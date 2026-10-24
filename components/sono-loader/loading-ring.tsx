@@ -4,7 +4,7 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
-import styles from "./loading-ring.module.css"
+import "./loading-ring.css"
 
 const DEFAULT_SIZE = 48
 
@@ -39,7 +39,7 @@ function WaveLayer({
   return (
     <div className={className}>
       <svg
-        className={styles.waveSvg}
+        className="sonoLoadingRing__waveSvg"
         viewBox="0 0 200 80"
         preserveAspectRatio="none"
         aria-hidden
@@ -52,7 +52,7 @@ function WaveLayer({
 
 /**
  * Circular liquid-fill loader — muted ball, primary water rising from the bottom.
- * Styles are self-contained in `loading-ring.module.css`.
+ * Styles are self-contained in `loading-ring.css` (scoped class names).
  */
 export function LoadingRing({
   value,
@@ -83,21 +83,34 @@ export function LoadingRing({
       aria-valuenow={clamped}
       aria-valuemin={0}
       aria-valuemax={100}
-      className={cn(styles.root, className)}
+      className={cn("sonoLoadingRing", className)}
     >
-      <span className={styles.ball} style={{ width: size, height: size }}>
+      <span
+        className="sonoLoadingRing__ball"
+        style={{ width: size, height: size }}
+      >
         <span
-          className={styles.column}
+          className="sonoLoadingRing__column"
           style={{ transform: `translate3d(0, ${rise}%, 0)` }}
         >
-          <span className={styles.crest}>
-            <WaveLayer className={styles.waveBack} amp={12} y={36} />
-            <WaveLayer className={styles.waveFront} amp={10} y={40} />
+          <span className="sonoLoadingRing__crest">
+            <WaveLayer
+              className="sonoLoadingRing__waveBack"
+              amp={12}
+              y={36}
+            />
+            <WaveLayer
+              className="sonoLoadingRing__waveFront"
+              amp={10}
+              y={40}
+            />
           </span>
-          <span className={styles.body} />
+          <span className="sonoLoadingRing__body" />
         </span>
       </span>
-      {showLabel ? <span className={styles.label}>{label}</span> : null}
+      {showLabel ? (
+        <span className="sonoLoadingRing__label">{label}</span>
+      ) : null}
     </div>
   )
 }

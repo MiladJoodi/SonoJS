@@ -177,7 +177,54 @@ export default async function ChartViewPage({
     id === "bar-label" ||
     id === "bar-label-custom" ||
     id === "bar-mixed" ||
-    id === "bar-negative"
+    id === "bar-negative" ||
+    id === "simple-radial-bar-chart" ||
+    id === "simple-scatter-chart" ||
+    id === "joint-line-scatter-chart" ||
+    id === "bubble-chart" ||
+    id === "custom-animation" ||
+    id === "scatter-chart-with-labels" ||
+    id === "multiple-y-axes-scatter-chart" ||
+    id === "scatter-chart-with-cells" ||
+    id === "scatter-chart-performance" ||
+    id === "area-responsive-container" ||
+    id === "composed-responsive-container" ||
+    id === "pie-responsive-container" ||
+    id === "legend-effect-opacity" ||
+    id === "legend-position" ||
+    id === "legend-styles" ||
+    id === "custom-content-of-tooltip" ||
+    id === "tooltip-styles" ||
+    id === "tooltip-advanced" ||
+    id === "chart-tooltip-default" ||
+    id === "chart-tooltip-indicator-line" ||
+    id === "chart-tooltip-indicator-none" ||
+    id === "chart-tooltip-label-custom" ||
+    id === "chart-tooltip-label-formatter" ||
+    id === "chart-tooltip-label-none" ||
+    id === "chart-tooltip-formatter" ||
+    id === "chart-tooltip-icons" ||
+    id === "chart-tooltip-advanced" ||
+    id === "simple-radar-chart" ||
+    id === "specified-domain-radar-chart" ||
+    id === "range-radar-chart-custom-animation" ||
+    id === "radar-lines-only" ||
+    id === "radar-icons" ||
+    id === "radar-multiple" ||
+    id === "chart-radar-default" ||
+    id === "chart-radar-dots" ||
+    id === "chart-radar-lines-only" ||
+    id === "chart-radar-label-custom" ||
+    id === "chart-radar-grid-custom" ||
+    id === "chart-radar-grid-none" ||
+    id === "chart-radar-grid-circle" ||
+    id === "chart-radar-grid-circle-no-lines" ||
+    id === "chart-radar-grid-circle-fill" ||
+    id === "chart-radar-grid-fill" ||
+    id === "chart-radar-multiple" ||
+    id === "chart-radar-legend" ||
+    id === "chart-radar-icons" ||
+    id === "chart-radar-radius"
   const chartImport =
     id === "area-chart"
       ? {
@@ -989,10 +1036,292 @@ export default async function ChartViewPage({
                                                           name: "BarNegative",
                                                           path: "@/components/charts/bar-negative",
                                                         }
-                                                  : {
-                                                      name: "SimpleBarChart",
-                                                      path: "@/components/charts/simple-bar-chart",
-                                                    }
+                                                      : id ===
+                                                          "simple-radial-bar-chart"
+                                                        ? {
+                                                            name: "SimpleRadialBarChart",
+                                                            path: "@/components/charts/simple-radial-bar-chart",
+                                                          }
+                                                        : id ===
+                                                            "simple-scatter-chart"
+                                                          ? {
+                                                              name: "SimpleScatterChart",
+                                                              path: "@/components/charts/simple-scatter-chart",
+                                                            }
+                                                          : id ===
+                                                              "joint-line-scatter-chart"
+                                                            ? {
+                                                                name: "JointLineScatterChart",
+                                                                path: "@/components/charts/joint-line-scatter-chart",
+                                                              }
+                                                            : id ===
+                                                                "bubble-chart"
+                                                              ? {
+                                                                  name: "BubbleChart",
+                                                                  path: "@/components/charts/bubble-chart",
+                                                                }
+                                                              : id ===
+                                                                  "custom-animation"
+                                                                ? {
+                                                                    name: "CustomAnimation",
+                                                                    path: "@/components/charts/custom-animation",
+                                                                  }
+                                                                : id ===
+                                                                    "scatter-chart-with-labels"
+                                                                  ? {
+                                                                      name: "ScatterChartWithLabels",
+                                                                      path: "@/components/charts/scatter-chart-with-labels",
+                                                                    }
+                                                                  : id ===
+                                                                      "multiple-y-axes-scatter-chart"
+                                                                    ? {
+                                                                        name: "MultipleYAxesScatterChart",
+                                                                        path: "@/components/charts/multiple-y-axes-scatter-chart",
+                                                                      }
+                                                                    : id ===
+                                                                        "scatter-chart-with-cells"
+                                                                      ? {
+                                                                          name: "ScatterChartWithCells",
+                                                                          path: "@/components/charts/scatter-chart-with-cells",
+                                                                        }
+                                                                      : id ===
+                                                                          "scatter-chart-performance"
+                                                                        ? {
+                                                                            name: "ScatterChartPerformance",
+                                                                            path: "@/components/charts/scatter-chart-performance",
+                                                                          }
+                                                                        : id ===
+                                                                            "area-responsive-container"
+                                                                          ? {
+                                                                              name: "AreaResponsiveContainer",
+                                                                              path: "@/components/charts/area-responsive-container",
+                                                                            }
+                                                                          : id ===
+                                                                              "composed-responsive-container"
+                                                                            ? {
+                                                                                name: "ComposedResponsiveContainer",
+                                                                                path: "@/components/charts/composed-responsive-container",
+                                                                              }
+                                                                  : id ===
+                                                                      "pie-responsive-container"
+                                                                    ? {
+                                                                        name: "PieResponsiveContainer",
+                                                                        path: "@/components/charts/pie-responsive-container",
+                                                                      }
+                                                                    : id ===
+                                                                        "legend-effect-opacity"
+                                                                      ? {
+                                                                          name: "LegendEffectOpacity",
+                                                                          path: "@/components/charts/legend-effect-opacity",
+                                                                        }
+                                                                      : id ===
+                                                                          "legend-position"
+                                                                        ? {
+                                                                            name: "LegendPosition",
+                                                                            path: "@/components/charts/legend-position",
+                                                                          }
+                                                                        : id ===
+                                                                            "legend-styles"
+                                                                          ? {
+                                                                              name: "LegendStyles",
+                                                                              path: "@/components/charts/legend-styles",
+                                                                            }
+                                                                          : id ===
+                                                                              "custom-content-of-tooltip"
+                                                                            ? {
+                                                                                name: "CustomContentOfTooltip",
+                                                                                path: "@/components/charts/custom-content-of-tooltip",
+                                                                              }
+                                                                            : id ===
+                                                                                "tooltip-styles"
+                                                                              ? {
+                                                                                  name: "TooltipStyles",
+                                                                                  path: "@/components/charts/tooltip-styles",
+                                                                                }
+                                                                              : id ===
+                                                                                  "tooltip-advanced"
+                                                                                ? {
+                                                                                    name: "TooltipAdvanced",
+                                                                                    path: "@/components/charts/tooltip-advanced",
+                                                                                  }
+                                                                                : id ===
+                                                                                    "chart-tooltip-default"
+                                                                                  ? {
+                                                                                      name: "ChartTooltipDefault",
+                                                                                      path: "@/components/charts/chart-tooltip-default",
+                                                                                    }
+                                                                                  : id ===
+                                                                                      "chart-tooltip-indicator-line"
+                                                                                    ? {
+                                                                                        name: "ChartTooltipIndicatorLine",
+                                                                                        path: "@/components/charts/chart-tooltip-indicator-line",
+                                                                                      }
+                                                                                    : id ===
+                                                                                        "chart-tooltip-indicator-none"
+                                                                                      ? {
+                                                                                          name: "ChartTooltipIndicatorNone",
+                                                                                          path: "@/components/charts/chart-tooltip-indicator-none",
+                                                                                        }
+                                                                                      : id ===
+                                                                                          "chart-tooltip-label-custom"
+                                                                                        ? {
+                                                                                            name: "ChartTooltipLabelCustom",
+                                                                                            path: "@/components/charts/chart-tooltip-label-custom",
+                                                                                          }
+                                                                                        : id ===
+                                                                                            "chart-tooltip-label-formatter"
+                                                                                          ? {
+                                                                                              name: "ChartTooltipLabelFormatter",
+                                                                                              path: "@/components/charts/chart-tooltip-label-formatter",
+                                                                                            }
+                                                                                          : id ===
+                                                                                              "chart-tooltip-label-none"
+                                                                                            ? {
+                                                                                                name: "ChartTooltipLabelNone",
+                                                                                                path: "@/components/charts/chart-tooltip-label-none",
+                                                                                              }
+                                                                                            : id ===
+                                                                                                "chart-tooltip-formatter"
+                                                                                              ? {
+                                                                                                  name: "ChartTooltipFormatter",
+                                                                                                  path: "@/components/charts/chart-tooltip-formatter",
+                                                                                                }
+                                                                                              : id ===
+                                                                                                  "chart-tooltip-icons"
+                                                                                                ? {
+                                                                                                    name: "ChartTooltipIcons",
+                                                                                                    path: "@/components/charts/chart-tooltip-icons",
+                                                                                                  }
+                                                                                                : id ===
+                                                                                                    "chart-tooltip-advanced"
+                                                                                                  ? {
+                                                                                                      name: "ChartTooltipAdvanced",
+                                                                                                      path: "@/components/charts/chart-tooltip-advanced",
+                                                                                                    }
+                                                                                                  : id ===
+                                                                                                      "simple-radar-chart"
+                                                                                                    ? {
+                                                                                                        name: "SimpleRadarChart",
+                                                                                                        path: "@/components/charts/simple-radar-chart",
+                                                                                                      }
+                                                                                                    : id ===
+                                                                                                        "specified-domain-radar-chart"
+                                                                                                      ? {
+                                                                                                          name: "SpecifiedDomainRadarChart",
+                                                                                                          path: "@/components/charts/specified-domain-radar-chart",
+                                                                                                        }
+                                                                                                      : id ===
+                                                                                                          "range-radar-chart-custom-animation"
+                                                                                                        ? {
+                                                                                                            name: "RangeRadarChartCustomAnimation",
+                                                                                                            path: "@/components/charts/range-radar-chart-custom-animation",
+                                                                                                          }
+                                                                                                        : id ===
+                                                                                                            "radar-lines-only"
+                                                                                                          ? {
+                                                                                                              name: "RadarLinesOnly",
+                                                                                                              path: "@/components/charts/radar-lines-only",
+                                                                                                            }
+                                                                                                          : id ===
+                                                                                                              "radar-icons"
+                                                                                                            ? {
+                                                                                                                name: "RadarIcons",
+                                                                                                                path: "@/components/charts/radar-icons",
+                                                                                                              }
+                                                                                                            : id ===
+                                                                                                                "radar-multiple"
+                                                                                                              ? {
+                                                                                                                  name: "RadarMultiple",
+                                                                                                                  path: "@/components/charts/radar-multiple",
+                                                                                                                }
+                                                                                                              : id ===
+                                                                                                                  "chart-radar-default"
+                                                                                                                ? {
+                                                                                                                    name: "ChartRadarDefault",
+                                                                                                                    path: "@/components/charts/chart-radar-default",
+                                                                                                                  }
+                                                                                                                : id ===
+                                                                                                                    "chart-radar-dots"
+                                                                                                                  ? {
+                                                                                                                      name: "ChartRadarDots",
+                                                                                                                      path: "@/components/charts/chart-radar-dots",
+                                                                                                                    }
+                                                                                                                  : id ===
+                                                                                                                      "chart-radar-lines-only"
+                                                                                                                    ? {
+                                                                                                                        name: "ChartRadarLinesOnly",
+                                                                                                                        path: "@/components/charts/chart-radar-lines-only",
+                                                                                                                      }
+                                                                                                                    : id ===
+                                                                                                                        "chart-radar-label-custom"
+                                                                                                                      ? {
+                                                                                                                          name: "ChartRadarLabelCustom",
+                                                                                                                          path: "@/components/charts/chart-radar-label-custom",
+                                                                                                                        }
+                                                                                                                      : id ===
+                                                                                                                          "chart-radar-grid-custom"
+                                                                                                                        ? {
+                                                                                                                            name: "ChartRadarGridCustom",
+                                                                                                                            path: "@/components/charts/chart-radar-grid-custom",
+                                                                                                                          }
+                                                                                                                        : id ===
+                                                                                                                            "chart-radar-grid-none"
+                                                                                                                          ? {
+                                                                                                                              name: "ChartRadarGridNone",
+                                                                                                                              path: "@/components/charts/chart-radar-grid-none",
+                                                                                                                            }
+                                                                                                                          : id ===
+                                                                                                                              "chart-radar-grid-circle"
+                                                                                                                            ? {
+                                                                                                                                name: "ChartRadarGridCircle",
+                                                                                                                                path: "@/components/charts/chart-radar-grid-circle",
+                                                                                                                              }
+                                                                                                                            : id ===
+                                                                                                                                "chart-radar-grid-circle-no-lines"
+                                                                                                                              ? {
+                                                                                                                                  name: "ChartRadarGridCircleNoLines",
+                                                                                                                                  path: "@/components/charts/chart-radar-grid-circle-no-lines",
+                                                                                                                                }
+                                                                                                                              : id ===
+                                                                                                                                  "chart-radar-grid-circle-fill"
+                                                                                                                                ? {
+                                                                                                                                    name: "ChartRadarGridCircleFill",
+                                                                                                                                    path: "@/components/charts/chart-radar-grid-circle-fill",
+                                                                                                                                  }
+                                                                                                                                : id ===
+                                                                                                                                    "chart-radar-grid-fill"
+                                                                                                                                  ? {
+                                                                                                                                      name: "ChartRadarGridFill",
+                                                                                                                                      path: "@/components/charts/chart-radar-grid-fill",
+                                                                                                                                    }
+                                                                                                                                  : id ===
+                                                                                                                                      "chart-radar-multiple"
+                                                                                                                                    ? {
+                                                                                                                                        name: "ChartRadarMultiple",
+                                                                                                                                        path: "@/components/charts/chart-radar-multiple",
+                                                                                                                                      }
+                                                                                                                                    : id ===
+                                                                                                                                        "chart-radar-legend"
+                                                                                                                                      ? {
+                                                                                                                                          name: "ChartRadarLegend",
+                                                                                                                                          path: "@/components/charts/chart-radar-legend",
+                                                                                                                                        }
+                                                                                                                                      : id ===
+                                                                                                                                          "chart-radar-icons"
+                                                                                                                                        ? {
+                                                                                                                                            name: "ChartRadarIcons",
+                                                                                                                                            path: "@/components/charts/chart-radar-icons",
+                                                                                                                                          }
+                                                                                                                                        : id ===
+                                                                                                                                            "chart-radar-radius"
+                                                                                                                                          ? {
+                                                                                                                                              name: "ChartRadarRadius",
+                                                                                                                                              path: "@/components/charts/chart-radar-radius",
+                                                                                                                                            }
+                                                                                                                                          : {
+                                                                                                                                              name: "SimpleBarChart",
+                                                                                                                                              path: "@/components/charts/simple-bar-chart",
+                                                                                                                                            }
 
   return (
     <article className="w-full max-w-none space-y-8">

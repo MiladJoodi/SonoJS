@@ -34,12 +34,13 @@ export type GaugeCustomArcsProps = {
 
 const DEMO_PERCENT = 0.37
 const DEMO_ARC_PADDING = 0.02
-const DEMO_ARCS_LENGTH = [0.3, 0.5, 0.2] as const
+/** Stable ref — default `= [...arr]` would allocate every render and re-init the SVG. */
+const DEMO_ARCS_LENGTH: number[] = [0.3, 0.5, 0.2]
 
 function GaugeCustomArcs({
   title = "Score gauge — custom arcs",
   subtitle = "Uneven green / gold / red arcs (30% · 50% · 20%) with the needle at 37%.",
-  arcsLength = [...DEMO_ARCS_LENGTH],
+  arcsLength = DEMO_ARCS_LENGTH,
   percent = DEMO_PERCENT,
   arcPadding = DEMO_ARC_PADDING,
   className,
@@ -88,7 +89,7 @@ function GaugeCustomArcs({
           id="gauge-custom-arcs"
           nrOfLevels={420}
           arcsLength={arcsLength}
-          colors={[...GAUGE_TRAFFIC_COLORS]}
+          colors={GAUGE_TRAFFIC_COLORS}
           percent={percent}
           arcPadding={arcPadding}
           needleColor={GAUGE_NEEDLE}

@@ -56,6 +56,12 @@ export const chartDemoLoaders: Record<
   "pie-interactive": () => import("./pie/pie-interactive"),
   "pie-stacked": () => import("./pie/pie-stacked"),
   "chart-pie-simple": () => import("./pie/chart-pie-simple"),
+  "chart-radial-simple": () => import("./radial/chart-radial-simple"),
+  "chart-radial-label": () => import("./radial/chart-radial-label"),
+  "chart-radial-grid": () => import("./radial/chart-radial-grid"),
+  "chart-radial-text": () => import("./radial/chart-radial-text"),
+  "chart-radial-shape": () => import("./radial/chart-radial-shape"),
+  "chart-radial-stacked": () => import("./radial/chart-radial-stacked"),
   "chart-pie-separator-none": () => import("./pie/chart-pie-separator-none"),
   "chart-pie-label": () => import("./pie/chart-pie-label"),
   "chart-pie-label-custom": () => import("./pie/chart-pie-label-custom"),
@@ -171,6 +177,10 @@ export const chartDemoLoaders: Record<
   "treemap-with-padding-and-gaps": () =>
     import("./treemap/treemap-with-padding-and-gaps"),
   "treemap-content": () => import("./treemap/treemap-content"),
+  "bundle-size-sunburst": () => import("./sunburst/bundle-size-sunburst"),
+  "sunburst-chart": () => import("./sunburst/sunburst-chart"),
+  "sunburst-chart-theme-colors": () =>
+    import("./sunburst/sunburst-chart-theme-colors"),
   "stacked-bar-chart": () => import("./bar/stacked-bar-chart"),
   "population-pyramid": () => import("./bar/population-pyramid"),
   "box-plot": () => import("./bar/box-plot"),
@@ -206,6 +216,77 @@ export const chartDemoLoaders: Record<
   "bar-interactive": () => import("./bar/bar-interactive"),
   "bar-horizontal": () => import("./bar/bar-horizontal"),
   "bar-negative": () => import("./bar/bar-negative"),
+  "simple-radial-bar-chart": () =>
+    import("./radial-bar/simple-radial-bar-chart"),
+  "radial-bar-chart-click-to-focus-legend": () =>
+    import("./radial-bar/radial-bar-chart-click-to-focus-legend"),
+  "radial-text": () => import("./radial-bar/radial-text"),
+  "radial-shape": () => import("./radial-bar/radial-shape"),
+  "radial-stacked": () => import("./radial-bar/radial-stacked"),
+  "simple-scatter-chart": () => import("./scatter/simple-scatter-chart"),
+  "joint-line-scatter-chart": () =>
+    import("./scatter/joint-line-scatter-chart"),
+  "bubble-chart": () => import("./scatter/bubble-chart"),
+  "custom-animation": () => import("./scatter/custom-animation"),
+  "scatter-chart-with-labels": () =>
+    import("./scatter/scatter-chart-with-labels"),
+  "multiple-y-axes-scatter-chart": () =>
+    import("./scatter/multiple-y-axes-scatter-chart"),
+  "scatter-chart-with-cells": () =>
+    import("./scatter/scatter-chart-with-cells"),
+  "scatter-chart-performance": () =>
+    import("./scatter/scatter-chart-performance"),
+  "area-responsive-container": () =>
+    import("./responsive/area-responsive-container"),
+  "composed-responsive-container": () =>
+    import("./responsive/composed-responsive-container"),
+  "pie-responsive-container": () =>
+    import("./responsive/pie-responsive-container"),
+  "legend-effect-opacity": () => import("./legend/legend-effect-opacity"),
+  "custom-content-of-tooltip": () =>
+    import("./tooltip/custom-content-of-tooltip"),
+  "tooltip-styles": () => import("./tooltip/tooltip-styles"),
+  "tooltip-advanced": () => import("./tooltip/tooltip-advanced"),
+  "chart-tooltip-default": () => import("./tooltip/chart-tooltip-default"),
+  "chart-tooltip-indicator-line": () =>
+    import("./tooltip/chart-tooltip-indicator-line"),
+  "chart-tooltip-indicator-none": () =>
+    import("./tooltip/chart-tooltip-indicator-none"),
+  "chart-tooltip-label-custom": () =>
+    import("./tooltip/chart-tooltip-label-custom"),
+  "chart-tooltip-label-formatter": () =>
+    import("./tooltip/chart-tooltip-label-formatter"),
+  "chart-tooltip-label-none": () => import("./tooltip/chart-tooltip-label-none"),
+  "chart-tooltip-formatter": () => import("./tooltip/chart-tooltip-formatter"),
+  "chart-tooltip-icons": () => import("./tooltip/chart-tooltip-icons"),
+  "chart-tooltip-advanced": () =>
+    import("./tooltip/chart-tooltip-advanced"),
+  "legend-position": () => import("./legend/legend-position"),
+  "legend-styles": () => import("./legend/legend-styles"),
+  "simple-radar-chart": () => import("./radar/simple-radar-chart"),
+  "specified-domain-radar-chart": () =>
+    import("./radar/specified-domain-radar-chart"),
+  "range-radar-chart-custom-animation": () =>
+    import("./radar/range-radar-chart-custom-animation"),
+  "radar-lines-only": () => import("./radar/radar-lines-only"),
+  "radar-icons": () => import("./radar/radar-icons"),
+  "radar-multiple": () => import("./radar/radar-multiple"),
+  "chart-radar-default": () => import("./radar/chart-radar-default"),
+  "chart-radar-dots": () => import("./radar/chart-radar-dots"),
+  "chart-radar-lines-only": () => import("./radar/chart-radar-lines-only"),
+  "chart-radar-label-custom": () => import("./radar/chart-radar-label-custom"),
+  "chart-radar-grid-custom": () => import("./radar/chart-radar-grid-custom"),
+  "chart-radar-grid-none": () => import("./radar/chart-radar-grid-none"),
+  "chart-radar-grid-circle": () => import("./radar/chart-radar-grid-circle"),
+  "chart-radar-grid-circle-no-lines": () =>
+    import("./radar/chart-radar-grid-circle-no-lines"),
+  "chart-radar-grid-circle-fill": () =>
+    import("./radar/chart-radar-grid-circle-fill"),
+  "chart-radar-grid-fill": () => import("./radar/chart-radar-grid-fill"),
+  "chart-radar-multiple": () => import("./radar/chart-radar-multiple"),
+  "chart-radar-legend": () => import("./radar/chart-radar-legend"),
+  "chart-radar-icons": () => import("./radar/chart-radar-icons"),
+  "chart-radar-radius": () => import("./radar/chart-radar-radius"),
 }
 
 export function getChartDemoLoader(id: string) {

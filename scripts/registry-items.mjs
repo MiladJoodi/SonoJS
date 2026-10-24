@@ -1208,6 +1208,21 @@ export const registryItems = [
     ],
   },
   {
+    name: "sunburst-shared",
+    type: "registry:lib",
+    title: "Sunburst shared",
+    description:
+      "Sunburst tree colorize, name labels, and center disc — EN, locked palette shades.",
+    registryDependencies: ["chart-styles"],
+    files: [
+      {
+        path: "registry/charts/_lib/sunburst-shared.tsx",
+        type: "registry:lib",
+        target: "components/charts/_lib/sunburst-shared.tsx",
+      },
+    ],
+  },
+  {
     name: "gauge-shared",
     type: "registry:lib",
     title: "Gauge shared",
@@ -2600,6 +2615,198 @@ export const registryItems = [
         path: "registry/charts/pie/chart-pie-donut-text.tsx",
         type: "registry:component",
         target: "components/charts/chart-pie-donut-text.tsx",
+      },
+    ],
+  },
+  {
+    name: "chart-radial-simple",
+    type: "registry:chart",
+    title: "Radial Simple",
+    description:
+      "Classic concentric radial bars of region sales — locked chrome, ring scrubber, RTL-aware.",
+    dependencies: ["recharts"],
+    registryDependencies: ["chart", "chart-styles"],
+    cssVars: {
+      light: {
+        "chart-1": "#1e3a8a",
+        "chart-2": "#ea580c",
+        "chart-3": "#f59e0b",
+        "chart-4": "#6366f1",
+        "chart-5": "#e11d48",
+      },
+      dark: {
+        "chart-1": "#3b82f6",
+        "chart-2": "#f97316",
+        "chart-3": "#fbbf24",
+        "chart-4": "#818cf8",
+        "chart-5": "#fb7185",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/radial/chart-radial-simple.tsx",
+        type: "registry:component",
+        target: "components/charts/chart-radial-simple.tsx",
+      },
+    ],
+  },
+  {
+    name: "chart-radial-label",
+    type: "registry:chart",
+    title: "Radial Label",
+    description:
+      "Classic radial bars with inside-start name labels — locked chrome, ring scrubber, RTL-aware.",
+    dependencies: ["recharts"],
+    registryDependencies: ["chart", "chart-styles"],
+    cssVars: {
+      light: {
+        "chart-1": "#1e3a8a",
+        "chart-2": "#ea580c",
+        "chart-3": "#f59e0b",
+        "chart-4": "#6366f1",
+        "chart-5": "#e11d48",
+      },
+      dark: {
+        "chart-1": "#3b82f6",
+        "chart-2": "#f97316",
+        "chart-3": "#fbbf24",
+        "chart-4": "#818cf8",
+        "chart-5": "#fb7185",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/radial/chart-radial-label.tsx",
+        type: "registry:component",
+        target: "components/charts/chart-radial-label.tsx",
+      },
+    ],
+  },
+  {
+    name: "chart-radial-grid",
+    type: "registry:chart",
+    title: "Radial Grid",
+    description:
+      "Classic radial bars with circular PolarGrid — locked chrome, ring scrubber, RTL-aware.",
+    dependencies: ["recharts"],
+    registryDependencies: ["chart", "chart-styles"],
+    cssVars: {
+      light: {
+        "chart-1": "#1e3a8a",
+        "chart-2": "#ea580c",
+        "chart-3": "#f59e0b",
+        "chart-4": "#6366f1",
+        "chart-5": "#e11d48",
+      },
+      dark: {
+        "chart-1": "#3b82f6",
+        "chart-2": "#f97316",
+        "chart-3": "#fbbf24",
+        "chart-4": "#818cf8",
+        "chart-5": "#fb7185",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/radial/chart-radial-grid.tsx",
+        type: "registry:component",
+        target: "components/charts/chart-radial-grid.tsx",
+      },
+    ],
+  },
+  {
+    name: "chart-radial-text",
+    type: "registry:chart",
+    title: "Radial Text",
+    description:
+      "Classic partial radial ring with centered value text — locked chrome, RTL-aware.",
+    dependencies: ["recharts"],
+    registryDependencies: ["chart", "chart-styles"],
+    cssVars: {
+      light: {
+        "chart-1": "#1e3a8a",
+        "chart-2": "#ea580c",
+        "chart-3": "#f59e0b",
+        "chart-4": "#6366f1",
+        "chart-5": "#e11d48",
+      },
+      dark: {
+        "chart-1": "#3b82f6",
+        "chart-2": "#f97316",
+        "chart-3": "#fbbf24",
+        "chart-4": "#818cf8",
+        "chart-5": "#fb7185",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/radial/chart-radial-text.tsx",
+        type: "registry:component",
+        target: "components/charts/chart-radial-text.tsx",
+      },
+    ],
+  },
+  {
+    name: "chart-radial-shape",
+    type: "registry:chart",
+    title: "Radial Shape",
+    description:
+      "Classic short radial arc with PolarGrid shape and centered value — locked chrome, RTL-aware.",
+    dependencies: ["recharts"],
+    registryDependencies: ["chart", "chart-styles"],
+    cssVars: {
+      light: {
+        "chart-1": "#1e3a8a",
+        "chart-2": "#ea580c",
+        "chart-3": "#f59e0b",
+        "chart-4": "#6366f1",
+        "chart-5": "#e11d48",
+      },
+      dark: {
+        "chart-1": "#3b82f6",
+        "chart-2": "#f97316",
+        "chart-3": "#fbbf24",
+        "chart-4": "#818cf8",
+        "chart-5": "#fb7185",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/radial/chart-radial-shape.tsx",
+        type: "registry:component",
+        target: "components/charts/chart-radial-shape.tsx",
+      },
+    ],
+  },
+  {
+    name: "chart-radial-stacked",
+    type: "registry:chart",
+    title: "Radial Stacked",
+    description:
+      "Classic semicircle stacked Store×Online radial — locked navy×orange, centered total, RTL-aware.",
+    dependencies: ["recharts"],
+    registryDependencies: ["chart", "chart-styles"],
+    cssVars: {
+      light: {
+        "chart-1": "#1e3a8a",
+        "chart-2": "#ea580c",
+        "chart-3": "#f59e0b",
+        "chart-4": "#6366f1",
+        "chart-5": "#e11d48",
+      },
+      dark: {
+        "chart-1": "#3b82f6",
+        "chart-2": "#f97316",
+        "chart-3": "#fbbf24",
+        "chart-4": "#818cf8",
+        "chart-5": "#fb7185",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/radial/chart-radial-stacked.tsx",
+        type: "registry:component",
+        target: "components/charts/chart-radial-stacked.tsx",
       },
     ],
   },
@@ -4519,6 +4726,102 @@ export const registryItems = [
     ],
   },
   {
+    name: "bundle-size-sunburst",
+    type: "registry:chart",
+    title: "Bundle Size Sunburst",
+    description:
+      "Tree-shaken client JS bundle (bytes) by group — Sunburst rings, metric scrubber, center disc.",
+    dependencies: ["recharts"],
+    registryDependencies: ["chart", "chart-styles", "sunburst-shared"],
+    cssVars: {
+      light: {
+        "chart-1": "#1e3a8a",
+        "chart-2": "#ea580c",
+        "chart-3": "#f59e0b",
+        "chart-4": "#6366f1",
+        "chart-5": "#e11d48",
+      },
+      dark: {
+        "chart-1": "#3b82f6",
+        "chart-2": "#f97316",
+        "chart-3": "#fbbf24",
+        "chart-4": "#818cf8",
+        "chart-5": "#fb7185",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/sunburst/bundle-size-sunburst.tsx",
+        type: "registry:component",
+        target: "components/charts/bundle-size-sunburst.tsx",
+      },
+    ],
+  },
+  {
+    name: "sunburst-chart",
+    type: "registry:chart",
+    title: "Sunburst Chart",
+    description:
+      "Regional sales share by channel — nested Sunburst rings, metric scrubber, center disc.",
+    dependencies: ["recharts"],
+    registryDependencies: ["chart", "chart-styles", "sunburst-shared"],
+    cssVars: {
+      light: {
+        "chart-1": "#1e3a8a",
+        "chart-2": "#ea580c",
+        "chart-3": "#f59e0b",
+        "chart-4": "#6366f1",
+        "chart-5": "#e11d48",
+      },
+      dark: {
+        "chart-1": "#3b82f6",
+        "chart-2": "#f97316",
+        "chart-3": "#fbbf24",
+        "chart-4": "#818cf8",
+        "chart-5": "#fb7185",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/sunburst/sunburst-chart.tsx",
+        type: "registry:component",
+        target: "components/charts/sunburst-chart.tsx",
+      },
+    ],
+  },
+  {
+    name: "sunburst-chart-theme-colors",
+    type: "registry:chart",
+    title: "Sunburst Chart Theme Colors",
+    description:
+      "Org headcount by team — nested Sunburst with locked theme palette shades, metric scrubber, center disc.",
+    dependencies: ["recharts"],
+    registryDependencies: ["chart", "chart-styles", "sunburst-shared"],
+    cssVars: {
+      light: {
+        "chart-1": "#1e3a8a",
+        "chart-2": "#ea580c",
+        "chart-3": "#f59e0b",
+        "chart-4": "#6366f1",
+        "chart-5": "#e11d48",
+      },
+      dark: {
+        "chart-1": "#3b82f6",
+        "chart-2": "#f97316",
+        "chart-3": "#fbbf24",
+        "chart-4": "#818cf8",
+        "chart-5": "#fb7185",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/sunburst/sunburst-chart-theme-colors.tsx",
+        type: "registry:component",
+        target: "components/charts/sunburst-chart-theme-colors.tsx",
+      },
+    ],
+  },
+  {
     name: "gauge-default",
     type: "registry:chart",
     title: "Gauge Default",
@@ -4935,19 +5238,19 @@ export const registryItems = [
     type: "registry:chart",
     title: "Hc Gauge Rounded Bands",
     description:
-      "Highcharts dial with individually rounded plotBands — soft blue scale, English metric header.",
+      "Highcharts dial with individually rounded plotBands — teal / amber / rose, English metric header.",
     dependencies: ["highcharts", "highcharts-react-official"],
     registryDependencies: ["hc-gauge-shared", "chart-styles"],
     cssVars: {
       light: {
-        "chart-1": "#a8c4d8",
-        "chart-2": "#6ea1c7",
-        "chart-3": "#8b9dc3",
+        "chart-1": "#0D9488",
+        "chart-2": "#D97706",
+        "chart-3": "#E11D48",
       },
       dark: {
-        "chart-1": "#a8c4d8",
-        "chart-2": "#6ea1c7",
-        "chart-3": "#8b9dc3",
+        "chart-1": "#2DD4BF",
+        "chart-2": "#FBBF24",
+        "chart-3": "#FB7185",
       },
     },
     files: [
@@ -5795,6 +6098,1418 @@ export const registryItems = [
         path: "registry/charts/bar/bar-negative.tsx",
         type: "registry:component",
         target: "components/charts/bar-negative.tsx",
+      },
+    ],
+  },
+  {
+    name: "simple-radial-bar-chart",
+    type: "registry:chart",
+    title: "Simple Radial Bar Chart",
+    description:
+      "Concentric age-band radial bars — locked chrome, ring scrubber, RTL-aware plot island.",
+    dependencies: ["recharts"],
+    registryDependencies: ["chart", "chart-styles"],
+    cssVars: {
+      light: {
+        "chart-1": "#1e3a8a",
+        "chart-2": "#ea580c",
+        "chart-3": "#f59e0b",
+        "chart-4": "#6366f1",
+        "chart-5": "#e11d48",
+      },
+      dark: {
+        "chart-1": "#3b82f6",
+        "chart-2": "#f97316",
+        "chart-3": "#fbbf24",
+        "chart-4": "#818cf8",
+        "chart-5": "#fb7185",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/radial-bar/simple-radial-bar-chart.tsx",
+        type: "registry:component",
+        target: "components/charts/simple-radial-bar-chart.tsx",
+      },
+    ],
+  },
+  {
+    name: "radial-bar-chart-click-to-focus-legend",
+    type: "registry:chart",
+    title: "Radial Bar Chart Click To Focus Legend",
+    description:
+      "Concentric radial bars with click-to-focus legend — dim siblings, locked chrome, RTL-aware.",
+    dependencies: ["recharts"],
+    registryDependencies: ["chart", "chart-styles"],
+    cssVars: {
+      light: {
+        "chart-1": "#1e3a8a",
+        "chart-2": "#ea580c",
+        "chart-3": "#f59e0b",
+        "chart-4": "#6366f1",
+        "chart-5": "#e11d48",
+      },
+      dark: {
+        "chart-1": "#3b82f6",
+        "chart-2": "#f97316",
+        "chart-3": "#fbbf24",
+        "chart-4": "#818cf8",
+        "chart-5": "#fb7185",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/radial-bar/radial-bar-chart-click-to-focus-legend.tsx",
+        type: "registry:component",
+        target: "components/charts/radial-bar-chart-click-to-focus-legend.tsx",
+      },
+    ],
+  },
+  {
+    name: "radial-text",
+    type: "registry:chart",
+    title: "Radial Text",
+    description:
+      "Single progress ring with centered value Label — locked chrome, RTL-aware plot island.",
+    dependencies: ["recharts"],
+    registryDependencies: ["chart", "chart-styles"],
+    cssVars: {
+      light: {
+        "chart-1": "#1e3a8a",
+      },
+      dark: {
+        "chart-1": "#3b82f6",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/radial-bar/radial-text.tsx",
+        type: "registry:component",
+        target: "components/charts/radial-text.tsx",
+      },
+    ],
+  },
+  {
+    name: "radial-shape",
+    type: "registry:chart",
+    title: "Radial Shape",
+    description:
+      "Thick square-ended radial arc over a thin muted track with center Label — locked chrome, RTL-aware.",
+    dependencies: ["recharts"],
+    registryDependencies: ["chart", "chart-styles"],
+    cssVars: {
+      light: {
+        "chart-1": "#1e3a8a",
+      },
+      dark: {
+        "chart-1": "#3b82f6",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/radial-bar/radial-shape.tsx",
+        type: "registry:component",
+        target: "components/charts/radial-shape.tsx",
+      },
+    ],
+  },
+  {
+    name: "radial-stacked",
+    type: "registry:chart",
+    title: "Radial Stacked",
+    description:
+      "Half-ring Desktop×Mobile stacked RadialBars with center total — locked chrome, RTL-aware.",
+    dependencies: ["recharts"],
+    registryDependencies: ["chart", "chart-styles"],
+    cssVars: {
+      light: {
+        "chart-1": "#1e3a8a",
+        "chart-2": "#ea580c",
+      },
+      dark: {
+        "chart-1": "#3b82f6",
+        "chart-2": "#f97316",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/radial-bar/radial-stacked.tsx",
+        type: "registry:component",
+        target: "components/charts/radial-stacked.tsx",
+      },
+    ],
+  },
+  {
+    name: "simple-scatter-chart",
+    type: "registry:chart",
+    title: "Simple Scatter Chart",
+    description:
+      "Dual-series height×weight scatter — locked navy×orange chrome, metric scrubber, RTL-aware.",
+    dependencies: ["recharts"],
+    registryDependencies: ["chart", "chart-styles"],
+    cssVars: {
+      light: {
+        "chart-1": "#1e3a8a",
+        "chart-2": "#ea580c",
+      },
+      dark: {
+        "chart-1": "#3b82f6",
+        "chart-2": "#f97316",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/scatter/simple-scatter-chart.tsx",
+        type: "registry:component",
+        target: "components/charts/simple-scatter-chart.tsx",
+      },
+    ],
+  },
+  {
+    name: "joint-line-scatter-chart",
+    type: "registry:chart",
+    title: "Joint Line Scatter Chart",
+    description:
+      "Dual-series scatter with joint connecting lines — locked navy×orange chrome, metric scrubber, RTL-aware.",
+    dependencies: ["recharts"],
+    registryDependencies: ["chart", "chart-styles"],
+    cssVars: {
+      light: {
+        "chart-1": "#1e3a8a",
+        "chart-2": "#ea580c",
+      },
+      dark: {
+        "chart-1": "#3b82f6",
+        "chart-2": "#f97316",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/scatter/joint-line-scatter-chart.tsx",
+        type: "registry:component",
+        target: "components/charts/joint-line-scatter-chart.tsx",
+      },
+    ],
+  },
+  {
+    name: "bubble-chart",
+    type: "registry:chart",
+    title: "Bubble Chart",
+    description:
+      "Dual-series bubble scatter with ZAxis sizing — locked navy×orange chrome, metric scrubber, RTL-aware.",
+    dependencies: ["recharts"],
+    registryDependencies: ["chart", "chart-styles"],
+    cssVars: {
+      light: {
+        "chart-1": "#1e3a8a",
+        "chart-2": "#ea580c",
+      },
+      dark: {
+        "chart-1": "#3b82f6",
+        "chart-2": "#f97316",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/scatter/bubble-chart.tsx",
+        type: "registry:component",
+        target: "components/charts/bubble-chart.tsx",
+      },
+    ],
+  },
+  {
+    name: "custom-animation",
+    type: "registry:chart",
+    title: "Custom Animation",
+    description:
+      "Scatter dataset swap with animationInterpolateFn (crossfade / staggered / pop) — locked chrome, scrub, RTL-aware.",
+    dependencies: ["recharts"],
+    registryDependencies: ["chart", "chart-styles"],
+    cssVars: {
+      light: {
+        "chart-1": "#1e3a8a",
+      },
+      dark: {
+        "chart-1": "#3b82f6",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/scatter/custom-animation.tsx",
+        type: "registry:component",
+        target: "components/charts/custom-animation.tsx",
+      },
+    ],
+  },
+  {
+    name: "scatter-chart-with-labels",
+    type: "registry:chart",
+    title: "Scatter Chart With Labels",
+    description:
+      "Bubble scatter with always-on LabelList names — locked chrome, metric scrubber, RTL-aware.",
+    dependencies: ["recharts"],
+    registryDependencies: ["chart", "chart-styles"],
+    cssVars: {
+      light: {
+        "chart-1": "#1e3a8a",
+      },
+      dark: {
+        "chart-1": "#3b82f6",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/scatter/scatter-chart-with-labels.tsx",
+        type: "registry:component",
+        target: "components/charts/scatter-chart-with-labels.tsx",
+      },
+    ],
+  },
+  {
+    name: "multiple-y-axes-scatter-chart",
+    type: "registry:chart",
+    title: "Multiple Y Axes Scatter Chart",
+    description:
+      "Dual-series scatter with independent Y axes — locked navy×orange chrome, metric scrubber, RTL-aware.",
+    dependencies: ["recharts"],
+    registryDependencies: ["chart", "chart-styles"],
+    cssVars: {
+      light: {
+        "chart-1": "#1e3a8a",
+        "chart-2": "#ea580c",
+      },
+      dark: {
+        "chart-1": "#3b82f6",
+        "chart-2": "#f97316",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/scatter/multiple-y-axes-scatter-chart.tsx",
+        type: "registry:component",
+        target: "components/charts/multiple-y-axes-scatter-chart.tsx",
+      },
+    ],
+  },
+  {
+    name: "scatter-chart-with-cells",
+    type: "registry:chart",
+    title: "Scatter Chart With Cells",
+    description:
+      "Per-point chart tokens + Symbols via shape (modern Cell) — locked chrome, scrub, RTL-aware.",
+    dependencies: ["recharts"],
+    registryDependencies: ["chart", "chart-styles"],
+    cssVars: {
+      light: {
+        "chart-1": "#1e3a8a",
+        "chart-2": "#ea580c",
+        "chart-3": "#f59e0b",
+        "chart-4": "#6366f1",
+        "chart-5": "#e11d48",
+      },
+      dark: {
+        "chart-1": "#3b82f6",
+        "chart-2": "#f97316",
+        "chart-3": "#fbbf24",
+        "chart-4": "#818cf8",
+        "chart-5": "#fb7185",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/scatter/scatter-chart-with-cells.tsx",
+        type: "registry:component",
+        target: "components/charts/scatter-chart-with-cells.tsx",
+      },
+    ],
+  },
+  {
+    name: "scatter-chart-performance",
+    type: "registry:chart",
+    title: "Scatter Chart Performance",
+    description:
+      "Many Scatter series × many points stress demo — animation off, series-level scrub, pass/fail tint, RTL-aware.",
+    dependencies: ["recharts"],
+    registryDependencies: ["chart", "chart-styles"],
+    cssVars: {
+      light: {
+        "chart-up": "#16a34a",
+        "chart-down": "#e11d48",
+      },
+      dark: {
+        "chart-up": "#4ade80",
+        "chart-down": "#f25f70",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/scatter/scatter-chart-performance.tsx",
+        type: "registry:component",
+        target: "components/charts/scatter-chart-performance.tsx",
+      },
+    ],
+  },
+  {
+    name: "area-responsive-container",
+    type: "registry:chart",
+    title: "Area Responsive Container",
+    description:
+      "Fluid ChartContainer area stage with min-month and target ReferenceLines — locked chrome, metric scrubber, RTL-aware.",
+    dependencies: ["recharts"],
+    registryDependencies: ["chart", "chart-styles"],
+    cssVars: {
+      light: {
+        "chart-1": "#1e3a8a",
+        "chart-2": "#ea580c",
+        "chart-3": "#f59e0b",
+        "chart-4": "#6366f1",
+        "chart-5": "#e11d48",
+        "chart-up": "#16a34a",
+      },
+      dark: {
+        "chart-1": "#3b82f6",
+        "chart-2": "#f97316",
+        "chart-3": "#fbbf24",
+        "chart-4": "#818cf8",
+        "chart-5": "#fb7185",
+        "chart-up": "#4ade80",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/responsive/area-responsive-container.tsx",
+        type: "registry:component",
+        target: "components/charts/area-responsive-container.tsx",
+      },
+    ],
+  },
+  {
+    name: "composed-responsive-container",
+    type: "registry:chart",
+    title: "Composed Responsive Container",
+    description:
+      "Fluid ChartContainer composed stage — orders area, online bars, store line — locked chrome, metric scrubber, RTL-aware.",
+    dependencies: ["recharts"],
+    registryDependencies: ["chart", "chart-styles"],
+    cssVars: {
+      light: {
+        "chart-1": "#1e3a8a",
+        "chart-2": "#ea580c",
+        "chart-3": "#f59e0b",
+        "chart-up": "#16a34a",
+      },
+      dark: {
+        "chart-1": "#3b82f6",
+        "chart-2": "#f97316",
+        "chart-3": "#fbbf24",
+        "chart-up": "#4ade80",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/responsive/composed-responsive-container.tsx",
+        type: "registry:component",
+        target: "components/charts/composed-responsive-container.tsx",
+      },
+    ],
+  },
+  {
+    name: "pie-responsive-container",
+    type: "registry:chart",
+    title: "Pie Responsive Container",
+    description:
+      "Fluid square ChartContainer pie stage with value labels and legend — locked chrome, slice scrubber, RTL-aware.",
+    dependencies: ["recharts"],
+    registryDependencies: ["chart", "chart-styles"],
+    cssVars: {
+      light: {
+        "chart-1": "#1e3a8a",
+        "chart-2": "#ea580c",
+        "chart-3": "#f59e0b",
+        "chart-4": "#6366f1",
+        "chart-5": "#e11d48",
+      },
+      dark: {
+        "chart-1": "#3b82f6",
+        "chart-2": "#f97316",
+        "chart-3": "#fbbf24",
+        "chart-4": "#818cf8",
+        "chart-5": "#fb7185",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/responsive/pie-responsive-container.tsx",
+        type: "registry:component",
+        target: "components/charts/pie-responsive-container.tsx",
+      },
+    ],
+  },
+  {
+    name: "legend-effect-opacity",
+    type: "registry:chart",
+    title: "Legend Effect Opacity",
+    description:
+      "Dual Online×Store lines — hover a legend item to dim the other series; locked chrome, metric scrubber, RTL-aware.",
+    dependencies: ["recharts"],
+    registryDependencies: ["chart", "chart-styles"],
+    cssVars: {
+      light: {
+        "chart-1": "#1e3a8a",
+        "chart-2": "#ea580c",
+        "chart-up": "#16a34a",
+      },
+      dark: {
+        "chart-1": "#3b82f6",
+        "chart-2": "#f97316",
+        "chart-up": "#4ade80",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/legend/legend-effect-opacity.tsx",
+        type: "registry:component",
+        target: "components/charts/legend-effect-opacity.tsx",
+      },
+    ],
+  },
+  {
+    name: "legend-position",
+    type: "registry:chart",
+    title: "Legend Position",
+    description:
+      "Dual Online×Store lines with top-aligned ChartLegend — locked chrome, metric scrubber, RTL-aware.",
+    dependencies: ["recharts"],
+    registryDependencies: ["chart", "chart-styles"],
+    cssVars: {
+      light: {
+        "chart-1": "#1e3a8a",
+        "chart-2": "#ea580c",
+        "chart-up": "#16a34a",
+      },
+      dark: {
+        "chart-1": "#3b82f6",
+        "chart-2": "#f97316",
+        "chart-up": "#4ade80",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/legend/legend-position.tsx",
+        type: "registry:component",
+        target: "components/charts/legend-position.tsx",
+      },
+    ],
+  },
+  {
+    name: "legend-styles",
+    type: "registry:chart",
+    title: "Legend Styles",
+    description:
+      "Dual Store×Online bars with custom card legend and period totals — locked chrome, metric scrubber, RTL-aware.",
+    dependencies: ["recharts"],
+    registryDependencies: ["chart", "chart-styles"],
+    cssVars: {
+      light: {
+        "chart-1": "#1e3a8a",
+        "chart-2": "#ea580c",
+        "chart-up": "#16a34a",
+      },
+      dark: {
+        "chart-1": "#3b82f6",
+        "chart-2": "#f97316",
+        "chart-up": "#4ade80",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/legend/legend-styles.tsx",
+        type: "registry:component",
+        target: "components/charts/legend-styles.tsx",
+      },
+    ],
+  },
+  {
+    name: "custom-content-of-tooltip",
+    type: "registry:chart",
+    title: "Custom Content Of Tooltip",
+    description:
+      "Dual Online x Store bars with a fully custom tooltip panel (intro + series) - locked chrome, metric scrubber, RTL-aware.",
+    dependencies: ["recharts"],
+    registryDependencies: ["chart", "chart-styles"],
+    cssVars: {
+      light: {
+        "chart-1": "#1e3a8a",
+        "chart-2": "#ea580c",
+        "chart-up": "#16a34a",
+      },
+      dark: {
+        "chart-1": "#3b82f6",
+        "chart-2": "#f97316",
+        "chart-up": "#4ade80",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/tooltip/custom-content-of-tooltip.tsx",
+        type: "registry:component",
+        target: "components/charts/custom-content-of-tooltip.tsx",
+      },
+    ],
+  },
+  {
+    name: "tooltip-styles",
+    type: "registry:chart",
+    title: "Tooltip Styles",
+    description:
+      "Dual Online x Store bars teaching Recharts tip chrome (contentStyle, itemStyle, labelStyle) - locked chrome, metric scrubber, RTL-aware.",
+    dependencies: ["recharts"],
+    registryDependencies: ["chart", "chart-styles"],
+    cssVars: {
+      light: {
+        "chart-1": "#1e3a8a",
+        "chart-2": "#ea580c",
+        "chart-up": "#16a34a",
+      },
+      dark: {
+        "chart-1": "#3b82f6",
+        "chart-2": "#f97316",
+        "chart-up": "#4ade80",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/tooltip/tooltip-styles.tsx",
+        type: "registry:component",
+        target: "components/charts/tooltip-styles.tsx",
+      },
+    ],
+  },
+  {
+    name: "tooltip-advanced",
+    type: "registry:chart",
+    title: "Tooltip Advanced",
+    description:
+      "Stacked Delivery x Pickup bars with an advanced tip formatter (swatch, unit, total) - locked chrome, metric scrubber, RTL-aware.",
+    dependencies: ["recharts"],
+    registryDependencies: ["chart", "chart-styles"],
+    cssVars: {
+      light: {
+        "chart-1": "#1e3a8a",
+        "chart-2": "#ea580c",
+        "chart-up": "#16a34a",
+      },
+      dark: {
+        "chart-1": "#3b82f6",
+        "chart-2": "#f97316",
+        "chart-up": "#4ade80",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/tooltip/tooltip-advanced.tsx",
+        type: "registry:component",
+        target: "components/charts/tooltip-advanced.tsx",
+      },
+    ],
+  },
+  {
+    name: "chart-tooltip-default",
+    type: "registry:chart",
+    title: "Tooltip Default",
+    description:
+      "Stacked Delivery x Pickup bars with default ChartTooltipContent and a long-date labelFormatter - locked chrome, metric scrubber, RTL-aware.",
+    dependencies: ["recharts"],
+    registryDependencies: ["chart", "chart-styles"],
+    cssVars: {
+      light: {
+        "chart-1": "#1e3a8a",
+        "chart-2": "#ea580c",
+        "chart-up": "#16a34a",
+      },
+      dark: {
+        "chart-1": "#3b82f6",
+        "chart-2": "#f97316",
+        "chart-up": "#4ade80",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/tooltip/chart-tooltip-default.tsx",
+        type: "registry:component",
+        target: "components/charts/chart-tooltip-default.tsx",
+      },
+    ],
+  },
+  {
+    name: "chart-tooltip-indicator-line",
+    type: "registry:chart",
+    title: "Tooltip Indicator Line",
+    description:
+      "Stacked Delivery x Pickup bars with ChartTooltipContent indicator=line and a long-date labelFormatter - locked chrome, metric scrubber, RTL-aware.",
+    dependencies: ["recharts"],
+    registryDependencies: ["chart", "chart-styles"],
+    cssVars: {
+      light: {
+        "chart-1": "#1e3a8a",
+        "chart-2": "#ea580c",
+        "chart-up": "#16a34a",
+      },
+      dark: {
+        "chart-1": "#3b82f6",
+        "chart-2": "#f97316",
+        "chart-up": "#4ade80",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/tooltip/chart-tooltip-indicator-line.tsx",
+        type: "registry:component",
+        target: "components/charts/chart-tooltip-indicator-line.tsx",
+      },
+    ],
+  },
+  {
+    name: "chart-tooltip-indicator-none",
+    type: "registry:chart",
+    title: "Tooltip Indicator None",
+    description:
+      "Stacked Delivery x Pickup bars with ChartTooltipContent hideIndicator and a long-date labelFormatter - locked chrome, metric scrubber, RTL-aware.",
+    dependencies: ["recharts"],
+    registryDependencies: ["chart", "chart-styles"],
+    cssVars: {
+      light: {
+        "chart-1": "#1e3a8a",
+        "chart-2": "#ea580c",
+        "chart-up": "#16a34a",
+      },
+      dark: {
+        "chart-1": "#3b82f6",
+        "chart-2": "#f97316",
+        "chart-up": "#4ade80",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/tooltip/chart-tooltip-indicator-none.tsx",
+        type: "registry:component",
+        target: "components/charts/chart-tooltip-indicator-none.tsx",
+      },
+    ],
+  },
+  {
+    name: "chart-tooltip-label-custom",
+    type: "registry:chart",
+    title: "Tooltip Label Custom",
+    description:
+      "Stacked Delivery x Pickup bars with ChartTooltipContent labelKey=activities (tip title from chartConfig) and indicator=line - locked chrome, metric scrubber, RTL-aware.",
+    dependencies: ["recharts"],
+    registryDependencies: ["chart", "chart-styles"],
+    cssVars: {
+      light: {
+        "chart-1": "#1e3a8a",
+        "chart-2": "#ea580c",
+        "chart-up": "#16a34a",
+      },
+      dark: {
+        "chart-1": "#3b82f6",
+        "chart-2": "#f97316",
+        "chart-up": "#4ade80",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/tooltip/chart-tooltip-label-custom.tsx",
+        type: "registry:component",
+        target: "components/charts/chart-tooltip-label-custom.tsx",
+      },
+    ],
+  },
+  {
+    name: "chart-tooltip-label-formatter",
+    type: "registry:chart",
+    title: "Tooltip Label Formatter",
+    description:
+      "Stacked Delivery x Pickup bars teaching ChartTooltipContent long-date labelFormatter - locked chrome, metric scrubber, RTL-aware.",
+    dependencies: ["recharts"],
+    registryDependencies: ["chart", "chart-styles"],
+    cssVars: {
+      light: {
+        "chart-1": "#1e3a8a",
+        "chart-2": "#ea580c",
+        "chart-up": "#16a34a",
+      },
+      dark: {
+        "chart-1": "#3b82f6",
+        "chart-2": "#f97316",
+        "chart-up": "#4ade80",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/tooltip/chart-tooltip-label-formatter.tsx",
+        type: "registry:component",
+        target: "components/charts/chart-tooltip-label-formatter.tsx",
+      },
+    ],
+  },
+  {
+    name: "chart-tooltip-label-none",
+    type: "registry:chart",
+    title: "Tooltip Label None",
+    description:
+      "Stacked Delivery x Pickup bars with ChartTooltipContent hideLabel and hideIndicator - locked chrome, metric scrubber, RTL-aware.",
+    dependencies: ["recharts"],
+    registryDependencies: ["chart", "chart-styles"],
+    cssVars: {
+      light: {
+        "chart-1": "#1e3a8a",
+        "chart-2": "#ea580c",
+        "chart-up": "#16a34a",
+      },
+      dark: {
+        "chart-1": "#3b82f6",
+        "chart-2": "#f97316",
+        "chart-up": "#4ade80",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/tooltip/chart-tooltip-label-none.tsx",
+        type: "registry:component",
+        target: "components/charts/chart-tooltip-label-none.tsx",
+      },
+    ],
+  },
+  {
+    name: "chart-tooltip-formatter",
+    type: "registry:chart",
+    title: "Tooltip Formatter",
+    description:
+      "Stacked Delivery x Pickup bars with ChartTooltipContent custom value formatter (kcal) and hideLabel - locked chrome, metric scrubber, RTL-aware.",
+    dependencies: ["recharts"],
+    registryDependencies: ["chart", "chart-styles"],
+    cssVars: {
+      light: {
+        "chart-1": "#1e3a8a",
+        "chart-2": "#ea580c",
+        "chart-up": "#16a34a",
+      },
+      dark: {
+        "chart-1": "#3b82f6",
+        "chart-2": "#f97316",
+        "chart-up": "#4ade80",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/tooltip/chart-tooltip-formatter.tsx",
+        type: "registry:component",
+        target: "components/charts/chart-tooltip-formatter.tsx",
+      },
+    ],
+  },
+  {
+    name: "chart-tooltip-icons",
+    type: "registry:chart",
+    title: "Tooltip Icons",
+    description:
+      "Stacked Delivery x Pickup bars with ChartTooltipContent series icons (Footprints / Waves) and hideLabel - locked chrome, metric scrubber, RTL-aware.",
+    dependencies: ["recharts", "lucide-react"],
+    registryDependencies: ["chart", "chart-styles"],
+    cssVars: {
+      light: {
+        "chart-1": "#1e3a8a",
+        "chart-2": "#ea580c",
+        "chart-up": "#16a34a",
+      },
+      dark: {
+        "chart-1": "#3b82f6",
+        "chart-2": "#f97316",
+        "chart-up": "#4ade80",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/tooltip/chart-tooltip-icons.tsx",
+        type: "registry:component",
+        target: "components/charts/chart-tooltip-icons.tsx",
+      },
+    ],
+  },
+  {
+    name: "chart-tooltip-advanced",
+    type: "registry:chart",
+    title: "Tooltip Advanced",
+    description:
+      "Classic stacked Delivery x Pickup with ChartTooltipContent formatter (swatch, kcal, Total) - locked chrome, metric scrubber, RTL-aware.",
+    dependencies: ["recharts"],
+    registryDependencies: ["chart", "chart-styles"],
+    cssVars: {
+      light: {
+        "chart-1": "#1e3a8a",
+        "chart-2": "#ea580c",
+        "chart-up": "#16a34a",
+      },
+      dark: {
+        "chart-1": "#3b82f6",
+        "chart-2": "#f97316",
+        "chart-up": "#4ade80",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/tooltip/chart-tooltip-advanced.tsx",
+        type: "registry:component",
+        target: "components/charts/chart-tooltip-advanced.tsx",
+      },
+    ],
+  },
+  {
+    name: "simple-radar-chart",
+    type: "registry:chart",
+    title: "Simple Radar Chart",
+    description:
+      "Single-series skill radar polygon — locked chrome, metric scrubber, RTL-aware polar island.",
+    dependencies: ["recharts"],
+    registryDependencies: ["chart", "chart-styles"],
+    cssVars: {
+      light: {
+        "chart-1": "#1e3a8a",
+        "chart-2": "#ea580c",
+        "chart-up": "#16a34a",
+      },
+      dark: {
+        "chart-1": "#3b82f6",
+        "chart-2": "#f97316",
+        "chart-up": "#4ade80",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/radar/simple-radar-chart.tsx",
+        type: "registry:component",
+        target: "components/charts/simple-radar-chart.tsx",
+      },
+    ],
+  },
+  {
+    name: "specified-domain-radar-chart",
+    type: "registry:chart",
+    title: "Specified Domain Radar Chart",
+    description:
+      "Dual Alex×Sara radar with PolarRadiusAxis domain [0, 150] — locked chrome, metric scrubber, RTL-aware.",
+    dependencies: ["recharts"],
+    registryDependencies: ["chart", "chart-styles"],
+    cssVars: {
+      light: {
+        "chart-1": "#1e3a8a",
+        "chart-2": "#ea580c",
+        "chart-up": "#16a34a",
+      },
+      dark: {
+        "chart-1": "#3b82f6",
+        "chart-2": "#f97316",
+        "chart-up": "#4ade80",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/radar/specified-domain-radar-chart.tsx",
+        type: "registry:component",
+        target: "components/charts/specified-domain-radar-chart.tsx",
+      },
+    ],
+  },
+  {
+    name: "range-radar-chart-custom-animation",
+    type: "registry:chart",
+    title: "Range Radar Chart Custom Animation",
+    description:
+      "Ceiling radar polygon with 1.6s entrance tween — locked chrome, metric scrubber, RTL-aware.",
+    dependencies: ["recharts"],
+    registryDependencies: ["chart", "chart-styles"],
+    cssVars: {
+      light: {
+        "chart-1": "#1e3a8a",
+        "chart-2": "#ea580c",
+        "chart-up": "#16a34a",
+      },
+      dark: {
+        "chart-1": "#3b82f6",
+        "chart-2": "#f97316",
+        "chart-up": "#4ade80",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/radar/range-radar-chart-custom-animation.tsx",
+        type: "registry:component",
+        target: "components/charts/range-radar-chart-custom-animation.tsx",
+      },
+    ],
+  },
+  {
+    name: "radar-lines-only",
+    type: "registry:chart",
+    title: "Radar Lines Only",
+    description:
+      "Dual Store×Online stroke-only radar (no fill, no radial spokes) — locked chrome, metric scrubber, RTL-aware.",
+    dependencies: ["recharts"],
+    registryDependencies: ["chart", "chart-styles"],
+    cssVars: {
+      light: {
+        "chart-1": "#1e3a8a",
+        "chart-2": "#ea580c",
+        "chart-up": "#16a34a",
+      },
+      dark: {
+        "chart-1": "#3b82f6",
+        "chart-2": "#f97316",
+        "chart-up": "#4ade80",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/radar/radar-lines-only.tsx",
+        type: "registry:component",
+        target: "components/charts/radar-lines-only.tsx",
+      },
+    ],
+  },
+  {
+    name: "radar-icons",
+    type: "registry:chart",
+    title: "Radar Icons",
+    description:
+      "Dual Store×Online radar with Lucide icons in chartConfig (ChartLegendContent) — locked chrome, metric scrubber, RTL-aware.",
+    dependencies: ["recharts", "lucide-react"],
+    registryDependencies: ["chart", "chart-styles"],
+    cssVars: {
+      light: {
+        "chart-1": "#1e3a8a",
+        "chart-2": "#ea580c",
+        "chart-up": "#16a34a",
+      },
+      dark: {
+        "chart-1": "#3b82f6",
+        "chart-2": "#f97316",
+        "chart-up": "#4ade80",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/radar/radar-icons.tsx",
+        type: "registry:component",
+        target: "components/charts/radar-icons.tsx",
+      },
+    ],
+  },
+  {
+    name: "radar-multiple",
+    type: "registry:chart",
+    title: "Radar Multiple",
+    description:
+      "Dual overlapping Store×Online filled radar polygons — locked chrome, metric scrubber, RTL-aware.",
+    dependencies: ["recharts"],
+    registryDependencies: ["chart", "chart-styles"],
+    cssVars: {
+      light: {
+        "chart-1": "#1e3a8a",
+        "chart-2": "#ea580c",
+        "chart-up": "#16a34a",
+      },
+      dark: {
+        "chart-1": "#3b82f6",
+        "chart-2": "#f97316",
+        "chart-up": "#4ade80",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/radar/radar-multiple.tsx",
+        type: "registry:component",
+        target: "components/charts/radar-multiple.tsx",
+      },
+    ],
+  },
+  {
+    name: "chart-radar-default",
+    type: "registry:chart",
+    title: "Radar Default",
+    description:
+      "Classic single Store radar with default ChartTooltipContent — locked chrome, metric scrubber, RTL-aware.",
+    dependencies: ["recharts"],
+    registryDependencies: ["chart", "chart-styles"],
+    cssVars: {
+      light: {
+        "chart-1": "#1e3a8a",
+        "chart-2": "#ea580c",
+        "chart-up": "#16a34a",
+      },
+      dark: {
+        "chart-1": "#3b82f6",
+        "chart-2": "#f97316",
+        "chart-up": "#4ade80",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/radar/chart-radar-default.tsx",
+        type: "registry:component",
+        target: "components/charts/chart-radar-default.tsx",
+      },
+    ],
+  },
+  {
+    name: "chart-radar-dots",
+    type: "registry:chart",
+    title: "Radar Dots",
+    description:
+      "Classic single Store radar with solid vertex dots — locked chrome, metric scrubber, RTL-aware.",
+    dependencies: ["recharts"],
+    registryDependencies: ["chart", "chart-styles"],
+    cssVars: {
+      light: {
+        "chart-1": "#1e3a8a",
+        "chart-2": "#ea580c",
+        "chart-up": "#16a34a",
+      },
+      dark: {
+        "chart-1": "#3b82f6",
+        "chart-2": "#f97316",
+        "chart-up": "#4ade80",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/radar/chart-radar-dots.tsx",
+        type: "registry:component",
+        target: "components/charts/chart-radar-dots.tsx",
+      },
+    ],
+  },
+  {
+    name: "chart-radar-lines-only",
+    type: "registry:chart",
+    title: "Radar Lines Only",
+    description:
+      "Classic dual Store×Online stroke-only radar (no fill, no radial spokes) — locked chrome, metric scrubber, RTL-aware.",
+    dependencies: ["recharts"],
+    registryDependencies: ["chart", "chart-styles"],
+    cssVars: {
+      light: {
+        "chart-1": "#1e3a8a",
+        "chart-2": "#ea580c",
+        "chart-up": "#16a34a",
+      },
+      dark: {
+        "chart-1": "#3b82f6",
+        "chart-2": "#f97316",
+        "chart-up": "#4ade80",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/radar/chart-radar-lines-only.tsx",
+        type: "registry:component",
+        target: "components/charts/chart-radar-lines-only.tsx",
+      },
+    ],
+  },
+  {
+    name: "chart-radar-label-custom",
+    type: "registry:chart",
+    title: "Radar Label Custom",
+    description:
+      "Classic dual Store×Online radar with custom angle ticks (values + month) — locked chrome, metric scrubber, RTL-aware.",
+    dependencies: ["recharts"],
+    registryDependencies: ["chart", "chart-styles"],
+    cssVars: {
+      light: {
+        "chart-1": "#1e3a8a",
+        "chart-2": "#ea580c",
+        "chart-up": "#16a34a",
+      },
+      dark: {
+        "chart-1": "#3b82f6",
+        "chart-2": "#f97316",
+        "chart-up": "#4ade80",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/radar/chart-radar-label-custom.tsx",
+        type: "registry:component",
+        target: "components/charts/chart-radar-label-custom.tsx",
+      },
+    ],
+  },
+  {
+    name: "chart-radar-grid-custom",
+    type: "registry:chart",
+    title: "Radar Grid Custom",
+    description:
+      "Classic single Store radar with custom PolarGrid (no radial spokes, single ring) — locked chrome, metric scrubber, RTL-aware.",
+    dependencies: ["recharts"],
+    registryDependencies: ["chart", "chart-styles"],
+    cssVars: {
+      light: {
+        "chart-1": "#1e3a8a",
+        "chart-up": "#16a34a",
+      },
+      dark: {
+        "chart-1": "#3b82f6",
+        "chart-up": "#4ade80",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/radar/chart-radar-grid-custom.tsx",
+        type: "registry:component",
+        target: "components/charts/chart-radar-grid-custom.tsx",
+      },
+    ],
+  },
+  {
+    name: "chart-radar-grid-none",
+    type: "registry:chart",
+    title: "Radar Grid None",
+    description:
+      "Classic single Store radar with no PolarGrid and vertex dots — locked chrome, metric scrubber, RTL-aware.",
+    dependencies: ["recharts"],
+    registryDependencies: ["chart", "chart-styles"],
+    cssVars: {
+      light: {
+        "chart-1": "#1e3a8a",
+        "chart-up": "#16a34a",
+      },
+      dark: {
+        "chart-1": "#3b82f6",
+        "chart-up": "#4ade80",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/radar/chart-radar-grid-none.tsx",
+        type: "registry:component",
+        target: "components/charts/chart-radar-grid-none.tsx",
+      },
+    ],
+  },
+  {
+    name: "chart-radar-grid-circle",
+    type: "registry:chart",
+    title: "Radar Grid Circle",
+    description:
+      "Classic single Store radar with circular PolarGrid and vertex dots — locked chrome, metric scrubber, RTL-aware.",
+    dependencies: ["recharts"],
+    registryDependencies: ["chart", "chart-styles"],
+    cssVars: {
+      light: {
+        "chart-1": "#1e3a8a",
+        "chart-up": "#16a34a",
+      },
+      dark: {
+        "chart-1": "#3b82f6",
+        "chart-up": "#4ade80",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/radar/chart-radar-grid-circle.tsx",
+        type: "registry:component",
+        target: "components/charts/chart-radar-grid-circle.tsx",
+      },
+    ],
+  },
+  {
+    name: "chart-radar-grid-circle-no-lines",
+    type: "registry:chart",
+    title: "Radar Grid Circle No Lines",
+    description:
+      "Classic single Store radar with circular PolarGrid, no radial spokes, and vertex dots — locked chrome, metric scrubber, RTL-aware.",
+    dependencies: ["recharts"],
+    registryDependencies: ["chart", "chart-styles"],
+    cssVars: {
+      light: {
+        "chart-1": "#1e3a8a",
+        "chart-up": "#16a34a",
+      },
+      dark: {
+        "chart-1": "#3b82f6",
+        "chart-up": "#4ade80",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/radar/chart-radar-grid-circle-no-lines.tsx",
+        type: "registry:component",
+        target: "components/charts/chart-radar-grid-circle-no-lines.tsx",
+      },
+    ],
+  },
+  {
+    name: "chart-radar-grid-circle-fill",
+    type: "registry:chart",
+    title: "Radar Grid Circle Fill",
+    description:
+      "Classic single Store radar with circular PolarGrid tinted by series fill — locked chrome, metric scrubber, RTL-aware.",
+    dependencies: ["recharts"],
+    registryDependencies: ["chart", "chart-styles"],
+    cssVars: {
+      light: {
+        "chart-1": "#1e3a8a",
+        "chart-up": "#16a34a",
+      },
+      dark: {
+        "chart-1": "#3b82f6",
+        "chart-up": "#4ade80",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/radar/chart-radar-grid-circle-fill.tsx",
+        type: "registry:component",
+        target: "components/charts/chart-radar-grid-circle-fill.tsx",
+      },
+    ],
+  },
+  {
+    name: "chart-radar-grid-fill",
+    type: "registry:chart",
+    title: "Radar Grid Fill",
+    description:
+      "Classic single Store radar with polygon PolarGrid tinted by series fill — locked chrome, metric scrubber, RTL-aware.",
+    dependencies: ["recharts"],
+    registryDependencies: ["chart", "chart-styles"],
+    cssVars: {
+      light: {
+        "chart-1": "#1e3a8a",
+        "chart-up": "#16a34a",
+      },
+      dark: {
+        "chart-1": "#3b82f6",
+        "chart-up": "#4ade80",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/radar/chart-radar-grid-fill.tsx",
+        type: "registry:component",
+        target: "components/charts/chart-radar-grid-fill.tsx",
+      },
+    ],
+  },
+  {
+    name: "chart-radar-multiple",
+    type: "registry:chart",
+    title: "Radar Multiple",
+    description:
+      "Classic dual Store×Online overlapping filled radar — locked chrome, metric scrubber, RTL-aware.",
+    dependencies: ["recharts"],
+    registryDependencies: ["chart", "chart-styles"],
+    cssVars: {
+      light: {
+        "chart-1": "#1e3a8a",
+        "chart-2": "#ea580c",
+        "chart-up": "#16a34a",
+      },
+      dark: {
+        "chart-1": "#3b82f6",
+        "chart-2": "#f97316",
+        "chart-up": "#4ade80",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/radar/chart-radar-multiple.tsx",
+        type: "registry:component",
+        target: "components/charts/chart-radar-multiple.tsx",
+      },
+    ],
+  },
+  {
+    name: "chart-radar-legend",
+    type: "registry:chart",
+    title: "Radar Legend",
+    description:
+      "Classic dual Store×Online radar with ChartLegend — locked chrome, metric scrubber, RTL-aware.",
+    dependencies: ["recharts"],
+    registryDependencies: ["chart", "chart-styles"],
+    cssVars: {
+      light: {
+        "chart-1": "#1e3a8a",
+        "chart-2": "#ea580c",
+        "chart-up": "#16a34a",
+      },
+      dark: {
+        "chart-1": "#3b82f6",
+        "chart-2": "#f97316",
+        "chart-up": "#4ade80",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/radar/chart-radar-legend.tsx",
+        type: "registry:component",
+        target: "components/charts/chart-radar-legend.tsx",
+      },
+    ],
+  },
+  {
+    name: "chart-radar-icons",
+    type: "registry:chart",
+    title: "Radar Icons",
+    description:
+      "Classic dual Store×Online radar with Lucide icons in chartConfig — locked chrome, metric scrubber, RTL-aware.",
+    dependencies: ["recharts", "lucide-react"],
+    registryDependencies: ["chart", "chart-styles"],
+    cssVars: {
+      light: {
+        "chart-1": "#1e3a8a",
+        "chart-2": "#ea580c",
+        "chart-up": "#16a34a",
+      },
+      dark: {
+        "chart-1": "#3b82f6",
+        "chart-2": "#f97316",
+        "chart-up": "#4ade80",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/radar/chart-radar-icons.tsx",
+        type: "registry:component",
+        target: "components/charts/chart-radar-icons.tsx",
+      },
+    ],
+  },
+  {
+    name: "chart-radar-radius",
+    type: "registry:chart",
+    title: "Radar Radius",
+    description:
+      "Classic dual Store×Online radar with PolarRadiusAxis (no angle axis) — locked chrome, metric scrubber, RTL-aware.",
+    dependencies: ["recharts"],
+    registryDependencies: ["chart", "chart-styles"],
+    cssVars: {
+      light: {
+        "chart-1": "#1e3a8a",
+        "chart-2": "#ea580c",
+        "chart-up": "#16a34a",
+      },
+      dark: {
+        "chart-1": "#3b82f6",
+        "chart-2": "#f97316",
+        "chart-up": "#4ade80",
+      },
+    },
+    files: [
+      {
+        path: "registry/charts/radar/chart-radar-radius.tsx",
+        type: "registry:component",
+        target: "components/charts/chart-radar-radius.tsx",
       },
     ],
   },

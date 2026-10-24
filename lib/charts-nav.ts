@@ -1,11 +1,15 @@
+import type { LucideIcon } from "lucide-react"
+
 import {
   CHART_CATEGORIES,
   CHART_CATEGORY_META,
   chartCategoryHref,
   chartViewHref,
   chartsCatalog,
+  getChartCategoryIcon,
   getChartEntry,
   getChartsByCategory,
+  isChartFeatured,
   type ChartCategory,
 } from "@/lib/charts-catalog"
 
@@ -21,6 +25,7 @@ export type ChartsNavGroup = {
   id: ChartCategory
   title: string
   href: string
+  icon: LucideIcon
   items: ChartsNavItem[]
 }
 
@@ -32,11 +37,12 @@ export const chartsNav: ChartsNavGroup[] = CHART_CATEGORIES.map((category) => {
     id: category,
     title: meta.title,
     href: chartCategoryHref(category),
+    icon: getChartCategoryIcon(category),
     items: entries.map((entry) => ({
       id: entry.id,
       title: entry.title,
       href: chartViewHref(entry.id),
-      featured: entry.featured === true,
+      featured: isChartFeatured(entry.id),
       status: entry.status,
     })),
   }

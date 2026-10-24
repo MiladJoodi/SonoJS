@@ -93,7 +93,7 @@ function GaugeCornerRadius({
         <ChartGauge
           id="gauge-corner-radius"
           nrOfLevels={levels}
-          colors={[...GAUGE_TRAFFIC_COLORS]}
+          colors={GAUGE_TRAFFIC_COLORS}
           arcPadding={arcPadding}
           cornerRadius={cornerRadius}
           percent={percent}

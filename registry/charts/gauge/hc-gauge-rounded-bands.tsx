@@ -14,7 +14,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
  * Hc Gauge Rounded Bands — dial with individually rounded plotBands.
- * Soft blue band scale; locked header chrome; English / Intl.
+ * Distinct teal / amber / rose scale (light + dark); locked header chrome.
  * Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/hc-gauge-rounded-bands.tsx
  */
@@ -29,10 +29,26 @@ export type HcGaugeRoundedBandsProps = {
 
 const DEMO_VALUE = 55
 
+const GAUGE_STAGE_ID = "hc-gauge-rounded-bands"
+
+/** Clear hue steps — not three near-identical blues. */
+const BAND_THEME = {
+  light: {
+    low: "#0D9488",
+    mid: "#D97706",
+    high: "#E11D48",
+  },
+  dark: {
+    low: "#2DD4BF",
+    mid: "#FBBF24",
+    high: "#FB7185",
+  },
+} as const
+
 const BANDS = [
-  { from: 0, to: 50, color: "#a8c4d8", label: "0–50" },
-  { from: 50, to: 75, color: "#6ea1c7", label: "50–75" },
-  { from: 75, to: 100, color: "#8b9dc3", label: "75–100" },
+  { from: 0, to: 50, color: "var(--gauge-band-1)", label: "0–50" },
+  { from: 50, to: 75, color: "var(--gauge-band-2)", label: "50–75" },
+  { from: 75, to: 100, color: "var(--gauge-band-3)", label: "75–100" },
 ] as const
 
 function buildOptions(value: number): Options {
@@ -78,7 +94,7 @@ function buildOptions(value: number): Options {
 
 function HcGaugeRoundedBands({
   title = "Rounded bands",
-  subtitle = "Dial with individually rounded plot bands — soft blue scale.",
+  subtitle = "Dial with individually rounded plot bands — teal / amber / rose.",
   value = DEMO_VALUE,
   className,
 }: HcGaugeRoundedBandsProps) {
@@ -90,11 +106,29 @@ function HcGaugeRoundedBands({
   return (
     <div
       ref={ref}
+      data-gauge={GAUGE_STAGE_ID}
       className={cn(
         "mx-auto flex w-full min-w-0 max-w-[640px] flex-col gap-5 font-sans tabular-nums sm:gap-6",
         className
       )}
     >
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+[data-gauge="${GAUGE_STAGE_ID}"] {
+  --gauge-band-1: ${BAND_THEME.light.low};
+  --gauge-band-2: ${BAND_THEME.light.mid};
+  --gauge-band-3: ${BAND_THEME.light.high};
+}
+.dark [data-gauge="${GAUGE_STAGE_ID}"] {
+  --gauge-band-1: ${BAND_THEME.dark.low};
+  --gauge-band-2: ${BAND_THEME.dark.mid};
+  --gauge-band-3: ${BAND_THEME.dark.high};
+}
+`,
+        }}
+      />
+
       <header className="flex flex-col gap-4">
         <div className="space-y-1">
           <h3 className="text-xl font-bold tracking-tight text-foreground sm:text-2xl">

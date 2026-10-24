@@ -1,5 +1,6 @@
 "use client"
 
+import * as React from "react"
 import type { CSSProperties, ComponentProps } from "react"
 import GaugeChart from "react-gauge-chart"
 
@@ -24,8 +25,9 @@ export const GAUGE_NEEDLE = "var(--foreground)"
 /**
  * Soft traffic-light arcs (aligned with chart palette intensity).
  * Mid gold stays readable on light backgrounds.
+ * Stable `string[]` — never spread a fresh array into `<GaugeChart colors={…} />`.
  */
-export const GAUGE_TRAFFIC_COLORS = ["#6cb87a", "#d4b45a", "#d96b5c"] as const
+export const GAUGE_TRAFFIC_COLORS: string[] = ["#6cb87a", "#d4b45a", "#d96b5c"]
 
 export const GAUGE_TRAFFIC_LABELS = ["Low", "Mid", "High"] as const
 
@@ -33,7 +35,7 @@ export const GAUGE_TRAFFIC_LABELS = ["Low", "Mid", "High"] as const
 export function gaugeTrafficRamp(levels: number): string[] {
   if (levels <= 1) return [GAUGE_TRAFFIC_COLORS[0]!]
   if (levels === 2) return [GAUGE_TRAFFIC_COLORS[0]!, GAUGE_TRAFFIC_COLORS[2]!]
-  if (levels === 3) return [...GAUGE_TRAFFIC_COLORS]
+  if (levels === 3) return GAUGE_TRAFFIC_COLORS.slice()
 
   const [green, yellow, red] = GAUGE_TRAFFIC_COLORS
   const mid = Math.floor((levels - 1) / 2)
@@ -67,14 +69,48 @@ export type ChartGaugeProps = ComponentProps<typeof GaugeChart> & {
   className?: string
 }
 
-export function ChartGauge({
+/**
+ * Library bug: `calculateRotation(prevPercent || percent)` treats `0` as falsy,
+ * so the needle is drawn at the *target* first, then tweens from 0 → target.
+ * We park at a tiny epsilon with `animate={false}`, then animate to the real %.
+ *
+ * Also memoized so ChartDemo / direction re-renders do not rebuild the SVG.
+ */
+function ChartGaugeImpl({
   className,
+  id,
+  percent = 0.66,
   textColor = GAUGE_NEEDLE,
   needleColor = GAUGE_NEEDLE,
   needleBaseColor = GAUGE_NEEDLE,
   formatTextValue = formatGaugePercent,
+  animate = true,
+  animDelay = 0,
+  animateDuration = 2200,
   ...gaugeProps
 }: ChartGaugeProps) {
+  const target = typeof percent === "number" ? percent : Number(percent) || 0
+  const [needle, setNeedle] = React.useState(animate ? 0.001 : target)
+  const [runAnim, setRunAnim] = React.useState(false)
+
+  React.useEffect(() => {
+    if (!animate) {
+      setNeedle(target)
+      setRunAnim(false)
+      return
+    }
+
+    // Park near 0 without the `0 || percent` flash, then sweep once.
+    setNeedle(0.001)
+    setRunAnim(false)
+    const timer = window.setTimeout(() => {
+      setRunAnim(true)
+      setNeedle(target)
+    }, 40)
+
+    return () => window.clearTimeout(timer)
+  }, [animate, target, id])
+
   return (
     <div
       className={cn(
@@ -83,13 +119,20 @@ export function ChartGauge({
       )}
     >
       <GaugeChart
+        id={id}
         style={gaugeChartStyle}
         textColor={textColor}
         needleColor={needleColor}
         needleBaseColor={needleBaseColor}
         formatTextValue={formatTextValue}
         {...gaugeProps}
+        percent={needle}
+        animate={runAnim}
+        animDelay={animDelay}
+        animateDuration={animateDuration}
       />
     </div>
   )
 }
+
+export const ChartGauge = React.memo(ChartGaugeImpl)

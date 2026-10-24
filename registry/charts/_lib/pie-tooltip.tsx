@@ -1,5 +1,7 @@
 import type { ReactNode } from "react"
 
+import { cn } from "@/lib/utils"
+
 type SliceConfig = Record<string, { label?: ReactNode } | undefined>
 
 /** Shared pie tooltip row — color swatch + slice label + en Intl value. */
@@ -66,4 +68,50 @@ export function pieSliceTooltip(
     locale,
     color,
   })
+}
+
+/**
+ * Radial ring tooltip — does not rely on ChartTooltipContent's
+ * `formatter && item.name` gate (RadialBar often names the dataKey).
+ * Pass `dir` from `useChartDir()` (plot island is `dir="ltr"`).
+ */
+export function RadialProvinceTooltipContent({
+  active,
+  payload,
+  className,
+  locale = "en",
+  dir = "ltr",
+  config,
+  nameKey = "province",
+  valueKey = "sales",
+}: {
+  active?: boolean
+  payload?: ReadonlyArray<PayloadLike>
+  className?: string
+  locale?: string
+  dir?: "ltr" | "rtl"
+  config: SliceConfig
+  nameKey?: string
+  valueKey?: string
+}) {
+  if (!active || !payload?.length) return null
+
+  const item = payload[0]!
+  const raw = item.payload
+  const value = Number(
+    item.value ?? (raw ? raw[valueKey] : undefined) ?? NaN
+  )
+  if (!Number.isFinite(value)) return null
+
+  return (
+    <div
+      dir={dir}
+      className={cn(
+        "pointer-events-none grid min-w-[9rem] items-start gap-1.5 rounded-md border border-border bg-background px-2.5 py-2 text-xs shadow-sm",
+        className
+      )}
+    >
+      {pieSliceTooltip(value, item, { locale, config, nameKey })}
+    </div>
+  )
 }

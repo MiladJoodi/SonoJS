@@ -2,8 +2,8 @@
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "sonojs",
   "homepage": "https://sonojs.com",
-  "version": "0.1.0+f3b1cde80695",
-  "generatedAt": "2026-10-24T00:02:33.074Z",
+  "version": "0.1.0+6b92f47ac64f",
+  "generatedAt": "2026-10-24T19:07:17.049Z",
   "items": [
     {
       "name": "accordion",
@@ -23,8 +23,8 @@
           "target": "components/ui/accordion.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "alert",
@@ -43,8 +43,8 @@
           "target": "components/ui/alert.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "alert-dialog",
@@ -76,8 +76,8 @@
           "target": "hooks/use-direction.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "avatar",
@@ -96,8 +96,8 @@
           "target": "components/ui/avatar.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "badge",
@@ -117,8 +117,8 @@
           "target": "components/ui/badge.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "breadcrumb",
@@ -138,8 +138,8 @@
           "target": "components/ui/breadcrumb.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "bubble",
@@ -159,8 +159,8 @@
           "target": "components/ui/bubble.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "button",
@@ -180,8 +180,8 @@
           "target": "components/ui/button.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "card",
@@ -199,8 +199,8 @@
           "target": "components/ui/card.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "carousel",
@@ -223,8 +223,8 @@
           "target": "components/ui/carousel.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "checkbox",
@@ -244,8 +244,8 @@
           "target": "components/ui/checkbox.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "collapsible",
@@ -264,8 +264,8 @@
           "target": "components/ui/collapsible.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "combobox",
@@ -289,8 +289,8 @@
           "target": "components/ui/combobox.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "command",
@@ -314,8 +314,8 @@
           "target": "components/ui/command.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "context-menu",
@@ -335,8 +335,8 @@
           "target": "components/ui/context-menu.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "dialog",
@@ -359,8 +359,8 @@
           "target": "components/ui/dialog.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "drawer",
@@ -398,8 +398,8 @@
           "target": "hooks/use-mobile.ts"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "dropdown-menu",
@@ -419,8 +419,8 @@
           "target": "components/ui/dropdown-menu.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "empty",
@@ -439,8 +439,8 @@
           "target": "components/ui/empty.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "field",
@@ -463,8 +463,8 @@
           "target": "components/ui/field.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "hover-card",
@@ -483,8 +483,8 @@
           "target": "components/ui/hover-card.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "input",
@@ -502,8 +502,8 @@
           "target": "components/ui/input.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "textarea",
@@ -521,8 +521,8 @@
           "target": "components/ui/textarea.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "table",
@@ -540,8 +540,8 @@
           "target": "components/ui/table.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "input-group",
@@ -565,8 +565,8 @@
           "target": "components/ui/input-group.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "input-otp",
@@ -586,8 +586,8 @@
           "target": "components/ui/input-otp.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "item",
@@ -610,8 +610,8 @@
           "target": "components/ui/item.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "kbd",
@@ -629,8 +629,8 @@
           "target": "components/ui/kbd.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "marker",
@@ -650,8 +650,8 @@
           "target": "components/ui/marker.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "menubar",
@@ -671,8 +671,8 @@
           "target": "components/ui/menubar.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "message",
@@ -690,8 +690,8 @@
           "target": "components/ui/message.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "message-scroller",
@@ -713,8 +713,8 @@
           "target": "components/ui/message-scroller.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "native-select",
@@ -733,8 +733,8 @@
           "target": "components/ui/native-select.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "navigation-menu",
@@ -755,8 +755,8 @@
           "target": "components/ui/navigation-menu.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "pagination",
@@ -778,8 +778,8 @@
           "target": "components/ui/pagination.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "code-block",
@@ -804,8 +804,8 @@
           "target": "components/ui/code-block.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "use-highlighted-code",
@@ -827,8 +827,8 @@
           "target": "lib/highlighter.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "label",
@@ -847,8 +847,8 @@
           "target": "components/ui/label.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "button-group",
@@ -871,8 +871,8 @@
           "target": "components/ui/button-group.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "calendar",
@@ -897,8 +897,8 @@
           "target": "components/ui/calendar.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "popover",
@@ -917,8 +917,8 @@
           "target": "components/ui/popover.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "progress",
@@ -937,8 +937,8 @@
           "target": "components/ui/progress.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "radio-group",
@@ -958,8 +958,8 @@
           "target": "components/ui/radio-group.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "resizable",
@@ -979,8 +979,8 @@
           "target": "components/ui/resizable.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "scroll-area",
@@ -999,8 +999,8 @@
           "target": "components/ui/scroll-area.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "select",
@@ -1020,8 +1020,8 @@
           "target": "components/ui/select.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "separator",
@@ -1040,8 +1040,8 @@
           "target": "components/ui/separator.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "sheet",
@@ -1072,8 +1072,8 @@
           "target": "hooks/use-direction.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "skeleton",
@@ -1091,8 +1091,8 @@
           "target": "components/ui/skeleton.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "slider",
@@ -1111,8 +1111,8 @@
           "target": "components/ui/slider.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "switch",
@@ -1131,8 +1131,8 @@
           "target": "components/ui/switch.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "tabs",
@@ -1152,8 +1152,8 @@
           "target": "components/ui/tabs.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "sonner",
@@ -1182,8 +1182,8 @@
           "target": "hooks/use-direction.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "toggle",
@@ -1203,8 +1203,8 @@
           "target": "components/ui/toggle.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "toggle-group",
@@ -1227,8 +1227,8 @@
           "target": "components/ui/toggle-group.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "tooltip",
@@ -1247,8 +1247,8 @@
           "target": "components/ui/tooltip.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "trace",
@@ -1270,8 +1270,8 @@
           "target": "components/ui/trace.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "attachment",
@@ -1296,8 +1296,8 @@
           "target": "components/ui/attachment.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "spinner",
@@ -1316,8 +1316,8 @@
           "target": "components/ui/spinner.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "login-01",
@@ -1338,8 +1338,8 @@
           "type": "registry:component"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "chart",
@@ -1358,8 +1358,8 @@
           "target": "components/ui/chart.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "chart-area",
@@ -1380,8 +1380,8 @@
           "target": "components/charts/chart-area.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "chart-mock-data",
@@ -1395,8 +1395,8 @@
           "target": "components/charts/_lib/chart-mock-data.ts"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "chart-styles",
@@ -1456,8 +1456,8 @@
           "target": "components/charts/_lib/treemap-tooltip.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "stock-shared",
@@ -1477,8 +1477,8 @@
           "target": "components/charts/_lib/stock-shared.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "heatmap-shared",
@@ -1495,8 +1495,26 @@
           "target": "components/charts/_lib/heatmap-shared.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "sunburst-shared",
+      "type": "registry:lib",
+      "title": "Sunburst shared",
+      "description": "Sunburst tree colorize, name labels, and center disc — EN, locked palette shades.",
+      "registryDependencies": [
+        "chart-styles"
+      ],
+      "files": [
+        {
+          "path": "components/charts/_lib/sunburst-shared.tsx",
+          "type": "registry:lib",
+          "target": "components/charts/_lib/sunburst-shared.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "gauge-shared",
@@ -1522,8 +1540,8 @@
           "target": "components/charts/_lib/react-gauge-chart.d.ts"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "hc-gauge-shared",
@@ -1544,8 +1562,8 @@
           "target": "components/charts/_lib/hc-gauge-shared.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "simple-bar-chart",
@@ -1576,8 +1594,8 @@
           "target": "components/charts/simple-bar-chart.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "area-chart",
@@ -1612,8 +1630,8 @@
           "target": "components/charts/area-chart.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "stacked-area-chart",
@@ -1650,8 +1668,8 @@
           "target": "components/charts/stacked-area-chart.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "area-chart-range",
@@ -1684,8 +1702,8 @@
           "target": "components/charts/area-chart-range.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "area-chart-connect-nulls",
@@ -1718,8 +1736,8 @@
           "target": "components/charts/area-chart-connect-nulls.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "cardinal-area-chart",
@@ -1754,8 +1772,8 @@
           "target": "components/charts/cardinal-area-chart.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "percent-area-chart",
@@ -1792,8 +1810,8 @@
           "target": "components/charts/percent-area-chart.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "synchronized-area-chart",
@@ -1830,8 +1848,8 @@
           "target": "components/charts/synchronized-area-chart.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "tiny-area-chart",
@@ -1864,8 +1882,8 @@
           "target": "components/charts/tiny-area-chart.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "area-chart-fill-by-value",
@@ -1900,8 +1918,8 @@
           "target": "components/charts/area-chart-fill-by-value.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "area-chart-custom-animation",
@@ -1934,8 +1952,8 @@
           "target": "components/charts/area-chart-custom-animation.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "range-area-chart-custom-animation",
@@ -1968,8 +1986,8 @@
           "target": "components/charts/range-area-chart-custom-animation.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "area-chart-with-custom-events",
@@ -2003,8 +2021,8 @@
           "target": "components/charts/area-chart-with-custom-events.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "prevent-right-click",
@@ -2038,8 +2056,8 @@
           "target": "components/charts/prevent-right-click.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "area-interactive",
@@ -2074,8 +2092,8 @@
           "target": "components/charts/area-interactive.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "area-step",
@@ -2108,8 +2126,8 @@
           "target": "components/charts/area-step.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "area-gradient",
@@ -2144,8 +2162,8 @@
           "target": "components/charts/area-gradient.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "market-cards",
@@ -2179,8 +2197,8 @@
           "target": "components/charts/market-cards.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "chart-area-default",
@@ -2209,8 +2227,8 @@
           "target": "components/charts/chart-area-default.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "chart-area-linear",
@@ -2239,8 +2257,8 @@
           "target": "components/charts/chart-area-linear.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "chart-area-step",
@@ -2269,8 +2287,8 @@
           "target": "components/charts/chart-area-step.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "chart-area-legend",
@@ -2301,8 +2319,8 @@
           "target": "components/charts/chart-area-legend.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "chart-area-stacked",
@@ -2333,8 +2351,8 @@
           "target": "components/charts/chart-area-stacked.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "chart-area-stacked-expand",
@@ -2365,8 +2383,8 @@
           "target": "components/charts/chart-area-stacked-expand.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "chart-area-icons",
@@ -2398,8 +2416,8 @@
           "target": "components/charts/chart-area-icons.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "chart-area-gradient",
@@ -2434,8 +2452,8 @@
           "target": "components/charts/chart-area-gradient.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "chart-area-axes",
@@ -2466,8 +2484,8 @@
           "target": "components/charts/chart-area-axes.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "two-level-pie-chart",
@@ -2504,8 +2522,8 @@
           "target": "components/charts/two-level-pie-chart.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "straight-angle-pie-chart",
@@ -2542,8 +2560,8 @@
           "target": "components/charts/straight-angle-pie-chart.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "custom-active-shape-pie-chart",
@@ -2578,8 +2596,8 @@
           "target": "components/charts/custom-active-shape-pie-chart.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "pie-chart-with-customized-label",
@@ -2614,8 +2632,8 @@
           "target": "components/charts/pie-chart-with-customized-label.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "pie-chart-with-padding-angle",
@@ -2650,8 +2668,8 @@
           "target": "components/charts/pie-chart-with-padding-angle.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "pie-chart-in-grid",
@@ -2686,8 +2704,8 @@
           "target": "components/charts/pie-chart-in-grid.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "pie-with-gradient",
@@ -2722,8 +2740,8 @@
           "target": "components/charts/pie-with-gradient.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "pie-donut-text",
@@ -2760,8 +2778,8 @@
           "target": "components/charts/pie-donut-text.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "pie-interactive",
@@ -2799,8 +2817,8 @@
           "target": "components/charts/pie-interactive.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "pie-stacked",
@@ -2837,8 +2855,8 @@
           "target": "components/charts/pie-stacked.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "chart-pie-simple",
@@ -2875,8 +2893,8 @@
           "target": "components/charts/chart-pie-simple.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "chart-pie-separator-none",
@@ -2913,8 +2931,8 @@
           "target": "components/charts/chart-pie-separator-none.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "chart-pie-label",
@@ -2951,8 +2969,8 @@
           "target": "components/charts/chart-pie-label.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "chart-pie-label-custom",
@@ -2989,8 +3007,8 @@
           "target": "components/charts/chart-pie-label-custom.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "chart-pie-label-list",
@@ -3027,8 +3045,8 @@
           "target": "components/charts/chart-pie-label-list.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "chart-pie-legend",
@@ -3065,8 +3083,8 @@
           "target": "components/charts/chart-pie-legend.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "chart-pie-donut",
@@ -3103,8 +3121,8 @@
           "target": "components/charts/chart-pie-donut.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "chart-pie-donut-active",
@@ -3141,8 +3159,8 @@
           "target": "components/charts/chart-pie-donut-active.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "chart-pie-donut-text",
@@ -3179,8 +3197,236 @@
           "target": "components/charts/chart-pie-donut-text.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "chart-radial-simple",
+      "type": "registry:chart",
+      "title": "Radial Simple",
+      "description": "Classic concentric radial bars of region sales — locked chrome, ring scrubber, RTL-aware.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-1": "#1e3a8a",
+          "chart-2": "#ea580c",
+          "chart-3": "#f59e0b",
+          "chart-4": "#6366f1",
+          "chart-5": "#e11d48"
+        },
+        "dark": {
+          "chart-1": "#3b82f6",
+          "chart-2": "#f97316",
+          "chart-3": "#fbbf24",
+          "chart-4": "#818cf8",
+          "chart-5": "#fb7185"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/chart-radial-simple.tsx",
+          "type": "registry:component",
+          "target": "components/charts/chart-radial-simple.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "chart-radial-label",
+      "type": "registry:chart",
+      "title": "Radial Label",
+      "description": "Classic radial bars with inside-start name labels — locked chrome, ring scrubber, RTL-aware.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-1": "#1e3a8a",
+          "chart-2": "#ea580c",
+          "chart-3": "#f59e0b",
+          "chart-4": "#6366f1",
+          "chart-5": "#e11d48"
+        },
+        "dark": {
+          "chart-1": "#3b82f6",
+          "chart-2": "#f97316",
+          "chart-3": "#fbbf24",
+          "chart-4": "#818cf8",
+          "chart-5": "#fb7185"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/chart-radial-label.tsx",
+          "type": "registry:component",
+          "target": "components/charts/chart-radial-label.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "chart-radial-grid",
+      "type": "registry:chart",
+      "title": "Radial Grid",
+      "description": "Classic radial bars with circular PolarGrid — locked chrome, ring scrubber, RTL-aware.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-1": "#1e3a8a",
+          "chart-2": "#ea580c",
+          "chart-3": "#f59e0b",
+          "chart-4": "#6366f1",
+          "chart-5": "#e11d48"
+        },
+        "dark": {
+          "chart-1": "#3b82f6",
+          "chart-2": "#f97316",
+          "chart-3": "#fbbf24",
+          "chart-4": "#818cf8",
+          "chart-5": "#fb7185"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/chart-radial-grid.tsx",
+          "type": "registry:component",
+          "target": "components/charts/chart-radial-grid.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "chart-radial-text",
+      "type": "registry:chart",
+      "title": "Radial Text",
+      "description": "Classic partial radial ring with centered value text — locked chrome, RTL-aware.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-1": "#1e3a8a",
+          "chart-2": "#ea580c",
+          "chart-3": "#f59e0b",
+          "chart-4": "#6366f1",
+          "chart-5": "#e11d48"
+        },
+        "dark": {
+          "chart-1": "#3b82f6",
+          "chart-2": "#f97316",
+          "chart-3": "#fbbf24",
+          "chart-4": "#818cf8",
+          "chart-5": "#fb7185"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/chart-radial-text.tsx",
+          "type": "registry:component",
+          "target": "components/charts/chart-radial-text.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "chart-radial-shape",
+      "type": "registry:chart",
+      "title": "Radial Shape",
+      "description": "Classic short radial arc with PolarGrid shape and centered value — locked chrome, RTL-aware.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-1": "#1e3a8a",
+          "chart-2": "#ea580c",
+          "chart-3": "#f59e0b",
+          "chart-4": "#6366f1",
+          "chart-5": "#e11d48"
+        },
+        "dark": {
+          "chart-1": "#3b82f6",
+          "chart-2": "#f97316",
+          "chart-3": "#fbbf24",
+          "chart-4": "#818cf8",
+          "chart-5": "#fb7185"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/chart-radial-shape.tsx",
+          "type": "registry:component",
+          "target": "components/charts/chart-radial-shape.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "chart-radial-stacked",
+      "type": "registry:chart",
+      "title": "Radial Stacked",
+      "description": "Classic semicircle stacked Store×Online radial — locked navy×orange, centered total, RTL-aware.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-1": "#1e3a8a",
+          "chart-2": "#ea580c",
+          "chart-3": "#f59e0b",
+          "chart-4": "#6366f1",
+          "chart-5": "#e11d48"
+        },
+        "dark": {
+          "chart-1": "#3b82f6",
+          "chart-2": "#f97316",
+          "chart-3": "#fbbf24",
+          "chart-4": "#818cf8",
+          "chart-5": "#fb7185"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/chart-radial-stacked.tsx",
+          "type": "registry:component",
+          "target": "components/charts/chart-radial-stacked.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "chart-pie-stacked",
@@ -3217,8 +3463,8 @@
           "target": "components/charts/chart-pie-stacked.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "chart-pie-interactive",
@@ -3256,8 +3502,8 @@
           "target": "components/charts/chart-pie-interactive.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "simple-line-chart",
@@ -3288,8 +3534,8 @@
           "target": "components/charts/simple-line-chart.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "dashed-line-chart",
@@ -3320,8 +3566,8 @@
           "target": "components/charts/dashed-line-chart.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "vertical-line-chart",
@@ -3352,8 +3598,8 @@
           "target": "components/charts/vertical-line-chart.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "line-chart-connect-nulls",
@@ -3382,8 +3628,8 @@
           "target": "components/charts/line-chart-connect-nulls.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "line-chart-with-reference-lines",
@@ -3414,8 +3660,8 @@
           "target": "components/charts/line-chart-with-reference-lines.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "customized-label-line-chart",
@@ -3446,8 +3692,8 @@
           "target": "components/charts/customized-label-line-chart.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "highlight-and-zoom-line-chart",
@@ -3478,8 +3724,8 @@
           "target": "components/charts/highlight-and-zoom-line-chart.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "line-chart-axis-interval",
@@ -3511,8 +3757,8 @@
           "target": "components/charts/line-chart-axis-interval.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "biaxial-line-chart",
@@ -3543,8 +3789,8 @@
           "target": "components/charts/biaxial-line-chart.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "line-chart-with-x-axis-padding",
@@ -3575,8 +3821,8 @@
           "target": "components/charts/line-chart-with-x-axis-padding.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "customized-dot-line-chart",
@@ -3609,8 +3855,8 @@
           "target": "components/charts/customized-dot-line-chart.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "synchronized-line-chart",
@@ -3643,8 +3889,8 @@
           "target": "components/charts/synchronized-line-chart.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "synchronized-different-data",
@@ -3675,8 +3921,8 @@
           "target": "components/charts/synchronized-different-data.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "line-chart-custom-shape",
@@ -3707,8 +3953,8 @@
           "target": "components/charts/line-chart-custom-shape.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "line-chart-has-multi-series",
@@ -3741,8 +3987,8 @@
           "target": "components/charts/line-chart-has-multi-series.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "line-chart-negative-values-with-reference-lines",
@@ -3771,8 +4017,8 @@
           "target": "components/charts/line-chart-negative-values-with-reference-lines.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "compare-two-lines",
@@ -3803,8 +4049,8 @@
           "target": "components/charts/compare-two-lines.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "dynamic-z-index-line-chart",
@@ -3837,8 +4083,8 @@
           "target": "components/charts/dynamic-z-index-line-chart.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "tiny-line-chart",
@@ -3867,8 +4113,8 @@
           "target": "components/charts/tiny-line-chart.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "animated-time-series",
@@ -3899,8 +4145,8 @@
           "target": "components/charts/animated-time-series.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "line-interactive",
@@ -3931,8 +4177,8 @@
           "target": "components/charts/line-interactive.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "line-step",
@@ -3963,8 +4209,8 @@
           "target": "components/charts/line-step.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "line-default",
@@ -3993,8 +4239,8 @@
           "target": "components/charts/line-default.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "line-dots-colors",
@@ -4031,8 +4277,8 @@
           "target": "components/charts/line-dots-colors.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "line-label-custom",
@@ -4063,8 +4309,8 @@
           "target": "components/charts/line-label-custom.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "line-bar-area-composed-chart",
@@ -4097,8 +4343,8 @@
           "target": "components/charts/line-bar-area-composed-chart.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "same-data-composed-chart",
@@ -4129,8 +4375,8 @@
           "target": "components/charts/same-data-composed-chart.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "vertical-composed-chart",
@@ -4161,8 +4407,8 @@
           "target": "components/charts/vertical-composed-chart.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "composed-chart-with-axis-labels",
@@ -4195,8 +4441,8 @@
           "target": "components/charts/composed-chart-with-axis-labels.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "scatter-and-line-of-best-fit",
@@ -4227,8 +4473,8 @@
           "target": "components/charts/scatter-and-line-of-best-fit.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "banded-chart",
@@ -4259,8 +4505,8 @@
           "target": "components/charts/banded-chart.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "target-price-chart",
@@ -4291,8 +4537,8 @@
           "target": "components/charts/target-price-chart.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "asset-returns",
@@ -4324,8 +4570,8 @@
           "target": "components/charts/asset-returns.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "monthly-savings",
@@ -4357,8 +4603,8 @@
           "target": "components/charts/monthly-savings.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "candlestick",
@@ -4390,8 +4636,8 @@
           "target": "components/charts/candlestick.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "candlestick-dashboard",
@@ -4425,8 +4671,8 @@
           "target": "components/charts/candlestick-dashboard.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "candlestick-bar",
@@ -4460,8 +4706,8 @@
           "target": "components/charts/candlestick-bar.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "candlestick-category",
@@ -4495,8 +4741,8 @@
           "target": "components/charts/candlestick-category.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "candlestick-line",
@@ -4530,8 +4776,8 @@
           "target": "components/charts/candlestick-line.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "sparklines",
@@ -4569,8 +4815,8 @@
           "target": "components/charts/sparklines.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "stock-ohlc",
@@ -4602,8 +4848,8 @@
           "target": "components/charts/stock-ohlc.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "stock-line",
@@ -4637,8 +4883,8 @@
           "target": "components/charts/stock-line.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "stock-column",
@@ -4670,8 +4916,8 @@
           "target": "components/charts/stock-column.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "stock-with-volume",
@@ -4703,8 +4949,8 @@
           "target": "components/charts/stock-with-volume.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "stock-multi-series",
@@ -4743,8 +4989,8 @@
           "target": "components/charts/stock-multi-series.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "stock-trendline",
@@ -4780,8 +5026,8 @@
           "target": "components/charts/stock-trendline.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "tremor-area-charts",
@@ -4819,8 +5065,8 @@
           "target": "components/charts/tremor-area-charts.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "realtime-mountain-chart",
@@ -4854,8 +5100,8 @@
           "target": "components/charts/realtime-mountain-chart.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "realtime-candlestick",
@@ -4887,8 +5133,8 @@
           "target": "components/charts/realtime-candlestick.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "heikin-ashi",
@@ -4920,8 +5166,8 @@
           "target": "components/charts/heikin-ashi.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "renko-chart",
@@ -4954,8 +5200,8 @@
           "target": "components/charts/renko-chart.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "volume-profile",
@@ -4987,8 +5233,8 @@
           "target": "components/charts/volume-profile.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "order-book-depth",
@@ -5021,8 +5267,8 @@
           "target": "components/charts/order-book-depth.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "drawdown-chart",
@@ -5056,8 +5302,8 @@
           "target": "components/charts/drawdown-chart.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "bollinger-bands",
@@ -5096,8 +5342,8 @@
           "target": "components/charts/bollinger-bands.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "candlestick-indicators",
@@ -5135,8 +5381,8 @@
           "target": "components/charts/candlestick-indicators.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "multi-timeframe",
@@ -5174,8 +5420,8 @@
           "target": "components/charts/multi-timeframe.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "heatmap-calendar",
@@ -5201,8 +5447,8 @@
           "target": "components/charts/heatmap-calendar.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "heatmap-calendar-emerald",
@@ -5228,8 +5474,8 @@
           "target": "components/charts/heatmap-calendar-emerald.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "heatmap-matrix",
@@ -5255,8 +5501,8 @@
           "target": "components/charts/heatmap-matrix.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "heatmap-matrix-values",
@@ -5282,8 +5528,8 @@
           "target": "components/charts/heatmap-matrix-values.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "bundle-size-treemap",
@@ -5320,8 +5566,8 @@
           "target": "components/charts/bundle-size-treemap.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "simple-treemap",
@@ -5358,8 +5604,8 @@
           "target": "components/charts/simple-treemap.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "custom-content-treemap",
@@ -5396,8 +5642,8 @@
           "target": "components/charts/custom-content-treemap.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "nested-treemap",
@@ -5434,8 +5680,8 @@
           "target": "components/charts/nested-treemap.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "treemap-with-padding-and-gaps",
@@ -5472,8 +5718,8 @@
           "target": "components/charts/treemap-with-padding-and-gaps.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "treemap-content",
@@ -5510,8 +5756,125 @@
           "target": "components/charts/treemap-content.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "bundle-size-sunburst",
+      "type": "registry:chart",
+      "title": "Bundle Size Sunburst",
+      "description": "Tree-shaken client JS bundle (bytes) by group — Sunburst rings, metric scrubber, center disc.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles",
+        "sunburst-shared"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-1": "#1e3a8a",
+          "chart-2": "#ea580c",
+          "chart-3": "#f59e0b",
+          "chart-4": "#6366f1",
+          "chart-5": "#e11d48"
+        },
+        "dark": {
+          "chart-1": "#3b82f6",
+          "chart-2": "#f97316",
+          "chart-3": "#fbbf24",
+          "chart-4": "#818cf8",
+          "chart-5": "#fb7185"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/bundle-size-sunburst.tsx",
+          "type": "registry:component",
+          "target": "components/charts/bundle-size-sunburst.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "sunburst-chart",
+      "type": "registry:chart",
+      "title": "Sunburst Chart",
+      "description": "Regional sales share by channel — nested Sunburst rings, metric scrubber, center disc.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles",
+        "sunburst-shared"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-1": "#1e3a8a",
+          "chart-2": "#ea580c",
+          "chart-3": "#f59e0b",
+          "chart-4": "#6366f1",
+          "chart-5": "#e11d48"
+        },
+        "dark": {
+          "chart-1": "#3b82f6",
+          "chart-2": "#f97316",
+          "chart-3": "#fbbf24",
+          "chart-4": "#818cf8",
+          "chart-5": "#fb7185"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/sunburst-chart.tsx",
+          "type": "registry:component",
+          "target": "components/charts/sunburst-chart.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "sunburst-chart-theme-colors",
+      "type": "registry:chart",
+      "title": "Sunburst Chart Theme Colors",
+      "description": "Org headcount by team — nested Sunburst with locked theme palette shades, metric scrubber, center disc.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles",
+        "sunburst-shared"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-1": "#1e3a8a",
+          "chart-2": "#ea580c",
+          "chart-3": "#f59e0b",
+          "chart-4": "#6366f1",
+          "chart-5": "#e11d48"
+        },
+        "dark": {
+          "chart-1": "#3b82f6",
+          "chart-2": "#f97316",
+          "chart-3": "#fbbf24",
+          "chart-4": "#818cf8",
+          "chart-5": "#fb7185"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/sunburst-chart-theme-colors.tsx",
+          "type": "registry:component",
+          "target": "components/charts/sunburst-chart-theme-colors.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "gauge-default",
@@ -5545,8 +5908,8 @@
           "target": "components/charts/gauge-default.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "gauge-levels",
@@ -5580,8 +5943,8 @@
           "target": "components/charts/gauge-levels.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "gauge-custom-colors",
@@ -5613,8 +5976,8 @@
           "target": "components/charts/gauge-custom-colors.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "gauge-corner-radius",
@@ -5648,8 +6011,8 @@
           "target": "components/charts/gauge-corner-radius.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "gauge-custom-arcs",
@@ -5683,8 +6046,8 @@
           "target": "components/charts/gauge-custom-arcs.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "gauge-no-animation",
@@ -5718,8 +6081,8 @@
           "target": "components/charts/gauge-no-animation.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "hc-gauge-default",
@@ -5753,8 +6116,8 @@
           "target": "components/charts/hc-gauge-default.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "hc-gauge-rounded-ends",
@@ -5788,8 +6151,8 @@
           "target": "components/charts/hc-gauge-rounded-ends.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "hc-gauge-thin-ring",
@@ -5821,8 +6184,8 @@
           "target": "components/charts/hc-gauge-thin-ring.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "hc-gauge-semicircle",
@@ -5856,8 +6219,8 @@
           "target": "components/charts/hc-gauge-semicircle.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "hc-gauge-custom-pivot",
@@ -5889,8 +6252,8 @@
           "target": "components/charts/hc-gauge-custom-pivot.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "hc-gauge-combo",
@@ -5924,8 +6287,8 @@
           "target": "components/charts/hc-gauge-combo.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "hc-gauge-fuel",
@@ -5959,8 +6322,8 @@
           "target": "components/charts/hc-gauge-fuel.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "hc-gauge-activity",
@@ -5992,8 +6355,8 @@
           "target": "components/charts/hc-gauge-activity.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "hc-gauge-kpi",
@@ -6027,14 +6390,14 @@
           "target": "components/charts/hc-gauge-kpi.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "hc-gauge-rounded-bands",
       "type": "registry:chart",
       "title": "Hc Gauge Rounded Bands",
-      "description": "Highcharts dial with individually rounded plotBands — soft blue scale, English metric header.",
+      "description": "Highcharts dial with individually rounded plotBands — teal / amber / rose, English metric header.",
       "dependencies": [
         "highcharts",
         "highcharts-react-official"
@@ -6045,14 +6408,14 @@
       ],
       "cssVars": {
         "light": {
-          "chart-1": "#a8c4d8",
-          "chart-2": "#6ea1c7",
-          "chart-3": "#8b9dc3"
+          "chart-1": "#0D9488",
+          "chart-2": "#D97706",
+          "chart-3": "#E11D48"
         },
         "dark": {
-          "chart-1": "#a8c4d8",
-          "chart-2": "#6ea1c7",
-          "chart-3": "#8b9dc3"
+          "chart-1": "#2DD4BF",
+          "chart-2": "#FBBF24",
+          "chart-3": "#FB7185"
         }
       },
       "files": [
@@ -6062,8 +6425,8 @@
           "target": "components/charts/hc-gauge-rounded-bands.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "hc-gauge-threshold",
@@ -6095,8 +6458,8 @@
           "target": "components/charts/hc-gauge-threshold.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "hc-gauge-custom-dial",
@@ -6126,8 +6489,8 @@
           "target": "components/charts/hc-gauge-custom-dial.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "stacked-bar-chart",
@@ -6158,8 +6521,8 @@
           "target": "components/charts/stacked-bar-chart.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "box-plot",
@@ -6190,8 +6553,8 @@
           "target": "components/charts/box-plot.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "waterfall",
@@ -6226,8 +6589,8 @@
           "target": "components/charts/waterfall.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "mix-bar-chart",
@@ -6260,8 +6623,8 @@
           "target": "components/charts/mix-bar-chart.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "positive-and-negative-bar-chart",
@@ -6294,8 +6657,8 @@
           "target": "components/charts/positive-and-negative-bar-chart.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "bar-chart-with-customized-event",
@@ -6328,8 +6691,8 @@
           "target": "components/charts/bar-chart-with-customized-event.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "bar-chart-has-background",
@@ -6360,8 +6723,8 @@
           "target": "components/charts/bar-chart-has-background.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "ranged-stacked-bar-chart",
@@ -6394,8 +6757,8 @@
           "target": "components/charts/ranged-stacked-bar-chart.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "tiny-bar-chart",
@@ -6424,8 +6787,8 @@
           "target": "components/charts/tiny-bar-chart.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "bar-active",
@@ -6462,8 +6825,8 @@
           "target": "components/charts/bar-active.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "population-pyramid",
@@ -6494,8 +6857,8 @@
           "target": "components/charts/population-pyramid.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "timeline",
@@ -6526,8 +6889,8 @@
           "target": "components/charts/timeline.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "animated-bar-width",
@@ -6558,8 +6921,8 @@
           "target": "components/charts/animated-bar-width.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "animated-bar-time-series",
@@ -6590,8 +6953,8 @@
           "target": "components/charts/animated-bar-time-series.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "custom-shape-bar-chart",
@@ -6628,8 +6991,8 @@
           "target": "components/charts/custom-shape-bar-chart.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "brush-bar-chart",
@@ -6660,8 +7023,8 @@
           "target": "components/charts/brush-bar-chart.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "biaxial-bar-chart",
@@ -6692,8 +7055,8 @@
           "target": "components/charts/biaxial-bar-chart.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "bar-chart-with-label-background",
@@ -6724,8 +7087,8 @@
           "target": "components/charts/bar-chart-with-label-background.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "bar-chart-range",
@@ -6756,8 +7119,8 @@
           "target": "components/charts/bar-chart-range.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "stacked-bar-chart-with-horizontal-line",
@@ -6790,8 +7153,8 @@
           "target": "components/charts/stacked-bar-chart-with-horizontal-line.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "bar-default",
@@ -6822,8 +7185,8 @@
           "target": "components/charts/bar-default.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "bar-multiple",
@@ -6854,8 +7217,8 @@
           "target": "components/charts/bar-multiple.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "bar-stacked",
@@ -6886,8 +7249,8 @@
           "target": "components/charts/bar-stacked.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "bar-label",
@@ -6918,8 +7281,8 @@
           "target": "components/charts/bar-label.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "bar-label-custom",
@@ -6950,8 +7313,8 @@
           "target": "components/charts/bar-label-custom.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "bar-interactive",
@@ -6982,8 +7345,8 @@
           "target": "components/charts/bar-interactive.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "bar-horizontal",
@@ -7014,8 +7377,8 @@
           "target": "components/charts/bar-horizontal.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "bar-mixed",
@@ -7052,8 +7415,8 @@
           "target": "components/charts/bar-mixed.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     },
     {
       "name": "bar-negative",
@@ -7090,8 +7453,1729 @@
           "target": "components/charts/bar-negative.tsx"
         }
       ],
-      "version": "0.1.0+f3b1cde80695",
-      "generatedAt": "2026-10-24T00:02:33.074Z"
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "simple-radial-bar-chart",
+      "type": "registry:chart",
+      "title": "Simple Radial Bar Chart",
+      "description": "Concentric age-band radial bars — locked chrome, ring scrubber, RTL-aware plot island.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-1": "#1e3a8a",
+          "chart-2": "#ea580c",
+          "chart-3": "#f59e0b",
+          "chart-4": "#6366f1",
+          "chart-5": "#e11d48"
+        },
+        "dark": {
+          "chart-1": "#3b82f6",
+          "chart-2": "#f97316",
+          "chart-3": "#fbbf24",
+          "chart-4": "#818cf8",
+          "chart-5": "#fb7185"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/simple-radial-bar-chart.tsx",
+          "type": "registry:component",
+          "target": "components/charts/simple-radial-bar-chart.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "radial-bar-chart-click-to-focus-legend",
+      "type": "registry:chart",
+      "title": "Radial Bar Chart Click To Focus Legend",
+      "description": "Concentric radial bars with click-to-focus legend — dim siblings, locked chrome, RTL-aware.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-1": "#1e3a8a",
+          "chart-2": "#ea580c",
+          "chart-3": "#f59e0b",
+          "chart-4": "#6366f1",
+          "chart-5": "#e11d48"
+        },
+        "dark": {
+          "chart-1": "#3b82f6",
+          "chart-2": "#f97316",
+          "chart-3": "#fbbf24",
+          "chart-4": "#818cf8",
+          "chart-5": "#fb7185"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/radial-bar-chart-click-to-focus-legend.tsx",
+          "type": "registry:component",
+          "target": "components/charts/radial-bar-chart-click-to-focus-legend.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "radial-text",
+      "type": "registry:chart",
+      "title": "Radial Text",
+      "description": "Single progress ring with centered value Label — locked chrome, RTL-aware plot island.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-1": "#1e3a8a"
+        },
+        "dark": {
+          "chart-1": "#3b82f6"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/radial-text.tsx",
+          "type": "registry:component",
+          "target": "components/charts/radial-text.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "radial-shape",
+      "type": "registry:chart",
+      "title": "Radial Shape",
+      "description": "Thick square-ended radial arc over a thin muted track with center Label — locked chrome, RTL-aware.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-1": "#1e3a8a"
+        },
+        "dark": {
+          "chart-1": "#3b82f6"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/radial-shape.tsx",
+          "type": "registry:component",
+          "target": "components/charts/radial-shape.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "radial-stacked",
+      "type": "registry:chart",
+      "title": "Radial Stacked",
+      "description": "Half-ring Desktop×Mobile stacked RadialBars with center total — locked chrome, RTL-aware.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-1": "#1e3a8a",
+          "chart-2": "#ea580c"
+        },
+        "dark": {
+          "chart-1": "#3b82f6",
+          "chart-2": "#f97316"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/radial-stacked.tsx",
+          "type": "registry:component",
+          "target": "components/charts/radial-stacked.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "simple-scatter-chart",
+      "type": "registry:chart",
+      "title": "Simple Scatter Chart",
+      "description": "Dual-series height×weight scatter — locked navy×orange chrome, metric scrubber, RTL-aware.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-1": "#1e3a8a",
+          "chart-2": "#ea580c"
+        },
+        "dark": {
+          "chart-1": "#3b82f6",
+          "chart-2": "#f97316"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/simple-scatter-chart.tsx",
+          "type": "registry:component",
+          "target": "components/charts/simple-scatter-chart.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "joint-line-scatter-chart",
+      "type": "registry:chart",
+      "title": "Joint Line Scatter Chart",
+      "description": "Dual-series scatter with joint connecting lines — locked navy×orange chrome, metric scrubber, RTL-aware.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-1": "#1e3a8a",
+          "chart-2": "#ea580c"
+        },
+        "dark": {
+          "chart-1": "#3b82f6",
+          "chart-2": "#f97316"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/joint-line-scatter-chart.tsx",
+          "type": "registry:component",
+          "target": "components/charts/joint-line-scatter-chart.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "bubble-chart",
+      "type": "registry:chart",
+      "title": "Bubble Chart",
+      "description": "Dual-series bubble scatter with ZAxis sizing — locked navy×orange chrome, metric scrubber, RTL-aware.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-1": "#1e3a8a",
+          "chart-2": "#ea580c"
+        },
+        "dark": {
+          "chart-1": "#3b82f6",
+          "chart-2": "#f97316"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/bubble-chart.tsx",
+          "type": "registry:component",
+          "target": "components/charts/bubble-chart.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "custom-animation",
+      "type": "registry:chart",
+      "title": "Custom Animation",
+      "description": "Scatter dataset swap with animationInterpolateFn (crossfade / staggered / pop) — locked chrome, scrub, RTL-aware.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-1": "#1e3a8a"
+        },
+        "dark": {
+          "chart-1": "#3b82f6"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/custom-animation.tsx",
+          "type": "registry:component",
+          "target": "components/charts/custom-animation.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "scatter-chart-with-labels",
+      "type": "registry:chart",
+      "title": "Scatter Chart With Labels",
+      "description": "Bubble scatter with always-on LabelList names — locked chrome, metric scrubber, RTL-aware.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-1": "#1e3a8a"
+        },
+        "dark": {
+          "chart-1": "#3b82f6"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/scatter-chart-with-labels.tsx",
+          "type": "registry:component",
+          "target": "components/charts/scatter-chart-with-labels.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "multiple-y-axes-scatter-chart",
+      "type": "registry:chart",
+      "title": "Multiple Y Axes Scatter Chart",
+      "description": "Dual-series scatter with independent Y axes — locked navy×orange chrome, metric scrubber, RTL-aware.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-1": "#1e3a8a",
+          "chart-2": "#ea580c"
+        },
+        "dark": {
+          "chart-1": "#3b82f6",
+          "chart-2": "#f97316"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/multiple-y-axes-scatter-chart.tsx",
+          "type": "registry:component",
+          "target": "components/charts/multiple-y-axes-scatter-chart.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "scatter-chart-with-cells",
+      "type": "registry:chart",
+      "title": "Scatter Chart With Cells",
+      "description": "Per-point chart tokens + Symbols via shape (modern Cell) — locked chrome, scrub, RTL-aware.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-1": "#1e3a8a",
+          "chart-2": "#ea580c",
+          "chart-3": "#f59e0b",
+          "chart-4": "#6366f1",
+          "chart-5": "#e11d48"
+        },
+        "dark": {
+          "chart-1": "#3b82f6",
+          "chart-2": "#f97316",
+          "chart-3": "#fbbf24",
+          "chart-4": "#818cf8",
+          "chart-5": "#fb7185"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/scatter-chart-with-cells.tsx",
+          "type": "registry:component",
+          "target": "components/charts/scatter-chart-with-cells.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "scatter-chart-performance",
+      "type": "registry:chart",
+      "title": "Scatter Chart Performance",
+      "description": "Many Scatter series × many points stress demo — animation off, series-level scrub, pass/fail tint, RTL-aware.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-up": "#16a34a",
+          "chart-down": "#e11d48"
+        },
+        "dark": {
+          "chart-up": "#4ade80",
+          "chart-down": "#f25f70"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/scatter-chart-performance.tsx",
+          "type": "registry:component",
+          "target": "components/charts/scatter-chart-performance.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "area-responsive-container",
+      "type": "registry:chart",
+      "title": "Area Responsive Container",
+      "description": "Fluid ChartContainer area stage with min-month and target ReferenceLines — locked chrome, metric scrubber, RTL-aware.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-1": "#1e3a8a",
+          "chart-2": "#ea580c",
+          "chart-3": "#f59e0b",
+          "chart-4": "#6366f1",
+          "chart-5": "#e11d48",
+          "chart-up": "#16a34a"
+        },
+        "dark": {
+          "chart-1": "#3b82f6",
+          "chart-2": "#f97316",
+          "chart-3": "#fbbf24",
+          "chart-4": "#818cf8",
+          "chart-5": "#fb7185",
+          "chart-up": "#4ade80"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/area-responsive-container.tsx",
+          "type": "registry:component",
+          "target": "components/charts/area-responsive-container.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "composed-responsive-container",
+      "type": "registry:chart",
+      "title": "Composed Responsive Container",
+      "description": "Fluid ChartContainer composed stage — orders area, online bars, store line — locked chrome, metric scrubber, RTL-aware.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-1": "#1e3a8a",
+          "chart-2": "#ea580c",
+          "chart-3": "#f59e0b",
+          "chart-up": "#16a34a"
+        },
+        "dark": {
+          "chart-1": "#3b82f6",
+          "chart-2": "#f97316",
+          "chart-3": "#fbbf24",
+          "chart-up": "#4ade80"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/composed-responsive-container.tsx",
+          "type": "registry:component",
+          "target": "components/charts/composed-responsive-container.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "pie-responsive-container",
+      "type": "registry:chart",
+      "title": "Pie Responsive Container",
+      "description": "Fluid square ChartContainer pie stage with value labels and legend — locked chrome, slice scrubber, RTL-aware.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-1": "#1e3a8a",
+          "chart-2": "#ea580c",
+          "chart-3": "#f59e0b",
+          "chart-4": "#6366f1",
+          "chart-5": "#e11d48"
+        },
+        "dark": {
+          "chart-1": "#3b82f6",
+          "chart-2": "#f97316",
+          "chart-3": "#fbbf24",
+          "chart-4": "#818cf8",
+          "chart-5": "#fb7185"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/pie-responsive-container.tsx",
+          "type": "registry:component",
+          "target": "components/charts/pie-responsive-container.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "legend-effect-opacity",
+      "type": "registry:chart",
+      "title": "Legend Effect Opacity",
+      "description": "Dual Online×Store lines — hover a legend item to dim the other series; locked chrome, metric scrubber, RTL-aware.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-1": "#1e3a8a",
+          "chart-2": "#ea580c",
+          "chart-up": "#16a34a"
+        },
+        "dark": {
+          "chart-1": "#3b82f6",
+          "chart-2": "#f97316",
+          "chart-up": "#4ade80"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/legend-effect-opacity.tsx",
+          "type": "registry:component",
+          "target": "components/charts/legend-effect-opacity.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "legend-position",
+      "type": "registry:chart",
+      "title": "Legend Position",
+      "description": "Dual Online×Store lines with top-aligned ChartLegend — locked chrome, metric scrubber, RTL-aware.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-1": "#1e3a8a",
+          "chart-2": "#ea580c",
+          "chart-up": "#16a34a"
+        },
+        "dark": {
+          "chart-1": "#3b82f6",
+          "chart-2": "#f97316",
+          "chart-up": "#4ade80"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/legend-position.tsx",
+          "type": "registry:component",
+          "target": "components/charts/legend-position.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "legend-styles",
+      "type": "registry:chart",
+      "title": "Legend Styles",
+      "description": "Dual Store×Online bars with custom card legend and period totals — locked chrome, metric scrubber, RTL-aware.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-1": "#1e3a8a",
+          "chart-2": "#ea580c",
+          "chart-up": "#16a34a"
+        },
+        "dark": {
+          "chart-1": "#3b82f6",
+          "chart-2": "#f97316",
+          "chart-up": "#4ade80"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/legend-styles.tsx",
+          "type": "registry:component",
+          "target": "components/charts/legend-styles.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "custom-content-of-tooltip",
+      "type": "registry:chart",
+      "title": "Custom Content Of Tooltip",
+      "description": "Dual Online x Store bars with a fully custom tooltip panel (intro + series) - locked chrome, metric scrubber, RTL-aware.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-1": "#1e3a8a",
+          "chart-2": "#ea580c",
+          "chart-up": "#16a34a"
+        },
+        "dark": {
+          "chart-1": "#3b82f6",
+          "chart-2": "#f97316",
+          "chart-up": "#4ade80"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/custom-content-of-tooltip.tsx",
+          "type": "registry:component",
+          "target": "components/charts/custom-content-of-tooltip.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "tooltip-styles",
+      "type": "registry:chart",
+      "title": "Tooltip Styles",
+      "description": "Dual Online x Store bars teaching Recharts tip chrome (contentStyle, itemStyle, labelStyle) - locked chrome, metric scrubber, RTL-aware.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-1": "#1e3a8a",
+          "chart-2": "#ea580c",
+          "chart-up": "#16a34a"
+        },
+        "dark": {
+          "chart-1": "#3b82f6",
+          "chart-2": "#f97316",
+          "chart-up": "#4ade80"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/tooltip-styles.tsx",
+          "type": "registry:component",
+          "target": "components/charts/tooltip-styles.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "tooltip-advanced",
+      "type": "registry:chart",
+      "title": "Tooltip Advanced",
+      "description": "Stacked Delivery x Pickup bars with an advanced tip formatter (swatch, unit, total) - locked chrome, metric scrubber, RTL-aware.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-1": "#1e3a8a",
+          "chart-2": "#ea580c",
+          "chart-up": "#16a34a"
+        },
+        "dark": {
+          "chart-1": "#3b82f6",
+          "chart-2": "#f97316",
+          "chart-up": "#4ade80"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/tooltip-advanced.tsx",
+          "type": "registry:component",
+          "target": "components/charts/tooltip-advanced.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "chart-tooltip-default",
+      "type": "registry:chart",
+      "title": "Tooltip Default",
+      "description": "Stacked Delivery x Pickup bars with default ChartTooltipContent and a long-date labelFormatter - locked chrome, metric scrubber, RTL-aware.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-1": "#1e3a8a",
+          "chart-2": "#ea580c",
+          "chart-up": "#16a34a"
+        },
+        "dark": {
+          "chart-1": "#3b82f6",
+          "chart-2": "#f97316",
+          "chart-up": "#4ade80"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/chart-tooltip-default.tsx",
+          "type": "registry:component",
+          "target": "components/charts/chart-tooltip-default.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "chart-tooltip-indicator-line",
+      "type": "registry:chart",
+      "title": "Tooltip Indicator Line",
+      "description": "Stacked Delivery x Pickup bars with ChartTooltipContent indicator=line and a long-date labelFormatter - locked chrome, metric scrubber, RTL-aware.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-1": "#1e3a8a",
+          "chart-2": "#ea580c",
+          "chart-up": "#16a34a"
+        },
+        "dark": {
+          "chart-1": "#3b82f6",
+          "chart-2": "#f97316",
+          "chart-up": "#4ade80"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/chart-tooltip-indicator-line.tsx",
+          "type": "registry:component",
+          "target": "components/charts/chart-tooltip-indicator-line.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "chart-tooltip-indicator-none",
+      "type": "registry:chart",
+      "title": "Tooltip Indicator None",
+      "description": "Stacked Delivery x Pickup bars with ChartTooltipContent hideIndicator and a long-date labelFormatter - locked chrome, metric scrubber, RTL-aware.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-1": "#1e3a8a",
+          "chart-2": "#ea580c",
+          "chart-up": "#16a34a"
+        },
+        "dark": {
+          "chart-1": "#3b82f6",
+          "chart-2": "#f97316",
+          "chart-up": "#4ade80"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/chart-tooltip-indicator-none.tsx",
+          "type": "registry:component",
+          "target": "components/charts/chart-tooltip-indicator-none.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "chart-tooltip-label-custom",
+      "type": "registry:chart",
+      "title": "Tooltip Label Custom",
+      "description": "Stacked Delivery x Pickup bars with ChartTooltipContent labelKey=activities (tip title from chartConfig) and indicator=line - locked chrome, metric scrubber, RTL-aware.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-1": "#1e3a8a",
+          "chart-2": "#ea580c",
+          "chart-up": "#16a34a"
+        },
+        "dark": {
+          "chart-1": "#3b82f6",
+          "chart-2": "#f97316",
+          "chart-up": "#4ade80"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/chart-tooltip-label-custom.tsx",
+          "type": "registry:component",
+          "target": "components/charts/chart-tooltip-label-custom.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "chart-tooltip-label-formatter",
+      "type": "registry:chart",
+      "title": "Tooltip Label Formatter",
+      "description": "Stacked Delivery x Pickup bars teaching ChartTooltipContent long-date labelFormatter - locked chrome, metric scrubber, RTL-aware.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-1": "#1e3a8a",
+          "chart-2": "#ea580c",
+          "chart-up": "#16a34a"
+        },
+        "dark": {
+          "chart-1": "#3b82f6",
+          "chart-2": "#f97316",
+          "chart-up": "#4ade80"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/chart-tooltip-label-formatter.tsx",
+          "type": "registry:component",
+          "target": "components/charts/chart-tooltip-label-formatter.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "chart-tooltip-label-none",
+      "type": "registry:chart",
+      "title": "Tooltip Label None",
+      "description": "Stacked Delivery x Pickup bars with ChartTooltipContent hideLabel and hideIndicator - locked chrome, metric scrubber, RTL-aware.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-1": "#1e3a8a",
+          "chart-2": "#ea580c",
+          "chart-up": "#16a34a"
+        },
+        "dark": {
+          "chart-1": "#3b82f6",
+          "chart-2": "#f97316",
+          "chart-up": "#4ade80"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/chart-tooltip-label-none.tsx",
+          "type": "registry:component",
+          "target": "components/charts/chart-tooltip-label-none.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "chart-tooltip-formatter",
+      "type": "registry:chart",
+      "title": "Tooltip Formatter",
+      "description": "Stacked Delivery x Pickup bars with ChartTooltipContent custom value formatter (kcal) and hideLabel - locked chrome, metric scrubber, RTL-aware.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-1": "#1e3a8a",
+          "chart-2": "#ea580c",
+          "chart-up": "#16a34a"
+        },
+        "dark": {
+          "chart-1": "#3b82f6",
+          "chart-2": "#f97316",
+          "chart-up": "#4ade80"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/chart-tooltip-formatter.tsx",
+          "type": "registry:component",
+          "target": "components/charts/chart-tooltip-formatter.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "chart-tooltip-icons",
+      "type": "registry:chart",
+      "title": "Tooltip Icons",
+      "description": "Stacked Delivery x Pickup bars with ChartTooltipContent series icons (Footprints / Waves) and hideLabel - locked chrome, metric scrubber, RTL-aware.",
+      "dependencies": [
+        "recharts",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-1": "#1e3a8a",
+          "chart-2": "#ea580c",
+          "chart-up": "#16a34a"
+        },
+        "dark": {
+          "chart-1": "#3b82f6",
+          "chart-2": "#f97316",
+          "chart-up": "#4ade80"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/chart-tooltip-icons.tsx",
+          "type": "registry:component",
+          "target": "components/charts/chart-tooltip-icons.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "chart-tooltip-advanced",
+      "type": "registry:chart",
+      "title": "Tooltip Advanced",
+      "description": "Classic stacked Delivery x Pickup with ChartTooltipContent formatter (swatch, kcal, Total) - locked chrome, metric scrubber, RTL-aware.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-1": "#1e3a8a",
+          "chart-2": "#ea580c",
+          "chart-up": "#16a34a"
+        },
+        "dark": {
+          "chart-1": "#3b82f6",
+          "chart-2": "#f97316",
+          "chart-up": "#4ade80"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/chart-tooltip-advanced.tsx",
+          "type": "registry:component",
+          "target": "components/charts/chart-tooltip-advanced.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "simple-radar-chart",
+      "type": "registry:chart",
+      "title": "Simple Radar Chart",
+      "description": "Single-series skill radar polygon — locked chrome, metric scrubber, RTL-aware polar island.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-1": "#1e3a8a",
+          "chart-2": "#ea580c",
+          "chart-up": "#16a34a"
+        },
+        "dark": {
+          "chart-1": "#3b82f6",
+          "chart-2": "#f97316",
+          "chart-up": "#4ade80"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/simple-radar-chart.tsx",
+          "type": "registry:component",
+          "target": "components/charts/simple-radar-chart.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "specified-domain-radar-chart",
+      "type": "registry:chart",
+      "title": "Specified Domain Radar Chart",
+      "description": "Dual Alex×Sara radar with PolarRadiusAxis domain [0, 150] — locked chrome, metric scrubber, RTL-aware.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-1": "#1e3a8a",
+          "chart-2": "#ea580c",
+          "chart-up": "#16a34a"
+        },
+        "dark": {
+          "chart-1": "#3b82f6",
+          "chart-2": "#f97316",
+          "chart-up": "#4ade80"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/specified-domain-radar-chart.tsx",
+          "type": "registry:component",
+          "target": "components/charts/specified-domain-radar-chart.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "range-radar-chart-custom-animation",
+      "type": "registry:chart",
+      "title": "Range Radar Chart Custom Animation",
+      "description": "Ceiling radar polygon with 1.6s entrance tween — locked chrome, metric scrubber, RTL-aware.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-1": "#1e3a8a",
+          "chart-2": "#ea580c",
+          "chart-up": "#16a34a"
+        },
+        "dark": {
+          "chart-1": "#3b82f6",
+          "chart-2": "#f97316",
+          "chart-up": "#4ade80"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/range-radar-chart-custom-animation.tsx",
+          "type": "registry:component",
+          "target": "components/charts/range-radar-chart-custom-animation.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "radar-lines-only",
+      "type": "registry:chart",
+      "title": "Radar Lines Only",
+      "description": "Dual Store×Online stroke-only radar (no fill, no radial spokes) — locked chrome, metric scrubber, RTL-aware.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-1": "#1e3a8a",
+          "chart-2": "#ea580c",
+          "chart-up": "#16a34a"
+        },
+        "dark": {
+          "chart-1": "#3b82f6",
+          "chart-2": "#f97316",
+          "chart-up": "#4ade80"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/radar-lines-only.tsx",
+          "type": "registry:component",
+          "target": "components/charts/radar-lines-only.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "radar-icons",
+      "type": "registry:chart",
+      "title": "Radar Icons",
+      "description": "Dual Store×Online radar with Lucide icons in chartConfig (ChartLegendContent) — locked chrome, metric scrubber, RTL-aware.",
+      "dependencies": [
+        "recharts",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-1": "#1e3a8a",
+          "chart-2": "#ea580c",
+          "chart-up": "#16a34a"
+        },
+        "dark": {
+          "chart-1": "#3b82f6",
+          "chart-2": "#f97316",
+          "chart-up": "#4ade80"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/radar-icons.tsx",
+          "type": "registry:component",
+          "target": "components/charts/radar-icons.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "radar-multiple",
+      "type": "registry:chart",
+      "title": "Radar Multiple",
+      "description": "Dual overlapping Store×Online filled radar polygons — locked chrome, metric scrubber, RTL-aware.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-1": "#1e3a8a",
+          "chart-2": "#ea580c",
+          "chart-up": "#16a34a"
+        },
+        "dark": {
+          "chart-1": "#3b82f6",
+          "chart-2": "#f97316",
+          "chart-up": "#4ade80"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/radar-multiple.tsx",
+          "type": "registry:component",
+          "target": "components/charts/radar-multiple.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "chart-radar-default",
+      "type": "registry:chart",
+      "title": "Radar Default",
+      "description": "Classic single Store radar with default ChartTooltipContent — locked chrome, metric scrubber, RTL-aware.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-1": "#1e3a8a",
+          "chart-2": "#ea580c",
+          "chart-up": "#16a34a"
+        },
+        "dark": {
+          "chart-1": "#3b82f6",
+          "chart-2": "#f97316",
+          "chart-up": "#4ade80"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/chart-radar-default.tsx",
+          "type": "registry:component",
+          "target": "components/charts/chart-radar-default.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "chart-radar-dots",
+      "type": "registry:chart",
+      "title": "Radar Dots",
+      "description": "Classic single Store radar with solid vertex dots — locked chrome, metric scrubber, RTL-aware.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-1": "#1e3a8a",
+          "chart-2": "#ea580c",
+          "chart-up": "#16a34a"
+        },
+        "dark": {
+          "chart-1": "#3b82f6",
+          "chart-2": "#f97316",
+          "chart-up": "#4ade80"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/chart-radar-dots.tsx",
+          "type": "registry:component",
+          "target": "components/charts/chart-radar-dots.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "chart-radar-lines-only",
+      "type": "registry:chart",
+      "title": "Radar Lines Only",
+      "description": "Classic dual Store×Online stroke-only radar (no fill, no radial spokes) — locked chrome, metric scrubber, RTL-aware.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-1": "#1e3a8a",
+          "chart-2": "#ea580c",
+          "chart-up": "#16a34a"
+        },
+        "dark": {
+          "chart-1": "#3b82f6",
+          "chart-2": "#f97316",
+          "chart-up": "#4ade80"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/chart-radar-lines-only.tsx",
+          "type": "registry:component",
+          "target": "components/charts/chart-radar-lines-only.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "chart-radar-label-custom",
+      "type": "registry:chart",
+      "title": "Radar Label Custom",
+      "description": "Classic dual Store×Online radar with custom angle ticks (values + month) — locked chrome, metric scrubber, RTL-aware.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-1": "#1e3a8a",
+          "chart-2": "#ea580c",
+          "chart-up": "#16a34a"
+        },
+        "dark": {
+          "chart-1": "#3b82f6",
+          "chart-2": "#f97316",
+          "chart-up": "#4ade80"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/chart-radar-label-custom.tsx",
+          "type": "registry:component",
+          "target": "components/charts/chart-radar-label-custom.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "chart-radar-grid-custom",
+      "type": "registry:chart",
+      "title": "Radar Grid Custom",
+      "description": "Classic single Store radar with custom PolarGrid (no radial spokes, single ring) — locked chrome, metric scrubber, RTL-aware.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-1": "#1e3a8a",
+          "chart-up": "#16a34a"
+        },
+        "dark": {
+          "chart-1": "#3b82f6",
+          "chart-up": "#4ade80"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/chart-radar-grid-custom.tsx",
+          "type": "registry:component",
+          "target": "components/charts/chart-radar-grid-custom.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "chart-radar-grid-none",
+      "type": "registry:chart",
+      "title": "Radar Grid None",
+      "description": "Classic single Store radar with no PolarGrid and vertex dots — locked chrome, metric scrubber, RTL-aware.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-1": "#1e3a8a",
+          "chart-up": "#16a34a"
+        },
+        "dark": {
+          "chart-1": "#3b82f6",
+          "chart-up": "#4ade80"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/chart-radar-grid-none.tsx",
+          "type": "registry:component",
+          "target": "components/charts/chart-radar-grid-none.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "chart-radar-grid-circle",
+      "type": "registry:chart",
+      "title": "Radar Grid Circle",
+      "description": "Classic single Store radar with circular PolarGrid and vertex dots — locked chrome, metric scrubber, RTL-aware.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-1": "#1e3a8a",
+          "chart-up": "#16a34a"
+        },
+        "dark": {
+          "chart-1": "#3b82f6",
+          "chart-up": "#4ade80"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/chart-radar-grid-circle.tsx",
+          "type": "registry:component",
+          "target": "components/charts/chart-radar-grid-circle.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "chart-radar-grid-circle-no-lines",
+      "type": "registry:chart",
+      "title": "Radar Grid Circle No Lines",
+      "description": "Classic single Store radar with circular PolarGrid, no radial spokes, and vertex dots — locked chrome, metric scrubber, RTL-aware.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-1": "#1e3a8a",
+          "chart-up": "#16a34a"
+        },
+        "dark": {
+          "chart-1": "#3b82f6",
+          "chart-up": "#4ade80"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/chart-radar-grid-circle-no-lines.tsx",
+          "type": "registry:component",
+          "target": "components/charts/chart-radar-grid-circle-no-lines.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "chart-radar-grid-circle-fill",
+      "type": "registry:chart",
+      "title": "Radar Grid Circle Fill",
+      "description": "Classic single Store radar with circular PolarGrid tinted by series fill — locked chrome, metric scrubber, RTL-aware.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-1": "#1e3a8a",
+          "chart-up": "#16a34a"
+        },
+        "dark": {
+          "chart-1": "#3b82f6",
+          "chart-up": "#4ade80"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/chart-radar-grid-circle-fill.tsx",
+          "type": "registry:component",
+          "target": "components/charts/chart-radar-grid-circle-fill.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "chart-radar-grid-fill",
+      "type": "registry:chart",
+      "title": "Radar Grid Fill",
+      "description": "Classic single Store radar with polygon PolarGrid tinted by series fill — locked chrome, metric scrubber, RTL-aware.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-1": "#1e3a8a",
+          "chart-up": "#16a34a"
+        },
+        "dark": {
+          "chart-1": "#3b82f6",
+          "chart-up": "#4ade80"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/chart-radar-grid-fill.tsx",
+          "type": "registry:component",
+          "target": "components/charts/chart-radar-grid-fill.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "chart-radar-multiple",
+      "type": "registry:chart",
+      "title": "Radar Multiple",
+      "description": "Classic dual Store×Online overlapping filled radar — locked chrome, metric scrubber, RTL-aware.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-1": "#1e3a8a",
+          "chart-2": "#ea580c",
+          "chart-up": "#16a34a"
+        },
+        "dark": {
+          "chart-1": "#3b82f6",
+          "chart-2": "#f97316",
+          "chart-up": "#4ade80"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/chart-radar-multiple.tsx",
+          "type": "registry:component",
+          "target": "components/charts/chart-radar-multiple.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "chart-radar-legend",
+      "type": "registry:chart",
+      "title": "Radar Legend",
+      "description": "Classic dual Store×Online radar with ChartLegend — locked chrome, metric scrubber, RTL-aware.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-1": "#1e3a8a",
+          "chart-2": "#ea580c",
+          "chart-up": "#16a34a"
+        },
+        "dark": {
+          "chart-1": "#3b82f6",
+          "chart-2": "#f97316",
+          "chart-up": "#4ade80"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/chart-radar-legend.tsx",
+          "type": "registry:component",
+          "target": "components/charts/chart-radar-legend.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "chart-radar-icons",
+      "type": "registry:chart",
+      "title": "Radar Icons",
+      "description": "Classic dual Store×Online radar with Lucide icons in chartConfig — locked chrome, metric scrubber, RTL-aware.",
+      "dependencies": [
+        "recharts",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-1": "#1e3a8a",
+          "chart-2": "#ea580c",
+          "chart-up": "#16a34a"
+        },
+        "dark": {
+          "chart-1": "#3b82f6",
+          "chart-2": "#f97316",
+          "chart-up": "#4ade80"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/chart-radar-icons.tsx",
+          "type": "registry:component",
+          "target": "components/charts/chart-radar-icons.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
+    },
+    {
+      "name": "chart-radar-radius",
+      "type": "registry:chart",
+      "title": "Radar Radius",
+      "description": "Classic dual Store×Online radar with PolarRadiusAxis (no angle axis) — locked chrome, metric scrubber, RTL-aware.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "chart",
+        "chart-styles"
+      ],
+      "cssVars": {
+        "light": {
+          "chart-1": "#1e3a8a",
+          "chart-2": "#ea580c",
+          "chart-up": "#16a34a"
+        },
+        "dark": {
+          "chart-1": "#3b82f6",
+          "chart-2": "#f97316",
+          "chart-up": "#4ade80"
+        }
+      },
+      "files": [
+        {
+          "path": "components/charts/chart-radar-radius.tsx",
+          "type": "registry:component",
+          "target": "components/charts/chart-radar-radius.tsx"
+        }
+      ],
+      "version": "0.1.0+6b92f47ac64f",
+      "generatedAt": "2026-10-24T19:07:17.049Z"
     }
   ]
 }

@@ -11,8 +11,7 @@ import { getChartDemoLoader } from "@/registry/charts/demo-loaders"
  * height follows content (heatmaps and other compact charts stay tight).
  */
 const STAGE_CLASS = "relative mx-auto w-full min-w-0 max-w-[640px]"
-const STAGE_LOADING_MIN =
-  "min-h-[26rem] sm:min-h-[28rem]"
+const STAGE_LOADING_MIN = "min-h-[26rem] sm:min-h-[28rem]"
 
 type ChartModule = Record<string, unknown>
 
@@ -38,11 +37,43 @@ export function ChartDemo({ id }: { id: string }) {
   return <ChartDemoLoader key={id} load={load} />
 }
 
+/**
+ * Splash owns dismiss state so fading the loader does not re-render `<Demo />`.
+ * react-gauge-chart rebuilds its SVG on every parent render.
+ */
+function ChartDemoSplash({ active }: { active: boolean }) {
+  const [gone, setGone] = React.useState(false)
+
+  React.useEffect(() => {
+    if (active) setGone(false)
+  }, [active])
+
+  if (gone) return null
+
+  return (
+    <div
+      className={cn(
+        "absolute inset-0 z-10 flex items-center justify-center transition-opacity duration-300 ease-out",
+        active ? "opacity-100" : "pointer-events-none opacity-0"
+      )}
+      role="status"
+      aria-label="Loading chart"
+      aria-hidden={!active}
+      onTransitionEnd={(event) => {
+        if (event.propertyName === "opacity" && !active) {
+          setGone(true)
+        }
+      }}
+    >
+      <LoadingRing size={40} showLabel label="Loading…" />
+    </div>
+  )
+}
+
 function ChartDemoLoader({ load }: { load: () => Promise<ChartModule> }) {
   const [Demo, setDemo] = React.useState<React.ComponentType | null>(null)
   const [error, setError] = React.useState<string | null>(null)
   const [revealed, setRevealed] = React.useState(false)
-  const [loaderGone, setLoaderGone] = React.useState(false)
 
   React.useEffect(() => {
     let cancelled = false
@@ -66,8 +97,9 @@ function ChartDemoLoader({ load }: { load: () => Promise<ChartModule> }) {
     }
   }, [load])
 
-  // Reveal only after paint so we can mount the chart while visible —
-  // otherwise Recharts entrance finishes (or pops) behind opacity-0.
+  // Reveal after paint, then mount the demo — never mount under opacity-0.
+  // Gauges that animate while hidden finish at the tip; when revealed they look
+  // "already full" and a remount replays from zero (double entrance).
   React.useEffect(() => {
     if (!Demo) return
     const frame = window.requestAnimationFrame(() => {
@@ -84,26 +116,8 @@ function ChartDemoLoader({ load }: { load: () => Promise<ChartModule> }) {
 
   return (
     <div className={cn(STAGE_CLASS, !showDemo && STAGE_LOADING_MIN)}>
-      {Demo && revealed ? <Demo /> : null}
-
-      {!loaderGone ? (
-        <div
-          className={cn(
-            "absolute inset-0 z-10 flex items-center justify-center transition-opacity duration-300 ease-out",
-            showDemo ? "pointer-events-none opacity-0" : "opacity-100"
-          )}
-          role="status"
-          aria-label="Loading chart"
-          aria-hidden={showDemo}
-          onTransitionEnd={(event) => {
-            if (event.propertyName === "opacity" && showDemo) {
-              setLoaderGone(true)
-            }
-          }}
-        >
-          <LoadingRing size={40} showLabel label="Loading…" />
-        </div>
-      ) : null}
+      {showDemo ? <Demo /> : null}
+      <ChartDemoSplash active={!showDemo} />
     </div>
   )
 }

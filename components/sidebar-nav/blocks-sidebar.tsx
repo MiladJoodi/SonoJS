@@ -19,6 +19,7 @@ import {
   SIDEBAR_GROUP_TRIGGER_CLASS,
   SIDEBAR_NESTED_ITEM_CLASS,
   SIDEBAR_NESTED_RAIL_CLASS,
+  SIDEBAR_CONTENT_CLASS,
   SIDEBAR_SEARCH_INPUT_CLASS,
   SIDEBAR_SEARCH_WRAP_CLASS,
   SIDEBAR_SHELL_CLASS,
@@ -70,7 +71,7 @@ function BlocksSidebarBody({ className }: { className?: string }) {
           inputClassName={SIDEBAR_SEARCH_INPUT_CLASS}
         />
       </div>
-      <SidebarContent className="no-scrollbar px-0">
+      <SidebarContent className={SIDEBAR_CONTENT_CLASS}>
         {filtered.length === 0 && !showIndex ? (
           <p className={SIDEBAR_EMPTY_CLASS}>No matches</p>
         ) : (

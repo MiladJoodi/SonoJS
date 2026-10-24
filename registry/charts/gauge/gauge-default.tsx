@@ -14,7 +14,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
  * Gauge Default — vivid emerald / amber / rose traffic bands.
- * Default library needle; light + dark band pairs.
+ * Default library needle; light + dark via scoped CSS vars (no remount).
  * Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/gauge-default.tsx
  */
@@ -31,24 +31,26 @@ const DEMO_PERCENT = 0.66
 
 /** Vivid traffic — deeper on light, luminous on dark. */
 const BAND_THEME = {
-  light: ["#10B981", "#F59E0B", "#F43F5E"] as const,
-  dark: ["#34D399", "#FBBF24", "#FB7185"] as const,
-}
+  light: {
+    low: "#10B981",
+    mid: "#F59E0B",
+    high: "#F43F5E",
+  },
+  dark: {
+    low: "#34D399",
+    mid: "#FBBF24",
+    high: "#FB7185",
+  },
+} as const
 
-function useIsDark() {
-  const [dark, setDark] = React.useState(false)
+/** Stable reference — new `colors={[...]}` each render re-inits react-gauge-chart. */
+const BAND_COLORS: string[] = [
+  "var(--gauge-band-1)",
+  "var(--gauge-band-2)",
+  "var(--gauge-band-3)",
+]
 
-  React.useEffect(() => {
-    const root = document.documentElement
-    const read = () => setDark(root.classList.contains("dark"))
-    read()
-    const obs = new MutationObserver(read)
-    obs.observe(root, { attributes: true, attributeFilter: ["class"] })
-    return () => obs.disconnect()
-  }, [])
-
-  return dark
-}
+const GAUGE_STAGE_ID = "gauge-default"
 
 function GaugeDefault({
   title = "Score gauge",
@@ -57,19 +59,35 @@ function GaugeDefault({
   className,
 }: GaugeDefaultProps) {
   const { ref } = useChartDir()
-  const dark = useIsDark()
   const locale = "en"
   const metric = formatGaugeMetric(percent, locale)
-  const bands = dark ? BAND_THEME.dark : BAND_THEME.light
 
   return (
     <div
       ref={ref}
+      data-gauge={GAUGE_STAGE_ID}
       className={cn(
         "mx-auto flex w-full min-w-0 max-w-[640px] flex-col gap-5 font-sans tabular-nums sm:gap-6",
         className
       )}
     >
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+[data-gauge="${GAUGE_STAGE_ID}"] {
+  --gauge-band-1: ${BAND_THEME.light.low};
+  --gauge-band-2: ${BAND_THEME.light.mid};
+  --gauge-band-3: ${BAND_THEME.light.high};
+}
+.dark [data-gauge="${GAUGE_STAGE_ID}"] {
+  --gauge-band-1: ${BAND_THEME.dark.low};
+  --gauge-band-2: ${BAND_THEME.dark.mid};
+  --gauge-band-3: ${BAND_THEME.dark.high};
+}
+`,
+        }}
+      />
+
       <header className="flex flex-col gap-4">
         <div className="space-y-1">
           <h3 className="text-xl font-bold tracking-tight text-foreground sm:text-2xl">
@@ -99,9 +117,8 @@ function GaugeDefault({
         className="touch-pan-y rounded-lg"
       >
         <ChartGauge
-          key={dark ? "dark" : "light"}
-          id="gauge-default"
-          colors={[...bands]}
+          id={GAUGE_STAGE_ID}
+          colors={BAND_COLORS}
           percent={percent}
           needleColor={GAUGE_NEEDLE}
           needleBaseColor={GAUGE_NEEDLE}
@@ -113,7 +130,7 @@ function GaugeDefault({
           <li key={label} className="inline-flex items-center gap-1.5">
             <span
               className="size-2 shrink-0 rounded-full"
-              style={{ backgroundColor: bands[index] }}
+              style={{ backgroundColor: BAND_COLORS[index] }}
               aria-hidden
             />
             <span>{label}</span>

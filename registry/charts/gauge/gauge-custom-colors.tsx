@@ -34,8 +34,8 @@ export type GaugeCustomColorsProps = {
 const DEMO_LEVELS = 30
 const DEMO_PERCENT = 0.37
 const DEMO_ARC_WIDTH = 0.3
-/** Soft rose → sand (demo palette). */
-const DEMO_COLORS = ["#d97986", "#c4a574"] as const
+/** Soft rose → sand — stable ref (do not default to `[...DEMO_COLORS]`). */
+const DEMO_COLORS: string[] = ["#d97986", "#c4a574"]
 
 function GaugeCustomColors({
   title = "Score gauge — custom colors",
@@ -43,7 +43,7 @@ function GaugeCustomColors({
   levels = DEMO_LEVELS,
   percent = DEMO_PERCENT,
   arcWidth = DEMO_ARC_WIDTH,
-  colors = [...DEMO_COLORS],
+  colors = DEMO_COLORS,
   className,
 }: GaugeCustomColorsProps) {
   const { ref } = useChartDir()

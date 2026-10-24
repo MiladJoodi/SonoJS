@@ -152,6 +152,18 @@ Locked Simple Bar chrome is the **default starting point**. Chart-type or custom
 
 **chart-pie-simple (classic):** baseline full pie (no inner radius); province sales 275/200/187/173/90; locked metric scrub; no Card shell; English / `Intl`; featured.
 
+**chart-radial-simple (classic):** concentric `RadialBar` rings (inner 30 / outer 110); region sales sample; `--chart-1…5` via Cell + cssVars (light/dark); locked metric scrub; `plotDir` flips angles; `RadialProvinceTooltipContent` with `dir`; track `background={{ fill: "var(--muted)" }}`; plot `dir="ltr"`.
+
+**chart-radial-label (classic):** same as simple + `LabelList` inside-start (white on-fill) + wide sweep (`-90`→`380`, RTL mirrored); `isAnimationActive={false}`; same tooltip / muted track.
+
+**chart-radial-grid (classic):** same sample + `PolarGrid gridType="circle"` + `outerRadius={100}` (no bar background); same tooltip / scrub.
+
+**chart-radial-text (classic):** partial ring (`0`→`250`, RTL mirrored) + PolarGrid double circle + center Label; `--chart-2`; muted track; `RadialProvinceTooltipContent`; plot `dir="ltr"`.
+
+**chart-radial-shape (classic):** short arc (`endAngle={100}`, RTL mirrored) + PolarGrid `[86,74]`; `--chart-2`; muted track; tooltip + center Label; plot `dir="ltr"`.
+
+**chart-radial-stacked (classic):** semicircle (`endAngle={180}`, RTL mirrored) Store×Online stack; navy×orange cssVars; `ChartTooltipContent dir={dir}`; centered total; plot `dir="ltr"`.
+
 **chart-pie-separator-none (classic):** same data as Simple; teaching diff is `stroke="0"` (seamless slices, no background gaps); locked metric scrub; not featured.
 
 **chart-pie-label (classic):** same data as Simple; always-on value `label`; ink via `[&_.recharts-pie-label-text]:fill-foreground`; `isAnimationActive={false}` to avoid label blink; locked metric scrub.
@@ -308,9 +320,133 @@ Locked Simple Bar chrome is the **default starting point**. Chart-type or custom
 
 **treemap-content:** teaching `content={<Cell />}` (cloneElement path) vs function content; centered leaf name + size; `--chart-1…5`; locked metric scrub; plot `dir="ltr"`.
 
+**bundle-size-sunburst:** Recharts `SunburstChart` of tree-shaken client JS (bytes) by group; nested ring shades via `color-mix` on `--chart-1…5` (tracks light/dark cssVars); center disc inherits page `dir`; `SunburstTooltipContent` with `dir` + fill swatch; locked metric scrub (idle = total); white on-fill name labels; EN names; plot `dir="ltr"`. Shared: `sunburst-shared`.
+
+**sunburst-chart:** classic regional sales share (%) — region → channel → site (3 levels); same chrome / theme-aware shades / center / tooltip as Bundle Size; EN names; plot `dir="ltr"`. Shared: `sunburst-shared`.
+
+**sunburst-chart-theme-colors:** org headcount by team (Engineering / Sales / Marketing / Support); same `--chart-1…5` `colorizeTree` + tooltip/center RTL pattern; EN names; plot `dir="ltr"`. Shared: `sunburst-shared`.
+
+**Radar (category):** header / legend inherit page `dir`; plot island `dir="ltr"` (polar SVG). `PolarAngleAxis.reversed` in RTL. Dual series navy×orange via `cssVars` (`--chart-1` for single-series). `ChartTooltip` + `ChartTooltipContent` (page `dir`). Metric scrub across angle categories; keyboard reverses in RTL. Quiet dashed `PolarGrid`. QA: LTR×RTL × light×dark before `ported`.
+
+**simple-radar-chart:** single Score polygon across six subjects; locked metric scrub (idle = last subject); active vertex dots while scrubbing; English / `Intl`; featured gallery starter.
+
+**specified-domain-radar-chart:** dual Alex×Sara polygons; `PolarRadiusAxis` `domain={[0,150]}` + `angle={30}` + `outerRadius="80%"`; metric = subject sum; English / `Intl`; featured.
+
+**range-radar-chart-custom-animation:** ceiling (`high`) polygon; data keeps `low`/`high` for span in metric + tip; custom entrance `animationDuration={1600}` (0 / paused when reduced-motion or scrubbing); English / `Intl`.
+
+**radar-lines-only:** dual Store×Online stroke-only (`fillOpacity={0}`) + `PolarGrid radialLines={false}`; metric = month sum; English / `Intl`.
+
+**radar-icons:** dual Store×Online filled polygons; `chartConfig` Lucide icons (`ArrowDownFromLine` / `ArrowUpFromLine`) via `ChartLegendContent`; tip `indicator="line"`; English / `Intl`; featured.
+
+**radar-multiple:** dual overlapping Store×Online filled polygons (no icons); metric = month sum; English / `Intl`; featured gallery.
+
+**chart-radar-default (classic):** single Store filled polygon + default `ChartTooltipContent`; metric scrub; English / `Intl`; featured classic starter.
+
+**chart-radar-dots (classic):** same as default + `dot={{ r: 4, fillOpacity: 1 }}`; English / `Intl`; featured.
+
+**chart-radar-lines-only (classic):** twin of gallery `radar-lines-only` — dual stroke-only + `radialLines={false}`; English / `Intl`.
+
+**chart-radar-label-custom (classic):** dual Store×Online; custom `PolarAngleAxis` tick renders `store/online` + month; English / `Intl`.
+
+**chart-radar-grid-custom (classic):** single Store; `PolarGrid` with `radialLines={false}` + `polarRadius={[90]}`; tip `hideLabel`; English / `Intl`.
+
+**chart-radar-grid-none (classic):** single Store; no `PolarGrid`; vertex `dot`; tip `hideLabel`; English / `Intl`.
+
+**chart-radar-grid-circle (classic):** single Store; `PolarGrid gridType="circle"`; vertex `dot`; tip `hideLabel`; English / `Intl`.
+
+**chart-radar-grid-circle-no-lines (classic):** single Store; `gridType="circle"` + `radialLines={false}`; vertex `dot`; tip `hideLabel`; English / `Intl`.
+
+**chart-radar-grid-circle-fill (classic):** single Store; circular `PolarGrid` with `fill-(--color-store) opacity-20`; English / `Intl`.
+
+**chart-radar-grid-fill (classic):** single Store; default polygon `PolarGrid` with `fill-(--color-store) opacity-20`; tip `hideLabel`; English / `Intl`.
+
+**chart-radar-multiple (classic):** twin of gallery `radar-multiple` — dual Store×Online filled polygons; tip `indicator="line"`; English / `Intl`.
+
+**chart-radar-legend (classic):** dual Store×Online + `ChartLegend` / `ChartLegendContent`; tip `indicator="line"`; English / `Intl`.
+
+**chart-radar-icons (classic):** twin of gallery `radar-icons` — Lucide icons in `chartConfig` + `ChartLegendContent`; English / `Intl`.
+
+**chart-radar-radius (classic):** dual Store×Online; `PolarRadiusAxis` (no `PolarAngleAxis`); tip `labelKey="month"` + `labelFormatter` → month value (not config label); radius `angle` 60 LTR / 120 RTL; English / `Intl`.
+
+**Radial bar (category):** header / legend inherit page `dir`; plot island `dir="ltr"` (polar SVG). Tokens `--chart-1…5` via registry `cssVars` (light/dark — no hex in demos except on-arc `#ffffff`). Track = muted mix / `fill-muted`. `ChartTooltip` + `ChartTooltipContent` (page `dir` via `useDirection`). Keyboard scrub / focus reverses in RTL. QA: LTR×RTL × light×dark before `ported`.
+
+**simple-radial-bar-chart:** concentric age-band rings (`RadialBar` + `background`); locked metric scrub (idle = total share); English / `Intl`; featured gallery starter.
+
+**radial-bar-chart-click-to-focus-legend:** five concentric rings (unique `--chart-1…5`); click ring or legend chip to focus (opacity 1 vs 0.2), click again to clear; metric tracks focus; `cursor-pointer`; English / `Intl`.
+
+**radial-text:** single progress `RadialBar` (~250° sweep) + center `Label` (value + caption); track muted mix; `--chart-1`; `ChartTooltip`; English / `Intl`.
+
+**radial-shape:** thick square-ended arc (`cornerRadius={0}`) over thin `PolarGrid` track; decorative ~100° sweep; center Label; `ChartTooltip`; teaching contrast vs `radial-text`.
+
+**radial-stacked:** half-ring Desktop×Mobile `stackId`; `PolarAngleAxis` domain = total; center Label total; navy×orange; tooltip + legend chips; English / `Intl`.
+
+**Scatter (category):** header / legend inherit page `dir`; plot island `dir="ltr"`; `XAxis.reversed` + `YAxis` orientation flip in RTL. Dual series navy×orange via `cssVars`. `ChartTooltip` + `ChartTooltipContent` (page `dir`). Scatter tooltip payload includes x+y (+z) — formatters render once (`index === 0`) from the row; `ChartTooltipContent` skips null formatter returns. Metric scrub across flattened points (sorted by X); keyboard reverses in RTL. QA: LTR×RTL × light×dark before `ported`.
+
+**simple-scatter-chart:** dual `Scatter` (Group A / B) on continuous height×weight plane; custom circle `shape` for scrub dim/size; featured gallery starter; English / `Intl`.
+
+**joint-line-scatter-chart:** same dual plane + `line` / `lineType="joint"` connecting points in data order; legend shows stroke+dot; English / `Intl`.
+
+**bubble-chart:** dual `Scatter` + `ZAxis` (`z` → bubble radius); metric tracks score; soft fill + background stroke; legend notes size encoding; English / `Intl`.
+
+**custom-animation:** single-series bubble scatter; Swap dataset + Crossfade / Staggered / Pop via `animationInterpolateFn` (Recharts ≥3.9); honors `prefers-reduced-motion`; English / `Intl`.
+
+**scatter-chart-with-labels:** single-series + `ZAxis` + always-on `LabelList` (`name`); `isAnimationActive={false}`; scrub dims inactive labels/points; English / `Intl`.
+
+**multiple-y-axes-scatter-chart:** dual `Scatter` with `yAxisId` primary/secondary + independent domains; axis ticks tinted to series; RTL swaps start/end sides; English / `Intl`.
+
+**scatter-chart-with-cells:** per-point `--chart-1…5` + `Symbols` via `shape` (Cell deprecated); scrub dims inactive marks; English / `Intl`.
+
+**scatter-chart-performance:** ~50 series × 12 points (seeded); `isAnimationActive={false}`; scrub focuses a whole series (not every mark); pass/fail via `--chart-up` / `--chart-down`; English / `Intl`.
+
+**Responsive (category):** teach fluid `ChartContainer` stage (not raw Recharts `ResponsiveContainer`). Header inherits page `dir`; plot island `dir="ltr"`; `XAxis.reversed` + `YAxis` orientation flip in RTL. Locked navy×orange + `--chart-1…5` refs; metric scrub; English / `Intl`. QA: LTR×RTL × light×dark before `ported`.
+
+**area-responsive-container:** single Store area + dashed ReferenceLines (`x=Mar` min month / `y=4000` target); fluid stage `max-h-[420px]`; legend chips for series + refs; plot `dir="ltr"`.
+
+**composed-responsive-container:** `ComposedChart` Orders area × Online bars × Store line; fluid stage `max-h-[380px]`; `ChartLegend`; metric = category sum; navy×orange×amber; plot `dir="ltr"`.
+
+**pie-responsive-container:** square fluid stage (`h-[300px]` / `max-w-[300px]`); labeled pie + `ChartLegend` wrap row; `--chart-1…4` regions; slice scrub (idle = total); `isAnimationActive={false}` for stable labels; plot `dir="ltr"`.
+
+**Legend (category):** teach legend interaction / placement / custom chrome. Header inherits page `dir`; plot island `dir="ltr"`; `XAxis.reversed` + `YAxis` orientation flip in RTL. Locked navy×orange; metric scrub; English / `Intl`. QA: LTR×RTL × light×dark before `ported`.
+
+**legend-effect-opacity:** dual Online×Store lines; `ChartLegend` `onMouseEnter` / `onMouseLeave` dims the other series (`strokeOpacity` 0.5); default Recharts legend icons (not `ChartLegendContent`) so payload hover works; `cursor-pointer` on legend items; plot `dir="ltr"`.
+
+**legend-position:** same dual line + data; teaching diff is `ChartLegend` / `ChartLegendContent` with `verticalAlign="top"` and `className="pb-4"`; plot `dir="ltr"`.
+
+**legend-styles:** dual Store×Online bars; custom card legend (`dir` from page) with hint + period total (`Intl`, number island `dir="ltr"`); accent bar on logical `end`; navy×orange; plot `dir="ltr"`.
+
+**Tooltip (category):** teach custom / styled / advanced chart tooltips. Header inherits page `dir`; plot island `dir="ltr"`; `XAxis.reversed` + `YAxis` orientation flip in RTL. Locked navy×orange; metric scrub; English / `Intl`. Custom tip panels set `dir` from `useChartDir` (not only `ChartTooltipContent`). QA: LTR×RTL × light×dark before `ported`.
+
+**custom-content-of-tooltip:** dual Online×Store bars; fully custom tip (month intro + series rows); `ChartLegend` / `ChartLegendContent`; soft bar cursor wash; plot `dir="ltr"`.
+
+**tooltip-styles:** dual Online×Store bars; Recharts default tip chrome via `contentStyle` / `itemStyle` / `labelStyle` (navy border, orange label); `direction` from `useChartDir`; pinned `active` + `defaultIndex` for inspectability; plot `dir="ltr"`.
+
+**tooltip-advanced:** stacked Delivery×Pickup bars; `ChartTooltipContent` custom `formatter` (swatch + kcal + Total row at `index === 1`); `hideLabel`; `cursor={false}`; `defaultIndex` pin; weekday axis via `Intl`; plot `dir="ltr"`.
+
+**chart-tooltip-default (classic):** same stacked Delivery×Pickup sample; default `ChartTooltipContent` + long-date `labelFormatter` (`Intl` day/month/year); `cursor={false}`; `defaultIndex` pin; locked scrub; plot `dir="ltr"`.
+
+**chart-tooltip-indicator-line (classic):** twin of default; teaching diff is `indicator="line"` on `ChartTooltipContent`; same sample / labelFormatter / scrub / plot `dir="ltr"`.
+
+**chart-tooltip-indicator-none (classic):** twin of default; teaching diff is `hideIndicator` (no color swatch); same sample / labelFormatter / scrub / plot `dir="ltr"`.
+
+**chart-tooltip-label-custom (classic):** same stacked sample; tip title from `labelKey="activities"` → `chartConfig.activities.label` ("Activities"); `indicator="line"`; no date labelFormatter; locked scrub; plot `dir="ltr"`.
+
+**chart-tooltip-label-formatter (classic):** same stacked sample; teaching focus is long-date `labelFormatter` on default `ChartTooltipContent` (dot indicator); `cursor={false}`; `defaultIndex` pin; locked scrub; plot `dir="ltr"`.
+
+**chart-tooltip-label-none (classic):** same stacked sample; `hideLabel` + `hideIndicator` (series rows only, no date header / swatches); locked scrub; plot `dir="ltr"`.
+
+**chart-tooltip-formatter (classic):** same stacked sample; `hideLabel` + custom `formatter` (series label + value + `kcal`); no Total row (vs gallery `tooltip-advanced`); locked scrub; plot `dir="ltr"`.
+
+**chart-tooltip-icons (classic):** same stacked sample; `chartConfig` series `icon` (`Footprints` / `Waves` from lucide); `hideLabel`; tip shows icons instead of color dots; npm `lucide-react`; locked scrub; plot `dir="ltr"`.
+
+**chart-tooltip-advanced (classic):** twin of gallery `tooltip-advanced`; `hideLabel` + custom `formatter` (swatch + kcal + Total at `index === 1`); locked scrub; plot `dir="ltr"`.
+
 **Gauge (category):** header chrome inherits page `dir` (logical layout); plot island always `dir="ltr"` (RGC wrapper or `ChartHighchartsGauge`). Needle/dial ink = `var(--foreground)` (`GAUGE_NEEDLE` / `HC_DIAL`). HC tooltips use `--popover` / `--popover-foreground` from `hc-gauge-shared`. Soft arc hex stays fixed (readable in both themes); tracks use `color-mix` on `--muted-foreground` / `--foreground`. RGC items declare `lodash` (undeclared dep of `react-gauge-chart` for `lodash/isEqual`). Not Simple Bar scrub.
 
-**gauge-default:** `react-gauge-chart` vivid **emerald / amber / rose** light/dark bands; default library needle (`GAUGE_NEEDLE` / `--foreground`); fixed 250×420 stage; plot `dir="ltr"`; shared `gauge-shared`.
+**Gauge CLI = demo:** `sonojs add <id>` installs the same `registry/charts/gauge/<id>.tsx` shown on `/charts/view/<id>`, plus shared (`gauge-shared` or `hc-gauge-shared`) and `chart-styles` (`use-chart-dir`), with npm deps logged as `+` lines. Keep `cssVars` in `registry-items.mjs` in sync with hex in the demo (and shared libs). Rebuild with `npm run registry:build` after edits.
+
+**RGC gauges:** `ChartGauge` is `memo`. Entrance: park at `0.001` with `animate={false}`, then animate to target (avoids library `prevPercent || percent` flash that drew the tip first). `ChartDemo` mounts the demo only after reveal (never under opacity-0 — that finished the sweep off-screen, then replayed). Splash dismiss is isolated. Pass **stable** `colors` / `arcsLength` refs. Use `animate={false}` to park the needle (gauge-no-animation).
+
+**gauge-default:** vivid **emerald / amber / rose** via scoped `--gauge-band-*`; default needle (`GAUGE_NEEDLE`); fixed 250×420 stage; plot `dir="ltr"`.
 
 **gauge-levels:** 20-band `gaugeTrafficRamp` at 86%; same chrome / traffic endpoints as `gauge-default`.
 
@@ -340,7 +476,7 @@ Locked Simple Bar chrome is the **default starting point**. Chart-type or custom
 
 **hc-gauge-kpi:** three nested solidgauge rings (Conversion 82 / Engagement 59 / Retention 71); `HC_COLOR_0…2`; height 320; same chrome.
 
-**hc-gauge-rounded-bands:** dial with individually rounded plotBands (`borderRadius` per band); soft blues `#a8c4d8` / `#6ea1c7` / `#8b9dc3`; value 55; same chrome.
+**hc-gauge-rounded-bands:** dial with individually rounded plotBands; distinct **teal / amber / rose** light+dark (`#0D9488`/`#D97706`/`#E11D48` · `#2DD4BF`/`#FBBF24`/`#FB7185`); value 55; same chrome.
 
 **hc-gauge-threshold:** solidgauge −4…4 with `threshold: 0`; red below / green above (`HC_TRAFFIC`); plotLine at 0; value −1.2; same chrome.
 

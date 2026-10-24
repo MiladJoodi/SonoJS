@@ -5,10 +5,16 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 
 import {
+  CHARTS_GALLERY_ACTIVE_EVENT,
+  chartGallerySectionId,
+} from "@/components/charts"
+import {
   chartsNav,
   getChartsActiveCategoryId,
   getChartsCurrentLabel,
 } from "@/lib/charts-nav"
+import type { ChartCategory } from "@/lib/charts-catalog"
+import { isChartCategory } from "@/lib/charts-catalog"
 import { cn } from "@/lib/utils"
 import { ListIndexNav } from "@/components/sidebar-nav/list-index-nav"
 import {
@@ -24,6 +30,7 @@ import {
   SIDEBAR_ITEM_ACTIVE,
   SIDEBAR_NESTED_ITEM_CLASS,
   SIDEBAR_NESTED_RAIL_CLASS,
+  SIDEBAR_CONTENT_CLASS,
   SIDEBAR_SEARCH_INPUT_CLASS,
   SIDEBAR_SEARCH_WRAP_CLASS,
   SIDEBAR_SHELL_CLASS,
@@ -68,37 +75,94 @@ function writeOpenGroups(next: Record<string, boolean>) {
   }
 }
 
+function readGalleryHashCategory(): ChartCategory | null {
+  if (typeof window === "undefined") return null
+  const hash = window.location.hash.replace(/^#chart-type-/, "")
+  return isChartCategory(hash) ? hash : null
+}
+
+/**
+ * FarsiUI pattern:
+ * - Gallery (`/charts`): flat category list — click scrolls, no expand/collapse.
+ * - Detail (view / category routes): collapsible folders; active category stays open;
+ *   open state is user-toggled (+ session), not fight with scroll.
+ */
 function ChartsSidebarBody({ className }: { className?: string }) {
   const pathname = usePathname()
+  const galleryMode = pathname === "/charts"
   const [query, setQuery] = React.useState("")
   const normalized = normalizeNavSearch(query)
-  const activeCategoryId = getChartsActiveCategoryId(pathname)
+  const routeCategoryId = getChartsActiveCategoryId(pathname)
+  const [galleryCategoryId, setGalleryCategoryId] =
+    React.useState<ChartCategory | null>(null)
 
   const [openGroups, setOpenGroups] = React.useState<Record<string, boolean>>(
-    {}
+    () => (routeCategoryId ? { [routeCategoryId]: true } : {})
   )
-  const [hydrated, setHydrated] = React.useState(false)
 
   React.useLayoutEffect(() => {
+    if (galleryMode) {
+      setGalleryCategoryId(readGalleryHashCategory())
+      return
+    }
     const saved = readOpenGroups()
     setOpenGroups({
       ...saved,
-      ...(activeCategoryId ? { [activeCategoryId]: true } : {}),
+      ...(routeCategoryId ? { [routeCategoryId]: true } : {}),
     })
-    setHydrated(true)
-    // Mount restore only; active category kept open via effect below.
     // eslint-disable-next-line react-hooks/exhaustive-deps -- mount
   }, [])
 
   React.useEffect(() => {
-    if (!activeCategoryId) return
+    if (!galleryMode) {
+      setGalleryCategoryId(null)
+      return
+    }
+    const onActive = (event: Event) => {
+      const id = (event as CustomEvent<{ id: ChartCategory | null }>).detail?.id
+      if (id == null) {
+        setGalleryCategoryId(null)
+        return
+      }
+      if (isChartCategory(id)) setGalleryCategoryId(id)
+    }
+    const onHash = () => setGalleryCategoryId(readGalleryHashCategory())
+    window.addEventListener(CHARTS_GALLERY_ACTIVE_EVENT, onActive)
+    window.addEventListener("hashchange", onHash)
+    setGalleryCategoryId(readGalleryHashCategory())
+    return () => {
+      window.removeEventListener(CHARTS_GALLERY_ACTIVE_EVENT, onActive)
+      window.removeEventListener("hashchange", onHash)
+    }
+  }, [galleryMode])
+
+  React.useEffect(() => {
+    if (galleryMode || !routeCategoryId) return
     setOpenGroups((prev) => {
-      if (prev[activeCategoryId]) return prev
-      const next = { ...prev, [activeCategoryId]: true }
+      if (prev[routeCategoryId]) return prev
+      const next = { ...prev, [routeCategoryId]: true }
       writeOpenGroups(next)
       return next
     })
-  }, [activeCategoryId])
+  }, [galleryMode, routeCategoryId])
+
+  const setGroupOpen = React.useCallback((id: string, next: boolean) => {
+    setOpenGroups((prev) => {
+      const updated = { ...prev, [id]: next }
+      writeOpenGroups(updated)
+      return updated
+    })
+  }, [])
+
+  const scrollGalleryToCategory = React.useCallback((category: ChartCategory) => {
+    window.history.replaceState(null, "", `#${chartGallerySectionId(category)}`)
+    setGalleryCategoryId(category)
+    window.dispatchEvent(
+      new CustomEvent("sonojs:charts-gallery-scroll-to", {
+        detail: { id: category },
+      })
+    )
+  }, [])
 
   const filtered = React.useMemo(() => {
     return chartsNav
@@ -129,7 +193,7 @@ function ChartsSidebarBody({ className }: { className?: string }) {
   }, [normalized])
 
   React.useEffect(() => {
-    if (!normalized) return
+    if (galleryMode || !normalized) return
     setOpenGroups((prev) => {
       const next = { ...prev }
       for (const group of filtered) {
@@ -138,15 +202,7 @@ function ChartsSidebarBody({ className }: { className?: string }) {
       writeOpenGroups(next)
       return next
     })
-  }, [normalized, filtered])
-
-  const setGroupOpen = React.useCallback((id: string, next: boolean) => {
-    setOpenGroups((prev) => {
-      const updated = { ...prev, [id]: next }
-      writeOpenGroups(updated)
-      return updated
-    })
-  }, [])
+  }, [galleryMode, normalized, filtered])
 
   const showIndex = matchesNavQuery("Charts", normalized) || !normalized
 
@@ -160,7 +216,7 @@ function ChartsSidebarBody({ className }: { className?: string }) {
           inputClassName={SIDEBAR_SEARCH_INPUT_CLASS}
         />
       </div>
-      <SidebarContent className="no-scrollbar px-0">
+      <SidebarContent className={SIDEBAR_CONTENT_CLASS}>
         {filtered.length === 0 && !showIndex ? (
           <p className={SIDEBAR_EMPTY_CLASS}>No matches</p>
         ) : (
@@ -172,10 +228,21 @@ function ChartsSidebarBody({ className }: { className?: string }) {
                     <Link
                       href="/charts"
                       prefetch={false}
-                      data-active={pathname === "/charts" || undefined}
+                      onClick={(event) => {
+                        if (!galleryMode) return
+                        event.preventDefault()
+                        window.history.replaceState(null, "", "/charts")
+                        setGalleryCategoryId(null)
+                        window.scrollTo({ top: 0, behavior: "smooth" })
+                      }}
+                      data-active={
+                        (galleryMode && !galleryCategoryId) || undefined
+                      }
                       className={cn(
                         SIDEBAR_TOP_LINK_CLASS,
-                        sidebarItemStateClass(pathname === "/charts")
+                        sidebarItemStateClass(
+                          galleryMode && !galleryCategoryId
+                        )
                       )}
                     >
                       <SidebarNavBullet />
@@ -183,81 +250,105 @@ function ChartsSidebarBody({ className }: { className?: string }) {
                     </Link>
                   </SidebarMenuItem>
                 ) : null}
-                {filtered.map((group) => {
-                  const categoryActive = group.id === activeCategoryId
-                  const open = hydrated
-                    ? (openGroups[group.id] ?? Boolean(normalized))
-                    : categoryActive
 
-                  return (
-                    <SidebarMenuItem key={group.id}>
-                      <Collapsible
-                        open={open}
-                        onOpenChange={(next) => setGroupOpen(group.id, next)}
-                        className="group/charts-folder"
-                      >
-                        <CollapsibleTrigger
-                          className={cn(
-                            SIDEBAR_GROUP_TRIGGER_CLASS,
-                            categoryActive && SIDEBAR_ITEM_ACTIVE
-                          )}
-                        >
-                          <span className="min-w-0 flex-1 truncate text-start">
-                            {group.title}
-                          </span>
-                          <span className={SIDEBAR_GROUP_COUNT_CLASS}>
-                            {group.items.length}
-                          </span>
-                          <SidebarNavChevron group="charts-folder" />
-                        </CollapsibleTrigger>
-                        <CollapsibleContent
-                          className={SIDEBAR_COLLAPSIBLE_CONTENT_CLASS}
-                        >
-                          <div className={SIDEBAR_NESTED_RAIL_CLASS}>
-                            <Link
-                              href={group.href}
-                              prefetch={false}
-                              data-active={
-                                pathname === group.href || undefined
-                              }
+                {galleryMode
+                  ? filtered.map((group) => {
+                      const active = galleryCategoryId === group.id
+                      return (
+                        <SidebarMenuItem key={group.id}>
+                          <button
+                            type="button"
+                            onClick={() => scrollGalleryToCategory(group.id)}
+                            className={cn(
+                              SIDEBAR_GROUP_TRIGGER_CLASS,
+                              "w-full cursor-pointer",
+                              active && SIDEBAR_ITEM_ACTIVE
+                            )}
+                          >
+                            <group.icon
+                              className="size-3.5 shrink-0 opacity-80"
+                              aria-hidden
+                            />
+                            <span className="min-w-0 flex-1 truncate text-start">
+                              {group.title}
+                            </span>
+                            <span className={SIDEBAR_GROUP_COUNT_CLASS}>
+                              {group.items.length}
+                            </span>
+                          </button>
+                        </SidebarMenuItem>
+                      )
+                    })
+                  : filtered.map((group) => {
+                      const folderActive = routeCategoryId === group.id
+                      const open =
+                        openGroups[group.id] ?? Boolean(normalized)
+
+                      return (
+                        <SidebarMenuItem key={group.id}>
+                          <Collapsible
+                            open={open}
+                            onOpenChange={(next) =>
+                              setGroupOpen(group.id, next)
+                            }
+                            className="group/charts-folder"
+                          >
+                            <CollapsibleTrigger
                               className={cn(
-                                SIDEBAR_NESTED_ITEM_CLASS,
-                                sidebarItemStateClass(pathname === group.href)
+                                SIDEBAR_GROUP_TRIGGER_CLASS,
+                                folderActive && SIDEBAR_ITEM_ACTIVE
                               )}
                             >
-                              <SidebarNavBullet />
-                              <SidebarNavLabel label="Overview" />
-                            </Link>
-                            {group.items.map((item) => {
-                              const active = pathname === item.href
-                              return (
-                                <Link
-                                  key={item.id}
-                                  href={item.href}
-                                  prefetch={false}
-                                  data-active={active || undefined}
-                                  title={item.status === "pending" ? "Pending" : undefined}
-                                  className={cn(
-                                    SIDEBAR_NESTED_ITEM_CLASS,
-                                    sidebarItemStateClass(active),
-                                    item.status === "pending" &&
-                                      !active &&
-                                      "opacity-70"
-                                  )}
-                                >
-                                  <SidebarNavBullet
-                                    featured={item.featured}
-                                  />
-                                  <SidebarNavLabel label={item.title} />
-                                </Link>
-                              )
-                            })}
-                          </div>
-                        </CollapsibleContent>
-                      </Collapsible>
-                    </SidebarMenuItem>
-                  )
-                })}
+                              <group.icon
+                                className="size-3.5 shrink-0 opacity-80"
+                                aria-hidden
+                              />
+                              <span className="min-w-0 flex-1 truncate text-start">
+                                {group.title}
+                              </span>
+                              <span className={SIDEBAR_GROUP_COUNT_CLASS}>
+                                {group.items.length}
+                              </span>
+                              <SidebarNavChevron group="charts-folder" />
+                            </CollapsibleTrigger>
+                            <CollapsibleContent
+                              className={SIDEBAR_COLLAPSIBLE_CONTENT_CLASS}
+                            >
+                              <div className={SIDEBAR_NESTED_RAIL_CLASS}>
+                                {group.items.map((item) => {
+                                  const active = pathname === item.href
+                                  return (
+                                    <Link
+                                      key={item.id}
+                                      href={item.href}
+                                      prefetch={false}
+                                      data-active={active || undefined}
+                                      title={
+                                        item.status === "pending"
+                                          ? "Pending"
+                                          : undefined
+                                      }
+                                      className={cn(
+                                        SIDEBAR_NESTED_ITEM_CLASS,
+                                        sidebarItemStateClass(active),
+                                        item.status === "pending" &&
+                                          !active &&
+                                          "opacity-70"
+                                      )}
+                                    >
+                                      <SidebarNavBullet
+                                        featured={item.featured}
+                                      />
+                                      <SidebarNavLabel label={item.title} />
+                                    </Link>
+                                  )
+                                })}
+                              </div>
+                            </CollapsibleContent>
+                          </Collapsible>
+                        </SidebarMenuItem>
+                      )
+                    })}
               </SidebarMenu>
             </SidebarGroupContent>
           </SidebarGroup>

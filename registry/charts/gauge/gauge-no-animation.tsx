@@ -86,7 +86,7 @@ function GaugeNoAnimation({
           id="gauge-no-animation"
           animate={false}
           nrOfLevels={levels}
-          colors={[...GAUGE_TRAFFIC_COLORS]}
+          colors={GAUGE_TRAFFIC_COLORS}
           percent={percent}
           needleColor={GAUGE_NEEDLE}
           needleBaseColor={GAUGE_NEEDLE}
