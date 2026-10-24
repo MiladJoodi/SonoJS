@@ -335,8 +335,12 @@ function PieResponsiveContainer({
               ))}
             </Pie>
             <ChartLegend
-              content={<ChartLegendContent nameKey="province" />}
-              className="-translate-y-2 flex-wrap gap-2 *:basis-1/4 *:justify-center"
+              content={
+                <ChartLegendContent
+                  nameKey="province"
+                  className="-translate-y-2 flex-wrap gap-2 *:basis-1/4 *:justify-center"
+                />
+              }
             />
           </PieChart>
         </ChartContainer>

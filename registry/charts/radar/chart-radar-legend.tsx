@@ -323,8 +323,7 @@ function ChartRadarLegend({
               animationEasing="ease-out"
             />
             <ChartLegend
-              className="mt-4"
-              content={<ChartLegendContent />}
+              content={<ChartLegendContent className="mt-4" />}
             />
           </RadarChart>
         </ChartContainer>

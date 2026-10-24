@@ -374,9 +374,8 @@ function LegendPosition({
               content={<ChartTooltipContent dir={dir} />}
             />
             <ChartLegend
-              content={<ChartLegendContent />}
+              content={<ChartLegendContent className="pb-4" />}
               verticalAlign="top"
-              className="pb-4"
             />
             <Line
               type="monotone"
