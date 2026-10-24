@@ -3,6 +3,7 @@ import {
   ComponentVariantPreview,
   DocsApiProps,
   DocsInstallation,
+  DocsPageHeader,
 } from "@/components/docs"
 import { withVariantCode } from "@/lib/docs-variant-examples"
 
@@ -49,9 +50,11 @@ export default async function SpinnerDocsPage() {
 
   return (
     <article className="mx-auto max-w-3xl space-y-10">
-      <header className="space-y-2">
-        <h1 className="text-h1">Spinner</h1>
-        <p className="leading-relaxed text-muted-foreground">
+      <DocsPageHeader
+        title="Spinner"
+        pathname="/docs/components/spinner"
+        description={
+          <p className="leading-relaxed text-muted-foreground">
           An indicator for loading states. Uses logical{" "}
           <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
             data-icon=&quot;inline-start&quot;
@@ -62,7 +65,8 @@ export default async function SpinnerDocsPage() {
           </code>{" "}
           so placement follows writing direction in buttons and badges.
         </p>
-      </header>
+        }
+      />
 
       <section className="space-y-4">
         <ComponentVariantPreview examples={examples} />

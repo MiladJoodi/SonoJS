@@ -3,6 +3,7 @@ import {
   ComponentVariantPreview,
   DocsApiProps,
   DocsInstallation,
+  DocsPageHeader,
 } from "@/components/docs"
 import { withVariantCode } from "@/lib/docs-variant-examples"
 
@@ -104,9 +105,11 @@ export default async function DialogDocsPage() {
 
   return (
     <article className="mx-auto max-w-3xl space-y-10">
-      <header className="space-y-2">
-        <h1 className="text-h1">Dialog</h1>
-        <p className="leading-relaxed text-muted-foreground">
+      <DocsPageHeader
+        title="Dialog"
+        pathname="/docs/components/dialog"
+        description={
+          <p className="leading-relaxed text-muted-foreground">
           A window overlaid on the primary content for focused tasks. Default
           width is{" "}
           <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
@@ -121,7 +124,8 @@ export default async function DialogDocsPage() {
           </a>
           .
         </p>
-      </header>
+        }
+      />
 
       <section className="space-y-4">
         <ComponentVariantPreview examples={examples} />

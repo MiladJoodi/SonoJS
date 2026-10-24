@@ -3,6 +3,7 @@ import {
   ComponentVariantPreview,
   DocsApiProps,
   DocsInstallation,
+  DocsPageHeader,
 } from "@/components/docs"
 import { withVariantCode } from "@/lib/docs-variant-examples"
 
@@ -96,14 +97,17 @@ export default async function DropdownMenuDocsPage() {
 
   return (
     <article className="mx-auto max-w-3xl space-y-10">
-      <header className="space-y-2">
-        <h1 className="text-h1">Dropdown Menu</h1>
-        <p className="leading-relaxed text-muted-foreground">
+      <DocsPageHeader
+        title="Dropdown Menu"
+        pathname="/docs/components/dropdown-menu"
+        description={
+          <p className="leading-relaxed text-muted-foreground">
           Displays a menu of actions triggered by a button. Supports shortcuts,
           nested submenus, checkboxes, radio groups, and destructive items.
           Chevron and inset spacing use logical properties for LTR and RTL.
         </p>
-      </header>
+        }
+      />
 
       <section className="space-y-4">
         <ComponentVariantPreview examples={examples} />

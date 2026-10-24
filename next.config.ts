@@ -3,6 +3,7 @@ import type { NextConfig } from "next";
 /**
  * Cache policy (host-agnostic):
  * - /r/* JSON: stable URLs, changing content → revalidate, never immutable
+ * - /chart/* thumbs: same path after re-export → must not stick on old bytes
  * - /_next/static/*: leave Next defaults (content-hashed, long-lived)
  * - Docs HTML: static at build; freshness via next production deploy
  */
@@ -27,6 +28,11 @@ const nextConfig: NextConfig = {
       {
         // Stable URLs, changing JSON — never immutable
         source: "/r/:path*",
+        headers: [...revalidateImmediately],
+      },
+      {
+        // Gallery thumbs keep stable filenames; bust sticky browser cache after re-shot
+        source: "/chart/:path*",
         headers: [...revalidateImmediately],
       },
       // Proven on next start: static docs defaulted to s-maxage=31536000.

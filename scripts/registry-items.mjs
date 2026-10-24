@@ -1088,21 +1088,6 @@ export const registryItems = [
     ],
   },
   {
-    name: "chart-area",
-    type: "registry:chart",
-    title: "Area chart",
-    description: "A simple area chart.",
-    dependencies: ["lucide-react", "recharts"],
-    registryDependencies: ["card"],
-    files: [
-      {
-        path: "registry/charts/area/chart-area.tsx",
-        type: "registry:component",
-        target: "components/charts/chart-area.tsx",
-      },
-    ],
-  },
-  {
     name: "chart-mock-data",
     type: "registry:lib",
     title: "Chart mock data",
@@ -4113,7 +4098,7 @@ export const registryItems = [
     ],
   },
   {
-    name: "tremor-area-charts",
+    name: "kpi-area-charts",
     type: "registry:chart",
     title: "KPI Area Charts",
     description:
@@ -4138,9 +4123,9 @@ export const registryItems = [
     },
     files: [
       {
-        path: "registry/charts/stock/tremor-area-charts.tsx",
+        path: "registry/charts/stock/kpi-area-charts.tsx",
         type: "registry:component",
-        target: "components/charts/tremor-area-charts.tsx",
+        target: "components/charts/kpi-area-charts.tsx",
       },
     ],
   },

@@ -3,6 +3,7 @@ import {
   ComponentVariantPreview,
   DocsApiProps,
   DocsInstallation,
+  DocsPageHeader,
 } from "@/components/docs"
 import { withVariantCode } from "@/lib/docs-variant-examples"
 
@@ -82,13 +83,16 @@ export default async function CardDocsPage() {
 
   return (
     <article className="mx-auto max-w-3xl space-y-10">
-      <header className="space-y-2">
-        <h1 className="text-h1">Card</h1>
-        <p className="leading-relaxed text-muted-foreground">
+      <DocsPageHeader
+        title="Card"
+        pathname="/docs/components/card"
+        description={
+          <p className="leading-relaxed text-muted-foreground">
           Displays a card with header, content, and footer — with size,
           spacing, edge-to-edge, and image layouts.
         </p>
-      </header>
+        }
+      />
 
       <section className="space-y-4">
         <ComponentVariantPreview examples={examples} />

@@ -1,1 +1,1 @@
-export { ChartAreaDefault } from "./chart-area"
+export { ChartAreaDefault } from "./chart-area-default"

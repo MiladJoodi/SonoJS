@@ -1,13 +1,19 @@
 import { notFound } from "next/navigation"
 
-import { ChartDemo, ChartPreview } from "@/components/charts"
+import {
+  ChartDemo,
+  ChartPreview,
+  ChartViewBackButton,
+  ChartViewPager,
+  chartGalleryHref,
+} from "@/components/charts"
 import {
   ComponentSource,
   DocsApiProps,
   DocsInstallation,
 } from "@/components/docs"
 import { chartUsageSnippets } from "@/lib/chart-demo-export-name"
-import { getChartEntry } from "@/lib/charts-catalog"
+import { getChartAdjacent, getChartEntry } from "@/lib/charts-catalog"
 import { readChartDemoSource } from "@/lib/read-chart-demo-source"
 
 export default async function ChartViewPage({
@@ -116,7 +122,7 @@ export default async function ChartViewPage({
     id === "stock-with-volume" ||
     id === "stock-multi-series" ||
     id === "stock-trendline" ||
-    id === "tremor-area-charts" ||
+    id === "kpi-area-charts" ||
     id === "realtime-mountain-chart" ||
     id === "realtime-candlestick" ||
     id === "heikin-ashi" ||
@@ -710,10 +716,10 @@ export default async function ChartViewPage({
                                                                                         name: "StockTrendline",
                                                                                         path: "@/components/charts/stock-trendline",
                                                                                       }
-                                                                                    : id === "tremor-area-charts"
+                                                                                    : id === "kpi-area-charts"
                                                                                       ? {
                                                                                           name: "KpiAreaCharts",
-                                                                                          path: "@/components/charts/tremor-area-charts",
+                                                                                          path: "@/components/charts/kpi-area-charts",
                                                                                         }
                                                                                       : id === "realtime-mountain-chart"
                                                                                         ? {
@@ -1323,14 +1329,34 @@ export default async function ChartViewPage({
                                                                                                                                               path: "@/components/charts/simple-bar-chart",
                                                                                                                                             }
 
+  const adjacent = getChartAdjacent(id)
+
   return (
     <article className="w-full max-w-none space-y-8">
-      <header>
-        <h1 className="text-h1">{entry.title}</h1>
+      <header className="space-y-2">
+        <div className="flex items-start justify-between gap-3">
+          <div className="flex min-w-0 flex-1 items-center gap-2">
+            <ChartViewBackButton href={chartGalleryHref(entry.category)} />
+            <h1
+              className="text-h1 min-w-0 flex-1 truncate"
+              title={entry.title}
+            >
+              {entry.title}
+            </h1>
+          </div>
+          <ChartViewPager
+            previous={adjacent.previous}
+            next={adjacent.next}
+            className="mt-1.5"
+          />
+        </div>
       </header>
 
       <section>
-        <ChartPreview fullWidth={entry.fullWidth}>
+        <ChartPreview
+          fullWidth={entry.fullWidth}
+          shotId={entry.status === "ported" ? entry.id : undefined}
+        >
           {entry.status === "ported" ? (
             <ChartDemo id={entry.id} />
           ) : (

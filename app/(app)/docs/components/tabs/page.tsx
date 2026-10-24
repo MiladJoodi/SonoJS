@@ -3,6 +3,7 @@ import {
   ComponentVariantPreview,
   DocsApiProps,
   DocsInstallation,
+  DocsPageHeader,
 } from "@/components/docs"
 import { withVariantCode } from "@/lib/docs-variant-examples"
 
@@ -74,14 +75,17 @@ export default async function TabsDocsPage() {
 
   return (
     <article className="mx-auto max-w-3xl space-y-10">
-      <header className="space-y-2">
-        <h1 className="text-h1">Tabs</h1>
-        <p className="leading-relaxed text-muted-foreground">
+      <DocsPageHeader
+        title="Tabs"
+        pathname="/docs/components/tabs"
+        description={
+          <p className="leading-relaxed text-muted-foreground">
           Layered sections of content displayed one at a time. Writing direction
           is passed to Radix so keyboard arrows flip in RTL; vertical line tabs
           place the active indicator on the inline-end edge.
         </p>
-      </header>
+        }
+      />
 
       <section className="space-y-4">
         <ComponentVariantPreview examples={examples} />

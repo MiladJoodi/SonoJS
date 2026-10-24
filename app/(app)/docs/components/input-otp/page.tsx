@@ -3,6 +3,7 @@ import {
   ComponentVariantPreview,
   DocsApiProps,
   DocsInstallation,
+  DocsPageHeader,
 } from "@/components/docs"
 import { withVariantCode } from "@/lib/docs-variant-examples"
 
@@ -91,9 +92,11 @@ export default async function InputOTPDocsPage() {
 
   return (
     <article className="mx-auto max-w-3xl space-y-10">
-      <header className="space-y-2">
-        <h1 className="text-h1">Input OTP</h1>
-        <p className="leading-relaxed text-muted-foreground">
+      <DocsPageHeader
+        title="Input OTP"
+        pathname="/docs/components/input-otp"
+        description={
+          <p className="leading-relaxed text-muted-foreground">
           Accessible one-time password input with copy-paste. Slots are{" "}
           <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
             size-8
@@ -104,7 +107,8 @@ export default async function InputOTPDocsPage() {
           </code>{" "}
           package.
         </p>
-      </header>
+        }
+      />
 
       <section className="space-y-4">
         <ComponentVariantPreview examples={examples} />

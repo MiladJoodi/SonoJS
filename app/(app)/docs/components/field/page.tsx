@@ -3,6 +3,7 @@ import {
   ComponentVariantPreview,
   DocsApiProps,
   DocsInstallation,
+  DocsPageHeader,
 } from "@/components/docs"
 import { withVariantCode } from "@/lib/docs-variant-examples"
 
@@ -85,14 +86,17 @@ export default async function FieldDocsPage() {
 
   return (
     <article className="mx-auto max-w-3xl space-y-10">
-      <header className="space-y-2">
-        <h1 className="text-h1">Field</h1>
-        <p className="leading-relaxed text-muted-foreground">
+      <DocsPageHeader
+        title="Field"
+        pathname="/docs/components/field"
+        description={
+          <p className="leading-relaxed text-muted-foreground">
           Combine labels, controls, and help text into accessible form fields
           and grouped inputs. Supports vertical, horizontal, and responsive
           orientations plus validation via `FieldError`.
         </p>
-      </header>
+        }
+      />
 
       <section className="space-y-4">
         <ComponentVariantPreview examples={examples} />

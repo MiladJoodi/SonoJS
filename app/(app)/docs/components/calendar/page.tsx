@@ -4,6 +4,7 @@ import {
   DocsApiProps,
   DocsInstallation,
   type VariantExample,
+  DocsPageHeader,
 } from "@/components/docs"
 import { highlightCode } from "@/lib/highlight-code"
 
@@ -461,13 +462,16 @@ export default async function CalendarDocsPage() {
 
   return (
     <article className="mx-auto max-w-3xl space-y-10">
-      <header className="space-y-2">
-        <h1 className="text-h1">Calendar</h1>
-        <p className="leading-relaxed text-muted-foreground">
+      <DocsPageHeader
+        title="Calendar"
+        pathname="/docs/components/calendar"
+        description={
+          <p className="leading-relaxed text-muted-foreground">
           A calendar component that allows users to select a date or a range of
           dates. Built on React DayPicker.
         </p>
-      </header>
+        }
+      />
 
       <section className="space-y-4">
         <ComponentVariantPreview examples={examples} />

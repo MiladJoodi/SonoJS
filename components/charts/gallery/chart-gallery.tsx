@@ -12,7 +12,6 @@ import {
 
 import { ChartExampleCard } from "./example-card"
 import {
-  CHART_THUMB_EAGER_COUNT,
   CHARTS_GALLERY_ACTIVE_EVENT,
   chartGallerySectionId,
 } from "./thumbs"
@@ -37,17 +36,6 @@ export function ChartGallery({
   categories?: readonly ChartCategory[]
 }) {
   const scrollToRef = React.useRef<ChartCategory | null>(null)
-
-  const eagerThumbIds = React.useMemo(() => {
-    const ids = new Set<string>()
-    for (const category of categories) {
-      for (const entry of getChartsByCategory(category)) {
-        if (ids.size >= CHART_THUMB_EAGER_COUNT) return ids
-        ids.add(entry.id)
-      }
-    }
-    return ids
-  }, [categories])
 
   const scrollSectionIntoView = React.useCallback(
     (id: ChartCategory, behavior: ScrollBehavior = "smooth") => {
@@ -181,9 +169,6 @@ export function ChartGallery({
                   id={entry.id}
                   title={entry.title}
                   status={entry.status}
-                  loading={
-                    eagerThumbIds.has(entry.id) ? "eager" : "lazy"
-                  }
                 />
               ))}
             </div>

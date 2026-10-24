@@ -3,6 +3,7 @@ import {
   ComponentVariantPreview,
   DocsApiProps,
   DocsInstallation,
+  DocsPageHeader,
 } from "@/components/docs"
 import { withVariantCode } from "@/lib/docs-variant-examples"
 
@@ -67,13 +68,16 @@ export default async function BubbleDocsPage() {
 
   return (
     <article className="mx-auto max-w-3xl space-y-10">
-      <header className="space-y-2">
-        <h1 className="text-h1">Bubble</h1>
-        <p className="leading-relaxed text-muted-foreground">
+      <DocsPageHeader
+        title="Bubble"
+        pathname="/docs/components/bubble"
+        description={
+          <p className="leading-relaxed text-muted-foreground">
           Displays conversational content in a message bubble — variants,
           alignment, grouping, reactions, and polymorphic link/button content.
         </p>
-      </header>
+        }
+      />
 
       <section className="space-y-3">
         <ComponentVariantPreview examples={examples} />

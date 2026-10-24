@@ -18,6 +18,7 @@ import {
   RadarIcon,
   SunIcon,
   TagsIcon,
+  TargetIcon,
 } from "lucide-react"
 
 export type ChartKind = "classic" | "gallery"
@@ -120,7 +121,7 @@ export const CHART_FEATURED_IDS = new Set([
   "stock-trendline",
   "asset-returns",
   "monthly-savings",
-  "tremor-area-charts",
+  "kpi-area-charts",
   "realtime-mountain-chart",
   "realtime-candlestick",
   "heikin-ashi",
@@ -291,7 +292,7 @@ export const GALLERY_ORDER_BY_CATEGORY: Record<string, readonly string[]> = {
     "stock-with-volume",
     "stock-multi-series",
     "stock-trendline",
-    "tremor-area-charts",
+    "kpi-area-charts",
     "realtime-mountain-chart",
     "realtime-candlestick",
     "heikin-ashi",
@@ -400,7 +401,7 @@ export const CHART_CATEGORY_ICONS: Record<ChartCategory, LucideIcon> = {
   pie: PieChartIcon,
   radar: HexagonIcon,
   "radial-bar": RadarIcon,
-  radial: RadarIcon,
+  radial: TargetIcon,
   treemap: LayoutGridIcon,
   sunburst: SunIcon,
   tooltip: MessageSquareIcon,
@@ -659,7 +660,7 @@ export const chartsCatalog: ChartsCatalogEntry[] = [
   { id: "stock-ohlc", category: "stock", kind: "gallery", title: "Stock Ohlc", status: "ported", featured: true },
   { id: "stock-trendline", category: "stock", kind: "gallery", title: "Stock Trendline", status: "ported", featured: true },
   { id: "stock-with-volume", category: "stock", kind: "gallery", title: "Stock With Volume", status: "ported", featured: true },
-  { id: "tremor-area-charts", category: "stock", kind: "gallery", title: "KPI Area Charts", status: "ported", featured: true },
+  { id: "kpi-area-charts", category: "stock", kind: "gallery", title: "KPI Area Charts", status: "ported", featured: true },
   { id: "volume-profile", category: "stock", kind: "gallery", title: "Volume Profile", status: "ported", featured: true },
   { id: "bundle-size-sunburst", category: "sunburst", kind: "gallery", title: "Bundle Size Sunburst", status: "ported", featured: true },
   { id: "sunburst-chart-theme-colors", category: "sunburst", kind: "gallery", title: "Sunburst Chart Theme Colors", status: "ported", featured: true },
@@ -705,6 +706,24 @@ export function isChartCategory(value: string): value is ChartCategory {
 
 export function chartViewHref(id: string) {
   return `/charts/view/${id}`
+}
+
+/** Flat gallery order (categories × demos) for prev/next on chart view pages. */
+export function getChartFlatExamples() {
+  return CHART_CATEGORIES.flatMap((category) => getChartsByCategory(category))
+}
+
+export function getChartAdjacent(id: string): {
+  previous: ChartsCatalogEntry | undefined
+  next: ChartsCatalogEntry | undefined
+} {
+  const flat = getChartFlatExamples()
+  const index = flat.findIndex((item) => item.id === id)
+  if (index < 0) return { previous: undefined, next: undefined }
+  return {
+    previous: index > 0 ? flat[index - 1] : undefined,
+    next: index < flat.length - 1 ? flat[index + 1] : undefined,
+  }
 }
 
 export function chartCategoryHref(category: string) {

@@ -1,5 +1,7 @@
 export { ChartDemo } from "./chart-demo"
 export { ChartPreview } from "./chart-preview"
+export { ChartViewBackButton } from "./chart-view-back-button"
+export { ChartViewPager } from "./chart-view-pager"
 export {
   ChartExampleCard,
   ChartGallery,
@@ -8,3 +10,5 @@ export {
   chartGallerySectionId,
   chartThumbSrc,
 } from "./gallery"
+/** TEMP — remove after regenerating gallery thumbs. */
+export { ChartShotButton } from "./thumb-export"

@@ -5,6 +5,7 @@ import {
   ComponentVariantPreview,
   DocsApiProps,
   DocsInstallation,
+  DocsPageHeader,
 } from "@/components/docs"
 import { withVariantCode } from "@/lib/docs-variant-examples"
 
@@ -90,9 +91,11 @@ export default async function SelectDocsPage() {
 
   return (
     <article className="mx-auto max-w-3xl space-y-10">
-      <header className="space-y-2">
-        <h1 className="text-h1">Select</h1>
-        <p className="leading-relaxed text-muted-foreground">
+      <DocsPageHeader
+        title="Select"
+        pathname="/docs/components/select"
+        description={
+          <p className="leading-relaxed text-muted-foreground">
           Displays a list of options triggered by a button. Content defaults to{" "}
           <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
             align=&quot;start&quot;
@@ -110,7 +113,8 @@ export default async function SelectDocsPage() {
           </Link>
           .
         </p>
-      </header>
+        }
+      />
 
       <section className="space-y-4">
         <ComponentVariantPreview examples={examples} />

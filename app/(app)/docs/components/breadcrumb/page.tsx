@@ -4,6 +4,7 @@ import {
   DocsApiProps,
   DocsInstallation,
   type VariantExample,
+  DocsPageHeader,
 } from "@/components/docs"
 import { highlightCode } from "@/lib/highlight-code"
 
@@ -354,12 +355,15 @@ export default async function BreadcrumbDocsPage() {
 
   return (
     <article className="mx-auto max-w-3xl space-y-10">
-      <header className="space-y-2">
-        <h1 className="text-h1">Breadcrumb</h1>
-        <p className="leading-relaxed text-muted-foreground">
+      <DocsPageHeader
+        title="Breadcrumb"
+        pathname="/docs/components/breadcrumb"
+        description={
+          <p className="leading-relaxed text-muted-foreground">
           Displays the path to the current resource using a hierarchy of links.
         </p>
-      </header>
+        }
+      />
 
       <section className="space-y-4">
         <ComponentVariantPreview examples={examples} />

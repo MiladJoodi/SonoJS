@@ -59,20 +59,24 @@ const GROUP_LABELS: Record<string, string> = {
 /**
  * Regional sales share (%) — three levels (region → channel → site).
  * Totals 100; EN names.
+ *
+ * Child names must be unique across the whole tree: Recharts keys sectors as
+ * `sunburst-sector-${name}-${siblingIndex}` into one flat array, so repeated
+ * labels like "Online" under North/South/West collide in React.
  */
 const DEMO_CHILDREN: SunburstChartBranch[] = [
   {
     name: "North",
     value: 40,
     children: [
-      { name: "In-store", value: 16 },
-      { name: "Online", value: 14 },
+      { name: "N In-store", value: 16 },
+      { name: "N Online", value: 14 },
       {
-        name: "Warehouse",
+        name: "N Warehouse",
         value: 10,
         children: [
-          { name: "Central", value: 6 },
-          { name: "Local", value: 4 },
+          { name: "N Central", value: 6 },
+          { name: "N Local", value: 4 },
         ],
       },
     ],
@@ -81,24 +85,24 @@ const DEMO_CHILDREN: SunburstChartBranch[] = [
     name: "South",
     value: 22,
     children: [
-      { name: "In-store", value: 12 },
-      { name: "Online", value: 10 },
+      { name: "S In-store", value: 12 },
+      { name: "S Online", value: 10 },
     ],
   },
   {
     name: "East",
     value: 20,
     children: [
-      { name: "Storefront", value: 11 },
-      { name: "Warehouse", value: 9 },
+      { name: "E Storefront", value: 11 },
+      { name: "E Warehouse", value: 9 },
     ],
   },
   {
     name: "West",
     value: 18,
     children: [
-      { name: "In-store", value: 10 },
-      { name: "Online", value: 8 },
+      { name: "W In-store", value: 10 },
+      { name: "W Online", value: 8 },
     ],
   },
 ]

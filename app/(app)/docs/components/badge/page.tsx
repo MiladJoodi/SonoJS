@@ -4,6 +4,7 @@ import {
   DocsApiProps,
   DocsInstallation,
   type VariantExample,
+  DocsPageHeader,
 } from "@/components/docs"
 import { highlightCode } from "@/lib/highlight-code"
 
@@ -164,13 +165,16 @@ export default async function BadgeDocsPage() {
 
   return (
     <article className="mx-auto max-w-3xl space-y-10">
-      <header className="space-y-2">
-        <h1 className="text-h1">Badge</h1>
-        <p className="leading-relaxed text-muted-foreground">
+      <DocsPageHeader
+        title="Badge"
+        pathname="/docs/components/badge"
+        description={
+          <p className="leading-relaxed text-muted-foreground">
           Small status labels for counts, categories, and inline metadata —
           with variants, icons, and link composition.
         </p>
-      </header>
+        }
+      />
 
       <section className="space-y-4">
         <ComponentVariantPreview examples={examples} />

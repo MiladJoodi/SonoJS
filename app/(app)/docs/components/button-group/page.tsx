@@ -4,6 +4,7 @@ import {
   DocsApiProps,
   DocsInstallation,
   type VariantExample,
+  DocsPageHeader,
 } from "@/components/docs"
 import { highlightCode } from "@/lib/highlight-code"
 
@@ -626,13 +627,16 @@ export default async function ButtonGroupDocsPage() {
 
   return (
     <article className="mx-auto max-w-3xl space-y-10">
-      <header className="space-y-2">
-        <h1 className="text-h1">Button Group</h1>
-        <p className="leading-relaxed text-muted-foreground">
+      <DocsPageHeader
+        title="Button Group"
+        pathname="/docs/components/button-group"
+        description={
+          <p className="leading-relaxed text-muted-foreground">
           A container that groups related buttons together with consistent
           styling.
         </p>
-      </header>
+        }
+      />
 
       <section className="space-y-4">
         <ComponentVariantPreview examples={examples} />

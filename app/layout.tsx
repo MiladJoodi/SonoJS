@@ -51,7 +51,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <PreviewDirectionProvider>
-            <TooltipProvider>
+            <TooltipProvider delayDuration={400}>
               {children}
               <DocsToaster />
             </TooltipProvider>

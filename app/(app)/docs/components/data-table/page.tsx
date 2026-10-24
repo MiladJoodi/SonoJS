@@ -4,6 +4,7 @@ import {
   ComponentSource,
   ComponentVariantPreview,
   DocsInstallation,
+  DocsPageHeader,
 } from "@/components/docs"
 import { withVariantCode } from "@/lib/docs-variant-examples"
 
@@ -160,9 +161,11 @@ export default async function DataTableDocsPage() {
 
   return (
     <article className="mx-auto max-w-3xl space-y-10">
-      <header className="space-y-2">
-        <h1 className="text-h1">Data Table</h1>
-        <p className="leading-relaxed text-muted-foreground">
+      <DocsPageHeader
+        title="Data Table"
+        pathname="/docs/components/data-table"
+        description={
+          <p className="leading-relaxed text-muted-foreground">
           Powerful tables and datagrids built by composing SonoJS{" "}
           <Link
             href="/docs/components/table"
@@ -190,7 +193,8 @@ export default async function DataTableDocsPage() {
           </code>{" "}
           for emails.
         </p>
-      </header>
+        }
+      />
 
       <section className="space-y-4">
         <ComponentVariantPreview examples={examples} />

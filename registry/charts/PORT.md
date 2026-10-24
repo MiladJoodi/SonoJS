@@ -278,7 +278,7 @@ Locked Simple Bar chrome is the **default starting point**. Chart-type or custom
 
 **stock-trendline:** type-required symbol card + close Line + dashed SMA (`--chart-2`); `sma()` from stock-shared; no neon; metric scrubber (close vs SMA).
 
-**tremor-area-charts:** install id kept; display title **KPI Area Charts** (no third-party brand). KPI minis + hero dual area + stacked/share; navy×orange×amber; no neon; scrub KPI/month.
+**kpi-area-charts:** **KPI Area Charts**. KPI minis + hero dual area + stacked/share; navy×orange×amber; no neon; scrub KPI/month.
 
 **realtime-mountain-chart:** live sliding-window area; type-required play/pause + `PulsingLiveDot` (respects `prefers-reduced-motion`); no neon; metric scrubber.
 
@@ -489,7 +489,7 @@ Locked Simple Bar chrome is the **default starting point**. Chart-type or custom
    - Gallery: `FarsiUI/apps/v4/examples/chart/<category>/<slug>.tsx` (or synced `…/charts/gallery/<category>/`)
 2. **Target path**
    - Authoring (classic + gallery) → `registry/charts/<category>/<slug>.tsx`
-     (e.g. `bar/simple-bar-chart.tsx`, `area/chart-area.tsx`; optional `index.ts`)
+     (e.g. `bar/simple-bar-chart.tsx`, `area/chart-area-default.tsx`; optional `index.ts`)
    - Shared helpers → `registry/charts/_lib/`
    - Preview images → `public/charts/` (only with that demo)
    - **Consumer install (`target`):** `components/charts/<slug>.tsx` (flat);

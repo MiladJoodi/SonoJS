@@ -298,3 +298,22 @@ export function getDocsCurrentLabel(pathname: string): string | null {
   if (pathname.startsWith("/docs")) return "Docs"
   return null
 }
+
+/** Components group in sidebar order — for title prev/next. */
+export function getDocsComponentPages(): DocsNavPage[] {
+  const group = docsNav.groups.find((g) => g.title === "Components")
+  return group?.pages ?? []
+}
+
+export function getDocsAdjacent(pathname: string): {
+  previous: DocsNavPage | undefined
+  next: DocsNavPage | undefined
+} {
+  const pages = getDocsComponentPages()
+  const index = pages.findIndex((page) => page.href === pathname)
+  if (index < 0) return { previous: undefined, next: undefined }
+  return {
+    previous: index > 0 ? pages[index - 1] : undefined,
+    next: index < pages.length - 1 ? pages[index + 1] : undefined,
+  }
+}

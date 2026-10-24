@@ -111,7 +111,7 @@ const CHART_DEMO_SOURCES: Record<string, string> = {
   "stock-with-volume": "stock/stock-with-volume.tsx",
   "stock-multi-series": "stock/stock-multi-series.tsx",
   "stock-trendline": "stock/stock-trendline.tsx",
-  "tremor-area-charts": "stock/tremor-area-charts.tsx",
+  "kpi-area-charts": "stock/kpi-area-charts.tsx",
   "realtime-mountain-chart": "stock/realtime-mountain-chart.tsx",
   "realtime-candlestick": "stock/realtime-candlestick.tsx",
   "heikin-ashi": "stock/heikin-ashi.tsx",

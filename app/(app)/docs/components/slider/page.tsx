@@ -3,6 +3,7 @@ import {
   ComponentVariantPreview,
   DocsApiProps,
   DocsInstallation,
+  DocsPageHeader,
 } from "@/components/docs"
 import { withVariantCode } from "@/lib/docs-variant-examples"
 
@@ -51,14 +52,17 @@ export default async function SliderDocsPage() {
 
   return (
     <article className="mx-auto max-w-3xl space-y-10">
-      <header className="space-y-2">
-        <h1 className="text-h1">Slider</h1>
-        <p className="leading-relaxed text-muted-foreground">
+      <DocsPageHeader
+        title="Slider"
+        pathname="/docs/components/slider"
+        description={
+          <p className="leading-relaxed text-muted-foreground">
           An input where the user selects a value from within a given range.
           Writing direction is passed through to Radix so the axis, range fill,
           and keyboard arrows follow LTR/RTL — toggle direction in the preview.
         </p>
-      </header>
+        }
+      />
 
       <section className="space-y-4">
         <ComponentVariantPreview examples={examples} />

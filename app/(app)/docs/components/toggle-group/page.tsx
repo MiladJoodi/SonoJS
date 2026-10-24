@@ -5,6 +5,7 @@ import {
   ComponentVariantPreview,
   DocsApiProps,
   DocsInstallation,
+  DocsPageHeader,
 } from "@/components/docs"
 import { withVariantCode } from "@/lib/docs-variant-examples"
 
@@ -85,9 +86,11 @@ export default async function ToggleGroupDocsPage() {
 
   return (
     <article className="mx-auto max-w-3xl space-y-10">
-      <header className="space-y-2">
-        <h1 className="text-h1">Toggle Group</h1>
-        <p className="leading-relaxed text-muted-foreground">
+      <DocsPageHeader
+        title="Toggle Group"
+        pathname="/docs/components/toggle-group"
+        description={
+          <p className="leading-relaxed text-muted-foreground">
           A set of two-state buttons that can be toggled on or off. Built on{" "}
           <Link
             href="/docs/components/toggle"
@@ -97,7 +100,8 @@ export default async function ToggleGroupDocsPage() {
           </Link>
           . Connected items use logical start/end radius and borders for RTL.
         </p>
-      </header>
+        }
+      />
 
       <section className="space-y-4">
         <ComponentVariantPreview examples={examples} />

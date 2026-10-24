@@ -3,6 +3,7 @@ import {
   ComponentVariantPreview,
   DocsApiProps,
   DocsInstallation,
+  DocsPageHeader,
 } from "@/components/docs"
 import { withVariantCode } from "@/lib/docs-variant-examples"
 
@@ -117,16 +118,19 @@ export default async function TraceDocsPage() {
 
   return (
     <article className="mx-auto max-w-3xl space-y-10">
-      <header className="space-y-2">
-        <h1 className="text-h1">Trace</h1>
-        <p className="leading-relaxed text-muted-foreground">
+      <DocsPageHeader
+        title="Trace"
+        pathname="/docs/components/trace"
+        description={
+          <p className="leading-relaxed text-muted-foreground">
           Rows for agent steps — reasoning, tool calls, sources, and plans.
           Each line shares the same shape; wrap it in a collapsible, link, or
           overlay trigger to add behavior. Use Message for replies and Marker
           for notes between turns. Layout uses logical properties so nested
           borders and chevrons stay correct in RTL.
         </p>
-      </header>
+        }
+      />
 
       <section className="space-y-4">
         <ComponentVariantPreview examples={examples} />

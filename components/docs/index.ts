@@ -13,5 +13,8 @@ export {
 export { ComponentVariantPreview } from "./variant-preview"
 export type { VariantExample } from "./variant-preview"
 export { DocsApiProps } from "./api-props"
+export { DocsAdjacentPager } from "./docs-adjacent-pager"
+export type { DocsAdjacentLink } from "./docs-adjacent-pager"
 export { DocsInstallation } from "./docs-installation"
 export { DocsInstallationTabs } from "./docs-installation-tabs"
+export { DocsPageHeader } from "./docs-page-header"

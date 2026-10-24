@@ -426,10 +426,11 @@ export const registry = {
         "Recharts helpers — ChartContainer, tooltip, legend, and theme CSS variables.",
     },
     {
-      name: "chart-area",
+      name: "chart-area-default",
       type: "registry:chart" as const,
-      title: "Area chart",
-      description: "A simple area chart.",
+      title: "Area Default",
+      description:
+        "Classic single-series area with locked gallery chrome.",
     },
     {
       name: "simple-bar-chart",

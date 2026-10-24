@@ -5,6 +5,7 @@ import {
   ComponentVariantPreview,
   DocsApiProps,
   DocsInstallation,
+  DocsPageHeader,
 } from "@/components/docs"
 import { withVariantCode } from "@/lib/docs-variant-examples"
 
@@ -61,9 +62,11 @@ export default async function ToggleDocsPage() {
 
   return (
     <article className="mx-auto max-w-3xl space-y-10">
-      <header className="space-y-2">
-        <h1 className="text-h1">Toggle</h1>
-        <p className="leading-relaxed text-muted-foreground">
+      <DocsPageHeader
+        title="Toggle"
+        pathname="/docs/components/toggle"
+        description={
+          <p className="leading-relaxed text-muted-foreground">
           A two-state button that can be on or off. For toolbars, see{" "}
           <Link
             href="/docs/components/toggle-group"
@@ -73,7 +76,8 @@ export default async function ToggleDocsPage() {
           </Link>
           .
         </p>
-      </header>
+        }
+      />
 
       <section className="space-y-4">
         <ComponentVariantPreview examples={examples} />

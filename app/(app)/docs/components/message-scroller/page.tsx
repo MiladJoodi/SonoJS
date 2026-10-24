@@ -3,6 +3,7 @@ import {
   ComponentVariantPreview,
   DocsApiProps,
   DocsInstallation,
+  DocsPageHeader,
 } from "@/components/docs"
 import { withVariantCode } from "@/lib/docs-variant-examples"
 
@@ -85,15 +86,18 @@ export default async function MessageScrollerDocsPage() {
 
   return (
     <article className="mx-auto max-w-3xl space-y-10">
-      <header className="space-y-2">
-        <h1 className="text-h1">Message Scroller</h1>
-        <p className="leading-relaxed text-muted-foreground">
+      <DocsPageHeader
+        title="Message Scroller"
+        pathname="/docs/components/message-scroller"
+        description={
+          <p className="leading-relaxed text-muted-foreground">
           A chat transcript scroller for turn anchoring, follow-output while
           streaming, history prepend without jumps, and jump-to-message
           commands. Put it in a height-constrained parent — it fills available
           space.
         </p>
-      </header>
+        }
+      />
 
       <section className="space-y-4">
         <ComponentVariantPreview examples={examples} />

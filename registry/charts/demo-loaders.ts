@@ -136,7 +136,7 @@ export const chartDemoLoaders: Record<
   "stock-with-volume": () => import("./stock/stock-with-volume"),
   "stock-multi-series": () => import("./stock/stock-multi-series"),
   "stock-trendline": () => import("./stock/stock-trendline"),
-  "tremor-area-charts": () => import("./stock/tremor-area-charts"),
+  "kpi-area-charts": () => import("./stock/kpi-area-charts"),
   "realtime-mountain-chart": () => import("./stock/realtime-mountain-chart"),
   "realtime-candlestick": () => import("./stock/realtime-candlestick"),
   "heikin-ashi": () => import("./stock/heikin-ashi"),
