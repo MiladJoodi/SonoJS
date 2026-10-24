@@ -37,6 +37,7 @@ export function pieTooltipRow({
 
 type PayloadLike = {
   name?: unknown
+  value?: unknown
   color?: string
   dataKey?: unknown
   payload?: Record<string, unknown>
