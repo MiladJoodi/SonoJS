@@ -1353,10 +1353,7 @@ export default async function ChartViewPage({
       </header>
 
       <section>
-        <ChartPreview
-          fullWidth={entry.fullWidth}
-          shotId={entry.status === "ported" ? entry.id : undefined}
-        >
+        <ChartPreview fullWidth={entry.fullWidth}>
           {entry.status === "ported" ? (
             <ChartDemo id={entry.id} />
           ) : (

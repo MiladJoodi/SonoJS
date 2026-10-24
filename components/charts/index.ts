@@ -10,5 +10,3 @@ export {
   chartGallerySectionId,
   chartThumbSrc,
 } from "./gallery"
-/** TEMP — remove after regenerating gallery thumbs. */
-export { ChartShotButton } from "./thumb-export"
