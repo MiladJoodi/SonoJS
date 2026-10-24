@@ -112,12 +112,19 @@ function ChartDemoLoader({ load }: { load: () => Promise<ChartModule> }) {
     return <p className="text-sm text-destructive">{error}</p>
   }
 
-  const showDemo = Boolean(Demo && revealed)
+  // Narrow `Demo` in-branch — a derived `showDemo` boolean does not.
+  if (!Demo || !revealed) {
+    return (
+      <div className={cn(STAGE_CLASS, STAGE_LOADING_MIN)}>
+        <ChartDemoSplash active />
+      </div>
+    )
+  }
 
   return (
-    <div className={cn(STAGE_CLASS, !showDemo && STAGE_LOADING_MIN)}>
-      {showDemo ? <Demo /> : null}
-      <ChartDemoSplash active={!showDemo} />
+    <div className={STAGE_CLASS}>
+      <Demo />
+      <ChartDemoSplash active={false} />
     </div>
   )
 }
