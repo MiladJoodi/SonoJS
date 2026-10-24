@@ -226,12 +226,19 @@ function ChartRadarLabelCustom({
       const yNum = typeof y === "number" ? y : Number(y)
       const activeTick = liveScrubbing && index === liveIndex
       const dimmed = liveScrubbing && index !== liveIndex
+      const anchor =
+        textAnchor === "start" ||
+        textAnchor === "middle" ||
+        textAnchor === "end" ||
+        textAnchor === "inherit"
+          ? textAnchor
+          : undefined
 
       return (
         <text
           x={xNum}
           y={yNum + (index === 0 ? -10 : 0)}
-          textAnchor={textAnchor}
+          textAnchor={anchor}
           fontSize={13}
           fontWeight={500}
           fillOpacity={dimmed ? 0.4 : 1}

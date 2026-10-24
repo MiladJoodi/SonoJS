@@ -8,7 +8,6 @@ import {
   Cell,
   XAxis,
   YAxis,
-  type TooltipContentProps,
 } from "recharts"
 
 import { cn } from "@/lib/utils"
@@ -111,6 +110,20 @@ function pointTotal(point: CustomContentOfTooltipPoint) {
   return point.online + point.store
 }
 
+type MonthTooltipProps = {
+  active?: boolean
+  payload?: ReadonlyArray<{
+    type?: string
+    dataKey?: string | number
+    value?: number | string
+    color?: string
+  }>
+  label?: unknown
+  dir: "ltr" | "rtl"
+  locale: string
+  intros: Record<string, string>
+}
+
 function MonthTooltip({
   active,
   payload,
@@ -118,11 +131,7 @@ function MonthTooltip({
   dir,
   locale,
   intros,
-}: TooltipContentProps<number, string> & {
-  dir: "ltr" | "rtl"
-  locale: string
-  intros: Record<string, string>
-}) {
+}: MonthTooltipProps) {
   if (!active || !payload?.length) return null
 
   const key = String(label ?? "")
@@ -132,7 +141,7 @@ function MonthTooltip({
       dir={dir}
       className="rounded-xl border border-border/60 bg-background px-3 py-2 font-sans text-xs shadow-sm"
     >
-      <p className="mb-1 font-medium text-foreground">{label}</p>
+      <p className="mb-1 font-medium text-foreground">{key}</p>
       <p className="mb-2 leading-relaxed text-muted-foreground">
         {intros[key] ?? ""}
       </p>
@@ -354,7 +363,11 @@ function CustomContentOfTooltip({
   }
 
   const tooltipContent = React.useCallback(
-    (props: TooltipContentProps<number, string>) => (
+    (props: {
+      active?: boolean
+      payload?: MonthTooltipProps["payload"]
+      label?: unknown
+    }) => (
       <MonthTooltip {...props} dir={dir} locale={locale} intros={intros} />
     ),
     [dir, intros, locale]
@@ -455,7 +468,11 @@ function CustomContentOfTooltip({
               cursor={{
                 fill: "color-mix(in oklab, var(--foreground) 5%, transparent)",
               }}
-              content={tooltipContent}
+              content={
+                tooltipContent as React.ComponentProps<
+                  typeof ChartTooltip
+                >["content"]
+              }
             />
             <ChartLegend content={<ChartLegendContent />} />
             <Bar

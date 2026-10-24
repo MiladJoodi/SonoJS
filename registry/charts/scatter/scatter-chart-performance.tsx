@@ -262,22 +262,16 @@ function ScatterChartPerformance({
   )
 
   const onChartMouseMove = React.useCallback(
-    (chartState: {
-      activePayload?: ReadonlyArray<{
-        name?: string
-        payload?: ScatterPerformancePoint
-      }>
-    }) => {
+    (
+      _state: unknown,
+      event: React.MouseEvent<SVGGraphicsElement>
+    ) => {
       if (!scrub) return
-      const name = chartState.activePayload?.[0]?.name
-      if (!name) return
-      const idx = datasets.findIndex((s) => s.name === name)
-      if (idx < 0) return
       scrubbingRef.current = true
       setScrubbing(true)
-      setActiveIndex(idx)
+      setActiveIndex(indexFromClientX(event.clientX))
     },
-    [datasets, scrub]
+    [indexFromClientX, scrub]
   )
 
   const onChartMouseLeave = React.useCallback(() => {

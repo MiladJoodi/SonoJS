@@ -286,26 +286,16 @@ function MultipleYAxesScatterChart({
   )
 
   const onChartMouseMove = React.useCallback(
-    (chartState: {
-      activePayload?: ReadonlyArray<{
-        payload?: MultipleYAxesScatterPoint & { series?: SeriesKey }
-      }>
-    }) => {
+    (
+      _state: unknown,
+      event: React.MouseEvent<SVGGraphicsElement>
+    ) => {
       if (!scrub) return
-      const row = chartState.activePayload?.[0]?.payload
-      if (!row || row.x == null || row.y == null) return
-      const idx = flat.findIndex(
-        (p) =>
-          p.x === row.x &&
-          p.y === row.y &&
-          (row.series == null || p.series === row.series)
-      )
-      if (idx < 0) return
       scrubbingRef.current = true
       setScrubbing(true)
-      setActiveIndex(idx)
+      setActiveIndex(indexFromClientX(event.clientX))
     },
-    [flat, scrub]
+    [indexFromClientX, scrub]
   )
 
   const onChartMouseLeave = React.useCallback(() => {

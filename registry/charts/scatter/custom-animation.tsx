@@ -382,21 +382,16 @@ function CustomAnimation({
   )
 
   const onChartMouseMove = React.useCallback(
-    (chartState: {
-      activePayload?: ReadonlyArray<{ payload?: CustomAnimationPoint }>
-    }) => {
+    (
+      _state: unknown,
+      event: React.MouseEvent<SVGGraphicsElement>
+    ) => {
       if (!scrub) return
-      const row = chartState.activePayload?.[0]?.payload
-      if (!row || row.x == null || row.y == null) return
-      const idx = plotData.findIndex(
-        (p) => p.x === row.x && p.y === row.y && p.z === row.z
-      )
-      if (idx < 0) return
       scrubbingRef.current = true
       setScrubbing(true)
-      setActiveIndex(idx)
+      setActiveIndex(indexFromClientX(event.clientX))
     },
-    [plotData, scrub]
+    [indexFromClientX, scrub]
   )
 
   const onChartMouseLeave = React.useCallback(() => {
