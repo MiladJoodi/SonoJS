@@ -281,16 +281,19 @@ function ChartsSidebarBody({ className }: { className?: string }) {
                     })
                   : filtered.map((group) => {
                       const folderActive = routeCategoryId === group.id
-                      const open =
-                        openGroups[group.id] ?? Boolean(normalized)
+                      const isSearching = Boolean(normalized)
+                      const open = isSearching
+                        ? true
+                        : (openGroups[group.id] ?? false)
 
                       return (
                         <SidebarMenuItem key={group.id}>
                           <Collapsible
                             open={open}
-                            onOpenChange={(next) =>
+                            onOpenChange={(next) => {
+                              if (isSearching) return
                               setGroupOpen(group.id, next)
-                            }
+                            }}
                             className="group/charts-folder"
                           >
                             <CollapsibleTrigger

@@ -1,35 +1,65 @@
 import Link from "next/link"
 
-import { blocksNav } from "@/lib/blocks-nav"
+import { blocksNav, getBlocksStats } from "@/lib/blocks-nav"
+import { cn } from "@/lib/utils"
 
 export default function BlocksIndexPage() {
+  const stats = getBlocksStats()
+
   return (
-    <article className="mx-auto max-w-2xl space-y-6">
-      <h1 className="text-h1">Blocks</h1>
-      <p className="text-muted-foreground">
-        Ready-made page sections. One example is registered below.
-      </p>
-      <ul className="space-y-4">
+    <article className="mx-auto max-w-3xl space-y-8">
+      <header className="space-y-3">
+        <h1 className="text-h1">Blocks</h1>
+        <p className="leading-relaxed text-muted-foreground">
+          Ready-made sections and screens for SonoJS apps. Most entries are
+          under development; Login is available now.
+        </p>
+        <p className="text-sm text-muted-foreground">
+          {stats.categories} categories · {stats.total} blocks ·{" "}
+          {stats.ready} ready · {stats.comingSoon} under development
+        </p>
+      </header>
+
+      <div className="space-y-8">
         {blocksNav.map((group) => (
-          <li key={group.title} className="space-y-2">
-            <h2 className="text-sm font-medium text-muted-foreground">
-              {group.title}
-            </h2>
-            <ul className="space-y-1">
-              {group.items.map((item) => (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    className="cursor-pointer font-medium text-primary underline-offset-4 hover:underline"
-                  >
-                    {item.title}
-                  </Link>
-                </li>
-              ))}
+          <section key={group.title} className="space-y-3">
+            <div className="flex items-baseline justify-between gap-3">
+              <h2 className="text-h4">{group.title}</h2>
+              <span className="text-xs text-muted-foreground tabular-nums">
+                {group.items.length}
+              </span>
+            </div>
+            <ul className="grid gap-1 sm:grid-cols-2">
+              {group.items.map((item) => {
+                const ready = item.status === "ready"
+                return (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      className={cn(
+                        "flex cursor-pointer items-center justify-between gap-2 rounded-md px-2 py-1.5 text-sm transition-colors hover:bg-muted",
+                        ready
+                          ? "font-medium text-foreground"
+                          : "text-muted-foreground"
+                      )}
+                    >
+                      <span className="truncate">{item.title}</span>
+                      <span
+                        className={cn(
+                          "shrink-0 text-[0.6875rem] tracking-wide uppercase",
+                          ready ? "text-primary" : "text-muted-foreground/80"
+                        )}
+                      >
+                        {ready ? "Ready" : "Soon"}
+                      </span>
+                    </Link>
+                  </li>
+                )
+              })}
             </ul>
-          </li>
+          </section>
         ))}
-      </ul>
+      </div>
     </article>
   )
 }

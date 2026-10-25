@@ -9,14 +9,28 @@ export type DocsNavGroup = {
   pages: DocsNavPage[]
 }
 
+/** Guide docs under `/docs` (not components). Keep lean. */
 export const docsNav: {
   top: DocsNavPage[]
   groups: DocsNavGroup[]
 } = {
   top: [
     { title: "Introduction", href: "/docs" },
+    { title: "Installation", href: "/docs/installation", featured: true },
+    { title: "Guide", href: "/docs/guide" },
+    { title: "CLI", href: "/docs/cli" },
+    { title: "MCP Server", href: "/docs/mcp", featured: true },
     { title: "Direction (RTL / LTR)", href: "/docs/direction", featured: true },
   ],
+  groups: [],
+}
+
+/** Component reference under `/docs/components`. */
+export const componentsNav: {
+  top: DocsNavPage[]
+  groups: DocsNavGroup[]
+} = {
+  top: [{ title: "All Components", href: "/docs/components" }],
   groups: [
     {
       title: "Components",
@@ -285,7 +299,23 @@ export const docsNav: {
   ],
 }
 
+export function isComponentsDocsPath(pathname: string): boolean {
+  return pathname === "/docs/components" || pathname.startsWith("/docs/components/")
+}
+
 export function getDocsCurrentLabel(pathname: string): string | null {
+  if (isComponentsDocsPath(pathname)) {
+    for (const page of componentsNav.top) {
+      if (page.href === pathname) return page.title
+    }
+    for (const group of componentsNav.groups) {
+      for (const page of group.pages) {
+        if (page.href === pathname) return page.title
+      }
+    }
+    return "Components"
+  }
+
   for (const page of docsNav.top) {
     if (page.href === pathname) return page.title
   }
@@ -294,22 +324,27 @@ export function getDocsCurrentLabel(pathname: string): string | null {
       if (page.href === pathname) return page.title
     }
   }
-  if (pathname.startsWith("/docs/components")) return "Components"
   if (pathname.startsWith("/docs")) return "Docs"
   return null
 }
 
 /** Components group in sidebar order — for title prev/next. */
 export function getDocsComponentPages(): DocsNavPage[] {
-  const group = docsNav.groups.find((g) => g.title === "Components")
+  const group = componentsNav.groups.find((g) => g.title === "Components")
   return group?.pages ?? []
+}
+
+export function getDocsGuidePages(): DocsNavPage[] {
+  return docsNav.top
 }
 
 export function getDocsAdjacent(pathname: string): {
   previous: DocsNavPage | undefined
   next: DocsNavPage | undefined
 } {
-  const pages = getDocsComponentPages()
+  const pages = isComponentsDocsPath(pathname)
+    ? getDocsComponentPages()
+    : getDocsGuidePages()
   const index = pages.findIndex((page) => page.href === pathname)
   if (index < 0) return { previous: undefined, next: undefined }
   return {

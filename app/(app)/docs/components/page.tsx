@@ -1,9 +1,8 @@
 import { ComponentsDirectory } from "@/components/docs/components-directory"
-import { docsNav } from "@/lib/docs-nav"
+import { getDocsComponentPages } from "@/lib/docs-nav"
 
 export default function ComponentsIndexPage() {
-  const components =
-    docsNav.groups.find((g) => g.title === "Components")?.pages ?? []
+  const components = getDocsComponentPages()
 
   const items = components.map((page) => ({
     title: page.title,

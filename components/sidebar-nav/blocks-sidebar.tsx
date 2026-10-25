@@ -46,7 +46,9 @@ import {
 function BlocksSidebarBody({ className }: { className?: string }) {
   const pathname = usePathname()
   const [query, setQuery] = React.useState("")
+  const [openMap, setOpenMap] = React.useState<Record<string, boolean>>({})
   const normalized = normalizeNavSearch(query)
+  const isSearching = normalized.length > 0
 
   const filtered = blocksNav
     .map((group) => ({
@@ -94,50 +96,67 @@ function BlocksSidebarBody({ className }: { className?: string }) {
                     </Link>
                   </SidebarMenuItem>
                 ) : null}
-                {filtered.map((group) => (
-                  <SidebarMenuItem key={group.title}>
-                    <Collapsible
-                      defaultOpen
-                      className="group/blocks-folder"
-                    >
-                      <CollapsibleTrigger
-                        className={SIDEBAR_GROUP_TRIGGER_CLASS}
+                {filtered.map((group) => {
+                  const groupActive = group.items.some(
+                    (item) => pathname === item.href
+                  )
+                  const open = isSearching
+                    ? true
+                    : (openMap[group.title] ?? groupActive)
+                  return (
+                    <SidebarMenuItem key={group.title}>
+                      <Collapsible
+                        open={open}
+                        onOpenChange={(next) => {
+                          if (isSearching) return
+                          setOpenMap((prev) => ({
+                            ...prev,
+                            [group.title]: next,
+                          }))
+                        }}
+                        className="group/blocks-folder"
                       >
-                        <span className="min-w-0 flex-1 truncate text-start">
-                          {group.title}
-                        </span>
-                        <span className={SIDEBAR_GROUP_COUNT_CLASS}>
-                          {group.items.length}
-                        </span>
-                        <SidebarNavChevron group="blocks-folder" />
-                      </CollapsibleTrigger>
-                      <CollapsibleContent
-                        className={SIDEBAR_COLLAPSIBLE_CONTENT_CLASS}
-                      >
-                        <div className={SIDEBAR_NESTED_RAIL_CLASS}>
-                          {group.items.map((item) => {
-                            const active = pathname === item.href
-                            return (
-                              <Link
-                                key={item.href}
-                                href={item.href}
-                                prefetch={false}
-                                data-active={active || undefined}
-                                className={cn(
-                                  SIDEBAR_NESTED_ITEM_CLASS,
-                                  sidebarItemStateClass(active)
-                                )}
-                              >
-                                <SidebarNavBullet featured={item.featured} />
-                                <SidebarNavLabel label={item.title} />
-                              </Link>
-                            )
-                          })}
-                        </div>
-                      </CollapsibleContent>
-                    </Collapsible>
-                  </SidebarMenuItem>
-                ))}
+                        <CollapsibleTrigger
+                          className={SIDEBAR_GROUP_TRIGGER_CLASS}
+                        >
+                          <span className="min-w-0 flex-1 truncate text-start">
+                            {group.title}
+                          </span>
+                          <span className={SIDEBAR_GROUP_COUNT_CLASS}>
+                            {group.items.length}
+                          </span>
+                          <SidebarNavChevron group="blocks-folder" />
+                        </CollapsibleTrigger>
+                        <CollapsibleContent
+                          className={SIDEBAR_COLLAPSIBLE_CONTENT_CLASS}
+                        >
+                          <div className={SIDEBAR_NESTED_RAIL_CLASS}>
+                            {group.items.map((item) => {
+                              const active = pathname === item.href
+                              return (
+                                <Link
+                                  key={item.href}
+                                  href={item.href}
+                                  prefetch={false}
+                                  data-active={active || undefined}
+                                  className={cn(
+                                    SIDEBAR_NESTED_ITEM_CLASS,
+                                    sidebarItemStateClass(active)
+                                  )}
+                                >
+                                  <SidebarNavBullet
+                                    featured={item.featured}
+                                  />
+                                  <SidebarNavLabel label={item.title} />
+                                </Link>
+                              )
+                            })}
+                          </div>
+                        </CollapsibleContent>
+                      </Collapsible>
+                    </SidebarMenuItem>
+                  )
+                })}
               </SidebarMenu>
             </SidebarGroupContent>
           </SidebarGroup>

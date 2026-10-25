@@ -9,6 +9,7 @@ import {
   LayoutGridIcon,
   LayoutTemplateIcon,
   MenuIcon,
+  ShapesIcon,
   XIcon,
   type LucideIcon,
 } from "lucide-react"
@@ -27,6 +28,7 @@ const NAV_ICONS: Record<string, LucideIcon> = {
   "/docs/components": LayoutGridIcon,
   "/blocks": LayoutTemplateIcon,
   "/charts": ChartAreaIcon,
+  "https://icons.sonojs.com": ShapesIcon,
 }
 
 export function MobileNav({
@@ -80,21 +82,43 @@ export function MobileNav({
           {items.map((item) => {
             const Icon = NAV_ICONS[item.href]
             const isActive = !item.external && item.href === activeHref
+            const className = cn(
+              "flex h-10 cursor-pointer items-center gap-2.5 rounded-md px-2 text-sm font-medium text-foreground/90 transition-colors hover:bg-muted hover:text-foreground",
+              isActive && "bg-primary/10 text-primary"
+            )
+            const content = (
+              <>
+                {Icon ? (
+                  <Icon className="size-4 shrink-0 opacity-70" aria-hidden />
+                ) : null}
+                {item.label}
+              </>
+            )
+
+            if (item.external) {
+              return (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  target="_blank"
+                  rel="nofollow noopener noreferrer"
+                  onClick={() => setOpen(false)}
+                  className={className}
+                >
+                  {content}
+                </a>
+              )
+            }
+
             return (
               <Link
                 key={item.href}
                 href={item.href}
                 prefetch={false}
                 onClick={() => setOpen(false)}
-                className={cn(
-                  "flex h-10 cursor-pointer items-center gap-2.5 rounded-md px-2 text-sm font-medium text-foreground/90 transition-colors hover:bg-muted hover:text-foreground",
-                  isActive && "bg-primary/10 text-primary"
-                )}
+                className={className}
               >
-                {Icon ? (
-                  <Icon className="size-4 shrink-0 opacity-70" aria-hidden />
-                ) : null}
-                {item.label}
+                {content}
               </Link>
             )
           })}
