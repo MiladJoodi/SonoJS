@@ -1,6 +1,6 @@
 ---
 description: SonoJS folder layout — group files per component, block, chart, or major section
-globs: registry/**/*,packages/ui/**/*,app/(app)/docs/**/*,components/**/*
+globs: registry/**/*,packages/ui/**/*,app/(app)/docs/**/*,app/(app)/tools/**/*,components/**/*
 alwaysApply: true
 ---
 
@@ -19,10 +19,14 @@ registry/
       sizes.tsx
       index.ts          # re-exports for the set
   blocks/
-    login-01/
-      page.tsx
-      components/
-        login-form.tsx
+    ai-agents/            # catalog category
+      agent-run-timeline/
+        agent-run-timeline.tsx
+    authentication/
+      login-01/
+        page.tsx
+        components/
+          login-form.tsx
   charts/
     _lib/                 # shared chart helpers
     bar/                  # by category (gallery + classic)
@@ -40,7 +44,7 @@ Rules:
 1. **Charts:** author under `registry/charts/<category>/<slug>.tsx`. Folder = catalog category (`bar`, `area`, …). Consumer install stays flat: `components/charts/<slug>.tsx`.
 2. **One folder per UI item name** (`button`, `login-01`). Folder name matches the registry / docs slug.
 3. **Examples** live under `registry/examples/<component>/`, not `registry/examples/<component>-<variant>.tsx` at the root of `examples/`.
-4. **Blocks** use a dedicated folder per block; keep all files for that item inside it.
+4. **Blocks** live under `registry/blocks/<category>/<name>/`. Category matches the docs catalog (`ai-agents`, `authentication`, …). Keep every file for that block inside its folder.
 5. Prefer a small `index.ts` barrel when the folder has multiple entry files consumers import together.
 6. Shared utilities stay in `lib/`, `hooks/`, or `packages/ui/src/lib` — not inside a random component folder unless they are private to that item.
 
@@ -68,6 +72,18 @@ app/(app)/docs/<topic>/page.tsx
 
 Docs for a component live under that component’s folder, not as loose files under `docs/components/`.
 
+## Tools
+
+```
+app/(app)/tools/page.tsx
+app/(app)/tools/<slug>/page.tsx
+components/tools/<slug>/
+  index.ts
+lib/tools-nav.ts
+```
+
+One folder per tool. The slug matches the route, the `components/tools/<slug>/` folder, and the `href` in `lib/tools-nav.ts`. Shared sidebar chrome stays in `components/sidebar-nav/`.
+
 ## Site chrome (`components/`)
 
 **Rule:** if a feature needs **more than one file**, put it in `components/<feature>/` with an `index.ts` barrel. Do not leave related siblings flat next to unrelated chrome.
@@ -79,7 +95,8 @@ components/
   docs/           # ComponentSource, CopyButton, variant preview, API props
   direction/      # DirectionProvider + DirectionToggle
   site-header/    # header, main-nav, mobile-nav, mode-switcher
-  sidebar-nav/    # docs/charts/blocks sidebars + shared nav UI/search
+  sidebar-nav/    # docs/charts/blocks/tools sidebars + shared nav UI/search
+  tools/          # one folder per tool (`<slug>/index.ts`)
   theme-provider.tsx          # single-file OK
   site-footer.tsx             # single-file OK
   scroll-to-top.tsx           # single-file OK
@@ -93,6 +110,7 @@ Single-file utilities may stay flat. The moment a second related file appears, p
 - [ ] No new flat `examples/<name>-*.tsx` next to unrelated examples
 - [ ] Block/chart/ui sources sit under `…/<name>/`
 - [ ] Docs chrome with 2+ files sits under `components/<feature>/`
+- [ ] Each tool sits under `app/(app)/tools/<slug>/` and `components/tools/<slug>/`
 - [ ] Imports and `scripts/registry-items.mjs` paths updated
 - [ ] Barrel `index.ts` when it clarifies the public entry
 

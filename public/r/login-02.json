@@ -1,0 +1,48 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "login-02",
+  "type": "registry:block",
+  "title": "Social Login",
+  "description": "Sign in with Google or Facebook, or with email. Includes remember me and password recovery.",
+  "registryDependencies": [
+    "button",
+    "checkbox",
+    "input",
+    "label",
+    "separator"
+  ],
+  "files": [
+    {
+      "path": "blocks/login-02/components/login-form.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport { FacebookIcon } from \"@/blocks/login-02/icons/facebook\"\nimport { GoogleIcon } from \"@/blocks/login-02/icons/google\"\nimport { cn } from \"@/lib/utils\"\nimport { Button } from \"@/components/ui/button\"\nimport { Checkbox } from \"@/components/ui/checkbox\"\nimport { Input } from \"@/components/ui/input\"\nimport { Label } from \"@/components/ui/label\"\nimport { Separator } from \"@/components/ui/separator\"\n\nexport default function LoginForm({\n  className,\n  ...props\n}: React.ComponentProps<\"div\">) {\n  return (\n    <div className={cn(\"flex w-full flex-col gap-6\", className)} {...props}>\n      <header className=\"space-y-1.5 text-start\">\n        <h1 className=\"text-h3 text-foreground\">Sign in</h1>\n        <p dir=\"ltr\" className=\"text-end text-sm text-muted-foreground\">\n          Use Google, Facebook, or your email.\n        </p>\n      </header>\n\n      <div className=\"grid gap-2\">\n        <Button type=\"button\" variant=\"outline\" className=\"h-[46px] w-full\">\n          <GoogleIcon />\n          Continue with Google\n        </Button>\n        <Button type=\"button\" variant=\"outline\" className=\"h-[46px] w-full\">\n          <FacebookIcon />\n          Continue with Facebook\n        </Button>\n      </div>\n\n      <div className=\"flex items-center gap-3\">\n        <Separator className=\"flex-1\" />\n        <span className=\"text-xs text-muted-foreground\">or</span>\n        <Separator className=\"flex-1\" />\n      </div>\n\n      <form\n        className=\"flex flex-col gap-4\"\n        onSubmit={(event) => event.preventDefault()}\n      >\n        <div className=\"grid gap-2\">\n          <Label htmlFor=\"social-email\">Email</Label>\n          <Input\n            id=\"social-email\"\n            type=\"email\"\n            autoComplete=\"email\"\n            placeholder=\"name@example.com\"\n            required\n            className=\"h-[46px]\"\n          />\n        </div>\n        <div className=\"grid gap-2\">\n          <Label htmlFor=\"social-password\">Password</Label>\n          <Input\n            id=\"social-password\"\n            type=\"password\"\n            autoComplete=\"current-password\"\n            required\n            className=\"h-[46px]\"\n          />\n        </div>\n        <div className=\"flex items-center gap-2\">\n          <Checkbox id=\"social-remember\" />\n          <Label htmlFor=\"social-remember\" className=\"font-normal\">\n            Remember me\n          </Label>\n          <a\n            href=\"#\"\n            className=\"ms-auto cursor-pointer text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline\"\n          >\n            <span dir=\"ltr\">Forgot password?</span>\n          </a>\n        </div>\n        <Button type=\"submit\" className=\"h-[46px] w-full\">\n          Sign in\n        </Button>\n      </form>\n\n      <p dir=\"ltr\" className=\"text-center text-sm text-muted-foreground\">\n        New here?{\" \"}\n        <a\n          href=\"#\"\n          className=\"cursor-pointer font-medium text-foreground underline-offset-4 hover:underline\"\n        >\n          Create an account\n        </a>\n      </p>\n    </div>\n  )\n}\n",
+      "target": "blocks/login-02/components/login-form.tsx"
+    },
+    {
+      "path": "blocks/login-02/icons/google.tsx",
+      "type": "registry:component",
+      "content": "import { cn } from \"@/lib/utils\"\n\nconst mark = [\n  {\n    fill: \"#4285F4\",\n    d: \"M22.501 12.2331C22.501 11.3698 22.4296 10.7398 22.2748 10.0864H12.2153V13.983H18.12C18.001 14.9514 17.3582 16.4097 15.9296 17.3897L15.9096 17.5202L19.0902 19.9349L19.3106 19.9564C21.3343 18.1247 22.501 15.4297 22.501 12.2331Z\",\n  },\n  {\n    fill: \"#34A853\",\n    d: \"M12.2147 22.5001C15.1075 22.5001 17.5361 21.5667 19.3099 19.9567L15.929 17.39C15.0242 18.0083 13.8099 18.44 12.2147 18.44C9.38142 18.44 6.97669 16.6083 6.11947 14.0767L5.99382 14.0871L2.68656 16.5955L2.64331 16.7133C4.40519 20.1433 8.02423 22.5001 12.2147 22.5001Z\",\n  },\n  {\n    fill: \"#FBBC05\",\n    d: \"M6.11997 14.0767C5.89379 13.4234 5.76289 12.7233 5.76289 12C5.76289 11.2767 5.89379 10.5767 6.10807 9.92337L6.10208 9.78423L2.75337 7.2356L2.64381 7.28667C1.91765 8.71002 1.50098 10.3084 1.50098 12C1.50098 13.6917 1.91765 15.29 2.64381 16.7133L6.11997 14.0767Z\",\n  },\n  {\n    fill: \"#EB4335\",\n    d: \"M12.2148 5.55997C14.2267 5.55997 15.5838 6.41163 16.3576 7.12335L19.3814 4.23C17.5243 2.53834 15.1076 1.5 12.2148 1.5C8.02426 1.5 4.4052 3.85665 2.64331 7.28662L6.10759 9.92332C6.97672 7.39166 9.38146 5.55997 12.2148 5.55997Z\",\n  },\n] as const\n\nexport function GoogleIcon({\n  className,\n  ...props\n}: React.ComponentProps<\"svg\">) {\n  return (\n    <svg\n      viewBox=\"0 0 24 24\"\n      aria-hidden=\"true\"\n      className={cn(\"size-5\", className)}\n      {...props}\n    >\n      {mark.map((part) => (\n        <path key={part.fill} d={part.d} fill={part.fill} />\n      ))}\n    </svg>\n  )\n}\n",
+      "target": "blocks/login-02/icons/google.tsx"
+    },
+    {
+      "path": "blocks/login-02/icons/facebook.tsx",
+      "type": "registry:component",
+      "content": "import { cn } from \"@/lib/utils\"\n\nconst facebookPath =\n  \"M12 22.5C17.799 22.5 22.5 17.799 22.5 12C22.5 6.20101 17.799 1.5 12 1.5C6.20101 1.5 1.5 6.20101 1.5 12C1.5 17.1752 5.24405 21.4759 10.1712 22.3413V15.2112H7.5V12.2476H10.1712V9.98883C10.1712 7.4197 11.7411 6 14.1452 6C15.2959 6 16.5 6.20024 16.5 6.20024V8.7233H15.1726C13.8657 8.7233 13.4589 9.51428 13.4589 10.3252V12.2476H16.3767L15.9103 15.2112H13.4589V22.3759C12.9525 22.4534 12.4351 22.4952 11.9084 22.4996C11.9389 22.4999 11.9694 22.5 12 22.5Z\"\n\nexport function FacebookIcon({\n  className,\n  ...props\n}: React.ComponentProps<\"svg\">) {\n  return (\n    <svg\n      viewBox=\"0 0 24 24\"\n      aria-hidden=\"true\"\n      className={cn(\"size-5\", className)}\n      {...props}\n    >\n      <path fillRule=\"evenodd\" clipRule=\"evenodd\" d={facebookPath} fill=\"#0866FF\" />\n    </svg>\n  )\n}\n",
+      "target": "blocks/login-02/icons/facebook.tsx"
+    },
+    {
+      "path": "blocks/login-02/icons/google.svg",
+      "type": "registry:file",
+      "content": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M22.501 12.2331C22.501 11.3698 22.4296 10.7398 22.2748 10.0864H12.2153V13.983H18.12C18.001 14.9514 17.3582 16.4097 15.9296 17.3897L15.9096 17.5202L19.0902 19.9349L19.3106 19.9564C21.3343 18.1247 22.501 15.4297 22.501 12.2331Z\" fill=\"#4285F4\"></path><path d=\"M12.2147 22.5001C15.1075 22.5001 17.5361 21.5667 19.3099 19.9567L15.929 17.39C15.0242 18.0083 13.8099 18.44 12.2147 18.44C9.38142 18.44 6.97669 16.6083 6.11947 14.0767L5.99382 14.0871L2.68656 16.5955L2.64331 16.7133C4.40519 20.1433 8.02423 22.5001 12.2147 22.5001Z\" fill=\"#34A853\"></path><path d=\"M6.11997 14.0767C5.89379 13.4234 5.76289 12.7233 5.76289 12C5.76289 11.2767 5.89379 10.5767 6.10807 9.92337L6.10208 9.78423L2.75337 7.2356L2.64381 7.28667C1.91765 8.71002 1.50098 10.3084 1.50098 12C1.50098 13.6917 1.91765 15.29 2.64381 16.7133L6.11997 14.0767Z\" fill=\"#FBBC05\"></path><path d=\"M12.2148 5.55997C14.2267 5.55997 15.5838 6.41163 16.3576 7.12335L19.3814 4.23C17.5243 2.53834 15.1076 1.5 12.2148 1.5C8.02426 1.5 4.4052 3.85665 2.64331 7.28662L6.10759 9.92332C6.97672 7.39166 9.38146 5.55997 12.2148 5.55997Z\" fill=\"#EB4335\"></path></svg>",
+      "target": "blocks/login-02/icons/google.svg"
+    },
+    {
+      "path": "blocks/login-02/icons/facebook.svg",
+      "type": "registry:file",
+      "content": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M12 22.5C17.799 22.5 22.5 17.799 22.5 12C22.5 6.20101 17.799 1.5 12 1.5C6.20101 1.5 1.5 6.20101 1.5 12C1.5 17.1752 5.24405 21.4759 10.1712 22.3413V15.2112H7.5V12.2476H10.1712V9.98883C10.1712 7.4197 11.7411 6 14.1452 6C15.2959 6 16.5 6.20024 16.5 6.20024V8.7233H15.1726C13.8657 8.7233 13.4589 9.51428 13.4589 10.3252V12.2476H16.3767L15.9103 15.2112H13.4589V22.3759C12.9525 22.4534 12.4351 22.4952 11.9084 22.4996C11.9389 22.4999 11.9694 22.5 12 22.5Z\" fill=\"#0866FF\"></path></svg>",
+      "target": "blocks/login-02/icons/facebook.svg"
+    }
+  ],
+  "version": "0.1.0+aaef5559c54a",
+  "generatedAt": "2026-10-25T21:21:07.280Z"
+}

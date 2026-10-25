@@ -1055,20 +1055,240 @@ export const registryItems = [
     ],
   },
   {
-    name: "login-01",
+    name: "agent-run-timeline",
     type: "registry:block",
-    title: "Login",
-    description: "A simple email/password login form.",
-    registryDependencies: ["button"],
+    title: "Agent Run Timeline",
+    description:
+      "A live plan for an agent run: step status, progress, and a review before it starts.",
+    dependencies: ["lucide-react"],
+    registryDependencies: ["button", "collapsible", "kbd", "popover"],
     files: [
       {
-        path: "registry/blocks/login-01/page.tsx",
-        type: "registry:page",
-        target: "app/login/page.tsx",
+        path: "registry/blocks/ai-agents/agent-run-timeline/agent-run-timeline.tsx",
+        type: "registry:component",
+        target: "components/blocks/agent-run-timeline.tsx",
+      },
+    ],
+  },
+  {
+    name: "login-01",
+    type: "registry:block",
+    title: "login-01",
+    description: "A minimal email and password sign-in, with Google and Apple.",
+    registryDependencies: ["button", "input", "label", "separator"],
+    files: [
+      {
+        path: "registry/blocks/authentication/login-01/components/login-form.tsx",
+        type: "registry:component",
+        target: "blocks/login-01/components/login-form.tsx",
       },
       {
-        path: "registry/blocks/login-01/components/login-form.tsx",
+        path: "registry/icons/google.tsx",
         type: "registry:component",
+        target: "blocks/login-01/icons/google.tsx",
+      },
+      {
+        path: "registry/icons/apple.tsx",
+        type: "registry:component",
+        target: "blocks/login-01/icons/apple.tsx",
+      },
+      {
+        path: "registry/icons/google.svg",
+        type: "registry:file",
+        target: "blocks/login-01/icons/google.svg",
+      },
+      {
+        path: "registry/icons/apple.svg",
+        type: "registry:file",
+        target: "blocks/login-01/icons/apple.svg",
+      },
+    ],
+  },
+  {
+    name: "login-02",
+    type: "registry:block",
+    title: "Social Login",
+    description:
+      "Sign in with Google or Facebook, or with email. Includes remember me and password recovery.",
+    registryDependencies: ["button", "checkbox", "input", "label", "separator"],
+    files: [
+      {
+        path: "registry/blocks/authentication/login-02/components/login-form.tsx",
+        type: "registry:component",
+        target: "blocks/login-02/components/login-form.tsx",
+      },
+      {
+        path: "registry/icons/google.tsx",
+        type: "registry:component",
+        target: "blocks/login-02/icons/google.tsx",
+      },
+      {
+        path: "registry/icons/facebook.tsx",
+        type: "registry:component",
+        target: "blocks/login-02/icons/facebook.tsx",
+      },
+      {
+        path: "registry/icons/google.svg",
+        type: "registry:file",
+        target: "blocks/login-02/icons/google.svg",
+      },
+      {
+        path: "registry/icons/facebook.svg",
+        type: "registry:file",
+        target: "blocks/login-02/icons/facebook.svg",
+      },
+    ],
+  },
+  {
+    name: "login-03",
+    type: "registry:block",
+    title: "Passwordless Login",
+    description:
+      "Email-first sign-in with a link, plus Google, Facebook, and X. No password.",
+    registryDependencies: ["button", "input", "label", "separator"],
+    files: [
+      {
+        path: "registry/blocks/authentication/login-03/components/login-form.tsx",
+        type: "registry:component",
+        target: "blocks/login-03/components/login-form.tsx",
+      },
+      {
+        path: "registry/icons/google.tsx",
+        type: "registry:component",
+        target: "blocks/login-03/icons/google.tsx",
+      },
+      {
+        path: "registry/icons/facebook.tsx",
+        type: "registry:component",
+        target: "blocks/login-03/icons/facebook.tsx",
+      },
+      {
+        path: "registry/icons/x.tsx",
+        type: "registry:component",
+        target: "blocks/login-03/icons/x.tsx",
+      },
+      {
+        path: "registry/icons/google.svg",
+        type: "registry:file",
+        target: "blocks/login-03/icons/google.svg",
+      },
+      {
+        path: "registry/icons/facebook.svg",
+        type: "registry:file",
+        target: "blocks/login-03/icons/facebook.svg",
+      },
+      {
+        path: "registry/icons/x.svg",
+        type: "registry:file",
+        target: "blocks/login-03/icons/x.svg",
+      },
+    ],
+  },
+  {
+    name: "signup-03",
+    type: "registry:block",
+    title: "signup-03",
+    description:
+      "Split sign-up: a rounded photo beside Google, Apple, or first name, last name, email, and password.",
+    registryDependencies: ["button", "input", "label", "separator"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/authentication/signup-03/components/signup-form.tsx",
+        type: "registry:component",
+        target: "blocks/signup-03/components/signup-form.tsx",
+      },
+      {
+        path: "registry/icons/google.tsx",
+        type: "registry:component",
+        target: "blocks/signup-03/icons/google.tsx",
+      },
+      {
+        path: "registry/icons/apple.tsx",
+        type: "registry:component",
+        target: "blocks/signup-03/icons/apple.tsx",
+      },
+      {
+        path: "registry/icons/google.svg",
+        type: "registry:file",
+        target: "blocks/signup-03/icons/google.svg",
+      },
+      {
+        path: "registry/icons/apple.svg",
+        type: "registry:file",
+        target: "blocks/signup-03/icons/apple.svg",
+      },
+    ],
+  },
+  {
+    name: "signup-04",
+    type: "registry:block",
+    title: "signup-04",
+    description:
+      "Email-first sign-up with Google and Apple, beside a branded panel.",
+    registryDependencies: ["button", "input", "label", "separator"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/authentication/signup-04/components/signup-form.tsx",
+        type: "registry:component",
+        target: "blocks/signup-04/components/signup-form.tsx",
+      },
+      {
+        path: "registry/icons/google.tsx",
+        type: "registry:component",
+        target: "blocks/signup-04/icons/google.tsx",
+      },
+      {
+        path: "registry/icons/apple.tsx",
+        type: "registry:component",
+        target: "blocks/signup-04/icons/apple.tsx",
+      },
+      {
+        path: "registry/icons/google.svg",
+        type: "registry:file",
+        target: "blocks/signup-04/icons/google.svg",
+      },
+      {
+        path: "registry/icons/apple.svg",
+        type: "registry:file",
+        target: "blocks/signup-04/icons/apple.svg",
+      },
+    ],
+  },
+  {
+    name: "signup-05",
+    type: "registry:block",
+    title: "signup-05",
+    description:
+      "Sign-up with name, email, and password, or Google and Apple, beside a quote on a photo.",
+    registryDependencies: ["button", "input", "label", "separator"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/authentication/signup-05/components/signup-form.tsx",
+        type: "registry:component",
+        target: "blocks/signup-05/components/signup-form.tsx",
+      },
+      {
+        path: "registry/icons/google.tsx",
+        type: "registry:component",
+        target: "blocks/signup-05/icons/google.tsx",
+      },
+      {
+        path: "registry/icons/apple.tsx",
+        type: "registry:component",
+        target: "blocks/signup-05/icons/apple.tsx",
+      },
+      {
+        path: "registry/icons/google.svg",
+        type: "registry:file",
+        target: "blocks/signup-05/icons/google.svg",
+      },
+      {
+        path: "registry/icons/apple.svg",
+        type: "registry:file",
+        target: "blocks/signup-05/icons/apple.svg",
       },
     ],
   },

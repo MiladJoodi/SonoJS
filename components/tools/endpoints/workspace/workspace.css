@@ -1,0 +1,111 @@
+.endpoints-workspace {
+  position: relative;
+  background: var(--background);
+  --success: #0b6b63;
+  --warning: #b45309;
+  --surface-hover: rgb(20 21 26 / 0.06);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  /* One quiet step off the page. Cards stay white; chrome uses the site muted token. */
+  --ep-well: var(--background);
+  --ep-card: var(--background);
+  --ep-header: var(--muted);
+  --ep-line: color-mix(in oklab, var(--border) 80%, transparent);
+}
+
+.endpoints-workspace .ep-well {
+  background: var(--ep-well);
+}
+
+.endpoints-workspace .ep-panel {
+  background: var(--ep-card);
+  border: 1px solid var(--ep-line);
+  border-radius: var(--radius-surface);
+  box-shadow: 0 1px 2px rgb(24 24 27 / 0.04);
+}
+
+.endpoints-workspace .ep-chrome {
+  background: var(--ep-header);
+}
+
+.endpoints-workspace .ep-field {
+  background: var(--ep-card);
+  border: 1px solid var(--ep-line);
+}
+
+/* One joined control: method, URL, and Send share the outer radius. */
+.endpoints-workspace .ep-field > .relative,
+.endpoints-workspace .ep-field [data-slot="input-clearable"] {
+  display: flex;
+  height: 100%;
+  min-height: 0;
+  min-width: 0;
+  flex: 1;
+  align-items: stretch;
+}
+
+.endpoints-workspace .ep-field [data-slot="select-trigger"],
+.endpoints-workspace .ep-field [data-slot="input"],
+.endpoints-workspace .ep-field > button {
+  height: 100%;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.endpoints-workspace .ep-field [data-slot="select-trigger"],
+.endpoints-workspace .ep-field [data-slot="input"] {
+  border: 0;
+  background: transparent;
+}
+
+.endpoints-workspace .ep-field [data-slot="select-trigger"] {
+  width: 5.75rem;
+  flex-shrink: 0;
+  padding-block: 0;
+  border-inline-end: 1px solid var(--ep-line);
+}
+
+.endpoints-workspace .ep-field [data-slot="select-trigger"]:hover {
+  background: var(--muted);
+}
+
+.endpoints-workspace .ep-field [data-slot="select-trigger"]:focus-visible,
+.endpoints-workspace .ep-field [data-slot="input"]:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+.endpoints-workspace .ep-field > button {
+  border-width: 0;
+}
+
+.dark .endpoints-workspace {
+  --success: #45b89a;
+  --warning: #e6ae2e;
+  --surface-hover: rgb(255 255 255 / 0.06);
+  --ep-well: var(--background);
+  --ep-card: var(--card);
+  --ep-header: color-mix(in oklab, var(--muted) 40%, var(--card));
+  --ep-line: color-mix(in oklab, white 10%, transparent);
+}
+
+@keyframes request-progress-slide {
+  0% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(400%);
+  }
+}
+
+.endpoints-workspace .request-progress {
+  animation: request-progress-slide 1.05s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .endpoints-workspace .request-progress {
+    animation: none;
+    width: 100%;
+    opacity: 0.7;
+  }
+}

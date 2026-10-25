@@ -4,7 +4,6 @@ import {
   SIDEBAR_LAYOUT_MAIN_CLASS,
   SIDEBAR_LAYOUT_PROVIDER_CLASS,
 } from "@/components/sidebar-nav"
-import { cn } from "@/lib/utils"
 import { SidebarProvider } from "@sonojs/ui/components/sidebar"
 
 export default function ChartsLayout({
@@ -15,10 +14,10 @@ export default function ChartsLayout({
   return (
     <div className="flex flex-1 flex-col">
       <ChartsListIndex />
-      <div className="container-wrapper flex flex-1 flex-col">
+      <div className="workspace-shell flex flex-1 flex-col">
         <SidebarProvider className={SIDEBAR_LAYOUT_PROVIDER_CLASS}>
           <ChartsSidebar />
-          <div className={cn(SIDEBAR_LAYOUT_MAIN_CLASS, "max-w-none")}>
+          <div data-workspace-main="" className={SIDEBAR_LAYOUT_MAIN_CLASS}>
             {children}
           </div>
         </SidebarProvider>

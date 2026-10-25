@@ -85,7 +85,7 @@ export default async function MessageScrollerDocsPage() {
   const examples = await withVariantCode(exampleDefs)
 
   return (
-    <article className="mx-auto max-w-3xl space-y-10">
+    <article className="w-full min-w-0 space-y-10">
       <DocsPageHeader
         title="Message Scroller"
         pathname="/docs/components/message-scroller"

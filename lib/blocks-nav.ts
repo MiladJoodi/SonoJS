@@ -59,7 +59,11 @@ export const blocksNav: BlocksNavGroup[] = [
       "AI Response Actions",
       "Streaming Response",
       "Prompt Library",
-    ].map((title) => block("ai-agents", title)),
+    ].map((title) =>
+      title === "Agent Run Timeline"
+        ? block("ai-agents", title, { status: "ready", featured: true })
+        : block("ai-agents", title)
+    ),
   },
   group("Application Layouts", "application-layouts", [
     "App Shell",
@@ -130,11 +134,11 @@ export const blocksNav: BlocksNavGroup[] = [
     items: [
       {
         title: "Login",
-        href: "/blocks/login-01",
+        href: "/blocks/authentication/login",
         featured: true,
         status: "ready",
       },
-      block("authentication", "Signup"),
+      block("authentication", "Signup", { status: "ready" }),
       block("authentication", "Forgot Password"),
       block("authentication", "Reset Password"),
       block("authentication", "OTP Verification"),

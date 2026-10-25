@@ -10,6 +10,7 @@ import {
   LayoutTemplateIcon,
   MenuIcon,
   ShapesIcon,
+  WrenchIcon,
   XIcon,
   type LucideIcon,
 } from "lucide-react"
@@ -28,6 +29,7 @@ const NAV_ICONS: Record<string, LucideIcon> = {
   "/docs/components": LayoutGridIcon,
   "/blocks": LayoutTemplateIcon,
   "/charts": ChartAreaIcon,
+  "/tools": WrenchIcon,
   "https://icons.sonojs.com": ShapesIcon,
 }
 

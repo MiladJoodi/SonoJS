@@ -31,21 +31,19 @@ export function SiteHeader() {
           <Link
             href="/"
             prefetch={false}
-            className="me-2 flex shrink-0 cursor-pointer items-center outline-none focus-visible:rounded-md focus-visible:ring-2 focus-visible:ring-ring"
+            className="me-2 flex shrink-0 cursor-pointer items-center gap-2 outline-none focus-visible:rounded-md focus-visible:ring-2 focus-visible:ring-ring"
           >
-            {/* Solid Sono + outlined JS (transparent fill). */}
-            <span
+            <img
+              src="/images/logos/logo.svg"
+              alt=""
               aria-hidden
-              className="inline-flex h-7 items-stretch overflow-hidden rounded-md border-[1.5px] border-primary bg-transparent"
-            >
-              <span className="flex items-center bg-primary pe-2.5 ps-2.5 text-[length:var(--text-secondary)] font-semibold leading-none tracking-tight text-primary-foreground">
-                Sono
-              </span>
-              <span className="flex items-center bg-transparent pe-2.5 ps-1.5 text-[length:var(--text-secondary)] font-semibold leading-none tracking-tight text-primary">
-                JS
-              </span>
+              width={20}
+              height={22}
+              className="h-[22px] w-auto shrink-0"
+            />
+            <span className="text-sm font-bold leading-none tracking-tight text-foreground">
+              Sono
             </span>
-            <span className="sr-only">{siteConfig.name}</span>
           </Link>
           <MainNav items={siteConfig.navItems} className="hidden lg:flex" />
 

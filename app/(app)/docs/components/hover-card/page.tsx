@@ -56,7 +56,7 @@ export default async function HoverCardDocsPage() {
   const examples = await withVariantCode(exampleDefs)
 
   return (
-    <article className="mx-auto max-w-3xl space-y-10">
+    <article className="w-full min-w-0 space-y-10">
       <DocsPageHeader
         title="Hover Card"
         pathname="/docs/components/hover-card"

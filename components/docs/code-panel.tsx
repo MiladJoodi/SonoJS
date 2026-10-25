@@ -9,11 +9,13 @@ export function CodePanel({
   code,
   html,
   className,
+  copyTooltip = true,
 }: {
   title?: string
   code: string
   html: string
   className?: string
+  copyTooltip?: boolean
 }) {
   return (
     <div className={cn("sono-code-block rounded-none border-0", className)}>
@@ -21,7 +23,7 @@ export function CodePanel({
         <div className="font-mono text-[14px] font-normal text-[color:var(--code-header-fg)]">
           {title}
         </div>
-        <CopyButton value={code} />
+        <CopyButton value={code} tooltip={copyTooltip} />
       </div>
       <div
         className="sono-code-shiki no-scrollbar max-h-72 overflow-auto font-mono text-[14px] leading-[1.65]"

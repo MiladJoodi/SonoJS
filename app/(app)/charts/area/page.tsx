@@ -16,7 +16,7 @@ export default function ChartAreaCategoryPage() {
     <article className="w-full max-w-none space-y-8">
       <header className="space-y-2">
         <h1 className="text-h1">{meta.title}</h1>
-        <p className="max-w-2xl text-muted-foreground">{meta.description}</p>
+        <p className="text-muted-foreground">{meta.description}</p>
       </header>
 
       <ul className="divide-y divide-border/80 rounded-xl border border-border/80">

@@ -12,6 +12,7 @@ export function InstallNeedsHint({
   registry = [],
   npm = [],
   className,
+  copyTooltip = true,
 }: {
   label?: string
   /** Registry items → `npx @sonojs/ui@latest add …` */
@@ -19,6 +20,7 @@ export function InstallNeedsHint({
   /** npm packages → `npm i …` (e.g. lucide-react, react-day-picker) */
   npm?: string[]
   className?: string
+  copyTooltip?: boolean
 }) {
   const registryNames = [...new Set(registry.filter(Boolean))].sort()
   const npmNames = [...new Set(npm.filter(Boolean))].sort()
@@ -41,11 +43,12 @@ export function InstallNeedsHint({
       )}
     >
       <span className="shrink-0">{label}</span>
-      <code className="min-w-0 flex-1 truncate rounded-md border border-border/70 bg-background px-1.5 py-0.5 font-mono text-[11.5px] text-foreground sm:flex-none">
+      <code className="min-w-0 max-w-full flex-1 truncate rounded-md border border-border/70 bg-background px-1.5 py-0.5 font-mono text-[11.5px] text-foreground">
         {command}
       </code>
       <CopyButton
         value={command}
+        tooltip={copyTooltip}
         className="text-muted-foreground hover:bg-muted hover:text-foreground"
       />
     </div>

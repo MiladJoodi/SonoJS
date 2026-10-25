@@ -7,7 +7,7 @@ export default function BlocksIndexPage() {
   const stats = getBlocksStats()
 
   return (
-    <article className="mx-auto max-w-3xl space-y-8">
+    <article className="w-full min-w-0 space-y-8">
       <header className="space-y-3">
         <h1 className="text-h1">Blocks</h1>
         <p className="leading-relaxed text-muted-foreground">
@@ -29,7 +29,7 @@ export default function BlocksIndexPage() {
                 {group.items.length}
               </span>
             </div>
-            <ul className="grid gap-1 sm:grid-cols-2">
+            <ul className="grid grid-cols-[repeat(auto-fill,minmax(min(100%,220px),1fr))] gap-1">
               {group.items.map((item) => {
                 const ready = item.status === "ready"
                 return (

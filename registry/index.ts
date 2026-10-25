@@ -416,6 +416,20 @@ export const registry = {
       title: "Login",
       description: "A simple email/password login form.",
     },
+    {
+      name: "login-02",
+      type: "registry:block" as const,
+      title: "Social Login",
+      description:
+        "Sign in with Google or Facebook, or with email. Includes remember me and password recovery.",
+    },
+    {
+      name: "login-03",
+      type: "registry:block" as const,
+      title: "Passwordless Login",
+      description:
+        "Email-first sign-in with a link, plus Google, Facebook, and X. No password.",
+    },
   ],
   charts: [
     {

@@ -164,7 +164,7 @@ export default async function BadgeDocsPage() {
   const examples = await getBadgeExamples()
 
   return (
-    <article className="mx-auto max-w-3xl space-y-10">
+    <article className="w-full min-w-0 space-y-10">
       <DocsPageHeader
         title="Badge"
         pathname="/docs/components/badge"

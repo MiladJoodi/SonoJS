@@ -9,7 +9,7 @@ export default function ChartsIndexPage() {
     <article className="w-full max-w-none space-y-6 md:space-y-8">
       <header className="space-y-2">
         <h1 className="text-h1">Charts</h1>
-        <p className="max-w-2xl text-muted-foreground">
+        <p className="text-muted-foreground">
           Browse every chart demo with a live thumbnail. Open a card for the
           interactive preview, install command, and source.
         </p>

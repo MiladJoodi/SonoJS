@@ -55,7 +55,7 @@ export default async function TextareaDocsPage() {
   const examples = await withVariantCode(exampleDefs)
 
   return (
-    <article className="mx-auto max-w-3xl space-y-10">
+    <article className="w-full min-w-0 space-y-10">
       <DocsPageHeader
         title="Textarea"
         pathname="/docs/components/textarea"

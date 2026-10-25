@@ -23,6 +23,15 @@ const nextConfig: NextConfig = {
   experimental: {
     turbopackFileSystemCacheForDev: false,
   },
+  async redirects() {
+    return [
+      {
+        source: "/blocks/login-01",
+        destination: "/blocks/authentication/login",
+        permanent: true,
+      },
+    ]
+  },
   async headers() {
     return [
       {
@@ -43,6 +52,14 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/docs/:path*",
+        headers: [...revalidateImmediately],
+      },
+      {
+        source: "/tools",
+        headers: [...revalidateImmediately],
+      },
+      {
+        source: "/tools/:path*",
         headers: [...revalidateImmediately],
       },
     ];

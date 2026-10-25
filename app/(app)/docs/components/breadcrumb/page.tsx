@@ -354,7 +354,7 @@ export default async function BreadcrumbDocsPage() {
   const examples = await getBreadcrumbExamples()
 
   return (
-    <article className="mx-auto max-w-3xl space-y-10">
+    <article className="w-full min-w-0 space-y-10">
       <DocsPageHeader
         title="Breadcrumb"
         pathname="/docs/components/breadcrumb"

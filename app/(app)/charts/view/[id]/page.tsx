@@ -1384,7 +1384,7 @@ export default async function ChartViewPage({
             <>
               <section className="space-y-4">
                 <h2 className="text-h3">Scrub</h2>
-                <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
+                <p className="text-sm leading-relaxed text-muted-foreground">
                   <code className="sono-inline-code">scrub</code> highlights the
                   active category and dims the rest (default{" "}
                   <code className="sono-inline-code">true</code>). Pass{" "}
@@ -1404,7 +1404,7 @@ export default function Page() {
 
               <section className="space-y-4">
                 <h2 className="text-h3">Plot direction</h2>
-                <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
+                <p className="text-sm leading-relaxed text-muted-foreground">
                   {id === "population-pyramid" ? (
                     <>
                       <code className="sono-inline-code">plotDir</code> swaps

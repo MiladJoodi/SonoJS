@@ -3,17 +3,17 @@ import { ChevronDownIcon } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
-/** Shared sidebar list chrome — docs / blocks / charts. */
+/** Shared sidebar list chrome — docs / blocks / charts / tools. */
 
 /**
- * Shared layout grid for docs / charts / blocks.
+ * Shared layout grid for docs / charts / blocks / tools.
  * One gap token (`--sidebar-content-gap`) so sidebar and main never sit flush.
  */
 export const SIDEBAR_LAYOUT_PROVIDER_CLASS =
   "min-h-min flex-1 items-start px-0 lg:grid lg:grid-cols-[var(--sidebar-width)_minmax(0,1fr)] lg:gap-x-[var(--sidebar-content-gap)]"
 
 export const SIDEBAR_LAYOUT_MAIN_CLASS =
-  "h-full w-full min-w-0 py-6 md:py-8 lg:pe-2"
+  "h-full w-full min-w-0 max-w-none py-6 md:py-8"
 
 /**
  * Sticky docs nav (shadcn-style): stays while the page scrolls; list scrolls inside.
@@ -24,7 +24,7 @@ export const SIDEBAR_SHELL_CLASS =
 
 export const SIDEBAR_SEARCH_WRAP_CLASS = "shrink-0 pe-2 pt-2 pb-3"
 
-/** Scrollable nav list — soft thin bar (docs / blocks / charts). */
+/** Scrollable nav list — soft thin bar (docs / blocks / charts / tools). */
 export const SIDEBAR_CONTENT_CLASS = "scrollbar-soft px-0"
 
 export const SIDEBAR_SEARCH_INPUT_CLASS = "text-[13px]"

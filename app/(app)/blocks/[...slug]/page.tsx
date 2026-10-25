@@ -14,7 +14,12 @@ type PageProps = {
 
 export function generateStaticParams() {
   return getAllBlockItems()
-    .filter((item) => item.href !== "/blocks/login-01")
+    .filter(
+      (item) =>
+        item.href !== "/blocks/authentication/login" &&
+        item.href !== "/blocks/authentication/signup" &&
+        item.href !== "/blocks/ai-agents/agent-run-timeline"
+    )
     .map((item) => ({
       slug: item.href.replace(/^\/blocks\//, "").split("/"),
     }))
@@ -23,9 +28,6 @@ export function generateStaticParams() {
 export default async function BlockPlaceholderPage({ params }: PageProps) {
   const { slug } = await params
   const pathname = `/blocks/${slug.join("/")}`
-
-  // Real block lives at app/(app)/blocks/login-01/page.tsx
-  if (pathname === "/blocks/login-01") notFound()
 
   const match = getBlockByHref(pathname)
   if (!match) notFound()

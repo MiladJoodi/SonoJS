@@ -25,7 +25,7 @@ export default async function ChartCategoryPage({
           <Icon className="size-7 shrink-0 opacity-80" aria-hidden />
           {meta.title}
         </h1>
-        <p className="max-w-2xl text-muted-foreground">{meta.description}</p>
+        <p className="text-muted-foreground">{meta.description}</p>
       </header>
 
       <ChartGallery categories={[category]} />

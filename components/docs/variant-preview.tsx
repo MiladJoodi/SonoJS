@@ -79,7 +79,7 @@ function ExampleLead({
     <div className="space-y-1.5">
       <h3 className="text-h4 tracking-tight text-foreground">{title}</h3>
       {description ? (
-        <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
+        <p className="text-sm leading-relaxed text-muted-foreground">
           <DescriptionText text={description} />
         </p>
       ) : null}

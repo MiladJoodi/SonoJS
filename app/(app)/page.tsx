@@ -44,7 +44,7 @@ export default function HomePage() {
         }}
       />
 
-      <section className="container-wrapper relative flex min-h-[calc(100svh-var(--header-height)-5rem)] flex-1 flex-col justify-center px-6 py-20 sm:px-10 sm:py-28">
+      <section className="workspace-shell relative flex min-h-[calc(100svh-var(--header-height)-5rem)] flex-1 flex-col justify-center py-20 sm:py-28">
         <p
           className="mb-5 text-[0.8125rem] font-semibold tracking-[0.16em] text-muted-foreground uppercase"
           style={{

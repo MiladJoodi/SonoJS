@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils"
 
 export default function DocsIndexPage() {
   return (
-    <article className="mx-auto max-w-2xl space-y-6">
+    <article className="w-full min-w-0 space-y-6">
       <h1 className="text-h1">Introduction</h1>
       <p className="leading-relaxed text-muted-foreground">
         SonoJS is a copy-source React component system. Init once, add what you

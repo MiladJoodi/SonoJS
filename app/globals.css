@@ -212,8 +212,24 @@
   }
 }
 
-@utility container-wrapper {
-  @apply mx-auto w-full max-w-[var(--content-max)] px-[var(--page-gutter)];
+/**
+ * Site frame — header, footer, home, docs, charts, and blocks.
+ * Wide and centered, with an inset so content stays off the viewport edges.
+ */
+.workspace-shell,
+.container-wrapper {
+  margin-inline: auto;
+  width: 100%;
+  min-width: 0;
+  max-width: var(--content-max);
+  padding-inline: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .workspace-shell,
+  .container-wrapper {
+    padding-inline: 2rem;
+  }
 }
 
 @utility text-h1 {
@@ -376,7 +392,7 @@
   --header-height: 3.5rem;
 
   /* Layout */
-  --content-max: 1280px;
+  --content-max: 1600px;
   --sidebar-width: 240px;
   /* Gap between sticky sidebar column and main content (docs / charts / blocks) */
   --sidebar-content-gap: var(--space-8);
@@ -602,6 +618,41 @@
     color: var(--code-fg);
   }
 
+  /* Drawer scroll matches the sidebar: thin and faint, including code blocks. */
+  [data-slot="drawer-content"] .scrollbar-soft,
+  [data-slot="drawer-content"] .sono-code-shiki,
+  [data-slot="drawer-content"] .sono-code-shiki pre {
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+  }
+
+  [data-slot="drawer-content"] .scrollbar-soft::-webkit-scrollbar,
+  [data-slot="drawer-content"] .sono-code-shiki::-webkit-scrollbar,
+  [data-slot="drawer-content"] .sono-code-shiki pre::-webkit-scrollbar {
+    display: block;
+    width: var(--scrollbar-size);
+    height: var(--scrollbar-size);
+  }
+
+  [data-slot="drawer-content"] .scrollbar-soft::-webkit-scrollbar-track,
+  [data-slot="drawer-content"] .sono-code-shiki::-webkit-scrollbar-track,
+  [data-slot="drawer-content"] .sono-code-shiki pre::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+  }
+
+  [data-slot="drawer-content"] .scrollbar-soft::-webkit-scrollbar-thumb,
+  [data-slot="drawer-content"] .sono-code-shiki::-webkit-scrollbar-thumb,
+  [data-slot="drawer-content"] .sono-code-shiki pre::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-thumb);
+    border-radius: var(--scrollbar-radius);
+  }
+
+  [data-slot="drawer-content"] .scrollbar-soft::-webkit-scrollbar-thumb:hover,
+  [data-slot="drawer-content"] .sono-code-shiki::-webkit-scrollbar-thumb:hover,
+  [data-slot="drawer-content"] .sono-code-shiki pre::-webkit-scrollbar-thumb:hover {
+    background-color: var(--scrollbar-thumb-hover);
+  }
+
   :where(code):not(.sono-code-block code):not(pre code) {
     font-family: var(--font-mono), ui-monospace, monospace;
     font-size: var(--text-code);
@@ -719,6 +770,17 @@
   to {
     opacity: 1;
   }
+}
+
+/*
+ * Page articles set a reading column (`max-w-*`). Inside the workspace the
+ * main track is the column, so previews can use the free width. Component
+ * and chart internals keep their own sizes.
+ */
+[data-workspace-main] > article {
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
 }
 
 

@@ -27,7 +27,7 @@ const GALLERY_TOP_CLEAR_PX = 96
 
 /**
  * Visual chart index — section per category, thumb cards → `/charts/view/[id]`.
- * Same shell as docs/blocks (`container-wrapper`); denser cols for thumbs.
+ * Same shell as the rest of the site (`workspace-shell`); denser cols for thumbs.
  */
 export function ChartGallery({
   categories = CHART_CATEGORIES,
@@ -162,7 +162,7 @@ export function ChartGallery({
               </div>
             ) : null}
 
-            <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+            <div className="grid grid-cols-[repeat(auto-fill,minmax(min(100%,220px),1fr))] gap-2">
               {entries.map((entry) => (
                 <ChartExampleCard
                   key={entry.id}

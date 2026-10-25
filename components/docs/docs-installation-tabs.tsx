@@ -23,14 +23,18 @@ export type DocsInstallationTabsProps = {
   manualNpmCommand: string | null
   files: DocsInstallFileView[]
   showAliasNote: boolean
+  /** Drawer copy buttons stay icon-only. */
+  copyTooltip?: boolean
 }
 
 function CliCodeFrame({
   code,
   html,
+  copyTooltip,
 }: {
   code: string
   html: string
+  copyTooltip: boolean
 }) {
   return (
     <div className="sono-code-block rounded-none border-0">
@@ -38,7 +42,7 @@ function CliCodeFrame({
         <div className="font-mono text-[14px] font-normal text-[color:var(--code-header-fg)]">
           CLI
         </div>
-        <CopyButton value={code} />
+        <CopyButton value={code} tooltip={copyTooltip} />
       </div>
       <div
         className="sono-code-shiki no-scrollbar font-mono text-[14px] leading-[1.65]"
@@ -48,19 +52,22 @@ function CliCodeFrame({
   )
 }
 
-function ManualFileFrame({ file }: { file: DocsInstallFileView }) {
+function ManualFileFrame({
+  file,
+  copyTooltip,
+}: {
+  file: DocsInstallFileView
+  copyTooltip: boolean
+}) {
   return (
     <div className="overflow-hidden rounded-xl border border-border/80">
       <div className="sono-code-block rounded-none border-0">
         <div className="flex items-center justify-between gap-2 border-b border-[color:var(--code-border)] px-4 py-2">
-          <div
-            className="min-w-0 truncate font-mono text-[14px] font-normal text-[color:var(--code-header-fg)]"
-            title={file.title}
-          >
+          <div className="min-w-0 truncate font-mono text-[14px] font-normal text-[color:var(--code-header-fg)]">
             {file.title}
           </div>
           {/* Copy raw source only — never path or highlight HTML */}
-          <CopyButton value={file.code} />
+          <CopyButton value={file.code} tooltip={copyTooltip} />
         </div>
         <div
           className="sono-code-shiki no-scrollbar max-h-96 overflow-auto font-mono text-[14px] leading-[1.65]"
@@ -71,14 +78,21 @@ function ManualFileFrame({ file }: { file: DocsInstallFileView }) {
   )
 }
 
-function QuietCommand({ command }: { command: string }) {
+function QuietCommand({
+  command,
+  copyTooltip,
+}: {
+  command: string
+  copyTooltip: boolean
+}) {
   return (
-    <div className="flex items-center gap-1.5">
-      <code className="min-w-0 font-mono text-[13px] text-foreground">
+    <div className="flex min-w-0 items-center gap-2">
+      <code className="min-w-0 max-w-full flex-1 truncate rounded-md border border-border/70 bg-background px-1.5 py-0.5 font-mono text-[11.5px] text-foreground">
         {command}
       </code>
       <CopyButton
         value={command}
+        tooltip={copyTooltip}
         className="shrink-0 text-muted-foreground hover:bg-muted hover:text-foreground"
       />
     </div>
@@ -96,6 +110,7 @@ export function DocsInstallationTabs({
   manualNpmCommand,
   files,
   showAliasNote,
+  copyTooltip = true,
 }: DocsInstallationTabsProps) {
   const hasCommandNeeds =
     alsoNeedsRegistry.length > 0 || alsoNeedsNpm.length > 0
@@ -103,6 +118,9 @@ export function DocsInstallationTabs({
     alsoNeedsRegistry.length > 0
       ? `npx @sonojs/ui@latest add ${alsoNeedsRegistry.join(" ")}`
       : null
+  const dependencyCommand = [registryAdd, manualNpmCommand]
+    .filter(Boolean)
+    .join(" && ")
 
   return (
     <Tabs defaultValue="command" className="gap-3">
@@ -117,12 +135,17 @@ export function DocsInstallationTabs({
 
       <TabsContent value="command" className="mt-0 outline-none">
         <div className="overflow-hidden rounded-xl border border-border/80">
-          <CliCodeFrame code={cliCode} html={cliHtml} />
+          <CliCodeFrame
+            code={cliCode}
+            html={cliHtml}
+            copyTooltip={copyTooltip}
+          />
           {hasCommandNeeds ? (
             <InstallNeedsHint
               label="Also needs"
               registry={alsoNeedsRegistry}
               npm={alsoNeedsNpm}
+              copyTooltip={copyTooltip}
             />
           ) : null}
         </div>
@@ -139,6 +162,7 @@ export function DocsInstallationTabs({
               <ManualFileFrame
                 key={`${file.title}:${index}`}
                 file={file}
+                copyTooltip={copyTooltip}
               />
             ))}
           </div>
@@ -152,15 +176,15 @@ export function DocsInstallationTabs({
           </p>
         ) : null}
 
-        {manualNpmCommand || registryAdd ? (
+        {dependencyCommand ? (
           <div className="space-y-1.5">
             <p className="text-sm text-muted-foreground">
               Then install dependencies:
             </p>
-            {manualNpmCommand ? (
-              <QuietCommand command={manualNpmCommand} />
-            ) : null}
-            {registryAdd ? <QuietCommand command={registryAdd} /> : null}
+            <QuietCommand
+              command={dependencyCommand}
+              copyTooltip={copyTooltip}
+            />
           </div>
         ) : null}
       </TabsContent>

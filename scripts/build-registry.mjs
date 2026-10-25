@@ -81,6 +81,28 @@ function rewriteChartLibImports(content, targetPath) {
   )
 }
 
+/**
+ * Authoring imports `@/registry/blocks/...`. Installed files use each file's
+ * `target` (`components/blocks/<name>/...`).
+ */
+function rewriteBlockTargets(content, files) {
+  const bySource = new Map()
+  for (const file of files) {
+    if (!file.target) continue
+    const source = file.path.replace(/\\/g, "/")
+    bySource.set(source.replace(/\.(tsx|ts|jsx|js)$/, ""), file.target)
+  }
+  return content.replace(
+    /from\s+["']@\/registry\/([^"']+)["']/g,
+    (full, spec) => {
+      const target = bySource.get(`registry/${spec}`)
+      if (!target) return full
+      const withoutExt = target.replace(/\.(tsx|ts|jsx|js)$/, "")
+      return `from "@/${withoutExt}"`
+    }
+  )
+}
+
 function buildItemPayload(item, version, generatedAt) {
   const files = item.files.map((file) => {
     const abs = path.join(root, file.path)
@@ -88,9 +110,13 @@ function buildItemPayload(item, version, generatedAt) {
       throw new Error(`Missing registry file: ${file.path}`)
     }
     let content = readFileSync(abs, "utf8")
-    if (file.path.startsWith("packages/ui/")) {
+    if (
+      file.path.startsWith("packages/ui/") ||
+      file.path.startsWith("registry/blocks/")
+    ) {
       content = rewriteConsumerImports(content)
     }
+    content = rewriteBlockTargets(content, item.files)
     if (file.target) {
       content = rewriteChartLibImports(content, file.target)
     }

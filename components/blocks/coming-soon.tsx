@@ -11,7 +11,7 @@ export function BlockComingSoon({
   category: string
 }) {
   return (
-    <article className="mx-auto flex max-w-2xl flex-col gap-8">
+    <article className="flex w-full min-w-0 flex-col gap-8">
       <header className="space-y-3">
         <p className="text-sm font-medium text-muted-foreground">{category}</p>
         <h1 className="text-h1">{title}</h1>
@@ -29,7 +29,7 @@ export function BlockComingSoon({
         </p>
         <div className="mt-2 flex flex-wrap justify-center gap-2">
           <Link
-            href="/blocks/login-01"
+            href="/blocks/authentication/login"
             className={cn(buttonVariants({ variant: "default" }), "cursor-pointer")}
           >
             View Login block

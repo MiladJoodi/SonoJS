@@ -23,10 +23,11 @@ Direction is a **core architecture** requirement for every new registry componen
 Group files **per component / block / chart / example set**. No flat dumps of related siblings.
 
 - Examples: `registry/examples/button/default.tsx` (not `examples/button-default.tsx`)
-- Blocks/charts/ui sources: `registry/<kind>/<name>/…`
+- Blocks: `registry/blocks/<category>/<name>/…` · charts/ui: `registry/<kind>/<name>/…`
 - Package UI: `packages/ui/src/components/…` (folder when multi-file)
-- Site chrome: `components/<feature>/…` when 2+ related files (`docs/`, `direction/`, `site-header/`, `sidebar-nav/`)
+- Site chrome: `components/<feature>/…` when 2+ related files (`docs/`, `direction/`, `site-header/`, `sidebar-nav/`, `tools/`)
 - Docs: `app/(app)/docs/components/<name>/page.tsx`
+- Tools: `app/(app)/tools/<slug>/page.tsx` + `components/tools/<slug>/` + `lib/tools-nav.ts`
 - Authoritative rule: `.cursor/rules/sonojs-folder-structure.mdc`
 <!-- END:sonojs-folder-structure -->
 

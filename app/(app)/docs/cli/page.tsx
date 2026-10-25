@@ -3,7 +3,7 @@ import { siteConfig } from "@/lib/config"
 
 export default function CliDocsPage() {
   return (
-    <article className="mx-auto max-w-2xl space-y-8">
+    <article className="w-full min-w-0 space-y-8">
       <header className="space-y-3">
         <h1 className="text-h1">CLI</h1>
         <p className="leading-relaxed text-muted-foreground">

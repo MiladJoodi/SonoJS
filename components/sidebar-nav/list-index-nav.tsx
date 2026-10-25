@@ -45,7 +45,7 @@ export function ListIndexNav({
           className
         )}
       >
-        <div className="container-wrapper px-4">
+        <div className="workspace-shell">
           <Button
             type="button"
             variant="ghost"

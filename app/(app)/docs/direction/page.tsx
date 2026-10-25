@@ -4,7 +4,7 @@ import { DirectionTryIt } from "./direction-try-it"
 
 export default function DirectionDocsPage() {
   return (
-    <article className="mx-auto max-w-3xl space-y-10">
+    <article className="w-full min-w-0 space-y-10">
       <header className="space-y-3">
         <h1 className="text-h1">Direction (RTL / LTR)</h1>
         <p className="text-lg leading-relaxed text-foreground">

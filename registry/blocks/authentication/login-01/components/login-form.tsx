@@ -1,0 +1,93 @@
+"use client"
+
+import { AppleIcon } from "@/registry/icons/apple"
+import { GoogleIcon } from "@/registry/icons/google"
+import { cn } from "@/lib/utils"
+import { Button } from "@sonojs/ui/components/button"
+import { Input } from "@sonojs/ui/components/input"
+import { Label } from "@sonojs/ui/components/label"
+import { Separator } from "@sonojs/ui/components/separator"
+
+export default function LoginForm({
+  className,
+  ...props
+}: React.ComponentProps<"div">) {
+  return (
+    <div className={cn("flex w-full flex-col gap-8", className)} {...props}>
+      <header className="flex flex-col items-start gap-3">
+        <span className="h-0.5 w-8 rounded-full bg-primary" aria-hidden />
+        <div className="space-y-1.5">
+          <h1 className="text-h3 text-foreground">Sign in</h1>
+          <p className="text-sm text-muted-foreground">
+            Use your email and password to continue.
+          </p>
+        </div>
+      </header>
+
+      <form
+        className="flex flex-col gap-4"
+        onSubmit={(event) => event.preventDefault()}
+      >
+        <div className="grid gap-2">
+          <Label htmlFor="login-email">Email</Label>
+          <Input
+            id="login-email"
+            type="email"
+            autoComplete="email"
+            placeholder="name@example.com"
+            required
+            className="h-[46px]"
+          />
+        </div>
+        <div className="grid gap-2">
+          <div className="flex items-center gap-3">
+            <Label htmlFor="login-password">Password</Label>
+            <a
+              href="#"
+              className="ms-auto cursor-pointer text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
+            >
+              Forgot password?
+            </a>
+          </div>
+          <Input
+            id="login-password"
+            type="password"
+            autoComplete="current-password"
+            required
+            className="h-[46px]"
+          />
+        </div>
+        <Button type="submit" className="mt-1 h-[46px] w-full">
+          Sign in
+        </Button>
+      </form>
+
+      <div className="flex items-center gap-3">
+        <Separator className="flex-1" />
+        <span className="text-xs text-muted-foreground">or</span>
+        <Separator className="flex-1" />
+      </div>
+
+      <div className="grid grid-cols-2 gap-2">
+        <Button type="button" variant="outline" className="h-[46px]">
+          <GoogleIcon />
+          Google
+        </Button>
+        <Button type="button" variant="outline" className="h-[46px]">
+          <AppleIcon />
+          Apple
+        </Button>
+      </div>
+
+      <p className="text-center text-sm text-muted-foreground">
+        New here?{" "}
+        <a
+          href="#"
+          className="cursor-pointer font-medium text-foreground underline-offset-4 hover:underline"
+        >
+          Create an account
+        </a>
+      </p>
+    </div>
+  )
+}
