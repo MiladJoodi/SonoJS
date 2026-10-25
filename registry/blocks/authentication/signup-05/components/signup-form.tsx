@@ -6,12 +6,14 @@ import { StarIcon } from "lucide-react"
 import { AppleIcon } from "@/registry/icons/apple"
 import { GoogleIcon } from "@/registry/icons/google"
 import { cn } from "@/lib/utils"
+import { Avatar, AvatarFallback, AvatarImage } from "@sonojs/ui/components/avatar"
 import { Button } from "@sonojs/ui/components/button"
 import { Input } from "@sonojs/ui/components/input"
 import { Label } from "@sonojs/ui/components/label"
 import { Separator } from "@sonojs/ui/components/separator"
 
-const portrait = "/blocks/signup-05/01.webp"
+const panelImage = "/blocks/signup-05/01.webp"
+const profileImage = "/blocks/signup-05/02.webp"
 
 function QuotePanel() {
   const [missing, setMissing] = React.useState(false)
@@ -20,7 +22,7 @@ function QuotePanel() {
     <aside className="relative h-[42rem] w-full max-w-md shrink-0 overflow-hidden rounded-3xl bg-muted">
       {missing ? null : (
         <img
-          src={portrait}
+          src={panelImage}
           alt=""
           className="absolute inset-0 size-full object-cover"
           onError={() => setMissing(true)}
@@ -41,9 +43,15 @@ function QuotePanel() {
           The account was ready before the rest of the team finished reading
           the invite.
         </blockquote>
-        <figcaption>
-          <p className="text-sm font-medium">Nora Hale</p>
-          <p className="text-sm text-white/80">Founder, Northwind</p>
+        <figcaption className="flex items-center gap-3">
+          <Avatar size="lg" className="ring-2 ring-white/30">
+            <AvatarImage src={profileImage} alt="" />
+            <AvatarFallback className="bg-white/20 text-white">NH</AvatarFallback>
+          </Avatar>
+          <div className="min-w-0">
+            <p className="text-sm font-medium">Nora Hale</p>
+            <p className="text-sm text-white/80">Founder, Northwind</p>
+          </div>
         </figcaption>
       </figure>
     </aside>

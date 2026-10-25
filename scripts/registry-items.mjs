@@ -1262,7 +1262,7 @@ export const registryItems = [
     title: "signup-05",
     description:
       "Sign-up with name, email, and password, or Google and Apple, beside a quote on a photo.",
-    registryDependencies: ["button", "input", "label", "separator"],
+    registryDependencies: ["avatar", "button", "input", "label", "separator"],
     dependencies: ["lucide-react"],
     files: [
       {
