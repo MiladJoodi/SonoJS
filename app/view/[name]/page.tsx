@@ -1,6 +1,7 @@
 import type { ComponentType } from "react"
 import { notFound } from "next/navigation"
 
+import { ModeSwitcher } from "@/components/site-header"
 import LoginForm from "@/registry/blocks/authentication/login-01/components/login-form"
 import SocialLoginForm from "@/registry/blocks/authentication/login-02/components/login-form"
 import SignupForm from "@/registry/blocks/authentication/signup-03/components/signup-form"
@@ -56,7 +57,10 @@ export default async function BlockViewPage({
   const View = views[name]
   if (!View) notFound()
   return (
-    <div className="flex min-h-svh w-full flex-col justify-center bg-background">
+    <div className="relative flex min-h-svh w-full flex-col justify-center bg-background">
+      <div className="absolute end-4 top-4 z-50">
+        <ModeSwitcher />
+      </div>
       <div className="w-full">
         <View />
       </div>
