@@ -46,9 +46,10 @@ export default function ToolsIndexPage() {
                     <Link
                       href={item.href}
                       className={cn(
-                        "flex cursor-pointer flex-col gap-0.5 rounded-md px-2 py-1.5 text-sm transition-colors hover:bg-muted"
+                        "flex min-h-[46px] cursor-pointer flex-col justify-center gap-0.5 rounded-[12px] border border-transparent px-3 py-2 text-sm transition-colors hover:border-border/70 hover:bg-card"
                       )}
                     >
+
                       <span className="truncate font-medium text-foreground">
                         {item.title}
                       </span>

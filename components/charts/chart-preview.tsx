@@ -35,7 +35,7 @@ export function ChartPreview({
       <DirectionProvider
         dir={dir}
         className={cn(
-          "flex w-full min-w-0 max-w-none justify-center rounded-xl border border-border/80 bg-background p-4 md:p-6",
+          "flex w-full min-w-0 max-w-none justify-center rounded-xl border border-border/70 bg-canvas p-4 md:p-6",
           fullWidth && "md:p-8"
         )}
       >

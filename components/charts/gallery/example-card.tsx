@@ -25,8 +25,8 @@ export function ChartExampleCard({
       href={chartViewHref(id)}
       aria-label={pending ? `${title} (pending)` : title}
       className={cn(
-        "group flex w-full cursor-pointer flex-col overflow-hidden rounded-lg border border-border/50 bg-transparent text-start no-underline outline-none",
-        "transition-[border-color,background-color] hover:border-border hover:bg-muted/15",
+        "group flex w-full cursor-pointer flex-col overflow-hidden rounded-[12px] border border-border/70 bg-card text-start no-underline outline-none shadow-soft",
+        "transition-[border-color,background-color] hover:border-border",
         "focus-visible:ring-2 focus-visible:ring-ring",
         pending && "opacity-80"
       )}
@@ -48,7 +48,7 @@ export function ChartExampleCard({
           className={cn(imgClass, "hidden dark:block")}
         />
       </div>
-      <div className="bg-background/80 px-2.5 py-2 md:px-3 md:py-2.5">
+      <div className="bg-card px-2.5 py-2 md:px-3 md:py-2.5">
         <span className="block truncate text-[13px] font-medium text-foreground md:text-sm">
           {title}
           {pending ? " · pending" : ""}

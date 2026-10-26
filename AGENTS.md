@@ -120,24 +120,25 @@ Tokens live in `app/globals.css` (and `styles/vega-tokens.css` for theme surface
 
 ## Component dimensions
 
-Size scale = SonoJS control scale (heights/padding/radius). Do **not** change fonts or brand colors when aligning sizes. Legacy default was `h-9` (36px); current styles use **`h-8` (32px)**.
+Size scale = SonoJS control scale (heights/padding/radius). Do **not** change fonts or brand colors when aligning sizes. Default control height is **46px** on mobile, tablet, and desktop (do not shrink below 46px).
 
-- Button: xs `h-6` · sm `h-7` · **default `h-8` (32px)** · lg `h-9` · icon `size-8` / `size-6` / `size-7` / `size-9`; `text-sm` / weight 500
-- Input / Select trigger: **`h-8`** · `px-2.5` · `rounded-md` · Input also `text-base md:text-sm`
+- Button: xs `h-8` · sm `h-10` · **default `h-[46px]`** · lg `h-[52px]` · icon `size-[46px]` / `size-8` / `size-10` / `size-[52px]`; `text-sm` / weight 500
+- Input / Select trigger: **`h-[46px]`** · `px-3` · `rounded-md` · `border-border/70` · Input also `text-base md:text-sm`
 - Checkbox: `size-4` (16px) · `rounded-[4px]`
 - Switch default: `h-[1.15rem]` × `w-8` · thumb `size-4`
 - Avatar default 32px · Badge: `px-2 py-0.5` · `rounded-full` · `text-xs`
-- Toggle: `h-8` / `h-7` / `h-9`
+- Toggle: `h-[46px]` / `h-10` / `h-[52px]`
 - Icons: inline 14px · default UI 16px · prominent 20px (Lucide)
-- Mobile touch targets ≥ 44×44px where practical
+- Touch targets: default controls **46px** (≥44px WCAG); responsive = width/stack/gutter, not shorter controls
+- Cards: `border-border/70` · `rounded-[12px]` / `rounded-lg` · elevated `shadow-soft`
 
 ## Border radius
 
-Radius scale (`--radius: 0.625rem` / 10px):
+Radius scale (`--radius: 0.75rem` / 12px):
 
 - Small / tooltips: ~6px (`--radius-sm` / `--radius-tooltip`)
-- Controls (buttons, inputs, selects, sidebar items): ~8px (`rounded-md` / `--radius-control`)
-- Surfaces (cards, code, dialogs): 10px (`--radius-lg` / `--radius-surface`)
+- Controls (buttons, inputs, selects, sidebar items): **12px** (`rounded-md` / `--radius-control`)
+- Surfaces (cards, code, dialogs): **12px** (`--radius-lg` / `--radius-surface`)
 - Pills / avatars: full round only when appropriate
 
 Fonts (Geist) and brand colors stay SonoJS — only dimensions and radius follow the token scale above.

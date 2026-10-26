@@ -30,9 +30,12 @@ export function ModeSwitcher({
     <Button
       type="button"
       variant={variant}
-      size="icon"
+      size="icon-xs"
       data-mode-switch=""
-      className={cn("group/toggle relative size-8 cursor-pointer", className)}
+      className={cn(
+        "group/toggle relative size-8 cursor-pointer rounded-md border border-border/70 bg-card shadow-none hover:bg-canvas",
+        className
+      )}
       onClick={toggleTheme}
     >
       <SunIcon className="size-4.5 scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />

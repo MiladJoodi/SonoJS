@@ -143,7 +143,7 @@ export function ComponentVariantPreview({
   )
 
   const previewFrameClass = cn(
-    "flex min-h-32 items-center justify-center bg-background p-8",
+    "flex min-h-32 items-center justify-center bg-canvas p-8",
     allowOverflow &&
       "relative z-20 min-h-[28rem] items-start justify-center overflow-visible pt-10 pb-16"
   )
@@ -160,7 +160,7 @@ export function ComponentVariantPreview({
 
       <div
         className={cn(
-          "rounded-xl border border-border/80",
+          "rounded-xl border border-border/70",
           allowOverflow
             ? "relative z-20 overflow-visible"
             : "overflow-hidden"
@@ -189,7 +189,7 @@ export function ComponentVariantPreview({
               <DirectionToggle value={dir} onValueChange={setDir} />
             ) : null}
             {hasCode ? (
-              <div className="inline-flex h-8 items-center rounded-md border border-border/80 bg-background p-0.5">
+              <div className="inline-flex h-8 items-center gap-0.5 rounded-md border border-border/70 bg-card p-0.5">
                 {(
                   [
                     { id: "preview", label: "Preview", Icon: EyeIcon },
@@ -203,16 +203,16 @@ export function ComponentVariantPreview({
                         onClick={() => setView(tab.id)}
                         aria-label={tab.label}
                         className={cn(
-                          "inline-flex size-7 cursor-pointer items-center justify-center rounded-sm transition-colors",
+                          "inline-flex h-7 min-w-7 cursor-pointer items-center justify-center rounded-sm px-0 text-muted-foreground transition-colors md:min-w-9",
                           effectiveView === tab.id
-                            ? "bg-muted text-foreground"
-                            : "text-muted-foreground hover:text-foreground"
+                            ? "bg-canvas text-foreground"
+                            : "hover:text-foreground"
                         )}
                       >
                         <tab.Icon className="size-3.5" aria-hidden />
                       </button>
                     </TooltipTrigger>
-                    <TooltipContent side="bottom">{tab.label}</TooltipContent>
+                    <TooltipContent side="top">{tab.label}</TooltipContent>
                   </Tooltip>
                 ))}
               </div>

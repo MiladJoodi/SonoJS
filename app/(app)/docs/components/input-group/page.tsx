@@ -108,7 +108,7 @@ export default async function InputGroupDocsPage() {
           Add icons, text, buttons, and other chrome around an input or
           textarea while sharing one focus ring. Height matches Input (
           <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
-            h-8
+            h-[46px]
           </code>
           ). Place addons after the control in the DOM and use{" "}
           <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">

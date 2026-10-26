@@ -18,13 +18,13 @@
 
 /* Map utilities → CSS vars (values from :root) */
 @theme inline {
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
+  --radius-sm: calc(var(--radius) * 0.5);
+  --radius-md: var(--radius);
   --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
+  --radius-xl: calc(var(--radius) * 1.333);
+  --radius-2xl: calc(var(--radius) * 1.667);
+  --radius-3xl: calc(var(--radius) * 2);
+  --radius-4xl: calc(var(--radius) * 2.333);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -249,11 +249,11 @@
   --leading-body: 1.5;
   --leading-heading: 1.2;
 
-  /* Control sizes — SonoJS (default = 32px / h-8) */
-  --size-button-sm: 28px;
-  --size-button-md: 32px;
-  --size-button-lg: 36px;
-  --size-input: 32px;
+  /* Control sizes — SonoJS (default = 46px; same on mobile/tablet/desktop) */
+  --size-button-sm: 40px;
+  --size-button-md: 46px;
+  --size-button-lg: 52px;
+  --size-input: 46px;
   --size-checkbox: 16px;
   --size-switch-w: 32px;
   --size-switch-h: 1.15rem;
@@ -262,15 +262,15 @@
   --size-icon-inline: 14px;
   --size-icon: 16px;
   --size-icon-lg: 20px;
-  --touch-target: 44px;
+  --touch-target: 46px;
 
-  /* Radius — SonoJS (base 10px · control ~8 · surface 10) */
-  --radius: 0.625rem;
+  /* Radius — SonoJS (base 12px for controls + cards · tooltip ~6px) */
+  --radius: 0.75rem;
   /* Aliases used by components (`rounded-(--cell-radius)` → --radius-md) */
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
-  --radius-tooltip: calc(var(--radius) * 0.6);
-  --radius-control: calc(var(--radius) * 0.8);
+  --radius-sm: calc(var(--radius) * 0.5);
+  --radius-md: var(--radius);
+  --radius-tooltip: calc(var(--radius) * 0.5);
+  --radius-control: var(--radius);
   --radius-surface: var(--radius);
   --radius-button: var(--radius-control);
   --radius-input: var(--radius-control);
@@ -285,6 +285,13 @@
   --code-header-fg: #858585;
   --code-line-number: #858585;
   --code-selection: #264f78;
+
+  /* Soft surfaces — match docs site tokens */
+  --canvas: #f3f3f4;
+  --border-soft: color-mix(in oklab, #e4e4e7 70%, transparent);
+  --shadow-soft:
+    0 2px 4px -1px rgba(10, 10, 12, 0.04),
+    0 28px 56px -28px rgba(10, 10, 12, 0.18);
 
   --background: #ffffff;
   --foreground: #09090b;
@@ -331,6 +338,12 @@
 }
 
 .dark {
+  --canvas: #09090b;
+  --border-soft: color-mix(in oklab, #27272a 70%, transparent);
+  --shadow-soft:
+    0 2px 4px -1px rgba(0, 0, 0, 0.24),
+    0 28px 56px -28px rgba(0, 0, 0, 0.48);
+
   --background: #09090b;
   --foreground: #fafafa;
   --card: #18181b;
@@ -371,6 +384,10 @@
   --sidebar-ring: #396ef0;
   --surface: #18181b;
   --surface-foreground: #a1a1aa;
+}
+
+.shadow-soft {
+  box-shadow: var(--shadow-soft);
 }
 
 /* Directional icons — chevrons/arrows along the inline axis */

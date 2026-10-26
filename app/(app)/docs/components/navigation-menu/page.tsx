@@ -73,7 +73,7 @@ export default async function NavigationMenuDocsPage() {
           <p className="leading-relaxed text-muted-foreground">
           A collection of links for site navigation. Triggers use height{" "}
           <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
-            h-8
+            h-[46px]
           </code>
           . Compose Next.js{" "}
           <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">

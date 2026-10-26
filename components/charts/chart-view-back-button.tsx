@@ -22,9 +22,9 @@ export function ChartViewBackButton({
     <Tooltip delayDuration={400}>
       <TooltipTrigger asChild>
         <Button
-          variant="secondary"
-          size="icon"
-          className="mt-1 size-8 shrink-0 shadow-none md:size-7"
+          variant="outline"
+          size="icon-xs"
+          className="mt-1 size-8 shrink-0 border-border/70 bg-card shadow-none hover:bg-canvas md:size-7"
           asChild
         >
           <Link href={href} prefetch={false} aria-label={`Back to ${label}`}>

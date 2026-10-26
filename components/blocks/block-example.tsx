@@ -61,7 +61,7 @@ function Segment({
           aria-pressed={pressed}
           onClick={onClick}
           className={cn(
-            "inline-flex h-6 cursor-pointer items-center justify-center rounded-sm px-2 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground",
+            "inline-flex h-7 min-w-7 cursor-pointer items-center justify-center rounded-sm px-2 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground md:min-w-9",
             pressed && "bg-canvas text-foreground",
             className
           )}
@@ -118,7 +118,7 @@ export function BlockExample({
           {title ?? name}
         </p>
         <div className="ms-auto flex min-w-0 shrink-0 items-center gap-2">
-          <div className="flex h-8 items-center gap-0.5 rounded-md border border-border-soft bg-card p-0.5">
+          <div className="flex h-8 items-center gap-0.5 rounded-md border border-border/70 bg-card p-0.5">
             <div className="hidden items-center gap-0.5 md:flex">
               {viewports.map((item) => (
                 <Segment
@@ -126,7 +126,7 @@ export function BlockExample({
                   label={item.label}
                   pressed={view === "preview" && viewport === item.value}
                   onClick={() => showPreview(item.value)}
-                  className="size-6 px-0"
+                  className="px-0"
                 >
                   <item.icon className="size-3.5" />
                 </Segment>
@@ -182,22 +182,22 @@ export function BlockExample({
           {view === "preview" ? (
             <DirectionToggle value={dir} onValueChange={setDir} />
           ) : null}
-          <div className="flex h-8 items-center gap-0.5 rounded-md border border-border-soft bg-card p-0.5">
+          <div className="flex h-8 items-center gap-0.5 rounded-md border border-border/70 bg-card p-0.5">
             <Segment
               label="Preview"
               pressed={view === "preview"}
               onClick={() => showPreview()}
-              className="size-7 px-0"
+              className="px-0"
             >
-              <EyeIcon className="size-4" />
+              <EyeIcon className="size-3.5" />
             </Segment>
             <Segment
               label="Code"
               pressed={view === "code"}
               onClick={() => setView("code")}
-              className="size-7 px-0"
+              className="px-0"
             >
-              <Code2Icon className="size-4" />
+              <Code2Icon className="size-3.5" />
             </Segment>
           </div>
         </div>

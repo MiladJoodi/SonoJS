@@ -343,14 +343,14 @@
   --font-sans: var(--font-sono-sans);
   --font-mono: var(--font-sono-mono);
   --font-heading: var(--font-sono-sans);
-  /* Tailwind rounded-* ↔ SonoJS radius scale */
-  --radius-sm: calc(var(--radius) * 0.6); /* ~6px */
-  --radius-md: calc(var(--radius) * 0.8); /* ~8px — controls */
-  --radius-lg: var(--radius); /* 10px — surfaces */
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
+  /* Tailwind rounded-* ↔ SonoJS radius scale (base 12px) */
+  --radius-sm: calc(var(--radius) * 0.5); /* ~6px — tooltips */
+  --radius-md: var(--radius); /* 12px — controls */
+  --radius-lg: var(--radius); /* 12px — surfaces / cards */
+  --radius-xl: calc(var(--radius) * 1.333);
+  --radius-2xl: calc(var(--radius) * 1.667);
+  --radius-3xl: calc(var(--radius) * 2);
+  --radius-4xl: calc(var(--radius) * 2.333);
   --color-canvas: var(--canvas);
   --color-border-soft: var(--border-soft);
   --shadow-soft: var(--shadow-soft);
@@ -457,11 +457,11 @@
   --code: var(--code-bg);
   --code-foreground: var(--code-fg);
 
-  /* Control sizes — SonoJS (default = 32px / h-8) */
-  --size-button-sm: 28px; /* h-7 */
-  --size-button-md: 32px; /* h-8 */
-  --size-button-lg: 36px; /* h-9 */
-  --size-input: 32px;
+  /* Control sizes — SonoJS (default = 46px; same on mobile/tablet/desktop) */
+  --size-button-sm: 40px;
+  --size-button-md: 46px;
+  --size-button-lg: 52px;
+  --size-input: 46px;
   --size-checkbox: 16px; /* size-4 */
   --size-switch-w: 32px; /* w-8 */
   --size-switch-h: 1.15rem;
@@ -470,15 +470,15 @@
   --size-icon-inline: 14px;
   --size-icon: 16px;
   --size-icon-lg: 20px;
-  --touch-target: 44px;
+  --touch-target: 46px;
 
   /*
    * Border radius — SonoJS
-   * Base 0.625rem (10px) · sm ~6 · md ~8 (controls) · lg 10 (surfaces)
+   * Base 0.75rem (12px) for controls + cards · tooltip ~6px
    */
-  --radius: 0.625rem;
-  --radius-tooltip: calc(var(--radius) * 0.6);
-  --radius-control: calc(var(--radius) * 0.8);
+  --radius: 0.75rem;
+  --radius-tooltip: calc(var(--radius) * 0.5);
+  --radius-control: var(--radius);
   --radius-surface: var(--radius);
   --radius-button: var(--radius-control);
   --radius-sidebar-button: var(--radius-control);
@@ -678,6 +678,10 @@
     font-weight: 400;
     line-height: var(--leading-code);
   }
+}
+
+@utility shadow-soft {
+  box-shadow: var(--shadow-soft);
 }
 
 @utility sono-inline-code {

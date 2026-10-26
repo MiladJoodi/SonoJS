@@ -37,7 +37,7 @@ export default function BlocksIndexPage() {
                     <Link
                       href={item.href}
                       className={cn(
-                        "flex cursor-pointer items-center justify-between gap-2 rounded-md px-2 py-1.5 text-sm transition-colors hover:bg-muted",
+                        "flex h-[46px] cursor-pointer items-center justify-between gap-2 rounded-[12px] border border-transparent px-3 text-sm transition-colors hover:border-border/70 hover:bg-card",
                         ready
                           ? "font-medium text-foreground"
                           : "text-muted-foreground"

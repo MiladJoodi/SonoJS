@@ -16,7 +16,7 @@ Registry / `components.json` **`$schema` URLs** that point at the public registr
 | Avoid | Prefer |
 |---|---|
 | “X-style CLI” | “copy-source CLI” / “SonoJS CLI” |
-| “X nova / new-york sizes” | “SonoJS control scale (`h-8` default, `--radius: 0.625rem`)” |
+| “X nova / new-york sizes” | “SonoJS control scale (`h-[46px]` default, `--radius: 0.75rem`)” |
 | Comments citing another kit | Comment the token or pixel value only |
 
 When aligning sizes with an external reference, describe **numbers and tokens**, not the other product’s name.

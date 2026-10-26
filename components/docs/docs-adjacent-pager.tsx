@@ -17,8 +17,8 @@ export type DocsAdjacentLink = {
 }
 
 /**
- * Prev/next beside a page title — FarsiUI docs chrome (secondary icon buttons),
- * LTR + `icon-dir` for RTL. Tooltip shows the adjacent page title.
+ * Prev/next beside a page title — white card chrome, LTR + `icon-dir` for RTL.
+ * Tooltip shows the adjacent page title.
  */
 export function DocsAdjacentPager({
   previous,
@@ -37,9 +37,9 @@ export function DocsAdjacentPager({
         <Tooltip delayDuration={400}>
           <TooltipTrigger asChild>
             <Button
-              variant="secondary"
-              size="icon"
-              className="size-8 shrink-0 shadow-none md:size-7"
+              variant="outline"
+              size="icon-xs"
+              className="size-8 shrink-0 border-border/70 bg-card shadow-none hover:bg-canvas md:size-7"
               asChild
             >
               <Link
@@ -58,9 +58,9 @@ export function DocsAdjacentPager({
         <Tooltip delayDuration={400}>
           <TooltipTrigger asChild>
             <Button
-              variant="secondary"
-              size="icon"
-              className="size-8 shrink-0 shadow-none md:size-7"
+              variant="outline"
+              size="icon-xs"
+              className="size-8 shrink-0 border-border/70 bg-card shadow-none hover:bg-canvas md:size-7"
               asChild
             >
               <Link

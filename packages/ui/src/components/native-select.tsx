@@ -19,7 +19,7 @@ function NativeSelect({
         data-slot="native-select"
         data-size={size}
         className={cn(
-          "h-8 w-full min-w-0 cursor-pointer appearance-none rounded-md border border-input bg-transparent py-0 ps-2.5 pe-9 text-start text-sm leading-8 shadow-xs transition-[color,box-shadow] outline-none selection:bg-primary selection:text-primary-foreground placeholder:text-muted-foreground disabled:pointer-events-none disabled:cursor-not-allowed data-[size=sm]:h-7 data-[size=sm]:leading-7 dark:bg-input/30 dark:hover:bg-input/50",
+          "h-[46px] w-full min-w-0 cursor-pointer appearance-none rounded-md border border-border/70 bg-card py-0 ps-3 pe-9 text-start text-sm leading-[46px] shadow-xs transition-[color,box-shadow] outline-none selection:bg-primary selection:text-primary-foreground placeholder:text-muted-foreground disabled:pointer-events-none disabled:cursor-not-allowed data-[size=sm]:h-10 data-[size=sm]:leading-10 dark:bg-card dark:hover:bg-muted/50",
           "focus-visible:border-ring",
           "aria-invalid:border-destructive"
         )}

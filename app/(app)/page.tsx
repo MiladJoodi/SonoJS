@@ -93,23 +93,27 @@ export default function HomePage() {
               >
                 <span
                   aria-hidden
-                  className="relative z-10 flex size-7 shrink-0 items-center justify-center rounded-full border border-border bg-background font-mono text-[11px] font-semibold text-foreground shadow-[0_0_0_4px_var(--background)]"
+                  className="relative z-10 flex size-8 shrink-0 items-center justify-center rounded-full border border-border/70 bg-card font-mono text-[11px] font-semibold text-foreground shadow-[0_0_0_4px_var(--background)]"
                 >
                   {step.n}
                 </span>
 
                 {step.kind === "command" ? (
-                  <div className="flex h-9 min-w-0 flex-1 items-center justify-between gap-2 rounded-[var(--radius-code)] border border-[color:var(--code-border)] bg-[color:var(--code-bg)] ps-3 pe-1.5">
+                  <div className="flex h-[46px] min-w-0 flex-1 items-center justify-between gap-2 rounded-[12px] border border-[color:var(--code-border)] bg-[color:var(--code-bg)] ps-3 pe-1.5">
                     <code className="min-w-0 truncate font-mono text-[13px] leading-none text-[color:var(--code-fg)]">
                       <span className="text-[color:var(--code-syntax-comment)] select-none">
                         ${" "}
                       </span>
                       {step.text}
                     </code>
-                    <CopyButton value={step.text} className="shrink-0" />
+                    <CopyButton
+                      value={step.text}
+                      tooltipSide="top"
+                      className="size-8 shrink-0 md:min-w-9"
+                    />
                   </div>
                 ) : step.kind === "prompt" ? (
-                  <div className="flex h-9 min-w-0 flex-1 items-center rounded-[var(--radius-code)] border border-border/80 bg-muted/40 ps-3 pe-3">
+                  <div className="flex h-[46px] min-w-0 flex-1 items-center rounded-[12px] border border-border/70 bg-card ps-3 pe-3">
                     <p className="min-w-0 truncate font-mono text-[13px] leading-none text-foreground">
                       <span className="text-muted-foreground select-none">
                         “
@@ -121,7 +125,7 @@ export default function HomePage() {
                     </p>
                   </div>
                 ) : (
-                  <div className="flex h-9 min-w-0 flex-1 items-center rounded-[var(--radius-code)] border border-transparent ps-3 pe-3">
+                  <div className="flex h-[46px] min-w-0 flex-1 items-center rounded-[12px] border border-transparent ps-3 pe-3">
                     <p className="min-w-0 truncate text-[13px] leading-none text-muted-foreground">
                       {step.text}
                     </p>

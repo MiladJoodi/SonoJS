@@ -58,8 +58,8 @@ export function MobileNav({
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger
         className={cn(
-          buttonVariants({ variant: "ghost", size: "icon" }),
-          "size-8 shrink-0 cursor-pointer hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 active:bg-transparent dark:hover:bg-transparent",
+          buttonVariants({ variant: "ghost", size: "icon-xs" }),
+          "size-8 shrink-0 cursor-pointer rounded-md border border-border/70 bg-card shadow-none hover:bg-canvas focus-visible:bg-transparent focus-visible:ring-0 active:bg-transparent dark:hover:bg-canvas",
           className
         )}
       >

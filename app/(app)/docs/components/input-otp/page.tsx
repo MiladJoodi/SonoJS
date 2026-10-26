@@ -99,7 +99,7 @@ export default async function InputOTPDocsPage() {
           <p className="leading-relaxed text-muted-foreground">
           Accessible one-time password input with copy-paste. Slots are{" "}
           <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
-            size-8
+            size-[46px]
           </code>{" "}
           to match the control scale. Built on the{" "}
           <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">

@@ -32,7 +32,7 @@ const exampleDefs = [
   {
     name: "toggle-size",
     title: "Size",
-    description: 'Use `size` — `sm`, `default` (`h-8`), or `lg` (`h-9`).',
+    description: 'Use `size` — `sm` (`h-10`), `default` (`h-[46px]`), or `lg` (`h-[52px]`).',
     npmRequires: ["lucide-react"],
   },
   {
@@ -131,7 +131,7 @@ export default async function ToggleDocsPage() {
               name: "size",
               type: '"sm" | "default" | "lg"',
               defaultValue: '"default"',
-              description: "Control height — `h-7` / `h-8` / `h-9`.",
+              description: "Control height — `h-10` / `h-[46px]` / `h-[52px]`.",
             },
             {
               name: "disabled",

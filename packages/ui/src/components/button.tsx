@@ -14,7 +14,7 @@ const buttonVariants = cva(
         destructive:
           "bg-destructive text-white hover:bg-destructive/90 dark:bg-destructive/60",
         outline:
-          "border border-border bg-background text-foreground shadow-xs hover:bg-muted hover:text-foreground dark:border-input dark:bg-input/30 dark:hover:bg-input/50",
+          "border border-border/70 bg-card text-foreground shadow-xs hover:bg-muted hover:text-foreground dark:bg-card dark:hover:bg-muted/50",
         secondary:
           "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost:
@@ -22,15 +22,15 @@ const buttonVariants = cva(
         link: "text-primary underline-offset-4 hover:underline",
       },
       size: {
-        /* SonoJS default control height — 32px (h-8) */
-        default: "h-8 gap-1.5 px-2.5 has-[>svg]:px-2",
-        xs: "h-6 gap-1 rounded-md px-2 text-xs has-[>svg]:px-1.5 [&_svg:not([class*='size-'])]:size-3",
-        sm: "h-7 gap-1 rounded-md px-2.5 has-[>svg]:px-1.5 [&_svg:not([class*='size-'])]:size-3.5",
-        lg: "h-9 gap-1.5 px-2.5 has-[>svg]:px-2",
-        icon: "size-8",
-        "icon-xs": "size-6 rounded-md [&_svg:not([class*='size-'])]:size-3",
-        "icon-sm": "size-7",
-        "icon-lg": "size-9",
+        /* SonoJS default control height — 46px (same on mobile/tablet/desktop) */
+        default: "h-[46px] gap-2 px-4 has-[>svg]:px-3",
+        xs: "h-8 gap-1 rounded-md px-2.5 text-xs has-[>svg]:px-2 [&_svg:not([class*='size-'])]:size-3.5",
+        sm: "h-10 gap-1.5 rounded-md px-3 has-[>svg]:px-2.5 [&_svg:not([class*='size-'])]:size-3.5",
+        lg: "h-[52px] gap-2 px-5 has-[>svg]:px-4",
+        icon: "size-[46px]",
+        "icon-xs": "size-8 rounded-md [&_svg:not([class*='size-'])]:size-3.5",
+        "icon-sm": "size-10",
+        "icon-lg": "size-[52px]",
       },
     },
     defaultVariants: {

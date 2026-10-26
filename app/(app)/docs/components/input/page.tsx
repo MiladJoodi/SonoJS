@@ -66,7 +66,11 @@ export default async function InputDocsPage() {
           <p className="leading-relaxed text-muted-foreground">
           A text input for forms and data entry. Height{" "}
           <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
-            h-8
+            h-[46px]
+          </code>
+          , white{" "}
+          <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
+            bg-card
           </code>
           , built-in focus and invalid styles. For icons or buttons inside the
           control, see{" "}

@@ -162,7 +162,7 @@ export default async function SelectDocsPage() {
               name: "size",
               type: '"sm" | "default"',
               defaultValue: '"default"',
-              description: "On `SelectTrigger` — `h-7` or `h-8`.",
+              description: "On `SelectTrigger` — `h-10` or `h-[46px]`.",
             },
             {
               name: "position",

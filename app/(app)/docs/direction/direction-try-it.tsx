@@ -29,7 +29,7 @@ export function DirectionTryIt() {
       </div>
       <DirectionProvider
         dir={dir}
-        className="overflow-hidden rounded-xl border border-border/80 bg-background p-6"
+        className="overflow-hidden rounded-xl border border-border/70 bg-canvas p-6"
       >
         <div className="mx-auto flex w-full max-w-sm flex-col gap-4">
           <div className="grid gap-2">

@@ -79,7 +79,7 @@ export default async function NativeSelectDocsPage() {
           </code>{" "}
           — height{" "}
           <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
-            h-8
+            h-[46px]
           </code>{" "}
           by default. Prefer this for mobile OS pickers and simple forms; use
           the custom Select when you need rich menu chrome.
@@ -119,7 +119,7 @@ export default async function NativeSelectDocsPage() {
               name: "size",
               type: '"default" | "sm"',
               defaultValue: '"default"',
-              description: "Control height — default `h-8`, sm `h-7`.",
+              description: "Control height — default `h-[46px]`, sm `h-10`.",
             },
             {
               name: "disabled",
