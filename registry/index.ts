@@ -430,6 +430,20 @@ export const registry = {
       description:
         "Email-first sign-in with a link, plus Google, Facebook, and X. No password.",
     },
+    {
+      name: "login-04",
+      type: "registry:block" as const,
+      title: "Photo Login",
+      description:
+        "Split sign-in: a rounded photo beside Google, Apple, or email and password.",
+    },
+    {
+      name: "login-05",
+      type: "registry:block" as const,
+      title: "Quote Login",
+      description:
+        "Sign-in with email and password, or Google and Apple, beside a quote on a photo.",
+    },
   ],
   charts: [
     {

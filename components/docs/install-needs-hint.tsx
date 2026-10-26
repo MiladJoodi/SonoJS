@@ -43,14 +43,16 @@ export function InstallNeedsHint({
       )}
     >
       <span className="shrink-0">{label}</span>
-      <code className="min-w-0 max-w-full flex-1 truncate rounded-md border border-border/70 bg-background px-1.5 py-0.5 font-mono text-[11.5px] text-foreground">
-        {command}
-      </code>
-      <CopyButton
-        value={command}
-        tooltip={copyTooltip}
-        className="text-muted-foreground hover:bg-muted hover:text-foreground"
-      />
+      <span className="inline-flex min-w-0 max-w-full items-center gap-1">
+        <code className="min-w-0 truncate rounded-md border border-border/70 bg-background px-1.5 py-0.5 font-mono text-[11.5px] text-foreground">
+          {command}
+        </code>
+        <CopyButton
+          value={command}
+          tooltip={copyTooltip}
+          className="shrink-0 text-muted-foreground hover:bg-muted hover:text-foreground"
+        />
+      </span>
     </div>
   )
 }

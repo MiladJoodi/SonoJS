@@ -13,10 +13,10 @@ function formatPropType(type: string) {
 }
 
 export function DocsApiProps({
-  rows,
+  rows = [],
   className,
 }: {
-  rows: PropRow[]
+  rows?: PropRow[]
   className?: string
 }) {
   return (

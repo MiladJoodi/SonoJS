@@ -17,6 +17,7 @@ export function CopyButton({
   tooltip = true,
   tooltipSide = "bottom",
   tone = "code",
+  children,
 }: {
   value: string
   className?: string
@@ -25,9 +26,12 @@ export function CopyButton({
   tooltipSide?: "top" | "bottom"
   /** `code` sits on a dark code header. `chrome` sits on the page surface. */
   tone?: "code" | "chrome"
+  /** Optional visible label before the icon (e.g. Install). */
+  children?: React.ReactNode
 }) {
   const [copied, setCopied] = React.useState(false)
   const label = copied ? "Copied" : "Copy"
+  const hasLabel = children != null && children !== false
 
   React.useEffect(() => {
     if (!copied) return
@@ -39,11 +43,12 @@ export function CopyButton({
     <Button
       type="button"
       variant="ghost"
-      size="icon-xs"
+      size={hasLabel ? "xs" : "icon-xs"}
       className={cn(
         tone === "chrome"
           ? "cursor-pointer text-muted-foreground hover:bg-muted hover:text-foreground"
           : "cursor-pointer text-[color:var(--code-header-fg)] hover:bg-white/10 hover:text-[color:var(--code-fg)]",
+        hasLabel && "gap-1 px-2",
         className
       )}
       aria-label={label}
@@ -56,8 +61,11 @@ export function CopyButton({
         }
       }}
     >
+      {hasLabel ? (
+        <span className="text-xs font-medium">{children}</span>
+      ) : null}
       {copied ? <CheckIcon /> : <CopyIcon />}
-      <span className="sr-only">{label}</span>
+      {!hasLabel ? <span className="sr-only">{label}</span> : null}
     </Button>
   )
 

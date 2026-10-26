@@ -38,7 +38,7 @@ function CliCodeFrame({
 }) {
   return (
     <div className="sono-code-block rounded-none border-0">
-      <div className="flex items-center justify-between gap-2 border-b border-[color:var(--code-border)] px-4 py-2">
+      <div className="flex items-center gap-1 border-b border-[color:var(--code-border)] px-4 py-2">
         <div className="font-mono text-[14px] font-normal text-[color:var(--code-header-fg)]">
           CLI
         </div>
@@ -62,12 +62,12 @@ function ManualFileFrame({
   return (
     <div className="overflow-hidden rounded-xl border border-border/80">
       <div className="sono-code-block rounded-none border-0">
-        <div className="flex items-center justify-between gap-2 border-b border-[color:var(--code-border)] px-4 py-2">
+        <div className="flex min-w-0 items-center gap-1 border-b border-[color:var(--code-border)] px-4 py-2">
           <div className="min-w-0 truncate font-mono text-[14px] font-normal text-[color:var(--code-header-fg)]">
             {file.title}
           </div>
           {/* Copy raw source only — never path or highlight HTML */}
-          <CopyButton value={file.code} tooltip={copyTooltip} />
+          <CopyButton value={file.code} tooltip={copyTooltip} className="shrink-0" />
         </div>
         <div
           className="sono-code-shiki no-scrollbar max-h-96 overflow-auto font-mono text-[14px] leading-[1.65]"
@@ -86,8 +86,8 @@ function QuietCommand({
   copyTooltip: boolean
 }) {
   return (
-    <div className="flex min-w-0 items-center gap-2">
-      <code className="min-w-0 max-w-full flex-1 truncate rounded-md border border-border/70 bg-background px-1.5 py-0.5 font-mono text-[11.5px] text-foreground">
+    <div className="inline-flex min-w-0 max-w-full items-center gap-1">
+      <code className="min-w-0 truncate rounded-md border border-border/70 bg-background px-1.5 py-0.5 font-mono text-[11.5px] text-foreground">
         {command}
       </code>
       <CopyButton

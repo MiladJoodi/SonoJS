@@ -3,6 +3,8 @@
 import * as React from "react"
 import Link from "next/link"
 import {
+  Code2Icon,
+  EyeIcon,
   FullscreenIcon,
   MonitorIcon,
   SmartphoneIcon,
@@ -23,12 +25,18 @@ import type { Direction } from "@/lib/direction"
 import { cn } from "@/lib/utils"
 
 type View = "preview" | "code"
-type Viewport = "100%" | "60%" | "30%"
+type Viewport = "desktop" | "tablet" | "mobile"
 
-const viewports: { value: Viewport; label: string; icon: typeof MonitorIcon }[] = [
-  { value: "100%", label: "Desktop", icon: MonitorIcon },
-  { value: "60%", label: "Tablet", icon: TabletIcon },
-  { value: "30%", label: "Mobile", icon: SmartphoneIcon },
+const viewports: {
+  value: Viewport
+  label: string
+  icon: typeof MonitorIcon
+  /** Pixel width for iframe viewport (media queries). Desktop uses full width. */
+  width: number | "100%"
+}[] = [
+  { value: "desktop", label: "Desktop", icon: MonitorIcon, width: "100%" },
+  { value: "tablet", label: "Tablet", icon: TabletIcon, width: 768 },
+  { value: "mobile", label: "Mobile", icon: SmartphoneIcon, width: 375 },
 ]
 
 function Segment({
@@ -54,7 +62,7 @@ function Segment({
           onClick={onClick}
           className={cn(
             "inline-flex h-6 cursor-pointer items-center justify-center rounded-sm px-2 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground",
-            pressed && "bg-muted text-foreground",
+            pressed && "bg-canvas text-foreground",
             className
           )}
         >
@@ -71,6 +79,8 @@ export function BlockExample({
   title,
   usage = [],
   children,
+  previewAlign = "center",
+  previewClassName,
 }: {
   /** Registry item name. Passed to `add`. */
   name: string
@@ -78,11 +88,20 @@ export function BlockExample({
   title?: string
   usage?: BlockInstallUsage[]
   children: React.ReactNode
+  /** How the preview sits in the frame. Navbars use `start`. */
+  previewAlign?: "center" | "start"
+  /** Extra classes on the preview surface (e.g. white page demos). */
+  previewClassName?: string
 }) {
   const [view, setView] = React.useState<View>("preview")
-  const [viewport, setViewport] = React.useState<Viewport>("100%")
+  const [viewport, setViewport] = React.useState<Viewport>("desktop")
   const [dir, setDir] = React.useState<Direction>("ltr")
   const command = `npx @sonojs/ui@latest add ${name}`
+  const activeViewport =
+    viewports.find((item) => item.value === viewport) ?? viewports[0]
+  /** Narrow frames need a real document viewport so `sm`/`md` media queries apply. */
+  const useFrame = viewport !== "desktop"
+  const frameSrc = `/view/${name}?embed=1&dir=${dir}`
 
   function showPreview(next?: Viewport) {
     if (next) setViewport(next)
@@ -91,11 +110,15 @@ export function BlockExample({
 
   return (
     <section id={name} className="flex w-full min-w-0 scroll-mt-24 flex-col gap-2">
-      <div className="flex min-w-0 flex-wrap items-center gap-2">
-        <p className="min-w-0 max-w-full truncate text-start text-sm font-medium text-foreground">
+      <div className="flex min-w-0 items-center gap-3">
+        <p
+          className="min-w-0 shrink truncate text-start font-mono text-[11.5px] text-muted-foreground"
+          title={title ?? name}
+        >
           {title ?? name}
         </p>
-        <div className="flex h-8 shrink-0 items-center gap-0.5 rounded-md border border-border/80 bg-background p-0.5">
+        <div className="ms-auto flex min-w-0 shrink-0 items-center gap-2">
+          <div className="flex h-8 items-center gap-0.5 rounded-md border border-border-soft bg-card p-0.5">
             <div className="hidden items-center gap-0.5 md:flex">
               {viewports.map((item) => (
                 <Segment
@@ -117,7 +140,7 @@ export function BlockExample({
                 <Button
                   variant="ghost"
                   size="icon-xs"
-                  className="text-muted-foreground hover:text-foreground"
+                  className="text-muted-foreground hover:bg-canvas hover:text-foreground"
                   asChild
                 >
                   <Link href={`/view/${name}`} target="_blank" rel="noreferrer">
@@ -128,69 +151,105 @@ export function BlockExample({
               </TooltipTrigger>
               <TooltipContent side="top">Open in a new tab</TooltipContent>
             </Tooltip>
-            <div className="mx-0.5 h-4" aria-hidden>
-              <Separator orientation="vertical" />
-            </div>
-            <div className="flex h-6 items-center gap-0.5 pe-0.5 ps-2">
-              <span className="text-xs font-medium text-muted-foreground">Install</span>
-              <CopyButton value={command} tone="chrome" tooltipSide="top" />
-            </div>
-        </div>
-        <div className="ms-auto flex shrink-0 items-center gap-2">
+          </div>
+
+          <CopyButton
+            value={command}
+            tone="chrome"
+            tooltipSide="top"
+            className="h-8 pe-1.5 ps-2 md:hidden"
+          >
+            CLI
+          </CopyButton>
+          <div className="hidden max-w-[min(100%,18rem)] items-center gap-0.5 lg:flex">
+            <code className="min-w-0 truncate px-0.5 font-mono text-[11px] text-muted-foreground">
+              {command}
+            </code>
+            <CopyButton
+              value={command}
+              tone="chrome"
+              tooltipSide="top"
+              className="size-7 shrink-0"
+            />
+          </div>
+          <CopyButton
+            value={command}
+            tone="chrome"
+            tooltipSide="top"
+            className="hidden size-8 md:inline-flex lg:hidden"
+          />
+
           {view === "preview" ? (
             <DirectionToggle value={dir} onValueChange={setDir} />
           ) : null}
-          <div className="flex h-8 items-center gap-0.5 rounded-md border border-border/80 bg-background p-0.5">
+          <div className="flex h-8 items-center gap-0.5 rounded-md border border-border-soft bg-card p-0.5">
             <Segment
               label="Preview"
               pressed={view === "preview"}
               onClick={() => showPreview()}
-              className="px-2.5"
+              className="size-7 px-0"
             >
-              Preview
+              <EyeIcon className="size-4" />
             </Segment>
             <Segment
               label="Code"
               pressed={view === "code"}
               onClick={() => setView("code")}
-              className="px-2.5"
+              className="size-7 px-0"
             >
-              Code
+              <Code2Icon className="size-4" />
             </Segment>
           </div>
         </div>
       </div>
 
-      <div className="overflow-hidden rounded-lg border border-border/80">
+      <div className="overflow-hidden rounded-lg border border-border">
         {view === "preview" ? (
           <div
             className={cn(
-              "flex min-h-[28rem] items-center justify-center",
-              viewport === "100%" ? "bg-background" : "bg-muted/30"
+              "flex min-h-[28rem] bg-canvas",
+              previewAlign === "center" && "items-center justify-center",
+              previewAlign === "start" && "items-stretch justify-center",
+              useFrame && "bg-muted",
+              !useFrame && previewClassName
             )}
             style={
-              viewport === "100%"
-                ? undefined
-                : {
+              useFrame
+                ? {
                     backgroundImage:
                       "radial-gradient(circle, var(--border) 1px, transparent 1px)",
                     backgroundSize: "16px 16px",
                   }
+                : undefined
             }
           >
             <div
               className={cn(
-                "h-auto transition-[width] duration-200 ease-linear",
-                viewport !== "100%" &&
-                  "overflow-hidden border border-border/80 bg-background"
+                "transition-[width] duration-200 ease-linear",
+                useFrame
+                  ? "overflow-hidden border border-border bg-card"
+                  : "h-auto w-full",
+                useFrame && previewClassName
               )}
-              style={{ width: viewport }}
+              style={{
+                width: activeViewport.width,
+                maxWidth: "100%",
+              }}
             >
-              <DirectionProvider dir={dir}>{children}</DirectionProvider>
+              {useFrame ? (
+                <iframe
+                  key={frameSrc}
+                  title={`${name} ${activeViewport.label} preview`}
+                  src={frameSrc}
+                  className="block h-[42rem] w-full border-0 bg-card"
+                />
+              ) : (
+                <DirectionProvider dir={dir}>{children}</DirectionProvider>
+              )}
             </div>
           </div>
         ) : (
-          <div className="max-h-[40rem] overflow-auto bg-background p-4">
+          <div className="max-h-[40rem] overflow-auto bg-card p-4">
             <BlockInstallBody name={name} usage={usage} />
           </div>
         )}

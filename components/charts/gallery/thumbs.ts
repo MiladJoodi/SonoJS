@@ -1,7 +1,7 @@
-/** Gallery thumbs: `public/chart/{id}-light.webp` + `{id}-dark.webp`. */
+/** Gallery thumbs: `public/images/chart/{id}-light.webp` + `{id}-dark.webp`. */
 
 export function chartThumbSrc(id: string, theme: "light" | "dark") {
-  return `/chart/${id}-${theme}.webp`
+  return `/images/chart/${id}-${theme}.webp`
 }
 
 /** Dispatched on `/charts` when scroll-spy changes the active category. */

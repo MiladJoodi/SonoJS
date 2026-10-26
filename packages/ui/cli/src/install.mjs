@@ -50,7 +50,11 @@ export async function installRegistryItemFiles(item, {
     }
 
     await mkdir(path.dirname(dest), { recursive: true })
-    await writeFile(dest, file.content, "utf8")
+    if (file.encoding === "base64") {
+      await writeFile(dest, Buffer.from(file.content, "base64"))
+    } else {
+      await writeFile(dest, file.content, "utf8")
+    }
     written.push(path.relative(cwd, dest))
   }
 

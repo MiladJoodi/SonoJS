@@ -19,11 +19,11 @@ export function CodePanel({
 }) {
   return (
     <div className={cn("sono-code-block rounded-none border-0", className)}>
-      <div className="flex items-center justify-between gap-2 border-b border-[color:var(--code-border)] px-4 py-2">
-        <div className="font-mono text-[14px] font-normal text-[color:var(--code-header-fg)]">
+      <div className="flex min-w-0 items-center gap-1 border-b border-[color:var(--code-border)] px-4 py-2">
+        <div className="min-w-0 truncate font-mono text-[14px] font-normal text-[color:var(--code-header-fg)]">
           {title}
         </div>
-        <CopyButton value={code} tooltip={copyTooltip} />
+        <CopyButton value={code} tooltip={copyTooltip} className="shrink-0" />
       </div>
       <div
         className="sono-code-shiki no-scrollbar max-h-72 overflow-auto font-mono text-[14px] leading-[1.65]"

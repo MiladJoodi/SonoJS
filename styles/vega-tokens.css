@@ -5,7 +5,7 @@
  */
 
 /* -------------------------------------------------------------------------- */
-/* Light — pure white paper (no blue-tint fills; accents stay on primary only) */
+/* Light — soft gray canvas (no blue-tint fills; accents stay on primary only) */
 /* -------------------------------------------------------------------------- */
 
 .style-vega {
@@ -24,7 +24,13 @@
   --vega-chart-4: #6366f1;
   --vega-chart-5: #e11d48;
 
-  --background: #ffffff;
+  --canvas: #f3f3f4;
+  --border-soft: color-mix(in oklab, #e4e4e7 70%, transparent);
+  --shadow-soft:
+    0 2px 4px -1px rgba(10, 10, 12, 0.04),
+    0 28px 56px -28px rgba(10, 10, 12, 0.18);
+
+  --background: var(--canvas);
   --foreground: #09090b;
   --card: #ffffff;
   --card-foreground: #09090b;
@@ -150,7 +156,13 @@ html.dark .style-vega,
   --vega-chart-5: #fb7185;
 
   /* Neutral zinc shell — primary stays brand blue only */
-  --background: #09090b;
+  --canvas: #09090b;
+  --border-soft: color-mix(in oklab, #27272a 70%, transparent);
+  --shadow-soft:
+    0 2px 4px -1px rgba(0, 0, 0, 0.24),
+    0 28px 56px -28px rgba(0, 0, 0, 0.48);
+
+  --background: var(--canvas);
   --foreground: #fafafa;
   --card: #18181b;
   --card-foreground: #fafafa;
@@ -237,12 +249,12 @@ html.dark .style-vega,
 }
 
 /*
- * One continuous white paper under hero + collage — never a second slab on
+ * One continuous canvas under hero + collage — never a second slab on
  * [data-collage-surface] (that hard edge read as a separator line).
- * No tinted / stained washes — keep the shell flat white in light.
+ * Shell matches --background in light.
  */
 .style-vega [data-home-surface] {
-  background-color: #ffffff;
+  background-color: var(--background);
   background-image: none;
   background-size: auto;
   background-attachment: scroll;

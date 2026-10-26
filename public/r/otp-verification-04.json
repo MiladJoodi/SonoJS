@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "otp-verification-04",
+  "type": "registry:block",
+  "title": "otp-verification-04",
+  "description": "Phone verification with a 6-digit OTP.",
+  "dependencies": [
+    "input-otp"
+  ],
+  "registryDependencies": [
+    "button",
+    "input-otp",
+    "label"
+  ],
+  "files": [
+    {
+      "path": "components/blocks/authentication/otp-verification-04/otp-verification-form.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { SmartphoneIcon } from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { Button } from \"@/components/ui/button\"\nimport {\n  InputOTP,\n  InputOTPGroup,\n  InputOTPSeparator,\n  InputOTPSlot,\n} from \"@/components/ui/input-otp\"\nimport { Label } from \"@/components/ui/label\"\n\nexport default function OtpVerificationForm({\n  className,\n  ...props\n}: React.ComponentProps<\"div\">) {\n  const [otp, setOtp] = React.useState(\"\")\n\n  return (\n    <div\n      className={cn(\n        \"[--login-card-padding:1.5rem] sm:[--login-card-padding:2rem]\",\n        \"flex w-full flex-col gap-8 rounded-[12px] border border-border/70 bg-card p-(--login-card-padding)\",\n        \"shadow-[0_2px_4px_-1px_rgba(10,10,12,0.04),0_28px_56px_-28px_rgba(10,10,12,0.18)]\",\n        \"dark:shadow-[0_2px_4px_-1px_rgba(0,0,0,0.24),0_28px_56px_-28px_rgba(0,0,0,0.48)]\",\n        className\n      )}\n      {...props}\n    >\n      <header className=\"flex flex-col items-center gap-3 text-center\">\n        <span className=\"flex size-12 items-center justify-center rounded-full bg-muted text-foreground\">\n          <SmartphoneIcon className=\"size-5\" />\n        </span>\n        <div className=\"space-y-1.5\">\n          <h1 className=\"text-h3 text-foreground\">Check your phone</h1>\n          <p className=\"text-sm text-muted-foreground\">\n            We texted a code to{\" \"}\n            <span dir=\"ltr\" className=\"font-medium text-foreground\">\n              +1 ••• ••• 4242\n            </span>\n          </p>\n        </div>\n      </header>\n\n      <form\n        className=\"flex flex-col items-center gap-4\"\n        onSubmit={(event) => event.preventDefault()}\n      >\n        <div className=\"flex w-full flex-col items-center gap-2\">\n          <Label htmlFor=\"otp-04\" className=\"sr-only\">\n            SMS verification code\n          </Label>\n          <div dir=\"ltr\" className=\"flex w-full justify-center\">\n            <InputOTP\n              id=\"otp-04\"\n              maxLength={6}\n              value={otp}\n              onChange={setOtp}\n              containerClassName=\"justify-center\"\n            >\n              <InputOTPGroup>\n                <InputOTPSlot index={0} />\n                <InputOTPSlot index={1} />\n                <InputOTPSlot index={2} />\n              </InputOTPGroup>\n              <InputOTPSeparator />\n              <InputOTPGroup>\n                <InputOTPSlot index={3} />\n                <InputOTPSlot index={4} />\n                <InputOTPSlot index={5} />\n              </InputOTPGroup>\n            </InputOTP>\n          </div>\n        </div>\n        <Button\n          type=\"submit\"\n          className=\"mt-1 h-[46px] w-full rounded-[12px] shadow-none\"\n        >\n          Verify phone\n        </Button>\n      </form>\n\n      <p className=\"text-center text-sm text-muted-foreground\">\n        Did not get it?{\" \"}\n        <a\n          href=\"#\"\n          className=\"cursor-pointer font-medium text-foreground underline-offset-4 hover:underline\"\n        >\n          Resend SMS\n        </a>\n      </p>\n    </div>\n  )\n}\n",
+      "target": "components/blocks/authentication/otp-verification-04/otp-verification-form.tsx"
+    }
+  ],
+  "version": "0.1.0+2720671e4284",
+  "generatedAt": "2026-10-26T11:05:11.128Z"
+}

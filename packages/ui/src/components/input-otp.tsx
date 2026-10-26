@@ -15,14 +15,14 @@ function InputOTP({
   return (
     <OTPInput
       data-slot="input-otp"
-      // OTP codes are always entered LTR — isolate from page RTL.
-      dir="ltr"
       containerClassName={cn(
         "flex items-center gap-2 has-disabled:opacity-50",
         containerClassName
       )}
       className={cn("disabled:cursor-not-allowed", className)}
       {...props}
+      // OTP codes are always entered LTR — isolate from page RTL.
+      dir="ltr"
     />
   )
 }
@@ -31,9 +31,9 @@ function InputOTPGroup({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="input-otp-group"
-      dir="ltr"
       className={cn("flex items-center gap-2", className)}
       {...props}
+      dir="ltr"
     />
   )
 }

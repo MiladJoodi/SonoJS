@@ -15,7 +15,7 @@ export function XIcon({
       fill="currentColor"
       {...props}
     >
-      <g transform="translate(12 12) scale(0.954545) translate(-12 -12)">
+      <g transform="translate(12 12) scale(0.78) translate(-12 -12)">
         <path fillRule="evenodd" clipRule="evenodd" d={xPath} />
       </g>
     </svg>

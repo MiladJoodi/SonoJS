@@ -14,7 +14,14 @@ export function FacebookIcon({
       className={cn("size-5", className)}
       {...props}
     >
-      <path fillRule="evenodd" clipRule="evenodd" d={facebookPath} fill="#0866FF" />
+      <g transform="translate(12 12) scale(1.12) translate(-12 -12)">
+        <path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d={facebookPath}
+          fill="#0866FF"
+        />
+      </g>
     </svg>
   )
 }

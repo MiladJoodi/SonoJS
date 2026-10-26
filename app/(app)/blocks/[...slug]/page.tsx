@@ -14,12 +14,7 @@ type PageProps = {
 
 export function generateStaticParams() {
   return getAllBlockItems()
-    .filter(
-      (item) =>
-        item.href !== "/blocks/authentication/login" &&
-        item.href !== "/blocks/authentication/signup" &&
-        item.href !== "/blocks/ai-agents/agent-run-timeline"
-    )
+    .filter((item) => item.status !== "ready")
     .map((item) => ({
       slug: item.href.replace(/^\/blocks\//, "").split("/"),
     }))

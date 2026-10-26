@@ -103,16 +103,46 @@ function rewriteBlockTargets(content, files) {
   )
 }
 
+const BINARY_EXT = new Set([
+  ".webp",
+  ".png",
+  ".jpg",
+  ".jpeg",
+  ".gif",
+  ".svg",
+  ".woff2",
+])
+
+function isBinaryRegistryPath(filePath) {
+  return BINARY_EXT.has(path.extname(filePath).toLowerCase())
+}
+
 function buildItemPayload(item, version, generatedAt) {
   const files = item.files.map((file) => {
     const abs = path.join(root, file.path)
     if (!existsSync(abs)) {
       throw new Error(`Missing registry file: ${file.path}`)
     }
+
+    if (isBinaryRegistryPath(file.path)) {
+      const payload = {
+        path: file.target || file.path,
+        type: file.type,
+        content: readFileSync(abs).toString("base64"),
+        encoding: "base64",
+      }
+      if (file.target) payload.target = file.target
+      return payload
+    }
+
     let content = readFileSync(abs, "utf8")
+    const isSourceText =
+      /\.(tsx?|jsx?|mjs|cjs|css)$/i.test(file.path) &&
+      !file.path.endsWith(".json")
     if (
-      file.path.startsWith("packages/ui/") ||
-      file.path.startsWith("registry/blocks/")
+      isSourceText &&
+      (file.path.startsWith("packages/ui/") ||
+        file.path.startsWith("registry/blocks/"))
     ) {
       content = rewriteConsumerImports(content)
     }
@@ -168,26 +198,44 @@ function writeAtomic(dir, files) {
     }
 
     const backup = `${dir}.bak-${Date.now()}`
+    let renamed = false
     if (existsSync(dir)) {
-      renameSync(dir, backup)
+      try {
+        renameSync(dir, backup)
+        renamed = true
+      } catch (error) {
+        // Windows may lock public/r (dev server). Fall back to in-place overwrite.
+        if (error && error.code !== "EPERM" && error.code !== "EACCES") {
+          throw error
+        }
+        console.warn(
+          `Could not rename ${dir} (${error.code}); writing files in place.`
+        )
+      }
     }
 
-    try {
-      mkdirSync(dir, { recursive: true })
+    if (renamed || !existsSync(dir)) {
+      try {
+        mkdirSync(dir, { recursive: true })
+        for (const name of readdirSync(staging)) {
+          cpSync(path.join(staging, name), path.join(dir, name))
+        }
+        if (existsSync(backup)) {
+          rmSync(backup, { recursive: true, force: true })
+        }
+      } catch (error) {
+        if (existsSync(dir)) {
+          rmSync(dir, { recursive: true, force: true })
+        }
+        if (existsSync(backup)) {
+          renameSync(backup, dir)
+        }
+        throw error
+      }
+    } else {
       for (const name of readdirSync(staging)) {
         cpSync(path.join(staging, name), path.join(dir, name))
       }
-      if (existsSync(backup)) {
-        rmSync(backup, { recursive: true, force: true })
-      }
-    } catch (error) {
-      if (existsSync(dir)) {
-        rmSync(dir, { recursive: true, force: true })
-      }
-      if (existsSync(backup)) {
-        renameSync(backup, dir)
-      }
-      throw error
     }
   } finally {
     rmSync(staging, { recursive: true, force: true })

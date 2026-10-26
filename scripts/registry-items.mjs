@@ -16,6 +16,22 @@
  * }} RegistryItemDef
  */
 
+/** Social brand icons for auth blocks (`@/registry/icons/*` → block-local `icons/`). */
+function authSocialIconFiles(slug, icons) {
+  return icons.flatMap((name) => [
+    {
+      path: `registry/icons/${name}.tsx`,
+      type: "registry:component",
+      target: `components/blocks/authentication/${slug}/icons/${name}.tsx`,
+    },
+    {
+      path: `registry/icons/${name}.svg`,
+      type: "registry:file",
+      target: `components/blocks/authentication/${slug}/icons/${name}.svg`,
+    },
+  ])
+}
+
 /** @type {RegistryItemDef[]} */
 export const registryItems = [
   {
@@ -1078,109 +1094,401 @@ export const registryItems = [
     registryDependencies: ["button", "input", "label", "separator"],
     files: [
       {
-        path: "registry/blocks/authentication/login-01/components/login-form.tsx",
+        path: "registry/blocks/authentication/login/login-01/login-form.tsx",
         type: "registry:component",
-        target: "blocks/login-01/components/login-form.tsx",
+        target: "components/blocks/authentication/login-01/login-form.tsx",
       },
       {
         path: "registry/icons/google.tsx",
         type: "registry:component",
-        target: "blocks/login-01/icons/google.tsx",
+        target: "components/blocks/authentication/login-01/icons/google.tsx",
       },
       {
         path: "registry/icons/apple.tsx",
         type: "registry:component",
-        target: "blocks/login-01/icons/apple.tsx",
+        target: "components/blocks/authentication/login-01/icons/apple.tsx",
       },
       {
         path: "registry/icons/google.svg",
         type: "registry:file",
-        target: "blocks/login-01/icons/google.svg",
+        target: "components/blocks/authentication/login-01/icons/google.svg",
       },
       {
         path: "registry/icons/apple.svg",
         type: "registry:file",
-        target: "blocks/login-01/icons/apple.svg",
+        target: "components/blocks/authentication/login-01/icons/apple.svg",
       },
     ],
   },
   {
     name: "login-02",
     type: "registry:block",
-    title: "Social Login",
+    title: "login-02",
     description:
       "Sign in with Google or Facebook, or with email. Includes remember me and password recovery.",
     registryDependencies: ["button", "checkbox", "input", "label", "separator"],
     files: [
       {
-        path: "registry/blocks/authentication/login-02/components/login-form.tsx",
+        path: "registry/blocks/authentication/login/login-02/login-form.tsx",
         type: "registry:component",
-        target: "blocks/login-02/components/login-form.tsx",
+        target: "components/blocks/authentication/login-02/login-form.tsx",
       },
       {
         path: "registry/icons/google.tsx",
         type: "registry:component",
-        target: "blocks/login-02/icons/google.tsx",
+        target: "components/blocks/authentication/login-02/icons/google.tsx",
       },
       {
         path: "registry/icons/facebook.tsx",
         type: "registry:component",
-        target: "blocks/login-02/icons/facebook.tsx",
+        target: "components/blocks/authentication/login-02/icons/facebook.tsx",
       },
       {
         path: "registry/icons/google.svg",
         type: "registry:file",
-        target: "blocks/login-02/icons/google.svg",
+        target: "components/blocks/authentication/login-02/icons/google.svg",
       },
       {
         path: "registry/icons/facebook.svg",
         type: "registry:file",
-        target: "blocks/login-02/icons/facebook.svg",
+        target: "components/blocks/authentication/login-02/icons/facebook.svg",
       },
     ],
   },
   {
     name: "login-03",
     type: "registry:block",
-    title: "Passwordless Login",
+    title: "login-03",
     description:
       "Email-first sign-in with a link, plus Google, Facebook, and X. No password.",
     registryDependencies: ["button", "input", "label", "separator"],
     files: [
       {
-        path: "registry/blocks/authentication/login-03/components/login-form.tsx",
+        path: "registry/blocks/authentication/login/login-03/login-form.tsx",
         type: "registry:component",
-        target: "blocks/login-03/components/login-form.tsx",
+        target: "components/blocks/authentication/login-03/login-form.tsx",
       },
       {
         path: "registry/icons/google.tsx",
         type: "registry:component",
-        target: "blocks/login-03/icons/google.tsx",
+        target: "components/blocks/authentication/login-03/icons/google.tsx",
       },
       {
         path: "registry/icons/facebook.tsx",
         type: "registry:component",
-        target: "blocks/login-03/icons/facebook.tsx",
+        target: "components/blocks/authentication/login-03/icons/facebook.tsx",
       },
       {
         path: "registry/icons/x.tsx",
         type: "registry:component",
-        target: "blocks/login-03/icons/x.tsx",
+        target: "components/blocks/authentication/login-03/icons/x.tsx",
       },
       {
         path: "registry/icons/google.svg",
         type: "registry:file",
-        target: "blocks/login-03/icons/google.svg",
+        target: "components/blocks/authentication/login-03/icons/google.svg",
       },
       {
         path: "registry/icons/facebook.svg",
         type: "registry:file",
-        target: "blocks/login-03/icons/facebook.svg",
+        target: "components/blocks/authentication/login-03/icons/facebook.svg",
       },
       {
         path: "registry/icons/x.svg",
         type: "registry:file",
-        target: "blocks/login-03/icons/x.svg",
+        target: "components/blocks/authentication/login-03/icons/x.svg",
+      },
+    ],
+  },
+  {
+    name: "login-04",
+    type: "registry:block",
+    title: "login-04",
+    description:
+      "Split sign-in: a rounded photo beside Google, Apple, or email and password.",
+    registryDependencies: ["button", "input", "label", "separator"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/authentication/login/login-04/login-form.tsx",
+        type: "registry:component",
+        target: "components/blocks/authentication/login-04/login-form.tsx",
+      },
+      {
+        path: "registry/icons/google.tsx",
+        type: "registry:component",
+        target: "components/blocks/authentication/login-04/icons/google.tsx",
+      },
+      {
+        path: "registry/icons/apple.tsx",
+        type: "registry:component",
+        target: "components/blocks/authentication/login-04/icons/apple.tsx",
+      },
+      {
+        path: "registry/icons/google.svg",
+        type: "registry:file",
+        target: "components/blocks/authentication/login-04/icons/google.svg",
+      },
+      {
+        path: "registry/icons/apple.svg",
+        type: "registry:file",
+        target: "components/blocks/authentication/login-04/icons/apple.svg",
+      },
+      {
+        path: "public/images/blocks/authentication/login/login-04/01.webp",
+        type: "registry:file",
+        target: "public/images/blocks/authentication/login/login-04/01.webp",
+      },
+    ],
+  },
+  {
+    name: "login-05",
+    type: "registry:block",
+    title: "login-05",
+    description:
+      "Sign-in with email and password, or Google and Apple, beside a quote on a photo.",
+    registryDependencies: ["avatar", "button", "input", "label", "separator"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/authentication/login/login-05/login-form.tsx",
+        type: "registry:component",
+        target: "components/blocks/authentication/login-05/login-form.tsx",
+      },
+      {
+        path: "registry/icons/google.tsx",
+        type: "registry:component",
+        target: "components/blocks/authentication/login-05/icons/google.tsx",
+      },
+      {
+        path: "registry/icons/apple.tsx",
+        type: "registry:component",
+        target: "components/blocks/authentication/login-05/icons/apple.tsx",
+      },
+      {
+        path: "registry/icons/google.svg",
+        type: "registry:file",
+        target: "components/blocks/authentication/login-05/icons/google.svg",
+      },
+      {
+        path: "registry/icons/apple.svg",
+        type: "registry:file",
+        target: "components/blocks/authentication/login-05/icons/apple.svg",
+      },
+      {
+        path: "public/images/blocks/authentication/login/login-05/01.webp",
+        type: "registry:file",
+        target: "public/images/blocks/authentication/login/login-05/01.webp",
+      },
+      {
+        path: "public/images/blocks/authentication/login/login-05/02.webp",
+        type: "registry:file",
+        target: "public/images/blocks/authentication/login/login-05/02.webp",
+      },
+    ],
+  },
+  {
+    name: "login-06",
+    type: "registry:block",
+    title: "login-06",
+    description:
+      "Dark workspace sign-in with email and password, plus Google and Apple.",
+    registryDependencies: ["button", "input", "label", "separator"],
+    files: [
+      {
+        path: "registry/blocks/authentication/login/login-06/login-form.tsx",
+        type: "registry:component",
+        target: "components/blocks/authentication/login-06/login-form.tsx",
+      },
+      {
+        path: "registry/icons/google.tsx",
+        type: "registry:component",
+        target: "components/blocks/authentication/login-06/icons/google.tsx",
+      },
+      {
+        path: "registry/icons/apple.tsx",
+        type: "registry:component",
+        target: "components/blocks/authentication/login-06/icons/apple.tsx",
+      },
+      {
+        path: "registry/icons/google.svg",
+        type: "registry:file",
+        target: "components/blocks/authentication/login-06/icons/google.svg",
+      },
+      {
+        path: "registry/icons/apple.svg",
+        type: "registry:file",
+        target: "components/blocks/authentication/login-06/icons/apple.svg",
+      },
+    ],
+  },
+  {
+    name: "login-07",
+    type: "registry:block",
+    title: "login-07",
+    description:
+      "Glass card sign-in over a full-bleed photo, with Google and Apple.",
+    registryDependencies: ["button", "input", "label", "separator"],
+    files: [
+      {
+        path: "registry/blocks/authentication/login/login-07/login-form.tsx",
+        type: "registry:component",
+        target: "components/blocks/authentication/login-07/login-form.tsx",
+      },
+      {
+        path: "registry/icons/google.tsx",
+        type: "registry:component",
+        target: "components/blocks/authentication/login-07/icons/google.tsx",
+      },
+      {
+        path: "registry/icons/apple.tsx",
+        type: "registry:component",
+        target: "components/blocks/authentication/login-07/icons/apple.tsx",
+      },
+      {
+        path: "registry/icons/google.svg",
+        type: "registry:file",
+        target: "components/blocks/authentication/login-07/icons/google.svg",
+      },
+      {
+        path: "registry/icons/apple.svg",
+        type: "registry:file",
+        target: "components/blocks/authentication/login-07/icons/apple.svg",
+      },
+      {
+        path: "public/images/blocks/authentication/login/login-07/bg.webp",
+        type: "registry:file",
+        target: "public/images/blocks/authentication/login/login-07/bg.webp",
+      },
+    ],
+  },
+  {
+    name: "login-08",
+    type: "registry:block",
+    title: "login-08",
+    description:
+      "Illustration beside email and password sign-in, with Google and Apple.",
+    registryDependencies: ["button", "input", "label", "separator"],
+    files: [
+      {
+        path: "registry/blocks/authentication/login/login-08/login-form.tsx",
+        type: "registry:component",
+        target: "components/blocks/authentication/login-08/login-form.tsx",
+      },
+      {
+        path: "registry/icons/google.tsx",
+        type: "registry:component",
+        target: "components/blocks/authentication/login-08/icons/google.tsx",
+      },
+      {
+        path: "registry/icons/apple.tsx",
+        type: "registry:component",
+        target: "components/blocks/authentication/login-08/icons/apple.tsx",
+      },
+      {
+        path: "registry/icons/google.svg",
+        type: "registry:file",
+        target: "components/blocks/authentication/login-08/icons/google.svg",
+      },
+      {
+        path: "registry/icons/apple.svg",
+        type: "registry:file",
+        target: "components/blocks/authentication/login-08/icons/apple.svg",
+      },
+      {
+        path: "public/images/blocks/authentication/login/login-08/illustration.webp",
+        type: "registry:file",
+        target: "public/images/blocks/authentication/login/login-08/illustration.webp",
+      },
+    ],
+  },
+  {
+    name: "login-09",
+    type: "registry:block",
+    title: "login-09",
+    description:
+      "SaaS workspace sign-in with product panel, checklist, Google, and Apple.",
+    registryDependencies: ["button", "input", "label", "separator"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/authentication/login/login-09/login-form.tsx",
+        type: "registry:component",
+        target: "components/blocks/authentication/login-09/login-form.tsx",
+      },
+      {
+        path: "registry/icons/google.tsx",
+        type: "registry:component",
+        target: "components/blocks/authentication/login-09/icons/google.tsx",
+      },
+      {
+        path: "registry/icons/apple.tsx",
+        type: "registry:component",
+        target: "components/blocks/authentication/login-09/icons/apple.tsx",
+      },
+      {
+        path: "registry/icons/google.svg",
+        type: "registry:file",
+        target: "components/blocks/authentication/login-09/icons/google.svg",
+      },
+      {
+        path: "registry/icons/apple.svg",
+        type: "registry:file",
+        target: "components/blocks/authentication/login-09/icons/apple.svg",
+      },
+      {
+        path: "public/images/blocks/authentication/login/login-09/product.webp",
+        type: "registry:file",
+        target: "public/images/blocks/authentication/login/login-09/product.webp",
+      },
+    ],
+  },
+  {
+    name: "signup-01",
+    type: "registry:block",
+    title: "signup-01",
+    description: "Minimal name, email, and password sign-up.",
+    registryDependencies: ["button", "input", "label"],
+    files: [
+      {
+        path: "registry/blocks/authentication/signup/signup-01/signup-form.tsx",
+        type: "registry:component",
+        target: "components/blocks/authentication/signup-01/signup-form.tsx",
+      },
+    ],
+  },
+  {
+    name: "signup-02",
+    type: "registry:block",
+    title: "signup-02",
+    description:
+      "Sign-up with Google or GitHub, or with email and password.",
+    registryDependencies: ["button", "input", "label", "separator"],
+    files: [
+      {
+        path: "registry/blocks/authentication/signup/signup-02/signup-form.tsx",
+        type: "registry:component",
+        target: "components/blocks/authentication/signup-02/signup-form.tsx",
+      },
+      {
+        path: "registry/icons/google.tsx",
+        type: "registry:component",
+        target: "components/blocks/authentication/signup-02/icons/google.tsx",
+      },
+      {
+        path: "registry/icons/github.tsx",
+        type: "registry:component",
+        target: "components/blocks/authentication/signup-02/icons/github.tsx",
+      },
+      {
+        path: "registry/icons/google.svg",
+        type: "registry:file",
+        target: "components/blocks/authentication/signup-02/icons/google.svg",
+      },
+      {
+        path: "registry/icons/github.svg",
+        type: "registry:file",
+        target: "components/blocks/authentication/signup-02/icons/github.svg",
       },
     ],
   },
@@ -1194,29 +1502,34 @@ export const registryItems = [
     dependencies: ["lucide-react"],
     files: [
       {
-        path: "registry/blocks/authentication/signup-03/components/signup-form.tsx",
+        path: "registry/blocks/authentication/signup/signup-03/signup-form.tsx",
         type: "registry:component",
-        target: "blocks/signup-03/components/signup-form.tsx",
+        target: "components/blocks/authentication/signup-03/signup-form.tsx",
       },
       {
         path: "registry/icons/google.tsx",
         type: "registry:component",
-        target: "blocks/signup-03/icons/google.tsx",
+        target: "components/blocks/authentication/signup-03/icons/google.tsx",
       },
       {
         path: "registry/icons/apple.tsx",
         type: "registry:component",
-        target: "blocks/signup-03/icons/apple.tsx",
+        target: "components/blocks/authentication/signup-03/icons/apple.tsx",
       },
       {
         path: "registry/icons/google.svg",
         type: "registry:file",
-        target: "blocks/signup-03/icons/google.svg",
+        target: "components/blocks/authentication/signup-03/icons/google.svg",
       },
       {
         path: "registry/icons/apple.svg",
         type: "registry:file",
-        target: "blocks/signup-03/icons/apple.svg",
+        target: "components/blocks/authentication/signup-03/icons/apple.svg",
+      },
+      {
+        path: "public/images/blocks/authentication/signup/signup-03/01.webp",
+        type: "registry:file",
+        target: "public/images/blocks/authentication/signup/signup-03/01.webp",
       },
     ],
   },
@@ -1230,29 +1543,29 @@ export const registryItems = [
     dependencies: ["lucide-react"],
     files: [
       {
-        path: "registry/blocks/authentication/signup-04/components/signup-form.tsx",
+        path: "registry/blocks/authentication/signup/signup-04/signup-form.tsx",
         type: "registry:component",
-        target: "blocks/signup-04/components/signup-form.tsx",
+        target: "components/blocks/authentication/signup-04/signup-form.tsx",
       },
       {
         path: "registry/icons/google.tsx",
         type: "registry:component",
-        target: "blocks/signup-04/icons/google.tsx",
+        target: "components/blocks/authentication/signup-04/icons/google.tsx",
       },
       {
         path: "registry/icons/apple.tsx",
         type: "registry:component",
-        target: "blocks/signup-04/icons/apple.tsx",
+        target: "components/blocks/authentication/signup-04/icons/apple.tsx",
       },
       {
         path: "registry/icons/google.svg",
         type: "registry:file",
-        target: "blocks/signup-04/icons/google.svg",
+        target: "components/blocks/authentication/signup-04/icons/google.svg",
       },
       {
         path: "registry/icons/apple.svg",
         type: "registry:file",
-        target: "blocks/signup-04/icons/apple.svg",
+        target: "components/blocks/authentication/signup-04/icons/apple.svg",
       },
     ],
   },
@@ -1266,29 +1579,707 @@ export const registryItems = [
     dependencies: ["lucide-react"],
     files: [
       {
-        path: "registry/blocks/authentication/signup-05/components/signup-form.tsx",
+        path: "registry/blocks/authentication/signup/signup-05/signup-form.tsx",
         type: "registry:component",
-        target: "blocks/signup-05/components/signup-form.tsx",
+        target: "components/blocks/authentication/signup-05/signup-form.tsx",
       },
       {
         path: "registry/icons/google.tsx",
         type: "registry:component",
-        target: "blocks/signup-05/icons/google.tsx",
+        target: "components/blocks/authentication/signup-05/icons/google.tsx",
       },
       {
         path: "registry/icons/apple.tsx",
         type: "registry:component",
-        target: "blocks/signup-05/icons/apple.tsx",
+        target: "components/blocks/authentication/signup-05/icons/apple.tsx",
       },
       {
         path: "registry/icons/google.svg",
         type: "registry:file",
-        target: "blocks/signup-05/icons/google.svg",
+        target: "components/blocks/authentication/signup-05/icons/google.svg",
       },
       {
         path: "registry/icons/apple.svg",
         type: "registry:file",
-        target: "blocks/signup-05/icons/apple.svg",
+        target: "components/blocks/authentication/signup-05/icons/apple.svg",
+      },
+      {
+        path: "public/images/blocks/authentication/signup/signup-05/01.webp",
+        type: "registry:file",
+        target: "public/images/blocks/authentication/signup/signup-05/01.webp",
+      },
+      {
+        path: "public/images/blocks/authentication/signup/signup-05/02.webp",
+        type: "registry:file",
+        target: "public/images/blocks/authentication/signup/signup-05/02.webp",
+      },
+    ],
+  },
+  {
+    name: "signup-06",
+    type: "registry:block",
+    title: "signup-06",
+    description: "Dark full-bleed sign-up with Google and Apple.",
+    registryDependencies: ["button", "input", "label", "separator"],
+    files: [
+      {
+        path: "registry/blocks/authentication/signup/signup-06/signup-form.tsx",
+        type: "registry:component",
+        target: "components/blocks/authentication/signup-06/signup-form.tsx",
+      },
+      {
+        path: "registry/icons/google.tsx",
+        type: "registry:component",
+        target: "components/blocks/authentication/signup-06/icons/google.tsx",
+      },
+      {
+        path: "registry/icons/apple.tsx",
+        type: "registry:component",
+        target: "components/blocks/authentication/signup-06/icons/apple.tsx",
+      },
+      {
+        path: "registry/icons/google.svg",
+        type: "registry:file",
+        target: "components/blocks/authentication/signup-06/icons/google.svg",
+      },
+      {
+        path: "registry/icons/apple.svg",
+        type: "registry:file",
+        target: "components/blocks/authentication/signup-06/icons/apple.svg",
+      },
+    ],
+  },
+  {
+    name: "signup-07",
+    type: "registry:block",
+    title: "signup-07",
+    description: "Multi-step sign-up: account, profile, then done.",
+    registryDependencies: ["button", "input", "label"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/authentication/signup/signup-07/signup-form.tsx",
+        type: "registry:component",
+        target: "components/blocks/authentication/signup-07/signup-form.tsx",
+      },
+    ],
+  },
+  {
+    name: "signup-08",
+    type: "registry:block",
+    title: "signup-08",
+    description:
+      "SaaS workspace sign-up with company fields, Google and Apple, and a product column.",
+    registryDependencies: ["button", "input", "label", "separator"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/authentication/signup/signup-08/signup-form.tsx",
+        type: "registry:component",
+        target: "components/blocks/authentication/signup-08/signup-form.tsx",
+      },
+      {
+        path: "registry/icons/google.tsx",
+        type: "registry:component",
+        target: "components/blocks/authentication/signup-08/icons/google.tsx",
+      },
+      {
+        path: "registry/icons/apple.tsx",
+        type: "registry:component",
+        target: "components/blocks/authentication/signup-08/icons/apple.tsx",
+      },
+      {
+        path: "registry/icons/google.svg",
+        type: "registry:file",
+        target: "components/blocks/authentication/signup-08/icons/google.svg",
+      },
+      {
+        path: "registry/icons/apple.svg",
+        type: "registry:file",
+        target: "components/blocks/authentication/signup-08/icons/apple.svg",
+      },
+      {
+        path: "public/images/blocks/authentication/signup/signup-08/product.webp",
+        type: "registry:file",
+        target: "public/images/blocks/authentication/signup/signup-08/product.webp",
+      },
+    ],
+  },
+  {
+    name: "forgot-password-01",
+    type: "registry:block",
+    title: "forgot-password-01",
+    description: "Minimal forgot password: email and send recovery link.",
+    registryDependencies: ["button", "input", "label"],
+    files: [
+      {
+        path: "registry/blocks/authentication/forgot-password/forgot-password-01/forgot-password-form.tsx",
+        type: "registry:component",
+        target: "components/blocks/authentication/forgot-password-01/forgot-password-form.tsx",
+      },
+    ],
+  },
+  {
+    name: "forgot-password-02",
+    type: "registry:block",
+    title: "forgot-password-02",
+    description:
+      "Split forgot password: recovery form beside a large key icon panel.",
+    registryDependencies: ["button", "input", "label"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/authentication/forgot-password/forgot-password-02/forgot-password-form.tsx",
+        type: "registry:component",
+        target: "components/blocks/authentication/forgot-password-02/forgot-password-form.tsx",
+      },
+    ],
+  },
+  {
+    name: "forgot-password-03",
+    type: "registry:block",
+    title: "forgot-password-03",
+    description: "OTP recovery: enter the 6-digit verification code.",
+    registryDependencies: ["button", "input-otp", "label"],
+    dependencies: ["input-otp"],
+    files: [
+      {
+        path: "registry/blocks/authentication/forgot-password/forgot-password-03/forgot-password-form.tsx",
+        type: "registry:component",
+        target: "components/blocks/authentication/forgot-password-03/forgot-password-form.tsx",
+      },
+    ],
+  },
+  {
+    name: "forgot-password-04",
+    type: "registry:block",
+    title: "forgot-password-04",
+    description:
+      "Multi-step recovery: email, verification code, then new password.",
+    registryDependencies: ["button", "input", "input-otp", "label"],
+    dependencies: ["input-otp", "lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/authentication/forgot-password/forgot-password-04/forgot-password-form.tsx",
+        type: "registry:component",
+        target: "components/blocks/authentication/forgot-password-04/forgot-password-form.tsx",
+      },
+    ],
+  },
+  {
+    name: "reset-password-01",
+    type: "registry:block",
+    title: "reset-password-01",
+    description: "Minimal reset password: new password and confirm.",
+    registryDependencies: ["button", "input", "label"],
+    files: [
+      {
+        path: "registry/blocks/authentication/reset-password/reset-password-01/reset-password-form.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/authentication/reset-password-01/reset-password-form.tsx",
+      },
+    ],
+  },
+  {
+    name: "reset-password-02",
+    type: "registry:block",
+    title: "reset-password-02",
+    description: "Reset password with a visible strength meter.",
+    registryDependencies: ["button", "input", "label"],
+    files: [
+      {
+        path: "registry/blocks/authentication/reset-password/reset-password-02/reset-password-form.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/authentication/reset-password-02/reset-password-form.tsx",
+      },
+    ],
+  },
+  {
+    name: "reset-password-03",
+    type: "registry:block",
+    title: "reset-password-03",
+    description:
+      "Split reset password: form beside a large key icon panel.",
+    registryDependencies: ["button", "input", "label"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/authentication/reset-password/reset-password-03/reset-password-form.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/authentication/reset-password-03/reset-password-form.tsx",
+      },
+    ],
+  },
+  {
+    name: "reset-password-04",
+    type: "registry:block",
+    title: "reset-password-04",
+    description: "Password reset success confirmation card.",
+    registryDependencies: ["button"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/authentication/reset-password/reset-password-04/reset-password-form.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/authentication/reset-password-04/reset-password-form.tsx",
+      },
+    ],
+  },
+  {
+    name: "otp-verification-01",
+    type: "registry:block",
+    title: "otp-verification-01",
+    description: "Centered 6-digit OTP verification.",
+    registryDependencies: ["button", "input-otp", "label"],
+    dependencies: ["input-otp"],
+    files: [
+      {
+        path: "registry/blocks/authentication/otp-verification/otp-verification-01/otp-verification-form.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/authentication/otp-verification-01/otp-verification-form.tsx",
+      },
+    ],
+  },
+  {
+    name: "otp-verification-02",
+    type: "registry:block",
+    title: "otp-verification-02",
+    description: "OTP verification with auto-focus on the first slot.",
+    registryDependencies: ["button", "input-otp", "label"],
+    dependencies: ["input-otp"],
+    files: [
+      {
+        path: "registry/blocks/authentication/otp-verification/otp-verification-02/otp-verification-form.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/authentication/otp-verification-02/otp-verification-form.tsx",
+      },
+    ],
+  },
+  {
+    name: "otp-verification-03",
+    type: "registry:block",
+    title: "otp-verification-03",
+    description: "Email verification with a 6-digit OTP.",
+    registryDependencies: ["button", "input-otp", "label"],
+    dependencies: ["input-otp"],
+    files: [
+      {
+        path: "registry/blocks/authentication/otp-verification/otp-verification-03/otp-verification-form.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/authentication/otp-verification-03/otp-verification-form.tsx",
+      },
+    ],
+  },
+  {
+    name: "otp-verification-04",
+    type: "registry:block",
+    title: "otp-verification-04",
+    description: "Phone verification with a 6-digit OTP.",
+    registryDependencies: ["button", "input-otp", "label"],
+    dependencies: ["input-otp"],
+    files: [
+      {
+        path: "registry/blocks/authentication/otp-verification/otp-verification-04/otp-verification-form.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/authentication/otp-verification-04/otp-verification-form.tsx",
+      },
+    ],
+  },
+  {
+    name: "two-factor-01",
+    type: "registry:block",
+    title: "two-factor-01",
+    description: "Authenticator app 2FA challenge.",
+    registryDependencies: ["button", "input-otp", "label"],
+    dependencies: ["input-otp", "lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/authentication/two-factor/two-factor-01/two-factor-form.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/authentication/two-factor-01/two-factor-form.tsx",
+      },
+    ],
+  },
+  {
+    name: "two-factor-02",
+    type: "registry:block",
+    title: "two-factor-02",
+    description: "SMS 2FA challenge with a 6-digit code.",
+    registryDependencies: ["button", "input-otp", "label"],
+    dependencies: ["input-otp", "lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/authentication/two-factor/two-factor-02/two-factor-form.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/authentication/two-factor-02/two-factor-form.tsx",
+      },
+    ],
+  },
+  {
+    name: "two-factor-03",
+    type: "registry:block",
+    title: "two-factor-03",
+    description: "Backup code 2FA challenge.",
+    registryDependencies: ["button", "input", "label"],
+    files: [
+      {
+        path: "registry/blocks/authentication/two-factor/two-factor-03/two-factor-form.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/authentication/two-factor-03/two-factor-form.tsx",
+      },
+    ],
+  },
+  {
+    name: "two-factor-04",
+    type: "registry:block",
+    title: "two-factor-04",
+    description: "Choose a 2FA method: authenticator, SMS, or backup code.",
+    registryDependencies: ["button"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/authentication/two-factor/two-factor-04/two-factor-form.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/authentication/two-factor-04/two-factor-form.tsx",
+      },
+    ],
+  },
+  {
+    name: "social-login-01",
+    type: "registry:block",
+    title: "social-login-01",
+    description: "Social-only sign-in with labeled provider buttons.",
+    registryDependencies: ["button"],
+    files: [
+      {
+        path: "registry/blocks/authentication/social-login/social-login-01/social-login-form.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/authentication/social-login-01/social-login-form.tsx",
+      },
+      ...authSocialIconFiles("social-login-01", [
+        "google",
+        "apple",
+        "github",
+        "facebook",
+      ]),
+    ],
+  },
+  {
+    name: "social-login-02",
+    type: "registry:block",
+    title: "social-login-02",
+    description: "Social providers plus email magic link.",
+    registryDependencies: ["button", "input", "label", "separator"],
+    files: [
+      {
+        path: "registry/blocks/authentication/social-login/social-login-02/social-login-form.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/authentication/social-login-02/social-login-form.tsx",
+      },
+      ...authSocialIconFiles("social-login-02", ["google", "apple"]),
+    ],
+  },
+  {
+    name: "social-login-03",
+    type: "registry:block",
+    title: "social-login-03",
+    description: "Compact social sign-in with icon-only provider buttons.",
+    registryDependencies: ["button"],
+    files: [
+      {
+        path: "registry/blocks/authentication/social-login/social-login-03/social-login-form.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/authentication/social-login-03/social-login-form.tsx",
+      },
+      ...authSocialIconFiles("social-login-03", [
+        "google",
+        "apple",
+        "github",
+        "facebook",
+        "x",
+      ]),
+    ],
+  },
+  {
+    name: "social-login-04",
+    type: "registry:block",
+    title: "social-login-04",
+    description:
+      "Split social sign-in: providers beside a large users icon panel.",
+    registryDependencies: ["button", "separator"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/authentication/social-login/social-login-04/social-login-form.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/authentication/social-login-04/social-login-form.tsx",
+      },
+      ...authSocialIconFiles("social-login-04", ["google", "apple"]),
+    ],
+  },
+  {
+    name: "passkey-01",
+    type: "registry:block",
+    title: "passkey-01",
+    description: "Passkey-first sign-in.",
+    registryDependencies: ["button"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/authentication/passkey/passkey-01/passkey-form.tsx",
+        type: "registry:component",
+        target: "components/blocks/authentication/passkey-01/passkey-form.tsx",
+      },
+    ],
+  },
+  {
+    name: "passkey-02",
+    type: "registry:block",
+    title: "passkey-02",
+    description: "Passkey sign-in with password fallback.",
+    registryDependencies: ["button", "input", "label", "separator"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/authentication/passkey/passkey-02/passkey-form.tsx",
+        type: "registry:component",
+        target: "components/blocks/authentication/passkey-02/passkey-form.tsx",
+      },
+    ],
+  },
+  {
+    name: "passkey-03",
+    type: "registry:block",
+    title: "passkey-03",
+    description: "Passkey setup / registration steps.",
+    registryDependencies: ["button"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/authentication/passkey/passkey-03/passkey-form.tsx",
+        type: "registry:component",
+        target: "components/blocks/authentication/passkey-03/passkey-form.tsx",
+      },
+    ],
+  },
+  {
+    name: "account-recovery-01",
+    type: "registry:block",
+    title: "account-recovery-01",
+    description: "Recover account by email.",
+    registryDependencies: ["button", "input", "label"],
+    files: [
+      {
+        path: "registry/blocks/authentication/account-recovery/account-recovery-01/account-recovery-form.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/authentication/account-recovery-01/account-recovery-form.tsx",
+      },
+    ],
+  },
+  {
+    name: "account-recovery-02",
+    type: "registry:block",
+    title: "account-recovery-02",
+    description: "Recover account by phone with country dial code.",
+    dependencies: ["lucide-react"],
+    registryDependencies: [
+      "button",
+      "input",
+      "input-group",
+      "label",
+      "popover",
+    ],
+    files: [
+      {
+        path: "registry/blocks/authentication/account-recovery/account-recovery-02/account-recovery-form.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/authentication/account-recovery-02/account-recovery-form.tsx",
+      },
+    ],
+  },
+  {
+    name: "account-recovery-03",
+    type: "registry:block",
+    title: "account-recovery-03",
+    description: "Recover account by verifying identity details.",
+    dependencies: ["date-fns", "lucide-react"],
+    registryDependencies: [
+      "button",
+      "calendar",
+      "input",
+      "label",
+      "popover",
+    ],
+    files: [
+      {
+        path: "registry/blocks/authentication/account-recovery/account-recovery-03/account-recovery-form.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/authentication/account-recovery-03/account-recovery-form.tsx",
+      },
+    ],
+  },
+  {
+    name: "account-recovery-04",
+    type: "registry:block",
+    title: "account-recovery-04",
+    description: "Recover account with a one-time recovery code.",
+    registryDependencies: ["button", "input", "label"],
+    files: [
+      {
+        path: "registry/blocks/authentication/account-recovery/account-recovery-04/account-recovery-form.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/authentication/account-recovery-04/account-recovery-form.tsx",
+      },
+    ],
+  },
+  {
+    name: "navbar-01",
+    type: "registry:block",
+    title: "navbar-01",
+    description: "Minimal navbar: logo, links, and one CTA.",
+    registryDependencies: ["button", "sheet"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/navbar/navbar-01/navbar.tsx",
+        type: "registry:component",
+        target: "components/blocks/navigation/navbar-01/navbar.tsx",
+      },
+    ],
+  },
+  {
+    name: "navbar-02",
+    type: "registry:block",
+    title: "navbar-02",
+    description:
+      "SaaS navbar with announcement strip, links, Sign in, and Sign up.",
+    registryDependencies: ["button", "sheet"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/navbar/navbar-02/navbar.tsx",
+        type: "registry:component",
+        target: "components/blocks/navigation/navbar-02/navbar.tsx",
+      },
+    ],
+  },
+  {
+    name: "navbar-03",
+    type: "registry:block",
+    title: "navbar-03",
+    description:
+      "Marketing navbar with brand on the start edge, centered links, and auth actions on the end.",
+    registryDependencies: ["button", "sheet"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/navbar/navbar-03/navbar.tsx",
+        type: "registry:component",
+        target: "components/blocks/navigation/navbar-03/navbar.tsx",
+      },
+    ],
+  },
+  {
+    name: "navbar-04",
+    type: "registry:block",
+    title: "navbar-04",
+    description: "Transparent navbar over a short hero.",
+    registryDependencies: ["button", "sheet"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/navbar/navbar-04/navbar.tsx",
+        type: "registry:component",
+        target: "components/blocks/navigation/navbar-04/navbar.tsx",
+      },
+    ],
+  },
+  {
+    name: "navbar-05",
+    type: "registry:block",
+    title: "navbar-05",
+    description:
+      "Mega menu navbar with cascading Product, Solutions, and Resources panels.",
+    registryDependencies: ["button", "navigation-menu", "sheet"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/navbar/navbar-05/navbar.tsx",
+        type: "registry:component",
+        target: "components/blocks/navigation/navbar-05/navbar.tsx",
+      },
+    ],
+  },
+  {
+    name: "navbar-06",
+    type: "registry:block",
+    title: "navbar-06",
+    description:
+      "E-commerce navbar with search, matching icon actions, and nested category mega menus.",
+    registryDependencies: [
+      "badge",
+      "button",
+      "dropdown-menu",
+      "input",
+      "navigation-menu",
+    ],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/navbar/navbar-06/navbar.tsx",
+        type: "registry:component",
+        target: "components/blocks/navigation/navbar-06/navbar.tsx",
+      },
+    ],
+  },
+  {
+    name: "navbar-07",
+    type: "registry:block",
+    title: "navbar-07",
+    description: "Sticky navbar that stays pinned while the page scrolls.",
+    registryDependencies: ["button", "sheet"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/navbar/navbar-07/navbar.tsx",
+        type: "registry:component",
+        target: "components/blocks/navigation/navbar-07/navbar.tsx",
+      },
+    ],
+  },
+  {
+    name: "navbar-08",
+    type: "registry:block",
+    title: "navbar-08",
+    description:
+      "Responsive navbar: full link row on desktop, hamburger sheet below md.",
+    registryDependencies: ["button", "sheet"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/navbar/navbar-08/navbar.tsx",
+        type: "registry:component",
+        target: "components/blocks/navigation/navbar-08/navbar.tsx",
       },
     ],
   },
