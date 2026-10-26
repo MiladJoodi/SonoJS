@@ -32,6 +32,252 @@ function authSocialIconFiles(slug, icons) {
   ])
 }
 
+/** Brand / tool icons for navigation blocks (`@/registry/icons/*` → block-local `icons/`). */
+function navBlockIconFiles(slug, icons) {
+  return icons.flatMap((name) => [
+    {
+      path: `registry/icons/${name}.tsx`,
+      type: "registry:component",
+      target: `components/blocks/navigation/${slug}/icons/${name}.tsx`,
+    },
+    {
+      path: `registry/icons/${name}.svg`,
+      type: "registry:file",
+      target: `components/blocks/navigation/${slug}/icons/${name}.svg`,
+    },
+  ])
+}
+
+/** Brand icons for marketing blocks (`@/registry/icons/*` → block-local `icons/`). */
+function marketingBlockIconFiles(slug, icons) {
+  return icons.flatMap((name) => [
+    {
+      path: `registry/icons/${name}.tsx`,
+      type: "registry:component",
+      target: `components/blocks/marketing/${slug}/icons/${name}.tsx`,
+    },
+    {
+      path: `registry/icons/${name}.svg`,
+      type: "registry:file",
+      target: `components/blocks/marketing/${slug}/icons/${name}.svg`,
+    },
+  ])
+}
+
+/** Team marketing block: `team.tsx` + portrait webps shipped with the demo. */
+function marketingTeamBlock(slug, description, images) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    files: [
+      {
+        path: `registry/blocks/marketing/team/${slug}/team.tsx`,
+        type: "registry:component",
+        target: `components/blocks/marketing/${slug}/team.tsx`,
+      },
+      ...images.map((file) => ({
+        path: `registry/blocks/marketing/team/${slug}/images/${file}`,
+        type: "registry:file",
+        target: `components/blocks/marketing/${slug}/images/${file}`,
+      })),
+    ],
+  }
+}
+
+/**
+ * Pricing marketing block: `pricing.tsx` with inline SVG icons (no image assets).
+ * Demo source === install payload after `@sonojs/ui` → `@/components/ui` rewrite.
+ */
+function marketingPricingBlock(slug, description) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    registryDependencies: ["button"],
+    files: [
+      {
+        path: `registry/blocks/marketing/pricing/${slug}/pricing.tsx`,
+        type: "registry:component",
+        target: `components/blocks/marketing/${slug}/pricing.tsx`,
+      },
+    ],
+  }
+}
+
+function marketingNewsletterBlock(
+  slug,
+  description,
+  {
+    images = [],
+    registryDependencies = ["button", "input"],
+  } = {}
+) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    registryDependencies,
+    files: [
+      {
+        path: `registry/blocks/marketing/newsletter/${slug}/newsletter.tsx`,
+        type: "registry:component",
+        target: `components/blocks/marketing/${slug}/newsletter.tsx`,
+      },
+      ...images.map((file) => ({
+        path: `registry/blocks/marketing/newsletter/${slug}/images/${file}`,
+        type: "registry:file",
+        target: `components/blocks/marketing/${slug}/images/${file}`,
+      })),
+    ],
+  }
+}
+
+/** Blog marketing block: `blog.tsx` + local cover images shipped with the demo. */
+function marketingBlogBlock(
+  slug,
+  description,
+  images = [],
+  { registryDependencies, dependencies } = {}
+) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    ...(registryDependencies?.length
+      ? { registryDependencies }
+      : {}),
+    ...(dependencies?.length ? { dependencies } : {}),
+    files: [
+      {
+        path: `registry/blocks/marketing/blog/${slug}/blog.tsx`,
+        type: "registry:component",
+        target: `components/blocks/marketing/${slug}/blog.tsx`,
+      },
+      ...images.map((file) => ({
+        path: `registry/blocks/marketing/blog/${slug}/images/${file}`,
+        type: "registry:file",
+        target: `components/blocks/marketing/${slug}/images/${file}`,
+      })),
+    ],
+  }
+}
+
+const BLOG_01_IMAGES = [
+  "ai-img1.webp",
+  "hotel-img.webp",
+  "team-image.webp",
+  "headphone-img8.webp",
+  "hacks-watch.webp",
+  "imagination.webp",
+]
+
+const BLOG_03_IMAGES = ["team-1.webp", "team-2.webp", "team-3.webp"]
+
+const BLOG_04_IMAGES = [
+  "food.webp",
+  "food11.webp",
+  "food22.webp",
+  "food33.webp",
+  "food44.webp",
+  "food55.webp",
+]
+
+const BLOG_07_IMAGES = [
+  "imagination.webp",
+  "hacks-watch.webp",
+  "prediction.webp",
+  "team-image.webp",
+]
+
+const BLOG_08_IMAGES = [
+  "imagination.webp",
+  "hacks-watch.webp",
+  "prediction.webp",
+  "food.webp",
+  "food11.webp",
+  "food22.webp",
+]
+
+const BLOG_09_IMAGES = [
+  "imagination.webp",
+  "hacks-watch.webp",
+  "prediction.webp",
+  "food.webp",
+]
+
+/** Hero marketing block: `hero.tsx` + local webp/svg assets shipped with the demo. */
+function marketingHeroBlock(
+  slug,
+  description,
+  images,
+  registryDependencies = ["button"]
+) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    registryDependencies,
+    files: [
+      {
+        path: `registry/blocks/marketing/hero/${slug}/hero.tsx`,
+        type: "registry:component",
+        target: `components/blocks/marketing/${slug}/hero.tsx`,
+      },
+      ...images.map((file) => ({
+        path: `registry/blocks/marketing/hero/${slug}/images/${file}`,
+        type: "registry:file",
+        target: `components/blocks/marketing/${slug}/images/${file}`,
+      })),
+    ],
+  }
+}
+
+const TEAM_PORTRAITS_6 = [
+  "team-01.webp",
+  "team-02.webp",
+  "team-03.webp",
+  "team-04.webp",
+  "team-05.webp",
+  "team-06.webp",
+]
+
+/** Brand icons for forms blocks (`@/registry/icons/*` → block-local `icons/`). */
+function formsBlockIconFiles(slug, icons) {
+  return icons.flatMap((name) => [
+    {
+      path: `registry/icons/${name}.tsx`,
+      type: "registry:component",
+      target: `components/blocks/forms/${slug}/icons/${name}.tsx`,
+    },
+    {
+      path: `registry/icons/${name}.svg`,
+      type: "registry:file",
+      target: `components/blocks/forms/${slug}/icons/${name}.svg`,
+    },
+  ])
+}
+
+const megaMenu05ToolIcons = [
+  "project-boards",
+  "adobe-xd",
+  "canva",
+  "sketch",
+  "photoshop",
+  "github",
+  "google-meet",
+  "slack",
+  "microsoft-teams",
+  "discord",
+  "asana",
+  "dropbox",
+]
+
 /** @type {RegistryItemDef[]} */
 export const registryItems = [
   {
@@ -1235,9 +1481,9 @@ export const registryItems = [
         target: "components/blocks/authentication/login-04/icons/apple.svg",
       },
       {
-        path: "public/images/blocks/authentication/login/login-04/01.webp",
+        path: "registry/blocks/authentication/login/login-04/images/01.webp",
         type: "registry:file",
-        target: "public/images/blocks/authentication/login/login-04/01.webp",
+        target: "components/blocks/authentication/login-04/images/01.webp",
       },
     ],
   },
@@ -1276,14 +1522,14 @@ export const registryItems = [
         target: "components/blocks/authentication/login-05/icons/apple.svg",
       },
       {
-        path: "public/images/blocks/authentication/login/login-05/01.webp",
+        path: "registry/blocks/authentication/login/login-05/images/01.webp",
         type: "registry:file",
-        target: "public/images/blocks/authentication/login/login-05/01.webp",
+        target: "components/blocks/authentication/login-05/images/01.webp",
       },
       {
-        path: "public/images/blocks/authentication/login/login-05/02.webp",
+        path: "registry/blocks/authentication/login/login-05/images/02.webp",
         type: "registry:file",
-        target: "public/images/blocks/authentication/login/login-05/02.webp",
+        target: "components/blocks/authentication/login-05/images/02.webp",
       },
     ],
   },
@@ -1356,9 +1602,9 @@ export const registryItems = [
         target: "components/blocks/authentication/login-07/icons/apple.svg",
       },
       {
-        path: "public/images/blocks/authentication/login/login-07/bg.webp",
+        path: "registry/blocks/authentication/login/login-07/images/bg.webp",
         type: "registry:file",
-        target: "public/images/blocks/authentication/login/login-07/bg.webp",
+        target: "components/blocks/authentication/login-07/images/bg.webp",
       },
     ],
   },
@@ -1396,9 +1642,9 @@ export const registryItems = [
         target: "components/blocks/authentication/login-08/icons/apple.svg",
       },
       {
-        path: "public/images/blocks/authentication/login/login-08/illustration.webp",
+        path: "registry/blocks/authentication/login/login-08/images/illustration.webp",
         type: "registry:file",
-        target: "public/images/blocks/authentication/login/login-08/illustration.webp",
+        target: "components/blocks/authentication/login-08/images/illustration.webp",
       },
     ],
   },
@@ -1437,9 +1683,225 @@ export const registryItems = [
         target: "components/blocks/authentication/login-09/icons/apple.svg",
       },
       {
-        path: "public/images/blocks/authentication/login/login-09/product.webp",
+        path: "registry/blocks/authentication/login/login-09/images/product.webp",
         type: "registry:file",
-        target: "public/images/blocks/authentication/login/login-09/product.webp",
+        target: "components/blocks/authentication/login-09/images/product.webp",
+      },
+    ],
+  },
+  {
+    name: "login-10",
+    type: "registry:block",
+    title: "login-10",
+    description:
+      "Centered sign-in with brand mark above the card, remember me, and sign-up link.",
+    registryDependencies: ["button", "checkbox", "input", "label"],
+    files: [
+      {
+        path: "registry/blocks/authentication/login/login-10/login-form.tsx",
+        type: "registry:component",
+        target: "components/blocks/authentication/login-10/login-form.tsx",
+      },
+      {
+        path: "registry/blocks/authentication/login/login-10/logo.svg",
+        type: "registry:file",
+        target: "components/blocks/authentication/login-10/logo.svg",
+      },
+    ],
+  },
+  {
+    name: "login-11",
+    type: "registry:block",
+    title: "login-11",
+    description:
+      "Split sign-in with form card and illustration panel, remember me, and sign-up link.",
+    registryDependencies: ["button", "checkbox", "input", "label"],
+    files: [
+      {
+        path: "registry/blocks/authentication/login/login-11/login-form.tsx",
+        type: "registry:component",
+        target: "components/blocks/authentication/login-11/login-form.tsx",
+      },
+      {
+        path: "registry/blocks/authentication/login/login-11/images/illustration.webp",
+        type: "registry:file",
+        target:
+          "components/blocks/authentication/login-11/images/illustration.webp",
+      },
+    ],
+  },
+  {
+    name: "login-12",
+    type: "registry:block",
+    title: "login-12",
+    description:
+      "Centered welcome-back card with password visibility toggle, remember me, and Google.",
+    registryDependencies: ["button", "checkbox", "input", "label", "separator"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/authentication/login/login-12/login-form.tsx",
+        type: "registry:component",
+        target: "components/blocks/authentication/login-12/login-form.tsx",
+      },
+      {
+        path: "registry/blocks/authentication/login/login-12/logo.svg",
+        type: "registry:file",
+        target: "components/blocks/authentication/login-12/logo.svg",
+      },
+      {
+        path: "registry/icons/google.tsx",
+        type: "registry:component",
+        target: "components/blocks/authentication/login-12/icons/google.tsx",
+      },
+      {
+        path: "registry/icons/google.svg",
+        type: "registry:file",
+        target: "components/blocks/authentication/login-12/icons/google.svg",
+      },
+    ],
+  },
+  {
+    name: "login-13",
+    type: "registry:block",
+    title: "login-13",
+    description:
+      "Split card with form, password toggle, Google, and photo panel with overlay copy.",
+    registryDependencies: ["button", "checkbox", "input", "label", "separator"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/authentication/login/login-13/login-form.tsx",
+        type: "registry:component",
+        target: "components/blocks/authentication/login-13/login-form.tsx",
+      },
+      {
+        path: "registry/icons/google.tsx",
+        type: "registry:component",
+        target: "components/blocks/authentication/login-13/icons/google.tsx",
+      },
+      {
+        path: "registry/icons/google.svg",
+        type: "registry:file",
+        target: "components/blocks/authentication/login-13/icons/google.svg",
+      },
+      {
+        path: "registry/blocks/authentication/login/login-13/images/team.webp",
+        type: "registry:file",
+        target: "components/blocks/authentication/login-13/images/team.webp",
+      },
+      {
+        path: "registry/blocks/authentication/login/login-13/logo.svg",
+        type: "registry:file",
+        target: "components/blocks/authentication/login-13/logo.svg",
+      },
+    ],
+  },
+  {
+    name: "login-14",
+    type: "registry:block",
+    title: "login-14",
+    description:
+      "Bleed photo panel with welcome copy beside email sign-in, password toggle, and Google.",
+    registryDependencies: ["button", "checkbox", "input", "label", "separator"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/authentication/login/login-14/login-form.tsx",
+        type: "registry:component",
+        target: "components/blocks/authentication/login-14/login-form.tsx",
+      },
+      {
+        path: "registry/icons/google.tsx",
+        type: "registry:component",
+        target: "components/blocks/authentication/login-14/icons/google.tsx",
+      },
+      {
+        path: "registry/icons/google.svg",
+        type: "registry:file",
+        target: "components/blocks/authentication/login-14/icons/google.svg",
+      },
+      {
+        path: "registry/blocks/authentication/login/login-14/images/team.webp",
+        type: "registry:file",
+        target: "components/blocks/authentication/login-14/images/team.webp",
+      },
+    ],
+  },
+  {
+    name: "login-15",
+    type: "registry:block",
+    title: "login-15",
+    description:
+      "Branded card with illustration beside email sign-in, password toggle, and Google.",
+    registryDependencies: ["button", "checkbox", "input", "label", "separator"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/authentication/login/login-15/login-form.tsx",
+        type: "registry:component",
+        target: "components/blocks/authentication/login-15/login-form.tsx",
+      },
+      {
+        path: "registry/icons/google.tsx",
+        type: "registry:component",
+        target: "components/blocks/authentication/login-15/icons/google.tsx",
+      },
+      {
+        path: "registry/icons/google.svg",
+        type: "registry:file",
+        target: "components/blocks/authentication/login-15/icons/google.svg",
+      },
+      {
+        path: "registry/blocks/authentication/login/login-15/images/signin.webp",
+        type: "registry:file",
+        target: "components/blocks/authentication/login-15/images/signin.webp",
+      },
+      {
+        path: "registry/blocks/authentication/login/login-15/logo.svg",
+        type: "registry:file",
+        target: "components/blocks/authentication/login-15/logo.svg",
+      },
+    ],
+  },
+  {
+    name: "login-16",
+    type: "registry:block",
+    title: "login-16",
+    description:
+      "Gradient marketing panel with floating sign-in card, password toggle, Google, and Apple.",
+    registryDependencies: ["button", "checkbox", "input", "label", "separator"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/authentication/login/login-16/login-form.tsx",
+        type: "registry:component",
+        target: "components/blocks/authentication/login-16/login-form.tsx",
+      },
+      {
+        path: "registry/blocks/authentication/login/login-16/logo-white.svg",
+        type: "registry:file",
+        target: "components/blocks/authentication/login-16/logo-white.svg",
+      },
+      {
+        path: "registry/icons/google.tsx",
+        type: "registry:component",
+        target: "components/blocks/authentication/login-16/icons/google.tsx",
+      },
+      {
+        path: "registry/icons/apple.tsx",
+        type: "registry:component",
+        target: "components/blocks/authentication/login-16/icons/apple.tsx",
+      },
+      {
+        path: "registry/icons/google.svg",
+        type: "registry:file",
+        target: "components/blocks/authentication/login-16/icons/google.svg",
+      },
+      {
+        path: "registry/icons/apple.svg",
+        type: "registry:file",
+        target: "components/blocks/authentication/login-16/icons/apple.svg",
       },
     ],
   },
@@ -1527,9 +1989,9 @@ export const registryItems = [
         target: "components/blocks/authentication/signup-03/icons/apple.svg",
       },
       {
-        path: "public/images/blocks/authentication/signup/signup-03/01.webp",
+        path: "registry/blocks/authentication/signup/signup-03/images/01.webp",
         type: "registry:file",
-        target: "public/images/blocks/authentication/signup/signup-03/01.webp",
+        target: "components/blocks/authentication/signup-03/images/01.webp",
       },
     ],
   },
@@ -1604,14 +2066,14 @@ export const registryItems = [
         target: "components/blocks/authentication/signup-05/icons/apple.svg",
       },
       {
-        path: "public/images/blocks/authentication/signup/signup-05/01.webp",
+        path: "registry/blocks/authentication/signup/signup-05/images/01.webp",
         type: "registry:file",
-        target: "public/images/blocks/authentication/signup/signup-05/01.webp",
+        target: "components/blocks/authentication/signup-05/images/01.webp",
       },
       {
-        path: "public/images/blocks/authentication/signup/signup-05/02.webp",
+        path: "registry/blocks/authentication/signup/signup-05/images/02.webp",
         type: "registry:file",
-        target: "public/images/blocks/authentication/signup/signup-05/02.webp",
+        target: "components/blocks/authentication/signup-05/images/02.webp",
       },
     ],
   },
@@ -1699,9 +2161,9 @@ export const registryItems = [
         target: "components/blocks/authentication/signup-08/icons/apple.svg",
       },
       {
-        path: "public/images/blocks/authentication/signup/signup-08/product.webp",
+        path: "registry/blocks/authentication/signup/signup-08/images/product.webp",
         type: "registry:file",
-        target: "public/images/blocks/authentication/signup/signup-08/product.webp",
+        target: "components/blocks/authentication/signup-08/images/product.webp",
       },
     ],
   },
@@ -2153,6 +2615,3140 @@ export const registryItems = [
     ],
   },
   {
+    name: "banner-01",
+    type: "registry:block",
+    title: "banner-01",
+    description:
+      "Violet-to-orange gradient strip for free shipping and first-purchase deal.",
+    files: [
+      {
+        path: "registry/blocks/marketing/banner/banner-01/banner.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/banner-01/banner.tsx",
+      },
+    ],
+  },
+  {
+    name: "banner-02",
+    type: "registry:block",
+    title: "banner-02",
+    description: "Dark gray full-width promo strip with the same deal copy.",
+    files: [
+      {
+        path: "registry/blocks/marketing/banner/banner-02/banner.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/banner-02/banner.tsx",
+      },
+    ],
+  },
+  {
+    name: "banner-03",
+    type: "registry:block",
+    title: "banner-03",
+    description:
+      "Violet-to-orange action strip with Claim Offer CTA and dismiss.",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/marketing/banner/banner-03/banner.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/banner-03/banner.tsx",
+      },
+    ],
+  },
+  {
+    name: "banner-04",
+    type: "registry:block",
+    title: "banner-04",
+    description: "Dark action strip with Claim Offer CTA and dismiss.",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/marketing/banner/banner-04/banner.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/banner-04/banner.tsx",
+      },
+    ],
+  },
+  {
+    name: "banner-05",
+    type: "registry:block",
+    title: "banner-05",
+    description:
+      "Rounded violet-to-orange ticket promo pill with underlined CTA and arrow.",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/marketing/banner/banner-05/banner.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/banner-05/banner.tsx",
+      },
+    ],
+  },
+  {
+    name: "banner-06",
+    type: "registry:block",
+    title: "banner-06",
+    description: "Dark ticket promo pill with underlined CTA and arrow.",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/marketing/banner/banner-06/banner.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/banner-06/banner.tsx",
+      },
+    ],
+  },
+  {
+    name: "banner-07",
+    type: "registry:block",
+    title: "banner-07",
+    description:
+      "Blue-to-purple strip with free shipping, discount, and promo code.",
+    files: [
+      {
+        path: "registry/blocks/marketing/banner/banner-07/banner.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/banner-07/banner.tsx",
+      },
+    ],
+  },
+  {
+    name: "banner-08",
+    type: "registry:block",
+    title: "banner-08",
+    description: "Indigo-to-white launch-offer strip with pill tag.",
+    files: [
+      {
+        path: "registry/blocks/marketing/banner/banner-08/banner.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/banner-08/banner.tsx",
+      },
+    ],
+  },
+  {
+    name: "banner-09",
+    type: "registry:block",
+    title: "banner-09",
+    description: "Lime-to-white strip with green New tag.",
+    files: [
+      {
+        path: "registry/blocks/marketing/banner/banner-09/banner.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/banner-09/banner.tsx",
+      },
+    ],
+  },
+  {
+    name: "banner-10",
+    type: "registry:block",
+    title: "banner-10",
+    description: "Orange gradient strip with Check it out pill CTA.",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/marketing/banner/banner-10/banner.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/banner-10/banner.tsx",
+      },
+    ],
+  },
+  {
+    name: "banner-11",
+    type: "registry:block",
+    title: "banner-11",
+    description: "Purple full-width explore link with hover pill.",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/marketing/banner/banner-11/banner.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/banner-11/banner.tsx",
+      },
+    ],
+  },
+  {
+    name: "banner-12",
+    type: "registry:block",
+    title: "banner-12",
+    description: "Violet-to-lavender strip with Explore now CTA.",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/marketing/banner/banner-12/banner.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/banner-12/banner.tsx",
+      },
+    ],
+  },
+  {
+    name: "banner-13",
+    type: "registry:block",
+    title: "banner-13",
+    description:
+      "Lime limited-time deals strip with static D/H/M/S countdown and checkout link.",
+    files: [
+      {
+        path: "registry/blocks/marketing/banner/banner-13/banner.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/banner-13/banner.tsx",
+      },
+    ],
+  },
+  {
+    name: "banner-14",
+    type: "registry:block",
+    title: "banner-14",
+    description: "Dark financing offer strip with Shop now link.",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/marketing/banner/banner-14/banner.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/banner-14/banner.tsx",
+      },
+    ],
+  },
+  {
+    name: "banner-15",
+    type: "registry:block",
+    title: "banner-15",
+    description: "Dark free-shipping bar with sparkles and promo code.",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/marketing/banner/banner-15/banner.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/banner-15/banner.tsx",
+      },
+    ],
+  },
+  {
+    name: "jumbotron-01",
+    type: "registry:block",
+    title: "jumbotron-01",
+    description:
+      "White promotional card with headline, body copy, shadow-soft, and a primary CTA.",
+    registryDependencies: ["button"],
+    files: [
+      {
+        path: "registry/blocks/marketing/jumbotron/jumbotron-01/jumbotron.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/jumbotron-01/jumbotron.tsx",
+      },
+    ],
+  },
+  {
+    name: "jumbotron-02",
+    type: "registry:block",
+    title: "jumbotron-02",
+    description:
+      "Split jumbotron with copy, CTA, and a cover image on the trailing side.",
+    registryDependencies: ["button"],
+    files: [
+      {
+        path: "registry/blocks/marketing/jumbotron/jumbotron-02/jumbotron.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/jumbotron-02/jumbotron.tsx",
+      },
+      {
+        path: "registry/blocks/marketing/jumbotron/jumbotron-02/images/card.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/jumbotron-02/images/card.webp",
+      },
+    ],
+  },
+  {
+    name: "jumbotron-03",
+    type: "registry:block",
+    title: "jumbotron-03",
+    description:
+      "Dark split jumbotron with brand accent title, short copy, CTA, and team photo.",
+    registryDependencies: ["button"],
+    files: [
+      {
+        path: "registry/blocks/marketing/jumbotron/jumbotron-03/jumbotron.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/jumbotron-03/jumbotron.tsx",
+      },
+      {
+        path: "registry/blocks/marketing/jumbotron/jumbotron-03/images/team.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/jumbotron-03/images/team.webp",
+      },
+    ],
+  },
+  {
+    name: "jumbotron-04",
+    type: "registry:block",
+    title: "jumbotron-04",
+    description:
+      "Centered photo-background jumbotron with dark overlay, short copy, and CTA.",
+    registryDependencies: ["button"],
+    files: [
+      {
+        path: "registry/blocks/marketing/jumbotron/jumbotron-04/jumbotron.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/jumbotron-04/jumbotron.tsx",
+      },
+      {
+        path: "registry/blocks/marketing/jumbotron/jumbotron-04/images/bg.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/jumbotron-04/images/bg.webp",
+      },
+    ],
+  },
+  {
+    name: "jumbotron-05",
+    type: "registry:block",
+    title: "jumbotron-05",
+    description:
+      "Dark centered jumbotron with short copy and a primary CTA, no image.",
+    registryDependencies: ["button"],
+    files: [
+      {
+        path: "registry/blocks/marketing/jumbotron/jumbotron-05/jumbotron.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/jumbotron-05/jumbotron.tsx",
+      },
+    ],
+  },
+  {
+    name: "jumbotron-06",
+    type: "registry:block",
+    title: "jumbotron-06",
+    description:
+      "Hero card plus a two-up grid of dark and light support cards with CTAs.",
+    registryDependencies: ["button"],
+    files: [
+      {
+        path: "registry/blocks/marketing/jumbotron/jumbotron-06/jumbotron.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/jumbotron-06/jumbotron.tsx",
+      },
+    ],
+  },
+  {
+    name: "jumbotron-07",
+    type: "registry:block",
+    title: "jumbotron-07",
+    description:
+      "Centered text jumbotron with primary and outline CTAs, no card chrome.",
+    registryDependencies: ["button"],
+    files: [
+      {
+        path: "registry/blocks/marketing/jumbotron/jumbotron-07/jumbotron.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/jumbotron-07/jumbotron.tsx",
+      },
+    ],
+  },
+  {
+    name: "jumbotron-08",
+    type: "registry:block",
+    title: "jumbotron-08",
+    description:
+      "Start-edge accent bar on a light card with short copy and a primary CTA.",
+    registryDependencies: ["button"],
+    files: [
+      {
+        path: "registry/blocks/marketing/jumbotron/jumbotron-08/jumbotron.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/jumbotron-08/jumbotron.tsx",
+      },
+    ],
+  },
+  {
+    name: "features-01",
+    type: "registry:block",
+    title: "features-01",
+    description:
+      "Six feature cards in a responsive grid with icons and learn-more links.",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/marketing/features/features-01/features.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/features-01/features.tsx",
+      },
+    ],
+  },
+  {
+    name: "features-02",
+    type: "registry:block",
+    title: "features-02",
+    description:
+      "Primary full-bleed features band with centered hover cards.",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/marketing/features/features-02/features.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/features-02/features.tsx",
+      },
+    ],
+  },
+  {
+    name: "features-03",
+    type: "registry:block",
+    title: "features-03",
+    description:
+      "Muted CTA card beside a two-by-two features grid with primary icon chips.",
+    registryDependencies: ["button"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/marketing/features/features-03/features.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/features-03/features.tsx",
+      },
+    ],
+  },
+  {
+    name: "features-04",
+    type: "registry:block",
+    title: "features-04",
+    description:
+      "Centered features grid with tinted icon chips for six product highlights.",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/marketing/features/features-04/features.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/features-04/features.tsx",
+      },
+    ],
+  },
+  {
+    name: "features-05",
+    type: "registry:block",
+    title: "features-05",
+    description:
+      "Feature cards with tinted icons and pill Explore actions.",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/marketing/features/features-05/features.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/features-05/features.tsx",
+      },
+    ],
+  },
+  {
+    name: "features-06",
+    type: "registry:block",
+    title: "features-06",
+    description:
+      "Split features layout with intro copy and a two-by-two muted card grid.",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/marketing/features/features-06/features.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/features-06/features.tsx",
+      },
+    ],
+  },
+  {
+    name: "features-07",
+    type: "registry:block",
+    title: "features-07",
+    description:
+      "Centered features intro with a three-column grid of muted cards and circular icons.",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/marketing/features/features-07/features.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/features-07/features.tsx",
+      },
+    ],
+  },
+  {
+    name: "features-08",
+    type: "registry:block",
+    title: "features-08",
+    description:
+      "Muted band features section with tinted icon chips, subtitles, and card dividers.",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/marketing/features/features-08/features.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/features-08/features.tsx",
+      },
+    ],
+  },
+  {
+    name: "features-09",
+    type: "registry:block",
+    title: "features-09",
+    description:
+      "Split features layout with intro copy, four highlight items, and a photo panel.",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/marketing/features/features-09/features.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/features-09/features.tsx",
+      },
+      {
+        path: "registry/blocks/marketing/features/features-09/images/social.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/features-09/images/social.webp",
+      },
+    ],
+  },
+  {
+    name: "features-10",
+    type: "registry:block",
+    title: "features-10",
+    description:
+      "Services intro column with explore link and a two-by-two digital marketing grid.",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/marketing/features/features-10/features.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/features-10/features.tsx",
+      },
+    ],
+  },
+  {
+    name: "features-11",
+    type: "registry:block",
+    title: "features-11",
+    description:
+      "Split features layout with solid primary icons, divider, and a media panel.",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/marketing/features/features-11/features.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/features-11/features.tsx",
+      },
+      {
+        path: "registry/blocks/marketing/features/features-11/images/panel.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/features-11/images/panel.webp",
+      },
+    ],
+  },
+  {
+    name: "cta-01",
+    type: "registry:block",
+    title: "cta-01",
+    description:
+      "Soft elevated card CTA with headline, supporting copy, and a primary Get started button.",
+    registryDependencies: ["button"],
+    files: [
+      {
+        path: "registry/blocks/marketing/cta/cta-01/cta.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/cta-01/cta.tsx",
+      },
+    ],
+  },
+  {
+    name: "cta-02",
+    type: "registry:block",
+    title: "cta-02",
+    description:
+      "Centered CTA with headline, supporting copy, and primary plus outline actions.",
+    registryDependencies: ["button"],
+    files: [
+      {
+        path: "registry/blocks/marketing/cta/cta-02/cta.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/cta-02/cta.tsx",
+      },
+    ],
+  },
+  {
+    name: "cta-03",
+    type: "registry:block",
+    title: "cta-03",
+    description:
+      "Split CTA with copy and dual actions beside a media panel.",
+    registryDependencies: ["button"],
+    files: [
+      {
+        path: "registry/blocks/marketing/cta/cta-03/cta.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/cta-03/cta.tsx",
+      },
+      {
+        path: "registry/blocks/marketing/cta/cta-03/images/team.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/cta-03/images/team.webp",
+      },
+    ],
+  },
+  {
+    name: "cta-04",
+    type: "registry:block",
+    title: "cta-04",
+    description:
+      "Warm peach CTA band with brand-kit copy, primary action, and desktop illustration.",
+    registryDependencies: ["button"],
+    files: [
+      {
+        path: "registry/blocks/marketing/cta/cta-04/cta.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/cta-04/cta.tsx",
+      },
+      {
+        path: "registry/blocks/marketing/cta/cta-04/images/working.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/cta-04/images/working.webp",
+      },
+    ],
+  },
+  {
+    name: "cta-05",
+    type: "registry:block",
+    title: "cta-05",
+    description:
+      "Dark purple gradient CTA card with free-guide copy and a light download button.",
+    files: [
+      {
+        path: "registry/blocks/marketing/cta/cta-05/cta.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/cta-05/cta.tsx",
+      },
+    ],
+  },
+  {
+    name: "cta-06",
+    type: "registry:block",
+    title: "cta-06",
+    description:
+      "Cyan app-discount CTA with Google Play and App Store buttons plus overlapping phone art.",
+    files: [
+      {
+        path: "registry/blocks/marketing/cta/cta-06/cta.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/cta-06/cta.tsx",
+      },
+      {
+        path: "registry/blocks/marketing/cta/cta-06/images/app.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/cta-06/images/app.webp",
+      },
+    ],
+  },
+  {
+    name: "cta-07",
+    type: "registry:block",
+    title: "cta-07",
+    description:
+      "Dark split CTA with photo overlay panel, confidence copy, and primary Get started.",
+    files: [
+      {
+        path: "registry/blocks/marketing/cta/cta-07/cta.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/cta-07/cta.tsx",
+      },
+      {
+        path: "registry/blocks/marketing/cta/cta-07/images/team.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/cta-07/images/team.webp",
+      },
+    ],
+  },
+  {
+    name: "cta-08",
+    type: "registry:block",
+    title: "cta-08",
+    description:
+      "Centered elevated card CTA with design-tools copy and See How It Works.",
+    registryDependencies: ["button"],
+    files: [
+      {
+        path: "registry/blocks/marketing/cta/cta-08/cta.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/cta-08/cta.tsx",
+      },
+    ],
+  },
+  {
+    name: "cta-09",
+    type: "registry:block",
+    title: "cta-09",
+    description:
+      "Purple gradient productivity CTA with dual actions and free-trial footnote.",
+    files: [
+      {
+        path: "registry/blocks/marketing/cta/cta-09/cta.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/cta-09/cta.tsx",
+      },
+    ],
+  },
+  {
+    name: "testimonials-01",
+    type: "registry:block",
+    title: "testimonials-01",
+    description:
+      "Centered customer quote with rating stars, avatar, and short testimonial copy.",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-01/testimonial.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/testimonials-01/testimonial.tsx",
+      },
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-01/images/avatar.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/testimonials-01/images/avatar.webp",
+      },
+    ],
+  },
+  {
+    name: "testimonials-02",
+    type: "registry:block",
+    title: "testimonials-02",
+    description:
+      "Three-column client quotes with large avatars, star ratings, and short copy.",
+    files: [
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-02/testimonial.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/testimonials-02/testimonial.tsx",
+      },
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-02/images/avatar-1.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/testimonials-02/images/avatar-1.webp",
+      },
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-02/images/avatar-2.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/testimonials-02/images/avatar-2.webp",
+      },
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-02/images/avatar-3.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/testimonials-02/images/avatar-3.webp",
+      },
+    ],
+  },
+  {
+    name: "testimonials-03",
+    type: "registry:block",
+    title: "testimonials-03",
+    description:
+      "Stacked testimonials with avatar, role, and quote in a two-column row.",
+    files: [
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-03/testimonial.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/testimonials-03/testimonial.tsx",
+      },
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-03/images/avatar-1.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/testimonials-03/images/avatar-1.webp",
+      },
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-03/images/avatar-2.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/testimonials-03/images/avatar-2.webp",
+      },
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-03/images/avatar-3.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/testimonials-03/images/avatar-3.webp",
+      },
+    ],
+  },
+  {
+    name: "testimonials-04",
+    type: "registry:block",
+    title: "testimonials-04",
+    description:
+      "Two-column testimonials with intro on the start edge and stacked quotes with dividers.",
+    files: [
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-04/testimonial.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/testimonials-04/testimonial.tsx",
+      },
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-04/images/avatar-1.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/testimonials-04/images/avatar-1.webp",
+      },
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-04/images/avatar-2.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/testimonials-04/images/avatar-2.webp",
+      },
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-04/images/avatar-3.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/testimonials-04/images/avatar-3.webp",
+      },
+    ],
+  },
+  {
+    name: "testimonials-05",
+    type: "registry:block",
+    title: "testimonials-05",
+    description:
+      "Masonry card wall of client quotes with gold star ratings and avatar captions.",
+    files: [
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-05/testimonial.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/testimonials-05/testimonial.tsx",
+      },
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-05/images/avatar-1.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/testimonials-05/images/avatar-1.webp",
+      },
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-05/images/avatar-2.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/testimonials-05/images/avatar-2.webp",
+      },
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-05/images/avatar-3.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/testimonials-05/images/avatar-3.webp",
+      },
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-05/images/avatar-4.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/testimonials-05/images/avatar-4.webp",
+      },
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-05/images/avatar-5.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/testimonials-05/images/avatar-5.webp",
+      },
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-05/images/avatar-6.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/testimonials-05/images/avatar-6.webp",
+      },
+    ],
+  },
+  {
+    name: "testimonials-06",
+    type: "registry:block",
+    title: "testimonials-06",
+    description:
+      "Dark panel grid of client quotes with large avatars, gold stars, and scores.",
+    files: [
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-06/testimonial.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/testimonials-06/testimonial.tsx",
+      },
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-06/images/avatar-1.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/testimonials-06/images/avatar-1.webp",
+      },
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-06/images/avatar-2.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/testimonials-06/images/avatar-2.webp",
+      },
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-06/images/avatar-3.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/testimonials-06/images/avatar-3.webp",
+      },
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-06/images/avatar-4.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/testimonials-06/images/avatar-4.webp",
+      },
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-06/images/avatar-5.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/testimonials-06/images/avatar-5.webp",
+      },
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-06/images/avatar-6.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/testimonials-06/images/avatar-6.webp",
+      },
+    ],
+  },
+  {
+    name: "testimonials-07",
+    type: "registry:block",
+    title: "testimonials-07",
+    description:
+      "Split testimonials with intro on the start edge and a masonry card column.",
+    files: [
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-07/testimonial.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/testimonials-07/testimonial.tsx",
+      },
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-07/images/avatar-1.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/testimonials-07/images/avatar-1.webp",
+      },
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-07/images/avatar-2.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/testimonials-07/images/avatar-2.webp",
+      },
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-07/images/avatar-3.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/testimonials-07/images/avatar-3.webp",
+      },
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-07/images/avatar-4.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/testimonials-07/images/avatar-4.webp",
+      },
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-07/images/avatar-5.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/testimonials-07/images/avatar-5.webp",
+      },
+    ],
+  },
+  {
+    name: "testimonials-08",
+    type: "registry:block",
+    title: "testimonials-08",
+    description:
+      "Horizontal testimonial carousel with overlapping avatars, gold stars, and prev/next controls.",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-08/testimonial.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/testimonials-08/testimonial.tsx",
+      },
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-08/images/avatar-1.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/testimonials-08/images/avatar-1.webp",
+      },
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-08/images/avatar-2.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/testimonials-08/images/avatar-2.webp",
+      },
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-08/images/avatar-3.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/testimonials-08/images/avatar-3.webp",
+      },
+    ],
+  },
+  {
+    name: "testimonials-09",
+    type: "registry:block",
+    title: "testimonials-09",
+    description:
+      "Centered quote cards with overlapping avatars, gold stars, and soft elevation.",
+    files: [
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-09/testimonial.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/testimonials-09/testimonial.tsx",
+      },
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-09/images/avatar-1.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/testimonials-09/images/avatar-1.webp",
+      },
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-09/images/avatar-2.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/testimonials-09/images/avatar-2.webp",
+      },
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-09/images/avatar-3.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/testimonials-09/images/avatar-3.webp",
+      },
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-09/images/avatar-4.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/testimonials-09/images/avatar-4.webp",
+      },
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-09/images/avatar-5.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/testimonials-09/images/avatar-5.webp",
+      },
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-09/images/avatar-6.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/testimonials-09/images/avatar-6.webp",
+      },
+    ],
+  },
+  {
+    name: "testimonials-10",
+    type: "registry:block",
+    title: "testimonials-10",
+    description:
+      "Muted section with a masonry wall of quote cards, gold stars, and avatar captions.",
+    files: [
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-10/testimonial.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/testimonials-10/testimonial.tsx",
+      },
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-10/images/avatar-1.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/testimonials-10/images/avatar-1.webp",
+      },
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-10/images/avatar-2.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/testimonials-10/images/avatar-2.webp",
+      },
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-10/images/avatar-3.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/testimonials-10/images/avatar-3.webp",
+      },
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-10/images/avatar-4.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/testimonials-10/images/avatar-4.webp",
+      },
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-10/images/avatar-5.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/testimonials-10/images/avatar-5.webp",
+      },
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-10/images/avatar-6.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/testimonials-10/images/avatar-6.webp",
+      },
+    ],
+  },
+  {
+    name: "testimonials-11",
+    type: "registry:block",
+    title: "testimonials-11",
+    description:
+      "Centered avatar cards in a three-column grid with gold star ratings.",
+    files: [
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-11/testimonial.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/testimonials-11/testimonial.tsx",
+      },
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-11/images/avatar-1.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/testimonials-11/images/avatar-1.webp",
+      },
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-11/images/avatar-2.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/testimonials-11/images/avatar-2.webp",
+      },
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-11/images/avatar-3.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/testimonials-11/images/avatar-3.webp",
+      },
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-11/images/avatar-4.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/testimonials-11/images/avatar-4.webp",
+      },
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-11/images/avatar-5.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/testimonials-11/images/avatar-5.webp",
+      },
+    ],
+  },
+  {
+    name: "testimonials-12",
+    type: "registry:block",
+    title: "testimonials-12",
+    description:
+      "Centered single-slide testimonial carousel with gold stars and side controls.",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-12/testimonial.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/testimonials-12/testimonial.tsx",
+      },
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-12/images/avatar-1.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/testimonials-12/images/avatar-1.webp",
+      },
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-12/images/avatar-2.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/testimonials-12/images/avatar-2.webp",
+      },
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-12/images/avatar-3.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/testimonials-12/images/avatar-3.webp",
+      },
+    ],
+  },
+  {
+    name: "testimonials-13",
+    type: "registry:block",
+    title: "testimonials-13",
+    description:
+      "Photo and quote carousel with primary offset shadow, gold stars, and prev/next controls.",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-13/testimonial.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/testimonials-13/testimonial.tsx",
+      },
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-13/images/photo-1.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/testimonials-13/images/photo-1.webp",
+      },
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-13/images/photo-2.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/testimonials-13/images/photo-2.webp",
+      },
+    ],
+  },
+  {
+    name: "contact-form-01",
+    type: "registry:block",
+    title: "contact-form-01",
+    description:
+      "Elevated contact card with two-column fields and message CTA.",
+    registryDependencies: ["button", "input", "label", "textarea"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/forms/contact-form/contact-form-01/contact-form.tsx",
+        type: "registry:component",
+        target: "components/blocks/forms/contact-form-01/contact-form.tsx",
+      },
+    ],
+  },
+  {
+    name: "contact-form-02",
+    type: "registry:block",
+    title: "contact-form-02",
+    description:
+      "Elevated form beside four contact detail cards (office, phone, chat, fax).",
+    registryDependencies: ["button", "input", "label", "textarea"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/forms/contact-form/contact-form-02/contact-form.tsx",
+        type: "registry:component",
+        target: "components/blocks/forms/contact-form-02/contact-form.tsx",
+      },
+    ],
+  },
+  {
+    name: "contact-form-03",
+    type: "registry:block",
+    title: "contact-form-03",
+    description:
+      "Four contact detail cards above an elevated compact contact form.",
+    registryDependencies: ["button", "input", "label", "textarea"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/forms/contact-form/contact-form-03/contact-form.tsx",
+        type: "registry:component",
+        target: "components/blocks/forms/contact-form-03/contact-form.tsx",
+      },
+    ],
+  },
+  {
+    name: "contact-form-04",
+    type: "registry:block",
+    title: "contact-form-04",
+    description:
+      "Centered elevated contact form with four detail cards underneath.",
+    registryDependencies: ["button", "input", "label", "textarea"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/forms/contact-form/contact-form-04/contact-form.tsx",
+        type: "registry:component",
+        target: "components/blocks/forms/contact-form-04/contact-form.tsx",
+      },
+    ],
+  },
+  {
+    name: "contact-form-05",
+    type: "registry:block",
+    title: "contact-form-05",
+    description:
+      "Split Let's Talk layout with email card, Facebook/LinkedIn/X icons, and form.",
+    registryDependencies: ["button", "input", "label", "textarea"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/forms/contact-form/contact-form-05/contact-form.tsx",
+        type: "registry:component",
+        target: "components/blocks/forms/contact-form-05/contact-form.tsx",
+      },
+      ...formsBlockIconFiles("contact-form-05", [
+        "facebook",
+        "linkedin",
+        "x",
+      ]),
+    ],
+  },
+  {
+    name: "contact-form-06",
+    type: "registry:block",
+    title: "contact-form-06",
+    description:
+      "Centered contact form card beside a rounded team photo panel.",
+    registryDependencies: ["button", "input", "label", "textarea"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/forms/contact-form/contact-form-06/contact-form.tsx",
+        type: "registry:component",
+        target: "components/blocks/forms/contact-form-06/contact-form.tsx",
+      },
+      {
+        path: "registry/blocks/forms/contact-form/contact-form-06/images/team.webp",
+        type: "registry:file",
+        target: "components/blocks/forms/contact-form-06/images/team.webp",
+      },
+    ],
+  },
+  {
+    name: "contact-form-07",
+    type: "registry:block",
+    title: "contact-form-07",
+    description:
+      "Primary info panel with social icons beside a two-column contact form.",
+    registryDependencies: ["button", "input", "label", "textarea"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/forms/contact-form/contact-form-07/contact-form.tsx",
+        type: "registry:component",
+        target: "components/blocks/forms/contact-form-07/contact-form.tsx",
+      },
+      ...formsBlockIconFiles("contact-form-07", [
+        "facebook",
+        "linkedin",
+        "x",
+      ]),
+    ],
+  },
+  {
+    name: "contact-form-08",
+    type: "registry:block",
+    title: "contact-form-08",
+    description:
+      "Elevated form with detail cards and an embedded office map.",
+    registryDependencies: ["button", "input", "label", "textarea"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/forms/contact-form/contact-form-08/contact-form.tsx",
+        type: "registry:component",
+        target: "components/blocks/forms/contact-form-08/contact-form.tsx",
+      },
+    ],
+  },
+  {
+    name: "contact-form-09",
+    type: "registry:block",
+    title: "contact-form-09",
+    description:
+      "Muted stage with centered form card and three contact detail cards.",
+    registryDependencies: ["button", "input", "label", "textarea"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/forms/contact-form/contact-form-09/contact-form.tsx",
+        type: "registry:component",
+        target: "components/blocks/forms/contact-form-09/contact-form.tsx",
+      },
+    ],
+  },
+  {
+    name: "contact-form-10",
+    type: "registry:block",
+    title: "contact-form-10",
+    description:
+      "Full-height split page with local team photo panel and contact form.",
+    registryDependencies: ["button", "input", "label", "textarea"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/forms/contact-form/contact-form-10/contact-form.tsx",
+        type: "registry:component",
+        target: "components/blocks/forms/contact-form-10/contact-form.tsx",
+      },
+      {
+        path: "registry/blocks/forms/contact-form/contact-form-10/images/team.webp",
+        type: "registry:file",
+        target: "components/blocks/forms/contact-form-10/images/team.webp",
+      },
+    ],
+  },
+  {
+    name: "contact-form-11",
+    type: "registry:block",
+    title: "contact-form-11",
+    description:
+      "Get In Touch form card beside an embedded office map.",
+    registryDependencies: ["button", "input", "label", "textarea"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/forms/contact-form/contact-form-11/contact-form.tsx",
+        type: "registry:component",
+        target: "components/blocks/forms/contact-form-11/contact-form.tsx",
+      },
+    ],
+  },
+  {
+    name: "contact-form-12",
+    type: "registry:block",
+    title: "contact-form-12",
+    description:
+      "Get in touch form with contact information and hours-of-operation cards.",
+    registryDependencies: ["button", "input", "label", "textarea"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/forms/contact-form/contact-form-12/contact-form.tsx",
+        type: "registry:component",
+        target: "components/blocks/forms/contact-form-12/contact-form.tsx",
+      },
+    ],
+  },
+  {
+    name: "footer-01",
+    type: "registry:block",
+    title: "footer-01",
+    description:
+      "Four-column marketing footer with quick links, services, platforms, and company.",
+    files: [
+      {
+        path: "registry/blocks/marketing/footer/footer-01/footer.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/footer-01/footer.tsx",
+      },
+    ],
+  },
+  {
+    name: "footer-02",
+    type: "registry:block",
+    title: "footer-02",
+    description:
+      "Marketing footer with logo, social icons, useful links, and information.",
+    files: [
+      {
+        path: "registry/blocks/marketing/footer/footer-02/footer.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/footer-02/footer.tsx",
+      },
+      {
+        path: "registry/blocks/marketing/footer/footer-02/logo.svg",
+        type: "registry:file",
+        target: "components/blocks/marketing/footer-02/logo.svg",
+      },
+      ...marketingBlockIconFiles("footer-02", [
+        "facebook",
+        "linkedin",
+        "x",
+        "github",
+      ]),
+    ],
+  },
+  {
+    name: "footer-03",
+    type: "registry:block",
+    title: "footer-03",
+    description:
+      "Dark marketing footer with resources, policies, social icons, and signup CTA.",
+    registryDependencies: ["button"],
+    files: [
+      {
+        path: "registry/blocks/marketing/footer/footer-03/footer.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/footer-03/footer.tsx",
+      },
+      ...marketingBlockIconFiles("footer-03", [
+        "facebook",
+        "linkedin",
+        "x",
+      ]),
+    ],
+  },
+  {
+    name: "footer-04",
+    type: "registry:block",
+    title: "footer-04",
+    description:
+      "Muted footer with brand blurb, social icons, four link columns, and legal bar.",
+    files: [
+      {
+        path: "registry/blocks/marketing/footer/footer-04/footer.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/footer-04/footer.tsx",
+      },
+      {
+        path: "registry/blocks/marketing/footer/footer-04/logo.svg",
+        type: "registry:file",
+        target: "components/blocks/marketing/footer-04/logo.svg",
+      },
+      ...marketingBlockIconFiles("footer-04", [
+        "facebook",
+        "linkedin",
+        "x",
+        "github",
+      ]),
+    ],
+  },
+  {
+    name: "footer-05",
+    type: "registry:block",
+    title: "footer-05",
+    description:
+      "Gradient dark footer with logo, social icons, three link columns, and legal bar.",
+    files: [
+      {
+        path: "registry/blocks/marketing/footer/footer-05/footer.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/footer-05/footer.tsx",
+      },
+      {
+        path: "registry/blocks/marketing/footer/footer-05/logo.svg",
+        type: "registry:file",
+        target: "components/blocks/marketing/footer-05/logo.svg",
+      },
+      ...marketingBlockIconFiles("footer-05", [
+        "facebook",
+        "linkedin",
+        "x",
+        "github",
+      ]),
+    ],
+  },
+  {
+    name: "footer-06",
+    type: "registry:block",
+    title: "footer-06",
+    description:
+      "Store-style footer with stacked link groups, audience columns, and centered legal links.",
+    files: [
+      {
+        path: "registry/blocks/marketing/footer/footer-06/footer.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/footer-06/footer.tsx",
+      },
+    ],
+  },
+  {
+    name: "footer-07",
+    type: "registry:block",
+    title: "footer-07",
+    description:
+      "Dark contact footer with address, social icons, link columns, and newsletter signup.",
+    registryDependencies: ["button", "input"],
+    files: [
+      {
+        path: "registry/blocks/marketing/footer/footer-07/footer.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/footer-07/footer.tsx",
+      },
+      {
+        path: "registry/blocks/marketing/footer/footer-07/logo.svg",
+        type: "registry:file",
+        target: "components/blocks/marketing/footer-07/logo.svg",
+      },
+      ...marketingBlockIconFiles("footer-07", [
+        "facebook",
+        "linkedin",
+        "x",
+        "github",
+      ]),
+    ],
+  },
+  {
+    name: "footer-08",
+    type: "registry:block",
+    title: "footer-08",
+    description:
+      "Centered dark footer with legal links, social icons, and copyright.",
+    files: [
+      {
+        path: "registry/blocks/marketing/footer/footer-08/footer.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/footer-08/footer.tsx",
+      },
+      ...marketingBlockIconFiles("footer-08", [
+        "facebook",
+        "linkedin",
+        "x",
+        "github",
+      ]),
+    ],
+  },
+  {
+    name: "footer-09",
+    type: "registry:block",
+    title: "footer-09",
+    description:
+      "Minimal centered footer with brand mark, family line, and social icons.",
+    files: [
+      {
+        path: "registry/blocks/marketing/footer/footer-09/footer.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/footer-09/footer.tsx",
+      },
+      ...marketingBlockIconFiles("footer-09", [
+        "google",
+        "x",
+        "github",
+        "slack",
+      ]),
+    ],
+  },
+  {
+    name: "footer-10",
+    type: "registry:block",
+    title: "footer-10",
+    description:
+      "Newsletter footer with brand mark, five link columns, social icons, and legal bar.",
+    registryDependencies: ["button", "input"],
+    files: [
+      {
+        path: "registry/blocks/marketing/footer/footer-10/footer.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/footer-10/footer.tsx",
+      },
+      ...marketingBlockIconFiles("footer-10", [
+        "facebook",
+        "instagram",
+        "x",
+        "github",
+        "dribbble",
+      ]),
+    ],
+  },
+  {
+    name: "footer-11",
+    type: "registry:block",
+    title: "footer-11",
+    description:
+      "Split footer with photo panel, phone hours, social icons, and link columns.",
+    files: [
+      {
+        path: "registry/blocks/marketing/footer/footer-11/footer.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/footer-11/footer.tsx",
+      },
+      {
+        path: "registry/blocks/marketing/footer/footer-11/images/panel.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/footer-11/images/panel.webp",
+      },
+      ...marketingBlockIconFiles("footer-11", [
+        "facebook",
+        "instagram",
+        "x",
+        "github",
+        "dribbble",
+      ]),
+    ],
+  },
+  {
+    name: "footer-12",
+    type: "registry:block",
+    title: "footer-12",
+    description:
+      "Centered newsletter pill, social icons, three link columns, and credit line.",
+    registryDependencies: ["button", "input"],
+    files: [
+      {
+        path: "registry/blocks/marketing/footer/footer-12/footer.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/footer-12/footer.tsx",
+      },
+      ...marketingBlockIconFiles("footer-12", [
+        "facebook",
+        "instagram",
+        "x",
+        "github",
+        "dribbble",
+      ]),
+    ],
+  },
+  {
+    name: "footer-13",
+    type: "registry:block",
+    title: "footer-13",
+    description:
+      "Centered muted footer with brand mark, blurb, nav links, and social icons.",
+    files: [
+      {
+        path: "registry/blocks/marketing/footer/footer-13/footer.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/footer-13/footer.tsx",
+      },
+      {
+        path: "registry/blocks/marketing/footer/footer-13/logo.svg",
+        type: "registry:file",
+        target: "components/blocks/marketing/footer-13/logo.svg",
+      },
+      ...marketingBlockIconFiles("footer-13", [
+        "facebook",
+        "instagram",
+        "x",
+        "github",
+        "dribbble",
+      ]),
+    ],
+  },
+  {
+    name: "footer-14",
+    type: "registry:block",
+    title: "footer-14",
+    description:
+      "Brand blurb and socials with About, Services, Helpful Links (live chat), Contact, and legal bar.",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/marketing/footer/footer-14/footer.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/footer-14/footer.tsx",
+      },
+      {
+        path: "registry/blocks/marketing/footer/footer-14/logo.svg",
+        type: "registry:file",
+        target: "components/blocks/marketing/footer-14/logo.svg",
+      },
+      ...marketingBlockIconFiles("footer-14", [
+        "facebook",
+        "instagram",
+        "x",
+        "github",
+        "dribbble",
+      ]),
+    ],
+  },
+  {
+    name: "footer-15",
+    type: "registry:block",
+    title: "footer-15",
+    description:
+      "Career CTA banner with four link columns, Live Chat indicator, socials, and brand bar.",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/marketing/footer/footer-15/footer.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/footer-15/footer.tsx",
+      },
+      {
+        path: "registry/blocks/marketing/footer/footer-15/logo.svg",
+        type: "registry:file",
+        target: "components/blocks/marketing/footer-15/logo.svg",
+      },
+      ...marketingBlockIconFiles("footer-15", [
+        "facebook",
+        "instagram",
+        "x",
+        "github",
+        "dribbble",
+      ]),
+    ],
+  },
+  {
+    name: "footer-16",
+    type: "registry:block",
+    title: "footer-16",
+    description:
+      "Brand blurb and socials with Company, Support, newsletter signup, and legal bar.",
+    registryDependencies: ["button", "input"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/marketing/footer/footer-16/footer.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/footer-16/footer.tsx",
+      },
+      {
+        path: "registry/blocks/marketing/footer/footer-16/logo.svg",
+        type: "registry:file",
+        target: "components/blocks/marketing/footer-16/logo.svg",
+      },
+      ...marketingBlockIconFiles("footer-16", [
+        "instagram",
+        "facebook",
+        "x",
+        "linkedin",
+      ]),
+    ],
+  },
+  {
+    name: "rating-01",
+    type: "registry:block",
+    title: "rating-01",
+    description: "Read-only five-star rating row with filled and empty stars.",
+    files: [
+      {
+        path: "registry/blocks/ecommerce/reviews-and-ratings/rating-01/rating.tsx",
+        type: "registry:component",
+        target: "components/blocks/ecommerce/rating-01/rating.tsx",
+      },
+    ],
+  },
+  {
+    name: "rating-02",
+    type: "registry:block",
+    title: "rating-02",
+    description:
+      "Read-only star rating with a numeric score label beside the stars.",
+    files: [
+      {
+        path: "registry/blocks/ecommerce/reviews-and-ratings/rating-02/rating.tsx",
+        type: "registry:component",
+        target: "components/blocks/ecommerce/rating-02/rating.tsx",
+      },
+    ],
+  },
+  {
+    name: "rating-03",
+    type: "registry:block",
+    title: "rating-03",
+    description:
+      "Dark pill rating with an overlapping yellow score badge and star row.",
+    files: [
+      {
+        path: "registry/blocks/ecommerce/reviews-and-ratings/rating-03/rating.tsx",
+        type: "registry:component",
+        target: "components/blocks/ecommerce/rating-03/rating.tsx",
+      },
+    ],
+  },
+  {
+    name: "rating-04",
+    type: "registry:block",
+    title: "rating-04",
+    description:
+      "Average score card with star row and per-star distribution bars.",
+    files: [
+      {
+        path: "registry/blocks/ecommerce/reviews-and-ratings/rating-04/rating.tsx",
+        type: "registry:component",
+        target: "components/blocks/ecommerce/rating-04/rating.tsx",
+      },
+    ],
+  },
+  {
+    name: "rating-05",
+    type: "registry:block",
+    title: "rating-05",
+    description:
+      "Dark review card with avatar header, star row, quote, and date.",
+    files: [
+      {
+        path: "registry/blocks/ecommerce/reviews-and-ratings/rating-05/rating.tsx",
+        type: "registry:component",
+        target: "components/blocks/ecommerce/rating-05/rating.tsx",
+      },
+      {
+        path: "registry/blocks/ecommerce/reviews-and-ratings/rating-05/avatar.webp",
+        type: "registry:file",
+        target: "components/blocks/ecommerce/rating-05/avatar.webp",
+      },
+    ],
+  },
+  {
+    name: "rating-06",
+    type: "registry:block",
+    title: "rating-06",
+    description:
+      "Summary score with distribution bars and a sample review list item.",
+    files: [
+      {
+        path: "registry/blocks/ecommerce/reviews-and-ratings/rating-06/rating.tsx",
+        type: "registry:component",
+        target: "components/blocks/ecommerce/rating-06/rating.tsx",
+      },
+      {
+        path: "registry/blocks/ecommerce/reviews-and-ratings/rating-06/avatar.webp",
+        type: "registry:file",
+        target: "components/blocks/ecommerce/rating-06/avatar.webp",
+      },
+    ],
+  },
+  {
+    name: "rating-07",
+    type: "registry:block",
+    title: "rating-07",
+    description: "Stacked review list with avatars, stars, and timestamps.",
+    files: [
+      {
+        path: "registry/blocks/ecommerce/reviews-and-ratings/rating-07/rating.tsx",
+        type: "registry:component",
+        target: "components/blocks/ecommerce/rating-07/rating.tsx",
+      },
+      {
+        path: "registry/blocks/ecommerce/reviews-and-ratings/rating-07/avatar-01.webp",
+        type: "registry:file",
+        target: "components/blocks/ecommerce/rating-07/avatar-01.webp",
+      },
+      {
+        path: "registry/blocks/ecommerce/reviews-and-ratings/rating-07/avatar-02.webp",
+        type: "registry:file",
+        target: "components/blocks/ecommerce/rating-07/avatar-02.webp",
+      },
+    ],
+  },
+  {
+    name: "rating-08",
+    type: "registry:block",
+    title: "rating-08",
+    description:
+      "Score card with distribution bars and a Write a review action.",
+    registryDependencies: ["button"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/ecommerce/reviews-and-ratings/rating-08/rating.tsx",
+        type: "registry:component",
+        target: "components/blocks/ecommerce/rating-08/rating.tsx",
+      },
+    ],
+  },
+  marketingHeroBlock(
+    "hero-01",
+    "Split hero with primary radial wash, dual CTAs, brand logos, and KPI dashboard image.",
+    [
+      "brand-logo-1.webp",
+      "brand-logo-2.webp",
+      "brand-logo-3.webp",
+      "brand-logo-4.webp",
+      "kpi-dashboard.webp",
+    ]
+  ),
+  marketingHeroBlock(
+    "hero-02",
+    "Centered productivity hero with gradient backdrop, responsive nav Sheet, dual CTAs, and KPI image.",
+    ["bg-gradient.webp", "logo.svg", "kpi-img-3.webp"],
+    ["button", "sheet"]
+  ),
+  marketingHeroBlock(
+    "hero-03",
+    "Centered productivity hero with eyebrow badge, nav Get started CTA, Sheet menu, and AI dashboard image.",
+    ["logo.svg", "ai-dashboard.webp"],
+    ["button", "sheet"]
+  ),
+  marketingHeroBlock(
+    "hero-04",
+    "Pill floating nav on primary wash backdrop, Get started CTA, Sheet menu, and KPI dashboard image.",
+    ["logo.svg", "kpis-dashboard-img.webp"],
+    ["button", "sheet"]
+  ),
+  marketingHeroBlock(
+    "hero-05",
+    "Split hero with eyebrow, dual CTAs, avatar social proof, and mobile app image.",
+    [
+      "logo.svg",
+      "team-1.webp",
+      "team-2.webp",
+      "team-3.webp",
+      "mobile-app-img-5.webp",
+    ],
+    ["button", "sheet"]
+  ),
+  marketingHeroBlock(
+    "hero-06",
+    "Split brand hero with stats row, dual CTAs, and two-column product gallery.",
+    [
+      "logo.svg",
+      "face-primer-category.webp",
+      "product6.webp",
+      "product2.webp",
+      "skin-glow-category.webp",
+    ],
+    ["button", "sheet"]
+  ),
+  marketingHeroBlock(
+    "hero-07",
+    "Full-bleed photo hero with dark overlay, light nav, dual CTAs, and avatar social proof.",
+    [
+      "logo.svg",
+      "logo-white.svg",
+      "real-estate-img.webp",
+      "team-1.webp",
+      "team-2.webp",
+      "team-3.webp",
+    ],
+    ["button", "sheet"]
+  ),
+  marketingHeroBlock(
+    "hero-08",
+    "Split hero with full-bleed photo column, Sign up nav, dual CTAs, and avatar social proof.",
+    [
+      "logo.svg",
+      "real-estate-img.webp",
+      "team-1.webp",
+      "team-2.webp",
+      "team-3.webp",
+    ],
+    ["button", "sheet"]
+  ),
+  marketingHeroBlock(
+    "hero-09",
+    "Image-left split hero with accented headline and dual CTAs — no navigation chrome.",
+    ["mobile-app-img-3.webp"],
+    ["button"]
+  ),
+  marketingHeroBlock(
+    "hero-10",
+    "Centered marketing hero with primary radial wash, search pill, dual CTAs, and avatar social proof.",
+    ["logo.svg", "team-1.webp", "team-2.webp", "team-3.webp"],
+    ["button", "sheet"]
+  ),
+  marketingNewsletterBlock(
+    "newsletter-01",
+    "Centered newsletter signup with email Input, Subscribe Button, and short supporting copy."
+  ),
+  marketingNewsletterBlock(
+    "newsletter-02",
+    "Card newsletter with mail illustration, secret-deals copy, and email Input plus Subscribe."
+  ),
+  marketingNewsletterBlock(
+    "newsletter-03",
+    "Full-bleed muted band with combined email field and Subscribe Button in one control.",
+    { registryDependencies: ["button"] }
+  ),
+  marketingNewsletterBlock(
+    "newsletter-04",
+    "Split muted panel — copy on the start side, email Input and Subscribe on the end."
+  ),
+  marketingNewsletterBlock(
+    "newsletter-05",
+    "Soft rounded card with mail illustration, centered copy, and combined subscribe control.",
+    { registryDependencies: ["button"] }
+  ),
+  marketingNewsletterBlock(
+    "newsletter-06",
+    "Full-bleed photo newsletter with dark overlay, light copy, and combined subscribe control.",
+    {
+      images: ["real-estate-img.webp"],
+      registryDependencies: ["button"],
+    }
+  ),
+  marketingNewsletterBlock(
+    "newsletter-07",
+    "Dark split newsletter with subscribe form and two perk cards plus unsubscribe footnote.",
+    { registryDependencies: ["button"] }
+  ),
+  marketingNewsletterBlock(
+    "newsletter-08",
+    "Primary gradient band with overlapping card form (email Input + Subscribe) hanging below."
+  ),
+  marketingNewsletterBlock(
+    "newsletter-09",
+    "Start-aligned muted panel with Newsletter headline, copy, and email Input plus Subscribe."
+  ),
+  marketingBlogBlock(
+    "blog-01",
+    "Latest posts header with a responsive 1/2/3-column card grid and local cover images.",
+    BLOG_01_IMAGES
+  ),
+  marketingBlogBlock(
+    "blog-02",
+    "Centered Latest posts intro with padded card grid, cover images, date, and author meta.",
+    BLOG_01_IMAGES
+  ),
+  marketingBlogBlock(
+    "blog-03",
+    "Editorial stacked essay list with date, hover title, author avatar, and arrow cue.",
+    BLOG_03_IMAGES,
+    { dependencies: ["lucide-react"] }
+  ),
+  marketingBlogBlock(
+    "blog-04",
+    "Minimal food story grid with cover images, date meta, and Read more arrow link.",
+    BLOG_04_IMAGES,
+    { dependencies: ["lucide-react"] }
+  ),
+  marketingBlogBlock(
+    "blog-05",
+    "Food card grid with hover zoom covers and primary date badge on the image corner.",
+    BLOG_04_IMAGES
+  ),
+  marketingBlogBlock(
+    "blog-06",
+    "Tall cinematic covers with frosted glass meta panel and always-visible excerpt.",
+    BLOG_04_IMAGES
+  ),
+  marketingBlogBlock(
+    "blog-07",
+    "Two-column horizontal post cards with cover thumb, date, author, and excerpt.",
+    BLOG_07_IMAGES
+  ),
+  marketingBlogBlock(
+    "blog-08",
+    "Tall cover tiles with dark scrim, hover zoom, and bottom gradient title meta.",
+    BLOG_08_IMAGES
+  ),
+  marketingBlogBlock(
+    "blog-09",
+    "Two-by-two wide cover tiles with dark scrim and bottom gradient title meta.",
+    BLOG_09_IMAGES
+  ),
+  marketingBlogBlock(
+    "blog-10",
+    "Premium padded food cards with cover, date meta, and text See more link.",
+    BLOG_04_IMAGES,
+    { dependencies: ["lucide-react"] }
+  ),
+  marketingTeamBlock(
+    "team-01",
+    "Premium portrait grid with eyebrow, 4:5 photo cards, and soft hover lift.",
+    TEAM_PORTRAITS_6
+  ),
+  marketingTeamBlock(
+    "team-02",
+    "Editorial team cards with bio plus inline LinkedIn / X icons and local portraits.",
+    TEAM_PORTRAITS_6
+  ),
+  marketingTeamBlock(
+    "team-03",
+    "Cinematic full-bleed portrait cards with gradient overlay and name/role.",
+    TEAM_PORTRAITS_6
+  ),
+  marketingTeamBlock(
+    "team-04",
+    "Dense gallery grid (up to four columns) with photo tiles, names, and roles.",
+    TEAM_PORTRAITS_6
+  ),
+  marketingTeamBlock(
+    "team-05",
+    "Minimal circular avatar grid with generous spacing and local portraits.",
+    TEAM_PORTRAITS_6
+  ),
+  marketingTeamBlock(
+    "team-06",
+    "Floating avatar cards with overlapping photos and LinkedIn / X links.",
+    TEAM_PORTRAITS_6
+  ),
+  marketingTeamBlock(
+    "team-07",
+    "Muted roster band with horizontal avatar + name/role rows (RTL-aware flex).",
+    TEAM_PORTRAITS_6
+  ),
+  marketingTeamBlock(
+    "team-08",
+    "Interactive circular portrait cards with hover scale and local images.",
+    TEAM_PORTRAITS_6
+  ),
+  marketingTeamBlock(
+    "team-09",
+    "Editorial split cards with photo, bio, and inline LinkedIn / X icons.",
+    ["team-01.webp", "team-03.webp", "team-04.webp", "team-05.webp"]
+  ),
+  marketingTeamBlock(
+    "team-10",
+    "Location cards with photo and floating name/role panel (logical end edge).",
+    TEAM_PORTRAITS_6
+  ),
+  marketingPricingBlock(
+    "pricing-01",
+    "Premium three-tier cards with atmospheric header, Popular lift, inline checks, and CTAs."
+  ),
+  marketingPricingBlock(
+    "pricing-02",
+    "Billing toggle with yearly savings hint, include/exclude checklist, and featured Popular card."
+  ),
+  marketingPricingBlock(
+    "pricing-03",
+    "Scrollable comparison table with Popular column accent, check/cross cells, and plan CTAs."
+  ),
+  marketingPricingBlock(
+    "pricing-04",
+    "Two-plan cinematic stack with zinc-950 featured panel (theme-stable) and recommended badge."
+  ),
+  marketingPricingBlock(
+    "pricing-05",
+    "Soft rounded cards with monthly/yearly toggle, free-months chip, and hairline dividers."
+  ),
+  marketingPricingBlock(
+    "pricing-06",
+    "Center spotlight plan with scale, Best value badge, billing toggle, and inline checks."
+  ),
+  marketingPricingBlock(
+    "pricing-07",
+    "Categorized feature matrix with Popular column, free/paid plans, and inline check/cross icons."
+  ),
+  marketingPricingBlock(
+    "pricing-08",
+    "Three pricing cards plus a categorized comparison table with inline SVG icons."
+  ),
+  marketingPricingBlock(
+    "pricing-09",
+    "Three-up pricing with solid primary featured card, white CTA, and soft glow accents."
+  ),
+  marketingPricingBlock(
+    "pricing-10",
+    "Four-column pricing with dark billing toggle, Best seller zinc panel, and yearly savings chip."
+  ),
+  {
+    name: "mega-menu-01",
+    type: "registry:block",
+    title: "mega-menu-01",
+    description:
+      "Services mega menu with four category columns, promo image, and Sign up.",
+    registryDependencies: ["button", "collapsible", "sheet"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/mega-menu/mega-menu-01/mega-menu.tsx",
+        type: "registry:component",
+        target: "components/blocks/navigation/mega-menu-01/mega-menu.tsx",
+      },
+      {
+        path: "registry/blocks/navigation/mega-menu/mega-menu-01/promo.webp",
+        type: "registry:file",
+        target: "components/blocks/navigation/mega-menu-01/promo.webp",
+      },
+    ],
+  },
+  {
+    name: "mega-menu-02",
+    type: "registry:block",
+    title: "mega-menu-02",
+    description:
+      "Institute Services mega dropdown with three CSS columns for governance, research, and training.",
+    registryDependencies: ["button", "collapsible", "sheet"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/mega-menu/mega-menu-02/mega-menu.tsx",
+        type: "registry:component",
+        target: "components/blocks/navigation/mega-menu-02/mega-menu.tsx",
+      },
+    ],
+  },
+  {
+    name: "mega-menu-03",
+    type: "registry:block",
+    title: "mega-menu-03",
+    description:
+      "Products mega menu with five striped apparel and gadgets columns.",
+    registryDependencies: ["button", "collapsible", "sheet"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/mega-menu/mega-menu-03/mega-menu.tsx",
+        type: "registry:component",
+        target: "components/blocks/navigation/mega-menu-03/mega-menu.tsx",
+      },
+    ],
+  },
+  {
+    name: "mega-menu-04",
+    type: "registry:block",
+    title: "mega-menu-04",
+    description:
+      "Features mega menu with icon cards, descriptions, and a release promo panel.",
+    registryDependencies: ["button", "collapsible", "sheet"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/mega-menu/mega-menu-04/mega-menu.tsx",
+        type: "registry:component",
+        target: "components/blocks/navigation/mega-menu-04/mega-menu.tsx",
+      },
+      {
+        path: "registry/blocks/navigation/mega-menu/mega-menu-04/promo.webp",
+        type: "registry:file",
+        target: "components/blocks/navigation/mega-menu-04/promo.webp",
+      },
+    ],
+  },
+  {
+    name: "mega-menu-05",
+    type: "registry:block",
+    title: "mega-menu-05",
+    description:
+      "Tools mega menu with brand app cards and a release promo panel.",
+    registryDependencies: ["button", "collapsible", "sheet"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/mega-menu/mega-menu-05/mega-menu.tsx",
+        type: "registry:component",
+        target: "components/blocks/navigation/mega-menu-05/mega-menu.tsx",
+      },
+      {
+        path: "registry/blocks/navigation/mega-menu/mega-menu-05/promo.webp",
+        type: "registry:file",
+        target: "components/blocks/navigation/mega-menu-05/promo.webp",
+      },
+      ...navBlockIconFiles("mega-menu-05", megaMenu05ToolIcons),
+    ],
+  },
+  {
+    name: "mega-menu-06",
+    type: "registry:block",
+    title: "mega-menu-06",
+    description:
+      "Company mega menu with icon links in a compact three-column panel, Login, and Sign Up.",
+    registryDependencies: ["button", "collapsible", "sheet"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/mega-menu/mega-menu-06/mega-menu.tsx",
+        type: "registry:component",
+        target: "components/blocks/navigation/mega-menu-06/mega-menu.tsx",
+      },
+      {
+        path: "registry/blocks/navigation/mega-menu/mega-menu-06/logo.svg",
+        type: "registry:file",
+        target: "components/blocks/navigation/mega-menu-06/logo.svg",
+      },
+    ],
+  },
+  {
+    name: "command-menu-01",
+    type: "registry:block",
+    title: "command-menu-01",
+    description:
+      "Embedded Quick create command palette for documents, tasks, projects, and AI draft.",
+    registryDependencies: ["command"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/command-menu/command-menu-01/command-menu.tsx",
+        type: "registry:component",
+        target: "components/blocks/navigation/command-menu-01/command-menu.tsx",
+      },
+    ],
+  },
+  {
+    name: "command-menu-02",
+    type: "registry:block",
+    title: "command-menu-02",
+    description:
+      "Global ⌘K app launcher with Go to / Actions groups and a keyboard hint footer.",
+    registryDependencies: ["badge", "button", "command", "kbd"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/command-menu/command-menu-02/command-menu.tsx",
+        type: "registry:component",
+        target: "components/blocks/navigation/command-menu-02/command-menu.tsx",
+      },
+    ],
+  },
+  {
+    name: "command-menu-03",
+    type: "registry:block",
+    title: "command-menu-03",
+    description:
+      "People scout command dialog with department filter chips and match highlighting.",
+    registryDependencies: ["avatar", "badge", "button", "command"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/command-menu/command-menu-03/command-menu.tsx",
+        type: "registry:component",
+        target: "components/blocks/navigation/command-menu-03/command-menu.tsx",
+      },
+    ],
+  },
+  {
+    name: "command-menu-04",
+    type: "registry:block",
+    title: "command-menu-04",
+    description:
+      "IDE-style jump-to-file command dialog with path rows and extension badges.",
+    registryDependencies: ["badge", "button", "command", "kbd"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/command-menu/command-menu-04/command-menu.tsx",
+        type: "registry:component",
+        target: "components/blocks/navigation/command-menu-04/command-menu.tsx",
+      },
+    ],
+  },
+  {
+    name: "command-menu-05",
+    type: "registry:block",
+    title: "command-menu-05",
+    description:
+      "Split-pane integration studio with list, detail panel, enable switch, and mobile back.",
+    registryDependencies: ["button", "command", "switch"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/command-menu/command-menu-05/command-menu.tsx",
+        type: "registry:component",
+        target: "components/blocks/navigation/command-menu-05/command-menu.tsx",
+      },
+    ],
+  },
+  {
+    name: "command-menu-06",
+    type: "registry:block",
+    title: "command-menu-06",
+    description:
+      "Slash studio command dialog for AI generate and editor insert actions.",
+    registryDependencies: ["button", "command"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/command-menu/command-menu-06/command-menu.tsx",
+        type: "registry:component",
+        target: "components/blocks/navigation/command-menu-06/command-menu.tsx",
+      },
+    ],
+  },
+  {
+    name: "sidebar-01",
+    type: "registry:block",
+    title: "sidebar-01",
+    description:
+      "Simple sidebar with brand mark, Dashboard, and Information, Income, and Actions sections.",
+    registryDependencies: [],
+    dependencies: [],
+    files: [
+      {
+        path: "registry/blocks/navigation/sidebar/sidebar-01/sidebar.tsx",
+        type: "registry:component",
+        target: "components/blocks/navigation/sidebar-01/sidebar.tsx",
+      },
+      {
+        path: "registry/blocks/navigation/sidebar/sidebar-01/logo.svg",
+        type: "registry:file",
+        target: "components/blocks/navigation/sidebar-01/logo.svg",
+      },
+    ],
+  },
+  {
+    name: "sidebar-02",
+    type: "registry:block",
+    title: "sidebar-02",
+    description:
+      "Sectioned sidebar with brand mark and Lucide icons beside Dashboard and nav links.",
+    registryDependencies: [],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/sidebar/sidebar-02/sidebar.tsx",
+        type: "registry:component",
+        target: "components/blocks/navigation/sidebar-02/sidebar.tsx",
+      },
+      {
+        path: "registry/blocks/navigation/sidebar/sidebar-02/logo.svg",
+        type: "registry:file",
+        target: "components/blocks/navigation/sidebar-02/logo.svg",
+      },
+    ],
+  },
+  {
+    name: "sidebar-03",
+    type: "registry:block",
+    title: "sidebar-03",
+    description:
+      "Flat icon sidebar with brand mark and a user profile footer at the bottom.",
+    registryDependencies: ["avatar"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/sidebar/sidebar-03/sidebar.tsx",
+        type: "registry:component",
+        target: "components/blocks/navigation/sidebar-03/sidebar.tsx",
+      },
+      {
+        path: "registry/blocks/navigation/sidebar/sidebar-03/logo.svg",
+        type: "registry:file",
+        target: "components/blocks/navigation/sidebar-03/logo.svg",
+      },
+      {
+        path: "registry/blocks/navigation/sidebar/sidebar-03/avatar.webp",
+        type: "registry:file",
+        target: "components/blocks/navigation/sidebar-03/avatar.webp",
+      },
+    ],
+  },
+  {
+    name: "sidebar-04",
+    type: "registry:block",
+    title: "sidebar-04",
+    description:
+      "Sidebar with brand mark, Dashboard, and collapsible Information, Income, and Actions groups.",
+    registryDependencies: ["collapsible"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/sidebar/sidebar-04/sidebar.tsx",
+        type: "registry:component",
+        target: "components/blocks/navigation/sidebar-04/sidebar.tsx",
+      },
+      {
+        path: "registry/blocks/navigation/sidebar/sidebar-04/logo.svg",
+        type: "registry:file",
+        target: "components/blocks/navigation/sidebar-04/logo.svg",
+      },
+    ],
+  },
+  {
+    name: "sidebar-05",
+    type: "registry:block",
+    title: "sidebar-05",
+    description:
+      "Sidebar with brand mark, Insights and Shared sections, collapse control, and user footer.",
+    registryDependencies: ["avatar", "separator"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/sidebar/sidebar-05/sidebar.tsx",
+        type: "registry:component",
+        target: "components/blocks/navigation/sidebar-05/sidebar.tsx",
+      },
+      {
+        path: "registry/blocks/navigation/sidebar/sidebar-05/logo.svg",
+        type: "registry:file",
+        target: "components/blocks/navigation/sidebar-05/logo.svg",
+      },
+      {
+        path: "registry/blocks/navigation/sidebar/sidebar-05/avatar.webp",
+        type: "registry:file",
+        target: "components/blocks/navigation/sidebar-05/avatar.webp",
+      },
+    ],
+  },
+  {
+    name: "sidebar-06",
+    type: "registry:block",
+    title: "sidebar-06",
+    description:
+      "Flat icon sidebar with brand mark, end-edge active accent, collapse control, and user footer.",
+    registryDependencies: ["avatar", "separator"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/sidebar/sidebar-06/sidebar.tsx",
+        type: "registry:component",
+        target: "components/blocks/navigation/sidebar-06/sidebar.tsx",
+      },
+      {
+        path: "registry/blocks/navigation/sidebar/sidebar-06/logo.svg",
+        type: "registry:file",
+        target: "components/blocks/navigation/sidebar-06/logo.svg",
+      },
+      {
+        path: "registry/blocks/navigation/sidebar/sidebar-06/avatar.webp",
+        type: "registry:file",
+        target: "components/blocks/navigation/sidebar-06/avatar.webp",
+      },
+    ],
+  },
+  {
+    name: "sidebar-07",
+    type: "registry:block",
+    title: "sidebar-07",
+    description:
+      "Sidebar with user initials header, search field, icon nav, and count badges.",
+    registryDependencies: ["input-group"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/sidebar/sidebar-07/sidebar.tsx",
+        type: "registry:component",
+        target: "components/blocks/navigation/sidebar-07/sidebar.tsx",
+      },
+    ],
+  },
+  {
+    name: "sidebar-08",
+    type: "registry:block",
+    title: "sidebar-08",
+    description:
+      "Card-surface sidebar with badges, stacked chat avatars, and collapsible Information and Income groups.",
+    registryDependencies: ["avatar", "collapsible", "separator"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/sidebar/sidebar-08/sidebar.tsx",
+        type: "registry:component",
+        target: "components/blocks/navigation/sidebar-08/sidebar.tsx",
+      },
+      {
+        path: "registry/blocks/navigation/sidebar/sidebar-08/chat-1.webp",
+        type: "registry:file",
+        target: "components/blocks/navigation/sidebar-08/chat-1.webp",
+      },
+      {
+        path: "registry/blocks/navigation/sidebar/sidebar-08/chat-2.webp",
+        type: "registry:file",
+        target: "components/blocks/navigation/sidebar-08/chat-2.webp",
+      },
+      {
+        path: "registry/blocks/navigation/sidebar/sidebar-08/chat-3.webp",
+        type: "registry:file",
+        target: "components/blocks/navigation/sidebar-08/chat-3.webp",
+      },
+    ],
+  },
+  {
+    name: "breadcrumbs-01",
+    type: "registry:block",
+    title: "breadcrumbs-01",
+    description:
+      "Centered breadcrumb trail: Home, Profile, and the current Edit page.",
+    registryDependencies: ["breadcrumb"],
+    files: [
+      {
+        path: "registry/blocks/navigation/breadcrumbs/breadcrumbs-01/breadcrumbs.tsx",
+        type: "registry:component",
+        target: "components/blocks/navigation/breadcrumbs-01/breadcrumbs.tsx",
+      },
+    ],
+  },
+  {
+    name: "breadcrumbs-02",
+    type: "registry:block",
+    title: "breadcrumbs-02",
+    description:
+      "Centered breadcrumb with a home icon on the first link, then Profile and Edit.",
+    registryDependencies: ["breadcrumb"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/breadcrumbs/breadcrumbs-02/breadcrumbs.tsx",
+        type: "registry:component",
+        target: "components/blocks/navigation/breadcrumbs-02/breadcrumbs.tsx",
+      },
+    ],
+  },
+  {
+    name: "breadcrumbs-03",
+    type: "registry:block",
+    title: "breadcrumbs-03",
+    description:
+      "Centered breadcrumb with icons on every step: Home, Profile, and Edit.",
+    registryDependencies: ["breadcrumb"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/breadcrumbs/breadcrumbs-03/breadcrumbs.tsx",
+        type: "registry:component",
+        target: "components/blocks/navigation/breadcrumbs-03/breadcrumbs.tsx",
+      },
+    ],
+  },
+  {
+    name: "breadcrumbs-04",
+    type: "registry:block",
+    title: "breadcrumbs-04",
+    description:
+      "Centered icon breadcrumb using slash separators instead of chevrons.",
+    registryDependencies: ["breadcrumb"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/breadcrumbs/breadcrumbs-04/breadcrumbs.tsx",
+        type: "registry:component",
+        target: "components/blocks/navigation/breadcrumbs-04/breadcrumbs.tsx",
+      },
+    ],
+  },
+  {
+    name: "breadcrumbs-05",
+    type: "registry:block",
+    title: "breadcrumbs-05",
+    description:
+      "Centered breadcrumb with home icon and slash separators for Profile and Edit.",
+    registryDependencies: ["breadcrumb"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/breadcrumbs/breadcrumbs-05/breadcrumbs.tsx",
+        type: "registry:component",
+        target: "components/blocks/navigation/breadcrumbs-05/breadcrumbs.tsx",
+      },
+    ],
+  },
+  {
+    name: "breadcrumbs-06",
+    type: "registry:block",
+    title: "breadcrumbs-06",
+    description:
+      "Pill breadcrumb with icons, slash separators, and a filled current page chip.",
+    registryDependencies: ["breadcrumb"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/breadcrumbs/breadcrumbs-06/breadcrumbs.tsx",
+        type: "registry:component",
+        target: "components/blocks/navigation/breadcrumbs-06/breadcrumbs.tsx",
+      },
+    ],
+  },
+  {
+    name: "breadcrumbs-07",
+    type: "registry:block",
+    title: "breadcrumbs-07",
+    description:
+      "Compact bordered breadcrumb panel with home icon and chevron trail.",
+    registryDependencies: ["breadcrumb"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/breadcrumbs/breadcrumbs-07/breadcrumbs.tsx",
+        type: "registry:component",
+        target: "components/blocks/navigation/breadcrumbs-07/breadcrumbs.tsx",
+      },
+    ],
+  },
+  {
+    name: "breadcrumbs-08",
+    type: "registry:block",
+    title: "breadcrumbs-08",
+    description:
+      "Breadcrumb with home icon, collapsed ellipsis dropdown, Profile, and Edit.",
+    registryDependencies: ["breadcrumb", "button", "dropdown-menu"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/breadcrumbs/breadcrumbs-08/breadcrumbs.tsx",
+        type: "registry:component",
+        target: "components/blocks/navigation/breadcrumbs-08/breadcrumbs.tsx",
+      },
+    ],
+  },
+  {
+    name: "breadcrumbs-09",
+    type: "registry:block",
+    title: "breadcrumbs-09",
+    description:
+      "Overlapping pill segments ending in a primary current-page chip.",
+    registryDependencies: ["breadcrumb"],
+    files: [
+      {
+        path: "registry/blocks/navigation/breadcrumbs/breadcrumbs-09/breadcrumbs.tsx",
+        type: "registry:component",
+        target: "components/blocks/navigation/breadcrumbs-09/breadcrumbs.tsx",
+      },
+    ],
+  },
+  {
+    name: "mobile-navigation-01",
+    type: "registry:block",
+    title: "mobile-navigation-01",
+    description:
+      "Classic edge-to-edge tab bar with Home, Search, Bag, and Profile labels.",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/mobile-navigation/mobile-navigation-01/mobile-navigation.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/navigation/mobile-navigation-01/mobile-navigation.tsx",
+      },
+    ],
+  },
+  {
+    name: "mobile-navigation-02",
+    type: "registry:block",
+    title: "mobile-navigation-02",
+    description:
+      "Soft muted tab bar with a filled pill on the active item.",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/mobile-navigation/mobile-navigation-02/mobile-navigation.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/navigation/mobile-navigation-02/mobile-navigation.tsx",
+      },
+    ],
+  },
+  {
+    name: "mobile-navigation-03",
+    type: "registry:block",
+    title: "mobile-navigation-03",
+    description:
+      "Five media tabs with a sliding primary indicator under the active item.",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/mobile-navigation/mobile-navigation-03/mobile-navigation.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/navigation/mobile-navigation-03/mobile-navigation.tsx",
+      },
+    ],
+  },
+  {
+    name: "mobile-navigation-04",
+    type: "registry:block",
+    title: "mobile-navigation-04",
+    description:
+      "Floating rounded dock with labeled tabs and a center create action.",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/mobile-navigation/mobile-navigation-04/mobile-navigation.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/navigation/mobile-navigation-04/mobile-navigation.tsx",
+      },
+    ],
+  },
+  {
+    name: "mobile-navigation-05",
+    type: "registry:block",
+    title: "mobile-navigation-05",
+    description:
+      "Full-width tabs with unread badges on Mail and Alerts.",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/mobile-navigation/mobile-navigation-05/mobile-navigation.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/navigation/mobile-navigation-05/mobile-navigation.tsx",
+      },
+    ],
+  },
+  {
+    name: "mobile-navigation-06",
+    type: "registry:block",
+    title: "mobile-navigation-06",
+    description:
+      "Frosted floating dock with a sliding active pill and visible labels.",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/mobile-navigation/mobile-navigation-06/mobile-navigation.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/navigation/mobile-navigation-06/mobile-navigation.tsx",
+      },
+    ],
+  },
+  {
+    name: "mobile-navigation-07",
+    type: "registry:block",
+    title: "mobile-navigation-07",
+    description:
+      "Bottom tab bar with a raised center create FAB and labeled side items.",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/mobile-navigation/mobile-navigation-07/mobile-navigation.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/navigation/mobile-navigation-07/mobile-navigation.tsx",
+      },
+    ],
+  },
+  {
+    name: "mobile-navigation-08",
+    type: "registry:block",
+    title: "mobile-navigation-08",
+    description:
+      "Compact pill dock that expands the active tab to show its label.",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/mobile-navigation/mobile-navigation-08/mobile-navigation.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/navigation/mobile-navigation-08/mobile-navigation.tsx",
+      },
+    ],
+  },
+  {
+    name: "mobile-navigation-09",
+    type: "registry:block",
+    title: "mobile-navigation-09",
+    description:
+      "Workspace tabs with a top primary accent on the active item.",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/mobile-navigation/mobile-navigation-09/mobile-navigation.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/navigation/mobile-navigation-09/mobile-navigation.tsx",
+      },
+    ],
+  },
+  {
+    name: "mobile-navigation-10",
+    type: "registry:block",
+    title: "mobile-navigation-10",
+    description:
+      "Productivity dock with badges, center compose, and online profile avatar.",
+    registryDependencies: ["avatar"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/mobile-navigation/mobile-navigation-10/mobile-navigation.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/navigation/mobile-navigation-10/mobile-navigation.tsx",
+      },
+    ],
+  },
+  {
+    name: "mobile-navigation-11",
+    type: "registry:block",
+    title: "mobile-navigation-11",
+    description:
+      "Blur chrome tab bar with filled active glyphs, labels, and home indicator.",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/mobile-navigation/mobile-navigation-11/mobile-navigation.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/navigation/mobile-navigation-11/mobile-navigation.tsx",
+      },
+    ],
+  },
+  {
+    name: "mobile-navigation-12",
+    type: "registry:block",
+    title: "mobile-navigation-12",
+    description:
+      "Morphing dock where the active tab blooms into a labeled primary droplet.",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/mobile-navigation/mobile-navigation-12/mobile-navigation.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/navigation/mobile-navigation-12/mobile-navigation.tsx",
+      },
+    ],
+  },
+  {
+    name: "mobile-navigation-13",
+    type: "registry:block",
+    title: "mobile-navigation-13",
+    description:
+      "Floating primary pill bar with a bottom overflow sheet for secondary destinations.",
+    registryDependencies: ["sheet"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/mobile-navigation/mobile-navigation-13/mobile-navigation.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/navigation/mobile-navigation-13/mobile-navigation.tsx",
+      },
+    ],
+  },
+  {
+    name: "mobile-navigation-14",
+    type: "registry:block",
+    title: "mobile-navigation-14",
+    description:
+      "Live status capsule above a compact tab bar that morphs with the active tab.",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/mobile-navigation/mobile-navigation-14/mobile-navigation.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/navigation/mobile-navigation-14/mobile-navigation.tsx",
+      },
+    ],
+  },
+  {
+    name: "tabs-01",
+    type: "registry:block",
+    title: "tabs-01",
+    description:
+      "Product card with underline tabs for Overview, Features, Pricing, and FAQ.",
+    registryDependencies: ["tabs"],
+    files: [
+      {
+        path: "registry/blocks/navigation/tabs/tabs-01/tabs.tsx",
+        type: "registry:component",
+        target: "components/blocks/navigation/tabs-01/tabs.tsx",
+      },
+    ],
+  },
+  {
+    name: "tabs-02",
+    type: "registry:block",
+    title: "tabs-02",
+    description:
+      "Account settings underline tabs with forms for General, Security, Notifications, and Billing.",
+    registryDependencies: ["tabs", "button", "input", "label"],
+    files: [
+      {
+        path: "registry/blocks/navigation/tabs/tabs-02/tabs.tsx",
+        type: "registry:component",
+        target: "components/blocks/navigation/tabs-02/tabs.tsx",
+      },
+    ],
+  },
+  {
+    name: "tabs-03",
+    type: "registry:block",
+    title: "tabs-03",
+    description:
+      "Project folder tabs for Design, Code, Assets, and History.",
+    registryDependencies: ["tabs"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/tabs/tabs-03/tabs.tsx",
+        type: "registry:component",
+        target: "components/blocks/navigation/tabs-03/tabs.tsx",
+      },
+      {
+        path: "registry/blocks/navigation/tabs/tabs-03/images/hero.webp",
+        type: "registry:file",
+        target: "components/blocks/navigation/tabs-03/images/hero.webp",
+      },
+      {
+        path: "registry/blocks/navigation/tabs/tabs-03/images/pricing.webp",
+        type: "registry:file",
+        target: "components/blocks/navigation/tabs-03/images/pricing.webp",
+      },
+      {
+        path: "registry/blocks/navigation/tabs/tabs-03/images/footer.webp",
+        type: "registry:file",
+        target: "components/blocks/navigation/tabs-03/images/footer.webp",
+      },
+    ],
+  },
+  {
+    name: "tabs-04",
+    type: "registry:block",
+    title: "tabs-04",
+    description:
+      "Analytics underline tabs with icon labels and metric panels.",
+    registryDependencies: ["tabs"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/tabs/tabs-04/tabs.tsx",
+        type: "registry:component",
+        target: "components/blocks/navigation/tabs-04/tabs.tsx",
+      },
+    ],
+  },
+  {
+    name: "tabs-05",
+    type: "registry:block",
+    title: "tabs-05",
+    description:
+      "Billing cycle segmented control with Monthly, Yearly, and Lifetime plan cards.",
+    registryDependencies: ["tabs", "button"],
+    files: [
+      {
+        path: "registry/blocks/navigation/tabs/tabs-05/tabs.tsx",
+        type: "registry:component",
+        target: "components/blocks/navigation/tabs-05/tabs.tsx",
+      },
+    ],
+  },
+  {
+    name: "tabs-06",
+    type: "registry:block",
+    title: "tabs-06",
+    description:
+      "Design editor inspector with icon-only segmented tools and property panels.",
+    registryDependencies: ["tabs", "label"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/tabs/tabs-06/tabs.tsx",
+        type: "registry:component",
+        target: "components/blocks/navigation/tabs-06/tabs.tsx",
+      },
+    ],
+  },
+  {
+    name: "tabs-07",
+    type: "registry:block",
+    title: "tabs-07",
+    description:
+      "Inbox soft-pill filters with threaded message lists.",
+    registryDependencies: ["tabs", "avatar"],
+    files: [
+      {
+        path: "registry/blocks/navigation/tabs/tabs-07/tabs.tsx",
+        type: "registry:component",
+        target: "components/blocks/navigation/tabs-07/tabs.tsx",
+      },
+    ],
+  },
+  {
+    name: "tabs-08",
+    type: "registry:block",
+    title: "tabs-08",
+    description:
+      "Fulfillment queue with underline status tabs, counts, and order rows.",
+    registryDependencies: ["tabs", "button", "avatar"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/tabs/tabs-08/tabs.tsx",
+        type: "registry:component",
+        target: "components/blocks/navigation/tabs-08/tabs.tsx",
+      },
+    ],
+  },
+  {
+    name: "tabs-09",
+    type: "registry:block",
+    title: "tabs-09",
+    description:
+      "Storefront collection with underline category tabs and product cards.",
+    registryDependencies: ["tabs", "button"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/tabs/tabs-09/tabs.tsx",
+        type: "registry:component",
+        target: "components/blocks/navigation/tabs-09/tabs.tsx",
+      },
+      {
+        path: "registry/blocks/navigation/tabs/tabs-09/images/lamp.webp",
+        type: "registry:file",
+        target: "components/blocks/navigation/tabs-09/images/lamp.webp",
+      },
+      {
+        path: "registry/blocks/navigation/tabs/tabs-09/images/mugs.webp",
+        type: "registry:file",
+        target: "components/blocks/navigation/tabs-09/images/mugs.webp",
+      },
+      {
+        path: "registry/blocks/navigation/tabs/tabs-09/images/throw.webp",
+        type: "registry:file",
+        target: "components/blocks/navigation/tabs-09/images/throw.webp",
+      },
+      {
+        path: "registry/blocks/navigation/tabs/tabs-09/images/table.webp",
+        type: "registry:file",
+        target: "components/blocks/navigation/tabs-09/images/table.webp",
+      },
+      {
+        path: "registry/blocks/navigation/tabs/tabs-09/images/bowl.webp",
+        type: "registry:file",
+        target: "components/blocks/navigation/tabs-09/images/bowl.webp",
+      },
+      {
+        path: "registry/blocks/navigation/tabs/tabs-09/images/cushion.webp",
+        type: "registry:file",
+        target: "components/blocks/navigation/tabs-09/images/cushion.webp",
+      },
+      {
+        path: "registry/blocks/navigation/tabs/tabs-09/images/tray.webp",
+        type: "registry:file",
+        target: "components/blocks/navigation/tabs-09/images/tray.webp",
+      },
+      {
+        path: "registry/blocks/navigation/tabs/tabs-09/images/tote.webp",
+        type: "registry:file",
+        target: "components/blocks/navigation/tabs-09/images/tote.webp",
+      },
+      {
+        path: "registry/blocks/navigation/tabs/tabs-09/images/candles.webp",
+        type: "registry:file",
+        target: "components/blocks/navigation/tabs-09/images/candles.webp",
+      },
+      {
+        path: "registry/blocks/navigation/tabs/tabs-09/images/bundle.webp",
+        type: "registry:file",
+        target: "components/blocks/navigation/tabs-09/images/bundle.webp",
+      },
+      {
+        path: "registry/blocks/navigation/tabs/tabs-09/images/care-kit.webp",
+        type: "registry:file",
+        target: "components/blocks/navigation/tabs-09/images/care-kit.webp",
+      },
+      {
+        path: "registry/blocks/navigation/tabs/tabs-09/images/gift-card.webp",
+        type: "registry:file",
+        target: "components/blocks/navigation/tabs-09/images/gift-card.webp",
+      },
+    ],
+  },
+  {
+    name: "tabs-10",
+    type: "registry:block",
+    title: "tabs-10",
+    description:
+      "Full-width workspace switcher for Home, Projects, Team, and Reports.",
+    registryDependencies: ["tabs", "button"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/tabs/tabs-10/tabs.tsx",
+        type: "registry:component",
+        target: "components/blocks/navigation/tabs-10/tabs.tsx",
+      },
+    ],
+  },
+  {
+    name: "tabs-11",
+    type: "registry:block",
+    title: "tabs-11",
+    description:
+      "CRM card shell with top-accent tabs for Leads, Deals, Contacts, Activities, and Reports.",
+    registryDependencies: ["tabs", "button"],
+    files: [
+      {
+        path: "registry/blocks/navigation/tabs/tabs-11/tabs.tsx",
+        type: "registry:component",
+        target: "components/blocks/navigation/tabs-11/tabs.tsx",
+      },
+    ],
+  },
+  {
+    name: "tabs-12",
+    type: "registry:block",
+    title: "tabs-12",
+    description:
+      "Vertical settings navigation with profile forms, integrations, and danger zone.",
+    registryDependencies: ["tabs", "button", "input", "label"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/tabs/tabs-12/tabs.tsx",
+        type: "registry:component",
+        target: "components/blocks/navigation/tabs-12/tabs.tsx",
+      },
+    ],
+  },
+  {
     name: "navbar-01",
     type: "registry:block",
     title: "navbar-01",
@@ -2172,8 +5768,8 @@ export const registryItems = [
     type: "registry:block",
     title: "navbar-02",
     description:
-      "SaaS navbar with announcement strip, links, Sign in, and Sign up.",
-    registryDependencies: ["button", "sheet"],
+      "SaaS navbar with product links, docs search shortcut, Changelog badge, and Start free trial.",
+    registryDependencies: ["badge", "button", "sheet"],
     dependencies: ["lucide-react"],
     files: [
       {
@@ -2272,14 +5868,88 @@ export const registryItems = [
     type: "registry:block",
     title: "navbar-08",
     description:
-      "Responsive navbar: full link row on desktop, hamburger sheet below md.",
-    registryDependencies: ["button", "sheet"],
+      "Marketing navbar with end-aligned links, Resources mega menu, and auth actions.",
+    registryDependencies: ["button", "navigation-menu", "sheet"],
     dependencies: ["lucide-react"],
     files: [
       {
         path: "registry/blocks/navigation/navbar/navbar-08/navbar.tsx",
         type: "registry:component",
         target: "components/blocks/navigation/navbar-08/navbar.tsx",
+      },
+      {
+        path: "registry/blocks/navigation/navbar/navbar-08/story.webp",
+        type: "registry:file",
+        target: "components/blocks/navigation/navbar-08/story.webp",
+      },
+    ],
+  },
+  {
+    name: "navbar-09",
+    type: "registry:block",
+    title: "navbar-09",
+    description:
+      "Marketing navbar with medium Resources mega — About, Support, Partners, and Customer stories panel.",
+    registryDependencies: ["button", "navigation-menu", "sheet"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/navbar/navbar-09/navbar.tsx",
+        type: "registry:component",
+        target: "components/blocks/navigation/navbar-09/navbar.tsx",
+      },
+      {
+        path: "registry/blocks/navigation/navbar/navbar-09/story.webp",
+        type: "registry:file",
+        target: "components/blocks/navigation/navbar-09/story.webp",
+      },
+    ],
+  },
+  {
+    name: "navbar-10",
+    type: "registry:block",
+    title: "navbar-10",
+    description:
+      "Marketing navbar with compact Resources menu — Data, Team hiring badge, and Blog.",
+    registryDependencies: ["badge", "button", "navigation-menu", "sheet"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/navbar/navbar-10/navbar.tsx",
+        type: "registry:component",
+        target: "components/blocks/navigation/navbar-10/navbar.tsx",
+      },
+    ],
+  },
+  {
+    name: "navbar-11",
+    type: "registry:block",
+    title: "navbar-11",
+    description:
+      "Marketing navbar with start-aligned links and a nested Dropdown submenu.",
+    registryDependencies: ["button", "dropdown-menu", "sheet"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/navbar/navbar-11/navbar.tsx",
+        type: "registry:component",
+        target: "components/blocks/navigation/navbar-11/navbar.tsx",
+      },
+    ],
+  },
+  {
+    name: "navbar-12",
+    type: "registry:block",
+    title: "navbar-12",
+    description:
+      "Marketing navbar with mobile Menu sheet, nested Dropdown, and a separate offcanvas panel.",
+    registryDependencies: ["button", "dropdown-menu", "sheet"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/navbar/navbar-12/navbar.tsx",
+        type: "registry:component",
+        target: "components/blocks/navigation/navbar-12/navbar.tsx",
       },
     ],
   },

@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "mobile-navigation-03",
+  "type": "registry:block",
+  "title": "mobile-navigation-03",
+  "description": "Five media tabs with a sliding primary indicator under the active item.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/blocks/navigation/mobile-navigation-03/mobile-navigation.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport {\n  ClapperboardIcon,\n  HomeIcon,\n  RadioIcon,\n  StoreIcon,\n  UserRoundIcon,\n} from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst items = [\n  { id: \"home\", label: \"Home\", icon: HomeIcon },\n  { id: \"watch\", label: \"Watch\", icon: ClapperboardIcon },\n  { id: \"live\", label: \"Live\", icon: RadioIcon },\n  { id: \"market\", label: \"Market\", icon: StoreIcon },\n  { id: \"profile\", label: \"Profile\", icon: UserRoundIcon },\n] as const\n\ntype ItemId = (typeof items)[number][\"id\"]\n\nexport default function MobileNavigation({\n  className,\n  ...props\n}: React.ComponentProps<\"div\">) {\n  const [active, setActive] = React.useState<ItemId>(\"watch\")\n  const activeIndex = items.findIndex((item) => item.id === active)\n  const activeItem = items[activeIndex]\n\n  return (\n    <div\n      className={cn(\n        \"relative flex min-h-[22rem] w-full flex-col overflow-hidden rounded-[12px] border border-border/70 bg-background\",\n        className\n      )}\n      {...props}\n    >\n      <div className=\"flex flex-1 flex-col items-center justify-center gap-2 px-6 text-center\">\n        <p className=\"text-sm font-medium text-foreground\">\n          {activeItem?.label}\n        </p>\n        <p className=\"max-w-xs text-sm text-muted-foreground\">\n          Five tabs with a sliding primary indicator under the active item.\n        </p>\n      </div>\n\n      <nav\n        aria-label=\"Mobile\"\n        className=\"border-t border-border/70 bg-card pb-[env(safe-area-inset-bottom)]\"\n      >\n        <div className=\"relative mx-auto grid h-[4.25rem] max-w-lg grid-cols-5\">\n          <span\n            aria-hidden\n            className=\"pointer-events-none absolute inset-x-0 bottom-0 h-0.5 bg-border/80\"\n          />\n          <span\n            aria-hidden\n            className=\"pointer-events-none absolute bottom-0 h-0.5 rounded-full bg-primary transition-all duration-300 ease-out\"\n            style={{\n              width: \"16%\",\n              insetInlineStart: `calc(${activeIndex} * 20% + 2%)`,\n            }}\n          />\n          {items.map((item) => {\n            const Icon = item.icon\n            const isActive = active === item.id\n            return (\n              <button\n                key={item.id}\n                type=\"button\"\n                onClick={() => setActive(item.id)}\n                aria-current={isActive ? \"page\" : undefined}\n                className={cn(\n                  \"relative z-10 inline-flex h-full min-w-0 cursor-pointer flex-col items-center justify-center gap-1 px-1\",\n                  \"transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring\"\n                )}\n              >\n                <Icon\n                  aria-hidden\n                  className={cn(\n                    \"size-5 shrink-0\",\n                    isActive ? \"text-primary\" : \"text-muted-foreground\"\n                  )}\n                />\n                <span\n                  className={cn(\n                    \"max-w-full truncate text-[11px] font-medium\",\n                    isActive ? \"text-primary\" : \"text-muted-foreground\"\n                  )}\n                >\n                  {item.label}\n                </span>\n              </button>\n            )\n          })}\n        </div>\n      </nav>\n    </div>\n  )\n}\n",
+      "target": "components/blocks/navigation/mobile-navigation-03/mobile-navigation.tsx"
+    }
+  ],
+  "version": "0.1.0+176467e5d4a5",
+  "generatedAt": "2026-10-26T22:45:20.808Z"
+}

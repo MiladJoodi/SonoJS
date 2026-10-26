@@ -13,10 +13,10 @@
     {
       "path": "components/ui/collapsible.tsx",
       "type": "registry:ui",
-      "content": "\"use client\"\n\nimport { Collapsible as CollapsiblePrimitive } from \"radix-ui\"\n\nimport { cn } from \"@/lib/utils\"\n\nfunction Collapsible({\n  className,\n  ...props\n}: React.ComponentProps<typeof CollapsiblePrimitive.Root>) {\n  return (\n    <CollapsiblePrimitive.Root\n      data-slot=\"collapsible\"\n      className={cn(className)}\n      {...props}\n    />\n  )\n}\n\nfunction CollapsibleTrigger({\n  className,\n  ...props\n}: React.ComponentProps<typeof CollapsiblePrimitive.CollapsibleTrigger>) {\n  return (\n    <CollapsiblePrimitive.CollapsibleTrigger\n      data-slot=\"collapsible-trigger\"\n      className={cn(\"cursor-pointer\", className)}\n      {...props}\n    />\n  )\n}\n\nfunction CollapsibleContent({\n  className,\n  ...props\n}: React.ComponentProps<typeof CollapsiblePrimitive.CollapsibleContent>) {\n  return (\n    <CollapsiblePrimitive.CollapsibleContent\n      data-slot=\"collapsible-content\"\n      className={cn(className)}\n      {...props}\n    />\n  )\n}\n\nexport { Collapsible, CollapsibleTrigger, CollapsibleContent }\n",
+      "content": "\"use client\"\n\nimport { Collapsible as CollapsiblePrimitive } from \"radix-ui\"\n\nimport { cn } from \"@/lib/utils\"\n\nfunction Collapsible({\n  className,\n  ...props\n}: React.ComponentProps<typeof CollapsiblePrimitive.Root>) {\n  return (\n    <CollapsiblePrimitive.Root\n      data-slot=\"collapsible\"\n      className={cn(className)}\n      {...props}\n    />\n  )\n}\n\nfunction CollapsibleTrigger({\n  className,\n  ...props\n}: React.ComponentProps<typeof CollapsiblePrimitive.CollapsibleTrigger>) {\n  return (\n    <CollapsiblePrimitive.CollapsibleTrigger\n      data-slot=\"collapsible-trigger\"\n      className={cn(\"cursor-pointer\", className)}\n      {...props}\n    />\n  )\n}\n\nfunction CollapsibleContent({\n  className,\n  ...props\n}: React.ComponentProps<typeof CollapsiblePrimitive.CollapsibleContent>) {\n  return (\n    <CollapsiblePrimitive.CollapsibleContent\n      data-slot=\"collapsible-content\"\n      className={cn(\n        \"overflow-hidden\",\n        \"data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down\",\n        \"data-[state=closed]:duration-[250ms] data-[state=open]:duration-300\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\nexport { Collapsible, CollapsibleTrigger, CollapsibleContent }\n",
       "target": "components/ui/collapsible.tsx"
     }
   ],
-  "version": "0.1.0+d8d553f12c29",
-  "generatedAt": "2026-10-26T11:45:42.805Z"
+  "version": "0.1.0+f9f25a599210",
+  "generatedAt": "2026-10-26T23:48:29.739Z"
 }

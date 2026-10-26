@@ -41,7 +41,8 @@ function group(title: string, category: string, titles: string[]): BlocksNavGrou
   }
 }
 
-export const blocksNav: BlocksNavGroup[] = [
+/** Full catalog (ready + placeholders). Prefer `blocksNav` for UI. */
+export const blocksNavCatalog: BlocksNavGroup[] = [
   {
     title: "AI & Agents",
     items: [
@@ -79,13 +80,15 @@ export const blocksNav: BlocksNavGroup[] = [
     title: "Navigation",
     items: [
       block("navigation", "Navbar", { status: "ready", featured: true }),
-      block("navigation", "Header"),
-      block("navigation", "Mega Menu"),
-      block("navigation", "Sidebar"),
-      block("navigation", "Mobile Navigation"),
-      block("navigation", "Breadcrumbs"),
-      block("navigation", "Tabs"),
-      block("navigation", "Command Menu"),
+      block("navigation", "Mega Menu", { status: "ready", featured: true }),
+      block("navigation", "Sidebar", { status: "ready", featured: true }),
+      block("navigation", "Mobile Navigation", {
+        status: "ready",
+        featured: true,
+      }),
+      block("navigation", "Breadcrumbs", { status: "ready", featured: true }),
+      block("navigation", "Tabs", { status: "ready", featured: true }),
+      block("navigation", "Command Menu", { status: "ready" }),
       block("navigation", "Navigation Rail"),
     ],
   },
@@ -114,24 +117,29 @@ export const blocksNav: BlocksNavGroup[] = [
     "CRUD Management",
     "Audit Log",
   ]),
-  group("Marketing", "marketing", [
-    "Hero",
-    "Features",
-    "Feature Split",
-    "Bento Grid",
-    "Pricing",
-    "CTA",
-    "Banner",
-    "Stats",
-    "Testimonials",
-    "Logo Cloud",
-    "Newsletter",
-    "Comparison",
-    "FAQ",
-    "Team",
-    "Contact Section",
-    "Footer",
-  ]),
+  {
+    title: "Marketing",
+    items: [
+      block("marketing", "Hero", { status: "ready" }),
+      block("marketing", "Features", { status: "ready" }),
+      block("marketing", "Feature Split"),
+      block("marketing", "Bento Grid"),
+      block("marketing", "Pricing", { status: "ready" }),
+      block("marketing", "CTA", { status: "ready" }),
+      block("marketing", "Banner", { status: "ready", featured: true }),
+      block("marketing", "Jumbotron", { status: "ready" }),
+      block("marketing", "Stats"),
+      block("marketing", "Testimonials", { status: "ready" }),
+      block("marketing", "Logo Cloud"),
+      block("marketing", "Newsletter", { status: "ready" }),
+      block("marketing", "Blog", { status: "ready" }),
+      block("marketing", "Comparison"),
+      block("marketing", "FAQ"),
+      block("marketing", "Team", { status: "ready" }),
+      block("marketing", "Contact Section"),
+      block("marketing", "Footer", { status: "ready" }),
+    ],
+  },
   {
     title: "Authentication",
     items: [
@@ -172,19 +180,22 @@ export const blocksNav: BlocksNavGroup[] = [
       }),
     ],
   },
-  group("Forms", "forms", [
-    "Contact Form",
-    "Multi-Step Form",
-    "Form Wizard",
-    "Form Builder",
-    "Survey Form",
-    "Application Form",
-    "Feedback Form",
-    "Support Request Form",
-    "Newsletter Form",
-    "Profile Form",
-    "File Upload Form",
-  ]),
+  {
+    title: "Forms",
+    items: [
+      block("forms", "Contact Form", { status: "ready" }),
+      block("forms", "Multi-Step Form"),
+      block("forms", "Form Wizard"),
+      block("forms", "Form Builder"),
+      block("forms", "Survey Form"),
+      block("forms", "Application Form"),
+      block("forms", "Feedback Form"),
+      block("forms", "Support Request Form"),
+      block("forms", "Newsletter Form"),
+      block("forms", "Profile Form"),
+      block("forms", "File Upload Form"),
+    ],
+  },
   group("Feedback & States", "feedback-states", [
     "Empty State",
     "Loading State",
@@ -255,19 +266,22 @@ export const blocksNav: BlocksNavGroup[] = [
     "JSON Viewer",
     "Deployment Status",
   ]),
-  group("E-commerce", "ecommerce", [
-    "Product Grid",
-    "Product Details",
-    "Product Gallery",
-    "Shopping Cart",
-    "Checkout",
-    "Order Summary",
-    "Order History",
-    "Wishlist",
-    "Product Comparison",
-    "Reviews & Ratings",
-    "Inventory Management",
-  ]),
+  {
+    title: "E-commerce",
+    items: [
+      block("ecommerce", "Product Grid"),
+      block("ecommerce", "Product Details"),
+      block("ecommerce", "Product Gallery"),
+      block("ecommerce", "Shopping Cart"),
+      block("ecommerce", "Checkout"),
+      block("ecommerce", "Order Summary"),
+      block("ecommerce", "Order History"),
+      block("ecommerce", "Wishlist"),
+      block("ecommerce", "Product Comparison"),
+      block("ecommerce", "Reviews & Ratings", { status: "ready" }),
+      block("ecommerce", "Inventory Management"),
+    ],
+  },
   group("Payments & Billing", "payments-billing", [
     "Payment Methods",
     "Payment Form",
@@ -334,8 +348,37 @@ export const blocksNav: BlocksNavGroup[] = [
   ]),
 ]
 
+/**
+ * TEMP: sidebar / blocks index show only shipped blocks.
+ * Coming-soon placeholders stay in `blocksNavCatalog` — restore by exporting that instead.
+ */
+export const blocksNav: BlocksNavGroup[] = blocksNavCatalog
+  .map((group) => ({
+    ...group,
+    items: group.items.filter((item) => item.status === "ready"),
+  }))
+  .filter((group) => group.items.length > 0)
+
 export function getAllBlockItems(): BlocksNavItem[] {
   return blocksNav.flatMap((group) => group.items)
+}
+
+export function getAllBlockCatalogItems(): BlocksNavItem[] {
+  return blocksNavCatalog.flatMap((group) => group.items)
+}
+
+/** Flat ready-block order (sidebar) for prev/next on block docs pages. */
+export function getBlocksAdjacent(pathname: string): {
+  previous: BlocksNavItem | undefined
+  next: BlocksNavItem | undefined
+} {
+  const items = getAllBlockItems()
+  const index = items.findIndex((item) => item.href === pathname)
+  if (index < 0) return { previous: undefined, next: undefined }
+  return {
+    previous: index > 0 ? items[index - 1] : undefined,
+    next: index < items.length - 1 ? items[index + 1] : undefined,
+  }
 }
 
 export function getBlockByHref(pathname: string): {
@@ -358,9 +401,9 @@ export function getBlocksCurrentLabel(pathname: string): string | null {
 }
 
 export function getBlocksStats() {
-  const items = getAllBlockItems()
+  const items = getAllBlockCatalogItems()
   return {
-    categories: blocksNav.length,
+    categories: blocksNavCatalog.length,
     total: items.length,
     ready: items.filter((item) => item.status === "ready").length,
     comingSoon: items.filter((item) => item.status !== "ready").length,

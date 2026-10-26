@@ -16,8 +16,8 @@ export default function LoginForm({
   return (
     <div
       className={cn(
-        "[--login-card-padding:1.5rem] sm:[--login-card-padding:2rem]",
-        "flex w-full flex-col gap-8 rounded-[12px] border border-border/70 bg-card p-(--login-card-padding)",
+        "[--login-card-padding:1.25rem] sm:[--login-card-padding:1.5rem] md:[--login-card-padding:2rem]",
+        "flex w-full flex-col gap-6 rounded-[12px] border border-border/70 bg-card p-(--login-card-padding) sm:gap-8",
         "shadow-soft",
         className
       )}

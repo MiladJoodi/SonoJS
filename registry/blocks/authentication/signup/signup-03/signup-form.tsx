@@ -11,7 +11,12 @@ import { Input } from "@sonojs/ui/components/input"
 import { Label } from "@sonojs/ui/components/label"
 import { Separator } from "@sonojs/ui/components/separator"
 
-const panelImage = "/images/blocks/authentication/signup/signup-03/01.webp"
+import panelImage from "./images/01.webp"
+
+function assetSrc(asset: string | { src: string }) {
+  return typeof asset === "string" ? asset : asset.src
+}
+
 const controlClass = "px-3 shadow-none"
 
 function SignupPanel({ className }: { className?: string }) {
@@ -27,7 +32,7 @@ function SignupPanel({ className }: { className?: string }) {
     >
       {missing ? null : (
         <img
-          src={panelImage}
+          src={assetSrc(panelImage)}
           alt=""
           className="absolute inset-0 size-full object-cover"
           onError={() => setMissing(true)}

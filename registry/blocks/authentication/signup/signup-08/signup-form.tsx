@@ -11,8 +11,11 @@ import { Input } from "@sonojs/ui/components/input"
 import { Label } from "@sonojs/ui/components/label"
 import { Separator } from "@sonojs/ui/components/separator"
 
-/** Optional product screenshot for the marketing column. */
-const productSrc = "/images/blocks/authentication/signup/signup-08/product.webp"
+import productSrc from "./images/product.webp"
+
+function assetSrc(asset: string | { src: string }) {
+  return typeof asset === "string" ? asset : asset.src
+}
 
 const controlClass = "shadow-none"
 
@@ -63,7 +66,7 @@ function BrandColumn() {
       {!missingProduct ? (
         <div className="hidden overflow-hidden rounded-[12px] border border-border/70 bg-muted sm:block">
           <img
-            src={productSrc}
+            src={assetSrc(productSrc)}
             alt=""
             className="aspect-[16/10] w-full object-cover object-top"
             onError={() => setMissingProduct(true)}

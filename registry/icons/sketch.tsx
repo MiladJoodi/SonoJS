@@ -1,0 +1,21 @@
+import { cn } from "@/lib/utils"
+
+export function SketchIcon({
+  className,
+  ...props
+}: React.ComponentProps<"svg">) {
+  return (
+    <svg
+      viewBox="0 0 512 512"
+      aria-hidden="true"
+      className={cn("size-5 shrink-0", className)}
+      {...props}
+    >
+      <path fill="#ffd54f" d="M96 191.024v-144l160-30.048 160 30.048v144z" />
+      <path fill="#ffecb3" d="M96 191.024 256 16.976l160 174.048z" />
+      <path fill="#ffa000" d="m0 191.024 256 304 256-304z" />
+      <path fill="#ffca28" d="m96 191.024 160 304 160-304z" />
+      <path fill="#ffc107" d="m0 191.024 96-144v144zm416-144v144h96z" />
+    </svg>
+  )
+}

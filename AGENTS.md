@@ -67,6 +67,17 @@ What docs show must be what users install. No stale registry payloads.
 - Authoritative rule: `.cursor/rules/sonojs-registry-parity.mdc`
 <!-- END:sonojs-registry-parity -->
 
+<!-- BEGIN:sonojs-blocks-preview -->
+# SonoJS blocks preview (canvas vs card)
+
+Block docs / view shells follow the login pattern so elevated cards show `shadow-soft`.
+
+- Desktop stage: `bg-canvas` (never `bg-card` as the stage)
+- Tablet/mobile letterbox: `bg-transparency` (checkerboard = transparent/empty void); no extra device bezel
+- Elevated block surface: `bg-card` + `border-border/70` + `rounded-[12px]` + `shadow-soft`
+- Canonical: `/blocks/authentication/login` · rule: `.cursor/rules/sonojs-blocks-preview.mdc`
+<!-- END:sonojs-blocks-preview -->
+
 <!-- BEGIN:sonojs-charts-locked -->
 # SonoJS charts — locked pattern
 

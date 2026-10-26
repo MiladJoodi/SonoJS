@@ -1,4 +1,7 @@
-import { BlockExample } from "@/components/blocks"
+import {
+  BlockExample,
+  BlocksPageHeader,
+} from "@/components/blocks"
 import PasskeyFirstForm from "@/registry/blocks/authentication/passkey/passkey-01/passkey-form"
 import PasskeyPasswordForm from "@/registry/blocks/authentication/passkey/passkey-02/passkey-form"
 import PasskeySetupForm from "@/registry/blocks/authentication/passkey/passkey-03/passkey-form"
@@ -63,13 +66,11 @@ function Center({ children }: { children: React.ReactNode }) {
 export default function BlockPasskeyDocsPage() {
   return (
     <article className="w-full min-w-0 space-y-8">
-      <header className="space-y-2">
-        <h1 className="text-h1">Passkey Authentication</h1>
-        <p className="text-muted-foreground">
-          Passkey sign-in and setup layouts. Each example has its own name and
-          install command.
-        </p>
-      </header>
+      <BlocksPageHeader
+        title="Passkey Authentication"
+        pathname="/blocks/authentication/passkey-authentication"
+        description="Passkey sign-in and setup layouts. Each example has its own name and install command."
+      />
 
       <div className="flex flex-col gap-8">
         <BlockExample

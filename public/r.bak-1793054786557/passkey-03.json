@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "passkey-03",
+  "type": "registry:block",
+  "title": "passkey-03",
+  "description": "Passkey setup / registration steps.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "button"
+  ],
+  "files": [
+    {
+      "path": "components/blocks/authentication/passkey-03/passkey-form.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport { FingerprintIcon } from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { Button } from \"@/components/ui/button\"\n\nconst steps = [\n  \"Confirm it is you with your device lock.\",\n  \"Save this passkey for faster sign-in next time.\",\n  \"You can still use a password as a backup.\",\n] as const\n\nexport default function PasskeyForm({\n  className,\n  ...props\n}: React.ComponentProps<\"div\">) {\n  return (\n    <div\n      className={cn(\n        \"[--login-card-padding:1.5rem] sm:[--login-card-padding:2rem]\",\n        \"flex w-full flex-col gap-8 rounded-[12px] border border-border/70 bg-card p-(--login-card-padding)\",\n        \"shadow-soft\",\n        className\n      )}\n      {...props}\n    >\n      <header className=\"flex flex-col items-start gap-3\">\n        <span className=\"h-0.5 w-8 rounded-full bg-primary\" aria-hidden />\n        <div className=\"space-y-1.5\">\n          <h1 className=\"text-h3 text-foreground\">Create a passkey</h1>\n          <p className=\"text-sm text-muted-foreground\">\n            Register this device so you can sign in without a password.\n          </p>\n        </div>\n      </header>\n\n      <ul className=\"space-y-3\">\n        {steps.map((step) => (\n          <li\n            key={step}\n            className=\"flex items-start gap-2 text-start text-sm text-foreground\"\n          >\n            <FingerprintIcon className=\"mt-0.5 size-4 shrink-0 text-primary\" />\n            <span>{step}</span>\n          </li>\n        ))}\n      </ul>\n\n      <Button\n        type=\"button\"\n        className=\"w-full shadow-none\"\n      >\n        Set up passkey\n      </Button>\n\n      <p className=\"text-center text-sm text-muted-foreground\">\n        Not now?{\" \"}\n        <a\n          href=\"#\"\n          className=\"cursor-pointer font-medium text-foreground underline-offset-4 hover:underline\"\n        >\n          Skip for later\n        </a>\n      </p>\n    </div>\n  )\n}\n",
+      "target": "components/blocks/authentication/passkey-03/passkey-form.tsx"
+    }
+  ],
+  "version": "0.1.0+176467e5d4a5",
+  "generatedAt": "2026-10-26T22:45:20.808Z"
+}

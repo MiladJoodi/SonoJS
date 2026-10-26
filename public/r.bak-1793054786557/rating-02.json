@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "rating-02",
+  "type": "registry:block",
+  "title": "rating-02",
+  "description": "Read-only star rating with a numeric score label beside the stars.",
+  "files": [
+    {
+      "path": "components/blocks/ecommerce/rating-02/rating.tsx",
+      "type": "registry:component",
+      "content": "import type * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst STAR_PATH =\n  \"m23.363 8.584-7.378-1.127L12.678.413c-.247-.526-1.11-.526-1.357 0L8.015 7.457.637 8.584a.75.75 0 0 0-.423 1.265l5.36 5.494-1.267 7.767a.75.75 0 0 0 1.103.777L12 20.245l6.59 3.643a.75.75 0 0 0 1.103-.777l-1.267-7.767 5.36-5.494a.75.75 0 0 0-.423-1.266z\"\n\nfunction StarIcon({\n  filled,\n  className,\n  ...props\n}: React.ComponentProps<\"svg\"> & { filled?: boolean }) {\n  return (\n    <svg\n      xmlns=\"http://www.w3.org/2000/svg\"\n      viewBox=\"0 0 24 24\"\n      aria-hidden=\"true\"\n      className={cn(\n        \"size-[18px] drop-shadow-[0_1px_1px_rgba(0,0,0,0.08)]\",\n        filled\n          ? \"fill-[#F5B301]\"\n          : \"fill-zinc-200 dark:fill-zinc-600\",\n        className\n      )}\n      {...props}\n    >\n      <path d={STAR_PATH} />\n    </svg>\n  )\n}\n\nexport default function Rating({\n  value = 3,\n  max = 5,\n  className,\n  ...props\n}: React.ComponentProps<\"div\"> & {\n  value?: number\n  max?: number\n}) {\n  const clamped = Math.max(0, Math.min(max, value))\n  const label = `${clamped.toFixed(1)} out of ${max}`\n\n  return (\n    <div\n      className={cn(\n        \"inline-flex flex-wrap items-center justify-center gap-3 rounded-full border border-border/70 bg-card px-4 py-2.5 shadow-soft\",\n        className\n      )}\n      {...props}\n      dir=\"ltr\"\n    >\n      <div className=\"flex items-center gap-1.5\">\n        <span className=\"sr-only\">\n          Rated {clamped} out of {max} stars\n        </span>\n        {Array.from({ length: max }, (_, i) => (\n          <StarIcon key={i} filled={i < clamped} />\n        ))}\n      </div>\n      <span\n        aria-hidden=\"true\"\n        className=\"hidden h-4 w-px bg-border/80 sm:block\"\n      />\n      <p className=\"text-sm font-medium tabular-nums tracking-tight text-muted-foreground\">\n        {label}\n      </p>\n    </div>\n  )\n}\n",
+      "target": "components/blocks/ecommerce/rating-02/rating.tsx"
+    }
+  ],
+  "version": "0.1.0+176467e5d4a5",
+  "generatedAt": "2026-10-26T22:45:20.808Z"
+}

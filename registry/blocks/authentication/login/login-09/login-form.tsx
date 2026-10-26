@@ -11,8 +11,11 @@ import { Input } from "@sonojs/ui/components/input"
 import { Label } from "@sonojs/ui/components/label"
 import { Separator } from "@sonojs/ui/components/separator"
 
-/** Optional product screenshot for the marketing column. */
-const productSrc = "/images/blocks/authentication/login/login-09/product.webp"
+import productSrc from "./images/product.webp"
+
+function assetSrc(asset: string | { src: string }) {
+  return typeof asset === "string" ? asset : asset.src
+}
 
 const controlClass = "shadow-none"
 
@@ -28,7 +31,7 @@ function BrandColumn() {
   return (
     <aside
       className={cn(
-        "flex flex-1 flex-col justify-between gap-6 rounded-[12px] border border-border/70 bg-card p-6 shadow-soft",
+        "flex flex-1 flex-col justify-between gap-5 rounded-[12px] border border-border/70 bg-card p-5 shadow-soft sm:gap-6 sm:p-6",
         "md:gap-10 md:p-8 lg:p-10"
       )}
     >
@@ -63,7 +66,7 @@ function BrandColumn() {
       {!missingProduct ? (
         <div className="hidden overflow-hidden rounded-[12px] border border-border/70 bg-muted sm:block">
           <img
-            src={productSrc}
+            src={assetSrc(productSrc)}
             alt=""
             className="aspect-[16/10] w-full object-cover object-top"
             onError={() => setMissingProduct(true)}
@@ -85,7 +88,7 @@ export default function LoginForm({
   return (
     <div
       className={cn(
-        "flex w-full items-center justify-center bg-background px-4 py-8",
+        "flex w-full items-center justify-center bg-background px-3 py-6 sm:px-4 md:px-8 md:py-10",
         className
       )}
       {...props}
@@ -97,7 +100,7 @@ export default function LoginForm({
 
         <div
           className={cn(
-            "[--login-card-padding:1.5rem] sm:[--login-card-padding:2rem]",
+            "[--login-card-padding:1.25rem] sm:[--login-card-padding:1.5rem] md:[--login-card-padding:2rem]",
             "order-1 mx-auto flex w-full max-w-md flex-col justify-center gap-6 rounded-[12px] border border-border/70 bg-card p-(--login-card-padding) md:order-2 md:mx-0 md:shrink-0",
             "shadow-soft",
             ""

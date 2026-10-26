@@ -38,13 +38,19 @@ function CommandDialog({
   description = "Search for a command to run...",
   children,
   className,
+  style,
   showCloseButton = false,
+  dir,
   ...props
 }: React.ComponentProps<typeof Dialog> & {
   title?: string
   description?: string
   className?: string
+  /** Merged into DialogContent (wins over the default maxWidth). */
+  style?: React.CSSProperties
   showCloseButton?: boolean
+  /** Force writing direction on the palette surface (e.g. `ltr` for path UIs). */
+  dir?: "ltr" | "rtl"
 }) {
   return (
     <Dialog {...props}>
@@ -53,10 +59,12 @@ function CommandDialog({
         <DialogDescription>{description}</DialogDescription>
       </DialogHeader>
       <DialogContent
+        dir={dir}
         className={cn(
           "top-1/3 translate-y-0 overflow-hidden rounded-lg p-0",
           className
         )}
+        style={style}
         showCloseButton={showCloseButton}
       >
         {children}
@@ -155,7 +163,7 @@ function CommandItem({
     <CommandPrimitive.Item
       data-slot="command-item"
       className={cn(
-        "group/command-item relative flex cursor-pointer items-center gap-2 rounded-md px-2 py-1.5 text-sm outline-hidden select-none in-data-[slot=dialog-content]:rounded-md data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50 data-selected:bg-muted data-selected:text-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 data-selected:*:[svg]:text-foreground",
+        "group/command-item relative flex cursor-pointer items-center gap-2 rounded-none border-b border-border/40 px-2 py-1.5 text-sm outline-hidden select-none last:border-b-0 data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50 data-selected:border-border/70 data-selected:text-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 data-selected:*:[svg]:text-foreground",
         className
       )}
       {...props}

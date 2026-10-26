@@ -18,15 +18,15 @@ export default function LoginForm({
   return (
     <div
       className={cn(
-        "dark flex min-h-[36rem] w-full items-center justify-center bg-zinc-950 px-6 py-10 text-zinc-50",
+        "dark flex min-h-[36rem] w-full items-center justify-center bg-zinc-950 px-3 py-6 text-zinc-50 sm:px-4 md:px-8 md:py-10",
         className
       )}
       {...props}
     >
       <div
         className={cn(
-          "[--login-card-padding:1.5rem] sm:[--login-card-padding:2rem]",
-          "flex w-full max-w-md flex-col gap-8 rounded-[12px] border border-zinc-800 bg-zinc-900 p-(--login-card-padding)",
+          "[--login-card-padding:1.25rem] sm:[--login-card-padding:1.5rem] md:[--login-card-padding:2rem]",
+          "flex w-full max-w-md flex-col gap-6 rounded-[12px] border border-zinc-800 bg-zinc-900 p-(--login-card-padding) sm:gap-8",
           "shadow-[0_2px_4px_-1px_rgba(0,0,0,0.4),0_28px_56px_-28px_rgba(0,0,0,0.65)]"
         )}
       >

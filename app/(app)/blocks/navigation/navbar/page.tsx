@@ -1,4 +1,7 @@
-import { BlockExample } from "@/components/blocks"
+import {
+  BlockExample,
+  BlocksPageHeader,
+} from "@/components/blocks"
 import MinimalNavbar from "@/registry/blocks/navigation/navbar/navbar-01/navbar"
 import SaasNavbar from "@/registry/blocks/navigation/navbar/navbar-02/navbar"
 import CenteredNavbar from "@/registry/blocks/navigation/navbar/navbar-03/navbar"
@@ -6,7 +9,11 @@ import TransparentNavbar from "@/registry/blocks/navigation/navbar/navbar-04/nav
 import MegaMenuNavbar from "@/registry/blocks/navigation/navbar/navbar-05/navbar"
 import EcommerceNavbar from "@/registry/blocks/navigation/navbar/navbar-06/navbar"
 import StickyNavbar from "@/registry/blocks/navigation/navbar/navbar-07/navbar"
-import MobileFirstNavbar from "@/registry/blocks/navigation/navbar/navbar-08/navbar"
+import ResourcesMegaNavbar from "@/registry/blocks/navigation/navbar/navbar-08/navbar"
+import MediumResourcesNavbar from "@/registry/blocks/navigation/navbar/navbar-09/navbar"
+import CompactResourcesNavbar from "@/registry/blocks/navigation/navbar/navbar-10/navbar"
+import NestedDropdownNavbar from "@/registry/blocks/navigation/navbar/navbar-11/navbar"
+import MenuOffcanvasNavbar from "@/registry/blocks/navigation/navbar/navbar-12/navbar"
 
 const usage = (name: string) => `import Navbar from "@/components/blocks/navigation/${name}/navbar"
 
@@ -16,7 +23,7 @@ export default function Page() {
 
 const previewProps = {
   previewAlign: "start" as const,
-  previewClassName: "bg-card",
+  previewClassName: "bg-canvas",
 }
 
 function ExampleRule() {
@@ -35,13 +42,11 @@ function ExampleRule() {
 export default function BlockNavbarDocsPage() {
   return (
     <article className="w-full min-w-0 space-y-8">
-      <header className="space-y-2">
-        <h1 className="text-h1">Navbar</h1>
-        <p className="text-muted-foreground">
-          Site navigation bars. Each example has its own name and install
-          command.
-        </p>
-      </header>
+      <BlocksPageHeader
+        title="Navbar"
+        pathname="/blocks/navigation/navbar"
+        description="Site navigation bars. Each example has its own name and install command."
+      />
 
       <div className="flex flex-col gap-8">
         <BlockExample
@@ -119,7 +124,47 @@ export default function BlockNavbarDocsPage() {
           usage={[{ title: "app/page.tsx", code: usage("navbar-08") }]}
           {...previewProps}
         >
-          <MobileFirstNavbar />
+          <ResourcesMegaNavbar />
+        </BlockExample>
+
+        <ExampleRule />
+
+        <BlockExample
+          name="navbar-09"
+          usage={[{ title: "app/page.tsx", code: usage("navbar-09") }]}
+          {...previewProps}
+        >
+          <MediumResourcesNavbar />
+        </BlockExample>
+
+        <ExampleRule />
+
+        <BlockExample
+          name="navbar-10"
+          usage={[{ title: "app/page.tsx", code: usage("navbar-10") }]}
+          {...previewProps}
+        >
+          <CompactResourcesNavbar />
+        </BlockExample>
+
+        <ExampleRule />
+
+        <BlockExample
+          name="navbar-11"
+          usage={[{ title: "app/page.tsx", code: usage("navbar-11") }]}
+          {...previewProps}
+        >
+          <NestedDropdownNavbar />
+        </BlockExample>
+
+        <ExampleRule />
+
+        <BlockExample
+          name="navbar-12"
+          usage={[{ title: "app/page.tsx", code: usage("navbar-12") }]}
+          {...previewProps}
+        >
+          <MenuOffcanvasNavbar />
         </BlockExample>
       </div>
     </article>

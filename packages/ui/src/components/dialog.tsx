@@ -68,13 +68,15 @@ function DialogContent({
   showCloseButton = true,
   size = "default",
   style,
+  dir: dirProp,
   ...props
 }: React.ComponentProps<typeof DialogPrimitive.Content> & {
   showCloseButton?: boolean
   size?: "default" | "sm"
 }) {
-  // Portal under <body> — set dir so RTL from DirectionProvider still applies.
-  const { dir } = useDirection()
+  // Portal under <body> — inherit DirectionProvider unless the caller forces dir.
+  const { dir: dirFromProvider } = useDirection()
+  const dir = dirProp ?? dirFromProvider
 
   // Inline maxWidth — Tailwind max-w-* source-order can let
   // max-w-[calc(100%-2rem)] win and stretch the panel full-bleed.

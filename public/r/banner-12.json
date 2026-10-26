@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "banner-12",
+  "type": "registry:block",
+  "title": "banner-12",
+  "description": "Violet-to-lavender strip with Explore now CTA.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/blocks/marketing/banner-12/banner.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport type * as React from \"react\"\nimport { ArrowRightIcon } from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\n\nexport default function Banner({\n  className,\n  ...props\n}: React.ComponentProps<\"div\">) {\n  return (\n    <div\n      className={cn(\n        \"flex w-full flex-wrap items-center justify-between bg-gradient-to-r from-violet-500 to-purple-100 px-4 py-2 text-center text-sm font-medium text-white md:px-14\",\n        className\n      )}\n      role=\"region\"\n      aria-label=\"Promotion\"\n      {...props}\n    >\n      <p className=\"min-w-0 text-start\">\n        Build Faster with Responsive Tailwind CSS Templates\n      </p>\n      <a\n        href=\"#\"\n        className=\"ms-3 inline-flex cursor-pointer items-center gap-1 rounded-lg bg-violet-50 px-3 py-1 text-violet-600 transition hover:bg-slate-100 active:scale-95\"\n      >\n        Explore now\n        <ArrowRightIcon className=\"size-3.5 icon-dir\" aria-hidden />\n      </a>\n    </div>\n  )\n}\n",
+      "target": "components/blocks/marketing/banner-12/banner.tsx"
+    }
+  ],
+  "version": "0.1.0+f9f25a599210",
+  "generatedAt": "2026-10-26T23:48:29.739Z"
+}

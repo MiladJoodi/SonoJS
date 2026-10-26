@@ -1,7 +1,10 @@
+"use client"
+
 import * as React from "react"
-import { ChevronRight, MoreHorizontal } from "lucide-react"
+import { ChevronLeft, ChevronRight, MoreHorizontal } from "lucide-react"
 import { Slot } from "radix-ui"
 
+import { useDirection } from "@sonojs/ui/hooks/use-direction"
 import { cn } from "@sonojs/ui/lib/utils"
 
 function Breadcrumb({ className, ...props }: React.ComponentProps<"nav">) {
@@ -77,6 +80,9 @@ function BreadcrumbSeparator({
   className,
   ...props
 }: React.ComponentProps<"li">) {
+  const { isRtl } = useDirection()
+  const Chevron = isRtl ? ChevronLeft : ChevronRight
+
   return (
     <li
       data-slot="breadcrumb-separator"
@@ -85,9 +91,7 @@ function BreadcrumbSeparator({
       className={cn("[&>svg]:size-3.5", className)}
       {...props}
     >
-      {children ?? (
-        <ChevronRight className="icon-dir rtl:scale-x-[-1]" />
-      )}
+      {children ?? <Chevron className="size-3.5" aria-hidden="true" />}
     </li>
   )
 }

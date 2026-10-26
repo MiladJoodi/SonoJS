@@ -1,4 +1,7 @@
-import { BlockExample } from "@/components/blocks"
+import {
+  BlockExample,
+  BlocksPageHeader,
+} from "@/components/blocks"
 import AuthenticatorTwoFactorForm from "@/registry/blocks/authentication/two-factor/two-factor-01/two-factor-form"
 import SmsTwoFactorForm from "@/registry/blocks/authentication/two-factor/two-factor-02/two-factor-form"
 import BackupTwoFactorForm from "@/registry/blocks/authentication/two-factor/two-factor-03/two-factor-form"
@@ -76,13 +79,11 @@ function Center({ children }: { children: React.ReactNode }) {
 export default function BlockTwoFactorDocsPage() {
   return (
     <article className="w-full min-w-0 space-y-8">
-      <header className="space-y-2">
-        <h1 className="text-h1">Two-Factor Authentication</h1>
-        <p className="text-muted-foreground">
-          2FA challenge layouts. Each example has its own name and install
-          command.
-        </p>
-      </header>
+      <BlocksPageHeader
+        title="Two-Factor Authentication"
+        pathname="/blocks/authentication/two-factor-authentication"
+        description="2FA challenge layouts. Each example has its own name and install command."
+      />
 
       <div className="flex flex-col gap-8">
         <BlockExample

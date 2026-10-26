@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "rating-08",
+  "type": "registry:block",
+  "title": "rating-08",
+  "description": "Score card with distribution bars and a Write a review action.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "button"
+  ],
+  "files": [
+    {
+      "path": "components/blocks/ecommerce/rating-08/rating.tsx",
+      "type": "registry:component",
+      "content": "import type * as React from \"react\"\n\nimport { PencilIcon } from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { Button } from \"@/components/ui/button\"\n\nconst STAR_PATH =\n  \"m23.363 8.584-7.378-1.127L12.678.413c-.247-.526-1.11-.526-1.357 0L8.015 7.457.637 8.584a.75.75 0 0 0-.423 1.265l5.36 5.494-1.267 7.767a.75.75 0 0 0 1.103.777L12 20.245l6.59 3.643a.75.75 0 0 0 1.103-.777l-1.267-7.767 5.36-5.494a.75.75 0 0 0-.423-1.266z\"\n\nconst DEFAULT_DISTRIBUTION = [\n  { label: \"5\", percentage: 60 },\n  { label: \"4\", percentage: 20 },\n  { label: \"3\", percentage: 10 },\n  { label: \"2\", percentage: 7 },\n  { label: \"1\", percentage: 3 },\n]\n\nfunction StarIcon({\n  filled,\n  className,\n  ...props\n}: React.ComponentProps<\"svg\"> & { filled?: boolean }) {\n  return (\n    <svg\n      xmlns=\"http://www.w3.org/2000/svg\"\n      viewBox=\"0 0 24 24\"\n      aria-hidden=\"true\"\n      className={cn(\n        \"size-4 shrink-0\",\n        filled\n          ? \"fill-[#F5B301]\"\n          : \"fill-zinc-200 dark:fill-zinc-600\",\n        className\n      )}\n      {...props}\n    >\n      <path d={STAR_PATH} />\n    </svg>\n  )\n}\n\nexport default function Rating({\n  averageRating = 4,\n  totalRatings = \"1,153 ratings\",\n  filledStars = 4,\n  distribution = DEFAULT_DISTRIBUTION,\n  className,\n  ...props\n}: React.ComponentProps<\"div\"> & {\n  averageRating?: number\n  totalRatings?: string\n  filledStars?: number\n  distribution?: { label: string; percentage: number }[]\n}) {\n  return (\n    <div\n      className={cn(\n        \"mx-auto w-full max-w-sm rounded-[12px] border border-border/70 bg-card p-6 shadow-soft\",\n        className\n      )}\n      {...props}\n      dir=\"ltr\"\n    >\n      <div className=\"flex items-center gap-5\">\n        <div className=\"flex size-[4.5rem] shrink-0 flex-col items-center justify-center rounded-[12px] bg-muted/60\">\n          <h3 className=\"text-3xl font-semibold tracking-tight tabular-nums text-foreground\">\n            {averageRating.toFixed(1)}\n          </h3>\n        </div>\n\n        <div className=\"min-w-0 flex-1\">\n          <div\n            className=\"flex gap-1.5\"\n            role=\"img\"\n            aria-label={`Average rating ${filledStars} out of 5 stars based on ${totalRatings}`}\n          >\n            {Array.from({ length: 5 }, (_, i) => (\n              <StarIcon key={i} filled={i < filledStars} />\n            ))}\n          </div>\n          <p className=\"mt-2 text-sm font-medium tabular-nums text-muted-foreground\">\n            {totalRatings}\n          </p>\n        </div>\n      </div>\n\n      <div className=\"my-6 h-px bg-border/70\" />\n\n      <div className=\"space-y-2.5\">\n        {distribution.map((rating) => (\n          <div key={rating.label} className=\"flex items-center gap-3\">\n            <div className=\"h-2 min-w-0 flex-1 overflow-hidden rounded-full bg-muted\">\n              <div\n                className=\"h-full rounded-full bg-[#F5B301]\"\n                style={{ width: `${rating.percentage}%` }}\n                role=\"progressbar\"\n                aria-valuemin={0}\n                aria-valuemax={100}\n                aria-valuenow={rating.percentage}\n                aria-label={`${rating.label} star reviews`}\n              />\n            </div>\n            <div className=\"flex w-10 shrink-0 items-center justify-end gap-1\">\n              <span className=\"text-sm font-semibold tabular-nums text-muted-foreground\">\n                {rating.label}\n              </span>\n              <StarIcon filled className=\"size-3.5\" />\n            </div>\n          </div>\n        ))}\n      </div>\n\n      <div className=\"my-6 h-px bg-border/70\" />\n\n      <Button type=\"button\" variant=\"outline\" className=\"w-full shadow-none\">\n        <PencilIcon className=\"size-4\" aria-hidden />\n        Write a review\n      </Button>\n    </div>\n  )\n}\n",
+      "target": "components/blocks/ecommerce/rating-08/rating.tsx"
+    }
+  ],
+  "version": "0.1.0+f9f25a599210",
+  "generatedAt": "2026-10-26T23:48:29.739Z"
+}

@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "cta-08",
+  "type": "registry:block",
+  "title": "cta-08",
+  "description": "Centered elevated card CTA with design-tools copy and See How It Works.",
+  "registryDependencies": [
+    "button"
+  ],
+  "files": [
+    {
+      "path": "components/blocks/marketing/cta-08/cta.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport type * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { Button } from \"@/components/ui/button\"\n\nexport default function Cta({\n  className,\n  ...props\n}: React.ComponentProps<\"section\">) {\n  return (\n    <section\n      className={cn(\"w-full px-4 py-6 md:px-8 md:py-8\", className)}\n      aria-labelledby=\"cta-heading\"\n      {...props}\n    >\n      <style>{`\n        .cta-08-card {\n          border-radius: 24px;\n        }\n      `}</style>\n\n      <div className=\"cta-08-card mx-auto max-w-3xl bg-card px-4 py-8 shadow-soft sm:px-6 md:px-10 md:py-14\">\n        <div className=\"text-center\">\n          <h2\n            id=\"cta-heading\"\n            className=\"mb-4 text-[1.75rem] font-bold tracking-tight text-foreground sm:mb-6 sm:text-3xl md:text-4xl\"\n          >\n            Create Stunning Designs in Minutes\n          </h2>\n          <p className=\"text-base leading-relaxed text-muted-foreground\">\n            Discover tools designed to help you stay organized, save time, and\n            get more done. Whether you&apos;re managing daily tasks or\n            collaborating with a team.\n          </p>\n\n          <Button asChild className=\"mt-6 h-[46px] rounded-[12px] sm:mt-8\">\n            <a href=\"#\">See How It Works</a>\n          </Button>\n        </div>\n      </div>\n    </section>\n  )\n}\n",
+      "target": "components/blocks/marketing/cta-08/cta.tsx"
+    }
+  ],
+  "version": "0.1.0+f9f25a599210",
+  "generatedAt": "2026-10-26T23:48:29.739Z"
+}

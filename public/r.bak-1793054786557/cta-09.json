@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "cta-09",
+  "type": "registry:block",
+  "title": "cta-09",
+  "description": "Purple gradient productivity CTA with dual actions and free-trial footnote.",
+  "registryDependencies": [
+    "button"
+  ],
+  "files": [
+    {
+      "path": "components/blocks/marketing/cta-09/cta.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport type * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { Button } from \"@/components/ui/button\"\n\nexport default function Cta({\n  className,\n  ...props\n}: React.ComponentProps<\"section\">) {\n  return (\n    <section\n      className={cn(\"w-full px-3 py-6 sm:px-4 md:px-8 md:py-8\", className)}\n      aria-labelledby=\"cta-heading\"\n      {...props}\n    >\n      <div className=\"relative mx-auto max-w-6xl overflow-hidden rounded-[16px] bg-gradient-to-br from-purple-900 via-indigo-900 to-purple-800 px-5 py-12 sm:px-6 sm:py-14 md:px-12 md:py-20\">\n        <div\n          className=\"pointer-events-none absolute start-6 top-1/2 hidden size-20 -translate-y-1/2 rotate-45 rounded-[12px] bg-white/10 sm:start-10 sm:block sm:size-28\"\n          aria-hidden=\"true\"\n        />\n        <div\n          className=\"pointer-events-none absolute end-6 top-8 hidden size-12 rotate-45 rounded-[12px] bg-white/10 sm:end-10 sm:block sm:size-16\"\n          aria-hidden=\"true\"\n        />\n        <div\n          className=\"pointer-events-none absolute bottom-8 end-16 hidden size-16 rotate-45 rounded-[12px] bg-white/10 sm:end-24 sm:block sm:size-20\"\n          aria-hidden=\"true\"\n        />\n\n        <div className=\"relative mx-auto max-w-2xl text-center\">\n          <h2\n            id=\"cta-heading\"\n            className=\"mb-4 text-[1.75rem] font-bold tracking-tight text-white sm:mb-6 sm:text-3xl md:text-4xl\"\n          >\n            Ready to boost your productivity?\n          </h2>\n          <p className=\"text-base leading-relaxed text-slate-300\">\n            Start organizing your work, collaborating with your team, and\n            achieving more with powerful tools built for modern teams.\n          </p>\n\n          <div className=\"mt-6 flex flex-wrap items-center justify-center gap-3 sm:mt-8 sm:gap-4\">\n            <Button\n              asChild\n              variant=\"secondary\"\n              className=\"h-[46px] rounded-[12px] border border-white bg-white text-slate-900 shadow-none hover:bg-slate-100\"\n            >\n              <a href=\"#\">Start your free trial</a>\n            </Button>\n            <Button\n              asChild\n              variant=\"outline\"\n              className=\"h-[46px] rounded-[12px] border-slate-500 bg-transparent text-white shadow-none hover:bg-white/10 hover:text-white\"\n            >\n              <a href=\"#\">View pricing</a>\n            </Button>\n          </div>\n\n          <p className=\"mt-4 text-xs text-slate-400\">\n            No credit card required. Get started in minutes.\n          </p>\n        </div>\n      </div>\n    </section>\n  )\n}\n",
+      "target": "components/blocks/marketing/cta-09/cta.tsx"
+    }
+  ],
+  "version": "0.1.0+176467e5d4a5",
+  "generatedAt": "2026-10-26T22:45:20.808Z"
+}

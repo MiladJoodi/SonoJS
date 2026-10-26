@@ -189,7 +189,7 @@ export function ComponentVariantPreview({
               <DirectionToggle value={dir} onValueChange={setDir} />
             ) : null}
             {hasCode ? (
-              <div className="inline-flex h-8 items-center gap-0.5 rounded-md border border-border/70 bg-card p-0.5">
+              <div className="inline-flex h-8 items-stretch overflow-hidden rounded-md border border-border/70 bg-card">
                 {(
                   [
                     { id: "preview", label: "Preview", Icon: EyeIcon },
@@ -203,7 +203,8 @@ export function ComponentVariantPreview({
                         onClick={() => setView(tab.id)}
                         aria-label={tab.label}
                         className={cn(
-                          "inline-flex h-7 min-w-7 cursor-pointer items-center justify-center rounded-sm px-0 text-muted-foreground transition-colors md:min-w-9",
+                          "inline-flex min-w-7 cursor-pointer items-center justify-center rounded-none px-0 text-muted-foreground transition-colors md:min-w-9",
+                          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 focus-visible:ring-inset",
                           effectiveView === tab.id
                             ? "bg-canvas text-foreground"
                             : "hover:text-foreground"

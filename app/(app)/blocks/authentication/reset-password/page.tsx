@@ -1,4 +1,7 @@
-import { BlockExample } from "@/components/blocks"
+import {
+  BlockExample,
+  BlocksPageHeader,
+} from "@/components/blocks"
 import MinimalResetPasswordForm from "@/registry/blocks/authentication/reset-password/reset-password-01/reset-password-form"
 import StrengthResetPasswordForm from "@/registry/blocks/authentication/reset-password/reset-password-02/reset-password-form"
 import SplitResetPasswordForm from "@/registry/blocks/authentication/reset-password/reset-password-03/reset-password-form"
@@ -62,13 +65,11 @@ function ExampleRule() {
 export default function BlockResetPasswordDocsPage() {
   return (
     <article className="w-full min-w-0 space-y-8">
-      <header className="space-y-2">
-        <h1 className="text-h1">Reset Password</h1>
-        <p className="text-muted-foreground">
-          Password reset layouts. Each example has its own name and install
-          command.
-        </p>
-      </header>
+      <BlocksPageHeader
+        title="Reset Password"
+        pathname="/blocks/authentication/reset-password"
+        description="Password reset layouts. Each example has its own name and install command."
+      />
 
       <div className="flex flex-col gap-8">
         <BlockExample

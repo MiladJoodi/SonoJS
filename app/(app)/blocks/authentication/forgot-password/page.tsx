@@ -1,4 +1,7 @@
-import { BlockExample } from "@/components/blocks"
+import {
+  BlockExample,
+  BlocksPageHeader,
+} from "@/components/blocks"
 import MinimalForgotPasswordForm from "@/registry/blocks/authentication/forgot-password/forgot-password-01/forgot-password-form"
 import SplitForgotPasswordForm from "@/registry/blocks/authentication/forgot-password/forgot-password-02/forgot-password-form"
 import OtpForgotPasswordForm from "@/registry/blocks/authentication/forgot-password/forgot-password-03/forgot-password-form"
@@ -56,13 +59,11 @@ function ExampleRule() {
 export default function BlockForgotPasswordDocsPage() {
   return (
     <article className="w-full min-w-0 space-y-8">
-      <header className="space-y-2">
-        <h1 className="text-h1">Forgot Password</h1>
-        <p className="text-muted-foreground">
-          Password recovery layouts. Each example has its own name and install
-          command.
-        </p>
-      </header>
+      <BlocksPageHeader
+        title="Forgot Password"
+        pathname="/blocks/authentication/forgot-password"
+        description="Password recovery layouts. Each example has its own name and install command."
+      />
 
       <div className="flex flex-col gap-8">
         <BlockExample

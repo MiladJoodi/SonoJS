@@ -10,8 +10,11 @@ import { Input } from "@sonojs/ui/components/input"
 import { Label } from "@sonojs/ui/components/label"
 import { Separator } from "@sonojs/ui/components/separator"
 
-/** Full-bleed photo behind the glass card. */
-const backgroundImage = "/images/blocks/authentication/login/login-07/bg.webp"
+import backgroundImage from "./images/bg.webp"
+
+function assetSrc(asset: string | { src: string }) {
+  return typeof asset === "string" ? asset : asset.src
+}
 
 const controlClass =
   "h-[46px] rounded-[12px] border-white/25 bg-white/10 text-white shadow-none backdrop-blur-sm placeholder:text-white/55"
@@ -25,14 +28,14 @@ export default function LoginForm({
   return (
     <div
       className={cn(
-        "relative flex min-h-[36rem] w-full items-center justify-center overflow-hidden px-6 py-10",
+        "relative flex min-h-[36rem] w-full items-center justify-center overflow-hidden px-3 py-6 sm:px-4 md:px-8 md:py-10",
         className
       )}
       {...props}
     >
       {!missingBg ? (
         <img
-          src={backgroundImage}
+          src={assetSrc(backgroundImage)}
           alt=""
           className="absolute inset-0 size-full object-cover"
           onError={() => setMissingBg(true)}
@@ -47,8 +50,8 @@ export default function LoginForm({
 
       <div
         className={cn(
-          "[--login-card-padding:1.5rem] sm:[--login-card-padding:2rem]",
-          "relative z-10 flex w-full max-w-md flex-col gap-8 rounded-[12px] border border-white/25",
+          "[--login-card-padding:1.25rem] sm:[--login-card-padding:1.5rem] md:[--login-card-padding:2rem]",
+          "relative z-10 flex w-full max-w-md flex-col gap-6 rounded-[12px] border border-white/25 sm:gap-8",
           "bg-white/12 p-(--login-card-padding) text-white shadow-soft backdrop-blur-xl"
         )}
       >

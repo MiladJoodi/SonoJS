@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "features-03",
+  "type": "registry:block",
+  "title": "features-03",
+  "description": "Muted CTA card beside a two-by-two features grid with primary icon chips.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "button"
+  ],
+  "files": [
+    {
+      "path": "components/blocks/marketing/features-03/features.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport type * as React from \"react\"\nimport {\n  ArrowRightIcon,\n  ChartColumnIcon,\n  HeadphonesIcon,\n  Settings2Icon,\n  ShieldCheckIcon,\n} from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { Button } from \"@/components/ui/button\"\n\nconst features = [\n  {\n    title: \"Customization\",\n    description:\n      \"Easily tailor every aspect of the platform to suit your business needs.\",\n    icon: Settings2Icon,\n  },\n  {\n    title: \"Security\",\n    description: \"Your data is protected by the latest security measures.\",\n    icon: ShieldCheckIcon,\n  },\n  {\n    title: \"Support\",\n    description: \"24/7 customer support for all your inquiries.\",\n    icon: HeadphonesIcon,\n  },\n  {\n    title: \"Performance\",\n    description: \"Experience blazing-fast performance with our product.\",\n    icon: ChartColumnIcon,\n  },\n] as const\n\nexport default function Features({\n  className,\n  ...props\n}: React.ComponentProps<\"section\">) {\n  return (\n    <section\n      className={cn(\"w-full bg-muted px-4 py-12 md:px-8 md:py-20\", className)}\n      aria-labelledby=\"features-heading\"\n      {...props}\n    >\n      <div className=\"mx-auto max-w-6xl\">\n        <div className=\"flex flex-col items-stretch gap-5 md:gap-8 lg:flex-row lg:items-start lg:gap-10\">\n          <div className=\"w-full rounded-[12px] border border-border/70 bg-card p-6 text-start shadow-soft sm:p-8 md:p-10 lg:max-w-md lg:shrink-0\">\n            <p className=\"mb-3 text-sm font-medium tracking-wide text-primary\">\n              Features\n            </p>\n            <h2\n              id=\"features-heading\"\n              className=\"mb-3 text-[1.75rem] font-bold tracking-tight text-foreground sm:mb-4 sm:text-3xl\"\n            >\n              Discover our exclusive features\n            </h2>\n            <p className=\"text-base leading-relaxed text-muted-foreground\">\n              Unlock a world of possibilities with our features. Explore how\n              our unique offerings can transform your journey and empower you\n              to achieve more.\n            </p>\n            <Button\n              asChild\n              className=\"mt-6 h-[46px] w-full rounded-[12px] sm:mt-8 sm:w-auto\"\n            >\n              <a href=\"#\">\n                Learn more\n                <ArrowRightIcon\n                  className=\"size-3.5 icon-dir\"\n                  aria-hidden=\"true\"\n                />\n              </a>\n            </Button>\n          </div>\n\n          <div className=\"grid w-full gap-4 md:grid-cols-2 md:gap-5\">\n            {features.map((feature) => (\n              <div\n                key={feature.title}\n                className=\"rounded-[12px] bg-card p-5 text-start shadow-soft sm:p-6\"\n              >\n                <div className=\"mb-3 flex items-start gap-3\">\n                  <div className=\"flex size-10 shrink-0 items-center justify-center rounded-[10px] bg-primary text-primary-foreground\">\n                    <feature.icon className=\"size-5\" aria-hidden=\"true\" />\n                  </div>\n                  <h3 className=\"min-w-0 pt-1.5 text-base font-semibold tracking-tight text-foreground sm:text-lg\">\n                    {feature.title}\n                  </h3>\n                </div>\n                <p className=\"text-base leading-relaxed text-muted-foreground\">\n                  {feature.description}\n                </p>\n              </div>\n            ))}\n          </div>\n        </div>\n      </div>\n    </section>\n  )\n}\n",
+      "target": "components/blocks/marketing/features-03/features.tsx"
+    }
+  ],
+  "version": "0.1.0+176467e5d4a5",
+  "generatedAt": "2026-10-26T22:45:20.808Z"
+}

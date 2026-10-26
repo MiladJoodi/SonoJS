@@ -1,0 +1,63 @@
+---
+description: Block preview stage = canvas; elevated cards use bg-card + shadow-soft (login pattern)
+globs: app/(app)/blocks/**/*.tsx,components/blocks/**/*.tsx,app/view/**/*.tsx
+alwaysApply: true
+---
+
+# SonoJS blocks preview — login pattern
+
+Canonical surface: `/blocks/authentication/login` (`login-01` …). **Same stage / card rule everywhere** — docs `BlockExample`, `/view/[name]` embeds, and installable demos.
+
+## Stage vs card
+
+| Layer | Token | Role |
+|---|---|---|
+| Desktop preview stage | `bg-canvas` (same as `--background`) | Soft gray page behind the demo |
+| Tablet/mobile letterbox | `bg-transparency` | Checkerboard void around the shrunk viewport — reads as transparent/empty, not solid white or muted fill |
+| Device bezel | none | No extra border/shadow around the phone — only the block’s own `bg-card` |
+| Elevated UI card | `bg-card` + `border-border/70` + `shadow-soft` + `rounded-[12px]` | The floating form / panel |
+
+**Never** paint the `BlockExample` stage (or device iframe chrome) with `bg-card`. Card-on-card kills `shadow-soft`.
+
+## Docs `BlockExample`
+
+```tsx
+// ✅ Card demos (login, tabs, breadcrumbs, …)
+<BlockExample name="login-01" usage={…}>
+  <div className="flex w-full items-center justify-center bg-canvas px-10 py-10">
+    <div className="w-full max-w-md">
+      <LoginForm /> {/* itself: bg-card shadow-soft */}
+    </div>
+  </div>
+</BlockExample>
+
+// ✅ Or omit previewClassName (stage defaults to bg-canvas) and wrap the same way.
+
+// ✅ Full-bleed chrome (navbar, sidebar, footer, mega-menu, …)
+<BlockExample
+  name="navbar-01"
+  previewAlign="start"
+  previewClassName="bg-canvas p-0"
+  …
+>
+
+// ❌ Stage same color as the card — shadow disappears
+previewClassName="bg-card"
+```
+
+## `/view/[name]` embeds
+
+Match the docs shell: `bg-canvas` + padding when the block is a floating card; `bg-canvas` / `bg-background` full-bleed when the block is a page chrome.
+
+## Shadow must not be clipped
+
+`shadow-soft` spreads ~28px down. Desktop `BlockExample` preview must use `overflow-visible` (not `overflow-hidden`) on the stage/chrome so the bottom of the card shadow isn’t cut by the frame. Keep padding (`px-10 py-12`) so the blur has room inside the canvas.
+
+## Checklist
+
+- [ ] Desktop stage is `bg-canvas` (not `bg-card`)
+- [ ] Tablet/mobile letterbox is `bg-transparency` (checkerboard void); device has no extra border/shadow
+- [ ] Floating panels use `bg-card shadow-soft`
+- [ ] Enough padding (`px-10 py-12` or similar) so the soft shadow is visible
+- [ ] Desktop preview does not `overflow-hidden` the stage (shadow intact)
+- [ ] Tablet/mobile iframe pages use the same canvas shell

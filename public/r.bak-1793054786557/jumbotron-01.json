@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "jumbotron-01",
+  "type": "registry:block",
+  "title": "jumbotron-01",
+  "description": "White promotional card with headline, body copy, shadow-soft, and a primary CTA.",
+  "registryDependencies": [
+    "button"
+  ],
+  "files": [
+    {
+      "path": "components/blocks/marketing/jumbotron-01/jumbotron.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport type * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { Button } from \"@/components/ui/button\"\n\nexport default function Jumbotron({\n  className,\n  ...props\n}: React.ComponentProps<\"section\">) {\n  return (\n    <section\n      className={cn(\"w-full px-4 md:px-8\", className)}\n      aria-labelledby=\"jumbotron-heading\"\n      {...props}\n    >\n      <div className=\"mx-auto w-full max-w-4xl rounded-[12px] border border-border/70 bg-card p-6 shadow-soft md:p-8\">\n        <h2\n          id=\"jumbotron-heading\"\n          className=\"text-2xl font-bold tracking-tight text-foreground whitespace-nowrap md:text-3xl\"\n        >\n          Build faster with ready-made UI\n        </h2>\n        <p className=\"mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground\">\n          Use ready components and layouts. Customize with Tailwind and launch\n          your site without starting from scratch.\n        </p>\n        <Button asChild className=\"mt-6 h-[46px] rounded-[12px]\">\n          <a href=\"#\">Start building</a>\n        </Button>\n      </div>\n    </section>\n  )\n}\n",
+      "target": "components/blocks/marketing/jumbotron-01/jumbotron.tsx"
+    }
+  ],
+  "version": "0.1.0+176467e5d4a5",
+  "generatedAt": "2026-10-26T22:45:20.808Z"
+}

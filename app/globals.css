@@ -12,6 +12,18 @@
 @source inline("ltr:data-[state=checked]:translate-x-[calc(100%-2px)] rtl:data-[state=checked]:-translate-x-[calc(100%-2px)]");
 /* Gallery / dense grids — cols 4–7 sometimes missing from the emitted sheet. */
 @source inline("grid-cols-4 grid-cols-5 grid-cols-6 grid-cols-7 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6");
+/* Mega menus / nav — responsive + arbitrary utilities often missing from the emitted sheet. */
+@source inline("min-h-[68px] min-h-16 sm:inline-flex max-sm:hidden hidden sm:inline-flex hidden lg:inline-flex hidden lg:flex lg:w-56 lg:w-64 lg:w-72 lg:min-h-40 lg:min-h-[12rem] lg:h-auto lg:col-span-1 md:col-span-4 col-span-2 lg:self-stretch lg:self-start size-full h-full w-full object-cover aspect-[6/3] aspect-[16/10] lg:grid-cols-[minmax(0,1fr)_minmax(14rem,18rem)] lg:items-stretch lg:gap-8 lg:gap-10 space-y-2.5 w-[min(calc(100vw-2rem),48rem)] max-w-56");
+/* Sidebars — md width/borders + end-accent / chat stack often missing from the emitted sheet. */
+@source inline("md:w-64 md:w-72 md:max-w-xs md:max-w-64 max-w-[264px] md:max-w-[264px] md:[max-width:20rem] md:min-h-[28rem] md:border-b-0 md:border-e border-e-4 border-e-2 pe-24 pe-20 pe-16 -me-2 -me-1 max-md:max-w-none");
+/* Collapsible sidebar chevron — closed points inline-end (LTR right / RTL left). */
+@source inline("[&[data-state=open]>svg:last-child]:rotate-0 [&[data-state=closed]>svg:last-child]:-rotate-90 rtl:[&[data-state=closed]>svg:last-child]:rotate-90");
+/* Collapsible open/close — height anim utilities sometimes missing from the emitted sheet. */
+@source inline("overflow-hidden data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down data-[state=closed]:duration-[250ms] data-[state=open]:duration-300");
+/* Mega menu compact panel — absolute start/top + w-max grid often missing from the emitted sheet. */
+@source inline("w-max max-w-[min(100vw-2rem,36rem)] start-0 top-[calc(100%+0.75rem)] md:grid-cols-3 grid-cols-2");
+/* Marketing banners — gradients + arbitrary stops often missing from the emitted sheet. */
+@source inline("bg-gradient-to-r bg-gradient-to-b bg-gradient-to-br bg-gradient-to-t from-violet-500 via-[#9938CA] to-[#E0724A] from-blue-400 via-indigo-500 to-purple-500 from-[#4F39F6] to-[#FDFEFF] from-[#ABFF7E] from-orange-500 to-orange-600 to-purple-100 from-transparent via-primary/45 via-primary/40 to-transparent from-zinc-950 via-zinc-950 to-primary/80 from-foreground/70 via-foreground/35 to-foreground/15 bg-[#C4F500] bg-[#7668ff] bg-zinc-800 bg-gray-800 bg-white/[0.04] bg-blue-600 bg-purple-600 bg-pink-600 bg-slate-600 bg-cyan-600 bg-amber-600 fill-[#ffc107] fill-[#F5B301] fill-[#CED5D8] fill-zinc-200 fill-zinc-500 fill-zinc-600 dark:fill-zinc-600 dark:fill-neutral-600 from-[#FFE08A] to-[#F5B301] bg-[#facc15] bg-gray-800 bg-gray-700 dark:bg-neutral-800 dark:bg-neutral-700 text-slate-600 dark:text-slate-400 text-green-800 text-indigo-600 text-orange-600 text-violet-600 text-amber-400 text-blue-400 bg-green-600 bg-violet-50 hover:bg-slate-200 hover:bg-slate-100 hover:bg-white/10 group-hover:bg-white/15 active:scale-95");
 
 @custom-variant style-vega (&:where(.style-vega *));
 @custom-variant dark (&:is(.dark *));
@@ -23,6 +35,39 @@
   &::-webkit-scrollbar {
     display: none;
   }
+}
+
+/* Checkerboard = “transparent / empty” (preview letterbox, asset voids). */
+@utility bg-transparency {
+  --transparency-cell: 14px;
+  background-color: color-mix(in oklab, var(--card) 70%, var(--muted));
+  background-image:
+    linear-gradient(
+      45deg,
+      color-mix(in oklab, var(--muted-foreground) 7%, transparent) 25%,
+      transparent 25%
+    ),
+    linear-gradient(
+      -45deg,
+      color-mix(in oklab, var(--muted-foreground) 7%, transparent) 25%,
+      transparent 25%
+    ),
+    linear-gradient(
+      45deg,
+      transparent 75%,
+      color-mix(in oklab, var(--muted-foreground) 7%, transparent) 75%
+    ),
+    linear-gradient(
+      -45deg,
+      transparent 75%,
+      color-mix(in oklab, var(--muted-foreground) 7%, transparent) 75%
+    );
+  background-size: var(--transparency-cell) var(--transparency-cell);
+  background-position:
+    0 0,
+    0 calc(var(--transparency-cell) / 2),
+    calc(var(--transparency-cell) / 2) calc(var(--transparency-cell) / -2),
+    calc(var(--transparency-cell) / -2) 0;
 }
 
 /* Thin, low-contrast scrollbar for sidebars (FarsiUI charts / docs pattern). */
@@ -542,7 +587,7 @@
   --motion-fast: 180ms;
   --motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
 
-  /* Soft sidebars scrollbars — docs / blocks / charts */
+  /* Soft sidebars scrollbars — docs / blocks / charts / embed previews */
   --scrollbar-size: 4px;
   --scrollbar-track: transparent;
   --scrollbar-radius: 999px;
@@ -552,6 +597,16 @@
     var(--muted-foreground) 38%,
     transparent
   );
+}
+
+/* BlockExample mobile/tablet iframe: only soft scrollbar, not the OS chrome bar. */
+html:has([data-block-embed]) {
+  height: 100%;
+  overflow: hidden;
+}
+html:has([data-block-embed]) body {
+  height: 100%;
+  overflow: hidden;
 }
 
 .dark {

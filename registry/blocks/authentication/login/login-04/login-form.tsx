@@ -11,7 +11,12 @@ import { Input } from "@sonojs/ui/components/input"
 import { Label } from "@sonojs/ui/components/label"
 import { Separator } from "@sonojs/ui/components/separator"
 
-const panelImage = "/images/blocks/authentication/login/login-04/01.webp"
+import panelImage from "./images/01.webp"
+
+function assetSrc(asset: string | { src: string }) {
+  return typeof asset === "string" ? asset : asset.src
+}
+
 const controlClass = "px-3 shadow-none"
 
 function LoginPanel({ className }: { className?: string }) {
@@ -27,7 +32,7 @@ function LoginPanel({ className }: { className?: string }) {
     >
       {missing ? null : (
         <img
-          src={panelImage}
+          src={assetSrc(panelImage)}
           alt=""
           className="absolute inset-0 size-full object-cover"
           onError={() => setMissing(true)}
@@ -46,7 +51,7 @@ export default function LoginForm({
   return (
     <div
       className={cn(
-        "flex w-full items-center justify-center bg-background px-4 py-8",
+        "flex w-full items-center justify-center bg-background px-3 py-6 sm:px-4 md:px-8 md:py-10",
         className
       )}
       {...props}
@@ -56,7 +61,7 @@ export default function LoginForm({
 
         <div
           className={cn(
-            "[--login-card-padding:1.5rem] sm:[--login-card-padding:2rem]",
+            "[--login-card-padding:1.25rem] sm:[--login-card-padding:1.5rem] md:[--login-card-padding:2rem]",
             "order-1 mx-auto flex w-full max-w-md flex-col gap-6 rounded-[12px] border border-border/70 bg-card p-(--login-card-padding) md:order-2 md:mx-0 md:max-w-sm md:shrink-0",
             "shadow-soft",
             ""
@@ -76,7 +81,7 @@ export default function LoginForm({
             <Button
               type="button"
               variant="outline"
-              className="h-[46px] w-full rounded-[12px] border-border/70 bg-card shadow-none hover:bg-muted"
+              className="w-full rounded-[12px] border-border/70 bg-card shadow-none hover:bg-muted"
             >
               <GoogleIcon />
               Continue with Google
@@ -84,7 +89,7 @@ export default function LoginForm({
             <Button
               type="button"
               variant="outline"
-              className="h-[46px] w-full rounded-[12px] border-border/70 bg-card shadow-none hover:bg-muted"
+              className="w-full rounded-[12px] border-border/70 bg-card shadow-none hover:bg-muted"
             >
               <AppleIcon />
               Continue with Apple

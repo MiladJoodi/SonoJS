@@ -1,0 +1,98 @@
+<!--
+  Pending: Files & Media → Media Player (media-player-01)
+  Source sketch: fixed bottom video player bar (track, transport, extras).
+  Port later to Sono tokens + Lucide + Tooltip. Do not ship this file as-is.
+-->
+<div class="fixed bottom-0 left-0 z-50 grid w-full h-24 grid-cols-1 px-8 bg-neutral-primary-soft border-t border-default md:grid-cols-3">
+    <div class="items-center justify-center hidden me-auto md:flex">
+        <img class="h-8 me-3 rounded-sm" src="/images/misc/video-thumb.png" alt="Video preview">
+        <span class="text-sm text-body">Crash Course</span>
+    </div>
+    <div class="flex items-center w-full">
+        <div class="w-full">
+            <div class="flex items-center justify-center mx-auto mb-1">
+                <button data-tooltip-target="tooltip-shuffle" type="button" class="p-2 group rounded-full text-body hover:bg-neutral-tertiary-medium hover:text-heading me-1 focus:outline-none focus:ring-4 focus:ring-neutral-tertiary">
+                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.484 9.166 15 7h5m0 0-3-3m3 3-3 3M4 17h4l1.577-2.253M4 7h4l7 10h5m0 0-3 3m3-3-3-3"/></svg>
+                    <span class="sr-only">Shuffle video</span>
+                </button>
+                <div id="tooltip-shuffle" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-dark rounded-base shadow-xs opacity-0 tooltip">
+                    Shuffle video
+                    <div class="tooltip-arrow" data-popper-arrow></div>
+                </div>
+                <button data-tooltip-target="tooltip-previous" type="button" class="p-2 group rounded-full text-body hover:bg-neutral-tertiary-medium hover:text-heading me-1 focus:outline-none focus:ring-4 focus:ring-neutral-tertiary">
+                    <svg class="w-5 h-5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 6v12m8-12v12l-8-6 8-6Z"/></svg>
+                    <span class="sr-only">Previous video</span>
+                </button>
+                <div id="tooltip-previous" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-dark rounded-base shadow-xs opacity-0 tooltip">
+                    Previous video
+                    <div class="tooltip-arrow" data-popper-arrow></div>
+                </div>
+                <button data-tooltip-target="tooltip-pause" type="button" class="text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-full text-sm mx-2 p-2.5 focus:outline-none">
+                    <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M8 5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H8Zm7 0a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1Z" clip-rule="evenodd"/></svg>
+                    <span class="sr-only">Pause video</span>
+                </button>
+                <div id="tooltip-pause" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-dark rounded-base shadow-xs opacity-0 tooltip">
+                    Pause video
+                    <div class="tooltip-arrow" data-popper-arrow></div>
+                </div>
+                <button data-tooltip-target="tooltip-next" type="button" class="p-2 group rounded-full text-body hover:bg-neutral-tertiary-medium hover:text-heading me-1 focus:outline-none focus:ring-4 focus:ring-neutral-tertiary">
+                    <svg class="w-5 h-5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 6v12M8 6v12l8-6-8-6Z"/></svg>
+                    <span class="sr-only">Next video</span>
+                </button>
+                <div id="tooltip-next" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-dark rounded-base shadow-xs opacity-0 tooltip">
+                    Next video
+                    <div class="tooltip-arrow" data-popper-arrow></div>
+                </div>
+                <button data-tooltip-target="tooltip-restart" type="button" class="p-2 group rounded-full text-body hover:bg-neutral-tertiary-medium hover:text-heading me-1 focus:outline-none focus:ring-4 focus:ring-neutral-tertiary">
+                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.651 7.65a7.131 7.131 0 0 0-12.68 3.15M18.001 4v4h-4m-7.652 8.35a7.13 7.13 0 0 0 12.68-3.15M6 20v-4h4"/></svg>
+                    <span class="sr-only">Restart video</span>
+                </button>
+                <div id="tooltip-restart" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-dark rounded-base shadow-xs opacity-0 tooltip">
+                    Restart video
+                    <div class="tooltip-arrow" data-popper-arrow></div>
+                </div>
+            </div>
+            <div class="flex items-center justify-between space-x-2 rtl:space-x-reverse">
+                <span class="text-sm font-medium text-body">3:45</span>
+                <div class="w-full bg-neutral-quaternary rounded-full h-1.5">
+                    <div class="bg-brand h-1.5 rounded-full" style="width: 65%"></div>
+                </div>
+                <span class="text-sm font-medium text-body">5:00</span>
+            </div>
+        </div>
+    </div>
+    <div class="items-center justify-center hidden ms-auto md:flex">
+        <button data-tooltip-target="tooltip-playlist" type="button" class="p-2 group rounded-full text-body hover:bg-neutral-tertiary-medium hover:text-heading me-1 focus:outline-none focus:ring-4 focus:ring-neutral-tertiary">
+            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 15.5V5s3 1 3 4m-7-3H4m9 4H4m4 4H4m13 2.4c0 1.326-1.343 2.4-3 2.4s-3-1.075-3-2.4 1.343-2.4 3-2.4 3 1.075 3 2.4Z"/></svg>
+            <span class="sr-only">View playlist</span>
+        </button>
+        <div id="tooltip-playlist" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-dark rounded-base shadow-xs opacity-0 tooltip">
+            View playlist
+            <div class="tooltip-arrow" data-popper-arrow></div>
+        </div>
+        <button data-tooltip-target="tooltip-captions" type="button" class="p-2 group rounded-full text-body hover:bg-neutral-tertiary-medium hover:text-heading me-1 focus:outline-none focus:ring-4 focus:ring-neutral-tertiary">
+            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.855 14.322a2.475 2.475 0 1 1 .133-4.241m6.053 4.241a2.475 2.475 0 1 1 .133-4.241M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z"/></svg>
+            <span class="sr-only">Captions</span>
+        </button>
+        <div id="tooltip-captions" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-dark rounded-base shadow-xs opacity-0 tooltip">
+            Toggle captions
+            <div class="tooltip-arrow" data-popper-arrow></div>
+        </div>
+        <button data-tooltip-target="tooltip-expand" type="button" class="p-2 group rounded-full text-body hover:bg-neutral-tertiary-medium hover:text-heading me-1 focus:outline-none focus:ring-4 focus:ring-neutral-tertiary">
+            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 4H4m0 0v4m0-4 5 5m7-5h4m0 0v4m0-4-5 5M8 20H4m0 0v-4m0 4 5-5m7 5h4m0 0v-4m0 4-5-5"/></svg>
+            <span class="sr-only">Expand</span>
+        </button>
+        <div id="tooltip-expand" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-dark rounded-base shadow-xs opacity-0 tooltip">
+            Full screen
+            <div class="tooltip-arrow" data-popper-arrow></div>
+        </div>
+        <button data-tooltip-target="tooltip-volume" type="button" class="p-2 group rounded-full text-body hover:bg-neutral-tertiary-medium hover:text-heading me-1 focus:outline-none focus:ring-4 focus:ring-neutral-tertiary">
+            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.5 8.43A4.985 4.985 0 0 1 17 12a4.984 4.984 0 0 1-1.43 3.5m2.794 2.864A8.972 8.972 0 0 0 21 12a8.972 8.972 0 0 0-2.636-6.364M12 6.135v11.73a1 1 0 0 1-1.64.768L6 15H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h2l4.36-3.633a1 1 0 0 1 1.64.768Z"/></svg>
+            <span class="sr-only">Adjust volume</span>
+        </button>
+        <div id="tooltip-volume" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-dark rounded-base shadow-xs opacity-0 tooltip">
+            Adjust volume
+            <div class="tooltip-arrow" data-popper-arrow></div>
+        </div>
+    </div>
+</div>

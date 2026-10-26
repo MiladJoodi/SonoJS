@@ -16,6 +16,8 @@ export function CopyButton({
   className,
   tooltip = true,
   tooltipSide = "bottom",
+  tooltipIdle = "Copy",
+  tooltipCopied = "Copied",
   tone = "code",
   children,
 }: {
@@ -24,13 +26,17 @@ export function CopyButton({
   /** Drawer copy actions stay icon-only. Docs pages keep the label tooltip. */
   tooltip?: boolean
   tooltipSide?: "top" | "bottom"
+  /** Idle tooltip / aria when not copied. */
+  tooltipIdle?: string
+  /** Success tooltip / aria after copy. */
+  tooltipCopied?: string
   /** `code` sits on a dark code header. `chrome` sits on the page surface. */
   tone?: "code" | "chrome"
   /** Optional visible label before the icon (e.g. Install). */
   children?: React.ReactNode
 }) {
   const [copied, setCopied] = React.useState(false)
-  const label = copied ? "Copied" : "Copy"
+  const label = copied ? tooltipCopied : tooltipIdle
   const hasLabel = children != null && children !== false
 
   React.useEffect(() => {

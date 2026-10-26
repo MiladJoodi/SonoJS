@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "newsletter-01",
+  "type": "registry:block",
+  "title": "newsletter-01",
+  "description": "Centered newsletter signup with email Input, Subscribe Button, and short supporting copy.",
+  "registryDependencies": [
+    "button",
+    "input"
+  ],
+  "files": [
+    {
+      "path": "components/blocks/marketing/newsletter-01/newsletter.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport type * as React from \"react\"\n\nimport { Button } from \"@/components/ui/button\"\nimport { Input } from \"@/components/ui/input\"\nimport { cn } from \"@/lib/utils\"\n\nexport default function Newsletter({\n  title = \"Newsletter\",\n  description = \"Subscribe to our newsletter and stay up to date with the latest news, updates, and exclusive offers. Get valuable insights. Join our community today!\",\n  placeholder = \"you@example.com\",\n  cta = \"Subscribe\",\n  className,\n  ...props\n}: React.ComponentProps<\"section\"> & {\n  title?: string\n  description?: string\n  placeholder?: string\n  cta?: string\n}) {\n  return (\n    <section\n      className={cn(\"mt-6 w-full bg-background px-4 md:px-8\", className)}\n      aria-labelledby=\"newsletter-heading\"\n      {...props}\n    >\n      <div className=\"mx-auto max-w-3xl text-center\">\n        <h2\n          id=\"newsletter-heading\"\n          className=\"mb-6 text-3xl font-bold tracking-tight text-foreground md:text-4xl\"\n        >\n          {title}\n        </h2>\n        <p className=\"text-base leading-relaxed text-muted-foreground\">\n          {description}\n        </p>\n\n        <form\n          className=\"mx-auto mt-10 flex max-w-lg flex-col gap-4 sm:flex-row sm:items-center\"\n          onSubmit={(event) => event.preventDefault()}\n        >\n          <label htmlFor=\"newsletter-email\" className=\"sr-only\">\n            Email address\n          </label>\n          <Input\n            type=\"email\"\n            id=\"newsletter-email\"\n            name=\"email\"\n            placeholder={placeholder}\n            required\n            autoComplete=\"email\"\n            className=\"min-w-0 flex-1\"\n          />\n          <Button type=\"submit\" className=\"w-full shrink-0 sm:w-auto\">\n            {cta}\n          </Button>\n        </form>\n      </div>\n    </section>\n  )\n}\n",
+      "target": "components/blocks/marketing/newsletter-01/newsletter.tsx"
+    }
+  ],
+  "version": "0.1.0+176467e5d4a5",
+  "generatedAt": "2026-10-26T22:45:20.808Z"
+}

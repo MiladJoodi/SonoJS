@@ -1,16 +1,26 @@
 import * as React from "react"
 import { cn } from "@sonojs/ui/lib/utils"
 
-function Input({ className, type, ...props }: React.ComponentProps<"input">) {
+function Input({
+  className,
+  type,
+  dir,
+  ...props
+}: React.ComponentProps<"input">) {
+  // Email (and URL) stay LTR + left-aligned even inside an RTL page.
+  const ltrValue = type === "email" || type === "url"
+
   return (
     <input
       type={type}
+      dir={dir ?? (ltrValue ? "ltr" : undefined)}
       data-slot="input"
       className={cn(
         "h-[46px] w-full min-w-0 rounded-md border border-border/70 bg-card px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none selection:bg-primary selection:text-primary-foreground file:inline-flex file:h-7 file:cursor-pointer file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm dark:bg-card",
         "focus-visible:border-ring",
         "aria-invalid:border-destructive",
         type === "file" && "cursor-pointer",
+        ltrValue && "text-left",
         className
       )}
       {...props}

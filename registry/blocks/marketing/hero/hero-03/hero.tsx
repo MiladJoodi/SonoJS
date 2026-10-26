@@ -1,0 +1,226 @@
+"use client"
+
+import type * as React from "react"
+
+import { Button } from "@sonojs/ui/components/button"
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@sonojs/ui/components/sheet"
+import { cn } from "@/lib/utils"
+
+import aiDashboard from "./images/ai-dashboard.webp"
+import logoAsset from "./images/logo.svg"
+
+function assetSrc(asset: string | { src: string }) {
+  return typeof asset === "string" ? asset : asset.src
+}
+
+const DEFAULT_LINKS = [
+  { label: "Home", href: "#", current: true },
+  { label: "How it works", href: "#" },
+  { label: "Features", href: "#" },
+  { label: "Integrations", href: "#" },
+  { label: "FAQ", href: "#" },
+] as const
+
+function MenuIcon({ className, ...props }: React.ComponentProps<"svg">) {
+  return (
+    <svg
+      className={cn("size-7 fill-current", className)}
+      viewBox="0 0 20 20"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+      {...props}
+    >
+      <path
+        fillRule="evenodd"
+        d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+        clipRule="evenodd"
+      />
+    </svg>
+  )
+}
+
+function Brand({
+  src = assetSrc(logoAsset),
+  className,
+}: {
+  src?: string
+  className?: string
+}) {
+  return (
+    <a
+      href="#"
+      className={cn(
+        "inline-flex min-w-9 cursor-pointer outline-none focus-visible:rounded-md focus-visible:ring-2 focus-visible:ring-ring/40",
+        className
+      )}
+    >
+      <span className="sr-only">SonoJS</span>
+      <img src={src} alt="" className="h-9 w-auto" />
+    </a>
+  )
+}
+
+export default function Hero({
+  eyebrow = "Your Ultimate Productivity Companion",
+  titleBefore = "Boost Your Productivity with ",
+  titleAccent = "EffortlessTask",
+  description = "The all-in-one app to finally master your workflow. Organize tasks effortlessly, focus without distractions, and accomplish more every day—just like 100,000+ professionals.",
+  primaryCta = "Start Free Trial",
+  primaryHref = "#",
+  secondaryCta = "How It Works",
+  secondaryHref = "#",
+  navCta = "Get started",
+  navCtaHref = "#",
+  imageSrc = assetSrc(aiDashboard),
+  imageAlt = "AI dashboard preview",
+  logoSrc = assetSrc(logoAsset),
+  links = DEFAULT_LINKS as unknown as {
+    label: string
+    href: string
+    current?: boolean
+  }[],
+  className,
+  ...props
+}: React.ComponentProps<"div"> & {
+  eyebrow?: string
+  titleBefore?: string
+  titleAccent?: string
+  description?: string
+  primaryCta?: string
+  primaryHref?: string
+  secondaryCta?: string
+  secondaryHref?: string
+  navCta?: string
+  navCtaHref?: string
+  imageSrc?: string
+  imageAlt?: string
+  logoSrc?: string
+  links?: { label: string; href: string; current?: boolean }[]
+}) {
+  return (
+    <div className={cn("relative w-full bg-background", className)} {...props}>
+      <nav
+        className="relative z-20 min-h-[68px] border-b border-border/70 bg-background px-4 py-2 md:px-8"
+        aria-label="Main navigation"
+      >
+        <div className="mx-auto flex w-full max-w-7xl flex-wrap items-center justify-between gap-4">
+          <Brand src={logoSrc} />
+
+          <ul className="hidden items-center gap-8 text-sm font-semibold text-foreground lg:flex">
+            {links.map((link) => (
+              <li key={link.label}>
+                <a
+                  href={link.href}
+                  aria-current={link.current ? "page" : undefined}
+                  className="cursor-pointer rounded-md outline-none hover:text-primary focus-visible:ring-2 focus-visible:ring-ring/40"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+
+          <div className="flex items-center gap-3 sm:gap-4">
+            <Button asChild size="sm" className="hidden sm:inline-flex">
+              <a href={navCtaHref}>{navCta}</a>
+            </Button>
+
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="icon"
+                  className="lg:hidden"
+                  aria-label="Open main menu"
+                >
+                  <MenuIcon />
+                </Button>
+              </SheetTrigger>
+              <SheetContent
+                side="end"
+                className="flex w-[min(100%,20rem)] flex-col gap-0 border-border/70 p-0 sm:max-w-sm"
+              >
+                <SheetHeader className="border-b border-border/70 px-4 py-4 text-start">
+                  <SheetTitle className="sr-only">Main menu</SheetTitle>
+                  <Brand src={logoSrc} />
+                </SheetHeader>
+                <nav className="flex flex-1 flex-col gap-1 overflow-y-auto p-4">
+                  {links.map((link) => (
+                    <SheetClose asChild key={link.label}>
+                      <a
+                        href={link.href}
+                        aria-current={link.current ? "page" : undefined}
+                        className={cn(
+                          "cursor-pointer rounded-[12px] px-3 py-3 text-sm font-semibold outline-none focus-visible:ring-2 focus-visible:ring-ring/40",
+                          link.current
+                            ? "bg-muted text-foreground"
+                            : "text-foreground hover:bg-muted"
+                        )}
+                      >
+                        {link.label}
+                      </a>
+                    </SheetClose>
+                  ))}
+                </nav>
+                <div className="border-t border-border/70 p-4">
+                  <Button asChild className="w-full">
+                    <a href={navCtaHref}>{navCta}</a>
+                  </Button>
+                </div>
+              </SheetContent>
+            </Sheet>
+          </div>
+        </div>
+      </nav>
+
+      <section
+        className="mt-12 px-4 md:mt-16 md:px-8"
+        aria-labelledby="hero-heading"
+      >
+        <div className="relative mx-auto max-w-7xl">
+          <div className="mx-auto max-w-4xl text-center">
+            <div className="mb-4 inline-flex rounded-lg border border-border/70 bg-muted/60 px-2.5 py-1.5">
+              <span className="text-[13px] text-foreground">{eyebrow}</span>
+            </div>
+
+            <h1
+              id="hero-heading"
+              className="mb-6 text-4xl font-bold tracking-tight text-balance text-foreground md:text-5xl lg:text-6xl lg:leading-[1.1]"
+            >
+              {titleBefore}
+              <span className="text-primary">{titleAccent}</span>
+            </h1>
+            <p className="text-lg leading-relaxed text-muted-foreground">
+              {description}
+            </p>
+
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+              <Button asChild>
+                <a href={primaryHref}>{primaryCta}</a>
+              </Button>
+              <Button asChild variant="outline">
+                <a href={secondaryHref}>{secondaryCta}</a>
+              </Button>
+            </div>
+          </div>
+
+          <div className="mx-auto mt-16 w-full max-w-6xl md:mt-20">
+            <img
+              src={imageSrc}
+              alt={imageAlt}
+              className="w-full rounded-[12px]"
+            />
+          </div>
+        </div>
+      </section>
+    </div>
+  )
+}

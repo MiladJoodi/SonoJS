@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { Direction as RadixDirection } from "radix-ui"
 
 import {
   DEFAULT_DIRECTION,
@@ -20,7 +21,12 @@ export function DirectionContextProvider({
   children: React.ReactNode
 }) {
   return (
-    <DirectionContext.Provider value={dir}>{children}</DirectionContext.Provider>
+    <DirectionContext.Provider value={dir}>
+      {/* Keep Radix primitives (Tabs, etc.) in sync — they default to dir="ltr" otherwise. */}
+      <RadixDirection.DirectionProvider dir={dir}>
+        {children}
+      </RadixDirection.DirectionProvider>
+    </DirectionContext.Provider>
   )
 }
 

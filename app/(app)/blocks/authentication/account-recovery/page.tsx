@@ -1,4 +1,7 @@
-import { BlockExample } from "@/components/blocks"
+import {
+  BlockExample,
+  BlocksPageHeader,
+} from "@/components/blocks"
 import EmailRecoveryForm from "@/registry/blocks/authentication/account-recovery/account-recovery-01/account-recovery-form"
 import PhoneRecoveryForm from "@/registry/blocks/authentication/account-recovery/account-recovery-02/account-recovery-form"
 import IdentityRecoveryForm from "@/registry/blocks/authentication/account-recovery/account-recovery-03/account-recovery-form"
@@ -76,13 +79,11 @@ function Center({ children }: { children: React.ReactNode }) {
 export default function BlockAccountRecoveryDocsPage() {
   return (
     <article className="w-full min-w-0 space-y-8">
-      <header className="space-y-2">
-        <h1 className="text-h1">Account Recovery</h1>
-        <p className="text-muted-foreground">
-          Account recovery layouts. Each example has its own name and install
-          command.
-        </p>
-      </header>
+      <BlocksPageHeader
+        title="Account Recovery"
+        pathname="/blocks/authentication/account-recovery"
+        description="Account recovery layouts. Each example has its own name and install command."
+      />
 
       <div className="flex flex-col gap-8">
         <BlockExample

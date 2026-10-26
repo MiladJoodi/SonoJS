@@ -1,4 +1,7 @@
-import { BlockExample } from "@/components/blocks"
+import {
+  BlockExample,
+  BlocksPageHeader,
+} from "@/components/blocks"
 import SocialOnlyForm from "@/registry/blocks/authentication/social-login/social-login-01/social-login-form"
 import SocialEmailForm from "@/registry/blocks/authentication/social-login/social-login-02/social-login-form"
 import SocialIconsForm from "@/registry/blocks/authentication/social-login/social-login-03/social-login-form"
@@ -70,13 +73,11 @@ function Center({ children }: { children: React.ReactNode }) {
 export default function BlockSocialLoginDocsPage() {
   return (
     <article className="w-full min-w-0 space-y-8">
-      <header className="space-y-2">
-        <h1 className="text-h1">Social Login</h1>
-        <p className="text-muted-foreground">
-          Social sign-in layouts. Each example has its own name and install
-          command.
-        </p>
-      </header>
+      <BlocksPageHeader
+        title="Social Login"
+        pathname="/blocks/authentication/social-login"
+        description="Social sign-in layouts. Each example has its own name and install command."
+      />
 
       <div className="flex flex-col gap-8">
         <BlockExample

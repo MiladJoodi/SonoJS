@@ -12,10 +12,10 @@
     {
       "path": "components/ui/input.tsx",
       "type": "registry:ui",
-      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\nfunction Input({ className, type, ...props }: React.ComponentProps<\"input\">) {\n  return (\n    <input\n      type={type}\n      data-slot=\"input\"\n      className={cn(\n        \"h-[46px] w-full min-w-0 rounded-md border border-border/70 bg-card px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none selection:bg-primary selection:text-primary-foreground file:inline-flex file:h-7 file:cursor-pointer file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm dark:bg-card\",\n        \"focus-visible:border-ring\",\n        \"aria-invalid:border-destructive\",\n        type === \"file\" && \"cursor-pointer\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\nexport { Input }\n",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\nfunction Input({\n  className,\n  type,\n  dir,\n  ...props\n}: React.ComponentProps<\"input\">) {\n  // Email (and URL) stay LTR + left-aligned even inside an RTL page.\n  const ltrValue = type === \"email\" || type === \"url\"\n\n  return (\n    <input\n      type={type}\n      dir={dir ?? (ltrValue ? \"ltr\" : undefined)}\n      data-slot=\"input\"\n      className={cn(\n        \"h-[46px] w-full min-w-0 rounded-md border border-border/70 bg-card px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none selection:bg-primary selection:text-primary-foreground file:inline-flex file:h-7 file:cursor-pointer file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm dark:bg-card\",\n        \"focus-visible:border-ring\",\n        \"aria-invalid:border-destructive\",\n        type === \"file\" && \"cursor-pointer\",\n        ltrValue && \"text-left\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\nexport { Input }\n",
       "target": "components/ui/input.tsx"
     }
   ],
-  "version": "0.1.0+d8d553f12c29",
-  "generatedAt": "2026-10-26T11:45:42.805Z"
+  "version": "0.1.0+f9f25a599210",
+  "generatedAt": "2026-10-26T23:48:29.739Z"
 }

@@ -1,0 +1,20 @@
+import { cn } from "@/lib/utils"
+
+export function MicrosoftTeamsIcon({
+  className,
+  ...props
+}: React.ComponentProps<"svg">) {
+  return (
+    <svg
+      viewBox="0 0 512 512"
+      aria-hidden="true"
+      className={cn("size-5 shrink-0", className)}
+      {...props}
+    >
+      <path fill="#4caf50" d="M272 240h240V16c0-8.832-7.168-16-16-16H272v240z" />
+      <path fill="#f44336" d="M240 240V0H16C7.168 0 0 7.168 0 16v224h240z" />
+      <path fill="#2196f3" d="M240 272H0v224c0 8.832 7.168 16 16 16h224V272z" />
+      <path fill="#ffc107" d="M272 272v240h224c8.832 0 16-7.168 16-16V272H272z" />
+    </svg>
+  )
+}

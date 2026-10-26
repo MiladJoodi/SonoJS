@@ -1,4 +1,7 @@
-import { BlockExample } from "@/components/blocks"
+import {
+  BlockExample,
+  BlocksPageHeader,
+} from "@/components/blocks"
 import DigitsOtpForm from "@/registry/blocks/authentication/otp-verification/otp-verification-01/otp-verification-form"
 import AutoFocusOtpForm from "@/registry/blocks/authentication/otp-verification/otp-verification-02/otp-verification-form"
 import EmailOtpForm from "@/registry/blocks/authentication/otp-verification/otp-verification-03/otp-verification-form"
@@ -76,13 +79,11 @@ function Center({ children }: { children: React.ReactNode }) {
 export default function BlockOtpVerificationDocsPage() {
   return (
     <article className="w-full min-w-0 space-y-8">
-      <header className="space-y-2">
-        <h1 className="text-h1">OTP Verification</h1>
-        <p className="text-muted-foreground">
-          One-time code layouts. Each example has its own name and install
-          command.
-        </p>
-      </header>
+      <BlocksPageHeader
+        title="OTP Verification"
+        pathname="/blocks/authentication/otp-verification"
+        description="One-time code layouts. Each example has its own name and install command."
+      />
 
       <div className="flex flex-col gap-8">
         <BlockExample

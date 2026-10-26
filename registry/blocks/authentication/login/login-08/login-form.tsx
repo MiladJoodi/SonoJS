@@ -10,8 +10,11 @@ import { Input } from "@sonojs/ui/components/input"
 import { Label } from "@sonojs/ui/components/label"
 import { Separator } from "@sonojs/ui/components/separator"
 
-/** Side illustration — prefer transparent PNG/WebP or SVG. */
-const illustrationSrc = "/images/blocks/authentication/login/login-08/illustration.webp"
+import illustrationSrc from "./images/illustration.webp"
+
+function assetSrc(asset: string | { src: string }) {
+  return typeof asset === "string" ? asset : asset.src
+}
 
 const controlClass = "shadow-none"
 
@@ -32,7 +35,7 @@ function IllustrationPanel({ className }: { className?: string }) {
         </p>
       ) : (
         <img
-          src={illustrationSrc}
+          src={assetSrc(illustrationSrc)}
           alt=""
           className="max-h-full max-w-full object-contain"
           onError={() => setMissing(true)}
@@ -49,7 +52,7 @@ export default function LoginForm({
   return (
     <div
       className={cn(
-        "flex w-full items-center justify-center bg-background px-4 py-8",
+        "flex w-full items-center justify-center bg-background px-3 py-6 sm:px-4 md:px-8 md:py-10",
         className
       )}
       {...props}
@@ -59,7 +62,7 @@ export default function LoginForm({
 
         <div
           className={cn(
-            "[--login-card-padding:1.5rem] sm:[--login-card-padding:2rem]",
+            "[--login-card-padding:1.25rem] sm:[--login-card-padding:1.5rem] md:[--login-card-padding:2rem]",
             "order-1 mx-auto flex w-full max-w-md flex-col gap-6 rounded-[12px] border border-border/70 bg-card p-(--login-card-padding) md:order-2 md:mx-0 md:max-w-sm md:shrink-0",
             "shadow-soft",
             ""

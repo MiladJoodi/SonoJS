@@ -1,0 +1,30 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "login-10",
+  "type": "registry:block",
+  "title": "login-10",
+  "description": "Centered sign-in with brand mark above the card, remember me, and sign-up link.",
+  "registryDependencies": [
+    "button",
+    "checkbox",
+    "input",
+    "label"
+  ],
+  "files": [
+    {
+      "path": "components/blocks/authentication/login-10/login-form.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport { cn } from \"@/lib/utils\"\nimport { Button } from \"@/components/ui/button\"\nimport { Checkbox } from \"@/components/ui/checkbox\"\nimport { Input } from \"@/components/ui/input\"\nimport { Label } from \"@/components/ui/label\"\n\nimport logoAsset from \"./logo.svg\"\n\nfunction assetSrc(asset: string | { src: string }) {\n  return typeof asset === \"string\" ? asset : asset.src\n}\n\nexport default function LoginForm({\n  className,\n  ...props\n}: React.ComponentProps<\"div\">) {\n  return (\n    <div\n      className={cn(\"flex w-full max-w-md flex-col items-center\", className)}\n      {...props}\n    >\n      <a\n        href=\"#\"\n        className=\"mb-8 inline-flex cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40\"\n        aria-label=\"Home\"\n      >\n        <img\n          src={assetSrc(logoAsset)}\n          alt=\"\"\n          aria-hidden=\"true\"\n          width={40}\n          height={45}\n          className=\"h-11 w-auto\"\n        />\n      </a>\n\n      <div\n        className={cn(\n          \"w-full rounded-[12px] border border-border/70 bg-card p-5 shadow-soft sm:p-6 md:p-8\"\n        )}\n      >\n        <h1 className=\"text-center text-3xl font-bold tracking-tight text-foreground\">\n          Sign in\n        </h1>\n\n        <form\n          className=\"mt-8 flex flex-col gap-5 sm:mt-10 sm:gap-6\"\n          onSubmit={(event) => event.preventDefault()}\n        >\n          <div className=\"grid gap-2\">\n            <Label htmlFor=\"login-10-email\">Email</Label>\n            <Input\n              id=\"login-10-email\"\n              name=\"email\"\n              type=\"email\"\n              dir=\"ltr\"\n              autoComplete=\"email\"\n              placeholder=\"name@example.com\"\n              required\n              className=\"shadow-none\"\n            />\n          </div>\n\n          <div className=\"grid gap-2\">\n            <Label htmlFor=\"login-10-password\">Password</Label>\n            <Input\n              id=\"login-10-password\"\n              name=\"password\"\n              type=\"password\"\n              autoComplete=\"current-password\"\n              placeholder=\"••••••••\"\n              required\n              className=\"shadow-none\"\n            />\n          </div>\n\n          <div className=\"flex flex-wrap items-center gap-2\">\n            <div className=\"flex items-center gap-2\">\n              <Checkbox id=\"login-10-remember\" />\n              <Label htmlFor=\"login-10-remember\" className=\"font-normal\">\n                Remember me\n              </Label>\n            </div>\n            <a\n              href=\"#\"\n              className=\"ms-auto cursor-pointer text-sm font-medium text-primary underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40\"\n            >\n              Forgot password?\n            </a>\n          </div>\n\n          <Button type=\"submit\" className=\"w-full shadow-none\">\n            Sign in\n          </Button>\n\n          <p className=\"text-center text-sm text-muted-foreground\">\n            Don&apos;t have an account?{\" \"}\n            <a\n              href=\"#\"\n              className=\"cursor-pointer font-medium text-primary underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40\"\n            >\n              Sign up\n            </a>\n          </p>\n        </form>\n      </div>\n    </div>\n  )\n}\n",
+      "target": "components/blocks/authentication/login-10/login-form.tsx"
+    },
+    {
+      "path": "components/blocks/authentication/login-10/logo.svg",
+      "type": "registry:file",
+      "content": "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDI3LjYuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAyNC45IDI4IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAyNC45IDI4OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+Cgkuc3Qwe2ZpbGw6IzI1NjNlYjt9Cgkuc3Qxe29wYWNpdHk6MC40O2ZpbGw6IzI1NjNlYjtlbmFibGUtYmFja2dyb3VuZDpuZXcgICAgO30KPC9zdHlsZT4KPHBhdGggY2xhc3M9InN0MCIgZD0iTTIyLjUsMTkuOGwtOS43LDYuNWMtMS4zLDAuOS0yLjQsMC4zLTIuNC0xLjN2LTguNWMwLTEuNiwxLjEtMy42LDIuNC00LjVsOS43LTYuNWMxLjMtMC45LDIuNC0wLjMsMi40LDEuM3Y4LjUKCUMyNC45LDE2LjksMjMuOCwxOC45LDIyLjUsMTkuOHoiLz4KPHBhdGggY2xhc3M9InN0MSIgZD0iTTEyLjMsMTUuOWwtOS43LDYuNWMtMS4zLDAuOS0yLjQsMC4zLTIuNC0xLjN2LTguNUMwLjIsMTEsMS4zLDksMi42LDguMWw5LjctNi41YzEuMy0wLjksMi40LTAuMywyLjQsMS4zdjguNQoJQzE0LjcsMTIuOSwxMy42LDE1LDEyLjMsMTUuOXoiLz4KPC9zdmc+Cg==",
+      "encoding": "base64",
+      "target": "components/blocks/authentication/login-10/logo.svg"
+    }
+  ],
+  "version": "0.1.0+176467e5d4a5",
+  "generatedAt": "2026-10-26T22:45:20.808Z"
+}

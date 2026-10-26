@@ -1,4 +1,7 @@
-import { BlockExample } from "@/components/blocks"
+import {
+  BlockExample,
+  BlocksPageHeader,
+} from "@/components/blocks"
 import MinimalSignupForm from "@/registry/blocks/authentication/signup/signup-01/signup-form"
 import SocialSignupForm from "@/registry/blocks/authentication/signup/signup-02/signup-form"
 import SignupForm from "@/registry/blocks/authentication/signup/signup-03/signup-form"
@@ -72,12 +75,11 @@ function ExampleRule() {
 export default function BlockSignupDocsPage() {
   return (
     <article className="w-full min-w-0 space-y-8">
-      <header className="space-y-2">
-        <h1 className="text-h1">Signup</h1>
-        <p className="text-muted-foreground">
-          Sign-up layouts. Each example has its own name and install command.
-        </p>
-      </header>
+      <BlocksPageHeader
+        title="Signup"
+        pathname="/blocks/authentication/signup"
+        description="Sign-up layouts. Each example has its own name and install command."
+      />
 
       <div className="flex flex-col gap-8">
         <BlockExample

@@ -12,8 +12,12 @@ import { Input } from "@sonojs/ui/components/input"
 import { Label } from "@sonojs/ui/components/label"
 import { Separator } from "@sonojs/ui/components/separator"
 
-const panelImage = "/images/blocks/authentication/login/login-05/01.webp"
-const profileImage = "/images/blocks/authentication/login/login-05/02.webp"
+import panelImage from "./images/01.webp"
+import profileImage from "./images/02.webp"
+
+function assetSrc(asset: string | { src: string }) {
+  return typeof asset === "string" ? asset : asset.src
+}
 
 function QuotePanel({ className }: { className?: string }) {
   const [missing, setMissing] = React.useState(false)
@@ -28,7 +32,7 @@ function QuotePanel({ className }: { className?: string }) {
     >
       {missing ? null : (
         <img
-          src={panelImage}
+          src={assetSrc(panelImage)}
           alt=""
           className="absolute inset-0 size-full object-cover"
           onError={() => setMissing(true)}
@@ -50,7 +54,7 @@ function QuotePanel({ className }: { className?: string }) {
         </blockquote>
         <figcaption className="flex items-center gap-3">
           <Avatar size="lg" className="ring-2 ring-white/30">
-            <AvatarImage src={profileImage} alt="" />
+            <AvatarImage src={assetSrc(profileImage)} alt="" />
             <AvatarFallback className="bg-white/20 text-white">LR</AvatarFallback>
           </Avatar>
           <div className="min-w-0">
@@ -70,7 +74,7 @@ export default function LoginForm({
   return (
     <div
       className={cn(
-        "flex w-full items-center justify-center bg-background px-4 py-8",
+        "flex w-full items-center justify-center bg-background px-3 py-6 sm:px-4 md:px-8 md:py-10",
         className
       )}
       {...props}
@@ -78,7 +82,7 @@ export default function LoginForm({
       <div className="flex w-full max-w-4xl flex-col items-stretch gap-6 md:flex-row md:items-center md:justify-center md:gap-8">
         <div
           className={cn(
-            "[--login-card-padding:1.5rem] sm:[--login-card-padding:2rem]",
+            "[--login-card-padding:1.25rem] sm:[--login-card-padding:1.5rem] md:[--login-card-padding:2rem]",
             "mx-auto flex w-full max-w-md flex-col gap-6 rounded-[12px] border border-border/70 bg-card p-(--login-card-padding) md:mx-0 md:max-w-sm md:shrink-0",
             "shadow-soft",
             ""

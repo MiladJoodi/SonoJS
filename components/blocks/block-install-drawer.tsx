@@ -5,6 +5,7 @@ import { CodeIcon } from "lucide-react"
 
 import { CodePanel } from "@/components/docs/code-panel"
 import { DocsInstallationTabs } from "@/components/docs/docs-installation-tabs"
+import { LoadingRing } from "@/components/sono-loader"
 import { Button } from "@sonojs/ui/components/button"
 import {
   Drawer,
@@ -14,7 +15,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@sonojs/ui/components/drawer"
-import { highlightInstallSnippets } from "@/lib/highlight-install-action"
+import { highlightBlockInstall } from "@/lib/highlight-install-action"
 
 /** Same baseline skip as docs install hints — keep lucide and the rest. */
 const NPM_SKIP = new Set([
@@ -84,6 +85,53 @@ function highlightKey(name: string, usage: BlockInstallUsage[]) {
   return `${name}\0${usage.map((item) => `${item.title}\0${item.code}`).join("\0")}`
 }
 
+async function loadMeta(name: string): Promise<InstallMeta> {
+  const cached = metaCache.get(name)
+  if (cached) return cached
+  const response = await fetch(`/r/${encodeURIComponent(name)}.json`)
+  if (!response.ok) throw new Error("missing")
+  const json = (await response.json()) as Parameters<typeof parseMeta>[0]
+  const next = parseMeta(json)
+  metaCache.set(name, next)
+  return next
+}
+
+const highlightInflight = new Map<string, Promise<HighlightedInstall>>()
+
+async function loadHighlighted(
+  name: string,
+  usage: BlockInstallUsage[]
+): Promise<HighlightedInstall> {
+  const key = highlightKey(name, usage)
+  const cached = highlightCache.get(key)
+  if (cached) return cached
+
+  const pending = highlightInflight.get(key)
+  if (pending) return pending
+
+  const task = highlightBlockInstall(name, usage)
+    .then((next) => {
+      highlightCache.set(key, next)
+      return next
+    })
+    .finally(() => {
+      highlightInflight.delete(key)
+    })
+
+  highlightInflight.set(key, task)
+  return task
+}
+
+/** Warm registry JSON + highlight so the Code tab does not flash empty. */
+export function prefetchBlockInstall(
+  name: string,
+  usage: BlockInstallUsage[] = []
+) {
+  void Promise.all([loadMeta(name), loadHighlighted(name, usage)]).catch(
+    () => {}
+  )
+}
+
 const drawerWidthClass = "overflow-x-hidden"
 
 /** Fixed panel width. Long lines scroll inside; they must not grow the drawer. */
@@ -109,74 +157,22 @@ export function BlockInstallBody({
   const [error, setError] = React.useState<string | null>(null)
 
   React.useEffect(() => {
-    const cached = metaCache.get(name)
-    if (cached) {
-      setMeta(cached)
-      setError(null)
-      return
-    }
-
     let cancelled = false
-    setMeta(null)
     setError(null)
 
-    fetch(`/r/${encodeURIComponent(name)}.json`)
-      .then(async (response) => {
-        if (!response.ok) throw new Error("missing")
-        return response.json() as Promise<Parameters<typeof parseMeta>[0]>
-      })
-      .then((json) => {
-        const next = parseMeta(json)
-        metaCache.set(name, next)
-        if (!cancelled) setMeta(next)
-      })
-      .catch(() => {
-        if (!cancelled) {
-          setError("Install details are not available for this block.")
-        }
-      })
+    const cachedMeta = metaCache.get(name)
+    if (cachedMeta) setMeta(cachedMeta)
+    else setMeta(null)
 
-    return () => {
-      cancelled = true
-    }
-  }, [name])
+    const cachedHighlight = highlightCache.get(key)
+    if (cachedHighlight) setHighlighted(cachedHighlight)
+    else setHighlighted(null)
 
-  React.useEffect(() => {
-    if (!meta) return
-    const cached = highlightCache.get(key)
-    if (cached) {
-      setHighlighted(cached)
-      return
-    }
-
-    let cancelled = false
-    setHighlighted(null)
-
-    const cli = `npx @sonojs/ui@latest add ${name}`
-    const snippets = [
-      { code: cli, lang: "bash" as const },
-      ...meta.files.map((file) => ({ code: file.content, lang: "tsx" as const })),
-      ...usage.map((item) => ({ code: item.code, lang: "tsx" as const })),
-    ]
-
-    highlightInstallSnippets(snippets)
-      .then((html) => {
-        const fileCount = meta.files.length
-        const next: HighlightedInstall = {
-          cliHtml: html[0] ?? "",
-          files: meta.files.map((file, index) => ({
-            title: file.title,
-            code: file.content,
-            html: html[index + 1] ?? "",
-          })),
-          usage: usage.map((item, index) => ({
-            title: item.title,
-            code: item.code,
-            html: html[fileCount + 1 + index] ?? "",
-          })),
-        }
-        highlightCache.set(key, next)
-        if (!cancelled) setHighlighted(next)
+    Promise.all([loadMeta(name), loadHighlighted(name, usage)])
+      .then(([nextMeta, nextHighlight]) => {
+        if (cancelled) return
+        setMeta(nextMeta)
+        setHighlighted(nextHighlight)
       })
       .catch(() => {
         if (!cancelled) {
@@ -187,15 +183,27 @@ export function BlockInstallBody({
     return () => {
       cancelled = true
     }
-  }, [key, meta, name, usage])
+    // `key` already encodes usage title+code — omit `usage` identity churn.
+  // eslint-disable-next-line react-hooks/exhaustive-deps -- usage via key
+  }, [key, name])
 
   if (error) {
-    return <p className="text-sm text-muted-foreground">{error}</p>
+    return (
+      <div className="flex min-h-[28rem] w-full items-center justify-center">
+        <p className="text-sm text-muted-foreground">{error}</p>
+      </div>
+    )
   }
 
   if (!meta || !highlighted) {
     return (
-      <p className="text-sm text-muted-foreground">Loading install details…</p>
+      <div
+        className="flex min-h-[28rem] w-full items-center justify-center"
+        role="status"
+        aria-label="Loading install details"
+      >
+        <LoadingRing size={40} showLabel label="Loading…" />
+      </div>
     )
   }
 
