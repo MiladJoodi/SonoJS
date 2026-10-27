@@ -1,0 +1,33 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "rating-04",
+  "type": "registry:block",
+  "title": "rating-04",
+  "description": "Average score card with star row and per-star distribution bars.",
+  "cssVars": {
+    "light": {
+      "canvas": "#f3f3f4",
+      "border-soft": "color-mix(in oklab, #e4e4e7 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18)",
+      "background": "var(--canvas)",
+      "card": "#ffffff"
+    },
+    "dark": {
+      "canvas": "#09090b",
+      "border-soft": "color-mix(in oklab, #27272a 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(0, 0, 0, 0.24), 0 28px 56px -28px rgba(0, 0, 0, 0.48)",
+      "background": "var(--canvas)",
+      "card": "#18181b"
+    }
+  },
+  "files": [
+    {
+      "path": "components/blocks/ecommerce/rating-04/rating.tsx",
+      "type": "registry:component",
+      "content": "import type * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst STAR_PATH =\n  \"m23.363 8.584-7.378-1.127L12.678.413c-.247-.526-1.11-.526-1.357 0L8.015 7.457.637 8.584a.75.75 0 0 0-.423 1.265l5.36 5.494-1.267 7.767a.75.75 0 0 0 1.103.777L12 20.245l6.59 3.643a.75.75 0 0 0 1.103-.777l-1.267-7.767 5.36-5.494a.75.75 0 0 0-.423-1.266z\"\n\nconst DEFAULT_DISTRIBUTION = [\n  { label: \"5\", percentage: 52 },\n  { label: \"4\", percentage: 24 },\n  { label: \"3\", percentage: 12 },\n  { label: \"2\", percentage: 7 },\n  { label: \"1\", percentage: 5 },\n]\n\nfunction StarIcon({\n  filled,\n  className,\n  ...props\n}: React.ComponentProps<\"svg\"> & { filled?: boolean }) {\n  return (\n    <svg\n      xmlns=\"http://www.w3.org/2000/svg\"\n      viewBox=\"0 0 24 24\"\n      aria-hidden=\"true\"\n      className={cn(\n        \"size-4 shrink-0\",\n        filled\n          ? \"fill-[#F5B301]\"\n          : \"fill-zinc-200 dark:fill-zinc-600\",\n        className\n      )}\n      {...props}\n    >\n      <path d={STAR_PATH} />\n    </svg>\n  )\n}\n\nexport default function Rating({\n  averageRating = 4,\n  totalRatings = \"1,153\",\n  distribution = DEFAULT_DISTRIBUTION,\n  className,\n  ...props\n}: React.ComponentProps<\"div\"> & {\n  averageRating?: number\n  totalRatings?: string\n  distribution?: { label: string; percentage: number }[]\n}) {\n  const filledStars = Math.floor(averageRating)\n\n  return (\n    <div\n      className={cn(\n        \"mx-auto w-full max-w-sm rounded-[12px] border border-border/70 bg-card p-6 shadow-soft\",\n        className\n      )}\n      {...props}\n      dir=\"ltr\"\n\n              style={{\n                backgroundColor: \"var(--card, #ffffff)\",\n                boxShadow:\n                  \"var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))\",\n              }}\n            >\n      <div\n        className=\"text-center\"\n        role=\"img\"\n        aria-label={`Average rating ${averageRating} out of 5 stars based on ${totalRatings} ratings`}\n      >\n        <p className=\"text-[11px] font-medium tracking-[0.14em] text-muted-foreground uppercase\">\n          Average rating\n        </p>\n        <h3 className=\"mt-2 text-5xl font-semibold tracking-tight tabular-nums text-foreground\">\n          {averageRating.toFixed(1)}\n        </h3>\n\n        <div className=\"mt-4 flex justify-center gap-1.5\">\n          {Array.from({ length: 5 }, (_, i) => (\n            <StarIcon key={i} filled={i < filledStars} />\n          ))}\n        </div>\n\n        <p className=\"mt-3 text-sm font-medium tabular-nums text-muted-foreground\">\n          {totalRatings} ratings\n        </p>\n      </div>\n\n      <div className=\"mt-7 space-y-2.5 border-t border-border/70 pt-6\">\n        {distribution.map((item) => (\n          <div key={item.label} className=\"flex items-center gap-3\">\n            <div className=\"flex w-10 shrink-0 items-center gap-1\">\n              <span className=\"text-sm font-semibold tabular-nums text-muted-foreground\">\n                {item.label}\n              </span>\n              <StarIcon filled className=\"size-3.5\" />\n            </div>\n\n            <div className=\"h-2 min-w-0 flex-1 overflow-hidden rounded-full bg-muted\">\n              <div\n                className=\"h-full rounded-full bg-[#F5B301] transition-[width] duration-500 ease-out\"\n                style={{ width: `${item.percentage}%` }}\n                role=\"progressbar\"\n                aria-valuemin={0}\n                aria-valuemax={100}\n                aria-valuenow={item.percentage}\n                aria-label={`${item.label} star reviews`}\n              />\n            </div>\n\n            <p className=\"w-10 shrink-0 text-end text-sm font-semibold tabular-nums whitespace-nowrap text-muted-foreground\">\n              {item.percentage}%\n            </p>\n          </div>\n        ))}\n      </div>\n    </div>\n  )\n}\n",
+      "target": "components/blocks/ecommerce/rating-04/rating.tsx"
+    }
+  ],
+  "version": "0.1.0+0c67e178c74a",
+  "generatedAt": "2026-10-27T19:05:53.101Z"
+}

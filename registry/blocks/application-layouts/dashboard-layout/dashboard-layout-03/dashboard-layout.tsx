@@ -162,7 +162,7 @@ const PROJECTS = [
     status: "Active",
     progress: 72,
     updated: "2h ago",
-    tone: "bg-primary/10 text-primary",
+    tone: "bg-emerald-500/10 text-emerald-700 dark:text-emerald-400",
   },
   {
     name: "Atlas Docs",
@@ -178,7 +178,7 @@ const PROJECTS = [
     status: "Active",
     progress: 44,
     updated: "4h ago",
-    tone: "bg-primary/10 text-primary",
+    tone: "bg-emerald-500/10 text-emerald-700 dark:text-emerald-400",
   },
   {
     name: "Ledger API",
@@ -194,7 +194,7 @@ const PROJECTS = [
     status: "Active",
     progress: 63,
     updated: "3h ago",
-    tone: "bg-primary/10 text-primary",
+    tone: "bg-emerald-500/10 text-emerald-700 dark:text-emerald-400",
   },
 ] as const
 
@@ -484,7 +484,7 @@ export default function DashboardLayout({
                     <div>
                       <span
                         className={cn(
-                          "inline-flex rounded-full px-2 py-0.5 text-caption font-medium",
+                          "inline-flex rounded-full px-2 py-0.5 text-[11px] font-normal leading-4",
                           project.tone
                         )}
                       >

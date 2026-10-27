@@ -148,7 +148,35 @@ export function BlockExample({
   const clipPreview = Boolean(
     previewClassName && /\boverflow-hidden\b/.test(previewClassName)
   )
-  const stageOverflow = clipPreview ? "overflow-hidden" : "overflow-visible"
+  /**
+   * Full-bleed `Sidebar` uses `position: fixed` + `h-svh`, which paints over the site
+   * chrome. Clip demos: contain fixed descendants (transform) and force the sidebar
+   * shell to `absolute` / `h-full` so it cannot leave the preview frame.
+   */
+  const stageOverflow = clipPreview
+    ? [
+        "overflow-hidden [transform:translateZ(0)]",
+        // Contain fixed Sidebar inside the preview frame (absolute + h-full).
+        "[&_[data-slot=sidebar-container]]:absolute!",
+        "[&_[data-slot=sidebar-container]]:inset-y-0!",
+        "[&_[data-slot=sidebar-container]]:h-full!",
+        "[&_[data-slot=sidebar-container]]:max-h-full!",
+        "[&_[data-slot=sidebar-inner]]:h-full!",
+        "[&_[data-slot=sidebar-inner]]:min-h-0!",
+        "[&_[data-slot=sidebar-inner]]:max-h-full!",
+        // Pin to the inline start/end edge (logical — works in LTR and RTL).
+        "[&_[data-slot=sidebar][data-side=left]_[data-slot=sidebar-container]]:start-0!",
+        "[&_[data-slot=sidebar][data-side=left]_[data-slot=sidebar-container]]:end-auto!",
+        "[&_[data-slot=sidebar][data-side=right]_[data-slot=sidebar-container]]:end-0!",
+        "[&_[data-slot=sidebar][data-side=right]_[data-slot=sidebar-container]]:start-auto!",
+        // Collapsed offcanvas: slide out past the start/end edge (gap already w-0).
+        // Translate (not left/right) so it still moves when start-0 is forced above.
+        "[&_[data-slot=sidebar][data-side=left][data-collapsible=offcanvas]_[data-slot=sidebar-container]]:-translate-x-full!",
+        "rtl:[&_[data-slot=sidebar][data-side=left][data-collapsible=offcanvas]_[data-slot=sidebar-container]]:translate-x-full!",
+        "[&_[data-slot=sidebar][data-side=right][data-collapsible=offcanvas]_[data-slot=sidebar-container]]:translate-x-full!",
+        "rtl:[&_[data-slot=sidebar][data-side=right][data-collapsible=offcanvas]_[data-slot=sidebar-container]]:-translate-x-full!",
+      ].join(" ")
+    : "overflow-visible"
 
   // Unmount path: drop stale ready so desktop→tablet always waits for onLoad.
   if (!framed && loadedSrc !== null) {
@@ -174,10 +202,14 @@ export function BlockExample({
     >
       <div
         className={cn(
-          "rounded-[12px] border border-border/70 bg-card",
-          // Code clips. Soft card shadows need overflow-visible — unless the demo
-          // opted into clip (full-bleed app shells that would otherwise spill).
-          view === "code" || clipPreview ? "overflow-hidden" : "overflow-visible"
+          "border border-border/70 bg-card",
+          // Full-bleed shells (`overflow-hidden` in previewClassName) must clip
+          // sidebar spill — but keep a square bottom so the stage doesn’t look
+          // like a floating card with radius (toolbar stays rounded-t only).
+          // Soft card demos stay fully rounded + overflow-visible for shadows.
+          view === "code" || clipPreview
+            ? "overflow-hidden rounded-t-[12px]"
+            : "overflow-visible rounded-[12px]"
         )}
       >
         {/* Match docs VariantPreview chrome */}
@@ -297,6 +329,9 @@ export function BlockExample({
                   ? cn("mx-auto bg-transparent", stageOverflow)
                   : cn(
                       "w-full border border-transparent bg-transparent",
+                      // Full-bleed shells set h-* on the stage; stretch this frame so
+                      // h-full children (SidebarProvider, etc.) fill the preview.
+                      clipPreview && "h-full min-h-0",
                       stageOverflow
                     ),
                 framed && previewClassName
@@ -330,7 +365,9 @@ export function BlockExample({
                   <DirectionProvider
                     dir={dir}
                     className={
-                      clipPreview ? "h-full min-h-0 w-full" : undefined
+                      clipPreview
+                        ? "relative h-full min-h-0 w-full overflow-hidden [transform:translateZ(0)]"
+                        : undefined
                     }
                   >
                     {children}

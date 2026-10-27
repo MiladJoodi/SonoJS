@@ -32,6 +32,7 @@ export const siteConfig = {
     { href: "/docs/components", label: "Components" },
     { href: "/blocks", label: "Blocks" },
     { href: "/charts", label: "Charts" },
+    { href: "/tools", label: "Tools" },
     {
       href: "https://icons.sonojs.com",
       label: "Icons",

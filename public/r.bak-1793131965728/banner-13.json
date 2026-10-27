@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "banner-13",
+  "type": "registry:block",
+  "title": "banner-13",
+  "description": "Lime limited-time deals strip with static D/H/M/S countdown and checkout link.",
+  "files": [
+    {
+      "path": "components/blocks/marketing/banner-13/banner.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport type * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst units = [\n  { value: \"05\", label: \"D\" },\n  { value: \"24\", label: \"H\" },\n  { value: \"26\", label: \"M\" },\n  { value: \"32\", label: \"S\" },\n] as const\n\nexport default function Banner({\n  className,\n  ...props\n}: React.ComponentProps<\"div\">) {\n  return (\n    <div\n      className={cn(\"w-full bg-[#C4F500] px-2 py-2.5\", className)}\n      role=\"region\"\n      aria-label=\"Limited-time deals\"\n      {...props}\n    >\n      <div className=\"mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-3 text-center sm:gap-12\">\n        <p className=\"text-[13px] font-medium text-zinc-900\">\n          Don&apos;t miss the limited-time deals!\n        </p>\n        <div\n          className=\"flex items-center gap-2\"\n          aria-label=\"Countdown 5 days 24 hours 26 minutes 32 seconds\"\n        >\n          {units.map((unit) => (\n            <div key={unit.label} className=\"flex items-baseline gap-0.5\">\n              <span className=\"text-sm font-medium text-zinc-900\">\n                {unit.value}\n              </span>\n              <span className=\"text-[11px] font-light text-zinc-700\">\n                {unit.label}\n              </span>\n            </div>\n          ))}\n        </div>\n        <a\n          href=\"#\"\n          className=\"cursor-pointer text-xs text-zinc-800 underline underline-offset-2 hover:opacity-80\"\n        >\n          Check out now!\n        </a>\n      </div>\n    </div>\n  )\n}\n",
+      "target": "components/blocks/marketing/banner-13/banner.tsx"
+    }
+  ],
+  "version": "0.1.0+55ca011705c9",
+  "generatedAt": "2026-10-27T20:11:50.866Z"
+}

@@ -10,6 +10,7 @@ import ProductDetails05 from "@/registry/blocks/ecommerce/product-details/produc
 import ProductDetails06 from "@/registry/blocks/ecommerce/product-details/product-details-06/product-details"
 import ProductDetails07 from "@/registry/blocks/ecommerce/product-details/product-details-07/product-details"
 import ProductDetails08 from "@/registry/blocks/ecommerce/product-details/product-details-08/product-details"
+import ProductDetails09 from "@/registry/blocks/ecommerce/product-details/product-details-09/product-details"
 
 import { blocksPageMetadata } from "@/lib/seo"
 
@@ -28,7 +29,7 @@ export default function BlockProductDetailsDocsPage() {
       <BlocksPageHeader
         title="Product Details"
         pathname="/blocks/ecommerce/product-details"
-        description="Product detail pages with gallery, sizing, delivery check, accordion specs, and reviews."
+        description="Nine product detail pages — galleries, variants, trust badges, specs, and reviews."
       />
 
       <div className="flex flex-col gap-8">
@@ -142,6 +143,20 @@ export default function BlockProductDetailsDocsPage() {
           previewClassName="bg-white p-0"
         >
           <ProductDetails08 />
+        </BlockExample>
+
+        <BlockExample
+          name="product-details-09"
+          usage={[
+            {
+              title: "app/page.tsx",
+              code: usage("product-details-09"),
+            },
+          ]}
+          previewAlign="start"
+          previewClassName="bg-canvas p-0"
+        >
+          <ProductDetails09 />
         </BlockExample>
       </div>
     </article>

@@ -220,7 +220,10 @@ export default function Checkout({
   }
 
   return (
-    <main className={cn("w-full bg-canvas", className)} {...props}>
+    <main
+      className={cn("w-full bg-white dark:bg-background", className)}
+      {...props}
+    >
       <div className="px-4 py-8 md:px-8 md:py-10">
         <div className="mx-auto w-full max-w-4xl space-y-10 md:space-y-12">
           <header className="border-b border-border/70 pb-4">

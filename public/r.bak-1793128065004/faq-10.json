@@ -1,0 +1,33 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "faq-10",
+  "type": "registry:block",
+  "title": "faq-10",
+  "description": "Bordered FAQ panel with header and two-column muted answer cards.",
+  "cssVars": {
+    "light": {
+      "canvas": "#f3f3f4",
+      "border-soft": "color-mix(in oklab, #e4e4e7 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18)",
+      "background": "var(--canvas)",
+      "card": "#ffffff"
+    },
+    "dark": {
+      "canvas": "#09090b",
+      "border-soft": "color-mix(in oklab, #27272a 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(0, 0, 0, 0.24), 0 28px 56px -28px rgba(0, 0, 0, 0.48)",
+      "background": "var(--canvas)",
+      "card": "#18181b"
+    }
+  },
+  "files": [
+    {
+      "path": "components/blocks/marketing/faq-10/faq.tsx",
+      "type": "registry:component",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst faqData = [\n  {\n    question: \"How can I create an account?\",\n    answer:\n      'Creating an account is easy! Click on the \"Sign Up\" button and follow the simple steps to get started.',\n  },\n  {\n    question: \"Is there a mobile app available?\",\n    answer:\n      \"Yes, we offer a mobile app for both iOS and Android. Visit the App Store or Google Play to download it.\",\n  },\n  {\n    question: \"How can I reset my password?\",\n    answer:\n      'To reset your password, go to the login page and click on the \"Forgot Password\" link. Follow the instructions sent to your email.',\n  },\n  {\n    question: \"Can I use the platform without a subscription?\",\n    answer:\n      \"Yes, we offer a free plan with limited features. You can explore the core tools without any upfront cost.\",\n  },\n  {\n    question: \"Where can I find tutorials and guides?\",\n    answer:\n      \"Visit our Help Center for detailed tutorials, video walkthroughs, and troubleshooting tips to get the most out of the platform.\",\n  },\n  {\n    question: \"Is my data secure on your platform?\",\n    answer:\n      \"Absolutely. We use industry-standard encryption and security practices to ensure your data is always protected and private.\",\n  },\n] as const\n\nexport default function Faq({\n  className,\n  ...props\n}: React.ComponentProps<\"section\">) {\n  return (\n    <section\n      className={cn(\"mx-auto w-full max-w-7xl px-4 py-12 md:px-8 md:py-16\", className)}\n      aria-labelledby=\"faq-heading\"\n      {...props}\n    >\n      <div className=\"overflow-hidden rounded-[12px] border border-border/70 bg-card shadow-soft\">\n        <div className=\"border-b border-border/70 p-5 md:p-6\">\n          <h2\n            id=\"faq-heading\"\n            className=\"mb-3 text-2xl font-semibold tracking-tight text-foreground md:mb-4 md:text-3xl\"\n          >\n            Frequently Asked Questions\n          </h2>\n          <p className=\"text-base leading-relaxed text-muted-foreground\">\n            Explore our comprehensive FAQ to find answers to common queries.\n          </p>\n        </div>\n\n        <div className=\"grid gap-4 p-5 sm:gap-6 sm:p-6 lg:grid-cols-2\">\n          {faqData.map((item) => (\n            <div\n              key={item.question}\n              className=\"rounded-[12px] border border-border/70 bg-muted/50 p-4 sm:p-6\"\n            >\n              <h3 className=\"mb-3 text-base font-semibold text-foreground md:mb-4\">\n                {item.question}\n              </h3>\n              <p className=\"text-base leading-relaxed text-muted-foreground\">\n                {item.answer}\n              </p>\n            </div>\n          ))}\n        </div>\n      </div>\n    </section>\n  )\n}\n",
+      "target": "components/blocks/marketing/faq-10/faq.tsx"
+    }
+  ],
+  "version": "0.1.0+0c67e178c74a",
+  "generatedAt": "2026-10-27T19:05:53.101Z"
+}

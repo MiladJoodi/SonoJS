@@ -6,10 +6,8 @@ import { DocsAdjacentPager } from "@/components/docs/docs-adjacent-pager"
 import { getBlocksAdjacent } from "@/lib/blocks-nav"
 import { cn } from "@/lib/utils"
 
-import { BlocksBackButton } from "./blocks-back-button"
-
 /**
- * Block docs title row: back to /blocks, truncate title, prev/next ready blocks.
+ * Block docs title row: truncate title, prev/next ready blocks.
  * Matches the charts view header chrome.
  */
 export function BlocksPageHeader({
@@ -28,12 +26,9 @@ export function BlocksPageHeader({
   return (
     <header className={cn("space-y-2", className)}>
       <div className="flex items-start justify-between gap-3">
-        <div className="flex min-w-0 flex-1 items-center gap-2">
-          <BlocksBackButton />
-          <h1 className="text-h1 min-w-0 flex-1 truncate" title={title}>
-            {title}
-          </h1>
-        </div>
+        <h1 className="text-h1 min-w-0 flex-1 truncate" title={title}>
+          {title}
+        </h1>
         <DocsAdjacentPager
           previous={
             previous

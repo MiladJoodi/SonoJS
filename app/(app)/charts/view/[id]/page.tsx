@@ -4,9 +4,7 @@ import { notFound } from "next/navigation"
 import {
   ChartDemo,
   ChartPreview,
-  ChartViewBackButton,
   ChartViewPager,
-  chartGalleryHref,
 } from "@/components/charts"
 import {
   ComponentSource,
@@ -1350,15 +1348,12 @@ export default async function ChartViewPage({
     <article className="w-full max-w-none space-y-8">
       <header className="space-y-2">
         <div className="flex items-start justify-between gap-3">
-          <div className="flex min-w-0 flex-1 items-center gap-2">
-            <ChartViewBackButton href={chartGalleryHref(entry.category)} />
-            <h1
-              className="text-h1 min-w-0 flex-1 truncate"
-              title={entry.title}
-            >
-              {entry.title}
-            </h1>
-          </div>
+          <h1
+            className="text-h1 min-w-0 flex-1 truncate"
+            title={entry.title}
+          >
+            {entry.title}
+          </h1>
           <ChartViewPager
             previous={adjacent.previous}
             next={adjacent.next}

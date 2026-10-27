@@ -1,0 +1,38 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "two-factor-03",
+  "type": "registry:block",
+  "title": "two-factor-03",
+  "description": "Backup code 2FA challenge.",
+  "registryDependencies": [
+    "button",
+    "input",
+    "label"
+  ],
+  "cssVars": {
+    "light": {
+      "canvas": "#f3f3f4",
+      "border-soft": "color-mix(in oklab, #e4e4e7 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18)",
+      "background": "var(--canvas)",
+      "card": "#ffffff"
+    },
+    "dark": {
+      "canvas": "#09090b",
+      "border-soft": "color-mix(in oklab, #27272a 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(0, 0, 0, 0.24), 0 28px 56px -28px rgba(0, 0, 0, 0.48)",
+      "background": "var(--canvas)",
+      "card": "#18181b"
+    }
+  },
+  "files": [
+    {
+      "path": "components/blocks/authentication/two-factor-03/two-factor-form.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport { cn } from \"@/lib/utils\"\nimport { Button } from \"@/components/ui/button\"\nimport { Input } from \"@/components/ui/input\"\nimport { Label } from \"@/components/ui/label\"\n\nconst controlClass =\n  \"h-[46px] rounded-[12px] border-border/70 shadow-none font-mono tracking-wider\"\n\nexport default function TwoFactorForm({\n  className,\n  ...props\n}: React.ComponentProps<\"div\">) {\n  return (\n    <div\n      className={cn(\n        \"[--login-card-padding:1.5rem] sm:[--login-card-padding:2rem]\",\n        \"flex w-full flex-col gap-8 rounded-[12px] border border-border/70 bg-card p-(--login-card-padding)\",\n        \"shadow-soft\",\n        className\n      )}\n      style={{\n                backgroundColor: \"var(--card, #ffffff)\",\n                boxShadow:\n                  \"var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))\",\n              }}\n      {...props}\n    >\n      <header className=\"flex flex-col items-start gap-3\">\n        <span className=\"h-0.5 w-8 rounded-full bg-primary\" aria-hidden />\n        <div className=\"space-y-1.5\">\n          <h1 className=\"text-h3 text-foreground\">Backup code</h1>\n          <p className=\"text-sm text-muted-foreground\">\n            Enter one of your single-use backup codes to continue.\n          </p>\n        </div>\n      </header>\n\n      <form\n        className=\"flex flex-col gap-4\"\n        onSubmit={(event) => event.preventDefault()}\n      >\n        <div className=\"grid gap-2\">\n          <Label htmlFor=\"tfa-03-code\">Backup code</Label>\n          <Input\n            id=\"tfa-03-code\"\n            dir=\"ltr\"\n            autoComplete=\"one-time-code\"\n            placeholder=\"XXXX-XXXX-XXXX\"\n            required\n            className={controlClass}\n          />\n        </div>\n        <Button\n          type=\"submit\"\n          className=\"mt-1 w-full shadow-none\"\n        >\n          Verify backup code\n        </Button>\n      </form>\n    </div>\n  )\n}\n",
+      "target": "components/blocks/authentication/two-factor-03/two-factor-form.tsx"
+    }
+  ],
+  "version": "0.1.0+55ca011705c9",
+  "generatedAt": "2026-10-27T20:11:50.866Z"
+}

@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "usage-based-billing-02",
+  "type": "registry:block",
+  "title": "usage-based-billing-02",
+  "description": "Plan overview — radial capacity gauges for workspaces, blocks, registry items, and storage.",
+  "dependencies": [
+    "lucide-react",
+    "recharts"
+  ],
+  "registryDependencies": [
+    "card",
+    "chart"
+  ],
+  "cssVars": {
+    "light": {
+      "canvas": "#f3f3f4",
+      "border-soft": "color-mix(in oklab, #e4e4e7 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18)",
+      "background": "var(--canvas)",
+      "card": "#ffffff"
+    },
+    "dark": {
+      "canvas": "#09090b",
+      "border-soft": "color-mix(in oklab, #27272a 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(0, 0, 0, 0.24), 0 28px 56px -28px rgba(0, 0, 0, 0.48)",
+      "background": "var(--canvas)",
+      "card": "#18181b"
+    }
+  },
+  "files": [
+    {
+      "path": "components/blocks/payments-billing/usage-based-billing-02/usage-based-billing.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { ExternalLinkIcon } from \"lucide-react\"\nimport { PolarAngleAxis, RadialBar, RadialBarChart } from \"recharts\"\n\nimport { Card, CardContent } from \"@/components/ui/card\"\nimport {\n  type ChartConfig,\n  ChartContainer,\n} from \"@/components/ui/chart\"\nimport { cn } from \"@/lib/utils\"\n\nconst DATA = [\n  {\n    name: \"Workspaces\",\n    capacity: 20,\n    current: 1,\n    allowed: 5,\n  },\n  {\n    name: \"Blocks installed\",\n    capacity: 40,\n    current: 8,\n    allowed: 20,\n  },\n  {\n    name: \"Registry items\",\n    capacity: 30,\n    current: 15,\n    allowed: 50,\n  },\n  {\n    name: \"Storage\",\n    capacity: 50,\n    current: 25,\n    allowed: 100,\n  },\n] as const\n\nconst chartConfig = {\n  capacity: {\n    label: \"Capacity\",\n    color: \"var(--primary)\",\n  },\n} satisfies ChartConfig\n\nexport default function UsageBasedBilling({\n  className,\n  ...props\n}: React.ComponentProps<\"section\">) {\n  return (\n    <section\n      className={cn(\n        \"relative isolate w-full min-w-0 overflow-hidden bg-white dark:bg-background px-4 py-10 text-foreground sm:px-6 sm:py-12\",\n        className\n      )}\n      aria-labelledby=\"usage-based-billing-02-heading\"\n      {...props}\n    >\n      <div\n        aria-hidden\n        className=\"pointer-events-none absolute inset-0 -z-10\"\n      >\n        <div className=\"absolute start-1/2 top-[-18%] size-[22rem] -translate-x-1/2 rounded-full bg-primary/10 blur-3xl\" />\n      </div>\n\n      <div className=\"mx-auto w-full max-w-5xl\">\n        <header className=\"text-start\">\n          <h2\n            id=\"usage-based-billing-02-heading\"\n            className=\"text-balance text-xl font-medium text-foreground\"\n          >\n            Plan overview\n          </h2>\n          <p className=\"mt-1 text-pretty text-sm leading-6 text-muted-foreground\">\n            You are currently on the{\" \"}\n            <span className=\"font-medium text-foreground\">Starter plan</span>.{\" \"}\n            <a\n              href=\"#\"\n              className=\"inline-flex items-center gap-1 text-primary hover:underline hover:underline-offset-4\"\n            >\n              View other plans\n              <ExternalLinkIcon className=\"size-4\" aria-hidden />\n            </a>\n          </p>\n        </header>\n\n        <dl className=\"mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4\">\n          {DATA.map((item) => (\n            <Card\n              key={item.name}\n              className=\"border-border/70 p-4 shadow-soft\"\n            >\n              <CardContent className=\"flex items-center gap-4 p-0\">\n                <div className=\"relative flex items-center justify-center\">\n                  <ChartContainer\n                    className=\"h-20 w-20\"\n                    config={chartConfig}\n                  >\n                    <RadialBarChart\n                      data={[item]}\n                      barSize={6}\n                      endAngle={-270}\n                      innerRadius={30}\n                      outerRadius={40}\n                      startAngle={90}\n                    >\n                      <PolarAngleAxis\n                        angleAxisId={0}\n                        axisLine={false}\n                        domain={[0, 100]}\n                        tick={false}\n                        type=\"number\"\n                      />\n                      <RadialBar\n                        angleAxisId={0}\n                        background\n                        cornerRadius={10}\n                        dataKey=\"capacity\"\n                        fill=\"var(--primary)\"\n                      />\n                    </RadialBarChart>\n                  </ChartContainer>\n                  <div className=\"absolute inset-0 flex items-center justify-center\">\n                    <span\n                      dir=\"ltr\"\n                      className=\"text-base font-medium text-foreground tabular-nums\"\n                    >\n                      {item.capacity}%\n                    </span>\n                  </div>\n                </div>\n                <div className=\"min-w-0 text-start\">\n                  <dt className=\"text-sm font-medium text-foreground\">\n                    {item.name}\n                  </dt>\n                  <dd\n                    dir=\"ltr\"\n                    className=\"text-sm text-muted-foreground\"\n                  >\n                    {item.current} of {item.allowed} used\n                  </dd>\n                </div>\n              </CardContent>\n            </Card>\n          ))}\n        </dl>\n      </div>\n    </section>\n  )\n}\n",
+      "target": "components/blocks/payments-billing/usage-based-billing-02/usage-based-billing.tsx"
+    }
+  ],
+  "version": "0.1.0+675d7fc0a862",
+  "generatedAt": "2026-10-27T22:46:01.251Z"
+}

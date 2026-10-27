@@ -85,6 +85,7 @@ import Banner12 from "@/registry/blocks/marketing/banner/banner-12/banner"
 import Banner13 from "@/registry/blocks/marketing/banner/banner-13/banner"
 import Banner14 from "@/registry/blocks/marketing/banner/banner-14/banner"
 import Banner15 from "@/registry/blocks/marketing/banner/banner-15/banner"
+import CookieConsent01 from "@/registry/blocks/marketing/cookie-consent/cookie-consent-01/cookie-consent"
 import Jumbotron01 from "@/registry/blocks/marketing/jumbotron/jumbotron-01/jumbotron"
 import Jumbotron02 from "@/registry/blocks/marketing/jumbotron/jumbotron-02/jumbotron"
 import Jumbotron03 from "@/registry/blocks/marketing/jumbotron/jumbotron-03/jumbotron"
@@ -104,6 +105,12 @@ import Features08 from "@/registry/blocks/marketing/features/features-08/feature
 import Features09 from "@/registry/blocks/marketing/features/features-09/features"
 import Features10 from "@/registry/blocks/marketing/features/features-10/features"
 import Features11 from "@/registry/blocks/marketing/features/features-11/features"
+import ArticleLayout01 from "@/registry/blocks/content-publishing/article-layout/article-layout-01/article-layout"
+import AuthorProfile01 from "@/registry/blocks/content-publishing/author-profile/author-profile-01/author-profile"
+import BlogGrid01 from "@/registry/blocks/content-publishing/blog-grid/blog-grid-01/blog-grid"
+import Changelog01 from "@/registry/blocks/content-publishing/changelog/changelog-01/changelog"
+import BentoGrid01 from "@/registry/blocks/marketing/bento-grid/bento-grid-01/bento-grid"
+import HowItWorks01 from "@/registry/blocks/marketing/how-it-works/how-it-works-01/how-it-works"
 import Cta01 from "@/registry/blocks/marketing/cta/cta-01/cta"
 import Cta02 from "@/registry/blocks/marketing/cta/cta-02/cta"
 import Cta03 from "@/registry/blocks/marketing/cta/cta-03/cta"
@@ -149,10 +156,75 @@ import Faq17 from "@/registry/blocks/marketing/faq/faq-17/faq"
 import Faq18 from "@/registry/blocks/marketing/faq/faq-18/faq"
 import Faq19 from "@/registry/blocks/marketing/faq/faq-19/faq"
 import Faq20 from "@/registry/blocks/marketing/faq/faq-20/faq"
+import DataTable01 from "@/registry/blocks/data-tables/data-table/data-table-01/table"
 import AdvancedDataGrid01 from "@/registry/blocks/data-tables/advanced-data-grid/advanced-data-grid-01/table"
 import AdvancedDataGrid02 from "@/registry/blocks/data-tables/advanced-data-grid/advanced-data-grid-02/table"
 import AdvancedDataGrid03 from "@/registry/blocks/data-tables/advanced-data-grid/advanced-data-grid-03/table"
 import AdvancedDataGrid04 from "@/registry/blocks/data-tables/advanced-data-grid/advanced-data-grid-04/table"
+import RowActions01 from "@/registry/blocks/data-tables/row-actions/row-actions-01/table"
+import ApiKeys01 from "@/registry/blocks/developer-tools/api-key-management/api-keys-01/api-keys"
+import ApiKeys02 from "@/registry/blocks/developer-tools/api-key-management/api-keys-02/api-keys"
+import WebhookManagement01 from "@/registry/blocks/developer-tools/webhook-management/webhook-management-01/webhook-management"
+import Integrations01 from "@/registry/blocks/developer-tools/integrations/integrations-01/integrations"
+import LogsViewer01 from "@/registry/blocks/developer-tools/logs-viewer/logs-viewer-01/logs-viewer"
+import AccountSettings01 from "@/registry/blocks/user-account/account-settings/account-settings-01/account-settings"
+import AccountSettings02 from "@/registry/blocks/user-account/account-settings/account-settings-02/account-settings"
+import AccountSettings03 from "@/registry/blocks/user-account/account-settings/account-settings-03/account-settings"
+import UserProfile01 from "@/registry/blocks/user-account/user-profile/user-profile-01/user-profile"
+import TeamMembers01 from "@/registry/blocks/user-account/team-members/team-members-01/team-members"
+import RolesAndPermissions01 from "@/registry/blocks/user-account/roles-and-permissions/roles-and-permissions-01/roles-and-permissions"
+import BillingHistory01 from "@/registry/blocks/payments-billing/billing-history/billing-history-01/billing-history"
+import BillingSettings01 from "@/registry/blocks/payments-billing/billing-settings/billing-settings-01/billing-settings"
+import BillingSettings02 from "@/registry/blocks/payments-billing/billing-settings/billing-settings-02/billing-settings"
+import UsageBasedBilling01 from "@/registry/blocks/payments-billing/usage-based-billing/usage-based-billing-01/usage-based-billing"
+import UsageBasedBilling02 from "@/registry/blocks/payments-billing/usage-based-billing/usage-based-billing-02/usage-based-billing"
+import UsageBasedBilling03 from "@/registry/blocks/payments-billing/usage-based-billing/usage-based-billing-03/usage-based-billing"
+import UsageBasedBilling04 from "@/registry/blocks/payments-billing/usage-based-billing/usage-based-billing-04/usage-based-billing"
+import UsageBasedBilling05 from "@/registry/blocks/payments-billing/usage-based-billing/usage-based-billing-05/usage-based-billing"
+import UsageBasedBilling06 from "@/registry/blocks/payments-billing/usage-based-billing/usage-based-billing-06/usage-based-billing"
+import UsageBasedBilling07 from "@/registry/blocks/payments-billing/usage-based-billing/usage-based-billing-07/usage-based-billing"
+import PaymentMethods01 from "@/registry/blocks/payments-billing/payment-methods/payment-methods-01/payment-methods"
+import TransferFunds01 from "@/registry/blocks/payments-billing/transfer-funds/transfer-funds-01/transfer-funds"
+import Invoice01 from "@/registry/blocks/payments-billing/invoice/invoice-01/invoice"
+import AccessDenied01 from "@/registry/blocks/feedback-states/access-denied/access-denied-01/access-denied"
+import NotFound01 from "@/registry/blocks/feedback-states/not-found/not-found-01/not-found"
+import ErrorState01 from "@/registry/blocks/feedback-states/error-state/error-state-01/error-state"
+import RateLimit01 from "@/registry/blocks/feedback-states/rate-limit/rate-limit-01/rate-limit"
+import Maintenance01 from "@/registry/blocks/feedback-states/maintenance/maintenance-01/maintenance"
+import StatusPage01 from "@/registry/blocks/feedback-states/status-page/status-page-01/status-page"
+import AiChat01 from "@/registry/blocks/ai-agents/ai-chat/ai-chat-01/ai-chat"
+import AiChat02 from "@/registry/blocks/ai-agents/ai-chat/ai-chat-02/ai-chat"
+import AiChat03 from "@/registry/blocks/ai-agents/ai-chat/ai-chat-03/ai-chat"
+import AgentWorkspace01 from "@/registry/blocks/ai-agents/agent-workspace/agent-workspace-01/agent-workspace"
+import { AgentRunTimeline } from "@/registry/blocks/ai-agents/agent-run-timeline/agent-run-timeline"
+import ChatComposer01 from "@/registry/blocks/ai-agents/chat-composer/chat-composer-01/chat-composer"
+import ChatComposer02 from "@/registry/blocks/ai-agents/chat-composer/chat-composer-02/chat-composer"
+import ChatComposer03 from "@/registry/blocks/ai-agents/chat-composer/chat-composer-03/chat-composer"
+import ChatComposer04 from "@/registry/blocks/ai-agents/chat-composer/chat-composer-04/chat-composer"
+import EmptyState01 from "@/registry/blocks/feedback-states/empty-state/empty-state-01/empty-state"
+import DataExport01 from "@/registry/blocks/files-media/data-export/data-export-01/data-export"
+import DataExport02 from "@/registry/blocks/files-media/data-export/data-export-02/data-export"
+import FileManager01 from "@/registry/blocks/files-media/file-manager/file-manager-01/file-manager"
+import FileUpload01 from "@/registry/blocks/files-media/file-upload/file-upload-01/file-upload"
+import MediaGallery01 from "@/registry/blocks/files-media/media-gallery/media-gallery-01/media-gallery"
+import Comments01 from "@/registry/blocks/communication/comments/comments-01/comments"
+import ActivityFeed01 from "@/registry/blocks/communication/activity-feed/activity-feed-01/activity-feed"
+import ActivityFeed02 from "@/registry/blocks/communication/activity-feed/activity-feed-02/activity-feed"
+import ActivityFeed03 from "@/registry/blocks/communication/activity-feed/activity-feed-03/activity-feed"
+import NotificationCenter01 from "@/registry/blocks/communication/notification-center/notification-center-01/notification-center"
+import AnalyticsDashboard01 from "@/registry/blocks/dashboards-analytics/analytics-dashboard/analytics-dashboard-01/analytics-dashboard"
+import Calendar01 from "@/registry/blocks/calendar-scheduling/calendar/calendar-01/calendar"
+import SetupWizard01 from "@/registry/blocks/onboarding/setup-wizard/setup-wizard-01/setup-wizard"
+import WorkspaceSetup01 from "@/registry/blocks/onboarding/workspace-setup/workspace-setup-01/workspace-setup"
+import WorkspaceSetup02 from "@/registry/blocks/onboarding/workspace-setup/workspace-setup-02/workspace-setup"
+import ProgressChecklist01 from "@/registry/blocks/onboarding/progress-checklist/progress-checklist-01/progress-checklist"
+import ProgressChecklist02 from "@/registry/blocks/onboarding/progress-checklist/progress-checklist-02/progress-checklist"
+import ProgressChecklist03 from "@/registry/blocks/onboarding/progress-checklist/progress-checklist-03/progress-checklist"
+import ProgressChecklist04 from "@/registry/blocks/onboarding/progress-checklist/progress-checklist-04/progress-checklist"
+import ProgressChecklist05 from "@/registry/blocks/onboarding/progress-checklist/progress-checklist-05/progress-checklist"
+import DataImport01 from "@/registry/blocks/onboarding/data-import/data-import-01/data-import"
+import SearchResults01 from "@/registry/blocks/search-filtering/search-results/search-results-01/search-results"
+import FilterPanel01 from "@/registry/blocks/search-filtering/filter-panel/filter-panel-01/filter-panel"
 import PaymentForm01 from "@/registry/blocks/payments-billing/payment-form/payment-form-01/payment-form"
 import PaymentForm02 from "@/registry/blocks/payments-billing/payment-form/payment-form-02/payment-form"
 import PaymentForm03 from "@/registry/blocks/payments-billing/payment-form/payment-form-03/payment-form"
@@ -176,6 +248,8 @@ import Checkout05 from "@/registry/blocks/ecommerce/checkout/checkout-05/checkou
 import Checkout06 from "@/registry/blocks/ecommerce/checkout/checkout-06/checkout"
 import Checkout07 from "@/registry/blocks/ecommerce/checkout/checkout-07/checkout"
 import Checkout08 from "@/registry/blocks/ecommerce/checkout/checkout-08/checkout"
+import Checkout09 from "@/registry/blocks/ecommerce/checkout/checkout-09/checkout"
+import OrderConfirmation01 from "@/registry/blocks/ecommerce/order-confirmation/order-confirmation-01/order-confirmation"
 import OrderSummary01 from "@/registry/blocks/ecommerce/order-summary/order-summary-01/order-summary"
 import OrderSummary02 from "@/registry/blocks/ecommerce/order-summary/order-summary-02/order-summary"
 import OrderSummary03 from "@/registry/blocks/ecommerce/order-summary/order-summary-03/order-summary"
@@ -190,6 +264,7 @@ import ProductDetails05 from "@/registry/blocks/ecommerce/product-details/produc
 import ProductDetails06 from "@/registry/blocks/ecommerce/product-details/product-details-06/product-details"
 import ProductDetails07 from "@/registry/blocks/ecommerce/product-details/product-details-07/product-details"
 import ProductDetails08 from "@/registry/blocks/ecommerce/product-details/product-details-08/product-details"
+import ProductDetails09 from "@/registry/blocks/ecommerce/product-details/product-details-09/product-details"
 import ShoppingCart01 from "@/registry/blocks/ecommerce/shopping-cart/shopping-cart-01/shopping-cart"
 import ShoppingCart02 from "@/registry/blocks/ecommerce/shopping-cart/shopping-cart-02/shopping-cart"
 import ShoppingCart03 from "@/registry/blocks/ecommerce/shopping-cart/shopping-cart-03/shopping-cart"
@@ -199,6 +274,40 @@ import ShoppingCart06 from "@/registry/blocks/ecommerce/shopping-cart/shopping-c
 import ShoppingCart07 from "@/registry/blocks/ecommerce/shopping-cart/shopping-cart-07/shopping-cart"
 import ShoppingCart08 from "@/registry/blocks/ecommerce/shopping-cart/shopping-cart-08/shopping-cart"
 import ShoppingCart09 from "@/registry/blocks/ecommerce/shopping-cart/shopping-cart-09/shopping-cart"
+import ShoppingCart10 from "@/registry/blocks/ecommerce/shopping-cart/shopping-cart-10/shopping-cart"
+import Wishlist01 from "@/registry/blocks/ecommerce/wishlist/wishlist-01/wishlist"
+import OrderTracking01 from "@/registry/blocks/ecommerce/order-tracking/order-tracking-01/order-tracking"
+import OrderTracking02 from "@/registry/blocks/ecommerce/order-tracking/order-tracking-02/order-tracking"
+import OrderTracking03 from "@/registry/blocks/ecommerce/order-tracking/order-tracking-03/order-tracking"
+import OrderTracking04 from "@/registry/blocks/ecommerce/order-tracking/order-tracking-04/order-tracking"
+import OrderTracking05 from "@/registry/blocks/ecommerce/order-tracking/order-tracking-05/order-tracking"
+import OrderTracking06 from "@/registry/blocks/ecommerce/order-tracking/order-tracking-06/order-tracking"
+import OrderTracking07 from "@/registry/blocks/ecommerce/order-tracking/order-tracking-07/order-tracking"
+import OrderHistory01 from "@/registry/blocks/ecommerce/order-history/order-history-01/order-history"
+import OrderHistory02 from "@/registry/blocks/ecommerce/order-history/order-history-02/order-history"
+import OrderHistory03 from "@/registry/blocks/ecommerce/order-history/order-history-03/order-history"
+import OrderHistory04 from "@/registry/blocks/ecommerce/order-history/order-history-04/order-history"
+import OrderHistory05 from "@/registry/blocks/ecommerce/order-history/order-history-05/order-history"
+import OrderHistory06 from "@/registry/blocks/ecommerce/order-history/order-history-06/order-history"
+import OrderHistory07 from "@/registry/blocks/ecommerce/order-history/order-history-07/order-history"
+import OrderHistory08 from "@/registry/blocks/ecommerce/order-history/order-history-08/order-history"
+import ProductFilter01 from "@/registry/blocks/ecommerce/product-filter/product-filter-01/product-filter"
+import ProductFilter02 from "@/registry/blocks/ecommerce/product-filter/product-filter-02/product-filter"
+import ProductFilter03 from "@/registry/blocks/ecommerce/product-filter/product-filter-03/product-filter"
+import ProductFilter04 from "@/registry/blocks/ecommerce/product-filter/product-filter-04/product-filter"
+import ProductReview01 from "@/registry/blocks/ecommerce/product-review/product-review-01/product-review"
+import ProductReview02 from "@/registry/blocks/ecommerce/product-review/product-review-02/product-review"
+import ProductReview03 from "@/registry/blocks/ecommerce/product-review/product-review-03/product-review"
+import ProductReview04 from "@/registry/blocks/ecommerce/product-review/product-review-04/product-review"
+import ProductReview05 from "@/registry/blocks/ecommerce/product-review/product-review-05/product-review"
+import ProductCategories01 from "@/registry/blocks/ecommerce/product-categories/product-categories-01/product-categories"
+import ProductCategories02 from "@/registry/blocks/ecommerce/product-categories/product-categories-02/product-categories"
+import ProductCategories03 from "@/registry/blocks/ecommerce/product-categories/product-categories-03/product-categories"
+import ProductCategories04 from "@/registry/blocks/ecommerce/product-categories/product-categories-04/product-categories"
+import ProductCategories05 from "@/registry/blocks/ecommerce/product-categories/product-categories-05/product-categories"
+import ProductCategories06 from "@/registry/blocks/ecommerce/product-categories/product-categories-06/product-categories"
+import ProductCategories07 from "@/registry/blocks/ecommerce/product-categories/product-categories-07/product-categories"
+import ProductCategories08 from "@/registry/blocks/ecommerce/product-categories/product-categories-08/product-categories"
 import Gallery01 from "@/registry/blocks/files-media/image-gallery/gallery-01/gallery"
 import Gallery02 from "@/registry/blocks/files-media/image-gallery/gallery-02/gallery"
 import Gallery03 from "@/registry/blocks/files-media/image-gallery/gallery-03/gallery"
@@ -219,6 +328,8 @@ import Hero07 from "@/registry/blocks/marketing/hero/hero-07/hero"
 import Hero08 from "@/registry/blocks/marketing/hero/hero-08/hero"
 import Hero09 from "@/registry/blocks/marketing/hero/hero-09/hero"
 import Hero10 from "@/registry/blocks/marketing/hero/hero-10/hero"
+import Hero11 from "@/registry/blocks/marketing/hero/hero-11/hero"
+import Hero12 from "@/registry/blocks/marketing/hero/hero-12/hero"
 import Newsletter01 from "@/registry/blocks/marketing/newsletter/newsletter-01/newsletter"
 import Newsletter02 from "@/registry/blocks/marketing/newsletter/newsletter-02/newsletter"
 import Newsletter03 from "@/registry/blocks/marketing/newsletter/newsletter-03/newsletter"
@@ -228,6 +339,15 @@ import Newsletter06 from "@/registry/blocks/marketing/newsletter/newsletter-06/n
 import Newsletter07 from "@/registry/blocks/marketing/newsletter/newsletter-07/newsletter"
 import Newsletter08 from "@/registry/blocks/marketing/newsletter/newsletter-08/newsletter"
 import Newsletter09 from "@/registry/blocks/marketing/newsletter/newsletter-09/newsletter"
+import Newsletter10 from "@/registry/blocks/marketing/newsletter/newsletter-10/newsletter"
+import Portfolio01 from "@/registry/blocks/marketing/portfolio/portfolio-01/portfolio"
+import SocialLinks01 from "@/registry/blocks/marketing/social-links/social-links-01/social-links"
+import MediaPlayer01 from "@/registry/blocks/files-media/media-player/media-player-01/media-player"
+import CryptoPortfolio01 from "@/registry/blocks/dashboards-analytics/crypto-portfolio/crypto-portfolio-01/crypto-portfolio"
+import KpiCards01 from "@/registry/blocks/dashboards-analytics/kpi-cards/kpi-cards-01/kpi-cards"
+import KpiCards02 from "@/registry/blocks/dashboards-analytics/kpi-cards/kpi-cards-02/kpi-cards"
+import KpiCards03 from "@/registry/blocks/dashboards-analytics/kpi-cards/kpi-cards-03/kpi-cards"
+import KpiCards04 from "@/registry/blocks/dashboards-analytics/kpi-cards/kpi-cards-04/kpi-cards"
 import Blog01 from "@/registry/blocks/marketing/blog/blog-01/blog"
 import Blog02 from "@/registry/blocks/marketing/blog/blog-02/blog"
 import Blog03 from "@/registry/blocks/marketing/blog/blog-03/blog"
@@ -286,6 +406,7 @@ import Testimonials10 from "@/registry/blocks/marketing/testimonials/testimonial
 import Testimonials11 from "@/registry/blocks/marketing/testimonials/testimonials-11/testimonial"
 import Testimonials12 from "@/registry/blocks/marketing/testimonials/testimonials-12/testimonial"
 import Testimonials13 from "@/registry/blocks/marketing/testimonials/testimonials-13/testimonial"
+import ApplicationForm01 from "@/registry/blocks/forms/application-form/application-form-01/application-form"
 import ContactForm01 from "@/registry/blocks/forms/contact-form/contact-form-01/contact-form"
 import ContactForm02 from "@/registry/blocks/forms/contact-form/contact-form-02/contact-form"
 import ContactForm03 from "@/registry/blocks/forms/contact-form/contact-form-03/contact-form"
@@ -336,6 +457,7 @@ import InsightsSidebar from "@/registry/blocks/navigation/sidebar/sidebar-05/sid
 import AccentSidebar from "@/registry/blocks/navigation/sidebar/sidebar-06/sidebar"
 import SearchSidebar from "@/registry/blocks/navigation/sidebar/sidebar-07/sidebar"
 import ChatSidebar from "@/registry/blocks/navigation/sidebar/sidebar-08/sidebar"
+import DualRailSidebar from "@/registry/blocks/navigation/sidebar/sidebar-09/sidebar"
 import BasicBreadcrumbs from "@/registry/blocks/navigation/breadcrumbs/breadcrumbs-01/breadcrumbs"
 import HomeIconBreadcrumbs from "@/registry/blocks/navigation/breadcrumbs/breadcrumbs-02/breadcrumbs"
 import IconTrailBreadcrumbs from "@/registry/blocks/navigation/breadcrumbs/breadcrumbs-03/breadcrumbs"
@@ -798,6 +920,78 @@ const views: Record<string, ComponentType> = {
       </div>
     )
   },
+  "cookie-consent-01": function CookieConsent01View() {
+    return (
+      <div className="flex min-h-svh w-full items-stretch justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <CookieConsent01 />
+        </div>
+      </div>
+    )
+  },
+  "bento-grid-01": function BentoGrid01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <BentoGrid01 />
+        </div>
+      </div>
+    )
+  },
+  "how-it-works-01": function HowItWorks01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <HowItWorks01 />
+        </div>
+      </div>
+    )
+  },
+  "author-profile-01": function AuthorProfile01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <AuthorProfile01 />
+        </div>
+      </div>
+    )
+  },
+  "blog-grid-01": function BlogGrid01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <BlogGrid01 />
+        </div>
+      </div>
+    )
+  },
+  "changelog-01": function Changelog01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Changelog01 />
+        </div>
+      </div>
+    )
+  },
+  "reading-progress-01": function ReadingProgress01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <ReadingProgress01 />
+        </div>
+      </div>
+    )
+  },
+  "article-layout-01": function ArticleLayout01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <ArticleLayout01 />
+        </div>
+      </div>
+    )
+  },
   "cta-01": function Cta01View() {
     return (
       <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-0 py-8 md:px-8 md:py-12">
@@ -1203,6 +1397,15 @@ const views: Record<string, ComponentType> = {
       </div>
     )
   },
+  "data-table-01": function DataTable01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-3 py-6 sm:px-6 sm:py-10 dark:bg-background">
+        <div className="w-full min-w-0 max-w-5xl">
+          <DataTable01 />
+        </div>
+      </div>
+    )
+  },
   "advanced-data-grid-01": function AdvancedDataGrid01View() {
     return (
       <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
@@ -1235,6 +1438,632 @@ const views: Record<string, ComponentType> = {
       <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
         <div className="w-full">
           <AdvancedDataGrid04 />
+        </div>
+      </div>
+    )
+  },
+  "row-actions-01": function RowActions01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-3 py-6 sm:px-6 sm:py-10 dark:bg-background">
+        <div className="w-full min-w-0 max-w-6xl">
+          <RowActions01 />
+        </div>
+      </div>
+    )
+  },
+  "api-keys-01": function ApiKeys01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <ApiKeys01 />
+        </div>
+      </div>
+    )
+  },
+  "webhook-management-01": function WebhookManagement01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <WebhookManagement01 />
+        </div>
+      </div>
+    )
+  },
+  "integrations-01": function Integrations01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Integrations01 />
+        </div>
+      </div>
+    )
+  },
+  "logs-viewer-01": function LogsViewer01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <LogsViewer01 />
+        </div>
+      </div>
+    )
+  },
+  "api-keys-02": function ApiKeys02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <ApiKeys02 />
+        </div>
+      </div>
+    )
+  },
+  "account-settings-01": function AccountSettings01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <AccountSettings01 />
+        </div>
+      </div>
+    )
+  },
+  "account-settings-02": function AccountSettings02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <AccountSettings02 />
+        </div>
+      </div>
+    )
+  },
+  "account-settings-03": function AccountSettings03View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <AccountSettings03 />
+        </div>
+      </div>
+    )
+  },
+  "user-profile-01": function UserProfile01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <UserProfile01 />
+        </div>
+      </div>
+    )
+  },
+  "team-members-01": function TeamMembers01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <TeamMembers01 />
+        </div>
+      </div>
+    )
+  },
+  "roles-and-permissions-01": function RolesAndPermissions01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <RolesAndPermissions01 />
+        </div>
+      </div>
+    )
+  },
+  "billing-history-01": function BillingHistory01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <BillingHistory01 />
+        </div>
+      </div>
+    )
+  },
+  "billing-settings-01": function BillingSettings01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <BillingSettings01 />
+        </div>
+      </div>
+    )
+  },
+  "billing-settings-02": function BillingSettings02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <BillingSettings02 />
+        </div>
+      </div>
+    )
+  },
+  "usage-based-billing-01": function UsageBasedBilling01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <UsageBasedBilling01 />
+        </div>
+      </div>
+    )
+  },
+  "usage-based-billing-02": function UsageBasedBilling02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <UsageBasedBilling02 />
+        </div>
+      </div>
+    )
+  },
+  "usage-based-billing-03": function UsageBasedBilling03View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <UsageBasedBilling03 />
+        </div>
+      </div>
+    )
+  },
+  "usage-based-billing-04": function UsageBasedBilling04View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <UsageBasedBilling04 />
+        </div>
+      </div>
+    )
+  },
+  "usage-based-billing-05": function UsageBasedBilling05View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <UsageBasedBilling05 />
+        </div>
+      </div>
+    )
+  },
+  "usage-based-billing-06": function UsageBasedBilling06View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <UsageBasedBilling06 />
+        </div>
+      </div>
+    )
+  },
+  "usage-based-billing-07": function UsageBasedBilling07View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <UsageBasedBilling07 />
+        </div>
+      </div>
+    )
+  },
+  "payment-methods-01": function PaymentMethods01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <PaymentMethods01 />
+        </div>
+      </div>
+    )
+  },
+  "transfer-funds-01": function TransferFunds01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <TransferFunds01 />
+        </div>
+      </div>
+    )
+  },
+  "invoice-01": function Invoice01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Invoice01 />
+        </div>
+      </div>
+    )
+  },
+  "access-denied-01": function AccessDenied01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <AccessDenied01 />
+        </div>
+      </div>
+    )
+  },
+  "not-found-01": function NotFound01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <NotFound01 />
+        </div>
+      </div>
+    )
+  },
+  "error-state-01": function ErrorState01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <ErrorState01 />
+        </div>
+      </div>
+    )
+  },
+  "rate-limit-01": function RateLimit01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <RateLimit01 />
+        </div>
+      </div>
+    )
+  },
+  "maintenance-01": function Maintenance01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Maintenance01 />
+        </div>
+      </div>
+    )
+  },
+  "empty-state-01": function EmptyState01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <EmptyState01 />
+        </div>
+      </div>
+    )
+  },
+  "status-page-01": function StatusPage01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <StatusPage01 />
+        </div>
+      </div>
+    )
+  },
+  "ai-chat-01": function AiChat01View() {
+    return (
+      <div className="flex min-h-svh w-full items-center justify-center bg-white dark:bg-background">
+        <div className="w-full">
+          <AiChat01 />
+        </div>
+      </div>
+    )
+  },
+  "ai-chat-02": function AiChat02View() {
+    return (
+      <div className="flex min-h-svh w-full items-center justify-center bg-white dark:bg-background">
+        <div className="w-full">
+          <AiChat02 />
+        </div>
+      </div>
+    )
+  },
+  "ai-chat-03": function AiChat03View() {
+    return (
+      <div className="flex min-h-svh w-full items-center justify-center bg-white dark:bg-background">
+        <div className="w-full">
+          <AiChat03 />
+        </div>
+      </div>
+    )
+  },
+  "agent-workspace-01": function AgentWorkspace01View() {
+    return (
+      <div className="h-dvh w-full bg-white dark:bg-background">
+        <AgentWorkspace01 />
+      </div>
+    )
+  },
+  "agent-run-timeline": function AgentRunTimelineView() {
+    return (
+      <div className="h-dvh w-full bg-white dark:bg-background">
+        <AgentRunTimeline />
+      </div>
+    )
+  },
+  "chat-composer-01": function ChatComposer01View() {
+    return (
+      <div className="flex min-h-svh w-full items-center justify-center bg-white dark:bg-background">
+        <div className="w-full">
+          <ChatComposer01 />
+        </div>
+      </div>
+    )
+  },
+  "chat-composer-02": function ChatComposer02View() {
+    return (
+      <div className="flex min-h-svh w-full items-center justify-center bg-white dark:bg-background">
+        <div className="w-full">
+          <ChatComposer02 />
+        </div>
+      </div>
+    )
+  },
+  "chat-composer-03": function ChatComposer03View() {
+    return (
+      <div className="flex min-h-svh w-full items-center justify-center bg-white dark:bg-background">
+        <div className="w-full">
+          <ChatComposer03 />
+        </div>
+      </div>
+    )
+  },
+  "chat-composer-04": function ChatComposer04View() {
+    return (
+      <div className="flex min-h-svh w-full items-center justify-center bg-white dark:bg-background">
+        <div className="w-full">
+          <ChatComposer04 />
+        </div>
+      </div>
+    )
+  },
+  "data-export-01": function DataExport01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <DataExport01 />
+        </div>
+      </div>
+    )
+  },
+  "data-export-02": function DataExport02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <DataExport02 />
+        </div>
+      </div>
+    )
+  },
+  "file-manager-01": function FileManager01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <FileManager01 />
+        </div>
+      </div>
+    )
+  },
+  "file-upload-01": function FileUpload01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <FileUpload01 />
+        </div>
+      </div>
+    )
+  },
+  "media-gallery-01": function MediaGallery01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <MediaGallery01 />
+        </div>
+      </div>
+    )
+  },
+  "media-player-01": function MediaPlayer01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <MediaPlayer01 />
+        </div>
+      </div>
+    )
+  },
+  "comments-01": function Comments01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Comments01 />
+        </div>
+      </div>
+    )
+  },
+  "activity-feed-01": function ActivityFeed01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <ActivityFeed01 />
+        </div>
+      </div>
+    )
+  },
+  "activity-feed-02": function ActivityFeed02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <ActivityFeed02 />
+        </div>
+      </div>
+    )
+  },
+  "activity-feed-03": function ActivityFeed03View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <ActivityFeed03 />
+        </div>
+      </div>
+    )
+  },
+  "analytics-dashboard-01": function AnalyticsDashboard01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <AnalyticsDashboard01 />
+        </div>
+      </div>
+    )
+  },
+  "crypto-portfolio-01": function CryptoPortfolio01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <CryptoPortfolio01 />
+        </div>
+      </div>
+    )
+  },
+  "kpi-cards-01": function KpiCards01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas">
+        <div className="w-full">
+          <KpiCards01 />
+        </div>
+      </div>
+    )
+  },
+  "kpi-cards-02": function KpiCards02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas">
+        <div className="w-full">
+          <KpiCards02 />
+        </div>
+      </div>
+    )
+  },
+  "kpi-cards-03": function KpiCards03View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas">
+        <div className="w-full">
+          <KpiCards03 />
+        </div>
+      </div>
+    )
+  },
+  "kpi-cards-04": function KpiCards04View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas">
+        <div className="w-full">
+          <KpiCards04 />
+        </div>
+      </div>
+    )
+  },
+  "calendar-01": function Calendar01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Calendar01 />
+        </div>
+      </div>
+    )
+  },
+  "notification-center-01": function NotificationCenter01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <NotificationCenter01 />
+        </div>
+      </div>
+    )
+  },
+  "setup-wizard-01": function SetupWizard01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <SetupWizard01 />
+        </div>
+      </div>
+    )
+  },
+  "workspace-setup-01": function WorkspaceSetup01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <WorkspaceSetup01 />
+        </div>
+      </div>
+    )
+  },
+  "workspace-setup-02": function WorkspaceSetup02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <WorkspaceSetup02 />
+        </div>
+      </div>
+    )
+  },
+  "progress-checklist-01": function ProgressChecklist01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <ProgressChecklist01 />
+        </div>
+      </div>
+    )
+  },
+  "progress-checklist-02": function ProgressChecklist02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <ProgressChecklist02 />
+        </div>
+      </div>
+    )
+  },
+  "progress-checklist-03": function ProgressChecklist03View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <ProgressChecklist03 />
+        </div>
+      </div>
+    )
+  },
+  "progress-checklist-04": function ProgressChecklist04View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <ProgressChecklist04 />
+        </div>
+      </div>
+    )
+  },
+  "progress-checklist-05": function ProgressChecklist05View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <ProgressChecklist05 />
+        </div>
+      </div>
+    )
+  },
+  "data-import-01": function DataImport01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <DataImport01 />
+        </div>
+      </div>
+    )
+  },
+  "search-results-01": function SearchResults01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <SearchResults01 />
+        </div>
+      </div>
+    )
+  },
+  "filter-panel-01": function FilterPanel01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <FilterPanel01 />
         </div>
       </div>
     )
@@ -1376,7 +2205,7 @@ const views: Record<string, ComponentType> = {
   },
   "checkout-01": function Checkout01View() {
     return (
-      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
         <div className="w-full">
           <Checkout01 />
         </div>
@@ -1385,7 +2214,7 @@ const views: Record<string, ComponentType> = {
   },
   "checkout-02": function Checkout02View() {
     return (
-      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
         <div className="w-full">
           <Checkout02 />
         </div>
@@ -1394,7 +2223,7 @@ const views: Record<string, ComponentType> = {
   },
   "checkout-03": function Checkout03View() {
     return (
-      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
         <div className="w-full">
           <Checkout03 />
         </div>
@@ -1403,7 +2232,7 @@ const views: Record<string, ComponentType> = {
   },
   "checkout-04": function Checkout04View() {
     return (
-      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
         <div className="w-full">
           <Checkout04 />
         </div>
@@ -1412,7 +2241,7 @@ const views: Record<string, ComponentType> = {
   },
   "checkout-05": function Checkout05View() {
     return (
-      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
         <div className="w-full">
           <Checkout05 />
         </div>
@@ -1421,7 +2250,7 @@ const views: Record<string, ComponentType> = {
   },
   "checkout-06": function Checkout06View() {
     return (
-      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
         <div className="w-full">
           <Checkout06 />
         </div>
@@ -1442,6 +2271,24 @@ const views: Record<string, ComponentType> = {
       <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-0 py-0">
         <div className="w-full">
           <Checkout08 />
+        </div>
+      </div>
+    )
+  },
+  "checkout-09": function Checkout09View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Checkout09 />
+        </div>
+      </div>
+    )
+  },
+  "order-confirmation-01": function OrderConfirmation01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <OrderConfirmation01 />
         </div>
       </div>
     )
@@ -1572,9 +2419,18 @@ const views: Record<string, ComponentType> = {
       </div>
     )
   },
+  "product-details-09": function ProductDetails09View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <ProductDetails09 />
+        </div>
+      </div>
+    )
+  },
   "shopping-cart-01": function ShoppingCart01View() {
     return (
-      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0">
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
         <div className="w-full">
           <ShoppingCart01 />
         </div>
@@ -1583,7 +2439,7 @@ const views: Record<string, ComponentType> = {
   },
   "shopping-cart-02": function ShoppingCart02View() {
     return (
-      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0">
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
         <div className="w-full">
           <ShoppingCart02 />
         </div>
@@ -1592,7 +2448,7 @@ const views: Record<string, ComponentType> = {
   },
   "shopping-cart-03": function ShoppingCart03View() {
     return (
-      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0">
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
         <div className="w-full">
           <ShoppingCart03 />
         </div>
@@ -1601,7 +2457,7 @@ const views: Record<string, ComponentType> = {
   },
   "shopping-cart-04": function ShoppingCart04View() {
     return (
-      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0">
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
         <div className="w-full">
           <ShoppingCart04 />
         </div>
@@ -1610,7 +2466,7 @@ const views: Record<string, ComponentType> = {
   },
   "shopping-cart-05": function ShoppingCart05View() {
     return (
-      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0">
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
         <div className="w-full">
           <ShoppingCart05 />
         </div>
@@ -1619,7 +2475,7 @@ const views: Record<string, ComponentType> = {
   },
   "shopping-cart-06": function ShoppingCart06View() {
     return (
-      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0">
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
         <div className="w-full">
           <ShoppingCart06 />
         </div>
@@ -1628,7 +2484,7 @@ const views: Record<string, ComponentType> = {
   },
   "shopping-cart-07": function ShoppingCart07View() {
     return (
-      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0">
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
         <div className="w-full">
           <ShoppingCart07 />
         </div>
@@ -1637,7 +2493,7 @@ const views: Record<string, ComponentType> = {
   },
   "shopping-cart-08": function ShoppingCart08View() {
     return (
-      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0">
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
         <div className="w-full">
           <ShoppingCart08 />
         </div>
@@ -1646,9 +2502,315 @@ const views: Record<string, ComponentType> = {
   },
   "shopping-cart-09": function ShoppingCart09View() {
     return (
-      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0">
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
         <div className="w-full">
           <ShoppingCart09 />
+        </div>
+      </div>
+    )
+  },
+  "shopping-cart-10": function ShoppingCart10View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <ShoppingCart10 />
+        </div>
+      </div>
+    )
+  },
+  "wishlist-01": function Wishlist01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Wishlist01 />
+        </div>
+      </div>
+    )
+  },
+  "order-tracking-01": function OrderTracking01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <OrderTracking01 />
+        </div>
+      </div>
+    )
+  },
+  "order-tracking-02": function OrderTracking02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <OrderTracking02 />
+        </div>
+      </div>
+    )
+  },
+  "order-tracking-03": function OrderTracking03View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <OrderTracking03 />
+        </div>
+      </div>
+    )
+  },
+  "order-tracking-04": function OrderTracking04View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <OrderTracking04 />
+        </div>
+      </div>
+    )
+  },
+  "order-tracking-05": function OrderTracking05View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <OrderTracking05 />
+        </div>
+      </div>
+    )
+  },
+  "order-tracking-06": function OrderTracking06View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <OrderTracking06 />
+        </div>
+      </div>
+    )
+  },
+  "order-tracking-07": function OrderTracking07View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <OrderTracking07 />
+        </div>
+      </div>
+    )
+  },
+  "order-history-01": function OrderHistory01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <OrderHistory01 />
+        </div>
+      </div>
+    )
+  },
+  "order-history-02": function OrderHistory02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <OrderHistory02 />
+        </div>
+      </div>
+    )
+  },
+  "order-history-03": function OrderHistory03View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <OrderHistory03 />
+        </div>
+      </div>
+    )
+  },
+  "order-history-04": function OrderHistory04View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <OrderHistory04 />
+        </div>
+      </div>
+    )
+  },
+  "order-history-05": function OrderHistory05View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <OrderHistory05 />
+        </div>
+      </div>
+    )
+  },
+  "order-history-06": function OrderHistory06View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <OrderHistory06 />
+        </div>
+      </div>
+    )
+  },
+  "order-history-07": function OrderHistory07View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <OrderHistory07 />
+        </div>
+      </div>
+    )
+  },
+  "order-history-08": function OrderHistory08View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <OrderHistory08 />
+        </div>
+      </div>
+    )
+  },
+  "product-filter-01": function ProductFilter01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <ProductFilter01 />
+        </div>
+      </div>
+    )
+  },
+  "product-filter-02": function ProductFilter02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <ProductFilter02 />
+        </div>
+      </div>
+    )
+  },
+  "product-filter-03": function ProductFilter03View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <ProductFilter03 />
+        </div>
+      </div>
+    )
+  },
+  "product-filter-04": function ProductFilter04View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <ProductFilter04 />
+        </div>
+      </div>
+    )
+  },
+  "product-review-01": function ProductReview01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <ProductReview01 />
+        </div>
+      </div>
+    )
+  },
+  "product-review-02": function ProductReview02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <ProductReview02 />
+        </div>
+      </div>
+    )
+  },
+  "product-review-03": function ProductReview03View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <ProductReview03 />
+        </div>
+      </div>
+    )
+  },
+  "product-review-04": function ProductReview04View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <ProductReview04 />
+        </div>
+      </div>
+    )
+  },
+  "product-review-05": function ProductReview05View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <ProductReview05 />
+        </div>
+      </div>
+    )
+  },
+  "product-categories-01": function ProductCategories01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <ProductCategories01 />
+        </div>
+      </div>
+    )
+  },
+  "product-categories-02": function ProductCategories02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-zinc-950 px-0 py-0">
+        <div className="w-full">
+          <ProductCategories02 />
+        </div>
+      </div>
+    )
+  },
+  "product-categories-03": function ProductCategories03View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <ProductCategories03 />
+        </div>
+      </div>
+    )
+  },
+  "product-categories-04": function ProductCategories04View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <ProductCategories04 />
+        </div>
+      </div>
+    )
+  },
+  "product-categories-05": function ProductCategories05View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <ProductCategories05 />
+        </div>
+      </div>
+    )
+  },
+  "product-categories-06": function ProductCategories06View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <ProductCategories06 />
+        </div>
+      </div>
+    )
+  },
+  "product-categories-07": function ProductCategories07View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <ProductCategories07 />
+        </div>
+      </div>
+    )
+  },
+  "product-categories-08": function ProductCategories08View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-muted px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <ProductCategories08 />
         </div>
       </div>
     )
@@ -2002,6 +3164,24 @@ const views: Record<string, ComponentType> = {
       </div>
     )
   },
+  "hero-11": function Hero11View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Hero11 />
+        </div>
+      </div>
+    )
+  },
+  "hero-12": function Hero12View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Hero12 />
+        </div>
+      </div>
+    )
+  },
   "newsletter-01": function Newsletter01View() {
     return (
       <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-0 py-12 md:px-8">
@@ -2079,6 +3259,33 @@ const views: Record<string, ComponentType> = {
       <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-0 py-12 md:px-8">
         <div className="w-full max-w-6xl">
           <Newsletter09 />
+        </div>
+      </div>
+    )
+  },
+  "newsletter-10": function Newsletter10View() {
+    return (
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Newsletter10 />
+        </div>
+      </div>
+    )
+  },
+  "portfolio-01": function Portfolio01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Portfolio01 />
+        </div>
+      </div>
+    )
+  },
+  "social-links-01": function SocialLinks01View() {
+    return (
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <SocialLinks01 />
         </div>
       </div>
     )
@@ -2599,6 +3806,15 @@ const views: Record<string, ComponentType> = {
       </div>
     )
   },
+  "application-form-01": function ApplicationForm01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <ApplicationForm01 />
+        </div>
+      </div>
+    )
+  },
   "contact-form-01": function ContactForm01View() {
     return (
       <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-8 py-12">
@@ -2896,6 +4112,13 @@ const views: Record<string, ComponentType> = {
   "sidebar-06": AccentSidebar,
   "sidebar-07": SearchSidebar,
   "sidebar-08": ChatSidebar,
+  "sidebar-09": function DualRailSidebarView() {
+    return (
+      <div className="h-svh w-full bg-white dark:bg-background">
+        <DualRailSidebar className="h-svh min-h-0" />
+      </div>
+    )
+  },
   "rating-01": function Rating01View() {
     return (
       <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-10 py-10">

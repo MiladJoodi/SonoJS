@@ -1,0 +1,33 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "faq-01",
+  "type": "registry:block",
+  "title": "faq-01",
+  "description": "Centered FAQ list with plus/minus toggles and single-open accordion panels.",
+  "cssVars": {
+    "light": {
+      "canvas": "#f3f3f4",
+      "border-soft": "color-mix(in oklab, #e4e4e7 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18)",
+      "background": "var(--canvas)",
+      "card": "#ffffff"
+    },
+    "dark": {
+      "canvas": "#09090b",
+      "border-soft": "color-mix(in oklab, #27272a 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(0, 0, 0, 0.24), 0 28px 56px -28px rgba(0, 0, 0, 0.48)",
+      "background": "var(--canvas)",
+      "card": "#18181b"
+    }
+  },
+  "files": [
+    {
+      "path": "components/blocks/marketing/faq-01/faq.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst faqData = [\n  {\n    question: \"Are there any special discounts or early bird offers?\",\n    answer:\n      \"Yes! We offer limited-time early bird discounts and bundle packages for group registrations. Be sure to sign up early to grab the best deals.\",\n  },\n  {\n    question: \"What are the dates and locations for the product launch events?\",\n    answer:\n      \"The launch events will take place in New York on July 18th, San Francisco on July 25th, and virtually on August 1st. Detailed schedules will be emailed after registration.\",\n  },\n  {\n    question: \"Can I bring a guest to the product launch?\",\n    answer:\n      \"Yes, you may bring one guest with you. Please ensure that both names are included during registration as seats are limited.\",\n  },\n  {\n    question: \"How do I register for the event?\",\n    answer:\n      'Simply visit our official website and click the \"Register\" button at the top of the page. You’ll receive a confirmation email within minutes.',\n  },\n  {\n    question: \"Is parking available at the event venue?\",\n    answer:\n      \"Yes, most venues have dedicated parking areas for attendees. You’ll receive parking details in your confirmation email.\",\n  },\n  {\n    question: \"How can I contact the event organizers?\",\n    answer:\n      \"For any inquiries, you can email us at events@yourcompany.com or call our support line at +1 (800) 123-4567 between 9 AM – 5 PM.\",\n  },\n] as const\n\nfunction PlusMinusIcon({\n  open,\n  className,\n}: {\n  open: boolean\n  className?: string\n}) {\n  return (\n    <svg\n      xmlns=\"http://www.w3.org/2000/svg\"\n      viewBox=\"0 0 512 512\"\n      className={cn(\"size-3.5 shrink-0 fill-current\", className)}\n      aria-hidden\n    >\n      <path d=\"M40.421 215.579H471.579C493.868 215.579 512 233.711 512 256s-18.132 40.421-40.421 40.421H40.421C18.132 296.421 0 278.289 0 256s18.132-40.421 40.421-40.421z\" />\n      <path\n        className={cn(\n          \"origin-center transition-opacity duration-300\",\n          open ? \"opacity-0\" : \"opacity-100\"\n        )}\n        d=\"M215.579 40.421C215.579 18.132 233.711 0 256 0s40.421 18.132 40.421 40.421v431.158C296.421 493.868 278.289 512 256 512s-40.421-18.132-40.421-40.421V40.421z\"\n      />\n    </svg>\n  )\n}\n\nexport default function Faq({\n  className,\n  ...props\n}: React.ComponentProps<\"section\">) {\n  const uid = React.useId()\n\n  const [openIndex, setOpenIndex] = React.useState<number | null>(0)\n\n  return (\n    <section\n      className={cn(\"w-full bg-card px-4 py-12 md:px-8 md:py-16\", className)}\n      aria-labelledby={`${uid}-title`}\n      {...props}\n    >\n      <div className=\"mx-auto mb-8 max-w-3xl text-center md:mb-10\">\n        <h2\n          id={`${uid}-title`}\n          className=\"text-2xl font-semibold tracking-tight text-foreground md:text-3xl\"\n        >\n          Frequently Asked Questions\n        </h2>\n      </div>\n\n      <div className=\"mx-auto max-w-4xl\">\n        <div className=\"divide-y divide-border\">\n          {faqData.map((item, index) => {\n            const isOpen = openIndex === index\n            const headingId = `${uid}-heading-${index}`\n            const panelId = `${uid}-panel-${index}`\n\n            return (\n              <div key={item.question} className=\"py-5 md:py-6\">\n                <h3 id={headingId}>\n                  <button\n                    type=\"button\"\n                    aria-expanded={isOpen}\n                    aria-controls={panelId}\n                    onClick={() => setOpenIndex(isOpen ? null : index)}\n                    className=\"flex w-full cursor-pointer items-center gap-4 rounded-md text-start text-base font-semibold text-foreground outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring\"\n                  >\n                    <span className=\"min-w-0 flex-1\">{item.question}</span>\n                    <PlusMinusIcon open={isOpen} className=\"text-foreground\" />\n                  </button>\n                </h3>\n\n                <div\n                  id={panelId}\n                  role=\"region\"\n                  aria-labelledby={headingId}\n                  aria-hidden={!isOpen}\n                  inert={!isOpen ? true : undefined}\n                  style={{ gridTemplateRows: isOpen ? \"1fr\" : \"0fr\" }}\n        className=\"grid overflow-hidden transition-[grid-template-rows] duration-300 ease-in-out\"\n                >\n                  <div className=\"min-h-0 overflow-hidden\">\n                    <p className=\"pt-4 text-base leading-relaxed text-muted-foreground\">\n                      {item.answer}\n                    </p>\n                  </div>\n                </div>\n              </div>\n            )\n          })}\n        </div>\n      </div>\n    </section>\n  )\n}\n",
+      "target": "components/blocks/marketing/faq-01/faq.tsx"
+    }
+  ],
+  "version": "0.1.0+0c67e178c74a",
+  "generatedAt": "2026-10-27T19:05:53.101Z"
+}

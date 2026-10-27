@@ -1,0 +1,36 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "how-it-works-01",
+  "type": "registry:block",
+  "title": "how-it-works-01",
+  "description": "How it works — numbered four-step path with bottom CTA bar for get started and explore blocks.",
+  "registryDependencies": [
+    "button"
+  ],
+  "cssVars": {
+    "light": {
+      "canvas": "#f3f3f4",
+      "border-soft": "color-mix(in oklab, #e4e4e7 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18)",
+      "background": "var(--canvas)",
+      "card": "#ffffff"
+    },
+    "dark": {
+      "canvas": "#09090b",
+      "border-soft": "color-mix(in oklab, #27272a 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(0, 0, 0, 0.24), 0 28px 56px -28px rgba(0, 0, 0, 0.48)",
+      "background": "var(--canvas)",
+      "card": "#18181b"
+    }
+  },
+  "files": [
+    {
+      "path": "components/blocks/marketing/how-it-works-01/how-it-works.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport type * as React from \"react\"\n\nimport { Button } from \"@/components/ui/button\"\nimport { cn } from \"@/lib/utils\"\n\nconst STEPS = [\n  {\n    title: \"Install the packages\",\n    description:\n      \"Add the SonoJS packages your project needs, then import a theme preset in your CSS.\",\n    detail: \"React · Tailwind CSS\",\n  },\n  {\n    title: \"Choose your theme\",\n    description:\n      \"Start with a preset. Use semantic color tokens to keep light and dark modes consistent.\",\n    detail: \"Presets · Light and dark\",\n  },\n  {\n    title: \"Build your interface\",\n    description:\n      \"Compose individual components or start from a block. Adapt the content and layout to fit your product.\",\n    detail: \"Typed components · Portable examples\",\n  },\n  {\n    title: \"Review and ship\",\n    description:\n      \"Check your layout at different screen sizes, test keyboard navigation, and connect your application data.\",\n    detail: \"Responsive layouts · Accessible interactions\",\n  },\n] as const\n\nexport default function HowItWorks({\n  className,\n  ...props\n}: React.ComponentProps<\"section\">) {\n  return (\n    <section\n      className={cn(\n        \"w-full bg-canvas py-16 text-foreground sm:py-24\",\n        className\n      )}\n      aria-labelledby=\"how-it-works-01-heading\"\n      {...props}\n    >\n      <div className=\"mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8\">\n        <div className=\"max-w-2xl text-start\">\n          <p className=\"text-sm font-medium text-primary\">How it works</p>\n          <h1\n            id=\"how-it-works-01-heading\"\n            className=\"mt-4 text-h1 font-semibold tracking-tight text-foreground\"\n          >\n            A clear path from setup to shipping.\n          </h1>\n          <p className=\"mt-5 leading-relaxed text-muted-foreground\">\n            A small set of steps to build a consistent interface with SonoJS.\n          </p>\n        </div>\n\n        <ol className=\"mt-12 grid gap-8 border-t border-border/70 pt-8 sm:grid-cols-2 lg:grid-cols-4\">\n          {STEPS.map((step, index) => (\n            <li key={step.title} className=\"min-w-0 text-start\">\n              <span\n                dir=\"ltr\"\n                className=\"text-sm font-medium tabular-nums text-primary\"\n              >\n                0{index + 1}\n              </span>\n              <h2 className=\"mt-5 text-lg font-semibold text-foreground\">\n                {step.title}\n              </h2>\n              <p className=\"mt-3 text-sm leading-relaxed text-muted-foreground\">\n                {step.description}\n              </p>\n              <p className=\"mt-5 text-xs text-muted-foreground\">{step.detail}</p>\n            </li>\n          ))}\n        </ol>\n\n        <div className=\"mt-12 flex flex-col items-start justify-between gap-5 rounded-[12px] border border-border/70 bg-card p-6 shadow-soft sm:flex-row sm:items-center\">\n          <div className=\"min-w-0 text-start\">\n            <h2 className=\"text-lg font-semibold text-foreground\">\n              Start with a working foundation.\n            </h2>\n            <p className=\"mt-2 text-sm text-muted-foreground\">\n              Follow the installation guide or explore the block collection.\n            </p>\n          </div>\n          <div className=\"flex flex-wrap gap-3\">\n            <Button asChild>\n              <a href=\"#\">Get started</a>\n            </Button>\n            <Button asChild variant=\"outline\">\n              <a href=\"#\">Explore blocks</a>\n            </Button>\n          </div>\n        </div>\n      </div>\n    </section>\n  )\n}\n",
+      "target": "components/blocks/marketing/how-it-works-01/how-it-works.tsx"
+    }
+  ],
+  "version": "0.1.0+0c67e178c74a",
+  "generatedAt": "2026-10-27T19:05:53.101Z"
+}

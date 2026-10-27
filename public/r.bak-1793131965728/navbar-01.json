@@ -1,0 +1,40 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "navbar-01",
+  "type": "registry:block",
+  "title": "navbar-01",
+  "description": "Minimal navbar: logo, links, and one CTA.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "button",
+    "sheet"
+  ],
+  "cssVars": {
+    "light": {
+      "canvas": "#f3f3f4",
+      "border-soft": "color-mix(in oklab, #e4e4e7 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18)",
+      "background": "var(--canvas)",
+      "card": "#ffffff"
+    },
+    "dark": {
+      "canvas": "#09090b",
+      "border-soft": "color-mix(in oklab, #27272a 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(0, 0, 0, 0.24), 0 28px 56px -28px rgba(0, 0, 0, 0.48)",
+      "background": "var(--canvas)",
+      "card": "#18181b"
+    }
+  },
+  "files": [
+    {
+      "path": "components/blocks/navigation/navbar-01/navbar.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport { MenuIcon } from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { Button } from \"@/components/ui/button\"\nimport {\n  Sheet,\n  SheetContent,\n  SheetHeader,\n  SheetTitle,\n  SheetTrigger,\n} from \"@/components/ui/sheet\"\n\nconst links = [\n  { label: \"Product\", href: \"#\" },\n  { label: \"Pricing\", href: \"#\" },\n  { label: \"Docs\", href: \"#\" },\n]\n\nconst ctaClass =\n  \"!h-[46px] h-[46px] min-h-[46px] max-h-[46px] rounded-[12px] shadow-none\"\n\nconst iconBtn =\n  \"size-[46px] min-h-[46px] max-h-[46px] min-w-[46px] max-w-[46px] rounded-[12px] border-border/70 shadow-none\"\n\nfunction Brand() {\n  return (\n    <a\n      href=\"#\"\n      className=\"flex cursor-pointer items-center gap-2 outline-none focus-visible:rounded-md focus-visible:ring-2 focus-visible:ring-ring\"\n    >\n      <img\n        src=\"/images/logos/logo.svg\"\n        alt=\"\"\n        width={28}\n        height={32}\n        className=\"h-8 w-auto shrink-0\"\n      />\n      <span className=\"text-sm font-semibold tracking-tight text-foreground\">\n        Sono\n      </span>\n    </a>\n  )\n}\n\nexport default function Navbar({\n  className,\n  ...props\n}: React.ComponentProps<\"div\">) {\n  return (\n    <div\n      className={cn(\"flex min-h-[28rem] w-full flex-col bg-card\", className)}\n      {...props}>\n      <div className=\"border-b border-border/70 bg-canvas/80 px-4 py-5 sm:px-6\">\n        <header\n          className={cn(\n            \"mx-auto flex min-h-[62px] w-full max-w-3xl items-center gap-4 rounded-[12px] border border-border/70 bg-card pe-1.5 ps-4\",\n            \"shadow-[0_2px_4px_-1px_rgba(10,10,12,0.04),0_16px_32px_-20px_rgba(10,10,12,0.18)]\",\n            \"dark:shadow-[0_2px_4px_-1px_rgba(0,0,0,0.24),0_16px_32px_-20px_rgba(0,0,0,0.48)]\"\n          )}>\n          <Brand />\n          <nav className=\"ms-2 hidden items-center gap-0.5 md:flex\">\n            {links.map((link) => (\n              <a\n                key={link.label}\n                href={link.href}\n                className=\"cursor-pointer rounded-md px-2.5 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground\"\n              >\n                {link.label}\n              </a>\n            ))}\n          </nav>\n          <Button className={cn(\"ms-auto md:ms-auto\", ctaClass)}>\n            Get started\n          </Button>\n          <Sheet>\n            <SheetTrigger asChild>\n              <Button\n                variant=\"outline\"\n                className={cn(iconBtn, \"md:hidden\")}\n                aria-label=\"Open menu\"\n              >\n                <MenuIcon className=\"size-4\" />\n              </Button>\n            </SheetTrigger>\n            <SheetContent\n              side=\"start\"\n              className=\"flex w-[min(100%,18rem)] flex-col gap-0 border-border/70 p-0\"\n            >\n              <SheetHeader className=\"border-b border-border/70 px-4 py-4 text-start\">\n                <SheetTitle className=\"sr-only\">Menu</SheetTitle>\n                <Brand />\n              </SheetHeader>\n              <nav className=\"flex flex-1 flex-col gap-0.5 overflow-y-auto p-3\">\n                {links.map((link) => (\n                  <a\n                    key={link.label}\n                    href={link.href}\n                    className=\"cursor-pointer rounded-[12px] px-3 py-3 text-sm font-medium text-foreground hover:bg-muted\"\n                  >\n                    {link.label}\n                  </a>\n                ))}\n              </nav>\n            </SheetContent>\n          </Sheet>\n        </header>\n      </div>\n      <main className=\"mx-auto flex w-full max-w-3xl flex-1 flex-col justify-center gap-3 px-6 py-14\">\n        <span className=\"h-0.5 w-8 rounded-full bg-primary\" aria-hidden />\n        <h1 className=\"max-w-md text-balance text-h3 text-foreground\">\n          Minimal floating bar\n        </h1>\n        <p className=\"max-w-sm text-sm text-muted-foreground\">\n          Logo, a few links, one CTA — for quiet product pages.\n        </p>\n      </main>\n    </div>\n  )\n}\n",
+      "target": "components/blocks/navigation/navbar-01/navbar.tsx"
+    }
+  ],
+  "version": "0.1.0+55ca011705c9",
+  "generatedAt": "2026-10-27T20:11:50.866Z"
+}

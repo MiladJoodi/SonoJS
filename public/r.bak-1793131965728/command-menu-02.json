@@ -1,0 +1,42 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "command-menu-02",
+  "type": "registry:block",
+  "title": "command-menu-02",
+  "description": "Global ⌘K app launcher with Go to / Actions groups and a keyboard hint footer.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "badge",
+    "button",
+    "command",
+    "kbd"
+  ],
+  "cssVars": {
+    "light": {
+      "canvas": "#f3f3f4",
+      "border-soft": "color-mix(in oklab, #e4e4e7 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18)",
+      "background": "var(--canvas)",
+      "card": "#ffffff"
+    },
+    "dark": {
+      "canvas": "#09090b",
+      "border-soft": "color-mix(in oklab, #27272a 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(0, 0, 0, 0.24), 0 28px 56px -28px rgba(0, 0, 0, 0.48)",
+      "background": "var(--canvas)",
+      "card": "#18181b"
+    }
+  },
+  "files": [
+    {
+      "path": "components/blocks/navigation/command-menu-02/command-menu.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport {\n  ArrowDownIcon,\n  ArrowUpIcon,\n  CreditCardIcon,\n  HomeIcon,\n  InboxIcon,\n  PlusIcon,\n  SettingsIcon,\n  UserIcon,\n} from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { Badge } from \"@/components/ui/badge\"\nimport { Button } from \"@/components/ui/button\"\nimport {\n  Command,\n  CommandDialog,\n  CommandEmpty,\n  CommandGroup,\n  CommandInput,\n  CommandItem,\n  CommandList,\n  CommandSeparator,\n  CommandShortcut,\n} from \"@/components/ui/command\"\nimport { Kbd, KbdGroup } from \"@/components/ui/kbd\"\n\nexport default function CommandMenu({\n  className,\n  ...props\n}: React.ComponentProps<\"div\">) {\n  const [open, setOpen] = React.useState(false)\n\n  React.useEffect(() => {\n    function onKeyDown(e: KeyboardEvent) {\n      if (e.key === \"k\" && (e.metaKey || e.ctrlKey)) {\n        e.preventDefault()\n        setOpen((v) => !v)\n      }\n    }\n    document.addEventListener(\"keydown\", onKeyDown)\n    return () => document.removeEventListener(\"keydown\", onKeyDown)\n  }, [])\n\n  return (\n    <div\n      className={cn(\n        \"flex min-h-[28rem] w-full flex-1 flex-col bg-canvas\",\n        className\n      )}\n      {...props}\n    >\n      <header className=\"border-b border-border/70 px-4 py-3 sm:px-6\">\n        <p className=\"text-start text-sm font-medium text-foreground\">\n          App launcher\n        </p>\n        <p className=\"text-start text-xs text-muted-foreground\">\n          Global command palette with keyboard hints.\n        </p>\n      </header>\n\n      <main className=\"flex flex-1 flex-col items-center justify-center gap-4 px-4 py-10 sm:px-6\">\n        <Button\n          type=\"button\"\n          variant=\"outline\"\n          className=\"max-w-full cursor-pointer gap-2\"\n          onClick={() => setOpen(true)}\n        >\n          <span className=\"truncate\">Jump anywhere</span>\n          <KbdGroup className=\"ms-auto shrink-0\" dir=\"ltr\">\n            <Kbd>⌘</Kbd>\n            <Kbd>K</Kbd>\n          </KbdGroup>\n        </Button>\n        <p className=\"max-w-xs text-center text-sm text-muted-foreground\">\n          Open with the button or press{\" \"}\n          <span dir=\"ltr\" className=\"font-mono text-foreground\">\n            ⌘K\n          </span>\n          .\n        </p>\n      </main>\n\n      <CommandDialog open={open} onOpenChange={setOpen}>\n        <Command className=\"bg-popover text-popover-foreground\">\n          <CommandInput placeholder=\"Go to page or run action…\" />\n          <CommandList className=\"max-h-[min(20rem,50dvh)]\">\n            <CommandEmpty>No matches.</CommandEmpty>\n            <CommandGroup heading=\"Go to\">\n              <CommandItem className=\"cursor-pointer\">\n                <HomeIcon />\n                <span className=\"min-w-0 flex-1 truncate text-start\">Home</span>\n                <CommandShortcut dir=\"ltr\">G H</CommandShortcut>\n              </CommandItem>\n              <CommandItem className=\"cursor-pointer\">\n                <InboxIcon />\n                <span className=\"min-w-0 flex-1 truncate text-start\">Inbox</span>\n                <CommandShortcut dir=\"ltr\">G I</CommandShortcut>\n              </CommandItem>\n              <CommandItem className=\"cursor-pointer\">\n                <UserIcon />\n                <span className=\"min-w-0 flex-1 truncate text-start\">\n                  Profile\n                </span>\n                <CommandShortcut dir=\"ltr\">G P</CommandShortcut>\n              </CommandItem>\n            </CommandGroup>\n            <CommandSeparator />\n            <CommandGroup heading=\"Actions\">\n              <CommandItem className=\"cursor-pointer\">\n                <PlusIcon />\n                <span className=\"min-w-0 flex-1 truncate text-start\">\n                  New issue\n                </span>\n                <CommandShortcut dir=\"ltr\">C</CommandShortcut>\n              </CommandItem>\n              <CommandItem className=\"cursor-pointer\">\n                <CreditCardIcon />\n                <span className=\"min-w-0 flex-1 truncate text-start\">\n                  Billing\n                </span>\n              </CommandItem>\n              <CommandItem className=\"cursor-pointer\">\n                <SettingsIcon />\n                <span className=\"min-w-0 flex-1 truncate text-start\">\n                  Settings\n                </span>\n                <CommandShortcut dir=\"ltr\">⌘,</CommandShortcut>\n              </CommandItem>\n            </CommandGroup>\n          </CommandList>\n          <div className=\"flex flex-wrap items-center justify-between gap-x-3 gap-y-2 border-t border-border/70 px-3 py-2.5\">\n            <div className=\"flex flex-wrap items-center gap-3 text-xs text-muted-foreground\">\n              <span className=\"inline-flex items-center gap-1.5\">\n                <Badge\n                  variant=\"secondary\"\n                  className=\"gap-0.5 px-1\"\n                  dir=\"ltr\"\n                  aria-hidden\n                >\n                  <ArrowUpIcon className=\"size-3\" />\n                  <ArrowDownIcon className=\"size-3\" />\n                </Badge>\n                Move\n              </span>\n              <span className=\"inline-flex items-center gap-1.5\">\n                <Badge variant=\"secondary\" className=\"px-1.5\" dir=\"ltr\">\n                  ↵\n                </Badge>\n                Open\n              </span>\n            </div>\n            <span\n              className=\"inline-flex items-center gap-1.5 text-xs text-muted-foreground\"\n              dir=\"ltr\"\n            >\n              <Kbd>esc</Kbd>\n              <span dir=\"auto\">close</span>\n            </span>\n          </div>\n        </Command>\n      </CommandDialog>\n    </div>\n  )\n}\n",
+      "target": "components/blocks/navigation/command-menu-02/command-menu.tsx"
+    }
+  ],
+  "version": "0.1.0+55ca011705c9",
+  "generatedAt": "2026-10-27T20:11:50.866Z"
+}

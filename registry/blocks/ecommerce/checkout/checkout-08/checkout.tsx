@@ -152,10 +152,10 @@ export default function Checkout({
         <SheetContent
           side="end"
           showCloseButton
-          className="flex w-full max-w-full flex-col gap-0 overflow-hidden p-0 sm:max-w-lg"
+          className="flex h-svh max-h-svh w-full max-w-md flex-col gap-0 overflow-hidden p-0 sm:max-w-md"
         >
-          <SheetHeader className="shrink-0 border-b border-border/70 px-5 py-4 pe-12 text-start sm:px-6">
-            <SheetTitle className="text-lg font-semibold tracking-tight">
+          <SheetHeader className="shrink-0 border-b border-border/70 px-5 py-3.5 pe-12 text-start sm:px-6">
+            <SheetTitle className="text-base font-semibold tracking-tight">
               Shopping cart
             </SheetTitle>
             <SheetDescription className="sr-only">
@@ -164,16 +164,16 @@ export default function Checkout({
             </SheetDescription>
           </SheetHeader>
 
-          <div className="min-h-0 flex-1 overflow-y-auto px-5 py-5 sm:px-6">
-            <form
-              id="checkout-08-form"
-              className="space-y-8 pb-4"
-              onSubmit={(e) => {
-                e.preventDefault()
-                setOpen(false)
-              }}
-            >
-              <div className="rounded-[12px] bg-muted/60 p-5 sm:p-6">
+          <form
+            id="checkout-08-form"
+            className="flex min-h-0 flex-1 flex-col"
+            onSubmit={(e) => {
+              e.preventDefault()
+              setOpen(false)
+            }}
+          >
+            <div className="min-h-0 flex-1 space-y-6 overflow-y-auto px-5 py-5 sm:px-6">
+              <div className="rounded-[12px] bg-muted/60 p-4">
                 <ul className="divide-y divide-border/70 text-sm">
                   {(
                     [
@@ -186,7 +186,7 @@ export default function Checkout({
                     <li
                       key={label}
                       className={cn(
-                        "flex items-center justify-between gap-3 py-3 first:pt-0 last:pb-0",
+                        "flex items-center justify-between gap-3 py-2.5 first:pt-0 last:pb-0",
                         i === arr.length - 1
                           ? "font-semibold text-foreground"
                           : "text-muted-foreground"
@@ -209,13 +209,13 @@ export default function Checkout({
                 </ul>
               </div>
 
-              <fieldset className="space-y-5">
-                <legend className="text-start text-xl font-semibold tracking-tight text-foreground">
+              <fieldset className="space-y-3">
+                <legend className="text-start text-base font-semibold tracking-tight text-foreground">
                   Delivery Details
                 </legend>
-                <div className="space-y-4">
+                <div className="space-y-3">
                   {DELIVERY_FIELDS.map((field) => (
-                    <div key={field.id} className="space-y-2">
+                    <div key={field.id} className="space-y-1.5">
                       <Label htmlFor={`checkout-08-${field.id}`}>
                         {field.label}
                       </Label>
@@ -237,19 +237,19 @@ export default function Checkout({
                 </div>
               </fieldset>
 
-              <fieldset className="space-y-5">
-                <legend className="text-start text-xl font-semibold tracking-tight text-foreground">
+              <fieldset className="space-y-3">
+                <legend className="text-start text-base font-semibold tracking-tight text-foreground">
                   Payment method
                 </legend>
                 <RadioGroup
                   value={paymentMethod}
                   onValueChange={setPaymentMethod}
-                  className="grid gap-4 sm:grid-cols-2"
+                  className="grid gap-3"
                 >
                   <label
                     htmlFor="checkout-08-card"
                     className={cn(
-                      "flex cursor-pointer items-center gap-3 rounded-[12px] border border-border/70 bg-card px-3 py-3 shadow-soft",
+                      "flex cursor-pointer items-center gap-3 rounded-[12px] border border-border/70 bg-card px-3 py-2.5 shadow-soft",
                       paymentMethod === "card" &&
                         "border-primary/40 bg-primary/5"
                     )}
@@ -257,19 +257,19 @@ export default function Checkout({
                     <RadioGroupItem value="card" id="checkout-08-card" />
                     <span className="sr-only">Card</span>
                     <span className="flex flex-wrap gap-1.5" aria-hidden>
-                      <img src={assetSrc(visaMark)} alt="" className="h-6" />
-                      <img src={assetSrc(amexMark)} alt="" className="h-6" />
+                      <img src={assetSrc(visaMark)} alt="" className="h-5" />
+                      <img src={assetSrc(amexMark)} alt="" className="h-5" />
                       <img
                         src={assetSrc(mastercardMark)}
                         alt=""
-                        className="h-6"
+                        className="h-5"
                       />
                     </span>
                   </label>
                   <label
                     htmlFor="checkout-08-paypal"
                     className={cn(
-                      "flex cursor-pointer items-center gap-3 rounded-[12px] border border-border/70 bg-card px-3 py-3 shadow-soft",
+                      "flex cursor-pointer items-center gap-3 rounded-[12px] border border-border/70 bg-card px-3 py-2.5 shadow-soft",
                       paymentMethod === "paypal" &&
                         "border-primary/40 bg-primary/5"
                     )}
@@ -280,14 +280,14 @@ export default function Checkout({
                       src={assetSrc(paypalMark)}
                       alt=""
                       aria-hidden
-                      className="h-7"
+                      className="h-6"
                     />
                   </label>
                 </RadioGroup>
 
-                <div className="space-y-4">
+                <div className="space-y-3">
                   {CARD_FIELDS.map((field) => (
-                    <div key={field.id} className="space-y-2">
+                    <div key={field.id} className="space-y-1.5">
                       <Label htmlFor={`checkout-08-${field.id}`}>
                         {field.label}
                       </Label>
@@ -320,15 +320,17 @@ export default function Checkout({
                   Billing address is the same as shipping address
                 </Label>
               </div>
+            </div>
 
-              <Button type="submit" className="w-full" size="lg">
+            <div className="shrink-0 border-t border-border/70 px-5 py-4 sm:px-6">
+              <Button type="submit" className="w-full">
                 Pay{" "}
                 <span dir="ltr" className="tabular-nums">
                   {money(TOTAL)}
                 </span>
               </Button>
-            </form>
-          </div>
+            </div>
+          </form>
         </SheetContent>
       </Sheet>
     </div>

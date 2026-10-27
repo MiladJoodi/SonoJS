@@ -23,6 +23,21 @@ const nextConfig: NextConfig = {
   experimental: {
     turbopackFileSystemCacheForDev: false,
   },
+  // Local block showcase films (e.g. media-player-01)
+  turbopack: {
+    rules: {
+      "*.mp4": {
+        type: "asset",
+      },
+    },
+  },
+  webpack: (config) => {
+    config.module.rules.push({
+      test: /\.mp4$/i,
+      type: "asset/resource",
+    })
+    return config
+  },
   async redirects() {
     return [
       {

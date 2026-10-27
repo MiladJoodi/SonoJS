@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "banner-10",
+  "type": "registry:block",
+  "title": "banner-10",
+  "description": "Orange gradient strip with Check it out pill CTA.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/blocks/marketing/banner-10/banner.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport type * as React from \"react\"\nimport { ArrowRightIcon } from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\n\nexport default function Banner({\n  className,\n  ...props\n}: React.ComponentProps<\"div\">) {\n  return (\n    <div\n      className={cn(\n        \"flex w-full flex-wrap items-center justify-center bg-gradient-to-b from-orange-500 to-orange-600 py-2 text-center text-sm font-medium text-white\",\n        className\n      )}\n      role=\"region\"\n      aria-label=\"Promotion\"\n      {...props}\n    >\n      <p>Templates are live on SonoJS!</p>\n      <a\n        href=\"#\"\n        className=\"ms-3 inline-flex cursor-pointer items-center gap-1 rounded-md bg-white px-3 py-1 text-xs text-orange-600 transition hover:bg-slate-200 active:scale-95\"\n      >\n        Check it out\n        <ArrowRightIcon className=\"size-3.5 icon-dir\" aria-hidden />\n      </a>\n    </div>\n  )\n}\n",
+      "target": "components/blocks/marketing/banner-10/banner.tsx"
+    }
+  ],
+  "version": "0.1.0+91c7a9edf388",
+  "generatedAt": "2026-10-27T15:39:22.160Z"
+}

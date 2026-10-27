@@ -220,7 +220,10 @@ export default function Checkout({
   }
 
   return (
-    <main className={cn("w-full bg-canvas", className)} {...props}>
+    <main
+      className={cn("w-full bg-white dark:bg-background", className)}
+      {...props}
+    >
       <h1 className="sr-only">Checkout</h1>
       <div className="px-4 py-8 md:px-8 md:py-10">
         <div className="mx-auto grid w-full max-w-xl gap-10 lg:max-w-7xl lg:grid-cols-2 lg:gap-16">

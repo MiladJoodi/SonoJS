@@ -1,0 +1,42 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "access-denied-01",
+  "type": "registry:block",
+  "title": "access-denied-01",
+  "description": "Access denied gate — locked resource card, signed-in identity, request access and switch account.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "avatar",
+    "badge",
+    "button",
+    "separator"
+  ],
+  "cssVars": {
+    "light": {
+      "canvas": "#f3f3f4",
+      "border-soft": "color-mix(in oklab, #e4e4e7 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18)",
+      "background": "var(--canvas)",
+      "card": "#ffffff"
+    },
+    "dark": {
+      "canvas": "#09090b",
+      "border-soft": "color-mix(in oklab, #27272a 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(0, 0, 0, 0.24), 0 28px 56px -28px rgba(0, 0, 0, 0.48)",
+      "background": "var(--canvas)",
+      "card": "#18181b"
+    }
+  },
+  "files": [
+    {
+      "path": "components/blocks/feedback-states/access-denied-01/access-denied.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport {\n  ArrowLeftIcon,\n  HomeIcon,\n  LockKeyholeIcon,\n  MailIcon,\n} from \"lucide-react\"\n\nimport { Avatar, AvatarFallback } from \"@/components/ui/avatar\"\nimport { Badge } from \"@/components/ui/badge\"\nimport { Button } from \"@/components/ui/button\"\nimport { Separator } from \"@/components/ui/separator\"\nimport { cn } from \"@/lib/utils\"\n\nexport default function AccessDenied({\n  className,\n  ...props\n}: React.ComponentProps<\"main\">) {\n  return (\n    <main\n      className={cn(\n        \"flex min-h-[min(40rem,100svh)] w-full flex-col items-center justify-center bg-canvas px-4 py-12 text-foreground sm:px-6\",\n        className\n      )}\n      {...props}\n    >\n      <div className=\"w-full max-w-md\">\n        <div className=\"overflow-hidden rounded-[12px] border border-border/70 bg-card shadow-soft\">\n          <div className=\"border-b border-border/70 bg-muted/30 px-6 py-8 text-center\">\n            <div className=\"mx-auto mb-4 flex size-12 items-center justify-center rounded-full border border-border/70 bg-card\">\n              <LockKeyholeIcon\n                className=\"size-5 text-muted-foreground\"\n                aria-hidden\n              />\n            </div>\n            <p className=\"text-xs font-medium tracking-wide text-muted-foreground uppercase\">\n              Error 403\n            </p>\n            <h1 className=\"mt-2 text-xl font-semibold tracking-tight\">\n              This page is restricted\n            </h1>\n            <p className=\"mt-2 text-sm leading-relaxed text-muted-foreground\">\n              You&apos;re signed in, but this workspace resource needs a higher\n              role. Ask an admin for access, or switch accounts.\n            </p>\n          </div>\n\n          <div className=\"space-y-5 px-6 py-5\">\n            <div className=\"rounded-lg border border-border/70 bg-canvas px-3.5 py-3 text-start\">\n              <p className=\"text-[11px] font-medium tracking-wide text-muted-foreground uppercase\">\n                Tried to open\n              </p>\n              <p className=\"mt-1 truncate text-sm font-medium\" dir=\"ltr\">\n                Workspace › Settings › Billing\n              </p>\n            </div>\n\n            <div className=\"flex items-center gap-3 rounded-lg border border-border/70 px-3.5 py-3\">\n              <Avatar size=\"default\">\n                <AvatarFallback>AR</AvatarFallback>\n              </Avatar>\n              <div className=\"min-w-0 flex-1 text-start\">\n                <p className=\"truncate text-sm font-medium\">Alex Rivera</p>\n                <p className=\"truncate text-xs text-muted-foreground\">\n                  alex@example.com\n                </p>\n              </div>\n              <Badge variant=\"secondary\">Viewer</Badge>\n            </div>\n\n            <div className=\"flex flex-col gap-2\">\n              <Button type=\"button\" className=\"w-full gap-2\">\n                <MailIcon className=\"size-4\" aria-hidden />\n                Request access\n              </Button>\n              <Button type=\"button\" variant=\"outline\" className=\"w-full gap-2\">\n                Switch account\n              </Button>\n              <div className=\"grid grid-cols-2 gap-2 pt-1\">\n                <Button type=\"button\" variant=\"ghost\" size=\"sm\" className=\"gap-1.5\">\n                  <ArrowLeftIcon className=\"icon-dir size-3.5\" aria-hidden />\n                  Go back\n                </Button>\n                <Button type=\"button\" variant=\"ghost\" size=\"sm\" className=\"gap-1.5\">\n                  <HomeIcon className=\"size-3.5\" aria-hidden />\n                  Home\n                </Button>\n              </div>\n            </div>\n          </div>\n\n          <Separator />\n\n          <p className=\"px-6 py-3 text-center text-xs text-muted-foreground\">\n            Forbidden · Trace{\" \"}\n            <span className=\"font-mono tabular-nums\" dir=\"ltr\">\n              REQ-8K2M9X-PQL\n            </span>\n          </p>\n        </div>\n      </div>\n    </main>\n  )\n}\n",
+      "target": "components/blocks/feedback-states/access-denied-01/access-denied.tsx"
+    }
+  ],
+  "version": "0.1.0+675d7fc0a862",
+  "generatedAt": "2026-10-27T22:46:01.251Z"
+}

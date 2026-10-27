@@ -144,6 +144,10 @@ function MessageScrollerProvider({
  const visibilitySubscribers = React.useRef(0)
  const appliedDefault = React.useRef(false)
 
+ React.useEffect(() => {
+ following.current = autoScroll
+ }, [autoScroll])
+
  const [scrollable, setScrollable] = React.useState<MessageScrollerScrollable>(
  { start: false, end: false }
  )
@@ -364,21 +368,8 @@ function MessageScrollerProvider({
  })
  }
 
- if (
- record.scrollAnchor &&
- appliedDefault.current &&
- !pendingScroll.current
- ) {
- const viewport = viewportRef.current
- if (viewport) {
- const top = Math.max(
- 0,
- record.element.offsetTop - scrollPreviousItemPeek
- )
- viewport.scrollTo({ top, behavior: "smooth" })
- following.current = false
- }
- }
+ // Do not scroll to scrollAnchor on (re)register — context identity changes
+ // remount effects and would yank the viewport while the user is reading up.
 
  requestAnimationFrame(() => {
  if (!appliedDefault.current) applyDefaultPosition()
@@ -397,10 +388,18 @@ function MessageScrollerProvider({
  applyDefaultPosition,
  autoScroll,
  measureScrollable,
- scrollPreviousItemPeek,
  scrollToMessage,
  updateVisibility,
  ]
+ )
+
+ // Keep registerItem identity stable so MessageScrollerItem effects do not
+ // re-fire on every scrollable/visibility update (that yanked scroll to end).
+ const registerItemRef = React.useRef(registerItem)
+ registerItemRef.current = registerItem
+ const stableRegisterItem = React.useCallback(
+ (record: ItemRecord) => registerItemRef.current(record),
+ []
  )
 
  const value = React.useMemo<MessageScrollerContextValue>(
@@ -412,7 +411,7 @@ function MessageScrollerProvider({
  scrollMargin,
  viewportRef,
  rootRef,
- registerItem,
+ registerItem: stableRegisterItem,
  scrollToEnd,
  scrollToStart,
  scrollToMessage,
@@ -436,7 +435,6 @@ function MessageScrollerProvider({
  applyDefaultPosition,
  defaultScrollPosition,
  measureScrollable,
- registerItem,
  releaseFollow,
  scrollEdgeThreshold,
  scrollMargin,
@@ -445,6 +443,7 @@ function MessageScrollerProvider({
  scrollToMessage,
  scrollToStart,
  scrollable,
+ stableRegisterItem,
  syncScrollAttributes,
  visibility,
  ]
@@ -492,13 +491,21 @@ function MessageScrollerViewport({
  height: number
  top: number
  } | null>(null)
+ const {
+ viewportRef,
+ applyDefaultPosition,
+ measureScrollable,
+ autoScroll,
+ following,
+ visibilitySubscribers,
+ } = context
 
  React.useEffect(() => {
- const viewport = context.viewportRef.current
+ const viewport = viewportRef.current
  if (!viewport) return
 
- context.applyDefaultPosition()
- context.measureScrollable()
+ applyDefaultPosition()
+ measureScrollable()
 
  const resizeObserver = new ResizeObserver(() => {
  if (
@@ -512,12 +519,11 @@ function MessageScrollerViewport({
  prependSnapshot.current = null
  }
 
- if (context.autoScroll && context.following.current) {
+ if (autoScroll && following.current) {
  viewport.scrollTop = viewport.scrollHeight
  }
- context.measureScrollable()
- if (context.visibilitySubscribers.current > 0) {
- // visibility updated via scroll path; force a pass after size changes
+ measureScrollable()
+ if (visibilitySubscribers.current > 0) {
  viewport.dispatchEvent(new Event("scroll"))
  }
  })
@@ -527,7 +533,15 @@ function MessageScrollerViewport({
  resizeObserver.observe(viewport)
 
  return () => resizeObserver.disconnect()
- }, [context, preserveScrollOnPrepend])
+ }, [
+ applyDefaultPosition,
+ autoScroll,
+ following,
+ measureScrollable,
+ preserveScrollOnPrepend,
+ viewportRef,
+ visibilitySubscribers,
+ ])
 
  return (
  <div
@@ -638,18 +652,18 @@ function MessageScrollerItem({
  messageId?: string
  scrollAnchor?: boolean
 }) {
- const context = useMessageScrollerContext("MessageScrollerItem")
+ const { registerItem } = useMessageScrollerContext("MessageScrollerItem")
  const ref = React.useRef<HTMLDivElement | null>(null)
 
  React.useEffect(() => {
  const element = ref.current
  if (!element) return
- return context.registerItem({
+ return registerItem({
  id: messageId,
  element,
  scrollAnchor,
  })
- }, [context, messageId, scrollAnchor])
+ }, [registerItem, messageId, scrollAnchor])
 
  return (
  <div
@@ -657,10 +671,7 @@ function MessageScrollerItem({
  data-slot="message-scroller-item"
  data-message-id={messageId}
  data-scroll-anchor={scrollAnchor || undefined}
- className={cn(
- "min-w-0 shrink-0 [contain-intrinsic-size:auto_10rem] [content-visibility:auto]",
- className
- )}
+ className={cn("min-w-0 shrink-0", className)}
  {...props}
  />
  )

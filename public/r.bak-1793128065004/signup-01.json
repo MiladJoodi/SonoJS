@@ -1,0 +1,38 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "signup-01",
+  "type": "registry:block",
+  "title": "signup-01",
+  "description": "Minimal name, email, and password sign-up.",
+  "registryDependencies": [
+    "button",
+    "input",
+    "label"
+  ],
+  "cssVars": {
+    "light": {
+      "canvas": "#f3f3f4",
+      "border-soft": "color-mix(in oklab, #e4e4e7 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18)",
+      "background": "var(--canvas)",
+      "card": "#ffffff"
+    },
+    "dark": {
+      "canvas": "#09090b",
+      "border-soft": "color-mix(in oklab, #27272a 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(0, 0, 0, 0.24), 0 28px 56px -28px rgba(0, 0, 0, 0.48)",
+      "background": "var(--canvas)",
+      "card": "#18181b"
+    }
+  },
+  "files": [
+    {
+      "path": "components/blocks/authentication/signup-01/signup-form.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\r\n\r\nimport { cn } from \"@/lib/utils\"\r\nimport { Button } from \"@/components/ui/button\"\r\nimport { Input } from \"@/components/ui/input\"\r\nimport { Label } from \"@/components/ui/label\"\r\n\r\nconst controlClass = \"shadow-none\"\r\n\r\nexport default function SignupForm({\r\n  className,\r\n  ...props\r\n}: React.ComponentProps<\"div\">) {\r\n  return (\r\n    <div\r\n      className={cn(\r\n        \"flex w-full items-center justify-center bg-canvas px-6 py-10\",\r\n        className\r\n      )}\r\n      {...props}\r\n    >\r\n      <div\r\n        className={cn(\r\n          \"[--login-card-padding:1.5rem] sm:[--login-card-padding:2rem]\",\r\n          \"flex w-full max-w-md flex-col gap-8 rounded-[12px] border border-border/70 bg-card p-(--login-card-padding)\",\r\n          \"shadow-soft\",\r\n          \"\"\r\n        )}\r\n\n              style={{\n                backgroundColor: \"var(--card, #ffffff)\",\n                boxShadow:\n                  \"var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))\",\n              }}\n            >\r\n        <header className=\"flex flex-col items-start gap-3\">\r\n          <span className=\"h-0.5 w-8 rounded-full bg-primary\" aria-hidden />\r\n          <div className=\"space-y-1.5\">\r\n            <h1 className=\"text-h3 text-foreground\">Create an account</h1>\r\n            <p className=\"text-sm text-muted-foreground\">\r\n              Name, email, and a password. That&apos;s all.\r\n            </p>\r\n          </div>\r\n        </header>\r\n\r\n        <form\r\n          className=\"flex flex-col gap-4\"\r\n          onSubmit={(event) => event.preventDefault()}\r\n        >\r\n          <div className=\"grid gap-4 sm:grid-cols-2\">\r\n            <div className=\"grid gap-2\">\r\n              <Label htmlFor=\"signup-01-first\">First name</Label>\r\n              <Input\r\n                id=\"signup-01-first\"\r\n                autoComplete=\"given-name\"\r\n                placeholder=\"Cameron\"\r\n                required\r\n                className={controlClass}\r\n              />\r\n            </div>\r\n            <div className=\"grid gap-2\">\r\n              <Label htmlFor=\"signup-01-last\">Last name</Label>\r\n              <Input\r\n                id=\"signup-01-last\"\r\n                autoComplete=\"family-name\"\r\n                placeholder=\"Williamson\"\r\n                required\r\n                className={controlClass}\r\n              />\r\n            </div>\r\n          </div>\r\n          <div className=\"grid gap-2\">\r\n            <Label htmlFor=\"signup-01-email\">Email</Label>\r\n            <Input\r\n              id=\"signup-01-email\"\r\n              type=\"email\"\r\n              dir=\"ltr\"\r\n              autoComplete=\"email\"\r\n              placeholder=\"name@example.com\"\r\n              required\r\n              className={controlClass}\r\n            />\r\n          </div>\r\n          <div className=\"grid gap-2\">\r\n            <Label htmlFor=\"signup-01-password\">Password</Label>\r\n            <Input\r\n              id=\"signup-01-password\"\r\n              type=\"password\"\r\n              autoComplete=\"new-password\"\r\n              placeholder=\"••••••••\"\r\n              required\r\n              className={controlClass}\r\n            />\r\n          </div>\r\n          <Button\r\n            type=\"submit\"\r\n            className=\"mt-1 w-full shadow-none\"\r\n          >\r\n            Create account\r\n          </Button>\r\n        </form>\r\n\r\n        <p className=\"text-center text-sm text-muted-foreground\">\r\n          Already have an account?{\" \"}\r\n          <a\r\n            href=\"#\"\r\n            className=\"cursor-pointer font-medium text-foreground underline-offset-4 hover:underline\"\r\n          >\r\n            Sign in\r\n          </a>\r\n        </p>\r\n      </div>\r\n    </div>\r\n  )\r\n}\r\n",
+      "target": "components/blocks/authentication/signup-01/signup-form.tsx"
+    }
+  ],
+  "version": "0.1.0+0c67e178c74a",
+  "generatedAt": "2026-10-27T19:05:53.101Z"
+}

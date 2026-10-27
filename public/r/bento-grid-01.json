@@ -1,0 +1,36 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "bento-grid-01",
+  "type": "registry:block",
+  "title": "bento-grid-01",
+  "description": "Bento feature grid — wide analytics chart, access controls, regions metric, and deploy status (RTL/LTR).",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "cssVars": {
+    "light": {
+      "canvas": "#f3f3f4",
+      "border-soft": "color-mix(in oklab, #e4e4e7 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18)",
+      "background": "var(--canvas)",
+      "card": "#ffffff"
+    },
+    "dark": {
+      "canvas": "#09090b",
+      "border-soft": "color-mix(in oklab, #27272a 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(0, 0, 0, 0.24), 0 28px 56px -28px rgba(0, 0, 0, 0.48)",
+      "background": "var(--canvas)",
+      "card": "#18181b"
+    }
+  },
+  "files": [
+    {
+      "path": "components/blocks/marketing/bento-grid-01/bento-grid.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport type * as React from \"react\"\nimport {\n  BarChart3Icon,\n  GlobeIcon,\n  ShieldIcon,\n  TerminalIcon,\n} from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst BAR_HEIGHTS = [44, 57, 52, 74, 68, 85, 96] as const\n\nexport default function BentoGrid01({\n  className,\n  ...props\n}: React.ComponentProps<\"section\">) {\n  return (\n    <section\n      className={cn(\"bg-canvas py-12 text-foreground sm:py-20\", className)}\n      aria-labelledby=\"bento-grid-01-heading\"\n      {...props}\n    >\n      <div className=\"mx-auto max-w-7xl px-4 sm:px-6 lg:px-8\">\n        <div className=\"mb-9 max-w-xl\">\n          <p className=\"text-sm font-medium text-primary\">A connected platform</p>\n          <h2\n            id=\"bento-grid-01-heading\"\n            className=\"mt-3 text-3xl font-semibold tracking-tight\"\n          >\n            Everything in its right place.\n          </h2>\n          <p className=\"mt-4 leading-relaxed text-muted-foreground\">\n            Bring insights, security, and delivery into one clear workflow.\n          </p>\n        </div>\n\n        <div className=\"grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3\">\n          <article className=\"rounded-[12px] border border-border/70 bg-card p-6 shadow-soft lg:col-span-2\">\n            <BarChart3Icon\n              className=\"size-5 text-muted-foreground\"\n              aria-hidden\n            />\n            <h3 className=\"mt-5 text-lg font-semibold\">\n              Understand the whole picture.\n            </h3>\n            <p className=\"mt-3 max-w-lg text-sm leading-relaxed text-muted-foreground\">\n              Track the metrics that matter and see how your product is\n              performing over time.\n            </p>\n            <div className=\"mt-7 border-t border-border/70 pt-5\">\n              <div className=\"flex items-baseline justify-between gap-4\">\n                <span className=\"text-xs text-muted-foreground\">\n                  Active users, past week\n                </span>\n                <span className=\"text-sm font-medium text-emerald-700 dark:text-emerald-400\">\n                  +12.8%\n                </span>\n              </div>\n              <div\n                className=\"mt-5 flex h-28 items-end gap-3\"\n                role=\"img\"\n                aria-label=\"Daily active users increased over the past week\"\n              >\n                {BAR_HEIGHTS.map((height, i) => (\n                  <div\n                    key={i}\n                    className=\"flex-1 rounded-t bg-primary/70\"\n                    style={{ height: `${height}%` }}\n                  />\n                ))}\n              </div>\n            </div>\n          </article>\n\n          <article className=\"rounded-[12px] border border-border/70 bg-card p-6 shadow-soft\">\n            <ShieldIcon className=\"size-5 text-muted-foreground\" aria-hidden />\n            <h3 className=\"mt-5 text-lg font-semibold\">Control access.</h3>\n            <p className=\"mt-3 text-sm leading-relaxed text-muted-foreground\">\n              Give each person the access they need. Review permissions and keep\n              your team&apos;s work protected.\n            </p>\n            <dl className=\"mt-7 space-y-3 border-t border-border/70 pt-5 text-sm\">\n              <div className=\"flex justify-between gap-3\">\n                <dt className=\"text-muted-foreground\">\n                  Two-factor authentication\n                </dt>\n                <dd className=\"text-emerald-700 dark:text-emerald-400\">\n                  Enabled\n                </dd>\n              </div>\n              <div className=\"flex justify-between gap-3\">\n                <dt className=\"text-muted-foreground\">Access reviews</dt>\n                <dd>Monthly</dd>\n              </div>\n            </dl>\n          </article>\n\n          <article className=\"rounded-[12px] border border-border/70 bg-card p-6 shadow-soft\">\n            <GlobeIcon className=\"size-5 text-muted-foreground\" aria-hidden />\n            <h3 className=\"mt-5 text-lg font-semibold\">Reach your customers.</h3>\n            <p className=\"mt-3 text-sm leading-relaxed text-muted-foreground\">\n              Deliver a consistent experience wherever your team and customers\n              work.\n            </p>\n            <p className=\"mt-7 text-2xl font-semibold tabular-nums\">\n              28{\" \"}\n              <span className=\"text-sm font-normal text-muted-foreground\">\n                regions available\n              </span>\n            </p>\n          </article>\n\n          <article className=\"rounded-[12px] border border-border/70 bg-card p-6 shadow-soft lg:col-span-2\">\n            <TerminalIcon\n              className=\"size-5 text-muted-foreground\"\n              aria-hidden\n            />\n            <h3 className=\"mt-5 text-lg font-semibold\">Keep delivery moving.</h3>\n            <p className=\"mt-3 text-sm leading-relaxed text-muted-foreground\">\n              Review build status and deploy with a workflow your team can\n              follow.\n            </p>\n            <div className=\"mt-6 flex flex-wrap items-center justify-between gap-3 rounded-md border border-border/70 bg-muted/40 px-4 py-3 text-sm\">\n              <code className=\"font-mono text-muted-foreground\" dir=\"ltr\">\n                production / main\n              </code>\n              <span className=\"text-emerald-700 dark:text-emerald-400\">\n                Deployed successfully\n              </span>\n            </div>\n          </article>\n        </div>\n      </div>\n    </section>\n  )\n}\n",
+      "target": "components/blocks/marketing/bento-grid-01/bento-grid.tsx"
+    }
+  ],
+  "version": "0.1.0+675d7fc0a862",
+  "generatedAt": "2026-10-27T22:46:01.251Z"
+}

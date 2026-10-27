@@ -11,6 +11,7 @@ import Newsletter06 from "@/registry/blocks/marketing/newsletter/newsletter-06/n
 import Newsletter07 from "@/registry/blocks/marketing/newsletter/newsletter-07/newsletter"
 import Newsletter08 from "@/registry/blocks/marketing/newsletter/newsletter-08/newsletter"
 import Newsletter09 from "@/registry/blocks/marketing/newsletter/newsletter-09/newsletter"
+import Newsletter10 from "@/registry/blocks/marketing/newsletter/newsletter-10/newsletter"
 
 import { blocksPageMetadata } from "@/lib/seo"
 
@@ -140,6 +141,17 @@ export default function BlockNewsletterDocsPage() {
           previewClassName="bg-canvas px-0 py-8 md:px-8 md:py-12"
         >
           <Newsletter09 />
+        </BlockExample>
+
+        <ExampleRule />
+
+        <BlockExample
+          name="newsletter-10"
+          usage={[{ title: "app/page.tsx", code: usage("newsletter-10") }]}
+          previewAlign="center"
+          previewClassName="bg-canvas p-0"
+        >
+          <Newsletter10 />
         </BlockExample>
       </div>
     </article>

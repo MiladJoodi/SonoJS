@@ -1,0 +1,36 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "breadcrumbs-09",
+  "type": "registry:block",
+  "title": "breadcrumbs-09",
+  "description": "Overlapping pill segments ending in a primary current-page chip.",
+  "registryDependencies": [
+    "breadcrumb"
+  ],
+  "cssVars": {
+    "light": {
+      "canvas": "#f3f3f4",
+      "border-soft": "color-mix(in oklab, #e4e4e7 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18)",
+      "background": "var(--canvas)",
+      "card": "#ffffff"
+    },
+    "dark": {
+      "canvas": "#09090b",
+      "border-soft": "color-mix(in oklab, #27272a 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(0, 0, 0, 0.24), 0 28px 56px -28px rgba(0, 0, 0, 0.48)",
+      "background": "var(--canvas)",
+      "card": "#18181b"
+    }
+  },
+  "files": [
+    {
+      "path": "components/blocks/navigation/breadcrumbs-09/breadcrumbs.tsx",
+      "type": "registry:component",
+      "content": "import type * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { Breadcrumb } from \"@/components/ui/breadcrumb\"\n\nconst segmentClass =\n  \"inline-block cursor-pointer border border-border/70 bg-card px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:px-7 sm:py-2.5\"\n\nconst currentClass =\n  \"inline-block border border-primary bg-primary px-4 py-2 text-sm font-medium text-primary-foreground sm:px-7 sm:py-2.5\"\n\nexport default function Breadcrumbs({\n  className,\n  ...props\n}: React.ComponentProps<\"nav\">) {\n  return (\n    <Breadcrumb className={cn(\"w-full max-w-full\", className)} {...props}>\n      <div className=\"mx-auto max-w-full overflow-x-auto px-1\">\n        <div className=\"mx-auto flex w-max items-center\">\n          <a href=\"#\" className={cn(segmentClass, \"z-40 rounded-full\")}>\n            Home\n          </a>\n          <a\n            href=\"#\"\n            className={cn(segmentClass, \"z-30 -ms-5 rounded-e-full\")}\n          >\n            Profile\n          </a>\n          <a\n            href=\"#\"\n            className={cn(segmentClass, \"z-20 -ms-5 rounded-e-full\")}\n          >\n            Profile Details\n          </a>\n          <span\n            aria-current=\"page\"\n            className={cn(currentClass, \"z-10 -ms-5 rounded-e-full\")}\n          >\n            Edit\n          </span>\n        </div>\n      </div>\n    </Breadcrumb>\n  )\n}\n",
+      "target": "components/blocks/navigation/breadcrumbs-09/breadcrumbs.tsx"
+    }
+  ],
+  "version": "0.1.0+0c67e178c74a",
+  "generatedAt": "2026-10-27T19:05:53.101Z"
+}

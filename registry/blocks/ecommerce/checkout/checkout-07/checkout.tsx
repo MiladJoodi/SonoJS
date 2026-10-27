@@ -153,11 +153,11 @@ export default function Checkout({
 
         <DialogContent
           showCloseButton
-          className="max-h-[min(95vh,52rem)] gap-0 overflow-y-auto p-0 sm:max-w-2xl"
-          style={{ maxWidth: "min(42rem, calc(100% - 2rem))" }}
+          className="flex max-h-[calc(100dvh-2rem)] flex-col gap-0 overflow-hidden p-0"
+          style={{ maxWidth: "min(36rem, calc(100% - 2rem))" }}
         >
-          <DialogHeader className="border-b border-border/70 px-5 py-4 pe-12 text-start sm:px-6">
-            <DialogTitle className="text-xl font-bold tracking-tight">
+          <DialogHeader className="shrink-0 border-b border-border/70 px-5 py-3.5 pe-12 text-start sm:px-6">
+            <DialogTitle className="text-lg font-bold tracking-tight">
               Checkout
             </DialogTitle>
             <DialogDescription className="sr-only">
@@ -167,160 +167,163 @@ export default function Checkout({
           </DialogHeader>
 
           <form
-            className="space-y-8 px-5 py-6 sm:px-6"
+            className="flex min-h-0 flex-1 flex-col"
             onSubmit={(e) => {
               e.preventDefault()
               setOpen(false)
             }}
           >
-            <div className="rounded-[12px] bg-muted/60 p-5 sm:p-6">
-              <ul className="divide-y divide-border/70 text-sm">
-                {(
-                  [
-                    ["Subtotal", money(SUBTOTAL)],
-                    ["Shipping", money(SHIPPING)],
-                    ["Tax", money(TAX)],
-                    ["Total", money(TOTAL)],
-                  ] as const
-                ).map(([label, value], i, arr) => (
-                  <li
-                    key={label}
-                    className={cn(
-                      "flex items-center justify-between gap-3 py-3 first:pt-0 last:pb-0",
-                      i === arr.length - 1
-                        ? "font-semibold text-foreground"
-                        : "text-muted-foreground"
-                    )}
-                  >
-                    <span>{label}</span>
-                    <span
-                      dir="ltr"
+            <div className="min-h-0 flex-1 space-y-6 overflow-y-auto px-5 py-5 sm:px-6">
+              <div className="rounded-[12px] bg-muted/60 p-4">
+                <ul className="divide-y divide-border/70 text-sm">
+                  {(
+                    [
+                      ["Subtotal", money(SUBTOTAL)],
+                      ["Shipping", money(SHIPPING)],
+                      ["Tax", money(TAX)],
+                      ["Total", money(TOTAL)],
+                    ] as const
+                  ).map(([label, value], i, arr) => (
+                    <li
+                      key={label}
                       className={cn(
-                        "tabular-nums",
+                        "flex items-center justify-between gap-3 py-2.5 first:pt-0 last:pb-0",
                         i === arr.length - 1
-                          ? "text-foreground"
-                          : "font-semibold text-foreground"
+                          ? "font-semibold text-foreground"
+                          : "text-muted-foreground"
                       )}
                     >
-                      {value}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <fieldset className="space-y-5">
-              <legend className="text-start text-xl font-semibold tracking-tight text-foreground">
-                Delivery Details
-              </legend>
-              <div className="grid gap-4 md:grid-cols-2 md:gap-5">
-                {DELIVERY_FIELDS.map((field) => (
-                  <div key={field.id} className="space-y-2">
-                    <Label htmlFor={`checkout-07-${field.id}`}>
-                      {field.label}
-                    </Label>
-                    <Input
-                      id={`checkout-07-${field.id}`}
-                      name={field.id}
-                      type={field.type}
-                      placeholder={field.placeholder}
-                      autoComplete={field.autoComplete}
-                      dir={
-                        field.type === "tel" || field.id === "postal-code"
-                          ? "ltr"
-                          : undefined
-                      }
-                      required
-                    />
-                  </div>
-                ))}
+                      <span>{label}</span>
+                      <span
+                        dir="ltr"
+                        className={cn(
+                          "tabular-nums",
+                          i === arr.length - 1
+                            ? "text-foreground"
+                            : "font-semibold text-foreground"
+                        )}
+                      >
+                        {value}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-            </fieldset>
 
-            <fieldset className="space-y-5">
-              <legend className="text-start text-xl font-semibold tracking-tight text-foreground">
-                Payment method
-              </legend>
-              <RadioGroup
-                value={paymentMethod}
-                onValueChange={setPaymentMethod}
-                className="grid gap-4 sm:grid-cols-2"
-              >
-                <label
-                  htmlFor="checkout-07-card"
-                  className={cn(
-                    "flex cursor-pointer items-center gap-3 rounded-[12px] border border-border/70 bg-card px-3 py-3 shadow-soft",
-                    paymentMethod === "card" && "border-primary/40 bg-primary/5"
-                  )}
+              <fieldset className="space-y-4">
+                <legend className="text-start text-base font-semibold tracking-tight text-foreground">
+                  Delivery Details
+                </legend>
+                <div className="grid gap-3 sm:grid-cols-2 sm:gap-4">
+                  {DELIVERY_FIELDS.map((field) => (
+                    <div key={field.id} className="space-y-1.5">
+                      <Label htmlFor={`checkout-07-${field.id}`}>
+                        {field.label}
+                      </Label>
+                      <Input
+                        id={`checkout-07-${field.id}`}
+                        name={field.id}
+                        type={field.type}
+                        placeholder={field.placeholder}
+                        autoComplete={field.autoComplete}
+                        dir={
+                          field.type === "tel" || field.id === "postal-code"
+                            ? "ltr"
+                            : undefined
+                        }
+                        required
+                      />
+                    </div>
+                  ))}
+                </div>
+              </fieldset>
+
+              <fieldset className="space-y-4">
+                <legend className="text-start text-base font-semibold tracking-tight text-foreground">
+                  Payment method
+                </legend>
+                <RadioGroup
+                  value={paymentMethod}
+                  onValueChange={setPaymentMethod}
+                  className="grid gap-3 sm:grid-cols-2"
                 >
-                  <RadioGroupItem value="card" id="checkout-07-card" />
-                  <span className="sr-only">Card</span>
-                  <span className="flex gap-1.5" aria-hidden>
-                    <img src={assetSrc(visaMark)} alt="" className="h-6" />
-                    <img src={assetSrc(amexMark)} alt="" className="h-6" />
+                  <label
+                    htmlFor="checkout-07-card"
+                    className={cn(
+                      "flex cursor-pointer items-center gap-3 rounded-[12px] border border-border/70 bg-card px-3 py-2.5 shadow-soft",
+                      paymentMethod === "card" &&
+                        "border-primary/40 bg-primary/5"
+                    )}
+                  >
+                    <RadioGroupItem value="card" id="checkout-07-card" />
+                    <span className="sr-only">Card</span>
+                    <span className="flex gap-1.5" aria-hidden>
+                      <img src={assetSrc(visaMark)} alt="" className="h-5" />
+                      <img src={assetSrc(amexMark)} alt="" className="h-5" />
+                      <img
+                        src={assetSrc(mastercardMark)}
+                        alt=""
+                        className="h-5"
+                      />
+                    </span>
+                  </label>
+                  <label
+                    htmlFor="checkout-07-paypal"
+                    className={cn(
+                      "flex cursor-pointer items-center gap-3 rounded-[12px] border border-border/70 bg-card px-3 py-2.5 shadow-soft",
+                      paymentMethod === "paypal" &&
+                        "border-primary/40 bg-primary/5"
+                    )}
+                  >
+                    <RadioGroupItem value="paypal" id="checkout-07-paypal" />
+                    <span className="sr-only">PayPal</span>
                     <img
-                      src={assetSrc(mastercardMark)}
+                      src={assetSrc(paypalMark)}
                       alt=""
+                      aria-hidden
                       className="h-6"
                     />
-                  </span>
-                </label>
-                <label
-                  htmlFor="checkout-07-paypal"
-                  className={cn(
-                    "flex cursor-pointer items-center gap-3 rounded-[12px] border border-border/70 bg-card px-3 py-3 shadow-soft",
-                    paymentMethod === "paypal" &&
-                      "border-primary/40 bg-primary/5"
-                  )}
+                  </label>
+                </RadioGroup>
+
+                <div className="grid gap-3 sm:grid-cols-2 sm:gap-4">
+                  {CARD_FIELDS.map((field) => (
+                    <div key={field.id} className="space-y-1.5">
+                      <Label htmlFor={`checkout-07-${field.id}`}>
+                        {field.label}
+                      </Label>
+                      <Input
+                        id={`checkout-07-${field.id}`}
+                        name={field.id}
+                        type={field.type}
+                        placeholder={field.placeholder}
+                        autoComplete={field.autoComplete}
+                        dir="ltr"
+                        required={paymentMethod === "card"}
+                        disabled={paymentMethod !== "card"}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </fieldset>
+
+              <div className="flex items-start gap-3">
+                <Checkbox
+                  id="checkout-07-billing"
+                  checked={billingSame}
+                  onCheckedChange={(v) => setBillingSame(v === true)}
+                  className="mt-0.5"
+                />
+                <Label
+                  htmlFor="checkout-07-billing"
+                  className="cursor-pointer text-sm font-normal text-muted-foreground"
                 >
-                  <RadioGroupItem value="paypal" id="checkout-07-paypal" />
-                  <span className="sr-only">PayPal</span>
-                  <img
-                    src={assetSrc(paypalMark)}
-                    alt=""
-                    aria-hidden
-                    className="h-7"
-                  />
-                </label>
-              </RadioGroup>
-
-              <div className="grid gap-4 md:grid-cols-2 md:gap-5">
-                {CARD_FIELDS.map((field) => (
-                  <div key={field.id} className="space-y-2">
-                    <Label htmlFor={`checkout-07-${field.id}`}>
-                      {field.label}
-                    </Label>
-                    <Input
-                      id={`checkout-07-${field.id}`}
-                      name={field.id}
-                      type={field.type}
-                      placeholder={field.placeholder}
-                      autoComplete={field.autoComplete}
-                      dir="ltr"
-                      required={paymentMethod === "card"}
-                      disabled={paymentMethod !== "card"}
-                    />
-                  </div>
-                ))}
+                  Billing address is the same as shipping address
+                </Label>
               </div>
-            </fieldset>
-
-            <div className="flex items-start gap-3">
-              <Checkbox
-                id="checkout-07-billing"
-                checked={billingSame}
-                onCheckedChange={(v) => setBillingSame(v === true)}
-                className="mt-0.5"
-              />
-              <Label
-                htmlFor="checkout-07-billing"
-                className="cursor-pointer text-sm font-normal text-muted-foreground"
-              >
-                Billing address is the same as shipping address
-              </Label>
             </div>
 
-            <DialogFooter className="gap-3 border-t border-border/70 pt-6 sm:justify-end">
+            <DialogFooter className="shrink-0 gap-3 border-t border-border/70 px-5 py-4 sm:justify-end sm:px-6">
               <DialogClose asChild>
                 <Button type="button" variant="outline">
                   Cancel

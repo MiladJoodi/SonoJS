@@ -1,0 +1,44 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "account-recovery-03",
+  "type": "registry:block",
+  "title": "account-recovery-03",
+  "description": "Recover account by verifying identity details.",
+  "dependencies": [
+    "date-fns",
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "button",
+    "calendar",
+    "input",
+    "label",
+    "popover"
+  ],
+  "cssVars": {
+    "light": {
+      "canvas": "#f3f3f4",
+      "border-soft": "color-mix(in oklab, #e4e4e7 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18)",
+      "background": "var(--canvas)",
+      "card": "#ffffff"
+    },
+    "dark": {
+      "canvas": "#09090b",
+      "border-soft": "color-mix(in oklab, #27272a 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(0, 0, 0, 0.24), 0 28px 56px -28px rgba(0, 0, 0, 0.48)",
+      "background": "var(--canvas)",
+      "card": "#18181b"
+    }
+  },
+  "files": [
+    {
+      "path": "components/blocks/authentication/account-recovery-03/account-recovery-form.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { format } from \"date-fns\"\nimport { CalendarIcon } from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { Button } from \"@/components/ui/button\"\nimport { Calendar } from \"@/components/ui/calendar\"\nimport { Input } from \"@/components/ui/input\"\nimport { Label } from \"@/components/ui/label\"\nimport {\n  Popover,\n  PopoverContent,\n  PopoverTrigger,\n} from \"@/components/ui/popover\"\n\nconst controlClass = \"shadow-none\"\n\nexport default function AccountRecoveryForm({\n  className,\n  ...props\n}: React.ComponentProps<\"div\">) {\n  const [open, setOpen] = React.useState(false)\n  const [date, setDate] = React.useState<Date>()\n  const [month, setMonth] = React.useState<Date>(\n    () => new Date(2000, 0, 1)\n  )\n\n  return (\n    <div\n      className={cn(\n        \"[--login-card-padding:1.5rem] sm:[--login-card-padding:2rem]\",\n        \"flex w-full flex-col gap-8 rounded-[12px] border border-border/70 bg-card p-(--login-card-padding)\",\n        \"shadow-soft\",\n        className\n      )}\n      style={{\n                backgroundColor: \"var(--card, #ffffff)\",\n                boxShadow:\n                  \"var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))\",\n              }}\n      {...props}\n    >\n      <header className=\"flex flex-col items-start gap-3\">\n        <span className=\"h-0.5 w-8 rounded-full bg-primary\" aria-hidden />\n        <div className=\"space-y-1.5\">\n          <h1 className=\"text-h3 text-foreground\">Verify your identity</h1>\n          <p className=\"text-sm text-muted-foreground\">\n            Answer a few details so we can confirm this account is yours.\n          </p>\n        </div>\n      </header>\n\n      <form\n        className=\"flex flex-col gap-4\"\n        onSubmit={(event) => event.preventDefault()}\n      >\n        <div className=\"grid gap-2\">\n          <Label htmlFor=\"recovery-03-email\">Account email</Label>\n          <Input\n            id=\"recovery-03-email\"\n            type=\"email\"\n            dir=\"ltr\"\n            autoComplete=\"email\"\n            placeholder=\"name@example.com\"\n            required\n            className={controlClass}\n          />\n        </div>\n        <div className=\"grid gap-2\">\n          <Label htmlFor=\"recovery-03-name\">Full name on the account</Label>\n          <Input\n            id=\"recovery-03-name\"\n            type=\"text\"\n            autoComplete=\"name\"\n            placeholder=\"Jane Doe\"\n            required\n            className={controlClass}\n          />\n        </div>\n        <div className=\"grid gap-2\">\n          <Label htmlFor=\"recovery-03-dob\">Date of birth</Label>\n          <div className=\"relative\" dir=\"ltr\">\n            <Input\n              id=\"recovery-03-dob\"\n              type=\"text\"\n              dir=\"ltr\"\n              readOnly\n              required\n              value={date ? format(date, \"MMM d, yyyy\") : \"\"}\n              placeholder=\"Select date\"\n              className={cn(controlClass, \"cursor-pointer pe-10\")}\n              onClick={() => setOpen(true)}\n              onKeyDown={(event) => {\n                if (event.key === \"Enter\" || event.key === \" \") {\n                  event.preventDefault()\n                  setOpen(true)\n                }\n              }}\n            />\n            <Popover open={open} onOpenChange={setOpen}>\n              <PopoverTrigger asChild>\n                <button\n                  type=\"button\"\n                  aria-label=\"Open calendar\"\n                  className=\"absolute end-2 top-1/2 inline-flex size-8 -translate-y-1/2 cursor-pointer items-center justify-center rounded-md text-muted-foreground hover:bg-muted hover:text-foreground\"\n                >\n                  <CalendarIcon className=\"size-4\" />\n                </button>\n              </PopoverTrigger>\n              <PopoverContent\n                className=\"w-auto overflow-hidden p-0\"\n                align=\"start\"\n                dir=\"ltr\"\n              >\n                <Calendar\n                  mode=\"single\"\n                  captionLayout=\"dropdown\"\n                  selected={date}\n                  month={month}\n                  onMonthChange={setMonth}\n                  startMonth={new Date(1920, 0)}\n                  endMonth={new Date()}\n                  disabled={{ after: new Date() }}\n                  onSelect={(next) => {\n                    setDate(next)\n                    if (next) setMonth(next)\n                    setOpen(false)\n                  }}\n                />\n              </PopoverContent>\n            </Popover>\n          </div>\n        </div>\n        <Button\n          type=\"submit\"\n          className=\"mt-1 w-full shadow-none\"\n        >\n          Continue\n        </Button>\n      </form>\n\n      <p className=\"text-center text-sm text-muted-foreground\">\n        Need help?{\" \"}\n        <a\n          href=\"#\"\n          className=\"cursor-pointer font-medium text-foreground underline-offset-4 hover:underline\"\n        >\n          Contact support\n        </a>\n      </p>\n    </div>\n  )\n}\n",
+      "target": "components/blocks/authentication/account-recovery-03/account-recovery-form.tsx"
+    }
+  ],
+  "version": "0.1.0+55ca011705c9",
+  "generatedAt": "2026-10-27T20:11:50.866Z"
+}

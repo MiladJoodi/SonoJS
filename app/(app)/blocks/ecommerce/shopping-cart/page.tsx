@@ -11,6 +11,7 @@ import ShoppingCart06 from "@/registry/blocks/ecommerce/shopping-cart/shopping-c
 import ShoppingCart07 from "@/registry/blocks/ecommerce/shopping-cart/shopping-cart-07/shopping-cart"
 import ShoppingCart08 from "@/registry/blocks/ecommerce/shopping-cart/shopping-cart-08/shopping-cart"
 import ShoppingCart09 from "@/registry/blocks/ecommerce/shopping-cart/shopping-cart-09/shopping-cart"
+import ShoppingCart10 from "@/registry/blocks/ecommerce/shopping-cart/shopping-cart-10/shopping-cart"
 
 import { blocksPageMetadata } from "@/lib/seo"
 
@@ -29,7 +30,7 @@ export default function BlockShoppingCartDocsPage() {
       <BlocksPageHeader
         title="Shopping Cart"
         pathname="/blocks/ecommerce/shopping-cart"
-        description="Nine production cart patterns — classic bag, split rail, product cards, device configs, beauty table, sale fashion, modal, drawer, and spreadsheet — each with a distinct layout."
+        description="Ten production cart patterns — classic bag, split rail, product cards, device configs, beauty table, sale fashion, modal, drawer, spreadsheet, and interactive promo cart."
       />
 
       <div className="flex flex-col gap-8">
@@ -42,7 +43,7 @@ export default function BlockShoppingCartDocsPage() {
             },
           ]}
           previewAlign="start"
-          previewClassName="bg-white p-0"
+          previewClassName="bg-white p-0 dark:bg-background"
         >
           <ShoppingCart01 />
         </BlockExample>
@@ -56,7 +57,7 @@ export default function BlockShoppingCartDocsPage() {
             },
           ]}
           previewAlign="start"
-          previewClassName="bg-white p-0"
+          previewClassName="bg-white p-0 dark:bg-background"
         >
           <ShoppingCart02 />
         </BlockExample>
@@ -70,7 +71,7 @@ export default function BlockShoppingCartDocsPage() {
             },
           ]}
           previewAlign="start"
-          previewClassName="bg-white p-0"
+          previewClassName="bg-white p-0 dark:bg-background"
         >
           <ShoppingCart03 />
         </BlockExample>
@@ -84,7 +85,7 @@ export default function BlockShoppingCartDocsPage() {
             },
           ]}
           previewAlign="start"
-          previewClassName="bg-white p-0"
+          previewClassName="bg-white p-0 dark:bg-background"
         >
           <ShoppingCart04 />
         </BlockExample>
@@ -98,7 +99,7 @@ export default function BlockShoppingCartDocsPage() {
             },
           ]}
           previewAlign="start"
-          previewClassName="bg-white p-0"
+          previewClassName="bg-white p-0 dark:bg-background"
         >
           <ShoppingCart05 />
         </BlockExample>
@@ -112,7 +113,7 @@ export default function BlockShoppingCartDocsPage() {
             },
           ]}
           previewAlign="start"
-          previewClassName="bg-white p-0"
+          previewClassName="bg-white p-0 dark:bg-background"
         >
           <ShoppingCart06 />
         </BlockExample>
@@ -126,7 +127,7 @@ export default function BlockShoppingCartDocsPage() {
             },
           ]}
           previewAlign="start"
-          previewClassName="bg-white p-0"
+          previewClassName="bg-white p-0 dark:bg-background"
         >
           <ShoppingCart07 />
         </BlockExample>
@@ -140,7 +141,7 @@ export default function BlockShoppingCartDocsPage() {
             },
           ]}
           previewAlign="start"
-          previewClassName="bg-white p-0"
+          previewClassName="bg-white p-0 dark:bg-background"
         >
           <ShoppingCart08 />
         </BlockExample>
@@ -154,9 +155,23 @@ export default function BlockShoppingCartDocsPage() {
             },
           ]}
           previewAlign="start"
-          previewClassName="bg-white p-0"
+          previewClassName="bg-white p-0 dark:bg-background"
         >
           <ShoppingCart09 />
+        </BlockExample>
+
+        <BlockExample
+          name="shopping-cart-10"
+          usage={[
+            {
+              title: "app/page.tsx",
+              code: usage("shopping-cart-10"),
+            },
+          ]}
+          previewAlign="start"
+          previewClassName="bg-canvas p-0"
+        >
+          <ShoppingCart10 />
         </BlockExample>
       </div>
     </article>

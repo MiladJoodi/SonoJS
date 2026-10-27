@@ -1,0 +1,33 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "faq-15",
+  "type": "registry:block",
+  "title": "faq-15",
+  "description": "Two-column FAQ with badge heading and bordered chevron accordion cards.",
+  "cssVars": {
+    "light": {
+      "canvas": "#f3f3f4",
+      "border-soft": "color-mix(in oklab, #e4e4e7 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18)",
+      "background": "var(--canvas)",
+      "card": "#ffffff"
+    },
+    "dark": {
+      "canvas": "#09090b",
+      "border-soft": "color-mix(in oklab, #27272a 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(0, 0, 0, 0.24), 0 28px 56px -28px rgba(0, 0, 0, 0.48)",
+      "background": "var(--canvas)",
+      "card": "#18181b"
+    }
+  },
+  "files": [
+    {
+      "path": "components/blocks/marketing/faq-15/faq.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst faqData = [\n  {\n    question: \"How many items are there in this list?\",\n    answer:\n      \"This FAQ includes five common questions covering licensing, usage, and support. You can expand or collapse each item independently to find what you need.\",\n  },\n  {\n    question: \"Can you describe the product in just one sentence?\",\n    answer:\n      \"A copy-ready UI kit that helps teams ship polished marketing and product interfaces without rebuilding the same patterns from scratch.\",\n  },\n  {\n    question: \"Can I use this template for my client?\",\n    answer:\n      \"Yes. You can use these components in personal and commercial client projects. Redistributing the source as a competing kit is not allowed.\",\n  },\n  {\n    question: \"Do you offer templates in other categories?\",\n    answer:\n      \"Yes. Beyond FAQ blocks you will find heroes, pricing, footers, forms, and more. New categories are added regularly based on what teams request most.\",\n  },\n  {\n    question: \"Do I need to credit you when I use this template?\",\n    answer:\n      \"Attribution is appreciated but not required for shipped products. Keep license notices in your source if you redistribute unmodified kit files.\",\n  },\n] as const\n\nfunction ChevronIcon({\n  open,\n  className,\n}: {\n  open: boolean\n  className?: string\n}) {\n  return (\n    <span\n      className={cn(\n        \"inline-block shrink-0 transition-transform duration-200\",\n        open ? \"rotate-90\" : \"rotate-0\",\n        className\n      )}\n    >\n      <svg\n        width=\"9\"\n        height=\"14\"\n        viewBox=\"0 0 9 14\"\n        fill=\"none\"\n        xmlns=\"http://www.w3.org/2000/svg\"\n        aria-hidden\n        className=\"icon-dir text-foreground\"\n      >\n        <path\n          d=\"M1.5 1.16683L7.33333 7.00016L1.5 12.8335\"\n          stroke=\"currentColor\"\n          strokeWidth=\"1.5\"\n          strokeLinecap=\"round\"\n          strokeLinejoin=\"round\"\n        />\n      </svg>\n    </span>\n  )\n}\n\nfunction FaqItem({\n  item,\n  index,\n  isOpen,\n  onToggle,\n}: {\n  item: (typeof faqData)[number]\n  index: number\n  isOpen: boolean\n  onToggle: () => void\n}) {\n  const uid = React.useId()\n  const headingId = `${uid}-heading-${index}`\n  const panelId = `${uid}-panel-${index}`\n\n  return (\n    <div className=\"rounded-[12px] border border-border/70 bg-card p-5 shadow-soft transition-colors duration-200 hover:border-border sm:p-6\">\n      <button\n        type=\"button\"\n        aria-expanded={isOpen}\n        aria-controls={panelId}\n        onClick={onToggle}\n        className=\"flex w-full cursor-pointer items-center justify-between gap-4 text-start outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2\"\n      >\n        <h3\n          id={headingId}\n          className=\"min-w-0 flex-1 text-base font-semibold tracking-tight text-foreground\"\n        >\n          {item.question}\n        </h3>\n        <ChevronIcon open={isOpen} />\n      </button>\n\n      <div\n        id={panelId}\n        role=\"region\"\n        aria-labelledby={headingId}\n        aria-hidden={!isOpen}\n        inert={!isOpen ? true : undefined}\n        style={{ gridTemplateRows: isOpen ? \"1fr\" : \"0fr\" }}\n        className=\"grid overflow-hidden transition-[grid-template-rows] duration-300 ease-in-out\"\n      >\n        <div className=\"min-h-0 overflow-hidden\">\n          <p className=\"mt-5 text-base leading-relaxed tracking-tight text-muted-foreground sm:mt-6\">\n            {item.answer}\n          </p>\n        </div>\n      </div>\n    </div>\n  )\n}\n\nexport default function Faq({\n  className,\n  ...props\n}: React.ComponentProps<\"section\">) {\n  const uid = React.useId()\n\n  const [openIndexes, setOpenIndexes] = React.useState<number[]>([])\n\n  const toggleItem = (index: number) => {\n    setOpenIndexes((prev) =>\n      prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]\n    )\n  }\n\n  return (\n    <section\n      className={cn(\n        \"overflow-hidden bg-background px-4 py-16 md:px-8 md:py-24 lg:py-32\",\n        className\n      )}\n      aria-labelledby={`${uid}-title`}\n      {...props}\n    >\n      <div className=\"mx-auto grid w-full max-w-7xl gap-10 md:grid-cols-2 md:gap-8 lg:gap-16\">\n        <div className=\"md:pe-4\">\n          <span className=\"mb-5 inline-flex max-w-max rounded-full bg-primary px-3 py-1.5 text-sm font-semibold uppercase tracking-tight text-primary-foreground md:mb-6\">\n            Try some freebie\n          </span>\n          <h2\n            id={`${uid}-title`}\n            className=\"text-4xl font-semibold tracking-tighter text-foreground sm:text-5xl lg:text-6xl\"\n          >\n            Provide some additional information with this FAQ Accordion.\n          </h2>\n        </div>\n\n        <div className=\"space-y-3\">\n          {faqData.map((item, index) => (\n            <FaqItem\n              key={item.question}\n              item={item}\n              index={index}\n              isOpen={openIndexes.includes(index)}\n              onToggle={() => toggleItem(index)}\n            />\n          ))}\n        </div>\n      </div>\n    </section>\n  )\n}\n",
+      "target": "components/blocks/marketing/faq-15/faq.tsx"
+    }
+  ],
+  "version": "0.1.0+55ca011705c9",
+  "generatedAt": "2026-10-27T20:11:50.866Z"
+}

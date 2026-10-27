@@ -1,0 +1,36 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "jumbotron-06",
+  "type": "registry:block",
+  "title": "jumbotron-06",
+  "description": "Hero card plus a two-up grid of dark and light support cards with CTAs.",
+  "registryDependencies": [
+    "button"
+  ],
+  "cssVars": {
+    "light": {
+      "canvas": "#f3f3f4",
+      "border-soft": "color-mix(in oklab, #e4e4e7 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18)",
+      "background": "var(--canvas)",
+      "card": "#ffffff"
+    },
+    "dark": {
+      "canvas": "#09090b",
+      "border-soft": "color-mix(in oklab, #27272a 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(0, 0, 0, 0.24), 0 28px 56px -28px rgba(0, 0, 0, 0.48)",
+      "background": "var(--canvas)",
+      "card": "#18181b"
+    }
+  },
+  "files": [
+    {
+      "path": "components/blocks/marketing/jumbotron-06/jumbotron.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport type * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { Button } from \"@/components/ui/button\"\n\nexport default function Jumbotron({\n  className,\n  ...props\n}: React.ComponentProps<\"section\">) {\n  return (\n    <section\n      className={cn(\"w-full bg-canvas px-4 py-12 md:px-8 md:py-16\", className)}\n      style={{ backgroundColor: \"var(--canvas, #f3f3f4)\" }}\n      aria-labelledby=\"jumbotron-heading\"\n      {...props}\n    >\n      <div className=\"mx-auto w-full max-w-6xl\">\n        <div className=\"w-full rounded-[12px] border border-border/70 bg-card p-6 shadow-soft md:p-8\"\n              style={{\n                backgroundColor: \"var(--card, #ffffff)\",\n                boxShadow:\n                  \"var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))\",\n              }}\n            >\n          <h2\n            id=\"jumbotron-heading\"\n            className=\"text-3xl font-bold tracking-tight text-foreground whitespace-nowrap md:text-4xl\"\n          >\n            Build beautiful websites faster\n          </h2>\n          <p className=\"mt-4 max-w-3xl text-base leading-relaxed text-muted-foreground\">\n            Use ready components and a clear design scale. Spend less time on\n            layout chrome and more time on the product.\n          </p>\n          <Button asChild className=\"mt-6 h-[46px] rounded-[12px]\">\n            <a href=\"#\">Get started</a>\n          </Button>\n        </div>\n\n        <div className=\"mt-6 grid gap-6 md:grid-cols-2\">\n          <div className=\"w-full rounded-[12px] bg-zinc-900 p-6 shadow-soft md:p-8\"\n              style={{\n                boxShadow:\n                  \"var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))\",\n              }}\n            >\n            <h3 className=\"text-2xl font-semibold tracking-tight text-white whitespace-nowrap\">\n              Why SonoJS?\n            </h3>\n            <p className=\"mt-4 text-base leading-relaxed text-zinc-400\">\n              Copy-source UI with RTL and dark mode built in. Customize what you\n              need without fighting a heavy theme.\n            </p>\n            <Button asChild className=\"mt-6 h-[46px] rounded-[12px]\">\n              <a href=\"#\">Learn more</a>\n            </Button>\n          </div>\n\n          <div className=\"w-full rounded-[12px] border border-border/70 bg-card p-6 shadow-soft md:p-8\"\n              style={{\n                backgroundColor: \"var(--card, #ffffff)\",\n                boxShadow:\n                  \"var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))\",\n              }}\n            >\n            <h3 className=\"text-2xl font-semibold tracking-tight text-foreground whitespace-nowrap\">\n              Who is it for?\n            </h3>\n            <p className=\"mt-4 text-base leading-relaxed text-muted-foreground\">\n              Developers, startups, and teams who want clean interfaces without\n              starting every screen from zero.\n            </p>\n            <Button asChild className=\"mt-6 h-[46px] rounded-[12px]\">\n              <a href=\"#\">Learn more</a>\n            </Button>\n          </div>\n        </div>\n      </div>\n    </section>\n  )\n}\n",
+      "target": "components/blocks/marketing/jumbotron-06/jumbotron.tsx"
+    }
+  ],
+  "version": "0.1.0+91c7a9edf388",
+  "generatedAt": "2026-10-27T15:39:22.160Z"
+}

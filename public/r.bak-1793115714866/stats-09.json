@@ -1,0 +1,33 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "stats-09",
+  "type": "registry:block",
+  "title": "stats-09",
+  "description": "Dark trusted-creators band with heading and a tight four-cell metrics grid.",
+  "cssVars": {
+    "light": {
+      "canvas": "#f3f3f4",
+      "border-soft": "color-mix(in oklab, #e4e4e7 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18)",
+      "background": "var(--canvas)",
+      "card": "#ffffff"
+    },
+    "dark": {
+      "canvas": "#09090b",
+      "border-soft": "color-mix(in oklab, #27272a 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(0, 0, 0, 0.24), 0 28px 56px -28px rgba(0, 0, 0, 0.48)",
+      "background": "var(--canvas)",
+      "card": "#18181b"
+    }
+  },
+  "files": [
+    {
+      "path": "components/blocks/marketing/stats-09/stats.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport type * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst metrics = [\n  { value: \"12 million\", label: \"words written in 2023\" },\n  { value: \"10k\", label: \"episodes uploaded\" },\n  { value: \"6.6k\", label: \"hours of media\" },\n  { value: \"2.1k\", label: \"answers\" },\n]\n\nexport default function Stats({\n  className,\n  ...props\n}: React.ComponentProps<\"section\">) {\n  return (\n    <section\n      className={cn(\"w-full px-4 md:px-8\", className)}\n      aria-labelledby=\"stats-heading\"\n      {...props}\n    >\n      <div className=\"w-full rounded-[24px] border border-border/70 bg-card p-5 shadow-soft sm:p-8 md:p-10\">\n        <div className=\"mx-auto max-w-6xl\">\n          <div className=\"mx-auto max-w-2xl space-y-3 text-center\">\n            <h2\n              id=\"stats-heading\"\n              className=\"text-2xl font-semibold tracking-tight md:text-3xl\"\n            >\n              Trusted by creators worldwide\n            </h2>\n            <p className=\"text-base text-muted-foreground\">\n              We can help you grow your audience and your business, no matter\n              the size.\n            </p>\n          </div>\n\n          <dl className=\"mt-8 grid grid-cols-1 gap-px overflow-hidden rounded-xl bg-border text-center sm:mt-12 sm:grid-cols-2 lg:grid-cols-4\">\n            {metrics.map((item) => (\n              <div\n                key={item.label}\n                className=\"flex flex-col bg-muted/50 p-6 dark:bg-muted sm:p-8\"\n              >\n                <dt className=\"order-last text-sm text-muted-foreground\">\n                  {item.label}\n                </dt>\n                <dd className=\"order-first text-3xl font-semibold tracking-tight tabular-nums text-foreground\">\n                  {item.value}\n                </dd>\n              </div>\n            ))}\n          </dl>\n        </div>\n      </div>\n    </section>\n  )\n}\n",
+      "target": "components/blocks/marketing/stats-09/stats.tsx"
+    }
+  ],
+  "version": "0.1.0+91c7a9edf388",
+  "generatedAt": "2026-10-27T15:39:22.160Z"
+}

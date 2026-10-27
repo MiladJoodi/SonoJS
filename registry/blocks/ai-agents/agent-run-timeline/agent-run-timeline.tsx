@@ -1023,7 +1023,7 @@ export function AgentRunTimeline() {
   }, [sceneIndex])
 
   return (
-    <div className="flex h-full min-h-[720px] flex-col bg-background text-foreground">
+    <div className="flex h-full min-h-[720px] flex-col bg-white text-foreground dark:bg-background">
       <div ref={scroller} className="min-h-0 flex-1 overflow-y-auto">
         <div className="mx-auto flex w-full max-w-[664px] flex-col gap-4 px-6 py-10">
           <div className="flex">

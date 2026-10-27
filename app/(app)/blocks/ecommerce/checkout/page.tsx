@@ -10,6 +10,7 @@ import Checkout05 from "@/registry/blocks/ecommerce/checkout/checkout-05/checkou
 import Checkout06 from "@/registry/blocks/ecommerce/checkout/checkout-06/checkout"
 import Checkout07 from "@/registry/blocks/ecommerce/checkout/checkout-07/checkout"
 import Checkout08 from "@/registry/blocks/ecommerce/checkout/checkout-08/checkout"
+import Checkout09 from "@/registry/blocks/ecommerce/checkout/checkout-09/checkout"
 
 import { blocksPageMetadata } from "@/lib/seo"
 
@@ -28,7 +29,7 @@ export default function BlockCheckoutDocsPage() {
       <BlocksPageHeader
         title="Checkout"
         pathname="/blocks/ecommerce/checkout"
-        description="Eight checkout layouts — fixed sidebar, two-column, stepper, payment form, vertical fields, one column, modal, and drawer."
+        description="Nine checkout layouts — fixed sidebar, two-column, stepper, payment form, vertical fields, one column, modal, drawer, and multi-step."
       />
 
       <div className="flex flex-col gap-8">
@@ -41,7 +42,7 @@ export default function BlockCheckoutDocsPage() {
             },
           ]}
           previewAlign="start"
-          previewClassName="bg-canvas p-0"
+          previewClassName="bg-white p-0 dark:bg-background"
         >
           <Checkout01 />
         </BlockExample>
@@ -55,7 +56,7 @@ export default function BlockCheckoutDocsPage() {
             },
           ]}
           previewAlign="start"
-          previewClassName="bg-canvas p-0"
+          previewClassName="bg-white p-0 dark:bg-background"
         >
           <Checkout02 />
         </BlockExample>
@@ -69,7 +70,7 @@ export default function BlockCheckoutDocsPage() {
             },
           ]}
           previewAlign="start"
-          previewClassName="bg-canvas p-0"
+          previewClassName="bg-white p-0 dark:bg-background"
         >
           <Checkout03 />
         </BlockExample>
@@ -83,7 +84,7 @@ export default function BlockCheckoutDocsPage() {
             },
           ]}
           previewAlign="start"
-          previewClassName="bg-canvas p-0"
+          previewClassName="bg-white p-0 dark:bg-background"
         >
           <Checkout04 />
         </BlockExample>
@@ -97,7 +98,7 @@ export default function BlockCheckoutDocsPage() {
             },
           ]}
           previewAlign="start"
-          previewClassName="bg-canvas p-0"
+          previewClassName="bg-white p-0 dark:bg-background"
         >
           <Checkout05 />
         </BlockExample>
@@ -111,7 +112,7 @@ export default function BlockCheckoutDocsPage() {
             },
           ]}
           previewAlign="start"
-          previewClassName="bg-canvas p-0"
+          previewClassName="bg-white p-0 dark:bg-background"
         >
           <Checkout06 />
         </BlockExample>
@@ -125,6 +126,7 @@ export default function BlockCheckoutDocsPage() {
             },
           ]}
           previewAlign="center"
+          previewSize="compact"
           previewClassName="bg-canvas p-0"
         >
           <Checkout07 />
@@ -139,9 +141,24 @@ export default function BlockCheckoutDocsPage() {
             },
           ]}
           previewAlign="center"
+          previewSize="compact"
           previewClassName="bg-canvas p-0"
         >
           <Checkout08 />
+        </BlockExample>
+
+        <BlockExample
+          name="checkout-09"
+          usage={[
+            {
+              title: "app/page.tsx",
+              code: usage("checkout-09"),
+            },
+          ]}
+          previewAlign="start"
+          previewClassName="bg-canvas p-0"
+        >
+          <Checkout09 />
         </BlockExample>
       </div>
     </article>

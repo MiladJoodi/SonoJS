@@ -1,0 +1,40 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "command-menu-06",
+  "type": "registry:block",
+  "title": "command-menu-06",
+  "description": "Slash studio command dialog for AI generate and editor insert actions.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "button",
+    "command"
+  ],
+  "cssVars": {
+    "light": {
+      "canvas": "#f3f3f4",
+      "border-soft": "color-mix(in oklab, #e4e4e7 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18)",
+      "background": "var(--canvas)",
+      "card": "#ffffff"
+    },
+    "dark": {
+      "canvas": "#09090b",
+      "border-soft": "color-mix(in oklab, #27272a 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(0, 0, 0, 0.24), 0 28px 56px -28px rgba(0, 0, 0, 0.48)",
+      "background": "var(--canvas)",
+      "card": "#18181b"
+    }
+  },
+  "files": [
+    {
+      "path": "components/blocks/navigation/command-menu-06/command-menu.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport {\n  Heading1Icon,\n  ImageIcon,\n  ListIcon,\n  SparklesIcon,\n  TableIcon,\n  TextCursorInputIcon,\n  WorkflowIcon,\n} from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { Button } from \"@/components/ui/button\"\nimport {\n  Command,\n  CommandDialog,\n  CommandEmpty,\n  CommandGroup,\n  CommandInput,\n  CommandItem,\n  CommandList,\n  CommandSeparator,\n  CommandShortcut,\n} from \"@/components/ui/command\"\n\nconst SLASH = [\n  {\n    group: \"Generate\",\n    items: [\n      {\n        id: \"ai-continue\",\n        label: \"Continue writing\",\n        hint: \"Extend from cursor\",\n        icon: SparklesIcon,\n        keys: \"⌘↵\",\n      },\n      {\n        id: \"ai-brief\",\n        label: \"Summarize selection\",\n        hint: \"Short bullet brief\",\n        icon: TextCursorInputIcon,\n        keys: \"\",\n      },\n      {\n        id: \"ai-flow\",\n        label: \"Turn into workflow\",\n        hint: \"Steps + owners\",\n        icon: WorkflowIcon,\n        keys: \"\",\n      },\n    ],\n  },\n  {\n    group: \"Insert\",\n    items: [\n      {\n        id: \"h1\",\n        label: \"Heading\",\n        hint: \"/h1\",\n        icon: Heading1Icon,\n        keys: \"\",\n      },\n      {\n        id: \"list\",\n        label: \"Bulleted list\",\n        hint: \"/list\",\n        icon: ListIcon,\n        keys: \"\",\n      },\n      {\n        id: \"table\",\n        label: \"Table\",\n        hint: \"/table\",\n        icon: TableIcon,\n        keys: \"\",\n      },\n      {\n        id: \"image\",\n        label: \"Image\",\n        hint: \"/img\",\n        icon: ImageIcon,\n        keys: \"\",\n      },\n    ],\n  },\n] as const\n\nexport default function CommandMenu({\n  className,\n  ...props\n}: React.ComponentProps<\"div\">) {\n  const [open, setOpen] = React.useState(false)\n  const [q, setQ] = React.useState(\"/\")\n\n  const needle = q.replace(/^\\//, \"\").toLowerCase()\n  const visible = SLASH.map((section) => ({\n    ...section,\n    items: section.items.filter(\n      (it) =>\n        !needle ||\n        it.label.toLowerCase().includes(needle) ||\n        it.hint.toLowerCase().includes(needle) ||\n        it.id.includes(needle)\n    ),\n  })).filter((section) => section.items.length > 0)\n\n  return (\n    <div\n      className={cn(\n        \"flex min-h-[28rem] w-full flex-1 flex-col bg-canvas\",\n        className\n      )}\n      {...props}\n    >\n      <header className=\"border-b border-border/70 px-4 py-3 sm:px-6\">\n        <p className=\"text-start text-sm font-medium text-foreground\">\n          Slash studio\n        </p>\n        <p className=\"text-start text-xs text-muted-foreground\">\n          Editor insert palette — keep the leading slash.\n        </p>\n      </header>\n\n      <main className=\"flex flex-1 flex-col items-center justify-center gap-3 px-4 py-10 sm:px-6\">\n        <Button\n          type=\"button\"\n          variant=\"outline\"\n          className=\"cursor-pointer\"\n          onClick={() => {\n            setQ(\"/\")\n            setOpen(true)\n          }}\n        >\n          Insert with /\n        </Button>\n      </main>\n\n      <CommandDialog\n        open={open}\n        onOpenChange={(next) => {\n          setOpen(next)\n          if (!next) setQ(\"/\")\n        }}\n      >\n        <Command\n          shouldFilter={false}\n          className=\"bg-popover text-popover-foreground\"\n        >\n          <CommandInput\n            value={q}\n            onValueChange={(v) => setQ(v.startsWith(\"/\") ? v : `/${v}`)}\n            placeholder=\"/ask or /insert…\"\n            dir=\"ltr\"\n            className=\"text-start\"\n          />\n          <CommandList className=\"max-h-[min(20rem,50dvh)]\">\n            <CommandEmpty>\n              Unknown slash. Try{\" \"}\n              <span className=\"font-mono\" dir=\"ltr\">\n                /ai\n              </span>{\" \"}\n              or{\" \"}\n              <span className=\"font-mono\" dir=\"ltr\">\n                /h1\n              </span>\n              .\n            </CommandEmpty>\n            {visible.map((section, idx) => (\n              <React.Fragment key={section.group}>\n                {idx > 0 ? <CommandSeparator /> : null}\n                <CommandGroup heading={section.group}>\n                  {section.items.map((it) => (\n                    <CommandItem\n                      key={it.id}\n                      value={it.id}\n                      className=\"cursor-pointer gap-2.5\"\n                    >\n                      <it.icon aria-hidden />\n                      <div className=\"flex min-w-0 flex-1 flex-col text-start\">\n                        <span className=\"text-sm font-medium\">{it.label}</span>\n                        <span\n                          className=\"truncate font-mono text-xs text-muted-foreground\"\n                          dir=\"ltr\"\n                        >\n                          {it.hint}\n                        </span>\n                      </div>\n                      {it.keys ? (\n                        <CommandShortcut dir=\"ltr\">{it.keys}</CommandShortcut>\n                      ) : null}\n                    </CommandItem>\n                  ))}\n                </CommandGroup>\n              </React.Fragment>\n            ))}\n          </CommandList>\n          <p className=\"border-t border-border/70 px-3 py-2 text-start text-xs text-muted-foreground\">\n            Tip: keep the leading{\" \"}\n            <span className=\"font-mono\" dir=\"ltr\">\n              /\n            </span>{\" \"}\n            — this palette is for editor inserts, not app navigation.\n          </p>\n        </Command>\n      </CommandDialog>\n    </div>\n  )\n}\n",
+      "target": "components/blocks/navigation/command-menu-06/command-menu.tsx"
+    }
+  ],
+  "version": "0.1.0+55ca011705c9",
+  "generatedAt": "2026-10-27T20:11:50.866Z"
+}

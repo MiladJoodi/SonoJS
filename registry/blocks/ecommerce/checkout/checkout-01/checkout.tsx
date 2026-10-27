@@ -67,65 +67,14 @@ const SUMMARY = {
   total: "$113.00",
 } as const
 
-function Field({
-  id,
-  label,
-  children,
-}: {
-  id: string
-  label: string
-  children: React.ReactNode
-}) {
-  return (
-    <div className="space-y-2">
-      <Label htmlFor={id} className="text-sm font-medium text-foreground">
-        {label}
-      </Label>
-      {children}
-    </div>
-  )
-}
-
-function SummaryRow({
-  label,
-  value,
-  emphasize,
-}: {
-  label: string
-  value: string
-  emphasize?: boolean
-}) {
-  return (
-    <li
-      className={cn(
-        "flex flex-wrap items-center justify-between gap-3 text-sm",
-        emphasize
-          ? "border-t border-border/70 pt-4 font-semibold text-foreground"
-          : "text-muted-foreground"
-      )}
-    >
-      <span>{label}</span>
-      <span
-        dir="ltr"
-        className={cn(
-          "ms-auto tabular-nums",
-          emphasize ? "text-foreground" : "font-semibold text-foreground"
-        )}
-      >
-        {value}
-      </span>
-    </li>
-  )
-}
-
 function OrderSidebar() {
   return (
-    <aside className="w-full min-w-0 shrink-0 border-b border-border/70 bg-muted/50 md:sticky md:top-0 md:h-svh md:w-[min(100%,420px)] md:min-w-[340px] md:overflow-y-auto md:border-b-0 md:border-e">
-      <div className="flex flex-col gap-6 px-4 py-8 sm:px-6 md:px-6 md:py-10">
-        <ul className="space-y-5">
+    <aside className="w-full min-w-0 bg-muted md:min-h-full">
+      <div className="px-4 py-8 sm:px-6 md:sticky md:top-0 md:max-h-svh md:overflow-y-auto">
+        <ul className="space-y-6">
           {PRODUCTS.map((product) => (
-            <li key={product.id} className="flex items-start gap-3 sm:gap-4">
-              <div className="flex size-20 shrink-0 items-center justify-center rounded-md bg-card p-2 sm:size-24 sm:p-3">
+            <li key={product.id} className="flex min-w-0 items-start gap-3 sm:gap-4">
+              <div className="flex size-20 shrink-0 rounded-md bg-white p-2.5 sm:size-24 sm:p-3 dark:bg-card">
                 <img
                   src={product.image}
                   alt={product.alt}
@@ -133,21 +82,24 @@ function OrderSidebar() {
                 />
               </div>
               <div className="min-w-0 flex-1">
-                <h3 className="truncate text-start text-sm font-semibold text-foreground">
+                <h3 className="text-start text-sm font-semibold text-foreground">
                   {product.name}
                 </h3>
-                <ul className="mt-2 space-y-1.5 text-sm text-muted-foreground">
-                  <li className="flex flex-wrap justify-between gap-2">
-                    <span>Quantity</span>
-                    <span dir="ltr" className="tabular-nums text-foreground">
+                <ul className="mt-2 space-y-2 text-sm font-medium text-muted-foreground">
+                  <li className="flex min-w-0 flex-wrap gap-x-4 gap-y-1">
+                    Quantity
+                    <span
+                      dir="ltr"
+                      className="ms-auto tabular-nums text-foreground"
+                    >
                       {product.quantity}
                     </span>
                   </li>
-                  <li className="flex flex-wrap justify-between gap-2">
-                    <span>Total Price</span>
+                  <li className="flex min-w-0 flex-wrap gap-x-4 gap-y-1">
+                    Total Price
                     <span
                       dir="ltr"
-                      className="font-semibold tabular-nums text-foreground"
+                      className="ms-auto font-semibold tabular-nums text-foreground"
                     >
                       {product.price}
                     </span>
@@ -158,30 +110,51 @@ function OrderSidebar() {
           ))}
         </ul>
 
-        <hr className="border-border/70" />
+        <hr className="my-6 border-border" />
 
-        <form className="space-y-3" onSubmit={(e) => e.preventDefault()}>
-          <Label htmlFor="checkout-01-promo" className="text-sm font-medium">
-            Do you have a promo code?
-          </Label>
+        <form
+          className="mb-8 max-w-sm space-y-2"
+          onSubmit={(e) => e.preventDefault()}
+        >
+          <Label htmlFor="checkout-01-promo">Do you have a promo code?</Label>
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
             <Input
               id="checkout-01-promo"
               name="promocode"
               placeholder="Enter promo code"
-              className="min-w-0 flex-1"
+              className="min-w-0 flex-1 bg-white dark:bg-card"
             />
-            <Button type="submit" variant="outline" className="w-full sm:w-auto">
+            <Button type="submit" className="w-full sm:w-auto">
               Apply
             </Button>
           </div>
         </form>
 
-        <ul className="space-y-3">
-          <SummaryRow label="Subtotal" value={SUMMARY.subtotal} />
-          <SummaryRow label="Shipping" value={SUMMARY.shipping} />
-          <SummaryRow label="Tax" value={SUMMARY.tax} />
-          <SummaryRow label="Total" value={SUMMARY.total} emphasize />
+        <ul className="space-y-4 text-sm font-medium text-muted-foreground">
+          {(
+            [
+              ["Subtotal", SUMMARY.subtotal],
+              ["Shipping", SUMMARY.shipping],
+              ["Tax", SUMMARY.tax],
+            ] as const
+          ).map(([label, value]) => (
+            <li key={label} className="flex flex-wrap gap-4">
+              {label}
+              <span
+                dir="ltr"
+                className="ms-auto font-semibold tabular-nums text-foreground"
+              >
+                {value}
+              </span>
+            </li>
+          ))}
+          <li aria-hidden className="border-t border-border" />
+          <li className="flex flex-wrap gap-4 font-semibold text-foreground">
+            Total
+            <span dir="ltr" className="ms-auto tabular-nums">
+              {SUMMARY.total}
+            </span>
+          </li>
         </ul>
       </div>
     </aside>
@@ -193,131 +166,130 @@ function DeliveryDetailsForm() {
   const [billingSame, setBillingSame] = React.useState(true)
 
   return (
-    <section className="min-w-0 flex-1 bg-canvas px-4 py-8 sm:px-6 md:px-8 md:py-10 xl:px-12">
-      <form
-        className="mx-auto w-full max-w-2xl space-y-10"
-        onSubmit={(e) => e.preventDefault()}
-      >
-        <fieldset className="space-y-6">
-          <legend className="text-start text-xl font-semibold tracking-tight text-foreground">
+    <section className="h-max min-w-0 w-full bg-white px-4 py-8 sm:px-6 lg:px-8 dark:bg-background">
+      <form className="min-w-0 space-y-0" onSubmit={(e) => e.preventDefault()}>
+        <fieldset>
+          <legend className="mb-6 text-start text-xl font-semibold text-foreground">
             Delivery Details
           </legend>
-
-          <div className="grid gap-4 sm:grid-cols-2 sm:gap-5">
-            <Field id="checkout-01-fname" label="First Name">
-              <Input
-                id="checkout-01-fname"
-                name="fname"
-                placeholder="John"
-                autoComplete="given-name"
-                required
-              />
-            </Field>
-            <Field id="checkout-01-lname" label="Last Name">
-              <Input
-                id="checkout-01-lname"
-                name="lname"
-                placeholder="Doe"
-                autoComplete="family-name"
-                required
-              />
-            </Field>
-            <Field id="checkout-01-email" label="Email">
-              <Input
-                id="checkout-01-email"
-                name="email"
-                type="email"
-                placeholder="john@example.com"
-                autoComplete="email"
-                required
-              />
-            </Field>
-            <Field id="checkout-01-mobile" label="Mobile Number">
-              <Input
-                id="checkout-01-mobile"
-                name="mobile"
-                type="tel"
-                placeholder="123-456-7890"
-                autoComplete="tel"
-                dir="ltr"
-                required
-              />
-            </Field>
-            <Field id="checkout-01-address" label="Address Line">
-              <Input
-                id="checkout-01-address"
-                name="address"
-                placeholder="123 Main Street"
-                autoComplete="street-address"
-                required
-              />
-            </Field>
-            <Field id="checkout-01-city" label="City">
-              <Input
-                id="checkout-01-city"
-                name="city"
-                placeholder="New York"
-                autoComplete="address-level2"
-                required
-              />
-            </Field>
-            <Field id="checkout-01-state" label="State">
-              <Input
-                id="checkout-01-state"
-                name="state"
-                placeholder="NY"
-                autoComplete="address-level1"
-                required
-              />
-            </Field>
-            <Field id="checkout-01-postal" label="Postal code">
-              <Input
-                id="checkout-01-postal"
-                name="postalCode"
-                placeholder="10001"
-                autoComplete="postal-code"
-                dir="ltr"
-                required
-              />
-            </Field>
+          <div className="grid min-w-0 gap-6 lg:grid-cols-2">
+            {(
+              [
+                {
+                  id: "fname",
+                  label: "First Name",
+                  type: "text",
+                  placeholder: "John",
+                  autoComplete: "given-name",
+                },
+                {
+                  id: "lname",
+                  label: "Last Name",
+                  type: "text",
+                  placeholder: "Doe",
+                  autoComplete: "family-name",
+                },
+                {
+                  id: "email",
+                  label: "Email",
+                  type: "email",
+                  placeholder: "john@example.com",
+                  autoComplete: "email",
+                },
+                {
+                  id: "mobile",
+                  label: "Mobile Number",
+                  type: "tel",
+                  placeholder: "123-456-7890",
+                  autoComplete: "tel",
+                },
+                {
+                  id: "address",
+                  label: "Address Line",
+                  type: "text",
+                  placeholder: "123 Main Street",
+                  autoComplete: "street-address",
+                },
+                {
+                  id: "city",
+                  label: "City",
+                  type: "text",
+                  placeholder: "New York",
+                  autoComplete: "address-level2",
+                },
+                {
+                  id: "state",
+                  label: "State",
+                  type: "text",
+                  placeholder: "NY",
+                  autoComplete: "address-level1",
+                },
+                {
+                  id: "postal-code",
+                  label: "Postal code",
+                  type: "text",
+                  placeholder: "10001",
+                  autoComplete: "postal-code",
+                },
+              ] as const
+            ).map((field) => (
+              <div key={field.id} className="space-y-2">
+                <Label htmlFor={`checkout-01-${field.id}`}>{field.label}</Label>
+                <Input
+                  id={`checkout-01-${field.id}`}
+                  name={field.id}
+                  type={field.type}
+                  placeholder={field.placeholder}
+                  autoComplete={field.autoComplete}
+                  dir={
+                    field.type === "tel" || field.id === "postal-code"
+                      ? "ltr"
+                      : undefined
+                  }
+                  required
+                />
+              </div>
+            ))}
           </div>
         </fieldset>
 
-        <fieldset className="space-y-5">
-          <legend className="text-start text-xl font-semibold tracking-tight text-foreground">
+        <fieldset className="mt-12">
+          <legend className="mb-6 text-start text-xl font-semibold text-foreground">
             Payment method
           </legend>
-
           <RadioGroup
             value={paymentMethod}
             onValueChange={setPaymentMethod}
-            className="grid gap-4 sm:grid-cols-2"
+            className="grid min-w-0 gap-4 lg:grid-cols-2"
           >
             <label
               htmlFor="checkout-01-card"
               className={cn(
-                "flex cursor-pointer flex-col gap-3 rounded-[12px] border border-border/70 bg-card p-4 shadow-soft transition-colors",
-                paymentMethod === "card" &&
-                  "border-primary/50 ring-1 ring-primary/30"
+                "min-w-0 cursor-pointer rounded-md border border-border bg-muted p-4",
+                paymentMethod === "card" && "border-primary/40"
               )}
             >
-              <div className="flex items-center gap-3">
+              <div className="flex min-w-0 items-center gap-3 sm:gap-4">
                 <RadioGroupItem value="card" id="checkout-01-card" />
-                <span className="flex flex-wrap items-center gap-2">
-                  <img src={assetSrc(visaMark)} alt="Visa" className="h-6 w-auto" />
+                <span className="flex min-w-0 flex-wrap gap-2">
+                  <img
+                    src={assetSrc(visaMark)}
+                    alt="Visa"
+                    className="h-auto w-10 sm:w-12"
+                  />
                   <img
                     src={assetSrc(amexMark)}
                     alt="American Express"
-                    className="h-6 w-auto"
+                    className="h-auto w-10 sm:w-12"
                   />
                   <img
                     src={assetSrc(mastercardMark)}
                     alt="Mastercard"
-                    className="h-6 w-auto"
+                    className="h-auto w-10 sm:w-12"
                   />
                 </span>
               </div>
-              <p className="text-start text-sm text-muted-foreground">
+              <p className="mt-4 text-start text-sm font-medium text-muted-foreground">
                 Pay with your debit or credit card
               </p>
             </label>
@@ -325,27 +297,26 @@ function DeliveryDetailsForm() {
             <label
               htmlFor="checkout-01-paypal"
               className={cn(
-                "flex cursor-pointer flex-col gap-3 rounded-[12px] border border-border/70 bg-card p-4 shadow-soft transition-colors",
-                paymentMethod === "paypal" &&
-                  "border-primary/50 ring-1 ring-primary/30"
+                "min-w-0 cursor-pointer rounded-md border border-border bg-muted p-4",
+                paymentMethod === "paypal" && "border-primary/40"
               )}
             >
-              <div className="flex items-center gap-3">
+              <div className="flex min-w-0 items-center gap-3 sm:gap-4">
                 <RadioGroupItem value="paypal" id="checkout-01-paypal" />
                 <img
                   src={assetSrc(paypalMark)}
                   alt="PayPal"
-                  className="h-7 w-auto"
+                  className="h-auto w-16 sm:w-20"
                 />
               </div>
-              <p className="text-start text-sm text-muted-foreground">
+              <p className="mt-4 text-start text-sm font-medium text-muted-foreground">
                 Pay with your PayPal account
               </p>
             </label>
           </RadioGroup>
         </fieldset>
 
-        <div className="flex items-start gap-3">
+        <div className="mt-6 flex items-start gap-3">
           <Checkbox
             id="checkout-01-billing"
             checked={billingSame}
@@ -354,18 +325,20 @@ function DeliveryDetailsForm() {
           />
           <Label
             htmlFor="checkout-01-billing"
-            className="cursor-pointer text-sm leading-snug font-normal text-muted-foreground"
+            className="cursor-pointer text-sm font-normal text-muted-foreground"
           >
             Billing address is the same as shipping address
           </Label>
         </div>
 
-        <Button type="submit" className="w-full" size="lg">
-          Pay{" "}
-          <span dir="ltr" className="tabular-nums">
-            {SUMMARY.total}
-          </span>
-        </Button>
+        <div className="mt-8">
+          <Button type="submit" className="w-full">
+            Pay{" "}
+            <span dir="ltr" className="tabular-nums">
+              {SUMMARY.total}
+            </span>
+          </Button>
+        </div>
       </form>
     </section>
   )
@@ -376,9 +349,15 @@ export default function Checkout({
   ...props
 }: React.ComponentProps<"main">) {
   return (
-    <main className={cn("w-full bg-canvas", className)} {...props}>
+    <main
+      className={cn(
+        "w-full min-w-0 overflow-x-hidden bg-white dark:bg-background",
+        className
+      )}
+      {...props}
+    >
       <h1 className="sr-only">Checkout</h1>
-      <div className="flex flex-col md:flex-row md:items-start">
+      <div className="grid h-full min-w-0 grid-cols-1 md:grid-cols-[minmax(0,420px)_minmax(0,1fr)]">
         <OrderSidebar />
         <DeliveryDetailsForm />
       </div>

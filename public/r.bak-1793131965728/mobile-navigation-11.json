@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "mobile-navigation-11",
+  "type": "registry:block",
+  "title": "mobile-navigation-11",
+  "description": "Blur chrome tab bar with filled active glyphs, labels, and home indicator.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/blocks/navigation/mobile-navigation-11/mobile-navigation.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport {\n  HeartIcon,\n  HouseIcon,\n  PlusSquareIcon,\n  SearchIcon,\n  UserRoundIcon,\n} from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst items = [\n  { id: \"home\", label: \"Home\", icon: HouseIcon },\n  { id: \"search\", label: \"Search\", icon: SearchIcon },\n  { id: \"post\", label: \"Post\", icon: PlusSquareIcon },\n  { id: \"likes\", label: \"Likes\", icon: HeartIcon },\n  { id: \"profile\", label: \"Profile\", icon: UserRoundIcon },\n] as const\n\ntype ItemId = (typeof items)[number][\"id\"]\n\nexport default function MobileNavigation({\n  className,\n  ...props\n}: React.ComponentProps<\"div\">) {\n  const [active, setActive] = React.useState<ItemId>(\"home\")\n  const activeItem = items.find((item) => item.id === active)\n\n  return (\n    <div\n      className={cn(\n        \"relative flex min-h-[22rem] w-full flex-col overflow-hidden rounded-[12px] border border-border/70 bg-background\",\n        className\n      )}\n      {...props}\n    >\n      <div className=\"flex flex-1 flex-col items-center justify-center gap-2 px-6 text-center\">\n        <p className=\"text-sm font-medium text-foreground\">\n          {activeItem?.label}\n        </p>\n        <p className=\"max-w-xs text-sm text-muted-foreground\">\n          Blur chrome tab bar with filled active glyphs and always-on labels.\n        </p>\n      </div>\n\n      <nav\n        aria-label=\"Mobile\"\n        className={cn(\n          \"relative border-t border-black/10 bg-background/72 pb-[max(0.5rem,env(safe-area-inset-bottom))] backdrop-blur-2xl backdrop-saturate-150\",\n          \"dark:border-white/10 dark:bg-background/55\"\n        )}\n      >\n        <div className=\"mx-auto grid h-[3.05rem] max-w-lg grid-cols-5 pt-1\">\n          {items.map((item) => {\n            const Icon = item.icon\n            const isActive = active === item.id\n            return (\n              <button\n                key={item.id}\n                type=\"button\"\n                onClick={() => setActive(item.id)}\n                aria-current={isActive ? \"page\" : undefined}\n                className={cn(\n                  \"inline-flex h-full min-w-0 cursor-pointer flex-col items-center justify-center gap-0.5 px-1\",\n                  \"transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring\"\n                )}\n              >\n                <Icon\n                  aria-hidden\n                  strokeWidth={isActive ? 0 : 1.75}\n                  className={cn(\n                    \"size-[22px] shrink-0 transition-[color,transform] duration-200\",\n                    isActive\n                      ? \"scale-[1.02] fill-primary text-primary\"\n                      : \"text-muted-foreground\"\n                  )}\n                />\n                <span\n                  className={cn(\n                    \"max-w-full truncate text-[10px] font-medium leading-none tracking-tight\",\n                    isActive ? \"text-primary\" : \"text-muted-foreground\"\n                  )}\n                >\n                  {item.label}\n                </span>\n              </button>\n            )\n          })}\n        </div>\n        <div\n          aria-hidden\n          className=\"mx-auto mb-1 h-1 w-[8.25rem] rounded-full bg-foreground/85\"\n        />\n      </nav>\n    </div>\n  )\n}\n",
+      "target": "components/blocks/navigation/mobile-navigation-11/mobile-navigation.tsx"
+    }
+  ],
+  "version": "0.1.0+55ca011705c9",
+  "generatedAt": "2026-10-27T20:11:50.866Z"
+}

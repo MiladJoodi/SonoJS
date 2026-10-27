@@ -111,6 +111,8 @@ const BINARY_EXT = new Set([
   ".gif",
   ".svg",
   ".woff2",
+  ".mp4",
+  ".webm",
 ])
 
 function isBinaryRegistryPath(filePath) {

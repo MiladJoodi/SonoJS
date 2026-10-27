@@ -10,6 +10,7 @@ import InsightsSidebar from "@/registry/blocks/navigation/sidebar/sidebar-05/sid
 import AccentSidebar from "@/registry/blocks/navigation/sidebar/sidebar-06/sidebar"
 import SearchSidebar from "@/registry/blocks/navigation/sidebar/sidebar-07/sidebar"
 import ChatSidebar from "@/registry/blocks/navigation/sidebar/sidebar-08/sidebar"
+import DualRailSidebar from "@/registry/blocks/navigation/sidebar/sidebar-09/sidebar"
 
 import { blocksPageMetadata } from "@/lib/seo"
 
@@ -125,6 +126,19 @@ export default function BlockSidebarDocsPage() {
           {...previewProps}
         >
           <ChatSidebar />
+        </BlockExample>
+
+        <ExampleRule />
+
+        <BlockExample
+          name="sidebar-09"
+          usage={[{ title: "app/page.tsx", code: usage("sidebar-09") }]}
+          previewAlign="start"
+          previewClassName="bg-white p-0 h-180 overflow-hidden dark:bg-background"
+        >
+          <div className="h-180">
+            <DualRailSidebar />
+          </div>
         </BlockExample>
       </div>
     </article>

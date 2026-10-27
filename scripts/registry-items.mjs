@@ -191,6 +191,440 @@ function dataTablesAdvancedGridBlock(
   }
 }
 
+/** Billing settings under Payments & Billing. */
+function paymentsBillingSettingsBlock(
+  slug,
+  description,
+  {
+    registryDependencies = [
+      "alert",
+      "badge",
+      "button",
+      "card",
+      "separator",
+      "table",
+    ],
+  } = {}
+) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies,
+    files: [
+      {
+        path: `registry/blocks/payments-billing/billing-settings/${slug}/billing-settings.tsx`,
+        type: "registry:component",
+        target: `components/blocks/payments-billing/${slug}/billing-settings.tsx`,
+      },
+    ],
+  }
+}
+
+function paymentsUsageBasedBillingBlock(
+  slug,
+  description,
+  {
+    registryDependencies = ["badge", "button", "separator"],
+    dependencies = ["lucide-react"],
+  } = {}
+) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies,
+    registryDependencies,
+    files: [
+      {
+        path: `registry/blocks/payments-billing/usage-based-billing/${slug}/usage-based-billing.tsx`,
+        type: "registry:component",
+        target: `components/blocks/payments-billing/${slug}/usage-based-billing.tsx`,
+      },
+    ],
+  }
+}
+
+function paymentsTransferFundsBlock(
+  slug,
+  description,
+  {
+    registryDependencies = [
+      "badge",
+      "button",
+      "field",
+      "input-group",
+      "select",
+      "textarea",
+    ],
+  } = {}
+) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies,
+    files: [
+      {
+        path: `registry/blocks/payments-billing/transfer-funds/${slug}/transfer-funds.tsx`,
+        type: "registry:component",
+        target: `components/blocks/payments-billing/${slug}/transfer-funds.tsx`,
+      },
+    ],
+  }
+}
+
+function paymentsInvoiceBlock(
+  slug,
+  description,
+  {
+    registryDependencies = ["badge", "button", "separator", "table"],
+  } = {}
+) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies,
+    files: [
+      {
+        path: `registry/blocks/payments-billing/invoice/${slug}/invoice.tsx`,
+        type: "registry:component",
+        target: `components/blocks/payments-billing/${slug}/invoice.tsx`,
+      },
+    ],
+  }
+}
+
+/** Cards & wallets under Payments & Billing. */
+function paymentsPaymentMethodsBlock(
+  slug,
+  description,
+  {
+    registryDependencies = ["badge", "button"],
+  } = {}
+) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies,
+    files: [
+      {
+        path: `registry/blocks/payments-billing/payment-methods/${slug}/payment-methods.tsx`,
+        type: "registry:component",
+        target: `components/blocks/payments-billing/${slug}/payment-methods.tsx`,
+      },
+    ],
+  }
+}
+
+function feedbackAccessDeniedBlock(
+  slug,
+  description,
+  {
+    registryDependencies = ["avatar", "badge", "button", "separator"],
+  } = {}
+) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies,
+    files: [
+      {
+        path: `registry/blocks/feedback-states/access-denied/${slug}/access-denied.tsx`,
+        type: "registry:component",
+        target: `components/blocks/feedback-states/${slug}/access-denied.tsx`,
+      },
+    ],
+  }
+}
+
+function feedbackNotFoundBlock(
+  slug,
+  description,
+  {
+    registryDependencies = ["button", "input-group", "separator"],
+  } = {}
+) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies,
+    files: [
+      {
+        path: `registry/blocks/feedback-states/not-found/${slug}/not-found.tsx`,
+        type: "registry:component",
+        target: `components/blocks/feedback-states/${slug}/not-found.tsx`,
+      },
+    ],
+  }
+}
+
+function feedbackErrorStateBlock(
+  slug,
+  description,
+  {
+    registryDependencies = ["alert", "button", "separator"],
+  } = {}
+) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies,
+    files: [
+      {
+        path: `registry/blocks/feedback-states/error-state/${slug}/error-state.tsx`,
+        type: "registry:component",
+        target: `components/blocks/feedback-states/${slug}/error-state.tsx`,
+      },
+    ],
+  }
+}
+
+function feedbackRateLimitBlock(
+  slug,
+  description,
+  {
+    registryDependencies = ["alert", "badge", "button", "separator"],
+  } = {}
+) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies,
+    files: [
+      {
+        path: `registry/blocks/feedback-states/rate-limit/${slug}/rate-limit.tsx`,
+        type: "registry:component",
+        target: `components/blocks/feedback-states/${slug}/rate-limit.tsx`,
+      },
+    ],
+  }
+}
+
+function feedbackMaintenanceBlock(
+  slug,
+  description,
+  {
+    registryDependencies = ["badge", "button", "input-group"],
+  } = {}
+) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies,
+    files: [
+      {
+        path: `registry/blocks/feedback-states/maintenance/${slug}/maintenance.tsx`,
+        type: "registry:component",
+        target: `components/blocks/feedback-states/${slug}/maintenance.tsx`,
+      },
+    ],
+  }
+}
+
+function feedbackStatusPageBlock(
+  slug,
+  description,
+  {
+    registryDependencies = ["alert", "badge", "button", "card"],
+  } = {}
+) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies,
+    files: [
+      {
+        path: `registry/blocks/feedback-states/status-page/${slug}/status-page.tsx`,
+        type: "registry:component",
+        target: `components/blocks/feedback-states/${slug}/status-page.tsx`,
+      },
+    ],
+  }
+}
+
+/** Account settings under User & Account. */
+function userAccountSettingsBlock(
+  slug,
+  description,
+  {
+    registryDependencies = [
+      "avatar",
+      "badge",
+      "button",
+      "field",
+      "input",
+      "select",
+      "separator",
+      "switch",
+      "tabs",
+      "textarea",
+    ],
+    images = ["avatar.webp"],
+  } = {}
+) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies,
+    files: [
+      {
+        path: `registry/blocks/user-account/account-settings/${slug}/account-settings.tsx`,
+        type: "registry:component",
+        target: `components/blocks/user-account/${slug}/account-settings.tsx`,
+      },
+      ...images.map((file) => ({
+        path: `registry/blocks/user-account/account-settings/${slug}/images/${file}`,
+        type: "registry:file",
+        target: `components/blocks/user-account/${slug}/images/${file}`,
+      })),
+    ],
+  }
+}
+
+function userAccountTeamMembersBlock(
+  slug,
+  description,
+  {
+    registryDependencies = [
+      "avatar",
+      "badge",
+      "button",
+      "dialog",
+      "dropdown-menu",
+      "field",
+      "input",
+      "select",
+      "table",
+    ],
+  } = {}
+) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies,
+    files: [
+      {
+        path: `registry/blocks/user-account/team-members/${slug}/team-members.tsx`,
+        type: "registry:component",
+        target: `components/blocks/user-account/${slug}/team-members.tsx`,
+      },
+    ],
+  }
+}
+
+function userAccountRolesAndPermissionsBlock(
+  slug,
+  description,
+  {
+    registryDependencies = [
+      "badge",
+      "button",
+      "card",
+      "checkbox",
+      "table",
+      "tooltip",
+    ],
+  } = {}
+) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies,
+    files: [
+      {
+        path: `registry/blocks/user-account/roles-and-permissions/${slug}/roles-and-permissions.tsx`,
+        type: "registry:component",
+        target: `components/blocks/user-account/${slug}/roles-and-permissions.tsx`,
+      },
+    ],
+  }
+}
+
+/** Public user profile under User & Account. */
+function userAccountUserProfileBlock(
+  slug,
+  description,
+  {
+    registryDependencies = ["avatar", "badge", "button", "separator", "tabs"],
+    images = ["avatar.webp"],
+  } = {}
+) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies,
+    files: [
+      {
+        path: `registry/blocks/user-account/user-profile/${slug}/user-profile.tsx`,
+        type: "registry:component",
+        target: `components/blocks/user-account/${slug}/user-profile.tsx`,
+      },
+      ...images.map((file) => ({
+        path: `registry/blocks/user-account/user-profile/${slug}/images/${file}`,
+        type: "registry:file",
+        target: `components/blocks/user-account/${slug}/images/${file}`,
+      })),
+    ],
+  }
+}
+
 /** Payment form block under Payments & Billing. */
 function paymentsBillingPaymentFormBlock(
   slug,
@@ -368,6 +802,105 @@ function ecommerceShoppingCartBlock(
   }
 }
 
+/** Product category grid: `product-categories.tsx` + local category images. */
+function ecommerceProductCategoriesBlock(
+  slug,
+  description,
+  {
+    dependencies = [],
+    registryDependencies = [],
+    images = [],
+  } = {}
+) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    ...(dependencies?.length ? { dependencies } : {}),
+    ...(registryDependencies?.length ? { registryDependencies } : {}),
+    files: [
+      {
+        path: `registry/blocks/ecommerce/product-categories/${slug}/product-categories.tsx`,
+        type: "registry:component",
+        target: `components/blocks/ecommerce/${slug}/product-categories.tsx`,
+      },
+      ...images.map((file) => ({
+        path: `registry/blocks/ecommerce/product-categories/${slug}/images/${file}`,
+        type: "registry:file",
+        target: `components/blocks/ecommerce/${slug}/images/${file}`,
+      })),
+    ],
+  }
+}
+
+/** Saved wishlist grid: `wishlist.tsx` + local product images. */
+function ecommerceWishlistBlock(
+  slug,
+  description,
+  {
+    dependencies = ["lucide-react"],
+    registryDependencies = ["badge", "button"],
+    images = [],
+  } = {}
+) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    ...(dependencies?.length ? { dependencies } : {}),
+    ...(registryDependencies?.length ? { registryDependencies } : {}),
+    files: [
+      {
+        path: `registry/blocks/ecommerce/wishlist/${slug}/wishlist.tsx`,
+        type: "registry:component",
+        target: `components/blocks/ecommerce/${slug}/wishlist.tsx`,
+      },
+      ...images.map((file) => ({
+        path: `registry/blocks/ecommerce/wishlist/${slug}/images/${file}`,
+        type: "registry:file",
+        target: `components/blocks/ecommerce/${slug}/images/${file}`,
+      })),
+    ],
+  }
+}
+
+/** Post-checkout confirmation page: `order-confirmation.tsx` + local product images. */
+function ecommerceOrderConfirmationBlock(
+  slug,
+  description,
+  {
+    dependencies = ["lucide-react"],
+    registryDependencies = ["badge", "button", "separator"],
+    images = [],
+  } = {}
+) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    ...(dependencies?.length ? { dependencies } : {}),
+    ...(registryDependencies?.length ? { registryDependencies } : {}),
+    files: [
+      {
+        path: `registry/blocks/ecommerce/order-confirmation/${slug}/order-confirmation.tsx`,
+        type: "registry:component",
+        target: `components/blocks/ecommerce/${slug}/order-confirmation.tsx`,
+      },
+      ...images.map((file) => ({
+        path: `registry/blocks/ecommerce/order-confirmation/${slug}/images/${file}`,
+        type: "registry:file",
+        target: `components/blocks/ecommerce/${slug}/images/${file}`,
+      })),
+    ],
+  }
+}
+
 /** Order summary / confirmation card: `order-summary.tsx` + local product images. */
 function ecommerceOrderSummaryBlock(
   slug,
@@ -401,7 +934,292 @@ function ecommerceOrderSummaryBlock(
   }
 }
 
+/** Order tracking page: `order-tracking.tsx` + local product images. */
+function ecommerceOrderTrackingBlock(
+  slug,
+  description,
+  {
+    dependencies = ["lucide-react"],
+    registryDependencies = ["button"],
+    images = [],
+  } = {}
+) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    ...(dependencies?.length ? { dependencies } : {}),
+    ...(registryDependencies?.length ? { registryDependencies } : {}),
+    files: [
+      {
+        path: `registry/blocks/ecommerce/order-tracking/${slug}/order-tracking.tsx`,
+        type: "registry:component",
+        target: `components/blocks/ecommerce/${slug}/order-tracking.tsx`,
+      },
+      ...images.map((file) => ({
+        path: `registry/blocks/ecommerce/order-tracking/${slug}/images/${file}`,
+        type: "registry:file",
+        target: `components/blocks/ecommerce/${slug}/images/${file}`,
+      })),
+    ],
+  }
+}
+
+/** Order history list: `order-history.tsx` + local product images. */
+function ecommerceOrderHistoryBlock(
+  slug,
+  description,
+  {
+    dependencies = [],
+    registryDependencies = [],
+    images = [],
+  } = {}
+) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    ...(dependencies?.length ? { dependencies } : {}),
+    ...(registryDependencies?.length ? { registryDependencies } : {}),
+    files: [
+      {
+        path: `registry/blocks/ecommerce/order-history/${slug}/order-history.tsx`,
+        type: "registry:component",
+        target: `components/blocks/ecommerce/${slug}/order-history.tsx`,
+      },
+      ...images.map((file) => ({
+        path: `registry/blocks/ecommerce/order-history/${slug}/images/${file}`,
+        type: "registry:file",
+        target: `components/blocks/ecommerce/${slug}/images/${file}`,
+      })),
+    ],
+  }
+}
+
+/** Product filter sidebar + results: `product-filter.tsx`. */
+function ecommerceProductFilterBlock(
+  slug,
+  description,
+  {
+    dependencies = [],
+    registryDependencies = [],
+    images = [],
+  } = {}
+) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    ...(dependencies?.length ? { dependencies } : {}),
+    ...(registryDependencies?.length ? { registryDependencies } : {}),
+    files: [
+      {
+        path: `registry/blocks/ecommerce/product-filter/${slug}/product-filter.tsx`,
+        type: "registry:component",
+        target: `components/blocks/ecommerce/${slug}/product-filter.tsx`,
+      },
+      ...images.map((file) => ({
+        path: `registry/blocks/ecommerce/product-filter/${slug}/images/${file}`,
+        type: "registry:file",
+        target: `components/blocks/ecommerce/${slug}/images/${file}`,
+      })),
+    ],
+  }
+}
+
+/** Product review list / cards: `product-review.tsx` + local avatars. */
+function ecommerceProductReviewBlock(
+  slug,
+  description,
+  {
+    dependencies = [],
+    registryDependencies = [],
+    images = [],
+  } = {}
+) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    ...(dependencies?.length ? { dependencies } : {}),
+    ...(registryDependencies?.length ? { registryDependencies } : {}),
+    files: [
+      {
+        path: `registry/blocks/ecommerce/product-review/${slug}/product-review.tsx`,
+        type: "registry:component",
+        target: `components/blocks/ecommerce/${slug}/product-review.tsx`,
+      },
+      ...images.map((file) => ({
+        path: `registry/blocks/ecommerce/product-review/${slug}/images/${file}`,
+        type: "registry:file",
+        target: `components/blocks/ecommerce/${slug}/images/${file}`,
+      })),
+    ],
+  }
+}
+
 /** Image gallery block: `gallery.tsx` + local demo images. */
+/** Data export panel under Files & Media. */
+function filesMediaDataExportBlock(
+  slug,
+  description,
+  {
+    registryDependencies = [
+      "alert",
+      "badge",
+      "button",
+      "checkbox",
+      "label",
+      "progress",
+      "radio-group",
+    ],
+  } = {}
+) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies,
+    files: [
+      {
+        path: `registry/blocks/files-media/data-export/${slug}/data-export.tsx`,
+        type: "registry:component",
+        target: `components/blocks/files-media/${slug}/data-export.tsx`,
+      },
+    ],
+  }
+}
+
+function filesMediaFileManagerBlock(
+  slug,
+  description,
+  {
+    registryDependencies = [
+      "avatar",
+      "button",
+      "checkbox",
+      "dropdown-menu",
+      "input",
+      "table",
+    ],
+  } = {}
+) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies,
+    files: [
+      {
+        path: `registry/blocks/files-media/file-manager/${slug}/file-manager.tsx`,
+        type: "registry:component",
+        target: `components/blocks/files-media/${slug}/file-manager.tsx`,
+      },
+    ],
+  }
+}
+
+function filesMediaFileUploadBlock(
+  slug,
+  description,
+  {
+    registryDependencies = ["badge", "button", "progress"],
+  } = {}
+) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies,
+    files: [
+      {
+        path: `registry/blocks/files-media/file-upload/${slug}/file-upload.tsx`,
+        type: "registry:component",
+        target: `components/blocks/files-media/${slug}/file-upload.tsx`,
+      },
+    ],
+  }
+}
+
+function filesMediaMediaGalleryBlock(
+  slug,
+  description,
+  images = [],
+  {
+    registryDependencies = ["button", "checkbox", "dialog", "label"],
+  } = {}
+) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies,
+    files: [
+      {
+        path: `registry/blocks/files-media/media-gallery/${slug}/media-gallery.tsx`,
+        type: "registry:component",
+        target: `components/blocks/files-media/${slug}/media-gallery.tsx`,
+      },
+      ...images.map((file) => ({
+        path: `registry/blocks/files-media/media-gallery/${slug}/images/${file}`,
+        type: "registry:file",
+        target: `components/blocks/files-media/${slug}/images/${file}`,
+      })),
+    ],
+  }
+}
+
+function filesMediaMediaPlayerBlock(
+  slug,
+  description,
+  media = [],
+  {
+    registryDependencies = ["button"],
+  } = {}
+) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies,
+    files: [
+      {
+        path: `registry/blocks/files-media/media-player/${slug}/media-player.tsx`,
+        type: "registry:component",
+        target: `components/blocks/files-media/${slug}/media-player.tsx`,
+      },
+      ...media.map((file) => ({
+        path: `registry/blocks/files-media/media-player/${slug}/media/${file}`,
+        type: "registry:file",
+        target: `components/blocks/files-media/${slug}/media/${file}`,
+      })),
+    ],
+  }
+}
+
 function filesMediaGalleryBlock(slug, description, images = []) {
   return {
     name: slug,
@@ -457,6 +1275,325 @@ function marketingContentSectionBlock(
 }
 
 /** Application dashboard layout shell: `dashboard-layout.tsx` + local images. */
+/** API key management under Developer Tools. */
+function developerToolsApiKeysBlock(
+  slug,
+  description,
+  {
+    registryDependencies = [
+      "alert",
+      "badge",
+      "button",
+      "card",
+      "checkbox",
+      "dialog",
+      "dropdown-menu",
+      "input",
+      "label",
+      "select",
+      "table",
+    ],
+  } = {}
+) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies,
+    files: [
+      {
+        path: `registry/blocks/developer-tools/api-key-management/${slug}/api-keys.tsx`,
+        type: "registry:component",
+        target: `components/blocks/developer-tools/${slug}/api-keys.tsx`,
+      },
+    ],
+  }
+}
+
+/** Webhook management under Developer Tools. */
+function developerToolsWebhookManagementBlock(
+  slug,
+  description,
+  {
+    registryDependencies = [
+      "badge",
+      "button",
+      "card",
+      "checkbox",
+      "dropdown-menu",
+      "field",
+      "input",
+      "label",
+    ],
+  } = {}
+) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies,
+    files: [
+      {
+        path: `registry/blocks/developer-tools/webhook-management/${slug}/webhook-management.tsx`,
+        type: "registry:component",
+        target: `components/blocks/developer-tools/${slug}/webhook-management.tsx`,
+      },
+    ],
+  }
+}
+
+function developerToolsIntegrationsBlock(
+  slug,
+  description,
+  {
+    registryDependencies = ["badge", "button", "input-group"],
+  } = {}
+) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies,
+    files: [
+      {
+        path: `registry/blocks/developer-tools/integrations/${slug}/integrations.tsx`,
+        type: "registry:component",
+        target: `components/blocks/developer-tools/${slug}/integrations.tsx`,
+      },
+    ],
+  }
+}
+
+function developerToolsLogsViewerBlock(
+  slug,
+  description,
+  {
+    registryDependencies = ["button", "input-group", "select"],
+  } = {}
+) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies,
+    files: [
+      {
+        path: `registry/blocks/developer-tools/logs-viewer/${slug}/logs-viewer.tsx`,
+        type: "registry:component",
+        target: `components/blocks/developer-tools/${slug}/logs-viewer.tsx`,
+      },
+    ],
+  }
+}
+
+function communicationNotificationCenterBlock(
+  slug,
+  description,
+  {
+    registryDependencies = [
+      "avatar",
+      "badge",
+      "button",
+      "dropdown-menu",
+      "scroll-area",
+      "tabs",
+    ],
+  } = {}
+) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies,
+    files: [
+      {
+        path: `registry/blocks/communication/notification-center/${slug}/notification-center.tsx`,
+        type: "registry:component",
+        target: `components/blocks/communication/${slug}/notification-center.tsx`,
+      },
+    ],
+  }
+}
+
+function communicationActivityFeedBlock(
+  slug,
+  description,
+  {
+    registryDependencies = ["avatar", "badge", "button", "card"],
+    images = [],
+  } = {}
+) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies,
+    files: [
+      {
+        path: `registry/blocks/communication/activity-feed/${slug}/activity-feed.tsx`,
+        type: "registry:component",
+        target: `components/blocks/communication/${slug}/activity-feed.tsx`,
+      },
+      ...images.map((file) => ({
+        path: `registry/blocks/communication/activity-feed/${slug}/images/${file}`,
+        type: "registry:file",
+        target: `components/blocks/communication/${slug}/images/${file}`,
+      })),
+    ],
+  }
+}
+
+function dashboardsAnalyticsDashboardBlock(
+  slug,
+  description,
+  {
+    registryDependencies = ["button"],
+  } = {}
+) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies,
+    files: [
+      {
+        path: `registry/blocks/dashboards-analytics/analytics-dashboard/${slug}/analytics-dashboard.tsx`,
+        type: "registry:component",
+        target: `components/blocks/dashboards-analytics/${slug}/analytics-dashboard.tsx`,
+      },
+    ],
+  }
+}
+
+function calendarSchedulingCalendarBlock(
+  slug,
+  description,
+  {
+    registryDependencies = [
+      "avatar",
+      "badge",
+      "button",
+      "calendar",
+      "dialog",
+      "field",
+      "input",
+      "select",
+      "separator",
+    ],
+    images = [],
+  } = {}
+) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: [
+      "lucide-react",
+      "date-fns",
+      "react-day-picker@^9.14.0",
+    ],
+    registryDependencies,
+    files: [
+      {
+        path: `registry/blocks/calendar-scheduling/calendar/${slug}/calendar.tsx`,
+        type: "registry:component",
+        target: `components/blocks/calendar-scheduling/${slug}/calendar.tsx`,
+      },
+      ...images.map((file) => ({
+        path: `registry/blocks/calendar-scheduling/calendar/${slug}/images/${file}`,
+        type: "registry:file",
+        target: `components/blocks/calendar-scheduling/${slug}/images/${file}`,
+      })),
+    ],
+  }
+}
+
+function onboardingSetupWizardBlock(
+  slug,
+  description,
+  {
+    registryDependencies = [
+      "badge",
+      "button",
+      "field",
+      "input-group",
+      "input-otp",
+      "progress",
+    ],
+  } = {}
+) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies,
+    files: [
+      {
+        path: `registry/blocks/onboarding/setup-wizard/${slug}/setup-wizard.tsx`,
+        type: "registry:component",
+        target: `components/blocks/onboarding/${slug}/setup-wizard.tsx`,
+      },
+    ],
+  }
+}
+
+function searchFilteringSearchResultsBlock(
+  slug,
+  description,
+  {
+    registryDependencies = [
+      "badge",
+      "button",
+      "input",
+      "input-group",
+      "select",
+    ],
+  } = {}
+) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies,
+    files: [
+      {
+        path: `registry/blocks/search-filtering/search-results/${slug}/search-results.tsx`,
+        type: "registry:component",
+        target: `components/blocks/search-filtering/${slug}/search-results.tsx`,
+      },
+    ],
+  }
+}
+
 function applicationDashboardLayoutBlock(slug, description, images = []) {
   return {
     name: slug,
@@ -510,6 +1647,46 @@ function marketingBlogBlock(
     ],
   }
 }
+
+function marketingPortfolioBlock(
+  slug,
+  description,
+  images = [],
+  { registryDependencies, dependencies } = {}
+) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    ...(registryDependencies?.length ? { registryDependencies } : {}),
+    ...(dependencies?.length ? { dependencies } : {}),
+    files: [
+      {
+        path: `registry/blocks/marketing/portfolio/${slug}/portfolio.tsx`,
+        type: "registry:component",
+        target: `components/blocks/marketing/${slug}/portfolio.tsx`,
+      },
+      ...images.map((file) => ({
+        path: `registry/blocks/marketing/portfolio/${slug}/images/${file}`,
+        type: "registry:file",
+        target: `components/blocks/marketing/${slug}/images/${file}`,
+      })),
+    ],
+  }
+}
+
+const PORTFOLIO_01_IMAGES = [
+  "project-design-system.webp",
+  "project-fintech.webp",
+  "project-analytics.webp",
+  "project-workspace.webp",
+  "project-logistics.webp",
+  "project-fitness.webp",
+  "avatar-sarah.webp",
+  "avatar-marcus.webp",
+]
 
 const BLOG_01_IMAGES = [
   "ai-img1.webp",
@@ -1468,6 +2645,40 @@ const registryItemsRaw = [
     ],
   },
   {
+    name: "sidebar",
+    type: "registry:ui",
+    title: "Sidebar",
+    description:
+      "A composable application sidebar with mobile sheet, rail, and menu primitives.",
+    dependencies: [
+      "radix-ui",
+      "class-variance-authority",
+      "clsx",
+      "tailwind-merge",
+      "lucide-react",
+    ],
+    registryDependencies: [
+      "button",
+      "input",
+      "separator",
+      "sheet",
+      "skeleton",
+      "tooltip",
+    ],
+    files: [
+      {
+        path: "packages/ui/src/components/sidebar.tsx",
+        type: "registry:ui",
+        target: "components/ui/sidebar.tsx",
+      },
+      {
+        path: "packages/ui/src/hooks/use-mobile.ts",
+        type: "registry:hook",
+        target: "hooks/use-mobile.ts",
+      },
+    ],
+  },
+  {
     name: "skeleton",
     type: "registry:ui",
     title: "Skeleton",
@@ -1674,6 +2885,226 @@ const registryItemsRaw = [
         path: "registry/blocks/ai-agents/agent-run-timeline/agent-run-timeline.tsx",
         type: "registry:component",
         target: "components/blocks/agent-run-timeline.tsx",
+      },
+    ],
+  },
+  {
+    name: "chat-composer-01",
+    type: "registry:block",
+    title: "chat-composer-01",
+    description:
+      "Hero chat composer - h-13 pill, voice toggle, audio affordance, attach menu, and Enter to send (RTL/LTR).",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: ["button", "dropdown-menu", "input-group"],
+    files: [
+      {
+        path: "registry/blocks/ai-agents/chat-composer/chat-composer-01/chat-composer.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/ai-agents/chat-composer-01/chat-composer.tsx",
+      },
+    ],
+  },
+  {
+    name: "chat-composer-02",
+    type: "registry:block",
+    title: "chat-composer-02",
+    description:
+      "Chat composer with model select - MAX badge, prompt chips, image attach, and Enter to send (RTL/LTR).",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: ["button", "select", "textarea"],
+    files: [
+      {
+        path: "registry/blocks/ai-agents/chat-composer/chat-composer-02/chat-composer.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/ai-agents/chat-composer-02/chat-composer.tsx",
+      },
+    ],
+  },
+  {
+    name: "chat-composer-03",
+    type: "registry:block",
+    title: "chat-composer-03",
+    description:
+      "Compact agent composer - attach/tools menu, Auto mode, Local/Cloud + agent + performance pills (RTL/LTR).",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: ["button", "dropdown-menu", "textarea"],
+    files: [
+      {
+        path: "registry/blocks/ai-agents/chat-composer/chat-composer-03/chat-composer.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/ai-agents/chat-composer-03/chat-composer.tsx",
+      },
+    ],
+  },
+  {
+    name: "chat-composer-04",
+    type: "registry:block",
+    title: "chat-composer-04",
+    description:
+      "Prompt composer with drag-drop file attachments, settings switches, and action chips (RTL/LTR).",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: [
+      "badge",
+      "button",
+      "dropdown-menu",
+      "label",
+      "switch",
+      "textarea",
+    ],
+    files: [
+      {
+        path: "registry/blocks/ai-agents/chat-composer/chat-composer-04/chat-composer.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/ai-agents/chat-composer-04/chat-composer.tsx",
+      },
+    ],
+  },
+  {
+    name: "ai-chat-01",
+    type: "registry:block",
+    title: "ai-chat-01",
+    description:
+      "Basic AI chat - message scroller, streaming replies, edit-resend, attach menu, and pill composer (RTL/LTR).",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: [
+      "bubble",
+      "button",
+      "dropdown-menu",
+      "input-group",
+      "message",
+      "message-scroller",
+      "textarea",
+    ],
+    files: [
+      {
+        path: "registry/blocks/ai-agents/ai-chat/ai-chat-01/ai-chat.tsx",
+        type: "registry:component",
+        target: "components/blocks/ai-agents/ai-chat-01/ai-chat.tsx",
+      },
+    ],
+  },
+  {
+    name: "ai-chat-02",
+    type: "registry:block",
+    title: "ai-chat-02",
+    description:
+      "AI chat with model menu - intelligence levels, model submenu, growing textarea composer, and jump-to-latest (RTL/LTR).",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: [
+      "bubble",
+      "button",
+      "dropdown-menu",
+      "input-group",
+      "message",
+      "message-scroller",
+      "textarea",
+    ],
+    files: [
+      {
+        path: "registry/blocks/ai-agents/ai-chat/ai-chat-02/ai-chat.tsx",
+        type: "registry:component",
+        target: "components/blocks/ai-agents/ai-chat-02/ai-chat.tsx",
+      },
+    ],
+  },
+  {
+    name: "ai-chat-03",
+    type: "registry:block",
+    title: "ai-chat-03",
+    description:
+      "Card assistant chat - online header, suggestion chips, typing state, and compact prompt footer (RTL/LTR).",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: [
+      "bubble",
+      "button",
+      "input-group",
+      "message",
+      "message-scroller",
+    ],
+    files: [
+      {
+        path: "registry/blocks/ai-agents/ai-chat/ai-chat-03/ai-chat.tsx",
+        type: "registry:component",
+        target: "components/blocks/ai-agents/ai-chat-03/ai-chat.tsx",
+      },
+    ],
+  },
+  {
+    name: "agent-workspace-01",
+    type: "registry:block",
+    title: "agent-workspace-01",
+    description:
+      "Full chat application - sidebar threads, model picker, streaming conversation, composer stop/retry, and command search (RTL/LTR).",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: [
+      "avatar",
+      "bubble",
+      "button",
+      "command",
+      "dropdown-menu",
+      "input-group",
+      "kbd",
+      "message",
+      "message-scroller",
+      "sidebar",
+      "textarea",
+    ],
+    files: [
+      {
+        path: "registry/blocks/ai-agents/agent-workspace/agent-workspace-01/agent-workspace.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/ai-agents/agent-workspace-01/agent-workspace.tsx",
+      },
+      {
+        path: "registry/blocks/ai-agents/agent-workspace/agent-workspace-01/chat-sidebar.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/ai-agents/agent-workspace-01/chat-sidebar.tsx",
+      },
+      {
+        path: "registry/blocks/ai-agents/agent-workspace/agent-workspace-01/command-menu.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/ai-agents/agent-workspace-01/command-menu.tsx",
+      },
+      {
+        path: "registry/blocks/ai-agents/agent-workspace/agent-workspace-01/composer.tsx",
+        type: "registry:component",
+        target: "components/blocks/ai-agents/agent-workspace-01/composer.tsx",
+      },
+      {
+        path: "registry/blocks/ai-agents/agent-workspace/agent-workspace-01/conversation.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/ai-agents/agent-workspace-01/conversation.tsx",
+      },
+      {
+        path: "registry/blocks/ai-agents/agent-workspace/agent-workspace-01/data.ts",
+        type: "registry:file",
+        target: "components/blocks/ai-agents/agent-workspace-01/data.ts",
+      },
+      {
+        path: "registry/blocks/ai-agents/agent-workspace/agent-workspace-01/logos.tsx",
+        type: "registry:component",
+        target: "components/blocks/ai-agents/agent-workspace-01/logos.tsx",
+      },
+      {
+        path: "registry/blocks/ai-agents/agent-workspace/agent-workspace-01/types.ts",
+        type: "registry:file",
+        target: "components/blocks/ai-agents/agent-workspace-01/types.ts",
       },
     ],
   },
@@ -3169,6 +4600,23 @@ const registryItemsRaw = [
     ],
   },
   {
+    name: "cookie-consent-01",
+    type: "registry:block",
+    title: "cookie-consent-01",
+    description:
+      "Everyday cookie bar — short privacy copy, Accept / Reject / Manage, compact preference checkboxes (RTL/LTR).",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: ["badge", "button", "checkbox", "label"],
+    files: [
+      {
+        path: "registry/blocks/marketing/cookie-consent/cookie-consent-01/cookie-consent.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/cookie-consent-01/cookie-consent.tsx",
+      },
+    ],
+  },
+  {
     name: "jumbotron-01",
     type: "registry:block",
     title: "jumbotron-01",
@@ -3476,6 +4924,154 @@ const registryItemsRaw = [
         path: "registry/blocks/marketing/features/features-11/images/panel.webp",
         type: "registry:file",
         target: "components/blocks/marketing/features-11/images/panel.webp",
+      },
+    ],
+  },
+  {
+    name: "bento-grid-01",
+    type: "registry:block",
+    title: "bento-grid-01",
+    description:
+      "Bento feature grid — wide analytics chart, access controls, regions metric, and deploy status (RTL/LTR).",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/marketing/bento-grid/bento-grid-01/bento-grid.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/bento-grid-01/bento-grid.tsx",
+      },
+    ],
+  },
+  {
+    name: "how-it-works-01",
+    type: "registry:block",
+    title: "how-it-works-01",
+    description:
+      "How it works — numbered four-step path with bottom CTA bar for get started and explore blocks.",
+    registryDependencies: ["button"],
+    files: [
+      {
+        path: "registry/blocks/marketing/how-it-works/how-it-works-01/how-it-works.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/how-it-works-01/how-it-works.tsx",
+      },
+    ],
+  },
+  {
+    name: "article-layout-01",
+    type: "registry:block",
+    title: "article-layout-01",
+    description:
+      "Article layout — hero meta, short prose sections, sticky TOC, author card, and prev/next.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: ["avatar", "badge", "button", "separator"],
+    files: [
+      {
+        path: "registry/blocks/content-publishing/article-layout/article-layout-01/article-layout.tsx",
+        type: "registry:component",
+        target: "components/blocks/content-publishing/article-layout-01/article-layout.tsx",
+      },
+    ],
+  },
+  {
+    name: "author-profile-01",
+    type: "registry:block",
+    title: "author-profile-01",
+    description:
+      "Author profile cards — follow toggle, stats, tags, social links, and recent posts grid.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: ["avatar", "badge", "button"],
+    files: [
+      {
+        path: "registry/blocks/content-publishing/author-profile/author-profile-01/author-profile.tsx",
+        type: "registry:component",
+        target: "components/blocks/content-publishing/author-profile-01/author-profile.tsx",
+      },
+    ],
+  },
+  {
+    name: "blog-grid-01",
+    type: "registry:block",
+    title: "blog-grid-01",
+    description:
+      "Blog grid with category chips, search, empty state, post cards, and pagination.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: [
+      "avatar",
+      "badge",
+      "button",
+      "card",
+      "empty",
+      "input-group",
+      "pagination",
+    ],
+    files: [
+      {
+        path: "registry/blocks/content-publishing/blog-grid/blog-grid-01/blog-grid.tsx",
+        type: "registry:component",
+        target: "components/blocks/content-publishing/blog-grid-01/blog-grid.tsx",
+      },
+    ],
+  },
+  {
+    name: "changelog-01",
+    type: "registry:block",
+    title: "changelog-01",
+    description:
+      "Changelog timeline — version cards with added/changed/fixed/removed badges and load-more.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: ["badge", "button", "card", "separator"],
+    files: [
+      {
+        path: "registry/blocks/content-publishing/changelog/changelog-01/changelog.tsx",
+        type: "registry:component",
+        target: "components/blocks/content-publishing/changelog-01/changelog.tsx",
+      },
+    ],
+  },
+  {
+    name: "comments-01",
+    type: "registry:block",
+    title: "comments-01",
+    description:
+      "Comments discussion — composer, nested replies, likes, and load-more.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: [
+      "avatar",
+      "badge",
+      "button",
+      "separator",
+      "textarea",
+    ],
+    files: [
+      {
+        path: "registry/blocks/communication/comments/comments-01/comments.tsx",
+        type: "registry:component",
+        target: "components/blocks/communication/comments-01/comments.tsx",
+      },
+    ],
+  },
+  {
+    name: "reading-progress-01",
+    type: "registry:block",
+    title: "reading-progress-01",
+    description:
+      "Article reading progress — sticky primary bar, share actions, back-to-top, and inline percent card.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: ["avatar", "badge"],
+    files: [
+      {
+        path: "registry/blocks/content-publishing/reading-progress/reading-progress-01/reading-progress.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/content-publishing/reading-progress-01/reading-progress.tsx",
       },
     ],
   },
@@ -4163,6 +5759,22 @@ const registryItemsRaw = [
       },
     ],
   },
+  {
+    name: "data-table-01",
+    type: "registry:block",
+    title: "data-table-01",
+    description:
+      "Grouped task table with department sections, assignee avatar stacks, and status badges.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    registryDependencies: ["avatar", "badge", "table"],
+    files: [
+      {
+        path: "registry/blocks/data-tables/data-table/data-table-01/table.tsx",
+        type: "registry:component",
+        target: "components/blocks/data-tables/data-table-01/table.tsx",
+      },
+    ],
+  },
   dataTablesAdvancedGridBlock(
     "advanced-data-grid-01",
     "Fleet security inventory with KPI strip, status filters, and coverage meters.",
@@ -4203,6 +5815,578 @@ const registryItemsRaw = [
     "advanced-data-grid-04",
     "Accounts receivable ledger with balances, contact cards, and create-bill CTAs.",
     { dependencies: ["lucide-react"] }
+  ),
+  {
+    name: "row-actions-01",
+    type: "registry:block",
+    title: "row-actions-01",
+    description:
+      "Task table with status badges and per-row start, pause, complete, delete, and view actions.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    registryDependencies: ["badge", "button", "table", "tooltip"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/data-tables/row-actions/row-actions-01/table.tsx",
+        type: "registry:component",
+        target: "components/blocks/data-tables/row-actions-01/table.tsx",
+      },
+    ],
+  },
+  developerToolsApiKeysBlock(
+    "api-keys-01",
+    "API keys settings — security banner, token table with copy and revoke actions, create-key dialog."
+  ),
+  developerToolsWebhookManagementBlock(
+    "webhook-management-01",
+    "Webhooks — add endpoint form, active endpoints list with actions, and recent delivery logs."
+  ),
+  developerToolsIntegrationsBlock(
+    "integrations-01",
+    "Integrations grid — search, category chips, connect/disconnect cards, and request CTA (RTL/LTR)."
+  ),
+  developerToolsLogsViewerBlock(
+    "logs-viewer-01",
+    "Log viewer - level/service filters, search, live stream, auto-scroll, and density-aware rows (RTL/LTR)."
+  ),
+  developerToolsApiKeysBlock(
+    "api-keys-02",
+    "Access tokens — compact list with scopes, dialog create flow, one-time secret reveal.",
+    {
+      registryDependencies: [
+        "alert",
+        "badge",
+        "button",
+        "checkbox",
+        "dialog",
+        "input",
+        "label",
+        "select",
+      ],
+    }
+  ),
+  communicationNotificationCenterBlock(
+    "notification-center-01",
+    "Production notification panel — filters, avatars, inline actions, and scrollable inbox."
+  ),
+  communicationActivityFeedBlock(
+    "activity-feed-01",
+    "Workspace activity timeline — comment, commit, invite, upload, backup, and security events (RTL/LTR).",
+    {
+      images: ["sarah.webp", "alex.webp", "david.webp", "maria.webp"],
+    }
+  ),
+  communicationActivityFeedBlock(
+    "activity-feed-02",
+    "Rich activity timeline — release publish, comment thread, workspace join, and branch merge cards.",
+    {
+      images: ["sarah.webp", "alex.webp", "david.webp", "maria.webp"],
+    }
+  ),
+  communicationActivityFeedBlock(
+    "activity-feed-03",
+    "Compact project activity rail — avatar initials, timeline dots, and relative timestamps.",
+    {
+      registryDependencies: [],
+      images: [],
+    }
+  ),
+  dashboardsAnalyticsDashboardBlock(
+    "analytics-dashboard-01",
+    "Analytics overview — time-range KPIs with sparklines, revenue bars, traffic sources, top pages, and quick stats (RTL/LTR)."
+  ),
+  {
+    name: "crypto-portfolio-01",
+    type: "registry:block",
+    title: "crypto-portfolio-01",
+    description:
+      "Crypto portfolio dashboard — total balance, receive/send, action tiles, and assets table with coin icon slots.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: ["avatar", "badge", "button", "card", "table"],
+    files: [
+      {
+        path: "registry/blocks/dashboards-analytics/crypto-portfolio/crypto-portfolio-01/crypto-portfolio.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/dashboards-analytics/crypto-portfolio-01/crypto-portfolio.tsx",
+      },
+    ],
+  },
+  {
+    name: "kpi-cards-01",
+    type: "registry:block",
+    title: "kpi-cards-01",
+    description:
+      "KPI cards grid — four metric cards with trend badges and sparklines.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: ["badge", "card"],
+    files: [
+      {
+        path: "registry/blocks/dashboards-analytics/kpi-cards/kpi-cards-01/kpi-cards.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/dashboards-analytics/kpi-cards-01/kpi-cards.tsx",
+      },
+    ],
+  },
+  {
+    name: "kpi-cards-02",
+    type: "registry:block",
+    title: "kpi-cards-02",
+    description:
+      "Regional KPI strip — status dots, revenue totals, and segmented goal meters.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: [],
+    files: [
+      {
+        path: "registry/blocks/dashboards-analytics/kpi-cards/kpi-cards-02/kpi-cards.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/dashboards-analytics/kpi-cards-02/kpi-cards.tsx",
+      },
+    ],
+  },
+  {
+    name: "kpi-cards-03",
+    type: "registry:block",
+    title: "kpi-cards-03",
+    description:
+      "Department budget cards — radial progress gauges with spend vs plan and view links.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react", "recharts"],
+    registryDependencies: ["card", "chart"],
+    files: [
+      {
+        path: "registry/blocks/dashboards-analytics/kpi-cards/kpi-cards-03/kpi-cards.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/dashboards-analytics/kpi-cards-03/kpi-cards.tsx",
+      },
+    ],
+  },
+  {
+    name: "kpi-cards-04",
+    type: "registry:block",
+    title: "kpi-cards-04",
+    description:
+      "Product trend cards — area sparklines for registry installs, docs traffic, and CLI downloads.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["recharts"],
+    registryDependencies: ["card", "chart"],
+    files: [
+      {
+        path: "registry/blocks/dashboards-analytics/kpi-cards/kpi-cards-04/kpi-cards.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/dashboards-analytics/kpi-cards-04/kpi-cards.tsx",
+      },
+    ],
+  },
+  calendarSchedulingCalendarBlock(
+    "calendar-01",
+    "Production calendar — month picker with event dots, day agenda, attendees, and create-event dialog (RTL/LTR).",
+    {
+      images: ["sarah.webp", "alex.webp", "david.webp", "maria.webp"],
+    }
+  ),
+  onboardingSetupWizardBlock(
+    "setup-wizard-01",
+    "Four-step onboarding — account, email OTP, experience, and launch."
+  ),
+  {
+    name: "workspace-setup-01",
+    type: "registry:block",
+    title: "workspace-setup-01",
+    description:
+      "Create workspace — name, work email, URL slug, role, team size, country, and terms.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: [],
+    registryDependencies: [
+      "button",
+      "checkbox",
+      "field",
+      "input",
+      "input-group",
+      "select",
+      "separator",
+    ],
+    files: [
+      {
+        path: "registry/blocks/onboarding/workspace-setup/workspace-setup-01/workspace-setup.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/onboarding/workspace-setup-01/workspace-setup.tsx",
+      },
+    ],
+  },
+  {
+    name: "workspace-setup-02",
+    type: "registry:block",
+    title: "workspace-setup-02",
+    description:
+      "Create workspace — organization, region, and selectable Creator/Team/Agency plan cards.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: [
+      "badge",
+      "button",
+      "card",
+      "field",
+      "input",
+      "radio-group",
+      "select",
+      "separator",
+    ],
+    files: [
+      {
+        path: "registry/blocks/onboarding/workspace-setup/workspace-setup-02/workspace-setup.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/onboarding/workspace-setup-02/workspace-setup.tsx",
+      },
+    ],
+  },
+  {
+    name: "progress-checklist-01",
+    type: "registry:block",
+    title: "progress-checklist-01",
+    description:
+      "Onboarding progress checklist — expandable steps, circular progress, dismiss and feedback menu.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: [
+      "button",
+      "collapsible",
+      "dropdown-menu",
+    ],
+    files: [
+      {
+        path: "registry/blocks/onboarding/progress-checklist/progress-checklist-01/progress-checklist.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/onboarding/progress-checklist-01/progress-checklist.tsx",
+      },
+    ],
+  },
+  {
+    name: "progress-checklist-02",
+    type: "registry:block",
+    title: "progress-checklist-02",
+    description:
+      "Sequential onboarding cards — numbered steps, progress bar, and one active CTA at a time.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: ["button"],
+    files: [
+      {
+        path: "registry/blocks/onboarding/progress-checklist/progress-checklist-02/progress-checklist.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/onboarding/progress-checklist-02/progress-checklist.tsx",
+      },
+    ],
+  },
+  {
+    name: "progress-checklist-03",
+    type: "registry:block",
+    title: "progress-checklist-03",
+    description:
+      "Workspace launch checklist — clickable steps with Progress bar and help footer.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: ["progress"],
+    files: [
+      {
+        path: "registry/blocks/onboarding/progress-checklist/progress-checklist-03/progress-checklist.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/onboarding/progress-checklist-03/progress-checklist.tsx",
+      },
+    ],
+  },
+  {
+    name: "progress-checklist-04",
+    type: "registry:block",
+    title: "progress-checklist-04",
+    description:
+      "Quick-start accordion — sequential setup steps with icon panels and complete CTAs.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: ["accordion", "button"],
+    files: [
+      {
+        path: "registry/blocks/onboarding/progress-checklist/progress-checklist-04/progress-checklist.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/onboarding/progress-checklist-04/progress-checklist.tsx",
+      },
+    ],
+  },
+  {
+    name: "progress-checklist-05",
+    type: "registry:block",
+    title: "progress-checklist-05",
+    description:
+      "Deployment progress timeline — done, in-progress, and upcoming steps with a vertical rail.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: [],
+    files: [
+      {
+        path: "registry/blocks/onboarding/progress-checklist/progress-checklist-05/progress-checklist.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/onboarding/progress-checklist-05/progress-checklist.tsx",
+      },
+    ],
+  },
+  {
+    name: "data-import-01",
+    type: "registry:block",
+    title: "data-import-01",
+    description:
+      "Design system migration — animated step Progress bars, rerun control, and logs accordion.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: ["accordion", "button", "progress"],
+    files: [
+      {
+        path: "registry/blocks/onboarding/data-import/data-import-01/data-import.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/onboarding/data-import-01/data-import.tsx",
+      },
+    ],
+  },
+  searchFilteringSearchResultsBlock(
+    "search-results-01",
+    "Search results page — query bar, type sidebar, sort, pagination, and empty state."
+  ),
+  {
+    name: "filter-panel-01",
+    type: "registry:block",
+    title: "filter-panel-01",
+    description:
+      "Report filter panel — date range, multi-select dimensions, dual-thumb sliders, and saved presets.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: [
+      "badge",
+      "button",
+      "card",
+      "input",
+      "label",
+      "popover",
+      "slider",
+    ],
+    files: [
+      {
+        path: "registry/blocks/search-filtering/filter-panel/filter-panel-01/filter-panel.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/search-filtering/filter-panel-01/filter-panel.tsx",
+      },
+    ],
+  },
+  {
+    name: "billing-history-01",
+    type: "registry:block",
+    title: "billing-history-01",
+    description:
+      "Transaction history — search and status/type filters, paginated table, and empty state.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: [
+      "avatar",
+      "badge",
+      "button",
+      "card",
+      "empty",
+      "input-group",
+      "select",
+      "table",
+    ],
+    files: [
+      {
+        path: "registry/blocks/payments-billing/billing-history/billing-history-01/billing-history.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/payments-billing/billing-history-01/billing-history.tsx",
+      },
+    ],
+  },
+  paymentsBillingSettingsBlock(
+    "billing-settings-01",
+    "Billing settings — plan card, payment method, invoice history table, and card-expiry alert."
+  ),
+  paymentsBillingSettingsBlock(
+    "billing-settings-02",
+    "Compact billing panel — plan, payment method, and invoice list in one surface.",
+    {
+      registryDependencies: ["badge", "button", "separator"],
+    }
+  ),
+  paymentsUsageBasedBillingBlock(
+    "usage-based-billing-01",
+    "Plan & usage — Pro summary with quota meters, status badges, and Enterprise CTA."
+  ),
+  paymentsUsageBasedBillingBlock(
+    "usage-based-billing-02",
+    "Plan overview — radial capacity gauges for workspaces, blocks, registry items, and storage.",
+    {
+      registryDependencies: ["card", "chart"],
+      dependencies: ["lucide-react", "recharts"],
+    }
+  ),
+  paymentsUsageBasedBillingBlock(
+    "usage-based-billing-03",
+    "Usage meters — Progress bars for installs, credits, storage, and API calls.",
+    {
+      registryDependencies: ["card", "progress"],
+      dependencies: [],
+    }
+  ),
+  paymentsUsageBasedBillingBlock(
+    "usage-based-billing-04",
+    "Workspace usage cards — stacked bars, warnings, upgrade actions, and budget dialog.",
+    {
+      registryDependencies: [
+        "button",
+        "card",
+        "dialog",
+        "input",
+        "label",
+      ],
+      dependencies: ["lucide-react"],
+    }
+  ),
+  paymentsUsageBasedBillingBlock(
+    "usage-based-billing-05",
+    "30-day usage list — mini donut gauges, alternating rows, and upgrade CTA.",
+    {
+      registryDependencies: ["button", "card", "chart"],
+      dependencies: ["recharts"],
+    }
+  ),
+  paymentsUsageBasedBillingBlock(
+    "usage-based-billing-06",
+    "Storage breakdown — segmented bar for components, assets, docs media, themes, and free space.",
+    {
+      registryDependencies: ["card"],
+      dependencies: [],
+    }
+  ),
+  paymentsUsageBasedBillingBlock(
+    "usage-based-billing-07",
+    "Monthly usage cost card — trend badge, compute/storage/bandwidth bar, and settings link.",
+    {
+      registryDependencies: ["badge", "card"],
+      dependencies: [],
+    }
+  ),
+  paymentsTransferFundsBlock(
+    "transfer-funds-01",
+    "Transfer funds — details, review, and success steps with account and recipient select."
+  ),
+  paymentsInvoiceBlock(
+    "invoice-01",
+    "Invoice receipt — line items, totals, paid badge, and print / download actions."
+  ),
+  paymentsPaymentMethodsBlock(
+    "payment-methods-01",
+    "Cards & wallets — main/euro balances, physical card with reveal, and recent activity list."
+  ),
+  feedbackAccessDeniedBlock(
+    "access-denied-01",
+    "Access denied gate — locked resource card, signed-in identity, request access and switch account."
+  ),
+  feedbackNotFoundBlock(
+    "not-found-01",
+    "Not found — search field, suggested destinations, and home / back actions."
+  ),
+  feedbackErrorStateBlock(
+    "error-state-01",
+    "Server error — incident card with alert, trace id, retry, and support link."
+  ),
+  feedbackRateLimitBlock(
+    "rate-limit-01",
+    "Rate limit 429 — cooldown meter, usage details, retry, and Pro upgrade CTA."
+  ),
+  feedbackMaintenanceBlock(
+    "maintenance-01",
+    "Maintenance — phase rail, ETA, systems board, and notify bar."
+  ),
+  {
+    name: "empty-state-01",
+    type: "registry:block",
+    title: "empty-state-01",
+    description:
+      "Empty state gallery — no results, empty inbox, access restricted, and create-first patterns.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: ["badge", "button", "empty"],
+    files: [
+      {
+        path: "registry/blocks/feedback-states/empty-state/empty-state-01/empty-state.tsx",
+        type: "registry:component",
+        target: "components/blocks/feedback-states/empty-state-01/empty-state.tsx",
+      },
+    ],
+  },
+  feedbackStatusPageBlock(
+    "status-page-01",
+    "Public status page - incident alert, KPIs, service cards with uptime bars, history, and regional health (RTL/LTR)."
+  ),
+  userAccountSettingsBlock(
+    "account-settings-01",
+    "Account settings — profile, notifications, security, and appearance tabs."
+  ),
+  userAccountSettingsBlock(
+    "account-settings-02",
+    "Account & workspace settings — stacked sections for profile, workspace defaults, and email digest.",
+    {
+      registryDependencies: [
+        "button",
+        "field",
+        "input",
+        "radio-group",
+        "select",
+        "separator",
+        "textarea",
+      ],
+      images: [],
+    }
+  ),
+  userAccountSettingsBlock(
+    "account-settings-03",
+    "Account & workspace settings — stacked sections with team and usage alert checkboxes.",
+    {
+      registryDependencies: [
+        "button",
+        "checkbox",
+        "field",
+        "input",
+        "select",
+        "separator",
+        "textarea",
+      ],
+      images: [],
+    }
+  ),
+  userAccountTeamMembersBlock(
+    "team-members-01",
+    "Team members table — invite dialog, roles, status badges, and row actions."
+  ),
+  userAccountRolesAndPermissionsBlock(
+    "roles-and-permissions-01",
+    "RBAC matrix - role columns, resource groups, checkboxes, tooltips, discard/save dirty state (RTL/LTR)."
+  ),
+  userAccountUserProfileBlock(
+    "user-profile-01",
+    "Public profile — cover banner, follow actions, sidebar stats/skills, and repos/activity/starred tabs."
   ),
   paymentsBillingPaymentFormBlock(
     "payment-form-01",
@@ -4525,6 +6709,30 @@ const registryItemsRaw = [
       images: ["visa.webp", "amex.webp", "mastercard.webp", "paypal.webp"],
     }
   ),
+  ecommerceCheckoutBlock(
+    "checkout-09",
+    "Multi-step checkout — Shipping → Payment → Review stepper, address and method cards, sticky order summary (RTL/LTR).",
+    {
+      dependencies: ["lucide-react"],
+      registryDependencies: [
+        "button",
+        "card",
+        "checkbox",
+        "field",
+        "input",
+        "label",
+        "radio-group",
+      ],
+      images: ["watch.webp", "wallet.webp"],
+    }
+  ),
+  ecommerceOrderConfirmationBlock(
+    "order-confirmation-01",
+    "Order confirmation — success header with copyable order ID, delivery timeline, shipping/payment cards, and totals (RTL/LTR).",
+    {
+      images: ["headphones.webp", "keyboard.webp", "mouse.webp"],
+    }
+  ),
   ecommerceOrderSummaryBlock(
     "order-summary-01",
     "Boutique receipt ticket — success stamp header, order pipeline, ships-to card, compact line items, and invoice CTA (RTL/LTR).",
@@ -4693,6 +6901,26 @@ const registryItemsRaw = [
       ],
     }
   ),
+  ecommerceProductDetailsBlock(
+    "product-details-09",
+    "Headphones PDP — carousel gallery with thumbs, color/edition pickers, qty CTAs, trust badges, and Description/Specs/Reviews tabs (RTL/LTR).",
+    {
+      registryDependencies: [
+        "avatar",
+        "badge",
+        "breadcrumb",
+        "button",
+        "separator",
+        "tabs",
+      ],
+      images: [
+        "headphones-1.webp",
+        "headphones-2.webp",
+        "headphones-3.webp",
+        "headphones-4.webp",
+      ],
+    }
+  ),
   ecommerceShoppingCartBlock(
     "shopping-cart-01",
     "Classic bag with free-shipping progress, bordered line items, and sticky order-details card.",
@@ -4762,9 +6990,9 @@ const registryItemsRaw = [
   ),
   ecommerceShoppingCartBlock(
     "shopping-cart-07",
-    "Focused bag modal with item grid, dashed totals panel, and dual footer actions.",
+    "End-edge Drawer bag with item list, dashed totals panel, and dual footer actions.",
     {
-      registryDependencies: ["button"],
+      registryDependencies: ["button", "drawer"],
       images: [
         "tshirt.webp",
         "sweater.webp",
@@ -4775,9 +7003,9 @@ const registryItemsRaw = [
   ),
   ecommerceShoppingCartBlock(
     "shopping-cart-08",
-    "End-edge drawer with free-shipping progress, size selects, and sticky checkout footer.",
+    "End-edge Drawer cart with free-shipping progress, size selects, and sticky checkout footer.",
     {
-      registryDependencies: ["button"],
+      registryDependencies: ["button", "drawer"],
       images: ["sneaker.webp", "watch-1.webp", "watch-2.webp", "watch-3.webp"],
     }
   ),
@@ -4788,6 +7016,464 @@ const registryItemsRaw = [
       registryDependencies: ["button"],
       images: ["sunscreen.webp", "sweater.webp", "tshirt.webp", "sneaker.webp"],
     }
+  ),
+  ecommerceShoppingCartBlock(
+    "shopping-cart-10",
+    "Interactive cart — qty steppers, remove, promo code, sticky order summary with free shipping over $100 (RTL/LTR).",
+    {
+      registryDependencies: [
+        "badge",
+        "button",
+        "input-group",
+        "separator",
+      ],
+      images: ["headphones.webp", "keyboard.webp", "mouse.webp"],
+    }
+  ),
+  ecommerceWishlistBlock(
+    "wishlist-01",
+    "Wishlist grid — savings header, share/add-all, discount badges, out-of-stock cards, and empty state (RTL/LTR).",
+    {
+      images: [
+        "headphones.webp",
+        "desktop-set.webp",
+        "workspace.webp",
+        "desk-essentials.webp",
+      ],
+    }
+  ),
+  ecommerceOrderHistoryBlock(
+    "order-history-01",
+    "Account order timeline with status dots, soft cards, and filter select.",
+    {
+      dependencies: ["lucide-react"],
+      images: [
+        "tshirt.webp",
+        "echo-elegance.webp",
+        "watch.webp",
+        "sunscreen.webp",
+      ],
+    }
+  ),
+  ecommerceOrderHistoryBlock(
+    "order-history-02",
+    "Action-forward purchase cards with Buy again / Cancel stack and View.",
+    {
+      registryDependencies: ["button"],
+      dependencies: ["lucide-react"],
+      images: [
+        "tshirt.webp",
+        "echo-elegance.webp",
+        "watch.webp",
+        "sunscreen.webp",
+      ],
+    }
+  ),
+  ecommerceOrderHistoryBlock(
+    "order-history-03",
+    "Shipment board with search toolbar, filter chips, item grids, and reorder actions.",
+    {
+      registryDependencies: ["button"],
+      dependencies: ["lucide-react"],
+      images: [
+        "tshirt.webp",
+        "echo-elegance.webp",
+        "watch.webp",
+        "sunscreen.webp",
+        "facewash.webp",
+        "sweater.webp",
+      ],
+    }
+  ),
+  ecommerceOrderHistoryBlock(
+    "order-history-04",
+    "Dark invoice header groups with packing-slip line items and status pills.",
+    {
+      registryDependencies: ["button"],
+      dependencies: ["lucide-react"],
+      images: [
+        "tshirt.webp",
+        "echo-elegance.webp",
+        "watch.webp",
+        "sunscreen.webp",
+      ],
+    }
+  ),
+  ecommerceOrderHistoryBlock(
+    "order-history-05",
+    "Segmented order console with count tabs and product data table.",
+    {
+      registryDependencies: ["button"],
+      images: [
+        "tshirt.webp",
+        "echo-elegance.webp",
+        "watch.webp",
+        "sunscreen.webp",
+      ],
+    }
+  ),
+  ecommerceOrderHistoryBlock(
+    "order-history-06",
+    "Ops ledger spreadsheet with search, status radios, zebra rows, and pagination.",
+    {
+      dependencies: ["lucide-react"],
+    }
+  ),
+  ecommerceOrderHistoryBlock(
+    "order-history-07",
+    "Centered delivery dossier with meta strip, delivered badges, and buy-again links.",
+    {
+      registryDependencies: ["button", "separator"],
+      dependencies: ["lucide-react"],
+      images: ["tshirt.webp", "sneaker.webp"],
+    }
+  ),
+  ecommerceOrderHistoryBlock(
+    "order-history-08",
+    "Merchant command center with KPI cards, avatar table, and segmented filters.",
+    {
+      registryDependencies: ["button"],
+      dependencies: ["lucide-react"],
+    }
+  ),
+  ecommerceProductFilterBlock(
+    "product-filter-01",
+    "Filter sidebar with brand search, size chips, dual price slider, color swatches, and product grid.",
+    {
+      registryDependencies: ["checkbox", "label", "separator", "slider"],
+      dependencies: ["lucide-react"],
+    }
+  ),
+  ecommerceProductFilterBlock(
+    "product-filter-02",
+    "Collapsible filter rail with price slider, category/brand search, sizes, colors, and recent searches.",
+    {
+      registryDependencies: ["checkbox", "collapsible", "label", "slider"],
+      dependencies: ["lucide-react"],
+    }
+  ),
+  ecommerceProductFilterBlock(
+    "product-filter-03",
+    "Full filter panel — audience radios, category/brand/color search, sizes, price, and discount.",
+    {
+      registryDependencies: ["checkbox", "label", "separator", "slider"],
+      dependencies: ["lucide-react"],
+    }
+  ),
+  ecommerceProductFilterBlock(
+    "product-filter-04",
+    "End-edge Drawer filter with category/brand search, sizes, price slider, colors, and Apply/Close.",
+    {
+      registryDependencies: [
+        "button",
+        "checkbox",
+        "drawer",
+        "label",
+        "separator",
+        "slider",
+      ],
+      dependencies: ["lucide-react"],
+    }
+  ),
+  ecommerceProductReviewBlock(
+    "product-review-01",
+    "Stacked customer reviews with verified badges, star ratings, and dates.",
+    {
+      dependencies: ["lucide-react"],
+      images: [
+        "avatar-01.webp",
+        "avatar-02.webp",
+        "avatar-03.webp",
+        "avatar-04.webp",
+      ],
+    }
+  ),
+  ecommerceProductReviewBlock(
+    "product-review-02",
+    "Split review rows — buyer profile beside content on desktop, stacked on mobile.",
+    {
+      dependencies: ["lucide-react"],
+      images: [
+        "avatar-01.webp",
+        "avatar-02.webp",
+        "avatar-03.webp",
+        "avatar-04.webp",
+      ],
+    }
+  ),
+  ecommerceProductReviewBlock(
+    "product-review-03",
+    "Review section with score bars, customer image strip, and photo-attached reviews.",
+    {
+      dependencies: ["lucide-react"],
+      images: [
+        "avatar-01.webp",
+        "avatar-02.webp",
+        "avatar-03.webp",
+        "avatar-04.webp",
+        "photo-01.webp",
+        "photo-02.webp",
+        "photo-03.webp",
+        "photo-04.webp",
+        "photo-05.webp",
+      ],
+    }
+  ),
+  ecommerceProductReviewBlock(
+    "product-review-04",
+    "Masonry review cards with rating summary, native star filter, and helpful votes.",
+    {
+      dependencies: ["lucide-react"],
+      images: [
+        "avatar-01.webp",
+        "avatar-02.webp",
+        "avatar-03.webp",
+        "avatar-04.webp",
+        "avatar-05.webp",
+        "avatar-06.webp",
+      ],
+    }
+  ),
+  ecommerceProductReviewBlock(
+    "product-review-05",
+    "Two-column reviews — rating summary and write CTA beside images and review list.",
+    {
+      dependencies: ["lucide-react"],
+      images: [
+        "avatar-01.webp",
+        "avatar-02.webp",
+        "avatar-03.webp",
+        "avatar-04.webp",
+        "photo-01.webp",
+        "photo-02.webp",
+        "photo-03.webp",
+        "photo-04.webp",
+        "photo-05.webp",
+      ],
+    }
+  ),
+  ecommerceOrderTrackingBlock(
+    "order-tracking-01",
+    "Order tracking page — status steps, product lines, and billing summary with invoice CTA (RTL/LTR).",
+    {
+      images: ["sneaker.webp", "watch.webp"],
+    }
+  ),
+  ecommerceOrderTrackingBlock(
+    "order-tracking-02",
+    "Order tracking split — products and billing left, vertical shipment timeline on the end edge (RTL/LTR).",
+    {
+      registryDependencies: [],
+      images: ["sneaker.webp", "watch.webp"],
+    }
+  ),
+  ecommerceOrderTrackingBlock(
+    "order-tracking-03",
+    "Order tracking pipeline — responsive step rail, products, delivery info, and billing with invoice CTA (RTL/LTR).",
+    {
+      images: ["sneaker.webp", "watch.webp"],
+    }
+  ),
+  ecommerceOrderTrackingBlock(
+    "order-tracking-04",
+    "Order details card — summary meta, responsive tracking rail, line items with color, and end-aligned billing (RTL/LTR).",
+    {
+      images: ["sneaker.webp", "watch.webp", "watch-silver.webp"],
+    }
+  ),
+  ecommerceOrderTrackingBlock(
+    "order-tracking-05",
+    "Order tracking split — products, billing, and vertical timeline with customer info aside (RTL/LTR).",
+    {
+      images: ["sneaker.webp", "watch.webp", "watch-silver.webp"],
+    }
+  ),
+  ecommerceOrderTrackingBlock(
+    "order-tracking-06",
+    "Compact order tracking — purchase summary, pricing, items with reorder, and three-step delivery rail (RTL/LTR).",
+    {
+      images: ["sneaker.webp"],
+    }
+  ),
+  ecommerceOrderTrackingBlock(
+    "order-tracking-07",
+    "Order tracking overview — meta row, responsive step rail, product grid, and end-aligned billing (RTL/LTR).",
+    {
+      registryDependencies: [],
+      images: ["sneaker.webp", "watch.webp", "watch-silver.webp"],
+    }
+  ),
+  ecommerceProductCategoriesBlock(
+    "product-categories-01",
+    "Lookbook orbit — numbered circular fashion tiles with offer captions and View all (RTL/LTR).",
+    {
+      dependencies: ["lucide-react"],
+      images: [
+        "ethnic.webp",
+        "festive.webp",
+        "casual.webp",
+        "streetwear.webp",
+        "winter.webp",
+        "summer.webp",
+      ],
+    }
+  ),
+  ecommerceProductCategoriesBlock(
+    "product-categories-02",
+    "Poster wall — dark campaign grid with tall product posters and hover name captions (RTL/LTR).",
+    {
+      images: [
+        "sunglass-1.webp",
+        "sneakers.webp",
+        "laptop-1.webp",
+        "coffee.webp",
+        "mug.webp",
+        "sunglass-2.webp",
+        "fashion.webp",
+        "laptop-2.webp",
+      ],
+    }
+  ),
+  ecommerceProductCategoriesBlock(
+    "product-categories-03",
+    "Apothecary tray — muted shell with SKU-tagged beauty cards in a soft grid (RTL/LTR).",
+    {
+      images: [
+        "hair-brush.webp",
+        "body-lotion.webp",
+        "nail-polish.webp",
+        "body-butter.webp",
+        "lipstick.webp",
+        "eye-primer.webp",
+        "dry-shampoo.webp",
+        "face-wash.webp",
+        "skin-glow.webp",
+        "face-primer.webp",
+      ],
+    }
+  ),
+  ecommerceProductCategoriesBlock(
+    "product-categories-04",
+    "Spotlight triptych — cinematic promo tiles with gradient overlays and Shop now CTAs (RTL/LTR).",
+    {
+      dependencies: ["lucide-react"],
+      images: ["face-wash.webp", "skin-glow.webp", "face-primer.webp"],
+    }
+  ),
+  ecommerceProductCategoriesBlock(
+    "product-categories-05",
+    "Lookbook index — editorial fashion portraits with index chips and primary rule header (RTL/LTR).",
+    {
+      images: [
+        "ethnic.webp",
+        "festive.webp",
+        "casual.webp",
+        "street.webp",
+        "budget.webp",
+        "summer.webp",
+        "deals.webp",
+        "refresh.webp",
+        "best.webp",
+        "winter.webp",
+      ],
+    }
+  ),
+  ecommerceProductCategoriesBlock(
+    "product-categories-06",
+    "Offer desk — ticket-tagged promo cards with season copy and Explore links (RTL/LTR).",
+    {
+      dependencies: ["lucide-react"],
+      images: [
+        "ethnic.webp",
+        "festive.webp",
+        "casual.webp",
+        "street.webp",
+        "picks.webp",
+      ],
+    }
+  ),
+  ecommerceProductCategoriesBlock(
+    "product-categories-07",
+    "Wellness shelf — snap-scroll beauty rail with chevron scrubbers (RTL/LTR).",
+    {
+      dependencies: ["lucide-react"],
+      registryDependencies: ["button"],
+      images: [
+        "sunscreen.webp",
+        "face-wash.webp",
+        "skin-glow.webp",
+        "dry-shampoo.webp",
+        "body-butter.webp",
+        "face-primer.webp",
+        "body-lotion.webp",
+      ],
+    }
+  ),
+  ecommerceProductCategoriesBlock(
+    "product-categories-08",
+    "Marketplace hubs — four department boards with browse actions and 2×2 product tiles (RTL/LTR).",
+    {
+      dependencies: ["lucide-react"],
+      images: [
+        "watch-1.webp",
+        "laptop-1.webp",
+        "sunglass.webp",
+        "sunscreen-a.webp",
+        "food-1.webp",
+        "coffee.webp",
+        "food-2.webp",
+        "burger.webp",
+        "laptop-2.webp",
+        "watch-2.webp",
+        "desktop.webp",
+        "laptop-3.webp",
+        "sunscreen-b.webp",
+        "sun-cream.webp",
+        "organic.webp",
+      ],
+    }
+  ),
+  filesMediaDataExportBlock(
+    "data-export-01",
+    "Data export panel — format cards, collapsible field groups, progress, and success state."
+  ),
+  filesMediaDataExportBlock(
+    "data-export-02",
+    "Minimal export dialog — format, date range, headers checkbox, and Export.",
+    {
+      registryDependencies: ["button", "checkbox", "label", "select"],
+    }
+  ),
+  filesMediaFileManagerBlock(
+    "file-manager-01",
+    "Drive-style file manager — sidebar nav, breadcrumbs, storage meter, and grid or list views."
+  ),
+  filesMediaFileUploadBlock(
+    "file-upload-01",
+    "Drag-and-drop upload zone with type badges, per-file progress, and clear / upload actions."
+  ),
+  filesMediaMediaGalleryBlock(
+    "media-gallery-01",
+    "Media asset gallery — tag filters, masonry or list, multi-select, and lightbox preview.",
+    [
+      "gallery-1.webp",
+      "gallery-2.webp",
+      "gallery-3.webp",
+      "gallery-4.webp",
+      "gallery-5.webp",
+      "gallery-6.webp",
+      "gallery-7.webp",
+      "gallery-8.webp",
+      "gallery-9.webp",
+      "gallery-10.webp",
+      "gallery-11.webp",
+      "gallery-12.webp",
+    ]
+  ),
+  filesMediaMediaPlayerBlock(
+    "media-player-01",
+    "Video showcase — local silent nature film, copy panel, metadata, and play CTA.",
+    ["flower.mp4"]
   ),
   filesMediaGalleryBlock(
     "gallery-01",
@@ -5359,6 +8045,31 @@ const registryItemsRaw = [
         path: "registry/blocks/marketing/testimonials/testimonials-13/images/photo-2.webp",
         type: "registry:file",
         target: "components/blocks/marketing/testimonials-13/images/photo-2.webp",
+      },
+    ],
+  },
+  {
+    name: "application-form-01",
+    type: "registry:block",
+    title: "application-form-01",
+    description:
+      "Early-access application — contact, company, use case, and selectable plan cards.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: [],
+    registryDependencies: [
+      "button",
+      "field",
+      "input",
+      "radio-group",
+      "select",
+      "separator",
+    ],
+    files: [
+      {
+        path: "registry/blocks/forms/application-form/application-form-01/application-form.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/forms/application-form-01/application-form.tsx",
       },
     ],
   },
@@ -6162,6 +8873,45 @@ const registryItemsRaw = [
     ["logo.svg", "team-1.webp", "team-2.webp", "team-3.webp"],
     ["button", "sheet"]
   ),
+  {
+    name: "hero-11",
+    type: "registry:block",
+    title: "hero-11",
+    description:
+      "Source & Stage hero — marketing copy with Design/Source toggle, live invite form over a code sheet (RTL/LTR).",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: ["badge", "button", "field", "input"],
+    files: [
+      {
+        path: "registry/blocks/marketing/hero/hero-11/hero.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/hero-11/hero.tsx",
+      },
+    ],
+  },
+  {
+    name: "hero-12",
+    type: "registry:block",
+    title: "hero-12",
+    description:
+      "Full-bleed video background hero — muted looping film, dark scrim, dual CTAs, and feature stats.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: ["button"],
+    files: [
+      {
+        path: "registry/blocks/marketing/hero/hero-12/hero.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/hero-12/hero.tsx",
+      },
+      {
+        path: "registry/blocks/marketing/hero/hero-12/media/flower.mp4",
+        type: "registry:file",
+        target: "components/blocks/marketing/hero-12/media/flower.mp4",
+      },
+    ],
+  },
   marketingNewsletterBlock(
     "newsletter-01",
     "Centered newsletter signup with email Input, Subscribe Button, and short supporting copy."
@@ -6204,6 +8954,13 @@ const registryItemsRaw = [
   marketingNewsletterBlock(
     "newsletter-09",
     "Start-aligned muted panel with Newsletter headline, copy, and email Input plus Subscribe."
+  ),
+  marketingNewsletterBlock(
+    "newsletter-10",
+    "Newsletter popup dialog — teaser stage, email subscribe form, and success state.",
+    {
+      registryDependencies: ["button", "dialog", "input", "label"],
+    }
   ),
   marketingBlogBlock(
     "blog-01",
@@ -6258,6 +9015,32 @@ const registryItemsRaw = [
     BLOG_04_IMAGES,
     { dependencies: ["lucide-react"] }
   ),
+  marketingPortfolioBlock(
+    "portfolio-01",
+    "Professional portfolio grid — category filter, local cover images, testimonials, and CTA.",
+    PORTFOLIO_01_IMAGES,
+    {
+      registryDependencies: ["avatar", "badge", "button"],
+      dependencies: ["lucide-react"],
+    }
+  ),
+  {
+    name: "social-links-01",
+    type: "registry:block",
+    title: "social-links-01",
+    description:
+      "Creative social / link-in-bio page — glass profile card, tone-colored link stack, and soft atmosphere.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: ["avatar", "badge"],
+    files: [
+      {
+        path: "registry/blocks/marketing/social-links/social-links-01/social-links.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/social-links-01/social-links.tsx",
+      },
+    ],
+  },
   marketingContentSectionBlock(
     "content-section-01",
     "Editorial analytics split: accent rail copy, metric chips, and framed KPI dashboard media.",
@@ -6834,6 +9617,32 @@ const registryItemsRaw = [
         path: "registry/blocks/navigation/sidebar/sidebar-08/chat-3.webp",
         type: "registry:file",
         target: "components/blocks/navigation/sidebar-08/chat-3.webp",
+      },
+    ],
+  },
+  {
+    name: "sidebar-09",
+    type: "registry:block",
+    title: "sidebar-09",
+    description:
+      "Dual-rail app sidebar with team switcher, nested section panel, badges, and account footer.",
+    registryDependencies: ["avatar", "dropdown-menu", "sidebar"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/navigation/sidebar/sidebar-09/sidebar.tsx",
+        type: "registry:component",
+        target: "components/blocks/navigation/sidebar-09/sidebar.tsx",
+      },
+      {
+        path: "registry/blocks/navigation/sidebar/sidebar-09/app-sidebar.tsx",
+        type: "registry:component",
+        target: "components/blocks/navigation/sidebar-09/app-sidebar.tsx",
+      },
+      {
+        path: "registry/blocks/navigation/sidebar/sidebar-09/team-switcher.tsx",
+        type: "registry:component",
+        target: "components/blocks/navigation/sidebar-09/team-switcher.tsx",
       },
     ],
   },

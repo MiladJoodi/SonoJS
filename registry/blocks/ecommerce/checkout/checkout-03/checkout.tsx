@@ -160,7 +160,10 @@ export default function Checkout({
   const total = SUBTOTAL + SHIPPING + TAX
 
   return (
-    <main className={cn("w-full bg-canvas", className)} {...props}>
+    <main
+      className={cn("w-full bg-white dark:bg-background", className)}
+      {...props}
+    >
       <div className="mx-auto max-w-6xl px-4 py-8 md:px-8 md:py-10">
         <ProgressSteps />
 

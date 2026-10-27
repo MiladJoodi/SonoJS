@@ -220,7 +220,10 @@ export default function Checkout({
   }
 
   return (
-    <main className={cn("w-full bg-canvas", className)} {...props}>
+    <main
+      className={cn("w-full bg-white dark:bg-background", className)}
+      {...props}
+    >
       <h1 className="sr-only">Checkout</h1>
       <div className="mx-auto grid max-w-6xl gap-0 lg:grid-cols-2">
         <section className="border-b border-border/70 bg-muted/40 px-4 py-8 sm:px-8 lg:border-b-0 lg:border-e lg:py-10">
@@ -336,7 +339,7 @@ export default function Checkout({
           </div>
         </section>
 
-        <section className="bg-canvas px-4 py-8 sm:px-8 lg:py-10">
+        <section className="bg-white px-4 py-8 sm:px-8 lg:py-10 dark:bg-background">
           <form
             className="mx-auto max-w-lg space-y-10 lg:ms-0"
             onSubmit={(e) => e.preventDefault()}

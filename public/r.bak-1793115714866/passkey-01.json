@@ -1,0 +1,39 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "passkey-01",
+  "type": "registry:block",
+  "title": "passkey-01",
+  "description": "Passkey-first sign-in.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "button"
+  ],
+  "cssVars": {
+    "light": {
+      "canvas": "#f3f3f4",
+      "border-soft": "color-mix(in oklab, #e4e4e7 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18)",
+      "background": "var(--canvas)",
+      "card": "#ffffff"
+    },
+    "dark": {
+      "canvas": "#09090b",
+      "border-soft": "color-mix(in oklab, #27272a 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(0, 0, 0, 0.24), 0 28px 56px -28px rgba(0, 0, 0, 0.48)",
+      "background": "var(--canvas)",
+      "card": "#18181b"
+    }
+  },
+  "files": [
+    {
+      "path": "components/blocks/authentication/passkey-01/passkey-form.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport { FingerprintIcon } from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { Button } from \"@/components/ui/button\"\n\nexport default function PasskeyForm({\n  className,\n  ...props\n}: React.ComponentProps<\"div\">) {\n  return (\n    <div\n      className={cn(\n        \"[--login-card-padding:1.5rem] sm:[--login-card-padding:2rem]\",\n        \"flex w-full flex-col gap-8 rounded-[12px] border border-border/70 bg-card p-(--login-card-padding)\",\n        \"shadow-soft\",\n        className\n      )}\n      style={{\n                backgroundColor: \"var(--card, #ffffff)\",\n                boxShadow:\n                  \"var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))\",\n              }}\n      {...props}\n    >\n      <header className=\"flex flex-col items-center gap-3 text-center\">\n        <span className=\"flex size-14 items-center justify-center rounded-full bg-muted text-foreground\">\n          <FingerprintIcon className=\"size-7\" strokeWidth={1.5} />\n        </span>\n        <div className=\"space-y-1.5\">\n          <h1 className=\"text-h3 text-foreground\">Sign in with a passkey</h1>\n          <p className=\"text-sm text-muted-foreground\">\n            Use Face ID, Touch ID, or your device lock to continue.\n          </p>\n        </div>\n      </header>\n\n      <Button\n        type=\"button\"\n        className=\"w-full shadow-none\"\n      >\n        Continue with passkey\n      </Button>\n\n      <p className=\"text-center text-sm text-muted-foreground\">\n        Prefer a password?{\" \"}\n        <a\n          href=\"#\"\n          className=\"cursor-pointer font-medium text-foreground underline-offset-4 hover:underline\"\n        >\n          Sign in another way\n        </a>\n      </p>\n    </div>\n  )\n}\n",
+      "target": "components/blocks/authentication/passkey-01/passkey-form.tsx"
+    }
+  ],
+  "version": "0.1.0+91c7a9edf388",
+  "generatedAt": "2026-10-27T15:39:22.160Z"
+}

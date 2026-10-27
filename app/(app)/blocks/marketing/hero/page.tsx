@@ -12,6 +12,8 @@ import Hero07 from "@/registry/blocks/marketing/hero/hero-07/hero"
 import Hero08 from "@/registry/blocks/marketing/hero/hero-08/hero"
 import Hero09 from "@/registry/blocks/marketing/hero/hero-09/hero"
 import Hero10 from "@/registry/blocks/marketing/hero/hero-10/hero"
+import Hero11 from "@/registry/blocks/marketing/hero/hero-11/hero"
+import Hero12 from "@/registry/blocks/marketing/hero/hero-12/hero"
 
 import { blocksPageMetadata } from "@/lib/seo"
 
@@ -42,7 +44,7 @@ export default function BlockHeroDocsPage() {
       <BlocksPageHeader
         title="Hero"
         pathname="/blocks/marketing/hero"
-        description="Marketing heroes — headline, CTA, brand logos, and product imagery."
+        description="Marketing heroes — headlines, CTAs, product stages, and brand imagery."
       />
 
       <div className="flex flex-col gap-8">
@@ -152,6 +154,28 @@ export default function BlockHeroDocsPage() {
           previewClassName="bg-canvas p-0"
         >
           <Hero10 />
+        </BlockExample>
+
+        <ExampleRule />
+
+        <BlockExample
+          name="hero-11"
+          usage={[{ title: "app/page.tsx", code: usage("hero-11") }]}
+          previewAlign="start"
+          previewClassName="bg-canvas p-0"
+        >
+          <Hero11 />
+        </BlockExample>
+
+        <ExampleRule />
+
+        <BlockExample
+          name="hero-12"
+          usage={[{ title: "app/page.tsx", code: usage("hero-12") }]}
+          previewAlign="start"
+          previewClassName="bg-canvas p-0"
+        >
+          <Hero12 />
         </BlockExample>
       </div>
     </article>

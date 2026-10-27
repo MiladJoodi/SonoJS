@@ -1,0 +1,36 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "features-08",
+  "type": "registry:block",
+  "title": "features-08",
+  "description": "Muted band features section with tinted icon chips, subtitles, and card dividers.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "cssVars": {
+    "light": {
+      "canvas": "#f3f3f4",
+      "border-soft": "color-mix(in oklab, #e4e4e7 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18)",
+      "background": "var(--canvas)",
+      "card": "#ffffff"
+    },
+    "dark": {
+      "canvas": "#09090b",
+      "border-soft": "color-mix(in oklab, #27272a 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(0, 0, 0, 0.24), 0 28px 56px -28px rgba(0, 0, 0, 0.48)",
+      "background": "var(--canvas)",
+      "card": "#18181b"
+    }
+  },
+  "files": [
+    {
+      "path": "components/blocks/marketing/features-08/features.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport type * as React from \"react\"\nimport {\n  AppWindowIcon,\n  ChartColumnIcon,\n  HeadphonesIcon,\n  Maximize2Icon,\n  Settings2Icon,\n  ShieldCheckIcon,\n} from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst features = [\n  {\n    title: \"Customization\",\n    subtitle: \"Fits your brand needs\",\n    description:\n      \"Easily tailor every aspect of the platform to suit your business needs. From design tweaks to functional preferences.\",\n    icon: Settings2Icon,\n    chip: \"f08-chip-sky\",\n  },\n  {\n    title: \"Security\",\n    subtitle: \"Enterprise-level data security\",\n    description:\n      \"Your privacy is our top priority. We implement industry-standard encryption and real-time threat detection.\",\n    icon: ShieldCheckIcon,\n    chip: \"f08-chip-emerald\",\n  },\n  {\n    title: \"User-Friendly Interface\",\n    subtitle: \"Streamlined for productivity\",\n    description:\n      \"Navigate with ease using our intuitive interface designed for efficiency — for beginners and experts alike.\",\n    icon: AppWindowIcon,\n    chip: \"f08-chip-teal\",\n  },\n  {\n    title: \"Performance\",\n    subtitle: \"Fast and dependable\",\n    description:\n      \"Experience lightning-fast load times and seamless performance without lag or disruption.\",\n    icon: ChartColumnIcon,\n    chip: \"f08-chip-orange\",\n  },\n  {\n    title: \"Scalability\",\n    subtitle: \"Scales with your growth\",\n    description:\n      \"Whether you're a startup or enterprise, add users and capabilities without disrupting performance.\",\n    icon: Maximize2Icon,\n    chip: \"f08-chip-rose\",\n  },\n  {\n    title: \"24/7 Support\",\n    subtitle: \"Help is always within reach\",\n    description:\n      \"Our expert support team is available around the clock to keep your experience smooth.\",\n    icon: HeadphonesIcon,\n    chip: \"f08-chip-blue\",\n  },\n] as const\n\nexport default function Features({\n  className,\n  ...props\n}: React.ComponentProps<\"section\">) {\n  return (\n    <section\n      className={cn(\"w-full bg-muted px-4 py-12 md:px-8 md:py-16\", className)}\n      aria-labelledby=\"features-heading\"\n      {...props}\n    >\n      <style>{`\n        .f08-chip-sky { background: #e0f2fe; color: #0369a1; }\n        .dark .f08-chip-sky { background: #0c4a6e; color: #7dd3fc; }\n        .f08-chip-emerald { background: #d1fae5; color: #047857; }\n        .dark .f08-chip-emerald { background: #064e3b; color: #6ee7b7; }\n        .f08-chip-teal { background: #ccfbf1; color: #0f766e; }\n        .dark .f08-chip-teal { background: #115e59; color: #5eead4; }\n        .f08-chip-orange { background: #ffedd5; color: #c2410c; }\n        .dark .f08-chip-orange { background: #7c2d12; color: #fdba74; }\n        .f08-chip-rose { background: #ffe4e6; color: #be123c; }\n        .dark .f08-chip-rose { background: #881337; color: #fda4af; }\n        .f08-chip-blue { background: #dbeafe; color: #1d4ed8; }\n        .dark .f08-chip-blue { background: #1e3a8a; color: #93c5fd; }\n      `}</style>\n\n      <div className=\"mx-auto w-full max-w-7xl\">\n        <div className=\"mb-8 max-w-2xl text-start md:mb-12\">\n          <p className=\"mb-2 text-sm font-medium text-primary\">Features</p>\n          <h2\n            id=\"features-heading\"\n            className=\"mb-3 text-[1.75rem] font-bold tracking-tight text-foreground sm:text-3xl md:text-4xl\"\n          >\n            Discover our exclusive features\n          </h2>\n          <p className=\"text-base leading-relaxed text-muted-foreground\">\n            Unlock a world of possibilities with our exclusive features. Explore\n            how our unique offerings can transform your journey.\n          </p>\n        </div>\n\n        <div className=\"grid w-full grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3\">\n          {features.map((feature) => (\n            <div\n              key={feature.title}\n              className=\"rounded-[12px] bg-card p-5 shadow-soft sm:p-6\"\n\n              style={{\n                backgroundColor: \"var(--card, #ffffff)\",\n                boxShadow:\n                  \"var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))\",\n              }}\n            >\n              <div className=\"flex items-start gap-3\">\n                <div\n                  className={cn(\n                    \"flex size-11 shrink-0 items-center justify-center rounded-[10px]\",\n                    feature.chip\n                  )}\n                >\n                  <feature.icon className=\"size-5\" aria-hidden=\"true\" />\n                </div>\n                <div className=\"min-w-0 pt-0.5 text-start\">\n                  <h3 className=\"text-base font-semibold text-foreground\">\n                    {feature.title}\n                  </h3>\n                  <p className=\"mt-0.5 text-xs text-muted-foreground\">\n                    {feature.subtitle}\n                  </p>\n                </div>\n              </div>\n              <p className=\"mt-4 text-start text-sm leading-relaxed text-muted-foreground sm:mt-5 md:text-base\">\n                {feature.description}\n              </p>\n            </div>\n          ))}\n        </div>\n      </div>\n    </section>\n  )\n}\n",
+      "target": "components/blocks/marketing/features-08/features.tsx"
+    }
+  ],
+  "version": "0.1.0+91c7a9edf388",
+  "generatedAt": "2026-10-27T15:39:22.160Z"
+}

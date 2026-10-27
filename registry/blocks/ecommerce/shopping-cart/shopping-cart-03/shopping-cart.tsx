@@ -84,7 +84,7 @@ export default function ShoppingCart({
   return (
     <section
       className={cn(
-        "w-full min-w-0 bg-background px-4 py-8 sm:py-10 md:px-8",
+        "w-full min-w-0 bg-white px-4 py-8 sm:py-10 md:px-8 dark:bg-background",
         className
       )}
       aria-label="Shopping cart"

@@ -1,0 +1,85 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "footer-09",
+  "type": "registry:block",
+  "title": "footer-09",
+  "description": "Minimal centered footer with brand mark, family line, and social icons.",
+  "cssVars": {
+    "light": {
+      "canvas": "#f3f3f4",
+      "border-soft": "color-mix(in oklab, #e4e4e7 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18)",
+      "background": "var(--canvas)",
+      "card": "#ffffff"
+    },
+    "dark": {
+      "canvas": "#09090b",
+      "border-soft": "color-mix(in oklab, #27272a 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(0, 0, 0, 0.24), 0 28px 56px -28px rgba(0, 0, 0, 0.48)",
+      "background": "var(--canvas)",
+      "card": "#18181b"
+    }
+  },
+  "files": [
+    {
+      "path": "components/blocks/marketing/footer-09/footer.tsx",
+      "type": "registry:component",
+      "content": "import type * as React from \"react\"\n\nimport { GithubIcon } from \"@/components/blocks/marketing/footer-09/icons/github\"\nimport { GoogleIcon } from \"@/components/blocks/marketing/footer-09/icons/google\"\nimport { SlackIcon } from \"@/components/blocks/marketing/footer-09/icons/slack\"\nimport { XIcon } from \"@/components/blocks/marketing/footer-09/icons/x\"\nimport { cn } from \"@/lib/utils\"\n\nconst social = [\n  { label: \"Google\", href: \"#\", Icon: GoogleIcon },\n  { label: \"Slack\", href: \"#\", Icon: SlackIcon },\n  { label: \"GitHub\", href: \"#\", Icon: GithubIcon },\n  { label: \"X\", href: \"#\", Icon: XIcon },\n] as const\n\nexport default function Footer({\n  className,\n  ...props\n}: React.ComponentProps<\"footer\">) {\n  return (\n    <footer className={cn(\"bg-card\", className)} {...props}>\n      <div className=\"mx-auto flex max-w-xl flex-col items-center px-4 py-16 text-center sm:px-6\">\n        <a\n          href=\"#\"\n          aria-label=\"SonoJS\"\n          className=\"cursor-pointer rounded-md text-xl font-semibold tracking-tight text-foreground transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40\"\n        >\n          SonoJS\n        </a>\n\n        <p className=\"mt-3 max-w-sm text-sm leading-relaxed text-muted-foreground\">\n          We&apos;re part of the{\" \"}\n          <a\n            href=\"#\"\n            className=\"cursor-pointer font-medium text-primary underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40\"\n          >\n            SonoJS\n          </a>{\" \"}\n          family.\n        </p>\n\n        <ul className=\"mt-10 flex flex-wrap items-center justify-center gap-x-5 gap-y-3 rounded-[12px] border border-border/70 bg-background/60 px-5 py-3 shadow-soft\"\n              style={{\n                boxShadow:\n                  \"var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))\",\n              }}\n            >\n          {social.map(({ label, href, Icon }) => (\n            <li key={label}>\n              <a\n                href={href}\n                aria-label={label}\n                className=\"inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-md px-1 text-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40\"\n              >\n                <Icon className=\"size-4 shrink-0\" />\n                <span>{label}</span>\n              </a>\n            </li>\n          ))}\n        </ul>\n\n        <p className=\"mt-10 text-xs text-muted-foreground\">© 2026 SonoJS.</p>\n      </div>\n    </footer>\n  )\n}\n",
+      "target": "components/blocks/marketing/footer-09/footer.tsx"
+    },
+    {
+      "path": "components/blocks/marketing/footer-09/icons/google.tsx",
+      "type": "registry:component",
+      "content": "import { cn } from \"@/lib/utils\"\n\nconst mark = [\n  {\n    fill: \"#4285F4\",\n    d: \"M22.501 12.2331C22.501 11.3698 22.4296 10.7398 22.2748 10.0864H12.2153V13.983H18.12C18.001 14.9514 17.3582 16.4097 15.9296 17.3897L15.9096 17.5202L19.0902 19.9349L19.3106 19.9564C21.3343 18.1247 22.501 15.4297 22.501 12.2331Z\",\n  },\n  {\n    fill: \"#34A853\",\n    d: \"M12.2147 22.5001C15.1075 22.5001 17.5361 21.5667 19.3099 19.9567L15.929 17.39C15.0242 18.0083 13.8099 18.44 12.2147 18.44C9.38142 18.44 6.97669 16.6083 6.11947 14.0767L5.99382 14.0871L2.68656 16.5955L2.64331 16.7133C4.40519 20.1433 8.02423 22.5001 12.2147 22.5001Z\",\n  },\n  {\n    fill: \"#FBBC05\",\n    d: \"M6.11997 14.0767C5.89379 13.4234 5.76289 12.7233 5.76289 12C5.76289 11.2767 5.89379 10.5767 6.10807 9.92337L6.10208 9.78423L2.75337 7.2356L2.64381 7.28667C1.91765 8.71002 1.50098 10.3084 1.50098 12C1.50098 13.6917 1.91765 15.29 2.64381 16.7133L6.11997 14.0767Z\",\n  },\n  {\n    fill: \"#EB4335\",\n    d: \"M12.2148 5.55997C14.2267 5.55997 15.5838 6.41163 16.3576 7.12335L19.3814 4.23C17.5243 2.53834 15.1076 1.5 12.2148 1.5C8.02426 1.5 4.4052 3.85665 2.64331 7.28662L6.10759 9.92332C6.97672 7.39166 9.38146 5.55997 12.2148 5.55997Z\",\n  },\n] as const\n\nexport function GoogleIcon({\n  className,\n  ...props\n}: React.ComponentProps<\"svg\">) {\n  return (\n    <svg\n      viewBox=\"0 0 24 24\"\n      aria-hidden=\"true\"\n      className={cn(\"size-5\", className)}\n      {...props}\n    >\n      {mark.map((part) => (\n        <path key={part.fill} d={part.d} fill={part.fill} />\n      ))}\n    </svg>\n  )\n}\n",
+      "target": "components/blocks/marketing/footer-09/icons/google.tsx"
+    },
+    {
+      "path": "components/blocks/marketing/footer-09/icons/google.svg",
+      "type": "registry:file",
+      "content": "PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIj48cGF0aCBkPSJNMjIuNTAxIDEyLjIzMzFDMjIuNTAxIDExLjM2OTggMjIuNDI5NiAxMC43Mzk4IDIyLjI3NDggMTAuMDg2NEgxMi4yMTUzVjEzLjk4M0gxOC4xMkMxOC4wMDEgMTQuOTUxNCAxNy4zNTgyIDE2LjQwOTcgMTUuOTI5NiAxNy4zODk3TDE1LjkwOTYgMTcuNTIwMkwxOS4wOTAyIDE5LjkzNDlMMTkuMzEwNiAxOS45NTY0QzIxLjMzNDMgMTguMTI0NyAyMi41MDEgMTUuNDI5NyAyMi41MDEgMTIuMjMzMVoiIGZpbGw9IiM0Mjg1RjQiPjwvcGF0aD48cGF0aCBkPSJNMTIuMjE0NyAyMi41MDAxQzE1LjEwNzUgMjIuNTAwMSAxNy41MzYxIDIxLjU2NjcgMTkuMzA5OSAxOS45NTY3TDE1LjkyOSAxNy4zOUMxNS4wMjQyIDE4LjAwODMgMTMuODA5OSAxOC40NCAxMi4yMTQ3IDE4LjQ0QzkuMzgxNDIgMTguNDQgNi45NzY2OSAxNi42MDgzIDYuMTE5NDcgMTQuMDc2N0w1Ljk5MzgyIDE0LjA4NzFMMi42ODY1NiAxNi41OTU1TDIuNjQzMzEgMTYuNzEzM0M0LjQwNTE5IDIwLjE0MzMgOC4wMjQyMyAyMi41MDAxIDEyLjIxNDcgMjIuNTAwMVoiIGZpbGw9IiMzNEE4NTMiPjwvcGF0aD48cGF0aCBkPSJNNi4xMTk5NyAxNC4wNzY3QzUuODkzNzkgMTMuNDIzNCA1Ljc2Mjg5IDEyLjcyMzMgNS43NjI4OSAxMkM1Ljc2Mjg5IDExLjI3NjcgNS44OTM3OSAxMC41NzY3IDYuMTA4MDcgOS45MjMzN0w2LjEwMjA4IDkuNzg0MjNMMi43NTMzNyA3LjIzNTZMMi42NDM4MSA3LjI4NjY3QzEuOTE3NjUgOC43MTAwMiAxLjUwMDk4IDEwLjMwODQgMS41MDA5OCAxMkMxLjUwMDk4IDEzLjY5MTcgMS45MTc2NSAxNS4yOSAyLjY0MzgxIDE2LjcxMzNMNi4xMTk5NyAxNC4wNzY3WiIgZmlsbD0iI0ZCQkMwNSI+PC9wYXRoPjxwYXRoIGQ9Ik0xMi4yMTQ4IDUuNTU5OTdDMTQuMjI2NyA1LjU1OTk3IDE1LjU4MzggNi40MTE2MyAxNi4zNTc2IDcuMTIzMzVMMTkuMzgxNCA0LjIzQzE3LjUyNDMgMi41MzgzNCAxNS4xMDc2IDEuNSAxMi4yMTQ4IDEuNUM4LjAyNDI2IDEuNSA0LjQwNTIgMy44NTY2NSAyLjY0MzMxIDcuMjg2NjJMNi4xMDc1OSA5LjkyMzMyQzYuOTc2NzIgNy4zOTE2NiA5LjM4MTQ2IDUuNTU5OTcgMTIuMjE0OCA1LjU1OTk3WiIgZmlsbD0iI0VCNDMzNSI+PC9wYXRoPjwvc3ZnPg==",
+      "encoding": "base64",
+      "target": "components/blocks/marketing/footer-09/icons/google.svg"
+    },
+    {
+      "path": "components/blocks/marketing/footer-09/icons/x.tsx",
+      "type": "registry:component",
+      "content": "import { cn } from \"@/lib/utils\"\n\nconst xPath =\n  \"M15.9445 23L10.3951 15.0901L3.44789 23H0.508789L9.09111 13.2311L0.508789 1H8.05474L13.285 8.45502L19.8383 1H22.7774L14.5933 10.3165L23.4904 23H15.9445ZM19.2175 20.77H17.2388L4.71714 3.23H6.69613L11.7111 10.2532L12.5784 11.4719L19.2175 20.77Z\"\n\nexport function XIcon({\n  className,\n  ...props\n}: React.ComponentProps<\"svg\">) {\n  return (\n    <svg\n      viewBox=\"0 0 24 24\"\n      aria-hidden=\"true\"\n      className={cn(\"size-5\", className)}\n      fill=\"currentColor\"\n      {...props}\n    >\n      <g transform=\"translate(12 12) scale(0.78) translate(-12 -12)\">\n        <path fillRule=\"evenodd\" clipRule=\"evenodd\" d={xPath} />\n      </g>\n    </svg>\n  )\n}\n",
+      "target": "components/blocks/marketing/footer-09/icons/x.tsx"
+    },
+    {
+      "path": "components/blocks/marketing/footer-09/icons/x.svg",
+      "type": "registry:file",
+      "content": "PHN2ZyBjbGFzcz0iamd0a2QiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiPjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMTUuOTQ0NSAyM0wxMC4zOTUxIDE1LjA5MDFMMy40NDc4OSAyM0gwLjUwODc4OUw5LjA5MTExIDEzLjIzMTFMMC41MDg3ODkgMUg4LjA1NDc0TDEzLjI4NSA4LjQ1NTAyTDE5LjgzODMgMUgyMi43Nzc0TDE0LjU5MzMgMTAuMzE2NUwyMy40OTA0IDIzSDE1Ljk0NDVaTTE5LjIxNzUgMjAuNzdIMTcuMjM4OEw0LjcxNzE0IDMuMjNINi42OTYxM0wxMS43MTExIDEwLjI1MzJMMTIuNTc4NCAxMS40NzE5TDE5LjIxNzUgMjAuNzdaIiBmaWxsPSIjMzc0MTUxIj48L3BhdGg+PC9zdmc+",
+      "encoding": "base64",
+      "target": "components/blocks/marketing/footer-09/icons/x.svg"
+    },
+    {
+      "path": "components/blocks/marketing/footer-09/icons/github.tsx",
+      "type": "registry:component",
+      "content": "import { cn } from \"@/lib/utils\"\n\nconst githubPath =\n  \"M8 0C3.58 0 0 3.58 0 8C0 11.54 2.29 14.53 5.47 15.59C5.87 15.66 6.02 15.42 6.02 15.21C6.02 15.02 6.01 14.39 6.01 13.72C4 14.09 3.48 13.23 3.32 12.78C3.23 12.55 2.84 11.84 2.5 11.65C2.22 11.5 1.82 11.13 2.49 11.12C3.12 11.11 3.57 11.7 3.72 11.94C4.44 13.15 5.59 12.81 6.05 12.6C6.12 12.08 6.33 11.73 6.56 11.53C4.78 11.33 2.92 10.64 2.92 7.58C2.92 6.71 3.23 5.99 3.74 5.43C3.66 5.23 3.38 4.41 3.82 3.31C3.82 3.31 4.49 3.1 6.02 4.13C6.66 3.95 7.34 3.86 8.02 3.86C8.7 3.86 9.38 3.95 10.02 4.13C11.55 3.09 12.22 3.31 12.22 3.31C12.66 4.41 12.38 5.23 12.3 5.43C12.81 5.99 13.12 6.7 13.12 7.58C13.12 10.65 11.25 11.33 9.47 11.53C9.76 11.78 10.01 12.26 10.01 13.01C10.01 14.08 10 14.94 10 15.21C10 15.42 10.15 15.67 10.55 15.59C13.71 14.53 16 11.53 16 8C16 3.58 12.42 0 8 0Z\"\n\nexport function GithubIcon({\n  className,\n  ...props\n}: React.ComponentProps<\"svg\">) {\n  return (\n    <svg\n      viewBox=\"0 0 24 24\"\n      aria-hidden=\"true\"\n      className={cn(\"size-5\", className)}\n      fill=\"currentColor\"\n      {...props}\n    >\n      <g transform=\"translate(12 12) scale(1.35) translate(-8 -8)\">\n        <path fillRule=\"evenodd\" clipRule=\"evenodd\" d={githubPath} />\n      </g>\n    </svg>\n  )\n}\n",
+      "target": "components/blocks/marketing/footer-09/icons/github.tsx"
+    },
+    {
+      "path": "components/blocks/marketing/footer-09/icons/github.svg",
+      "type": "registry:file",
+      "content": "PHN2ZyB3aWR0aD0iMTAyNCIgaGVpZ2h0PSIxMDI0IiB2aWV3Qm94PSIwIDAgMTAyNCAxMDI0IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTggMEMzLjU4IDAgMCAzLjU4IDAgOEMwIDExLjU0IDIuMjkgMTQuNTMgNS40NyAxNS41OUM1Ljg3IDE1LjY2IDYuMDIgMTUuNDIgNi4wMiAxNS4yMUM2LjAyIDE1LjAyIDYuMDEgMTQuMzkgNi4wMSAxMy43MkM0IDE0LjA5IDMuNDggMTMuMjMgMy4zMiAxMi43OEMzLjIzIDEyLjU1IDIuODQgMTEuODQgMi41IDExLjY1QzIuMjIgMTEuNSAxLjgyIDExLjEzIDIuNDkgMTEuMTJDMy4xMiAxMS4xMSAzLjU3IDExLjcgMy43MiAxMS45NEM0LjQ0IDEzLjE1IDUuNTkgMTIuODEgNi4wNSAxMi42QzYuMTIgMTIuMDggNi4zMyAxMS43MyA2LjU2IDExLjUzQzQuNzggMTEuMzMgMi45MiAxMC42NCAyLjkyIDcuNThDMi45MiA2LjcxIDMuMjMgNS45OSAzLjc0IDUuNDNDMy42NiA1LjIzIDMuMzggNC40MSAzLjgyIDMuMzFDMy44MiAzLjMxIDQuNDkgMy4xIDYuMDIgNC4xM0M2LjY2IDMuOTUgNy4zNCAzLjg2IDguMDIgMy44NkM4LjcgMy44NiA5LjM4IDMuOTUgMTAuMDIgNC4xM0MxMS41NSAzLjA5IDEyLjIyIDMuMzEgMTIuMjIgMy4zMUMxMi42NiA0LjQxIDEyLjM4IDUuMjMgMTIuMyA1LjQzQzEyLjgxIDUuOTkgMTMuMTIgNi43IDEzLjEyIDcuNThDMTMuMTIgMTAuNjUgMTEuMjUgMTEuMzMgOS40NyAxMS41M0M5Ljc2IDExLjc4IDEwLjAxIDEyLjI2IDEwLjAxIDEzLjAxQzEwLjAxIDE0LjA4IDEwIDE0Ljk0IDEwIDE1LjIxQzEwIDE1LjQyIDEwLjE1IDE1LjY3IDEwLjU1IDE1LjU5QzEzLjcxIDE0LjUzIDE2IDExLjUzIDE2IDhDMTYgMy41OCAxMi40MiAwIDggMFoiIHRyYW5zZm9ybT0ic2NhbGUoNjQpIiBmaWxsPSIjMUIxRjIzIi8+Cjwvc3ZnPgo=",
+      "encoding": "base64",
+      "target": "components/blocks/marketing/footer-09/icons/github.svg"
+    },
+    {
+      "path": "components/blocks/marketing/footer-09/icons/slack.tsx",
+      "type": "registry:component",
+      "content": "import { cn } from \"@/lib/utils\"\n\nexport function SlackIcon({\n  className,\n  ...props\n}: React.ComponentProps<\"svg\">) {\n  return (\n    <svg\n      viewBox=\"0 0 512 512\"\n      aria-hidden=\"true\"\n      className={cn(\"size-5 shrink-0\", className)}\n      {...props}\n    >\n      <path fill=\"#ff4340\" d=\"M187.432 271c-29.538 0-53.568 24.03-53.568 53.568v133.863c0 29.538 24.03 53.568 53.568 53.568C216.97 512 241 487.97 241 458.432V324.568C241 295.03 216.97 271 187.432 271zm-83.569 0h-51.86c-28.596 0-51.86 23.265-51.86 51.86 0 28.596 23.265 51.86 51.86 51.86s51.86-23.265 51.86-51.86z\" />\n      <path fill=\"#36c6ff\" d=\"M0 187.432C0 216.97 24.03 241 53.568 241h133.863C216.97 241 241 216.97 241 187.432s-24.03-53.568-53.568-53.568H53.568C24.03 133.863 0 157.894 0 187.432zm189.14-83.569H241v-51.86c0-28.596-23.265-51.86-51.86-51.86-28.596 0-51.86 23.265-51.86 51.86s23.264 51.86 51.86 51.86z\" />\n      <path fill=\"#0dc46e\" d=\"M324.568 241c29.538 0 53.568-24.03 53.568-53.568V53.568C378.137 24.03 354.106 0 324.568 0S271 24.03 271 53.568v133.863C271 216.97 295.03 241 324.568 241zm83.569 0h51.86c28.596 0 51.86-23.265 51.86-51.86 0-28.596-23.265-51.86-51.86-51.86s-51.86 23.265-51.86 51.86z\" />\n      <path fill=\"#fdcb02\" d=\"M512 324.568C512 295.03 487.97 271 458.432 271H324.568C295.03 271 271 295.03 271 324.568s24.03 53.568 53.568 53.568h133.863c29.539.001 53.569-24.03 53.569-53.568zm-189.14 83.569H271v51.86c0 28.596 23.265 51.86 51.86 51.86 28.596 0 51.86-23.265 51.86-51.86s-23.264-51.86-51.86-51.86z\" />\n    </svg>\n  )\n}\n",
+      "target": "components/blocks/marketing/footer-09/icons/slack.tsx"
+    },
+    {
+      "path": "components/blocks/marketing/footer-09/icons/slack.svg",
+      "type": "registry:file",
+      "content": "PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDUxMiA1MTIiPjxwYXRoIGZpbGw9IiNmZjQzNDAiIGQ9Ik0xODcuNDMyIDI3MWMtMjkuNTM4IDAtNTMuNTY4IDI0LjAzLTUzLjU2OCA1My41Njh2MTMzLjg2M2MwIDI5LjUzOCAyNC4wMyA1My41NjggNTMuNTY4IDUzLjU2OEMyMTYuOTcgNTEyIDI0MSA0ODcuOTcgMjQxIDQ1OC40MzJWMzI0LjU2OEMyNDEgMjk1LjAzIDIxNi45NyAyNzEgMTg3LjQzMiAyNzF6bS04My41NjkgMGgtNTEuODZjLTI4LjU5NiAwLTUxLjg2IDIzLjI2NS01MS44NiA1MS44NiAwIDI4LjU5NiAyMy4yNjUgNTEuODYgNTEuODYgNTEuODZzNTEuODYtMjMuMjY1IDUxLjg2LTUxLjg2eiIvPjxwYXRoIGZpbGw9IiMzNmM2ZmYiIGQ9Ik0wIDE4Ny40MzJDMCAyMTYuOTcgMjQuMDMgMjQxIDUzLjU2OCAyNDFoMTMzLjg2M0MyMTYuOTcgMjQxIDI0MSAyMTYuOTcgMjQxIDE4Ny40MzJzLTI0LjAzLTUzLjU2OC01My41NjgtNTMuNTY4SDUzLjU2OEMyNC4wMyAxMzMuODYzIDAgMTU3Ljg5NCAwIDE4Ny40MzJ6bTE4OS4xNC04My41NjlIMjQxdi01MS44NmMwLTI4LjU5Ni0yMy4yNjUtNTEuODYtNTEuODYtNTEuODYtMjguNTk2IDAtNTEuODYgMjMuMjY1LTUxLjg2IDUxLjg2czIzLjI2NCA1MS44NiA1MS44NiA1MS44NnoiLz48cGF0aCBmaWxsPSIjMGRjNDZlIiBkPSJNMzI0LjU2OCAyNDFjMjkuNTM4IDAgNTMuNTY4LTI0LjAzIDUzLjU2OC01My41NjhWNTMuNTY4QzM3OC4xMzcgMjQuMDMgMzU0LjEwNiAwIDMyNC41NjggMFMyNzEgMjQuMDMgMjcxIDUzLjU2OHYxMzMuODYzQzI3MSAyMTYuOTcgMjk1LjAzIDI0MSAzMjQuNTY4IDI0MXptODMuNTY5IDBoNTEuODZjMjguNTk2IDAgNTEuODYtMjMuMjY1IDUxLjg2LTUxLjg2IDAtMjguNTk2LTIzLjI2NS01MS44Ni01MS44Ni01MS44NnMtNTEuODYgMjMuMjY1LTUxLjg2IDUxLjg2eiIvPjxwYXRoIGZpbGw9IiNmZGNiMDIiIGQ9Ik01MTIgMzI0LjU2OEM1MTIgMjk1LjAzIDQ4Ny45NyAyNzEgNDU4LjQzMiAyNzFIMzI0LjU2OEMyOTUuMDMgMjcxIDI3MSAyOTUuMDMgMjcxIDMyNC41NjhzMjQuMDMgNTMuNTY4IDUzLjU2OCA1My41NjhoMTMzLjg2M2MyOS41MzkuMDAxIDUzLjU2OS0yNC4wMyA1My41NjktNTMuNTY4em0tMTg5LjE0IDgzLjU2OUgyNzF2NTEuODZjMCAyOC41OTYgMjMuMjY1IDUxLjg2IDUxLjg2IDUxLjg2IDI4LjU5NiAwIDUxLjg2LTIzLjI2NSA1MS44Ni01MS44NnMtMjMuMjY0LTUxLjg2LTUxLjg2LTUxLjg2eiIvPjwvc3ZnPgo=",
+      "encoding": "base64",
+      "target": "components/blocks/marketing/footer-09/icons/slack.svg"
+    }
+  ],
+  "version": "0.1.0+0c67e178c74a",
+  "generatedAt": "2026-10-27T19:05:53.101Z"
+}
