@@ -88,7 +88,8 @@ export default function Blog({
 }) {
   return (
     <section
-      className={cn("w-full px-4 md:px-8", className)}
+      className={cn("w-full bg-canvas px-4 py-12 md:px-8 md:py-16", className)}
+      style={{ backgroundColor: "var(--canvas, #f3f3f4)" }}
       aria-labelledby="blog-heading"
       {...props}
     >
@@ -114,6 +115,10 @@ export default function Blog({
               key={post.id}
               href={post.href}
               className="group relative block cursor-pointer overflow-hidden rounded-[12px] bg-muted shadow-soft ring-1 ring-border/40 transition-[box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_40px_-24px_rgba(0,0,0,0.45)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              style={{
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
             >
               <div className="relative aspect-[3/4] w-full bg-muted">
                 <img

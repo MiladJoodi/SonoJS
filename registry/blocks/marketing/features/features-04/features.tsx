@@ -90,6 +90,12 @@ export default function Features({
             <div
               key={feature.title}
               className="rounded-[12px] border border-border/70 bg-card px-5 py-8 text-center shadow-soft sm:px-6 sm:py-10"
+
+              style={{
+                backgroundColor: "var(--card, #ffffff)",
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
             >
               <div
                 className={cn(

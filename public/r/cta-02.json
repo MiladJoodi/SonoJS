@@ -7,14 +7,30 @@
   "registryDependencies": [
     "button"
   ],
+  "cssVars": {
+    "light": {
+      "canvas": "#f3f3f4",
+      "border-soft": "color-mix(in oklab, #e4e4e7 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18)",
+      "background": "var(--canvas)",
+      "card": "#ffffff"
+    },
+    "dark": {
+      "canvas": "#09090b",
+      "border-soft": "color-mix(in oklab, #27272a 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(0, 0, 0, 0.24), 0 28px 56px -28px rgba(0, 0, 0, 0.48)",
+      "background": "var(--canvas)",
+      "card": "#18181b"
+    }
+  },
   "files": [
     {
       "path": "components/blocks/marketing/cta-02/cta.tsx",
       "type": "registry:component",
-      "content": "\"use client\"\n\nimport type * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { Button } from \"@/components/ui/button\"\n\nexport default function Cta({\n  className,\n  ...props\n}: React.ComponentProps<\"section\">) {\n  return (\n    <section\n      className={cn(\"w-full px-4 py-6 md:px-8 md:py-8\", className)}\n      aria-labelledby=\"cta-heading\"\n      {...props}\n    >\n      <div className=\"mx-auto max-w-3xl text-center\">\n        <h2\n          id=\"cta-heading\"\n          className=\"mb-4 text-[1.75rem] font-bold tracking-tight text-foreground sm:mb-6 sm:text-3xl md:text-4xl\"\n        >\n          Try using our templates\n        </h2>\n        <p className=\"text-base leading-relaxed text-muted-foreground\">\n          Try using our templates to quickly create professional pages without\n          starting from scratch. Save time, stay consistent, and customize\n          designs to fit your brand perfectly.\n        </p>\n\n        <div className=\"mt-6 flex flex-wrap items-center justify-center gap-3 sm:mt-8 sm:gap-4\">\n          <Button asChild className=\"h-[46px] rounded-[12px]\">\n            <a href=\"#\">Get started</a>\n          </Button>\n          <Button\n            asChild\n            variant=\"outline\"\n            className=\"h-[46px] rounded-[12px] border-border/70 bg-card shadow-none hover:bg-muted\"\n          >\n            <a href=\"#\">Learn more</a>\n          </Button>\n        </div>\n      </div>\n    </section>\n  )\n}\n",
+      "content": "\"use client\"\n\nimport type * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { Button } from \"@/components/ui/button\"\n\nexport default function Cta({\n  className,\n  ...props\n}: React.ComponentProps<\"section\">) {\n  return (\n    <section\n      className={cn(\"w-full px-4 py-6 md:px-8 md:py-8\", className)}\n      aria-labelledby=\"cta-heading\"\n      {...props}\n    >\n      <div className=\"mx-auto max-w-3xl text-center\">\n        <h2\n          id=\"cta-heading\"\n          className=\"mb-4 text-[1.75rem] font-bold tracking-tight text-foreground sm:mb-6 sm:text-3xl md:text-4xl\"\n        >\n          Try using our templates\n        </h2>\n        <p className=\"text-base leading-relaxed text-muted-foreground\">\n          Try using our templates to quickly create professional pages without\n          starting from scratch. Save time, stay consistent, and customize\n          designs to fit your brand perfectly.\n        </p>\n\n        <div className=\"mt-6 flex flex-wrap items-center justify-center gap-3 sm:mt-8 sm:gap-4\">\n          <Button asChild className=\"h-[46px] rounded-[12px]\">\n            <a href=\"#\">Get started</a>\n          </Button>\n          <Button\n            asChild\n            variant=\"outline\"\n            className=\"h-[46px] rounded-[12px] border-border/70 bg-card shadow-none hover:bg-muted\">\n            <a href=\"#\">Learn more</a>\n          </Button>\n        </div>\n      </div>\n    </section>\n  )\n}\n",
       "target": "components/blocks/marketing/cta-02/cta.tsx"
     }
   ],
-  "version": "0.1.0+f9f25a599210",
-  "generatedAt": "2026-10-26T23:48:29.739Z"
+  "version": "0.1.0+4407fc129d93",
+  "generatedAt": "2026-10-27T14:06:34.340Z"
 }

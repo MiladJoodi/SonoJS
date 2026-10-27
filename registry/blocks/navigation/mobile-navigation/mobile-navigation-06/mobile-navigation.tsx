@@ -53,8 +53,7 @@ export default function MobileNavigation({
             "relative mx-auto grid h-[4.5rem] max-w-md grid-cols-5 overflow-hidden rounded-2xl border border-border/60",
             "bg-background/75 shadow-lg shadow-black/10 backdrop-blur-xl",
             "dark:bg-card/80 dark:shadow-black/40"
-          )}
-        >
+          )}>
           <div
             aria-hidden
             className="pointer-events-none absolute inset-y-1.5 rounded-xl bg-primary/15 transition-all duration-300 ease-out dark:bg-primary/25"

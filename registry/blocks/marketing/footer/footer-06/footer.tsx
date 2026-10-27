@@ -120,8 +120,7 @@ export default function Footer({
         "border-t border-border/70 bg-card px-4 py-14 text-foreground md:px-8 md:py-16",
         className
       )}
-      {...props}
-    >
+      {...props}>
       <div className="mx-auto max-w-6xl">
         <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 sm:gap-x-8 md:grid-cols-4">
           {columns.map((column, columnIndex) => (

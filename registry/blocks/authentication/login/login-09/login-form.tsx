@@ -34,7 +34,13 @@ function BrandColumn() {
         "flex flex-1 flex-col justify-between gap-5 rounded-[12px] border border-border/70 bg-card p-5 shadow-soft sm:gap-6 sm:p-6",
         "md:gap-10 md:p-8 lg:p-10"
       )}
-    >
+
+              style={{
+                backgroundColor: "var(--card, #ffffff)",
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
+            >
       <div className="space-y-4 md:space-y-6">
         <span className="text-sm font-semibold tracking-wide text-foreground">
           Sono
@@ -105,7 +111,13 @@ export default function LoginForm({
             "shadow-soft",
             ""
           )}
-        >
+
+              style={{
+                backgroundColor: "var(--card, #ffffff)",
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
+            >
           <header className="flex flex-col items-start gap-3">
             <span className="h-0.5 w-8 rounded-full bg-primary" aria-hidden />
             <div className="space-y-1.5">
@@ -169,16 +181,14 @@ export default function LoginForm({
             <Button
               type="button"
               variant="outline"
-              className="h-[46px] w-full rounded-[12px] border-border/70 bg-card shadow-none hover:bg-muted"
-            >
+              className="h-[46px] w-full rounded-[12px] border-border/70 bg-card shadow-none hover:bg-muted">
               <GoogleIcon />
               Continue with Google
             </Button>
             <Button
               type="button"
               variant="outline"
-              className="h-[46px] w-full rounded-[12px] border-border/70 bg-card shadow-none hover:bg-muted"
-            >
+              className="h-[46px] w-full rounded-[12px] border-border/70 bg-card shadow-none hover:bg-muted">
               <AppleIcon />
               Continue with Apple
             </Button>

@@ -186,8 +186,7 @@ export default function MegaMenu({
         "flex min-h-[28rem] w-full flex-1 flex-col bg-card",
         className
       )}
-      {...props}
-    >
+      {...props}>
       <header className="sticky top-0 z-20 w-full border-b border-border/70 bg-card">
         <nav
           className="mx-auto flex min-h-16 w-full max-w-7xl flex-nowrap items-center gap-4 px-4 py-2 sm:px-6 lg:px-8"

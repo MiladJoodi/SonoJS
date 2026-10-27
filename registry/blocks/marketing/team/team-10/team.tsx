@@ -109,7 +109,13 @@ export default function Team({
                 />
               </div>
 
-              <div className="absolute end-3 z-10 min-w-[132px] max-w-[calc(100%-1.25rem)] rounded-[12px] border border-border/70 bg-card p-4 text-start shadow-soft transition-transform duration-300 group-hover:-translate-y-0.5 sm:end-4 sm:min-w-[140px]">
+              <div className="absolute end-3 z-10 min-w-[132px] max-w-[calc(100%-1.25rem)] rounded-[12px] border border-border/70 bg-card p-4 text-start shadow-soft transition-transform duration-300 group-hover:-translate-y-0.5 sm:end-4 sm:min-w-[140px]"
+              style={{
+                backgroundColor: "var(--card, #ffffff)",
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
+            >
                 <h3 className="text-sm font-semibold tracking-tight text-foreground">
                   {member.name}
                 </h3>

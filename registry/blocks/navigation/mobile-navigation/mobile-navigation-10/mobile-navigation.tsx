@@ -56,8 +56,7 @@ export default function MobileNavigation({
           className={cn(
             "mx-auto flex h-[4.25rem] max-w-md items-center gap-1 rounded-[1.25rem]",
             "border border-border/70 bg-card p-1.5 shadow-lg shadow-black/10 dark:shadow-black/40"
-          )}
-        >
+          )}>
           <div className="grid h-full min-w-0 flex-1 grid-cols-5 gap-0.5">
             {items.map((item) => {
               const Icon = item.icon

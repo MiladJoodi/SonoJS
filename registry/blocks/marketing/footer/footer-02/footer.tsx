@@ -57,8 +57,7 @@ export default function Footer({
         "border-t border-border/70 bg-card px-4 py-10 text-foreground md:px-8 md:py-12",
         className
       )}
-      {...props}
-    >
+      {...props}>
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between md:gap-10">
           <a

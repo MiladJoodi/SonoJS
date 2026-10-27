@@ -39,7 +39,12 @@ export default function Footer({
           family.
         </p>
 
-        <ul className="mt-10 flex flex-wrap items-center justify-center gap-x-5 gap-y-3 rounded-[12px] border border-border/70 bg-background/60 px-5 py-3 shadow-soft">
+        <ul className="mt-10 flex flex-wrap items-center justify-center gap-x-5 gap-y-3 rounded-[12px] border border-border/70 bg-background/60 px-5 py-3 shadow-soft"
+              style={{
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
+            >
           {social.map(({ label, href, Icon }) => (
             <li key={label}>
               <a

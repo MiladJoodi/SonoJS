@@ -74,6 +74,12 @@ export default function Features({
             <div
               key={service.title}
               className="rounded-[12px] bg-card p-5 shadow-soft sm:p-6 md:p-7"
+
+              style={{
+                backgroundColor: "var(--card, #ffffff)",
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
             >
               <div className="mb-3 flex items-start justify-between gap-3">
                 <div className="flex min-w-0 items-start gap-3 sm:items-center">

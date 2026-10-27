@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
+import { GithubLink } from "@/components/site-header/github-link"
 import { MainNav } from "@/components/site-header/main-nav"
 import { MobileNav } from "@/components/site-header/mobile-nav"
 import { ModeSwitcher } from "@/components/site-header/mode-switcher"
@@ -10,7 +11,11 @@ import { siteConfig } from "@/lib/config"
 import { cn } from "@/lib/utils"
 import { Separator } from "@sonojs/ui/components/separator"
 
-export function SiteHeader() {
+export function SiteHeader({
+  githubStars = null,
+}: {
+  githubStars?: number | null
+}) {
   const pathname = usePathname()
   const isHome = pathname === "/"
 
@@ -47,8 +52,9 @@ export function SiteHeader() {
           </Link>
           <MainNav items={siteConfig.navItems} className="hidden lg:flex" />
 
-          <div className="ms-auto flex shrink-0 items-center gap-0.5">
-            <Separator orientation="vertical" className="mx-1 hidden sm:block" />
+          <div className="ms-auto flex shrink-0 items-center gap-1.5">
+            <GithubLink stars={githubStars} />
+            <Separator orientation="vertical" className="mx-0.5 hidden sm:block" />
             <ModeSwitcher />
           </div>
         </div>

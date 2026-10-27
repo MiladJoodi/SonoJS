@@ -51,16 +51,14 @@ export default function Navbar({
   return (
     <div
       className={cn("flex min-h-[28rem] w-full flex-col bg-card", className)}
-      {...props}
-    >
+      {...props}>
       <div className="border-b border-border/70 bg-canvas/80 px-4 py-5 sm:px-6">
         <header
           className={cn(
             "mx-auto flex min-h-[62px] w-full max-w-3xl items-center gap-4 rounded-[12px] border border-border/70 bg-card pe-1.5 ps-4",
             "shadow-[0_2px_4px_-1px_rgba(10,10,12,0.04),0_16px_32px_-20px_rgba(10,10,12,0.18)]",
             "dark:shadow-[0_2px_4px_-1px_rgba(0,0,0,0.24),0_16px_32px_-20px_rgba(0,0,0,0.48)]"
-          )}
-        >
+          )}>
           <Brand />
           <nav className="ms-2 hidden items-center gap-0.5 md:flex">
             {links.map((link) => (

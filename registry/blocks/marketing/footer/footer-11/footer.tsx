@@ -61,8 +61,7 @@ export default function Footer({
   return (
     <footer
       className={cn("bg-card lg:grid lg:grid-cols-5", className)}
-      {...props}
-    >
+      {...props}>
       <div className="relative h-72 overflow-hidden lg:col-span-2 lg:h-auto lg:min-h-[30rem]">
         <img
           src={panelSrc}
@@ -89,7 +88,12 @@ export default function Footer({
 
       <div className="px-4 py-12 text-start sm:px-6 lg:col-span-3 lg:px-10 lg:py-16">
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2">
-          <div className="rounded-[12px] border border-border/70 bg-background/50 p-5 shadow-soft sm:p-6">
+          <div className="rounded-[12px] border border-border/70 bg-background/50 p-5 shadow-soft sm:p-6"
+              style={{
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
+            >
             <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
               Call us
             </p>

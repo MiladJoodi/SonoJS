@@ -67,7 +67,12 @@ export default function Footer({
     <footer className={cn("bg-card", className)} {...props}>
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-3">
-          <div className="rounded-[12px] border border-border/70 bg-background/50 p-6 text-start shadow-soft">
+          <div className="rounded-[12px] border border-border/70 bg-background/50 p-6 text-start shadow-soft"
+              style={{
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
+            >
             <a
               href="#"
               aria-label="SonoJS"

@@ -7,6 +7,7 @@
 /* Scan installable UI + registry so component-only utilities (e.g. card radius/padding) emit. */
 @source "../packages/ui/src/**/*.{ts,tsx}";
 @source "../registry/**/*.{ts,tsx}";
+@source inline("grid-rows-[0fr] grid-rows-[1fr] transition-[grid-template-rows]");
 @source "../components/**/*.{ts,tsx}";
 /* Switch thumb LTR/RTL travel — ensure compound variants emit. */
 @source inline("ltr:data-[state=checked]:translate-x-[calc(100%-2px)] rtl:data-[state=checked]:-translate-x-[calc(100%-2px)]");

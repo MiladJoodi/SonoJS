@@ -74,7 +74,13 @@ export default function MobileNavigation({
           <nav
             aria-label="Mobile"
             className="mx-auto flex h-14 max-w-sm items-center gap-1 rounded-full border border-border/70 bg-card p-1.5 shadow-soft"
-          >
+
+              style={{
+                backgroundColor: "var(--card, #ffffff)",
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
+            >
             {primary.map((item) => {
               const Icon = item.icon
               const isActive = active === item.id && !open
@@ -141,8 +147,7 @@ export default function MobileNavigation({
                   key={item.label}
                   type="button"
                   onClick={() => setOpen(false)}
-                  className="flex cursor-pointer items-start gap-3 rounded-[12px] border border-border/70 bg-card p-3 text-start transition-colors hover:bg-muted/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                >
+                  className="flex cursor-pointer items-start gap-3 rounded-[12px] border border-border/70 bg-card p-3 text-start transition-colors hover:bg-muted/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
                   <span className="inline-flex size-9 shrink-0 items-center justify-center rounded-[10px] bg-muted text-foreground">
                     <Icon aria-hidden className="size-4" />
                   </span>

@@ -88,8 +88,7 @@ export default function MobileNavigation({
               "w-[min(100%,17.5rem)] bg-primary text-primary-foreground",
             island.tone === "idle" &&
               "w-[min(100%,15.5rem)] border border-border/70 bg-card text-foreground"
-          )}
-        >
+          )}>
           {island.tone === "live" ? (
             <span className="relative flex size-2.5 shrink-0">
               <span className="absolute inline-flex size-full animate-ping rounded-full bg-rose-500 opacity-60" />
@@ -118,8 +117,7 @@ export default function MobileNavigation({
 
       <nav
         aria-label="Mobile"
-        className="relative z-10 border-t border-border/70 bg-card/95 pb-[env(safe-area-inset-bottom)] backdrop-blur-md"
-      >
+        className="relative z-10 border-t border-border/70 bg-card/95 pb-[env(safe-area-inset-bottom)] backdrop-blur-md">
         <div className="mx-auto grid h-[4.25rem] max-w-lg grid-cols-5">
           {items.map((item) => {
             const Icon = item.icon

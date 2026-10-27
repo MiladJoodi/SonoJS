@@ -144,6 +144,11 @@ export function BlockExample({
   const frameSrc = `/view/${name}?embed=1&dir=${dir}`
   const isPreview = view === "preview"
   const frameReady = framed && loadedSrc === frameSrc
+  /** Full-bleed shells (dashboards, command menus) opt into clip via previewClassName. */
+  const clipPreview = Boolean(
+    previewClassName && /\boverflow-hidden\b/.test(previewClassName)
+  )
+  const stageOverflow = clipPreview ? "overflow-hidden" : "overflow-visible"
 
   // Unmount path: drop stale ready so desktop→tablet always waits for onLoad.
   if (!framed && loadedSrc !== null) {
@@ -170,8 +175,9 @@ export function BlockExample({
       <div
         className={cn(
           "rounded-[12px] border border-border/70 bg-card",
-          // Code clips; preview must stay visible so card shadow-soft isn’t cut on the sides.
-          view === "code" ? "overflow-hidden" : "overflow-visible"
+          // Code clips. Soft card shadows need overflow-visible — unless the demo
+          // opted into clip (full-bleed app shells that would otherwise spill).
+          view === "code" || clipPreview ? "overflow-hidden" : "overflow-visible"
         )}
       >
         {/* Match docs VariantPreview chrome */}
@@ -269,23 +275,30 @@ export function BlockExample({
                   : "bg-canvas",
               framed
                 ? cn(
-                    "items-center justify-center overflow-visible px-6",
+                    "items-center justify-center px-6",
+                    stageOverflow,
                     compact ? "py-6" : "py-10"
                   )
                 : previewAlign === "center"
-                  ? "items-center justify-center overflow-visible"
-                  : "flex-col items-stretch justify-start overflow-visible",
+                  ? cn("items-center justify-center", stageOverflow)
+                  : cn(
+                      "flex-col items-stretch justify-start",
+                      stageOverflow
+                    ),
               !framed && previewClassName
             )}
           >
             <div
               className={cn(
-                // No bezel; overflow-visible so soft side shadows aren’t squared off.
+                // No bezel. Soft side shadows need overflow-visible unless clipped.
                 // Transparent so the stage color (canvas / previewClassName) shows through.
                 "relative transition-[width] duration-300 ease-out",
                 framed
-                  ? "mx-auto overflow-visible bg-transparent"
-                  : "w-full overflow-visible border border-transparent bg-transparent",
+                  ? cn("mx-auto bg-transparent", stageOverflow)
+                  : cn(
+                      "w-full border border-transparent bg-transparent",
+                      stageOverflow
+                    ),
                 framed && previewClassName
               )}
               style={{
@@ -305,18 +318,29 @@ export function BlockExample({
                   : undefined),
               }}
             >
-              {/* Desktop: live children only. Framed: placeholder until iframe loads, then drop children. */}
-              {!framed || !frameReady ? (
+              {/* Desktop: live children. Framed: inert fill until iframe is ready (never mount
+                  full-bleed shells as a placeholder — they spill the letterbox). */}
+              {!framed ? (
                 <div
-                  className={
-                    framed
-                      ? "pointer-events-none absolute inset-0"
-                      : "relative"
-                  }
-                  aria-hidden={framed}
+                  className={cn(
+                    "relative h-full min-h-0",
+                    stageOverflow
+                  )}
                 >
-                  <DirectionProvider dir={dir}>{children}</DirectionProvider>
+                  <DirectionProvider
+                    dir={dir}
+                    className={
+                      clipPreview ? "h-full min-h-0 w-full" : undefined
+                    }
+                  >
+                    {children}
+                  </DirectionProvider>
                 </div>
+              ) : !frameReady ? (
+                <div
+                  className="pointer-events-none absolute inset-0 bg-canvas"
+                  aria-hidden
+                />
               ) : null}
 
               {framed ? (

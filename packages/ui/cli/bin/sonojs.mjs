@@ -6,6 +6,7 @@ import { applyRegistryCssVars } from "../src/apply-css-vars.mjs"
 import { RegistryConsistencyError } from "../src/consistency.mjs"
 import {
   ensureChartNeonVars,
+  ensureSoftSurfaceTokens,
   ensureTwAnimateImport,
   initSonojsProject,
 } from "../src/init.mjs"
@@ -61,7 +62,7 @@ async function cmdInit(rest) {
       ? registry
       : undefined
 
-  const { written, skipped, globals, twAnimate, chartNeon } =
+  const { written, skipped, globals, twAnimate, chartNeon, softSurface } =
     await initSonojsProject({
       cwd,
       overwrite,
@@ -86,6 +87,11 @@ async function cmdInit(rest) {
   if (chartNeon?.status === "patched") {
     console.log(
       `  + chart neon cssVars → ${chartNeon.file} (${chartNeon.keys?.join(", ")})`
+    )
+  }
+  if (softSurface?.status === "patched") {
+    console.log(
+      `  + soft surface cssVars → ${softSurface.file} (${softSurface.keys?.join(", ")})`
     )
   }
 
@@ -172,6 +178,13 @@ async function cmdAdd(names, rest) {
   if (chartNeon?.status === "patched") {
     console.log(
       `  + chart neon cssVars → ${chartNeon.file} (${chartNeon.keys?.join(", ")})`
+    )
+  }
+
+  const softSurface = await ensureSoftSurfaceTokens(cwd)
+  if (softSurface?.status === "patched") {
+    console.log(
+      `  + soft surface cssVars → ${softSurface.file} (${softSurface.keys?.join(", ")})`
     )
   }
 

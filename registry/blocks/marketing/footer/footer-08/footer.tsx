@@ -58,7 +58,12 @@ export default function Footer({
           </ul>
         </nav>
 
-        <div className="mt-12 flex w-full flex-col items-center rounded-[12px] border border-white/10 bg-white/5 px-6 py-8 shadow-soft">
+        <div className="mt-12 flex w-full flex-col items-center rounded-[12px] border border-white/10 bg-white/5 px-6 py-8 shadow-soft"
+              style={{
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
+            >
           <p className="text-xs font-medium uppercase tracking-[0.22em] text-muted-foreground">
             Stay connected
           </p>

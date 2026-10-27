@@ -284,7 +284,7 @@ function Row({
         className="flex size-8 shrink-0 items-center justify-center rounded-md border border-border/70 bg-card text-xs font-semibold text-foreground"
         aria-hidden
         dir="ltr"
-      >
+            >
         {item.mark}
       </span>
       <div className="flex min-w-0 flex-col text-start">

@@ -63,8 +63,7 @@ export default function MobileNavigation({
                   isActive
                     ? "bg-card text-foreground shadow-sm"
                     : "text-muted-foreground hover:text-foreground"
-                )}
-              >
+                )}>
                 <Icon aria-hidden className="size-5 shrink-0" />
                 <span className="max-w-full truncate text-[11px] font-medium">
                   {item.label}

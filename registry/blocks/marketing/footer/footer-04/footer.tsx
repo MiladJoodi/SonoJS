@@ -91,11 +91,16 @@ export default function Footer({
         "border-t border-border/70 bg-card px-4 py-14 text-foreground md:px-8 md:py-16",
         className
       )}
-      {...props}
-    >
+      {...props}>
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-10 md:grid-cols-[minmax(16rem,20rem)_minmax(0,1fr)] md:gap-12">
-          <div className="rounded-[12px] border border-border/70 bg-card p-6 shadow-soft">
+          <div className="rounded-[12px] border border-border/70 bg-card p-6 shadow-soft"
+              style={{
+                backgroundColor: "var(--card, #ffffff)",
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
+            >
             <a
               href="#"
               className="inline-flex cursor-pointer rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40"

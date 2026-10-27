@@ -82,7 +82,13 @@ export default function ForgotPasswordForm({
           "shadow-soft",
           ""
         )}
-      >
+
+              style={{
+                backgroundColor: "var(--card, #ffffff)",
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
+            >
         <header className="flex flex-col items-start gap-3">
           <span className="h-0.5 w-8 rounded-full bg-primary" aria-hidden />
           <div className="space-y-1.5">
@@ -163,8 +169,7 @@ export default function ForgotPasswordForm({
                 type="button"
                 variant="outline"
                 className="border-border/70 bg-card shadow-none hover:bg-muted"
-                onClick={() => setStep(1)}
-              >
+                onClick={() => setStep(1)}>
                 Back
               </Button>
               <Button
@@ -210,7 +215,7 @@ export default function ForgotPasswordForm({
                 variant="outline"
                 className="border-border/70 bg-card shadow-none hover:bg-muted"
                 onClick={() => setStep(2)}
-              >
+            >
                 Back
               </Button>
               <Button

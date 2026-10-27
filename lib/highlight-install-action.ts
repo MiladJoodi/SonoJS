@@ -34,14 +34,22 @@ export async function highlightBlockInstall(
   const filePath = path.join(process.cwd(), "public", "r", `${name}.json`)
   const raw = await readFile(filePath, "utf8")
   const json = JSON.parse(raw) as {
-    files?: { path?: string; target?: string; content?: string }[]
+    files?: {
+      path?: string
+      target?: string
+      content?: string
+      encoding?: string
+    }[]
   }
 
   const files: { title: string; code: string }[] = []
   for (const file of json.files ?? []) {
     if (!file.content) continue
+    // Binary registry assets (webp/png/…) ship as base64 — never show in Code tab.
+    if (file.encoding === "base64") continue
     const title = file.target || file.path
     if (!title) continue
+    if (/\.(webp|png|jpe?g|gif|woff2|svg)$/i.test(title)) continue
     files.push({ title, code: file.content })
   }
 

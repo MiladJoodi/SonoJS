@@ -156,7 +156,13 @@ export default function Pricing({
           </p>
         </div>
 
-        <div className="overflow-x-auto rounded-[12px] border border-border/70 bg-card shadow-soft">
+        <div className="overflow-x-auto rounded-[12px] border border-border/70 bg-card shadow-soft"
+              style={{
+                backgroundColor: "var(--card, #ffffff)",
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
+            >
           <table className="w-full min-w-[720px] table-fixed border-collapse">
             <colgroup>
               <col />

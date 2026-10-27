@@ -65,13 +65,20 @@ function notableNpm(deps: string[]) {
 function parseMeta(json: {
   dependencies?: string[]
   registryDependencies?: string[]
-  files?: { path?: string; target?: string; content?: string }[]
+  files?: {
+    path?: string
+    target?: string
+    content?: string
+    encoding?: string
+  }[]
 }): InstallMeta {
   const files: InstallFile[] = []
   for (const file of json.files ?? []) {
     if (!file.content) continue
+    if (file.encoding === "base64") continue
     const title = file.target || file.path
     if (!title) continue
+    if (/\.(webp|png|jpe?g|gif|woff2|svg)$/i.test(title)) continue
     files.push({ title, content: file.content })
   }
   return {

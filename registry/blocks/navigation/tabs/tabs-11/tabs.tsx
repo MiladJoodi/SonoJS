@@ -149,7 +149,13 @@ export default function TabsBlock({
         value={tab}
         onValueChange={(value) => setTab(value as CrmTab)}
         className="w-full gap-0 overflow-hidden rounded-[12px] border border-border/70 bg-card shadow-soft"
-      >
+
+              style={{
+                backgroundColor: "var(--card, #ffffff)",
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
+            >
         <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border bg-muted/60 px-3 py-2">
           <p className="px-1 text-sm font-semibold text-foreground">CRM</p>
           <Button size="sm" className="h-8 rounded-[12px]">

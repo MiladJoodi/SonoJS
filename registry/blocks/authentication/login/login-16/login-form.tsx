@@ -73,7 +73,13 @@ export default function LoginForm({
             </p>
           </div>
 
-          <div className="mx-auto w-full max-w-lg rounded-[12px] border border-border/70 bg-card px-4 py-6 shadow-soft sm:px-6 sm:py-8 md:px-8 lg:max-w-md">
+          <div className="mx-auto w-full max-w-lg rounded-[12px] border border-border/70 bg-card px-4 py-6 shadow-soft sm:px-6 sm:py-8 md:px-8 lg:max-w-md"
+              style={{
+                backgroundColor: "var(--card, #ffffff)",
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
+            >
             <h1 className="mb-6 text-2xl font-semibold tracking-tight text-foreground sm:mb-10 sm:text-3xl">
               Sign in
             </h1>
@@ -156,16 +162,14 @@ export default function LoginForm({
               <Button
                 type="button"
                 variant="outline"
-                className="h-[46px] w-full rounded-[12px] border-border/70 bg-card shadow-none hover:bg-muted"
-              >
+                className="h-[46px] w-full rounded-[12px] border-border/70 bg-card shadow-none hover:bg-muted">
                 <GoogleIcon />
                 Google
               </Button>
               <Button
                 type="button"
                 variant="outline"
-                className="h-[46px] w-full rounded-[12px] border-border/70 bg-card shadow-none hover:bg-muted"
-              >
+                className="h-[46px] w-full rounded-[12px] border-border/70 bg-card shadow-none hover:bg-muted">
                 <AppleIcon />
                 Apple
               </Button>

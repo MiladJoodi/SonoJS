@@ -109,6 +109,12 @@ export default function Team({
             <li
               key={member.id}
               className="group rounded-[12px] border border-border/70 bg-card px-3 py-5 shadow-soft transition-transform duration-500 hover:z-10 hover:scale-105 sm:px-4 sm:py-6"
+
+              style={{
+                backgroundColor: "var(--card, #ffffff)",
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
             >
               <div className="mx-auto size-28 overflow-hidden rounded-full bg-muted ring-1 ring-border/60 sm:size-36">
                 <img

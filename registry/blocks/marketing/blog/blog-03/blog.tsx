@@ -74,7 +74,8 @@ export default function Blog({
 }) {
   return (
     <section
-      className={cn("w-full px-4 md:px-8", className)}
+      className={cn("w-full bg-canvas px-4 py-12 md:px-8 md:py-16", className)}
+      style={{ backgroundColor: "var(--canvas, #f3f3f4)" }}
       aria-labelledby="blog-heading"
       {...props}
     >
@@ -108,6 +109,11 @@ export default function Blog({
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
                   "sm:p-6"
                 )}
+                style={{
+                  backgroundColor: "var(--card, #ffffff)",
+                  boxShadow:
+                    "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+                }}
               >
                 <div
                   aria-hidden="true"

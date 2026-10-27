@@ -39,6 +39,11 @@ export default function TwoFactorForm({
         "shadow-soft",
         className
       )}
+      style={{
+                backgroundColor: "var(--card, #ffffff)",
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
       {...props}
     >
       <header className="flex flex-col items-start gap-3">
@@ -57,8 +62,7 @@ export default function TwoFactorForm({
             key={title}
             type="button"
             variant="outline"
-            className="h-auto w-full justify-start gap-3 rounded-[12px] border-border/70 bg-card px-3 py-3 text-start shadow-none hover:bg-muted"
-          >
+            className="h-auto w-full justify-start gap-3 rounded-[12px] border-border/70 bg-card px-3 py-3 text-start shadow-none hover:bg-muted">
             <span className="flex size-9 shrink-0 items-center justify-center rounded-md bg-muted">
               <Icon className="size-4" />
             </span>

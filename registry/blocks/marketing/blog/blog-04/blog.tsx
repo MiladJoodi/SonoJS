@@ -96,7 +96,8 @@ export default function Blog({
 }) {
   return (
     <section
-      className={cn("w-full px-4 md:px-8", className)}
+      className={cn("w-full bg-canvas px-4 py-12 md:px-8 md:py-16", className)}
+      style={{ backgroundColor: "var(--canvas, #f3f3f4)" }}
       aria-labelledby="blog-heading"
       {...props}
     >

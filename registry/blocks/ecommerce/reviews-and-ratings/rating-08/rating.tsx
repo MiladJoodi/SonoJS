@@ -61,7 +61,13 @@ export default function Rating({
       )}
       {...props}
       dir="ltr"
-    >
+
+              style={{
+                backgroundColor: "var(--card, #ffffff)",
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
+            >
       <div className="flex items-center gap-5">
         <div className="flex size-[4.5rem] shrink-0 flex-col items-center justify-center rounded-[12px] bg-muted/60">
           <h3 className="text-3xl font-semibold tracking-tight tabular-nums text-foreground">

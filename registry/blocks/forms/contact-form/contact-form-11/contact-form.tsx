@@ -21,7 +21,13 @@ export default function ContactForm({
     >
       <div className="mx-auto max-w-6xl overflow-hidden px-4 max-lg:max-w-2xl md:px-8">
         <div className="grid items-stretch gap-6 lg:grid-cols-2 lg:gap-8">
-          <div className="flex flex-col rounded-[12px] border border-border/70 bg-card p-6 shadow-soft sm:p-8 md:p-10">
+          <div className="flex flex-col rounded-[12px] border border-border/70 bg-card p-6 shadow-soft sm:p-8 md:p-10"
+              style={{
+                backgroundColor: "var(--card, #ffffff)",
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
+            >
             <p className="mb-3 text-sm font-medium tracking-wide text-primary">
               Get in touch
             </p>
@@ -105,7 +111,12 @@ export default function ContactForm({
             </form>
           </div>
 
-          <div className="relative min-h-[400px] overflow-hidden rounded-[12px] border border-border/70 shadow-soft lg:min-h-full">
+          <div className="relative min-h-[400px] overflow-hidden rounded-[12px] border border-border/70 shadow-soft lg:min-h-full"
+              style={{
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
+            >
             <iframe
               title="Office location map"
               src="https://maps.google.com/maps?q=New+York&t=&z=13&ie=UTF8&iwloc=&output=embed"

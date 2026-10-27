@@ -75,7 +75,13 @@ export default function Features({
                 <div
                   key={feature.title}
                   className="rounded-[12px] bg-card p-4 text-start shadow-soft sm:p-5 md:p-6"
-                >
+
+              style={{
+                backgroundColor: "var(--card, #ffffff)",
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
+            >
                   <div className="flex items-start gap-3">
                     <div className="flex size-10 shrink-0 items-center justify-center rounded-[10px] bg-primary text-primary-foreground">
                       <feature.icon className="size-5" aria-hidden="true" />
@@ -95,7 +101,12 @@ export default function Features({
           </div>
 
           <div className="min-w-0 max-lg:-order-1">
-            <div className="aspect-[16/10] w-full overflow-hidden rounded-[12px] bg-muted shadow-soft sm:aspect-[4/3]">
+            <div className="aspect-[16/10] w-full overflow-hidden rounded-[12px] bg-muted shadow-soft sm:aspect-[4/3]"
+              style={{
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
+            >
               <img
                 src={assetSrc(panelImage)}
                 alt="Illustration showing platform features"

@@ -64,7 +64,13 @@ export default function ContactForm({
         <form
           className="grid gap-5 rounded-[12px] border border-border/70 bg-card p-6 shadow-soft md:grid-cols-2 md:p-8"
           onSubmit={(event) => event.preventDefault()}
-        >
+
+              style={{
+                backgroundColor: "var(--card, #ffffff)",
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
+            >
           <div className="grid gap-2 text-start">
             <Label htmlFor="contact-09-name">Name</Label>
             <Input
@@ -144,6 +150,12 @@ export default function ContactForm({
             <div
               key={item.title}
               className="flex flex-col items-center gap-4 rounded-[12px] border border-border/70 bg-card px-4 py-6 text-center shadow-soft"
+
+              style={{
+                backgroundColor: "var(--card, #ffffff)",
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
             >
               <div className="flex size-11 items-center justify-center rounded-full bg-primary/10 text-primary">
                 <item.icon className="size-5" aria-hidden="true" />

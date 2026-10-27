@@ -199,8 +199,7 @@ export default function Navbar({
   return (
     <div
       className={cn("flex min-h-[28rem] w-full flex-col bg-card", className)}
-      {...props}
-    >
+      {...props}>
       <div className="border-b border-border/70 bg-canvas px-4 py-2 text-center text-xs text-muted-foreground sm:px-6">
         Free shipping over $75 · Easy 30-day returns
       </div>

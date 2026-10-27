@@ -88,6 +88,12 @@ export default function Features({
                 "rounded-[12px] border border-border/70 bg-card px-5 py-8 text-center shadow-soft sm:px-6 sm:py-12",
                 "transition-colors hover:border-primary/25"
               )}
+
+              style={{
+                backgroundColor: "var(--card, #ffffff)",
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
             >
               <div className="mx-auto mb-5 flex size-12 items-center justify-center rounded-full bg-primary/10 text-primary sm:mb-6 sm:size-14">
                 <feature.icon className="size-6 sm:size-7" aria-hidden="true" />

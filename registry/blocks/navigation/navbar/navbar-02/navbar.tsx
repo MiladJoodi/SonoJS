@@ -82,8 +82,7 @@ export default function Navbar({
   return (
     <div
       className={cn("flex min-h-112 w-full flex-col bg-card", className)}
-      {...props}
-    >
+      {...props}>
       <header className="border-b border-border/70 bg-card">
         <div className="mx-auto flex min-h-15.5 w-full max-w-5xl items-center gap-3 px-4 sm:px-6 md:gap-6">
           <Brand />

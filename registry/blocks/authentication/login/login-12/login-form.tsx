@@ -29,6 +29,11 @@ export default function LoginForm({
         "w-full max-w-md rounded-[12px] border border-border/70 bg-card p-5 shadow-soft sm:p-6 md:p-8",
         className
       )}
+      style={{
+                backgroundColor: "var(--card, #ffffff)",
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
       {...props}
     >
       <div className="mb-6 flex justify-center">
@@ -132,8 +137,7 @@ export default function LoginForm({
       <Button
         type="button"
         variant="outline"
-        className="h-[46px] w-full rounded-[12px] border-border/70 bg-card shadow-none hover:bg-muted"
-      >
+        className="h-[46px] w-full rounded-[12px] border-border/70 bg-card shadow-none hover:bg-muted">
         <GoogleIcon />
         Sign in with Google
       </Button>

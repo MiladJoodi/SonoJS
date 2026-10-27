@@ -15,6 +15,8 @@
 @source inline("border-destructive bg-destructive text-destructive data-[state=checked]:bg-destructive data-[state=checked]:border-destructive data-[invalid=true]:text-destructive data-[invalid=true]:[&_[data-slot=label]]:text-destructive data-[invalid=true]:[&_[data-slot=field-label]]:text-destructive");
 /* Switch thumb LTR/RTL travel */
 @source inline("ltr:data-[state=checked]:translate-x-[calc(100%-2px)] rtl:data-[state=checked]:-translate-x-[calc(100%-2px)]");
+/* Elevated surfaces used by marketing / auth blocks */
+@source inline("bg-canvas bg-card text-card-foreground border-border/70 shadow-soft rounded-[12px]");
 
 /* Map utilities → CSS vars (values from :root) */
 @theme inline {
@@ -43,6 +45,10 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  /* Soft surfaces — elevated cards on canvas (docs / blocks parity) */
+  --color-canvas: var(--canvas);
+  --color-border-soft: var(--border-soft);
+  --shadow-soft: var(--shadow-soft);
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
@@ -313,7 +319,8 @@
     0 2px 4px -1px rgba(10, 10, 12, 0.04),
     0 28px 56px -28px rgba(10, 10, 12, 0.18);
 
-  --background: #ffffff;
+  /* Page shell = canvas so bg-card + shadow-soft read like the docs */
+  --background: var(--canvas);
   --foreground: #09090b;
   --card: #ffffff;
   --card-foreground: #09090b;
@@ -364,7 +371,7 @@
     0 2px 4px -1px rgba(0, 0, 0, 0.24),
     0 28px 56px -28px rgba(0, 0, 0, 0.48);
 
-  --background: #09090b;
+  --background: var(--canvas);
   --foreground: #fafafa;
   --card: #18181b;
   --card-foreground: #fafafa;

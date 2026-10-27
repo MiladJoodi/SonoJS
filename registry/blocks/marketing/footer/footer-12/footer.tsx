@@ -72,6 +72,10 @@ export default function Footer({
           <form
             action="#"
             className="mx-auto mt-8 flex w-full max-w-lg flex-col gap-2 sm:relative sm:rounded-full sm:border sm:border-border/70 sm:bg-background sm:p-1.5 sm:shadow-soft sm:focus-within:ring-2 sm:focus-within:ring-ring/40"
+            style={{
+              boxShadow:
+                "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+            }}
           >
             <label className="sr-only" htmlFor="footer-12-email">
               Email

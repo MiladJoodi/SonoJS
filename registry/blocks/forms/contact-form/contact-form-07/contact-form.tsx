@@ -51,7 +51,8 @@ export default function ContactForm({
 }: React.ComponentProps<"section">) {
   return (
     <section
-      className={cn("w-full px-4 md:px-8", className)}
+      className={cn("w-full bg-canvas px-4 py-12 md:px-8 md:py-16", className)}
+      style={{ backgroundColor: "var(--canvas, #f3f3f4)" }}
       aria-labelledby="contact-form-heading"
       {...props}
     >
@@ -72,7 +73,13 @@ export default function ContactForm({
           </p>
         </div>
 
-        <div className="grid items-stretch gap-y-2 rounded-[12px] border border-border/70 bg-card p-2 shadow-soft lg:grid-cols-5">
+        <div className="grid items-stretch gap-y-2 rounded-[12px] border border-border/70 bg-card p-2 shadow-soft lg:grid-cols-5"
+              style={{
+                backgroundColor: "var(--card, #ffffff)",
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
+            >
           <div className="relative h-full max-lg:order-1 overflow-hidden rounded-[10px] bg-primary px-6 py-8 text-primary-foreground sm:px-8 sm:py-10 lg:col-span-2">
             <div className="relative z-10 flex h-full flex-col">
               <p className="mb-8 text-sm font-medium text-primary-foreground/75">

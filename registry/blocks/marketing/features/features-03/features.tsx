@@ -48,7 +48,13 @@ export default function Features({
     >
       <div className="mx-auto max-w-6xl">
         <div className="flex flex-col items-stretch gap-5 md:gap-8 lg:flex-row lg:items-start lg:gap-10">
-          <div className="w-full rounded-[12px] border border-border/70 bg-card p-6 text-start shadow-soft sm:p-8 md:p-10 lg:max-w-md lg:shrink-0">
+          <div className="w-full rounded-[12px] border border-border/70 bg-card p-6 text-start shadow-soft sm:p-8 md:p-10 lg:max-w-md lg:shrink-0"
+              style={{
+                backgroundColor: "var(--card, #ffffff)",
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
+            >
             <p className="mb-3 text-sm font-medium tracking-wide text-primary">
               Features
             </p>
@@ -82,7 +88,13 @@ export default function Features({
               <div
                 key={feature.title}
                 className="rounded-[12px] bg-card p-5 text-start shadow-soft sm:p-6"
-              >
+
+              style={{
+                backgroundColor: "var(--card, #ffffff)",
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
+            >
                 <div className="mb-3 flex items-start gap-3">
                   <div className="flex size-10 shrink-0 items-center justify-center rounded-[10px] bg-primary text-primary-foreground">
                     <feature.icon className="size-5" aria-hidden="true" />

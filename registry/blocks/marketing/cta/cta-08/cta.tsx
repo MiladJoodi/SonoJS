@@ -21,7 +21,13 @@ export default function Cta({
         }
       `}</style>
 
-      <div className="cta-08-card mx-auto max-w-3xl bg-card px-4 py-8 shadow-soft sm:px-6 md:px-10 md:py-14">
+      <div className="cta-08-card mx-auto max-w-3xl bg-card px-4 py-8 shadow-soft sm:px-6 md:px-10 md:py-14"
+              style={{
+                backgroundColor: "var(--card, #ffffff)",
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
+            >
         <div className="text-center">
           <h2
             id="cta-heading"

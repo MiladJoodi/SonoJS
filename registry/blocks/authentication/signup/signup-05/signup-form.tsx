@@ -87,7 +87,13 @@ export default function SignupForm({
             "shadow-soft",
             ""
           )}
-        >
+
+              style={{
+                backgroundColor: "var(--card, #ffffff)",
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
+            >
           <header className="space-y-1.5 text-start">
             <h1 className="text-h3 text-foreground">Create an account</h1>
             <p className="text-sm text-muted-foreground">
@@ -150,16 +156,14 @@ export default function SignupForm({
             <Button
               type="button"
               variant="outline"
-              className="h-[46px] w-full rounded-[12px] border-border/70 bg-card shadow-none hover:bg-muted"
-            >
+              className="h-[46px] w-full rounded-[12px] border-border/70 bg-card shadow-none hover:bg-muted">
               <GoogleIcon />
               Continue with Google
             </Button>
             <Button
               type="button"
               variant="outline"
-              className="h-[46px] w-full rounded-[12px] border-border/70 bg-card shadow-none hover:bg-muted"
-            >
+              className="h-[46px] w-full rounded-[12px] border-border/70 bg-card shadow-none hover:bg-muted">
               <AppleIcon />
               Continue with Apple
             </Button>

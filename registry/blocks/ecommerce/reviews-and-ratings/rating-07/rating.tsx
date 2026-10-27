@@ -77,7 +77,13 @@ export default function Rating({
       )}
       {...props}
       dir="ltr"
-    >
+
+              style={{
+                backgroundColor: "var(--card, #ffffff)",
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
+            >
       <div className="flex items-end justify-between gap-3">
         <h3 className="text-sm font-semibold text-foreground">All reviews</h3>
         <p className="text-xs font-medium tabular-nums text-muted-foreground">

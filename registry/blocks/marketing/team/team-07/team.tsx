@@ -116,7 +116,13 @@ export default function Team({
               key={member.id}
               className="flex flex-col items-center gap-4 max-sm:text-center sm:flex-row sm:gap-5 sm:text-start"
             >
-              <div className="size-20 shrink-0 overflow-hidden rounded-full border border-border/70 bg-card shadow-soft sm:size-24">
+              <div className="size-20 shrink-0 overflow-hidden rounded-full border border-border/70 bg-card shadow-soft sm:size-24"
+              style={{
+                backgroundColor: "var(--card, #ffffff)",
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
+            >
                 <img
                   src={member.img}
                   className="size-full object-cover object-top"

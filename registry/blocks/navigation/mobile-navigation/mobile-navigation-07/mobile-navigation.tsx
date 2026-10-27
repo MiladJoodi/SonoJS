@@ -96,7 +96,9 @@ export default function MobileNavigation({
         className="relative pb-[env(safe-area-inset-bottom)]"
       >
         <div className="relative mx-auto h-[5.25rem] w-full max-w-lg">
-          <div className="absolute inset-x-0 bottom-0 h-16 border-t border-border/70 bg-card" />
+          <div className="absolute inset-x-0 bottom-0 h-16 border-t border-border/70 bg-card"
+
+            />
 
           <div className="absolute inset-x-0 bottom-0 grid h-16 grid-cols-5">
             {sideItems.map((item) => (

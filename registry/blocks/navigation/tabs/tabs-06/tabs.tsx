@@ -38,6 +38,11 @@ export default function TabsBlock({
         "mx-auto flex min-w-0 w-full max-w-xl flex-col overflow-hidden rounded-[12px] border border-border/70 bg-card shadow-soft sm:flex-row",
         className
       )}
+      style={{
+                backgroundColor: "var(--card, #ffffff)",
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
       {...props}
     >
       <div className="flex min-h-48 flex-1 items-center justify-center bg-muted/40 p-6">

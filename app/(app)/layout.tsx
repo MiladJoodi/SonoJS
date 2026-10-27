@@ -5,8 +5,15 @@ import { NavigationProgress } from "@/components/navigation-progress"
 import { ScrollToTop } from "@/components/scroll-to-top"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
+import { getGithubStars } from "@/lib/github"
 
-export default function AppLayout({ children }: { children: React.ReactNode }) {
+export default async function AppLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  const githubStars = await getGithubStars()
+
   return (
     <div
       data-slot="layout"
@@ -17,7 +24,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
       </Suspense>
       <ScrollToTop />
       <MobileHeaderScroll />
-      <SiteHeader />
+      <SiteHeader githubStars={githubStars} />
       <main className="flex min-h-0 flex-1 flex-col">{children}</main>
       <SiteFooter />
     </div>

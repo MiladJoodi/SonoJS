@@ -154,7 +154,13 @@ export default function Pricing({
             className="flex w-max rounded-full border border-border/70 bg-card p-1 shadow-soft"
             role="group"
             aria-label="Billing cycle"
-          >
+
+              style={{
+                backgroundColor: "var(--card, #ffffff)",
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
+            >
             {(["monthly", "yearly"] as const).map((cycle) => {
               const active = billingCycle === cycle
               return (
@@ -202,7 +208,13 @@ export default function Pricing({
                     ? "border-primary/50 ring-1 ring-primary/25 lg:-translate-y-1"
                     : "border-border/70 hover:-translate-y-0.5 hover:shadow-[0_20px_44px_-28px_rgba(0,0,0,0.3)]"
                 )}
-              >
+
+              style={{
+                backgroundColor: "var(--card, #ffffff)",
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
+            >
                 {plan.featured ? (
                   <div
                     aria-hidden="true"

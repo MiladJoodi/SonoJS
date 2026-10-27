@@ -39,18 +39,25 @@ const cardClass = cn(
   "rounded-[12px] border border-border/70 bg-card p-6 shadow-soft sm:p-7"
 )
 
+const cardSurfaceStyle = {
+  backgroundColor: "var(--card, #ffffff)",
+  boxShadow:
+    "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+} as const
+
 export default function ContactForm({
   className,
   ...props
 }: React.ComponentProps<"section">) {
   return (
     <section
-      className={cn("w-full px-4 md:px-8", className)}
+      className={cn("w-full bg-canvas px-4 py-12 md:px-8 md:py-16", className)}
+      style={{ backgroundColor: "var(--canvas, #f3f3f4)" }}
       aria-labelledby="contact-form-heading"
       {...props}
     >
       <div className="mx-auto grid max-w-7xl items-start gap-6 max-lg:max-w-3xl lg:grid-cols-2 lg:gap-8">
-        <div className={cardClass}>
+        <div className={cardClass} style={cardSurfaceStyle}>
           <p className="mb-3 text-sm font-medium tracking-wide text-primary">
             Message us
           </p>
@@ -133,7 +140,7 @@ export default function ContactForm({
         </div>
 
         <div className="flex flex-col gap-6">
-          <div className={cardClass}>
+          <div className={cardClass} style={cardSurfaceStyle}>
             <h3 className="mb-6 text-lg font-semibold tracking-tight text-foreground">
               Contact Information
             </h3>
@@ -165,7 +172,7 @@ export default function ContactForm({
             </div>
           </div>
 
-          <div className={cardClass}>
+          <div className={cardClass} style={cardSurfaceStyle}>
             <h3 className="mb-6 text-lg font-semibold tracking-tight text-foreground">
               Hours of Operation
             </h3>

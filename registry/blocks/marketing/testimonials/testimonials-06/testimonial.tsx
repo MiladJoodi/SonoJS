@@ -114,7 +114,8 @@ export default function Testimonial({
 }: React.ComponentProps<"section">) {
   return (
     <section
-      className={cn("w-full px-4 md:px-8", className)}
+      className={cn("w-full bg-canvas px-4 py-12 md:px-8 md:py-16", className)}
+      style={{ backgroundColor: "var(--canvas, #f3f3f4)" }}
       aria-labelledby="testimonials-heading"
       {...props}
     >
@@ -137,6 +138,11 @@ export default function Testimonial({
             <figure
               key={item.id}
               className="flex flex-col gap-6 rounded-[12px] border border-zinc-700 p-4 shadow-soft min-[1200px]:flex-row min-[1200px]:items-center md:p-6"
+
+              style={{
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
             >
               <div className="mx-auto shrink-0 min-[1200px]:mx-0">
                 <img

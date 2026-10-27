@@ -92,7 +92,12 @@ export default function Footer({
   return (
     <footer className={cn("bg-card", className)} {...props}>
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="flex flex-col items-start justify-between gap-6 rounded-[12px] border border-primary/20 bg-primary px-6 py-8 shadow-soft sm:flex-row sm:items-center sm:px-8">
+        <div className="flex flex-col items-start justify-between gap-6 rounded-[12px] border border-primary/20 bg-primary px-6 py-8 shadow-soft sm:flex-row sm:items-center sm:px-8"
+              style={{
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
+            >
           <div className="text-start">
             <p className="text-xs font-medium tracking-wide text-primary-foreground/80 uppercase">
               Careers
@@ -108,7 +113,12 @@ export default function Footer({
               "transition-colors hover:bg-primary-foreground/90",
               "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-foreground/40 focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
             )}
-          >
+
+              style={{
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
+            >
             <span>Let&apos;s get started</span>
             <ArrowRightIcon aria-hidden className="icon-dir size-4" />
           </a>

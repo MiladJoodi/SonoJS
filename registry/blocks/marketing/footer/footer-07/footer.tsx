@@ -128,7 +128,12 @@ export default function Footer({
             </ul>
           </div>
 
-          <div className="rounded-[12px] border border-white/10 bg-white/5 p-6 shadow-soft">
+          <div className="rounded-[12px] border border-white/10 bg-white/5 p-6 shadow-soft"
+              style={{
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
+            >
             <h3 className="text-base font-semibold text-foreground">
               Join Our Newsletter
             </h3>

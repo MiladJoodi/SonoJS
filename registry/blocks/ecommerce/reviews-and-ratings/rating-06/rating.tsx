@@ -74,7 +74,13 @@ export default function Rating({
       )}
       {...props}
       dir="ltr"
-    >
+
+              style={{
+                backgroundColor: "var(--card, #ffffff)",
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
+            >
       <div className="grid items-center gap-6 sm:grid-cols-3">
         <div className="text-center sm:text-start">
           <p className="text-[11px] font-medium tracking-[0.14em] text-muted-foreground uppercase">

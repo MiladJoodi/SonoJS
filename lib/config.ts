@@ -22,8 +22,10 @@ export const siteConfig = {
   /** Placeholder until the real npx MCP command ships. Works with any MCP client. */
   mcpInitCommand: "npx @sonojs/ui@latest mcp init",
   links: {
-    github: "https://github.com/example/sonojs",
+    github: "https://github.com/MiladJoodi/SonoJS",
   },
+  /** `owner/repo` for GitHub API (stars, etc.). */
+  githubRepo: "MiladJoodi/SonoJS",
   navItems: [
     { href: "/docs", label: "Docs" },
     { href: "/docs/components", label: "Components" },

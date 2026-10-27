@@ -48,8 +48,7 @@ export default function MobileNavigation({
       <div className="px-4 pb-[calc(1.25rem+env(safe-area-inset-bottom))]">
         <nav
           aria-label="Mobile"
-          className="mx-auto flex h-14 max-w-sm items-center justify-center gap-1 rounded-full border border-border/70 bg-card p-1.5 shadow-md"
-        >
+          className="mx-auto flex h-14 max-w-sm items-center justify-center gap-1 rounded-full border border-border/70 bg-card p-1.5 shadow-md">
           {items.map((item) => {
             const Icon = item.icon
             const isActive = active === item.id

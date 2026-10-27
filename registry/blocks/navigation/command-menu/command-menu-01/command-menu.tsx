@@ -40,7 +40,13 @@ export default function CommandMenu({
       </header>
 
       <main className="flex flex-1 items-start justify-center px-4 py-10 sm:px-6">
-        <div className="w-full min-w-0 max-w-sm overflow-hidden rounded-[12px] border border-border/70 bg-card text-card-foreground shadow-soft">
+        <div className="w-full min-w-0 max-w-sm overflow-hidden rounded-[12px] border border-border/70 bg-card text-card-foreground shadow-soft"
+              style={{
+                backgroundColor: "var(--card, #ffffff)",
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
+            >
           <div className="border-b border-border/70 px-3 py-2.5">
             <p className="text-start text-xs font-medium tracking-wide text-muted-foreground uppercase">
               Quick create

@@ -88,7 +88,8 @@ export default function Testimonial({
 
   return (
     <section
-      className={cn("w-full px-4 md:px-8", className)}
+      className={cn("w-full bg-canvas px-4 py-12 md:px-8 md:py-16", className)}
+      style={{ backgroundColor: "var(--canvas, #f3f3f4)" }}
       aria-labelledby="testimonials-heading"
       {...props}
     >
@@ -118,7 +119,12 @@ export default function Testimonial({
                 className="size-28 rounded-full border-2 border-background object-cover shadow-soft"
                 width={112}
                 height={112}
-              />
+
+              style={{
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
+            />
               <figcaption className="mt-4">
                 <p className="text-base font-semibold text-foreground">
                   {current.name}
@@ -151,8 +157,7 @@ export default function Testimonial({
             type="button"
             onClick={prevSlide}
             aria-label="Previous testimonial"
-            className="absolute start-0 top-1/2 flex size-10 shrink-0 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-border/70 bg-card shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-          >
+            className="absolute start-0 top-1/2 flex size-10 shrink-0 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-border/70 bg-card shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
             <ChevronLeftIcon className="size-3.5 text-foreground icon-dir" />
           </button>
 
@@ -160,8 +165,7 @@ export default function Testimonial({
             type="button"
             onClick={nextSlide}
             aria-label="Next testimonial"
-            className="absolute end-0 top-1/2 flex size-10 shrink-0 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-border/70 bg-card shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-          >
+            className="absolute end-0 top-1/2 flex size-10 shrink-0 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-border/70 bg-card shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
             <ChevronRightIcon className="size-3.5 text-foreground icon-dir" />
           </button>
         </div>

@@ -90,6 +90,12 @@ export default function Features({
             <div
               key={feature.title}
               className="flex flex-col rounded-[12px] bg-card p-5 shadow-soft sm:p-6"
+
+              style={{
+                backgroundColor: "var(--card, #ffffff)",
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
             >
               <div className="mb-4 flex items-start gap-3">
                 <div

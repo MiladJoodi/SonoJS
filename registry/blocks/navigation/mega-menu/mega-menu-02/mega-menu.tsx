@@ -154,8 +154,7 @@ export default function MegaMenu({
         "flex min-h-[28rem] w-full flex-1 flex-col bg-card",
         className
       )}
-      {...props}
-    >
+      {...props}>
       <header className="sticky top-0 z-20 w-full border-b border-border/70 bg-card">
         <nav
           className="mx-auto flex min-h-16 w-full max-w-7xl flex-nowrap items-center gap-4 px-4 py-2 sm:px-6 lg:px-8"
@@ -202,8 +201,7 @@ export default function MegaMenu({
                 <div
                   id="mega-menu-panel"
                   ref={panelRef}
-                  className="absolute start-0 top-full z-50 mt-3 w-[min(calc(100vw-2rem),48rem)] rounded-[12px] border border-border/70 bg-card px-6 py-8 shadow-md"
-                >
+                  className="absolute start-0 top-full z-50 mt-3 w-[min(calc(100vw-2rem),48rem)] rounded-[12px] border border-border/70 bg-card px-6 py-8 shadow-md">
                   <MegaPanel />
                 </div>
               ) : null}

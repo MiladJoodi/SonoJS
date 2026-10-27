@@ -109,6 +109,12 @@ export default function Pricing({
                   ? "z-10 border-zinc-800 bg-zinc-950 text-zinc-50 shadow-[0_28px_56px_-28px_rgba(0,0,0,0.55)] dark:border-zinc-700"
                   : "border-border/70 bg-card text-foreground shadow-soft"
               )}
+
+              style={{
+                backgroundColor: "var(--card, #ffffff)",
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
             >
               {plan.featured ? (
                 <div

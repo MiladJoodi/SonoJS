@@ -4,6 +4,8 @@
  * Blocks/charts stay under registry/.
  */
 
+import { readFileSync } from "node:fs"
+
 /** @typedef {{ path: string, type: string, target?: string }} RegistryFileDef */
 /** @typedef {{
  *   name: string,
@@ -12,9 +14,30 @@
  *   description?: string,
  *   dependencies?: string[],
  *   registryDependencies?: string[],
+ *   cssVars?: { light?: Record<string, string>, dark?: Record<string, string> },
  *   files: RegistryFileDef[]
  * }} RegistryItemDef
  */
+
+/** Soft surfaces — install injects these so elevated cards match docs. */
+const SOFT_SURFACE_CSS_VARS = {
+  light: {
+    canvas: "#f3f3f4",
+    "border-soft": "color-mix(in oklab, #e4e4e7 70%, transparent)",
+    "shadow-soft":
+      "0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18)",
+    background: "var(--canvas)",
+    card: "#ffffff",
+  },
+  dark: {
+    canvas: "#09090b",
+    "border-soft": "color-mix(in oklab, #27272a 70%, transparent)",
+    "shadow-soft":
+      "0 2px 4px -1px rgba(0, 0, 0, 0.24), 0 28px 56px -28px rgba(0, 0, 0, 0.48)",
+    background: "var(--canvas)",
+    card: "#18181b",
+  },
+}
 
 /** Social brand icons for auth blocks (`@/registry/icons/*` → block-local `icons/`). */
 function authSocialIconFiles(slug, icons) {
@@ -71,6 +94,7 @@ function marketingTeamBlock(slug, description, images) {
     type: "registry:block",
     title: slug,
     description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
     files: [
       {
         path: `registry/blocks/marketing/team/${slug}/team.tsx`,
@@ -96,6 +120,7 @@ function marketingPricingBlock(slug, description) {
     type: "registry:block",
     title: slug,
     description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
     registryDependencies: ["button"],
     files: [
       {
@@ -120,6 +145,7 @@ function marketingNewsletterBlock(
     type: "registry:block",
     title: slug,
     description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
     registryDependencies,
     files: [
       {
@@ -131,6 +157,251 @@ function marketingNewsletterBlock(
         path: `registry/blocks/marketing/newsletter/${slug}/images/${file}`,
         type: "registry:file",
         target: `components/blocks/marketing/${slug}/images/${file}`,
+      })),
+    ],
+  }
+}
+
+/** Advanced data grid block under Data & Tables. */
+function dataTablesAdvancedGridBlock(
+  slug,
+  description,
+  { dependencies, registryDependencies, images = [] } = {}
+) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    ...(dependencies?.length ? { dependencies } : {}),
+    ...(registryDependencies?.length ? { registryDependencies } : {}),
+    files: [
+      {
+        path: `registry/blocks/data-tables/advanced-data-grid/${slug}/table.tsx`,
+        type: "registry:component",
+        target: `components/blocks/data-tables/${slug}/table.tsx`,
+      },
+      ...images.map((file) => ({
+        path: `registry/blocks/data-tables/advanced-data-grid/${slug}/images/${file}`,
+        type: "registry:file",
+        target: `components/blocks/data-tables/${slug}/images/${file}`,
+      })),
+    ],
+  }
+}
+
+/** Payment form block under Payments & Billing. */
+function paymentsBillingPaymentFormBlock(
+  slug,
+  description,
+  {
+    dependencies = ["lucide-react"],
+    registryDependencies = ["button", "checkbox", "input", "label"],
+    images = [],
+  } = {}
+) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    ...(dependencies?.length ? { dependencies } : {}),
+    ...(registryDependencies?.length ? { registryDependencies } : {}),
+    files: [
+      {
+        path: `registry/blocks/payments-billing/payment-form/${slug}/payment-form.tsx`,
+        type: "registry:component",
+        target: `components/blocks/payments-billing/${slug}/payment-form.tsx`,
+      },
+      ...images.map((file) => ({
+        path: `registry/blocks/payments-billing/payment-form/${slug}/images/${file}`,
+        type: "registry:file",
+        target: `components/blocks/payments-billing/${slug}/images/${file}`,
+      })),
+    ],
+  }
+}
+
+/** Product details block under E-commerce. */
+function ecommerceProductDetailsBlock(
+  slug,
+  description,
+  {
+    dependencies = ["lucide-react"],
+    registryDependencies = [
+      "accordion",
+      "button",
+      "input",
+      "label",
+      "separator",
+    ],
+    images = [],
+  } = {}
+) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    ...(dependencies?.length ? { dependencies } : {}),
+    ...(registryDependencies?.length ? { registryDependencies } : {}),
+    files: [
+      {
+        path: `registry/blocks/ecommerce/product-details/${slug}/product-details.tsx`,
+        type: "registry:component",
+        target: `components/blocks/ecommerce/${slug}/product-details.tsx`,
+      },
+      ...images.map((file) => ({
+        path: `registry/blocks/ecommerce/product-details/${slug}/images/${file}`,
+        type: "registry:file",
+        target: `components/blocks/ecommerce/${slug}/images/${file}`,
+      })),
+    ],
+  }
+}
+
+/** Product list / grid: `product-list.tsx` + local product images. */
+function ecommerceProductListBlock(
+  slug,
+  description,
+  {
+    dependencies = [],
+    registryDependencies = ["button"],
+    images = [],
+  } = {}
+) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    ...(dependencies?.length ? { dependencies } : {}),
+    ...(registryDependencies?.length ? { registryDependencies } : {}),
+    files: [
+      {
+        path: `registry/blocks/ecommerce/product-list/${slug}/product-list.tsx`,
+        type: "registry:component",
+        target: `components/blocks/ecommerce/${slug}/product-list.tsx`,
+      },
+      ...images.map((file) => ({
+        path: `registry/blocks/ecommerce/product-list/${slug}/images/${file}`,
+        type: "registry:file",
+        target: `components/blocks/ecommerce/${slug}/images/${file}`,
+      })),
+    ],
+  }
+}
+
+/** Order summary / confirmation card: `order-summary.tsx` + local product images. */
+function ecommerceOrderSummaryBlock(
+  slug,
+  description,
+  {
+    dependencies = [],
+    registryDependencies = ["button"],
+    images = [],
+  } = {}
+) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    ...(dependencies?.length ? { dependencies } : {}),
+    ...(registryDependencies?.length ? { registryDependencies } : {}),
+    files: [
+      {
+        path: `registry/blocks/ecommerce/order-summary/${slug}/order-summary.tsx`,
+        type: "registry:component",
+        target: `components/blocks/ecommerce/${slug}/order-summary.tsx`,
+      },
+      ...images.map((file) => ({
+        path: `registry/blocks/ecommerce/order-summary/${slug}/images/${file}`,
+        type: "registry:file",
+        target: `components/blocks/ecommerce/${slug}/images/${file}`,
+      })),
+    ],
+  }
+}
+
+/** Image gallery block: `gallery.tsx` + local demo images. */
+function filesMediaGalleryBlock(slug, description, images = []) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    files: [
+      {
+        path: `registry/blocks/files-media/image-gallery/${slug}/gallery.tsx`,
+        type: "registry:component",
+        target: `components/blocks/files-media/${slug}/gallery.tsx`,
+      },
+      ...images.map((file) => ({
+        path: `registry/blocks/files-media/image-gallery/${slug}/images/${file}`,
+        type: "registry:file",
+        target: `components/blocks/files-media/${slug}/images/${file}`,
+      })),
+    ],
+  }
+}
+
+/** Content-section marketing block: `content-section.tsx` + local images. */
+function marketingContentSectionBlock(
+  slug,
+  description,
+  images = [],
+  { registryDependencies, dependencies } = {}
+) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    ...(registryDependencies?.length
+      ? { registryDependencies }
+      : {}),
+    ...(dependencies?.length ? { dependencies } : {}),
+    files: [
+      {
+        path: `registry/blocks/marketing/content-section/${slug}/content-section.tsx`,
+        type: "registry:component",
+        target: `components/blocks/marketing/${slug}/content-section.tsx`,
+      },
+      ...images.map((file) => ({
+        path: `registry/blocks/marketing/content-section/${slug}/images/${file}`,
+        type: "registry:file",
+        target: `components/blocks/marketing/${slug}/images/${file}`,
+      })),
+    ],
+  }
+}
+
+/** Application dashboard layout shell: `dashboard-layout.tsx` + local images. */
+function applicationDashboardLayoutBlock(slug, description, images = []) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    files: [
+      {
+        path: `registry/blocks/application-layouts/dashboard-layout/${slug}/dashboard-layout.tsx`,
+        type: "registry:component",
+        target: `components/blocks/application-layouts/${slug}/dashboard-layout.tsx`,
+      },
+      ...images.map((file) => ({
+        path: `registry/blocks/application-layouts/dashboard-layout/${slug}/images/${file}`,
+        type: "registry:file",
+        target: `components/blocks/application-layouts/${slug}/images/${file}`,
       })),
     ],
   }
@@ -148,6 +419,7 @@ function marketingBlogBlock(
     type: "registry:block",
     title: slug,
     description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
     ...(registryDependencies?.length
       ? { registryDependencies }
       : {}),
@@ -222,6 +494,7 @@ function marketingHeroBlock(
     type: "registry:block",
     title: slug,
     description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
     registryDependencies,
     files: [
       {
@@ -279,7 +552,7 @@ const megaMenu05ToolIcons = [
 ]
 
 /** @type {RegistryItemDef[]} */
-export const registryItems = [
+const registryItemsRaw = [
   {
     name: "accordion",
     type: "registry:ui",
@@ -3286,6 +3559,1083 @@ export const registryItems = [
     ],
   },
   {
+    name: "stats-01",
+    type: "registry:block",
+    title: "stats-01",
+    description:
+      "Full-bleed photo metrics band with overlay and four centered stats.",
+    files: [
+      {
+        path: "registry/blocks/marketing/stats/stats-01/stats.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/stats-01/stats.tsx",
+      },
+      {
+        path: "registry/blocks/marketing/stats/stats-01/images/digital.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/stats-01/images/digital.webp",
+      },
+    ],
+  },
+  {
+    name: "stats-02",
+    type: "registry:block",
+    title: "stats-02",
+    description:
+      "Dark split stats band with photo, heading, and two gradient percentages.",
+    files: [
+      {
+        path: "registry/blocks/marketing/stats/stats-02/stats.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/stats-02/stats.tsx",
+      },
+      {
+        path: "registry/blocks/marketing/stats/stats-02/images/media.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/stats-02/images/media.webp",
+      },
+    ],
+  },
+  {
+    name: "stats-03",
+    type: "registry:block",
+    title: "stats-03",
+    description:
+      "Dark three-metric row with large values, captions, and vertical dividers.",
+    files: [
+      {
+        path: "registry/blocks/marketing/stats/stats-03/stats.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/stats-03/stats.tsx",
+      },
+    ],
+  },
+  {
+    name: "stats-04",
+    type: "registry:block",
+    title: "stats-04",
+    description:
+      "Four KPI cards with icons, period badges, values, and trend deltas.",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/marketing/stats/stats-04/stats.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/stats-04/stats.tsx",
+      },
+    ],
+  },
+  {
+    name: "stats-05",
+    type: "registry:block",
+    title: "stats-05",
+    description:
+      "Four-column progress stats with circular charts, titles, and copy.",
+    files: [
+      {
+        path: "registry/blocks/marketing/stats/stats-05/stats.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/stats-05/stats.tsx",
+      },
+    ],
+  },
+  {
+    name: "stats-06",
+    type: "registry:block",
+    title: "stats-06",
+    description:
+      "Dark achievements band with blur orbs, heading, and three avatar metrics.",
+    files: [
+      {
+        path: "registry/blocks/marketing/stats/stats-06/stats.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/stats-06/stats.tsx",
+      },
+      {
+        path: "registry/blocks/marketing/stats/stats-06/images/avatar-1.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/stats-06/images/avatar-1.webp",
+      },
+      {
+        path: "registry/blocks/marketing/stats/stats-06/images/avatar-2.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/stats-06/images/avatar-2.webp",
+      },
+      {
+        path: "registry/blocks/marketing/stats/stats-06/images/avatar-3.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/stats-06/images/avatar-3.webp",
+      },
+    ],
+  },
+  {
+    name: "stats-07",
+    type: "registry:block",
+    title: "stats-07",
+    description:
+      "Dark hologram-style KPI cards with scan lines, float motion, and gradient values.",
+    files: [
+      {
+        path: "registry/blocks/marketing/stats/stats-07/stats.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/stats-07/stats.tsx",
+      },
+    ],
+  },
+  {
+    name: "stats-08",
+    type: "registry:block",
+    title: "stats-08",
+    description:
+      "Dark centered stats band with green gradient values and four metrics.",
+    files: [
+      {
+        path: "registry/blocks/marketing/stats/stats-08/stats.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/stats-08/stats.tsx",
+      },
+    ],
+  },
+  {
+    name: "stats-09",
+    type: "registry:block",
+    title: "stats-09",
+    description:
+      "Dark trusted-creators band with heading and a tight four-cell metrics grid.",
+    files: [
+      {
+        path: "registry/blocks/marketing/stats/stats-09/stats.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/stats-09/stats.tsx",
+      },
+    ],
+  },
+  {
+    name: "stats-10",
+    type: "registry:block",
+    title: "stats-10",
+    description:
+      "Peach achievement cards with orange icons, values, and a centered heading.",
+    files: [
+      {
+        path: "registry/blocks/marketing/stats/stats-10/stats.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/stats-10/stats.tsx",
+      },
+    ],
+  },
+  {
+    name: "stats-11",
+    type: "registry:block",
+    title: "stats-11",
+    description:
+      "Blue metrics card with uptime, funding, features, and a five-star rating panel.",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/marketing/stats/stats-11/stats.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/stats-11/stats.tsx",
+      },
+    ],
+  },
+  {
+    name: "stats-12",
+    type: "registry:block",
+    title: "stats-12",
+    description:
+      "Tomato (light) / gray (dark) join-us band with heading and three metrics.",
+    files: [
+      {
+        path: "registry/blocks/marketing/stats/stats-12/stats.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/stats-12/stats.tsx",
+      },
+    ],
+  },
+  {
+    name: "stats-13",
+    type: "registry:block",
+    title: "stats-13",
+    description:
+      "Dashboard overview with four metric cards, colored values, and monthly trends.",
+    files: [
+      {
+        path: "registry/blocks/marketing/stats/stats-13/stats.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/stats-13/stats.tsx",
+      },
+    ],
+  },
+  {
+    name: "stats-14",
+    type: "registry:block",
+    title: "stats-14",
+    description:
+      "Four icon metrics with blue values and desktop column dividers.",
+    files: [
+      {
+        path: "registry/blocks/marketing/stats/stats-14/stats.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/stats-14/stats.tsx",
+      },
+    ],
+  },
+  {
+    name: "stats-15",
+    type: "registry:block",
+    title: "stats-15",
+    description:
+      "Dark split band with startup copy and a two-by-two metrics card grid.",
+    files: [
+      {
+        path: "registry/blocks/marketing/stats/stats-15/stats.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/stats-15/stats.tsx",
+      },
+    ],
+  },
+  {
+    name: "stats-16",
+    type: "registry:block",
+    title: "stats-16",
+    description:
+      "Dark gray metrics band with orange icons and horizontal value rows.",
+    files: [
+      {
+        path: "registry/blocks/marketing/stats/stats-16/stats.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/stats-16/stats.tsx",
+      },
+    ],
+  },
+  {
+    name: "faq-01",
+    type: "registry:block",
+    title: "faq-01",
+    description:
+      "Centered FAQ list with plus/minus toggles and single-open accordion panels.",
+    files: [
+      {
+        path: "registry/blocks/marketing/faq/faq-01/faq.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/faq-01/faq.tsx",
+      },
+    ],
+  },
+  {
+    name: "faq-02",
+    type: "registry:block",
+    title: "faq-02",
+    description:
+      "Static FAQ list with green check icons, start-aligned title, and open answers.",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/marketing/faq/faq-02/faq.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/faq-02/faq.tsx",
+      },
+    ],
+  },
+  {
+    name: "faq-03",
+    type: "registry:block",
+    title: "faq-03",
+    description:
+      "Two-column FAQ with help icons, top border, and inline primary links.",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/marketing/faq/faq-03/faq.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/faq-03/faq.tsx",
+      },
+    ],
+  },
+  {
+    name: "faq-04",
+    type: "registry:block",
+    title: "faq-04",
+    description:
+      "Split FAQ with intro column and stacked open question answers.",
+    files: [
+      {
+        path: "registry/blocks/marketing/faq/faq-04/faq.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/faq-04/faq.tsx",
+      },
+    ],
+  },
+  {
+    name: "faq-05",
+    type: "registry:block",
+    title: "faq-05",
+    description:
+      "Multi-open FAQ accordion with muted hover/open surfaces and plus/minus toggles.",
+    files: [
+      {
+        path: "registry/blocks/marketing/faq/faq-05/faq.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/faq-05/faq.tsx",
+      },
+    ],
+  },
+  {
+    name: "faq-06",
+    type: "registry:block",
+    title: "faq-06",
+    description:
+      "Categorized multi-open FAQ with leading plus/minus toggles and dividers.",
+    files: [
+      {
+        path: "registry/blocks/marketing/faq/faq-06/faq.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/faq-06/faq.tsx",
+      },
+    ],
+  },
+  {
+    name: "faq-07",
+    type: "registry:block",
+    title: "faq-07",
+    description:
+      "Two-column multi-open FAQ cards with plus/minus toggles and intro copy.",
+    files: [
+      {
+        path: "registry/blocks/marketing/faq/faq-07/faq.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/faq-07/faq.tsx",
+      },
+    ],
+  },
+  {
+    name: "faq-08",
+    type: "registry:block",
+    title: "faq-08",
+    description:
+      "Single-column multi-open FAQ cards with soft shadow and plus/minus toggles.",
+    files: [
+      {
+        path: "registry/blocks/marketing/faq/faq-08/faq.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/faq-08/faq.tsx",
+      },
+    ],
+  },
+  {
+    name: "faq-09",
+    type: "registry:block",
+    title: "faq-09",
+    description:
+      "Static two-column FAQ grid with always-visible answers and intro copy.",
+    files: [
+      {
+        path: "registry/blocks/marketing/faq/faq-09/faq.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/faq-09/faq.tsx",
+      },
+    ],
+  },
+  {
+    name: "faq-10",
+    type: "registry:block",
+    title: "faq-10",
+    description:
+      "Bordered FAQ panel with header and two-column muted answer cards.",
+    files: [
+      {
+        path: "registry/blocks/marketing/faq/faq-10/faq.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/faq-10/faq.tsx",
+      },
+    ],
+  },
+  {
+    name: "faq-11",
+    type: "registry:block",
+    title: "faq-11",
+    description:
+      "Dark full-bleed FAQ with category tabs and chevron accordion items.",
+    files: [
+      {
+        path: "registry/blocks/marketing/faq/faq-11/faq.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/faq-11/faq.tsx",
+      },
+    ],
+  },
+  {
+    name: "faq-12",
+    type: "registry:block",
+    title: "faq-12",
+    description:
+      "Centered FAQ with bordered accordion cards, primary open state, and contact CTA.",
+    files: [
+      {
+        path: "registry/blocks/marketing/faq/faq-12/faq.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/faq-12/faq.tsx",
+      },
+    ],
+  },
+  {
+    name: "faq-13",
+    type: "registry:block",
+    title: "faq-13",
+    description:
+      "Centered FAQ with cyan-primary gradient frame, soft shadow, and arrow toggle accordion.",
+    files: [
+      {
+        path: "registry/blocks/marketing/faq/faq-13/faq.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/faq-13/faq.tsx",
+      },
+    ],
+  },
+  {
+    name: "faq-14",
+    type: "registry:block",
+    title: "faq-14",
+    description:
+      "Centered FAQ with pill category tabs and rounded cards with plus-circle toggles.",
+    files: [
+      {
+        path: "registry/blocks/marketing/faq/faq-14/faq.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/faq-14/faq.tsx",
+      },
+    ],
+  },
+  {
+    name: "faq-15",
+    type: "registry:block",
+    title: "faq-15",
+    description:
+      "Two-column FAQ with badge heading and bordered chevron accordion cards.",
+    files: [
+      {
+        path: "registry/blocks/marketing/faq/faq-15/faq.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/faq-15/faq.tsx",
+      },
+    ],
+  },
+  {
+    name: "faq-16",
+    type: "registry:block",
+    title: "faq-16",
+    description:
+      "Dark rounded FAQ panel with bold accordion cards and contact CTA.",
+    files: [
+      {
+        path: "registry/blocks/marketing/faq/faq-16/faq.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/faq-16/faq.tsx",
+      },
+    ],
+  },
+  {
+    name: "faq-17",
+    type: "registry:block",
+    title: "faq-17",
+    description:
+      "Light FAQ with underline category tabs and circle-chevron accordion.",
+    files: [
+      {
+        path: "registry/blocks/marketing/faq/faq-17/faq.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/faq-17/faq.tsx",
+      },
+    ],
+  },
+  {
+    name: "faq-18",
+    type: "registry:block",
+    title: "faq-18",
+    description:
+      "Numbered FAQ cards on a soft primary wash with chevron accordion details.",
+    files: [
+      {
+        path: "registry/blocks/marketing/faq/faq-18/faq.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/faq-18/faq.tsx",
+      },
+    ],
+  },
+  {
+    name: "faq-19",
+    type: "registry:block",
+    title: "faq-19",
+    description:
+      "Static FAQ card grid with wave edges, badge header, and overlapping icon badges.",
+    files: [
+      {
+        path: "registry/blocks/marketing/faq/faq-19/faq.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/faq-19/faq.tsx",
+      },
+    ],
+  },
+  {
+    name: "faq-20",
+    type: "registry:block",
+    title: "faq-20",
+    description:
+      "Bold amber FAQ with numbered step rail, oversized accordion type, and show-more CTA.",
+    files: [
+      {
+        path: "registry/blocks/marketing/faq/faq-20/faq.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/faq-20/faq.tsx",
+      },
+    ],
+  },
+  dataTablesAdvancedGridBlock(
+    "advanced-data-grid-01",
+    "Fleet security inventory with KPI strip, status filters, and coverage meters.",
+    { dependencies: ["lucide-react"] }
+  ),
+  dataTablesAdvancedGridBlock(
+    "advanced-data-grid-02",
+    "Team directory with bulk selection bar, role badges, and hover row actions.",
+    {
+      dependencies: ["lucide-react"],
+      registryDependencies: ["checkbox"],
+      images: [
+        "team-1.webp",
+        "team-2.webp",
+        "team-3.webp",
+        "team-4.webp",
+        "team-5.webp",
+        "team-6.webp",
+      ],
+    }
+  ),
+  dataTablesAdvancedGridBlock(
+    "advanced-data-grid-03",
+    "File vault browser with type tiles, storage meter, and shared avatar stacks.",
+    {
+      dependencies: ["lucide-react"],
+      registryDependencies: ["checkbox"],
+      images: [
+        "team-1.webp",
+        "team-2.webp",
+        "team-3.webp",
+        "team-4.webp",
+        "team-5.webp",
+      ],
+    }
+  ),
+  dataTablesAdvancedGridBlock(
+    "advanced-data-grid-04",
+    "Accounts receivable ledger with balances, contact cards, and create-bill CTAs.",
+    { dependencies: ["lucide-react"] }
+  ),
+  paymentsBillingPaymentFormBlock(
+    "payment-form-01",
+    "Card-terminal checkout — dark amount header, visual card mock, method tiles, PayPal and bank panels."
+  ),
+  paymentsBillingPaymentFormBlock(
+    "payment-form-02",
+    "Commerce checkout — step crumbs, method radios with brand marks, sticky order receipt and ship/delivery.",
+    {
+      registryDependencies: ["button", "input", "label", "radio-group", "separator"],
+      images: [
+        "visa.webp",
+        "american-express.webp",
+        "master.webp",
+        "paypal.webp",
+      ],
+    }
+  ),
+  paymentsBillingPaymentFormBlock(
+    "payment-form-03",
+    "SaaS upgrade — primary plan banner with feature checklist, segmented methods, invoice bank details."
+  ),
+  paymentsBillingPaymentFormBlock(
+    "payment-form-04",
+    "Editorial subscription — dark typographic plan rail, quiet card form, brand strip and terms gate.",
+    {
+      images: ["visa.webp", "american-express.webp", "master.webp"],
+    }
+  ),
+  ecommerceProductListBlock(
+    "product-list-01",
+    "Lookbook drop — portrait covers, index badges, hover Quick add (RTL/LTR).",
+    {
+      images: [
+        "product-1.webp",
+        "product-2.webp",
+        "product-3.webp",
+        "product-4.webp",
+        "product-5.webp",
+        "product-6.webp",
+      ],
+    }
+  ),
+  ecommerceProductListBlock(
+    "product-list-02",
+    "Spec desk laptops — dark product stages, rating chips, From + Specs CTA (RTL/LTR).",
+    {
+      images: [
+        "laptop-1.webp",
+        "laptop-2.webp",
+        "laptop-3.webp",
+        "laptop-4.webp",
+        "laptop-5.webp",
+        "laptop-6.webp",
+      ],
+    }
+  ),
+  ecommerceProductListBlock(
+    "product-list-03",
+    "Runway rail footwear — split media/copy cards, colorway dots, cart + wishlist (RTL/LTR).",
+    {
+      images: [
+        "shoe-1.webp",
+        "shoe-2.webp",
+        "shoe-3.webp",
+        "shoe-4.webp",
+        "shoe-5.webp",
+        "shoe-6.webp",
+        "shoe-7.webp",
+      ],
+    }
+  ),
+  ecommerceProductListBlock(
+    "product-list-04",
+    "Atelier markdowns — discount ribbons, frosted price sheets over covers, dual CTAs (RTL/LTR).",
+    {
+      images: [
+        "fashion-1.webp",
+        "fashion-2.webp",
+        "fashion-3.webp",
+        "fashion-4.webp",
+        "fashion-5.webp",
+        "fashion-6.webp",
+        "fashion-7.webp",
+        "fashion-9.webp",
+      ],
+    }
+  ),
+  ecommerceProductListBlock(
+    "product-list-05",
+    "Cover stories — full-bleed fashion with glass hover capsules for wishlist + cart (RTL/LTR).",
+    {
+      registryDependencies: [],
+      images: [
+        "fashion-1.webp",
+        "fashion-2.webp",
+        "fashion-3.webp",
+        "fashion-4.webp",
+        "fashion-5.webp",
+        "fashion-6.webp",
+        "fashion-7.webp",
+        "fashion-9.webp",
+      ],
+    }
+  ),
+  ecommerceProductListBlock(
+    "product-list-06",
+    "Apothecary hot list — warm product wells, MRP chips, bag + save for later (RTL/LTR).",
+    {
+      images: [
+        "sunscreen-1.webp",
+        "sunscreen-2.webp",
+        "sunscreen-3.webp",
+        "sunscreen-4.webp",
+        "sunscreen-5.webp",
+        "sunscreen-6.webp",
+        "aloederm-1.webp",
+        "aloederm-2.webp",
+      ],
+    }
+  ),
+  ecommerceProductListBlock(
+    "product-list-07",
+    "Pharmacy shelf — dense five-up grid, % badges, flush wishlist + Add to Bag bar (RTL/LTR).",
+    {
+      registryDependencies: [],
+      images: [
+        "sunscreen-1.webp",
+        "sunscreen-2.webp",
+        "sunscreen-3.webp",
+        "sunscreen-4.webp",
+        "sunscreen-5.webp",
+        "sunscreen-6.webp",
+        "aloederm-1.webp",
+        "aloederm-2.webp",
+        "face-body-1.webp",
+        "face-body-2.webp",
+      ],
+    }
+  ),
+  ecommerceProductListBlock(
+    "product-list-08",
+    "Category spotlights — pedestal pods, dim-on-hover stage, rising frosted info plate (RTL/LTR).",
+    {
+      registryDependencies: [],
+      images: [
+        "sunglass-white.webp",
+        "echo-elegance.webp",
+        "laptop-acer.webp",
+        "coffee-irish.webp",
+        "coffee-mocha.webp",
+        "sunglass-black.webp",
+        "sneakers.webp",
+        "laptop-asus.webp",
+      ],
+    }
+  ),
+  ecommerceProductListBlock(
+    "product-list-09",
+    "Ranked ticker — numbered trending tiles on muted board with live chip (RTL/LTR).",
+    {
+      registryDependencies: [],
+      images: [
+        "watch-1.webp",
+        "echo-elegance.webp",
+        "laptop-acer.webp",
+        "watch-4.webp",
+        "coffee-mocha.webp",
+        "watch-7.webp",
+        "watch-8.webp",
+        "laptop-asus.webp",
+        "watch-3.webp",
+        "watch-5.webp",
+      ],
+    }
+  ),
+  ecommerceProductListBlock(
+    "product-list-10",
+    "Concierge watch rows — soft cards with spec meta and directional chevron (RTL/LTR).",
+    {
+      registryDependencies: [],
+      images: [
+        "watch-1.webp",
+        "watch-2.webp",
+        "watch-3.webp",
+        "watch-4.webp",
+        "watch-5.webp",
+        "watch-6.webp",
+        "watch-7.webp",
+        "watch-8.webp",
+      ],
+    }
+  ),
+  ecommerceProductListBlock(
+    "product-list-11",
+    "Museum pedestals — borderless watch gallery with soft shadow ellipses (RTL/LTR).",
+    {
+      registryDependencies: [],
+      images: [
+        "watch-1.webp",
+        "watch-2.webp",
+        "watch-3.webp",
+        "watch-4.webp",
+        "watch-5.webp",
+        "watch-7.webp",
+        "watch-8.webp",
+      ],
+    }
+  ),
+  ecommerceOrderSummaryBlock(
+    "order-summary-01",
+    "Boutique receipt ticket — success stamp header, order pipeline, ships-to card, compact line items, and invoice CTA (RTL/LTR).",
+    {
+      images: ["watch.webp", "sneaker.webp"],
+    }
+  ),
+  ecommerceOrderSummaryBlock(
+    "order-summary-02",
+    "Fulfillment desk board — pipeline scrubber, status-colored chips per SKU, and settlement totals card (RTL/LTR).",
+    {
+      registryDependencies: [],
+      images: ["sunglass.webp", "sneaker.webp", "watch.webp"],
+    }
+  ),
+  ecommerceOrderSummaryBlock(
+    "order-summary-03",
+    "Commerce success masthead — arrival chip, meta tiles with Mastercard mark, bag list, sticky Track order card (RTL/LTR).",
+    {
+      images: [
+        "sneaker.webp",
+        "watch.webp",
+        "watch-alt.webp",
+        "mastercard.webp",
+      ],
+    }
+  ),
+  ecommerceOrderSummaryBlock(
+    "order-summary-04",
+    "Split atelier sheet — muted start rail for shipping/billing + numbered magazine piece list (RTL/LTR).",
+    {
+      images: ["sneaker.webp", "watch.webp", "watch-alt.webp"],
+    }
+  ),
+  ecommerceOrderSummaryBlock(
+    "order-summary-05",
+    "Account order console — order ID badge, compact line cards, and pencil-edit customer/shipping panels (RTL/LTR).",
+    {
+      registryDependencies: [],
+      images: ["watch.webp", "watch-alt.webp"],
+    }
+  ),
+  ecommerceOrderSummaryBlock(
+    "order-summary-06",
+    "Invoice document — numbered info tiles, SKU line sheet with Qty/Amount columns, and total-due footer (RTL/LTR).",
+    {
+      registryDependencies: [],
+      images: ["laptop.webp", "watch.webp", "sunscreen.webp"],
+    }
+  ),
+  ecommerceProductDetailsBlock(
+    "product-details-01",
+    "PDP with sticky vertical-thumb gallery, size picker, wishlist/cart, pincode check, accordion details, and reviews.",
+    {
+      dependencies: [],
+      images: [
+        "fashion-1.webp",
+        "fashion-2.webp",
+        "fashion-3.webp",
+        "fashion-4.webp",
+        "avatar.webp",
+      ],
+    }
+  ),
+  ecommerceProductDetailsBlock(
+    "product-details-02",
+    "Beauty PDP — sticky main image over horizontal thumbs, qty stepper, cart/buy CTAs, pincode, and perk tiles.",
+    {
+      registryDependencies: ["button", "input", "label", "separator"],
+      images: [
+        "product-1.webp",
+        "product-2.webp",
+        "product-3.webp",
+        "product-4.webp",
+        "product-5.webp",
+        "product-6.webp",
+      ],
+    }
+  ),
+  ecommerceProductDetailsBlock(
+    "product-details-03",
+    "Fashion PDP — sticky full-size 2×2 mosaic gallery, size/color pickers, wishlist/cart, pincode, and review.",
+    {
+      dependencies: [],
+      registryDependencies: ["button", "input", "separator"],
+      images: [
+        "fashion-1.webp",
+        "fashion-2.webp",
+        "fashion-3.webp",
+        "fashion-4.webp",
+        "avatar.webp",
+      ],
+    }
+  ),
+  ecommerceProductDetailsBlock(
+    "product-details-04",
+    "Apparel PDP — sticky masonry mosaic gallery, size/color pickers, wishlist/cart, delivery, description, and reviews.",
+    {
+      dependencies: [],
+      registryDependencies: ["button", "input"],
+      images: [
+        "product-1.webp",
+        "product-2.webp",
+        "product-3.webp",
+        "product-4.webp",
+        "product-5.webp",
+        "avatar.webp",
+      ],
+    }
+  ),
+  ecommerceProductDetailsBlock(
+    "product-details-05",
+    "Laptop PDP — bordered card chrome, sticky gallery with horizontal thumbs, color swatches, and specs list.",
+    {
+      dependencies: [],
+      registryDependencies: ["button", "input", "label", "separator"],
+      images: [
+        "laptop-1.webp",
+        "laptop-2.webp",
+        "laptop-3.webp",
+        "laptop-4.webp",
+      ],
+    }
+  ),
+  ecommerceProductDetailsBlock(
+    "product-details-06",
+    "Sneakers PDP — title-first layout, mosaic hero with side angles, size/color pickers, delivery, description, and reviews.",
+    {
+      dependencies: [],
+      registryDependencies: ["button", "input"],
+      images: [
+        "sneaker-main.webp",
+        "sneaker-2.webp",
+        "sneaker-3.webp",
+        "avatar.webp",
+      ],
+    }
+  ),
+  ecommerceProductDetailsBlock(
+    "product-details-07",
+    "Eyewear PDP — gallery thumbs, likes/share, colors, features checklist, and description.",
+    {
+      registryDependencies: ["button", "input", "separator"],
+      images: [
+        "glass-1.webp",
+        "glass-2.webp",
+        "glass-3.webp",
+        "glass-4.webp",
+        "glass-5.webp",
+        "glass-6.webp",
+      ],
+    }
+  ),
+  ecommerceProductDetailsBlock(
+    "product-details-08",
+    "Tee PDP — sticky gallery with end-edge vertical thumbs, size grid, pincode, accordion details, and reviews.",
+    {
+      dependencies: [],
+      registryDependencies: ["accordion", "button", "input", "separator"],
+      images: [
+        "tee-1.webp",
+        "tee-2.webp",
+        "tee-3.webp",
+        "tee-4.webp",
+        "avatar.webp",
+      ],
+    }
+  ),
+  filesMediaGalleryBlock(
+    "gallery-01",
+    "Responsive 2×3 image gallery grid with rounded frames, soft shadow, and local demo photos.",
+    [
+      "gallery-1.webp",
+      "gallery-2.webp",
+      "gallery-3.webp",
+      "gallery-4.webp",
+      "gallery-5.webp",
+      "gallery-6.webp",
+      "gallery-7.webp",
+      "gallery-8.webp",
+      "gallery-9.webp",
+    ]
+  ),
+  filesMediaGalleryBlock(
+    "gallery-02",
+    "Masonry image gallery with column layout, hover zoom, soft frames, and local demo photos.",
+    [
+      "valeriia.webp",
+      "gallery-2.webp",
+      "gallery-1.webp",
+      "body-motion.webp",
+      "face-cream.webp",
+      "gallery-6.webp",
+      "headphones.webp",
+      "gallery-8.webp",
+      "sunscreen.webp",
+      "green-tshirt.webp",
+      "cream.webp",
+    ]
+  ),
+  filesMediaGalleryBlock(
+    "gallery-03",
+    "Two-column image gallery grid with equal tiles, soft frames, and local demo photos.",
+    [
+      "gallery-1.webp",
+      "gallery-2.webp",
+      "gallery-3.webp",
+      "gallery-4.webp",
+      "gallery-5.webp",
+      "gallery-6.webp",
+    ]
+  ),
+  filesMediaGalleryBlock(
+    "gallery-04",
+    "Full-bleed category gallery with hover primary scrim and image zoom.",
+    [
+      "dry-shampoo.webp",
+      "eye-primer.webp",
+      "face-primer.webp",
+      "face-wash.webp",
+      "hair-brush.webp",
+      "lipstick.webp",
+    ]
+  ),
+  filesMediaGalleryBlock(
+    "gallery-05",
+    "People intro split with primary CTA and masonry photo column grid.",
+    [
+      "fashion-5.webp",
+      "fashion-7.webp",
+      "fashion-1.webp",
+      "dry-shampoo.webp",
+      "fashion-10.webp",
+      "fashion-6.webp",
+      "fashion-9.webp",
+      "fashion-8.webp",
+      "lipstick.webp",
+    ]
+  ),
+  filesMediaGalleryBlock(
+    "gallery-06",
+    "Featured asymmetric gallery: one-third / two-thirds top row plus equal bottom trio.",
+    [
+      "gallery-1.webp",
+      "furniture.webp",
+      "gallery-6.webp",
+      "gallery-4.webp",
+      "gallery-5.webp",
+    ]
+  ),
+  filesMediaGalleryBlock(
+    "gallery-07",
+    "Featured hero tile beside a 2×2 image grid with soft frames and hover zoom.",
+    [
+      "gallery-1.webp",
+      "gallery-2.webp",
+      "gallery-6.webp",
+      "gallery-4.webp",
+      "gallery-5.webp",
+    ]
+  ),
+  filesMediaGalleryBlock(
+    "gallery-08",
+    "Three-row gallery: asymmetric 3/6, equal pair, then mirrored 6/3 bands.",
+    [
+      "gallery-1.webp",
+      "furniture.webp",
+      "gallery-6.webp",
+      "gallery-4.webp",
+      "real-estate.webp",
+      "gallery-5.webp",
+    ]
+  ),
+  filesMediaGalleryBlock(
+    "gallery-09",
+    "Interactive featured image with selectable thumbnail strip and active indicator.",
+    [
+      "gallery-8.webp",
+      "gallery-4.webp",
+      "gallery-5.webp",
+      "gallery-6.webp",
+      "gallery-7.webp",
+    ]
+  ),
+  filesMediaGalleryBlock(
+    "gallery-10",
+    "Interactive featured image with vertical thumbnail sidebar and active indicator.",
+    [
+      "gallery-8.webp",
+      "gallery-4.webp",
+      "gallery-5.webp",
+      "gallery-6.webp",
+      "gallery-7.webp",
+    ]
+  ),
+  {
     name: "testimonials-01",
     type: "registry:block",
     title: "testimonials-01",
@@ -4626,6 +5976,94 @@ export const registryItems = [
     "Premium padded food cards with cover, date meta, and text See more link.",
     BLOG_04_IMAGES,
     { dependencies: ["lucide-react"] }
+  ),
+  marketingContentSectionBlock(
+    "content-section-01",
+    "Editorial analytics split: accent rail copy, metric chips, and framed KPI dashboard media.",
+    ["kpis-dashboard.webp"]
+  ),
+  marketingContentSectionBlock(
+    "content-section-02",
+    "Creative workspace: soft checklist rows, dual CTAs, and elevated illustration panel.",
+    ["insights-illus.webp"],
+    {
+      registryDependencies: ["button"],
+      dependencies: ["lucide-react"],
+    }
+  ),
+  marketingContentSectionBlock(
+    "content-section-03",
+    "Numbered why-choose cards with gradient accent bars and hover lift."
+  ),
+  marketingContentSectionBlock(
+    "content-section-04",
+    "Premium bento: dark featured tile spanning two columns plus numbered feature cards.",
+    [],
+    { dependencies: ["lucide-react"] }
+  ),
+  marketingContentSectionBlock(
+    "content-section-05",
+    "Alternating full-bleed story bands with step badges and media frames.",
+    ["insights-illus.webp", "kpi-img-3.webp"],
+    {
+      registryDependencies: ["button"],
+      dependencies: ["lucide-react"],
+    }
+  ),
+  marketingContentSectionBlock(
+    "content-section-06",
+    "Magazine header split with vertical rule, then soft icon feature cards.",
+    [],
+    { dependencies: ["lucide-react"] }
+  ),
+  marketingContentSectionBlock(
+    "content-section-07",
+    "Playbook story cards with cover media, tags, and outline CTAs.",
+    ["digital-img-1.webp", "digital-img-4.webp"],
+    {
+      registryDependencies: ["button"],
+      dependencies: ["lucide-react"],
+    }
+  ),
+  marketingContentSectionBlock(
+    "content-section-08",
+    "Asymmetric intro with numbered hover feature grid and colorful SVG marks."
+  ),
+  marketingContentSectionBlock(
+    "content-section-09",
+    "Cinematic dark story: full-bleed hero fade, polaroid corner, lightbulb callout.",
+    ["portrait-corner.jpg", "hero-portrait.jpg"],
+    { dependencies: ["lucide-react"] }
+  ),
+  marketingContentSectionBlock(
+    "content-section-10",
+    "Display typography intro with framed widget, pencil mark, and underlined CTA.",
+    ["widget.png", "icon-orange-pencil.svg"]
+  ),
+  marketingContentSectionBlock(
+    "content-section-11",
+    "Sticky dark editorial: violet glow, accent rail, and framed robot illustration.",
+    ["image-robot.png"]
+  ),
+  marketingContentSectionBlock(
+    "content-section-12",
+    "Soft violet product hero with live pill, checklist card, and overlapping media stack.",
+    ["black-red-lines.svg", "frame-apps-avatar.png", "join-box.png"]
+  ),
+  applicationDashboardLayoutBlock(
+    "dashboard-layout-01",
+    "Sono Studio analytics shell: sectioned drawer sidebar, sticky search header, KPI grid, traffic panels, and local logo/avatar (RTL/LTR).",
+    ["logo.svg", "avatar.webp"]
+  ),
+  applicationDashboardLayoutBlock(
+    "dashboard-layout-02",
+    "Sono Console ops board: primary accordion sidebar, nested links, sticky header search, sidebar user card, and local logo/avatars (RTL/LTR).",
+    ["logo.svg", "avatar.webp", "avatar-sidebar.webp"]
+  ),
+  applicationDashboardLayoutBlock(
+    "dashboard-layout-03",
+    "Sono Workspace team table: flat sidebar with in-nav search, sticky notifications header, filters, data table, and local logo/avatars (RTL/LTR).",
+    ["logo.svg", "avatar.webp", "avatar-sidebar.webp"]
   ),
   marketingTeamBlock(
     "team-01",
@@ -12380,3 +13818,38 @@ export const registryItems = [
     ],
   },
 ]
+
+/** True when block source uses elevated card / soft shadow / canvas chrome. */
+function blockSourceNeedsSoftSurface(item) {
+  if (item.type !== "registry:block") return false
+  if (item.cssVars?.light?.canvas && item.cssVars?.light?.card) return false
+  for (const file of item.files ?? []) {
+    if (!file.path?.endsWith(".tsx")) continue
+    try {
+      const src = readFileSync(file.path, "utf8")
+      if (
+        src.includes("bg-card") ||
+        src.includes("shadow-soft") ||
+        src.includes("bg-canvas")
+      ) {
+        return true
+      }
+    } catch {
+      /* missing source — skip */
+    }
+  }
+  return false
+}
+
+function withSoftSurfaceCssVars(item) {
+  if (!blockSourceNeedsSoftSurface(item)) return item
+  return {
+    ...item,
+    cssVars: {
+      light: { ...SOFT_SURFACE_CSS_VARS.light, ...(item.cssVars?.light ?? {}) },
+      dark: { ...SOFT_SURFACE_CSS_VARS.dark, ...(item.cssVars?.dark ?? {}) },
+    },
+  }
+}
+
+export const registryItems = registryItemsRaw.map(withSoftSurfaceCssVars)

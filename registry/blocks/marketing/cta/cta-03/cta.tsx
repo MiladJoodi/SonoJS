@@ -69,8 +69,7 @@ export default function Cta({
               <Button
                 asChild
                 variant="outline"
-                className="h-[46px] rounded-[12px] border-border/70 bg-card shadow-none hover:bg-muted"
-              >
+                className="h-[46px] rounded-[12px] border-border/70 bg-card shadow-none hover:bg-muted">
                 <a href="#">Learn more</a>
               </Button>
             </div>

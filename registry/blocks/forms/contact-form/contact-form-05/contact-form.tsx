@@ -54,7 +54,13 @@ export default function ContactForm({
             </p>
           </div>
 
-          <div className="rounded-[12px] border border-border/70 bg-card p-5 shadow-soft">
+          <div className="rounded-[12px] border border-border/70 bg-card p-5 shadow-soft"
+              style={{
+                backgroundColor: "var(--card, #ffffff)",
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
+            >
             <h3 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
               Email
             </h3>
@@ -93,7 +99,13 @@ export default function ContactForm({
         <form
           className="space-y-5 rounded-[12px] border border-border/70 bg-card p-6 shadow-soft sm:p-8"
           onSubmit={(event) => event.preventDefault()}
-        >
+
+              style={{
+                backgroundColor: "var(--card, #ffffff)",
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
+            >
           <div className="grid gap-5 sm:grid-cols-2">
             <div className="grid gap-2 text-start">
               <Label htmlFor="contact-05-name">Name</Label>

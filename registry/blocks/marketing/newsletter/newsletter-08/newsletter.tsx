@@ -49,7 +49,13 @@ export default function Newsletter({
         <form
           className="flex w-full flex-col gap-3 rounded-[12px] border border-border/70 bg-card p-4 shadow-soft sm:flex-row sm:items-center sm:gap-4"
           onSubmit={(event) => event.preventDefault()}
-        >
+
+              style={{
+                backgroundColor: "var(--card, #ffffff)",
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
+            >
           <label htmlFor="newsletter-email" className="sr-only">
             Email address
           </label>

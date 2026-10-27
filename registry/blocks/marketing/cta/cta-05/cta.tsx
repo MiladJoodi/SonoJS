@@ -65,7 +65,12 @@ export default function Cta({
       `}</style>
 
       <div className="mx-auto max-w-4xl">
-        <div className="cta-05-band w-full px-4 py-10 shadow-soft sm:px-6 sm:py-12 md:px-16 md:py-14">
+        <div className="cta-05-band w-full px-4 py-10 shadow-soft sm:px-6 sm:py-12 md:px-16 md:py-14"
+              style={{
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
+            >
           <div className="max-w-xl text-start">
             <h2
               id="cta-heading"

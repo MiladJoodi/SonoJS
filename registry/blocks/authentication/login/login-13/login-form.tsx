@@ -74,7 +74,13 @@ export default function LoginForm({
       )}
       {...props}
     >
-      <div className="w-full max-w-6xl rounded-[12px] border border-border/70 bg-card p-3 shadow-soft sm:p-4 lg:p-6">
+      <div className="w-full max-w-6xl rounded-[12px] border border-border/70 bg-card p-3 shadow-soft sm:p-4 lg:p-6"
+              style={{
+                backgroundColor: "var(--card, #ffffff)",
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
+            >
         <div className="grid items-center gap-x-8 gap-y-6 md:grid-cols-2 md:gap-y-10">
           <div className="mx-auto w-full max-w-md p-1 sm:p-2 md:p-4">
             <a
@@ -172,8 +178,7 @@ export default function LoginForm({
             <Button
               type="button"
               variant="outline"
-              className="h-[46px] w-full rounded-[12px] border-border/70 bg-card shadow-none hover:bg-muted"
-            >
+              className="h-[46px] w-full rounded-[12px] border-border/70 bg-card shadow-none hover:bg-muted">
               <GoogleIcon />
               Sign in with Google
             </Button>

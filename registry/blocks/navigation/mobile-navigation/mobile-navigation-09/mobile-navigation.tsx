@@ -47,8 +47,7 @@ export default function MobileNavigation({
 
       <nav
         aria-label="Mobile"
-        className="border-t border-border/70 bg-card/95 pb-[env(safe-area-inset-bottom)] backdrop-blur-md"
-      >
+        className="border-t border-border/70 bg-card/95 pb-[env(safe-area-inset-bottom)] backdrop-blur-md">
         <div className="mx-auto grid h-[4.25rem] max-w-lg grid-cols-5">
           {items.map((item) => {
             const Icon = item.icon

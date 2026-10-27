@@ -63,8 +63,7 @@ export default function Footer({
         "bg-card px-4 py-12 text-foreground md:px-8 md:py-16",
         className
       )}
-      {...props}
-    >
+      {...props}>
       <div className="mx-auto max-w-7xl">
         <div
           aria-hidden

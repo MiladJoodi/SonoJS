@@ -58,7 +58,13 @@ export default function Newsletter({
       aria-labelledby="newsletter-heading"
       {...props}
     >
-      <div className="mx-auto w-full max-w-xl overflow-hidden rounded-[12px] border border-border/70 bg-card p-6 shadow-soft md:p-8">
+      <div className="mx-auto w-full max-w-xl overflow-hidden rounded-[12px] border border-border/70 bg-card p-6 shadow-soft md:p-8"
+              style={{
+                backgroundColor: "var(--card, #ffffff)",
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
+            >
         <div className="flex gap-x-10 gap-y-6 max-sm:flex-col">
           <MailIllustration />
 

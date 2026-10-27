@@ -36,7 +36,12 @@ export default function ContactForm({
           aria-hidden="true"
         />
         <div className="absolute inset-x-0 bottom-0 p-8">
-          <div className="max-w-sm rounded-[12px] border border-white/20 bg-background/90 p-5 shadow-soft backdrop-blur-sm">
+          <div className="max-w-sm rounded-[12px] border border-white/20 bg-background/90 p-5 shadow-soft backdrop-blur-sm"
+              style={{
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
+            >
             <p className="text-sm font-medium text-primary">On-site & remote</p>
             <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
               Meet the team in person or collaborate online — same care either

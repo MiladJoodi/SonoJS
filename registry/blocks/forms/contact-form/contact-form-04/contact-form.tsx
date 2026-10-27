@@ -47,7 +47,8 @@ export default function ContactForm({
 }: React.ComponentProps<"section">) {
   return (
     <section
-      className={cn("w-full px-4 md:px-8", className)}
+      className={cn("w-full bg-canvas px-4 py-12 md:px-8 md:py-16", className)}
+      style={{ backgroundColor: "var(--canvas, #f3f3f4)" }}
       aria-labelledby="contact-form-heading"
       {...props}
     >
@@ -71,7 +72,13 @@ export default function ContactForm({
         <form
           className="mx-auto max-w-xl space-y-5 rounded-[12px] border border-border/70 bg-card p-6 shadow-soft sm:p-8"
           onSubmit={(event) => event.preventDefault()}
-        >
+
+              style={{
+                backgroundColor: "var(--card, #ffffff)",
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
+            >
           <div className="grid gap-5 sm:grid-cols-2">
             <div className="grid gap-2 text-start">
               <Label htmlFor="contact-04-name">Name</Label>
@@ -152,6 +159,12 @@ export default function ContactForm({
             <div
               key={item.title}
               className="flex flex-col items-center gap-3 rounded-[12px] border border-border/70 bg-card px-4 py-5 text-center shadow-soft"
+
+              style={{
+                backgroundColor: "var(--card, #ffffff)",
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
             >
               <div className="flex size-10 items-center justify-center rounded-full bg-primary/10 text-primary">
                 <item.icon className="size-5" aria-hidden="true" />

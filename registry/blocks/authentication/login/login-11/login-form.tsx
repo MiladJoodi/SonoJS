@@ -60,7 +60,13 @@ export default function LoginForm({
           className={cn(
             "mx-auto w-full max-w-md rounded-[12px] border border-border/70 bg-card p-5 shadow-soft sm:p-6 md:p-8 lg:mx-0"
           )}
-        >
+
+              style={{
+                backgroundColor: "var(--card, #ffffff)",
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
+            >
           <header className="mb-6 text-start sm:mb-8">
             <h1 className="mb-2 text-2xl font-bold tracking-tight text-foreground sm:mb-3 sm:text-3xl">
               Sign in

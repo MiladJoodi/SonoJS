@@ -180,6 +180,11 @@ export default function TabsBlock({
         "mx-auto min-w-0 w-full max-w-2xl overflow-x-clip rounded-[12px] border border-border/70 bg-card p-4 shadow-soft sm:p-5 md:p-6",
         className
       )}
+      style={{
+                backgroundColor: "var(--card, #ffffff)",
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
       {...props}
     >
       <Tabs

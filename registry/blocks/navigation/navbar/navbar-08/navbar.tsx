@@ -212,8 +212,7 @@ export default function Navbar({
   return (
     <div
       className={cn("flex min-h-[28rem] w-full flex-col bg-card", className)}
-      {...props}
-    >
+      {...props}>
       <header className="z-50 w-full border-b border-border/70 bg-card">
         <nav className="relative mx-auto flex w-full max-w-5xl flex-wrap items-center justify-between gap-3 px-4 py-2 sm:px-6 md:flex-nowrap">
           <div className="flex w-full items-center justify-between gap-2 md:w-auto">

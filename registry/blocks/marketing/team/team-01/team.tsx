@@ -70,7 +70,8 @@ export default function Team({
 }) {
   return (
     <section
-      className={cn("w-full px-4 md:px-8", className)}
+      className={cn("w-full bg-canvas px-4 py-12 md:px-8 md:py-16", className)}
+      style={{ backgroundColor: "var(--canvas, #f3f3f4)" }}
       aria-labelledby="team-heading"
       {...props}
     >
@@ -92,6 +93,12 @@ export default function Team({
             <li
               key={member.id}
               className="group overflow-hidden rounded-[12px] border border-border/70 bg-card p-2 shadow-soft transition-[box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_40px_-24px_rgba(0,0,0,0.35)] sm:p-3"
+
+              style={{
+                backgroundColor: "var(--card, #ffffff)",
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
             >
               <div className="aspect-[4/5] overflow-hidden rounded-[10px] bg-muted">
                 <img

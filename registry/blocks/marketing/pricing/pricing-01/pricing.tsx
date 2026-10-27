@@ -126,6 +126,12 @@ export default function Pricing({
                   ? "z-10 border-primary shadow-[0_18px_40px_-18px_rgba(37,99,235,0.45)] ring-1 ring-primary/25 dark:shadow-[0_18px_40px_-18px_rgba(57,110,240,0.4)]"
                   : "hover:-translate-y-0.5 hover:border-border hover:shadow-[0_18px_40px_-18px_rgba(0,0,0,0.35)]"
               )}
+
+              style={{
+                backgroundColor: "var(--card, #ffffff)",
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
             >
               {plan.featured ? (
                 <div

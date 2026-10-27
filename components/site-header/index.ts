@@ -1,4 +1,5 @@
 export { SiteHeader } from "./site-header"
+export { GithubLink } from "./github-link"
 export { MainNav } from "./main-nav"
 export { MobileNav } from "./mobile-nav"
 export { ModeSwitcher } from "./mode-switcher"

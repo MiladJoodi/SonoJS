@@ -250,6 +250,12 @@ export default function Pricing({
                   ? "border-primary/50 ring-1 ring-primary/25 lg:-translate-y-1"
                   : "border-border/70 hover:-translate-y-0.5 hover:shadow-[0_20px_44px_-28px_rgba(0,0,0,0.3)]"
               )}
+
+              style={{
+                backgroundColor: "var(--card, #ffffff)",
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
             >
               {plan.featured ? (
                 <div
@@ -310,7 +316,13 @@ export default function Pricing({
           ))}
         </ul>
 
-        <div className="mt-14 overflow-x-auto rounded-[12px] border border-border/70 bg-card shadow-soft md:mt-16">
+        <div className="mt-14 overflow-x-auto rounded-[12px] border border-border/70 bg-card shadow-soft md:mt-16"
+              style={{
+                backgroundColor: "var(--card, #ffffff)",
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
+            >
           <table className="w-full min-w-[800px] border-collapse text-start">
             <thead>
               <tr className="border-b border-border/70">

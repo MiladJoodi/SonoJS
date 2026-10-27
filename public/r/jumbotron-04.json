@@ -7,11 +7,27 @@
   "registryDependencies": [
     "button"
   ],
+  "cssVars": {
+    "light": {
+      "canvas": "#f3f3f4",
+      "border-soft": "color-mix(in oklab, #e4e4e7 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18)",
+      "background": "var(--canvas)",
+      "card": "#ffffff"
+    },
+    "dark": {
+      "canvas": "#09090b",
+      "border-soft": "color-mix(in oklab, #27272a 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(0, 0, 0, 0.24), 0 28px 56px -28px rgba(0, 0, 0, 0.48)",
+      "background": "var(--canvas)",
+      "card": "#18181b"
+    }
+  },
   "files": [
     {
       "path": "components/blocks/marketing/jumbotron-04/jumbotron.tsx",
       "type": "registry:component",
-      "content": "\"use client\"\n\nimport type * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { Button } from \"@/components/ui/button\"\n\nimport bgImage from \"./images/bg.webp\"\n\nfunction assetSrc(asset: string | { src: string }) {\n  return typeof asset === \"string\" ? asset : asset.src\n}\n\nexport default function Jumbotron({\n  className,\n  ...props\n}: React.ComponentProps<\"section\">) {\n  return (\n    <section\n      className={cn(\n        \"relative overflow-hidden rounded-[12px] px-6 py-16 text-center shadow-soft md:px-8 md:py-24\",\n        className\n      )}\n      aria-labelledby=\"jumbotron-heading\"\n      {...props}\n    >\n      <img\n        src={assetSrc(bgImage)}\n        alt=\"\"\n        className=\"absolute inset-0 size-full object-cover\"\n      />\n      <div className=\"absolute inset-0 bg-black/75\" aria-hidden />\n\n      <div className=\"relative mx-auto max-w-5xl\">\n        <h2\n          id=\"jumbotron-heading\"\n          className=\"mb-6 text-3xl font-bold tracking-tight text-white whitespace-nowrap md:text-5xl\"\n        >\n          Show your product in style\n        </h2>\n        <p className=\"mx-auto max-w-2xl text-base leading-relaxed text-zinc-300 md:text-lg\">\n          A bold banner for launches, promos, and portfolios. Make the first\n          look count.\n        </p>\n        <div className=\"mt-10\">\n          <Button asChild className=\"h-[46px] rounded-[12px]\">\n            <a href=\"#\">Get started</a>\n          </Button>\n        </div>\n      </div>\n    </section>\n  )\n}\n",
+      "content": "\"use client\"\n\nimport type * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { Button } from \"@/components/ui/button\"\n\nimport bgImage from \"./images/bg.webp\"\n\nfunction assetSrc(asset: string | { src: string }) {\n  return typeof asset === \"string\" ? asset : asset.src\n}\n\nexport default function Jumbotron({\n  className,\n  ...props\n}: React.ComponentProps<\"section\">) {\n  return (\n    <section\n      className={cn(\n        \"relative overflow-hidden rounded-[12px] px-6 py-16 text-center shadow-soft md:px-8 md:py-24\",\n        className\n      )}\n      aria-labelledby=\"jumbotron-heading\"\n      style={{\n                boxShadow:\n                  \"var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))\",\n              }}\n      {...props}\n    >\n      <img\n        src={assetSrc(bgImage)}\n        alt=\"\"\n        className=\"absolute inset-0 size-full object-cover\"\n      />\n      <div className=\"absolute inset-0 bg-black/75\" aria-hidden />\n\n      <div className=\"relative mx-auto max-w-5xl\">\n        <h2\n          id=\"jumbotron-heading\"\n          className=\"mb-6 text-3xl font-bold tracking-tight text-white whitespace-nowrap md:text-5xl\"\n        >\n          Show your product in style\n        </h2>\n        <p className=\"mx-auto max-w-2xl text-base leading-relaxed text-zinc-300 md:text-lg\">\n          A bold banner for launches, promos, and portfolios. Make the first\n          look count.\n        </p>\n        <div className=\"mt-10\">\n          <Button asChild className=\"h-[46px] rounded-[12px]\">\n            <a href=\"#\">Get started</a>\n          </Button>\n        </div>\n      </div>\n    </section>\n  )\n}\n",
       "target": "components/blocks/marketing/jumbotron-04/jumbotron.tsx"
     },
     {
@@ -22,6 +38,6 @@
       "target": "components/blocks/marketing/jumbotron-04/images/bg.webp"
     }
   ],
-  "version": "0.1.0+f9f25a599210",
-  "generatedAt": "2026-10-26T23:48:29.739Z"
+  "version": "0.1.0+4407fc129d93",
+  "generatedAt": "2026-10-27T14:06:34.340Z"
 }

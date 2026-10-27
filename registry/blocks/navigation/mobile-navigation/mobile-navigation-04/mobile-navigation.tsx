@@ -52,8 +52,7 @@ export default function MobileNavigation({
       <div className="px-4 pb-[calc(1rem+env(safe-area-inset-bottom))]">
         <nav
           aria-label="Mobile"
-          className="mx-auto flex h-16 max-w-md items-center rounded-full border border-border/70 bg-card px-1.5 shadow-md"
-        >
+          className="mx-auto flex h-16 max-w-md items-center rounded-full border border-border/70 bg-card px-1.5 shadow-md">
           <div className="grid h-full flex-1 grid-cols-5">
             {sideItems.map((item) => {
               const Icon = item.icon

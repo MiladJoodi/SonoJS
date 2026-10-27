@@ -48,8 +48,7 @@ export default function MobileNavigation({
 
       <nav
         aria-label="Mobile"
-        className="border-t border-border/70 bg-card pb-[env(safe-area-inset-bottom)]"
-      >
+        className="border-t border-border/70 bg-card pb-[env(safe-area-inset-bottom)]">
         <div className="relative mx-auto grid h-[4.25rem] max-w-lg grid-cols-5">
           <span
             aria-hidden

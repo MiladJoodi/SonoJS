@@ -67,7 +67,13 @@ export default function LoginForm({
       )}
       {...props}
     >
-      <div className="w-full max-w-5xl overflow-hidden rounded-[16px] bg-card shadow-soft">
+      <div className="w-full max-w-5xl overflow-hidden rounded-[16px] bg-card shadow-soft"
+              style={{
+                backgroundColor: "var(--card, #ffffff)",
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
+            >
         <div className="grid w-full items-stretch gap-0 md:grid-cols-2">
           <PhotoPanel />
 
@@ -154,8 +160,7 @@ export default function LoginForm({
               <Button
                 type="button"
                 variant="outline"
-                className="h-[46px] w-full rounded-[12px] border-border/70 bg-card shadow-none hover:bg-muted"
-              >
+                className="h-[46px] w-full rounded-[12px] border-border/70 bg-card shadow-none hover:bg-muted">
                 <GoogleIcon />
                 Sign in with Google
               </Button>

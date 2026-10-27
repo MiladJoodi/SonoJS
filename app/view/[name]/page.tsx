@@ -111,6 +111,85 @@ import Cta06 from "@/registry/blocks/marketing/cta/cta-06/cta"
 import Cta07 from "@/registry/blocks/marketing/cta/cta-07/cta"
 import Cta08 from "@/registry/blocks/marketing/cta/cta-08/cta"
 import Cta09 from "@/registry/blocks/marketing/cta/cta-09/cta"
+import Stats01 from "@/registry/blocks/marketing/stats/stats-01/stats"
+import Stats02 from "@/registry/blocks/marketing/stats/stats-02/stats"
+import Stats03 from "@/registry/blocks/marketing/stats/stats-03/stats"
+import Stats04 from "@/registry/blocks/marketing/stats/stats-04/stats"
+import Stats05 from "@/registry/blocks/marketing/stats/stats-05/stats"
+import Stats06 from "@/registry/blocks/marketing/stats/stats-06/stats"
+import Stats07 from "@/registry/blocks/marketing/stats/stats-07/stats"
+import Stats08 from "@/registry/blocks/marketing/stats/stats-08/stats"
+import Stats09 from "@/registry/blocks/marketing/stats/stats-09/stats"
+import Stats10 from "@/registry/blocks/marketing/stats/stats-10/stats"
+import Stats11 from "@/registry/blocks/marketing/stats/stats-11/stats"
+import Stats12 from "@/registry/blocks/marketing/stats/stats-12/stats"
+import Stats13 from "@/registry/blocks/marketing/stats/stats-13/stats"
+import Stats14 from "@/registry/blocks/marketing/stats/stats-14/stats"
+import Stats15 from "@/registry/blocks/marketing/stats/stats-15/stats"
+import Stats16 from "@/registry/blocks/marketing/stats/stats-16/stats"
+import Faq01 from "@/registry/blocks/marketing/faq/faq-01/faq"
+import Faq02 from "@/registry/blocks/marketing/faq/faq-02/faq"
+import Faq03 from "@/registry/blocks/marketing/faq/faq-03/faq"
+import Faq04 from "@/registry/blocks/marketing/faq/faq-04/faq"
+import Faq05 from "@/registry/blocks/marketing/faq/faq-05/faq"
+import Faq06 from "@/registry/blocks/marketing/faq/faq-06/faq"
+import Faq07 from "@/registry/blocks/marketing/faq/faq-07/faq"
+import Faq08 from "@/registry/blocks/marketing/faq/faq-08/faq"
+import Faq09 from "@/registry/blocks/marketing/faq/faq-09/faq"
+import Faq10 from "@/registry/blocks/marketing/faq/faq-10/faq"
+import Faq11 from "@/registry/blocks/marketing/faq/faq-11/faq"
+import Faq12 from "@/registry/blocks/marketing/faq/faq-12/faq"
+import Faq13 from "@/registry/blocks/marketing/faq/faq-13/faq"
+import Faq14 from "@/registry/blocks/marketing/faq/faq-14/faq"
+import Faq15 from "@/registry/blocks/marketing/faq/faq-15/faq"
+import Faq16 from "@/registry/blocks/marketing/faq/faq-16/faq"
+import Faq17 from "@/registry/blocks/marketing/faq/faq-17/faq"
+import Faq18 from "@/registry/blocks/marketing/faq/faq-18/faq"
+import Faq19 from "@/registry/blocks/marketing/faq/faq-19/faq"
+import Faq20 from "@/registry/blocks/marketing/faq/faq-20/faq"
+import AdvancedDataGrid01 from "@/registry/blocks/data-tables/advanced-data-grid/advanced-data-grid-01/table"
+import AdvancedDataGrid02 from "@/registry/blocks/data-tables/advanced-data-grid/advanced-data-grid-02/table"
+import AdvancedDataGrid03 from "@/registry/blocks/data-tables/advanced-data-grid/advanced-data-grid-03/table"
+import AdvancedDataGrid04 from "@/registry/blocks/data-tables/advanced-data-grid/advanced-data-grid-04/table"
+import PaymentForm01 from "@/registry/blocks/payments-billing/payment-form/payment-form-01/payment-form"
+import PaymentForm02 from "@/registry/blocks/payments-billing/payment-form/payment-form-02/payment-form"
+import PaymentForm03 from "@/registry/blocks/payments-billing/payment-form/payment-form-03/payment-form"
+import PaymentForm04 from "@/registry/blocks/payments-billing/payment-form/payment-form-04/payment-form"
+import ProductList01 from "@/registry/blocks/ecommerce/product-list/product-list-01/product-list"
+import ProductList02 from "@/registry/blocks/ecommerce/product-list/product-list-02/product-list"
+import ProductList03 from "@/registry/blocks/ecommerce/product-list/product-list-03/product-list"
+import ProductList04 from "@/registry/blocks/ecommerce/product-list/product-list-04/product-list"
+import ProductList05 from "@/registry/blocks/ecommerce/product-list/product-list-05/product-list"
+import ProductList06 from "@/registry/blocks/ecommerce/product-list/product-list-06/product-list"
+import ProductList07 from "@/registry/blocks/ecommerce/product-list/product-list-07/product-list"
+import ProductList08 from "@/registry/blocks/ecommerce/product-list/product-list-08/product-list"
+import ProductList09 from "@/registry/blocks/ecommerce/product-list/product-list-09/product-list"
+import ProductList10 from "@/registry/blocks/ecommerce/product-list/product-list-10/product-list"
+import ProductList11 from "@/registry/blocks/ecommerce/product-list/product-list-11/product-list"
+import OrderSummary01 from "@/registry/blocks/ecommerce/order-summary/order-summary-01/order-summary"
+import OrderSummary02 from "@/registry/blocks/ecommerce/order-summary/order-summary-02/order-summary"
+import OrderSummary03 from "@/registry/blocks/ecommerce/order-summary/order-summary-03/order-summary"
+import OrderSummary04 from "@/registry/blocks/ecommerce/order-summary/order-summary-04/order-summary"
+import OrderSummary05 from "@/registry/blocks/ecommerce/order-summary/order-summary-05/order-summary"
+import OrderSummary06 from "@/registry/blocks/ecommerce/order-summary/order-summary-06/order-summary"
+import ProductDetails01 from "@/registry/blocks/ecommerce/product-details/product-details-01/product-details"
+import ProductDetails02 from "@/registry/blocks/ecommerce/product-details/product-details-02/product-details"
+import ProductDetails03 from "@/registry/blocks/ecommerce/product-details/product-details-03/product-details"
+import ProductDetails04 from "@/registry/blocks/ecommerce/product-details/product-details-04/product-details"
+import ProductDetails05 from "@/registry/blocks/ecommerce/product-details/product-details-05/product-details"
+import ProductDetails06 from "@/registry/blocks/ecommerce/product-details/product-details-06/product-details"
+import ProductDetails07 from "@/registry/blocks/ecommerce/product-details/product-details-07/product-details"
+import ProductDetails08 from "@/registry/blocks/ecommerce/product-details/product-details-08/product-details"
+import Gallery01 from "@/registry/blocks/files-media/image-gallery/gallery-01/gallery"
+import Gallery02 from "@/registry/blocks/files-media/image-gallery/gallery-02/gallery"
+import Gallery03 from "@/registry/blocks/files-media/image-gallery/gallery-03/gallery"
+import Gallery04 from "@/registry/blocks/files-media/image-gallery/gallery-04/gallery"
+import Gallery05 from "@/registry/blocks/files-media/image-gallery/gallery-05/gallery"
+import Gallery06 from "@/registry/blocks/files-media/image-gallery/gallery-06/gallery"
+import Gallery07 from "@/registry/blocks/files-media/image-gallery/gallery-07/gallery"
+import Gallery08 from "@/registry/blocks/files-media/image-gallery/gallery-08/gallery"
+import Gallery09 from "@/registry/blocks/files-media/image-gallery/gallery-09/gallery"
+import Gallery10 from "@/registry/blocks/files-media/image-gallery/gallery-10/gallery"
 import Hero01 from "@/registry/blocks/marketing/hero/hero-01/hero"
 import Hero02 from "@/registry/blocks/marketing/hero/hero-02/hero"
 import Hero03 from "@/registry/blocks/marketing/hero/hero-03/hero"
@@ -140,6 +219,21 @@ import Blog07 from "@/registry/blocks/marketing/blog/blog-07/blog"
 import Blog08 from "@/registry/blocks/marketing/blog/blog-08/blog"
 import Blog09 from "@/registry/blocks/marketing/blog/blog-09/blog"
 import Blog10 from "@/registry/blocks/marketing/blog/blog-10/blog"
+import ContentSection01 from "@/registry/blocks/marketing/content-section/content-section-01/content-section"
+import ContentSection02 from "@/registry/blocks/marketing/content-section/content-section-02/content-section"
+import ContentSection03 from "@/registry/blocks/marketing/content-section/content-section-03/content-section"
+import ContentSection04 from "@/registry/blocks/marketing/content-section/content-section-04/content-section"
+import ContentSection05 from "@/registry/blocks/marketing/content-section/content-section-05/content-section"
+import ContentSection06 from "@/registry/blocks/marketing/content-section/content-section-06/content-section"
+import ContentSection07 from "@/registry/blocks/marketing/content-section/content-section-07/content-section"
+import ContentSection08 from "@/registry/blocks/marketing/content-section/content-section-08/content-section"
+import ContentSection09 from "@/registry/blocks/marketing/content-section/content-section-09/content-section"
+import ContentSection10 from "@/registry/blocks/marketing/content-section/content-section-10/content-section"
+import ContentSection11 from "@/registry/blocks/marketing/content-section/content-section-11/content-section"
+import ContentSection12 from "@/registry/blocks/marketing/content-section/content-section-12/content-section"
+import DashboardLayout01 from "@/registry/blocks/application-layouts/dashboard-layout/dashboard-layout-01/dashboard-layout"
+import DashboardLayout02 from "@/registry/blocks/application-layouts/dashboard-layout/dashboard-layout-02/dashboard-layout"
+import DashboardLayout03 from "@/registry/blocks/application-layouts/dashboard-layout/dashboard-layout-03/dashboard-layout"
 import Team01 from "@/registry/blocks/marketing/team/team-01/team"
 import Team02 from "@/registry/blocks/marketing/team/team-02/team"
 import Team03 from "@/registry/blocks/marketing/team/team-03/team"
@@ -766,6 +860,717 @@ const views: Record<string, ComponentType> = {
       </div>
     )
   },
+  "stats-01": function Stats01View() {
+    return (
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Stats01 />
+        </div>
+      </div>
+    )
+  },
+  "stats-02": function Stats02View() {
+    return (
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Stats02 />
+        </div>
+      </div>
+    )
+  },
+  "stats-03": function Stats03View() {
+    return (
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Stats03 />
+        </div>
+      </div>
+    )
+  },
+  "stats-04": function Stats04View() {
+    return (
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-0 py-0">
+        <div className="w-full max-w-6xl">
+          <Stats04 />
+        </div>
+      </div>
+    )
+  },
+  "stats-05": function Stats05View() {
+    return (
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Stats05 />
+        </div>
+      </div>
+    )
+  },
+  "stats-06": function Stats06View() {
+    return (
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Stats06 />
+        </div>
+      </div>
+    )
+  },
+  "stats-07": function Stats07View() {
+    return (
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Stats07 />
+        </div>
+      </div>
+    )
+  },
+  "stats-08": function Stats08View() {
+    return (
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Stats08 />
+        </div>
+      </div>
+    )
+  },
+  "stats-09": function Stats09View() {
+    return (
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Stats09 />
+        </div>
+      </div>
+    )
+  },
+  "stats-10": function Stats10View() {
+    return (
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-0 py-0">
+        <div className="w-full max-w-6xl">
+          <Stats10 />
+        </div>
+      </div>
+    )
+  },
+  "stats-11": function Stats11View() {
+    return (
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-0 py-0">
+        <div className="w-full max-w-3xl">
+          <Stats11 />
+        </div>
+      </div>
+    )
+  },
+  "stats-12": function Stats12View() {
+    return (
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-0 py-0">
+        <div className="w-full max-w-5xl">
+          <Stats12 />
+        </div>
+      </div>
+    )
+  },
+  "stats-13": function Stats13View() {
+    return (
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-0 py-0">
+        <div className="w-full max-w-6xl">
+          <Stats13 />
+        </div>
+      </div>
+    )
+  },
+  "stats-14": function Stats14View() {
+    return (
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-0 py-0">
+        <div className="w-full max-w-6xl">
+          <Stats14 />
+        </div>
+      </div>
+    )
+  },
+  "stats-15": function Stats15View() {
+    return (
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Stats15 />
+        </div>
+      </div>
+    )
+  },
+  "stats-16": function Stats16View() {
+    return (
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-0 py-0">
+        <div className="w-full max-w-6xl">
+          <Stats16 />
+        </div>
+      </div>
+    )
+  },
+  "faq-01": function Faq01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Faq01 />
+        </div>
+      </div>
+    )
+  },
+  "faq-02": function Faq02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Faq02 />
+        </div>
+      </div>
+    )
+  },
+  "faq-03": function Faq03View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Faq03 />
+        </div>
+      </div>
+    )
+  },
+  "faq-04": function Faq04View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Faq04 />
+        </div>
+      </div>
+    )
+  },
+  "faq-05": function Faq05View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Faq05 />
+        </div>
+      </div>
+    )
+  },
+  "faq-06": function Faq06View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Faq06 />
+        </div>
+      </div>
+    )
+  },
+  "faq-07": function Faq07View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Faq07 />
+        </div>
+      </div>
+    )
+  },
+  "faq-08": function Faq08View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Faq08 />
+        </div>
+      </div>
+    )
+  },
+  "faq-09": function Faq09View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Faq09 />
+        </div>
+      </div>
+    )
+  },
+  "faq-10": function Faq10View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Faq10 />
+        </div>
+      </div>
+    )
+  },
+  "faq-11": function Faq11View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Faq11 />
+        </div>
+      </div>
+    )
+  },
+  "faq-12": function Faq12View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Faq12 />
+        </div>
+      </div>
+    )
+  },
+  "faq-13": function Faq13View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Faq13 />
+        </div>
+      </div>
+    )
+  },
+  "faq-14": function Faq14View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Faq14 />
+        </div>
+      </div>
+    )
+  },
+  "faq-15": function Faq15View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Faq15 />
+        </div>
+      </div>
+    )
+  },
+  "faq-16": function Faq16View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Faq16 />
+        </div>
+      </div>
+    )
+  },
+  "faq-17": function Faq17View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Faq17 />
+        </div>
+      </div>
+    )
+  },
+  "faq-18": function Faq18View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Faq18 />
+        </div>
+      </div>
+    )
+  },
+  "faq-19": function Faq19View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Faq19 />
+        </div>
+      </div>
+    )
+  },
+  "faq-20": function Faq20View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Faq20 />
+        </div>
+      </div>
+    )
+  },
+  "advanced-data-grid-01": function AdvancedDataGrid01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <AdvancedDataGrid01 />
+        </div>
+      </div>
+    )
+  },
+  "advanced-data-grid-02": function AdvancedDataGrid02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <AdvancedDataGrid02 />
+        </div>
+      </div>
+    )
+  },
+  "advanced-data-grid-03": function AdvancedDataGrid03View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <AdvancedDataGrid03 />
+        </div>
+      </div>
+    )
+  },
+  "advanced-data-grid-04": function AdvancedDataGrid04View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <AdvancedDataGrid04 />
+        </div>
+      </div>
+    )
+  },
+  "payment-form-01": function PaymentForm01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <PaymentForm01 />
+        </div>
+      </div>
+    )
+  },
+  "payment-form-02": function PaymentForm02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <PaymentForm02 />
+        </div>
+      </div>
+    )
+  },
+  "payment-form-03": function PaymentForm03View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <PaymentForm03 />
+        </div>
+      </div>
+    )
+  },
+  "payment-form-04": function PaymentForm04View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <PaymentForm04 />
+        </div>
+      </div>
+    )
+  },
+  "product-list-01": function ProductList01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <ProductList01 />
+        </div>
+      </div>
+    )
+  },
+  "product-list-02": function ProductList02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <ProductList02 />
+        </div>
+      </div>
+    )
+  },
+  "product-list-03": function ProductList03View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <ProductList03 />
+        </div>
+      </div>
+    )
+  },
+  "product-list-04": function ProductList04View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <ProductList04 />
+        </div>
+      </div>
+    )
+  },
+  "product-list-05": function ProductList05View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <ProductList05 />
+        </div>
+      </div>
+    )
+  },
+  "product-list-06": function ProductList06View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <ProductList06 />
+        </div>
+      </div>
+    )
+  },
+  "product-list-07": function ProductList07View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <ProductList07 />
+        </div>
+      </div>
+    )
+  },
+  "product-list-08": function ProductList08View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <ProductList08 />
+        </div>
+      </div>
+    )
+  },
+  "product-list-09": function ProductList09View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <ProductList09 />
+        </div>
+      </div>
+    )
+  },
+  "product-list-10": function ProductList10View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <ProductList10 />
+        </div>
+      </div>
+    )
+  },
+  "product-list-11": function ProductList11View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <ProductList11 />
+        </div>
+      </div>
+    )
+  },
+  "order-summary-01": function OrderSummary01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <OrderSummary01 />
+        </div>
+      </div>
+    )
+  },
+  "order-summary-02": function OrderSummary02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <OrderSummary02 />
+        </div>
+      </div>
+    )
+  },
+  "order-summary-03": function OrderSummary03View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <OrderSummary03 />
+        </div>
+      </div>
+    )
+  },
+  "order-summary-04": function OrderSummary04View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <OrderSummary04 />
+        </div>
+      </div>
+    )
+  },
+  "order-summary-05": function OrderSummary05View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <OrderSummary05 />
+        </div>
+      </div>
+    )
+  },
+  "order-summary-06": function OrderSummary06View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <OrderSummary06 />
+        </div>
+      </div>
+    )
+  },
+  "product-details-01": function ProductDetails01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0">
+        <div className="w-full">
+          <ProductDetails01 />
+        </div>
+      </div>
+    )
+  },
+  "product-details-02": function ProductDetails02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0">
+        <div className="w-full">
+          <ProductDetails02 />
+        </div>
+      </div>
+    )
+  },
+  "product-details-03": function ProductDetails03View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0">
+        <div className="w-full">
+          <ProductDetails03 />
+        </div>
+      </div>
+    )
+  },
+  "product-details-04": function ProductDetails04View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0">
+        <div className="w-full">
+          <ProductDetails04 />
+        </div>
+      </div>
+    )
+  },
+  "product-details-05": function ProductDetails05View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0">
+        <div className="w-full">
+          <ProductDetails05 />
+        </div>
+      </div>
+    )
+  },
+  "product-details-06": function ProductDetails06View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0">
+        <div className="w-full">
+          <ProductDetails06 />
+        </div>
+      </div>
+    )
+  },
+  "product-details-07": function ProductDetails07View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0">
+        <div className="w-full">
+          <ProductDetails07 />
+        </div>
+      </div>
+    )
+  },
+  "product-details-08": function ProductDetails08View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0">
+        <div className="w-full">
+          <ProductDetails08 />
+        </div>
+      </div>
+    )
+  },
+  "gallery-01": function Gallery01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Gallery01 />
+        </div>
+      </div>
+    )
+  },
+  "gallery-02": function Gallery02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Gallery02 />
+        </div>
+      </div>
+    )
+  },
+  "gallery-03": function Gallery03View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Gallery03 />
+        </div>
+      </div>
+    )
+  },
+  "gallery-04": function Gallery04View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Gallery04 />
+        </div>
+      </div>
+    )
+  },
+  "gallery-05": function Gallery05View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Gallery05 />
+        </div>
+      </div>
+    )
+  },
+  "gallery-06": function Gallery06View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Gallery06 />
+        </div>
+      </div>
+    )
+  },
+  "gallery-07": function Gallery07View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Gallery07 />
+        </div>
+      </div>
+    )
+  },
+  "gallery-08": function Gallery08View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Gallery08 />
+        </div>
+      </div>
+    )
+  },
+  "gallery-09": function Gallery09View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Gallery09 />
+        </div>
+      </div>
+    )
+  },
+  "gallery-10": function Gallery10View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Gallery10 />
+        </div>
+      </div>
+    )
+  },
   "features-01": function Features01View() {
     return (
       <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-8 py-12">
@@ -1193,6 +1998,135 @@ const views: Record<string, ComponentType> = {
         <div className="w-full max-w-6xl">
           <Blog10 />
         </div>
+      </div>
+    )
+  },
+  "content-section-01": function ContentSection01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <ContentSection01 />
+        </div>
+      </div>
+    )
+  },
+  "content-section-02": function ContentSection02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <ContentSection02 />
+        </div>
+      </div>
+    )
+  },
+  "content-section-03": function ContentSection03View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <ContentSection03 />
+        </div>
+      </div>
+    )
+  },
+  "content-section-04": function ContentSection04View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <ContentSection04 />
+        </div>
+      </div>
+    )
+  },
+  "content-section-05": function ContentSection05View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <ContentSection05 />
+        </div>
+      </div>
+    )
+  },
+  "content-section-06": function ContentSection06View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <ContentSection06 />
+        </div>
+      </div>
+    )
+  },
+  "content-section-07": function ContentSection07View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <ContentSection07 />
+        </div>
+      </div>
+    )
+  },
+  "content-section-08": function ContentSection08View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <ContentSection08 />
+        </div>
+      </div>
+    )
+  },
+  "content-section-09": function ContentSection09View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-zinc-950 px-0 py-0">
+        <div className="w-full">
+          <ContentSection09 />
+        </div>
+      </div>
+    )
+  },
+  "content-section-10": function ContentSection10View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <ContentSection10 />
+        </div>
+      </div>
+    )
+  },
+  "content-section-11": function ContentSection11View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-zinc-950 px-0 py-0">
+        <div className="w-full">
+          <ContentSection11 />
+        </div>
+      </div>
+    )
+  },
+  "content-section-12": function ContentSection12View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-violet-50 px-0 py-0 dark:bg-violet-950/40">
+        <div className="w-full">
+          <ContentSection12 />
+        </div>
+      </div>
+    )
+  },
+  "dashboard-layout-01": function DashboardLayout01View() {
+    return (
+      <div className="h-svh w-full overflow-hidden bg-canvas">
+        <DashboardLayout01 />
+      </div>
+    )
+  },
+  "dashboard-layout-02": function DashboardLayout02View() {
+    return (
+      <div className="h-svh w-full overflow-hidden bg-canvas">
+        <DashboardLayout02 />
+      </div>
+    )
+  },
+  "dashboard-layout-03": function DashboardLayout03View() {
+    return (
+      <div className="h-svh w-full overflow-hidden bg-canvas">
+        <DashboardLayout03 />
       </div>
     )
   },

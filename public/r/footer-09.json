@@ -4,11 +4,27 @@
   "type": "registry:block",
   "title": "footer-09",
   "description": "Minimal centered footer with brand mark, family line, and social icons.",
+  "cssVars": {
+    "light": {
+      "canvas": "#f3f3f4",
+      "border-soft": "color-mix(in oklab, #e4e4e7 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18)",
+      "background": "var(--canvas)",
+      "card": "#ffffff"
+    },
+    "dark": {
+      "canvas": "#09090b",
+      "border-soft": "color-mix(in oklab, #27272a 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(0, 0, 0, 0.24), 0 28px 56px -28px rgba(0, 0, 0, 0.48)",
+      "background": "var(--canvas)",
+      "card": "#18181b"
+    }
+  },
   "files": [
     {
       "path": "components/blocks/marketing/footer-09/footer.tsx",
       "type": "registry:component",
-      "content": "import type * as React from \"react\"\n\nimport { GithubIcon } from \"@/components/blocks/marketing/footer-09/icons/github\"\nimport { GoogleIcon } from \"@/components/blocks/marketing/footer-09/icons/google\"\nimport { SlackIcon } from \"@/components/blocks/marketing/footer-09/icons/slack\"\nimport { XIcon } from \"@/components/blocks/marketing/footer-09/icons/x\"\nimport { cn } from \"@/lib/utils\"\n\nconst social = [\n  { label: \"Google\", href: \"#\", Icon: GoogleIcon },\n  { label: \"Slack\", href: \"#\", Icon: SlackIcon },\n  { label: \"GitHub\", href: \"#\", Icon: GithubIcon },\n  { label: \"X\", href: \"#\", Icon: XIcon },\n] as const\n\nexport default function Footer({\n  className,\n  ...props\n}: React.ComponentProps<\"footer\">) {\n  return (\n    <footer className={cn(\"bg-card\", className)} {...props}>\n      <div className=\"mx-auto flex max-w-xl flex-col items-center px-4 py-16 text-center sm:px-6\">\n        <a\n          href=\"#\"\n          aria-label=\"SonoJS\"\n          className=\"cursor-pointer rounded-md text-xl font-semibold tracking-tight text-foreground transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40\"\n        >\n          SonoJS\n        </a>\n\n        <p className=\"mt-3 max-w-sm text-sm leading-relaxed text-muted-foreground\">\n          We&apos;re part of the{\" \"}\n          <a\n            href=\"#\"\n            className=\"cursor-pointer font-medium text-primary underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40\"\n          >\n            SonoJS\n          </a>{\" \"}\n          family.\n        </p>\n\n        <ul className=\"mt-10 flex flex-wrap items-center justify-center gap-x-5 gap-y-3 rounded-[12px] border border-border/70 bg-background/60 px-5 py-3 shadow-soft\">\n          {social.map(({ label, href, Icon }) => (\n            <li key={label}>\n              <a\n                href={href}\n                aria-label={label}\n                className=\"inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-md px-1 text-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40\"\n              >\n                <Icon className=\"size-4 shrink-0\" />\n                <span>{label}</span>\n              </a>\n            </li>\n          ))}\n        </ul>\n\n        <p className=\"mt-10 text-xs text-muted-foreground\">© 2026 SonoJS.</p>\n      </div>\n    </footer>\n  )\n}\n",
+      "content": "import type * as React from \"react\"\n\nimport { GithubIcon } from \"@/components/blocks/marketing/footer-09/icons/github\"\nimport { GoogleIcon } from \"@/components/blocks/marketing/footer-09/icons/google\"\nimport { SlackIcon } from \"@/components/blocks/marketing/footer-09/icons/slack\"\nimport { XIcon } from \"@/components/blocks/marketing/footer-09/icons/x\"\nimport { cn } from \"@/lib/utils\"\n\nconst social = [\n  { label: \"Google\", href: \"#\", Icon: GoogleIcon },\n  { label: \"Slack\", href: \"#\", Icon: SlackIcon },\n  { label: \"GitHub\", href: \"#\", Icon: GithubIcon },\n  { label: \"X\", href: \"#\", Icon: XIcon },\n] as const\n\nexport default function Footer({\n  className,\n  ...props\n}: React.ComponentProps<\"footer\">) {\n  return (\n    <footer className={cn(\"bg-card\", className)} {...props}>\n      <div className=\"mx-auto flex max-w-xl flex-col items-center px-4 py-16 text-center sm:px-6\">\n        <a\n          href=\"#\"\n          aria-label=\"SonoJS\"\n          className=\"cursor-pointer rounded-md text-xl font-semibold tracking-tight text-foreground transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40\"\n        >\n          SonoJS\n        </a>\n\n        <p className=\"mt-3 max-w-sm text-sm leading-relaxed text-muted-foreground\">\n          We&apos;re part of the{\" \"}\n          <a\n            href=\"#\"\n            className=\"cursor-pointer font-medium text-primary underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40\"\n          >\n            SonoJS\n          </a>{\" \"}\n          family.\n        </p>\n\n        <ul className=\"mt-10 flex flex-wrap items-center justify-center gap-x-5 gap-y-3 rounded-[12px] border border-border/70 bg-background/60 px-5 py-3 shadow-soft\"\n              style={{\n                boxShadow:\n                  \"var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))\",\n              }}\n            >\n          {social.map(({ label, href, Icon }) => (\n            <li key={label}>\n              <a\n                href={href}\n                aria-label={label}\n                className=\"inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-md px-1 text-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40\"\n              >\n                <Icon className=\"size-4 shrink-0\" />\n                <span>{label}</span>\n              </a>\n            </li>\n          ))}\n        </ul>\n\n        <p className=\"mt-10 text-xs text-muted-foreground\">© 2026 SonoJS.</p>\n      </div>\n    </footer>\n  )\n}\n",
       "target": "components/blocks/marketing/footer-09/footer.tsx"
     },
     {
@@ -64,6 +80,6 @@
       "target": "components/blocks/marketing/footer-09/icons/slack.svg"
     }
   ],
-  "version": "0.1.0+f9f25a599210",
-  "generatedAt": "2026-10-26T23:48:29.739Z"
+  "version": "0.1.0+4407fc129d93",
+  "generatedAt": "2026-10-27T14:06:34.340Z"
 }

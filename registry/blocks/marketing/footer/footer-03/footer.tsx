@@ -95,7 +95,12 @@ export default function Footer({
             </div>
           ))}
 
-          <div className="col-span-1 flex h-fit flex-col rounded-[12px] border border-white/10 bg-white/5 p-6 shadow-soft sm:col-span-2 xl:col-span-1">
+          <div className="col-span-1 flex h-fit flex-col rounded-[12px] border border-white/10 bg-white/5 p-6 shadow-soft sm:col-span-2 xl:col-span-1"
+              style={{
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
+            >
             <p className="text-xs font-semibold uppercase tracking-wide text-primary">
               Newsletter
             </p>

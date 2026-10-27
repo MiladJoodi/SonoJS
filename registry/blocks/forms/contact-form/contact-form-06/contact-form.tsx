@@ -72,7 +72,13 @@ export default function ContactForm({
           <form
             className="grid gap-5 rounded-[12px] border border-border/70 bg-card p-6 shadow-soft sm:grid-cols-2 sm:p-8"
             onSubmit={(event) => event.preventDefault()}
-          >
+
+              style={{
+                backgroundColor: "var(--card, #ffffff)",
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
+            >
             <div className="grid gap-2 text-start">
               <Label htmlFor="contact-06-name">Name</Label>
               <Input

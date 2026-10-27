@@ -15,7 +15,13 @@ export default function Cta({
       aria-labelledby="cta-heading"
       {...props}
     >
-      <div className="mx-auto w-full max-w-5xl rounded-[12px] bg-card p-4 shadow-soft sm:p-6 md:p-8">
+      <div className="mx-auto w-full max-w-5xl rounded-[12px] bg-card p-4 shadow-soft sm:p-6 md:p-8"
+              style={{
+                backgroundColor: "var(--card, #ffffff)",
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
+            >
         <div className="max-w-4xl text-start">
           <h2
             id="cta-heading"

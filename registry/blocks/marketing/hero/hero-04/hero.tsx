@@ -114,7 +114,13 @@ export default function Hero({
         <nav
           className="relative z-20 mx-auto flex max-w-max rounded-full border border-border/70 bg-card px-4 py-2 shadow-soft"
           aria-label="Main navigation"
-        >
+
+              style={{
+                backgroundColor: "var(--card, #ffffff)",
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
+            >
           <div className="mx-auto flex w-full max-w-7xl flex-wrap items-center justify-between gap-x-16 gap-y-2">
             <Brand src={logoSrc} />
 

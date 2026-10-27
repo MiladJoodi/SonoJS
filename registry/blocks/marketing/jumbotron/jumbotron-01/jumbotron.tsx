@@ -11,11 +11,18 @@ export default function Jumbotron({
 }: React.ComponentProps<"section">) {
   return (
     <section
-      className={cn("w-full px-4 md:px-8", className)}
+      className={cn("w-full bg-canvas px-4 py-12 md:px-8 md:py-16", className)}
+      style={{ backgroundColor: "var(--canvas, #f3f3f4)" }}
       aria-labelledby="jumbotron-heading"
       {...props}
     >
-      <div className="mx-auto w-full max-w-4xl rounded-[12px] border border-border/70 bg-card p-6 shadow-soft md:p-8">
+      <div className="mx-auto w-full max-w-4xl rounded-[12px] border border-border/70 bg-card p-6 shadow-soft md:p-8"
+              style={{
+                backgroundColor: "var(--card, #ffffff)",
+                boxShadow:
+                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
+              }}
+            >
         <h2
           id="jumbotron-heading"
           className="text-2xl font-bold tracking-tight text-foreground whitespace-nowrap md:text-3xl"

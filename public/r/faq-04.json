@@ -1,0 +1,33 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "faq-04",
+  "type": "registry:block",
+  "title": "faq-04",
+  "description": "Split FAQ with intro column and stacked open question answers.",
+  "cssVars": {
+    "light": {
+      "canvas": "#f3f3f4",
+      "border-soft": "color-mix(in oklab, #e4e4e7 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18)",
+      "background": "var(--canvas)",
+      "card": "#ffffff"
+    },
+    "dark": {
+      "canvas": "#09090b",
+      "border-soft": "color-mix(in oklab, #27272a 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(0, 0, 0, 0.24), 0 28px 56px -28px rgba(0, 0, 0, 0.48)",
+      "background": "var(--canvas)",
+      "card": "#18181b"
+    }
+  },
+  "files": [
+    {
+      "path": "components/blocks/marketing/faq-04/faq.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport type * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst faqs = [\n  {\n    question: \"Are there any special discounts or early bird offers?\",\n    answer:\n      \"Yes! We offer limited-time early bird discounts and bundle packages for group registrations. Be sure to sign up early to grab the best deals.\",\n  },\n  {\n    question: \"What are the dates and locations for the product launch events?\",\n    answer:\n      \"The launch events will take place in New York on July 18th, San Francisco on July 25th, and virtually on August 1st. Detailed schedules will be emailed after registration.\",\n  },\n  {\n    question: \"Can I bring a guest to the product launch?\",\n    answer:\n      \"Yes, you may bring one guest with you. Please ensure that both names are included during registration as seats are limited.\",\n  },\n  {\n    question: \"How do I register for the event?\",\n    answer:\n      'Simply visit our official website and click the \"Register\" button at the top of the page. You’ll receive a confirmation email within minutes.',\n  },\n  {\n    question: \"Is parking available at the event venue?\",\n    answer:\n      \"Yes, most venues have dedicated parking areas for attendees. You’ll receive parking details in your confirmation email.\",\n  },\n] as const\n\nexport default function Faq({\n  className,\n  ...props\n}: React.ComponentProps<\"section\">) {\n  return (\n    <section\n      className={cn(\"w-full bg-card px-4 py-12 md:px-8 md:py-16\", className)}\n      aria-labelledby=\"faq-heading\"\n      {...props}\n    >\n      <div className=\"mx-auto flex max-w-7xl flex-col items-start gap-x-16 gap-y-10 lg:flex-row lg:gap-y-12\">\n        <div className=\"max-w-3xl lg:max-w-md\">\n          <h2\n            id=\"faq-heading\"\n            className=\"mb-4 text-2xl font-semibold tracking-tight text-foreground md:mb-6 md:text-3xl\"\n          >\n            Frequently Asked Questions\n          </h2>\n          <p className=\"text-base leading-relaxed text-muted-foreground\">\n            Find quick answers to the most common questions about using our\n            platform, managing your account, and accessing our services.\n          </p>\n        </div>\n\n        <ul className=\"min-w-0 flex-1 space-y-8\">\n          {faqs.map((faq) => (\n            <li key={faq.question}>\n              <h3 className=\"text-base font-semibold text-foreground\">\n                {faq.question}\n              </h3>\n              <p className=\"mt-3 text-base leading-relaxed text-muted-foreground md:mt-4\">\n                {faq.answer}\n              </p>\n            </li>\n          ))}\n        </ul>\n      </div>\n    </section>\n  )\n}\n",
+      "target": "components/blocks/marketing/faq-04/faq.tsx"
+    }
+  ],
+  "version": "0.1.0+4407fc129d93",
+  "generatedAt": "2026-10-27T14:06:34.340Z"
+}
