@@ -1,3 +1,5 @@
+[![wakatime](https://wakatime.com/badge/user/aa8c2b32-33c3-43c1-887e-5ded05b7dcea/project/e12b13a0-039e-425f-8e73-5b094aa2d8d5.svg)](https://wakatime.com/badge/user/aa8c2b32-33c3-43c1-887e-5ded05b7dcea/project/e12b13a0-039e-425f-8e73-5b094aa2d8d5)
+
 # SonoJS
 
 Accessible React + Tailwind component library with calm defaults, first-class RTL/LTR, and a tiny docs/registry shell.
