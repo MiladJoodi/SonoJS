@@ -15,6 +15,10 @@ import ContactForm10 from "@/registry/blocks/forms/contact-form/contact-form-10/
 import ContactForm11 from "@/registry/blocks/forms/contact-form/contact-form-11/contact-form"
 import ContactForm12 from "@/registry/blocks/forms/contact-form/contact-form-12/contact-form"
 
+import { blocksPageMetadata } from "@/lib/seo"
+
+export const metadata = blocksPageMetadata("/blocks/forms/contact-form", "Contact Form", "Ready-to-use Contact Form UI blocks for React and Tailwind. Preview variants and install with the SonoJS CLI.")
+
 const usage = (name: string) => `import ContactForm from "@/components/blocks/forms/${name}/contact-form"
 
 export default function Page() {

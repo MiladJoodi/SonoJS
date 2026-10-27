@@ -7,6 +7,10 @@ import {
 } from "@/components/docs"
 import { withVariantCode } from "@/lib/docs-variant-examples"
 
+import { componentDocsMetadata } from "@/lib/seo"
+
+export const metadata = componentDocsMetadata("bubble", "Bubble")
+
 const exampleDefs = [
   {
     name: "bubble-default",

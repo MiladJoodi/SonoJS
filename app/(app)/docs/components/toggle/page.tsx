@@ -9,6 +9,10 @@ import {
 } from "@/components/docs"
 import { withVariantCode } from "@/lib/docs-variant-examples"
 
+import { componentDocsMetadata } from "@/lib/seo"
+
+export const metadata = componentDocsMetadata("toggle", "Toggle")
+
 const exampleDefs = [
   {
     name: "toggle-default",

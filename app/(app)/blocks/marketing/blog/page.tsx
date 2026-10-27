@@ -13,6 +13,10 @@ import Blog08 from "@/registry/blocks/marketing/blog/blog-08/blog"
 import Blog09 from "@/registry/blocks/marketing/blog/blog-09/blog"
 import Blog10 from "@/registry/blocks/marketing/blog/blog-10/blog"
 
+import { blocksPageMetadata } from "@/lib/seo"
+
+export const metadata = blocksPageMetadata("/blocks/marketing/blog", "Blog", "Ready-to-use Blog UI blocks for React and Tailwind. Preview variants and install with the SonoJS CLI.")
+
 const usage = (name: string) => `import Blog from "@/components/blocks/marketing/${name}/blog"
 
 export default function Page() {

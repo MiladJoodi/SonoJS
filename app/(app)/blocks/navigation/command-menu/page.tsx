@@ -9,6 +9,10 @@ import CodeJumpCommandMenu from "@/registry/blocks/navigation/command-menu/comma
 import IntegrationSplitCommandMenu from "@/registry/blocks/navigation/command-menu/command-menu-05/command-menu"
 import SlashStudioCommandMenu from "@/registry/blocks/navigation/command-menu/command-menu-06/command-menu"
 
+import { blocksPageMetadata } from "@/lib/seo"
+
+export const metadata = blocksPageMetadata("/blocks/navigation/command-menu", "Command Menu", "Ready-to-use Command Menu UI blocks for React and Tailwind. Preview variants and install with the SonoJS CLI.")
+
 const usage = (name: string) => `import CommandMenu from "@/components/blocks/navigation/${name}/command-menu"
 
 export default function Page() {

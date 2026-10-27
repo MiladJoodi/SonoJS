@@ -12,6 +12,10 @@ import Cta07 from "@/registry/blocks/marketing/cta/cta-07/cta"
 import Cta08 from "@/registry/blocks/marketing/cta/cta-08/cta"
 import Cta09 from "@/registry/blocks/marketing/cta/cta-09/cta"
 
+import { blocksPageMetadata } from "@/lib/seo"
+
+export const metadata = blocksPageMetadata("/blocks/marketing/cta", "Cta", "Ready-to-use Cta UI blocks for React and Tailwind. Preview variants and install with the SonoJS CLI.")
+
 const usage = (name: string) => `import Cta from "@/components/blocks/marketing/${name}/cta"
 
 export default function Page() {

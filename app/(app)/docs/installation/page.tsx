@@ -2,7 +2,14 @@ import Link from "next/link"
 
 import { ComponentSource } from "@/components/docs"
 import { buttonVariants } from "@sonojs/ui/components/button"
+import { docsGuideMetadata } from "@/lib/seo"
 import { cn } from "@/lib/utils"
+
+export const metadata = docsGuideMetadata(
+  "/docs/installation",
+  "Installation",
+  "Set up the SonoJS design system once, then add React components as you need them with the CLI."
+)
 
 export default function InstallationDocsPage() {
   return (

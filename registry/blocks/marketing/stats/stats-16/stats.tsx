@@ -112,10 +112,9 @@ export default function Stats({
             >
               <item.Icon
                 className={cn(
-                  "size-8 shrink-0 md:size-10",
+                  "size-8 shrink-0 text-[#f97316] md:size-10",
                   item.Icon === SalesIcon && "icon-dir"
                 )}
-                style={{ color: "#f97316", fill: "#f97316" }}
               />
               <dl className="flex min-w-0 flex-col">
                 <dd

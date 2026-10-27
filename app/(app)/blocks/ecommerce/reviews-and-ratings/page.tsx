@@ -11,6 +11,10 @@ import Rating06 from "@/registry/blocks/ecommerce/reviews-and-ratings/rating-06/
 import Rating07 from "@/registry/blocks/ecommerce/reviews-and-ratings/rating-07/rating"
 import Rating08 from "@/registry/blocks/ecommerce/reviews-and-ratings/rating-08/rating"
 
+import { blocksPageMetadata } from "@/lib/seo"
+
+export const metadata = blocksPageMetadata("/blocks/ecommerce/reviews-and-ratings", "Reviews And Ratings", "Ready-to-use Reviews And Ratings UI blocks for React and Tailwind. Preview variants and install with the SonoJS CLI.")
+
 const usage = (name: string) => `import Rating from "@/components/blocks/ecommerce/${name}/rating"
 
 export default function Page() {

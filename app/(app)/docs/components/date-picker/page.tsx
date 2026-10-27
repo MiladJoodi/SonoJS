@@ -6,6 +6,10 @@ import {
 } from "@/components/docs"
 import { withVariantCode } from "@/lib/docs-variant-examples"
 
+import { componentDocsMetadata } from "@/lib/seo"
+
+export const metadata = componentDocsMetadata("date-picker", "Date Picker")
+
 const exampleDefs = [
   {
     name: "date-picker-default",

@@ -11,6 +11,10 @@ import Jumbotron06 from "@/registry/blocks/marketing/jumbotron/jumbotron-06/jumb
 import Jumbotron07 from "@/registry/blocks/marketing/jumbotron/jumbotron-07/jumbotron"
 import Jumbotron08 from "@/registry/blocks/marketing/jumbotron/jumbotron-08/jumbotron"
 
+import { blocksPageMetadata } from "@/lib/seo"
+
+export const metadata = blocksPageMetadata("/blocks/marketing/jumbotron", "Jumbotron", "Ready-to-use Jumbotron UI blocks for React and Tailwind. Preview variants and install with the SonoJS CLI.")
+
 const usage = (name: string) => `import Jumbotron from "@/components/blocks/marketing/${name}/jumbotron"
 
 export default function Page() {

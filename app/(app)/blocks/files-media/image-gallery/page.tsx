@@ -13,6 +13,10 @@ import Gallery08 from "@/registry/blocks/files-media/image-gallery/gallery-08/ga
 import Gallery09 from "@/registry/blocks/files-media/image-gallery/gallery-09/gallery"
 import Gallery10 from "@/registry/blocks/files-media/image-gallery/gallery-10/gallery"
 
+import { blocksPageMetadata } from "@/lib/seo"
+
+export const metadata = blocksPageMetadata("/blocks/files-media/image-gallery", "Image Gallery", "Ready-to-use Image Gallery UI blocks for React and Tailwind. Preview variants and install with the SonoJS CLI.")
+
 const usage = (name: string) =>
   `import Gallery from "@/components/blocks/files-media/${name}/gallery"
 

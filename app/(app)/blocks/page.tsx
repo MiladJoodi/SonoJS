@@ -1,7 +1,15 @@
 import Link from "next/link"
 
 import { blocksNav, getBlocksStats } from "@/lib/blocks-nav"
+import { pageMetadata } from "@/lib/seo"
 import { cn } from "@/lib/utils"
+
+export const metadata = pageMetadata({
+  title: "Blocks",
+  description:
+    "Ready-made SonoJS UI blocks — authentication, navigation, marketing, ecommerce, and more. Preview variants and install with the CLI.",
+  path: "/blocks",
+})
 
 export default function BlocksIndexPage() {
   const stats = getBlocksStats()
@@ -11,8 +19,8 @@ export default function BlocksIndexPage() {
       <header className="space-y-3">
         <h1 className="text-h1">Blocks</h1>
         <p className="leading-relaxed text-muted-foreground">
-          Ready-made sections and screens for SonoJS apps. Most entries are
-          under development; Login is available now.
+          Ready-made sections and screens for SonoJS apps. Browse shipped
+          categories below; more patterns continue to land over time.
         </p>
         <p className="text-sm text-muted-foreground">
           {stats.categories} categories · {stats.total} blocks ·{" "}

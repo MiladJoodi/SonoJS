@@ -1,10 +1,11 @@
-const PRODUCTION_APP_URL = "https://sonojs.com"
+import { PRODUCTION_ORIGIN } from "@/lib/site-origin"
+
 const LOCAL_APP_URL = "http://localhost:3000"
 
 function resolveAppUrl() {
   const fromEnv = process.env.NEXT_PUBLIC_APP_URL?.trim()
   if (fromEnv) return fromEnv.replace(/\/$/, "")
-  if (process.env.NODE_ENV === "production") return PRODUCTION_APP_URL
+  if (process.env.NODE_ENV === "production") return PRODUCTION_ORIGIN
   return LOCAL_APP_URL
 }
 

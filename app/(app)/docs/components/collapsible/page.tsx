@@ -7,6 +7,10 @@ import {
 } from "@/components/docs"
 import { withVariantCode } from "@/lib/docs-variant-examples"
 
+import { componentDocsMetadata } from "@/lib/seo"
+
+export const metadata = componentDocsMetadata("collapsible", "Collapsible")
+
 const exampleDefs = [
   {
     name: "collapsible-default",

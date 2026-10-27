@@ -8,6 +8,10 @@ import DashboardLayout01 from "@/registry/blocks/application-layouts/dashboard-l
 import DashboardLayout02 from "@/registry/blocks/application-layouts/dashboard-layout/dashboard-layout-02/dashboard-layout"
 import DashboardLayout03 from "@/registry/blocks/application-layouts/dashboard-layout/dashboard-layout-03/dashboard-layout"
 
+import { blocksPageMetadata } from "@/lib/seo"
+
+export const metadata = blocksPageMetadata("/blocks/application-layouts/dashboard-layout", "Dashboard Layout", "Ready-to-use Dashboard Layout UI blocks for React and Tailwind. Preview variants and install with the SonoJS CLI.")
+
 const usage = (name: string) => `import DashboardLayout from "@/components/blocks/application-layouts/${name}/dashboard-layout"
 
 export default function Page() {

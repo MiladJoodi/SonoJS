@@ -8,6 +8,10 @@ import {
 } from "@/components/docs"
 import { highlightCode } from "@/lib/highlight-code"
 
+import { componentDocsMetadata } from "@/lib/seo"
+
+export const metadata = componentDocsMetadata("calendar", "Calendar")
+
 const calendarSources: Record<string, string> = {
   "calendar-default": `"use client"
 

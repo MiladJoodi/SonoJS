@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 
 import {
@@ -15,6 +16,20 @@ import {
 import { chartUsageSnippets } from "@/lib/chart-demo-export-name"
 import { getChartAdjacent, getChartEntry } from "@/lib/charts-catalog"
 import { readChartDemoSource } from "@/lib/read-chart-demo-source"
+import { chartViewMetadata } from "@/lib/seo"
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>
+}): Promise<Metadata> {
+  const { id } = await params
+  const entry = getChartEntry(id)
+  if (!entry) {
+    return { title: "Chart" }
+  }
+  return chartViewMetadata(id, entry.title, entry.status === "ported")
+}
 
 export default async function ChartViewPage({
   params,

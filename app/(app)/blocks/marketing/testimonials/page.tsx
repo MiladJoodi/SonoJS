@@ -16,6 +16,10 @@ import Testimonial11 from "@/registry/blocks/marketing/testimonials/testimonials
 import Testimonial12 from "@/registry/blocks/marketing/testimonials/testimonials-12/testimonial"
 import Testimonial13 from "@/registry/blocks/marketing/testimonials/testimonials-13/testimonial"
 
+import { blocksPageMetadata } from "@/lib/seo"
+
+export const metadata = blocksPageMetadata("/blocks/marketing/testimonials", "Testimonials", "Ready-to-use Testimonials UI blocks for React and Tailwind. Preview variants and install with the SonoJS CLI.")
+
 const usage = (name: string) => `import Testimonial from "@/components/blocks/marketing/${name}/testimonial"
 
 export default function Page() {

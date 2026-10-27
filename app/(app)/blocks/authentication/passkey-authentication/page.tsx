@@ -6,6 +6,10 @@ import PasskeyFirstForm from "@/registry/blocks/authentication/passkey/passkey-0
 import PasskeyPasswordForm from "@/registry/blocks/authentication/passkey/passkey-02/passkey-form"
 import PasskeySetupForm from "@/registry/blocks/authentication/passkey/passkey-03/passkey-form"
 
+import { blocksPageMetadata } from "@/lib/seo"
+
+export const metadata = blocksPageMetadata("/blocks/authentication/passkey-authentication", "Passkey Authentication", "Ready-to-use Passkey Authentication UI blocks for React and Tailwind. Preview variants and install with the SonoJS CLI.")
+
 const firstSource = `import PasskeyForm from "@/components/blocks/authentication/passkey-01/passkey-form"
 
 export default function Page() {

@@ -7,6 +7,10 @@ import PhoneRecoveryForm from "@/registry/blocks/authentication/account-recovery
 import IdentityRecoveryForm from "@/registry/blocks/authentication/account-recovery/account-recovery-03/account-recovery-form"
 import CodesRecoveryForm from "@/registry/blocks/authentication/account-recovery/account-recovery-04/account-recovery-form"
 
+import { blocksPageMetadata } from "@/lib/seo"
+
+export const metadata = blocksPageMetadata("/blocks/authentication/account-recovery", "Account Recovery", "Ready-to-use Account Recovery UI blocks for React and Tailwind. Preview variants and install with the SonoJS CLI.")
+
 const emailSource = `import AccountRecoveryForm from "@/components/blocks/authentication/account-recovery-01/account-recovery-form"
 
 export default function Page() {

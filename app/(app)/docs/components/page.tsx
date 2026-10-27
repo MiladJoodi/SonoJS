@@ -1,5 +1,13 @@
 import { ComponentsDirectory } from "@/components/docs/components-directory"
 import { getDocsComponentPages } from "@/lib/docs-nav"
+import { pageMetadata } from "@/lib/seo"
+
+export const metadata = pageMetadata({
+  title: "Components",
+  description:
+    "Browse SonoJS React components — accessible, Tailwind-styled, copy-source UI primitives for your app.",
+  path: "/docs/components",
+})
 
 export default function ComponentsIndexPage() {
   const components = getDocsComponentPages()

@@ -7,6 +7,10 @@ import {
 } from "@/components/docs"
 import { withVariantCode } from "@/lib/docs-variant-examples"
 
+import { componentDocsMetadata } from "@/lib/seo"
+
+export const metadata = componentDocsMetadata("marker", "Marker")
+
 const exampleDefs = [
   {
     name: "marker-default",

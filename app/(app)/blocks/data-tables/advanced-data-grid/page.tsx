@@ -7,6 +7,10 @@ import AdvancedDataGrid02 from "@/registry/blocks/data-tables/advanced-data-grid
 import AdvancedDataGrid03 from "@/registry/blocks/data-tables/advanced-data-grid/advanced-data-grid-03/table"
 import AdvancedDataGrid04 from "@/registry/blocks/data-tables/advanced-data-grid/advanced-data-grid-04/table"
 
+import { blocksPageMetadata } from "@/lib/seo"
+
+export const metadata = blocksPageMetadata("/blocks/data-tables/advanced-data-grid", "Advanced Data Grid", "Ready-to-use Advanced Data Grid UI blocks for React and Tailwind. Preview variants and install with the SonoJS CLI.")
+
 const usage = (name: string) =>
   `import AdvancedDataGrid from "@/components/blocks/data-tables/${name}/table"
 

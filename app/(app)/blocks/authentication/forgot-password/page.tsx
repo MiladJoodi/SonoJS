@@ -7,6 +7,10 @@ import SplitForgotPasswordForm from "@/registry/blocks/authentication/forgot-pas
 import OtpForgotPasswordForm from "@/registry/blocks/authentication/forgot-password/forgot-password-03/forgot-password-form"
 import MultiStepForgotPasswordForm from "@/registry/blocks/authentication/forgot-password/forgot-password-04/forgot-password-form"
 
+import { blocksPageMetadata } from "@/lib/seo"
+
+export const metadata = blocksPageMetadata("/blocks/authentication/forgot-password", "Forgot Password", "Ready-to-use Forgot Password UI blocks for React and Tailwind. Preview variants and install with the SonoJS CLI.")
+
 const minimalSource = `import ForgotPasswordForm from "@/components/blocks/authentication/forgot-password-01/forgot-password-form"
 
 export default function Page() {

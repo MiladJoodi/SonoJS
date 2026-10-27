@@ -8,6 +8,8 @@ import {
 import { ThemeProvider } from "@/components/theme-provider"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { siteConfig } from "@/lib/config"
+import { isProductionIndexingEnabled } from "@/lib/seo"
+import { PRODUCTION_ORIGIN } from "@/lib/site-origin"
 
 import "./globals.css"
 
@@ -22,15 +24,39 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 })
 
+const indexing = isProductionIndexingEnabled()
+
 export const metadata: Metadata = {
+  metadataBase: new URL(PRODUCTION_ORIGIN),
   title: {
     default: siteConfig.name,
     template: `%s · ${siteConfig.name}`,
   },
   description: siteConfig.description,
+  applicationName: siteConfig.name,
   icons: {
     icon: [{ url: "/favicon.png", type: "image/png" }],
   },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    siteName: siteConfig.name,
+    title: siteConfig.name,
+    description: siteConfig.description,
+    url: PRODUCTION_ORIGIN,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteConfig.name,
+    description: siteConfig.description,
+  },
+  robots: indexing
+    ? { index: true, follow: true }
+    : {
+        index: false,
+        follow: false,
+        googleBot: { index: false, follow: false },
+      },
 }
 
 export default function RootLayout({

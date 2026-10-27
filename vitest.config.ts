@@ -4,7 +4,10 @@ import { defineConfig } from "vitest/config"
 export default defineConfig({
   test: {
     environment: "node",
-    include: ["components/tools/endpoints/**/*.test.ts"],
+    include: [
+      "components/tools/endpoints/**/*.test.ts",
+      "lib/seo.test.ts",
+    ],
   },
   resolve: {
     alias: {

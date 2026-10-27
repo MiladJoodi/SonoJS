@@ -1,5 +1,13 @@
 import { ChartGallery } from "@/components/charts"
 import { chartsCatalog } from "@/lib/charts-catalog"
+import { pageMetadata } from "@/lib/seo"
+
+export const metadata = pageMetadata({
+  title: "Charts",
+  description:
+    "Browse SonoJS chart demos with live thumbnails — install React chart examples with the CLI.",
+  path: "/charts",
+})
 
 export default function ChartsIndexPage() {
   const pending = chartsCatalog.filter((e) => e.status === "pending").length

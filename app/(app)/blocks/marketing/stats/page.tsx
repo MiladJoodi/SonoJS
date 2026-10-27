@@ -19,6 +19,10 @@ import Stats14 from "@/registry/blocks/marketing/stats/stats-14/stats"
 import Stats15 from "@/registry/blocks/marketing/stats/stats-15/stats"
 import Stats16 from "@/registry/blocks/marketing/stats/stats-16/stats"
 
+import { blocksPageMetadata } from "@/lib/seo"
+
+export const metadata = blocksPageMetadata("/blocks/marketing/stats", "Stats", "Ready-to-use Stats UI blocks for React and Tailwind. Preview variants and install with the SonoJS CLI.")
+
 const usage = (name: string) => `import Stats from "@/components/blocks/marketing/${name}/stats"
 
 export default function Page() {

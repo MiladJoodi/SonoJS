@@ -31,6 +31,9 @@ desktop.ini
 *.tmp
 *.local
 
+# Local registry backups (must not be publicly served under public/)
+/_backups/
+
 # debug
 npm-debug.log*
 yarn-debug.log*

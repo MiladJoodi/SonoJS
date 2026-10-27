@@ -15,6 +15,10 @@ import ContentSection10 from "@/registry/blocks/marketing/content-section/conten
 import ContentSection11 from "@/registry/blocks/marketing/content-section/content-section-11/content-section"
 import ContentSection12 from "@/registry/blocks/marketing/content-section/content-section-12/content-section"
 
+import { blocksPageMetadata } from "@/lib/seo"
+
+export const metadata = blocksPageMetadata("/blocks/marketing/content-section", "Content Section", "Ready-to-use Content Section UI blocks for React and Tailwind. Preview variants and install with the SonoJS CLI.")
+
 const usage = (name: string) =>
   `import ContentSection from "@/components/blocks/marketing/${name}/content-section"
 

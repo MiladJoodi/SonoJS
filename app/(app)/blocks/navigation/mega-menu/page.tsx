@@ -9,6 +9,10 @@ import FeaturesMegaMenu from "@/registry/blocks/navigation/mega-menu/mega-menu-0
 import ToolsMegaMenu from "@/registry/blocks/navigation/mega-menu/mega-menu-05/mega-menu"
 import CompanyIconsMegaMenu from "@/registry/blocks/navigation/mega-menu/mega-menu-06/mega-menu"
 
+import { blocksPageMetadata } from "@/lib/seo"
+
+export const metadata = blocksPageMetadata("/blocks/navigation/mega-menu", "Mega Menu", "Ready-to-use Mega Menu UI blocks for React and Tailwind. Preview variants and install with the SonoJS CLI.")
+
 const usage = (name: string) => `import MegaMenu from "@/components/blocks/navigation/${name}/mega-menu"
 
 export default function Page() {

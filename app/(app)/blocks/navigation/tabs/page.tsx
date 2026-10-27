@@ -15,6 +15,10 @@ import Tabs10 from "@/registry/blocks/navigation/tabs/tabs-10/tabs"
 import Tabs11 from "@/registry/blocks/navigation/tabs/tabs-11/tabs"
 import Tabs12 from "@/registry/blocks/navigation/tabs/tabs-12/tabs"
 
+import { blocksPageMetadata } from "@/lib/seo"
+
+export const metadata = blocksPageMetadata("/blocks/navigation/tabs", "Tabs", "Ready-to-use Tabs UI blocks for React and Tailwind. Preview variants and install with the SonoJS CLI.")
+
 const usage = (name: string) => `import Tabs from "@/components/blocks/navigation/${name}/tabs"
 
 export default function Page() {

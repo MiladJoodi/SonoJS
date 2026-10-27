@@ -15,6 +15,10 @@ import CompactResourcesNavbar from "@/registry/blocks/navigation/navbar/navbar-1
 import NestedDropdownNavbar from "@/registry/blocks/navigation/navbar/navbar-11/navbar"
 import MenuOffcanvasNavbar from "@/registry/blocks/navigation/navbar/navbar-12/navbar"
 
+import { blocksPageMetadata } from "@/lib/seo"
+
+export const metadata = blocksPageMetadata("/blocks/navigation/navbar", "Navbar", "Ready-to-use Navbar UI blocks for React and Tailwind. Preview variants and install with the SonoJS CLI.")
+
 const usage = (name: string) => `import Navbar from "@/components/blocks/navigation/${name}/navbar"
 
 export default function Page() {

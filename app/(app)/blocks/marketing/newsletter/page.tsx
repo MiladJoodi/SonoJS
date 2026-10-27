@@ -12,6 +12,10 @@ import Newsletter07 from "@/registry/blocks/marketing/newsletter/newsletter-07/n
 import Newsletter08 from "@/registry/blocks/marketing/newsletter/newsletter-08/newsletter"
 import Newsletter09 from "@/registry/blocks/marketing/newsletter/newsletter-09/newsletter"
 
+import { blocksPageMetadata } from "@/lib/seo"
+
+export const metadata = blocksPageMetadata("/blocks/marketing/newsletter", "Newsletter", "Ready-to-use Newsletter UI blocks for React and Tailwind. Preview variants and install with the SonoJS CLI.")
+
 const usage = (name: string) => `import Newsletter from "@/components/blocks/marketing/${name}/newsletter"
 
 export default function Page() {

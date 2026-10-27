@@ -8,6 +8,10 @@ import {
 } from "@/components/docs"
 import { highlightCode } from "@/lib/highlight-code"
 
+import { componentDocsMetadata } from "@/lib/seo"
+
+export const metadata = componentDocsMetadata("badge", "Badge")
+
 const badgeSources: Record<string, string> = {
   "badge-default": `import { Badge } from "@/components/ui/badge"
 

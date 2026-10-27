@@ -7,6 +7,10 @@ import PaymentForm02 from "@/registry/blocks/payments-billing/payment-form/payme
 import PaymentForm03 from "@/registry/blocks/payments-billing/payment-form/payment-form-03/payment-form"
 import PaymentForm04 from "@/registry/blocks/payments-billing/payment-form/payment-form-04/payment-form"
 
+import { blocksPageMetadata } from "@/lib/seo"
+
+export const metadata = blocksPageMetadata("/blocks/payments-billing/payment-form", "Payment Form", "Ready-to-use Payment Form UI blocks for React and Tailwind. Preview variants and install with the SonoJS CLI.")
+
 const usage = (name: string) =>
   `import PaymentForm from "@/components/blocks/payments-billing/${name}/payment-form"
 

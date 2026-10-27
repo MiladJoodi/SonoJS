@@ -11,6 +11,10 @@ import DarkSignupForm from "@/registry/blocks/authentication/signup/signup-06/si
 import MultiStepSignupForm from "@/registry/blocks/authentication/signup/signup-07/signup-form"
 import SaasSignupForm from "@/registry/blocks/authentication/signup/signup-08/signup-form"
 
+import { blocksPageMetadata } from "@/lib/seo"
+
+export const metadata = blocksPageMetadata("/blocks/authentication/signup", "Signup", "Ready-to-use Signup UI blocks for React and Tailwind. Preview variants and install with the SonoJS CLI.")
+
 const minimalSource = `import SignupForm from "@/components/blocks/authentication/signup-01/signup-form"
 
 export default function Page() {

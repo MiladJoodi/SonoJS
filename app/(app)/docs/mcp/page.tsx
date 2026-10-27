@@ -1,5 +1,12 @@
 import { ComponentSource } from "@/components/docs"
 import { siteConfig } from "@/lib/config"
+import { docsGuideMetadata } from "@/lib/seo"
+
+export const metadata = docsGuideMetadata(
+  "/docs/mcp",
+  "MCP Server",
+  "Connect your MCP client so agents can discover and use SonoJS the same way the CLI does."
+)
 
 export default function McpDocsPage() {
   return (

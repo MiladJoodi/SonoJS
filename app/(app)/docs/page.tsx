@@ -1,7 +1,14 @@
 import Link from "next/link"
 
 import { buttonVariants } from "@sonojs/ui/components/button"
+import { docsGuideMetadata } from "@/lib/seo"
 import { cn } from "@/lib/utils"
+
+export const metadata = docsGuideMetadata(
+  "/docs",
+  "Introduction",
+  "SonoJS is a copy-source React component system. Init once, add what you need, and own the files in your app."
+)
 
 export default function DocsIndexPage() {
   return (

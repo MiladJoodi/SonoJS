@@ -14,6 +14,10 @@ import Features09 from "@/registry/blocks/marketing/features/features-09/feature
 import Features10 from "@/registry/blocks/marketing/features/features-10/features"
 import Features11 from "@/registry/blocks/marketing/features/features-11/features"
 
+import { blocksPageMetadata } from "@/lib/seo"
+
+export const metadata = blocksPageMetadata("/blocks/marketing/features", "Features", "Ready-to-use Features UI blocks for React and Tailwind. Preview variants and install with the SonoJS CLI.")
+
 const usage = (name: string) => `import Features from "@/components/blocks/marketing/${name}/features"
 
 export default function Page() {

@@ -11,6 +11,10 @@ import ProductDetails06 from "@/registry/blocks/ecommerce/product-details/produc
 import ProductDetails07 from "@/registry/blocks/ecommerce/product-details/product-details-07/product-details"
 import ProductDetails08 from "@/registry/blocks/ecommerce/product-details/product-details-08/product-details"
 
+import { blocksPageMetadata } from "@/lib/seo"
+
+export const metadata = blocksPageMetadata("/blocks/ecommerce/product-details", "Product Details", "Ready-to-use Product Details UI blocks for React and Tailwind. Preview variants and install with the SonoJS CLI.")
+
 const usage = (name: string) =>
   `import ProductDetails from "@/components/blocks/ecommerce/${name}/product-details"
 

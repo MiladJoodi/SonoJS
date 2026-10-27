@@ -7,6 +7,10 @@ import StrengthResetPasswordForm from "@/registry/blocks/authentication/reset-pa
 import SplitResetPasswordForm from "@/registry/blocks/authentication/reset-password/reset-password-03/reset-password-form"
 import SuccessResetPasswordForm from "@/registry/blocks/authentication/reset-password/reset-password-04/reset-password-form"
 
+import { blocksPageMetadata } from "@/lib/seo"
+
+export const metadata = blocksPageMetadata("/blocks/authentication/reset-password", "Reset Password", "Ready-to-use Reset Password UI blocks for React and Tailwind. Preview variants and install with the SonoJS CLI.")
+
 const minimalSource = `import ResetPasswordForm from "@/components/blocks/authentication/reset-password-01/reset-password-form"
 
 export default function Page() {

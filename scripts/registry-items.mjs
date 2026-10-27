@@ -296,6 +296,78 @@ function ecommerceProductListBlock(
   }
 }
 
+/** Checkout flow: `checkout.tsx` + local product / payment-mark images. */
+function ecommerceCheckoutBlock(
+  slug,
+  description,
+  {
+    dependencies = [],
+    registryDependencies = [
+      "button",
+      "checkbox",
+      "input",
+      "label",
+      "radio-group",
+    ],
+    images = [],
+  } = {}
+) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    ...(dependencies?.length ? { dependencies } : {}),
+    ...(registryDependencies?.length ? { registryDependencies } : {}),
+    files: [
+      {
+        path: `registry/blocks/ecommerce/checkout/${slug}/checkout.tsx`,
+        type: "registry:component",
+        target: `components/blocks/ecommerce/${slug}/checkout.tsx`,
+      },
+      ...images.map((file) => ({
+        path: `registry/blocks/ecommerce/checkout/${slug}/images/${file}`,
+        type: "registry:file",
+        target: `components/blocks/ecommerce/${slug}/images/${file}`,
+      })),
+    ],
+  }
+}
+
+/** Shopping cart page: `shopping-cart.tsx` + local product images. */
+function ecommerceShoppingCartBlock(
+  slug,
+  description,
+  {
+    dependencies = ["lucide-react"],
+    registryDependencies = ["button", "input", "label", "separator"],
+    images = [],
+  } = {}
+) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    ...(dependencies?.length ? { dependencies } : {}),
+    ...(registryDependencies?.length ? { registryDependencies } : {}),
+    files: [
+      {
+        path: `registry/blocks/ecommerce/shopping-cart/${slug}/shopping-cart.tsx`,
+        type: "registry:component",
+        target: `components/blocks/ecommerce/${slug}/shopping-cart.tsx`,
+      },
+      ...images.map((file) => ({
+        path: `registry/blocks/ecommerce/shopping-cart/${slug}/images/${file}`,
+        type: "registry:file",
+        target: `components/blocks/ecommerce/${slug}/images/${file}`,
+      })),
+    ],
+  }
+}
+
 /** Order summary / confirmation card: `order-summary.tsx` + local product images. */
 function ecommerceOrderSummaryBlock(
   slug,
@@ -4340,6 +4412,119 @@ const registryItemsRaw = [
       ],
     }
   ),
+  ecommerceCheckoutBlock(
+    "checkout-01",
+    "Fixed sidebar checkout — sticky muted bag with promo and totals left, delivery grid and Card/PayPal tiles right (RTL/LTR).",
+    {
+      images: [
+        "sweater.webp",
+        "tshirt.webp",
+        "jacket.webp",
+        "sneakers.webp",
+        "visa.webp",
+        "amex.webp",
+        "mastercard.webp",
+        "paypal.webp",
+      ],
+    }
+  ),
+  ecommerceCheckoutBlock(
+    "checkout-02",
+    "Two-column checkout — delivery and payment form left, interactive bag with qty steppers and live totals right (RTL/LTR).",
+    {
+      images: [
+        "sneakers.webp",
+        "watch.webp",
+        "tshirt.webp",
+        "visa.webp",
+        "amex.webp",
+        "mastercard.webp",
+        "paypal.webp",
+      ],
+    }
+  ),
+  ecommerceCheckoutBlock(
+    "checkout-03",
+    "Stepper checkout — Cart → Checkout → Order progress, form and promo left, sticky summary with Pay now right (RTL/LTR).",
+    {
+      images: ["visa.webp", "amex.webp", "mastercard.webp", "paypal.webp"],
+    }
+  ),
+  ecommerceCheckoutBlock(
+    "checkout-04",
+    "Payment-form checkout — interactive bag left, delivery and payment right with card fields when Card is selected (RTL/LTR).",
+    {
+      images: [
+        "sneakers.webp",
+        "watch.webp",
+        "tshirt.webp",
+        "visa.webp",
+        "amex.webp",
+        "mastercard.webp",
+        "paypal.webp",
+      ],
+    }
+  ),
+  ecommerceCheckoutBlock(
+    "checkout-05",
+    "Vertical-fields checkout — stacked form left, muted summary first on mobile, always-stacked card fields (RTL/LTR).",
+    {
+      images: [
+        "sneakers.webp",
+        "watch.webp",
+        "tshirt.webp",
+        "visa.webp",
+        "amex.webp",
+        "mastercard.webp",
+        "paypal.webp",
+      ],
+    }
+  ),
+  ecommerceCheckoutBlock(
+    "checkout-06",
+    "One-column checkout — max-width stack with Checkout header, bag, muted totals, then two-column delivery and card grids (RTL/LTR).",
+    {
+      images: [
+        "sneakers.webp",
+        "watch.webp",
+        "tshirt.webp",
+        "visa.webp",
+        "amex.webp",
+        "mastercard.webp",
+        "paypal.webp",
+      ],
+    }
+  ),
+  ecommerceCheckoutBlock(
+    "checkout-07",
+    "Modal checkout — Open trigger, Dialog with totals strip, two-column fields, and Cancel / Pay footer (RTL/LTR).",
+    {
+      registryDependencies: [
+        "button",
+        "checkbox",
+        "dialog",
+        "input",
+        "label",
+        "radio-group",
+      ],
+      images: ["visa.webp", "amex.webp", "mastercard.webp", "paypal.webp"],
+    }
+  ),
+  ecommerceCheckoutBlock(
+    "checkout-08",
+    "Drawer checkout — Open trigger, end-edge Sheet titled Shopping cart with stacked delivery/card fields and Pay CTA (RTL/LTR).",
+    {
+      registryDependencies: [
+        "button",
+        "checkbox",
+        "input",
+        "label",
+        "radio-group",
+        "sheet",
+      ],
+      images: ["visa.webp", "amex.webp", "mastercard.webp", "paypal.webp"],
+    }
+  ),
   ecommerceOrderSummaryBlock(
     "order-summary-01",
     "Boutique receipt ticket — success stamp header, order pipeline, ships-to card, compact line items, and invoice CTA (RTL/LTR).",
@@ -4506,6 +4691,102 @@ const registryItemsRaw = [
         "tee-4.webp",
         "avatar.webp",
       ],
+    }
+  ),
+  ecommerceShoppingCartBlock(
+    "shopping-cart-01",
+    "Classic bag with free-shipping progress, bordered line items, and sticky order-details card.",
+    {
+      images: ["sneaker.webp", "watch.webp", "sunglass.webp"],
+    }
+  ),
+  ecommerceShoppingCartBlock(
+    "shopping-cart-02",
+    "Split rail cart with size chips, divided rows, and full-height summary column.",
+    {
+      images: [
+        "sneaker.webp",
+        "watch.webp",
+        "watch-alt.webp",
+        "watch-2.webp",
+      ],
+    }
+  ),
+  ecommerceShoppingCartBlock(
+    "shopping-cart-03",
+    "Stacked product cards with color swatches, save/remove actions, and payment logos.",
+    {
+      images: [
+        "watch-1.webp",
+        "watch-5.webp",
+        "sunglass.webp",
+        "mastercard.webp",
+        "visa.webp",
+        "amex.webp",
+      ],
+    }
+  ),
+  ecommerceShoppingCartBlock(
+    "shopping-cart-04",
+    "Configured device cards with spec checklists, warranty note, quote + checkout CTAs.",
+    {
+      registryDependencies: ["button"],
+      images: [
+        "laptop-1.webp",
+        "laptop-2.webp",
+        "mastercard.webp",
+        "visa.webp",
+        "amex.webp",
+      ],
+    }
+  ),
+  ecommerceShoppingCartBlock(
+    "shopping-cart-05",
+    "Skincare table cart with receipt-style sticky sidebar and promo field.",
+    {
+      images: [
+        "product-1.webp",
+        "product-2.webp",
+        "product-3.webp",
+        "product-4.webp",
+        "product-5.webp",
+      ],
+    }
+  ),
+  ecommerceShoppingCartBlock(
+    "shopping-cart-06",
+    "Sale fashion rows with % badges, compare-at prices, wishlist, and border-start summary.",
+    {
+      images: ["tee-1.webp", "tee-2.webp", "tee-3.webp", "tee-4.webp"],
+    }
+  ),
+  ecommerceShoppingCartBlock(
+    "shopping-cart-07",
+    "Focused bag modal with item grid, dashed totals panel, and dual footer actions.",
+    {
+      registryDependencies: ["button"],
+      images: [
+        "tshirt.webp",
+        "sweater.webp",
+        "echo-elegance.webp",
+        "watch.webp",
+      ],
+    }
+  ),
+  ecommerceShoppingCartBlock(
+    "shopping-cart-08",
+    "End-edge drawer with free-shipping progress, size selects, and sticky checkout footer.",
+    {
+      registryDependencies: ["button"],
+      images: ["sneaker.webp", "watch-1.webp", "watch-2.webp", "watch-3.webp"],
+    }
+  ),
+  ecommerceShoppingCartBlock(
+    "shopping-cart-09",
+    "Framed spreadsheet cart with size badges, unit meta, and end-aligned totals.",
+    {
+      registryDependencies: ["button"],
+      images: ["sunscreen.webp", "sweater.webp", "tshirt.webp", "sneaker.webp"],
     }
   ),
   filesMediaGalleryBlock(

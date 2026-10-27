@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 
 import { ChartGallery } from "@/components/charts"
@@ -6,6 +7,20 @@ import {
   getChartCategoryIcon,
   isChartCategory,
 } from "@/lib/charts-catalog"
+import { chartCategoryMetadata } from "@/lib/seo"
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ category: string }>
+}): Promise<Metadata> {
+  const { category } = await params
+  if (!isChartCategory(category)) {
+    return { title: "Charts" }
+  }
+  const meta = CHART_CATEGORY_META[category]
+  return chartCategoryMetadata(category, meta.title, meta.description)
+}
 
 export default async function ChartCategoryPage({
   params,

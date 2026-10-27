@@ -13,6 +13,10 @@ import Pricing08 from "@/registry/blocks/marketing/pricing/pricing-08/pricing"
 import Pricing09 from "@/registry/blocks/marketing/pricing/pricing-09/pricing"
 import Pricing10 from "@/registry/blocks/marketing/pricing/pricing-10/pricing"
 
+import { blocksPageMetadata } from "@/lib/seo"
+
+export const metadata = blocksPageMetadata("/blocks/marketing/pricing", "Pricing", "Ready-to-use Pricing UI blocks for React and Tailwind. Preview variants and install with the SonoJS CLI.")
+
 const usage = (name: string) => `import Pricing from "@/components/blocks/marketing/${name}/pricing"
 
 export default function Page() {

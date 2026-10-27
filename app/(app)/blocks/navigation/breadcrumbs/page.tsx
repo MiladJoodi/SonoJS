@@ -12,6 +12,10 @@ import BoxedHomeBreadcrumbs from "@/registry/blocks/navigation/breadcrumbs/bread
 import EllipsisBreadcrumbs from "@/registry/blocks/navigation/breadcrumbs/breadcrumbs-08/breadcrumbs"
 import SegmentBreadcrumbs from "@/registry/blocks/navigation/breadcrumbs/breadcrumbs-09/breadcrumbs"
 
+import { blocksPageMetadata } from "@/lib/seo"
+
+export const metadata = blocksPageMetadata("/blocks/navigation/breadcrumbs", "Breadcrumbs", "Ready-to-use Breadcrumbs UI blocks for React and Tailwind. Preview variants and install with the SonoJS CLI.")
+
 const usage = (name: string) => `import Breadcrumbs from "@/components/blocks/navigation/${name}/breadcrumbs"
 
 export default function Page() {

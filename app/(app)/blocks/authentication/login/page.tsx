@@ -19,6 +19,10 @@ import WelcomePhotoLoginForm from "@/registry/blocks/authentication/login/login-
 import IllustratedBrandLoginForm from "@/registry/blocks/authentication/login/login-15/login-form"
 import GradientAccessLoginForm from "@/registry/blocks/authentication/login/login-16/login-form"
 
+import { blocksPageMetadata } from "@/lib/seo"
+
+export const metadata = blocksPageMetadata("/blocks/authentication/login", "Login", "Ready-to-use Login UI blocks for React and Tailwind. Preview variants and install with the SonoJS CLI.")
+
 const blockSource = `import LoginForm from "@/components/blocks/authentication/login-01/login-form"
 
 export default function Page() {

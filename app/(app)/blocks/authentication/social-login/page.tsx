@@ -7,6 +7,10 @@ import SocialEmailForm from "@/registry/blocks/authentication/social-login/socia
 import SocialIconsForm from "@/registry/blocks/authentication/social-login/social-login-03/social-login-form"
 import SocialSplitForm from "@/registry/blocks/authentication/social-login/social-login-04/social-login-form"
 
+import { blocksPageMetadata } from "@/lib/seo"
+
+export const metadata = blocksPageMetadata("/blocks/authentication/social-login", "Social Login", "Ready-to-use Social Login UI blocks for React and Tailwind. Preview variants and install with the SonoJS CLI.")
+
 const onlySource = `import SocialLoginForm from "@/components/blocks/authentication/social-login-01/social-login-form"
 
 export default function Page() {

@@ -35,6 +35,16 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
+        // Block previews: meta noindex + header (query variants stay non-indexable)
+        source: "/view/:path*",
+        headers: [
+          {
+            key: "X-Robots-Tag",
+            value: "noindex, nofollow",
+          },
+        ],
+      },
+      {
         // Stable URLs, changing JSON — never immutable
         source: "/r/:path*",
         headers: [...revalidateImmediately],

@@ -19,6 +19,10 @@ import ContactColumnsFooter from "@/registry/blocks/marketing/footer/footer-14/f
 import CareerCtaFooter from "@/registry/blocks/marketing/footer/footer-15/footer"
 import NewsletterLegalFooter from "@/registry/blocks/marketing/footer/footer-16/footer"
 
+import { blocksPageMetadata } from "@/lib/seo"
+
+export const metadata = blocksPageMetadata("/blocks/marketing/footer", "Footer", "Ready-to-use Footer UI blocks for React and Tailwind. Preview variants and install with the SonoJS CLI.")
+
 const usage = (name: string) => `import Footer from "@/components/blocks/marketing/${name}/footer"
 
 export default function Page() {

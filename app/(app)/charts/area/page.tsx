@@ -5,6 +5,15 @@ import {
   chartViewHref,
   getChartsByCategory,
 } from "@/lib/charts-catalog"
+import { chartCategoryMetadata } from "@/lib/seo"
+
+const areaMeta = CHART_CATEGORY_META.area
+
+export const metadata = chartCategoryMetadata(
+  "area",
+  areaMeta.title,
+  areaMeta.description
+)
 
 /** Static route keeps `/charts/area` out of the dynamic `[category]` segment. */
 export default function ChartAreaCategoryPage() {

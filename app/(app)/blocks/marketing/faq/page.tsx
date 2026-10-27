@@ -23,6 +23,10 @@ import Faq18 from "@/registry/blocks/marketing/faq/faq-18/faq"
 import Faq19 from "@/registry/blocks/marketing/faq/faq-19/faq"
 import Faq20 from "@/registry/blocks/marketing/faq/faq-20/faq"
 
+import { blocksPageMetadata } from "@/lib/seo"
+
+export const metadata = blocksPageMetadata("/blocks/marketing/faq", "Faq", "Ready-to-use Faq UI blocks for React and Tailwind. Preview variants and install with the SonoJS CLI.")
+
 const usage = (name: string) =>
   `import Faq from "@/components/blocks/marketing/${name}/faq"
 

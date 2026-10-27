@@ -13,6 +13,10 @@ import Hero08 from "@/registry/blocks/marketing/hero/hero-08/hero"
 import Hero09 from "@/registry/blocks/marketing/hero/hero-09/hero"
 import Hero10 from "@/registry/blocks/marketing/hero/hero-10/hero"
 
+import { blocksPageMetadata } from "@/lib/seo"
+
+export const metadata = blocksPageMetadata("/blocks/marketing/hero", "Hero", "Ready-to-use Hero UI blocks for React and Tailwind. Preview variants and install with the SonoJS CLI.")
+
 const usage = (name: string) => `import Hero from "@/components/blocks/marketing/${name}/hero"
 
 export default function Page() {

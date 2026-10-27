@@ -8,6 +8,10 @@ import {
 } from "@/components/docs"
 import { highlightCode } from "@/lib/highlight-code"
 
+import { componentDocsMetadata } from "@/lib/seo"
+
+export const metadata = componentDocsMetadata("button-group", "Button Group")
+
 const buttonGroupSources: Record<string, string> = {
   "button-group-default": `"use client"
 

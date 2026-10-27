@@ -7,6 +7,10 @@ import AutoFocusOtpForm from "@/registry/blocks/authentication/otp-verification/
 import EmailOtpForm from "@/registry/blocks/authentication/otp-verification/otp-verification-03/otp-verification-form"
 import PhoneOtpForm from "@/registry/blocks/authentication/otp-verification/otp-verification-04/otp-verification-form"
 
+import { blocksPageMetadata } from "@/lib/seo"
+
+export const metadata = blocksPageMetadata("/blocks/authentication/otp-verification", "Otp Verification", "Ready-to-use Otp Verification UI blocks for React and Tailwind. Preview variants and install with the SonoJS CLI.")
+
 const digitsSource = `import OtpVerificationForm from "@/components/blocks/authentication/otp-verification-01/otp-verification-form"
 
 export default function Page() {

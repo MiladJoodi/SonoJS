@@ -115,7 +115,6 @@ export default function Stats({
                   "mx-auto size-8 text-primary",
                   item.Icon === SalesIcon && "icon-dir"
                 )}
-                style={{ fill: "currentColor", color: "currentColor" }}
               />
               <dl className="flex flex-col">
                 <dd

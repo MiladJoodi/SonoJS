@@ -17,6 +17,10 @@ import MobileNavigation12 from "@/registry/blocks/navigation/mobile-navigation/m
 import MobileNavigation13 from "@/registry/blocks/navigation/mobile-navigation/mobile-navigation-13/mobile-navigation"
 import MobileNavigation14 from "@/registry/blocks/navigation/mobile-navigation/mobile-navigation-14/mobile-navigation"
 
+import { blocksPageMetadata } from "@/lib/seo"
+
+export const metadata = blocksPageMetadata("/blocks/navigation/mobile-navigation", "Mobile Navigation", "Ready-to-use Mobile Navigation UI blocks for React and Tailwind. Preview variants and install with the SonoJS CLI.")
+
 const usage = (name: string) => `import MobileNavigation from "@/components/blocks/navigation/${name}/mobile-navigation"
 
 export default function Page() {

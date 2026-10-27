@@ -4,10 +4,13 @@ import Link from "next/link"
 import { getAllToolItems, toolsNav } from "@/lib/tools-nav"
 import { cn } from "@/lib/utils"
 
-export const metadata: Metadata = {
+import { pageMetadata } from "@/lib/seo"
+
+export const metadata: Metadata = pageMetadata({
   title: "Tools",
   description: "Browser utilities for everyday web development.",
-}
+  path: "/tools",
+})
 
 export default function ToolsIndexPage() {
   const tools = getAllToolItems()

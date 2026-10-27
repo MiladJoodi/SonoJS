@@ -13,6 +13,10 @@ import Team08 from "@/registry/blocks/marketing/team/team-08/team"
 import Team09 from "@/registry/blocks/marketing/team/team-09/team"
 import Team10 from "@/registry/blocks/marketing/team/team-10/team"
 
+import { blocksPageMetadata } from "@/lib/seo"
+
+export const metadata = blocksPageMetadata("/blocks/marketing/team", "Team", "Ready-to-use Team UI blocks for React and Tailwind. Preview variants and install with the SonoJS CLI.")
+
 const usage = (name: string) => `import Team from "@/components/blocks/marketing/${name}/team"
 
 export default function Page() {

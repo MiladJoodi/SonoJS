@@ -7,6 +7,10 @@ import SmsTwoFactorForm from "@/registry/blocks/authentication/two-factor/two-fa
 import BackupTwoFactorForm from "@/registry/blocks/authentication/two-factor/two-factor-03/two-factor-form"
 import ChooseTwoFactorForm from "@/registry/blocks/authentication/two-factor/two-factor-04/two-factor-form"
 
+import { blocksPageMetadata } from "@/lib/seo"
+
+export const metadata = blocksPageMetadata("/blocks/authentication/two-factor-authentication", "Two Factor Authentication", "Ready-to-use Two Factor Authentication UI blocks for React and Tailwind. Preview variants and install with the SonoJS CLI.")
+
 const authenticatorSource = `import TwoFactorForm from "@/components/blocks/authentication/two-factor-01/two-factor-form"
 
 export default function Page() {

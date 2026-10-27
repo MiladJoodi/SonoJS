@@ -11,6 +11,10 @@ import AccentSidebar from "@/registry/blocks/navigation/sidebar/sidebar-06/sideb
 import SearchSidebar from "@/registry/blocks/navigation/sidebar/sidebar-07/sidebar"
 import ChatSidebar from "@/registry/blocks/navigation/sidebar/sidebar-08/sidebar"
 
+import { blocksPageMetadata } from "@/lib/seo"
+
+export const metadata = blocksPageMetadata("/blocks/navigation/sidebar", "Sidebar", "Ready-to-use Sidebar UI blocks for React and Tailwind. Preview variants and install with the SonoJS CLI.")
+
 const usage = (name: string) => `import Sidebar from "@/components/blocks/navigation/${name}/sidebar"
 
 export default function Page() {

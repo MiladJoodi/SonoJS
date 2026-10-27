@@ -7,6 +7,10 @@ import {
 } from "@/components/docs"
 import { withVariantCode } from "@/lib/docs-variant-examples"
 
+import { componentDocsMetadata } from "@/lib/seo"
+
+export const metadata = componentDocsMetadata("dropdown-menu", "Dropdown Menu")
+
 const exampleDefs = [
   {
     name: "dropdown-menu-default",

@@ -20,6 +20,10 @@ import Banner13 from "@/registry/blocks/marketing/banner/banner-13/banner"
 import Banner14 from "@/registry/blocks/marketing/banner/banner-14/banner"
 import Banner15 from "@/registry/blocks/marketing/banner/banner-15/banner"
 
+import { blocksPageMetadata } from "@/lib/seo"
+
+export const metadata = blocksPageMetadata("/blocks/marketing/banner", "Banner", "Ready-to-use Banner UI blocks for React and Tailwind. Preview variants and install with the SonoJS CLI.")
+
 const usage = (name: string) => `import Banner from "@/components/blocks/marketing/${name}/banner"
 
 export default function Page() {

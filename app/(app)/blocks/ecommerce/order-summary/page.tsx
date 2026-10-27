@@ -9,6 +9,10 @@ import OrderSummary04 from "@/registry/blocks/ecommerce/order-summary/order-summ
 import OrderSummary05 from "@/registry/blocks/ecommerce/order-summary/order-summary-05/order-summary"
 import OrderSummary06 from "@/registry/blocks/ecommerce/order-summary/order-summary-06/order-summary"
 
+import { blocksPageMetadata } from "@/lib/seo"
+
+export const metadata = blocksPageMetadata("/blocks/ecommerce/order-summary", "Order Summary", "Ready-to-use Order Summary UI blocks for React and Tailwind. Preview variants and install with the SonoJS CLI.")
+
 const usage = (name: string) =>
   `import OrderSummary from "@/components/blocks/ecommerce/${name}/order-summary"
 

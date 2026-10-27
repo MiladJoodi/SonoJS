@@ -1,9 +1,26 @@
 import Link from "next/link"
 
 import { CopyButton } from "@/components/docs"
+import { JsonLd } from "@/components/seo/json-ld"
 import { siteConfig } from "@/lib/config"
+import { absoluteUrl, pageMetadata } from "@/lib/seo"
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@sonojs/ui/components/button"
+
+export const metadata = pageMetadata({
+  title: "SonoJS — Agent-friendly React UI components",
+  description: siteConfig.description,
+  path: "/",
+  absoluteTitle: true,
+})
+
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: siteConfig.name,
+  url: absoluteUrl("/"),
+  description: siteConfig.description,
+}
 
 const steps = [
   {
@@ -29,6 +46,7 @@ export default function HomePage() {
       data-home-surface=""
       className="relative -mt-(--header-height) flex flex-1 flex-col overflow-hidden pt-(--header-height)"
     >
+      <JsonLd data={websiteJsonLd} />
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0"

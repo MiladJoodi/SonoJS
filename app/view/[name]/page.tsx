@@ -1,10 +1,12 @@
 import type { ComponentType, ReactNode } from "react"
+import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 
 import { DirectionProvider } from "@/components/direction"
 import { ModeSwitcher } from "@/components/site-header"
-import { cn } from "@/lib/utils"
 import type { Direction } from "@/lib/direction"
+import { noindexMetadata } from "@/lib/seo"
+import { cn } from "@/lib/utils"
 import LoginForm from "@/registry/blocks/authentication/login/login-01/login-form"
 import SocialLoginForm from "@/registry/blocks/authentication/login/login-02/login-form"
 import PasswordlessLoginForm from "@/registry/blocks/authentication/login/login-03/login-form"
@@ -166,6 +168,14 @@ import ProductList08 from "@/registry/blocks/ecommerce/product-list/product-list
 import ProductList09 from "@/registry/blocks/ecommerce/product-list/product-list-09/product-list"
 import ProductList10 from "@/registry/blocks/ecommerce/product-list/product-list-10/product-list"
 import ProductList11 from "@/registry/blocks/ecommerce/product-list/product-list-11/product-list"
+import Checkout01 from "@/registry/blocks/ecommerce/checkout/checkout-01/checkout"
+import Checkout02 from "@/registry/blocks/ecommerce/checkout/checkout-02/checkout"
+import Checkout03 from "@/registry/blocks/ecommerce/checkout/checkout-03/checkout"
+import Checkout04 from "@/registry/blocks/ecommerce/checkout/checkout-04/checkout"
+import Checkout05 from "@/registry/blocks/ecommerce/checkout/checkout-05/checkout"
+import Checkout06 from "@/registry/blocks/ecommerce/checkout/checkout-06/checkout"
+import Checkout07 from "@/registry/blocks/ecommerce/checkout/checkout-07/checkout"
+import Checkout08 from "@/registry/blocks/ecommerce/checkout/checkout-08/checkout"
 import OrderSummary01 from "@/registry/blocks/ecommerce/order-summary/order-summary-01/order-summary"
 import OrderSummary02 from "@/registry/blocks/ecommerce/order-summary/order-summary-02/order-summary"
 import OrderSummary03 from "@/registry/blocks/ecommerce/order-summary/order-summary-03/order-summary"
@@ -180,6 +190,15 @@ import ProductDetails05 from "@/registry/blocks/ecommerce/product-details/produc
 import ProductDetails06 from "@/registry/blocks/ecommerce/product-details/product-details-06/product-details"
 import ProductDetails07 from "@/registry/blocks/ecommerce/product-details/product-details-07/product-details"
 import ProductDetails08 from "@/registry/blocks/ecommerce/product-details/product-details-08/product-details"
+import ShoppingCart01 from "@/registry/blocks/ecommerce/shopping-cart/shopping-cart-01/shopping-cart"
+import ShoppingCart02 from "@/registry/blocks/ecommerce/shopping-cart/shopping-cart-02/shopping-cart"
+import ShoppingCart03 from "@/registry/blocks/ecommerce/shopping-cart/shopping-cart-03/shopping-cart"
+import ShoppingCart04 from "@/registry/blocks/ecommerce/shopping-cart/shopping-cart-04/shopping-cart"
+import ShoppingCart05 from "@/registry/blocks/ecommerce/shopping-cart/shopping-cart-05/shopping-cart"
+import ShoppingCart06 from "@/registry/blocks/ecommerce/shopping-cart/shopping-cart-06/shopping-cart"
+import ShoppingCart07 from "@/registry/blocks/ecommerce/shopping-cart/shopping-cart-07/shopping-cart"
+import ShoppingCart08 from "@/registry/blocks/ecommerce/shopping-cart/shopping-cart-08/shopping-cart"
+import ShoppingCart09 from "@/registry/blocks/ecommerce/shopping-cart/shopping-cart-09/shopping-cart"
 import Gallery01 from "@/registry/blocks/files-media/image-gallery/gallery-01/gallery"
 import Gallery02 from "@/registry/blocks/files-media/image-gallery/gallery-02/gallery"
 import Gallery03 from "@/registry/blocks/files-media/image-gallery/gallery-03/gallery"
@@ -1355,6 +1374,78 @@ const views: Record<string, ComponentType> = {
       </div>
     )
   },
+  "checkout-01": function Checkout01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Checkout01 />
+        </div>
+      </div>
+    )
+  },
+  "checkout-02": function Checkout02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Checkout02 />
+        </div>
+      </div>
+    )
+  },
+  "checkout-03": function Checkout03View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Checkout03 />
+        </div>
+      </div>
+    )
+  },
+  "checkout-04": function Checkout04View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Checkout04 />
+        </div>
+      </div>
+    )
+  },
+  "checkout-05": function Checkout05View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Checkout05 />
+        </div>
+      </div>
+    )
+  },
+  "checkout-06": function Checkout06View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Checkout06 />
+        </div>
+      </div>
+    )
+  },
+  "checkout-07": function Checkout07View() {
+    return (
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Checkout07 />
+        </div>
+      </div>
+    )
+  },
+  "checkout-08": function Checkout08View() {
+    return (
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Checkout08 />
+        </div>
+      </div>
+    )
+  },
   "order-summary-01": function OrderSummary01View() {
     return (
       <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
@@ -1477,6 +1568,87 @@ const views: Record<string, ComponentType> = {
       <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0">
         <div className="w-full">
           <ProductDetails08 />
+        </div>
+      </div>
+    )
+  },
+  "shopping-cart-01": function ShoppingCart01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0">
+        <div className="w-full">
+          <ShoppingCart01 />
+        </div>
+      </div>
+    )
+  },
+  "shopping-cart-02": function ShoppingCart02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0">
+        <div className="w-full">
+          <ShoppingCart02 />
+        </div>
+      </div>
+    )
+  },
+  "shopping-cart-03": function ShoppingCart03View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0">
+        <div className="w-full">
+          <ShoppingCart03 />
+        </div>
+      </div>
+    )
+  },
+  "shopping-cart-04": function ShoppingCart04View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0">
+        <div className="w-full">
+          <ShoppingCart04 />
+        </div>
+      </div>
+    )
+  },
+  "shopping-cart-05": function ShoppingCart05View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0">
+        <div className="w-full">
+          <ShoppingCart05 />
+        </div>
+      </div>
+    )
+  },
+  "shopping-cart-06": function ShoppingCart06View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0">
+        <div className="w-full">
+          <ShoppingCart06 />
+        </div>
+      </div>
+    )
+  },
+  "shopping-cart-07": function ShoppingCart07View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0">
+        <div className="w-full">
+          <ShoppingCart07 />
+        </div>
+      </div>
+    )
+  },
+  "shopping-cart-08": function ShoppingCart08View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0">
+        <div className="w-full">
+          <ShoppingCart08 />
+        </div>
+      </div>
+    )
+  },
+  "shopping-cart-09": function ShoppingCart09View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0">
+        <div className="w-full">
+          <ShoppingCart09 />
         </div>
       </div>
     )
@@ -3091,6 +3263,22 @@ const views: Record<string, ComponentType> = {
   "navbar-10": CompactResourcesNavbar,
   "navbar-11": NestedDropdownNavbar,
   "navbar-12": MenuOffcanvasNavbar,
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ name: string }>
+}): Promise<Metadata> {
+  const { name } = await params
+  if (!views[name]) {
+    return noindexMetadata({ title: "Block preview" })
+  }
+  return noindexMetadata({
+    title: `${name} preview`,
+    description: `Live preview for ${name}. Prefer the blocks catalog for documentation and install commands.`,
+    path: `/view/${name}`,
+  })
 }
 
 export default async function BlockViewPage({
