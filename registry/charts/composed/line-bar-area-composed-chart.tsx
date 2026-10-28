@@ -456,8 +456,11 @@ function LineBarAreaComposedChart({
   })
 
   const tooltipContent = React.useCallback(
-    (props: Omit<ComposedTooltipProps, "locale">) => (
-      <ComposedTooltip {...props} locale={locale} />
+    (props: Record<string, unknown>) => (
+      <ComposedTooltip
+        {...(props as Omit<ComposedTooltipProps, "locale">)}
+        locale={locale}
+      />
     ),
     [locale]
   )
@@ -620,7 +623,11 @@ function LineBarAreaComposedChart({
             />
             <ChartTooltip
               cursor={COMPOSED_TOOLTIP_CURSOR}
-              content={tooltipContent}
+              content={
+                tooltipContent as React.ComponentProps<
+                  typeof ChartTooltip
+                >["content"]
+              }
             />
             <Area
               type="monotone"

@@ -109,7 +109,8 @@ export default function ReadingProgress({
       // Reading line ~28% from the top of the viewport — pick the last
       // section whose heading has crossed it. Hysteresis via sticky last id.
       const marker = viewport * 0.28
-      let nextId = ARTICLE.sections[0].id
+      let nextId: (typeof ARTICLE.sections)[number]["id"] =
+        ARTICLE.sections[0].id
       for (const section of ARTICLE.sections) {
         const node = document.getElementById(section.id)
         if (!node) continue

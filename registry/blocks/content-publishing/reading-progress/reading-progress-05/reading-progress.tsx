@@ -90,7 +90,8 @@ export default function ReadingProgress({
       setProgress((prev) => (Math.abs(prev - next) < 0.4 ? prev : next))
 
       const marker = viewport * 0.32
-      let nextId = ARTICLE.sections[0].id
+      let nextId: (typeof ARTICLE.sections)[number]["id"] =
+        ARTICLE.sections[0].id
       for (const section of ARTICLE.sections) {
         const node = document.getElementById(section.id)
         if (!node) continue

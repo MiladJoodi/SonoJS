@@ -411,8 +411,12 @@ export function HomeCandlestickChart({
   }, [fullData.length, plotRtl, seriesLast])
 
   const tooltipContent = React.useCallback(
-    (props: Omit<BtcTooltipProps, "timeframe" | "locale">) => (
-      <BtcTooltip {...props} timeframe={timeframe} locale={locale} />
+    (props: Record<string, unknown>) => (
+      <BtcTooltip
+        {...(props as Omit<BtcTooltipProps, "timeframe" | "locale">)}
+        timeframe={timeframe}
+        locale={locale}
+      />
     ),
     [locale, timeframe]
   )
@@ -548,7 +552,11 @@ export function HomeCandlestickChart({
               />
               <ChartTooltip
                 cursor={BAR_TOOLTIP_CURSOR}
-                content={tooltipContent}
+                content={
+                  tooltipContent as React.ComponentProps<
+                    typeof ChartTooltip
+                  >["content"]
+                }
               />
               <Bar
                 name="candle"
