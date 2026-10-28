@@ -638,13 +638,13 @@ export function ShowcaseChartPreview({
               dataKey="value"
               name="value"
               stroke={color}
-              strokeWidth={neon ? 2.25 : 2}
               fill={`url(#${gradId})`}
               fillOpacity={1}
               isAnimationActive={show}
               animationDuration={500}
               animationEasing="ease-out"
               {...(glow ?? {})}
+              strokeWidth={neon ? 2.25 : 2}
             />
           </RechartsAreaChart>
         </ChartContainer>

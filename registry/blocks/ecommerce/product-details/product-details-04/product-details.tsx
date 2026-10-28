@@ -100,7 +100,7 @@ export default function ProductDetails({
 
   return (
     <section
-      className={cn("w-full min-w-0 bg-white", className)}
+      className={cn("w-full min-w-0 bg-canvas text-foreground", className)}
       aria-label="Product detail"
       {...props}
     >

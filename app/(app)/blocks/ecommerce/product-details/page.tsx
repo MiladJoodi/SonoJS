@@ -42,7 +42,7 @@ export default function BlockProductDetailsDocsPage() {
             },
           ]}
           previewAlign="start"
-          previewClassName="bg-white p-0"
+          previewClassName="bg-canvas p-0"
         >
           <ProductDetails01 />
         </BlockExample>
@@ -56,7 +56,7 @@ export default function BlockProductDetailsDocsPage() {
             },
           ]}
           previewAlign="start"
-          previewClassName="bg-white p-0"
+          previewClassName="bg-canvas p-0"
         >
           <ProductDetails02 />
         </BlockExample>
@@ -70,7 +70,7 @@ export default function BlockProductDetailsDocsPage() {
             },
           ]}
           previewAlign="start"
-          previewClassName="bg-white p-0"
+          previewClassName="bg-canvas p-0"
         >
           <ProductDetails03 />
         </BlockExample>
@@ -84,7 +84,7 @@ export default function BlockProductDetailsDocsPage() {
             },
           ]}
           previewAlign="start"
-          previewClassName="bg-white p-0"
+          previewClassName="bg-canvas p-0"
         >
           <ProductDetails04 />
         </BlockExample>
@@ -98,7 +98,7 @@ export default function BlockProductDetailsDocsPage() {
             },
           ]}
           previewAlign="start"
-          previewClassName="bg-white p-0"
+          previewClassName="bg-canvas p-0"
         >
           <ProductDetails05 />
         </BlockExample>
@@ -112,7 +112,7 @@ export default function BlockProductDetailsDocsPage() {
             },
           ]}
           previewAlign="start"
-          previewClassName="bg-white p-0"
+          previewClassName="bg-canvas p-0"
         >
           <ProductDetails06 />
         </BlockExample>
@@ -126,7 +126,7 @@ export default function BlockProductDetailsDocsPage() {
             },
           ]}
           previewAlign="start"
-          previewClassName="bg-white p-0"
+          previewClassName="bg-canvas p-0"
         >
           <ProductDetails07 />
         </BlockExample>
@@ -140,7 +140,7 @@ export default function BlockProductDetailsDocsPage() {
             },
           ]}
           previewAlign="start"
-          previewClassName="bg-white p-0"
+          previewClassName="bg-canvas p-0"
         >
           <ProductDetails08 />
         </BlockExample>

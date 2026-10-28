@@ -3022,7 +3022,7 @@ const views: Record<string, ComponentType> = {
   },
   "product-details-01": function ProductDetails01View() {
     return (
-      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0">
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
         <div className="w-full">
           <ProductDetails01 />
         </div>
@@ -3031,7 +3031,7 @@ const views: Record<string, ComponentType> = {
   },
   "product-details-02": function ProductDetails02View() {
     return (
-      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0">
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
         <div className="w-full">
           <ProductDetails02 />
         </div>
@@ -3040,7 +3040,7 @@ const views: Record<string, ComponentType> = {
   },
   "product-details-03": function ProductDetails03View() {
     return (
-      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0">
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
         <div className="w-full">
           <ProductDetails03 />
         </div>
@@ -3049,7 +3049,7 @@ const views: Record<string, ComponentType> = {
   },
   "product-details-04": function ProductDetails04View() {
     return (
-      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0">
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
         <div className="w-full">
           <ProductDetails04 />
         </div>
@@ -3058,7 +3058,7 @@ const views: Record<string, ComponentType> = {
   },
   "product-details-05": function ProductDetails05View() {
     return (
-      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0">
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
         <div className="w-full">
           <ProductDetails05 />
         </div>
@@ -3067,7 +3067,7 @@ const views: Record<string, ComponentType> = {
   },
   "product-details-06": function ProductDetails06View() {
     return (
-      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0">
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
         <div className="w-full">
           <ProductDetails06 />
         </div>
@@ -3076,7 +3076,7 @@ const views: Record<string, ComponentType> = {
   },
   "product-details-07": function ProductDetails07View() {
     return (
-      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0">
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
         <div className="w-full">
           <ProductDetails07 />
         </div>
@@ -3085,7 +3085,7 @@ const views: Record<string, ComponentType> = {
   },
   "product-details-08": function ProductDetails08View() {
     return (
-      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0">
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
         <div className="w-full">
           <ProductDetails08 />
         </div>
