@@ -68,7 +68,9 @@ export default function ReadingProgress({
 }: React.ComponentProps<"section">) {
   const articleRef = React.useRef<HTMLElement>(null)
   const [progress, setProgress] = React.useState(0)
-  const [activeId, setActiveId] = React.useState(ARTICLE.sections[0].id)
+  const [activeId, setActiveId] = React.useState<
+    (typeof ARTICLE.sections)[number]["id"]
+  >(ARTICLE.sections[0].id)
   const activeIdRef = React.useRef(activeId)
   activeIdRef.current = activeId
 

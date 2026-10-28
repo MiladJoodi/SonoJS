@@ -456,7 +456,7 @@ function LineBarAreaComposedChart({
   })
 
   const tooltipContent = React.useCallback(
-    (props: ComposedTooltipProps) => (
+    (props: Omit<ComposedTooltipProps, "locale">) => (
       <ComposedTooltip {...props} locale={locale} />
     ),
     [locale]

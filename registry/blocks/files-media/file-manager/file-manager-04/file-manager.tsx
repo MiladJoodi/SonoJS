@@ -115,7 +115,9 @@ export default function FileManager({
   className,
   ...props
 }: React.ComponentProps<"div">) {
-  const [selectedId, setSelectedId] = React.useState(FILES[0].id)
+  const [selectedId, setSelectedId] = React.useState<(typeof FILES)[number]["id"]>(
+    FILES[0].id
+  )
   const selected = FILES.find((f) => f.id === selectedId) ?? FILES[0]
 
   return (
