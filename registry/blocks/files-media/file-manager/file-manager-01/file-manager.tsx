@@ -48,10 +48,10 @@ const BREADCRUMBS = ["My Drive", "Projects", "Q3 Campaign"] as const
 
 const NAV = [
   { id: "drive", label: "My Drive", icon: HardDriveIcon, active: true },
-  { id: "shared", label: "Shared with me", icon: UsersIcon },
-  { id: "recent", label: "Recent", icon: ClockIcon },
-  { id: "starred", label: "Starred", icon: StarIcon },
-  { id: "trash", label: "Trash", icon: Trash2Icon },
+  { id: "shared", label: "Shared with me", icon: UsersIcon, active: false },
+  { id: "recent", label: "Recent", icon: ClockIcon, active: false },
+  { id: "starred", label: "Starred", icon: StarIcon, active: false },
+  { id: "trash", label: "Trash", icon: Trash2Icon, active: false },
 ] as const
 
 const FOLDERS = [

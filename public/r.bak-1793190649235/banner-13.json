@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "banner-13",
+  "type": "registry:block",
+  "title": "banner-13",
+  "description": "Lime flash-sale strip with mono countdown chips and shop link (RTL/LTR).",
+  "files": [
+    {
+      "path": "components/blocks/marketing/banner-13/banner.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst units = [\n  { value: \"02\", label: \"d\" },\n  { value: \"14\", label: \"h\" },\n  { value: \"37\", label: \"m\" },\n  { value: \"08\", label: \"s\" },\n] as const\n\nexport default function Banner({\n  className,\n  ...props\n}: React.ComponentProps<\"div\">) {\n  return (\n    <div\n      className={cn(\n        \"w-full border-b border-lime-600/30 bg-lime-400 px-2 py-2.5 dark:border-lime-400/20 dark:bg-lime-500\",\n        className\n      )}\n      role=\"region\"\n      aria-label=\"Limited-time deals\"\n      {...props}\n    >\n      <div className=\"mx-auto flex max-w-5xl flex-wrap items-center justify-center gap-3 text-center sm:gap-6\">\n        <p className=\"text-sm font-semibold text-zinc-950\">\n          Flash sale ends soon\n        </p>\n        <div\n          className=\"flex items-center gap-1.5\"\n          aria-label=\"Countdown 2 days 14 hours 37 minutes 8 seconds\"\n          dir=\"ltr\"\n        >\n          {units.map((unit, i) => (\n            <React.Fragment key={unit.label}>\n              {i > 0 ? (\n                <span className=\"text-zinc-950/40\" aria-hidden>\n                  :\n                </span>\n              ) : null}\n              <span className=\"inline-flex min-w-8 items-baseline justify-center gap-0.5 rounded-md bg-zinc-950/10 px-1.5 py-0.5 font-mono text-sm font-semibold tabular-nums text-zinc-950\">\n                {unit.value}\n                <span className=\"text-[10px] font-medium uppercase opacity-70\">\n                  {unit.label}\n                </span>\n              </span>\n            </React.Fragment>\n          ))}\n        </div>\n        <a\n          href=\"#\"\n          className=\"cursor-pointer text-xs font-semibold text-zinc-950 underline underline-offset-2 hover:opacity-80\"\n        >\n          Shop the deal\n        </a>\n      </div>\n    </div>\n  )\n}\n",
+      "target": "components/blocks/marketing/banner-13/banner.tsx"
+    }
+  ],
+  "version": "0.1.0+b0276619b649",
+  "generatedAt": "2026-10-28T12:28:50.990Z"
+}

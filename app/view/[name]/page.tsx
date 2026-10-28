@@ -43,21 +43,32 @@ import OtpSixDigitForm from "@/registry/blocks/authentication/otp-verification/o
 import OtpAutoFocusForm from "@/registry/blocks/authentication/otp-verification/otp-verification-02/otp-verification-form"
 import OtpEmailForm from "@/registry/blocks/authentication/otp-verification/otp-verification-03/otp-verification-form"
 import OtpPhoneForm from "@/registry/blocks/authentication/otp-verification/otp-verification-04/otp-verification-form"
+import OtpTrustDeviceForm from "@/registry/blocks/authentication/otp-verification/otp-verification-05/otp-verification-form"
+import OtpOnboardingForm from "@/registry/blocks/authentication/otp-verification/otp-verification-06/otp-verification-form"
 import AuthenticatorTwoFactorForm from "@/registry/blocks/authentication/two-factor/two-factor-01/two-factor-form"
 import SmsTwoFactorForm from "@/registry/blocks/authentication/two-factor/two-factor-02/two-factor-form"
 import BackupTwoFactorForm from "@/registry/blocks/authentication/two-factor/two-factor-03/two-factor-form"
 import ChooseTwoFactorForm from "@/registry/blocks/authentication/two-factor/two-factor-04/two-factor-form"
+import PasskeyTwoFactorForm from "@/registry/blocks/authentication/two-factor/two-factor-05/two-factor-form"
+import NewDeviceTwoFactorForm from "@/registry/blocks/authentication/two-factor/two-factor-06/two-factor-form"
 import SocialOnlyForm from "@/registry/blocks/authentication/social-login/social-login-01/social-login-form"
 import SocialEmailForm from "@/registry/blocks/authentication/social-login/social-login-02/social-login-form"
 import SocialIconsForm from "@/registry/blocks/authentication/social-login/social-login-03/social-login-form"
 import SocialSplitForm from "@/registry/blocks/authentication/social-login/social-login-04/social-login-form"
+import SocialLastUsedForm from "@/registry/blocks/authentication/social-login/social-login-05/social-login-form"
+import SocialBrandSplitForm from "@/registry/blocks/authentication/social-login/social-login-06/social-login-form"
 import PasskeyFirstForm from "@/registry/blocks/authentication/passkey/passkey-01/passkey-form"
 import PasskeyPasswordForm from "@/registry/blocks/authentication/passkey/passkey-02/passkey-form"
 import PasskeySetupForm from "@/registry/blocks/authentication/passkey/passkey-03/passkey-form"
+import PasskeyManageForm from "@/registry/blocks/authentication/passkey/passkey-04/passkey-form"
+import PasskeyCrossDeviceForm from "@/registry/blocks/authentication/passkey/passkey-05/passkey-form"
+import PasskeyBrandSplitForm from "@/registry/blocks/authentication/passkey/passkey-06/passkey-form"
 import EmailRecoveryForm from "@/registry/blocks/authentication/account-recovery/account-recovery-01/account-recovery-form"
 import PhoneRecoveryForm from "@/registry/blocks/authentication/account-recovery/account-recovery-02/account-recovery-form"
-import IdentityRecoveryForm from "@/registry/blocks/authentication/account-recovery/account-recovery-03/account-recovery-form"
+import CheckInboxRecoveryForm from "@/registry/blocks/authentication/account-recovery/account-recovery-03/account-recovery-form"
 import CodesRecoveryForm from "@/registry/blocks/authentication/account-recovery/account-recovery-04/account-recovery-form"
+import MethodRecoveryForm from "@/registry/blocks/authentication/account-recovery/account-recovery-05/account-recovery-form"
+import BrandSplitRecoveryForm from "@/registry/blocks/authentication/account-recovery/account-recovery-06/account-recovery-form"
 import MinimalNavbar from "@/registry/blocks/navigation/navbar/navbar-01/navbar"
 import SaasNavbar from "@/registry/blocks/navigation/navbar/navbar-02/navbar"
 import CenteredNavbar from "@/registry/blocks/navigation/navbar/navbar-03/navbar"
@@ -117,6 +128,8 @@ import BentoGrid01 from "@/registry/blocks/marketing/bento-grid/bento-grid-01/be
 import BentoGrid02 from "@/registry/blocks/marketing/bento-grid/bento-grid-02/bento-grid"
 import HowItWorks01 from "@/registry/blocks/marketing/how-it-works/how-it-works-01/how-it-works"
 import HowItWorks02 from "@/registry/blocks/marketing/how-it-works/how-it-works-02/how-it-works"
+import HowItWorks03 from "@/registry/blocks/marketing/how-it-works/how-it-works-03/how-it-works"
+import HowItWorks04 from "@/registry/blocks/marketing/how-it-works/how-it-works-04/how-it-works"
 import Cta01 from "@/registry/blocks/marketing/cta/cta-01/cta"
 import Cta02 from "@/registry/blocks/marketing/cta/cta-02/cta"
 import Cta03 from "@/registry/blocks/marketing/cta/cta-03/cta"
@@ -180,9 +193,23 @@ import LogsViewer01 from "@/registry/blocks/developer-tools/logs-viewer/logs-vie
 import AccountSettings01 from "@/registry/blocks/user-account/account-settings/account-settings-01/account-settings"
 import AccountSettings02 from "@/registry/blocks/user-account/account-settings/account-settings-02/account-settings"
 import AccountSettings03 from "@/registry/blocks/user-account/account-settings/account-settings-03/account-settings"
+import AccountSettings04 from "@/registry/blocks/user-account/account-settings/account-settings-04/account-settings"
+import AccountSettings05 from "@/registry/blocks/user-account/account-settings/account-settings-05/account-settings"
 import UserProfile01 from "@/registry/blocks/user-account/user-profile/user-profile-01/user-profile"
+import UserProfile02 from "@/registry/blocks/user-account/user-profile/user-profile-02/user-profile"
+import UserProfile03 from "@/registry/blocks/user-account/user-profile/user-profile-03/user-profile"
+import UserProfile04 from "@/registry/blocks/user-account/user-profile/user-profile-04/user-profile"
+import UserProfile05 from "@/registry/blocks/user-account/user-profile/user-profile-05/user-profile"
+import UserProfile06 from "@/registry/blocks/user-account/user-profile/user-profile-06/user-profile"
 import TeamMembers01 from "@/registry/blocks/user-account/team-members/team-members-01/team-members"
+import TeamMembers02 from "@/registry/blocks/user-account/team-members/team-members-02/team-members"
+import TeamMembers03 from "@/registry/blocks/user-account/team-members/team-members-03/team-members"
+import TeamMembers04 from "@/registry/blocks/user-account/team-members/team-members-04/team-members"
+import TeamMembers05 from "@/registry/blocks/user-account/team-members/team-members-05/team-members"
+import TeamMembers06 from "@/registry/blocks/user-account/team-members/team-members-06/team-members"
 import RolesAndPermissions01 from "@/registry/blocks/user-account/roles-and-permissions/roles-and-permissions-01/roles-and-permissions"
+import RolesAndPermissions02 from "@/registry/blocks/user-account/roles-and-permissions/roles-and-permissions-02/roles-and-permissions"
+import RolesAndPermissions03 from "@/registry/blocks/user-account/roles-and-permissions/roles-and-permissions-03/roles-and-permissions"
 import BillingHistory01 from "@/registry/blocks/payments-billing/billing-history/billing-history-01/billing-history"
 import BillingSettings01 from "@/registry/blocks/payments-billing/billing-settings/billing-settings-01/billing-settings"
 import BillingSettings02 from "@/registry/blocks/payments-billing/billing-settings/billing-settings-02/billing-settings"
@@ -427,6 +454,9 @@ import Testimonials12 from "@/registry/blocks/marketing/testimonials/testimonial
 import Testimonials13 from "@/registry/blocks/marketing/testimonials/testimonials-13/testimonial"
 import Testimonials14 from "@/registry/blocks/marketing/testimonials/testimonials-14/testimonial"
 import ApplicationForm01 from "@/registry/blocks/forms/application-form/application-form-01/application-form"
+import ApplicationForm02 from "@/registry/blocks/forms/application-form/application-form-02/application-form"
+import ApplicationForm03 from "@/registry/blocks/forms/application-form/application-form-03/application-form"
+import ApplicationForm04 from "@/registry/blocks/forms/application-form/application-form-04/application-form"
 import ContactForm01 from "@/registry/blocks/forms/contact-form/contact-form-01/contact-form"
 import ContactForm02 from "@/registry/blocks/forms/contact-form/contact-form-02/contact-form"
 import ContactForm03 from "@/registry/blocks/forms/contact-form/contact-form-03/contact-form"
@@ -659,9 +689,11 @@ const views: Record<string, ComponentType> = {
   },
   "otp-verification-03": function OtpVerification03View() {
     return (
-      <CenteredCard>
-        <OtpEmailForm />
-      </CenteredCard>
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-4 py-10">
+        <div className="w-full max-w-4xl">
+          <OtpEmailForm />
+        </div>
+      </div>
     )
   },
   "otp-verification-04": function OtpVerification04View() {
@@ -669,6 +701,22 @@ const views: Record<string, ComponentType> = {
       <CenteredCard>
         <OtpPhoneForm />
       </CenteredCard>
+    )
+  },
+  "otp-verification-05": function OtpVerification05View() {
+    return (
+      <CenteredCard>
+        <OtpTrustDeviceForm />
+      </CenteredCard>
+    )
+  },
+  "otp-verification-06": function OtpVerification06View() {
+    return (
+      <div className="flex min-h-svh w-full items-center justify-center bg-white px-6 py-10 dark:bg-background">
+        <div className="w-full max-w-md">
+          <OtpOnboardingForm />
+        </div>
+      </div>
     )
   },
   "two-factor-01": function TwoFactor01View() {
@@ -694,9 +742,27 @@ const views: Record<string, ComponentType> = {
   },
   "two-factor-04": function TwoFactor04View() {
     return (
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-6 py-10">
+        <div className="w-full max-w-lg">
+          <ChooseTwoFactorForm />
+        </div>
+      </div>
+    )
+  },
+  "two-factor-05": function TwoFactor05View() {
+    return (
       <CenteredCard>
-        <ChooseTwoFactorForm />
+        <PasskeyTwoFactorForm />
       </CenteredCard>
+    )
+  },
+  "two-factor-06": function TwoFactor06View() {
+    return (
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-4 py-10">
+        <div className="w-full max-w-4xl">
+          <NewDeviceTwoFactorForm />
+        </div>
+      </div>
     )
   },
   "social-login-01": function SocialLogin01View() {
@@ -720,7 +786,31 @@ const views: Record<string, ComponentType> = {
       </CenteredCard>
     )
   },
-  "social-login-04": SocialSplitForm,
+  "social-login-04": function SocialLogin04View() {
+    return (
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-4 py-10">
+        <div className="w-full max-w-4xl">
+          <SocialSplitForm />
+        </div>
+      </div>
+    )
+  },
+  "social-login-05": function SocialLogin05View() {
+    return (
+      <CenteredCard>
+        <SocialLastUsedForm />
+      </CenteredCard>
+    )
+  },
+  "social-login-06": function SocialLogin06View() {
+    return (
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-4 py-10">
+        <div className="w-full max-w-4xl">
+          <SocialBrandSplitForm />
+        </div>
+      </div>
+    )
+  },
   "passkey-01": function Passkey01View() {
     return (
       <CenteredCard>
@@ -742,6 +832,31 @@ const views: Record<string, ComponentType> = {
       </CenteredCard>
     )
   },
+  "passkey-04": function Passkey04View() {
+    return (
+      <CenteredCard>
+        <PasskeyManageForm />
+      </CenteredCard>
+    )
+  },
+  "passkey-05": function Passkey05View() {
+    return (
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-4 py-10">
+        <div className="w-full max-w-4xl">
+          <PasskeyCrossDeviceForm />
+        </div>
+      </div>
+    )
+  },
+  "passkey-06": function Passkey06View() {
+    return (
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-4 py-10">
+        <div className="w-full max-w-4xl">
+          <PasskeyBrandSplitForm />
+        </div>
+      </div>
+    )
+  },
   "account-recovery-01": function AccountRecovery01View() {
     return (
       <CenteredCard>
@@ -759,7 +874,7 @@ const views: Record<string, ComponentType> = {
   "account-recovery-03": function AccountRecovery03View() {
     return (
       <CenteredCard>
-        <IdentityRecoveryForm />
+        <CheckInboxRecoveryForm />
       </CenteredCard>
     )
   },
@@ -768,6 +883,22 @@ const views: Record<string, ComponentType> = {
       <CenteredCard>
         <CodesRecoveryForm />
       </CenteredCard>
+    )
+  },
+  "account-recovery-05": function AccountRecovery05View() {
+    return (
+      <CenteredCard>
+        <MethodRecoveryForm />
+      </CenteredCard>
+    )
+  },
+  "account-recovery-06": function AccountRecovery06View() {
+    return (
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-4 py-10">
+        <div className="w-full max-w-4xl">
+          <BrandSplitRecoveryForm />
+        </div>
+      </div>
     )
   },
   "banner-01": function Banner01View() {
@@ -996,7 +1127,7 @@ const views: Record<string, ComponentType> = {
   },
   "how-it-works-01": function HowItWorks01View() {
     return (
-      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
         <div className="w-full">
           <HowItWorks01 />
         </div>
@@ -1008,6 +1139,24 @@ const views: Record<string, ComponentType> = {
       <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
         <div className="w-full">
           <HowItWorks02 />
+        </div>
+      </div>
+    )
+  },
+  "how-it-works-03": function HowItWorks03View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-zinc-950 px-0 py-0">
+        <div className="w-full">
+          <HowItWorks03 />
+        </div>
+      </div>
+    )
+  },
+  "how-it-works-04": function HowItWorks04View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <HowItWorks04 />
         </div>
       </div>
     )
@@ -1599,7 +1748,7 @@ const views: Record<string, ComponentType> = {
   },
   "account-settings-01": function AccountSettings01View() {
     return (
-      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
         <div className="w-full">
           <AccountSettings01 />
         </div>
@@ -1608,7 +1757,7 @@ const views: Record<string, ComponentType> = {
   },
   "account-settings-02": function AccountSettings02View() {
     return (
-      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
         <div className="w-full">
           <AccountSettings02 />
         </div>
@@ -1617,18 +1766,81 @@ const views: Record<string, ComponentType> = {
   },
   "account-settings-03": function AccountSettings03View() {
     return (
-      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
         <div className="w-full">
           <AccountSettings03 />
         </div>
       </div>
     )
   },
-  "user-profile-01": function UserProfile01View() {
+  "account-settings-04": function AccountSettings04View() {
     return (
       <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
         <div className="w-full">
+          <AccountSettings04 />
+        </div>
+      </div>
+    )
+  },
+  "account-settings-05": function AccountSettings05View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <AccountSettings05 />
+        </div>
+      </div>
+    )
+  },
+  "user-profile-01": function UserProfile01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
           <UserProfile01 />
+        </div>
+      </div>
+    )
+  },
+  "user-profile-02": function UserProfile02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <UserProfile02 />
+        </div>
+      </div>
+    )
+  },
+  "user-profile-03": function UserProfile03View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <UserProfile03 />
+        </div>
+      </div>
+    )
+  },
+  "user-profile-04": function UserProfile04View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <UserProfile04 />
+        </div>
+      </div>
+    )
+  },
+  "user-profile-05": function UserProfile05View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <UserProfile05 />
+        </div>
+      </div>
+    )
+  },
+  "user-profile-06": function UserProfile06View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <UserProfile06 />
         </div>
       </div>
     )
@@ -1642,11 +1854,74 @@ const views: Record<string, ComponentType> = {
       </div>
     )
   },
+  "team-members-02": function TeamMembers02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <TeamMembers02 />
+        </div>
+      </div>
+    )
+  },
+  "team-members-03": function TeamMembers03View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <TeamMembers03 />
+        </div>
+      </div>
+    )
+  },
+  "team-members-04": function TeamMembers04View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <TeamMembers04 />
+        </div>
+      </div>
+    )
+  },
+  "team-members-05": function TeamMembers05View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <TeamMembers05 />
+        </div>
+      </div>
+    )
+  },
+  "team-members-06": function TeamMembers06View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <TeamMembers06 />
+        </div>
+      </div>
+    )
+  },
   "roles-and-permissions-01": function RolesAndPermissions01View() {
     return (
       <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
         <div className="w-full">
           <RolesAndPermissions01 />
+        </div>
+      </div>
+    )
+  },
+  "roles-and-permissions-02": function RolesAndPermissions02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <RolesAndPermissions02 />
+        </div>
+      </div>
+    )
+  },
+  "roles-and-permissions-03": function RolesAndPermissions03View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <RolesAndPermissions03 />
         </div>
       </div>
     )
@@ -1818,6 +2093,78 @@ const views: Record<string, ComponentType> = {
       <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
         <div className="w-full">
           <EmptyState01 />
+        </div>
+      </div>
+    )
+  },
+  "empty-state-02": function EmptyState02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <EmptyState02 />
+        </div>
+      </div>
+    )
+  },
+  "empty-state-03": function EmptyState03View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <EmptyState03 />
+        </div>
+      </div>
+    )
+  },
+  "empty-state-04": function EmptyState04View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <EmptyState04 />
+        </div>
+      </div>
+    )
+  },
+  "empty-state-05": function EmptyState05View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <EmptyState05 />
+        </div>
+      </div>
+    )
+  },
+  "empty-state-06": function EmptyState06View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <EmptyState06 />
+        </div>
+      </div>
+    )
+  },
+  "empty-state-07": function EmptyState07View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <EmptyState07 />
+        </div>
+      </div>
+    )
+  },
+  "empty-state-08": function EmptyState08View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <EmptyState08 />
+        </div>
+      </div>
+    )
+  },
+  "empty-state-09": function EmptyState09View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <EmptyState09 />
         </div>
       </div>
     )
@@ -3999,9 +4346,36 @@ const views: Record<string, ComponentType> = {
   },
   "application-form-01": function ApplicationForm01View() {
     return (
-      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
         <div className="w-full">
           <ApplicationForm01 />
+        </div>
+      </div>
+    )
+  },
+  "application-form-02": function ApplicationForm02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <ApplicationForm02 />
+        </div>
+      </div>
+    )
+  },
+  "application-form-03": function ApplicationForm03View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <ApplicationForm03 />
+        </div>
+      </div>
+    )
+  },
+  "application-form-04": function ApplicationForm04View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <ApplicationForm04 />
         </div>
       </div>
     )

@@ -3,6 +3,7 @@
 import * as React from "react"
 
 import { Button } from "@sonojs/ui/components/button"
+import { Checkbox } from "@sonojs/ui/components/checkbox"
 import {
   Field,
   FieldDescription,
@@ -21,6 +22,7 @@ import {
   SelectValue,
 } from "@sonojs/ui/components/select"
 import { Separator } from "@sonojs/ui/components/separator"
+import { Textarea } from "@sonojs/ui/components/textarea"
 import { cn } from "@/lib/utils"
 
 const PLANS = [
@@ -79,20 +81,18 @@ export default function ApplicationForm({
   const [plan, setPlan] = React.useState<PlanId>("starter")
   const [companySize, setCompanySize] = React.useState("")
   const [useCase, setUseCase] = React.useState("")
+  const [terms, setTerms] = React.useState(false)
 
   return (
     <section
       className={cn(
-        "relative isolate w-full min-w-0 overflow-hidden bg-white dark:bg-background py-10 text-foreground sm:py-12",
+        "relative isolate w-full min-w-0 overflow-hidden bg-canvas py-10 text-foreground sm:py-14",
         className
       )}
       aria-labelledby="application-form-01-heading"
       {...props}
     >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10"
-      >
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute start-1/2 top-[-18%] size-[24rem] -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
       </div>
 
@@ -103,7 +103,7 @@ export default function ApplicationForm({
           </p>
           <h1
             id="application-form-01-heading"
-            className="text-balance text-2xl font-semibold tracking-tight text-foreground"
+            className="text-balance text-2xl font-semibold tracking-tight text-foreground sm:text-3xl"
           >
             Apply for SonoJS early access
           </h1>
@@ -189,7 +189,7 @@ export default function ApplicationForm({
               <Select value={companySize} onValueChange={setCompanySize}>
                 <SelectTrigger
                   id="application-form-01-size"
-                  className="w-full"
+                  className="w-full cursor-pointer"
                 >
                   <SelectValue placeholder="Select size" />
                 </SelectTrigger>
@@ -210,7 +210,7 @@ export default function ApplicationForm({
               <Select value={useCase} onValueChange={setUseCase}>
                 <SelectTrigger
                   id="application-form-01-use-case"
-                  className="w-full"
+                  className="w-full cursor-pointer"
                 >
                   <SelectValue placeholder="What are you building?" />
                 </SelectTrigger>
@@ -248,7 +248,7 @@ export default function ApplicationForm({
                       key={item.id}
                       htmlFor={inputId}
                       className={cn(
-                        "relative flex cursor-pointer flex-col gap-3 rounded-[12px] border border-border/70 bg-card p-4 shadow-xs transition-colors",
+                        "relative flex cursor-pointer flex-col gap-3 rounded-[12px] border border-border/70 bg-card p-4 shadow-soft transition-colors",
                         selected && "border-primary bg-primary/5"
                       )}
                     >
@@ -264,7 +264,7 @@ export default function ApplicationForm({
                         <RadioGroupItem
                           id={inputId}
                           value={item.id}
-                          className="mt-0.5"
+                          className="mt-0.5 cursor-pointer"
                         />
                       </div>
                       <p className="flex-1 text-pretty text-sm text-muted-foreground">
@@ -292,15 +292,51 @@ export default function ApplicationForm({
                 </FieldDescription>
               </div>
             </div>
+
+            <Field className="col-span-full">
+              <FieldLabel htmlFor="application-form-01-notes">
+                Anything else?
+              </FieldLabel>
+              <Textarea
+                id="application-form-01-notes"
+                name="notes"
+                rows={3}
+                placeholder="Timeline, stack constraints, or links we should see…"
+              />
+            </Field>
+
+            <div className="col-span-full flex items-start gap-3">
+              <Checkbox
+                id="application-form-01-terms"
+                checked={terms}
+                onCheckedChange={(v) => setTerms(v === true)}
+                className="mt-0.5 cursor-pointer"
+              />
+              <label
+                htmlFor="application-form-01-terms"
+                className="cursor-pointer text-sm leading-relaxed text-muted-foreground"
+              >
+                I agree to the{" "}
+                <a
+                  href="#"
+                  className="font-medium text-foreground underline-offset-4 hover:underline"
+                >
+                  early access terms
+                </a>{" "}
+                and privacy policy.
+              </label>
+            </div>
           </div>
 
           <Separator className="my-6" />
 
           <div className="flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-end">
-            <Button type="button" variant="outline">
-              Go back
+            <Button type="button" variant="outline" className="cursor-pointer">
+              Cancel
             </Button>
-            <Button type="submit">Submit application</Button>
+            <Button type="submit" className="cursor-pointer" disabled={!terms}>
+              Submit application
+            </Button>
           </div>
         </form>
       </div>

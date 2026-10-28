@@ -11,18 +11,22 @@ export default function Banner({
   return (
     <div
       className={cn(
-        "w-full bg-gradient-to-r from-[#4F39F6] to-[#FDFEFF] py-2.5 text-center text-sm font-medium text-white",
+        "w-full bg-indigo-600 py-2.5 text-center text-sm font-medium text-white dark:bg-indigo-500",
         className
       )}
       role="region"
-      aria-label="Promotion"
+      aria-label="Launch offer"
       {...props}
     >
-      <p>
-        <span className="me-2 rounded-md bg-white px-3 py-1 text-indigo-600">
-          Launch offer
+      <p className="inline-flex flex-wrap items-center justify-center gap-2 px-4">
+        <span className="rounded-full bg-white/20 px-2.5 py-0.5 text-xs font-semibold tracking-wide uppercase">
+          Launch
         </span>
-        Try SonoJS today and get $50 free credits
+        <span>
+          Try SonoJS today —{" "}
+          <span className="font-semibold">$50 free credits</span> on your first
+          workspace
+        </span>
       </p>
     </div>
   )

@@ -1,56 +1,35 @@
+import type { ReactNode } from "react"
+
 import {
   BlockExample,
   BlocksPageHeader,
 } from "@/components/blocks"
-import SocialOnlyForm from "@/registry/blocks/authentication/social-login/social-login-01/social-login-form"
-import SocialEmailForm from "@/registry/blocks/authentication/social-login/social-login-02/social-login-form"
-import SocialIconsForm from "@/registry/blocks/authentication/social-login/social-login-03/social-login-form"
-import SocialSplitForm from "@/registry/blocks/authentication/social-login/social-login-04/social-login-form"
+import SocialLogin01 from "@/registry/blocks/authentication/social-login/social-login-01/social-login-form"
+import SocialLogin02 from "@/registry/blocks/authentication/social-login/social-login-02/social-login-form"
+import SocialLogin03 from "@/registry/blocks/authentication/social-login/social-login-03/social-login-form"
+import SocialLogin04 from "@/registry/blocks/authentication/social-login/social-login-04/social-login-form"
+import SocialLogin05 from "@/registry/blocks/authentication/social-login/social-login-05/social-login-form"
+import SocialLogin06 from "@/registry/blocks/authentication/social-login/social-login-06/social-login-form"
 
 import { blocksPageMetadata } from "@/lib/seo"
 
-export const metadata = blocksPageMetadata("/blocks/authentication/social-login", "Social Login", "Ready-to-use Social Login UI blocks for React and Tailwind. Preview variants and install with the SonoJS CLI.")
+export const metadata = blocksPageMetadata(
+  "/blocks/authentication/social-login",
+  "Social Login",
+  "Ready-to-use Social Login UI blocks for React and Tailwind. Preview variants and install with the SonoJS CLI."
+)
 
-const onlySource = `import SocialLoginForm from "@/components/blocks/authentication/social-login-01/social-login-form"
+const usage = (name: string, maxW = "max-w-md") =>
+  `import SocialLoginForm from "@/components/blocks/authentication/${name}/social-login-form"
 
 export default function Page() {
   return (
-    <div className="flex min-h-svh w-full items-center justify-center bg-background px-10 py-10">
-      <div className="w-full max-w-md">
+    <div className="flex min-h-svh w-full items-center justify-center bg-background px-6 py-10">
+      <div className="w-full ${maxW}">
         <SocialLoginForm />
       </div>
     </div>
   )
-}`
-
-const emailSource = `import SocialLoginForm from "@/components/blocks/authentication/social-login-02/social-login-form"
-
-export default function Page() {
-  return (
-    <div className="flex min-h-svh w-full items-center justify-center bg-background px-10 py-10">
-      <div className="w-full max-w-md">
-        <SocialLoginForm />
-      </div>
-    </div>
-  )
-}`
-
-const iconsSource = `import SocialLoginForm from "@/components/blocks/authentication/social-login-03/social-login-form"
-
-export default function Page() {
-  return (
-    <div className="flex min-h-svh w-full items-center justify-center bg-background px-10 py-10">
-      <div className="w-full max-w-md">
-        <SocialLoginForm />
-      </div>
-    </div>
-  )
-}`
-
-const splitSource = `import SocialLoginForm from "@/components/blocks/authentication/social-login-04/social-login-form"
-
-export default function Page() {
-  return <SocialLoginForm />
 }`
 
 function ExampleRule() {
@@ -66,10 +45,16 @@ function ExampleRule() {
   )
 }
 
-function Center({ children }: { children: React.ReactNode }) {
+function Center({
+  children,
+  className = "max-w-md",
+}: {
+  children: ReactNode
+  className?: string
+}) {
   return (
-    <div className="flex w-full items-center justify-center bg-canvas px-10 py-10">
-      <div className="w-full max-w-md">{children}</div>
+    <div className="flex w-full items-center justify-center px-6 py-10">
+      <div className={`w-full ${className}`}>{children}</div>
     </div>
   )
 }
@@ -80,16 +65,18 @@ export default function BlockSocialLoginDocsPage() {
       <BlocksPageHeader
         title="Social Login"
         pathname="/blocks/authentication/social-login"
-        description="Social sign-in layouts. Each example has its own name and install command."
+        description="Provider stack, magic link, icon row, photo split, last-used primary, and brand split."
       />
 
       <div className="flex flex-col gap-8">
         <BlockExample
           name="social-login-01"
-          usage={[{ title: "app/login/page.tsx", code: onlySource }]}
+          usage={[{ title: "app/login/page.tsx", code: usage("social-login-01") }]}
+          previewAlign="center"
+          previewClassName="bg-canvas"
         >
           <Center>
-            <SocialOnlyForm />
+            <SocialLogin01 />
           </Center>
         </BlockExample>
 
@@ -97,10 +84,12 @@ export default function BlockSocialLoginDocsPage() {
 
         <BlockExample
           name="social-login-02"
-          usage={[{ title: "app/login/page.tsx", code: emailSource }]}
+          usage={[{ title: "app/login/page.tsx", code: usage("social-login-02") }]}
+          previewAlign="center"
+          previewClassName="bg-canvas"
         >
           <Center>
-            <SocialEmailForm />
+            <SocialLogin02 />
           </Center>
         </BlockExample>
 
@@ -108,10 +97,12 @@ export default function BlockSocialLoginDocsPage() {
 
         <BlockExample
           name="social-login-03"
-          usage={[{ title: "app/login/page.tsx", code: iconsSource }]}
+          usage={[{ title: "app/login/page.tsx", code: usage("social-login-03") }]}
+          previewAlign="center"
+          previewClassName="bg-canvas"
         >
           <Center>
-            <SocialIconsForm />
+            <SocialLogin03 />
           </Center>
         </BlockExample>
 
@@ -119,9 +110,49 @@ export default function BlockSocialLoginDocsPage() {
 
         <BlockExample
           name="social-login-04"
-          usage={[{ title: "app/login/page.tsx", code: splitSource }]}
+          usage={[
+            {
+              title: "app/login/page.tsx",
+              code: usage("social-login-04", "max-w-4xl"),
+            },
+          ]}
+          previewAlign="center"
+          previewClassName="bg-canvas p-0"
         >
-          <SocialSplitForm />
+          <Center className="max-w-4xl px-4 py-8 sm:px-6">
+            <SocialLogin04 />
+          </Center>
+        </BlockExample>
+
+        <ExampleRule />
+
+        <BlockExample
+          name="social-login-05"
+          usage={[{ title: "app/login/page.tsx", code: usage("social-login-05") }]}
+          previewAlign="center"
+          previewClassName="bg-canvas"
+        >
+          <Center>
+            <SocialLogin05 />
+          </Center>
+        </BlockExample>
+
+        <ExampleRule />
+
+        <BlockExample
+          name="social-login-06"
+          usage={[
+            {
+              title: "app/login/page.tsx",
+              code: usage("social-login-06", "max-w-4xl"),
+            },
+          ]}
+          previewAlign="center"
+          previewClassName="bg-canvas p-0"
+        >
+          <Center className="max-w-4xl px-4 py-8 sm:px-6">
+            <SocialLogin06 />
+          </Center>
         </BlockExample>
       </div>
     </article>

@@ -81,7 +81,7 @@ function MaxBadge() {
 
 export default function ChatComposer02() {
   const [inputValue, setInputValue] = React.useState("")
-  const [modelValue, setModelValue] = React.useState(MODELS[0].value)
+  const [modelValue, setModelValue] = React.useState<string>(MODELS[0].value)
   const selectedModel =
     MODELS.find((m) => m.value === modelValue) ?? MODELS[0]
   const inputRef = React.useRef<HTMLTextAreaElement>(null)

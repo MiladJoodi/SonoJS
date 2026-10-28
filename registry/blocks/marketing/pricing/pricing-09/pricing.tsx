@@ -132,12 +132,6 @@ export default function Pricing({
                   ? "z-10 border-primary bg-primary text-primary-foreground shadow-[0_32px_64px_-28px_rgba(37,99,235,0.55)] lg:-translate-y-1 dark:shadow-[0_32px_64px_-28px_rgba(57,110,240,0.45)]"
                   : "border-border/70 bg-card text-foreground shadow-soft hover:-translate-y-0.5 hover:shadow-[0_20px_44px_-28px_rgba(0,0,0,0.3)] transition-[box-shadow,transform] duration-300"
               )}
-
-              style={{
-                backgroundColor: "var(--card, #ffffff)",
-                boxShadow:
-                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
-              }}
             >
               {plan.featured ? (
                 <div

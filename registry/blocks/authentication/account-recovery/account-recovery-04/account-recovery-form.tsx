@@ -1,11 +1,13 @@
 "use client"
 
-import { cn } from "@/lib/utils"
+import type * as React from "react"
+import { KeyRoundIcon } from "lucide-react"
+
+import { Badge } from "@sonojs/ui/components/badge"
 import { Button } from "@sonojs/ui/components/button"
 import { Input } from "@sonojs/ui/components/input"
 import { Label } from "@sonojs/ui/components/label"
-
-const controlClass = "font-mono shadow-none"
+import { cn } from "@/lib/utils"
 
 export default function AccountRecoveryForm({
   className,
@@ -14,22 +16,27 @@ export default function AccountRecoveryForm({
   return (
     <div
       className={cn(
-        "[--login-card-padding:1.5rem] sm:[--login-card-padding:2rem]",
-        "flex w-full flex-col gap-8 rounded-[12px] border border-border/70 bg-card p-(--login-card-padding)",
-        "shadow-soft",
+        "flex w-full flex-col gap-6 rounded-[12px] border border-border/70 bg-card p-6 shadow-soft sm:p-8",
         className
       )}
-      style={{
-                backgroundColor: "var(--card, #ffffff)",
-                boxShadow:
-                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
-              }}
       {...props}
     >
-      <header className="flex flex-col items-start gap-3">
-        <span className="h-0.5 w-8 rounded-full bg-primary" aria-hidden />
+      <header className="flex flex-col items-start gap-3 text-start">
+        <div className="flex w-full items-start justify-between gap-3">
+          <span className="flex size-10 items-center justify-center rounded-md bg-primary/10 text-primary">
+            <KeyRoundIcon className="size-5" aria-hidden />
+          </span>
+          <Badge
+            variant="secondary"
+            className="shrink-0 border-0 bg-muted text-muted-foreground"
+          >
+            1 of 8 remaining
+          </Badge>
+        </div>
         <div className="space-y-1.5">
-          <h1 className="text-h3 text-foreground">Enter a recovery code</h1>
+          <h1 className="text-h3 font-semibold tracking-tight text-foreground">
+            Enter a recovery code
+          </h1>
           <p className="text-sm text-muted-foreground">
             Use one of the one-time codes you saved when you set up recovery.
           </p>
@@ -49,13 +56,10 @@ export default function AccountRecoveryForm({
             autoComplete="one-time-code"
             placeholder="XXXX-XXXX-XXXX"
             required
-            className={controlClass}
+            className="font-mono tracking-wider"
           />
         </div>
-        <Button
-          type="submit"
-          className="mt-1 w-full shadow-none"
-        >
+        <Button type="submit" className="w-full cursor-pointer">
           Verify recovery code
         </Button>
       </form>

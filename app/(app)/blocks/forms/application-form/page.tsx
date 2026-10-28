@@ -3,6 +3,9 @@ import {
   BlocksPageHeader,
 } from "@/components/blocks"
 import ApplicationForm01 from "@/registry/blocks/forms/application-form/application-form-01/application-form"
+import ApplicationForm02 from "@/registry/blocks/forms/application-form/application-form-02/application-form"
+import ApplicationForm03 from "@/registry/blocks/forms/application-form/application-form-03/application-form"
+import ApplicationForm04 from "@/registry/blocks/forms/application-form/application-form-04/application-form"
 
 import { blocksPageMetadata } from "@/lib/seo"
 
@@ -25,7 +28,7 @@ export default function BlockApplicationFormDocsPage() {
       <BlocksPageHeader
         title="Application Form"
         pathname="/blocks/forms/application-form"
-        description="Early-access application — contact details, company size, use case, and plan selection cards."
+        description="Early access, job apply, partnership RFP, and cohort enrollment — elevated cards on canvas."
       />
 
       <div className="flex flex-col gap-8">
@@ -38,9 +41,51 @@ export default function BlockApplicationFormDocsPage() {
             },
           ]}
           previewAlign="start"
-          previewClassName="bg-white p-0 dark:bg-background"
+          previewClassName="bg-canvas p-0"
         >
           <ApplicationForm01 />
+        </BlockExample>
+
+        <BlockExample
+          name="application-form-02"
+          usage={[
+            {
+              title: "app/page.tsx",
+              code: usage("application-form-02"),
+            },
+          ]}
+          previewAlign="start"
+          previewClassName="bg-canvas p-0"
+        >
+          <ApplicationForm02 />
+        </BlockExample>
+
+        <BlockExample
+          name="application-form-03"
+          usage={[
+            {
+              title: "app/page.tsx",
+              code: usage("application-form-03"),
+            },
+          ]}
+          previewAlign="start"
+          previewClassName="bg-canvas p-0"
+        >
+          <ApplicationForm03 />
+        </BlockExample>
+
+        <BlockExample
+          name="application-form-04"
+          usage={[
+            {
+              title: "app/page.tsx",
+              code: usage("application-form-04"),
+            },
+          ]}
+          previewAlign="start"
+          previewClassName="bg-canvas p-0"
+        >
+          <ApplicationForm04 />
         </BlockExample>
       </div>
     </article>

@@ -501,6 +501,7 @@ function userAccountSettingsBlock(
       "textarea",
     ],
     images = ["avatar.webp"],
+    icons = [],
   } = {}
 ) {
   return {
@@ -522,6 +523,18 @@ function userAccountSettingsBlock(
         type: "registry:file",
         target: `components/blocks/user-account/${slug}/images/${file}`,
       })),
+      ...icons.flatMap((name) => [
+        {
+          path: `registry/icons/${name}.tsx`,
+          type: "registry:component",
+          target: `components/blocks/user-account/${slug}/icons/${name}.tsx`,
+        },
+        {
+          path: `registry/icons/${name}.svg`,
+          type: "registry:file",
+          target: `components/blocks/user-account/${slug}/icons/${name}.svg`,
+        },
+      ]),
     ],
   }
 }
@@ -541,6 +554,7 @@ function userAccountTeamMembersBlock(
       "select",
       "table",
     ],
+    images = [],
   } = {}
 ) {
   return {
@@ -557,6 +571,11 @@ function userAccountTeamMembersBlock(
         type: "registry:component",
         target: `components/blocks/user-account/${slug}/team-members.tsx`,
       },
+      ...images.map((file) => ({
+        path: `registry/blocks/user-account/team-members/${slug}/images/${file}`,
+        type: "registry:file",
+        target: `components/blocks/user-account/${slug}/images/${file}`,
+      })),
     ],
   }
 }
@@ -3960,14 +3979,20 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "forgot-password-02",
     description:
-      "Split forgot password: recovery form beside a large key icon panel.",
+      "Split forgot password: recovery form beside a photo cover panel.",
     registryDependencies: ["button", "input", "label"],
-    dependencies: ["lucide-react"],
+    dependencies: [],
     files: [
       {
         path: "registry/blocks/authentication/forgot-password/forgot-password-02/forgot-password-form.tsx",
         type: "registry:component",
         target: "components/blocks/authentication/forgot-password-02/forgot-password-form.tsx",
+      },
+      {
+        path: "registry/blocks/authentication/forgot-password/forgot-password-02/images/cover.webp",
+        type: "registry:file",
+        target:
+          "components/blocks/authentication/forgot-password-02/images/cover.webp",
       },
     ],
   },
@@ -4037,15 +4062,21 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "reset-password-03",
     description:
-      "Split reset password: form beside a large key icon panel.",
+      "Split reset password: form beside a photo cover panel.",
     registryDependencies: ["button", "input", "label"],
-    dependencies: ["lucide-react"],
+    dependencies: [],
     files: [
       {
         path: "registry/blocks/authentication/reset-password/reset-password-03/reset-password-form.tsx",
         type: "registry:component",
         target:
           "components/blocks/authentication/reset-password-03/reset-password-form.tsx",
+      },
+      {
+        path: "registry/blocks/authentication/reset-password/reset-password-03/images/cover.webp",
+        type: "registry:file",
+        target:
+          "components/blocks/authentication/reset-password-03/images/cover.webp",
       },
     ],
   },
@@ -4069,9 +4100,11 @@ const registryItemsRaw = [
     name: "otp-verification-01",
     type: "registry:block",
     title: "otp-verification-01",
-    description: "Centered 6-digit OTP verification.",
+    description:
+      "Email OTP card — masked address, 3–3 slots, resend countdown, different-email link (RTL/LTR).",
+    cssVars: SOFT_SURFACE_CSS_VARS,
     registryDependencies: ["button", "input-otp", "label"],
-    dependencies: ["input-otp"],
+    dependencies: ["input-otp", "lucide-react"],
     files: [
       {
         path: "registry/blocks/authentication/otp-verification/otp-verification-01/otp-verification-form.tsx",
@@ -4085,9 +4118,11 @@ const registryItemsRaw = [
     name: "otp-verification-02",
     type: "registry:block",
     title: "otp-verification-02",
-    description: "OTP verification with auto-focus on the first slot.",
+    description:
+      "SMS OTP card — continuous 6 slots, masked phone, change number, resend countdown (RTL/LTR).",
+    cssVars: SOFT_SURFACE_CSS_VARS,
     registryDependencies: ["button", "input-otp", "label"],
-    dependencies: ["input-otp"],
+    dependencies: ["input-otp", "lucide-react"],
     files: [
       {
         path: "registry/blocks/authentication/otp-verification/otp-verification-02/otp-verification-form.tsx",
@@ -4101,9 +4136,11 @@ const registryItemsRaw = [
     name: "otp-verification-03",
     type: "registry:block",
     title: "otp-verification-03",
-    description: "Email verification with a 6-digit OTP.",
+    description:
+      "Split brand OTP — dark trust panel + light form with countdown (RTL/LTR).",
+    cssVars: SOFT_SURFACE_CSS_VARS,
     registryDependencies: ["button", "input-otp", "label"],
-    dependencies: ["input-otp"],
+    dependencies: ["input-otp", "lucide-react"],
     files: [
       {
         path: "registry/blocks/authentication/otp-verification/otp-verification-03/otp-verification-form.tsx",
@@ -4117,9 +4154,11 @@ const registryItemsRaw = [
     name: "otp-verification-04",
     type: "registry:block",
     title: "otp-verification-04",
-    description: "Phone verification with a 6-digit OTP.",
+    description:
+      "Error-recovery OTP — invalid slots, alert copy, Try again + Resend (RTL/LTR).",
+    cssVars: SOFT_SURFACE_CSS_VARS,
     registryDependencies: ["button", "input-otp", "label"],
-    dependencies: ["input-otp"],
+    dependencies: ["input-otp", "lucide-react"],
     files: [
       {
         path: "registry/blocks/authentication/otp-verification/otp-verification-04/otp-verification-form.tsx",
@@ -4130,10 +4169,47 @@ const registryItemsRaw = [
     ],
   },
   {
+    name: "otp-verification-05",
+    type: "registry:block",
+    title: "otp-verification-05",
+    description:
+      "Trust-device OTP — fingerprint mark, 30-day trust checkbox, verify (RTL/LTR).",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    registryDependencies: ["button", "checkbox", "input-otp", "label"],
+    dependencies: ["input-otp", "lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/authentication/otp-verification/otp-verification-05/otp-verification-form.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/authentication/otp-verification-05/otp-verification-form.tsx",
+      },
+    ],
+  },
+  {
+    name: "otp-verification-06",
+    type: "registry:block",
+    title: "otp-verification-06",
+    description:
+      "Onboarding-step OTP — step 2 of 3 progress, Back / Continue funnel (RTL/LTR).",
+    registryDependencies: ["button", "input-otp", "label"],
+    dependencies: ["input-otp", "lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/authentication/otp-verification/otp-verification-06/otp-verification-form.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/authentication/otp-verification-06/otp-verification-form.tsx",
+      },
+    ],
+  },
+  {
     name: "two-factor-01",
     type: "registry:block",
     title: "two-factor-01",
-    description: "Authenticator app 2FA challenge.",
+    description:
+      "Authenticator TOTP challenge — 3–3 slots, 30s hint, use another method (RTL/LTR).",
+    cssVars: SOFT_SURFACE_CSS_VARS,
     registryDependencies: ["button", "input-otp", "label"],
     dependencies: ["input-otp", "lucide-react"],
     files: [
@@ -4149,7 +4225,9 @@ const registryItemsRaw = [
     name: "two-factor-02",
     type: "registry:block",
     title: "two-factor-02",
-    description: "SMS 2FA challenge with a 6-digit code.",
+    description:
+      "SMS 2FA — continuous 6 slots, resend countdown, try authenticator (RTL/LTR).",
+    cssVars: SOFT_SURFACE_CSS_VARS,
     registryDependencies: ["button", "input-otp", "label"],
     dependencies: ["input-otp", "lucide-react"],
     files: [
@@ -4165,8 +4243,11 @@ const registryItemsRaw = [
     name: "two-factor-03",
     type: "registry:block",
     title: "two-factor-03",
-    description: "Backup code 2FA challenge.",
-    registryDependencies: ["button", "input", "label"],
+    description:
+      "Backup code 2FA — mono input, codes-left chip, single-use warning (RTL/LTR).",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    registryDependencies: ["badge", "button", "input", "label"],
+    dependencies: ["lucide-react"],
     files: [
       {
         path: "registry/blocks/authentication/two-factor/two-factor-03/two-factor-form.tsx",
@@ -4180,8 +4261,10 @@ const registryItemsRaw = [
     name: "two-factor-04",
     type: "registry:block",
     title: "two-factor-04",
-    description: "Choose a 2FA method: authenticator, SMS, or backup code.",
-    registryDependencies: ["button"],
+    description:
+      "Choose 2FA method — selectable cards with Recommended badge (RTL/LTR).",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    registryDependencies: ["badge", "button"],
     dependencies: ["lucide-react"],
     files: [
       {
@@ -4193,10 +4276,48 @@ const registryItemsRaw = [
     ],
   },
   {
+    name: "two-factor-05",
+    type: "registry:block",
+    title: "two-factor-05",
+    description:
+      "Passkey-as-2FA — Continue with passkey or enter authenticator code (RTL/LTR).",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    registryDependencies: ["button", "input-otp", "label"],
+    dependencies: ["input-otp", "lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/authentication/two-factor/two-factor-05/two-factor-form.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/authentication/two-factor-05/two-factor-form.tsx",
+      },
+    ],
+  },
+  {
+    name: "two-factor-06",
+    type: "registry:block",
+    title: "two-factor-06",
+    description:
+      "New-device alert split — location meta + approve with TOTP / deny (RTL/LTR).",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    registryDependencies: ["button", "input-otp", "label"],
+    dependencies: ["input-otp", "lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/authentication/two-factor/two-factor-06/two-factor-form.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/authentication/two-factor-06/two-factor-form.tsx",
+      },
+    ],
+  },
+  {
     name: "social-login-01",
     type: "registry:block",
     title: "social-login-01",
-    description: "Social-only sign-in with labeled provider buttons.",
+    description:
+      "Provider stack — full-width Google/Apple/GitHub/Facebook, create account (RTL/LTR).",
+    cssVars: SOFT_SURFACE_CSS_VARS,
     registryDependencies: ["button"],
     files: [
       {
@@ -4217,7 +4338,9 @@ const registryItemsRaw = [
     name: "social-login-02",
     type: "registry:block",
     title: "social-login-02",
-    description: "Social providers plus email magic link.",
+    description:
+      "Social providers plus email magic link with password fallback (RTL/LTR).",
+    cssVars: SOFT_SURFACE_CSS_VARS,
     registryDependencies: ["button", "input", "label", "separator"],
     files: [
       {
@@ -4233,7 +4356,9 @@ const registryItemsRaw = [
     name: "social-login-03",
     type: "registry:block",
     title: "social-login-03",
-    description: "Compact social sign-in with icon-only provider buttons.",
+    description:
+      "Compact icon-only providers with continue-with-email link (RTL/LTR).",
+    cssVars: SOFT_SURFACE_CSS_VARS,
     registryDependencies: ["button"],
     files: [
       {
@@ -4256,9 +4381,10 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "social-login-04",
     description:
-      "Split social sign-in: providers beside a large users icon panel.",
+      "Photo-split social sign-in — cover panel + Google/Apple card (RTL/LTR).",
+    cssVars: SOFT_SURFACE_CSS_VARS,
     registryDependencies: ["button", "separator"],
-    dependencies: ["lucide-react"],
+    dependencies: [],
     files: [
       {
         path: "registry/blocks/authentication/social-login/social-login-04/social-login-form.tsx",
@@ -4266,14 +4392,59 @@ const registryItemsRaw = [
         target:
           "components/blocks/authentication/social-login-04/social-login-form.tsx",
       },
+      {
+        path: "registry/blocks/authentication/social-login/social-login-04/images/cover.webp",
+        type: "registry:file",
+        target:
+          "components/blocks/authentication/social-login-04/images/cover.webp",
+      },
       ...authSocialIconFiles("social-login-04", ["google", "apple"]),
+    ],
+  },
+  {
+    name: "social-login-05",
+    type: "registry:block",
+    title: "social-login-05",
+    description:
+      "Last-used primary Google CTA with outline Apple and GitHub (RTL/LTR).",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    registryDependencies: ["badge", "button"],
+    files: [
+      {
+        path: "registry/blocks/authentication/social-login/social-login-05/social-login-form.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/authentication/social-login-05/social-login-form.tsx",
+      },
+      ...authSocialIconFiles("social-login-05", ["google", "apple", "github"]),
+    ],
+  },
+  {
+    name: "social-login-06",
+    type: "registry:block",
+    title: "social-login-06",
+    description:
+      "Brand-split social sign-in — dark trust panel + Google/Apple + magic link (RTL/LTR).",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    registryDependencies: ["button", "input", "label", "separator"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/authentication/social-login/social-login-06/social-login-form.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/authentication/social-login-06/social-login-form.tsx",
+      },
+      ...authSocialIconFiles("social-login-06", ["google", "apple"]),
     ],
   },
   {
     name: "passkey-01",
     type: "registry:block",
     title: "passkey-01",
-    description: "Passkey-first sign-in.",
+    description:
+      "Passkey-first sign-in — fingerprint mark, trust line, another-way link (RTL/LTR).",
+    cssVars: SOFT_SURFACE_CSS_VARS,
     registryDependencies: ["button"],
     dependencies: ["lucide-react"],
     files: [
@@ -4288,7 +4459,9 @@ const registryItemsRaw = [
     name: "passkey-02",
     type: "registry:block",
     title: "passkey-02",
-    description: "Passkey sign-in with password fallback.",
+    description:
+      "Conditional email then passkey CTA with password fallback (RTL/LTR).",
+    cssVars: SOFT_SURFACE_CSS_VARS,
     registryDependencies: ["button", "input", "label", "separator"],
     dependencies: ["lucide-react"],
     files: [
@@ -4303,7 +4476,9 @@ const registryItemsRaw = [
     name: "passkey-03",
     type: "registry:block",
     title: "passkey-03",
-    description: "Passkey setup / registration steps.",
+    description:
+      "Passkey setup wizard — numbered steps, progress, skip later (RTL/LTR).",
+    cssVars: SOFT_SURFACE_CSS_VARS,
     registryDependencies: ["button"],
     dependencies: ["lucide-react"],
     files: [
@@ -4315,11 +4490,65 @@ const registryItemsRaw = [
     ],
   },
   {
+    name: "passkey-04",
+    type: "registry:block",
+    title: "passkey-04",
+    description:
+      "Manage passkeys — device list, This device badge, Add / Revoke (RTL/LTR).",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    registryDependencies: ["badge", "button"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/authentication/passkey/passkey-04/passkey-form.tsx",
+        type: "registry:component",
+        target: "components/blocks/authentication/passkey-04/passkey-form.tsx",
+      },
+    ],
+  },
+  {
+    name: "passkey-05",
+    type: "registry:block",
+    title: "passkey-05",
+    description:
+      "Cross-device passkey — QR panel + use this device instead (RTL/LTR).",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    registryDependencies: ["button"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/authentication/passkey/passkey-05/passkey-form.tsx",
+        type: "registry:component",
+        target: "components/blocks/authentication/passkey-05/passkey-form.tsx",
+      },
+    ],
+  },
+  {
+    name: "passkey-06",
+    type: "registry:block",
+    title: "passkey-06",
+    description:
+      "Brand-split passkey sign-in — dark trust panel + light CTA form (RTL/LTR).",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    registryDependencies: ["button"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/authentication/passkey/passkey-06/passkey-form.tsx",
+        type: "registry:component",
+        target: "components/blocks/authentication/passkey-06/passkey-form.tsx",
+      },
+    ],
+  },
+  {
     name: "account-recovery-01",
     type: "registry:block",
     title: "account-recovery-01",
-    description: "Recover account by email.",
+    description:
+      "Email recovery request — mail mark, trust line, back to sign in (RTL/LTR).",
+    cssVars: SOFT_SURFACE_CSS_VARS,
     registryDependencies: ["button", "input", "label"],
+    dependencies: ["lucide-react"],
     files: [
       {
         path: "registry/blocks/authentication/account-recovery/account-recovery-01/account-recovery-form.tsx",
@@ -4333,11 +4562,12 @@ const registryItemsRaw = [
     name: "account-recovery-02",
     type: "registry:block",
     title: "account-recovery-02",
-    description: "Recover account by phone with country dial code.",
+    description:
+      "Phone recovery with country dial InputGroup and smartphone mark (RTL/LTR).",
+    cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: [
       "button",
-      "input",
       "input-group",
       "label",
       "popover",
@@ -4355,15 +4585,11 @@ const registryItemsRaw = [
     name: "account-recovery-03",
     type: "registry:block",
     title: "account-recovery-03",
-    description: "Recover account by verifying identity details.",
-    dependencies: ["date-fns", "lucide-react"],
-    registryDependencies: [
-      "button",
-      "calendar",
-      "input",
-      "label",
-      "popover",
-    ],
+    description:
+      "Check inbox confirmation — masked email, open mail app, resend countdown (RTL/LTR).",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: ["button"],
     files: [
       {
         path: "registry/blocks/authentication/account-recovery/account-recovery-03/account-recovery-form.tsx",
@@ -4377,8 +4603,11 @@ const registryItemsRaw = [
     name: "account-recovery-04",
     type: "registry:block",
     title: "account-recovery-04",
-    description: "Recover account with a one-time recovery code.",
-    registryDependencies: ["button", "input", "label"],
+    description:
+      "Backup recovery code — mono input, remaining badge, verify (RTL/LTR).",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    registryDependencies: ["badge", "button", "input", "label"],
+    dependencies: ["lucide-react"],
     files: [
       {
         path: "registry/blocks/authentication/account-recovery/account-recovery-04/account-recovery-form.tsx",
@@ -4389,11 +4618,47 @@ const registryItemsRaw = [
     ],
   },
   {
+    name: "account-recovery-05",
+    type: "registry:block",
+    title: "account-recovery-05",
+    description:
+      "Choose recovery method — email, SMS, backup code, or support (RTL/LTR).",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    registryDependencies: ["badge", "button"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/authentication/account-recovery/account-recovery-05/account-recovery-form.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/authentication/account-recovery-05/account-recovery-form.tsx",
+      },
+    ],
+  },
+  {
+    name: "account-recovery-06",
+    type: "registry:block",
+    title: "account-recovery-06",
+    description:
+      "Brand-split locked recovery — dark trust panel + light email form (RTL/LTR).",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    registryDependencies: ["button", "input", "label"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/authentication/account-recovery/account-recovery-06/account-recovery-form.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/authentication/account-recovery-06/account-recovery-form.tsx",
+      },
+    ],
+  },
+  {
     name: "banner-01",
     type: "registry:block",
     title: "banner-01",
     description:
-      "Violet-to-orange gradient strip for free shipping and first-purchase deal.",
+      "Soft primary shipping strip with live pulse — free express + first-purchase deal (RTL/LTR).",
     files: [
       {
         path: "registry/blocks/marketing/banner/banner-01/banner.tsx",
@@ -4406,7 +4671,9 @@ const registryItemsRaw = [
     name: "banner-02",
     type: "registry:block",
     title: "banner-02",
-    description: "Dark gray full-width promo strip with the same deal copy.",
+    description:
+      "Dark agent-mode launch strip with sparkles and Try it link (RTL/LTR).",
+    dependencies: ["lucide-react"],
     files: [
       {
         path: "registry/blocks/marketing/banner/banner-02/banner.tsx",
@@ -4420,7 +4687,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "banner-03",
     description:
-      "Violet-to-orange action strip with Claim Offer CTA and dismiss.",
+      "Primary passkey enable strip with CTA pill and dismiss (RTL/LTR).",
     dependencies: ["lucide-react"],
     files: [
       {
@@ -4434,7 +4701,8 @@ const registryItemsRaw = [
     name: "banner-04",
     type: "registry:block",
     title: "banner-04",
-    description: "Dark action strip with Claim Offer CTA and dismiss.",
+    description:
+      "Dark invite-only claim strip with primary CTA and dismiss (RTL/LTR).",
     dependencies: ["lucide-react"],
     files: [
       {
@@ -4449,7 +4717,8 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "banner-05",
     description:
-      "Rounded violet-to-orange ticket promo pill with underlined CTA and arrow.",
+      "Primary floating conference ticket pill with link CTA (RTL/LTR).",
+    cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     files: [
       {
@@ -4463,7 +4732,9 @@ const registryItemsRaw = [
     name: "banner-06",
     type: "registry:block",
     title: "banner-06",
-    description: "Dark ticket promo pill with underlined CTA and arrow.",
+    description:
+      "Dark floating workshop ticket pill with primary link CTA (RTL/LTR).",
+    cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     files: [
       {
@@ -4478,7 +4749,8 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "banner-07",
     description:
-      "Blue-to-purple strip with free shipping, discount, and promo code.",
+      "Card shipping strip with mono promo code copy chip (RTL/LTR).",
+    dependencies: ["lucide-react"],
     files: [
       {
         path: "registry/blocks/marketing/banner/banner-07/banner.tsx",
@@ -4491,7 +4763,8 @@ const registryItemsRaw = [
     name: "banner-08",
     type: "registry:block",
     title: "banner-08",
-    description: "Indigo-to-white launch-offer strip with pill tag.",
+    description:
+      "Solid indigo launch strip with Launch pill and free credits copy (RTL/LTR).",
     files: [
       {
         path: "registry/blocks/marketing/banner/banner-08/banner.tsx",
@@ -4504,7 +4777,9 @@ const registryItemsRaw = [
     name: "banner-09",
     type: "registry:block",
     title: "banner-09",
-    description: "Lime-to-white strip with green New tag.",
+    description:
+      "Solid emerald New feature strip for AI layout assistant (RTL/LTR).",
+    dependencies: ["lucide-react"],
     files: [
       {
         path: "registry/blocks/marketing/banner/banner-09/banner.tsx",
@@ -4517,7 +4792,8 @@ const registryItemsRaw = [
     name: "banner-10",
     type: "registry:block",
     title: "banner-10",
-    description: "Orange gradient strip with Check it out pill CTA.",
+    description:
+      "Solid orange templates drop strip with Browse pack pill CTA (RTL/LTR).",
     dependencies: ["lucide-react"],
     files: [
       {
@@ -4531,7 +4807,8 @@ const registryItemsRaw = [
     name: "banner-11",
     type: "registry:block",
     title: "banner-11",
-    description: "Purple full-width explore link with hover pill.",
+    description:
+      "Full-width violet changelog link banner with hover wash (RTL/LTR).",
     dependencies: ["lucide-react"],
     files: [
       {
@@ -4545,7 +4822,8 @@ const registryItemsRaw = [
     name: "banner-12",
     type: "registry:block",
     title: "banner-12",
-    description: "Violet-to-lavender strip with Explore now CTA.",
+    description:
+      "Dark zinc explore strip with solid primary Explore now CTA (RTL/LTR).",
     dependencies: ["lucide-react"],
     files: [
       {
@@ -4560,7 +4838,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "banner-13",
     description:
-      "Lime limited-time deals strip with static D/H/M/S countdown and checkout link.",
+      "Lime flash-sale strip with mono countdown chips and shop link (RTL/LTR).",
     files: [
       {
         path: "registry/blocks/marketing/banner/banner-13/banner.tsx",
@@ -4573,7 +4851,8 @@ const registryItemsRaw = [
     name: "banner-14",
     type: "registry:block",
     title: "banner-14",
-    description: "Dark financing offer strip with Shop now link.",
+    description:
+      "Dark 0% APR financing strip with See terms link (RTL/LTR).",
     dependencies: ["lucide-react"],
     files: [
       {
@@ -4587,7 +4866,8 @@ const registryItemsRaw = [
     name: "banner-15",
     type: "registry:block",
     title: "banner-15",
-    description: "Dark free-shipping bar with sparkles and promo code.",
+    description:
+      "Dark free-shipping bar with sparkles and mono promo code chip (RTL/LTR).",
     dependencies: ["lucide-react"],
     files: [
       {
@@ -5039,6 +5319,40 @@ const registryItemsRaw = [
         path: "registry/blocks/marketing/how-it-works/how-it-works-02/how-it-works.tsx",
         type: "registry:component",
         target: "components/blocks/marketing/how-it-works-02/how-it-works.tsx",
+      },
+    ],
+  },
+  {
+    name: "how-it-works-03",
+    type: "registry:block",
+    title: "how-it-works-03",
+    description:
+      "Dark AI agent how-it-works — attach context, run tools, review diff, open PR (RTL/LTR).",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    registryDependencies: ["badge", "button"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/marketing/how-it-works/how-it-works-03/how-it-works.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/how-it-works-03/how-it-works.tsx",
+      },
+    ],
+  },
+  {
+    name: "how-it-works-04",
+    type: "registry:block",
+    title: "how-it-works-04",
+    description:
+      "Passkey sign-in how-it-works — email, device trust, create passkey, welcome (RTL/LTR).",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    registryDependencies: ["button"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/marketing/how-it-works/how-it-works-04/how-it-works.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/how-it-works-04/how-it-works.tsx",
       },
     ],
   },
@@ -6359,7 +6673,15 @@ const registryItemsRaw = [
   ),
   onboardingSetupWizardBlock(
     "setup-wizard-01",
-    "Four-step onboarding — account, email OTP, experience, and launch."
+    "Compact card wizard — separated stepper band, account, OTP, experience, launch (RTL/LTR)."
+  ),
+  onboardingSetupWizardBlock(
+    "setup-wizard-02",
+    "Vertical rail wizard — left step list, right panel, mobile progress (RTL/LTR)."
+  ),
+  onboardingSetupWizardBlock(
+    "setup-wizard-03",
+    "Brand-split wizard — dark progress panel + light step form (RTL/LTR)."
   ),
   {
     name: "workspace-setup-01",
@@ -6689,15 +7011,151 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "empty-state-01",
     description:
-      "Empty state gallery — no results, empty inbox, access restricted, and create-first patterns.",
+      "Search no results — query field, filter chips, and clear / refine CTAs.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
-    registryDependencies: ["badge", "button", "empty"],
+    registryDependencies: ["badge", "button", "empty", "input"],
     files: [
       {
         path: "registry/blocks/feedback-states/empty-state/empty-state-01/empty-state.tsx",
         type: "registry:component",
         target: "components/blocks/feedback-states/empty-state-01/empty-state.tsx",
+      },
+    ],
+  },
+  {
+    name: "empty-state-02",
+    type: "registry:block",
+    title: "empty-state-02",
+    description:
+      "Empty inbox — mail folder rail, list header, and compose CTA.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: ["badge", "button", "empty"],
+    files: [
+      {
+        path: "registry/blocks/feedback-states/empty-state/empty-state-02/empty-state.tsx",
+        type: "registry:component",
+        target: "components/blocks/feedback-states/empty-state-02/empty-state.tsx",
+      },
+    ],
+  },
+  {
+    name: "empty-state-03",
+    type: "registry:block",
+    title: "empty-state-03",
+    description:
+      "No projects — board chrome, dashed create tile, and create project CTA.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: ["button", "empty"],
+    files: [
+      {
+        path: "registry/blocks/feedback-states/empty-state/empty-state-03/empty-state.tsx",
+        type: "registry:component",
+        target: "components/blocks/feedback-states/empty-state-03/empty-state.tsx",
+      },
+    ],
+  },
+  {
+    name: "empty-state-04",
+    type: "registry:block",
+    title: "empty-state-04",
+    description:
+      "Table no results — column header chrome and adjust / clear filters.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: ["button", "empty"],
+    files: [
+      {
+        path: "registry/blocks/feedback-states/empty-state/empty-state-04/empty-state.tsx",
+        type: "registry:component",
+        target: "components/blocks/feedback-states/empty-state-04/empty-state.tsx",
+      },
+    ],
+  },
+  {
+    name: "empty-state-05",
+    type: "registry:block",
+    title: "empty-state-05",
+    description:
+      "Empty team — avatar placeholders and invite members CTA.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: ["avatar", "button", "empty"],
+    files: [
+      {
+        path: "registry/blocks/feedback-states/empty-state/empty-state-05/empty-state.tsx",
+        type: "registry:component",
+        target: "components/blocks/feedback-states/empty-state-05/empty-state.tsx",
+      },
+    ],
+  },
+  {
+    name: "empty-state-06",
+    type: "registry:block",
+    title: "empty-state-06",
+    description:
+      "Empty files — breadcrumb chrome, dashed dropzone, and upload CTA.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: ["button", "empty"],
+    files: [
+      {
+        path: "registry/blocks/feedback-states/empty-state/empty-state-06/empty-state.tsx",
+        type: "registry:component",
+        target: "components/blocks/feedback-states/empty-state-06/empty-state.tsx",
+      },
+    ],
+  },
+  {
+    name: "empty-state-07",
+    type: "registry:block",
+    title: "empty-state-07",
+    description:
+      "Chart no data — metric header, placeholder plot, and connect source CTA.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: ["button", "empty", "separator"],
+    files: [
+      {
+        path: "registry/blocks/feedback-states/empty-state/empty-state-07/empty-state.tsx",
+        type: "registry:component",
+        target: "components/blocks/feedback-states/empty-state-07/empty-state.tsx",
+      },
+    ],
+  },
+  {
+    name: "empty-state-08",
+    type: "registry:block",
+    title: "empty-state-08",
+    description:
+      "Quiet notifications — activity panel with all-caught-up empty and prefs.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: ["button", "empty"],
+    files: [
+      {
+        path: "registry/blocks/feedback-states/empty-state/empty-state-08/empty-state.tsx",
+        type: "registry:component",
+        target: "components/blocks/feedback-states/empty-state-08/empty-state.tsx",
+      },
+    ],
+  },
+  {
+    name: "empty-state-09",
+    type: "registry:block",
+    title: "empty-state-09",
+    description:
+      "First-run onboarding — checklist steps and start setup CTA.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: ["button", "checkbox", "empty", "separator"],
+    files: [
+      {
+        path: "registry/blocks/feedback-states/empty-state/empty-state-09/empty-state.tsx",
+        type: "registry:component",
+        target: "components/blocks/feedback-states/empty-state-09/empty-state.tsx",
       },
     ],
   },
@@ -6707,11 +7165,11 @@ const registryItemsRaw = [
   ),
   userAccountSettingsBlock(
     "account-settings-01",
-    "Account settings — profile, notifications, security, and appearance tabs."
+    "Vertical settings shell — profile, security, notifications, API keys (RTL/LTR)."
   ),
   userAccountSettingsBlock(
     "account-settings-02",
-    "Account & workspace settings — stacked sections for profile, workspace defaults, and email digest.",
+    "Stacked account & workspace form with email digest radios (RTL/LTR).",
     {
       registryDependencies: [
         "button",
@@ -6727,31 +7185,217 @@ const registryItemsRaw = [
   ),
   userAccountSettingsBlock(
     "account-settings-03",
-    "Account & workspace settings — stacked sections with team and usage alert checkboxes.",
+    "Sessions & devices — revoke remote sessions with device marks (RTL/LTR).",
+    {
+      registryDependencies: ["badge", "button"],
+      images: [],
+    }
+  ),
+  userAccountSettingsBlock(
+    "account-settings-04",
+    "Connected accounts — Google, Apple, GitHub connect/disconnect (RTL/LTR).",
+    {
+      registryDependencies: ["badge", "button"],
+      images: [],
+      icons: ["google", "apple", "github"],
+    }
+  ),
+  userAccountSettingsBlock(
+    "account-settings-05",
+    "Appearance — theme tiles, language, density (RTL/LTR).",
+    {
+      registryDependencies: ["button", "label", "radio-group", "select"],
+      images: [],
+    }
+  ),
+  userAccountTeamMembersBlock(
+    "team-members-01",
+    "Team table — invite dialog, seats badge, roles, status, and row actions (RTL/LTR).",
+    {
+      images: [
+        "avatar-01.webp",
+        "avatar-02.webp",
+        "avatar-03.webp",
+        "avatar-04.webp",
+      ],
+    }
+  ),
+  userAccountTeamMembersBlock(
+    "team-members-02",
+    "People card grid — role/status badges and overflow actions (RTL/LTR).",
+    {
+      registryDependencies: ["avatar", "badge", "button", "dropdown-menu"],
+      images: [
+        "avatar-01.webp",
+        "avatar-02.webp",
+        "avatar-03.webp",
+        "avatar-04.webp",
+        "avatar-05.webp",
+      ],
+    }
+  ),
+  userAccountTeamMembersBlock(
+    "team-members-03",
+    "Search + status tabs member list with row actions (RTL/LTR).",
     {
       registryDependencies: [
+        "avatar",
+        "badge",
+        "button",
+        "dropdown-menu",
+        "input",
+        "tabs",
+      ],
+      images: [
+        "avatar-01.webp",
+        "avatar-02.webp",
+        "avatar-03.webp",
+        "avatar-04.webp",
+        "avatar-05.webp",
+      ],
+    }
+  ),
+  userAccountTeamMembersBlock(
+    "team-members-04",
+    "Seats meter + members table with last-active column (RTL/LTR).",
+    {
+      registryDependencies: [
+        "avatar",
+        "badge",
+        "button",
+        "dropdown-menu",
+        "progress",
+        "table",
+      ],
+      images: [
+        "avatar-01.webp",
+        "avatar-02.webp",
+        "avatar-03.webp",
+        "avatar-04.webp",
+      ],
+    }
+  ),
+  userAccountTeamMembersBlock(
+    "team-members-05",
+    "Inline invite strip above current team list — no modal (RTL/LTR).",
+    {
+      registryDependencies: [
+        "avatar",
+        "badge",
+        "button",
+        "input",
+        "label",
+        "select",
+      ],
+      images: [
+        "avatar-01.webp",
+        "avatar-02.webp",
+        "avatar-03.webp",
+        "avatar-04.webp",
+      ],
+    }
+  ),
+  userAccountTeamMembersBlock(
+    "team-members-06",
+    "Pending invites + active members with real avatar photos (RTL/LTR).",
+    {
+      registryDependencies: ["avatar", "badge", "button", "dropdown-menu"],
+      images: [
+        "avatar-01.webp",
+        "avatar-02.webp",
+        "avatar-03.webp",
+        "avatar-04.webp",
+        "avatar-05.webp",
+      ],
+    }
+  ),
+  userAccountRolesAndPermissionsBlock(
+    "roles-and-permissions-01",
+    "RBAC matrix — role columns, resource groups, locked admin, discard/save.",
+    {
+      registryDependencies: [
+        "badge",
         "button",
         "checkbox",
+        "table",
+        "tooltip",
+      ],
+    }
+  ),
+  userAccountRolesAndPermissionsBlock(
+    "roles-and-permissions-02",
+    "Role cards — member counts, scope chips, Edit and Duplicate actions.",
+    {
+      registryDependencies: ["badge", "button", "separator"],
+    }
+  ),
+  userAccountRolesAndPermissionsBlock(
+    "roles-and-permissions-03",
+    "Role editor — left role list, name/description fields, grouped permission checklists.",
+    {
+      registryDependencies: [
+        "badge",
+        "button",
+        "checkbox",
+        "field",
+        "input",
+        "separator",
+        "textarea",
+      ],
+    }
+  ),
+  userAccountUserProfileBlock(
+    "user-profile-01",
+    "Public profile — header, follow actions, sidebar stats/skills, and repos/activity/starred tabs.",
+    { images: ["avatar.avif"] }
+  ),
+  userAccountUserProfileBlock(
+    "user-profile-02",
+    "Creator card — centered avatar, social row, followers strip, Follow and Message.",
+    {
+      images: ["avatar.avif"],
+      registryDependencies: ["avatar", "badge", "button"],
+    }
+  ),
+  userAccountUserProfileBlock(
+    "user-profile-03",
+    "Cover profile — gradient banner, about column, and featured work icon grid.",
+    {
+      images: ["avatar.webp"],
+      registryDependencies: ["avatar", "badge", "button", "separator"],
+    }
+  ),
+  userAccountUserProfileBlock(
+    "user-profile-04",
+    "Account settings profile — rail navigation and editable profile fields.",
+    {
+      images: ["avatar.webp"],
+      registryDependencies: [
+        "avatar",
+        "button",
         "field",
         "input",
         "select",
         "separator",
         "textarea",
       ],
-      images: [],
     }
   ),
-  userAccountTeamMembersBlock(
-    "team-members-01",
-    "Team members table — invite dialog, roles, status badges, and row actions."
-  ),
-  userAccountRolesAndPermissionsBlock(
-    "roles-and-permissions-01",
-    "RBAC matrix - role columns, resource groups, checkboxes, tooltips, discard/save dirty state (RTL/LTR)."
+  userAccountUserProfileBlock(
+    "user-profile-05",
+    "Resume profile — editorial header, experience timeline, and skill chips.",
+    {
+      images: ["avatar.avif"],
+      registryDependencies: ["avatar", "badge", "separator"],
+    }
   ),
   userAccountUserProfileBlock(
-    "user-profile-01",
-    "Public profile — cover banner, follow actions, sidebar stats/skills, and repos/activity/starred tabs."
+    "user-profile-06",
+    "Org directory member — role badge, availability, Message and Book time CTAs.",
+    {
+      images: ["avatar.webp"],
+      registryDependencies: ["avatar", "badge", "button", "separator"],
+    }
   ),
   paymentsBillingPaymentFormBlock(
     "payment-form-01",
@@ -8454,16 +9098,18 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "application-form-01",
     description:
-      "Early-access application — contact, company, use case, and selectable plan cards.",
+      "Early-access application on canvas — contact, company, plan cards, notes, and terms.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: [],
     registryDependencies: [
       "button",
+      "checkbox",
       "field",
       "input",
       "radio-group",
       "select",
       "separator",
+      "textarea",
     ],
     files: [
       {
@@ -8471,6 +9117,87 @@ const registryItemsRaw = [
         type: "registry:component",
         target:
           "components/blocks/forms/application-form-01/application-form.tsx",
+      },
+    ],
+  },
+  {
+    name: "application-form-02",
+    type: "registry:block",
+    title: "application-form-02",
+    description:
+      "Job application — role meta chips, portfolio, experience select, cover note, and consent.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: [],
+    registryDependencies: [
+      "badge",
+      "button",
+      "checkbox",
+      "field",
+      "input",
+      "select",
+      "separator",
+      "textarea",
+    ],
+    files: [
+      {
+        path: "registry/blocks/forms/application-form/application-form-02/application-form.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/forms/application-form-02/application-form.tsx",
+      },
+    ],
+  },
+  {
+    name: "application-form-03",
+    type: "registry:block",
+    title: "application-form-03",
+    description:
+      "Partnership RFP — company details, partnership type cards, brief, and start quarter.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: [],
+    registryDependencies: [
+      "button",
+      "checkbox",
+      "field",
+      "input",
+      "radio-group",
+      "select",
+      "separator",
+      "textarea",
+    ],
+    files: [
+      {
+        path: "registry/blocks/forms/application-form/application-form-03/application-form.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/forms/application-form-03/application-form.tsx",
+      },
+    ],
+  },
+  {
+    name: "application-form-04",
+    type: "registry:block",
+    title: "application-form-04",
+    description:
+      "Cohort enrollment stepper — profile, background, goals, and cohort radios on one card.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: [
+      "button",
+      "checkbox",
+      "field",
+      "input",
+      "radio-group",
+      "select",
+      "separator",
+      "textarea",
+    ],
+    files: [
+      {
+        path: "registry/blocks/forms/application-form/application-form-04/application-form.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/forms/application-form-04/application-form.tsx",
       },
     ],
   },

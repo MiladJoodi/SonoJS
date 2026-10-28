@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "breadcrumbs-01",
+  "type": "registry:block",
+  "title": "breadcrumbs-01",
+  "description": "Centered breadcrumb trail: Home, Profile, and the current Edit page.",
+  "registryDependencies": [
+    "breadcrumb"
+  ],
+  "files": [
+    {
+      "path": "components/blocks/navigation/breadcrumbs-01/breadcrumbs.tsx",
+      "type": "registry:component",
+      "content": "import type * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\nimport {\n  Breadcrumb,\n  BreadcrumbItem,\n  BreadcrumbLink,\n  BreadcrumbList,\n  BreadcrumbPage,\n  BreadcrumbSeparator,\n} from \"@/components/ui/breadcrumb\"\n\nexport default function Breadcrumbs({\n  className,\n  ...props\n}: React.ComponentProps<\"nav\">) {\n  return (\n    <Breadcrumb className={cn(\"w-full max-w-full\", className)} {...props}>\n      <BreadcrumbList className=\"max-w-full justify-center gap-2 px-1 sm:gap-3\">\n        <BreadcrumbItem>\n          <BreadcrumbLink\n            href=\"#\"\n            className=\"font-medium text-muted-foreground hover:text-primary\"\n          >\n            Home\n          </BreadcrumbLink>\n        </BreadcrumbItem>\n        <BreadcrumbSeparator />\n        <BreadcrumbItem>\n          <BreadcrumbLink\n            href=\"#\"\n            className=\"font-medium text-muted-foreground hover:text-primary\"\n          >\n            Profile\n          </BreadcrumbLink>\n        </BreadcrumbItem>\n        <BreadcrumbSeparator />\n        <BreadcrumbItem>\n          <BreadcrumbPage className=\"font-medium\">Edit</BreadcrumbPage>\n        </BreadcrumbItem>\n      </BreadcrumbList>\n    </Breadcrumb>\n  )\n}\n",
+      "target": "components/blocks/navigation/breadcrumbs-01/breadcrumbs.tsx"
+    }
+  ],
+  "version": "0.1.0+b0276619b649",
+  "generatedAt": "2026-10-28T12:28:50.990Z"
+}

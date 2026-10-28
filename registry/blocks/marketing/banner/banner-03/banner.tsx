@@ -12,24 +12,26 @@ export default function Banner({
   return (
     <div
       className={cn(
-        "flex w-full items-center justify-between bg-gradient-to-r from-violet-500 via-[#9938CA] to-[#E0724A] px-4 py-1 text-center text-sm font-medium text-white md:px-14",
+        "flex w-full items-center justify-between gap-3 bg-primary px-4 py-2 text-sm font-medium text-primary-foreground md:px-8",
         className
       )}
       role="region"
       aria-label="Promotion"
       {...props}
     >
-      <p className="min-w-0 text-start">Get 20% OFF on Your First Order!</p>
-      <div className="flex shrink-0 items-center gap-6">
+      <p className="min-w-0 text-start">
+        Passkeys are on — skip passwords on your next sign-in
+      </p>
+      <div className="flex shrink-0 items-center gap-3">
         <button
           type="button"
-          className="cursor-pointer rounded-full bg-white px-7 py-2 font-normal text-zinc-800"
+          className="cursor-pointer rounded-full bg-white px-4 py-1.5 text-xs font-semibold text-zinc-900 transition hover:bg-white/90"
         >
-          Claim Offer
+          Enable
         </button>
         <button
           type="button"
-          className="cursor-pointer text-white"
+          className="cursor-pointer rounded-md p-1 text-primary-foreground/80 transition hover:bg-white/10 hover:text-primary-foreground"
           aria-label="Dismiss"
         >
           <XIcon className="size-3.5" />

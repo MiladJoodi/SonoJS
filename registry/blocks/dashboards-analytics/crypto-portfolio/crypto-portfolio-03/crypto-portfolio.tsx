@@ -91,6 +91,13 @@ const TICKER_EXTRA = [
   { symbol: "ARB", price: 1.12, change: -0.88 },
 ]
 
+type TapeRow = {
+  symbol: string
+  price: number
+  change: number
+  iconSrc?: string
+}
+
 type Point = { i: number; v: number }
 
 function money(n: number, digits = 2) {
@@ -281,8 +288,8 @@ export default function CryptoPortfolio03({
   const equityChange = seriesChange(equitySeries)
   const equityUp = equityChange >= 0
 
-  const tape = React.useMemo(() => {
-    const coins = HOLDINGS.map((h) => {
+  const tape = React.useMemo((): TapeRow[] => {
+    const coins: TapeRow[] = HOLDINGS.map((h) => {
       const series = coinSeries[h.id] ?? []
       const price = series[series.length - 1]?.v ?? h.seed
       const change = seriesChange(series)
@@ -293,7 +300,12 @@ export default function CryptoPortfolio03({
         iconSrc: h.iconSrc,
       }
     })
-    return [...coins, ...tickerExtra]
+    const extras: TapeRow[] = tickerExtra.map((row) => ({
+      symbol: row.symbol,
+      price: row.price,
+      change: row.change,
+    }))
+    return [...coins, ...extras]
   }, [coinSeries, tickerExtra])
 
   const loopTape = [...tape, ...tape]
@@ -345,7 +357,7 @@ export default function CryptoPortfolio03({
                   key={`${row.symbol}-${i}`}
                   className="flex shrink-0 items-center gap-2 font-mono text-xs"
                 >
-                  {"iconSrc" in row && row.iconSrc ? (
+                  {row.iconSrc ? (
                     <img
                       src={row.iconSrc}
                       alt=""

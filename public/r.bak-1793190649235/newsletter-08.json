@@ -1,0 +1,37 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "newsletter-08",
+  "type": "registry:block",
+  "title": "newsletter-08",
+  "description": "Primary gradient band with overlapping card form (email Input + Subscribe) hanging below.",
+  "registryDependencies": [
+    "button",
+    "input"
+  ],
+  "cssVars": {
+    "light": {
+      "canvas": "#f3f3f4",
+      "border-soft": "color-mix(in oklab, #e4e4e7 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18)",
+      "background": "var(--canvas)",
+      "card": "#ffffff"
+    },
+    "dark": {
+      "canvas": "#09090b",
+      "border-soft": "color-mix(in oklab, #27272a 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(0, 0, 0, 0.24), 0 28px 56px -28px rgba(0, 0, 0, 0.48)",
+      "background": "var(--canvas)",
+      "card": "#18181b"
+    }
+  },
+  "files": [
+    {
+      "path": "components/blocks/marketing/newsletter-08/newsletter.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport type * as React from \"react\"\n\nimport { Button } from \"@/components/ui/button\"\nimport { Input } from \"@/components/ui/input\"\nimport { cn } from \"@/lib/utils\"\n\nexport default function Newsletter({\n  title = \"Subscribe to Our Newsletter\",\n  description = \"Subscribe to our newsletter and stay up to date with the latest news, updates, and exclusive offers. Get valuable insights. Join our community today!\",\n  placeholder = \"you@example.com\",\n  cta = \"Subscribe\",\n  className,\n  ...props\n}: React.ComponentProps<\"section\"> & {\n  title?: string\n  description?: string\n  placeholder?: string\n  cta?: string\n}) {\n  return (\n    <section\n      className={cn(\n        \"relative mb-14 w-full px-6 py-16 pb-20\",\n        className\n      )}\n      style={{\n        backgroundImage:\n          \"linear-gradient(to right, var(--primary), color-mix(in oklab, var(--primary) 72%, white), var(--primary))\",\n      }}\n      aria-labelledby=\"newsletter-heading\"\n      {...props}\n    >\n      <div className=\"mx-auto max-w-2xl text-center\">\n        <h2\n          id=\"newsletter-heading\"\n          className=\"mb-6 text-3xl font-bold tracking-tight text-primary-foreground md:text-4xl\"\n        >\n          {title}\n        </h2>\n        <p className=\"text-base leading-relaxed text-primary-foreground/85\">\n          {description}\n        </p>\n      </div>\n\n      {/* Anchored to the section so the card hangs below the band, not under the copy. */}\n      <div className=\"absolute inset-x-0 -bottom-10 mx-auto w-full max-w-2xl px-4\">\n        <form\n          className=\"flex w-full flex-col gap-3 rounded-[12px] border border-border/70 bg-card p-4 shadow-soft sm:flex-row sm:items-center sm:gap-4\"\n          onSubmit={(event) => event.preventDefault()}\n\n              style={{\n                backgroundColor: \"var(--card, #ffffff)\",\n                boxShadow:\n                  \"var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))\",\n              }}\n            >\n          <label htmlFor=\"newsletter-email\" className=\"sr-only\">\n            Email address\n          </label>\n          <Input\n            type=\"email\"\n            id=\"newsletter-email\"\n            name=\"email\"\n            placeholder={placeholder}\n            required\n            autoComplete=\"email\"\n            className=\"min-w-0 flex-1\"\n          />\n          <Button type=\"submit\" className=\"w-full shrink-0 sm:w-auto\">\n            {cta}\n          </Button>\n        </form>\n      </div>\n    </section>\n  )\n}\n",
+      "target": "components/blocks/marketing/newsletter-08/newsletter.tsx"
+    }
+  ],
+  "version": "0.1.0+b0276619b649",
+  "generatedAt": "2026-10-28T12:28:50.990Z"
+}

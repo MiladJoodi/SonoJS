@@ -1,11 +1,12 @@
 "use client"
 
-import { cn } from "@/lib/utils"
+import type * as React from "react"
+import { MailIcon, ShieldCheckIcon } from "lucide-react"
+
 import { Button } from "@sonojs/ui/components/button"
 import { Input } from "@sonojs/ui/components/input"
 import { Label } from "@sonojs/ui/components/label"
-
-const controlClass = "shadow-none"
+import { cn } from "@/lib/utils"
 
 export default function AccountRecoveryForm({
   className,
@@ -14,24 +15,21 @@ export default function AccountRecoveryForm({
   return (
     <div
       className={cn(
-        "[--login-card-padding:1.5rem] sm:[--login-card-padding:2rem]",
-        "flex w-full flex-col gap-8 rounded-[12px] border border-border/70 bg-card p-(--login-card-padding)",
-        "shadow-soft",
+        "flex w-full flex-col gap-6 rounded-[12px] border border-border/70 bg-card p-6 shadow-soft sm:p-8",
         className
       )}
-      style={{
-                backgroundColor: "var(--card, #ffffff)",
-                boxShadow:
-                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
-              }}
       {...props}
     >
-      <header className="flex flex-col items-start gap-3">
-        <span className="h-0.5 w-8 rounded-full bg-primary" aria-hidden />
+      <header className="flex flex-col items-center gap-3 text-center">
+        <span className="flex size-14 items-center justify-center rounded-full bg-primary/10 text-primary">
+          <MailIcon className="size-7" strokeWidth={1.5} aria-hidden />
+        </span>
         <div className="space-y-1.5">
-          <h1 className="text-h3 text-foreground">Recover your account</h1>
+          <h1 className="text-h3 font-semibold tracking-tight text-foreground">
+            Recover your account
+          </h1>
           <p className="text-sm text-muted-foreground">
-            Enter the email on your account. We will send recovery steps.
+            Enter the email on your account. We&apos;ll send recovery steps.
           </p>
         </div>
       </header>
@@ -40,7 +38,7 @@ export default function AccountRecoveryForm({
         className="flex flex-col gap-4"
         onSubmit={(event) => event.preventDefault()}
       >
-        <div className="grid gap-2">
+        <div className="grid gap-2 text-start">
           <Label htmlFor="recovery-01-email">Email</Label>
           <Input
             id="recovery-01-email"
@@ -49,16 +47,17 @@ export default function AccountRecoveryForm({
             autoComplete="email"
             placeholder="name@example.com"
             required
-            className={controlClass}
           />
         </div>
-        <Button
-          type="submit"
-          className="mt-1 w-full shadow-none"
-        >
+        <Button type="submit" className="w-full cursor-pointer">
           Send recovery email
         </Button>
       </form>
+
+      <p className="inline-flex items-center justify-center gap-1.5 text-center text-xs text-muted-foreground">
+        <ShieldCheckIcon className="size-3.5 text-primary" aria-hidden />
+        We&apos;ll never ask for your password
+      </p>
 
       <p className="text-center text-sm text-muted-foreground">
         Remembered it?{" "}

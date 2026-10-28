@@ -1,0 +1,36 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "stats-16",
+  "type": "registry:block",
+  "title": "stats-16",
+  "description": "Four-column KPI strip with muted icon tiles and large values in a single elevated card on canvas.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "cssVars": {
+    "light": {
+      "canvas": "#f3f3f4",
+      "border-soft": "color-mix(in oklab, #e4e4e7 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18)",
+      "background": "var(--canvas)",
+      "card": "#ffffff"
+    },
+    "dark": {
+      "canvas": "#09090b",
+      "border-soft": "color-mix(in oklab, #27272a 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(0, 0, 0, 0.24), 0 28px 56px -28px rgba(0, 0, 0, 0.48)",
+      "background": "var(--canvas)",
+      "card": "#18181b"
+    }
+  },
+  "files": [
+    {
+      "path": "components/blocks/marketing/stats-16/stats.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport type * as React from \"react\"\nimport {\n  ActivityIcon,\n  HeartHandshakeIcon,\n  ShoppingBagIcon,\n  UsersIcon,\n  type LucideIcon,\n} from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst metrics: {\n  value: string\n  label: string\n  icon: LucideIcon\n}[] = [\n  {\n    value: \"400+\",\n    label: \"Unique visitors\",\n    icon: UsersIcon,\n  },\n  {\n    value: \"450+\",\n    label: \"Total sales\",\n    icon: ShoppingBagIcon,\n  },\n  {\n    value: \"500+\",\n    label: \"Customer satisfaction\",\n    icon: HeartHandshakeIcon,\n  },\n  {\n    value: \"600+\",\n    label: \"System uptime hours\",\n    icon: ActivityIcon,\n  },\n]\n\nexport default function Stats({\n  className,\n  ...props\n}: React.ComponentProps<\"section\">) {\n  return (\n    <section\n      className={cn(\n        \"w-full bg-canvas px-4 py-12 text-foreground sm:px-6 md:px-8 md:py-16\",\n        className\n      )}\n      aria-label=\"Key metrics\"\n      {...props}\n    >\n      <div className=\"mx-auto w-full max-w-6xl overflow-hidden rounded-[12px] bg-card shadow-soft\">\n        <ul className=\"grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4\">\n          {metrics.map((item, index) => {\n            const Icon = item.icon\n            return (\n              <li\n                key={item.label}\n                className={cn(\n                  \"flex flex-col items-start gap-4 px-6 py-8 text-start sm:px-7 sm:py-10\",\n                  index > 0 && \"border-t border-border/70 sm:border-t-0\",\n                  index % 2 === 1 && \"sm:border-s\",\n                  index >= 2 && \"lg:border-t-0\",\n                  index > 0 && \"lg:border-s\"\n                )}\n              >\n                <span className=\"inline-flex size-10 items-center justify-center rounded-[10px] bg-muted text-foreground\">\n                  <Icon className=\"size-5\" aria-hidden />\n                </span>\n                <dl className=\"min-w-0\">\n                  <dd\n                    className=\"text-3xl font-semibold tracking-tight tabular-nums sm:text-4xl\"\n                    dir=\"ltr\"\n                  >\n                    {item.value}\n                  </dd>\n                  <dt className=\"mt-2 text-sm font-medium text-muted-foreground\">\n                    {item.label}\n                  </dt>\n                </dl>\n              </li>\n            )\n          })}\n        </ul>\n      </div>\n    </section>\n  )\n}\n",
+      "target": "components/blocks/marketing/stats-16/stats.tsx"
+    }
+  ],
+  "version": "0.1.0+b0276619b649",
+  "generatedAt": "2026-10-28T12:28:50.990Z"
+}

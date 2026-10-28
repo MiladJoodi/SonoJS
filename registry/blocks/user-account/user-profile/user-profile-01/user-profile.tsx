@@ -25,18 +25,18 @@ import {
 } from "@sonojs/ui/components/tabs"
 import { cn } from "@/lib/utils"
 
-import avatarImg from "./images/avatar.webp"
+import avatarImg from "./images/avatar.avif"
 
 function assetSrc(asset: string | { src: string }) {
   return typeof asset === "string" ? asset : asset.src
 }
 
 const USER = {
-  name: "Alex Rivera",
-  username: "@alexrivera",
+  name: "Maya Chen",
+  username: "@mayachen",
   bio: "Full-stack developer passionate about design systems and accessible UI. Building open-source UI kits in public.",
   location: "San Francisco, CA",
-  website: "alexrivera.dev",
+  website: "mayachen.dev",
   joinDate: "March 2022",
   following: 234,
   followers: 1842,
@@ -174,21 +174,19 @@ export default function UserProfile({
   return (
     <main
       className={cn(
-        "min-h-svh w-full min-w-0 bg-canvas text-foreground",
+        "w-full min-w-0 bg-white pb-8 text-foreground dark:bg-background sm:pb-10",
         className
       )}
       {...props}
     >
-      <div className="h-40 bg-muted sm:h-52" aria-hidden />
-
-      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-        <div className="-mt-16 mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-          <div className="flex items-end gap-4">
-            <Avatar className="size-24 ring-4 ring-canvas shadow-soft sm:size-28">
+      <div className="mx-auto max-w-5xl px-4 pt-4 sm:px-6 sm:pt-5 lg:px-8">
+        <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex items-center gap-4">
+            <Avatar className="size-20 sm:size-24">
               <AvatarImage src={assetSrc(avatarImg)} alt={USER.name} />
-              <AvatarFallback className="text-lg">AR</AvatarFallback>
+              <AvatarFallback className="text-lg">MC</AvatarFallback>
             </Avatar>
-            <div className="mb-2 min-w-0 text-start">
+            <div className="min-w-0 text-start">
               <h1 className="text-2xl font-semibold tracking-tight text-foreground">
                 {USER.name}
               </h1>
@@ -286,7 +284,7 @@ export default function UserProfile({
                 {STATS.map((stat) => (
                   <div
                     key={stat.label}
-                    className="rounded-[12px] border border-border/70 bg-card p-3 shadow-soft"
+                    className="rounded-[12px] border border-border/70 bg-card p-3"
                   >
                     <p
                       dir="ltr"
@@ -335,7 +333,7 @@ export default function UserProfile({
                     <li key={repo.name}>
                       <button
                         type="button"
-                        className="group w-full cursor-pointer rounded-[12px] border border-border/70 bg-card p-5 text-start shadow-soft transition-colors hover:border-primary/20"
+                        className="group w-full cursor-pointer rounded-[12px] border border-border/70 bg-card p-5 text-start transition-colors hover:border-primary/20"
                       >
                         <div className="flex flex-col gap-3">
                           <div className="flex items-start justify-between gap-3">
@@ -388,7 +386,7 @@ export default function UserProfile({
 
               <TabsContent value="activity" className="mt-6">
                 <ul
-                  className="divide-y divide-border/70 overflow-hidden rounded-[12px] border border-border/70 bg-card shadow-soft"
+                  className="divide-y divide-border/70 overflow-hidden rounded-[12px] border border-border/70 bg-card"
                   role="list"
                 >
                   {ACTIVITY.map((item) => (
@@ -420,7 +418,7 @@ export default function UserProfile({
                   {PINNED_REPOS.slice(0, 3).map((repo) => (
                     <li
                       key={repo.name}
-                      className="rounded-[12px] border border-border/70 bg-card p-5 shadow-soft"
+                      className="rounded-[12px] border border-border/70 bg-card p-5"
                     >
                       <div className="flex items-start justify-between gap-3">
                         <div className="min-w-0 text-start">
@@ -453,7 +451,6 @@ export default function UserProfile({
         </div>
       </div>
 
-      <div className="pb-16" aria-hidden />
     </main>
   )
 }

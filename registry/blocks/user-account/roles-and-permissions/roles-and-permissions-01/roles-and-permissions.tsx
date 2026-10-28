@@ -1,11 +1,16 @@
 "use client"
 
 import * as React from "react"
-import { InfoIcon, RotateCcwIcon, SaveIcon, ShieldCheckIcon } from "lucide-react"
+import {
+  CircleHelpIcon,
+  LockIcon,
+  RotateCcwIcon,
+  SaveIcon,
+  ShieldCheckIcon,
+} from "lucide-react"
 
 import { Badge } from "@sonojs/ui/components/badge"
 import { Button } from "@sonojs/ui/components/button"
-import { Card } from "@sonojs/ui/components/card"
 import { Checkbox } from "@sonojs/ui/components/checkbox"
 import {
   Table,
@@ -27,22 +32,26 @@ const ROLES = [
   {
     id: "admin",
     name: "Administrator",
-    description: "Full access to all resources.",
+    description: "Full access to all resources. Permissions are locked.",
+    locked: true,
   },
   {
     id: "manager",
     name: "Manager",
     description: "Can manage users and billing, but cannot delete projects.",
+    locked: false,
   },
   {
     id: "editor",
     name: "Editor",
     description: "Can create and edit content.",
+    locked: false,
   },
   {
     id: "viewer",
     name: "Viewer",
     description: "Read-only access to most resources.",
+    locked: false,
   },
 ] as const
 
@@ -117,7 +126,10 @@ function clonePermissions(source: PermissionMap): PermissionMap {
   return JSON.parse(JSON.stringify(source)) as PermissionMap
 }
 
-export default function RolesAndPermissions01() {
+export default function RolesAndPermissions({
+  className,
+  ...props
+}: React.ComponentProps<"section">) {
   const [permissions, setPermissions] = React.useState(() =>
     clonePermissions(INITIAL_PERMISSIONS)
   )
@@ -154,82 +166,103 @@ export default function RolesAndPermissions01() {
 
   return (
     <TooltipProvider>
-      <div className="min-h-svh w-full bg-canvas px-4 py-10 text-foreground sm:px-6">
-        <div className="mx-auto max-w-7xl space-y-6">
+      <section
+        className={cn(
+          "w-full min-w-0 bg-canvas px-4 py-8 text-foreground sm:px-6 sm:py-10",
+          className
+        )}
+        aria-labelledby="roles-and-permissions-01-heading"
+        {...props}
+      >
+        <div className="mx-auto max-w-6xl space-y-5">
           <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
-            <div>
-              <h1 className="flex items-center gap-2 text-2xl font-semibold tracking-tight">
+            <div className="text-start">
+              <h1
+                id="roles-and-permissions-01-heading"
+                className="flex items-center gap-2 text-xl font-semibold tracking-tight sm:text-2xl"
+              >
                 <ShieldCheckIcon
-                  className="size-6 text-primary"
+                  className="size-5 text-primary sm:size-6"
                   aria-hidden
                 />
-                Role Permissions
+                Role permissions
               </h1>
-              <p className="mt-1 text-muted-foreground">
-                Configure granular access control for each role across the
-                platform.
+              <p className="mt-1 text-sm text-muted-foreground">
+                Set access for each role across users, billing, and projects.
               </p>
             </div>
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-2">
               <Button
                 type="button"
                 variant="outline"
-                className="gap-2"
+                className="cursor-pointer gap-2"
                 onClick={handleReset}
                 disabled={!isDirty}
               >
                 <RotateCcwIcon className="size-4" aria-hidden />
-                Discard Changes
+                Discard
               </Button>
               <Button
                 type="button"
-                className="gap-2"
+                className="cursor-pointer gap-2"
                 onClick={handleSave}
                 disabled={!isDirty}
               >
                 <SaveIcon className="size-4" aria-hidden />
-                Save Changes
+                Save changes
               </Button>
             </div>
           </div>
 
-          <Card className="overflow-hidden border-border/70 shadow-soft">
+          <div className="overflow-hidden rounded-[12px] border border-border/70 bg-card">
             <div className="overflow-x-auto">
               <Table>
-                <TableHeader className="bg-muted/40">
-                  <TableRow className="border-b-2 border-border/70 hover:bg-transparent">
-                    <TableHead className="w-[300px] text-base font-semibold text-foreground">
+                <TableHeader className="sticky top-0 z-10 bg-muted/50 backdrop-blur-sm">
+                  <TableRow className="border-b border-border/70 hover:bg-transparent">
+                    <TableHead className="min-w-[12rem] text-sm font-semibold text-foreground">
                       Resource / Permission
                     </TableHead>
                     {ROLES.map((role) => (
                       <TableHead
                         key={role.id}
-                        className="min-w-[150px] text-center"
+                        className="min-w-[8.5rem] text-center"
                       >
-                        <div className="flex flex-col items-center gap-1">
-                          <span className="font-semibold text-foreground">
+                        <div className="flex flex-col items-center gap-1.5 py-1">
+                          <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-foreground">
                             {role.name}
+                            {role.locked ? (
+                              <LockIcon
+                                className="size-3 text-muted-foreground"
+                                aria-hidden
+                              />
+                            ) : null}
                           </span>
-                          <Tooltip>
-                            <TooltipTrigger asChild>
-                              <button
-                                type="button"
-                                className="inline-flex cursor-help"
-                                aria-label={`${role.name} role details`}
-                              >
-                                <Badge
-                                  variant="outline"
-                                  className="pointer-events-none gap-1 font-normal"
+                          {role.locked ? (
+                            <Badge
+                              variant="outline"
+                              className="rounded-full border-transparent bg-muted px-2 py-0 text-[10px] font-normal text-muted-foreground"
+                            >
+                              Locked
+                            </Badge>
+                          ) : (
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <button
+                                  type="button"
+                                  className="inline-flex size-6 cursor-help items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                                  aria-label={`${role.name}: ${role.description}`}
                                 >
-                                  Info
-                                  <InfoIcon className="size-3" aria-hidden />
-                                </Badge>
-                              </button>
-                            </TooltipTrigger>
-                            <TooltipContent className="max-w-xs text-start">
-                              {role.description}
-                            </TooltipContent>
-                          </Tooltip>
+                                  <CircleHelpIcon
+                                    className="size-3.5"
+                                    aria-hidden
+                                  />
+                                </button>
+                              </TooltipTrigger>
+                              <TooltipContent className="max-w-xs text-start">
+                                {role.description}
+                              </TooltipContent>
+                            </Tooltip>
+                          )}
                         </div>
                       </TableHead>
                     ))}
@@ -241,7 +274,7 @@ export default function RolesAndPermissions01() {
                       <TableRow className="bg-muted/30 hover:bg-muted/30">
                         <TableCell
                           colSpan={ROLES.length + 1}
-                          className="border-y border-border/70 py-3 font-semibold"
+                          className="border-y border-border/70 py-2.5 text-sm font-semibold"
                         >
                           {resource.name}
                         </TableCell>
@@ -249,9 +282,9 @@ export default function RolesAndPermissions01() {
                       {resource.permissions.map((perm) => (
                         <TableRow
                           key={`${resource.id}-${perm.id}`}
-                          className="hover:bg-muted/20"
+                          className="hover:bg-muted/15"
                         >
-                          <TableCell className="ps-8 text-sm text-muted-foreground">
+                          <TableCell className="ps-6 text-sm text-muted-foreground sm:ps-8">
                             {perm.label}
                           </TableCell>
                           {ROLES.map((role) => {
@@ -279,7 +312,10 @@ export default function RolesAndPermissions01() {
                                       )
                                     }
                                     aria-label={`Toggle ${perm.label} for ${role.name}`}
-                                    className={cn(isAdmin && "opacity-60")}
+                                    className={cn(
+                                      !isAdmin && "cursor-pointer",
+                                      isAdmin && "opacity-60"
+                                    )}
                                   />
                                 </div>
                               </TableCell>
@@ -292,9 +328,9 @@ export default function RolesAndPermissions01() {
                 </TableBody>
               </Table>
             </div>
-          </Card>
+          </div>
         </div>
-      </div>
+      </section>
     </TooltipProvider>
   )
 }

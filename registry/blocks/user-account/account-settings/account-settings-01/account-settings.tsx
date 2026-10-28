@@ -51,17 +51,17 @@ export default function AccountSettings({
   return (
     <main
       className={cn(
-        "w-full min-w-0 bg-white dark:bg-background py-10 text-foreground",
+        "w-full min-w-0 bg-canvas py-8 text-foreground sm:py-10",
         className
       )}
       {...props}
     >
       <div className="mx-auto w-full max-w-5xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-8 space-y-2 text-start">
-          <h1 className="text-3xl font-semibold tracking-tight text-foreground">
-            Account Settings
+        <div className="mb-8 space-y-1.5 text-start">
+          <h1 className="text-h3 font-semibold tracking-tight text-foreground">
+            Account settings
           </h1>
-          <p className="text-lg text-muted-foreground">
+          <p className="text-sm text-muted-foreground sm:text-base">
             Manage your profile, security, and workspace preferences.
           </p>
         </div>
@@ -69,20 +69,20 @@ export default function AccountSettings({
         <Tabs
           defaultValue="profile"
           orientation="vertical"
-          className="flex flex-col gap-8 md:flex-row md:items-start"
+          className="flex flex-col gap-6 md:flex-row md:items-start md:gap-8"
         >
-          <div className="w-full shrink-0 md:w-64">
+          <div className="w-full shrink-0 md:w-56">
             <TabsList
               aria-label="Account settings sections"
-              className="h-auto w-full flex-row justify-start gap-1 overflow-x-auto bg-transparent p-0 md:flex-col md:overflow-visible"
+              className="h-auto w-full flex-row justify-start gap-1 overflow-x-auto rounded-[12px] border border-border/70 bg-card p-1.5 shadow-soft md:flex-col md:overflow-visible"
             >
               {NAV.map((item) => (
                 <TabsTrigger
                   key={item.value}
                   value={item.value}
-                  className="justify-start data-[state=active]:bg-muted"
+                  className="h-10 cursor-pointer justify-start gap-2 rounded-md px-3 data-[state=active]:bg-primary/10 data-[state=active]:text-primary"
                 >
-                  <item.icon aria-hidden />
+                  <item.icon className="size-4" aria-hidden />
                   {item.label}
                 </TabsTrigger>
               ))}
@@ -101,7 +101,7 @@ export default function AccountSettings({
                 <CardContent className="py-6">
                   <FieldGroup className="gap-6">
                     <div className="flex flex-col items-start gap-6 sm:flex-row sm:items-center">
-                      <Avatar className="size-20" size="lg">
+                      <Avatar className="size-20 overflow-hidden" size="lg">
                         <AvatarImage
                           src={assetSrc(avatarImg)}
                           alt="Alex Rivera"
@@ -110,14 +110,14 @@ export default function AccountSettings({
                       </Avatar>
                       <div className="flex flex-col items-start gap-2">
                         <div className="flex flex-wrap gap-2">
-                          <Button type="button" size="sm">
-                            Change Avatar
+                          <Button type="button" size="sm" className="cursor-pointer">
+                            Change avatar
                           </Button>
                           <Button
                             type="button"
                             size="sm"
                             variant="ghost"
-                            className="text-destructive hover:bg-destructive/10 hover:text-destructive"
+                            className="cursor-pointer text-destructive hover:bg-destructive/10 hover:text-destructive"
                           >
                             Remove
                           </Button>
@@ -185,7 +185,9 @@ export default function AccountSettings({
                   </FieldGroup>
                 </CardContent>
                 <CardFooter className="justify-end border-t border-border/70 bg-muted/40 py-4">
-                  <Button type="button">Save Changes</Button>
+                  <Button type="button" className="cursor-pointer">
+                    Save changes
+                  </Button>
                 </CardFooter>
               </Card>
             </TabsContent>
@@ -236,7 +238,9 @@ export default function AccountSettings({
                   </FieldGroup>
                 </CardContent>
                 <CardFooter className="justify-end border-t border-border/70 bg-muted/40 py-4">
-                  <Button type="button">Update Password</Button>
+                  <Button type="button" className="cursor-pointer">
+                    Update password
+                  </Button>
                 </CardFooter>
               </Card>
 
@@ -260,9 +264,9 @@ export default function AccountSettings({
                     <Button
                       type="button"
                       variant="outline"
-                      className="shrink-0 border-destructive/40 text-destructive hover:bg-destructive/10 hover:text-destructive"
+                      className="shrink-0 cursor-pointer border-destructive/40 text-destructive hover:bg-destructive/10 hover:text-destructive"
                     >
-                      Delete Account
+                      Delete account
                     </Button>
                   </div>
                 </CardContent>
@@ -290,13 +294,14 @@ export default function AccountSettings({
                       </div>
                       <Switch
                         defaultChecked
+                        className="cursor-pointer"
                         aria-label="Marketing emails"
                       />
                     </li>
                     <li className="flex items-center justify-between gap-4 p-6">
                       <div className="min-w-0 pe-4 text-start">
                         <h4 className="mb-1 text-sm font-semibold text-foreground">
-                          Security Emails
+                          Security emails
                         </h4>
                         <p className="text-sm text-muted-foreground">
                           Receive emails about your account security.
@@ -311,13 +316,16 @@ export default function AccountSettings({
                     <li className="flex items-center justify-between gap-4 p-6">
                       <div className="min-w-0 pe-4 text-start">
                         <h4 className="mb-1 text-sm font-semibold text-foreground">
-                          Activity Digest
+                          Activity digest
                         </h4>
                         <p className="text-sm text-muted-foreground">
                           A weekly summary of activity on your workspaces.
                         </p>
                       </div>
-                      <Switch aria-label="Activity digest" />
+                      <Switch
+                        className="cursor-pointer"
+                        aria-label="Activity digest"
+                      />
                     </li>
                   </ul>
                 </CardContent>
@@ -334,8 +342,12 @@ export default function AccountSettings({
                         Manage API keys to access our APIs.
                       </CardDescription>
                     </div>
-                    <Button type="button" size="sm" className="shrink-0">
-                      Create Key
+                    <Button
+                      type="button"
+                      size="sm"
+                      className="shrink-0 cursor-pointer"
+                    >
+                      Create key
                     </Button>
                   </div>
                 </CardHeader>
@@ -368,7 +380,7 @@ export default function AccountSettings({
                         type="button"
                         variant="outline"
                         size="sm"
-                        className="shrink-0"
+                        className="shrink-0 cursor-pointer"
                       >
                         Revoke
                       </Button>
@@ -377,7 +389,7 @@ export default function AccountSettings({
                       <div className="min-w-0 space-y-1 text-start">
                         <div className="flex flex-wrap items-center gap-2">
                           <h4 className="text-sm font-semibold text-foreground">
-                            Test Key
+                            Test key
                           </h4>
                           <Badge variant="secondary">Active</Badge>
                         </div>
@@ -395,7 +407,7 @@ export default function AccountSettings({
                         type="button"
                         variant="outline"
                         size="sm"
-                        className="shrink-0"
+                        className="shrink-0 cursor-pointer"
                       >
                         Revoke
                       </Button>

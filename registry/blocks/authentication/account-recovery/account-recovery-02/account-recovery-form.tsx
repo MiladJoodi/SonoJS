@@ -1,9 +1,8 @@
 "use client"
 
 import * as React from "react"
-import { CheckIcon, ChevronsUpDownIcon } from "lucide-react"
+import { CheckIcon, ChevronsUpDownIcon, SmartphoneIcon } from "lucide-react"
 
-import { cn } from "@/lib/utils"
 import { Button } from "@sonojs/ui/components/button"
 import {
   InputGroup,
@@ -17,6 +16,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@sonojs/ui/components/popover"
+import { cn } from "@/lib/utils"
 
 const DEMO_COUNTRIES = [
   { code: "US", name: "United States", dial: "+1", flag: "🇺🇸" },
@@ -41,22 +41,19 @@ export default function AccountRecoveryForm({
   return (
     <div
       className={cn(
-        "[--login-card-padding:1.5rem] sm:[--login-card-padding:2rem]",
-        "flex w-full flex-col gap-8 rounded-[12px] border border-border/70 bg-card p-(--login-card-padding)",
-        "shadow-soft",
+        "flex w-full flex-col gap-6 rounded-[12px] border border-border/70 bg-card p-6 shadow-soft sm:p-8",
         className
       )}
-      style={{
-                backgroundColor: "var(--card, #ffffff)",
-                boxShadow:
-                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
-              }}
       {...props}
     >
-      <header className="flex flex-col items-start gap-3">
-        <span className="h-0.5 w-8 rounded-full bg-primary" aria-hidden />
+      <header className="flex flex-col items-center gap-3 text-center">
+        <span className="flex size-14 items-center justify-center rounded-full bg-primary/10 text-primary">
+          <SmartphoneIcon className="size-7" strokeWidth={1.5} aria-hidden />
+        </span>
         <div className="space-y-1.5">
-          <h1 className="text-h3 text-foreground">Recover by phone</h1>
+          <h1 className="text-h3 font-semibold tracking-tight text-foreground">
+            Recover by phone
+          </h1>
           <p className="text-sm text-muted-foreground">
             Choose your country and enter the phone number on your account.
           </p>
@@ -67,12 +64,12 @@ export default function AccountRecoveryForm({
         className="flex flex-col gap-4"
         onSubmit={(event) => event.preventDefault()}
       >
-        <div className="grid gap-2">
+        <div className="grid gap-2 text-start">
           <Label htmlFor="recovery-02-phone">Phone number</Label>
           <InputGroup
             dir="ltr"
             className={cn(
-              "h-[46px] rounded-[12px] border-border/70 shadow-none",
+              "h-[46px] rounded-[12px] border-border/70",
               open ? "overflow-visible" : "overflow-hidden"
             )}
           >
@@ -87,7 +84,7 @@ export default function AccountRecoveryForm({
                     size="sm"
                     aria-label="Select country"
                     aria-expanded={open}
-                    className="h-[calc(100%-6px)] min-h-9 gap-1.5 rounded-[calc(12px-4px)] px-2.5 tabular-nums"
+                    className="h-[calc(100%-6px)] min-h-9 cursor-pointer gap-1.5 rounded-[calc(12px-4px)] px-2.5 tabular-nums"
                   >
                     <span className="text-base leading-none" aria-hidden>
                       {country.flag}
@@ -160,10 +157,7 @@ export default function AccountRecoveryForm({
             />
           </InputGroup>
         </div>
-        <Button
-          type="submit"
-          className="mt-1 w-full shadow-none"
-        >
+        <Button type="submit" className="w-full cursor-pointer">
           Send recovery code
         </Button>
       </form>

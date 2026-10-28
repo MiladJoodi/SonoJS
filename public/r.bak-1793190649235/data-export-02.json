@@ -1,0 +1,42 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "data-export-02",
+  "type": "registry:block",
+  "title": "data-export-02",
+  "description": "Minimal export dialog — format, date range, headers checkbox, and Export.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "button",
+    "checkbox",
+    "label",
+    "select"
+  ],
+  "cssVars": {
+    "light": {
+      "canvas": "#f3f3f4",
+      "border-soft": "color-mix(in oklab, #e4e4e7 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18)",
+      "background": "var(--canvas)",
+      "card": "#ffffff"
+    },
+    "dark": {
+      "canvas": "#09090b",
+      "border-soft": "color-mix(in oklab, #27272a 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(0, 0, 0, 0.24), 0 28px 56px -28px rgba(0, 0, 0, 0.48)",
+      "background": "var(--canvas)",
+      "card": "#18181b"
+    }
+  },
+  "files": [
+    {
+      "path": "components/blocks/files-media/data-export-02/data-export.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { DownloadIcon, Loader2Icon } from \"lucide-react\"\n\nimport { Button } from \"@/components/ui/button\"\nimport { Checkbox } from \"@/components/ui/checkbox\"\nimport { Label } from \"@/components/ui/label\"\nimport {\n  Select,\n  SelectContent,\n  SelectItem,\n  SelectTrigger,\n  SelectValue,\n} from \"@/components/ui/select\"\nimport { cn } from \"@/lib/utils\"\n\nexport default function DataExport({\n  className,\n  ...props\n}: React.ComponentProps<\"main\">) {\n  const [format, setFormat] = React.useState(\"csv\")\n  const [range, setRange] = React.useState(\"30d\")\n  const [headers, setHeaders] = React.useState(true)\n  const [busy, setBusy] = React.useState(false)\n\n  function handleExport(e: React.FormEvent) {\n    e.preventDefault()\n    setBusy(true)\n    window.setTimeout(() => setBusy(false), 1200)\n  }\n\n  return (\n    <main\n      className={cn(\n        \"flex w-full min-w-0 items-start justify-center bg-canvas px-4 py-12 text-foreground sm:px-6\",\n        className\n      )}\n      {...props}\n    >\n      <form\n        onSubmit={handleExport}\n        className=\"w-full max-w-md rounded-[12px] border border-border/70 bg-card shadow-soft\"\n      >\n        <div className=\"space-y-1 border-b border-border/70 px-5 py-4 text-start\">\n          <h1 className=\"text-base font-semibold tracking-tight\">\n            Export customers\n          </h1>\n          <p className=\"text-sm text-muted-foreground\">\n            Download a file of your customer list.\n          </p>\n        </div>\n\n        <div className=\"space-y-4 px-5 py-5\">\n          <div className=\"grid gap-2\">\n            <Label htmlFor=\"data-export-02-format\">File format</Label>\n            <Select value={format} onValueChange={setFormat}>\n              <SelectTrigger id=\"data-export-02-format\" className=\"w-full\">\n                <SelectValue />\n              </SelectTrigger>\n              <SelectContent>\n                <SelectItem value=\"csv\">CSV</SelectItem>\n                <SelectItem value=\"xlsx\">Excel (.xlsx)</SelectItem>\n                <SelectItem value=\"json\">JSON</SelectItem>\n              </SelectContent>\n            </Select>\n          </div>\n\n          <div className=\"grid gap-2\">\n            <Label htmlFor=\"data-export-02-range\">Date range</Label>\n            <Select value={range} onValueChange={setRange}>\n              <SelectTrigger id=\"data-export-02-range\" className=\"w-full\">\n                <SelectValue />\n              </SelectTrigger>\n              <SelectContent>\n                <SelectItem value=\"7d\">Last 7 days</SelectItem>\n                <SelectItem value=\"30d\">Last 30 days</SelectItem>\n                <SelectItem value=\"all\">All time</SelectItem>\n              </SelectContent>\n            </Select>\n          </div>\n\n          <div className=\"flex items-center gap-3\">\n            <Checkbox\n              id=\"data-export-02-headers\"\n              checked={headers}\n              onCheckedChange={(v) => setHeaders(v === true)}\n            />\n            <Label htmlFor=\"data-export-02-headers\" className=\"font-normal\">\n              Include column headers\n            </Label>\n          </div>\n        </div>\n\n        <div className=\"flex items-center justify-end gap-2 border-t border-border/70 px-5 py-4\">\n          <Button type=\"button\" variant=\"ghost\">\n            Cancel\n          </Button>\n          <Button type=\"submit\" disabled={busy}>\n            {busy ? (\n              <>\n                <Loader2Icon className=\"size-4 animate-spin\" aria-hidden />\n                Exporting…\n              </>\n            ) : (\n              <>\n                <DownloadIcon className=\"size-4\" aria-hidden />\n                Export\n              </>\n            )}\n          </Button>\n        </div>\n      </form>\n    </main>\n  )\n}\n",
+      "target": "components/blocks/files-media/data-export-02/data-export.tsx"
+    }
+  ],
+  "version": "0.1.0+b0276619b649",
+  "generatedAt": "2026-10-28T12:28:50.990Z"
+}

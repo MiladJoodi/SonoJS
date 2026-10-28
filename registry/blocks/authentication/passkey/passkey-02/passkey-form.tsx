@@ -1,49 +1,60 @@
 "use client"
 
+import * as React from "react"
 import { FingerprintIcon } from "lucide-react"
 
-import { cn } from "@/lib/utils"
 import { Button } from "@sonojs/ui/components/button"
 import { Input } from "@sonojs/ui/components/input"
 import { Label } from "@sonojs/ui/components/label"
 import { Separator } from "@sonojs/ui/components/separator"
-
-const controlClass = "shadow-none"
+import { cn } from "@/lib/utils"
 
 export default function PasskeyForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+  const [email, setEmail] = React.useState("")
+  const emailReady = email.includes("@") && email.includes(".")
+
   return (
     <div
       className={cn(
-        "[--login-card-padding:1.5rem] sm:[--login-card-padding:2rem]",
-        "flex w-full flex-col gap-8 rounded-[12px] border border-border/70 bg-card p-(--login-card-padding)",
-        "shadow-soft",
+        "flex w-full flex-col gap-6 rounded-[12px] border border-border/70 bg-card p-6 shadow-soft sm:p-8",
         className
       )}
-      style={{
-                backgroundColor: "var(--card, #ffffff)",
-                boxShadow:
-                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
-              }}
       {...props}
     >
-      <header className="flex flex-col items-start gap-3">
-        <span className="h-0.5 w-8 rounded-full bg-primary" aria-hidden />
-        <div className="space-y-1.5">
-          <h1 className="text-h3 text-foreground">Sign in</h1>
-          <p className="text-sm text-muted-foreground">
-            Prefer a passkey. Password is available as a fallback.
-          </p>
-        </div>
+      <header className="flex flex-col items-start gap-1.5 text-start">
+        <h1 className="text-h3 font-semibold tracking-tight text-foreground">
+          Sign in
+        </h1>
+        <p className="text-sm text-muted-foreground">
+          Enter your email — we&apos;ll offer a passkey when one is available.
+        </p>
       </header>
+
+      <div className="grid gap-2">
+        <Label htmlFor="passkey-02-email">Email</Label>
+        <Input
+          id="passkey-02-email"
+          type="email"
+          dir="ltr"
+          autoFocus
+          autoComplete="username webauthn"
+          placeholder="name@example.com"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+          className="h-[46px] rounded-[12px] border-border/70 shadow-none"
+        />
+      </div>
 
       <Button
         type="button"
-        className="w-full shadow-none"
+        className="w-full cursor-pointer"
+        disabled={!emailReady}
       >
-        <FingerprintIcon className="size-4" />
+        <FingerprintIcon className="size-4" aria-hidden />
         Continue with passkey
       </Button>
 
@@ -58,18 +69,6 @@ export default function PasskeyForm({
         onSubmit={(event) => event.preventDefault()}
       >
         <div className="grid gap-2">
-          <Label htmlFor="passkey-02-email">Email</Label>
-          <Input
-            id="passkey-02-email"
-            type="email"
-            dir="ltr"
-            autoComplete="email"
-            placeholder="name@example.com"
-            required
-            className={controlClass}
-          />
-        </div>
-        <div className="grid gap-2">
           <Label htmlFor="passkey-02-password">Password</Label>
           <Input
             id="passkey-02-password"
@@ -77,13 +76,15 @@ export default function PasskeyForm({
             autoComplete="current-password"
             placeholder={"\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022"}
             required
-            className={controlClass}
+            className="h-[46px] rounded-[12px] border-border/70 shadow-none"
           />
         </div>
         <Button
           type="submit"
           variant="outline"
-          className="mt-1 h-[46px] w-full rounded-[12px] border-border/70 bg-card shadow-none hover:bg-muted">
+          className="w-full cursor-pointer"
+          disabled={!emailReady}
+        >
           Sign in with password
         </Button>
       </form>

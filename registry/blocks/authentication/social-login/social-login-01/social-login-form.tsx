@@ -1,11 +1,13 @@
 "use client"
 
+import type * as React from "react"
+
 import { AppleIcon } from "@/registry/icons/apple"
 import { FacebookIcon } from "@/registry/icons/facebook"
 import { GithubIcon } from "@/registry/icons/github"
 import { GoogleIcon } from "@/registry/icons/google"
-import { cn } from "@/lib/utils"
 import { Button } from "@sonojs/ui/components/button"
+import { cn } from "@/lib/utils"
 
 const providers = [
   { name: "Continue with Google", Icon: GoogleIcon },
@@ -21,26 +23,18 @@ export default function SocialLoginForm({
   return (
     <div
       className={cn(
-        "[--login-card-padding:1.5rem] sm:[--login-card-padding:2rem]",
-        "flex w-full flex-col gap-8 rounded-[12px] border border-border/70 bg-card p-(--login-card-padding)",
-        "shadow-soft",
+        "flex w-full flex-col gap-6 rounded-[12px] border border-border/70 bg-card p-6 shadow-soft sm:p-8",
         className
       )}
-      style={{
-                backgroundColor: "var(--card, #ffffff)",
-                boxShadow:
-                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
-              }}
       {...props}
     >
-      <header className="flex flex-col items-start gap-3">
-        <span className="h-0.5 w-8 rounded-full bg-primary" aria-hidden />
-        <div className="space-y-1.5">
-          <h1 className="text-h3 text-foreground">Sign in</h1>
-          <p className="text-sm text-muted-foreground">
-            Continue with a social account. No password needed.
-          </p>
-        </div>
+      <header className="flex flex-col items-center gap-1.5 text-center">
+        <h1 className="text-h3 font-semibold tracking-tight text-foreground">
+          Sign in
+        </h1>
+        <p className="text-sm text-muted-foreground">
+          Continue with a social account. No password needed.
+        </p>
       </header>
 
       <div className="flex flex-col gap-2">
@@ -49,12 +43,23 @@ export default function SocialLoginForm({
             key={name}
             type="button"
             variant="outline"
-            className="h-[46px] w-full justify-start gap-3 rounded-[12px] border-border/70 bg-card shadow-none hover:bg-muted">
+            className="h-[46px] w-full cursor-pointer justify-start gap-3 rounded-[12px] border-border/70 bg-card hover:bg-muted"
+          >
             <Icon />
             {name}
           </Button>
         ))}
       </div>
+
+      <p className="text-center text-sm text-muted-foreground">
+        New here?{" "}
+        <a
+          href="#"
+          className="cursor-pointer font-medium text-foreground underline-offset-4 hover:underline"
+        >
+          Create account
+        </a>
+      </p>
     </div>
   )
 }

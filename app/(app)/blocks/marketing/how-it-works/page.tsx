@@ -4,6 +4,8 @@ import {
 } from "@/components/blocks"
 import HowItWorks01 from "@/registry/blocks/marketing/how-it-works/how-it-works-01/how-it-works"
 import HowItWorks02 from "@/registry/blocks/marketing/how-it-works/how-it-works-02/how-it-works"
+import HowItWorks03 from "@/registry/blocks/marketing/how-it-works/how-it-works-03/how-it-works"
+import HowItWorks04 from "@/registry/blocks/marketing/how-it-works/how-it-works-04/how-it-works"
 
 import { blocksPageMetadata } from "@/lib/seo"
 
@@ -26,7 +28,7 @@ export default function BlockHowItWorksDocsPage() {
       <BlocksPageHeader
         title="How It Works"
         pathname="/blocks/marketing/how-it-works"
-        description="Editorial zig-zag steps with live artifacts, plus an interactive booking desk."
+        description="Editorial steps, booking desk, AI agent loop, and modern passkey sign-in."
       />
 
       <div className="flex flex-col gap-8">
@@ -39,7 +41,7 @@ export default function BlockHowItWorksDocsPage() {
             },
           ]}
           previewAlign="start"
-          previewClassName="bg-canvas p-0"
+          previewClassName="bg-white p-0 dark:bg-background"
         >
           <HowItWorks01 />
         </BlockExample>
@@ -56,6 +58,34 @@ export default function BlockHowItWorksDocsPage() {
           previewClassName="bg-canvas p-0"
         >
           <HowItWorks02 />
+        </BlockExample>
+
+        <BlockExample
+          name="how-it-works-03"
+          usage={[
+            {
+              title: "app/page.tsx",
+              code: usage("how-it-works-03"),
+            },
+          ]}
+          previewAlign="start"
+          previewClassName="bg-zinc-950 p-0"
+        >
+          <HowItWorks03 />
+        </BlockExample>
+
+        <BlockExample
+          name="how-it-works-04"
+          usage={[
+            {
+              title: "app/page.tsx",
+              code: usage("how-it-works-04"),
+            },
+          ]}
+          previewAlign="start"
+          previewClassName="bg-white p-0 dark:bg-background"
+        >
+          <HowItWorks04 />
         </BlockExample>
       </div>
     </article>

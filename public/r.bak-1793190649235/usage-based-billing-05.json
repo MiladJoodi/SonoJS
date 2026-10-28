@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "usage-based-billing-05",
+  "type": "registry:block",
+  "title": "usage-based-billing-05",
+  "description": "30-day usage list — mini donut gauges, alternating rows, and upgrade CTA.",
+  "dependencies": [
+    "recharts"
+  ],
+  "registryDependencies": [
+    "button",
+    "card",
+    "chart"
+  ],
+  "cssVars": {
+    "light": {
+      "canvas": "#f3f3f4",
+      "border-soft": "color-mix(in oklab, #e4e4e7 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18)",
+      "background": "var(--canvas)",
+      "card": "#ffffff"
+    },
+    "dark": {
+      "canvas": "#09090b",
+      "border-soft": "color-mix(in oklab, #27272a 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(0, 0, 0, 0.24), 0 28px 56px -28px rgba(0, 0, 0, 0.48)",
+      "background": "var(--canvas)",
+      "card": "#18181b"
+    }
+  },
+  "files": [
+    {
+      "path": "components/blocks/payments-billing/usage-based-billing-05/usage-based-billing.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Cell, Pie, PieChart } from \"recharts\"\n\nimport { Button } from \"@/components/ui/button\"\nimport { Card, CardContent, CardHeader } from \"@/components/ui/card\"\nimport {\n  type ChartConfig,\n  ChartContainer,\n} from \"@/components/ui/chart\"\nimport { cn } from \"@/lib/utils\"\n\ntype UsageItem = {\n  name: string\n  current: string\n  limit: string\n  percentage: number\n}\n\nconst USAGE_DATA: UsageItem[] = [\n  { name: \"Registry installs\", current: \"358K\", limit: \"1M\", percentage: 35.8 },\n  { name: \"Docs pageviews\", current: \"317K\", limit: \"1M\", percentage: 31.7 },\n  {\n    name: \"CDN transfer\",\n    current: \"3.07 GB\",\n    limit: \"10 GB\",\n    percentage: 30.7,\n  },\n  {\n    name: \"Preview builds\",\n    current: \"791\",\n    limit: \"10K\",\n    percentage: 7.9,\n  },\n  {\n    name: \"Asset bandwidth\",\n    current: \"4.98 GB\",\n    limit: \"100 GB\",\n    percentage: 5.0,\n  },\n  {\n    name: \"Build minutes\",\n    current: \"3.1 GB-Hrs\",\n    limit: \"100 GB-Hrs\",\n    percentage: 3.1,\n  },\n  {\n    name: \"Analytics events\",\n    current: \"1.3K\",\n    limit: \"50K\",\n    percentage: 2.6,\n  },\n  { name: \"Registry publishes\", current: \"4.8K\", limit: \"200K\", percentage: 2.4 },\n  {\n    name: \"API invocations\",\n    current: \"19K\",\n    limit: \"1M\",\n    percentage: 1.9,\n  },\n  {\n    name: \"Image cache reads\",\n    current: \"4.3K\",\n    limit: \"300K\",\n    percentage: 1.4,\n  },\n]\n\nconst chartConfig = {\n  used: {\n    label: \"Used\",\n    color: \"var(--primary)\",\n  },\n  remaining: {\n    label: \"Remaining\",\n    color: \"var(--muted)\",\n  },\n} satisfies ChartConfig\n\nfunction DonutChart({ percentage }: { percentage: number }) {\n  const clamped = Math.max(0, Math.min(100, Number(percentage)))\n  const backgroundData = [\n    { name: \"background\", value: 100, fill: \"var(--border)\" },\n  ]\n  const foregroundData = [\n    {\n      name: \"used\",\n      value: clamped,\n      fill: \"var(--primary)\",\n    },\n    {\n      name: \"empty\",\n      value: 100 - clamped,\n      fill: \"transparent\",\n    },\n  ]\n\n  return (\n    <ChartContainer\n      className=\"aspect-square size-6 shrink-0\"\n      config={chartConfig}\n    >\n      <PieChart>\n        <Pie\n          cx=\"50%\"\n          cy=\"50%\"\n          data={backgroundData}\n          dataKey=\"value\"\n          innerRadius={6}\n          isAnimationActive={false}\n          nameKey=\"name\"\n          outerRadius={10}\n        >\n          {backgroundData.map((entry) => (\n            <Cell fill={entry.fill} key={`bg-${entry.name}`} />\n          ))}\n        </Pie>\n        <Pie\n          cx=\"50%\"\n          cy=\"50%\"\n          data={foregroundData}\n          dataKey=\"value\"\n          endAngle={-270}\n          innerRadius={6}\n          nameKey=\"name\"\n          outerRadius={10}\n          startAngle={90}\n        >\n          {foregroundData.map((entry) => (\n            <Cell fill={entry.fill} key={`fg-${entry.name}`} />\n          ))}\n        </Pie>\n      </PieChart>\n    </ChartContainer>\n  )\n}\n\nexport default function UsageBasedBilling({\n  className,\n  ...props\n}: React.ComponentProps<\"section\">) {\n  return (\n    <section\n      className={cn(\n        \"relative isolate flex w-full min-w-0 items-center justify-center overflow-hidden bg-white dark:bg-background px-4 py-10 text-foreground sm:px-6 sm:py-12\",\n        className\n      )}\n      aria-labelledby=\"usage-based-billing-05-heading\"\n      {...props}\n    >\n      <div\n        aria-hidden\n        className=\"pointer-events-none absolute inset-0 -z-10\"\n      >\n        <div className=\"absolute start-1/2 top-[-18%] size-[22rem] -translate-x-1/2 rounded-full bg-primary/10 blur-3xl\" />\n      </div>\n\n      <Card className=\"w-full max-w-md gap-3 border-border/70 py-5 shadow-soft\">\n        <CardHeader className=\"px-5\">\n          <div className=\"flex items-center justify-between gap-3\">\n            <div className=\"min-w-0 flex-1 text-start\">\n              <h2\n                id=\"usage-based-billing-05-heading\"\n                className=\"text-balance text-sm font-medium\"\n              >\n                Last 30 days\n              </h2>\n              <p className=\"text-pretty text-xs font-medium text-muted-foreground\">\n                Updated just now\n              </p>\n            </div>\n            <Button\n              type=\"button\"\n              size=\"sm\"\n              className=\"h-8 shrink-0 text-xs font-medium\"\n            >\n              Upgrade\n            </Button>\n          </div>\n        </CardHeader>\n\n        <CardContent className=\"px-3 pt-0\">\n          <ul className=\"space-y-0\">\n            {USAGE_DATA.map((item, index) => (\n              <li\n                key={item.name}\n                className={cn(\n                  \"flex items-center gap-3 rounded-sm p-2 transition-colors hover:bg-muted/50\",\n                  index % 2 === 1 && \"bg-muted/20\"\n                )}\n              >\n                <DonutChart percentage={item.percentage} />\n                <span className=\"flex-1 truncate text-sm leading-4 text-foreground\">\n                  {item.name}\n                </span>\n                <span\n                  dir=\"ltr\"\n                  className=\"text-xs font-medium tracking-tighter text-muted-foreground tabular-nums\"\n                >\n                  {item.current} /{\" \"}\n                  <span className=\"text-foreground\">{item.limit}</span>\n                </span>\n              </li>\n            ))}\n          </ul>\n        </CardContent>\n      </Card>\n    </section>\n  )\n}\n",
+      "target": "components/blocks/payments-billing/usage-based-billing-05/usage-based-billing.tsx"
+    }
+  ],
+  "version": "0.1.0+b0276619b649",
+  "generatedAt": "2026-10-28T12:28:50.990Z"
+}

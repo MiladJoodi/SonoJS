@@ -1,0 +1,39 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "progress-checklist-03",
+  "type": "registry:block",
+  "title": "progress-checklist-03",
+  "description": "Workspace launch checklist — clickable steps with Progress bar and help footer.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "progress"
+  ],
+  "cssVars": {
+    "light": {
+      "canvas": "#f3f3f4",
+      "border-soft": "color-mix(in oklab, #e4e4e7 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18)",
+      "background": "var(--canvas)",
+      "card": "#ffffff"
+    },
+    "dark": {
+      "canvas": "#09090b",
+      "border-soft": "color-mix(in oklab, #27272a 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(0, 0, 0, 0.24), 0 28px 56px -28px rgba(0, 0, 0, 0.48)",
+      "background": "var(--canvas)",
+      "card": "#18181b"
+    }
+  },
+  "files": [
+    {
+      "path": "components/blocks/onboarding/progress-checklist-03/progress-checklist.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { CheckCircle2Icon } from \"lucide-react\"\n\nimport { Progress } from \"@/components/ui/progress\"\nimport { cn } from \"@/lib/utils\"\n\nconst STEPS = [\n  {\n    id: \"1.\",\n    title: \"Create your workspace\",\n    description:\n      \"Choose a name, pick a URL slug, and set your region and defaults.\",\n  },\n  {\n    id: \"2.\",\n    title: \"Install your first components\",\n    description:\n      \"Add Button, Card, and a block with the CLI so your app matches the docs.\",\n  },\n  {\n    id: \"3.\",\n    title: \"Invite your team\",\n    description:\n      \"Send invites so designers and engineers can share the same registry.\",\n  },\n  {\n    id: \"4.\",\n    title: \"Connect GitHub & launch\",\n    description:\n      \"Link your repo, review permissions, and start shipping from the workspace.\",\n  },\n] as const\n\nexport default function ProgressChecklist({\n  className,\n  ...props\n}: React.ComponentProps<\"section\">) {\n  const [activeStep, setActiveStep] = React.useState(0)\n  const progressValue = ((activeStep + 1) / STEPS.length) * 100\n\n  return (\n    <section\n      className={cn(\n        \"relative isolate flex w-full min-w-0 items-center justify-center overflow-hidden bg-white dark:bg-background px-4 py-10 text-foreground sm:py-12\",\n        className\n      )}\n      aria-labelledby=\"progress-checklist-03-heading\"\n      {...props}\n    >\n      <div\n        aria-hidden\n        className=\"pointer-events-none absolute inset-0 -z-10\"\n      >\n        <div className=\"absolute start-1/2 top-[-18%] size-[22rem] -translate-x-1/2 rounded-full bg-primary/10 blur-3xl\" />\n      </div>\n\n      <div className=\"w-full max-w-lg\">\n        <header className=\"text-start\">\n          <h2\n            id=\"progress-checklist-03-heading\"\n            className=\"text-lg font-semibold text-foreground\"\n          >\n            Workspace launch\n          </h2>\n          <p className=\"mt-1 text-sm leading-6 text-muted-foreground\">\n            Complete each step to get your SonoJS workspace ready for the team.\n          </p>\n          <div className=\"mt-4 flex items-center justify-end gap-4\">\n            <span className=\"text-sm text-muted-foreground\">\n              Step {activeStep + 1}/{STEPS.length}\n            </span>\n            <Progress\n              className=\"w-32\"\n              value={progressValue}\n              aria-label=\"Setup progress\"\n            />\n          </div>\n        </header>\n\n        <ul className=\"mt-4 space-y-4\">\n          {STEPS.map((step, index) => {\n            const isActive = index === activeStep\n            const isDone = index < activeStep\n            return (\n              <li key={step.id}>\n                <button\n                  type=\"button\"\n                  className={cn(\n                    \"relative w-full cursor-pointer rounded-[12px] border bg-card p-4 text-start shadow-soft transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2\",\n                    isActive\n                      ? \"border-foreground/20\"\n                      : \"border-border/70\"\n                  )}\n                  onClick={() => setActiveStep(index)}\n                  aria-current={isActive ? \"step\" : undefined}\n                >\n                  <div className=\"flex items-start gap-3\">\n                    {isDone ? (\n                      <CheckCircle2Icon\n                        aria-hidden\n                        className=\"size-6 shrink-0 text-foreground\"\n                      />\n                    ) : (\n                      <span\n                        aria-hidden\n                        className=\"flex size-6 items-center justify-center font-medium text-muted-foreground\"\n                      >\n                        {step.id}\n                      </span>\n                    )}\n                    <div>\n                      <h3\n                        className={cn(\n                          \"font-medium\",\n                          isDone\n                            ? \"text-muted-foreground line-through\"\n                            : \"text-foreground\"\n                        )}\n                      >\n                        {step.title}\n                      </h3>\n                      <p className=\"mt-1 text-sm leading-6 text-muted-foreground\">\n                        {step.description}\n                      </p>\n                    </div>\n                  </div>\n                </button>\n              </li>\n            )\n          })}\n        </ul>\n\n        <div className=\"mt-6 rounded-[12px] bg-muted/60 p-4 text-start\">\n          <h4 className=\"text-sm font-medium text-foreground\">Need help?</h4>\n          <p className=\"mt-1 text-sm text-muted-foreground\">\n            Reach the SonoJS team at{\" \"}\n            <a\n              className=\"font-medium text-primary hover:underline hover:underline-offset-4\"\n              href=\"mailto:hello@sonojs.com\"\n            >\n              hello@sonojs.com\n            </a>\n            .\n          </p>\n        </div>\n      </div>\n    </section>\n  )\n}\n",
+      "target": "components/blocks/onboarding/progress-checklist-03/progress-checklist.tsx"
+    }
+  ],
+  "version": "0.1.0+b0276619b649",
+  "generatedAt": "2026-10-28T12:28:50.990Z"
+}

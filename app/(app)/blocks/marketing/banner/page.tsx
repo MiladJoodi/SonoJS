@@ -1,5 +1,3 @@
-import type { ReactNode } from "react"
-
 import {
   BlockExample,
   BlocksPageHeader,
@@ -22,18 +20,18 @@ import Banner15 from "@/registry/blocks/marketing/banner/banner-15/banner"
 
 import { blocksPageMetadata } from "@/lib/seo"
 
-export const metadata = blocksPageMetadata("/blocks/marketing/banner", "Banner", "Ready-to-use Banner UI blocks for React and Tailwind. Preview variants and install with the SonoJS CLI.")
+export const metadata = blocksPageMetadata(
+  "/blocks/marketing/banner",
+  "Banner",
+  "Ready-to-use Banner UI blocks for React and Tailwind. Preview variants and install with the SonoJS CLI."
+)
 
-const usage = (name: string) => `import Banner from "@/components/blocks/marketing/${name}/banner"
+const usage = (name: string) =>
+  `import Banner from "@/components/blocks/marketing/${name}/banner"
 
 export default function Page() {
   return <Banner />
 }`
-
-const previewProps = {
-  previewAlign: "start" as const,
-  previewClassName: "bg-canvas",
-}
 
 function ExampleRule() {
   return (
@@ -48,35 +46,22 @@ function ExampleRule() {
   )
 }
 
-function BannerShell({ children }: { children: ReactNode }) {
-  return (
-    <div className="flex min-h-[28rem] w-full flex-col">
-      {children}
-      <div className="flex flex-1 items-center justify-center px-6 py-8">
-        <p className="text-sm text-muted-foreground">
-          Place above your navbar or page chrome.
-        </p>
-      </div>
-    </div>
-  )
-}
-
 const examples = [
-  { name: "banner-01", node: <Banner01 /> },
-  { name: "banner-02", node: <Banner02 /> },
-  { name: "banner-03", node: <Banner03 /> },
-  { name: "banner-04", node: <Banner04 /> },
-  { name: "banner-05", node: <Banner05 /> },
-  { name: "banner-06", node: <Banner06 /> },
-  { name: "banner-07", node: <Banner07 /> },
-  { name: "banner-08", node: <Banner08 /> },
-  { name: "banner-09", node: <Banner09 /> },
-  { name: "banner-10", node: <Banner10 /> },
-  { name: "banner-11", node: <Banner11 /> },
-  { name: "banner-12", node: <Banner12 /> },
-  { name: "banner-13", node: <Banner13 /> },
-  { name: "banner-14", node: <Banner14 /> },
-  { name: "banner-15", node: <Banner15 /> },
+  { name: "banner-01", node: <Banner01 />, stage: "bg-canvas" },
+  { name: "banner-02", node: <Banner02 />, stage: "bg-canvas" },
+  { name: "banner-03", node: <Banner03 />, stage: "bg-canvas" },
+  { name: "banner-04", node: <Banner04 />, stage: "bg-canvas" },
+  { name: "banner-05", node: <Banner05 />, stage: "bg-canvas px-4" },
+  { name: "banner-06", node: <Banner06 />, stage: "bg-canvas px-4" },
+  { name: "banner-07", node: <Banner07 />, stage: "bg-canvas" },
+  { name: "banner-08", node: <Banner08 />, stage: "bg-canvas" },
+  { name: "banner-09", node: <Banner09 />, stage: "bg-canvas" },
+  { name: "banner-10", node: <Banner10 />, stage: "bg-canvas" },
+  { name: "banner-11", node: <Banner11 />, stage: "bg-canvas" },
+  { name: "banner-12", node: <Banner12 />, stage: "bg-canvas" },
+  { name: "banner-13", node: <Banner13 />, stage: "bg-canvas" },
+  { name: "banner-14", node: <Banner14 />, stage: "bg-canvas" },
+  { name: "banner-15", node: <Banner15 />, stage: "bg-canvas" },
 ] as const
 
 export default function BlockBannerDocsPage() {
@@ -85,7 +70,7 @@ export default function BlockBannerDocsPage() {
       <BlocksPageHeader
         title="Banner"
         pathname="/blocks/marketing/banner"
-        description="Top-of-site announcement and promo strips. Keep these separate from Navbar — stack a Banner above your header when you need one."
+        description="Top-of-site announcement strips for launches, promos, passkeys, and deals — stack above your navbar."
       />
 
       <div className="flex flex-col gap-8">
@@ -95,16 +80,11 @@ export default function BlockBannerDocsPage() {
             <BlockExample
               name={example.name}
               usage={[{ title: "app/page.tsx", code: usage(example.name) }]}
-              {...previewProps}
+              previewAlign="center"
+              previewSize="compact"
+              previewClassName={example.stage}
             >
-              {example.name === "banner-05" ||
-              example.name === "banner-06" ? (
-                <div className="flex min-h-[28rem] w-full items-center justify-center px-6 py-6">
-                  {example.node}
-                </div>
-              ) : (
-                <BannerShell>{example.node}</BannerShell>
-              )}
+              {example.node}
             </BlockExample>
           </div>
         ))}

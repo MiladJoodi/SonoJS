@@ -1,21 +1,30 @@
+import type { ReactNode } from "react"
+
 import {
   BlockExample,
   BlocksPageHeader,
 } from "@/components/blocks"
-import DigitsOtpForm from "@/registry/blocks/authentication/otp-verification/otp-verification-01/otp-verification-form"
-import AutoFocusOtpForm from "@/registry/blocks/authentication/otp-verification/otp-verification-02/otp-verification-form"
-import EmailOtpForm from "@/registry/blocks/authentication/otp-verification/otp-verification-03/otp-verification-form"
-import PhoneOtpForm from "@/registry/blocks/authentication/otp-verification/otp-verification-04/otp-verification-form"
+import Otp01 from "@/registry/blocks/authentication/otp-verification/otp-verification-01/otp-verification-form"
+import Otp02 from "@/registry/blocks/authentication/otp-verification/otp-verification-02/otp-verification-form"
+import Otp03 from "@/registry/blocks/authentication/otp-verification/otp-verification-03/otp-verification-form"
+import Otp04 from "@/registry/blocks/authentication/otp-verification/otp-verification-04/otp-verification-form"
+import Otp05 from "@/registry/blocks/authentication/otp-verification/otp-verification-05/otp-verification-form"
+import Otp06 from "@/registry/blocks/authentication/otp-verification/otp-verification-06/otp-verification-form"
 
 import { blocksPageMetadata } from "@/lib/seo"
 
-export const metadata = blocksPageMetadata("/blocks/authentication/otp-verification", "Otp Verification", "Ready-to-use Otp Verification UI blocks for React and Tailwind. Preview variants and install with the SonoJS CLI.")
+export const metadata = blocksPageMetadata(
+  "/blocks/authentication/otp-verification",
+  "OTP Verification",
+  "Ready-to-use OTP Verification UI blocks for React and Tailwind. Preview variants and install with the SonoJS CLI."
+)
 
-const digitsSource = `import OtpVerificationForm from "@/components/blocks/authentication/otp-verification-01/otp-verification-form"
+const usage = (name: string) =>
+  `import OtpVerificationForm from "@/components/blocks/authentication/${name}/otp-verification-form"
 
 export default function Page() {
   return (
-    <div className="flex min-h-svh w-full items-center justify-center bg-background px-10 py-10">
+    <div className="flex min-h-svh w-full items-center justify-center bg-background px-6 py-10">
       <div className="w-full max-w-md">
         <OtpVerificationForm />
       </div>
@@ -23,36 +32,12 @@ export default function Page() {
   )
 }`
 
-const autoFocusSource = `import OtpVerificationForm from "@/components/blocks/authentication/otp-verification-02/otp-verification-form"
+const usageSplit = `import OtpVerificationForm from "@/components/blocks/authentication/otp-verification-03/otp-verification-form"
 
 export default function Page() {
   return (
-    <div className="flex min-h-svh w-full items-center justify-center bg-background px-10 py-10">
-      <div className="w-full max-w-md">
-        <OtpVerificationForm />
-      </div>
-    </div>
-  )
-}`
-
-const emailSource = `import OtpVerificationForm from "@/components/blocks/authentication/otp-verification-03/otp-verification-form"
-
-export default function Page() {
-  return (
-    <div className="flex min-h-svh w-full items-center justify-center bg-background px-10 py-10">
-      <div className="w-full max-w-md">
-        <OtpVerificationForm />
-      </div>
-    </div>
-  )
-}`
-
-const phoneSource = `import OtpVerificationForm from "@/components/blocks/authentication/otp-verification-04/otp-verification-form"
-
-export default function Page() {
-  return (
-    <div className="flex min-h-svh w-full items-center justify-center bg-background px-10 py-10">
-      <div className="w-full max-w-md">
+    <div className="flex min-h-svh w-full items-center justify-center bg-background px-4 py-10">
+      <div className="w-full max-w-4xl">
         <OtpVerificationForm />
       </div>
     </div>
@@ -72,10 +57,16 @@ function ExampleRule() {
   )
 }
 
-function Center({ children }: { children: React.ReactNode }) {
+function Center({
+  children,
+  className = "max-w-md",
+}: {
+  children: ReactNode
+  className?: string
+}) {
   return (
-    <div className="flex w-full items-center justify-center bg-canvas px-10 py-10">
-      <div className="w-full max-w-md">{children}</div>
+    <div className="flex w-full items-center justify-center px-6 py-10">
+      <div className={`w-full ${className}`}>{children}</div>
     </div>
   )
 }
@@ -86,16 +77,18 @@ export default function BlockOtpVerificationDocsPage() {
       <BlocksPageHeader
         title="OTP Verification"
         pathname="/blocks/authentication/otp-verification"
-        description="One-time code layouts. Each example has its own name and install command."
+        description="Email, SMS, split brand, error recovery, trust-device, and onboarding-step verification flows."
       />
 
       <div className="flex flex-col gap-8">
         <BlockExample
           name="otp-verification-01"
-          usage={[{ title: "app/otp/page.tsx", code: digitsSource }]}
+          usage={[{ title: "app/otp/page.tsx", code: usage("otp-verification-01") }]}
+          previewAlign="center"
+          previewClassName="bg-canvas"
         >
           <Center>
-            <DigitsOtpForm />
+            <Otp01 />
           </Center>
         </BlockExample>
 
@@ -103,10 +96,12 @@ export default function BlockOtpVerificationDocsPage() {
 
         <BlockExample
           name="otp-verification-02"
-          usage={[{ title: "app/otp/page.tsx", code: autoFocusSource }]}
+          usage={[{ title: "app/otp/page.tsx", code: usage("otp-verification-02") }]}
+          previewAlign="center"
+          previewClassName="bg-canvas"
         >
           <Center>
-            <AutoFocusOtpForm />
+            <Otp02 />
           </Center>
         </BlockExample>
 
@@ -114,10 +109,12 @@ export default function BlockOtpVerificationDocsPage() {
 
         <BlockExample
           name="otp-verification-03"
-          usage={[{ title: "app/otp/page.tsx", code: emailSource }]}
+          usage={[{ title: "app/otp/page.tsx", code: usageSplit }]}
+          previewAlign="center"
+          previewClassName="bg-canvas p-0"
         >
-          <Center>
-            <EmailOtpForm />
+          <Center className="max-w-4xl px-4 py-8 sm:px-6">
+            <Otp03 />
           </Center>
         </BlockExample>
 
@@ -125,10 +122,38 @@ export default function BlockOtpVerificationDocsPage() {
 
         <BlockExample
           name="otp-verification-04"
-          usage={[{ title: "app/otp/page.tsx", code: phoneSource }]}
+          usage={[{ title: "app/otp/page.tsx", code: usage("otp-verification-04") }]}
+          previewAlign="center"
+          previewClassName="bg-canvas"
         >
           <Center>
-            <PhoneOtpForm />
+            <Otp04 />
+          </Center>
+        </BlockExample>
+
+        <ExampleRule />
+
+        <BlockExample
+          name="otp-verification-05"
+          usage={[{ title: "app/otp/page.tsx", code: usage("otp-verification-05") }]}
+          previewAlign="center"
+          previewClassName="bg-canvas"
+        >
+          <Center>
+            <Otp05 />
+          </Center>
+        </BlockExample>
+
+        <ExampleRule />
+
+        <BlockExample
+          name="otp-verification-06"
+          usage={[{ title: "app/otp/page.tsx", code: usage("otp-verification-06") }]}
+          previewAlign="center"
+          previewClassName="bg-white dark:bg-background"
+        >
+          <Center>
+            <Otp06 />
           </Center>
         </BlockExample>
       </div>

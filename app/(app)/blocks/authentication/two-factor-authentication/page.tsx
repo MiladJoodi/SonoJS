@@ -1,58 +1,31 @@
+import type { ReactNode } from "react"
+
 import {
   BlockExample,
   BlocksPageHeader,
 } from "@/components/blocks"
-import AuthenticatorTwoFactorForm from "@/registry/blocks/authentication/two-factor/two-factor-01/two-factor-form"
-import SmsTwoFactorForm from "@/registry/blocks/authentication/two-factor/two-factor-02/two-factor-form"
-import BackupTwoFactorForm from "@/registry/blocks/authentication/two-factor/two-factor-03/two-factor-form"
-import ChooseTwoFactorForm from "@/registry/blocks/authentication/two-factor/two-factor-04/two-factor-form"
+import TwoFactor01 from "@/registry/blocks/authentication/two-factor/two-factor-01/two-factor-form"
+import TwoFactor02 from "@/registry/blocks/authentication/two-factor/two-factor-02/two-factor-form"
+import TwoFactor03 from "@/registry/blocks/authentication/two-factor/two-factor-03/two-factor-form"
+import TwoFactor04 from "@/registry/blocks/authentication/two-factor/two-factor-04/two-factor-form"
+import TwoFactor05 from "@/registry/blocks/authentication/two-factor/two-factor-05/two-factor-form"
+import TwoFactor06 from "@/registry/blocks/authentication/two-factor/two-factor-06/two-factor-form"
 
 import { blocksPageMetadata } from "@/lib/seo"
 
-export const metadata = blocksPageMetadata("/blocks/authentication/two-factor-authentication", "Two Factor Authentication", "Ready-to-use Two Factor Authentication UI blocks for React and Tailwind. Preview variants and install with the SonoJS CLI.")
+export const metadata = blocksPageMetadata(
+  "/blocks/authentication/two-factor-authentication",
+  "Two Factor Authentication",
+  "Ready-to-use Two Factor Authentication UI blocks for React and Tailwind. Preview variants and install with the SonoJS CLI."
+)
 
-const authenticatorSource = `import TwoFactorForm from "@/components/blocks/authentication/two-factor-01/two-factor-form"
-
-export default function Page() {
-  return (
-    <div className="flex min-h-svh w-full items-center justify-center bg-background px-10 py-10">
-      <div className="w-full max-w-md">
-        <TwoFactorForm />
-      </div>
-    </div>
-  )
-}`
-
-const smsSource = `import TwoFactorForm from "@/components/blocks/authentication/two-factor-02/two-factor-form"
+const usage = (name: string, maxW = "max-w-md") =>
+  `import TwoFactorForm from "@/components/blocks/authentication/${name}/two-factor-form"
 
 export default function Page() {
   return (
-    <div className="flex min-h-svh w-full items-center justify-center bg-background px-10 py-10">
-      <div className="w-full max-w-md">
-        <TwoFactorForm />
-      </div>
-    </div>
-  )
-}`
-
-const backupSource = `import TwoFactorForm from "@/components/blocks/authentication/two-factor-03/two-factor-form"
-
-export default function Page() {
-  return (
-    <div className="flex min-h-svh w-full items-center justify-center bg-background px-10 py-10">
-      <div className="w-full max-w-md">
-        <TwoFactorForm />
-      </div>
-    </div>
-  )
-}`
-
-const chooseSource = `import TwoFactorForm from "@/components/blocks/authentication/two-factor-04/two-factor-form"
-
-export default function Page() {
-  return (
-    <div className="flex min-h-svh w-full items-center justify-center bg-background px-10 py-10">
-      <div className="w-full max-w-md">
+    <div className="flex min-h-svh w-full items-center justify-center bg-background px-6 py-10">
+      <div className="w-full ${maxW}">
         <TwoFactorForm />
       </div>
     </div>
@@ -72,10 +45,16 @@ function ExampleRule() {
   )
 }
 
-function Center({ children }: { children: React.ReactNode }) {
+function Center({
+  children,
+  className = "max-w-md",
+}: {
+  children: ReactNode
+  className?: string
+}) {
   return (
-    <div className="flex w-full items-center justify-center bg-canvas px-10 py-10">
-      <div className="w-full max-w-md">{children}</div>
+    <div className="flex w-full items-center justify-center px-6 py-10">
+      <div className={`w-full ${className}`}>{children}</div>
     </div>
   )
 }
@@ -86,16 +65,23 @@ export default function BlockTwoFactorDocsPage() {
       <BlocksPageHeader
         title="Two-Factor Authentication"
         pathname="/blocks/authentication/two-factor-authentication"
-        description="2FA challenge layouts. Each example has its own name and install command."
+        description="Authenticator, SMS, backup codes, method chooser, passkey factor, and new-device approval."
       />
 
       <div className="flex flex-col gap-8">
         <BlockExample
           name="two-factor-01"
-          usage={[{ title: "app/two-factor/page.tsx", code: authenticatorSource }]}
+          usage={[
+            {
+              title: "app/two-factor/page.tsx",
+              code: usage("two-factor-01"),
+            },
+          ]}
+          previewAlign="center"
+          previewClassName="bg-canvas"
         >
           <Center>
-            <AuthenticatorTwoFactorForm />
+            <TwoFactor01 />
           </Center>
         </BlockExample>
 
@@ -103,10 +89,17 @@ export default function BlockTwoFactorDocsPage() {
 
         <BlockExample
           name="two-factor-02"
-          usage={[{ title: "app/two-factor/page.tsx", code: smsSource }]}
+          usage={[
+            {
+              title: "app/two-factor/page.tsx",
+              code: usage("two-factor-02"),
+            },
+          ]}
+          previewAlign="center"
+          previewClassName="bg-canvas"
         >
           <Center>
-            <SmsTwoFactorForm />
+            <TwoFactor02 />
           </Center>
         </BlockExample>
 
@@ -114,10 +107,17 @@ export default function BlockTwoFactorDocsPage() {
 
         <BlockExample
           name="two-factor-03"
-          usage={[{ title: "app/two-factor/page.tsx", code: backupSource }]}
+          usage={[
+            {
+              title: "app/two-factor/page.tsx",
+              code: usage("two-factor-03"),
+            },
+          ]}
+          previewAlign="center"
+          previewClassName="bg-canvas"
         >
           <Center>
-            <BackupTwoFactorForm />
+            <TwoFactor03 />
           </Center>
         </BlockExample>
 
@@ -125,10 +125,53 @@ export default function BlockTwoFactorDocsPage() {
 
         <BlockExample
           name="two-factor-04"
-          usage={[{ title: "app/two-factor/page.tsx", code: chooseSource }]}
+          usage={[
+            {
+              title: "app/two-factor/page.tsx",
+              code: usage("two-factor-04", "max-w-lg"),
+            },
+          ]}
+          previewAlign="center"
+          previewClassName="bg-canvas"
+        >
+          <Center className="max-w-lg">
+            <TwoFactor04 />
+          </Center>
+        </BlockExample>
+
+        <ExampleRule />
+
+        <BlockExample
+          name="two-factor-05"
+          usage={[
+            {
+              title: "app/two-factor/page.tsx",
+              code: usage("two-factor-05"),
+            },
+          ]}
+          previewAlign="center"
+          previewClassName="bg-canvas"
         >
           <Center>
-            <ChooseTwoFactorForm />
+            <TwoFactor05 />
+          </Center>
+        </BlockExample>
+
+        <ExampleRule />
+
+        <BlockExample
+          name="two-factor-06"
+          usage={[
+            {
+              title: "app/two-factor/page.tsx",
+              code: usage("two-factor-06", "max-w-4xl"),
+            },
+          ]}
+          previewAlign="center"
+          previewClassName="bg-canvas p-0"
+        >
+          <Center className="max-w-4xl px-4 py-8 sm:px-6">
+            <TwoFactor06 />
           </Center>
         </BlockExample>
       </div>

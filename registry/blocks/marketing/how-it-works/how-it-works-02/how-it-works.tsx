@@ -70,27 +70,26 @@ export default function HowItWorks({
   return (
     <section
       className={cn(
-        "w-full bg-canvas py-16 text-foreground sm:py-24",
+        "w-full bg-canvas py-10 text-foreground sm:py-14",
         className
       )}
       aria-labelledby="how-it-works-02-heading"
       {...props}
     >
-      <div className="mx-auto grid w-full max-w-6xl gap-12 px-4 sm:px-6 lg:grid-cols-12 lg:gap-10 lg:px-8">
+      <div className="mx-auto grid w-full max-w-5xl gap-8 px-4 sm:px-6 lg:grid-cols-12 lg:gap-8 lg:px-8">
         <div className="flex flex-col text-start lg:col-span-5">
           <p className="text-sm font-medium text-primary">How it works</p>
           <h1
             id="how-it-works-02-heading"
-            className="mt-3 text-h1 font-semibold tracking-tight"
+            className="mt-1.5 text-h2 font-semibold tracking-tight"
           >
             Book like people actually book.
           </h1>
-          <p className="mt-4 max-w-md leading-relaxed text-muted-foreground">
-            One quiet desk — not four copy-paste cards. Tap through service, day,
-            time, confirm. Same flow everyone already knows.
+          <p className="mt-2.5 max-w-md text-sm leading-relaxed text-muted-foreground">
+            One quiet desk — tap through service, day, time, confirm.
           </p>
 
-          <ol className="mt-10 space-y-1">
+          <ol className="mt-6 space-y-0.5">
             {NAV.map((item) => {
               const on = item.id === step
               const done = item.id < step
@@ -100,7 +99,7 @@ export default function HowItWorks({
                     type="button"
                     onClick={() => setStep(item.id)}
                     className={cn(
-                      "flex w-full cursor-pointer items-center gap-4 rounded-[12px] px-3 py-3 text-start transition-colors",
+                      "flex w-full cursor-pointer items-center gap-3 rounded-[12px] px-2.5 py-2 text-start transition-colors",
                       on
                         ? "bg-muted/70"
                         : "hover:bg-muted/40"
@@ -109,14 +108,14 @@ export default function HowItWorks({
                     <span
                       dir="ltr"
                       className={cn(
-                        "flex size-9 shrink-0 items-center justify-center rounded-full text-xs font-semibold tabular-nums",
-                        on && "bg-primary text-primary-foreground",
-                        done && !on && "bg-primary/10 text-primary",
-                        !on && !done && "bg-background text-muted-foreground ring-1 ring-border/70"
+                        "flex size-8 shrink-0 items-center justify-center rounded-full bg-white text-xs font-semibold tabular-nums ring-1 ring-border/70",
+                        on && "text-primary ring-primary/40",
+                        done && !on && "text-primary",
+                        !on && !done && "text-muted-foreground"
                       )}
                     >
                       {done && !on ? (
-                        <CheckCircle2Icon className="size-4" aria-hidden />
+                        <CheckCircle2Icon className="size-3.5" aria-hidden />
                       ) : (
                         `0${item.id}`
                       )}
@@ -140,7 +139,7 @@ export default function HowItWorks({
             })}
           </ol>
 
-          <div className="mt-auto hidden pt-10 lg:block">
+          <div className="mt-auto hidden pt-6 lg:block">
             <p className="text-xs text-muted-foreground">
               Try the panel — steps stay in sync.
             </p>
@@ -148,8 +147,8 @@ export default function HowItWorks({
         </div>
 
         <div className="lg:col-span-7">
-          <div className="overflow-hidden rounded-[20px] border border-border/70 bg-card shadow-soft">
-            <div className="flex items-center justify-between gap-3 border-b border-border/70 px-5 py-4">
+          <div className="overflow-hidden rounded-[16px] border border-border/70 bg-card shadow-soft">
+            <div className="flex items-center justify-between gap-3 border-b border-border/70 px-4 py-3">
               <div className="min-w-0 text-start">
                 <p className="text-xs font-medium text-muted-foreground">
                   North Clinic · Booking
@@ -169,9 +168,9 @@ export default function HowItWorks({
               </div>
             </div>
 
-            <div className="min-h-[22rem] p-5 sm:p-6">
+            <div className="min-h-[18rem] p-4 sm:p-5">
               {step === 1 ? (
-                <div className="space-y-3">
+                <div className="space-y-2">
                   <p className="text-sm text-muted-foreground">
                     Choose a visit type
                   </p>
@@ -183,7 +182,7 @@ export default function HowItWorks({
                         type="button"
                         onClick={() => setService(i)}
                         className={cn(
-                          "flex w-full cursor-pointer items-center justify-between gap-3 rounded-[12px] border px-4 py-3.5 text-start transition-colors",
+                          "flex w-full cursor-pointer items-center justify-between gap-3 rounded-[12px] border px-3.5 py-3 text-start transition-colors",
                           on
                             ? "border-primary/40 bg-primary/5"
                             : "border-border/70 hover:bg-muted/40"

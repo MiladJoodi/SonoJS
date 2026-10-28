@@ -274,12 +274,12 @@ function ImageGallery({
 }
 
 export default function ProductDetails09() {
-  const [selectedColor, setSelectedColor] = React.useState(
-    PRODUCT.colors[0].id
-  )
-  const [selectedVariant, setSelectedVariant] = React.useState(
-    PRODUCT.variants[0]
-  )
+  const [selectedColor, setSelectedColor] = React.useState<
+    (typeof PRODUCT.colors)[number]["id"]
+  >(PRODUCT.colors[0].id)
+  const [selectedVariant, setSelectedVariant] = React.useState<
+    (typeof PRODUCT.variants)[number]
+  >(PRODUCT.variants[0])
   const [qty, setQty] = React.useState(1)
   const [wishlisted, setWishlisted] = React.useState(false)
 

@@ -19,7 +19,7 @@ export const siteConfig = {
   name: "SonoJS",
   url: resolveAppUrl(),
   description:
-    "Agent-friendly React components — set up MCP, then ask your agent to build with SonoJS.",
+    "Connect via MCP. Describe what you need. Your agent builds with real SonoJS components, right in your codebase.",
   /** Placeholder until the real npx MCP command ships. Works with any MCP client. */
   mcpInitCommand: "npx @sonojs/ui@latest mcp init",
   links: {

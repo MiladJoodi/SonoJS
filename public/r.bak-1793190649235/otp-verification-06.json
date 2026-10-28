@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "otp-verification-06",
+  "type": "registry:block",
+  "title": "otp-verification-06",
+  "description": "Onboarding-step OTP — step 2 of 3 progress, Back / Continue funnel (RTL/LTR).",
+  "dependencies": [
+    "input-otp",
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "button",
+    "input-otp",
+    "label"
+  ],
+  "files": [
+    {
+      "path": "components/blocks/authentication/otp-verification-06/otp-verification-form.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { ArrowLeftIcon, ArrowRightIcon } from \"lucide-react\"\n\nimport { Button } from \"@/components/ui/button\"\nimport {\n  InputOTP,\n  InputOTPGroup,\n  InputOTPSeparator,\n  InputOTPSlot,\n} from \"@/components/ui/input-otp\"\nimport { Label } from \"@/components/ui/label\"\nimport { cn } from \"@/lib/utils\"\n\nconst RESEND_SECONDS = 30\nconst STEP = 2\nconst TOTAL = 3\n\nexport default function OtpVerificationForm({\n  className,\n  ...props\n}: React.ComponentProps<\"div\">) {\n  const [otp, setOtp] = React.useState(\"\")\n  const [seconds, setSeconds] = React.useState(RESEND_SECONDS)\n\n  React.useEffect(() => {\n    if (seconds <= 0) return\n    const id = window.setTimeout(() => setSeconds((s) => s - 1), 1000)\n    return () => window.clearTimeout(id)\n  }, [seconds])\n\n  const ready = otp.length === 6\n  const progress = (STEP / TOTAL) * 100\n\n  return (\n    <div\n      className={cn(\n        \"mx-auto flex w-full max-w-md flex-col gap-6 bg-white p-6 sm:p-8 dark:bg-background\",\n        className\n      )}\n      {...props}\n    >\n      <div className=\"space-y-3\">\n        <div className=\"flex items-center justify-between gap-3 text-xs font-medium text-muted-foreground\">\n          <span>\n            Step {STEP} of {TOTAL}\n          </span>\n          <span className=\"text-foreground\">Verify</span>\n        </div>\n        <div\n          className=\"h-1 w-full overflow-hidden rounded-full bg-muted\"\n          role=\"progressbar\"\n          aria-valuenow={STEP}\n          aria-valuemin={1}\n          aria-valuemax={TOTAL}\n          aria-label={`Step ${STEP} of ${TOTAL}`}\n        >\n          <div\n            className=\"h-full rounded-full bg-primary transition-[width]\"\n            style={{ width: `${progress}%` }}\n          />\n        </div>\n      </div>\n\n      <header className=\"space-y-1.5 text-start\">\n        <h1 className=\"text-h3 font-semibold tracking-tight text-foreground\">\n          Verify your email\n        </h1>\n        <p className=\"text-sm text-muted-foreground\">\n          Almost done — enter the code we sent to{\" \"}\n          <span dir=\"ltr\" className=\"font-medium text-foreground\">\n            a***@company.com\n          </span>\n        </p>\n      </header>\n\n      <form\n        className=\"flex flex-col gap-5\"\n        onSubmit={(event) => event.preventDefault()}\n      >\n        <div className=\"flex flex-col gap-2\">\n          <Label htmlFor=\"otp-06\" className=\"sr-only\">\n            Verification code\n          </Label>\n          <InputOTP\n            id=\"otp-06\"\n            maxLength={6}\n            value={otp}\n            onChange={setOtp}\n            autoFocus\n            containerClassName=\"justify-start\"\n          >\n            <InputOTPGroup>\n              <InputOTPSlot index={0} />\n              <InputOTPSlot index={1} />\n              <InputOTPSlot index={2} />\n            </InputOTPGroup>\n            <InputOTPSeparator />\n            <InputOTPGroup>\n              <InputOTPSlot index={3} />\n              <InputOTPSlot index={4} />\n              <InputOTPSlot index={5} />\n            </InputOTPGroup>\n          </InputOTP>\n          <div className=\"text-sm\">\n            {seconds > 0 ? (\n              <p className=\"text-muted-foreground\" dir=\"ltr\">\n                Resend in {seconds}s\n              </p>\n            ) : (\n              <button\n                type=\"button\"\n                className=\"cursor-pointer font-medium text-primary underline-offset-4 hover:underline\"\n                onClick={() => {\n                  setSeconds(RESEND_SECONDS)\n                  setOtp(\"\")\n                }}\n              >\n                Resend code\n              </button>\n            )}\n          </div>\n        </div>\n\n        <div className=\"flex flex-col-reverse gap-2.5 sm:flex-row sm:justify-between\">\n          <Button\n            type=\"button\"\n            variant=\"outline\"\n            className=\"cursor-pointer\"\n          >\n            <ArrowLeftIcon className=\"size-4 icon-dir\" aria-hidden />\n            Back\n          </Button>\n          <Button\n            type=\"submit\"\n            className=\"cursor-pointer\"\n            disabled={!ready}\n          >\n            Continue\n            <ArrowRightIcon className=\"size-4 icon-dir\" aria-hidden />\n          </Button>\n        </div>\n      </form>\n    </div>\n  )\n}\n",
+      "target": "components/blocks/authentication/otp-verification-06/otp-verification-form.tsx"
+    }
+  ],
+  "version": "0.1.0+b0276619b649",
+  "generatedAt": "2026-10-28T12:28:50.990Z"
+}

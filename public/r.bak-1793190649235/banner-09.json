@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "banner-09",
+  "type": "registry:block",
+  "title": "banner-09",
+  "description": "Solid emerald New feature strip for AI layout assistant (RTL/LTR).",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/blocks/marketing/banner-09/banner.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport type * as React from \"react\"\nimport { WandSparklesIcon } from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\n\nexport default function Banner({\n  className,\n  ...props\n}: React.ComponentProps<\"div\">) {\n  return (\n    <div\n      className={cn(\n        \"w-full bg-emerald-600 py-2.5 text-center text-sm font-medium text-white dark:bg-emerald-500\",\n        className\n      )}\n      role=\"region\"\n      aria-label=\"New feature\"\n      {...props}\n    >\n      <p className=\"inline-flex flex-wrap items-center justify-center gap-2 px-4\">\n        <span className=\"inline-flex items-center gap-1 rounded-full bg-white/20 px-2.5 py-0.5 text-xs font-semibold tracking-wide uppercase\">\n          <WandSparklesIcon className=\"size-3\" aria-hidden />\n          New\n        </span>\n        <span>\n          AI layout assistant — describe a page, get a block stack\n        </span>\n        <a\n          href=\"#\"\n          className=\"cursor-pointer font-semibold underline underline-offset-2\"\n        >\n          See demo\n        </a>\n      </p>\n    </div>\n  )\n}\n",
+      "target": "components/blocks/marketing/banner-09/banner.tsx"
+    }
+  ],
+  "version": "0.1.0+b0276619b649",
+  "generatedAt": "2026-10-28T12:28:50.990Z"
+}

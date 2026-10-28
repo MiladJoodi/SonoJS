@@ -1,0 +1,36 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "banner-07",
+  "type": "registry:block",
+  "title": "banner-07",
+  "description": "Card shipping strip with mono promo code copy chip (RTL/LTR).",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "cssVars": {
+    "light": {
+      "canvas": "#f3f3f4",
+      "border-soft": "color-mix(in oklab, #e4e4e7 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18)",
+      "background": "var(--canvas)",
+      "card": "#ffffff"
+    },
+    "dark": {
+      "canvas": "#09090b",
+      "border-soft": "color-mix(in oklab, #27272a 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(0, 0, 0, 0.24), 0 28px 56px -28px rgba(0, 0, 0, 0.48)",
+      "background": "var(--canvas)",
+      "card": "#18181b"
+    }
+  },
+  "files": [
+    {
+      "path": "components/blocks/marketing/banner-07/banner.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport type * as React from \"react\"\nimport { CopyIcon, TruckIcon } from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\n\nexport default function Banner({\n  className,\n  ...props\n}: React.ComponentProps<\"div\">) {\n  return (\n    <div\n      className={cn(\n        \"w-full border-b border-border/70 bg-card py-2.5 text-sm font-medium text-foreground\",\n        className\n      )}\n      role=\"region\"\n      aria-label=\"Promotion\"\n      {...props}\n    >\n      <div className=\"mx-auto flex max-w-5xl flex-wrap items-center justify-center gap-x-4 gap-y-2 px-4 text-center sm:justify-between sm:text-start\">\n        <p className=\"inline-flex items-center gap-2\">\n          <TruckIcon className=\"size-3.5 text-primary\" aria-hidden />\n          Free shipping $50+ · 20% off first order\n        </p>\n        <button\n          type=\"button\"\n          className=\"inline-flex cursor-pointer items-center gap-1.5 rounded-md border border-border/70 bg-background px-2.5 py-1 font-mono text-xs tabular-nums transition hover:bg-muted/60\"\n          aria-label=\"Copy promo code WELCOME20\"\n        >\n          WELCOME20\n          <CopyIcon className=\"size-3 text-muted-foreground\" aria-hidden />\n        </button>\n      </div>\n    </div>\n  )\n}\n",
+      "target": "components/blocks/marketing/banner-07/banner.tsx"
+    }
+  ],
+  "version": "0.1.0+b0276619b649",
+  "generatedAt": "2026-10-28T12:28:50.990Z"
+}

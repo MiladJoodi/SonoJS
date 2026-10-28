@@ -1,58 +1,31 @@
+import type { ReactNode } from "react"
+
 import {
   BlockExample,
   BlocksPageHeader,
 } from "@/components/blocks"
-import EmailRecoveryForm from "@/registry/blocks/authentication/account-recovery/account-recovery-01/account-recovery-form"
-import PhoneRecoveryForm from "@/registry/blocks/authentication/account-recovery/account-recovery-02/account-recovery-form"
-import IdentityRecoveryForm from "@/registry/blocks/authentication/account-recovery/account-recovery-03/account-recovery-form"
-import CodesRecoveryForm from "@/registry/blocks/authentication/account-recovery/account-recovery-04/account-recovery-form"
+import AccountRecovery01 from "@/registry/blocks/authentication/account-recovery/account-recovery-01/account-recovery-form"
+import AccountRecovery02 from "@/registry/blocks/authentication/account-recovery/account-recovery-02/account-recovery-form"
+import AccountRecovery03 from "@/registry/blocks/authentication/account-recovery/account-recovery-03/account-recovery-form"
+import AccountRecovery04 from "@/registry/blocks/authentication/account-recovery/account-recovery-04/account-recovery-form"
+import AccountRecovery05 from "@/registry/blocks/authentication/account-recovery/account-recovery-05/account-recovery-form"
+import AccountRecovery06 from "@/registry/blocks/authentication/account-recovery/account-recovery-06/account-recovery-form"
 
 import { blocksPageMetadata } from "@/lib/seo"
 
-export const metadata = blocksPageMetadata("/blocks/authentication/account-recovery", "Account Recovery", "Ready-to-use Account Recovery UI blocks for React and Tailwind. Preview variants and install with the SonoJS CLI.")
+export const metadata = blocksPageMetadata(
+  "/blocks/authentication/account-recovery",
+  "Account Recovery",
+  "Ready-to-use Account Recovery UI blocks for React and Tailwind. Preview variants and install with the SonoJS CLI."
+)
 
-const emailSource = `import AccountRecoveryForm from "@/components/blocks/authentication/account-recovery-01/account-recovery-form"
-
-export default function Page() {
-  return (
-    <div className="flex min-h-svh w-full items-center justify-center bg-background px-10 py-10">
-      <div className="w-full max-w-md">
-        <AccountRecoveryForm />
-      </div>
-    </div>
-  )
-}`
-
-const phoneSource = `import AccountRecoveryForm from "@/components/blocks/authentication/account-recovery-02/account-recovery-form"
+const usage = (name: string, maxW = "max-w-md") =>
+  `import AccountRecoveryForm from "@/components/blocks/authentication/${name}/account-recovery-form"
 
 export default function Page() {
   return (
-    <div className="flex min-h-svh w-full items-center justify-center bg-background px-10 py-10">
-      <div className="w-full max-w-md">
-        <AccountRecoveryForm />
-      </div>
-    </div>
-  )
-}`
-
-const identitySource = `import AccountRecoveryForm from "@/components/blocks/authentication/account-recovery-03/account-recovery-form"
-
-export default function Page() {
-  return (
-    <div className="flex min-h-svh w-full items-center justify-center bg-background px-10 py-10">
-      <div className="w-full max-w-md">
-        <AccountRecoveryForm />
-      </div>
-    </div>
-  )
-}`
-
-const codesSource = `import AccountRecoveryForm from "@/components/blocks/authentication/account-recovery-04/account-recovery-form"
-
-export default function Page() {
-  return (
-    <div className="flex min-h-svh w-full items-center justify-center bg-background px-10 py-10">
-      <div className="w-full max-w-md">
+    <div className="flex min-h-svh w-full items-center justify-center bg-background px-6 py-10">
+      <div className="w-full ${maxW}">
         <AccountRecoveryForm />
       </div>
     </div>
@@ -72,10 +45,16 @@ function ExampleRule() {
   )
 }
 
-function Center({ children }: { children: React.ReactNode }) {
+function Center({
+  children,
+  className = "max-w-md",
+}: {
+  children: ReactNode
+  className?: string
+}) {
   return (
-    <div className="flex w-full items-center justify-center bg-canvas px-10 py-10">
-      <div className="w-full max-w-md">{children}</div>
+    <div className="flex w-full items-center justify-center px-6 py-10">
+      <div className={`w-full ${className}`}>{children}</div>
     </div>
   )
 }
@@ -86,16 +65,20 @@ export default function BlockAccountRecoveryDocsPage() {
       <BlocksPageHeader
         title="Account Recovery"
         pathname="/blocks/authentication/account-recovery"
-        description="Account recovery layouts. Each example has its own name and install command."
+        description="Email request, phone, check inbox, backup codes, method chooser, and brand-split locked recovery."
       />
 
       <div className="flex flex-col gap-8">
         <BlockExample
           name="account-recovery-01"
-          usage={[{ title: "app/recovery/page.tsx", code: emailSource }]}
+          usage={[
+            { title: "app/recovery/page.tsx", code: usage("account-recovery-01") },
+          ]}
+          previewAlign="center"
+          previewClassName="bg-canvas"
         >
           <Center>
-            <EmailRecoveryForm />
+            <AccountRecovery01 />
           </Center>
         </BlockExample>
 
@@ -103,10 +86,14 @@ export default function BlockAccountRecoveryDocsPage() {
 
         <BlockExample
           name="account-recovery-02"
-          usage={[{ title: "app/recovery/page.tsx", code: phoneSource }]}
+          usage={[
+            { title: "app/recovery/page.tsx", code: usage("account-recovery-02") },
+          ]}
+          previewAlign="center"
+          previewClassName="bg-canvas"
         >
           <Center>
-            <PhoneRecoveryForm />
+            <AccountRecovery02 />
           </Center>
         </BlockExample>
 
@@ -114,10 +101,14 @@ export default function BlockAccountRecoveryDocsPage() {
 
         <BlockExample
           name="account-recovery-03"
-          usage={[{ title: "app/recovery/page.tsx", code: identitySource }]}
+          usage={[
+            { title: "app/recovery/page.tsx", code: usage("account-recovery-03") },
+          ]}
+          previewAlign="center"
+          previewClassName="bg-canvas"
         >
           <Center>
-            <IdentityRecoveryForm />
+            <AccountRecovery03 />
           </Center>
         </BlockExample>
 
@@ -125,10 +116,47 @@ export default function BlockAccountRecoveryDocsPage() {
 
         <BlockExample
           name="account-recovery-04"
-          usage={[{ title: "app/recovery/page.tsx", code: codesSource }]}
+          usage={[
+            { title: "app/recovery/page.tsx", code: usage("account-recovery-04") },
+          ]}
+          previewAlign="center"
+          previewClassName="bg-canvas"
         >
           <Center>
-            <CodesRecoveryForm />
+            <AccountRecovery04 />
+          </Center>
+        </BlockExample>
+
+        <ExampleRule />
+
+        <BlockExample
+          name="account-recovery-05"
+          usage={[
+            { title: "app/recovery/page.tsx", code: usage("account-recovery-05") },
+          ]}
+          previewAlign="center"
+          previewClassName="bg-canvas"
+        >
+          <Center>
+            <AccountRecovery05 />
+          </Center>
+        </BlockExample>
+
+        <ExampleRule />
+
+        <BlockExample
+          name="account-recovery-06"
+          usage={[
+            {
+              title: "app/recovery/page.tsx",
+              code: usage("account-recovery-06", "max-w-4xl"),
+            },
+          ]}
+          previewAlign="center"
+          previewClassName="bg-canvas p-0"
+        >
+          <Center className="max-w-4xl px-4 py-8 sm:px-6">
+            <AccountRecovery06 />
           </Center>
         </BlockExample>
       </div>

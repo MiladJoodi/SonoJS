@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "banner-14",
+  "type": "registry:block",
+  "title": "banner-14",
+  "description": "Dark 0% APR financing strip with See terms link (RTL/LTR).",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/blocks/marketing/banner-14/banner.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport type * as React from \"react\"\nimport { ArrowRightIcon, CreditCardIcon } from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\n\nexport default function Banner({\n  className,\n  ...props\n}: React.ComponentProps<\"div\">) {\n  return (\n    <div\n      className={cn(\n        \"flex flex-wrap items-center justify-center gap-2 bg-zinc-900 px-4 py-2 text-center text-xs font-medium tracking-tight text-zinc-100\",\n        className\n      )}\n      role=\"region\"\n      aria-label=\"Financing offer\"\n      {...props}\n    >\n      <CreditCardIcon className=\"size-3.5 shrink-0 text-sky-400\" aria-hidden />\n      <span>\n        0% APR for 12 months on qualifying plans — pay monthly, keep cashflow\n      </span>\n      <a\n        href=\"#\"\n        className=\"inline-flex cursor-pointer items-center gap-0.5 font-semibold text-sky-400 hover:underline\"\n      >\n        See terms\n        <ArrowRightIcon className=\"size-3 icon-dir\" aria-hidden />\n      </a>\n    </div>\n  )\n}\n",
+      "target": "components/blocks/marketing/banner-14/banner.tsx"
+    }
+  ],
+  "version": "0.1.0+b0276619b649",
+  "generatedAt": "2026-10-28T12:28:50.990Z"
+}

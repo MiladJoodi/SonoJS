@@ -1,14 +1,27 @@
 "use client"
 
+import type * as React from "react"
 import { FingerprintIcon } from "lucide-react"
 
-import { cn } from "@/lib/utils"
 import { Button } from "@sonojs/ui/components/button"
+import { cn } from "@/lib/utils"
 
 const steps = [
-  "Confirm it is you with your device lock.",
-  "Save this passkey for faster sign-in next time.",
-  "You can still use a password as a backup.",
+  {
+    n: "1",
+    title: "Confirm it's you",
+    body: "Unlock with Face ID, Touch ID, or your device PIN.",
+  },
+  {
+    n: "2",
+    title: "Save this passkey",
+    body: "Stored in your password manager / platform keychain.",
+  },
+  {
+    n: "3",
+    title: "Sign in faster next time",
+    body: "No password to remember — you can still keep a backup.",
+  },
 ] as const
 
 export default function PasskeyForm({
@@ -18,44 +31,61 @@ export default function PasskeyForm({
   return (
     <div
       className={cn(
-        "[--login-card-padding:1.5rem] sm:[--login-card-padding:2rem]",
-        "flex w-full flex-col gap-8 rounded-[12px] border border-border/70 bg-card p-(--login-card-padding)",
-        "shadow-soft",
+        "flex w-full flex-col gap-6 rounded-[12px] border border-border/70 bg-card p-6 shadow-soft sm:p-8",
         className
       )}
-      style={{
-                backgroundColor: "var(--card, #ffffff)",
-                boxShadow:
-                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
-              }}
       {...props}
     >
-      <header className="flex flex-col items-start gap-3">
-        <span className="h-0.5 w-8 rounded-full bg-primary" aria-hidden />
+      <header className="flex flex-col items-start gap-3 text-start">
+        <span className="flex size-12 items-center justify-center rounded-full bg-primary/10 text-primary">
+          <FingerprintIcon className="size-5" aria-hidden />
+        </span>
         <div className="space-y-1.5">
-          <h1 className="text-h3 text-foreground">Create a passkey</h1>
+          <h1 className="text-h3 font-semibold tracking-tight text-foreground">
+            Create a passkey
+          </h1>
           <p className="text-sm text-muted-foreground">
             Register this device so you can sign in without a password.
           </p>
         </div>
+        <div
+          className="h-1 w-full overflow-hidden rounded-full bg-muted"
+          role="progressbar"
+          aria-valuenow={1}
+          aria-valuemin={1}
+          aria-valuemax={3}
+          aria-label="Setup progress"
+        >
+          <div className="h-full w-1/3 rounded-full bg-primary" />
+        </div>
       </header>
 
-      <ul className="space-y-3">
+      <ol className="space-y-3">
         {steps.map((step) => (
           <li
-            key={step}
-            className="flex items-start gap-2 text-start text-sm text-foreground"
+            key={step.n}
+            className="flex items-start gap-3 rounded-[12px] border border-border/70 bg-muted/30 px-3 py-3 text-start"
           >
-            <FingerprintIcon className="mt-0.5 size-4 shrink-0 text-primary" />
-            <span>{step}</span>
+            <span
+              dir="ltr"
+              className="flex size-7 shrink-0 items-center justify-center rounded-full bg-white text-xs font-semibold text-foreground ring-1 ring-border/70 dark:bg-card"
+            >
+              {step.n}
+            </span>
+            <span className="min-w-0 space-y-0.5">
+              <span className="block text-sm font-semibold text-foreground">
+                {step.title}
+              </span>
+              <span className="block text-xs text-muted-foreground">
+                {step.body}
+              </span>
+            </span>
           </li>
         ))}
-      </ul>
+      </ol>
 
-      <Button
-        type="button"
-        className="w-full shadow-none"
-      >
+      <Button type="button" className="w-full cursor-pointer">
+        <FingerprintIcon className="size-4" aria-hidden />
         Set up passkey
       </Button>
 

@@ -1,45 +1,50 @@
 "use client"
 
 import * as React from "react"
-import { MessageSquareIcon } from "lucide-react"
+import { SmartphoneIcon } from "lucide-react"
 
-import { cn } from "@/lib/utils"
 import { Button } from "@sonojs/ui/components/button"
 import {
   InputOTP,
   InputOTPGroup,
-  InputOTPSeparator,
   InputOTPSlot,
 } from "@sonojs/ui/components/input-otp"
 import { Label } from "@sonojs/ui/components/label"
+import { cn } from "@/lib/utils"
+
+const RESEND_SECONDS = 30
 
 export default function TwoFactorForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
   const [otp, setOtp] = React.useState("")
+  const [seconds, setSeconds] = React.useState(RESEND_SECONDS)
+
+  React.useEffect(() => {
+    if (seconds <= 0) return
+    const id = window.setTimeout(() => setSeconds((s) => s - 1), 1000)
+    return () => window.clearTimeout(id)
+  }, [seconds])
+
+  const ready = otp.length === 6
 
   return (
     <div
       className={cn(
-        "[--login-card-padding:1.5rem] sm:[--login-card-padding:2rem]",
-        "flex w-full flex-col gap-8 rounded-[12px] border border-border/70 bg-card p-(--login-card-padding)",
-        "shadow-soft",
+        "flex w-full flex-col gap-6 rounded-[12px] border border-border/70 bg-card p-6 shadow-soft sm:p-8",
         className
       )}
-      style={{
-                backgroundColor: "var(--card, #ffffff)",
-                boxShadow:
-                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
-              }}
       {...props}
     >
       <header className="flex flex-col items-center gap-3 text-center">
-        <span className="flex size-12 items-center justify-center rounded-full bg-muted text-foreground">
-          <MessageSquareIcon className="size-5" />
+        <span className="flex size-12 items-center justify-center rounded-full bg-primary/10 text-primary">
+          <SmartphoneIcon className="size-5" aria-hidden />
         </span>
         <div className="space-y-1.5">
-          <h1 className="text-h3 text-foreground">SMS verification</h1>
+          <h1 className="text-h3 font-semibold tracking-tight text-foreground">
+            Text message
+          </h1>
           <p className="text-sm text-muted-foreground">
             Enter the code we texted to{" "}
             <span dir="ltr" className="font-medium text-foreground">
@@ -57,35 +62,58 @@ export default function TwoFactorForm({
           <Label htmlFor="tfa-02" className="sr-only">
             SMS code
           </Label>
-          <div dir="ltr" className="flex w-full justify-center">
-            <InputOTP
-              id="tfa-02"
-              maxLength={6}
-              value={otp}
-              onChange={setOtp}
-              containerClassName="justify-center"
-            >
-              <InputOTPGroup>
-                <InputOTPSlot index={0} />
-                <InputOTPSlot index={1} />
-                <InputOTPSlot index={2} />
-              </InputOTPGroup>
-              <InputOTPSeparator />
-              <InputOTPGroup>
-                <InputOTPSlot index={3} />
-                <InputOTPSlot index={4} />
-                <InputOTPSlot index={5} />
-              </InputOTPGroup>
-            </InputOTP>
-          </div>
+          <InputOTP
+            id="tfa-02"
+            maxLength={6}
+            value={otp}
+            onChange={setOtp}
+            autoFocus
+            containerClassName="justify-center"
+          >
+            <InputOTPGroup>
+              <InputOTPSlot index={0} />
+              <InputOTPSlot index={1} />
+              <InputOTPSlot index={2} />
+              <InputOTPSlot index={3} />
+              <InputOTPSlot index={4} />
+              <InputOTPSlot index={5} />
+            </InputOTPGroup>
+          </InputOTP>
         </div>
+
         <Button
           type="submit"
-          className="mt-1 w-full shadow-none"
+          className="mt-1 w-full cursor-pointer"
+          disabled={!ready}
         >
           Continue
         </Button>
       </form>
+
+      <div className="flex flex-col items-center gap-2 text-center text-sm">
+        {seconds > 0 ? (
+          <p className="text-muted-foreground" dir="ltr">
+            Resend SMS in {seconds}s
+          </p>
+        ) : (
+          <button
+            type="button"
+            className="cursor-pointer font-medium text-primary underline-offset-4 hover:underline"
+            onClick={() => {
+              setSeconds(RESEND_SECONDS)
+              setOtp("")
+            }}
+          >
+            Resend SMS
+          </button>
+        )}
+        <a
+          href="#"
+          className="cursor-pointer text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
+        >
+          Try authenticator instead
+        </a>
+      </div>
     </div>
   )
 }

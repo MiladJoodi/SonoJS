@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "empty-state-07",
+  "type": "registry:block",
+  "title": "empty-state-07",
+  "description": "Chart no data — metric header, placeholder plot, and connect source CTA.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "button",
+    "empty",
+    "separator"
+  ],
+  "cssVars": {
+    "light": {
+      "canvas": "#f3f3f4",
+      "border-soft": "color-mix(in oklab, #e4e4e7 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18)",
+      "background": "var(--canvas)",
+      "card": "#ffffff"
+    },
+    "dark": {
+      "canvas": "#09090b",
+      "border-soft": "color-mix(in oklab, #27272a 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(0, 0, 0, 0.24), 0 28px 56px -28px rgba(0, 0, 0, 0.48)",
+      "background": "var(--canvas)",
+      "card": "#18181b"
+    }
+  },
+  "files": [
+    {
+      "path": "components/blocks/feedback-states/empty-state-07/empty-state.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport type * as React from \"react\"\nimport { BarChart3Icon, Link2Icon } from \"lucide-react\"\n\nimport { Button } from \"@/components/ui/button\"\nimport {\n  Empty,\n  EmptyContent,\n  EmptyDescription,\n  EmptyHeader,\n  EmptyMedia,\n  EmptyTitle,\n} from \"@/components/ui/empty\"\nimport { Separator } from \"@/components/ui/separator\"\nimport { cn } from \"@/lib/utils\"\n\nexport default function EmptyState({\n  className,\n  ...props\n}: React.ComponentProps<\"section\">) {\n  return (\n    <section\n      className={cn(\n        \"w-full min-w-0 bg-canvas px-4 py-10 text-foreground sm:px-6 sm:py-14\",\n        className\n      )}\n      aria-labelledby=\"empty-state-07-heading\"\n      {...props}\n    >\n      <div className=\"mx-auto w-full max-w-2xl overflow-hidden rounded-[12px] border border-border/70 bg-card shadow-soft\">\n        <div className=\"flex flex-wrap items-end justify-between gap-3 px-4 pt-4 sm:px-5 sm:pt-5\">\n          <div>\n            <p className=\"text-xs font-medium tracking-wide text-muted-foreground uppercase\">\n              Analytics\n            </p>\n            <h2 className=\"mt-1 text-sm font-semibold\">Weekly active users</h2>\n          </div>\n          <p className=\"text-xs text-muted-foreground\">Last 7 days · No source</p>\n        </div>\n\n        <Separator className=\"mt-4\" />\n\n        <div\n          aria-hidden\n          className=\"relative mx-4 mt-4 h-28 overflow-hidden rounded-md border border-border/50 bg-muted/20 sm:mx-5\"\n        >\n          <div className=\"absolute inset-x-0 bottom-0 flex h-full items-end justify-around gap-2 px-4 pb-2 opacity-40\">\n            {[28, 44, 36, 52, 40, 48, 32].map((h, i) => (\n              <div\n                key={i}\n                className=\"w-full max-w-6 rounded-t-sm bg-muted-foreground/25\"\n                style={{ height: `${h}%` }}\n              />\n            ))}\n          </div>\n        </div>\n\n        <Empty className=\"min-h-[200px] border-0\">\n          <EmptyHeader>\n            <EmptyMedia variant=\"icon\">\n              <BarChart3Icon aria-hidden />\n            </EmptyMedia>\n            <EmptyTitle id=\"empty-state-07-heading\">No data yet</EmptyTitle>\n            <EmptyDescription>\n              Connect a product analytics source to populate this chart. Ranges\n              and comparisons unlock after the first sync.\n            </EmptyDescription>\n          </EmptyHeader>\n          <EmptyContent>\n            <Button type=\"button\" className=\"cursor-pointer\">\n              <Link2Icon className=\"size-4\" aria-hidden />\n              Connect data source\n            </Button>\n          </EmptyContent>\n        </Empty>\n      </div>\n    </section>\n  )\n}\n",
+      "target": "components/blocks/feedback-states/empty-state-07/empty-state.tsx"
+    }
+  ],
+  "version": "0.1.0+ae9df65d1e57",
+  "generatedAt": "2026-10-28T12:46:55.763Z"
+}

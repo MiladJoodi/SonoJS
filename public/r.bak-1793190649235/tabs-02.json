@@ -1,0 +1,39 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tabs-02",
+  "type": "registry:block",
+  "title": "tabs-02",
+  "description": "Account settings underline tabs with forms for General, Security, Notifications, and Billing.",
+  "registryDependencies": [
+    "tabs",
+    "button",
+    "input",
+    "label"
+  ],
+  "cssVars": {
+    "light": {
+      "canvas": "#f3f3f4",
+      "border-soft": "color-mix(in oklab, #e4e4e7 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18)",
+      "background": "var(--canvas)",
+      "card": "#ffffff"
+    },
+    "dark": {
+      "canvas": "#09090b",
+      "border-soft": "color-mix(in oklab, #27272a 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(0, 0, 0, 0.24), 0 28px 56px -28px rgba(0, 0, 0, 0.48)",
+      "background": "var(--canvas)",
+      "card": "#18181b"
+    }
+  },
+  "files": [
+    {
+      "path": "components/blocks/navigation/tabs-02/tabs.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport type * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { Button } from \"@/components/ui/button\"\nimport { Input } from \"@/components/ui/input\"\nimport { Label } from \"@/components/ui/label\"\nimport {\n  Tabs,\n  TabsContent,\n  TabsList,\n  TabsTrigger,\n} from \"@/components/ui/tabs\"\n\nconst triggerClass = cn(\n  \"relative top-px h-10 min-h-10 flex-none rounded-none border-0 border-b-2 border-transparent\",\n  \"bg-transparent px-4 text-sm font-medium text-muted-foreground shadow-none\",\n  \"after:hidden after:opacity-0 hover:text-foreground\",\n  \"data-[state=active]:border-foreground data-[state=active]:bg-transparent\",\n  \"data-[state=active]:text-foreground data-[state=active]:shadow-none\",\n  \"dark:data-[state=active]:bg-transparent\"\n)\n\nexport default function TabsBlock({\n  className,\n  ...props\n}: React.ComponentProps<\"div\">) {\n  return (\n    <div\n      className={cn(\n        \"mx-auto min-w-0 w-full max-w-2xl overflow-x-clip rounded-[12px] border border-border/70 bg-card p-4 shadow-soft sm:p-5 md:p-6\",\n        className\n      )}\n      style={{\n                backgroundColor: \"var(--card, #ffffff)\",\n                boxShadow:\n                  \"var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))\",\n              }}\n      {...props}\n    >\n      <Tabs defaultValue=\"general\" className=\"min-w-0 w-full gap-6\">\n        <div className=\"space-y-1\">\n          <h3 className=\"text-h4 text-foreground\">Account settings</h3>\n          <p className=\"text-sm text-muted-foreground\">\n            Manage how Sara Reed appears across the workspace.\n          </p>\n        </div>\n\n        <TabsList\n          variant=\"line\"\n          aria-label=\"Account settings\"\n          className=\"no-scrollbar h-auto max-w-full min-w-0 w-full justify-start gap-1 overflow-x-auto overflow-y-hidden rounded-none border-b border-border bg-transparent p-0\"\n        >\n          <TabsTrigger value=\"general\" className={triggerClass}>\n            General\n          </TabsTrigger>\n          <TabsTrigger value=\"security\" className={triggerClass}>\n            Security\n          </TabsTrigger>\n          <TabsTrigger value=\"notifications\" className={triggerClass}>\n            Notifications\n          </TabsTrigger>\n          <TabsTrigger value=\"billing\" className={triggerClass}>\n            Billing\n          </TabsTrigger>\n        </TabsList>\n\n        <TabsContent value=\"general\" className=\"mt-0 space-y-4\">\n          <div className=\"grid gap-4 sm:grid-cols-2\">\n            <div className=\"space-y-2\">\n              <Label htmlFor=\"tabs02-name\">Display name</Label>\n              <Input id=\"tabs02-name\" defaultValue=\"Sara Reed\" />\n            </div>\n            <div className=\"space-y-2\">\n              <Label htmlFor=\"tabs02-email\">Email</Label>\n              <Input\n                id=\"tabs02-email\"\n                type=\"email\"\n                defaultValue=\"sara@sonojs.dev\"\n              />\n            </div>\n          </div>\n          <div className=\"space-y-2\">\n            <Label htmlFor=\"tabs02-role\">Role</Label>\n            <Input id=\"tabs02-role\" defaultValue=\"Product designer\" />\n          </div>\n          <Button className=\"h-[46px] rounded-[12px]\">Save changes</Button>\n        </TabsContent>\n\n        <TabsContent value=\"security\" className=\"mt-0 space-y-4\">\n          <div className=\"rounded-[12px] border border-border/70 p-4\">\n            <p className=\"text-sm font-medium text-foreground\">\n              Two-factor authentication\n            </p>\n            <p className=\"mt-1 text-sm text-muted-foreground\">\n              Protect the account with an authenticator app.\n            </p>\n            <Button variant=\"outline\" className=\"mt-3 h-10 rounded-[12px]\">\n              Enable 2FA\n            </Button>\n          </div>\n          <div className=\"rounded-[12px] border border-border/70 p-4\">\n            <p className=\"text-sm font-medium text-foreground\">\n              Active sessions\n            </p>\n            <p className=\"mt-1 text-sm text-muted-foreground\">\n              2 devices signed in · Last active 12 minutes ago\n            </p>\n            <Button variant=\"ghost\" className=\"mt-2 h-10 px-0 text-destructive\">\n              Sign out everywhere\n            </Button>\n          </div>\n        </TabsContent>\n\n        <TabsContent value=\"notifications\" className=\"mt-0 space-y-3\">\n          {[\n            [\"Product updates\", \"Release notes and new component alerts\"],\n            [\"Mentions\", \"When someone tags you in a comment\"],\n            [\"Billing\", \"Invoices and payment failures\"],\n          ].map(([title, body]) => (\n            <label\n              key={title}\n              className=\"flex cursor-pointer items-start justify-between gap-4 rounded-[12px] border border-border/70 p-4\"\n            >\n              <span>\n                <span className=\"block text-sm font-medium text-foreground\">\n                  {title}\n                </span>\n                <span className=\"mt-0.5 block text-sm text-muted-foreground\">\n                  {body}\n                </span>\n              </span>\n              <input\n                type=\"checkbox\"\n                defaultChecked={title !== \"Billing\"}\n                className=\"mt-1 size-4 cursor-pointer accent-primary\"\n              />\n            </label>\n          ))}\n        </TabsContent>\n\n        <TabsContent value=\"billing\" className=\"mt-0 space-y-4\">\n          <div className=\"flex flex-wrap items-center justify-between gap-3 rounded-[12px] border border-border/70 bg-muted/40 p-4\">\n            <div>\n              <p className=\"text-sm font-medium text-foreground\">Team plan</p>\n              <p className=\"text-sm text-muted-foreground\">\n                Renews on Nov 12 · Visa ···· 4242\n              </p>\n            </div>\n            <Button variant=\"outline\" className=\"h-10 rounded-[12px]\">\n              Manage plan\n            </Button>\n          </div>\n          <p className=\"text-sm text-muted-foreground\">\n            Invoices are emailed to sara@sonojs.dev after each renewal.\n          </p>\n        </TabsContent>\n      </Tabs>\n    </div>\n  )\n}\n",
+      "target": "components/blocks/navigation/tabs-02/tabs.tsx"
+    }
+  ],
+  "version": "0.1.0+b0276619b649",
+  "generatedAt": "2026-10-28T12:28:50.990Z"
+}

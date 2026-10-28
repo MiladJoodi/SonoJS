@@ -1,9 +1,10 @@
 "use client"
 
-import { FingerprintIcon } from "lucide-react"
+import type * as React from "react"
+import { FingerprintIcon, ShieldCheckIcon } from "lucide-react"
 
-import { cn } from "@/lib/utils"
 import { Button } from "@sonojs/ui/components/button"
+import { cn } from "@/lib/utils"
 
 export default function PasskeyForm({
   className,
@@ -12,36 +13,34 @@ export default function PasskeyForm({
   return (
     <div
       className={cn(
-        "[--login-card-padding:1.5rem] sm:[--login-card-padding:2rem]",
-        "flex w-full flex-col gap-8 rounded-[12px] border border-border/70 bg-card p-(--login-card-padding)",
-        "shadow-soft",
+        "flex w-full flex-col gap-6 rounded-[12px] border border-border/70 bg-card p-6 shadow-soft sm:p-8",
         className
       )}
-      style={{
-                backgroundColor: "var(--card, #ffffff)",
-                boxShadow:
-                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
-              }}
       {...props}
     >
       <header className="flex flex-col items-center gap-3 text-center">
-        <span className="flex size-14 items-center justify-center rounded-full bg-muted text-foreground">
-          <FingerprintIcon className="size-7" strokeWidth={1.5} />
+        <span className="flex size-14 items-center justify-center rounded-full bg-primary/10 text-primary">
+          <FingerprintIcon className="size-7" strokeWidth={1.5} aria-hidden />
         </span>
         <div className="space-y-1.5">
-          <h1 className="text-h3 text-foreground">Sign in with a passkey</h1>
+          <h1 className="text-h3 font-semibold tracking-tight text-foreground">
+            Sign in with a passkey
+          </h1>
           <p className="text-sm text-muted-foreground">
-            Use Face ID, Touch ID, or your device lock to continue.
+            Use Face ID, Touch ID, Windows Hello, or your security key.
           </p>
         </div>
       </header>
 
-      <Button
-        type="button"
-        className="w-full shadow-none"
-      >
+      <Button type="button" className="w-full cursor-pointer">
+        <FingerprintIcon className="size-4" aria-hidden />
         Continue with passkey
       </Button>
+
+      <p className="inline-flex items-center justify-center gap-1.5 text-center text-xs text-muted-foreground">
+        <ShieldCheckIcon className="size-3.5 text-primary" aria-hidden />
+        Synced across your devices
+      </p>
 
       <p className="text-center text-sm text-muted-foreground">
         Prefer a password?{" "}

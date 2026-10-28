@@ -1,12 +1,14 @@
 "use client"
 
+import type * as React from "react"
+
 import { AppleIcon } from "@/registry/icons/apple"
 import { FacebookIcon } from "@/registry/icons/facebook"
 import { GithubIcon } from "@/registry/icons/github"
 import { GoogleIcon } from "@/registry/icons/google"
 import { XIcon } from "@/registry/icons/x"
-import { cn } from "@/lib/utils"
 import { Button } from "@sonojs/ui/components/button"
+import { cn } from "@/lib/utils"
 
 const providers = [
   { name: "Google", Icon: GoogleIcon },
@@ -23,26 +25,18 @@ export default function SocialLoginForm({
   return (
     <div
       className={cn(
-        "[--login-card-padding:1.5rem] sm:[--login-card-padding:2rem]",
-        "flex w-full flex-col gap-8 rounded-[12px] border border-border/70 bg-card p-(--login-card-padding)",
-        "shadow-soft",
+        "flex w-full flex-col gap-6 rounded-[12px] border border-border/70 bg-card p-6 shadow-soft sm:p-8",
         className
       )}
-      style={{
-                backgroundColor: "var(--card, #ffffff)",
-                boxShadow:
-                  "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
-              }}
       {...props}
     >
-      <header className="flex flex-col items-start gap-3">
-        <span className="h-0.5 w-8 rounded-full bg-primary" aria-hidden />
-        <div className="space-y-1.5">
-          <h1 className="text-h3 text-foreground">Sign in</h1>
-          <p className="text-sm text-muted-foreground">
-            Pick a provider. Icon-only buttons keep the card compact.
-          </p>
-        </div>
+      <header className="flex flex-col items-center gap-1.5 text-center">
+        <h1 className="text-h3 font-semibold tracking-tight text-foreground">
+          Sign in
+        </h1>
+        <p className="text-sm text-muted-foreground">
+          Pick a provider. Icon-only buttons keep the card compact.
+        </p>
       </header>
 
       <div className="flex flex-wrap items-center justify-center gap-2">
@@ -52,12 +46,23 @@ export default function SocialLoginForm({
             type="button"
             variant="outline"
             size="icon"
-            aria-label={name}
-            className="size-[46px] rounded-[12px] border-border/70 bg-card shadow-none hover:bg-muted">
+            aria-label={`Continue with ${name}`}
+            className="size-[46px] cursor-pointer rounded-[12px] border-border/70 bg-card hover:bg-muted"
+          >
             <Icon />
           </Button>
         ))}
       </div>
+
+      <p className="text-center text-sm text-muted-foreground">
+        or{" "}
+        <a
+          href="#"
+          className="cursor-pointer font-medium text-foreground underline-offset-4 hover:underline"
+        >
+          continue with email
+        </a>
+      </p>
     </div>
   )
 }

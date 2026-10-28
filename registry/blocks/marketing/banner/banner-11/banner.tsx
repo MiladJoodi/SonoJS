@@ -13,18 +13,17 @@ export default function Banner({
     <a
       href="#"
       className={cn(
-        "group flex w-full cursor-pointer items-center justify-center bg-[#7668ff] py-1.5 text-center text-sm font-medium text-white",
+        "group flex w-full cursor-pointer items-center justify-center bg-violet-600 py-2 text-center text-sm font-medium text-white dark:bg-violet-500",
         className
       )}
       {...props}
     >
-      <div className="flex flex-wrap items-center justify-center gap-1 rounded-full px-4 py-1 transition duration-300 group-hover:bg-white/15">
-        <p>
-          Explore a growing library of over 300+ beautifully crafted,
-          customizable components.
-        </p>
-        <ArrowRightIcon className="mt-px size-4 shrink-0 icon-dir" aria-hidden />
-      </div>
+      <span className="inline-flex max-w-4xl flex-wrap items-center justify-center gap-1.5 rounded-full px-4 py-0.5 transition group-hover:bg-white/10">
+        <span>
+          Changelog: 40+ blocks, passkey auth, and agent workspace patterns
+        </span>
+        <ArrowRightIcon className="size-4 shrink-0 icon-dir" aria-hidden />
+      </span>
     </a>
   )
 }

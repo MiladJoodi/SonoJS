@@ -1,0 +1,40 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "empty-state-06",
+  "type": "registry:block",
+  "title": "empty-state-06",
+  "description": "Empty files — breadcrumb chrome, dashed dropzone, and upload CTA.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "button",
+    "empty"
+  ],
+  "cssVars": {
+    "light": {
+      "canvas": "#f3f3f4",
+      "border-soft": "color-mix(in oklab, #e4e4e7 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18)",
+      "background": "var(--canvas)",
+      "card": "#ffffff"
+    },
+    "dark": {
+      "canvas": "#09090b",
+      "border-soft": "color-mix(in oklab, #27272a 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(0, 0, 0, 0.24), 0 28px 56px -28px rgba(0, 0, 0, 0.48)",
+      "background": "var(--canvas)",
+      "card": "#18181b"
+    }
+  },
+  "files": [
+    {
+      "path": "components/blocks/feedback-states/empty-state-06/empty-state.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport type * as React from \"react\"\nimport { ChevronRightIcon, FolderIcon, UploadIcon } from \"lucide-react\"\n\nimport { Button } from \"@/components/ui/button\"\nimport {\n  Empty,\n  EmptyContent,\n  EmptyDescription,\n  EmptyHeader,\n  EmptyMedia,\n  EmptyTitle,\n} from \"@/components/ui/empty\"\nimport { cn } from \"@/lib/utils\"\n\nexport default function EmptyState({\n  className,\n  ...props\n}: React.ComponentProps<\"section\">) {\n  return (\n    <section\n      className={cn(\n        \"w-full min-w-0 bg-canvas px-4 py-10 text-foreground sm:px-6 sm:py-14\",\n        className\n      )}\n      aria-labelledby=\"empty-state-06-heading\"\n      {...props}\n    >\n      <div className=\"mx-auto w-full max-w-2xl overflow-hidden rounded-[12px] border border-border/70 bg-card shadow-soft\">\n        <div className=\"flex flex-wrap items-center justify-between gap-3 border-b border-border/70 px-4 py-3 sm:px-5\">\n          <nav aria-label=\"Breadcrumb\" className=\"flex items-center gap-1 text-sm\">\n            <span className=\"text-muted-foreground\">Files</span>\n            <ChevronRightIcon\n              className=\"size-3.5 text-muted-foreground\"\n              aria-hidden\n            />\n            <span className=\"font-medium text-foreground\">Brand assets</span>\n          </nav>\n          <Button type=\"button\" size=\"sm\" className=\"cursor-pointer\">\n            <UploadIcon className=\"size-3.5\" aria-hidden />\n            Upload\n          </Button>\n        </div>\n\n        <Empty className=\"m-4 min-h-[260px] rounded-[12px] border border-dashed border-border/70 bg-muted/10 sm:m-5\">\n          <EmptyHeader>\n            <EmptyMedia variant=\"icon\">\n              <FolderIcon aria-hidden />\n            </EmptyMedia>\n            <EmptyTitle id=\"empty-state-06-heading\">\n              This folder is empty\n            </EmptyTitle>\n            <EmptyDescription>\n              Drop files here or upload from your computer. Logos, icons, and\n              export packs stay organized in one place.\n            </EmptyDescription>\n          </EmptyHeader>\n          <EmptyContent>\n            <Button type=\"button\" className=\"cursor-pointer\">\n              <UploadIcon className=\"size-4\" aria-hidden />\n              Upload files\n            </Button>\n            <p className=\"text-xs text-muted-foreground\">\n              PNG, SVG, or ZIP · up to 50 MB\n            </p>\n          </EmptyContent>\n        </Empty>\n      </div>\n    </section>\n  )\n}\n",
+      "target": "components/blocks/feedback-states/empty-state-06/empty-state.tsx"
+    }
+  ],
+  "version": "0.1.0+b0276619b649",
+  "generatedAt": "2026-10-28T12:28:50.990Z"
+}

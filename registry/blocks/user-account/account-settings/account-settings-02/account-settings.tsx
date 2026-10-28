@@ -99,33 +99,22 @@ export default function AccountSettings({
   return (
     <section
       className={cn(
-        "relative isolate w-full min-w-0 overflow-hidden bg-white dark:bg-background py-10 text-foreground sm:py-12",
+        "w-full min-w-0 bg-canvas py-8 text-foreground sm:py-10",
         className
       )}
       aria-labelledby="account-settings-02-heading"
       {...props}
     >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10"
-      >
-        <div className="absolute start-1/2 top-[-16%] size-[22rem] -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
-      </div>
-
       <div className="mx-auto w-full max-w-5xl px-4 sm:px-6 lg:px-8">
-        <header className="mb-8 text-start sm:mb-10">
-          <p className="mb-2 text-sm font-medium tracking-wide text-primary">
-            Settings
-          </p>
+        <header className="mb-8 space-y-1.5 text-start">
           <h1
             id="account-settings-02-heading"
-            className="text-balance text-2xl font-semibold tracking-tight sm:text-3xl"
+            className="text-h3 font-semibold tracking-tight"
           >
             Account & workspace
           </h1>
-          <p className="mt-2 max-w-2xl text-pretty text-sm text-muted-foreground sm:text-base">
-            Update your profile, workspace defaults, and how often SonoJS emails
-            you.
+          <p className="max-w-2xl text-sm text-muted-foreground sm:text-base">
+            Update your profile, workspace defaults, and email digest.
           </p>
         </header>
 
@@ -195,7 +184,7 @@ export default function AccountSettings({
                   <Select value={timezone} onValueChange={setTimezone}>
                     <SelectTrigger
                       id="account-settings-02-timezone"
-                      className="w-full"
+                      className="w-full cursor-pointer"
                     >
                       <SelectValue placeholder="Select timezone" />
                     </SelectTrigger>
@@ -264,7 +253,7 @@ export default function AccountSettings({
                   <Select value={visibility} onValueChange={setVisibility}>
                     <SelectTrigger
                       id="account-settings-02-visibility"
-                      className="w-full"
+                      className="w-full cursor-pointer"
                     >
                       <SelectValue placeholder="Select visibility" />
                     </SelectTrigger>
@@ -338,7 +327,7 @@ export default function AccountSettings({
                       <RadioGroupItem
                         id={option.id}
                         value={option.value}
-                        className="mt-0.5"
+                        className="mt-0.5 cursor-pointer"
                       />
                       <div className="grid gap-0.5">
                         <FieldLabel
@@ -359,10 +348,12 @@ export default function AccountSettings({
           <Separator className="my-8" />
 
           <div className="flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-end">
-            <Button type="button" variant="outline">
+            <Button type="button" variant="outline" className="cursor-pointer">
               Discard
             </Button>
-            <Button type="submit">Save settings</Button>
+            <Button type="submit" className="cursor-pointer">
+              Save settings
+            </Button>
           </div>
         </form>
       </div>

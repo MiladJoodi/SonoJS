@@ -1,6 +1,7 @@
 "use client"
 
 import type * as React from "react"
+import { CopyIcon, TruckIcon } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
@@ -11,25 +12,26 @@ export default function Banner({
   return (
     <div
       className={cn(
-        "w-full bg-gradient-to-r from-blue-400 via-indigo-500 to-purple-500 py-2.5 text-sm font-medium text-white",
+        "w-full border-b border-border/70 bg-card py-2.5 text-sm font-medium text-foreground",
         className
       )}
       role="region"
       aria-label="Promotion"
       {...props}
     >
-      <div className="mx-auto flex max-w-screen-xl flex-col items-center justify-center gap-4 text-center sm:flex-row">
-        <p>🚚 Free Shipping on Orders Above $50</p>
-        <span className="hidden sm:inline" aria-hidden>
-          |
-        </span>
-        <p>🎁 20% OFF on First Purchase</p>
-        <span className="hidden sm:inline" aria-hidden>
-          |
-        </span>
-        <p>
-          🔐 Use Code: <strong>WELCOME10</strong>
+      <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-center gap-x-4 gap-y-2 px-4 text-center sm:justify-between sm:text-start">
+        <p className="inline-flex items-center gap-2">
+          <TruckIcon className="size-3.5 text-primary" aria-hidden />
+          Free shipping $50+ · 20% off first order
         </p>
+        <button
+          type="button"
+          className="inline-flex cursor-pointer items-center gap-1.5 rounded-md border border-border/70 bg-background px-2.5 py-1 font-mono text-xs tabular-nums transition hover:bg-muted/60"
+          aria-label="Copy promo code WELCOME20"
+        >
+          WELCOME20
+          <CopyIcon className="size-3 text-muted-foreground" aria-hidden />
+        </button>
       </div>
     </div>
   )

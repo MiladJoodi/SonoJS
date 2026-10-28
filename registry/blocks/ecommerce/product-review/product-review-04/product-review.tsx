@@ -222,10 +222,11 @@ export default function ProductReview({
     FILTER_OPTIONS.find((o) => o.value === filter)?.min ?? 0
 
   const filtered = REVIEWS.filter((review) => {
+    const rating = review.rating as number
     if (filter === "all") return true
-    if (filter === "5") return review.rating === 5
-    if (filter === "1") return review.rating === 1
-    return review.rating >= minRating
+    if (filter === "5") return rating === 5
+    if (filter === "1") return rating === 1
+    return rating >= minRating
   })
 
   const shown = filtered.slice(0, visible)

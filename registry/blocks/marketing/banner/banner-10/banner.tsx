@@ -12,19 +12,19 @@ export default function Banner({
   return (
     <div
       className={cn(
-        "flex w-full flex-wrap items-center justify-center bg-gradient-to-b from-orange-500 to-orange-600 py-2 text-center text-sm font-medium text-white",
+        "flex w-full flex-wrap items-center justify-center gap-3 bg-orange-600 px-4 py-2 text-center text-sm font-medium text-white dark:bg-orange-500",
         className
       )}
       role="region"
-      aria-label="Promotion"
+      aria-label="Templates"
       {...props}
     >
-      <p>Templates are live on SonoJS!</p>
+      <p>Marketing templates just dropped — hero, pricing, and CTA packs</p>
       <a
         href="#"
-        className="ms-3 inline-flex cursor-pointer items-center gap-1 rounded-md bg-white px-3 py-1 text-xs text-orange-600 transition hover:bg-slate-200 active:scale-95"
+        className="inline-flex cursor-pointer items-center gap-1 rounded-full bg-white px-3 py-1 text-xs font-semibold text-orange-700 transition hover:bg-orange-50 active:scale-[0.98]"
       >
-        Check it out
+        Browse pack
         <ArrowRightIcon className="size-3.5 icon-dir" aria-hidden />
       </a>
     </div>

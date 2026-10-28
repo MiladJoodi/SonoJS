@@ -12,7 +12,7 @@ export default function Banner({
   return (
     <div
       className={cn(
-        "flex w-full flex-wrap items-center justify-between bg-gradient-to-r from-violet-500 to-purple-100 px-4 py-2 text-center text-sm font-medium text-white md:px-14",
+        "flex w-full flex-wrap items-center justify-between gap-3 bg-zinc-950 px-4 py-2.5 text-sm font-medium text-zinc-50 md:px-8",
         className
       )}
       role="region"
@@ -20,11 +20,11 @@ export default function Banner({
       {...props}
     >
       <p className="min-w-0 text-start">
-        Build Faster with Responsive Tailwind CSS Templates
+        Ship responsive Tailwind UI faster — blocks that already look finished
       </p>
       <a
         href="#"
-        className="ms-3 inline-flex cursor-pointer items-center gap-1 rounded-lg bg-violet-50 px-3 py-1 text-violet-600 transition hover:bg-slate-100 active:scale-95"
+        className="inline-flex shrink-0 cursor-pointer items-center gap-1 rounded-full bg-primary px-3.5 py-1.5 text-xs font-semibold text-primary-foreground transition hover:opacity-90 active:scale-[0.98]"
       >
         Explore now
         <ArrowRightIcon className="size-3.5 icon-dir" aria-hidden />
