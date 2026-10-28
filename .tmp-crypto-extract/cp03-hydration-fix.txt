@@ -1,0 +1,67 @@
+OLD:\n    setEquitySeries(buildSeries(146800, len, range === "1H" ? 0.003 : 0.008))
+    setCoinSeries(
+      Object.fromEntries(
+        HOLDINGS.map((h) => [
+          h.id,
+          buildSeries(
+            h.seed,
+            Math.max(24, Math.floor(len * 0.75)),
+            h.id === "usdc" ? 0.0001 : range === "1H" ? 0.004 : 0.012
+          ),
+        ])
+      ) as Record<CoinId, Point[]>
+    )
+  }, [range, len])
+
+  React.useEffect(() => {
+    const id = window.setInterval(() => {
+      const vol = range === "1H" ? 0.0028 : range === "24H" ? 0.0045 : 0.007
+      setEquitySeries((s) => pushPoint(s, vol))
+      setCoinSeries((prev) => {
+        const next = { ...prev }
+        for (const h of HOLDINGS) {
+          next[h.id] = pushPoint(
+            prev[h.id] ?? [],
+            h.id === "usdc" ? 0 : vol * 1.4,
+            h.id === "usdc"
+          )
+        }
+        return next
+      })\n\nNEW:\n    setEquitySeries(
+      buildSeries(146800, len, range === "1H" ? 0.008 : range === "24H" ? 0.014 : 0.02)
+    )
+    setCoinSeries(
+      Object.fromEntries(
+        HOLDINGS.map((h) => [
+          h.id,
+          buildSeries(
+            h.seed,
+            Math.max(24, Math.floor(len * 0.75)),
+            h.id === "usdc"
+              ? 0.0012
+              : range === "1H"
+                ? 0.018
+                : range === "24H"
+                  ? 0.03
+                  : 0.04
+          ),
+        ])
+      ) as Record<CoinId, Point[]>
+    )
+  }, [range, len])
+
+  React.useEffect(() => {
+    const id = window.setInterval(() => {
+      const vol = range === "1H" ? 0.006 : range === "24H" ? 0.01 : 0.014
+      setEquitySeries((s) => pushPoint(s, vol))
+      setCoinSeries((prev) => {
+        const next = { ...prev }
+        for (const h of HOLDINGS) {
+          next[h.id] = pushPoint(
+            prev[h.id] ?? [],
+            h.id === "usdc" ? 0.0015 : vol * 1.8,
+            false
+          )
+        }
+        return next
+      })

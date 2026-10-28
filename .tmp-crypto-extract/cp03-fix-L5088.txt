@@ -1,0 +1,5 @@
+OLD:
+                        heightClass="h-20"
+
+NEW:
+                        heightClass="h-24"

@@ -484,7 +484,7 @@ export default function DashboardLayout({
                     <div>
                       <span
                         className={cn(
-                          "inline-flex rounded-full px-2 py-0.5 text-[11px] font-normal leading-4",
+                          "inline-flex shrink-0 rounded-full px-2 py-0.5 text-xs font-medium leading-4 whitespace-nowrap",
                           project.tone
                         )}
                       >

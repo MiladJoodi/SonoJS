@@ -1,0 +1,15 @@
+OLD:\n    name: "crypto-portfolio-04",
+    type: "registry:block",
+    title: "crypto-portfolio-04",
+    description:
+      "Light Bitcoin-orange / coffee cream portfolio — warm exterior shell, equity area, asset cards, and allocation.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react", "recharts"],
+    registryDependencies: ["avatar", "badge", "button", "chart"],\n\nNEW:\n    name: "crypto-portfolio-04",
+    type: "registry:block",
+    title: "crypto-portfolio-04",
+    description:
+      "Bitcoin-orange / coffee portfolio — cream shell in light, dark coffee shell in dark, with warm equity and allocation.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: ["avatar", "badge", "button"],

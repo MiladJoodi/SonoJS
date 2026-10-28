@@ -573,7 +573,7 @@ export default function DashboardLayout({
                         </span>
                         <span
                           className={cn(
-                            "rounded-full px-2 py-0.5 text-[11px] font-normal leading-4",
+                            "shrink-0 rounded-full px-2 py-0.5 text-xs font-medium leading-4 whitespace-nowrap",
                             row.tone
                           )}
                         >

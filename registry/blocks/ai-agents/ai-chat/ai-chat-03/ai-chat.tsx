@@ -142,7 +142,7 @@ export default function AiChat03() {
   }
 
   return (
-    <div className="w-full bg-white px-4 py-10 dark:bg-background">
+    <div className="w-full bg-canvas px-4 py-10">
       <div className="mx-auto flex h-140 w-full max-w-2xl flex-col overflow-hidden rounded-3xl border border-border/70 bg-card shadow-soft">
         <header className="flex items-center justify-between gap-4 border-b border-border/60 px-5 py-4">
           <div className="flex flex-col">

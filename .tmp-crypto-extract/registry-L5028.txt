@@ -1,0 +1,39 @@
+OLD:\n    name: "crypto-portfolio-01",
+    type: "registry:block",
+    title: "crypto-portfolio-01",
+    description:
+      "Crypto portfolio dashboard — total balance, receive/send, action tiles, and assets table with coin icon slots.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: ["avatar", "badge", "button", "card", "table"],
+    files: [
+      {
+        path: "registry/blocks/dashboards-analytics/crypto-portfolio/crypto-portfolio-01/crypto-portfolio.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/dashboards-analytics/crypto-portfolio-01/crypto-portfolio.tsx",
+      },
+    ],
+  },\n\nNEW:\n    name: "crypto-portfolio-01",
+    type: "registry:block",
+    title: "crypto-portfolio-01",
+    description:
+      "Crypto portfolio dashboard — total balance, receive/send, action tiles, and assets table with coin icon slots.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: ["avatar", "badge", "button", "card", "table"],
+    files: [
+      {
+        path: "registry/blocks/dashboards-analytics/crypto-portfolio/crypto-portfolio-01/crypto-portfolio.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/dashboards-analytics/crypto-portfolio-01/crypto-portfolio.tsx",
+      },
+      {
+        path: "registry/blocks/dashboards-analytics/crypto-portfolio/crypto-portfolio-01/icons/btc.svg",
+        type: "registry:file",
+        target:
+          "components/blocks/dashboards-analytics/crypto-portfolio-01/icons/btc.svg",
+      },
+    ],
+  },

@@ -1,0 +1,9 @@
+{
+  "type": "tool_use",
+  "name": "StrReplace",
+  "input": {
+    "path": "i:\\Github\\new\\Sono\\SonoJs\\registry\\blocks\\dashboards-analytics\\crypto-portfolio\\crypto-portfolio-01\\crypto-portfolio.tsx",
+    "old_string": "import avatarImg from \"./images/avatar.avif\"",
+    "new_string": "import avatarImg from \"./images/avatar.webp\""
+  }
+}

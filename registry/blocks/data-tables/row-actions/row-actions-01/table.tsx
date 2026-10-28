@@ -2,8 +2,8 @@
 
 import * as React from "react"
 import {
-  CheckCircle2Icon,
-  FileTextIcon,
+  CheckIcon,
+  EyeIcon,
   Loader2Icon,
   PauseIcon,
   PlayIcon,
@@ -29,7 +29,6 @@ import {
 import { cn } from "@/lib/utils"
 
 type TaskStatus = "pending" | "in-progress" | "completed" | "blocked"
-type TaskPriority = "low" | "medium" | "high" | "urgent"
 type TaskActionType = "start" | "pause" | "complete" | "delete" | "view"
 
 type Task = {
@@ -37,7 +36,6 @@ type Task = {
   title: string
   assignee: string
   status: TaskStatus
-  priority: TaskPriority
   dueDate: string
   notes: string
 }
@@ -48,7 +46,6 @@ const tasks: Task[] = [
     title: "Implement User Authentication",
     assignee: "Sarah Chen",
     status: "in-progress",
-    priority: "high",
     dueDate: "2024-03-25",
     notes: "OAuth 2.0 integration with Google and GitHub providers",
   },
@@ -57,7 +54,6 @@ const tasks: Task[] = [
     title: "Design Dashboard UI",
     assignee: "Michael Torres",
     status: "completed",
-    priority: "medium",
     dueDate: "2024-03-20",
     notes: "Finalize dashboard layout with responsive grid system",
   },
@@ -66,7 +62,6 @@ const tasks: Task[] = [
     title: "API Performance Optimization",
     assignee: "Emma Rodriguez",
     status: "pending",
-    priority: "urgent",
     dueDate: "2024-03-22",
     notes: "Reduce API response time by implementing caching strategy",
   },
@@ -75,7 +70,6 @@ const tasks: Task[] = [
     title: "Write Unit Tests",
     assignee: "James Wilson",
     status: "in-progress",
-    priority: "medium",
     dueDate: "2024-03-28",
     notes: "Achieve 80% code coverage for authentication module",
   },
@@ -84,7 +78,6 @@ const tasks: Task[] = [
     title: "Database Migration",
     assignee: "Olivia Martinez",
     status: "blocked",
-    priority: "high",
     dueDate: "2024-03-24",
     notes: "Waiting for infrastructure team approval before proceeding",
   },
@@ -93,7 +86,6 @@ const tasks: Task[] = [
     title: "Update Documentation",
     assignee: "Lucas Anderson",
     status: "pending",
-    priority: "low",
     dueDate: "2024-03-30",
     notes: "Document new API endpoints and authentication flow",
   },
@@ -102,62 +94,49 @@ const tasks: Task[] = [
     title: "Security Audit",
     assignee: "Sophia Taylor",
     status: "completed",
-    priority: "urgent",
     dueDate: "2024-03-19",
     notes:
       "Conducted comprehensive security review and vulnerability assessment",
   },
 ]
 
-function getStatusBadge(status: TaskStatus) {
-  switch (status) {
-    case "pending":
-      return (
-        <Badge
-          variant="outline"
-          className="border-0 bg-amber-500/15 text-amber-700 hover:bg-amber-500/25 dark:bg-amber-500/10 dark:text-amber-300 dark:hover:bg-amber-500/20"
-        >
-          Pending
-        </Badge>
-      )
-    case "in-progress":
-      return (
-        <Badge
-          variant="outline"
-          className="border-0 bg-blue-500/15 text-blue-700 hover:bg-blue-500/25 dark:bg-blue-500/10 dark:text-blue-400 dark:hover:bg-blue-500/20"
-        >
-          In Progress
-        </Badge>
-      )
-    case "completed":
-      return (
-        <Badge
-          variant="outline"
-          className="border-0 bg-green-500/15 text-green-700 hover:bg-green-500/25 dark:bg-green-500/10 dark:text-green-400 dark:hover:bg-green-500/20"
-        >
-          Completed
-        </Badge>
-      )
-    case "blocked":
-      return (
-        <Badge
-          variant="outline"
-          className="border-0 bg-rose-500/15 text-rose-700 hover:bg-rose-500/25 dark:bg-rose-500/10 dark:text-rose-400 dark:hover:bg-rose-500/20"
-        >
-          Blocked
-        </Badge>
-      )
-    default:
-      return <Badge variant="secondary">{status}</Badge>
-  }
+const statusStyles: Record<TaskStatus, string> = {
+  pending:
+    "border-transparent bg-muted text-muted-foreground",
+  "in-progress":
+    "border-transparent bg-sky-500/10 text-sky-700 dark:text-sky-300",
+  completed:
+    "border-transparent bg-emerald-500/10 text-emerald-700 dark:text-emerald-400",
+  blocked:
+    "border-transparent bg-rose-500/10 text-rose-700 dark:text-rose-400",
 }
+
+const statusLabel: Record<TaskStatus, string> = {
+  pending: "Pending",
+  "in-progress": "In Progress",
+  completed: "Completed",
+  blocked: "Blocked",
+}
+
+function StatusBadge({ status }: { status: TaskStatus }) {
+  return (
+    <Badge
+      variant="outline"
+      className={cn("h-6 rounded-full px-2.5 font-medium", statusStyles[status])}
+    >
+      {statusLabel[status]}
+    </Badge>
+  )
+}
+
+const iconBtn =
+  "size-8 cursor-pointer rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground"
 
 function ActionButton({
   label,
   pending,
   disabled,
   onClick,
-  variant = "outline",
   className,
   children,
 }: {
@@ -165,7 +144,6 @@ function ActionButton({
   pending?: boolean
   disabled?: boolean
   onClick: () => void
-  variant?: React.ComponentProps<typeof Button>["variant"]
   className?: string
   children: React.ReactNode
 }) {
@@ -175,11 +153,11 @@ function ActionButton({
         <Button
           type="button"
           aria-label={label}
-          size="icon-xs"
-          variant={variant}
+          size="icon-sm"
+          variant="ghost"
           disabled={disabled}
           onClick={onClick}
-          className={className}
+          className={cn(iconBtn, className)}
         >
           {pending ? (
             <Loader2Icon className="size-4 animate-spin" aria-hidden />
@@ -211,7 +189,7 @@ function TaskActions({
   onAction: (task: Task, type: TaskActionType) => void
 }) {
   return (
-    <div className="flex flex-wrap items-center gap-1">
+    <div className="flex items-center gap-0.5">
       {(task.status === "pending" || task.status === "blocked") && (
         <ActionButton
           label="Start"
@@ -238,25 +216,25 @@ function TaskActions({
             disabled={busy}
             onClick={() => onAction(task, "complete")}
           >
-            <CheckCircle2Icon className="size-4" aria-hidden />
+            <CheckIcon className="size-4" aria-hidden />
           </ActionButton>
         </>
       )}
+      <ActionButton
+        label="View"
+        disabled={busy}
+        onClick={() => onAction(task, "view")}
+      >
+        <EyeIcon className="size-4" aria-hidden />
+      </ActionButton>
       <ActionButton
         label="Delete"
         pending={deletePending}
         disabled={busy}
         onClick={() => onAction(task, "delete")}
-        className="text-destructive hover:bg-destructive hover:text-white"
+        className="hover:bg-destructive/10 hover:text-destructive"
       >
         <Trash2Icon className="size-4" aria-hidden />
-      </ActionButton>
-      <ActionButton
-        label="View Details"
-        disabled={busy}
-        onClick={() => onAction(task, "view")}
-      >
-        <FileTextIcon className="size-4" aria-hidden />
       </ActionButton>
     </div>
   )
@@ -292,18 +270,18 @@ export default function RowActions01({
             return (
               <li
                 key={task.id}
-                className="rounded-[12px] border border-border/70 bg-card p-4 shadow-soft"
+                className="rounded-[12px] border border-border/70 bg-white p-4 shadow-soft dark:bg-card"
               >
                 <div className="flex flex-wrap items-start justify-between gap-2">
                   <div className="min-w-0 flex-1 text-start">
-                    <p className="font-medium text-foreground wrap-break-word">
+                    <p className="text-sm font-medium text-foreground wrap-break-word">
                       {task.title}
                     </p>
                     <p className="mt-1 text-sm text-muted-foreground">
                       {task.assignee}
                     </p>
                   </div>
-                  {getStatusBadge(task.status)}
+                  <StatusBadge status={task.status} />
                 </div>
                 <p className="mt-3 text-sm text-muted-foreground wrap-break-word whitespace-normal">
                   {task.notes}
@@ -327,7 +305,7 @@ export default function RowActions01({
           })}
         </ul>
 
-        <div className="hidden overflow-hidden rounded-[12px] border border-border/70 bg-card shadow-soft md:block">
+        <div className="hidden rounded-[12px] border border-border/70 bg-white shadow-soft md:block dark:bg-card">
           <Table className="min-w-200">
             <TableHeader>
               <TableRow className="border-b border-border/70 hover:bg-transparent">
@@ -348,15 +326,15 @@ export default function RowActions01({
                 const busy = isTaskBusy(task.id)
 
                 return (
-                  <TableRow key={task.id} className="hover:bg-muted/50">
-                    <TableCell className="h-16 max-w-60 px-4 font-medium whitespace-normal">
+                  <TableRow key={task.id} className="hover:bg-muted/40">
+                    <TableCell className="h-16 max-w-60 px-4 text-sm font-medium whitespace-normal">
                       {task.title}
                     </TableCell>
                     <TableCell className="h-16 px-4 text-sm text-muted-foreground">
                       {task.assignee}
                     </TableCell>
                     <TableCell className="h-16 px-4">
-                      {getStatusBadge(task.status)}
+                      <StatusBadge status={task.status} />
                     </TableCell>
                     <TableCell className="h-16 px-4 text-sm tabular-nums text-muted-foreground">
                       {task.dueDate}

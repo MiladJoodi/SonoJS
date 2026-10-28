@@ -3,6 +3,9 @@ import {
   BlocksPageHeader,
 } from "@/components/blocks"
 import CryptoPortfolio01 from "@/registry/blocks/dashboards-analytics/crypto-portfolio/crypto-portfolio-01/crypto-portfolio"
+import CryptoPortfolio02 from "@/registry/blocks/dashboards-analytics/crypto-portfolio/crypto-portfolio-02/crypto-portfolio"
+import CryptoPortfolio03 from "@/registry/blocks/dashboards-analytics/crypto-portfolio/crypto-portfolio-03/crypto-portfolio"
+import CryptoPortfolio04 from "@/registry/blocks/dashboards-analytics/crypto-portfolio/crypto-portfolio-04/crypto-portfolio"
 
 import { blocksPageMetadata } from "@/lib/seo"
 
@@ -25,7 +28,7 @@ export default function BlockCryptoPortfolioDocsPage() {
       <BlocksPageHeader
         title="Crypto Portfolio"
         pathname="/blocks/dashboards-analytics/crypto-portfolio"
-        description="Balance overview, quick actions, and an assets table — drop coin logos into icons/btc|eth|sol|usdc."
+        description="Production wallet, dark trading desks, or a light Bitcoin-orange / coffee cream shell."
       />
 
       <div className="flex flex-col gap-8">
@@ -41,6 +44,48 @@ export default function BlockCryptoPortfolioDocsPage() {
           previewClassName="bg-canvas p-0"
         >
           <CryptoPortfolio01 />
+        </BlockExample>
+
+        <BlockExample
+          name="crypto-portfolio-02"
+          usage={[
+            {
+              title: "app/page.tsx",
+              code: usage("crypto-portfolio-02"),
+            },
+          ]}
+          previewAlign="start"
+          previewClassName="bg-[#05070d] p-0"
+        >
+          <CryptoPortfolio02 />
+        </BlockExample>
+
+        <BlockExample
+          name="crypto-portfolio-03"
+          usage={[
+            {
+              title: "app/page.tsx",
+              code: usage("crypto-portfolio-03"),
+            },
+          ]}
+          previewAlign="start"
+          previewClassName="bg-[#05070d] p-0"
+        >
+          <CryptoPortfolio03 />
+        </BlockExample>
+
+        <BlockExample
+          name="crypto-portfolio-04"
+          usage={[
+            {
+              title: "app/page.tsx",
+              code: usage("crypto-portfolio-04"),
+            },
+          ]}
+          previewAlign="start"
+          previewClassName="bg-[#F7F0E6] p-0 dark:bg-[#120c09]"
+        >
+          <CryptoPortfolio04 />
         </BlockExample>
       </div>
     </article>

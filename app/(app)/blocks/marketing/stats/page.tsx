@@ -35,7 +35,7 @@ export default function BlockStatsDocsPage() {
       <BlocksPageHeader
         title="Stats"
         pathname="/blocks/marketing/stats"
-        description="Metric and social-proof bands for marketing pages — counts, KPIs, and outcome highlights."
+        description="Metric and social-proof bands for marketing pages: counts, KPIs, rings, and outcome highlights."
       />
 
       <div className="flex flex-col gap-8">

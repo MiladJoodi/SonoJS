@@ -3,6 +3,7 @@ import {
   BlocksPageHeader,
 } from "@/components/blocks"
 import BentoGrid01 from "@/registry/blocks/marketing/bento-grid/bento-grid-01/bento-grid"
+import BentoGrid02 from "@/registry/blocks/marketing/bento-grid/bento-grid-02/bento-grid"
 
 import { blocksPageMetadata } from "@/lib/seo"
 
@@ -25,7 +26,7 @@ export default function BlockBentoGridDocsPage() {
       <BlocksPageHeader
         title="Bento Grid"
         pathname="/blocks/marketing/bento-grid"
-        description="Asymmetric feature grids with chart, security, regions, and deploy status cards."
+        description="Asymmetric marketing grids — product ops metrics or an editorial design-system layout."
       />
 
       <div className="flex flex-col gap-8">
@@ -41,6 +42,20 @@ export default function BlockBentoGridDocsPage() {
           previewClassName="bg-canvas p-0"
         >
           <BentoGrid01 />
+        </BlockExample>
+
+        <BlockExample
+          name="bento-grid-02"
+          usage={[
+            {
+              title: "app/page.tsx",
+              code: usage("bento-grid-02"),
+            },
+          ]}
+          previewAlign="start"
+          previewClassName="bg-white p-0 dark:bg-background"
+        >
+          <BentoGrid02 />
         </BlockExample>
       </div>
     </article>

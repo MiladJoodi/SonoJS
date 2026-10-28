@@ -1677,15 +1677,13 @@ function marketingPortfolioBlock(
   }
 }
 
-const PORTFOLIO_01_IMAGES = [
+const PORTFOLIO_IMAGES = [
   "project-design-system.webp",
   "project-fintech.webp",
   "project-analytics.webp",
   "project-workspace.webp",
   "project-logistics.webp",
   "project-fitness.webp",
-  "avatar-sarah.webp",
-  "avatar-marcus.webp",
 ]
 
 const BLOG_01_IMAGES = [
@@ -4604,7 +4602,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "cookie-consent-01",
     description:
-      "Everyday cookie bar — short privacy copy, Accept / Reject / Manage, compact preference checkboxes (RTL/LTR).",
+      "Bottom floating cookie card — Accept / Reject / Manage with preference checkboxes (RTL/LTR).",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: ["badge", "button", "checkbox", "label"],
@@ -4613,6 +4611,57 @@ const registryItemsRaw = [
         path: "registry/blocks/marketing/cookie-consent/cookie-consent-01/cookie-consent.tsx",
         type: "registry:component",
         target: "components/blocks/marketing/cookie-consent-01/cookie-consent.tsx",
+      },
+    ],
+  },
+  {
+    name: "cookie-consent-02",
+    type: "registry:block",
+    title: "cookie-consent-02",
+    description:
+      "Full-width bottom cookie strip — Accept all / Reject all / Customize with prefs panel (RTL/LTR).",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: ["badge", "button", "checkbox", "label"],
+    files: [
+      {
+        path: "registry/blocks/marketing/cookie-consent/cookie-consent-02/cookie-consent.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/cookie-consent-02/cookie-consent.tsx",
+      },
+    ],
+  },
+  {
+    name: "cookie-consent-03",
+    type: "registry:block",
+    title: "cookie-consent-03",
+    description:
+      "Center cookie modal with backdrop — Accept all / Reject all / Customize with Switch categories (RTL/LTR).",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: ["button", "label", "switch"],
+    files: [
+      {
+        path: "registry/blocks/marketing/cookie-consent/cookie-consent-03/cookie-consent.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/cookie-consent-03/cookie-consent.tsx",
+      },
+    ],
+  },
+  {
+    name: "cookie-consent-04",
+    type: "registry:block",
+    title: "cookie-consent-04",
+    description:
+      "Dark bottom-end corner cookie card — Accept / Reject / Preferences with Switch toggles (RTL/LTR).",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: ["button", "label", "switch"],
+    files: [
+      {
+        path: "registry/blocks/marketing/cookie-consent/cookie-consent-04/cookie-consent.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/cookie-consent-04/cookie-consent.tsx",
       },
     ],
   },
@@ -4932,9 +4981,10 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "bento-grid-01",
     description:
-      "Bento feature grid — wide analytics chart, access controls, regions metric, and deploy status (RTL/LTR).",
+      "Product ops bento — installs chart, live team presence, latency, checklist, and command palette (RTL/LTR).",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
+    registryDependencies: ["avatar"],
     files: [
       {
         path: "registry/blocks/marketing/bento-grid/bento-grid-01/bento-grid.tsx",
@@ -4944,17 +4994,51 @@ const registryItemsRaw = [
     ],
   },
   {
+    name: "bento-grid-02",
+    type: "registry:block",
+    title: "bento-grid-02",
+    description:
+      "Editorial design-system bento — dark metric, quote, CLI terminal, and stack chips (RTL/LTR).",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: ["button"],
+    files: [
+      {
+        path: "registry/blocks/marketing/bento-grid/bento-grid-02/bento-grid.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/bento-grid-02/bento-grid.tsx",
+      },
+    ],
+  },
+  {
     name: "how-it-works-01",
     type: "registry:block",
     title: "how-it-works-01",
     description:
-      "How it works — numbered four-step path with bottom CTA bar for get started and explore blocks.",
+      "Editorial zig-zag how-it-works path with terminal, token, dashboard, and checklist artifacts plus a get-started CTA.",
     registryDependencies: ["button"],
+    dependencies: ["lucide-react"],
     files: [
       {
         path: "registry/blocks/marketing/how-it-works/how-it-works-01/how-it-works.tsx",
         type: "registry:component",
         target: "components/blocks/marketing/how-it-works-01/how-it-works.tsx",
+      },
+    ],
+  },
+  {
+    name: "how-it-works-02",
+    type: "registry:block",
+    title: "how-it-works-02",
+    description:
+      "Interactive booking desk with step rail and panel for service, day, time, and confirmation.",
+    registryDependencies: ["button"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/marketing/how-it-works/how-it-works-02/how-it-works.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/how-it-works-02/how-it-works.tsx",
       },
     ],
   },
@@ -5095,7 +5179,9 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "cta-02",
     description:
-      "Centered CTA with headline, supporting copy, and primary plus outline actions.",
+      "Dark asymmetric runway CTA — primary edge accent, invite form, avatar proof, and CLI teaser (RTL/LTR).",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
     registryDependencies: ["button"],
     files: [
       {
@@ -5269,7 +5355,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "stats-03",
     description:
-      "Dark three-metric row with large values, captions, and vertical dividers.",
+      "Dark hero metric panel on canvas with one oversized value and two supporting stat chips.",
     files: [
       {
         path: "registry/blocks/marketing/stats/stats-03/stats.tsx",
@@ -5283,7 +5369,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "stats-04",
     description:
-      "Four KPI cards with icons, period badges, values, and trend deltas.",
+      "Featured KPI card with sparkline plus three compact peer metrics, primary-only accents on canvas.",
     dependencies: ["lucide-react"],
     files: [
       {
@@ -5298,7 +5384,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "stats-05",
     description:
-      "Four-column progress stats with circular charts, titles, and copy.",
+      "Four equal progress-ring cards on canvas with primary stroke and shadow-soft surfaces.",
     files: [
       {
         path: "registry/blocks/marketing/stats/stats-05/stats.tsx",
@@ -5355,7 +5441,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "stats-08",
     description:
-      "Dark centered stats band with green gradient values and four metrics.",
+      "Dark social-proof panel with headline and four metric tiles using primary accent bars.",
     files: [
       {
         path: "registry/blocks/marketing/stats/stats-08/stats.tsx",
@@ -5426,7 +5512,8 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "stats-13",
     description:
-      "Dashboard overview with four metric cards, colored values, and monthly trends.",
+      "Dashboard overview with revenue bar chart and stacked KPI cards, primary accents on canvas.",
+    dependencies: ["lucide-react"],
     files: [
       {
         path: "registry/blocks/marketing/stats/stats-13/stats.tsx",
@@ -5468,7 +5555,8 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "stats-16",
     description:
-      "Dark gray metrics band with orange icons and horizontal value rows.",
+      "Four-column KPI strip with muted icon tiles and large values in a single elevated card on canvas.",
+    dependencies: ["lucide-react"],
     files: [
       {
         path: "registry/blocks/marketing/stats/stats-16/stats.tsx",
@@ -5775,6 +5863,56 @@ const registryItemsRaw = [
       },
     ],
   },
+  {
+    name: "data-table-02",
+    type: "registry:block",
+    title: "data-table-02",
+    description:
+      "Invoice table with search, status chips, row selection, bulk bar, and customer avatars.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: [
+      "avatar",
+      "badge",
+      "button",
+      "checkbox",
+      "dropdown-menu",
+      "input",
+      "table",
+    ],
+    files: [
+      {
+        path: "registry/blocks/data-tables/data-table/data-table-02/table.tsx",
+        type: "registry:component",
+        target: "components/blocks/data-tables/data-table-02/table.tsx",
+      },
+    ],
+  },
+  {
+    name: "data-table-03",
+    type: "registry:block",
+    title: "data-table-03",
+    description:
+      "Team access table with search, role filters, sortable headers, and per-row access switches.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: [
+      "avatar",
+      "badge",
+      "button",
+      "dropdown-menu",
+      "input",
+      "switch",
+      "table",
+    ],
+    files: [
+      {
+        path: "registry/blocks/data-tables/data-table/data-table-03/table.tsx",
+        type: "registry:component",
+        target: "components/blocks/data-tables/data-table-03/table.tsx",
+      },
+    ],
+  },
   dataTablesAdvancedGridBlock(
     "advanced-data-grid-01",
     "Fleet security inventory with KPI strip, status filters, and coverage meters.",
@@ -5821,7 +5959,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "row-actions-01",
     description:
-      "Task table with status badges and per-row start, pause, complete, delete, and view actions.",
+      "Task table with soft muted icon actions — start, pause, complete, view, delete.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     registryDependencies: ["badge", "button", "table", "tooltip"],
     dependencies: ["lucide-react"],
@@ -5830,6 +5968,52 @@ const registryItemsRaw = [
         path: "registry/blocks/data-tables/row-actions/row-actions-01/table.tsx",
         type: "registry:component",
         target: "components/blocks/data-tables/row-actions-01/table.tsx",
+      },
+    ],
+  },
+  {
+    name: "row-actions-02",
+    type: "registry:block",
+    title: "row-actions-02",
+    description:
+      "Invoice table with muted view/copy/download icons and overflow menu (hover reveal).",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    registryDependencies: [
+      "badge",
+      "button",
+      "dropdown-menu",
+      "table",
+      "tooltip",
+    ],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/data-tables/row-actions/row-actions-02/table.tsx",
+        type: "registry:component",
+        target: "components/blocks/data-tables/row-actions-02/table.tsx",
+      },
+    ],
+  },
+  {
+    name: "row-actions-03",
+    type: "registry:block",
+    title: "row-actions-03",
+    description:
+      "Content table with star, edit, and muted overflow menu for archive/delete.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    registryDependencies: [
+      "avatar",
+      "badge",
+      "button",
+      "dropdown-menu",
+      "table",
+    ],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/data-tables/row-actions/row-actions-03/table.tsx",
+        type: "registry:component",
+        target: "components/blocks/data-tables/row-actions-03/table.tsx",
       },
     ],
   },
@@ -5900,16 +6084,197 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "crypto-portfolio-01",
     description:
-      "Crypto portfolio dashboard — total balance, receive/send, action tiles, and assets table with coin icon slots.",
+      "Production wallet portfolio — balance with 24h PnL, allocation, searchable assets with SVG sparklines, and recent activity.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
-    registryDependencies: ["avatar", "badge", "button", "card", "table"],
+    registryDependencies: [
+      "avatar",
+      "badge",
+      "button",
+      "card",
+      "input",
+      "table",
+    ],
     files: [
       {
         path: "registry/blocks/dashboards-analytics/crypto-portfolio/crypto-portfolio-01/crypto-portfolio.tsx",
         type: "registry:component",
         target:
           "components/blocks/dashboards-analytics/crypto-portfolio-01/crypto-portfolio.tsx",
+      },
+      {
+        path: "registry/blocks/dashboards-analytics/crypto-portfolio/crypto-portfolio-01/icons/btc.svg",
+        type: "registry:file",
+        target:
+          "components/blocks/dashboards-analytics/crypto-portfolio-01/icons/btc.svg",
+      },
+      {
+        path: "registry/blocks/dashboards-analytics/crypto-portfolio/crypto-portfolio-01/icons/eth.svg",
+        type: "registry:file",
+        target:
+          "components/blocks/dashboards-analytics/crypto-portfolio-01/icons/eth.svg",
+      },
+      {
+        path: "registry/blocks/dashboards-analytics/crypto-portfolio/crypto-portfolio-01/icons/sol.svg",
+        type: "registry:file",
+        target:
+          "components/blocks/dashboards-analytics/crypto-portfolio-01/icons/sol.svg",
+      },
+      {
+        path: "registry/blocks/dashboards-analytics/crypto-portfolio/crypto-portfolio-01/icons/usdc.svg",
+        type: "registry:file",
+        target:
+          "components/blocks/dashboards-analytics/crypto-portfolio-01/icons/usdc.svg",
+      },
+      {
+        path: "registry/blocks/dashboards-analytics/crypto-portfolio/crypto-portfolio-01/images/avatar.webp",
+        type: "registry:file",
+        target:
+          "components/blocks/dashboards-analytics/crypto-portfolio-01/images/avatar.webp",
+      },
+    ],
+  },
+  {
+    name: "crypto-portfolio-02",
+    type: "registry:block",
+    title: "crypto-portfolio-02",
+    description:
+      "Dark trading-desk crypto portfolio — live ticker tape, streaming equity sparkline, allocation bars, and flashing position cards.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: ["avatar", "badge", "button"],
+    files: [
+      {
+        path: "registry/blocks/dashboards-analytics/crypto-portfolio/crypto-portfolio-02/crypto-portfolio.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/dashboards-analytics/crypto-portfolio-02/crypto-portfolio.tsx",
+      },
+      {
+        path: "registry/blocks/dashboards-analytics/crypto-portfolio/crypto-portfolio-02/icons/btc.svg",
+        type: "registry:file",
+        target:
+          "components/blocks/dashboards-analytics/crypto-portfolio-02/icons/btc.svg",
+      },
+      {
+        path: "registry/blocks/dashboards-analytics/crypto-portfolio/crypto-portfolio-02/icons/eth.svg",
+        type: "registry:file",
+        target:
+          "components/blocks/dashboards-analytics/crypto-portfolio-02/icons/eth.svg",
+      },
+      {
+        path: "registry/blocks/dashboards-analytics/crypto-portfolio/crypto-portfolio-02/icons/sol.svg",
+        type: "registry:file",
+        target:
+          "components/blocks/dashboards-analytics/crypto-portfolio-02/icons/sol.svg",
+      },
+      {
+        path: "registry/blocks/dashboards-analytics/crypto-portfolio/crypto-portfolio-02/icons/usdc.svg",
+        type: "registry:file",
+        target:
+          "components/blocks/dashboards-analytics/crypto-portfolio-02/icons/usdc.svg",
+      },
+      {
+        path: "registry/blocks/dashboards-analytics/crypto-portfolio/crypto-portfolio-02/images/avatar.webp",
+        type: "registry:file",
+        target:
+          "components/blocks/dashboards-analytics/crypto-portfolio-02/images/avatar.webp",
+      },
+    ],
+  },
+  {
+    name: "crypto-portfolio-03",
+    type: "registry:block",
+    title: "crypto-portfolio-03",
+    description:
+      "Dark live crypto desk — streaming Recharts area charts for equity, per-asset markets, and stacked BTC/ETH/SOL exposure.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react", "recharts"],
+    registryDependencies: ["avatar", "badge", "button", "chart"],
+    files: [
+      {
+        path: "registry/blocks/dashboards-analytics/crypto-portfolio/crypto-portfolio-03/crypto-portfolio.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/dashboards-analytics/crypto-portfolio-03/crypto-portfolio.tsx",
+      },
+      {
+        path: "registry/blocks/dashboards-analytics/crypto-portfolio/crypto-portfolio-03/icons/btc.svg",
+        type: "registry:file",
+        target:
+          "components/blocks/dashboards-analytics/crypto-portfolio-03/icons/btc.svg",
+      },
+      {
+        path: "registry/blocks/dashboards-analytics/crypto-portfolio/crypto-portfolio-03/icons/eth.svg",
+        type: "registry:file",
+        target:
+          "components/blocks/dashboards-analytics/crypto-portfolio-03/icons/eth.svg",
+      },
+      {
+        path: "registry/blocks/dashboards-analytics/crypto-portfolio/crypto-portfolio-03/icons/sol.svg",
+        type: "registry:file",
+        target:
+          "components/blocks/dashboards-analytics/crypto-portfolio-03/icons/sol.svg",
+      },
+      {
+        path: "registry/blocks/dashboards-analytics/crypto-portfolio/crypto-portfolio-03/icons/usdc.svg",
+        type: "registry:file",
+        target:
+          "components/blocks/dashboards-analytics/crypto-portfolio-03/icons/usdc.svg",
+      },
+      {
+        path: "registry/blocks/dashboards-analytics/crypto-portfolio/crypto-portfolio-03/images/avatar.webp",
+        type: "registry:file",
+        target:
+          "components/blocks/dashboards-analytics/crypto-portfolio-03/images/avatar.webp",
+      },
+    ],
+  },
+  {
+    name: "crypto-portfolio-04",
+    type: "registry:block",
+    title: "crypto-portfolio-04",
+    description:
+      "Bitcoin-orange / coffee portfolio — cream shell in light, dark coffee shell in dark, with warm equity and allocation.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: ["avatar", "badge", "button"],
+    files: [
+      {
+        path: "registry/blocks/dashboards-analytics/crypto-portfolio/crypto-portfolio-04/crypto-portfolio.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/dashboards-analytics/crypto-portfolio-04/crypto-portfolio.tsx",
+      },
+      {
+        path: "registry/blocks/dashboards-analytics/crypto-portfolio/crypto-portfolio-04/icons/btc.svg",
+        type: "registry:file",
+        target:
+          "components/blocks/dashboards-analytics/crypto-portfolio-04/icons/btc.svg",
+      },
+      {
+        path: "registry/blocks/dashboards-analytics/crypto-portfolio/crypto-portfolio-04/icons/eth.svg",
+        type: "registry:file",
+        target:
+          "components/blocks/dashboards-analytics/crypto-portfolio-04/icons/eth.svg",
+      },
+      {
+        path: "registry/blocks/dashboards-analytics/crypto-portfolio/crypto-portfolio-04/icons/sol.svg",
+        type: "registry:file",
+        target:
+          "components/blocks/dashboards-analytics/crypto-portfolio-04/icons/sol.svg",
+      },
+      {
+        path: "registry/blocks/dashboards-analytics/crypto-portfolio/crypto-portfolio-04/icons/usdc.svg",
+        type: "registry:file",
+        target:
+          "components/blocks/dashboards-analytics/crypto-portfolio-04/icons/usdc.svg",
+      },
+      {
+        path: "registry/blocks/dashboards-analytics/crypto-portfolio/crypto-portfolio-04/images/avatar.webp",
+        type: "registry:file",
+        target:
+          "components/blocks/dashboards-analytics/crypto-portfolio-04/images/avatar.webp",
       },
     ],
   },
@@ -8049,6 +8414,42 @@ const registryItemsRaw = [
     ],
   },
   {
+    name: "testimonials-14",
+    type: "registry:block",
+    title: "testimonials-14",
+    description:
+      "Spotlight desk with a customer rail and quote stage, outcome chips, and previous/next controls.",
+    registryDependencies: ["avatar", "button"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-14/testimonial.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/testimonials-14/testimonial.tsx",
+      },
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-14/images/avatar-1.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/testimonials-14/images/avatar-1.webp",
+      },
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-14/images/avatar-2.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/testimonials-14/images/avatar-2.webp",
+      },
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-14/images/avatar-3.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/testimonials-14/images/avatar-3.webp",
+      },
+      {
+        path: "registry/blocks/marketing/testimonials/testimonials-14/images/avatar-4.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/testimonials-14/images/avatar-4.webp",
+      },
+    ],
+  },
+  {
     name: "application-form-01",
     type: "registry:block",
     title: "application-form-01",
@@ -9017,12 +9418,33 @@ const registryItemsRaw = [
   ),
   marketingPortfolioBlock(
     "portfolio-01",
-    "Professional portfolio grid — category filter, local cover images, testimonials, and CTA.",
-    PORTFOLIO_01_IMAGES,
+    "Featured case plus filtered project grid — primary-only badges, static filters, and a hard-stop closing CTA.",
+    PORTFOLIO_IMAGES,
     {
-      registryDependencies: ["avatar", "badge", "button"],
+      registryDependencies: ["badge", "button"],
       dependencies: ["lucide-react"],
     }
+  ),
+  marketingPortfolioBlock(
+    "portfolio-02",
+    "Case spotlight — filter chips, project rail (col-span-4), and detail stage (col-span-8).",
+    PORTFOLIO_IMAGES,
+    {
+      registryDependencies: ["badge", "button"],
+      dependencies: ["lucide-react"],
+    }
+  ),
+  marketingPortfolioBlock(
+    "portfolio-03",
+    "Light kinetic studio — cream canvas with dark mode, marquee, magnetic featured cover, and orbiting thumbs.",
+    PORTFOLIO_IMAGES,
+    { dependencies: ["lucide-react"] }
+  ),
+  marketingPortfolioBlock(
+    "portfolio-04",
+    "Dark neon showreel — wide cover with a six-column thumbnail strip underneath.",
+    PORTFOLIO_IMAGES,
+    { dependencies: ["lucide-react"] }
   ),
   {
     name: "social-links-01",
@@ -9038,6 +9460,91 @@ const registryItemsRaw = [
         path: "registry/blocks/marketing/social-links/social-links-01/social-links.tsx",
         type: "registry:component",
         target: "components/blocks/marketing/social-links-01/social-links.tsx",
+      },
+    ],
+  },
+  {
+    name: "social-links-02",
+    type: "registry:block",
+    title: "social-links-02",
+    description:
+      "Dark cinematic link-in-bio — cover photo, portrait, 2×2 destination grid, and Sono logo mark (RTL/LTR).",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/marketing/social-links/social-links-02/social-links.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/social-links-02/social-links.tsx",
+      },
+      {
+        path: "registry/blocks/marketing/social-links/social-links-02/images/logo.svg",
+        type: "registry:file",
+        target: "components/blocks/marketing/social-links-02/images/logo.svg",
+      },
+      {
+        path: "registry/blocks/marketing/social-links/social-links-02/images/cover.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/social-links-02/images/cover.webp",
+      },
+      {
+        path: "registry/blocks/marketing/social-links/social-links-02/images/portrait.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/social-links-02/images/portrait.webp",
+      },
+    ],
+  },
+  {
+    name: "social-links-03",
+    type: "registry:block",
+    title: "social-links-03",
+    description:
+      "Split magazine social card — cover panel, portrait header, link stack, and Sono logo (RTL/LTR).",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: ["button"],
+    files: [
+      {
+        path: "registry/blocks/marketing/social-links/social-links-03/social-links.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/social-links-03/social-links.tsx",
+      },
+      {
+        path: "registry/blocks/marketing/social-links/social-links-03/images/logo.svg",
+        type: "registry:file",
+        target: "components/blocks/marketing/social-links-03/images/logo.svg",
+      },
+      {
+        path: "registry/blocks/marketing/social-links/social-links-03/images/cover.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/social-links-03/images/cover.webp",
+      },
+      {
+        path: "registry/blocks/marketing/social-links/social-links-03/images/portrait.webp",
+        type: "registry:file",
+        target: "components/blocks/marketing/social-links-03/images/portrait.webp",
+      },
+    ],
+  },
+  {
+    name: "social-links-04",
+    type: "registry:block",
+    title: "social-links-04",
+    description:
+      "Simple SonoJS-site social card — logo wordmark, muted nav-style links, and primary Get started (RTL/LTR).",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: ["button"],
+    files: [
+      {
+        path: "registry/blocks/marketing/social-links/social-links-04/social-links.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/social-links-04/social-links.tsx",
+      },
+      {
+        path: "registry/blocks/marketing/social-links/social-links-04/images/logo.svg",
+        type: "registry:file",
+        target: "components/blocks/marketing/social-links-04/images/logo.svg",
       },
     ],
   },

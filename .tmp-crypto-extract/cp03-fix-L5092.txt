@@ -1,0 +1,49 @@
+OLD:
+              <div
+                className="flex rounded-full bg-zinc-900/80 p-1"
+                role="tablist"
+                aria-label="Chart range"
+              >
+                {RANGES.map((r) => (
+                  <button
+                    key={r}
+                    type="button"
+                    role="tab"
+                    aria-selected={range === r}
+                    onClick={() => setRange(r)}
+                    className={cn(
+                      "cursor-pointer rounded-full px-3 py-1.5 font-mono text-[11px] font-medium transition-colors",
+                      range === r
+                        ? "bg-zinc-100 text-zinc-950"
+                        : "text-zinc-400 hover:text-zinc-200"
+                    )}
+                  >
+                    {r}
+                  </button>
+                ))}
+              </div>
+
+NEW:
+              <div
+                className="flex rounded-full bg-black/45 p-1 ring-1 ring-white/10"
+                role="tablist"
+                aria-label="Chart range"
+              >
+                {RANGES.map((r) => (
+                  <button
+                    key={r}
+                    type="button"
+                    role="tab"
+                    aria-selected={range === r}
+                    onClick={() => setRange(r)}
+                    className={cn(
+                      "cursor-pointer rounded-full px-3 py-1.5 font-mono text-[11px] font-medium transition-colors",
+                      range === r
+                        ? "bg-emerald-400 text-zinc-950 shadow-sm"
+                        : "bg-transparent text-zinc-400 hover:text-zinc-100"
+                    )}
+                  >
+                    {r}
+                  </button>
+                ))}
+              </div>

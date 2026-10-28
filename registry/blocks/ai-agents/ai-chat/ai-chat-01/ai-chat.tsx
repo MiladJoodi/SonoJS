@@ -329,7 +329,7 @@ export default function AiChat01() {
   }
 
   return (
-    <div className="w-full bg-white px-4 py-10 dark:bg-background">
+    <div className="w-full bg-canvas px-4 py-10">
       <div className="mx-auto flex h-140 w-full max-w-2xl flex-col overflow-hidden rounded-3xl border border-border/70 bg-card shadow-soft">
       <MessageScrollerProvider
         autoScroll={streaming}

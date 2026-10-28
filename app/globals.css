@@ -13,6 +13,8 @@
 @source inline("ltr:data-[state=checked]:translate-x-[calc(100%-2px)] rtl:data-[state=checked]:-translate-x-[calc(100%-2px)]");
 /* Gallery / dense grids — cols 4–7 sometimes missing from the emitted sheet. */
 @source inline("grid-cols-4 grid-cols-5 grid-cols-6 grid-cols-7 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6");
+/* Bento / asymmetric grids — col-span-4 + row-span often missing from the emitted sheet. */
+@source inline("col-span-3 col-span-4 col-span-5 col-span-6 col-span-7 col-span-8 sm:col-span-5 sm:col-span-7 sm:col-span-12 md:col-span-3 md:col-span-4 md:col-span-5 md:col-span-6 md:col-span-7 md:col-span-8 lg:col-span-3 lg:col-span-4 lg:col-span-5 lg:col-span-6 lg:col-span-7 lg:col-span-8 row-span-2 md:row-span-2 lg:row-span-2 bg-foreground/15 bg-foreground/20 bg-foreground/25 bg-primary/5 bg-primary/10 bg-primary/15 bg-primary/20 border-primary/20 fill-primary");
 /* Mega menus / nav — responsive + arbitrary utilities often missing from the emitted sheet. */
 @source inline("min-h-[68px] min-h-16 sm:inline-flex max-sm:hidden hidden sm:inline-flex hidden lg:inline-flex hidden lg:flex lg:w-56 lg:w-64 lg:w-72 lg:min-h-40 lg:min-h-[12rem] lg:h-auto lg:col-span-1 md:col-span-4 col-span-2 lg:self-stretch lg:self-start size-full h-full w-full object-cover aspect-[6/3] aspect-[16/10] lg:grid-cols-[minmax(0,1fr)_minmax(14rem,18rem)] lg:items-stretch lg:gap-8 lg:gap-10 space-y-2.5 w-[min(calc(100vw-2rem),48rem)] max-w-56");
 /* Sidebars — md width/borders + end-accent / chat stack often missing from the emitted sheet. */

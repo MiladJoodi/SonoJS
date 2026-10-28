@@ -86,6 +86,9 @@ import Banner13 from "@/registry/blocks/marketing/banner/banner-13/banner"
 import Banner14 from "@/registry/blocks/marketing/banner/banner-14/banner"
 import Banner15 from "@/registry/blocks/marketing/banner/banner-15/banner"
 import CookieConsent01 from "@/registry/blocks/marketing/cookie-consent/cookie-consent-01/cookie-consent"
+import CookieConsent02 from "@/registry/blocks/marketing/cookie-consent/cookie-consent-02/cookie-consent"
+import CookieConsent03 from "@/registry/blocks/marketing/cookie-consent/cookie-consent-03/cookie-consent"
+import CookieConsent04 from "@/registry/blocks/marketing/cookie-consent/cookie-consent-04/cookie-consent"
 import Jumbotron01 from "@/registry/blocks/marketing/jumbotron/jumbotron-01/jumbotron"
 import Jumbotron02 from "@/registry/blocks/marketing/jumbotron/jumbotron-02/jumbotron"
 import Jumbotron03 from "@/registry/blocks/marketing/jumbotron/jumbotron-03/jumbotron"
@@ -109,8 +112,11 @@ import ArticleLayout01 from "@/registry/blocks/content-publishing/article-layout
 import AuthorProfile01 from "@/registry/blocks/content-publishing/author-profile/author-profile-01/author-profile"
 import BlogGrid01 from "@/registry/blocks/content-publishing/blog-grid/blog-grid-01/blog-grid"
 import Changelog01 from "@/registry/blocks/content-publishing/changelog/changelog-01/changelog"
+import ReadingProgress01 from "@/registry/blocks/content-publishing/reading-progress/reading-progress-01/reading-progress"
 import BentoGrid01 from "@/registry/blocks/marketing/bento-grid/bento-grid-01/bento-grid"
+import BentoGrid02 from "@/registry/blocks/marketing/bento-grid/bento-grid-02/bento-grid"
 import HowItWorks01 from "@/registry/blocks/marketing/how-it-works/how-it-works-01/how-it-works"
+import HowItWorks02 from "@/registry/blocks/marketing/how-it-works/how-it-works-02/how-it-works"
 import Cta01 from "@/registry/blocks/marketing/cta/cta-01/cta"
 import Cta02 from "@/registry/blocks/marketing/cta/cta-02/cta"
 import Cta03 from "@/registry/blocks/marketing/cta/cta-03/cta"
@@ -157,11 +163,15 @@ import Faq18 from "@/registry/blocks/marketing/faq/faq-18/faq"
 import Faq19 from "@/registry/blocks/marketing/faq/faq-19/faq"
 import Faq20 from "@/registry/blocks/marketing/faq/faq-20/faq"
 import DataTable01 from "@/registry/blocks/data-tables/data-table/data-table-01/table"
+import DataTable02 from "@/registry/blocks/data-tables/data-table/data-table-02/table"
+import DataTable03 from "@/registry/blocks/data-tables/data-table/data-table-03/table"
 import AdvancedDataGrid01 from "@/registry/blocks/data-tables/advanced-data-grid/advanced-data-grid-01/table"
 import AdvancedDataGrid02 from "@/registry/blocks/data-tables/advanced-data-grid/advanced-data-grid-02/table"
 import AdvancedDataGrid03 from "@/registry/blocks/data-tables/advanced-data-grid/advanced-data-grid-03/table"
 import AdvancedDataGrid04 from "@/registry/blocks/data-tables/advanced-data-grid/advanced-data-grid-04/table"
 import RowActions01 from "@/registry/blocks/data-tables/row-actions/row-actions-01/table"
+import RowActions02 from "@/registry/blocks/data-tables/row-actions/row-actions-02/table"
+import RowActions03 from "@/registry/blocks/data-tables/row-actions/row-actions-03/table"
 import ApiKeys01 from "@/registry/blocks/developer-tools/api-key-management/api-keys-01/api-keys"
 import ApiKeys02 from "@/registry/blocks/developer-tools/api-key-management/api-keys-02/api-keys"
 import WebhookManagement01 from "@/registry/blocks/developer-tools/webhook-management/webhook-management-01/webhook-management"
@@ -341,9 +351,18 @@ import Newsletter08 from "@/registry/blocks/marketing/newsletter/newsletter-08/n
 import Newsletter09 from "@/registry/blocks/marketing/newsletter/newsletter-09/newsletter"
 import Newsletter10 from "@/registry/blocks/marketing/newsletter/newsletter-10/newsletter"
 import Portfolio01 from "@/registry/blocks/marketing/portfolio/portfolio-01/portfolio"
+import Portfolio02 from "@/registry/blocks/marketing/portfolio/portfolio-02/portfolio"
+import Portfolio03 from "@/registry/blocks/marketing/portfolio/portfolio-03/portfolio"
+import Portfolio04 from "@/registry/blocks/marketing/portfolio/portfolio-04/portfolio"
 import SocialLinks01 from "@/registry/blocks/marketing/social-links/social-links-01/social-links"
+import SocialLinks02 from "@/registry/blocks/marketing/social-links/social-links-02/social-links"
+import SocialLinks03 from "@/registry/blocks/marketing/social-links/social-links-03/social-links"
+import SocialLinks04 from "@/registry/blocks/marketing/social-links/social-links-04/social-links"
 import MediaPlayer01 from "@/registry/blocks/files-media/media-player/media-player-01/media-player"
 import CryptoPortfolio01 from "@/registry/blocks/dashboards-analytics/crypto-portfolio/crypto-portfolio-01/crypto-portfolio"
+import CryptoPortfolio02 from "@/registry/blocks/dashboards-analytics/crypto-portfolio/crypto-portfolio-02/crypto-portfolio"
+import CryptoPortfolio03 from "@/registry/blocks/dashboards-analytics/crypto-portfolio/crypto-portfolio-03/crypto-portfolio"
+import CryptoPortfolio04 from "@/registry/blocks/dashboards-analytics/crypto-portfolio/crypto-portfolio-04/crypto-portfolio"
 import KpiCards01 from "@/registry/blocks/dashboards-analytics/kpi-cards/kpi-cards-01/kpi-cards"
 import KpiCards02 from "@/registry/blocks/dashboards-analytics/kpi-cards/kpi-cards-02/kpi-cards"
 import KpiCards03 from "@/registry/blocks/dashboards-analytics/kpi-cards/kpi-cards-03/kpi-cards"
@@ -406,6 +425,7 @@ import Testimonials10 from "@/registry/blocks/marketing/testimonials/testimonial
 import Testimonials11 from "@/registry/blocks/marketing/testimonials/testimonials-11/testimonial"
 import Testimonials12 from "@/registry/blocks/marketing/testimonials/testimonials-12/testimonial"
 import Testimonials13 from "@/registry/blocks/marketing/testimonials/testimonials-13/testimonial"
+import Testimonials14 from "@/registry/blocks/marketing/testimonials/testimonials-14/testimonial"
 import ApplicationForm01 from "@/registry/blocks/forms/application-form/application-form-01/application-form"
 import ContactForm01 from "@/registry/blocks/forms/contact-form/contact-form-01/contact-form"
 import ContactForm02 from "@/registry/blocks/forms/contact-form/contact-form-02/contact-form"
@@ -922,18 +942,54 @@ const views: Record<string, ComponentType> = {
   },
   "cookie-consent-01": function CookieConsent01View() {
     return (
-      <div className="flex min-h-svh w-full items-stretch justify-center bg-canvas px-0 py-0">
+      <div className="flex min-h-svh w-full items-stretch justify-center bg-canvas">
         <div className="w-full">
           <CookieConsent01 />
         </div>
       </div>
     )
   },
+  "cookie-consent-02": function CookieConsent02View() {
+    return (
+      <div className="flex min-h-svh w-full items-stretch justify-center bg-canvas">
+        <div className="w-full">
+          <CookieConsent02 />
+        </div>
+      </div>
+    )
+  },
+  "cookie-consent-03": function CookieConsent03View() {
+    return (
+      <div className="flex min-h-svh w-full items-stretch justify-center bg-canvas">
+        <div className="w-full">
+          <CookieConsent03 />
+        </div>
+      </div>
+    )
+  },
+  "cookie-consent-04": function CookieConsent04View() {
+    return (
+      <div className="flex min-h-svh w-full items-stretch justify-center bg-canvas">
+        <div className="w-full">
+          <CookieConsent04 />
+        </div>
+      </div>
+    )
+  },
   "bento-grid-01": function BentoGrid01View() {
     return (
-      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas">
         <div className="w-full">
           <BentoGrid01 />
+        </div>
+      </div>
+    )
+  },
+  "bento-grid-02": function BentoGrid02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white dark:bg-background">
+        <div className="w-full">
+          <BentoGrid02 />
         </div>
       </div>
     )
@@ -943,6 +999,15 @@ const views: Record<string, ComponentType> = {
       <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
         <div className="w-full">
           <HowItWorks01 />
+        </div>
+      </div>
+    )
+  },
+  "how-it-works-02": function HowItWorks02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <HowItWorks02 />
         </div>
       </div>
     )
@@ -1399,9 +1464,27 @@ const views: Record<string, ComponentType> = {
   },
   "data-table-01": function DataTable01View() {
     return (
-      <div className="flex min-h-svh w-full items-start justify-center bg-white px-3 py-6 sm:px-6 sm:py-10 dark:bg-background">
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-3 py-6 sm:px-6 sm:py-10">
         <div className="w-full min-w-0 max-w-5xl">
           <DataTable01 />
+        </div>
+      </div>
+    )
+  },
+  "data-table-02": function DataTable02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-3 py-6 sm:px-6 sm:py-10">
+        <div className="w-full min-w-0 max-w-5xl">
+          <DataTable02 />
+        </div>
+      </div>
+    )
+  },
+  "data-table-03": function DataTable03View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-3 py-6 sm:px-6 sm:py-10">
+        <div className="w-full min-w-0 max-w-5xl">
+          <DataTable03 />
         </div>
       </div>
     )
@@ -1444,9 +1527,27 @@ const views: Record<string, ComponentType> = {
   },
   "row-actions-01": function RowActions01View() {
     return (
-      <div className="flex min-h-svh w-full items-start justify-center bg-white px-3 py-6 sm:px-6 sm:py-10 dark:bg-background">
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-3 py-6 sm:px-6 sm:py-10">
         <div className="w-full min-w-0 max-w-6xl">
           <RowActions01 />
+        </div>
+      </div>
+    )
+  },
+  "row-actions-02": function RowActions02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-3 py-6 sm:px-6 sm:py-10">
+        <div className="w-full min-w-0 max-w-6xl">
+          <RowActions02 />
+        </div>
+      </div>
+    )
+  },
+  "row-actions-03": function RowActions03View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-3 py-6 sm:px-6 sm:py-10">
+        <div className="w-full min-w-0 max-w-6xl">
+          <RowActions03 />
         </div>
       </div>
     )
@@ -1911,6 +2012,33 @@ const views: Record<string, ComponentType> = {
       <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
         <div className="w-full">
           <CryptoPortfolio01 />
+        </div>
+      </div>
+    )
+  },
+  "crypto-portfolio-02": function CryptoPortfolio02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-[#05070d] px-0 py-0">
+        <div className="w-full">
+          <CryptoPortfolio02 />
+        </div>
+      </div>
+    )
+  },
+  "crypto-portfolio-03": function CryptoPortfolio03View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-[#05070d] px-0 py-0">
+        <div className="w-full">
+          <CryptoPortfolio03 />
+        </div>
+      </div>
+    )
+  },
+  "crypto-portfolio-04": function CryptoPortfolio04View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-[#F7F0E6] px-0 py-0 dark:bg-[#120c09]">
+        <div className="w-full">
+          <CryptoPortfolio04 />
         </div>
       </div>
     )
@@ -3281,11 +3409,65 @@ const views: Record<string, ComponentType> = {
       </div>
     )
   },
+  "portfolio-02": function Portfolio02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Portfolio02 />
+        </div>
+      </div>
+    )
+  },
+  "portfolio-03": function Portfolio03View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Portfolio03 />
+        </div>
+      </div>
+    )
+  },
+  "portfolio-04": function Portfolio04View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Portfolio04 />
+        </div>
+      </div>
+    )
+  },
   "social-links-01": function SocialLinks01View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-0 py-0">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas">
         <div className="w-full">
           <SocialLinks01 />
+        </div>
+      </div>
+    )
+  },
+  "social-links-02": function SocialLinks02View() {
+    return (
+      <div className="flex min-h-svh w-full items-center justify-center bg-zinc-950">
+        <div className="w-full">
+          <SocialLinks02 />
+        </div>
+      </div>
+    )
+  },
+  "social-links-03": function SocialLinks03View() {
+    return (
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas">
+        <div className="w-full">
+          <SocialLinks03 />
+        </div>
+      </div>
+    )
+  },
+  "social-links-04": function SocialLinks04View() {
+    return (
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas">
+        <div className="w-full">
+          <SocialLinks04 />
         </div>
       </div>
     )
@@ -3802,6 +3984,15 @@ const views: Record<string, ComponentType> = {
       <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-8 py-12">
         <div className="w-full max-w-4xl">
           <Testimonials13 />
+        </div>
+      </div>
+    )
+  },
+  "testimonials-14": function Testimonials14View() {
+    return (
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Testimonials14 />
         </div>
       </div>
     )

@@ -41,7 +41,7 @@
     {
       "path": "components/blocks/marketing/hero-07/images/logo-white.svg",
       "type": "registry:file",
-      "content": "77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIKCSB2aWV3Qm94PSIwIDAgMjQuOSAyOCIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMjQuOSAyODsiIHhtbDpzcGFjZT0icHJlc2VydmUiPgo8c3R5bGUgdHlwZT0idGV4dC9jc3MiPgoJLnN0MHtmaWxsOiNmZmZmZmY7fQoJLnN0MXtvcGFjaXR5OjAuNDtmaWxsOiNmZmZmZmY7ZW5hYmxlLWJhY2tncm91bmQ6bmV3ICAgIDt9Cjwvc3R5bGU+CjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0yMi41LDE5LjhsLTkuNyw2LjVjLTEuMywwLjktMi40LDAuMy0yLjQtMS4zdi04LjVjMC0xLjYsMS4xLTMuNiwyLjQtNC41bDkuNy02LjVjMS4zLTAuOSwyLjQtMC4zLDIuNCwxLjN2OC41CglDMjQuOSwxNi45LDIzLjgsMTguOSwyMi41LDE5Ljh6Ii8+CjxwYXRoIGNsYXNzPSJzdDEiIGQ9Ik0xMi4zLDE1LjlsLTkuNyw2LjVjLTEuMywwLjktMi40LDAuMy0yLjQtMS4zdi04LjVDMC4yLDExLDEuMyw5LDIuNiw4LjFsOS43LTYuNWMxLjMtMC45LDIuNC0wLjMsMi40LDEuM3Y4LjUKCUMxNC43LDEyLjksMTMuNiwxNSwxMi4zLDE1Ljl6Ii8+Cjwvc3ZnPg0K",
+      "content": "77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIKCSB2aWV3Qm94PSIwIDAgMjQuOSAyOCIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMjQuOSAyODsiIHhtbDpzcGFjZT0icHJlc2VydmUiPgo8c3R5bGUgdHlwZT0idGV4dC9jc3MiPgoJLnN0MHtmaWxsOiNmZmZmZmY7fQoJLnN0MXtvcGFjaXR5OjAuNDtmaWxsOiNmZmZmZmY7ZW5hYmxlLWJhY2tncm91bmQ6bmV3ICAgIDt9Cjwvc3R5bGU+CjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0yMi41LDE5LjhsLTkuNyw2LjVjLTEuMywwLjktMi40LDAuMy0yLjQtMS4zdi04LjVjMC0xLjYsMS4xLTMuNiwyLjQtNC41bDkuNy02LjVjMS4zLTAuOSwyLjQtMC4zLDIuNCwxLjN2OC41CglDMjQuOSwxNi45LDIzLjgsMTguOSwyMi41LDE5Ljh6Ii8+CjxwYXRoIGNsYXNzPSJzdDEiIGQ9Ik0xMi4zLDE1LjlsLTkuNyw2LjVjLTEuMywwLjktMi40LDAuMy0yLjQtMS4zdi04LjVDMC4yLDExLDEuMyw5LDIuNiw4LjFsOS43LTYuNWMxLjMtMC45LDIuNC0wLjMsMi40LDEuM3Y4LjUKCUMxNC43LDEyLjksMTMuNiwxNSwxMi4zLDE1Ljl6Ii8+Cjwvc3ZnPgo=",
       "encoding": "base64",
       "target": "components/blocks/marketing/hero-07/images/logo-white.svg"
     },
@@ -74,6 +74,6 @@
       "target": "components/blocks/marketing/hero-07/images/team-3.webp"
     }
   ],
-  "version": "0.1.0+675d7fc0a862",
-  "generatedAt": "2026-10-27T22:46:01.251Z"
+  "version": "0.1.0+2f1c7cdd9850",
+  "generatedAt": "2026-10-28T10:34:41.204Z"
 }

@@ -5,6 +5,8 @@ import {
   ArrowDownLeftIcon,
   ArrowUpRightIcon,
   BellIcon,
+  EyeIcon,
+  EyeOffIcon,
   HistoryIcon,
   RefreshCcwIcon,
   SearchIcon,
@@ -13,7 +15,7 @@ import {
   WalletIcon,
 } from "lucide-react"
 
-import { Avatar, AvatarFallback } from "@sonojs/ui/components/avatar"
+import { Avatar, AvatarFallback, AvatarImage } from "@sonojs/ui/components/avatar"
 import { Badge } from "@sonojs/ui/components/badge"
 import { Button } from "@sonojs/ui/components/button"
 import {
@@ -22,6 +24,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@sonojs/ui/components/card"
+import { Input } from "@sonojs/ui/components/input"
 import {
   Table,
   TableBody,
@@ -32,36 +35,35 @@ import {
 } from "@sonojs/ui/components/table"
 import { cn } from "@/lib/utils"
 
-/**
- * Coin icons — drop files in `./icons/` then import here:
- *
- *   icons/btc.svg  → Bitcoin   (id: "btc")
- *   icons/eth.svg  → Ethereum  (id: "eth")
- *   icons/sol.svg  → Solana    (id: "sol")
- *   icons/usdc.svg → USD Coin  (id: "usdc")
- *
- * Example after you add the files:
- *
- *   import btcIcon from "./icons/btc.svg"
- *   … then set iconSrc: assetSrc(btcIcon) on that asset.
- *
- * See `./icons/README.md` for the full map.
- */
+import btcIcon from "./icons/btc.svg"
+import ethIcon from "./icons/eth.svg"
+import solIcon from "./icons/sol.svg"
+import usdcIcon from "./icons/usdc.svg"
+import avatarImg from "./images/avatar.webp"
+
 function assetSrc(asset: string | { src: string }) {
   return typeof asset === "string" ? asset : asset.src
 }
 
+const USER = {
+  name: "Sofia Reyes",
+  initials: "SR",
+  handle: "@sofia.vault",
+} as const
+
+type CoinId = "btc" | "eth" | "sol" | "usdc"
+
 type Asset = {
-  id: "btc" | "eth" | "sol" | "usdc"
+  id: CoinId
   name: string
   symbol: string
   balance: number
   price: number
   change: number
-  /** Set after dropping `./icons/{id}.svg` (or webp/png) */
-  iconSrc?: string
-  accent: string
-  well: string
+  color: string
+  iconSrc: string
+  /** Deterministic spark points (relative index → price walk) */
+  spark: number[]
 }
 
 const ASSETS: Asset[] = [
@@ -72,9 +74,9 @@ const ASSETS: Asset[] = [
     balance: 0.4521,
     price: 64230.5,
     change: 2.4,
-    // iconSrc: assetSrc(btcIcon),
-    accent: "text-amber-600 dark:text-amber-400",
-    well: "bg-amber-500/15 ring-amber-500/25",
+    color: "#F39321",
+    iconSrc: assetSrc(btcIcon),
+    spark: [61.2, 61.8, 60.9, 62.1, 63.4, 62.8, 63.9, 64.1, 63.7, 64.23],
   },
   {
     id: "eth",
@@ -83,9 +85,9 @@ const ASSETS: Asset[] = [
     balance: 4.2,
     price: 3450.2,
     change: -1.2,
-    // iconSrc: assetSrc(ethIcon),
-    accent: "text-violet-600 dark:text-violet-300",
-    well: "bg-violet-500/15 ring-violet-500/25",
+    color: "#8B5CF6",
+    iconSrc: assetSrc(ethIcon),
+    spark: [3.52, 3.49, 3.51, 3.48, 3.46, 3.47, 3.44, 3.45, 3.43, 3.45],
   },
   {
     id: "sol",
@@ -94,9 +96,9 @@ const ASSETS: Asset[] = [
     balance: 145.5,
     price: 142.6,
     change: 5.8,
-    // iconSrc: assetSrc(solIcon),
-    accent: "text-emerald-700 dark:text-emerald-300",
-    well: "bg-emerald-500/15 ring-emerald-500/25",
+    color: "#10B981",
+    iconSrc: assetSrc(solIcon),
+    spark: [128, 131, 129, 134, 136, 133, 138, 140, 139, 142.6],
   },
   {
     id: "usdc",
@@ -105,9 +107,9 @@ const ASSETS: Asset[] = [
     balance: 2450.0,
     price: 1.0,
     change: 0.01,
-    // iconSrc: assetSrc(usdcIcon),
-    accent: "text-sky-700 dark:text-sky-300",
-    well: "bg-sky-500/15 ring-sky-500/25",
+    color: "#0EA5E9",
+    iconSrc: assetSrc(usdcIcon),
+    spark: [1, 1.001, 0.999, 1, 1.002, 0.999, 1, 1.001, 1, 1],
   },
 ]
 
@@ -118,59 +120,102 @@ const ACTIONS = [
   { label: "Earn", icon: TrendingUpIcon },
 ] as const
 
-function money(n: number) {
+const ACTIVITY = [
+  {
+    id: 1,
+    type: "Received",
+    detail: "0.05 BTC from cold wallet",
+    time: "2h ago",
+    amount: "+$3,211.53",
+    tone: "pos" as const,
+  },
+  {
+    id: 2,
+    type: "Swapped",
+    detail: "120 SOL → USDC",
+    time: "Yesterday",
+    amount: "$17,112.00",
+    tone: "neutral" as const,
+  },
+  {
+    id: 3,
+    type: "Sent",
+    detail: "0.8 ETH to exchange",
+    time: "Mar 12",
+    amount: "-$2,760.16",
+    tone: "neg" as const,
+  },
+]
+
+function money(n: number, digits = 2) {
   return n.toLocaleString("en-US", {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
+    minimumFractionDigits: digits,
+    maximumFractionDigits: digits,
   })
 }
 
 function AssetMark({ asset }: { asset: Asset }) {
-  if (asset.iconSrc) {
-    return (
-      <img
-        src={asset.iconSrc}
-        alt=""
-        width={40}
-        height={40}
-        className="size-10 rounded-full object-cover"
-      />
-    )
-  }
-
   return (
-    <span
-      className={cn(
-        "flex size-10 items-center justify-center rounded-full text-sm font-bold ring-1",
-        asset.well,
-        asset.accent
-      )}
-      aria-hidden
-    >
-      {asset.symbol[0]}
-    </span>
+    <img
+      src={asset.iconSrc}
+      alt=""
+      width={40}
+      height={40}
+      className="size-10 rounded-full object-contain"
+    />
   )
 }
 
-/** Tiny decorative spark bars (visual only — not live chart data). */
-function Spark({ up }: { up: boolean }) {
-  const heights = up ? [28, 42, 36, 58, 48, 72, 64] : [64, 52, 60, 40, 48, 32, 38]
+/** Fixed SVG spark — avoids ResponsiveContainer 0×0 in table cells. */
+function MiniArea({
+  values,
+  color,
+  up,
+  id,
+}: {
+  values: number[]
+  color: string
+  up: boolean
+  id: string
+}) {
+  const w = 96
+  const h = 40
+  const min = Math.min(...values)
+  const max = Math.max(...values)
+  const span = Math.max(max - min, max * 0.004, 0.0001)
+  const stroke = up ? color : "#F43F5E"
+  const coords = values.map((v, i) => {
+    const x = (i / Math.max(values.length - 1, 1)) * w
+    const y = h - ((v - min) / span) * (h - 6) - 3
+    return [x, y] as const
+  })
+  const line = coords.map(([x, y], i) => `${i === 0 ? "M" : "L"}${x},${y}`).join(" ")
+  const area = `${line} L${w},${h} L0,${h} Z`
+
   return (
-    <div
-      className="flex h-8 items-end gap-0.5"
+    <svg
+      width={w}
+      height={h}
+      viewBox={`0 0 ${w} ${h}`}
+      className="block overflow-visible"
       aria-hidden
     >
-      {heights.map((h, i) => (
-        <span
-          key={i}
-          className={cn(
-            "w-1 rounded-full",
-            up ? "bg-emerald-500/70" : "bg-rose-500/70"
-          )}
-          style={{ height: `${h}%` }}
-        />
-      ))}
-    </div>
+      <defs>
+        <linearGradient id={id} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor={stroke} stopOpacity={0.35} />
+          <stop offset="100%" stopColor={stroke} stopOpacity={0} />
+        </linearGradient>
+      </defs>
+      <path d={area} fill={`url(#${id})`} />
+      <path
+        d={line}
+        fill="none"
+        stroke={stroke}
+        strokeWidth={1.5}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
   )
 }
 
@@ -178,10 +223,53 @@ export default function CryptoPortfolio({
   className,
   ...props
 }: React.ComponentProps<"section">) {
-  const totalBalance = ASSETS.reduce(
-    (sum, asset) => sum + asset.balance * asset.price,
-    0
-  )
+  const [query, setQuery] = React.useState("")
+  const [hidden, setHidden] = React.useState(false)
+  const [updatedAt, setUpdatedAt] = React.useState("—")
+
+  React.useEffect(() => {
+    const tick = () => {
+      setUpdatedAt(
+        new Date().toLocaleTimeString("en-GB", {
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: false,
+        })
+      )
+    }
+    tick()
+    const id = window.setInterval(tick, 1000)
+    return () => window.clearInterval(id)
+  }, [])
+
+  const rows = React.useMemo(() => {
+    const enriched = ASSETS.map((asset) => {
+      const value = asset.balance * asset.price
+      return { ...asset, value }
+    })
+    const total = enriched.reduce((s, a) => s + a.value, 0) || 1
+    return enriched.map((a) => ({
+      ...a,
+      weight: (a.value / total) * 100,
+      dayPnl: a.value * (a.change / 100),
+    }))
+  }, [])
+
+  const totalBalance = rows.reduce((s, a) => s + a.value, 0)
+  const dayPnl = rows.reduce((s, a) => s + a.dayPnl, 0)
+  const dayPct = totalBalance ? (dayPnl / (totalBalance - dayPnl)) * 100 : 0
+  const dayUp = dayPnl >= 0
+
+  const filtered = rows.filter((a) => {
+    const q = query.trim().toLowerCase()
+    if (!q) return true
+    return (
+      a.name.toLowerCase().includes(q) || a.symbol.toLowerCase().includes(q)
+    )
+  })
+
+  const mask = (value: string) => (hidden ? "••••••" : value)
 
   return (
     <section
@@ -192,51 +280,51 @@ export default function CryptoPortfolio({
       aria-labelledby="crypto-portfolio-01-heading"
       {...props}
     >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10"
-      >
-        <div className="absolute start-1/2 top-[-18%] size-[28rem] -translate-x-1/2 rounded-full bg-primary/12 blur-3xl" />
-        <div className="absolute end-[-8%] top-[40%] size-[18rem] rounded-full bg-amber-400/10 blur-3xl" />
-      </div>
-
-      <div className="mx-auto max-w-6xl space-y-8 px-4 sm:px-0">
-        {/* Header */}
-        <header className="flex items-center justify-between gap-4">
-          <div className="flex items-center gap-4">
-            <Avatar className="size-12 border border-border/70 bg-card shadow-soft">
+      <div className="mx-auto max-w-6xl space-y-6 px-4 sm:px-0">
+        <header className="flex flex-wrap items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <Avatar className="size-11 border border-border/70 bg-card shadow-soft">
+              <AvatarImage src={assetSrc(avatarImg)} alt={USER.name} />
               <AvatarFallback className="bg-card text-sm font-semibold">
-                AJ
+                {USER.initials}
               </AvatarFallback>
             </Avatar>
             <div className="min-w-0 text-start">
-              <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
-                Portfolio
-              </p>
               <h1
                 id="crypto-portfolio-01-heading"
-                className="truncate text-xl font-semibold tracking-tight text-foreground"
+                className="truncate text-lg font-semibold tracking-tight"
               >
-                Alex Johnson
+                {USER.name}
               </h1>
+              <p className="text-xs text-muted-foreground">{USER.handle}</p>
             </div>
           </div>
-          <div className="flex items-center gap-1">
+
+          <div className="flex flex-wrap items-center gap-2">
+            <p className="hidden font-mono text-[11px] text-muted-foreground sm:block">
+              Updated {updatedAt}
+            </p>
             <Button
               type="button"
               size="icon"
               variant="ghost"
-              aria-label="Search"
-              className="text-muted-foreground"
+              aria-label={hidden ? "Show balances" : "Hide balances"}
+              aria-pressed={hidden}
+              onClick={() => setHidden((v) => !v)}
+              className="cursor-pointer text-muted-foreground"
             >
-              <SearchIcon className="size-5" aria-hidden />
+              {hidden ? (
+                <EyeOffIcon className="size-5" aria-hidden />
+              ) : (
+                <EyeIcon className="size-5" aria-hidden />
+              )}
             </Button>
             <Button
               type="button"
               size="icon"
               variant="ghost"
               aria-label="Notifications"
-              className="relative text-muted-foreground"
+              className="relative cursor-pointer text-muted-foreground"
             >
               <BellIcon className="size-5" aria-hidden />
               <span className="absolute end-2.5 top-2.5 size-1.5 rounded-full bg-primary" />
@@ -244,42 +332,48 @@ export default function CryptoPortfolio({
           </div>
         </header>
 
-        <div className="grid gap-6 lg:grid-cols-3">
-          {/* Balance */}
-          <Card className="relative overflow-hidden border-border/70 lg:col-span-2">
-            <div
-              aria-hidden
-              className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-primary via-amber-400 to-emerald-400"
-            />
-            <CardContent className="flex flex-col gap-8 p-8 md:flex-row md:items-end md:justify-between md:p-10">
+        <div className="grid gap-4 lg:grid-cols-12">
+          <Card className="border-border/70 shadow-soft lg:col-span-7">
+            <CardContent className="flex flex-col gap-6 p-6 sm:flex-row sm:items-end sm:justify-between sm:p-7">
               <div className="text-start">
-                <p className="mb-3 text-sm font-medium tracking-wide text-muted-foreground">
-                  Total Balance
+                <p className="mb-2 text-sm font-medium text-muted-foreground">
+                  Total balance
                 </p>
                 <p
                   dir="ltr"
-                  className="text-4xl font-light tracking-tighter text-foreground tabular-nums sm:text-5xl"
+                  className="text-3xl font-semibold tracking-tight tabular-nums sm:text-4xl"
                 >
-                  ${money(totalBalance)}
+                  {mask(`$${money(totalBalance)}`)}
                 </p>
-                <div className="mt-5 flex flex-wrap items-center gap-3">
+                <div className="mt-3 flex flex-wrap items-center gap-2">
                   <Badge
                     variant="outline"
-                    className="border-transparent bg-emerald-500/10 font-medium text-emerald-700 dark:text-emerald-300"
+                    className={cn(
+                      "border-transparent font-medium",
+                      dayUp
+                        ? "bg-emerald-500/10 text-emerald-700 dark:text-emerald-300"
+                        : "bg-rose-500/10 text-rose-700 dark:text-rose-300"
+                    )}
                   >
-                    <TrendingUpIcon className="size-3.5" aria-hidden />
-                    <span dir="ltr">+$1,245.50</span>
+                    {dayUp ? (
+                      <TrendingUpIcon className="size-3.5" aria-hidden />
+                    ) : (
+                      <TrendingDownIcon className="size-3.5" aria-hidden />
+                    )}
+                    <span dir="ltr">
+                      {mask(
+                        `${dayUp ? "+" : ""}$${money(Math.abs(dayPnl))} (${dayUp ? "+" : ""}${dayPct.toFixed(2)}%)`
+                      )}
+                    </span>
                   </Badge>
-                  <span className="text-sm font-medium text-muted-foreground">
-                    Past 24 hours
-                  </span>
+                  <span className="text-sm text-muted-foreground">24h</span>
                 </div>
               </div>
 
-              <div className="flex w-full gap-3 md:w-auto">
+              <div className="flex w-full gap-2 sm:w-auto">
                 <Button
                   type="button"
-                  className="h-12 flex-1 rounded-full px-6 md:flex-none"
+                  className="h-[46px] flex-1 cursor-pointer rounded-full px-5 sm:flex-none"
                 >
                   <ArrowDownLeftIcon className="size-4" aria-hidden />
                   Receive
@@ -287,7 +381,7 @@ export default function CryptoPortfolio({
                 <Button
                   type="button"
                   variant="outline"
-                  className="h-12 flex-1 rounded-full px-6 md:flex-none"
+                  className="h-[46px] flex-1 cursor-pointer rounded-full px-5 sm:flex-none"
                 >
                   <ArrowUpRightIcon className="size-4" aria-hidden />
                   Send
@@ -296,149 +390,250 @@ export default function CryptoPortfolio({
             </CardContent>
           </Card>
 
-          {/* Actions */}
-          <Card className="border-border/70">
+          <Card className="border-border/70 shadow-soft lg:col-span-5">
             <CardHeader className="pb-2">
               <CardTitle className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
-                Actions
+                Allocation
               </CardTitle>
             </CardHeader>
-            <CardContent className="grid grid-cols-2 gap-3 pt-0">
-              {ACTIONS.map(({ label, icon: Icon }) => (
-                <Button
-                  key={label}
-                  type="button"
-                  variant="ghost"
-                  className="h-24 flex-col gap-2.5 rounded-[12px] border border-transparent bg-muted/40 text-foreground hover:border-border/70 hover:bg-muted"
-                >
-                  <Icon className="size-5 opacity-70" aria-hidden />
-                  <span className="font-medium">{label}</span>
-                </Button>
+            <CardContent className="flex flex-col gap-3 pt-0">
+              {rows.map((asset) => (
+                <div key={asset.id}>
+                  <div className="mb-1 flex items-center justify-between gap-2 text-sm">
+                    <span className="flex items-center gap-2 text-foreground">
+                      <img
+                        src={asset.iconSrc}
+                        alt=""
+                        width={16}
+                        height={16}
+                        className="size-4 rounded-full object-contain"
+                      />
+                      {asset.symbol}
+                    </span>
+                    <span className="font-mono text-muted-foreground tabular-nums">
+                      {mask(`${asset.weight.toFixed(1)}%`)}
+                    </span>
+                  </div>
+                  <div className="h-1.5 overflow-hidden rounded-full bg-muted">
+                    <div
+                      className="h-full rounded-full"
+                      style={{
+                        width: `${asset.weight}%`,
+                        backgroundColor: asset.color,
+                      }}
+                    />
+                  </div>
+                </div>
               ))}
             </CardContent>
           </Card>
         </div>
 
-        {/* Assets */}
-        <div>
-          <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
-            <h2 className="text-xl font-semibold tracking-tight text-foreground">
-              Your Assets
-            </h2>
-            <p className="text-xs text-muted-foreground">
-              Icons: drop files in{" "}
-              <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-[11px]">
-                icons/btc|eth|sol|usdc
-              </code>
-            </p>
-          </div>
+        <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+          {ACTIONS.map(({ label, icon: Icon }) => (
+            <Button
+              key={label}
+              type="button"
+              variant="outline"
+              className="h-[46px] cursor-pointer justify-start gap-2.5 rounded-[12px] border-border/70 bg-card px-4 shadow-soft"
+            >
+              <Icon className="size-4 opacity-70" aria-hidden />
+              <span className="font-medium">{label}</span>
+            </Button>
+          ))}
+        </div>
 
-          <Card className="overflow-hidden border-border/70">
-            <Table>
-              <TableHeader>
-                <TableRow className="hover:bg-transparent">
-                  <TableHead className="h-12 ps-6 text-xs tracking-wider uppercase">
-                    Asset
-                  </TableHead>
-                  <TableHead className="h-12 text-end text-xs tracking-wider uppercase">
-                    Price
-                  </TableHead>
-                  <TableHead className="h-12 text-end text-xs tracking-wider uppercase">
-                    24h
-                  </TableHead>
-                  <TableHead className="hidden h-12 text-end text-xs tracking-wider uppercase sm:table-cell">
-                    Trend
-                  </TableHead>
-                  <TableHead className="h-12 pe-6 text-end text-xs tracking-wider uppercase">
-                    Balance
-                  </TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {ASSETS.map((asset) => {
-                  const up = asset.change >= 0
-                  const value = asset.balance * asset.price
-                  return (
-                    <TableRow
-                      key={asset.id}
-                      className="group cursor-pointer"
-                    >
-                      <TableCell className="py-4 ps-6">
-                        <div className="flex items-center gap-3">
-                          <span className="transition-transform duration-300 group-hover:scale-105">
+        <div className="grid gap-4 lg:grid-cols-12">
+          <div className="lg:col-span-8">
+            <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
+              <h2 className="text-base font-semibold tracking-tight">
+                Your assets
+              </h2>
+              <div className="relative w-full max-w-xs">
+                <SearchIcon
+                  className="pointer-events-none absolute start-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground"
+                  aria-hidden
+                />
+                <Input
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  placeholder="Search asset"
+                  aria-label="Search assets"
+                  className="h-[46px] ps-9"
+                />
+              </div>
+            </div>
+
+            <Card className="overflow-hidden border-border/70 shadow-soft">
+              <Table>
+                <TableHeader>
+                  <TableRow className="hover:bg-transparent">
+                    <TableHead className="h-11 ps-5 text-xs tracking-wider uppercase">
+                      Asset
+                    </TableHead>
+                    <TableHead className="h-11 text-end text-xs tracking-wider uppercase">
+                      Price
+                    </TableHead>
+                    <TableHead className="h-11 text-end text-xs tracking-wider uppercase">
+                      24h
+                    </TableHead>
+                    <TableHead className="hidden h-11 text-end text-xs tracking-wider uppercase md:table-cell">
+                      Chart
+                    </TableHead>
+                    <TableHead className="hidden h-11 text-end text-xs tracking-wider uppercase sm:table-cell">
+                      Alloc
+                    </TableHead>
+                    <TableHead className="h-11 pe-5 text-end text-xs tracking-wider uppercase">
+                      Value
+                    </TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {filtered.map((asset) => {
+                    const up = asset.change >= 0
+                    return (
+                      <TableRow key={asset.id} className="group">
+                        <TableCell className="py-3.5 ps-5">
+                          <div className="flex items-center gap-3">
                             <AssetMark asset={asset} />
-                          </span>
-                          <div className="min-w-0 text-start">
-                            <p className="font-semibold text-foreground">
-                              {asset.name}
-                            </p>
-                            <p
-                              dir="ltr"
-                              className="text-sm font-medium text-muted-foreground"
-                            >
-                              {asset.symbol}
-                            </p>
+                            <div className="min-w-0 text-start">
+                              <p className="font-semibold">{asset.name}</p>
+                              <p
+                                dir="ltr"
+                                className="text-sm text-muted-foreground"
+                              >
+                                {mask(`${asset.balance} ${asset.symbol}`)}
+                              </p>
+                            </div>
                           </div>
-                        </div>
-                      </TableCell>
-                      <TableCell className="py-4 text-end">
-                        <span
-                          dir="ltr"
-                          className="font-medium text-muted-foreground tabular-nums"
-                        >
-                          ${money(asset.price)}
-                        </span>
-                      </TableCell>
-                      <TableCell className="py-4 text-end">
-                        <span
-                          dir="ltr"
-                          className={cn(
-                            "inline-flex items-center justify-end gap-1 font-medium tabular-nums",
-                            up
-                              ? "text-emerald-600 dark:text-emerald-400"
-                              : "text-rose-600 dark:text-rose-400"
-                          )}
-                        >
-                          {up ? (
-                            <TrendingUpIcon
-                              className="size-4"
-                              aria-hidden
+                        </TableCell>
+                        <TableCell className="py-3.5 text-end">
+                          <span
+                            dir="ltr"
+                            className="text-muted-foreground tabular-nums"
+                          >
+                            ${money(asset.price, asset.price < 2 ? 4 : 2)}
+                          </span>
+                        </TableCell>
+                        <TableCell className="py-3.5 text-end">
+                          <span
+                            dir="ltr"
+                            className={cn(
+                              "inline-flex items-center justify-end gap-1 font-medium tabular-nums",
+                              up
+                                ? "text-emerald-600 dark:text-emerald-400"
+                                : "text-rose-600 dark:text-rose-400"
+                            )}
+                          >
+                            {up ? (
+                              <TrendingUpIcon className="size-3.5" aria-hidden />
+                            ) : (
+                              <TrendingDownIcon
+                                className="size-3.5"
+                                aria-hidden
+                              />
+                            )}
+                            {Math.abs(asset.change)}%
+                          </span>
+                        </TableCell>
+                        <TableCell className="hidden py-3.5 text-end md:table-cell">
+                          <div className="ms-auto flex justify-end" dir="ltr">
+                            <MiniArea
+                              values={asset.spark}
+                              color={asset.color}
+                              up={up}
+                              id={`cp01-${asset.id}`}
                             />
-                          ) : (
-                            <TrendingDownIcon
-                              className="size-4"
-                              aria-hidden
-                            />
-                          )}
-                          {Math.abs(asset.change)}%
-                        </span>
-                      </TableCell>
-                      <TableCell className="hidden py-4 text-end sm:table-cell">
-                        <div className="ms-auto flex justify-end">
-                          <Spark up={up} />
-                        </div>
-                      </TableCell>
-                      <TableCell className="py-4 pe-6 text-end">
-                        <div className="text-end">
+                          </div>
+                        </TableCell>
+                        <TableCell className="hidden py-3.5 text-end sm:table-cell">
+                          <span className="font-mono text-sm text-muted-foreground tabular-nums">
+                            {mask(`${asset.weight.toFixed(1)}%`)}
+                          </span>
+                        </TableCell>
+                        <TableCell className="py-3.5 pe-5 text-end">
                           <p
                             dir="ltr"
-                            className="font-semibold text-foreground tabular-nums"
+                            className="font-semibold tabular-nums"
                           >
-                            ${money(value)}
+                            {mask(`$${money(asset.value)}`)}
                           </p>
                           <p
                             dir="ltr"
-                            className="text-sm font-medium text-muted-foreground tabular-nums"
+                            className={cn(
+                              "text-xs font-medium tabular-nums",
+                              asset.dayPnl >= 0
+                                ? "text-emerald-600 dark:text-emerald-400"
+                                : "text-rose-600 dark:text-rose-400"
+                            )}
                           >
-                            {asset.balance} {asset.symbol}
+                            {mask(
+                              `${asset.dayPnl >= 0 ? "+" : ""}$${money(Math.abs(asset.dayPnl))}`
+                            )}
                           </p>
-                        </div>
+                        </TableCell>
+                      </TableRow>
+                    )
+                  })}
+                  {filtered.length === 0 ? (
+                    <TableRow>
+                      <TableCell
+                        colSpan={6}
+                        className="h-24 text-center text-sm text-muted-foreground"
+                      >
+                        No assets match “{query}”.
                       </TableCell>
                     </TableRow>
-                  )
-                })}
-              </TableBody>
-            </Table>
+                  ) : null}
+                </TableBody>
+              </Table>
+            </Card>
+          </div>
+
+          <Card className="border-border/70 shadow-soft lg:col-span-4">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
+                Recent activity
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="flex flex-col gap-1 pt-0">
+              {ACTIVITY.map((item) => (
+                <div
+                  key={item.id}
+                  className="flex items-start justify-between gap-3 rounded-[12px] px-2 py-3 hover:bg-muted/50"
+                >
+                  <div className="min-w-0 text-start">
+                    <p className="text-sm font-semibold">{item.type}</p>
+                    <p className="truncate text-xs text-muted-foreground">
+                      {item.detail}
+                    </p>
+                    <p className="mt-1 text-[11px] text-muted-foreground">
+                      {item.time}
+                    </p>
+                  </div>
+                  <p
+                    dir="ltr"
+                    className={cn(
+                      "shrink-0 font-mono text-sm font-medium tabular-nums",
+                      item.tone === "pos" &&
+                        "text-emerald-600 dark:text-emerald-400",
+                      item.tone === "neg" &&
+                        "text-rose-600 dark:text-rose-400",
+                      item.tone === "neutral" && "text-foreground"
+                    )}
+                  >
+                    {mask(item.amount)}
+                  </p>
+                </div>
+              ))}
+              <Button
+                type="button"
+                variant="ghost"
+                className="mt-1 h-10 w-full cursor-pointer text-muted-foreground"
+              >
+                View all activity
+              </Button>
+            </CardContent>
           </Card>
         </div>
       </div>

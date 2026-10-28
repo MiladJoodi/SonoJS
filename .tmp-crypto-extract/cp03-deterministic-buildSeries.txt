@@ -1,0 +1,32 @@
+OLD:
+/** Deterministic walk so SSR + first client paint match (no hydration mismatch). */
+function buildSeries(seed: number, len: number, volatility: number): Point[] {
+  const out: Point[] = []
+  let v = seed
+  for (let i = 0; i < len; i++) {
+    const wave =
+      Math.sin(i * 0.37) * 0.45 +
+      Math.cos(i * 0.19) * 0.35 +
+      Math.sin(i * 0.11 + seed * 0.001) * 0.2
+    v = Math.max(seed * 0.82, v * (1 + wave * volatility))
+    out.push({ i, v })
+  }
+  return out
+}
+
+NEW:
+/** Deterministic walk so SSR + first client paint match (no hydration mismatch). */
+function buildSeries(seed: number, len: number, volatility: number): Point[] {
+  const out: Point[] = []
+  let v = seed
+  for (let i = 0; i < len; i++) {
+    const wave =
+      Math.sin(i * 0.55) * 0.55 +
+      Math.cos(i * 0.31) * 0.4 +
+      Math.sin(i * 0.17 + seed * 0.001) * 0.35 +
+      Math.sin(i * 1.1) * 0.15
+    v = Math.max(seed * 0.75, v * (1 + wave * volatility))
+    out.push({ i, v })
+  }
+  return out
+}

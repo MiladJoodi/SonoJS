@@ -1,0 +1,90 @@
+OLD:
+}
+
+function StackedAreas({
+  coinSeries,
+}: {
+  coinSeries: Record<CoinId, Point[]>
+}) {
+  const data = React.useMemo(() => {
+    const btc = coinSeries.btc ?? []
+    const eth = coinSeries.eth ?? []
+    const sol = coinSeries.sol ?? []
+    const n = Math.min(btc.length, eth.length, sol.length)
+    const out: Array<{ i: number; btc: number; eth: number; sol: number }> = []
+    for (let idx = 0; idx < n; idx++) {
+      // Normalize each series to % of its own mean so they share a visual scale
+      const b = btc[idx]!.v
+      const e = eth[idx]!.v
+      const s = sol[idx]!.v
+      out.push({
+        i: idx,
+        btc: (b / (btc[0]?.v || 1)) * 100,
+        eth: (e / (eth[0]?.v || 1)) * 100,
+        sol: (s / (sol[0]?.v || 1)) * 100,
+      })
+    }
+    return out
+  }, [coinSeries])
+
+  return (
+    <ChartContainer
+      className="h-48 w-full sm:h-56"
+      config={{
+        btc: { label: "BTC", color: "#F39321" },
+        eth: { label: "ETH", color: "#A78BFA" },
+        sol: { label: "SOL", color: "#34D399" },
+      }}
+    >
+      <AreaChart data={data} margin={{ top: 8, right: 4, bottom: 0, left: 4 }}>
+        <defs>
+          <linearGradient id="cp03-stack-btc" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#F39321" stopOpacity={0.35} />
+            <stop offset="100%" stopColor="#F39321" stopOpacity={0} />
+          </linearGradient>
+          <linearGradient id="cp03-stack-eth" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#A78BFA" stopOpacity={0.3} />
+            <stop offset="100%" stopColor="#A78BFA" stopOpacity={0} />
+          </linearGradient>
+          <linearGradient id="cp03-stack-sol" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#34D399" stopOpacity={0.3} />
+            <stop offset="100%" stopColor="#34D399" stopOpacity={0} />
+          </linearGradient>
+        </defs>
+        <XAxis dataKey="i" hide />
+        <YAxis hide domain={["dataMin - 2", "dataMax + 2"]} />
+        <Area
+          type="monotone"
+          dataKey="btc"
+          stroke="#F39321"
+          strokeWidth={2}
+          fill="url(#cp03-stack-btc)"
+          isAnimationActive={false}
+          dot={false}
+        />
+        <Area
+          type="monotone"
+          dataKey="eth"
+          stroke="#A78BFA"
+          strokeWidth={2}
+          fill="url(#cp03-stack-eth)"
+          isAnimationActive={false}
+          dot={false}
+        />
+        <Area
+          type="monotone"
+          dataKey="sol"
+          stroke="#34D399"
+          strokeWidth={2}
+          fill="url(#cp03-stack-sol)"
+          isAnimationActive={false}
+          dot={false}
+        />
+      </AreaChart>
+    </ChartContainer>
+  )
+}
+
+
+NEW:
+}

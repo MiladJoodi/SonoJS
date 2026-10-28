@@ -114,7 +114,7 @@ export default function SocialLinks({
   return (
     <section
       className={cn(
-        "relative isolate min-h-svh w-full min-w-0 overflow-hidden bg-canvas px-4 py-20 text-foreground sm:px-6",
+        "relative isolate w-full min-w-0 overflow-hidden bg-canvas px-4 py-10 text-foreground sm:px-6 sm:py-12",
         className
       )}
       aria-labelledby="social-links-01-heading"
@@ -125,9 +125,9 @@ export default function SocialLinks({
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10"
       >
-        <div className="absolute start-1/2 top-[-12%] size-[34rem] -translate-x-1/2 rounded-full bg-primary/15 blur-3xl" />
-        <div className="absolute end-[-10%] top-[28%] size-[22rem] rounded-full bg-sky-400/10 blur-3xl" />
-        <div className="absolute start-[-8%] bottom-[8%] size-[18rem] rounded-full bg-violet-400/10 blur-3xl" />
+        <div className="absolute start-1/2 top-[-12%] size-[28rem] -translate-x-1/2 rounded-full bg-primary/15 blur-3xl" />
+        <div className="absolute end-[-10%] top-[28%] size-[18rem] rounded-full bg-sky-400/10 blur-3xl" />
+        <div className="absolute start-[-8%] bottom-[8%] size-[14rem] rounded-full bg-violet-400/10 blur-3xl" />
         <div
           className="absolute inset-0 opacity-[0.35] dark:opacity-[0.2]"
           style={{
@@ -138,32 +138,32 @@ export default function SocialLinks({
         />
       </div>
 
-      <div className="mx-auto w-full max-w-md">
-        <div className="rounded-[20px] border border-border/70 bg-card/80 p-6 shadow-soft backdrop-blur-md sm:p-8">
-          <div className="flex flex-col items-center gap-8">
+      <div className="mx-auto w-full max-w-lg">
+        <div className="rounded-[20px] border border-border/70 bg-card/80 p-5 shadow-soft backdrop-blur-md sm:p-6">
+          <div className="flex flex-col items-center gap-5">
             {/* Profile */}
-            <div className="flex flex-col items-center gap-4 text-center">
+            <div className="flex flex-col items-center gap-3 text-center">
               <div className="relative">
                 <div
                   aria-hidden
-                  className="absolute -inset-3 rounded-full bg-linear-to-br from-primary/25 via-sky-400/15 to-transparent blur-md"
+                  className="absolute -inset-2.5 rounded-full bg-linear-to-br from-primary/25 via-sky-400/15 to-transparent blur-md"
                 />
-                <Avatar className="relative size-24 ring-4 ring-primary/15 transition-[box-shadow] duration-300 hover:ring-primary/30">
-                  <AvatarFallback className="bg-primary text-2xl font-semibold text-primary-foreground">
+                <Avatar className="relative size-20 ring-4 ring-primary/15 transition-[box-shadow] duration-300 hover:ring-primary/30">
+                  <AvatarFallback className="bg-primary text-xl font-semibold text-primary-foreground">
                     SJ
                   </AvatarFallback>
                 </Avatar>
-                <span className="absolute -end-0.5 -bottom-0.5 flex size-6 items-center justify-center rounded-full border-[3px] border-card bg-emerald-500">
+                <span className="absolute -end-0.5 -bottom-0.5 flex size-5 items-center justify-center rounded-full border-[3px] border-card bg-emerald-500">
                   <span className="size-1.5 animate-pulse rounded-full bg-white" />
                   <span className="sr-only">Online</span>
                 </span>
               </div>
 
-              <div className="space-y-1">
+              <div className="space-y-0.5">
                 <div className="flex flex-wrap items-center justify-center gap-2">
                   <h1
                     id="social-links-01-heading"
-                    className="text-2xl font-semibold tracking-tight text-foreground"
+                    className="text-xl font-semibold tracking-tight text-foreground"
                   >
                     SonoJS
                   </h1>
@@ -180,9 +180,8 @@ export default function SocialLinks({
                 </p>
               </div>
 
-              <p className="max-w-[18rem] text-sm leading-relaxed text-muted-foreground">
-                Beautiful, production-ready React components — copy the source,
-                keep the craft.
+              <p className="truncate text-sm text-muted-foreground">
+                Production-ready React components — copy the source, keep the craft.
               </p>
             </div>
 
@@ -193,15 +192,15 @@ export default function SocialLinks({
                   key={label}
                   href={href}
                   aria-label={label}
-                  className="inline-flex size-10 cursor-pointer items-center justify-center rounded-full border border-border/70 bg-muted/40 text-muted-foreground transition-all hover:-translate-y-0.5 hover:border-primary/30 hover:bg-primary/5 hover:text-primary hover:shadow-soft"
+                  className="inline-flex size-9 cursor-pointer items-center justify-center rounded-full border border-border/70 bg-muted/40 text-muted-foreground transition-all hover:-translate-y-0.5 hover:border-primary/30 hover:bg-primary/5 hover:text-primary hover:shadow-soft"
                 >
-                  <Icon className="size-[18px]" aria-hidden />
+                  <Icon className="size-4" aria-hidden />
                 </a>
               ))}
             </div>
 
             {/* Link stack */}
-            <ul className="flex w-full flex-col gap-3" role="list">
+            <ul className="flex w-full flex-col gap-2.5" role="list">
               {LINKS.map((link) => {
                 const Icon = link.icon
                 const tone = TONE[link.tone]
@@ -210,7 +209,7 @@ export default function SocialLinks({
                     <a
                       href={link.href}
                       className={cn(
-                        "group relative flex w-full cursor-pointer items-center gap-4 overflow-hidden rounded-[14px] border border-border/70 bg-card p-3.5 text-start shadow-xs transition-all duration-300 hover:-translate-y-0.5",
+                        "group relative flex w-full cursor-pointer items-center gap-3.5 overflow-hidden rounded-[14px] border border-border/70 bg-card p-3 text-start shadow-xs transition-all duration-300 hover:-translate-y-0.5",
                         tone.ring,
                         tone.glow
                       )}
@@ -223,11 +222,11 @@ export default function SocialLinks({
                       ) : null}
                       <span
                         className={cn(
-                          "flex size-11 shrink-0 items-center justify-center rounded-[12px] transition-transform duration-300 group-hover:scale-105",
+                          "flex size-10 shrink-0 items-center justify-center rounded-[12px] transition-transform duration-300 group-hover:scale-105",
                           tone.well
                         )}
                       >
-                        <Icon className="size-5" aria-hidden />
+                        <Icon className="size-4" aria-hidden />
                       </span>
                       <span className="min-w-0 flex-1">
                         <span className="flex items-center gap-2">
@@ -261,19 +260,18 @@ export default function SocialLinks({
             </ul>
 
             {/* Soft CTA strip */}
-            <div className="flex w-full items-start gap-3 rounded-[14px] border border-dashed border-border/70 bg-muted/30 px-4 py-3 text-start">
-              <span className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+            <div className="flex w-full items-center gap-3 rounded-[14px] border border-dashed border-border/70 bg-muted/30 px-3.5 py-2.5 text-start">
+              <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
                 <BookOpenIcon className="size-3.5" aria-hidden />
               </span>
-              <p className="text-xs leading-relaxed text-muted-foreground">
-                New this week: portfolio, changelog, and reading-progress
-                blocks — explore the full catalog.
+              <p className="min-w-0 flex-1 truncate text-xs text-muted-foreground">
+                New: portfolio, changelog, reading-progress — explore the catalog.
               </p>
             </div>
 
             {/* Brand mark */}
             <div
-              className="flex items-center gap-2 pt-2 text-muted-foreground/50 select-none"
+              className="flex items-center gap-2 text-muted-foreground/50 select-none"
               aria-hidden
             >
               <span className="flex size-5 items-center justify-center rounded-md bg-foreground/80 text-[10px] font-bold text-background">

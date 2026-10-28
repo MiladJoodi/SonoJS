@@ -15,6 +15,7 @@ import Testimonial10 from "@/registry/blocks/marketing/testimonials/testimonials
 import Testimonial11 from "@/registry/blocks/marketing/testimonials/testimonials-11/testimonial"
 import Testimonial12 from "@/registry/blocks/marketing/testimonials/testimonials-12/testimonial"
 import Testimonial13 from "@/registry/blocks/marketing/testimonials/testimonials-13/testimonial"
+import Testimonial14 from "@/registry/blocks/marketing/testimonials/testimonials-14/testimonial"
 
 import { blocksPageMetadata } from "@/lib/seo"
 
@@ -226,6 +227,19 @@ export default function BlockTestimonialsDocsPage() {
         >
           <div className="flex w-full items-center justify-center">
             <Testimonial13 />
+          </div>
+        </BlockExample>
+        <ExampleRule />
+
+        <BlockExample
+          name="testimonials-14"
+          usage={[
+            { title: "app/page.tsx", code: usage("testimonials-14") },
+          ]}
+          previewClassName="bg-canvas p-0"
+        >
+          <div className="flex w-full items-center justify-center">
+            <Testimonial14 />
           </div>
         </BlockExample>
       </div>

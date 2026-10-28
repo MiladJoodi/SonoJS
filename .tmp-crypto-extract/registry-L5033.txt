@@ -1,0 +1,25 @@
+OLD:\n      {
+        path: "registry/blocks/dashboards-analytics/crypto-portfolio/crypto-portfolio-01/icons/btc.svg",
+        type: "registry:file",
+        target:
+          "components/blocks/dashboards-analytics/crypto-portfolio-01/icons/btc.svg",
+      },
+    ],
+  },
+  {
+    name: "kpi-cards-01",\n\nNEW:\n      {
+        path: "registry/blocks/dashboards-analytics/crypto-portfolio/crypto-portfolio-01/icons/btc.svg",
+        type: "registry:file",
+        target:
+          "components/blocks/dashboards-analytics/crypto-portfolio-01/icons/btc.svg",
+      },
+      {
+        path: "registry/blocks/dashboards-analytics/crypto-portfolio/crypto-portfolio-01/icons/eth.svg",
+        type: "registry:file",
+        target:
+          "components/blocks/dashboards-analytics/crypto-portfolio-01/icons/eth.svg",
+      },
+    ],
+  },
+  {
+    name: "kpi-cards-01",

@@ -3,6 +3,7 @@ import {
   BlocksPageHeader,
 } from "@/components/blocks"
 import HowItWorks01 from "@/registry/blocks/marketing/how-it-works/how-it-works-01/how-it-works"
+import HowItWorks02 from "@/registry/blocks/marketing/how-it-works/how-it-works-02/how-it-works"
 
 import { blocksPageMetadata } from "@/lib/seo"
 
@@ -25,7 +26,7 @@ export default function BlockHowItWorksDocsPage() {
       <BlocksPageHeader
         title="How It Works"
         pathname="/blocks/marketing/how-it-works"
-        description="Numbered step paths from setup to shipping, with a foundation CTA bar."
+        description="Editorial zig-zag steps with live artifacts, plus an interactive booking desk."
       />
 
       <div className="flex flex-col gap-8">
@@ -41,6 +42,20 @@ export default function BlockHowItWorksDocsPage() {
           previewClassName="bg-canvas p-0"
         >
           <HowItWorks01 />
+        </BlockExample>
+
+        <BlockExample
+          name="how-it-works-02"
+          usage={[
+            {
+              title: "app/page.tsx",
+              code: usage("how-it-works-02"),
+            },
+          ]}
+          previewAlign="start"
+          previewClassName="bg-canvas p-0"
+        >
+          <HowItWorks02 />
         </BlockExample>
       </div>
     </article>

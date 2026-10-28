@@ -1,0 +1,33 @@
+PATH: i:/Github/new/Sono/SonoJs/app/view/[name]/page.tsx
+OLD:
+  "crypto-portfolio-01": function CryptoPortfolio01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <CryptoPortfolio01 />
+        </div>
+      </div>
+    )
+  },
+  "kpi-cards-01": function KpiCards01View() {
+
+NEW:
+  "crypto-portfolio-01": function CryptoPortfolio01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <CryptoPortfolio01 />
+        </div>
+      </div>
+    )
+  },
+  "crypto-portfolio-02": function CryptoPortfolio02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-[#05070d] px-0 py-0">
+        <div className="w-full">
+          <CryptoPortfolio02 />
+        </div>
+      </div>
+    )
+  },
+  "kpi-cards-01": function KpiCards01View() {
