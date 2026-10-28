@@ -1,7 +1,10 @@
 import {
+  HomeBlocksSection,
   HomeChartsSection,
   HomeHero,
   HomeIconsSection,
+  HomeMcpSection,
+  HomeToolsSection,
 } from "@/components/home"
 import { JsonLd } from "@/components/seo/json-ld"
 import { siteConfig } from "@/lib/config"
@@ -27,8 +30,11 @@ export default function HomePage() {
     <>
       <JsonLd data={websiteJsonLd} />
       <HomeHero />
+      <HomeBlocksSection />
       <HomeChartsSection />
       <HomeIconsSection />
+      <HomeToolsSection />
+      <HomeMcpSection />
     </>
   )
 }

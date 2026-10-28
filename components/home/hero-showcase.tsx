@@ -163,7 +163,7 @@ export function HeroShowcase({ className }: { className?: string }) {
     <section
       aria-label="Interactive demo: describe a UI and watch an agent build it"
       className={cn(
-        "relative flex min-h-0 flex-col gap-3 p-3 transition-colors sm:min-h-[540px] sm:gap-3.5 sm:p-[18px]",
+        "relative flex min-h-0 flex-col gap-2.5 p-2.5 transition-colors sm:min-h-[540px] sm:gap-3.5 sm:p-[18px]",
         className
       )}
     >
@@ -195,7 +195,7 @@ export function HeroShowcase({ className }: { className?: string }) {
               aria-pressed={selected}
               onClick={() => selectChip(p.id)}
               className={cn(
-                "shrink-0 cursor-pointer rounded-full border px-2.5 py-1.5 text-xs transition-colors sm:px-3 sm:text-[13px]",
+                "inline-flex min-h-11 shrink-0 cursor-pointer items-center rounded-full border px-3 py-2 text-xs transition-colors sm:min-h-0 sm:px-3 sm:py-1.5 sm:text-[13px]",
                 selected
                   ? "border-primary text-foreground"
                   : "border-border/70 bg-card text-muted-foreground hover:border-muted-foreground/50 hover:text-foreground"
@@ -225,7 +225,7 @@ export function HeroShowcase({ className }: { className?: string }) {
         <button
           type="submit"
           aria-label="Build"
-          className="grid size-8 shrink-0 cursor-pointer place-items-center rounded-lg text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+          className="grid size-11 shrink-0 cursor-pointer place-items-center rounded-lg text-muted-foreground transition-colors hover:bg-muted hover:text-foreground sm:size-8"
         >
           <ArrowRightIcon className="size-3.5 icon-dir" strokeWidth={1.8} />
         </button>

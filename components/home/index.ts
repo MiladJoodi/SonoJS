@@ -1,8 +1,15 @@
 export { HomeHero } from "./home-hero"
-export { HomeChartsSection } from "./home-charts-section"
-export { HomeIconsSection } from "./home-icons-section"
-export { HomeChartStage } from "./home-chart-stage"
-export { HomeCandlestickChart } from "./home-candlestick-chart"
 export { HeroShowcase } from "./hero-showcase"
 export { PlatformBadges } from "./platform-badges"
 export { CommandBar } from "./command-bar"
+
+export {
+  HomeBlocksSection,
+  HomeChatComposer,
+  HomeChartsSection,
+  HomeChartStage,
+  HomeCandlestickChart,
+  HomeIconsSection,
+  HomeToolsSection,
+  HomeMcpSection,
+} from "./sections"

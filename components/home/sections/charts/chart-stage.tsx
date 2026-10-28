@@ -4,7 +4,7 @@ import * as React from "react"
 import { ChevronsRightIcon } from "lucide-react"
 
 import { ChartDemo } from "@/components/charts"
-import { HomeCandlestickChart } from "@/components/home/home-candlestick-chart"
+import { HomeCandlestickChart } from "./candlestick-chart"
 import { cn } from "@/lib/utils"
 import { LineBarAreaComposedChart } from "@/registry/charts/composed/line-bar-area-composed-chart"
 
@@ -95,8 +95,8 @@ export function HomeChartStage({
   return (
     <div className={cn("relative w-full min-w-0", className)}>
       {/* Same white card every time — absolute lock so swap cannot resize it */}
-      <div className="relative w-full min-w-0 overflow-visible pb-6">
-        <div className="relative h-[25rem] w-full sm:h-[27rem]">
+      <div className="relative w-full min-w-0 overflow-visible pb-4 sm:pb-6">
+        <div className="relative h-[22rem] w-full sm:h-[25rem] lg:h-[27rem]">
           <div className="absolute inset-0 overflow-hidden rounded-[12px] border border-border/70 bg-card shadow-soft sm:rounded-[14px]">
             <div
               key={kind}
@@ -112,6 +112,7 @@ export function HomeChartStage({
                     "flex h-full w-full min-w-0 flex-col",
                     "[&>div]:flex [&>div]:h-full [&>div]:min-h-0 [&>div]:flex-col",
                     "[&>div]:rounded-none [&>div]:border-0 [&>div]:bg-transparent [&>div]:shadow-none",
+                    "[&>div>*:first-child]:flex-col [&>div>*:first-child]:items-stretch [&>div>*:first-child]:gap-2 [&>div>*:first-child]:px-2.5 [&>div>*:first-child]:py-2 sm:[&>div>*:first-child]:flex-row sm:[&>div>*:first-child]:items-center sm:[&>div>*:first-child]:px-4 sm:[&>div>*:first-child]:py-3",
                     "[&>div>*:last-child]:min-h-0 [&>div>*:last-child]:flex-1",
                     "[&_[data-slot=chart]]:!h-full [&_[data-slot=chart]]:!max-h-none"
                   )}
@@ -119,7 +120,7 @@ export function HomeChartStage({
               ) : (
                 <LineBarAreaComposedChart
                   className={cn(
-                    "flex h-full max-w-none flex-col gap-3 overflow-hidden p-3 pe-12 sm:gap-3.5 sm:p-4 sm:pe-14",
+                    "flex h-full max-w-none flex-col gap-2.5 overflow-hidden p-2.5 pe-11 sm:gap-3.5 sm:p-4 sm:pe-14",
                     "[&>header]:shrink-0 [&>header]:gap-2",
                     "[&>header_h3]:text-base sm:[&>header_h3]:text-lg",
                     "[&>header>div:first-child>p]:hidden",
@@ -133,7 +134,9 @@ export function HomeChartStage({
           </div>
 
           {!isCandlestick ? (
-            <div className="absolute end-3 top-3 z-10">{nextButton}</div>
+            <div className="absolute end-2.5 top-2.5 z-10 sm:end-3 sm:top-3">
+              {nextButton}
+            </div>
           ) : null}
         </div>
       </div>

@@ -1,6 +1,6 @@
 import Link from "next/link"
 
-import { HomeChartStage } from "@/components/home/home-chart-stage"
+import { HomeChartStage } from "./chart-stage"
 import { getChartsNavStats } from "@/lib/charts-nav"
 import { RainbowButton } from "@sonojs/ui/components/rainbow-button"
 
@@ -39,8 +39,8 @@ export function HomeChartsSection() {
         }}
       />
 
-      <div className="workspace-shell relative z-10 mx-auto w-full max-w-[1180px] px-4 py-14 sm:px-7 sm:py-20 lg:py-24">
-        <div className="grid items-center gap-10 sm:gap-12 lg:grid-cols-2 lg:gap-[clamp(2.5rem,6vw,5rem)]">
+      <div className="workspace-shell relative z-10 mx-auto w-full max-w-[1180px] px-4 py-10 sm:px-7 sm:py-20 lg:py-24">
+        <div className="grid items-center gap-8 sm:gap-12 lg:grid-cols-2 lg:gap-[clamp(2.5rem,6vw,5rem)]">
           <div
             className="min-w-0 text-start"
             style={{
@@ -87,9 +87,9 @@ export function HomeChartsSection() {
               charts. Ready to build with.
             </p>
 
-            <div className="mt-7">
-              <RainbowButton asChild>
-                <Link href="/charts" className="no-underline">
+            <div className="mt-7 w-full sm:w-auto">
+              <RainbowButton asChild className="w-full sm:w-auto">
+                <Link href="/charts" className="w-full no-underline sm:w-auto">
                   Explore Charts
                 </Link>
               </RainbowButton>

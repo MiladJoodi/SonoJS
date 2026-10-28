@@ -1,25 +1,23 @@
-import Image from "next/image"
 import Link from "next/link"
 
-import { siteConfig } from "@/lib/config"
+import { HomeChatComposer } from "./chat-composer"
+import { getBlocksStats } from "@/lib/blocks-nav"
 import { RainbowButton } from "@sonojs/ui/components/rainbow-button"
 
 const FEATURES = [
-  "Developer and technology icons",
-  "Crypto and blockchain icons",
-  "UI and general-purpose icons",
-  "Easy to find and use",
+  "Model picker and prompt chips",
+  "Interactive composers for AI agents",
+  "RTL-ready and theme-aware",
+  "Copy or install with the SonoJS CLI",
 ] as const
 
-const ICONS_HREF =
-  siteConfig.navItems.find((item) => item.label === "Icons")?.href ??
-  "https://icons.sonojs.com"
+export function HomeBlocksSection() {
+  const { ready } = getBlocksStats()
 
-export function HomeIconsSection() {
   return (
     <section
       data-home-surface=""
-      aria-labelledby="home-icons-heading"
+      aria-labelledby="home-blocks-heading"
       className="relative overflow-x-clip border-t border-border/60"
     >
       <div
@@ -28,21 +26,21 @@ export function HomeIconsSection() {
         style={{
           backgroundImage: `
             radial-gradient(
-              ellipse 65% 48% at 18% 35%,
-              color-mix(in oklab, var(--primary) 14%, transparent),
-              transparent 70%
+              ellipse 70% 50% at 82% 28%,
+              color-mix(in oklab, var(--primary) 12%, transparent),
+              transparent 68%
             ),
             radial-gradient(
-              ellipse 60% 50% at 88% 65%,
-              color-mix(in oklab, var(--chart-2) 12%, transparent),
-              transparent 68%
+              ellipse 55% 45% at 10% 72%,
+              color-mix(in oklab, var(--chart-2) 14%, transparent),
+              transparent 70%
             )
           `,
         }}
       />
 
-      <div className="workspace-shell relative z-10 mx-auto w-full max-w-[1180px] px-4 py-14 sm:px-7 sm:py-20 lg:py-24">
-        <div className="grid items-center gap-10 sm:gap-12 lg:grid-cols-2 lg:gap-[clamp(2.5rem,6vw,5rem)]">
+      <div className="workspace-shell relative z-10 mx-auto w-full max-w-[1180px] px-4 py-10 sm:px-7 sm:py-20 lg:py-24">
+        <div className="grid items-center gap-8 sm:gap-12 lg:grid-cols-2 lg:gap-[clamp(2.5rem,6vw,5rem)]">
           <div
             className="min-w-0 text-start"
             style={{
@@ -50,20 +48,20 @@ export function HomeIconsSection() {
             }}
           >
             <p className="text-sm font-medium tracking-wide text-primary">
-              + ICONS
+              Blocks
             </p>
 
             <h2
-              id="home-icons-heading"
+              id="home-blocks-heading"
               className="mt-3 text-balance text-[clamp(1.75rem,5vw,2.75rem)] leading-[1.12] font-semibold tracking-[-0.035em] text-foreground"
             >
-              4000+ icons. One collection.
+              Complete interfaces. Built for AI.
             </h2>
 
             <p className="mt-4 max-w-[34em] text-[clamp(0.9375rem,3.2vw,1.0625rem)] leading-[1.6] text-muted-foreground">
-              Explore a growing collection of icons for development, crypto,
-              interfaces, and everyday use. Find the right icon, customize it,
-              and use it directly in your React projects.
+              Production-ready blocks for agent workspaces, chat composers, and
+              full product flows — so you can ship real interfaces without
+              starting from a blank canvas.
             </p>
 
             <ul className="mt-6 flex flex-col gap-2.5">
@@ -81,15 +79,17 @@ export function HomeIconsSection() {
               ))}
             </ul>
 
-            <div className="mt-7">
-              <RainbowButton asChild>
-                <Link
-                  href={ICONS_HREF}
-                  className="no-underline"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Explore Icons
+            <p className="mt-6 text-sm font-medium tabular-nums tracking-tight text-foreground">
+              <span className="text-[1.25rem] font-semibold text-primary">
+                {ready}+
+              </span>{" "}
+              blocks. Ready to build with.
+            </p>
+
+            <div className="mt-7 w-full sm:w-auto">
+              <RainbowButton asChild className="w-full sm:w-auto">
+                <Link href="/blocks" className="w-full no-underline sm:w-auto">
+                  Explore Blocks
                 </Link>
               </RainbowButton>
             </div>
@@ -101,16 +101,9 @@ export function HomeIconsSection() {
               animation: "sono-fade-up 520ms var(--motion-ease) 80ms both",
             }}
           >
-            <Image
-              src="/images/docs/icons.webp"
-              alt="SonoJS icons collection preview"
-              width={1624}
-              height={969}
-              className="h-auto w-full object-contain"
-              sizes="(max-width: 1024px) 100vw, 800px"
-              quality={100}
-              unoptimized
-            />
+            <div className="flex h-[22rem] w-full overflow-hidden sm:h-[25rem] lg:h-[27rem]">
+              <HomeChatComposer />
+            </div>
           </div>
         </div>
       </div>

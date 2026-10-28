@@ -1,0 +1,1 @@
+export { HomeMcpSection } from "./section"

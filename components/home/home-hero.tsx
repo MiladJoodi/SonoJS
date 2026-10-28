@@ -30,14 +30,14 @@ export function HomeHero() {
         }}
       />
 
-      <div className="workspace-shell relative z-10 mx-auto flex w-full max-w-[1180px] flex-1 flex-col justify-center px-4 pt-8 pb-[max(5rem,calc(2rem+env(safe-area-inset-bottom)))] sm:px-7 sm:pt-14 sm:pb-20 lg:pt-16 lg:pb-24">
-        <div className="grid items-center gap-8 sm:gap-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:gap-[clamp(2.5rem,6vw,5.5rem)]">
+      <div className="workspace-shell relative z-10 mx-auto flex w-full max-w-[1180px] flex-1 flex-col justify-center px-4 pt-6 pb-[max(3rem,calc(1.5rem+env(safe-area-inset-bottom)))] sm:px-7 sm:pt-14 sm:pb-20 lg:pt-16 lg:pb-24">
+        <div className="grid items-center gap-7 sm:gap-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:gap-[clamp(2.5rem,6vw,5.5rem)]">
           <section
             className="min-w-0 text-start"
             aria-labelledby="home-hero-heading"
           >
             <p
-              className="mb-5 text-[clamp(1.5rem,5vw,2.25rem)] font-semibold tracking-[-0.03em] text-foreground sm:mb-8"
+              className="mb-3.5 text-[clamp(1.5rem,5vw,2.25rem)] font-semibold tracking-[-0.03em] text-foreground sm:mb-8"
               style={{
                 animation:
                   "sono-fade-in var(--motion-fast) var(--motion-ease) both",
@@ -58,7 +58,7 @@ export function HomeHero() {
             </h1>
 
             <p
-              className="mt-4 max-w-[36em] text-[clamp(0.9375rem,3.5vw,1.125rem)] leading-[1.6] text-muted-foreground sm:mt-6"
+              className="mt-3.5 max-w-[36em] text-[clamp(0.9375rem,3.5vw,1.125rem)] leading-[1.6] text-muted-foreground sm:mt-6"
               style={{
                 animation: "sono-fade-up 520ms var(--motion-ease) 120ms both",
               }}
@@ -69,18 +69,21 @@ export function HomeHero() {
             </p>
 
             <div
-              className="mt-7 flex flex-wrap items-center gap-2.5 sm:mt-9 sm:gap-3"
+              className="mt-6 flex w-full flex-col items-stretch gap-2.5 sm:mt-9 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center sm:gap-3"
               style={{
                 animation: "sono-fade-up 520ms var(--motion-ease) 180ms both",
               }}
             >
-              <RainbowButton asChild>
-                <Link href="/docs" className="no-underline">
+              <RainbowButton asChild className="w-full sm:w-auto">
+                <Link href="/docs" className="w-full no-underline sm:w-auto">
                   Get Started
                 </Link>
               </RainbowButton>
-              <RainbowButton variant="white" asChild>
-                <Link href="/docs/components" className="no-underline">
+              <RainbowButton variant="white" asChild className="w-full sm:w-auto">
+                <Link
+                  href="/docs/components"
+                  className="w-full no-underline sm:w-auto"
+                >
                   Explore Components
                 </Link>
               </RainbowButton>
