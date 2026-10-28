@@ -140,7 +140,7 @@ export default function AuthorProfile({
   return (
     <section
       className={cn(
-        "w-full min-w-0 bg-background py-14 text-foreground sm:py-20",
+        "w-full min-w-0 bg-white py-14 text-foreground sm:py-20 dark:bg-background",
         className
       )}
       aria-labelledby="author-profile-07-heading"

@@ -1,5 +1,6 @@
 export { HomeHero } from "./home-hero"
 export { HomeChartsSection } from "./home-charts-section"
+export { HomeIconsSection } from "./home-icons-section"
 export { HomeChartStage } from "./home-chart-stage"
 export { HomeCandlestickChart } from "./home-candlestick-chart"
 export { HeroShowcase } from "./hero-showcase"

@@ -1,15 +1,14 @@
 "use client"
 
 import * as React from "react"
-import { ArrowLeftRightIcon } from "lucide-react"
+import { ChevronsRightIcon } from "lucide-react"
 
 import { ChartDemo } from "@/components/charts"
 import { HomeCandlestickChart } from "@/components/home/home-candlestick-chart"
 import { cn } from "@/lib/utils"
+import { LineBarAreaComposedChart } from "@/registry/charts/composed/line-bar-area-composed-chart"
 
 type HomeChartKind = "candlestick" | "composed"
-
-const COMPOSED_ID = "line-bar-area-composed-chart"
 
 type HomeChartStageProps = {
   /** When set, mounts that registry demo only (no swap). */
@@ -78,48 +77,64 @@ export function HomeChartStage({
     ? "Show Line Bar Area Composed Chart"
     : "Show Bitcoin candlestick"
 
+  const nextButton = (
+    <button
+      type="button"
+      onClick={swap}
+      aria-label={swapLabel}
+      title={swapLabel}
+      className={cn(
+        "grid size-9 shrink-0 cursor-pointer place-items-center rounded-full border border-border/70 bg-card text-foreground shadow-sm transition-colors",
+        "hover:border-primary/50 hover:bg-muted/60"
+      )}
+    >
+      <ChevronsRightIcon className="size-4 icon-dir" strokeWidth={2} />
+    </button>
+  )
+
   return (
     <div className={cn("relative w-full min-w-0", className)}>
-      <div className="mb-2 flex items-center justify-end gap-2 px-1">
-        <p className="me-auto text-xs font-medium text-muted-foreground">
-          {isCandlestick ? "Candlestick" : "Line · Bar · Area"}
-        </p>
-        <button
-          type="button"
-          onClick={swap}
-          aria-label={swapLabel}
-          title={swapLabel}
-          className={cn(
-            "inline-flex h-9 cursor-pointer items-center gap-1.5 rounded-md border border-border/70 bg-card px-2.5 text-xs font-medium text-foreground shadow-sm transition-colors",
-            "hover:border-primary/50 hover:bg-muted/60"
-          )}
-        >
-          <ArrowLeftRightIcon className="size-3.5" strokeWidth={2} />
-          Switch chart
-        </button>
-      </div>
-
-      <div className="relative w-full min-w-0 px-1 pb-8 pt-1">
-        <div
-          className={cn(
-            "flex h-[31rem] w-full flex-col overflow-hidden rounded-[12px] border border-border/70 bg-card shadow-soft sm:h-[33rem]"
-          )}
-        >
-          <div
-            key={kind}
-            className="flex min-h-0 flex-1 items-start justify-center overflow-y-auto p-3 sm:p-4"
-            style={{
-              animation: "sono-fade-up 420ms var(--motion-ease) both",
-            }}
-          >
-            {isCandlestick ? (
-              <HomeCandlestickChart className="w-full min-w-0 [&>div]:rounded-none [&>div]:border-0 [&>div]:bg-transparent [&>div]:shadow-none" />
-            ) : (
-              <div className="w-full min-w-0 [&_[class*='max-w']]:max-w-none">
-                <ChartDemo id={COMPOSED_ID} />
-              </div>
-            )}
+      {/* Same white card every time — absolute lock so swap cannot resize it */}
+      <div className="relative w-full min-w-0 overflow-visible pb-6">
+        <div className="relative h-[25rem] w-full sm:h-[27rem]">
+          <div className="absolute inset-0 overflow-hidden rounded-[12px] border border-border/70 bg-card shadow-soft sm:rounded-[14px]">
+            <div
+              key={kind}
+              className="h-full w-full"
+              style={{
+                animation: "sono-fade-up 420ms var(--motion-ease) both",
+              }}
+            >
+              {isCandlestick ? (
+                <HomeCandlestickChart
+                  trailing={nextButton}
+                  className={cn(
+                    "flex h-full w-full min-w-0 flex-col",
+                    "[&>div]:flex [&>div]:h-full [&>div]:min-h-0 [&>div]:flex-col",
+                    "[&>div]:rounded-none [&>div]:border-0 [&>div]:bg-transparent [&>div]:shadow-none",
+                    "[&>div>*:last-child]:min-h-0 [&>div>*:last-child]:flex-1",
+                    "[&_[data-slot=chart]]:!h-full [&_[data-slot=chart]]:!max-h-none"
+                  )}
+                />
+              ) : (
+                <LineBarAreaComposedChart
+                  className={cn(
+                    "flex h-full max-w-none flex-col gap-3 overflow-hidden p-3 pe-12 sm:gap-3.5 sm:p-4 sm:pe-14",
+                    "[&>header]:shrink-0 [&>header]:gap-2",
+                    "[&>header_h3]:text-base sm:[&>header_h3]:text-lg",
+                    "[&>header>div:first-child>p]:hidden",
+                    "[&_[role=img]]:flex [&_[role=img]]:min-h-0 [&_[role=img]]:flex-1 [&_[role=img]]:flex-col",
+                    "[&_[data-slot=chart]]:!h-full [&_[data-slot=chart]]:!max-h-none [&_[data-slot=chart]]:!max-w-none",
+                    "[&>div.flex.flex-wrap]:shrink-0"
+                  )}
+                />
+              )}
+            </div>
           </div>
+
+          {!isCandlestick ? (
+            <div className="absolute end-3 top-3 z-10">{nextButton}</div>
+          ) : null}
         </div>
       </div>
     </div>

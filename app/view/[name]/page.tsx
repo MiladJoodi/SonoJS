@@ -1274,7 +1274,7 @@ const views: Record<string, ComponentType> = {
   },
   "author-profile-01": function AuthorProfile01View() {
     return (
-      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
         <div className="w-full">
           <AuthorProfile01 />
         </div>
@@ -1283,7 +1283,7 @@ const views: Record<string, ComponentType> = {
   },
   "author-profile-02": function AuthorProfile02View() {
     return (
-      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
         <div className="w-full">
           <AuthorProfile02 />
         </div>
@@ -1292,7 +1292,7 @@ const views: Record<string, ComponentType> = {
   },
   "author-profile-03": function AuthorProfile03View() {
     return (
-      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
         <div className="w-full">
           <AuthorProfile03 />
         </div>
@@ -1301,7 +1301,7 @@ const views: Record<string, ComponentType> = {
   },
   "author-profile-04": function AuthorProfile04View() {
     return (
-      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
         <div className="w-full">
           <AuthorProfile04 />
         </div>
@@ -1310,7 +1310,7 @@ const views: Record<string, ComponentType> = {
   },
   "author-profile-05": function AuthorProfile05View() {
     return (
-      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
         <div className="w-full">
           <AuthorProfile05 />
         </div>
@@ -1319,7 +1319,7 @@ const views: Record<string, ComponentType> = {
   },
   "author-profile-06": function AuthorProfile06View() {
     return (
-      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
         <div className="w-full">
           <AuthorProfile06 />
         </div>
@@ -1337,7 +1337,7 @@ const views: Record<string, ComponentType> = {
   },
   "author-profile-08": function AuthorProfile08View() {
     return (
-      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
         <div className="w-full">
           <AuthorProfile08 />
         </div>
@@ -1346,7 +1346,7 @@ const views: Record<string, ComponentType> = {
   },
   "author-profile-09": function AuthorProfile09View() {
     return (
-      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
         <div className="w-full">
           <AuthorProfile09 />
         </div>
@@ -1355,7 +1355,7 @@ const views: Record<string, ComponentType> = {
   },
   "author-profile-10": function AuthorProfile10View() {
     return (
-      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
         <div className="w-full">
           <AuthorProfile10 />
         </div>

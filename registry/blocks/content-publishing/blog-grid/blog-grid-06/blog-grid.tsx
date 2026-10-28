@@ -328,7 +328,7 @@ export default function BlogGrid({
   return (
     <section
       className={cn(
-        "w-full min-w-0 bg-background py-10 text-foreground sm:py-14",
+        "w-full min-w-0 bg-white py-10 dark:bg-background text-foreground sm:py-14",
         className
       )}
       aria-labelledby="blog-grid-06-heading"

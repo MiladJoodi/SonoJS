@@ -255,9 +255,14 @@ function BtcTooltip({ active, payload, timeframe, locale }: BtcTooltipProps) {
 
 export type HomeCandlestickChartProps = {
   className?: string
+  /** Renders after the timeframe tabs (e.g. next-chart control). */
+  trailing?: React.ReactNode
 }
 
-export function HomeCandlestickChart({ className }: HomeCandlestickChartProps) {
+export function HomeCandlestickChart({
+  className,
+  trailing,
+}: HomeCandlestickChartProps) {
   const { dir, ref } = useChartDir()
   const plotRtl = dir === "rtl"
   const narrow = useNarrowViewport()
@@ -425,28 +430,26 @@ export function HomeCandlestickChart({ className }: HomeCandlestickChartProps) {
       <div className="overflow-hidden rounded-[12px] border border-border/70 bg-card shadow-soft sm:rounded-[14px]">
         <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2.5 border-b border-border/50 px-3 py-2.5 sm:px-4 sm:py-3">
           <div className="min-w-0">
-            <div className="flex flex-wrap items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2.5">
               <span
-                className="grid size-7 shrink-0 place-items-center rounded-full"
+                className="grid size-10 shrink-0 place-items-center rounded-full"
                 style={{
-                  background: "color-mix(in oklab, #f7931a 18%, transparent)",
+                  background: "color-mix(in oklab, #f7931a 20%, transparent)",
                   color: "#f7931a",
                 }}
                 aria-hidden
               >
-                <Bitcoin className="size-3.5" strokeWidth={2.2} />
+                <Bitcoin className="size-5" strokeWidth={2} />
               </span>
-              <div className="min-w-0">
-                <p className="text-sm font-semibold leading-tight tracking-tight text-foreground">
-                  Bitcoin
-                  <span className="ms-1.5 font-medium text-muted-foreground">
-                    BTC/USD
-                  </span>
-                </p>
-              </div>
+              <p className="min-w-0 text-sm font-semibold leading-none tracking-tight text-foreground sm:text-[15px]">
+                Bitcoin
+                <span className="ms-1.5 font-medium text-muted-foreground">
+                  BTC/USD
+                </span>
+              </p>
               <ChangeBadge value={rangePct} good={rangeUp} locale={locale} />
             </div>
-            <div className="mt-1.5 flex flex-wrap items-baseline gap-2 ps-0 sm:ps-9">
+            <div className="mt-2 flex flex-wrap items-baseline gap-2 ps-[3.25rem]">
               <p className="text-[1.375rem] font-semibold leading-none tracking-tight text-foreground sm:text-2xl">
                 {formatCandlePrice(total, locale)}
               </p>
@@ -459,31 +462,34 @@ export function HomeCandlestickChart({ className }: HomeCandlestickChartProps) {
             </div>
           </div>
 
-          <div
-            role="tablist"
-            aria-label="Chart timeframe"
-            className="flex shrink-0 items-center gap-0.5"
-          >
-            {TIMEFRAMES.map((tf) => {
-              const selected = tf === timeframe
-              return (
-                <button
-                  key={tf}
-                  type="button"
-                  role="tab"
-                  aria-selected={selected}
-                  onClick={() => setTimeframe(tf)}
-                  className={cn(
-                    "h-8 min-w-8 cursor-pointer rounded-md border px-2 text-xs font-medium tabular-nums transition-colors",
-                    selected
-                      ? "border-primary text-foreground"
-                      : "border-transparent text-muted-foreground hover:bg-muted/70 hover:text-foreground"
-                  )}
-                >
-                  {tf}
-                </button>
-              )
-            })}
+          <div className="flex shrink-0 items-center gap-2">
+            <div
+              role="tablist"
+              aria-label="Chart timeframe"
+              className="flex items-center gap-0.5"
+            >
+              {TIMEFRAMES.map((tf) => {
+                const selected = tf === timeframe
+                return (
+                  <button
+                    key={tf}
+                    type="button"
+                    role="tab"
+                    aria-selected={selected}
+                    onClick={() => setTimeframe(tf)}
+                    className={cn(
+                      "h-8 min-w-8 cursor-pointer rounded-md border px-2 text-xs font-medium tabular-nums transition-colors",
+                      selected
+                        ? "border-primary text-foreground"
+                        : "border-transparent text-muted-foreground hover:bg-muted/70 hover:text-foreground"
+                    )}
+                  >
+                    {tf}
+                  </button>
+                )
+              })}
+            </div>
+            {trailing}
           </div>
         </div>
 

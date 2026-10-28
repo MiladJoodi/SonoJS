@@ -74,68 +74,12 @@ const ALL_POSTS: Post[] = [
     index: "04",
   },
   {
-    title: "Testing 60+ Components: Our Accessibility Audit Strategy",
-    category: "engineering",
-    author: "Sarah Chen",
-    date: "Mar 8, 2026",
-    readTime: "7 min",
-    index: "05",
-  },
-  {
-    title: "oklch Color Spaces Explained for UI Engineers",
-    category: "design",
-    author: "Marcus Kim",
-    date: "Mar 5, 2026",
-    readTime: "9 min",
-    index: "06",
-  },
-  {
     title: "SonoJS v1.2 — Calendar and Tree Components",
     category: "release",
     author: "SonoJS Team",
     date: "Mar 1, 2026",
     readTime: "3 min",
-    index: "07",
-  },
-  {
-    title: "Composable vs Monolithic Component APIs",
-    category: "opinion",
-    author: "Alex Rivera",
-    date: "Feb 26, 2026",
-    readTime: "6 min",
-    index: "08",
-  },
-  {
-    title: "Building a Stepper Component from Scratch",
-    category: "tutorial",
-    author: "Sarah Chen",
-    date: "Feb 22, 2026",
-    readTime: "10 min",
-    index: "09",
-  },
-  {
-    title: "How We Generate Tailwind Safelisted Classes",
-    category: "engineering",
-    author: "Marcus Kim",
-    date: "Feb 18, 2026",
-    readTime: "8 min",
-    index: "10",
-  },
-  {
-    title: "Design Token Architecture for Tailwind v4",
-    category: "design",
-    author: "Alex Rivera",
-    date: "Feb 14, 2026",
-    readTime: "7 min",
-    index: "11",
-  },
-  {
-    title: "SonoJS v1.1 — Data Table and Timeline",
-    category: "release",
-    author: "SonoJS Team",
-    date: "Feb 10, 2026",
-    readTime: "3 min",
-    index: "12",
+    index: "05",
   },
 ]
 
@@ -154,7 +98,7 @@ export default function BlogGrid({
   return (
     <section
       className={cn(
-        "w-full min-w-0 bg-background py-14 text-foreground sm:py-20",
+        "w-full min-w-0 bg-white py-14 dark:bg-background text-foreground sm:py-20",
         className
       )}
       aria-labelledby="blog-grid-07-heading"

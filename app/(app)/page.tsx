@@ -1,4 +1,8 @@
-import { HomeChartsSection, HomeHero } from "@/components/home"
+import {
+  HomeChartsSection,
+  HomeHero,
+  HomeIconsSection,
+} from "@/components/home"
 import { JsonLd } from "@/components/seo/json-ld"
 import { siteConfig } from "@/lib/config"
 import { absoluteUrl, pageMetadata } from "@/lib/seo"
@@ -24,6 +28,7 @@ export default function HomePage() {
       <JsonLd data={websiteJsonLd} />
       <HomeHero />
       <HomeChartsSection />
+      <HomeIconsSection />
     </>
   )
 }

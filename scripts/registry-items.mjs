@@ -6131,10 +6131,10 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "reading-progress-05",
     description:
-      "Minimal reading progress — hairline top bar and floating percent pill.",
+      "Essay spine reader — end-edge vertical ticks, chapter HUD, and quiet typography (no top bar or bottom dock).",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
-    registryDependencies: ["avatar", "badge"],
+    registryDependencies: [],
     files: [
       {
         path: "registry/blocks/content-publishing/reading-progress/reading-progress-05/reading-progress.tsx",

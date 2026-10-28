@@ -50,7 +50,7 @@ export default function BlockReadingProgressDocsPage() {
       <BlocksPageHeader
         title="Reading Progress"
         pathname="/blocks/content-publishing/reading-progress"
-        description="Five reading chrome layouts — sticky bar, circular FAB, chapter sync, bottom dock, and minimal percent pill."
+        description="Five reading chrome layouts — sticky bar, circular FAB, chapter sync, bottom dock, and end-edge essay spine."
       />
 
       <div className="flex flex-col gap-8">

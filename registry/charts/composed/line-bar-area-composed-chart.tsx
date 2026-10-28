@@ -17,13 +17,13 @@ import { cn } from "@/lib/utils"
 import {
   ChartContainer,
   ChartTooltip,
-  ChartTooltipContent,
   type ChartConfig,
 } from "@/components/ui/chart"
 
 import {
   CHART_SERIES_A,
   CHART_SERIES_B,
+  chartAreaGradientStops,
   chartBarContainerClassName,
 } from "../_lib/chart-styles"
 import { useChartDir } from "../_lib/use-chart-dir"
@@ -61,12 +61,12 @@ const AXIS_TICK_FILL =
   "color-mix(in oklab, var(--foreground) 58%, transparent)"
 
 const DEMO_DATA: LineBarAreaComposedPoint[] = [
-  { month: "2026-01-01", orders: 124, online: 82, store: 59 },
-  { month: "2026-02-01", orders: 131, online: 91, store: 64 },
-  { month: "2026-03-01", orders: 118, online: 104, store: 71 },
-  { month: "2026-04-01", orders: 146, online: 112, store: 78 },
-  { month: "2026-05-01", orders: 152, online: 108, store: 82 },
-  { month: "2026-06-01", orders: 160, online: 124, store: 76 },
+  { month: "2026-01-01", orders: 128, online: 78, store: 54 },
+  { month: "2026-02-01", orders: 136, online: 92, store: 61 },
+  { month: "2026-03-01", orders: 122, online: 108, store: 70 },
+  { month: "2026-04-01", orders: 148, online: 118, store: 79 },
+  { month: "2026-05-01", orders: 156, online: 111, store: 86 },
+  { month: "2026-06-01", orders: 164, online: 126, store: 81 },
 ]
 
 const chartConfig = {
@@ -83,6 +83,8 @@ const chartConfig = {
     color: CHART_SERIES_C,
   },
 } satisfies ChartConfig
+
+const SERIES_KEYS = ["orders", "online", "store"] as const
 
 const COMPOSED_TOOLTIP_CURSOR = {
   fill: "color-mix(in oklab, var(--foreground) 5%, transparent)",
@@ -151,9 +153,55 @@ function formatCompact(value: number, locale: string) {
   }).format(value)
 }
 
+type ComposedTooltipProps = {
+  active?: boolean
+  payload?: Array<{
+    dataKey?: string | number
+    name?: string
+    value?: number
+    color?: string
+    payload?: LineBarAreaComposedPoint
+  }>
+  locale: string
+}
+
+function ComposedTooltip({ active, payload, locale }: ComposedTooltipProps) {
+  if (!active || !payload?.length) return null
+  const row = payload[0]?.payload
+  if (!row) return null
+
+  return (
+    <div className="pointer-events-none min-w-[10.5rem] rounded-[12px] border border-border/70 bg-card px-3 py-2.5 shadow-soft">
+      <p className="text-[11px] font-medium text-muted-foreground">
+        {formatFullMonthYear(row.month, locale)}
+      </p>
+      <div className="mt-2 flex flex-col gap-1.5">
+        {SERIES_KEYS.map((key) => (
+          <div
+            key={key}
+            className="flex items-center justify-between gap-5"
+          >
+            <span className="flex items-center gap-2 text-[12px] text-muted-foreground">
+              <span
+                className="size-2 shrink-0 rounded-full"
+                style={{ backgroundColor: chartConfig[key].color }}
+                aria-hidden
+              />
+              {chartConfig[key].label}
+            </span>
+            <span className="text-[12px] font-medium tabular-nums text-foreground">
+              {formatNumber(row[key], locale)}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 function LineBarAreaComposedChart({
   title = "Orders, Online & Store – H1 2026",
-  subtitle = "Area + bar + line composed series.",
+  subtitle = "Orders area, online bars, and store trend in one view.",
   data = DEMO_DATA,
   className,
   plotDir,
@@ -167,6 +215,8 @@ function LineBarAreaComposedChart({
   const liveRef = React.useRef<HTMLParagraphElement>(null)
   const scrubbingRef = React.useRef(false)
   const locale = "en"
+  const uid = React.useId().replace(/:/g, "")
+  const gradOrders = `composedOrdersGrad-${uid}`
 
   const lastIndex = Math.max(0, data.length - 1)
   const [activeIndex, setActiveIndex] = React.useState(lastIndex)
@@ -337,15 +387,16 @@ function LineBarAreaComposedChart({
       const { cx, cy, index = 0 } = props
       if (cx == null || cy == null) return null
       const dimmed = liveScrubbing && index !== liveIndex
+      const active = liveScrubbing && index === liveIndex
       return (
         <circle
           cx={cx}
           cy={cy}
-          r={3.5}
+          r={active ? 5 : 3.5}
           fill="var(--color-store)"
           stroke="var(--background)"
           strokeWidth={2}
-          opacity={dimmed ? 0.4 : 1}
+          opacity={dimmed ? 0.35 : 1}
         />
       )
     },
@@ -398,7 +449,18 @@ function LineBarAreaComposedChart({
     return Math.ceil(raw / step) * step
   }, [data])
 
-  const seriesOpacity = liveScrubbing ? 0.85 : 1
+  const seriesOpacity = liveScrubbing ? 0.88 : 1
+  const areaStops = chartAreaGradientStops("var(--color-orders)", {
+    startOpacity: liveScrubbing ? 0.14 : 0.22,
+    endOpacity: 0,
+  })
+
+  const tooltipContent = React.useCallback(
+    (props: ComposedTooltipProps) => (
+      <ComposedTooltip {...props} locale={locale} />
+    ),
+    [locale]
+  )
 
   const ariaLabel = React.useMemo(() => {
     if (!active) return title
@@ -417,7 +479,7 @@ function LineBarAreaComposedChart({
         className
       )}
     >
-      <header className="flex flex-col gap-4">
+      <header className="flex flex-col gap-3.5 sm:gap-4">
         <div className="space-y-1">
           <h3 className="text-xl font-bold tracking-tight text-foreground sm:text-2xl">
             {title}
@@ -499,6 +561,24 @@ function LineBarAreaComposedChart({
             onMouseMove={scrub ? onChartMouseMove : undefined}
             onMouseLeave={scrub ? onChartMouseLeave : undefined}
           >
+            <defs>
+              <linearGradient
+                id={gradOrders}
+                x1="0"
+                y1="0"
+                x2="0"
+                y2="1"
+              >
+                {areaStops.map((s) => (
+                  <stop
+                    key={s.offset}
+                    offset={s.offset}
+                    stopColor={s.stopColor}
+                    stopOpacity={s.stopOpacity}
+                  />
+                ))}
+              </linearGradient>
+            </defs>
             <CartesianGrid
               vertical={false}
               strokeDasharray="4 4"
@@ -540,17 +620,15 @@ function LineBarAreaComposedChart({
             />
             <ChartTooltip
               cursor={COMPOSED_TOOLTIP_CURSOR}
-              content={
-                <ChartTooltipContent className="rounded-xl border-border/60 shadow-sm" />
-              }
+              content={tooltipContent}
             />
             <Area
               type="monotone"
               dataKey="orders"
               name="orders"
-              fill="var(--color-orders)"
+              fill={`url(#${gradOrders})`}
               stroke="var(--color-orders)"
-              fillOpacity={liveScrubbing ? 0.12 : 0.18}
+              fillOpacity={1}
               strokeOpacity={seriesOpacity}
               strokeWidth={1.5}
               dot={false}
@@ -573,7 +651,7 @@ function LineBarAreaComposedChart({
                 <Cell
                   key={row.month}
                   fillOpacity={
-                    liveScrubbing && index !== liveIndex ? 0.4 : 1
+                    liveScrubbing && index !== liveIndex ? 0.35 : 1
                   }
                 />
               ))}
@@ -583,11 +661,11 @@ function LineBarAreaComposedChart({
               dataKey="store"
               name="store"
               stroke="var(--color-store)"
-              strokeWidth={2}
+              strokeWidth={2.25}
               strokeOpacity={seriesOpacity}
               dot={storeDot}
               activeDot={{
-                r: 5,
+                r: 6,
                 strokeWidth: 2,
                 stroke: "var(--background)",
                 fill: "var(--color-store)",
@@ -608,7 +686,7 @@ function LineBarAreaComposedChart({
         <div className="flex items-center gap-2">
           <span
             className="size-2 shrink-0 rounded-full"
-            style={{ backgroundColor: "var(--chart-1)" }}
+            style={{ backgroundColor: chartConfig.orders.color }}
             aria-hidden
           />
           <span className="text-foreground">{chartConfig.orders.label}</span>
@@ -616,7 +694,7 @@ function LineBarAreaComposedChart({
         <div className="flex items-center gap-2">
           <span
             className="size-2 shrink-0 rounded-full"
-            style={{ backgroundColor: "var(--chart-2)" }}
+            style={{ backgroundColor: chartConfig.online.color }}
             aria-hidden
           />
           <span className="text-foreground">{chartConfig.online.label}</span>
@@ -624,7 +702,7 @@ function LineBarAreaComposedChart({
         <div className="flex items-center gap-2">
           <span
             className="size-2 shrink-0 rounded-full"
-            style={{ backgroundColor: "var(--chart-3)" }}
+            style={{ backgroundColor: chartConfig.store.color }}
             aria-hidden
           />
           <span className="text-foreground">{chartConfig.store.label}</span>
@@ -661,7 +739,9 @@ function LineBarAreaComposedChart({
 }
 
 /** Docs / gallery default export. */
-export default function LineBarAreaComposedChartDemo(props: LineBarAreaComposedChartProps) {
+export default function LineBarAreaComposedChartDemo(
+  props: LineBarAreaComposedChartProps
+) {
   return <LineBarAreaComposedChart {...props} />
 }
 

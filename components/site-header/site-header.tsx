@@ -24,11 +24,7 @@ export function SiteHeader({
       data-site-header=""
       data-home-header={isHome ? "" : undefined}
       className={cn(
-        "sticky top-0 z-50 w-full transition-transform duration-300 ease-out [[data-header-hidden]_&]:pointer-events-none [[data-header-hidden]_&]:-translate-y-full",
-        isHome
-          ? // Home desktop stays clear over the hero; mobile needs a solid bar so content doesn’t show through.
-            "border-b border-border/70 bg-background/85 backdrop-blur-md supports-backdrop-filter:bg-background/70 lg:border-transparent lg:bg-transparent lg:backdrop-blur-none lg:supports-backdrop-filter:bg-transparent"
-          : "border-b border-border/70 bg-background/85 backdrop-blur-md supports-backdrop-filter:bg-background/70"
+        "sticky top-0 z-50 w-full border-b border-white/20 bg-white/40 backdrop-blur-2xl backdrop-saturate-150 transition-[background-color,backdrop-filter,border-color,transform] duration-300 ease-out supports-backdrop-filter:bg-white/25 dark:border-white/10 dark:bg-background/40 dark:supports-backdrop-filter:bg-background/25 [[data-header-hidden]_&]:pointer-events-none [[data-header-hidden]_&]:-translate-y-full"
       )}
     >
       <div className="container-wrapper">

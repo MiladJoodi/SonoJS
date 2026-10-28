@@ -28,7 +28,7 @@ export default function Page() {
   return <AuthorProfile />
 }`
 
-const WHITE_STAGE = "bg-white p-0 dark:bg-background"
+const CANVAS_STAGE = "bg-canvas p-0"
 
 function ExampleRule() {
   return (
@@ -57,7 +57,7 @@ export default function BlockAuthorProfileDocsPage() {
           name="author-profile-01"
           usage={[{ title: "app/page.tsx", code: usage("author-profile-01") }]}
           previewAlign="start"
-          previewClassName={WHITE_STAGE}
+          previewClassName={CANVAS_STAGE}
         >
           <AuthorProfile01 />
         </BlockExample>
@@ -68,7 +68,7 @@ export default function BlockAuthorProfileDocsPage() {
           name="author-profile-02"
           usage={[{ title: "app/page.tsx", code: usage("author-profile-02") }]}
           previewAlign="start"
-          previewClassName={WHITE_STAGE}
+          previewClassName={CANVAS_STAGE}
         >
           <AuthorProfile02 />
         </BlockExample>
@@ -79,7 +79,7 @@ export default function BlockAuthorProfileDocsPage() {
           name="author-profile-03"
           usage={[{ title: "app/page.tsx", code: usage("author-profile-03") }]}
           previewAlign="start"
-          previewClassName={WHITE_STAGE}
+          previewClassName={CANVAS_STAGE}
         >
           <AuthorProfile03 />
         </BlockExample>
@@ -90,7 +90,7 @@ export default function BlockAuthorProfileDocsPage() {
           name="author-profile-04"
           usage={[{ title: "app/page.tsx", code: usage("author-profile-04") }]}
           previewAlign="start"
-          previewClassName={WHITE_STAGE}
+          previewClassName={CANVAS_STAGE}
         >
           <AuthorProfile04 />
         </BlockExample>
@@ -101,7 +101,7 @@ export default function BlockAuthorProfileDocsPage() {
           name="author-profile-05"
           usage={[{ title: "app/page.tsx", code: usage("author-profile-05") }]}
           previewAlign="start"
-          previewClassName={WHITE_STAGE}
+          previewClassName={CANVAS_STAGE}
         >
           <AuthorProfile05 />
         </BlockExample>
@@ -112,7 +112,7 @@ export default function BlockAuthorProfileDocsPage() {
           name="author-profile-06"
           usage={[{ title: "app/page.tsx", code: usage("author-profile-06") }]}
           previewAlign="start"
-          previewClassName={WHITE_STAGE}
+          previewClassName={CANVAS_STAGE}
         >
           <AuthorProfile06 />
         </BlockExample>
@@ -123,7 +123,7 @@ export default function BlockAuthorProfileDocsPage() {
           name="author-profile-07"
           usage={[{ title: "app/page.tsx", code: usage("author-profile-07") }]}
           previewAlign="start"
-          previewClassName={WHITE_STAGE}
+          previewClassName={CANVAS_STAGE}
         >
           <AuthorProfile07 />
         </BlockExample>
@@ -134,7 +134,7 @@ export default function BlockAuthorProfileDocsPage() {
           name="author-profile-08"
           usage={[{ title: "app/page.tsx", code: usage("author-profile-08") }]}
           previewAlign="start"
-          previewClassName={WHITE_STAGE}
+          previewClassName={CANVAS_STAGE}
         >
           <AuthorProfile08 />
         </BlockExample>
@@ -145,7 +145,7 @@ export default function BlockAuthorProfileDocsPage() {
           name="author-profile-09"
           usage={[{ title: "app/page.tsx", code: usage("author-profile-09") }]}
           previewAlign="start"
-          previewClassName={WHITE_STAGE}
+          previewClassName={CANVAS_STAGE}
         >
           <AuthorProfile09 />
         </BlockExample>
@@ -156,7 +156,7 @@ export default function BlockAuthorProfileDocsPage() {
           name="author-profile-10"
           usage={[{ title: "app/page.tsx", code: usage("author-profile-10") }]}
           previewAlign="start"
-          previewClassName={WHITE_STAGE}
+          previewClassName={CANVAS_STAGE}
         >
           <AuthorProfile10 />
         </BlockExample>

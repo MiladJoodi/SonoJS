@@ -191,8 +191,8 @@ function AuthorCard({ author }: { author: Author }) {
   const [following, setFollowing] = React.useState(false)
 
   return (
-    <article className="group flex flex-col overflow-hidden rounded-[12px] border border-border/70 bg-card shadow-soft transition-[border-color,box-shadow] hover:border-primary/30">
-      <div className="relative aspect-[16/7] overflow-hidden bg-muted">
+    <article className="group flex flex-col rounded-[12px] border border-border/70 bg-card shadow-soft transition-[border-color,box-shadow] hover:border-primary/30">
+      <div className="relative aspect-[16/7] overflow-hidden rounded-t-[12px] bg-muted">
         <img
           src={author.portrait}
           alt=""
@@ -202,9 +202,9 @@ function AuthorCard({ author }: { author: Author }) {
         <div className="absolute inset-0 bg-gradient-to-t from-card via-card/40 to-transparent" />
       </div>
 
-      <div className="-mt-10 flex flex-1 flex-col px-5 pb-5">
+      <div className="relative z-10 -mt-10 flex flex-1 flex-col px-5 pb-5">
         <div className="mb-4 flex items-end justify-between gap-3">
-          <div className="relative">
+          <div className="relative shrink-0">
             <Avatar className="size-16 ring-4 ring-card">
               <AvatarImage src={author.portrait} alt="" />
               <AvatarFallback className="text-base">
@@ -223,7 +223,7 @@ function AuthorCard({ author }: { author: Author }) {
             size="sm"
             variant={following ? "outline" : "default"}
             aria-pressed={following}
-            className="cursor-pointer"
+            className="relative z-10 mb-0.5 shrink-0 cursor-pointer"
             onClick={() => setFollowing((f) => !f)}
           >
             <UsersIcon className="size-3.5" aria-hidden />
