@@ -77,22 +77,45 @@ export function HeroShowcase({ className }: { className?: string }) {
   const [steps, setSteps] = React.useState<StepState[]>([])
   const [showCanvas, setShowCanvas] = React.useState(false)
   const [previewKey, setPreviewKey] = React.useState(0)
+  /** Typing + entrance only on first load; later swaps just change content. */
+  const [motionOn, setMotionOn] = React.useState(true)
 
   const runRef = React.useRef(0)
+  const introDoneRef = React.useRef(false)
+
+  const finishSteps = React.useCallback((file: string) => {
+    return [
+      { label: "Reading your project", on: true, done: true },
+      { label: "Composing with SonoJS components", on: true, done: true },
+      { label: `Wrote ${file}`, on: true, done: true },
+    ] satisfies StepState[]
+  }, [])
 
   const build = React.useCallback(
-    async (text: string, id: ShowcaseDemoId, fast: boolean) => {
+    async (text: string, id: ShowcaseDemoId, mode: "intro" | "swap") => {
       const run = ++runRef.current
+      const prompt = PROMPTS.find((p) => p.id === id) ?? PROMPTS[0]!
+      const reduced = prefersReducedMotion()
+
+      // After first play: only swap content — no typewriter / step / entrance.
+      if (mode === "swap" || introDoneRef.current) {
+        introDoneRef.current = true
+        setMotionOn(false)
+        setActive(id)
+        setQuery(text)
+        setSteps(finishSteps(prompt.file))
+        setShowCanvas(true)
+        setPreviewKey((k) => k + 1)
+        return
+      }
+
+      setMotionOn(true)
       setActive(id)
       setShowCanvas(false)
       setSteps([])
       setPreviewKey((k) => k + 1)
 
-      const prompt = PROMPTS.find((p) => p.id === id) ?? PROMPTS[0]!
-      const reduced = prefersReducedMotion()
-      const skipType = fast || reduced
-
-      if (skipType) {
+      if (reduced) {
         setQuery(text)
       } else {
         setQuery("")
@@ -111,7 +134,7 @@ export function HeroShowcase({ className }: { className?: string }) {
         "Composing with SonoJS components",
         `Wrote ${prompt.file}`,
       ]
-      const stepDelay = skipType ? 260 : 420
+      const stepDelay = reduced ? 260 : 420
 
       for (let j = 0; j < labels.length; j++) {
         if (run !== runRef.current) return
@@ -134,13 +157,14 @@ export function HeroShowcase({ className }: { className?: string }) {
 
       if (run !== runRef.current) return
       setShowCanvas(true)
+      introDoneRef.current = true
     },
-    []
+    [finishSteps]
   )
 
   React.useEffect(() => {
     const first = PROMPTS[0]!
-    void build(first.text, first.id, prefersReducedMotion())
+    void build(first.text, first.id, "intro")
     return () => {
       runRef.current += 1
     }
@@ -149,14 +173,14 @@ export function HeroShowcase({ className }: { className?: string }) {
   function selectChip(id: ShowcaseDemoId) {
     if (id === active) return
     const prompt = PROMPTS.find((p) => p.id === id)!
-    void build(prompt.text, id, false)
+    void build(prompt.text, id, "swap")
   }
 
   function onSubmit(e: React.FormEvent) {
     e.preventDefault()
     const v = query.trim()
     if (!v) return
-    void build(v, pickPrompt(v), true)
+    void build(v, pickPrompt(v), "swap")
   }
 
   return (
@@ -274,7 +298,12 @@ export function HeroShowcase({ className }: { className?: string }) {
       </ol>
 
       <div className="relative z-10 grid w-full min-w-0 flex-1 place-items-center pb-1">
-        <ShowcasePreviewFor key={previewKey} id={active} show={showCanvas} />
+        <ShowcasePreviewFor
+          key={previewKey}
+          id={active}
+          show={showCanvas}
+          animate={motionOn}
+        />
       </div>
     </section>
   )

@@ -101,7 +101,7 @@ export function HomeBlocksSection() {
               animation: "sono-fade-up 520ms var(--motion-ease) 80ms both",
             }}
           >
-            <div className="flex h-[22rem] w-full overflow-hidden sm:h-[25rem] lg:h-[27rem]">
+            <div className="flex h-auto w-full sm:h-[25rem] sm:overflow-hidden lg:h-[27rem]">
               <HomeChatComposer />
             </div>
           </div>

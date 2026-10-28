@@ -39,9 +39,13 @@ export function PlatformBadges({ className }: { className?: string }) {
         >
           {PLATFORMS.map(({ label, Icon }) => (
             <li key={label} className="shrink-0">
-              <span className="inline-flex h-8 items-center gap-1.5 rounded-full border border-border/70 bg-card/80 px-2.5 text-xs font-medium text-foreground shadow-soft backdrop-blur-sm sm:h-9 sm:px-3 sm:text-sm">
-                <Icon className="size-3.5 sm:size-4" />
-                {label}
+              <span
+                title={label}
+                aria-label={label}
+                className="inline-flex size-8 items-center justify-center rounded-full border border-border/70 bg-card/80 text-foreground shadow-soft backdrop-blur-sm sm:h-9 sm:w-auto sm:gap-1.5 sm:px-3 sm:text-sm sm:font-medium"
+              >
+                <Icon className="size-3.5 sm:size-4" aria-hidden />
+                <span className="hidden sm:inline">{label}</span>
               </span>
             </li>
           ))}

@@ -203,56 +203,61 @@ export function HomeChatComposer() {
     }, 1400)
   }
 
+  const hasThread = turns.length > 0 || thinking
+
   return (
-    <div className="mx-auto flex h-full w-full max-w-xl flex-col gap-3 text-foreground">
+    <div className="mx-auto flex h-auto w-full max-w-xl flex-col gap-2 text-foreground sm:h-full sm:gap-3">
+      {/* Fixed thread slot on mobile — scrolls inside, no page jump / no empty below */}
       <div
         ref={threadRef}
-        className="min-h-0 flex-1 space-y-3 overflow-y-auto overscroll-contain pe-1"
+        className="h-[4.5rem] shrink-0 space-y-2 overflow-y-auto overscroll-contain pe-1 sm:h-auto sm:min-h-0 sm:flex-1 sm:space-y-3"
         aria-live="polite"
       >
-        {turns.map((turn) => (
-          <div
-            key={turn.id}
-            className={cn(
-              "flex",
-              turn.role === "user" ? "justify-end" : "justify-start"
-            )}
-          >
-            <div
-              className={cn(
-                "max-w-[92%] rounded-2xl px-3 py-2 text-sm leading-relaxed",
-                turn.role === "user"
-                  ? "bg-primary text-primary-foreground"
-                  : "border border-border/70 bg-card text-foreground shadow-soft"
-              )}
-            >
-              {turn.text}
-            </div>
-          </div>
-        ))}
+        {hasThread ? (
+          <>
+            {turns.map((turn) => (
+              <div
+                key={turn.id}
+                className={cn(
+                  "flex",
+                  turn.role === "user" ? "justify-end" : "justify-start"
+                )}
+              >
+                <div
+                  className={cn(
+                    "max-w-[92%] rounded-2xl px-3 py-1.5 text-sm leading-relaxed sm:py-2",
+                    turn.role === "user"
+                      ? "bg-primary text-primary-foreground"
+                      : "border border-border/70 bg-card text-foreground shadow-soft"
+                  )}
+                >
+                  {turn.text}
+                </div>
+              </div>
+            ))}
 
-        {thinking ? (
-          <div className="flex items-center gap-2 px-1 text-sm text-muted-foreground">
-            <ThinkingSpinner />
-            <span>Thinking</span>
-          </div>
-        ) : null}
+            {thinking ? (
+              <div className="flex items-center gap-2 px-1 text-sm text-muted-foreground">
+                <ThinkingSpinner />
+                <span>Thinking</span>
+              </div>
+            ) : null}
+          </>
+        ) : (
+          <p className="px-1 text-xs text-muted-foreground sm:text-sm">
+            Try a prompt below, or ask anything.
+          </p>
+        )}
       </div>
-
-      {turns.length === 0 && !thinking ? (
-        <p className="shrink-0 px-1 text-xs text-muted-foreground sm:text-sm">
-          Try a prompt below, or ask anything.
-        </p>
-      ) : null}
 
       <div className="flex shrink-0 cursor-text flex-col rounded-2xl border border-border/70 bg-card shadow-soft">
         <div
-          className="relative max-h-28 overflow-y-auto"
+          className="relative max-h-20 overflow-y-auto sm:max-h-28"
           onClick={() => inputRef.current?.focus()}
         >
           <Textarea
             ref={inputRef}
-            className="min-h-12 w-full resize-none wrap-break-word border-0 bg-transparent p-3 text-base whitespace-pre-wrap shadow-none outline-none transition-[padding] duration-200 ease-in-out focus-visible:ring-0 md:text-base dark:bg-transparent"
+            className="min-h-10 w-full resize-none wrap-break-word border-0 bg-transparent p-2.5 text-base whitespace-pre-wrap shadow-none outline-none transition-[padding] duration-200 ease-in-out focus-visible:ring-0 sm:min-h-12 sm:p-3 md:text-base dark:bg-transparent"
             onChange={(e) => setInputValue(e.target.value)}
             onKeyDown={(e) => {
               if (e.key === "Enter" && !e.shiftKey) {
@@ -263,7 +268,7 @@ export function HomeChatComposer() {
             onClick={(e) => e.stopPropagation()}
             placeholder="Ask anything"
             aria-label="Ask anything"
-            rows={2}
+            rows={1}
             value={inputValue}
             disabled={thinking}
           />

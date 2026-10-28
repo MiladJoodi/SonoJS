@@ -20,6 +20,9 @@ import {
 import { useMarketNeon } from "@/registry/charts/_lib/use-market-neon"
 import { cn } from "@/lib/utils"
 
+/** When false, skip entrance / stagger (chip switches after first load). */
+const ShowcaseMotionContext = React.createContext(true)
+
 function DemoCard({
   className,
   children,
@@ -29,12 +32,15 @@ function DemoCard({
   children: React.ReactNode
   show: boolean
 }) {
+  const animate = React.useContext(ShowcaseMotionContext)
+  const visible = show || !animate
   return (
     <div
       className={cn(
         "w-full max-w-[350px] rounded-[14px] border border-border/70 bg-card p-4 text-foreground shadow-soft sm:rounded-[18px] sm:p-[22px]",
-        "transition-[opacity,transform] duration-500 ease-[cubic-bezier(0.2,0.8,0.2,1)] motion-reduce:transition-none",
-        show
+        animate &&
+          "transition-[opacity,transform] duration-500 ease-[cubic-bezier(0.2,0.8,0.2,1)] motion-reduce:transition-none",
+        visible
           ? "translate-y-0 scale-100 opacity-100"
           : "translate-y-3.5 scale-[0.985] opacity-0",
         className
@@ -56,15 +62,18 @@ function Stagger({
   className?: string
   children: React.ReactNode
 }) {
+  const animate = React.useContext(ShowcaseMotionContext)
+  const visible = show || !animate
   return (
     <div
       className={cn(
-        "transition-[opacity,transform] duration-300 ease-out motion-reduce:transition-none",
-        show ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0",
+        animate &&
+          "transition-[opacity,transform] duration-300 ease-out motion-reduce:transition-none",
+        visible ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0",
         className
       )}
       style={{
-        transitionDelay: show ? `${i * 70 + 120}ms` : "0ms",
+        transitionDelay: animate && show ? `${i * 70 + 120}ms` : "0ms",
       }}
     >
       {children}
@@ -546,6 +555,7 @@ export function ShowcaseChartPreview({
   show: boolean
   className?: string
 }) {
+  const animate = React.useContext(ShowcaseMotionContext)
   const neon = useMarketNeon()
   const color = neon ? MARKET_UP : "var(--chart-1)"
   const glow = neon ? chartNeonGlowProps(color) : null
@@ -620,7 +630,7 @@ export function ShowcaseChartPreview({
               stroke={color}
               fill={`url(#${gradId})`}
               fillOpacity={1}
-              isAnimationActive={show}
+              isAnimationActive={show && animate}
               animationDuration={500}
               animationEasing="ease-out"
               {...(glow ?? {})}
@@ -643,13 +653,26 @@ export type ShowcaseDemoId =
 export function ShowcasePreviewFor({
   id,
   show,
+  animate = true,
 }: {
   id: ShowcaseDemoId
   show: boolean
+  /** Entrance + stagger — false after first hero load. */
+  animate?: boolean
 }) {
-  if (id === "pricing") return <ShowcasePricingPreview show={show} />
-  if (id === "player") return <ShowcasePlayerPreview show={show} />
-  if (id === "palette") return <ShowcasePalettePreview show={show} />
-  if (id === "chart") return <ShowcaseChartPreview show={show} />
-  return <ShowcaseLoginPreview show={show} />
+  return (
+    <ShowcaseMotionContext.Provider value={animate}>
+      {id === "pricing" ? (
+        <ShowcasePricingPreview show={show} />
+      ) : id === "player" ? (
+        <ShowcasePlayerPreview show={show} />
+      ) : id === "palette" ? (
+        <ShowcasePalettePreview show={show} />
+      ) : id === "chart" ? (
+        <ShowcaseChartPreview show={show} />
+      ) : (
+        <ShowcaseLoginPreview show={show} />
+      )}
+    </ShowcaseMotionContext.Provider>
+  )
 }

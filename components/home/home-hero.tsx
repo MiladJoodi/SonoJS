@@ -53,8 +53,7 @@ export function HomeHero() {
                 animation: "sono-fade-up 520ms var(--motion-ease) 60ms both",
               }}
             >
-              From components to complete interfaces.{" "}
-              <span className="text-primary">With AI.</span>
+              React components, blocks, and tools for your projects.
             </h1>
 
             <p
@@ -63,27 +62,25 @@ export function HomeHero() {
                 animation: "sono-fade-up 520ms var(--motion-ease) 120ms both",
               }}
             >
-              A modern React UI library with beautifully crafted components,
-              blocks, and charts. Connect your AI agent via MCP to build with
-              SonoJS and generate real UI directly in your codebase.
+              A customizable React UI library with ready-to-use components,
+              interface blocks, charts, and icons. Use the SonoJS CLI to add
+              components to your project, or connect an AI coding agent through
+              MCP.
             </p>
 
             <div
-              className="mt-6 flex w-full flex-col items-stretch gap-2.5 sm:mt-9 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center sm:gap-3"
+              className="mt-6 flex flex-row flex-wrap items-center justify-center gap-2.5 sm:mt-9 sm:justify-start sm:gap-3"
               style={{
                 animation: "sono-fade-up 520ms var(--motion-ease) 180ms both",
               }}
             >
-              <RainbowButton asChild className="w-full sm:w-auto">
-                <Link href="/docs" className="w-full no-underline sm:w-auto">
+              <RainbowButton asChild className="shrink-0">
+                <Link href="/docs" className="no-underline">
                   Get Started
                 </Link>
               </RainbowButton>
-              <RainbowButton variant="white" asChild className="w-full sm:w-auto">
-                <Link
-                  href="/docs/components"
-                  className="w-full no-underline sm:w-auto"
-                >
+              <RainbowButton variant="white" asChild className="shrink-0">
+                <Link href="/docs/components" className="no-underline">
                   Explore Components
                 </Link>
               </RainbowButton>
@@ -95,7 +92,7 @@ export function HomeHero() {
                 animation: "sono-fade-up 520ms var(--motion-ease) 240ms both",
               }}
             >
-              <PlatformBadges className="justify-start [&>ul]:mx-0 [&>ul]:justify-start" />
+              <PlatformBadges className="[&>div>ul]:mx-auto sm:[&>div>ul]:mx-0" />
             </div>
           </section>
 
