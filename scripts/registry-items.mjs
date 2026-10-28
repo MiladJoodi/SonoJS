@@ -1480,6 +1480,43 @@ function communicationActivityFeedBlock(
   }
 }
 
+function communicationCommentsBlock(
+  slug,
+  description,
+  {
+    registryDependencies = [
+      "avatar",
+      "badge",
+      "button",
+      "separator",
+      "textarea",
+    ],
+    images = [],
+  } = {}
+) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies,
+    files: [
+      {
+        path: `registry/blocks/communication/comments/${slug}/comments.tsx`,
+        type: "registry:component",
+        target: `components/blocks/communication/${slug}/comments.tsx`,
+      },
+      ...images.map((file) => ({
+        path: `registry/blocks/communication/comments/${slug}/images/${file}`,
+        type: "registry:file",
+        target: `components/blocks/communication/${slug}/images/${file}`,
+      })),
+    ],
+  }
+}
+
 function dashboardsAnalyticsDashboardBlock(
   slug,
   description,
@@ -5432,29 +5469,42 @@ const registryItemsRaw = [
       },
     ],
   },
-  {
-    name: "comments-01",
-    type: "registry:block",
-    title: "comments-01",
-    description:
-      "Comments discussion — composer, nested replies, likes, and load-more.",
-    cssVars: SOFT_SURFACE_CSS_VARS,
-    dependencies: ["lucide-react"],
-    registryDependencies: [
-      "avatar",
-      "badge",
-      "button",
-      "separator",
-      "textarea",
-    ],
-    files: [
-      {
-        path: "registry/blocks/communication/comments/comments-01/comments.tsx",
-        type: "registry:component",
-        target: "components/blocks/communication/comments-01/comments.tsx",
-      },
-    ],
-  },
+  communicationCommentsBlock(
+    "comments-01",
+    "Nested discussion panel — white card on canvas, threaded replies, likes, load-more (RTL/LTR).",
+    {
+      registryDependencies: [
+        "avatar",
+        "badge",
+        "button",
+        "dropdown-menu",
+        "separator",
+        "textarea",
+      ],
+      images: ["sarah.webp", "alex.webp", "david.webp", "maria.webp"],
+    }
+  ),
+  communicationCommentsBlock(
+    "comments-02",
+    "Sorted comments panel — Newest/Top segment, flat rows, likes (RTL/LTR).",
+    {
+      images: ["sarah.webp", "alex.webp", "david.webp", "maria.webp"],
+    }
+  ),
+  communicationCommentsBlock(
+    "comments-03",
+    "Review comments panel — line anchors, Open/All filter, Resolve/Unresolve (RTL/LTR).",
+    {
+      images: ["sarah.webp", "alex.webp", "david.webp", "maria.webp"],
+    }
+  ),
+  communicationCommentsBlock(
+    "comments-04",
+    "Mentions panel — @ chips and reaction pills on a white card (RTL/LTR).",
+    {
+      images: ["sarah.webp", "alex.webp", "david.webp", "maria.webp"],
+    }
+  ),
   {
     name: "reading-progress-01",
     type: "registry:block",
@@ -6337,15 +6387,87 @@ const registryItemsRaw = [
   ),
   developerToolsWebhookManagementBlock(
     "webhook-management-01",
-    "Webhooks — add endpoint form, active endpoints list with actions, and recent delivery logs."
+    "Ops dashboard — add endpoint form, searchable active list, and sticky recent deliveries (RTL/LTR)."
+  ),
+  developerToolsWebhookManagementBlock(
+    "webhook-management-02",
+    "Delivery inspector — endpoint picker, delivery list, and request/response/headers panels (RTL/LTR).",
+    {
+      registryDependencies: [
+        "badge",
+        "button",
+        "card",
+        "separator",
+        "tabs",
+      ],
+    }
+  ),
+  developerToolsWebhookManagementBlock(
+    "webhook-management-03",
+    "Compact endpoints table — enable switches, status badges, Test, and row actions (RTL/LTR).",
+    {
+      registryDependencies: [
+        "badge",
+        "button",
+        "card",
+        "dropdown-menu",
+        "switch",
+        "table",
+      ],
+    }
   ),
   developerToolsIntegrationsBlock(
     "integrations-01",
-    "Integrations grid — search, category chips, connect/disconnect cards, and request CTA (RTL/LTR)."
+    "Marketplace catalog — search, category chips, connect cards, and request CTA (RTL/LTR)."
+  ),
+  developerToolsIntegrationsBlock(
+    "integrations-02",
+    "Detail studio — app list, scopes checklist, enable switch, and connect/configure (RTL/LTR).",
+    {
+      registryDependencies: [
+        "badge",
+        "button",
+        "input-group",
+        "separator",
+        "switch",
+      ],
+    }
+  ),
+  developerToolsIntegrationsBlock(
+    "integrations-03",
+    "Compact connected list — status, last sync, enable switches, configure, and row menu (RTL/LTR).",
+    {
+      registryDependencies: [
+        "badge",
+        "button",
+        "dropdown-menu",
+        "switch",
+      ],
+    }
   ),
   developerToolsLogsViewerBlock(
     "logs-viewer-01",
-    "Log viewer - level/service filters, search, live stream, auto-scroll, and density-aware rows (RTL/LTR)."
+    "Live stream console — level chips, service select, search, auto-scroll, and realistic ops lines (RTL/LTR)."
+  ),
+  developerToolsLogsViewerBlock(
+    "logs-viewer-02",
+    "Entry inspector — filtered list, attributes, stack traces, and copy JSON (RTL/LTR).",
+    {
+      registryDependencies: [
+        "badge",
+        "button",
+        "input-group",
+        "select",
+        "separator",
+      ],
+    }
+  ),
+  developerToolsLogsViewerBlock(
+    "logs-viewer-03",
+    "Compact terminal tail — dark mono pane, level chips, pause/clear, and live ops lines (RTL/LTR).",
+    {
+      registryDependencies: ["badge", "button"],
+    }
   ),
   developerToolsApiKeysBlock(
     "api-keys-02",
@@ -6365,7 +6487,21 @@ const registryItemsRaw = [
   ),
   communicationNotificationCenterBlock(
     "notification-center-01",
-    "Production notification panel — filters, avatars, inline actions, and scrollable inbox."
+    "Notification inbox — tabs, avatars, inline actions, and mark all read."
+  ),
+  communicationNotificationCenterBlock(
+    "notification-center-02",
+    "Header bell popover — badge count, compact unread list, mark all and view all.",
+    {
+      registryDependencies: ["avatar", "badge", "button", "popover"],
+    }
+  ),
+  communicationNotificationCenterBlock(
+    "notification-center-03",
+    "Notification preferences — category toggles for in-app and email channels.",
+    {
+      registryDependencies: ["button", "label", "separator", "switch"],
+    }
   ),
   communicationActivityFeedBlock(
     "activity-feed-01",

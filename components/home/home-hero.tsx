@@ -7,11 +7,11 @@ export function HomeHero() {
   return (
     <div
       data-home-surface=""
-      className="relative -mt-(--header-height) flex flex-1 flex-col overflow-hidden pt-(--header-height)"
+      className="relative -mt-(--header-height) flex flex-1 flex-col overflow-x-clip pt-(--header-height)"
     >
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 z-0"
+        className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
         style={{
           backgroundImage: `
             radial-gradient(
@@ -73,6 +73,15 @@ export function HomeHero() {
             >
               <CommandBar className="max-w-none" />
             </div>
+
+            <div
+              className="mt-6"
+              style={{
+                animation: "sono-fade-up 520ms var(--motion-ease) 240ms both",
+              }}
+            >
+              <PlatformBadges className="justify-start [&>ul]:mx-0 [&>ul]:justify-start" />
+            </div>
           </section>
 
           <div
@@ -82,15 +91,6 @@ export function HomeHero() {
           >
             <HeroShowcase />
           </div>
-        </div>
-
-        <div
-          className="mt-12 w-full sm:mt-14"
-          style={{
-            animation: "sono-fade-up 520ms var(--motion-ease) 320ms both",
-          }}
-        >
-          <PlatformBadges />
         </div>
       </div>
     </div>

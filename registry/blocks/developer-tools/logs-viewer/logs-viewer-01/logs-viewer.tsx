@@ -349,7 +349,7 @@ export default function LogsViewer01() {
               type="button"
               variant={streaming ? "destructive" : "default"}
               size="sm"
-              className="gap-1.5"
+              className="cursor-pointer gap-1.5"
               onClick={streaming ? stopStreaming : startStreaming}
             >
               {streaming ? (
@@ -368,6 +368,7 @@ export default function LogsViewer01() {
               type="button"
               variant="ghost"
               size="icon-sm"
+              className="cursor-pointer"
               aria-label="Clear logs"
               onClick={() => {
                 stopStreaming()
@@ -407,7 +408,7 @@ export default function LogsViewer01() {
           <Select value={serviceFilter} onValueChange={setServiceFilter}>
             <SelectTrigger
               size="sm"
-              className="w-full font-mono text-xs sm:w-40"
+              className="w-full cursor-pointer font-mono text-xs sm:w-40"
               aria-label="Filter by service"
             >
               <SelectValue placeholder="All services" />

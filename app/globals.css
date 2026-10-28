@@ -853,6 +853,15 @@ html:has([data-block-embed]) body {
   }
 }
 
+@keyframes sono-eq {
+  from {
+    transform: scaleY(0.25);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
 @keyframes sono-mark-rise {
   from {
     transform: scaleY(0.15);

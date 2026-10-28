@@ -188,8 +188,14 @@ import RowActions03 from "@/registry/blocks/data-tables/row-actions/row-actions-
 import ApiKeys01 from "@/registry/blocks/developer-tools/api-key-management/api-keys-01/api-keys"
 import ApiKeys02 from "@/registry/blocks/developer-tools/api-key-management/api-keys-02/api-keys"
 import WebhookManagement01 from "@/registry/blocks/developer-tools/webhook-management/webhook-management-01/webhook-management"
+import WebhookManagement02 from "@/registry/blocks/developer-tools/webhook-management/webhook-management-02/webhook-management"
+import WebhookManagement03 from "@/registry/blocks/developer-tools/webhook-management/webhook-management-03/webhook-management"
 import Integrations01 from "@/registry/blocks/developer-tools/integrations/integrations-01/integrations"
+import Integrations02 from "@/registry/blocks/developer-tools/integrations/integrations-02/integrations"
+import Integrations03 from "@/registry/blocks/developer-tools/integrations/integrations-03/integrations"
 import LogsViewer01 from "@/registry/blocks/developer-tools/logs-viewer/logs-viewer-01/logs-viewer"
+import LogsViewer02 from "@/registry/blocks/developer-tools/logs-viewer/logs-viewer-02/logs-viewer"
+import LogsViewer03 from "@/registry/blocks/developer-tools/logs-viewer/logs-viewer-03/logs-viewer"
 import AccountSettings01 from "@/registry/blocks/user-account/account-settings/account-settings-01/account-settings"
 import AccountSettings02 from "@/registry/blocks/user-account/account-settings/account-settings-02/account-settings"
 import AccountSettings03 from "@/registry/blocks/user-account/account-settings/account-settings-03/account-settings"
@@ -253,12 +259,17 @@ import FileManager01 from "@/registry/blocks/files-media/file-manager/file-manag
 import FileUpload01 from "@/registry/blocks/files-media/file-upload/file-upload-01/file-upload"
 import MediaGallery01 from "@/registry/blocks/files-media/media-gallery/media-gallery-01/media-gallery"
 import Comments01 from "@/registry/blocks/communication/comments/comments-01/comments"
+import Comments02 from "@/registry/blocks/communication/comments/comments-02/comments"
+import Comments03 from "@/registry/blocks/communication/comments/comments-03/comments"
+import Comments04 from "@/registry/blocks/communication/comments/comments-04/comments"
 import ActivityFeed01 from "@/registry/blocks/communication/activity-feed/activity-feed-01/activity-feed"
 import ActivityFeed02 from "@/registry/blocks/communication/activity-feed/activity-feed-02/activity-feed"
 import ActivityFeed03 from "@/registry/blocks/communication/activity-feed/activity-feed-03/activity-feed"
 import ActivityFeed04 from "@/registry/blocks/communication/activity-feed/activity-feed-04/activity-feed"
 import ActivityFeed05 from "@/registry/blocks/communication/activity-feed/activity-feed-05/activity-feed"
 import NotificationCenter01 from "@/registry/blocks/communication/notification-center/notification-center-01/notification-center"
+import NotificationCenter02 from "@/registry/blocks/communication/notification-center/notification-center-02/notification-center"
+import NotificationCenter03 from "@/registry/blocks/communication/notification-center/notification-center-03/notification-center"
 import AnalyticsDashboard01 from "@/registry/blocks/dashboards-analytics/analytics-dashboard/analytics-dashboard-01/analytics-dashboard"
 import Calendar01 from "@/registry/blocks/calendar-scheduling/calendar/calendar-01/calendar"
 import SetupWizard01 from "@/registry/blocks/onboarding/setup-wizard/setup-wizard-01/setup-wizard"
@@ -1735,6 +1746,24 @@ const views: Record<string, ComponentType> = {
       </div>
     )
   },
+  "webhook-management-02": function WebhookManagement02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <WebhookManagement02 />
+        </div>
+      </div>
+    )
+  },
+  "webhook-management-03": function WebhookManagement03View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <WebhookManagement03 />
+        </div>
+      </div>
+    )
+  },
   "integrations-01": function Integrations01View() {
     return (
       <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
@@ -1744,11 +1773,47 @@ const views: Record<string, ComponentType> = {
       </div>
     )
   },
+  "integrations-02": function Integrations02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Integrations02 />
+        </div>
+      </div>
+    )
+  },
+  "integrations-03": function Integrations03View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Integrations03 />
+        </div>
+      </div>
+    )
+  },
   "logs-viewer-01": function LogsViewer01View() {
     return (
       <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
         <div className="w-full">
           <LogsViewer01 />
+        </div>
+      </div>
+    )
+  },
+  "logs-viewer-02": function LogsViewer02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <LogsViewer02 />
+        </div>
+      </div>
+    )
+  },
+  "logs-viewer-03": function LogsViewer03View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <LogsViewer03 />
         </div>
       </div>
     )
@@ -2334,6 +2399,33 @@ const views: Record<string, ComponentType> = {
       </div>
     )
   },
+  "comments-02": function Comments02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Comments02 />
+        </div>
+      </div>
+    )
+  },
+  "comments-03": function Comments03View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Comments03 />
+        </div>
+      </div>
+    )
+  },
+  "comments-04": function Comments04View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Comments04 />
+        </div>
+      </div>
+    )
+  },
   "activity-feed-01": function ActivityFeed01View() {
     return (
       <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
@@ -2474,6 +2566,24 @@ const views: Record<string, ComponentType> = {
       <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
         <div className="w-full">
           <NotificationCenter01 />
+        </div>
+      </div>
+    )
+  },
+  "notification-center-02": function NotificationCenter02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <NotificationCenter02 />
+        </div>
+      </div>
+    )
+  },
+  "notification-center-03": function NotificationCenter03View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <NotificationCenter03 />
         </div>
       </div>
     )

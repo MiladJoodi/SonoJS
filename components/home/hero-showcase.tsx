@@ -1,35 +1,64 @@
 "use client"
 
 import * as React from "react"
+import { ArrowRightIcon, Volume2Icon, VolumeXIcon } from "lucide-react"
 
 import {
-  ShowcaseChartPreview,
-  ShowcaseLoginPreview,
+  chime,
+  getShowcaseSound,
+  setShowcaseSound,
+  tick,
+} from "@/components/home/hero-showcase-audio"
+import {
+  ShowcasePreviewFor,
+  type ShowcaseDemoId,
 } from "@/components/home/hero-showcase-previews"
 import { cn } from "@/lib/utils"
 
-type PromptId = "login" | "chart"
+/* Stage demos: login | pricing | player | palette | chart */
 
 const PROMPTS: {
-  id: PromptId
+  id: ShowcaseDemoId
   label: string
-  user: string
+  text: string
+  file: string
 }[] = [
   {
     id: "login",
     label: "Login form",
-    user: "Build a login form with email, password, Google, and Apple sign-in.",
+    text: "Build a beautiful login form with SonoJS",
+    file: "login-form.tsx",
+  },
+  {
+    id: "pricing",
+    label: "Pricing",
+    text: "Build a pricing card UI",
+    file: "pricing-card.tsx",
+  },
+  {
+    id: "player",
+    label: "Music player",
+    text: "Build a music player with SonoJS",
+    file: "music-player.tsx",
+  },
+  {
+    id: "palette",
+    label: "Command palette",
+    text: "Build a command palette with SonoJS",
+    file: "command-palette.tsx",
   },
   {
     id: "chart",
-    label: "Analytics chart",
-    user: "Build an analytics chart for weekly active users.",
+    label: "Chart",
+    text: "Build an analytics chart with SonoJS",
+    file: "analytics-chart.tsx",
   },
 ]
 
-function PreviewFor({ id }: { id: PromptId }) {
-  if (id === "chart") return <ShowcaseChartPreview />
-  return <ShowcaseLoginPreview />
+function sleep(ms: number) {
+  return new Promise<void>((resolve) => {
+    window.setTimeout(resolve, ms)
+  })
 }
 
 function prefersReducedMotion() {
@@ -39,196 +68,271 @@ function prefersReducedMotion() {
   )
 }
 
+function pickPrompt(text: string): ShowcaseDemoId {
+  const t = text.toLowerCase()
+  if (/pric|plan|tier|bill/.test(t)) return "pricing"
+  if (/music|player|audio|song|sound|play/.test(t)) return "player"
+  if (/command|palette|search|menu|cmd/.test(t)) return "palette"
+  if (/chart|analytics|users|metric|graph/.test(t)) return "chart"
+  return "login"
+}
+
+type StepState = { label: string; on: boolean; done: boolean }
+
 export function HeroShowcase({ className }: { className?: string }) {
-  const [active, setActive] = React.useState<PromptId>("login")
-  const [typed, setTyped] = React.useState("")
-  const [typing, setTyping] = React.useState(false)
-  const [bubbleIn, setBubbleIn] = React.useState(false)
-  const [showPreview, setShowPreview] = React.useState(false)
+  const [active, setActive] = React.useState<ShowcaseDemoId>("login")
+  const [query, setQuery] = React.useState("")
+  const [steps, setSteps] = React.useState<StepState[]>([])
+  const [showCanvas, setShowCanvas] = React.useState(false)
+  const [soundOn, setSoundOn] = React.useState(true)
   const [previewKey, setPreviewKey] = React.useState(0)
-  const introDoneRef = React.useRef(false)
+
   const runRef = React.useRef(0)
-  const fadeTimerRef = React.useRef<number | null>(null)
+  const autoRef = React.useRef(true)
+  const nextTimerRef = React.useRef<number | null>(null)
 
-  const current = PROMPTS.find((p) => p.id === active) ?? PROMPTS[0]!
-
-  React.useEffect(() => {
-    const run = ++runRef.current
-    const prompt = PROMPTS[0]!
-
-    if (prefersReducedMotion()) {
-      setBubbleIn(true)
-      setTyped(prompt.user)
-      setShowPreview(true)
-      introDoneRef.current = true
-      return
-    }
-
-    setBubbleIn(true)
-    setTyping(true)
-
-    const startDelay = window.setTimeout(function tick(i = 0) {
-      if (run !== runRef.current) return
-      const next = Math.min(i + 1, prompt.user.length)
-      setTyped(prompt.user.slice(0, next))
-      if (next < prompt.user.length) {
-        // Slight ease: a bit slower at the start, steadier after.
-        const delay = next < 8 ? 38 : next < 20 ? 28 : 22
-        window.setTimeout(() => tick(next), delay)
-      } else {
-        setTyping(false)
-        window.setTimeout(() => {
-          if (run === runRef.current) {
-            setShowPreview(true)
-            introDoneRef.current = true
-          }
-        }, 320)
-      }
-    }, 280)
-
-    return () => {
-      runRef.current += 1
-      window.clearTimeout(startDelay)
-      if (fadeTimerRef.current) window.clearTimeout(fadeTimerRef.current)
+  const clearNext = React.useCallback(() => {
+    if (nextTimerRef.current) {
+      window.clearTimeout(nextTimerRef.current)
+      nextTimerRef.current = null
     }
   }, [])
 
-  function switchPreview(id: PromptId) {
-    if (id === active) return
-    const prompt = PROMPTS.find((p) => p.id === id) ?? PROMPTS[0]!
-
-    if (prefersReducedMotion()) {
+  const build = React.useCallback(
+    async (text: string, id: ShowcaseDemoId, fast: boolean) => {
+      const run = ++runRef.current
+      clearNext()
       setActive(id)
-      setTyped(prompt.user)
-      setShowPreview(true)
+      setShowCanvas(false)
+      setSteps([])
       setPreviewKey((k) => k + 1)
-      return
+
+      const prompt = PROMPTS.find((p) => p.id === id) ?? PROMPTS[0]!
+      const reduced = prefersReducedMotion()
+      const skipType = fast || reduced
+
+      if (skipType) {
+        setQuery(text)
+      } else {
+        setQuery("")
+        for (let i = 0; i < text.length; i++) {
+          if (run !== runRef.current) return
+          setQuery(text.slice(0, i + 1))
+          await sleep(24)
+        }
+        await sleep(260)
+      }
+
+      if (run !== runRef.current) return
+
+      const labels = [
+        "Reading your project",
+        "Composing with SonoJS components",
+        `Wrote ${prompt.file}`,
+      ]
+      const stepDelay = skipType ? 260 : 420
+
+      for (let j = 0; j < labels.length; j++) {
+        if (run !== runRef.current) return
+        const label = labels[j]!
+        setSteps((prev) => [
+          ...prev.map((s) => ({ ...s, done: true })),
+          { label, on: false, done: false },
+        ])
+        await sleep(16)
+        if (run !== runRef.current) return
+        setSteps((prev) =>
+          prev.map((s, i) => (i === j ? { ...s, on: true } : s))
+        )
+        await sleep(stepDelay)
+        if (run !== runRef.current) return
+        setSteps((prev) =>
+          prev.map((s, i) => (i === j ? { ...s, done: true } : s))
+        )
+      }
+
+      if (run !== runRef.current) return
+      setShowCanvas(true)
+      chime()
+
+      if (autoRef.current && !reduced) {
+        nextTimerRef.current = window.setTimeout(() => {
+          const ids = PROMPTS.map((p) => p.id)
+          const next = ids[(ids.indexOf(id) + 1) % ids.length]!
+          const nextPrompt = PROMPTS.find((p) => p.id === next)!
+          void build(nextPrompt.text, next, false)
+        }, 7500)
+      }
+    },
+    [clearNext]
+  )
+
+  React.useEffect(() => {
+    setShowcaseSound(true)
+    const first = PROMPTS[0]!
+    void build(first.text, first.id, prefersReducedMotion())
+    return () => {
+      runRef.current += 1
+      clearNext()
     }
+  }, [build, clearNext])
 
-    setShowPreview(false)
-    if (fadeTimerRef.current) window.clearTimeout(fadeTimerRef.current)
-    fadeTimerRef.current = window.setTimeout(() => {
-      setActive(id)
-      setTyped(prompt.user)
-      setPreviewKey((k) => k + 1)
-      // next frame so enter transition runs
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => setShowPreview(true))
-      })
-    }, 280)
+  function selectChip(id: ShowcaseDemoId) {
+    autoRef.current = false
+    clearNext()
+    tick()
+    const prompt = PROMPTS.find((p) => p.id === id)!
+    void build(prompt.text, id, false)
   }
 
-  function select(id: PromptId) {
-    if (!introDoneRef.current) return
-    switchPreview(id)
+  function onSubmit(e: React.FormEvent) {
+    e.preventDefault()
+    const v = query.trim()
+    if (!v) return
+    autoRef.current = false
+    clearNext()
+    void build(v, pickPrompt(v), true)
   }
 
-  function onTabsKeyDown(e: React.KeyboardEvent) {
-    if (!introDoneRef.current) return
-    const i = PROMPTS.findIndex((p) => p.id === active)
-    if (e.key === "ArrowRight" || e.key === "ArrowDown") {
-      e.preventDefault()
-      select(PROMPTS[(i + 1) % PROMPTS.length]!.id)
-    } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
-      e.preventDefault()
-      select(PROMPTS[(i - 1 + PROMPTS.length) % PROMPTS.length]!.id)
-    } else if (e.key === "Home") {
-      e.preventDefault()
-      select(PROMPTS[0]!.id)
-    } else if (e.key === "End") {
-      e.preventDefault()
-      select(PROMPTS[PROMPTS.length - 1]!.id)
-    }
+  function toggleSound() {
+    const next = !getShowcaseSound()
+    setShowcaseSound(next)
+    setSoundOn(next)
+    if (next) tick()
   }
 
   return (
-    <div
+    <section
+      aria-label="Interactive demo: describe a UI and watch an agent build it"
+      onPointerDown={() => {
+        autoRef.current = false
+        clearNext()
+      }}
       className={cn(
-        "flex w-full flex-col gap-4 rounded-[16px] border border-border/70 bg-card/60 p-4 shadow-soft sm:p-5",
+        "flex min-h-[540px] flex-col gap-3.5 rounded-3xl border border-border/70 bg-muted/50 p-[18px] transition-colors dark:bg-muted/30",
         className
       )}
     >
-      <div
-        role="tablist"
-        aria-label="Showcase prompts"
-        onKeyDown={onTabsKeyDown}
-        className="flex flex-wrap gap-2"
-      >
-        {PROMPTS.map((p) => {
-          const selected = p.id === active
-          return (
-            <button
-              key={p.id}
-              type="button"
-              role="tab"
-              id={`hero-showcase-tab-${p.id}`}
-              aria-selected={selected}
-              aria-controls="hero-showcase-panel"
-              tabIndex={selected ? 0 : -1}
-              onClick={() => select(p.id)}
-              className={cn(
-                "cursor-pointer rounded-full border px-3 py-1.5 text-xs font-medium transition-colors",
-                selected
-                  ? "border-primary/40 bg-primary/10 text-foreground"
-                  : "border-border/70 bg-background/80 text-muted-foreground hover:bg-muted hover:text-foreground"
-              )}
-            >
-              {p.label}
-            </button>
-          )
-        })}
-      </div>
-
-      <div className="grid gap-4 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:items-start">
+      <div className="flex items-start gap-2">
         <div
-          className="flex min-h-[88px] flex-col rounded-[12px] border border-border/70 bg-muted/40 p-3"
-          aria-label="Example prompt"
+          role="tablist"
+          aria-label="Showcase prompts"
+          className="flex flex-1 flex-wrap gap-1.5"
         >
-          <p
-            className={cn(
-              "ms-auto max-w-[95%] rounded-[12px_12px_4px_12px] border border-border/70 bg-card px-3 py-2 text-start text-sm leading-snug text-foreground shadow-soft",
-              "transition-[opacity,transform] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
-              bubbleIn
-                ? "translate-y-0 opacity-100"
-                : "-translate-y-3 opacity-0"
-            )}
-          >
-            <span className="sr-only">{current.user}</span>
-            <span aria-hidden="true">
-              {typed}
-              <span
+          {PROMPTS.map((p) => {
+            const selected = p.id === active
+            return (
+              <button
+                key={p.id}
+                type="button"
+                role="tab"
+                aria-selected={selected}
+                aria-pressed={selected}
+                onClick={() => selectChip(p.id)}
                 className={cn(
-                  "ms-px inline-block h-[1.05em] w-0.5 translate-y-[-0.15em] bg-primary align-middle",
-                  typing && "animate-caret-blink motion-reduce:animate-none",
-                  !typing && "opacity-0"
+                  "cursor-pointer rounded-full border px-3 py-1.5 text-[13px] transition-colors",
+                  selected
+                    ? "border-primary text-foreground"
+                    : "border-border/70 bg-card text-muted-foreground hover:border-muted-foreground/50 hover:text-foreground"
                 )}
-              />
-            </span>
-          </p>
+              >
+                {p.label}
+              </button>
+            )
+          })}
         </div>
-
-        <div
-          id="hero-showcase-panel"
-          role="tabpanel"
-          aria-labelledby={`hero-showcase-tab-${active}`}
-          aria-live="polite"
-          className="flex min-h-[300px] items-center justify-center overflow-hidden rounded-[12px] border border-border/70 bg-muted/30 p-3 sm:p-4"
+        <button
+          type="button"
+          aria-pressed={soundOn}
+          aria-label="Sound"
+          onClick={toggleSound}
+          className="grid size-8 shrink-0 cursor-pointer place-items-center rounded-lg text-muted-foreground transition-colors hover:bg-card hover:text-foreground"
         >
-          <div
-            key={previewKey}
+          {soundOn ? (
+            <Volume2Icon className="size-[17px]" />
+          ) : (
+            <VolumeXIcon className="size-[17px]" />
+          )}
+        </button>
+      </div>
+
+      <form
+        onSubmit={onSubmit}
+        className={cn(
+          "flex items-center gap-2 rounded-[14px] border border-border/70 bg-card py-1.5 ps-4 pe-1.5 transition-colors",
+          "focus-within:border-primary"
+        )}
+      >
+        <input
+          value={query}
+          onChange={(e) => {
+            autoRef.current = false
+            clearNext()
+            setQuery(e.target.value)
+          }}
+          autoComplete="off"
+          aria-label="Describe a UI"
+          placeholder="Describe any UI, then press Enter"
+          className="h-9 min-w-0 flex-1 bg-transparent text-[15px] text-foreground outline-none placeholder:text-muted-foreground"
+        />
+        <button
+          type="submit"
+          aria-label="Build"
+          className="grid size-9 shrink-0 cursor-pointer place-items-center rounded-[10px] bg-primary text-primary-foreground transition-transform active:scale-[0.98]"
+        >
+          <ArrowRightIcon className="size-4 icon-dir" strokeWidth={1.8} />
+        </button>
+      </form>
+
+      <ol
+        aria-live="polite"
+        className="flex min-h-[62px] flex-col gap-1.5 px-1 text-[13px] text-muted-foreground"
+      >
+        {steps.map((s) => (
+          <li
+            key={s.label}
             className={cn(
-              "w-full transition-[opacity,transform] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
-              showPreview
-                ? "translate-y-0 opacity-100"
-                : "translate-y-3 opacity-0"
+              "flex items-center gap-2 transition-[opacity,transform] duration-300 motion-reduce:transition-none",
+              s.on ? "translate-y-0 opacity-100" : "translate-y-1 opacity-0",
+              s.done && "text-muted-foreground"
             )}
           >
-            {showPreview || prefersReducedMotion() ? (
-              <PreviewFor id={active} />
-            ) : null}
-          </div>
-        </div>
+            <span
+              className={cn(
+                "relative grid size-3.5 shrink-0 place-items-center rounded-full border-[1.5px] border-border",
+                s.done && "border-primary bg-primary"
+              )}
+              aria-hidden
+            >
+              {s.done ? (
+                <svg
+                  viewBox="0 0 10 10"
+                  className="size-2 text-primary-foreground"
+                  aria-hidden
+                >
+                  <path
+                    d="M2 5.2l2 2.2L8 2.8"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              ) : null}
+            </span>
+            {s.label}
+          </li>
+        ))}
+      </ol>
+
+      <div className="grid flex-1 place-items-center pb-1.5">
+        <ShowcasePreviewFor
+          key={previewKey}
+          id={active}
+          show={showCanvas}
+        />
       </div>
-    </div>
+    </section>
   )
 }

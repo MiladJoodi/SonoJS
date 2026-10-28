@@ -202,7 +202,7 @@ function IntegrationCard({
           type="button"
           variant={connected ? "outline" : "default"}
           size="sm"
-          className="flex-1 justify-center"
+          className="flex-1 cursor-pointer justify-center"
           onClick={() => {
             setConnected((v) => {
               const next = !v
@@ -217,6 +217,7 @@ function IntegrationCard({
           type="button"
           variant="ghost"
           size="icon-xs"
+          className="cursor-pointer"
           aria-label={`View ${integration.name} docs`}
         >
           <ExternalLinkIcon className="size-4" aria-hidden />
@@ -358,7 +359,12 @@ export default function Integrations01() {
                     Don&apos;t see what you need? Let us know.
                   </p>
                 </div>
-                <Button type="button" variant="outline" size="sm">
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  className="cursor-pointer"
+                >
                   Submit request
                 </Button>
               </div>

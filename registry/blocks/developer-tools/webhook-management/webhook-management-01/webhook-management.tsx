@@ -131,7 +131,11 @@ export default function WebhookManagement({
               Manage webhook endpoints and view delivery logs.
             </p>
           </div>
-          <Button type="button" onClick={() => setIsAdding((v) => !v)}>
+          <Button
+            type="button"
+            className="cursor-pointer"
+            onClick={() => setIsAdding((v) => !v)}
+          >
             <PlusIcon aria-hidden />
             Add Endpoint
           </Button>
@@ -175,6 +179,7 @@ export default function WebhookManagement({
                           >
                             <Checkbox
                               id={`webhook-management-01-${opt.id}`}
+                              className="cursor-pointer"
                               defaultChecked={
                                 "defaultChecked" in opt
                                   ? opt.defaultChecked
@@ -197,11 +202,14 @@ export default function WebhookManagement({
                   <Button
                     type="button"
                     variant="ghost"
+                    className="cursor-pointer"
                     onClick={() => setIsAdding(false)}
                   >
                     Cancel
                   </Button>
-                  <Button type="button">Save Endpoint</Button>
+                  <Button type="button" className="cursor-pointer">
+                    Save Endpoint
+                  </Button>
                 </CardFooter>
               </Card>
             ) : null}
@@ -271,7 +279,7 @@ export default function WebhookManagement({
                           type="button"
                           variant="outline"
                           size="sm"
-                          className="hidden h-8 text-xs sm:inline-flex"
+                          className="hidden h-8 cursor-pointer text-xs sm:inline-flex"
                         >
                           Test
                         </Button>
@@ -281,7 +289,7 @@ export default function WebhookManagement({
                               type="button"
                               variant="ghost"
                               size="icon-sm"
-                              className="size-8"
+                              className="size-8 cursor-pointer"
                               aria-label={`Actions for ${webhook.id}`}
                             >
                               <EllipsisVerticalIcon
@@ -291,16 +299,19 @@ export default function WebhookManagement({
                             </Button>
                           </DropdownMenuTrigger>
                           <DropdownMenuContent align="end" className="w-48">
-                            <DropdownMenuItem>
+                            <DropdownMenuItem className="cursor-pointer">
                               <PencilIcon className="size-4" aria-hidden />
                               Edit
                             </DropdownMenuItem>
-                            <DropdownMenuItem>
+                            <DropdownMenuItem className="cursor-pointer">
                               <CopyIcon className="size-4" aria-hidden />
                               Copy Secret
                             </DropdownMenuItem>
                             <DropdownMenuSeparator />
-                            <DropdownMenuItem variant="destructive">
+                            <DropdownMenuItem
+                              variant="destructive"
+                              className="cursor-pointer"
+                            >
                               <Trash2Icon className="size-4" aria-hidden />
                               Delete
                             </DropdownMenuItem>
@@ -352,7 +363,7 @@ export default function WebhookManagement({
                   type="button"
                   variant="ghost"
                   size="icon-sm"
-                  className="size-8"
+                  className="size-8 cursor-pointer"
                   aria-label="Refresh"
                 >
                   <RefreshCwIcon className="size-4" aria-hidden />
@@ -415,7 +426,7 @@ export default function WebhookManagement({
                   type="button"
                   variant="ghost"
                   size="sm"
-                  className="w-full text-xs"
+                  className="w-full cursor-pointer text-xs"
                 >
                   View all logs
                 </Button>

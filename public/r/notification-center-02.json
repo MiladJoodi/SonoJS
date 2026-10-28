@@ -1,0 +1,42 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "notification-center-02",
+  "type": "registry:block",
+  "title": "notification-center-02",
+  "description": "Header bell popover — badge count, compact unread list, mark all and view all.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "avatar",
+    "badge",
+    "button",
+    "popover"
+  ],
+  "cssVars": {
+    "light": {
+      "canvas": "#f3f3f4",
+      "border-soft": "color-mix(in oklab, #e4e4e7 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18)",
+      "background": "var(--canvas)",
+      "card": "#ffffff"
+    },
+    "dark": {
+      "canvas": "#09090b",
+      "border-soft": "color-mix(in oklab, #27272a 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(0, 0, 0, 0.24), 0 28px 56px -28px rgba(0, 0, 0, 0.48)",
+      "background": "var(--canvas)",
+      "card": "#18181b"
+    }
+  },
+  "files": [
+    {
+      "path": "components/blocks/communication/notification-center-02/notification-center.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { BellIcon, CheckCheckIcon } from \"lucide-react\"\n\nimport { Avatar, AvatarFallback } from \"@/components/ui/avatar\"\nimport { Badge } from \"@/components/ui/badge\"\nimport { Button } from \"@/components/ui/button\"\nimport {\n  Popover,\n  PopoverContent,\n  PopoverTrigger,\n} from \"@/components/ui/popover\"\nimport { cn } from \"@/lib/utils\"\n\ntype Item = {\n  id: string\n  title: string\n  body: string\n  time: string\n  unread: boolean\n  initials?: string\n}\n\nconst INITIAL: Item[] = [\n  {\n    id: \"1\",\n    title: \"Sarah mentioned you\",\n    body: \"Could you review the button states before Friday?\",\n    time: \"2m\",\n    unread: true,\n    initials: \"SJ\",\n  },\n  {\n    id: \"2\",\n    title: \"Access request\",\n    body: \"David Chen wants editor access to Sono Pro.\",\n    time: \"45m\",\n    unread: true,\n    initials: \"DC\",\n  },\n  {\n    id: \"3\",\n    title: \"Build succeeded\",\n    body: \"sonojs-web finished in 1m 24s.\",\n    time: \"2h\",\n    unread: false,\n  },\n]\n\nexport default function NotificationCenter({\n  className,\n  ...props\n}: React.ComponentProps<\"section\">) {\n  const [items, setItems] = React.useState(INITIAL)\n  const [open, setOpen] = React.useState(false)\n  const unread = items.filter((n) => n.unread).length\n\n  const markAllRead = () =>\n    setItems((prev) => prev.map((n) => ({ ...n, unread: false })))\n\n  const markRead = (id: string) =>\n    setItems((prev) =>\n      prev.map((n) => (n.id === id ? { ...n, unread: false } : n))\n    )\n\n  return (\n    <section\n      className={cn(\n        \"w-full min-w-0 bg-canvas px-4 py-4 text-foreground sm:px-6 sm:py-5\",\n        className\n      )}\n      aria-label=\"App chrome with notifications\"\n      {...props}\n    >\n      <div className=\"mx-auto w-full max-w-3xl overflow-hidden rounded-[12px] border border-border/70 bg-card shadow-soft\">\n        <header className=\"flex items-center justify-between gap-3 px-4 py-3 sm:px-5\">\n          <div className=\"flex items-center gap-2\">\n            <span className=\"flex size-8 items-center justify-center rounded-md bg-primary/10 text-sm font-semibold text-primary\">\n              S\n            </span>\n            <span className=\"text-sm font-semibold tracking-tight\">Sono</span>\n          </div>\n\n          <Popover open={open} onOpenChange={setOpen}>\n            <PopoverTrigger asChild>\n              <Button\n                type=\"button\"\n                variant=\"ghost\"\n                size=\"icon\"\n                className=\"relative size-9 cursor-pointer\"\n                aria-label={\n                  unread > 0\n                    ? `Notifications, ${unread} unread`\n                    : \"Notifications\"\n                }\n              >\n                <BellIcon className=\"size-4\" aria-hidden />\n                {unread > 0 ? (\n                  <Badge\n                    variant=\"default\"\n                    className=\"absolute -end-0.5 -top-0.5 h-4 min-w-4 justify-center rounded-full px-1 text-[10px] tabular-nums\"\n                  >\n                    {unread}\n                  </Badge>\n                ) : null}\n              </Button>\n            </PopoverTrigger>\n            <PopoverContent\n              align=\"end\"\n              sideOffset={8}\n              className=\"w-[min(100vw-2rem,22rem)] p-0\"\n            >\n              <div className=\"flex items-center justify-between gap-2 border-b border-border/70 px-3 py-2.5\">\n                <p className=\"text-sm font-semibold\">Notifications</p>\n                <Button\n                  type=\"button\"\n                  variant=\"ghost\"\n                  size=\"sm\"\n                  className=\"h-8 cursor-pointer gap-1 px-2 text-xs disabled:cursor-not-allowed\"\n                  disabled={unread === 0}\n                  onClick={markAllRead}\n                >\n                  <CheckCheckIcon className=\"size-3.5\" aria-hidden />\n                  Mark all\n                </Button>\n              </div>\n\n              <ul className=\"max-h-72 divide-y divide-border/70 overflow-y-auto\">\n                {items.map((item) => (\n                  <li key={item.id}>\n                    <button\n                      type=\"button\"\n                      className={cn(\n                        \"flex w-full cursor-pointer gap-3 px-3 py-3 text-start transition-colors\",\n                        item.unread\n                          ? \"bg-primary/[0.04] hover:bg-primary/[0.07]\"\n                          : \"hover:bg-muted/40\"\n                      )}\n                      onClick={() => markRead(item.id)}\n                    >\n                      {item.initials ? (\n                        <Avatar className=\"size-8 shrink-0\">\n                          <AvatarFallback className=\"text-xs\">\n                            {item.initials}\n                          </AvatarFallback>\n                        </Avatar>\n                      ) : (\n                        <span className=\"flex size-8 shrink-0 items-center justify-center rounded-full bg-muted text-muted-foreground\">\n                          <BellIcon className=\"size-3.5\" aria-hidden />\n                        </span>\n                      )}\n                      <span className=\"min-w-0 flex-1\">\n                        <span className=\"flex items-baseline justify-between gap-2\">\n                          <span\n                            className={cn(\n                              \"truncate text-sm\",\n                              item.unread\n                                ? \"font-semibold\"\n                                : \"font-medium\"\n                            )}\n                          >\n                            {item.title}\n                          </span>\n                          <time className=\"shrink-0 text-[11px] text-muted-foreground tabular-nums\">\n                            {item.time}\n                          </time>\n                        </span>\n                        <span className=\"mt-0.5 line-clamp-2 text-xs leading-snug text-muted-foreground\">\n                          {item.body}\n                        </span>\n                      </span>\n                    </button>\n                  </li>\n                ))}\n              </ul>\n\n              <div className=\"border-t border-border/70 p-2\">\n                <Button\n                  type=\"button\"\n                  variant=\"ghost\"\n                  size=\"sm\"\n                  className=\"w-full cursor-pointer\"\n                >\n                  View all notifications\n                </Button>\n              </div>\n            </PopoverContent>\n          </Popover>\n        </header>\n      </div>\n    </section>\n  )\n}\n",
+      "target": "components/blocks/communication/notification-center-02/notification-center.tsx"
+    }
+  ],
+  "version": "0.1.0+ecee075feb57",
+  "generatedAt": "2026-10-28T13:52:13.777Z"
+}

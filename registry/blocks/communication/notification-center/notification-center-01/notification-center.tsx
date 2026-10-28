@@ -106,11 +106,11 @@ function typeTone(type: NotificationType) {
     case "mention":
       return "bg-primary/10 text-primary"
     case "request":
-      return "bg-violet-500/10 text-violet-700 dark:text-violet-300"
+      return "bg-muted text-foreground"
     case "security":
-      return "bg-amber-500/10 text-amber-700 dark:text-amber-300"
+      return "bg-destructive/10 text-destructive"
     default:
-      return "bg-emerald-500/10 text-emerald-700 dark:text-emerald-300"
+      return "bg-muted text-muted-foreground"
   }
 }
 
@@ -193,7 +193,7 @@ export default function NotificationCenter({
             type="button"
             variant="ghost"
             size="sm"
-            className="shrink-0 gap-1.5"
+            className="shrink-0 cursor-pointer gap-1.5 disabled:cursor-not-allowed"
             disabled={unread === 0}
             onClick={markAllRead}
           >
@@ -353,7 +353,7 @@ export default function NotificationCenter({
                                   <Button
                                     type="button"
                                     size="xs"
-                                    className="gap-1"
+                                    className="cursor-pointer gap-1"
                                     onClick={() => markRead(item.id)}
                                   >
                                     <CheckIcon className="size-3.5" aria-hidden />
@@ -363,7 +363,7 @@ export default function NotificationCenter({
                                     type="button"
                                     size="xs"
                                     variant="outline"
-                                    className="gap-1"
+                                    className="cursor-pointer gap-1"
                                     onClick={() => remove(item.id)}
                                   >
                                     <XIcon className="size-3.5" aria-hidden />
@@ -378,7 +378,7 @@ export default function NotificationCenter({
                                     type="button"
                                     size="xs"
                                     variant="outline"
-                                    className="gap-1"
+                                    className="cursor-pointer gap-1"
                                     onClick={() => markRead(item.id)}
                                   >
                                     <CircleAlertIcon
@@ -396,6 +396,7 @@ export default function NotificationCenter({
                                     type="button"
                                     size="xs"
                                     variant="outline"
+                                    className="cursor-pointer"
                                     onClick={() => markRead(item.id)}
                                   >
                                     Open thread
@@ -410,7 +411,7 @@ export default function NotificationCenter({
                                   type="button"
                                   variant="ghost"
                                   size="icon-xs"
-                                  className="absolute end-2 top-2 opacity-0 group-hover:opacity-100 focus-visible:opacity-100 data-[state=open]:opacity-100"
+                                  className="absolute end-2 top-2 cursor-pointer opacity-0 group-hover:opacity-100 focus-visible:opacity-100 data-[state=open]:opacity-100"
                                   aria-label={`Actions for ${item.title}`}
                                 >
                                   <EllipsisIcon className="size-4" aria-hidden />

@@ -1,107 +1,605 @@
 "use client"
 
-import { AppleIcon } from "@/registry/icons/apple"
-import { GoogleIcon } from "@/registry/icons/google"
-import { TinyAreaChart } from "@/registry/charts/area/tiny-area-chart"
-import { Button } from "@sonojs/ui/components/button"
-import { Input } from "@sonojs/ui/components/input"
-import { Label } from "@sonojs/ui/components/label"
+import * as React from "react"
+import { PauseIcon, PlayIcon } from "lucide-react"
+import { useTheme } from "next-themes"
+import { Area, AreaChart as RechartsAreaChart } from "recharts"
+
+import { chime, tick, tone } from "@/components/home/hero-showcase-audio"
+import { ChartContainer, type ChartConfig } from "@/components/ui/chart"
+import {
+  MARKET_UP,
+  chartAreaGradientStops,
+  chartNeonGlowProps,
+  chartNeonOverflowClassName,
+} from "@/registry/charts/_lib/chart-styles"
+import { useMarketNeon } from "@/registry/charts/_lib/use-market-neon"
 import { cn } from "@/lib/utils"
 
-export function ShowcaseLoginPreview({ className }: { className?: string }) {
+function DemoCard({
+  className,
+  children,
+  show,
+}: {
+  className?: string
+  children: React.ReactNode
+  show: boolean
+}) {
   return (
     <div
       className={cn(
-        "mx-auto w-full max-w-[380px] rounded-[12px] border border-border/70 bg-card p-5 shadow-soft",
+        "w-full max-w-[350px] rounded-[18px] border border-border/70 bg-card p-[22px] text-foreground shadow-soft",
+        "transition-[opacity,transform] duration-500 ease-[cubic-bezier(0.2,0.8,0.2,1)] motion-reduce:transition-none",
+        show
+          ? "translate-y-0 scale-100 opacity-100"
+          : "translate-y-3.5 scale-[0.985] opacity-0",
         className
       )}
     >
-      <header className="mb-4 space-y-1 text-start">
-        <h3 className="text-lg font-semibold tracking-tight text-foreground">
-          Welcome back
-        </h3>
-        <p className="text-sm text-muted-foreground">Sign in to your account</p>
-      </header>
-
-      <form
-        className="flex flex-col gap-3"
-        onSubmit={(e) => e.preventDefault()}
-      >
-        <div className="grid gap-1.5 text-start">
-          <Label htmlFor="hero-showcase-email" className="text-[13px]">
-            Email
-          </Label>
-          <Input
-            id="hero-showcase-email"
-            type="email"
-            placeholder="name@example.com"
-            autoComplete="off"
-            tabIndex={-1}
-            className="h-11 shadow-none"
-            readOnly
-            defaultValue=""
-          />
-        </div>
-        <div className="grid gap-1.5 text-start">
-          <Label htmlFor="hero-showcase-password" className="text-[13px]">
-            Password
-          </Label>
-          <Input
-            id="hero-showcase-password"
-            type="password"
-            placeholder="••••••••"
-            autoComplete="off"
-            tabIndex={-1}
-            className="h-11 shadow-none"
-            readOnly
-            defaultValue=""
-          />
-        </div>
-        <Button
-          type="submit"
-          className="mt-1 h-11 w-full shadow-none"
-          tabIndex={-1}
-        >
-          Sign in
-        </Button>
-        <div className="grid grid-cols-2 gap-2 pt-1">
-          <Button
-            type="button"
-            variant="outline"
-            className="h-11 border-border/70 bg-card shadow-none hover:bg-muted"
-            tabIndex={-1}
-          >
-            <GoogleIcon className="size-4" />
-            Google
-          </Button>
-          <Button
-            type="button"
-            variant="outline"
-            className="h-11 border-border/70 bg-card shadow-none hover:bg-muted"
-            tabIndex={-1}
-          >
-            <AppleIcon className="size-4" />
-            Apple
-          </Button>
-        </div>
-      </form>
+      {children}
     </div>
   )
 }
 
-export function ShowcaseChartPreview({ className }: { className?: string }) {
+function Stagger({
+  i,
+  show,
+  className,
+  children,
+}: {
+  i: number
+  show: boolean
+  className?: string
+  children: React.ReactNode
+}) {
   return (
     <div
       className={cn(
-        "mx-auto w-full max-w-[420px] overflow-hidden rounded-[12px] border border-border/70 bg-card p-1 shadow-soft sm:p-2",
+        "transition-[opacity,transform] duration-300 ease-out motion-reduce:transition-none",
+        show ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0",
         className
       )}
+      style={{
+        transitionDelay: show ? `${i * 70 + 120}ms` : "0ms",
+      }}
     >
-      <TinyAreaChart
-        title="Weekly active"
-        subtitle="Last 6 months"
-        className="max-w-none border-0 shadow-none"
-      />
+      {children}
     </div>
   )
+}
+
+export function ShowcaseLoginPreview({
+  show,
+  className,
+}: {
+  show: boolean
+  className?: string
+}) {
+  const [signedIn, setSignedIn] = React.useState(false)
+
+  React.useEffect(() => {
+    setSignedIn(false)
+  }, [show])
+
+  return (
+    <DemoCard show={show} className={className}>
+      <Stagger i={0} show={show}>
+        <h2 className="text-[20px] font-semibold tracking-[-0.02em]">
+          Welcome back
+        </h2>
+      </Stagger>
+      <Stagger i={1} show={show}>
+        <p className="mt-1 mb-4 text-sm text-muted-foreground">
+          Sign in to continue.
+        </p>
+      </Stagger>
+      <Stagger i={2} show={show}>
+        <label className="mb-3 block text-start">
+          <span className="mb-1.5 block text-[13px] font-medium">Email</span>
+          <input
+            type="email"
+            placeholder="you@company.com"
+            tabIndex={-1}
+            readOnly
+            className="h-10 w-full rounded-[10px] border border-border/70 bg-background px-3 text-sm outline-none"
+          />
+        </label>
+      </Stagger>
+      <Stagger i={3} show={show}>
+        <label className="mb-3 block text-start">
+          <span className="mb-1.5 block text-[13px] font-medium">Password</span>
+          <input
+            type="password"
+            placeholder="••••••••••"
+            tabIndex={-1}
+            readOnly
+            className="h-10 w-full rounded-[10px] border border-border/70 bg-background px-3 text-sm outline-none"
+          />
+        </label>
+      </Stagger>
+      <Stagger i={4} show={show}>
+        <button
+          type="button"
+          onClick={() => {
+            setSignedIn(true)
+            chime()
+          }}
+          className="mt-1 flex h-[42px] w-full cursor-pointer items-center justify-center rounded-[10px] bg-primary text-sm font-medium text-primary-foreground transition-transform active:scale-[0.98]"
+        >
+          {signedIn ? "Signed in ✓" : "Sign in"}
+        </button>
+      </Stagger>
+      <Stagger i={5} show={show}>
+        <button
+          type="button"
+          tabIndex={-1}
+          className="mt-2.5 flex h-[42px] w-full cursor-pointer items-center justify-center rounded-[10px] border border-border/70 text-sm font-medium"
+        >
+          Continue with GitHub
+        </button>
+      </Stagger>
+      <Stagger i={6} show={show}>
+        <p className="mt-3.5 text-center text-[13px] text-muted-foreground">
+          Forgot your password?
+        </p>
+      </Stagger>
+    </DemoCard>
+  )
+}
+
+const PRICES = [12, 29, 79] as const
+
+export function ShowcasePricingPreview({
+  show,
+  className,
+}: {
+  show: boolean
+  className?: string
+}) {
+  const [plan, setPlan] = React.useState(1)
+  const [yearly, setYearly] = React.useState(false)
+
+  React.useEffect(() => {
+    setPlan(1)
+    setYearly(false)
+  }, [show])
+
+  const price = Math.round(PRICES[plan]! * (yearly ? 0.8 : 1))
+
+  return (
+    <DemoCard show={show} className={className}>
+      <Stagger i={0} show={show}>
+        <div className="mb-3 flex gap-1 rounded-[10px] border border-border/70 bg-background p-[3px]">
+          {(["Solo", "Team", "Scale"] as const).map((label, i) => (
+            <button
+              key={label}
+              type="button"
+              aria-pressed={plan === i}
+              onClick={() => {
+                setPlan(i)
+                tick()
+              }}
+              className={cn(
+                "h-[30px] flex-1 cursor-pointer rounded-[7px] text-[13px] font-medium transition-colors",
+                plan === i
+                  ? "bg-card text-foreground shadow-sm"
+                  : "text-muted-foreground"
+              )}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+      </Stagger>
+      <Stagger i={1} show={show}>
+        <div className="mb-3 flex gap-1 rounded-[10px] border border-border/70 bg-background p-[3px]">
+          {(
+            [
+              { label: "Monthly", yr: false },
+              { label: "Yearly · save 20%", yr: true },
+            ] as const
+          ).map((b) => (
+            <button
+              key={b.label}
+              type="button"
+              aria-pressed={yearly === b.yr}
+              onClick={() => {
+                setYearly(b.yr)
+                tick()
+              }}
+              className={cn(
+                "h-[30px] flex-1 cursor-pointer rounded-[7px] text-[13px] font-medium transition-colors",
+                yearly === b.yr
+                  ? "bg-card text-foreground shadow-sm"
+                  : "text-muted-foreground"
+              )}
+            >
+              {b.label}
+            </button>
+          ))}
+        </div>
+      </Stagger>
+      <Stagger i={2} show={show}>
+        <p className="mt-2 text-[46px] leading-none font-semibold tracking-[-0.04em]">
+          ${price}
+          <small className="ms-1 text-sm font-normal tracking-normal text-muted-foreground">
+            / seat / month
+          </small>
+        </p>
+      </Stagger>
+      <Stagger i={3} show={show}>
+        <ul className="mt-3.5 grid gap-2 text-sm text-muted-foreground">
+          {[
+            "Unlimited projects",
+            "Shared team workspaces",
+            "Email support",
+          ].map((item) => (
+            <li key={item} className="flex items-center gap-2.5 text-start">
+              <span
+                className="size-1.5 shrink-0 rounded-full bg-primary"
+                aria-hidden
+              />
+              {item}
+            </li>
+          ))}
+        </ul>
+      </Stagger>
+      <Stagger i={4} show={show}>
+        <button
+          type="button"
+          className="mt-4 flex h-[42px] w-full cursor-pointer items-center justify-center rounded-[10px] bg-primary text-sm font-medium text-primary-foreground transition-transform active:scale-[0.98]"
+        >
+          Choose plan
+        </button>
+      </Stagger>
+    </DemoCard>
+  )
+}
+
+const EQ_BARS = Array.from({ length: 9 }, (_, b) => ({
+  h: 24 + Math.round(Math.abs(Math.sin(b * 1.3)) * 56),
+  d: -(b * 0.11),
+}))
+
+const PLAYER_NOTES = [392, 440, 523.25, 587.33, 659.25, 783.99]
+
+export function ShowcasePlayerPreview({
+  show,
+  className,
+}: {
+  show: boolean
+  className?: string
+}) {
+  const [playing, setPlaying] = React.useState(false)
+  const [elapsed, setElapsed] = React.useState(0)
+  const timerRef = React.useRef<number | null>(null)
+
+  React.useEffect(() => {
+    setPlaying(false)
+    setElapsed(0)
+    if (timerRef.current) window.clearInterval(timerRef.current)
+    return () => {
+      if (timerRef.current) window.clearInterval(timerRef.current)
+    }
+  }, [show])
+
+  React.useEffect(() => {
+    if (!playing) {
+      if (timerRef.current) window.clearInterval(timerRef.current)
+      return
+    }
+    timerRef.current = window.setInterval(() => {
+      setElapsed((s) => {
+        const next = s + 0.32
+        if (Math.random() < 0.75) {
+          tone(
+            PLAYER_NOTES[Math.floor(Math.random() * PLAYER_NOTES.length)]!,
+            0,
+            0.5,
+            0.03
+          )
+        }
+        return next >= 204 ? 0 : next
+      })
+    }, 320)
+    return () => {
+      if (timerRef.current) window.clearInterval(timerRef.current)
+    }
+  }, [playing])
+
+  const mins = Math.floor(elapsed / 60)
+  const secs = Math.floor(elapsed % 60)
+  const pct = Math.min(100, (elapsed / 204) * 100)
+
+  return (
+    <DemoCard show={show} className={cn(playing && "playing", className)}>
+      <Stagger i={0} show={show}>
+        <div className="mb-3.5 flex h-[150px] items-center justify-center gap-1.5 rounded-[12px] bg-primary">
+          {EQ_BARS.map((bar, i) => (
+            <b
+              key={i}
+              className={cn(
+                "inline-block w-1.5 max-h-20 origin-center rounded-[3px] bg-primary-foreground opacity-90",
+                playing &&
+                  "animate-[sono-eq_0.9s_ease-in-out_infinite_alternate] motion-reduce:animate-none"
+              )}
+              style={
+                {
+                  height: bar.h,
+                  animationDelay: `${bar.d}s`,
+                } as React.CSSProperties
+              }
+            />
+          ))}
+        </div>
+      </Stagger>
+      <Stagger i={1} show={show}>
+        <div className="flex items-center gap-3">
+          <div className="min-w-0 flex-1 text-start">
+            <strong className="block text-base tracking-[-0.01em]">
+              Low tide
+            </strong>
+            <span className="text-[13px] text-muted-foreground">
+              Sono Sessions
+            </span>
+          </div>
+          <button
+            type="button"
+            aria-label={playing ? "Pause" : "Play"}
+            onClick={() => {
+              setPlaying((p) => !p)
+              tick()
+            }}
+            className="grid size-[46px] shrink-0 cursor-pointer place-items-center rounded-full bg-foreground text-background"
+          >
+            {playing ? (
+              <PauseIcon className="size-[18px]" fill="currentColor" />
+            ) : (
+              <PlayIcon className="size-[18px]" fill="currentColor" />
+            )}
+          </button>
+        </div>
+      </Stagger>
+      <Stagger i={2} show={show}>
+        <div className="mt-2">
+          <div className="mt-2 h-[3px] overflow-hidden rounded-sm bg-border">
+            <i
+              className="block h-full bg-primary transition-[width] duration-300"
+              style={{ width: `${pct}%` }}
+            />
+          </div>
+          <div className="mt-3.5 flex justify-between font-mono text-xs text-muted-foreground">
+            <span>
+              {mins}:{secs.toString().padStart(2, "0")}
+            </span>
+            <span>3:24</span>
+          </div>
+        </div>
+      </Stagger>
+    </DemoCard>
+  )
+}
+
+const COMMANDS = [
+  ["New project", "N"],
+  ["Invite teammate", "I"],
+  ["Switch theme", "T"],
+  ["Open settings", ","],
+  ["Deploy to production", "D"],
+] as const
+
+export function ShowcasePalettePreview({
+  show,
+  className,
+}: {
+  show: boolean
+  className?: string
+}) {
+  const [q, setQ] = React.useState("")
+  const [toast, setToast] = React.useState("")
+  const { resolvedTheme, setTheme } = useTheme()
+
+  React.useEffect(() => {
+    setQ("")
+    setToast("")
+  }, [show])
+
+  const filtered = COMMANDS.filter((c) =>
+    c[0].toLowerCase().includes(q.toLowerCase())
+  )
+
+  function run(name: string) {
+    setToast(`Ran: ${name}`)
+    chime()
+    if (name === "Switch theme") {
+      setTheme(resolvedTheme === "dark" ? "light" : "dark")
+    }
+  }
+
+  return (
+    <DemoCard show={show} className={className}>
+      <Stagger i={0} show={show}>
+        <input
+          value={q}
+          onChange={(e) => {
+            setQ(e.target.value)
+            tick()
+          }}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && filtered[0]) run(filtered[0][0])
+          }}
+          placeholder="Type a command…"
+          aria-label="Command"
+          className="h-10 w-full rounded-[10px] border border-border/70 bg-background px-3 text-sm outline-none focus-visible:border-primary"
+        />
+      </Stagger>
+      <Stagger i={1} show={show}>
+        <ul className="mt-2.5 grid gap-0.5">
+          {filtered.length === 0 ? (
+            <li>
+              <button
+                type="button"
+                disabled
+                className="w-full rounded-lg px-2.5 py-2 text-start text-sm text-muted-foreground"
+              >
+                No commands found
+              </button>
+            </li>
+          ) : (
+            filtered.map((c, i) => (
+              <li key={c[0]}>
+                <button
+                  type="button"
+                  onClick={() => run(c[0])}
+                  className={cn(
+                    "flex w-full cursor-pointer items-center justify-between rounded-lg px-2.5 py-2 text-sm hover:bg-muted",
+                    i === 0 && "bg-muted"
+                  )}
+                >
+                  {c[0]}
+                  <kbd className="font-mono text-xs text-muted-foreground">
+                    {c[1]}
+                  </kbd>
+                </button>
+              </li>
+            ))
+          )}
+        </ul>
+      </Stagger>
+      <Stagger i={2} show={show}>
+        <p
+          role="status"
+          className="mt-2.5 min-h-[18px] text-[13px] text-primary"
+        >
+          {toast}
+        </p>
+      </Stagger>
+    </DemoCard>
+  )
+}
+
+const CHART_DATA = [
+  { month: "Oct", value: 1820 },
+  { month: "Nov", value: 2140 },
+  { month: "Dec", value: 1980 },
+  { month: "Jan", value: 2460 },
+  { month: "Feb", value: 2710 },
+  { month: "Mar", value: 2590 },
+  { month: "Apr", value: 3120 },
+  { month: "May", value: 3480 },
+]
+
+export function ShowcaseChartPreview({
+  show,
+  className,
+}: {
+  show: boolean
+  className?: string
+}) {
+  const neon = useMarketNeon()
+  const color = neon ? MARKET_UP : "var(--chart-1)"
+  const glow = neon ? chartNeonGlowProps(color) : null
+  const gradId = React.useId().replace(/:/g, "")
+  const last = CHART_DATA[CHART_DATA.length - 1]!
+  const prev = CHART_DATA[CHART_DATA.length - 2]!
+  const deltaPct = ((last.value - prev.value) / prev.value) * 100
+
+  const chartConfig = {
+    value: { label: "Users", color },
+  } satisfies ChartConfig
+
+  return (
+    <DemoCard show={show} className={className}>
+      <Stagger i={0} show={show}>
+        <div className="mb-4 flex items-start justify-between gap-3 text-start">
+          <div className="min-w-0 space-y-0.5">
+            <p className="text-sm font-medium text-muted-foreground">
+              Active users
+            </p>
+            <p
+              dir="ltr"
+              className="text-[1.75rem] font-semibold tracking-tight tabular-nums"
+            >
+              {last.value.toLocaleString("en-US")}
+            </p>
+          </div>
+          <span
+            dir="ltr"
+            className="mt-0.5 inline-flex shrink-0 items-center rounded-full px-2 py-0.5 text-xs font-medium tabular-nums text-[var(--chart-up)]"
+            style={{
+              backgroundColor:
+                "color-mix(in oklab, var(--chart-up) 12%, transparent)",
+            }}
+          >
+            +{deltaPct.toFixed(1)}%
+          </span>
+        </div>
+      </Stagger>
+      <Stagger i={1} show={show}>
+        <ChartContainer
+          config={chartConfig}
+          className={cn(
+            "aspect-auto h-[160px] w-full font-sans",
+            neon && chartNeonOverflowClassName
+          )}
+        >
+          <RechartsAreaChart
+            accessibilityLayer
+            data={CHART_DATA}
+            margin={{ top: 8, right: 4, left: 0, bottom: 0 }}
+          >
+            <defs>
+              <linearGradient id={gradId} x1="0" y1="0" x2="0" y2="1">
+                {chartAreaGradientStops(color, {
+                  startOpacity: neon ? 0.32 : 0.4,
+                  endOpacity: 0,
+                }).map((s) => (
+                  <stop
+                    key={s.offset}
+                    offset={s.offset}
+                    stopColor={s.stopColor}
+                    stopOpacity={s.stopOpacity}
+                  />
+                ))}
+              </linearGradient>
+            </defs>
+            <Area
+              type="monotone"
+              dataKey="value"
+              name="value"
+              stroke={color}
+              strokeWidth={neon ? 2.25 : 2}
+              fill={`url(#${gradId})`}
+              fillOpacity={1}
+              isAnimationActive={show}
+              animationDuration={500}
+              animationEasing="ease-out"
+              {...(glow ?? {})}
+            />
+          </RechartsAreaChart>
+        </ChartContainer>
+      </Stagger>
+    </DemoCard>
+  )
+}
+
+export type ShowcaseDemoId =
+  | "login"
+  | "pricing"
+  | "player"
+  | "palette"
+  | "chart"
+
+export function ShowcasePreviewFor({
+  id,
+  show,
+}: {
+  id: ShowcaseDemoId
+  show: boolean
+}) {
+  if (id === "pricing") return <ShowcasePricingPreview show={show} />
+  if (id === "player") return <ShowcasePlayerPreview show={show} />
+  if (id === "palette") return <ShowcasePalettePreview show={show} />
+  if (id === "chart") return <ShowcaseChartPreview show={show} />
+  return <ShowcaseLoginPreview show={show} />
 }
