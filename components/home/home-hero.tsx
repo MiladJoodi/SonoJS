@@ -28,14 +28,14 @@ export function HomeHero() {
         }}
       />
 
-      <div className="workspace-shell relative z-10 mx-auto flex w-full max-w-[1180px] flex-1 flex-col justify-center px-5 py-12 sm:px-7 sm:py-16">
-        <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:gap-[clamp(2.5rem,6vw,5.5rem)]">
+      <div className="workspace-shell relative z-10 mx-auto flex w-full max-w-[1180px] flex-1 flex-col justify-center px-4 pt-8 pb-[max(5rem,calc(2rem+env(safe-area-inset-bottom)))] sm:px-7 sm:pt-14 sm:pb-20 lg:pt-16 lg:pb-24">
+        <div className="grid items-center gap-8 sm:gap-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:gap-[clamp(2.5rem,6vw,5.5rem)]">
           <section
-            className="text-start"
+            className="min-w-0 text-start"
             aria-labelledby="home-hero-heading"
           >
             <p
-              className="mb-6 text-[clamp(1.75rem,3.4vw,2.25rem)] font-semibold tracking-[-0.03em] text-foreground sm:mb-9"
+              className="mb-5 text-[clamp(1.5rem,5vw,2.25rem)] font-semibold tracking-[-0.03em] text-foreground sm:mb-9"
               style={{
                 animation:
                   "sono-fade-in var(--motion-fast) var(--motion-ease) both",
@@ -46,7 +46,7 @@ export function HomeHero() {
 
             <h1
               id="home-hero-heading"
-              className="text-balance text-[clamp(2.625rem,6.4vw,5rem)] leading-[1.02] font-semibold tracking-[-0.045em] text-foreground"
+              className="text-balance text-[clamp(2.125rem,9vw,5rem)] leading-[1.05] font-semibold tracking-[-0.045em] text-foreground sm:leading-[1.02]"
               style={{
                 animation: "sono-fade-up 520ms var(--motion-ease) 60ms both",
               }}
@@ -56,7 +56,7 @@ export function HomeHero() {
             </h1>
 
             <p
-              className="mt-6 max-w-[32em] text-[clamp(1rem,1.8vw,1.1875rem)] leading-[1.55] text-muted-foreground"
+              className="mt-4 max-w-[32em] text-[clamp(0.9375rem,3.5vw,1.1875rem)] leading-[1.55] text-muted-foreground sm:mt-6"
               style={{
                 animation: "sono-fade-up 520ms var(--motion-ease) 120ms both",
               }}
@@ -66,7 +66,7 @@ export function HomeHero() {
             </p>
 
             <div
-              className="mt-10"
+              className="mt-7 sm:mt-10"
               style={{
                 animation: "sono-fade-up 520ms var(--motion-ease) 180ms both",
               }}
@@ -75,7 +75,7 @@ export function HomeHero() {
             </div>
 
             <div
-              className="mt-6"
+              className="mt-5 sm:mt-6"
               style={{
                 animation: "sono-fade-up 520ms var(--motion-ease) 240ms both",
               }}
@@ -85,6 +85,7 @@ export function HomeHero() {
           </section>
 
           <div
+            className="min-w-0"
             style={{
               animation: "sono-fade-up 520ms var(--motion-ease) 200ms both",
             }}

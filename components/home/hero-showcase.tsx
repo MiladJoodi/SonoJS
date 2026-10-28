@@ -1,21 +1,14 @@
 "use client"
 
 import * as React from "react"
-import { ArrowRightIcon, Volume2Icon, VolumeXIcon } from "lucide-react"
+import { ArrowRightIcon } from "lucide-react"
 
-import {
-  chime,
-  getShowcaseSound,
-  setShowcaseSound,
-  tick,
-} from "@/components/home/hero-showcase-audio"
+import { chime, tick } from "@/components/home/hero-showcase-audio"
 import {
   ShowcasePreviewFor,
   type ShowcaseDemoId,
 } from "@/components/home/hero-showcase-previews"
 import { cn } from "@/lib/utils"
-
-/* Stage demos: login | pricing | player | palette | chart */
 
 const PROMPTS: {
   id: ShowcaseDemoId
@@ -84,24 +77,13 @@ export function HeroShowcase({ className }: { className?: string }) {
   const [query, setQuery] = React.useState("")
   const [steps, setSteps] = React.useState<StepState[]>([])
   const [showCanvas, setShowCanvas] = React.useState(false)
-  const [soundOn, setSoundOn] = React.useState(true)
   const [previewKey, setPreviewKey] = React.useState(0)
 
   const runRef = React.useRef(0)
-  const autoRef = React.useRef(true)
-  const nextTimerRef = React.useRef<number | null>(null)
-
-  const clearNext = React.useCallback(() => {
-    if (nextTimerRef.current) {
-      window.clearTimeout(nextTimerRef.current)
-      nextTimerRef.current = null
-    }
-  }, [])
 
   const build = React.useCallback(
     async (text: string, id: ShowcaseDemoId, fast: boolean) => {
       const run = ++runRef.current
-      clearNext()
       setActive(id)
       setShowCanvas(false)
       setSteps([])
@@ -154,32 +136,20 @@ export function HeroShowcase({ className }: { className?: string }) {
       if (run !== runRef.current) return
       setShowCanvas(true)
       chime()
-
-      if (autoRef.current && !reduced) {
-        nextTimerRef.current = window.setTimeout(() => {
-          const ids = PROMPTS.map((p) => p.id)
-          const next = ids[(ids.indexOf(id) + 1) % ids.length]!
-          const nextPrompt = PROMPTS.find((p) => p.id === next)!
-          void build(nextPrompt.text, next, false)
-        }, 7500)
-      }
     },
-    [clearNext]
+    []
   )
 
   React.useEffect(() => {
-    setShowcaseSound(true)
     const first = PROMPTS[0]!
     void build(first.text, first.id, prefersReducedMotion())
     return () => {
       runRef.current += 1
-      clearNext()
     }
-  }, [build, clearNext])
+  }, [build])
 
   function selectChip(id: ShowcaseDemoId) {
-    autoRef.current = false
-    clearNext()
+    if (id === active) return
     tick()
     const prompt = PROMPTS.find((p) => p.id === id)!
     void build(prompt.text, id, false)
@@ -189,117 +159,85 @@ export function HeroShowcase({ className }: { className?: string }) {
     e.preventDefault()
     const v = query.trim()
     if (!v) return
-    autoRef.current = false
-    clearNext()
     void build(v, pickPrompt(v), true)
-  }
-
-  function toggleSound() {
-    const next = !getShowcaseSound()
-    setShowcaseSound(next)
-    setSoundOn(next)
-    if (next) tick()
   }
 
   return (
     <section
       aria-label="Interactive demo: describe a UI and watch an agent build it"
-      onPointerDown={() => {
-        autoRef.current = false
-        clearNext()
-      }}
       className={cn(
-        "flex min-h-[540px] flex-col gap-3.5 rounded-3xl border border-border/70 bg-muted/50 p-[18px] transition-colors dark:bg-muted/30",
+        "flex min-h-0 flex-col gap-3 rounded-2xl border border-border/70 bg-muted/50 p-3 transition-colors sm:min-h-[540px] sm:gap-3.5 sm:rounded-3xl sm:p-[18px] dark:bg-muted/30",
         className
       )}
     >
-      <div className="flex items-start gap-2">
-        <div
-          role="tablist"
-          aria-label="Showcase prompts"
-          className="flex flex-1 flex-wrap gap-1.5"
-        >
-          {PROMPTS.map((p) => {
-            const selected = p.id === active
-            return (
-              <button
-                key={p.id}
-                type="button"
-                role="tab"
-                aria-selected={selected}
-                aria-pressed={selected}
-                onClick={() => selectChip(p.id)}
-                className={cn(
-                  "cursor-pointer rounded-full border px-3 py-1.5 text-[13px] transition-colors",
-                  selected
-                    ? "border-primary text-foreground"
-                    : "border-border/70 bg-card text-muted-foreground hover:border-muted-foreground/50 hover:text-foreground"
-                )}
-              >
-                {p.label}
-              </button>
-            )
-          })}
-        </div>
-        <button
-          type="button"
-          aria-pressed={soundOn}
-          aria-label="Sound"
-          onClick={toggleSound}
-          className="grid size-8 shrink-0 cursor-pointer place-items-center rounded-lg text-muted-foreground transition-colors hover:bg-card hover:text-foreground"
-        >
-          {soundOn ? (
-            <Volume2Icon className="size-[17px]" />
-          ) : (
-            <VolumeXIcon className="size-[17px]" />
-          )}
-        </button>
+      <div
+        role="tablist"
+        aria-label="Showcase prompts"
+        className="flex min-w-0 gap-1.5 overflow-x-auto overscroll-x-contain pb-0.5 [-ms-overflow-style:none] [-webkit-overflow-scrolling:touch] [scrollbar-width:none] sm:flex-wrap sm:overflow-visible [&::-webkit-scrollbar]:hidden"
+      >
+        {PROMPTS.map((p) => {
+          const selected = p.id === active
+          return (
+            <button
+              key={p.id}
+              type="button"
+              role="tab"
+              aria-selected={selected}
+              aria-pressed={selected}
+              onClick={() => selectChip(p.id)}
+              className={cn(
+                "shrink-0 cursor-pointer rounded-full border px-2.5 py-1.5 text-xs transition-colors sm:px-3 sm:text-[13px]",
+                selected
+                  ? "border-primary text-foreground"
+                  : "border-border/70 bg-card text-muted-foreground hover:border-muted-foreground/50 hover:text-foreground"
+              )}
+            >
+              {p.label}
+            </button>
+          )
+        })}
       </div>
 
       <form
         onSubmit={onSubmit}
         className={cn(
-          "flex items-center gap-2 rounded-[14px] border border-border/70 bg-card py-1.5 ps-4 pe-1.5 transition-colors",
+          "flex items-center gap-1 rounded-[14px] border border-border/70 bg-card py-1 ps-3 pe-1 transition-colors sm:gap-1.5 sm:ps-4 sm:pe-1.5",
           "focus-within:border-primary"
         )}
       >
         <input
           value={query}
-          onChange={(e) => {
-            autoRef.current = false
-            clearNext()
-            setQuery(e.target.value)
-          }}
+          onChange={(e) => setQuery(e.target.value)}
           autoComplete="off"
           aria-label="Describe a UI"
-          placeholder="Describe any UI, then press Enter"
-          className="h-9 min-w-0 flex-1 bg-transparent text-[15px] text-foreground outline-none placeholder:text-muted-foreground"
+          placeholder="Describe a UI…"
+          className="h-9 min-w-0 flex-1 bg-transparent text-[13px] leading-snug text-foreground outline-none placeholder:text-muted-foreground sm:h-9 sm:text-[15px]"
         />
         <button
           type="submit"
           aria-label="Build"
-          className="grid size-9 shrink-0 cursor-pointer place-items-center rounded-[10px] bg-primary text-primary-foreground transition-transform active:scale-[0.98]"
+          className="grid size-8 shrink-0 cursor-pointer place-items-center rounded-lg text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
         >
-          <ArrowRightIcon className="size-4 icon-dir" strokeWidth={1.8} />
+          <ArrowRightIcon className="size-3.5 icon-dir" strokeWidth={1.8} />
         </button>
       </form>
 
       <ol
         aria-live="polite"
-        className="flex min-h-[62px] flex-col gap-1.5 px-1 text-[13px] text-muted-foreground"
+        className="flex min-h-[54px] flex-col gap-1 px-0.5 text-xs text-muted-foreground sm:min-h-[62px] sm:gap-1.5 sm:px-1 sm:text-[13px]"
       >
         {steps.map((s) => (
           <li
             key={s.label}
             className={cn(
-              "flex items-center gap-2 transition-[opacity,transform] duration-300 motion-reduce:transition-none",
+              "flex items-start gap-2 transition-[opacity,transform] duration-300 motion-reduce:transition-none",
               s.on ? "translate-y-0 opacity-100" : "translate-y-1 opacity-0",
               s.done && "text-muted-foreground"
             )}
           >
             <span
               className={cn(
-                "relative grid size-3.5 shrink-0 place-items-center rounded-full border-[1.5px] border-border",
+                "relative mt-0.5 grid size-3.5 shrink-0 place-items-center rounded-full border-[1.5px] border-border",
                 s.done && "border-primary bg-primary"
               )}
               aria-hidden
@@ -321,17 +259,13 @@ export function HeroShowcase({ className }: { className?: string }) {
                 </svg>
               ) : null}
             </span>
-            {s.label}
+            <span className="min-w-0 break-words">{s.label}</span>
           </li>
         ))}
       </ol>
 
-      <div className="grid flex-1 place-items-center pb-1.5">
-        <ShowcasePreviewFor
-          key={previewKey}
-          id={active}
-          show={showCanvas}
-        />
+      <div className="grid w-full min-w-0 flex-1 place-items-center pb-1">
+        <ShowcasePreviewFor key={previewKey} id={active} show={showCanvas} />
       </div>
     </section>
   )

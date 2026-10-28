@@ -1,7 +1,12 @@
 "use client"
 
 import * as React from "react"
-import { PauseIcon, PlayIcon } from "lucide-react"
+import {
+  PauseIcon,
+  PlayIcon,
+  SkipBackIcon,
+  SkipForwardIcon,
+} from "lucide-react"
 import { useTheme } from "next-themes"
 import { Area, AreaChart as RechartsAreaChart } from "recharts"
 
@@ -28,7 +33,7 @@ function DemoCard({
   return (
     <div
       className={cn(
-        "w-full max-w-[350px] rounded-[18px] border border-border/70 bg-card p-[22px] text-foreground shadow-soft",
+        "w-full max-w-[350px] rounded-[14px] border border-border/70 bg-card p-4 text-foreground shadow-soft sm:rounded-[18px] sm:p-[22px]",
         "transition-[opacity,transform] duration-500 ease-[cubic-bezier(0.2,0.8,0.2,1)] motion-reduce:transition-none",
         show
           ? "translate-y-0 scale-100 opacity-100"
@@ -195,34 +200,36 @@ export function ShowcasePricingPreview({
         <div className="mb-3 flex gap-1 rounded-[10px] border border-border/70 bg-background p-[3px]">
           {(
             [
-              { label: "Monthly", yr: false },
-              { label: "Yearly · save 20%", yr: true },
+              { label: "Monthly", short: "Monthly", yr: false },
+              { label: "Yearly · save 20%", short: "Yearly", yr: true },
             ] as const
           ).map((b) => (
             <button
               key={b.label}
               type="button"
               aria-pressed={yearly === b.yr}
+              title={b.label}
               onClick={() => {
                 setYearly(b.yr)
                 tick()
               }}
               className={cn(
-                "h-[30px] flex-1 cursor-pointer rounded-[7px] text-[13px] font-medium transition-colors",
+                "h-[30px] flex-1 cursor-pointer rounded-[7px] px-1 text-[12px] font-medium transition-colors sm:text-[13px]",
                 yearly === b.yr
                   ? "bg-card text-foreground shadow-sm"
                   : "text-muted-foreground"
               )}
             >
-              {b.label}
+              <span className="sm:hidden">{b.short}</span>
+              <span className="hidden sm:inline">{b.label}</span>
             </button>
           ))}
         </div>
       </Stagger>
       <Stagger i={2} show={show}>
-        <p className="mt-2 text-[46px] leading-none font-semibold tracking-[-0.04em]">
+        <p className="mt-2 text-[2.25rem] leading-none font-semibold tracking-[-0.04em] sm:text-[46px]">
           ${price}
-          <small className="ms-1 text-sm font-normal tracking-normal text-muted-foreground">
+          <small className="ms-1 text-xs font-normal tracking-normal text-muted-foreground sm:text-sm">
             / seat / month
           </small>
         </p>
@@ -256,12 +263,18 @@ export function ShowcasePricingPreview({
   )
 }
 
-const EQ_BARS = Array.from({ length: 9 }, (_, b) => ({
-  h: 24 + Math.round(Math.abs(Math.sin(b * 1.3)) * 56),
-  d: -(b * 0.11),
+const EQ_BARS = Array.from({ length: 13 }, (_, b) => ({
+  h: 18 + Math.round(Math.abs(Math.sin(b * 0.95 + 0.4)) * 64),
+  d: -(b * 0.08),
 }))
 
 const PLAYER_NOTES = [392, 440, 523.25, 587.33, 659.25, 783.99]
+
+const PLAYER_TRACKS = [
+  { title: "Low tide", artist: "Sono Sessions" },
+  { title: "Night drive", artist: "Sono Sessions" },
+  { title: "Glass house", artist: "Sono Sessions" },
+] as const
 
 export function ShowcasePlayerPreview({
   show,
@@ -272,11 +285,16 @@ export function ShowcasePlayerPreview({
 }) {
   const [playing, setPlaying] = React.useState(false)
   const [elapsed, setElapsed] = React.useState(0)
+  const [track, setTrack] = React.useState(0)
+  const [playGen, setPlayGen] = React.useState(0)
   const timerRef = React.useRef<number | null>(null)
+  const elapsedRef = React.useRef(0)
 
   React.useEffect(() => {
     setPlaying(false)
+    elapsedRef.current = 0
     setElapsed(0)
+    setTrack(0)
     if (timerRef.current) window.clearInterval(timerRef.current)
     return () => {
       if (timerRef.current) window.clearInterval(timerRef.current)
@@ -284,98 +302,150 @@ export function ShowcasePlayerPreview({
   }, [show])
 
   React.useEffect(() => {
-    if (!playing) {
-      if (timerRef.current) window.clearInterval(timerRef.current)
-      return
-    }
+    if (timerRef.current) window.clearInterval(timerRef.current)
+    if (!playing) return
+
     timerRef.current = window.setInterval(() => {
-      setElapsed((s) => {
-        const next = s + 0.32
-        if (Math.random() < 0.75) {
-          tone(
-            PLAYER_NOTES[Math.floor(Math.random() * PLAYER_NOTES.length)]!,
-            0,
-            0.5,
-            0.03
-          )
-        }
-        return next >= 204 ? 0 : next
-      })
+      elapsedRef.current += 0.32
+      if (elapsedRef.current >= 204) elapsedRef.current = 0
+      setElapsed(elapsedRef.current)
+      if (Math.random() < 0.75) {
+        tone(
+          PLAYER_NOTES[Math.floor(Math.random() * PLAYER_NOTES.length)]!,
+          0,
+          0.5,
+          0.03
+        )
+      }
     }, 320)
+
     return () => {
       if (timerRef.current) window.clearInterval(timerRef.current)
     }
-  }, [playing])
+  }, [playing, playGen])
 
   const mins = Math.floor(elapsed / 60)
   const secs = Math.floor(elapsed % 60)
   const pct = Math.min(100, (elapsed / 204) * 100)
 
+  function skip(delta: number) {
+    setTrack((t) => (t + delta + PLAYER_TRACKS.length) % PLAYER_TRACKS.length)
+    elapsedRef.current = 0
+    setElapsed(0)
+    setPlaying(true)
+    setPlayGen((g) => g + 1)
+    tick()
+    // Fresh track feel — lead-in note from the start
+    tone(PLAYER_NOTES[0]!, 0, 0.35, 0.04)
+  }
+
+  const current = PLAYER_TRACKS[track]!
+
   return (
-    <DemoCard show={show} className={cn(playing && "playing", className)}>
+    <DemoCard
+      show={show}
+      className={cn("overflow-hidden p-0!", playing && "playing", className)}
+    >
       <Stagger i={0} show={show}>
-        <div className="mb-3.5 flex h-[150px] items-center justify-center gap-1.5 rounded-[12px] bg-primary">
-          {EQ_BARS.map((bar, i) => (
-            <b
-              key={i}
-              className={cn(
-                "inline-block w-1.5 max-h-20 origin-center rounded-[3px] bg-primary-foreground opacity-90",
-                playing &&
-                  "animate-[sono-eq_0.9s_ease-in-out_infinite_alternate] motion-reduce:animate-none"
-              )}
-              style={
-                {
-                  height: bar.h,
-                  animationDelay: `${bar.d}s`,
-                } as React.CSSProperties
-              }
-            />
-          ))}
-        </div>
-      </Stagger>
-      <Stagger i={1} show={show}>
-        <div className="flex items-center gap-3">
-          <div className="min-w-0 flex-1 text-start">
-            <strong className="block text-base tracking-[-0.01em]">
-              Low tide
-            </strong>
-            <span className="text-[13px] text-muted-foreground">
-              Sono Sessions
-            </span>
-          </div>
-          <button
-            type="button"
-            aria-label={playing ? "Pause" : "Play"}
-            onClick={() => {
-              setPlaying((p) => !p)
-              tick()
+        <div className="relative h-[96px] overflow-hidden sm:h-[110px]">
+          <div
+            aria-hidden
+            className="absolute inset-0"
+            style={{
+              background: `
+                radial-gradient(ellipse 80% 70% at 30% 20%, color-mix(in oklab, var(--primary) 55%, transparent), transparent 60%),
+                linear-gradient(145deg, var(--chart-1) 0%, color-mix(in oklab, var(--chart-1) 65%, var(--primary)) 100%)
+              `,
             }}
-            className="grid size-[46px] shrink-0 cursor-pointer place-items-center rounded-full bg-foreground text-background"
-          >
-            {playing ? (
-              <PauseIcon className="size-[18px]" fill="currentColor" />
-            ) : (
-              <PlayIcon className="size-[18px]" fill="currentColor" />
-            )}
-          </button>
-        </div>
-      </Stagger>
-      <Stagger i={2} show={show}>
-        <div className="mt-2">
-          <div className="mt-2 h-[3px] overflow-hidden rounded-sm bg-border">
-            <i
-              className="block h-full bg-primary transition-[width] duration-300"
-              style={{ width: `${pct}%` }}
-            />
-          </div>
-          <div className="mt-3.5 flex justify-between font-mono text-xs text-muted-foreground">
-            <span>
-              {mins}:{secs.toString().padStart(2, "0")}
-            </span>
-            <span>3:24</span>
+          />
+          <div className="relative flex h-full items-center justify-center gap-1 px-4 sm:gap-1.5">
+            {EQ_BARS.map((bar, i) => (
+              <b
+                key={i}
+                className={cn(
+                  "inline-block w-1 max-h-14 origin-center rounded-full bg-white/95 sm:w-1.5 sm:max-h-16",
+                  playing &&
+                    "animate-[sono-eq_0.85s_ease-in-out_infinite_alternate] motion-reduce:animate-none"
+                )}
+                style={
+                  {
+                    height: Math.round(bar.h * 0.72),
+                    animationDelay: `${bar.d}s`,
+                    opacity: 0.6 + (i % 5) * 0.07,
+                  } as React.CSSProperties
+                }
+              />
+            ))}
           </div>
         </div>
       </Stagger>
+      <div className="p-4 pt-3 sm:px-[22px] sm:pb-[22px] sm:pt-3.5">
+        <Stagger i={1} show={show}>
+          <div className="flex items-center gap-3">
+            <div className="min-w-0 flex-1 text-start">
+              <strong className="block truncate text-[15px] tracking-[-0.02em]">
+                {current.title}
+              </strong>
+              <span className="block truncate text-[12px] text-muted-foreground">
+                {current.artist}
+              </span>
+            </div>
+            <div className="flex shrink-0 items-center gap-1">
+              <button
+                type="button"
+                aria-label="Previous"
+                onClick={() => skip(-1)}
+                className="grid size-8 cursor-pointer place-items-center rounded-full text-primary/70 transition-colors hover:bg-primary/10 hover:text-primary"
+              >
+                <SkipBackIcon className="size-3.5" fill="currentColor" />
+              </button>
+              <button
+                type="button"
+                aria-label={playing ? "Pause" : "Play"}
+                onClick={() => {
+                  setPlaying((p) => !p)
+                  tick()
+                }}
+                className={cn(
+                  "grid size-10 cursor-pointer place-items-center rounded-full bg-primary text-primary-foreground transition-transform active:scale-[0.96]",
+                  playing &&
+                    "shadow-[0_0_0_5px_color-mix(in_oklab,var(--primary)_20%,transparent)]"
+                )}
+              >
+                {playing ? (
+                  <PauseIcon className="size-4" fill="currentColor" />
+                ) : (
+                  <PlayIcon className="ms-px size-4" fill="currentColor" />
+                )}
+              </button>
+              <button
+                type="button"
+                aria-label="Next"
+                onClick={() => skip(1)}
+                className="grid size-8 cursor-pointer place-items-center rounded-full text-primary/70 transition-colors hover:bg-primary/10 hover:text-primary"
+              >
+                <SkipForwardIcon className="size-3.5" fill="currentColor" />
+              </button>
+            </div>
+          </div>
+        </Stagger>
+        <Stagger i={2} show={show}>
+          <div className="mt-2.5">
+            <div className="relative h-1 overflow-hidden rounded-full bg-muted">
+              <i
+                className="absolute inset-y-0 start-0 rounded-full bg-primary transition-[width] duration-300"
+                style={{ width: `${pct}%` }}
+              />
+            </div>
+            <div className="mt-1.5 flex justify-between font-mono text-[11px] tabular-nums text-muted-foreground">
+              <span>
+                {mins}:{secs.toString().padStart(2, "0")}
+              </span>
+              <span>3:24</span>
+            </div>
+          </div>
+        </Stagger>
+      </div>
     </DemoCard>
   )
 }
@@ -539,7 +609,7 @@ export function ShowcaseChartPreview({
         <ChartContainer
           config={chartConfig}
           className={cn(
-            "aspect-auto h-[160px] w-full font-sans",
+            "aspect-auto h-[140px] w-full font-sans sm:h-[160px]",
             neon && chartNeonOverflowClassName
           )}
         >
