@@ -189,7 +189,7 @@ export default function Hero({
                     <img src={logoSheetSrc} alt="" className="h-9 w-auto" />
                   </a>
                 </SheetHeader>
-                <nav className="flex flex-1 flex-col gap-1 overflow-y-auto p-4">
+                <nav className="flex flex-1 flex-col gap-1 overflow-y-auto p-4 pb-8">
                   {links.map((link) => (
                     <SheetClose asChild key={link.label}>
                       <a

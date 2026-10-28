@@ -77,7 +77,7 @@ export function MobileNav({
         sideOffset={8}
         className="no-scrollbar h-(--radix-popover-content-available-height) w-(--radix-popover-content-available-width) overflow-y-auto rounded-none border-none bg-background/95 p-0 shadow-none backdrop-blur-md duration-100"
       >
-        <nav className="flex flex-col gap-1 px-4 py-4 text-sm">
+        <nav className="flex flex-col gap-1 px-4 py-4 pb-8 text-sm">
           <div className="px-2 pb-1 text-[0.6875rem] font-medium tracking-wide text-muted-foreground">
             Menu
           </div>

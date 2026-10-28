@@ -33,7 +33,7 @@ export default function DataExport({
   return (
     <main
       className={cn(
-        "flex w-full min-w-0 items-start justify-center bg-canvas px-4 py-12 text-foreground sm:px-6",
+        "flex w-full min-w-0 items-start justify-center bg-white px-4 py-12 text-foreground dark:bg-background sm:px-6",
         className
       )}
       {...props}
@@ -55,7 +55,10 @@ export default function DataExport({
           <div className="grid gap-2">
             <Label htmlFor="data-export-02-format">File format</Label>
             <Select value={format} onValueChange={setFormat}>
-              <SelectTrigger id="data-export-02-format" className="w-full">
+              <SelectTrigger
+                id="data-export-02-format"
+                className="w-full cursor-pointer"
+              >
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -69,7 +72,10 @@ export default function DataExport({
           <div className="grid gap-2">
             <Label htmlFor="data-export-02-range">Date range</Label>
             <Select value={range} onValueChange={setRange}>
-              <SelectTrigger id="data-export-02-range" className="w-full">
+              <SelectTrigger
+                id="data-export-02-range"
+                className="w-full cursor-pointer"
+              >
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -84,19 +90,27 @@ export default function DataExport({
             <Checkbox
               id="data-export-02-headers"
               checked={headers}
+              className="cursor-pointer"
               onCheckedChange={(v) => setHeaders(v === true)}
             />
-            <Label htmlFor="data-export-02-headers" className="font-normal">
+            <Label
+              htmlFor="data-export-02-headers"
+              className="cursor-pointer font-normal"
+            >
               Include column headers
             </Label>
           </div>
         </div>
 
         <div className="flex items-center justify-end gap-2 border-t border-border/70 px-5 py-4">
-          <Button type="button" variant="ghost">
+          <Button type="button" variant="ghost" className="cursor-pointer">
             Cancel
           </Button>
-          <Button type="submit" disabled={busy}>
+          <Button
+            type="submit"
+            className="cursor-pointer gap-2 disabled:cursor-not-allowed"
+            disabled={busy}
+          >
             {busy ? (
               <>
                 <Loader2Icon className="size-4 animate-spin" aria-hidden />

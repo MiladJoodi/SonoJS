@@ -40,7 +40,6 @@ export const chartDemoLoaders: Record<
   "chart-area-stacked": () => import("./area/chart-area-stacked"),
   "chart-area-stacked-expand": () => import("./area/chart-area-stacked-expand"),
   "chart-area-icons": () => import("./area/chart-area-icons"),
-  "chart-area-gradient": () => import("./area/chart-area-gradient"),
   "chart-area-axes": () => import("./area/chart-area-axes"),
   "two-level-pie-chart": () => import("./pie/two-level-pie-chart"),
   "straight-angle-pie-chart": () => import("./pie/straight-angle-pie-chart"),

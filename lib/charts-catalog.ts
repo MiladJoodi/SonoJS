@@ -459,7 +459,6 @@ export const chartsCatalog: ChartsCatalogEntry[] = [
   { id: "chart-area-stacked", category: "area", kind: "classic", title: "Area Stacked", status: "ported" },
   { id: "chart-area-stacked-expand", category: "area", kind: "classic", title: "Area Stacked Expand", status: "ported" },
   { id: "chart-area-icons", category: "area", kind: "classic", title: "Area Icons", status: "ported" },
-  { id: "chart-area-gradient", category: "area", kind: "classic", title: "Area Gradient", status: "ported" },
   { id: "chart-area-axes", category: "area", kind: "classic", title: "Area Axes", status: "ported" },
   { id: "bar-default", category: "bar", kind: "classic", title: "Bar Default", status: "ported", featured: true },
   { id: "bar-multiple", category: "bar", kind: "classic", title: "Bar Multiple", status: "ported" },

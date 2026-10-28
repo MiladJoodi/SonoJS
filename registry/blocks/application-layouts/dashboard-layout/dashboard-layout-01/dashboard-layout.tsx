@@ -298,7 +298,7 @@ export default function DashboardLayout({
           </div>
 
           <nav
-            className="flex-1 space-y-5 overflow-y-auto px-3 pb-4"
+            className="flex-1 space-y-5 overflow-y-auto px-3 pb-8"
             aria-label="Primary"
           >
             {NAV.map((group) => (

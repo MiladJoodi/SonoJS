@@ -113,6 +113,9 @@ const BINARY_EXT = new Set([
   ".woff2",
   ".mp4",
   ".webm",
+  ".wav",
+  ".mp3",
+  ".ogg",
 ])
 
 function isBinaryRegistryPath(filePath) {
@@ -170,6 +173,7 @@ function buildItemPayload(item, version, generatedAt) {
     dependencies: item.dependencies,
     registryDependencies: item.registryDependencies,
     ...(item.cssVars ? { cssVars: item.cssVars } : {}),
+    ...(item.css ? { css: item.css } : {}),
     files,
     version,
     generatedAt,
@@ -185,6 +189,7 @@ function toIndexEntry(item) {
     dependencies: item.dependencies,
     registryDependencies: item.registryDependencies,
     ...(item.cssVars ? { cssVars: item.cssVars } : {}),
+    ...(item.css ? { css: item.css } : {}),
     files: item.files.map(({ content: _content, ...file }) => file),
     version: item.version,
     generatedAt: item.generatedAt,

@@ -2,7 +2,10 @@
 import path from "node:path"
 import { fileURLToPath } from "node:url"
 
-import { applyRegistryCssVars } from "../src/apply-css-vars.mjs"
+import {
+  applyRegistryCss,
+  applyRegistryCssVars,
+} from "../src/apply-css-vars.mjs"
 import { RegistryConsistencyError } from "../src/consistency.mjs"
 import {
   ensureChartNeonVars,
@@ -107,8 +110,10 @@ async function cmdAdd(names, rest) {
   const { registry, cwd, overwrite } = parseFlags(rest)
   const npmDeps = new Set()
   const seen = new Set()
-  /** @type {{ light?: Record<string, string>, dark?: Record<string, string> }} */
-  const mergedCssVars = { light: {}, dark: {} }
+  /** @type {{ light?: Record<string, string>, dark?: Record<string, string>, theme?: Record<string, string> }} */
+  const mergedCssVars = { light: {}, dark: {}, theme: {} }
+  /** @type {Record<string, Record<string, Record<string, string>>>} */
+  const mergedCss = {}
 
   async function addOne(itemName) {
     if (seen.has(itemName)) return
@@ -140,6 +145,12 @@ async function cmdAdd(names, rest) {
     if (item.cssVars?.dark) {
       Object.assign(mergedCssVars.dark, item.cssVars.dark)
     }
+    if (item.cssVars?.theme) {
+      Object.assign(mergedCssVars.theme, item.cssVars.theme)
+    }
+    if (item.css) {
+      Object.assign(mergedCss, item.css)
+    }
 
     for (const dep of item.dependencies ?? []) npmDeps.add(dep)
   }
@@ -150,7 +161,8 @@ async function cmdAdd(names, rest) {
 
   const hasCssVars =
     Object.keys(mergedCssVars.light).length > 0 ||
-    Object.keys(mergedCssVars.dark).length > 0
+    Object.keys(mergedCssVars.dark).length > 0 ||
+    Object.keys(mergedCssVars.theme).length > 0
   if (hasCssVars) {
     const cssResult = await applyRegistryCssVars(cwd, mergedCssVars)
     if (cssResult.status === "patched") {
@@ -160,6 +172,19 @@ async function cmdAdd(names, rest) {
     } else if (cssResult.status === "missing") {
       console.log(
         "  ! No styles/sonojs.css or globals.css — set --chart-* tokens manually from the registry item cssVars"
+      )
+    }
+  }
+
+  if (Object.keys(mergedCss).length > 0) {
+    const keyframesResult = await applyRegistryCss(cwd, mergedCss)
+    if (keyframesResult.status === "patched") {
+      console.log(
+        `  + css → ${keyframesResult.file} (${keyframesResult.keys?.join(", ")})`
+      )
+    } else if (keyframesResult.status === "missing") {
+      console.log(
+        "  ! No styles/sonojs.css or globals.css — add registry keyframes manually from the item css field"
       )
     }
   }

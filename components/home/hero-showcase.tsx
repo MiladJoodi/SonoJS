@@ -3,7 +3,6 @@
 import * as React from "react"
 import { ArrowRightIcon } from "lucide-react"
 
-import { chime, tick } from "@/components/home/hero-showcase-audio"
 import {
   ShowcasePreviewFor,
   type ShowcaseDemoId,
@@ -135,7 +134,6 @@ export function HeroShowcase({ className }: { className?: string }) {
 
       if (run !== runRef.current) return
       setShowCanvas(true)
-      chime()
     },
     []
   )
@@ -150,7 +148,6 @@ export function HeroShowcase({ className }: { className?: string }) {
 
   function selectChip(id: ShowcaseDemoId) {
     if (id === active) return
-    tick()
     const prompt = PROMPTS.find((p) => p.id === id)!
     void build(prompt.text, id, false)
   }
@@ -166,14 +163,26 @@ export function HeroShowcase({ className }: { className?: string }) {
     <section
       aria-label="Interactive demo: describe a UI and watch an agent build it"
       className={cn(
-        "flex min-h-0 flex-col gap-3 rounded-2xl border border-border/70 bg-muted/50 p-3 transition-colors sm:min-h-[540px] sm:gap-3.5 sm:rounded-3xl sm:p-[18px] dark:bg-muted/30",
+        "relative flex min-h-0 flex-col gap-3 p-3 transition-colors sm:min-h-[540px] sm:gap-3.5 sm:p-[18px]",
         className
       )}
     >
+      {/* Background shell only — fades at the bottom; foreground cards stay sharp */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 rounded-2xl border border-border/70 bg-muted/50 sm:rounded-3xl dark:bg-muted/30"
+        style={{
+          WebkitMaskImage:
+            "linear-gradient(to bottom, #000 0%, #000 62%, transparent 100%)",
+          maskImage:
+            "linear-gradient(to bottom, #000 0%, #000 62%, transparent 100%)",
+        }}
+      />
+
       <div
         role="tablist"
         aria-label="Showcase prompts"
-        className="flex min-w-0 gap-1.5 overflow-x-auto overscroll-x-contain pb-0.5 [-ms-overflow-style:none] [-webkit-overflow-scrolling:touch] [scrollbar-width:none] sm:flex-wrap sm:overflow-visible [&::-webkit-scrollbar]:hidden"
+        className="relative z-10 flex min-w-0 gap-1.5 overflow-x-auto overscroll-x-contain pb-0.5 [-ms-overflow-style:none] [-webkit-overflow-scrolling:touch] [scrollbar-width:none] sm:flex-wrap sm:overflow-visible [&::-webkit-scrollbar]:hidden"
       >
         {PROMPTS.map((p) => {
           const selected = p.id === active
@@ -201,7 +210,7 @@ export function HeroShowcase({ className }: { className?: string }) {
       <form
         onSubmit={onSubmit}
         className={cn(
-          "flex items-center gap-1 rounded-[14px] border border-border/70 bg-card py-1 ps-3 pe-1 transition-colors sm:gap-1.5 sm:ps-4 sm:pe-1.5",
+          "relative z-10 flex items-center gap-1 rounded-[14px] border border-border/70 bg-card py-1 ps-3 pe-1 transition-colors sm:gap-1.5 sm:ps-4 sm:pe-1.5",
           "focus-within:border-primary"
         )}
       >
@@ -224,7 +233,7 @@ export function HeroShowcase({ className }: { className?: string }) {
 
       <ol
         aria-live="polite"
-        className="flex min-h-[54px] flex-col gap-1 px-0.5 text-xs text-muted-foreground sm:min-h-[62px] sm:gap-1.5 sm:px-1 sm:text-[13px]"
+        className="relative z-10 flex min-h-[54px] flex-col gap-1 px-0.5 text-xs text-muted-foreground sm:min-h-[62px] sm:gap-1.5 sm:px-1 sm:text-[13px]"
       >
         {steps.map((s) => (
           <li
@@ -264,7 +273,7 @@ export function HeroShowcase({ className }: { className?: string }) {
         ))}
       </ol>
 
-      <div className="grid w-full min-w-0 flex-1 place-items-center pb-1">
+      <div className="relative z-10 grid w-full min-w-0 flex-1 place-items-center pb-1">
         <ShowcasePreviewFor key={previewKey} id={active} show={showCanvas} />
       </div>
     </section>

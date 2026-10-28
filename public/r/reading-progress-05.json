@@ -1,0 +1,40 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "reading-progress-05",
+  "type": "registry:block",
+  "title": "reading-progress-05",
+  "description": "Minimal reading progress — hairline top bar and floating percent pill.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "avatar",
+    "badge"
+  ],
+  "cssVars": {
+    "light": {
+      "canvas": "#f3f3f4",
+      "border-soft": "color-mix(in oklab, #e4e4e7 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18)",
+      "background": "var(--canvas)",
+      "card": "#ffffff"
+    },
+    "dark": {
+      "canvas": "#09090b",
+      "border-soft": "color-mix(in oklab, #27272a 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(0, 0, 0, 0.24), 0 28px 56px -28px rgba(0, 0, 0, 0.48)",
+      "background": "var(--canvas)",
+      "card": "#18181b"
+    }
+  },
+  "files": [
+    {
+      "path": "components/blocks/content-publishing/reading-progress-05/reading-progress.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { BookOpenIcon } from \"lucide-react\"\n\nimport { Avatar, AvatarFallback } from \"@/components/ui/avatar\"\nimport { Badge } from \"@/components/ui/badge\"\nimport { cn } from \"@/lib/utils\"\n\nconst ARTICLE = {\n  title: \"Building production-ready UIs with SonoJS and Tailwind v4\",\n  author: \"Alex Rivera\",\n  date: \"June 23, 2026\",\n  readTime: \"8 min read\",\n  tags: [\"Design Systems\", \"React\", \"Tailwind CSS\"],\n  sections: [\n    {\n      heading: \"Introduction\",\n      body: \"Modern front-end development demands more than just getting things to work — it requires systems that scale, components that compose, and designs that adapt. SonoJS is built to satisfy all three.\",\n    },\n    {\n      heading: \"Setting Up the Project\",\n      body: \"The fastest way to start is with the SonoJS CLI. Run npx @sonojs/ui@latest init and follow the prompts for your framework, theme tokens, and TypeScript setup.\",\n    },\n    {\n      heading: \"Semantic Token System\",\n      body: \"Style with tokens like bg-primary and text-foreground. Because these map to CSS custom properties backed by oklch values, dark mode is zero-effort.\",\n    },\n    {\n      heading: \"Responsive Layouts\",\n      body: \"Prefer logical layout utilities so grids and stacks adapt without physical left/right assumptions. Keep control heights consistent across breakpoints.\",\n    },\n    {\n      heading: \"Accessibility by Default\",\n      body: \"Interactive components ship with correct ARIA attributes, keyboard navigation, and focus management. Overlays handle focus trapping.\",\n    },\n    {\n      heading: \"Production Checklist\",\n      body: \"Before shipping: run typecheck, verify the build, and test at 375px, 768px, and 1280px. Check light and dark modes and visible focus rings.\",\n    },\n  ],\n} as const\n\nexport default function ReadingProgress({\n  className,\n  ...props\n}: React.ComponentProps<\"section\">) {\n  const articleRef = React.useRef<HTMLElement>(null)\n  const [progress, setProgress] = React.useState(0)\n\n  React.useEffect(() => {\n    const handleScroll = () => {\n      if (!articleRef.current) return\n      const el = articleRef.current\n      const { top, height } = el.getBoundingClientRect()\n      const scrolled = Math.max(0, -top)\n      const total = height - window.innerHeight\n      setProgress(total > 0 ? Math.min(100, (scrolled / total) * 100) : 0)\n    }\n    handleScroll()\n    window.addEventListener(\"scroll\", handleScroll, { passive: true })\n    window.addEventListener(\"resize\", handleScroll)\n    return () => {\n      window.removeEventListener(\"scroll\", handleScroll)\n      window.removeEventListener(\"resize\", handleScroll)\n    }\n  }, [])\n\n  const showPill = progress > 4 && progress < 98\n\n  return (\n    <section\n      className={cn(\n        \"relative min-h-svh w-full min-w-0 bg-white text-foreground dark:bg-background\",\n        className\n      )}\n      {...props}\n    >\n      <div\n        className=\"sticky top-0 z-50 h-px w-full bg-border\"\n        role=\"progressbar\"\n        aria-valuenow={Math.round(progress)}\n        aria-valuemin={0}\n        aria-valuemax={100}\n        aria-label=\"Reading progress\"\n      >\n        <div\n          className=\"h-full bg-foreground transition-[width] duration-150 ease-out\"\n          style={{ width: `${progress}%` }}\n        />\n      </div>\n\n      {showPill ? (\n        <div\n          className=\"pointer-events-none fixed start-4 top-1/2 z-40 -translate-y-1/2 sm:start-6\"\n          aria-hidden={false}\n        >\n          <div\n            className=\"pointer-events-none rounded-full border border-border/70 bg-card/95 px-2.5 py-1.5 shadow-soft backdrop-blur-sm\"\n            role=\"status\"\n            aria-live=\"polite\"\n          >\n            <span className=\"font-mono text-xs font-semibold tabular-nums text-foreground\">\n              {Math.round(progress)}%\n            </span>\n          </div>\n        </div>\n      ) : null}\n\n      <article\n        ref={articleRef}\n        className=\"mx-auto max-w-2xl px-4 py-16 sm:py-24\"\n      >\n        <div className=\"mb-8 flex flex-wrap gap-2\">\n          {ARTICLE.tags.map((tag) => (\n            <Badge\n              key={tag}\n              variant=\"outline\"\n              className=\"border-transparent bg-muted text-muted-foreground\"\n            >\n              {tag}\n            </Badge>\n          ))}\n        </div>\n        <h1 className=\"mb-6 text-h1 font-bold tracking-tight\">\n          {ARTICLE.title}\n        </h1>\n        <div className=\"mb-10 flex flex-wrap items-center gap-3 border-b border-border/70 pb-6\">\n          <Avatar className=\"size-10 shrink-0\">\n            <AvatarFallback className=\"bg-muted text-sm font-bold\">\n              {ARTICLE.author[0]}\n            </AvatarFallback>\n          </Avatar>\n          <div className=\"min-w-0 text-start\">\n            <p className=\"text-sm font-semibold\">{ARTICLE.author}</p>\n            <p className=\"text-xs text-muted-foreground\">\n              <span dir=\"ltr\">{ARTICLE.date}</span>\n              <span aria-hidden> · </span>\n              <span className=\"inline-flex items-center gap-1\">\n                <BookOpenIcon className=\"size-3\" aria-hidden />\n                {ARTICLE.readTime}\n              </span>\n            </p>\n          </div>\n        </div>\n        <div className=\"space-y-10\">\n          {ARTICLE.sections.map((section) => (\n            <section key={section.heading}>\n              <h2 className=\"mb-4 text-xl font-bold tracking-tight\">\n                {section.heading}\n              </h2>\n              <p className=\"text-base leading-relaxed text-muted-foreground\">\n                {section.body}\n              </p>\n            </section>\n          ))}\n        </div>\n      </article>\n    </section>\n  )\n}\n",
+      "target": "components/blocks/content-publishing/reading-progress-05/reading-progress.tsx"
+    }
+  ],
+  "version": "0.1.0+100157e5f9d9",
+  "generatedAt": "2026-10-28T18:44:12.462Z"
+}

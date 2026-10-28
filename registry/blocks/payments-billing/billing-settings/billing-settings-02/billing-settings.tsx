@@ -1,118 +1,129 @@
 "use client"
 
 import * as React from "react"
-import { CreditCardIcon, DownloadIcon } from "lucide-react"
 
 import { Badge } from "@sonojs/ui/components/badge"
 import { Button } from "@sonojs/ui/components/button"
+import {
+  Field,
+  FieldDescription,
+  FieldLabel,
+} from "@sonojs/ui/components/field"
+import { Input } from "@sonojs/ui/components/input"
 import { Separator } from "@sonojs/ui/components/separator"
+import { Switch } from "@sonojs/ui/components/switch"
 import { cn } from "@/lib/utils"
-
-const INVOICES = [
-  { id: "INV-001", date: "Jun 1, 2026", amount: "$49.00" },
-  { id: "INV-002", date: "May 1, 2026", amount: "$49.00" },
-  { id: "INV-003", date: "Apr 1, 2026", amount: "$49.00" },
-] as const
 
 export default function BillingSettings({
   className,
   ...props
-}: React.ComponentProps<"main">) {
+}: React.ComponentProps<"div">) {
+  const [email, setEmail] = React.useState("billing@acme.com")
+  const [receipts, setReceipts] = React.useState(true)
+  const [reminders, setReminders] = React.useState(true)
+
   return (
-    <main
+    <div
       className={cn(
-        "w-full min-w-0 bg-canvas px-4 py-10 text-foreground sm:px-6",
+        "flex w-full justify-center bg-white px-4 py-10 text-foreground dark:bg-background sm:px-6 sm:py-14",
         className
       )}
       {...props}
     >
-      <div className="mx-auto w-full max-w-lg space-y-6">
-        <div className="text-start">
-          <h1 className="text-2xl font-semibold tracking-tight">Billing</h1>
+      <section
+        className="w-full max-w-lg overflow-hidden rounded-[12px] border border-border/70 bg-card shadow-soft"
+        aria-labelledby="billing-settings-02-heading"
+      >
+        <header className="border-b border-border/70 px-5 py-4 sm:px-6">
+          <div className="flex flex-wrap items-center gap-2 text-start">
+            <h1
+              id="billing-settings-02-heading"
+              className="text-base font-semibold tracking-tight"
+            >
+              Billing preferences
+            </h1>
+            <Badge variant="secondary">Pro</Badge>
+          </div>
           <p className="mt-1 text-sm text-muted-foreground">
-            Plan, payment method, and recent invoices.
+            Where invoices go and which emails you get.
           </p>
-        </div>
+        </header>
 
-        <div className="overflow-hidden rounded-[12px] border border-border/70 bg-card shadow-soft">
-          <div className="flex items-start justify-between gap-4 px-5 py-5">
-            <div className="min-w-0 space-y-1 text-start">
-              <div className="flex flex-wrap items-center gap-2">
-                <p className="text-sm font-semibold text-foreground">Pro</p>
-                <Badge variant="secondary">Active</Badge>
-              </div>
-              <p className="text-sm text-muted-foreground">
-                <span className="font-medium text-foreground" dir="ltr">
-                  $49
-                </span>
-                /month · Renews July 1, 2026
-              </p>
-            </div>
-            <Button type="button" variant="outline" size="sm">
-              Change plan
-            </Button>
-          </div>
-
-          <Separator />
-
-          <div className="flex items-center justify-between gap-4 px-5 py-4">
-            <div className="flex min-w-0 items-center gap-3">
-              <div className="flex size-9 shrink-0 items-center justify-center rounded-md border border-border/70 bg-muted">
-                <CreditCardIcon
-                  className="size-4 text-muted-foreground"
-                  aria-hidden
-                />
-              </div>
-              <div className="min-w-0 text-start">
-                <p className="text-sm font-medium">Visa ···· 4242</p>
-                <p className="text-xs text-muted-foreground">Expires 08/26</p>
-              </div>
-            </div>
-            <Button type="button" variant="ghost" size="sm">
-              Update
-            </Button>
-          </div>
-
-          <Separator />
-
-          <div className="px-5 py-4">
-            <p className="mb-3 text-start text-xs font-medium tracking-wide text-muted-foreground uppercase">
-              Invoices
+        <div className="space-y-5 px-5 py-5 sm:px-6">
+          <div className="rounded-[12px] border border-border/70 bg-muted/40 px-4 py-3 text-start">
+            <p className="text-sm font-medium text-foreground">Current plan</p>
+            <p className="mt-0.5 text-sm text-muted-foreground">
+              <span className="font-medium text-foreground" dir="ltr">
+                $49
+              </span>
+              /month · Next charge Jul 1, 2026
             </p>
-            <ul className="space-y-1" role="list">
-              {INVOICES.map((invoice) => (
-                <li
-                  key={invoice.id}
-                  className="flex items-center justify-between gap-3 rounded-md px-1 py-2 hover:bg-muted/50"
-                >
-                  <div className="min-w-0 text-start">
-                    <p className="text-sm font-medium" dir="ltr">
-                      {invoice.id}
-                    </p>
-                    <p className="text-xs text-muted-foreground">
-                      {invoice.date}
-                    </p>
-                  </div>
-                  <div className="flex shrink-0 items-center gap-2">
-                    <span className="text-sm tabular-nums" dir="ltr">
-                      {invoice.amount}
-                    </span>
-                    <Button
-                      type="button"
-                      variant="ghost"
-                      size="icon-sm"
-                      className="size-8"
-                      aria-label={`Download ${invoice.id}`}
-                    >
-                      <DownloadIcon className="size-3.5" aria-hidden />
-                    </Button>
-                  </div>
-                </li>
-              ))}
-            </ul>
+          </div>
+
+          <Field>
+            <FieldLabel htmlFor="billing-settings-02-email">
+              Billing email
+            </FieldLabel>
+            <Input
+              id="billing-settings-02-email"
+              type="email"
+              dir="ltr"
+              autoComplete="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <FieldDescription>
+              Invoices and payment receipts are sent here.
+            </FieldDescription>
+          </Field>
+
+          <Separator />
+
+          <div className="space-y-4">
+            <div className="flex items-start justify-between gap-4">
+              <div className="min-w-0 text-start">
+                <p className="text-sm font-medium text-foreground">
+                  Email receipts
+                </p>
+                <p className="mt-0.5 text-sm text-muted-foreground">
+                  Send a PDF receipt after every successful charge.
+                </p>
+              </div>
+              <Switch
+                checked={receipts}
+                onCheckedChange={(v) => setReceipts(v === true)}
+                className="cursor-pointer"
+                aria-label="Email receipts"
+              />
+            </div>
+            <div className="flex items-start justify-between gap-4">
+              <div className="min-w-0 text-start">
+                <p className="text-sm font-medium text-foreground">
+                  Renewal reminders
+                </p>
+                <p className="mt-0.5 text-sm text-muted-foreground">
+                  Remind me 7 days before the next renewal.
+                </p>
+              </div>
+              <Switch
+                checked={reminders}
+                onCheckedChange={(v) => setReminders(v === true)}
+                className="cursor-pointer"
+                aria-label="Renewal reminders"
+              />
+            </div>
           </div>
         </div>
-      </div>
-    </main>
+
+        <div className="flex justify-end gap-2 border-t border-border/70 bg-muted/40 px-5 py-3 sm:px-6">
+          <Button type="button" variant="ghost" className="cursor-pointer">
+            Cancel
+          </Button>
+          <Button type="button" className="cursor-pointer">
+            Save preferences
+          </Button>
+        </div>
+      </section>
+    </div>
   )
 }

@@ -266,7 +266,7 @@ export default function MegaMenu({
                     </Button>
                   </SheetClose>
                 </SheetHeader>
-                <div className="flex-1 overflow-y-auto p-4">
+                <div className="flex-1 overflow-y-auto p-4 pb-8">
                   <ul className="flex flex-col gap-1 text-sm font-semibold text-foreground">
                     <li>
                       <Collapsible>

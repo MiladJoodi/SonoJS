@@ -81,7 +81,7 @@ export function ListIndexNav({
               Page and category index
             </SheetDescription>
           </SheetHeader>
-          <div className="no-scrollbar h-[calc(100svh-3.25rem)] overflow-y-auto overscroll-contain p-2">
+          <div className="no-scrollbar h-[calc(100svh-3.25rem)] overflow-y-auto overscroll-contain p-2 pb-8">
             {children}
           </div>
         </SheetContent>

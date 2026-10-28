@@ -120,10 +120,40 @@ import Features09 from "@/registry/blocks/marketing/features/features-09/feature
 import Features10 from "@/registry/blocks/marketing/features/features-10/features"
 import Features11 from "@/registry/blocks/marketing/features/features-11/features"
 import ArticleLayout01 from "@/registry/blocks/content-publishing/article-layout/article-layout-01/article-layout"
+import ArticleLayout02 from "@/registry/blocks/content-publishing/article-layout/article-layout-02/article-layout"
+import ArticleLayout03 from "@/registry/blocks/content-publishing/article-layout/article-layout-03/article-layout"
+import ArticleLayout04 from "@/registry/blocks/content-publishing/article-layout/article-layout-04/article-layout"
+import ArticleLayout05 from "@/registry/blocks/content-publishing/article-layout/article-layout-05/article-layout"
 import AuthorProfile01 from "@/registry/blocks/content-publishing/author-profile/author-profile-01/author-profile"
+import AuthorProfile02 from "@/registry/blocks/content-publishing/author-profile/author-profile-02/author-profile"
+import AuthorProfile03 from "@/registry/blocks/content-publishing/author-profile/author-profile-03/author-profile"
+import AuthorProfile04 from "@/registry/blocks/content-publishing/author-profile/author-profile-04/author-profile"
+import AuthorProfile05 from "@/registry/blocks/content-publishing/author-profile/author-profile-05/author-profile"
+import AuthorProfile06 from "@/registry/blocks/content-publishing/author-profile/author-profile-06/author-profile"
+import AuthorProfile07 from "@/registry/blocks/content-publishing/author-profile/author-profile-07/author-profile"
+import AuthorProfile08 from "@/registry/blocks/content-publishing/author-profile/author-profile-08/author-profile"
+import AuthorProfile09 from "@/registry/blocks/content-publishing/author-profile/author-profile-09/author-profile"
+import AuthorProfile10 from "@/registry/blocks/content-publishing/author-profile/author-profile-10/author-profile"
 import BlogGrid01 from "@/registry/blocks/content-publishing/blog-grid/blog-grid-01/blog-grid"
+import BlogGrid02 from "@/registry/blocks/content-publishing/blog-grid/blog-grid-02/blog-grid"
+import BlogGrid03 from "@/registry/blocks/content-publishing/blog-grid/blog-grid-03/blog-grid"
+import BlogGrid04 from "@/registry/blocks/content-publishing/blog-grid/blog-grid-04/blog-grid"
+import BlogGrid05 from "@/registry/blocks/content-publishing/blog-grid/blog-grid-05/blog-grid"
+import BlogGrid06 from "@/registry/blocks/content-publishing/blog-grid/blog-grid-06/blog-grid"
+import BlogGrid07 from "@/registry/blocks/content-publishing/blog-grid/blog-grid-07/blog-grid"
+import BlogGrid08 from "@/registry/blocks/content-publishing/blog-grid/blog-grid-08/blog-grid"
+import BlogGrid09 from "@/registry/blocks/content-publishing/blog-grid/blog-grid-09/blog-grid"
+import BlogGrid10 from "@/registry/blocks/content-publishing/blog-grid/blog-grid-10/blog-grid"
 import Changelog01 from "@/registry/blocks/content-publishing/changelog/changelog-01/changelog"
+import Changelog02 from "@/registry/blocks/content-publishing/changelog/changelog-02/changelog"
+import Changelog03 from "@/registry/blocks/content-publishing/changelog/changelog-03/changelog"
+import Changelog04 from "@/registry/blocks/content-publishing/changelog/changelog-04/changelog"
+import Changelog05 from "@/registry/blocks/content-publishing/changelog/changelog-05/changelog"
 import ReadingProgress01 from "@/registry/blocks/content-publishing/reading-progress/reading-progress-01/reading-progress"
+import ReadingProgress02 from "@/registry/blocks/content-publishing/reading-progress/reading-progress-02/reading-progress"
+import ReadingProgress03 from "@/registry/blocks/content-publishing/reading-progress/reading-progress-03/reading-progress"
+import ReadingProgress04 from "@/registry/blocks/content-publishing/reading-progress/reading-progress-04/reading-progress"
+import ReadingProgress05 from "@/registry/blocks/content-publishing/reading-progress/reading-progress-05/reading-progress"
 import BentoGrid01 from "@/registry/blocks/marketing/bento-grid/bento-grid-01/bento-grid"
 import BentoGrid02 from "@/registry/blocks/marketing/bento-grid/bento-grid-02/bento-grid"
 import HowItWorks01 from "@/registry/blocks/marketing/how-it-works/how-it-works-01/how-it-works"
@@ -217,8 +247,12 @@ import RolesAndPermissions01 from "@/registry/blocks/user-account/roles-and-perm
 import RolesAndPermissions02 from "@/registry/blocks/user-account/roles-and-permissions/roles-and-permissions-02/roles-and-permissions"
 import RolesAndPermissions03 from "@/registry/blocks/user-account/roles-and-permissions/roles-and-permissions-03/roles-and-permissions"
 import BillingHistory01 from "@/registry/blocks/payments-billing/billing-history/billing-history-01/billing-history"
+import BillingHistory02 from "@/registry/blocks/payments-billing/billing-history/billing-history-02/billing-history"
+import BillingHistory03 from "@/registry/blocks/payments-billing/billing-history/billing-history-03/billing-history"
 import BillingSettings01 from "@/registry/blocks/payments-billing/billing-settings/billing-settings-01/billing-settings"
 import BillingSettings02 from "@/registry/blocks/payments-billing/billing-settings/billing-settings-02/billing-settings"
+import BillingSettings03 from "@/registry/blocks/payments-billing/billing-settings/billing-settings-03/billing-settings"
+import BillingSettings04 from "@/registry/blocks/payments-billing/billing-settings/billing-settings-04/billing-settings"
 import UsageBasedBilling01 from "@/registry/blocks/payments-billing/usage-based-billing/usage-based-billing-01/usage-based-billing"
 import UsageBasedBilling02 from "@/registry/blocks/payments-billing/usage-based-billing/usage-based-billing-02/usage-based-billing"
 import UsageBasedBilling03 from "@/registry/blocks/payments-billing/usage-based-billing/usage-based-billing-03/usage-based-billing"
@@ -227,8 +261,17 @@ import UsageBasedBilling05 from "@/registry/blocks/payments-billing/usage-based-
 import UsageBasedBilling06 from "@/registry/blocks/payments-billing/usage-based-billing/usage-based-billing-06/usage-based-billing"
 import UsageBasedBilling07 from "@/registry/blocks/payments-billing/usage-based-billing/usage-based-billing-07/usage-based-billing"
 import PaymentMethods01 from "@/registry/blocks/payments-billing/payment-methods/payment-methods-01/payment-methods"
+import PaymentMethods02 from "@/registry/blocks/payments-billing/payment-methods/payment-methods-02/payment-methods"
+import PaymentMethods03 from "@/registry/blocks/payments-billing/payment-methods/payment-methods-03/payment-methods"
 import TransferFunds01 from "@/registry/blocks/payments-billing/transfer-funds/transfer-funds-01/transfer-funds"
+import TransferFunds02 from "@/registry/blocks/payments-billing/transfer-funds/transfer-funds-02/transfer-funds"
+import TransferFunds03 from "@/registry/blocks/payments-billing/transfer-funds/transfer-funds-03/transfer-funds"
 import Invoice01 from "@/registry/blocks/payments-billing/invoice/invoice-01/invoice"
+import Invoice02 from "@/registry/blocks/payments-billing/invoice/invoice-02/invoice"
+import Invoice03 from "@/registry/blocks/payments-billing/invoice/invoice-03/invoice"
+import Invoice04 from "@/registry/blocks/payments-billing/invoice/invoice-04/invoice"
+import Invoice05 from "@/registry/blocks/payments-billing/invoice/invoice-05/invoice"
+import Invoice06 from "@/registry/blocks/payments-billing/invoice/invoice-06/invoice"
 import AccessDenied01 from "@/registry/blocks/feedback-states/access-denied/access-denied-01/access-denied"
 import NotFound01 from "@/registry/blocks/feedback-states/not-found/not-found-01/not-found"
 import ErrorState01 from "@/registry/blocks/feedback-states/error-state/error-state-01/error-state"
@@ -255,8 +298,17 @@ import EmptyState08 from "@/registry/blocks/feedback-states/empty-state/empty-st
 import EmptyState09 from "@/registry/blocks/feedback-states/empty-state/empty-state-09/empty-state"
 import DataExport01 from "@/registry/blocks/files-media/data-export/data-export-01/data-export"
 import DataExport02 from "@/registry/blocks/files-media/data-export/data-export-02/data-export"
+import DataExport03 from "@/registry/blocks/files-media/data-export/data-export-03/data-export"
+import DataExport04 from "@/registry/blocks/files-media/data-export/data-export-04/data-export"
 import FileManager01 from "@/registry/blocks/files-media/file-manager/file-manager-01/file-manager"
+import FileManager02 from "@/registry/blocks/files-media/file-manager/file-manager-02/file-manager"
+import FileManager03 from "@/registry/blocks/files-media/file-manager/file-manager-03/file-manager"
+import FileManager04 from "@/registry/blocks/files-media/file-manager/file-manager-04/file-manager"
+import FileManager05 from "@/registry/blocks/files-media/file-manager/file-manager-05/file-manager"
 import FileUpload01 from "@/registry/blocks/files-media/file-upload/file-upload-01/file-upload"
+import FileUpload02 from "@/registry/blocks/files-media/file-upload/file-upload-02/file-upload"
+import FileUpload03 from "@/registry/blocks/files-media/file-upload/file-upload-03/file-upload"
+import FileUpload04 from "@/registry/blocks/files-media/file-upload/file-upload-04/file-upload"
 import MediaGallery01 from "@/registry/blocks/files-media/media-gallery/media-gallery-01/media-gallery"
 import Comments01 from "@/registry/blocks/communication/comments/comments-01/comments"
 import Comments02 from "@/registry/blocks/communication/comments/comments-02/comments"
@@ -272,6 +324,10 @@ import NotificationCenter02 from "@/registry/blocks/communication/notification-c
 import NotificationCenter03 from "@/registry/blocks/communication/notification-center/notification-center-03/notification-center"
 import AnalyticsDashboard01 from "@/registry/blocks/dashboards-analytics/analytics-dashboard/analytics-dashboard-01/analytics-dashboard"
 import Calendar01 from "@/registry/blocks/calendar-scheduling/calendar/calendar-01/calendar"
+import Calendar02 from "@/registry/blocks/calendar-scheduling/calendar/calendar-02/calendar"
+import Calendar03 from "@/registry/blocks/calendar-scheduling/calendar/calendar-03/calendar"
+import Calendar04 from "@/registry/blocks/calendar-scheduling/calendar/calendar-04/calendar"
+import Calendar05 from "@/registry/blocks/calendar-scheduling/calendar/calendar-05/calendar"
 import SetupWizard01 from "@/registry/blocks/onboarding/setup-wizard/setup-wizard-01/setup-wizard"
 import SetupWizard02 from "@/registry/blocks/onboarding/setup-wizard/setup-wizard-02/setup-wizard"
 import SetupWizard03 from "@/registry/blocks/onboarding/setup-wizard/setup-wizard-03/setup-wizard"
@@ -288,7 +344,14 @@ import DataImport01 from "@/registry/blocks/onboarding/data-import/data-import-0
 import DataImport02 from "@/registry/blocks/onboarding/data-import/data-import-02/data-import"
 import DataImport03 from "@/registry/blocks/onboarding/data-import/data-import-03/data-import"
 import SearchResults01 from "@/registry/blocks/search-filtering/search-results/search-results-01/search-results"
+import SearchResults02 from "@/registry/blocks/search-filtering/search-results/search-results-02/search-results"
+import SearchResults03 from "@/registry/blocks/search-filtering/search-results/search-results-03/search-results"
+import SearchResults04 from "@/registry/blocks/search-filtering/search-results/search-results-04/search-results"
 import FilterPanel01 from "@/registry/blocks/search-filtering/filter-panel/filter-panel-01/filter-panel"
+import FilterPanel02 from "@/registry/blocks/search-filtering/filter-panel/filter-panel-02/filter-panel"
+import FilterPanel03 from "@/registry/blocks/search-filtering/filter-panel/filter-panel-03/filter-panel"
+import FilterPanel04 from "@/registry/blocks/search-filtering/filter-panel/filter-panel-04/filter-panel"
+import FilterPanel05 from "@/registry/blocks/search-filtering/filter-panel/filter-panel-05/filter-panel"
 import PaymentForm01 from "@/registry/blocks/payments-billing/payment-form/payment-form-01/payment-form"
 import PaymentForm02 from "@/registry/blocks/payments-billing/payment-form/payment-form-02/payment-form"
 import PaymentForm03 from "@/registry/blocks/payments-billing/payment-form/payment-form-03/payment-form"
@@ -413,6 +476,27 @@ import SocialLinks02 from "@/registry/blocks/marketing/social-links/social-links
 import SocialLinks03 from "@/registry/blocks/marketing/social-links/social-links-03/social-links"
 import SocialLinks04 from "@/registry/blocks/marketing/social-links/social-links-04/social-links"
 import MediaPlayer01 from "@/registry/blocks/files-media/media-player/media-player-01/media-player"
+import MediaPlayer02 from "@/registry/blocks/files-media/media-player/media-player-02/media-player"
+import MediaPlayer03 from "@/registry/blocks/files-media/media-player/media-player-03/media-player"
+import MediaPlayer04 from "@/registry/blocks/files-media/media-player/media-player-04/media-player"
+import MediaPlayer05 from "@/registry/blocks/files-media/media-player/media-player-05/media-player"
+import MediaPlayer06 from "@/registry/blocks/files-media/media-player/media-player-06/media-player"
+import MediaPlayer07 from "@/registry/blocks/files-media/media-player/media-player-07/media-player"
+import MediaPlayer08 from "@/registry/blocks/files-media/media-player/media-player-08/media-player"
+import MediaPlayer09 from "@/registry/blocks/files-media/media-player/media-player-09/media-player"
+import MediaPlayer10 from "@/registry/blocks/files-media/media-player/media-player-10/media-player"
+import MusicPlayer01 from "@/registry/blocks/files-media/music-player/music-player-01/music-player"
+import MusicPlayer02 from "@/registry/blocks/files-media/music-player/music-player-02/music-player"
+import MusicPlayer03 from "@/registry/blocks/files-media/music-player/music-player-03/music-player"
+import MusicPlayer04 from "@/registry/blocks/files-media/music-player/music-player-04/music-player"
+import MusicPlayer05 from "@/registry/blocks/files-media/music-player/music-player-05/music-player"
+import MusicPlayer06 from "@/registry/blocks/files-media/music-player/music-player-06/music-player"
+import MusicPlayer07 from "@/registry/blocks/files-media/music-player/music-player-07/music-player"
+import MusicPlayer08 from "@/registry/blocks/files-media/music-player/music-player-08/music-player"
+import MusicPlayer09 from "@/registry/blocks/files-media/music-player/music-player-09/music-player"
+import MusicPlayer10 from "@/registry/blocks/files-media/music-player/music-player-10/music-player"
+import MusicPlayer11 from "@/registry/blocks/files-media/music-player/music-player-11/music-player"
+import MusicPlayer12 from "@/registry/blocks/files-media/music-player/music-player-12/music-player"
 import CryptoPortfolio01 from "@/registry/blocks/dashboards-analytics/crypto-portfolio/crypto-portfolio-01/crypto-portfolio"
 import CryptoPortfolio02 from "@/registry/blocks/dashboards-analytics/crypto-portfolio/crypto-portfolio-02/crypto-portfolio"
 import CryptoPortfolio03 from "@/registry/blocks/dashboards-analytics/crypto-portfolio/crypto-portfolio-03/crypto-portfolio"
@@ -1190,45 +1274,315 @@ const views: Record<string, ComponentType> = {
   },
   "author-profile-01": function AuthorProfile01View() {
     return (
-      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
         <div className="w-full">
           <AuthorProfile01 />
         </div>
       </div>
     )
   },
+  "author-profile-02": function AuthorProfile02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <AuthorProfile02 />
+        </div>
+      </div>
+    )
+  },
+  "author-profile-03": function AuthorProfile03View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <AuthorProfile03 />
+        </div>
+      </div>
+    )
+  },
+  "author-profile-04": function AuthorProfile04View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <AuthorProfile04 />
+        </div>
+      </div>
+    )
+  },
+  "author-profile-05": function AuthorProfile05View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <AuthorProfile05 />
+        </div>
+      </div>
+    )
+  },
+  "author-profile-06": function AuthorProfile06View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <AuthorProfile06 />
+        </div>
+      </div>
+    )
+  },
+  "author-profile-07": function AuthorProfile07View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <AuthorProfile07 />
+        </div>
+      </div>
+    )
+  },
+  "author-profile-08": function AuthorProfile08View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <AuthorProfile08 />
+        </div>
+      </div>
+    )
+  },
+  "author-profile-09": function AuthorProfile09View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <AuthorProfile09 />
+        </div>
+      </div>
+    )
+  },
+  "author-profile-10": function AuthorProfile10View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <AuthorProfile10 />
+        </div>
+      </div>
+    )
+  },
   "blog-grid-01": function BlogGrid01View() {
     return (
-      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
         <div className="w-full">
           <BlogGrid01 />
         </div>
       </div>
     )
   },
+  "blog-grid-02": function BlogGrid02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <BlogGrid02 />
+        </div>
+      </div>
+    )
+  },
+  "blog-grid-03": function BlogGrid03View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <BlogGrid03 />
+        </div>
+      </div>
+    )
+  },
+  "blog-grid-04": function BlogGrid04View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <BlogGrid04 />
+        </div>
+      </div>
+    )
+  },
+  "blog-grid-05": function BlogGrid05View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <BlogGrid05 />
+        </div>
+      </div>
+    )
+  },
+  "blog-grid-06": function BlogGrid06View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <BlogGrid06 />
+        </div>
+      </div>
+    )
+  },
+  "blog-grid-07": function BlogGrid07View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <BlogGrid07 />
+        </div>
+      </div>
+    )
+  },
+  "blog-grid-08": function BlogGrid08View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <BlogGrid08 />
+        </div>
+      </div>
+    )
+  },
+  "blog-grid-09": function BlogGrid09View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <BlogGrid09 />
+        </div>
+      </div>
+    )
+  },
+  "blog-grid-10": function BlogGrid10View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <BlogGrid10 />
+        </div>
+      </div>
+    )
+  },
   "changelog-01": function Changelog01View() {
     return (
-      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
         <div className="w-full">
           <Changelog01 />
         </div>
       </div>
     )
   },
+  "changelog-02": function Changelog02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <Changelog02 />
+        </div>
+      </div>
+    )
+  },
+  "changelog-03": function Changelog03View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <Changelog03 />
+        </div>
+      </div>
+    )
+  },
+  "changelog-04": function Changelog04View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <Changelog04 />
+        </div>
+      </div>
+    )
+  },
+  "changelog-05": function Changelog05View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <Changelog05 />
+        </div>
+      </div>
+    )
+  },
   "reading-progress-01": function ReadingProgress01View() {
     return (
-      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
         <div className="w-full">
           <ReadingProgress01 />
         </div>
       </div>
     )
   },
+  "reading-progress-02": function ReadingProgress02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <ReadingProgress02 />
+        </div>
+      </div>
+    )
+  },
+  "reading-progress-03": function ReadingProgress03View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <ReadingProgress03 />
+        </div>
+      </div>
+    )
+  },
+  "reading-progress-04": function ReadingProgress04View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <ReadingProgress04 />
+        </div>
+      </div>
+    )
+  },
+  "reading-progress-05": function ReadingProgress05View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <ReadingProgress05 />
+        </div>
+      </div>
+    )
+  },
   "article-layout-01": function ArticleLayout01View() {
     return (
-      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
         <div className="w-full">
           <ArticleLayout01 />
+        </div>
+      </div>
+    )
+  },
+  "article-layout-02": function ArticleLayout02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <ArticleLayout02 />
+        </div>
+      </div>
+    )
+  },
+  "article-layout-03": function ArticleLayout03View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <ArticleLayout03 />
+        </div>
+      </div>
+    )
+  },
+  "article-layout-04": function ArticleLayout04View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <ArticleLayout04 />
+        </div>
+      </div>
+    )
+  },
+  "article-layout-05": function ArticleLayout05View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <ArticleLayout05 />
         </div>
       </div>
     )
@@ -2016,9 +2370,27 @@ const views: Record<string, ComponentType> = {
       </div>
     )
   },
+  "billing-history-02": function BillingHistory02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <BillingHistory02 />
+        </div>
+      </div>
+    )
+  },
+  "billing-history-03": function BillingHistory03View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <BillingHistory03 />
+        </div>
+      </div>
+    )
+  },
   "billing-settings-01": function BillingSettings01View() {
     return (
-      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
         <div className="w-full">
           <BillingSettings01 />
         </div>
@@ -2027,9 +2399,27 @@ const views: Record<string, ComponentType> = {
   },
   "billing-settings-02": function BillingSettings02View() {
     return (
-      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
         <div className="w-full">
           <BillingSettings02 />
+        </div>
+      </div>
+    )
+  },
+  "billing-settings-03": function BillingSettings03View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <BillingSettings03 />
+        </div>
+      </div>
+    )
+  },
+  "billing-settings-04": function BillingSettings04View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <BillingSettings04 />
         </div>
       </div>
     )
@@ -2099,9 +2489,27 @@ const views: Record<string, ComponentType> = {
   },
   "payment-methods-01": function PaymentMethods01View() {
     return (
-      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
         <div className="w-full">
           <PaymentMethods01 />
+        </div>
+      </div>
+    )
+  },
+  "payment-methods-02": function PaymentMethods02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <PaymentMethods02 />
+        </div>
+      </div>
+    )
+  },
+  "payment-methods-03": function PaymentMethods03View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <PaymentMethods03 />
         </div>
       </div>
     )
@@ -2115,11 +2523,74 @@ const views: Record<string, ComponentType> = {
       </div>
     )
   },
+  "transfer-funds-02": function TransferFunds02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <TransferFunds02 />
+        </div>
+      </div>
+    )
+  },
+  "transfer-funds-03": function TransferFunds03View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <TransferFunds03 />
+        </div>
+      </div>
+    )
+  },
   "invoice-01": function Invoice01View() {
     return (
       <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
         <div className="w-full">
           <Invoice01 />
+        </div>
+      </div>
+    )
+  },
+  "invoice-02": function Invoice02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Invoice02 />
+        </div>
+      </div>
+    )
+  },
+  "invoice-03": function Invoice03View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Invoice03 />
+        </div>
+      </div>
+    )
+  },
+  "invoice-04": function Invoice04View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Invoice04 />
+        </div>
+      </div>
+    )
+  },
+  "invoice-05": function Invoice05View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Invoice05 />
+        </div>
+      </div>
+    )
+  },
+  "invoice-06": function Invoice06View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Invoice06 />
         </div>
       </div>
     )
@@ -2338,7 +2809,7 @@ const views: Record<string, ComponentType> = {
   },
   "data-export-01": function DataExport01View() {
     return (
-      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
         <div className="w-full">
           <DataExport01 />
         </div>
@@ -2347,9 +2818,27 @@ const views: Record<string, ComponentType> = {
   },
   "data-export-02": function DataExport02View() {
     return (
-      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
         <div className="w-full">
           <DataExport02 />
+        </div>
+      </div>
+    )
+  },
+  "data-export-03": function DataExport03View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <DataExport03 />
+        </div>
+      </div>
+    )
+  },
+  "data-export-04": function DataExport04View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <DataExport04 />
         </div>
       </div>
     )
@@ -2363,11 +2852,74 @@ const views: Record<string, ComponentType> = {
       </div>
     )
   },
-  "file-upload-01": function FileUpload01View() {
+  "file-manager-02": function FileManager02View() {
     return (
       <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
         <div className="w-full">
+          <FileManager02 />
+        </div>
+      </div>
+    )
+  },
+  "file-manager-03": function FileManager03View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <FileManager03 />
+        </div>
+      </div>
+    )
+  },
+  "file-manager-04": function FileManager04View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <FileManager04 />
+        </div>
+      </div>
+    )
+  },
+  "file-manager-05": function FileManager05View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <FileManager05 />
+        </div>
+      </div>
+    )
+  },
+  "file-upload-01": function FileUpload01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
           <FileUpload01 />
+        </div>
+      </div>
+    )
+  },
+  "file-upload-02": function FileUpload02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <FileUpload02 />
+        </div>
+      </div>
+    )
+  },
+  "file-upload-03": function FileUpload03View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <FileUpload03 />
+        </div>
+      </div>
+    )
+  },
+  "file-upload-04": function FileUpload04View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <FileUpload04 />
         </div>
       </div>
     )
@@ -2383,9 +2935,198 @@ const views: Record<string, ComponentType> = {
   },
   "media-player-01": function MediaPlayer01View() {
     return (
-      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
         <div className="w-full">
           <MediaPlayer01 />
+        </div>
+      </div>
+    )
+  },
+  "media-player-02": function MediaPlayer02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <MediaPlayer02 />
+        </div>
+      </div>
+    )
+  },
+  "media-player-03": function MediaPlayer03View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <MediaPlayer03 />
+        </div>
+      </div>
+    )
+  },
+  "media-player-04": function MediaPlayer04View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <MediaPlayer04 />
+        </div>
+      </div>
+    )
+  },
+  "media-player-05": function MediaPlayer05View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <MediaPlayer05 />
+        </div>
+      </div>
+    )
+  },
+  "media-player-06": function MediaPlayer06View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <MediaPlayer06 />
+        </div>
+      </div>
+    )
+  },
+  "media-player-07": function MediaPlayer07View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <MediaPlayer07 />
+        </div>
+      </div>
+    )
+  },
+  "media-player-08": function MediaPlayer08View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <MediaPlayer08 />
+        </div>
+      </div>
+    )
+  },
+  "media-player-09": function MediaPlayer09View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <MediaPlayer09 />
+        </div>
+      </div>
+    )
+  },
+  "media-player-10": function MediaPlayer10View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <MediaPlayer10 />
+        </div>
+      </div>
+    )
+  },
+  "music-player-01": function MusicPlayer01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <MusicPlayer01 />
+        </div>
+      </div>
+    )
+  },
+  "music-player-02": function MusicPlayer02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <MusicPlayer02 />
+        </div>
+      </div>
+    )
+  },
+  "music-player-03": function MusicPlayer03View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <MusicPlayer03 />
+        </div>
+      </div>
+    )
+  },
+  "music-player-04": function MusicPlayer04View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <MusicPlayer04 />
+        </div>
+      </div>
+    )
+  },
+  "music-player-05": function MusicPlayer05View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <MusicPlayer05 />
+        </div>
+      </div>
+    )
+  },
+  "music-player-06": function MusicPlayer06View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <MusicPlayer06 />
+        </div>
+      </div>
+    )
+  },
+  "music-player-07": function MusicPlayer07View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <MusicPlayer07 />
+        </div>
+      </div>
+    )
+  },
+  "music-player-08": function MusicPlayer08View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <MusicPlayer08 />
+        </div>
+      </div>
+    )
+  },
+  "music-player-09": function MusicPlayer09View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <MusicPlayer09 />
+        </div>
+      </div>
+    )
+  },
+  "music-player-10": function MusicPlayer10View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <MusicPlayer10 />
+        </div>
+      </div>
+    )
+  },
+  "music-player-11": function MusicPlayer11View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <MusicPlayer11 />
+        </div>
+      </div>
+    )
+  },
+  "music-player-12": function MusicPlayer12View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <MusicPlayer12 />
         </div>
       </div>
     )
@@ -2561,6 +3302,42 @@ const views: Record<string, ComponentType> = {
       </div>
     )
   },
+  "calendar-02": function Calendar02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Calendar02 />
+        </div>
+      </div>
+    )
+  },
+  "calendar-03": function Calendar03View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Calendar03 />
+        </div>
+      </div>
+    )
+  },
+  "calendar-04": function Calendar04View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Calendar04 />
+        </div>
+      </div>
+    )
+  },
+  "calendar-05": function Calendar05View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <Calendar05 />
+        </div>
+      </div>
+    )
+  },
   "notification-center-01": function NotificationCenter01View() {
     return (
       <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
@@ -2725,18 +3502,81 @@ const views: Record<string, ComponentType> = {
   },
   "search-results-01": function SearchResults01View() {
     return (
-      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
         <div className="w-full">
           <SearchResults01 />
         </div>
       </div>
     )
   },
+  "search-results-02": function SearchResults02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <SearchResults02 />
+        </div>
+      </div>
+    )
+  },
+  "search-results-03": function SearchResults03View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <SearchResults03 />
+        </div>
+      </div>
+    )
+  },
+  "search-results-04": function SearchResults04View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <SearchResults04 />
+        </div>
+      </div>
+    )
+  },
   "filter-panel-01": function FilterPanel01View() {
     return (
-      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
         <div className="w-full">
           <FilterPanel01 />
+        </div>
+      </div>
+    )
+  },
+  "filter-panel-02": function FilterPanel02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <FilterPanel02 />
+        </div>
+      </div>
+    )
+  },
+  "filter-panel-03": function FilterPanel03View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <FilterPanel03 />
+        </div>
+      </div>
+    )
+  },
+  "filter-panel-04": function FilterPanel04View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <FilterPanel04 />
+        </div>
+      </div>
+    )
+  },
+  "filter-panel-05": function FilterPanel05View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <FilterPanel05 />
         </div>
       </div>
     )

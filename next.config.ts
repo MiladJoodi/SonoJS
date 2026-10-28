@@ -23,17 +23,23 @@ const nextConfig: NextConfig = {
   experimental: {
     turbopackFileSystemCacheForDev: false,
   },
-  // Local block showcase films (e.g. media-player-01)
+  // Local block showcase media (video + audio demos)
   turbopack: {
     rules: {
       "*.mp4": {
+        type: "asset",
+      },
+      "*.wav": {
+        type: "asset",
+      },
+      "*.mp3": {
         type: "asset",
       },
     },
   },
   webpack: (config) => {
     config.module.rules.push({
-      test: /\.mp4$/i,
+      test: /\.(mp4|wav|mp3)$/i,
       type: "asset/resource",
     })
     return config

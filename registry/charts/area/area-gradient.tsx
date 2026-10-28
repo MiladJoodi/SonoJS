@@ -36,7 +36,7 @@ import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 /**
  * Area Gradient — locked gallery chrome + **neon** fill/glow (chart-local).
  * Dual stacked natural areas; branded skins use `--chart-up` / `--chart-down`
- * + drop-shadow bloom (same pattern as classic `chart-area-gradient`).
+ * + drop-shadow bloom.
  * Installs to: components/charts/area-gradient.tsx
  */
 

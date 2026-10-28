@@ -16,7 +16,21 @@ import {
 
 import { Badge } from "@sonojs/ui/components/badge"
 import { Button } from "@sonojs/ui/components/button"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@sonojs/ui/components/dropdown-menu"
 import { cn } from "@/lib/utils"
+
+import visaLogo from "./images/visa.webp"
+
+function assetSrc(asset: string | { src: string }) {
+  return typeof asset === "string" ? asset : asset.src
+}
+
+const VISA = assetSrc(visaLogo)
 
 const ACTIVITY = [
   {
@@ -36,7 +50,7 @@ const ACTIVITY = [
   {
     id: 3,
     merchant: "AWS Services",
-    date: "Jun 24, 08:00",
+    date: "Jun 24, 2026 · 08:00",
     amount: "-$840.12",
     card: "Main Wallet",
   },
@@ -80,15 +94,34 @@ function ChipMark({ className }: { className?: string }) {
   )
 }
 
+function BrandMark({
+  src,
+  className,
+}: {
+  src: string
+  className?: string
+}) {
+  return (
+    <span className="inline-flex shrink-0 items-center rounded-md bg-white px-1.5 py-0.5">
+      <img
+        src={src}
+        alt=""
+        className={cn("h-4 w-auto object-contain", className)}
+      />
+    </span>
+  )
+}
+
 function ActionButton({
   children,
+  className,
   ...props
 }: React.ComponentProps<typeof Button>) {
   return (
     <Button
       type="button"
       variant="outline"
-      className="h-12 flex-1 font-medium"
+      className={cn("h-12 flex-1 cursor-pointer font-medium", className)}
       {...props}
     >
       {children}
@@ -101,11 +134,12 @@ export default function PaymentMethods({
   ...props
 }: React.ComponentProps<"main">) {
   const [showNumbers, setShowNumbers] = React.useState(false)
+  const [frozen, setFrozen] = React.useState(false)
 
   return (
     <main
       className={cn(
-        "w-full min-w-0 bg-canvas px-4 py-10 text-foreground sm:px-6",
+        "w-full min-w-0 bg-white px-4 py-10 text-foreground dark:bg-background sm:px-6",
         className
       )}
       {...props}
@@ -124,6 +158,7 @@ export default function PaymentMethods({
             <Button
               type="button"
               variant="outline"
+              className="cursor-pointer"
               onClick={() => setShowNumbers((v) => !v)}
             >
               {showNumbers ? (
@@ -133,7 +168,7 @@ export default function PaymentMethods({
               )}
               {showNumbers ? "Hide numbers" : "Show numbers"}
             </Button>
-            <Button type="button">
+            <Button type="button" className="cursor-pointer">
               <PlusIcon aria-hidden />
               Add Card
             </Button>
@@ -141,7 +176,6 @@ export default function PaymentMethods({
         </div>
 
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {/* Main virtual wallet */}
           <div className="flex flex-col gap-4">
             <div className="relative flex h-[240px] flex-col justify-between overflow-hidden rounded-[12px] border border-border/70 bg-card p-8 shadow-soft">
               <div className="relative z-10 flex items-start justify-between gap-3">
@@ -174,10 +208,7 @@ export default function PaymentMethods({
 
             <div className="flex gap-3">
               <ActionButton>
-                <ArrowDownToLineIcon
-                  className="opacity-70"
-                  aria-hidden
-                />
+                <ArrowDownToLineIcon className="opacity-70" aria-hidden />
                 Top Up
               </ActionButton>
               <ActionButton>
@@ -187,14 +218,21 @@ export default function PaymentMethods({
             </div>
           </div>
 
-          {/* Physical corporate card */}
           <div className="flex flex-col gap-4">
-            <div className="relative flex h-[240px] flex-col justify-between overflow-hidden rounded-[12px] bg-primary p-8 !text-white shadow-soft">
+            <div
+              className={cn(
+                "relative flex h-[240px] flex-col justify-between overflow-hidden rounded-[12px] bg-primary p-8 !text-white shadow-soft",
+                frozen && "opacity-80"
+              )}
+            >
               <div className="relative z-10 flex items-start justify-between gap-3">
                 <ChipMark className="text-white" />
-                <Badge className="border-white/30 bg-white/20 !text-white hover:bg-white/25">
-                  Physical
-                </Badge>
+                <div className="flex flex-col items-end gap-2">
+                  <BrandMark src={VISA} />
+                  <Badge className="border-white/30 bg-white/20 !text-white hover:bg-white/25">
+                    {frozen ? "Frozen" : "Physical"}
+                  </Badge>
+                </div>
               </div>
 
               <div className="relative z-10 space-y-5 text-start">
@@ -231,9 +269,13 @@ export default function PaymentMethods({
             </div>
 
             <div className="flex gap-3">
-              <ActionButton>
+              <ActionButton
+                variant={frozen ? "default" : "outline"}
+                onClick={() => setFrozen((v) => !v)}
+                aria-pressed={frozen}
+              >
                 <SnowflakeIcon className="opacity-70" aria-hidden />
-                Freeze
+                {frozen ? "Unfreeze" : "Freeze"}
               </ActionButton>
               <ActionButton>
                 <SettingsIcon className="opacity-70" aria-hidden />
@@ -242,7 +284,6 @@ export default function PaymentMethods({
             </div>
           </div>
 
-          {/* Euro wallet */}
           <div className="flex flex-col gap-4">
             <div className="relative flex h-[240px] flex-col justify-between overflow-hidden rounded-[12px] border border-border/70 bg-card p-8 shadow-soft">
               <div className="relative z-10 flex items-start justify-between gap-3">
@@ -257,15 +298,33 @@ export default function PaymentMethods({
                     Euro Wallet
                   </p>
                 </div>
-                <Button
-                  type="button"
-                  variant="ghost"
-                  size="icon-sm"
-                  aria-label="Wallet options"
-                  className="-me-2"
-                >
-                  <MoreHorizontalIcon aria-hidden />
-                </Button>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="icon-sm"
+                      aria-label="Wallet options"
+                      className="-me-2 cursor-pointer"
+                    >
+                      <MoreHorizontalIcon aria-hidden />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className="w-44">
+                    <DropdownMenuItem className="cursor-pointer">
+                      View statements
+                    </DropdownMenuItem>
+                    <DropdownMenuItem className="cursor-pointer">
+                      Set as default
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                      variant="destructive"
+                      className="cursor-pointer"
+                    >
+                      Close wallet
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
               </div>
 
               <div className="relative z-10 text-start">
@@ -293,10 +352,7 @@ export default function PaymentMethods({
                 Convert
               </ActionButton>
               <ActionButton>
-                <ArrowDownToLineIcon
-                  className="opacity-70"
-                  aria-hidden
-                />
+                <ArrowDownToLineIcon className="opacity-70" aria-hidden />
                 Withdraw
               </ActionButton>
             </div>
@@ -310,36 +366,38 @@ export default function PaymentMethods({
           <div className="overflow-hidden rounded-[12px] border border-border/70 bg-card shadow-soft">
             <ul className="divide-y divide-border/70" role="list">
               {ACTIVITY.map((tx) => (
-                <li
-                  key={tx.id}
-                  className="flex items-center justify-between gap-4 p-5 transition-colors hover:bg-muted/40"
-                >
-                  <div className="flex min-w-0 items-center gap-4">
-                    <div className="flex size-12 shrink-0 items-center justify-center rounded-full border border-border/70 bg-muted shadow-xs">
-                      <CreditCardIcon
-                        className="size-5 text-muted-foreground"
-                        aria-hidden
-                      />
-                    </div>
-                    <div className="min-w-0 text-start">
-                      <p className="font-semibold text-foreground">
-                        {tx.merchant}
-                      </p>
-                      <p className="text-sm text-muted-foreground">
-                        {tx.date}
-                        <span className="mx-1.5 opacity-50" aria-hidden>
-                          •
-                        </span>
-                        <span dir="ltr">{tx.card}</span>
-                      </p>
-                    </div>
-                  </div>
-                  <p
-                    dir="ltr"
-                    className="shrink-0 font-semibold tabular-nums text-foreground"
+                <li key={tx.id}>
+                  <button
+                    type="button"
+                    className="flex w-full cursor-pointer items-center justify-between gap-4 p-5 text-start transition-colors hover:bg-muted/40"
                   >
-                    {tx.amount}
-                  </p>
+                    <span className="flex min-w-0 items-center gap-4">
+                      <span className="flex size-12 shrink-0 items-center justify-center rounded-full border border-border/70 bg-muted shadow-xs">
+                        <CreditCardIcon
+                          className="size-5 text-muted-foreground"
+                          aria-hidden
+                        />
+                      </span>
+                      <span className="min-w-0">
+                        <span className="block font-semibold text-foreground">
+                          {tx.merchant}
+                        </span>
+                        <span className="block text-sm text-muted-foreground">
+                          {tx.date}
+                          <span className="mx-1.5 opacity-50" aria-hidden>
+                            •
+                          </span>
+                          <span dir="ltr">{tx.card}</span>
+                        </span>
+                      </span>
+                    </span>
+                    <span
+                      dir="ltr"
+                      className="shrink-0 font-semibold tabular-nums text-foreground"
+                    >
+                      {tx.amount}
+                    </span>
+                  </button>
                 </li>
               ))}
             </ul>
@@ -347,7 +405,7 @@ export default function PaymentMethods({
               <Button
                 type="button"
                 variant="ghost"
-                className="h-10 w-full text-sm font-medium"
+                className="h-10 w-full cursor-pointer text-sm font-medium"
               >
                 View all transactions
               </Button>

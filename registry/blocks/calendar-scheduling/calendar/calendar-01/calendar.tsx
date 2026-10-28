@@ -1,11 +1,15 @@
 "use client"
 
 import * as React from "react"
-import { format, isSameDay } from "date-fns"
+import { addMonths, format, isSameDay } from "date-fns"
 import {
+  ChevronLeftIcon,
+  ChevronRightIcon,
   ClockIcon,
   MapPinIcon,
+  PencilIcon,
   PlusIcon,
+  Trash2Icon,
   VideoIcon,
 } from "lucide-react"
 
@@ -48,6 +52,13 @@ import sarahImg from "./images/sarah.webp"
 
 function assetSrc(asset: string | { src: string }) {
   return typeof asset === "string" ? asset : asset.src
+}
+
+function atNoon(offsetDays: number) {
+  const d = new Date()
+  d.setHours(12, 0, 0, 0)
+  d.setDate(d.getDate() + offsetDays)
+  return d
 }
 
 type Category = "design" | "engineering" | "marketing" | "admin"
@@ -121,59 +132,61 @@ const CATEGORY_STYLES: Record<
   },
 }
 
-const INITIAL_EVENTS: CalendarEvent[] = [
-  {
-    id: "1",
-    title: "Design Sync",
-    date: new Date(2026, 5, 15),
-    start: "10:00",
-    end: "10:45",
-    category: "design",
-    meeting: true,
-    location: "Figma · Room A",
-    attendees: [ATTENDEES.sarah, ATTENDEES.maria, ATTENDEES.alex],
-  },
-  {
-    id: "2",
-    title: "Weekly Standup",
-    date: new Date(2026, 5, 15),
-    start: "11:30",
-    end: "12:00",
-    category: "engineering",
-    meeting: true,
-    attendees: [ATTENDEES.alex, ATTENDEES.david, ATTENDEES.sarah],
-  },
-  {
-    id: "3",
-    title: "Product Launch Review",
-    date: new Date(2026, 5, 18),
-    start: "14:00",
-    end: "15:30",
-    category: "marketing",
-    location: "HQ · Conference 2",
-    attendees: [ATTENDEES.maria, ATTENDEES.sarah],
-  },
-  {
-    id: "4",
-    title: "Board Meeting",
-    date: new Date(2026, 5, 22),
-    start: "09:00",
-    end: "10:30",
-    category: "admin",
-    location: "Executive suite",
-    attendees: [ATTENDEES.david, ATTENDEES.maria, ATTENDEES.alex],
-  },
-  {
-    id: "5",
-    title: "Sprint Planning",
-    date: new Date(2026, 5, 16),
-    start: "13:00",
-    end: "14:00",
-    category: "engineering",
-    meeting: true,
-    attendees: [ATTENDEES.alex, ATTENDEES.david],
-  },
-]
+function buildInitialEvents(): CalendarEvent[] {
+  return [
+    {
+      id: "1",
+      title: "Design Sync",
+      date: atNoon(0),
+      start: "10:00",
+      end: "10:45",
+      category: "design",
+      meeting: true,
+      location: "Figma · Room A",
+      attendees: [ATTENDEES.sarah, ATTENDEES.maria, ATTENDEES.alex],
+    },
+    {
+      id: "2",
+      title: "Weekly Standup",
+      date: atNoon(0),
+      start: "11:30",
+      end: "12:00",
+      category: "engineering",
+      meeting: true,
+      attendees: [ATTENDEES.alex, ATTENDEES.david, ATTENDEES.sarah],
+    },
+    {
+      id: "3",
+      title: "Sprint Planning",
+      date: atNoon(1),
+      start: "13:00",
+      end: "14:00",
+      category: "engineering",
+      meeting: true,
+      attendees: [ATTENDEES.alex, ATTENDEES.david],
+    },
+    {
+      id: "4",
+      title: "Product Launch Review",
+      date: atNoon(3),
+      start: "14:00",
+      end: "15:30",
+      category: "marketing",
+      location: "HQ · Conference 2",
+      attendees: [ATTENDEES.maria, ATTENDEES.sarah],
+    },
+    {
+      id: "5",
+      title: "Board Meeting",
+      date: atNoon(7),
+      start: "09:00",
+      end: "10:30",
+      category: "admin",
+      location: "Executive suite",
+      attendees: [ATTENDEES.david, ATTENDEES.maria, ATTENDEES.alex],
+    },
+  ]
+}
 
 function formatTimeRange(start: string, end: string) {
   const toLabel = (t: string) => {
@@ -185,23 +198,22 @@ function formatTimeRange(start: string, end: string) {
   return `${toLabel(start)} – ${toLabel(end)}`
 }
 
+/** Month + day agenda with create/edit dialog. */
 export default function Calendar01() {
-  const [month, setMonth] = React.useState(new Date(2026, 5, 1))
-  const [selected, setSelected] = React.useState<Date | undefined>(
-    new Date(2026, 5, 15)
+  const [month, setMonth] = React.useState(() => new Date())
+  const [selected, setSelected] = React.useState<Date | undefined>(() =>
+    atNoon(0)
   )
-  const [events, setEvents] = React.useState(INITIAL_EVENTS)
+  const [events, setEvents] = React.useState(buildInitialEvents)
   const [open, setOpen] = React.useState(false)
+  const [editingId, setEditingId] = React.useState<string | null>(null)
   const [title, setTitle] = React.useState("")
-  const [dateValue, setDateValue] = React.useState("2026-06-15")
+  const [dateValue, setDateValue] = React.useState(() =>
+    format(atNoon(0), "yyyy-MM-dd")
+  )
   const [startTime, setStartTime] = React.useState("10:00")
   const [endTime, setEndTime] = React.useState("10:45")
   const [category, setCategory] = React.useState<Category>("design")
-
-  const eventDates = React.useMemo(
-    () => events.map((e) => e.date),
-    [events]
-  )
 
   const dayEvents = React.useMemo(() => {
     if (!selected) return []
@@ -211,7 +223,8 @@ export default function Calendar01() {
   }, [events, selected])
 
   const openCreate = () => {
-    const d = selected ?? new Date(2026, 5, 15)
+    const d = selected ?? atNoon(0)
+    setEditingId(null)
     setDateValue(format(d, "yyyy-MM-dd"))
     setTitle("")
     setStartTime("10:00")
@@ -220,92 +233,165 @@ export default function Calendar01() {
     setOpen(true)
   }
 
+  const openEdit = (event: CalendarEvent) => {
+    setEditingId(event.id)
+    setDateValue(format(event.date, "yyyy-MM-dd"))
+    setTitle(event.title)
+    setStartTime(event.start)
+    setEndTime(event.end)
+    setCategory(event.category)
+    setOpen(true)
+  }
+
   const saveEvent = () => {
     if (!title.trim()) return
     const [y, m, d] = dateValue.split("-").map(Number)
-    const next: CalendarEvent = {
-      id: String(Date.now()),
-      title: title.trim(),
-      date: new Date(y ?? 2026, (m ?? 1) - 1, d ?? 1),
-      start: startTime,
-      end: endTime,
-      category,
-      attendees: [ATTENDEES.sarah],
+    const date = new Date(y ?? 2026, (m ?? 1) - 1, d ?? 1, 12, 0, 0, 0)
+    if (editingId) {
+      setEvents((prev) =>
+        prev.map((e) =>
+          e.id === editingId
+            ? {
+                ...e,
+                title: title.trim(),
+                date,
+                start: startTime,
+                end: endTime,
+                category,
+              }
+            : e
+        )
+      )
+    } else {
+      setEvents((prev) => [
+        ...prev,
+        {
+          id: String(Date.now()),
+          title: title.trim(),
+          date,
+          start: startTime,
+          end: endTime,
+          category,
+          attendees: [ATTENDEES.sarah],
+        },
+      ])
     }
-    setEvents((prev) => [...prev, next])
-    setSelected(next.date)
-    setMonth(next.date)
+    setSelected(date)
+    setMonth(date)
+    setOpen(false)
+  }
+
+  const deleteEvent = () => {
+    if (!editingId) return
+    setEvents((prev) => prev.filter((e) => e.id !== editingId))
     setOpen(false)
   }
 
   return (
-    <div className="min-h-svh bg-canvas text-foreground">
-      <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
-        <header className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-          <div>
+    <div className="w-full bg-canvas text-foreground">
+      <div className="mx-auto max-w-5xl px-4 py-6 sm:px-6 lg:px-8">
+        <header className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+          <div className="text-start">
             <p className="text-sm font-medium text-primary">Calendar</p>
             <h1 className="mt-1 text-2xl font-semibold tracking-tight">
               {format(month, "MMMM yyyy")}
             </h1>
             <p className="mt-1 text-sm text-muted-foreground">
-              {events.length} events this month · select a day to review the
-              agenda
+              {events.length} events · select a day to review the agenda
             </p>
           </div>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap items-center gap-2">
+            <div className="flex items-center gap-1 rounded-md border border-border/70 bg-card p-0.5 shadow-soft">
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon-sm"
+                className="cursor-pointer"
+                aria-label="Previous month"
+                onClick={() => setMonth((m) => addMonths(m, -1))}
+              >
+                <ChevronLeftIcon className="icon-dir size-4" aria-hidden />
+              </Button>
+              <span
+                className="min-w-28 px-2 text-center text-sm font-semibold tabular-nums"
+                dir="ltr"
+              >
+                {format(month, "MMM yyyy")}
+              </span>
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon-sm"
+                className="cursor-pointer"
+                aria-label="Next month"
+                onClick={() => setMonth((m) => addMonths(m, 1))}
+              >
+                <ChevronRightIcon className="icon-dir size-4" aria-hidden />
+              </Button>
+            </div>
             <Button
               type="button"
               variant="outline"
               size="sm"
+              className="cursor-pointer"
               onClick={() => {
-                const today = new Date(2026, 5, 15)
+                const today = atNoon(0)
                 setSelected(today)
                 setMonth(today)
               }}
             >
               Today
             </Button>
-            <Button type="button" size="sm" className="gap-1.5" onClick={openCreate}>
+            <Button
+              type="button"
+              size="sm"
+              className="cursor-pointer gap-1.5"
+              onClick={openCreate}
+            >
               <PlusIcon className="size-4" aria-hidden />
               New event
             </Button>
           </div>
         </header>
 
-        <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_360px]">
-          <section className="rounded-[12px] border border-border/70 bg-card p-3 shadow-soft sm:p-4">
+        <div className="grid items-start gap-4 lg:grid-cols-[minmax(0,1fr)_320px]">
+          <section className="rounded-[12px] border border-border/70 bg-card p-2 shadow-soft sm:p-3">
             <Calendar
               mode="single"
               month={month}
               onMonthChange={setMonth}
               selected={selected}
               onSelect={setSelected}
-              modifiers={{ hasEvent: eventDates }}
-              className="w-full [--cell-size:--spacing(10)] sm:[--cell-size:--spacing(11)]"
+              hideNavigation
+              className="w-full [--cell-size:--spacing(8)]"
               classNames={{
                 root: "w-full",
                 months: "w-full",
                 month: "w-full",
+                month_caption: "justify-start px-1",
+                caption_label: "text-sm font-semibold",
               }}
               components={{
                 DayButton: ({ children, modifiers, day, ...props }) => {
-                  const count = events.filter((e) =>
-                    isSameDay(e.date, day.date)
-                  ).length
+                  const dayCats = events
+                    .filter((e) => isSameDay(e.date, day.date))
+                    .map((e) => e.category)
+                  const unique = [...new Set(dayCats)].slice(0, 3)
                   return (
                     <CalendarDayButton day={day} modifiers={modifiers} {...props}>
                       {children}
-                      {!modifiers.outside && count > 0 ? (
+                      {!modifiers.outside && unique.length > 0 ? (
                         <span className="flex items-center justify-center gap-0.5">
-                          {Array.from({ length: Math.min(count, 3) }).map(
-                            (_, i) => (
-                              <span
-                                key={i}
-                                className="size-1 rounded-full bg-primary"
-                                aria-hidden
-                              />
-                            )
-                          )}
+                          {unique.map((cat) => (
+                            <span
+                              key={cat}
+                              className={cn(
+                                "size-1 rounded-full",
+                                CATEGORY_STYLES[cat].dot
+                              )}
+                              aria-hidden
+                            />
+                          ))}
                         </span>
                       ) : (
                         <span className="size-1 opacity-0" aria-hidden />
@@ -315,8 +401,8 @@ export default function Calendar01() {
                 },
               }}
             />
-            <Separator className="my-4" />
-            <ul className="flex flex-wrap gap-3 px-1 text-xs text-muted-foreground">
+            <Separator className="my-3" />
+            <ul className="flex flex-wrap gap-3 px-1 pb-1 text-xs text-muted-foreground">
               {(Object.keys(CATEGORY_STYLES) as Category[]).map((key) => (
                 <li key={key} className="flex items-center gap-1.5">
                   <span
@@ -329,10 +415,10 @@ export default function Calendar01() {
             </ul>
           </section>
 
-          <aside className="flex min-h-105 flex-col rounded-[12px] border border-border/70 bg-card shadow-soft">
-            <div className="border-b border-border/70 px-5 py-4">
+          <aside className="flex flex-col rounded-[12px] border border-border/70 bg-card shadow-soft">
+            <div className="border-b border-border/70 px-4 py-3">
               <div className="flex items-start justify-between gap-3">
-                <div>
+                <div className="text-start">
                   <h2 className="text-base font-semibold">
                     {selected
                       ? format(selected, "EEEE, MMM d")
@@ -348,6 +434,7 @@ export default function Calendar01() {
                   type="button"
                   variant="outline"
                   size="icon-xs"
+                  className="cursor-pointer"
                   aria-label="Add event for selected day"
                   onClick={openCreate}
                 >
@@ -356,9 +443,9 @@ export default function Calendar01() {
               </div>
             </div>
 
-            <div className="flex-1 overflow-y-auto p-4">
+            <div className="max-h-[28rem] overflow-y-auto p-3 pb-8">
               {dayEvents.length === 0 ? (
-                <div className="flex h-full min-h-48 flex-col items-center justify-center rounded-[12px] border border-dashed border-border/70 bg-muted/20 px-6 text-center">
+                <div className="flex min-h-32 flex-col items-center justify-center rounded-[12px] border border-dashed border-border/70 bg-muted/20 px-4 py-8 text-center">
                   <p className="text-sm font-medium">Nothing on the calendar</p>
                   <p className="mt-1 max-w-55 text-xs text-muted-foreground">
                     Create an event for this day or pick another date.
@@ -366,7 +453,7 @@ export default function Calendar01() {
                   <Button
                     type="button"
                     size="sm"
-                    className="mt-4 gap-1.5"
+                    className="mt-4 cursor-pointer gap-1.5"
                     onClick={openCreate}
                   >
                     <PlusIcon className="size-3.5" aria-hidden />
@@ -378,69 +465,71 @@ export default function Calendar01() {
                   {dayEvents.map((event) => {
                     const style = CATEGORY_STYLES[event.category]
                     return (
-                      <li
-                        key={event.id}
-                        className="rounded-[12px] border border-border/70 bg-muted/20 p-4 transition-colors hover:border-primary/25 hover:bg-card"
-                      >
-                        <div className="flex items-start justify-between gap-3">
-                          <div className="min-w-0">
-                            <div className="flex items-center gap-2">
-                              <span
-                                className={cn(
-                                  "size-2 shrink-0 rounded-full",
-                                  style.dot
-                                )}
-                                aria-hidden
-                              />
-                              <h3 className="truncate text-sm font-semibold">
-                                {event.title}
-                              </h3>
-                            </div>
-                            <p className="mt-1.5 flex items-center gap-1.5 text-xs text-muted-foreground">
-                              <ClockIcon className="size-3.5" aria-hidden />
-                              <span dir="ltr">
-                                {formatTimeRange(event.start, event.end)}
-                              </span>
-                            </p>
-                            {event.location ? (
-                              <p className="mt-1 flex items-center gap-1.5 text-xs text-muted-foreground">
-                                {event.meeting ? (
-                                  <VideoIcon className="size-3.5" aria-hidden />
-                                ) : (
-                                  <MapPinIcon className="size-3.5" aria-hidden />
-                                )}
-                                {event.location}
-                              </p>
-                            ) : null}
-                          </div>
-                          <Badge className={cn("shrink-0", style.badge)}>
-                            {style.label}
-                          </Badge>
-                        </div>
-                        <div className="mt-3 flex items-center justify-between gap-2">
-                          <div className="flex -space-x-2">
-                            {event.attendees.slice(0, 3).map((person) => (
-                              <Avatar
-                                key={person.name}
-                                size="sm"
-                                className="ring-2 ring-card"
-                              >
-                                <AvatarImage
-                                  src={person.src}
-                                  alt={person.name}
+                      <li key={event.id}>
+                        <button
+                          type="button"
+                          onClick={() => openEdit(event)}
+                          className="w-full cursor-pointer rounded-[12px] border border-border/70 bg-muted/20 p-3 text-start transition-colors hover:border-primary/25 hover:bg-card"
+                        >
+                          <div className="flex items-start justify-between gap-3">
+                            <div className="min-w-0">
+                              <div className="flex items-center gap-2">
+                                <span
+                                  className={cn(
+                                    "size-2 shrink-0 rounded-full",
+                                    style.dot
+                                  )}
+                                  aria-hidden
                                 />
-                                <AvatarFallback>
-                                  {person.initials}
-                                </AvatarFallback>
-                              </Avatar>
-                            ))}
-                            {event.attendees.length > 3 ? (
-                              <span className="flex size-6 items-center justify-center rounded-full bg-muted text-[10px] font-semibold ring-2 ring-card">
-                                +{event.attendees.length - 3}
-                              </span>
-                            ) : null}
+                                <h3 className="truncate text-sm font-semibold">
+                                  {event.title}
+                                </h3>
+                                <PencilIcon
+                                  className="size-3 shrink-0 text-muted-foreground"
+                                  aria-hidden
+                                />
+                              </div>
+                              <p className="mt-1.5 flex items-center gap-1.5 text-xs text-muted-foreground">
+                                <ClockIcon className="size-3.5" aria-hidden />
+                                <span dir="ltr">
+                                  {formatTimeRange(event.start, event.end)}
+                                </span>
+                              </p>
+                              {event.location ? (
+                                <p className="mt-1 flex items-center gap-1.5 text-xs text-muted-foreground">
+                                  {event.meeting ? (
+                                    <VideoIcon className="size-3.5" aria-hidden />
+                                  ) : (
+                                    <MapPinIcon className="size-3.5" aria-hidden />
+                                  )}
+                                  {event.location}
+                                </p>
+                              ) : null}
+                            </div>
+                            <Badge className={cn("shrink-0", style.badge)}>
+                              {style.label}
+                            </Badge>
                           </div>
-                        </div>
+                          <div className="mt-3 flex items-center gap-2">
+                            <div className="flex -space-x-2 rtl:space-x-reverse">
+                              {event.attendees.slice(0, 3).map((person) => (
+                                <Avatar
+                                  key={person.name}
+                                  size="sm"
+                                  className="ring-2 ring-card"
+                                >
+                                  <AvatarImage
+                                    src={person.src}
+                                    alt={person.name}
+                                  />
+                                  <AvatarFallback>
+                                    {person.initials}
+                                  </AvatarFallback>
+                                </Avatar>
+                              ))}
+                            </div>
+                          </div>
+                        </button>
                       </li>
                     )
                   })}
@@ -453,9 +542,13 @@ export default function Calendar01() {
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogContent className="sm:max-w-md">
             <DialogHeader>
-              <DialogTitle>New event</DialogTitle>
+              <DialogTitle>
+                {editingId ? "Edit event" : "New event"}
+              </DialogTitle>
               <DialogDescription>
-                Add a meeting or reminder to your calendar.
+                {editingId
+                  ? "Update or remove this calendar event."
+                  : "Add a meeting or reminder to your calendar."}
               </DialogDescription>
             </DialogHeader>
             <FieldGroup className="gap-4 px-1">
@@ -474,6 +567,7 @@ export default function Calendar01() {
                   <Input
                     id="cal-01-date"
                     type="date"
+                    dir="ltr"
                     value={dateValue}
                     onChange={(e) => setDateValue(e.target.value)}
                   />
@@ -484,7 +578,7 @@ export default function Calendar01() {
                     value={category}
                     onValueChange={(v) => setCategory(v as Category)}
                   >
-                    <SelectTrigger id="cal-01-category" className="w-full">
+                    <SelectTrigger id="cal-01-category" className="w-full cursor-pointer">
                       <SelectValue placeholder="Category" />
                     </SelectTrigger>
                     <SelectContent>
@@ -502,6 +596,7 @@ export default function Calendar01() {
                   <Input
                     id="cal-01-start"
                     type="time"
+                    dir="ltr"
                     value={startTime}
                     onChange={(e) => setStartTime(e.target.value)}
                   />
@@ -511,21 +606,42 @@ export default function Calendar01() {
                   <Input
                     id="cal-01-end"
                     type="time"
+                    dir="ltr"
                     value={endTime}
                     onChange={(e) => setEndTime(e.target.value)}
                   />
                 </Field>
               </div>
             </FieldGroup>
-            <DialogFooter>
-              <DialogClose asChild>
-                <Button type="button" variant="outline">
-                  Cancel
+            <DialogFooter className="flex-row gap-2 sm:justify-between">
+              {editingId ? (
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="cursor-pointer gap-1.5 text-destructive hover:text-destructive"
+                  onClick={deleteEvent}
+                >
+                  <Trash2Icon className="size-3.5" aria-hidden />
+                  Delete
                 </Button>
-              </DialogClose>
-              <Button type="button" onClick={saveEvent} disabled={!title.trim()}>
-                Save event
-              </Button>
+              ) : (
+                <span />
+              )}
+              <div className="flex gap-2">
+                <DialogClose asChild>
+                  <Button type="button" variant="outline" className="cursor-pointer">
+                    Cancel
+                  </Button>
+                </DialogClose>
+                <Button
+                  type="button"
+                  className="cursor-pointer"
+                  onClick={saveEvent}
+                  disabled={!title.trim()}
+                >
+                  {editingId ? "Save changes" : "Save event"}
+                </Button>
+              </div>
             </DialogFooter>
           </DialogContent>
         </Dialog>

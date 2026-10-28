@@ -1,7 +1,9 @@
-import { CommandBar } from "@/components/home/command-bar"
+import Link from "next/link"
+
 import { HeroShowcase } from "@/components/home/hero-showcase"
 import { PlatformBadges } from "@/components/home/platform-badges"
 import { siteConfig } from "@/lib/config"
+import { RainbowButton } from "@sonojs/ui/components/rainbow-button"
 
 export function HomeHero() {
   return (
@@ -35,7 +37,7 @@ export function HomeHero() {
             aria-labelledby="home-hero-heading"
           >
             <p
-              className="mb-5 text-[clamp(1.5rem,5vw,2.25rem)] font-semibold tracking-[-0.03em] text-foreground sm:mb-9"
+              className="mb-5 text-[clamp(1.5rem,5vw,2.25rem)] font-semibold tracking-[-0.03em] text-foreground sm:mb-8"
               style={{
                 animation:
                   "sono-fade-in var(--motion-fast) var(--motion-ease) both",
@@ -46,36 +48,46 @@ export function HomeHero() {
 
             <h1
               id="home-hero-heading"
-              className="text-balance text-[clamp(2.125rem,9vw,5rem)] leading-[1.05] font-semibold tracking-[-0.045em] text-foreground sm:leading-[1.02]"
+              className="text-balance text-[clamp(2rem,7.5vw,3.75rem)] leading-[1.08] font-semibold tracking-[-0.04em] text-foreground"
               style={{
                 animation: "sono-fade-up 520ms var(--motion-ease) 60ms both",
               }}
             >
-              <span className="block">Tell your agent.</span>
-              <span className="block">Get the UI.</span>
+              From components to complete interfaces.{" "}
+              <span className="text-primary">With AI.</span>
             </h1>
 
             <p
-              className="mt-4 max-w-[32em] text-[clamp(0.9375rem,3.5vw,1.1875rem)] leading-[1.55] text-muted-foreground sm:mt-6"
+              className="mt-4 max-w-[36em] text-[clamp(0.9375rem,3.5vw,1.125rem)] leading-[1.6] text-muted-foreground sm:mt-6"
               style={{
                 animation: "sono-fade-up 520ms var(--motion-ease) 120ms both",
               }}
             >
-              Connect via MCP. Describe what you need. Your AI agent builds with
-              real SonoJS components directly in your codebase.
+              A modern React UI library with beautifully crafted components,
+              blocks, and charts. Connect your AI agent via MCP to build with
+              SonoJS and generate real UI directly in your codebase.
             </p>
 
             <div
-              className="mt-7 sm:mt-10"
+              className="mt-7 flex flex-wrap items-center gap-2.5 sm:mt-9 sm:gap-3"
               style={{
                 animation: "sono-fade-up 520ms var(--motion-ease) 180ms both",
               }}
             >
-              <CommandBar className="max-w-none" />
+              <RainbowButton asChild>
+                <Link href="/docs" className="no-underline">
+                  Get Started
+                </Link>
+              </RainbowButton>
+              <RainbowButton variant="white" asChild>
+                <Link href="/docs/components" className="no-underline">
+                  Explore Components
+                </Link>
+              </RainbowButton>
             </div>
 
             <div
-              className="mt-5 sm:mt-6"
+              className="mt-5 sm:mt-7"
               style={{
                 animation: "sono-fade-up 520ms var(--motion-ease) 240ms both",
               }}

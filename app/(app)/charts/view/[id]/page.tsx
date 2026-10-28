@@ -67,7 +67,6 @@ export default async function ChartViewPage({
     id === "chart-area-stacked" ||
     id === "chart-area-stacked-expand" ||
     id === "chart-area-icons" ||
-    id === "chart-area-gradient" ||
     id === "chart-area-axes" ||
     id === "two-level-pie-chart" ||
     id === "straight-angle-pie-chart" ||
@@ -365,22 +364,17 @@ export default async function ChartViewPage({
                                                         name: "ChartAreaIcons",
                                                         path: "@/components/charts/chart-area-icons",
                                                       }
-                                                    : id === "chart-area-gradient"
+                                                    : id === "chart-area-axes"
                                                       ? {
-                                                          name: "ChartAreaGradient",
-                                                          path: "@/components/charts/chart-area-gradient",
+                                                          name: "ChartAreaAxes",
+                                                          path: "@/components/charts/chart-area-axes",
                                                         }
-                                                      : id === "chart-area-axes"
+                                                      : id === "two-level-pie-chart"
                                                         ? {
-                                                            name: "ChartAreaAxes",
-                                                            path: "@/components/charts/chart-area-axes",
+                                                            name: "TwoLevelPieChart",
+                                                            path: "@/components/charts/two-level-pie-chart",
                                                           }
-                                                        : id === "two-level-pie-chart"
-                                                          ? {
-                                                              name: "TwoLevelPieChart",
-                                                              path: "@/components/charts/two-level-pie-chart",
-                                                            }
-                                                          : id === "straight-angle-pie-chart"
+                                                        : id === "straight-angle-pie-chart"
                                                             ? {
                                                                 name: "StraightAnglePieChart",
                                                                 path: "@/components/charts/straight-angle-pie-chart",

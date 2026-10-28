@@ -253,7 +253,7 @@ export function Sidebar() {
         />
       </div>
 
-      <div className="min-h-0 min-w-0 flex-1 overflow-x-hidden overflow-y-auto p-2">
+      <div className="min-h-0 min-w-0 flex-1 overflow-x-hidden overflow-y-auto p-2 pb-8">
         {sidebarTab === "collections" ? (
           <div className="space-y-1">
             <div className="mb-2 flex items-center justify-between px-1">

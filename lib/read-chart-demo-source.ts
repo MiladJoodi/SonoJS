@@ -29,7 +29,6 @@ const CHART_DEMO_SOURCES: Record<string, string> = {
   "chart-area-stacked": "area/chart-area-stacked.tsx",
   "chart-area-stacked-expand": "area/chart-area-stacked-expand.tsx",
   "chart-area-icons": "area/chart-area-icons.tsx",
-  "chart-area-gradient": "area/chart-area-gradient.tsx",
   "chart-area-axes": "area/chart-area-axes.tsx",
   "two-level-pie-chart": "pie/two-level-pie-chart.tsx",
   "straight-angle-pie-chart": "pie/straight-angle-pie-chart.tsx",

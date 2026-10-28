@@ -1,0 +1,43 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "billing-settings-04",
+  "type": "registry:block",
+  "title": "billing-settings-04",
+  "description": "Company & tax — legal name, billing address, country, and tax ID (RTL/LTR).",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "button",
+    "field",
+    "input",
+    "select",
+    "separator"
+  ],
+  "cssVars": {
+    "light": {
+      "canvas": "#f3f3f4",
+      "border-soft": "color-mix(in oklab, #e4e4e7 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18)",
+      "background": "var(--canvas)",
+      "card": "#ffffff"
+    },
+    "dark": {
+      "canvas": "#09090b",
+      "border-soft": "color-mix(in oklab, #27272a 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(0, 0, 0, 0.24), 0 28px 56px -28px rgba(0, 0, 0, 0.48)",
+      "background": "var(--canvas)",
+      "card": "#18181b"
+    }
+  },
+  "files": [
+    {
+      "path": "components/blocks/payments-billing/billing-settings-04/billing-settings.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\n\nimport { Button } from \"@/components/ui/button\"\nimport {\n  Field,\n  FieldDescription,\n  FieldGroup,\n  FieldLabel,\n} from \"@/components/ui/field\"\nimport { Input } from \"@/components/ui/input\"\nimport {\n  Select,\n  SelectContent,\n  SelectItem,\n  SelectTrigger,\n  SelectValue,\n} from \"@/components/ui/select\"\nimport { Separator } from \"@/components/ui/separator\"\nimport { cn } from \"@/lib/utils\"\n\nexport default function BillingSettings({\n  className,\n  ...props\n}: React.ComponentProps<\"div\">) {\n  const [company, setCompany] = React.useState(\"Acme Studio Inc.\")\n  const [address, setAddress] = React.useState(\"120 Market Street, Suite 400\")\n  const [city, setCity] = React.useState(\"San Francisco\")\n  const [postal, setPostal] = React.useState(\"94105\")\n  const [taxId, setTaxId] = React.useState(\"US-98-7654321\")\n  const [country, setCountry] = React.useState(\"us\")\n\n  return (\n    <div\n      className={cn(\n        \"flex w-full justify-center bg-white px-4 py-10 text-foreground dark:bg-background sm:px-6 sm:py-14\",\n        className\n      )}\n      {...props}\n    >\n      <section\n        className=\"w-full max-w-lg overflow-hidden rounded-[12px] border border-border/70 bg-card shadow-soft\"\n        aria-labelledby=\"billing-settings-04-heading\"\n      >\n        <header className=\"border-b border-border/70 px-5 py-4 sm:px-6\">\n          <h1\n            id=\"billing-settings-04-heading\"\n            className=\"text-base font-semibold tracking-tight text-start\"\n          >\n            Company &amp; tax\n          </h1>\n          <p className=\"mt-1 text-start text-sm text-muted-foreground\">\n            Shown on invoices and used for tax calculation.\n          </p>\n        </header>\n\n        <div className=\"px-5 py-5 sm:px-6\">\n          <FieldGroup className=\"gap-4\">\n            <Field>\n              <FieldLabel htmlFor=\"billing-settings-04-company\">\n                Legal company name\n              </FieldLabel>\n              <Input\n                id=\"billing-settings-04-company\"\n                value={company}\n                onChange={(e) => setCompany(e.target.value)}\n                autoComplete=\"organization\"\n              />\n            </Field>\n\n            <Field>\n              <FieldLabel htmlFor=\"billing-settings-04-address\">\n                Billing address\n              </FieldLabel>\n              <Input\n                id=\"billing-settings-04-address\"\n                value={address}\n                onChange={(e) => setAddress(e.target.value)}\n                autoComplete=\"street-address\"\n              />\n              <FieldDescription>\n                Street address that appears on PDF invoices.\n              </FieldDescription>\n            </Field>\n\n            <div className=\"grid gap-3 sm:grid-cols-2\">\n              <Field>\n                <FieldLabel htmlFor=\"billing-settings-04-city\">City</FieldLabel>\n                <Input\n                  id=\"billing-settings-04-city\"\n                  value={city}\n                  onChange={(e) => setCity(e.target.value)}\n                  autoComplete=\"address-level2\"\n                />\n              </Field>\n              <Field>\n                <FieldLabel htmlFor=\"billing-settings-04-postal\">\n                  Postal code\n                </FieldLabel>\n                <Input\n                  id=\"billing-settings-04-postal\"\n                  dir=\"ltr\"\n                  value={postal}\n                  onChange={(e) => setPostal(e.target.value)}\n                  autoComplete=\"postal-code\"\n                />\n              </Field>\n            </div>\n\n            <Field>\n              <FieldLabel htmlFor=\"billing-settings-04-country\">\n                Country\n              </FieldLabel>\n              <Select value={country} onValueChange={setCountry}>\n                <SelectTrigger\n                  id=\"billing-settings-04-country\"\n                  className=\"w-full cursor-pointer\"\n                  aria-label=\"Country\"\n                >\n                  <SelectValue placeholder=\"Select country\" />\n                </SelectTrigger>\n                <SelectContent>\n                  <SelectItem value=\"us\">United States</SelectItem>\n                  <SelectItem value=\"ca\">Canada</SelectItem>\n                  <SelectItem value=\"gb\">United Kingdom</SelectItem>\n                  <SelectItem value=\"de\">Germany</SelectItem>\n                  <SelectItem value=\"ae\">United Arab Emirates</SelectItem>\n                </SelectContent>\n              </Select>\n            </Field>\n\n            <Separator />\n\n            <Field>\n              <FieldLabel htmlFor=\"billing-settings-04-tax\">\n                Tax ID / VAT\n              </FieldLabel>\n              <Input\n                id=\"billing-settings-04-tax\"\n                dir=\"ltr\"\n                value={taxId}\n                onChange={(e) => setTaxId(e.target.value)}\n                placeholder=\"EU VAT or EIN\"\n                className=\"font-mono\"\n              />\n              <FieldDescription>\n                Optional. Leave blank if you are not tax-registered.\n              </FieldDescription>\n            </Field>\n          </FieldGroup>\n        </div>\n\n        <div className=\"flex flex-col-reverse gap-2 border-t border-border/70 bg-muted/40 px-5 py-3 sm:flex-row sm:justify-end sm:px-6\">\n          <Button type=\"button\" variant=\"ghost\" className=\"cursor-pointer\">\n            Cancel\n          </Button>\n          <Button type=\"button\" className=\"cursor-pointer\">\n            Save details\n          </Button>\n        </div>\n      </section>\n    </div>\n  )\n}\n",
+      "target": "components/blocks/payments-billing/billing-settings-04/billing-settings.tsx"
+    }
+  ],
+  "version": "0.1.0+100157e5f9d9",
+  "generatedAt": "2026-10-28T18:44:12.462Z"
+}

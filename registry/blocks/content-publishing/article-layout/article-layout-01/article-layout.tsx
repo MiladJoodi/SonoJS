@@ -1,12 +1,13 @@
 "use client"
 
-import type * as React from "react"
+import * as React from "react"
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
   BookmarkIcon,
   CalendarIcon,
   ClockIcon,
+  InfoIcon,
   MessageSquareIcon,
   Share2Icon,
   ThumbsUpIcon,
@@ -17,6 +18,16 @@ import { Badge } from "@sonojs/ui/components/badge"
 import { Button } from "@sonojs/ui/components/button"
 import { Separator } from "@sonojs/ui/components/separator"
 import { cn } from "@/lib/utils"
+
+import coverAsset from "./images/cover.webp"
+import figureAsset from "./images/figure.webp"
+
+function assetSrc(asset: string | { src: string }) {
+  return typeof asset === "string" ? asset : asset.src
+}
+
+const COVER = assetSrc(coverAsset)
+const FIGURE = assetSrc(figureAsset)
 
 const ARTICLE = {
   title: "Building accessible design systems that scale",
@@ -35,10 +46,10 @@ const ARTICLE = {
 } as const
 
 const TOC = [
-  { id: "intro", label: "Introduction", level: 1 },
-  { id: "primitives", label: "Accessible primitives", level: 1 },
-  { id: "tokens", label: "Tokens and theming", level: 1 },
-  { id: "conclusion", label: "Conclusion", level: 1 },
+  { id: "intro", label: "Introduction" },
+  { id: "primitives", label: "Accessible primitives" },
+  { id: "tokens", label: "Tokens and theming" },
+  { id: "conclusion", label: "Conclusion" },
 ] as const
 
 const RELATED = [
@@ -75,9 +86,36 @@ export default function ArticleLayout({
   className,
   ...props
 }: React.ComponentProps<"main">) {
+  const [activeId, setActiveId] = React.useState<string>(TOC[0].id)
+
+  React.useEffect(() => {
+    const nodes = TOC.map((item) => document.getElementById(item.id)).filter(
+      (el): el is HTMLElement => Boolean(el)
+    )
+    if (nodes.length === 0) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)
+        if (visible[0]?.target?.id) {
+          setActiveId(visible[0].target.id)
+        }
+      },
+      { rootMargin: "-20% 0px -55% 0px", threshold: [0, 0.25, 0.5, 1] }
+    )
+
+    nodes.forEach((node) => observer.observe(node))
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <main
-      className={cn("min-h-svh w-full min-w-0 bg-canvas text-foreground", className)}
+      className={cn(
+        "min-h-svh w-full min-w-0 bg-white text-foreground dark:bg-background",
+        className
+      )}
       {...props}
     >
       <div className="border-b border-border/70 bg-card">
@@ -134,6 +172,14 @@ export default function ArticleLayout({
               </div>
             </div>
           </div>
+
+          <div className="mt-8 overflow-hidden rounded-[12px] border border-border/70 shadow-soft">
+            <img
+              src={COVER}
+              alt="Design system workspace with component tokens"
+              className="aspect-[21/9] w-full object-cover"
+            />
+          </div>
         </div>
       </div>
 
@@ -182,6 +228,17 @@ export default function ArticleLayout({
                   ARIA roles. You style the surface; behavior stays consistent
                   out of the box.
                 </p>
+                <figure className="my-6 overflow-hidden rounded-[12px] border border-border/70 shadow-soft">
+                  <img
+                    src={FIGURE}
+                    alt="Keyboard-first component primitives on a canvas"
+                    className="aspect-[16/9] w-full object-cover"
+                  />
+                  <figcaption className="border-t border-border/70 bg-muted/40 px-4 py-2.5 text-xs text-muted-foreground">
+                    Focus rings and keyboard paths ship with every interactive
+                    primitive.
+                  </figcaption>
+                </figure>
                 <blockquote className="my-6 rounded-[12px] border-s-4 border-primary bg-primary/5 p-5">
                   <p className="text-sm leading-relaxed text-muted-foreground italic">
                     “Accessibility works best when it is the default path, not
@@ -196,11 +253,24 @@ export default function ArticleLayout({
                 <h2 className="mb-3 text-2xl font-semibold tracking-tight">
                   Tokens and theming
                 </h2>
-                <p className="leading-7 text-muted-foreground">
+                <p className="mb-4 leading-7 text-muted-foreground">
                   Keep colors, radius, and spacing in CSS variables. Light and
                   dark modes swap tokens without shipping a theme runtime —
                   consumers stay in control of the look.
                 </p>
+                <div className="flex gap-3 rounded-[12px] border border-border/70 bg-card p-4 shadow-soft">
+                  <InfoIcon
+                    className="mt-0.5 size-4 shrink-0 text-primary"
+                    aria-hidden
+                  />
+                  <div className="min-w-0 text-start">
+                    <p className="text-sm font-semibold">Callout</p>
+                    <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+                      Prefer semantic names (`--primary`, `--border`) over
+                      raw hex in components so themes stay portable.
+                    </p>
+                  </div>
+                </div>
               </section>
 
               <Separator />
@@ -289,16 +359,32 @@ export default function ArticleLayout({
               </p>
               <nav aria-label="Table of contents">
                 <ul className="space-y-1" role="list">
-                  {TOC.map((item) => (
-                    <li key={item.id}>
-                      <a
-                        href={`#${item.id}`}
-                        className="flex cursor-pointer items-center gap-1.5 rounded-md py-1 text-sm text-muted-foreground transition-colors hover:text-primary"
-                      >
-                        {item.label}
-                      </a>
-                    </li>
-                  ))}
+                  {TOC.map((item) => {
+                    const active = activeId === item.id
+                    return (
+                      <li key={item.id}>
+                        <a
+                          href={`#${item.id}`}
+                          className={cn(
+                            "flex cursor-pointer items-center gap-2 rounded-md py-1 text-sm transition-colors",
+                            active
+                              ? "font-medium text-foreground"
+                              : "text-muted-foreground hover:text-primary"
+                          )}
+                          onClick={() => setActiveId(item.id)}
+                        >
+                          <span
+                            className={cn(
+                              "h-4 w-0.5 shrink-0 rounded-full transition-colors",
+                              active ? "bg-primary" : "bg-transparent"
+                            )}
+                            aria-hidden
+                          />
+                          {item.label}
+                        </a>
+                      </li>
+                    )
+                  })}
                 </ul>
               </nav>
 

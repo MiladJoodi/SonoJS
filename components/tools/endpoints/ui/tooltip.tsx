@@ -1,7 +1,25 @@
 "use client"
 
+import * as React from "react"
 import { Tooltip as TooltipPrimitive } from "@base-ui/react/tooltip"
 import { cn } from "@/lib/utils"
+
+const DESKTOP_HOVER_MQ = "(hover: hover) and (pointer: fine)"
+
+/** True only on fine-pointer hover devices (desktop mouse) — not phone/tablet touch. */
+function useDesktopHover() {
+  const [ok, setOk] = React.useState(false)
+
+  React.useEffect(() => {
+    const mq = window.matchMedia(DESKTOP_HOVER_MQ)
+    const update = () => setOk(mq.matches)
+    update()
+    mq.addEventListener("change", update)
+    return () => mq.removeEventListener("change", update)
+  }, [])
+
+  return ok
+}
 
 function TooltipProvider({
   delay = 0,
@@ -16,8 +34,21 @@ function TooltipProvider({
   )
 }
 
-function Tooltip({ ...props }: TooltipPrimitive.Root.Props) {
-  return <TooltipPrimitive.Root data-slot="tooltip" {...props} />
+function Tooltip({
+  open,
+  onOpenChange,
+  ...props
+}: TooltipPrimitive.Root.Props) {
+  const desktopHover = useDesktopHover()
+
+  return (
+    <TooltipPrimitive.Root
+      data-slot="tooltip"
+      {...props}
+      open={desktopHover ? open : false}
+      onOpenChange={desktopHover ? onOpenChange : undefined}
+    />
+  )
 }
 
 function TooltipTrigger({ ...props }: TooltipPrimitive.Trigger.Props) {

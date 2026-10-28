@@ -335,7 +335,7 @@ export default function DashboardLayout({
           </div>
 
           <nav
-            className="flex-1 space-y-1 overflow-y-auto px-3 pb-3"
+            className="flex-1 space-y-1 overflow-y-auto px-3 pb-8"
             aria-label="Console navigation"
           >
             {NAVIGATION.map((section) => {

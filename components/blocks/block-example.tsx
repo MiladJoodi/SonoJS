@@ -5,7 +5,7 @@ import Link from "next/link"
 import {
   Code2Icon,
   EyeIcon,
-  ExternalLinkIcon,
+  FullscreenIcon,
   MonitorIcon,
   SmartphoneIcon,
   TabletIcon,
@@ -222,6 +222,23 @@ export function BlockExample({
               {displayTitle}
             </a>
 
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Link
+                  href={`/view/${name}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Open full preview"
+                  className="inline-flex size-8 shrink-0 cursor-pointer items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted/60 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40"
+                >
+                  <FullscreenIcon className="size-3.5" aria-hidden />
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent side="top" className="text-xs">
+                Open full preview
+              </TooltipContent>
+            </Tooltip>
+
             {isPreview ? (
               <>
                 <SoftGroup label="Viewport">
@@ -273,23 +290,6 @@ export function BlockExample({
             >
               CLI
             </CopyButton>
-
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Link
-                  href={`/view/${name}`}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label="Open full preview"
-                  className="inline-flex size-8 cursor-pointer items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted/60 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40"
-                >
-                  <ExternalLinkIcon className="size-3.5" aria-hidden />
-                </Link>
-              </TooltipTrigger>
-              <TooltipContent side="top" className="text-xs">
-                Open full preview
-              </TooltipContent>
-            </Tooltip>
           </div>
         </div>
 

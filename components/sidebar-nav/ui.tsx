@@ -25,7 +25,7 @@ export const SIDEBAR_SHELL_CLASS =
 export const SIDEBAR_SEARCH_WRAP_CLASS = "shrink-0 pe-2 pt-2 pb-3"
 
 /** Scrollable nav list — soft thin bar (docs / blocks / charts / tools). */
-export const SIDEBAR_CONTENT_CLASS = "scrollbar-soft px-0"
+export const SIDEBAR_CONTENT_CLASS = "scrollbar-soft px-0 pb-8"
 
 export const SIDEBAR_SEARCH_INPUT_CLASS = "text-[13px]"
 

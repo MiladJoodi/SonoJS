@@ -7,10 +7,12 @@ import {
   FileTextIcon,
   FilmIcon,
   ImageIcon,
+  RefreshCwIcon,
   UploadIcon,
   XIcon,
 } from "lucide-react"
 
+import { Alert, AlertDescription, AlertTitle } from "@sonojs/ui/components/alert"
 import { Badge } from "@sonojs/ui/components/badge"
 import { Button } from "@sonojs/ui/components/button"
 import { Progress } from "@sonojs/ui/components/progress"
@@ -26,6 +28,10 @@ interface FileItem {
   progress: number
   status: FileStatus
 }
+
+const MAX_BYTES = 50 * 1024 * 1024
+const ACCEPT =
+  "image/png,image/jpeg,image/gif,application/pdf,.doc,.docx,video/mp4,video/quicktime"
 
 const DEMO_FILES: FileItem[] = [
   {
@@ -52,6 +58,14 @@ const DEMO_FILES: FileItem[] = [
     progress: 30,
     status: "uploading",
   },
+  {
+    id: "4",
+    name: "corrupted-asset.zip",
+    size: 4_100_000,
+    type: "application/zip",
+    progress: 0,
+    status: "error",
+  },
 ]
 
 function formatSize(bytes: number): string {
@@ -72,12 +86,18 @@ function FileTypeIcon({ type }: { type: string }) {
       />
     )
   }
-  return (
-    <FileTextIcon
-      className="size-5 text-muted-foreground"
-      aria-hidden
-    />
-  )
+  return <FileTextIcon className="size-5 text-muted-foreground" aria-hidden />
+}
+
+function isAccepted(file: File): boolean {
+  if (file.size > MAX_BYTES) return false
+  const name = file.name.toLowerCase()
+  if (file.type.startsWith("image/")) return true
+  if (file.type.startsWith("video/")) return true
+  if (file.type === "application/pdf") return true
+  if (name.endsWith(".doc") || name.endsWith(".docx")) return true
+  if (file.type === "video/mp4" || file.type === "video/quicktime") return true
+  return false
 }
 
 function toFileItems(list: File[]): FileItem[] {
@@ -98,7 +118,43 @@ export default function FileUpload({
 }: React.ComponentProps<"div">) {
   const [files, setFiles] = React.useState<FileItem[]>(DEMO_FILES)
   const [isDragging, setIsDragging] = React.useState(false)
+  const [rejectMsg, setRejectMsg] = React.useState<string | null>(null)
+  const [isUploading, setIsUploading] = React.useState(false)
   const inputRef = React.useRef<HTMLInputElement>(null)
+  const timersRef = React.useRef<number[]>([])
+
+  React.useEffect(() => {
+    return () => {
+      for (const t of timersRef.current) window.clearInterval(t)
+    }
+  }, [])
+
+  const ingest = React.useCallback((list: File[]) => {
+    if (list.length === 0) return
+    const accepted: File[] = []
+    const rejected: string[] = []
+    for (const f of list) {
+      if (f.size > MAX_BYTES) {
+        rejected.push(`${f.name} (over 50MB)`)
+      } else if (!isAccepted(f)) {
+        rejected.push(`${f.name} (type not allowed)`)
+      } else {
+        accepted.push(f)
+      }
+    }
+    if (rejected.length > 0) {
+      setRejectMsg(
+        `Skipped ${rejected.length}: ${rejected.slice(0, 2).join(", ")}${
+          rejected.length > 2 ? "…" : ""
+        }`
+      )
+    } else {
+      setRejectMsg(null)
+    }
+    if (accepted.length > 0) {
+      setFiles((prev) => [...prev, ...toFileItems(accepted)])
+    }
+  }, [])
 
   const handleDragOver = React.useCallback((e: React.DragEvent) => {
     e.preventDefault()
@@ -110,35 +166,80 @@ export default function FileUpload({
     setIsDragging(false)
   }, [])
 
-  const handleDrop = React.useCallback((e: React.DragEvent) => {
-    e.preventDefault()
-    setIsDragging(false)
-    const dropped = Array.from(e.dataTransfer.files)
-    if (dropped.length === 0) return
-    setFiles((prev) => [...prev, ...toFileItems(dropped)])
-  }, [])
+  const handleDrop = React.useCallback(
+    (e: React.DragEvent) => {
+      e.preventDefault()
+      setIsDragging(false)
+      ingest(Array.from(e.dataTransfer.files))
+    },
+    [ingest]
+  )
 
   const removeFile = (id: string) => {
     setFiles((prev) => prev.filter((f) => f.id !== id))
   }
 
+  const retryFile = (id: string) => {
+    setFiles((prev) =>
+      prev.map((f) =>
+        f.id === id ? { ...f, status: "uploading", progress: 0 } : f
+      )
+    )
+  }
+
+  const startMockUpload = () => {
+    const pending = files.filter(
+      (f) => f.status === "uploading" || f.status === "error"
+    )
+    if (pending.length === 0) return
+    setIsUploading(true)
+    setFiles((prev) =>
+      prev.map((f) =>
+        f.status === "error" ? { ...f, status: "uploading", progress: 0 } : f
+      )
+    )
+    const id = window.setInterval(() => {
+      setFiles((prev) => {
+        let anyUploading = false
+        const next = prev.map((f) => {
+          if (f.status !== "uploading") return f
+          const progress = Math.min(100, f.progress + 12 + Math.random() * 18)
+          if (progress >= 100) {
+            return { ...f, progress: 100, status: "complete" as const }
+          }
+          anyUploading = true
+          return { ...f, progress: Math.round(progress) }
+        })
+        if (!anyUploading) {
+          window.clearInterval(id)
+          timersRef.current = timersRef.current.filter((t) => t !== id)
+          setIsUploading(false)
+        }
+        return next
+      })
+    }, 400)
+    timersRef.current.push(id)
+  }
+
   const totalSize = files.reduce((sum, f) => sum + f.size, 0)
   const completedCount = files.filter((f) => f.status === "complete").length
-  const uploadingCount = files.filter((f) => f.status === "uploading").length
+  const uploadingCount = files.filter(
+    (f) => f.status === "uploading" || f.status === "error"
+  ).length
 
   return (
     <div
       className={cn(
-        "w-full bg-canvas py-10 text-foreground sm:py-12",
+        "w-full bg-white py-10 text-foreground dark:bg-background sm:py-12",
         className
       )}
       {...props}
     >
       <div className="mx-auto w-full max-w-2xl px-4 sm:px-6">
-        <div className="mb-8">
-          <h1 className="text-2xl font-semibold tracking-tight">Upload Files</h1>
+        <div className="mb-8 text-start">
+          <h1 className="text-2xl font-semibold tracking-tight">Upload files</h1>
           <p className="mt-1 text-muted-foreground">
-            Drag and drop files or click to browse
+            Drag and drop files or click to browse — validated types and size.
           </p>
         </div>
 
@@ -147,11 +248,11 @@ export default function FileUpload({
           onDragLeave={handleDragLeave}
           onDrop={handleDrop}
           className={cn(
-            "relative rounded-lg border-2 border-dashed p-8 text-center transition-all sm:p-12",
-            "focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 focus-within:ring-offset-canvas",
+            "relative rounded-[12px] border-2 border-dashed p-8 text-center transition-all sm:p-12",
+            "focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 focus-within:ring-offset-background",
             isDragging
               ? "scale-[0.99] border-primary bg-primary/5"
-              : "border-border/70 bg-card shadow-soft hover:border-primary/40 hover:bg-primary/5"
+              : "cursor-pointer border-border/70 bg-card shadow-soft hover:border-primary/40 hover:bg-primary/5"
           )}
         >
           <div className="mb-4 inline-flex size-14 items-center justify-center rounded-full bg-primary/10">
@@ -179,22 +280,30 @@ export default function FileUpload({
             ref={inputRef}
             type="file"
             multiple
+            accept={ACCEPT}
             className="absolute inset-0 size-full cursor-pointer opacity-0"
             aria-label="Upload files"
             onChange={(e) => {
-              const picked = Array.from(e.target.files ?? [])
-              if (picked.length === 0) return
-              setFiles((prev) => [...prev, ...toFileItems(picked)])
+              ingest(Array.from(e.target.files ?? []))
               e.target.value = ""
             }}
           />
         </div>
 
+        {rejectMsg ? (
+          <Alert variant="destructive" className="mt-4">
+            <AlertCircleIcon aria-hidden />
+            <AlertTitle>Some files were skipped</AlertTitle>
+            <AlertDescription>{rejectMsg}</AlertDescription>
+          </Alert>
+        ) : null}
+
         {files.length > 0 ? (
           <div className="mt-6">
             <div className="mb-3 flex items-center justify-between gap-3">
               <p className="text-sm font-medium text-muted-foreground">
-                {files.length} files · {formatSize(totalSize)}
+                {files.length} files ·{" "}
+                <span dir="ltr">{formatSize(totalSize)}</span>
               </p>
               <p className="text-xs text-muted-foreground">
                 {completedCount}/{files.length} complete
@@ -205,15 +314,18 @@ export default function FileUpload({
               {files.map((file) => (
                 <li
                   key={file.id}
-                  className="flex items-center gap-3 rounded-lg border border-border/70 bg-card p-3 shadow-soft"
+                  className="flex items-center gap-3 rounded-[12px] border border-border/70 bg-card p-3 shadow-soft"
                 >
                   <div className="flex size-10 shrink-0 items-center justify-center rounded-md bg-muted/60">
                     <FileTypeIcon type={file.type} />
                   </div>
 
-                  <div className="min-w-0 flex-1">
+                  <div className="min-w-0 flex-1 text-start">
                     <div className="flex items-center gap-2">
-                      <p className="truncate text-sm font-medium" title={file.name}>
+                      <p
+                        className="truncate text-sm font-medium"
+                        title={file.name}
+                      >
                         {file.name}
                       </p>
                       {file.status === "complete" ? (
@@ -229,19 +341,30 @@ export default function FileUpload({
                         />
                       ) : null}
                     </div>
-                    <div className="mt-1 flex items-center gap-2">
+                    <div className="mt-1 flex flex-wrap items-center gap-2">
                       <span className="text-xs text-muted-foreground" dir="ltr">
                         {formatSize(file.size)}
                       </span>
                       {file.status === "uploading" ? (
                         <>
-                          <span className="text-xs text-muted-foreground" aria-hidden>
+                          <span
+                            className="text-xs text-muted-foreground"
+                            aria-hidden
+                          >
                             ·
                           </span>
-                          <span className="text-xs font-medium text-primary" dir="ltr">
+                          <span
+                            className="text-xs font-medium text-primary"
+                            dir="ltr"
+                          >
                             {file.progress}%
                           </span>
                         </>
+                      ) : null}
+                      {file.status === "error" ? (
+                        <span className="text-xs font-medium text-destructive">
+                          Upload failed
+                        </span>
                       ) : null}
                     </div>
                     {file.status === "uploading" ? (
@@ -253,11 +376,24 @@ export default function FileUpload({
                     ) : null}
                   </div>
 
+                  {file.status === "error" ? (
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      className="cursor-pointer gap-1.5"
+                      onClick={() => retryFile(file.id)}
+                    >
+                      <RefreshCwIcon className="size-3.5" aria-hidden />
+                      Retry
+                    </Button>
+                  ) : null}
+
                   <Button
                     type="button"
                     variant="ghost"
                     size="icon-xs"
-                    className="shrink-0 text-muted-foreground hover:bg-destructive/10 hover:text-destructive"
+                    className="shrink-0 cursor-pointer text-muted-foreground hover:bg-destructive/10 hover:text-destructive"
                     aria-label={`Remove ${file.name}`}
                     onClick={() => removeFile(file.id)}
                   >
@@ -272,13 +408,25 @@ export default function FileUpload({
                 type="button"
                 variant="outline"
                 size="sm"
-                onClick={() => setFiles([])}
+                className="cursor-pointer"
+                onClick={() => {
+                  setFiles([])
+                  setRejectMsg(null)
+                }}
               >
                 Clear all
               </Button>
-              <Button type="button" size="sm" className="gap-2">
+              <Button
+                type="button"
+                size="sm"
+                className="cursor-pointer gap-2 disabled:cursor-not-allowed"
+                disabled={uploadingCount === 0 || isUploading}
+                onClick={startMockUpload}
+              >
                 <UploadIcon className="size-4" aria-hidden />
-                Upload {uploadingCount} files
+                {isUploading
+                  ? "Uploading…"
+                  : `Upload ${uploadingCount} file${uploadingCount === 1 ? "" : "s"}`}
               </Button>
             </div>
           </div>

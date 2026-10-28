@@ -271,7 +271,7 @@ export default function Navbar({
                   <SheetTitle className="sr-only">Menu</SheetTitle>
                   <Brand />
                 </SheetHeader>
-                <div className="flex-1 overflow-y-auto p-3">
+                <div className="flex-1 overflow-y-auto p-3 pb-8">
                   {mobileSections.map((section) => (
                     <div key={section.heading} className="mb-4 space-y-1">
                       <p className="px-3 text-[11px] font-semibold tracking-wider text-muted-foreground uppercase">

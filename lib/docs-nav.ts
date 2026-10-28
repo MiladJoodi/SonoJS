@@ -222,6 +222,10 @@ export const componentsNav: {
           featured: true,
         },
         {
+          title: "Rainbow Button",
+          href: "/docs/components/rainbow-button",
+        },
+        {
           title: "Resizable",
           href: "/docs/components/resizable",
         },

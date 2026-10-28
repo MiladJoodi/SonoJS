@@ -5,8 +5,11 @@ import {
   AlertCircleIcon,
   ArrowRightIcon,
   CheckCircle2Icon,
+  CreditCardIcon,
   LandmarkIcon,
   Loader2Icon,
+  ReceiptIcon,
+  UserIcon,
   WalletIcon,
 } from "lucide-react"
 
@@ -39,19 +42,25 @@ const SOURCES = [
   {
     id: "acc_main",
     label: "Main USD wallet",
-    balance: "$12,450.00",
+    balance: 12450,
+    currency: "USD",
+    symbol: "$",
     icon: WalletIcon,
   },
   {
     id: "acc_saving",
     label: "High-yield savings",
-    balance: "$45,000.00",
+    balance: 45000,
+    currency: "USD",
+    symbol: "$",
     icon: LandmarkIcon,
   },
   {
     id: "acc_euro",
     label: "Euro wallet",
-    balance: "€3,890.50",
+    balance: 3890.5,
+    currency: "EUR",
+    symbol: "€",
     icon: WalletIcon,
   },
 ] as const
@@ -61,13 +70,34 @@ const DESTINATIONS = [
     id: "rec_alex",
     label: "Alex Johnson",
     detail: "ACH ···· 1234",
+    icon: UserIcon,
+  },
+  {
+    id: "rec_maya",
+    label: "Maya Chen",
+    detail: "ACH ···· 8821",
+    icon: UserIcon,
   },
   {
     id: "rec_card",
     label: "Company debit card",
     detail: "Visa ···· 4242",
+    icon: CreditCardIcon,
+  },
+  {
+    id: "rec_ops",
+    label: "Ops checking",
+    detail: "Wire ···· 4401",
+    icon: LandmarkIcon,
   },
 ] as const
+
+function formatBalance(amount: number, symbol: string) {
+  return `${symbol}${amount.toLocaleString("en-US", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  })}`
+}
 
 function StepRail({ step }: { step: Step }) {
   const index = step === "details" ? 0 : step === "review" ? 1 : 2
@@ -80,7 +110,10 @@ function StepRail({ step }: { step: Step }) {
           const done = i < index
           const current = i === index
           return (
-            <li key={label} className="flex flex-1 items-center gap-2 last:flex-none">
+            <li
+              key={label}
+              className="flex flex-1 items-center gap-2 last:flex-none"
+            >
               <div className="flex flex-col items-center gap-1.5">
                 <span
                   className={cn(
@@ -131,10 +164,14 @@ export default function TransferFunds({
 }: React.ComponentProps<"div">) {
   const [step, setStep] = React.useState<Step>("details")
   const [isSubmitting, setIsSubmitting] = React.useState(false)
+  const [showReceipt, setShowReceipt] = React.useState(false)
   const [sourceId, setSourceId] = React.useState("")
   const [destinationId, setDestinationId] = React.useState("")
   const [amount, setAmount] = React.useState("")
   const [note, setNote] = React.useState("")
+  const [refId] = React.useState(
+    () => `TRX-${Math.random().toString(36).slice(2, 7).toUpperCase()}-9X`
+  )
 
   const source = SOURCES.find((s) => s.id === sourceId)
   const destination = DESTINATIONS.find((d) => d.id === destinationId)
@@ -142,9 +179,14 @@ export default function TransferFunds({
   const amountDisplay = Number.isFinite(amountNumber)
     ? amountNumber.toFixed(2)
     : "0.00"
+  const symbol = source?.symbol ?? "$"
+  const fee = 0
+  const arrival = "Today, in minutes"
 
   const canContinue =
-    Boolean(sourceId && destinationId && amount) && amountNumber > 0
+    Boolean(sourceId && destinationId && amount) &&
+    amountNumber > 0 &&
+    (!source || amountNumber <= source.balance)
 
   const handleContinue = (e: React.FormEvent) => {
     e.preventDefault()
@@ -156,12 +198,14 @@ export default function TransferFunds({
     setIsSubmitting(true)
     window.setTimeout(() => {
       setIsSubmitting(false)
+      setShowReceipt(false)
       setStep("success")
     }, 1200)
   }
 
   const resetForm = () => {
     setStep("details")
+    setShowReceipt(false)
     setSourceId("")
     setDestinationId("")
     setAmount("")
@@ -200,14 +244,17 @@ export default function TransferFunds({
                     <Select value={sourceId} onValueChange={setSourceId}>
                       <SelectTrigger
                         id="transfer-funds-01-from"
-                        className="h-[46px] w-full"
+                        className="h-[46px] w-full cursor-pointer"
                       >
                         <SelectValue placeholder="Select source account" />
                       </SelectTrigger>
                       <SelectContent>
                         {SOURCES.map((item) => (
                           <SelectItem key={item.id} value={item.id}>
-                            {item.label} · {item.balance}
+                            {item.label} ·{" "}
+                            <span dir="ltr">
+                              {formatBalance(item.balance, item.symbol)}
+                            </span>
                           </SelectItem>
                         ))}
                       </SelectContent>
@@ -224,7 +271,7 @@ export default function TransferFunds({
                     >
                       <SelectTrigger
                         id="transfer-funds-01-to"
-                        className="h-[46px] w-full"
+                        className="h-[46px] w-full cursor-pointer"
                       >
                         <SelectValue placeholder="Select destination" />
                       </SelectTrigger>
@@ -244,8 +291,11 @@ export default function TransferFunds({
                     </FieldLabel>
                     <InputGroup>
                       <InputGroupAddon align="inline-start">
-                        <span className="text-base font-medium text-muted-foreground">
-                          $
+                        <span
+                          className="text-base font-medium text-muted-foreground"
+                          dir="ltr"
+                        >
+                          {symbol}
                         </span>
                       </InputGroupAddon>
                       <InputGroupInput
@@ -264,7 +314,14 @@ export default function TransferFunds({
                     {source ? (
                       <FieldDescription>
                         Available:{" "}
-                        <span dir="ltr">{source.balance}</span>
+                        <span dir="ltr">
+                          {formatBalance(source.balance, source.symbol)}
+                        </span>
+                        {amountNumber > source.balance ? (
+                          <span className="ms-2 text-destructive">
+                            Exceeds balance
+                          </span>
+                        ) : null}
                       </FieldDescription>
                     ) : null}
                   </Field>
@@ -291,7 +348,7 @@ export default function TransferFunds({
                 <Button
                   type="submit"
                   size="lg"
-                  className="w-full gap-2"
+                  className="w-full cursor-pointer gap-2 disabled:cursor-not-allowed"
                   disabled={!canContinue}
                 >
                   Continue to review
@@ -312,11 +369,17 @@ export default function TransferFunds({
                     className="mt-2 text-4xl font-semibold tracking-tight tabular-nums sm:text-5xl"
                     dir="ltr"
                   >
-                    ${amountDisplay}
+                    {symbol}
+                    {amountDisplay}
                   </p>
+                  {source ? (
+                    <p className="mt-1 text-xs text-muted-foreground">
+                      {source.currency}
+                    </p>
+                  ) : null}
                 </div>
 
-                <dl className="overflow-hidden rounded-lg border border-border/70 divide-y divide-border/70">
+                <dl className="divide-y divide-border/70 overflow-hidden rounded-lg border border-border/70">
                   <div className="flex items-center justify-between gap-3 px-4 py-3.5">
                     <dt className="text-sm text-muted-foreground">From</dt>
                     <dd className="flex items-center gap-2 text-sm font-medium">
@@ -335,12 +398,18 @@ export default function TransferFunds({
                   </div>
                   <div className="flex items-center justify-between gap-3 px-4 py-3.5">
                     <dt className="text-sm text-muted-foreground">To</dt>
-                    <dd className="text-end text-sm font-medium">
+                    <dd className="flex items-center gap-2 text-end text-sm font-medium">
                       {destination ? (
                         <>
-                          {destination.label}
-                          <span className="ms-1.5 font-mono text-xs text-muted-foreground">
-                            {destination.detail}
+                          <destination.icon
+                            className="size-4 shrink-0 text-muted-foreground"
+                            aria-hidden
+                          />
+                          <span>
+                            {destination.label}
+                            <span className="ms-1.5 font-mono text-xs text-muted-foreground">
+                              {destination.detail}
+                            </span>
                           </span>
                         </>
                       ) : (
@@ -355,13 +424,13 @@ export default function TransferFunds({
                         variant="secondary"
                         className="bg-emerald-500/10 text-emerald-700 dark:text-emerald-300"
                       >
-                        Free
+                        {fee === 0 ? "Free" : formatBalance(fee, symbol)}
                       </Badge>
                     </dd>
                   </div>
                   <div className="flex items-center justify-between gap-3 px-4 py-3.5">
                     <dt className="text-sm text-muted-foreground">Arrival</dt>
-                    <dd className="text-sm font-medium">Today, in minutes</dd>
+                    <dd className="text-sm font-medium">{arrival}</dd>
                   </div>
                   {note ? (
                     <div className="flex items-start justify-between gap-3 px-4 py-3.5">
@@ -391,7 +460,7 @@ export default function TransferFunds({
                   type="button"
                   variant="outline"
                   size="lg"
-                  className="sm:flex-1"
+                  className="cursor-pointer sm:flex-1 disabled:cursor-not-allowed"
                   onClick={() => setStep("details")}
                   disabled={isSubmitting}
                 >
@@ -400,7 +469,7 @@ export default function TransferFunds({
                 <Button
                   type="button"
                   size="lg"
-                  className="gap-2 sm:flex-[1.6]"
+                  className="cursor-pointer gap-2 sm:flex-[1.6] disabled:cursor-not-allowed"
                   onClick={handleConfirm}
                   disabled={isSubmitting}
                 >
@@ -433,8 +502,12 @@ export default function TransferFunds({
               </h2>
               <p className="mt-2 max-w-sm text-sm leading-relaxed text-muted-foreground">
                 Your transfer of{" "}
-                <span className="font-semibold text-foreground tabular-nums" dir="ltr">
-                  ${amountDisplay}
+                <span
+                  className="font-semibold text-foreground tabular-nums"
+                  dir="ltr"
+                >
+                  {symbol}
+                  {amountDisplay}
                 </span>{" "}
                 to{" "}
                 <span className="font-semibold text-foreground">
@@ -443,11 +516,14 @@ export default function TransferFunds({
                 is on its way.
               </p>
 
-              <dl className="mt-8 w-full overflow-hidden rounded-lg border border-border/70 divide-y divide-border/70 text-start">
+              <dl className="mt-8 w-full divide-y divide-border/70 overflow-hidden rounded-lg border border-border/70 text-start">
                 <div className="flex items-center justify-between gap-3 px-4 py-3.5">
                   <dt className="text-sm text-muted-foreground">Reference</dt>
-                  <dd className="font-mono text-sm font-medium tracking-wide" dir="ltr">
-                    TRX-892J4-9X
+                  <dd
+                    className="font-mono text-sm font-medium tracking-wide"
+                    dir="ltr"
+                  >
+                    {refId}
                   </dd>
                 </div>
                 <div className="flex items-center justify-between gap-3 px-4 py-3.5">
@@ -459,18 +535,50 @@ export default function TransferFunds({
                     })}
                   </dd>
                 </div>
+                <div className="flex items-center justify-between gap-3 px-4 py-3.5">
+                  <dt className="text-sm text-muted-foreground">Fee</dt>
+                  <dd className="text-sm font-medium">Free</dd>
+                </div>
+                <div className="flex items-center justify-between gap-3 px-4 py-3.5">
+                  <dt className="text-sm text-muted-foreground">Arrival</dt>
+                  <dd className="text-sm font-medium">{arrival}</dd>
+                </div>
               </dl>
+
+              {showReceipt ? (
+                <div className="mt-4 w-full rounded-[12px] border border-dashed border-border/70 bg-muted/30 p-4 text-start text-sm">
+                  <div className="flex items-center gap-2 font-medium">
+                    <ReceiptIcon className="size-4" aria-hidden />
+                    Digital receipt
+                  </div>
+                  <p className="mt-2 text-muted-foreground">
+                    Sent from {source?.label ?? "—"} to{" "}
+                    {destination?.label ?? "—"}. Keep reference{" "}
+                    <span className="font-mono text-foreground" dir="ltr">
+                      {refId}
+                    </span>{" "}
+                    for your records.
+                  </p>
+                </div>
+              ) : null}
 
               <div className="mt-6 grid w-full grid-cols-1 gap-3 sm:grid-cols-2">
                 <Button
                   type="button"
                   variant="outline"
                   size="lg"
+                  className="cursor-pointer"
                   onClick={resetForm}
                 >
                   New transfer
                 </Button>
-                <Button type="button" size="lg">
+                <Button
+                  type="button"
+                  size="lg"
+                  className="cursor-pointer gap-2"
+                  onClick={() => setShowReceipt(true)}
+                >
+                  <ReceiptIcon className="size-4" aria-hidden />
                   View receipt
                 </Button>
               </div>

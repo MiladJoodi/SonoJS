@@ -7,6 +7,8 @@ import {
   ChevronLeftIcon,
   ChevronRightIcon,
   CreditCardIcon,
+  DownloadIcon,
+  EyeIcon,
   FilterIcon,
   MoreHorizontalIcon,
   RefreshCcwIcon,
@@ -18,6 +20,13 @@ import { Avatar, AvatarFallback } from "@sonojs/ui/components/avatar"
 import { Badge } from "@sonojs/ui/components/badge"
 import { Button } from "@sonojs/ui/components/button"
 import { Card, CardContent } from "@sonojs/ui/components/card"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@sonojs/ui/components/dropdown-menu"
 import {
   Empty,
   EmptyContent,
@@ -239,6 +248,17 @@ export default function BillingHistory({
     return result
   }, [query, statusFilter, typeFilter])
 
+  const totals = React.useMemo(() => {
+    const inflow = TRANSACTIONS.filter(
+      (t) => t.amount > 0 && t.status === "completed"
+    ).reduce((s, t) => s + t.amount, 0)
+    const outflow = TRANSACTIONS.filter(
+      (t) => t.amount < 0 && t.status === "completed"
+    ).reduce((s, t) => s + Math.abs(t.amount), 0)
+    const pending = TRANSACTIONS.filter((t) => t.status === "pending").length
+    return { inflow, outflow, pending }
+  }, [])
+
   const totalPages = Math.max(1, Math.ceil(filtered.length / perPage))
   const safePage = Math.min(page, totalPages)
   const paged = filtered.slice((safePage - 1) * perPage, safePage * perPage)
@@ -256,41 +276,80 @@ export default function BillingHistory({
   return (
     <section
       className={cn(
-        "relative isolate w-full min-w-0 overflow-hidden bg-white dark:bg-background py-10 text-foreground",
+        "relative isolate w-full min-w-0 overflow-hidden bg-white py-10 text-foreground dark:bg-background",
         className
       )}
       aria-labelledby="billing-history-01-heading"
       {...props}
     >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10"
-      >
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute start-1/2 top-[-18%] size-[26rem] -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
       </div>
 
       <div className="mx-auto max-w-6xl space-y-8 px-4 sm:px-6 lg:px-8">
-        <header className="flex flex-col items-stretch justify-between gap-4 sm:flex-row sm:items-center">
+        <header className="flex flex-col items-stretch justify-between gap-4 sm:flex-row sm:items-end">
           <div className="min-w-0 text-start">
+            <p className="text-xs font-semibold tracking-[0.18em] text-muted-foreground uppercase">
+              Ledger
+            </p>
             <h1
               id="billing-history-01-heading"
-              className="text-2xl font-light tracking-tight text-foreground sm:text-3xl"
+              className="mt-1 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl"
             >
-              Transaction History
+              Transaction history
             </h1>
-            <p className="mt-2 text-sm font-medium text-muted-foreground">
-              Review your financial activity and download statements.
+            <p className="mt-2 max-w-xl text-sm text-muted-foreground">
+              Every deposit, payment, and transfer — searchable, filterable, and
+              export-ready.
             </p>
           </div>
           <Button
             type="button"
             variant="outline"
-            className="w-full shrink-0 rounded-full sm:w-auto"
+            className="w-full shrink-0 cursor-pointer rounded-full sm:w-auto"
           >
             <ArrowDownToLineIcon className="size-4" aria-hidden />
             Export CSV
           </Button>
         </header>
+
+        <div className="grid gap-3 sm:grid-cols-3">
+          {[
+            {
+              label: "Inflow (30d)",
+              value: formatCurrency(totals.inflow, "USD"),
+              tone: "text-emerald-700 dark:text-emerald-400",
+            },
+            {
+              label: "Outflow (30d)",
+              value: formatCurrency(-totals.outflow, "USD"),
+              tone: "text-foreground",
+            },
+            {
+              label: "Pending",
+              value: String(totals.pending),
+              tone: "text-amber-700 dark:text-amber-400",
+            },
+          ].map((stat) => (
+            <div
+              key={stat.label}
+              className="rounded-[12px] border border-border/70 bg-card px-5 py-4 shadow-soft"
+            >
+              <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
+                {stat.label}
+              </p>
+              <p
+                dir="ltr"
+                className={cn(
+                  "mt-1 text-2xl font-semibold tracking-tight tabular-nums",
+                  stat.tone
+                )}
+              >
+                {stat.value}
+              </p>
+            </div>
+          ))}
+        </div>
 
         <Card className="border-border/70 shadow-soft">
           <CardContent className="space-y-4 p-5 sm:p-6">
@@ -313,6 +372,7 @@ export default function BillingHistory({
                     <InputGroupButton
                       type="button"
                       size="icon-xs"
+                      className="cursor-pointer"
                       aria-label="Clear search"
                       onClick={() => {
                         setQuery("")
@@ -333,7 +393,7 @@ export default function BillingHistory({
                     setPage(1)
                   }}
                 >
-                  <SelectTrigger className="w-full sm:w-[160px]">
+                  <SelectTrigger className="w-full cursor-pointer sm:w-[160px]">
                     <SelectValue placeholder="All Status" />
                   </SelectTrigger>
                   <SelectContent>
@@ -351,7 +411,7 @@ export default function BillingHistory({
                     setPage(1)
                   }}
                 >
-                  <SelectTrigger className="w-full sm:w-[160px]">
+                  <SelectTrigger className="w-full cursor-pointer sm:w-[160px]">
                     <SelectValue placeholder="All Types" />
                   </SelectTrigger>
                   <SelectContent>
@@ -435,7 +495,7 @@ export default function BillingHistory({
                   type="button"
                   variant="ghost"
                   size="sm"
-                  className="ms-auto h-8 rounded-full"
+                  className="ms-auto h-8 cursor-pointer rounded-full"
                   onClick={clearFilters}
                 >
                   Clear all
@@ -447,151 +507,175 @@ export default function BillingHistory({
 
         <Card className="overflow-hidden border-border/70 shadow-soft">
           <div className="overflow-x-auto">
-          <Table>
-            <TableHeader>
-              <TableRow className="hover:bg-transparent">
-                <TableHead className="h-12 ps-6 text-xs tracking-wider uppercase">
-                  Transaction
-                </TableHead>
-                <TableHead className="h-12 text-xs tracking-wider uppercase">
-                  Date
-                </TableHead>
-                <TableHead className="h-12 text-xs tracking-wider uppercase">
-                  Type
-                </TableHead>
-                <TableHead className="h-12 text-xs tracking-wider uppercase">
-                  Status
-                </TableHead>
-                <TableHead className="h-12 text-end text-xs tracking-wider uppercase">
-                  Amount
-                </TableHead>
-                <TableHead className="h-12 w-14 pe-6" />
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {paged.length === 0 ? (
+            <Table>
+              <TableHeader>
                 <TableRow className="hover:bg-transparent">
-                  <TableCell colSpan={6} className="py-16">
-                    <Empty className="border-0">
-                      <EmptyHeader>
-                        <EmptyMedia variant="icon">
-                          <SearchIcon aria-hidden />
-                        </EmptyMedia>
-                        <EmptyTitle>No transactions found</EmptyTitle>
-                        <EmptyDescription>
-                          Try adjusting your filters or search query.
-                        </EmptyDescription>
-                      </EmptyHeader>
-                      <EmptyContent>
-                        <Button
-                          type="button"
-                          variant="outline"
-                          className="rounded-full"
-                          onClick={clearFilters}
-                        >
-                          Clear Filters
-                        </Button>
-                      </EmptyContent>
-                    </Empty>
-                  </TableCell>
+                  <TableHead className="h-12 ps-6 text-xs tracking-wider uppercase">
+                    Transaction
+                  </TableHead>
+                  <TableHead className="h-12 text-xs tracking-wider uppercase">
+                    Date
+                  </TableHead>
+                  <TableHead className="h-12 text-xs tracking-wider uppercase">
+                    Type
+                  </TableHead>
+                  <TableHead className="h-12 text-xs tracking-wider uppercase">
+                    Status
+                  </TableHead>
+                  <TableHead className="h-12 text-end text-xs tracking-wider uppercase">
+                    Amount
+                  </TableHead>
+                  <TableHead className="h-12 w-14 pe-6" />
                 </TableRow>
-              ) : (
-                paged.map((tx) => {
-                  const status = STATUS_META[tx.status]
-                  const isPositive = tx.amount > 0
-                  const isFailed = tx.status === "failed"
-                  return (
-                    <TableRow key={tx.id} className="group">
-                      <TableCell className="py-5 ps-6">
-                        <div className="flex items-center gap-3">
-                          <Avatar className="size-10 border border-border/70">
-                            <AvatarFallback className="bg-muted text-xs font-semibold">
-                              {tx.initials}
-                            </AvatarFallback>
-                          </Avatar>
-                          <div className="min-w-0 text-start">
-                            <p
-                              className={cn(
-                                "truncate font-semibold",
-                                isFailed
-                                  ? "text-muted-foreground line-through"
-                                  : "text-foreground"
-                              )}
-                            >
-                              {tx.counterparty}
-                            </p>
-                            <div className="mt-0.5 flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
-                              <span dir="ltr" className="font-mono tracking-wide">
-                                {tx.id}
-                              </span>
-                              <span
-                                className="size-1 rounded-full bg-border"
-                                aria-hidden
-                              />
-                              <span>{tx.category}</span>
+              </TableHeader>
+              <TableBody>
+                {paged.length === 0 ? (
+                  <TableRow className="hover:bg-transparent">
+                    <TableCell colSpan={6} className="py-16">
+                      <Empty className="border-0">
+                        <EmptyHeader>
+                          <EmptyMedia variant="icon">
+                            <SearchIcon aria-hidden />
+                          </EmptyMedia>
+                          <EmptyTitle>No transactions found</EmptyTitle>
+                          <EmptyDescription>
+                            Try adjusting your filters or search query.
+                          </EmptyDescription>
+                        </EmptyHeader>
+                        <EmptyContent>
+                          <Button
+                            type="button"
+                            variant="outline"
+                            className="cursor-pointer rounded-full"
+                            onClick={clearFilters}
+                          >
+                            Clear Filters
+                          </Button>
+                        </EmptyContent>
+                      </Empty>
+                    </TableCell>
+                  </TableRow>
+                ) : (
+                  paged.map((tx) => {
+                    const status = STATUS_META[tx.status]
+                    const isPositive = tx.amount > 0
+                    const isFailed = tx.status === "failed"
+                    return (
+                      <TableRow key={tx.id} className="group">
+                        <TableCell className="py-5 ps-6">
+                          <div className="flex items-center gap-3">
+                            <Avatar className="size-10 border border-border/70">
+                              <AvatarFallback className="bg-muted text-xs font-semibold">
+                                {tx.initials}
+                              </AvatarFallback>
+                            </Avatar>
+                            <div className="min-w-0 text-start">
+                              <p
+                                className={cn(
+                                  "truncate font-semibold",
+                                  isFailed
+                                    ? "text-muted-foreground line-through"
+                                    : "text-foreground"
+                                )}
+                              >
+                                {tx.counterparty}
+                              </p>
+                              <div className="mt-0.5 flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
+                                <span
+                                  dir="ltr"
+                                  className="font-mono tracking-wide"
+                                >
+                                  {tx.id}
+                                </span>
+                                <span
+                                  className="size-1 rounded-full bg-border"
+                                  aria-hidden
+                                />
+                                <span>{tx.category}</span>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      </TableCell>
-                      <TableCell className="py-5 whitespace-nowrap">
-                        <span
-                          dir="ltr"
-                          className="font-medium text-muted-foreground"
-                        >
-                          {formatDate(tx.date)}
-                        </span>
-                      </TableCell>
-                      <TableCell className="py-5">
-                        <span className="inline-flex items-center gap-2 capitalize text-muted-foreground">
-                          <TypeIcon type={tx.type} />
-                          {tx.type}
-                        </span>
-                      </TableCell>
-                      <TableCell className="py-5">
-                        <span
-                          className={cn(
-                            "inline-flex items-center gap-2 text-sm font-medium",
-                            status.text
-                          )}
-                        >
+                        </TableCell>
+                        <TableCell className="py-5 whitespace-nowrap">
                           <span
-                            className={cn("size-2 rounded-full", status.dot)}
-                          />
-                          {status.label}
-                        </span>
-                      </TableCell>
-                      <TableCell className="py-5 text-end">
-                        <span
-                          dir="ltr"
-                          className={cn(
-                            "text-lg font-semibold tracking-tight tabular-nums",
-                            isFailed
-                              ? "text-muted-foreground/40 line-through"
-                              : isPositive
-                                ? "text-emerald-700 dark:text-emerald-400"
-                                : "text-foreground"
-                          )}
-                        >
-                          {formatCurrency(tx.amount, tx.currency)}
-                        </span>
-                      </TableCell>
-                      <TableCell className="py-5 pe-6 text-end">
-                        <Button
-                          type="button"
-                          size="icon-xs"
-                          variant="ghost"
-                          aria-label="View details"
-                          className="rounded-full text-muted-foreground"
-                        >
-                          <MoreHorizontalIcon className="size-5" aria-hidden />
-                        </Button>
-                      </TableCell>
-                    </TableRow>
-                  )
-                })
-              )}
-            </TableBody>
-          </Table>
+                            dir="ltr"
+                            className="font-medium text-muted-foreground"
+                          >
+                            {formatDate(tx.date)}
+                          </span>
+                        </TableCell>
+                        <TableCell className="py-5">
+                          <span className="inline-flex items-center gap-2 capitalize text-muted-foreground">
+                            <TypeIcon type={tx.type} />
+                            {tx.type}
+                          </span>
+                        </TableCell>
+                        <TableCell className="py-5">
+                          <span
+                            className={cn(
+                              "inline-flex items-center gap-2 text-sm font-medium",
+                              status.text
+                            )}
+                          >
+                            <span
+                              className={cn("size-2 rounded-full", status.dot)}
+                            />
+                            {status.label}
+                          </span>
+                        </TableCell>
+                        <TableCell className="py-5 text-end">
+                          <span
+                            dir="ltr"
+                            className={cn(
+                              "text-lg font-semibold tracking-tight tabular-nums",
+                              isFailed
+                                ? "text-muted-foreground/40 line-through"
+                                : isPositive
+                                  ? "text-emerald-700 dark:text-emerald-400"
+                                  : "text-foreground"
+                            )}
+                          >
+                            {formatCurrency(tx.amount, tx.currency)}
+                          </span>
+                        </TableCell>
+                        <TableCell className="py-5 pe-6 text-end">
+                          <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                              <Button
+                                type="button"
+                                size="icon-xs"
+                                variant="ghost"
+                                aria-label="Transaction actions"
+                                className="cursor-pointer rounded-full text-muted-foreground"
+                              >
+                                <MoreHorizontalIcon
+                                  className="size-5"
+                                  aria-hidden
+                                />
+                              </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="end" className="w-44">
+                              <DropdownMenuItem className="cursor-pointer gap-2">
+                                <EyeIcon className="size-4" aria-hidden />
+                                View details
+                              </DropdownMenuItem>
+                              <DropdownMenuItem className="cursor-pointer gap-2">
+                                <DownloadIcon className="size-4" aria-hidden />
+                                Download receipt
+                              </DropdownMenuItem>
+                              <DropdownMenuSeparator />
+                              <DropdownMenuItem className="cursor-pointer gap-2">
+                                Copy ID
+                              </DropdownMenuItem>
+                            </DropdownMenuContent>
+                          </DropdownMenu>
+                        </TableCell>
+                      </TableRow>
+                    )
+                  })
+                )}
+              </TableBody>
+            </Table>
           </div>
 
           {filtered.length > 0 ? (
@@ -616,7 +700,7 @@ export default function BillingHistory({
                   type="button"
                   variant="outline"
                   size="sm"
-                  className="rounded-full"
+                  className="cursor-pointer rounded-full disabled:cursor-not-allowed"
                   disabled={safePage <= 1}
                   onClick={() => setPage((p) => Math.max(1, p - 1))}
                 >
@@ -627,7 +711,7 @@ export default function BillingHistory({
                   type="button"
                   variant="outline"
                   size="sm"
-                  className="rounded-full"
+                  className="cursor-pointer rounded-full disabled:cursor-not-allowed"
                   disabled={safePage >= totalPages}
                   onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
                 >

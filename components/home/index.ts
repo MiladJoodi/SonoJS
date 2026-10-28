@@ -1,4 +1,7 @@
 export { HomeHero } from "./home-hero"
+export { HomeChartsSection } from "./home-charts-section"
+export { HomeChartStage } from "./home-chart-stage"
+export { HomeCandlestickChart } from "./home-candlestick-chart"
 export { HeroShowcase } from "./hero-showcase"
 export { PlatformBadges } from "./platform-badges"
 export { CommandBar } from "./command-bar"

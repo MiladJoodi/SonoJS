@@ -230,7 +230,7 @@ export default function FileManager({
           </DropdownMenu>
         </div>
 
-        <nav className="flex flex-1 flex-col gap-1 overflow-y-auto p-2" aria-label="Drive">
+        <nav className="flex flex-1 flex-col gap-1 overflow-y-auto p-2 pb-8" aria-label="Drive">
           {NAV.map((item) => {
             const Icon = item.icon
             return (

@@ -182,7 +182,7 @@ export default function Hero({
                   <SheetTitle className="sr-only">Main menu</SheetTitle>
                   <Brand src={logoSrc} />
                 </SheetHeader>
-                <nav className="flex flex-1 flex-col gap-1 overflow-y-auto p-4">
+                <nav className="flex flex-1 flex-col gap-1 overflow-y-auto p-4 pb-8">
                   {links.map((link) => (
                     <SheetClose asChild key={link.label}>
                       <a

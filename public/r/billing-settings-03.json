@@ -1,0 +1,42 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "billing-settings-03",
+  "type": "registry:block",
+  "title": "billing-settings-03",
+  "description": "Change plan — selectable Starter/Pro/Team radios with current badge (RTL/LTR).",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "badge",
+    "button",
+    "radio-group",
+    "separator"
+  ],
+  "cssVars": {
+    "light": {
+      "canvas": "#f3f3f4",
+      "border-soft": "color-mix(in oklab, #e4e4e7 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18)",
+      "background": "var(--canvas)",
+      "card": "#ffffff"
+    },
+    "dark": {
+      "canvas": "#09090b",
+      "border-soft": "color-mix(in oklab, #27272a 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(0, 0, 0, 0.24), 0 28px 56px -28px rgba(0, 0, 0, 0.48)",
+      "background": "var(--canvas)",
+      "card": "#18181b"
+    }
+  },
+  "files": [
+    {
+      "path": "components/blocks/payments-billing/billing-settings-03/billing-settings.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { CheckIcon } from \"lucide-react\"\n\nimport { Badge } from \"@/components/ui/badge\"\nimport { Button } from \"@/components/ui/button\"\nimport {\n  RadioGroup,\n  RadioGroupItem,\n} from \"@/components/ui/radio-group\"\nimport { Separator } from \"@/components/ui/separator\"\nimport { cn } from \"@/lib/utils\"\n\nconst PLANS = [\n  {\n    id: \"starter\",\n    name: \"Starter\",\n    price: \"$19\",\n    blurb: \"For solo builders\",\n    features: [\"1 workspace\", \"3 seats\", \"Community support\"],\n  },\n  {\n    id: \"pro\",\n    name: \"Pro\",\n    price: \"$49\",\n    blurb: \"For growing teams\",\n    features: [\"Unlimited projects\", \"10 seats\", \"Priority email\"],\n    current: true,\n  },\n  {\n    id: \"team\",\n    name: \"Team\",\n    price: \"$99\",\n    blurb: \"For orgs shipping often\",\n    features: [\"Unlimited seats\", \"SSO\", \"Dedicated support\"],\n  },\n] as const\n\ntype PlanId = (typeof PLANS)[number][\"id\"]\n\nexport default function BillingSettings({\n  className,\n  ...props\n}: React.ComponentProps<\"div\">) {\n  const [plan, setPlan] = React.useState<PlanId>(\"pro\")\n\n  return (\n    <div\n      className={cn(\n        \"flex w-full justify-center bg-white px-4 py-10 text-foreground dark:bg-background sm:px-6 sm:py-14\",\n        className\n      )}\n      {...props}\n    >\n      <section\n        className=\"w-full max-w-lg overflow-hidden rounded-[12px] border border-border/70 bg-card shadow-soft\"\n        aria-labelledby=\"billing-settings-03-heading\"\n      >\n        <header className=\"border-b border-border/70 px-5 py-4 sm:px-6\">\n          <h1\n            id=\"billing-settings-03-heading\"\n            className=\"text-base font-semibold tracking-tight text-start\"\n          >\n            Change plan\n          </h1>\n          <p className=\"mt-1 text-sm text-muted-foreground text-start\">\n            Pick a plan. You can switch again anytime before the next renewal.\n          </p>\n        </header>\n\n        <div className=\"px-5 py-5 sm:px-6\">\n          <RadioGroup\n            value={plan}\n            onValueChange={(value) => setPlan(value as PlanId)}\n            className=\"gap-3\"\n            aria-label=\"Plans\"\n          >\n            {PLANS.map((item) => {\n              const selected = plan === item.id\n              const inputId = `billing-settings-03-${item.id}`\n              return (\n                <label\n                  key={item.id}\n                  htmlFor={inputId}\n                  className={cn(\n                    \"block cursor-pointer rounded-[12px] border p-4 transition-colors\",\n                    selected\n                      ? \"border-primary/40 bg-primary/5 ring-2 ring-primary/15\"\n                      : \"border-border/70 hover:bg-muted/30\"\n                  )}\n                >\n                  <div className=\"flex items-start gap-3\">\n                    <RadioGroupItem\n                      id={inputId}\n                      value={item.id}\n                      className=\"mt-1 cursor-pointer\"\n                    />\n                    <div className=\"min-w-0 flex-1 text-start\">\n                      <div className=\"flex flex-wrap items-center gap-2\">\n                        <span className=\"text-sm font-semibold text-foreground\">\n                          {item.name}\n                        </span>\n                        {\"current\" in item && item.current ? (\n                          <Badge variant=\"secondary\">Current</Badge>\n                        ) : null}\n                      </div>\n                      <p className=\"mt-0.5 text-sm text-muted-foreground\">\n                        {item.blurb}\n                      </p>\n                      <ul className=\"mt-2 space-y-1\">\n                        {item.features.map((feature) => (\n                          <li\n                            key={feature}\n                            className=\"flex items-center gap-2 text-xs text-muted-foreground\"\n                          >\n                            <CheckIcon\n                              className=\"size-3.5 shrink-0 text-foreground\"\n                              aria-hidden\n                            />\n                            {feature}\n                          </li>\n                        ))}\n                      </ul>\n                    </div>\n                    <p className=\"shrink-0 text-end\">\n                      <span\n                        dir=\"ltr\"\n                        className=\"text-lg font-semibold text-foreground\"\n                      >\n                        {item.price}\n                      </span>\n                      <span className=\"block text-xs text-muted-foreground\">\n                        /mo\n                      </span>\n                    </p>\n                  </div>\n                </label>\n              )\n            })}\n          </RadioGroup>\n        </div>\n\n        <Separator />\n\n        <div className=\"flex flex-col-reverse gap-2 px-5 py-3 sm:flex-row sm:items-center sm:justify-end sm:px-6\">\n          <Button type=\"button\" variant=\"ghost\" className=\"cursor-pointer\">\n            Cancel\n          </Button>\n          <Button type=\"button\" className=\"cursor-pointer\">\n            Continue with {PLANS.find((p) => p.id === plan)?.name}\n          </Button>\n        </div>\n      </section>\n    </div>\n  )\n}\n",
+      "target": "components/blocks/payments-billing/billing-settings-03/billing-settings.tsx"
+    }
+  ],
+  "version": "0.1.0+100157e5f9d9",
+  "generatedAt": "2026-10-28T18:44:12.462Z"
+}

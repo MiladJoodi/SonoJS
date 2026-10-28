@@ -48,6 +48,7 @@ const folderModules = {
   "popover": () => import("./examples/popover/_loaders"),
   "progress": () => import("./examples/progress/_loaders"),
   "radio-group": () => import("./examples/radio-group/_loaders"),
+  "rainbow-button": () => import("./examples/rainbow-button/_loaders"),
   "resizable": () => import("./examples/resizable/_loaders"),
   "scroll-area": () => import("./examples/scroll-area/_loaders"),
   "select": () => import("./examples/select/_loaders"),
@@ -67,7 +68,7 @@ const folderModules = {
   "trace": () => import("./examples/trace/_loaders"),
 } as const
 
-const FOLDERS_LONGEST_FIRST = ["message-scroller","navigation-menu","dropdown-menu","native-select","alert-dialog","button-group","context-menu","toggle-group","collapsible","date-picker","input-group","radio-group","scroll-area","attachment","breadcrumb","code-block","data-table","hover-card","pagination","accordion","input-otp","resizable","separator","calendar","combobox","carousel","checkbox","progress","skeleton","textarea","command","menubar","message","popover","spinner","tooltip","avatar","bubble","button","dialog","drawer","marker","select","slider","sonner","switch","toggle","badge","alert","empty","field","input","label","sheet","table","trace","card","item","tabs","kbd"] as const
+const FOLDERS_LONGEST_FIRST = ["message-scroller","navigation-menu","rainbow-button","dropdown-menu","native-select","alert-dialog","button-group","context-menu","toggle-group","collapsible","date-picker","input-group","radio-group","scroll-area","attachment","breadcrumb","code-block","data-table","hover-card","pagination","accordion","input-otp","resizable","separator","calendar","combobox","carousel","checkbox","progress","skeleton","textarea","command","menubar","message","popover","spinner","tooltip","avatar","bubble","button","dialog","drawer","marker","select","slider","sonner","switch","toggle","badge","alert","empty","field","input","label","sheet","table","trace","card","item","tabs","kbd"] as const
 
 function folderForExample(name: string): string | undefined {
   for (const folder of FOLDERS_LONGEST_FIRST) {

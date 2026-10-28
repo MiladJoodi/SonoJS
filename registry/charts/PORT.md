@@ -126,8 +126,6 @@ Locked Simple Bar chrome is the **default starting point**. Chart-type or custom
 
 **chart-area-icons (classic):** stacked Desktop×Mobile natural areas + `ChartLegend` with Lucide `TrendingDown` / `TrendingUp` series icons; locked metric scrubber.
 
-**chart-area-gradient (classic):** stacked Store×Online natural areas with **neon** chart-local styles — `useMarketNeon` → `--chart-up`/`--chart-down`, fill fade `0.32→0` + drop-shadow stroke glow on branded skins; raw fallback uses navy×orange with classic `0.8→0.1` stops. Distinct from gallery `area-gradient`.
-
 **chart-area-axes (classic):** stacked Store×Online solid fills (`fillOpacity` 0.4) + sparse Y-axis `tickCount={3}`; locked metric scrubber. Last classic area demo in the set.
 
 **two-level-pie-chart:** nested pies (inner regions / outer channels); metric = idle outer total or scrub slice + “% of ring”; no on-slice labels; region legend only; `--chart-1…5`; RTL flips start/end angles.

@@ -12,13 +12,6 @@ import { Avatar, AvatarFallback } from "@sonojs/ui/components/avatar"
 import { Badge } from "@sonojs/ui/components/badge"
 import { Button } from "@sonojs/ui/components/button"
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardTitle,
-} from "@sonojs/ui/components/card"
-import {
   Empty,
   EmptyContent,
   EmptyDescription,
@@ -43,6 +36,23 @@ import {
 } from "@sonojs/ui/components/pagination"
 import { cn } from "@/lib/utils"
 
+import cover01 from "./images/cover-01.webp"
+import cover02 from "./images/cover-02.webp"
+import cover03 from "./images/cover-03.webp"
+import cover04 from "./images/cover-04.webp"
+import cover05 from "./images/cover-05.webp"
+import cover06 from "./images/cover-06.webp"
+import cover07 from "./images/cover-07.webp"
+import cover08 from "./images/cover-08.webp"
+import cover09 from "./images/cover-09.webp"
+import cover10 from "./images/cover-10.webp"
+import cover11 from "./images/cover-11.webp"
+import cover12 from "./images/cover-12.webp"
+
+function assetSrc(asset: string | { src: string }) {
+  return typeof asset === "string" ? asset : asset.src
+}
+
 type CategoryId =
   | "all"
   | "engineering"
@@ -51,13 +61,7 @@ type CategoryId =
   | "opinion"
   | "release"
 
-type Category = {
-  id: CategoryId
-  label: string
-  badgeClass: string
-}
-
-const CATEGORIES: Category[] = [
+const CATEGORIES: { id: CategoryId; label: string; badgeClass: string }[] = [
   {
     id: "all",
     label: "All Posts",
@@ -102,6 +106,8 @@ type Post = {
   date: string
   readTime: string
   excerpt: string
+  cover: string
+  alt: string
 }
 
 const ALL_POSTS: Post[] = [
@@ -113,7 +119,9 @@ const ALL_POSTS: Post[] = [
     date: "Mar 18, 2026",
     readTime: "8 min",
     excerpt:
-      "A deep dive into combining accessible primitives with Tailwind to create component libraries that scale.",
+      "Combining accessible primitives with Tailwind to ship libraries that scale.",
+    cover: assetSrc(cover01),
+    alt: "Design system workspace",
   },
   {
     title: "Zero Runtime Theming: CSS Custom Properties Replace JS",
@@ -123,7 +131,9 @@ const ALL_POSTS: Post[] = [
     date: "Mar 15, 2026",
     readTime: "6 min",
     excerpt:
-      "Why we chose pure CSS theming over runtime solutions, and how oklch colors help with contrast.",
+      "Why pure CSS theming wins — and how oklch keeps contrast honest.",
+    cover: assetSrc(cover02),
+    alt: "Theming mood board",
   },
   {
     title: "Copy-source CLI to npm: Why We Ship as a Library",
@@ -133,7 +143,9 @@ const ALL_POSTS: Post[] = [
     date: "Mar 12, 2026",
     readTime: "5 min",
     excerpt:
-      "The trade-offs between copy-paste component collections and versioned npm packages.",
+      "Trade-offs between copy-paste collections and versioned packages.",
+    cover: assetSrc(cover03),
+    alt: "Team collaboration",
   },
   {
     title: "Tailwind CSS v4 Migration Guide for Libraries",
@@ -143,7 +155,9 @@ const ALL_POSTS: Post[] = [
     date: "Mar 10, 2026",
     readTime: "12 min",
     excerpt:
-      "Practical steps for migrating from Tailwind v3 to v4: CSS-first config, @theme, and @source.",
+      "CSS-first config, @theme, and @source — a practical migration path.",
+    cover: assetSrc(cover04),
+    alt: "Product headphones on desk",
   },
   {
     title: "Testing 60+ Components: Our Accessibility Audit Strategy",
@@ -153,7 +167,9 @@ const ALL_POSTS: Post[] = [
     date: "Mar 8, 2026",
     readTime: "7 min",
     excerpt:
-      "How we keep hundreds of tests green across packages with automated accessibility checks.",
+      "Keeping hundreds of a11y checks green across packages.",
+    cover: assetSrc(cover05),
+    alt: "Watch and planning notes",
   },
   {
     title: "oklch Color Spaces Explained for UI Engineers",
@@ -163,7 +179,9 @@ const ALL_POSTS: Post[] = [
     date: "Mar 5, 2026",
     readTime: "9 min",
     excerpt:
-      "Understanding perceptual uniformity, lightness channels, and why oklch beats HSL for UI.",
+      "Perceptual uniformity and why oklch beats HSL for UI tokens.",
+    cover: assetSrc(cover06),
+    alt: "Creative imagination cover",
   },
   {
     title: "SonoJS v1.2 — Calendar and Tree Components",
@@ -173,7 +191,9 @@ const ALL_POSTS: Post[] = [
     date: "Mar 1, 2026",
     readTime: "3 min",
     excerpt:
-      "Two new data-display components with full keyboard navigation and ARIA support.",
+      "Keyboard-first data display with full ARIA support.",
+    cover: assetSrc(cover07),
+    alt: "Portrait of engineer",
   },
   {
     title: "Composable vs Monolithic Component APIs",
@@ -183,7 +203,9 @@ const ALL_POSTS: Post[] = [
     date: "Feb 26, 2026",
     readTime: "6 min",
     excerpt:
-      "Why CardHeader + CardContent beats a single Card with a dozen props every time.",
+      "Why CardHeader + CardContent beats a dozen props every time.",
+    cover: assetSrc(cover08),
+    alt: "Portrait of designer",
   },
   {
     title: "Building a Stepper Component from Scratch",
@@ -193,7 +215,9 @@ const ALL_POSTS: Post[] = [
     date: "Feb 22, 2026",
     readTime: "10 min",
     excerpt:
-      "Step-by-step guide to an accessible multi-step wizard with clear focus and state.",
+      "An accessible multi-step wizard with clear focus and state.",
+    cover: assetSrc(cover09),
+    alt: "Portrait of product lead",
   },
   {
     title: "How We Generate Tailwind Safelisted Classes",
@@ -203,7 +227,9 @@ const ALL_POSTS: Post[] = [
     date: "Feb 18, 2026",
     readTime: "8 min",
     excerpt:
-      "An automated safelist generator so every utility class ships correctly from node_modules.",
+      "An automated safelist so every utility ships from node_modules.",
+    cover: assetSrc(cover10),
+    alt: "Prediction analytics visual",
   },
   {
     title: "Design Token Architecture for Tailwind v4",
@@ -213,7 +239,9 @@ const ALL_POSTS: Post[] = [
     date: "Feb 14, 2026",
     readTime: "7 min",
     excerpt:
-      "Structuring @theme variables for scalable, multi-brand design systems.",
+      "Structuring @theme variables for multi-brand systems.",
+    cover: assetSrc(cover11),
+    alt: "Creative workspace",
   },
   {
     title: "SonoJS v1.1 — Data Table and Timeline",
@@ -223,7 +251,9 @@ const ALL_POSTS: Post[] = [
     date: "Feb 10, 2026",
     readTime: "3 min",
     excerpt:
-      "Data tables with sorting and selection, plus timelines for activity feeds and changelogs.",
+      "Sortable tables plus timelines for feeds and changelogs.",
+    cover: assetSrc(cover12),
+    alt: "Time management desk",
   },
 ]
 
@@ -245,9 +275,7 @@ function pageItems(totalPages: number, current: number) {
       page !== totalPages &&
       Math.abs(page - current) > 1
     ) {
-      if (page === 2 || page === totalPages - 1) {
-        pages.push("ellipsis")
-      }
+      if (page === 2 || page === totalPages - 1) pages.push("ellipsis")
       continue
     }
     pages.push(page)
@@ -307,7 +335,7 @@ export default function BlogGrid({
   return (
     <section
       className={cn(
-        "w-full min-w-0 bg-canvas py-16 text-foreground sm:py-24",
+        "w-full min-w-0 bg-background py-14 text-foreground sm:py-20",
         className
       )}
       aria-labelledby="blog-grid-01-heading"
@@ -315,15 +343,16 @@ export default function BlogGrid({
     >
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="mb-8 max-w-2xl text-start">
+          <p className="mb-2 text-sm font-medium text-primary">Journal</p>
           <h1
             id="blog-grid-01-heading"
             className="text-h1 font-semibold tracking-tight text-foreground"
           >
-            Blog
+            Filter studio
           </h1>
           <p className="mt-2 text-base text-muted-foreground">
-            Insights on design systems, React, accessibility, and modern UI
-            engineering.
+            Cover cards with category chips, search, and pagination — a
+            publishing index that feels finished.
           </p>
         </div>
 
@@ -412,55 +441,61 @@ export default function BlogGrid({
           </Empty>
         ) : (
           <>
-            <div className="mb-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mb-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {paginated.map((post) => (
-                <Card
+                <a
                   key={post.title}
-                  size="sm"
-                  className="cursor-pointer transition-colors hover:border-primary/30"
+                  href="#"
+                  onClick={(e) => e.preventDefault()}
+                  className="group flex cursor-pointer flex-col overflow-hidden rounded-[12px] border border-border/70 bg-card shadow-soft outline-none transition-[border-color,box-shadow] hover:border-primary/30 focus-visible:ring-2 focus-visible:ring-ring"
                 >
-                  <CardContent className="flex flex-1 flex-col gap-3">
-                    <div className="flex flex-wrap items-center gap-2">
-                      <Badge
-                        variant="outline"
-                        className={cn(
-                          "capitalize",
-                          categoryBadgeClass(post.category)
-                        )}
-                      >
-                        {post.category}
-                      </Badge>
-                      <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
-                        <ClockIcon className="size-3" aria-hidden />
-                        <span dir="ltr">{post.readTime}</span>
-                      </span>
-                    </div>
-                    <CardTitle className="line-clamp-2 text-base leading-snug transition-colors group-hover/card:text-primary">
-                      {post.title}
-                    </CardTitle>
-                    <CardDescription className="line-clamp-2 leading-relaxed">
-                      {post.excerpt}
-                    </CardDescription>
-                  </CardContent>
-                  <CardFooter className="mt-auto justify-between gap-3 border-t border-border/70 pt-4">
-                    <div className="flex min-w-0 items-center gap-2">
-                      <Avatar className="size-6">
-                        <AvatarFallback className="text-[10px]">
-                          {post.initials}
-                        </AvatarFallback>
-                      </Avatar>
-                      <span className="truncate text-xs font-semibold text-foreground">
-                        {post.author}
-                      </span>
-                    </div>
-                    <span
-                      dir="ltr"
-                      className="shrink-0 text-xs text-muted-foreground"
+                  <div className="relative aspect-[16/10] overflow-hidden bg-muted">
+                    <img
+                      src={post.cover}
+                      alt={post.alt}
+                      className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <Badge
+                      variant="outline"
+                      className={cn(
+                        "absolute start-3 top-3 capitalize shadow-sm backdrop-blur-sm",
+                        categoryBadgeClass(post.category)
+                      )}
                     >
-                      {post.date}
-                    </span>
-                  </CardFooter>
-                </Card>
+                      {post.category}
+                    </Badge>
+                  </div>
+                  <div className="flex flex-1 flex-col gap-3 p-4">
+                    <div className="inline-flex items-center gap-1 text-xs text-muted-foreground">
+                      <ClockIcon className="size-3" aria-hidden />
+                      <span dir="ltr">{post.readTime}</span>
+                    </div>
+                    <h2 className="line-clamp-2 text-base font-semibold leading-snug text-foreground transition-colors group-hover:text-primary">
+                      {post.title}
+                    </h2>
+                    <p className="line-clamp-2 text-sm leading-relaxed text-muted-foreground">
+                      {post.excerpt}
+                    </p>
+                    <div className="mt-auto flex items-center justify-between gap-3 border-t border-border/70 pt-3">
+                      <div className="flex min-w-0 items-center gap-2">
+                        <Avatar className="size-6">
+                          <AvatarFallback className="text-[10px]">
+                            {post.initials}
+                          </AvatarFallback>
+                        </Avatar>
+                        <span className="truncate text-xs font-semibold text-foreground">
+                          {post.author}
+                        </span>
+                      </div>
+                      <span
+                        dir="ltr"
+                        className="shrink-0 text-xs text-muted-foreground"
+                      >
+                        {post.date}
+                      </span>
+                    </div>
+                  </div>
+                </a>
               ))}
             </div>
 

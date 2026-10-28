@@ -286,19 +286,12 @@ export default function FilterPanel({
   return (
     <section
       className={cn(
-        "relative isolate w-full min-w-0 overflow-hidden bg-canvas py-8 text-foreground",
+        "w-full min-w-0 bg-white py-8 text-foreground dark:bg-background",
         className
       )}
       aria-labelledby="filter-panel-01-heading"
       {...props}
     >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10"
-      >
-        <div className="absolute start-1/2 top-[-20%] size-[28rem] -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
-      </div>
-
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <header className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="text-start">

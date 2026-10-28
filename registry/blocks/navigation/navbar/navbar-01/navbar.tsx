@@ -92,7 +92,7 @@ export default function Navbar({
                 <SheetTitle className="sr-only">Menu</SheetTitle>
                 <Brand />
               </SheetHeader>
-              <nav className="flex flex-1 flex-col gap-0.5 overflow-y-auto p-3">
+              <nav className="flex flex-1 flex-col gap-0.5 overflow-y-auto p-3 pb-8">
                 {links.map((link) => (
                   <a
                     key={link.label}

@@ -153,7 +153,7 @@ export default function Navbar({
                 <div className="border-b border-border/70 p-3">
                   <SearchTrigger className="w-full" />
                 </div>
-                <nav className="flex flex-1 flex-col gap-0.5 overflow-y-auto p-3">
+                <nav className="flex flex-1 flex-col gap-0.5 overflow-y-auto p-3 pb-8">
                   {links.map((link) => {
                     const isActive = active === link.label
                     return (

@@ -296,7 +296,7 @@ export default function DashboardLayout({
           </form>
 
           <nav
-            className="mt-3 flex-1 space-y-0.5 overflow-y-auto px-3 pb-3"
+            className="mt-3 flex-1 space-y-0.5 overflow-y-auto px-3 pb-8"
             aria-label="Workspace"
           >
             {NAV_ITEMS.map((item) => {

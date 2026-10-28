@@ -159,7 +159,7 @@ export default function ProductFilter({
             </button>
           </DrawerHeader>
 
-          <div className="min-h-0 flex-1 space-y-0 overflow-y-auto overscroll-contain px-4 py-5 sm:px-6">
+          <div className="min-h-0 flex-1 space-y-0 overflow-y-auto overscroll-contain px-4 py-5 pb-8 sm:px-6">
             <fieldset>
               <legend className="text-sm font-semibold text-foreground">
                 Category

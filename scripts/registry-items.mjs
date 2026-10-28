@@ -14,10 +14,43 @@ import { readFileSync } from "node:fs"
  *   description?: string,
  *   dependencies?: string[],
  *   registryDependencies?: string[],
- *   cssVars?: { light?: Record<string, string>, dark?: Record<string, string> },
+ *   cssVars?: {
+ *     light?: Record<string, string>,
+ *     dark?: Record<string, string>,
+ *     theme?: Record<string, string>,
+ *   },
+ *   css?: Record<string, Record<string, Record<string, string>>>,
  *   files: RegistryFileDef[]
  * }} RegistryItemDef
  */
+
+/** Rainbow button — spectrum + motion (injected on `sonojs add`). */
+const RAINBOW_BUTTON_CSS_VARS = {
+  theme: {
+    "animate-rainbow": "rainbow var(--speed, 2s) infinite linear",
+  },
+  light: {
+    "color-1": "hsl(0 100% 63%)",
+    "color-2": "hsl(270 100% 63%)",
+    "color-3": "hsl(210 100% 63%)",
+    "color-4": "hsl(195 100% 63%)",
+    "color-5": "hsl(90 100% 63%)",
+  },
+  dark: {
+    "color-1": "hsl(0 100% 63%)",
+    "color-2": "hsl(270 100% 63%)",
+    "color-3": "hsl(210 100% 63%)",
+    "color-4": "hsl(195 100% 63%)",
+    "color-5": "hsl(90 100% 63%)",
+  },
+}
+
+const RAINBOW_BUTTON_CSS = {
+  "@keyframes rainbow": {
+    "0%": { "background-position": "0%" },
+    "100%": { "background-position": "200%" },
+  },
+}
 
 /** Soft surfaces — install injects these so elevated cards match docs. */
 const SOFT_SURFACE_CSS_VARS = {
@@ -204,6 +237,7 @@ function paymentsBillingSettingsBlock(
       "separator",
       "table",
     ],
+    images = [],
   } = {}
 ) {
   return {
@@ -220,6 +254,11 @@ function paymentsBillingSettingsBlock(
         type: "registry:component",
         target: `components/blocks/payments-billing/${slug}/billing-settings.tsx`,
       },
+      ...images.map((file) => ({
+        path: `registry/blocks/payments-billing/billing-settings/${slug}/images/${file}`,
+        type: "registry:file",
+        target: `components/blocks/payments-billing/${slug}/images/${file}`,
+      })),
     ],
   }
 }
@@ -313,6 +352,7 @@ function paymentsPaymentMethodsBlock(
   description,
   {
     registryDependencies = ["badge", "button"],
+    images = [],
   } = {}
 ) {
   return {
@@ -329,6 +369,11 @@ function paymentsPaymentMethodsBlock(
         type: "registry:component",
         target: `components/blocks/payments-billing/${slug}/payment-methods.tsx`,
       },
+      ...images.map((file) => ({
+        path: `registry/blocks/payments-billing/payment-methods/${slug}/images/${file}`,
+        type: "registry:file",
+        target: `components/blocks/payments-billing/${slug}/images/${file}`,
+      })),
     ],
   }
 }
@@ -1214,6 +1259,7 @@ function filesMediaMediaPlayerBlock(
   media = [],
   {
     registryDependencies = ["button"],
+    includeLib = true,
   } = {}
 ) {
   return {
@@ -1230,8 +1276,58 @@ function filesMediaMediaPlayerBlock(
         type: "registry:component",
         target: `components/blocks/files-media/${slug}/media-player.tsx`,
       },
+      ...(includeLib
+        ? [
+            {
+              path: "registry/blocks/files-media/media-player/_lib/use-media-video.ts",
+              type: "registry:component",
+              target: "components/blocks/files-media/_lib/use-media-video.ts",
+            },
+          ]
+        : []),
       ...media.map((file) => ({
         path: `registry/blocks/files-media/media-player/${slug}/media/${file}`,
+        type: "registry:file",
+        target: `components/blocks/files-media/${slug}/media/${file}`,
+      })),
+    ],
+  }
+}
+
+function filesMediaMusicPlayerBlock(
+  slug,
+  description,
+  media = ["demo.wav"],
+  {
+    registryDependencies = ["button", "slider"],
+    includeLib = true,
+  } = {}
+) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies,
+    files: [
+      {
+        path: `registry/blocks/files-media/music-player/${slug}/music-player.tsx`,
+        type: "registry:component",
+        target: `components/blocks/files-media/${slug}/music-player.tsx`,
+      },
+      ...(includeLib
+        ? [
+            {
+              path: "registry/blocks/files-media/music-player/_lib/use-music-audio.ts",
+              type: "registry:component",
+              target: "components/blocks/files-media/_lib/use-music-audio.ts",
+            },
+          ]
+        : []),
+      ...media.map((file) => ({
+        path: `registry/blocks/files-media/music-player/${slug}/media/${file}`,
         type: "registry:file",
         target: `components/blocks/files-media/${slug}/media/${file}`,
       })),
@@ -1542,6 +1638,101 @@ function dashboardsAnalyticsDashboardBlock(
   }
 }
 
+function contentPublishingBlogGridBlock(
+  slug,
+  description,
+  {
+    registryDependencies = [
+      "avatar",
+      "badge",
+      "button",
+      "empty",
+      "input-group",
+      "pagination",
+    ],
+    images = [],
+  } = {}
+) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies,
+    files: [
+      {
+        path: `registry/blocks/content-publishing/blog-grid/${slug}/blog-grid.tsx`,
+        type: "registry:component",
+        target: `components/blocks/content-publishing/${slug}/blog-grid.tsx`,
+      },
+      ...images.map((file) => ({
+        path: `registry/blocks/content-publishing/blog-grid/${slug}/images/${file}`,
+        type: "registry:file",
+        target: `components/blocks/content-publishing/${slug}/images/${file}`,
+      })),
+    ],
+  }
+}
+
+function contentPublishingAuthorProfileBlock(
+  slug,
+  description,
+  {
+    registryDependencies = ["avatar", "badge", "button"],
+    images = [],
+  } = {}
+) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies,
+    files: [
+      {
+        path: `registry/blocks/content-publishing/author-profile/${slug}/author-profile.tsx`,
+        type: "registry:component",
+        target: `components/blocks/content-publishing/${slug}/author-profile.tsx`,
+      },
+      ...images.map((file) => ({
+        path: `registry/blocks/content-publishing/author-profile/${slug}/images/${file}`,
+        type: "registry:file",
+        target: `components/blocks/content-publishing/${slug}/images/${file}`,
+      })),
+    ],
+  }
+}
+
+const AUTHOR_PROFILE_IMAGES = [
+  "portrait-01.webp",
+  "portrait-02.webp",
+  "portrait-03.webp",
+  "portrait-04.webp",
+  "cover-01.webp",
+  "cover-02.webp",
+  "cover-03.webp",
+  "cover-04.webp",
+]
+
+const BLOG_GRID_COVERS = [
+  "cover-01.webp",
+  "cover-02.webp",
+  "cover-03.webp",
+  "cover-04.webp",
+  "cover-05.webp",
+  "cover-06.webp",
+  "cover-07.webp",
+  "cover-08.webp",
+  "cover-09.webp",
+  "cover-10.webp",
+  "cover-11.webp",
+  "cover-12.webp",
+]
+
 function calendarSchedulingCalendarBlock(
   slug,
   description,
@@ -1645,6 +1836,39 @@ function searchFilteringSearchResultsBlock(
         path: `registry/blocks/search-filtering/search-results/${slug}/search-results.tsx`,
         type: "registry:component",
         target: `components/blocks/search-filtering/${slug}/search-results.tsx`,
+      },
+    ],
+  }
+}
+
+function searchFilteringFilterPanelBlock(
+  slug,
+  description,
+  {
+    registryDependencies = [
+      "badge",
+      "button",
+      "card",
+      "input",
+      "label",
+      "popover",
+      "slider",
+    ],
+  } = {}
+) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies,
+    files: [
+      {
+        path: `registry/blocks/search-filtering/filter-panel/${slug}/filter-panel.tsx`,
+        type: "registry:component",
+        target: `components/blocks/search-filtering/${slug}/filter-panel.tsx`,
       },
     ],
   }
@@ -1998,6 +2222,27 @@ const registryItemsRaw = [
         path: "packages/ui/src/components/button.tsx",
         type: "registry:ui",
         target: "components/ui/button.tsx",
+      },
+    ],
+  },
+  {
+    name: "rainbow-button",
+    type: "registry:ui",
+    title: "Rainbow Button",
+    description: "An animated button with a rainbow border and glow.",
+    dependencies: [
+      "radix-ui",
+      "class-variance-authority",
+      "clsx",
+      "tailwind-merge",
+    ],
+    cssVars: RAINBOW_BUTTON_CSS_VARS,
+    css: RAINBOW_BUTTON_CSS,
+    files: [
+      {
+        path: "packages/ui/src/components/rainbow-button.tsx",
+        type: "registry:ui",
+        target: "components/ui/rainbow-button.tsx",
       },
     ],
   },
@@ -5398,7 +5643,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "article-layout-01",
     description:
-      "Article layout — hero meta, short prose sections, sticky TOC, author card, and prev/next.",
+      "Classic article — cover figure, active sticky TOC, callout prose, author card, and prev/next.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: ["avatar", "badge", "button", "separator"],
@@ -5408,56 +5653,292 @@ const registryItemsRaw = [
         type: "registry:component",
         target: "components/blocks/content-publishing/article-layout-01/article-layout.tsx",
       },
+      {
+        path: "registry/blocks/content-publishing/article-layout/article-layout-01/images/cover.webp",
+        type: "registry:file",
+        target:
+          "components/blocks/content-publishing/article-layout-01/images/cover.webp",
+      },
+      {
+        path: "registry/blocks/content-publishing/article-layout/article-layout-01/images/figure.webp",
+        type: "registry:file",
+        target:
+          "components/blocks/content-publishing/article-layout-01/images/figure.webp",
+      },
     ],
   },
   {
-    name: "author-profile-01",
+    name: "article-layout-02",
     type: "registry:block",
-    title: "author-profile-01",
+    title: "article-layout-02",
     description:
-      "Author profile cards — follow toggle, stats, tags, social links, and recent posts grid.",
+      "Magazine cover article — full-bleed hero scrim, narrow measure, jump chips, floating share stack.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: ["avatar", "badge", "button"],
     files: [
       {
-        path: "registry/blocks/content-publishing/author-profile/author-profile-01/author-profile.tsx",
+        path: "registry/blocks/content-publishing/article-layout/article-layout-02/article-layout.tsx",
         type: "registry:component",
-        target: "components/blocks/content-publishing/author-profile-01/author-profile.tsx",
+        target: "components/blocks/content-publishing/article-layout-02/article-layout.tsx",
+      },
+      {
+        path: "registry/blocks/content-publishing/article-layout/article-layout-02/images/cover.webp",
+        type: "registry:file",
+        target:
+          "components/blocks/content-publishing/article-layout-02/images/cover.webp",
       },
     ],
   },
   {
-    name: "blog-grid-01",
+    name: "article-layout-03",
     type: "registry:block",
-    title: "blog-grid-01",
+    title: "article-layout-03",
     description:
-      "Blog grid with category chips, search, empty state, post cards, and pagination.",
+      "Editorial split — oversized title, drop-cap, sticky author/share rail, pull-quote, related cards.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
-    registryDependencies: [
-      "avatar",
-      "badge",
-      "button",
-      "card",
-      "empty",
-      "input-group",
-      "pagination",
-    ],
+    registryDependencies: ["avatar", "badge", "button"],
     files: [
       {
-        path: "registry/blocks/content-publishing/blog-grid/blog-grid-01/blog-grid.tsx",
+        path: "registry/blocks/content-publishing/article-layout/article-layout-03/article-layout.tsx",
         type: "registry:component",
-        target: "components/blocks/content-publishing/blog-grid-01/blog-grid.tsx",
+        target: "components/blocks/content-publishing/article-layout-03/article-layout.tsx",
+      },
+      {
+        path: "registry/blocks/content-publishing/article-layout/article-layout-03/images/cover.webp",
+        type: "registry:file",
+        target:
+          "components/blocks/content-publishing/article-layout-03/images/cover.webp",
       },
     ],
   },
+  {
+    name: "article-layout-04",
+    type: "registry:block",
+    title: "article-layout-04",
+    description:
+      "Product-docs article — breadcrumb, numbered sticky TOC, tip/warning panels, code surface callout.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: ["avatar", "badge", "button", "separator"],
+    files: [
+      {
+        path: "registry/blocks/content-publishing/article-layout/article-layout-04/article-layout.tsx",
+        type: "registry:component",
+        target: "components/blocks/content-publishing/article-layout-04/article-layout.tsx",
+      },
+    ],
+  },
+  {
+    name: "article-layout-05",
+    type: "registry:block",
+    title: "article-layout-05",
+    description:
+      "Series immersive article — reading progress, chapter chrome, sticky action bar, comments teaser.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: ["avatar", "badge", "button", "separator"],
+    files: [
+      {
+        path: "registry/blocks/content-publishing/article-layout/article-layout-05/article-layout.tsx",
+        type: "registry:component",
+        target: "components/blocks/content-publishing/article-layout-05/article-layout.tsx",
+      },
+      {
+        path: "registry/blocks/content-publishing/article-layout/article-layout-05/images/cover.webp",
+        type: "registry:file",
+        target:
+          "components/blocks/content-publishing/article-layout-05/images/cover.webp",
+      },
+    ],
+  },
+  contentPublishingAuthorProfileBlock(
+    "author-profile-01",
+    "Directory cards — portrait authors with follow, stats, tags, and recent posts.",
+    {
+      registryDependencies: ["avatar", "badge", "button"],
+      images: AUTHOR_PROFILE_IMAGES,
+    }
+  ),
+  contentPublishingAuthorProfileBlock(
+    "author-profile-02",
+    "Full profile hero — cover banner, overlapping avatar, stats strip, and posts.",
+    {
+      registryDependencies: ["avatar", "badge", "button"],
+      images: AUTHOR_PROFILE_IMAGES,
+    }
+  ),
+  contentPublishingAuthorProfileBlock(
+    "author-profile-03",
+    "Cover split — tall portrait beside identity, socials, and compact posts.",
+    {
+      registryDependencies: ["avatar", "badge", "button"],
+      images: AUTHOR_PROFILE_IMAGES,
+    }
+  ),
+  contentPublishingAuthorProfileBlock(
+    "author-profile-04",
+    "Compact row directory — searchable author rows with follow actions.",
+    {
+      registryDependencies: ["avatar", "button", "input-group"],
+      images: AUTHOR_PROFILE_IMAGES,
+    }
+  ),
+  contentPublishingAuthorProfileBlock(
+    "author-profile-05",
+    "Spotlight theater — cinematic featured author plus also-writing stack.",
+    {
+      registryDependencies: ["avatar", "badge", "button"],
+      images: AUTHOR_PROFILE_IMAGES,
+    }
+  ),
+  contentPublishingAuthorProfileBlock(
+    "author-profile-06",
+    "Tabs workspace — profile header with Posts, About, and Activity tabs.",
+    {
+      registryDependencies: ["avatar", "badge", "button", "separator", "tabs"],
+      images: AUTHOR_PROFILE_IMAGES,
+    }
+  ),
+  contentPublishingAuthorProfileBlock(
+    "author-profile-07",
+    "Minimal type bio — typography-first author listing without covers.",
+    {
+      registryDependencies: ["button"],
+      images: [],
+    }
+  ),
+  contentPublishingAuthorProfileBlock(
+    "author-profile-08",
+    "Team rail — horizontal snap carousel of contributor cards.",
+    {
+      registryDependencies: ["avatar", "button"],
+      images: AUTHOR_PROFILE_IMAGES,
+    }
+  ),
+  contentPublishingAuthorProfileBlock(
+    "author-profile-09",
+    "Stats dashboard — elevated profile with metric tiles and progress bars.",
+    {
+      registryDependencies: ["avatar", "button", "separator"],
+      images: AUTHOR_PROFILE_IMAGES,
+    }
+  ),
+  contentPublishingAuthorProfileBlock(
+    "author-profile-10",
+    "Social chip card — top-writer badge, follow/share group, and link chips.",
+    {
+      registryDependencies: ["avatar", "badge", "button", "button-group"],
+      images: AUTHOR_PROFILE_IMAGES,
+    }
+  ),
+  contentPublishingBlogGridBlock(
+    "blog-grid-01",
+    "Filter studio — cover cards with category chips, search, empty state, and pagination.",
+    {
+      registryDependencies: [
+        "avatar",
+        "badge",
+        "button",
+        "empty",
+        "input-group",
+        "pagination",
+      ],
+      images: BLOG_GRID_COVERS,
+    }
+  ),
+  contentPublishingBlogGridBlock(
+    "blog-grid-02",
+    "Featured split magazine — large lead cover, stacked up-next, and secondary grid.",
+    {
+      registryDependencies: ["avatar", "badge"],
+      images: BLOG_GRID_COVERS,
+    }
+  ),
+  contentPublishingBlogGridBlock(
+    "blog-grid-03",
+    "Bento mosaic — asymmetric magazine tiles with editor’s pick treatment.",
+    {
+      registryDependencies: ["badge"],
+      images: BLOG_GRID_COVERS,
+    }
+  ),
+  contentPublishingBlogGridBlock(
+    "blog-grid-04",
+    "Editorial archive — searchable hairline rows with thumbs and Latest/Popular sort.",
+    {
+      registryDependencies: ["badge", "button", "empty", "input-group"],
+      images: BLOG_GRID_COVERS,
+    }
+  ),
+  contentPublishingBlogGridBlock(
+    "blog-grid-05",
+    "Cinematic theater — scrim cover tiles with category pills and load more.",
+    {
+      registryDependencies: ["badge", "button"],
+      images: BLOG_GRID_COVERS,
+    }
+  ),
+  contentPublishingBlogGridBlock(
+    "blog-grid-06",
+    "Filter rail app shell — sticky category filters, sheet on mobile, cover card grid.",
+    {
+      registryDependencies: [
+        "avatar",
+        "badge",
+        "button",
+        "empty",
+        "input-group",
+        "sheet",
+      ],
+      images: BLOG_GRID_COVERS,
+    }
+  ),
+  contentPublishingBlogGridBlock(
+    "blog-grid-07",
+    "Type index — typography-first editorial listing with category chips.",
+    {
+      registryDependencies: ["button", "empty"],
+      images: [],
+    }
+  ),
+  contentPublishingBlogGridBlock(
+    "blog-grid-08",
+    "Topic rails — horizontal snap carousels per category with global search.",
+    {
+      registryDependencies: ["input-group"],
+      images: BLOG_GRID_COVERS,
+    }
+  ),
+  contentPublishingBlogGridBlock(
+    "blog-grid-09",
+    "Author atelier — people-first cards with follow toggle and soft covers.",
+    {
+      registryDependencies: ["avatar", "badge", "button"],
+      images: BLOG_GRID_COVERS,
+    }
+  ),
+  contentPublishingBlogGridBlock(
+    "blog-grid-10",
+    "Command density — search-forward list/grid toggle, badges, and pagination.",
+    {
+      registryDependencies: [
+        "badge",
+        "button",
+        "button-group",
+        "input-group",
+        "pagination",
+      ],
+      images: BLOG_GRID_COVERS,
+    }
+  ),
   {
     name: "changelog-01",
     type: "registry:block",
     title: "changelog-01",
     description:
-      "Changelog timeline — version cards with added/changed/fixed/removed badges and load-more.",
+      "Classic changelog timeline — Latest hero card, typed badges, and show-older load-more.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: ["badge", "button", "card", "separator"],
@@ -5466,6 +5947,74 @@ const registryItemsRaw = [
         path: "registry/blocks/content-publishing/changelog/changelog-01/changelog.tsx",
         type: "registry:component",
         target: "components/blocks/content-publishing/changelog-01/changelog.tsx",
+      },
+    ],
+  },
+  {
+    name: "changelog-02",
+    type: "registry:block",
+    title: "changelog-02",
+    description:
+      "Product update feed — sticky type filters and dense flat change rows.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: ["badge"],
+    files: [
+      {
+        path: "registry/blocks/content-publishing/changelog/changelog-02/changelog.tsx",
+        type: "registry:component",
+        target: "components/blocks/content-publishing/changelog-02/changelog.tsx",
+      },
+    ],
+  },
+  {
+    name: "changelog-03",
+    type: "registry:block",
+    title: "changelog-03",
+    description:
+      "Featured latest release panel with CTAs and compact earlier-release list.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: ["badge", "button", "separator"],
+    files: [
+      {
+        path: "registry/blocks/content-publishing/changelog/changelog-03/changelog.tsx",
+        type: "registry:component",
+        target: "components/blocks/content-publishing/changelog-03/changelog.tsx",
+      },
+    ],
+  },
+  {
+    name: "changelog-04",
+    type: "registry:block",
+    title: "changelog-04",
+    description:
+      "Magazine changelog — oversized latest version plus past-release card grid.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: ["badge", "button"],
+    files: [
+      {
+        path: "registry/blocks/content-publishing/changelog/changelog-04/changelog.tsx",
+        type: "registry:component",
+        target: "components/blocks/content-publishing/changelog-04/changelog.tsx",
+      },
+    ],
+  },
+  {
+    name: "changelog-05",
+    type: "registry:block",
+    title: "changelog-05",
+    description:
+      "Accordion version history with type filters and expandable change lists.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: ["badge", "collapsible"],
+    files: [
+      {
+        path: "registry/blocks/content-publishing/changelog/changelog-05/changelog.tsx",
+        type: "registry:component",
+        target: "components/blocks/content-publishing/changelog-05/changelog.tsx",
       },
     ],
   },
@@ -5510,7 +6059,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "reading-progress-01",
     description:
-      "Article reading progress — sticky primary bar, share actions, back-to-top, and inline percent card.",
+      "Classic reading progress — quiet sticky bar, share rail, back-to-top, and percent card.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: ["avatar", "badge"],
@@ -5520,6 +6069,78 @@ const registryItemsRaw = [
         type: "registry:component",
         target:
           "components/blocks/content-publishing/reading-progress-01/reading-progress.tsx",
+      },
+    ],
+  },
+  {
+    name: "reading-progress-02",
+    type: "registry:block",
+    title: "reading-progress-02",
+    description:
+      "Circular FAB reading progress — ring around back-to-top with compact share cluster.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: ["avatar", "badge"],
+    files: [
+      {
+        path: "registry/blocks/content-publishing/reading-progress/reading-progress-02/reading-progress.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/content-publishing/reading-progress-02/reading-progress.tsx",
+      },
+    ],
+  },
+  {
+    name: "reading-progress-03",
+    type: "registry:block",
+    title: "reading-progress-03",
+    description:
+      "Chapter-sync reading progress — sticky mini-TOC with active section and top bar.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: ["avatar", "badge"],
+    files: [
+      {
+        path: "registry/blocks/content-publishing/reading-progress/reading-progress-03/reading-progress.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/content-publishing/reading-progress-03/reading-progress.tsx",
+      },
+    ],
+  },
+  {
+    name: "reading-progress-04",
+    type: "registry:block",
+    title: "reading-progress-04",
+    description:
+      "Bottom-dock reading progress — percent, minutes left, and share/copy actions.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: ["avatar", "badge"],
+    files: [
+      {
+        path: "registry/blocks/content-publishing/reading-progress/reading-progress-04/reading-progress.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/content-publishing/reading-progress-04/reading-progress.tsx",
+      },
+    ],
+  },
+  {
+    name: "reading-progress-05",
+    type: "registry:block",
+    title: "reading-progress-05",
+    description:
+      "Minimal reading progress — hairline top bar and floating percent pill.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: ["avatar", "badge"],
+    files: [
+      {
+        path: "registry/blocks/content-publishing/reading-progress/reading-progress-05/reading-progress.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/content-publishing/reading-progress-05/reading-progress.tsx",
       },
     ],
   },
@@ -6816,9 +7437,37 @@ const registryItemsRaw = [
   },
   calendarSchedulingCalendarBlock(
     "calendar-01",
-    "Production calendar — month picker with event dots, day agenda, attendees, and create-event dialog (RTL/LTR).",
+    "Month + day agenda — category dots, create/edit dialog, attendees (RTL/LTR).",
     {
       images: ["sarah.webp", "alex.webp", "david.webp", "maria.webp"],
+    }
+  ),
+  calendarSchedulingCalendarBlock(
+    "calendar-02",
+    "Week timeline — hours × days grid, all-day strip, colored event bars (RTL/LTR).",
+    {
+      registryDependencies: ["badge", "button"],
+    }
+  ),
+  calendarSchedulingCalendarBlock(
+    "calendar-03",
+    "Day focus — mini-month side rail and timed agenda timeline (RTL/LTR).",
+    {
+      registryDependencies: ["badge", "button", "calendar", "separator"],
+    }
+  ),
+  calendarSchedulingCalendarBlock(
+    "calendar-04",
+    "Public booking — service type, day chips, time slots, and confirm (RTL/LTR).",
+    {
+      registryDependencies: ["badge", "button", "separator"],
+    }
+  ),
+  calendarSchedulingCalendarBlock(
+    "calendar-05",
+    "Team week — people lanes with busy overlays Mon–Fri (RTL/LTR).",
+    {
+      registryDependencies: ["avatar", "badge", "button"],
     }
   ),
   onboardingSetupWizardBlock(
@@ -7083,40 +7732,118 @@ const registryItemsRaw = [
   },
   searchFilteringSearchResultsBlock(
     "search-results-01",
-    "Search results page — query bar, type sidebar, sort, pagination, and empty state."
+    "Knowledge SERP — start-edge type filters, sort, hit list, pagination, and empty state (RTL/LTR)."
   ),
-  {
-    name: "filter-panel-01",
-    type: "registry:block",
-    title: "filter-panel-01",
-    description:
-      "Report filter panel — date range, multi-select dimensions, dual-thumb sliders, and saved presets.",
-    cssVars: SOFT_SURFACE_CSS_VARS,
-    dependencies: ["lucide-react"],
-    registryDependencies: [
-      "badge",
-      "button",
-      "card",
-      "input",
-      "label",
-      "popover",
-      "slider",
-    ],
-    files: [
-      {
-        path: "registry/blocks/search-filtering/filter-panel/filter-panel-01/filter-panel.tsx",
-        type: "registry:component",
-        target:
-          "components/blocks/search-filtering/filter-panel-01/filter-panel.tsx",
-      },
-    ],
-  },
+  searchFilteringSearchResultsBlock(
+    "search-results-02",
+    "Product PLP SERP — search, category pills, sort, and product card grid (RTL/LTR).",
+    {
+      registryDependencies: [
+        "badge",
+        "button",
+        "input-group",
+        "select",
+      ],
+    }
+  ),
+  searchFilteringSearchResultsBlock(
+    "search-results-03",
+    "People directory — role/dept checkboxes, avatar rows, status, message and invite (RTL/LTR).",
+    {
+      registryDependencies: [
+        "avatar",
+        "badge",
+        "button",
+        "checkbox",
+        "input-group",
+        "label",
+        "separator",
+      ],
+    }
+  ),
+  searchFilteringSearchResultsBlock(
+    "search-results-04",
+    "Advanced search results — SERP list, active chips, and compact Edit filters panel (RTL/LTR).",
+    {
+      registryDependencies: [
+        "badge",
+        "button",
+        "checkbox",
+        "input-group",
+        "label",
+        "select",
+        "separator",
+      ],
+    }
+  ),
+  searchFilteringFilterPanelBlock(
+    "filter-panel-01",
+    "SaaS report filters — date range, multi-select dimensions, numeric sliders, and saved presets (RTL/LTR)."
+  ),
+  searchFilteringFilterPanelBlock(
+    "filter-panel-02",
+    "Standalone ecommerce facet accordion — categories, brands, price, rating, color/size (RTL/LTR).",
+    {
+      registryDependencies: [
+        "accordion",
+        "badge",
+        "button",
+        "checkbox",
+        "label",
+        "slider",
+      ],
+    }
+  ),
+  searchFilteringFilterPanelBlock(
+    "filter-panel-03",
+    "Data-table filter toolbar — status/priority/assignee popovers, active chips, and task table (RTL/LTR).",
+    {
+      registryDependencies: [
+        "badge",
+        "button",
+        "popover",
+        "separator",
+        "table",
+      ],
+    }
+  ),
+  searchFilteringFilterPanelBlock(
+    "filter-panel-04",
+    "Chip strip + All filters sheet — applied chips, dense facets, no SERP listings (RTL/LTR).",
+    {
+      registryDependencies: [
+        "badge",
+        "button",
+        "checkbox",
+        "label",
+        "separator",
+        "sheet",
+        "slider",
+        "switch",
+      ],
+    }
+  ),
+  searchFilteringFilterPanelBlock(
+    "filter-panel-05",
+    "Job filter sidebar as hero — location, salary, remote, experience; muted preview strip (RTL/LTR).",
+    {
+      registryDependencies: [
+        "badge",
+        "button",
+        "checkbox",
+        "label",
+        "separator",
+        "slider",
+        "switch",
+      ],
+    }
+  ),
   {
     name: "billing-history-01",
     type: "registry:block",
     title: "billing-history-01",
     description:
-      "Transaction history — search and status/type filters, paginated table, and empty state.",
+      "Transaction ledger — metric strip, search/filters, paginated table, and row actions (RTL/LTR).",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: [
@@ -7124,6 +7851,7 @@ const registryItemsRaw = [
       "badge",
       "button",
       "card",
+      "dropdown-menu",
       "empty",
       "input-group",
       "select",
@@ -7138,15 +7866,82 @@ const registryItemsRaw = [
       },
     ],
   },
+  {
+    name: "billing-history-02",
+    type: "registry:block",
+    title: "billing-history-02",
+    description:
+      "Invoice archive — month-grouped statements with status badges and PDF download (RTL/LTR).",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: ["badge", "button", "separator"],
+    files: [
+      {
+        path: "registry/blocks/payments-billing/billing-history/billing-history-02/billing-history.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/payments-billing/billing-history-02/billing-history.tsx",
+      },
+    ],
+  },
+  {
+    name: "billing-history-03",
+    type: "registry:block",
+    title: "billing-history-03",
+    description:
+      "Receipt inspector — invoice list, line items, totals, and copy/print/PDF actions (RTL/LTR).",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: ["badge", "button", "separator"],
+    files: [
+      {
+        path: "registry/blocks/payments-billing/billing-history/billing-history-03/billing-history.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/payments-billing/billing-history-03/billing-history.tsx",
+      },
+    ],
+  },
   paymentsBillingSettingsBlock(
     "billing-settings-01",
-    "Billing settings — plan card, payment method, invoice history table, and card-expiry alert."
+    "Compact billing overview — plan, Visa on file, and recent invoices (RTL/LTR).",
+    {
+      registryDependencies: ["badge", "button", "separator"],
+      images: ["visa.webp"],
+    }
   ),
   paymentsBillingSettingsBlock(
     "billing-settings-02",
-    "Compact billing panel — plan, payment method, and invoice list in one surface.",
+    "Billing preferences — email, receipt and renewal toggles (RTL/LTR).",
     {
-      registryDependencies: ["badge", "button", "separator"],
+      registryDependencies: [
+        "badge",
+        "button",
+        "field",
+        "input",
+        "separator",
+        "switch",
+      ],
+    }
+  ),
+  paymentsBillingSettingsBlock(
+    "billing-settings-03",
+    "Change plan — selectable Starter/Pro/Team radios with current badge (RTL/LTR).",
+    {
+      registryDependencies: ["badge", "button", "radio-group", "separator"],
+    }
+  ),
+  paymentsBillingSettingsBlock(
+    "billing-settings-04",
+    "Company & tax — legal name, billing address, country, and tax ID (RTL/LTR).",
+    {
+      registryDependencies: [
+        "button",
+        "field",
+        "input",
+        "select",
+        "separator",
+      ],
     }
   ),
   paymentsUsageBasedBillingBlock(
@@ -7209,15 +8004,107 @@ const registryItemsRaw = [
   ),
   paymentsTransferFundsBlock(
     "transfer-funds-01",
-    "Transfer funds — details, review, and success steps with account and recipient select."
+    "Instant wallet transfer — Details → Review → Done with source currency, fee/arrival, and receipt (RTL/LTR)."
+  ),
+  paymentsTransferFundsBlock(
+    "transfer-funds-02",
+    "Scheduled transfer — from/to, amount, Once/Weekly/Monthly, start date, and next-run review strip (RTL/LTR).",
+    {
+      registryDependencies: [
+        "badge",
+        "button",
+        "field",
+        "input",
+        "input-group",
+        "label",
+        "radio-group",
+        "select",
+        "separator",
+      ],
+    }
+  ),
+  paymentsTransferFundsBlock(
+    "transfer-funds-03",
+    "International wire — beneficiary IBAN/BIC, USD→EUR FX quote, fee, compliance note, and confirm (RTL/LTR).",
+    {
+      registryDependencies: [
+        "alert",
+        "badge",
+        "button",
+        "field",
+        "input",
+        "input-group",
+        "separator",
+      ],
+    }
   ),
   paymentsInvoiceBlock(
     "invoice-01",
-    "Invoice receipt — line items, totals, paid badge, and print / download actions."
+    "Paid EU VAT invoice — From/Bill to, VAT line columns, totals, card receipt (RTL/LTR)."
+  ),
+  paymentsInvoiceBlock(
+    "invoice-02",
+    "Open VAT invoice — due banner, full tax table, SEPA IBAN/BIC payment panel (RTL/LTR).",
+    {
+      registryDependencies: ["alert", "badge", "button", "separator", "table"],
+    }
+  ),
+  paymentsInvoiceBlock(
+    "invoice-03",
+    "Reverse-charge B2B tax invoice — dual VAT IDs, 0% lines, legal note, wire instructions (RTL/LTR).",
+    {
+      registryDependencies: ["alert", "badge", "button", "separator", "table"],
+    }
+  ),
+  paymentsInvoiceBlock(
+    "invoice-04",
+    "Compact thermal receipt — narrow max-w-sm, qty×price lines, QR-style payment ref (RTL/LTR).",
+    {
+      registryDependencies: ["badge", "button", "separator"],
+    }
+  ),
+  paymentsInvoiceBlock(
+    "invoice-05",
+    "Formal signed VAT invoice — dense PO/project meta, dual VAT, signature line and company stamp (RTL/LTR)."
+  ),
+  paymentsInvoiceBlock(
+    "invoice-06",
+    "Wide branded sales statement — primary rail, ship-to + bill-to, mixed 21%/9% VAT summary (RTL/LTR)."
   ),
   paymentsPaymentMethodsBlock(
     "payment-methods-01",
-    "Cards & wallets — main/euro balances, physical card with reveal, and recent activity list."
+    "Cards & wallets — balances, Visa physical card with reveal/freeze, and recent activity (RTL/LTR).",
+    {
+      registryDependencies: ["badge", "button", "dropdown-menu"],
+      images: ["visa.webp"],
+    }
+  ),
+  paymentsPaymentMethodsBlock(
+    "payment-methods-02",
+    "Saved methods manager — Visa/Mastercard/Amex/PayPal/ACH, default badge, set default and remove (RTL/LTR).",
+    {
+      registryDependencies: ["badge", "button", "dropdown-menu", "separator"],
+      images: [
+        "visa.webp",
+        "master.webp",
+        "american-express.webp",
+        "paypal.webp",
+      ],
+    }
+  ),
+  paymentsPaymentMethodsBlock(
+    "payment-methods-03",
+    "Add card dialog — primary Visa card chrome with open add-card form and brand strip (RTL/LTR).",
+    {
+      registryDependencies: [
+        "badge",
+        "button",
+        "dialog",
+        "field",
+        "input",
+      ],
+      images: ["visa.webp", "master.webp", "american-express.webp"],
+    }
   ),
   feedbackAccessDeniedBlock(
     "access-denied-01",
@@ -8677,22 +9564,125 @@ const registryItemsRaw = [
   ),
   filesMediaDataExportBlock(
     "data-export-01",
-    "Data export panel — format cards, collapsible field groups, progress, and success state."
+    "Full export panel — format cards, collapsible field groups, progress, and success (RTL/LTR)."
   ),
   filesMediaDataExportBlock(
     "data-export-02",
-    "Minimal export dialog — format, date range, headers checkbox, and Export.",
+    "Compact export card — format, date range, headers checkbox, and Export (RTL/LTR).",
     {
       registryDependencies: ["button", "checkbox", "label", "select"],
+    }
+  ),
+  filesMediaDataExportBlock(
+    "data-export-03",
+    "Scheduled export — frequency radios, format, email delivery, PII switch (RTL/LTR).",
+    {
+      registryDependencies: [
+        "badge",
+        "button",
+        "field",
+        "input",
+        "label",
+        "radio-group",
+        "select",
+        "separator",
+        "switch",
+      ],
+    }
+  ),
+  filesMediaDataExportBlock(
+    "data-export-04",
+    "Export history — ready/processing/failed/expired jobs with download and retry (RTL/LTR).",
+    {
+      registryDependencies: ["badge", "button", "separator"],
     }
   ),
   filesMediaFileManagerBlock(
     "file-manager-01",
     "Drive-style file manager — sidebar nav, breadcrumbs, storage meter, and grid or list views."
   ),
+  filesMediaFileManagerBlock(
+    "file-manager-02",
+    "Finder / Explorer — folder tree, path bar, dense table, and status line (RTL/LTR).",
+    {
+      registryDependencies: [
+        "button",
+        "scroll-area",
+        "separator",
+        "table",
+      ],
+    }
+  ),
+  filesMediaFileManagerBlock(
+    "file-manager-03",
+    "Shared team folder — member strip, ACL badges, invite/copy link, and access table (RTL/LTR).",
+    {
+      registryDependencies: [
+        "avatar",
+        "badge",
+        "button",
+        "dropdown-menu",
+        "table",
+      ],
+    }
+  ),
+  filesMediaFileManagerBlock(
+    "file-manager-04",
+    "Details inspector — file list with end-side properties panel and actions (RTL/LTR).",
+    {
+      registryDependencies: [
+        "avatar",
+        "badge",
+        "button",
+        "separator",
+      ],
+    }
+  ),
+  filesMediaFileManagerBlock(
+    "file-manager-05",
+    "Compact file picker dialog — breadcrumbs, multi-select list, Cancel/Attach (RTL/LTR).",
+    {
+      registryDependencies: [
+        "badge",
+        "button",
+        "dialog",
+        "scroll-area",
+      ],
+    }
+  ),
   filesMediaFileUploadBlock(
     "file-upload-01",
-    "Drag-and-drop upload zone with type badges, per-file progress, and clear / upload actions."
+    "Multi-file drop zone — accept/size validation, progress queue, error retry, and mock upload (RTL/LTR).",
+    {
+      registryDependencies: ["alert", "badge", "button", "progress"],
+    }
+  ),
+  filesMediaFileUploadBlock(
+    "file-upload-02",
+    "Product photo batch — image drop zone, thumbnail grid, cover mark, and upload progress (RTL/LTR).",
+    {
+      registryDependencies: ["badge", "button", "progress"],
+    }
+  ),
+  filesMediaFileUploadBlock(
+    "file-upload-03",
+    "Single document slot — PDF/CSV empty or filled state with replace and remove (RTL/LTR).",
+    {
+      registryDependencies: ["badge", "button"],
+    }
+  ),
+  filesMediaFileUploadBlock(
+    "file-upload-04",
+    "Dialog uploader — drop zone, attachment rows, error retry, and cancel/upload footer (RTL/LTR).",
+    {
+      registryDependencies: [
+        "attachment",
+        "badge",
+        "button",
+        "dialog",
+        "progress",
+      ],
+    }
   ),
   filesMediaMediaGalleryBlock(
     "media-gallery-01",
@@ -8714,8 +9704,128 @@ const registryItemsRaw = [
   ),
   filesMediaMediaPlayerBlock(
     "media-player-01",
-    "Video showcase — local silent nature film, copy panel, metadata, and play CTA.",
-    ["flower.mp4"]
+    "Feature-dense watch player — scrubber, ±10s, volume, captions, speed/quality menu, fullscreen (RTL/LTR).",
+    ["flower.mp4"],
+    {
+      registryDependencies: [
+        "badge",
+        "button",
+        "dropdown-menu",
+        "slider",
+      ],
+    }
+  ),
+  filesMediaMediaPlayerBlock(
+    "media-player-02",
+    "Immersive cinema player — center play, skip intro, next-episode card, large scrub (RTL/LTR).",
+    ["flower.mp4"],
+    { registryDependencies: ["button", "slider"] }
+  ),
+  filesMediaMediaPlayerBlock(
+    "media-player-03",
+    "Clean embed player — minimal progress bar, play, fullscreen, elegant title (RTL/LTR).",
+    ["flower.mp4"],
+    { registryDependencies: ["button"] }
+  ),
+  filesMediaMediaPlayerBlock(
+    "media-player-04",
+    "Live stream + chat rail — LIVE badge, DVR scrubber, go-to-live, mock chat (RTL/LTR).",
+    ["flower.mp4"],
+    {
+      registryDependencies: [
+        "badge",
+        "button",
+        "input",
+        "scroll-area",
+        "slider",
+      ],
+    }
+  ),
+  filesMediaMediaPlayerBlock(
+    "media-player-05",
+    "Streaming next-up — episode chrome with countdown autoplay overlay and cancel (RTL/LTR).",
+    ["flower.mp4"],
+    { registryDependencies: ["button", "progress", "slider"] }
+  ),
+  filesMediaMediaPlayerBlock(
+    "media-player-06",
+    "Info panel player — cast, trivia, chapter seek list beside the frame (RTL/LTR).",
+    ["flower.mp4"],
+    { registryDependencies: ["badge", "button", "separator", "slider"] }
+  ),
+  filesMediaMediaPlayerBlock(
+    "media-player-07",
+    "Course lesson player — playlist sidebar, prev/next, speed select (RTL/LTR).",
+    ["flower.mp4"],
+    { registryDependencies: ["badge", "button", "select", "slider"] }
+  ),
+  filesMediaMediaPlayerBlock(
+    "media-player-08",
+    "Share embed — chapter chips, copy link, share, watch again (RTL/LTR).",
+    ["flower.mp4"],
+    { registryDependencies: ["badge", "button", "separator"] }
+  ),
+  filesMediaMediaPlayerBlock(
+    "media-player-09",
+    "Vertical short — 9:16 frame, side actions, caption overlay (RTL/LTR).",
+    ["flower.mp4"],
+    { registryDependencies: ["button"] }
+  ),
+  filesMediaMediaPlayerBlock(
+    "media-player-10",
+    "Mini dock / PiP — floating card closed by default, transport bar, expand (RTL/LTR).",
+    ["flower.mp4"],
+    { registryDependencies: ["button", "slider"] }
+  ),
+  filesMediaMusicPlayerBlock(
+    "music-player-01",
+    "Minimal audio bar — play, title, seek (RTL/LTR)."
+  ),
+  filesMediaMusicPlayerBlock(
+    "music-player-02",
+    "Classic cover card — art, transport, scrubber (RTL/LTR)."
+  ),
+  filesMediaMusicPlayerBlock(
+    "music-player-03",
+    "Streaming now-playing — dark canvas, green accent, shuffle/repeat/like (RTL/LTR)."
+  ),
+  filesMediaMusicPlayerBlock(
+    "music-player-04",
+    "Waveform scrubber — vertical bars that animate while playing (RTL/LTR)."
+  ),
+  filesMediaMusicPlayerBlock(
+    "music-player-05",
+    "Lock-screen style — large cover, blurred gradient mesh, Playing Next (RTL/LTR)."
+  ),
+  filesMediaMusicPlayerBlock(
+    "music-player-06",
+    "Neon equalizer — glowing bars, fuchsia/cyan chrome (RTL/LTR)."
+  ),
+  filesMediaMusicPlayerBlock(
+    "music-player-07",
+    "Synced lyrics — tappable scrolling lines with active highlight (RTL/LTR)."
+  ),
+  filesMediaMusicPlayerBlock(
+    "music-player-08",
+    "Soft pastel player — round cover, pink theme, heart (RTL/LTR)."
+  ),
+  filesMediaMusicPlayerBlock(
+    "music-player-09",
+    "Cover-forward immersive — full-bleed art with overlay transport (RTL/LTR)."
+  ),
+  filesMediaMusicPlayerBlock(
+    "music-player-10",
+    "Bottom mini dock — closed until Start listening (RTL/LTR)."
+  ),
+  filesMediaMusicPlayerBlock(
+    "music-player-11",
+    "One UI-style phone player — large rounded art, blue play (RTL/LTR)."
+  ),
+  filesMediaMusicPlayerBlock(
+    "music-player-12",
+    "Queue + now playing — up-next list with active row (RTL/LTR).",
+    ["demo.wav"],
+    { registryDependencies: ["badge", "button", "separator", "slider"] }
   ),
   filesMediaGalleryBlock(
     "gallery-01",
@@ -12822,36 +13932,6 @@ const registryItemsRaw = [
         path: "registry/charts/area/chart-area-icons.tsx",
         type: "registry:component",
         target: "components/charts/chart-area-icons.tsx",
-      },
-    ],
-  },
-  {
-    name: "chart-area-gradient",
-    type: "registry:chart",
-    title: "Area Gradient",
-    description:
-      "Classic stacked Store×Online natural areas with neon glow gradients (style-vega) — locked chrome, metric scrubber, RTL-aware.",
-    dependencies: ["recharts"],
-    registryDependencies: ["chart", "chart-styles"],
-    cssVars: {
-      light: {
-        "chart-1": "#1e3a8a",
-        "chart-2": "#ea580c",
-        "chart-up": "#16a34a",
-        "chart-down": "#e11d48",
-      },
-      dark: {
-        "chart-1": "#3b82f6",
-        "chart-2": "#f97316",
-        "chart-up": "#4ade80",
-        "chart-down": "#f25f70",
-      },
-    },
-    files: [
-      {
-        path: "registry/charts/area/chart-area-gradient.tsx",
-        type: "registry:component",
-        target: "components/charts/chart-area-gradient.tsx",
       },
     ],
   },

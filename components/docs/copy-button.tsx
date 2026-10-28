@@ -15,7 +15,7 @@ export function CopyButton({
   value,
   className,
   tooltip = true,
-  tooltipSide = "bottom",
+  tooltipSide = "top",
   tooltipIdle = "Copy",
   tooltipCopied = "Copied",
   tone = "code",

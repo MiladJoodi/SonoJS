@@ -5,6 +5,7 @@ import {
   ChevronDownIcon,
   PlusIcon,
   RefreshCwIcon,
+  SparklesIcon,
   TagIcon,
   Trash2Icon,
   WrenchIcon,
@@ -204,14 +205,14 @@ export default function Changelog({
   return (
     <section
       className={cn(
-        "w-full min-w-0 bg-canvas py-16 text-foreground sm:py-24",
+        "min-h-svh w-full min-w-0 bg-white py-16 text-foreground dark:bg-background sm:py-20",
         className
       )}
       aria-labelledby="changelog-01-heading"
       {...props}
     >
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-12 text-start">
+        <div className="mb-10 text-start sm:mb-12">
           <div className="mb-3 flex items-center gap-3">
             <div className="flex size-10 items-center justify-center rounded-[12px] bg-primary/10">
               <TagIcon className="size-5 text-primary" aria-hidden />
@@ -237,9 +238,7 @@ export default function Changelog({
           <div className="flex flex-col">
             {displayedReleases.map((release, idx) => (
               <div key={release.version} className="relative">
-                {idx > 0 ? (
-                  <Separator className="my-8 sm:ms-10" />
-                ) : null}
+                {idx > 0 ? <Separator className="my-7 sm:ms-10" /> : null}
 
                 <div className="flex gap-4 sm:gap-6">
                   <div className="hidden shrink-0 flex-col items-center sm:flex">
@@ -247,23 +246,28 @@ export default function Changelog({
                       className={cn(
                         "relative z-10 flex size-10 items-center justify-center rounded-full border-2",
                         release.latest
-                          ? "border-primary bg-primary/10"
+                          ? "border-primary bg-primary text-primary-foreground shadow-soft"
                           : "border-border bg-card"
                       )}
                     >
-                      <TagIcon
-                        className={cn(
-                          "size-4",
-                          release.latest
-                            ? "text-primary"
-                            : "text-muted-foreground"
-                        )}
-                        aria-hidden
-                      />
+                      {release.latest ? (
+                        <SparklesIcon className="size-4" aria-hidden />
+                      ) : (
+                        <TagIcon
+                          className="size-4 text-muted-foreground"
+                          aria-hidden
+                        />
+                      )}
                     </div>
                   </div>
 
-                  <Card className="flex-1 transition-colors hover:border-primary/30">
+                  <Card
+                    className={cn(
+                      "flex-1 transition-colors hover:border-primary/30",
+                      release.latest &&
+                        "border-primary/35 shadow-soft ring-1 ring-primary/15"
+                    )}
+                  >
                     <CardContent className="flex flex-col gap-4 p-5 sm:p-6">
                       <div className="text-start">
                         <div className="mb-2 flex flex-wrap items-center gap-2">
@@ -296,8 +300,8 @@ export default function Changelog({
                         </CardDescription>
                       </div>
 
-                      <div className="rounded-[12px] bg-muted/50 p-4">
-                        <ul className="space-y-2" role="list">
+                      <div className="rounded-[12px] border border-border/60 bg-muted/40 p-4">
+                        <ul className="space-y-2.5" role="list">
                           {release.changes.map((change, ci) => {
                             const cfg = CHANGE_CONFIG[change.type]
                             const Icon = cfg.icon

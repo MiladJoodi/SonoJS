@@ -57,7 +57,7 @@ function ProgressFill({
   return (
     <div
       className={cn(
-        "h-full rounded-full bg-primary shadow-[0_0_12px_color-mix(in_oklab,var(--primary)_45%,transparent)] transition-[width] duration-150 ease-out",
+        "h-full rounded-full bg-primary transition-[width] duration-150 ease-out",
         className
       )}
       style={{ width: `${progress}%` }}
@@ -68,7 +68,7 @@ function ProgressFill({
 function ReadingProgressBar({ progress }: { progress: number }) {
   return (
     <div
-      className="sticky top-0 z-50 h-1.5 w-full bg-primary/15"
+      className="sticky top-0 z-50 h-1 w-full bg-muted"
       role="progressbar"
       aria-valuenow={Math.round(progress)}
       aria-valuemin={0}
@@ -190,7 +190,7 @@ export default function ReadingProgress({
   return (
     <section
       className={cn(
-        "relative w-full min-w-0 bg-canvas text-foreground",
+        "relative min-h-svh w-full min-w-0 bg-white text-foreground dark:bg-background",
         className
       )}
       {...props}
@@ -201,9 +201,7 @@ export default function ReadingProgress({
       {showBackToTop ? (
         <button
           type="button"
-          onClick={() =>
-            window.scrollTo({ top: 0, behavior: "smooth" })
-          }
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           className="fixed end-8 bottom-8 z-40 flex size-12 cursor-pointer items-center justify-center rounded-full bg-primary text-primary-foreground shadow-soft transition-transform hover:scale-105 active:scale-95"
           aria-label="Back to top"
         >
@@ -243,10 +241,7 @@ export default function ReadingProgress({
             </p>
             <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
               <span dir="ltr">{ARTICLE.date}</span>
-              <span
-                className="size-1 rounded-full bg-border"
-                aria-hidden
-              />
+              <span className="size-1 rounded-full bg-border" aria-hidden />
               <span className="inline-flex items-center gap-1">
                 <BookOpenIcon className="size-3" aria-hidden />
                 {ARTICLE.readTime}
@@ -303,7 +298,7 @@ export default function ReadingProgress({
               {Math.round(progress)}%
             </p>
           </div>
-          <div className="h-2.5 overflow-hidden rounded-full bg-primary/15">
+          <div className="h-2 overflow-hidden rounded-full bg-muted">
             <ProgressFill progress={progress} />
           </div>
           {progress >= 95 ? (

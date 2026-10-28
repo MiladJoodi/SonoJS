@@ -385,7 +385,17 @@
     }
   }
 
+  @keyframes rainbow {
+    0% {
+      background-position: 0%;
+    }
+    100% {
+      background-position: 200%;
+    }
+  }
+
   --animate-caret-blink: caret-blink 1.25s ease-out infinite;
+  --animate-rainbow: rainbow var(--speed, 2s) infinite linear;
 
   --breakpoint-3xl: 1600px;
   --font-sans: var(--font-sono-sans);
@@ -577,6 +587,12 @@
   --chart-up: #16a34a;
   --chart-down: #e11d48;
   --chart-mute: #52525b;
+  /* Rainbow button spectrum */
+  --color-1: hsl(0 100% 63%);
+  --color-2: hsl(270 100% 63%);
+  --color-3: hsl(210 100% 63%);
+  --color-4: hsl(195 100% 63%);
+  --color-5: hsl(90 100% 63%);
   --sidebar: #ffffff;
   --sidebar-foreground: #09090b;
   --sidebar-primary: #2563eb;
@@ -650,6 +666,12 @@ html:has([data-block-embed]) body {
   --chart-up: #4ade80;
   --chart-down: #f25f70;
   --chart-mute: #d4d4d8;
+  /* Rainbow button spectrum */
+  --color-1: hsl(0 100% 63%);
+  --color-2: hsl(270 100% 63%);
+  --color-3: hsl(210 100% 63%);
+  --color-4: hsl(195 100% 63%);
+  --color-5: hsl(90 100% 63%);
   --sidebar: #09090b;
   --sidebar-foreground: #fafafa;
   --sidebar-primary: #396ef0;

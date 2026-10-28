@@ -10,7 +10,6 @@ import {
 import { useTheme } from "next-themes"
 import { Area, AreaChart as RechartsAreaChart } from "recharts"
 
-import { chime, tick, tone } from "@/components/home/hero-showcase-audio"
 import { ChartContainer, type ChartConfig } from "@/components/ui/chart"
 import {
   MARKET_UP,
@@ -127,7 +126,6 @@ export function ShowcaseLoginPreview({
           type="button"
           onClick={() => {
             setSignedIn(true)
-            chime()
           }}
           className="mt-1 flex h-[42px] w-full cursor-pointer items-center justify-center rounded-[10px] bg-primary text-sm font-medium text-primary-foreground transition-transform active:scale-[0.98]"
         >
@@ -182,7 +180,6 @@ export function ShowcasePricingPreview({
               aria-pressed={plan === i}
               onClick={() => {
                 setPlan(i)
-                tick()
               }}
               className={cn(
                 "h-[30px] flex-1 cursor-pointer rounded-[7px] text-[13px] font-medium transition-colors",
@@ -211,7 +208,6 @@ export function ShowcasePricingPreview({
               title={b.label}
               onClick={() => {
                 setYearly(b.yr)
-                tick()
               }}
               className={cn(
                 "h-[30px] flex-1 cursor-pointer rounded-[7px] px-1 text-[12px] font-medium transition-colors sm:text-[13px]",
@@ -268,8 +264,6 @@ const EQ_BARS = Array.from({ length: 13 }, (_, b) => ({
   d: -(b * 0.08),
 }))
 
-const PLAYER_NOTES = [392, 440, 523.25, 587.33, 659.25, 783.99]
-
 const PLAYER_TRACKS = [
   { title: "Low tide", artist: "Sono Sessions" },
   { title: "Night drive", artist: "Sono Sessions" },
@@ -309,14 +303,6 @@ export function ShowcasePlayerPreview({
       elapsedRef.current += 0.32
       if (elapsedRef.current >= 204) elapsedRef.current = 0
       setElapsed(elapsedRef.current)
-      if (Math.random() < 0.75) {
-        tone(
-          PLAYER_NOTES[Math.floor(Math.random() * PLAYER_NOTES.length)]!,
-          0,
-          0.5,
-          0.03
-        )
-      }
     }, 320)
 
     return () => {
@@ -334,9 +320,6 @@ export function ShowcasePlayerPreview({
     setElapsed(0)
     setPlaying(true)
     setPlayGen((g) => g + 1)
-    tick()
-    // Fresh track feel — lead-in note from the start
-    tone(PLAYER_NOTES[0]!, 0, 0.35, 0.04)
   }
 
   const current = PLAYER_TRACKS[track]!
@@ -404,7 +387,6 @@ export function ShowcasePlayerPreview({
                 aria-label={playing ? "Pause" : "Play"}
                 onClick={() => {
                   setPlaying((p) => !p)
-                  tick()
                 }}
                 className={cn(
                   "grid size-10 cursor-pointer place-items-center rounded-full bg-primary text-primary-foreground transition-transform active:scale-[0.96]",
@@ -480,7 +462,6 @@ export function ShowcasePalettePreview({
 
   function run(name: string) {
     setToast(`Ran: ${name}`)
-    chime()
     if (name === "Switch theme") {
       setTheme(resolvedTheme === "dark" ? "light" : "dark")
     }
@@ -493,7 +474,6 @@ export function ShowcasePalettePreview({
           value={q}
           onChange={(e) => {
             setQ(e.target.value)
-            tick()
           }}
           onKeyDown={(e) => {
             if (e.key === "Enter" && filtered[0]) run(filtered[0][0])

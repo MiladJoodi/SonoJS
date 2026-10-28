@@ -158,7 +158,7 @@ export default function DataExport({
   return (
     <main
       className={cn(
-        "flex w-full min-w-0 items-start justify-center bg-canvas px-4 py-10 text-foreground sm:px-6",
+        "flex w-full min-w-0 items-start justify-center bg-white px-4 py-10 text-foreground dark:bg-background sm:px-6",
         className
       )}
       {...props}
@@ -206,10 +206,10 @@ export default function DataExport({
                 </AlertDescription>
               </Alert>
               <div className="flex flex-wrap justify-center gap-3">
-                <Button type="button" onClick={reset}>
+                <Button type="button" className="cursor-pointer" onClick={reset}>
                   Export another
                 </Button>
-                <Button type="button" variant="outline">
+                <Button type="button" variant="outline" className="cursor-pointer gap-2">
                   <DownloadIcon className="size-4" aria-hidden />
                   Download again
                 </Button>
@@ -305,7 +305,7 @@ export default function DataExport({
                               type="button"
                               variant="ghost"
                               size="icon-sm"
-                              className="size-8"
+                              className="size-8 cursor-pointer"
                               aria-label={
                                 expanded
                                   ? `Collapse ${group}`
@@ -378,12 +378,17 @@ export default function DataExport({
                 ~1,234 records · {selectedFmt.ext}
               </p>
               <div className="flex flex-wrap gap-3">
-                <Button type="button" variant="ghost" onClick={reset}>
+                <Button
+                  type="button"
+                  variant="ghost"
+                  className="cursor-pointer"
+                  onClick={reset}
+                >
                   Cancel
                 </Button>
                 <Button
                   type="button"
-                  className="min-w-28"
+                  className="min-w-28 cursor-pointer gap-2 disabled:cursor-not-allowed"
                   disabled={
                     exportState === "exporting" || selectedFields.size === 0
                   }

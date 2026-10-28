@@ -15,10 +15,19 @@ import {
   UsersIcon,
 } from "lucide-react"
 
-import { Avatar, AvatarFallback } from "@sonojs/ui/components/avatar"
+import { Avatar, AvatarFallback, AvatarImage } from "@sonojs/ui/components/avatar"
 import { Badge } from "@sonojs/ui/components/badge"
 import { Button } from "@sonojs/ui/components/button"
 import { cn } from "@/lib/utils"
+
+import portrait01 from "./images/portrait-01.webp"
+import portrait02 from "./images/portrait-02.webp"
+import portrait03 from "./images/portrait-03.webp"
+import portrait04 from "./images/portrait-04.webp"
+
+function assetSrc(asset: string | { src: string }) {
+  return typeof asset === "string" ? asset : asset.src
+}
 
 type SocialLink = {
   icon: React.ComponentType<{ className?: string; "aria-hidden"?: boolean }>
@@ -39,7 +48,7 @@ type Author = {
   followers: number
   following: number
   posts: number
-  band: "primary" | "muted" | "emerald"
+  portrait: string
   links: SocialLink[]
   tags: string[]
   recentPosts: { title: string; likes: number; comments: number }[]
@@ -60,13 +69,13 @@ const AUTHORS: Author[] = [
     followers: 12400,
     following: 384,
     posts: 142,
-    band: "primary",
+    portrait: assetSrc(portrait01),
     links: [
       { icon: Link2Icon, label: "GitHub", href: "#" },
       { icon: GlobeIcon, label: "Website", href: "#" },
       { icon: RssIcon, label: "Newsletter", href: "#" },
     ],
-    tags: ["React", "TypeScript", "Design Systems", "Open Source"],
+    tags: ["React", "TypeScript", "Design Systems"],
     recentPosts: [
       {
         title: "Why I switched from CSS Modules to utility-first CSS",
@@ -77,11 +86,6 @@ const AUTHORS: Author[] = [
         title: "Building accessible component libraries from scratch",
         likes: 312,
         comments: 21,
-      },
-      {
-        title: "The real cost of design system maintenance",
-        likes: 195,
-        comments: 18,
       },
     ],
     featured: true,
@@ -99,12 +103,12 @@ const AUTHORS: Author[] = [
     followers: 8700,
     following: 220,
     posts: 89,
-    band: "muted",
+    portrait: assetSrc(portrait02),
     links: [
       { icon: Link2Icon, label: "GitHub", href: "#" },
       { icon: GlobeIcon, label: "Website", href: "#" },
     ],
-    tags: ["Rust", "Performance", "Bundlers", "React"],
+    tags: ["Rust", "Performance", "Bundlers"],
     recentPosts: [
       {
         title: "Profiling React renders: a practical guide",
@@ -131,12 +135,12 @@ const AUTHORS: Author[] = [
     followers: 6100,
     following: 415,
     posts: 67,
-    band: "emerald",
+    portrait: assetSrc(portrait03),
     links: [
       { icon: GlobeIcon, label: "Website", href: "#" },
       { icon: RssIcon, label: "Newsletter", href: "#" },
     ],
-    tags: ["UX Design", "Accessibility", "Color Theory"],
+    tags: ["UX Design", "Accessibility", "Color"],
     recentPosts: [
       {
         title: "Why your color system is broken (and how to fix it)",
@@ -150,35 +154,59 @@ const AUTHORS: Author[] = [
       },
     ],
   },
+  {
+    id: 4,
+    name: "Jonas Berg",
+    handle: "@jonasberg",
+    initials: "JB",
+    role: "Design Engineer",
+    company: "SonoJS",
+    bio: "Bridging design and code. Obsessed with interaction polish and direction-aware UI.",
+    location: "Stockholm",
+    joined: "May 2023",
+    followers: 4200,
+    following: 190,
+    posts: 38,
+    portrait: assetSrc(portrait04),
+    links: [
+      { icon: Link2Icon, label: "GitHub", href: "#" },
+      { icon: GlobeIcon, label: "Website", href: "#" },
+    ],
+    tags: ["Motion", "RTL", "Craft"],
+    recentPosts: [
+      {
+        title: "Direction-aware components without physical CSS",
+        likes: 198,
+        comments: 12,
+      },
+    ],
+  },
 ]
 
 function formatCount(n: number): string {
   return n >= 1000 ? `${(n / 1000).toFixed(1)}k` : String(n)
 }
 
-const BAND: Record<Author["band"], string> = {
-  primary: "bg-primary",
-  muted: "bg-muted-foreground/40",
-  emerald: "bg-emerald-500",
-}
-
-const STAT_SHELL: Record<Author["band"], string> = {
-  primary: "border-primary/20 bg-primary/5",
-  muted: "border-border/70 bg-muted/50",
-  emerald: "border-emerald-500/20 bg-emerald-500/5",
-}
-
 function AuthorCard({ author }: { author: Author }) {
   const [following, setFollowing] = React.useState(false)
 
   return (
-    <article className="overflow-hidden rounded-[12px] border border-border/70 bg-card shadow-soft transition-shadow">
-      <div className={cn("h-2 w-full", BAND[author.band])} aria-hidden />
+    <article className="group flex flex-col overflow-hidden rounded-[12px] border border-border/70 bg-card shadow-soft transition-[border-color,box-shadow] hover:border-primary/30">
+      <div className="relative aspect-[16/7] overflow-hidden bg-muted">
+        <img
+          src={author.portrait}
+          alt=""
+          className="size-full object-cover opacity-40 blur-[2px] transition-transform duration-500 group-hover:scale-105"
+          aria-hidden
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-card via-card/40 to-transparent" />
+      </div>
 
-      <div className="p-6">
-        <div className="mb-4 flex items-start justify-between gap-3">
+      <div className="-mt-10 flex flex-1 flex-col px-5 pb-5">
+        <div className="mb-4 flex items-end justify-between gap-3">
           <div className="relative">
-            <Avatar className="size-16">
+            <Avatar className="size-16 ring-4 ring-card">
+              <AvatarImage src={author.portrait} alt="" />
               <AvatarFallback className="text-base">
                 {author.initials}
               </AvatarFallback>
@@ -195,6 +223,7 @@ function AuthorCard({ author }: { author: Author }) {
             size="sm"
             variant={following ? "outline" : "default"}
             aria-pressed={following}
+            className="cursor-pointer"
             onClick={() => setFollowing((f) => !f)}
           >
             <UsersIcon className="size-3.5" aria-hidden />
@@ -239,12 +268,7 @@ function AuthorCard({ author }: { author: Author }) {
           </li>
         </ul>
 
-        <div
-          className={cn(
-            "mb-4 grid grid-cols-3 overflow-hidden rounded-[12px] border",
-            STAT_SHELL[author.band]
-          )}
-        >
+        <div className="mb-4 grid grid-cols-3 overflow-hidden rounded-[12px] border border-border/70 bg-muted/40">
           {(
             [
               ["Followers", formatCount(author.followers)],
@@ -291,7 +315,7 @@ function AuthorCard({ author }: { author: Author }) {
           ))}
         </div>
 
-        <div>
+        <div className="mt-auto">
           <div className="mb-3 flex items-center gap-2">
             <BookOpenIcon
               className="size-3.5 text-muted-foreground"
@@ -306,6 +330,7 @@ function AuthorCard({ author }: { author: Author }) {
               <li key={post.title}>
                 <a
                   href="#"
+                  onClick={(e) => e.preventDefault()}
                   className="group/post -mx-2.5 flex cursor-pointer items-start justify-between gap-3 rounded-md p-2.5 transition-colors hover:bg-muted/50"
                 >
                   <span className="min-w-0 flex-1 text-start text-xs leading-snug text-muted-foreground transition-colors group-hover/post:text-foreground">
@@ -334,13 +359,14 @@ function AuthorCard({ author }: { author: Author }) {
         </div>
       </div>
 
-      <div className="border-t border-border/70 px-6 py-3">
+      <div className="border-t border-border/70 px-5 py-3">
         <a
           href="#"
+          onClick={(e) => e.preventDefault()}
           className="inline-flex cursor-pointer items-center gap-1.5 text-xs font-semibold text-primary hover:underline"
         >
           View full profile
-          <ExternalLinkIcon className="size-3" aria-hidden />
+          <ExternalLinkIcon className="icon-dir size-3" aria-hidden />
         </a>
       </div>
     </article>
@@ -354,30 +380,28 @@ export default function AuthorProfile({
   return (
     <section
       className={cn(
-        "w-full min-w-0 bg-canvas py-16 text-foreground sm:py-24",
+        "w-full min-w-0 bg-background py-14 text-foreground sm:py-20",
         className
       )}
       aria-labelledby="author-profile-01-heading"
       {...props}
     >
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto mb-14 max-w-2xl text-center">
-          <Badge variant="secondary" className="mb-4 font-semibold">
-            Our Authors
-          </Badge>
+        <div className="mb-10 max-w-2xl text-start">
+          <p className="mb-2 text-sm font-medium text-primary">Directory</p>
           <h1
             id="author-profile-01-heading"
             className="text-h1 font-semibold tracking-tight text-foreground"
           >
             Meet the people behind the content
           </h1>
-          <p className="mx-auto mt-4 max-w-xl text-lg leading-relaxed text-muted-foreground">
-            Our authors are practitioners — engineers, designers, and builders
-            sharing real-world experience.
+          <p className="mt-3 text-base leading-relaxed text-muted-foreground">
+            Practitioners — engineers, designers, and builders sharing
+            real-world experience.
           </p>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4">
           {AUTHORS.map((author) => (
             <AuthorCard key={author.id} author={author} />
           ))}

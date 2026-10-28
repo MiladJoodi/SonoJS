@@ -375,7 +375,10 @@ export const blocksNavCatalog: BlocksNavGroup[] = [
         featured: true,
       }),
       block("payments-billing", "Subscription Management"),
-      block("payments-billing", "Invoice", { status: "ready" }),
+      block("payments-billing", "Invoice", {
+        status: "ready",
+        featured: true,
+      }),
       block("payments-billing", "Billing History", { status: "ready" }),
       block("payments-billing", "Usage-Based Billing", { status: "ready" }),
       block("payments-billing", "Plan Management"),
@@ -417,6 +420,10 @@ export const blocksNavCatalog: BlocksNavGroup[] = [
       block("files-media", "Avatar Upload"),
       block("files-media", "Document Preview"),
       block("files-media", "Media Player", {
+        status: "ready",
+        featured: true,
+      }),
+      block("files-media", "Music Player", {
         status: "ready",
         featured: true,
       }),

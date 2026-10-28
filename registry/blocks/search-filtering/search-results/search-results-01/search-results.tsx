@@ -241,7 +241,10 @@ export default function SearchResults({
 
   return (
     <div
-      className={cn("min-h-[min(48rem,100svh)] bg-canvas text-foreground", className)}
+      className={cn(
+        "min-h-[min(48rem,100svh)] bg-white text-foreground dark:bg-background",
+        className
+      )}
       {...props}
     >
       <div className="border-b border-border/70 bg-card shadow-soft">
@@ -261,6 +264,7 @@ export default function SearchResults({
                 <InputGroupButton
                   type="button"
                   size="icon-xs"
+                  className="cursor-pointer"
                   aria-label="Clear search"
                   onClick={() => setQuery("")}
                 >
@@ -273,174 +277,9 @@ export default function SearchResults({
       </div>
 
       <div className="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6">
+        {/* Aside first → start edge in LTR and RTL */}
         <div className="flex flex-col gap-8 lg:flex-row lg:gap-8">
-          <div className="min-w-0 flex-1">
-            <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-              <p className="text-sm text-muted-foreground">
-                {sorted.length} results for{" "}
-                <span className="font-semibold text-foreground">
-                  &ldquo;{query || "…"}&rdquo;
-                </span>
-              </p>
-              <div className="flex items-center gap-2">
-                <SlidersHorizontalIcon
-                  className="size-4 shrink-0 text-muted-foreground"
-                  aria-hidden
-                />
-                <Select
-                  value={activeSort}
-                  onValueChange={(value) => {
-                    setActiveSort(value)
-                    setPage(1)
-                  }}
-                >
-                  <SelectTrigger
-                    size="sm"
-                    className="w-[8.5rem]"
-                    aria-label="Sort results"
-                  >
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {SORT_OPTIONS.map((opt) => (
-                      <SelectItem key={opt.value} value={opt.value}>
-                        {opt.label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-
-            {activeFilter !== "All" ? (
-              <div className="mb-5 flex flex-wrap gap-2">
-                <button
-                  type="button"
-                  onClick={clearFilter}
-                  className="inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-primary/20 bg-primary/10 px-3 py-1.5 text-xs font-semibold text-primary transition-colors hover:bg-primary/15"
-                >
-                  <FilterIcon className="size-3" aria-hidden />
-                  {activeFilter}
-                  <XIcon className="size-3" aria-hidden />
-                </button>
-              </div>
-            ) : null}
-
-            {paginated.length === 0 ? (
-              <div className="rounded-[12px] border border-border/70 bg-card px-6 py-16 text-center shadow-soft">
-                <InboxIcon
-                  className="mx-auto mb-4 size-12 text-muted-foreground/30"
-                  aria-hidden
-                />
-                <h2 className="mb-2 text-lg font-semibold">No results found</h2>
-                <p className="mx-auto mb-6 max-w-xs text-sm text-muted-foreground">
-                  Try different keywords or clear filters to see more results.
-                </p>
-                <Button type="button" variant="outline" onClick={clearFilter}>
-                  Clear filters
-                </Button>
-              </div>
-            ) : (
-              <ul className="flex flex-col gap-3">
-                {paginated.map((result) => {
-                  const Icon = TYPE_ICON[result.type]
-                  return (
-                    <li key={result.id}>
-                      <a
-                        href={result.href}
-                        className="group flex cursor-pointer gap-4 rounded-[12px] border border-border/70 bg-card p-5 shadow-soft transition-colors hover:border-primary/30"
-                      >
-                        <div
-                          className={cn(
-                            "flex size-10 shrink-0 items-center justify-center rounded-lg",
-                            typeTone(result.type)
-                          )}
-                        >
-                          <Icon className="size-5" aria-hidden />
-                        </div>
-                        <div className="min-w-0 flex-1">
-                          <div className="mb-1 flex items-start justify-between gap-2">
-                            <span className="text-sm font-semibold text-foreground transition-colors group-hover:text-primary">
-                              {result.title}
-                            </span>
-                            <ArrowUpRightIcon
-                              className="mt-0.5 size-4 shrink-0 text-muted-foreground transition-colors group-hover:text-primary"
-                              aria-hidden
-                            />
-                          </div>
-                          <p className="mb-3 text-sm leading-relaxed text-muted-foreground">
-                            {result.snippet}
-                          </p>
-                          <div className="flex flex-wrap items-center gap-3">
-                            <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
-                              <ClockIcon className="size-3" aria-hidden />
-                              {result.date}
-                            </span>
-                            <span className="flex flex-wrap gap-1">
-                              {result.tags.map((tag) => (
-                                <span
-                                  key={tag}
-                                  className="rounded-full bg-muted px-2 py-0.5 text-xs font-medium text-muted-foreground"
-                                >
-                                  {tag}
-                                </span>
-                              ))}
-                            </span>
-                          </div>
-                        </div>
-                      </a>
-                    </li>
-                  )
-                })}
-              </ul>
-            )}
-
-            {totalPages > 1 && sorted.length > 0 ? (
-              <div className="mt-8 flex items-center justify-between gap-3">
-                <Button
-                  type="button"
-                  variant="outline"
-                  size="sm"
-                  className="gap-1"
-                  disabled={safePage === 1}
-                  onClick={() => setPage((p) => Math.max(1, p - 1))}
-                >
-                  <ChevronLeftIcon className="icon-dir size-4" aria-hidden />
-                  Previous
-                </Button>
-                <div className="flex gap-1" dir="ltr" role="navigation" aria-label="Pagination">
-                  {Array.from({ length: totalPages }, (_, i) => i + 1).map(
-                    (p) => (
-                      <Button
-                        key={p}
-                        type="button"
-                        size="icon-xs"
-                        variant={p === safePage ? "default" : "ghost"}
-                        aria-label={`Go to page ${p}`}
-                        aria-current={p === safePage ? "page" : undefined}
-                        onClick={() => setPage(p)}
-                      >
-                        {p}
-                      </Button>
-                    )
-                  )}
-                </div>
-                <Button
-                  type="button"
-                  variant="outline"
-                  size="sm"
-                  className="gap-1"
-                  disabled={safePage === totalPages}
-                  onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-                >
-                  Next
-                  <ChevronRightIcon className="icon-dir size-4" aria-hidden />
-                </Button>
-              </div>
-            ) : null}
-          </div>
-
-          <aside className="shrink-0 border-t border-border/70 pt-8 lg:mt-0 lg:w-56 lg:border-t-0 lg:pt-0">
+          <aside className="shrink-0 border-b border-border/70 pb-8 lg:w-56 lg:border-b-0 lg:pb-0">
             <div className="sticky top-6 rounded-[12px] border border-border/70 bg-card p-4 shadow-soft">
               <h2 className="mb-4 text-sm font-semibold">Filter by type</h2>
               <div className="flex flex-col gap-1" role="list">
@@ -483,14 +322,197 @@ export default function SearchResults({
                 <div className="grid gap-2">
                   <Input
                     type="date"
+                    dir="ltr"
                     aria-label="Start date"
-                    className="h-10"
+                    className="h-10 cursor-pointer"
                   />
-                  <Input type="date" aria-label="End date" className="h-10" />
+                  <Input
+                    type="date"
+                    dir="ltr"
+                    aria-label="End date"
+                    className="h-10 cursor-pointer"
+                  />
                 </div>
               </div>
             </div>
           </aside>
+
+          <div className="min-w-0 flex-1">
+            <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <p className="text-sm text-muted-foreground">
+                {sorted.length} results for{" "}
+                <span className="font-semibold text-foreground">
+                  &ldquo;{query || "…"}&rdquo;
+                </span>
+              </p>
+              <div className="flex items-center gap-2">
+                <SlidersHorizontalIcon
+                  className="size-4 shrink-0 text-muted-foreground"
+                  aria-hidden
+                />
+                <Select
+                  value={activeSort}
+                  onValueChange={(value) => {
+                    setActiveSort(value)
+                    setPage(1)
+                  }}
+                >
+                  <SelectTrigger
+                    size="sm"
+                    className="w-[8.5rem] cursor-pointer"
+                    aria-label="Sort results"
+                  >
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {SORT_OPTIONS.map((opt) => (
+                      <SelectItem key={opt.value} value={opt.value}>
+                        {opt.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+
+            {activeFilter !== "All" ? (
+              <div className="mb-5 flex flex-wrap gap-2">
+                <button
+                  type="button"
+                  onClick={clearFilter}
+                  className="inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-primary/20 bg-primary/10 px-3 py-1.5 text-xs font-semibold text-primary transition-colors hover:bg-primary/15"
+                >
+                  <FilterIcon className="size-3" aria-hidden />
+                  {activeFilter}
+                  <XIcon className="size-3" aria-hidden />
+                </button>
+              </div>
+            ) : null}
+
+            {paginated.length === 0 ? (
+              <div className="rounded-[12px] border border-border/70 bg-card px-6 py-16 text-center shadow-soft">
+                <InboxIcon
+                  className="mx-auto mb-4 size-12 text-muted-foreground/30"
+                  aria-hidden
+                />
+                <h2 className="mb-2 text-lg font-semibold">No results found</h2>
+                <p className="mx-auto mb-6 max-w-xs text-sm text-muted-foreground">
+                  Try different keywords or clear filters to see more results.
+                </p>
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="cursor-pointer"
+                  onClick={clearFilter}
+                >
+                  Clear filters
+                </Button>
+              </div>
+            ) : (
+              <ul className="flex flex-col gap-3">
+                {paginated.map((result) => {
+                  const Icon = TYPE_ICON[result.type]
+                  return (
+                    <li key={result.id}>
+                      <a
+                        href={result.href}
+                        className="group flex cursor-pointer gap-4 rounded-[12px] border border-border/70 bg-card p-5 shadow-soft transition-colors hover:border-primary/30"
+                      >
+                        <div
+                          className={cn(
+                            "flex size-10 shrink-0 items-center justify-center rounded-lg",
+                            typeTone(result.type)
+                          )}
+                        >
+                          <Icon className="size-5" aria-hidden />
+                        </div>
+                        <div className="min-w-0 flex-1 text-start">
+                          <div className="mb-1 flex items-start justify-between gap-2">
+                            <span className="text-sm font-semibold text-foreground transition-colors group-hover:text-primary">
+                              {result.title}
+                            </span>
+                            <ArrowUpRightIcon
+                              className="mt-0.5 size-4 shrink-0 text-muted-foreground transition-colors group-hover:text-primary"
+                              aria-hidden
+                            />
+                          </div>
+                          <p className="mb-3 text-sm leading-relaxed text-muted-foreground">
+                            {result.snippet}
+                          </p>
+                          <div className="flex flex-wrap items-center gap-3">
+                            <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
+                              <ClockIcon className="size-3" aria-hidden />
+                              {result.date}
+                            </span>
+                            <span className="flex flex-wrap gap-1">
+                              {result.tags.map((tag) => (
+                                <span
+                                  key={tag}
+                                  className="rounded-full bg-muted px-2 py-0.5 text-xs font-medium text-muted-foreground"
+                                >
+                                  {tag}
+                                </span>
+                              ))}
+                            </span>
+                          </div>
+                        </div>
+                      </a>
+                    </li>
+                  )
+                })}
+              </ul>
+            )}
+
+            {totalPages > 1 && sorted.length > 0 ? (
+              <div className="mt-8 flex items-center justify-between gap-3">
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  className="cursor-pointer gap-1 disabled:cursor-not-allowed"
+                  disabled={safePage === 1}
+                  onClick={() => setPage((p) => Math.max(1, p - 1))}
+                >
+                  <ChevronLeftIcon className="icon-dir size-4" aria-hidden />
+                  Previous
+                </Button>
+                <div
+                  className="flex gap-1"
+                  dir="ltr"
+                  role="navigation"
+                  aria-label="Pagination"
+                >
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+                    (p) => (
+                      <Button
+                        key={p}
+                        type="button"
+                        size="icon-xs"
+                        variant={p === safePage ? "default" : "ghost"}
+                        className="cursor-pointer"
+                        aria-label={`Go to page ${p}`}
+                        aria-current={p === safePage ? "page" : undefined}
+                        onClick={() => setPage(p)}
+                      >
+                        {p}
+                      </Button>
+                    )
+                  )}
+                </div>
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  className="cursor-pointer gap-1 disabled:cursor-not-allowed"
+                  disabled={safePage === totalPages}
+                  onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                >
+                  Next
+                  <ChevronRightIcon className="icon-dir size-4" aria-hidden />
+                </Button>
+              </div>
+            ) : null}
+          </div>
         </div>
       </div>
     </div>

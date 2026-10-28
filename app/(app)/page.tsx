@@ -1,10 +1,10 @@
-import { HomeHero } from "@/components/home"
+import { HomeChartsSection, HomeHero } from "@/components/home"
 import { JsonLd } from "@/components/seo/json-ld"
 import { siteConfig } from "@/lib/config"
 import { absoluteUrl, pageMetadata } from "@/lib/seo"
 
 export const metadata = pageMetadata({
-  title: "SonoJS – Tell your agent. Get the UI.",
+  title: "SonoJS – From components to complete interfaces. With AI.",
   description: siteConfig.description,
   path: "/",
   absoluteTitle: true,
@@ -23,6 +23,7 @@ export default function HomePage() {
     <>
       <JsonLd data={websiteJsonLd} />
       <HomeHero />
+      <HomeChartsSection />
     </>
   )
 }
