@@ -252,6 +252,8 @@ import NotificationCenter01 from "@/registry/blocks/communication/notification-c
 import AnalyticsDashboard01 from "@/registry/blocks/dashboards-analytics/analytics-dashboard/analytics-dashboard-01/analytics-dashboard"
 import Calendar01 from "@/registry/blocks/calendar-scheduling/calendar/calendar-01/calendar"
 import SetupWizard01 from "@/registry/blocks/onboarding/setup-wizard/setup-wizard-01/setup-wizard"
+import SetupWizard02 from "@/registry/blocks/onboarding/setup-wizard/setup-wizard-02/setup-wizard"
+import SetupWizard03 from "@/registry/blocks/onboarding/setup-wizard/setup-wizard-03/setup-wizard"
 import WorkspaceSetup01 from "@/registry/blocks/onboarding/workspace-setup/workspace-setup-01/workspace-setup"
 import WorkspaceSetup02 from "@/registry/blocks/onboarding/workspace-setup/workspace-setup-02/workspace-setup"
 import ProgressChecklist01 from "@/registry/blocks/onboarding/progress-checklist/progress-checklist-01/progress-checklist"
@@ -2449,6 +2451,24 @@ const views: Record<string, ComponentType> = {
       <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
         <div className="w-full">
           <SetupWizard01 />
+        </div>
+      </div>
+    )
+  },
+  "setup-wizard-02": function SetupWizard02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <SetupWizard02 />
+        </div>
+      </div>
+    )
+  },
+  "setup-wizard-03": function SetupWizard03View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <SetupWizard03 />
         </div>
       </div>
     )
