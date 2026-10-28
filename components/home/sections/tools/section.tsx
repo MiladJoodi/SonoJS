@@ -1,7 +1,8 @@
 import Image from "next/image"
 import Link from "next/link"
 
-import { RainbowButton } from "@sonojs/ui/components/rainbow-button"
+import { HomeSectionHeading } from "@/components/home/section-heading"
+import { Button } from "@sonojs/ui/components/button"
 
 export function HomeToolsSection() {
   return (
@@ -37,16 +38,9 @@ export function HomeToolsSection() {
               animation: "sono-fade-up 520ms var(--motion-ease) both",
             }}
           >
-            <p className="text-sm font-medium tracking-wide text-primary">
-              Developer Tools
-            </p>
-
-            <h2
-              id="home-tools-heading"
-              className="mt-3 text-balance text-[clamp(1.75rem,5vw,2.75rem)] leading-[1.12] font-semibold tracking-[-0.035em] text-foreground"
-            >
-              Simplify your development workflow.
-            </h2>
+            <HomeSectionHeading id="home-tools-heading">
+              Tools that simplify your workflow
+            </HomeSectionHeading>
 
             <p className="mt-4 max-w-[34em] text-[clamp(0.9375rem,3.2vw,1.0625rem)] leading-[1.6] text-muted-foreground">
               Practical browser tools for everyday work — call APIs, inspect
@@ -54,11 +48,9 @@ export function HomeToolsSection() {
             </p>
 
             <div className="mt-7 w-full sm:w-auto">
-              <RainbowButton asChild className="w-full sm:w-auto">
-                <Link href="/tools" className="w-full no-underline sm:w-auto">
-                  Explore Tools
-                </Link>
-              </RainbowButton>
+              <Button asChild className="w-full sm:w-auto">
+                <Link href="/tools">Explore Tools</Link>
+              </Button>
             </div>
           </div>
 

@@ -62,9 +62,9 @@ const MODELS = [
 ] as const
 
 const REPLIES = [
-  "Got it — I’d start with a clear outline, then fill in setup, API surface, and a couple of real usage examples.",
-  "Here’s a tight plan: measure the hot path, cut unused work, and cache the expensive reads first.",
-  "I’ll scan for the three highest-impact bugs, patch them, and note why each fix is safe.",
+  "Got it — I'd start with a clear outline, then fill in setup, API surface, and a couple of real usage examples.",
+  "Here's a tight plan: measure the hot path, cut unused work, and cache the expensive reads first.",
+  "I'll scan for the three highest-impact bugs, patch them, and note why each fix is safe.",
   "Sounds good. I can break that into small steps and ship a clean first draft you can iterate on.",
 ] as const
 
@@ -73,6 +73,29 @@ type Turn = {
   role: "user" | "assistant"
   text: string
 }
+
+const SAMPLE_TURNS: Turn[] = [
+  {
+    id: "sample-u1",
+    role: "user",
+    text: "Build a login form with email and password.",
+  },
+  {
+    id: "sample-a1",
+    role: "assistant",
+    text: "Done — email, password, and a Sign in button with SonoJS Field and Button.",
+  },
+  {
+    id: "sample-u2",
+    role: "user",
+    text: "Add a forgot-password link under the form.",
+  },
+  {
+    id: "sample-a2",
+    role: "assistant",
+    text: "Added. Centered muted link under the actions — works in LTR and RTL.",
+  },
+]
 
 function MaxBadge() {
   return (
@@ -138,12 +161,12 @@ function replyFor(prompt: string, modelName: string): string {
 
 /**
  * Home-only interactive chat-composer-02 showcase.
- * Sends a message, shows a thinking spinner, then a simple canned reply.
+ * Starts with a filled sample thread; sends still work with thinking + reply.
  */
 export function HomeChatComposer() {
   const [inputValue, setInputValue] = React.useState("")
   const [modelValue, setModelValue] = React.useState<string>(MODELS[0].value)
-  const [turns, setTurns] = React.useState<Turn[]>([])
+  const [turns, setTurns] = React.useState<Turn[]>(SAMPLE_TURNS)
   const [thinking, setThinking] = React.useState(false)
   const selectedModel =
     MODELS.find((m) => m.value === modelValue) ?? MODELS[0]

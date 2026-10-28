@@ -17,7 +17,7 @@ const PROMPTS: {
 }[] = [
   {
     id: "login",
-    label: "Login form",
+    label: "Login",
     text: "Build a beautiful login form with SonoJS",
     file: "login-form.tsx",
   },
@@ -29,13 +29,13 @@ const PROMPTS: {
   },
   {
     id: "player",
-    label: "Music player",
+    label: "Player",
     text: "Build a music player with SonoJS",
     file: "music-player.tsx",
   },
   {
     id: "palette",
-    label: "Command palette",
+    label: "Command",
     text: "Build a command palette with SonoJS",
     file: "command-palette.tsx",
   },
@@ -187,7 +187,7 @@ export function HeroShowcase({ className }: { className?: string }) {
     <section
       aria-label="Interactive demo: describe a UI and watch an agent build it"
       className={cn(
-        "relative flex min-h-0 flex-col gap-2.5 p-2.5 transition-colors sm:min-h-[540px] sm:gap-3.5 sm:p-[18px]",
+        "relative flex h-[37rem] flex-col gap-2.5 overflow-hidden p-2.5 transition-colors sm:h-[40rem] sm:gap-3.5 sm:p-[18px]",
         className
       )}
     >
@@ -197,9 +197,9 @@ export function HeroShowcase({ className }: { className?: string }) {
         className="pointer-events-none absolute inset-0 rounded-2xl border border-border/70 bg-muted/50 sm:rounded-3xl dark:bg-muted/30"
         style={{
           WebkitMaskImage:
-            "linear-gradient(to bottom, #000 0%, #000 62%, transparent 100%)",
+            "linear-gradient(to bottom, #000 0%, #000 14%, transparent 58%)",
           maskImage:
-            "linear-gradient(to bottom, #000 0%, #000 62%, transparent 100%)",
+            "linear-gradient(to bottom, #000 0%, #000 14%, transparent 58%)",
         }}
       />
 
@@ -297,13 +297,16 @@ export function HeroShowcase({ className }: { className?: string }) {
         ))}
       </ol>
 
-      <div className="relative z-10 grid w-full min-w-0 flex-1 place-items-center pb-1">
-        <ShowcasePreviewFor
-          key={previewKey}
-          id={active}
-          show={showCanvas}
-          animate={motionOn}
-        />
+      {/* Absolute fill so demo intrinsic height never shifts the hero */}
+      <div className="relative z-10 min-h-0 w-full min-w-0 flex-1 overflow-hidden">
+        <div className="absolute inset-0 flex items-start justify-center overflow-hidden pb-1">
+          <ShowcasePreviewFor
+            key={previewKey}
+            id={active}
+            show={showCanvas}
+            animate={motionOn}
+          />
+        </div>
       </div>
     </section>
   )

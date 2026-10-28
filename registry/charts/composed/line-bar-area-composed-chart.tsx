@@ -63,10 +63,13 @@ const AXIS_TICK_FILL =
 const DEMO_DATA: LineBarAreaComposedPoint[] = [
   { month: "2026-01-01", orders: 128, online: 78, store: 54 },
   { month: "2026-02-01", orders: 136, online: 92, store: 61 },
-  { month: "2026-03-01", orders: 122, online: 108, store: 70 },
+  { month: "2026-03-01", orders: 98, online: 64, store: 48 },
   { month: "2026-04-01", orders: 148, online: 118, store: 79 },
   { month: "2026-05-01", orders: 156, online: 111, store: 86 },
   { month: "2026-06-01", orders: 164, online: 126, store: 81 },
+  { month: "2026-07-01", orders: 112, online: 72, store: 58 },
+  { month: "2026-08-01", orders: 188, online: 142, store: 96 },
+  { month: "2026-09-01", orders: 134, online: 88, store: 67 },
 ]
 
 const chartConfig = {
@@ -88,6 +91,9 @@ const SERIES_KEYS = ["orders", "online", "store"] as const
 
 const COMPOSED_TOOLTIP_CURSOR = {
   fill: "color-mix(in oklab, var(--foreground) 5%, transparent)",
+  // Recharts defaults stroke to #ccc — reads as a white/gray frame on the plot
+  stroke: "transparent",
+  strokeWidth: 0,
 } as const
 
 function useNarrowViewport() {
@@ -200,7 +206,7 @@ function ComposedTooltip({ active, payload, locale }: ComposedTooltipProps) {
 }
 
 function LineBarAreaComposedChart({
-  title = "Orders, Online & Store – H1 2026",
+  title = "Orders, Online & Store – Jan–Sep 2026",
   subtitle = "Orders area, online bars, and store trend in one view.",
   data = DEMO_DATA,
   className,
@@ -394,8 +400,8 @@ function LineBarAreaComposedChart({
           cy={cy}
           r={active ? 5 : 3.5}
           fill="var(--color-store)"
-          stroke="var(--background)"
-          strokeWidth={2}
+          stroke="transparent"
+          strokeWidth={0}
           opacity={dimmed ? 0.35 : 1}
         />
       )
@@ -531,7 +537,14 @@ function LineBarAreaComposedChart({
         dir="ltr"
         role="img"
         aria-label={ariaLabel}
-        tabIndex={scrub ? 0 : undefined}
+        tabIndex={scrub ? 0 : -1}
+        onMouseDown={(e) => {
+          // Prevent click-focus white outline around the plot (OS / :focus ring).
+          if (e.target instanceof Element && e.target.closest("button,a,input,textarea,select")) {
+            return
+          }
+          e.preventDefault()
+        }}
         onKeyDown={scrub ? onKeyDown : undefined}
         onBlur={
           scrub
@@ -542,14 +555,13 @@ function LineBarAreaComposedChart({
               }
             : undefined
         }
-        className="touch-pan-y rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+        className="touch-pan-y outline-none! ring-0! focus:outline-none! focus-visible:outline-none! focus-visible:ring-0! [&_svg]:outline-none! [&_g]:outline-none!"
       >
         <ChartContainer
           config={chartConfig}
           className={cn(chartBarContainerClassName, "max-w-none")}
         >
           <ComposedChart
-            accessibilityLayer
             data={data}
             margin={
               narrow
@@ -673,8 +685,8 @@ function LineBarAreaComposedChart({
               dot={storeDot}
               activeDot={{
                 r: 6,
-                strokeWidth: 2,
-                stroke: "var(--background)",
+                strokeWidth: 0,
+                stroke: "transparent",
                 fill: "var(--color-store)",
               }}
               isAnimationActive={!reducedMotion && !liveScrubbing}

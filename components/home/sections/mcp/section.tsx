@@ -1,7 +1,8 @@
 import Image from "next/image"
 import Link from "next/link"
 
-import { RainbowButton } from "@sonojs/ui/components/rainbow-button"
+import { HomeSectionHeading } from "@/components/home/section-heading"
+import { Button } from "@sonojs/ui/components/button"
 
 export function HomeMcpSection() {
   return (
@@ -37,16 +38,9 @@ export function HomeMcpSection() {
               animation: "sono-fade-up 520ms var(--motion-ease) both",
             }}
           >
-            <p className="text-sm font-medium tracking-wide text-primary">
-              AI + MCP
-            </p>
-
-            <h2
-              id="home-mcp-heading"
-              className="mt-3 text-balance text-[clamp(1.75rem,5vw,2.75rem)] leading-[1.12] font-semibold tracking-[-0.035em] text-foreground"
-            >
-              Your AI agent. Powered by SonoJS.
-            </h2>
+            <HomeSectionHeading id="home-mcp-heading">
+              MCP for your AI coding agent
+            </HomeSectionHeading>
 
             <p className="mt-4 max-w-[34em] text-[clamp(0.9375rem,3.2vw,1.0625rem)] leading-[1.6] text-muted-foreground">
               Connect AI coding agents like Cursor and Claude Code to SonoJS
@@ -55,11 +49,9 @@ export function HomeMcpSection() {
             </p>
 
             <div className="mt-7 w-full sm:w-auto">
-              <RainbowButton asChild className="w-full sm:w-auto">
-                <Link href="/docs/mcp" className="w-full no-underline sm:w-auto">
-                  Explore MCP
-                </Link>
-              </RainbowButton>
+              <Button asChild className="w-full sm:w-auto">
+                <Link href="/docs/mcp">Explore MCP</Link>
+              </Button>
             </div>
           </div>
 

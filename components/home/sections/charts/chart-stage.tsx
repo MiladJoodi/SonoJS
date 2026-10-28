@@ -5,6 +5,11 @@ import { ChevronsRightIcon } from "lucide-react"
 
 import { ChartDemo } from "@/components/charts"
 import { HomeCandlestickChart } from "./candlestick-chart"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
 import { cn } from "@/lib/utils"
 import { LineBarAreaComposedChart } from "@/registry/charts/composed/line-bar-area-composed-chart"
 
@@ -78,18 +83,22 @@ export function HomeChartStage({
     : "Show Bitcoin candlestick"
 
   const nextButton = (
-    <button
-      type="button"
-      onClick={swap}
-      aria-label={swapLabel}
-      title={swapLabel}
-      className={cn(
-        "grid size-9 shrink-0 cursor-pointer place-items-center rounded-full border border-border/70 bg-card text-foreground shadow-sm transition-colors",
-        "hover:border-primary/50 hover:bg-muted/60"
-      )}
-    >
-      <ChevronsRightIcon className="size-4 icon-dir" strokeWidth={2} />
-    </button>
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <button
+          type="button"
+          onClick={swap}
+          aria-label={swapLabel}
+          className={cn(
+            "grid size-9 shrink-0 cursor-pointer place-items-center rounded-full border border-border/70 bg-card text-foreground shadow-sm transition-colors",
+            "hover:border-primary/50 hover:bg-muted/60"
+          )}
+        >
+          <ChevronsRightIcon className="size-4 icon-dir" strokeWidth={2} />
+        </button>
+      </TooltipTrigger>
+      <TooltipContent side="top">{swapLabel}</TooltipContent>
+    </Tooltip>
   )
 
   return (
@@ -119,12 +128,16 @@ export function HomeChartStage({
                 />
               ) : (
                 <LineBarAreaComposedChart
+                  scrub={false}
                   className={cn(
                     "flex h-full max-w-none flex-col gap-2.5 overflow-hidden p-2.5 pe-11 sm:gap-3.5 sm:p-4 sm:pe-14",
                     "[&>header]:shrink-0 [&>header]:gap-2",
                     "[&>header_h3]:text-base sm:[&>header_h3]:text-lg",
                     "[&>header>div:first-child>p]:hidden",
                     "[&_[role=img]]:flex [&_[role=img]]:min-h-0 [&_[role=img]]:flex-1 [&_[role=img]]:flex-col",
+                    "[&_[role=img]]:rounded-none [&_[role=img]]:outline-none! [&_[role=img]]:ring-0! [&_[role=img]]:focus:outline-none! [&_[role=img]]:focus-visible:outline-none! [&_[role=img]]:focus-visible:ring-0!",
+                    "[&_.recharts-wrapper]:outline-none! [&_.recharts-surface]:outline-none! [&_g]:outline-none!",
+                    "[&_.recharts-tooltip-cursor]:stroke-transparent!",
                     "[&_[data-slot=chart]]:!h-full [&_[data-slot=chart]]:!max-h-none [&_[data-slot=chart]]:!max-w-none",
                     "[&>div.flex.flex-wrap]:shrink-0"
                   )}

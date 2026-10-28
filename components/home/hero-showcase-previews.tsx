@@ -88,12 +88,6 @@ export function ShowcaseLoginPreview({
   show: boolean
   className?: string
 }) {
-  const [signedIn, setSignedIn] = React.useState(false)
-
-  React.useEffect(() => {
-    setSignedIn(false)
-  }, [show])
-
   return (
     <DemoCard show={show} className={className}>
       <Stagger i={0} show={show}>
@@ -133,19 +127,19 @@ export function ShowcaseLoginPreview({
       <Stagger i={4} show={show}>
         <button
           type="button"
-          onClick={() => {
-            setSignedIn(true)
-          }}
-          className="mt-1 flex h-[42px] w-full cursor-pointer items-center justify-center rounded-[10px] bg-primary text-sm font-medium text-primary-foreground transition-transform active:scale-[0.98]"
+          disabled
+          tabIndex={-1}
+          className="mt-1 flex h-[42px] w-full cursor-not-allowed items-center justify-center rounded-[10px] bg-primary text-sm font-medium text-primary-foreground disabled:pointer-events-none disabled:opacity-50"
         >
-          {signedIn ? "Signed in ✓" : "Sign in"}
+          Sign in
         </button>
       </Stagger>
       <Stagger i={5} show={show}>
         <button
           type="button"
+          disabled
           tabIndex={-1}
-          className="mt-2.5 flex h-[42px] w-full cursor-pointer items-center justify-center rounded-[10px] border border-border/70 text-sm font-medium"
+          className="mt-2.5 flex h-[42px] w-full cursor-not-allowed items-center justify-center rounded-[10px] border border-border/70 text-sm font-medium disabled:pointer-events-none disabled:opacity-50"
         >
           Continue with GitHub
         </button>
@@ -160,6 +154,50 @@ export function ShowcaseLoginPreview({
 }
 
 const PRICES = [12, 29, 79] as const
+
+function easeOutCubic(t: number) {
+  return 1 - Math.pow(1 - t, 3)
+}
+
+/** Animate from previous value to `target` when the price changes. */
+function useCountedPrice(target: number) {
+  const [display, setDisplay] = React.useState(target)
+  const displayRef = React.useRef(target)
+  const rafRef = React.useRef(0)
+
+  React.useEffect(() => {
+    displayRef.current = display
+  }, [display])
+
+  React.useEffect(() => {
+    const from = displayRef.current
+    if (from === target) return
+
+    const reduced =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    if (reduced) {
+      setDisplay(target)
+      return
+    }
+
+    const delta = Math.abs(target - from)
+    const duration = Math.min(520, 220 + delta * 18)
+    const start = performance.now()
+    cancelAnimationFrame(rafRef.current)
+
+    const tick = (now: number) => {
+      const t = Math.min(1, (now - start) / duration)
+      const next = Math.round(from + (target - from) * easeOutCubic(t))
+      setDisplay(next)
+      if (t < 1) rafRef.current = requestAnimationFrame(tick)
+    }
+    rafRef.current = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(rafRef.current)
+  }, [target])
+
+  return display
+}
 
 export function ShowcasePricingPreview({
   show,
@@ -177,6 +215,7 @@ export function ShowcasePricingPreview({
   }, [show])
 
   const price = Math.round(PRICES[plan]! * (yearly ? 0.8 : 1))
+  const counted = useCountedPrice(price)
 
   return (
     <DemoCard show={show} className={className}>
@@ -232,8 +271,11 @@ export function ShowcasePricingPreview({
         </div>
       </Stagger>
       <Stagger i={2} show={show}>
-        <p className="mt-2 text-[2.25rem] leading-none font-semibold tracking-[-0.04em] sm:text-[46px]">
-          ${price}
+        <p
+          className="mt-2 text-[2.25rem] leading-none font-semibold tracking-[-0.04em] tabular-nums sm:text-[46px]"
+          aria-live="polite"
+        >
+          ${counted}
           <small className="ms-1 text-xs font-normal tracking-normal text-muted-foreground sm:text-sm">
             / seat / month
           </small>
@@ -279,6 +321,14 @@ const PLAYER_TRACKS = [
   { title: "Glass house", artist: "Sono Sessions" },
 ] as const
 
+function formatPlayerTime(seconds: number) {
+  if (!Number.isFinite(seconds) || seconds < 0) return "0:00"
+  const s = Math.floor(seconds)
+  const m = Math.floor(s / 60)
+  const r = s % 60
+  return `${m}:${String(r).padStart(2, "0")}`
+}
+
 export function ShowcasePlayerPreview({
   show,
   className,
@@ -288,56 +338,133 @@ export function ShowcasePlayerPreview({
 }) {
   const [playing, setPlaying] = React.useState(false)
   const [elapsed, setElapsed] = React.useState(0)
+  const [duration, setDuration] = React.useState(0)
   const [track, setTrack] = React.useState(0)
-  const [playGen, setPlayGen] = React.useState(0)
-  const timerRef = React.useRef<number | null>(null)
-  const elapsedRef = React.useRef(0)
+  const [dragging, setDragging] = React.useState(false)
+  const audioRef = React.useRef<HTMLAudioElement>(null)
+  const seekRef = React.useRef<HTMLDivElement>(null)
+  const dragRef = React.useRef(false)
 
   React.useEffect(() => {
+    const a = audioRef.current
+    if (!a) return
+    a.pause()
+    a.currentTime = 0
     setPlaying(false)
-    elapsedRef.current = 0
     setElapsed(0)
     setTrack(0)
-    if (timerRef.current) window.clearInterval(timerRef.current)
-    return () => {
-      if (timerRef.current) window.clearInterval(timerRef.current)
-    }
+    setDragging(false)
+    dragRef.current = false
   }, [show])
 
   React.useEffect(() => {
-    if (timerRef.current) window.clearInterval(timerRef.current)
-    if (!playing) return
+    const a = audioRef.current
+    if (!a) return
 
-    timerRef.current = window.setInterval(() => {
-      elapsedRef.current += 0.32
-      if (elapsedRef.current >= 204) elapsedRef.current = 0
-      setElapsed(elapsedRef.current)
-    }, 320)
-
-    return () => {
-      if (timerRef.current) window.clearInterval(timerRef.current)
+    const onTime = () => {
+      if (!dragRef.current) setElapsed(a.currentTime)
     }
-  }, [playing, playGen])
+    const onMeta = () => {
+      setDuration(Number.isFinite(a.duration) ? a.duration : 0)
+    }
+    const onPlay = () => setPlaying(true)
+    const onPause = () => setPlaying(false)
+    const onEnded = () => {
+      setPlaying(false)
+      setElapsed(0)
+      a.currentTime = 0
+    }
 
-  const mins = Math.floor(elapsed / 60)
-  const secs = Math.floor(elapsed % 60)
-  const pct = Math.min(100, (elapsed / 204) * 100)
+    a.addEventListener("timeupdate", onTime)
+    a.addEventListener("loadedmetadata", onMeta)
+    a.addEventListener("durationchange", onMeta)
+    a.addEventListener("play", onPlay)
+    a.addEventListener("pause", onPause)
+    a.addEventListener("ended", onEnded)
+    return () => {
+      a.removeEventListener("timeupdate", onTime)
+      a.removeEventListener("loadedmetadata", onMeta)
+      a.removeEventListener("durationchange", onMeta)
+      a.removeEventListener("play", onPlay)
+      a.removeEventListener("pause", onPause)
+      a.removeEventListener("ended", onEnded)
+    }
+  }, [])
 
-  function skip(delta: number) {
+  const seekToClientX = React.useCallback((clientX: number) => {
+    const a = audioRef.current
+    const el = seekRef.current
+    if (!a || !el) return
+    const rect = el.getBoundingClientRect()
+    if (rect.width <= 0) return
+    const ratio = Math.min(1, Math.max(0, (clientX - rect.left) / rect.width))
+    const d = Number.isFinite(a.duration) && a.duration > 0 ? a.duration : 0
+    if (d <= 0) return
+    a.currentTime = ratio * d
+    setElapsed(a.currentTime)
+  }, [])
+
+  React.useEffect(() => {
+    if (!dragging) return
+
+    const onMove = (e: PointerEvent) => seekToClientX(e.clientX)
+    const onUp = () => {
+      dragRef.current = false
+      setDragging(false)
+    }
+
+    window.addEventListener("pointermove", onMove)
+    window.addEventListener("pointerup", onUp)
+    window.addEventListener("pointercancel", onUp)
+    return () => {
+      window.removeEventListener("pointermove", onMove)
+      window.removeEventListener("pointerup", onUp)
+      window.removeEventListener("pointercancel", onUp)
+    }
+  }, [dragging, seekToClientX])
+
+  async function togglePlay() {
+    const a = audioRef.current
+    if (!a) return
+    if (a.paused) {
+      try {
+        await a.play()
+      } catch {
+        /* autoplay blocked */
+      }
+    } else {
+      a.pause()
+    }
+  }
+
+  async function skip(delta: number) {
+    const a = audioRef.current
     setTrack((t) => (t + delta + PLAYER_TRACKS.length) % PLAYER_TRACKS.length)
-    elapsedRef.current = 0
+    if (!a) return
+    a.currentTime = 0
     setElapsed(0)
-    setPlaying(true)
-    setPlayGen((g) => g + 1)
+    try {
+      await a.play()
+    } catch {
+      /* autoplay */
+    }
   }
 
   const current = PLAYER_TRACKS[track]!
+  const pct =
+    duration > 0 ? Math.min(100, Math.max(0, (elapsed / duration) * 100)) : 0
 
   return (
     <DemoCard
       show={show}
       className={cn("overflow-hidden p-0!", playing && "playing", className)}
     >
+      <audio
+        ref={audioRef}
+        src="/media/home-demo.wav"
+        preload="metadata"
+        playsInline
+      />
       <Stagger i={0} show={show}>
         <div className="relative h-[96px] overflow-hidden sm:h-[110px]">
           <div
@@ -386,7 +513,7 @@ export function ShowcasePlayerPreview({
               <button
                 type="button"
                 aria-label="Previous"
-                onClick={() => skip(-1)}
+                onClick={() => void skip(-1)}
                 className="grid size-8 cursor-pointer place-items-center rounded-full text-primary/70 transition-colors hover:bg-primary/10 hover:text-primary"
               >
                 <SkipBackIcon className="size-3.5" fill="currentColor" />
@@ -394,9 +521,7 @@ export function ShowcasePlayerPreview({
               <button
                 type="button"
                 aria-label={playing ? "Pause" : "Play"}
-                onClick={() => {
-                  setPlaying((p) => !p)
-                }}
+                onClick={() => void togglePlay()}
                 className={cn(
                   "grid size-10 cursor-pointer place-items-center rounded-full bg-primary text-primary-foreground transition-transform active:scale-[0.96]",
                   playing &&
@@ -412,7 +537,7 @@ export function ShowcasePlayerPreview({
               <button
                 type="button"
                 aria-label="Next"
-                onClick={() => skip(1)}
+                onClick={() => void skip(1)}
                 className="grid size-8 cursor-pointer place-items-center rounded-full text-primary/70 transition-colors hover:bg-primary/10 hover:text-primary"
               >
                 <SkipForwardIcon className="size-3.5" fill="currentColor" />
@@ -422,17 +547,36 @@ export function ShowcasePlayerPreview({
         </Stagger>
         <Stagger i={2} show={show}>
           <div className="mt-2.5">
-            <div className="relative h-1 overflow-hidden rounded-full bg-muted">
-              <i
-                className="absolute inset-y-0 start-0 rounded-full bg-primary transition-[width] duration-300"
-                style={{ width: `${pct}%` }}
-              />
+            <div
+              ref={seekRef}
+              role="slider"
+              aria-label="Seek"
+              aria-valuemin={0}
+              aria-valuemax={Math.round(duration || 0)}
+              aria-valuenow={Math.round(elapsed)}
+              tabIndex={0}
+              className="relative h-3 cursor-pointer touch-none py-1"
+              onPointerDown={(e) => {
+                e.preventDefault()
+                dragRef.current = true
+                setDragging(true)
+                seekToClientX(e.clientX)
+                e.currentTarget.setPointerCapture?.(e.pointerId)
+              }}
+            >
+              <div className="relative h-1 overflow-hidden rounded-full bg-muted">
+                <i
+                  className={cn(
+                    "absolute inset-y-0 start-0 rounded-full bg-primary",
+                    !dragging && "transition-[width] duration-150"
+                  )}
+                  style={{ width: `${pct}%` }}
+                />
+              </div>
             </div>
             <div className="mt-1.5 flex justify-between font-mono text-[11px] tabular-nums text-muted-foreground">
-              <span>
-                {mins}:{secs.toString().padStart(2, "0")}
-              </span>
-              <span>3:24</span>
+              <span>{formatPlayerTime(elapsed)}</span>
+              <span>{formatPlayerTime(duration || 0)}</span>
             </div>
           </div>
         </Stagger>

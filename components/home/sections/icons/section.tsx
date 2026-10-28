@@ -1,8 +1,9 @@
 import Image from "next/image"
 import Link from "next/link"
 
+import { HomeSectionHeading } from "@/components/home/section-heading"
 import { siteConfig } from "@/lib/config"
-import { RainbowButton } from "@sonojs/ui/components/rainbow-button"
+import { Button } from "@sonojs/ui/components/button"
 
 const FEATURES = [
   "Developer and technology icons",
@@ -49,16 +50,9 @@ export function HomeIconsSection() {
               animation: "sono-fade-up 520ms var(--motion-ease) both",
             }}
           >
-            <p className="text-sm font-medium tracking-wide text-primary">
-              + ICONS
-            </p>
-
-            <h2
-              id="home-icons-heading"
-              className="mt-3 text-balance text-[clamp(1.75rem,5vw,2.75rem)] leading-[1.12] font-semibold tracking-[-0.035em] text-foreground"
-            >
-              4000+ icons. One collection.
-            </h2>
+            <HomeSectionHeading id="home-icons-heading">
+              Icons for every interface
+            </HomeSectionHeading>
 
             <p className="mt-4 max-w-[34em] text-[clamp(0.9375rem,3.2vw,1.0625rem)] leading-[1.6] text-muted-foreground">
               Explore a growing collection of icons for development, crypto,
@@ -74,7 +68,7 @@ export function HomeIconsSection() {
                 >
                   <span
                     aria-hidden
-                    className="mt-1.5 size-1.5 shrink-0 rounded-full bg-chart-2"
+                    className="mt-1.5 size-1.5 shrink-0 rounded-full bg-primary"
                   />
                   {line}
                 </li>
@@ -82,16 +76,15 @@ export function HomeIconsSection() {
             </ul>
 
             <div className="mt-7 w-full sm:w-auto">
-              <RainbowButton asChild className="w-full sm:w-auto">
+              <Button asChild className="w-full sm:w-auto">
                 <Link
                   href={ICONS_HREF}
-                  className="w-full no-underline sm:w-auto"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   Explore Icons
                 </Link>
-              </RainbowButton>
+              </Button>
             </div>
           </div>
 

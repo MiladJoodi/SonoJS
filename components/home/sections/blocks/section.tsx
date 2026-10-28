@@ -1,8 +1,9 @@
 import Link from "next/link"
 
+import { HomeSectionHeading } from "@/components/home/section-heading"
 import { HomeChatComposer } from "./chat-composer"
 import { getBlocksStats } from "@/lib/blocks-nav"
-import { RainbowButton } from "@sonojs/ui/components/rainbow-button"
+import { Button } from "@sonojs/ui/components/button"
 
 const FEATURES = [
   "Model picker and prompt chips",
@@ -47,16 +48,9 @@ export function HomeBlocksSection() {
               animation: "sono-fade-up 520ms var(--motion-ease) both",
             }}
           >
-            <p className="text-sm font-medium tracking-wide text-primary">
-              Blocks
-            </p>
-
-            <h2
-              id="home-blocks-heading"
-              className="mt-3 text-balance text-[clamp(1.75rem,5vw,2.75rem)] leading-[1.12] font-semibold tracking-[-0.035em] text-foreground"
-            >
-              Complete interfaces. Built for AI.
-            </h2>
+            <HomeSectionHeading id="home-blocks-heading">
+              Blocks for complete AI interfaces
+            </HomeSectionHeading>
 
             <p className="mt-4 max-w-[34em] text-[clamp(0.9375rem,3.2vw,1.0625rem)] leading-[1.6] text-muted-foreground">
               Production-ready blocks for agent workspaces, chat composers, and
@@ -72,7 +66,7 @@ export function HomeBlocksSection() {
                 >
                   <span
                     aria-hidden
-                    className="mt-1.5 size-1.5 shrink-0 rounded-full bg-chart-2"
+                    className="mt-1.5 size-1.5 shrink-0 rounded-full bg-primary"
                   />
                   {line}
                 </li>
@@ -87,11 +81,9 @@ export function HomeBlocksSection() {
             </p>
 
             <div className="mt-7 w-full sm:w-auto">
-              <RainbowButton asChild className="w-full sm:w-auto">
-                <Link href="/blocks" className="w-full no-underline sm:w-auto">
-                  Explore Blocks
-                </Link>
-              </RainbowButton>
+              <Button asChild className="w-full sm:w-auto">
+                <Link href="/blocks">Explore Blocks</Link>
+              </Button>
             </div>
           </div>
 

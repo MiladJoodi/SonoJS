@@ -1,8 +1,9 @@
 import Link from "next/link"
 
+import { HomeSectionHeading } from "@/components/home/section-heading"
 import { HomeChartStage } from "./chart-stage"
 import { getChartsNavStats } from "@/lib/charts-nav"
-import { RainbowButton } from "@sonojs/ui/components/rainbow-button"
+import { Button } from "@sonojs/ui/components/button"
 
 const FEATURES = [
   "Full RTL support",
@@ -47,16 +48,9 @@ export function HomeChartsSection() {
               animation: "sono-fade-up 520ms var(--motion-ease) both",
             }}
           >
-            <p className="text-sm font-medium tracking-wide text-primary">
-              Charts
-            </p>
-
-            <h2
-              id="home-charts-heading"
-              className="mt-3 text-balance text-[clamp(1.75rem,5vw,2.75rem)] leading-[1.12] font-semibold tracking-[-0.035em] text-foreground"
-            >
-              Beautiful charts. Ready for production.
-            </h2>
+            <HomeSectionHeading id="home-charts-heading">
+              Charts ready for production
+            </HomeSectionHeading>
 
             <p className="mt-4 max-w-[34em] text-[clamp(0.9375rem,3.2vw,1.0625rem)] leading-[1.6] text-muted-foreground">
               A collection of customizable, interactive charts for React, built
@@ -73,7 +67,7 @@ export function HomeChartsSection() {
                 >
                   <span
                     aria-hidden
-                    className="mt-1.5 size-1.5 shrink-0 rounded-full bg-chart-2"
+                    className="mt-1.5 size-1.5 shrink-0 rounded-full bg-primary"
                   />
                   {line}
                 </li>
@@ -88,11 +82,9 @@ export function HomeChartsSection() {
             </p>
 
             <div className="mt-7 w-full sm:w-auto">
-              <RainbowButton asChild className="w-full sm:w-auto">
-                <Link href="/charts" className="w-full no-underline sm:w-auto">
-                  Explore Charts
-                </Link>
-              </RainbowButton>
+              <Button asChild className="w-full sm:w-auto">
+                <Link href="/charts">Explore Charts</Link>
+              </Button>
             </div>
           </div>
 
