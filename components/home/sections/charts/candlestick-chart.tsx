@@ -411,7 +411,7 @@ export function HomeCandlestickChart({
   }, [fullData.length, plotRtl, seriesLast])
 
   const tooltipContent = React.useCallback(
-    (props: BtcTooltipProps) => (
+    (props: Omit<BtcTooltipProps, "timeframe" | "locale">) => (
       <BtcTooltip {...props} timeframe={timeframe} locale={locale} />
     ),
     [locale, timeframe]
