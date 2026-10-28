@@ -1,6 +1,0 @@
-OLD:
-import CryptoPortfolio03 from "@/registry/blocks/dashboards-analytics/crypto-portfolio/crypto-portfolio-03/crypto-portfolio"
-
-NEW:
-import CryptoPortfolio03 from "@/registry/blocks/dashboards-analytics/crypto-portfolio/crypto-portfolio-03/crypto-portfolio"
-import CryptoPortfolio04 from "@/registry/blocks/dashboards-analytics/crypto-portfolio/crypto-portfolio-04/crypto-portfolio"

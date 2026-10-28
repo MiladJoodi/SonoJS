@@ -1,9 +1,0 @@
-{
-  "type": "tool_use",
-  "name": "Shell",
-  "input": {
-    "command": "Remove-Item -Force \"I:\\Github\\new\\Sono\\SonoJs\\registry\\blocks\\dashboards-analytics\\crypto-portfolio\\crypto-portfolio-01\\images\\avatar.avif\"; npm run registry:build",
-    "working_directory": "i:\\Github\\new\\Sono\\SonoJs",
-    "description": "Remove avif, rebuild registry for 01"
-  }
-}

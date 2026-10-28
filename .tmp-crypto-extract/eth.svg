@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" role="img" aria-label="Ethereum">
-  <title>Ethereum</title>
-  <polygon fill="#2F3030" points="249.982,6.554 397.98,251.112 250.53,188.092" />
-  <polygon fill="#828384" points="102.39,251.112 249.982,6.554 250.53,188.092" />
-  <polygon fill="#343535" points="249.982,341.285 102.39,251.112 250.53,188.092" />
-  <polygon fill="#131313" points="397.98,251.112 250.53,188.092 249.982,341.285" />
-  <polygon fill="#2F3030" points="249.982,372.329 397.98,284.597 249.982,493.13" />
-  <polygon fill="#828384" points="249.982,372.329 102.39,284.597 249.982,493.13" />
-</svg>

@@ -1,7 +1,0 @@
-{
-  "type": "tool_use",
-  "name": "Shell",
-  "input": {
-    "command": "# Convert avif → webp for turbopack support (all crypto-portfolio variants)\n$src = \"I:\\Github\\new\\Sono\\SonoJs\\registry\\blocks\\dashboards-analytics\\crypto-portfolio\\crypto-portfolio-01\\images\\avatar.avif\"\n# Prefer magick/ffmpeg if available\nif (Get-Command magick -ErrorAction SilentlyContinue) {\n  foreach ($v in @(\"01\",\"02\",\"03\",\"04\")) {\n    $dir = \"I:\\Github\\new\\Sono\\SonoJs\\registry\\blocks\\dashboards-analytics\\crypto-portfolio\\crypto-portfolio-$v\\images\"\n    magick \"$src\" \"$dir\\avatar.webp\"\n  }\n  \"magick ok\"\n} elseif (Get-Command ffmpeg -ErrorAction SilentlyContinue) {\n  foreach ($v in @(\"01\",\"02\",\"03\",\"04\")) {\n    $dir = \"I:\\Github\\new\\Sono\\SonoJs\\registry\\blocks\\dashboards-analytics\\crypto-portfolio\\crypto-portfolio-$v\\images\"\n    ffmpeg -y -i \"$src\" \"$dir\\avatar.webp\" 2>$null\n  }\n  \"ffmpeg ok\"\n} else {\n  \"no converter\"\n  Get-ChildItem \"I:\\Github\\new\\Sono\\SonoJs\\registry\\blocks\\dashboards-analytics\\crypto-portfolio\\crypto-portfolio-01\\images\"\n}"
-  }
-}
