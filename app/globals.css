@@ -853,6 +853,15 @@ html:has([data-block-embed]) body {
   }
 }
 
+@keyframes sono-mark-rise {
+  from {
+    transform: scaleY(0.15);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
 /*
  * Page articles set a reading column (`max-w-*`). Inside the workspace the
  * main track is the column, so previews can use the free width. Component

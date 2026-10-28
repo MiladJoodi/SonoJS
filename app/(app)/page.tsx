@@ -4,7 +4,7 @@ import { siteConfig } from "@/lib/config"
 import { absoluteUrl, pageMetadata } from "@/lib/seo"
 
 export const metadata = pageMetadata({
-  title: "SonoJS. Tell your agent. Get the UI.",
+  title: "SonoJS – Tell your agent. Get the UI.",
   description: siteConfig.description,
   path: "/",
   absoluteTitle: true,
