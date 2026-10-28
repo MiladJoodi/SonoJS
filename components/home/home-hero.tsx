@@ -1,5 +1,5 @@
-import { AgentDemo } from "@/components/home/agent-demo"
 import { CommandBar } from "@/components/home/command-bar"
+import { HeroShowcase } from "@/components/home/hero-showcase"
 import { PlatformBadges } from "@/components/home/platform-badges"
 import { siteConfig } from "@/lib/config"
 
@@ -80,7 +80,7 @@ export function HomeHero() {
               animation: "sono-fade-up 520ms var(--motion-ease) 200ms both",
             }}
           >
-            <AgentDemo />
+            <HeroShowcase />
           </div>
         </div>
 

@@ -45,18 +45,6 @@ const TEAM_SIZES = [
   { value: "200+", label: "200+ people" },
 ] as const
 
-const COUNTRIES = [
-  { value: "us", label: "United States" },
-  { value: "gb", label: "United Kingdom" },
-  { value: "ca", label: "Canada" },
-  { value: "de", label: "Germany" },
-  { value: "nl", label: "Netherlands" },
-  { value: "ae", label: "United Arab Emirates" },
-  { value: "in", label: "India" },
-  { value: "au", label: "Australia" },
-  { value: "other", label: "Other" },
-] as const
-
 function slugify(value: string) {
   return value
     .toLowerCase()
@@ -77,13 +65,12 @@ function RequiredMark() {
 export default function WorkspaceSetup({
   className,
   ...props
-}: React.ComponentProps<"section">) {
+}: React.ComponentProps<"div">) {
   const [workspaceName, setWorkspaceName] = React.useState("")
   const [slug, setSlug] = React.useState("")
   const [slugTouched, setSlugTouched] = React.useState(false)
   const [role, setRole] = React.useState("")
   const [teamSize, setTeamSize] = React.useState("")
-  const [country, setCountry] = React.useState("")
   const [accepted, setAccepted] = React.useState(false)
 
   const onWorkspaceNameChange = (value: string) => {
@@ -94,76 +81,50 @@ export default function WorkspaceSetup({
   }
 
   return (
-    <section
+    <div
       className={cn(
-        "relative isolate w-full min-w-0 overflow-hidden bg-white dark:bg-background py-10 text-foreground sm:py-12",
+        "w-full bg-canvas px-4 py-10 text-foreground sm:px-6 sm:py-16",
         className
       )}
-      aria-labelledby="workspace-setup-01-heading"
       {...props}
     >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10"
-      >
-        <div className="absolute start-1/2 top-[-18%] size-[24rem] -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
-      </div>
-
-      <div className="mx-auto w-full max-w-2xl px-4 sm:px-6">
-        <header className="text-start">
-          <p className="mb-2 text-sm font-medium tracking-wide text-primary">
-            Workspace
-          </p>
-          <h1
-            id="workspace-setup-01-heading"
-            className="text-balance text-2xl font-semibold tracking-tight text-foreground sm:text-3xl"
-          >
-            Create your workspace
-          </h1>
-          <p className="mt-2 text-pretty text-sm text-muted-foreground">
-            Set up your team’s SonoJS workspace — invite members and ship UI
-            after you create it.
-          </p>
-        </header>
-
+      <div className="mx-auto w-full max-w-lg">
         <form
-          className="mt-8 rounded-[12px] border border-border/70 bg-card p-6 shadow-soft sm:p-8"
+          className="overflow-hidden rounded-[12px] border border-border/70 bg-card shadow-soft"
           onSubmit={(event) => event.preventDefault()}
           noValidate
+          aria-labelledby="workspace-setup-01-heading"
         >
-          <FieldGroup className="gap-6">
-            <div className="grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-6">
-              <Field className="col-span-full sm:col-span-3">
-                <FieldLabel htmlFor="workspace-setup-01-first-name">
-                  First name <RequiredMark />
+          <header className="border-b border-border/70 px-5 py-5 text-start sm:px-8 sm:py-6">
+            <h1
+              id="workspace-setup-01-heading"
+              className="text-balance text-xl font-semibold tracking-tight sm:text-2xl"
+            >
+              Create your workspace
+            </h1>
+            <p className="mt-1.5 text-pretty text-sm text-muted-foreground">
+              Name it, pick a URL, and tell us a bit about your team.
+            </p>
+          </header>
+
+          <div className="px-5 py-6 sm:px-8 sm:py-8">
+            <FieldGroup className="gap-5">
+              <Field>
+                <FieldLabel htmlFor="workspace-setup-01-name">
+                  Full name <RequiredMark />
                 </FieldLabel>
                 <Input
-                  id="workspace-setup-01-first-name"
-                  name="firstName"
+                  id="workspace-setup-01-name"
+                  name="fullName"
                   type="text"
-                  autoComplete="given-name"
-                  placeholder="Jordan"
+                  autoComplete="name"
+                  placeholder="Jordan Lee"
                   required
                   aria-required="true"
                 />
               </Field>
 
-              <Field className="col-span-full sm:col-span-3">
-                <FieldLabel htmlFor="workspace-setup-01-last-name">
-                  Last name <RequiredMark />
-                </FieldLabel>
-                <Input
-                  id="workspace-setup-01-last-name"
-                  name="lastName"
-                  type="text"
-                  autoComplete="family-name"
-                  placeholder="Lee"
-                  required
-                  aria-required="true"
-                />
-              </Field>
-
-              <Field className="col-span-full">
+              <Field>
                 <FieldLabel htmlFor="workspace-setup-01-email">
                   Work email <RequiredMark />
                 </FieldLabel>
@@ -178,11 +139,11 @@ export default function WorkspaceSetup({
                   aria-required="true"
                 />
                 <FieldDescription>
-                  We’ll send the invite link and billing receipts here.
+                  We’ll send invites and billing receipts here.
                 </FieldDescription>
               </Field>
 
-              <Field className="col-span-full">
+              <Field>
                 <FieldLabel htmlFor="workspace-setup-01-workspace">
                   Workspace name <RequiredMark />
                 </FieldLabel>
@@ -191,7 +152,7 @@ export default function WorkspaceSetup({
                   name="workspaceName"
                   type="text"
                   autoComplete="organization"
-                  placeholder="Acme Design System"
+                  placeholder="Acme Design"
                   value={workspaceName}
                   onChange={(e) => onWorkspaceNameChange(e.target.value)}
                   required
@@ -199,13 +160,13 @@ export default function WorkspaceSetup({
                 />
               </Field>
 
-              <Field className="col-span-full">
+              <Field>
                 <FieldLabel htmlFor="workspace-setup-01-slug">
                   Workspace URL <RequiredMark />
                 </FieldLabel>
                 <InputGroup dir="ltr">
                   <InputGroupAddon align="inline-start">
-                    <InputGroupText>app.sonojs.com/</InputGroupText>
+                    <InputGroupText>app.example.com/</InputGroupText>
                   </InputGroupAddon>
                   <InputGroupInput
                     id="workspace-setup-01-slug"
@@ -225,132 +186,108 @@ export default function WorkspaceSetup({
                   />
                 </InputGroup>
                 <FieldDescription id="workspace-setup-01-slug-hint">
-                  Lowercase letters, numbers, and hyphens. You can change this
-                  later in settings.
+                  Lowercase letters, numbers, and hyphens.
                 </FieldDescription>
               </Field>
 
-              <Field className="col-span-full sm:col-span-3">
-                <FieldLabel htmlFor="workspace-setup-01-role">
-                  Your role <RequiredMark />
-                </FieldLabel>
-                <Select value={role} onValueChange={setRole}>
-                  <SelectTrigger
-                    id="workspace-setup-01-role"
-                    className="w-full"
-                    aria-required="true"
-                  >
-                    <SelectValue placeholder="Select your role" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {ROLES.map((item) => (
-                      <SelectItem key={item.value} value={item.value}>
-                        {item.label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </Field>
+              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                <Field>
+                  <FieldLabel htmlFor="workspace-setup-01-role">
+                    Your role <RequiredMark />
+                  </FieldLabel>
+                  <Select value={role} onValueChange={setRole}>
+                    <SelectTrigger
+                      id="workspace-setup-01-role"
+                      className="w-full cursor-pointer"
+                      aria-required="true"
+                    >
+                      <SelectValue placeholder="Select role" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {ROLES.map((item) => (
+                        <SelectItem
+                          key={item.value}
+                          value={item.value}
+                          className="cursor-pointer"
+                        >
+                          {item.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </Field>
 
-              <Field className="col-span-full sm:col-span-3">
-                <FieldLabel htmlFor="workspace-setup-01-team-size">
-                  Team size <RequiredMark />
-                </FieldLabel>
-                <Select value={teamSize} onValueChange={setTeamSize}>
-                  <SelectTrigger
-                    id="workspace-setup-01-team-size"
-                    className="w-full"
-                    aria-required="true"
-                  >
-                    <SelectValue placeholder="Select team size" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {TEAM_SIZES.map((item) => (
-                      <SelectItem key={item.value} value={item.value}>
-                        {item.label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </Field>
-
-              <Field className="col-span-full sm:col-span-3">
-                <FieldLabel htmlFor="workspace-setup-01-country">
-                  Country / region <RequiredMark />
-                </FieldLabel>
-                <Select value={country} onValueChange={setCountry}>
-                  <SelectTrigger
-                    id="workspace-setup-01-country"
-                    className="w-full"
-                    aria-required="true"
-                  >
-                    <SelectValue placeholder="Select country" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {COUNTRIES.map((item) => (
-                      <SelectItem key={item.value} value={item.value}>
-                        {item.label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <FieldDescription>
-                  Used for tax and data-residency defaults.
-                </FieldDescription>
-              </Field>
-
-              <Field className="col-span-full sm:col-span-3">
-                <FieldLabel htmlFor="workspace-setup-01-phone">
-                  Phone{" "}
-                  <span className="font-normal text-muted-foreground">
-                    (optional)
-                  </span>
-                </FieldLabel>
-                <Input
-                  id="workspace-setup-01-phone"
-                  name="phone"
-                  type="tel"
-                  dir="ltr"
-                  autoComplete="tel"
-                  placeholder="+1 415 555 0199"
-                />
-              </Field>
-            </div>
-
-            <Separator />
-
-            <Field orientation="horizontal" className="items-start gap-3">
-              <Checkbox
-                id="workspace-setup-01-terms"
-                checked={accepted}
-                onCheckedChange={(value) => setAccepted(value === true)}
-                aria-required="true"
-              />
-              <div className="grid gap-1.5 leading-none">
-                <FieldLabel
-                  htmlFor="workspace-setup-01-terms"
-                  className="font-normal"
-                >
-                  I agree to the Terms of Service and Privacy Policy{" "}
-                  <RequiredMark />
-                </FieldLabel>
-                <FieldDescription>
-                  You can invite teammates right after the workspace is created.
-                </FieldDescription>
+                <Field>
+                  <FieldLabel htmlFor="workspace-setup-01-team-size">
+                    Team size <RequiredMark />
+                  </FieldLabel>
+                  <Select value={teamSize} onValueChange={setTeamSize}>
+                    <SelectTrigger
+                      id="workspace-setup-01-team-size"
+                      className="w-full cursor-pointer"
+                      aria-required="true"
+                    >
+                      <SelectValue placeholder="Select size" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {TEAM_SIZES.map((item) => (
+                        <SelectItem
+                          key={item.value}
+                          value={item.value}
+                          className="cursor-pointer"
+                        >
+                          {item.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </Field>
               </div>
-            </Field>
 
-            <div className="flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-end">
-              <Button type="button" variant="outline">
-                Cancel
-              </Button>
-              <Button type="submit" disabled={!accepted}>
-                Create workspace
-              </Button>
-            </div>
-          </FieldGroup>
+              <Separator />
+
+              <Field orientation="horizontal" className="items-start gap-3">
+                <Checkbox
+                  id="workspace-setup-01-terms"
+                  checked={accepted}
+                  onCheckedChange={(value) => setAccepted(value === true)}
+                  className="cursor-pointer"
+                  aria-required="true"
+                />
+                <div className="grid gap-1 leading-none">
+                  <FieldLabel
+                    htmlFor="workspace-setup-01-terms"
+                    className="cursor-pointer font-normal"
+                  >
+                    I agree to the Terms of Service and Privacy Policy{" "}
+                    <RequiredMark />
+                  </FieldLabel>
+                  <FieldDescription>
+                    You can invite teammates right after create.
+                  </FieldDescription>
+                </div>
+              </Field>
+
+              <div className="flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-end">
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="cursor-pointer"
+                >
+                  Cancel
+                </Button>
+                <Button
+                  type="submit"
+                  disabled={!accepted}
+                  className="cursor-pointer disabled:cursor-not-allowed"
+                >
+                  Create workspace
+                </Button>
+              </div>
+            </FieldGroup>
+          </div>
         </form>
       </div>
-    </section>
+    </div>
   )
 }

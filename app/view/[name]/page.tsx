@@ -239,6 +239,14 @@ import ChatComposer02 from "@/registry/blocks/ai-agents/chat-composer/chat-compo
 import ChatComposer03 from "@/registry/blocks/ai-agents/chat-composer/chat-composer-03/chat-composer"
 import ChatComposer04 from "@/registry/blocks/ai-agents/chat-composer/chat-composer-04/chat-composer"
 import EmptyState01 from "@/registry/blocks/feedback-states/empty-state/empty-state-01/empty-state"
+import EmptyState02 from "@/registry/blocks/feedback-states/empty-state/empty-state-02/empty-state"
+import EmptyState03 from "@/registry/blocks/feedback-states/empty-state/empty-state-03/empty-state"
+import EmptyState04 from "@/registry/blocks/feedback-states/empty-state/empty-state-04/empty-state"
+import EmptyState05 from "@/registry/blocks/feedback-states/empty-state/empty-state-05/empty-state"
+import EmptyState06 from "@/registry/blocks/feedback-states/empty-state/empty-state-06/empty-state"
+import EmptyState07 from "@/registry/blocks/feedback-states/empty-state/empty-state-07/empty-state"
+import EmptyState08 from "@/registry/blocks/feedback-states/empty-state/empty-state-08/empty-state"
+import EmptyState09 from "@/registry/blocks/feedback-states/empty-state/empty-state-09/empty-state"
 import DataExport01 from "@/registry/blocks/files-media/data-export/data-export-01/data-export"
 import DataExport02 from "@/registry/blocks/files-media/data-export/data-export-02/data-export"
 import FileManager01 from "@/registry/blocks/files-media/file-manager/file-manager-01/file-manager"
@@ -248,6 +256,8 @@ import Comments01 from "@/registry/blocks/communication/comments/comments-01/com
 import ActivityFeed01 from "@/registry/blocks/communication/activity-feed/activity-feed-01/activity-feed"
 import ActivityFeed02 from "@/registry/blocks/communication/activity-feed/activity-feed-02/activity-feed"
 import ActivityFeed03 from "@/registry/blocks/communication/activity-feed/activity-feed-03/activity-feed"
+import ActivityFeed04 from "@/registry/blocks/communication/activity-feed/activity-feed-04/activity-feed"
+import ActivityFeed05 from "@/registry/blocks/communication/activity-feed/activity-feed-05/activity-feed"
 import NotificationCenter01 from "@/registry/blocks/communication/notification-center/notification-center-01/notification-center"
 import AnalyticsDashboard01 from "@/registry/blocks/dashboards-analytics/analytics-dashboard/analytics-dashboard-01/analytics-dashboard"
 import Calendar01 from "@/registry/blocks/calendar-scheduling/calendar/calendar-01/calendar"
@@ -256,12 +266,16 @@ import SetupWizard02 from "@/registry/blocks/onboarding/setup-wizard/setup-wizar
 import SetupWizard03 from "@/registry/blocks/onboarding/setup-wizard/setup-wizard-03/setup-wizard"
 import WorkspaceSetup01 from "@/registry/blocks/onboarding/workspace-setup/workspace-setup-01/workspace-setup"
 import WorkspaceSetup02 from "@/registry/blocks/onboarding/workspace-setup/workspace-setup-02/workspace-setup"
+import WorkspaceSetup03 from "@/registry/blocks/onboarding/workspace-setup/workspace-setup-03/workspace-setup"
+import WorkspaceSetup04 from "@/registry/blocks/onboarding/workspace-setup/workspace-setup-04/workspace-setup"
 import ProgressChecklist01 from "@/registry/blocks/onboarding/progress-checklist/progress-checklist-01/progress-checklist"
 import ProgressChecklist02 from "@/registry/blocks/onboarding/progress-checklist/progress-checklist-02/progress-checklist"
 import ProgressChecklist03 from "@/registry/blocks/onboarding/progress-checklist/progress-checklist-03/progress-checklist"
 import ProgressChecklist04 from "@/registry/blocks/onboarding/progress-checklist/progress-checklist-04/progress-checklist"
 import ProgressChecklist05 from "@/registry/blocks/onboarding/progress-checklist/progress-checklist-05/progress-checklist"
 import DataImport01 from "@/registry/blocks/onboarding/data-import/data-import-01/data-import"
+import DataImport02 from "@/registry/blocks/onboarding/data-import/data-import-02/data-import"
+import DataImport03 from "@/registry/blocks/onboarding/data-import/data-import-03/data-import"
 import SearchResults01 from "@/registry/blocks/search-filtering/search-results/search-results-01/search-results"
 import FilterPanel01 from "@/registry/blocks/search-filtering/filter-panel/filter-panel-01/filter-panel"
 import PaymentForm01 from "@/registry/blocks/payments-billing/payment-form/payment-form-01/payment-form"
@@ -2322,7 +2336,7 @@ const views: Record<string, ComponentType> = {
   },
   "activity-feed-01": function ActivityFeed01View() {
     return (
-      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
         <div className="w-full">
           <ActivityFeed01 />
         </div>
@@ -2331,7 +2345,7 @@ const views: Record<string, ComponentType> = {
   },
   "activity-feed-02": function ActivityFeed02View() {
     return (
-      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
         <div className="w-full">
           <ActivityFeed02 />
         </div>
@@ -2340,9 +2354,27 @@ const views: Record<string, ComponentType> = {
   },
   "activity-feed-03": function ActivityFeed03View() {
     return (
-      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
         <div className="w-full">
           <ActivityFeed03 />
+        </div>
+      </div>
+    )
+  },
+  "activity-feed-04": function ActivityFeed04View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <ActivityFeed04 />
+        </div>
+      </div>
+    )
+  },
+  "activity-feed-05": function ActivityFeed05View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <ActivityFeed05 />
         </div>
       </div>
     )
@@ -2475,7 +2507,7 @@ const views: Record<string, ComponentType> = {
   },
   "workspace-setup-01": function WorkspaceSetup01View() {
     return (
-      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
         <div className="w-full">
           <WorkspaceSetup01 />
         </div>
@@ -2484,9 +2516,27 @@ const views: Record<string, ComponentType> = {
   },
   "workspace-setup-02": function WorkspaceSetup02View() {
     return (
-      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
         <div className="w-full">
           <WorkspaceSetup02 />
+        </div>
+      </div>
+    )
+  },
+  "workspace-setup-03": function WorkspaceSetup03View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <WorkspaceSetup03 />
+        </div>
+      </div>
+    )
+  },
+  "workspace-setup-04": function WorkspaceSetup04View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <WorkspaceSetup04 />
         </div>
       </div>
     )
@@ -2541,6 +2591,24 @@ const views: Record<string, ComponentType> = {
       <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
         <div className="w-full">
           <DataImport01 />
+        </div>
+      </div>
+    )
+  },
+  "data-import-02": function DataImport02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <DataImport02 />
+        </div>
+      </div>
+    )
+  },
+  "data-import-03": function DataImport03View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <DataImport03 />
         </div>
       </div>
     )

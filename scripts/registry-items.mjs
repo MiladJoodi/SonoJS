@@ -6389,6 +6389,20 @@ const registryItemsRaw = [
       images: [],
     }
   ),
+  communicationActivityFeedBlock(
+    "activity-feed-04",
+    "Day-grouped activity feed — sticky Today/Yesterday/Earlier headers with Team/Code/System chips (RTL/LTR).",
+    {
+      images: ["sarah.webp", "alex.webp", "david.webp", "maria.webp"],
+    }
+  ),
+  communicationActivityFeedBlock(
+    "activity-feed-05",
+    "Split live activity — pulsing Live feed plus This week stats and highlights panel (RTL/LTR).",
+    {
+      images: ["sarah.webp", "alex.webp", "david.webp", "maria.webp"],
+    }
+  ),
   dashboardsAnalyticsDashboardBlock(
     "analytics-dashboard-01",
     "Analytics overview — time-range KPIs with sparklines, revenue bars, traffic sources, top pages, and quick stats (RTL/LTR)."
@@ -6688,7 +6702,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "workspace-setup-01",
     description:
-      "Create workspace — name, work email, URL slug, role, team size, country, and terms.",
+      "Compact create-workspace card — name, email, auto slug, role, team size, and terms (RTL/LTR).",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: [],
     registryDependencies: [
@@ -6714,13 +6728,12 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "workspace-setup-02",
     description:
-      "Create workspace — organization, region, and selectable Creator/Team/Agency plan cards.",
+      "Org + plan picker — organization, region, and Creator/Team/Agency radio cards (RTL/LTR).",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: [
       "badge",
       "button",
-      "card",
       "field",
       "input",
       "radio-group",
@@ -6733,6 +6746,54 @@ const registryItemsRaw = [
         type: "registry:component",
         target:
           "components/blocks/onboarding/workspace-setup-02/workspace-setup.tsx",
+      },
+    ],
+  },
+  {
+    name: "workspace-setup-03",
+    type: "registry:block",
+    title: "workspace-setup-03",
+    description:
+      "Brand-split create workspace — dark panel + light name/slug/role form (RTL/LTR).",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: [
+      "button",
+      "field",
+      "input",
+      "input-group",
+      "select",
+    ],
+    files: [
+      {
+        path: "registry/blocks/onboarding/workspace-setup/workspace-setup-03/workspace-setup.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/onboarding/workspace-setup-03/workspace-setup.tsx",
+      },
+    ],
+  },
+  {
+    name: "workspace-setup-04",
+    type: "registry:block",
+    title: "workspace-setup-04",
+    description:
+      "Create workspace + invite teammates — name, slug, and removable email chips (RTL/LTR).",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: [
+      "badge",
+      "button",
+      "field",
+      "input",
+      "input-group",
+    ],
+    files: [
+      {
+        path: "registry/blocks/onboarding/workspace-setup/workspace-setup-04/workspace-setup.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/onboarding/workspace-setup-04/workspace-setup.tsx",
       },
     ],
   },
@@ -6835,16 +6896,52 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "data-import-01",
     description:
-      "Design system migration — animated step Progress bars, rerun control, and logs accordion.",
+      "Contacts import progress — overall percent, row count, and step checklist.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
-    registryDependencies: ["accordion", "button", "progress"],
+    registryDependencies: ["button", "progress"],
     files: [
       {
         path: "registry/blocks/onboarding/data-import/data-import-01/data-import.tsx",
         type: "registry:component",
         target:
           "components/blocks/onboarding/data-import-01/data-import.tsx",
+      },
+    ],
+  },
+  {
+    name: "data-import-02",
+    type: "registry:block",
+    title: "data-import-02",
+    description:
+      "Upload dropzone — format chips, dashed zone, selected file row, Continue.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: ["badge", "button"],
+    files: [
+      {
+        path: "registry/blocks/onboarding/data-import/data-import-02/data-import.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/onboarding/data-import-02/data-import.tsx",
+      },
+    ],
+  },
+  {
+    name: "data-import-03",
+    type: "registry:block",
+    title: "data-import-03",
+    description:
+      "Column mapping — source columns to destination selects with sample preview.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: ["badge", "button", "select", "separator"],
+    files: [
+      {
+        path: "registry/blocks/onboarding/data-import/data-import-03/data-import.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/onboarding/data-import-03/data-import.tsx",
       },
     ],
   },

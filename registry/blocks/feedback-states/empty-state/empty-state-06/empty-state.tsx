@@ -32,7 +32,7 @@ export default function EmptyState({
           <nav aria-label="Breadcrumb" className="flex items-center gap-1 text-sm">
             <span className="text-muted-foreground">Files</span>
             <ChevronRightIcon
-              className="size-3.5 text-muted-foreground"
+              className="icon-dir size-3.5 text-muted-foreground"
               aria-hidden
             />
             <span className="font-medium text-foreground">Brand assets</span>

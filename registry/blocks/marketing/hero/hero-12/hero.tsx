@@ -67,7 +67,7 @@ export default function Hero({
           <div className="mt-8 flex flex-wrap gap-3">
             <Button type="button" size="lg">
               Explore the platform
-              <ArrowRightIcon className="size-4" aria-hidden />
+              <ArrowRightIcon className="icon-dir size-4" aria-hidden />
             </Button>
             <Button
               type="button"

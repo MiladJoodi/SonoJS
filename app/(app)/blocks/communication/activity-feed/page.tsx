@@ -5,6 +5,8 @@ import {
 import ActivityFeed01 from "@/registry/blocks/communication/activity-feed/activity-feed-01/activity-feed"
 import ActivityFeed02 from "@/registry/blocks/communication/activity-feed/activity-feed-02/activity-feed"
 import ActivityFeed03 from "@/registry/blocks/communication/activity-feed/activity-feed-03/activity-feed"
+import ActivityFeed04 from "@/registry/blocks/communication/activity-feed/activity-feed-04/activity-feed"
+import ActivityFeed05 from "@/registry/blocks/communication/activity-feed/activity-feed-05/activity-feed"
 
 import { blocksPageMetadata } from "@/lib/seo"
 
@@ -40,20 +42,15 @@ export default function BlockActivityFeedDocsPage() {
       <BlocksPageHeader
         title="Activity Feed"
         pathname="/blocks/communication/activity-feed"
-        description="Workspace timelines — event list, rich cards, or a compact activity rail."
+        description="Card timeline, rich events, compact rail, day-grouped filters, and live + highlights."
       />
 
       <div className="flex flex-col gap-8">
         <BlockExample
           name="activity-feed-01"
-          usage={[
-            {
-              title: "app/page.tsx",
-              code: usage("activity-feed-01"),
-            },
-          ]}
+          usage={[{ title: "app/page.tsx", code: usage("activity-feed-01") }]}
           previewAlign="start"
-          previewClassName="bg-white p-0 dark:bg-background"
+          previewClassName="bg-canvas p-0"
         >
           <ActivityFeed01 />
         </BlockExample>
@@ -62,14 +59,9 @@ export default function BlockActivityFeedDocsPage() {
 
         <BlockExample
           name="activity-feed-02"
-          usage={[
-            {
-              title: "app/page.tsx",
-              code: usage("activity-feed-02"),
-            },
-          ]}
+          usage={[{ title: "app/page.tsx", code: usage("activity-feed-02") }]}
           previewAlign="start"
-          previewClassName="bg-white p-0 dark:bg-background"
+          previewClassName="bg-canvas p-0"
         >
           <ActivityFeed02 />
         </BlockExample>
@@ -78,16 +70,33 @@ export default function BlockActivityFeedDocsPage() {
 
         <BlockExample
           name="activity-feed-03"
-          usage={[
-            {
-              title: "app/page.tsx",
-              code: usage("activity-feed-03"),
-            },
-          ]}
+          usage={[{ title: "app/page.tsx", code: usage("activity-feed-03") }]}
           previewAlign="start"
-          previewClassName="bg-white p-0 dark:bg-background"
+          previewClassName="bg-canvas p-0"
         >
           <ActivityFeed03 />
+        </BlockExample>
+
+        <ExampleRule />
+
+        <BlockExample
+          name="activity-feed-04"
+          usage={[{ title: "app/page.tsx", code: usage("activity-feed-04") }]}
+          previewAlign="start"
+          previewClassName="bg-canvas p-0"
+        >
+          <ActivityFeed04 />
+        </BlockExample>
+
+        <ExampleRule />
+
+        <BlockExample
+          name="activity-feed-05"
+          usage={[{ title: "app/page.tsx", code: usage("activity-feed-05") }]}
+          previewAlign="start"
+          previewClassName="bg-canvas p-0"
+        >
+          <ActivityFeed05 />
         </BlockExample>
       </div>
     </article>
