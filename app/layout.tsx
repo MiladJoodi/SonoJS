@@ -9,7 +9,7 @@ import {
 import { ThemeProvider } from "@/components/theme-provider"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { siteConfig } from "@/lib/config"
-import { isProductionIndexingEnabled } from "@/lib/seo"
+import { isProductionIndexingEnabled, OG_IMAGE } from "@/lib/seo"
 import { PRODUCTION_ORIGIN } from "@/lib/site-origin"
 
 import "./globals.css"
@@ -27,6 +27,16 @@ const geistMono = Geist_Mono({
 
 const indexing = isProductionIndexingEnabled()
 
+const ogImages = [
+  {
+    url: OG_IMAGE.url,
+    width: OG_IMAGE.width,
+    height: OG_IMAGE.height,
+    type: OG_IMAGE.type,
+    alt: OG_IMAGE.alt,
+  },
+]
+
 export const metadata: Metadata = {
   metadataBase: new URL(PRODUCTION_ORIGIN),
   title: {
@@ -35,8 +45,15 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   applicationName: siteConfig.name,
+  alternates: {
+    canonical: "/",
+  },
   icons: {
-    icon: [{ url: "/favicon.png", type: "image/png" }],
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon.png", type: "image/png" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
   },
   openGraph: {
     type: "website",
@@ -45,11 +62,13 @@ export const metadata: Metadata = {
     title: siteConfig.name,
     description: siteConfig.description,
     url: PRODUCTION_ORIGIN,
+    images: ogImages,
   },
   twitter: {
     card: "summary_large_image",
     title: siteConfig.name,
     description: siteConfig.description,
+    images: [OG_IMAGE.url],
   },
   robots: indexing
     ? { index: true, follow: true }

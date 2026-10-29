@@ -5,6 +5,27 @@ import { PRODUCTION_ORIGIN } from "@/lib/site-origin"
 
 export { PRODUCTION_ORIGIN }
 
+/** Committed share image at `public/og.png` (1200×630). */
+export const OG_IMAGE = {
+  url: "/og.png",
+  width: 1200,
+  height: 630,
+  type: "image/png",
+  alt: "SonoJS — React components, blocks, charts, and tools",
+} as const
+
+function shareImages(alt?: string): NonNullable<Metadata["openGraph"]>["images"] {
+  return [
+    {
+      url: OG_IMAGE.url,
+      width: OG_IMAGE.width,
+      height: OG_IMAGE.height,
+      type: OG_IMAGE.type,
+      alt: alt ?? OG_IMAGE.alt,
+    },
+  ]
+}
+
 /** Paths / prefixes that must never appear in the sitemap and use noindex. */
 export const NOINDEX_PATH_PREFIXES = ["/view"] as const
 export const NOINDEX_EXACT_PATHS = ["/tools/endpoints"] as const
@@ -73,6 +94,8 @@ export function pageMetadata({
   const url = absoluteUrl(normalized)
   const shouldIndex = index && !isNoindexPath(normalized)
 
+  const images = shareImages(title)
+
   return {
     title: absoluteTitle ? { absolute: title } : title,
     description,
@@ -86,11 +109,13 @@ export function pageMetadata({
       siteName: siteConfig.name,
       type: "website",
       locale: "en_US",
+      images,
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
+      images: [OG_IMAGE.url],
     },
     robots: robotsFor(shouldIndex),
   }

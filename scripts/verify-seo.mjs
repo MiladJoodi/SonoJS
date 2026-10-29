@@ -15,11 +15,14 @@ const require = createRequire(import.meta.url)
 const requiredFiles = [
   "app/sitemap.ts",
   "app/robots.ts",
-  "app/opengraph-image.tsx",
   "app/not-found.tsx",
   "lib/seo.ts",
   "lib/seo-sitemap.ts",
   "lib/site-origin.ts",
+  "public/og.png",
+  "public/favicon.svg",
+  "public/favicon.png",
+  "public/apple-touch-icon.png",
 ]
 
 let failed = false
@@ -60,6 +63,33 @@ const publicDirs = require("node:fs").readdirSync(path.join(root, "public"), {
 })
 if (publicDirs.some((d) => d.isDirectory() && d.name.startsWith("r.bak"))) {
   console.error("public/r.bak-* must not remain publicly served")
+  failed = true
+}
+
+const fs = require("node:fs")
+const ogBuf = fs.readFileSync(path.join(root, "public/og.png"))
+// PNG IHDR: width/height at bytes 16–23 (big-endian)
+if (ogBuf[0] === 0x89 && ogBuf[1] === 0x50) {
+  const w = ogBuf.readUInt32BE(16)
+  const h = ogBuf.readUInt32BE(20)
+  if (w !== 1200 || h !== 630) {
+    console.error(`public/og.png must be 1200×630, got ${w}×${h}`)
+    failed = true
+  }
+} else {
+  console.error("public/og.png is not a PNG")
+  failed = true
+}
+
+const seoSrc = fs.readFileSync(path.join(root, "lib/seo.ts"), "utf8")
+if (!seoSrc.includes('url: "/og.png"') || !seoSrc.includes("summary_large_image")) {
+  console.error("lib/seo.ts should declare /og.png and summary_large_image")
+  failed = true
+}
+if (fs.existsSync(path.join(root, "app/opengraph-image.tsx"))) {
+  console.error(
+    "app/opengraph-image.tsx conflicts with static public/og.png — remove it"
+  )
   failed = true
 }
 

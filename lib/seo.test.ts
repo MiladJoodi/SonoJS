@@ -7,6 +7,8 @@ import {
   normalizePath,
   NOINDEX_EXACT_PATHS,
   NOINDEX_PATH_PREFIXES,
+  OG_IMAGE,
+  pageMetadata,
 } from "@/lib/seo"
 import {
   assertSitemapIntegrity,
@@ -32,6 +34,37 @@ describe("seo helpers", () => {
     expect(absoluteUrl("/docs")).toBe(`${PRODUCTION_ORIGIN}/docs`)
     expect(absoluteUrl("/")).toBe(PRODUCTION_ORIGIN)
     expect(absoluteUrl("/docs")).not.toMatch(/localhost|127\.0\.0\.1|vercel\.app/i)
+  })
+
+  it("exposes a committed 1200×630 OG image path", () => {
+    expect(OG_IMAGE.url).toBe("/og.png")
+    expect(OG_IMAGE.width).toBe(1200)
+    expect(OG_IMAGE.height).toBe(630)
+    expect(OG_IMAGE.type).toBe("image/png")
+  })
+
+  it("pageMetadata includes OG/Twitter share images and canonical", () => {
+    const meta = pageMetadata({
+      title: "Button",
+      description: "Button docs",
+      path: "/docs/components/button",
+    })
+    expect(meta.alternates?.canonical).toBe("/docs/components/button")
+    expect(meta.openGraph?.url).toBe(`${PRODUCTION_ORIGIN}/docs/components/button`)
+    expect(meta.openGraph?.images).toEqual([
+      expect.objectContaining({
+        url: "/og.png",
+        width: 1200,
+        height: 630,
+        type: "image/png",
+      }),
+    ])
+    expect(meta.twitter).toEqual(
+      expect.objectContaining({
+        card: "summary_large_image",
+        images: ["/og.png"],
+      })
+    )
   })
 
   it("classifies noindex paths", () => {

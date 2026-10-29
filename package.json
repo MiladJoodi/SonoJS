@@ -15,6 +15,7 @@
     "lint": "eslint",
     "test": "vitest run",
     "verify:cache": "node scripts/verify-cache-headers.mjs",
+    "generate:og": "node scripts/generate-og-assets.mjs",
     "verify:seo": "node scripts/verify-seo.mjs && vitest run lib/seo.test.ts",
     "sonojs": "node packages/cli/bin/sonojs.mjs",
     "fix:ui-imports": "node scripts/fix-ui-imports.mjs",
