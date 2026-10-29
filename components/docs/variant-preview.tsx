@@ -83,21 +83,9 @@ function ExampleLead({
   )
 }
 
-function PreviewSurface({
-  surface,
-  active,
-}: {
-  surface: "plain" | "card"
-  active: string
-}) {
+function PreviewSurface({ active }: { active: string }) {
   if (!active) return null
-  const preview = <RegistryExamplePreview name={active} />
-  if (surface !== "card") return preview
-  return (
-    <div className="w-full max-w-xl rounded-[12px] bg-card p-5">
-      {preview}
-    </div>
-  )
+  return <RegistryExamplePreview name={active} />
 }
 
 export function ComponentVariantPreview({
@@ -113,8 +101,8 @@ export function ComponentVariantPreview({
   /** Override the preview stage surface (default `bg-canvas`). */
   previewClassName?: string
   /**
-   * Wrap the live example in a flat `bg-card` panel on the canvas stage.
-   * Used for AI demos (no border / shadow — surface only).
+   * Preview stage fill. `card` = white/`bg-card` stage (AI demos).
+   * `plain` = soft `bg-canvas` stage.
    */
   previewSurface?: "plain" | "card"
   /** Hide LTR/RTL when the preview has no directional layout (e.g. code). */
@@ -165,7 +153,8 @@ export function ComponentVariantPreview({
   )
 
   const previewFrameClass = cn(
-    "flex min-h-32 items-center justify-center bg-canvas p-8",
+    "flex min-h-32 items-center justify-center p-8",
+    previewSurface === "card" ? "bg-card" : "bg-canvas",
     allowOverflow &&
       "relative z-20 min-h-[28rem] items-start justify-center overflow-visible pt-10 pb-16",
     previewClassName
@@ -245,10 +234,10 @@ export function ComponentVariantPreview({
           >
             {showDirection ? (
               <DirectionProvider dir={dir} className="contents">
-                <PreviewSurface surface={previewSurface} active={active} />
+                <PreviewSurface active={active} />
               </DirectionProvider>
             ) : (
-              <PreviewSurface surface={previewSurface} active={active} />
+              <PreviewSurface active={active} />
             )}
           </div>
         ) : meta?.code && meta?.codeHtml ? (
