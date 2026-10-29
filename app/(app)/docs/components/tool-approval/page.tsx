@@ -82,7 +82,7 @@ export default async function ToolApprovalDocsPage() {
       />
 
       <section className="space-y-4">
-        <ComponentVariantPreview examples={examples} />
+        <ComponentVariantPreview examples={examples} previewSurface="card" />
       </section>
 
       <DocsInstallation name="tool-approval" />

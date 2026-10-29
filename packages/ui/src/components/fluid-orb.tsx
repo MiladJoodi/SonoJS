@@ -7,6 +7,8 @@ import { cn } from "@sonojs/ui/lib/utils"
 export type FluidOrbProps = React.ComponentProps<"div"> & {
   size?: number
   color?: string
+  /** When false, freeze the shader (no RAF). Default true. */
+  animated?: boolean
 }
 
 const VERT = `
@@ -111,6 +113,7 @@ function compile(gl: WebGLRenderingContext, type: number, src: string) {
 function FluidOrb({
   size = 240,
   color = "#1A73F2",
+  animated = true,
   className,
   style,
   ...props
@@ -160,7 +163,9 @@ function FluidOrb({
     gl.viewport(0, 0, px, px)
     gl.uniform2f(uResolution, px, px)
 
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    const reduce =
+      !animated ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
     const start = performance.now()
     let raf = 0
 
@@ -178,7 +183,7 @@ function FluidOrb({
       gl.deleteShader(frag)
       gl.deleteBuffer(buffer)
     }
-  }, [size, color])
+  }, [size, color, animated])
 
   return (
     <div

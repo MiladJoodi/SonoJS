@@ -3,6 +3,7 @@
 import {
   CitationList,
   CitationStack,
+  citationIcons,
   type CitationItem,
 } from "@sonojs/ui/components/citations"
 
@@ -11,19 +12,22 @@ const SOURCES: CitationItem[] = [
     id: "wiki",
     title: "Ice cream",
     domain: "wikipedia.org",
-    url: "https://en.wikipedia.org/wiki/Ice_cream",
+    url: "#stack-demo-wiki",
+    icon: citationIcons.wiki,
   },
   {
     id: "seriouseats",
     title: "The Science of the Best Chocolate Ice Cream",
     domain: "seriouseats.com",
-    url: "https://www.seriouseats.com/the-best-chocolate-ice-cream-recipe",
+    url: "#stack-demo-seriouseats",
+    icon: citationIcons.seriouseats,
   },
   {
     id: "nyt",
     title: "How to Make Ice Cream Without a Machine",
     domain: "nytimes.com",
-    url: "https://cooking.nytimes.com/recipes/1016605-no-churn-ice-cream",
+    url: "#stack-demo-nyt",
+    icon: citationIcons.nyt,
   },
 ]
 

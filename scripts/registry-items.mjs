@@ -2312,14 +2312,44 @@ const registryItemsRaw = [
     registryDependencies: ["agent-disclosure"],
     files: [
       {
-        path: "packages/ui/src/components/citations.tsx",
+        path: "packages/ui/src/components/citations/index.tsx",
         type: "registry:ui",
-        target: "components/sonojs/citations.tsx",
+        target: "components/sonojs/citations/index.tsx",
       },
       {
-        path: "packages/ui/src/lib/favicon.ts",
-        type: "registry:lib",
-        target: "lib/favicon.ts",
+        path: "packages/ui/src/components/citations/media.ts",
+        type: "registry:ui",
+        target: "components/sonojs/citations/media.ts",
+      },
+      {
+        path: "packages/ui/src/components/citations/media/mdn.svg",
+        type: "registry:file",
+        target: "components/sonojs/citations/media/mdn.svg",
+      },
+      {
+        path: "packages/ui/src/components/citations/media/tc39.svg",
+        type: "registry:file",
+        target: "components/sonojs/citations/media/tc39.svg",
+      },
+      {
+        path: "packages/ui/src/components/citations/media/node.svg",
+        type: "registry:file",
+        target: "components/sonojs/citations/media/node.svg",
+      },
+      {
+        path: "packages/ui/src/components/citations/media/wiki.svg",
+        type: "registry:file",
+        target: "components/sonojs/citations/media/wiki.svg",
+      },
+      {
+        path: "packages/ui/src/components/citations/media/seriouseats.svg",
+        type: "registry:file",
+        target: "components/sonojs/citations/media/seriouseats.svg",
+      },
+      {
+        path: "packages/ui/src/components/citations/media/nyt.svg",
+        type: "registry:file",
+        target: "components/sonojs/citations/media/nyt.svg",
       },
     ],
   },

@@ -109,7 +109,7 @@ export default async function CodeBlockDocsPage() {
       />
 
       <section className="space-y-4">
-        <ComponentVariantPreview examples={examples} showDirection={false} />
+        <ComponentVariantPreview examples={examples} showDirection={false}  previewSurface="card" />
       </section>
 
       <DocsInstallation name="code-block" />

@@ -450,7 +450,11 @@
 }
 
 :root {
-  --header-height: 3.5rem;
+  --header-nav-height: 3.5rem;
+  --header-banner-height: 2rem;
+  --header-height: calc(
+    var(--header-nav-height) + var(--header-banner-height)
+  );
 
   /* Layout */
   --content-max: 1600px;

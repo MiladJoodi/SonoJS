@@ -3,6 +3,7 @@
 import * as React from "react"
 import { RotateCcwIcon } from "lucide-react"
 
+import { citationIcons } from "@sonojs/ui/components/citations"
 import {
   StreamingResponse,
   type StreamingResponseStatus,
@@ -13,16 +14,18 @@ const FULL =
 
 const SOURCES = [
   {
-    id: "joy",
-    title: "Joy Cone",
-    domain: "joycone.com",
-    url: "https://joycone.com",
+    id: "wiki",
+    title: "Ice cream",
+    domain: "wikipedia.org",
+    url: "#response-source-wiki",
+    icon: citationIcons.wiki,
   },
   {
-    id: "konery",
-    title: "The Konery",
-    domain: "thekonery.com",
-    url: "https://www.thekonery.com",
+    id: "seriouseats",
+    title: "The Science of the Best Chocolate Ice Cream",
+    domain: "seriouseats.com",
+    url: "#response-source-seriouseats",
+    icon: citationIcons.seriouseats,
   },
 ]
 

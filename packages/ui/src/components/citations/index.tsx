@@ -15,7 +15,6 @@ import {
   SPRING_LAYOUT,
   SPRING_SWAP,
 } from "@sonojs/ui/lib/ease"
-import { getFaviconUrl } from "@sonojs/ui/lib/favicon"
 import { cn } from "@sonojs/ui/lib/utils"
 
 export type CitationItem = {
@@ -23,6 +22,11 @@ export type CitationItem = {
   title: React.ReactNode
   domain?: React.ReactNode
   url?: string
+  /**
+   * Local favicon / mark (bundled asset URL). Prefer this over remote icons —
+   * never load `/favicon.ico` from the open web in demos.
+   */
+  icon?: string
 }
 
 export type CitationsProps = {
@@ -80,14 +84,13 @@ export function Citation({
 }
 
 export function CitationFavicon({
-  url,
+  icon,
   className,
 }: {
-  url?: string
+  icon?: string
   className?: string
 }) {
-  const favicon = url ? getFaviconUrl(url) : null
-  const [failedUrl, setFailedUrl] = React.useState<string | null>(null)
+  const [failed, setFailed] = React.useState(false)
 
   return (
     <span
@@ -97,14 +100,13 @@ export function CitationFavicon({
         className
       )}
     >
-      {favicon && failedUrl !== favicon ? (
+      {icon && !failed ? (
         <img
-          src={favicon}
+          src={icon}
           alt=""
           width={16}
           height={16}
-          referrerPolicy="no-referrer"
-          onError={() => setFailedUrl(favicon)}
+          onError={() => setFailed(true)}
           className="size-4 rounded-sm object-contain"
         />
       ) : (
@@ -127,7 +129,7 @@ export function CitationStack({
       {citations.slice(0, limit).map((citation) => (
         <CitationFavicon
           key={citation.id}
-          url={citation.url}
+          icon={citation.icon}
           className="size-6 rounded-full bg-background ring-2 ring-background"
         />
       ))}
@@ -146,7 +148,7 @@ function CitationRow({
 }) {
   const content = (
     <>
-      <CitationFavicon url={citation.url} />
+      <CitationFavicon icon={citation.icon} />
       <span className="flex min-w-0 flex-1 flex-wrap items-baseline gap-x-2 gap-y-0.5">
         <span className="truncate text-sm font-medium text-foreground/80 transition-colors group-hover/citation:text-foreground">
           {citation.title}
@@ -290,3 +292,5 @@ function Citations({
 }
 
 export { Citations }
+export { citationIcons } from "./media"
+export type { CitationIconKey } from "./media"

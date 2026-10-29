@@ -63,7 +63,7 @@ export default async function VoiceAiOrbDocsPage() {
       />
 
       <section className="space-y-4">
-        <ComponentVariantPreview examples={examples} />
+        <ComponentVariantPreview examples={examples} previewSurface="card" />
       </section>
 
       <DocsInstallation name="voice-ai-orb" />

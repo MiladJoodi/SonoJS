@@ -16,7 +16,7 @@ const exampleDefs = [
     name: "citations-default",
     title: "Inline + disclosure",
     description:
-      "Superscript `Citation` links jump to rows in a live `Citations` list. Replay remounts the stream.",
+      "Superscript `Citation` markers jump into a live `Sources` list with local favicons. Replay remounts.",
     requires: ["agent-disclosure"],
     npmRequires: ["lucide-react", "motion"],
   },
@@ -24,13 +24,17 @@ const exampleDefs = [
     name: "citations-stack",
     title: "Stack + list",
     description:
-      "`CitationStack` favicon cluster with a flat `CitationList` — useful under a streaming reply.",
+      "`CitationStack` overlapping marks plus `CitationList` — same pattern under a streaming reply.",
     requires: ["agent-disclosure"],
     npmRequires: ["lucide-react", "motion"],
   },
 ]
 
-const usageSource = `import { Citation, Citations } from "@/components/sonojs/citations"
+const usageSource = `import {
+  Citation,
+  Citations,
+  citationIcons,
+} from "@/components/sonojs/citations"
 
 const PREFIX = "answer"
 
@@ -38,18 +42,19 @@ export function Example() {
   return (
     <>
       <p>
-        See the MDN notes
-        <Citation citationId="mdn" index={1} idPrefix={PREFIX} />.
+        Peach leads summer demand
+        <Citation citationId="wiki" index={1} idPrefix={PREFIX} />.
       </p>
       <Citations
         idPrefix={PREFIX}
         defaultOpen
         citations={[
           {
-            id: "mdn",
-            title: "Array.prototype.sort()",
-            domain: "developer.mozilla.org",
-            url: "https://developer.mozilla.org/",
+            id: "wiki",
+            title: "Ice cream",
+            domain: "wikipedia.org",
+            url: "#answer-wiki",
+            icon: citationIcons.wiki,
           },
         ]}
       />
@@ -74,7 +79,7 @@ export default async function CitationsDocsPage() {
       />
 
       <section className="space-y-4">
-        <ComponentVariantPreview examples={examples} />
+        <ComponentVariantPreview examples={examples} previewSurface="card" />
       </section>
 
       <DocsInstallation name="citations" />
@@ -92,7 +97,15 @@ export default async function CitationsDocsPage() {
               name: "citations",
               type: "CitationItem[]",
               defaultValue: "—",
-              description: "Source rows with id, title, optional domain/url.",
+              description:
+                "Source rows with id, title, optional domain/url, and local `icon`.",
+            },
+            {
+              name: "icon",
+              type: "string",
+              defaultValue: "—",
+              description:
+                "Bundled favicon URL on each item (use `citationIcons` or your own asset).",
             },
             {
               name: "title",

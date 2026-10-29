@@ -1,5 +1,6 @@
 "use client"
 
+import { citationIcons } from "@sonojs/ui/components/citations"
 import { StreamingResponse } from "@sonojs/ui/components/streaming-response"
 
 const COPY =
@@ -17,13 +18,15 @@ export function StreamingResponseComplete() {
             id: "mdn",
             title: "Array.prototype.sort()",
             domain: "developer.mozilla.org",
-            url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort",
+            url: "#response-source-mdn",
+            icon: citationIcons.mdn,
           },
           {
             id: "tc39",
             title: "ECMAScript Language Specification",
             domain: "tc39.es",
-            url: "https://tc39.es/ecma262/",
+            url: "#response-source-tc39",
+            icon: citationIcons.tc39,
           },
         ]}
       >

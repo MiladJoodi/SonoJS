@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
+import { DevBanner } from "@/components/site-header/dev-banner"
 import { GithubLink } from "@/components/site-header/github-link"
 import { MainNav } from "@/components/site-header/main-nav"
 import { MobileNav } from "@/components/site-header/mobile-nav"
@@ -27,8 +28,9 @@ export function SiteHeader({
         "sticky top-0 z-50 w-full border-b border-white/20 bg-white/40 backdrop-blur-2xl backdrop-saturate-150 transition-[background-color,backdrop-filter,border-color,transform] duration-300 ease-out supports-backdrop-filter:bg-white/25 dark:border-white/10 dark:bg-background/40 dark:supports-backdrop-filter:bg-background/25 [[data-header-hidden]_&]:pointer-events-none [[data-header-hidden]_&]:-translate-y-full"
       )}
     >
+      <DevBanner />
       <div className="container-wrapper">
-        <div className="relative flex h-(--header-height) items-center gap-2 sm:gap-2.5 **:data-[slot=separator]:h-4!">
+        <div className="relative flex h-(--header-nav-height) items-center gap-2 sm:gap-2.5 **:data-[slot=separator]:h-4!">
           <MobileNav
             items={siteConfig.navItems}
             className="me-0.5 flex lg:hidden"

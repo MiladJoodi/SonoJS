@@ -79,7 +79,7 @@ export default async function ImageGenerationDocsPage() {
       />
 
       <section className="space-y-4">
-        <ComponentVariantPreview examples={examples} />
+        <ComponentVariantPreview examples={examples} previewSurface="card" />
       </section>
 
       <DocsInstallation name="image-generation" />

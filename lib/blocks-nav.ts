@@ -546,3 +546,15 @@ export function getBlocksStats() {
     comingSoon: items.filter((item) => item.status !== "ready").length,
   }
 }
+
+/** URL category segment from `/blocks/{category}/{slug}`. */
+export function getBlocksCategorySlug(group: BlocksNavGroup): string {
+  const href = group.items[0]?.href ?? ""
+  const parts = href.split("/").filter(Boolean)
+  return parts[1] ?? slugify(group.title)
+}
+
+/** Deep-link into a category: first ready item (blocksNav is ready-only). */
+export function getBlocksCategoryEntryHref(group: BlocksNavGroup): string {
+  return group.items[0]?.href ?? "/blocks"
+}

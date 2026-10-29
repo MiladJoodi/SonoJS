@@ -1,4 +1,9 @@
-import Link from "next/link"
+import {
+  CatalogSection,
+  CatalogThumbCard,
+  componentThumbSrc,
+} from "@/components/catalog"
+import type { DocsNavGroup } from "@/lib/docs-nav"
 
 export type ComponentsDirectoryItem = {
   title: string
@@ -7,23 +12,38 @@ export type ComponentsDirectoryItem = {
   featured?: boolean
 }
 
+function slugFromHref(href: string) {
+  return href.replace(/^\/docs\/components\//, "")
+}
+
+/** Sectioned thumb catalog — one card per component, groups from `componentsNav`. */
 export function ComponentsDirectory({
-  items,
+  groups,
 }: {
-  items: ComponentsDirectoryItem[]
+  groups: DocsNavGroup[]
 }) {
   return (
-    <ul className="flex flex-wrap gap-1.5">
-      {items.map((item) => (
-        <li key={item.href}>
-          <Link
-            href={item.href}
-            className="inline-flex h-[46px] cursor-pointer items-center rounded-md border border-border/70 bg-card px-3 text-[13px] font-medium text-foreground outline-none transition-colors hover:bg-muted/50 focus-visible:ring-2 focus-visible:ring-ring"
-          >
-            {item.title}
-          </Link>
-        </li>
+    <div className="flex w-full min-w-0 flex-col gap-10 md:gap-12">
+      {groups.map((group) => (
+        <CatalogSection
+          key={group.title}
+          title={group.title}
+          count={group.pages.length}
+        >
+          {group.pages.map((page) => {
+            const slug = slugFromHref(page.href)
+            return (
+              <CatalogThumbCard
+                key={page.href}
+                href={page.href}
+                title={page.title}
+                lightSrc={componentThumbSrc(slug, "light")}
+                darkSrc={componentThumbSrc(slug, "dark")}
+              />
+            )
+          })}
+        </CatalogSection>
       ))}
-    </ul>
+    </div>
   )
 }

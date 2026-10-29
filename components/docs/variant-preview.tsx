@@ -83,10 +83,28 @@ function ExampleLead({
   )
 }
 
+function PreviewSurface({
+  surface,
+  active,
+}: {
+  surface: "plain" | "card"
+  active: string
+}) {
+  if (!active) return null
+  const preview = <RegistryExamplePreview name={active} />
+  if (surface !== "card") return preview
+  return (
+    <div className="w-full max-w-xl rounded-[12px] bg-card p-5">
+      {preview}
+    </div>
+  )
+}
+
 export function ComponentVariantPreview({
   examples,
   className,
   previewClassName,
+  previewSurface = "plain",
   showDirection = true,
   allowOverflow = false,
 }: {
@@ -94,6 +112,11 @@ export function ComponentVariantPreview({
   className?: string
   /** Override the preview stage surface (default `bg-canvas`). */
   previewClassName?: string
+  /**
+   * Wrap the live example in a flat `bg-card` panel on the canvas stage.
+   * Used for AI demos (no border / shadow — surface only).
+   */
+  previewSurface?: "plain" | "card"
   /** Hide LTR/RTL when the preview has no directional layout (e.g. code). */
   showDirection?: boolean
   /**
@@ -222,11 +245,11 @@ export function ComponentVariantPreview({
           >
             {showDirection ? (
               <DirectionProvider dir={dir} className="contents">
-                {active ? <RegistryExamplePreview name={active} /> : null}
+                <PreviewSurface surface={previewSurface} active={active} />
               </DirectionProvider>
-            ) : active ? (
-              <RegistryExamplePreview name={active} />
-            ) : null}
+            ) : (
+              <PreviewSurface surface={previewSurface} active={active} />
+            )}
           </div>
         ) : meta?.code && meta?.codeHtml ? (
           <>

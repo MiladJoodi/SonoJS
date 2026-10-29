@@ -84,7 +84,7 @@ export default async function BubbleDocsPage() {
       />
 
       <section className="space-y-3">
-        <ComponentVariantPreview examples={examples} />
+        <ComponentVariantPreview examples={examples} previewSurface="card" />
       </section>
 
       <DocsInstallation name="bubble" />

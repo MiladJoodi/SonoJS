@@ -1,8 +1,6 @@
-import Link from "next/link"
-
+import { BlocksCategoryGrid } from "@/components/catalog/blocks-category-grid"
 import { blocksNav, getBlocksStats } from "@/lib/blocks-nav"
 import { pageMetadata } from "@/lib/seo"
-import { cn } from "@/lib/utils"
 
 export const metadata = pageMetadata({
   title: "Blocks",
@@ -28,46 +26,7 @@ export default function BlocksIndexPage() {
         </p>
       </header>
 
-      <div className="space-y-8">
-        {blocksNav.map((group) => (
-          <section key={group.title} className="space-y-3">
-            <div className="flex items-baseline justify-between gap-3">
-              <h2 className="text-h4">{group.title}</h2>
-              <span className="text-xs text-muted-foreground tabular-nums">
-                {group.items.length}
-              </span>
-            </div>
-            <ul className="grid grid-cols-[repeat(auto-fill,minmax(min(100%,220px),1fr))] gap-1">
-              {group.items.map((item) => {
-                const ready = item.status === "ready"
-                return (
-                  <li key={item.href}>
-                    <Link
-                      href={item.href}
-                      className={cn(
-                        "flex h-[46px] cursor-pointer items-center justify-between gap-2 rounded-[12px] border border-transparent px-3 text-sm transition-colors hover:border-border/70 hover:bg-card",
-                        ready
-                          ? "font-medium text-foreground"
-                          : "text-muted-foreground"
-                      )}
-                    >
-                      <span className="truncate">{item.title}</span>
-                      <span
-                        className={cn(
-                          "shrink-0 text-[0.6875rem] tracking-wide uppercase",
-                          ready ? "text-primary" : "text-muted-foreground/80"
-                        )}
-                      >
-                        {ready ? "Ready" : "Soon"}
-                      </span>
-                    </Link>
-                  </li>
-                )
-              })}
-            </ul>
-          </section>
-        ))}
-      </div>
+      <BlocksCategoryGrid groups={blocksNav} />
     </article>
   )
 }

@@ -31,6 +31,8 @@
     "./components/agent-activity-2/*": "./src/components/agent-activity-2/*",
     "./components/structured-output": "./src/components/structured-output/index.ts",
     "./components/structured-output/*": "./src/components/structured-output/*",
+    "./components/citations": "./src/components/citations/index.tsx",
+    "./components/citations/*": "./src/components/citations/*",
     "./components/loading-states": "./src/components/loading-states/index.tsx",
     "./components/loading-states/*": "./src/components/loading-states/*",
     "./components/reasoning-text": "./src/components/reasoning-text/index.tsx",

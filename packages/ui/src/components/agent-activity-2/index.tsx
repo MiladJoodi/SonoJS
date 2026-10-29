@@ -86,18 +86,26 @@ const traces: Record<
   },
 }
 
-const stageDelays = [700, 650, 1600, 1600]
+const OPEN_AT = 1
+const ROWS_START = 2
 
-function useTraceStage() {
+function stageDelay(stage: number, completeAt: number) {
+  if (stage === 0) return 700
+  if (stage === 1) return 650
+  if (stage < completeAt - 1) return 900
+  return 1100
+}
+
+function useTraceStage(completeAt: number) {
   const [stage, setStage] = React.useState(0)
   React.useEffect(() => {
-    if (stage >= stageDelays.length) return
+    if (stage >= completeAt) return
     const timer = window.setTimeout(
       () => setStage((current) => current + 1),
-      stageDelays[stage]
+      stageDelay(stage, completeAt)
     )
     return () => window.clearTimeout(timer)
-  }, [stage])
+  }, [completeAt, stage])
   return stage
 }
 
@@ -123,19 +131,19 @@ function AgentActivity2({
   variant = "steps",
   className,
 }: AgentActivity2Props) {
-  const stage = useTraceStage()
   const [manualOpen, setManualOpen] = React.useState<boolean | null>(null)
   const [selectedTool, setSelectedTool] = React.useState<string | null>(null)
   const trace = traces[variant]
-  const working = stage < 3
-  const autoOpen = stage >= 1 && stage < 4
+  const completeAt = ROWS_START + trace.rows.length
+  const stage = useTraceStage(completeAt)
+  const working = stage < completeAt
+  // Stay expanded after the run finishes (user can still collapse manually).
+  const autoOpen = stage >= OPEN_AT
   const isOpen = manualOpen ?? autoOpen
   const visibleRows =
-    stage < 2
+    stage < ROWS_START
       ? 0
-      : stage === 2
-        ? Math.min(2, trace.rows.length)
-        : trace.rows.length
+      : Math.min(stage - ROWS_START + 1, trace.rows.length)
 
   function toggleOpen() {
     setManualOpen((current) => !(current ?? autoOpen))
@@ -293,7 +301,7 @@ function AgentActivity2({
                 </div>
               )
             })}
-            {variant === "search" && stage >= 3 ? (
+            {variant === "search" && !working ? (
               <span className="block px-2 py-1.5 text-[13px] text-muted-foreground">
                 +7 more
               </span>
