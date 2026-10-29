@@ -56,11 +56,6 @@ export const componentsNav: {
           href: "/docs/components/image-generation-2",
         },
         { title: "Loading States", href: "/docs/components/loading-states" },
-        { title: "Message", href: "/docs/components/message" },
-        {
-          title: "Message Scroller",
-          href: "/docs/components/message-scroller",
-        },
         { title: "Prompt Input", href: "/docs/components/prompt-input" },
         { title: "Prompt Input 2", href: "/docs/components/prompt-input-2" },
         { title: "Reasoning Text", href: "/docs/components/reasoning-text" },
@@ -199,6 +194,11 @@ export const componentsNav: {
         { title: "Carousel", href: "/docs/components/carousel" },
         { title: "Code Panel", href: "/docs/components/code-panel" },
         { title: "Data Table", href: "/docs/components/data-table" },
+        { title: "Message", href: "/docs/components/message" },
+        {
+          title: "Message Scroller",
+          href: "/docs/components/message-scroller",
+        },
         { title: "Pagination", href: "/docs/components/pagination" },
         { title: "Table", href: "/docs/components/table", featured: true },
       ],
