@@ -187,7 +187,7 @@ export function HeroShowcase({ className }: { className?: string }) {
     <section
       aria-label="Interactive demo: describe a UI and watch an agent build it"
       className={cn(
-        "relative flex h-[37rem] flex-col gap-2.5 overflow-hidden p-2.5 transition-colors sm:h-[40rem] sm:gap-3.5 sm:p-[18px]",
+        "relative flex h-[37rem] flex-col gap-2.5 overflow-x-clip overflow-y-visible p-2.5 transition-colors sm:h-[40rem] sm:gap-3.5 sm:p-[18px]",
         className
       )}
     >
@@ -297,9 +297,9 @@ export function HeroShowcase({ className }: { className?: string }) {
         ))}
       </ol>
 
-      {/* Absolute fill so demo intrinsic height never shifts the hero */}
-      <div className="relative z-10 min-h-0 w-full min-w-0 flex-1 overflow-hidden">
-        <div className="absolute inset-0 flex items-start justify-center overflow-hidden pb-1">
+      {/* Absolute fill so demo height stays locked; overflow-visible + pad so card shadow-soft isn’t clipped */}
+      <div className="relative z-10 min-h-0 w-full min-w-0 flex-1 overflow-visible pb-6 sm:pb-7">
+        <div className="absolute inset-x-0 top-0 bottom-6 flex items-start justify-center overflow-visible px-1 sm:bottom-7">
           <ShowcasePreviewFor
             key={previewKey}
             id={active}

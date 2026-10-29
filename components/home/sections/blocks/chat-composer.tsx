@@ -1,14 +1,7 @@
 "use client"
 
 import * as React from "react"
-import {
-  ArrowUpIcon,
-  BookOpenTextIcon,
-  CloudIcon,
-  GaugeIcon,
-  ImageIcon,
-  TriangleAlertIcon,
-} from "lucide-react"
+import { ArrowUpIcon, CloudIcon, ImageIcon } from "lucide-react"
 
 import { Button } from "@sonojs/ui/components/button"
 import {
@@ -20,27 +13,6 @@ import {
 } from "@sonojs/ui/components/select"
 import { Textarea } from "@sonojs/ui/components/textarea"
 import { cn } from "@/lib/utils"
-
-const PROMPTS = [
-  {
-    icon: BookOpenTextIcon,
-    text: "Write documentation",
-    prompt:
-      "Write comprehensive documentation for this codebase, including setup instructions, API references, and usage examples.",
-  },
-  {
-    icon: GaugeIcon,
-    text: "Optimize performance",
-    prompt:
-      "Analyze the codebase for performance bottlenecks and suggest optimizations to improve loading times and runtime efficiency.",
-  },
-  {
-    icon: TriangleAlertIcon,
-    text: "Find and fix 3 bugs",
-    prompt:
-      "Scan through the codebase to identify and fix 3 critical bugs, providing detailed explanations for each fix.",
-  },
-] as const
 
 const MODELS = [
   {
@@ -188,12 +160,6 @@ export function HomeChatComposer() {
     el.scrollTop = el.scrollHeight
   }, [turns, thinking])
 
-  const handlePromptClick = (prompt: string) => {
-    if (thinking) return
-    setInputValue(prompt)
-    inputRef.current?.focus()
-  }
-
   const send = () => {
     const text = inputValue.trim()
     if (!text || thinking) return
@@ -229,11 +195,11 @@ export function HomeChatComposer() {
   const hasThread = turns.length > 0 || thinking
 
   return (
-    <div className="mx-auto flex h-full w-full max-w-xl flex-col gap-2 text-foreground sm:gap-3">
-      {/* Fixed thread slot on mobile — scrolls inside, no page jump / no empty below */}
+    <div className="mx-auto flex h-full w-full max-w-xl flex-col gap-2 overflow-visible px-0.5 pb-1 text-foreground sm:gap-3">
+      {/* Thread scrolls inside; outer shell stays overflow-visible for input shadow */}
       <div
         ref={threadRef}
-        className="min-h-0 flex-1 space-y-2 overflow-y-auto overscroll-contain pe-1 sm:space-y-3"
+        className="min-h-0 flex-1 space-y-2 overflow-x-visible overflow-y-auto overscroll-contain pe-1 sm:space-y-3"
         aria-live="polite"
       >
         {hasThread ? (
@@ -268,7 +234,7 @@ export function HomeChatComposer() {
           </>
         ) : (
           <p className="px-1 text-xs text-muted-foreground sm:text-sm">
-            Try a prompt below, or ask anything.
+            Ask anything to try the composer.
           </p>
         )}
       </div>
@@ -371,30 +337,6 @@ export function HomeChatComposer() {
             </Button>
           </div>
         </div>
-      </div>
-
-      <div className="flex shrink-0 flex-nowrap justify-start gap-2 overflow-x-auto overscroll-x-contain pb-0.5 [-ms-overflow-style:none] [-webkit-overflow-scrolling:touch] [scrollbar-width:none] sm:flex-wrap sm:justify-center sm:overflow-visible [&::-webkit-scrollbar]:hidden">
-        {PROMPTS.map((button) => {
-          const Icon = button.icon
-          return (
-            <Button
-              key={button.text}
-              type="button"
-              variant="outline"
-              disabled={thinking}
-              className={cn(
-                "group/button h-8 shrink-0 gap-1.5 rounded-full border-border/70 bg-background ps-2.5 pe-3.5 text-sm font-normal text-foreground shadow-[0_1px_2px_oklch(0_0_0/0.05)] transition-[background-color,color,scale,box-shadow] duration-150 ease-out hover:bg-muted active:scale-[0.96] motion-reduce:active:scale-100 dark:bg-muted/40 dark:hover:bg-muted"
-              )}
-              onClick={() => handlePromptClick(button.prompt)}
-            >
-              <Icon
-                className="size-4 text-muted-foreground transition-colors duration-150 group-hover/button:text-foreground"
-                aria-hidden
-              />
-              {button.text}
-            </Button>
-          )
-        })}
       </div>
     </div>
   )

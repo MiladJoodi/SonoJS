@@ -6,7 +6,7 @@ import { getBlocksStats } from "@/lib/blocks-nav"
 import { Button } from "@sonojs/ui/components/button"
 
 const FEATURES = [
-  "Model picker and prompt chips",
+  "Model picker and send controls",
   "Interactive composers for AI agents",
   "RTL-ready and theme-aware",
   "Copy or install with the SonoJS CLI",
@@ -41,59 +41,69 @@ export function HomeBlocksSection() {
       />
 
       <div className="workspace-shell relative z-10 mx-auto w-full max-w-[1180px] px-4 py-10 sm:px-7 sm:py-20 lg:py-24">
+        {/* Mobile: title → preview → copy. Desktop: copy column | preview. */}
         <div className="grid items-center gap-8 sm:gap-12 lg:grid-cols-2 lg:gap-[clamp(2.5rem,6vw,5rem)]">
-          <div
-            className="min-w-0 text-start"
-            style={{
-              animation: "sono-fade-up 520ms var(--motion-ease) both",
-            }}
-          >
-            <HomeSectionHeading id="home-blocks-heading">
+          <div className="contents lg:flex lg:flex-col lg:justify-center">
+            <HomeSectionHeading
+              id="home-blocks-heading"
+              className="order-1 text-start"
+              style={{
+                animation: "sono-fade-up 520ms var(--motion-ease) both",
+              }}
+            >
               Blocks for complete AI interfaces
             </HomeSectionHeading>
 
-            <p className="mt-4 max-w-[34em] text-[clamp(0.9375rem,3.2vw,1.0625rem)] leading-[1.6] text-muted-foreground">
-              Production-ready blocks for agent workspaces, chat composers, and
-              full product flows — so you can ship real interfaces without
-              starting from a blank canvas.
-            </p>
+            <div
+              className="order-3 min-w-0 text-start lg:mt-4"
+              style={{
+                animation: "sono-fade-up 520ms var(--motion-ease) 120ms both",
+              }}
+            >
+              <p className="max-w-[34em] text-[clamp(0.9375rem,3.2vw,1.0625rem)] leading-[1.6] text-muted-foreground">
+                Production-ready blocks for agent workspaces, chat composers,
+                and full product flows — so you can ship real interfaces without
+                starting from a blank canvas.
+              </p>
 
-            <ul className="mt-6 flex flex-col gap-2.5">
-              {FEATURES.map((line) => (
-                <li
-                  key={line}
-                  className="flex items-start gap-2.5 text-sm text-foreground/90"
-                >
-                  <span
-                    aria-hidden
-                    className="mt-1.5 size-1.5 shrink-0 rounded-full bg-primary"
-                  />
-                  {line}
-                </li>
-              ))}
-            </ul>
+              <ul className="mt-6 flex flex-col gap-2.5">
+                {FEATURES.map((line) => (
+                  <li
+                    key={line}
+                    className="flex items-start gap-2.5 text-sm text-foreground/90"
+                  >
+                    <span
+                      aria-hidden
+                      className="mt-1.5 size-1.5 shrink-0 rounded-full bg-primary"
+                    />
+                    {line}
+                  </li>
+                ))}
+              </ul>
 
-            <p className="mt-6 text-sm font-medium tabular-nums tracking-tight text-foreground">
-              <span className="text-[1.25rem] font-semibold text-primary">
-                {ready}+
-              </span>{" "}
-              blocks. Ready to build with.
-            </p>
+              <p className="mt-6 text-sm font-medium tabular-nums tracking-tight text-foreground">
+                <span className="text-[1.25rem] font-semibold text-primary">
+                  {ready}+
+                </span>{" "}
+                blocks. Ready to build with.
+              </p>
 
-            <div className="mt-7 w-full sm:w-auto">
-              <Button asChild className="w-full sm:w-auto">
-                <Link href="/blocks">Explore Blocks</Link>
-              </Button>
+              <div className="mt-7 w-full sm:w-auto">
+                <Button asChild className="w-full sm:w-auto">
+                  <Link href="/blocks">Explore Blocks</Link>
+                </Button>
+              </div>
             </div>
           </div>
 
           <div
-            className="relative mx-auto w-full min-w-0 max-w-[36rem] lg:max-w-none"
+            className="relative order-2 mx-auto w-full min-w-0 max-w-[36rem] overflow-visible lg:mx-0 lg:max-w-none"
             style={{
               animation: "sono-fade-up 520ms var(--motion-ease) 80ms both",
             }}
           >
-            <div className="flex h-[22rem] w-full overflow-hidden sm:h-[25rem] lg:h-[27rem]">
+            {/* overflow-visible + bottom pad so shadow-soft on input/bubbles isn’t clipped */}
+            <div className="flex h-[22rem] w-full overflow-visible pb-5 sm:h-[25rem] sm:pb-6 lg:h-[27rem]">
               <HomeChatComposer />
             </div>
           </div>

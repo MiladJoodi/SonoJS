@@ -1,5 +1,4 @@
 export { SiteHeader } from "./site-header"
-export { DevBanner } from "./dev-banner"
 export { GithubLink } from "./github-link"
 export { MainNav } from "./main-nav"
 export { MobileNav } from "./mobile-nav"
