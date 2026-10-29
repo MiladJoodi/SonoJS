@@ -47,19 +47,6 @@ const PROMPTS: {
   },
 ]
 
-function sleep(ms: number) {
-  return new Promise<void>((resolve) => {
-    window.setTimeout(resolve, ms)
-  })
-}
-
-function prefersReducedMotion() {
-  return (
-    typeof window !== "undefined" &&
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches
-  )
-}
-
 function pickPrompt(text: string): ShowcaseDemoId {
   const t = text.toLowerCase()
   if (/pric|plan|tier|bill/.test(t)) return "pricing"
@@ -71,116 +58,50 @@ function pickPrompt(text: string): ShowcaseDemoId {
 
 type StepState = { label: string; on: boolean; done: boolean }
 
+function settledSteps(file: string): StepState[] {
+  return [
+    { label: "Reading your project", on: true, done: true },
+    { label: "Composing with SonoJS components", on: true, done: true },
+    { label: `Wrote ${file}`, on: true, done: true },
+  ]
+}
+
 export function HeroShowcase({ className }: { className?: string }) {
-  const [active, setActive] = React.useState<ShowcaseDemoId>("login")
-  const [query, setQuery] = React.useState("")
-  const [steps, setSteps] = React.useState<StepState[]>([])
-  const [showCanvas, setShowCanvas] = React.useState(false)
+  const firstPrompt = PROMPTS[0]!
+  // Mount already settled — avoids empty→animate→paint that feels like a double load.
+  const [active, setActive] = React.useState<ShowcaseDemoId>(firstPrompt.id)
+  const [query, setQuery] = React.useState(firstPrompt.text)
+  const [steps, setSteps] = React.useState<StepState[]>(() =>
+    settledSteps(firstPrompt.file)
+  )
+  const [showCanvas, setShowCanvas] = React.useState(true)
   const [previewKey, setPreviewKey] = React.useState(0)
-  /** Typing + entrance only on first load; later swaps just change content. */
-  const [motionOn, setMotionOn] = React.useState(true)
+  const [motionOn, setMotionOn] = React.useState(false)
 
   const runRef = React.useRef(0)
-  const introDoneRef = React.useRef(false)
 
-  const finishSteps = React.useCallback((file: string) => {
-    return [
-      { label: "Reading your project", on: true, done: true },
-      { label: "Composing with SonoJS components", on: true, done: true },
-      { label: `Wrote ${file}`, on: true, done: true },
-    ] satisfies StepState[]
+  const swapTo = React.useCallback((text: string, id: ShowcaseDemoId) => {
+    runRef.current += 1
+    const prompt = PROMPTS.find((p) => p.id === id) ?? PROMPTS[0]!
+    setMotionOn(false)
+    setActive(id)
+    setQuery(text)
+    setSteps(settledSteps(prompt.file))
+    setShowCanvas(true)
+    setPreviewKey((k) => k + 1)
   }, [])
-
-  const build = React.useCallback(
-    async (text: string, id: ShowcaseDemoId, mode: "intro" | "swap") => {
-      const run = ++runRef.current
-      const prompt = PROMPTS.find((p) => p.id === id) ?? PROMPTS[0]!
-      const reduced = prefersReducedMotion()
-
-      // After first play: only swap content — no typewriter / step / entrance.
-      if (mode === "swap" || introDoneRef.current) {
-        introDoneRef.current = true
-        setMotionOn(false)
-        setActive(id)
-        setQuery(text)
-        setSteps(finishSteps(prompt.file))
-        setShowCanvas(true)
-        setPreviewKey((k) => k + 1)
-        return
-      }
-
-      setMotionOn(true)
-      setActive(id)
-      setShowCanvas(false)
-      setSteps([])
-      setPreviewKey((k) => k + 1)
-
-      if (reduced) {
-        setQuery(text)
-      } else {
-        setQuery("")
-        for (let i = 0; i < text.length; i++) {
-          if (run !== runRef.current) return
-          setQuery(text.slice(0, i + 1))
-          await sleep(24)
-        }
-        await sleep(260)
-      }
-
-      if (run !== runRef.current) return
-
-      const labels = [
-        "Reading your project",
-        "Composing with SonoJS components",
-        `Wrote ${prompt.file}`,
-      ]
-      const stepDelay = reduced ? 260 : 420
-
-      for (let j = 0; j < labels.length; j++) {
-        if (run !== runRef.current) return
-        const label = labels[j]!
-        setSteps((prev) => [
-          ...prev.map((s) => ({ ...s, done: true })),
-          { label, on: false, done: false },
-        ])
-        await sleep(16)
-        if (run !== runRef.current) return
-        setSteps((prev) =>
-          prev.map((s, i) => (i === j ? { ...s, on: true } : s))
-        )
-        await sleep(stepDelay)
-        if (run !== runRef.current) return
-        setSteps((prev) =>
-          prev.map((s, i) => (i === j ? { ...s, done: true } : s))
-        )
-      }
-
-      if (run !== runRef.current) return
-      setShowCanvas(true)
-      introDoneRef.current = true
-    },
-    [finishSteps]
-  )
-
-  React.useEffect(() => {
-    const first = PROMPTS[0]!
-    void build(first.text, first.id, "intro")
-    return () => {
-      runRef.current += 1
-    }
-  }, [build])
 
   function selectChip(id: ShowcaseDemoId) {
     if (id === active) return
     const prompt = PROMPTS.find((p) => p.id === id)!
-    void build(prompt.text, id, "swap")
+    swapTo(prompt.text, id)
   }
 
   function onSubmit(e: React.FormEvent) {
     e.preventDefault()
     const v = query.trim()
     if (!v) return
-    void build(v, pickPrompt(v), "swap")
+    swapTo(v, pickPrompt(v))
   }
 
   return (
