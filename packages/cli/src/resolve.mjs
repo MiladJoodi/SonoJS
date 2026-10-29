@@ -3,6 +3,7 @@ import path from "node:path"
 import { pathToFileURL } from "node:url"
 
 import { assertRegistryItemCompatible } from "./consistency.mjs"
+import { parseJsonText } from "./strip-bom.mjs"
 
 function joinRegistryUrl(base, file) {
   const normalized = base.endsWith("/") ? base : `${base}/`
@@ -19,11 +20,11 @@ async function loadJson(urlOrPath) {
     if (!res.ok) {
       throw new Error(`Failed to fetch ${urlOrPath}: ${res.status} ${res.statusText}`)
     }
-    return res.json()
+    return parseJsonText(await res.text(), urlOrPath)
   }
 
   const abs = path.resolve(urlOrPath)
-  return JSON.parse(await readFile(abs, "utf8"))
+  return parseJsonText(await readFile(abs, "utf8"), abs)
 }
 
 /**

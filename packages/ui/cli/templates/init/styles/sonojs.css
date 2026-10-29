@@ -1,4 +1,4 @@
-﻿/**
+/**
  * SonoJS design system — theme tokens on `:root` / `.dark`.
  * `init` imports this from globals.css; `add` only copies components.
  *
@@ -16,17 +16,19 @@
 /* Switch thumb LTR/RTL travel */
 @source inline("ltr:data-[state=checked]:translate-x-[calc(100%-2px)] rtl:data-[state=checked]:-translate-x-[calc(100%-2px)]");
 /* Elevated surfaces used by marketing / auth blocks */
-@source inline("bg-canvas bg-card text-card-foreground border-border/70 shadow-soft rounded-[12px]");
+@source inline("bg-canvas bg-card text-card-foreground border-border/70 shadow-soft rounded-[12px] ring-border/70");
+/* Semantic colors — blocks/buttons even if a content path is missed */
+@source inline("bg-primary hover:bg-primary/90 bg-primary/90 !text-white text-primary bg-destructive hover:bg-destructive/90 text-destructive text-muted-foreground bg-muted hover:bg-muted bg-secondary text-secondary-foreground bg-accent text-accent-foreground text-foreground text-background bg-foreground bg-background from-card via-card/70 to-transparent");
 
 /* Map utilities → CSS vars (values from :root) */
 @theme inline {
-  --radius-sm: calc(var(--radius) * 0.5);
-  --radius-md: var(--radius);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.333);
-  --radius-2xl: calc(var(--radius) * 1.667);
-  --radius-3xl: calc(var(--radius) * 2);
-  --radius-4xl: calc(var(--radius) * 2.333);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -275,11 +277,11 @@
   --leading-body: 1.5;
   --leading-heading: 1.2;
 
-  /* Control sizes — SonoJS (default = 46px; same on mobile/tablet/desktop) */
-  --size-button-sm: 40px;
-  --size-button-md: 46px;
-  --size-button-lg: 52px;
-  --size-input: 46px;
+  /* Control sizes — SonoJS (default = 32px / h-8) */
+  --size-button-sm: 28px;
+  --size-button-md: 32px;
+  --size-button-lg: 36px;
+  --size-input: 32px;
   --size-checkbox: 16px;
   --size-switch-w: 32px;
   --size-switch-h: 1.15rem;
@@ -288,15 +290,15 @@
   --size-icon-inline: 14px;
   --size-icon: 16px;
   --size-icon-lg: 20px;
-  --touch-target: 46px;
+  --touch-target: 44px;
 
-  /* Radius — SonoJS (base 12px for controls + cards · tooltip ~6px) */
-  --radius: 0.75rem;
+  /* Radius — SonoJS (base 10px · control ~8 · surface 10) */
+  --radius: 0.625rem;
   /* Aliases used by components (`rounded-(--cell-radius)` → --radius-md) */
-  --radius-sm: calc(var(--radius) * 0.5);
-  --radius-md: var(--radius);
-  --radius-tooltip: calc(var(--radius) * 0.5);
-  --radius-control: var(--radius);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-tooltip: calc(var(--radius) * 0.6);
+  --radius-control: calc(var(--radius) * 0.8);
   --radius-surface: var(--radius);
   --radius-button: var(--radius-control);
   --radius-input: var(--radius-control);

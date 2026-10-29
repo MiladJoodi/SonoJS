@@ -800,7 +800,7 @@ const views: Record<string, ComponentType> = {
   },
   "otp-verification-03": function OtpVerification03View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-4 py-10">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-8 md:py-10">
         <div className="w-full max-w-4xl">
           <OtpEmailForm />
         </div>
@@ -823,7 +823,7 @@ const views: Record<string, ComponentType> = {
   },
   "otp-verification-06": function OtpVerification06View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-white px-6 py-10 dark:bg-background">
+      <div className="flex min-h-svh w-full items-center justify-center bg-white px-3 py-6 sm:px-4 md:px-8 md:py-10 dark:bg-background">
         <div className="w-full max-w-md">
           <OtpOnboardingForm />
         </div>
@@ -853,7 +853,7 @@ const views: Record<string, ComponentType> = {
   },
   "two-factor-04": function TwoFactor04View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-6 py-10">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-8 md:py-10">
         <div className="w-full max-w-lg">
           <ChooseTwoFactorForm />
         </div>
@@ -869,7 +869,7 @@ const views: Record<string, ComponentType> = {
   },
   "two-factor-06": function TwoFactor06View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-4 py-10">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-8 md:py-10">
         <div className="w-full max-w-4xl">
           <NewDeviceTwoFactorForm />
         </div>
@@ -899,7 +899,7 @@ const views: Record<string, ComponentType> = {
   },
   "social-login-04": function SocialLogin04View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-4 py-10">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-8 md:py-10">
         <div className="w-full max-w-4xl">
           <SocialSplitForm />
         </div>
@@ -915,7 +915,7 @@ const views: Record<string, ComponentType> = {
   },
   "social-login-06": function SocialLogin06View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-4 py-10">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-8 md:py-10">
         <div className="w-full max-w-4xl">
           <SocialBrandSplitForm />
         </div>
@@ -952,7 +952,7 @@ const views: Record<string, ComponentType> = {
   },
   "passkey-05": function Passkey05View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-4 py-10">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-8 md:py-10">
         <div className="w-full max-w-4xl">
           <PasskeyCrossDeviceForm />
         </div>
@@ -961,7 +961,7 @@ const views: Record<string, ComponentType> = {
   },
   "passkey-06": function Passkey06View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-4 py-10">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-8 md:py-10">
         <div className="w-full max-w-4xl">
           <PasskeyBrandSplitForm />
         </div>
@@ -1005,7 +1005,7 @@ const views: Record<string, ComponentType> = {
   },
   "account-recovery-06": function AccountRecovery06View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-4 py-10">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-8 md:py-10">
         <div className="w-full max-w-4xl">
           <BrandSplitRecoveryForm />
         </div>
@@ -1016,7 +1016,7 @@ const views: Record<string, ComponentType> = {
     return (
       <div className="flex min-h-svh w-full flex-col bg-canvas">
         <Banner01 />
-        <div className="flex flex-1 items-center justify-center px-6 py-10">
+        <div className="flex flex-1 items-center justify-center px-3 py-6 sm:px-4 md:px-8 md:py-10">
           <p className="text-sm text-muted-foreground">
             Place above your navbar or page chrome.
           </p>
@@ -1028,7 +1028,7 @@ const views: Record<string, ComponentType> = {
     return (
       <div className="flex min-h-svh w-full flex-col bg-canvas">
         <Banner02 />
-        <div className="flex flex-1 items-center justify-center px-6 py-10">
+        <div className="flex flex-1 items-center justify-center px-3 py-6 sm:px-4 md:px-8 md:py-10">
           <p className="text-sm text-muted-foreground">
             Place above your navbar or page chrome.
           </p>
@@ -1040,7 +1040,7 @@ const views: Record<string, ComponentType> = {
     return (
       <div className="flex min-h-svh w-full flex-col bg-canvas">
         <Banner03 />
-        <div className="flex flex-1 items-center justify-center px-6 py-10">
+        <div className="flex flex-1 items-center justify-center px-3 py-6 sm:px-4 md:px-8 md:py-10">
           <p className="text-sm text-muted-foreground">
             Place above your navbar or page chrome.
           </p>
@@ -1052,7 +1052,7 @@ const views: Record<string, ComponentType> = {
     return (
       <div className="flex min-h-svh w-full flex-col bg-canvas">
         <Banner04 />
-        <div className="flex flex-1 items-center justify-center px-6 py-10">
+        <div className="flex flex-1 items-center justify-center px-3 py-6 sm:px-4 md:px-8 md:py-10">
           <p className="text-sm text-muted-foreground">
             Place above your navbar or page chrome.
           </p>
@@ -1062,14 +1062,14 @@ const views: Record<string, ComponentType> = {
   },
   "banner-05": function Banner05View() {
     return (
-      <div className="flex min-h-svh w-full flex-col justify-center bg-canvas px-6 py-10">
+      <div className="flex min-h-svh w-full flex-col justify-center bg-canvas px-3 py-6 sm:px-4 md:px-8 md:py-10">
         <Banner05 />
       </div>
     )
   },
   "banner-06": function Banner06View() {
     return (
-      <div className="flex min-h-svh w-full flex-col justify-center bg-canvas px-6 py-10">
+      <div className="flex min-h-svh w-full flex-col justify-center bg-canvas px-3 py-6 sm:px-4 md:px-8 md:py-10">
         <Banner06 />
       </div>
     )
@@ -1078,7 +1078,7 @@ const views: Record<string, ComponentType> = {
     return (
       <div className="flex min-h-svh w-full flex-col bg-canvas">
         <Banner07 />
-        <div className="flex flex-1 items-center justify-center px-6 py-10">
+        <div className="flex flex-1 items-center justify-center px-3 py-6 sm:px-4 md:px-8 md:py-10">
           <p className="text-sm text-muted-foreground">
             Place above your navbar or page chrome.
           </p>
@@ -1090,7 +1090,7 @@ const views: Record<string, ComponentType> = {
     return (
       <div className="flex min-h-svh w-full flex-col bg-canvas">
         <Banner08 />
-        <div className="flex flex-1 items-center justify-center px-6 py-10">
+        <div className="flex flex-1 items-center justify-center px-3 py-6 sm:px-4 md:px-8 md:py-10">
           <p className="text-sm text-muted-foreground">
             Place above your navbar or page chrome.
           </p>
@@ -1102,7 +1102,7 @@ const views: Record<string, ComponentType> = {
     return (
       <div className="flex min-h-svh w-full flex-col bg-canvas">
         <Banner09 />
-        <div className="flex flex-1 items-center justify-center px-6 py-10">
+        <div className="flex flex-1 items-center justify-center px-3 py-6 sm:px-4 md:px-8 md:py-10">
           <p className="text-sm text-muted-foreground">
             Place above your navbar or page chrome.
           </p>
@@ -1114,7 +1114,7 @@ const views: Record<string, ComponentType> = {
     return (
       <div className="flex min-h-svh w-full flex-col bg-canvas">
         <Banner10 />
-        <div className="flex flex-1 items-center justify-center px-6 py-10">
+        <div className="flex flex-1 items-center justify-center px-3 py-6 sm:px-4 md:px-8 md:py-10">
           <p className="text-sm text-muted-foreground">
             Place above your navbar or page chrome.
           </p>
@@ -1126,7 +1126,7 @@ const views: Record<string, ComponentType> = {
     return (
       <div className="flex min-h-svh w-full flex-col bg-canvas">
         <Banner11 />
-        <div className="flex flex-1 items-center justify-center px-6 py-10">
+        <div className="flex flex-1 items-center justify-center px-3 py-6 sm:px-4 md:px-8 md:py-10">
           <p className="text-sm text-muted-foreground">
             Place above your navbar or page chrome.
           </p>
@@ -1138,7 +1138,7 @@ const views: Record<string, ComponentType> = {
     return (
       <div className="flex min-h-svh w-full flex-col bg-canvas">
         <Banner12 />
-        <div className="flex flex-1 items-center justify-center px-6 py-10">
+        <div className="flex flex-1 items-center justify-center px-3 py-6 sm:px-4 md:px-8 md:py-10">
           <p className="text-sm text-muted-foreground">
             Place above your navbar or page chrome.
           </p>
@@ -1150,7 +1150,7 @@ const views: Record<string, ComponentType> = {
     return (
       <div className="flex min-h-svh w-full flex-col bg-canvas">
         <Banner13 />
-        <div className="flex flex-1 items-center justify-center px-6 py-10">
+        <div className="flex flex-1 items-center justify-center px-3 py-6 sm:px-4 md:px-8 md:py-10">
           <p className="text-sm text-muted-foreground">
             Place above your navbar or page chrome.
           </p>
@@ -1162,7 +1162,7 @@ const views: Record<string, ComponentType> = {
     return (
       <div className="flex min-h-svh w-full flex-col bg-canvas">
         <Banner14 />
-        <div className="flex flex-1 items-center justify-center px-6 py-10">
+        <div className="flex flex-1 items-center justify-center px-3 py-6 sm:px-4 md:px-8 md:py-10">
           <p className="text-sm text-muted-foreground">
             Place above your navbar or page chrome.
           </p>
@@ -1174,7 +1174,7 @@ const views: Record<string, ComponentType> = {
     return (
       <div className="flex min-h-svh w-full flex-col bg-canvas">
         <Banner15 />
-        <div className="flex flex-1 items-center justify-center px-6 py-10">
+        <div className="flex flex-1 items-center justify-center px-3 py-6 sm:px-4 md:px-8 md:py-10">
           <p className="text-sm text-muted-foreground">
             Place above your navbar or page chrome.
           </p>
@@ -4420,7 +4420,7 @@ const views: Record<string, ComponentType> = {
   },
   "features-01": function Features01View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-8 py-12">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-8 md:py-12">
         <div className="w-full max-w-7xl">
           <Features01 />
         </div>
@@ -4463,7 +4463,7 @@ const views: Record<string, ComponentType> = {
   },
   "features-06": function Features06View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-8 py-12">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-8 md:py-12">
         <div className="w-full max-w-7xl">
           <Features06 />
         </div>
@@ -4490,7 +4490,7 @@ const views: Record<string, ComponentType> = {
   },
   "features-09": function Features09View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-8 py-12">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-8 md:py-12">
         <div className="w-full max-w-7xl">
           <Features09 />
         </div>
@@ -4499,7 +4499,7 @@ const views: Record<string, ComponentType> = {
   },
   "features-10": function Features10View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-8 py-12">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-8 md:py-12">
         <div className="w-full max-w-7xl">
           <Features10 />
         </div>
@@ -4508,7 +4508,7 @@ const views: Record<string, ComponentType> = {
   },
   "features-11": function Features11View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-8 py-12">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-8 md:py-12">
         <div className="w-full max-w-7xl">
           <Features11 />
         </div>
@@ -4517,7 +4517,7 @@ const views: Record<string, ComponentType> = {
   },
   "jumbotron-01": function Jumbotron01View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-8 py-12">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-8 md:py-12">
         <div className="w-full max-w-4xl">
           <Jumbotron01 />
         </div>
@@ -4526,7 +4526,7 @@ const views: Record<string, ComponentType> = {
   },
   "jumbotron-02": function Jumbotron02View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-8 py-12">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-8 md:py-12">
         <div className="w-full max-w-7xl">
           <Jumbotron02 />
         </div>
@@ -4535,7 +4535,7 @@ const views: Record<string, ComponentType> = {
   },
   "jumbotron-03": function Jumbotron03View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-8 py-12">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-8 md:py-12">
         <div className="w-full max-w-6xl">
           <Jumbotron03 />
         </div>
@@ -4544,7 +4544,7 @@ const views: Record<string, ComponentType> = {
   },
   "jumbotron-04": function Jumbotron04View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-8 py-12">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-8 md:py-12">
         <div className="w-full max-w-6xl">
           <Jumbotron04 />
         </div>
@@ -4553,7 +4553,7 @@ const views: Record<string, ComponentType> = {
   },
   "jumbotron-05": function Jumbotron05View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-8 py-12">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-8 md:py-12">
         <div className="w-full max-w-7xl">
           <Jumbotron05 />
         </div>
@@ -4562,7 +4562,7 @@ const views: Record<string, ComponentType> = {
   },
   "jumbotron-06": function Jumbotron06View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-8 py-12">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-8 md:py-12">
         <div className="w-full max-w-6xl">
           <Jumbotron06 />
         </div>
@@ -4571,7 +4571,7 @@ const views: Record<string, ComponentType> = {
   },
   "jumbotron-07": function Jumbotron07View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-8 py-12">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-8 md:py-12">
         <div className="w-full max-w-2xl">
           <Jumbotron07 />
         </div>
@@ -4580,7 +4580,7 @@ const views: Record<string, ComponentType> = {
   },
   "jumbotron-08": function Jumbotron08View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-8 py-12">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-8 md:py-12">
         <div className="w-full max-w-4xl">
           <Jumbotron08 />
         </div>
@@ -5258,7 +5258,7 @@ const views: Record<string, ComponentType> = {
   },
   "testimonials-01": function Testimonials01View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-8 py-12">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-8 md:py-12">
         <div className="w-full max-w-2xl">
           <Testimonials01 />
         </div>
@@ -5267,7 +5267,7 @@ const views: Record<string, ComponentType> = {
   },
   "testimonials-02": function Testimonials02View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-8 py-12">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-8 md:py-12">
         <div className="w-full max-w-7xl">
           <Testimonials02 />
         </div>
@@ -5276,7 +5276,7 @@ const views: Record<string, ComponentType> = {
   },
   "testimonials-03": function Testimonials03View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-8 py-12">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-8 md:py-12">
         <div className="w-full max-w-3xl">
           <Testimonials03 />
         </div>
@@ -5285,7 +5285,7 @@ const views: Record<string, ComponentType> = {
   },
   "testimonials-04": function Testimonials04View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-8 py-12">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-8 md:py-12">
         <div className="w-full max-w-7xl">
           <Testimonials04 />
         </div>
@@ -5294,7 +5294,7 @@ const views: Record<string, ComponentType> = {
   },
   "testimonials-05": function Testimonials05View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-8 py-12">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-8 md:py-12">
         <div className="w-full max-w-6xl">
           <Testimonials05 />
         </div>
@@ -5303,7 +5303,7 @@ const views: Record<string, ComponentType> = {
   },
   "testimonials-06": function Testimonials06View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-8 py-12">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-8 md:py-12">
         <div className="w-full max-w-7xl">
           <Testimonials06 />
         </div>
@@ -5312,7 +5312,7 @@ const views: Record<string, ComponentType> = {
   },
   "testimonials-07": function Testimonials07View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-8 py-12">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-8 md:py-12">
         <div className="w-full max-w-7xl">
           <Testimonials07 />
         </div>
@@ -5321,7 +5321,7 @@ const views: Record<string, ComponentType> = {
   },
   "testimonials-08": function Testimonials08View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-8 py-12">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-8 md:py-12">
         <div className="w-full max-w-6xl">
           <Testimonials08 />
         </div>
@@ -5339,7 +5339,7 @@ const views: Record<string, ComponentType> = {
   },
   "testimonials-10": function Testimonials10View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-8 py-12">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-8 md:py-12">
         <div className="w-full max-w-7xl">
           <Testimonials10 />
         </div>
@@ -5348,7 +5348,7 @@ const views: Record<string, ComponentType> = {
   },
   "testimonials-11": function Testimonials11View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-8 py-12">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-8 md:py-12">
         <div className="w-full max-w-5xl">
           <Testimonials11 />
         </div>
@@ -5357,7 +5357,7 @@ const views: Record<string, ComponentType> = {
   },
   "testimonials-12": function Testimonials12View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-8 py-12">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-8 md:py-12">
         <div className="w-full max-w-4xl">
           <Testimonials12 />
         </div>
@@ -5366,7 +5366,7 @@ const views: Record<string, ComponentType> = {
   },
   "testimonials-13": function Testimonials13View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-8 py-12">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-8 md:py-12">
         <div className="w-full max-w-4xl">
           <Testimonials13 />
         </div>
@@ -5420,7 +5420,7 @@ const views: Record<string, ComponentType> = {
   },
   "contact-form-01": function ContactForm01View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-8 py-12">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-8 md:py-12">
         <div className="w-full max-w-xl">
           <ContactForm01 />
         </div>
@@ -5429,7 +5429,7 @@ const views: Record<string, ComponentType> = {
   },
   "contact-form-02": function ContactForm02View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-8 py-12">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-8 md:py-12">
         <div className="w-full max-w-6xl">
           <ContactForm02 />
         </div>
@@ -5438,7 +5438,7 @@ const views: Record<string, ComponentType> = {
   },
   "contact-form-03": function ContactForm03View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-8 py-12">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-8 md:py-12">
         <div className="w-full max-w-4xl">
           <ContactForm03 />
         </div>
@@ -5447,7 +5447,7 @@ const views: Record<string, ComponentType> = {
   },
   "contact-form-04": function ContactForm04View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-8 py-12">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-8 md:py-12">
         <div className="w-full max-w-5xl">
           <ContactForm04 />
         </div>
@@ -5456,7 +5456,7 @@ const views: Record<string, ComponentType> = {
   },
   "contact-form-05": function ContactForm05View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-8 py-12">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-8 md:py-12">
         <div className="w-full max-w-5xl">
           <ContactForm05 />
         </div>
@@ -5466,7 +5466,7 @@ const views: Record<string, ComponentType> = {
   "contact-form-06": ContactForm06,
   "contact-form-07": function ContactForm07View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-8 py-12">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-8 md:py-12">
         <div className="w-full max-w-5xl">
           <ContactForm07 />
         </div>
@@ -5475,7 +5475,7 @@ const views: Record<string, ComponentType> = {
   },
   "contact-form-08": function ContactForm08View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-8 py-12">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-8 md:py-12">
         <div className="w-full max-w-6xl">
           <ContactForm08 />
         </div>
@@ -5498,7 +5498,7 @@ const views: Record<string, ComponentType> = {
   },
   "contact-form-11": function ContactForm11View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-8 py-12">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-8 md:py-12">
         <div className="w-full max-w-6xl">
           <ContactForm11 />
         </div>
@@ -5507,7 +5507,7 @@ const views: Record<string, ComponentType> = {
   },
   "contact-form-12": function ContactForm12View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-8 py-12">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-8 md:py-12">
         <div className="w-full max-w-7xl">
           <ContactForm12 />
         </div>
@@ -5517,7 +5517,7 @@ const views: Record<string, ComponentType> = {
   "footer-01": function Footer01View() {
     return (
       <div className="flex min-h-svh w-full flex-col bg-canvas">
-        <div className="flex flex-1 items-center justify-center px-6 py-10">
+        <div className="flex flex-1 items-center justify-center px-3 py-6 sm:px-4 md:px-8 md:py-10">
           <p className="text-sm text-muted-foreground">
             Page content above the footer.
           </p>
@@ -5529,7 +5529,7 @@ const views: Record<string, ComponentType> = {
   "footer-02": function Footer02View() {
     return (
       <div className="flex min-h-svh w-full flex-col bg-canvas">
-        <div className="flex flex-1 items-center justify-center px-6 py-10">
+        <div className="flex flex-1 items-center justify-center px-3 py-6 sm:px-4 md:px-8 md:py-10">
           <p className="text-sm text-muted-foreground">
             Page content above the footer.
           </p>
@@ -5541,7 +5541,7 @@ const views: Record<string, ComponentType> = {
   "footer-03": function Footer03View() {
     return (
       <div className="flex min-h-svh w-full flex-col bg-canvas">
-        <div className="flex flex-1 items-center justify-center px-6 py-10">
+        <div className="flex flex-1 items-center justify-center px-3 py-6 sm:px-4 md:px-8 md:py-10">
           <p className="text-sm text-muted-foreground">
             Page content above the footer.
           </p>
@@ -5553,7 +5553,7 @@ const views: Record<string, ComponentType> = {
   "footer-04": function Footer04View() {
     return (
       <div className="flex min-h-svh w-full flex-col bg-canvas">
-        <div className="flex flex-1 items-center justify-center px-6 py-10">
+        <div className="flex flex-1 items-center justify-center px-3 py-6 sm:px-4 md:px-8 md:py-10">
           <p className="text-sm text-muted-foreground">
             Page content above the footer.
           </p>
@@ -5565,7 +5565,7 @@ const views: Record<string, ComponentType> = {
   "footer-05": function Footer05View() {
     return (
       <div className="flex min-h-svh w-full flex-col bg-canvas">
-        <div className="flex flex-1 items-center justify-center px-6 py-10">
+        <div className="flex flex-1 items-center justify-center px-3 py-6 sm:px-4 md:px-8 md:py-10">
           <p className="text-sm text-muted-foreground">
             Page content above the footer.
           </p>
@@ -5577,7 +5577,7 @@ const views: Record<string, ComponentType> = {
   "footer-06": function Footer06View() {
     return (
       <div className="flex min-h-svh w-full flex-col bg-canvas">
-        <div className="flex flex-1 items-center justify-center px-6 py-10">
+        <div className="flex flex-1 items-center justify-center px-3 py-6 sm:px-4 md:px-8 md:py-10">
           <p className="text-sm text-muted-foreground">
             Page content above the footer.
           </p>
@@ -5589,7 +5589,7 @@ const views: Record<string, ComponentType> = {
   "footer-07": function Footer07View() {
     return (
       <div className="flex min-h-svh w-full flex-col bg-canvas">
-        <div className="flex flex-1 items-center justify-center px-6 py-10">
+        <div className="flex flex-1 items-center justify-center px-3 py-6 sm:px-4 md:px-8 md:py-10">
           <p className="text-sm text-muted-foreground">
             Page content above the footer.
           </p>
@@ -5601,7 +5601,7 @@ const views: Record<string, ComponentType> = {
   "footer-08": function Footer08View() {
     return (
       <div className="flex min-h-svh w-full flex-col bg-canvas">
-        <div className="flex flex-1 items-center justify-center px-6 py-10">
+        <div className="flex flex-1 items-center justify-center px-3 py-6 sm:px-4 md:px-8 md:py-10">
           <p className="text-sm text-muted-foreground">
             Page content above the footer.
           </p>
@@ -5613,7 +5613,7 @@ const views: Record<string, ComponentType> = {
   "footer-09": function Footer09View() {
     return (
       <div className="flex min-h-svh w-full flex-col bg-canvas">
-        <div className="flex flex-1 items-center justify-center px-6 py-10">
+        <div className="flex flex-1 items-center justify-center px-3 py-6 sm:px-4 md:px-8 md:py-10">
           <p className="text-sm text-muted-foreground">
             Page content above the footer.
           </p>
@@ -5625,7 +5625,7 @@ const views: Record<string, ComponentType> = {
   "footer-10": function Footer10View() {
     return (
       <div className="flex min-h-svh w-full flex-col bg-canvas">
-        <div className="flex flex-1 items-center justify-center px-6 py-10">
+        <div className="flex flex-1 items-center justify-center px-3 py-6 sm:px-4 md:px-8 md:py-10">
           <p className="text-sm text-muted-foreground">
             Page content above the footer.
           </p>
@@ -5644,7 +5644,7 @@ const views: Record<string, ComponentType> = {
   "footer-12": function Footer12View() {
     return (
       <div className="flex min-h-svh w-full flex-col bg-canvas">
-        <div className="flex flex-1 items-center justify-center px-6 py-10">
+        <div className="flex flex-1 items-center justify-center px-3 py-6 sm:px-4 md:px-8 md:py-10">
           <p className="text-sm text-muted-foreground">
             Page content above the footer.
           </p>
@@ -5656,7 +5656,7 @@ const views: Record<string, ComponentType> = {
   "footer-13": function Footer13View() {
     return (
       <div className="flex min-h-svh w-full flex-col bg-canvas">
-        <div className="flex flex-1 items-center justify-center px-6 py-10">
+        <div className="flex flex-1 items-center justify-center px-3 py-6 sm:px-4 md:px-8 md:py-10">
           <p className="text-sm text-muted-foreground">
             Page content above the footer.
           </p>
@@ -5668,7 +5668,7 @@ const views: Record<string, ComponentType> = {
   "footer-14": function Footer14View() {
     return (
       <div className="flex min-h-svh w-full flex-col bg-canvas">
-        <div className="flex flex-1 items-center justify-center px-6 py-10">
+        <div className="flex flex-1 items-center justify-center px-3 py-6 sm:px-4 md:px-8 md:py-10">
           <p className="text-sm text-muted-foreground">
             Page content above the footer.
           </p>
@@ -5680,7 +5680,7 @@ const views: Record<string, ComponentType> = {
   "footer-15": function Footer15View() {
     return (
       <div className="flex min-h-svh w-full flex-col bg-canvas">
-        <div className="flex flex-1 items-center justify-center px-6 py-10">
+        <div className="flex flex-1 items-center justify-center px-3 py-6 sm:px-4 md:px-8 md:py-10">
           <p className="text-sm text-muted-foreground">
             Page content above the footer.
           </p>
@@ -5692,7 +5692,7 @@ const views: Record<string, ComponentType> = {
   "footer-16": function Footer16View() {
     return (
       <div className="flex min-h-svh w-full flex-col bg-canvas">
-        <div className="flex flex-1 items-center justify-center px-6 py-10">
+        <div className="flex flex-1 items-center justify-center px-3 py-6 sm:px-4 md:px-8 md:py-10">
           <p className="text-sm text-muted-foreground">
             Page content above the footer.
           </p>
@@ -5724,126 +5724,126 @@ const views: Record<string, ComponentType> = {
   },
   "rating-01": function Rating01View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-10 py-10">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-10 md:py-10">
         <Rating01 />
       </div>
     )
   },
   "rating-02": function Rating02View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-10 py-10">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-10 md:py-10">
         <Rating02 />
       </div>
     )
   },
   "rating-03": function Rating03View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-10 py-10">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-10 md:py-10">
         <Rating03 />
       </div>
     )
   },
   "rating-04": function Rating04View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-10 py-10">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-10 md:py-10">
         <Rating04 />
       </div>
     )
   },
   "rating-05": function Rating05View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-10 py-10">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-10 md:py-10">
         <Rating05 />
       </div>
     )
   },
   "rating-06": function Rating06View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-10 py-10">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-10 md:py-10">
         <Rating06 />
       </div>
     )
   },
   "rating-07": function Rating07View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-10 py-10">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-10 md:py-10">
         <Rating07 />
       </div>
     )
   },
   "rating-08": function Rating08View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-10 py-10">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-10 md:py-10">
         <Rating08 />
       </div>
     )
   },
   "breadcrumbs-01": function Breadcrumbs01View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-10 py-10">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-10 md:py-10">
         <BasicBreadcrumbs />
       </div>
     )
   },
   "breadcrumbs-02": function Breadcrumbs02View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-10 py-10">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-10 md:py-10">
         <HomeIconBreadcrumbs />
       </div>
     )
   },
   "breadcrumbs-03": function Breadcrumbs03View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-10 py-10">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-10 md:py-10">
         <IconTrailBreadcrumbs />
       </div>
     )
   },
   "breadcrumbs-04": function Breadcrumbs04View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-10 py-10">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-10 md:py-10">
         <SlashIconBreadcrumbs />
       </div>
     )
   },
   "breadcrumbs-05": function Breadcrumbs05View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-10 py-10">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-10 md:py-10">
         <SlashHomeBreadcrumbs />
       </div>
     )
   },
   "breadcrumbs-06": function Breadcrumbs06View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-10 py-10">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-10 md:py-10">
         <PillIconBreadcrumbs />
       </div>
     )
   },
   "breadcrumbs-07": function Breadcrumbs07View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-10 py-10">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-10 md:py-10">
         <BoxedHomeBreadcrumbs />
       </div>
     )
   },
   "breadcrumbs-08": function Breadcrumbs08View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-10 py-10">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-10 md:py-10">
         <EllipsisBreadcrumbs />
       </div>
     )
   },
   "breadcrumbs-09": function Breadcrumbs09View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-10 py-10">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-10 md:py-10">
         <SegmentBreadcrumbs />
       </div>
     )
   },
   "tabs-01": function Tabs01View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-8 py-12">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-8 md:py-12">
         <div className="w-full min-w-0 max-w-full">
           <Tabs01 />
         </div>
@@ -5852,7 +5852,7 @@ const views: Record<string, ComponentType> = {
   },
   "tabs-02": function Tabs02View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-8 py-12">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-8 md:py-12">
         <div className="w-full min-w-0 max-w-full">
           <Tabs02 />
         </div>
@@ -5861,7 +5861,7 @@ const views: Record<string, ComponentType> = {
   },
   "tabs-03": function Tabs03View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-8 py-12">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-8 md:py-12">
         <div className="w-full min-w-0 max-w-full">
           <Tabs03 />
         </div>
@@ -5870,7 +5870,7 @@ const views: Record<string, ComponentType> = {
   },
   "tabs-04": function Tabs04View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-8 py-12">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-8 md:py-12">
         <div className="w-full min-w-0 max-w-full">
           <Tabs04 />
         </div>
@@ -5879,7 +5879,7 @@ const views: Record<string, ComponentType> = {
   },
   "tabs-05": function Tabs05View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-8 py-12">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-8 md:py-12">
         <div className="w-full min-w-0 max-w-full">
           <Tabs05 />
         </div>
@@ -5888,7 +5888,7 @@ const views: Record<string, ComponentType> = {
   },
   "tabs-06": function Tabs06View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-8 py-12">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-8 md:py-12">
         <div className="w-full min-w-0 max-w-full">
           <Tabs06 />
         </div>
@@ -5897,7 +5897,7 @@ const views: Record<string, ComponentType> = {
   },
   "tabs-07": function Tabs07View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-8 py-12">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-8 md:py-12">
         <div className="w-full min-w-0 max-w-full">
           <Tabs07 />
         </div>
@@ -5906,7 +5906,7 @@ const views: Record<string, ComponentType> = {
   },
   "tabs-08": function Tabs08View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-8 py-12">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-8 md:py-12">
         <div className="w-full min-w-0 max-w-full">
           <Tabs08 />
         </div>
@@ -5915,7 +5915,7 @@ const views: Record<string, ComponentType> = {
   },
   "tabs-09": function Tabs09View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-8 py-12">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-8 md:py-12">
         <div className="w-full min-w-0 max-w-full">
           <Tabs09 />
         </div>
@@ -5924,7 +5924,7 @@ const views: Record<string, ComponentType> = {
   },
   "tabs-10": function Tabs10View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-8 py-12">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-8 md:py-12">
         <div className="w-full min-w-0 max-w-full">
           <Tabs10 />
         </div>
@@ -5933,7 +5933,7 @@ const views: Record<string, ComponentType> = {
   },
   "tabs-11": function Tabs11View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-8 py-12">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-8 md:py-12">
         <div className="w-full min-w-0 max-w-full">
           <Tabs11 />
         </div>
@@ -5942,7 +5942,7 @@ const views: Record<string, ComponentType> = {
   },
   "tabs-12": function Tabs12View() {
     return (
-      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-8 py-12">
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-3 py-6 sm:px-4 md:px-8 md:py-12">
         <div className="w-full min-w-0 max-w-full">
           <Tabs12 />
         </div>

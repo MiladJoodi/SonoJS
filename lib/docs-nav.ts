@@ -300,6 +300,31 @@ export const componentsNav: {
         },
       ],
     },
+    {
+      title: "AI",
+      pages: [
+        {
+          title: "Approval Card",
+          href: "/docs/components/approval-card",
+        },
+        {
+          title: "Fluid Orb",
+          href: "/docs/components/fluid-orb",
+        },
+        {
+          title: "Image Generation",
+          href: "/docs/components/image-generation",
+        },
+        {
+          title: "Tool Approval",
+          href: "/docs/components/tool-approval",
+        },
+        {
+          title: "Voice AI Orb",
+          href: "/docs/components/voice-ai-orb",
+        },
+      ],
+    },
   ],
 }
 
@@ -332,10 +357,9 @@ export function getDocsCurrentLabel(pathname: string): string | null {
   return null
 }
 
-/** Components group in sidebar order — for title prev/next. */
+/** All component groups in sidebar order — for directory + prev/next. */
 export function getDocsComponentPages(): DocsNavPage[] {
-  const group = componentsNav.groups.find((g) => g.title === "Components")
-  return group?.pages ?? []
+  return componentsNav.groups.flatMap((group) => group.pages)
 }
 
 export function getDocsGuidePages(): DocsNavPage[] {

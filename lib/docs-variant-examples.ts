@@ -3,10 +3,12 @@ import path from "node:path"
 
 import type { VariantExample } from "@/components/docs/variant-preview"
 import { highlightCode } from "@/lib/highlight-code"
+import { rewriteConsumerImports } from "../scripts/rewrite-consumer-imports.mjs"
 
 /** Longer names first so `alert-dialog` wins over `alert`. */
 const EXAMPLE_FOLDERS = [
   "alert-dialog",
+  "approval-card",
   "attachment",
   "button-group",
   "breadcrumb",
@@ -31,10 +33,13 @@ const EXAMPLE_FOLDERS = [
   "dropdown-menu",
   "empty",
   "field",
+  "fluid-orb",
   "hover-card",
+  "image-generation",
   "input-group",
   "input-otp",
   "input",
+  "tool-approval",
   "item",
   "kbd",
   "label",
@@ -65,6 +70,7 @@ const EXAMPLE_FOLDERS = [
   "toggle",
   "tooltip",
   "trace",
+  "voice-ai-orb",
 ] as const
 
 function exampleFilePath(exampleName: string): string | null {
@@ -85,19 +91,7 @@ function exampleFilePath(exampleName: string): string | null {
 
 /** Rewrite monorepo imports to consumer install paths for docs Code tab. */
 function toConsumerSource(source: string): string {
-  return source
-    .replace(
-      /from\s+["']@sonojs\/ui\/components\/([^"']+)["']/g,
-      'from "@/components/ui/$1"'
-    )
-    .replace(
-      /from\s+["']@sonojs\/ui\/hooks\/([^"']+)["']/g,
-      'from "@/hooks/$1"'
-    )
-    .replace(
-      /from\s+["']@sonojs\/ui\/lib\/([^"']+)["']/g,
-      'from "@/lib/$1"'
-    )
+  return rewriteConsumerImports(source)
 }
 
 /**

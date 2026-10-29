@@ -19,6 +19,13 @@ export const registry = {
         "A vertically stacked set of interactive headings that reveal content.",
     },
     {
+      name: "approval-card",
+      type: "registry:ui" as const,
+      title: "Approval Card",
+      description:
+        "A review card for approving an AI agent's proposed action.",
+    },
+    {
       name: "alert",
       type: "registry:ui" as const,
       title: "Alert",
@@ -174,11 +181,24 @@ export const registry = {
         "Combine labels, controls, and help text into accessible form fields.",
     },
     {
+      name: "fluid-orb",
+      type: "registry:ui" as const,
+      title: "Fluid Orb",
+      description: "A WebGL fluid orb for AI idle and thinking states.",
+    },
+    {
       name: "hover-card",
       type: "registry:ui" as const,
       title: "Hover Card",
       description:
         "For sighted users to preview content available behind a link.",
+    },
+    {
+      name: "image-generation",
+      type: "registry:ui" as const,
+      title: "Image Generation",
+      description:
+        "An image-generation state with dither progress and a completed result.",
     },
     {
       name: "input",
@@ -402,11 +422,25 @@ export const registry = {
         "A popup that displays information related to an element when it receives focus or hover.",
     },
     {
+      name: "tool-approval",
+      type: "registry:ui" as const,
+      title: "Tool Approval",
+      description:
+        "A permission prompt for approving an AI agent's tool call.",
+    },
+    {
       name: "trace",
       type: "registry:ui" as const,
       title: "Trace",
       description:
         "Rows for agent steps — reasoning, tool calls, sources, and plans.",
+    },
+    {
+      name: "voice-ai-orb",
+      type: "registry:ui" as const,
+      title: "Voice AI Orb",
+      description:
+        "A voice-agent status orb for listening, reasoning, and speaking.",
     },
   ],
   blocks: [

@@ -1,0 +1,28 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "agent-disclosure",
+  "type": "registry:ui",
+  "title": "Agent Disclosure",
+  "description": "A transform-only reveal for collapsible agent content (clip-path + opacity).",
+  "dependencies": [
+    "motion",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "files": [
+    {
+      "path": "components/sonojs/agent-disclosure.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\"\n\nimport { motion, type HTMLMotionProps, useReducedMotion } from \"motion/react\"\nimport type { CSSProperties } from \"react\"\n\nimport { EASE_OUT } from \"@/lib/ease\"\nimport { cn } from \"@/lib/utils\"\n\nexport interface AgentDisclosureProps\n  extends Omit<HTMLMotionProps<\"div\">, \"animate\" | \"initial\"> {\n  open: boolean\n  openHeight?: CSSProperties[\"height\"]\n}\n\n/** Shared transform-only reveal for collapsible agent content. */\nexport function AgentDisclosure({\n  open,\n  openHeight = \"auto\",\n  className,\n  style,\n  transition,\n  ...props\n}: AgentDisclosureProps) {\n  const reduce = useReducedMotion() ?? false\n\n  return (\n    <motion.div\n      {...props}\n      aria-hidden={!open}\n      inert={!open}\n      initial={false}\n      animate={\n        reduce\n          ? { opacity: open ? 1 : 0 }\n          : {\n              opacity: open ? 1 : 0,\n              clipPath: open ? \"inset(0 0 0% 0)\" : \"inset(0 0 100% 0)\",\n              y: open ? 0 : -4,\n            }\n      }\n      transition={\n        transition ?? {\n          duration: reduce ? 0 : open ? 0.22 : 0.14,\n          ease: EASE_OUT,\n        }\n      }\n      className={cn(\"overflow-hidden\", className)}\n      style={{\n        ...style,\n        height: open ? openHeight : 0,\n        pointerEvents: open ? undefined : \"none\",\n        transformOrigin: \"top\",\n      }}\n    />\n  )\n}\n",
+      "target": "components/sonojs/agent-disclosure.tsx"
+    },
+    {
+      "path": "lib/ease.ts",
+      "type": "registry:lib",
+      "content": "export const EASE_OUT = [0.16, 1, 0.3, 1] as const\nexport const EASE_IN_OUT = [0.77, 0, 0.175, 1] as const\nexport const EASE_DRAWER = [0.32, 0.72, 0, 1] as const\n\n/** CSS string form of EASE_OUT for inline style transitions. */\nexport const EASE_OUT_CSS = \"cubic-bezier(0.16, 1, 0.3, 1)\"\n\n/** Press feedback on buttons and other tappable surfaces. */\nexport const SPRING_PRESS = {\n  type: \"spring\",\n  stiffness: 500,\n  damping: 30,\n  mass: 0.6,\n} as const\n\n/** Content swaps — label/icon slots trading places inside a control. */\nexport const SPRING_SWAP = {\n  type: \"spring\",\n  stiffness: 460,\n  damping: 30,\n  mass: 0.55,\n} as const\n\n/** Overlay panel entrances — modals and sheets summoned by pointer. */\nexport const SPRING_PANEL = {\n  type: \"spring\",\n  stiffness: 420,\n  damping: 40,\n  mass: 0.5,\n} as const\n\n/** Shared-layout glides — pills, indicators and panels morphing between positions. */\nexport const SPRING_LAYOUT = {\n  type: \"spring\",\n  stiffness: 360,\n  damping: 32,\n  mass: 0.6,\n} as const\n\n/** Cursor-follow physics for decorative mouse tracking (magnetic, tilt, dock). */\nexport const SPRING_MOUSE = {\n  stiffness: 200,\n  damping: 15,\n  mass: 0.3,\n} as const\n\n/** Dragged handles and fills (sliders) — critically damped `useSpring` config,\n * so the value follows the pointer butterily and never rebounds off an end. */\nexport const SPRING_GLIDE = {\n  stiffness: 700,\n  damping: 50,\n  mass: 0.5,\n} as const\n",
+      "target": "lib/ease.ts"
+    }
+  ],
+  "version": "0.1.0+76990872e394",
+  "generatedAt": "2026-10-29T09:17:56.649Z"
+}

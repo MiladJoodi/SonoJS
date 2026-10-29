@@ -1,9 +1,14 @@
-﻿import { mkdir, readFile, writeFile, access } from "node:fs/promises"
+import { mkdir, readFile, writeFile, access } from "node:fs/promises"
 import { constants as fsConstants } from "node:fs"
 import path from "node:path"
 import { fileURLToPath } from "node:url"
 
 import { applyRegistryCssVars } from "./apply-css-vars.mjs"
+import {
+  ensureGlobalsThemeEntry,
+  SONOJS_SOURCE_INLINE_LINES,
+} from "./ensure-globals-theme.mjs"
+import { parseJsonText, stripBom } from "./strip-bom.mjs"
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const templatesRoot = path.resolve(__dirname, "../templates/init")
@@ -37,27 +42,6 @@ async function pathExists(p) {
   } catch {
     return false
   }
-}
-
-async function findGlobalsCss(cwd) {
-  const candidates = [
-    "app/globals.css",
-    "src/app/globals.css",
-    "src/styles/globals.css",
-    "styles/globals.css",
-  ]
-  for (const rel of candidates) {
-    const abs = path.resolve(cwd, rel)
-    if (await pathExists(abs)) return { abs, rel }
-  }
-  return null
-}
-
-function importLineForGlobals(cwd, globalsAbs) {
-  const sonoAbs = path.resolve(cwd, "styles/sonojs.css")
-  let rel = path.relative(path.dirname(globalsAbs), sonoAbs).replace(/\\/g, "/")
-  if (!rel.startsWith(".")) rel = `./${rel}`
-  return `@import "${rel}";`
 }
 
 /**
@@ -120,6 +104,54 @@ const SHADOW_SOFT_RULE = `.shadow-soft {
 `
 
 /**
+ * Patch sonojs.css safelist if an older template is missing primary utilities.
+ */
+export async function ensureSonojsSafelist(cwd) {
+  const sonoAbs = path.resolve(cwd, "styles/sonojs.css")
+  if (!(await pathExists(sonoAbs))) {
+    return { status: "missing" }
+  }
+
+  let css = await readFile(sonoAbs, "utf8")
+  let changed = false
+  const keys = []
+
+  for (const line of SONOJS_SOURCE_INLINE_LINES) {
+    if (css.includes(line)) continue
+    // Insert after last existing @source inline, or after tw-animate import
+    if (css.includes("@source inline(")) {
+      const matches = [...css.matchAll(/@source inline\("[^"]*"\);\s*/g)]
+      const last = matches[matches.length - 1]
+      if (last) {
+        const end = last.index + last[0].length
+        css = css.slice(0, end) + `${line}\n` + css.slice(end)
+        changed = true
+        keys.push("source-inline")
+        continue
+      }
+    }
+    css = css.replace(
+      /(@import\s+"tw-animate-css";\s*)/,
+      `$1\n${line}\n`
+    )
+    if (!css.includes(line)) {
+      css = `${line}\n${css}`
+    }
+    changed = true
+    keys.push("source-inline")
+  }
+
+  if (!changed) return { status: "exists", file: "styles/sonojs.css" }
+
+  await writeFile(sonoAbs, css, "utf8")
+  return {
+    status: "patched",
+    file: "styles/sonojs.css",
+    keys: [...new Set(keys)],
+  }
+}
+
+/**
  * Ensure canvas / shadow-soft tokens + utility exist for elevated cards.
  * Covers projects that inited before soft surfaces were part of the baseline.
  */
@@ -177,10 +209,7 @@ export async function ensureSoftSurfaceTokens(cwd) {
     const marker =
       '@source inline("bg-canvas bg-card text-card-foreground border-border/70 shadow-soft rounded-[12px]");\n'
     if (!css.includes(marker.trim())) {
-      css = css.replace(
-        /(@source inline\("[^"]*"\);\s*)/,
-        `$1${marker}`
-      )
+      css = css.replace(/(@source inline\("[^"]*"\);\s*)/, `$1${marker}`)
       changed = true
     }
   }
@@ -201,42 +230,11 @@ export async function ensureSoftSurfaceTokens(cwd) {
   }
 }
 
-/**
- * Ensure sonojs.css is imported from the app globals stylesheet.
- */
-async function ensureGlobalsImport(cwd) {
-  const found = await findGlobalsCss(cwd)
-  if (!found) {
-    return {
-      status: "missing",
-      message:
-        'No globals.css found — add: @import "../styles/sonojs.css";',
-    }
-  }
-
-  let css = await readFile(found.abs, "utf8")
-  if (css.includes("styles/sonojs.css") || css.includes("sonojs.css")) {
-    return { status: "exists", rel: found.rel }
-  }
-
-  const importLine = importLineForGlobals(cwd, found.abs)
-
-  // Insert after the last leading @import, or at the top.
-  const importBlock = css.match(/^(?:@import[^;]+;\s*)+/m)
-  if (importBlock) {
-    const end = importBlock.index + importBlock[0].length
-    css = css.slice(0, end) + `${importLine}\n` + css.slice(end)
-  } else {
-    css = `${importLine}\n${css}`
-  }
-
-  await writeFile(found.abs, css, "utf8")
-  return { status: "patched", rel: found.rel }
-}
+export { ensureGlobalsThemeEntry }
 
 /**
  * Install SonoJS design system + utils into a consumer project.
- * Theme tokens land on `:root` via styles/sonojs.css (imported from globals.css).
+ * Theme tokens on `:root` via styles/sonojs.css; @theme/@source pinned on globals.
  */
 export async function initSonojsProject({
   cwd = process.cwd(),
@@ -255,10 +253,10 @@ export async function initSonojsProject({
       continue
     }
 
-    let content = await readFile(src, "utf8")
+    let content = stripBom(await readFile(src, "utf8"))
 
     if (file.to === "components.json" && registryUrl) {
-      const json = JSON.parse(content)
+      const json = parseJsonText(content, "components.json template")
       const base = registryUrl.replace(/\/?$/, "/")
       json.registries = {
         ...(json.registries ?? {}),
@@ -272,10 +270,19 @@ export async function initSonojsProject({
     written.push(file.to)
   }
 
-  const globals = await ensureGlobalsImport(cwd)
+  const globals = await ensureGlobalsThemeEntry(cwd)
   const twAnimate = await ensureTwAnimateImport(cwd)
+  const safelist = await ensureSonojsSafelist(cwd)
   const chartNeon = await ensureChartNeonVars(cwd)
   const softSurface = await ensureSoftSurfaceTokens(cwd)
 
-  return { written, skipped, globals, twAnimate, chartNeon, softSurface }
+  return {
+    written,
+    skipped,
+    globals,
+    twAnimate,
+    safelist,
+    chartNeon,
+    softSurface,
+  }
 }

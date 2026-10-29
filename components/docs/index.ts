@@ -10,6 +10,7 @@ export {
   usePreviewDirection,
   useRegisterPreviewDirection,
 } from "./preview-direction"
+export { SoftButton, SoftGroup } from "./soft-toolbar"
 export { ComponentVariantPreview } from "./variant-preview"
 export type { VariantExample } from "./variant-preview"
 export { DocsApiProps } from "./api-props"

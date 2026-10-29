@@ -15,6 +15,7 @@ const outRouter = path.join(root, "registry", "example-loaders.ts")
 /** Must stay longest-first for id → folder matching (same idea as docs-variant-examples). */
 const FOLDER_ORDER = [
   "alert-dialog",
+  "approval-card",
   "attachment",
   "button-group",
   "breadcrumb",
@@ -39,7 +40,9 @@ const FOLDER_ORDER = [
   "dropdown-menu",
   "empty",
   "field",
+  "fluid-orb",
   "hover-card",
+  "image-generation",
   "input-group",
   "input-otp",
   "input",
@@ -72,7 +75,9 @@ const FOLDER_ORDER = [
   "toggle-group",
   "toggle",
   "tooltip",
+  "tool-approval",
   "trace",
+  "voice-ai-orb",
 ]
 
 function stripNoise(source) {

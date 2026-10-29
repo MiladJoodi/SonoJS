@@ -1,6 +1,6 @@
 {
   "name": "@sonojs/ui",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "SonoJS — design system + CLI (copy-source add)",
   "license": "MIT",
   "type": "module",
@@ -25,6 +25,8 @@
     "./lib/*": "./src/lib/*",
     "./lib/direction": "./src/lib/direction.ts",
     "./lib/highlighter": "./src/lib/highlighter.tsx",
+    "./components/image-generation": "./src/components/image-generation/index.tsx",
+    "./components/image-generation/*": "./src/components/image-generation/*",
     "./components/*": "./src/components/*.tsx",
     "./hooks/*": "./src/hooks/*",
     "./hooks/use-direction": "./src/hooks/use-direction.tsx",

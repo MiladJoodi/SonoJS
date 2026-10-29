@@ -1,11 +1,12 @@
 "use client"
 
 import * as React from "react"
-import { CodeIcon, EyeIcon } from "lucide-react"
+import { Code2Icon, EyeIcon } from "lucide-react"
 
 import { CodePanel } from "@/components/docs/code-panel"
 import { InstallNeedsHint } from "@/components/docs/install-needs-hint"
 import { useRegisterPreviewDirection } from "@/components/docs/preview-direction"
+import { SoftButton, SoftGroup } from "@/components/docs/soft-toolbar"
 import {
   DirectionProvider,
   DirectionToggle,
@@ -14,11 +15,6 @@ import type { Direction } from "@/lib/direction"
 import { prefetchExamples } from "@/components/docs/example-component-cache"
 import { RegistryExamplePreview } from "@/components/docs/registry-example-preview"
 import { cn } from "@/lib/utils"
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip"
 
 export type VariantExample = {
   name: string
@@ -90,11 +86,14 @@ function ExampleLead({
 export function ComponentVariantPreview({
   examples,
   className,
+  previewClassName,
   showDirection = true,
   allowOverflow = false,
 }: {
   examples: VariantExample[]
   className?: string
+  /** Override the preview stage surface (default `bg-canvas`). */
+  previewClassName?: string
   /** Hide LTR/RTL when the preview has no directional layout (e.g. code). */
   showDirection?: boolean
   /**
@@ -145,7 +144,8 @@ export function ComponentVariantPreview({
   const previewFrameClass = cn(
     "flex min-h-32 items-center justify-center bg-canvas p-8",
     allowOverflow &&
-      "relative z-20 min-h-[28rem] items-start justify-center overflow-visible pt-10 pb-16"
+      "relative z-20 min-h-[28rem] items-start justify-center overflow-visible pt-10 pb-16",
+    previewClassName
   )
   const previewFrameStyle =
     frameMinHeight != null && !allowOverflow
@@ -160,23 +160,25 @@ export function ComponentVariantPreview({
 
       <div
         className={cn(
-          "rounded-xl border border-border/70",
+          "border border-border/70 bg-card",
           allowOverflow
-            ? "relative z-20 overflow-visible"
-            : "overflow-hidden"
+            ? "relative z-20 overflow-visible rounded-t-[12px]"
+            : "overflow-hidden rounded-[12px]"
         )}
       >
-        <div className="flex items-start gap-2 rounded-t-xl border-b border-border/80 bg-muted/30 p-2">
-          <div className="flex min-w-0 flex-1 flex-wrap gap-1">
+        {/* Same toolbar chrome as BlockExample (no CLI / no viewport). */}
+        <div className="flex flex-col gap-2 rounded-t-[12px] border-b border-border/80 bg-muted/30 px-3 py-2 sm:flex-row sm:items-center sm:justify-between sm:gap-3">
+          <div className="flex min-w-0 flex-wrap items-center gap-1">
             {examples.map((item) => (
               <button
                 key={item.name}
                 type="button"
                 onClick={() => setActive(item.name)}
                 className={cn(
-                  "cursor-pointer rounded-md px-2.5 py-1.5 text-[12.5px] font-medium transition-colors",
+                  "h-8 cursor-pointer rounded-md px-2.5 text-[12.5px] font-medium transition-colors",
+                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 focus-visible:ring-inset",
                   active === item.name
-                    ? "bg-primary/10 text-primary"
+                    ? "bg-canvas text-foreground"
                     : "text-muted-foreground hover:bg-muted/60 hover:text-foreground"
                 )}
               >
@@ -184,39 +186,30 @@ export function ComponentVariantPreview({
               </button>
             ))}
           </div>
-          <div className="flex shrink-0 items-center gap-1.5 self-start">
+
+          <div className="flex shrink-0 flex-wrap items-center gap-1.5">
             {effectiveView === "preview" && showDirection ? (
               <DirectionToggle value={dir} onValueChange={setDir} />
             ) : null}
             {hasCode ? (
-              <div className="inline-flex h-8 items-stretch overflow-hidden rounded-md border border-border/70 bg-card">
-                {(
-                  [
-                    { id: "preview", label: "Preview", Icon: EyeIcon },
-                    { id: "code", label: "Code", Icon: CodeIcon },
-                  ] as const
-                ).map((tab) => (
-                  <Tooltip key={tab.id}>
-                    <TooltipTrigger asChild>
-                      <button
-                        type="button"
-                        onClick={() => setView(tab.id)}
-                        aria-label={tab.label}
-                        className={cn(
-                          "inline-flex min-w-7 cursor-pointer items-center justify-center rounded-none px-0 text-muted-foreground transition-colors md:min-w-9",
-                          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 focus-visible:ring-inset",
-                          effectiveView === tab.id
-                            ? "bg-canvas text-foreground"
-                            : "hover:text-foreground"
-                        )}
-                      >
-                        <tab.Icon className="size-3.5" aria-hidden />
-                      </button>
-                    </TooltipTrigger>
-                    <TooltipContent side="top">{tab.label}</TooltipContent>
-                  </Tooltip>
-                ))}
-              </div>
+              <SoftGroup label="View mode">
+                <SoftButton
+                  label="Preview"
+                  pressed={effectiveView === "preview"}
+                  onClick={() => setView("preview")}
+                >
+                  <EyeIcon className="size-3.5 shrink-0" aria-hidden />
+                  <span className="hidden sm:inline">Preview</span>
+                </SoftButton>
+                <SoftButton
+                  label="Code"
+                  pressed={effectiveView === "code"}
+                  onClick={() => setView("code")}
+                >
+                  <Code2Icon className="size-3.5 shrink-0" aria-hidden />
+                  <span className="hidden sm:inline">Code</span>
+                </SoftButton>
+              </SoftGroup>
             ) : null}
           </div>
         </div>

@@ -8,6 +8,7 @@ const folderModules = {
   "accordion": () => import("./examples/accordion/_loaders"),
   "alert": () => import("./examples/alert/_loaders"),
   "alert-dialog": () => import("./examples/alert-dialog/_loaders"),
+  "approval-card": () => import("./examples/approval-card/_loaders"),
   "attachment": () => import("./examples/attachment/_loaders"),
   "avatar": () => import("./examples/avatar/_loaders"),
   "badge": () => import("./examples/badge/_loaders"),
@@ -31,7 +32,9 @@ const folderModules = {
   "dropdown-menu": () => import("./examples/dropdown-menu/_loaders"),
   "empty": () => import("./examples/empty/_loaders"),
   "field": () => import("./examples/field/_loaders"),
+  "fluid-orb": () => import("./examples/fluid-orb/_loaders"),
   "hover-card": () => import("./examples/hover-card/_loaders"),
+  "image-generation": () => import("./examples/image-generation/_loaders"),
   "input": () => import("./examples/input/_loaders"),
   "input-group": () => import("./examples/input-group/_loaders"),
   "input-otp": () => import("./examples/input-otp/_loaders"),
@@ -64,11 +67,13 @@ const folderModules = {
   "textarea": () => import("./examples/textarea/_loaders"),
   "toggle": () => import("./examples/toggle/_loaders"),
   "toggle-group": () => import("./examples/toggle-group/_loaders"),
+  "tool-approval": () => import("./examples/tool-approval/_loaders"),
   "tooltip": () => import("./examples/tooltip/_loaders"),
   "trace": () => import("./examples/trace/_loaders"),
+  "voice-ai-orb": () => import("./examples/voice-ai-orb/_loaders"),
 } as const
 
-const FOLDERS_LONGEST_FIRST = ["message-scroller","navigation-menu","rainbow-button","dropdown-menu","native-select","alert-dialog","button-group","context-menu","toggle-group","collapsible","date-picker","input-group","radio-group","scroll-area","attachment","breadcrumb","code-block","data-table","hover-card","pagination","accordion","input-otp","resizable","separator","calendar","combobox","carousel","checkbox","progress","skeleton","textarea","command","menubar","message","popover","spinner","tooltip","avatar","bubble","button","dialog","drawer","marker","select","slider","sonner","switch","toggle","badge","alert","empty","field","input","label","sheet","table","trace","card","item","tabs","kbd"] as const
+const FOLDERS_LONGEST_FIRST = ["image-generation","message-scroller","navigation-menu","rainbow-button","approval-card","dropdown-menu","native-select","tool-approval","alert-dialog","button-group","context-menu","toggle-group","voice-ai-orb","collapsible","date-picker","input-group","radio-group","scroll-area","attachment","breadcrumb","code-block","data-table","hover-card","pagination","accordion","fluid-orb","input-otp","resizable","separator","calendar","combobox","carousel","checkbox","progress","skeleton","textarea","command","menubar","message","popover","spinner","tooltip","avatar","bubble","button","dialog","drawer","marker","select","slider","sonner","switch","toggle","badge","alert","empty","field","input","label","sheet","table","trace","card","item","tabs","kbd"] as const
 
 function folderForExample(name: string): string | undefined {
   for (const folder of FOLDERS_LONGEST_FIRST) {

@@ -22,6 +22,7 @@ import path from "node:path"
 import { fileURLToPath } from "node:url"
 
 import { registryItems } from "./registry-items.mjs"
+import { rewriteConsumerImports } from "./rewrite-consumer-imports.mjs"
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const root = path.resolve(__dirname, "..")
@@ -41,25 +42,6 @@ function contentHash(files) {
     hash.update("\0")
   }
   return hash.digest("hex").slice(0, 12)
-}
-
-/**
- * packages/ui uses @sonojs/ui/*; consumers get @/* after install.
- */
-function rewriteConsumerImports(content) {
-  return content
-    .replace(
-      /from\s+["']@sonojs\/ui\/components\/([^"']+)["']/g,
-      'from "@/components/ui/$1"'
-    )
-    .replace(
-      /from\s+["']@sonojs\/ui\/hooks\/([^"']+)["']/g,
-      'from "@/hooks/$1"'
-    )
-    .replace(
-      /from\s+["']@sonojs\/ui\/lib\/([^"']+)["']/g,
-      'from "@/lib/$1"'
-    )
 }
 
 /**

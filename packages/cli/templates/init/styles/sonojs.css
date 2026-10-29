@@ -1,4 +1,4 @@
-﻿/**
+/**
  * SonoJS design system — theme tokens on `:root` / `.dark`.
  * `init` imports this from globals.css; `add` only copies components.
  *
@@ -16,7 +16,9 @@
 /* Switch thumb LTR/RTL travel */
 @source inline("ltr:data-[state=checked]:translate-x-[calc(100%-2px)] rtl:data-[state=checked]:-translate-x-[calc(100%-2px)]");
 /* Elevated surfaces used by marketing / auth blocks */
-@source inline("bg-canvas bg-card text-card-foreground border-border/70 shadow-soft rounded-[12px]");
+@source inline("bg-canvas bg-card text-card-foreground border-border/70 shadow-soft rounded-[12px] ring-border/70");
+/* Semantic colors — blocks/buttons even if a content path is missed */
+@source inline("bg-primary hover:bg-primary/90 bg-primary/90 !text-white text-primary bg-destructive hover:bg-destructive/90 text-destructive text-muted-foreground bg-muted hover:bg-muted bg-secondary text-secondary-foreground bg-accent text-accent-foreground text-foreground text-background bg-foreground bg-background from-card via-card/70 to-transparent");
 
 /* Map utilities → CSS vars (values from :root) */
 @theme inline {

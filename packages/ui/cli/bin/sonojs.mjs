@@ -9,7 +9,9 @@ import {
 import { RegistryConsistencyError } from "../src/consistency.mjs"
 import {
   ensureChartNeonVars,
+  ensureGlobalsThemeEntry,
   ensureSoftSurfaceTokens,
+  ensureSonojsSafelist,
   ensureTwAnimateImport,
   initSonojsProject,
 } from "../src/init.mjs"
@@ -21,6 +23,7 @@ import { installRegistryItemFiles } from "../src/install.mjs"
 import { resolveRegistryItem } from "../src/resolve.mjs"
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
+/** Published default — monorepo overrides via SONOJS_REGISTRY or --registry. */
 const defaultRegistry = "https://sonojs.com/r"
 
 function printHelp() {
@@ -65,27 +68,42 @@ async function cmdInit(rest) {
       ? registry
       : undefined
 
-  const { written, skipped, globals, twAnimate, chartNeon, softSurface } =
-    await initSonojsProject({
-      cwd,
-      overwrite,
-      registryUrl,
-    })
+  const {
+    written,
+    skipped,
+    globals,
+    twAnimate,
+    safelist,
+    chartNeon,
+    softSurface,
+  } = await initSonojsProject({
+    cwd,
+    overwrite,
+    registryUrl,
+  })
 
-  console.log("SonoJS initialized (theme tokens on :root via styles/sonojs.css)")
+  console.log(
+    "SonoJS initialized (tokens in styles/sonojs.css; @theme on globals — class .dark only)"
+  )
   for (const file of written) console.log(`  + ${file}`)
   for (const file of skipped) {
     console.log(`  ~ skip (exists): ${file}  (use --overwrite)`)
   }
   if (globals?.status === "patched") {
-    console.log(`  + import in ${globals.rel}`)
+    const detail = globals.keys?.length
+      ? ` (${globals.keys.join(", ")})`
+      : ""
+    console.log(`  + globals theme entry → ${globals.rel}${detail}`)
   } else if (globals?.status === "exists") {
-    console.log(`  ~ import already in ${globals.rel}`)
+    console.log(`  ~ globals theme entry already in ${globals.rel}`)
   } else if (globals?.status === "missing") {
     console.log(`  ! ${globals.message}`)
   }
   if (twAnimate?.status === "patched") {
     console.log("  + @import tw-animate-css in styles/sonojs.css")
+  }
+  if (safelist?.status === "patched") {
+    console.log("  + @source inline safelist in styles/sonojs.css")
   }
   if (chartNeon?.status === "patched") {
     console.log(
@@ -194,9 +212,28 @@ async function cmdAdd(names, rest) {
   npmDeps.add("tw-animate-css")
   installNpmDependencies(cwd, [...npmDeps])
 
+  // Heal failed/partial init: clsx + tailwind-merge for lib/utils.ts
+  installInitNpmDependencies(cwd)
+
   const twAnimate = await ensureTwAnimateImport(cwd)
   if (twAnimate?.status === "patched") {
     console.log("  + @import tw-animate-css in styles/sonojs.css")
+  }
+
+  const safelist = await ensureSonojsSafelist(cwd)
+  if (safelist?.status === "patched") {
+    console.log("  + @source inline safelist in styles/sonojs.css")
+  }
+
+  // Heal create-next-app theme conflict + pin @theme/@source on every add
+  const globals = await ensureGlobalsThemeEntry(cwd)
+  if (globals?.status === "patched") {
+    const detail = globals.keys?.length
+      ? ` (${globals.keys.join(", ")})`
+      : ""
+    console.log(`  + globals theme entry → ${globals.rel}${detail}`)
+  } else if (globals?.status === "missing") {
+    console.log(`  ! ${globals.message}`)
   }
 
   const chartNeon = await ensureChartNeonVars(cwd)

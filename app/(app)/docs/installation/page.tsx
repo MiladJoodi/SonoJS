@@ -24,7 +24,17 @@ export default function InstallationDocsPage() {
       <section className="space-y-4">
         <h2 className="text-h3">1. Init</h2>
         <p className="text-sm leading-relaxed text-muted-foreground">
-          Copies base utilities, direction helpers, and styles into your project.
+          Copies base utilities, direction helpers, and{" "}
+          <code className="text-foreground">styles/sonojs.css</code> tokens into
+          your project. It also wires your{" "}
+          <code className="text-foreground">globals.css</code> Tailwind entry:
+          imports SonoJS, pins <code className="text-foreground">@theme</code> /{" "}
+          <code className="text-foreground">@source</code>, and removes
+          create-next-app{" "}
+          <code className="text-foreground">prefers-color-scheme</code>{" "}
+          <code className="text-foreground">:root</code> colors so dark mode stays
+          class-based (<code className="text-foreground">.dark</code> only). Restart
+          the dev server after init if styles look stale.
         </p>
         <ComponentSource
           title="Terminal"

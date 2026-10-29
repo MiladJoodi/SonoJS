@@ -2096,6 +2096,85 @@ const registryItemsRaw = [
     ],
   },
   {
+    name: "agent-code",
+    type: "registry:ui",
+    title: "Agent Code",
+    description:
+      "Lightweight dual-theme Shiki highlighter for agent tool surfaces.",
+    dependencies: ["shiki", "clsx", "tailwind-merge"],
+    files: [
+      {
+        path: "packages/ui/src/components/agent-code.tsx",
+        type: "registry:ui",
+        target: "components/sonojs/agent-code.tsx",
+      },
+    ],
+  },
+  {
+    name: "agent-disclosure",
+    type: "registry:ui",
+    title: "Agent Disclosure",
+    description:
+      "A transform-only reveal for collapsible agent content (clip-path + opacity).",
+    dependencies: ["motion", "clsx", "tailwind-merge"],
+    files: [
+      {
+        path: "packages/ui/src/components/agent-disclosure.tsx",
+        type: "registry:ui",
+        target: "components/sonojs/agent-disclosure.tsx",
+      },
+      {
+        path: "packages/ui/src/lib/ease.ts",
+        type: "registry:lib",
+        target: "lib/ease.ts",
+      },
+    ],
+  },
+  {
+    name: "approval-card",
+    type: "registry:ui",
+    title: "Approval Card",
+    description:
+      "A review card for approving an AI agent's proposed action.",
+    dependencies: [
+      "motion",
+      "lucide-react",
+      "radix-ui",
+      "clsx",
+      "tailwind-merge",
+    ],
+    registryDependencies: ["agent-disclosure", "button", "checkbox"],
+    files: [
+      {
+        path: "packages/ui/src/components/approval-card.tsx",
+        type: "registry:ui",
+        target: "components/sonojs/approval-card.tsx",
+      },
+    ],
+  },
+  {
+    name: "tool-approval",
+    type: "registry:ui",
+    title: "Tool Approval",
+    description:
+      "A permission prompt for approving an AI agent's tool call.",
+    dependencies: [
+      "motion",
+      "lucide-react",
+      "shiki",
+      "clsx",
+      "tailwind-merge",
+    ],
+    registryDependencies: ["agent-code", "agent-disclosure"],
+    files: [
+      {
+        path: "packages/ui/src/components/tool-approval.tsx",
+        type: "registry:ui",
+        target: "components/sonojs/tool-approval.tsx",
+      },
+    ],
+  },
+  {
     name: "alert",
     type: "registry:ui",
     title: "Alert",
@@ -2458,6 +2537,20 @@ const registryItemsRaw = [
     ],
   },
   {
+    name: "fluid-orb",
+    type: "registry:ui",
+    title: "Fluid Orb",
+    description: "A WebGL fluid orb for AI idle and thinking states.",
+    dependencies: ["clsx", "tailwind-merge"],
+    files: [
+      {
+        path: "packages/ui/src/components/fluid-orb.tsx",
+        type: "registry:ui",
+        target: "components/sonojs/fluid-orb.tsx",
+      },
+    ],
+  },
+  {
     name: "hover-card",
     type: "registry:ui",
     title: "Hover Card",
@@ -2469,6 +2562,36 @@ const registryItemsRaw = [
         path: "packages/ui/src/components/hover-card.tsx",
         type: "registry:ui",
         target: "components/ui/hover-card.tsx",
+      },
+    ],
+  },
+  {
+    name: "image-generation",
+    type: "registry:ui",
+    title: "Image Generation",
+    description:
+      "An image-generation state with dither progress and a completed result.",
+    dependencies: ["motion", "lucide-react", "clsx", "tailwind-merge"],
+    files: [
+      {
+        path: "packages/ui/src/components/image-generation/index.tsx",
+        type: "registry:ui",
+        target: "components/sonojs/image-generation/index.tsx",
+      },
+      {
+        path: "packages/ui/src/components/image-generation/use-hover-capable.ts",
+        type: "registry:ui",
+        target: "components/sonojs/image-generation/use-hover-capable.ts",
+      },
+      {
+        path: "packages/ui/src/components/image-generation/ease.ts",
+        type: "registry:ui",
+        target: "components/sonojs/image-generation/ease.ts",
+      },
+      {
+        path: "packages/ui/src/components/image-generation/media/design.png",
+        type: "registry:file",
+        target: "components/sonojs/image-generation/media/design.png",
       },
     ],
   },
@@ -3132,6 +3255,21 @@ const registryItemsRaw = [
         path: "packages/ui/src/components/trace.tsx",
         type: "registry:ui",
         target: "components/ui/trace.tsx",
+      },
+    ],
+  },
+  {
+    name: "voice-ai-orb",
+    type: "registry:ui",
+    title: "Voice AI Orb",
+    description:
+      "A voice-agent status orb for listening, reasoning, and speaking.",
+    dependencies: ["lucide-react", "clsx", "tailwind-merge"],
+    files: [
+      {
+        path: "packages/ui/src/components/voice-ai-orb.tsx",
+        type: "registry:ui",
+        target: "components/ui/voice-ai-orb.tsx",
       },
     ],
   },

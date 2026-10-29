@@ -2,6 +2,8 @@ import { spawnSync } from "node:child_process"
 import { readFileSync } from "node:fs"
 import path from "node:path"
 
+import { parseJsonText } from "./strip-bom.mjs"
+
 /**
  * Packages `sonojs init` installs. Skipped again on `add` (except
  * `tw-animate-css`, which stays installable via item deps / add path).
@@ -31,8 +33,9 @@ function hasVersionRange(spec) {
 
 function readInstalledNames(cwd) {
   try {
-    const pkg = JSON.parse(
-      readFileSync(path.join(cwd, "package.json"), "utf8")
+    const pkg = parseJsonText(
+      readFileSync(path.join(cwd, "package.json"), "utf8"),
+      "package.json"
     )
     return new Set([
       ...Object.keys(pkg.dependencies ?? {}),
