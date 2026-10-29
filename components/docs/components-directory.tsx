@@ -1,8 +1,8 @@
-import {
-  CatalogSection,
-  CatalogThumbCard,
-  componentThumbSrc,
-} from "@/components/catalog"
+"use client"
+
+import { CatalogSection } from "@/components/catalog/catalog-section"
+import { CatalogThumbCard } from "@/components/catalog/catalog-thumb-card"
+import { getComponentWireframe } from "@/components/catalog/wireframes/components"
 import type { DocsNavGroup } from "@/lib/docs-nav"
 
 export type ComponentsDirectoryItem = {
@@ -37,8 +37,7 @@ export function ComponentsDirectory({
                 key={page.href}
                 href={page.href}
                 title={page.title}
-                lightSrc={componentThumbSrc(slug, "light")}
-                darkSrc={componentThumbSrc(slug, "dark")}
+                preview={getComponentWireframe(slug)}
               />
             )
           })}

@@ -6,3 +6,5 @@ export {
   AiAgentsBlockWireframe,
   getBlockCategoryWireframe,
 } from "./wireframes/blocks"
+export { getComponentWireframe } from "./wireframes/components"
+export { MarkFrame } from "./wireframes/mark-frame"

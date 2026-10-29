@@ -43,7 +43,7 @@ export function CatalogThumbCard({
         className="relative aspect-16/10 w-full overflow-hidden bg-muted/35 dark:bg-muted/25"
       >
         {preview ? (
-          <div className="size-full p-1.5 transition-transform duration-500 group-hover:scale-[1.04] md:p-2">
+          <div className="size-full p-1 transition-transform duration-500 group-hover:scale-[1.04]">
             {preview}
           </div>
         ) : hasImages ? (
