@@ -144,6 +144,7 @@ export function detectClients(env = {}) {
 
 export function buildSonojsServerEntry({ registryUrl } = {}) {
   const entry = {
+    type: "stdio",
     command: SONOJS_MCP_COMMAND,
     args: [...SONOJS_MCP_ARGS],
   }
