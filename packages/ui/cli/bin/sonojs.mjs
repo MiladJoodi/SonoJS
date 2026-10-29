@@ -20,6 +20,7 @@ import {
   installNpmDependencies,
 } from "../src/install-npm.mjs"
 import { installRegistryItemFiles } from "../src/install.mjs"
+import { cmdMcp } from "../src/mcp/cmd.mjs"
 import { resolveRegistryItem } from "../src/resolve.mjs"
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -30,9 +31,13 @@ function printHelp() {
   console.log(`Usage:
   sonojs init [--cwd <dir>] [--registry <url-or-path>] [--overwrite]
   sonojs add <name> [name...] [--registry <url-or-path>] [--cwd <dir>] [--overwrite]
+  sonojs mcp [--registry <url-or-path>]
+  sonojs mcp init [--client <name>] [--all] [--dry-run] [--cwd <dir>] [--registry <url-or-path>]
 
-init  — installs design system (styles/sonojs.css), lib/utils.ts, components.json
-add   — copies component(s) into components/ui/ (run init first)
+init      — installs design system (styles/sonojs.css), lib/utils.ts, components.json
+add       — copies component(s) into components/ui/ (run init first)
+mcp       — run the SonoJS MCP stdio server (agents launch this)
+mcp init  — detect Cursor/VS Code/Claude/Codex/Windsurf and write MCP config
 
 Environment:
   SONOJS_REGISTRY   Default registry base (URL or local directory)
@@ -290,6 +295,11 @@ async function main() {
         process.exit(1)
       }
       await cmdAdd(names, rest.slice(i))
+      return
+    }
+
+    if (command === "mcp") {
+      await cmdMcp(rest)
       return
     }
 

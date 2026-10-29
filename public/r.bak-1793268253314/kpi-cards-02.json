@@ -1,0 +1,37 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "kpi-cards-02",
+  "type": "registry:block",
+  "title": "kpi-cards-02",
+  "description": "Regional KPI strip — status dots, revenue totals, and segmented goal meters.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [],
+  "cssVars": {
+    "light": {
+      "canvas": "#f3f3f4",
+      "border-soft": "color-mix(in oklab, #e4e4e7 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18)",
+      "background": "var(--canvas)",
+      "card": "#ffffff"
+    },
+    "dark": {
+      "canvas": "#09090b",
+      "border-soft": "color-mix(in oklab, #27272a 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(0, 0, 0, 0.24), 0 28px 56px -28px rgba(0, 0, 0, 0.48)",
+      "background": "var(--canvas)",
+      "card": "#18181b"
+    }
+  },
+  "files": [
+    {
+      "path": "components/blocks/dashboards-analytics/kpi-cards-02/kpi-cards.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { ArrowRightIcon } from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst STATUSES = {\n  within: { label: \"On track\", color: \"bg-emerald-500\" },\n  observe: { label: \"Needs attention\", color: \"bg-amber-500\" },\n  critical: { label: \"At risk\", color: \"bg-rose-500\" },\n} as const\n\ntype StatusKey = keyof typeof STATUSES\n\ntype RegionStat = {\n  name: string\n  stat: string\n  goalsAchieved: number\n  status: StatusKey\n  href: string\n}\n\nconst DATA: RegionStat[] = [\n  {\n    name: \"Europe\",\n    stat: \"$10,023\",\n    goalsAchieved: 3,\n    status: \"observe\",\n    href: \"#\",\n  },\n  {\n    name: \"North America\",\n    stat: \"$14,092\",\n    goalsAchieved: 5,\n    status: \"within\",\n    href: \"#\",\n  },\n  {\n    name: \"Asia Pacific\",\n    stat: \"$113,232\",\n    goalsAchieved: 1,\n    status: \"critical\",\n    href: \"#\",\n  },\n]\n\nconst GOALS = [1, 2, 3, 4, 5] as const\n\nexport default function KpiCards({\n  className,\n  ...props\n}: React.ComponentProps<\"section\">) {\n  return (\n    <section\n      className={cn(\n        \"relative isolate flex w-full min-w-0 items-center justify-center bg-canvas px-4 pt-10 pb-14 text-foreground sm:px-6 sm:pt-12 sm:pb-16\",\n        className\n      )}\n      aria-labelledby=\"kpi-cards-02-heading\"\n      {...props}\n    >\n      <div\n        aria-hidden\n        className=\"pointer-events-none absolute inset-0 -z-10\"\n      >\n        <div className=\"absolute start-1/2 top-[-18%] size-[22rem] -translate-x-1/2 rounded-full bg-primary/10 blur-3xl\" />\n      </div>\n\n      <div className=\"@container w-full max-w-5xl\">\n        <header className=\"mb-6 text-start\">\n          <h2\n            id=\"kpi-cards-02-heading\"\n            className=\"text-lg font-semibold tracking-tight text-foreground\"\n          >\n            Regional performance\n          </h2>\n          <p className=\"mt-1 text-sm text-muted-foreground\">\n            Revenue and quarterly goals across your SonoJS markets.\n          </p>\n        </header>\n\n        {/* Outer keeps shadow-soft; inner overflow clips divide/hover to radius. */}\n        <div className=\"rounded-[12px] border border-border/70 bg-card shadow-soft\">\n          <dl className=\"grid w-full grid-cols-1 divide-y divide-border/70 overflow-hidden rounded-[12px] @2xl:grid-cols-3 @2xl:divide-x @2xl:divide-y-0\">\n          {DATA.map((item) => {\n            const status = STATUSES[item.status]\n            return (\n              <div\n                key={item.name}\n                className=\"group relative flex flex-col gap-6 p-6 transition-colors hover:bg-muted/40\"\n              >\n                <div className=\"flex items-center justify-between gap-3\">\n                  <dt className=\"truncate text-sm font-medium text-foreground\">\n                    {item.name}\n                  </dt>\n                  <dd className=\"flex shrink-0 items-center gap-2 text-sm text-muted-foreground\">\n                    <span\n                      aria-hidden\n                      className={cn(\"size-1.5 rounded-full\", status.color)}\n                    />\n                    {status.label}\n                  </dd>\n                </div>\n                <dd\n                  dir=\"ltr\"\n                  className=\"text-3xl font-semibold tracking-tight text-foreground tabular-nums\"\n                >\n                  {item.stat}\n                </dd>\n                <dd className=\"flex flex-col gap-2\">\n                  <div className=\"flex items-center justify-between text-sm\">\n                    <span className=\"text-muted-foreground\">Goals achieved</span>\n                    <span\n                      dir=\"ltr\"\n                      className=\"font-medium text-foreground tabular-nums\"\n                    >\n                      {item.goalsAchieved}/{GOALS.length}\n                    </span>\n                  </div>\n                  <div aria-hidden className=\"flex gap-1\">\n                    {GOALS.map((goal) => (\n                      <span\n                        key={goal}\n                        className={cn(\n                          \"h-1.5 flex-1 rounded-full\",\n                          goal <= item.goalsAchieved\n                            ? status.color\n                            : \"bg-foreground/10\"\n                        )}\n                      />\n                    ))}\n                  </div>\n                </dd>\n                <dd className=\"text-sm\">\n                  <a\n                    href={item.href}\n                    className=\"inline-flex items-center gap-1 font-medium text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring\"\n                  >\n                    <span aria-hidden className=\"absolute inset-0\" />\n                    View region\n                    <ArrowRightIcon\n                      aria-hidden\n                      className=\"icon-dir size-4 shrink-0 transition-transform group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5\"\n                    />\n                  </a>\n                </dd>\n              </div>\n            )\n          })}\n          </dl>\n        </div>\n      </div>\n    </section>\n  )\n}\n",
+      "target": "components/blocks/dashboards-analytics/kpi-cards-02/kpi-cards.tsx"
+    }
+  ],
+  "version": "0.1.0+44be9ac7d5f6",
+  "generatedAt": "2026-10-29T10:03:04.279Z"
+}

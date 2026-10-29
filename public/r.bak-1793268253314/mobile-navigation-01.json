@@ -1,0 +1,36 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "mobile-navigation-01",
+  "type": "registry:block",
+  "title": "mobile-navigation-01",
+  "description": "Classic edge-to-edge tab bar with Home, Search, Bag, and Profile labels.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "cssVars": {
+    "light": {
+      "canvas": "#f3f3f4",
+      "border-soft": "color-mix(in oklab, #e4e4e7 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18)",
+      "background": "var(--canvas)",
+      "card": "#ffffff"
+    },
+    "dark": {
+      "canvas": "#09090b",
+      "border-soft": "color-mix(in oklab, #27272a 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(0, 0, 0, 0.24), 0 28px 56px -28px rgba(0, 0, 0, 0.48)",
+      "background": "var(--canvas)",
+      "card": "#18181b"
+    }
+  },
+  "files": [
+    {
+      "path": "components/blocks/navigation/mobile-navigation-01/mobile-navigation.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport {\n  HomeIcon,\n  SearchIcon,\n  ShoppingBagIcon,\n  UserIcon,\n} from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst items = [\n  { id: \"home\", label: \"Home\", icon: HomeIcon },\n  { id: \"search\", label: \"Search\", icon: SearchIcon },\n  { id: \"bag\", label: \"Bag\", icon: ShoppingBagIcon },\n  { id: \"profile\", label: \"Profile\", icon: UserIcon },\n] as const\n\ntype ItemId = (typeof items)[number][\"id\"]\n\nexport default function MobileNavigation({\n  className,\n  ...props\n}: React.ComponentProps<\"div\">) {\n  const [active, setActive] = React.useState<ItemId>(\"home\")\n  const activeItem = items.find((item) => item.id === active)\n\n  return (\n    <div\n      className={cn(\n        \"relative flex min-h-[22rem] w-full flex-col overflow-hidden rounded-[12px] border border-border/70 bg-background\",\n        className\n      )}\n      {...props}\n    >\n      <div className=\"flex flex-1 flex-col items-center justify-center gap-2 px-6 text-center\">\n        <p className=\"text-sm font-medium text-foreground\">\n          {activeItem?.label}\n        </p>\n        <p className=\"max-w-xs text-sm text-muted-foreground\">\n          Classic edge-to-edge tab bar with icon and label.\n        </p>\n      </div>\n\n      <nav\n        aria-label=\"Mobile\"\n        className=\"border-t border-border/70 bg-card pb-[env(safe-area-inset-bottom)] shadow-[0_-8px_24px_-20px_rgba(0,0,0,0.35)]\">\n        <div className=\"mx-auto grid h-[4.25rem] max-w-lg grid-cols-4\">\n          {items.map((item) => {\n            const Icon = item.icon\n            const isActive = active === item.id\n            return (\n              <button\n                key={item.id}\n                type=\"button\"\n                onClick={() => setActive(item.id)}\n                aria-current={isActive ? \"page\" : undefined}\n                className={cn(\n                  \"inline-flex h-full min-w-0 cursor-pointer flex-col items-center justify-center gap-1 px-2\",\n                  \"transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring\"\n                )}\n              >\n                <Icon\n                  aria-hidden\n                  className={cn(\n                    \"size-5 shrink-0 transition-colors\",\n                    isActive ? \"text-primary\" : \"text-muted-foreground\"\n                  )}\n                />\n                <span\n                  className={cn(\n                    \"max-w-full truncate text-[11px] font-medium\",\n                    isActive ? \"text-primary\" : \"text-muted-foreground\"\n                  )}\n                >\n                  {item.label}\n                </span>\n              </button>\n            )\n          })}\n        </div>\n      </nav>\n    </div>\n  )\n}\n",
+      "target": "components/blocks/navigation/mobile-navigation-01/mobile-navigation.tsx"
+    }
+  ],
+  "version": "0.1.0+44be9ac7d5f6",
+  "generatedAt": "2026-10-29T10:03:04.279Z"
+}

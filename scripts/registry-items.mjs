@@ -2096,6 +2096,149 @@ const registryItemsRaw = [
     ],
   },
   {
+    name: "agent-activity",
+    type: "registry:ui",
+    title: "Agent Activity",
+    description:
+      "A live timeline that shows an AI agent's work step by step.",
+    dependencies: ["motion", "lucide-react", "clsx", "tailwind-merge"],
+    registryDependencies: ["agent-disclosure"],
+    files: [
+      {
+        path: "packages/ui/src/components/agent-activity/index.tsx",
+        type: "registry:ui",
+        target: "components/sonojs/agent-activity/index.tsx",
+      },
+      {
+        path: "packages/ui/src/components/agent-activity/activity-row.tsx",
+        type: "registry:ui",
+        target: "components/sonojs/agent-activity/activity-row.tsx",
+      },
+      {
+        path: "packages/ui/src/components/agent-activity/types.ts",
+        type: "registry:ui",
+        target: "components/sonojs/agent-activity/types.ts",
+      },
+      {
+        path: "packages/ui/src/components/agent-activity/thinking-shimmer.tsx",
+        type: "registry:ui",
+        target: "components/sonojs/agent-activity/thinking-shimmer.tsx",
+      },
+      {
+        path: "packages/ui/src/components/agent-activity/text-shimmer.tsx",
+        type: "registry:ui",
+        target: "components/sonojs/agent-activity/text-shimmer.tsx",
+      },
+      {
+        path: "packages/ui/src/components/agent-activity/text-shimmer-styles.ts",
+        type: "registry:ui",
+        target: "components/sonojs/agent-activity/text-shimmer-styles.ts",
+      },
+    ],
+  },
+  {
+    name: "agent-activity-2",
+    type: "registry:ui",
+    title: "Agent Activity 2",
+    description:
+      "An expandable agent trace for steps, reasoning, search, and coding.",
+    dependencies: ["lucide-react", "clsx", "tailwind-merge"],
+    files: [
+      {
+        path: "packages/ui/src/components/agent-activity-2/index.tsx",
+        type: "registry:ui",
+        target: "components/sonojs/agent-activity-2/index.tsx",
+      },
+      {
+        path: "packages/ui/src/components/agent-activity-2/thinking-shimmer.tsx",
+        type: "registry:ui",
+        target: "components/sonojs/agent-activity-2/thinking-shimmer.tsx",
+      },
+      {
+        path: "packages/ui/src/components/agent-activity-2/text-shimmer.tsx",
+        type: "registry:ui",
+        target: "components/sonojs/agent-activity-2/text-shimmer.tsx",
+      },
+      {
+        path: "packages/ui/src/components/agent-activity-2/text-shimmer-styles.ts",
+        type: "registry:ui",
+        target: "components/sonojs/agent-activity-2/text-shimmer-styles.ts",
+      },
+    ],
+  },
+  {
+    name: "task-rows",
+    type: "registry:ui",
+    title: "Task Rows",
+    description:
+      "Expandable task rows that show an AI agent's live progress.",
+    dependencies: ["lucide-react", "clsx", "tailwind-merge"],
+    files: [
+      {
+        path: "packages/ui/src/components/task-rows.tsx",
+        type: "registry:ui",
+        target: "components/sonojs/task-rows.tsx",
+      },
+    ],
+  },
+  {
+    name: "todo-list",
+    type: "registry:ui",
+    title: "Todo List",
+    description:
+      "A collapsible task list that shows an agent's plan and progress.",
+    dependencies: ["motion", "lucide-react", "clsx", "tailwind-merge"],
+    registryDependencies: ["agent-disclosure"],
+    files: [
+      {
+        path: "packages/ui/src/components/todo-list.tsx",
+        type: "registry:ui",
+        target: "components/sonojs/todo-list.tsx",
+      },
+    ],
+  },
+  {
+    name: "prompt-input",
+    type: "registry:ui",
+    title: "Prompt Input",
+    description:
+      "An AI prompt bar for chat interfaces with attachments and voice input.",
+    dependencies: ["clsx", "tailwind-merge"],
+    files: [
+      {
+        path: "packages/ui/src/components/prompt-input.tsx",
+        type: "registry:ui",
+        target: "components/sonojs/prompt-input.tsx",
+      },
+    ],
+  },
+  {
+    name: "prompt-input-2",
+    type: "registry:ui",
+    title: "Prompt Input 2",
+    description:
+      "A prompt bar for composing agent requests with model selection and quick actions.",
+    dependencies: [
+      "motion",
+      "lucide-react",
+      "clsx",
+      "tailwind-merge",
+    ],
+    registryDependencies: ["button", "popover", "select"],
+    files: [
+      {
+        path: "packages/ui/src/components/prompt-input-2.tsx",
+        type: "registry:ui",
+        target: "components/sonojs/prompt-input-2.tsx",
+      },
+      {
+        path: "packages/ui/src/lib/ease.ts",
+        type: "registry:lib",
+        target: "lib/ease.ts",
+      },
+    ],
+  },
+  {
     name: "agent-code",
     type: "registry:ui",
     title: "Agent Code",
@@ -2107,6 +2250,117 @@ const registryItemsRaw = [
         path: "packages/ui/src/components/agent-code.tsx",
         type: "registry:ui",
         target: "components/sonojs/agent-code.tsx",
+      },
+    ],
+  },
+  {
+    name: "agent-code-block",
+    type: "registry:ui",
+    title: "Agent Code Block",
+    description:
+      "A syntax-highlighted code block for AI-generated code, with copy support.",
+    dependencies: [
+      "motion",
+      "lucide-react",
+      "shiki",
+      "clsx",
+      "tailwind-merge",
+    ],
+    registryDependencies: ["agent-code"],
+    files: [
+      {
+        path: "packages/ui/src/components/agent-code-block.tsx",
+        type: "registry:ui",
+        target: "components/sonojs/agent-code-block.tsx",
+      },
+      {
+        path: "packages/ui/src/lib/ease.ts",
+        type: "registry:lib",
+        target: "lib/ease.ts",
+      },
+    ],
+  },
+  {
+    name: "file-diff",
+    type: "registry:ui",
+    title: "File Diff",
+    description:
+      "A collapsible code diff that shows added and removed lines.",
+    dependencies: [
+      "motion",
+      "lucide-react",
+      "shiki",
+      "clsx",
+      "tailwind-merge",
+    ],
+    registryDependencies: ["agent-code", "agent-disclosure"],
+    files: [
+      {
+        path: "packages/ui/src/components/file-diff.tsx",
+        type: "registry:ui",
+        target: "components/sonojs/file-diff.tsx",
+      },
+    ],
+  },
+  {
+    name: "citations",
+    type: "registry:ui",
+    title: "Citations",
+    description:
+      "Collapsible citations for linked sources in AI responses.",
+    dependencies: ["motion", "lucide-react", "clsx", "tailwind-merge"],
+    registryDependencies: ["agent-disclosure"],
+    files: [
+      {
+        path: "packages/ui/src/components/citations.tsx",
+        type: "registry:ui",
+        target: "components/sonojs/citations.tsx",
+      },
+      {
+        path: "packages/ui/src/lib/favicon.ts",
+        type: "registry:lib",
+        target: "lib/favicon.ts",
+      },
+    ],
+  },
+  {
+    name: "streaming-response",
+    type: "registry:ui",
+    title: "Streaming Response",
+    description:
+      "A streaming AI response surface with sources and feedback actions.",
+    dependencies: ["motion", "lucide-react", "clsx", "tailwind-merge"],
+    registryDependencies: ["agent-disclosure", "citations"],
+    files: [
+      {
+        path: "packages/ui/src/components/streaming-response.tsx",
+        type: "registry:ui",
+        target: "components/sonojs/streaming-response.tsx",
+      },
+    ],
+  },
+  {
+    name: "structured-output",
+    type: "registry:ui",
+    title: "Structured Output",
+    description:
+      "A structured table for comparing AI models and their results.",
+    dependencies: ["clsx", "tailwind-merge"],
+    files: [
+      {
+        path: "packages/ui/src/components/structured-output/index.ts",
+        type: "registry:ui",
+        target: "components/sonojs/structured-output/index.ts",
+      },
+      {
+        path: "packages/ui/src/components/structured-output/data-table.tsx",
+        type: "registry:ui",
+        target: "components/sonojs/structured-output/data-table.tsx",
+      },
+      {
+        path: "packages/ui/src/components/structured-output/data-table.module.css",
+        type: "registry:ui",
+        target: "components/sonojs/structured-output/data-table.module.css",
       },
     ],
   },
@@ -2596,6 +2850,31 @@ const registryItemsRaw = [
     ],
   },
   {
+    name: "image-generation-2",
+    type: "registry:ui",
+    title: "Image Generation 2",
+    description:
+      "An animated loading state that reveals an AI-generated image when it is ready.",
+    dependencies: ["motion", "clsx", "tailwind-merge"],
+    files: [
+      {
+        path: "packages/ui/src/components/image-generation-2/index.tsx",
+        type: "registry:ui",
+        target: "components/sonojs/image-generation-2/index.tsx",
+      },
+      {
+        path: "packages/ui/src/components/image-generation-2/text-shimmer-styles.ts",
+        type: "registry:ui",
+        target: "components/sonojs/image-generation-2/text-shimmer-styles.ts",
+      },
+      {
+        path: "packages/ui/src/components/image-generation-2/media/design.png",
+        type: "registry:file",
+        target: "components/sonojs/image-generation-2/media/design.png",
+      },
+    ],
+  },
+  {
     name: "input",
     type: "registry:ui",
     title: "Input",
@@ -2622,6 +2901,96 @@ const registryItemsRaw = [
         path: "packages/ui/src/components/textarea.tsx",
         type: "registry:ui",
         target: "components/ui/textarea.tsx",
+      },
+    ],
+  },
+  {
+    name: "thinking-orbs",
+    type: "registry:ui",
+    title: "Thinking Orbs",
+    description:
+      "Animated orb states that visualize an AI agent's work.",
+    dependencies: [],
+    files: [
+      {
+        path: "packages/ui/src/components/thinking-orbs/index.ts",
+        type: "registry:ui",
+        target: "components/sonojs/thinking-orbs/index.ts",
+      },
+      {
+        path: "packages/ui/src/components/thinking-orbs/ThinkingOrb.tsx",
+        type: "registry:ui",
+        target: "components/sonojs/thinking-orbs/ThinkingOrb.tsx",
+      },
+      {
+        path: "packages/ui/src/components/thinking-orbs/types.ts",
+        type: "registry:ui",
+        target: "components/sonojs/thinking-orbs/types.ts",
+      },
+      {
+        path: "packages/ui/src/components/thinking-orbs/presets.ts",
+        type: "registry:ui",
+        target: "components/sonojs/thinking-orbs/presets.ts",
+      },
+      {
+        path: "packages/ui/src/components/thinking-orbs/theme.ts",
+        type: "registry:ui",
+        target: "components/sonojs/thinking-orbs/theme.ts",
+      },
+      {
+        path: "packages/ui/src/components/thinking-orbs/LICENSE.md",
+        type: "registry:file",
+        target: "components/sonojs/thinking-orbs/LICENSE.md",
+      },
+      {
+        path: "packages/ui/src/components/thinking-orbs/engine/types.ts",
+        type: "registry:ui",
+        target: "components/sonojs/thinking-orbs/engine/types.ts",
+      },
+      {
+        path: "packages/ui/src/components/thinking-orbs/engine/core.ts",
+        type: "registry:ui",
+        target: "components/sonojs/thinking-orbs/engine/core.ts",
+      },
+      {
+        path: "packages/ui/src/components/thinking-orbs/engine/registry.ts",
+        type: "registry:ui",
+        target: "components/sonojs/thinking-orbs/engine/registry.ts",
+      },
+      {
+        path: "packages/ui/src/components/thinking-orbs/engine/braid.ts",
+        type: "registry:ui",
+        target: "components/sonojs/thinking-orbs/engine/braid.ts",
+      },
+      {
+        path: "packages/ui/src/components/thinking-orbs/engine/lattice.ts",
+        type: "registry:ui",
+        target: "components/sonojs/thinking-orbs/engine/lattice.ts",
+      },
+      {
+        path: "packages/ui/src/components/thinking-orbs/engine/morph.ts",
+        type: "registry:ui",
+        target: "components/sonojs/thinking-orbs/engine/morph.ts",
+      },
+      {
+        path: "packages/ui/src/components/thinking-orbs/engine/orbits.ts",
+        type: "registry:ui",
+        target: "components/sonojs/thinking-orbs/engine/orbits.ts",
+      },
+      {
+        path: "packages/ui/src/components/thinking-orbs/engine/profiles.ts",
+        type: "registry:ui",
+        target: "components/sonojs/thinking-orbs/engine/profiles.ts",
+      },
+      {
+        path: "packages/ui/src/components/thinking-orbs/engine/ribbon.ts",
+        type: "registry:ui",
+        target: "components/sonojs/thinking-orbs/engine/ribbon.ts",
+      },
+      {
+        path: "packages/ui/src/components/thinking-orbs/engine/web.ts",
+        type: "registry:ui",
+        target: "components/sonojs/thinking-orbs/engine/web.ts",
       },
     ],
   },
@@ -2883,6 +3252,41 @@ const registryItemsRaw = [
     ],
   },
   {
+    name: "loading-states",
+    type: "registry:ui",
+    title: "Loading States",
+    description:
+      "Animated loading states for waiting while an AI agent works.",
+    dependencies: ["clsx", "tailwind-merge"],
+    files: [
+      {
+        path: "packages/ui/src/components/loading-states/index.tsx",
+        type: "registry:ui",
+        target: "components/sonojs/loading-states/index.tsx",
+      },
+      {
+        path: "packages/ui/src/components/loading-states/loading-state.module.css",
+        type: "registry:ui",
+        target: "components/sonojs/loading-states/loading-state.module.css",
+      },
+      {
+        path: "packages/ui/src/components/loading-states/thinking-shimmer.tsx",
+        type: "registry:ui",
+        target: "components/sonojs/loading-states/thinking-shimmer.tsx",
+      },
+      {
+        path: "packages/ui/src/components/loading-states/text-shimmer.tsx",
+        type: "registry:ui",
+        target: "components/sonojs/loading-states/text-shimmer.tsx",
+      },
+      {
+        path: "packages/ui/src/components/loading-states/text-shimmer-styles.ts",
+        type: "registry:ui",
+        target: "components/sonojs/loading-states/text-shimmer-styles.ts",
+      },
+    ],
+  },
+  {
     name: "button-group",
     type: "registry:ui",
     title: "Button Group",
@@ -2972,6 +3376,36 @@ const registryItemsRaw = [
     ],
   },
   {
+    name: "reasoning-text",
+    type: "registry:ui",
+    title: "Reasoning Text",
+    description:
+      "Animated status text for showing that an AI agent is thinking and working.",
+    dependencies: ["motion", "clsx", "tailwind-merge"],
+    files: [
+      {
+        path: "packages/ui/src/components/reasoning-text/index.tsx",
+        type: "registry:ui",
+        target: "components/sonojs/reasoning-text/index.tsx",
+      },
+      {
+        path: "packages/ui/src/components/reasoning-text/loader.tsx",
+        type: "registry:ui",
+        target: "components/sonojs/reasoning-text/loader.tsx",
+      },
+      {
+        path: "packages/ui/src/components/reasoning-text/text-shimmer-styles.ts",
+        type: "registry:ui",
+        target: "components/sonojs/reasoning-text/text-shimmer-styles.ts",
+      },
+      {
+        path: "packages/ui/src/lib/ease.ts",
+        type: "registry:lib",
+        target: "lib/ease.ts",
+      },
+    ],
+  },
+  {
     name: "resizable",
     type: "registry:ui",
     title: "Resizable",
@@ -3018,6 +3452,26 @@ const registryItemsRaw = [
         path: "packages/ui/src/components/select.tsx",
         type: "registry:ui",
         target: "components/ui/select.tsx",
+      },
+    ],
+  },
+  {
+    name: "selection-actions",
+    type: "registry:ui",
+    title: "Selection Actions",
+    description:
+      "A contextual AI action bar that appears beneath selected text.",
+    dependencies: ["motion", "lucide-react", "clsx", "tailwind-merge"],
+    files: [
+      {
+        path: "packages/ui/src/components/selection-actions.tsx",
+        type: "registry:ui",
+        target: "components/sonojs/selection-actions.tsx",
+      },
+      {
+        path: "packages/ui/src/lib/ease.ts",
+        type: "registry:lib",
+        target: "lib/ease.ts",
       },
     ],
   },

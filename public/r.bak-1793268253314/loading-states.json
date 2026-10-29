@@ -1,0 +1,45 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "loading-states",
+  "type": "registry:ui",
+  "title": "Loading States",
+  "description": "Animated loading states for waiting while an AI agent works.",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "files": [
+    {
+      "path": "components/sonojs/loading-states/index.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\"\n\nimport { useEffect, useState } from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\nimport styles from \"./loading-state.module.css\"\nimport { ThinkingShimmer } from \"./thinking-shimmer\"\n\nexport type LoadingStateVariant = \"drive\" | \"dots\" | \"orbit\"\n\nexport interface LoadingStateProps {\n  /** The current work message announced to assistive technology. */\n  label?: string\n  /** Visual treatment for the loading indicator. */\n  variant?: LoadingStateVariant\n  /** Show the elapsed duration beside the label. */\n  showElapsed?: boolean\n  className?: string\n}\n\nconst chevronDelays = Array.from({ length: 9 }, (_, index) => {\n  const row = Math.floor(index / 3)\n  const column = index % 3\n  return (column + Math.abs(row - 1)) * 90\n})\n\nconst orbitOrder = [0, 1, 2, 5, 8, 7, 6, 3]\nconst orbitDelays = Array.from({ length: 9 }, (_, index) => {\n  const position = orbitOrder.indexOf(index)\n  return position === -1 ? null : position * 110\n})\n\nconst patternByVariant: Record<\n  LoadingStateVariant,\n  { delays: Array<number | null>; duration: number; circular: boolean }\n> = {\n  drive: { delays: chevronDelays, duration: 650, circular: false },\n  dots: { delays: chevronDelays, duration: 650, circular: true },\n  orbit: { delays: orbitDelays, duration: 950, circular: false },\n}\n\nfunction useElapsed() {\n  const [tenths, setTenths] = useState(0)\n\n  useEffect(() => {\n    const interval = window.setInterval(\n      () => setTenths((value) => value + 1),\n      100\n    )\n    return () => window.clearInterval(interval)\n  }, [])\n\n  const seconds = tenths / 10\n  return seconds < 60\n    ? `${seconds.toFixed(1)}s`\n    : `${Math.floor(seconds / 60)}m ${(seconds % 60).toFixed(1)}s`\n}\n\nfunction LoadingState({\n  label = \"Working\",\n  variant = \"drive\",\n  showElapsed = true,\n  className,\n}: LoadingStateProps) {\n  const elapsed = useElapsed()\n  const { delays, duration, circular } = patternByVariant[variant]\n\n  return (\n    <div\n      data-slot=\"loading-state\"\n      data-variant={variant}\n      className={cn(styles.root, className)}\n      role=\"status\"\n    >\n      <span aria-hidden className={styles.grid}>\n        {delays.map((delay, index) => (\n          <span\n            // The grid position is stable for the lifetime of the indicator.\n            key={index}\n            className={cn(styles.pixel, circular && styles.circular)}\n            style={\n              delay === null\n                ? undefined\n                : {\n                    animationDelay: `${delay}ms`,\n                    animationDuration: `${duration}ms`,\n                  }\n            }\n          />\n        ))}\n      </span>\n      <ThinkingShimmer className={styles.label}>{label}</ThinkingShimmer>\n      {showElapsed ? (\n        <span aria-hidden className={styles.elapsed}>\n          {elapsed}\n        </span>\n      ) : null}\n    </div>\n  )\n}\n\nexport { LoadingState }\nexport default LoadingState\n",
+      "target": "components/sonojs/loading-states/index.tsx"
+    },
+    {
+      "path": "components/sonojs/loading-states/loading-state.module.css",
+      "type": "registry:ui",
+      "content": ".root {\n  display: inline-flex;\n  width: fit-content;\n  align-items: center;\n  gap: 0.625rem;\n  color: var(--foreground);\n}\n\n.grid {\n  display: grid;\n  grid-template-columns: repeat(3, 4px);\n  gap: 1.5px;\n}\n\n.pixel {\n  width: 4px;\n  height: 4px;\n  border-radius: 1px;\n  background: currentColor;\n  opacity: 0.15;\n  animation-name: pixel-on;\n  animation-timing-function: ease-in-out;\n  animation-iteration-count: infinite;\n}\n\n.circular {\n  border-radius: 999px;\n}\n\n.pixel:nth-child(5) {\n  animation: none;\n  opacity: 0.07;\n}\n\n.label {\n  font-size: 13px;\n  font-weight: 500;\n}\n\n.elapsed {\n  color: var(--muted-foreground);\n  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;\n  font-size: 12px;\n  font-variant-numeric: tabular-nums;\n}\n\n@keyframes pixel-on {\n  0%,\n  100% {\n    opacity: 0.15;\n    transform: scale(1);\n  }\n  45% {\n    opacity: 1;\n    transform: scale(1.28);\n  }\n}\n\n@media (prefers-reduced-motion: reduce) {\n  .pixel,\n  .label {\n    animation: none;\n  }\n}\n",
+      "target": "components/sonojs/loading-states/loading-state.module.css"
+    },
+    {
+      "path": "components/sonojs/loading-states/thinking-shimmer.tsx",
+      "type": "registry:ui",
+      "content": "import type { ReactNode } from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\nimport { TextShimmer } from \"./text-shimmer\"\n\nexport interface ThinkingShimmerProps {\n  /** Loading message shown to the user. */\n  children?: ReactNode\n  /** Seconds taken for one shimmer pass. */\n  duration?: number\n  className?: string\n}\n\nexport function ThinkingShimmer({\n  children = \"Thinking…\",\n  duration = 2,\n  className,\n}: ThinkingShimmerProps) {\n  return (\n    <TextShimmer\n      as=\"span\"\n      duration={duration}\n      className={cn(\"font-medium\", className)}\n    >\n      {children}\n    </TextShimmer>\n  )\n}\n",
+      "target": "components/sonojs/loading-states/thinking-shimmer.tsx"
+    },
+    {
+      "path": "components/sonojs/loading-states/text-shimmer.tsx",
+      "type": "registry:ui",
+      "content": "import { createElement, type ElementType, type ReactNode } from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\nimport {\n  TEXT_SHIMMER_CLASS_NAME,\n  TEXT_SHIMMER_KEYFRAMES,\n  textShimmerStyle,\n} from \"./text-shimmer-styles\"\n\nexport interface TextShimmerProps {\n  children: ReactNode\n  as?: ElementType\n  duration?: number\n  className?: string\n}\n\nexport function TextShimmer({\n  children,\n  as: Comp = \"span\",\n  duration = 2,\n  className,\n}: TextShimmerProps) {\n  return (\n    <>\n      <style>{TEXT_SHIMMER_KEYFRAMES}</style>\n      {createElement(\n        Comp,\n        {\n          style: textShimmerStyle(duration),\n          className: cn(\"inline-block\", TEXT_SHIMMER_CLASS_NAME, className),\n        },\n        children\n      )}\n    </>\n  )\n}\n",
+      "target": "components/sonojs/loading-states/text-shimmer.tsx"
+    },
+    {
+      "path": "components/sonojs/loading-states/text-shimmer-styles.ts",
+      "type": "registry:ui",
+      "content": "import type { CSSProperties } from \"react\"\n\n/** Angled text mask: one sweep, then a pause. */\nexport const TEXT_SHIMMER_KEYFRAMES = `\n@property --sono-mask-x {\n  syntax: \"<percentage>\";\n  inherits: false;\n  initial-value: 100%;\n}\n@keyframes sono-text-shimmer {\n  0% { --sono-mask-x: 100%; }\n  50%, 100% { --sono-mask-x: -100%; }\n}\n@media (prefers-reduced-motion: reduce) {\n  .sono-text-shimmer {\n    animation: none !important;\n    -webkit-mask-image: none !important;\n    mask-image: none !important;\n  }\n}`\n\nexport const TEXT_SHIMMER_CLASS_NAME = \"sono-text-shimmer text-foreground\"\n\nconst mask =\n  \"linear-gradient(-75deg, white calc(var(--sono-mask-x) + 20%), transparent calc(var(--sono-mask-x) + 30%), white calc(var(--sono-mask-x) + 100%))\"\n\nexport function textShimmerStyle(duration: number): CSSProperties {\n  return {\n    WebkitMaskImage: mask,\n    maskImage: mask,\n    animation: `sono-text-shimmer ${duration}s linear infinite`,\n  }\n}\n",
+      "target": "components/sonojs/loading-states/text-shimmer-styles.ts"
+    }
+  ],
+  "version": "0.1.0+44be9ac7d5f6",
+  "generatedAt": "2026-10-29T10:03:04.279Z"
+}

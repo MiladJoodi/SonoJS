@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "banner-02",
+  "type": "registry:block",
+  "title": "banner-02",
+  "description": "Dark agent-mode launch strip with sparkles and Try it link (RTL/LTR).",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/blocks/marketing/banner-02/banner.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport type * as React from \"react\"\nimport { SparklesIcon } from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\n\nexport default function Banner({\n  className,\n  ...props\n}: React.ComponentProps<\"div\">) {\n  return (\n    <div\n      className={cn(\n        \"w-full bg-zinc-950 py-2.5 text-center text-sm font-medium text-zinc-50\",\n        className\n      )}\n      role=\"region\"\n      aria-label=\"Product update\"\n      {...props}\n    >\n      <p className=\"inline-flex flex-wrap items-center justify-center gap-2 px-4\">\n        <SparklesIcon className=\"size-3.5 text-primary\" aria-hidden />\n        <span>\n          Agent mode is live — attach context, review the diff, ship the PR\n        </span>\n        <a\n          href=\"#\"\n          className=\"cursor-pointer font-semibold text-primary underline-offset-2 hover:underline\"\n        >\n          Try it\n        </a>\n      </p>\n    </div>\n  )\n}\n",
+      "target": "components/blocks/marketing/banner-02/banner.tsx"
+    }
+  ],
+  "version": "0.1.0+44be9ac7d5f6",
+  "generatedAt": "2026-10-29T10:03:04.279Z"
+}

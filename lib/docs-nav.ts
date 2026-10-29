@@ -304,8 +304,28 @@ export const componentsNav: {
       title: "AI",
       pages: [
         {
+          title: "Agent Activity",
+          href: "/docs/components/agent-activity",
+        },
+        {
+          title: "Agent Activity 2",
+          href: "/docs/components/agent-activity-2",
+        },
+        {
+          title: "Agent Code Block",
+          href: "/docs/components/agent-code-block",
+        },
+        {
           title: "Approval Card",
           href: "/docs/components/approval-card",
+        },
+        {
+          title: "Citations",
+          href: "/docs/components/citations",
+        },
+        {
+          title: "File Diff",
+          href: "/docs/components/file-diff",
         },
         {
           title: "Fluid Orb",
@@ -314,6 +334,50 @@ export const componentsNav: {
         {
           title: "Image Generation",
           href: "/docs/components/image-generation",
+        },
+        {
+          title: "Image Generation 2",
+          href: "/docs/components/image-generation-2",
+        },
+        {
+          title: "Loading States",
+          href: "/docs/components/loading-states",
+        },
+        {
+          title: "Prompt Input",
+          href: "/docs/components/prompt-input",
+        },
+        {
+          title: "Prompt Input 2",
+          href: "/docs/components/prompt-input-2",
+        },
+        {
+          title: "Reasoning Text",
+          href: "/docs/components/reasoning-text",
+        },
+        {
+          title: "Selection Actions",
+          href: "/docs/components/selection-actions",
+        },
+        {
+          title: "Streaming Response",
+          href: "/docs/components/streaming-response",
+        },
+        {
+          title: "Structured Output",
+          href: "/docs/components/structured-output",
+        },
+        {
+          title: "Task Rows",
+          href: "/docs/components/task-rows",
+        },
+        {
+          title: "Thinking Orbs",
+          href: "/docs/components/thinking-orbs",
+        },
+        {
+          title: "Todo List",
+          href: "/docs/components/todo-list",
         },
         {
           title: "Tool Approval",

@@ -1,0 +1,42 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "file-manager-05",
+  "type": "registry:block",
+  "title": "file-manager-05",
+  "description": "Compact file picker dialog — breadcrumbs, multi-select list, Cancel/Attach (RTL/LTR).",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "badge",
+    "button",
+    "dialog",
+    "scroll-area"
+  ],
+  "cssVars": {
+    "light": {
+      "canvas": "#f3f3f4",
+      "border-soft": "color-mix(in oklab, #e4e4e7 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18)",
+      "background": "var(--canvas)",
+      "card": "#ffffff"
+    },
+    "dark": {
+      "canvas": "#09090b",
+      "border-soft": "color-mix(in oklab, #27272a 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(0, 0, 0, 0.24), 0 28px 56px -28px rgba(0, 0, 0, 0.48)",
+      "background": "var(--canvas)",
+      "card": "#18181b"
+    }
+  },
+  "files": [
+    {
+      "path": "components/blocks/files-media/file-manager-05/file-manager.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport {\n  ChevronRightIcon,\n  FileTextIcon,\n  FolderIcon,\n  ImageIcon,\n  PaperclipIcon,\n} from \"lucide-react\"\n\nimport { Badge } from \"@/components/ui/badge\"\nimport { Button } from \"@/components/ui/button\"\nimport {\n  Dialog,\n  DialogContent,\n  DialogDescription,\n  DialogFooter,\n  DialogHeader,\n  DialogTitle,\n} from \"@/components/ui/dialog\"\nimport { ScrollArea } from \"@/components/ui/scroll-area\"\nimport { cn } from \"@/lib/utils\"\n\nconst BREADCRUMBS = [\"My Drive\", \"Projects\", \"Q3 Campaign\"] as const\n\nconst ITEMS = [\n  {\n    id: \"1\",\n    name: \"Assets\",\n    kind: \"folder\" as const,\n    meta: \"42 items\",\n  },\n  {\n    id: \"2\",\n    name: \"campaign_brief_v2.pdf\",\n    kind: \"pdf\" as const,\n    meta: \"2.4 MB\",\n  },\n  {\n    id: \"3\",\n    name: \"hero_banner_final.png\",\n    kind: \"image\" as const,\n    meta: \"4.1 MB\",\n  },\n  {\n    id: \"4\",\n    name: \"Drafts\",\n    kind: \"folder\" as const,\n    meta: \"12 items\",\n  },\n  {\n    id: \"5\",\n    name: \"press_release.pdf\",\n    kind: \"pdf\" as const,\n    meta: \"890 KB\",\n  },\n  {\n    id: \"6\",\n    name: \"logo_lockup.png\",\n    kind: \"image\" as const,\n    meta: \"320 KB\",\n  },\n] as const\n\n/** Compact picker dialog — Attach from files. */\nexport default function FileManager({\n  className,\n  ...props\n}: React.ComponentProps<\"div\">) {\n  const [open, setOpen] = React.useState(true)\n  const [selected, setSelected] = React.useState<Set<string>>(\n    () => new Set([\"2\", \"3\"])\n  )\n\n  const toggle = (id: string, kind: string) => {\n    if (kind === \"folder\") return\n    setSelected((prev) => {\n      const next = new Set(prev)\n      if (next.has(id)) next.delete(id)\n      else next.add(id)\n      return next\n    })\n  }\n\n  return (\n    <div\n      className={cn(\n        \"flex min-h-[min(36rem,100svh)] w-full items-center justify-center bg-white px-4 py-10 dark:bg-background\",\n        className\n      )}\n      {...props}\n    >\n      <Dialog open={open} onOpenChange={setOpen}>\n        {!open ? (\n          <Button\n            type=\"button\"\n            className=\"cursor-pointer gap-1.5\"\n            onClick={() => setOpen(true)}\n          >\n            <PaperclipIcon className=\"size-4\" aria-hidden />\n            Attach from files\n          </Button>\n        ) : null}\n        <DialogContent className=\"flex max-h-[min(36rem,90svh)] flex-col gap-0 overflow-hidden p-0 sm:max-w-lg\">\n          <DialogHeader className=\"border-b border-border/70 px-5 py-4 text-start\">\n            <DialogTitle>Attach from files</DialogTitle>\n            <DialogDescription>\n              Choose files from your drive to attach to this message.\n            </DialogDescription>\n          </DialogHeader>\n\n          <nav\n            aria-label=\"Breadcrumb\"\n            className=\"flex flex-wrap items-center gap-1 border-b border-border/70 px-5 py-2.5 text-xs text-muted-foreground\"\n          >\n            {BREADCRUMBS.map((crumb, i) => (\n              <React.Fragment key={crumb}>\n                {i > 0 ? (\n                  <ChevronRightIcon\n                    className=\"icon-dir size-3\"\n                    aria-hidden\n                  />\n                ) : null}\n                <button\n                  type=\"button\"\n                  className={cn(\n                    \"cursor-pointer rounded-sm hover:text-foreground\",\n                    i === BREADCRUMBS.length - 1 &&\n                      \"font-medium text-foreground\"\n                  )}\n                >\n                  {crumb}\n                </button>\n              </React.Fragment>\n            ))}\n          </nav>\n\n          <ScrollArea className=\"min-h-0 flex-1\">\n            <ul className=\"space-y-0.5 p-2\" role=\"listbox\" aria-multiselectable>\n              {ITEMS.map((item) => {\n                const on = selected.has(item.id)\n                const isFolder = item.kind === \"folder\"\n                return (\n                  <li key={item.id}>\n                    <button\n                      type=\"button\"\n                      role=\"option\"\n                      aria-selected={isFolder ? undefined : on}\n                      disabled={isFolder}\n                      onClick={() => toggle(item.id, item.kind)}\n                      className={cn(\n                        \"flex w-full items-center gap-3 rounded-md px-3 py-2.5 text-start text-sm transition-colors\",\n                        isFolder\n                          ? \"cursor-pointer text-foreground hover:bg-muted\"\n                          : on\n                            ? \"cursor-pointer bg-primary/10 font-medium\"\n                            : \"cursor-pointer hover:bg-muted\"\n                      )}\n                    >\n                      {item.kind === \"folder\" ? (\n                        <FolderIcon\n                          className=\"size-5 text-amber-500\"\n                          aria-hidden\n                        />\n                      ) : item.kind === \"image\" ? (\n                        <ImageIcon className=\"size-5 text-primary\" aria-hidden />\n                      ) : (\n                        <FileTextIcon\n                          className=\"size-5 text-destructive\"\n                          aria-hidden\n                        />\n                      )}\n                      <span className=\"min-w-0 flex-1\">\n                        <span className=\"block truncate\">{item.name}</span>\n                        <span\n                          className=\"block text-xs text-muted-foreground\"\n                          dir=\"ltr\"\n                        >\n                          {item.meta}\n                        </span>\n                      </span>\n                      {!isFolder && on ? (\n                        <Badge variant=\"secondary\">Selected</Badge>\n                      ) : null}\n                    </button>\n                  </li>\n                )\n              })}\n            </ul>\n          </ScrollArea>\n\n          <DialogFooter className=\"flex-row items-center justify-between gap-2 border-t border-border/70 px-5 py-3 sm:justify-between\">\n            <p className=\"text-xs text-muted-foreground\" dir=\"ltr\">\n              {selected.size} selected\n            </p>\n            <div className=\"flex gap-2\">\n              <Button\n                type=\"button\"\n                variant=\"outline\"\n                className=\"cursor-pointer\"\n                onClick={() => setOpen(false)}\n              >\n                Cancel\n              </Button>\n              <Button\n                type=\"button\"\n                className=\"cursor-pointer\"\n                disabled={selected.size === 0}\n                onClick={() => setOpen(false)}\n              >\n                Attach\n              </Button>\n            </div>\n          </DialogFooter>\n        </DialogContent>\n      </Dialog>\n    </div>\n  )\n}\n",
+      "target": "components/blocks/files-media/file-manager-05/file-manager.tsx"
+    }
+  ],
+  "version": "0.1.0+44be9ac7d5f6",
+  "generatedAt": "2026-10-29T10:03:04.279Z"
+}

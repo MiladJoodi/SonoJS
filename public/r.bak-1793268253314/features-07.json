@@ -1,0 +1,36 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "features-07",
+  "type": "registry:block",
+  "title": "features-07",
+  "description": "Centered features intro with a three-column grid of muted cards and circular icons.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "cssVars": {
+    "light": {
+      "canvas": "#f3f3f4",
+      "border-soft": "color-mix(in oklab, #e4e4e7 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18)",
+      "background": "var(--canvas)",
+      "card": "#ffffff"
+    },
+    "dark": {
+      "canvas": "#09090b",
+      "border-soft": "color-mix(in oklab, #27272a 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(0, 0, 0, 0.24), 0 28px 56px -28px rgba(0, 0, 0, 0.48)",
+      "background": "var(--canvas)",
+      "card": "#18181b"
+    }
+  },
+  "files": [
+    {
+      "path": "components/blocks/marketing/features-07/features.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport type * as React from \"react\"\nimport {\n  ArrowRightIcon,\n  ChartColumnIcon,\n  Globe2Icon,\n  HeadphonesIcon,\n  MessageSquareIcon,\n  Settings2Icon,\n  ShieldCheckIcon,\n} from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst features = [\n  {\n    title: \"Customization\",\n    description:\n      \"Easily tailor every aspect of the platform to suit your business needs. From design tweaks to functional preferences.\",\n    icon: Settings2Icon,\n  },\n  {\n    title: \"Security\",\n    description:\n      \"Your privacy is our top priority. We implement industry-standard encryption and real-time detection to keep your data safe.\",\n    icon: ShieldCheckIcon,\n  },\n  {\n    title: \"Support\",\n    description:\n      \"Our expert support team is available around the clock to assist you. We’re here to ensure your experience remains smooth.\",\n    icon: HeadphonesIcon,\n  },\n  {\n    title: \"Performance\",\n    description:\n      \"Experience lightning-fast load times and seamless performance. Our system is built to deliver results without lag or disruption.\",\n    icon: ChartColumnIcon,\n  },\n  {\n    title: \"Global Reach\",\n    description:\n      \"Whether you're a startup or enterprise. Add users, features, or capabilities without disrupting performance.\",\n    icon: Globe2Icon,\n  },\n  {\n    title: \"Communication\",\n    description:\n      \"Keep everyone connected, share updates instantly, and boost collaboration no matter where your team is located.\",\n    icon: MessageSquareIcon,\n  },\n] as const\n\nexport default function Features({\n  className,\n  ...props\n}: React.ComponentProps<\"section\">) {\n  return (\n    <section\n      className={cn(\"w-full bg-muted px-4 py-12 md:px-8 md:py-20\", className)}\n      aria-labelledby=\"features-heading\"\n      {...props}\n    >\n      <div className=\"mx-auto max-w-7xl\">\n        <div className=\"mx-auto mb-8 max-w-3xl text-center md:mb-16\">\n          <p className=\"mb-3 text-sm font-medium tracking-wide text-primary\">\n            Features\n          </p>\n          <h2\n            id=\"features-heading\"\n            className=\"mb-3 text-[1.75rem] font-bold tracking-tight text-foreground sm:mb-4 sm:text-3xl md:text-4xl\"\n          >\n            Work easier today\n          </h2>\n          <p className=\"text-base leading-relaxed text-muted-foreground\">\n            Unlock a world of possibilities with our exclusive features. Explore\n            how our unique offerings can transform your journey and empower you\n            to achieve more.\n          </p>\n        </div>\n\n        <div className=\"grid gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-3\">\n          {features.map((feature) => (\n            <div\n              key={feature.title}\n              className={cn(\n                \"rounded-[12px] border border-border/70 bg-card px-5 py-8 text-center shadow-soft sm:px-6 sm:py-12\",\n                \"transition-colors hover:border-primary/25\"\n              )}\n\n              style={{\n                backgroundColor: \"var(--card, #ffffff)\",\n                boxShadow:\n                  \"var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))\",\n              }}\n            >\n              <div className=\"mx-auto mb-5 flex size-12 items-center justify-center rounded-full bg-primary/10 text-primary sm:mb-6 sm:size-14\">\n                <feature.icon className=\"size-6 sm:size-7\" aria-hidden=\"true\" />\n              </div>\n              <h3 className=\"mb-2 text-base font-semibold tracking-tight text-foreground sm:mb-3 sm:text-lg\">\n                {feature.title}\n              </h3>\n              <p className=\"text-sm leading-relaxed text-muted-foreground sm:text-base\">\n                {feature.description}\n              </p>\n              <a\n                href=\"#\"\n                className={cn(\n                  \"mt-5 inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-md text-sm font-medium text-primary sm:mt-6\",\n                  \"transition-colors hover:text-primary/80\",\n                  \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40\"\n                )}\n              >\n                Learn more\n                <ArrowRightIcon\n                  className=\"size-3.5 icon-dir\"\n                  aria-hidden=\"true\"\n                />\n              </a>\n            </div>\n          ))}\n        </div>\n      </div>\n    </section>\n  )\n}\n",
+      "target": "components/blocks/marketing/features-07/features.tsx"
+    }
+  ],
+  "version": "0.1.0+44be9ac7d5f6",
+  "generatedAt": "2026-10-29T10:03:04.279Z"
+}

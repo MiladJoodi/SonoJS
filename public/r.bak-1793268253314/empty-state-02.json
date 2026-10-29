@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "empty-state-02",
+  "type": "registry:block",
+  "title": "empty-state-02",
+  "description": "Empty inbox — mail folder rail, list header, and compose CTA.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "badge",
+    "button",
+    "empty"
+  ],
+  "cssVars": {
+    "light": {
+      "canvas": "#f3f3f4",
+      "border-soft": "color-mix(in oklab, #e4e4e7 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18)",
+      "background": "var(--canvas)",
+      "card": "#ffffff"
+    },
+    "dark": {
+      "canvas": "#09090b",
+      "border-soft": "color-mix(in oklab, #27272a 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(0, 0, 0, 0.24), 0 28px 56px -28px rgba(0, 0, 0, 0.48)",
+      "background": "var(--canvas)",
+      "card": "#18181b"
+    }
+  },
+  "files": [
+    {
+      "path": "components/blocks/feedback-states/empty-state-02/empty-state.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport type * as React from \"react\"\nimport { InboxIcon, PenSquareIcon, StarIcon } from \"lucide-react\"\n\nimport { Badge } from \"@/components/ui/badge\"\nimport { Button } from \"@/components/ui/button\"\nimport {\n  Empty,\n  EmptyContent,\n  EmptyDescription,\n  EmptyHeader,\n  EmptyMedia,\n  EmptyTitle,\n} from \"@/components/ui/empty\"\nimport { cn } from \"@/lib/utils\"\n\nconst FOLDERS = [\n  { id: \"inbox\", label: \"Inbox\", count: 0, active: true },\n  { id: \"starred\", label: \"Starred\", count: 2, active: false },\n  { id: \"sent\", label: \"Sent\", count: 12, active: false },\n] as const\n\nexport default function EmptyState({\n  className,\n  ...props\n}: React.ComponentProps<\"section\">) {\n  return (\n    <section\n      className={cn(\n        \"w-full min-w-0 bg-canvas px-4 py-10 text-foreground sm:px-6 sm:py-14\",\n        className\n      )}\n      aria-labelledby=\"empty-state-02-heading\"\n      {...props}\n    >\n      <div className=\"mx-auto flex w-full max-w-3xl min-h-[22rem] overflow-hidden rounded-[12px] border border-border/70 bg-card shadow-soft\">\n        <aside className=\"hidden w-44 shrink-0 border-e border-border/70 bg-muted/30 p-3 sm:block\">\n          <p className=\"mb-3 px-2 text-xs font-medium tracking-wide text-muted-foreground uppercase\">\n            Mail\n          </p>\n          <ul className=\"space-y-0.5\">\n            {FOLDERS.map((folder) => (\n              <li key={folder.id}>\n                <button\n                  type=\"button\"\n                  className={cn(\n                    \"flex w-full cursor-pointer items-center justify-between rounded-md px-2 py-2 text-sm transition-colors\",\n                    folder.active\n                      ? \"bg-primary/10 font-medium text-primary\"\n                      : \"text-muted-foreground hover:bg-muted hover:text-foreground\"\n                  )}\n                >\n                  <span className=\"flex items-center gap-2\">\n                    {folder.id === \"starred\" ? (\n                      <StarIcon className=\"size-3.5\" aria-hidden />\n                    ) : (\n                      <InboxIcon className=\"size-3.5\" aria-hidden />\n                    )}\n                    {folder.label}\n                  </span>\n                  {folder.count > 0 ? (\n                    <Badge\n                      variant=\"outline\"\n                      className=\"h-5 min-w-5 justify-center rounded-full border-transparent bg-muted px-1.5 text-[10px] text-muted-foreground\"\n                    >\n                      {folder.count}\n                    </Badge>\n                  ) : null}\n                </button>\n              </li>\n            ))}\n          </ul>\n        </aside>\n\n        <div className=\"flex min-w-0 flex-1 flex-col\">\n          <div className=\"flex items-center justify-between gap-3 border-b border-border/70 px-4 py-3 sm:px-5\">\n            <div>\n              <h2 className=\"text-sm font-semibold\">Inbox</h2>\n              <p className=\"text-xs text-muted-foreground\">0 unread</p>\n            </div>\n            <Button type=\"button\" size=\"sm\" className=\"cursor-pointer\">\n              <PenSquareIcon className=\"size-3.5\" aria-hidden />\n              Compose\n            </Button>\n          </div>\n\n          <Empty className=\"min-h-0 flex-1 border-0\">\n            <EmptyHeader>\n              <EmptyMedia variant=\"icon\">\n                <InboxIcon aria-hidden />\n              </EmptyMedia>\n              <EmptyTitle id=\"empty-state-02-heading\">\n                All caught up\n              </EmptyTitle>\n              <EmptyDescription>\n                Your inbox is empty. New messages will show up here.\n              </EmptyDescription>\n            </EmptyHeader>\n            <EmptyContent>\n              <Button type=\"button\" className=\"cursor-pointer\">\n                <PenSquareIcon className=\"size-4\" aria-hidden />\n                Compose message\n              </Button>\n            </EmptyContent>\n          </Empty>\n        </div>\n      </div>\n    </section>\n  )\n}\n",
+      "target": "components/blocks/feedback-states/empty-state-02/empty-state.tsx"
+    }
+  ],
+  "version": "0.1.0+44be9ac7d5f6",
+  "generatedAt": "2026-10-29T10:03:04.279Z"
+}

@@ -1,0 +1,33 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "footer-06",
+  "type": "registry:block",
+  "title": "footer-06",
+  "description": "Store-style footer with stacked link groups, audience columns, and centered legal links.",
+  "cssVars": {
+    "light": {
+      "canvas": "#f3f3f4",
+      "border-soft": "color-mix(in oklab, #e4e4e7 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18)",
+      "background": "var(--canvas)",
+      "card": "#ffffff"
+    },
+    "dark": {
+      "canvas": "#09090b",
+      "border-soft": "color-mix(in oklab, #27272a 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(0, 0, 0, 0.24), 0 28px 56px -28px rgba(0, 0, 0, 0.48)",
+      "background": "var(--canvas)",
+      "card": "#18181b"
+    }
+  },
+  "files": [
+    {
+      "path": "components/blocks/marketing/footer-06/footer.tsx",
+      "type": "registry:component",
+      "content": "import type * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\ntype LinkItem = { label: string; href: string }\ntype Section = { title: string; links: LinkItem[] }\ntype Column = { sections: Section[] }\n\nconst columns: Column[] = [\n  {\n    sections: [\n      {\n        title: \"Explore Our Products\",\n        links: [\n          { label: \"Gadgets\", href: \"#\" },\n          { label: \"Laptops\", href: \"#\" },\n          { label: \"Tablets\", href: \"#\" },\n          { label: \"Smartphones\", href: \"#\" },\n          { label: \"Smartwatches\", href: \"#\" },\n          { label: \"Wireless Headphones\", href: \"#\" },\n          { label: \"Home Entertainment\", href: \"#\" },\n          { label: \"Tracking Devices\", href: \"#\" },\n          { label: \"Gifts\", href: \"#\" },\n        ],\n      },\n    ],\n  },\n  {\n    sections: [\n      {\n        title: \"Your Account\",\n        links: [\n          { label: \"Manage Your Account\", href: \"#\" },\n          { label: \"Account Settings\", href: \"#\" },\n          { label: \"Sign In\", href: \"#\" },\n        ],\n      },\n      {\n        title: \"About Us\",\n        links: [\n          { label: \"Company News\", href: \"#\" },\n          { label: \"Leadership Team\", href: \"#\" },\n          { label: \"Join Our Team\", href: \"#\" },\n          { label: \"Investors\", href: \"#\" },\n          { label: \"Our Values\", href: \"#\" },\n          { label: \"Events\", href: \"#\" },\n          { label: \"Contact Us\", href: \"#\" },\n        ],\n      },\n    ],\n  },\n  {\n    sections: [\n      {\n        title: \"Our Stores\",\n        links: [\n          { label: \"Find a Location\", href: \"#\" },\n          { label: \"Customer Service\", href: \"#\" },\n          { label: \"Workshops\", href: \"#\" },\n          { label: \"Group Bookings\", href: \"#\" },\n          { label: \"Trade-In Program\", href: \"#\" },\n          { label: \"Purchase Options\", href: \"#\" },\n          { label: \"Recycle\", href: \"#\" },\n          { label: \"Order Updates\", href: \"#\" },\n          { label: \"Shopping Assistance\", href: \"#\" },\n        ],\n      },\n    ],\n  },\n  {\n    sections: [\n      {\n        title: \"For Businesses\",\n        links: [\n          { label: \"Solutions for Business\", href: \"#\" },\n          { label: \"Shop for Business\", href: \"#\" },\n        ],\n      },\n      {\n        title: \"For Education\",\n        links: [\n          { label: \"Educational Discounts\", href: \"#\" },\n          { label: \"Shop for Schools\", href: \"#\" },\n          { label: \"University Discounts\", href: \"#\" },\n        ],\n      },\n      {\n        title: \"For Healthcare\",\n        links: [\n          { label: \"Devices in Healthcare\", href: \"#\" },\n          { label: \"Medical Devices\", href: \"#\" },\n          { label: \"Health Features on Devices\", href: \"#\" },\n        ],\n      },\n    ],\n  },\n]\n\nconst legalLinks = [\n  { label: \"Privacy\", href: \"#\" },\n  { label: \"Terms of Service\", href: \"#\" },\n  { label: \"Sales Terms\", href: \"#\" },\n  { label: \"Legal Notices\", href: \"#\" },\n  { label: \"Sitemap\", href: \"#\" },\n] as const\n\nconst linkClass = cn(\n  \"cursor-pointer rounded-md transition-colors\",\n  \"text-muted-foreground hover:text-foreground\",\n  \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40\"\n)\n\nexport default function Footer({\n  className,\n  ...props\n}: React.ComponentProps<\"footer\">) {\n  return (\n    <footer\n      className={cn(\n        \"border-t border-border/70 bg-card px-4 py-14 text-foreground md:px-8 md:py-16\",\n        className\n      )}\n      {...props}>\n      <div className=\"mx-auto max-w-6xl\">\n        <div className=\"grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 sm:gap-x-8 md:grid-cols-4\">\n          {columns.map((column, columnIndex) => (\n            <div key={columnIndex} className=\"space-y-8\">\n              {column.sections.map((section) => (\n                <div key={section.title}>\n                  <h3 className=\"mb-3 text-xs font-semibold uppercase tracking-wider text-foreground\">\n                    {section.title}\n                  </h3>\n                  <ul className=\"space-y-2 text-sm leading-5\">\n                    {section.links.map((link) => (\n                      <li key={link.label}>\n                        <a href={link.href} className={linkClass}>\n                          {link.label}\n                        </a>\n                      </li>\n                    ))}\n                  </ul>\n                </div>\n              ))}\n            </div>\n          ))}\n        </div>\n\n        <div className=\"mt-14 border-t border-border/70 pt-8 text-center\">\n          <ul className=\"flex flex-wrap justify-center gap-x-5 gap-y-2 text-sm\">\n            {legalLinks.map((link) => (\n              <li key={link.label}>\n                <a href={link.href} className={linkClass}>\n                  {link.label}\n                </a>\n              </li>\n            ))}\n          </ul>\n          <p className=\"mt-4 text-sm text-muted-foreground\">\n            © SonoJS. All rights reserved.\n          </p>\n        </div>\n      </div>\n    </footer>\n  )\n}\n",
+      "target": "components/blocks/marketing/footer-06/footer.tsx"
+    }
+  ],
+  "version": "0.1.0+44be9ac7d5f6",
+  "generatedAt": "2026-10-29T10:03:04.279Z"
+}

@@ -1,0 +1,42 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "empty-state-09",
+  "type": "registry:block",
+  "title": "empty-state-09",
+  "description": "First-run onboarding — checklist steps and start setup CTA.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "button",
+    "checkbox",
+    "empty",
+    "separator"
+  ],
+  "cssVars": {
+    "light": {
+      "canvas": "#f3f3f4",
+      "border-soft": "color-mix(in oklab, #e4e4e7 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18)",
+      "background": "var(--canvas)",
+      "card": "#ffffff"
+    },
+    "dark": {
+      "canvas": "#09090b",
+      "border-soft": "color-mix(in oklab, #27272a 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(0, 0, 0, 0.24), 0 28px 56px -28px rgba(0, 0, 0, 0.48)",
+      "background": "var(--canvas)",
+      "card": "#18181b"
+    }
+  },
+  "files": [
+    {
+      "path": "components/blocks/feedback-states/empty-state-09/empty-state.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { CheckIcon, RocketIcon, SparklesIcon } from \"lucide-react\"\n\nimport { Button } from \"@/components/ui/button\"\nimport { Checkbox } from \"@/components/ui/checkbox\"\nimport {\n  Empty,\n  EmptyContent,\n  EmptyDescription,\n  EmptyHeader,\n  EmptyMedia,\n  EmptyTitle,\n} from \"@/components/ui/empty\"\nimport { Separator } from \"@/components/ui/separator\"\nimport { cn } from \"@/lib/utils\"\n\nconst STEPS = [\n  {\n    id: \"profile\",\n    label: \"Complete your profile\",\n    hint: \"Name, avatar, and timezone\",\n  },\n  {\n    id: \"invite\",\n    label: \"Invite a teammate\",\n    hint: \"Share the workspace early\",\n  },\n  {\n    id: \"component\",\n    label: \"Install your first component\",\n    hint: \"Start with Button or Input\",\n  },\n] as const\n\nexport default function EmptyState({\n  className,\n  ...props\n}: React.ComponentProps<\"section\">) {\n  const [done, setDone] = React.useState<Record<string, boolean>>({\n    profile: true,\n    invite: false,\n    component: false,\n  })\n\n  const completed = Object.values(done).filter(Boolean).length\n\n  return (\n    <section\n      className={cn(\n        \"w-full min-w-0 bg-canvas px-4 py-10 text-foreground sm:px-6 sm:py-14\",\n        className\n      )}\n      aria-labelledby=\"empty-state-09-heading\"\n      {...props}\n    >\n      <div className=\"mx-auto w-full max-w-lg overflow-hidden rounded-[12px] border border-border/70 bg-card shadow-soft\">\n        <div className=\"flex items-start gap-3 px-4 pt-5 sm:px-5\">\n          <div className=\"flex size-10 shrink-0 items-center justify-center rounded-md bg-primary/10 text-primary\">\n            <SparklesIcon className=\"size-5\" aria-hidden />\n          </div>\n          <div className=\"min-w-0\">\n            <p className=\"text-xs font-medium tracking-wide text-primary\">\n              Get started\n            </p>\n            <h2\n              id=\"empty-state-09-heading\"\n              className=\"mt-0.5 text-base font-semibold tracking-tight\"\n            >\n              Set up your workspace\n            </h2>\n            <p className=\"mt-1 text-sm text-muted-foreground\">\n              {completed} of {STEPS.length} steps complete\n            </p>\n          </div>\n        </div>\n\n        <Separator className=\"my-4\" />\n\n        <ul className=\"space-y-1 px-4 pb-2 sm:px-5\">\n          {STEPS.map((step) => {\n            const checked = done[step.id] === true\n            return (\n              <li key={step.id}>\n                <label\n                  htmlFor={`empty-state-09-${step.id}`}\n                  className={cn(\n                    \"flex cursor-pointer items-start gap-3 rounded-[12px] border border-transparent px-2 py-2.5 transition-colors hover:bg-muted/40\",\n                    checked && \"opacity-70\"\n                  )}\n                >\n                  <Checkbox\n                    id={`empty-state-09-${step.id}`}\n                    checked={checked}\n                    onCheckedChange={(v) =>\n                      setDone((prev) => ({ ...prev, [step.id]: v === true }))\n                    }\n                    className=\"mt-0.5 cursor-pointer\"\n                  />\n                  <span className=\"min-w-0 flex-1\">\n                    <span\n                      className={cn(\n                        \"block text-sm font-medium\",\n                        checked && \"line-through\"\n                      )}\n                    >\n                      {step.label}\n                    </span>\n                    <span className=\"block text-xs text-muted-foreground\">\n                      {step.hint}\n                    </span>\n                  </span>\n                  {checked ? (\n                    <CheckIcon\n                      className=\"mt-0.5 size-4 shrink-0 text-primary\"\n                      aria-hidden\n                    />\n                  ) : null}\n                </label>\n              </li>\n            )\n          })}\n        </ul>\n\n        <Empty className=\"border-0 pt-2 pb-6\">\n          <EmptyHeader className=\"max-w-none\">\n            <EmptyMedia variant=\"icon\" className=\"sr-only\">\n              <RocketIcon aria-hidden />\n            </EmptyMedia>\n            <EmptyTitle className=\"sr-only\">Finish setup</EmptyTitle>\n            <EmptyDescription>\n              Finish these steps to unlock invites, installs, and your first\n              preview.\n            </EmptyDescription>\n          </EmptyHeader>\n          <EmptyContent>\n            <Button type=\"button\" className=\"cursor-pointer\">\n              <RocketIcon className=\"size-4\" aria-hidden />\n              Start setup\n            </Button>\n          </EmptyContent>\n        </Empty>\n      </div>\n    </section>\n  )\n}\n",
+      "target": "components/blocks/feedback-states/empty-state-09/empty-state.tsx"
+    }
+  ],
+  "version": "0.1.0+44be9ac7d5f6",
+  "generatedAt": "2026-10-29T10:03:04.279Z"
+}

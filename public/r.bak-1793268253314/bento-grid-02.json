@@ -1,0 +1,39 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "bento-grid-02",
+  "type": "registry:block",
+  "title": "bento-grid-02",
+  "description": "Editorial design-system bento — dark metric, quote, CLI terminal, and stack chips (RTL/LTR).",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "button"
+  ],
+  "cssVars": {
+    "light": {
+      "canvas": "#f3f3f4",
+      "border-soft": "color-mix(in oklab, #e4e4e7 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18)",
+      "background": "var(--canvas)",
+      "card": "#ffffff"
+    },
+    "dark": {
+      "canvas": "#09090b",
+      "border-soft": "color-mix(in oklab, #27272a 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(0, 0, 0, 0.24), 0 28px 56px -28px rgba(0, 0, 0, 0.48)",
+      "background": "var(--canvas)",
+      "card": "#18181b"
+    }
+  },
+  "files": [
+    {
+      "path": "components/blocks/marketing/bento-grid-02/bento-grid.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport type * as React from \"react\"\nimport { ArrowRightIcon, QuoteIcon } from \"lucide-react\"\n\nimport { Button } from \"@/components/ui/button\"\nimport { cn } from \"@/lib/utils\"\n\nconst STACK = [\n  { label: \"React 19\", note: \"App Router\" },\n  { label: \"Tailwind 4\", note: \"@theme\" },\n  { label: \"Radix\", note: \"Primitives\" },\n] as const\n\nexport default function BentoGrid02({\n  className,\n  ...props\n}: React.ComponentProps<\"section\">) {\n  return (\n    <section\n      className={cn(\n        \"w-full min-w-0 bg-white py-12 text-foreground sm:py-16 md:py-20 dark:bg-background\",\n        className\n      )}\n      aria-labelledby=\"bento-grid-02-heading\"\n      {...props}\n    >\n      <div className=\"mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8\">\n        <div className=\"grid grid-cols-1 gap-4 md:grid-cols-12 md:gap-5 md:items-stretch\">\n          {/* Left column — editorial + stack */}\n          <div className=\"flex flex-col gap-4 md:col-span-5 md:gap-5\">\n            <header className=\"flex flex-1 flex-col justify-center text-start md:py-2\">\n              <p className=\"text-sm font-medium text-muted-foreground\">\n                Design system\n              </p>\n              <h2\n                id=\"bento-grid-02-heading\"\n                className=\"mt-3 text-h2 font-semibold tracking-tight text-foreground\"\n              >\n                Components that look finished{\" \"}\n                <span className=\"text-muted-foreground\">\n                  before you theme them.\n                </span>\n              </h2>\n              <p className=\"mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground\">\n                Copy a block, keep the tokens, ship. No second design pass for\n                radius, type, or empty states.\n              </p>\n              <div className=\"mt-6\">\n                <Button\n                  type=\"button\"\n                  className=\"h-10 cursor-pointer gap-2 rounded-lg\"\n                >\n                  Browse blocks\n                  <ArrowRightIcon className=\"icon-dir size-4\" aria-hidden />\n                </Button>\n              </div>\n            </header>\n\n            <article className=\"rounded-[12px] border border-border/70 bg-canvas p-5 shadow-soft sm:p-6 dark:bg-card\">\n              <p className=\"text-xs font-medium tracking-wide text-muted-foreground uppercase\">\n                Works with your stack\n              </p>\n              <ul className=\"mt-4 flex flex-col gap-2\">\n                {STACK.map((item) => (\n                  <li\n                    key={item.label}\n                    className=\"flex items-center justify-between gap-3 rounded-[10px] border border-border/70 bg-white px-3.5 py-2.5 dark:bg-background\"\n                  >\n                    <span className=\"text-sm font-medium text-foreground\">\n                      {item.label}\n                    </span>\n                    <span className=\"text-xs text-muted-foreground\">\n                      {item.note}\n                    </span>\n                  </li>\n                ))}\n              </ul>\n            </article>\n          </div>\n\n          {/* Right column — metric, quote, terminal */}\n          <div className=\"grid grid-cols-1 gap-4 sm:grid-cols-12 md:col-span-7 md:gap-5\">\n            <article className=\"relative overflow-hidden rounded-[12px] bg-foreground p-6 text-background shadow-soft sm:col-span-7 dark:border dark:border-border/70 dark:bg-card dark:text-foreground\">\n              <p className=\"text-xs font-medium tracking-wide text-background/60 uppercase dark:text-muted-foreground\">\n                Open source\n              </p>\n              <p className=\"mt-4 text-5xl font-semibold tracking-tight tabular-nums\">\n                110\n              </p>\n              <p className=\"mt-1 text-sm text-background/70 dark:text-muted-foreground\">\n                GitHub stars · and counting\n              </p>\n              <div\n                aria-hidden\n                className=\"pointer-events-none absolute -end-6 -bottom-8 size-32 rounded-full bg-background/10 dark:bg-muted/40\"\n              />\n            </article>\n\n            <article className=\"rounded-[12px] border border-border/70 bg-canvas p-6 shadow-soft sm:col-span-5 dark:bg-card\">\n              <QuoteIcon\n                className=\"size-5 text-muted-foreground/50\"\n                aria-hidden\n              />\n              <blockquote className=\"mt-4 text-sm leading-relaxed text-foreground\">\n                &ldquo;We dropped three custom tables and one half-broken\n                sidebar in an afternoon.&rdquo;\n              </blockquote>\n              <footer className=\"mt-4 text-xs text-muted-foreground\">\n                — Maya K., design eng\n              </footer>\n            </article>\n\n            <article className=\"rounded-[12px] border border-border/70 bg-zinc-950 p-5 text-zinc-100 shadow-soft sm:col-span-12 sm:p-6 dark:border-border/70\">\n              <div className=\"flex items-center gap-1.5\" aria-hidden>\n                <span className=\"size-2.5 rounded-full bg-zinc-700\" />\n                <span className=\"size-2.5 rounded-full bg-zinc-700\" />\n                <span className=\"size-2.5 rounded-full bg-zinc-700\" />\n                <span className=\"ms-2 font-mono text-[11px] text-zinc-500\">\n                  terminal\n                </span>\n              </div>\n              <pre\n                dir=\"ltr\"\n                className=\"mt-4 overflow-x-auto font-mono text-[13px] leading-relaxed text-zinc-300\"\n              >\n                <code>\n                  <span className=\"text-zinc-500\">$</span> npx @sonojs/ui add\n                  calendar\n                  {\"\\n\"}\n                  <span className=\"text-emerald-400/90\"> +</span>{\" \"}\n                  components/ui/button.tsx\n                  {\"\\n\"}\n                  <span className=\"text-emerald-400/90\"> +</span>{\" \"}\n                  components/ui/calendar.tsx\n                  {\"\\n\"}\n                  <span className=\"text-zinc-500\">→</span> npm i date-fns\n                  react-day-picker\n                </code>\n              </pre>\n            </article>\n          </div>\n        </div>\n      </div>\n    </section>\n  )\n}\n",
+      "target": "components/blocks/marketing/bento-grid-02/bento-grid.tsx"
+    }
+  ],
+  "version": "0.1.0+44be9ac7d5f6",
+  "generatedAt": "2026-10-29T10:03:04.279Z"
+}

@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "error-state-01",
+  "type": "registry:block",
+  "title": "error-state-01",
+  "description": "Server error — incident card with alert, trace id, retry, and support link.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "alert",
+    "button",
+    "separator"
+  ],
+  "cssVars": {
+    "light": {
+      "canvas": "#f3f3f4",
+      "border-soft": "color-mix(in oklab, #e4e4e7 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18)",
+      "background": "var(--canvas)",
+      "card": "#ffffff"
+    },
+    "dark": {
+      "canvas": "#09090b",
+      "border-soft": "color-mix(in oklab, #27272a 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(0, 0, 0, 0.24), 0 28px 56px -28px rgba(0, 0, 0, 0.48)",
+      "background": "var(--canvas)",
+      "card": "#18181b"
+    }
+  },
+  "files": [
+    {
+      "path": "components/blocks/feedback-states/error-state-01/error-state.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport {\n  HeadphonesIcon,\n  HomeIcon,\n  RefreshCwIcon,\n  ServerCrashIcon,\n} from \"lucide-react\"\n\nimport { Alert, AlertDescription, AlertTitle } from \"@/components/ui/alert\"\nimport { Button } from \"@/components/ui/button\"\nimport { Separator } from \"@/components/ui/separator\"\nimport { cn } from \"@/lib/utils\"\n\nexport default function ErrorState({\n  className,\n  ...props\n}: React.ComponentProps<\"main\">) {\n  const [refreshing, setRefreshing] = React.useState(false)\n\n  const handleRefresh = () => {\n    setRefreshing(true)\n    window.setTimeout(() => {\n      window.location.reload()\n    }, 400)\n  }\n\n  return (\n    <main\n      className={cn(\n        \"flex min-h-[min(40rem,100svh)] w-full flex-col items-center justify-center bg-canvas px-4 py-12 text-foreground sm:px-6\",\n        className\n      )}\n      {...props}\n    >\n      <div className=\"w-full max-w-md\">\n        <div className=\"overflow-hidden rounded-[12px] border border-border/70 bg-card shadow-soft\">\n          <div className=\"border-b border-border/70 px-6 py-8 text-center\">\n            <div className=\"mx-auto mb-4 flex size-12 items-center justify-center rounded-full border border-destructive/20 bg-destructive/5\">\n              <ServerCrashIcon\n                className=\"size-5 text-destructive\"\n                aria-hidden\n              />\n            </div>\n            <p className=\"text-xs font-medium tracking-wide text-muted-foreground uppercase\">\n              Error 500\n            </p>\n            <h1 className=\"mt-2 text-xl font-semibold tracking-tight\">\n              Something went wrong on our side\n            </h1>\n            <p className=\"mt-2 text-sm leading-relaxed text-muted-foreground\">\n              The request failed unexpectedly. We&apos;ve logged the incident —\n              you can retry, or head home while we sort it out.\n            </p>\n          </div>\n\n          <div className=\"space-y-4 px-6 py-5\">\n            <Alert variant=\"destructive\">\n              <ServerCrashIcon aria-hidden />\n              <AlertTitle>Server exception</AlertTitle>\n              <AlertDescription>\n                Unexpected error while handling this request. Reference{\" \"}\n                <span className=\"font-mono text-xs\" dir=\"ltr\">\n                  ERR_SRV_500\n                </span>\n                .\n              </AlertDescription>\n            </Alert>\n\n            <dl className=\"overflow-hidden rounded-lg border border-border/70 divide-y divide-border/70 text-start text-sm\">\n              <div className=\"flex items-center justify-between gap-3 px-3.5 py-2.5\">\n                <dt className=\"text-muted-foreground\">Status</dt>\n                <dd className=\"font-medium\">Internal Server Error</dd>\n              </div>\n              <div className=\"flex items-center justify-between gap-3 px-3.5 py-2.5\">\n                <dt className=\"text-muted-foreground\">Trace</dt>\n                <dd className=\"font-mono text-xs tabular-nums\" dir=\"ltr\">\n                  REQ-5ERV-ER50\n                </dd>\n              </div>\n            </dl>\n\n            <div className=\"flex flex-col gap-2 pt-1\">\n              <Button\n                type=\"button\"\n                className=\"w-full gap-2\"\n                onClick={handleRefresh}\n                disabled={refreshing}\n              >\n                <RefreshCwIcon\n                  className={cn(\"size-4\", refreshing && \"animate-spin\")}\n                  aria-hidden\n                />\n                {refreshing ? \"Refreshing…\" : \"Try again\"}\n              </Button>\n              <Button type=\"button\" variant=\"outline\" className=\"w-full gap-2\">\n                <HomeIcon className=\"size-4\" aria-hidden />\n                Back to home\n              </Button>\n            </div>\n          </div>\n\n          <Separator />\n\n          <p className=\"flex items-center justify-center gap-1.5 px-6 py-3 text-xs text-muted-foreground\">\n            <HeadphonesIcon className=\"size-3.5 shrink-0\" aria-hidden />\n            Still stuck?{\" \"}\n            <button\n              type=\"button\"\n              className=\"cursor-pointer font-medium text-foreground underline-offset-4 hover:underline\"\n            >\n              Contact support\n            </button>\n          </p>\n        </div>\n      </div>\n    </main>\n  )\n}\n",
+      "target": "components/blocks/feedback-states/error-state-01/error-state.tsx"
+    }
+  ],
+  "version": "0.1.0+44be9ac7d5f6",
+  "generatedAt": "2026-10-29T10:03:04.279Z"
+}

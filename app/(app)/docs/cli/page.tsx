@@ -47,6 +47,25 @@ npx @sonojs/ui@latest add button card calendar`}
       </section>
 
       <section className="space-y-4">
+        <h2 className="text-h3">mcp</h2>
+        <p className="text-sm leading-relaxed text-muted-foreground">
+          Stdio MCP server for agents, plus{" "}
+          <code className="sono-inline-code">mcp init</code> to register it with
+          Cursor, VS Code, Claude, Codex, or Windsurf. See{" "}
+          <a href="/docs/mcp" className="text-foreground underline-offset-4 hover:underline">
+            MCP docs
+          </a>
+          .
+        </p>
+        <ComponentSource
+          title="Terminal"
+          lang="bash"
+          code={`npx @sonojs/ui@latest mcp init
+npx @sonojs/ui@latest mcp`}
+        />
+      </section>
+
+      <section className="space-y-4">
         <h2 className="text-h3">Options</h2>
         <ul className="list-disc space-y-2 ps-5 text-sm leading-relaxed text-muted-foreground">
           <li>
@@ -60,6 +79,11 @@ npx @sonojs/ui@latest add button card calendar`}
           <li>
             <code className="sono-inline-code">--overwrite</code> — replace
             existing files
+          </li>
+          <li>
+            <code className="sono-inline-code">mcp init --client</code> /{" "}
+            <code className="sono-inline-code">--all</code> /{" "}
+            <code className="sono-inline-code">--dry-run</code>
           </li>
         </ul>
       </section>

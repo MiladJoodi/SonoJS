@@ -1,0 +1,42 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "two-factor-03",
+  "type": "registry:block",
+  "title": "two-factor-03",
+  "description": "Backup code 2FA — mono input, codes-left chip, single-use warning (RTL/LTR).",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "badge",
+    "button",
+    "input",
+    "label"
+  ],
+  "cssVars": {
+    "light": {
+      "canvas": "#f3f3f4",
+      "border-soft": "color-mix(in oklab, #e4e4e7 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18)",
+      "background": "var(--canvas)",
+      "card": "#ffffff"
+    },
+    "dark": {
+      "canvas": "#09090b",
+      "border-soft": "color-mix(in oklab, #27272a 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(0, 0, 0, 0.24), 0 28px 56px -28px rgba(0, 0, 0, 0.48)",
+      "background": "var(--canvas)",
+      "card": "#18181b"
+    }
+  },
+  "files": [
+    {
+      "path": "components/blocks/authentication/two-factor-03/two-factor-form.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { KeyRoundIcon } from \"lucide-react\"\n\nimport { Badge } from \"@/components/ui/badge\"\nimport { Button } from \"@/components/ui/button\"\nimport { Input } from \"@/components/ui/input\"\nimport { Label } from \"@/components/ui/label\"\nimport { cn } from \"@/lib/utils\"\n\nexport default function TwoFactorForm({\n  className,\n  ...props\n}: React.ComponentProps<\"div\">) {\n  const [code, setCode] = React.useState(\"\")\n  const ready = code.replace(/[^a-zA-Z0-9]/g, \"\").length >= 8\n\n  return (\n    <div\n      className={cn(\n        \"flex w-full flex-col gap-6 rounded-[12px] border border-border/70 bg-card p-6 shadow-soft sm:p-8\",\n        className\n      )}\n      {...props}\n    >\n      <header className=\"flex flex-col items-start gap-3 text-start\">\n        <div className=\"flex w-full items-start justify-between gap-3\">\n          <span className=\"flex size-12 items-center justify-center rounded-full bg-primary/10 text-primary\">\n            <KeyRoundIcon className=\"size-5\" aria-hidden />\n          </span>\n          <Badge\n            variant=\"secondary\"\n            className=\"border-0 bg-muted text-muted-foreground\"\n          >\n            3 codes left\n          </Badge>\n        </div>\n        <div className=\"space-y-1.5\">\n          <h1 className=\"text-h3 font-semibold tracking-tight text-foreground\">\n            Backup code\n          </h1>\n          <p className=\"text-sm text-muted-foreground\">\n            Enter one of your single-use backup codes. Each code works once.\n          </p>\n        </div>\n      </header>\n\n      <form\n        className=\"flex flex-col gap-4\"\n        onSubmit={(event) => event.preventDefault()}\n      >\n        <div className=\"grid gap-2\">\n          <Label htmlFor=\"tfa-03-code\">Backup code</Label>\n          <Input\n            id=\"tfa-03-code\"\n            dir=\"ltr\"\n            autoFocus\n            autoComplete=\"one-time-code\"\n            placeholder=\"XXXX-XXXX-XXXX\"\n            value={code}\n            onChange={(e) => setCode(e.target.value)}\n            required\n            className=\"h-[46px] rounded-[12px] border-border/70 font-mono tracking-wider shadow-none\"\n          />\n          <p className=\"text-xs text-muted-foreground\">\n            Format: letters and numbers, often with dashes\n          </p>\n        </div>\n        <Button\n          type=\"submit\"\n          className=\"w-full cursor-pointer\"\n          disabled={!ready}\n        >\n          Verify backup code\n        </Button>\n      </form>\n\n      <p className=\"text-start text-sm\">\n        <a\n          href=\"#\"\n          className=\"cursor-pointer font-medium text-muted-foreground underline-offset-4 hover:text-foreground hover:underline\"\n        >\n          Use authenticator instead\n        </a>\n      </p>\n    </div>\n  )\n}\n",
+      "target": "components/blocks/authentication/two-factor-03/two-factor-form.tsx"
+    }
+  ],
+  "version": "0.1.0+44be9ac7d5f6",
+  "generatedAt": "2026-10-29T10:03:04.279Z"
+}

@@ -1,0 +1,37 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "usage-based-billing-06",
+  "type": "registry:block",
+  "title": "usage-based-billing-06",
+  "description": "Storage breakdown — segmented bar for components, assets, docs media, themes, and free space.",
+  "dependencies": [],
+  "registryDependencies": [
+    "card"
+  ],
+  "cssVars": {
+    "light": {
+      "canvas": "#f3f3f4",
+      "border-soft": "color-mix(in oklab, #e4e4e7 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18)",
+      "background": "var(--canvas)",
+      "card": "#ffffff"
+    },
+    "dark": {
+      "canvas": "#09090b",
+      "border-soft": "color-mix(in oklab, #27272a 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(0, 0, 0, 0.24), 0 28px 56px -28px rgba(0, 0, 0, 0.48)",
+      "background": "var(--canvas)",
+      "card": "#18181b"
+    }
+  },
+  "files": [
+    {
+      "path": "components/blocks/payments-billing/usage-based-billing-06/usage-based-billing.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\n\nimport { Card, CardContent } from \"@/components/ui/card\"\nimport { cn } from \"@/lib/utils\"\n\ntype Segment = {\n  label: string\n  value: number\n  color: string\n}\n\ntype UsageBasedBillingProps = React.ComponentProps<\"section\"> & {\n  title?: string\n  used?: number\n  total?: number\n  usedLabel?: string\n  totalLabel?: string\n  segments?: Segment[]\n}\n\nconst DEFAULT_SEGMENTS: Segment[] = [\n  { label: \"Components\", value: 2400, color: \"bg-blue-500\" },\n  { label: \"Assets\", value: 1800, color: \"bg-emerald-500\" },\n  { label: \"Docs media\", value: 3200, color: \"bg-amber-500\" },\n  { label: \"Themes\", value: 900, color: \"bg-violet-500\" },\n]\n\nexport default function UsageBasedBilling({\n  title = \"Using storage\",\n  used = 8300,\n  total = 15,\n  usedLabel = \"MB\",\n  totalLabel = \"GB\",\n  segments = DEFAULT_SEGMENTS,\n  className,\n  ...props\n}: UsageBasedBillingProps) {\n  const totalValue = total * 1000\n  const freeValue = Math.max(0, totalValue - used)\n\n  return (\n    <section\n      className={cn(\n        \"relative isolate flex w-full min-w-0 items-center justify-center overflow-hidden bg-white dark:bg-background px-4 py-10 text-foreground sm:px-6 sm:py-12\",\n        className\n      )}\n      aria-labelledby=\"usage-based-billing-06-heading\"\n      {...props}\n    >\n      <div\n        aria-hidden\n        className=\"pointer-events-none absolute inset-0 -z-10\"\n      >\n        <div className=\"absolute start-1/2 top-[-18%] size-[22rem] -translate-x-1/2 rounded-full bg-primary/10 blur-3xl\" />\n      </div>\n\n      <Card className=\"w-full max-w-4xl border-border/70 shadow-soft\">\n        <CardContent className=\"py-6\">\n          <p\n            id=\"usage-based-billing-06-heading\"\n            className=\"mb-4 text-pretty text-base text-muted-foreground\"\n          >\n            {title}{\" \"}\n            <span\n              dir=\"ltr\"\n              className=\"font-semibold text-foreground tabular-nums\"\n            >\n              {used.toLocaleString(undefined, {\n                minimumFractionDigits: 0,\n                maximumFractionDigits: 2,\n              })}{\" \"}\n              {usedLabel}\n            </span>{\" \"}\n            of {total} {totalLabel}\n          </p>\n\n          <div\n            dir=\"ltr\"\n            className=\"mb-4 flex h-2.5 w-full overflow-hidden rounded-full bg-muted\"\n          >\n            {segments.map((segment) => {\n              const percentage = (segment.value / totalValue) * 100\n              return (\n                <div\n                  key={segment.label}\n                  role=\"progressbar\"\n                  aria-label={segment.label}\n                  aria-valuemin={0}\n                  aria-valuemax={totalValue}\n                  aria-valuenow={segment.value}\n                  className={cn(\"h-full\", segment.color)}\n                  style={{ width: `${percentage}%` }}\n                />\n              )\n            })}\n          </div>\n\n          <div className=\"flex flex-wrap items-center gap-x-8 gap-y-2\">\n            {segments.map((segment) => (\n              <div\n                key={segment.label}\n                className=\"flex items-center gap-2\"\n              >\n                <span\n                  aria-hidden\n                  className={cn(\"size-3 shrink-0 rounded\", segment.color)}\n                />\n                <span className=\"text-sm text-muted-foreground\">\n                  {segment.label}\n                </span>\n                <span\n                  dir=\"ltr\"\n                  className=\"text-sm text-muted-foreground tabular-nums\"\n                >\n                  {Math.round(segment.value)}\n                  {usedLabel}\n                </span>\n              </div>\n            ))}\n            <div className=\"flex items-center gap-2\">\n              <span\n                aria-hidden\n                className=\"size-3 shrink-0 rounded-sm bg-muted\"\n              />\n              <span className=\"text-sm text-muted-foreground\">Free</span>\n              <span\n                dir=\"ltr\"\n                className=\"text-sm text-muted-foreground tabular-nums\"\n              >\n                {Math.round(freeValue)}\n                {usedLabel}\n              </span>\n            </div>\n          </div>\n        </CardContent>\n      </Card>\n    </section>\n  )\n}\n",
+      "target": "components/blocks/payments-billing/usage-based-billing-06/usage-based-billing.tsx"
+    }
+  ],
+  "version": "0.1.0+44be9ac7d5f6",
+  "generatedAt": "2026-10-29T10:03:04.279Z"
+}

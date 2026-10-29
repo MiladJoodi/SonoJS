@@ -156,8 +156,7 @@ function ToolApproval({
           aria-hidden
           className={cn(
             "relative mt-0.5 grid size-8 shrink-0 place-items-center overflow-hidden rounded-[12px] border border-border/70 bg-background text-muted-foreground",
-            error && "text-destructive",
-            busy && "border-blue-500/30 text-blue-600 dark:text-blue-400"
+            error && "text-destructive"
           )}
         >
           <AnimatePresence initial={false} mode="popLayout">

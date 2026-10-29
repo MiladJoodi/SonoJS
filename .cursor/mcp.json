@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "sonojs": {
+      "type": "stdio",
+      "command": "C:\\nvm4w\\nodejs\\node.exe",
+      "args": [
+        "I:/Github/new/Sono/SonoJs/packages/cli/bin/sonojs.mjs",
+        "mcp",
+        "--registry",
+        "I:/Github/new/Sono/SonoJs/public/r"
+      ]
+    }
+  }
+}

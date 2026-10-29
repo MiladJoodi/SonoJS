@@ -1,0 +1,64 @@
+.root {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  gap: 0.625rem;
+  color: var(--foreground);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 4px);
+  gap: 1.5px;
+}
+
+.pixel {
+  width: 4px;
+  height: 4px;
+  border-radius: 1px;
+  background: currentColor;
+  opacity: 0.15;
+  animation-name: pixel-on;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.circular {
+  border-radius: 999px;
+}
+
+.pixel:nth-child(5) {
+  animation: none;
+  opacity: 0.07;
+}
+
+.label {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.elapsed {
+  color: var(--muted-foreground);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+@keyframes pixel-on {
+  0%,
+  100% {
+    opacity: 0.15;
+    transform: scale(1);
+  }
+  45% {
+    opacity: 1;
+    transform: scale(1.28);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pixel,
+  .label {
+    animation: none;
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "data-import-01",
+  "type": "registry:block",
+  "title": "data-import-01",
+  "description": "Contacts import progress — overall percent, row count, and step checklist.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "button",
+    "progress"
+  ],
+  "cssVars": {
+    "light": {
+      "canvas": "#f3f3f4",
+      "border-soft": "color-mix(in oklab, #e4e4e7 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18)",
+      "background": "var(--canvas)",
+      "card": "#ffffff"
+    },
+    "dark": {
+      "canvas": "#09090b",
+      "border-soft": "color-mix(in oklab, #27272a 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(0, 0, 0, 0.24), 0 28px 56px -28px rgba(0, 0, 0, 0.48)",
+      "background": "var(--canvas)",
+      "card": "#18181b"
+    }
+  },
+  "files": [
+    {
+      "path": "components/blocks/onboarding/data-import-01/data-import.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport {\n  CheckCircle2Icon,\n  Loader2Icon,\n  RefreshCwIcon,\n  XIcon,\n} from \"lucide-react\"\n\nimport { Button } from \"@/components/ui/button\"\nimport { Progress } from \"@/components/ui/progress\"\nimport { cn } from \"@/lib/utils\"\n\nconst TOTAL_ROWS = 28_500\n\ntype StepStatus = \"done\" | \"active\" | \"pending\"\n\ntype Step = {\n  id: string\n  label: string\n  status: StepStatus\n}\n\nconst INITIAL_STEPS: Step[] = [\n  { id: \"upload\", label: \"Upload file\", status: \"done\" },\n  { id: \"map\", label: \"Map columns\", status: \"done\" },\n  { id: \"import\", label: \"Import rows\", status: \"active\" },\n]\n\nexport default function DataImport({\n  className,\n  ...props\n}: React.ComponentProps<\"section\">) {\n  const [processed, setProcessed] = React.useState(12_400)\n  const [steps, setSteps] = React.useState<Step[]>(INITIAL_STEPS)\n  const intervalRef = React.useRef<ReturnType<typeof setInterval> | null>(null)\n\n  const percent = Math.min(100, Math.round((processed / TOTAL_ROWS) * 100))\n  const complete = processed >= TOTAL_ROWS\n\n  const clearTick = React.useCallback(() => {\n    if (intervalRef.current) {\n      clearInterval(intervalRef.current)\n      intervalRef.current = null\n    }\n  }, [])\n\n  const startImport = React.useCallback(() => {\n    clearTick()\n    intervalRef.current = setInterval(() => {\n      setProcessed((prev) => {\n        if (prev >= TOTAL_ROWS) {\n          clearTick()\n          return TOTAL_ROWS\n        }\n        const bump = Math.floor(Math.random() * 180) + 90\n        return Math.min(prev + bump, TOTAL_ROWS)\n      })\n    }, 80)\n  }, [clearTick])\n\n  React.useEffect(() => {\n    startImport()\n    return clearTick\n  }, [startImport, clearTick])\n\n  React.useEffect(() => {\n    if (!complete) return\n    clearTick()\n    setSteps((prev) =>\n      prev.map((step) =>\n        step.id === \"import\" ? { ...step, status: \"done\" as const } : step\n      )\n    )\n  }, [complete, clearTick])\n\n  const handleRunAgain = () => {\n    setProcessed(12_400)\n    setSteps(INITIAL_STEPS)\n    startImport()\n  }\n\n  return (\n    <section\n      className={cn(\n        \"w-full min-w-0 bg-white px-4 py-10 text-foreground dark:bg-background sm:px-6 sm:py-12\",\n        className\n      )}\n      aria-labelledby=\"data-import-01-heading\"\n      {...props}\n    >\n      <div className=\"mx-auto w-full max-w-lg rounded-[12px] border border-border/70 bg-card p-6 sm:p-8\">\n        <div className=\"flex items-start justify-between gap-3\">\n          <div className=\"min-w-0 text-start\">\n            <h1\n              id=\"data-import-01-heading\"\n              className=\"text-lg font-semibold tracking-tight\"\n            >\n              Importing contacts\n            </h1>\n            <p className=\"mt-1 text-sm text-muted-foreground\">\n              {complete\n                ? \"All rows imported successfully.\"\n                : \"We’re writing rows into your workspace. Keep this tab open.\"}\n            </p>\n          </div>\n          {complete ? (\n            <Button\n              type=\"button\"\n              size=\"icon\"\n              variant=\"outline\"\n              className=\"size-9 shrink-0 cursor-pointer\"\n              aria-label=\"Run import again\"\n              onClick={handleRunAgain}\n            >\n              <RefreshCwIcon className=\"size-4\" aria-hidden />\n            </Button>\n          ) : null}\n        </div>\n\n        <div className=\"mt-6 space-y-2\">\n          <div className=\"flex items-center justify-between gap-3 text-sm\">\n            <span className=\"font-medium tabular-nums\" dir=\"ltr\">\n              {percent}%\n            </span>\n            <span className=\"text-muted-foreground tabular-nums\" dir=\"ltr\">\n              {processed.toLocaleString(\"en-US\")} /{\" \"}\n              {TOTAL_ROWS.toLocaleString(\"en-US\")} rows\n            </span>\n          </div>\n          <Progress value={percent} className=\"h-2\" />\n        </div>\n\n        <ol className=\"mt-6 space-y-3\">\n          {steps.map((step) => (\n            <li\n              key={step.id}\n              className=\"flex items-center gap-3 rounded-[12px] border border-border/70 px-3 py-2.5\"\n            >\n              {step.status === \"done\" ? (\n                <CheckCircle2Icon\n                  className=\"size-4 shrink-0 text-primary\"\n                  aria-hidden\n                />\n              ) : step.status === \"active\" ? (\n                <Loader2Icon\n                  className=\"size-4 shrink-0 animate-spin text-primary\"\n                  aria-hidden\n                />\n              ) : (\n                <span\n                  className=\"size-4 shrink-0 rounded-full border border-border\"\n                  aria-hidden\n                />\n              )}\n              <span\n                className={cn(\n                  \"text-sm\",\n                  step.status === \"pending\"\n                    ? \"text-muted-foreground\"\n                    : \"font-medium text-foreground\"\n                )}\n              >\n                {step.label}\n              </span>\n            </li>\n          ))}\n        </ol>\n\n        <div className=\"mt-6 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end\">\n          {!complete ? (\n            <Button\n              type=\"button\"\n              variant=\"outline\"\n              className=\"cursor-pointer\"\n            >\n              <XIcon className=\"size-4\" aria-hidden />\n              Cancel\n            </Button>\n          ) : (\n            <Button\n              type=\"button\"\n              className=\"cursor-pointer\"\n              onClick={handleRunAgain}\n            >\n              <RefreshCwIcon className=\"size-4\" aria-hidden />\n              Run again\n            </Button>\n          )}\n        </div>\n      </div>\n    </section>\n  )\n}\n",
+      "target": "components/blocks/onboarding/data-import-01/data-import.tsx"
+    }
+  ],
+  "version": "0.1.0+44be9ac7d5f6",
+  "generatedAt": "2026-10-29T10:03:04.279Z"
+}

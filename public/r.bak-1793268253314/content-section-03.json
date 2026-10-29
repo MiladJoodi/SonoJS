@@ -1,0 +1,33 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "content-section-03",
+  "type": "registry:block",
+  "title": "content-section-03",
+  "description": "Numbered why-choose cards with gradient accent bars and hover lift.",
+  "cssVars": {
+    "light": {
+      "canvas": "#f3f3f4",
+      "border-soft": "color-mix(in oklab, #e4e4e7 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18)",
+      "background": "var(--canvas)",
+      "card": "#ffffff"
+    },
+    "dark": {
+      "canvas": "#09090b",
+      "border-soft": "color-mix(in oklab, #27272a 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(0, 0, 0, 0.24), 0 28px 56px -28px rgba(0, 0, 0, 0.48)",
+      "background": "var(--canvas)",
+      "card": "#18181b"
+    }
+  },
+  "files": [
+    {
+      "path": "components/blocks/marketing/content-section-03/content-section.tsx",
+      "type": "registry:component",
+      "content": "import type * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst DEFAULT_ITEMS = [\n  {\n    title: \"Reliable & Easy to Use\",\n    description:\n      \"Crafted for developers and operators alike—clean structure, thoughtful defaults, and layouts you can ship the same day.\",\n  },\n  {\n    title: \"Modern & Clean Designs\",\n    description:\n      \"Contemporary UI that stays readable and accessible. Every surface follows clear hierarchy so content always leads.\",\n  },\n  {\n    title: \"Built for Speed & Flexibility\",\n    description:\n      \"Optimized for fast loads and seamless performance. Customize sections freely without fighting the system.\",\n  },\n] as const\n\nexport type ContentSectionItem = {\n  title: string\n  description: string\n}\n\nexport default function ContentSection({\n  eyebrow = \"Why teams switch\",\n  title = \"Why Choose Our Templates\",\n  description = \"Thoughtfully designed to help you build faster without compromising quality—clean code, modern layouts, effortless customization.\",\n  items = DEFAULT_ITEMS,\n  className,\n  ...props\n}: React.ComponentProps<\"section\"> & {\n  eyebrow?: string\n  title?: string\n  description?: string\n  items?: readonly ContentSectionItem[]\n}) {\n  return (\n    <section\n      className={cn(\n        \"w-full bg-canvas px-4 py-12 sm:py-16 md:px-8 md:py-24\",\n        className\n      )}\n      style={{ backgroundColor: \"var(--canvas)\" }}\n      aria-labelledby=\"content-section-heading\"\n      {...props}\n    >\n      <div className=\"mx-auto max-w-7xl\">\n        <div className=\"mb-10 flex flex-col gap-4 sm:mb-14 sm:gap-6 md:mb-20 md:flex-row md:items-end md:justify-between\">\n          <div className=\"max-w-2xl min-w-0 text-start\">\n            <p className=\"mb-3 text-xs font-semibold tracking-[0.18em] text-primary uppercase\">\n              {eyebrow}\n            </p>\n            <h2\n              id=\"content-section-heading\"\n              className=\"text-3xl font-bold tracking-tight text-balance text-foreground md:text-5xl\"\n            >\n              {title}\n            </h2>\n          </div>\n          <p className=\"max-w-md text-base leading-relaxed text-muted-foreground md:text-end\">\n            {description}\n          </p>\n        </div>\n\n        <ol className=\"grid gap-4 sm:gap-6 md:grid-cols-3\">\n          {items.map((item, index) => (\n            <li\n              key={item.title}\n              className=\"group relative overflow-hidden rounded-[16px] border border-border/70 bg-card p-5 shadow-soft transition-transform duration-300 hover:-translate-y-1 sm:p-6 md:p-8\"\n              style={{\n                backgroundColor: \"var(--card)\",\n                boxShadow: \"var(--shadow-soft)\",\n              }}\n            >\n              <div\n                aria-hidden=\"true\"\n                className=\"absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-primary to-primary/30 opacity-80 rtl:bg-gradient-to-l\"\n              />\n              <span className=\"mb-5 block font-mono text-4xl font-semibold tracking-tighter text-muted-foreground/25 tabular-nums transition-colors group-hover:text-primary/30 sm:mb-8 sm:text-5xl\">\n                {String(index + 1).padStart(2, \"0\")}\n              </span>\n              <h3 className=\"mb-3 text-lg font-semibold tracking-tight text-foreground sm:text-xl\">\n                {item.title}\n              </h3>\n              <p className=\"text-sm leading-relaxed text-muted-foreground sm:text-base\">\n                {item.description}\n              </p>\n            </li>\n          ))}\n        </ol>\n      </div>\n    </section>\n  )\n}\n",
+      "target": "components/blocks/marketing/content-section-03/content-section.tsx"
+    }
+  ],
+  "version": "0.1.0+44be9ac7d5f6",
+  "generatedAt": "2026-10-29T10:03:04.279Z"
+}

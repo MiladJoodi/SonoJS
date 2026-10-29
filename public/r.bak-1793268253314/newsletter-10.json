@@ -1,0 +1,39 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "newsletter-10",
+  "type": "registry:block",
+  "title": "newsletter-10",
+  "description": "Newsletter popup dialog — teaser stage, email subscribe form, and success state.",
+  "registryDependencies": [
+    "button",
+    "dialog",
+    "input",
+    "label"
+  ],
+  "cssVars": {
+    "light": {
+      "canvas": "#f3f3f4",
+      "border-soft": "color-mix(in oklab, #e4e4e7 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18)",
+      "background": "var(--canvas)",
+      "card": "#ffffff"
+    },
+    "dark": {
+      "canvas": "#09090b",
+      "border-soft": "color-mix(in oklab, #27272a 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(0, 0, 0, 0.24), 0 28px 56px -28px rgba(0, 0, 0, 0.48)",
+      "background": "var(--canvas)",
+      "card": "#18181b"
+    }
+  },
+  "files": [
+    {
+      "path": "components/blocks/marketing/newsletter-10/newsletter.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\n\nimport { Button } from \"@/components/ui/button\"\nimport {\n  Dialog,\n  DialogClose,\n  DialogContent,\n  DialogDescription,\n  DialogFooter,\n  DialogHeader,\n  DialogTitle,\n  DialogTrigger,\n} from \"@/components/ui/dialog\"\nimport { Input } from \"@/components/ui/input\"\nimport { Label } from \"@/components/ui/label\"\nimport { cn } from \"@/lib/utils\"\n\nexport default function Newsletter({\n  className,\n  ...props\n}: React.ComponentProps<\"section\">) {\n  const [open, setOpen] = React.useState(true)\n  const [subscribed, setSubscribed] = React.useState(false)\n\n  return (\n    <section\n      className={cn(\n        \"flex min-h-[560px] w-full min-w-0 items-center justify-center bg-canvas p-6 text-foreground\",\n        className\n      )}\n      {...props}\n    >\n      <Dialog\n        open={open}\n        onOpenChange={(next) => {\n          setOpen(next)\n          if (!next) setSubscribed(false)\n        }}\n      >\n        <div className=\"max-w-sm text-center\">\n          <p className=\"mb-3 text-sm font-medium text-primary\">\n            The monthly edition\n          </p>\n          <h1 className=\"text-h1 font-semibold tracking-tight text-foreground\">\n            A little more perspective.\n          </h1>\n          <p className=\"mt-4 text-base text-muted-foreground\">\n            Notes on design, development, and the products we use.\n          </p>\n          <DialogTrigger asChild>\n            <Button type=\"button\" className=\"mt-6\">\n              Subscribe to updates\n            </Button>\n          </DialogTrigger>\n        </div>\n\n        <DialogContent\n          className=\"gap-0 p-0 sm:max-w-md\"\n          style={{ maxWidth: \"min(28rem, calc(100% - 2rem))\" }}\n        >\n          <DialogHeader className=\"border-b border-border/70 px-6 py-5 text-start\">\n            <DialogTitle>\n              {subscribed\n                ? \"You're on the list.\"\n                : \"Good ideas, once a month.\"}\n            </DialogTitle>\n            <DialogDescription>\n              {subscribed\n                ? \"Thanks for subscribing. Look out for the next edition in your inbox.\"\n                : \"A short collection of useful articles, practical resources, and things worth trying.\"}\n            </DialogDescription>\n          </DialogHeader>\n\n          <div className=\"px-6 py-5\">\n            {subscribed ? (\n              <p\n                role=\"status\"\n                className=\"text-sm leading-relaxed text-muted-foreground\"\n              >\n                You’re subscribed. We’ll send the next edition when it’s ready.\n              </p>\n            ) : (\n              <form\n                onSubmit={(event) => {\n                  event.preventDefault()\n                  setSubscribed(true)\n                }}\n                className=\"space-y-5\"\n              >\n                <div className=\"grid gap-2 text-start\">\n                  <Label htmlFor=\"newsletter-10-email\">Email address</Label>\n                  <Input\n                    id=\"newsletter-10-email\"\n                    type=\"email\"\n                    required\n                    placeholder=\"you@company.com\"\n                    autoComplete=\"email\"\n                  />\n                </div>\n                <Button type=\"submit\" className=\"w-full\">\n                  Subscribe\n                </Button>\n                <p className=\"text-xs text-muted-foreground\">\n                  No spam. Unsubscribe whenever you like.\n                </p>\n              </form>\n            )}\n          </div>\n\n          <DialogFooter className=\"border-t border-border/70 px-6 py-4 sm:justify-start\">\n            <DialogClose asChild>\n              <Button type=\"button\" variant=\"ghost\">\n                {subscribed ? \"Done\" : \"Maybe later\"}\n              </Button>\n            </DialogClose>\n          </DialogFooter>\n        </DialogContent>\n      </Dialog>\n    </section>\n  )\n}\n",
+      "target": "components/blocks/marketing/newsletter-10/newsletter.tsx"
+    }
+  ],
+  "version": "0.1.0+44be9ac7d5f6",
+  "generatedAt": "2026-10-29T10:03:04.279Z"
+}

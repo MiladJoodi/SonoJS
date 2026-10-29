@@ -20,7 +20,7 @@ export const siteConfig = {
   url: resolveAppUrl(),
   description:
     "A modern React UI library with beautifully crafted components, blocks, and charts. Connect your AI agent via MCP to build with SonoJS and generate real UI directly in your codebase.",
-  /** Placeholder until the real npx MCP command ships. Works with any MCP client. */
+  /** One-command MCP client setup (auto-detect + merge-safe `sonojs` entry). */
   mcpInitCommand: "npx @sonojs/ui@latest mcp init",
   links: {
     github: "https://github.com/MiladJoodi/SonoJS",

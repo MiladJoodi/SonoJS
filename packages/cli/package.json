@@ -15,6 +15,7 @@
     "templates"
   ],
   "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.2",
     "@tanstack/react-table": "^9.3.1"
   }
 }

@@ -19,6 +19,20 @@ export const registry = {
         "A vertically stacked set of interactive headings that reveal content.",
     },
     {
+      name: "agent-activity",
+      type: "registry:ui" as const,
+      title: "Agent Activity",
+      description:
+        "A live timeline that shows an AI agent's work step by step.",
+    },
+    {
+      name: "agent-activity-2",
+      type: "registry:ui" as const,
+      title: "Agent Activity 2",
+      description:
+        "An expandable agent trace for steps, reasoning, search, and coding.",
+    },
+    {
       name: "approval-card",
       type: "registry:ui" as const,
       title: "Approval Card",
@@ -201,6 +215,13 @@ export const registry = {
         "An image-generation state with dither progress and a completed result.",
     },
     {
+      name: "image-generation-2",
+      type: "registry:ui" as const,
+      title: "Image Generation 2",
+      description:
+        "An animated loading state that reveals an AI-generated image when it is ready.",
+    },
+    {
       name: "input",
       type: "registry:ui" as const,
       title: "Input",
@@ -289,10 +310,24 @@ export const registry = {
         "Displays a form textarea or a component that looks like a textarea.",
     },
     {
+      name: "thinking-orbs",
+      type: "registry:ui" as const,
+      title: "Thinking Orbs",
+      description:
+        "Animated orb states that visualize an AI agent's work.",
+    },
+    {
       name: "label",
       type: "registry:ui" as const,
       title: "Label",
       description: "Renders an accessible label associated with controls.",
+    },
+    {
+      name: "loading-states",
+      type: "registry:ui" as const,
+      title: "Loading States",
+      description:
+        "Animated loading states for waiting while an AI agent works.",
     },
     {
       name: "button-group",
@@ -329,6 +364,13 @@ export const registry = {
         "A set of checkable buttons where only one can be selected at a time.",
     },
     {
+      name: "reasoning-text",
+      type: "registry:ui" as const,
+      title: "Reasoning Text",
+      description:
+        "Animated status text for showing that an AI agent is thinking and working.",
+    },
+    {
       name: "resizable",
       type: "registry:ui" as const,
       title: "Resizable",
@@ -348,6 +390,13 @@ export const registry = {
       title: "Select",
       description:
         "Displays a list of options for the user to pick from—triggered by a button.",
+    },
+    {
+      name: "selection-actions",
+      type: "registry:ui" as const,
+      title: "Selection Actions",
+      description:
+        "A contextual AI action bar that appears beneath selected text.",
     },
     {
       name: "separator",

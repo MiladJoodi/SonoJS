@@ -5,12 +5,29 @@
 
 /** @type {ReadonlySet<string>} */
 export const SONOJS_COMPONENT_ROOTS = new Set([
+  "agent-activity",
+  "agent-activity-2",
   "agent-code",
+  "agent-code-block",
   "agent-disclosure",
   "approval-card",
+  "citations",
+  "file-diff",
   "fluid-orb",
   "image-generation",
+  "image-generation-2",
+  "loading-states",
+  "prompt-input",
+  "prompt-input-2",
+  "reasoning-text",
+  "selection-actions",
+  "streaming-response",
+  "structured-output",
+  "task-rows",
+  "thinking-orbs",
+  "todo-list",
   "tool-approval",
+  "voice-ai-orb",
 ])
 
 /**

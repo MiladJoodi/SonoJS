@@ -1,0 +1,43 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "otp-verification-05",
+  "type": "registry:block",
+  "title": "otp-verification-05",
+  "description": "Trust-device OTP — fingerprint mark, 30-day trust checkbox, verify (RTL/LTR).",
+  "dependencies": [
+    "input-otp",
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "button",
+    "checkbox",
+    "input-otp",
+    "label"
+  ],
+  "cssVars": {
+    "light": {
+      "canvas": "#f3f3f4",
+      "border-soft": "color-mix(in oklab, #e4e4e7 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18)",
+      "background": "var(--canvas)",
+      "card": "#ffffff"
+    },
+    "dark": {
+      "canvas": "#09090b",
+      "border-soft": "color-mix(in oklab, #27272a 70%, transparent)",
+      "shadow-soft": "0 2px 4px -1px rgba(0, 0, 0, 0.24), 0 28px 56px -28px rgba(0, 0, 0, 0.48)",
+      "background": "var(--canvas)",
+      "card": "#18181b"
+    }
+  },
+  "files": [
+    {
+      "path": "components/blocks/authentication/otp-verification-05/otp-verification-form.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { FingerprintIcon } from \"lucide-react\"\n\nimport { Button } from \"@/components/ui/button\"\nimport { Checkbox } from \"@/components/ui/checkbox\"\nimport {\n  InputOTP,\n  InputOTPGroup,\n  InputOTPSeparator,\n  InputOTPSlot,\n} from \"@/components/ui/input-otp\"\nimport { Label } from \"@/components/ui/label\"\nimport { cn } from \"@/lib/utils\"\n\nconst RESEND_SECONDS = 30\n\nexport default function OtpVerificationForm({\n  className,\n  ...props\n}: React.ComponentProps<\"div\">) {\n  const [otp, setOtp] = React.useState(\"\")\n  const [trust, setTrust] = React.useState(true)\n  const [seconds, setSeconds] = React.useState(RESEND_SECONDS)\n\n  React.useEffect(() => {\n    if (seconds <= 0) return\n    const id = window.setTimeout(() => setSeconds((s) => s - 1), 1000)\n    return () => window.clearTimeout(id)\n  }, [seconds])\n\n  const ready = otp.length === 6\n\n  return (\n    <div\n      className={cn(\n        \"flex w-full flex-col gap-6 rounded-[12px] border border-border/70 bg-card p-6 shadow-soft sm:p-8\",\n        className\n      )}\n      {...props}\n    >\n      <header className=\"flex flex-col items-center gap-3 text-center\">\n        <span className=\"flex size-12 items-center justify-center rounded-full bg-primary/10 text-primary\">\n          <FingerprintIcon className=\"size-5\" aria-hidden />\n        </span>\n        <div className=\"space-y-1.5\">\n          <h1 className=\"text-h3 font-semibold tracking-tight text-foreground\">\n            Confirm it&apos;s you\n          </h1>\n          <p className=\"text-sm text-muted-foreground\">\n            Enter the code from your email, then choose whether to trust this\n            device.\n          </p>\n        </div>\n      </header>\n\n      <form\n        className=\"flex flex-col items-center gap-4\"\n        onSubmit={(event) => event.preventDefault()}\n      >\n        <div className=\"flex w-full flex-col items-center gap-2\">\n          <Label htmlFor=\"otp-05\" className=\"sr-only\">\n            Verification code\n          </Label>\n          <InputOTP\n            id=\"otp-05\"\n            maxLength={6}\n            value={otp}\n            onChange={setOtp}\n            autoFocus\n            containerClassName=\"justify-center\"\n          >\n            <InputOTPGroup>\n              <InputOTPSlot index={0} />\n              <InputOTPSlot index={1} />\n              <InputOTPSlot index={2} />\n            </InputOTPGroup>\n            <InputOTPSeparator />\n            <InputOTPGroup>\n              <InputOTPSlot index={3} />\n              <InputOTPSlot index={4} />\n              <InputOTPSlot index={5} />\n            </InputOTPGroup>\n          </InputOTP>\n        </div>\n\n        <div className=\"flex w-full items-start gap-3 rounded-[12px] border border-border/70 bg-muted/40 px-3 py-3 text-start\">\n          <Checkbox\n            id=\"trust-device\"\n            checked={trust}\n            onCheckedChange={(v) => setTrust(v === true)}\n            className=\"mt-0.5 cursor-pointer\"\n          />\n          <div className=\"min-w-0 space-y-0.5\">\n            <Label\n              htmlFor=\"trust-device\"\n              className=\"cursor-pointer text-sm font-medium text-foreground\"\n            >\n              Trust this device for 30 days\n            </Label>\n            <p className=\"text-xs text-muted-foreground\">\n              Skip the code next time on this browser. Revoke anytime in\n              settings.\n            </p>\n          </div>\n        </div>\n\n        <Button\n          type=\"submit\"\n          className=\"w-full cursor-pointer\"\n          disabled={!ready}\n        >\n          Verify &amp; continue\n        </Button>\n      </form>\n\n      <div className=\"text-center text-sm\">\n        {seconds > 0 ? (\n          <p className=\"text-muted-foreground\" dir=\"ltr\">\n            Resend in {seconds}s\n          </p>\n        ) : (\n          <button\n            type=\"button\"\n            className=\"cursor-pointer font-medium text-primary underline-offset-4 hover:underline\"\n            onClick={() => {\n              setSeconds(RESEND_SECONDS)\n              setOtp(\"\")\n            }}\n          >\n            Resend code\n          </button>\n        )}\n      </div>\n    </div>\n  )\n}\n",
+      "target": "components/blocks/authentication/otp-verification-05/otp-verification-form.tsx"
+    }
+  ],
+  "version": "0.1.0+44be9ac7d5f6",
+  "generatedAt": "2026-10-29T10:03:04.279Z"
+}

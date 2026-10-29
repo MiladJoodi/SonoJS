@@ -1,0 +1,111 @@
+.table {
+  width: min(34rem, calc(100vw - 3rem));
+  overflow: hidden;
+  color: var(--foreground);
+  background: color-mix(in oklab, var(--card) 96%, transparent);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  box-shadow:
+    0 1px 2px rgb(0 0 0 / 5%),
+    0 12px 36px rgb(0 0 0 / 4%);
+}
+
+.tableHead,
+.tableRow {
+  display: grid;
+  grid-template-columns:
+    minmax(10rem, 1.45fr) minmax(6rem, 0.8fr)
+    minmax(6rem, 0.75fr);
+  align-items: center;
+}
+
+.tableHead {
+  min-height: 2.75rem;
+  color: var(--muted-foreground);
+  background: color-mix(in oklab, var(--muted) 54%, transparent);
+  border-bottom: 1px solid var(--border);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+}
+
+.tableBody {
+  display: flex;
+  flex-direction: column;
+}
+
+.tableRow {
+  min-height: 3.5rem;
+  font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
+  transition: background-color 160ms ease;
+}
+
+.tableRow:not(:last-child) {
+  border-bottom: 1px solid color-mix(in oklab, var(--border) 72%, transparent);
+}
+
+.tableRow:hover {
+  background: color-mix(in oklab, var(--muted) 42%, transparent);
+}
+
+.tableCell {
+  min-width: 0;
+  padding: 0.75rem 1rem;
+}
+
+.tableHead .tableCell:not(:first-child),
+.tableRow .tableCell:not(:first-child) {
+  border-inline-start: 1px solid color-mix(in oklab, var(--border) 60%, transparent);
+}
+
+.modelCell {
+  display: inline-flex;
+  min-width: 0;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.modelIcon {
+  display: inline-grid;
+  width: 1.5rem;
+  height: 1.5rem;
+  flex: 0 0 auto;
+  place-items: center;
+  color: white;
+  background: var(--brand-color);
+  border-radius: 0.4375rem;
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 18%);
+}
+
+.modelIcon svg {
+  width: 0.6875rem;
+  height: 0.6875rem;
+}
+
+.tableCellText {
+  overflow: hidden;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+  .tableHead,
+  .tableRow {
+    grid-template-columns:
+      minmax(8rem, 1.3fr) minmax(4.75rem, 0.7fr)
+      minmax(4.75rem, 0.7fr);
+  }
+
+  .tableCell {
+    padding-inline: 0.75rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tableRow {
+    transition: none;
+  }
+}
