@@ -169,12 +169,48 @@ type ComposedTooltipProps = {
     payload?: LineBarAreaComposedPoint
   }>
   locale: string
+  compact?: boolean
 }
 
-function ComposedTooltip({ active, payload, locale }: ComposedTooltipProps) {
+function ComposedTooltip({
+  active,
+  payload,
+  locale,
+  compact = false,
+}: ComposedTooltipProps) {
   if (!active || !payload?.length) return null
   const row = payload[0]?.payload
   if (!row) return null
+
+  if (compact) {
+    return (
+      <div className="pointer-events-none min-w-0 max-w-[8.75rem] rounded-[8px] border border-border/70 bg-card px-2 py-1.5 shadow-soft">
+        <p className="text-[9px] font-medium leading-tight text-muted-foreground">
+          {formatFullMonthYear(row.month, locale)}
+        </p>
+        <div className="mt-1 flex flex-col gap-0.5">
+          {SERIES_KEYS.map((key) => (
+            <div
+              key={key}
+              className="flex items-center justify-between gap-2"
+            >
+              <span className="flex items-center gap-1 text-[10px] text-muted-foreground">
+                <span
+                  className="size-1.5 shrink-0 rounded-full"
+                  style={{ backgroundColor: chartConfig[key].color }}
+                  aria-hidden
+                />
+                {chartConfig[key].label}
+              </span>
+              <span className="text-[10px] font-medium tabular-nums text-foreground">
+                {formatNumber(row[key], locale)}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="pointer-events-none min-w-[10.5rem] rounded-[12px] border border-border/70 bg-card px-3 py-2.5 shadow-soft">
@@ -464,11 +500,12 @@ function LineBarAreaComposedChart({
   const tooltipContent = React.useCallback(
     (props: Record<string, unknown>) => (
       <ComposedTooltip
-        {...(props as Omit<ComposedTooltipProps, "locale">)}
+        {...(props as Omit<ComposedTooltipProps, "locale" | "compact">)}
         locale={locale}
+        compact={narrow}
       />
     ),
-    [locale]
+    [locale, narrow]
   )
 
   const ariaLabel = React.useMemo(() => {

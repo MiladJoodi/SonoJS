@@ -1,7 +1,7 @@
-import Image from "next/image"
 import Link from "next/link"
 
 import { HomeSectionHeading } from "@/components/home/section-heading"
+import { IconsScatter } from "@/components/home/sections/icons/icons-scatter"
 import { siteConfig } from "@/lib/config"
 import { Button } from "@sonojs/ui/components/button"
 
@@ -89,22 +89,12 @@ export function HomeIconsSection() {
           </div>
 
           <div
-            className="relative mx-auto flex w-full min-w-0 max-w-[36rem] justify-center lg:max-w-none"
+            className="relative mx-auto w-full min-w-0 max-w-[40rem] lg:max-w-none"
             style={{
               animation: "sono-fade-up 520ms var(--motion-ease) 80ms both",
             }}
           >
-            <Image
-              src="/images/docs/icons.webp"
-              alt="SonoJS icons collection preview"
-              width={1624}
-              height={969}
-              draggable={false}
-              className="mx-auto h-auto max-h-[14rem] w-auto select-none object-contain sm:max-h-none sm:w-full"
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 800px"
-              quality={100}
-              unoptimized
-            />
+            <IconsScatter />
           </div>
         </div>
       </div>

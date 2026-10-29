@@ -859,6 +859,28 @@ html:has([data-block-embed]) body {
   }
 }
 
+@keyframes sono-icon-drift {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) translateY(0);
+  }
+  50% {
+    transform: translate(-50%, -50%) translateY(-6px);
+  }
+}
+
+.sono-icon-drift {
+  transform: translate(-50%, -50%);
+  animation: sono-icon-drift 5.6s var(--motion-ease) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sono-icon-drift {
+    animation: none;
+    transform: translate(-50%, -50%);
+  }
+}
+
 @keyframes sono-fade-up {
   from {
     opacity: 0;

@@ -1,7 +1,7 @@
-import Image from "next/image"
 import Link from "next/link"
 
 import { HomeSectionHeading } from "@/components/home/section-heading"
+import { HomeParallaxImage } from "@/components/home/sections/parallax-image"
 import { Button } from "@sonojs/ui/components/button"
 
 export function HomeMcpSection() {
@@ -61,15 +61,12 @@ export function HomeMcpSection() {
               animation: "sono-fade-up 520ms var(--motion-ease) 80ms both",
             }}
           >
-            <Image
+            <HomeParallaxImage
               src="/images/docs/mcp.png"
               alt="SonoJS MCP for AI coding agents"
               width={1672}
               height={940}
               className="mx-auto h-auto max-h-[14rem] w-auto object-contain sm:max-h-none sm:w-full"
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 800px"
-              quality={100}
-              unoptimized
             />
           </div>
         </div>

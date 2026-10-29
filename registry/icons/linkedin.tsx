@@ -12,10 +12,14 @@ export function LinkedinIcon({
       viewBox="0 0 24 24"
       aria-hidden="true"
       className={cn("size-5", className)}
-      fill="currentColor"
       {...props}
     >
-      <path fillRule="evenodd" clipRule="evenodd" d={linkedinPath} />
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d={linkedinPath}
+        fill="#0A66C2"
+      />
     </svg>
   )
 }

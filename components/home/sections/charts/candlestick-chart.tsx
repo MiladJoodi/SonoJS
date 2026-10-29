@@ -193,9 +193,16 @@ type BtcTooltipProps = {
   payload?: Array<{ payload?: OhlcvRow }>
   timeframe: Timeframe
   locale: string
+  compact?: boolean
 }
 
-function BtcTooltip({ active, payload, timeframe, locale }: BtcTooltipProps) {
+function BtcTooltip({
+  active,
+  payload,
+  timeframe,
+  locale,
+  compact = false,
+}: BtcTooltipProps) {
   if (!active || !payload?.length) return null
   const row = payload[0]?.payload
   if (!row) return null
@@ -203,6 +210,30 @@ function BtcTooltip({ active, payload, timeframe, locale }: BtcTooltipProps) {
   const candlePct =
     row.open === 0 ? 0 : ((row.close - row.open) / row.open) * 100
   const up = candlePct >= 0
+
+  if (compact) {
+    return (
+      <div className="pointer-events-none min-w-0 max-w-[9.5rem] rounded-[8px] border border-border/70 bg-card px-2 py-1.5 shadow-soft">
+        <p className="text-[9px] font-medium leading-tight text-muted-foreground">
+          {formatAxisLabel(row.time, timeframe, locale)}
+        </p>
+        <div className="mt-1 flex items-baseline gap-1.5">
+          <p
+            className="text-[13px] font-semibold leading-none tracking-tight tabular-nums"
+            style={{ color: candleColor(row) }}
+          >
+            {formatCandlePrice(row.close, locale)}
+          </p>
+          <span
+            className="text-[9px] font-semibold tabular-nums"
+            style={{ color: up ? CANDLE_UP : CANDLE_DOWN }}
+          >
+            {formatSessionPct(candlePct, locale)}
+          </span>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="pointer-events-none min-w-[11.5rem] rounded-[12px] border border-border/70 bg-card px-3 py-2.5 shadow-soft">
@@ -248,7 +279,6 @@ function BtcTooltip({ active, payload, timeframe, locale }: BtcTooltipProps) {
           accent={candleColor(row)}
         />
       </div>
-
     </div>
   )
 }
@@ -413,12 +443,13 @@ export function HomeCandlestickChart({
   const tooltipContent = React.useCallback(
     (props: Record<string, unknown>) => (
       <BtcTooltip
-        {...(props as Omit<BtcTooltipProps, "timeframe" | "locale">)}
+        {...(props as Omit<BtcTooltipProps, "timeframe" | "locale" | "compact">)}
         timeframe={timeframe}
         locale={locale}
+        compact={narrow}
       />
     ),
-    [locale, timeframe]
+    [locale, narrow, timeframe]
   )
 
   const ariaLabel = `Bitcoin BTC/USD candlestick, ${timeframe}, ${timeLabel} last ${formatCandlePrice(total, locale)}`
