@@ -99,36 +99,34 @@ function AgentCodeBlock({
   }, [code, onCopy])
 
   return (
-    // Nested `dark` keeps Dark+ token colors readable in both site themes
-    // (same always-dark chrome as Code Panel / docs code samples).
     <div
       data-slot="agent-code-block"
       data-state={status}
       aria-busy={streaming}
       className={cn(
-        "dark w-full overflow-hidden rounded-2xl border border-[var(--code-border)] bg-[var(--code-bg)] text-sm text-[var(--code-fg)]",
+        "w-full overflow-hidden rounded-2xl bg-muted text-sm",
         className
       )}
     >
       <div className="flex h-10 items-center gap-2.5 px-3">
         <FileCode2Icon
           aria-hidden
-          className="size-3.5 shrink-0 text-[var(--code-header-fg)]"
+          className="size-3.5 shrink-0 text-muted-foreground/70"
         />
         {filename ? (
-          <span className="min-w-0 truncate font-mono text-xs text-[var(--code-fg)]/90">
+          <span className="min-w-0 truncate font-mono text-xs text-foreground/80">
             {filename}
           </span>
         ) : null}
-        <span className="text-[10px] font-medium tracking-wide text-[var(--code-header-fg)] uppercase">
+        <span className="text-[10px] font-medium tracking-wide text-muted-foreground/55 uppercase">
           {language}
         </span>
         <span
           className={cn(
             "ms-auto inline-flex shrink-0 items-center gap-1 text-[10px] font-medium",
             streaming
-              ? "text-[var(--code-header-fg)]"
-              : "text-emerald-400"
+              ? "text-muted-foreground"
+              : "text-emerald-600 dark:text-emerald-400"
           )}
         >
           {streaming ? (
@@ -148,7 +146,7 @@ function AgentCodeBlock({
             onClick={handleCopy}
             whileTap={reduce ? undefined : { scale: 0.9 }}
             transition={SPRING_PRESS}
-            className="grid size-7 shrink-0 cursor-pointer place-items-center rounded-full text-[var(--code-header-fg)] outline-none transition-colors hover:bg-white/10 hover:text-[var(--code-fg)] focus-visible:ring-2 focus-visible:ring-ring"
+            className="grid size-7 shrink-0 cursor-pointer place-items-center rounded-full text-muted-foreground outline-none transition-colors hover:bg-background/70 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
           >
             {copied ? (
               <CheckIcon className="size-3.5" />
@@ -163,10 +161,10 @@ function AgentCodeBlock({
         ref={viewportRef}
         role={streaming ? "log" : undefined}
         aria-live={streaming ? "polite" : undefined}
-        className="scrollbar-none overflow-auto border-t border-white/10 py-2"
+        className="scrollbar-none overflow-auto border-t border-border/60 py-2"
         style={{ maxHeight }}
       >
-        <pre className="m-0 min-w-max font-mono text-xs leading-5 text-[var(--code-fg)]">
+        <pre className="m-0 min-w-max font-mono text-xs leading-5 text-foreground">
           <code>
             {lines.map((line, index) => {
               const lineNumber = index + 1
@@ -178,11 +176,11 @@ function AgentCodeBlock({
                     showLineNumbers
                       ? "grid-cols-[2.75rem_minmax(0,1fr)]"
                       : "grid-cols-1",
-                    highlighted.has(lineNumber) && "bg-white/5"
+                    highlighted.has(lineNumber) && "bg-foreground/5"
                   )}
                 >
                   {showLineNumbers ? (
-                    <span className="select-none pe-3 text-end tabular-nums text-[var(--code-line-number)]">
+                    <span className="select-none pe-3 text-end tabular-nums text-muted-foreground/50">
                       {lineNumber}
                     </span>
                   ) : null}

@@ -229,11 +229,11 @@ export function HomeChatComposer() {
   const hasThread = turns.length > 0 || thinking
 
   return (
-    <div className="mx-auto flex h-auto w-full max-w-xl flex-col gap-2 text-foreground sm:h-full sm:gap-3">
+    <div className="mx-auto flex h-full w-full max-w-xl flex-col gap-2 text-foreground sm:gap-3">
       {/* Fixed thread slot on mobile — scrolls inside, no page jump / no empty below */}
       <div
         ref={threadRef}
-        className="h-[4.5rem] shrink-0 space-y-2 overflow-y-auto overscroll-contain pe-1 sm:h-auto sm:min-h-0 sm:flex-1 sm:space-y-3"
+        className="min-h-0 flex-1 space-y-2 overflow-y-auto overscroll-contain pe-1 sm:space-y-3"
         aria-live="polite"
       >
         {hasThread ? (
