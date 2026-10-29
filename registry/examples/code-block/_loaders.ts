@@ -29,6 +29,10 @@ export const exampleLoaders = {
     import("./size").then((m) => ({
       default: m.CodeBlockSize,
     })),
+  "code-block-streaming": () =>
+    import("./streaming").then((m) => ({
+      default: m.CodeBlockStreaming,
+    })),
   "code-block-syntax": () =>
     import("./syntax").then((m) => ({
       default: m.CodeBlockSyntax,

@@ -87,7 +87,7 @@ function AgentCodeBlock({
       }
     })
     return () => cancelAnimationFrame(frame)
-  })
+  }, [code, reduce, streaming])
 
   const handleCopy = React.useCallback(async () => {
     if (onCopy) await onCopy()
@@ -99,34 +99,36 @@ function AgentCodeBlock({
   }, [code, onCopy])
 
   return (
+    // Nested `dark` keeps Dark+ token colors readable in both site themes
+    // (same always-dark chrome as Code Panel / docs code samples).
     <div
       data-slot="agent-code-block"
       data-state={status}
       aria-busy={streaming}
       className={cn(
-        "w-full overflow-hidden rounded-2xl border border-border/70 bg-muted/80 text-sm shadow-soft",
+        "dark w-full overflow-hidden rounded-2xl border border-[var(--code-border)] bg-[var(--code-bg)] text-sm text-[var(--code-fg)]",
         className
       )}
     >
       <div className="flex h-10 items-center gap-2.5 px-3">
         <FileCode2Icon
           aria-hidden
-          className="size-3.5 shrink-0 text-muted-foreground/70"
+          className="size-3.5 shrink-0 text-[var(--code-header-fg)]"
         />
         {filename ? (
-          <span className="min-w-0 truncate font-mono text-xs text-foreground/80">
+          <span className="min-w-0 truncate font-mono text-xs text-[var(--code-fg)]/90">
             {filename}
           </span>
         ) : null}
-        <span className="text-[10px] font-medium tracking-wide text-muted-foreground/55 uppercase">
+        <span className="text-[10px] font-medium tracking-wide text-[var(--code-header-fg)] uppercase">
           {language}
         </span>
         <span
           className={cn(
             "ms-auto inline-flex shrink-0 items-center gap-1 text-[10px] font-medium",
             streaming
-              ? "text-muted-foreground"
-              : "text-emerald-600 dark:text-emerald-400"
+              ? "text-[var(--code-header-fg)]"
+              : "text-emerald-400"
           )}
         >
           {streaming ? (
@@ -146,7 +148,7 @@ function AgentCodeBlock({
             onClick={handleCopy}
             whileTap={reduce ? undefined : { scale: 0.9 }}
             transition={SPRING_PRESS}
-            className="grid size-7 shrink-0 cursor-pointer place-items-center rounded-full text-muted-foreground outline-none transition-colors hover:bg-background/70 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
+            className="grid size-7 shrink-0 cursor-pointer place-items-center rounded-full text-[var(--code-header-fg)] outline-none transition-colors hover:bg-white/10 hover:text-[var(--code-fg)] focus-visible:ring-2 focus-visible:ring-ring"
           >
             {copied ? (
               <CheckIcon className="size-3.5" />
@@ -161,10 +163,10 @@ function AgentCodeBlock({
         ref={viewportRef}
         role={streaming ? "log" : undefined}
         aria-live={streaming ? "polite" : undefined}
-        className="scrollbar-none overflow-auto border-t border-foreground/[0.06] py-2"
+        className="scrollbar-none overflow-auto border-t border-white/10 py-2"
         style={{ maxHeight }}
       >
-        <pre className="m-0 min-w-max font-mono text-xs leading-5 text-foreground/85">
+        <pre className="m-0 min-w-max font-mono text-xs leading-5 text-[var(--code-fg)]">
           <code>
             {lines.map((line, index) => {
               const lineNumber = index + 1
@@ -176,11 +178,11 @@ function AgentCodeBlock({
                     showLineNumbers
                       ? "grid-cols-[2.75rem_minmax(0,1fr)]"
                       : "grid-cols-1",
-                    highlighted.has(lineNumber) && "bg-primary/10"
+                    highlighted.has(lineNumber) && "bg-white/5"
                   )}
                 >
                   {showLineNumbers ? (
-                    <span className="select-none pe-3 text-end tabular-nums text-muted-foreground/35">
+                    <span className="select-none pe-3 text-end tabular-nums text-[var(--code-line-number)]">
                       {lineNumber}
                     </span>
                   ) : null}

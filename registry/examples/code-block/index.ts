@@ -1,3 +1,4 @@
+export { CodeBlockStreaming } from "./streaming"
 export { CodeBlockDefault } from "./default"
 export { CodeBlockHeaderExample } from "./header"
 export { CodeBlockLineNumbers } from "./line-numbers"

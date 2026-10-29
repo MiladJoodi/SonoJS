@@ -60,6 +60,7 @@ export function FileDiffDefault() {
   const [replay, setReplay] = React.useState(0)
   const [lines, setLines] = React.useState<FileDiffLine[]>([])
   const [status, setStatus] = React.useState<FileDiffStatus>("streaming")
+  const done = status === "complete"
 
   React.useEffect(() => {
     setLines([])
@@ -77,7 +78,7 @@ export function FileDiffDefault() {
   }, [replay])
 
   return (
-    <div className="mx-auto flex w-full max-w-lg flex-col gap-3">
+    <div className="mx-auto flex min-h-[22rem] w-full max-w-lg flex-col gap-3">
       <FileDiff
         key={replay}
         file="src/lib/vendors.ts"
@@ -87,16 +88,20 @@ export function FileDiffDefault() {
         copyText={COPY}
         defaultOpen
       />
-      {status === "complete" ? (
-        <button
-          type="button"
-          onClick={() => setReplay((n) => n + 1)}
-          className="inline-flex cursor-pointer items-center gap-1.5 self-start text-xs font-medium text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
-        >
-          <RotateCcwIcon className="size-3.5" />
-          Replay
-        </button>
-      ) : null}
+      <button
+        type="button"
+        onClick={() => setReplay((n) => n + 1)}
+        tabIndex={done ? undefined : -1}
+        aria-hidden={!done}
+        className={
+          done
+            ? "inline-flex cursor-pointer items-center gap-1.5 self-start text-xs font-medium text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
+            : "invisible pointer-events-none inline-flex cursor-pointer items-center gap-1.5 self-start text-xs font-medium text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
+        }
+      >
+        <RotateCcwIcon className="size-3.5" />
+        Replay
+      </button>
     </div>
   )
 }

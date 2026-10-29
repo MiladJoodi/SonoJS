@@ -2256,7 +2256,7 @@ const registryItemsRaw = [
   {
     name: "agent-code-block",
     type: "registry:ui",
-    title: "Agent Code Block",
+    title: "Code Block",
     description:
       "A syntax-highlighted code block for AI-generated code, with copy support.",
     dependencies: [
@@ -3228,7 +3228,7 @@ const registryItemsRaw = [
   {
     name: "code-block",
     type: "registry:ui",
-    title: "Code Block",
+    title: "Code Panel",
     description:
       "Displays code, terminal output and diffs with an optional header, line numbers and a copy button.",
     dependencies: [

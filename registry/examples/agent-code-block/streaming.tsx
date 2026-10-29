@@ -34,7 +34,7 @@ export function AgentCodeBlockStreaming() {
   }, [replay])
 
   return (
-    <div className="mx-auto flex w-full max-w-lg flex-col gap-3">
+    <div className="mx-auto flex min-h-[18rem] w-full max-w-lg flex-col gap-3">
       <AgentCodeBlock
         filename="rank.ts"
         language="typescript"

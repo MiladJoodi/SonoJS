@@ -55,7 +55,7 @@ export function CitationsDefault() {
   }, [replay])
 
   return (
-    <div className="mx-auto flex w-full max-w-lg flex-col gap-4">
+    <div className="mx-auto flex min-h-[18rem] w-full max-w-lg flex-col gap-4">
       <p className="text-sm leading-relaxed text-foreground/85">
         Summer demand spikes for stone-fruit flavors — peach and apricot lead
         <Citation citationId="wiki" index={1} idPrefix={PREFIX} />
@@ -71,16 +71,20 @@ export function CitationsDefault() {
         onOpenChange={setOpen}
         title="Sources"
       />
-      {done ? (
-        <button
-          type="button"
-          onClick={() => setReplay((n) => n + 1)}
-          className="inline-flex cursor-pointer items-center gap-1.5 self-start text-xs font-medium text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
-        >
-          <RotateCcwIcon className="size-3.5" />
-          Replay
-        </button>
-      ) : null}
+      <button
+        type="button"
+        onClick={() => setReplay((n) => n + 1)}
+        tabIndex={done ? undefined : -1}
+        aria-hidden={!done}
+        className={
+          done
+            ? "inline-flex cursor-pointer items-center gap-1.5 self-start text-xs font-medium text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
+            : "invisible pointer-events-none inline-flex cursor-pointer items-center gap-1.5 self-start text-xs font-medium text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
+        }
+      >
+        <RotateCcwIcon className="size-3.5" />
+        Replay
+      </button>
     </div>
   )
 }

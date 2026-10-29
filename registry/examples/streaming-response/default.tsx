@@ -34,6 +34,7 @@ export function StreamingResponseDefault() {
   const [text, setText] = React.useState("")
   const [status, setStatus] =
     React.useState<StreamingResponseStatus>("streaming")
+  const done = status === "complete"
 
   React.useEffect(() => {
     setText("")
@@ -51,27 +52,31 @@ export function StreamingResponseDefault() {
   }, [replay])
 
   return (
-    <div className="mx-auto flex w-full max-w-lg flex-col gap-3">
+    <div className="mx-auto flex min-h-[20rem] w-full max-w-lg flex-col gap-3">
       <StreamingResponse
         key={replay}
         status={status}
         copyText={FULL}
-        sources={status === "complete" ? SOURCES : []}
+        sources={done ? SOURCES : []}
         defaultSourcesOpen
         onRetry={() => setReplay((n) => n + 1)}
       >
         <p>{text || "\u00a0"}</p>
       </StreamingResponse>
-      {status === "complete" ? (
-        <button
-          type="button"
-          onClick={() => setReplay((n) => n + 1)}
-          className="inline-flex cursor-pointer items-center gap-1.5 self-start text-xs font-medium text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
-        >
-          <RotateCcwIcon className="size-3.5" />
-          Replay
-        </button>
-      ) : null}
+      <button
+        type="button"
+        onClick={() => setReplay((n) => n + 1)}
+        tabIndex={done ? undefined : -1}
+        aria-hidden={!done}
+        className={
+          done
+            ? "inline-flex cursor-pointer items-center gap-1.5 self-start text-xs font-medium text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
+            : "invisible pointer-events-none inline-flex cursor-pointer items-center gap-1.5 self-start text-xs font-medium text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
+        }
+      >
+        <RotateCcwIcon className="size-3.5" />
+        Replay
+      </button>
     </div>
   )
 }

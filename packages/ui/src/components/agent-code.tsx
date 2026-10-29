@@ -130,7 +130,8 @@ export function AgentCodeLine({
                     token.dark ?? token.light ?? "currentColor",
                 } as CSSProperties
               }
-              className="text-[var(--agent-code-light)] dark:text-[var(--agent-code-dark)]"
+              // CSS vars (not inline `color`) so `.dark` / nested dark islands switch correctly.
+              className="text-[color:var(--agent-code-light)] dark:text-[color:var(--agent-code-dark)]"
             >
               {token.content}
             </span>

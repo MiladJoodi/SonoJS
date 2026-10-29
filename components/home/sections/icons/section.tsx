@@ -99,7 +99,8 @@ export function HomeIconsSection() {
               alt="SonoJS icons collection preview"
               width={1624}
               height={969}
-              className="mx-auto h-auto max-h-[14rem] w-auto object-contain sm:max-h-none sm:w-full"
+              draggable={false}
+              className="mx-auto h-auto max-h-[14rem] w-auto select-none object-contain sm:max-h-none sm:w-full"
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 800px"
               quality={100}
               unoptimized

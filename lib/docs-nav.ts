@@ -40,10 +40,6 @@ export const componentsNav: {
           title: "Agent Activity 2",
           href: "/docs/components/agent-activity-2",
         },
-        {
-          title: "Agent Code Block",
-          href: "/docs/components/agent-code-block",
-        },
         { title: "Approval Card", href: "/docs/components/approval-card" },
         { title: "Attachment", href: "/docs/components/attachment" },
         { title: "Bubble", href: "/docs/components/bubble" },
@@ -201,6 +197,7 @@ export const componentsNav: {
           featured: true,
         },
         { title: "Carousel", href: "/docs/components/carousel" },
+        { title: "Code Panel", href: "/docs/components/code-panel" },
         { title: "Data Table", href: "/docs/components/data-table" },
         { title: "Pagination", href: "/docs/components/pagination" },
         { title: "Table", href: "/docs/components/table", featured: true },

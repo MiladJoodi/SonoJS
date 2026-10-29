@@ -13,79 +13,32 @@ export const metadata = componentDocsMetadata("code-block", "Code Block")
 
 const exampleDefs = [
   {
-    name: "code-block-syntax",
-    title: "Syntax Highlighting",
+    name: "agent-code-block-streaming",
+    title: "Streaming",
     description:
-      'Set `language` on `CodeBlockContent` (e.g. `language="tsx"`) for Dark+ colors.',
+      "`status=\"streaming\"` shows Writing and auto-scrolls as tokens arrive. Replay remounts the stream.",
+    requires: ["agent-code"],
+    npmRequires: ["lucide-react", "motion", "shiki"],
   },
   {
-    name: "code-block-default",
-    title: "Basic",
-    description: 'CLI output with `language="bash"`.',
-  },
-  {
-    name: "code-block-header",
-    title: "Header",
+    name: "agent-code-block-default",
+    title: "Ready",
     description:
-      "`CodeBlockHeader` with a title and `CodeBlockCopyButton`.",
-  },
-  {
-    name: "code-block-line-numbers",
-    title: "Line Numbers",
-    description: 'Combine `language` with `lineNumbers` for numbered source.',
-  },
-  {
-    name: "code-block-wrap",
-    title: "Wrap",
-    description: "Set `wrap` so long error lines break instead of scrolling.",
-  },
-  {
-    name: "code-block-diff",
-    title: "Diff",
-    description:
-      'Highlight with `useHighlightedCode`, then mark lines `added` / `removed`.',
-    requires: ["use-highlighted-code"],
-  },
-  {
-    name: "code-block-size",
-    title: "Size",
-    description: 'Use `size="sm"` for compact terminal traces.',
-  },
-  {
-    name: "code-block-destructive",
-    title: "Destructive",
-    description: 'Use `variant="destructive"` for compile errors and failures.',
+      "Complete AI code surface with filename, language, line numbers, and copy.",
+    requires: ["agent-code"],
+    npmRequires: ["lucide-react", "motion", "shiki"],
   },
 ]
 
-const usageSource = `import {
-  CodeBlock,
-  CodeBlockActions,
-  CodeBlockContent,
-  CodeBlockCopyButton,
-  CodeBlockHeader,
-  CodeBlockTitle,
-} from "@/components/ui/code-block"
+const usageSource = `import { AgentCodeBlock } from "@/components/sonojs/agent-code-block"
 
 export function Example() {
-  const code = \`import { Button } from "@/components/ui/button"
-
-export function SaveBar() {
-  return <Button>Save changes</Button>
-}\`
-
   return (
-    <CodeBlock>
-      <CodeBlockHeader>
-        <CodeBlockTitle>save-bar.tsx</CodeBlockTitle>
-        <CodeBlockActions>
-          <CodeBlockCopyButton value={code} />
-        </CodeBlockActions>
-      </CodeBlockHeader>
-      <CodeBlockContent language="tsx" lineNumbers>
-        {code}
-      </CodeBlockContent>
-    </CodeBlock>
+    <AgentCodeBlock
+      filename="app.ts"
+      language="typescript"
+      code={\`export const answer = 42\`}
+    />
   )
 }`
 
@@ -99,24 +52,27 @@ export default async function CodeBlockDocsPage() {
         pathname="/docs/components/code-block"
         description={
           <p className="leading-relaxed text-muted-foreground">
-          Displays code, terminal output and diffs with an optional header,
-          line numbers and a copy button. Pass{" "}
-          <code className="sono-inline-code">language</code> for Shiki Dark+
-          highlighting. Content stays{" "}
-          <code className="sono-inline-code">dir=&quot;ltr&quot;</code>.
-        </p>
+            A syntax-highlighted code block for AI-generated code, with copy
+            support — streaming Writing status, line numbers, and highlights.
+            Content stays{" "}
+            <code className="sono-inline-code">dir=&quot;ltr&quot;</code>.
+          </p>
         }
       />
 
       <section className="space-y-4">
-        <ComponentVariantPreview examples={examples} showDirection={false}  previewSurface="card" />
+        <ComponentVariantPreview examples={examples} previewSurface="card" />
       </section>
 
-      <DocsInstallation name="code-block" />
+      <DocsInstallation name="agent-code-block" />
 
       <section className="space-y-3">
         <h2 className="text-h3">Usage</h2>
-        <ComponentSource title="code-block.tsx" lang="tsx" code={usageSource} />
+        <ComponentSource
+          title="agent-code-block.tsx"
+          lang="tsx"
+          code={usageSource}
+        />
       </section>
 
       <section className="space-y-3">
@@ -124,41 +80,70 @@ export default async function CodeBlockDocsPage() {
         <DocsApiProps
           rows={[
             {
-              name: "variant",
-              type: '"default" | "destructive"',
-              defaultValue: '"default"',
-              description: "Tone of the block surface.",
-            },
-            {
-              name: "size",
-              type: '"default" | "sm"',
-              defaultValue: '"default"',
-              description: "Density. Small suits tool / trace output.",
+              name: "code",
+              type: "string",
+              defaultValue: "—",
+              description: "Source text to highlight.",
             },
             {
               name: "language",
-              type: "string",
+              type: "AgentCodeLanguage",
+              defaultValue: '"typescript"',
+              description: "Highlighter language.",
+            },
+            {
+              name: "filename",
+              type: "ReactNode",
               defaultValue: "—",
-              description:
-                "On CodeBlockContent — Shiki id (`tsx`, `json`, `bash`, …).",
+              description: "Optional filename in the header.",
+            },
+            {
+              name: "status",
+              type: '"streaming" | "complete"',
+              defaultValue: '"complete"',
+              description: "Shows Writing vs Ready in the header.",
+            },
+            {
+              name: "showLineNumbers",
+              type: "boolean",
+              defaultValue: "true",
+              description: "Renders a gutter with line numbers.",
+            },
+            {
+              name: "highlightLines",
+              type: "number[]",
+              defaultValue: "[]",
+              description: "1-based line numbers to tint.",
+            },
+            {
+              name: "maxHeight",
+              type: "number",
+              defaultValue: "280",
+              description: "Scroll viewport max height in pixels.",
             },
             {
               name: "wrap",
               type: "boolean",
               defaultValue: "false",
-              description: "On CodeBlockContent — wrap long lines.",
+              description: "Wrap long lines instead of horizontal scroll.",
             },
             {
-              name: "lineNumbers",
+              name: "copyable",
               type: "boolean",
-              defaultValue: "false",
-              description: "On CodeBlockContent — show a line number gutter.",
+              defaultValue: "true",
+              description: "Shows the copy control in the header.",
             },
             {
-              name: "startLine",
-              type: "number",
-              defaultValue: "1",
-              description: "On CodeBlockContent — first line number in the gutter.",
+              name: "onCopy",
+              type: "() => void",
+              defaultValue: "—",
+              description: "Optional override for the copy action.",
+            },
+            {
+              name: "className",
+              type: "string",
+              defaultValue: "—",
+              description: "Optional class names on the root.",
             },
           ]}
         />
