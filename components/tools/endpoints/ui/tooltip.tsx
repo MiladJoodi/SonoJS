@@ -4,7 +4,8 @@ import * as React from "react"
 import { Tooltip as TooltipPrimitive } from "@base-ui/react/tooltip"
 import { cn } from "@/lib/utils"
 
-const DESKTOP_HOVER_MQ = "(hover: hover) and (pointer: fine)"
+const DESKTOP_HOVER_MQ =
+  "(hover: hover) and (pointer: fine) and (min-width: 768px)"
 
 /** True only on fine-pointer hover devices (desktop mouse) — not phone/tablet touch. */
 function useDesktopHover() {

@@ -6,6 +6,7 @@ import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
+  useDesktopHover,
 } from "@/components/ui/tooltip"
 import { cn } from "@/lib/utils"
 
@@ -46,26 +47,33 @@ export function SoftButton({
   children: React.ReactNode
   className?: string
 }) {
+  const desktopHover = useDesktopHover()
+
+  const button = (
+    <button
+      type="button"
+      aria-label={label}
+      aria-pressed={pressed}
+      onClick={onClick}
+      className={cn(
+        "inline-flex cursor-pointer items-center justify-center gap-1.5 rounded-none px-2.5 text-[12.5px] font-medium transition-colors",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 focus-visible:ring-inset",
+        pressed
+          ? "bg-card text-foreground shadow-sm"
+          : "text-muted-foreground hover:bg-muted/80 hover:text-foreground",
+        className
+      )}
+    >
+      {children}
+    </button>
+  )
+
+  /* Touch / narrow viewports: aria-label only — no tooltip chrome. */
+  if (!desktopHover) return button
+
   return (
     <Tooltip>
-      <TooltipTrigger asChild>
-        <button
-          type="button"
-          aria-label={label}
-          aria-pressed={pressed}
-          onClick={onClick}
-          className={cn(
-            "inline-flex cursor-pointer items-center justify-center gap-1.5 rounded-none px-2.5 text-[12.5px] font-medium transition-colors",
-            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 focus-visible:ring-inset",
-            pressed
-              ? "bg-card text-foreground shadow-sm"
-              : "text-muted-foreground hover:bg-muted/80 hover:text-foreground",
-            className
-          )}
-        >
-          {children}
-        </button>
-      </TooltipTrigger>
+      <TooltipTrigger asChild>{button}</TooltipTrigger>
       <TooltipContent side="top" className="text-xs">
         {label}
       </TooltipContent>
