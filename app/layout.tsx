@@ -1,3 +1,4 @@
+import { ClerkProvider } from "@clerk/nextjs"
 import type { Metadata } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
@@ -17,7 +18,7 @@ import "./globals.css"
 const geistSans = Geist({
   variable: "--font-sono-sans",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "500", "600", "700", "800"],
 })
 
 const geistMono = Geist_Mono({
@@ -93,20 +94,22 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="style-vega flex min-h-full flex-col font-sans text-body">
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <PreviewDirectionProvider>
-            <TooltipProvider delayDuration={400}>
-              {children}
-              <DocsToaster />
-            </TooltipProvider>
-          </PreviewDirectionProvider>
-          <Analytics />
-        </ThemeProvider>
+        <ClerkProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <PreviewDirectionProvider>
+              <TooltipProvider delayDuration={400}>
+                {children}
+                <DocsToaster />
+              </TooltipProvider>
+            </PreviewDirectionProvider>
+            <Analytics />
+          </ThemeProvider>
+        </ClerkProvider>
       </body>
     </html>
   )

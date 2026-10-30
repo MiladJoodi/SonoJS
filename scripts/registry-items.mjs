@@ -7329,6 +7329,53 @@ const registryItemsRaw = [
       },
     ],
   },
+  ...[
+    [
+      "offer-card-01",
+      "Classic limited-offer upsell with meteor border (default speed 0.9), shine headline, pricing, and social proof.",
+    ],
+    [
+      "offer-card-02",
+      "Pricing Most Popular Pro tier — meteor border (default speed 0.9), yearly billing, checklist.",
+    ],
+    [
+      "offer-card-03",
+      "Glassmorphic Aura studio card — violet meteor (default speed 0.9), dual orbs, lifetime price.",
+    ],
+    [
+      "offer-card-04",
+      "Dark enterprise seat card — emerald meteor (default speed 0.9), team features, sales CTA.",
+    ],
+    [
+      "offer-card-05",
+      "Flash lifetime deal — amber meteor (default speed 0.9), countdown badge, deep discount.",
+    ],
+  ].map(([slug, description]) => ({
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: `registry/blocks/marketing/offer-card/${slug}/offer-card.tsx`,
+        type: "registry:component",
+        target: `components/blocks/marketing/${slug}/offer-card.tsx`,
+      },
+      {
+        path: "registry/blocks/marketing/offer-card/_lib/meteor-border.tsx",
+        type: "registry:component",
+        target: "components/blocks/marketing/_lib/meteor-border.tsx",
+      },
+      ...(slug === "offer-card-01"
+        ? [1, 2, 3, 4, 5].map((n) => ({
+            path: `registry/blocks/marketing/offer-card/offer-card-01/images/avatar-${n}.webp`,
+            type: "registry:file",
+            target: `components/blocks/marketing/offer-card-01/images/avatar-${n}.webp`,
+          }))
+        : []),
+    ],
+  })),
   {
     name: "cta-01",
     type: "registry:block",

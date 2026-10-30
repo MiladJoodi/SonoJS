@@ -10,10 +10,14 @@ import { cn } from "@/lib/utils"
  * One gap token (`--sidebar-content-gap`) so sidebar and main never sit flush.
  */
 export const SIDEBAR_LAYOUT_PROVIDER_CLASS =
-  "min-h-min flex-1 items-start px-0 lg:grid lg:grid-cols-[var(--sidebar-width)_minmax(0,1fr)] lg:gap-x-[var(--sidebar-content-gap)]"
+  "min-h-min flex-1 items-start px-0 lg:grid lg:grid-cols-[var(--sidebar-width)_minmax(0,1fr)] lg:gap-x-[var(--sidebar-content-gap)] xl:grid-cols-[var(--sidebar-width)_minmax(0,1fr)_var(--offer-rail-width)]"
 
 export const SIDEBAR_LAYOUT_MAIN_CLASS =
   "h-full w-full min-w-0 max-w-none py-6 md:py-8"
+
+/** Desktop-only third column for the free-account offer card (docs / blocks / charts). */
+export const OFFER_RAIL_CLASS =
+  "sticky top-[calc(var(--header-height)+0.6rem)] z-20 hidden w-full min-h-0 shrink-0 self-start pe-1 pt-2 xl:flex xl:flex-col"
 
 /**
  * Sticky docs nav (shadcn-style): stays while the page scrolls; list scrolls inside.

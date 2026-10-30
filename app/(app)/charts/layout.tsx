@@ -4,6 +4,7 @@ import {
   SIDEBAR_LAYOUT_MAIN_CLASS,
   SIDEBAR_LAYOUT_PROVIDER_CLASS,
 } from "@/components/sidebar-nav"
+import { WorkspaceOfferRail } from "@/components/workspace-offer-rail"
 import { SidebarProvider } from "@sonojs/ui/components/sidebar"
 
 export default function ChartsLayout({
@@ -20,6 +21,7 @@ export default function ChartsLayout({
           <div data-workspace-main="" className={SIDEBAR_LAYOUT_MAIN_CLASS}>
             {children}
           </div>
+          <WorkspaceOfferRail />
         </SidebarProvider>
       </div>
     </div>

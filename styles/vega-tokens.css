@@ -97,7 +97,7 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 
   --sidebar-width: 240px;
-  --content-max: 1600px;
+  --content-max: 1400px;
   --page-gutter: 16px;
   --card-padding: 24px;
   --form-gap: 16px;

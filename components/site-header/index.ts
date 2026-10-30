@@ -1,3 +1,4 @@
+export { AuthControls } from "./auth-controls"
 export { SiteHeader } from "./site-header"
 export { GithubLink } from "./github-link"
 export { MainNav } from "./main-nav"

@@ -169,6 +169,11 @@ import Cta06 from "@/registry/blocks/marketing/cta/cta-06/cta"
 import Cta07 from "@/registry/blocks/marketing/cta/cta-07/cta"
 import Cta08 from "@/registry/blocks/marketing/cta/cta-08/cta"
 import Cta09 from "@/registry/blocks/marketing/cta/cta-09/cta"
+import OfferCard01 from "@/registry/blocks/marketing/offer-card/offer-card-01/offer-card"
+import OfferCard02 from "@/registry/blocks/marketing/offer-card/offer-card-02/offer-card"
+import OfferCard03 from "@/registry/blocks/marketing/offer-card/offer-card-03/offer-card"
+import OfferCard04 from "@/registry/blocks/marketing/offer-card/offer-card-04/offer-card"
+import OfferCard05 from "@/registry/blocks/marketing/offer-card/offer-card-05/offer-card"
 import Stats01 from "@/registry/blocks/marketing/stats/stats-01/stats"
 import Stats02 from "@/registry/blocks/marketing/stats/stats-02/stats"
 import Stats03 from "@/registry/blocks/marketing/stats/stats-03/stats"
@@ -1610,6 +1615,51 @@ const views: Record<string, ComponentType> = {
       <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
         <div className="w-full">
           <ArticleLayout05 />
+        </div>
+      </div>
+    )
+  },
+  "offer-card-01": function OfferCard01View() {
+    return (
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-4 py-10 sm:px-6 md:px-10 md:py-14">
+        <div className="flex w-full max-w-[300px] justify-center">
+          <OfferCard01 />
+        </div>
+      </div>
+    )
+  },
+  "offer-card-02": function OfferCard02View() {
+    return (
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-4 py-10 sm:px-6 md:px-10 md:py-14">
+        <div className="flex w-full max-w-[320px] justify-center">
+          <OfferCard02 />
+        </div>
+      </div>
+    )
+  },
+  "offer-card-03": function OfferCard03View() {
+    return (
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-4 py-10 sm:px-6 md:px-10 md:py-14">
+        <div className="flex w-full max-w-[300px] justify-center">
+          <OfferCard03 />
+        </div>
+      </div>
+    )
+  },
+  "offer-card-04": function OfferCard04View() {
+    return (
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-4 py-10 sm:px-6 md:px-10 md:py-14">
+        <div className="flex w-full max-w-[300px] justify-center">
+          <OfferCard04 />
+        </div>
+      </div>
+    )
+  },
+  "offer-card-05": function OfferCard05View() {
+    return (
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-4 py-10 sm:px-6 md:px-10 md:py-14">
+        <div className="flex w-full max-w-[300px] justify-center">
+          <OfferCard05 />
         </div>
       </div>
     )

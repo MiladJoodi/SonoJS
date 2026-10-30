@@ -21,7 +21,7 @@ Follow `AGENTS.md` → **Design System Standards**. Tokens: `app/globals.css`.
 | Checkbox / Switch | `size-4` · switch `h-[1.15rem]` × `w-8` |
 | Body / button text | 16 / 14 medium (typography tokens frozen) |
 | Icon default | Lucide 16px |
-| Content max / sidebar | 1280px / 240px |
+| Content max / sidebar | full viewport (`100%`) / 240px |
 | Spacing | 4px scale |
 | Responsive | Same 46px controls on mobile/tablet/desktop; adapt width/stack only |
 

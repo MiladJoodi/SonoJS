@@ -163,6 +163,7 @@ export const blocksNavCatalog: BlocksNavGroup[] = [
       block("marketing", "Testimonials", { status: "ready" }),
       block("marketing", "Logo Cloud"),
       block("marketing", "Newsletter", { status: "ready" }),
+      block("marketing", "Offer Card", { status: "ready" }),
       block("marketing", "Blog", { status: "ready" }),
       block("marketing", "Portfolio", {
         status: "ready",

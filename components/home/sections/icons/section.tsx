@@ -1,5 +1,6 @@
 import Link from "next/link"
 
+import { HomeShell } from "@/components/home/home-shell"
 import { HomeSectionHeading } from "@/components/home/section-heading"
 import { IconsScatter } from "@/components/home/sections/icons/icons-scatter"
 import { siteConfig } from "@/lib/config"
@@ -42,7 +43,7 @@ export function HomeIconsSection() {
         }}
       />
 
-      <div className="workspace-shell relative z-10 mx-auto w-full max-w-[1180px] px-4 py-10 sm:px-7 sm:py-20 lg:py-24">
+      <HomeShell className="py-10 sm:py-20 lg:py-24">
         <div className="grid items-center gap-8 sm:gap-12 lg:grid-cols-2 lg:gap-[clamp(2.5rem,6vw,5rem)]">
           <div className="contents lg:flex lg:flex-col lg:justify-center">
             <HomeSectionHeading
@@ -105,7 +106,7 @@ export function HomeIconsSection() {
             <IconsScatter />
           </div>
         </div>
-      </div>
+      </HomeShell>
     </section>
   )
 }

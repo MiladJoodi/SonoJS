@@ -1,6 +1,7 @@
 import Link from "next/link"
 
 import { HeroShowcase } from "@/components/home/hero-showcase"
+import { HomeShell } from "@/components/home/home-shell"
 import { PlatformBadges } from "@/components/home/platform-badges"
 import { siteConfig } from "@/lib/config"
 import { Button } from "@sonojs/ui/components/button"
@@ -30,7 +31,7 @@ export function HomeHero() {
         }}
       />
 
-      <div className="workspace-shell relative z-10 mx-auto flex w-full max-w-[1180px] flex-1 flex-col justify-center px-4 pt-6 pb-[max(3rem,calc(1.5rem+env(safe-area-inset-bottom)))] sm:px-7 sm:pt-14 sm:pb-20 lg:pt-16 lg:pb-24">
+      <HomeShell className="flex flex-1 flex-col justify-center pt-6 pb-[max(3rem,calc(1.5rem+env(safe-area-inset-bottom)))] sm:pt-14 sm:pb-20 lg:pt-16 lg:pb-24">
         <div className="grid items-start gap-7 sm:gap-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-center lg:gap-[clamp(2.5rem,6vw,5.5rem)]">
           <section
             className="min-w-0 text-start"
@@ -108,7 +109,7 @@ export function HomeHero() {
             <HeroShowcase />
           </div>
         </div>
-      </div>
+      </HomeShell>
     </div>
   )
 }

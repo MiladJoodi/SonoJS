@@ -1,4 +1,4 @@
-import { ComponentSource } from "@/components/docs"
+import { AgentPromptCard, ComponentSource } from "@/components/docs"
 import { siteConfig } from "@/lib/config"
 import { docsGuideMetadata } from "@/lib/seo"
 
@@ -21,6 +21,8 @@ export default function McpDocsPage() {
           writes.
         </p>
       </header>
+
+      <AgentPromptCard />
 
       <section className="space-y-4">
         <h2 className="text-h3">Init</h2>

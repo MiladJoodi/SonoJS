@@ -263,23 +263,17 @@
 }
 
 /**
- * Site frame — header, footer, home, docs, charts, and blocks.
- * Wide and centered, with an inset so content stays off the viewport edges.
+ * Site frame — header, footer, docs, charts, and blocks.
+ * Full viewport width with a modest gutter (≈ px-6). Homepage body uses
+ * `HomeShell` (~1180px) separately.
  */
 .workspace-shell,
 .container-wrapper {
   margin-inline: auto;
   width: 100%;
   min-width: 0;
-  max-width: var(--content-max);
+  max-width: none;
   padding-inline: 1.5rem;
-}
-
-@media (min-width: 1024px) {
-  .workspace-shell,
-  .container-wrapper {
-    padding-inline: 2rem;
-  }
 }
 
 @utility text-h1 {
@@ -475,10 +469,11 @@
   --header-height: 3.5rem;
 
   /* Layout */
-  --content-max: 1600px;
+  --content-max: 1400px;
   --sidebar-width: 240px;
+  --offer-rail-width: 300px;
   /* Gap between sticky sidebar column and main content (docs / charts / blocks) */
-  --sidebar-content-gap: var(--space-8);
+  --sidebar-content-gap: var(--space-6);
   --page-gutter: 16px;
   --card-padding: 24px;
   --form-gap: 16px;

@@ -159,7 +159,7 @@ Fonts (Geist) and brand colors stay SonoJS — only dimensions and radius follow
 4px scale: 4, 8, 12, 16, 20, 24, 32, 48, 64 (`--space-*`).
 
 - Form gaps 16px · Card padding 20–24px · Section 48–64px
-- Mobile gutters 16px · Content max ~1280px · Desktop sidebar ~240px
+- Mobile gutters 16px · Content max full viewport · Desktop sidebar ~240px
 
 ## Icons
 

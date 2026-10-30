@@ -22,6 +22,17 @@ export const siteConfig = {
     "React components, blocks, charts, and cursors for Tailwind apps. Add with the SonoJS CLI or generate UI via MCP.",
   /** One-command MCP client setup (auto-detect + merge-safe `sonojs` entry). */
   mcpInitCommand: "npx @sonojs/ui@latest mcp init",
+  /** Short prompt users paste into coding agents to set up SonoJS MCP. */
+  mcpAgentSetupPrompt: `# Set up SonoJS MCP
+
+In this project root:
+
+1. Run: npx @sonojs/ui@latest mcp init
+2. Reload MCP in the client (Cursor: Settings → MCP, or restart).
+3. Verify with list_components / search_components, or get_add_command for "button".
+4. Install only via the returned \`npx @sonojs/ui@latest add …\` command — do not invent registry names or hand-edit unrelated MCP servers.
+
+Ask before changing MCP config outside this project.`,
   links: {
     github: "https://github.com/MiladJoodi/SonoJS",
   },
