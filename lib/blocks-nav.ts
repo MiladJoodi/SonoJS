@@ -51,6 +51,7 @@ export const blocksNavCatalog: BlocksNavGroup[] = [
       "Chat Composer",
       "Message Thread",
       "Agent Run Timeline",
+      "AI Usage Chart",
       "Tool Execution Viewer",
       "Human Approval",
       "Agent Activity",
@@ -70,6 +71,9 @@ export const blocksNavCatalog: BlocksNavGroup[] = [
         return block("ai-agents", title, { status: "ready", featured: true })
       }
       if (title === "Chat Composer") {
+        return block("ai-agents", title, { status: "ready" })
+      }
+      if (title === "AI Usage Chart") {
         return block("ai-agents", title, { status: "ready" })
       }
       return block("ai-agents", title)

@@ -2167,6 +2167,27 @@ const registryItemsRaw = [
     ],
   },
   {
+    name: "ai-sidebar",
+    type: "registry:ui",
+    title: "AI Sidebar",
+    description:
+      "A feature-packed AI navigation sidebar with chat history, search, and profile footer.",
+    dependencies: [
+      "motion",
+      "lucide-react",
+      "clsx",
+      "tailwind-merge",
+    ],
+    registryDependencies: ["button", "input", "avatar"],
+    files: [
+      {
+        path: "packages/ui/src/components/ai-sidebar.tsx",
+        type: "registry:ui",
+        target: "components/sonojs/ai-sidebar.tsx",
+      },
+    ],
+  },
+  {
     name: "task-rows",
     type: "registry:ui",
     title: "Task Rows",
@@ -2178,6 +2199,27 @@ const registryItemsRaw = [
         path: "packages/ui/src/components/task-rows.tsx",
         type: "registry:ui",
         target: "components/sonojs/task-rows.tsx",
+      },
+    ],
+  },
+  {
+    name: "terminal",
+    type: "registry:ui",
+    title: "Terminal",
+    description:
+      "A streaming terminal surface for ANSI build and agent logs, with copy and clear.",
+    dependencies: [
+      "ansi-to-react",
+      "lucide-react",
+      "clsx",
+      "tailwind-merge",
+    ],
+    registryDependencies: ["button", "spinner"],
+    files: [
+      {
+        path: "packages/ui/src/components/terminal.tsx",
+        type: "registry:ui",
+        target: "components/sonojs/terminal.tsx",
       },
     ],
   },
@@ -2194,6 +2236,26 @@ const registryItemsRaw = [
         path: "packages/ui/src/components/todo-list.tsx",
         type: "registry:ui",
         target: "components/sonojs/todo-list.tsx",
+      },
+    ],
+  },
+  {
+    name: "transcription",
+    type: "registry:ui",
+    title: "Transcription",
+    description:
+      "Interactive, time-synced transcript segments with click-to-seek playback.",
+    dependencies: ["clsx", "tailwind-merge"],
+    files: [
+      {
+        path: "packages/ui/src/components/transcription/index.tsx",
+        type: "registry:ui",
+        target: "components/sonojs/transcription/index.tsx",
+      },
+      {
+        path: "packages/ui/src/components/transcription/media/demo.mp3",
+        type: "registry:file",
+        target: "components/sonojs/transcription/media/demo.mp3",
       },
     ],
   },
@@ -2801,6 +2863,21 @@ const registryItemsRaw = [
     ],
   },
   {
+    name: "electro-border",
+    type: "registry:ui",
+    title: "Electro Border",
+    description:
+      "A dynamic SVG turbulence border with optional glow, aura, and overlay.",
+    dependencies: ["clsx", "tailwind-merge"],
+    files: [
+      {
+        path: "packages/ui/src/components/electro-border.tsx",
+        type: "registry:ui",
+        target: "components/ui/electro-border.tsx",
+      },
+    ],
+  },
+  {
     name: "field",
     type: "registry:ui",
     title: "Field",
@@ -2823,8 +2900,9 @@ const registryItemsRaw = [
   {
     name: "fluid-orb",
     type: "registry:ui",
-    title: "Fluid Orb",
-    description: "A WebGL fluid orb for AI idle and thinking states.",
+    title: "Fluid AI Orb",
+    description:
+      "A WebGL fluid AI orb for idle and thinking states (pair with Voice AI Orb).",
     dependencies: ["clsx", "tailwind-merge"],
     files: [
       {
@@ -2901,6 +2979,22 @@ const registryItemsRaw = [
         path: "packages/ui/src/components/image-generation-2/media/design.png",
         type: "registry:file",
         target: "components/sonojs/image-generation-2/media/design.png",
+      },
+    ],
+  },
+  {
+    name: "inline-citation",
+    type: "registry:ui",
+    title: "Inline Citation",
+    description:
+      "Hoverable citations inline with text — source pills and a carousel of titles, URLs, and quotes.",
+    dependencies: ["lucide-react", "clsx", "tailwind-merge"],
+    registryDependencies: ["badge", "carousel", "hover-card"],
+    files: [
+      {
+        path: "packages/ui/src/components/inline-citation.tsx",
+        type: "registry:ui",
+        target: "components/sonojs/inline-citation.tsx",
       },
     ],
   },
@@ -3176,6 +3270,70 @@ const registryItemsRaw = [
     ],
   },
   {
+    name: "mic-selector",
+    type: "registry:ui",
+    title: "Mic Selector",
+    description:
+      "A searchable popover for picking an audio input — permission-aware labels and live device updates.",
+    dependencies: ["lucide-react", "clsx", "tailwind-merge"],
+    registryDependencies: ["button", "command", "popover"],
+    files: [
+      {
+        path: "packages/ui/src/components/mic-selector.tsx",
+        type: "registry:ui",
+        target: "components/sonojs/mic-selector.tsx",
+      },
+    ],
+  },
+  {
+    name: "model-selector",
+    type: "registry:ui",
+    title: "Model Selector",
+    description:
+      "A searchable dialog for picking an AI model — grouped by chef, with provider logos.",
+    dependencies: ["lucide-react", "clsx", "tailwind-merge"],
+    registryDependencies: ["dialog", "command"],
+    files: [
+      {
+        path: "packages/ui/src/components/model-selector.tsx",
+        type: "registry:ui",
+        target: "components/sonojs/model-selector.tsx",
+      },
+    ],
+  },
+  {
+    name: "open-in-chat",
+    type: "registry:ui",
+    title: "Open In Chat",
+    description:
+      "A dropdown that opens a prompt in ChatGPT, Claude, Cursor, T3, Scira, or v0.",
+    dependencies: ["lucide-react", "clsx", "tailwind-merge"],
+    registryDependencies: ["button", "dropdown-menu"],
+    files: [
+      {
+        path: "packages/ui/src/components/open-in-chat.tsx",
+        type: "registry:ui",
+        target: "components/sonojs/open-in-chat.tsx",
+      },
+    ],
+  },
+  {
+    name: "queue",
+    type: "registry:ui",
+    title: "Queue",
+    description:
+      "Collapsible sections for queued messages, todos, and attachments in AI workflows.",
+    dependencies: ["lucide-react", "clsx", "tailwind-merge"],
+    registryDependencies: ["button", "collapsible", "scroll-area"],
+    files: [
+      {
+        path: "packages/ui/src/components/queue.tsx",
+        type: "registry:ui",
+        target: "components/sonojs/queue.tsx",
+      },
+    ],
+  },
+  {
     name: "native-select",
     type: "registry:ui",
     title: "Native Select",
@@ -3222,6 +3380,25 @@ const registryItemsRaw = [
         path: "packages/ui/src/components/pagination.tsx",
         type: "registry:ui",
         target: "components/ui/pagination.tsx",
+      },
+    ],
+  },
+  {
+    name: "persona",
+    type: "registry:ui",
+    title: "Persona",
+    description:
+      "An animated AI visual powered by Rive WebGL2 for idle, listening, thinking, speaking, and asleep.",
+    dependencies: [
+      "@rive-app/react-webgl2",
+      "clsx",
+      "tailwind-merge",
+    ],
+    files: [
+      {
+        path: "packages/ui/src/components/persona.tsx",
+        type: "registry:ui",
+        target: "components/sonojs/persona.tsx",
       },
     ],
   },
@@ -3758,6 +3935,57 @@ const registryItemsRaw = [
     ],
   },
   {
+    name: "voice-selector",
+    type: "registry:ui",
+    title: "Voice Selector",
+    description:
+      "A searchable dialog for picking an AI voice — preview playback and metadata.",
+    dependencies: ["lucide-react@^1.61.0", "clsx", "tailwind-merge"],
+    registryDependencies: ["button", "dialog", "command", "spinner"],
+    files: [
+      {
+        path: "packages/ui/src/components/voice-selector/index.tsx",
+        type: "registry:ui",
+        target: "components/sonojs/voice-selector/index.tsx",
+      },
+      {
+        path: "packages/ui/src/components/voice-selector/demo-previews.ts",
+        type: "registry:ui",
+        target: "components/sonojs/voice-selector/demo-previews.ts",
+      },
+      {
+        path: "packages/ui/src/components/voice-selector/media/liam.mp3",
+        type: "registry:file",
+        target: "components/sonojs/voice-selector/media/liam.mp3",
+      },
+      {
+        path: "packages/ui/src/components/voice-selector/media/adam.mp3",
+        type: "registry:file",
+        target: "components/sonojs/voice-selector/media/adam.mp3",
+      },
+      {
+        path: "packages/ui/src/components/voice-selector/media/alice.mp3",
+        type: "registry:file",
+        target: "components/sonojs/voice-selector/media/alice.mp3",
+      },
+      {
+        path: "packages/ui/src/components/voice-selector/media/bill.mp3",
+        type: "registry:file",
+        target: "components/sonojs/voice-selector/media/bill.mp3",
+      },
+      {
+        path: "packages/ui/src/components/voice-selector/media/jessica.mp3",
+        type: "registry:file",
+        target: "components/sonojs/voice-selector/media/jessica.mp3",
+      },
+      {
+        path: "packages/ui/src/components/voice-selector/media/lily.mp3",
+        type: "registry:file",
+        target: "components/sonojs/voice-selector/media/lily.mp3",
+      },
+    ],
+  },
+  {
     name: "attachment",
     type: "registry:ui",
     title: "Attachment",
@@ -3806,6 +4034,23 @@ const registryItemsRaw = [
         path: "registry/blocks/ai-agents/agent-run-timeline/agent-run-timeline.tsx",
         type: "registry:component",
         target: "components/blocks/agent-run-timeline.tsx",
+      },
+    ],
+  },
+  {
+    name: "ai-usage-chart",
+    type: "registry:block",
+    title: "AI Usage Chart",
+    description:
+      "Monitor token consumption, model costs, request throughput, and latency.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["motion", "lucide-react"],
+    registryDependencies: ["button", "badge"],
+    files: [
+      {
+        path: "registry/blocks/ai-agents/ai-usage-chart/ai-usage-chart.tsx",
+        type: "registry:component",
+        target: "components/blocks/ai-usage-chart.tsx",
       },
     ],
   },

@@ -24,7 +24,7 @@ export function SoftGroup({
       role="group"
       aria-label={label}
       className={cn(
-        "inline-flex h-8 items-stretch overflow-hidden rounded-md border border-border/70 bg-card",
+        "inline-flex h-8 items-stretch overflow-hidden rounded-md border border-border/70 bg-muted divide-x divide-border/70",
         className
       )}
     >
@@ -58,8 +58,8 @@ export function SoftButton({
             "inline-flex cursor-pointer items-center justify-center gap-1.5 rounded-none px-2.5 text-[12.5px] font-medium transition-colors",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 focus-visible:ring-inset",
             pressed
-              ? "bg-canvas text-foreground"
-              : "text-muted-foreground hover:text-foreground",
+              ? "bg-card text-foreground shadow-sm"
+              : "text-muted-foreground hover:bg-muted/80 hover:text-foreground",
             className
           )}
         >

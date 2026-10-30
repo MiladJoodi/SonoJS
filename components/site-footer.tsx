@@ -14,11 +14,7 @@ const footerLinks = [
 
 export function SiteFooter() {
   const pathname = usePathname()
-  if (
-    pathname === "/" ||
-    pathname === "/tools/endpoints" ||
-    pathname.startsWith("/tools/endpoints/")
-  ) {
+  if (pathname === "/" || pathname.startsWith("/tools/")) {
     return null
   }
 

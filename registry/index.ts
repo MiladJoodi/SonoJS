@@ -33,6 +33,13 @@ export const registry = {
         "An expandable agent trace for steps, reasoning, search, and coding.",
     },
     {
+      name: "ai-sidebar",
+      type: "registry:ui" as const,
+      title: "AI Sidebar",
+      description:
+        "A feature-packed AI navigation sidebar with chat history, search, and profile footer.",
+    },
+    {
       name: "approval-card",
       type: "registry:ui" as const,
       title: "Approval Card",
@@ -182,6 +189,13 @@ export const registry = {
         "Displays a menu of actions triggered by a button — shortcuts, submenus, checkboxes, and radios.",
     },
     {
+      name: "electro-border",
+      type: "registry:ui" as const,
+      title: "Electro Border",
+      description:
+        "A dynamic SVG turbulence border with optional glow, aura, and overlay.",
+    },
+    {
       name: "empty",
       type: "registry:ui" as const,
       title: "Empty",
@@ -197,8 +211,9 @@ export const registry = {
     {
       name: "fluid-orb",
       type: "registry:ui" as const,
-      title: "Fluid Orb",
-      description: "A WebGL fluid orb for AI idle and thinking states.",
+      title: "Fluid AI Orb",
+      description:
+        "A WebGL fluid AI orb for idle and thinking states (pair with Voice AI Orb).",
     },
     {
       name: "hover-card",
@@ -220,6 +235,13 @@ export const registry = {
       title: "Image Generation 2",
       description:
         "An animated loading state that reveals an AI-generated image when it is ready.",
+    },
+    {
+      name: "inline-citation",
+      type: "registry:ui" as const,
+      title: "Inline Citation",
+      description:
+        "Hoverable citations inline with text — source pills and a carousel of titles, URLs, and quotes.",
     },
     {
       name: "input",
@@ -284,6 +306,34 @@ export const registry = {
         "A chat scroll container that anchors turns, follows streamed responses, and jumps to any message.",
     },
     {
+      name: "mic-selector",
+      type: "registry:ui" as const,
+      title: "Mic Selector",
+      description:
+        "A searchable popover for picking an audio input — permission-aware labels and live device updates.",
+    },
+    {
+      name: "model-selector",
+      type: "registry:ui" as const,
+      title: "Model Selector",
+      description:
+        "A searchable dialog for picking an AI model — grouped by chef, with provider logos.",
+    },
+    {
+      name: "open-in-chat",
+      type: "registry:ui" as const,
+      title: "Open In Chat",
+      description:
+        "A dropdown that opens a prompt in ChatGPT, Claude, Cursor, T3, Scira, or v0.",
+    },
+    {
+      name: "queue",
+      type: "registry:ui" as const,
+      title: "Queue",
+      description:
+        "Collapsible sections for queued messages, todos, and attachments in AI workflows.",
+    },
+    {
       name: "native-select",
       type: "registry:ui" as const,
       title: "Native Select",
@@ -303,6 +353,13 @@ export const registry = {
       description: "Pagination with page navigation, next and previous links.",
     },
     {
+      name: "persona",
+      type: "registry:ui" as const,
+      title: "Persona",
+      description:
+        "An animated AI visual powered by Rive WebGL2 for idle, listening, thinking, speaking, and asleep.",
+    },
+    {
       name: "textarea",
       type: "registry:ui" as const,
       title: "Textarea",
@@ -310,11 +367,25 @@ export const registry = {
         "Displays a form textarea or a component that looks like a textarea.",
     },
     {
+      name: "terminal",
+      type: "registry:ui" as const,
+      title: "Terminal",
+      description:
+        "A streaming terminal surface for ANSI build and agent logs, with copy and clear.",
+    },
+    {
       name: "thinking-orbs",
       type: "registry:ui" as const,
       title: "Thinking Orbs",
       description:
         "Animated orb states that visualize an AI agent's work.",
+    },
+    {
+      name: "transcription",
+      type: "registry:ui" as const,
+      title: "Transcription",
+      description:
+        "Interactive, time-synced transcript segments with click-to-seek playback.",
     },
     {
       name: "label",
@@ -490,6 +561,13 @@ export const registry = {
       title: "Voice AI Orb",
       description:
         "A voice-agent status orb for listening, reasoning, and speaking.",
+    },
+    {
+      name: "voice-selector",
+      type: "registry:ui" as const,
+      title: "Voice Selector",
+      description:
+        "A searchable dialog for picking an AI voice — preview playback and metadata.",
     },
   ],
   blocks: [

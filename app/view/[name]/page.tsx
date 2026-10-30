@@ -283,6 +283,7 @@ import AiChat02 from "@/registry/blocks/ai-agents/ai-chat/ai-chat-02/ai-chat"
 import AiChat03 from "@/registry/blocks/ai-agents/ai-chat/ai-chat-03/ai-chat"
 import AgentWorkspace01 from "@/registry/blocks/ai-agents/agent-workspace/agent-workspace-01/agent-workspace"
 import { AgentRunTimeline } from "@/registry/blocks/ai-agents/agent-run-timeline/agent-run-timeline"
+import { AiUsageChart } from "@/registry/blocks/ai-agents/ai-usage-chart/ai-usage-chart"
 import ChatComposer01 from "@/registry/blocks/ai-agents/chat-composer/chat-composer-01/chat-composer"
 import ChatComposer02 from "@/registry/blocks/ai-agents/chat-composer/chat-composer-02/chat-composer"
 import ChatComposer03 from "@/registry/blocks/ai-agents/chat-composer/chat-composer-03/chat-composer"
@@ -2768,6 +2769,21 @@ const views: Record<string, ComponentType> = {
     return (
       <div className="h-dvh w-full bg-white dark:bg-background">
         <AgentRunTimeline />
+      </div>
+    )
+  },
+  "ai-usage-chart": function AiUsageChartView() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-6 py-10 dark:bg-background">
+        <div className="w-full max-w-4xl">
+          <AiUsageChart
+            timeRange="7d"
+            activeMetric="tokens"
+            chartType="area"
+            budgetLimit={100}
+            currentSpend={37.2}
+          />
+        </div>
       </div>
     )
   },

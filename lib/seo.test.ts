@@ -70,9 +70,11 @@ describe("seo helpers", () => {
   it("classifies noindex paths", () => {
     expect(isNoindexPath("/view/login-01")).toBe(true)
     expect(isNoindexPath("/tools/endpoints")).toBe(true)
+    expect(isNoindexPath("/tools/markdown-editor")).toBe(true)
     expect(isNoindexPath("/docs/components/button")).toBe(false)
     expect(NOINDEX_PATH_PREFIXES).toContain("/view")
     expect(NOINDEX_EXACT_PATHS).toContain("/tools/endpoints")
+    expect(NOINDEX_EXACT_PATHS).toContain("/tools/markdown-editor")
   })
 
   it("disables indexing on Vercel preview and SEO_NOINDEX", () => {
@@ -108,10 +110,11 @@ describe("sitemap builder", () => {
       expect(p.startsWith("/api")).toBe(false)
       expect(p.startsWith("/r")).toBe(false)
       expect(p).not.toBe("/tools/endpoints")
+      expect(p).not.toBe("/tools/markdown-editor")
     }
   })
 
-  it("includes core hubs and excludes endpoints", () => {
+  it("includes core hubs and excludes tool workspaces", () => {
     const paths = new Set(buildSitemapPaths())
     expect(paths.has("/")).toBe(true)
     expect(paths.has("/docs")).toBe(true)
@@ -121,6 +124,7 @@ describe("sitemap builder", () => {
     expect(paths.has("/charts")).toBe(true)
     expect(paths.has("/tools")).toBe(true)
     expect(paths.has("/tools/endpoints")).toBe(false)
+    expect(paths.has("/tools/markdown-editor")).toBe(false)
     expect(paths.has("/view/login-01")).toBe(false)
   })
 })

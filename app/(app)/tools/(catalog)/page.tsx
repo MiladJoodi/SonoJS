@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 
-import { getAllToolItems, toolsNav } from "@/lib/tools-nav"
+import { getAllToolItems } from "@/lib/tools-nav"
 import { cn } from "@/lib/utils"
 
 import { pageMetadata } from "@/lib/seo"
@@ -25,7 +25,6 @@ export default function ToolsIndexPage() {
         </p>
         {tools.length > 0 ? (
           <p className="text-sm text-muted-foreground">
-            {toolsNav.length} {toolsNav.length === 1 ? "group" : "groups"} ·{" "}
             {tools.length} {tools.length === 1 ? "tool" : "tools"}
           </p>
         ) : null}
@@ -34,38 +33,25 @@ export default function ToolsIndexPage() {
       {tools.length === 0 ? (
         <p className="text-sm text-muted-foreground">No tools yet.</p>
       ) : (
-        <div className="space-y-8">
-          {toolsNav.map((group) => (
-            <section key={group.title} className="space-y-3">
-              <div className="flex items-baseline justify-between gap-3">
-                <h2 className="text-h4">{group.title}</h2>
-                <span className="text-xs text-muted-foreground tabular-nums">
-                  {group.items.length}
+        <ul className="grid grid-cols-[repeat(auto-fill,minmax(min(100%,220px),1fr))] gap-1">
+          {tools.map((item) => (
+            <li key={item.href}>
+              <Link
+                href={item.href}
+                className={cn(
+                  "flex min-h-[46px] cursor-pointer flex-col justify-center gap-0.5 rounded-[12px] border border-transparent px-3 py-2 text-sm transition-colors hover:border-border/70 hover:bg-card"
+                )}
+              >
+                <span className="truncate font-medium text-foreground">
+                  {item.title}
                 </span>
-              </div>
-              <ul className="grid grid-cols-[repeat(auto-fill,minmax(min(100%,220px),1fr))] gap-1">
-                {group.items.map((item) => (
-                  <li key={item.href}>
-                    <Link
-                      href={item.href}
-                      className={cn(
-                        "flex min-h-[46px] cursor-pointer flex-col justify-center gap-0.5 rounded-[12px] border border-transparent px-3 py-2 text-sm transition-colors hover:border-border/70 hover:bg-card"
-                      )}
-                    >
-
-                      <span className="truncate font-medium text-foreground">
-                        {item.title}
-                      </span>
-                      <span className="truncate text-xs text-muted-foreground">
-                        {item.description}
-                      </span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </section>
+                <span className="truncate text-xs text-muted-foreground">
+                  {item.description}
+                </span>
+              </Link>
+            </li>
           ))}
-        </div>
+        </ul>
       )}
     </article>
   )

@@ -36,18 +36,34 @@ function TooltipProvider({
 }
 
 function Tooltip({
-  open,
+  open: openProp,
+  defaultOpen,
   onOpenChange,
   ...props
 }: React.ComponentProps<typeof TooltipPrimitive.Root>) {
   const desktopHover = useDesktopHover()
+  // Always control `open` as a boolean so touch-gating never flips
+  // uncontrolled ↔ controlled (Radix warns; home / docs hit this on hydrate).
+  const [uncontrolledOpen, setUncontrolledOpen] = React.useState(
+    () => defaultOpen ?? false
+  )
+  const isControlled = openProp !== undefined
+  const open = desktopHover
+    ? isControlled
+      ? openProp
+      : uncontrolledOpen
+    : false
 
   return (
     <TooltipPrimitive.Root
       data-slot="tooltip"
       {...props}
-      open={desktopHover ? open : false}
-      onOpenChange={desktopHover ? onOpenChange : undefined}
+      open={open}
+      onOpenChange={(next) => {
+        if (!desktopHover) return
+        if (!isControlled) setUncontrolledOpen(next)
+        onOpenChange?.(next)
+      }}
     />
   )
 }

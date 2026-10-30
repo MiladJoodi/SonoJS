@@ -1,0 +1,1 @@
+export { OpenInChatDefault } from "./default"

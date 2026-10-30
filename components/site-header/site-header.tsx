@@ -36,6 +36,7 @@ export function SiteHeader({
           <Link
             href="/"
             prefetch={false}
+            aria-label="SonoJS"
             className="me-2 flex shrink-0 cursor-pointer items-center gap-2 outline-none focus-visible:rounded-md focus-visible:ring-2 focus-visible:ring-ring"
           >
             <img
@@ -46,7 +47,7 @@ export function SiteHeader({
               height={22}
               className="h-[22px] w-auto shrink-0"
             />
-            <span className="text-sm font-bold leading-none tracking-tight text-foreground">
+            <span className="text-sm font-bold leading-none tracking-tight text-foreground lg:hidden">
               Sono
             </span>
           </Link>

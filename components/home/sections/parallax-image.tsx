@@ -94,7 +94,6 @@ export function HomeParallaxImage({
           className
         )}
         sizes={sizes}
-        quality={100}
         unoptimized
       />
     </div>

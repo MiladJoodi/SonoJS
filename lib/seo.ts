@@ -28,7 +28,10 @@ function shareImages(alt?: string): NonNullable<Metadata["openGraph"]>["images"]
 
 /** Paths / prefixes that must never appear in the sitemap and use noindex. */
 export const NOINDEX_PATH_PREFIXES = ["/view"] as const
-export const NOINDEX_EXACT_PATHS = ["/tools/endpoints"] as const
+export const NOINDEX_EXACT_PATHS = [
+  "/tools/endpoints",
+  "/tools/markdown-editor",
+] as const
 
 export function isProductionIndexingEnabled(): boolean {
   if (process.env.SEO_NOINDEX === "1") return false

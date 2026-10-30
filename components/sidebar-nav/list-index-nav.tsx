@@ -21,11 +21,14 @@ export function ListIndexNav({
   current,
   children,
   className,
+  /** Workspace shells sit below SiteHeader already — skip sticky header offset. */
+  flush = false,
 }: {
   title?: string
   current?: string | null
   children: React.ReactNode
   className?: string
+  flush?: boolean
 }) {
   const [open, setOpen] = React.useState(false)
   const pathname = usePathname()
@@ -41,7 +44,10 @@ export function ListIndexNav({
       <div
         data-list-index-nav=""
         className={cn(
-          "sticky top-(--header-height) z-40 border-b border-border/80 bg-background/95 backdrop-blur-md transition-[top] duration-300 ease-out supports-backdrop-filter:bg-background/80 [[data-header-hidden]_&]:top-0 lg:hidden",
+          "z-40 border-b border-border/80 bg-background/95 backdrop-blur-md supports-backdrop-filter:bg-background/80 lg:hidden",
+          flush
+            ? "relative top-0 shrink-0"
+            : "sticky top-(--header-height) transition-[top] duration-300 ease-out [[data-header-hidden]_&]:top-0",
           className
         )}
       >
@@ -50,7 +56,11 @@ export function ListIndexNav({
             type="button"
             variant="ghost"
             onClick={() => setOpen(true)}
-            className="h-11 w-full cursor-pointer justify-start gap-2.5 rounded-none px-0 text-sm font-medium hover:bg-transparent"
+            className={cn(
+              "h-11 w-full cursor-pointer justify-start gap-2.5 rounded-none px-0 text-sm font-medium hover:bg-transparent",
+              /* Room for workspace actions overlaid on this row (Write/Preview/…) */
+              flush && "pe-[9.5rem]"
+            )}
             aria-expanded={open}
             aria-controls="list-index-sheet"
           >

@@ -57,8 +57,9 @@ export default function ToolsLayout({
           : "flex-1"
       )}
     >
-      <ToolsListIndex />
-      <div className="workspace-shell flex min-h-0 flex-1 flex-col">
+      {/* Same mobile index as docs/blocks: bar → sheet from the start edge */}
+      <ToolsListIndex flush={isWorkspace} />
+      <div className="workspace-shell flex min-h-0 min-w-0 flex-1 flex-col">
         <SidebarProvider
           className={cn(
             "flex w-full min-w-0 px-0",

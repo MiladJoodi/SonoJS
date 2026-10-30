@@ -16,7 +16,7 @@ const revalidateImmediately = [
 
 const nextConfig: NextConfig = {
   // Workspace package — must transpile + watch for HMR
-  transpilePackages: ["@sonojs/ui"],
+  transpilePackages: ["@sonojs/ui", "@mdxeditor/editor"],
   // Keep Shiki off Turbopack transforms (token colors / grammars stay intact)
   serverExternalPackages: ["shiki"],
   // Slow disks freeze on Turbopack FS cache compaction — disable in local dev

@@ -9,7 +9,7 @@ import { withVariantCode } from "@/lib/docs-variant-examples"
 
 import { componentDocsMetadata } from "@/lib/seo"
 
-export const metadata = componentDocsMetadata("fluid-orb", "Fluid Orb")
+export const metadata = componentDocsMetadata("fluid-orb", "Fluid AI Orb")
 
 const exampleDefs = [
   {
@@ -42,7 +42,7 @@ export default async function FluidOrbDocsPage() {
   return (
     <article className="w-full min-w-0 space-y-10">
       <DocsPageHeader
-        title="Fluid Orb"
+        title="Fluid AI Orb"
         pathname="/docs/components/fluid-orb"
         description={
           <p className="leading-relaxed text-muted-foreground">

@@ -35,18 +35,32 @@ function TooltipProvider({
 }
 
 function Tooltip({
-  open,
+  open: openProp,
+  defaultOpen,
   onOpenChange,
   ...props
 }: TooltipPrimitive.Root.Props) {
   const desktopHover = useDesktopHover()
+  const [uncontrolledOpen, setUncontrolledOpen] = React.useState(
+    () => defaultOpen ?? false
+  )
+  const isControlled = openProp !== undefined
+  const open = desktopHover
+    ? isControlled
+      ? openProp
+      : uncontrolledOpen
+    : false
 
   return (
     <TooltipPrimitive.Root
       data-slot="tooltip"
       {...props}
-      open={desktopHover ? open : false}
-      onOpenChange={desktopHover ? onOpenChange : undefined}
+      open={open}
+      onOpenChange={(next, eventDetails) => {
+        if (!desktopHover) return
+        if (!isControlled) setUncontrolledOpen(next)
+        onOpenChange?.(next, eventDetails)
+      }}
     />
   )
 }

@@ -25,7 +25,7 @@ export function ChartExampleCard({
       href={chartViewHref(id)}
       aria-label={pending ? `${title} (pending)` : title}
       className={cn(
-        "group flex w-full cursor-pointer flex-col overflow-hidden rounded-[12px] border border-border/70 bg-card text-start no-underline outline-none shadow-soft",
+        "group flex w-full cursor-pointer flex-col overflow-hidden rounded-[12px] border border-border/70 bg-card text-start no-underline outline-none",
         "transition-[border-color,background-color] hover:border-border",
         "focus-visible:ring-2 focus-visible:ring-ring",
         pending && "opacity-80"

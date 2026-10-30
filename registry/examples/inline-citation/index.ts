@@ -1,0 +1,1 @@
+export { InlineCitationDefault } from "./default"

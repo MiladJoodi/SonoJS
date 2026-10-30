@@ -19,7 +19,7 @@ export const siteConfig = {
   name: "SonoJS",
   url: resolveAppUrl(),
   description:
-    "A modern React UI library with beautifully crafted components, blocks, and charts. Connect your AI agent via MCP to build with SonoJS and generate real UI directly in your codebase.",
+    "React components, blocks, and charts for Tailwind apps. Add with the SonoJS CLI or generate UI via MCP.",
   /** One-command MCP client setup (auto-detect + merge-safe `sonojs` entry). */
   mcpInitCommand: "npx @sonojs/ui@latest mcp init",
   links: {
