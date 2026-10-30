@@ -199,3 +199,28 @@ export function chartViewMetadata(
     index,
   })
 }
+
+export function cursorCategoryMetadata(
+  category: string,
+  title: string,
+  description: string
+): Metadata {
+  return pageMetadata({
+    title: `${title} cursors`,
+    description,
+    path: `/cursors/${category}`,
+  })
+}
+
+export function cursorViewMetadata(
+  id: string,
+  title: string,
+  index: boolean
+): Metadata {
+  return pageMetadata({
+    title: `${title} cursor`,
+    description: `Interactive ${title} cursor effect for SonoJS — preview, install command, and source.`,
+    path: `/cursors/view/${id}`,
+    index,
+  })
+}

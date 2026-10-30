@@ -195,7 +195,7 @@ export const chartDemoLoaders: Record<
     import("./bar/ranged-stacked-bar-chart"),
   "tiny-bar-chart": () => import("./bar/tiny-bar-chart"),
   "bar-active": () => import("./bar/bar-active"),
-  timeline: () => import("./bar/timeline"),
+  "timeline-chart": () => import("./bar/timeline"),
   "animated-bar-width": () => import("./bar/animated-bar-width"),
   "animated-bar-time-series": () => import("./bar/animated-bar-time-series"),
   "custom-shape-bar-chart": () => import("./bar/custom-shape-bar-chart"),

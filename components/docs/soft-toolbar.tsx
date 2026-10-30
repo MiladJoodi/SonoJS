@@ -2,12 +2,6 @@
 
 import * as React from "react"
 
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-  useDesktopHover,
-} from "@/components/ui/tooltip"
 import { cn } from "@/lib/utils"
 
 /** Segmented chrome shared by docs VariantPreview and blocks BlockExample. */
@@ -47,9 +41,7 @@ export function SoftButton({
   children: React.ReactNode
   className?: string
 }) {
-  const desktopHover = useDesktopHover()
-
-  const button = (
+  return (
     <button
       type="button"
       aria-label={label}
@@ -66,17 +58,5 @@ export function SoftButton({
     >
       {children}
     </button>
-  )
-
-  /* Touch / narrow viewports: aria-label only — no tooltip chrome. */
-  if (!desktopHover) return button
-
-  return (
-    <Tooltip>
-      <TooltipTrigger asChild>{button}</TooltipTrigger>
-      <TooltipContent side="top" className="text-xs">
-        {label}
-      </TooltipContent>
-    </Tooltip>
   )
 }

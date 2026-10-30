@@ -1,6 +1,12 @@
 "use client"
 
 import * as React from "react"
+import {
+  ArrowUpRightIcon,
+  BriefcaseBusinessIcon,
+  CpuIcon,
+  StoreIcon,
+} from "lucide-react"
 
 import { Button } from "@sonojs/ui/components/button"
 import { Checkbox } from "@sonojs/ui/components/checkbox"
@@ -29,17 +35,26 @@ const PARTNERSHIP_TYPES = [
   {
     id: "reseller",
     title: "Reseller",
+    eyebrow: "Go-to-market",
     description: "Sell SonoJS to your customers with margin and enablement.",
+    icon: StoreIcon,
+    outcomes: ["Partner margin", "Sales enablement", "Deal desk support"],
   },
   {
     id: "technology",
     title: "Technology",
-    description: "Integrate or co-ship product with shared roadmap.",
+    eyebrow: "Product",
+    description: "Integrate or co-ship with a shared roadmap and APIs.",
+    icon: CpuIcon,
+    outcomes: ["API access", "Co-marketing", "Shared roadmap"],
   },
   {
     id: "agency",
     title: "Agency",
+    eyebrow: "Services",
     description: "Build client work on SonoJS with partner pricing.",
+    icon: BriefcaseBusinessIcon,
+    outcomes: ["Partner pricing", "Certified builds", "Priority support"],
   },
 ] as const
 
@@ -189,41 +204,93 @@ export default function ApplicationForm({
             <Separator className="col-span-full my-2" />
 
             <div className="col-span-full space-y-4">
-              <FieldLabel
-                id="application-form-03-type-label"
-                className="text-sm font-semibold"
-              >
-                Partnership type <RequiredMark />
-              </FieldLabel>
+              <div className="space-y-1">
+                <FieldLabel
+                  id="application-form-03-type-label"
+                  className="text-sm font-semibold"
+                >
+                  Partnership type <RequiredMark />
+                </FieldLabel>
+                <p className="text-sm text-muted-foreground">
+                  Choose the motion that best matches how you go to market.
+                </p>
+              </div>
               <RadioGroup
                 value={partnership}
                 onValueChange={(v) => setPartnership(v as PartnershipId)}
-                className="grid grid-cols-1 gap-3 sm:grid-cols-3"
+                className="grid grid-cols-1 gap-3 md:grid-cols-3"
                 aria-labelledby="application-form-03-type-label"
               >
                 {PARTNERSHIP_TYPES.map((item) => {
                   const selected = partnership === item.id
                   const inputId = `application-form-03-type-${item.id}`
+                  const Icon = item.icon
                   return (
                     <label
                       key={item.id}
                       htmlFor={inputId}
                       className={cn(
-                        "flex cursor-pointer flex-col gap-2 rounded-[12px] border border-border/70 bg-card p-4 shadow-soft transition-colors",
-                        selected && "border-primary bg-primary/5"
+                        "group/type relative flex min-h-[46px] cursor-pointer flex-col gap-4 rounded-[12px] border border-border/70 bg-background p-4 transition-[border-color,box-shadow,background-color]",
+                        "hover:border-border hover:bg-muted/40",
+                        "has-focus-visible:ring-[3px] has-focus-visible:ring-ring/40",
+                        selected &&
+                          "border-primary bg-primary/5 shadow-soft ring-1 ring-primary/30 hover:border-primary hover:bg-primary/5"
                       )}
                     >
-                      <div className="flex items-start justify-between gap-2">
-                        <span className="text-sm font-medium">{item.title}</span>
+                      <div className="flex items-start justify-between gap-3">
+                        <span
+                          className={cn(
+                            "flex size-11 shrink-0 items-center justify-center rounded-[12px] border border-dashed border-border/80 bg-card text-muted-foreground transition-colors",
+                            selected &&
+                              "border-solid border-primary/40 bg-primary/10 text-primary"
+                          )}
+                        >
+                          <Icon className="size-5" aria-hidden />
+                        </span>
                         <RadioGroupItem
                           id={inputId}
                           value={item.id}
-                          className="mt-0.5 cursor-pointer"
+                          className="mt-1 cursor-pointer"
                         />
                       </div>
-                      <p className="text-pretty text-sm text-muted-foreground">
-                        {item.description}
-                      </p>
+
+                      <div className="min-w-0 space-y-1.5 text-start">
+                        <p className="text-[11px] font-medium tracking-[0.14em] text-muted-foreground uppercase">
+                          {item.eyebrow}
+                        </p>
+                        <p className="flex items-center gap-1.5 text-base font-semibold tracking-tight text-foreground">
+                          {item.title}
+                          <ArrowUpRightIcon
+                            className={cn(
+                              "size-3.5 text-muted-foreground opacity-0 transition-opacity icon-dir",
+                              "group-hover/type:opacity-100",
+                              selected && "text-primary opacity-100"
+                            )}
+                            aria-hidden
+                          />
+                        </p>
+                        <p className="text-pretty text-sm leading-5 text-muted-foreground">
+                          {item.description}
+                        </p>
+                      </div>
+
+                      <ul className="mt-auto space-y-1.5 border-t border-border/60 pt-3">
+                        {item.outcomes.map((outcome) => (
+                          <li
+                            key={outcome}
+                            className="flex items-center gap-2 text-sm text-muted-foreground"
+                          >
+                            <span
+                              className={cn(
+                                "size-1.5 shrink-0 rounded-full bg-foreground/30",
+                                selected && "bg-primary"
+                              )}
+                              aria-hidden
+                            />
+                            <span className="min-w-0 text-start">{outcome}</span>
+                          </li>
+                        ))}
+                      </ul>
                     </label>
                   )
                 })}

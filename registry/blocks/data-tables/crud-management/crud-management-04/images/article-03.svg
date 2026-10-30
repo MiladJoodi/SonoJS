@@ -1,0 +1,11 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480">
+  <rect width="800" height="480" fill="#052e2b"/>
+  <path d="M0 355c120-130 215-75 310-170s190 35 245-35 135-30 245 68v262H0Z" fill="#0f766e"/>
+  <path d="M0 405c130-82 230-22 327-91s184 42 271-20 146-20 202 18v168H0Z" fill="#5eead4"/>
+  <circle cx="655" cy="94" r="48" fill="#fef3c7"/>
+  <text x="48" y="82" fill="#ccfbf1" font-family="Arial" font-size="31" font-weight="700">A BETTER ROUTE</text>
+</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360" role="img" aria-label="Guide">
+  <rect width="640" height="360" rx="16" fill="#047857"/>
+  <text x="320" y="190" text-anchor="middle" font-family="system-ui,sans-serif" font-size="40" font-weight="600" fill="#fff">Guide</text>
+</svg>

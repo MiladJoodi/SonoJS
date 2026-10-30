@@ -1,0 +1,11 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480">
+  <rect width="800" height="480" fill="#172554"/>
+  <circle cx="645" cy="105" r="150" fill="#2563eb" opacity=".7"/>
+  <path d="M0 390 210 190l145 126 128-115 317 279H0Z" fill="#60a5fa"/>
+  <path d="M0 435 236 254l123 108 92-77 208 195H0Z" fill="#dbeafe" opacity=".9"/>
+  <text x="55" y="92" fill="#fff" font-family="Arial" font-size="34" font-weight="700">FIELD NOTES</text>
+</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360" role="img" aria-label="Launch">
+  <rect width="640" height="360" rx="16" fill="#1D4ED8"/>
+  <text x="320" y="190" text-anchor="middle" font-family="system-ui,sans-serif" font-size="40" font-weight="600" fill="#fff">Launch</text>
+</svg>

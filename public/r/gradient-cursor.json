@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "gradient-cursor",
+  "type": "registry:cursor",
+  "title": "Gradient Cursor",
+  "description": "Soft dual gradient blobs with spring lag.",
+  "dependencies": [
+    "motion"
+  ],
+  "files": [
+    {
+      "path": "components/cursors/gradient-cursor.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport {\n  type RefObject,\n  useEffect,\n  useState,\n} from \"react\"\nimport { motion, useMotionValue, useSpring } from \"motion/react\"\n\nimport { cn } from \"@/lib/utils\"\n\nexport interface GradientCursorProps {\n  containerRef?: RefObject<HTMLElement | null>\n  className?: string\n}\n\n/**\n * Dual soft gradient blobs with spring lag — black-stage friendly.\n */\nexport function GradientCursor({\n  containerRef,\n  className,\n}: GradientCursorProps) {\n  const [ready, setReady] = useState(false)\n  const [reduced, setReduced] = useState(false)\n  const mx = useMotionValue(0)\n  const my = useMotionValue(0)\n  const aX = useSpring(mx, { stiffness: 120, damping: 20, mass: 0.8 })\n  const aY = useSpring(my, { stiffness: 120, damping: 20, mass: 0.8 })\n  const bX = useSpring(mx, { stiffness: 60, damping: 18, mass: 1.1 })\n  const bY = useSpring(my, { stiffness: 60, damping: 18, mass: 1.1 })\n\n  useEffect(() => {\n    const mq = window.matchMedia(\"(prefers-reduced-motion: reduce)\")\n    setReduced(mq.matches)\n    const onChange = () => setReduced(mq.matches)\n    mq.addEventListener(\"change\", onChange)\n    return () => mq.removeEventListener(\"change\", onChange)\n  }, [])\n\n  useEffect(() => {\n    if (reduced) return\n\n    const root = containerRef?.current ?? null\n    const target: HTMLElement | Window = root ?? window\n\n    const toLocal = (e: MouseEvent) => {\n      if (root) {\n        const rect = root.getBoundingClientRect()\n        return { x: e.clientX - rect.left, y: e.clientY - rect.top }\n      }\n      return { x: e.clientX, y: e.clientY }\n    }\n\n    const onMove = (e: Event) => {\n      const p = toLocal(e as MouseEvent)\n      mx.set(p.x)\n      my.set(p.y)\n      setReady(true)\n    }\n\n    target.addEventListener(\"mousemove\", onMove)\n    return () => target.removeEventListener(\"mousemove\", onMove)\n  }, [containerRef, reduced, mx, my])\n\n  if (reduced || !ready) return null\n\n  const scoped = Boolean(containerRef)\n\n  return (\n    <div\n      className={cn(\n        \"pointer-events-none z-50\",\n        scoped ? \"absolute inset-0\" : \"fixed inset-0\",\n        className\n      )}\n      aria-hidden\n    >\n      <motion.div\n        className=\"absolute size-40 rounded-full blur-2xl\"\n        style={{\n          x: aX,\n          y: aY,\n          translateX: \"-50%\",\n          translateY: \"-50%\",\n          background:\n            \"radial-gradient(circle, rgba(56,189,248,0.55) 0%, transparent 70%)\",\n          mixBlendMode: \"screen\",\n        }}\n      />\n      <motion.div\n        className=\"absolute size-52 rounded-full blur-3xl\"\n        style={{\n          x: bX,\n          y: bY,\n          translateX: \"-40%\",\n          translateY: \"-60%\",\n          background:\n            \"radial-gradient(circle, rgba(232,121,249,0.45) 0%, transparent 68%)\",\n          mixBlendMode: \"screen\",\n        }}\n      />\n      <motion.div\n        className=\"absolute size-3 rounded-full bg-white/90\"\n        style={{\n          x: aX,\n          y: aY,\n          translateX: \"-50%\",\n          translateY: \"-50%\",\n          boxShadow: \"0 0 16px rgba(255,255,255,0.6)\",\n        }}\n      />\n    </div>\n  )\n}\n",
+      "target": "components/cursors/gradient-cursor.tsx"
+    }
+  ],
+  "version": "0.1.0+9c6543fbed07",
+  "generatedAt": "2026-10-30T17:30:40.356Z"
+}

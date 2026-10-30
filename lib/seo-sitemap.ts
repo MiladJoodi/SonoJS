@@ -8,6 +8,7 @@ import {
   chartCategoryHref,
   chartViewHref,
 } from "@/lib/charts-catalog"
+import { cursorsCatalog, cursorViewHref } from "@/lib/cursors-catalog"
 import { getDocsComponentPages, getDocsGuidePages } from "@/lib/docs-nav"
 import {
   absoluteUrl,
@@ -58,6 +59,11 @@ export function sitemapPathExists(href: string): boolean {
     const category = normalized.slice("/charts/".length)
     return (CHART_CATEGORIES as readonly string[]).includes(category)
   }
+  if (normalized.startsWith("/cursors/view/")) {
+    const id = normalized.slice("/cursors/view/".length)
+    if (!id || id.includes("/")) return false
+    return cursorsCatalog.some((e) => e.id === id && e.status === "ported")
+  }
   return appPageFileCandidates(normalized).some((file) => existsSync(file))
 }
 
@@ -89,6 +95,7 @@ export function buildSitemapPaths(): string[] {
   pushUnique(paths, "/")
   pushUnique(paths, "/blocks")
   pushUnique(paths, "/charts")
+  pushUnique(paths, "/cursors")
   pushUnique(paths, "/tools")
   pushUnique(paths, "/docs/components")
 
@@ -108,6 +115,10 @@ export function buildSitemapPaths(): string[] {
   for (const entry of chartsCatalog) {
     if (entry.status !== "ported") continue
     pushUnique(paths, chartViewHref(entry.id))
+  }
+  for (const entry of cursorsCatalog) {
+    if (entry.status !== "ported") continue
+    pushUnique(paths, cursorViewHref(entry.id))
   }
 
   return [...paths].sort((a, b) => a.localeCompare(b))

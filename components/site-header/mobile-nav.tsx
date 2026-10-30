@@ -9,6 +9,7 @@ import {
   LayoutGridIcon,
   LayoutTemplateIcon,
   MenuIcon,
+  MousePointer2Icon,
   ShapesIcon,
   WrenchIcon,
   XIcon,
@@ -29,6 +30,7 @@ const NAV_ICONS: Record<string, LucideIcon> = {
   "/docs/components": LayoutGridIcon,
   "/blocks": LayoutTemplateIcon,
   "/charts": ChartAreaIcon,
+  "/cursors": MousePointer2Icon,
   "/tools": WrenchIcon,
   "https://icons.sonojs.com": ShapesIcon,
 }

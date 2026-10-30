@@ -180,7 +180,7 @@ export default async function ChartViewPage({
     id === "bar-active" ||
     id === "bar-interactive" ||
     id === "bar-horizontal" ||
-    id === "timeline" ||
+    id === "timeline-chart" ||
     id === "animated-bar-width" ||
     id === "animated-bar-time-series" ||
     id === "custom-shape-bar-chart" ||
@@ -969,10 +969,10 @@ export default async function ChartViewPage({
                                     name: "BarHorizontal",
                                     path: "@/components/charts/bar-horizontal",
                                   }
-                        : id === "timeline"
+                        : id === "timeline-chart"
                           ? {
                               name: "TimelineChart",
-                              path: "@/components/charts/timeline",
+                              path: "@/components/charts/timeline-chart",
                             }
                         : id === "animated-bar-width"
                           ? {

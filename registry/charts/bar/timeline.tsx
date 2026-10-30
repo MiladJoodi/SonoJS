@@ -26,7 +26,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 /**
  * Timeline — locked gallery chrome with type-required ranged horizontal bars.
  * Outcome colors use semantic tokens (status); cycles = soft vs solid.
- * Installs to: components/charts/timeline.tsx
+ * Installs to: components/charts/timeline-chart.tsx
  */
 
 export type TimelineOutcome = "success" | "error" | "pending"

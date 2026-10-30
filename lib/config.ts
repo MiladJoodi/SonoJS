@@ -19,7 +19,7 @@ export const siteConfig = {
   name: "SonoJS",
   url: resolveAppUrl(),
   description:
-    "React components, blocks, and charts for Tailwind apps. Add with the SonoJS CLI or generate UI via MCP.",
+    "React components, blocks, charts, and cursors for Tailwind apps. Add with the SonoJS CLI or generate UI via MCP.",
   /** One-command MCP client setup (auto-detect + merge-safe `sonojs` entry). */
   mcpInitCommand: "npx @sonojs/ui@latest mcp init",
   links: {
@@ -32,6 +32,7 @@ export const siteConfig = {
     { href: "/docs/components", label: "Components" },
     { href: "/blocks", label: "Blocks" },
     { href: "/charts", label: "Charts" },
+    { href: "/cursors", label: "Cursors" },
     { href: "/tools", label: "Tools" },
     {
       href: "https://icons.sonojs.com",

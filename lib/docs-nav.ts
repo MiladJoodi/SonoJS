@@ -153,10 +153,13 @@ export const componentsNav: {
         { title: "Collapsible", href: "/docs/components/collapsible" },
         { title: "Electro Border", href: "/docs/components/electro-border" },
         { title: "Item", href: "/docs/components/item" },
+        { title: "Marquee", href: "/docs/components/marquee" },
         { title: "Resizable", href: "/docs/components/resizable" },
         { title: "Scroll Area", href: "/docs/components/scroll-area" },
         { title: "Separator", href: "/docs/components/separator" },
+        { title: "Sortable", href: "/docs/components/sortable" },
         { title: "Tabs", href: "/docs/components/tabs", featured: true },
+        { title: "Timeline", href: "/docs/components/timeline" },
       ],
     },
     {

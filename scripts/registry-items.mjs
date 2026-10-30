@@ -6,6 +6,8 @@
 
 import { readFileSync } from "node:fs"
 
+import { cursorRegistryItems } from "./registry-cursor-items.mjs"
+
 /** @typedef {{ path: string, type: string, target?: string }} RegistryFileDef */
 /** @typedef {{
  *   name: string,
@@ -49,6 +51,34 @@ const RAINBOW_BUTTON_CSS = {
   "@keyframes rainbow": {
     "0%": { "background-position": "0%" },
     "100%": { "background-position": "200%" },
+  },
+}
+
+/** Infinite scrolling strip — injected on `sonojs add marquee`. */
+const MARQUEE_CSS_VARS = {
+  theme: {
+    "animate-marquee": "marquee var(--duration) infinite linear",
+    "animate-marquee-vertical":
+      "marquee-vertical var(--duration) linear infinite",
+  },
+}
+
+const MARQUEE_CSS = {
+  "@keyframes marquee": {
+    from: {
+      transform: "translateX(0)",
+    },
+    to: {
+      transform: "translateX(calc(-100% - var(--gap)))",
+    },
+  },
+  "@keyframes marquee-vertical": {
+    from: {
+      transform: "translateY(0)",
+    },
+    to: {
+      transform: "translateY(calc(-100% - var(--gap)))",
+    },
   },
 }
 
@@ -217,6 +247,59 @@ function dataTablesAdvancedGridBlock(
       },
       ...images.map((file) => ({
         path: `registry/blocks/data-tables/advanced-data-grid/${slug}/images/${file}`,
+        type: "registry:file",
+        target: `components/blocks/data-tables/${slug}/images/${file}`,
+      })),
+    ],
+  }
+}
+
+/** Table toolbar + data table composition under Data & Tables. */
+function dataTablesTableToolbarBlock(
+  slug,
+  description,
+  { dependencies, registryDependencies } = {}
+) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    ...(dependencies?.length ? { dependencies } : {}),
+    ...(registryDependencies?.length ? { registryDependencies } : {}),
+    files: [
+      {
+        path: `registry/blocks/data-tables/table-toolbar/${slug}/table.tsx`,
+        type: "registry:component",
+        target: `components/blocks/data-tables/${slug}/table.tsx`,
+      },
+    ],
+  }
+}
+
+/** CRUD management workspace under Data & Tables. */
+function dataTablesCrudManagementBlock(
+  slug,
+  description,
+  { dependencies, registryDependencies, images = [] } = {}
+) {
+  return {
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    ...(dependencies?.length ? { dependencies } : {}),
+    ...(registryDependencies?.length ? { registryDependencies } : {}),
+    files: [
+      {
+        path: `registry/blocks/data-tables/crud-management/${slug}/table.tsx`,
+        type: "registry:component",
+        target: `components/blocks/data-tables/${slug}/table.tsx`,
+      },
+      ...images.map((file) => ({
+        path: `registry/blocks/data-tables/crud-management/${slug}/images/${file}`,
         type: "registry:file",
         target: `components/blocks/data-tables/${slug}/images/${file}`,
       })),
@@ -3224,6 +3307,53 @@ const registryItemsRaw = [
     ],
   },
   {
+    name: "marquee",
+    type: "registry:ui",
+    title: "Marquee",
+    description:
+      "An infinite scrolling strip for text, images, or cards.",
+    dependencies: ["clsx", "tailwind-merge"],
+    cssVars: MARQUEE_CSS_VARS,
+    css: MARQUEE_CSS,
+    files: [
+      {
+        path: "packages/ui/src/components/marquee.tsx",
+        type: "registry:ui",
+        target: "components/ui/marquee.tsx",
+      },
+      {
+        path: "registry/examples/marquee/images/avatar-1.webp",
+        type: "registry:file",
+        target: "components/ui/marquee/images/avatar-1.webp",
+      },
+      {
+        path: "registry/examples/marquee/images/avatar-2.webp",
+        type: "registry:file",
+        target: "components/ui/marquee/images/avatar-2.webp",
+      },
+      {
+        path: "registry/examples/marquee/images/avatar-3.webp",
+        type: "registry:file",
+        target: "components/ui/marquee/images/avatar-3.webp",
+      },
+      {
+        path: "registry/examples/marquee/images/avatar-4.webp",
+        type: "registry:file",
+        target: "components/ui/marquee/images/avatar-4.webp",
+      },
+      {
+        path: "registry/examples/marquee/images/avatar-5.webp",
+        type: "registry:file",
+        target: "components/ui/marquee/images/avatar-5.webp",
+      },
+      {
+        path: "registry/examples/marquee/images/avatar-6.webp",
+        type: "registry:file",
+        target: "components/ui/marquee/images/avatar-6.webp",
+      },
+    ],
+  },
+  {
     name: "menubar",
     type: "registry:ui",
     title: "Menubar",
@@ -3791,6 +3921,179 @@ const registryItemsRaw = [
     ],
   },
   {
+    name: "sortable",
+    type: "registry:ui",
+    title: "Sortable",
+    description:
+      "Drag-and-drop reordering for lists, with keyboard support and an optional overlay.",
+    dependencies: [
+      "@dnd-kit/core@^6.3.1",
+      "@dnd-kit/sortable@^10.0.0",
+      "@dnd-kit/utilities@^3.2.2",
+      "radix-ui",
+      "clsx",
+      "tailwind-merge",
+    ],
+    files: [
+      {
+        path: "packages/ui/src/components/sortable.tsx",
+        type: "registry:ui",
+        target: "components/ui/sortable.tsx",
+      },
+    ],
+  },
+  {
+    name: "sortable-default",
+    type: "registry:component",
+    title: "Sortable Asset Pipeline",
+    description:
+      "Vertical CDN asset list with typed chips, Lucide icons, and toast on reorder. RTL-aware.",
+    registryDependencies: ["sortable", "badge", "sonner"],
+    dependencies: ["lucide-react", "sonner"],
+    files: [
+      {
+        path: "registry/examples/sortable/default.tsx",
+        type: "registry:component",
+        target: "components/examples/sortable-default.tsx",
+      },
+    ],
+  },
+  {
+    name: "sortable-grid",
+    type: "registry:component",
+    title: "Sortable Content Board",
+    description:
+      "Grid mosaic with featured 2×2 span, priority rail, and Lucide type icons. RTL-aware.",
+    registryDependencies: ["sortable", "badge", "sonner"],
+    dependencies: ["lucide-react", "sonner"],
+    files: [
+      {
+        path: "registry/examples/sortable/grid.tsx",
+        type: "registry:component",
+        target: "components/examples/sortable-grid.tsx",
+      },
+    ],
+  },
+  {
+    name: "sortable-nested",
+    type: "registry:component",
+    title: "Sortable Product Variants",
+    description:
+      "Nested sortable option groups and values with color swatches. RTL-aware.",
+    registryDependencies: ["sortable", "badge", "sonner"],
+    dependencies: ["lucide-react", "sonner"],
+    files: [
+      {
+        path: "registry/examples/sortable/nested.tsx",
+        type: "registry:component",
+        target: "components/examples/sortable-nested.tsx",
+      },
+    ],
+  },
+  {
+    name: "sortable-playlist",
+    type: "registry:component",
+    title: "Sortable Playlist",
+    description:
+      "Music queue with now-playing chrome, local album art covers, and Lucide controls. RTL-aware.",
+    registryDependencies: ["sortable", "badge"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/examples/sortable/playlist.tsx",
+        type: "registry:component",
+        target: "components/examples/sortable/playlist.tsx",
+      },
+      ...[
+        "blue-monday.webp",
+        "digital-love.webp",
+        "midnight-city.webp",
+        "starlight.webp",
+        "take-on-me.webp",
+      ].map((file) => ({
+        path: `registry/examples/sortable/images/playlist/${file}`,
+        type: "registry:file",
+        target: `components/examples/sortable/images/playlist/${file}`,
+      })),
+    ],
+  },
+  {
+    name: "sortable-notifications",
+    type: "registry:component",
+    title: "Sortable Notifications",
+    description:
+      "Delivery priority ladder with channel icons and Switch toggles. RTL-aware.",
+    registryDependencies: ["sortable", "badge", "switch"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/examples/sortable/notifications.tsx",
+        type: "registry:component",
+        target: "components/examples/sortable-notifications.tsx",
+      },
+    ],
+  },
+  {
+    name: "sortable-navigation",
+    type: "registry:component",
+    title: "Sortable Navigation",
+    description:
+      "App sidebar nav with active state, count badges, and Lucide icons. RTL-aware.",
+    registryDependencies: ["sortable", "badge"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/examples/sortable/navigation.tsx",
+        type: "registry:component",
+        target: "components/examples/sortable-navigation.tsx",
+      },
+    ],
+  },
+  {
+    name: "sortable-media-library",
+    type: "registry:component",
+    title: "Sortable Media Library",
+    description:
+      "Aspect-square media tiles with local photo thumbs. RTL-aware.",
+    registryDependencies: ["sortable", "badge"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/examples/sortable/media-library.tsx",
+        type: "registry:component",
+        target: "components/examples/sortable/media-library.tsx",
+      },
+      ...[
+        "detail-shot.webp",
+        "hero-banner.webp",
+        "logo-mark.webp",
+        "og-image.webp",
+        "product-shot.webp",
+        "team-photo.webp",
+      ].map((file) => ({
+        path: `registry/examples/sortable/images/media-library/${file}`,
+        type: "registry:file",
+        target: `components/examples/sortable/images/media-library/${file}`,
+      })),
+    ],
+  },
+  {
+    name: "sortable-optimistic",
+    type: "registry:component",
+    title: "Sortable Optimistic Save",
+    description:
+      "Release checklist with onValueCommit, toast.promise, and rollback. RTL-aware.",
+    registryDependencies: ["sortable", "badge", "sonner"],
+    dependencies: ["lucide-react", "sonner"],
+    files: [
+      {
+        path: "registry/examples/sortable/optimistic.tsx",
+        type: "registry:component",
+        target: "components/examples/sortable-optimistic.tsx",
+      },
+    ],
+  },
+  {
     name: "switch",
     type: "registry:ui",
     title: "Switch",
@@ -3822,6 +4125,21 @@ const registryItemsRaw = [
         path: "packages/ui/src/components/tabs.tsx",
         type: "registry:ui",
         target: "components/ui/tabs.tsx",
+      },
+    ],
+  },
+  {
+    name: "timeline",
+    type: "registry:ui",
+    title: "Timeline",
+    description:
+      "Vertical or horizontal event timeline with step progress, indicators, and separators.",
+    dependencies: ["radix-ui", "clsx", "tailwind-merge"],
+    files: [
+      {
+        path: "packages/ui/src/components/timeline.tsx",
+        type: "registry:ui",
+        target: "components/ui/timeline.tsx",
       },
     ],
   },
@@ -7765,6 +8083,222 @@ const registryItemsRaw = [
       },
     ],
   },
+  dataTablesTableToolbarBlock(
+    "table-toolbar-01",
+    "Everyday team table toolbar with search, status/role filters, chips, column visibility, and add member.",
+    {
+      dependencies: ["lucide-react"],
+      registryDependencies: [
+        "badge",
+        "button",
+        "dropdown-menu",
+        "input",
+        "select",
+        "table",
+      ],
+    }
+  ),
+  dataTablesTableToolbarBlock(
+    "table-toolbar-02",
+    "Orders toolbar with faceted filters, date/amount ranges, typed operators, and removable chips.",
+    {
+      dependencies: ["lucide-react"],
+      registryDependencies: [
+        "badge",
+        "button",
+        "checkbox",
+        "input",
+        "popover",
+        "select",
+        "separator",
+        "table",
+      ],
+    }
+  ),
+  dataTablesTableToolbarBlock(
+    "table-toolbar-03",
+    "Projects toolbar with saved views, localStorage persistence, sorting, and column controls.",
+    {
+      dependencies: ["lucide-react"],
+      registryDependencies: [
+        "badge",
+        "button",
+        "dropdown-menu",
+        "input",
+        "popover",
+        "select",
+        "table",
+      ],
+    }
+  ),
+  dataTablesTableToolbarBlock(
+    "table-toolbar-04",
+    "Selection-aware toolbar with bulk status, assign, export, archive, and delete confirmations.",
+    {
+      dependencies: ["lucide-react"],
+      registryDependencies: [
+        "alert-dialog",
+        "badge",
+        "button",
+        "checkbox",
+        "dropdown-menu",
+        "input",
+        "select",
+        "table",
+      ],
+    }
+  ),
+  dataTablesTableToolbarBlock(
+    "table-toolbar-05",
+    "Audit log query builder with AND/OR groups, saved queries, multi-sort, and CSV export.",
+    {
+      dependencies: ["lucide-react"],
+      registryDependencies: [
+        "badge",
+        "button",
+        "dropdown-menu",
+        "input",
+        "select",
+        "table",
+      ],
+    }
+  ),
+  dataTablesCrudManagementBlock(
+    "crud-management-01",
+    "SaaS user administration with invite flow, roles, lifecycle, detail drawer, and bulk actions.",
+    {
+      dependencies: ["lucide-react"],
+      registryDependencies: [
+        "alert",
+        "alert-dialog",
+        "avatar",
+        "badge",
+        "button",
+        "checkbox",
+        "dialog",
+        "dropdown-menu",
+        "field",
+        "input",
+        "label",
+        "pagination",
+        "select",
+        "separator",
+        "sheet",
+        "table",
+        "textarea",
+      ],
+    }
+  ),
+  dataTablesCrudManagementBlock(
+    "crud-management-02",
+    "Ecommerce catalog with table/grid views, variants, inventory adjustments, and product media.",
+    {
+      dependencies: ["lucide-react"],
+      registryDependencies: [
+        "alert",
+        "alert-dialog",
+        "badge",
+        "button",
+        "checkbox",
+        "dialog",
+        "dropdown-menu",
+        "input",
+        "label",
+        "select",
+        "sheet",
+        "switch",
+        "table",
+        "textarea",
+      ],
+      images: [
+        "product-01.svg",
+        "product-02.svg",
+        "product-03.svg",
+        "product-04.svg",
+        "product-05.svg",
+        "product-06.svg",
+      ],
+    }
+  ),
+  dataTablesCrudManagementBlock(
+    "crud-management-03",
+    "Order fulfillment workspace with table, board, timeline, tracking, and simulated refunds.",
+    {
+      dependencies: ["lucide-react"],
+      registryDependencies: [
+        "alert",
+        "alert-dialog",
+        "badge",
+        "button",
+        "dialog",
+        "input",
+        "label",
+        "select",
+        "separator",
+        "sheet",
+        "table",
+        "tabs",
+        "textarea",
+      ],
+    }
+  ),
+  dataTablesCrudManagementBlock(
+    "crud-management-04",
+    "Editorial CMS with article editor, preview, review workflow, and publication calendar.",
+    {
+      dependencies: ["lucide-react"],
+      registryDependencies: [
+        "alert",
+        "alert-dialog",
+        "badge",
+        "button",
+        "calendar",
+        "checkbox",
+        "dialog",
+        "dropdown-menu",
+        "field",
+        "input",
+        "label",
+        "pagination",
+        "popover",
+        "scroll-area",
+        "select",
+        "separator",
+        "sheet",
+        "table",
+        "tabs",
+        "textarea",
+      ],
+      images: [
+        "article-01.svg",
+        "article-02.svg",
+        "article-03.svg",
+        "article-04.svg",
+      ],
+    }
+  ),
+  dataTablesCrudManagementBlock(
+    "crud-management-05",
+    "Support inbox with split view, conversation replies, internal notes, assignment, and SLA.",
+    {
+      dependencies: ["lucide-react"],
+      registryDependencies: [
+        "alert",
+        "alert-dialog",
+        "avatar",
+        "badge",
+        "button",
+        "checkbox",
+        "dropdown-menu",
+        "input",
+        "label",
+        "scroll-area",
+        "select",
+        "separator",
+        "textarea",
+      ],
+    }
+  ),
   dataTablesAdvancedGridBlock(
     "advanced-data-grid-01",
     "Fleet security inventory with KPI strip, status filters, and coverage meters.",
@@ -7806,6 +8340,208 @@ const registryItemsRaw = [
     "Accounts receivable ledger with balances, contact cards, and create-bill CTAs.",
     { dependencies: ["lucide-react"] }
   ),
+  {
+    name: "advanced-filters-01",
+    type: "registry:block",
+    title: "advanced-filters-01",
+    description:
+      "Searchable brand picker — letter avatars, density bars, and selected chips.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    registryDependencies: [
+      "badge",
+      "button",
+      "input",
+      "popover",
+      "separator",
+    ],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/data-tables/advanced-filters/advanced-filters-01/advanced-filters.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/data-tables/advanced-filters-01/advanced-filters.tsx",
+      },
+    ],
+  },
+  {
+    name: "advanced-filters-02",
+    type: "registry:block",
+    title: "advanced-filters-02",
+    description:
+      "Smart commerce filters — live match pulse, icon accordion, shipping cards, and star tiles.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    registryDependencies: [
+      "accordion",
+      "badge",
+      "button",
+      "checkbox",
+      "input",
+      "label",
+      "popover",
+      "radio-group",
+      "separator",
+      "slider",
+    ],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/data-tables/advanced-filters/advanced-filters-02/advanced-filters.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/data-tables/advanced-filters-02/advanced-filters.tsx",
+      },
+    ],
+  },
+  {
+    name: "advanced-filters-03",
+    type: "registry:block",
+    title: "advanced-filters-03",
+    description:
+      "SEO keyword console — side-rail section nav with pill radios and denser controls.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    registryDependencies: [
+      "badge",
+      "button",
+      "checkbox",
+      "label",
+      "popover",
+      "radio-group",
+      "separator",
+      "switch",
+    ],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/data-tables/advanced-filters/advanced-filters-03/advanced-filters.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/data-tables/advanced-filters-03/advanced-filters.tsx",
+      },
+    ],
+  },
+  {
+    name: "advanced-filters-04",
+    type: "registry:block",
+    title: "advanced-filters-04",
+    description:
+      "Shop filter with vertical icon rails — price hero, shipping cards, and brand list.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    registryDependencies: [
+      "badge",
+      "button",
+      "checkbox",
+      "input",
+      "label",
+      "popover",
+      "separator",
+      "slider",
+    ],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/data-tables/advanced-filters/advanced-filters-04/advanced-filters.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/data-tables/advanced-filters-04/advanced-filters.tsx",
+      },
+    ],
+  },
+  {
+    name: "advanced-filters-05",
+    type: "registry:block",
+    title: "advanced-filters-05",
+    description:
+      "Visual property rule builder — include/exclude rails, AND connectors, and live rule preview.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    registryDependencies: [
+      "badge",
+      "button",
+      "input",
+      "label",
+      "popover",
+      "select",
+      "separator",
+    ],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/data-tables/advanced-filters/advanced-filters-05/advanced-filters.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/data-tables/advanced-filters-05/advanced-filters.tsx",
+      },
+    ],
+  },
+  {
+    name: "advanced-filters-06",
+    type: "registry:block",
+    title: "advanced-filters-06",
+    description:
+      "Status pipeline filter — stacked share bar, tonal cards, and per-status density meters.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    registryDependencies: ["badge", "button", "popover", "separator"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/data-tables/advanced-filters/advanced-filters-06/advanced-filters.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/data-tables/advanced-filters-06/advanced-filters.tsx",
+      },
+    ],
+  },
+  {
+    name: "advanced-filters-07",
+    type: "registry:block",
+    title: "advanced-filters-07",
+    description:
+      "Catalog cockpit — two-column ranges + chip facets with live SKU preview.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    registryDependencies: [
+      "badge",
+      "button",
+      "input",
+      "label",
+      "popover",
+      "separator",
+      "slider",
+    ],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/data-tables/advanced-filters/advanced-filters-07/advanced-filters.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/data-tables/advanced-filters-07/advanced-filters.tsx",
+      },
+    ],
+  },
+  {
+    name: "advanced-filters-08",
+    type: "registry:block",
+    title: "advanced-filters-08",
+    description:
+      "Volume ladder range filter — density bars per bucket plus expandable custom From/To.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    registryDependencies: [
+      "badge",
+      "button",
+      "input",
+      "label",
+      "popover",
+      "separator",
+    ],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "registry/blocks/data-tables/advanced-filters/advanced-filters-08/advanced-filters.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/data-tables/advanced-filters-08/advanced-filters.tsx",
+      },
+    ],
+  },
   {
     name: "row-actions-01",
     type: "registry:block",
@@ -11308,10 +12044,11 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "application-form-01",
     description:
-      "Early-access application on canvas — contact, company, plan cards, notes, and terms.",
+      "Early-access application on canvas — contact, company, pricing plan cards with perks, notes, and terms.",
     cssVars: SOFT_SURFACE_CSS_VARS,
-    dependencies: [],
+    dependencies: ["lucide-react"],
     registryDependencies: [
+      "badge",
       "button",
       "checkbox",
       "field",
@@ -11362,9 +12099,9 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "application-form-03",
     description:
-      "Partnership RFP — company details, partnership type cards, brief, and start quarter.",
+      "Partnership RFP — company details, icon partnership-type cards with outcomes, brief, and start quarter.",
     cssVars: SOFT_SURFACE_CSS_VARS,
-    dependencies: [],
+    dependencies: ["lucide-react"],
     registryDependencies: [
       "button",
       "checkbox",
@@ -11408,6 +12145,298 @@ const registryItemsRaw = [
         type: "registry:component",
         target:
           "components/blocks/forms/application-form-04/application-form.tsx",
+      },
+    ],
+  },
+  {
+    name: "appointment-booking-form-01",
+    type: "registry:block",
+    title: "appointment-booking-form-01",
+    description:
+      "Clinic schedule board — services, specialists, inline calendar, time chips, and ticket-stub confirmation.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: [
+      "date-fns",
+      "lucide-react",
+      "react-day-picker@^9.14.0",
+    ],
+    registryDependencies: [
+      "avatar",
+      "button",
+      "calendar",
+      "field",
+      "input",
+      "textarea",
+    ],
+    files: [
+      {
+        path: "registry/blocks/forms/appointment-booking-form/appointment-booking-form-01/appointment-booking-form.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/forms/appointment-booking-form-01/appointment-booking-form.tsx",
+      },
+    ],
+  },
+  {
+    name: "hotel-booking-form-01",
+    type: "registry:block",
+    title: "hotel-booking-form-01",
+    description:
+      "Resort magazine booking — hero glass strip, horizontal room rows, receipt, and boarding-pass confirmation.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: [
+      "date-fns",
+      "lucide-react",
+      "react-day-picker@^9.14.0",
+    ],
+    registryDependencies: [
+      "badge",
+      "button",
+      "calendar",
+      "field",
+      "input",
+      "popover",
+      "select",
+      "textarea",
+    ],
+    files: [
+      {
+        path: "registry/blocks/forms/hotel-booking-form/hotel-booking-form-01/hotel-booking-form.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/forms/hotel-booking-form-01/hotel-booking-form.tsx",
+      },
+      {
+        path: "registry/blocks/forms/hotel-booking-form/hotel-booking-form-01/images/property.webp",
+        type: "registry:file",
+        target:
+          "components/blocks/forms/hotel-booking-form-01/images/property.webp",
+      },
+      {
+        path: "registry/blocks/forms/hotel-booking-form/hotel-booking-form-01/images/room-standard.webp",
+        type: "registry:file",
+        target:
+          "components/blocks/forms/hotel-booking-form-01/images/room-standard.webp",
+      },
+      {
+        path: "registry/blocks/forms/hotel-booking-form/hotel-booking-form-01/images/room-deluxe.webp",
+        type: "registry:file",
+        target:
+          "components/blocks/forms/hotel-booking-form-01/images/room-deluxe.webp",
+      },
+      {
+        path: "registry/blocks/forms/hotel-booking-form/hotel-booking-form-01/images/room-suite.webp",
+        type: "registry:file",
+        target:
+          "components/blocks/forms/hotel-booking-form-01/images/room-suite.webp",
+      },
+    ],
+  },
+  {
+    name: "event-registration-form-01",
+    type: "registry:block",
+    title: "event-registration-form-01",
+    description:
+      "Conference ticket registration — perforated ticket cards, name badges, and badge-ID confirmation.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: [
+      "badge",
+      "button",
+      "field",
+      "input",
+      "radio-group",
+      "select",
+      "separator",
+      "spinner",
+      "textarea",
+    ],
+    files: [
+      {
+        path: "registry/blocks/forms/event-registration-form/event-registration-form-01/event-registration-form.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/forms/event-registration-form-01/event-registration-form.tsx",
+      },
+      {
+        path: "registry/blocks/forms/event-registration-form/event-registration-form-01/images/event-cover.webp",
+        type: "registry:file",
+        target:
+          "components/blocks/forms/event-registration-form-01/images/event-cover.webp",
+      },
+    ],
+  },
+  {
+    name: "job-application-form-01",
+    type: "registry:block",
+    title: "job-application-form-01",
+    description:
+      "ATS careers pipeline — vertical step rail, dossier review, PDF drop zones, and application reference.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: [
+      "attachment",
+      "badge",
+      "button",
+      "checkbox",
+      "field",
+      "input",
+      "progress",
+      "radio-group",
+      "select",
+      "separator",
+      "spinner",
+      "textarea",
+    ],
+    files: [
+      {
+        path: "registry/blocks/forms/job-application-form/job-application-form-01/job-application-form.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/forms/job-application-form-01/job-application-form.tsx",
+      },
+    ],
+  },
+  {
+    name: "product-order-form-01",
+    type: "registry:block",
+    title: "product-order-form-01",
+    description:
+      "Ecommerce PDP order — sticky gallery, swatches, buy box checkout, and packing-slip confirmation.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: [
+      "badge",
+      "button",
+      "field",
+      "input",
+      "radio-group",
+      "select",
+      "separator",
+      "textarea",
+    ],
+    files: [
+      {
+        path: "registry/blocks/forms/product-order-form/product-order-form-01/product-order-form.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/forms/product-order-form-01/product-order-form.tsx",
+      },
+      {
+        path: "registry/blocks/forms/product-order-form/product-order-form-01/images/product-1.webp",
+        type: "registry:file",
+        target:
+          "components/blocks/forms/product-order-form-01/images/product-1.webp",
+      },
+      {
+        path: "registry/blocks/forms/product-order-form/product-order-form-01/images/product-2.webp",
+        type: "registry:file",
+        target:
+          "components/blocks/forms/product-order-form-01/images/product-2.webp",
+      },
+      {
+        path: "registry/blocks/forms/product-order-form/product-order-form-01/images/product-3.webp",
+        type: "registry:file",
+        target:
+          "components/blocks/forms/product-order-form-01/images/product-3.webp",
+      },
+    ],
+  },
+  {
+    name: "project-inquiry-form-01",
+    type: "registry:block",
+    title: "project-inquiry-form-01",
+    description:
+      "Agency RFP brief — icon type grid, budget track, proposal review, and inquiry timeline confirmation.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["lucide-react"],
+    registryDependencies: [
+      "attachment",
+      "badge",
+      "button",
+      "checkbox",
+      "field",
+      "input",
+      "radio-group",
+      "textarea",
+    ],
+    files: [
+      {
+        path: "registry/blocks/forms/project-inquiry-form/project-inquiry-form-01/project-inquiry-form.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/forms/project-inquiry-form-01/project-inquiry-form.tsx",
+      },
+    ],
+  },
+  {
+    name: "restaurant-reservation-form-01",
+    type: "registry:block",
+    title: "restaurant-reservation-form-01",
+    description:
+      "Fine-dining reservation book — portrait vignette, large party counter, scrolling time pills, menu-style recap.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: [
+      "date-fns",
+      "lucide-react",
+      "react-day-picker@^9.14.0",
+    ],
+    registryDependencies: [
+      "button",
+      "calendar",
+      "field",
+      "input",
+      "popover",
+      "radio-group",
+      "select",
+      "separator",
+      "textarea",
+    ],
+    files: [
+      {
+        path: "registry/blocks/forms/restaurant-reservation-form/restaurant-reservation-form-01/restaurant-reservation-form.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/forms/restaurant-reservation-form-01/restaurant-reservation-form.tsx",
+      },
+      {
+        path: "registry/blocks/forms/restaurant-reservation-form/restaurant-reservation-form-01/images/dining.webp",
+        type: "registry:file",
+        target:
+          "components/blocks/forms/restaurant-reservation-form-01/images/dining.webp",
+      },
+    ],
+  },
+  {
+    name: "course-enrollment-form-01",
+    type: "registry:block",
+    title: "course-enrollment-form-01",
+    description:
+      "EdTech syllabus enrollment — curriculum panel, cohort cards, promo chip, and enrollment receipt.",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: ["date-fns", "lucide-react"],
+    registryDependencies: [
+      "badge",
+      "button",
+      "checkbox",
+      "field",
+      "input",
+      "radio-group",
+      "select",
+      "separator",
+    ],
+    files: [
+      {
+        path: "registry/blocks/forms/course-enrollment-form/course-enrollment-form-01/course-enrollment-form.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/forms/course-enrollment-form-01/course-enrollment-form.tsx",
+      },
+      {
+        path: "registry/blocks/forms/course-enrollment-form/course-enrollment-form-01/images/course-cover.webp",
+        type: "registry:file",
+        target:
+          "components/blocks/forms/course-enrollment-form-01/images/course-cover.webp",
       },
     ],
   },
@@ -18422,7 +19451,7 @@ const registryItemsRaw = [
     ],
   },
   {
-    name: "timeline",
+    name: "timeline-chart",
     type: "registry:chart",
     title: "Timeline",
     description:
@@ -18443,7 +19472,7 @@ const registryItemsRaw = [
       {
         path: "registry/charts/bar/timeline.tsx",
         type: "registry:component",
-        target: "components/charts/timeline.tsx",
+        target: "components/charts/timeline-chart.tsx",
       },
     ],
   },
@@ -20356,4 +21385,7 @@ function withSoftSurfaceCssVars(item) {
   }
 }
 
-export const registryItems = registryItemsRaw.map(withSoftSurfaceCssVars)
+export const registryItems = [
+  ...registryItemsRaw,
+  ...cursorRegistryItems,
+].map(withSoftSurfaceCssVars)

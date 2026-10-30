@@ -1,7 +1,14 @@
 "use client"
 
 import * as React from "react"
+import {
+  Building2Icon,
+  CheckIcon,
+  SparklesIcon,
+  UsersIcon,
+} from "lucide-react"
 
+import { Badge } from "@sonojs/ui/components/badge"
 import { Button } from "@sonojs/ui/components/button"
 import { Checkbox } from "@sonojs/ui/components/checkbox"
 import {
@@ -29,23 +36,35 @@ const PLANS = [
   {
     id: "starter",
     title: "Starter",
-    description: "1 workspace, community support, public registry installs.",
+    description: "Ship with the public registry while you evaluate the system.",
     price: "Free",
+    priceHint: "forever",
     footnote: null,
+    popular: false,
+    icon: SparklesIcon,
+    perks: ["1 workspace", "Community support", "Public installs"],
   },
   {
     id: "team",
     title: "Team",
-    description: "10 seats, private components, and priority email support.",
-    price: "$49/month",
+    description: "Private components and priority email for product squads.",
+    price: "$49",
+    priceHint: "/month",
     footnote: "1",
+    popular: true,
+    icon: UsersIcon,
+    perks: ["10 seats", "Private components", "Priority email"],
   },
   {
     id: "enterprise",
     title: "Enterprise",
-    description: "SSO, private registry mirror, and a dedicated success manager.",
+    description: "SSO, a private mirror, and a dedicated success manager.",
     price: "Custom",
+    priceHint: "quote",
     footnote: "2",
+    popular: false,
+    icon: Building2Icon,
+    perks: ["SSO / SAML", "Private mirror", "Success manager"],
   },
 ] as const
 
@@ -227,55 +246,106 @@ export default function ApplicationForm({
             <Separator className="col-span-full my-2" />
 
             <div className="col-span-full space-y-4">
-              <FieldLabel
-                id="application-form-01-plan-label"
-                className="text-sm font-semibold text-foreground"
-              >
-                Select a plan <RequiredMark />
-              </FieldLabel>
+              <div className="space-y-1">
+                <FieldLabel
+                  id="application-form-01-plan-label"
+                  className="text-sm font-semibold text-foreground"
+                >
+                  Select a plan <RequiredMark />
+                </FieldLabel>
+                <p className="text-sm text-muted-foreground">
+                  You can change this after approval — pick what fits today.
+                </p>
+              </div>
 
               <RadioGroup
                 value={plan}
                 onValueChange={(value) => setPlan(value as PlanId)}
-                className="grid grid-cols-1 gap-4 sm:grid-cols-3"
+                className="grid grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-4"
                 aria-labelledby="application-form-01-plan-label"
               >
                 {PLANS.map((item) => {
                   const selected = plan === item.id
                   const inputId = `application-form-01-plan-${item.id}`
+                  const Icon = item.icon
                   return (
                     <label
                       key={item.id}
                       htmlFor={inputId}
                       className={cn(
-                        "relative flex cursor-pointer flex-col gap-3 rounded-[12px] border border-border/70 bg-card p-4 shadow-soft transition-colors",
-                        selected && "border-primary bg-primary/5"
+                        "group/plan relative flex min-h-[46px] cursor-pointer flex-col gap-4 overflow-hidden rounded-[12px] border border-border/70 bg-background p-4 transition-[border-color,box-shadow,background-color]",
+                        "hover:border-border hover:bg-muted/40",
+                        "has-focus-visible:ring-[3px] has-focus-visible:ring-ring/40",
+                        selected &&
+                          "border-primary bg-primary/5 shadow-soft ring-1 ring-primary/30 hover:border-primary hover:bg-primary/5"
                       )}
                     >
-                      <div className="flex items-start justify-between gap-2">
-                        <span className="text-sm font-medium text-foreground">
+                      {item.popular ? (
+                        <Badge className="absolute end-3 top-3 rounded-full">
+                          Popular
+                        </Badge>
+                      ) : null}
+
+                      <div className="flex items-start justify-between gap-3 pe-16 sm:pe-0">
+                        <span
+                          className={cn(
+                            "flex size-10 shrink-0 items-center justify-center rounded-[10px] border border-border/70 bg-card text-muted-foreground transition-colors",
+                            selected &&
+                              "border-primary/30 bg-primary/10 text-primary"
+                          )}
+                        >
+                          <Icon className="size-4" aria-hidden />
+                        </span>
+                        <RadioGroupItem
+                          id={inputId}
+                          value={item.id}
+                          className="mt-1 cursor-pointer"
+                        />
+                      </div>
+
+                      <div className="min-w-0 space-y-1 text-start">
+                        <p className="text-sm font-semibold text-foreground">
                           {item.title}
                           {item.footnote ? (
                             <sup className="ms-0.5 text-xs text-muted-foreground">
                               {item.footnote}
                             </sup>
                           ) : null}
-                        </span>
-                        <RadioGroupItem
-                          id={inputId}
-                          value={item.id}
-                          className="mt-0.5 cursor-pointer"
-                        />
+                        </p>
+                        <p className="text-pretty text-sm leading-5 text-muted-foreground">
+                          {item.description}
+                        </p>
                       </div>
-                      <p className="flex-1 text-pretty text-sm text-muted-foreground">
-                        {item.description}
-                      </p>
-                      <span
+
+                      <p
                         dir="ltr"
-                        className="text-sm font-semibold text-foreground"
+                        className="flex items-baseline gap-1 text-start tabular-nums"
                       >
-                        {item.price}
-                      </span>
+                        <span className="text-2xl font-semibold tracking-tight text-foreground">
+                          {item.price}
+                        </span>
+                        <span className="text-xs text-muted-foreground">
+                          {item.priceHint}
+                        </span>
+                      </p>
+
+                      <ul className="mt-auto space-y-2 border-t border-border/60 pt-3">
+                        {item.perks.map((perk) => (
+                          <li
+                            key={perk}
+                            className="flex items-start gap-2 text-sm text-muted-foreground"
+                          >
+                            <CheckIcon
+                              className={cn(
+                                "mt-0.5 size-3.5 shrink-0",
+                                selected ? "text-primary" : "text-foreground/50"
+                              )}
+                              aria-hidden
+                            />
+                            <span className="min-w-0 text-start">{perk}</span>
+                          </li>
+                        ))}
+                      </ul>
                     </label>
                   )
                 })}

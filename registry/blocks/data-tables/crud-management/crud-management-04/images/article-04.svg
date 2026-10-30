@@ -1,0 +1,15 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480">
+  <rect width="800" height="480" fill="#2e1065"/>
+  <g fill="none" stroke="#a78bfa" stroke-width="3" opacity=".7">
+    <circle cx="400" cy="240" r="185"/>
+    <circle cx="400" cy="240" r="130"/>
+    <circle cx="400" cy="240" r="74"/>
+  </g>
+  <path d="M400 72 438 202l126 38-126 38-38 130-38-130-126-38 126-38Z" fill="#f5d0fe"/>
+  <circle cx="400" cy="240" r="30" fill="#c026d3"/>
+  <text x="50" y="430" fill="#fff" font-family="Arial" font-size="30" font-weight="700">DESIGNING TOMORROW</text>
+</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360" role="img" aria-label="Notes">
+  <rect width="640" height="360" rx="16" fill="#6D28D9"/>
+  <text x="320" y="190" text-anchor="middle" font-family="system-ui,sans-serif" font-size="40" font-weight="600" fill="#fff">Notes</text>
+</svg>

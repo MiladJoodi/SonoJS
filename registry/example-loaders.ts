@@ -52,6 +52,7 @@ const folderModules = {
   "label": () => import("./examples/label/_loaders"),
   "loading-states": () => import("./examples/loading-states/_loaders"),
   "marker": () => import("./examples/marker/_loaders"),
+  "marquee": () => import("./examples/marquee/_loaders"),
   "menubar": () => import("./examples/menubar/_loaders"),
   "message": () => import("./examples/message/_loaders"),
   "message-scroller": () => import("./examples/message-scroller/_loaders"),
@@ -79,6 +80,7 @@ const folderModules = {
   "skeleton": () => import("./examples/skeleton/_loaders"),
   "slider": () => import("./examples/slider/_loaders"),
   "sonner": () => import("./examples/sonner/_loaders"),
+  "sortable": () => import("./examples/sortable/_loaders"),
   "spinner": () => import("./examples/spinner/_loaders"),
   "streaming-response": () => import("./examples/streaming-response/_loaders"),
   "structured-output": () => import("./examples/structured-output/_loaders"),
@@ -89,6 +91,7 @@ const folderModules = {
   "terminal": () => import("./examples/terminal/_loaders"),
   "textarea": () => import("./examples/textarea/_loaders"),
   "thinking-orbs": () => import("./examples/thinking-orbs/_loaders"),
+  "timeline": () => import("./examples/timeline/_loaders"),
   "todo-list": () => import("./examples/todo-list/_loaders"),
   "toggle": () => import("./examples/toggle/_loaders"),
   "toggle-group": () => import("./examples/toggle-group/_loaders"),
@@ -100,7 +103,7 @@ const folderModules = {
   "voice-selector": () => import("./examples/voice-selector/_loaders"),
 } as const
 
-const FOLDERS_LONGEST_FIRST = ["image-generation-2","streaming-response","selection-actions","structured-output","image-generation","agent-activity-2","agent-code-block","message-scroller","inline-citation","navigation-menu","rainbow-button","electro-border","agent-activity","loading-states","model-selector","prompt-input-2","reasoning-text","voice-selector","approval-card","dropdown-menu","native-select","thinking-orbs","tool-approval","transcription","alert-dialog","button-group","context-menu","mic-selector","open-in-chat","prompt-input","toggle-group","voice-ai-orb","collapsible","date-picker","input-group","radio-group","scroll-area","attachment","breadcrumb","code-block","data-table","hover-card","ai-sidebar","pagination","accordion","citations","file-diff","fluid-orb","input-otp","resizable","separator","task-rows","todo-list","calendar","combobox","carousel","checkbox","progress","skeleton","terminal","textarea","command","menubar","message","persona","popover","spinner","tooltip","avatar","bubble","button","dialog","drawer","marker","select","slider","sonner","switch","toggle","badge","alert","empty","field","input","label","queue","sheet","table","trace","card","item","tabs","kbd"] as const
+const FOLDERS_LONGEST_FIRST = ["image-generation-2","streaming-response","selection-actions","structured-output","image-generation","agent-activity-2","agent-code-block","message-scroller","inline-citation","navigation-menu","rainbow-button","electro-border","agent-activity","loading-states","model-selector","prompt-input-2","reasoning-text","voice-selector","approval-card","dropdown-menu","native-select","thinking-orbs","tool-approval","transcription","alert-dialog","button-group","context-menu","mic-selector","open-in-chat","prompt-input","toggle-group","voice-ai-orb","collapsible","date-picker","input-group","radio-group","scroll-area","attachment","breadcrumb","code-block","data-table","hover-card","ai-sidebar","pagination","accordion","citations","file-diff","fluid-orb","input-otp","resizable","separator","task-rows","todo-list","calendar","combobox","carousel","checkbox","progress","skeleton","sortable","terminal","timeline","textarea","command","marquee","menubar","message","persona","popover","spinner","tooltip","avatar","bubble","button","dialog","drawer","marker","select","slider","sonner","switch","toggle","badge","alert","empty","field","input","label","queue","sheet","table","trace","card","item","tabs","kbd"] as const
 
 function folderForExample(name: string): string | undefined {
   for (const folder of FOLDERS_LONGEST_FIRST) {

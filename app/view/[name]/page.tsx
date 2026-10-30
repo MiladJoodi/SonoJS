@@ -208,10 +208,28 @@ import Faq20 from "@/registry/blocks/marketing/faq/faq-20/faq"
 import DataTable01 from "@/registry/blocks/data-tables/data-table/data-table-01/table"
 import DataTable02 from "@/registry/blocks/data-tables/data-table/data-table-02/table"
 import DataTable03 from "@/registry/blocks/data-tables/data-table/data-table-03/table"
+import TableToolbar01 from "@/registry/blocks/data-tables/table-toolbar/table-toolbar-01/table"
+import TableToolbar02 from "@/registry/blocks/data-tables/table-toolbar/table-toolbar-02/table"
+import TableToolbar03 from "@/registry/blocks/data-tables/table-toolbar/table-toolbar-03/table"
+import TableToolbar04 from "@/registry/blocks/data-tables/table-toolbar/table-toolbar-04/table"
+import TableToolbar05 from "@/registry/blocks/data-tables/table-toolbar/table-toolbar-05/table"
+import CrudManagement01 from "@/registry/blocks/data-tables/crud-management/crud-management-01/table"
+import CrudManagement02 from "@/registry/blocks/data-tables/crud-management/crud-management-02/table"
+import CrudManagement03 from "@/registry/blocks/data-tables/crud-management/crud-management-03/table"
+import CrudManagement04 from "@/registry/blocks/data-tables/crud-management/crud-management-04/table"
+import CrudManagement05 from "@/registry/blocks/data-tables/crud-management/crud-management-05/table"
 import AdvancedDataGrid01 from "@/registry/blocks/data-tables/advanced-data-grid/advanced-data-grid-01/table"
 import AdvancedDataGrid02 from "@/registry/blocks/data-tables/advanced-data-grid/advanced-data-grid-02/table"
 import AdvancedDataGrid03 from "@/registry/blocks/data-tables/advanced-data-grid/advanced-data-grid-03/table"
 import AdvancedDataGrid04 from "@/registry/blocks/data-tables/advanced-data-grid/advanced-data-grid-04/table"
+import AdvancedFilters01 from "@/registry/blocks/data-tables/advanced-filters/advanced-filters-01/advanced-filters"
+import AdvancedFilters02 from "@/registry/blocks/data-tables/advanced-filters/advanced-filters-02/advanced-filters"
+import AdvancedFilters03 from "@/registry/blocks/data-tables/advanced-filters/advanced-filters-03/advanced-filters"
+import AdvancedFilters04 from "@/registry/blocks/data-tables/advanced-filters/advanced-filters-04/advanced-filters"
+import AdvancedFilters05 from "@/registry/blocks/data-tables/advanced-filters/advanced-filters-05/advanced-filters"
+import AdvancedFilters06 from "@/registry/blocks/data-tables/advanced-filters/advanced-filters-06/advanced-filters"
+import AdvancedFilters07 from "@/registry/blocks/data-tables/advanced-filters/advanced-filters-07/advanced-filters"
+import AdvancedFilters08 from "@/registry/blocks/data-tables/advanced-filters/advanced-filters-08/advanced-filters"
 import RowActions01 from "@/registry/blocks/data-tables/row-actions/row-actions-01/table"
 import RowActions02 from "@/registry/blocks/data-tables/row-actions/row-actions-02/table"
 import RowActions03 from "@/registry/blocks/data-tables/row-actions/row-actions-03/table"
@@ -581,6 +599,14 @@ import ContactForm09 from "@/registry/blocks/forms/contact-form/contact-form-09/
 import ContactForm10 from "@/registry/blocks/forms/contact-form/contact-form-10/contact-form"
 import ContactForm11 from "@/registry/blocks/forms/contact-form/contact-form-11/contact-form"
 import ContactForm12 from "@/registry/blocks/forms/contact-form/contact-form-12/contact-form"
+import AppointmentBookingForm01 from "@/registry/blocks/forms/appointment-booking-form/appointment-booking-form-01/appointment-booking-form"
+import HotelBookingForm01 from "@/registry/blocks/forms/hotel-booking-form/hotel-booking-form-01/hotel-booking-form"
+import EventRegistrationForm01 from "@/registry/blocks/forms/event-registration-form/event-registration-form-01/event-registration-form"
+import JobApplicationForm01 from "@/registry/blocks/forms/job-application-form/job-application-form-01/job-application-form"
+import ProductOrderForm01 from "@/registry/blocks/forms/product-order-form/product-order-form-01/product-order-form"
+import ProjectInquiryForm01 from "@/registry/blocks/forms/project-inquiry-form/project-inquiry-form-01/project-inquiry-form"
+import RestaurantReservationForm01 from "@/registry/blocks/forms/restaurant-reservation-form/restaurant-reservation-form-01/restaurant-reservation-form"
+import CourseEnrollmentForm01 from "@/registry/blocks/forms/course-enrollment-form/course-enrollment-form-01/course-enrollment-form"
 import SimpleColumnsFooter from "@/registry/blocks/marketing/footer/footer-01/footer"
 import LogoSocialFooter from "@/registry/blocks/marketing/footer/footer-02/footer"
 import DarkColumnsFooter from "@/registry/blocks/marketing/footer/footer-03/footer"
@@ -2020,6 +2046,96 @@ const views: Record<string, ComponentType> = {
       </div>
     )
   },
+  "table-toolbar-01": function TableToolbar01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-3 py-6 sm:px-6 sm:py-10">
+        <div className="w-full min-w-0 max-w-5xl">
+          <TableToolbar01 />
+        </div>
+      </div>
+    )
+  },
+  "table-toolbar-02": function TableToolbar02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-3 py-6 sm:px-6 sm:py-10">
+        <div className="w-full min-w-0 max-w-5xl">
+          <TableToolbar02 />
+        </div>
+      </div>
+    )
+  },
+  "table-toolbar-03": function TableToolbar03View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-3 py-6 sm:px-6 sm:py-10">
+        <div className="w-full min-w-0 max-w-5xl">
+          <TableToolbar03 />
+        </div>
+      </div>
+    )
+  },
+  "table-toolbar-04": function TableToolbar04View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-3 py-6 sm:px-6 sm:py-10">
+        <div className="w-full min-w-0 max-w-5xl">
+          <TableToolbar04 />
+        </div>
+      </div>
+    )
+  },
+  "table-toolbar-05": function TableToolbar05View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-3 py-6 sm:px-6 sm:py-10">
+        <div className="w-full min-w-0 max-w-5xl">
+          <TableToolbar05 />
+        </div>
+      </div>
+    )
+  },
+  "crud-management-01": function CrudManagement01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-3 py-6 sm:px-6 sm:py-10">
+        <div className="w-full min-w-0 max-w-6xl">
+          <CrudManagement01 />
+        </div>
+      </div>
+    )
+  },
+  "crud-management-02": function CrudManagement02View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-3 py-6 sm:px-6 sm:py-10">
+        <div className="w-full min-w-0 max-w-6xl">
+          <CrudManagement02 />
+        </div>
+      </div>
+    )
+  },
+  "crud-management-03": function CrudManagement03View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-3 py-6 sm:px-6 sm:py-10">
+        <div className="w-full min-w-0 max-w-6xl">
+          <CrudManagement03 />
+        </div>
+      </div>
+    )
+  },
+  "crud-management-04": function CrudManagement04View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-3 py-6 sm:px-6 sm:py-10">
+        <div className="w-full min-w-0 max-w-6xl">
+          <CrudManagement04 />
+        </div>
+      </div>
+    )
+  },
+  "crud-management-05": function CrudManagement05View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-3 py-6 sm:px-6 sm:py-10">
+        <div className="w-full min-w-0 max-w-6xl">
+          <CrudManagement05 />
+        </div>
+      </div>
+    )
+  },
   "advanced-data-grid-01": function AdvancedDataGrid01View() {
     return (
       <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
@@ -2053,6 +2169,62 @@ const views: Record<string, ComponentType> = {
         <div className="w-full">
           <AdvancedDataGrid04 />
         </div>
+      </div>
+    )
+  },
+  "advanced-filters-01": function AdvancedFilters01View() {
+    return (
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-6 py-10 sm:px-10 sm:py-12">
+        <AdvancedFilters01 />
+      </div>
+    )
+  },
+  "advanced-filters-02": function AdvancedFilters02View() {
+    return (
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-6 py-10 sm:px-10 sm:py-12">
+        <AdvancedFilters02 />
+      </div>
+    )
+  },
+  "advanced-filters-03": function AdvancedFilters03View() {
+    return (
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-6 py-10 sm:px-10 sm:py-12">
+        <AdvancedFilters03 />
+      </div>
+    )
+  },
+  "advanced-filters-04": function AdvancedFilters04View() {
+    return (
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-6 py-10 sm:px-10 sm:py-12">
+        <AdvancedFilters04 />
+      </div>
+    )
+  },
+  "advanced-filters-05": function AdvancedFilters05View() {
+    return (
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-6 py-10 sm:px-10 sm:py-12">
+        <AdvancedFilters05 />
+      </div>
+    )
+  },
+  "advanced-filters-06": function AdvancedFilters06View() {
+    return (
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-6 py-10 sm:px-10 sm:py-12">
+        <AdvancedFilters06 />
+      </div>
+    )
+  },
+  "advanced-filters-07": function AdvancedFilters07View() {
+    return (
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-6 py-10 sm:px-10 sm:py-12">
+        <AdvancedFilters07 />
+      </div>
+    )
+  },
+  "advanced-filters-08": function AdvancedFilters08View() {
+    return (
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-6 py-10 sm:px-10 sm:py-12">
+        <AdvancedFilters08 />
       </div>
     )
   },
@@ -5430,6 +5602,78 @@ const views: Record<string, ComponentType> = {
       <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
         <div className="w-full">
           <ApplicationForm04 />
+        </div>
+      </div>
+    )
+  },
+  "appointment-booking-form-01": function AppointmentBookingForm01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <AppointmentBookingForm01 />
+        </div>
+      </div>
+    )
+  },
+  "hotel-booking-form-01": function HotelBookingForm01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <HotelBookingForm01 />
+        </div>
+      </div>
+    )
+  },
+  "event-registration-form-01": function EventRegistrationForm01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <EventRegistrationForm01 />
+        </div>
+      </div>
+    )
+  },
+  "job-application-form-01": function JobApplicationForm01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <JobApplicationForm01 />
+        </div>
+      </div>
+    )
+  },
+  "product-order-form-01": function ProductOrderForm01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-white px-0 py-0 dark:bg-background">
+        <div className="w-full">
+          <ProductOrderForm01 />
+        </div>
+      </div>
+    )
+  },
+  "project-inquiry-form-01": function ProjectInquiryForm01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <ProjectInquiryForm01 />
+        </div>
+      </div>
+    )
+  },
+  "restaurant-reservation-form-01": function RestaurantReservationForm01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <RestaurantReservationForm01 />
+        </div>
+      </div>
+    )
+  },
+  "course-enrollment-form-01": function CourseEnrollmentForm01View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <CourseEnrollmentForm01 />
         </div>
       </div>
     )

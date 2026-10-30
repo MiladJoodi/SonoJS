@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "trail-cursor",
+  "type": "registry:cursor",
+  "title": "Trail Cursor",
+  "description": "Soft ghost stamps that fade behind the pointer.",
+  "files": [
+    {
+      "path": "components/cursors/trail-cursor.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport {\n  type RefObject,\n  useEffect,\n  useRef,\n  useState,\n} from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\ntype Stamp = { id: number; x: number; y: number }\n\nexport interface TrailCursorProps {\n  containerRef?: RefObject<HTMLElement | null>\n  className?: string\n  /** Max ghost stamps kept. */\n  length?: number\n}\n\n/**\n * Soft ghost stamps that fade behind the pointer (not a rainbow ribbon).\n */\nexport function TrailCursor({\n  containerRef,\n  className,\n  length = 12,\n}: TrailCursorProps) {\n  const [stamps, setStamps] = useState<Stamp[]>([])\n  const [core, setCore] = useState({ x: 0, y: 0 })\n  const [ready, setReady] = useState(false)\n  const [reduced, setReduced] = useState(false)\n  const idRef = useRef(0)\n  const last = useRef(0)\n\n  useEffect(() => {\n    const mq = window.matchMedia(\"(prefers-reduced-motion: reduce)\")\n    setReduced(mq.matches)\n    const onChange = () => setReduced(mq.matches)\n    mq.addEventListener(\"change\", onChange)\n    return () => mq.removeEventListener(\"change\", onChange)\n  }, [])\n\n  useEffect(() => {\n    if (reduced) return\n\n    const root = containerRef?.current ?? null\n    const target: HTMLElement | Window = root ?? window\n\n    const toLocal = (e: MouseEvent) => {\n      if (root) {\n        const rect = root.getBoundingClientRect()\n        return { x: e.clientX - rect.left, y: e.clientY - rect.top }\n      }\n      return { x: e.clientX, y: e.clientY }\n    }\n\n    const onMove = (e: Event) => {\n      const p = toLocal(e as MouseEvent)\n      setCore(p)\n      setReady(true)\n      const now = performance.now()\n      if (now - last.current < 24) return\n      last.current = now\n      const id = ++idRef.current\n      setStamps((prev) => [...prev.slice(-(length - 1)), { id, x: p.x, y: p.y }])\n    }\n\n    target.addEventListener(\"mousemove\", onMove)\n    return () => target.removeEventListener(\"mousemove\", onMove)\n  }, [containerRef, length, reduced])\n\n  if (reduced || !ready) return null\n\n  const scoped = Boolean(containerRef)\n\n  return (\n    <div\n      className={cn(\n        \"pointer-events-none z-50\",\n        scoped ? \"absolute inset-0\" : \"fixed inset-0\",\n        className\n      )}\n      aria-hidden\n    >\n      {stamps.map((s, i) => {\n        const t = (i + 1) / stamps.length\n        const size = 6 + t * 10\n        return (\n          <div\n            key={s.id}\n            className=\"absolute rounded-full bg-foreground/25\"\n            style={{\n              width: size,\n              height: size,\n              left: s.x,\n              top: s.y,\n              opacity: t * 0.55,\n              transform: \"translate(-50%, -50%)\",\n            }}\n          />\n        )\n      })}\n      <div\n        className=\"absolute size-3 rounded-full bg-foreground mix-blend-difference\"\n        style={{\n          left: core.x,\n          top: core.y,\n          transform: \"translate(-50%, -50%)\",\n        }}\n      />\n    </div>\n  )\n}\n",
+      "target": "components/cursors/trail-cursor.tsx"
+    }
+  ],
+  "version": "0.1.0+9c6543fbed07",
+  "generatedAt": "2026-10-30T17:30:40.356Z"
+}

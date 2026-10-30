@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-mouse",
+  "type": "registry:hook",
+  "title": "useMouse",
+  "description": "Track page and element-relative pointer position.",
+  "files": [
+    {
+      "path": "hooks/use-mouse.ts",
+      "type": "registry:hook",
+      "content": "\"use client\"\n\nimport { type RefObject, useLayoutEffect, useRef, useState } from \"react\"\n\nexport interface MouseState {\n  x: number | null\n  y: number | null\n  elementX: number | null\n  elementY: number | null\n  elementPositionX: number | null\n  elementPositionY: number | null\n}\n\nexport function useMouse(): [MouseState, RefObject<HTMLDivElement | null>] {\n  const [state, setState] = useState<MouseState>({\n    x: null,\n    y: null,\n    elementX: null,\n    elementY: null,\n    elementPositionX: null,\n    elementPositionY: null,\n  })\n\n  const ref = useRef<HTMLDivElement | null>(null)\n\n  useLayoutEffect(() => {\n    const handleMouseMove = (event: MouseEvent) => {\n      const next: Partial<MouseState> = {\n        x: event.pageX,\n        y: event.pageY,\n      }\n\n      if (ref.current instanceof Element) {\n        const { left, top } = ref.current.getBoundingClientRect()\n        const elementPositionX = left + window.scrollX\n        const elementPositionY = top + window.scrollY\n        next.elementX = event.pageX - elementPositionX\n        next.elementY = event.pageY - elementPositionY\n        next.elementPositionX = elementPositionX\n        next.elementPositionY = elementPositionY\n      }\n\n      setState((prev) => ({ ...prev, ...next }))\n    }\n\n    document.addEventListener(\"mousemove\", handleMouseMove)\n    return () => document.removeEventListener(\"mousemove\", handleMouseMove)\n  }, [])\n\n  return [state, ref]\n}\n",
+      "target": "hooks/use-mouse.ts"
+    }
+  ],
+  "version": "0.1.0+9c6543fbed07",
+  "generatedAt": "2026-10-30T17:30:40.356Z"
+}

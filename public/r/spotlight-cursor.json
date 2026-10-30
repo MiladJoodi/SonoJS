@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "spotlight-cursor",
+  "type": "registry:cursor",
+  "title": "Spotlight Cursor",
+  "description": "Dark vignette with a soft light that follows the pointer.",
+  "registryDependencies": [
+    "use-spotlight"
+  ],
+  "files": [
+    {
+      "path": "components/cursors/spotlight-cursor.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport {\n  type HTMLAttributes,\n  type RefObject,\n} from \"react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { useSpotlightEffect } from \"@/hooks/use-spotlight\"\n\nexport interface SpotlightCursorConfig {\n  /** Spotlight radius in px (maps to spotlightSize). */\n  radius?: number\n  /** Hole brightness 0–1 (maps to spotlightIntensity). */\n  brightness?: number\n  /** Glow as CSS rgb channels, e.g. `\"255, 255, 255\"`. */\n  color?: string\n  /** Lerp factor toward the pointer (maps to fadeSpeed). */\n  smoothing?: number\n  pulseSpeed?: number\n  /** Outside darkness 0–1. */\n  vignette?: number\n}\n\nexport interface SpotlightCursorProps\n  extends HTMLAttributes<HTMLCanvasElement> {\n  config?: SpotlightCursorConfig\n  containerRef?: RefObject<HTMLElement | null>\n}\n\n/**\n * Soft vignette spotlight — content under the beam stays readable (no WebGL).\n */\nexport function SpotlightCursor({\n  config = {},\n  containerRef,\n  className,\n  ...rest\n}: SpotlightCursorProps) {\n  const {\n    radius = 240,\n    brightness = 0.95,\n    color = \"255, 248, 236\",\n    smoothing = 0.14,\n    pulseSpeed = 2600,\n    vignette = 0.8,\n  } = config\n\n  const [canvasRef] = useSpotlightEffect({\n    spotlightSize: radius,\n    spotlightIntensity: brightness,\n    fadeSpeed: smoothing,\n    glowColor: color,\n    pulseSpeed,\n    vignette,\n    containerRef,\n  })\n\n  const scoped = Boolean(containerRef)\n\n  return (\n    <canvas\n      ref={canvasRef}\n      className={cn(\n        \"pointer-events-none z-[9999]\",\n        scoped\n          ? \"absolute inset-0 size-full\"\n          : \"fixed inset-0 size-full\",\n        className\n      )}\n      aria-hidden\n      {...rest}\n    />\n  )\n}\n",
+      "target": "components/cursors/spotlight-cursor.tsx"
+    }
+  ],
+  "version": "0.1.0+9c6543fbed07",
+  "generatedAt": "2026-10-30T17:30:40.356Z"
+}

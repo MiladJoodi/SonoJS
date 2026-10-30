@@ -1,5 +1,6 @@
 export { DocsListIndex, DocsSidebar } from "./docs-sidebar"
 export { ChartsListIndex, ChartsSidebar } from "./charts-sidebar"
+export { CursorsListIndex, CursorsSidebar } from "./cursors-sidebar"
 export { BlocksListIndex, BlocksSidebar } from "./blocks-sidebar"
 export { ToolsListIndex, ToolsSidebar, ToolsSidebarToggle } from "./tools-sidebar"
 export { ListIndexNav } from "./list-index-nav"

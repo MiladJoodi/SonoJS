@@ -129,9 +129,17 @@ function buildItemPayload(item, version, generatedAt) {
     if (
       isSourceText &&
       (file.path.startsWith("packages/ui/") ||
-        file.path.startsWith("registry/blocks/"))
+        file.path.startsWith("registry/blocks/") ||
+        file.path.startsWith("registry/cursors/") ||
+        file.path.startsWith("registry/examples/") ||
+        file.path.startsWith("registry/hooks/"))
     ) {
       content = rewriteConsumerImports(content)
+      // Cursor hooks author as @/registry/hooks/* → consumers get @/hooks/*
+      content = content.replace(
+        /from\s+["']@\/registry\/hooks\/([^"']+)["']/g,
+        'from "@/hooks/$1"'
+      )
     }
     content = rewriteBlockTargets(content, item.files)
     if (file.target) {

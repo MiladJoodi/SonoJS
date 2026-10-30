@@ -122,6 +122,8 @@ describe("sitemap builder", () => {
     expect(paths.has("/docs/components/button")).toBe(true)
     expect(paths.has("/blocks")).toBe(true)
     expect(paths.has("/charts")).toBe(true)
+    expect(paths.has("/cursors")).toBe(true)
+    expect(paths.has("/cursors/view/smooth-cursor-follower")).toBe(true)
     expect(paths.has("/tools")).toBe(true)
     expect(paths.has("/tools/endpoints")).toBe(false)
     expect(paths.has("/tools/markdown-editor")).toBe(false)

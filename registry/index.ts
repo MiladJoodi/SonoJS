@@ -1,6 +1,12 @@
 export type RegistryItem = {
   name: string
-  type: "registry:ui" | "registry:block" | "registry:chart" | "registry:example"
+  type:
+    | "registry:ui"
+    | "registry:block"
+    | "registry:chart"
+    | "registry:cursor"
+    | "registry:example"
+    | "registry:hook"
   title: string
   description?: string
 }

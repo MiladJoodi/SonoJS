@@ -27,6 +27,8 @@
 @source inline("w-max max-w-[min(100vw-2rem,36rem)] start-0 top-[calc(100%+0.75rem)] md:grid-cols-3 grid-cols-2");
 /* Marketing banners — gradients + arbitrary stops often missing from the emitted sheet. */
 @source inline("bg-gradient-to-r bg-gradient-to-b bg-gradient-to-br bg-gradient-to-t from-violet-500 via-[#9938CA] to-[#E0724A] from-blue-400 via-indigo-500 to-purple-500 from-[#4F39F6] to-[#FDFEFF] from-[#ABFF7E] from-orange-500 to-orange-600 to-purple-100 from-transparent via-primary/45 via-primary/40 to-transparent from-zinc-950 via-zinc-950 to-primary/80 from-foreground/70 via-foreground/35 to-foreground/15 bg-[#C4F500] bg-[#7668ff] bg-zinc-800 bg-gray-800 bg-white/[0.04] bg-blue-600 bg-purple-600 bg-pink-600 bg-slate-600 bg-cyan-600 bg-amber-600 fill-[#ffc107] fill-[#F5B301] fill-[#CED5D8] fill-zinc-200 fill-zinc-500 fill-zinc-600 dark:fill-zinc-600 dark:fill-neutral-600 from-[#FFE08A] to-[#F5B301] bg-[#facc15] bg-gray-800 bg-gray-700 dark:bg-neutral-800 dark:bg-neutral-700 text-slate-600 dark:text-slate-400 text-green-800 text-indigo-600 text-orange-600 text-violet-600 text-amber-400 text-blue-400 bg-green-600 bg-violet-50 hover:bg-slate-200 hover:bg-slate-100 hover:bg-white/10 group-hover:bg-white/15 active:scale-95");
+/* Timeline — spacing/rail utilities often missing from the emitted sheet (ms-8/10/12, -start-7/8). */
+@source inline("ms-8 ms-10 ms-12 sm:ms-36 sm:ps-36 sm:ps-40 -start-7 -start-8 sm:-start-36 sm:-start-40 translate-x-4.5 -translate-x-4.5 rtl:-translate-x-4.5 rtl:translate-x-1/2");
 
 @custom-variant style-vega (&:where(.style-vega *));
 @custom-variant dark (&:is(.dark *));
@@ -394,8 +396,28 @@
     }
   }
 
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(calc(-100% - var(--gap)));
+    }
+  }
+
+  @keyframes marquee-vertical {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(calc(-100% - var(--gap)));
+    }
+  }
+
   --animate-caret-blink: caret-blink 1.25s ease-out infinite;
   --animate-rainbow: rainbow var(--speed, 2s) infinite linear;
+  --animate-marquee: marquee var(--duration) infinite linear;
+  --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
 
   --breakpoint-3xl: 1600px;
   --font-sans: var(--font-sono-sans);

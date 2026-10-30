@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "arrow-cursor",
+  "type": "registry:cursor",
+  "title": "Arrow Cursor",
+  "description": "Velocity-aware chevron that rotates with motion.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/cursors/arrow-cursor.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport {\n  type RefObject,\n  useEffect,\n  useRef,\n  useState,\n} from \"react\"\nimport { ChevronUpIcon } from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\n\nexport interface ArrowCursorProps {\n  containerRef?: RefObject<HTMLElement | null>\n  className?: string\n  /** Position lag 0–1. */\n  lag?: number\n}\n\n/**\n * Velocity-aware chevron that rotates with pointer motion direction.\n */\nexport function ArrowCursor({\n  containerRef,\n  className,\n  lag = 0.22,\n}: ArrowCursorProps) {\n  const mouse = useRef({ x: 0, y: 0 })\n  const pos = useRef({ x: 0, y: 0 })\n  const prev = useRef({ x: 0, y: 0 })\n  const angle = useRef(0)\n  const [render, setRender] = useState({ x: 0, y: 0, angle: 0 })\n  const [ready, setReady] = useState(false)\n  const [reduced, setReduced] = useState(false)\n\n  useEffect(() => {\n    const mq = window.matchMedia(\"(prefers-reduced-motion: reduce)\")\n    setReduced(mq.matches)\n    const onChange = () => setReduced(mq.matches)\n    mq.addEventListener(\"change\", onChange)\n    return () => mq.removeEventListener(\"change\", onChange)\n  }, [])\n\n  useEffect(() => {\n    if (reduced) return\n\n    const root = containerRef?.current ?? null\n    const target: HTMLElement | Window = root ?? window\n    const lerp = (a: number, b: number, t: number) => a + (b - a) * t\n\n    const toLocal = (e: MouseEvent) => {\n      if (root) {\n        const rect = root.getBoundingClientRect()\n        return { x: e.clientX - rect.left, y: e.clientY - rect.top }\n      }\n      return { x: e.clientX, y: e.clientY }\n    }\n\n    const onMove = (e: Event) => {\n      mouse.current = toLocal(e as MouseEvent)\n      setReady(true)\n    }\n\n    target.addEventListener(\"mousemove\", onMove)\n\n    let raf = 0\n    const tick = () => {\n      pos.current.x = lerp(pos.current.x, mouse.current.x, lag)\n      pos.current.y = lerp(pos.current.y, mouse.current.y, lag)\n\n      const dx = pos.current.x - prev.current.x\n      const dy = pos.current.y - prev.current.y\n      const speed = Math.hypot(dx, dy)\n      if (speed > 0.35) {\n        const targetAngle = (Math.atan2(dy, dx) * 180) / Math.PI + 90\n        let delta = targetAngle - angle.current\n        while (delta > 180) delta -= 360\n        while (delta < -180) delta += 360\n        angle.current += delta * 0.18\n      }\n      prev.current = { ...pos.current }\n\n      setRender({\n        x: pos.current.x,\n        y: pos.current.y,\n        angle: angle.current,\n      })\n      raf = requestAnimationFrame(tick)\n    }\n    raf = requestAnimationFrame(tick)\n\n    return () => {\n      target.removeEventListener(\"mousemove\", onMove)\n      cancelAnimationFrame(raf)\n    }\n  }, [containerRef, lag, reduced])\n\n  if (reduced || !ready) return null\n\n  const scoped = Boolean(containerRef)\n\n  return (\n    <div\n      className={cn(\n        \"pointer-events-none z-50\",\n        scoped ? \"absolute inset-0\" : \"fixed inset-0\",\n        className\n      )}\n      aria-hidden\n    >\n      <div\n        className=\"absolute flex size-8 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-[0_0_18px_color-mix(in_oklab,var(--primary)_45%,transparent)]\"\n        style={{\n          left: render.x,\n          top: render.y,\n          transform: `translate(-50%, -50%) rotate(${render.angle}deg)`,\n        }}\n      >\n        <ChevronUpIcon className=\"size-4\" strokeWidth={2.5} />\n      </div>\n    </div>\n  )\n}\n",
+      "target": "components/cursors/arrow-cursor.tsx"
+    }
+  ],
+  "version": "0.1.0+9c6543fbed07",
+  "generatedAt": "2026-10-30T17:30:40.356Z"
+}

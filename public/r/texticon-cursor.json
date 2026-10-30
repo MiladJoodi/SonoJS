@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "texticon-cursor",
+  "type": "registry:cursor",
+  "title": "Text Icon Cursor",
+  "description": "Contextual text or icon chip near the pointer.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "use-mouse"
+  ],
+  "files": [
+    {
+      "path": "components/cursors/texticon-cursor.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport { type ReactNode, useState } from \"react\"\nimport {\n  LinkIcon,\n  PencilIcon,\n  PlayIcon,\n  SearchIcon,\n} from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { useMouse } from \"@/hooks/use-mouse\"\n\nconst CURSOR_ICONS = {\n  edit: <PencilIcon className=\"size-3.5\" />,\n  search: <SearchIcon className=\"size-3.5\" />,\n  play: <PlayIcon className=\"size-3.5\" />,\n  link: <LinkIcon className=\"size-3.5\" />,\n} as const\n\nexport type TextIconCursorContent = keyof typeof CURSOR_ICONS | string | null\n\nexport interface TextIconCursorProps {\n  className?: string\n  children?: ReactNode\n}\n\n/**\n * Glass chip cursor with Lucide icons over clear hotspots.\n */\nexport function TextIconCursor({ className, children }: TextIconCursorProps) {\n  const [mouseState, ref] = useMouse()\n  const [cursorContent, setCursorContent] =\n    useState<TextIconCursorContent>(null)\n\n  const defaultChildren = (\n    <div className=\"flex h-full flex-wrap items-center justify-center gap-4 p-8\">\n      <button\n        type=\"button\"\n        className=\"cursor-pointer rounded-[12px] border border-border/70 bg-card px-5 py-3 text-sm font-medium text-foreground shadow-soft transition-colors hover:border-primary/40\"\n        onMouseEnter={() => setCursorContent(\"edit\")}\n        onMouseLeave={() => setCursorContent(null)}\n      >\n        Edit\n      </button>\n      <div\n        className=\"cursor-help rounded-[12px] border border-dashed border-border/80 bg-muted/40 px-5 py-3 text-sm text-foreground\"\n        onMouseEnter={() => setCursorContent(\"Click to search\")}\n        onMouseLeave={() => setCursorContent(null)}\n      >\n        Search zone\n      </div>\n      <a\n        href=\"#\"\n        className=\"cursor-pointer rounded-[12px] border border-border/70 bg-card px-5 py-3 text-sm font-medium text-primary shadow-soft\"\n        onMouseEnter={() => setCursorContent(\"link\")}\n        onMouseLeave={() => setCursorContent(null)}\n        onClick={(e) => e.preventDefault()}\n      >\n        Navigate\n      </a>\n      <div\n        className=\"flex size-28 cursor-pointer flex-col items-center justify-center gap-2 rounded-[12px] border border-border/70 bg-card shadow-soft\"\n        onMouseEnter={() => setCursorContent(\"play\")}\n        onMouseLeave={() => setCursorContent(null)}\n      >\n        <PlayIcon className=\"size-6 text-primary\" />\n        <span className=\"text-xs text-muted-foreground\">Media</span>\n      </div>\n    </div>\n  )\n\n  const chipLabel =\n    typeof cursorContent === \"string\" && cursorContent in CURSOR_ICONS\n      ? CURSOR_ICONS[cursorContent as keyof typeof CURSOR_ICONS]\n      : typeof cursorContent === \"string\"\n        ? cursorContent\n        : null\n\n  return (\n    <div\n      ref={ref}\n      className={cn(\"relative size-full cursor-none\", className)}\n    >\n      {mouseState.elementX !== null && mouseState.elementY !== null && (\n        <div\n          className=\"pointer-events-none absolute z-50\"\n          style={{\n            left: mouseState.elementX,\n            top: mouseState.elementY,\n            transform: \"translate(-50%, -50%)\",\n          }}\n        >\n          <div className=\"size-3 rounded-full bg-foreground mix-blend-difference\" />\n          {cursorContent != null && (\n            <div className=\"absolute start-5 top-1/2 flex -translate-y-1/2 items-center gap-2 whitespace-nowrap rounded-full border border-white/25 bg-card/70 px-3 py-1.5 text-xs font-medium text-card-foreground shadow-soft backdrop-blur-md dark:border-white/15 dark:bg-zinc-900/70\">\n              {chipLabel}\n              {typeof cursorContent === \"string\" &&\n                cursorContent in CURSOR_ICONS && (\n                  <span className=\"capitalize text-muted-foreground\">\n                    {cursorContent}\n                  </span>\n                )}\n            </div>\n          )}\n        </div>\n      )}\n      {children ?? defaultChildren}\n    </div>\n  )\n}\n\nexport { CURSOR_ICONS }\n",
+      "target": "components/cursors/texticon-cursor.tsx"
+    }
+  ],
+  "version": "0.1.0+9c6543fbed07",
+  "generatedAt": "2026-10-30T17:30:40.356Z"
+}
