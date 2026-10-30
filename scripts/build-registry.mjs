@@ -186,7 +186,10 @@ function writeAtomic(dir, files) {
       writeFileSync(path.join(staging, name), contents, "utf8")
     }
 
-    const backup = `${dir}.bak-${Date.now()}`
+    // Keep leftovers outside public/ so they are never served or committed.
+    const backupsRoot = path.join(root, "_backups")
+    mkdirSync(backupsRoot, { recursive: true })
+    const backup = path.join(backupsRoot, `r-${Date.now()}`)
     let renamed = false
     if (existsSync(dir)) {
       try {

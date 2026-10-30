@@ -33,6 +33,8 @@ desktop.ini
 
 # Local registry backups (must not be publicly served under public/)
 /_backups/
+# Atomic-write leftovers from registry:build (never commit / never serve)
+/public/r.bak-*/
 
 # debug
 npm-debug.log*
