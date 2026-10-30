@@ -52,9 +52,9 @@ type MarkdownEditorProps = {
   onError?: (message: string) => void
 }
 
+/** Lean list — duplicates (yml/sh/empty) dropped so the mobile picker stays short. */
 const CODE_BLOCK_LANGUAGES = {
-  "": "Plain text",
-  txt: "Text",
+  txt: "Plain text",
   js: "JavaScript",
   jsx: "JSX",
   ts: "TypeScript",
@@ -63,15 +63,12 @@ const CODE_BLOCK_LANGUAGES = {
   html: "HTML",
   json: "JSON",
   md: "Markdown",
-  mdx: "MDX",
   py: "Python",
   go: "Go",
   rust: "Rust",
   sql: "SQL",
   bash: "Bash",
-  sh: "Shell",
   yaml: "YAML",
-  yml: "YAML",
   xml: "XML",
   graphql: "GraphQL",
 }

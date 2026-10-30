@@ -1788,43 +1788,99 @@
 }
 
 /*
- * Block type menu order: Paragraph, Quote, Heading 1…6.
- * Show Heading levels as a descending type scale.
+ * Block type menu only (Paragraph, Quote, Heading 1…6).
+ * Do NOT apply to code-block language select — that shared
+ * `_selectContainer_` / `.mdxeditor-select-content` and made
+ * languages look like oversized headings.
  */
-.mdxeditor-popup-container .mdxeditor-select-content [class*="_selectItem_"]:nth-child(3),
-.mdxeditor-popup-container [class*="_selectContainer_"] [class*="_selectItem_"]:nth-child(3) {
+.mdxeditor-popup-container [class*="_toolbarNodeKindSelectContainer_"] [class*="_selectItem_"]:nth-child(3),
+.mdxeditor-popup-container [class*="_toolbarNodeKindSelectItem_"]:nth-child(3) {
   font-size: 1.35rem !important;
   font-weight: 700 !important;
 }
 
-.mdxeditor-popup-container .mdxeditor-select-content [class*="_selectItem_"]:nth-child(4),
-.mdxeditor-popup-container [class*="_selectContainer_"] [class*="_selectItem_"]:nth-child(4) {
+.mdxeditor-popup-container [class*="_toolbarNodeKindSelectContainer_"] [class*="_selectItem_"]:nth-child(4),
+.mdxeditor-popup-container [class*="_toolbarNodeKindSelectItem_"]:nth-child(4) {
   font-size: 1.2rem !important;
   font-weight: 700 !important;
 }
 
-.mdxeditor-popup-container .mdxeditor-select-content [class*="_selectItem_"]:nth-child(5),
-.mdxeditor-popup-container [class*="_selectContainer_"] [class*="_selectItem_"]:nth-child(5) {
+.mdxeditor-popup-container [class*="_toolbarNodeKindSelectContainer_"] [class*="_selectItem_"]:nth-child(5),
+.mdxeditor-popup-container [class*="_toolbarNodeKindSelectItem_"]:nth-child(5) {
   font-size: 1.075rem !important;
   font-weight: 600 !important;
 }
 
-.mdxeditor-popup-container .mdxeditor-select-content [class*="_selectItem_"]:nth-child(6),
-.mdxeditor-popup-container [class*="_selectContainer_"] [class*="_selectItem_"]:nth-child(6) {
+.mdxeditor-popup-container [class*="_toolbarNodeKindSelectContainer_"] [class*="_selectItem_"]:nth-child(6),
+.mdxeditor-popup-container [class*="_toolbarNodeKindSelectItem_"]:nth-child(6) {
   font-size: 0.975rem !important;
   font-weight: 600 !important;
 }
 
-.mdxeditor-popup-container .mdxeditor-select-content [class*="_selectItem_"]:nth-child(7),
-.mdxeditor-popup-container [class*="_selectContainer_"] [class*="_selectItem_"]:nth-child(7) {
+.mdxeditor-popup-container [class*="_toolbarNodeKindSelectContainer_"] [class*="_selectItem_"]:nth-child(7),
+.mdxeditor-popup-container [class*="_toolbarNodeKindSelectItem_"]:nth-child(7) {
   font-size: 0.875rem !important;
   font-weight: 600 !important;
 }
 
-.mdxeditor-popup-container .mdxeditor-select-content [class*="_selectItem_"]:nth-child(8),
-.mdxeditor-popup-container [class*="_selectContainer_"] [class*="_selectItem_"]:nth-child(8) {
+.mdxeditor-popup-container [class*="_toolbarNodeKindSelectContainer_"] [class*="_selectItem_"]:nth-child(8),
+.mdxeditor-popup-container [class*="_toolbarNodeKindSelectItem_"]:nth-child(8) {
   font-size: 0.8125rem !important;
   font-weight: 600 !important;
+}
+
+/* Code fence language list — uniform size + long-list scroll (esp. mobile) */
+.mdxeditor-popup-container [class*="_toolbarCodeBlockLanguageSelectContent_"] {
+  z-index: 220 !important;
+  width: min(100vw - 1rem, 16rem) !important;
+  max-width: min(100vw - 1rem, 16rem) !important;
+  max-height: min(50vh, var(--radix-select-content-available-height, 50vh)) !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  touch-action: pan-y;
+  padding: 0.2rem !important;
+}
+
+.mdxeditor-popup-container [class*="_toolbarCodeBlockLanguageSelectContent_"] [class*="_selectItem_"] {
+  box-sizing: border-box !important;
+  min-height: 2.25rem !important;
+  display: flex !important;
+  align-items: center !important;
+  font-size: 0.8125rem !important;
+  font-weight: 500 !important;
+  line-height: 1.3 !important;
+  padding-block: 0.5rem !important;
+  padding-inline: 0.65rem !important;
+}
+
+@media (max-width: 767px) {
+  .mdxeditor-popup-container [class*="_toolbarCodeBlockLanguageSelectContent_"] {
+    /* Room for ~8–9 languages; rest scrolls — avoids covering the whole phone */
+    width: min(100vw - 0.75rem, 18rem) !important;
+    max-width: min(100vw - 0.75rem, 18rem) !important;
+    max-height: min(42dvh, 18rem) !important;
+    border-radius: 0.75rem !important;
+  }
+
+  .mdxeditor-popup-container [class*="_toolbarCodeBlockLanguageSelectContent_"] [class*="_selectItem_"] {
+    /* Comfortable tap targets without making the list endless-tall */
+    min-height: 2.75rem !important;
+    font-size: 0.875rem !important;
+    padding-block: 0.65rem !important;
+  }
+
+  /* Language chip on the code block — easier to open on touch */
+  .markdown-editor-root [class*="_codeMirrorToolbar_"] [class*="_selectTrigger_"] {
+    height: 2rem !important;
+    min-height: 2rem !important;
+    max-height: 2rem !important;
+    min-width: 4.5rem;
+    max-width: 8.5rem;
+    font-size: 0.8125rem !important;
+    padding-inline: 0.5rem 0.35rem !important;
+  }
 }
 
 /* Keep link anchor out of document flow (MDX sets fixed; reinforce) */
