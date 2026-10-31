@@ -11,6 +11,7 @@ import {
   MenuIcon,
   MousePointer2Icon,
   ShapesIcon,
+  StoreIcon,
   WrenchIcon,
   XIcon,
   type LucideIcon,
@@ -31,6 +32,7 @@ const NAV_ICONS: Record<string, LucideIcon> = {
   "/blocks": LayoutTemplateIcon,
   "/charts": ChartAreaIcon,
   "/cursors": MousePointer2Icon,
+  "/marketplace": StoreIcon,
   "/tools": WrenchIcon,
   "https://icons.sonojs.com": ShapesIcon,
 }

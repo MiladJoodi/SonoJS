@@ -6,6 +6,7 @@ import { useAuth } from "@clerk/nextjs"
 import {
   AuthDialog,
   type AuthDialogMode,
+  useSignedInHint,
 } from "@/components/auth"
 import { OFFER_RAIL_CLASS } from "@/components/sidebar-nav"
 import { cn } from "@/lib/utils"
@@ -19,9 +20,9 @@ const FREE_FEATURES = [
 ]
 
 /**
- * Desktop-only free-account promo in the workspace third column
- * (docs / blocks / charts). Hidden on mobile and when signed in.
- * CTA opens the same AuthDialog as the header (sign-up mode).
+ * Desktop-only free-account promo (docs / blocks / charts / marketplace).
+ * Hidden below `xl` and when signed in.
+ * Uses server SignedInHint until Clerk loads so members never flash the card.
  */
 export function WorkspaceOfferRail({
   className,
@@ -31,15 +32,17 @@ export function WorkspaceOfferRail({
   /** Meteor lap speed — same control as offer-card-01. */
   speed?: number
 }) {
-  const { isSignedIn, isLoaded } = useAuth()
+  const { isLoaded, isSignedIn } = useAuth()
+  const initialSignedIn = useSignedInHint()
+  const signedIn = isLoaded ? Boolean(isSignedIn) : initialSignedIn
   const [authOpen, setAuthOpen] = React.useState(false)
   const [authMode, setAuthMode] = React.useState<AuthDialogMode>("sign-up")
 
   React.useEffect(() => {
-    if (isSignedIn && authOpen) setAuthOpen(false)
-  }, [isSignedIn, authOpen])
+    if (signedIn && authOpen) setAuthOpen(false)
+  }, [signedIn, authOpen])
 
-  if (!isLoaded || isSignedIn) return null
+  if (signedIn) return null
 
   return (
     <aside

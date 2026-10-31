@@ -15,7 +15,7 @@ export const SIDEBAR_LAYOUT_PROVIDER_CLASS =
 export const SIDEBAR_LAYOUT_MAIN_CLASS =
   "h-full w-full min-w-0 max-w-none py-6 md:py-8"
 
-/** Desktop-only third column for the free-account offer card (docs / blocks / charts). */
+/** Desktop-only column for the free-account offer card (docs / blocks / charts / marketplace). */
 export const OFFER_RAIL_CLASS =
   "sticky top-[calc(var(--header-height)+0.6rem)] z-20 hidden w-full min-h-0 shrink-0 self-start pe-1 pt-2 xl:flex xl:flex-col"
 

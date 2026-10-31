@@ -1,5 +1,6 @@
 import { Suspense } from "react"
 
+import { SignedInHintProvider } from "@/components/auth"
 import { MobileHeaderScroll } from "@/components/mobile-header-scroll"
 import { NavigationProgress } from "@/components/navigation-progress"
 import { ScrollToTop } from "@/components/scroll-to-top"
@@ -17,23 +18,26 @@ export default async function AppLayout({
     getGithubStars(),
     getAuthUserId(),
   ])
+  const signedIn = Boolean(userId)
 
   return (
-    <div
-      data-slot="layout"
-      className="group/layout relative z-10 flex min-h-svh flex-col bg-background font-sans"
-    >
-      <Suspense fallback={null}>
-        <NavigationProgress />
-      </Suspense>
-      <ScrollToTop />
-      <MobileHeaderScroll />
-      <SiteHeader
-        githubStars={githubStars}
-        initialSignedIn={Boolean(userId)}
-      />
-      <main className="flex min-h-0 flex-1 flex-col">{children}</main>
-      <SiteFooter />
-    </div>
+    <SignedInHintProvider value={signedIn}>
+      <div
+        data-slot="layout"
+        className="group/layout relative z-10 flex min-h-svh flex-col bg-background font-sans"
+      >
+        <Suspense fallback={null}>
+          <NavigationProgress />
+        </Suspense>
+        <ScrollToTop />
+        <MobileHeaderScroll />
+        <SiteHeader
+          githubStars={githubStars}
+          initialSignedIn={signedIn}
+        />
+        <main className="flex min-h-0 flex-1 flex-col">{children}</main>
+        <SiteFooter />
+      </div>
+    </SignedInHintProvider>
   )
 }

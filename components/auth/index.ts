@@ -9,6 +9,10 @@ export { AccountIdentityHero } from "./account"
 export { AccountSettings } from "./account-settings"
 export { AuthDialog } from "./auth-dialog"
 export type { AuthDialogMode } from "./auth-dialog"
+export {
+  SignedInHintProvider,
+  useSignedInHint,
+} from "./signed-in-hint"
 export { ForgotPasswordForm } from "./forgot-password-form"
 export { SignInForm } from "./sign-in-form"
 export { SignUpContinueForm } from "./sign-up-continue-form"
