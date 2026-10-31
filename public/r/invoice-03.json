@@ -4,6 +4,7 @@
   "type": "registry:block",
   "title": "invoice-03",
   "description": "Reverse-charge B2B tax invoice — dual VAT IDs, 0% lines, legal note, wire instructions (RTL/LTR).",
+  "access": "public",
   "dependencies": [
     "lucide-react"
   ],
@@ -38,6 +39,6 @@
       "target": "components/blocks/payments-billing/invoice-03/invoice.tsx"
     }
   ],
-  "version": "0.1.0+682de9148ce8",
-  "generatedAt": "2026-10-30T19:37:01.588Z"
+  "version": "0.1.0+3f4db2465391",
+  "generatedAt": "2026-10-31T00:40:17.212Z"
 }

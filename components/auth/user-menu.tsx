@@ -4,6 +4,9 @@ import Link from "next/link"
 import { useClerk, useUser } from "@clerk/nextjs"
 import { LogOutIcon, SettingsIcon } from "lucide-react"
 
+import { PlanIcon } from "@/components/icons/plan-icon"
+import { getUserPlan, getViewerPlanId } from "@/lib/access"
+import { cn } from "@/lib/utils"
 import { Avatar, AvatarFallback, AvatarImage } from "@sonojs/ui/components/avatar"
 import { Button } from "@sonojs/ui/components/button"
 import {
@@ -44,6 +47,9 @@ export function UserMenu() {
 
   const name = user.fullName
   const email = user.primaryEmailAddress?.emailAddress
+  const metadata = user.publicMetadata
+  const isPro = getUserPlan(metadata) === "pro"
+  const planId = getViewerPlanId(metadata)
 
   return (
     <DropdownMenu>
@@ -65,10 +71,23 @@ export function UserMenu() {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-56">
         <DropdownMenuLabel className="font-normal">
-          <div className="flex flex-col gap-0.5">
-            <span className="truncate text-sm font-medium text-foreground">
-              {name || "Account"}
-            </span>
+          <div className="flex min-w-0 flex-col gap-0.5">
+            <div className="flex min-w-0 items-center gap-2">
+              <span className="truncate text-sm font-medium text-foreground">
+                {name || "Account"}
+              </span>
+              <span
+                className={cn(
+                  "inline-flex shrink-0 items-center gap-1 rounded-full px-1.5 py-0.5 text-[11px] font-medium tracking-tight",
+                  isPro
+                    ? "bg-primary/10 text-primary"
+                    : "bg-muted text-muted-foreground"
+                )}
+              >
+                <PlanIcon plan={planId} className="size-3" />
+                {isPro ? "Pro" : "Free"}
+              </span>
+            </div>
             {email ? (
               <span className="truncate text-xs text-muted-foreground">
                 {email}
@@ -77,7 +96,7 @@ export function UserMenu() {
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem asChild className="cursor-pointer">
+        <DropdownMenuItem asChild className="cursor-pointer py-2.5">
           <Link href="/account">
             <SettingsIcon className="size-4" />
             Account settings
@@ -86,7 +105,7 @@ export function UserMenu() {
         <DropdownMenuSeparator />
         <DropdownMenuItem
           variant="destructive"
-          className="cursor-pointer"
+          className="cursor-pointer py-2.5"
           onSelect={() => {
             void signOut({ redirectUrl: "/" })
           }}

@@ -9,6 +9,7 @@ import {
   Dialog,
   DialogContent,
   DialogTitle,
+  DialogTrigger,
 } from "@sonojs/ui/components/dialog"
 
 export type AuthDialogMode = "sign-in" | "sign-up" | "forgot-password"
@@ -17,10 +18,13 @@ export function AuthDialog({
   open,
   onOpenChange,
   defaultMode = "sign-in",
+  trigger,
 }: {
   open: boolean
   onOpenChange: (open: boolean) => void
   defaultMode?: AuthDialogMode
+  /** Prefer DialogTrigger so the open click does not dismiss the overlay. */
+  trigger?: React.ReactNode
 }) {
   const [mode, setMode] = React.useState<AuthDialogMode>(defaultMode)
 
@@ -39,10 +43,20 @@ export function AuthDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
+      {trigger ? <DialogTrigger asChild>{trigger}</DialogTrigger> : null}
       <DialogContent
         showCloseButton
         className="gap-0 overflow-y-auto border-border/70 p-6 sm:p-8"
         style={{ maxWidth: "min(28rem, calc(100% - 2rem))" }}
+        onOpenAutoFocus={(event) => {
+          // Avoid stealing focus in a way that can bounce the dialog closed.
+          event.preventDefault()
+          const root = event.currentTarget
+          const focusable = root.querySelector<HTMLElement>(
+            "input:not([disabled]),button:not([disabled])"
+          )
+          focusable?.focus()
+        }}
       >
         <DialogTitle className="sr-only">{title}</DialogTitle>
         {mode === "sign-in" ? (

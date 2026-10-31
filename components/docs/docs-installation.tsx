@@ -1,4 +1,7 @@
+import { AccessLocked } from "@/components/access/access-locked"
 import { DocsInstallationTabs } from "@/components/docs/docs-installation-tabs"
+import { maxContentAccess } from "@/lib/access"
+import { canAccessContent } from "@/lib/access-server"
 import {
   docsHintNpmDeps,
   docsInstallBash,
@@ -11,6 +14,7 @@ import { highlightCode } from "@/lib/highlight-code"
 /**
  * Installation: Command (`add`) + Manual (copy files from registry JSON).
  * Pass `names` when the page is a composition (e.g. date-picker → calendar + popover).
+ * Gates on registry `access` (site only — CLI/MCP unchanged).
  */
 export async function DocsInstallation({
   name,
@@ -25,6 +29,17 @@ export async function DocsInstallation({
   }
 
   const metas = await Promise.all(primary.map(readRegistryInstallMeta))
+  const access = maxContentAccess(metas.map((m) => m.access ?? "public"))
+
+  if (!(await canAccessContent(access))) {
+    return (
+      <section className="space-y-3">
+        <h2 className="text-h3">Installation</h2>
+        <AccessLocked access={access} />
+      </section>
+    )
+  }
+
   const primarySet = new Set(primary)
   const registry = [
     ...new Set(

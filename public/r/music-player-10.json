@@ -4,6 +4,7 @@
   "type": "registry:block",
   "title": "music-player-10",
   "description": "Bottom mini dock — closed until Start listening (RTL/LTR).",
+  "access": "public",
   "dependencies": [
     "lucide-react"
   ],
@@ -48,6 +49,6 @@
       "target": "components/blocks/files-media/music-player-10/media/demo.wav"
     }
   ],
-  "version": "0.1.0+682de9148ce8",
-  "generatedAt": "2026-10-30T19:37:01.588Z"
+  "version": "0.1.0+3f4db2465391",
+  "generatedAt": "2026-10-31T00:40:17.212Z"
 }

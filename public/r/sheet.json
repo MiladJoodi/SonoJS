@@ -4,6 +4,7 @@
   "type": "registry:ui",
   "title": "Sheet",
   "description": "A panel that slides in from an edge. Prefer side start/end for RTL-safe edges.",
+  "access": "public",
   "dependencies": [
     "radix-ui",
     "lucide-react",
@@ -31,6 +32,6 @@
       "target": "hooks/use-direction.tsx"
     }
   ],
-  "version": "0.1.0+682de9148ce8",
-  "generatedAt": "2026-10-30T19:37:01.588Z"
+  "version": "0.1.0+3f4db2465391",
+  "generatedAt": "2026-10-31T00:40:17.212Z"
 }

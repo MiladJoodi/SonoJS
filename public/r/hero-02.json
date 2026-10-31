@@ -4,6 +4,7 @@
   "type": "registry:block",
   "title": "hero-02",
   "description": "Centered productivity hero with gradient backdrop, responsive nav Sheet, dual CTAs, and KPI image.",
+  "access": "public",
   "registryDependencies": [
     "button",
     "sheet"
@@ -53,6 +54,6 @@
       "target": "components/blocks/marketing/hero-02/images/kpi-img-3.webp"
     }
   ],
-  "version": "0.1.0+682de9148ce8",
-  "generatedAt": "2026-10-30T19:37:01.588Z"
+  "version": "0.1.0+3f4db2465391",
+  "generatedAt": "2026-10-31T00:40:17.212Z"
 }

@@ -4,6 +4,7 @@
   "type": "registry:block",
   "title": "project-inquiry-form-01",
   "description": "Agency RFP brief — icon type grid, budget track, proposal review, and inquiry timeline confirmation.",
+  "access": "public",
   "dependencies": [
     "lucide-react"
   ],
@@ -41,6 +42,6 @@
       "target": "components/blocks/forms/project-inquiry-form-01/project-inquiry-form.tsx"
     }
   ],
-  "version": "0.1.0+682de9148ce8",
-  "generatedAt": "2026-10-30T19:37:01.588Z"
+  "version": "0.1.0+3f4db2465391",
+  "generatedAt": "2026-10-31T00:40:17.212Z"
 }

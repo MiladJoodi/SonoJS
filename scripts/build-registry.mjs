@@ -154,12 +154,16 @@ function buildItemPayload(item, version, generatedAt) {
     return payload
   })
 
+  const access =
+    item.access === "member" || item.access === "pro" ? item.access : "public"
+
   return {
     $schema: "https://ui.shadcn.com/schema/registry-item.json",
     name: item.name,
     type: item.type,
     title: item.title,
     description: item.description,
+    access,
     dependencies: item.dependencies,
     registryDependencies: item.registryDependencies,
     ...(item.cssVars ? { cssVars: item.cssVars } : {}),
@@ -171,11 +175,15 @@ function buildItemPayload(item, version, generatedAt) {
 }
 
 function toIndexEntry(item) {
+  const access =
+    item.access === "member" || item.access === "pro" ? item.access : "public"
+
   return {
     name: item.name,
     type: item.type,
     title: item.title,
     description: item.description,
+    access,
     dependencies: item.dependencies,
     registryDependencies: item.registryDependencies,
     ...(item.cssVars ? { cssVars: item.cssVars } : {}),

@@ -4,6 +4,7 @@
   "type": "registry:block",
   "title": "mega-menu-02",
   "description": "Institute Services mega dropdown with three CSS columns for governance, research, and training.",
+  "access": "public",
   "dependencies": [
     "lucide-react"
   ],
@@ -36,6 +37,6 @@
       "target": "components/blocks/navigation/mega-menu-02/mega-menu.tsx"
     }
   ],
-  "version": "0.1.0+682de9148ce8",
-  "generatedAt": "2026-10-30T19:37:01.588Z"
+  "version": "0.1.0+3f4db2465391",
+  "generatedAt": "2026-10-31T00:40:17.212Z"
 }

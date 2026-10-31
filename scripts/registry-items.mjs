@@ -14,6 +14,7 @@ import { cursorRegistryItems } from "./registry-cursor-items.mjs"
  *   type: string,
  *   title: string,
  *   description?: string,
+ *   access?: "public" | "member" | "pro",
  *   dependencies?: string[],
  *   registryDependencies?: string[],
  *   cssVars?: {
@@ -4218,6 +4219,21 @@ const registryItemsRaw = [
         path: "packages/ui/src/components/tooltip.tsx",
         type: "registry:ui",
         target: "components/ui/tooltip.tsx",
+      },
+    ],
+  },
+  {
+    name: "verified-badge",
+    type: "registry:ui",
+    title: "Verified Badge",
+    description:
+      "Instagram-style verified seal for creators, businesses, and trust UI.",
+    dependencies: ["class-variance-authority", "clsx", "tailwind-merge"],
+    files: [
+      {
+        path: "packages/ui/src/components/verified-badge.tsx",
+        type: "registry:ui",
+        target: "components/ui/verified-badge.tsx",
       },
     ],
   },

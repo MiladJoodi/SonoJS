@@ -106,6 +106,7 @@ const FOLDER_ORDER = [
   "tool-approval",
   "trace",
   "transcription",
+  "verified-badge",
   "voice-ai-orb",
   "voice-selector",
 ]

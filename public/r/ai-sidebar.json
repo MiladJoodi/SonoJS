@@ -4,6 +4,7 @@
   "type": "registry:ui",
   "title": "AI Sidebar",
   "description": "A feature-packed AI navigation sidebar with chat history, search, and profile footer.",
+  "access": "public",
   "dependencies": [
     "motion",
     "lucide-react",
@@ -23,6 +24,6 @@
       "target": "components/sonojs/ai-sidebar.tsx"
     }
   ],
-  "version": "0.1.0+682de9148ce8",
-  "generatedAt": "2026-10-30T19:37:01.588Z"
+  "version": "0.1.0+3f4db2465391",
+  "generatedAt": "2026-10-31T00:40:17.212Z"
 }

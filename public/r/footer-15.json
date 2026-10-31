@@ -4,6 +4,7 @@
   "type": "registry:block",
   "title": "footer-15",
   "description": "Career CTA banner with four link columns, Live Chat indicator, socials, and brand bar.",
+  "access": "public",
   "dependencies": [
     "lucide-react"
   ],
@@ -103,6 +104,6 @@
       "target": "components/blocks/marketing/footer-15/icons/dribbble.svg"
     }
   ],
-  "version": "0.1.0+682de9148ce8",
-  "generatedAt": "2026-10-30T19:37:01.588Z"
+  "version": "0.1.0+3f4db2465391",
+  "generatedAt": "2026-10-31T00:40:17.212Z"
 }

@@ -4,6 +4,7 @@
   "type": "registry:block",
   "title": "newsletter-10",
   "description": "Newsletter popup dialog — teaser stage, email subscribe form, and success state.",
+  "access": "public",
   "registryDependencies": [
     "button",
     "dialog",
@@ -34,6 +35,6 @@
       "target": "components/blocks/marketing/newsletter-10/newsletter.tsx"
     }
   ],
-  "version": "0.1.0+682de9148ce8",
-  "generatedAt": "2026-10-30T19:37:01.588Z"
+  "version": "0.1.0+3f4db2465391",
+  "generatedAt": "2026-10-31T00:40:17.212Z"
 }

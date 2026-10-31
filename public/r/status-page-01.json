@@ -4,6 +4,7 @@
   "type": "registry:block",
   "title": "status-page-01",
   "description": "Public status page - incident alert, KPIs, service cards with uptime bars, history, and regional health (RTL/LTR).",
+  "access": "public",
   "dependencies": [
     "lucide-react"
   ],
@@ -37,6 +38,6 @@
       "target": "components/blocks/feedback-states/status-page-01/status-page.tsx"
     }
   ],
-  "version": "0.1.0+682de9148ce8",
-  "generatedAt": "2026-10-30T19:37:01.588Z"
+  "version": "0.1.0+3f4db2465391",
+  "generatedAt": "2026-10-31T00:40:17.212Z"
 }

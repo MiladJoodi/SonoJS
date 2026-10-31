@@ -4,6 +4,7 @@
   "type": "registry:block",
   "title": "otp-verification-01",
   "description": "Email OTP card — masked address, 3–3 slots, resend countdown, different-email link (RTL/LTR).",
+  "access": "public",
   "dependencies": [
     "input-otp",
     "lucide-react"
@@ -37,6 +38,6 @@
       "target": "components/blocks/authentication/otp-verification-01/otp-verification-form.tsx"
     }
   ],
-  "version": "0.1.0+682de9148ce8",
-  "generatedAt": "2026-10-30T19:37:01.588Z"
+  "version": "0.1.0+3f4db2465391",
+  "generatedAt": "2026-10-31T00:40:17.212Z"
 }

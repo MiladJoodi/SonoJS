@@ -4,6 +4,7 @@
   "type": "registry:block",
   "title": "breadcrumbs-08",
   "description": "Breadcrumb with home icon, collapsed ellipsis dropdown, Profile, and Edit.",
+  "access": "public",
   "dependencies": [
     "lucide-react"
   ],
@@ -20,6 +21,6 @@
       "target": "components/blocks/navigation/breadcrumbs-08/breadcrumbs.tsx"
     }
   ],
-  "version": "0.1.0+682de9148ce8",
-  "generatedAt": "2026-10-30T19:37:01.588Z"
+  "version": "0.1.0+3f4db2465391",
+  "generatedAt": "2026-10-31T00:40:17.212Z"
 }

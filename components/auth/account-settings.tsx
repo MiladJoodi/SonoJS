@@ -2,25 +2,29 @@
 
 import * as React from "react"
 import { useRouter } from "next/navigation"
+import { useReverification, useUser } from "@clerk/nextjs"
 import {
-  useClerk,
-  useReverification,
-  useUser,
-} from "@clerk/nextjs"
-import {
+  CheckIcon,
+  EyeIcon,
+  EyeOffIcon,
   KeyIcon,
   Link2Icon,
-  LogOutIcon,
   ShieldIcon,
   Trash2Icon,
   UserIcon,
 } from "lucide-react"
 
+import { AccountIdentityHero } from "@/components/auth/account"
 import { GithubIcon } from "@/registry/icons/github"
 import { GoogleIcon } from "@/registry/icons/google"
+import {
+  formatPlanExpiry,
+  getEffectivePlanExpiresAt,
+  getUserPlan,
+  getViewerPlanId,
+  planLabel,
+} from "@/lib/access"
 import { cn } from "@/lib/utils"
-import { Avatar, AvatarFallback, AvatarImage } from "@sonojs/ui/components/avatar"
-import { Badge } from "@sonojs/ui/components/badge"
 import { Button } from "@sonojs/ui/components/button"
 import {
   Card,
@@ -31,8 +35,13 @@ import {
   CardTitle,
 } from "@sonojs/ui/components/card"
 import { Input } from "@sonojs/ui/components/input"
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupInput,
+} from "@sonojs/ui/components/input-group"
 import { Label } from "@sonojs/ui/components/label"
-import { Separator } from "@sonojs/ui/components/separator"
 import { Spinner } from "@sonojs/ui/components/spinner"
 import {
   Tabs,
@@ -59,20 +68,65 @@ const OAUTH_PROVIDERS: {
   { strategy: "oauth_github", label: "GitHub", Icon: GithubIcon },
 ]
 
-function initials(name?: string | null, email?: string | null) {
-  if (name?.trim()) {
-    return name
-      .split(/\s+/)
-      .slice(0, 2)
-      .map((part) => part[0]?.toUpperCase() ?? "")
-      .join("")
-  }
-  return email?.[0]?.toUpperCase() ?? "?"
-}
-
 function FieldError({ message }: { message?: string | null }) {
   if (!message) return null
   return <p className="text-sm text-destructive">{message}</p>
+}
+
+function PasswordField({
+  id,
+  label,
+  value,
+  onChange,
+  autoComplete,
+  disabled,
+  required,
+}: {
+  id: string
+  label: string
+  value: string
+  onChange: (value: string) => void
+  autoComplete: string
+  disabled?: boolean
+  required?: boolean
+}) {
+  const [visible, setVisible] = React.useState(false)
+
+  return (
+    <div className="grid gap-2">
+      <Label htmlFor={id}>{label}</Label>
+      <InputGroup>
+        <InputGroupInput
+          id={id}
+          type={visible ? "text" : "password"}
+          autoComplete={autoComplete}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          required={required}
+          disabled={disabled}
+          className="shadow-none"
+        />
+        <InputGroupAddon align="inline-end">
+          <InputGroupButton
+            type="button"
+            size="icon-xs"
+            variant="ghost"
+            className="cursor-pointer text-muted-foreground/55 shadow-none hover:bg-transparent hover:text-muted-foreground"
+            aria-label={visible ? "Hide password" : "Show password"}
+            aria-pressed={visible}
+            disabled={disabled}
+            onClick={() => setVisible((v) => !v)}
+          >
+            {visible ? (
+              <EyeOffIcon className="size-4" aria-hidden />
+            ) : (
+              <EyeIcon className="size-4" aria-hidden />
+            )}
+          </InputGroupButton>
+        </InputGroupAddon>
+      </InputGroup>
+    </div>
+  )
 }
 
 function StatusMessage({
@@ -98,10 +152,7 @@ function StatusMessage({
 
 export function AccountSettings({ className }: { className?: string }) {
   const { isLoaded, isSignedIn, user } = useUser()
-  const { signOut } = useClerk()
   const router = useRouter()
-  const fileRef = React.useRef<HTMLInputElement>(null)
-
   const [firstName, setFirstName] = React.useState("")
   const [lastName, setLastName] = React.useState("")
   const [profileMsg, setProfileMsg] = React.useState<string | null>(null)
@@ -170,6 +221,13 @@ export function AccountSettings({ className }: { className?: string }) {
 
   const email = user.primaryEmailAddress?.emailAddress
   const displayName = user.fullName || email || "Account"
+  const metadata = user.publicMetadata
+  const isPro = getUserPlan(metadata) === "pro"
+  const planId = getViewerPlanId(metadata)
+  const planName = planLabel(metadata)
+  const planExpiryLabel = formatPlanExpiry(
+    getEffectivePlanExpiresAt(metadata)
+  )
 
   const saveProfile = async (event: React.FormEvent) => {
     event.preventDefault()
@@ -186,9 +244,7 @@ export function AccountSettings({ className }: { className?: string }) {
     }
   }
 
-  const onAvatarChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0]
-    if (!file) return
+  const onAvatarFile = async (file: File) => {
     setProfileBusy(true)
     setProfileError(null)
     setProfileMsg(null)
@@ -199,7 +255,6 @@ export function AccountSettings({ className }: { className?: string }) {
       setProfileError(err instanceof Error ? err.message : "Could not update avatar.")
     } finally {
       setProfileBusy(false)
-      event.target.value = ""
     }
   }
 
@@ -316,42 +371,35 @@ export function AccountSettings({ className }: { className?: string }) {
         className
       )}
     >
-      <div className="mx-auto w-full max-w-5xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-          <div className="space-y-1.5 text-start">
-            <h1 className="text-h3 font-semibold tracking-tight text-foreground">
-              Account settings
-            </h1>
-            <p className="text-sm text-muted-foreground sm:text-base">
-              Manage your profile, password, and connected accounts.
-            </p>
-          </div>
-          <Button
-            type="button"
-            variant="outline"
-            className="w-fit cursor-pointer border-border/70 bg-card shadow-none"
-            onClick={() => void signOut({ redirectUrl: "/" })}
-          >
-            <LogOutIcon className="size-4" />
-            Sign out
-          </Button>
-        </div>
+      <div className="mx-auto flex w-full max-w-5xl flex-col gap-10 px-4 sm:px-6 lg:px-8">
+        <AccountIdentityHero
+          name={displayName}
+          email={email}
+          imageUrl={user.imageUrl}
+          isPro={isPro}
+          planId={planId}
+          planName={planName}
+          expiryLabel={planExpiryLabel}
+          avatarBusy={profileBusy}
+          onPickAvatar={(file) => void onAvatarFile(file)}
+          onRemoveAvatar={() => void removeAvatar()}
+        />
 
         <Tabs
           defaultValue="profile"
           orientation="vertical"
-          className="flex flex-col gap-6 md:flex-row md:items-start md:gap-8"
+          className="flex flex-col gap-3 md:flex-row md:items-start md:!gap-2"
         >
-          <div className="w-full shrink-0 md:w-56">
+          <div className="w-full shrink-0 md:w-48">
             <TabsList
               aria-label="Account settings sections"
-              className="h-auto w-full flex-row justify-start gap-1 overflow-x-auto rounded-[12px] border border-border/70 bg-card p-1.5 shadow-soft md:flex-col md:overflow-visible"
+              className="h-auto w-full flex-row justify-start gap-0.5 overflow-x-auto rounded-[12px] border border-border/60 bg-card p-1 md:flex-col md:overflow-visible"
             >
               {NAV.map((item) => (
                 <TabsTrigger
                   key={item.value}
                   value={item.value}
-                  className="h-10 cursor-pointer justify-start gap-2 rounded-md px-3 data-[state=active]:bg-primary/10 data-[state=active]:text-primary"
+                  className="h-10 cursor-pointer justify-start gap-2 rounded-md px-3 data-[state=active]:bg-primary/10 data-[state=active]:shadow-none data-[state=active]:text-primary"
                 >
                   <item.icon className="size-4" aria-hidden />
                   {item.label}
@@ -362,58 +410,14 @@ export function AccountSettings({ className }: { className?: string }) {
 
           <div className="min-w-0 flex-1 space-y-6">
             <TabsContent value="profile" className="mt-0">
-              <Card className="gap-0 border-border/70 py-0 shadow-soft">
-                <CardHeader className="border-b border-border/70 py-6">
+              <Card className="gap-0 border-border/60 py-0 shadow-none">
+                <CardHeader className="border-b border-border/50 py-6">
                   <CardTitle>Profile</CardTitle>
                   <CardDescription>
-                    Your name and avatar across SonoJS.
+                    Update your name. Change your photo from the avatar above.
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6 py-6">
-                  <div className="flex flex-col items-start gap-6 sm:flex-row sm:items-center">
-                    <Avatar className="size-20" size="lg">
-                      <AvatarImage src={user.imageUrl} alt="" />
-                      <AvatarFallback>
-                        {initials(displayName, email)}
-                      </AvatarFallback>
-                    </Avatar>
-                    <div className="flex flex-col items-start gap-2">
-                      <input
-                        ref={fileRef}
-                        type="file"
-                        accept="image/*"
-                        className="sr-only"
-                        onChange={onAvatarChange}
-                      />
-                      <div className="flex flex-wrap gap-2">
-                        <Button
-                          type="button"
-                          size="sm"
-                          className="cursor-pointer"
-                          disabled={profileBusy}
-                          onClick={() => fileRef.current?.click()}
-                        >
-                          Change avatar
-                        </Button>
-                        <Button
-                          type="button"
-                          size="sm"
-                          variant="ghost"
-                          className="cursor-pointer text-destructive hover:bg-destructive/10 hover:text-destructive"
-                          disabled={profileBusy}
-                          onClick={() => void removeAvatar()}
-                        >
-                          Remove
-                        </Button>
-                      </div>
-                      <p className="text-xs text-muted-foreground">
-                        JPG, PNG, or WebP. Square images work best.
-                      </p>
-                    </div>
-                  </div>
-
-                  <Separator />
-
                   <form className="grid gap-4" onSubmit={saveProfile}>
                     <div className="grid gap-4 sm:grid-cols-2">
                       <div className="grid gap-2">
@@ -469,8 +473,8 @@ export function AccountSettings({ className }: { className?: string }) {
             </TabsContent>
 
             <TabsContent value="security" className="mt-0">
-              <Card className="gap-0 border-border/70 py-0 shadow-soft">
-                <CardHeader className="border-b border-border/70 py-6">
+              <Card className="gap-0 border-border/60 py-0 shadow-none">
+                <CardHeader className="border-b border-border/50 py-6">
                   <CardTitle className="flex items-center gap-2">
                     <KeyIcon className="size-4" aria-hidden />
                     {user.passwordEnabled ? "Change password" : "Add a password"}
@@ -484,48 +488,36 @@ export function AccountSettings({ className }: { className?: string }) {
                 <CardContent className="py-6">
                   <form className="grid max-w-md gap-4" onSubmit={savePassword}>
                     {user.passwordEnabled ? (
-                      <div className="grid gap-2">
-                        <Label htmlFor="current-password">Current password</Label>
-                        <Input
-                          id="current-password"
-                          type="password"
-                          autoComplete="current-password"
-                          value={currentPassword}
-                          onChange={(e) => setCurrentPassword(e.target.value)}
-                          required
-                          disabled={passwordBusy}
-                          className="shadow-none"
-                        />
-                      </div>
+                      <PasswordField
+                        id="current-password"
+                        label="Current password"
+                        autoComplete="current-password"
+                        value={currentPassword}
+                        onChange={setCurrentPassword}
+                        required
+                        disabled={passwordBusy}
+                      />
                     ) : null}
-                    <div className="grid gap-2">
-                      <Label htmlFor="new-password">
-                        {user.passwordEnabled ? "New password" : "Password"}
-                      </Label>
-                      <Input
-                        id="new-password"
-                        type="password"
-                        autoComplete="new-password"
-                        value={newPassword}
-                        onChange={(e) => setNewPassword(e.target.value)}
-                        required
-                        disabled={passwordBusy}
-                        className="shadow-none"
-                      />
-                    </div>
-                    <div className="grid gap-2">
-                      <Label htmlFor="confirm-password">Confirm password</Label>
-                      <Input
-                        id="confirm-password"
-                        type="password"
-                        autoComplete="new-password"
-                        value={confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                        required
-                        disabled={passwordBusy}
-                        className="shadow-none"
-                      />
-                    </div>
+                    <PasswordField
+                      id="new-password"
+                      label={
+                        user.passwordEnabled ? "New password" : "Password"
+                      }
+                      autoComplete="new-password"
+                      value={newPassword}
+                      onChange={setNewPassword}
+                      required
+                      disabled={passwordBusy}
+                    />
+                    <PasswordField
+                      id="confirm-password"
+                      label="Confirm password"
+                      autoComplete="new-password"
+                      value={confirmPassword}
+                      onChange={setConfirmPassword}
+                      required
+                      disabled={passwordBusy}
+                    />
                     <FieldError message={passwordError} />
                     {passwordMsg ? (
                       <StatusMessage tone="success">{passwordMsg}</StatusMessage>
@@ -549,8 +541,8 @@ export function AccountSettings({ className }: { className?: string }) {
             </TabsContent>
 
             <TabsContent value="connections" className="mt-0">
-              <Card className="gap-0 border-border/70 py-0 shadow-soft">
-                <CardHeader className="border-b border-border/70 py-6">
+              <Card className="gap-0 border-border/60 py-0 shadow-none">
+                <CardHeader className="border-b border-border/50 py-6">
                   <CardTitle>Connected accounts</CardTitle>
                   <CardDescription>
                     Link Google or GitHub for faster sign-in.
@@ -578,7 +570,9 @@ export function AccountSettings({ className }: { className?: string }) {
                             </p>
                             {connected ? (
                               <p className="truncate text-xs text-muted-foreground">
-                                {connected.emailAddress || connected.username || "Connected"}
+                                {connected.emailAddress ||
+                                  connected.username ||
+                                  "Connected"}
                               </p>
                             ) : (
                               <p className="text-xs text-muted-foreground">
@@ -589,16 +583,34 @@ export function AccountSettings({ className }: { className?: string }) {
                         </div>
                         {connected ? (
                           <div className="flex items-center gap-2">
-                            <Badge variant="secondary">Connected</Badge>
+                            <span
+                              className="inline-flex items-center gap-1 text-emerald-600/70 dark:text-emerald-400/65"
+                              title="Connected"
+                            >
+                              <CheckIcon
+                                className="size-3.5 stroke-[2.5]"
+                                aria-hidden
+                              />
+                              <span className="hidden text-xs font-medium tracking-tight sm:inline">
+                                Connected
+                              </span>
+                              <span className="sr-only sm:hidden">Connected</span>
+                            </span>
                             <Button
                               type="button"
                               size="sm"
                               variant="outline"
                               className="cursor-pointer border-border/70 shadow-none"
                               disabled={busy}
-                              onClick={() => void disconnectProvider(connected.id)}
+                              onClick={() =>
+                                void disconnectProvider(connected.id)
+                              }
                             >
-                              {busy ? <Spinner className="size-4" /> : "Disconnect"}
+                              {busy ? (
+                                <Spinner className="size-4" />
+                              ) : (
+                                "Disconnect"
+                              )}
                             </Button>
                           </div>
                         ) : (
@@ -622,8 +634,8 @@ export function AccountSettings({ className }: { className?: string }) {
             </TabsContent>
 
             <TabsContent value="danger" className="mt-0">
-              <Card className="gap-0 border-destructive/30 py-0 shadow-soft">
-                <CardHeader className="border-b border-destructive/20 py-6">
+              <Card className="gap-0 border-destructive/25 py-0 shadow-none">
+                <CardHeader className="border-b border-destructive/15 py-6">
                   <CardTitle className="text-destructive">Delete account</CardTitle>
                   <CardDescription>
                     Permanently remove your account and all associated data.

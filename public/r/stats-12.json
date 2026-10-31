@@ -4,6 +4,7 @@
   "type": "registry:block",
   "title": "stats-12",
   "description": "Tomato (light) / gray (dark) join-us band with heading and three metrics.",
+  "access": "public",
   "files": [
     {
       "path": "components/blocks/marketing/stats-12/stats.tsx",
@@ -12,6 +13,6 @@
       "target": "components/blocks/marketing/stats-12/stats.tsx"
     }
   ],
-  "version": "0.1.0+682de9148ce8",
-  "generatedAt": "2026-10-30T19:37:01.588Z"
+  "version": "0.1.0+3f4db2465391",
+  "generatedAt": "2026-10-31T00:40:17.212Z"
 }

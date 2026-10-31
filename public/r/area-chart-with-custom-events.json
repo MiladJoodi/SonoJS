@@ -4,6 +4,7 @@
   "type": "registry:chart",
   "title": "Area Chart With Custom Events",
   "description": "Neon step area with chart-root pointer events via getRelativeCoordinate — live event panel, metric scrubber, RTL-aware.",
+  "access": "public",
   "dependencies": [
     "recharts"
   ],
@@ -32,6 +33,6 @@
       "target": "components/charts/area-chart-with-custom-events.tsx"
     }
   ],
-  "version": "0.1.0+682de9148ce8",
-  "generatedAt": "2026-10-30T19:37:01.588Z"
+  "version": "0.1.0+3f4db2465391",
+  "generatedAt": "2026-10-31T00:40:17.212Z"
 }

@@ -1,0 +1,6 @@
+export { VerifiedBadgeDefault } from "./default"
+export { VerifiedBadgeVariants } from "./variants"
+export { VerifiedBadgeProfile } from "./profile"
+export { VerifiedBadgeComment } from "./comment"
+export { VerifiedBadgeSeller } from "./seller"
+export { VerifiedBadgeTrust } from "./trust"

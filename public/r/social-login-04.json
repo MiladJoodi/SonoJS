@@ -4,6 +4,7 @@
   "type": "registry:block",
   "title": "social-login-04",
   "description": "Photo-split social sign-in — cover panel + Google/Apple card (RTL/LTR).",
+  "access": "public",
   "dependencies": [],
   "registryDependencies": [
     "button",
@@ -66,6 +67,6 @@
       "target": "components/blocks/authentication/social-login-04/icons/apple.svg"
     }
   ],
-  "version": "0.1.0+682de9148ce8",
-  "generatedAt": "2026-10-30T19:37:01.588Z"
+  "version": "0.1.0+3f4db2465391",
+  "generatedAt": "2026-10-31T00:40:17.212Z"
 }

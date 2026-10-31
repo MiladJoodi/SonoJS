@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "verified-badge",
+  "type": "registry:ui",
+  "title": "Verified Badge",
+  "description": "Instagram-style verified seal for creators, businesses, and trust UI.",
+  "access": "public",
+  "dependencies": [
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "files": [
+    {
+      "path": "components/ui/verified-badge.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n/**\n * Instagram-style verified seal (scalloped badge + check).\n * Colors via `variant`; size via `size` or `className`.\n */\nconst verifiedBadgeVariants = cva(\n  \"sonojs inline-block shrink-0 align-middle\",\n  {\n    variants: {\n      variant: {\n        /** Classic creator / personal verify */\n        blue: \"text-[#0095F6]\",\n        /** Business / Meta gold */\n        gold: \"text-[#E0A800]\",\n        /** Muted / inactive */\n        gray: \"text-muted-foreground\",\n      },\n      size: {\n        sm: \"size-3.5\",\n        md: \"size-4\",\n        lg: \"size-5\",\n      },\n    },\n    defaultVariants: {\n      variant: \"blue\",\n      size: \"md\",\n    },\n  }\n)\n\nfunction VerifiedBadge({\n  className,\n  variant = \"blue\",\n  size = \"md\",\n  title = \"Verified\",\n  ...props\n}: React.ComponentProps<\"svg\"> &\n  VariantProps<typeof verifiedBadgeVariants> & {\n    /** Accessible name for the mark. */\n    title?: string\n  }) {\n  return (\n    <svg\n      data-slot=\"verified-badge\"\n      data-variant={variant}\n      viewBox=\"0 0 40 40\"\n      fill=\"none\"\n      xmlns=\"http://www.w3.org/2000/svg\"\n      role=\"img\"\n      aria-label={title}\n      className={cn(verifiedBadgeVariants({ variant, size }), className)}\n      {...props}\n    >\n      <title>{title}</title>\n      {/* Scalloped seal */}\n      <path\n        fill=\"currentColor\"\n        d=\"M19.998 3.094 14.638 0l-2.972 5.15H5.432v6.354L0 14.64 3.094 20 0 25.359l5.432 3.137v5.351h6.234l2.972 5.15 5.358-3.086 5.358 3.087 2.972-5.15h6.234v-5.351l5.432-3.137L40 25.359 36.905 20 40 14.641l-5.432-3.137V5.15h-6.234L25.358 0l-5.36 3.094z\"\n      />\n      {/* Check */}\n      <path\n        fill=\"#fff\"\n        d=\"M26.311 14.538l2.254 2.287-11.43 11.5-6.837-6.93 2.244-2.258 4.587 4.581 9.182-9.18z\"\n      />\n    </svg>\n  )\n}\n\nexport { VerifiedBadge, verifiedBadgeVariants }\n",
+      "target": "components/ui/verified-badge.tsx"
+    }
+  ],
+  "version": "0.1.0+3f4db2465391",
+  "generatedAt": "2026-10-31T00:40:17.212Z"
+}

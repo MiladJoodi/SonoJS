@@ -4,6 +4,7 @@
   "type": "registry:block",
   "title": "order-tracking-07",
   "description": "Order tracking overview — meta row, responsive step rail, product grid, and end-aligned billing (RTL/LTR).",
+  "access": "public",
   "dependencies": [
     "lucide-react"
   ],
@@ -52,6 +53,6 @@
       "target": "components/blocks/ecommerce/order-tracking-07/images/watch-silver.webp"
     }
   ],
-  "version": "0.1.0+682de9148ce8",
-  "generatedAt": "2026-10-30T19:37:01.588Z"
+  "version": "0.1.0+3f4db2465391",
+  "generatedAt": "2026-10-31T00:40:17.212Z"
 }

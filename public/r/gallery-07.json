@@ -4,6 +4,7 @@
   "type": "registry:block",
   "title": "gallery-07",
   "description": "Featured hero tile beside a 2×2 image grid with soft frames and hover zoom.",
+  "access": "public",
   "cssVars": {
     "light": {
       "canvas": "#f3f3f4",
@@ -63,6 +64,6 @@
       "target": "components/blocks/files-media/gallery-07/images/gallery-5.webp"
     }
   ],
-  "version": "0.1.0+682de9148ce8",
-  "generatedAt": "2026-10-30T19:37:01.588Z"
+  "version": "0.1.0+3f4db2465391",
+  "generatedAt": "2026-10-31T00:40:17.212Z"
 }

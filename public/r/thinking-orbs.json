@@ -4,6 +4,7 @@
   "type": "registry:ui",
   "title": "Thinking Orbs",
   "description": "Animated orb states that visualize an AI agent's work.",
+  "access": "public",
   "dependencies": [],
   "files": [
     {
@@ -103,6 +104,6 @@
       "target": "components/sonojs/thinking-orbs/engine/web.ts"
     }
   ],
-  "version": "0.1.0+682de9148ce8",
-  "generatedAt": "2026-10-30T19:37:01.588Z"
+  "version": "0.1.0+3f4db2465391",
+  "generatedAt": "2026-10-31T00:40:17.212Z"
 }

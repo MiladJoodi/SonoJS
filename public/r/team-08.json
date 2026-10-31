@@ -4,6 +4,7 @@
   "type": "registry:block",
   "title": "team-08",
   "description": "Interactive circular portrait cards with hover scale and local images.",
+  "access": "public",
   "cssVars": {
     "light": {
       "canvas": "#f3f3f4",
@@ -70,6 +71,6 @@
       "target": "components/blocks/marketing/team-08/images/team-06.webp"
     }
   ],
-  "version": "0.1.0+682de9148ce8",
-  "generatedAt": "2026-10-30T19:37:01.588Z"
+  "version": "0.1.0+3f4db2465391",
+  "generatedAt": "2026-10-31T00:40:17.212Z"
 }

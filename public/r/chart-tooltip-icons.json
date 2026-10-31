@@ -4,6 +4,7 @@
   "type": "registry:chart",
   "title": "Tooltip Icons",
   "description": "Stacked Delivery x Pickup bars with ChartTooltipContent series icons (Footprints / Waves) and hideLabel - locked chrome, metric scrubber, RTL-aware.",
+  "access": "public",
   "dependencies": [
     "recharts",
     "lucide-react"
@@ -32,6 +33,6 @@
       "target": "components/charts/chart-tooltip-icons.tsx"
     }
   ],
-  "version": "0.1.0+682de9148ce8",
-  "generatedAt": "2026-10-30T19:37:01.588Z"
+  "version": "0.1.0+3f4db2465391",
+  "generatedAt": "2026-10-31T00:40:17.212Z"
 }

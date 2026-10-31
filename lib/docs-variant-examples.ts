@@ -99,6 +99,7 @@ const EXAMPLE_FOLDERS = [
   "tooltip",
   "trace",
   "transcription",
+  "verified-badge",
   "voice-ai-orb",
   "voice-selector",
 ] as const

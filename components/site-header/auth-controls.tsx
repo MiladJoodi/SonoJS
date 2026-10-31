@@ -8,6 +8,7 @@ import {
   type AuthDialogMode,
   UserMenu,
 } from "@/components/auth"
+import { useEnsureUserPlan } from "@/hooks/use-ensure-user-plan"
 import { Button } from "@sonojs/ui/components/button"
 import { Skeleton } from "@sonojs/ui/components/skeleton"
 
@@ -17,36 +18,44 @@ export function AuthControls() {
   const [open, setOpen] = React.useState(false)
   const [mode, setMode] = React.useState<AuthDialogMode>("sign-in")
 
-  // Close the auth dialog as soon as the session becomes active (e.g. OAuth popup).
+  // Default missing plan → Free; expire Pro when planExpiresAt has passed.
+  useEnsureUserPlan()
+
+  // Close the auth dialog as soon as the session becomes active.
   React.useEffect(() => {
     if (isSignedIn && open) setOpen(false)
   }, [isSignedIn, open])
 
+  if (!isLoaded) {
+    return (
+      <Skeleton
+        className="size-8 shrink-0 rounded-full"
+        aria-hidden
+        aria-busy="true"
+      />
+    )
+  }
+
+  if (isSignedIn) {
+    return <UserMenu />
+  }
+
   return (
-    <>
-      {!isLoaded ? (
-        <Skeleton
-          className="size-8 shrink-0 rounded-full"
-          aria-hidden
-          aria-busy="true"
-        />
-      ) : isSignedIn ? (
-        <UserMenu />
-      ) : (
+    <AuthDialog
+      open={open}
+      onOpenChange={setOpen}
+      defaultMode={mode}
+      trigger={
         <Button
           type="button"
           variant="ghost"
           size="sm"
           className="h-8 cursor-pointer rounded-md px-2.5 text-[12.5px] font-medium"
-          onClick={() => {
-            setMode("sign-in")
-            setOpen(true)
-          }}
+          onClick={() => setMode("sign-in")}
         >
           Sign in
         </Button>
-      )}
-      <AuthDialog open={open} onOpenChange={setOpen} defaultMode={mode} />
-    </>
+      }
+    />
   )
 }

@@ -198,6 +198,7 @@ export const componentsNav: {
         { title: "Skeleton", href: "/docs/components/skeleton" },
         { title: "Sonner", href: "/docs/components/sonner" },
         { title: "Spinner", href: "/docs/components/spinner" },
+        { title: "Verified Badge", href: "/docs/components/verified-badge" },
       ],
     },
     {

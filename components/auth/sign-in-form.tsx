@@ -3,7 +3,7 @@
 import * as React from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { useAuth, useClerk, useSignIn } from "@clerk/nextjs"
+import { useAuth, useSignIn } from "@clerk/nextjs"
 
 import { GithubIcon } from "@/registry/icons/github"
 import { GoogleIcon } from "@/registry/icons/google"
@@ -13,7 +13,6 @@ import {
   AuthFieldError,
   type AuthFormProps,
 } from "@/components/auth/auth-card"
-import { isSsoDoneMessage } from "@/components/auth/sso-message"
 import { Button } from "@sonojs/ui/components/button"
 import { Input } from "@sonojs/ui/components/input"
 import { Label } from "@sonojs/ui/components/label"
@@ -45,7 +44,6 @@ export function SignInForm({
   onForgotPassword,
 }: AuthFormProps = {}) {
   const { isSignedIn } = useAuth()
-  const clerk = useClerk()
   const { signIn, errors, fetchStatus } = useSignIn()
   const router = useRouter()
   const [code, setCode] = React.useState("")
@@ -54,46 +52,9 @@ export function SignInForm({
   const [magicLinkError, setMagicLinkError] = React.useState<string | null>(
     null
   )
+  const [oauthError, setOauthError] = React.useState<string | null>(null)
   const busy = fetchStatus === "fetching"
-  const finishingOAuth = React.useRef(false)
   const magicLinkAbort = React.useRef(false)
-
-  const activateSession = React.useCallback(async () => {
-    if (finishingOAuth.current) return
-    finishingOAuth.current = true
-    try {
-      if (signIn?.status === "complete") {
-        await signIn.finalize({
-          navigate: ({ session, decorateUrl }) => {
-            if (session?.currentTask) return
-            router.refresh()
-            if (onSuccess) {
-              onSuccess()
-              return
-            }
-            navigateAfterAuth(router, decorateUrl)
-          },
-        })
-        return
-      }
-
-      await clerk.session?.reload()
-      if (!clerk.session) {
-        await clerk.client?.reload()
-        const next =
-          clerk.client?.signedInSessions?.[0] ?? clerk.client?.sessions?.[0]
-        if (next) {
-          await clerk.setActive({ session: next.id })
-        }
-      }
-
-      router.refresh()
-      if (onSuccess) onSuccess()
-      else router.replace("/")
-    } finally {
-      finishingOAuth.current = false
-    }
-  }, [clerk, onSuccess, router, signIn])
 
   React.useEffect(() => {
     if (!isSignedIn) return
@@ -103,17 +64,6 @@ export function SignInForm({
     }
     router.replace("/")
   }, [isSignedIn, onSuccess, router])
-
-  // Backup when OAuth finishes on our /sso-callback inside the popup.
-  React.useEffect(() => {
-    const onMessage = (event: MessageEvent) => {
-      if (event.origin !== window.location.origin) return
-      if (!isSsoDoneMessage(event.data)) return
-      void activateSession()
-    }
-    window.addEventListener("message", onMessage)
-    return () => window.removeEventListener("message", onMessage)
-  }, [activateSession])
 
   React.useEffect(() => {
     return () => {
@@ -223,47 +173,17 @@ export function SignInForm({
   }
 
   const handleOAuth = async (strategy: "oauth_google" | "oauth_github") => {
-    // Open synchronously from the click so the browser allows the popup.
-    const width = 500
-    const height = 700
-    const left = Math.max(0, window.screenX + (window.outerWidth - width) / 2)
-    const top = Math.max(0, window.screenY + (window.outerHeight - height) / 2)
-    const popup = window.open(
-      "about:blank",
-      "clerkOAuth",
-      `popup=yes,width=${width},height=${height},left=${left},top=${top}`
-    )
-    if (!popup) {
-      // Popup blocked — fall back to full-page redirect.
-      const { error } = await signIn.sso({
-        strategy,
-        redirectCallbackUrl: "/sso-callback",
-        redirectUrl: "/",
-      })
-      if (error) console.error(JSON.stringify(error, null, 2))
-      return
-    }
-
+    setOauthError(null)
+    // Full-page redirect — reliable with Google/GitHub (no popup / COOP).
     const { error } = await signIn.sso({
       strategy,
-      popup,
       redirectCallbackUrl: "/sso-callback",
       redirectUrl: "/",
     })
     if (error) {
-      if (!popup.closed) popup.close()
+      setOauthError(error.message)
       console.error(JSON.stringify(error, null, 2))
-      return
     }
-
-    // Future SSO only reloads the SignIn resource after the popup posts back —
-    // activate the session so the header / dialog update without a refresh.
-    if (!popup.closed) popup.close()
-    if (signIn.status === "complete") {
-      await finalize()
-      return
-    }
-    await activateSession()
   }
 
   if (signIn.status === "needs_client_trust") {
@@ -451,6 +371,7 @@ export function SignInForm({
           GitHub
         </Button>
       </div>
+      {oauthError ? <AuthFieldError message={oauthError} /> : null}
 
       <Button
         type="button"

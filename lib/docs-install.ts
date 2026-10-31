@@ -1,6 +1,8 @@
 import { readFile } from "node:fs/promises"
 import path from "node:path"
 
+import { normalizeContentAccess } from "@/lib/access"
+
 /**
  * Packages that are baseline / noise for the “Also needs” bar.
  * Always surface lucide-react, react-day-picker, date-fns, recharts, …
@@ -29,6 +31,7 @@ export type RegistryInstallFile = {
 }
 
 export type RegistryInstallMeta = {
+  access?: "public" | "member" | "pro"
   dependencies?: string[]
   registryDependencies?: string[]
   files?: RegistryInstallFile[]
@@ -41,6 +44,7 @@ type RegistryJsonFile = {
 }
 
 type RegistryJson = {
+  access?: string
   dependencies?: string[]
   registryDependencies?: string[]
   files?: RegistryJsonFile[]
@@ -67,12 +71,18 @@ export async function readRegistryInstallMeta(
     const raw = await readFile(file, "utf8")
     const json = JSON.parse(raw) as RegistryJson
     return {
+      access: normalizeContentAccess(json.access),
       dependencies: json.dependencies ?? [],
       registryDependencies: json.registryDependencies ?? [],
       files: mapFiles(json.files),
     }
   } catch {
-    return { dependencies: [], registryDependencies: [], files: [] }
+    return {
+      access: "public",
+      dependencies: [],
+      registryDependencies: [],
+      files: [],
+    }
   }
 }
 

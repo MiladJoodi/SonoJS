@@ -4,6 +4,7 @@
   "type": "registry:block",
   "title": "cta-03",
   "description": "Split CTA with copy and dual actions beside a media panel.",
+  "access": "public",
   "registryDependencies": [
     "button"
   ],
@@ -38,6 +39,6 @@
       "target": "components/blocks/marketing/cta-03/images/team.webp"
     }
   ],
-  "version": "0.1.0+682de9148ce8",
-  "generatedAt": "2026-10-30T19:37:01.588Z"
+  "version": "0.1.0+3f4db2465391",
+  "generatedAt": "2026-10-31T00:40:17.212Z"
 }

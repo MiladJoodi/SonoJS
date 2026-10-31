@@ -4,6 +4,7 @@
   "type": "registry:block",
   "title": "shopping-cart-08",
   "description": "End-edge Drawer cart with free-shipping progress, size selects, and sticky checkout footer.",
+  "access": "public",
   "dependencies": [
     "lucide-react"
   ],
@@ -63,6 +64,6 @@
       "target": "components/blocks/ecommerce/shopping-cart-08/images/watch-3.webp"
     }
   ],
-  "version": "0.1.0+682de9148ce8",
-  "generatedAt": "2026-10-30T19:37:01.588Z"
+  "version": "0.1.0+3f4db2465391",
+  "generatedAt": "2026-10-31T00:40:17.212Z"
 }

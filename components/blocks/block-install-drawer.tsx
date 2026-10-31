@@ -3,9 +3,13 @@
 import * as React from "react"
 import { CodeIcon } from "lucide-react"
 
+import { AccessLocked } from "@/components/access/access-locked"
 import { CodePanel } from "@/components/docs/code-panel"
 import { DocsInstallationTabs } from "@/components/docs/docs-installation-tabs"
 import { LoadingRing } from "@/components/sono-loader"
+import { useContentAccess } from "@/hooks/use-content-access"
+import type { ContentAccess } from "@/lib/access"
+import { normalizeContentAccess } from "@/lib/access"
 import { Button } from "@sonojs/ui/components/button"
 import {
   Drawer,
@@ -28,6 +32,7 @@ const NPM_SKIP = new Set([
 type InstallFile = { title: string; content: string }
 
 type InstallMeta = {
+  access: ContentAccess
   dependencies: string[]
   registryDependencies: string[]
   files: InstallFile[]
@@ -63,6 +68,7 @@ function notableNpm(deps: string[]) {
 }
 
 function parseMeta(json: {
+  access?: string
   dependencies?: string[]
   registryDependencies?: string[]
   files?: {
@@ -82,6 +88,7 @@ function parseMeta(json: {
     files.push({ title, content: file.content })
   }
   return {
+    access: normalizeContentAccess(json.access),
     dependencies: json.dependencies ?? [],
     registryDependencies: json.registryDependencies ?? [],
     files,
@@ -194,6 +201,8 @@ export function BlockInstallBody({
   // eslint-disable-next-line react-hooks/exhaustive-deps -- usage via key
   }, [key, name])
 
+  const gate = useContentAccess(meta?.access)
+
   if (error) {
     return (
       <div className="flex min-h-[28rem] w-full items-center justify-center">
@@ -202,7 +211,27 @@ export function BlockInstallBody({
     )
   }
 
-  if (!meta || !highlighted) {
+  if (!meta || !gate.ready) {
+    return (
+      <div
+        className="flex min-h-[28rem] w-full items-center justify-center"
+        role="status"
+        aria-label="Loading install details"
+      >
+        <LoadingRing size={40} showLabel label="Loading…" />
+      </div>
+    )
+  }
+
+  if (!gate.allowed) {
+    return (
+      <div className="w-full min-w-0 p-1">
+        <AccessLocked access={gate.access} />
+      </div>
+    )
+  }
+
+  if (!highlighted) {
     return (
       <div
         className="flex min-h-[28rem] w-full items-center justify-center"

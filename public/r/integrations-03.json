@@ -4,6 +4,7 @@
   "type": "registry:block",
   "title": "integrations-03",
   "description": "Compact connected list — status, last sync, enable switches, configure, and row menu (RTL/LTR).",
+  "access": "public",
   "dependencies": [
     "lucide-react"
   ],
@@ -37,6 +38,6 @@
       "target": "components/blocks/developer-tools/integrations-03/integrations.tsx"
     }
   ],
-  "version": "0.1.0+682de9148ce8",
-  "generatedAt": "2026-10-30T19:37:01.588Z"
+  "version": "0.1.0+3f4db2465391",
+  "generatedAt": "2026-10-31T00:40:17.212Z"
 }

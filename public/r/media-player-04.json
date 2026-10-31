@@ -4,6 +4,7 @@
   "type": "registry:block",
   "title": "media-player-04",
   "description": "Live stream + chat rail — LIVE badge, DVR scrubber, go-to-live, mock chat (RTL/LTR).",
+  "access": "public",
   "dependencies": [
     "lucide-react"
   ],
@@ -51,6 +52,6 @@
       "target": "components/blocks/files-media/media-player-04/media/flower.mp4"
     }
   ],
-  "version": "0.1.0+682de9148ce8",
-  "generatedAt": "2026-10-30T19:37:01.588Z"
+  "version": "0.1.0+3f4db2465391",
+  "generatedAt": "2026-10-31T00:40:17.212Z"
 }

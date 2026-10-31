@@ -4,6 +4,7 @@
   "type": "registry:block",
   "title": "signup-06",
   "description": "Dark full-bleed sign-up with Google and Apple.",
+  "access": "public",
   "registryDependencies": [
     "button",
     "input",
@@ -44,6 +45,6 @@
       "target": "components/blocks/authentication/signup-06/icons/apple.svg"
     }
   ],
-  "version": "0.1.0+682de9148ce8",
-  "generatedAt": "2026-10-30T19:37:01.588Z"
+  "version": "0.1.0+3f4db2465391",
+  "generatedAt": "2026-10-31T00:40:17.212Z"
 }

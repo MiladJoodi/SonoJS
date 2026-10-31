@@ -4,18 +4,7 @@ import { HandleSSOCallback } from "@clerk/nextjs"
 import { useRouter } from "next/navigation"
 
 import { AuthPageShell } from "@/components/auth"
-import { SSO_DONE } from "@/components/auth/sso-message"
 import { Spinner } from "@sonojs/ui/components/spinner"
-
-function finishInPopup(url: string) {
-  if (typeof window === "undefined") return
-  if (window.opener && !window.opener.closed) {
-    window.opener.postMessage({ type: SSO_DONE, url }, window.location.origin)
-    window.close()
-    return
-  }
-  window.location.assign(url)
-}
 
 export default function SsoCallbackPage() {
   const router = useRouter()
@@ -30,30 +19,14 @@ export default function SsoCallbackPage() {
         navigateToApp={({ session, decorateUrl }) => {
           if (session?.currentTask) return
           const url = decorateUrl("/")
-          if (window.opener && !window.opener.closed) {
-            finishInPopup(url.startsWith("http") ? url : "/")
-            return
-          }
           if (url.startsWith("http")) {
             window.location.href = url
-            return
+          } else {
+            router.push(url)
           }
-          router.push(url)
         }}
-        navigateToSignIn={() => {
-          if (window.opener && !window.opener.closed) {
-            finishInPopup("/sign-in")
-            return
-          }
-          router.push("/sign-in")
-        }}
-        navigateToSignUp={() => {
-          if (window.opener && !window.opener.closed) {
-            finishInPopup("/sign-up")
-            return
-          }
-          router.push("/sign-up")
-        }}
+        navigateToSignIn={() => router.push("/sign-in")}
+        navigateToSignUp={() => router.push("/sign-up/continue")}
       />
     </AuthPageShell>
   )

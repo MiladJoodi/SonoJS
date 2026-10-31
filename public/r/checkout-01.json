@@ -4,6 +4,7 @@
   "type": "registry:block",
   "title": "checkout-01",
   "description": "Fixed sidebar checkout — sticky muted bag with promo and totals left, delivery grid and Card/PayPal tiles right (RTL/LTR).",
+  "access": "public",
   "registryDependencies": [
     "button",
     "checkbox",
@@ -91,6 +92,6 @@
       "target": "components/blocks/ecommerce/checkout-01/images/paypal.webp"
     }
   ],
-  "version": "0.1.0+682de9148ce8",
-  "generatedAt": "2026-10-30T19:37:01.588Z"
+  "version": "0.1.0+3f4db2465391",
+  "generatedAt": "2026-10-31T00:40:17.212Z"
 }

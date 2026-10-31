@@ -4,6 +4,7 @@
   "type": "registry:block",
   "title": "gallery-09",
   "description": "Interactive featured image with selectable thumbnail strip and active indicator.",
+  "access": "public",
   "cssVars": {
     "light": {
       "canvas": "#f3f3f4",
@@ -63,6 +64,6 @@
       "target": "components/blocks/files-media/gallery-09/images/gallery-7.webp"
     }
   ],
-  "version": "0.1.0+682de9148ce8",
-  "generatedAt": "2026-10-30T19:37:01.588Z"
+  "version": "0.1.0+3f4db2465391",
+  "generatedAt": "2026-10-31T00:40:17.212Z"
 }

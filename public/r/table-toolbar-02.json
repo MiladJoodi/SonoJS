@@ -4,6 +4,7 @@
   "type": "registry:block",
   "title": "table-toolbar-02",
   "description": "Orders toolbar with faceted filters, date/amount ranges, typed operators, and removable chips.",
+  "access": "public",
   "dependencies": [
     "lucide-react"
   ],
@@ -41,6 +42,6 @@
       "target": "components/blocks/data-tables/table-toolbar-02/table.tsx"
     }
   ],
-  "version": "0.1.0+682de9148ce8",
-  "generatedAt": "2026-10-30T19:37:01.588Z"
+  "version": "0.1.0+3f4db2465391",
+  "generatedAt": "2026-10-31T00:40:17.212Z"
 }

@@ -4,6 +4,7 @@
   "type": "registry:block",
   "title": "chat-composer-01",
   "description": "Hero chat composer - h-13 pill, voice toggle, audio affordance, attach menu, and Enter to send (RTL/LTR).",
+  "access": "public",
   "dependencies": [
     "lucide-react"
   ],
@@ -36,6 +37,6 @@
       "target": "components/blocks/ai-agents/chat-composer-01/chat-composer.tsx"
     }
   ],
-  "version": "0.1.0+682de9148ce8",
-  "generatedAt": "2026-10-30T19:37:01.588Z"
+  "version": "0.1.0+3f4db2465391",
+  "generatedAt": "2026-10-31T00:40:17.212Z"
 }

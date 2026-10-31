@@ -4,6 +4,7 @@
   "type": "registry:ui",
   "title": "Persona",
   "description": "An animated AI visual powered by Rive WebGL2 for idle, listening, thinking, speaking, and asleep.",
+  "access": "public",
   "dependencies": [
     "@rive-app/react-webgl2",
     "clsx",
@@ -17,6 +18,6 @@
       "target": "components/sonojs/persona.tsx"
     }
   ],
-  "version": "0.1.0+682de9148ce8",
-  "generatedAt": "2026-10-30T19:37:01.588Z"
+  "version": "0.1.0+3f4db2465391",
+  "generatedAt": "2026-10-31T00:40:17.212Z"
 }
