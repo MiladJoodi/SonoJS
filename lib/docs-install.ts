@@ -1,7 +1,5 @@
-import { readFile } from "node:fs/promises"
-import path from "node:path"
-
 import { normalizeContentAccess } from "@/lib/access"
+import { readRegistryJson } from "@/lib/read-registry-json"
 
 /**
  * Packages that are baseline / noise for the “Also needs” bar.
@@ -66,23 +64,20 @@ function mapFiles(files: RegistryJsonFile[] | undefined): RegistryInstallFile[] 
 export async function readRegistryInstallMeta(
   name: string
 ): Promise<RegistryInstallMeta> {
-  try {
-    const file = path.join(process.cwd(), "public", "r", `${name}.json`)
-    const raw = await readFile(file, "utf8")
-    const json = JSON.parse(raw) as RegistryJson
-    return {
-      access: normalizeContentAccess(json.access),
-      dependencies: json.dependencies ?? [],
-      registryDependencies: json.registryDependencies ?? [],
-      files: mapFiles(json.files),
-    }
-  } catch {
+  const json = await readRegistryJson<RegistryJson>(name)
+  if (!json) {
     return {
       access: "public",
       dependencies: [],
       registryDependencies: [],
       files: [],
     }
+  }
+  return {
+    access: normalizeContentAccess(json.access),
+    dependencies: json.dependencies ?? [],
+    registryDependencies: json.registryDependencies ?? [],
+    files: mapFiles(json.files),
   }
 }
 

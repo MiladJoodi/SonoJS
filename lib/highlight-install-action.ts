@@ -1,9 +1,7 @@
 "use server"
 
-import { readFile } from "node:fs/promises"
-import path from "node:path"
-
 import { highlightCode } from "@/lib/highlight-code"
+import { readRegistryJson } from "@/lib/read-registry-json"
 
 export type HighlightBlockUsage = {
   title: string
@@ -20,8 +18,8 @@ const NAME_RE = /^[a-z0-9][a-z0-9-]*$/i
 
 /**
  * Highlight install snippets for a registry block.
- * Reads `public/r/<name>.json` on the server so the client never POSTs
- * full source (Next.js logs server-action args in dev).
+ * Loads `public/r/<name>.json` via disk or static URL (not bundled into
+ * every serverless function) so the client never POSTs full source.
  */
 export async function highlightBlockInstall(
   name: string,
@@ -31,15 +29,16 @@ export async function highlightBlockInstall(
     throw new Error("Invalid registry item name")
   }
 
-  const filePath = path.join(process.cwd(), "public", "r", `${name}.json`)
-  const raw = await readFile(filePath, "utf8")
-  const json = JSON.parse(raw) as {
+  const json = await readRegistryJson<{
     files?: {
       path?: string
       target?: string
       content?: string
       encoding?: string
     }[]
+  }>(name)
+  if (!json) {
+    throw new Error(`Registry item not found: ${name}`)
   }
 
   const files: { title: string; code: string }[] = []

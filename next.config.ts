@@ -19,6 +19,20 @@ const nextConfig: NextConfig = {
   transpilePackages: ["@sonojs/ui", "@mdxeditor/editor"],
   // Keep Shiki off Turbopack transforms (token colors / grammars stay intact)
   serverExternalPackages: ["shiki"],
+  /**
+   * Docs/routes that `readFile` registry paths used to pull entire trees into
+   * each Vercel Function (public/r alone ~120MB → over the 250MB limit).
+   * Registry JSON is served as static `/r/*`; loaders fetch or read one file.
+   */
+  outputFileTracingExcludes: {
+    "*": [
+      "./public/r/**",
+      "./registry/blocks/**",
+      "./registry/charts/**",
+      "./node_modules/highcharts/**",
+      "./node_modules/highcharts-react-official/**",
+    ],
+  },
   // Slow disks freeze on Turbopack FS cache compaction — disable in local dev
   experimental: {
     turbopackFileSystemCacheForDev: false,

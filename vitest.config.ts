@@ -7,8 +7,7 @@ export default defineConfig({
     include: [
       "components/tools/endpoints/**/*.test.ts",
       "components/pricing/**/*.test.ts",
-      "lib/seo.test.ts",
-      "lib/stripe/**/*.test.ts",
+      "lib/**/*.test.ts",
       "db/**/*.test.ts",
     ],
     // Neon HTTP round-trips; concurrency races need headroom
