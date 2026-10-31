@@ -1,8 +1,12 @@
 "use client"
 
-import Link from "next/link"
+import * as React from "react"
 import { useAuth } from "@clerk/nextjs"
 
+import {
+  AuthDialog,
+  type AuthDialogMode,
+} from "@/components/auth"
 import { OFFER_RAIL_CLASS } from "@/components/sidebar-nav"
 import { cn } from "@/lib/utils"
 import OfferCard from "@/registry/blocks/marketing/offer-card/offer-card-01/offer-card"
@@ -17,6 +21,7 @@ const FREE_FEATURES = [
 /**
  * Desktop-only free-account promo in the workspace third column
  * (docs / blocks / charts). Hidden on mobile and when signed in.
+ * CTA opens the same AuthDialog as the header (sign-up mode).
  */
 export function WorkspaceOfferRail({
   className,
@@ -27,6 +32,12 @@ export function WorkspaceOfferRail({
   speed?: number
 }) {
   const { isSignedIn, isLoaded } = useAuth()
+  const [authOpen, setAuthOpen] = React.useState(false)
+  const [authMode, setAuthMode] = React.useState<AuthDialogMode>("sign-up")
+
+  React.useEffect(() => {
+    if (isSignedIn && authOpen) setAuthOpen(false)
+  }, [isSignedIn, authOpen])
 
   if (!isLoaded || isSignedIn) return null
 
@@ -56,21 +67,34 @@ export function WorkspaceOfferRail({
           compareAt=""
           tier="FREE"
           ctaLabel="Create free account"
-          ctaHref="/sign-up"
+          onCtaClick={() => {
+            setAuthMode("sign-up")
+            setAuthOpen(true)
+          }}
           trustLead="Trusted by"
           trustHighlight="builders"
           trustTrail="shipping free"
         />
         <p className="mt-2.5 text-center text-[11px] text-muted-foreground">
           Already have an account?{" "}
-          <Link
-            href="/sign-in"
-            className="font-semibold text-foreground underline-offset-2 hover:underline"
+          <button
+            type="button"
+            className="cursor-pointer font-semibold text-foreground underline-offset-2 hover:underline"
+            onClick={() => {
+              setAuthMode("sign-in")
+              setAuthOpen(true)
+            }}
           >
             Sign in
-          </Link>
+          </button>
         </p>
       </div>
+
+      <AuthDialog
+        open={authOpen}
+        onOpenChange={setAuthOpen}
+        defaultMode={authMode}
+      />
     </aside>
   )
 }

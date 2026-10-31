@@ -8,9 +8,11 @@ import { WorkspaceOfferRail } from "@/components/workspace-offer-rail"
 import { cn } from "@/lib/utils"
 import { SidebarProvider } from "@sonojs/ui/components/sidebar"
 
-/** Docs depend on registry metadata + static MDX/TSX — bake at build; refresh on deploy. */
-export const dynamic = "force-static"
-
+/**
+ * Docs HTML is still cache-friendly via `next.config` Cache-Control on `/docs`.
+ * Do not force-static: Installation gates call Clerk `auth()`, which needs the
+ * request (proxy headers / cookies). force-static → missing AuthStatus → 500/404.
+ */
 export default function DocsLayout({
   children,
 }: {

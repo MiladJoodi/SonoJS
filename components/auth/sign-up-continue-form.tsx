@@ -107,6 +107,7 @@ export function SignUpContinueForm() {
   const needsLast = missingSet.has("last_name")
   const needsLegal = missingSet.has("legal_acceptance")
   const needsPhone = missingSet.has("phone_number")
+  const needsUsername = missingSet.has("username")
   const handled = new Set([
     "first_name",
     "last_name",
@@ -114,6 +115,7 @@ export function SignUpContinueForm() {
     "phone_number",
     "password",
     "email_address",
+    "username",
   ])
   const unknownMissing = missing.filter((f) => !handled.has(f))
 
@@ -150,12 +152,16 @@ export function SignUpContinueForm() {
       firstName?: string
       lastName?: string
       phoneNumber?: string
+      username?: string
       legalAccepted?: boolean
     } = {}
 
     if (needsFirst) payload.firstName = String(form.get("firstName") ?? "").trim()
     if (needsLast) payload.lastName = String(form.get("lastName") ?? "").trim()
     if (needsPhone) payload.phoneNumber = String(form.get("phoneNumber") ?? "").trim()
+    if (needsUsername) {
+      payload.username = String(form.get("username") ?? "").trim()
+    }
     // Always send when required — OAuth continue often only needs this.
     if (needsLegal) payload.legalAccepted = true
 
@@ -314,6 +320,22 @@ export function SignUpContinueForm() {
               className="shadow-none"
             />
             <AuthFieldError message={errors.fields.phoneNumber?.message} />
+          </div>
+        ) : null}
+
+        {needsUsername ? (
+          <div className="grid gap-2">
+            <Label htmlFor="continue-username">Username</Label>
+            <Input
+              id="continue-username"
+              name="username"
+              autoComplete="username"
+              defaultValue={signUp.username ?? ""}
+              required
+              disabled={busy}
+              className="shadow-none"
+            />
+            <AuthFieldError message={errors.fields.username?.message} />
           </div>
         ) : null}
 

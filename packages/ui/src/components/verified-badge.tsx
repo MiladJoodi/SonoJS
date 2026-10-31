@@ -4,20 +4,20 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@sonojs/ui/lib/utils"
 
 /**
- * Instagram-style verified seal (scalloped badge + check).
- * Colors via `variant`; size via `size` or `className`.
+ * Verified seal (scalloped badge + check) — Instagram / X (Twitter) style.
+ * Colors match X’s three check tiers (blue · gold · gray).
  */
 const verifiedBadgeVariants = cva(
   "sonojs inline-block shrink-0 align-middle",
   {
     variants: {
       variant: {
-        /** Classic creator / personal verify */
-        blue: "text-[#0095F6]",
-        /** Business / Meta gold */
-        gold: "text-[#E0A800]",
-        /** Muted / inactive */
-        gray: "text-muted-foreground",
+        /** X Premium / creator — Twitter blue */
+        blue: "text-[#1D9BF0]",
+        /** X Organizations / business — gold */
+        gold: "text-[#E2B719]",
+        /** X Government / institutions — gray */
+        gray: "text-[#829AAB]",
       },
       size: {
         sm: "size-3.5",

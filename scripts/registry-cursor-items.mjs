@@ -6,11 +6,15 @@
  *   type: string,
  *   title: string,
  *   description?: string,
+ *   access?: "public" | "member" | "pro",
  *   dependencies?: string[],
  *   registryDependencies?: string[],
  *   files: RegistryFileDef[]
  * }} RegistryItemDef
  */
+
+/** Cursor installs/code on the site require a Free (signed-in) account or higher. */
+const CURSOR_SITE_ACCESS = "member"
 
 /** @type {RegistryItemDef[]} */
 export const cursorRegistryItems = [
@@ -403,3 +407,9 @@ export const cursorRegistryItems = [
     ],
   },
 ]
+
+for (const item of cursorRegistryItems) {
+  if (item.type === "registry:cursor") {
+    item.access = CURSOR_SITE_ACCESS
+  }
+}

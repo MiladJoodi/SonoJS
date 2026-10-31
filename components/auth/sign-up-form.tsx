@@ -13,6 +13,10 @@ import {
   AuthFieldError,
   type AuthFormProps,
 } from "@/components/auth/auth-card"
+import {
+  getAuthReturnPath,
+  rememberAuthReturnPath,
+} from "@/lib/auth-return-path"
 import { Button } from "@sonojs/ui/components/button"
 import { Input } from "@sonojs/ui/components/input"
 import { Label } from "@sonojs/ui/components/label"
@@ -29,7 +33,7 @@ function navigateAfterAuth(
   router: ReturnType<typeof useRouter>,
   decorateUrl: (path: string) => string
 ) {
-  const url = decorateUrl("/")
+  const url = decorateUrl(getAuthReturnPath())
   if (url.startsWith("http")) {
     window.location.href = url
   } else {
@@ -54,9 +58,10 @@ export function SignUpForm({
     if (!isSignedIn) return
     if (onSuccess) {
       onSuccess()
+      router.refresh()
       return
     }
-    router.replace("/")
+    router.replace(getAuthReturnPath())
   }, [isSignedIn, onSuccess, router])
 
   if (!signUp || isSignedIn) {
@@ -131,10 +136,11 @@ export function SignUpForm({
 
   const handleOAuth = async (strategy: "oauth_google" | "oauth_github") => {
     setOauthError(null)
+    const returnTo = rememberAuthReturnPath()
     const { error } = await signUp.sso({
       strategy,
       redirectCallbackUrl: "/sso-callback",
-      redirectUrl: "/",
+      redirectUrl: returnTo,
     })
     if (error) {
       setOauthError(error.message)

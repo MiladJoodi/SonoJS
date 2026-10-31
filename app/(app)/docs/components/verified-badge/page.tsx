@@ -1,3 +1,4 @@
+import { AccessGate } from "@/components/access/access-gate"
 import {
   ComponentSource,
   ComponentVariantPreview,
@@ -23,7 +24,8 @@ const exampleDefs = [
   {
     name: "verified-badge-variants",
     title: "Variants",
-    description: "`blue` for creators, `gold` for business, `gray` for muted.",
+    description:
+      "X / Twitter tiers — `blue` Premium, `gold` business, `gray` government.",
   },
   {
     name: "verified-badge-profile",
@@ -68,25 +70,31 @@ export default async function VerifiedBadgeDocsPage() {
         pathname="/docs/components/verified-badge"
         description={
           <p className="leading-relaxed text-muted-foreground">
-            Instagram-style verified seal for creators, businesses, and trust
-            UI — place next to names, in comments, or on seller cards.
+            Verified seal for creators, businesses, and institutions — X /
+            Twitter color tiers (`blue`, `gold`, `gray`). Place next to names,
+            in comments, or on seller cards.
           </p>
         }
       />
 
       <section className="space-y-4">
-        <ComponentVariantPreview examples={examples} />
+        <ComponentVariantPreview
+          examples={examples}
+          previewSurface="card"
+        />
       </section>
 
       <DocsInstallation name="verified-badge" />
 
       <section className="space-y-3">
         <h2 className="text-h3">Usage</h2>
-        <ComponentSource
-          title="verified-badge.tsx"
-          lang="tsx"
-          code={usageSource}
-        />
+        <AccessGate access="member">
+          <ComponentSource
+            title="verified-badge.tsx"
+            lang="tsx"
+            code={usageSource}
+          />
+        </AccessGate>
       </section>
 
       <section className="space-y-3">
@@ -97,7 +105,8 @@ export default async function VerifiedBadgeDocsPage() {
               name: "variant",
               type: '"blue" | "gold" | "gray"',
               defaultValue: '"blue"',
-              description: "Seal color — creator blue, business gold, or muted gray.",
+              description:
+                "X / Twitter tiers — Premium blue (`#1D9BF0`), business gold (`#E2B719`), government gray (`#829AAB`).",
             },
             {
               name: "size",

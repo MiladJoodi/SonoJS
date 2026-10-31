@@ -1,6 +1,6 @@
 import "server-only"
 
-import { auth, clerkClient, currentUser } from "@clerk/nextjs/server"
+import { clerkClient } from "@clerk/nextjs/server"
 
 import {
   canAccess,
@@ -11,6 +11,7 @@ import {
   type UserPlan,
   type Viewer,
 } from "@/lib/access"
+import { getAuthUserId } from "@/lib/clerk-auth"
 
 /**
  * Persist Free when Pro has passed `planExpiresAt`.
@@ -35,11 +36,13 @@ export async function syncExpiredPlanToFree(
 }
 
 export async function getViewer(): Promise<Viewer> {
-  const { userId } = await auth()
+  const userId = await getAuthUserId()
   if (!userId) return { kind: "guest" }
 
-  const user = await currentUser()
-  const metadata = user?.publicMetadata
+  // Prefer API user fetch — `currentUser()` also depends on middleware headers.
+  const client = await clerkClient()
+  const user = await client.users.getUser(userId)
+  const metadata = user.publicMetadata
 
   if (isProExpired(metadata)) {
     void syncExpiredPlanToFree(userId, metadata).catch((err) => {

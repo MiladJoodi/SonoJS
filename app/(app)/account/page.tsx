@@ -1,8 +1,8 @@
 import type { Metadata } from "next"
-import { auth } from "@clerk/nextjs/server"
 import { redirect } from "next/navigation"
 
 import { AccountSettings } from "@/components/auth/account-settings"
+import { getAuthUserId } from "@/lib/clerk-auth"
 
 export const metadata: Metadata = {
   title: "Account",
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 }
 
 export default async function AccountPage() {
-  const { userId } = await auth()
+  const userId = await getAuthUserId()
   if (!userId) redirect("/sign-in")
 
   return <AccountSettings />

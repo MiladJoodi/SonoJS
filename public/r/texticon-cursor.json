@@ -4,7 +4,7 @@
   "type": "registry:cursor",
   "title": "Text Icon Cursor",
   "description": "Contextual text or icon chip near the pointer.",
-  "access": "public",
+  "access": "member",
   "dependencies": [
     "lucide-react"
   ],
@@ -19,6 +19,6 @@
       "target": "components/cursors/texticon-cursor.tsx"
     }
   ],
-  "version": "0.1.0+3f4db2465391",
-  "generatedAt": "2026-10-31T00:40:17.212Z"
+  "version": "0.1.0+815dcc9c67ae",
+  "generatedAt": "2026-10-31T01:39:32.527Z"
 }

@@ -11,6 +11,7 @@ import {
   AuthFieldError,
   type AuthFormProps,
 } from "@/components/auth/auth-card"
+import { getAuthReturnPath } from "@/lib/auth-return-path"
 import { Button } from "@sonojs/ui/components/button"
 import { Input } from "@sonojs/ui/components/input"
 import { Label } from "@sonojs/ui/components/label"
@@ -26,7 +27,7 @@ function navigateAfterAuth(
   router: ReturnType<typeof useRouter>,
   decorateUrl: (path: string) => string
 ) {
-  const url = decorateUrl("/")
+  const url = decorateUrl(getAuthReturnPath())
   if (url.startsWith("http")) {
     window.location.href = url
   } else {
@@ -57,9 +58,10 @@ export function ForgotPasswordForm({
     if (!isSignedIn) return
     if (onSuccess) {
       onSuccess()
+      router.refresh()
       return
     }
-    router.replace("/")
+    router.replace(getAuthReturnPath())
   }, [isSignedIn, onSuccess, router])
 
   if (!signIn || isSignedIn) {

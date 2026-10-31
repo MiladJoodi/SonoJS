@@ -1,4 +1,4 @@
-import { auth, clerkClient } from "@clerk/nextjs/server"
+import { clerkClient } from "@clerk/nextjs/server"
 import { NextResponse } from "next/server"
 
 import {
@@ -6,6 +6,7 @@ import {
   getUserPlan,
   isProExpired,
 } from "@/lib/access"
+import { getAuthUserId } from "@/lib/clerk-auth"
 
 /**
  * After sign-up (and on each session sync):
@@ -14,7 +15,7 @@ import {
  * Never upgrades Free → Pro (that stays manual / future billing).
  */
 export async function POST() {
-  const { userId } = await auth()
+  const userId = await getAuthUserId()
   if (!userId) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
   }

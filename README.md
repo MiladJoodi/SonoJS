@@ -27,6 +27,27 @@ npm install
 npm run dev
 ```
 
+### Stripe billing webhooks (Test mode)
+
+Forward **all** billing events SonoJS handles (Checkout + invoices + subscription lifecycle). Do **not** listen only to `invoice.paid` — new Checkout customers need `checkout.session.completed` (or subscription metadata on `invoice.paid`) to link Clerk and grant Pro.
+
+```bash
+npm run stripe:listen
+# equivalent:
+# stripe listen --forward-to localhost:3000/api/webhooks/stripe \
+#   --events checkout.session.completed,invoice.paid,customer.subscription.created,customer.subscription.updated,customer.subscription.deleted
+```
+
+Put the CLI `whsec_…` in `.env.local` as `STRIPE_WEBHOOK_SECRET`. Requires `STRIPE_SECRET_KEY` (`sk_test_…`) and Neon `plans.stripe_price_id` for Checkout.
+
+**Ops reprocess (unlinked invoice only):** if an `invoice.paid` was ACK'd as `processed` with an `unlinked_invoice` audit note and the Subscription later has `metadata.clerkUserId`, reclaim is **not** done by Stripe retries (idempotency unchanged). Use:
+
+```bash
+npm run stripe:reprocess -- evt_<id> --confirm
+```
+
+Eligible only when `status=processed` and `last_error` contains `unlinked_invoice`. Re-runs the same handle + Clerk sync paths; no deletes and no new charges. A second run after a clean grant is rejected (`not_eligible`).
+
 Consumers use the **`@sonojs/ui`** CLI (copy-source install):
 
 ```bash

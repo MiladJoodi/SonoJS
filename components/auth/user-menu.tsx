@@ -6,6 +6,7 @@ import { LogOutIcon, SettingsIcon } from "lucide-react"
 
 import { PlanIcon } from "@/components/icons/plan-icon"
 import { getUserPlan, getViewerPlanId } from "@/lib/access"
+import { getAuthReturnPath } from "@/lib/auth-return-path"
 import { cn } from "@/lib/utils"
 import { Avatar, AvatarFallback, AvatarImage } from "@sonojs/ui/components/avatar"
 import { Button } from "@sonojs/ui/components/button"
@@ -79,9 +80,10 @@ export function UserMenu() {
               <span
                 className={cn(
                   "inline-flex shrink-0 items-center gap-1 rounded-full px-1.5 py-0.5 text-[11px] font-medium tracking-tight",
-                  isPro
-                    ? "bg-primary/10 text-primary"
-                    : "bg-muted text-muted-foreground"
+                  planId === "pro-yearly" && "bg-primary/10 text-primary",
+                  planId === "pro-monthly" &&
+                    "bg-emerald-500/15 text-emerald-700 dark:text-emerald-400",
+                  planId === "free" && "bg-muted text-muted-foreground"
                 )}
               >
                 <PlanIcon plan={planId} className="size-3" />
@@ -107,7 +109,7 @@ export function UserMenu() {
           variant="destructive"
           className="cursor-pointer py-2.5"
           onSelect={() => {
-            void signOut({ redirectUrl: "/" })
+            void signOut({ redirectUrl: getAuthReturnPath() })
           }}
         >
           <LogOutIcon className="size-4" />

@@ -2952,6 +2952,7 @@ const registryItemsRaw = [
     title: "Electro Border",
     description:
       "A dynamic SVG turbulence border with optional glow, aura, and overlay.",
+    access: "member",
     dependencies: ["clsx", "tailwind-merge"],
     files: [
       {
@@ -4227,7 +4228,8 @@ const registryItemsRaw = [
     type: "registry:ui",
     title: "Verified Badge",
     description:
-      "Instagram-style verified seal for creators, businesses, and trust UI.",
+      "Verified seal with X / Twitter color tiers (blue, gold, gray) for trust UI.",
+    access: "member",
     dependencies: ["class-variance-authority", "clsx", "tailwind-merge"],
     files: [
       {

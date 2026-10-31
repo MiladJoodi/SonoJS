@@ -13,6 +13,10 @@ import {
   AuthFieldError,
   type AuthFormProps,
 } from "@/components/auth/auth-card"
+import {
+  getAuthReturnPath,
+  rememberAuthReturnPath,
+} from "@/lib/auth-return-path"
 import { Button } from "@sonojs/ui/components/button"
 import { Input } from "@sonojs/ui/components/input"
 import { Label } from "@sonojs/ui/components/label"
@@ -29,7 +33,7 @@ function navigateAfterAuth(
   router: ReturnType<typeof useRouter>,
   decorateUrl: (path: string) => string
 ) {
-  const url = decorateUrl("/")
+  const url = decorateUrl(getAuthReturnPath())
   if (url.startsWith("http")) {
     window.location.href = url
   } else {
@@ -60,9 +64,10 @@ export function SignInForm({
     if (!isSignedIn) return
     if (onSuccess) {
       onSuccess()
+      router.refresh()
       return
     }
-    router.replace("/")
+    router.replace(getAuthReturnPath())
   }, [isSignedIn, onSuccess, router])
 
   React.useEffect(() => {
@@ -175,10 +180,11 @@ export function SignInForm({
   const handleOAuth = async (strategy: "oauth_google" | "oauth_github") => {
     setOauthError(null)
     // Full-page redirect — reliable with Google/GitHub (no popup / COOP).
+    const returnTo = rememberAuthReturnPath()
     const { error } = await signIn.sso({
       strategy,
       redirectCallbackUrl: "/sso-callback",
-      redirectUrl: "/",
+      redirectUrl: returnTo,
     })
     if (error) {
       setOauthError(error.message)

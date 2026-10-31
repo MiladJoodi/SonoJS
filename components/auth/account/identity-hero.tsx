@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils"
 
 /**
  * Account header — editable avatar + name/email; plan + expiry opposite.
- * Plan mark matches /pricing (Free gray · Monthly primary · Yearly amber sparkles).
+ * Plan mark matches /pricing (Free gray · Monthly check green · Yearly primary).
  */
 export function AccountIdentityHero({
   name,
@@ -61,8 +61,8 @@ export function AccountIdentityHero({
           <span
             className={cn(
               "inline-flex size-10 shrink-0 items-center justify-center rounded-full",
-              planId === "pro-yearly" && "bg-amber-500/15",
-              planId === "pro-monthly" && "bg-primary/10",
+              planId === "pro-yearly" && "bg-primary/10",
+              planId === "pro-monthly" && "bg-emerald-500/15",
               planId === "free" && "bg-zinc-500/10"
             )}
             aria-hidden

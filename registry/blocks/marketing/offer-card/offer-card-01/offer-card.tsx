@@ -1,6 +1,6 @@
 "use client"
 
-import type { CSSProperties, ReactNode } from "react"
+import type { CSSProperties, MouseEvent, ReactNode } from "react"
 import {
   ArrowRightIcon,
   CircleCheckIcon,
@@ -56,6 +56,8 @@ export type OfferCardProps = {
   tier?: string
   ctaLabel?: string
   ctaHref?: string
+  /** When set, CTA renders as a button (e.g. open auth dialog) instead of a link. */
+  onCtaClick?: () => void
   avatars?: string[]
   trustLead?: string
   trustHighlight?: string
@@ -82,6 +84,7 @@ export default function OfferCard({
   tier = "STARTER",
   ctaLabel = "Get Lifetime Access",
   ctaHref = "#",
+  onCtaClick,
   avatars = AVATARS,
   trustLead = "Trusted by",
   trustHighlight = "millions",
@@ -216,24 +219,56 @@ export default function OfferCard({
               </span>
             </div>
 
-            <a
-              href={ctaHref}
-              className="group/btn relative flex w-full cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-full px-5 py-2.5 text-xs font-bold tracking-wide text-white shadow-md transition-all hover:shadow-lg"
-              style={{
+            {(() => {
+              const ctaClassName =
+                "group/btn relative flex w-full cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-full px-5 py-2.5 text-xs font-bold tracking-wide text-white shadow-md transition-all hover:shadow-lg"
+              const ctaStyle = {
                 backgroundColor: accent,
                 boxShadow: `0 4px 14px color-mix(in srgb, ${accent} 35%, transparent)`,
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = accentHover
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = accent
-              }}
-            >
-              <div className="absolute inset-0 -translate-x-full rounded-full bg-linear-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 ease-in-out group-hover/btn:translate-x-full rtl:translate-x-full rtl:group-hover/btn:-translate-x-full" />
-              <span className="relative z-10 font-bold">{ctaLabel}</span>
-              <ArrowRightIcon className="icon-dir relative z-10 size-3.5 transition-transform duration-300 group-hover/btn:translate-x-1 rtl:group-hover/btn:-translate-x-1" />
-            </a>
+              } as const
+              const ctaHover = {
+                onMouseEnter: (
+                  e: MouseEvent<HTMLAnchorElement | HTMLButtonElement>
+                ) => {
+                  e.currentTarget.style.backgroundColor = accentHover
+                },
+                onMouseLeave: (
+                  e: MouseEvent<HTMLAnchorElement | HTMLButtonElement>
+                ) => {
+                  e.currentTarget.style.backgroundColor = accent
+                },
+              }
+              const ctaInner = (
+                <>
+                  <div className="absolute inset-0 -translate-x-full rounded-full bg-linear-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 ease-in-out group-hover/btn:translate-x-full rtl:translate-x-full rtl:group-hover/btn:-translate-x-full" />
+                  <span className="relative z-10 font-bold">{ctaLabel}</span>
+                  <ArrowRightIcon className="icon-dir relative z-10 size-3.5 transition-transform duration-300 group-hover/btn:translate-x-1 rtl:group-hover/btn:-translate-x-1" />
+                </>
+              )
+              if (onCtaClick) {
+                return (
+                  <button
+                    type="button"
+                    className={ctaClassName}
+                    style={ctaStyle}
+                    onClick={onCtaClick}
+                    {...ctaHover}
+                  >
+                    {ctaInner}
+                  </button>
+                )
+              }
+              return (
+                <a
+                  href={ctaHref}
+                  className={ctaClassName}
+                  style={ctaStyle}
+                  {...ctaHover}
+                >
+                  {ctaInner}
+                </a>
+              )
+            })()}
 
             <div className="mt-3 flex flex-wrap items-center justify-center gap-x-1.5 gap-y-1">
               <div className="flex shrink-0 -space-x-1.5 rtl:space-x-reverse">

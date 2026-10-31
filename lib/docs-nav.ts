@@ -101,6 +101,7 @@ export const componentsNav: {
           featured: true,
         },
         { title: "Button Group", href: "/docs/components/button-group" },
+        { title: "Pro Button", href: "/docs/components/pro-button" },
         {
           title: "Calendar",
           href: "/docs/components/calendar",
@@ -198,7 +199,11 @@ export const componentsNav: {
         { title: "Skeleton", href: "/docs/components/skeleton" },
         { title: "Sonner", href: "/docs/components/sonner" },
         { title: "Spinner", href: "/docs/components/spinner" },
-        { title: "Verified Badge", href: "/docs/components/verified-badge" },
+        {
+          title: "Verified Badge",
+          href: "/docs/components/verified-badge",
+          featured: true,
+        },
       ],
     },
     {

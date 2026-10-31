@@ -4,7 +4,7 @@
   "type": "registry:cursor",
   "title": "Invert Cursor",
   "description": "Editorial lens using mix-blend-mode difference.",
-  "access": "public",
+  "access": "member",
   "files": [
     {
       "path": "components/cursors/invert-cursor.tsx",
@@ -13,6 +13,6 @@
       "target": "components/cursors/invert-cursor.tsx"
     }
   ],
-  "version": "0.1.0+3f4db2465391",
-  "generatedAt": "2026-10-31T00:40:17.212Z"
+  "version": "0.1.0+815dcc9c67ae",
+  "generatedAt": "2026-10-31T01:39:32.527Z"
 }

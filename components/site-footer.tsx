@@ -10,7 +10,6 @@ const footerLinks = [
   { href: "/docs/components", label: "Components" },
   { href: "/blocks", label: "Blocks" },
   { href: "/charts", label: "Charts" },
-  { href: "/pricing", label: "Pricing" },
 ] as const
 
 export function SiteFooter() {

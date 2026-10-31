@@ -1,3 +1,4 @@
+import { AccessGate } from "@/components/access/access-gate"
 import {
   ComponentSource,
   ComponentVariantPreview,
@@ -73,11 +74,13 @@ export default async function ElectroBorderDocsPage() {
 
       <section className="space-y-3">
         <h2 className="text-h3">Usage</h2>
-        <ComponentSource
-          title="electro-border.tsx"
-          lang="tsx"
-          code={usageSource}
-        />
+        <AccessGate access="member">
+          <ComponentSource
+            title="electro-border.tsx"
+            lang="tsx"
+            code={usageSource}
+          />
+        </AccessGate>
       </section>
 
       <section className="space-y-3">

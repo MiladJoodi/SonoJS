@@ -10,16 +10,36 @@ import {
 } from "@/components/auth"
 import { ProIcon } from "@/components/icons/pro-icon"
 import type { ContentAccess } from "@/lib/access"
-import { Button } from "@sonojs/ui/components/button"
+import { cn } from "@/lib/utils"
 
-function openAuth(
-  setMode: (mode: AuthDialogMode) => void,
-  setOpen: (open: boolean) => void,
-  mode: AuthDialogMode
-) {
-  setMode(mode)
-  // Defer open so the same click does not dismiss the overlay.
-  queueMicrotask(() => setOpen(true))
+/** Decorative lines — look like a real code sample behind the glass. */
+const FAKE_LINES = [
+  { c: "kw", t: "npx" },
+  { c: "str", t: " @sonojs/ui@latest add …" },
+  { c: "cmt", t: "" },
+  { c: "kw", t: "import" },
+  { c: "var", t: " { Component } " },
+  { c: "kw", t: "from" },
+  { c: "str", t: ' "@/components/…"' },
+  { c: "cmt", t: "" },
+  { c: "kw", t: "export function" },
+  { c: "fn", t: " Example" },
+  { c: "op", t: "() {" },
+  { c: "cmt", t: "" },
+  { c: "op", t: "  return <" },
+  { c: "type", t: "Component" },
+  { c: "op", t: " />" },
+  { c: "op", t: "}" },
+] as const
+
+const TONE: Record<(typeof FAKE_LINES)[number]["c"], string> = {
+  kw: "text-[color:var(--code-syntax-keyword)]",
+  str: "text-[color:var(--code-syntax-string)]",
+  var: "text-[color:var(--code-syntax-variable)]",
+  fn: "text-[color:var(--code-syntax-function)]",
+  type: "text-[color:var(--code-syntax-type)]",
+  op: "text-[color:var(--code-fg)]",
+  cmt: "text-[color:var(--code-syntax-comment)]",
 }
 
 export function AccessLocked({
@@ -31,68 +51,90 @@ export function AccessLocked({
 }) {
   const [open, setOpen] = React.useState(false)
   const [mode, setMode] = React.useState<AuthDialogMode>("sign-in")
-
   const isPro = access === "pro"
 
+  const openSignIn = () => {
+    setMode("sign-in")
+    queueMicrotask(() => setOpen(true))
+  }
+
   return (
-    <div
-      className={
-        className ??
-        "flex flex-col items-start gap-4 rounded-[12px] border border-border/70 bg-card p-6 shadow-soft"
-      }
-    >
+    <>
       <div
-        className={
-          isPro
-            ? "flex size-10 items-center justify-center rounded-full bg-primary/10 text-primary"
-            : "flex size-10 items-center justify-center rounded-full bg-muted"
-        }
-      >
-        {isPro ? (
-          <ProIcon className="size-5" aria-hidden />
-        ) : (
-          <LockIcon className="size-4 text-muted-foreground" aria-hidden />
+        className={cn(
+          "sono-code-block relative overflow-hidden select-none",
+          className
         )}
+      >
+        <div className="flex min-w-0 items-center gap-1 border-b border-[color:var(--code-border)] px-4 py-2">
+          <div className="min-w-0 truncate font-mono text-[14px] font-normal text-[color:var(--code-header-fg)]">
+            {isPro ? "pro.tsx" : "source.tsx"}
+          </div>
+        </div>
+
+        <div className="relative min-h-[11rem]">
+          <pre
+            aria-hidden
+            className="pointer-events-none px-4 py-3 font-mono text-[14px] leading-[1.65] blur-[5px] saturate-75"
+          >
+            <code>
+              {chunkLines(FAKE_LINES).map((line, i) => (
+                <div key={i} className="whitespace-pre">
+                  {line.map((tok, j) => (
+                    <span key={j} className={TONE[tok.c]}>
+                      {tok.t || " "}
+                    </span>
+                  ))}
+                </div>
+              ))}
+            </code>
+          </pre>
+
+          <div className="absolute inset-0 flex flex-col items-center justify-center gap-1.5 bg-[color:var(--code-bg)]/50 backdrop-blur-[2px]">
+            {isPro ? (
+              <ProIcon className="size-4 text-primary" aria-hidden />
+            ) : (
+              <LockIcon
+                className="size-4 text-[color:var(--code-header-fg)]"
+                aria-hidden
+              />
+            )}
+            {isPro ? (
+              <Link
+                href="/pricing"
+                className="cursor-pointer text-sm font-medium text-[color:var(--code-fg)] underline-offset-4 hover:underline"
+              >
+                Pro required
+              </Link>
+            ) : (
+              <button
+                type="button"
+                onClick={openSignIn}
+                className="cursor-pointer text-sm font-medium text-[color:var(--code-fg)] underline-offset-4 hover:underline"
+              >
+                Just log in
+              </button>
+            )}
+          </div>
+        </div>
       </div>
-      <div className="space-y-1.5">
-        <h2 className="text-base font-semibold tracking-tight text-foreground">
-          {isPro ? "Pro only" : "Members only"}
-        </h2>
-        <p className="text-sm text-muted-foreground">
-          {isPro
-            ? "This item needs a Pro plan. Ask an admin to set plan: \"pro\" and planExpiresAt (ISO) in Clerk."
-            : "Sign in to view and use this item."}
-        </p>
-      </div>
-      <div className="flex flex-wrap gap-2">
-        <Button
-          type="button"
-          size="sm"
-          className="cursor-pointer shadow-none"
-          onClick={() => openAuth(setMode, setOpen, "sign-in")}
-        >
-          Sign in
-        </Button>
-        <Button
-          type="button"
-          size="sm"
-          variant="outline"
-          className="cursor-pointer border-border/70 bg-card shadow-none"
-          onClick={() => openAuth(setMode, setOpen, "sign-up")}
-        >
-          Create account
-        </Button>
-        <Button
-          type="button"
-          size="sm"
-          variant="ghost"
-          className="cursor-pointer"
-          asChild
-        >
-          <Link href="/account">Account</Link>
-        </Button>
-      </div>
-      <AuthDialog open={open} onOpenChange={setOpen} defaultMode={mode} />
-    </div>
+      {isPro ? null : (
+        <AuthDialog open={open} onOpenChange={setOpen} defaultMode={mode} />
+      )}
+    </>
   )
+}
+
+function chunkLines(
+  tokens: readonly { c: (typeof FAKE_LINES)[number]["c"]; t: string }[]
+) {
+  const lines: { c: (typeof FAKE_LINES)[number]["c"]; t: string }[][] = [[]]
+  for (const tok of tokens) {
+    if (tok.c === "cmt" && tok.t === "") {
+      lines.push([])
+      continue
+    }
+    lines[lines.length - 1]!.push(tok)
+  }
+  return lines.filter((l) => l.length > 0)
 }

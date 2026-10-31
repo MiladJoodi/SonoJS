@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 
+import { AccessGate } from "@/components/access/access-gate"
 import {
   CursorDemo,
   CursorPreview,
@@ -14,6 +15,9 @@ import {
 } from "@/lib/cursors-catalog"
 import { getCursorUsage } from "@/lib/cursors-usage"
 import { cursorViewMetadata } from "@/lib/seo"
+
+/** Install / usage gates call Clerk auth — must be request-time. */
+export const dynamic = "force-dynamic"
 
 export function generateStaticParams() {
   return cursorsCatalog.map((entry) => ({ id: entry.id }))
@@ -72,15 +76,24 @@ export default async function CursorViewPage({
             <CursorDemo id={id} />
           </CursorPreview>
 
+          {/* Free+ (signed in). Guests see AccessLocked — not install/code. */}
           <DocsInstallation name={id} />
 
           {usage ? (
             <section className="space-y-3">
               <h2 className="text-h3">Usage</h2>
-              <p className="text-sm leading-relaxed text-muted-foreground">
-                {usage.blurb}
-              </p>
-              <ComponentSource title="page.tsx" lang="tsx" code={usage.code} />
+              <AccessGate access="member">
+                <div className="space-y-3">
+                  <p className="text-sm leading-relaxed text-muted-foreground">
+                    {usage.blurb}
+                  </p>
+                  <ComponentSource
+                    title="page.tsx"
+                    lang="tsx"
+                    code={usage.code}
+                  />
+                </div>
+              </AccessGate>
             </section>
           ) : null}
         </>

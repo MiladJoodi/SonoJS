@@ -4,6 +4,7 @@ import { HandleSSOCallback } from "@clerk/nextjs"
 import { useRouter } from "next/navigation"
 
 import { AuthPageShell } from "@/components/auth"
+import { takeAuthReturnPath } from "@/lib/auth-return-path"
 import { Spinner } from "@sonojs/ui/components/spinner"
 
 export default function SsoCallbackPage() {
@@ -18,7 +19,7 @@ export default function SsoCallbackPage() {
       <HandleSSOCallback
         navigateToApp={({ session, decorateUrl }) => {
           if (session?.currentTask) return
-          const url = decorateUrl("/")
+          const url = decorateUrl(takeAuthReturnPath())
           if (url.startsWith("http")) {
             window.location.href = url
           } else {

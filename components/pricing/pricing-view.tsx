@@ -2,21 +2,32 @@
 
 import * as React from "react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { useAuth } from "@clerk/nextjs"
 import { motion, useReducedMotion } from "motion/react"
-import { CheckIcon, MinusIcon } from "lucide-react"
+import { CheckIcon, Loader2Icon, MinusIcon } from "lucide-react"
 
+import { CheckoutReturnBanner } from "@/components/pricing/checkout-return-banner"
 import {
   COMPARISON,
   PLANS,
   TABLE_HEADERS,
   type ComparisonValue,
   type Plan,
+  type PlanId,
 } from "@/components/pricing/pricing-data"
+import {
+  startCheckout,
+  type CheckoutPlanSlug,
+} from "@/components/pricing/start-checkout"
 import { PlanIcon } from "@/components/icons/plan-icon"
 import { ProIcon } from "@/components/icons/pro-icon"
 import { Button } from "@sonojs/ui/components/button"
 import { cn } from "@/lib/utils"
+
+function isCheckoutPlanSlug(id: PlanId): id is CheckoutPlanSlug {
+  return id === "pro-monthly" || id === "pro-yearly"
+}
 
 function GreenCheck({ className }: { className?: string }) {
   return (
@@ -66,7 +77,37 @@ function PlanCard({
   reduceMotion: boolean | null
   isSignedIn: boolean
 }) {
+  const router = useRouter()
+  const [loading, setLoading] = React.useState(false)
+  const [error, setError] = React.useState<string | null>(null)
   const createAccountLocked = isSignedIn && plan.id === "free"
+  const isProCheckout = isCheckoutPlanSlug(plan.id)
+
+  async function onProCheckout() {
+    if (!isCheckoutPlanSlug(plan.id)) return
+    setError(null)
+
+    if (!isSignedIn) {
+      router.push("/sign-in?redirect_url=/pricing")
+      return
+    }
+
+    setLoading(true)
+    try {
+      const result = await startCheckout(plan.id)
+      if (!result.ok) {
+        if (result.unauthorized) {
+          router.push("/sign-in?redirect_url=/pricing")
+          return
+        }
+        setError(result.error)
+        return
+      }
+      window.location.assign(result.url)
+    } finally {
+      setLoading(false)
+    }
+  }
 
   return (
     <motion.li
@@ -170,12 +211,42 @@ function PlanCard({
       {createAccountLocked ? (
         <Button
           type="button"
-          variant="outline"
+          variant={plan.featured ? "default" : "outline"}
           disabled
-          className="mt-6 w-full shrink-0 cursor-not-allowed border-border/70 bg-card shadow-none disabled:opacity-60"
+          className={cn(
+            "mt-6 w-full shrink-0 cursor-not-allowed shadow-none disabled:opacity-60",
+            !plan.featured && "border-border/70 bg-card"
+          )}
         >
           Create account
         </Button>
+      ) : isProCheckout ? (
+        <div className="mt-6 flex w-full shrink-0 flex-col gap-2">
+          <Button
+            type="button"
+            variant="default"
+            disabled={loading}
+            onClick={() => void onProCheckout()}
+            className="w-full cursor-pointer shadow-none disabled:cursor-not-allowed"
+          >
+            {loading ? (
+              <span className="inline-flex items-center gap-2">
+                <Loader2Icon className="size-4 animate-spin" aria-hidden />
+                Redirecting…
+              </span>
+            ) : (
+              plan.cta
+            )}
+          </Button>
+          {error ? (
+            <p
+              role="alert"
+              className="text-center text-sm text-destructive"
+            >
+              {error}
+            </p>
+          ) : null}
+        </div>
       ) : (
         <Button
           asChild
@@ -258,6 +329,12 @@ export function PricingView() {
             Free to start. Pro for the full library and templates.
           </p>
         </motion.header>
+
+        <div className="mx-auto mb-2 w-full max-w-6xl">
+          <React.Suspense fallback={null}>
+            <CheckoutReturnBanner />
+          </React.Suspense>
+        </div>
 
         <ul className="mx-auto grid w-full max-w-6xl items-stretch gap-5 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
           {PLANS.map((plan, index) => (
@@ -372,7 +449,7 @@ export function PricingView() {
           viewport={{ once: true }}
           transition={{ delay: 0.15, duration: 0.45 }}
         >
-          <ProIcon className="size-3.5 text-primary" />
+          <ProIcon className="size-3.5 shrink-0 text-primary" />
           <span>
             Yearly ={" "}
             <span className="font-medium text-foreground">$8.25/mo</span>

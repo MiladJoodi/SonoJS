@@ -45,7 +45,6 @@ Ask before changing MCP config outside this project.`,
     { href: "/charts", label: "Charts" },
     { href: "/cursors", label: "Cursors" },
     { href: "/tools", label: "Tools" },
-    { href: "/pricing", label: "Pricing" },
     {
       href: "https://icons.sonojs.com",
       label: "Icons",
