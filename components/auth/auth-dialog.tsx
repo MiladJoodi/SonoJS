@@ -51,8 +51,8 @@ export function AuthDialog({
         onOpenAutoFocus={(event) => {
           // Avoid stealing focus in a way that can bounce the dialog closed.
           event.preventDefault()
-          const root = event.currentTarget
-          const focusable = root.querySelector<HTMLElement>(
+          const root = event.currentTarget as HTMLElement | null
+          const focusable = root?.querySelector<HTMLElement>(
             "input:not([disabled]),button:not([disabled])"
           )
           focusable?.focus()

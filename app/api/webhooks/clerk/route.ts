@@ -1,11 +1,12 @@
 import { clerkClient } from "@clerk/nextjs/server"
 import { verifyWebhook } from "@clerk/nextjs/webhooks"
+import type { NextRequest } from "next/server"
 
 /**
  * Clerk → user.created: default new accounts to Free (no expiry).
  * Admins can later set `plan: "pro"` + `planExpiresAt` (ISO) in Dashboard.
  */
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   let evt: Awaited<ReturnType<typeof verifyWebhook>>
   try {
     evt = await verifyWebhook(req)

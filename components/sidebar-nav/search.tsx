@@ -18,11 +18,13 @@ export function SidebarNavSearch({
   value,
   onValueChange,
   onClear,
+  placeholder = "Search...",
   inputClassName,
 }: {
   value: string
   onValueChange: (value: string) => void
   onClear: () => void
+  placeholder?: string
   inputClassName?: string
 }) {
   const inputRef = React.useRef<HTMLInputElement>(null)
@@ -49,7 +51,7 @@ export function SidebarNavSearch({
             }
           }
         }}
-        placeholder="Search..."
+        placeholder={placeholder}
         aria-label="Search sidebar items"
         className={cn(
           "h-8 w-full min-w-0 rounded-md border border-border/70 bg-background/80 py-0 pe-9 ps-9 text-[0.8rem] leading-none text-foreground shadow-none outline-none transition-colors placeholder:text-muted-foreground",

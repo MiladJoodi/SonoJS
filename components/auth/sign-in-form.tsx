@@ -318,9 +318,7 @@ export function SignInForm({
           />
           <AuthFieldError
             message={
-              errors.fields.identifier?.message ??
-              errors.fields.emailAddress?.message ??
-              magicLinkError
+              errors.fields.identifier?.message ?? magicLinkError
             }
           />
         </div>

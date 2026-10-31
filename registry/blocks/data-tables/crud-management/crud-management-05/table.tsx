@@ -3,6 +3,7 @@
 import * as React from "react"
 import {
   ArrowLeftIcon,
+  CheckCircle2Icon,
   ChevronDownIcon,
   InboxIcon,
   MailIcon,

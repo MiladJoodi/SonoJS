@@ -143,6 +143,7 @@ describe.runIf(hasDb)("concurrency race scenarios", () => {
             canceledAt: null,
             endedAt: null,
             priceId: "price_test",
+            metadata: {},
           },
           claim: {
             stripeEventId: evtOld,
@@ -206,6 +207,7 @@ describe.runIf(hasDb)("concurrency race scenarios", () => {
         canceledAt: 1_700_050_000,
         endedAt: 1_700_050_000,
         priceId: "price_test",
+        metadata: {},
       },
       claim: { stripeEventId: evt2, claimToken: c2.claimToken },
       reconcileLease: {
@@ -238,6 +240,7 @@ describe.runIf(hasDb)("concurrency race scenarios", () => {
         canceledAt: null,
         endedAt: null,
         priceId: "price_test",
+        metadata: {},
       },
       claim: { stripeEventId: evt1, claimToken: c1.claimToken },
       reconcileLease: {

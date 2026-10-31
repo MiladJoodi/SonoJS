@@ -100,7 +100,8 @@ export function SignUpContinueForm() {
   }
 
   const missing = signUp.missingFields ?? []
-  const missingSet = new Set(missing)
+  const missingKeys = missing as string[]
+  const missingSet = new Set(missingKeys)
   const needsEmailCode =
     emailCodeSent || signUp.unverifiedFields.includes("email_address")
   const needsFirst = missingSet.has("first_name")
@@ -117,7 +118,7 @@ export function SignUpContinueForm() {
     "email_address",
     "username",
   ])
-  const unknownMissing = missing.filter((f) => !handled.has(f))
+  const unknownMissing = missingKeys.filter((f) => !handled.has(f))
 
   const handleVerifyEmail = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()

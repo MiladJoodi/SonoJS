@@ -179,7 +179,7 @@ export default async function SortableDocsPage() {
             {
               name: "strategy",
               type: '"vertical" | "horizontal" | "grid"',
-              default: '"vertical"',
+              defaultValue: '"vertical"',
               description: "Layout strategy for measuring and animating items.",
             },
             {
