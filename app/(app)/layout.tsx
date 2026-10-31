@@ -5,6 +5,7 @@ import { NavigationProgress } from "@/components/navigation-progress"
 import { ScrollToTop } from "@/components/scroll-to-top"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
+import { getAuthUserId } from "@/lib/clerk-auth"
 import { getGithubStars } from "@/lib/github"
 
 export default async function AppLayout({
@@ -12,7 +13,10 @@ export default async function AppLayout({
 }: {
   children: React.ReactNode
 }) {
-  const githubStars = await getGithubStars()
+  const [githubStars, userId] = await Promise.all([
+    getGithubStars(),
+    getAuthUserId(),
+  ])
 
   return (
     <div
@@ -24,7 +28,10 @@ export default async function AppLayout({
       </Suspense>
       <ScrollToTop />
       <MobileHeaderScroll />
-      <SiteHeader githubStars={githubStars} />
+      <SiteHeader
+        githubStars={githubStars}
+        initialSignedIn={Boolean(userId)}
+      />
       <main className="flex min-h-0 flex-1 flex-col">{children}</main>
       <SiteFooter />
     </div>

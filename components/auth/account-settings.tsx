@@ -371,7 +371,7 @@ export function AccountSettings({ className }: { className?: string }) {
         className
       )}
     >
-      <div className="mx-auto flex w-full max-w-5xl flex-col gap-10 px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex w-full max-w-5xl flex-col gap-6 px-4 pb-10 sm:gap-8 sm:px-6 lg:gap-10 lg:px-8">
         <AccountIdentityHero
           name={displayName}
           email={email}
@@ -387,28 +387,38 @@ export function AccountSettings({ className }: { className?: string }) {
 
         <Tabs
           defaultValue="profile"
-          orientation="vertical"
-          className="flex flex-col gap-3 md:flex-row md:items-start md:!gap-2"
+          orientation="horizontal"
+          className="flex w-full flex-col gap-4 md:!flex-row md:items-start md:!gap-6"
         >
-          <div className="w-full shrink-0 md:w-48">
+          <div className="w-full shrink-0 md:sticky md:top-24 md:w-48">
             <TabsList
               aria-label="Account settings sections"
-              className="h-auto w-full flex-row justify-start gap-0.5 overflow-x-auto rounded-[12px] border border-border/60 bg-card p-1 md:flex-col md:overflow-visible"
+              className={cn(
+                "h-auto w-full rounded-[12px] border border-border/60 bg-card p-1 text-muted-foreground",
+                // Mobile: 2×2 grid — no tall vertical stack, no sideways scroll trap
+                "grid grid-cols-2 gap-1 overflow-visible",
+                // Desktop: sidebar column
+                "md:flex md:flex-col md:items-stretch md:justify-start md:gap-0.5"
+              )}
             >
               {NAV.map((item) => (
                 <TabsTrigger
                   key={item.value}
                   value={item.value}
-                  className="h-10 cursor-pointer justify-start gap-2 rounded-md px-3 data-[state=active]:bg-primary/10 data-[state=active]:shadow-none data-[state=active]:text-primary"
+                  className={cn(
+                    "h-11 cursor-pointer gap-2 rounded-md px-3 text-sm",
+                    "justify-center md:h-10 md:justify-start",
+                    "data-[state=active]:bg-primary/10 data-[state=active]:text-primary data-[state=active]:shadow-none"
+                  )}
                 >
-                  <item.icon className="size-4" aria-hidden />
-                  {item.label}
+                  <item.icon className="size-4 shrink-0" aria-hidden />
+                  <span className="truncate">{item.label}</span>
                 </TabsTrigger>
               ))}
             </TabsList>
           </div>
 
-          <div className="min-w-0 flex-1 space-y-6">
+          <div className="min-w-0 w-full flex-1 space-y-6">
             <TabsContent value="profile" className="mt-0">
               <Card className="gap-0 border-border/60 py-0 shadow-none">
                 <CardHeader className="border-b border-border/50 py-6">

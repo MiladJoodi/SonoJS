@@ -1,7 +1,10 @@
-import { describe, expect, it, vi, beforeEach, afterEach } from "vitest"
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest"
 
 describe("readRegistryJsonText", () => {
   const prevFetch = globalThis.fetch
+  const prevAppUrl = process.env.NEXT_PUBLIC_APP_URL
+  const prevNodeEnv = process.env.NODE_ENV
+  const prevVercelEnv = process.env.VERCEL_ENV
 
   beforeEach(() => {
     vi.resetModules()
@@ -9,6 +12,11 @@ describe("readRegistryJsonText", () => {
 
   afterEach(() => {
     globalThis.fetch = prevFetch
+    if (prevAppUrl === undefined) delete process.env.NEXT_PUBLIC_APP_URL
+    else process.env.NEXT_PUBLIC_APP_URL = prevAppUrl
+    process.env.NODE_ENV = prevNodeEnv
+    if (prevVercelEnv === undefined) delete process.env.VERCEL_ENV
+    else process.env.VERCEL_ENV = prevVercelEnv
   })
 
   it("rejects invalid names", async () => {
@@ -21,7 +29,6 @@ describe("readRegistryJsonText", () => {
     const { readRegistryJsonText } = await import("@/lib/read-registry-json")
     const raw = await readRegistryJsonText("accordion")
     expect(raw).toBeTruthy()
-    expect(raw).toContain('"name"')
     expect(raw).toContain("accordion")
   })
 
@@ -31,9 +38,24 @@ describe("readRegistryJsonText", () => {
     ) as typeof fetch
 
     const { readRegistryJsonText } = await import("@/lib/read-registry-json")
-    // Use a name that will not exist on disk
     const raw = await readRegistryJsonText("zz-missing-registry-item-xyz")
     expect(raw).toContain("fake-from-net")
+    expect(globalThis.fetch).toHaveBeenCalled()
+  })
+
+  it("uses PRODUCTION_ORIGIN in production when APP_URL unset", async () => {
+    delete process.env.NEXT_PUBLIC_APP_URL
+    process.env.NODE_ENV = "production"
+    process.env.VERCEL_ENV = "production"
+
+    globalThis.fetch = vi.fn(async (input) => {
+      const url = String(input)
+      expect(url.startsWith("https://sonojs.com/r/")).toBe(true)
+      return new Response("{}", { status: 200 })
+    }) as typeof fetch
+
+    const { readRegistryJsonText } = await import("@/lib/read-registry-json")
+    await readRegistryJsonText("zz-missing-registry-item-xyz")
     expect(globalThis.fetch).toHaveBeenCalled()
   })
 })

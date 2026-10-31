@@ -1,27 +1,36 @@
 import { readFile } from "node:fs/promises"
 import path from "node:path"
 
-import { siteConfig } from "@/lib/config"
+import { PRODUCTION_ORIGIN } from "@/lib/site-origin"
 
 const NAME_RE = /^[a-z0-9][a-z0-9-]*$/i
 
 /**
- * Base URL for `public/r/*.json` as static assets (CDN / Next public).
- * Prefer this over bundling the whole registry into every serverless function.
+ * Stable origin for `public/r/*.json` static assets.
+ * Prefer the public app URL / production origin over ephemeral VERCEL_URL
+ * so RSC/docs can fetch registry JSON when files are excluded from NFT.
  */
 function registryAssetOrigin(): string {
   const explicit = process.env.NEXT_PUBLIC_APP_URL?.trim()
   if (explicit) return explicit.replace(/\/$/, "")
+
+  if (process.env.NODE_ENV === "production" || process.env.VERCEL_ENV === "production") {
+    return PRODUCTION_ORIGIN.replace(/\/$/, "")
+  }
+
   const vercel = process.env.VERCEL_URL?.trim()
   if (vercel) {
-    return vercel.startsWith("http") ? vercel.replace(/\/$/, "") : `https://${vercel}`
+    return vercel.startsWith("http")
+      ? vercel.replace(/\/$/, "")
+      : `https://${vercel}`
   }
-  return siteConfig.url.replace(/\/$/, "")
+
+  return "http://localhost:3000"
 }
 
 /**
  * Load one registry item JSON without requiring NFT to ship all of `public/r`
- * (~120MB) into each docs/lambda.
+ * (~120MB) into each serverless function.
  *
  * Order: disk (local / included files) → HTTP fetch of the static asset.
  */

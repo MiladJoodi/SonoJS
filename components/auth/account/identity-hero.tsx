@@ -35,9 +35,9 @@ export function AccountIdentityHero({
   onRemoveAvatar: () => void
 }) {
   return (
-    <header className="border-b border-border/50 pb-8">
-      <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
-        <div className="flex min-w-0 items-center gap-5 sm:gap-6">
+    <header className="border-b border-border/50 pb-6 sm:pb-8">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
+        <div className="flex min-w-0 items-center gap-4 sm:gap-6">
           <AccountAvatarEditor
             imageUrl={imageUrl}
             name={name}
@@ -48,16 +48,18 @@ export function AccountIdentityHero({
           />
 
           <div className="min-w-0 space-y-1 text-start">
-            <h1 className="truncate text-[clamp(1.625rem,3.5vw,2.125rem)] font-semibold tracking-[-0.03em] text-foreground">
+            <h1 className="truncate text-[clamp(1.375rem,4vw,2.125rem)] font-semibold tracking-[-0.03em] text-foreground">
               {name}
             </h1>
             {email ? (
-              <p className="truncate text-sm text-muted-foreground">{email}</p>
+              <p className="truncate text-sm text-muted-foreground" dir="ltr">
+                {email}
+              </p>
             ) : null}
           </div>
         </div>
 
-        <div className="flex min-w-0 items-center gap-3 text-start">
+        <div className="flex min-w-0 items-center gap-3 rounded-[12px] border border-border/60 bg-card px-3 py-2.5 text-start sm:border-0 sm:bg-transparent sm:p-0">
           <span
             className={cn(
               "inline-flex size-10 shrink-0 items-center justify-center rounded-full",
@@ -86,16 +88,12 @@ export function AccountIdentityHero({
                   "No expiry"
                 )
               ) : (
-                <>
-                  Included with your account
-                  {" · "}
-                  <Link
-                    href="/pricing"
-                    className="cursor-pointer font-medium text-foreground underline-offset-4 hover:underline"
-                  >
-                    Upgrade
-                  </Link>
-                </>
+                <Link
+                  href="/pricing"
+                  className="cursor-pointer font-medium text-foreground underline-offset-4 hover:underline"
+                >
+                  Upgrade to Pro
+                </Link>
               )}
             </p>
           </div>

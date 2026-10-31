@@ -13,8 +13,11 @@ import { Separator } from "@sonojs/ui/components/separator"
 
 export function SiteHeader({
   githubStars = null,
+  initialSignedIn = false,
 }: {
   githubStars?: number | null
+  /** Server auth hint so header chrome paints before Clerk JS loads. */
+  initialSignedIn?: boolean
 }) {
   return (
     <header
@@ -53,7 +56,7 @@ export function SiteHeader({
             <GithubLink stars={githubStars} />
             <Separator orientation="vertical" className="mx-0.5 hidden sm:block" />
             <ModeSwitcher />
-            <AuthControls />
+            <AuthControls initialSignedIn={initialSignedIn} />
           </div>
         </div>
       </div>

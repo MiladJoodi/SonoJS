@@ -10,33 +10,30 @@ import {
 } from "@/components/auth"
 import { useEnsureUserPlan } from "@/hooks/use-ensure-user-plan"
 import { Button } from "@sonojs/ui/components/button"
-import { Skeleton } from "@sonojs/ui/components/skeleton"
 
-/** Header auth — one control; dialog switches sign-in ↔ sign-up. */
-export function AuthControls() {
+/**
+ * Header auth chrome.
+ * Server session hint → instant Sign in / avatar shell before Clerk JS finishes.
+ */
+export function AuthControls({
+  initialSignedIn = false,
+}: {
+  /** From server auth cookie — first paint without waiting on Clerk JS. */
+  initialSignedIn?: boolean
+}) {
   const { isLoaded, isSignedIn } = useAuth()
   const [open, setOpen] = React.useState(false)
   const [mode, setMode] = React.useState<AuthDialogMode>("sign-in")
 
-  // Default missing plan → Free; expire Pro when planExpiresAt has passed.
   useEnsureUserPlan()
 
-  // Close the auth dialog as soon as the session becomes active.
   React.useEffect(() => {
     if (isSignedIn && open) setOpen(false)
   }, [isSignedIn, open])
 
-  if (!isLoaded) {
-    return (
-      <Skeleton
-        className="size-8 shrink-0 rounded-full"
-        aria-hidden
-        aria-busy="true"
-      />
-    )
-  }
+  const signedIn = isLoaded ? Boolean(isSignedIn) : initialSignedIn
 
-  if (isSignedIn) {
+  if (signedIn) {
     return <UserMenu />
   }
 
@@ -52,6 +49,7 @@ export function AuthControls() {
           size="sm"
           className="h-8 cursor-pointer rounded-md px-2.5 text-[12.5px] font-medium"
           onClick={() => setMode("sign-in")}
+          aria-busy={!isLoaded}
         >
           Sign in
         </Button>

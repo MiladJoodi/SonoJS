@@ -1,9 +1,13 @@
 "use server"
 
 import { highlightCode } from "@/lib/highlight-code"
-import { readRegistryJson } from "@/lib/read-registry-json"
 
 export type HighlightBlockUsage = {
+  title: string
+  code: string
+}
+
+export type HighlightBlockFile = {
   title: string
   code: string
 }
@@ -15,41 +19,52 @@ export type HighlightedBlockInstall = {
 }
 
 const NAME_RE = /^[a-z0-9][a-z0-9-]*$/i
+const MAX_FILES = 40
+const MAX_USAGE = 20
+const MAX_CODE_CHARS = 400_000
 
 /**
  * Highlight install snippets for a registry block.
- * Loads `public/r/<name>.json` via disk or static URL (not bundled into
- * every serverless function) so the client never POSTs full source.
+ * Caller supplies file/usage source (from static `/r/<name>.json` on the
+ * client) — this action does not read `public/r` from disk (keeps functions
+ * under the Vercel size limit).
  */
-export async function highlightBlockInstall(
-  name: string,
-  usage: HighlightBlockUsage[] = []
-): Promise<HighlightedBlockInstall> {
+export async function highlightBlockInstall(input: {
+  name: string
+  files: HighlightBlockFile[]
+  usage?: HighlightBlockUsage[]
+}): Promise<HighlightedBlockInstall> {
+  const name = input.name?.trim() ?? ""
   if (!NAME_RE.test(name)) {
     throw new Error("Invalid registry item name")
   }
 
-  const json = await readRegistryJson<{
-    files?: {
-      path?: string
-      target?: string
-      content?: string
-      encoding?: string
-    }[]
-  }>(name)
-  if (!json) {
-    throw new Error(`Registry item not found: ${name}`)
+  const usage = Array.isArray(input.usage) ? input.usage : []
+  const rawFiles = Array.isArray(input.files) ? input.files : []
+
+  if (rawFiles.length > MAX_FILES || usage.length > MAX_USAGE) {
+    throw new Error("Too many files for highlight")
   }
 
-  const files: { title: string; code: string }[] = []
-  for (const file of json.files ?? []) {
-    if (!file.content) continue
-    // Binary registry assets (webp/png/…) ship as base64 — never show in Code tab.
-    if (file.encoding === "base64") continue
-    const title = file.target || file.path
-    if (!title) continue
+  const files: HighlightBlockFile[] = []
+  let totalChars = 0
+  for (const file of rawFiles) {
+    const title = typeof file?.title === "string" ? file.title.trim() : ""
+    const code = typeof file?.code === "string" ? file.code : ""
+    if (!title || !code) continue
     if (/\.(webp|png|jpe?g|gif|woff2|svg)$/i.test(title)) continue
-    files.push({ title, code: file.content })
+    totalChars += code.length
+    if (totalChars > MAX_CODE_CHARS) {
+      throw new Error("Install source too large to highlight")
+    }
+    files.push({ title, code })
+  }
+
+  for (const item of usage) {
+    totalChars += typeof item?.code === "string" ? item.code.length : 0
+    if (totalChars > MAX_CODE_CHARS) {
+      throw new Error("Install source too large to highlight")
+    }
   }
 
   const cli = `npx @sonojs/ui@latest add ${name}`

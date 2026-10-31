@@ -114,6 +114,7 @@ const highlightInflight = new Map<string, Promise<HighlightedInstall>>()
 
 async function loadHighlighted(
   name: string,
+  files: InstallFile[],
   usage: BlockInstallUsage[]
 ): Promise<HighlightedInstall> {
   const key = highlightKey(name, usage)
@@ -123,7 +124,11 @@ async function loadHighlighted(
   const pending = highlightInflight.get(key)
   if (pending) return pending
 
-  const task = highlightBlockInstall(name, usage)
+  const task = highlightBlockInstall({
+    name,
+    files: files.map((file) => ({ title: file.title, code: file.content })),
+    usage,
+  })
     .then((next) => {
       highlightCache.set(key, next)
       return next
@@ -141,9 +146,9 @@ export function prefetchBlockInstall(
   name: string,
   usage: BlockInstallUsage[] = []
 ) {
-  void Promise.all([loadMeta(name), loadHighlighted(name, usage)]).catch(
-    () => {}
-  )
+  void loadMeta(name)
+    .then((meta) => loadHighlighted(name, meta.files, usage))
+    .catch(() => {})
 }
 
 const drawerWidthClass = "overflow-x-hidden"
@@ -182,10 +187,16 @@ export function BlockInstallBody({
     if (cachedHighlight) setHighlighted(cachedHighlight)
     else setHighlighted(null)
 
-    Promise.all([loadMeta(name), loadHighlighted(name, usage)])
-      .then(([nextMeta, nextHighlight]) => {
+    void loadMeta(name)
+      .then(async (nextMeta) => {
         if (cancelled) return
         setMeta(nextMeta)
+        const nextHighlight = await loadHighlighted(
+          name,
+          nextMeta.files,
+          usage
+        )
+        if (cancelled) return
         setHighlighted(nextHighlight)
       })
       .catch(() => {
