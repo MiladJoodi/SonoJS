@@ -2,10 +2,15 @@ import "server-only"
 
 import { fetchRepoFileText } from "@/lib/github-pro/client"
 
-export const PRO_REGISTRY_PATH = "registry/components.json"
+/** Central product registry in the private Pro repo (components, blocks, templates). */
+export const PRO_REGISTRY_PATH = "registry/registry.json"
+
+export type ProRegistryProductType = "component" | "block" | "template"
 
 export type ProRegistryEntry = {
   name: string
+  /** Product kind in the central registry. */
+  type?: ProRegistryProductType
   category?: string
   variant?: string
   /** Ready-made zip in the Pro repo — users download this as-is. */
@@ -18,6 +23,13 @@ export type ProRegistry = Record<string, ProRegistryEntry>
 
 function isStringArray(value: unknown): value is string[] {
   return Array.isArray(value) && value.every((v) => typeof v === "string")
+}
+
+function parseType(value: unknown): ProRegistryProductType | undefined {
+  if (value === "component" || value === "block" || value === "template") {
+    return value
+  }
+  return undefined
 }
 
 function parseEntry(_slug: string, raw: unknown): ProRegistryEntry | null {
@@ -35,6 +47,7 @@ function parseEntry(_slug: string, raw: unknown): ProRegistryEntry | null {
 
   return {
     name: obj.name,
+    type: parseType(obj.type),
     category: typeof obj.category === "string" ? obj.category : undefined,
     variant: typeof obj.variant === "string" ? obj.variant : undefined,
     archive,
@@ -68,3 +81,9 @@ export async function getProRegistryEntry(
   const registry = await fetchProRegistry()
   return registry[slug] ?? null
 }
+
+/** Alias — central product registry (same as fetchProRegistry). */
+export const fetchProductRegistry = fetchProRegistry
+
+/** Alias — lookup by slug in the central product registry. */
+export const getProductRegistryEntry = getProRegistryEntry

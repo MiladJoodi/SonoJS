@@ -13,7 +13,7 @@ import {
   ReactIcon,
   TailwindIcon,
   TypescriptIcon,
-} from "@/components/home/icons"
+} from "@/components/icons"
 import { AdobeXdIcon } from "@/registry/icons/adobe-xd"
 import { AppleIcon } from "@/registry/icons/apple"
 import { AsanaIcon } from "@/registry/icons/asana"

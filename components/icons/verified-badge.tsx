@@ -1,5 +1,5 @@
 /**
- * Site chrome re-export — installable source lives in
+ * Site chrome re-export - installable source lives in
  * `packages/ui/src/components/verified-badge.tsx`.
  */
 export {

@@ -100,3 +100,7 @@ Manual checks:
 4. `lib/docs-nav.ts` + docs: `npx @sonojs/ui@latest init` then `add <name>`
 
 See `registry/README.md`.
+
+## License
+
+MIT — see [`LICENSE`](./LICENSE).

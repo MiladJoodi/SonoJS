@@ -7,9 +7,12 @@ export {
 export {
   fetchProRegistry,
   getProRegistryEntry,
+  fetchProductRegistry,
+  getProductRegistryEntry,
   PRO_REGISTRY_PATH,
   type ProRegistry,
   type ProRegistryEntry,
+  type ProRegistryProductType,
 } from "@/lib/github-pro/registry"
 export {
   getProComponentSource,

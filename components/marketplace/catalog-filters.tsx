@@ -16,6 +16,8 @@ import { Input } from "@sonojs/ui/components/input"
 import { Label } from "@sonojs/ui/components/label"
 import { cn } from "@/lib/utils"
 
+export type CatalogSortKey = "newest" | "oldest"
+
 export type CatalogFilterState = {
   q: string
   categories: MarketplaceCategory[]
@@ -25,12 +27,14 @@ export type CatalogFilterState = {
 export function CatalogFilters({
   value,
   onChange,
-  resultCount,
+  sort,
+  onSortChange,
   className,
 }: {
   value: CatalogFilterState
   onChange: (next: CatalogFilterState) => void
-  resultCount: number
+  sort: CatalogSortKey
+  onSortChange: (next: CatalogSortKey) => void
   className?: string
 }) {
   const categories = listMarketplaceCategories()
@@ -79,9 +83,6 @@ export function CatalogFilters({
             </Button>
           ) : null}
         </div>
-        <p className="text-xs text-muted-foreground">
-          {resultCount} {resultCount === 1 ? "project" : "projects"}
-        </p>
       </div>
 
       <div className="relative">
@@ -96,6 +97,34 @@ export function CatalogFilters({
           className="h-[46px] ps-9 shadow-none"
           aria-label="Search marketplace"
         />
+      </div>
+
+      <div className="space-y-2">
+        <p className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
+          Sort
+        </p>
+        <div className="grid grid-cols-2 gap-2">
+          <Button
+            type="button"
+            variant={sort === "newest" ? "default" : "outline"}
+            size="sm"
+            className="h-10 cursor-pointer shadow-none"
+            aria-pressed={sort === "newest"}
+            onClick={() => onSortChange("newest")}
+          >
+            Newest
+          </Button>
+          <Button
+            type="button"
+            variant={sort === "oldest" ? "default" : "outline"}
+            size="sm"
+            className="h-10 cursor-pointer shadow-none"
+            aria-pressed={sort === "oldest"}
+            onClick={() => onSortChange("oldest")}
+          >
+            Oldest
+          </Button>
+        </div>
       </div>
 
       <fieldset className="space-y-3">

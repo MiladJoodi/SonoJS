@@ -8,7 +8,7 @@ import {
   AuthDialog,
   type AuthDialogMode,
 } from "@/components/auth"
-import { ProIcon } from "@/components/icons/pro-icon"
+import { ProIcon } from "@/components/icons/plan/pro"
 import type { ContentAccess } from "@/lib/access"
 import { cn } from "@/lib/utils"
 

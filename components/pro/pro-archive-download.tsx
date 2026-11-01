@@ -3,7 +3,7 @@
 import * as React from "react"
 import { ArrowDownToLineIcon } from "lucide-react"
 
-import { ProIcon } from "@/components/icons/pro-icon"
+import { ProIcon } from "@/components/icons/plan/pro"
 import { cn } from "@/lib/utils"
 import { Spinner } from "@sonojs/ui/components/spinner"
 

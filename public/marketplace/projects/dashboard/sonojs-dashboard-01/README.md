@@ -9,15 +9,17 @@ Source: `E:\SonoJS-Templates\apps\dashboard\02`
 
 | File | Purpose |
 |---|---|
-| `main-light.webp` | Cover (light theme) |
-| `main-dark.webp` | Cover (dark theme) |
+| `cover-light.webp` | Catalog cover (light) |
+| `cover-dark.webp` | Catalog cover (dark) |
+| `main-light.webp` | Detail page hero (light) |
+| `main-dark.webp` | Detail page hero (dark) |
 
 ## Live
 
-- Demo: https://miladjoodi.github.io/sonojs-dashboard-01/signin/
+- Demo: https://sonojs.github.io/sonojs-dashboard-01/
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Archive (private Pro repo): `templates/dashboards/sonojs-dashboard-01/sonojs-dashboard-01.zip`
+- Zip via Pro registry slug (see `registry/registry.json` in SonoJS-pro)

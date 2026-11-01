@@ -56,10 +56,33 @@ export function ProjectDetail({
   const specs = [
     ["Version", `v${project.version}`],
     ["Last update", formatDate(project.updatedAt)],
-    ["Pages", `${project.screens}+`],
+    ["Pages", String(project.screens)],
     ["Category", MARKETPLACE_CATEGORY_LABEL[project.category]],
     ["First release", formatDate(project.firstReleasedAt)],
   ] as const
+
+  const livePreview =
+    project.enabled && project.liveUrl ? (
+      <Button
+        asChild
+        variant="outline"
+        className="h-[46px] w-full cursor-pointer border-border/70 shadow-none"
+      >
+        <a href={project.liveUrl} target="_blank" rel="noreferrer">
+          <ExternalLinkIcon className="size-4" aria-hidden />
+          Live preview
+        </a>
+      </Button>
+    ) : (
+      <Button
+        type="button"
+        variant="outline"
+        disabled
+        className="h-[46px] w-full border-border/70 shadow-none"
+      >
+        Live preview soon
+      </Button>
+    )
 
   return (
     <div className="relative min-h-0 flex-1 bg-canvas">
@@ -74,47 +97,141 @@ export function ProjectDetail({
       <div className="workspace-shell relative py-5 sm:py-7 lg:py-8">
         <div
           className={cn(
-            "mx-auto grid max-w-7xl items-start gap-6 lg:grid-cols-[minmax(0,1fr)_300px] lg:gap-8 xl:grid-cols-[minmax(0,1fr)_320px]",
+            "mx-auto grid max-w-7xl items-start gap-6 lg:grid-cols-[minmax(0,1fr)_300px] lg:gap-x-8 lg:gap-y-0 xl:grid-cols-[minmax(0,1fr)_320px]",
             showOfferRail &&
               "xl:max-w-[min(100%,calc(80rem+var(--offer-rail-width)+2rem))] xl:grid-cols-[minmax(0,1fr)_320px_var(--offer-rail-width)]"
           )}
         >
-          {/* One story card: cover → end */}
-          <article className="min-w-0 overflow-hidden rounded-[12px] border border-border/70 bg-card shadow-soft">
-            <div className="relative">
-              <ProjectCover
-                hue={project.coverHue}
-                title={project.title}
-                variant={project.coverVariant}
-                imageSrc={project.detailCoverImage ?? project.coverImage}
-                imageSrcDark={
-                  project.detailCoverImage
-                    ? undefined
-                    : project.coverImageDark
-                }
-                interactive
-                className="aspect-video rounded-none border-0"
-              />
-              {!project.enabled ? (
-                <span className="absolute start-2.5 top-2.5 rounded-md bg-zinc-900/80 px-2 py-0.5 text-[11px] font-semibold text-white">
-                  Coming soon
-                </span>
-              ) : null}
-              {project.badge ? (
-                <span
-                  className={cn(
-                    "absolute rounded-md px-2 py-0.5 text-[11px] font-semibold text-white",
-                    project.enabled ? "start-2.5 top-2.5" : "start-2.5 top-10",
-                    project.badge === "free" && "bg-emerald-500/90",
-                    project.badge === "new" && "bg-sky-500/90",
-                    project.badge === "bestseller" && "bg-amber-500/95"
-                  )}
-                >
-                  {MARKETPLACE_BADGE_LABEL[project.badge]}
-                </span>
-              ) : null}
-            </div>
+          {/* Cover — first on mobile so CTAs can sit right under it */}
+          <div
+            className={cn(
+              "relative order-1 min-w-0 overflow-hidden rounded-[12px] border border-border/70 bg-card shadow-soft",
+              "lg:col-start-1 lg:row-start-1 lg:rounded-b-none lg:border-b-0"
+            )}
+          >
+            <ProjectCover
+              hue={project.coverHue}
+              title={project.title}
+              variant={project.coverVariant}
+              imageSrc={project.detailCoverImage ?? project.coverImage}
+              imageSrcDark={
+                project.detailCoverImageDark ??
+                (project.detailCoverImage
+                  ? undefined
+                  : project.coverImageDark)
+              }
+              interactive
+              className="aspect-video rounded-none border-0"
+            />
+            {!project.enabled ? (
+              <span className="absolute start-2.5 top-2.5 rounded-md bg-zinc-900/80 px-2 py-0.5 text-[11px] font-semibold text-white">
+                Coming soon
+              </span>
+            ) : null}
+            {project.badge ? (
+              <span
+                className={cn(
+                  "absolute rounded-md px-2 py-0.5 text-[11px] font-semibold text-white",
+                  project.enabled ? "start-2.5 top-2.5" : "start-2.5 top-10",
+                  project.badge === "free" && "bg-emerald-500/90",
+                  project.badge === "new" && "bg-sky-500/90",
+                  project.badge === "bestseller" && "bg-amber-500/95"
+                )}
+              >
+                {MARKETPLACE_BADGE_LABEL[project.badge]}
+              </span>
+            ) : null}
+          </div>
 
+          {/* Purchase card — directly under cover on mobile */}
+          <aside className="order-2 min-w-0 lg:sticky lg:top-24 lg:col-start-2 lg:row-start-1 lg:row-span-2 lg:self-start">
+            <div className="overflow-hidden rounded-[12px] border border-border/70 bg-card shadow-soft">
+              <div className="space-y-5 p-5">
+                <div className="space-y-2">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="rounded-full bg-muted px-2 py-0.5 text-[11px] font-medium text-muted-foreground">
+                      {MARKETPLACE_CATEGORY_LABEL[project.category]}
+                    </span>
+                    {project.badge ? (
+                      <span
+                        className={cn(
+                          "rounded-full px-2 py-0.5 text-[11px] font-semibold text-white",
+                          project.badge === "free" && "bg-emerald-500/90",
+                          project.badge === "new" && "bg-sky-500/90",
+                          project.badge === "bestseller" && "bg-amber-500/95"
+                        )}
+                      >
+                        {MARKETPLACE_BADGE_LABEL[project.badge]}
+                      </span>
+                    ) : null}
+                  </div>
+                  <h1 className="text-balance text-xl font-semibold tracking-tight text-foreground">
+                    {project.title}
+                  </h1>
+                  <p className="text-sm leading-snug text-muted-foreground">
+                    {project.tagline}
+                  </p>
+                </div>
+
+                <div className="space-y-2">
+                  <p className="text-3xl font-semibold tracking-tight tabular-nums text-foreground">
+                    {project.priceLabel}
+                  </p>
+                  {downloadCta}
+                  {livePreview}
+                </div>
+
+                <div className="space-y-3 border-t border-border/60 pt-4">
+                  <SectionLabel>Quick facts</SectionLabel>
+                  <dl className="grid grid-cols-2 gap-x-3 gap-y-3">
+                    {(
+                      [
+                        ["Pages", String(project.screens)],
+                        ["Version", `v${project.version}`],
+                        ["Last update", formatDate(project.updatedAt)],
+                        [
+                          "Who can download",
+                          project.access === "pro"
+                            ? "Pro only"
+                            : project.access === "public"
+                              ? "Everyone"
+                              : "Free account",
+                        ],
+                      ] as const
+                    ).map(([k, v]) => (
+                      <div key={k} className="min-w-0 space-y-0.5">
+                        <dt className="text-[11px] text-muted-foreground">
+                          {k}
+                        </dt>
+                        <dd className="truncate text-sm font-medium text-foreground">
+                          {v}
+                        </dd>
+                      </div>
+                    ))}
+                  </dl>
+                </div>
+
+                <div className="space-y-3 border-t border-border/60 pt-4">
+                  <SectionLabel>Made with</SectionLabel>
+                  <ul className="flex flex-wrap gap-1.5">
+                    {project.stack.map((s) => (
+                      <li key={s}>
+                        <StackChip stack={s} />
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </aside>
+
+          {/* Story body — after purchase CTAs on mobile */}
+          <article
+            className={cn(
+              "order-3 min-w-0 overflow-hidden rounded-[12px] border border-border/70 bg-card shadow-soft",
+              "lg:col-start-1 lg:row-start-2 lg:rounded-t-none lg:shadow-none"
+            )}
+          >
             <div className="divide-y divide-border/60">
               <section className="space-y-3 px-5 py-5 sm:px-6 sm:py-6">
                 <SectionLabel>Overview</SectionLabel>
@@ -200,112 +317,6 @@ export function ProjectDetail({
             </div>
           </article>
 
-          {/* One purchase / meta card */}
-          <aside className="min-w-0 lg:sticky lg:top-24">
-            <div className="overflow-hidden rounded-[12px] border border-border/70 bg-card shadow-soft">
-              <div className="space-y-5 p-5">
-                <div className="space-y-2">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <span className="rounded-full bg-muted px-2 py-0.5 text-[11px] font-medium text-muted-foreground">
-                      {MARKETPLACE_CATEGORY_LABEL[project.category]}
-                    </span>
-                    {project.badge ? (
-                      <span
-                        className={cn(
-                          "rounded-full px-2 py-0.5 text-[11px] font-semibold text-white",
-                          project.badge === "free" && "bg-emerald-500/90",
-                          project.badge === "new" && "bg-sky-500/90",
-                          project.badge === "bestseller" && "bg-amber-500/95"
-                        )}
-                      >
-                        {MARKETPLACE_BADGE_LABEL[project.badge]}
-                      </span>
-                    ) : null}
-                  </div>
-                  <h1 className="text-balance text-xl font-semibold tracking-tight text-foreground">
-                    {project.title}
-                  </h1>
-                  <p className="text-sm leading-snug text-muted-foreground">
-                    {project.tagline}
-                  </p>
-                </div>
-
-                <div className="space-y-2">
-                  <p className="text-3xl font-semibold tracking-tight tabular-nums text-foreground">
-                    {project.priceLabel}
-                  </p>
-                  {downloadCta}
-                  {project.enabled && project.liveUrl ? (
-                    <Button
-                      asChild
-                      variant="outline"
-                      className="h-[46px] w-full cursor-pointer border-border/70 shadow-none"
-                    >
-                      <a
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        <ExternalLinkIcon className="size-4" aria-hidden />
-                        Live preview
-                      </a>
-                    </Button>
-                  ) : (
-                    <Button
-                      type="button"
-                      variant="outline"
-                      disabled
-                      className="h-[46px] w-full border-border/70 shadow-none"
-                    >
-                      Live preview soon
-                    </Button>
-                  )}
-                </div>
-
-                <div className="space-y-3 border-t border-border/60 pt-4">
-                  <SectionLabel>Quick facts</SectionLabel>
-                  <dl className="grid grid-cols-2 gap-x-3 gap-y-3">
-                    {(
-                      [
-                        ["Pages", `${project.screens}+`],
-                        ["Version", `v${project.version}`],
-                        ["Last update", formatDate(project.updatedAt)],
-                        [
-                          "Who can download",
-                          project.access === "pro"
-                            ? "Pro only"
-                            : project.access === "public"
-                              ? "Everyone"
-                              : "Free account",
-                        ],
-                      ] as const
-                    ).map(([k, v]) => (
-                      <div key={k} className="min-w-0 space-y-0.5">
-                        <dt className="text-[11px] text-muted-foreground">
-                          {k}
-                        </dt>
-                        <dd className="truncate text-sm font-medium text-foreground">
-                          {v}
-                        </dd>
-                      </div>
-                    ))}
-                  </dl>
-                </div>
-
-                <div className="space-y-3 border-t border-border/60 pt-4">
-                  <SectionLabel>Made with</SectionLabel>
-                  <ul className="flex flex-wrap gap-1.5">
-                    {project.stack.map((s) => (
-                      <li key={s}>
-                        <StackChip stack={s} />
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </aside>
-
           <MarketplaceOfferColumn />
         </div>
 
@@ -325,7 +336,7 @@ export function ProjectDetail({
             <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {related.map((p, i) => (
                 <li key={p.slug}>
-                  <ProjectCard project={p} index={i} />
+                  <ProjectCard project={p} index={i} flat />
                 </li>
               ))}
             </ul>

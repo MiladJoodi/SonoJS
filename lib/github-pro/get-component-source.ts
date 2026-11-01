@@ -1,7 +1,10 @@
 import "server-only"
 
 import { fetchRepoFileBytes, fetchRepoFileText } from "@/lib/github-pro/client"
-import { getProRegistryEntry } from "@/lib/github-pro/registry"
+import {
+  getProRegistryEntry,
+  type ProRegistryProductType,
+} from "@/lib/github-pro/registry"
 import { assertSafeProRepoPath } from "@/lib/github-pro/paths"
 
 export class ProComponentNotFoundError extends Error {
@@ -26,6 +29,7 @@ export type ProComponentFile = {
 export type ProComponentSource = {
   slug: string
   name: string
+  type?: ProRegistryProductType
   category?: string
   variant?: string
   /** Repo-relative zip path when the item ships as an archive. */
@@ -68,6 +72,7 @@ export async function getProComponentSource(
   return {
     slug: safeSlug,
     name: entry.name,
+    type: entry.type,
     category: entry.category,
     variant: entry.variant,
     archive,

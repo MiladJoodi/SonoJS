@@ -14,10 +14,10 @@ Pages build: `E:\SonoJS-Templates-Github-Pages\01\sonojs-betting-02`
 
 ## Live
 
-- Demo: https://miladjoodi.github.io/sonojs-betting-02/
+- Demo: https://sonojs.github.io/sonojs-betting-02/
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Archive (private Pro repo): `templates/betting/sonojs-betting-02/sonojs-betting-02.zip`
+- Zip via Pro registry slug (see `registry/registry.json` in SonoJS-pro)

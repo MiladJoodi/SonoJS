@@ -4,7 +4,7 @@ import Link from "next/link"
 import { useClerk, useUser } from "@clerk/nextjs"
 import { LogOutIcon, SettingsIcon, UserIcon } from "lucide-react"
 
-import { PlanIcon } from "@/components/icons/plan-icon"
+import { PlanIcon } from "@/components/icons/plan/plan-icon"
 import { getUserPlan, getViewerPlanId } from "@/lib/access"
 import { getAuthReturnPath } from "@/lib/auth-return-path"
 import { cn } from "@/lib/utils"

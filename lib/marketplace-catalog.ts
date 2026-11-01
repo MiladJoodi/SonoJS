@@ -6,10 +6,15 @@ export type MarketplaceCategory =
   | "ecommerce"
   | "ai"
   | "betting"
+  | "crypto"
 
 export type MarketplaceStack =
   | "nextjs"
   | "react"
+  | "vite"
+  | "vercel"
+  | "bun"
+  | "lucide"
   | "tailwind"
   | "typescript"
   | "javascript"
@@ -20,16 +25,24 @@ export type MarketplaceStack =
   | "d3"
   | "threejs"
   | "reactquery"
+  | "zustand"
+  | "axios"
+  | "reactrouter"
   | "socketio"
   | "recharts"
+  | "chartjs"
+  | "lightweightcharts"
   | "clerk"
   | "authjs"
   | "jwt"
   | "linkedin"
+  | "indeed"
   | "github"
   | "medium"
   | "devto"
   | "stripe"
+  | "visa"
+  | "resend"
   | "drizzle"
   | "prisma"
   | "npm"
@@ -70,20 +83,17 @@ export type MarketplaceProject = {
   access?: "public" | "member" | "pro"
   badge: MarketplaceBadge | null
   coverVariant: MarketplaceCoverVariant
-  /** Public path under /public (light / default cover) */
+  /** Catalog card cover (light) — file: cover-light.webp */
   coverImage?: string | null
-  /** Optional dark-mode cover; falls back to coverImage */
+  /** Catalog card cover (dark) — file: cover-dark.webp */
   coverImageDark?: string | null
-  /** Detail-page hero; falls back to coverImage */
+  /** Detail-page hero (light) — file: main-light.webp; falls back to coverImage */
   detailCoverImage?: string | null
+  /** Detail-page hero (dark) — file: main-dark.webp */
+  detailCoverImageDark?: string | null
   liveUrl: string
-  /** Optional public / absolute download URL (redirect). Prefer `archivePath`. */
+  /** Optional public / absolute download URL (redirect). Prefer Pro registry zip via slug. */
   downloadUrl: string
-  /**
-   * Zip path inside the private Pro GitHub repo
-   * (e.g. `templates/dashboards/…/file.zip`).
-   */
-  archivePath?: string | null
   version: string
   updatedAt: string
   firstReleasedAt: string
@@ -107,11 +117,16 @@ export const MARKETPLACE_CATEGORY_LABEL: Record<MarketplaceCategory, string> = {
   ecommerce: "Ecommerce",
   ai: "AI & Agents",
   betting: "Betting & Casino",
+  crypto: "Crypto & Trading",
 }
 
 export const MARKETPLACE_STACK_LABEL: Record<MarketplaceStack, string> = {
   nextjs: "Next.js",
   react: "React",
+  vite: "Vite",
+  vercel: "Vercel",
+  bun: "Bun",
+  lucide: "Lucide",
   tailwind: "Tailwind CSS",
   typescript: "TypeScript",
   javascript: "JavaScript",
@@ -122,16 +137,24 @@ export const MARKETPLACE_STACK_LABEL: Record<MarketplaceStack, string> = {
   d3: "D3",
   threejs: "Three.js",
   reactquery: "React Query",
+  zustand: "Zustand",
+  axios: "Axios",
+  reactrouter: "React Router",
   socketio: "Socket.IO",
   recharts: "Recharts",
+  chartjs: "Chart.js",
+  lightweightcharts: "Lightweight Charts",
   clerk: "Clerk",
   authjs: "Auth.js",
   jwt: "JWT",
   linkedin: "LinkedIn",
+  indeed: "Indeed",
   github: "GitHub",
   medium: "Medium",
   devto: "DEV",
   stripe: "Stripe",
+  visa: "Visa",
+  resend: "Resend",
   drizzle: "Drizzle",
   prisma: "Prisma",
   npm: "npm",
@@ -159,13 +182,14 @@ export const marketplaceProjects: MarketplaceProject[] = [
     access: "member",
     badge: null,
     coverVariant: "dashboard",
-    coverImage: "/marketplace/projects/dashboard/sonojs-dashboard-01/main-light.webp",
-    coverImageDark: "/marketplace/projects/dashboard/sonojs-dashboard-01/main-dark.webp",
-    detailCoverImage: null,
-    liveUrl: "https://miladjoodi.github.io/sonojs-dashboard-01/signin/",
+    coverImage: "/marketplace/projects/dashboard/sonojs-dashboard-01/cover-light.webp",
+    coverImageDark: "/marketplace/projects/dashboard/sonojs-dashboard-01/cover-dark.webp",
+    detailCoverImage:
+      "/marketplace/projects/dashboard/sonojs-dashboard-01/main-light.webp",
+    detailCoverImageDark:
+      "/marketplace/projects/dashboard/sonojs-dashboard-01/main-dark.webp",
+    liveUrl: "https://sonojs.github.io/sonojs-dashboard-01/",
     downloadUrl: "",
-    archivePath:
-      "templates/dashboards/sonojs-dashboard-01/sonojs-dashboard-01.zip",
     version: "0.1.0",
     updatedAt: "2026-11-01",
     firstReleasedAt: "2026-10-31",
@@ -212,7 +236,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
     description:
       "Frontend-only casino lobby built with Vite, React 19, and Tailwind CSS 4. You get a narrow icon rail, sticky category bar, quick search (Ctrl/Cmd+K), square game tiles with favorites, a featured hero, live wins, promotions, providers, trust block, about, activity feed, and mobile bottom nav. Login dialog is included. Sample games are in the project so you can try it without a real backend. Ready to build and host as a static site.",
     category: "betting",
-    stack: ["react", "tailwind", "typescript", "javascript"],
+    stack: ["react", "vite", "tailwind", "typescript", "javascript"],
     priceLabel: "Free",
     priceCents: 0,
     rating: 0,
@@ -227,13 +251,13 @@ export const marketplaceProjects: MarketplaceProject[] = [
     coverImage: "/marketplace/projects/betting/sonojs-betting-01/cover.webp",
     coverImageDark: null,
     detailCoverImage: "/marketplace/projects/betting/sonojs-betting-01/cover.webp",
-    liveUrl: "https://miladjoodi.github.io/sonojs-betting-01/",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs.github.io/sonojs-betting-01/",
     downloadUrl: "",
-    archivePath: "templates/betting/sonojs-betting-01/sonojs-betting-01.zip",
     version: "0.1.0",
     updatedAt: "2026-11-01",
     firstReleasedAt: "2026-11-01",
-    screens: 12,
+    screens: 1,
     highlights: [
       {
         title: "Lobby built for browsing",
@@ -276,7 +300,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
     description:
       "Frontend-only online casino homepage built with Vite, React 19, and Tailwind CSS 4. You get a cinematic hero, search that leads into the game catalog, mid-page discovery tabs, game rails, live wins, promotions, providers, trust and about blocks, activity feed, mobile menu, and bottom nav. Login UI is included. Sample games ship in the project so you can try it without a real backend. Casino discovery only (no sportsbook). Static build ready for GitHub Pages.",
     category: "betting",
-    stack: ["react", "tailwind", "typescript", "javascript"],
+    stack: ["react", "vite", "tailwind", "typescript", "javascript"],
     priceLabel: "Free",
     priceCents: 0,
     rating: 0,
@@ -292,13 +316,13 @@ export const marketplaceProjects: MarketplaceProject[] = [
     coverImageDark: null,
     detailCoverImage:
       "/marketplace/projects/betting/sonojs-betting-02/cover.webp",
-    liveUrl: "https://miladjoodi.github.io/sonojs-betting-02/",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs.github.io/sonojs-betting-02/",
     downloadUrl: "",
-    archivePath: "templates/betting/sonojs-betting-02/sonojs-betting-02.zip",
     version: "0.1.0",
     updatedAt: "2026-11-01",
     firstReleasedAt: "2026-11-01",
-    screens: 12,
+    screens: 1,
     highlights: [
       {
         title: "Hero-first home",
@@ -341,7 +365,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
     description:
       "Frontend-only casino catalogue lobby built with Vite, React 19, and Tailwind CSS 4. You get sticky top category tabs, search always available in the header, a compact promo ticker, wide landscape game tiles, game rails, live wins, promotions, providers, trust and about blocks, activity feed, menu sheet, and mobile bottom nav. Guest demo state only — no real backend. Static build ready for GitHub Pages.",
     category: "betting",
-    stack: ["react", "tailwind", "typescript", "javascript"],
+    stack: ["react", "vite", "tailwind", "typescript", "javascript"],
     priceLabel: "Free",
     priceCents: 0,
     rating: 0,
@@ -357,13 +381,13 @@ export const marketplaceProjects: MarketplaceProject[] = [
     coverImageDark: null,
     detailCoverImage:
       "/marketplace/projects/betting/sonojs-betting-03/cover.webp",
-    liveUrl: "https://miladjoodi.github.io/sonojs-betting-03/",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs.github.io/sonojs-betting-03/",
     downloadUrl: "",
-    archivePath: "templates/betting/sonojs-betting-03/sonojs-betting-03.zip",
     version: "0.1.0",
     updatedAt: "2026-11-01",
     firstReleasedAt: "2026-11-01",
-    screens: 12,
+    screens: 1,
     highlights: [
       {
         title: "Browse by category",
@@ -398,6 +422,82 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "TypeScript 5",
     ],
   },
+  {
+    slug: "sonojs-crypto-01",
+    title: "Helix",
+    tagline:
+      "Crypto paper-trading desk with live prices, charts, and a local portfolio.",
+    description:
+      "Helix is a frontend crypto paper-trading desk by SonoJS. Built with Vite 8, React 19, TypeScript, TanStack Query, Zustand, and Lightweight Charts. Live spot prices come from Binance (WebSocket ticker). Market stats and news use public APIs. You get a desk home, markets table, asset pages, a trade terminal with chart, depth, and tape, plus portfolio, fill history, news, and settings. All orders are simulated and saved locally. Starting paper balance is $100,000. No wallets and no real trades. Marked as Paper Simulated. Static build ready for GitHub Pages.",
+    category: "crypto",
+    stack: [
+      "react",
+      "vite",
+      "typescript",
+      "reactquery",
+      "zustand",
+      "lightweightcharts",
+      "reactrouter",
+    ],
+    priceLabel: "Free",
+    priceCents: 0,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 38,
+    accent: "38",
+    enabled: true,
+    access: "member",
+    badge: null,
+    coverVariant: "dashboard",
+    coverImage: "/marketplace/projects/crypto/sonojs-crypto-01/cover-light.webp",
+    coverImageDark: "/marketplace/projects/crypto/sonojs-crypto-01/cover-dark.webp",
+    detailCoverImage:
+      "/marketplace/projects/crypto/sonojs-crypto-01/main-light.webp",
+    detailCoverImageDark:
+      "/marketplace/projects/crypto/sonojs-crypto-01/main-dark.webp",
+    liveUrl: "https://sonojs.github.io/sonojs-crypto-01/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-01",
+    firstReleasedAt: "2026-11-01",
+    screens: 9,
+    highlights: [
+      {
+        title: "Live market desk",
+        body: "Ticker, movers, and a home pulse fed by live Binance prices.",
+      },
+      {
+        title: "Full paper terminal",
+        body: "Lightweight Charts, depth, trade tape, and market or limit tickets.",
+      },
+      {
+        title: "Portfolio and history",
+        body: "Holdings, PnL, and paper fills stay in your browser so you can reset anytime.",
+      },
+      {
+        title: "Fast navigation",
+        body: "Command palette (Ctrl/Cmd+K), favorites, and price alerts with toasts.",
+      },
+    ],
+    includes: [
+      "Full Vite 8 + React 19 + TypeScript source (Helix)",
+      "Home, markets, asset, trade, portfolio, history, news, settings",
+      "Paper trading with Zustand portfolio and fills",
+      "Live ticker WebSocket, TanStack Query data hooks",
+      "Lightweight Charts terminal, command palette, favorites, alerts",
+      "Static build ready for GitHub Pages",
+    ],
+    requirements: [
+      "Node.js 20 or newer",
+      "Vite 8",
+      "React 19",
+      "TypeScript 5",
+      "TanStack Query 5",
+      "Zustand 5",
+      "Lightweight Charts 5",
+    ],
+  },
 ]
 
 export function getMarketplaceProject(
@@ -429,6 +529,7 @@ export function listMarketplaceCategories(): MarketplaceCategory[] {
     "ecommerce",
     "ai",
     "betting",
+    "crypto",
   ]
 }
 
@@ -436,6 +537,10 @@ export function listMarketplaceStacks(): MarketplaceStack[] {
   return [
     "nextjs",
     "react",
+    "vite",
+    "vercel",
+    "bun",
+    "lucide",
     "tailwind",
     "typescript",
     "javascript",
@@ -446,16 +551,24 @@ export function listMarketplaceStacks(): MarketplaceStack[] {
     "d3",
     "threejs",
     "reactquery",
+    "zustand",
+    "axios",
+    "reactrouter",
     "socketio",
     "recharts",
+    "chartjs",
+    "lightweightcharts",
     "clerk",
     "authjs",
     "jwt",
     "linkedin",
+    "indeed",
     "github",
     "medium",
     "devto",
     "stripe",
+    "visa",
+    "resend",
     "drizzle",
     "prisma",
     "npm",

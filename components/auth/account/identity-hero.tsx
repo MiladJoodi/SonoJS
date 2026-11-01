@@ -3,7 +3,7 @@
 import Link from "next/link"
 
 import { AccountAvatarEditor } from "@/components/auth/account/avatar-editor"
-import { PlanIcon } from "@/components/icons/plan-icon"
+import { PlanIcon } from "@/components/icons/plan/plan-icon"
 import type { PlanId } from "@/components/pricing/pricing-data"
 import { cn } from "@/lib/utils"
 

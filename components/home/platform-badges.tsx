@@ -7,7 +7,7 @@ import {
   ReactIcon,
   TailwindIcon,
   TypescriptIcon,
-} from "@/components/home/icons"
+} from "@/components/icons"
 import { cn } from "@/lib/utils"
 
 const PLATFORMS = [

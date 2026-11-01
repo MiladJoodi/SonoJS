@@ -9,8 +9,8 @@ import {
   AuthDialog,
   type AuthDialogMode,
 } from "@/components/auth"
-import { FreeIcon } from "@/components/icons/free-icon"
-import { ProIcon } from "@/components/icons/pro-icon"
+import { FreeIcon } from "@/components/icons/plan/free"
+import { ProIcon } from "@/components/icons/plan/pro"
 import type { MarketplaceProject } from "@/lib/marketplace-catalog"
 import { getUserPlan, normalizeContentAccess } from "@/lib/access"
 import { Button } from "@sonojs/ui/components/button"
@@ -47,7 +47,8 @@ export function MarketplaceDownloadButton({
       ? "Download free"
       : `Buy ${project.priceLabel}`
 
-  const hasArchive = Boolean(project.archivePath || project.downloadUrl)
+  /** Zip comes from Pro registry via slug (or optional external downloadUrl). */
+  const hasArchive = Boolean(project.downloadUrl) || project.enabled
 
   function handleDenied() {
     if (access === "pro") {

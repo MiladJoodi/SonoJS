@@ -18,9 +18,12 @@ import { cn } from "@/lib/utils"
 export function ProjectCard({
   project,
   index = 0,
+  flat = false,
 }: {
   project: MarketplaceProject
   index?: number
+  /** Border only — no soft shadow (e.g. Related projects). */
+  flat?: boolean
 }) {
   const reduce = useReducedMotion() ?? false
 
@@ -33,8 +36,10 @@ export function ProjectCard({
         duration: 0.3,
       }}
       className={cn(
-        "group flex h-full flex-col overflow-hidden rounded-[12px] border border-border/70 bg-card shadow-soft",
-        "transition-[transform,box-shadow] duration-200 hover:-translate-y-0.5 hover:shadow-md motion-reduce:transition-none motion-reduce:hover:translate-y-0"
+        "group flex h-full flex-col overflow-hidden rounded-[12px] border border-border/70 bg-card",
+        flat
+          ? "shadow-none"
+          : "shadow-soft transition-[transform,box-shadow] duration-200 hover:-translate-y-0.5 hover:shadow-md motion-reduce:transition-none motion-reduce:hover:translate-y-0"
       )}
     >
       <div className="relative">

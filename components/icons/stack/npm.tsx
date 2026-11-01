@@ -1,0 +1,24 @@
+"use client"
+
+import { cn } from "@/lib/utils"
+
+type MarkProps = { size: number; className?: string }
+
+export function NpmIcon({ size, className }: MarkProps) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 2500 2500"
+      width={size}
+      height={size}
+      className={cn("shrink-0", className)}
+      aria-hidden
+    >
+      <path fill="#c00" d="M0 0h2500v2500H0z" />
+      <path
+        fill="#fff"
+        d="M1241.5 268.5h-973v1962.9h972.9V763.5h495v1467.9h495V268.5z"
+      />
+    </svg>
+  )
+}

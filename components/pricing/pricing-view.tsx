@@ -20,8 +20,8 @@ import {
   startCheckout,
   type CheckoutPlanSlug,
 } from "@/components/pricing/start-checkout"
-import { PlanIcon } from "@/components/icons/plan-icon"
-import { ProIcon } from "@/components/icons/pro-icon"
+import { PlanIcon } from "@/components/icons/plan/plan-icon"
+import { ProIcon } from "@/components/icons/plan/pro"
 import { Button } from "@sonojs/ui/components/button"
 import { cn } from "@/lib/utils"
 

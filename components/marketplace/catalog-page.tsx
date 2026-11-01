@@ -7,6 +7,7 @@ import { FilterIcon, ShoppingBagIcon, XIcon } from "lucide-react"
 import {
   CatalogFilters,
   type CatalogFilterState,
+  type CatalogSortKey,
 } from "@/components/marketplace/catalog-filters"
 import { MarketStats } from "@/components/marketplace/market-stats"
 import {
@@ -23,13 +24,6 @@ import {
 } from "@/lib/marketplace-catalog"
 import { Button } from "@sonojs/ui/components/button"
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@sonojs/ui/components/select"
-import {
   Sheet,
   SheetContent,
   SheetHeader,
@@ -38,7 +32,10 @@ import {
 } from "@sonojs/ui/components/sheet"
 import { cn } from "@/lib/utils"
 
-type SortKey = "best" | "newest" | "price-asc" | "price-desc"
+function parseSortParam(raw: string | null): CatalogSortKey {
+  if (raw === "oldest") return "oldest"
+  return "newest"
+}
 
 function parseListParam<T extends string>(
   raw: string | null,
@@ -52,7 +49,7 @@ function parseListParam<T extends string>(
     .filter((s): s is T => set.has(s as T))
 }
 
-function filterProjects(state: CatalogFilterState, sort: SortKey) {
+function filterProjects(state: CatalogFilterState, sort: CatalogSortKey) {
   const q = state.q.trim().toLowerCase()
   let list = marketplaceProjects.filter((p) => {
     if (state.categories.length && !state.categories.includes(p.category)) {
@@ -70,12 +67,9 @@ function filterProjects(state: CatalogFilterState, sort: SortKey) {
   })
 
   list = [...list].sort((a, b) => {
-    if (sort === "newest") {
-      return b.updatedAt.localeCompare(a.updatedAt)
-    }
-    if (sort === "price-asc") return a.priceCents - b.priceCents
-    if (sort === "price-desc") return b.priceCents - a.priceCents
-    return b.rating * b.reviewCount - a.rating * a.reviewCount
+    const byDate = b.updatedAt.localeCompare(a.updatedAt)
+    if (sort === "oldest") return -byDate
+    return byDate
   })
 
   return list
@@ -105,6 +99,10 @@ export function MarketplaceCatalogPage() {
       [
         "nextjs",
         "react",
+        "vite",
+        "vercel",
+        "bun",
+        "lucide",
         "tailwind",
         "typescript",
         "javascript",
@@ -115,16 +113,24 @@ export function MarketplaceCatalogPage() {
         "d3",
         "threejs",
         "reactquery",
+        "zustand",
+        "axios",
+        "reactrouter",
         "socketio",
         "recharts",
+        "chartjs",
+        "lightweightcharts",
         "clerk",
         "authjs",
         "jwt",
         "linkedin",
+        "indeed",
         "github",
         "medium",
         "devto",
         "stripe",
+        "visa",
+        "resend",
         "drizzle",
         "prisma",
         "npm",
@@ -132,8 +138,8 @@ export function MarketplaceCatalogPage() {
       ] as const satisfies readonly MarketplaceStack[]
     ),
   }))
-  const [sort, setSort] = React.useState<SortKey>(
-    () => (searchParams.get("sort") as SortKey) || "best"
+  const [sort, setSort] = React.useState<CatalogSortKey>(() =>
+    parseSortParam(searchParams.get("sort"))
   )
   const [mobileFiltersOpen, setMobileFiltersOpen] = React.useState(false)
 
@@ -185,7 +191,7 @@ export function MarketplaceCatalogPage() {
     if (filters.stacks.length) {
       params.set("stack", filters.stacks.join(","))
     }
-    if (sort !== "best") params.set("sort", sort)
+    if (sort !== "newest") params.set("sort", sort)
     const qs = params.toString()
     router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false })
   }, [filters, sort, pathname, router])
@@ -228,14 +234,15 @@ export function MarketplaceCatalogPage() {
               <CatalogFilters
                 value={filters}
                 onChange={setFilters}
-                resultCount={results.length}
+                sort={sort}
+                onSortChange={setSort}
                 className="border-0 bg-transparent shadow-none"
               />
             </div>
           </div>
 
           <div className="min-w-0 space-y-4">
-            <div className="flex flex-wrap items-center justify-between gap-3">
+            <div className="flex flex-wrap items-center gap-3 lg:hidden">
               <Sheet
                 open={mobileFiltersOpen}
                 onOpenChange={setMobileFiltersOpen}
@@ -245,7 +252,7 @@ export function MarketplaceCatalogPage() {
                     type="button"
                     variant="outline"
                     size="sm"
-                    className="h-10 cursor-pointer border-border/70 shadow-none lg:hidden"
+                    className="h-10 cursor-pointer border-border/70 shadow-none"
                   >
                     <FilterIcon className="size-4" aria-hidden />
                     Filters
@@ -266,38 +273,12 @@ export function MarketplaceCatalogPage() {
                   <CatalogFilters
                     value={filters}
                     onChange={setFilters}
-                    resultCount={results.length}
+                    sort={sort}
+                    onSortChange={setSort}
                     className="border-0 p-0 shadow-none"
                   />
                 </SheetContent>
               </Sheet>
-
-              <p className="text-sm text-muted-foreground">
-                <span className="font-medium text-foreground">
-                  {results.length}
-                </span>{" "}
-                of {marketplaceProjects.length}
-              </p>
-
-              <div className="ms-auto flex items-center gap-2">
-                <span className="hidden text-xs font-medium tracking-wide text-muted-foreground uppercase sm:inline">
-                  Sort
-                </span>
-                <Select
-                  value={sort}
-                  onValueChange={(v) => setSort(v as SortKey)}
-                >
-                  <SelectTrigger className="h-10 w-[160px] cursor-pointer shadow-none">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="best">Best sellers</SelectItem>
-                    <SelectItem value="newest">Newest</SelectItem>
-                    <SelectItem value="price-asc">Price: low</SelectItem>
-                    <SelectItem value="price-desc">Price: high</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
             </div>
 
             {activeChips.length > 0 ? (

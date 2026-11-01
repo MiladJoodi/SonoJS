@@ -13,10 +13,10 @@ Source: `E:\SonoJS-Templates\apps\betting\01`
 
 ## Live
 
-- Demo: https://miladjoodi.github.io/sonojs-betting-01/
+- Demo: https://sonojs.github.io/sonojs-betting-01/
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Archive (private Pro repo): `templates/betting/sonojs-betting-01/sonojs-betting-01.zip`
+- Zip via Pro registry slug (see `registry/registry.json` in SonoJS-pro)
