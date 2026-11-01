@@ -3,8 +3,6 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest"
 describe("readRegistryJsonText", () => {
   const prevFetch = globalThis.fetch
   const prevAppUrl = process.env.NEXT_PUBLIC_APP_URL
-  const prevNodeEnv = process.env.NODE_ENV
-  const prevVercelEnv = process.env.VERCEL_ENV
 
   beforeEach(() => {
     vi.resetModules()
@@ -14,9 +12,7 @@ describe("readRegistryJsonText", () => {
     globalThis.fetch = prevFetch
     if (prevAppUrl === undefined) delete process.env.NEXT_PUBLIC_APP_URL
     else process.env.NEXT_PUBLIC_APP_URL = prevAppUrl
-    process.env.NODE_ENV = prevNodeEnv
-    if (prevVercelEnv === undefined) delete process.env.VERCEL_ENV
-    else process.env.VERCEL_ENV = prevVercelEnv
+    vi.unstubAllEnvs()
   })
 
   it("rejects invalid names", async () => {
@@ -45,8 +41,8 @@ describe("readRegistryJsonText", () => {
 
   it("uses PRODUCTION_ORIGIN in production when APP_URL unset", async () => {
     delete process.env.NEXT_PUBLIC_APP_URL
-    process.env.NODE_ENV = "production"
-    process.env.VERCEL_ENV = "production"
+    vi.stubEnv("NODE_ENV", "production")
+    vi.stubEnv("VERCEL_ENV", "production")
 
     globalThis.fetch = vi.fn(async (input) => {
       const url = String(input)
