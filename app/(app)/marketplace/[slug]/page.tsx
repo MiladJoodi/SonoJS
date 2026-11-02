@@ -1,12 +1,10 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 
-import { ProjectDetail } from "@/components/marketplace"
-import { ProjectDownloadCta } from "@/components/marketplace/project-download-cta"
-import {
-  getMarketplaceProject,
-  marketplaceProjects,
-} from "@/lib/marketplace-catalog"
+import { MarketplaceDownloadButton } from "@/components/marketplace/marketplace-download-button"
+import { SonoMarketDetailPage } from "@/components/sonomarket/detail-page"
+import { marketplaceProjects } from "@/lib/marketplace-catalog"
+import { getSonoMarketPreviewDetail } from "@/lib/sonomarket-preview-data"
 import { pageMetadata } from "@/lib/seo"
 
 type PageProps = {
@@ -24,8 +22,8 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { slug } = await params
-  const project = getMarketplaceProject(slug)
-  if (!project) {
+  const detail = getSonoMarketPreviewDetail(slug)
+  if (!detail) {
     return pageMetadata({
       title: "Project",
       description: "Marketplace project",
@@ -33,20 +31,21 @@ export async function generateMetadata({
     })
   }
   return pageMetadata({
-    title: project.title,
-    description: project.tagline,
-    path: `/marketplace/${project.slug}`,
+    title: detail.title,
+    description: detail.tagline,
+    path: `/marketplace/${detail.slug}`,
   })
 }
 
 export default async function MarketplaceProjectPage({ params }: PageProps) {
   const { slug } = await params
-  const project = getMarketplaceProject(slug)
-  if (!project) notFound()
+  const detail = getSonoMarketPreviewDetail(slug)
+  if (!detail) notFound()
+
   return (
-    <ProjectDetail
-      project={project}
-      downloadCta={<ProjectDownloadCta project={project} />}
+    <SonoMarketDetailPage
+      detail={detail}
+      downloadCta={<MarketplaceDownloadButton project={detail.project} />}
     />
   )
 }

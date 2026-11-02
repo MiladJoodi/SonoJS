@@ -14,16 +14,22 @@ import { Separator } from "@sonojs/ui/components/separator"
 export function SiteHeader({
   githubStars = null,
   initialSignedIn = false,
+  sticky = true,
 }: {
   githubStars?: number | null
   /** Server auth hint so header chrome paints before Clerk JS loads. */
   initialSignedIn?: boolean
+  /** When false, header scrolls away with the page (no sticky / hide-on-scroll). */
+  sticky?: boolean
 }) {
   return (
     <header
       data-site-header=""
       className={cn(
-        "sticky top-0 z-50 w-full border-b border-white/20 bg-white/40 backdrop-blur-2xl backdrop-saturate-150 transition-[background-color,backdrop-filter,border-color,transform] duration-300 ease-out supports-backdrop-filter:bg-white/25 dark:border-white/10 dark:bg-background/40 dark:supports-backdrop-filter:bg-background/25 [[data-header-hidden]_&]:pointer-events-none [[data-header-hidden]_&]:-translate-y-full"
+        "z-50 w-full border-b border-white/20 bg-white/40 backdrop-blur-2xl backdrop-saturate-150 transition-[background-color,backdrop-filter,border-color,transform] duration-300 ease-out supports-backdrop-filter:bg-white/25 dark:border-white/10 dark:bg-background/40 dark:supports-backdrop-filter:bg-background/25",
+        sticky
+          ? "sticky top-0 [[data-header-hidden]_&]:pointer-events-none [[data-header-hidden]_&]:-translate-y-full"
+          : "relative"
       )}
     >
       <div className="container-wrapper">

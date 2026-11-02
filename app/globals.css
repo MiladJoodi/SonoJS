@@ -815,7 +815,54 @@ html:has([data-block-embed]) body {
   overflow-x: auto;
 }
 
+@utility paused {
+  animation-play-state: paused;
+}
+
 @layer components {
+  /* SonoMarket preview — light + dark surfaces (follows html.dark) */
+  [data-sonomarket] {
+    --sm-bg: #f3f4f6;
+    --sm-bg-elevated: #ffffff;
+    --sm-sidebar: #ffffff;
+    --sm-header: rgb(243 244 246 / 0.92);
+    --sm-text: #0b0e14;
+    --sm-text-secondary: rgb(11 14 20 / 0.55);
+    --sm-text-faint: rgb(11 14 20 / 0.4);
+    --sm-border: rgb(11 14 20 / 0.09);
+    --sm-border-strong: rgb(11 14 20 / 0.14);
+    --sm-chip: rgb(11 14 20 / 0.04);
+    --sm-input: #ffffff;
+    --sm-overlay: rgb(0 0 0 / 0.45);
+    --sm-hero: #eef2ff;
+    --sm-hero-glow: color-mix(in oklab, var(--primary) 18%, transparent);
+    --sm-card-shadow: 0 10px 40px -18px rgb(15 23 42 / 0.16);
+    --sm-accent: var(--primary);
+    color: var(--sm-text);
+    background-color: var(--sm-bg);
+    color-scheme: light;
+  }
+
+  .dark [data-sonomarket] {
+    --sm-bg: #0a0c10;
+    --sm-bg-elevated: #12151c;
+    --sm-sidebar: rgb(12 14 20 / 0.95);
+    --sm-header: rgb(10 12 16 / 0.92);
+    --sm-text: #ffffff;
+    --sm-text-secondary: rgb(255 255 255 / 0.5);
+    --sm-text-faint: rgb(255 255 255 / 0.38);
+    --sm-border: rgb(255 255 255 / 0.09);
+    --sm-border-strong: rgb(255 255 255 / 0.14);
+    --sm-chip: rgb(255 255 255 / 0.04);
+    --sm-input: rgb(255 255 255 / 0.045);
+    --sm-overlay: rgb(0 0 0 / 0.55);
+    --sm-hero: #0c1018;
+    --sm-hero-glow: color-mix(in oklab, var(--primary) 30%, transparent);
+    --sm-card-shadow: 0 10px 40px -18px rgb(0 0 0 / 0.75);
+    --sm-accent: var(--primary);
+    color-scheme: dark;
+  }
+
   /* Shiki output — lock typography (nested @utility rules were not sticking) */
   .sono-code-shiki pre,
   .sono-code-shiki pre.shiki,

@@ -7,6 +7,7 @@ export type MarketplaceCategory =
   | "ai"
   | "betting"
   | "crypto"
+  | "fintech"
 
 export type MarketplaceStack =
   | "nextjs"
@@ -118,6 +119,7 @@ export const MARKETPLACE_CATEGORY_LABEL: Record<MarketplaceCategory, string> = {
   ai: "AI & Agents",
   betting: "Betting & Casino",
   crypto: "Crypto & Trading",
+  fintech: "Fintech & Payments",
 }
 
 export const MARKETPLACE_STACK_LABEL: Record<MarketplaceStack, string> = {
@@ -498,6 +500,137 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Lightweight Charts 5",
     ],
   },
+  {
+    slug: "sonojs-fintech-01",
+    title: "Pocket",
+    tagline: "Simple modern payments landing — clear hierarchy, ready to demo live.",
+    description:
+      "Pocket is a frontend payments marketing landing by SonoJS. Built with Vite, React, and Tailwind CSS. You get a dark fintech hero, stats, feature business block, billing and card-deal sections, testimonials, client logos, CTA, and footer. Motion accents use Framer Motion. Single-page scroll landing with navbar anchors for Home, Features, Product, and Clients. Demo marketing surface only — no real payments or accounts. Static build ready for GitHub Pages.",
+    category: "fintech",
+    stack: ["react", "vite", "javascript", "tailwind"],
+    priceLabel: "Free",
+    priceCents: 0,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 195,
+    accent: "195",
+    enabled: true,
+    access: "member",
+    badge: null,
+    coverVariant: "landing",
+    coverImage: "/marketplace/projects/fintech/sonojs-fintech-01/cover-light.webp",
+    coverImageDark: null,
+    detailCoverImage:
+      "/marketplace/projects/fintech/sonojs-fintech-01/cover-light.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs.github.io/sonojs-fintech-01/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-01",
+    firstReleasedAt: "2026-11-01",
+    screens: 1,
+    highlights: [
+      {
+        title: "Payments-first landing",
+        body: "Hero, stats, and product story framed for a simple payments brand — not a generic SaaS shell.",
+      },
+      {
+        title: "Billing and card deal blocks",
+        body: "Dedicated billing and card sections keep the product pitch visual and skimmable.",
+      },
+      {
+        title: "Social proof built in",
+        body: "Testimonials, client logos, and a clear CTA close the page without extra routes.",
+      },
+      {
+        title: "Static and demo-ready",
+        body: "Open the live preview or download and run locally. No backend required.",
+      },
+    ],
+    includes: [
+      "Full Vite + React project source (Pocket)",
+      "Navbar, hero, stats, business, billing, card deal",
+      "Testimonials, clients, CTA, and footer",
+      "Framer Motion accents and Tailwind layout",
+      "Asset pack for logos, icons, and people",
+      "Static build ready for GitHub Pages",
+    ],
+    requirements: [
+      "Node.js 18 or newer",
+      "Vite 5",
+      "React 18",
+      "Tailwind CSS 3",
+      "Framer Motion 11",
+    ],
+  },
+  {
+    slug: "sonojs-saas-01",
+    title: "Glyph",
+    tagline:
+      "AI SaaS starter — marketing shell, auth, pricing, and a text generator workspace.",
+    description:
+      "Glyph is a Next.js AI SaaS starter by SonoJS. Built with Next.js 15, React 19, Tailwind CSS 4, AI SDK, and OpenAI. You get a calm marketing site, sign-in / sign-up / reset screens, readable pricing, FAQ, contact, and a text generator chat workspace. Light and dark share one token system. Framer Motion on the hero stays restrained. Demo marketing and UI surface — chat streaming needs a Node host and OPENAI_API_KEY; the GitHub Pages static export keeps marketing pages working without the API. Static build ready for GitHub Pages.",
+    category: "saas",
+    stack: ["nextjs", "react", "tailwind", "typescript", "nodejs"],
+    priceLabel: "Free",
+    priceCents: 0,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 78,
+    accent: "78",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "saas",
+    coverImage: "/marketplace/projects/saas/sonojs-saas-01/cover-light.webp",
+    coverImageDark: "/marketplace/projects/saas/sonojs-saas-01/cover-dark.webp",
+    detailCoverImage:
+      "/marketplace/projects/saas/sonojs-saas-01/main-light.webp",
+    detailCoverImageDark:
+      "/marketplace/projects/saas/sonojs-saas-01/main-dark.webp",
+    liveUrl: "https://sonojs.github.io/sonojs-saas-01/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-02",
+    firstReleasedAt: "2026-11-02",
+    screens: 8,
+    highlights: [
+      {
+        title: "Generator as the product",
+        body: "Text workspace with streaming chat patterns — OpenAI-ready, built to extend.",
+      },
+      {
+        title: "Auth and pricing that ship",
+        body: "Sign in, sign up, reset, plan cards, and FAQ in one voice — ready to rebrand.",
+      },
+      {
+        title: "Theme-aware shell",
+        body: "Light and dark share tokens so demos stay sharp in either mode.",
+      },
+      {
+        title: "Static and fork-ready",
+        body: "Open the live preview or download and run locally. Modular sections, clear assets.",
+      },
+    ],
+    includes: [
+      "Full Next.js 15 + React 19 + TypeScript source (Glyph)",
+      "Marketing pages: home, pricing, FAQ, contact",
+      "Auth screens: sign in, sign up, reset password",
+      "Text generator workspace with AI SDK patterns",
+      "Framer Motion hero, next-themes light/dark",
+      "Static build ready for GitHub Pages",
+    ],
+    requirements: [
+      "Node.js 20 or newer",
+      "Next.js 15",
+      "React 19",
+      "Tailwind CSS 4",
+      "TypeScript 5",
+      "OPENAI_API_KEY for live chat (optional on static demo)",
+    ],
+  },
 ]
 
 export function getMarketplaceProject(
@@ -530,6 +663,7 @@ export function listMarketplaceCategories(): MarketplaceCategory[] {
     "ai",
     "betting",
     "crypto",
+    "fintech",
   ]
 }
 

@@ -40,6 +40,7 @@ Ask before changing MCP config outside this project.`,
   githubRepo: "MiladJoodi/SonoJS",
   navItems: [
     { href: "/docs", label: "Docs" },
+    { href: "/docs/mcp", label: "MCP" },
     { href: "/docs/components", label: "Components" },
     { href: "/blocks", label: "Blocks" },
     { href: "/charts", label: "Charts" },
