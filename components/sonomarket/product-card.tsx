@@ -4,12 +4,6 @@ import Image from "next/image"
 import Link from "next/link"
 import { HeartIcon } from "lucide-react"
 
-import { StackIcon } from "@/components/marketplace/stack-icon"
-import { SonoMarketStarRating } from "@/components/sonomarket/star-rating"
-import {
-  MARKETPLACE_CATEGORY_LABEL,
-  MARKETPLACE_STACK_LABEL,
-} from "@/lib/marketplace-catalog"
 import type { SonoMarketPreviewItem } from "@/lib/sonomarket-preview-data"
 import { cn } from "@/lib/utils"
 
@@ -25,7 +19,6 @@ export function SonoMarketProductCard({
   return (
     <article
       className={cn(
-        // Named group so Marquee's outer `group` (pauseOnHover) doesn't zoom every card.
         "group/card flex h-full flex-col overflow-hidden rounded-[1.15rem] border border-[var(--sm-border)] bg-[var(--sm-bg-elevated)] transition-[border-color] duration-200 hover:border-primary/35",
         className
       )}
@@ -73,8 +66,8 @@ export function SonoMarketProductCard({
         </button>
       </div>
 
-      <div className="flex flex-1 flex-col gap-2 px-4 pb-4 pt-3 text-start">
-        <div className="flex min-w-0 items-center justify-between gap-2">
+      <div className="flex flex-1 flex-col gap-1.5 px-4 pb-4 pt-3 text-start">
+        <div className="flex min-w-0 items-baseline justify-between gap-3">
           <Link
             href={item.href}
             draggable={false}
@@ -82,31 +75,13 @@ export function SonoMarketProductCard({
           >
             {item.title}
           </Link>
-          <span className="shrink-0 rounded-full bg-[var(--sm-chip)] px-2 py-0.5 text-[11px] font-medium text-[var(--sm-text-faint)]">
-            {MARKETPLACE_CATEGORY_LABEL[item.category]}
-          </span>
+          <p className="shrink-0 text-[15px] font-bold tracking-tight text-[var(--sm-text)]">
+            {item.priceLabel}
+          </p>
         </div>
-        <p className="line-clamp-2 min-h-[2.4em] text-[12.5px] leading-snug text-[var(--sm-text-secondary)]">
+        <p className="line-clamp-2 text-[12.5px] leading-snug text-[var(--sm-text-secondary)]">
           {item.tagline}
         </p>
-
-        <div className="mt-auto flex items-center justify-between gap-3 border-t border-[var(--sm-border)] pt-3">
-          <ul className="flex min-w-0 items-center gap-1" aria-label="Stack">
-            {item.stack.slice(0, 5).map((s) => (
-              <li key={s} title={MARKETPLACE_STACK_LABEL[s]}>
-                <StackIcon stack={s} size={18} />
-              </li>
-            ))}
-          </ul>
-          <div className="flex shrink-0 items-center gap-2.5">
-            {item.rating > 0 ? (
-              <SonoMarketStarRating rating={item.rating} variant="single" />
-            ) : null}
-            <p className="text-[16px] font-bold tracking-tight text-[var(--sm-text)]">
-              {item.priceLabel}
-            </p>
-          </div>
-        </div>
       </div>
     </article>
   )

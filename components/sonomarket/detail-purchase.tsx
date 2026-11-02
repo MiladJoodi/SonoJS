@@ -88,14 +88,16 @@ export function SonoMarketDetailPurchase({
           <p className="text-3xl font-semibold tracking-tight tabular-nums text-[var(--sm-text)]">
             {detail.priceLabel}
           </p>
-          <div className="flex flex-col gap-2 sm:flex-row sm:items-stretch">
-            <div className="min-w-0 flex-1 [&_button]:w-full">{downloadCta}</div>
+          <div className="flex items-stretch gap-2">
+            <div className="min-w-0 flex-1 [&_button]:h-[46px] [&_button]:w-full">
+              {downloadCta}
+            </div>
             {detail.liveUrl ? (
               <a
                 href={detail.liveUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="flex h-[46px] min-w-0 flex-1 cursor-pointer items-center justify-center gap-2 rounded-md border border-[var(--sm-border)] bg-[var(--sm-chip)] text-sm font-medium text-[var(--sm-text)] hover:border-primary/40"
+                className="inline-flex h-[46px] min-w-0 flex-1 cursor-pointer items-center justify-center gap-2 rounded-md border border-[var(--sm-border)] bg-[var(--sm-chip)] text-sm font-medium text-[var(--sm-text)] hover:border-primary/40"
               >
                 <ExternalLinkIcon className="size-4 shrink-0" />
                 Live preview
@@ -104,7 +106,7 @@ export function SonoMarketDetailPurchase({
               <button
                 type="button"
                 disabled
-                className="flex h-[46px] min-w-0 flex-1 cursor-not-allowed items-center justify-center gap-2 rounded-md border border-[var(--sm-border)] bg-[var(--sm-chip)] text-sm font-medium text-[var(--sm-text-faint)]"
+                className="inline-flex h-[46px] min-w-0 flex-1 cursor-not-allowed items-center justify-center gap-2 rounded-md border border-[var(--sm-border)] bg-[var(--sm-chip)] text-sm font-medium text-[var(--sm-text-faint)]"
               >
                 Live soon
               </button>
@@ -143,46 +145,6 @@ export function SonoMarketDetailPurchase({
             ))}
           </ul>
         </div>
-      </div>
-    </div>
-  )
-}
-
-export function SonoMarketMobileBuyBar({
-  detail,
-  downloadCta,
-}: {
-  detail: SonoMarketPreviewDetail
-  downloadCta: ReactNode
-}) {
-  return (
-    <div
-      className="fixed inset-x-0 bottom-0 z-40 border-t border-[var(--sm-border)] bg-[var(--sm-header)] px-4 py-3 backdrop-blur-xl lg:hidden"
-      style={{ paddingBottom: "calc(0.75rem + env(safe-area-inset-bottom))" }}
-    >
-      <div className="mx-auto flex max-w-lg items-center gap-3">
-        <div className="min-w-0">
-          <p className="text-[17px] font-semibold tabular-nums text-[var(--sm-text)]">
-            {detail.priceLabel}
-          </p>
-          <p className="text-[11px] text-[var(--sm-text-faint)]">
-            {accessLabel(detail.access)}
-          </p>
-        </div>
-        <div className="min-w-0 flex-1 [&_button]:h-11 [&_button]:w-full">
-          {downloadCta}
-        </div>
-        {detail.liveUrl ? (
-          <a
-            href={detail.liveUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="flex h-11 shrink-0 cursor-pointer items-center justify-center gap-1.5 rounded-md border border-[var(--sm-border)] bg-[var(--sm-chip)] px-3 text-[13px] font-medium text-[var(--sm-text)]"
-          >
-            <ExternalLinkIcon className="size-4" />
-            Live
-          </a>
-        ) : null}
       </div>
     </div>
   )

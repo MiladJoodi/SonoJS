@@ -64,24 +64,21 @@ export function SonoMarketFeaturedSection({
       id="sonomarket-browse"
       className={cn("w-full scroll-mt-24", className)}
     >
-      <div className="mx-auto mb-4 flex w-full max-w-[1600px] flex-wrap items-end justify-between gap-3 px-4 sm:px-6 lg:px-8">
-        <div>
-          <h2 className="flex items-center gap-2 text-lg font-bold tracking-tight text-[var(--sm-text)] sm:text-xl">
-            <span aria-hidden>🔥</span>
-            Featured Products
-          </h2>
-          <p className="mt-0.5 text-[13px] text-[var(--sm-text-faint)]">
-            Handpicked templates and projects
-          </p>
-        </div>
-        <div className="flex rounded-full border border-[var(--sm-border)] bg-[var(--sm-chip)] p-1">
+      <div className="mx-auto mb-4 flex w-full max-w-[1600px] items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
+        <h2 className="min-w-0 shrink truncate text-lg font-bold tracking-tight text-[var(--sm-text)] sm:text-xl">
+          <span aria-hidden className="me-2">
+            🔥
+          </span>
+          Featured Products
+        </h2>
+        <div className="flex shrink-0 rounded-full border border-[var(--sm-border)] bg-[var(--sm-chip)] p-1">
           {TABS.map((t) => (
             <button
               key={t}
               type="button"
               onClick={() => setTab(t)}
               className={cn(
-                "cursor-pointer rounded-full px-3.5 py-1.5 text-[12.5px] font-medium transition-colors",
+                "cursor-pointer rounded-full px-2.5 py-1.5 text-[12px] font-medium transition-colors sm:px-3.5 sm:text-[12.5px]",
                 tab === t
                   ? "bg-primary text-primary-foreground shadow-sm"
                   : "text-[var(--sm-text-secondary)] hover:text-[var(--sm-text)]"

@@ -5,10 +5,7 @@ import Link from "next/link"
 import { CheckIcon } from "lucide-react"
 
 import { SonoMarketDetailGallery } from "@/components/sonomarket/detail-gallery"
-import {
-  SonoMarketDetailPurchase,
-  SonoMarketMobileBuyBar,
-} from "@/components/sonomarket/detail-purchase"
+import { SonoMarketDetailPurchase } from "@/components/sonomarket/detail-purchase"
 import { SonoMarketProductCard } from "@/components/sonomarket/product-card"
 import type { SonoMarketPreviewDetail } from "@/lib/sonomarket-preview-data"
 
@@ -49,24 +46,6 @@ export function SonoMarketDetailPage({
   return (
     <div data-sonomarket="" className="min-h-0 flex-1 bg-[var(--sm-bg)] text-[var(--sm-text)]">
       <div className="mx-auto w-full max-w-[1400px] px-4 py-5 sm:px-6 sm:py-7 lg:px-8 lg:py-8">
-        <nav
-          aria-label="Breadcrumb"
-          className="mb-5 hidden flex-wrap items-center gap-1.5 text-[12.5px] text-[var(--sm-text-faint)] lg:flex"
-        >
-          <Link
-            href="/marketplace"
-            className="cursor-pointer hover:text-[var(--sm-text-secondary)]"
-          >
-            Marketplace
-          </Link>
-          <span>/</span>
-          <span>{detail.categoryLabel}</span>
-          <span>/</span>
-          <span className="truncate text-[var(--sm-text-secondary)]">
-            {detail.title}
-          </span>
-        </nav>
-
         <div className="grid items-stretch gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(300px,340px)] lg:gap-x-8 xl:grid-cols-[minmax(0,1fr)_360px]">
           <div className="flex min-w-0 flex-col gap-6 lg:col-start-1">
             <SonoMarketDetailGallery
@@ -185,7 +164,7 @@ export function SonoMarketDetailPage({
         </div>
 
         {detail.related.length > 0 ? (
-          <section className="mt-10 space-y-4 border-t border-[var(--sm-border)] pt-8 pb-24 lg:pb-8">
+          <section className="mt-10 space-y-4 border-t border-[var(--sm-border)] pt-8 pb-8">
             <div className="flex items-center justify-between gap-3">
               <h2 className="text-lg font-semibold tracking-tight text-[var(--sm-text)]">
                 Related products
@@ -203,12 +182,8 @@ export function SonoMarketDetailPage({
               ))}
             </div>
           </section>
-        ) : (
-          <div className="pb-24 lg:pb-8" />
-        )}
+        ) : null}
       </div>
-
-      <SonoMarketMobileBuyBar detail={detail} downloadCta={downloadCta} />
     </div>
   )
 }

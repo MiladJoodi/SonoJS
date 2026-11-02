@@ -173,12 +173,7 @@ export function SonoMarketProductsToolbar({
   className?: string
 }) {
   return (
-    <div
-      className={cn(
-        "flex flex-col gap-3 sm:flex-row sm:items-center",
-        className
-      )}
-    >
+    <div className={cn("flex items-center gap-2", className)}>
       <div className="relative min-w-0 flex-1">
         <SearchIcon
           className="pointer-events-none absolute start-3 top-1/2 size-4 -translate-y-1/2 text-[var(--sm-text-faint)]"
@@ -188,50 +183,48 @@ export function SonoMarketProductsToolbar({
           type="search"
           value={value.q}
           onChange={(e) => onChange({ ...value, q: e.target.value })}
-          placeholder="Search products…"
+          placeholder="Search…"
           aria-label="Search products"
           className="h-[46px] w-full rounded-md border border-[var(--sm-border)] bg-[var(--sm-input,var(--sm-bg-elevated))] pe-3 ps-9 text-sm text-[var(--sm-text)] outline-none placeholder:text-[var(--sm-text-faint)] focus-visible:border-primary/50 focus-visible:ring-2 focus-visible:ring-primary/20"
         />
       </div>
 
-      <div className="flex shrink-0 items-center gap-2">
-        <button
-          type="button"
-          onClick={() =>
-            onChange({
-              ...value,
-              sort: value.sort === "rating" ? "default" : "rating",
-            })
-          }
-          aria-pressed={value.sort === "rating"}
-          className={cn(
-            "h-[46px] cursor-pointer rounded-md border px-4 text-[14px] font-medium transition-colors",
-            value.sort === "rating"
-              ? "border-primary bg-primary text-primary-foreground"
-              : "border-[var(--sm-border)] bg-[var(--sm-bg-elevated)] text-[var(--sm-text-secondary)] hover:bg-[var(--sm-chip)] hover:text-[var(--sm-text)]"
-          )}
-        >
-          Top rated
-        </button>
-        <button
-          type="button"
-          onClick={() =>
-            onChange({
-              ...value,
-              sort: value.sort === "name" ? "default" : "name",
-            })
-          }
-          aria-pressed={value.sort === "name"}
-          className={cn(
-            "h-[46px] cursor-pointer rounded-md border px-4 text-[14px] font-medium transition-colors",
-            value.sort === "name"
-              ? "border-primary bg-primary text-primary-foreground"
-              : "border-[var(--sm-border)] bg-[var(--sm-bg-elevated)] text-[var(--sm-text-secondary)] hover:bg-[var(--sm-chip)] hover:text-[var(--sm-text)]"
-          )}
-        >
-          A–Z
-        </button>
-      </div>
+      <button
+        type="button"
+        onClick={() =>
+          onChange({
+            ...value,
+            sort: value.sort === "rating" ? "default" : "rating",
+          })
+        }
+        aria-pressed={value.sort === "rating"}
+        className={cn(
+          "h-[46px] shrink-0 cursor-pointer rounded-md border px-3 text-[13px] font-medium transition-colors sm:px-4 sm:text-[14px]",
+          value.sort === "rating"
+            ? "border-primary bg-primary text-primary-foreground"
+            : "border-[var(--sm-border)] bg-[var(--sm-bg-elevated)] text-[var(--sm-text-secondary)] hover:bg-[var(--sm-chip)] hover:text-[var(--sm-text)]"
+        )}
+      >
+        Top rated
+      </button>
+      <button
+        type="button"
+        onClick={() =>
+          onChange({
+            ...value,
+            sort: value.sort === "name" ? "default" : "name",
+          })
+        }
+        aria-pressed={value.sort === "name"}
+        className={cn(
+          "h-[46px] shrink-0 cursor-pointer rounded-md border px-3 text-[13px] font-medium transition-colors sm:px-4 sm:text-[14px]",
+          value.sort === "name"
+            ? "border-primary bg-primary text-primary-foreground"
+            : "border-[var(--sm-border)] bg-[var(--sm-bg-elevated)] text-[var(--sm-text-secondary)] hover:bg-[var(--sm-chip)] hover:text-[var(--sm-text)]"
+        )}
+      >
+        A–Z
+      </button>
     </div>
   )
 }

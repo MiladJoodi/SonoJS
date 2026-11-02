@@ -1,9 +1,6 @@
 export { SonoMarketDetailGallery } from "./detail-gallery"
 export { SonoMarketDetailPage } from "./detail-page"
-export {
-  SonoMarketDetailPurchase,
-  SonoMarketMobileBuyBar,
-} from "./detail-purchase"
+export { SonoMarketDetailPurchase } from "./detail-purchase"
 export { SonoMarketFeaturedSection } from "./featured-section"
 export { SonoMarketHero } from "./hero"
 export { SonoMarketProductCard } from "./product-card"
