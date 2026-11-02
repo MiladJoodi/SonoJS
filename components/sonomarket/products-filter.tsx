@@ -9,7 +9,10 @@ import {
   type MarketplaceCategory,
   type MarketplaceStack,
 } from "@/lib/marketplace-catalog"
-import type { SonoMarketPreviewItem } from "@/lib/sonomarket-preview-data"
+import {
+  compareMarketplaceNewest,
+  type SonoMarketPreviewItem,
+} from "@/lib/sonomarket-preview-data"
 import { cn } from "@/lib/utils"
 
 export type SonoMarketSortKey = "default" | "rating" | "name"
@@ -62,7 +65,7 @@ export function applySonoMarketProductsFilter(
   } else if (state.sort === "name") {
     next = [...next].sort((a, b) => a.title.localeCompare(b.title))
   } else {
-    next = [...next].sort((a, b) => b.updatedAt.localeCompare(a.updatedAt))
+    next = [...next].sort(compareMarketplaceNewest)
   }
 
   return next
@@ -119,6 +122,35 @@ export function SonoMarketProductsFilter({
         Category
       </p>
       <ul className="space-y-0.5">
+        <li>
+          <button
+            type="button"
+            onClick={() =>
+              onChange({
+                ...value,
+                categories: [],
+                stacks: [],
+              })
+            }
+            aria-pressed={!hasActive}
+            className={cn(
+              "flex min-h-11 w-full cursor-pointer items-center justify-between gap-3 rounded-md px-2 py-1.5 text-start transition-colors",
+              !hasActive
+                ? "bg-primary/10 text-primary"
+                : "text-[var(--sm-text)] hover:bg-[var(--sm-chip)]"
+            )}
+          >
+            <span className="text-[14px] font-medium leading-none">All</span>
+            <span
+              className={cn(
+                "tabular-nums text-[13px]",
+                !hasActive ? "text-primary" : "text-[var(--sm-text-faint)]"
+              )}
+            >
+              {items.length}
+            </span>
+          </button>
+        </li>
         {categories.map(([cat, count]) => {
           const active = value.categories.includes(cat)
           return (

@@ -51,6 +51,7 @@ export function SonoMarketDetailPage({
             <SonoMarketDetailGallery
               title={detail.title}
               image={detail.coverSrc || detail.gallery[0] || ""}
+              video={detail.coverVideo}
             />
 
             <div className="lg:hidden">

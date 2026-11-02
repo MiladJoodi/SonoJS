@@ -120,6 +120,7 @@ export function ProjectDetail({
                   ? undefined
                   : project.coverImageDark)
               }
+              videoSrc={project.coverVideo}
               interactive
               className="aspect-video rounded-none border-0"
             />

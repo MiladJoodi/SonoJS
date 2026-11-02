@@ -2,17 +2,20 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowLeftIcon, HeartIcon, Share2Icon } from "lucide-react"
+import { ArrowLeftIcon, Share2Icon } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
 export function SonoMarketDetailGallery({
   title,
   image,
+  video,
   className,
 }: {
   title: string
   image: string
+  /** When set, plays instead of the still image. */
+  video?: string | null
   className?: string
 }) {
   return (
@@ -22,7 +25,18 @@ export function SonoMarketDetailGallery({
         className
       )}
     >
-      {image ? (
+      {video ? (
+        <video
+          src={video}
+          muted
+          loop
+          playsInline
+          autoPlay
+          preload="metadata"
+          aria-label={title}
+          className="absolute inset-0 size-full object-cover object-top"
+        />
+      ) : image ? (
         <Image
           src={image}
           alt={title}
@@ -43,22 +57,13 @@ export function SonoMarketDetailGallery({
         >
           <ArrowLeftIcon className="size-4 icon-dir" />
         </Link>
-        <div className="flex gap-2">
-          <button
-            type="button"
-            aria-label="Share"
-            className="flex size-10 cursor-pointer items-center justify-center rounded-full border border-white/20 bg-[var(--sm-overlay)] text-white backdrop-blur-md"
-          >
-            <Share2Icon className="size-4" />
-          </button>
-          <button
-            type="button"
-            aria-label="Save"
-            className="flex size-10 cursor-pointer items-center justify-center rounded-full border border-white/20 bg-[var(--sm-overlay)] text-white backdrop-blur-md"
-          >
-            <HeartIcon className="size-4" />
-          </button>
-        </div>
+        <button
+          type="button"
+          aria-label="Share"
+          className="flex size-10 cursor-pointer items-center justify-center rounded-full border border-white/20 bg-[var(--sm-overlay)] text-white backdrop-blur-md"
+        >
+          <Share2Icon className="size-4" />
+        </button>
       </div>
     </div>
   )

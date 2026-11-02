@@ -36,6 +36,7 @@ const CATEGORY_IDS = [
   "betting",
   "crypto",
   "fintech",
+  "hero",
 ] as const satisfies readonly MarketplaceCategory[]
 
 function parseSortParam(raw: string | null): SonoMarketSortKey {

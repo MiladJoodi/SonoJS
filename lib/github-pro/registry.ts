@@ -2,10 +2,14 @@ import "server-only"
 
 import { fetchRepoFileText } from "@/lib/github-pro/client"
 
-/** Central product registry in the private Pro repo (components, blocks, templates). */
+/** Central product registry in the private Pro repo (under `products/`). */
 export const PRO_REGISTRY_PATH = "registry/registry.json"
 
-export type ProRegistryProductType = "component" | "block" | "template"
+export type ProRegistryProductType =
+  | "component"
+  | "block"
+  | "template"
+  | "hero"
 
 export type ProRegistryEntry = {
   name: string
@@ -26,7 +30,12 @@ function isStringArray(value: unknown): value is string[] {
 }
 
 function parseType(value: unknown): ProRegistryProductType | undefined {
-  if (value === "component" || value === "block" || value === "template") {
+  if (
+    value === "component" ||
+    value === "block" ||
+    value === "template" ||
+    value === "hero"
+  ) {
     return value
   }
   return undefined

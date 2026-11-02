@@ -8,6 +8,7 @@ export type MarketplaceCategory =
   | "betting"
   | "crypto"
   | "fintech"
+  | "hero"
 
 export type MarketplaceStack =
   | "nextjs"
@@ -58,6 +59,7 @@ export type MarketplaceCoverVariant =
   | "shop"
   | "ai"
   | "saas"
+  | "hero"
 
 export type MarketplaceProject = {
   slug: string
@@ -88,6 +90,11 @@ export type MarketplaceProject = {
   coverImage?: string | null
   /** Catalog card cover (dark) — file: cover-dark.webp */
   coverImageDark?: string | null
+  /**
+   * Catalog / detail cover video — file: cover.mp4 (muted loop).
+   * When set, UI prefers video over still covers.
+   */
+  coverVideo?: string | null
   /** Detail-page hero (light) — file: main-light.webp; falls back to coverImage */
   detailCoverImage?: string | null
   /** Detail-page hero (dark) — file: main-dark.webp */
@@ -120,6 +127,7 @@ export const MARKETPLACE_CATEGORY_LABEL: Record<MarketplaceCategory, string> = {
   betting: "Betting & Casino",
   crypto: "Crypto & Trading",
   fintech: "Fintech & Payments",
+  hero: "Hero & Interaction",
 }
 
 export const MARKETPLACE_STACK_LABEL: Record<MarketplaceStack, string> = {
@@ -582,7 +590,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
     accent: "78",
     enabled: true,
     access: "member",
-    badge: "new",
+    badge: null,
     coverVariant: "saas",
     coverImage: "/marketplace/projects/saas/sonojs-saas-01/cover-light.webp",
     coverImageDark: "/marketplace/projects/saas/sonojs-saas-01/cover-dark.webp",
@@ -631,6 +639,70 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "OPENAI_API_KEY for live chat (optional on static demo)",
     ],
   },
+  {
+    slug: "sonojs-hero-01",
+    title: "Otis",
+    tagline:
+      "Grab his cartoon face and pull it like taffy — stretch, wobble, new expression, patience bar.",
+    description:
+      "Otis is an interactive portfolio hero by SonoJS. Grab the cartoon face and pull it like taffy — it stretches into a tube, wobbles back, swaps to a new expression, and flushes red as the patience bar runs out. Built with Vite, React 19, TypeScript, Tailwind CSS 4, and a Canvas 2D face engine (no Three.js). Light and dark theme toggle, mood meter, and subscribe demo UI. Static build ready for GitHub Pages. Fork and rebrand the copy — keep the interaction.",
+    category: "hero",
+    stack: ["react", "vite", "typescript", "tailwind"],
+    priceLabel: "Free",
+    priceCents: 0,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 225,
+    accent: "225",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "hero",
+    coverImage: null,
+    coverImageDark: null,
+    coverVideo: "/marketplace/projects/hero/sonojs-hero-01/cover.mp4",
+    detailCoverImage: null,
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs.github.io/sonojs-hero-01/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-02",
+    firstReleasedAt: "2026-11-02",
+    screens: 1,
+    highlights: [
+      {
+        title: "Pull-to-stretch face",
+        body: "Grab opaque pixels, stretch like taffy, release into a random expression.",
+      },
+      {
+        title: "Patience meter",
+        body: "Pulls drain patience; the bust flushes red as the bar runs out.",
+      },
+      {
+        title: "Light and dark",
+        body: "One token set for page, ink, and cobalt disc — toggle in the header.",
+      },
+      {
+        title: "Static and fork-ready",
+        body: "Vite build to dist/. Open live preview or download and run locally.",
+      },
+    ],
+    includes: [
+      "Full Vite + React 19 + TypeScript source (Otis)",
+      "Canvas 2D face engine and expression cutouts",
+      "Mood / patience UI and subscribe demo",
+      "Light and dark theme toggle",
+      "Static build ready for GitHub Pages",
+    ],
+    requirements: [
+      "Node.js 20 or newer",
+      "Vite 6",
+      "React 19",
+      "TypeScript 5",
+      "Tailwind CSS 4",
+    ],
+  },
 ]
 
 export function getMarketplaceProject(
@@ -664,6 +736,7 @@ export function listMarketplaceCategories(): MarketplaceCategory[] {
     "betting",
     "crypto",
     "fintech",
+    "hero",
   ]
 }
 

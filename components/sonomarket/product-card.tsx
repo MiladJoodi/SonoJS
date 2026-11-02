@@ -2,7 +2,6 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { HeartIcon } from "lucide-react"
 
 import type { SonoMarketPreviewItem } from "@/lib/sonomarket-preview-data"
 import { cn } from "@/lib/utils"
@@ -37,7 +36,18 @@ export function SonoMarketProductCard({
               size === "featured" ? "aspect-[16/11]" : "aspect-[16/10.5]"
             )}
           >
-            {item.coverSrc ? (
+            {item.coverVideo ? (
+              <video
+                src={item.coverVideo}
+                muted
+                loop
+                playsInline
+                autoPlay
+                preload="metadata"
+                draggable={false}
+                className="pointer-events-none absolute inset-0 size-full select-none object-cover object-top transition-transform duration-500 group-hover/card:scale-[1.04] motion-reduce:transition-none motion-reduce:group-hover/card:scale-100"
+              />
+            ) : item.coverSrc ? (
               <Image
                 src={item.coverSrc}
                 alt=""
@@ -56,14 +66,6 @@ export function SonoMarketProductCard({
             )}
           </div>
         </Link>
-
-        <button
-          type="button"
-          aria-label={`Save ${item.title}`}
-          className="absolute end-3 top-3 z-10 flex size-9 cursor-pointer items-center justify-center rounded-full bg-black/35 text-white backdrop-blur-md transition-colors hover:text-rose-300"
-        >
-          <HeartIcon className="size-4" strokeWidth={1.75} />
-        </button>
       </div>
 
       <div className="flex flex-1 flex-col gap-1.5 px-4 pb-4 pt-3 text-start">

@@ -55,6 +55,7 @@ export function ProjectCard({
             variant={project.coverVariant}
             imageSrc={project.coverImage}
             imageSrcDark={project.coverImageDark}
+            videoSrc={project.coverVideo}
             interactive
             className="rounded-none border-0 border-b border-border/50"
           />

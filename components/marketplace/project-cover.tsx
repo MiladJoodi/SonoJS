@@ -177,7 +177,7 @@ function VariantUi({
   )
 }
 
-/** Living UI-mock cover — or real screenshot when `imageSrc` is set. */
+/** Living UI-mock cover — real screenshot / looping video when set. */
 export function ProjectCover({
   hue,
   title,
@@ -187,6 +187,7 @@ export function ProjectCover({
   interactive,
   imageSrc,
   imageSrcDark,
+  videoSrc,
 }: {
   hue: number
   title: string
@@ -199,12 +200,15 @@ export function ProjectCover({
   imageSrc?: string | null
   /** Optional dark-mode screenshot */
   imageSrcDark?: string | null
+  /** Catalog cover video (cover.mp4) — preferred over stills */
+  videoSrc?: string | null
 }) {
   const { resolvedTheme } = useTheme()
   const rootRef = React.useRef<HTMLDivElement>(null)
   const layerRef = React.useRef<HTMLDivElement>(null)
   const effectiveHue = hue % 360
   const [imgFailed, setImgFailed] = React.useState(false)
+  const [videoFailed, setVideoFailed] = React.useState(false)
   const [mounted, setMounted] = React.useState(false)
   React.useEffect(() => setMounted(true), [])
 
@@ -212,11 +216,16 @@ export function ProjectCover({
     mounted && resolvedTheme === "dark" && imageSrcDark
       ? imageSrcDark
       : imageSrc
-  const showImage = Boolean(resolvedImageSrc) && !imgFailed
+  const showVideo = Boolean(videoSrc) && !videoFailed
+  const showImage = !showVideo && Boolean(resolvedImageSrc) && !imgFailed
 
   React.useEffect(() => {
     setImgFailed(false)
   }, [resolvedImageSrc])
+
+  React.useEffect(() => {
+    setVideoFailed(false)
+  }, [videoSrc])
 
   const onMove = React.useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
@@ -245,7 +254,7 @@ export function ProjectCover({
         className
       )}
       style={
-        showImage
+        showVideo || showImage
           ? { background: "var(--card)" }
           : {
               background: `
@@ -267,7 +276,23 @@ export function ProjectCover({
       onMouseLeave={interactive ? onLeave : undefined}
       aria-hidden
     >
-      {showImage && resolvedImageSrc ? (
+      {showVideo && videoSrc ? (
+        <div
+          ref={layerRef}
+          className="absolute inset-0 transition-transform duration-300 ease-out will-change-transform motion-reduce:transition-none"
+        >
+          <video
+            src={videoSrc}
+            muted
+            loop
+            playsInline
+            autoPlay
+            preload="metadata"
+            className="absolute inset-0 size-full object-cover object-top"
+            onError={() => setVideoFailed(true)}
+          />
+        </div>
+      ) : showImage && resolvedImageSrc ? (
         <div
           ref={layerRef}
           className="absolute inset-0 transition-transform duration-300 ease-out will-change-transform motion-reduce:transition-none"

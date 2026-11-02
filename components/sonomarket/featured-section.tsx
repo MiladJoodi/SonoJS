@@ -4,7 +4,10 @@ import * as React from "react"
 
 import { SonoMarketProductCard } from "@/components/sonomarket/product-card"
 import { useAutoDragScroll } from "@/hooks/use-auto-drag-scroll"
-import type { SonoMarketPreviewItem } from "@/lib/sonomarket-preview-data"
+import {
+  compareMarketplaceNewest,
+  type SonoMarketPreviewItem,
+} from "@/lib/sonomarket-preview-data"
 import { cn } from "@/lib/utils"
 
 const TABS = ["Featured", "Popular", "New"] as const
@@ -54,7 +57,7 @@ export function SonoMarketFeaturedSection({
             a.title.localeCompare(b.title)
         )
       : tab === "New"
-        ? [...items].sort((a, b) => b.updatedAt.localeCompare(a.updatedAt))
+        ? [...items].sort(compareMarketplaceNewest)
         : items
 
   const durationSec = Math.max(28, ordered.length * 7)
