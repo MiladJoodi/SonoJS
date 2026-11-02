@@ -84,7 +84,7 @@ export default async function ProButtonDocsPage() {
               </p>
               <p className="mt-3 text-(--code-header-fg)">
                 Expected in private repo:{" "}
-                <code>components/buttons/01/01.zip</code>
+                <code>products/components/buttons/01/01.zip</code>
               </p>
             </div>
           )}
