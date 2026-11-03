@@ -38,3 +38,18 @@ export async function getPlanById(id: string): Promise<Plan | null> {
     wrapDbError("Failed to get plan by id", err)
   }
 }
+
+export async function getPlanByStripePriceId(
+  stripePriceId: string
+): Promise<Plan | null> {
+  const priceId = stripePriceId.trim()
+  if (!priceId) return null
+  try {
+    const row = await db.query.plans.findFirst({
+      where: eq(plans.stripePriceId, priceId),
+    })
+    return row ?? null
+  } catch (err) {
+    wrapDbError("Failed to get plan by Stripe price id", err)
+  }
+}

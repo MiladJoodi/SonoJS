@@ -1,10 +1,11 @@
 "use client"
 
 import * as React from "react"
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import { useReverification, useUser } from "@clerk/nextjs"
 import {
   CheckIcon,
+  CreditCardIcon,
   EyeIcon,
   EyeOffIcon,
   KeyIcon,
@@ -14,9 +15,8 @@ import {
   UserIcon,
 } from "lucide-react"
 
-import { AccountIdentityHero } from "@/components/auth/account"
-import { GithubIcon } from "@/registry/icons/github"
-import { GoogleIcon } from "@/registry/icons/google"
+import { AccountIdentityHero, BillingPanel } from "@/components/auth/account"
+import { useBillingSummary } from "@/hooks/use-billing-summary"
 import {
   formatPlanExpiry,
   getEffectivePlanExpiresAt,
@@ -25,6 +25,8 @@ import {
   planLabel,
 } from "@/lib/access"
 import { cn } from "@/lib/utils"
+import { GithubIcon } from "@/registry/icons/github"
+import { GoogleIcon } from "@/registry/icons/google"
 import { Button } from "@sonojs/ui/components/button"
 import {
   Card,
@@ -54,8 +56,15 @@ const NAV = [
   { value: "profile", label: "Profile", icon: UserIcon },
   { value: "security", label: "Security", icon: ShieldIcon },
   { value: "connections", label: "Connections", icon: Link2Icon },
+  { value: "billing", label: "Billing", icon: CreditCardIcon },
   { value: "danger", label: "Danger zone", icon: Trash2Icon },
 ] as const
+
+type AccountTab = (typeof NAV)[number]["value"]
+
+function isAccountTab(value: string | null): value is AccountTab {
+  return NAV.some((item) => item.value === value)
+}
 
 type OAuthStrategy = "oauth_google" | "oauth_github"
 
@@ -153,6 +162,9 @@ function StatusMessage({
 export function AccountSettings({ className }: { className?: string }) {
   const { isLoaded, isSignedIn, user } = useUser()
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const tabParam = searchParams.get("tab")
+  const initialTab: AccountTab = isAccountTab(tabParam) ? tabParam : "profile"
   const [firstName, setFirstName] = React.useState("")
   const [lastName, setLastName] = React.useState("")
   const [profileMsg, setProfileMsg] = React.useState<string | null>(null)
@@ -171,6 +183,12 @@ export function AccountSettings({ className }: { className?: string }) {
 
   const [deleteBusy, setDeleteBusy] = React.useState(false)
   const [deleteError, setDeleteError] = React.useState<string | null>(null)
+
+  const {
+    summary: billingSummary,
+    error: billingError,
+    loading: billingLoading,
+  } = useBillingSummary(Boolean(isLoaded && isSignedIn && user))
 
   const updatePassword = useReverification(
     (params: {
@@ -221,6 +239,8 @@ export function AccountSettings({ className }: { className?: string }) {
 
   const email = user.primaryEmailAddress?.emailAddress
   const displayName = user.fullName || email || "Account"
+  // Plan chip = Clerk publicMetadata (same as site header / user menu).
+  // Billing tab below = Neon + Stripe money record (separate).
   const metadata = user.publicMetadata
   const isPro = getUserPlan(metadata) === "pro"
   const planId = getViewerPlanId(metadata)
@@ -386,7 +406,7 @@ export function AccountSettings({ className }: { className?: string }) {
         />
 
         <Tabs
-          defaultValue="profile"
+          defaultValue={initialTab}
           orientation="horizontal"
           className="flex w-full flex-col gap-4 md:!flex-row md:items-start md:!gap-6"
         >
@@ -641,6 +661,14 @@ export function AccountSettings({ className }: { className?: string }) {
                   <FieldError message={connError} />
                 </CardContent>
               </Card>
+            </TabsContent>
+
+            <TabsContent value="billing" className="mt-0">
+              <BillingPanel
+                summary={billingSummary}
+                loading={billingLoading}
+                loadError={billingError}
+              />
             </TabsContent>
 
             <TabsContent value="danger" className="mt-0">

@@ -1,6 +1,6 @@
 import "server-only"
 
-import { eq, sql } from "drizzle-orm"
+import { and, desc, eq, sql } from "drizzle-orm"
 
 import { db } from "@/db"
 import { LostWebhookClaimError, wrapDbError } from "@/db/errors"
@@ -9,7 +9,7 @@ import {
   claimOwnershipSql,
   type WebhookClaim,
 } from "@/db/queries/claim-guard"
-import { payments, type Payment } from "@/db/schema"
+import { payments, users, type Payment } from "@/db/schema"
 
 export type UpsertPaymentInput = {
   userId: string
@@ -195,5 +195,45 @@ export async function getPaymentByStripeInvoiceId(
     return row ?? null
   } catch (err) {
     wrapDbError("Failed to get payment by Stripe invoice id", err)
+  }
+}
+
+export async function listPaymentsByClerkId(
+  clerkUserId: string,
+  opts: { limit?: number } = {}
+): Promise<Payment[]> {
+  const limit = Math.min(Math.max(opts.limit ?? 50, 1), 100)
+  try {
+    const user = await db.query.users.findFirst({
+      where: eq(users.clerkUserId, clerkUserId),
+    })
+    if (!user) return []
+
+    return await db.query.payments.findMany({
+      where: eq(payments.userId, user.id),
+      orderBy: [desc(payments.createdAt)],
+      limit,
+    })
+  } catch (err) {
+    wrapDbError("Failed to list payments by Clerk id", err)
+  }
+}
+
+export async function getPaymentForClerkUser(
+  paymentId: string,
+  clerkUserId: string
+): Promise<Payment | null> {
+  try {
+    const user = await db.query.users.findFirst({
+      where: eq(users.clerkUserId, clerkUserId),
+    })
+    if (!user) return null
+
+    const row = await db.query.payments.findFirst({
+      where: and(eq(payments.id, paymentId), eq(payments.userId, user.id)),
+    })
+    return row ?? null
+  } catch (err) {
+    wrapDbError("Failed to get payment for Clerk user", err)
   }
 }

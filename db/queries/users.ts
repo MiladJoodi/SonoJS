@@ -205,6 +205,25 @@ export async function setUserStripeCustomerId(
   }
 }
 
+/** Clear a Neon user's Stripe customer mapping (reclaim after deleted Clerk user). */
+export async function clearUserStripeCustomerId(
+  userId: string
+): Promise<User | null> {
+  try {
+    const [updated] = await db
+      .update(users)
+      .set({
+        stripeCustomerId: null,
+        updatedAt: new Date(),
+      })
+      .where(eq(users.id, userId))
+      .returning()
+    return updated ?? null
+  } catch (err) {
+    wrapDbError("Failed to clear Stripe customer id", err)
+  }
+}
+
 /**
  * Resolve Neon user from Stripe customer and/or Clerk id.
  * Returns null when the Stripe customer is unknown and no clerkUserId was

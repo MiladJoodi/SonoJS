@@ -100,6 +100,38 @@ export async function getActiveSubscriptionByClerkId(
   }
 }
 
+/**
+ * Latest subscription for account Billing UI (not access gating).
+ * Any status — incomplete rows still surface so the tab matches Stripe/Neon.
+ */
+export async function getBillingSubscriptionByClerkId(
+  clerkUserId: string
+): Promise<SubscriptionWithPlan | null> {
+  try {
+    const user = await db.query.users.findFirst({
+      where: eq(users.clerkUserId, clerkUserId),
+    })
+    if (!user) return null
+
+    const joined = await db
+      .select({
+        subscription: subscriptions,
+        plan: plans,
+      })
+      .from(subscriptions)
+      .innerJoin(plans, eq(subscriptions.planId, plans.id))
+      .where(eq(subscriptions.userId, user.id))
+      .orderBy(desc(subscriptions.updatedAt), desc(subscriptions.currentPeriodEnd))
+      .limit(1)
+
+    const hit = joined[0]
+    if (!hit) return null
+    return { ...hit.subscription, plan: hit.plan }
+  } catch (err) {
+    wrapDbError("Failed to get billing subscription by Clerk id", err)
+  }
+}
+
 async function resolvePlanIdFromStripePrice(
   priceId: string | null
 ): Promise<string> {

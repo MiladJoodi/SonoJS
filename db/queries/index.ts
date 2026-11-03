@@ -3,13 +3,20 @@ export {
   getUserByStripeCustomerId,
   upsertUserFromClerk,
   setUserStripeCustomerId,
+  clearUserStripeCustomerId,
   linkStripeCustomerToClerkUser,
   resolveBillingUser,
 } from "./users"
-export { listActivePlans, getPlanBySlug, getPlanById } from "./plans"
+export {
+  listActivePlans,
+  getPlanBySlug,
+  getPlanById,
+  getPlanByStripePriceId,
+} from "./plans"
 export {
   getSubscriptionByStripeId,
   getActiveSubscriptionByClerkId,
+  getBillingSubscriptionByClerkId,
   upsertSubscriptionByStripeId,
   reconcileSubscriptionFromStripe,
   applySubscriptionSnapshot,
@@ -25,6 +32,8 @@ export {
 export {
   upsertPayment,
   getPaymentByStripeInvoiceId,
+  listPaymentsByClerkId,
+  getPaymentForClerkUser,
   type UpsertPaymentInput,
 } from "./payments"
 export {

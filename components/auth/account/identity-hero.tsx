@@ -6,10 +6,12 @@ import { AccountAvatarEditor } from "@/components/auth/account/avatar-editor"
 import { PlanIcon } from "@/components/icons/plan/plan-icon"
 import type { PlanId } from "@/components/pricing/pricing-data"
 import { cn } from "@/lib/utils"
+import { Spinner } from "@sonojs/ui/components/spinner"
 
 /**
  * Account header — editable avatar + name/email; plan + expiry opposite.
  * Plan mark matches /pricing (Free gray · Monthly check green · Yearly primary).
+ * Plan chip comes from billing summary only (never Clerk flash).
  */
 export function AccountIdentityHero({
   name,
@@ -19,6 +21,7 @@ export function AccountIdentityHero({
   planId,
   planName,
   expiryLabel,
+  planLoading,
   avatarBusy,
   onPickAvatar,
   onRemoveAvatar,
@@ -30,6 +33,7 @@ export function AccountIdentityHero({
   planId: PlanId
   planName: string
   expiryLabel: string | null
+  planLoading?: boolean
   avatarBusy?: boolean
   onPickAvatar: (file: File) => void
   onRemoveAvatar: () => void
@@ -63,25 +67,36 @@ export function AccountIdentityHero({
           <span
             className={cn(
               "inline-flex size-10 shrink-0 items-center justify-center rounded-full",
-              planId === "pro-yearly" && "bg-primary/10",
-              planId === "pro-monthly" && "bg-emerald-500/15",
-              planId === "free" && "bg-zinc-500/10"
+              planLoading && "bg-muted",
+              !planLoading && planId === "pro-yearly" && "bg-primary/10",
+              !planLoading && planId === "pro-monthly" && "bg-emerald-500/15",
+              !planLoading && planId === "free" && "bg-zinc-500/10"
             )}
             aria-hidden
           >
-            <PlanIcon plan={planId} className="size-4" />
+            {planLoading ? (
+              <Spinner className="size-4 text-muted-foreground" />
+            ) : (
+              <PlanIcon plan={planId} className="size-4" />
+            )}
           </span>
           <div className="min-w-0 space-y-0.5 text-start">
             <p
               className={cn(
                 "text-sm font-semibold tracking-tight",
-                isPro ? "text-foreground" : "text-muted-foreground"
+                planLoading
+                  ? "text-muted-foreground"
+                  : isPro
+                    ? "text-foreground"
+                    : "text-muted-foreground"
               )}
             >
-              {planName}
+              {planLoading ? "Loading…" : planName}
             </p>
             <p className="text-sm text-muted-foreground">
-              {isPro ? (
+              {planLoading ? (
+                <span className="inline-block h-4 w-24 animate-pulse rounded bg-muted" />
+              ) : isPro ? (
                 expiryLabel ? (
                   <>Expires {expiryLabel}</>
                 ) : (
