@@ -5,7 +5,7 @@ import { MobileHeaderScroll } from "@/components/mobile-header-scroll"
 import { NavigationProgress } from "@/components/navigation-progress"
 import { ScrollToTop } from "@/components/scroll-to-top"
 import { SiteFooter } from "@/components/site-footer"
-import { SiteHeader } from "@/components/site-header"
+import { MobileBottomNav, SiteHeader } from "@/components/site-header"
 import { getAuthUserId } from "@/lib/clerk-auth"
 import { getGithubStars } from "@/lib/github"
 
@@ -37,6 +37,7 @@ export default async function AppLayout({
         />
         <main className="flex min-h-0 flex-1 flex-col">{children}</main>
         <SiteFooter />
+        <MobileBottomNav />
       </div>
     </SignedInHintProvider>
   )

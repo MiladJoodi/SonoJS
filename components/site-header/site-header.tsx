@@ -5,7 +5,6 @@ import Link from "next/link"
 import { AuthControls } from "@/components/site-header/auth-controls"
 import { GithubLink } from "@/components/site-header/github-link"
 import { MainNav } from "@/components/site-header/main-nav"
-import { MobileNav } from "@/components/site-header/mobile-nav"
 import { ModeSwitcher } from "@/components/site-header/mode-switcher"
 import { siteConfig } from "@/lib/config"
 import { cn } from "@/lib/utils"
@@ -34,10 +33,6 @@ export function SiteHeader({
     >
       <div className="container-wrapper">
         <div className="relative flex h-(--header-height) items-center gap-2 sm:gap-2.5 **:data-[slot=separator]:h-4!">
-          <MobileNav
-            items={siteConfig.navItems}
-            className="me-0.5 flex lg:hidden"
-          />
           <Link
             href="/"
             prefetch={false}
