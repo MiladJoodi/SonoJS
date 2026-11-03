@@ -115,10 +115,7 @@ export function ProjectDetail({
               variant={project.coverVariant}
               imageSrc={project.detailCoverImage ?? project.coverImage}
               imageSrcDark={
-                project.detailCoverImageDark ??
-                (project.detailCoverImage
-                  ? undefined
-                  : project.coverImageDark)
+                project.detailCoverImageDark ?? project.coverImageDark
               }
               videoSrc={project.coverVideo}
               interactive

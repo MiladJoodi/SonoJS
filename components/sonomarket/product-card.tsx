@@ -1,10 +1,12 @@
 "use client"
 
-import Image from "next/image"
 import Link from "next/link"
 
 import type { SonoMarketPreviewItem } from "@/lib/sonomarket-preview-data"
 import { cn } from "@/lib/utils"
+
+const coverImgClass =
+  "pointer-events-none absolute inset-0 size-full select-none object-cover object-top transition-transform duration-500 group-hover/card:scale-[1.04] motion-reduce:transition-none motion-reduce:group-hover/card:scale-100"
 
 export function SonoMarketProductCard({
   item,
@@ -45,22 +47,30 @@ export function SonoMarketProductCard({
               autoPlay
               preload="metadata"
               draggable={false}
-              className="pointer-events-none absolute inset-0 size-full select-none object-cover object-top transition-transform duration-500 group-hover/card:scale-[1.04] motion-reduce:transition-none motion-reduce:group-hover/card:scale-100"
+              className={coverImgClass}
             />
           ) : item.coverSrc ? (
-            <Image
-              src={item.coverSrc}
-              alt=""
-              fill
-              draggable={false}
-              loading={size === "featured" ? "eager" : "lazy"}
-              sizes={
-                size === "featured"
-                  ? "300px"
-                  : "(max-width: 768px) 92vw, (max-width: 1280px) 45vw, 320px"
-              }
-              className="pointer-events-none select-none object-cover object-top transition-transform duration-500 group-hover/card:scale-[1.04] motion-reduce:transition-none motion-reduce:group-hover/card:scale-100"
-            />
+            <>
+              {/* eslint-disable-next-line @next/next/no-img-element -- theme pair under /public */}
+              <img
+                src={item.coverSrc}
+                alt=""
+                draggable={false}
+                className={cn(
+                  coverImgClass,
+                  item.coverSrcDark ? "dark:hidden" : null
+                )}
+              />
+              {item.coverSrcDark ? (
+                // eslint-disable-next-line @next/next/no-img-element -- theme pair under /public
+                <img
+                  src={item.coverSrcDark}
+                  alt=""
+                  draggable={false}
+                  className={cn(coverImgClass, "hidden dark:block")}
+                />
+              ) : null}
+            </>
           ) : (
             <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-violet-700/20" />
           )}

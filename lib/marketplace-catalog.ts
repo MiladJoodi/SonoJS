@@ -638,6 +638,74 @@ export const marketplaceProjects: MarketplaceProject[] = [
     ],
   },
   {
+    slug: "sonojs-landing-01",
+    title: "Sono",
+    tagline:
+      "Calm SaaS marketing site — ink & champagne, full-bleed hero, pricing and auth.",
+    description:
+      "Sono is a premium product-marketing template by SonoJS. Built with Next.js 16, React 19, Tailwind CSS 4, and Motion. You get a full-bleed home (hero, logo marquee, features, resource allocation, testimonials, pricing, FAQ), plus About, Pricing, FAQ, Contact with form, Login, and Signup. Instrument Serif + Manrope, next-themes (default dark), MDX-ready content surfaces, and shadcn/ui blocks. Demo marketing and auth UI only — no real accounts or payments. Static build ready for GitHub Pages.",
+    category: "landing",
+    stack: ["nextjs", "react", "tailwind", "typescript"],
+    priceLabel: "Free",
+    priceCents: 0,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 38,
+    accent: "38",
+    enabled: true,
+    access: "member",
+    badge: null,
+    coverVariant: "landing",
+    coverImage:
+      "/marketplace/projects/landing/sonojs-landing-01/cover-light.webp",
+    coverImageDark:
+      "/marketplace/projects/landing/sonojs-landing-01/cover-dark.webp",
+    detailCoverImage:
+      "/marketplace/projects/landing/sonojs-landing-01/main-light.webp",
+    detailCoverImageDark:
+      "/marketplace/projects/landing/sonojs-landing-01/main-dark.webp",
+    liveUrl: "https://sonojs.github.io/sonojs-landing-01/",
+    downloadUrl: "",
+    version: "1.2.0",
+    updatedAt: "2026-11-03",
+    firstReleasedAt: "2026-11-03",
+    screens: 8,
+    highlights: [
+      {
+        title: "Product-first landing",
+        body: "Full-bleed hero, logo marquee, features, and a resource block that feel like a real SaaS launch — not a generic kit demo.",
+      },
+      {
+        title: "Pages that ship together",
+        body: "Home, About, Pricing, FAQ, Contact, Login, and Signup share one ink & champagne system.",
+      },
+      {
+        title: "Motion without noise",
+        body: "Motion accents on the hero and sections stay calm; light and dark stay on the same tokens.",
+      },
+      {
+        title: "Static and fork-ready",
+        body: "Open the live preview or download and run locally. GitHub Pages export included.",
+      },
+    ],
+    includes: [
+      "Full Next.js 16 + React 19 + TypeScript source (Sono)",
+      "Home blocks: hero, logos, features, resources, testimonials, pricing, FAQ",
+      "Pages: About, Pricing, FAQ, Contact, Login, Signup, Privacy",
+      "shadcn/ui primitives, Motion, next-themes, MDX support",
+      "Instrument Serif + Manrope and champagne accent tokens",
+      "Static build ready for GitHub Pages",
+    ],
+    requirements: [
+      "Node.js 20 or newer",
+      "Next.js 16",
+      "React 19",
+      "Tailwind CSS 4",
+      "TypeScript 5",
+    ],
+  },
+  {
     slug: "sonojs-saas-01",
     title: "Glyph",
     tagline:

@@ -1,6 +1,5 @@
 "use client"
 
-import Image from "next/image"
 import Link from "next/link"
 import { ArrowLeftIcon, Share2Icon } from "lucide-react"
 
@@ -9,11 +8,14 @@ import { cn } from "@/lib/utils"
 export function SonoMarketDetailGallery({
   title,
   image,
+  imageDark,
   video,
   className,
 }: {
   title: string
   image: string
+  /** Dark-mode still when available */
+  imageDark?: string | null
   /** When set, plays instead of the still image. */
   video?: string | null
   className?: string
@@ -37,14 +39,25 @@ export function SonoMarketDetailGallery({
           className="absolute inset-0 size-full object-cover object-top"
         />
       ) : image ? (
-        <Image
-          src={image}
-          alt={title}
-          fill
-          priority
-          sizes="(max-width: 1024px) 100vw, 60vw"
-          className="object-cover object-top"
-        />
+        <>
+          {/* eslint-disable-next-line @next/next/no-img-element -- theme pair under /public */}
+          <img
+            src={image}
+            alt={title}
+            className={cn(
+              "absolute inset-0 size-full object-cover object-top",
+              imageDark ? "dark:hidden" : null
+            )}
+          />
+          {imageDark ? (
+            // eslint-disable-next-line @next/next/no-img-element -- theme pair under /public
+            <img
+              src={imageDark}
+              alt={title}
+              className="absolute inset-0 hidden size-full object-cover object-top dark:block"
+            />
+          ) : null}
+        </>
       ) : (
         <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-violet-700/20" />
       )}

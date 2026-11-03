@@ -1,8 +1,6 @@
 "use client"
 
 import * as React from "react"
-import Image from "next/image"
-import { useTheme } from "next-themes"
 
 import type { MarketplaceCoverVariant } from "@/lib/marketplace-catalog"
 import { cn } from "@/lib/utils"
@@ -203,25 +201,13 @@ export function ProjectCover({
   /** Catalog cover video (cover.mp4) — preferred over stills */
   videoSrc?: string | null
 }) {
-  const { resolvedTheme } = useTheme()
   const rootRef = React.useRef<HTMLDivElement>(null)
   const layerRef = React.useRef<HTMLDivElement>(null)
   const effectiveHue = hue % 360
-  const [imgFailed, setImgFailed] = React.useState(false)
   const [videoFailed, setVideoFailed] = React.useState(false)
-  const [mounted, setMounted] = React.useState(false)
-  React.useEffect(() => setMounted(true), [])
 
-  const resolvedImageSrc =
-    mounted && resolvedTheme === "dark" && imageSrcDark
-      ? imageSrcDark
-      : imageSrc
   const showVideo = Boolean(videoSrc) && !videoFailed
-  const showImage = !showVideo && Boolean(resolvedImageSrc) && !imgFailed
-
-  React.useEffect(() => {
-    setImgFailed(false)
-  }, [resolvedImageSrc])
+  const showImage = !showVideo && Boolean(imageSrc)
 
   React.useEffect(() => {
     setVideoFailed(false)
@@ -292,24 +278,29 @@ export function ProjectCover({
             onError={() => setVideoFailed(true)}
           />
         </div>
-      ) : showImage && resolvedImageSrc ? (
+      ) : showImage && imageSrc ? (
         <div
           ref={layerRef}
           className="absolute inset-0 transition-transform duration-300 ease-out will-change-transform motion-reduce:transition-none"
         >
-          <Image
-            src={resolvedImageSrc}
+          {/* Same pattern as CatalogThumbCard — follows html.dark via CSS */}
+          {/* eslint-disable-next-line @next/next/no-img-element -- theme pair under /public */}
+          <img
+            src={imageSrc}
             alt=""
-            fill
-            unoptimized
-            className="object-cover object-top"
-            sizes={
-              compact
-                ? "120px"
-                : "(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1400px"
-            }
-            onError={() => setImgFailed(true)}
+            className={cn(
+              "absolute inset-0 size-full object-cover object-top",
+              imageSrcDark ? "dark:hidden" : null
+            )}
           />
+          {imageSrcDark ? (
+            // eslint-disable-next-line @next/next/no-img-element -- theme pair under /public
+            <img
+              src={imageSrcDark}
+              alt=""
+              className="absolute inset-0 hidden size-full object-cover object-top dark:block"
+            />
+          ) : null}
         </div>
       ) : (
         <>

@@ -16,7 +16,10 @@ export type SonoMarketPreviewItem = {
   title: string
   tagline: string
   category: MarketplaceCategory
+  /** Light / default cover under /public */
   coverSrc: string
+  /** Dark-mode cover when available */
+  coverSrcDark: string | null
   /** Looping cover video when set — preferred over coverSrc in cards/gallery. */
   coverVideo: string | null
   rating: number
@@ -47,13 +50,24 @@ export type SonoMarketPreviewDetail = SonoMarketPreviewItem & {
   project: MarketplaceProject
 }
 
+/** Light cover for cards — never prefer dark (theme swap is CSS). */
 export function marketplaceCoverSrc(project: MarketplaceProject): string {
   return (
-    project.coverImageDark ||
     project.coverImage ||
-    project.detailCoverImageDark ||
     project.detailCoverImage ||
+    project.coverImageDark ||
+    project.detailCoverImageDark ||
     ""
+  )
+}
+
+export function marketplaceCoverSrcDark(
+  project: MarketplaceProject
+): string | null {
+  return (
+    project.coverImageDark ||
+    project.detailCoverImageDark ||
+    null
   )
 }
 
@@ -65,9 +79,19 @@ export function marketplaceCoverVideo(
 
 export function marketplaceDetailCoverSrc(project: MarketplaceProject): string {
   return (
-    project.detailCoverImageDark ||
     project.detailCoverImage ||
+    project.coverImage ||
     marketplaceCoverSrc(project)
+  )
+}
+
+export function marketplaceDetailCoverSrcDark(
+  project: MarketplaceProject
+): string | null {
+  return (
+    project.detailCoverImageDark ||
+    project.coverImageDark ||
+    null
   )
 }
 
@@ -81,6 +105,7 @@ export function toSonoMarketItem(
     tagline: project.tagline,
     category: project.category,
     coverSrc: marketplaceCoverSrc(project),
+    coverSrcDark: marketplaceCoverSrcDark(project),
     coverVideo: marketplaceCoverVideo(project),
     rating: project.rating,
     reviewCount: project.reviewCount,
@@ -119,10 +144,12 @@ export function getSonoMarketPreviewDetail(
   const catalogIndex = marketplaceProjects.findIndex((p) => p.slug === slug)
   const base = toSonoMarketItem(project, catalogIndex < 0 ? 0 : catalogIndex)
   const cover = marketplaceDetailCoverSrc(project)
+  const coverDark = marketplaceDetailCoverSrcDark(project)
 
   return {
     ...base,
     coverSrc: cover,
+    coverSrcDark: coverDark,
     description: project.description,
     version: project.version,
     liveUrl: project.liveUrl,
