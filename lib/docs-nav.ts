@@ -36,7 +36,7 @@ export const componentsNav: {
   top: DocsNavPage[]
   groups: DocsNavGroup[]
 } = {
-  top: [{ title: "All Components", href: "/docs/components" }],
+  top: [],
   groups: [
     {
       title: COMPONENTS_FEATURED_GROUP,
@@ -46,6 +46,18 @@ export const componentsNav: {
           href: "/docs/components/clothes-rack",
           badge: "new",
         },
+        {
+          title: "Tweet Card",
+          href: "/docs/components/tweet-card",
+          badge: "new",
+        },
+        { title: "Fluid AI Orb", href: "/docs/components/fluid-orb" },
+        { title: "Thinking Orbs", href: "/docs/components/thinking-orbs" },
+        {
+          title: "Verified Badge",
+          href: "/docs/components/verified-badge",
+        },
+        { title: "Marquee", href: "/docs/components/marquee" },
       ],
     },
     {
@@ -245,8 +257,16 @@ export const componentsNav: {
     {
       title: "Social",
       pages: [
-        { title: "Clothes Rack", href: "/docs/components/clothes-rack" },
-        { title: "Tweet Card", href: "/docs/components/tweet-card" },
+        {
+          title: "Clothes Rack",
+          href: "/docs/components/clothes-rack",
+          badge: "new",
+        },
+        {
+          title: "Tweet Card",
+          href: "/docs/components/tweet-card",
+          badge: "new",
+        },
       ],
     },
     {
