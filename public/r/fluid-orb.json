@@ -4,7 +4,7 @@
   "type": "registry:ui",
   "title": "Fluid AI Orb",
   "description": "A WebGL fluid AI orb for idle and thinking states (pair with Voice AI Orb).",
-  "access": "public",
+  "access": "member",
   "dependencies": [
     "clsx",
     "tailwind-merge"
@@ -17,6 +17,6 @@
       "target": "components/sonojs/fluid-orb.tsx"
     }
   ],
-  "version": "0.1.0+815dcc9c67ae",
-  "generatedAt": "2026-10-31T01:39:32.527Z"
+  "version": "0.1.0+f7b382a6c0ad",
+  "generatedAt": "2026-11-03T10:02:44.983Z"
 }

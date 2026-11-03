@@ -4,7 +4,7 @@
   "type": "registry:ui",
   "title": "Rainbow Button",
   "description": "An animated button with a rainbow border and glow.",
-  "access": "public",
+  "access": "member",
   "dependencies": [
     "radix-ui",
     "class-variance-authority",
@@ -48,6 +48,6 @@
       "target": "components/ui/rainbow-button.tsx"
     }
   ],
-  "version": "0.1.0+815dcc9c67ae",
-  "generatedAt": "2026-10-31T01:39:32.527Z"
+  "version": "0.1.0+f7b382a6c0ad",
+  "generatedAt": "2026-11-03T10:02:44.983Z"
 }

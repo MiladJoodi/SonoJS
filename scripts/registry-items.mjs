@@ -2185,6 +2185,7 @@ const registryItemsRaw = [
     title: "Agent Activity",
     description:
       "A live timeline that shows an AI agent's work step by step.",
+    access: "member",
     dependencies: ["motion", "lucide-react", "clsx", "tailwind-merge"],
     registryDependencies: ["agent-disclosure"],
     files: [
@@ -2739,6 +2740,7 @@ const registryItemsRaw = [
     type: "registry:ui",
     title: "Rainbow Button",
     description: "An animated button with a rainbow border and glow.",
+    access: "member",
     dependencies: [
       "radix-ui",
       "class-variance-authority",
@@ -2988,6 +2990,7 @@ const registryItemsRaw = [
     title: "Fluid AI Orb",
     description:
       "A WebGL fluid AI orb for idle and thinking states (pair with Voice AI Orb).",
+    access: "member",
     dependencies: ["clsx", "tailwind-merge"],
     files: [
       {
@@ -3119,6 +3122,7 @@ const registryItemsRaw = [
     title: "Thinking Orbs",
     description:
       "Animated orb states that visualize an AI agent's work.",
+    access: "member",
     dependencies: [],
     files: [
       {
@@ -3314,6 +3318,7 @@ const registryItemsRaw = [
     title: "Marquee",
     description:
       "An infinite scrolling strip for text, images, or cards.",
+    access: "member",
     dependencies: ["clsx", "tailwind-merge"],
     cssVars: MARQUEE_CSS_VARS,
     css: MARQUEE_CSS,
@@ -4261,6 +4266,7 @@ const registryItemsRaw = [
     title: "Voice AI Orb",
     description:
       "A voice-agent status orb for listening, reasoning, and speaking.",
+    access: "member",
     dependencies: ["lucide-react", "clsx", "tailwind-merge"],
     files: [
       {
