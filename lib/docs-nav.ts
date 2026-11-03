@@ -227,6 +227,12 @@ export const componentsNav: {
       ],
     },
     {
+      title: "Social",
+      pages: [
+        { title: "Tweet Card", href: "/docs/components/tweet-card" },
+      ],
+    },
+    {
       title: "Navigation",
       pages: [
         { title: "Breadcrumb", href: "/docs/components/breadcrumb" },

@@ -72,7 +72,7 @@ export function AccessLocked({
           </div>
         </div>
 
-        <div className="relative min-h-[11rem]">
+        <div className="relative min-h-44">
           <pre
             aria-hidden
             className="pointer-events-none px-4 py-3 font-mono text-[14px] leading-[1.65] blur-[5px] saturate-75"
@@ -92,7 +92,10 @@ export function AccessLocked({
 
           <div className="absolute inset-0 flex flex-col items-center justify-center gap-1.5 bg-[color:var(--code-bg)]/50 backdrop-blur-[2px]">
             {isPro ? (
-              <ProIcon className="size-4 text-primary" aria-hidden />
+              <ProIcon
+                className="size-4 text-[color:var(--code-header-fg)]"
+                aria-hidden
+              />
             ) : (
               <LockIcon
                 className="size-4 text-[color:var(--code-header-fg)]"

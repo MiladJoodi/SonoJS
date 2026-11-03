@@ -639,11 +639,11 @@ export const marketplaceProjects: MarketplaceProject[] = [
   },
   {
     slug: "sonojs-landing-01",
-    title: "Sono",
+    title: "Mainline",
     tagline:
       "Calm SaaS marketing site — ink & champagne, full-bleed hero, pricing and auth.",
     description:
-      "Sono is a premium product-marketing template by SonoJS. Built with Next.js 16, React 19, Tailwind CSS 4, and Motion. You get a full-bleed home (hero, logo marquee, features, resource allocation, testimonials, pricing, FAQ), plus About, Pricing, FAQ, Contact with form, Login, and Signup. Instrument Serif + Manrope, next-themes (default dark), MDX-ready content surfaces, and shadcn/ui blocks. Demo marketing and auth UI only — no real accounts or payments. Static build ready for GitHub Pages.",
+      "Mainline is a premium product-marketing template by SonoJS. Built with Next.js 16, React 19, Tailwind CSS 4, and Motion. You get a full-bleed home (hero, logo marquee, features, resource allocation, testimonials, pricing, FAQ), plus About, Pricing, FAQ, Contact with form, Login, and Signup. Instrument Serif + Manrope, next-themes (default dark), MDX-ready content surfaces, and shadcn/ui blocks. Demo marketing and auth UI only — no real accounts or payments. Static build ready for GitHub Pages.",
     category: "landing",
     stack: ["nextjs", "react", "tailwind", "typescript"],
     priceLabel: "Free",
@@ -690,7 +690,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       },
     ],
     includes: [
-      "Full Next.js 16 + React 19 + TypeScript source (Sono)",
+      "Full Next.js 16 + React 19 + TypeScript source (Mainline)",
       "Home blocks: hero, logos, features, resources, testimonials, pricing, FAQ",
       "Pages: About, Pricing, FAQ, Contact, Login, Signup, Privacy",
       "shadcn/ui primitives, Motion, next-themes, MDX support",
@@ -703,6 +703,74 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "React 19",
       "Tailwind CSS 4",
       "TypeScript 5",
+    ],
+  },
+  {
+    slug: "sonojs-landing-02",
+    title: "Changelog Template",
+    tagline:
+      "Minimal changelog template — product releases, features, and fixes in chronological order.",
+    description:
+      "Changelog Template is a minimal changelog built with Next.js 16.4, React 19.2, and Tailwind CSS 4.1. Showcase product releases, features, and bug fixes in chronological order. Visual timeline with dates and versions, automatic dark mode, responsive layout, and MDX entries via Fumadocs. Write YYYY-MM-DD.mdx files under changelog/content — title, description, date, tags, and version in frontmatter. shadcn/ui components, full TypeScript, next-themes. Demo content only — no live CMS. Deploy to Vercel, Netlify, Cloudflare Pages, or static GitHub Pages.",
+    category: "landing",
+    stack: ["nextjs", "react", "tailwind", "typescript"],
+    priceLabel: "Free",
+    priceCents: 0,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 42,
+    accent: "42",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "landing",
+    coverImage:
+      "/marketplace/projects/landing/sonojs-landing-02/cover-light.webp",
+    coverImageDark:
+      "/marketplace/projects/landing/sonojs-landing-02/cover-dark.webp",
+    detailCoverImage:
+      "/marketplace/projects/landing/sonojs-landing-02/main-light.webp",
+    detailCoverImageDark:
+      "/marketplace/projects/landing/sonojs-landing-02/main-dark.webp",
+    liveUrl: "https://sonojs.github.io/sonojs-landing-02/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-03",
+    firstReleasedAt: "2026-11-03",
+    screens: 4,
+    highlights: [
+      {
+        title: "Timeline design",
+        body: "Visual timeline with dates and versions — releases, features, and fixes in chronological order.",
+      },
+      {
+        title: "MDX changelog entries",
+        body: "Add YYYY-MM-DD.mdx under changelog/content with title, description, date, tags, and version.",
+      },
+      {
+        title: "Dark mode",
+        body: "Automatic theme switching with next-themes — calm on every device.",
+      },
+      {
+        title: "Fast and fork-ready",
+        body: "Next.js App Router and React Server Components. Open the live preview or deploy anywhere Next.js runs.",
+      },
+    ],
+    includes: [
+      "Full Next.js 16.4 + React 19.2 + TypeScript 5.9 source (Changelog Template)",
+      "App Router pages, layout, metadata, and opengraph image",
+      "changelog/content MDX entries via Fumadocs",
+      "Timeline UI, theme provider / toggle, shadcn/ui primitives",
+      "Responsive layout optimized for all devices",
+    ],
+    requirements: [
+      "Node.js 20 or newer",
+      "Next.js 16.4",
+      "React 19.2",
+      "Tailwind CSS 4.1",
+      "TypeScript 5.9",
+      "pnpm (or npm) to install and run",
     ],
   },
   {

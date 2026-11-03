@@ -4,7 +4,7 @@
   "type": "registry:chart",
   "title": "Market Cards",
   "description": "Neon SVG area sparkline cards — 30-day up, KWD down, gold flat (style-vega glow); RTL-aware.",
-  "access": "public",
+  "access": "member",
   "dependencies": [],
   "registryDependencies": [
     "chart-styles"
@@ -33,6 +33,6 @@
       "target": "components/charts/market-cards.tsx"
     }
   ],
-  "version": "0.1.0+f7b382a6c0ad",
-  "generatedAt": "2026-11-03T10:02:44.983Z"
+  "version": "0.1.0+add37c636837",
+  "generatedAt": "2026-11-03T12:45:02.737Z"
 }

@@ -181,7 +181,6 @@ export default async function TimelineDocsPage() {
         <h2 className="text-h3">Vertical</h2>
         <ComponentVariantPreview
           examples={verticalExamples}
-          previewSurface="card"
         />
       </section>
 
@@ -189,7 +188,6 @@ export default async function TimelineDocsPage() {
         <h2 className="text-h3">Horizontal</h2>
         <ComponentVariantPreview
           examples={horizontalExamples}
-          previewSurface="card"
           allowOverflow
         />
       </section>

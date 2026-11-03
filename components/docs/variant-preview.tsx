@@ -92,19 +92,19 @@ export function ComponentVariantPreview({
   examples,
   className,
   previewClassName,
-  previewSurface = "plain",
+  previewSurface = "card",
   showDirection = true,
   allowOverflow = false,
 }: {
   examples: VariantExample[]
   className?: string
-  /** Override the preview stage surface (default `bg-canvas`). */
+  /** Extra classes on the stage (merged after surface). */
   previewClassName?: string
   /**
-   * Preview stage fill. `card` = white/`bg-card` stage (AI demos).
-   * `plain` = soft `bg-canvas` stage.
+   * Preview stage fill. Default `card` = `bg-card` (white in light).
+   * `canvas` = soft `bg-canvas` when a demo needs contrast (e.g. shadow-soft).
    */
-  previewSurface?: "plain" | "card"
+  previewSurface?: "card" | "canvas"
   /** Hide LTR/RTL when the preview has no directional layout (e.g. code). */
   showDirection?: boolean
   /**
@@ -154,7 +154,7 @@ export function ComponentVariantPreview({
 
   const previewFrameClass = cn(
     "flex min-h-32 items-center justify-center p-8",
-    previewSurface === "card" ? "bg-card" : "bg-canvas",
+    previewSurface === "canvas" ? "bg-canvas" : "bg-card",
     allowOverflow &&
       "relative z-20 min-h-[28rem] items-start justify-center overflow-visible pt-10 pb-16",
     previewClassName

@@ -79,7 +79,7 @@ export default async function CitationsDocsPage() {
       />
 
       <section className="space-y-4">
-        <ComponentVariantPreview examples={examples} previewSurface="card" />
+        <ComponentVariantPreview examples={examples} />
       </section>
 
       <DocsInstallation name="citations" />

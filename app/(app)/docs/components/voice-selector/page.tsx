@@ -76,7 +76,7 @@ export default async function VoiceSelectorDocsPage() {
       />
 
       <section className="space-y-4">
-        <ComponentVariantPreview examples={examples} previewSurface="card" />
+        <ComponentVariantPreview examples={examples} />
       </section>
 
       <DocsInstallation name="voice-selector" />

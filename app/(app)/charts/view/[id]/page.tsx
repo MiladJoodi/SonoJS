@@ -13,6 +13,7 @@ import {
 } from "@/components/docs"
 import { chartUsageSnippets } from "@/lib/chart-demo-export-name"
 import { getChartAdjacent, getChartEntry } from "@/lib/charts-catalog"
+import { highlightCode } from "@/lib/highlight-code"
 import { readChartDemoSource } from "@/lib/read-chart-demo-source"
 import { chartViewMetadata } from "@/lib/seo"
 
@@ -40,6 +41,7 @@ export default async function ChartViewPage({
 
   const source =
     entry.status === "ported" ? await readChartDemoSource(id) : null
+  const sourceHtml = source ? await highlightCode(source) : null
   const usage = source ? chartUsageSnippets(id, source) : null
   const hasGalleryBarProps =
     id === "simple-bar-chart" ||
@@ -1357,7 +1359,12 @@ export default async function ChartViewPage({
       </header>
 
       <section>
-        <ChartPreview fullWidth={entry.fullWidth}>
+        <ChartPreview
+          name={entry.id}
+          fullWidth={entry.fullWidth}
+          code={source ?? undefined}
+          codeHtml={sourceHtml ?? undefined}
+        >
           {entry.status === "ported" ? (
             <ChartDemo id={entry.id} />
           ) : (

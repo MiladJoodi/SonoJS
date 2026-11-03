@@ -348,7 +348,10 @@ export function BlockExample({
         </div>
 
         {!isPreview ? (
-          <div className="max-h-[40rem] min-h-[28rem] w-full overflow-auto bg-card p-4">
+          // No bg-card/p-4/min-h here — locked AccessLocked fills the stage with
+          // code chrome; unlocked body brings its own padding. A light min-h shell
+          // left a white void under the short dark lock panel.
+          <div className="max-h-[40rem] w-full overflow-auto">
             <BlockInstallBody name={name} usage={usage} />
           </div>
         ) : null}

@@ -127,7 +127,6 @@ export default async function CodePanelDocsPage() {
         <ComponentVariantPreview
           examples={examples}
           showDirection={false}
-          previewSurface="card"
         />
       </section>
 

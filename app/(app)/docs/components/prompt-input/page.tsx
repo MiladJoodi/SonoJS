@@ -49,7 +49,7 @@ export default async function PromptInputDocsPage() {
       />
 
       <section className="space-y-4">
-        <ComponentVariantPreview examples={examples} previewSurface="card" />
+        <ComponentVariantPreview examples={examples} />
       </section>
 
       <DocsInstallation name="prompt-input" />

@@ -4229,6 +4229,26 @@ const registryItemsRaw = [
     ],
   },
   {
+    name: "tweet-card",
+    type: "registry:ui",
+    title: "Tweet Card",
+    description:
+      "Static tweet-style card with avatar, name, handle, and text props.",
+    dependencies: ["clsx", "tailwind-merge"],
+    files: [
+      {
+        path: "packages/ui/src/components/tweet-card.tsx",
+        type: "registry:ui",
+        target: "components/tweet-card.tsx",
+      },
+      {
+        path: "packages/ui/src/components/tweet-card/images/avatar.jpg",
+        type: "registry:file",
+        target: "components/tweet-card/images/avatar.jpg",
+      },
+    ],
+  },
+  {
     name: "verified-badge",
     type: "registry:ui",
     title: "Verified Badge",
@@ -4369,6 +4389,7 @@ const registryItemsRaw = [
     title: "Agent Run Timeline",
     description:
       "A live plan for an agent run: step status, progress, and a review before it starts.",
+    access: "member",
     dependencies: ["lucide-react"],
     registryDependencies: ["button", "collapsible", "kbd", "popover"],
     files: [
@@ -4554,6 +4575,7 @@ const registryItemsRaw = [
     title: "agent-workspace-01",
     description:
       "Full chat application - sidebar threads, model picker, streaming conversation, composer stop/retry, and command search (RTL/LTR).",
+    access: "member",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: [
@@ -6770,6 +6792,7 @@ const registryItemsRaw = [
     title: "bento-grid-02",
     description:
       "Editorial design-system bento — dark metric, quote, CLI terminal, and stack chips (RTL/LTR).",
+    access: "member",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: ["button"],
@@ -7379,6 +7402,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: slug,
     description,
+    ...(slug === "offer-card-03" ? { access: "member" } : {}),
     dependencies: ["lucide-react"],
     files: [
       {
@@ -8947,6 +8971,7 @@ const registryItemsRaw = [
     title: "crypto-portfolio-03",
     description:
       "Dark live crypto desk — streaming Recharts area charts for equity, per-asset markets, and stacked BTC/ETH/SOL exposure.",
+    access: "member",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react", "recharts"],
     registryDependencies: ["avatar", "badge", "button", "chart"],
@@ -13334,6 +13359,7 @@ const registryItemsRaw = [
     title: "hero-12",
     description:
       "Full-bleed video background hero — muted looping film, dark scrim, dual CTAs, and feature stats.",
+    access: "member",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: ["button"],
@@ -15700,6 +15726,7 @@ const registryItemsRaw = [
     title: "Market Cards",
     description:
       "Neon SVG area sparkline cards — 30-day up, KWD down, gold flat (style-vega glow); RTL-aware.",
+    access: "member",
     dependencies: [],
     registryDependencies: ["chart-styles"],
     cssVars: {
@@ -17709,6 +17736,7 @@ const registryItemsRaw = [
     title: "Candlestick Dashboard",
     description:
       "Symbol KPI card + OHLC candles + volume strip — semantic up/down, metric scrubber, RTL-aware.",
+    access: "member",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles", "stock-shared"],
     cssVars: {
@@ -18058,6 +18086,7 @@ const registryItemsRaw = [
     title: "Realtime Mountain Chart",
     description:
       "Live mountain area with pulsing tip + play/pause — semantic up/down stroke, metric scrubber, RTL-aware.",
+    access: "member",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles", "stock-shared"],
     cssVars: {
@@ -18355,6 +18384,7 @@ const registryItemsRaw = [
     title: "Heatmap Calendar",
     description:
       "Year of daily activity — Sunday-start SVG grid, navy intensity, holiday accents, RTL-aware.",
+    access: "member",
     registryDependencies: ["heatmap-shared", "chart-styles"],
     cssVars: {
       light: {
@@ -18671,6 +18701,7 @@ const registryItemsRaw = [
     title: "Sunburst Chart",
     description:
       "Regional sales share by channel — nested Sunburst rings, metric scrubber, center disc.",
+    access: "member",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles", "sunburst-shared"],
     cssVars: {
@@ -19093,6 +19124,7 @@ const registryItemsRaw = [
     title: "Hc Gauge Activity",
     description:
       "Highcharts 360° activity ring — soft pink→rose gradient, English metric header.",
+    access: "member",
     dependencies: ["highcharts", "highcharts-react-official"],
     registryDependencies: ["hc-gauge-shared", "chart-styles"],
     cssVars: {

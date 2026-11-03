@@ -1,6 +1,7 @@
 /**
  * packages/ui uses @sonojs/ui/*; consumers get @/* after install.
  * AI docs items (and their AI-only helpers) install under components/sonojs/.
+ * A few social / standalone cards install at components/<name> (not under ui/).
  */
 
 /** @type {ReadonlySet<string>} */
@@ -40,13 +41,27 @@ export const SONOJS_COMPONENT_ROOTS = new Set([
   "voice-selector",
 ])
 
+/** Install at `components/<name>` (sibling of `ui/`, not inside it). */
+/** @type {ReadonlySet<string>} */
+export const TOP_LEVEL_COMPONENT_ROOTS = new Set(["tweet-card"])
+
 /**
  * @param {string} spec - Path after `@sonojs/ui/components/`
- * @returns {"sonojs" | "ui"}
+ * @returns {"sonojs" | "ui" | null} null = top-level under `components/`
  */
 export function consumerComponentsFolder(spec) {
   const root = spec.split("/")[0] ?? ""
+  if (TOP_LEVEL_COMPONENT_ROOTS.has(root)) return null
   return SONOJS_COMPONENT_ROOTS.has(root) ? "sonojs" : "ui"
+}
+
+/**
+ * @param {string} spec - Path after `@sonojs/ui/components/`
+ * @returns {string} Consumer import path without quotes
+ */
+export function consumerComponentImportPath(spec) {
+  const folder = consumerComponentsFolder(spec)
+  return folder ? `@/components/${folder}/${spec}` : `@/components/${spec}`
 }
 
 /**
@@ -57,8 +72,7 @@ export function rewriteConsumerImports(content) {
   return content
     .replace(
       /from\s+["']@sonojs\/ui\/components\/([^"']+)["']/g,
-      (_full, spec) =>
-        `from "@/components/${consumerComponentsFolder(spec)}/${spec}"`
+      (_full, spec) => `from "${consumerComponentImportPath(spec)}"`
     )
     .replace(
       /from\s+["']@sonojs\/ui\/hooks\/([^"']+)["']/g,

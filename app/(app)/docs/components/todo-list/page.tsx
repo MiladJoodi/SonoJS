@@ -61,7 +61,7 @@ export default async function TodoListDocsPage() {
       />
 
       <section className="space-y-4">
-        <ComponentVariantPreview examples={examples} previewSurface="card" />
+        <ComponentVariantPreview examples={examples} />
       </section>
 
       <DocsInstallation name="todo-list" />

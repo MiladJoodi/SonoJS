@@ -80,7 +80,6 @@ export default async function VerifiedBadgeDocsPage() {
       <section className="space-y-4">
         <ComponentVariantPreview
           examples={examples}
-          previewSurface="card"
         />
       </section>
 

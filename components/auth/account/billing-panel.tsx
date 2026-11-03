@@ -190,7 +190,7 @@ export function BillingPanel({
         <CardHeader className="border-b border-border/50 py-6">
           <CardTitle>Subscription</CardTitle>
           <CardDescription>
-            Live billing record (Neon, with Stripe fallback when needed).
+            Your current plan and renewal status.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4 py-6">

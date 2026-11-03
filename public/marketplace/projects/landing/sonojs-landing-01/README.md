@@ -1,10 +1,10 @@
-# Sono — marketplace assets
+# Mainline — marketplace assets
 
 Package: `sono-mainline` (`1.2.0`)  
 Category: `landing`  
 Slug / folder: `sonojs-landing-01`  
 Path: `public/marketplace/projects/landing/sonojs-landing-01/`  
-Source: `E:\SonoJS-Templates\tr\mainline-nextjs-template`
+Source: mainline Next.js marketing template
 
 ## Images
 

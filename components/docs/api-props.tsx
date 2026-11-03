@@ -22,12 +22,12 @@ export function DocsApiProps({
   return (
     <div
       className={cn(
-        "overflow-hidden rounded-[var(--radius-code)] border border-border/80",
+        "overflow-hidden rounded-[var(--radius-code)] border border-border/70 bg-card",
         className
       )}
     >
       <table className="w-full text-start text-secondary">
-        <thead className="bg-muted/40 text-caption text-muted-foreground">
+        <thead className="border-b border-border/70 bg-muted/50 text-caption text-muted-foreground">
           <tr>
             <th className="px-4 py-2.5 font-medium">Prop</th>
             <th className="px-4 py-2.5 font-medium">Type</th>

@@ -81,7 +81,7 @@ export default async function AttachmentDocsPage() {
       />
 
       <section className="space-y-3">
-        <ComponentVariantPreview examples={examples} previewSurface="card" />
+        <ComponentVariantPreview examples={examples} />
       </section>
 
       <DocsInstallation name="attachment" />

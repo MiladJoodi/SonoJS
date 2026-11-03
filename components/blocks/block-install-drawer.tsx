@@ -235,10 +235,12 @@ export function BlockInstallBody({
   }
 
   if (!gate.allowed) {
+    // Compact lock panel — natural height (AccessLocked min-h), no tall black stage.
     return (
-      <div className="w-full min-w-0 p-1">
-        <AccessLocked access={gate.access} />
-      </div>
+      <AccessLocked
+        access={gate.access}
+        className="rounded-none border-0"
+      />
     )
   }
 
@@ -263,7 +265,7 @@ export function BlockInstallBody({
   const showAliasNote = meta.files.some((file) => file.content.includes("@/"))
 
   return (
-    <div className="w-full min-w-0 max-w-full space-y-6">
+    <div className="w-full min-w-0 max-w-full space-y-6 p-4">
       <div className="min-w-0 max-w-full">
         <DocsInstallationTabs
           cliCode={cli}
@@ -325,7 +327,7 @@ export function BlockInstallDrawer({
             Install command, source, and usage.
           </DrawerDescription>
         </DrawerHeader>
-        <div className="scrollbar-soft min-h-0 w-full min-w-0 flex-1 overflow-x-hidden overflow-y-auto p-4">
+        <div className="scrollbar-soft min-h-0 w-full min-w-0 flex-1 overflow-x-hidden overflow-y-auto">
           {open ? <BlockInstallBody key={name} name={name} usage={usage} /> : null}
         </div>
       </DrawerContent>
