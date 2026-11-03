@@ -100,6 +100,7 @@ const EXAMPLE_FOLDERS = [
   "tooltip",
   "trace",
   "transcription",
+  "clothes-rack",
   "tweet-card",
   "verified-badge",
   "voice-ai-orb",

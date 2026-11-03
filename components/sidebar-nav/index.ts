@@ -24,6 +24,7 @@ export {
   SIDEBAR_SEARCH_WRAP_CLASS,
   SIDEBAR_SHELL_CLASS,
   SIDEBAR_TOP_LINK_CLASS,
+  SidebarNavBadge,
   SidebarNavBullet,
   SidebarNavChevron,
   SidebarNavLabel,

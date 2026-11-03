@@ -284,11 +284,15 @@ export function MeteorBorder({
   trailWidth?: number
   headRadius?: number
 }) {
+  const innerRadius = Math.max(0, borderRadius - borderWidth)
+
   return (
     <div
-      className={cn("group relative", className)}
+      className={cn("group relative overflow-hidden", className)}
       style={{ padding: borderWidth, borderRadius }}
     >
+      {/* Soft ring — sits under the card; keep transparent clip so corners
+          never flash a dark fill through AA gaps (was bg-zinc-950). */}
       <div
         className="absolute inset-0 bg-foreground/10 dark:bg-white/10"
         style={{ borderRadius }}
@@ -301,8 +305,8 @@ export function MeteorBorder({
         headRadius={headRadius}
       />
       <div
-        className="relative z-10 h-full w-full overflow-hidden bg-zinc-950"
-        style={{ borderRadius: Math.max(0, borderRadius - borderWidth) }}
+        className="relative z-10 h-full w-full overflow-hidden bg-transparent"
+        style={{ borderRadius: innerRadius }}
       >
         {children}
       </div>

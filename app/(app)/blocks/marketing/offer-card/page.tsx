@@ -7,13 +7,14 @@ import OfferCard02 from "@/registry/blocks/marketing/offer-card/offer-card-02/of
 import OfferCard03 from "@/registry/blocks/marketing/offer-card/offer-card-03/offer-card"
 import OfferCard04 from "@/registry/blocks/marketing/offer-card/offer-card-04/offer-card"
 import OfferCard05 from "@/registry/blocks/marketing/offer-card/offer-card-05/offer-card"
+import OfferCard06 from "@/registry/blocks/marketing/offer-card/offer-card-06/offer-card"
 
 import { blocksPageMetadata } from "@/lib/seo"
 
 export const metadata = blocksPageMetadata(
   "/blocks/marketing/offer-card",
   "Offer Card",
-  "Pro upsell offer cards with meteor border animation for React and Tailwind. Preview and install with the SonoJS CLI."
+  "Pro upsell offer cards — meteor borders, tiers, and a full-width ping/aurora sidebar CTA. Preview and install with the SonoJS CLI."
 )
 
 const usage = (name: string) =>
@@ -47,7 +48,7 @@ export default function BlockOfferCardDocsPage() {
       <BlocksPageHeader
         title="Offer Card"
         pathname="/blocks/marketing/offer-card"
-        description="Meteor-border upsell cards — pricing tiers, aura glass, enterprise seats, and flash deals. Default meteor speed is 0.9 on every variant (override with the speed prop)."
+        description="Pro upsell cards — meteor borders on 01–05 (default speed 0.9), plus a full-width green-ping + aurora headline CTA (06)."
       />
 
       <div className="flex flex-col gap-8">
@@ -106,6 +107,18 @@ export default function BlockOfferCardDocsPage() {
         >
           <div className="flex w-full justify-center">
             <OfferCard05 />
+          </div>
+        </BlockExample>
+
+        <ExampleRule />
+
+        <BlockExample
+          name="offer-card-06"
+          usage={[{ title: "app/page.tsx", code: usage("offer-card-06") }]}
+          {...shell}
+        >
+          <div className="flex w-full justify-center">
+            <OfferCard06 />
           </div>
         </BlockExample>
       </div>

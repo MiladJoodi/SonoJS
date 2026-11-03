@@ -4237,14 +4237,45 @@ const registryItemsRaw = [
     dependencies: ["clsx", "tailwind-merge"],
     files: [
       {
-        path: "packages/ui/src/components/tweet-card.tsx",
+        path: "packages/ui/src/components/tweet-card/index.tsx",
         type: "registry:ui",
-        target: "components/tweet-card.tsx",
+        target: "components/tweet-card/index.tsx",
       },
       {
         path: "packages/ui/src/components/tweet-card/images/avatar.jpg",
         type: "registry:file",
         target: "components/tweet-card/images/avatar.jpg",
+      },
+    ],
+  },
+  {
+    name: "clothes-rack",
+    type: "registry:ui",
+    title: "Clothes Rack",
+    description:
+      "A shop rail of 3D garments that swivel to face you, with cloth that moves like fabric.",
+    access: "member",
+    dependencies: ["three", "@types/three"],
+    files: [
+      {
+        path: "packages/ui/src/components/clothes-rack/index.tsx",
+        type: "registry:ui",
+        target: "components/clothes-rack/index.tsx",
+      },
+      {
+        path: "packages/ui/src/components/clothes-rack/cloth-motion.ts",
+        type: "registry:ui",
+        target: "components/clothes-rack/cloth-motion.ts",
+      },
+      {
+        path: "packages/ui/src/components/clothes-rack/garment.ts",
+        type: "registry:ui",
+        target: "components/clothes-rack/garment.ts",
+      },
+      {
+        path: "packages/ui/src/components/clothes-rack/garment-drapes.ts",
+        type: "registry:ui",
+        target: "components/clothes-rack/garment-drapes.ts",
       },
     ],
   },
@@ -7397,6 +7428,10 @@ const registryItemsRaw = [
       "offer-card-05",
       "Flash lifetime deal — amber meteor (default speed 0.9), countdown badge, deep discount.",
     ],
+    [
+      "offer-card-06",
+      "Full-width Pro upsell — green ping badge, line-shadow + aurora headline, checklist, lifetime price.",
+    ],
   ].map(([slug, description]) => ({
     name: slug,
     type: "registry:block",
@@ -7410,11 +7445,15 @@ const registryItemsRaw = [
         type: "registry:component",
         target: `components/blocks/marketing/${slug}/offer-card.tsx`,
       },
-      {
-        path: "registry/blocks/marketing/offer-card/_lib/meteor-border.tsx",
-        type: "registry:component",
-        target: "components/blocks/marketing/_lib/meteor-border.tsx",
-      },
+      ...(slug === "offer-card-06"
+        ? []
+        : [
+            {
+              path: "registry/blocks/marketing/offer-card/_lib/meteor-border.tsx",
+              type: "registry:component",
+              target: "components/blocks/marketing/_lib/meteor-border.tsx",
+            },
+          ]),
       ...(slug === "offer-card-01"
         ? [1, 2, 3, 4, 5].map((n) => ({
             path: `registry/blocks/marketing/offer-card/offer-card-01/images/avatar-${n}.webp`,

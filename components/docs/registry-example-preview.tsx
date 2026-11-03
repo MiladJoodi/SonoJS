@@ -7,6 +7,7 @@ import {
   ensureExample,
   getCachedExample,
 } from "@/components/docs/example-component-cache"
+import { LoadingRing } from "@/components/sono-loader"
 
 /**
  * Loads a registry example by name.
@@ -48,7 +49,15 @@ export function RegistryExamplePreview({ name }: { name: string }) {
 
   if (missing) return null
   if (!Component) {
-    return <div className="min-h-32 w-full" aria-hidden />
+    return (
+      <div
+        className="flex min-h-32 w-full items-center justify-center"
+        role="status"
+        aria-label="Loading example"
+      >
+        <LoadingRing size={40} showLabel label="Loading…" />
+      </div>
+    )
   }
 
   return <Component />

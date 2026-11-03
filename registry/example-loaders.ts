@@ -25,6 +25,7 @@ const folderModules = {
   "carousel": () => import("./examples/carousel/_loaders"),
   "checkbox": () => import("./examples/checkbox/_loaders"),
   "citations": () => import("./examples/citations/_loaders"),
+  "clothes-rack": () => import("./examples/clothes-rack/_loaders"),
   "code-block": () => import("./examples/code-block/_loaders"),
   "collapsible": () => import("./examples/collapsible/_loaders"),
   "combobox": () => import("./examples/combobox/_loaders"),
@@ -106,7 +107,7 @@ const folderModules = {
   "voice-selector": () => import("./examples/voice-selector/_loaders"),
 } as const
 
-const FOLDERS_LONGEST_FIRST = ["image-generation-2","streaming-response","selection-actions","structured-output","image-generation","agent-activity-2","agent-code-block","message-scroller","inline-citation","navigation-menu","rainbow-button","electro-border","agent-activity","loading-states","model-selector","prompt-input-2","reasoning-text","verified-badge","voice-selector","approval-card","dropdown-menu","native-select","thinking-orbs","tool-approval","transcription","alert-dialog","button-group","context-menu","mic-selector","open-in-chat","prompt-input","toggle-group","voice-ai-orb","collapsible","date-picker","input-group","radio-group","scroll-area","attachment","breadcrumb","code-block","data-table","hover-card","ai-sidebar","pagination","pro-button","tweet-card","accordion","citations","file-diff","fluid-orb","input-otp","resizable","separator","task-rows","todo-list","calendar","combobox","carousel","checkbox","progress","skeleton","sortable","terminal","timeline","textarea","command","marquee","menubar","message","persona","popover","spinner","tooltip","avatar","bubble","button","dialog","drawer","marker","select","slider","sonner","switch","toggle","badge","alert","empty","field","input","label","queue","sheet","table","trace","card","item","tabs","kbd"] as const
+const FOLDERS_LONGEST_FIRST = ["image-generation-2","streaming-response","selection-actions","structured-output","image-generation","agent-activity-2","agent-code-block","message-scroller","inline-citation","navigation-menu","rainbow-button","electro-border","agent-activity","loading-states","model-selector","prompt-input-2","reasoning-text","verified-badge","voice-selector","approval-card","dropdown-menu","native-select","thinking-orbs","tool-approval","transcription","alert-dialog","button-group","context-menu","clothes-rack","mic-selector","open-in-chat","prompt-input","toggle-group","voice-ai-orb","collapsible","date-picker","input-group","radio-group","scroll-area","attachment","breadcrumb","code-block","data-table","hover-card","ai-sidebar","pagination","pro-button","tweet-card","accordion","citations","file-diff","fluid-orb","input-otp","resizable","separator","task-rows","todo-list","calendar","combobox","carousel","checkbox","progress","skeleton","sortable","terminal","timeline","textarea","command","marquee","menubar","message","persona","popover","spinner","tooltip","avatar","bubble","button","dialog","drawer","marker","select","slider","sonner","switch","toggle","badge","alert","empty","field","input","label","queue","sheet","table","trace","card","item","tabs","kbd"] as const
 
 function folderForExample(name: string): string | undefined {
   for (const folder of FOLDERS_LONGEST_FIRST) {

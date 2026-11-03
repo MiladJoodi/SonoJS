@@ -2,7 +2,7 @@ import type { ReactNode, SVGProps } from "react"
 
 import { cn } from "@sonojs/ui/lib/utils"
 
-import avatarImage from "./tweet-card/images/avatar.jpg"
+import avatarImage from "./images/avatar.jpg"
 
 function assetSrc(asset: string | { src: string }) {
   return typeof asset === "string" ? asset : asset.src

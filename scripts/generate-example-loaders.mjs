@@ -33,6 +33,7 @@ const FOLDER_ORDER = [
   "carousel",
   "checkbox",
   "citations",
+  "clothes-rack",
   "card",
   "data-table",
   "date-picker",

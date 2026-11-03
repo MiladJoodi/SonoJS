@@ -31,6 +31,7 @@ import {
   SIDEBAR_SEARCH_WRAP_CLASS,
   SIDEBAR_SHELL_CLASS,
   SIDEBAR_TOP_LINK_CLASS,
+  SidebarNavBadge,
   SidebarNavBullet,
   SidebarNavChevron,
   SidebarNavLabel,
@@ -172,6 +173,9 @@ function DocsSidebarBody({ className }: { className?: string }) {
                                     featured={page.featured}
                                   />
                                   <SidebarNavLabel label={page.title} />
+                                  {page.badge === "new" ? (
+                                    <SidebarNavBadge>New</SidebarNavBadge>
+                                  ) : null}
                                 </Link>
                               )
                             })}

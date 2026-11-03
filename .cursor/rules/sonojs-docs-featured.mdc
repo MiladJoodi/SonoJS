@@ -4,11 +4,11 @@ globs: lib/docs-nav.ts,app/(app)/docs/**/*
 alwaysApply: true
 ---
 
-# SonoJS docs — featured (green bullet)
+# SonoJS docs — featured (green bullet) + Featured group
+
+## Green bullet (`featured: true`)
 
 In `lib/docs-nav.ts`, `featured: true` shows a **bright green** sidebar bullet (`SidebarNavBullet`).
-
-## When to set `featured: true`
 
 Mark a docs page if it is **commonly used / core** for building UIs — something most apps reach for early:
 
@@ -17,13 +17,19 @@ Mark a docs page if it is **commonly used / core** for building UIs — somethin
 - Data: Avatar, Table / Data Table, Calendar / Date Picker, Combobox
 - Cross-cutting docs that matter for the product (e.g. Direction)
 
-## When NOT to feature
+Do **not** feature niche / secondary items. Green should stay sparse.
 
-- Niche / secondary: Bubble, Attachment, Context Menu, Carousel, Code Block, Collapsible, Command palette variants, Button Group (unless it becomes a primary pattern)
-- Do not feature every new component — green should stay sparse so it signals importance
+## Featured group + `badge: "new"` (Components sidebar)
+
+Under `/docs/components`, the first collapsible group is **Featured** (`COMPONENTS_FEATURED_GROUP` in `lib/docs-nav.ts`) — a **manual** spotlight list (not every green-bullet item).
+
+- Add curated pages there with `badge: "new"` when you want a **New** chip.
+- Keep the same page in its normal category group (Social, Forms, …).
+- Featured is skipped by `getDocsComponentPages()` so prev/next is not duplicated.
 
 ## Checklist (new docs component)
 
-1. Add the page to `lib/docs-nav.ts` (alpha in its group).
-2. If it matches the “commonly used / core” bar above → `featured: true`.
-3. If unsure → leave featured off; easier to promote later than to dilute the green dots.
+1. Add the page to `lib/docs-nav.ts` (alpha in its category group).
+2. If core / high-traffic → `featured: true` (green bullet).
+3. If you want it in the top Featured list → also add under `COMPONENTS_FEATURED_GROUP` with `badge: "new"` when appropriate.
+4. If unsure → leave both off; easier to promote later.

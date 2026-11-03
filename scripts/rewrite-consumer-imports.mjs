@@ -43,7 +43,7 @@ export const SONOJS_COMPONENT_ROOTS = new Set([
 
 /** Install at `components/<name>` (sibling of `ui/`, not inside it). */
 /** @type {ReadonlySet<string>} */
-export const TOP_LEVEL_COMPONENT_ROOTS = new Set(["tweet-card"])
+export const TOP_LEVEL_COMPONENT_ROOTS = new Set(["tweet-card", "clothes-rack"])
 
 /**
  * @param {string} spec - Path after `@sonojs/ui/components/`

@@ -69,6 +69,9 @@ export const SIDEBAR_NESTED_ITEM_CLASS = cn(
 export const SIDEBAR_NESTED_LABEL_CLASS =
   "truncate text-[12.5px] font-medium leading-snug"
 
+export const SIDEBAR_NAV_BADGE_CLASS =
+  "ms-auto shrink-0 rounded-full bg-[#4ade80]/15 px-1.5 py-px text-[10px] font-semibold tracking-wide text-[#4ade80]"
+
 /** English-only label (adapted from bilingual fa/en pattern). */
 export function SidebarNavLabel({
   label,
@@ -76,6 +79,16 @@ export function SidebarNavLabel({
   label: string
 }) {
   return <span className={SIDEBAR_NESTED_LABEL_CLASS}>{label}</span>
+}
+
+export function SidebarNavBadge({
+  children = "New",
+  className,
+}: {
+  children?: React.ReactNode
+  className?: string
+}) {
+  return <span className={cn(SIDEBAR_NAV_BADGE_CLASS, className)}>{children}</span>
 }
 
 export const SIDEBAR_COLLAPSIBLE_CONTENT_CLASS = cn(

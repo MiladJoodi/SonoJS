@@ -1,13 +1,19 @@
 export type DocsNavPage = {
   title: string
   href: string
+  /** Green sidebar bullet — core / high-traffic items. */
   featured?: boolean
+  /** Small “New” chip next to the title (manual spotlight). */
+  badge?: "new"
 }
 
 export type DocsNavGroup = {
   title: string
   pages: DocsNavPage[]
 }
+
+/** Curated spotlight group — first under Components; excluded from prev/next order. */
+export const COMPONENTS_FEATURED_GROUP = "Featured"
 
 /** Guide docs under `/docs` (not components). Keep lean. */
 export const docsNav: {
@@ -32,6 +38,16 @@ export const componentsNav: {
 } = {
   top: [{ title: "All Components", href: "/docs/components" }],
   groups: [
+    {
+      title: COMPONENTS_FEATURED_GROUP,
+      pages: [
+        {
+          title: "Clothes Rack",
+          href: "/docs/components/clothes-rack",
+          badge: "new",
+        },
+      ],
+    },
     {
       title: "AI",
       pages: [
@@ -229,6 +245,7 @@ export const componentsNav: {
     {
       title: "Social",
       pages: [
+        { title: "Clothes Rack", href: "/docs/components/clothes-rack" },
         { title: "Tweet Card", href: "/docs/components/tweet-card" },
       ],
     },
@@ -276,7 +293,9 @@ export function getDocsCurrentLabel(pathname: string): string | null {
 
 /** All component groups in sidebar order — for directory + prev/next. */
 export function getDocsComponentPages(): DocsNavPage[] {
-  return componentsNav.groups.flatMap((group) => group.pages)
+  return componentsNav.groups
+    .filter((group) => group.title !== COMPONENTS_FEATURED_GROUP)
+    .flatMap((group) => group.pages)
 }
 
 export function getDocsGuidePages(): DocsNavPage[] {
