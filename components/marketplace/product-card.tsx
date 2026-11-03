@@ -2,18 +2,18 @@
 
 import Link from "next/link"
 
-import type { SonoMarketPreviewItem } from "@/lib/sonomarket-preview-data"
+import type { MarketplacePreviewItem } from "@/lib/marketplace-preview-data"
 import { cn } from "@/lib/utils"
 
 const coverImgClass =
   "pointer-events-none absolute inset-0 size-full select-none object-cover object-top transition-transform duration-500 group-hover/card:scale-[1.04] motion-reduce:transition-none motion-reduce:group-hover/card:scale-100"
 
-export function SonoMarketProductCard({
+export function MarketplaceProductCard({
   item,
   className,
   size = "default",
 }: {
-  item: SonoMarketPreviewItem
+  item: MarketplacePreviewItem
   className?: string
   size?: "default" | "featured"
 }) {

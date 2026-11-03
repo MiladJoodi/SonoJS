@@ -4,10 +4,10 @@ import type { ReactNode } from "react"
 import Link from "next/link"
 import { CheckIcon } from "lucide-react"
 
-import { SonoMarketDetailGallery } from "@/components/sonomarket/detail-gallery"
-import { SonoMarketDetailPurchase } from "@/components/sonomarket/detail-purchase"
-import { SonoMarketProductCard } from "@/components/sonomarket/product-card"
-import type { SonoMarketPreviewDetail } from "@/lib/sonomarket-preview-data"
+import { MarketplaceDetailGallery } from "@/components/marketplace/detail-gallery"
+import { MarketplaceDetailPurchase } from "@/components/marketplace/detail-purchase"
+import { MarketplaceProductCard } from "@/components/marketplace/product-card"
+import type { MarketplacePreviewDetail } from "@/lib/marketplace-preview-data"
 
 function SectionLabel({ children }: { children: ReactNode }) {
   return (
@@ -29,11 +29,11 @@ function formatDate(iso: string) {
   }
 }
 
-export function SonoMarketDetailPage({
+export function MarketplaceDetailPage({
   detail,
   downloadCta,
 }: {
-  detail: SonoMarketPreviewDetail
+  detail: MarketplacePreviewDetail
   downloadCta: ReactNode
 }) {
   const specs = [
@@ -44,11 +44,11 @@ export function SonoMarketDetailPage({
   ] as const
 
   return (
-    <div data-sonomarket="" className="min-h-0 flex-1 bg-[var(--sm-bg)] text-[var(--sm-text)]">
+    <div data-marketplace="" className="min-h-0 flex-1 bg-[var(--sm-bg)] text-[var(--sm-text)]">
       <div className="mx-auto w-full max-w-[1400px] px-4 py-5 sm:px-6 sm:py-7 lg:px-8 lg:py-8">
         <div className="grid items-stretch gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(300px,340px)] lg:gap-x-8 xl:grid-cols-[minmax(0,1fr)_360px]">
           <div className="flex min-w-0 flex-col gap-6 lg:col-start-1">
-            <SonoMarketDetailGallery
+            <MarketplaceDetailGallery
               title={detail.title}
               image={detail.coverSrc || detail.gallery[0] || ""}
               imageDark={detail.coverSrcDark}
@@ -56,7 +56,7 @@ export function SonoMarketDetailPage({
             />
 
             <div className="lg:hidden">
-              <SonoMarketDetailPurchase
+              <MarketplaceDetailPurchase
                 detail={detail}
                 downloadCta={downloadCta}
               />
@@ -157,7 +157,7 @@ export function SonoMarketDetailPage({
 
           <aside className="relative hidden min-h-0 min-w-0 lg:col-start-2 lg:block">
             <div className="sticky top-24">
-              <SonoMarketDetailPurchase
+              <MarketplaceDetailPurchase
                 detail={detail}
                 downloadCta={downloadCta}
               />
@@ -180,7 +180,7 @@ export function SonoMarketDetailPage({
             </div>
             <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
               {detail.related.map((item) => (
-                <SonoMarketProductCard key={item.slug} item={item} />
+                <MarketplaceProductCard key={item.slug} item={item} />
               ))}
             </div>
           </section>

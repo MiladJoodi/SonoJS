@@ -75,12 +75,20 @@ function plainCodeHtml(code: string) {
   return `<pre class="shiki"><code>${escapeHtml(code)}</code></pre>`
 }
 
+/** Skip Shiki above this size — large registry sources (e.g. clothes-rack drapes) blow Vercel SSR budgets. */
+const HIGHLIGHT_MAX_CHARS = 32_000
+
 /** Highlight source with VS Code Dark+ (shiki `dark-plus`). */
 export async function highlightCode(
   code: string,
   lang: CodeLang = "tsx"
 ): Promise<string> {
   const source = code.replace(/\n$/, "")
+
+  // Plain escape is enough for huge baked/data files; highlighting them times out serverless.
+  if (source.length > HIGHLIGHT_MAX_CHARS) {
+    return plainCodeHtml(source)
+  }
 
   try {
     const highlighter = await getHighlighter()

@@ -1,11 +1,26 @@
 export { MarketplaceCatalogPage } from "./catalog-page"
-export { CatalogFilters } from "./catalog-filters"
-export { MarketStats } from "./market-stats"
-export { ProjectCard } from "./project-card"
-export { ProjectCover } from "./project-cover"
-export { ProjectDetail } from "./project-detail"
-export { ProjectDownloadCta } from "./project-download-cta"
+export { MarketplaceDetailGallery } from "./detail-gallery"
+export { MarketplaceDetailPage } from "./detail-page"
+export { MarketplaceDetailPurchase } from "./detail-purchase"
+export { MarketplaceFeaturedSection } from "./featured-section"
+export { MarketplaceHero } from "./hero"
 export { MarketplaceDownloadButton } from "./marketplace-download-button"
+export {
+  MarketplaceOfferColumn,
+  useMarketplaceOfferRail,
+} from "./marketplace-offer-column"
+export { MarketplaceProductCard } from "./product-card"
+export {
+  MarketplaceProductsFilter,
+  MarketplaceProductsToolbar,
+  applyMarketplaceProductsFilter,
+  EMPTY_PRODUCTS_FILTER,
+} from "./products-filter"
+export type {
+  MarketplaceProductsFilterState,
+  MarketplaceSortKey,
+} from "./products-filter"
+export { MarketplaceStarRating } from "./star-rating"
 export { StackChip, StackIcon } from "./stack-icon"
 export {
   AxiosIcon as AxiosMark,

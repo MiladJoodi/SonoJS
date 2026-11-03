@@ -11,30 +11,30 @@ import {
 } from "@/lib/marketplace-catalog"
 import {
   compareMarketplaceNewest,
-  type SonoMarketPreviewItem,
-} from "@/lib/sonomarket-preview-data"
+  type MarketplacePreviewItem,
+} from "@/lib/marketplace-preview-data"
 import { cn } from "@/lib/utils"
 
-export type SonoMarketSortKey = "default" | "rating" | "name"
+export type MarketplaceSortKey = "default" | "rating" | "name"
 
-export type SonoMarketProductsFilterState = {
+export type MarketplaceProductsFilterState = {
   q: string
   categories: MarketplaceCategory[]
   stacks: MarketplaceStack[]
-  sort: SonoMarketSortKey
+  sort: MarketplaceSortKey
 }
 
-export const EMPTY_PRODUCTS_FILTER: SonoMarketProductsFilterState = {
+export const EMPTY_PRODUCTS_FILTER: MarketplaceProductsFilterState = {
   q: "",
   categories: [],
   stacks: [],
   sort: "default",
 }
 
-export function applySonoMarketProductsFilter(
-  items: SonoMarketPreviewItem[],
-  state: SonoMarketProductsFilterState
-): SonoMarketPreviewItem[] {
+export function applyMarketplaceProductsFilter(
+  items: MarketplacePreviewItem[],
+  state: MarketplaceProductsFilterState
+): MarketplacePreviewItem[] {
   let next = items
 
   const q = state.q.trim().toLowerCase()
@@ -77,15 +77,15 @@ function toggleIn<T>(list: T[], value: T): T[] {
     : [...list, value]
 }
 
-export function SonoMarketProductsFilter({
+export function MarketplaceProductsFilter({
   items,
   value,
   onChange,
   className,
 }: {
-  items: SonoMarketPreviewItem[]
-  value: SonoMarketProductsFilterState
-  onChange: (next: SonoMarketProductsFilterState) => void
+  items: MarketplacePreviewItem[]
+  value: MarketplaceProductsFilterState
+  onChange: (next: MarketplaceProductsFilterState) => void
   className?: string
 }) {
   const categories = React.useMemo(() => {
@@ -195,13 +195,13 @@ export function SonoMarketProductsFilter({
 }
 
 /** Horizontal search + sort bar above the product grid. */
-export function SonoMarketProductsToolbar({
+export function MarketplaceProductsToolbar({
   value,
   onChange,
   className,
 }: {
-  value: SonoMarketProductsFilterState
-  onChange: (next: SonoMarketProductsFilterState) => void
+  value: MarketplaceProductsFilterState
+  onChange: (next: MarketplaceProductsFilterState) => void
   className?: string
 }) {
   return (

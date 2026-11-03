@@ -2,9 +2,9 @@ import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 
 import { MarketplaceDownloadButton } from "@/components/marketplace/marketplace-download-button"
-import { SonoMarketDetailPage } from "@/components/sonomarket/detail-page"
+import { MarketplaceDetailPage } from "@/components/marketplace/detail-page"
 import { marketplaceProjects } from "@/lib/marketplace-catalog"
-import { getSonoMarketPreviewDetail } from "@/lib/sonomarket-preview-data"
+import { getMarketplacePreviewDetail } from "@/lib/marketplace-preview-data"
 import { pageMetadata } from "@/lib/seo"
 
 type PageProps = {
@@ -22,7 +22,7 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { slug } = await params
-  const detail = getSonoMarketPreviewDetail(slug)
+  const detail = getMarketplacePreviewDetail(slug)
   if (!detail) {
     return pageMetadata({
       title: "Project",
@@ -39,11 +39,11 @@ export async function generateMetadata({
 
 export default async function MarketplaceProjectPage({ params }: PageProps) {
   const { slug } = await params
-  const detail = getSonoMarketPreviewDetail(slug)
+  const detail = getMarketplacePreviewDetail(slug)
   if (!detail) notFound()
 
   return (
-    <SonoMarketDetailPage
+    <MarketplaceDetailPage
       detail={detail}
       downloadCta={<MarketplaceDownloadButton project={detail.project} />}
     />

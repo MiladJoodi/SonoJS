@@ -11,7 +11,7 @@ import {
 } from "@/lib/marketplace-catalog"
 
 /** Card/list row for marketplace UI (live `/marketplace` hrefs). */
-export type SonoMarketPreviewItem = {
+export type MarketplacePreviewItem = {
   slug: string
   title: string
   tagline: string
@@ -32,7 +32,7 @@ export type SonoMarketPreviewItem = {
   catalogIndex: number
 }
 
-export type SonoMarketPreviewDetail = SonoMarketPreviewItem & {
+export type MarketplacePreviewDetail = MarketplacePreviewItem & {
   description: string
   version: string
   liveUrl: string
@@ -45,7 +45,7 @@ export type SonoMarketPreviewDetail = SonoMarketPreviewItem & {
   gallery: string[]
   badge: MarketplaceBadge | null
   access: "public" | "member" | "pro"
-  related: SonoMarketPreviewItem[]
+  related: MarketplacePreviewItem[]
   /** Full catalog project for download gating. */
   project: MarketplaceProject
 }
@@ -95,10 +95,10 @@ export function marketplaceDetailCoverSrcDark(
   )
 }
 
-export function toSonoMarketItem(
+export function toMarketplaceItem(
   project: MarketplaceProject,
   catalogIndex = 0
-): SonoMarketPreviewItem {
+): MarketplacePreviewItem {
   return {
     slug: project.slug,
     title: project.title,
@@ -119,30 +119,30 @@ export function toSonoMarketItem(
 
 /** Newest first: later `updatedAt`, then later catalog index. */
 export function compareMarketplaceNewest(
-  a: Pick<SonoMarketPreviewItem, "updatedAt" | "catalogIndex">,
-  b: Pick<SonoMarketPreviewItem, "updatedAt" | "catalogIndex">
+  a: Pick<MarketplacePreviewItem, "updatedAt" | "catalogIndex">,
+  b: Pick<MarketplacePreviewItem, "updatedAt" | "catalogIndex">
 ): number {
   const byDate = b.updatedAt.localeCompare(a.updatedAt)
   if (byDate !== 0) return byDate
   return b.catalogIndex - a.catalogIndex
 }
 
-export function getSonoMarketPreviewItems(): SonoMarketPreviewItem[] {
+export function getMarketplacePreviewItems(): MarketplacePreviewItem[] {
   return marketplaceProjects
     .map((p, i) => ({ p, i }))
     .filter(({ p }) => p.enabled)
-    .map(({ p, i }) => toSonoMarketItem(p, i))
+    .map(({ p, i }) => toMarketplaceItem(p, i))
     .sort(compareMarketplaceNewest)
 }
 
-export function getSonoMarketPreviewDetail(
+export function getMarketplacePreviewDetail(
   slug: string
-): SonoMarketPreviewDetail | null {
+): MarketplacePreviewDetail | null {
   const project = getMarketplaceProject(slug)
   if (!project || !project.enabled) return null
 
   const catalogIndex = marketplaceProjects.findIndex((p) => p.slug === slug)
-  const base = toSonoMarketItem(project, catalogIndex < 0 ? 0 : catalogIndex)
+  const base = toMarketplaceItem(project, catalogIndex < 0 ? 0 : catalogIndex)
   const cover = marketplaceDetailCoverSrc(project)
   const coverDark = marketplaceDetailCoverSrcDark(project)
 
@@ -166,7 +166,7 @@ export function getSonoMarketPreviewDetail(
       .filter((p) => p.enabled)
       .map((p) => {
         const i = marketplaceProjects.findIndex((x) => x.slug === p.slug)
-        return toSonoMarketItem(p, i < 0 ? 0 : i)
+        return toMarketplaceItem(p, i < 0 ? 0 : i)
       }),
     project,
   }

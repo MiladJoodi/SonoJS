@@ -8,21 +8,21 @@ import {
   MarketplaceOfferColumn,
   useMarketplaceOfferRail,
 } from "@/components/marketplace/marketplace-offer-column"
-import { SonoMarketFeaturedSection } from "@/components/sonomarket/featured-section"
-import { SonoMarketHero } from "@/components/sonomarket/hero"
-import { SonoMarketProductCard } from "@/components/sonomarket/product-card"
+import { MarketplaceFeaturedSection } from "@/components/marketplace/featured-section"
+import { MarketplaceHero } from "@/components/marketplace/hero"
+import { MarketplaceProductCard } from "@/components/marketplace/product-card"
 import {
-  applySonoMarketProductsFilter,
+  applyMarketplaceProductsFilter,
   EMPTY_PRODUCTS_FILTER,
-  SonoMarketProductsFilter,
-  SonoMarketProductsToolbar,
-  type SonoMarketProductsFilterState,
-  type SonoMarketSortKey,
-} from "@/components/sonomarket/products-filter"
+  MarketplaceProductsFilter,
+  MarketplaceProductsToolbar,
+  type MarketplaceProductsFilterState,
+  type MarketplaceSortKey,
+} from "@/components/marketplace/products-filter"
 import {
-  getSonoMarketPreviewItems,
-  type SonoMarketPreviewItem,
-} from "@/lib/sonomarket-preview-data"
+  getMarketplacePreviewItems,
+  type MarketplacePreviewItem,
+} from "@/lib/marketplace-preview-data"
 import type { MarketplaceCategory } from "@/lib/marketplace-catalog"
 import { cn } from "@/lib/utils"
 
@@ -39,7 +39,7 @@ const CATEGORY_IDS = [
   "hero",
 ] as const satisfies readonly MarketplaceCategory[]
 
-function parseSortParam(raw: string | null): SonoMarketSortKey {
+function parseSortParam(raw: string | null): MarketplaceSortKey {
   if (raw === "rating" || raw === "name") return raw
   return "default"
 }
@@ -58,9 +58,9 @@ export function MarketplaceCatalogPage() {
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const showOfferRail = useMarketplaceOfferRail()
-  const items = React.useMemo(() => getSonoMarketPreviewItems(), [])
+  const items = React.useMemo(() => getMarketplacePreviewItems(), [])
 
-  const [filters, setFilters] = React.useState<SonoMarketProductsFilterState>(
+  const [filters, setFilters] = React.useState<MarketplaceProductsFilterState>(
     () => ({
       ...EMPTY_PRODUCTS_FILTER,
       q: searchParams.get("q") ?? "",
@@ -71,7 +71,7 @@ export function MarketplaceCatalogPage() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = React.useState(false)
 
   const filtered = React.useMemo(
-    () => applySonoMarketProductsFilter(items, filters),
+    () => applyMarketplaceProductsFilter(items, filters),
     [items, filters]
   )
 
@@ -107,13 +107,13 @@ export function MarketplaceCatalogPage() {
 
   return (
     <div
-      data-sonomarket=""
+      data-marketplace=""
       className="min-h-0 flex-1 bg-[var(--sm-bg)] text-[var(--sm-text)]"
     >
-      <SonoMarketHero />
+      <MarketplaceHero />
 
       <div className="w-full py-8 lg:py-10">
-        <SonoMarketFeaturedSection items={items} />
+        <MarketplaceFeaturedSection items={items} />
       </div>
 
       <div className="mx-auto w-full max-w-[1600px] px-4 pb-6 sm:px-6 lg:px-8 lg:pb-8">
@@ -171,7 +171,7 @@ export function MarketplaceCatalogPage() {
               )}
             >
               <div className="lg:sticky lg:top-24">
-                <SonoMarketProductsFilter
+                <MarketplaceProductsFilter
                   items={items}
                   value={filters}
                   onChange={setFilters}
@@ -180,7 +180,7 @@ export function MarketplaceCatalogPage() {
             </div>
 
             <div className="min-w-0 space-y-4">
-              <SonoMarketProductsToolbar
+              <MarketplaceProductsToolbar
                 value={filters}
                 onChange={setFilters}
               />
@@ -199,8 +199,8 @@ export function MarketplaceCatalogPage() {
                     showOfferRail ? "xl:grid-cols-3" : "xl:grid-cols-4"
                   )}
                 >
-                  {filtered.map((item: SonoMarketPreviewItem) => (
-                    <SonoMarketProductCard key={item.slug} item={item} />
+                  {filtered.map((item: MarketplacePreviewItem) => (
+                    <MarketplaceProductCard key={item.slug} item={item} />
                   ))}
                 </div>
                 {filtered.length === 0 ? (

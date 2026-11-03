@@ -5,7 +5,7 @@ import { ArrowLeftIcon, Share2Icon } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
-export function SonoMarketDetailGallery({
+export function MarketplaceDetailGallery({
   title,
   image,
   imageDark,

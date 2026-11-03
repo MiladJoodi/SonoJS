@@ -3,7 +3,7 @@ import { StarIcon } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 /** Card: one lit star + score. Detail: five stars, lit by floor(rating). */
-export function SonoMarketStarRating({
+export function MarketplaceStarRating({
   rating,
   className,
   size = "sm",

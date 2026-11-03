@@ -2,12 +2,12 @@
 
 import * as React from "react"
 
-import { SonoMarketProductCard } from "@/components/sonomarket/product-card"
+import { MarketplaceProductCard } from "@/components/marketplace/product-card"
 import { useAutoDragScroll } from "@/hooks/use-auto-drag-scroll"
 import {
   compareMarketplaceNewest,
-  type SonoMarketPreviewItem,
-} from "@/lib/sonomarket-preview-data"
+  type MarketplacePreviewItem,
+} from "@/lib/marketplace-preview-data"
 import { cn } from "@/lib/utils"
 
 const TABS = ["Featured", "Popular", "New"] as const
@@ -16,7 +16,7 @@ function FeaturedMarquee({
   items,
   durationSec,
 }: {
-  items: SonoMarketPreviewItem[]
+  items: MarketplacePreviewItem[]
   durationSec: number
 }) {
   const ref = useAutoDragScroll(durationSec)
@@ -32,18 +32,18 @@ function FeaturedMarquee({
           key={`${item.slug}-${i}`}
           className="w-[260px] shrink-0 sm:w-[280px] lg:w-[300px]"
         >
-          <SonoMarketProductCard item={item} size="featured" />
+          <MarketplaceProductCard item={item} size="featured" />
         </div>
       ))}
     </div>
   )
 }
 
-export function SonoMarketFeaturedSection({
+export function MarketplaceFeaturedSection({
   items,
   className,
 }: {
-  items: SonoMarketPreviewItem[]
+  items: MarketplacePreviewItem[]
   className?: string
 }) {
   const [tab, setTab] = React.useState<(typeof TABS)[number]>("Featured")
@@ -64,7 +64,7 @@ export function SonoMarketFeaturedSection({
 
   return (
     <section
-      id="sonomarket-browse"
+      id="marketplace-browse"
       className={cn("w-full scroll-mt-24", className)}
     >
       <div className="mx-auto mb-4 flex w-full max-w-[1600px] items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">

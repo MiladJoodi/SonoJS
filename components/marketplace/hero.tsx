@@ -7,7 +7,7 @@ import { useTheme } from "next-themes"
 
 import { cn } from "@/lib/utils"
 
-export function SonoMarketHero({ className }: { className?: string }) {
+export function MarketplaceHero({ className }: { className?: string }) {
   const { resolvedTheme } = useTheme()
   const [mounted, setMounted] = React.useState(false)
   React.useEffect(() => setMounted(true), [])
@@ -26,7 +26,7 @@ export function SonoMarketHero({ className }: { className?: string }) {
         className="pointer-events-none absolute inset-0 select-none [&_img]:pointer-events-none [&_img]:select-none"
       >
         <Image
-          src="/marketplace/sonomarket/hero-bg-v2.png"
+          src="/marketplace/hero/hero-bg-v2.png"
           alt=""
           fill
           priority
@@ -38,7 +38,7 @@ export function SonoMarketHero({ className }: { className?: string }) {
           )}
         />
         <Image
-          src="/marketplace/sonomarket/hero-bg-light.png"
+          src="/marketplace/hero/hero-bg-light.png"
           alt=""
           fill
           priority

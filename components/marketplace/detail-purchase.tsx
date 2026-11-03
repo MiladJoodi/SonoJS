@@ -8,7 +8,7 @@ import {
   MARKETPLACE_BADGE_LABEL,
   type MarketplaceBadge,
 } from "@/lib/marketplace-catalog"
-import type { SonoMarketPreviewDetail } from "@/lib/sonomarket-preview-data"
+import type { MarketplacePreviewDetail } from "@/lib/marketplace-preview-data"
 import { cn } from "@/lib/utils"
 
 function formatDate(iso: string) {
@@ -23,7 +23,7 @@ function formatDate(iso: string) {
   }
 }
 
-function accessLabel(access: SonoMarketPreviewDetail["access"]) {
+function accessLabel(access: MarketplacePreviewDetail["access"]) {
   if (access === "pro") return "Pro only"
   if (access === "public") return "Everyone"
   return "Free account"
@@ -43,12 +43,12 @@ function badgeClass(badge: MarketplaceBadge) {
   return "bg-amber-500/95"
 }
 
-export function SonoMarketDetailPurchase({
+export function MarketplaceDetailPurchase({
   detail,
   downloadCta,
   className,
 }: {
-  detail: SonoMarketPreviewDetail
+  detail: MarketplacePreviewDetail
   downloadCta: ReactNode
   className?: string
 }) {
