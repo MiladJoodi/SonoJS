@@ -4,7 +4,7 @@ import * as React from "react"
 
 /**
  * Horizontal strip: soft auto-scroll + click-drag scrub.
- * Blocks native link/image URL drag. No grab cursor.
+ * Capture starts only after a real drag so card links still navigate.
  */
 export function useAutoDragScroll(durationSec: number) {
   const ref = React.useRef<HTMLDivElement>(null)
@@ -16,10 +16,12 @@ export function useAutoDragScroll(durationSec: number) {
     let setWidth = 0
     let down = false
     let dragged = false
+    let suppressClick = false
     let x0 = 0
     let left0 = 0
     let last = performance.now()
     let raf = 0
+    const DRAG_PX = 8
 
     const measure = () => {
       setWidth = el.scrollWidth / 3
@@ -27,8 +29,7 @@ export function useAutoDragScroll(durationSec: number) {
 
     const wrap = () => {
       if (setWidth <= 0) return
-      el.scrollLeft =
-        ((el.scrollLeft % setWidth) + setWidth) % setWidth
+      el.scrollLeft = ((el.scrollLeft % setWidth) + setWidth) % setWidth
     }
 
     const ro = new ResizeObserver(measure)
@@ -52,29 +53,44 @@ export function useAutoDragScroll(durationSec: number) {
       dragged = false
       x0 = e.clientX
       left0 = el.scrollLeft
-      el.setPointerCapture(e.pointerId)
     }
 
     const onMove = (e: PointerEvent) => {
       if (!down) return
       const dx = e.clientX - x0
-      if (Math.abs(dx) < 4) return
-      dragged = true
+      if (!dragged) {
+        if (Math.abs(dx) < DRAG_PX) return
+        dragged = true
+        try {
+          el.setPointerCapture(e.pointerId)
+        } catch {
+          /* capture optional */
+        }
+      }
       el.scrollLeft = left0 - dx
       wrap()
     }
 
-    const onUp = () => {
+    const onUp = (e: PointerEvent) => {
+      if (dragged) suppressClick = true
       down = false
+      dragged = false
+      try {
+        if (el.hasPointerCapture(e.pointerId)) {
+          el.releasePointerCapture(e.pointerId)
+        }
+      } catch {
+        /* ignore */
+      }
       last = performance.now()
       wrap()
     }
 
     const onClick = (e: MouseEvent) => {
-      if (!dragged) return
+      if (!suppressClick) return
       e.preventDefault()
       e.stopPropagation()
-      dragged = false
+      suppressClick = false
     }
 
     const blockNativeDrag = (e: Event) => e.preventDefault()

@@ -708,9 +708,9 @@ export const marketplaceProjects: MarketplaceProject[] = [
     slug: "sonojs-hero-01",
     title: "Otis",
     tagline:
-      "Grab his cartoon face and pull it like taffy — stretch, wobble, new expression, patience bar.",
+      "Grab his cartoon face and pull it like taffy: stretch, wobble, new expression, patience bar.",
     description:
-      "Otis is an interactive portfolio hero by SonoJS. Grab the cartoon face and pull it like taffy — it stretches into a tube, wobbles back, swaps to a new expression, and flushes red as the patience bar runs out. Built with Vite, React 19, TypeScript, Tailwind CSS 4, and a Canvas 2D face engine (no Three.js). Light and dark theme toggle, mood meter, and subscribe demo UI. Static build ready for GitHub Pages. Fork and rebrand the copy — keep the interaction.",
+      "Otis is an interactive portfolio hero. Grab the cartoon face and pull it like taffy: it stretches into a tube, wobbles back, swaps to a new expression, and flushes red as the patience bar runs out. Stack: Vite, React 19, TypeScript, Tailwind CSS 4, and a Canvas 2D face engine (no Three.js). Includes light and dark theme toggle, mood meter, and a subscribe demo UI. Static build ready for GitHub Pages.",
     category: "hero",
     stack: ["react", "vite", "typescript", "tailwind"],
     priceLabel: "Free",
@@ -746,7 +746,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       },
       {
         title: "Light and dark",
-        body: "One token set for page, ink, and cobalt disc — toggle in the header.",
+        body: "One token set for page, ink, and cobalt disc. Toggle theme in the header.",
       },
       {
         title: "Static and fork-ready",
