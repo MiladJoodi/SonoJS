@@ -216,7 +216,9 @@ function DocsSidebarBody({ className }: { className?: string }) {
                           className={SIDEBAR_GROUP_TRIGGER_CLASS}
                         >
                           <span className="min-w-0 flex-1 truncate text-start">
-                            {group.title}
+                            {group.title === COMPONENTS_FEATURED_GROUP
+                              ? "Featured 🔥"
+                              : group.title}
                           </span>
                           <span className={SIDEBAR_GROUP_COUNT_CLASS}>
                             {group.pages.length}

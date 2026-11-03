@@ -4254,7 +4254,6 @@ const registryItemsRaw = [
     title: "Clothes Rack",
     description:
       "A shop rail of 3D garments that swivel to face you, with cloth that moves like fabric.",
-    access: "member",
     dependencies: ["three", "@types/three"],
     files: [
       {

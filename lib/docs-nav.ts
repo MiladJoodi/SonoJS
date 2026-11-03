@@ -286,6 +286,18 @@ export function isComponentsDocsPath(pathname: string): boolean {
   return pathname === "/docs/components" || pathname.startsWith("/docs/components/")
 }
 
+/** Top-nav / index target — first page in the Featured spotlight group. */
+export function getFirstFeaturedComponentHref(): string {
+  const featured = componentsNav.groups.find(
+    (group) => group.title === COMPONENTS_FEATURED_GROUP
+  )
+  return (
+    featured?.pages[0]?.href ??
+    getDocsComponentPages()[0]?.href ??
+    "/docs"
+  )
+}
+
 export function getDocsCurrentLabel(pathname: string): string | null {
   if (isComponentsDocsPath(pathname)) {
     for (const page of componentsNav.top) {
