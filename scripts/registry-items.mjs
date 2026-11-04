@@ -4276,6 +4276,18 @@ const registryItemsRaw = [
         type: "registry:ui",
         target: "components/clothes-rack/garment-drapes.ts",
       },
+      ...[
+        "fleece-normal.webp",
+        "fleece-roughness.webp",
+        "heather-grain.webp",
+        "jersey-normal.webp",
+        "jersey-roughness.webp",
+        "studio-small-09.hdr",
+      ].map((name) => ({
+        path: `packages/ui/src/components/clothes-rack/textures/${name}`,
+        type: "registry:file",
+        target: `components/clothes-rack/textures/${name}`,
+      })),
     ],
   },
   {
@@ -4449,6 +4461,11 @@ const registryItemsRaw = [
         type: "registry:ui",
         target: "components/3d/scroll-trigger/index.tsx",
       },
+      ...["1", "2", "3", "4", "5"].map((n) => ({
+        path: `packages/ui/src/components/3d/scroll-trigger/images/avatar-${n}.webp`,
+        type: "registry:file",
+        target: `components/3d/scroll-trigger/images/avatar-${n}.webp`,
+      })),
     ],
   },
   {

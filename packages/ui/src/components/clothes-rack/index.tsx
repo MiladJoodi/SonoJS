@@ -56,10 +56,10 @@ export type ClothesRackProps = {
   /** How much of the box height a garment takes, from 0.25 to 0.62. Default 0.55. */
   size?: number;
   /**
-   * Photographic cloth and light: addresses of tiling fabric scans (normal and roughness maps of jersey for the tees
+   * Photographic cloth and light: URL strings for tiling fabric scans (normal and roughness maps of jersey for the tees
    * and the shirt and of fleece for the crewneck), a greyscale heather grain, and an equirect .hdr studio. All
-   * optional; without them the knit is drawn in code and the light is a plain room. The demo uses Poly Haven's CC0
-   * scans (Poly Haven CC0). The docs demo serves them from /media/3d/clothes-rack.
+   * optional; without them the knit is drawn in code and the light is a plain room. Demo scans ship next to the
+   * component under `textures/` (Poly Haven CC0) - import them and pass `.src` / string URLs here.
    */
   textures?: GarmentTextures;
   /** Extra classes for the outer box. Give it a size: the rack fills it. */

@@ -4,37 +4,46 @@ import {
   ScrollTriggerContainer,
   ScrollTriggerRow,
 } from "@sonojs/ui/components/3d/scroll-trigger"
+import avatar1 from "@sonojs/ui/components/3d/scroll-trigger/images/avatar-1.webp"
+import avatar2 from "@sonojs/ui/components/3d/scroll-trigger/images/avatar-2.webp"
+import avatar3 from "@sonojs/ui/components/3d/scroll-trigger/images/avatar-3.webp"
+import avatar4 from "@sonojs/ui/components/3d/scroll-trigger/images/avatar-4.webp"
+import avatar5 from "@sonojs/ui/components/3d/scroll-trigger/images/avatar-5.webp"
+
+function assetSrc(asset: string | { src: string }) {
+  return typeof asset === "string" ? asset : asset.src
+}
 
 const REVIEWS = [
   {
     text: "SonoJS made our design system feel consistent without slowing shipping. Components drop in clean and stay ours.",
     author: "Aria Thompson",
     company: "CreativePixel Studio",
-    avatar: "/media/3d/scroll-trigger/avatar-1.webp",
+    avatar: assetSrc(avatar1),
   },
   {
     text: "We stood up a full SaaS dashboard in days. The copy-source CLI and registry deps are exactly what we needed.",
     author: "Ethan Rivera",
     company: "CodeLoom Technologies",
-    avatar: "/media/3d/scroll-trigger/avatar-2.webp",
+    avatar: assetSrc(avatar2),
   },
   {
     text: "Flexible enough for product work, polished enough for marketing. Direction and tokens just work.",
     author: "Maya Chen",
     company: "Visionary Labs",
-    avatar: "/media/3d/scroll-trigger/avatar-3.webp",
+    avatar: assetSrc(avatar3),
   },
   {
     text: "From landing pages to dense tools, the same control scale keeps everything readable and on-brand.",
     author: "Liam Patel",
     company: "NextGen Interfaces",
-    avatar: "/media/3d/scroll-trigger/avatar-4.webp",
+    avatar: assetSrc(avatar4),
   },
   {
     text: "Motion, spacing, and component harmony make every screen feel intentional. Our team ships faster with less polish debt.",
     author: "Zoe Williams",
     company: "Studio Aurora",
-    avatar: "/media/3d/scroll-trigger/avatar-5.webp",
+    avatar: assetSrc(avatar5),
   },
 ]
 
