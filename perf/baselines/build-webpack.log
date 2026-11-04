@@ -1,0 +1,92 @@
+START Wed, 2026-11-04 17:43:54.53 
+npm warn Unknown env config "devdir". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+▲ Next.js 16.2.6 (webpack)
+- Environments: .env.local
+
+  Creating an optimized production build ...
+<w> [webpack.cache.PackFileCacheStrategy] Serializing big strings (153kiB) impacts deserialization performance (consider using Buffer instead and decode when needed)
+<w> [webpack.cache.PackFileCacheStrategy] Serializing big strings (153kiB) impacts deserialization performance (consider using Buffer instead and decode when needed)
+<w> [webpack.cache.PackFileCacheStrategy] Serializing big strings (152kiB) impacts deserialization performance (consider using Buffer instead and decode when needed)
+<w> [webpack.cache.PackFileCacheStrategy] Serializing big strings (152kiB) impacts deserialization performance (consider using Buffer instead and decode when needed)
+<w> [webpack.cache.PackFileCacheStrategy] Serializing big strings (152kiB) impacts deserialization performance (consider using Buffer instead and decode when needed)
+<w> [webpack.cache.PackFileCacheStrategy] Serializing big strings (152kiB) impacts deserialization performance (consider using Buffer instead and decode when needed)
+<w> [webpack.cache.PackFileCacheStrategy] Serializing big strings (153kiB) impacts deserialization performance (consider using Buffer instead and decode when needed)
+<w> [webpack.cache.PackFileCacheStrategy] Serializing big strings (153kiB) impacts deserialization performance (consider using Buffer instead and decode when needed)
+<w> [webpack.cache.PackFileCacheStrategy] Serializing big strings (152kiB) impacts deserialization performance (consider using Buffer instead and decode when needed)
+<w> [webpack.cache.PackFileCacheStrategy] Serializing big strings (152kiB) impacts deserialization performance (consider using Buffer instead and decode when needed)
+<w> [webpack.cache.PackFileCacheStrategy] Serializing big strings (152kiB) impacts deserialization performance (consider using Buffer instead and decode when needed)
+<w> [webpack.cache.PackFileCacheStrategy] Serializing big strings (152kiB) impacts deserialization performance (consider using Buffer instead and decode when needed)
+Failed to compile.
+
+./node_modules/@react-three/drei/core/AccumulativeShadows.js
+Module not found: Package path ./helpers/esm/extends is not exported from package E:\SonoJS\node_modules\@babel\runtime (see exports field in E:\SonoJS\node_modules\@babel\runtime\package.json)
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./node_modules/@react-three/drei/index.js
+./packages/ui/src/components/3d/model-viewer/index.tsx
+./registry/examples/3d/model-viewer/default.tsx
+./registry/examples/3d/model-viewer/_loaders.ts
+./registry/example-loaders.ts
+./components/docs/example-component-cache.ts
+./components/docs/variant-preview.tsx
+
+./node_modules/@react-three/drei/core/ArcballControls.js
+Module not found: Package path ./helpers/esm/extends is not exported from package E:\SonoJS\node_modules\@babel\runtime (see exports field in E:\SonoJS\node_modules\@babel\runtime\package.json)
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./node_modules/@react-three/drei/index.js
+./packages/ui/src/components/3d/model-viewer/index.tsx
+./registry/examples/3d/model-viewer/default.tsx
+./registry/examples/3d/model-viewer/_loaders.ts
+./registry/example-loaders.ts
+./components/docs/example-component-cache.ts
+./components/docs/variant-preview.tsx
+
+./node_modules/@react-three/drei/core/BBAnchor.js
+Module not found: Package path ./helpers/esm/extends is not exported from package E:\SonoJS\node_modules\@babel\runtime (see exports field in E:\SonoJS\node_modules\@babel\runtime\package.json)
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./node_modules/@react-three/drei/index.js
+./packages/ui/src/components/3d/model-viewer/index.tsx
+./registry/examples/3d/model-viewer/default.tsx
+./registry/examples/3d/model-viewer/_loaders.ts
+./registry/example-loaders.ts
+./components/docs/example-component-cache.ts
+./components/docs/variant-preview.tsx
+
+./node_modules/@react-three/drei/core/Billboard.js
+Module not found: Package path ./helpers/esm/extends is not exported from package E:\SonoJS\node_modules\@babel\runtime (see exports field in E:\SonoJS\node_modules\@babel\runtime\package.json)
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./node_modules/@react-three/drei/index.js
+./packages/ui/src/components/3d/model-viewer/index.tsx
+./registry/examples/3d/model-viewer/default.tsx
+./registry/examples/3d/model-viewer/_loaders.ts
+./registry/example-loaders.ts
+./components/docs/example-component-cache.ts
+./components/docs/variant-preview.tsx
+
+./node_modules/@react-three/drei/core/Bvh.js
+Module not found: Package path ./helpers/esm/extends is not exported from package E:\SonoJS\node_modules\@babel\runtime (see exports field in E:\SonoJS\node_modules\@babel\runtime\package.json)
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./node_modules/@react-three/drei/index.js
+./packages/ui/src/components/3d/model-viewer/index.tsx
+./registry/examples/3d/model-viewer/default.tsx
+./registry/examples/3d/model-viewer/_loaders.ts
+./registry/example-loaders.ts
+./components/docs/example-component-cache.ts
+./components/docs/variant-preview.tsx
+
+
+> Build failed because of webpack errors

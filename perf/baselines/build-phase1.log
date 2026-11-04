@@ -1,0 +1,786 @@
+START Wed, 2026-11-04 18:32:29.26
+npm warn Unknown env config "devdir". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+▲ Next.js 16.2.6 (Turbopack)
+- Environments: .env.local
+- Experiments (use with caution):
+  ⨯ turbopackFileSystemCacheForDev
+
+  Creating an optimized production build ...
+Turbopack build encountered 4 warnings:
+./registry/blocks/user-account/user-profile/user-profile-01/images/avatar.avif
+AVIF image not supported
+This version of Turbopack does not support AVIF images, will emit without optimization or encoding
+
+Import traces:
+  Server Component:
+    ./registry/blocks/user-account/user-profile/user-profile-01/images/avatar.avif
+    ./lib/docs-variant-examples.ts
+    ./app/(app)/docs/components/select/page.tsx
+
+  Client Component SSR:
+    ./registry/blocks/user-account/user-profile/user-profile-01/images/avatar.avif
+    ./registry/blocks/user-account/user-profile/user-profile-01/user-profile.tsx [Client Component SSR]
+    ./registry/blocks/user-account/user-profile/user-profile-01/user-profile.tsx [Server Component]
+    ./app/view/[name]/page.tsx [Server Component]
+
+
+./registry/blocks/user-account/user-profile/user-profile-02/images/avatar.avif
+AVIF image not supported
+This version of Turbopack does not support AVIF images, will emit without optimization or encoding
+
+Import traces:
+  Server Component:
+    ./registry/blocks/user-account/user-profile/user-profile-02/images/avatar.avif
+    ./lib/docs-variant-examples.ts
+    ./app/(app)/docs/components/select/page.tsx
+
+  Client Component SSR:
+    ./registry/blocks/user-account/user-profile/user-profile-02/images/avatar.avif
+    ./registry/blocks/user-account/user-profile/user-profile-02/user-profile.tsx [Client Component SSR]
+    ./registry/blocks/user-account/user-profile/user-profile-02/user-profile.tsx [Server Component]
+    ./app/view/[name]/page.tsx [Server Component]
+
+
+./registry/blocks/user-account/user-profile/user-profile-05/images/avatar.avif
+AVIF image not supported
+This version of Turbopack does not support AVIF images, will emit without optimization or encoding
+
+Import traces:
+  Server Component:
+    ./registry/blocks/user-account/user-profile/user-profile-05/images/avatar.avif
+    ./lib/docs-variant-examples.ts
+    ./app/(app)/docs/components/select/page.tsx
+
+  Client Component SSR:
+    ./registry/blocks/user-account/user-profile/user-profile-05/images/avatar.avif
+    ./registry/blocks/user-account/user-profile/user-profile-05/user-profile.tsx [Client Component SSR]
+    ./registry/blocks/user-account/user-profile/user-profile-05/user-profile.tsx [Server Component]
+    ./app/view/[name]/page.tsx [Server Component]
+
+
+./next.config.ts
+Encountered unexpected file in NFT list
+A file was traced that indicates that the whole project was traced unintentionally. Somewhere in the import trace below, there are:
+- filesystem operations (like path.join, path.resolve or fs.readFile), or
+- very dynamic requires (like require('./' + foo)).
+To resolve this, you can
+- remove them if possible, or
+- only use them in development, or
+- make sure they are statically scoped to some subfolder: path.join(process.cwd(), 'data', bar), or
+- add ignore comments: path.join(/*turbopackIgnore: true*/ process.cwd(), bar)
+
+Import trace:
+  Server Component:
+    ./next.config.ts
+    ./lib/docs-variant-examples.ts
+    ./app/(app)/docs/components/select/page.tsx
+
+
+✓ Compiled successfully in 2.5min
+  Running TypeScript ...
+  Finished TypeScript in 111s ...
+  Collecting page data using 7 workers ...
+  Generating static pages using 7 workers (0/323) ...
+  Generating static pages using 7 workers (80/323) 
+  Generating static pages using 7 workers (161/323) 
+  Generating static pages using 7 workers (242/323) 
+✓ Generating static pages using 7 workers (323/323) in 5.4s
+  Finalizing page optimization ...
+
+Route (app)
+┌ ƒ /
+├ ○ /_not-found
+├ ƒ /3d
+├ ƒ /3d/beam-circle
+├ ƒ /3d/beam-circle-3d
+├ ƒ /3d/clothes-rack
+├ ƒ /3d/glass-coin-carousel
+├ ƒ /3d/hanging-id-card
+├ ƒ /3d/hover-gallery
+├ ƒ /3d/image-marquee
+├ ƒ /3d/image-pageflip
+├ ƒ /3d/image-ring
+├ ƒ /3d/infinite-drift
+├ ƒ /3d/infinite-drift-2
+├ ƒ /3d/marquee
+├ ƒ /3d/model-viewer
+├ ƒ /3d/perspective-card
+├ ƒ /3d/plasma-globe
+├ ƒ /3d/scroll-trigger
+├ ƒ /3d/smokey-frame
+├ ƒ /account
+├ ƒ /api/account/ensure-plan
+├ ƒ /api/billing/checkout
+├ ƒ /api/billing/checkout-status
+├ ƒ /api/billing/invoices/[paymentId]
+├ ƒ /api/billing/portal
+├ ƒ /api/billing/summary
+├ ƒ /api/contact
+├ ƒ /api/marketplace/[slug]/download
+├ ƒ /api/pro/components/[slug]
+├ ƒ /api/pro/components/[slug]/archive
+├ ƒ /api/pro/registry
+├ ƒ /api/proxy
+├ ƒ /api/webhooks/clerk
+├ ƒ /api/webhooks/stripe
+├ ƒ /blocks
+├ ○ /blocks/[...slug]
+├ ƒ /blocks/ai-agents/agent-run-timeline
+├ ƒ /blocks/ai-agents/agent-workspace
+├ ƒ /blocks/ai-agents/ai-chat
+├ ƒ /blocks/ai-agents/ai-usage-chart
+├ ƒ /blocks/ai-agents/chat-composer
+├ ƒ /blocks/application-layouts/dashboard-layout
+├ ƒ /blocks/authentication/account-recovery
+├ ƒ /blocks/authentication/forgot-password
+├ ƒ /blocks/authentication/login
+├ ƒ /blocks/authentication/otp-verification
+├ ƒ /blocks/authentication/passkey-authentication
+├ ƒ /blocks/authentication/reset-password
+├ ƒ /blocks/authentication/signup
+├ ƒ /blocks/authentication/social-login
+├ ƒ /blocks/authentication/two-factor-authentication
+├ ƒ /blocks/calendar-scheduling/calendar
+├ ƒ /blocks/communication/activity-feed
+├ ƒ /blocks/communication/comments
+├ ƒ /blocks/communication/notification-center
+├ ƒ /blocks/content-publishing/article-layout
+├ ƒ /blocks/content-publishing/author-profile
+├ ƒ /blocks/content-publishing/blog-grid
+├ ƒ /blocks/content-publishing/changelog
+├ ƒ /blocks/content-publishing/reading-progress
+├ ƒ /blocks/dashboards-analytics/analytics-dashboard
+├ ƒ /blocks/dashboards-analytics/crypto-portfolio
+├ ƒ /blocks/dashboards-analytics/kpi-cards
+├ ƒ /blocks/data-tables/advanced-data-grid
+├ ƒ /blocks/data-tables/advanced-filters
+├ ƒ /blocks/data-tables/crud-management
+├ ƒ /blocks/data-tables/data-table
+├ ƒ /blocks/data-tables/row-actions
+├ ƒ /blocks/data-tables/table-toolbar
+├ ƒ /blocks/developer-tools/api-key-management
+├ ƒ /blocks/developer-tools/integrations
+├ ƒ /blocks/developer-tools/logs-viewer
+├ ƒ /blocks/developer-tools/webhook-management
+├ ƒ /blocks/ecommerce/checkout
+├ ƒ /blocks/ecommerce/order-confirmation
+├ ƒ /blocks/ecommerce/order-history
+├ ƒ /blocks/ecommerce/order-summary
+├ ƒ /blocks/ecommerce/order-tracking
+├ ƒ /blocks/ecommerce/product-categories
+├ ƒ /blocks/ecommerce/product-details
+├ ƒ /blocks/ecommerce/product-filter
+├ ƒ /blocks/ecommerce/product-list
+├ ƒ /blocks/ecommerce/product-review
+├ ƒ /blocks/ecommerce/reviews-and-ratings
+├ ƒ /blocks/ecommerce/shopping-cart
+├ ƒ /blocks/ecommerce/wishlist
+├ ƒ /blocks/feedback-states/access-denied
+├ ƒ /blocks/feedback-states/empty-state
+├ ƒ /blocks/feedback-states/error-state
+├ ƒ /blocks/feedback-states/maintenance
+├ ƒ /blocks/feedback-states/not-found
+├ ƒ /blocks/feedback-states/rate-limit
+├ ƒ /blocks/feedback-states/status-page
+├ ƒ /blocks/files-media/data-export
+├ ƒ /blocks/files-media/file-manager
+├ ƒ /blocks/files-media/file-upload
+├ ƒ /blocks/files-media/image-gallery
+├ ƒ /blocks/files-media/media-gallery
+├ ƒ /blocks/files-media/media-player
+├ ƒ /blocks/files-media/music-player
+├ ƒ /blocks/forms/application-form
+├ ƒ /blocks/forms/appointment-booking-form
+├ ƒ /blocks/forms/contact-form
+├ ƒ /blocks/forms/course-enrollment-form
+├ ƒ /blocks/forms/event-registration-form
+├ ƒ /blocks/forms/hotel-booking-form
+├ ƒ /blocks/forms/job-application-form
+├ ƒ /blocks/forms/product-order-form
+├ ƒ /blocks/forms/project-inquiry-form
+├ ƒ /blocks/forms/restaurant-reservation-form
+├ ƒ /blocks/marketing/banner
+├ ƒ /blocks/marketing/bento-grid
+├ ƒ /blocks/marketing/blog
+├ ƒ /blocks/marketing/content-section
+├ ƒ /blocks/marketing/cookie-consent
+├ ƒ /blocks/marketing/cta
+├ ƒ /blocks/marketing/faq
+├ ƒ /blocks/marketing/features
+├ ƒ /blocks/marketing/footer
+├ ƒ /blocks/marketing/hero
+├ ƒ /blocks/marketing/how-it-works
+├ ƒ /blocks/marketing/jumbotron
+├ ƒ /blocks/marketing/newsletter
+├ ƒ /blocks/marketing/offer-card
+├ ƒ /blocks/marketing/portfolio
+├ ƒ /blocks/marketing/pricing
+├ ƒ /blocks/marketing/social-links
+├ ƒ /blocks/marketing/stats
+├ ƒ /blocks/marketing/team
+├ ƒ /blocks/marketing/testimonials
+├ ƒ /blocks/navigation/breadcrumbs
+├ ƒ /blocks/navigation/command-menu
+├ ƒ /blocks/navigation/mega-menu
+├ ƒ /blocks/navigation/mobile-navigation
+├ ƒ /blocks/navigation/navbar
+├ ƒ /blocks/navigation/sidebar
+├ ƒ /blocks/navigation/tabs
+├ ƒ /blocks/onboarding/data-import
+├ ƒ /blocks/onboarding/progress-checklist
+├ ƒ /blocks/onboarding/setup-wizard
+├ ƒ /blocks/onboarding/workspace-setup
+├ ƒ /blocks/payments-billing/billing-history
+├ ƒ /blocks/payments-billing/billing-settings
+├ ƒ /blocks/payments-billing/invoice
+├ ƒ /blocks/payments-billing/payment-form
+├ ƒ /blocks/payments-billing/payment-methods
+├ ƒ /blocks/payments-billing/transfer-funds
+├ ƒ /blocks/payments-billing/usage-based-billing
+├ ƒ /blocks/search-filtering/filter-panel
+├ ƒ /blocks/search-filtering/search-results
+├ ƒ /blocks/user-account/account-settings
+├ ƒ /blocks/user-account/roles-and-permissions
+├ ƒ /blocks/user-account/team-members
+├ ƒ /blocks/user-account/user-profile
+├ ƒ /carousels
+├ ƒ /carousels/3d-bend-carousel
+├ ƒ /carousels/3d-carousel
+├ ƒ /carousels/3d-image-carousel
+├ ƒ /carousels/3d-image-slider
+├ ƒ /carousels/3d-slider
+├ ƒ /carousels/angled-slider
+├ ƒ /carousels/chain-carousel
+├ ƒ /carousels/cool-slide-gallery
+├ ƒ /carousels/stylish-carousel
+├ ƒ /charts
+├ ƒ /charts/[category]
+├ ƒ /charts/area
+├ ƒ /charts/thumb-export
+├ ƒ /charts/view/[id]
+├ ƒ /cursors
+├ ƒ /cursors/view/[id]
+├ ƒ /docs
+├ ƒ /docs/cli
+├ ƒ /docs/components
+├ ƒ /docs/components/accordion
+├ ƒ /docs/components/agent-activity
+├ ƒ /docs/components/agent-activity-2
+├ ƒ /docs/components/agent-code-block
+├ ƒ /docs/components/ai-sidebar
+├ ƒ /docs/components/alert
+├ ƒ /docs/components/alert-dialog
+├ ƒ /docs/components/approval-card
+├ ƒ /docs/components/attachment
+├ ƒ /docs/components/avatar
+├ ƒ /docs/components/badge
+├ ƒ /docs/components/breadcrumb
+├ ƒ /docs/components/bubble
+├ ƒ /docs/components/button
+├ ƒ /docs/components/button-group
+├ ƒ /docs/components/calendar
+├ ƒ /docs/components/card
+├ ƒ /docs/components/carousel
+├ ƒ /docs/components/checkbox
+├ ƒ /docs/components/citations
+├ ƒ /docs/components/clothes-rack
+├ ƒ /docs/components/code-block
+├ ƒ /docs/components/code-panel
+├ ƒ /docs/components/collapsible
+├ ƒ /docs/components/combobox
+├ ƒ /docs/components/command
+├ ƒ /docs/components/context-menu
+├ ƒ /docs/components/data-table
+├ ƒ /docs/components/date-picker
+├ ƒ /docs/components/dialog
+├ ƒ /docs/components/drawer
+├ ƒ /docs/components/dropdown-menu
+├ ƒ /docs/components/electro-border
+├ ƒ /docs/components/empty
+├ ƒ /docs/components/field
+├ ƒ /docs/components/file-diff
+├ ƒ /docs/components/fluid-orb
+├ ƒ /docs/components/hover-card
+├ ƒ /docs/components/image-generation
+├ ƒ /docs/components/image-generation-2
+├ ƒ /docs/components/inline-citation
+├ ƒ /docs/components/input
+├ ƒ /docs/components/input-group
+├ ƒ /docs/components/input-otp
+├ ƒ /docs/components/item
+├ ƒ /docs/components/kbd
+├ ƒ /docs/components/label
+├ ƒ /docs/components/loading-states
+├ ƒ /docs/components/marker
+├ ƒ /docs/components/marquee
+├ ƒ /docs/components/menubar
+├ ƒ /docs/components/message
+├ ƒ /docs/components/message-scroller
+├ ƒ /docs/components/mic-selector
+├ ƒ /docs/components/model-selector
+├ ƒ /docs/components/native-select
+├ ƒ /docs/components/navigation-menu
+├ ƒ /docs/components/open-in-chat
+├ ƒ /docs/components/pagination
+├ ƒ /docs/components/persona
+├ ƒ /docs/components/popover
+├ ƒ /docs/components/pro-button
+├ ƒ /docs/components/progress
+├ ƒ /docs/components/prompt-input
+├ ƒ /docs/components/prompt-input-2
+├ ƒ /docs/components/queue
+├ ƒ /docs/components/radio-group
+├ ƒ /docs/components/rainbow-button
+├ ƒ /docs/components/reasoning-text
+├ ƒ /docs/components/resizable
+├ ƒ /docs/components/scroll-area
+├ ƒ /docs/components/select
+├ ƒ /docs/components/selection-actions
+├ ƒ /docs/components/separator
+├ ƒ /docs/components/sheet
+├ ƒ /docs/components/skeleton
+├ ƒ /docs/components/slider
+├ ƒ /docs/components/sonner
+├ ƒ /docs/components/sortable
+├ ƒ /docs/components/spinner
+├ ƒ /docs/components/streaming-response
+├ ƒ /docs/components/structured-output
+├ ƒ /docs/components/switch
+├ ƒ /docs/components/table
+├ ƒ /docs/components/tabs
+├ ƒ /docs/components/task-rows
+├ ƒ /docs/components/terminal
+├ ƒ /docs/components/textarea
+├ ƒ /docs/components/thinking-orbs
+├ ƒ /docs/components/timeline
+├ ƒ /docs/components/toast
+├ ƒ /docs/components/todo-list
+├ ƒ /docs/components/toggle
+├ ƒ /docs/components/toggle-group
+├ ƒ /docs/components/tool-approval
+├ ƒ /docs/components/tooltip
+├ ƒ /docs/components/trace
+├ ƒ /docs/components/transcription
+├ ƒ /docs/components/tweet-card
+├ ƒ /docs/components/verified-badge
+├ ƒ /docs/components/voice-ai-orb
+├ ƒ /docs/components/voice-selector
+├ ƒ /docs/direction
+├ ƒ /docs/guide
+├ ƒ /docs/installation
+├ ƒ /docs/mcp
+├ ○ /forgot-password
+├ ƒ /marketplace
+├ ƒ /marketplace/[slug]
+├ ƒ /pricing
+├ ○ /robots.txt
+├ ○ /sign-in
+├ ○ /sign-in/verify
+├ ○ /sign-up
+├ ○ /sign-up/continue
+├ ○ /sitemap.xml
+├ ○ /sso-callback
+├ ƒ /tools
+├ ƒ /tools/endpoints
+├ ƒ /tools/markdown-editor
+└ ƒ /view/[name]
+
+
+ƒ Proxy (Middleware)
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
+END Wed, 2026-11-04 18:37:06.79 EC=0
+npm warn Unknown env config "devdir". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+▲ Next.js 16.2.6 (Turbopack)
+- Environments: .env.local
+- Experiments (use with caution):
+  ⨯ turbopackFileSystemCacheForDev
+
+  Creating an optimized production build ...
+Turbopack build encountered 4 warnings:
+./registry/blocks/user-account/user-profile/user-profile-01/images/avatar.avif
+AVIF image not supported
+This version of Turbopack does not support AVIF images, will emit without optimization or encoding
+
+Import traces:
+  Server Component:
+    ./registry/blocks/user-account/user-profile/user-profile-01/images/avatar.avif
+    ./lib/docs-variant-examples.ts
+    ./app/(app)/docs/components/select/page.tsx
+
+  Client Component SSR:
+    ./registry/blocks/user-account/user-profile/user-profile-01/images/avatar.avif
+    ./registry/blocks/user-account/user-profile/user-profile-01/user-profile.tsx [Client Component SSR]
+    ./registry/blocks/user-account/user-profile/user-profile-01/user-profile.tsx [Server Component]
+    ./app/view/[name]/page.tsx [Server Component]
+
+
+./registry/blocks/user-account/user-profile/user-profile-02/images/avatar.avif
+AVIF image not supported
+This version of Turbopack does not support AVIF images, will emit without optimization or encoding
+
+Import traces:
+  Server Component:
+    ./registry/blocks/user-account/user-profile/user-profile-02/images/avatar.avif
+    ./lib/docs-variant-examples.ts
+    ./app/(app)/docs/components/select/page.tsx
+
+  Client Component SSR:
+    ./registry/blocks/user-account/user-profile/user-profile-02/images/avatar.avif
+    ./registry/blocks/user-account/user-profile/user-profile-02/user-profile.tsx [Client Component SSR]
+    ./registry/blocks/user-account/user-profile/user-profile-02/user-profile.tsx [Server Component]
+    ./app/view/[name]/page.tsx [Server Component]
+
+
+./registry/blocks/user-account/user-profile/user-profile-05/images/avatar.avif
+AVIF image not supported
+This version of Turbopack does not support AVIF images, will emit without optimization or encoding
+
+Import traces:
+  Server Component:
+    ./registry/blocks/user-account/user-profile/user-profile-05/images/avatar.avif
+    ./lib/docs-variant-examples.ts
+    ./app/(app)/docs/components/select/page.tsx
+
+  Client Component SSR:
+    ./registry/blocks/user-account/user-profile/user-profile-05/images/avatar.avif
+    ./registry/blocks/user-account/user-profile/user-profile-05/user-profile.tsx [Client Component SSR]
+    ./registry/blocks/user-account/user-profile/user-profile-05/user-profile.tsx [Server Component]
+    ./app/view/[name]/page.tsx [Server Component]
+
+
+./next.config.ts
+Encountered unexpected file in NFT list
+A file was traced that indicates that the whole project was traced unintentionally. Somewhere in the import trace below, there are:
+- filesystem operations (like path.join, path.resolve or fs.readFile), or
+- very dynamic requires (like require('./' + foo)).
+To resolve this, you can
+- remove them if possible, or
+- only use them in development, or
+- make sure they are statically scoped to some subfolder: path.join(process.cwd(), 'data', bar), or
+- add ignore comments: path.join(/*turbopackIgnore: true*/ process.cwd(), bar)
+
+Import trace:
+  Server Component:
+    ./next.config.ts
+    ./lib/docs-variant-examples.ts
+    ./app/(app)/docs/components/select/page.tsx
+
+
+✓ Compiled successfully in 2.1min
+  Running TypeScript ...
+  Finished TypeScript in 111s ...
+  Collecting page data using 7 workers ...
+  Generating static pages using 7 workers (0/323) ...
+  Generating static pages using 7 workers (80/323) 
+  Generating static pages using 7 workers (161/323) 
+  Generating static pages using 7 workers (242/323) 
+✓ Generating static pages using 7 workers (323/323) in 4.3s
+  Finalizing page optimization ...
+
+Route (app)
+┌ ƒ /
+├ ○ /_not-found
+├ ƒ /3d
+├ ƒ /3d/beam-circle
+├ ƒ /3d/beam-circle-3d
+├ ƒ /3d/clothes-rack
+├ ƒ /3d/glass-coin-carousel
+├ ƒ /3d/hanging-id-card
+├ ƒ /3d/hover-gallery
+├ ƒ /3d/image-marquee
+├ ƒ /3d/image-pageflip
+├ ƒ /3d/image-ring
+├ ƒ /3d/infinite-drift
+├ ƒ /3d/infinite-drift-2
+├ ƒ /3d/marquee
+├ ƒ /3d/model-viewer
+├ ƒ /3d/perspective-card
+├ ƒ /3d/plasma-globe
+├ ƒ /3d/scroll-trigger
+├ ƒ /3d/smokey-frame
+├ ƒ /account
+├ ƒ /api/account/ensure-plan
+├ ƒ /api/billing/checkout
+├ ƒ /api/billing/checkout-status
+├ ƒ /api/billing/invoices/[paymentId]
+├ ƒ /api/billing/portal
+├ ƒ /api/billing/summary
+├ ƒ /api/contact
+├ ƒ /api/marketplace/[slug]/download
+├ ƒ /api/pro/components/[slug]
+├ ƒ /api/pro/components/[slug]/archive
+├ ƒ /api/pro/registry
+├ ƒ /api/proxy
+├ ƒ /api/webhooks/clerk
+├ ƒ /api/webhooks/stripe
+├ ƒ /blocks
+├ ○ /blocks/[...slug]
+├ ƒ /blocks/ai-agents/agent-run-timeline
+├ ƒ /blocks/ai-agents/agent-workspace
+├ ƒ /blocks/ai-agents/ai-chat
+├ ƒ /blocks/ai-agents/ai-usage-chart
+├ ƒ /blocks/ai-agents/chat-composer
+├ ƒ /blocks/application-layouts/dashboard-layout
+├ ƒ /blocks/authentication/account-recovery
+├ ƒ /blocks/authentication/forgot-password
+├ ƒ /blocks/authentication/login
+├ ƒ /blocks/authentication/otp-verification
+├ ƒ /blocks/authentication/passkey-authentication
+├ ƒ /blocks/authentication/reset-password
+├ ƒ /blocks/authentication/signup
+├ ƒ /blocks/authentication/social-login
+├ ƒ /blocks/authentication/two-factor-authentication
+├ ƒ /blocks/calendar-scheduling/calendar
+├ ƒ /blocks/communication/activity-feed
+├ ƒ /blocks/communication/comments
+├ ƒ /blocks/communication/notification-center
+├ ƒ /blocks/content-publishing/article-layout
+├ ƒ /blocks/content-publishing/author-profile
+├ ƒ /blocks/content-publishing/blog-grid
+├ ƒ /blocks/content-publishing/changelog
+├ ƒ /blocks/content-publishing/reading-progress
+├ ƒ /blocks/dashboards-analytics/analytics-dashboard
+├ ƒ /blocks/dashboards-analytics/crypto-portfolio
+├ ƒ /blocks/dashboards-analytics/kpi-cards
+├ ƒ /blocks/data-tables/advanced-data-grid
+├ ƒ /blocks/data-tables/advanced-filters
+├ ƒ /blocks/data-tables/crud-management
+├ ƒ /blocks/data-tables/data-table
+├ ƒ /blocks/data-tables/row-actions
+├ ƒ /blocks/data-tables/table-toolbar
+├ ƒ /blocks/developer-tools/api-key-management
+├ ƒ /blocks/developer-tools/integrations
+├ ƒ /blocks/developer-tools/logs-viewer
+├ ƒ /blocks/developer-tools/webhook-management
+├ ƒ /blocks/ecommerce/checkout
+├ ƒ /blocks/ecommerce/order-confirmation
+├ ƒ /blocks/ecommerce/order-history
+├ ƒ /blocks/ecommerce/order-summary
+├ ƒ /blocks/ecommerce/order-tracking
+├ ƒ /blocks/ecommerce/product-categories
+├ ƒ /blocks/ecommerce/product-details
+├ ƒ /blocks/ecommerce/product-filter
+├ ƒ /blocks/ecommerce/product-list
+├ ƒ /blocks/ecommerce/product-review
+├ ƒ /blocks/ecommerce/reviews-and-ratings
+├ ƒ /blocks/ecommerce/shopping-cart
+├ ƒ /blocks/ecommerce/wishlist
+├ ƒ /blocks/feedback-states/access-denied
+├ ƒ /blocks/feedback-states/empty-state
+├ ƒ /blocks/feedback-states/error-state
+├ ƒ /blocks/feedback-states/maintenance
+├ ƒ /blocks/feedback-states/not-found
+├ ƒ /blocks/feedback-states/rate-limit
+├ ƒ /blocks/feedback-states/status-page
+├ ƒ /blocks/files-media/data-export
+├ ƒ /blocks/files-media/file-manager
+├ ƒ /blocks/files-media/file-upload
+├ ƒ /blocks/files-media/image-gallery
+├ ƒ /blocks/files-media/media-gallery
+├ ƒ /blocks/files-media/media-player
+├ ƒ /blocks/files-media/music-player
+├ ƒ /blocks/forms/application-form
+├ ƒ /blocks/forms/appointment-booking-form
+├ ƒ /blocks/forms/contact-form
+├ ƒ /blocks/forms/course-enrollment-form
+├ ƒ /blocks/forms/event-registration-form
+├ ƒ /blocks/forms/hotel-booking-form
+├ ƒ /blocks/forms/job-application-form
+├ ƒ /blocks/forms/product-order-form
+├ ƒ /blocks/forms/project-inquiry-form
+├ ƒ /blocks/forms/restaurant-reservation-form
+├ ƒ /blocks/marketing/banner
+├ ƒ /blocks/marketing/bento-grid
+├ ƒ /blocks/marketing/blog
+├ ƒ /blocks/marketing/content-section
+├ ƒ /blocks/marketing/cookie-consent
+├ ƒ /blocks/marketing/cta
+├ ƒ /blocks/marketing/faq
+├ ƒ /blocks/marketing/features
+├ ƒ /blocks/marketing/footer
+├ ƒ /blocks/marketing/hero
+├ ƒ /blocks/marketing/how-it-works
+├ ƒ /blocks/marketing/jumbotron
+├ ƒ /blocks/marketing/newsletter
+├ ƒ /blocks/marketing/offer-card
+├ ƒ /blocks/marketing/portfolio
+├ ƒ /blocks/marketing/pricing
+├ ƒ /blocks/marketing/social-links
+├ ƒ /blocks/marketing/stats
+├ ƒ /blocks/marketing/team
+├ ƒ /blocks/marketing/testimonials
+├ ƒ /blocks/navigation/breadcrumbs
+├ ƒ /blocks/navigation/command-menu
+├ ƒ /blocks/navigation/mega-menu
+├ ƒ /blocks/navigation/mobile-navigation
+├ ƒ /blocks/navigation/navbar
+├ ƒ /blocks/navigation/sidebar
+├ ƒ /blocks/navigation/tabs
+├ ƒ /blocks/onboarding/data-import
+├ ƒ /blocks/onboarding/progress-checklist
+├ ƒ /blocks/onboarding/setup-wizard
+├ ƒ /blocks/onboarding/workspace-setup
+├ ƒ /blocks/payments-billing/billing-history
+├ ƒ /blocks/payments-billing/billing-settings
+├ ƒ /blocks/payments-billing/invoice
+├ ƒ /blocks/payments-billing/payment-form
+├ ƒ /blocks/payments-billing/payment-methods
+├ ƒ /blocks/payments-billing/transfer-funds
+├ ƒ /blocks/payments-billing/usage-based-billing
+├ ƒ /blocks/search-filtering/filter-panel
+├ ƒ /blocks/search-filtering/search-results
+├ ƒ /blocks/user-account/account-settings
+├ ƒ /blocks/user-account/roles-and-permissions
+├ ƒ /blocks/user-account/team-members
+├ ƒ /blocks/user-account/user-profile
+├ ƒ /carousels
+├ ƒ /carousels/3d-bend-carousel
+├ ƒ /carousels/3d-carousel
+├ ƒ /carousels/3d-image-carousel
+├ ƒ /carousels/3d-image-slider
+├ ƒ /carousels/3d-slider
+├ ƒ /carousels/angled-slider
+├ ƒ /carousels/chain-carousel
+├ ƒ /carousels/cool-slide-gallery
+├ ƒ /carousels/stylish-carousel
+├ ƒ /charts
+├ ƒ /charts/[category]
+├ ƒ /charts/area
+├ ƒ /charts/thumb-export
+├ ƒ /charts/view/[id]
+├ ƒ /cursors
+├ ƒ /cursors/view/[id]
+├ ƒ /docs
+├ ƒ /docs/cli
+├ ƒ /docs/components
+├ ƒ /docs/components/accordion
+├ ƒ /docs/components/agent-activity
+├ ƒ /docs/components/agent-activity-2
+├ ƒ /docs/components/agent-code-block
+├ ƒ /docs/components/ai-sidebar
+├ ƒ /docs/components/alert
+├ ƒ /docs/components/alert-dialog
+├ ƒ /docs/components/approval-card
+├ ƒ /docs/components/attachment
+├ ƒ /docs/components/avatar
+├ ƒ /docs/components/badge
+├ ƒ /docs/components/breadcrumb
+├ ƒ /docs/components/bubble
+├ ƒ /docs/components/button
+├ ƒ /docs/components/button-group
+├ ƒ /docs/components/calendar
+├ ƒ /docs/components/card
+├ ƒ /docs/components/carousel
+├ ƒ /docs/components/checkbox
+├ ƒ /docs/components/citations
+├ ƒ /docs/components/clothes-rack
+├ ƒ /docs/components/code-block
+├ ƒ /docs/components/code-panel
+├ ƒ /docs/components/collapsible
+├ ƒ /docs/components/combobox
+├ ƒ /docs/components/command
+├ ƒ /docs/components/context-menu
+├ ƒ /docs/components/data-table
+├ ƒ /docs/components/date-picker
+├ ƒ /docs/components/dialog
+├ ƒ /docs/components/drawer
+├ ƒ /docs/components/dropdown-menu
+├ ƒ /docs/components/electro-border
+├ ƒ /docs/components/empty
+├ ƒ /docs/components/field
+├ ƒ /docs/components/file-diff
+├ ƒ /docs/components/fluid-orb
+├ ƒ /docs/components/hover-card
+├ ƒ /docs/components/image-generation
+├ ƒ /docs/components/image-generation-2
+├ ƒ /docs/components/inline-citation
+├ ƒ /docs/components/input
+├ ƒ /docs/components/input-group
+├ ƒ /docs/components/input-otp
+├ ƒ /docs/components/item
+├ ƒ /docs/components/kbd
+├ ƒ /docs/components/label
+├ ƒ /docs/components/loading-states
+├ ƒ /docs/components/marker
+├ ƒ /docs/components/marquee
+├ ƒ /docs/components/menubar
+├ ƒ /docs/components/message
+├ ƒ /docs/components/message-scroller
+├ ƒ /docs/components/mic-selector
+├ ƒ /docs/components/model-selector
+├ ƒ /docs/components/native-select
+├ ƒ /docs/components/navigation-menu
+├ ƒ /docs/components/open-in-chat
+├ ƒ /docs/components/pagination
+├ ƒ /docs/components/persona
+├ ƒ /docs/components/popover
+├ ƒ /docs/components/pro-button
+├ ƒ /docs/components/progress
+├ ƒ /docs/components/prompt-input
+├ ƒ /docs/components/prompt-input-2
+├ ƒ /docs/components/queue
+├ ƒ /docs/components/radio-group
+├ ƒ /docs/components/rainbow-button
+├ ƒ /docs/components/reasoning-text
+├ ƒ /docs/components/resizable
+├ ƒ /docs/components/scroll-area
+├ ƒ /docs/components/select
+├ ƒ /docs/components/selection-actions
+├ ƒ /docs/components/separator
+├ ƒ /docs/components/sheet
+├ ƒ /docs/components/skeleton
+├ ƒ /docs/components/slider
+├ ƒ /docs/components/sonner
+├ ƒ /docs/components/sortable
+├ ƒ /docs/components/spinner
+├ ƒ /docs/components/streaming-response
+├ ƒ /docs/components/structured-output
+├ ƒ /docs/components/switch
+├ ƒ /docs/components/table
+├ ƒ /docs/components/tabs
+├ ƒ /docs/components/task-rows
+├ ƒ /docs/components/terminal
+├ ƒ /docs/components/textarea
+├ ƒ /docs/components/thinking-orbs
+├ ƒ /docs/components/timeline
+├ ƒ /docs/components/toast
+├ ƒ /docs/components/todo-list
+├ ƒ /docs/components/toggle
+├ ƒ /docs/components/toggle-group
+├ ƒ /docs/components/tool-approval
+├ ƒ /docs/components/tooltip
+├ ƒ /docs/components/trace
+├ ƒ /docs/components/transcription
+├ ƒ /docs/components/tweet-card
+├ ƒ /docs/components/verified-badge
+├ ƒ /docs/components/voice-ai-orb
+├ ƒ /docs/components/voice-selector
+├ ƒ /docs/direction
+├ ƒ /docs/guide
+├ ƒ /docs/installation
+├ ƒ /docs/mcp
+├ ○ /forgot-password
+├ ƒ /marketplace
+├ ƒ /marketplace/[slug]
+├ ƒ /pricing
+├ ○ /robots.txt
+├ ○ /sign-in
+├ ○ /sign-in/verify
+├ ○ /sign-up
+├ ○ /sign-up/continue
+├ ○ /sitemap.xml
+├ ○ /sso-callback
+├ ƒ /tools
+├ ƒ /tools/endpoints
+├ ƒ /tools/markdown-editor
+└ ƒ /view/[name]
+
+
+ƒ Proxy (Middleware)
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+

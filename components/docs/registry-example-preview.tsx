@@ -60,5 +60,12 @@ export function RegistryExamplePreview({ name }: { name: string }) {
     )
   }
 
-  return <Component />
+  return (
+    <div
+      data-sono-capture-root=""
+      className="relative flex w-full max-w-full items-center justify-center"
+    >
+      <Component />
+    </div>
+  )
 }

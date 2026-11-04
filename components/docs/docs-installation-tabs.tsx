@@ -118,9 +118,10 @@ export function DocsInstallationTabs({
     alsoNeedsRegistry.length > 0
       ? `npx @sonojs/ui@latest add ${alsoNeedsRegistry.join(" ")}`
       : null
-  const dependencyCommand = [registryAdd, manualNpmCommand]
-    .filter(Boolean)
-    .join(" && ")
+  // Separate steps — never chain with && (PowerShell 5.x rejects it).
+  const dependencyCommands = [registryAdd, manualNpmCommand].filter(
+    (c): c is string => Boolean(c)
+  )
 
   return (
     <Tabs defaultValue="command" className="gap-3">
@@ -176,15 +177,20 @@ export function DocsInstallationTabs({
           </p>
         ) : null}
 
-        {dependencyCommand ? (
+        {dependencyCommands.length > 0 ? (
           <div className="space-y-1.5">
             <p className="text-sm text-muted-foreground">
               Then install dependencies:
             </p>
-            <QuietCommand
-              command={dependencyCommand}
-              copyTooltip={copyTooltip}
-            />
+            <div className="flex flex-wrap items-center gap-2">
+              {dependencyCommands.map((command) => (
+                <QuietCommand
+                  key={command}
+                  command={command}
+                  copyTooltip={copyTooltip}
+                />
+              ))}
+            </div>
           </div>
         ) : null}
       </TabsContent>

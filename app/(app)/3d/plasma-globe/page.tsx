@@ -31,7 +31,7 @@ import { PlasmaGlobe } from "@/components/3d/plasma-globe"
 
 export default function Page() {
   return (
-    <div className="relative h-[380px] w-full overflow-hidden rounded-[12px] bg-[#020617] sm:h-[480px]">
+    <div className="relative h-[380px] w-full overflow-hidden rounded-[12px] bg-[linear-gradient(180deg,#eef6ff_0%,#f8fafc_48%,#e2e8f0_100%)] sm:h-[480px] dark:bg-[linear-gradient(180deg,#020617_0%,#0b1220_55%,#020617_100%)]">
       <PlasmaGlobe height="100%" />
     </div>
   )
@@ -49,7 +49,8 @@ export default async function PlasmaGlobeDocsPage() {
           <p className="leading-relaxed text-muted-foreground">
             Procedural plasma sphere rendered with OGL - multiple filaments,
             volumetric glow, and optional pointer tilt. The canvas is
-            transparent by default so any stage color shows through. Respects{" "}
+            transparent, so light and dark stage colors both show through.
+            Respects{" "}
             <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
               prefers-reduced-motion
             </code>
@@ -61,8 +62,8 @@ export default async function PlasmaGlobeDocsPage() {
       <section className="space-y-4">
         <ComponentVariantPreview
           examples={examples}
-          previewSurface="card"
-          previewClassName="bg-black p-0"
+          previewSurface="canvas"
+          previewClassName="p-0"
         />
       </section>
 

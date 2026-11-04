@@ -1,13 +1,17 @@
-import Link from "next/link"
-
+import { CatalogSection } from "@/components/catalog/catalog-section"
+import { CatalogThumbCard } from "@/components/catalog/catalog-thumb-card"
+import {
+  carouselSlugFromHref,
+  carouselThumbSrc,
+  hasCarouselThumb,
+} from "@/components/carousels/gallery"
 import { getCarouselsPages } from "@/lib/carousels-nav"
 import { pageMetadata } from "@/lib/seo"
-import { SidebarNavBadge, SidebarNavBullet } from "@/components/sidebar-nav"
 
 export const metadata = pageMetadata({
   title: "Carousels",
   description:
-    "Browse SonoJS carousel components - 3D image stacks, swipe decks, and more. Install with the CLI.",
+    "Installable carousels for React — preview live, then add with the CLI.",
   path: "/carousels",
 })
 
@@ -19,33 +23,25 @@ export default function CarouselsIndexPage() {
       <header className="space-y-2">
         <h1 className="text-h1">Carousels</h1>
         <p className="text-muted-foreground">
-          Swipeable decks and image carousels you can install and own. Open a
-          page for a live preview, install command, and source.
-        </p>
-        <p className="text-sm text-muted-foreground">
-          {pages.length} component{pages.length === 1 ? "" : "s"}
+          Installable carousels for React — preview live, then add with the CLI.
         </p>
       </header>
 
-      <ul className="grid gap-3 sm:grid-cols-2">
-        {pages.map((page) => (
-          <li key={page.href}>
-            <Link
+      <CatalogSection title="Components" count={pages.length} showHeader={false}>
+        {pages.map((page) => {
+          const slug = carouselSlugFromHref(page.href)
+          const src = hasCarouselThumb(slug) ? carouselThumbSrc(slug) : undefined
+          return (
+            <CatalogThumbCard
+              key={page.href}
               href={page.href}
-              prefetch={false}
-              className="flex cursor-pointer items-center gap-2 rounded-[12px] border border-border/70 bg-card px-4 py-3 shadow-soft transition-colors hover:bg-muted/40"
-            >
-              <SidebarNavBullet featured={page.featured} />
-              <span className="min-w-0 flex-1 truncate font-medium">
-                {page.title}
-              </span>
-              {page.badge === "new" ? (
-                <SidebarNavBadge>New</SidebarNavBadge>
-              ) : null}
-            </Link>
-          </li>
-        ))}
-      </ul>
+              title={page.title}
+              lightSrc={src}
+              darkSrc={src}
+            />
+          )
+        })}
+      </CatalogSection>
     </article>
   )
 }

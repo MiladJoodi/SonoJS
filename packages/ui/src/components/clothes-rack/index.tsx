@@ -252,7 +252,13 @@ export function ClothesRack({
 
     let renderer: THREE.WebGLRenderer;
     try {
-      renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: "high-performance" });
+      renderer = new THREE.WebGLRenderer({
+        canvas,
+        antialias: true,
+        alpha: true,
+        preserveDrawingBuffer: true,
+        powerPreference: "high-performance",
+      });
     } catch {
       canvas.remove();
       setFailed(true);
@@ -806,7 +812,13 @@ export function ClothesRack({
       stageBox!.prepend(c);
       let r: THREE.WebGLRenderer;
       try {
-        r = new THREE.WebGLRenderer({ canvas: c, antialias: true, alpha: true, powerPreference: "high-performance" });
+        r = new THREE.WebGLRenderer({
+          canvas: c,
+          antialias: true,
+          alpha: true,
+          preserveDrawingBuffer: true,
+          powerPreference: "high-performance",
+        });
       } catch {
         c.remove();
         return null;

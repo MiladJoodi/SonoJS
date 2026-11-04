@@ -86,12 +86,6 @@ export const threeDNav: {
           featured: true,
         },
         {
-          title: "Marquee",
-          href: "/3d/marquee",
-          badge: "new",
-          featured: true,
-        },
-        {
           title: "Model Viewer",
           href: "/3d/model-viewer",
           badge: "new",

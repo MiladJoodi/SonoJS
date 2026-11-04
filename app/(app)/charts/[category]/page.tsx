@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 
-import { ChartGallery } from "@/components/charts"
+import { ChartGallery } from "@/components/charts/gallery"
 import {
   CHART_CATEGORY_META,
   getChartCategoryIcon,

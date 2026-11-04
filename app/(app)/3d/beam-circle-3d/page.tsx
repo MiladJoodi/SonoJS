@@ -20,7 +20,7 @@ const exampleDefs = [
     name: "beam-circle-3d-default",
     title: "Default",
     description:
-      "Semi-circle arcs with shipped tech marks (React, TypeScript, Tailwind) and a Next.js hub. Icons install under `icons/`.",
+      "Semi-circle arcs with shipped tech marks (React, Vite, Tailwind) and a Next.js hub. Icons install under `icons/`.",
   },
 ]
 

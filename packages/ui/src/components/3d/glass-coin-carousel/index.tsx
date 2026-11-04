@@ -275,7 +275,11 @@ export function GlassCoinCarousel({
     const canvas = canvasRef.current
     if (!container || !canvas) return
 
-    const gl = canvas.getContext("webgl2", { alpha: true, antialias: true })
+    const gl = canvas.getContext("webgl2", {
+      alpha: true,
+      antialias: true,
+      preserveDrawingBuffer: true,
+    })
     if (!gl) return
 
     gl.clearColor(0, 0, 0, 0)

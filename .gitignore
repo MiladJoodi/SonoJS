@@ -31,6 +31,9 @@ desktop.ini
 *.tmp
 *.local
 
+# Local Chrome user-data for chart/thumb screenshots (never scan / commit)
+.tmp-chrome-thumbs/
+
 # Local registry backups (must not be publicly served under public/)
 /_backups/
 # Atomic-write leftovers from registry:build (never commit / never serve)

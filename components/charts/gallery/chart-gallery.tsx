@@ -2,6 +2,7 @@
 
 import * as React from "react"
 
+import { CATALOG_THUMB_GRID_CLASS } from "@/components/catalog/catalog-grid"
 import {
   CHART_CATEGORIES,
   CHART_CATEGORY_META,
@@ -162,7 +163,7 @@ export function ChartGallery({
               </div>
             ) : null}
 
-            <div className="grid grid-cols-[repeat(auto-fill,minmax(min(100%,220px),1fr))] gap-2">
+            <div className={CATALOG_THUMB_GRID_CLASS}>
               {entries.map((entry) => (
                 <ChartExampleCard
                   key={entry.id}

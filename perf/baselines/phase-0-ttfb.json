@@ -1,0 +1,37 @@
+﻿[
+    {
+        "path":  "/blocks/authentication/login",
+        "status":  200,
+        "ttfb_avg_ms":  295,
+        "ttfb_samples":  "310,290,285",
+        "body_bytes":  399022
+    },
+    {
+        "path":  "/blocks/marketing/faq",
+        "status":  200,
+        "ttfb_avg_ms":  379,
+        "ttfb_samples":  "356,434,346",
+        "body_bytes":  515841
+    },
+    {
+        "path":  "/charts",
+        "status":  200,
+        "ttfb_avg_ms":  303,
+        "ttfb_samples":  "305,309,296",
+        "body_bytes":  436166
+    },
+    {
+        "path":  "/charts/view/simple-bar-chart",
+        "status":  200,
+        "ttfb_avg_ms":  725,
+        "ttfb_samples":  "755,704,715",
+        "body_bytes":  641956
+    },
+    {
+        "path":  "/docs",
+        "status":  200,
+        "ttfb_avg_ms":  65,
+        "ttfb_samples":  "65,62,68",
+        "body_bytes":  73038
+    }
+]

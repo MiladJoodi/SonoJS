@@ -64,6 +64,8 @@ const handlers = createToolHandlers({ registryUrl: registryPath })
   assert.ok(alsoNeeds.includes("date-fns"))
   assert.ok(alsoNeeds.includes("react-day-picker@^9.14.0"))
   assert.ok(!alsoNeeds.includes("clsx"))
+  assert.ok(!alsoNeeds.includes("&&"))
+  assert.ok(alsoNeeds.includes("\n"))
 }
 
 {

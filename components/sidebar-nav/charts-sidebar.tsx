@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation"
 import {
   CHARTS_GALLERY_ACTIVE_EVENT,
   chartGallerySectionId,
-} from "@/components/charts"
+} from "@/components/charts/gallery"
 import {
   chartsNav,
   getChartsActiveCategoryId,

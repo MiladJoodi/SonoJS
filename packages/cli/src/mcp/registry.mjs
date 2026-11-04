@@ -105,7 +105,8 @@ export function buildAddCommand(name, { registryDeps = [], npmDeps = [] } = {}) 
   }
   return {
     command: add,
-    alsoNeeds: also.length ? also.join(" && ") : null,
+    // Newline-separated — no && (PowerShell 5.x) or ; chaining.
+    alsoNeeds: also.length ? also.join("\n") : null,
   }
 }
 

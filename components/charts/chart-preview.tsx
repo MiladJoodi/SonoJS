@@ -51,11 +51,11 @@ export function ChartPreview({
   return (
     <div
       className={cn(
-        "w-full min-w-0 overflow-hidden rounded-[12px] border border-border/70 bg-card",
+        "w-full min-w-0 overflow-hidden rounded-[12px] border border-border/70",
         className
       )}
     >
-      <div className="flex flex-col gap-2 rounded-t-[12px] border-b border-border/80 bg-muted/30 px-3 py-2 sm:flex-row sm:items-center sm:justify-between sm:gap-3">
+      <div className="flex flex-col gap-2 rounded-t-[12px] border-b border-border/80 bg-card px-3 py-2 sm:flex-row sm:items-center sm:justify-between sm:gap-3">
         <div className="flex min-w-0 flex-wrap items-center gap-2">
           {displayTitle ? (
             <span className="min-w-0 max-w-40 shrink truncate rounded-md px-2 py-1.5 font-mono text-[12.5px] text-muted-foreground sm:max-w-64">
@@ -109,7 +109,7 @@ export function ChartPreview({
         <DirectionProvider
           dir={dir}
           className={cn(
-            "flex w-full min-w-0 max-w-none justify-center bg-card p-4 md:p-6",
+            "flex w-full min-w-0 max-w-none justify-center p-4 md:p-6",
             fullWidth && "md:p-8"
           )}
         >

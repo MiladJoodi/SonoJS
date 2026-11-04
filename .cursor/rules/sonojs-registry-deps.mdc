@@ -37,7 +37,7 @@ Use shared `DocsInstallation` on every component docs page. Same visual language
 Renders:
 
 1. Code player - only `npx @sonojs/ui@latest add <name>`
-2. Soft bar under it when the item has deps - **Also needs** `npx … add button && npm i date-fns lucide-react react-day-picker` (command only; no duplicate name list)
+2. Soft bar under it when the item has deps - **Also needs** separate copyable commands (no `&&` / `;` chaining — PowerShell 5.x safe): `npx … add button` and `npm i date-fns lucide-react react-day-picker`
 
 - `registryDependencies` → `npx @sonojs/ui@latest add …`
 - npm `dependencies` → `npm i …` for notable packages (**include** `lucide-react`, `react-day-picker`, `date-fns`, …)

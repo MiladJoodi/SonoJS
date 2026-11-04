@@ -8,17 +8,28 @@ import OfferCard03 from "@/registry/blocks/marketing/offer-card/offer-card-03/of
 import OfferCard04 from "@/registry/blocks/marketing/offer-card/offer-card-04/offer-card"
 import OfferCard05 from "@/registry/blocks/marketing/offer-card/offer-card-05/offer-card"
 import OfferCard06 from "@/registry/blocks/marketing/offer-card/offer-card-06/offer-card"
+import OfferCard07 from "@/registry/blocks/marketing/offer-card/offer-card-07/offer-card"
 
 import { blocksPageMetadata } from "@/lib/seo"
 
 export const metadata = blocksPageMetadata(
   "/blocks/marketing/offer-card",
   "Offer Card",
-  "Pro upsell offer cards - meteor borders, tiers, and a full-width ping/aurora sidebar CTA. Preview and install with the SonoJS CLI."
+  "Pro upsell offer cards - meteor borders, tiers, a full-width ping/aurora CTA, and a floating corner promo. Preview and install with the SonoJS CLI."
 )
 
 const usage = (name: string) =>
-  `import OfferCard from "@/components/blocks/marketing/${name}/offer-card"
+  name === "offer-card-07"
+    ? `import OfferCard from "@/components/blocks/marketing/offer-card-07/offer-card"
+
+export default function Page() {
+  return (
+    <div className="fixed start-6 bottom-6 z-50">
+      <OfferCard />
+    </div>
+  )
+}`
+    : `import OfferCard from "@/components/blocks/marketing/${name}/offer-card"
 
 export default function Page() {
   return <OfferCard />
@@ -48,7 +59,7 @@ export default function BlockOfferCardDocsPage() {
       <BlocksPageHeader
         title="Offer Card"
         pathname="/blocks/marketing/offer-card"
-        description="Pro upsell cards - meteor borders on 01–05 (default speed 0.9), plus a full-width green-ping + aurora headline CTA (06)."
+        description="Pro upsell cards - meteor borders on 01–05 (default speed 0.9), full-width green-ping + aurora CTA (06), and a floating corner promo with star hero (07)."
       />
 
       <div className="flex flex-col gap-8">
@@ -119,6 +130,19 @@ export default function BlockOfferCardDocsPage() {
         >
           <div className="flex w-full justify-center">
             <OfferCard06 />
+          </div>
+        </BlockExample>
+
+        <ExampleRule />
+
+        <BlockExample
+          name="offer-card-07"
+          usage={[{ title: "app/page.tsx", code: usage("offer-card-07") }]}
+          {...shell}
+        >
+          <div className="flex w-full justify-center">
+            {/* Keep mounted in docs preview — Close / CTA are visual-only here. */}
+            <OfferCard07 open />
           </div>
         </BlockExample>
       </div>

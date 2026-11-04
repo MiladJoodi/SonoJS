@@ -174,6 +174,8 @@ import OfferCard02 from "@/registry/blocks/marketing/offer-card/offer-card-02/of
 import OfferCard03 from "@/registry/blocks/marketing/offer-card/offer-card-03/offer-card"
 import OfferCard04 from "@/registry/blocks/marketing/offer-card/offer-card-04/offer-card"
 import OfferCard05 from "@/registry/blocks/marketing/offer-card/offer-card-05/offer-card"
+import OfferCard06 from "@/registry/blocks/marketing/offer-card/offer-card-06/offer-card"
+import OfferCard07 from "@/registry/blocks/marketing/offer-card/offer-card-07/offer-card"
 import Stats01 from "@/registry/blocks/marketing/stats/stats-01/stats"
 import Stats02 from "@/registry/blocks/marketing/stats/stats-02/stats"
 import Stats03 from "@/registry/blocks/marketing/stats/stats-03/stats"
@@ -1660,6 +1662,24 @@ const views: Record<string, ComponentType> = {
       <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-4 py-10 sm:px-6 md:px-10 md:py-14">
         <div className="flex w-full max-w-[300px] justify-center">
           <OfferCard05 />
+        </div>
+      </div>
+    )
+  },
+  "offer-card-06": function OfferCard06View() {
+    return (
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-4 py-10 sm:px-6 md:px-10 md:py-14">
+        <div className="flex w-full max-w-[300px] justify-center">
+          <OfferCard06 />
+        </div>
+      </div>
+    )
+  },
+  "offer-card-07": function OfferCard07View() {
+    return (
+      <div className="flex min-h-svh w-full items-center justify-center bg-canvas px-4 py-10 sm:px-6 md:px-10 md:py-14">
+        <div className="flex w-full max-w-[292px] justify-center">
+          <OfferCard07 open />
         </div>
       </div>
     )

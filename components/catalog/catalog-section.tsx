@@ -1,5 +1,6 @@
 import type { ReactNode } from "react"
 
+import { CATALOG_THUMB_GRID_CLASS } from "@/components/catalog/catalog-grid"
 import { cn } from "@/lib/utils"
 
 export function CatalogSection({
@@ -9,6 +10,7 @@ export function CatalogSection({
   icon,
   children,
   className,
+  gridClassName,
   showHeader = true,
 }: {
   id?: string
@@ -17,6 +19,8 @@ export function CatalogSection({
   icon?: ReactNode
   children: ReactNode
   className?: string
+  /** Override the shared catalog thumb grid. */
+  gridClassName?: string
   showHeader?: boolean
 }) {
   return (
@@ -45,7 +49,7 @@ export function CatalogSection({
         </div>
       ) : null}
 
-      <div className="grid grid-cols-[repeat(auto-fill,minmax(min(100%,220px),1fr))] gap-2">
+      <div className={cn(CATALOG_THUMB_GRID_CLASS, gridClassName)}>
         {children}
       </div>
     </section>

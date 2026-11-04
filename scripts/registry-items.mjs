@@ -4572,9 +4572,9 @@ const registryItemsRaw = [
         target: "components/3d/beam-circle-3d/icons/nextjs.tsx",
       },
       {
-        path: "packages/ui/src/components/3d/beam-circle-3d/icons/typescript.tsx",
+        path: "packages/ui/src/components/3d/beam-circle-3d/icons/vite.tsx",
         type: "registry:component",
-        target: "components/3d/beam-circle-3d/icons/typescript.tsx",
+        target: "components/3d/beam-circle-3d/icons/vite.tsx",
       },
       {
         path: "packages/ui/src/components/3d/beam-circle-3d/icons/tailwind.tsx",

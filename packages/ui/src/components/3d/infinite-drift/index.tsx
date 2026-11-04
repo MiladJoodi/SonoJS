@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import * as THREE from "three"
 
 import { cn } from "@sonojs/ui/lib/utils"
 
@@ -69,24 +70,34 @@ export type InfiniteDriftProps = {
   imageHeight?: number
   bandHeight?: number
   maxImageWidth?: number
+  /** Soft corner radius for each tile (px). Default 14. */
+  imageRadius?: number
   inertia?: number
   preserveOriginalRatios?: boolean
   className?: string
   children?: React.ReactNode
 }
 
+/** Design-time stage height the default offsets were authored against. */
+const DESIGN_HEIGHT = 760
+
+/**
+ * Five parallel lanes at design height 760.
+ * Step 160 keeps ~60px clear air between imageHeight-100 tiles so the
+ * bottom pair cannot visually merge (shadows / curve no longer bridge).
+ */
 const DEFAULT_BANDS: InfiniteDriftBand[] = [
   {
-    offsetY: -220,
+    offsetY: -320,
     speed: 1,
     rotation: 7,
-    rotationType: "fromLeft",
+    rotationType: "fromCenter",
     curveAmount: 40,
     curveDirection: 1,
     images: BUNDLED.slice(0, 4),
   },
   {
-    offsetY: -110,
+    offsetY: -160,
     speed: 1.3,
     rotation: 7,
     rotationType: "fromCenter",
@@ -98,58 +109,163 @@ const DEFAULT_BANDS: InfiniteDriftBand[] = [
     offsetY: 0,
     speed: 0.7,
     rotation: 7,
+    rotationType: "fromCenter",
     curveAmount: 40,
     curveDirection: 1,
     images: BUNDLED.slice(8, 12),
   },
   {
-    offsetY: 110,
+    offsetY: 160,
     speed: 1.2,
     rotation: 7,
+    rotationType: "fromCenter",
     curveAmount: 40,
     curveDirection: 1,
     images: BUNDLED.slice(12, 16),
   },
   {
-    offsetY: 220,
+    offsetY: 320,
     speed: 0.9,
     rotation: 7,
+    rotationType: "fromCenter",
     curveAmount: 35,
     curveDirection: 1,
     images: BUNDLED.slice(16, 20),
   },
 ]
 
-const glslMod = (a: number, b: number) => ((a % b) + b) % b
-
-const rotate2dPt = (
-  px: number,
-  py: number,
-  cx: number,
-  cy: number,
-  angle: number
-): [number, number] => {
-  const dx = px - cx
-  const dy = py - cy
-  const c = Math.cos(angle)
-  const s = Math.sin(angle)
-  return [cx + c * dx - s * dy, cy + s * dx + c * dy]
+function roundedPath(
+  ctx: CanvasRenderingContext2D,
+  x: number,
+  y: number,
+  w: number,
+  h: number,
+  radius: number
+) {
+  const r = Math.max(0, Math.min(radius, w / 2, h / 2))
+  ctx.beginPath()
+  if (r <= 0) {
+    ctx.rect(x, y, w, h)
+  } else if (typeof ctx.roundRect === "function") {
+    ctx.roundRect(x, y, w, h, r)
+  } else {
+    ctx.moveTo(x + r, y)
+    ctx.arcTo(x + w, y, x + w, y + h, r)
+    ctx.arcTo(x + w, y + h, x, y + h, r)
+    ctx.arcTo(x, y + h, x, y, r)
+    ctx.arcTo(x, y, x + w, y, r)
+    ctx.closePath()
+  }
 }
 
-type BandState = {
-  config: InfiniteDriftBand
-  stripCanvas: HTMLCanvasElement
-  sequenceWidth: number
-  ready: boolean
+function drawRoundedImage(
+  ctx: CanvasRenderingContext2D,
+  img: CanvasImageSource,
+  x: number,
+  y: number,
+  w: number,
+  h: number,
+  radius: number
+) {
+  // Soft corners only — no drop shadow (shadows were bridging lane gaps).
+  ctx.save()
+  roundedPath(ctx, x, y, w, h, radius)
+  ctx.clip()
+  ctx.drawImage(img, x, y, w, h)
+  ctx.restore()
 }
+
+const VERTEX_SHADER = /* glsl */ `
+  varying vec2 vUv;
+  void main() {
+    vUv = uv;
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+  }
+`
+
+const FRAGMENT_SHADER = /* glsl */ `
+  precision highp float;
+  uniform vec2 uResolution;
+  uniform sampler2D uTexture;
+  uniform float uTextureWidth;
+  uniform float uSequenceWidth;
+  uniform float uBandHeight;
+  uniform float uScroll;
+  uniform float uSpeed;
+  uniform float uOffsetY;
+  uniform float uRotation;
+  uniform float uRotationType;
+  uniform float uHasRotation;
+  uniform float uCurveAmount;
+  uniform float uCurveDirection;
+  varying vec2 vUv;
+
+  mat2 rotate2d(float angle) {
+    return mat2(cos(angle), -sin(angle), sin(angle), cos(angle));
+  }
+
+  void main() {
+    vec2 pixelCoord = vUv * uResolution;
+    vec2 originalPixelCoord = pixelCoord;
+
+    float normalizedX = pixelCoord.x / uResolution.x;
+    float curveFactor = 4.0 * (normalizedX - 0.5) * (normalizedX - 0.5);
+    float curveOffset = (0.5 - curveFactor) * uCurveAmount * uCurveDirection;
+
+    float bandTopBase = (uResolution.y - uBandHeight) * 0.5 + uOffsetY;
+    float bandTop = bandTopBase + curveOffset;
+    float bandBottom = bandTop + uBandHeight;
+    float bandCenterY = bandTopBase + (uBandHeight * 0.5);
+
+    if (uHasRotation > 0.5) {
+      vec2 rotationCenter = (uRotationType > 0.5)
+        ? vec2(0.0, bandCenterY)
+        : vec2(uResolution.x * 0.5, bandCenterY);
+      pixelCoord -= rotationCenter;
+      pixelCoord = rotate2d(uRotation) * pixelCoord;
+      pixelCoord += rotationCenter;
+      originalPixelCoord -= rotationCenter;
+      originalPixelCoord = rotate2d(uRotation) * originalPixelCoord;
+      originalPixelCoord += rotationCenter;
+    }
+
+    float margin = 4.0;
+    if (pixelCoord.y < bandTop - margin || pixelCoord.y > bandBottom + margin) {
+      discard;
+    }
+
+    float scrollPos = uScroll * uSpeed;
+    float wrappedX = mod(originalPixelCoord.x + scrollPos, uSequenceWidth);
+    float textureX = (wrappedX + uSequenceWidth) / uTextureWidth;
+    float texY = (pixelCoord.y - bandTop) / (bandBottom - bandTop);
+
+    if (textureX < 0.0 || textureX > 1.0 || texY < 0.0 || texY > 1.0) {
+      discard;
+    }
+
+    vec4 color = texture2D(uTexture, vec2(textureX, texY));
+    // Premultiplied strip: discard empty gutters so lanes stay separated.
+    if (color.a < 0.04) discard;
+
+    float edge = min(pixelCoord.y - bandTop, bandBottom - pixelCoord.y);
+    if (edge < margin) {
+      float fade = smoothstep(0.0, margin, edge);
+      color.rgb *= fade;
+      color.a *= fade;
+    }
+
+    gl_FragColor = color;
+  }
+`
 
 export function InfiniteDrift({
   bands = DEFAULT_BANDS,
-  height = 600,
+  height = 760,
   gap = 20,
   imageHeight = 100,
   bandHeight = 120,
   maxImageWidth = 300,
+  imageRadius = 14,
   inertia = 0.92,
   preserveOriginalRatios = true,
   className,
@@ -170,60 +286,65 @@ export function InfiniteDrift({
     const canvas = canvasRef.current
     if (!container || !canvas) return
 
-    const dpr = Math.min(window.devicePixelRatio || 1, 2)
-    const ctx = canvas.getContext("2d")
-    if (!ctx) return
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches
 
-    const resize = () => {
-      canvas.width = Math.max(1, Math.round(container.clientWidth * dpr))
-      canvas.height = Math.max(1, Math.round(container.clientHeight * dpr))
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
+    const scene = new THREE.Scene()
+    const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 10)
+    camera.position.z = 1
+
+    let renderer: THREE.WebGLRenderer
+    try {
+      renderer = new THREE.WebGLRenderer({
+        canvas,
+        antialias: true,
+        alpha: true,
+        preserveDrawingBuffer: true,
+        powerPreference: "high-performance",
+      })
+    } catch {
+      return
     }
-    resize()
+    renderer.setClearColor(0x000000, 0)
+    renderer.setSize(container.clientWidth, container.clientHeight)
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
-    const bandStates: BandState[] = bands.map((config) => ({
-      config,
-      stripCanvas: document.createElement("canvas"),
-      sequenceWidth: 0,
-      ready: false,
-    }))
+    const meshes: THREE.Mesh[] = []
+    const materials: THREE.ShaderMaterial[] = []
 
-    let cancelled = false
-
-    const loadBand = async (bs: BandState) => {
-      const { config } = bs
-      const imgs = await Promise.all(
-        config.images.map(
+    const createBandTexture = async (band: InfiniteDriftBand) => {
+      const images = await Promise.all(
+        band.images.map(
           (url) =>
             new Promise<HTMLImageElement | HTMLCanvasElement>((resolve) => {
               const img = new Image()
               img.crossOrigin = "anonymous"
               img.onload = () => resolve(img)
               img.onerror = () => {
-                const fb = document.createElement("canvas")
-                fb.width = 400
-                fb.height = 300
-                const fc = fb.getContext("2d")
-                if (fc) {
-                  fc.fillStyle = `hsl(${Math.random() * 360},70%,60%)`
-                  fc.fillRect(0, 0, 400, 300)
+                const fallback = document.createElement("canvas")
+                fallback.width = 400
+                fallback.height = 300
+                const ctx = fallback.getContext("2d")
+                if (ctx) {
+                  ctx.fillStyle = `hsl(${Math.random() * 360}, 70%, 60%)`
+                  ctx.fillRect(0, 0, 400, 300)
                 }
-                resolve(fb)
+                resolve(fallback)
               }
               img.src = url
             })
         )
       )
-      if (cancelled) return
 
-      let seqW = 0
-      const infos = imgs.map((src) => {
+      let sequenceWidth = 0
+      const imageInfos = images.map((img) => {
         const nw =
-          (src as HTMLImageElement).naturalWidth ||
-          (src as HTMLCanvasElement).width
+          (img as HTMLImageElement).naturalWidth ||
+          (img as HTMLCanvasElement).width
         const nh =
-          (src as HTMLImageElement).naturalHeight ||
-          (src as HTMLCanvasElement).height
+          (img as HTMLImageElement).naturalHeight ||
+          (img as HTMLCanvasElement).height
         const ratio = nw / nh || 1.5
         let w: number
         let h: number
@@ -238,124 +359,182 @@ export function InfiniteDrift({
           h = imageHeight
           w = Math.round(h * 1.5)
         }
-        seqW += w + gap
-        return { src, w, h }
+        sequenceWidth += w + gap
+        return { img, w, h }
       })
-      seqW -= gap
 
-      const CLONES = 3
-      const strip = bs.stripCanvas
-      strip.width = Math.max(1, seqW * CLONES)
-      strip.height = bandHeight
-      const sc = strip.getContext("2d")
-      if (!sc) return
-      let cx2 = 0
-      for (let c = 0; c < CLONES; c++) {
-        for (const info of infos) {
-          sc.drawImage(
-            info.src,
-            cx2,
+      sequenceWidth -= gap
+      const cloneCount = 3
+      const totalWidth = sequenceWidth * cloneCount
+
+      // 2× strip → smoother rounded corners when sampled in the shader.
+      const pixelRatio = 2
+      const offscreenCanvas = document.createElement("canvas")
+      offscreenCanvas.width = Math.max(1, Math.round(totalWidth * pixelRatio))
+      offscreenCanvas.height = Math.max(1, Math.round(bandHeight * pixelRatio))
+      const ctx = offscreenCanvas.getContext("2d", {
+        alpha: true,
+        colorSpace: "srgb",
+      })
+      if (!ctx) {
+        return {
+          texture: new THREE.Texture(),
+          totalWidth: 1,
+          sequenceWidth: 1,
+        }
+      }
+
+      ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0)
+      ctx.imageSmoothingEnabled = true
+      ctx.imageSmoothingQuality = "high"
+      // Keep gutters fully transparent so lanes do not paint as solid slabs.
+      ctx.clearRect(0, 0, totalWidth, bandHeight)
+
+      let currentX = 0
+      for (let c = 0; c < cloneCount; c++) {
+        for (const info of imageInfos) {
+          drawRoundedImage(
+            ctx,
+            info.img,
+            currentX,
             (bandHeight - info.h) / 2,
             info.w,
-            info.h
+            info.h,
+            imageRadius
           )
-          cx2 += info.w + gap
+          currentX += info.w + gap
         }
       }
-      bs.sequenceWidth = seqW
-      bs.ready = true
+
+      // Premultiply so linear filtering does not darken soft corners.
+      ctx.setTransform(1, 0, 0, 1, 0, 0)
+      const raw = ctx.getImageData(
+        0,
+        0,
+        offscreenCanvas.width,
+        offscreenCanvas.height
+      )
+      const px = raw.data
+      for (let i = 0; i < px.length; i += 4) {
+        const a = px[i + 3]! / 255
+        px[i] = Math.round(px[i]! * a)
+        px[i + 1] = Math.round(px[i + 1]! * a)
+        px[i + 2] = Math.round(px[i + 2]! * a)
+      }
+      ctx.putImageData(raw, 0, 0)
+
+      const texture = new THREE.Texture(offscreenCanvas)
+      texture.colorSpace = THREE.SRGBColorSpace
+      texture.premultiplyAlpha = true
+      texture.minFilter = THREE.LinearFilter
+      texture.magFilter = THREE.LinearFilter
+      texture.generateMipmaps = false
+      texture.needsUpdate = true
+      return { texture, totalWidth, sequenceWidth }
     }
 
-    void Promise.all(bandStates.map(loadBand))
+    let cancelled = false
 
-    const drawBand = (
-      bs: BandState,
-      W: number,
-      H: number,
-      scrollY: number
-    ) => {
-      if (!bs.ready || bs.sequenceWidth <= 0) return
-      const { config, stripCanvas, sequenceWidth } = bs
+    /**
+     * Scale all offsets together so relative lane gaps stay even.
+     * Per-band clamping would squash the outer pair onto each other.
+     */
+    const offsetYFactor = () => {
+      const h = container.clientHeight
+      const yScale = h / DESIGN_HEIGHT
+      const maxAuthored = Math.max(
+        1,
+        ...bands.map((b) => Math.abs(b.offsetY ?? 0))
+      )
+      const maxAllowed = Math.max(0, (h - bandHeight) * 0.5 - 12)
+      const afterScale = maxAuthored * yScale
+      const compress =
+        afterScale > maxAllowed && afterScale > 0
+          ? maxAllowed / afterScale
+          : 1
+      return yScale * compress
+    }
 
-      const rotRad = ((config.rotation || 0) * Math.PI) / 180
-      const hasRot = Math.abs(rotRad) > 0.0001
-      const curveAmount = config.curveAmount ?? 0
-      const curveDir = config.curveDirection ?? 1
-      const speed = config.speed ?? 1
-      const offsetY = config.offsetY ?? 0
-      const fromLeft = config.rotationType === "fromLeft"
+    /** Narrow docs previews: ease tilt so parallel lanes do not visually collide. */
+    const rotationFactor = () => Math.min(1, container.clientWidth / 720)
 
-      const bandTopBase = (H - bandHeight) * 0.5 + offsetY
-      const bandCenterY = bandTopBase + bandHeight * 0.5
-      const pivotX = fromLeft ? 0 : W * 0.5
-      const pivotY = bandCenterY
-      const scrollPos = scrollY * speed
+    const syncBandLayout = () => {
+      const w = container.clientWidth
+      const h = container.clientHeight
+      const yFactor = offsetYFactor()
+      const rFactor = rotationFactor()
+      for (let i = 0; i < materials.length; i++) {
+        const mat = materials[i]!
+        const config = bands[i]
+        if (!config) continue
+        mat.uniforms.uResolution!.value.set(w, h)
+        mat.uniforms.uOffsetY!.value = (config.offsetY ?? 0) * yFactor
+        mat.uniforms.uBandHeight!.value = bandHeight
+        mat.uniforms.uRotation!.value =
+          (((config.rotation ?? 0) * Math.PI) / 180) * rFactor
+      }
+    }
 
-      ctx.save()
+    const initBands = async () => {
+      for (let i = 0; i < bands.length; i++) {
+        if (cancelled) return
+        const config = bands[i]!
+        const { texture, totalWidth, sequenceWidth } =
+          await createBandTexture(config)
+        if (cancelled) {
+          texture.dispose()
+          return
+        }
 
-      ctx.beginPath()
-      if (hasRot) {
-        const pad = curveAmount + 4
-        const corners: [number, number][] = [
-          [0, bandTopBase - pad],
-          [W, bandTopBase - pad],
-          [W, bandTopBase + bandHeight + pad],
-          [0, bandTopBase + bandHeight + pad],
-        ]
-        corners.forEach(([cx_, cy_], i) => {
-          const [rx, ry] = rotate2dPt(cx_, cy_, pivotX, pivotY, -rotRad)
-          if (i === 0) ctx.moveTo(rx, ry)
-          else ctx.lineTo(rx, ry)
+        const material = new THREE.ShaderMaterial({
+          uniforms: {
+            uResolution: {
+              value: new THREE.Vector2(
+                container.clientWidth,
+                container.clientHeight
+              ),
+            },
+            uTexture: { value: texture },
+            uTextureWidth: { value: totalWidth },
+            uSequenceWidth: { value: sequenceWidth },
+            uBandHeight: { value: bandHeight },
+            uScroll: { value: 0 },
+            uSpeed: { value: config.speed ?? 1 },
+            uOffsetY: { value: (config.offsetY ?? 0) * offsetYFactor() },
+            uRotation: {
+              value:
+                (((config.rotation ?? 0) * Math.PI) / 180) * rotationFactor(),
+            },
+            uRotationType: {
+              value: config.rotationType === "fromLeft" ? 1 : 0,
+            },
+            uHasRotation: { value: config.rotation ? 1 : 0 },
+            uCurveAmount: { value: config.curveAmount ?? 0 },
+            uCurveDirection: { value: config.curveDirection ?? 1 },
+          },
+          vertexShader: VERTEX_SHADER,
+          fragmentShader: FRAGMENT_SHADER,
+          transparent: true,
+          premultipliedAlpha: true,
+          depthTest: false,
+          depthWrite: false,
         })
-        ctx.closePath()
-      } else {
-        const pad = curveAmount + 4
-        ctx.rect(0, bandTopBase - pad, W, bandHeight + pad * 2)
+
+        const geometry = new THREE.PlaneGeometry(2, 2)
+        const mesh = new THREE.Mesh(geometry, material)
+        mesh.position.z = i * -0.01
+        mesh.renderOrder = i
+        scene.add(mesh)
+        meshes.push(mesh)
+        materials.push(material)
       }
-      ctx.clip()
-
-      for (let x = 0; x < W; x++) {
-        const nx = x / W
-        const curveFactor = 4 * (nx - 0.5) * (nx - 0.5)
-        const curveOffset = (0.5 - curveFactor) * curveAmount * curveDir
-        const bandTop = bandTopBase + curveOffset
-
-        let srcX = x
-        if (hasRot) {
-          const [rx] = rotate2dPt(x, bandCenterY, pivotX, pivotY, rotRad)
-          srcX = rx
-        }
-
-        const wrappedX = glslMod(srcX + scrollPos, sequenceWidth)
-        const texSrcX = wrappedX + sequenceWidth
-
-        if (texSrcX < 0 || texSrcX >= stripCanvas.width) continue
-
-        ctx.drawImage(
-          stripCanvas,
-          texSrcX,
-          0,
-          1,
-          bandHeight,
-          x,
-          bandTop,
-          1,
-          bandHeight
-        )
-      }
-
-      ctx.restore()
     }
 
-    const reduceMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches
+    void initBands()
 
-    let animId = 0
+    let animationId = 0
     const animate = () => {
-      animId = requestAnimationFrame(animate)
-      const W = container.clientWidth
-      const H = container.clientHeight
+      animationId = requestAnimationFrame(animate)
       const state = scrollState.current
 
       if (!reduceMotion && !state.isDragging) {
@@ -363,10 +542,18 @@ export function InfiniteDrift({
         state.scrollVelocity *= inertia
         if (Math.abs(state.scrollVelocity) < 0.1) state.scrollVelocity = 0
       }
+
       state.scrollY += (state.targetScrollY - state.scrollY) * 0.1
 
-      ctx.clearRect(0, 0, W, H)
-      for (const bs of bandStates) drawBand(bs, W, H, state.scrollY)
+      for (const mat of materials) {
+        mat.uniforms.uScroll!.value = state.scrollY
+        mat.uniforms.uResolution!.value.set(
+          container.clientWidth,
+          container.clientHeight
+        )
+      }
+
+      renderer.render(scene, camera)
     }
     animate()
 
@@ -380,11 +567,11 @@ export function InfiniteDrift({
     let lastScrollTop = window.scrollY
     const handleGlobalScroll = () => {
       if (reduceMotion) return
-      const c = window.scrollY
-      const d = c - lastScrollTop
-      lastScrollTop = c
-      scrollState.current.targetScrollY += d * 2.5
-      scrollState.current.scrollVelocity = d * 0.3
+      const current = window.scrollY
+      const delta = current - lastScrollTop
+      lastScrollTop = current
+      scrollState.current.targetScrollY += delta * 2.5
+      scrollState.current.scrollVelocity = delta * 0.3
     }
 
     const handleMouseDown = (e: MouseEvent) => {
@@ -396,14 +583,19 @@ export function InfiniteDrift({
 
     const handleMouseMove = (e: MouseEvent) => {
       if (!scrollState.current.isDragging) return
-      const d = e.clientY - scrollState.current.lastMouseY
-      scrollState.current.targetScrollY += d * 2
+      const deltaY = e.clientY - scrollState.current.lastMouseY
+      scrollState.current.targetScrollY += deltaY * 2
       scrollState.current.lastMouseY = e.clientY
-      scrollState.current.scrollVelocity = d * 0.25
+      scrollState.current.scrollVelocity = deltaY * 0.25
     }
 
     const handleMouseUp = () => {
       scrollState.current.isDragging = false
+    }
+
+    const handleResize = () => {
+      renderer.setSize(container.clientWidth, container.clientHeight)
+      syncBandLayout()
     }
 
     const handleTouchStart = (e: TouchEvent) => {
@@ -414,17 +606,17 @@ export function InfiniteDrift({
 
     const handleTouchMove = (e: TouchEvent) => {
       if (!scrollState.current.isDragging || !e.touches[0]) return
-      const d = e.touches[0].clientY - scrollState.current.lastMouseY
-      scrollState.current.targetScrollY += d * 2.5
+      const deltaY = e.touches[0].clientY - scrollState.current.lastMouseY
+      scrollState.current.targetScrollY += deltaY * 2.5
       scrollState.current.lastMouseY = e.touches[0].clientY
-      scrollState.current.scrollVelocity = d * 0.3
+      scrollState.current.scrollVelocity = deltaY * 0.3
     }
 
     container.addEventListener("wheel", handleWheel, { passive: false })
     container.addEventListener("mousedown", handleMouseDown)
     window.addEventListener("mousemove", handleMouseMove)
     window.addEventListener("mouseup", handleMouseUp)
-    window.addEventListener("resize", resize)
+    window.addEventListener("resize", handleResize)
     window.addEventListener("scroll", handleGlobalScroll, { passive: true })
     container.addEventListener("touchstart", handleTouchStart, {
       passive: true,
@@ -434,16 +626,26 @@ export function InfiniteDrift({
 
     return () => {
       cancelled = true
-      cancelAnimationFrame(animId)
+      cancelAnimationFrame(animationId)
       container.removeEventListener("wheel", handleWheel)
       container.removeEventListener("mousedown", handleMouseDown)
       window.removeEventListener("mousemove", handleMouseMove)
       window.removeEventListener("mouseup", handleMouseUp)
-      window.removeEventListener("resize", resize)
+      window.removeEventListener("resize", handleResize)
       window.removeEventListener("scroll", handleGlobalScroll)
       container.removeEventListener("touchstart", handleTouchStart)
       container.removeEventListener("touchmove", handleTouchMove)
       container.removeEventListener("touchend", handleMouseUp)
+
+      for (const mesh of meshes) {
+        scene.remove(mesh)
+        mesh.geometry.dispose()
+        const mat = mesh.material as THREE.ShaderMaterial
+        const tex = mat.uniforms.uTexture?.value as THREE.Texture | undefined
+        tex?.dispose()
+        mat.dispose()
+      }
+      renderer.dispose()
     }
   }, [
     bands,
@@ -451,6 +653,7 @@ export function InfiniteDrift({
     imageHeight,
     bandHeight,
     maxImageWidth,
+    imageRadius,
     inertia,
     preserveOriginalRatios,
   ])
@@ -463,6 +666,7 @@ export function InfiniteDrift({
         className
       )}
       style={{ height }}
+      aria-label="Infinite Drift gallery"
     >
       <canvas ref={canvasRef} className="absolute inset-0 size-full" />
       {children}

@@ -6,6 +6,7 @@ import { Code2Icon, EyeIcon } from "lucide-react"
 import { CodePanel } from "@/components/docs/code-panel"
 import { InstallNeedsHint } from "@/components/docs/install-needs-hint"
 import { useRegisterPreviewDirection } from "@/components/docs/preview-direction"
+import { DevPreviewCaptureButton } from "@/components/docs/dev-preview-capture-button"
 import { SoftButton, SoftGroup } from "@/components/docs/soft-toolbar"
 import {
   DirectionProvider,
@@ -92,7 +93,7 @@ export function ComponentVariantPreview({
   examples,
   className,
   previewClassName,
-  previewSurface = "card",
+  previewSurface = "transparent",
   showDirection = true,
   allowOverflow = false,
 }: {
@@ -101,10 +102,11 @@ export function ComponentVariantPreview({
   /** Extra classes on the stage (merged after surface). */
   previewClassName?: string
   /**
-   * Preview stage fill. Default `card` = `bg-card` (white in light).
+   * Preview stage fill. Default `transparent` = no fill (page shows through).
    * `canvas` = soft `bg-canvas` when a demo needs contrast (e.g. shadow-soft).
+   * `card` is kept for call-site compat and also means no fill (not white).
    */
-  previewSurface?: "card" | "canvas"
+  previewSurface?: "transparent" | "canvas" | "card"
   /** Hide LTR/RTL when the preview has no directional layout (e.g. code). */
   showDirection?: boolean
   /**
@@ -154,7 +156,8 @@ export function ComponentVariantPreview({
 
   const previewFrameClass = cn(
     "flex min-h-32 items-center justify-center p-8",
-    previewSurface === "canvas" ? "bg-canvas" : "bg-card",
+    // Only canvas paints a fill — transparent/card leave the stage empty.
+    previewSurface === "canvas" && "bg-canvas",
     allowOverflow &&
       "relative z-20 min-h-[28rem] items-start justify-center overflow-visible pt-10 pb-16",
     previewClassName
@@ -172,14 +175,14 @@ export function ComponentVariantPreview({
 
       <div
         className={cn(
-          "border border-border/70 bg-card",
+          "border border-border/70",
           allowOverflow
             ? "relative z-20 overflow-visible rounded-t-[12px]"
             : "overflow-hidden rounded-[12px]"
         )}
       >
         {/* Same toolbar chrome as BlockExample (no CLI / no viewport). */}
-        <div className="flex flex-col gap-2 rounded-t-[12px] border-b border-border/80 bg-muted/30 px-3 py-2 sm:flex-row sm:items-center sm:justify-between sm:gap-3">
+        <div className="flex flex-col gap-2 rounded-t-[12px] border-b border-border/80 bg-card px-3 py-2 sm:flex-row sm:items-center sm:justify-between sm:gap-3">
           <div className="flex min-w-0 flex-wrap items-center gap-1">
             {examples.map((item) => (
               <button
@@ -200,6 +203,13 @@ export function ComponentVariantPreview({
           </div>
 
           <div className="flex shrink-0 flex-wrap items-center gap-1.5">
+            {process.env.NODE_ENV === "development" &&
+            effectiveView === "preview" ? (
+              <DevPreviewCaptureButton
+                targetRef={frameRef}
+                fileBase={active || meta?.title || "preview"}
+              />
+            ) : null}
             {effectiveView === "preview" && showDirection ? (
               <DirectionToggle value={dir} onValueChange={setDir} />
             ) : null}

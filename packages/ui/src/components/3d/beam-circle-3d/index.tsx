@@ -8,14 +8,14 @@ import {
   NextjsIcon,
   ReactIcon,
   TailwindIcon,
-  TypescriptIcon,
+  ViteIcon,
 } from "./icons"
 
 export {
   NextjsIcon,
   ReactIcon,
   TailwindIcon,
-  TypescriptIcon,
+  ViteIcon,
   type TechIconProps,
 } from "./icons"
 
@@ -81,7 +81,7 @@ const DEFAULT_SEMI_ORBITS: BeamOrbitConfig[] = [
     delay: 0.4,
     glowColor: "#396EF0",
     boxColor: "var(--card)",
-    children: <TypescriptIcon size={34} />,
+    children: <ViteIcon size={34} />,
   },
   {
     id: 2,

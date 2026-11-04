@@ -11,7 +11,7 @@ import { pageMetadata } from "@/lib/seo"
 export const metadata = pageMetadata({
   title: "Infinite Drift",
   description:
-    "Curved image bands with inertial drag and scroll - Canvas 2D, no WebGL. Install with the SonoJS CLI.",
+    "Three.js curved image bands with independent speeds, tilt pivots, and inertial drag/scroll. Install with the SonoJS CLI.",
   path: "/3d/infinite-drift",
 })
 
@@ -59,9 +59,12 @@ export default async function InfiniteDriftDocsPage() {
         pathname="/3d/infinite-drift"
         description={
           <p className="leading-relaxed text-muted-foreground">
-            Horizontal image strips with parabolic curvature and optional tilt,
-            driven by wheel, page scroll, and drag inertia. Pure Canvas 2D -
-            no Three.js. Bundled photos install under{" "}
+            Horizontal image strips with parabolic curvature and optional tilt
+            pivots (<code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">fromLeft</code>{" "}
+            /{" "}
+            <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">fromCenter</code>
+            ), driven by wheel, page scroll, and drag inertia via Three.js
+            shaders. Bundled photos install under{" "}
             <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
               components/3d/infinite-drift/images
             </code>
@@ -99,7 +102,7 @@ export default async function InfiniteDriftDocsPage() {
             {
               name: "height",
               type: "string | number",
-              defaultValue: "600",
+              defaultValue: "760",
               description: "Stage height.",
             },
             {
@@ -118,13 +121,19 @@ export default async function InfiniteDriftDocsPage() {
               name: "bandHeight",
               type: "number",
               defaultValue: "120",
-              description: "Band strip canvas height.",
+              description: "Band strip canvas height (includes soft shadow gutter).",
             },
             {
               name: "maxImageWidth",
               type: "number",
               defaultValue: "300",
               description: "Cap width when preserving ratios.",
+            },
+            {
+              name: "imageRadius",
+              type: "number",
+              defaultValue: "14",
+              description: "Soft corner radius for each tile (px).",
             },
             {
               name: "inertia",

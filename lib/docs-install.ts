@@ -100,6 +100,8 @@ export function docsManualNpmCommand(deps: string[]): string | null {
   return `npm i ${npm.join(" ")}`
 }
 
+export { formatInstallCommands } from "@/lib/format-install-commands"
+
 export function docsSourceUsesAppAlias(content: string): boolean {
   return content.includes("@/")
 }

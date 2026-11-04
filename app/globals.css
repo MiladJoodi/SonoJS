@@ -9,6 +9,8 @@
 @source "../registry/**/*.{ts,tsx}";
 @source inline("grid-rows-[0fr] grid-rows-[1fr] transition-[grid-template-rows]");
 @source "../components/**/*.{ts,tsx}";
+/* Chrome user-data leftover from local thumb exports - locked journals crash Turbopack track_glob. */
+@source not "../.tmp-chrome-thumbs";
 /* Switch thumb LTR/RTL travel â€” ensure compound variants emit. */
 @source inline("ltr:data-[state=checked]:translate-x-[calc(100%-2px)] rtl:data-[state=checked]:-translate-x-[calc(100%-2px)]");
 /* Gallery / dense grids â€” cols 4â€“7 sometimes missing from the emitted sheet. */

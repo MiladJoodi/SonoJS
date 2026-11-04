@@ -1,4 +1,4 @@
-import { ChartGallery } from "@/components/charts"
+import { ChartGallery } from "@/components/charts/gallery"
 import { chartsCatalog } from "@/lib/charts-catalog"
 import { pageMetadata } from "@/lib/seo"
 

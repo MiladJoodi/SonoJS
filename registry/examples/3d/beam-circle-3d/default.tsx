@@ -5,7 +5,7 @@ import {
   NextjsIcon,
   ReactIcon,
   TailwindIcon,
-  TypescriptIcon,
+  ViteIcon,
   type BeamOrbitConfig,
 } from "@sonojs/ui/components/3d/beam-circle-3d"
 
@@ -32,7 +32,7 @@ const orbits: BeamOrbitConfig[] = [
     glowColor: "#BFDBFE",
     size: 44,
     delay: 0.35,
-    children: <TypescriptIcon size={38} />,
+    children: <ViteIcon size={38} />,
   },
   {
     id: 2,

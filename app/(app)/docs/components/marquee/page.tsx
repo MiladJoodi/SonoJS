@@ -64,14 +64,7 @@ export default async function MarqueeDocsPage() {
               --gap
             </code>
             . Install also injects the marquee keyframes into your theme CSS.
-            Also listed under{" "}
-            <a
-              href="/3d/marquee"
-              className="font-medium text-foreground underline-offset-4 hover:underline"
-            >
-              3D → Marquee
-            </a>
-            . For tilted photo columns, see{" "}
+            For tilted photo columns, see{" "}
             <a
               href="/3d/image-marquee"
               className="font-medium text-foreground underline-offset-4 hover:underline"

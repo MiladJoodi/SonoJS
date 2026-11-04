@@ -1,4 +1,4 @@
 export { ReactIcon, type TechIconProps } from "./react"
 export { NextjsIcon } from "./nextjs"
-export { TypescriptIcon } from "./typescript"
+export { ViteIcon } from "./vite"
 export { TailwindIcon } from "./tailwind"

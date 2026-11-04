@@ -151,7 +151,7 @@ export function BlockExample({
         )}
       >
         {/* Match docs VariantPreview chrome */}
-        <div className="flex flex-col gap-2 rounded-t-[12px] border-b border-border/80 bg-muted/30 px-3 py-2 sm:flex-row sm:items-center sm:justify-between sm:gap-3">
+        <div className="flex flex-col gap-2 rounded-t-[12px] border-b border-border/80 bg-card px-3 py-2 sm:flex-row sm:items-center sm:justify-between sm:gap-3">
           <div className="flex min-w-0 flex-wrap items-center gap-2">
             <a
               href={`#${name}`}
