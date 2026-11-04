@@ -26,7 +26,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Asset Returns — locked gallery chrome (navy × orange).
+ * Asset Returns - locked gallery chrome (navy × orange).
  * Horizontal return % bars with on-fill portfolio value; range tabs + max/min stats.
  * Type-required custom bar shape (rounded trailing edge). Metric scrubber.
  * Installs to: components/charts/asset-returns.tsx
@@ -36,7 +36,7 @@ export type AssetReturnsRangeId = "3m" | "6m" | "1y" | "3y"
 
 export type AssetReturnsRow = {
   asset: string
-  /** Return percent — bar length. */
+  /** Return percent - bar length. */
   returnPct: number
   /** Approximate portfolio value after growth. */
   amount: number
@@ -474,7 +474,7 @@ function AssetReturns({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">

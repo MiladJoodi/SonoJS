@@ -16,7 +16,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Chart Radar Dots (classic) — single Store filled polygon with vertex dots.
+ * Chart Radar Dots (classic) - single Store filled polygon with vertex dots.
  * Locked metric scrub. Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/chart-radar-dots.tsx
  */
@@ -242,7 +242,7 @@ function ChartRadarDots({
                 {formatPct(deltaPct)}
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{caption}</p>

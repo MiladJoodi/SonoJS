@@ -81,7 +81,7 @@ export function MarketplaceHero({ className }: { className?: string }) {
               isDark ? "text-white/70" : "text-zinc-600"
             )}
           >
-            Free templates and full-stack projects — ready to ship,
+            Free templates and full-stack projects - ready to ship,
             designed to feel like a real product.
           </p>
 

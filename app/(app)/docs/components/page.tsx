@@ -8,7 +8,7 @@ import { pageMetadata } from "@/lib/seo"
 export const metadata = pageMetadata({
   title: "Components",
   description:
-    "Browse SonoJS React components — accessible, Tailwind-styled, copy-source UI primitives for your app.",
+    "Browse SonoJS React components - accessible, Tailwind-styled, copy-source UI primitives for your app.",
   path: "/docs/components",
 })
 

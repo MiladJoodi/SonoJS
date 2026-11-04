@@ -23,7 +23,7 @@ const exampleDefs = [
     name: "input-group-icon",
     title: "Addon Sides",
     description:
-      'Use `align="inline-start"` and `align="inline-end"` — put addons after the input in the DOM.',
+      'Use `align="inline-start"` and `align="inline-end"` - put addons after the input in the DOM.',
     npmRequires: ["lucide-react"],
   },
   {
@@ -35,7 +35,7 @@ const exampleDefs = [
     name: "input-group-button",
     title: "Button",
     description:
-      '`InputGroupButton` is sized for the group — try `size="icon-xs"`.',
+      '`InputGroupButton` is sized for the group - try `size="icon-xs"`.',
     npmRequires: ["lucide-react"],
   },
   {
@@ -152,24 +152,24 @@ export default async function InputGroupDocsPage() {
               type: '"inline-start" | "inline-end" | "block-start" | "block-end"',
               defaultValue: '"inline-start"',
               description:
-                "On `InputGroupAddon` — visual side relative to the control.",
+                "On `InputGroupAddon` - visual side relative to the control.",
             },
             {
               name: "size",
               type: '"xs" | "sm" | "icon-xs" | "icon-sm"',
               defaultValue: '"xs"',
-              description: "On `InputGroupButton` — compact sizes for the group.",
+              description: "On `InputGroupButton` - compact sizes for the group.",
             },
             {
               name: "variant",
               type: "Button variant",
               defaultValue: '"ghost"',
-              description: "On `InputGroupButton` — same variants as `Button`.",
+              description: "On `InputGroupButton` - same variants as `Button`.",
             },
             {
               name: "className",
               type: "string",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Merge extra Tailwind classes on any part.",
             },
           ]}

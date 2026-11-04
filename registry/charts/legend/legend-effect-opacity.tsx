@@ -29,7 +29,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Legend Effect Opacity — dual line; hover a legend item to dim the other series.
+ * Legend Effect Opacity - dual line; hover a legend item to dim the other series.
  * Locked metric scrub; navy×orange; EN months.
  * Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/legend-effect-opacity.tsx
@@ -339,7 +339,7 @@ function LegendEffectOpacity({
                 {formatPct(deltaPct)}
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{caption}</p>

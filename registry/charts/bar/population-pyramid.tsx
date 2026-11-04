@@ -27,7 +27,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Population Pyramid — locked gallery chrome (navy × orange).
+ * Population Pyramid - locked gallery chrome (navy × orange).
  * Mirrored Male × Female by age (% of total) + metric header scrubber.
  * Plot geometry matches FarsiUI sample: `stackOffset="sign"`, outward tip radius,
  * always-LTR axes (Male − left / Female + right unless `plotDir="rtl"`).
@@ -48,7 +48,7 @@ export type PopulationPyramidProps = {
   data?: PopulationPyramidPoint[]
   className?: string
   /**
-   * Male/Female sides. Default `"ltr"` (Male left, Female right) — plot does not
+   * Male/Female sides. Default `"ltr"` (Male left, Female right) - plot does not
    * follow page `dir` (same as FarsiUI). Pass `"rtl"` to swap sides.
    */
   plotDir?: "ltr" | "rtl"
@@ -57,7 +57,7 @@ export type PopulationPyramidProps = {
 }
 
 const NARROW_MQ = "(max-width: 639px)"
-/** Outer tip radius — matches `--radius-md` / control scale (~8px). */
+/** Outer tip radius - matches `--radius-md` / control scale (~8px). */
 const TIP_RADIUS = 8
 const AXIS_TICK_FILL =
   "color-mix(in oklab, var(--foreground) 58%, transparent)"
@@ -152,7 +152,7 @@ function formatPercent(val: unknown) {
 }
 
 /**
- * Tip % ink — series-tinted via `--foreground` (not `black`) so contrast holds
+ * Tip % ink - series-tinted via `--foreground` (not `black`) so contrast holds
  * in light and dark. Mixing with black made dark-mode tips nearly invisible.
  */
 const TIP_LABEL_MALE =
@@ -160,7 +160,7 @@ const TIP_LABEL_MALE =
 const TIP_LABEL_FEMALE =
   "color-mix(in oklab, var(--chart-2) 42%, var(--foreground))"
 
-/** Always-on tip % outside each bar — chart-local override (not Simple Bar chrome). */
+/** Always-on tip % outside each bar - chart-local override (not Simple Bar chrome). */
 function EndLabel({
   x,
   y,
@@ -454,7 +454,7 @@ function PopulationPyramid({
   const cellOpacity = (index: number) =>
     liveScrubbing && index !== liveIndex ? 0.4 : 1
 
-  /** Stable LabelList content — inline `label={() => …}` remounts every scrub frame. */
+  /** Stable LabelList content - inline `label={() => …}` remounts every scrub frame. */
   const femaleTipLabel = React.useCallback(
     (props: {
       x?: string | number
@@ -536,7 +536,7 @@ function PopulationPyramid({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{ageLabel}</p>
@@ -624,7 +624,7 @@ function PopulationPyramid({
               fill="var(--color-female)"
               stroke="none"
               shape={PyramidBar}
-              // Always-on tip % — enter animation makes labels blink on load.
+              // Always-on tip % - enter animation makes labels blink on load.
               isAnimationActive={false}
             >
               {plotData.map((_, index) => (

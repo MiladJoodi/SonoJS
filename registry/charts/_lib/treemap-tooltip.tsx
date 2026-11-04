@@ -10,7 +10,7 @@ type TreemapTooltipPayloadItem = {
 }
 
 /**
- * Treemap tooltip — reads Recharts computed `value` (parents) or leaf `size`.
+ * Treemap tooltip - reads Recharts computed `value` (parents) or leaf `size`.
  * ChartTooltipContent's formatter path misses parents when `dataKey="size"`.
  * Pass `dir` from `useChartDir()` so chrome follows page direction (plot is LTR).
  */

@@ -41,7 +41,7 @@ export default function BlockFileUploadDocsPage() {
       <BlocksPageHeader
         title="File Upload"
         pathname="/blocks/files-media/file-upload"
-        description="Multi-file queue, image thumbnails, single-document replace, and dialog upload with retry — four production upload patterns."
+        description="Multi-file queue, image thumbnails, single-document replace, and dialog upload with retry - four production upload patterns."
       />
 
       <div className="flex flex-col gap-8">

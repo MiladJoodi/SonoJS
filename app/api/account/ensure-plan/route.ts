@@ -2,17 +2,41 @@ import { clerkClient } from "@clerk/nextjs/server"
 import { NextResponse } from "next/server"
 
 import {
-  getPlanExpiresAt,
-  getUserPlan,
-  isProExpired,
-} from "@/lib/access"
+  planFingerprint,
+  type SyncedPlan,
+} from "@/db/lib/plan-fingerprint"
+import { syncClerkPlanFromDb } from "@/db/queries/sync-clerk-plan"
 import { getAuthUserId } from "@/lib/clerk-auth"
 
+function syncedPlanFromMetadata(metadata: unknown): SyncedPlan {
+  if (!metadata || typeof metadata !== "object") {
+    return { plan: "free", planInterval: null, planExpiresAt: null }
+  }
+  const meta = metadata as {
+    plan?: unknown
+    planInterval?: unknown
+    planExpiresAt?: unknown
+  }
+  const plan = meta.plan === "pro" ? "pro" : "free"
+  const planInterval =
+    plan === "pro" && meta.planInterval === "yearly"
+      ? ("yearly" as const)
+      : plan === "pro" && meta.planInterval === "monthly"
+        ? ("monthly" as const)
+        : plan === "pro"
+          ? ("monthly" as const)
+          : null
+  const planExpiresAt =
+    typeof meta.planExpiresAt === "string" && meta.planExpiresAt.trim()
+      ? meta.planExpiresAt
+      : null
+  return { plan, planInterval, planExpiresAt }
+}
+
 /**
- * After sign-up (and on each session sync):
- * - Default missing `plan` → `free` (no expiry).
- * - Expired Pro (`planExpiresAt` ≤ now) → `free` and clear expiry.
- * Never upgrades Free → Pro (that stays manual / future billing).
+ * Session heal for Clerk `publicMetadata` plan fields:
+ * - Sync from Neon (active sub → Pro, else Free) via `syncClerkPlanFromDb`
+ * - Repairs Free→Pro drift when billing is active but Clerk stayed Free
  */
 export async function POST() {
   const userId = await getAuthUserId()
@@ -22,44 +46,15 @@ export async function POST() {
 
   const client = await clerkClient()
   const user = await client.users.getUser(userId)
-  const metadata = user.publicMetadata
-  const existing = metadata?.plan
+  const before = syncedPlanFromMetadata(user.publicMetadata)
 
-  if (isProExpired(metadata)) {
-    await client.users.updateUserMetadata(userId, {
-      publicMetadata: {
-        plan: "free",
-        planExpiresAt: null,
-      },
-    })
-    return NextResponse.json({
-      plan: "free",
-      planExpiresAt: null,
-      updated: true,
-      reason: "expired",
-    })
-  }
-
-  if (existing === "pro" || existing === "free") {
-    const expiresAt = getPlanExpiresAt(metadata)
-    return NextResponse.json({
-      plan: getUserPlan(metadata),
-      planExpiresAt: expiresAt?.toISOString() ?? null,
-      updated: false,
-    })
-  }
-
-  await client.users.updateUserMetadata(userId, {
-    publicMetadata: {
-      plan: "free",
-      planExpiresAt: null,
-    },
-  })
+  const synced = await syncClerkPlanFromDb(userId)
+  const updated = planFingerprint(before) !== planFingerprint(synced)
 
   return NextResponse.json({
-    plan: "free",
-    planExpiresAt: null,
-    updated: true,
-    reason: "default",
+    plan: synced.plan,
+    planInterval: synced.planInterval,
+    planExpiresAt: synced.planExpiresAt,
+    updated,
   })
 }

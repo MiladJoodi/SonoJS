@@ -32,7 +32,7 @@ export function isCheckoutPlanSlug(value: unknown): value is CheckoutPlanSlug {
 
 /**
  * Create a Stripe Checkout Session for an authenticated Clerk user.
- * Pro is NOT granted here — only after webhook reconcile.
+ * Pro is NOT granted here - only after webhook reconcile.
  */
 export async function createBillingCheckout(input: {
   clerkUserId: string

@@ -77,7 +77,7 @@ export default async function CollapsibleDocsPage() {
         pathname="/docs/components/collapsible"
         description={
           <p className="leading-relaxed text-muted-foreground">
-          Expand or hide a panel in place — show more lists, advanced form
+          Expand or hide a panel in place - show more lists, advanced form
           fields, order details, or nested trees. Prefer Accordion when you need
           exclusive open sections.
         </p>
@@ -115,7 +115,7 @@ export default async function CollapsibleDocsPage() {
             {
               name: "open",
               type: "boolean",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Controlled open state.",
             },
             {
@@ -127,7 +127,7 @@ export default async function CollapsibleDocsPage() {
             {
               name: "onOpenChange",
               type: "(open: boolean) => void",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Called when the open state changes.",
             },
             {
@@ -141,7 +141,7 @@ export default async function CollapsibleDocsPage() {
               type: "boolean",
               defaultValue: "false",
               description:
-                "On `CollapsibleTrigger` — merge props onto a child (e.g. `Button`).",
+                "On `CollapsibleTrigger` - merge props onto a child (e.g. `Button`).",
             },
           ]}
         />

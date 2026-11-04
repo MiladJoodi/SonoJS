@@ -71,7 +71,7 @@ export function BlockExample({
   const [view, setView] = React.useState<View>("preview")
   const [viewport, setViewport] = React.useState<Viewport>("desktop")
   const [dir, setDir] = React.useState<Direction>("ltr")
-  /** Last embed `src` that finished loading — kept across desktop so revisit is instant. */
+  /** Last embed `src` that finished loading - kept across desktop so revisit is instant. */
   const [loadedSrc, setLoadedSrc] = React.useState<string | null>(null)
   /** Once tablet/mobile is opened, keep the iframe mounted (hidden on desktop). */
   const [frameWarmed, setFrameWarmed] = React.useState(false)
@@ -104,7 +104,7 @@ export function BlockExample({
         "[&_[data-slot=sidebar-inner]]:h-full!",
         "[&_[data-slot=sidebar-inner]]:min-h-0!",
         "[&_[data-slot=sidebar-inner]]:max-h-full!",
-        // Pin to the inline start/end edge (logical — works in LTR and RTL).
+        // Pin to the inline start/end edge (logical - works in LTR and RTL).
         "[&_[data-slot=sidebar][data-side=left]_[data-slot=sidebar-container]]:start-0!",
         "[&_[data-slot=sidebar][data-side=left]_[data-slot=sidebar-container]]:end-auto!",
         "[&_[data-slot=sidebar][data-side=right]_[data-slot=sidebar-container]]:end-0!",
@@ -127,7 +127,7 @@ export function BlockExample({
   }
 
   function showCode() {
-    // Highlight only when Code is opened — never warm all demos on page load
+    // Highlight only when Code is opened - never warm all demos on page load
     // (12× shiki POSTs were freezing mobile viewport switches).
     prefetchBlockInstall(name, usage)
     setView("code")
@@ -142,7 +142,7 @@ export function BlockExample({
         className={cn(
           "border border-border/70 bg-card",
           // Full-bleed shells (`overflow-hidden` in previewClassName) must clip
-          // sidebar spill — but keep a square bottom so the stage doesn’t look
+          // sidebar spill - but keep a square bottom so the stage doesn’t look
           // like a floating card with radius (toolbar stays rounded-t only).
           // Soft card demos stay fully rounded + overflow-visible for shadows.
           view === "code" || clipPreview
@@ -223,7 +223,7 @@ export function BlockExample({
               tone="chrome"
               tooltipSide="top"
               tooltipIdle="Copy install command"
-              tooltipCopied="Copied — paste in your terminal"
+              tooltipCopied="Copied - paste in your terminal"
               className="h-8 rounded-md"
             >
               CLI
@@ -231,7 +231,7 @@ export function BlockExample({
           </div>
         </div>
 
-        {/* Keep preview (and warm iframe) mounted while Code is open — CSS hide only. */}
+        {/* Keep preview (and warm iframe) mounted while Code is open - CSS hide only. */}
         <div
           className={cn(
             "relative flex transition-[background-color] duration-300 ease-out",
@@ -348,7 +348,7 @@ export function BlockExample({
         </div>
 
         {!isPreview ? (
-          // No bg-card/p-4/min-h here — locked AccessLocked fills the stage with
+          // No bg-card/p-4/min-h here - locked AccessLocked fills the stage with
           // code chrome; unlocked body brings its own padding. A light min-h shell
           // left a white void under the short dark lock panel.
           <div className="max-h-[40rem] w-full overflow-auto">

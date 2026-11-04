@@ -12,7 +12,7 @@ export default function SmoothCursorFollowerDemo() {
     <div ref={stageRef} className={`${CURSOR_STAGE_LIGHT} cursor-none`}>
       <SmoothCursorFollower containerRef={stageRef} />
       <p className="pointer-events-none absolute inset-0 flex items-center justify-center text-sm text-muted-foreground">
-        Dual rings — hover to expand
+        Dual rings - hover to expand
       </p>
       <div className="absolute inset-x-0 bottom-6 z-10 flex justify-center gap-3">
         <button

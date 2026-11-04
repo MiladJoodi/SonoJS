@@ -12,7 +12,7 @@ import { ProIcon } from "@/components/icons/plan/pro"
 import type { ContentAccess } from "@/lib/access"
 import { cn } from "@/lib/utils"
 
-/** Decorative lines — look like a real code sample behind the glass. */
+/** Decorative lines - look like a real code sample behind the glass. */
 const FAKE_LINES = [
   { c: "kw", t: "npx" },
   { c: "str", t: " @sonojs/ui@latest add …" },

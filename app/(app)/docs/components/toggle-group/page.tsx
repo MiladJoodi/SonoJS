@@ -169,7 +169,7 @@ export default async function ToggleGroupDocsPage() {
             {
               name: "type",
               type: '"single" | "multiple"',
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Single selection or multi-select.",
             },
             {

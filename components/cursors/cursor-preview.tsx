@@ -3,7 +3,7 @@ import type { ReactNode } from "react"
 import { cn } from "@/lib/utils"
 
 /**
- * Full-bleed interactive stage — the whole preview surface is the cursor arena.
+ * Full-bleed interactive stage - the whole preview surface is the cursor arena.
  */
 export function CursorPreview({
   children,

@@ -74,14 +74,14 @@ const INITIAL: Comment[] = [
     avatar: assetSrc(sarahImg),
     time: "30m ago",
     content:
-      "Hey @alex — can you glance at the mention chips before we merge?",
+      "Hey @alex - can you glance at the mention chips before we merge?",
     reactions: { up: 4, party: 1, eyes: 2 },
     mine: {},
     replies: [
       {
         id: "1a",
         author: "Alex Rivera",
-        content: "On it — will leave notes in the PR.",
+        content: "On it - will leave notes in the PR.",
         time: "18m ago",
       },
     ],

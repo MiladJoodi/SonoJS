@@ -21,7 +21,7 @@ function InputOTP({
       )}
       className={cn("disabled:cursor-not-allowed", className)}
       {...props}
-      // OTP codes are always entered LTR — isolate from page RTL.
+      // OTP codes are always entered LTR - isolate from page RTL.
       dir="ltr"
     />
   )
@@ -53,7 +53,7 @@ function InputOTPSlot({
       data-slot="input-otp-slot"
       data-active={isActive}
       className={cn(
-        // Separate cells (gap on group) so every side uses the same 1px border —
+        // Separate cells (gap on group) so every side uses the same 1px border -
         // joined slots share an edge and active borders look uneven.
         "relative flex h-[46px] w-[46px] items-center justify-center rounded-md border border-border/70 bg-card text-sm shadow-xs transition-all outline-none dark:bg-card",
         "aria-invalid:border-destructive data-[active=true]:z-10 data-[active=true]:border-ring data-[active=true]:aria-invalid:border-destructive",

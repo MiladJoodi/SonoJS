@@ -91,7 +91,7 @@ const PROJECT_TYPES: ReadonlyArray<{
     extra: {
       kind: "number",
       label: "Estimated page count",
-      description: "A rough number is fine — templates count once.",
+      description: "A rough number is fine - templates count once.",
       placeholder: "12",
       min: 1,
       max: 500,
@@ -160,7 +160,7 @@ const PROJECT_TYPES: ReadonlyArray<{
     extra: {
       kind: "text",
       label: "What kind of project is it?",
-      description: "A few words is enough — you can expand below.",
+      description: "A few words is enough - you can expand below.",
       placeholder: "Internal tooling, data pipeline…",
       min: 3,
       max: 80,
@@ -876,7 +876,7 @@ export default function ProjectInquiryForm({
                 <Section
                   id={id("s-type")}
                   title="Project type"
-                  hint="Pick the closest match — we'll ask one short follow-up."
+                  hint="Pick the closest match - we'll ask one short follow-up."
                 >
                   <Field data-invalid={!!show("type")}>
                     <RadioGroup
@@ -1661,7 +1661,7 @@ export default function ProjectInquiryForm({
 
                   <div className="flex flex-col-reverse items-stretch justify-between gap-3 sm:flex-row sm:items-center">
                     <p className="text-xs leading-5 text-muted-foreground">
-                      Demo form — nothing is actually sent.
+                      Demo form - nothing is actually sent.
                     </p>
                     <div className="flex flex-col-reverse gap-3 sm:flex-row">
                       <Button

@@ -1,7 +1,7 @@
 export type DocsNavPage = {
   title: string
   href: string
-  /** Green sidebar bullet — core / high-traffic items. */
+  /** Green sidebar bullet - core / high-traffic items. */
   featured?: boolean
   /** Small “New” chip next to the title (manual spotlight). */
   badge?: "new"
@@ -12,7 +12,7 @@ export type DocsNavGroup = {
   pages: DocsNavPage[]
 }
 
-/** Curated spotlight group — first under Components; excluded from prev/next order. */
+/** Curated spotlight group - first under Components; excluded from prev/next order. */
 export const COMPONENTS_FEATURED_GROUP = "Featured"
 
 /** Guide docs under `/docs` (not components). Keep lean. */
@@ -311,7 +311,7 @@ export function getDocsCurrentLabel(pathname: string): string | null {
   return null
 }
 
-/** All component groups in sidebar order — for directory + prev/next. */
+/** All component groups in sidebar order - for directory + prev/next. */
 export function getDocsComponentPages(): DocsNavPage[] {
   return componentsNav.groups
     .filter((group) => group.title !== COMPONENTS_FEATURED_GROUP)

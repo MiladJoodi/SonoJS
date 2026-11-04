@@ -76,7 +76,7 @@ const INITIAL_STEPS: OnboardingStep[] = [
     id: "notifications",
     title: "Set notification preferences",
     description:
-      "Choose which team and usage alerts you want by email — security notices always send.",
+      "Choose which team and usage alerts you want by email - security notices always send.",
     completed: false,
     actionLabel: "Manage notifications",
   },

@@ -1,7 +1,7 @@
 "use client"
 
 /**
- * Demo only — for your app, swap the DayPicker import in calendar.tsx:
+ * Demo only - for your app, swap the DayPicker import in calendar.tsx:
  *   import { DayPicker } from "react-day-picker/persian"
  */
 import React from "react"

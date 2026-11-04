@@ -29,7 +29,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Composed Chart With Axis Labels — locked gallery chrome (navy × orange × amber).
+ * Composed Chart With Axis Labels - locked gallery chrome (navy × orange × amber).
  * Dual Y-axes: Area(revenue)+Bar(cost) on money; Line(margin %) on pct.
  * Axis labels are type-required (chart-local); metric scrubber; RTL-aware.
  * Installs to: components/charts/composed-chart-with-axis-labels.tsx
@@ -445,7 +445,7 @@ function ComposedChartWithAxisLabels({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{monthLabel}</p>

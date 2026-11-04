@@ -20,7 +20,7 @@ export type MarketplacePreviewItem = {
   coverSrc: string
   /** Dark-mode cover when available */
   coverSrcDark: string | null
-  /** Looping cover video when set — preferred over coverSrc in cards/gallery. */
+  /** Looping cover video when set - preferred over coverSrc in cards/gallery. */
   coverVideo: string | null
   rating: number
   reviewCount: number
@@ -28,7 +28,7 @@ export type MarketplacePreviewItem = {
   href: string
   stack: MarketplaceStack[]
   updatedAt: string
-  /** Index in `marketplaceProjects` — later = newer when dates tie. */
+  /** Index in `marketplaceProjects` - later = newer when dates tie. */
   catalogIndex: number
 }
 
@@ -50,7 +50,7 @@ export type MarketplacePreviewDetail = MarketplacePreviewItem & {
   project: MarketplaceProject
 }
 
-/** Light cover for cards — never prefer dark (theme swap is CSS). */
+/** Light cover for cards - never prefer dark (theme swap is CSS). */
 export function marketplaceCoverSrc(project: MarketplaceProject): string {
   return (
     project.coverImage ||

@@ -84,13 +84,13 @@ export default async function LabelDocsPage() {
             {
               name: "htmlFor",
               type: "string",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Id of the labeled control.",
             },
             {
               name: "className",
               type: "string",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Merge extra Tailwind classes on the label.",
             },
           ]}

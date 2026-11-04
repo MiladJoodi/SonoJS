@@ -16,7 +16,7 @@ const exampleDefs = [
     name: "drawer-default",
     title: "Basic",
     description:
-      "Pick a delivery time — side drawer on desktop, bottom on mobile.",
+      "Pick a delivery time - side drawer on desktop, bottom on mobile.",
     requires: ["button", "badge", "field", "radio-group"],
   },
   {
@@ -102,7 +102,7 @@ export function Example() {
 const directionSource = `import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer"
 import { Button } from "@/components/ui/button"
 
-// Prefer logical edges — they follow writing direction.
+// Prefer logical edges - they follow writing direction.
 <Drawer direction="end">
   <DrawerTrigger asChild>
     <Button variant="outline">Open from end</Button>
@@ -140,7 +140,7 @@ export default async function DrawerDocsPage() {
           <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
             &quot;end&quot;
           </code>{" "}
-          — SonoJS resolves them to physical sides so Vaul&apos;s animation
+          - SonoJS resolves them to physical sides so Vaul&apos;s animation
           matches the visual edge.
         </p>
         }
@@ -211,26 +211,26 @@ export default async function DrawerDocsPage() {
               type: '"top" | "bottom" | "left" | "right" | "start" | "end"',
               defaultValue: '"bottom"',
               description:
-                "On Drawer — prefer start/end for RTL. left/right are physical and do not flip.",
+                "On Drawer - prefer start/end for RTL. left/right are physical and do not flip.",
             },
             {
               name: "open / onOpenChange",
               type: "boolean / (open: boolean) => void",
-              defaultValue: "—",
-              description: "On Drawer — controlled open state.",
+              defaultValue: "-",
+              description: "On Drawer - controlled open state.",
             },
             {
               name: "asChild",
               type: "boolean",
               defaultValue: "false",
               description:
-                "On DrawerTrigger / DrawerClose — merge props into the child (e.g. Button).",
+                "On DrawerTrigger / DrawerClose - merge props into the child (e.g. Button).",
             },
             {
               name: "shouldScaleBackground",
               type: "boolean",
               defaultValue: "true",
-              description: "On Drawer — Vaul scales the page behind the drawer.",
+              description: "On Drawer - Vaul scales the page behind the drawer.",
             },
           ]}
         />

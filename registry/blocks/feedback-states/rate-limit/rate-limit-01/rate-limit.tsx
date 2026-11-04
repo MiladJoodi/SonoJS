@@ -87,7 +87,7 @@ export default function RateLimit({
             </h1>
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
               You&apos;ve hit the request ceiling for this window. Wait for the
-              cooldown, then try again — or raise your plan limit.
+              cooldown, then try again - or raise your plan limit.
             </p>
           </div>
 

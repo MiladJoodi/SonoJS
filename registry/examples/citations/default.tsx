@@ -57,7 +57,7 @@ export function CitationsDefault() {
   return (
     <div className="mx-auto flex min-h-[18rem] w-full max-w-lg flex-col gap-4">
       <p className="text-sm leading-relaxed text-foreground/85">
-        Summer demand spikes for stone-fruit flavors — peach and apricot lead
+        Summer demand spikes for stone-fruit flavors - peach and apricot lead
         <Citation citationId="wiki" index={1} idPrefix={PREFIX} />
         . Check cone inventory before promoting a waffle-bowl special
         <Citation citationId="seriouseats" index={2} idPrefix={PREFIX} />

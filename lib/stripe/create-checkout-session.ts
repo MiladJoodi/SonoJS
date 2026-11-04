@@ -16,7 +16,7 @@ export type CreateCheckoutSessionResult = {
   url: string
 }
 
-/** Exported for unit tests — builds the form body Stripe expects. */
+/** Exported for unit tests - builds the form body Stripe expects. */
 export function buildCheckoutSessionFormBody(
   input: Omit<CreateCheckoutSessionInput, "fetchImpl">
 ): URLSearchParams {

@@ -76,7 +76,7 @@ function SheetContent({
   side?: EdgeSide
   showCloseButton?: boolean
 }) {
-  // Portal under <body> — resolve logical edges + set dir for RTL CSS.
+  // Portal under <body> - resolve logical edges + set dir for RTL CSS.
   const { dir } = useDirection()
   const resolvedSide = resolveEdgeSide(side, dir, "right")
 

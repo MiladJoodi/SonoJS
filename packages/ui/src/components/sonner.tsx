@@ -41,7 +41,7 @@ function Toaster({
 }: ToasterProps) {
   const { theme: nextTheme, resolvedTheme } = useTheme()
   const documentScheme = useDocumentColorScheme()
-  // Portaled under body — prefer explicit dir, else DirectionProvider / <html>.
+  // Portaled under body - prefer explicit dir, else DirectionProvider / <html>.
   const { dir: contextDir } = useDirection()
   const dir = dirProp ?? contextDir
 

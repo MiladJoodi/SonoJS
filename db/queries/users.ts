@@ -120,7 +120,7 @@ export async function linkStripeCustomerToClerkUser(input: {
 
     if (!updated) {
       throw new BillingIdentityConflictError(
-        `Failed to link Stripe customer ${customerId} — concurrent mapping conflict`
+        `Failed to link Stripe customer ${customerId} - concurrent mapping conflict`
       )
     }
 
@@ -142,7 +142,7 @@ export async function linkStripeCustomerToClerkUser(input: {
 /**
  * @deprecated Prefer linkStripeCustomerToClerkUser for conflict-safe linking.
  * Still used only when caller already resolved the user row id and accepts
- * overwriting that row's customer id — kept for internal/test seed paths.
+ * overwriting that row's customer id - kept for internal/test seed paths.
  */
 export async function setUserStripeCustomerId(
   userId: string,
@@ -195,7 +195,7 @@ export async function setUserStripeCustomerId(
 
     if (!updated) {
       throw new BillingIdentityConflictError(
-        "Failed to set Stripe customer id — identity conflict"
+        "Failed to set Stripe customer id - identity conflict"
       )
     }
     return updated
@@ -227,7 +227,7 @@ export async function clearUserStripeCustomerId(
 /**
  * Resolve Neon user from Stripe customer and/or Clerk id.
  * Returns null when the Stripe customer is unknown and no clerkUserId was
- * supplied (unlinked fixture / CLI event) — callers must not invent a user.
+ * supplied (unlinked fixture / CLI event) - callers must not invent a user.
  * Identity conflicts still throw BillingIdentityConflictError.
  */
 export async function resolveBillingUser(input: {

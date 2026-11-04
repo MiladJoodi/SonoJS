@@ -25,7 +25,7 @@ const exampleDefs = [
   {
     name: "avatar-sizes",
     title: "Sizes",
-    description: 'Use `size` — `sm`, default, or `lg`.',
+    description: 'Use `size` - `sm`, default, or `lg`.',
   },
   {
     name: "avatar-badge",
@@ -64,7 +64,7 @@ export default async function AvatarDocsPage() {
         pathname="/docs/components/avatar"
         description={
           <p className="leading-relaxed text-muted-foreground">
-          An image element with a fallback for representing the user — with
+          An image element with a fallback for representing the user - with
           optional badge, sizes, and overlapping groups.
         </p>
         }

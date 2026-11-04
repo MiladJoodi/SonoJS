@@ -3,7 +3,7 @@
   "name": "advanced-filters-02",
   "type": "registry:block",
   "title": "advanced-filters-02",
-  "description": "Smart commerce filters — live match pulse, icon accordion, shipping cards, and star tiles.",
+  "description": "Smart commerce filters - live match pulse, icon accordion, shipping cards, and star tiles.",
   "access": "public",
   "dependencies": [
     "lucide-react"
@@ -44,6 +44,6 @@
       "target": "components/blocks/data-tables/advanced-filters-02/advanced-filters.tsx"
     }
   ],
-  "version": "0.1.0+c9c3d2a86e47",
-  "generatedAt": "2026-11-03T21:57:48.548Z"
+  "version": "0.1.0+3fe3a15cbaf2",
+  "generatedAt": "2026-11-04T11:52:24.655Z"
 }

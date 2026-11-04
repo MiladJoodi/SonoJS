@@ -1,4 +1,4 @@
-# Coin icons — drop files here
+# Coin icons - drop files here
 
 Put each asset logo in this folder, then wire the import in `crypto-portfolio.tsx` (see the `ASSETS` array + `ICON_IMPORTS` comment).
 

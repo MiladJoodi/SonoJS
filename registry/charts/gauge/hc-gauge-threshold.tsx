@@ -15,7 +15,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Hc Gauge Threshold — solidgauge with zero threshold (red below / green above).
+ * Hc Gauge Threshold - solidgauge with zero threshold (red below / green above).
  * Locked header chrome; English / Intl. Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/hc-gauge-threshold.tsx
  */
@@ -93,7 +93,7 @@ function buildOptions(value: number): Options {
 
 function HcGaugeThreshold({
   title = "Threshold gauge",
-  subtitle = "Solid gauge with a zero threshold — red below, green above.",
+  subtitle = "Solid gauge with a zero threshold - red below, green above.",
   value = DEMO_VALUE,
   className,
 }: HcGaugeThresholdProps) {

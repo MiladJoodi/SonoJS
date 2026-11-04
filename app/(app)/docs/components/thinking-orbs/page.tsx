@@ -15,23 +15,23 @@ const exampleDefs = [
   {
     name: "thinking-orbs-working",
     title: "Working",
-    description: 'Particles on tilted orbits — `state="working"`.',
+    description: 'Particles on tilted orbits - `state="working"`.',
   },
   {
     name: "thinking-orbs-weaving",
     title: "Weaving",
-    description: 'Three strands plait around the sphere — `state="weaving"`.',
+    description: 'Three strands plait around the sphere - `state="weaving"`.',
   },
   {
     name: "thinking-orbs-searching",
     title: "Searching",
-    description: 'Scan meridian over a dotted globe — `state="searching"`.',
+    description: 'Scan meridian over a dotted globe - `state="searching"`.',
   },
   {
     name: "thinking-orbs-connecting",
     title: "Connecting",
     description:
-      'Constellation wires itself with packets on the edges — `state="connecting"`.',
+      'Constellation wires itself with packets on the edges - `state="connecting"`.',
   },
 ]
 
@@ -51,7 +51,7 @@ export default async function ThinkingOrbsDocsPage() {
         pathname="/docs/components/thinking-orbs"
         description={
           <p className="leading-relaxed text-muted-foreground">
-            Animated orb states that visualize an AI agent&apos;s work —
+            Animated orb states that visualize an AI agent&apos;s work -
             canvas particle modes for working, searching, weaving, and more.
           </p>
         }

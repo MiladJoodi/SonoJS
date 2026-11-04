@@ -62,7 +62,7 @@ export default function OtpVerificationForm({
           <Label htmlFor="otp-02" className="sr-only">
             SMS verification code
           </Label>
-          {/* Continuous 6 slots — no separator (SMS pattern) */}
+          {/* Continuous 6 slots - no separator (SMS pattern) */}
           <InputOTP
             id="otp-02"
             maxLength={6}

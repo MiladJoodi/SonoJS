@@ -23,11 +23,11 @@ const QUESTIONS = [
   {
     id: "risk",
     title: "How careful should it be?",
-    description: "Single choice — advances automatically.",
+    description: "Single choice - advances automatically.",
     options: [
-      { value: "strict", label: "Strict — ask before every write" },
-      { value: "balanced", label: "Balanced — ask on risky files" },
-      { value: "fast", label: "Fast — propose a full patch" },
+      { value: "strict", label: "Strict - ask before every write" },
+      { value: "balanced", label: "Balanced - ask on risky files" },
+      { value: "fast", label: "Fast - propose a full patch" },
     ],
   },
   {

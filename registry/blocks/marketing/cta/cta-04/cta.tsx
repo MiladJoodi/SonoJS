@@ -92,7 +92,7 @@ export default function Cta({
               </h2>
               <p className="cta-04-desc text-base leading-relaxed">
                 Startup Design Kit is a fast, easy way to build professional
-                brand visuals — from logos to landing pages. Whether you&apos;re
+                brand visuals - from logos to landing pages. Whether you&apos;re
                 just getting started or scaling fast, we&apos;ve got you covered.
               </p>
 

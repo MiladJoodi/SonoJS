@@ -21,7 +21,7 @@ import {
 } from "@sonojs/ui/components/drawer"
 import { highlightBlockInstall } from "@/lib/highlight-install-action"
 
-/** Same baseline skip as docs install hints — keep lucide and the rest. */
+/** Same baseline skip as docs install hints - keep lucide and the rest. */
 const NPM_SKIP = new Set([
   "clsx",
   "tailwind-merge",
@@ -208,7 +208,7 @@ export function BlockInstallBody({
     return () => {
       cancelled = true
     }
-    // `key` already encodes usage title+code — omit `usage` identity churn.
+    // `key` already encodes usage title+code - omit `usage` identity churn.
   // eslint-disable-next-line react-hooks/exhaustive-deps -- usage via key
   }, [key, name])
 
@@ -235,7 +235,7 @@ export function BlockInstallBody({
   }
 
   if (!gate.allowed) {
-    // Compact lock panel — natural height (AccessLocked min-h), no tall black stage.
+    // Compact lock panel - natural height (AccessLocked min-h), no tall black stage.
     return (
       <AccessLocked
         access={gate.access}

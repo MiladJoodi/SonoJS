@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils"
 import { getChartDemoLoader } from "@/registry/charts/demo-loaders"
 
 /**
- * Base stage. Tall min-height only while loading — once the demo is visible,
+ * Base stage. Tall min-height only while loading - once the demo is visible,
  * height follows content (heatmaps and other compact charts stay tight).
  */
 const STAGE_CLASS = "relative mx-auto w-full min-w-0 max-w-[640px]"
@@ -97,7 +97,7 @@ function ChartDemoLoader({ load }: { load: () => Promise<ChartModule> }) {
     }
   }, [load])
 
-  // Reveal after paint, then mount the demo — never mount under opacity-0.
+  // Reveal after paint, then mount the demo - never mount under opacity-0.
   // Gauges that animate while hidden finish at the tip; when revealed they look
   // "already full" and a remount replays from zero (double entrance).
   React.useEffect(() => {
@@ -112,7 +112,7 @@ function ChartDemoLoader({ load }: { load: () => Promise<ChartModule> }) {
     return <p className="text-sm text-destructive">{error}</p>
   }
 
-  // Narrow `Demo` in-branch — a derived `showDemo` boolean does not.
+  // Narrow `Demo` in-branch - a derived `showDemo` boolean does not.
   if (!Demo || !revealed) {
     return (
       <div className={cn(STAGE_CLASS, STAGE_LOADING_MIN)}>

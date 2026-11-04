@@ -16,7 +16,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Straight Angle Pie Chart — half-pie (180→0) with locked metric scrub chrome.
+ * Straight Angle Pie Chart - half-pie (180→0) with locked metric scrub chrome.
  * Flat edge sits on the bottom; no on-slice value labels (tooltip only).
  * Tokens: `--chart-1…5`. Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/straight-angle-pie-chart.tsx
@@ -108,7 +108,7 @@ const chartPieHalfContainerClassName =
 
 function StraightAnglePieChart({
   title = "Sales share",
-  subtitle = "Straight-angle half pie — region mix.",
+  subtitle = "Straight-angle half pie - region mix.",
   data = DEMO_DATA,
   className,
   plotDir,
@@ -270,7 +270,7 @@ function StraightAnglePieChart({
                 <span className="font-normal">of total</span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{caption}</p>

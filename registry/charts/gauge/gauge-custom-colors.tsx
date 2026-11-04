@@ -12,7 +12,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Gauge Custom Colors — rose → sand ramp, thicker arc, needle at 37%.
+ * Gauge Custom Colors - rose → sand ramp, thicker arc, needle at 37%.
  * react-gauge-chart; locked header chrome; English / Intl.
  * Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/gauge-custom-colors.tsx
@@ -34,11 +34,11 @@ export type GaugeCustomColorsProps = {
 const DEMO_LEVELS = 30
 const DEMO_PERCENT = 0.37
 const DEMO_ARC_WIDTH = 0.3
-/** Soft rose → sand — stable ref (do not default to `[...DEMO_COLORS]`). */
+/** Soft rose → sand - stable ref (do not default to `[...DEMO_COLORS]`). */
 const DEMO_COLORS: string[] = ["#d97986", "#c4a574"]
 
 function GaugeCustomColors({
-  title = "Score gauge — custom colors",
+  title = "Score gauge - custom colors",
   subtitle = "Thirty soft rose → sand bands with a thicker arc at 37%.",
   levels = DEMO_LEVELS,
   percent = DEMO_PERCENT,

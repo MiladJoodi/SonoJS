@@ -45,7 +45,7 @@ function useSetEditorMode() {
   )
 }
 
-/** Compact View menu — mobile only; sits in the end-sticky tabs slot. */
+/** Compact View menu - mobile only; sits in the end-sticky tabs slot. */
 function ViewModeMenu() {
   const { layout } = useEditorLayout()
   const setMode = useSetEditorMode()

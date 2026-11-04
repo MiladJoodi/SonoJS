@@ -26,7 +26,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Customized Label Line Chart — locked gallery chrome (navy × orange).
+ * Customized Label Line Chart - locked gallery chrome (navy × orange).
  * Dual monotone lines; Desktop series has alternating point labels + angled X ticks.
  * Installs to: components/charts/customized-label-line-chart.tsx
  */
@@ -385,7 +385,7 @@ function CustomizedLabelLineChart({
     [makeDot]
   )
 
-  /** Always-on Desktop labels — alternate above/below (FarsiUI pattern). */
+  /** Always-on Desktop labels - alternate above/below (FarsiUI pattern). */
   const desktopPointLabel = React.useCallback(
     (props: {
       x?: string | number
@@ -432,7 +432,7 @@ function CustomizedLabelLineChart({
     [liveIndex, liveScrubbing, locale]
   )
 
-  /** Scrub total — only while scrubbing (on mobile series tip). */
+  /** Scrub total - only while scrubbing (on mobile series tip). */
   const scrubTotalLabel = React.useCallback(
     (props: {
       x?: string | number
@@ -523,7 +523,7 @@ function CustomizedLabelLineChart({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{monthLabel}</p>

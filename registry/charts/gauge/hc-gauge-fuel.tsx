@@ -14,7 +14,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Hc Gauge Fuel — semicircle solidgauge fuel level.
+ * Hc Gauge Fuel - semicircle solidgauge fuel level.
  * Soft rose → gold → green stops; locked header chrome; English / Intl.
  * Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/hc-gauge-fuel.tsx
@@ -85,7 +85,7 @@ function buildOptions(value: number): Options {
 
 function HcGaugeFuel({
   title = "Fuel level",
-  subtitle = "Semicircle solid gauge — soft rose / gold / green stops.",
+  subtitle = "Semicircle solid gauge - soft rose / gold / green stops.",
   value = DEMO_VALUE,
   className,
 }: HcGaugeFuelProps) {

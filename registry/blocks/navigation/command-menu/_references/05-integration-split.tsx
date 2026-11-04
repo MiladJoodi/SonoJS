@@ -1,6 +1,6 @@
 /**
  * Pending: Navigation → Command Menu (05)
- * Job: Split-pane integration studio — list | detail + enable switch.
+ * Job: Split-pane integration studio - list | detail + enable switch.
  * Audit: md:border-e (RTL) · mobile list/detail swap · icon-dir back ·
  * wide dialog via style maxWidth · scrollable panes · semantic surfaces.
  */

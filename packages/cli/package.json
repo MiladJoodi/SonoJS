@@ -1,7 +1,7 @@
 {
   "name": "sonojs",
   "version": "0.1.0",
-  "description": "SonoJS CLI — add components into your project (copy-source)",
+  "description": "SonoJS CLI - add components into your project (copy-source)",
   "license": "MIT",
   "type": "module",
   "bin": {

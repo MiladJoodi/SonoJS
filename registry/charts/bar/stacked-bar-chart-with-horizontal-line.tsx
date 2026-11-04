@@ -28,7 +28,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Stacked Bar Chart With Horizontal Line — locked gallery chrome
+ * Stacked Bar Chart With Horizontal Line - locked gallery chrome
  * (navy × orange + chart-3 third stack); type-required dashed target
  * `ReferenceLine`. Metric header scrubber.
  * Installs to: components/charts/stacked-bar-chart-with-horizontal-line.tsx
@@ -494,7 +494,7 @@ function StackedBarChartWithHorizontalLine({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">

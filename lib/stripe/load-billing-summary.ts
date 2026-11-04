@@ -157,7 +157,7 @@ async function linkOrReclaimStripeCustomer(input: {
 
   const ownerAlive = await clerkUserExists(owner.clerkUserId)
   if (ownerAlive) {
-    // Still conflict with a living account — display may use customerId without Neon link.
+    // Still conflict with a living account - display may use customerId without Neon link.
     return
   }
 

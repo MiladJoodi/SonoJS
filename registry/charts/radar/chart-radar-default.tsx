@@ -16,7 +16,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Chart Radar Default (classic) — single Store filled polygon + default tip.
+ * Chart Radar Default (classic) - single Store filled polygon + default tip.
  * Locked metric scrub. Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/chart-radar-default.tsx
  */
@@ -242,7 +242,7 @@ function ChartRadarDefault({
                 {formatPct(deltaPct)}
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{caption}</p>

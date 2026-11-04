@@ -12,7 +12,7 @@ export type CursorsNavItem = {
   status: "pending" | "ported"
 }
 
-/** Flat sidebar list — ported first, then pending. */
+/** Flat sidebar list - ported first, then pending. */
 export const cursorsNav: CursorsNavItem[] = [...cursorsCatalog]
   .sort((a, b) => {
     if (a.status !== b.status) {

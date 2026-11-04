@@ -14,7 +14,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Hc Gauge Combo — solidgauge fill + dial needle on the same value.
+ * Hc Gauge Combo - solidgauge fill + dial needle on the same value.
  * Soft teal / blue / violet stops; locked header chrome; English / Intl.
  * Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/hc-gauge-combo.tsx
@@ -41,7 +41,7 @@ function buildOptions(value: number): Options {
   return {
     chart: {},
     pane: {
-      // No 50% borderRadius — rounded solid fills visually lag behind the dial.
+      // No 50% borderRadius - rounded solid fills visually lag behind the dial.
       borderRadius: 0,
       background: [
         {
@@ -115,7 +115,7 @@ function buildOptions(value: number): Options {
 }
 
 function HcGaugeCombo({
-  title = "Score gauge — combo",
+  title = "Score gauge - combo",
   subtitle = "Solid fill and dial share one value so the tip meets the arc end.",
   value = DEMO_VALUE,
   className,

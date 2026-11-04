@@ -28,7 +28,7 @@ const PREVIEW = [
   { title: "Design Systems Lead", meta: "Remote EU · Lead" },
 ] as const
 
-/** Job filter sidebar as hero — muted preview strip, not a job SERP. */
+/** Job filter sidebar as hero - muted preview strip, not a job SERP. */
 export default function FilterPanel({
   className,
   ...props

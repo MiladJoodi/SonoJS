@@ -5,7 +5,7 @@ import { pageMetadata } from "@/lib/seo"
 export const metadata = pageMetadata({
   title: "Cursors",
   description:
-    "Browse SonoJS cursor effects — pointer followers, trails, and interaction demos. Install with the CLI.",
+    "Browse SonoJS cursor effects - pointer followers, trails, and interaction demos. Install with the CLI.",
   path: "/cursors",
 })
 

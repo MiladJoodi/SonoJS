@@ -343,7 +343,7 @@ export default function MegaMenu({
           Features mega with release promo
         </h1>
         <p className="max-w-md text-sm text-muted-foreground">
-          Two columns of feature links with icons, plus a release update panel —
+          Two columns of feature links with icons, plus a release update panel -
           sheet on small screens.
         </p>
       </main>

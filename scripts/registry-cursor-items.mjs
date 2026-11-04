@@ -1,4 +1,4 @@
-/** Cursor effects for `registry:cursor` (light only — no WebGL / patterns). */
+/** Cursor effects for `registry:cursor` (light only - no WebGL / patterns). */
 
 /** @typedef {{ path: string, type: string, target?: string }} RegistryFileDef */
 /** @typedef {{

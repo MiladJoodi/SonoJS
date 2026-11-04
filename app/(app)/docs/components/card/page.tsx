@@ -92,7 +92,7 @@ export default async function CardDocsPage() {
         pathname="/docs/components/card"
         description={
           <p className="leading-relaxed text-muted-foreground">
-          Displays a card with header, content, and footer — with size,
+          Displays a card with header, content, and footer - with size,
           spacing, edge-to-edge, and image layouts.
         </p>
         }

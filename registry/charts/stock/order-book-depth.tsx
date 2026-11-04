@@ -22,7 +22,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Order Book Depth — cumulative bid/ask step areas around mid price.
+ * Order Book Depth - cumulative bid/ask step areas around mid price.
  * No neon; locked gallery chrome + metric scrubber.
  * Installs to: components/charts/order-book-depth.tsx
  */

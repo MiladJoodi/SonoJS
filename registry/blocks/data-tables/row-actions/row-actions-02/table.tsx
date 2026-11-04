@@ -197,7 +197,7 @@ export default function RowActions02({
             Invoices
           </h3>
           <p className="mt-0.5 text-sm text-muted-foreground">
-            Soft icon actions — view, copy, download, and overflow menu.
+            Soft icon actions - view, copy, download, and overflow menu.
           </p>
         </div>
 

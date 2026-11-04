@@ -68,7 +68,7 @@ export default function TabsBlock({
             Built for real product teams
           </h4>
           <p className="text-sm leading-relaxed text-muted-foreground">
-            Copy-source components with RTL, dark mode, and registry installs —
+            Copy-source components with RTL, dark mode, and registry installs -
             so design and engineering stay aligned from day one.
           </p>
           <ul className="grid gap-2 sm:grid-cols-2">
@@ -147,7 +147,7 @@ export default function TabsBlock({
           {[
             [
               "Can I customize tokens?",
-              "Yes — radius, heights, and colors come from CSS variables.",
+              "Yes - radius, heights, and colors come from CSS variables.",
             ],
             [
               "Does it support RTL?",

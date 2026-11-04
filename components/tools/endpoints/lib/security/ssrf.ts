@@ -1,5 +1,5 @@
 /**
- * SSRF protection utilities — shared between proxy route and tests.
+ * SSRF protection utilities - shared between proxy route and tests.
  * Pure functions; no Next.js imports.
  */
 

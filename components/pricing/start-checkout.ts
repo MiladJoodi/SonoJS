@@ -23,7 +23,7 @@ function messageForApiError(code: string | undefined): string {
 
 /**
  * Start Stripe Checkout for a Pro plan via the billing API.
- * Does not grant Pro — that happens only after the webhook reconciles Neon.
+ * Does not grant Pro - that happens only after the webhook reconciles Neon.
  */
 export async function startCheckout(
   planSlug: CheckoutPlanSlug,

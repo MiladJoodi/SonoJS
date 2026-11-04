@@ -23,7 +23,7 @@ export default function Banner({
           Launch
         </span>
         <span>
-          Try SonoJS today —{" "}
+          Try SonoJS today -{" "}
           <span className="font-semibold">$50 free credits</span> on your first
           workspace
         </span>

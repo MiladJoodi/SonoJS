@@ -35,7 +35,7 @@ export function MessageHeaderExample() {
       <Message align="end">
         <MessageContent>
           <Bubble>
-            <BubbleContent>On it — sending now.</BubbleContent>
+            <BubbleContent>On it - sending now.</BubbleContent>
           </Bubble>
           <MessageFooter>Read</MessageFooter>
         </MessageContent>

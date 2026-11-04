@@ -29,7 +29,7 @@ import { CANDLE_DOWN, CANDLE_UP } from "../_lib/stock-shared"
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * KPI Area Charts — multi-variant revenue area dashboard.
+ * KPI Area Charts - multi-variant revenue area dashboard.
  * KPI minis + hero dual area + stacked / percent variants; no neon; metric scrubber.
  * Installs to: components/charts/kpi-area-charts.tsx
  */
@@ -288,7 +288,7 @@ function VariantCard({
 
 function KpiAreaCharts({
   title = "KPI Area Charts",
-  subtitle = "Channel revenue areas — KPI minis, monthly dual series, stacked and share variants.",
+  subtitle = "Channel revenue areas - KPI minis, monthly dual series, stacked and share variants.",
   data = DEMO_DATA,
   className,
   plotDir,
@@ -476,7 +476,7 @@ function KpiAreaCharts({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">
@@ -819,7 +819,7 @@ function KpiAreaCharts({
                           <span className="font-medium text-foreground">
                             {abs != null
                               ? formatMoney(abs, locale)
-                              : "—"}{" "}
+                              : "-"}{" "}
                             · {Math.round(Number(value) * 100)}%
                           </span>
                         </div>

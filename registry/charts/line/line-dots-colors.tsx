@@ -18,7 +18,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Line Dots Colors (classic) — locked gallery chrome.
+ * Line Dots Colors (classic) - locked gallery chrome.
  * Natural sales line with per-region colored dots (chart-1…5).
  * Metric header scrubber; RTL-aware axes.
  * Installs to: components/charts/line-dots-colors.tsx
@@ -403,7 +403,7 @@ function LineDotsColors({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{categoryLabel}</p>

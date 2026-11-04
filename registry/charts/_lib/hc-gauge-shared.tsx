@@ -15,7 +15,7 @@ import { cn } from "@/lib/utils"
  * Installs to: components/charts/_lib/hc-gauge-shared.tsx
  */
 
-/** Softened Highcharts defaults — closer to chart intensity on light. */
+/** Softened Highcharts defaults - closer to chart intensity on light. */
 export const HC_COLOR_0 = "#5aa8d4"
 export const HC_COLOR_1 = "#6b66b8"
 export const HC_COLOR_2 = "#5cb88a"

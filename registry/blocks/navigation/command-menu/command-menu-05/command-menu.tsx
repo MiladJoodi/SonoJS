@@ -107,7 +107,7 @@ export default function CommandMenu({
           Integration studio
         </p>
         <p className="text-start text-xs text-muted-foreground">
-          Split list and detail — works on mobile and desktop.
+          Split list and detail - works on mobile and desktop.
         </p>
       </header>
 

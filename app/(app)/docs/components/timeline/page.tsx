@@ -44,7 +44,7 @@ const verticalDefs = [
     name: "timeline-milestones",
     title: "Company milestones",
     description:
-      "Zigzag year markers along a centered rail — odd/even start and end columns.",
+      "Zigzag year markers along a centered rail - odd/even start and end columns.",
   },
   {
     name: "timeline-color-dots",
@@ -213,13 +213,13 @@ export default async function TimelineDocsPage() {
             {
               name: "value",
               type: "number",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Controlled active step.",
             },
             {
               name: "onValueChange",
               type: "(value: number) => void",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Called when the active step changes.",
             },
             {
@@ -231,7 +231,7 @@ export default async function TimelineDocsPage() {
             {
               name: "step",
               type: "number",
-              defaultValue: "—",
+              defaultValue: "-",
               description:
                 "`TimelineItem` only. Ordinal index compared to the active step.",
             },
@@ -240,7 +240,7 @@ export default async function TimelineDocsPage() {
               type: "boolean",
               defaultValue: "false",
               description:
-                "`TimelineDate` / `TimelineIndicator` — merge props onto the child.",
+                "`TimelineDate` / `TimelineIndicator` - merge props onto the child.",
             },
           ]}
         />

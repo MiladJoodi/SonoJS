@@ -86,7 +86,7 @@ function Brand({
 export default function Hero({
   eyebrow = "Built to Grow with You",
   title = "Empower Brand with Human-Centered Solutions",
-  description = "Showcase your products and connect with your audience. Our all-in-one platform helps you manage operations and boost visibility — whether you're in fashion, beauty, wellness, or beyond.",
+  description = "Showcase your products and connect with your audience. Our all-in-one platform helps you manage operations and boost visibility - whether you're in fashion, beauty, wellness, or beyond.",
   primaryCta = "Get Started Free",
   primaryHref = "#",
   secondaryCta = "Explore Features",

@@ -49,7 +49,7 @@ export default function BlockBlogGridDocsPage() {
       <BlocksPageHeader
         title="Blog Grid"
         pathname="/blocks/content-publishing/blog-grid"
-        description="Publishing indexes — filter studio, featured magazine, bento mosaic, editorial archive, cinematic theater, filter-rail app shell, type index, topic rails, author atelier, and command density."
+        description="Publishing indexes - filter studio, featured magazine, bento mosaic, editorial archive, cinematic theater, filter-rail app shell, type index, topic rails, author atelier, and command density."
       />
 
       <div className="flex flex-col gap-8">

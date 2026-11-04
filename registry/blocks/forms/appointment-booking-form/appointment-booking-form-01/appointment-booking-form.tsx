@@ -254,7 +254,7 @@ function StubRow({
   )
 }
 
-/** Decorative barcode — pure CSS stripes, no data. */
+/** Decorative barcode - pure CSS stripes, no data. */
 function Barcode({ className }: { className?: string }) {
   return (
     <div
@@ -563,13 +563,13 @@ export default function AppointmentBookingForm({
                     Due at visit
                   </dt>
                   <dd className="mt-1 font-medium tabular-nums">
-                    {service ? currency.format(service.price) : "—"}
+                    {service ? currency.format(service.price) : "-"}
                   </dd>
                 </div>
               </dl>
 
               <p className="text-pretty text-sm leading-6 text-muted-foreground">
-                This is a demo — nothing has actually been booked and no email
+                This is a demo - nothing has actually been booked and no email
                 was sent. The reference is for illustration only.
               </p>
             </div>
@@ -621,7 +621,7 @@ export default function AppointmentBookingForm({
                   </h1>
                 </div>
                 <p className="max-w-xs text-pretty text-xs leading-5 text-muted-foreground sm:text-end">
-                  Demo board — nothing is sent or booked.
+                  Demo board - nothing is sent or booked.
                 </p>
               </div>
 
@@ -922,14 +922,14 @@ export default function AppointmentBookingForm({
                       Your visit
                     </p>
                     <p className="mt-1 text-lg font-semibold leading-6 tracking-tight">
-                      {service?.name ?? "—"}
+                      {service?.name ?? "-"}
                     </p>
                   </div>
 
                   <dl className="flex flex-col gap-2.5" aria-live="polite">
                     <StubRow
                       label="Specialist"
-                      value={offersService ? specialist?.name : "—"}
+                      value={offersService ? specialist?.name : "-"}
                     />
                     <StubRow
                       label="Date"
@@ -943,7 +943,7 @@ export default function AppointmentBookingForm({
                     />
                     <StubRow
                       label="Duration"
-                      value={service ? `${service.duration} min` : "—"}
+                      value={service ? `${service.duration} min` : "-"}
                     />
                   </dl>
 
@@ -953,7 +953,7 @@ export default function AppointmentBookingForm({
                         Due at visit
                       </span>
                       <span className="text-3xl font-semibold tabular-nums tracking-tight">
-                        {service ? currency.format(service.price) : "—"}
+                        {service ? currency.format(service.price) : "-"}
                       </span>
                     </div>
                   </div>
@@ -980,7 +980,7 @@ export default function AppointmentBookingForm({
                     {submitContent}
                   </Button>
                   <p className="text-center text-xs leading-5 text-muted-foreground">
-                    Demo form — nothing is sent or booked.
+                    Demo form - nothing is sent or booked.
                   </p>
                 </div>
               </aside>
@@ -1100,7 +1100,7 @@ export default function AppointmentBookingForm({
                     {dockSummary}
                   </p>
                   <p className="text-sm font-semibold tabular-nums">
-                    {service ? currency.format(service.price) : "—"}
+                    {service ? currency.format(service.price) : "-"}
                     <span className="ms-1.5 text-xs font-normal text-muted-foreground">
                       demo only
                     </span>

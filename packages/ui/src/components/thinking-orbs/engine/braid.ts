@@ -1,4 +1,4 @@
-// Braid: three strands plait around the sphere — the "weaving" state.
+// Braid: three strands plait around the sphere - the "weaving" state.
 // Each strand runs pole to pole on a helix, and a radial breathing term
 // makes them trade places, reading as the over/under of a plait.
 
@@ -38,7 +38,7 @@ export const frameBraid: ModeFrame = (size, t, o) => {
       const surf = Math.sqrt(Math.max(0, 1 - u * u));
       const endFade = Math.min(1, (1 - Math.abs(u)) / 0.1);
       const a = u * Math.PI * turns + phase;
-      // radial breathing: strands trade places — the over/under of a plait
+      // radial breathing: strands trade places - the over/under of a plait
       const weave =
         1 + 0.075 * Math.sin(u * Math.PI * turns * 2 + phase * 2 + t * 0.8);
       const rr = surf * R * weave;

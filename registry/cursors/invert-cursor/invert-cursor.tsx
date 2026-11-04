@@ -17,7 +17,7 @@ export interface InvertCursorProps {
 }
 
 /**
- * Editorial invert lens — white disc with mix-blend-mode difference.
+ * Editorial invert lens - white disc with mix-blend-mode difference.
  * No wrapping stacking context (z-index parent would break blending).
  */
 export function InvertCursor({

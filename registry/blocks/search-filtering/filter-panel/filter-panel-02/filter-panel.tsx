@@ -37,7 +37,7 @@ function money(n: number) {
   return n.toLocaleString("en-US", { style: "currency", currency: "USD" })
 }
 
-/** Standalone ecommerce facet accordion — filter UI as the product. */
+/** Standalone ecommerce facet accordion - filter UI as the product. */
 export default function FilterPanel({
   className,
   ...props
@@ -106,7 +106,7 @@ export default function FilterPanel({
             Product filters
           </h1>
           <p className="mt-1 text-sm text-muted-foreground">
-            Accordion facets — install as a standalone panel.
+            Accordion facets - install as a standalone panel.
           </p>
         </div>
 

@@ -38,7 +38,7 @@ const DAYS = [
 
 const SLOTS = ["09:00", "09:30", "10:00", "11:00", "14:00", "15:30", "16:00"] as const
 
-/** Public booking — service → day → slot → confirm. */
+/** Public booking - service → day → slot → confirm. */
 export default function Calendar04() {
   const [serviceId, setServiceId] = React.useState<string>(SERVICES[1].id)
   const [dayId, setDayId] = React.useState<string>(DAYS[1].id)

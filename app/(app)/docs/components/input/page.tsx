@@ -108,7 +108,7 @@ export default async function InputDocsPage() {
               name: "type",
               type: "HTML input type",
               defaultValue: '"text"',
-              description: "Native input type — text, email, file, password, …",
+              description: "Native input type - text, email, file, password, …",
             },
             {
               name: "disabled",
@@ -119,13 +119,13 @@ export default async function InputDocsPage() {
             {
               name: "aria-invalid",
               type: "boolean",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Marks the control invalid and applies destructive ring.",
             },
             {
               name: "className",
               type: "string",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Merge extra Tailwind classes on the input.",
             },
           ]}

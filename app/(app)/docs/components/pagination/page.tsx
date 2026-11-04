@@ -23,7 +23,7 @@ const exampleDefs = [
   {
     name: "pagination-simple",
     title: "Simple",
-    description: "Page numbers only — useful when the list is short.",
+    description: "Page numbers only - useful when the list is short.",
     requires: ["button"],
     npmRequires: ["lucide-react"],
   },
@@ -128,24 +128,24 @@ export default async function PaginationDocsPage() {
               name: "isActive",
               type: "boolean",
               defaultValue: "false",
-              description: "On `PaginationLink` — marks the current page.",
+              description: "On `PaginationLink` - marks the current page.",
             },
             {
               name: "size",
               type: "Button size",
               defaultValue: '"icon"',
-              description: "On `PaginationLink` — defaults to icon; prev/next use default.",
+              description: "On `PaginationLink` - defaults to icon; prev/next use default.",
             },
             {
               name: "text",
               type: "string",
               defaultValue: '"Previous" / "Next"',
-              description: "On `PaginationPrevious` / `PaginationNext` — visible label.",
+              description: "On `PaginationPrevious` / `PaginationNext` - visible label.",
             },
             {
               name: "href",
               type: "string",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Native anchor href (swap for Next.js `Link` if needed).",
             },
           ]}

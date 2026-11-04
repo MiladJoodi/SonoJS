@@ -144,7 +144,7 @@ export default function OrderHistory({
               Invoice groups
             </h1>
             <p className="mt-2 max-w-lg text-sm text-muted-foreground">
-              Each purchase is a packing slip — meta up top, line items below.
+              Each purchase is a packing slip - meta up top, line items below.
             </p>
           </div>
           <div className="w-full md:w-auto">

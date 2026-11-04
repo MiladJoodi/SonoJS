@@ -20,7 +20,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Chart Radial Stacked (classic) — semicircle stacked Store×Online ring.
+ * Chart Radial Stacked (classic) - semicircle stacked Store×Online ring.
  * Locked navy×orange dual series; centered total Label; no Card shell.
  * Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/chart-radial-stacked.tsx
@@ -43,7 +43,7 @@ export type ChartRadialStackedProps = {
 
 const RADIAL_MS = 200
 
-/** Classic January sample — Store×Online. */
+/** Classic January sample - Store×Online. */
 const DEMO_DATA: ChartRadialStackedPoint[] = [
   { month: "january", store: 1260, online: 570 },
 ]
@@ -68,7 +68,7 @@ const chartRadialContainerClassName =
 
 function ChartRadialStacked({
   title = "Sales by channel",
-  subtitle = "Stacked Store × Online — January.",
+  subtitle = "Stacked Store × Online - January.",
   data = DEMO_DATA,
   className,
   plotDir,

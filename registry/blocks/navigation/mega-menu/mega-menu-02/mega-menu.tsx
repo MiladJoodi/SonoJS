@@ -325,7 +325,7 @@ export default function MegaMenu({
         </h1>
         <p className="max-w-md text-sm text-muted-foreground">
           Compact three-column Services panel for governance, research, and
-          training — sheet on small screens.
+          training - sheet on small screens.
         </p>
       </main>
     </div>

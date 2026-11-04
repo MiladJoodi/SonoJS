@@ -1,6 +1,6 @@
 /**
  * Pending: Navigation → Command Menu (06)
- * Job: Slash studio — type `/` for AI + formatting actions (not a file picker).
+ * Job: Slash studio - type `/` for AI + formatting actions (not a file picker).
  * Audit: slash/hints dir=ltr · separators only between visible groups ·
  * scrollable list · semantic tokens.
  */
@@ -186,7 +186,7 @@ export default function SlashStudio() {
             <span className="font-mono" dir="ltr">
               /
             </span>{" "}
-            — this palette is for editor inserts, not app navigation.
+            - this palette is for editor inserts, not app navigation.
           </p>
         </Command>
       </CommandDialog>

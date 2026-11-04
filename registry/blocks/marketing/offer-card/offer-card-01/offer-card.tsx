@@ -64,7 +64,7 @@ export type OfferCardProps = {
   trustTrail?: string
 }
 
-/** Classic limited-offer upsell — default meteor speed 0.9. */
+/** Classic limited-offer upsell - default meteor speed 0.9. */
 export default function OfferCard({
   className,
   speed = 0.9,

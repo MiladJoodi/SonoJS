@@ -17,7 +17,7 @@ export default function GlassCursorDemo() {
       </div>
       <GlassCursor containerRef={stageRef} />
       <p className="pointer-events-none absolute inset-0 flex items-center justify-center text-sm text-muted-foreground">
-        Liquid glass — move over the colors
+        Liquid glass - move over the colors
       </p>
     </div>
   )

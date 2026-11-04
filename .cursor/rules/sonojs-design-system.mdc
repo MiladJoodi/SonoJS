@@ -1,5 +1,5 @@
 ---
-description: SonoJS Design System Standards — typography, radius, spacing, sizes, icons, responsive, colors
+description: SonoJS Design System Standards - typography, radius, spacing, sizes, icons, responsive, colors
 globs: app/**/*.{tsx,ts,css},components/**/*.{tsx,ts},packages/ui/**/*.{tsx,ts,css},styles/**/*.css
 alwaysApply: true
 ---
@@ -25,7 +25,7 @@ Follow `AGENTS.md` → **Design System Standards**. Tokens: `app/globals.css`.
 | Spacing | 4px scale |
 | Responsive | Same 46px controls on mobile/tablet/desktop; adapt width/stack only |
 
-Prefer changing a shared token over editing every call site. Preserve installable component APIs and intentional variants. When aligning sizes: update heights, padding, and radius only — never fonts or `--primary` colors.
+Prefer changing a shared token over editing every call site. Preserve installable component APIs and intentional variants. When aligning sizes: update heights, padding, and radius only - never fonts or `--primary` colors.
 
 ## Primary Button Contrast
 
@@ -39,6 +39,6 @@ Prefer changing a shared token over editing every call site. Preserve installabl
 ## Code blocks
 
 - Use `ComponentSource` + `--code-*` chrome tokens; syntax via shiki `dark-plus` (VS Code Dark+).
-- Geist Mono, 14px / 1.65 / weight 400 / tab-size 2 (VS Code default size); no wrap — scroll horizontally.
+- Geist Mono, 14px / 1.65 / weight 400 / tab-size 2 (VS Code default size); no wrap - scroll horizontally.
 - Syntax colors independent of brand `--primary`. Dark block OK in light and dark site themes.
 - Highlighter: `lib/highlight-code.ts` → theme `dark-plus`.

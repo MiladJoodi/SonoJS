@@ -29,7 +29,7 @@ export default function PasskeyForm({
           Sign in
         </h1>
         <p className="text-sm text-muted-foreground">
-          Enter your email — we&apos;ll offer a passkey when one is available.
+          Enter your email - we&apos;ll offer a passkey when one is available.
         </p>
       </header>
 

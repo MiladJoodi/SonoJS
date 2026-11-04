@@ -63,7 +63,7 @@ export default function BlockTabsDocsPage() {
       <BlocksPageHeader
         title="Tabs"
         pathname="/blocks/navigation/tabs"
-        description="Production section switchers — each pattern is a different product surface, not a restyle of the same demo."
+        description="Production section switchers - each pattern is a different product surface, not a restyle of the same demo."
       />
 
       <div className="flex flex-col gap-8">

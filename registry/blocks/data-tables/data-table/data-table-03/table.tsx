@@ -111,7 +111,7 @@ const MEMBERS: Member[] = [
   },
 ]
 
-/** iOS system green — inline so it never gets dropped by Tailwind/twMerge. */
+/** iOS system green - inline so it never gets dropped by Tailwind/twMerge. */
 const IOS_GREEN = "#34C759"
 
 function AccessSwitch({

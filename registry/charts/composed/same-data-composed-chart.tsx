@@ -28,7 +28,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Same Data Composed Chart — locked gallery chrome (navy × orange).
+ * Same Data Composed Chart - locked gallery chrome (navy × orange).
  * ComposedChart: Bar + Line share `sales`; line stroke is trend (chart-2).
  * Metric header scrubber; RTL-aware axes.
  * Installs to: components/charts/same-data-composed-chart.tsx
@@ -434,7 +434,7 @@ function SameDataComposedChart({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{monthLabel}</p>

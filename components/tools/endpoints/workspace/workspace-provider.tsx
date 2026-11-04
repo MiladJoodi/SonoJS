@@ -83,7 +83,7 @@ interface WorkspaceContextValue {
     name?: string,
     options?: { asNew?: boolean },
   ) => Promise<void>;
-  /** One-click save to last/default collection — no dialog. */
+  /** One-click save to last/default collection - no dialog. */
   quickSaveRequest: () => Promise<void>;
   addRequestToCollection: (
     collectionId: string,

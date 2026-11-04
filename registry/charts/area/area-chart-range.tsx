@@ -33,7 +33,7 @@ import { useNarrowViewport } from "../_lib/use-narrow-viewport"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Area Chart Range — locked gallery chrome + **neon** (chart-local); type-required ranged area
+ * Area Chart Range - locked gallery chrome + **neon** (chart-local); type-required ranged area
  * (`[low, high]` band per category). Single series `--chart-1`. Metric tracks high.
  * Installs to: components/charts/area-chart-range.tsx
  */
@@ -389,7 +389,7 @@ function AreaChartRange({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">

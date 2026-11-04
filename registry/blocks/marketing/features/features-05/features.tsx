@@ -31,7 +31,7 @@ const features = [
   {
     title: "Daily Highlights",
     description:
-      "A clear digest of the most important updates — without the noise of a crowded inbox.",
+      "A clear digest of the most important updates - without the noise of a crowded inbox.",
     icon: MailIcon,
     chip: "bg-blue-100 text-blue-600 dark:bg-blue-950 dark:text-blue-300",
   },
@@ -52,7 +52,7 @@ const features = [
   {
     title: "Idea Lab",
     description:
-      "Capture and refine ideas with your team — then turn the best ones into concrete next steps.",
+      "Capture and refine ideas with your team - then turn the best ones into concrete next steps.",
     icon: LightbulbIcon,
     chip: "bg-orange-100 text-orange-600 dark:bg-orange-950 dark:text-orange-300",
   },

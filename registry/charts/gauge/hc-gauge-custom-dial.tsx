@@ -14,7 +14,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Hc Gauge Custom Dial — solidgauge arc + circular dot dial (no needle).
+ * Hc Gauge Custom Dial - solidgauge arc + circular dot dial (no needle).
  * Soft Highcharts blue accent; locked header chrome; English / Intl.
  * Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/hc-gauge-custom-dial.tsx
@@ -101,7 +101,7 @@ function buildOptions(value: number): Options {
 
 function HcGaugeCustomDial({
   title = "Custom dial",
-  subtitle = "Dot marker instead of a needle — soft Highcharts blue.",
+  subtitle = "Dot marker instead of a needle - soft Highcharts blue.",
   value = DEMO_VALUE,
   className,
 }: HcGaugeCustomDialProps) {

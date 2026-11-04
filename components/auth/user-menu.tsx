@@ -30,8 +30,13 @@ function initials(name?: string | null, email?: string | null) {
   return email?.[0]?.toUpperCase() ?? "?"
 }
 
-/** SonoJS user menu — avatar shell immediately; details fill in when Clerk user is ready. */
-export function UserMenu() {
+/** SonoJS user menu - avatar shell immediately; details fill in when Clerk user is ready. */
+export function UserMenu({
+  planReady = false,
+}: {
+  /** True after session ensure-plan heal finishes (avoids a false Free flash). */
+  planReady?: boolean
+}) {
   const { user, isLoaded } = useUser()
   const { signOut } = useClerk()
   const ready = Boolean(isLoaded && user)
@@ -39,8 +44,9 @@ export function UserMenu() {
   const name = user?.fullName
   const email = user?.primaryEmailAddress?.emailAddress
   const metadata = user?.publicMetadata
-  const isPro = ready ? getUserPlan(metadata) === "pro" : false
-  const planId = ready ? getViewerPlanId(metadata) : "free"
+  const showPlan = ready && planReady
+  const isPro = showPlan ? getUserPlan(metadata) === "pro" : false
+  const planId = showPlan ? getViewerPlanId(metadata) : "free"
 
   return (
     <DropdownMenu>
@@ -51,7 +57,7 @@ export function UserMenu() {
           size="icon-xs"
           className="size-8 cursor-pointer rounded-full border border-border/70 bg-card p-0 shadow-none hover:bg-canvas"
           aria-label="Account menu"
-          aria-busy={!ready}
+          aria-busy={!ready || !planReady}
         >
           <Avatar className="size-8">
             {ready && user?.imageUrl ? (
@@ -81,18 +87,27 @@ export function UserMenu() {
                   <span className="truncate text-sm font-medium text-foreground">
                     {name || "Account"}
                   </span>
-                  <span
-                    className={cn(
-                      "inline-flex shrink-0 items-center gap-1 rounded-full px-1.5 py-0.5 text-[11px] font-medium tracking-tight",
-                      planId === "pro-yearly" && "bg-primary/10 text-primary",
-                      planId === "pro-monthly" &&
-                        "bg-emerald-500/15 text-emerald-700 dark:text-emerald-400",
-                      planId === "free" && "bg-muted text-muted-foreground"
-                    )}
-                  >
-                    <PlanIcon plan={planId} className="size-3" />
-                    {isPro ? "Pro" : "Free"}
-                  </span>
+                  {showPlan ? (
+                    <span
+                      className={cn(
+                        "inline-flex shrink-0 items-center gap-1 rounded-full px-1.5 py-0.5 text-[11px] font-medium tracking-tight",
+                        planId === "pro-yearly" && "bg-primary/10 text-primary",
+                        planId === "pro-monthly" &&
+                          "bg-emerald-500/15 text-emerald-700 dark:text-emerald-400",
+                        planId === "free" && "bg-muted text-muted-foreground"
+                      )}
+                    >
+                      <PlanIcon plan={planId} className="size-3" />
+                      {isPro ? "Pro" : "Free"}
+                    </span>
+                  ) : (
+                    <span
+                      className="inline-flex shrink-0 items-center rounded-full bg-muted px-1.5 py-0.5 text-[11px] font-medium tracking-tight text-muted-foreground"
+                      aria-busy
+                    >
+                      …
+                    </span>
+                  )}
                 </div>
                 {email ? (
                   <span className="truncate text-xs text-muted-foreground" dir="ltr">

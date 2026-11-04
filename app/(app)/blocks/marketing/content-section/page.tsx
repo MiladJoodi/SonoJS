@@ -45,7 +45,7 @@ export default function BlockContentSectionDocsPage() {
       <BlocksPageHeader
         title="Content Section"
         pathname="/blocks/marketing/content-section"
-        description="Copy + media splits — headline, body paragraphs, and a supporting image."
+        description="Copy + media splits - headline, body paragraphs, and a supporting image."
       />
 
       <div className="flex flex-col gap-8">

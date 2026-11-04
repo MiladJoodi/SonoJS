@@ -526,7 +526,7 @@ export function Sidebar() {
                                   ? "err"
                                   : item.status != null
                                     ? String(item.status)
-                                    : "—"}
+                                    : "-"}
                               </span>
                             </button>
                             <Button

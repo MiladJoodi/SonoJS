@@ -18,17 +18,17 @@ const exampleDefs = [
   {
     name: "loading-states-drive",
     title: "Drive",
-    description: 'Chevron pixel wave — `variant="drive"` (default).',
+    description: 'Chevron pixel wave - `variant="drive"` (default).',
   },
   {
     name: "loading-states-dots",
     title: "Dots",
-    description: 'Same pattern with circular pixels — `variant="dots"`.',
+    description: 'Same pattern with circular pixels - `variant="dots"`.',
   },
   {
     name: "loading-states-orbit",
     title: "Orbit",
-    description: 'Perimeter chase around the center cell — `variant="orbit"`.',
+    description: 'Perimeter chase around the center cell - `variant="orbit"`.',
   },
 ]
 
@@ -54,7 +54,7 @@ export default async function LoadingStatesDocsPage() {
         pathname="/docs/components/loading-states"
         description={
           <p className="leading-relaxed text-muted-foreground">
-            Animated loading states for waiting while an AI agent works — pixel
+            Animated loading states for waiting while an AI agent works - pixel
             grid, shimmer label, optional elapsed timer.
           </p>
         }
@@ -100,7 +100,7 @@ export default async function LoadingStatesDocsPage() {
             {
               name: "className",
               type: "string",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Merge classes on the root.",
             },
           ]}

@@ -28,7 +28,7 @@ export function RegistryExamplePreview({ name }: { name: string }) {
       return
     }
 
-    // Not cached yet — clear. Parent preview frame keeps minHeight so CLS stays low.
+    // Not cached yet - clear. Parent preview frame keeps minHeight so CLS stays low.
     setComponent(null)
     setMissing(false)
 

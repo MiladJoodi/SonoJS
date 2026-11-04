@@ -1,6 +1,6 @@
 import { MarkFrame } from "@/components/catalog/wireframes/mark-frame"
 
-/** Navbar + page band — scans as site chrome. */
+/** Navbar + page band - scans as site chrome. */
 export function NavigationBlockWireframe() {
   return (
     <MarkFrame>

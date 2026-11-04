@@ -24,7 +24,7 @@ export default function BlockAdvancedDataGridDocsPage() {
       <BlocksPageHeader
         title="Advanced Data Grid"
         pathname="/blocks/data-tables/advanced-data-grid"
-        description="Production data grids — fleet inventory, team directory, file vault, and billing ledger."
+        description="Production data grids - fleet inventory, team directory, file vault, and billing ledger."
       />
 
       <div className="flex flex-col gap-8">

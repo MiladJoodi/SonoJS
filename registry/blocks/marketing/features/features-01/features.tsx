@@ -39,7 +39,7 @@ const features = [
   {
     title: "Global Reach",
     description:
-      "Whether you're a startup or enterprise — add users and features as you grow.",
+      "Whether you're a startup or enterprise - add users and features as you grow.",
     icon: Globe2Icon,
   },
   {

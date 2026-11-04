@@ -67,7 +67,7 @@ const DEFAULT_MEMBERS = [
     name: "Sofia Alvarez",
     role: "Brand Designer",
     image: assetSrc(team03),
-    bio: "Builds visual systems that feel timeless—typography, motion, and narrative as one.",
+    bio: "Builds visual systems that feel timeless-typography, motion, and narrative as one.",
     socials: { linkedin: "#", x: "#" } satisfies Record<SocialPlatform, string>,
   },
   {

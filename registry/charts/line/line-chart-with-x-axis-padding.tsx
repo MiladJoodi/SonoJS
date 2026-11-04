@@ -26,7 +26,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Line Chart With X Axis Padding — locked gallery chrome (navy × orange).
+ * Line Chart With X Axis Padding - locked gallery chrome (navy × orange).
  * Dual monotone lines + type-required XAxis padding; metric header scrubber.
  * Installs to: components/charts/line-chart-with-x-axis-padding.tsx
  */
@@ -448,7 +448,7 @@ function LineChartWithXAxisPadding({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{monthLabel}</p>

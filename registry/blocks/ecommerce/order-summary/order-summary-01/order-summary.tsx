@@ -12,7 +12,7 @@ function assetSrc(asset: string | { src: string }) {
   return typeof asset === "string" ? asset : asset.src
 }
 
-/** Boutique receipt — compact confirmation ticket with success stamp. */
+/** Boutique receipt - compact confirmation ticket with success stamp. */
 const ORDER = {
   number: "#ORD-78945",
   date: "June 15, 2025",
@@ -142,7 +142,7 @@ export default function OrderSummary({
                 </span>
               </div>
               <p className="mt-1 text-sm text-primary-foreground/85">
-                Thanks, {ORDER.customer.split(" ")[0]} — your receipt is ready.
+                Thanks, {ORDER.customer.split(" ")[0]} - your receipt is ready.
               </p>
             </div>
           </div>

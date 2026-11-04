@@ -34,7 +34,7 @@ import { useNarrowViewport } from "../_lib/use-narrow-viewport"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Cardinal Area Chart — locked gallery chrome + **neon** (chart-local).
+ * Cardinal Area Chart - locked gallery chrome + **neon** (chart-local).
  * Side-by-side curve compare: monotone vs natural (cardinal-named panel).
  * Installs to: components/charts/cardinal-area-chart.tsx
  */
@@ -576,7 +576,7 @@ function CardinalAreaChart({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{monthLabel}</p>

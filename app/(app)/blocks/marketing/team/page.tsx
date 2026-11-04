@@ -47,7 +47,7 @@ export default function BlockTeamDocsPage() {
       <BlocksPageHeader
         title="Team"
         pathname="/blocks/marketing/team"
-        description="Team member grids for marketing pages — photo cards with name, role, bio, and social links."
+        description="Team member grids for marketing pages - photo cards with name, role, bio, and social links."
       />
 
       <div className="flex flex-col gap-8">

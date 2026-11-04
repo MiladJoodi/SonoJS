@@ -15,7 +15,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Nested Treemap — `type="nest"` drill-down with breadcrumb; keep true hierarchy
+ * Nested Treemap - `type="nest"` drill-down with breadcrumb; keep true hierarchy
  * (e.g. data → render). Locked metric scrub; `--chart-1…5`.
  * Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/nested-treemap.tsx
@@ -58,7 +58,7 @@ const NAME_LABELS: Record<string, string> = {
 }
 
 /**
- * Classic Nested Treemap sample — keep the `data → render` branch so nest
+ * Classic Nested Treemap sample - keep the `data → render` branch so nest
  * drill-down has a second level.
  */
 const DEMO_DATA: NestedTreemapNode[] = [
@@ -296,7 +296,7 @@ function NestedTreemapCell(props: CellProps) {
 
 function NestedTreemap({
   title = "Module size",
-  subtitle = "Nested treemap — click a group to zoom; breadcrumb returns up.",
+  subtitle = "Nested treemap - click a group to zoom; breadcrumb returns up.",
   data = DEMO_DATA,
   className,
   scrub = true,
@@ -500,7 +500,7 @@ function NestedTreemap({
                 <span className="font-normal">of total</span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{caption}</p>

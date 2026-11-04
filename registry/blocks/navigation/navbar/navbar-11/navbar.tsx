@@ -348,7 +348,7 @@ export default function Navbar({
         </h1>
         <p className="max-w-md text-sm text-muted-foreground">
           Start-aligned links, a Dropdown with Sub Menu flyout, and auth actions
-          pushed to the end — sheet on small screens.
+          pushed to the end - sheet on small screens.
         </p>
       </main>
     </div>

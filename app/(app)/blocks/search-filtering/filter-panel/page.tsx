@@ -44,7 +44,7 @@ export default function BlockFilterPanelDocsPage() {
       <BlocksPageHeader
         title="Filter Panel"
         pathname="/blocks/search-filtering/filter-panel"
-        description="Standalone filter patterns — report builders, accordion facets, table toolbars, chip + sheet, and domain filter sidebars."
+        description="Standalone filter patterns - report builders, accordion facets, table toolbars, chip + sheet, and domain filter sidebars."
       />
 
       <div className="flex flex-col gap-8">

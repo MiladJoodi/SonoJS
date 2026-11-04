@@ -15,7 +15,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Chart Radial Label (classic) — concentric radial bars with inside-start name labels.
+ * Chart Radial Label (classic) - concentric radial bars with inside-start name labels.
  * Wide sweep (`-90`→`380`); locked metric scrub; no Card shell. Tokens: `--chart-1…5`.
  * Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/chart-radial-label.tsx
@@ -103,7 +103,7 @@ const chartRadialContainerClassName =
 
 function ChartRadialLabel({
   title = "Sales by region",
-  subtitle = "Radial bars with inside labels — last 6 months.",
+  subtitle = "Radial bars with inside labels - last 6 months.",
   data = DEMO_DATA,
   className,
   plotDir,
@@ -265,7 +265,7 @@ function ChartRadialLabel({
                 <span className="font-normal">of total</span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{caption}</p>
@@ -308,7 +308,7 @@ function ChartRadialLabel({
             <RadialBar
               dataKey="sales"
               background={{ fill: "var(--muted)" }}
-              // Always-on LabelList — skip enter animation to avoid blink.
+              // Always-on LabelList - skip enter animation to avoid blink.
               isAnimationActive={false}
               onMouseEnter={
                 scrub ? (_, index) => activate(index) : undefined

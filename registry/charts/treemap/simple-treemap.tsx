@@ -15,7 +15,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Simple Treemap — flat hierarchy of module sizes (classic gallery baseline).
+ * Simple Treemap - flat hierarchy of module sizes (classic gallery baseline).
  * Locked metric scrub chrome; tokens `--chart-1…5` by top-level group.
  * Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/simple-treemap.tsx
@@ -61,7 +61,7 @@ const GROUP_LABELS: Record<string, string> = {
 }
 
 /**
- * Classic Simple Treemap sample (Flare-inspired LOC) — two levels, EN names.
+ * Classic Simple Treemap sample (Flare-inspired LOC) - two levels, EN names.
  * Nested flare branches flattened into the parent group.
  */
 const DEMO_DATA: SimpleTreemapGroup[] = [
@@ -265,7 +265,7 @@ function SimpleTreemapCell(props: CellProps) {
 
 function SimpleTreemap({
   title = "Module size",
-  subtitle = "Simple treemap of library modules — hover a tile to scrub.",
+  subtitle = "Simple treemap of library modules - hover a tile to scrub.",
   data = DEMO_DATA,
   className,
   scrub = true,
@@ -440,7 +440,7 @@ function SimpleTreemap({
                 <span className="font-normal">of total</span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{caption}</p>

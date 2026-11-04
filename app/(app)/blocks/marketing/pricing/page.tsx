@@ -47,7 +47,7 @@ export default function BlockPricingDocsPage() {
       <BlocksPageHeader
         title="Pricing"
         pathname="/blocks/marketing/pricing"
-        description="Pricing tables for marketing pages — tier cards with features, highlights, and CTAs."
+        description="Pricing tables for marketing pages - tier cards with features, highlights, and CTAs."
       />
 
       <div className="flex flex-col gap-8">

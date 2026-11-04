@@ -26,7 +26,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Customized Dot Line Chart — locked gallery chrome (navy × orange).
+ * Customized Dot Line Chart - locked gallery chrome (navy × orange).
  * Dual monotone lines; Desktop dots are smile/frown faces by threshold.
  * Installs to: components/charts/customized-dot-line-chart.tsx
  */
@@ -64,7 +64,7 @@ type FaceDotProps = {
   value?: number | string
 }
 
-/** Face + features as separate fills — works in light & dark. */
+/** Face + features as separate fills - works in light & dark. */
 function FaceDot({
   cx,
   cy,
@@ -74,7 +74,7 @@ function FaceDot({
   if (cx == null || cy == null) return null
 
   const happy = Number(value) > HAPPY_THRESHOLD
-  // Semantic amber (happy) / series orange (frown) — not a third series.
+  // Semantic amber (happy) / series orange (frown) - not a third series.
   const face = happy ? "var(--chart-3)" : "var(--chart-2)"
   const feature = "var(--background)"
 
@@ -492,7 +492,7 @@ function CustomizedDotLineChart({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{monthLabel}</p>

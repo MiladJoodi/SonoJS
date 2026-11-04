@@ -393,14 +393,14 @@ export default async function BreadcrumbDocsPage() {
               type: "boolean",
               defaultValue: "false",
               description:
-                "On BreadcrumbLink — render as the child element (e.g. Next.js Link).",
+                "On BreadcrumbLink - render as the child element (e.g. Next.js Link).",
             },
             {
               name: "children",
               type: "React.ReactNode",
               defaultValue: "ChevronRight",
               description:
-                "On BreadcrumbSeparator — custom separator; defaults to a directional chevron.",
+                "On BreadcrumbSeparator - custom separator; defaults to a directional chevron.",
             },
           ]}
         />

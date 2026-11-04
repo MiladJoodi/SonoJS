@@ -101,7 +101,7 @@ export default async function TableDocsPage() {
           <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
             text-end
           </code>
-          ) so columns flip correctly in RTL — toggle direction in the preview.
+          ) so columns flip correctly in RTL - toggle direction in the preview.
           For sorting, filtering, and pagination, see{" "}
           <Link
             href="/docs/components/data-table"
@@ -149,7 +149,7 @@ export default async function TableDocsPage() {
           <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
             text-end
           </code>{" "}
-          for amounts — never{" "}
+          for amounts - never{" "}
           <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
             text-right
           </code>
@@ -169,15 +169,15 @@ export default async function TableDocsPage() {
             {
               name: "className",
               type: "string",
-              defaultValue: "—",
+              defaultValue: "-",
               description:
-                "On any part — merge Tailwind classes (e.g. `text-end` on amount cells).",
+                "On any part - merge Tailwind classes (e.g. `text-end` on amount cells).",
             },
             {
               name: "colSpan",
               type: "number",
-              defaultValue: "—",
-              description: "On `TableCell` / `TableHead` — span columns.",
+              defaultValue: "-",
+              description: "On `TableCell` / `TableHead` - span columns.",
             },
           ]}
         />

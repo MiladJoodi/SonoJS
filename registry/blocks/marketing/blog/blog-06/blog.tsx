@@ -51,7 +51,7 @@ const DEFAULT_POSTS = [
     author: "SIMON KONECKI",
     title: "Colorful Bites for Creativity",
     description:
-      "Bright meals, bold ideas—see how vibrant food presentation can spark imagination and joy.",
+      "Bright meals, bold ideas-see how vibrant food presentation can spark imagination and joy.",
     href: "#",
   },
   {

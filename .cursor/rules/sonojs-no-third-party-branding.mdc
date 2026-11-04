@@ -3,7 +3,7 @@ description: Do not name third-party UI kits (e.g. competing registry brands) in
 alwaysApply: true
 ---
 
-# SonoJS — no third-party UI kit branding
+# SonoJS - no third-party UI kit branding
 
 SonoJS must read as its own product. Do **not** mention other component-kit / registry brand names in docs, README, package descriptions, CSS/TS comments, rules, or user-facing UI.
 

@@ -29,7 +29,7 @@ export default function BlockCheckoutDocsPage() {
       <BlocksPageHeader
         title="Checkout"
         pathname="/blocks/ecommerce/checkout"
-        description="Nine checkout layouts — fixed sidebar, two-column, stepper, payment form, vertical fields, one column, modal, drawer, and multi-step."
+        description="Nine checkout layouts - fixed sidebar, two-column, stepper, payment form, vertical fields, one column, modal, drawer, and multi-step."
       />
 
       <div className="flex flex-col gap-8">

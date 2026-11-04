@@ -45,7 +45,7 @@ export default function BlockFileManagerDocsPage() {
       <BlocksPageHeader
         title="File Manager"
         pathname="/blocks/files-media/file-manager"
-        description="Browse and organize files — Drive shell, Finder tree, shared team folder, details inspector, and attach picker."
+        description="Browse and organize files - Drive shell, Finder tree, shared team folder, details inspector, and attach picker."
       />
 
       <div className="flex flex-col gap-8">

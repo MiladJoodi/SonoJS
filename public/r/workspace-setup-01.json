@@ -3,7 +3,7 @@
   "name": "workspace-setup-01",
   "type": "registry:block",
   "title": "workspace-setup-01",
-  "description": "Compact create-workspace card — name, email, auto slug, role, team size, and terms (RTL/LTR).",
+  "description": "Compact create-workspace card - name, email, auto slug, role, team size, and terms (RTL/LTR).",
   "access": "public",
   "dependencies": [],
   "registryDependencies": [
@@ -39,6 +39,6 @@
       "target": "components/blocks/onboarding/workspace-setup-01/workspace-setup.tsx"
     }
   ],
-  "version": "0.1.0+c9c3d2a86e47",
-  "generatedAt": "2026-11-03T21:57:48.548Z"
+  "version": "0.1.0+3fe3a15cbaf2",
+  "generatedAt": "2026-11-04T11:52:24.655Z"
 }

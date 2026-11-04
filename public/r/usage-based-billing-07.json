@@ -3,7 +3,7 @@
   "name": "usage-based-billing-07",
   "type": "registry:block",
   "title": "usage-based-billing-07",
-  "description": "Monthly usage cost card — trend badge, compute/storage/bandwidth bar, and settings link.",
+  "description": "Monthly usage cost card - trend badge, compute/storage/bandwidth bar, and settings link.",
   "access": "public",
   "dependencies": [],
   "registryDependencies": [
@@ -34,6 +34,6 @@
       "target": "components/blocks/payments-billing/usage-based-billing-07/usage-based-billing.tsx"
     }
   ],
-  "version": "0.1.0+c9c3d2a86e47",
-  "generatedAt": "2026-11-03T21:57:48.548Z"
+  "version": "0.1.0+3fe3a15cbaf2",
+  "generatedAt": "2026-11-04T11:52:24.655Z"
 }

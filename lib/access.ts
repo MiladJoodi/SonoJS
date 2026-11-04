@@ -1,17 +1,17 @@
 /** Installable / docs content tier (omit on registry item → public). */
 export type ContentAccess = "public" | "member" | "pro"
 
-/** Clerk `publicMetadata.plan` — missing or anything else → free. */
+/** Clerk `publicMetadata.plan` - missing or anything else → free. */
 export type UserPlan = "free" | "pro"
 
-/** Billing cadence when Pro — drives silver (monthly) vs gold (yearly) marks. */
+/** Billing cadence when Pro - drives silver (monthly) vs gold (yearly) marks. */
 export type PlanInterval = "monthly" | "yearly"
 
 /** Shape we store on Clerk `publicMetadata`. */
 export type PlanMetadata = {
   plan?: unknown
   planExpiresAt?: unknown
-  /** `"monthly"` | `"yearly"` — only meaningful when plan is pro. */
+  /** `"monthly"` | `"yearly"` - only meaningful when plan is pro. */
   planInterval?: unknown
 }
 
@@ -66,7 +66,7 @@ export function getUserPlan(
   return "free"
 }
 
-/** Expiry to show in UI — only when effectively Pro. */
+/** Expiry to show in UI - only when effectively Pro. */
 export function getEffectivePlanExpiresAt(
   metadata: unknown,
   now: Date = new Date()

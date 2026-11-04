@@ -30,7 +30,7 @@ export default function BlockShoppingCartDocsPage() {
       <BlocksPageHeader
         title="Shopping Cart"
         pathname="/blocks/ecommerce/shopping-cart"
-        description="Ten production cart patterns — classic bag, split rail, product cards, device configs, beauty table, sale fashion, modal, drawer, spreadsheet, and interactive promo cart."
+        description="Ten production cart patterns - classic bag, split rail, product cards, device configs, beauty table, sale fashion, modal, drawer, spreadsheet, and interactive promo cart."
       />
 
       <div className="flex flex-col gap-8">

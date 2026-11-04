@@ -4,7 +4,7 @@ import { cursorsCatalog } from "@/lib/cursors-catalog"
 
 import { CursorExampleCard } from "./example-card"
 
-/** Flat card grid — no category folders. */
+/** Flat card grid - no category folders. */
 export function CursorGallery() {
   const entries = [...cursorsCatalog].sort((a, b) => {
     if (a.status !== b.status) {

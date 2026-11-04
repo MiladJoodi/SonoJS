@@ -354,7 +354,7 @@ export default function MegaMenu({
           Company mega menu with icons
         </h1>
         <p className="max-w-md text-sm text-muted-foreground">
-          Compact three-column Company panel with Lucide icons — Login and Sign
+          Compact three-column Company panel with Lucide icons - Login and Sign
           Up, sheet with collapsible Company on small screens.
         </p>
       </main>

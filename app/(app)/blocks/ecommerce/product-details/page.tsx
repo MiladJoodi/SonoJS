@@ -29,7 +29,7 @@ export default function BlockProductDetailsDocsPage() {
       <BlocksPageHeader
         title="Product Details"
         pathname="/blocks/ecommerce/product-details"
-        description="Nine product detail pages — galleries, variants, trust badges, specs, and reviews."
+        description="Nine product detail pages - galleries, variants, trust badges, specs, and reviews."
       />
 
       <div className="flex flex-col gap-8">

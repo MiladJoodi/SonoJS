@@ -3,7 +3,7 @@
   "name": "product-details-02",
   "type": "registry:block",
   "title": "product-details-02",
-  "description": "Beauty PDP — sticky main image over horizontal thumbs, qty stepper, cart/buy CTAs, pincode, and perk tiles.",
+  "description": "Beauty PDP - sticky main image over horizontal thumbs, qty stepper, cart/buy CTAs, pincode, and perk tiles.",
   "access": "public",
   "dependencies": [
     "lucide-react"
@@ -80,6 +80,6 @@
       "target": "components/blocks/ecommerce/product-details-02/images/product-6.webp"
     }
   ],
-  "version": "0.1.0+c9c3d2a86e47",
-  "generatedAt": "2026-11-03T21:57:48.548Z"
+  "version": "0.1.0+3fe3a15cbaf2",
+  "generatedAt": "2026-11-04T11:52:24.655Z"
 }

@@ -13,7 +13,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Hc Gauge Activity — full 360° solidgauge activity ring.
+ * Hc Gauge Activity - full 360° solidgauge activity ring.
  * Soft pink → rose gradient; locked header chrome; English / Intl.
  * Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/hc-gauge-activity.tsx

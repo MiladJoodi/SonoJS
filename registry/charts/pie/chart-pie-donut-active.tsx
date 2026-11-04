@@ -22,7 +22,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Chart Pie Donut Active (classic) — donut with expanded featured sector.
+ * Chart Pie Donut Active (classic) - donut with expanded featured sector.
  * Idle returns to `defaultActiveIndex` (0); scrub expands + updates metric.
  * Tokens: `--chart-1…5`. Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/chart-pie-donut-active.tsx
@@ -153,7 +153,7 @@ function ChartPieDonutActive({
     liveSlice && total > 0 ? (liveSlice.sales / total) * 100 : null
   const caption = liveSlice
     ? (SLICE_LABELS[liveSlice.province] ?? liveSlice.province)
-    : "—"
+    : "-"
 
   const startAngle = plotRtl ? -270 : 90
   const endAngle = plotRtl ? 90 : -270
@@ -289,7 +289,7 @@ function ChartPieDonutActive({
                 <span className="font-normal">of total</span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{caption}</p>

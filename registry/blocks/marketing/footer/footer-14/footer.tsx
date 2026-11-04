@@ -83,7 +83,7 @@ export default function Footer({
             </a>
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-muted-foreground sm:max-w-xs">
               A studio footer for teams who want the brand, the work, and a
-              direct line — address, phone, and mail in one place.
+              direct line - address, phone, and mail in one place.
             </p>
             <ul className="mt-6 flex flex-wrap justify-start gap-2">
               {social.map(({ label, href, Icon }) => (

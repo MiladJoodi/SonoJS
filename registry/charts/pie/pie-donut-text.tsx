@@ -16,7 +16,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Pie Donut Text — donut with centered ring-total Label.
+ * Pie Donut Text - donut with centered ring-total Label.
  * Header metric scrub; center text stays the ring total. Tokens: `--chart-1…5`.
  * Spec: `registry/charts/PORT.md` · classic twin: `chart-pie-donut-text`.
  * Installs to: components/charts/pie-donut-text.tsx
@@ -266,7 +266,7 @@ function PieDonutText({
                 <span className="font-normal">of total</span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{caption}</p>

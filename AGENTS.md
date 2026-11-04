@@ -1,7 +1,7 @@
 <!-- BEGIN:nextjs-agent-rules -->
 # This is NOT the Next.js you know
 
-This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
+This version has breaking changes - APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
 <!-- END:nextjs-agent-rules -->
 
 <!-- BEGIN:sonojs-direction -->
@@ -25,6 +25,7 @@ Group files **per component / block / chart / example set**. No flat dumps of re
 - Examples: `registry/examples/button/default.tsx` (not `examples/button-default.tsx`)
 - Blocks: `registry/blocks/<category>/<name>/…` · charts/ui: `registry/<kind>/<name>/…`
 - Package UI: `packages/ui/src/components/…` (folder when multi-file)
+- 3D: `packages/ui/src/components/3d/<slug>/` · `registry/examples/3d/<slug>/` · `app/(app)/3d/<slug>/` · install `components/3d/<slug>/` (exceptions: `clothes-rack` stays flat + dual docs; CSS `marquee` stays flat + dual `/3d/marquee`; tilted photo columns are `image-marquee`)
 - Site chrome: `components/<feature>/…` when 2+ related files (`docs/`, `direction/`, `site-header/`, `sidebar-nav/`, `tools/`)
 - Docs: `app/(app)/docs/components/<name>/page.tsx`
 - Tools: `app/(app)/tools/<slug>/page.tsx` + `components/tools/<slug>/` + `lib/tools-nav.ts`
@@ -36,7 +37,7 @@ Group files **per component / block / chart / example set**. No flat dumps of re
 
 Same action → same control. Do not invent one-off copy / toggle / clear buttons.
 
-- Copy: `CopyButton` (`@/components/docs`) — simple icon only
+- Copy: `CopyButton` (`@/components/docs`) - simple icon only
 - Code blocks: `ComponentSource` (includes copy)
 - Authoritative rule: `.cursor/rules/sonojs-ui-consistency.mdc`
 <!-- END:sonojs-ui-consistency -->
@@ -79,7 +80,7 @@ Block docs / view shells follow the login pattern so elevated cards show `shadow
 <!-- END:sonojs-blocks-preview -->
 
 <!-- BEGIN:sonojs-charts-locked -->
-# SonoJS charts — locked pattern
+# SonoJS charts - locked pattern
 
 Gallery charts follow the **LOCKED** Simple Bar chrome (navy × orange, metric header scrubber). Do not restyle without an explicit unlock.
 
@@ -152,7 +153,7 @@ Radius scale (`--radius: 0.75rem` / 12px):
 - Surfaces (cards, code, dialogs): **12px** (`--radius-lg` / `--radius-surface`)
 - Pills / avatars: full round only when appropriate
 
-Fonts (Geist) and brand colors stay SonoJS — only dimensions and radius follow the token scale above.
+Fonts (Geist) and brand colors stay SonoJS - only dimensions and radius follow the token scale above.
 
 ## Spacing
 
@@ -192,10 +193,10 @@ Apply to all code blocks, snippets, component source examples, and CLI samples. 
 **Typography**
 - Font: Geist Mono (`--font-sono-mono`)
 - Size: 14px (mobile + desktop, VS Code default) · Line-height: 1.65 · Weight: 400 · Tab size: 2
-- Preserve whitespace; no wrap by default — horizontal scroll
+- Preserve whitespace; no wrap by default - horizontal scroll
 - Line numbers optional and subtle (`--code-line-number`)
 
-**Default dark theme (VS Code Dark+)** — independent of brand primary
+**Default dark theme (VS Code Dark+)** - independent of brand primary
 - Highlighter: `shiki` theme `dark-plus` via `lib/highlight-code.ts` → `ComponentSource`
 - Chrome: Background `#1E1E1E` · Text `#D4D4D4` · Selection `#264F78` · Radius `--radius-code` (NY surface / 10px)
 - Token colors come from Dark+ (not brand `--primary`)

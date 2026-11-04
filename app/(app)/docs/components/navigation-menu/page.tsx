@@ -125,18 +125,18 @@ export default async function NavigationMenuDocsPage() {
               type: "boolean",
               defaultValue: "true",
               description:
-                "On `NavigationMenu` — shared floating viewport vs per-item panels.",
+                "On `NavigationMenu` - shared floating viewport vs per-item panels.",
             },
             {
               name: "asChild",
               type: "boolean",
               defaultValue: "false",
-              description: "On `NavigationMenuLink` — merge onto a custom link.",
+              description: "On `NavigationMenuLink` - merge onto a custom link.",
             },
             {
               name: "className",
               type: "string",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Merge extra Tailwind classes on any part.",
             },
           ]}

@@ -70,7 +70,7 @@ function Brand({
 export default function Hero({
   titleBefore = "Boost Your Productivity with ",
   titleAccent = "EffortlessTask",
-  description = "The all-in-one app to finally master your workflow. Organize tasks effortlessly, focus without distractions, and accomplish more every day—just like 100,000+ professionals.",
+  description = "The all-in-one app to finally master your workflow. Organize tasks effortlessly, focus without distractions, and accomplish more every day-just like 100,000+ professionals.",
   primaryCta = "Start Free Trial",
   primaryHref = "#",
   secondaryCta = "How It Works",

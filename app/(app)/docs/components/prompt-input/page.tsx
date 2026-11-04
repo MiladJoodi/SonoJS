@@ -16,7 +16,7 @@ const exampleDefs = [
     name: "prompt-input-default",
     title: "Default",
     description:
-      "Collapsed prompt that expands on focus — model select, effort cycle, image attachments, and mic / send.",
+      "Collapsed prompt that expands on focus - model select, effort cycle, image attachments, and mic / send.",
   },
 ]
 
@@ -42,7 +42,7 @@ export default async function PromptInputDocsPage() {
         pathname="/docs/components/prompt-input"
         description={
           <p className="leading-relaxed text-muted-foreground">
-            An AI prompt bar for chat interfaces — morphing expand, model and
+            An AI prompt bar for chat interfaces - morphing expand, model and
             effort controls, image attachments, and voice input.
           </p>
         }
@@ -76,13 +76,13 @@ export default async function PromptInputDocsPage() {
             {
               name: "onChange",
               type: "(value: string) => void",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Fires when the textarea value changes.",
             },
             {
               name: "onSubmit",
               type: "(value, meta) => void",
-              defaultValue: "—",
+              defaultValue: "-",
               description:
                 "Fires on send with `{ model, effort, attachments }`.",
             },
@@ -113,7 +113,7 @@ export default async function PromptInputDocsPage() {
             {
               name: "className",
               type: "string",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Optional class names on the outer wrapper.",
             },
           ]}

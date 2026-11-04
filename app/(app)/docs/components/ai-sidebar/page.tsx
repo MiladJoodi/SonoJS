@@ -53,7 +53,7 @@ export default async function AiSidebarDocsPage() {
         pathname="/docs/components/ai-sidebar"
         description={
           <p className="leading-relaxed text-muted-foreground">
-            A feature-packed AI navigation sidebar — brand header, chat history
+            A feature-packed AI navigation sidebar - brand header, chat history
             groups, search, new chat, hover actions, collapsed rail, and user
             footer. Fully prop-driven.
           </p>
@@ -130,37 +130,37 @@ export default async function AiSidebarDocsPage() {
             {
               name: "searchQuery",
               type: "string",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Controlled search query (optional).",
             },
             {
               name: "onNewChat",
               type: "() => void",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "New chat button callback.",
             },
             {
               name: "onSelectChat",
               type: "(chatId: string) => void",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Fired when a conversation is selected.",
             },
             {
               name: "onToggleCollapse",
               type: "() => void",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Expand / collapse control callback.",
             },
             {
               name: "onPinChat / onRenameChat / onDeleteChat",
               type: "callbacks",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "History item actions from the hover menu.",
             },
             {
               name: "className",
               type: "string",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Optional class names on the root aside.",
             },
           ]}

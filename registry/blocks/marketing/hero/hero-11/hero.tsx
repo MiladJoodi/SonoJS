@@ -149,7 +149,7 @@ export default function Hero11({
 
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-muted-foreground">
               Accessible components with a shared visual language. Preview what
-              customers see — then drop the typed source into your app.
+              customers see - then drop the typed source into your app.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3">

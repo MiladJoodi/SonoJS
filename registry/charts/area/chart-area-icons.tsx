@@ -30,7 +30,7 @@ import { useNarrowViewport } from "../_lib/use-narrow-viewport"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Chart Area Icons (classic) — locked gallery chrome; stacked Desktop×Mobile.
+ * Chart Area Icons (classic) - locked gallery chrome; stacked Desktop×Mobile.
  * Natural areas + `ChartLegend` with Lucide series icons + metric scrubber.
  * Installs to: components/charts/chart-area-icons.tsx
  */
@@ -57,7 +57,7 @@ const AREA_MS = 200
 const AXIS_TICK_FILL =
   "color-mix(in oklab, var(--foreground) 58%, transparent)"
 
-/** Classic visitor volumes — Desktop×Mobile, January to June 2026. */
+/** Classic visitor volumes - Desktop×Mobile, January to June 2026. */
 const DEMO_DATA: ChartAreaIconsPoint[] = [
   { month: "2026-01-01", desktop: 186, mobile: 80 },
   { month: "2026-02-01", desktop: 305, mobile: 200 },
@@ -132,7 +132,7 @@ function niceMax(values: number[]) {
 
 function ChartAreaIcons({
   title = "Visitor traffic",
-  subtitle = "Stacked Desktop × Mobile — January to June 2026.",
+  subtitle = "Stacked Desktop × Mobile - January to June 2026.",
   data = DEMO_DATA,
   className,
   plotDir,
@@ -370,7 +370,7 @@ function ChartAreaIcons({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{monthLabel}</p>

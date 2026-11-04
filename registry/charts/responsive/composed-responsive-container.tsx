@@ -30,7 +30,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Composed Responsive Container — fluid ChartContainer stage + Area×Bar×Line.
+ * Composed Responsive Container - fluid ChartContainer stage + Area×Bar×Line.
  * Locked metric scrub; EN months; navy×orange×amber series.
  * Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/composed-responsive-container.tsx
@@ -111,7 +111,7 @@ const stageClassName = cn(
 
 function ComposedResponsiveContainer({
   title = "Channel mix",
-  subtitle = "Responsive composed stage — orders area, online bars, store line.",
+  subtitle = "Responsive composed stage - orders area, online bars, store line.",
   data = DEMO_DATA,
   className,
   plotDir,
@@ -335,7 +335,7 @@ function ComposedResponsiveContainer({
                 {formatPct(deltaPct)}
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{caption}</p>

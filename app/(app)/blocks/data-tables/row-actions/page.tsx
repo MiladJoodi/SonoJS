@@ -29,7 +29,7 @@ export default function BlockRowActionsDocsPage() {
       <BlocksPageHeader
         title="Row Actions"
         pathname="/blocks/data-tables/row-actions"
-        description="Muted icon rows for tasks, invoices, and content — tooltips, hover reveal, and overflow menus."
+        description="Muted icon rows for tasks, invoices, and content - tooltips, hover reveal, and overflow menus."
       />
 
       <div className="flex flex-col gap-8">

@@ -3,7 +3,7 @@
   "name": "file-upload-02",
   "type": "registry:block",
   "title": "file-upload-02",
-  "description": "Product photo batch — image drop zone, thumbnail grid, cover mark, and upload progress (RTL/LTR).",
+  "description": "Product photo batch - image drop zone, thumbnail grid, cover mark, and upload progress (RTL/LTR).",
   "access": "public",
   "dependencies": [
     "lucide-react"
@@ -37,6 +37,6 @@
       "target": "components/blocks/files-media/file-upload-02/file-upload.tsx"
     }
   ],
-  "version": "0.1.0+c9c3d2a86e47",
-  "generatedAt": "2026-11-03T21:57:48.548Z"
+  "version": "0.1.0+3fe3a15cbaf2",
+  "generatedAt": "2026-11-04T11:52:24.655Z"
 }

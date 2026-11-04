@@ -13,7 +13,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Gauge Default — vivid emerald / amber / rose traffic bands.
+ * Gauge Default - vivid emerald / amber / rose traffic bands.
  * Default library needle; light + dark via scoped CSS vars (no remount).
  * Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/gauge-default.tsx
@@ -29,7 +29,7 @@ export type GaugeDefaultProps = {
 
 const DEMO_PERCENT = 0.66
 
-/** Vivid traffic — deeper on light, luminous on dark. */
+/** Vivid traffic - deeper on light, luminous on dark. */
 const BAND_THEME = {
   light: {
     low: "#10B981",
@@ -43,7 +43,7 @@ const BAND_THEME = {
   },
 } as const
 
-/** Stable reference — new `colors={[...]}` each render re-inits react-gauge-chart. */
+/** Stable reference - new `colors={[...]}` each render re-inits react-gauge-chart. */
 const BAND_COLORS: string[] = [
   "var(--gauge-band-1)",
   "var(--gauge-band-2)",
@@ -54,7 +54,7 @@ const GAUGE_STAGE_ID = "gauge-default"
 
 function GaugeDefault({
   title = "Score gauge",
-  subtitle = "Vivid traffic bands — emerald / amber / rose on a fixed stage.",
+  subtitle = "Vivid traffic bands - emerald / amber / rose on a fixed stage.",
   percent = DEMO_PERCENT,
   className,
 }: GaugeDefaultProps) {

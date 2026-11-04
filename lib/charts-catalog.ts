@@ -31,12 +31,12 @@ export type ChartsCatalogEntry = {
   title: string
   status: ChartPortStatus
   fullWidth?: boolean
-  /** Prefer `isChartFeatured(id)` / CHART_FEATURED_IDS — kept for typed entries. */
+  /** Prefer `isChartFeatured(id)` / CHART_FEATURED_IDS - kept for typed entries. */
   featured?: boolean
 }
 
 /**
- * Green sidebar bullet — showcase / high-traffic demos (aligned with FarsiUI).
+ * Green sidebar bullet - showcase / high-traffic demos (aligned with FarsiUI).
  * Keep sparse per category (core + standout patterns only).
  */
 export const CHART_FEATURED_IDS = new Set([
@@ -149,7 +149,7 @@ export const CHART_FEATURED_IDS = new Set([
   "heatmap-matrix",
   "heatmap-matrix-values",
   "area-responsive-container",
-  // Tooltip — default + common APIs + standout custom/styles/advanced
+  // Tooltip - default + common APIs + standout custom/styles/advanced
   "chart-tooltip-default",
   "chart-tooltip-formatter",
   "chart-tooltip-icons",
@@ -196,7 +196,7 @@ export const CHART_CATEGORIES = [
 ] as const
 
 /**
- * Gallery slug order per category — mirrors FarsiUI `chart-examples.json` `examples`.
+ * Gallery slug order per category - mirrors FarsiUI `chart-examples.json` `examples`.
  * Used so sidebar lists match FarsiUI (e.g. Bar starts with Simple Bar Chart).
  */
 export const GALLERY_ORDER_BY_CATEGORY: Record<string, readonly string[]> = {
@@ -391,7 +391,7 @@ export const GALLERY_ORDER_BY_CATEGORY: Record<string, readonly string[]> = {
 
 export type ChartCategory = (typeof CHART_CATEGORIES)[number]
 
-/** Category icons — same Lucide map as FarsiUI chart shell. */
+/** Category icons - same Lucide map as FarsiUI chart shell. */
 export const CHART_CATEGORY_ICONS: Record<ChartCategory, LucideIcon> = {
   line: LineChartIcon,
   area: AreaChartIcon,

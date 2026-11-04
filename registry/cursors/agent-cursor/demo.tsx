@@ -13,7 +13,7 @@ export default function AgentCursorDemo() {
       <AgentCursor containerRef={stageRef} />
       <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 p-8">
         <p className="pointer-events-none text-sm text-muted-foreground">
-          AI copilot — hover a card
+          AI copilot - hover a card
         </p>
         <div className="flex flex-wrap justify-center gap-3">
           <button

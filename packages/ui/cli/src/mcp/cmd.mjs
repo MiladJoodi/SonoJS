@@ -11,8 +11,8 @@ function printMcpHelp() {
   sonojs mcp [--registry <url-or-path>]
   sonojs mcp init [--client <name>] [--all] [--dry-run] [--cwd <dir>] [--registry <url-or-path>]
 
-mcp       — run the SonoJS MCP stdio server (what Cursor/Claude/Codex launch)
-mcp init  — detect agent clients and write a merge-safe \`sonojs\` MCP entry
+mcp       - run the SonoJS MCP stdio server (what Cursor/Claude/Codex launch)
+mcp init  - detect agent clients and write a merge-safe \`sonojs\` MCP entry
 
 Clients: ${ALL_CLIENT_IDS.join(", ")}
 

@@ -13,7 +13,7 @@ function assetSrc(asset: string | { src: string }) {
   return typeof asset === "string" ? asset : asset.src
 }
 
-/** Split atelier — start rail for ship/bill, magazine item column. */
+/** Split atelier - start rail for ship/bill, magazine item column. */
 const PRODUCTS = [
   {
     id: 1,

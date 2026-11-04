@@ -278,7 +278,7 @@ describe.runIf(hasDb)("billing idempotency + concurrency", () => {
         { status: 200, headers: { "Content-Type": "application/json" } }
       )
 
-    // Avoid needing STRIPE_SECRET_KEY for mock path — temporarily set
+    // Avoid needing STRIPE_SECRET_KEY for mock path - temporarily set
     const prev = process.env.STRIPE_SECRET_KEY
     process.env.STRIPE_SECRET_KEY = "sk_test_dummy"
 

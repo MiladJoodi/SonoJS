@@ -98,7 +98,7 @@ export default function MediaPlayer({
             Quiet frames
           </h1>
           <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-            A clean embed player — play, progress, fullscreen. Nothing else on
+            A clean embed player - play, progress, fullscreen. Nothing else on
             the glass.
           </p>
         </div>

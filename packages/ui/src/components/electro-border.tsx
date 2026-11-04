@@ -373,7 +373,7 @@ function ElectroBorder({
         className="pointer-events-none absolute inset-0"
         style={{ borderRadius: parsedRadius }}
       >
-        {/* Sibling strokes (not nested) — nesting inside a bordered box
+        {/* Sibling strokes (not nested) - nesting inside a bordered box
             would inset the filtered stroke by borderWidth. */}
         <div
           className="absolute inset-0"

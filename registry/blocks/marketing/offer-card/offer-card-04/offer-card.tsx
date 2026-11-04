@@ -25,7 +25,7 @@ const FEATURES = [
   "Dedicated success manager",
 ]
 
-/** Team / enterprise pricing seat — default meteor speed 0.9. */
+/** Team / enterprise pricing seat - default meteor speed 0.9. */
 export default function OfferCard({
   className,
   speed = 0.9,
@@ -91,7 +91,7 @@ export default function OfferCard({
             </div>
 
             <p className="text-[11px] leading-relaxed text-zinc-400">
-              Scale design systems across orgs — security, sync, and white-glove
+              Scale design systems across orgs - security, sync, and white-glove
               onboarding included.
             </p>
 

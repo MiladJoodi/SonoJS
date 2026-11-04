@@ -39,7 +39,7 @@ function LightbulbMark({ className, ...props }: React.ComponentProps<"svg">) {
 
 export default function ContentSection({
   eyebrow = "Our story",
-  title = "We're Zospace — Founded in London",
+  title = "We're Zospace - Founded in London",
   message = "A short message that will bring your customers into the world of your imagination.",
   ctaLabel = "Learn our story",
   ctaHref = "#",

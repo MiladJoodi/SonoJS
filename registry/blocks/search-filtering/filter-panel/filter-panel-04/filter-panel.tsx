@@ -28,7 +28,7 @@ function money(n: number) {
   return n.toLocaleString("en-US", { style: "currency", currency: "USD" })
 }
 
-/** Chip strip + All filters sheet — filter chrome as the product. */
+/** Chip strip + All filters sheet - filter chrome as the product. */
 export default function FilterPanel({
   className,
   ...props
@@ -101,7 +101,7 @@ export default function FilterPanel({
             Active filters
           </h1>
           <p className="mt-1 text-sm text-muted-foreground">
-            Quick chips plus an All filters sheet — no SERP chrome.
+            Quick chips plus an All filters sheet - no SERP chrome.
           </p>
         </div>
 
@@ -331,7 +331,7 @@ export default function FilterPanel({
               aria-hidden
             >
               <p className="text-xs text-muted-foreground">
-                Results preview omitted — this block is the filter chrome.
+                Results preview omitted - this block is the filter chrome.
               </p>
               <div className="mx-auto mt-3 h-2 w-2/3 rounded-full bg-muted" />
               <div className="mx-auto mt-2 h-2 w-1/2 rounded-full bg-muted" />

@@ -16,7 +16,7 @@ import { cn } from "@/lib/utils"
 type ViewMode = "preview" | "code"
 
 /**
- * Charts player — same Soft toolbar chrome as VariantPreview / BlockExample.
+ * Charts player - same Soft toolbar chrome as VariantPreview / BlockExample.
  * LTR/RTL · Preview/Code · CLI. No viewport / fullscreen / variant tabs.
  */
 export function ChartPreview({
@@ -32,7 +32,7 @@ export function ChartPreview({
   fullWidth?: boolean
   /** Mono label in the toolbar (defaults to `name`). */
   title?: string
-  /** Registry item id — enables CLI copy. */
+  /** Registry item id - enables CLI copy. */
   name?: string
   /** Ported demo source for the Code tab. */
   code?: string
@@ -96,7 +96,7 @@ export function ChartPreview({
               tone="chrome"
               tooltipSide="top"
               tooltipIdle="Copy install command"
-              tooltipCopied="Copied — paste in your terminal"
+              tooltipCopied="Copied - paste in your terminal"
               className="h-8 rounded-md"
             >
               CLI

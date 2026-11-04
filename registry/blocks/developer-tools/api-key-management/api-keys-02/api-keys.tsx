@@ -318,7 +318,7 @@ export default function ApiKeys({
               <DialogHeader className="border-b border-border/70 px-6 py-5">
                 <DialogTitle>Copy your token</DialogTitle>
                 <DialogDescription>
-                  Store it now — you won’t be able to view it again.
+                  Store it now - you won’t be able to view it again.
                 </DialogDescription>
               </DialogHeader>
 

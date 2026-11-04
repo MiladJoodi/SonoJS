@@ -38,7 +38,7 @@ export default function ContactForm({
               Get In <span className="text-primary">Touch</span>
             </h2>
             <p className="mt-3 text-base leading-relaxed text-muted-foreground">
-              Have a specific inquiry? Our team is ready to engage — share a few
+              Have a specific inquiry? Our team is ready to engage - share a few
               details and we&apos;ll follow up promptly.
             </p>
 

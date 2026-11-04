@@ -20,7 +20,7 @@ type MarkdownSourcePaneProps = {
   onChange: (markdown: string) => void
   theme: "light" | "dark"
   className?: string
-  /** Scroll host for the Display (rich) pane — enables proportional sync. */
+  /** Scroll host for the Display (rich) pane - enables proportional sync. */
   peerScrollRef?: React.RefObject<HTMLElement | null>
   label?: string
 }
@@ -79,7 +79,7 @@ function displayFrontmatterChromeHeight(peer: HTMLElement | null): number {
   const rich = peer.querySelector(".markdown-mdx-content")
   const first = rich?.firstElementChild as HTMLElement | null
   if (!first) return 0
-  // Lexical frontmatter decorator — only count real chrome, not body text.
+  // Lexical frontmatter decorator - only count real chrome, not body text.
   if (
     first.getAttribute("data-lexical-decorator") === "true" ||
     first.querySelector("[data-editor-type='frontmatter']")
@@ -178,7 +178,7 @@ export function MarkdownSourcePane({
       view.destroy()
       viewRef.current = null
     }
-    // Mount once — external value sync is handled below.
+    // Mount once - external value sync is handled below.
     // eslint-disable-next-line react-hooks/exhaustive-deps -- intentional
   }, [])
 

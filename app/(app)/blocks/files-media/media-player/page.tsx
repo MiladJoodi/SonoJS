@@ -60,7 +60,7 @@ export default function BlockMediaPlayerDocsPage() {
       <BlocksPageHeader
         title="Media Player"
         pathname="/blocks/files-media/media-player"
-        description="Ten production video players — dense watch, cinema, clean embed, live+chat, next-up, info panel, course, share embed, vertical short, and mini dock. Audio lives in a separate catalog."
+        description="Ten production video players - dense watch, cinema, clean embed, live+chat, next-up, info panel, course, share embed, vertical short, and mini dock. Audio lives in a separate catalog."
       />
 
       <div className="flex flex-col gap-8">

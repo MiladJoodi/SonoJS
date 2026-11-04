@@ -94,7 +94,7 @@ export default function Testimonial({
             They shipped. Here’s the receipt.
           </h2>
           <p className="mt-3 text-sm leading-relaxed text-muted-foreground md:text-base">
-            Pick a voice — the quote, outcomes, and role stay in sync.
+            Pick a voice - the quote, outcomes, and role stay in sync.
           </p>
         </header>
 

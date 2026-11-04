@@ -45,7 +45,7 @@ export function DocsApiProps({
                 {formatPropType(row.type)}
               </td>
               <td className="px-4 py-3 font-mono text-[length:var(--text-code)] text-muted-foreground">
-                {row.defaultValue ?? "—"}
+                {row.defaultValue ?? "-"}
               </td>
               <td className="px-4 py-3 text-muted-foreground">
                 {row.description}

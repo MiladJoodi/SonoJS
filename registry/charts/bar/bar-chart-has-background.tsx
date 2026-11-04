@@ -28,7 +28,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Bar Chart Has Background — locked gallery chrome + chart-local bar track.
+ * Bar Chart Has Background - locked gallery chrome + chart-local bar track.
  * Desktop series uses Recharts `background` fill; Mobile is a plain grouped bar.
  * Installs to: components/charts/bar-chart-has-background.tsx
  */
@@ -56,7 +56,7 @@ const BAR_MS = 200
 const BAR_GAP = 8
 /** Matches `--radius-md` / control scale (~8px). */
 const BAR_RADIUS: [number, number, number, number] = [8, 8, 0, 0]
-/** Axis tick fill — ≥4.5:1 on light/dark surfaces vs pure muted. */
+/** Axis tick fill - ≥4.5:1 on light/dark surfaces vs pure muted. */
 const AXIS_TICK_FILL =
   "color-mix(in oklab, var(--foreground) 58%, transparent)"
 
@@ -438,7 +438,7 @@ function BarChartHasBackground({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{monthLabel}</p>

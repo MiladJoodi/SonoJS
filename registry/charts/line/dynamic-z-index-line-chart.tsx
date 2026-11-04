@@ -26,7 +26,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Dynamic Z Index Line Chart — locked gallery chrome (navy × orange × amber).
+ * Dynamic Z Index Line Chart - locked gallery chrome (navy × orange × amber).
  * Three monotone lines; HTML legend hover dims that series and raises its z-index.
  * Metric header scrubber; RTL-aware axes.
  * Installs to: components/charts/dynamic-z-index-line-chart.tsx
@@ -58,7 +58,7 @@ const LINE_MS = 200
 const AXIS_TICK_FILL =
   "color-mix(in oklab, var(--foreground) 58%, transparent)"
 
-/** Third series accent — type-required for z-index demo, not a dual-palette invent. */
+/** Third series accent - type-required for z-index demo, not a dual-palette invent. */
 const CHART_SERIES_C = "var(--chart-3)"
 
 const SERIES_KEYS: SeriesKey[] = ["desktop", "mobile", "orders"]
@@ -516,7 +516,7 @@ function DynamicZIndexLineChart({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{monthLabel}</p>

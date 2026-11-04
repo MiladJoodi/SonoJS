@@ -27,8 +27,8 @@ import { useNarrowViewport } from "../_lib/use-narrow-viewport"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Chart Area Axes (classic) — locked gallery chrome; stacked Store×Online.
- * Solid fills + sparse Y-axis (`tickCount={3}`) — the axes teaching variant.
+ * Chart Area Axes (classic) - locked gallery chrome; stacked Store×Online.
+ * Solid fills + sparse Y-axis (`tickCount={3}`) - the axes teaching variant.
  * Installs to: components/charts/chart-area-axes.tsx
  */
 
@@ -54,7 +54,7 @@ const AREA_MS = 200
 const AXIS_TICK_FILL =
   "color-mix(in oklab, var(--foreground) 58%, transparent)"
 
-/** Classic visitor volumes — Store×Online, January to June 2026. */
+/** Classic visitor volumes - Store×Online, January to June 2026. */
 const DEMO_DATA: ChartAreaAxesPoint[] = [
   { month: "2026-01-01", store: 186, online: 80 },
   { month: "2026-02-01", store: 305, online: 200 },
@@ -127,7 +127,7 @@ function niceMax(values: number[]) {
 
 function ChartAreaAxes({
   title = "Visitor traffic",
-  subtitle = "Stacked Store × Online with sparse Y-axis — January to June 2026.",
+  subtitle = "Stacked Store × Online with sparse Y-axis - January to June 2026.",
   data = DEMO_DATA,
   className,
   plotDir,
@@ -362,7 +362,7 @@ function ChartAreaAxes({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{monthLabel}</p>

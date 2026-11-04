@@ -27,7 +27,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Line Chart With Reference Lines — locked gallery chrome (navy × orange).
+ * Line Chart With Reference Lines - locked gallery chrome (navy × orange).
  * Dual monotone lines + month/value ReferenceLines + metric header scrubber.
  * Installs to: components/charts/line-chart-with-reference-lines.tsx
  */
@@ -485,7 +485,7 @@ function LineChartWithReferenceLines({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{monthLabel}</p>

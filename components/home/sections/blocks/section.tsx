@@ -63,7 +63,7 @@ export function HomeBlocksSection() {
             >
               <p className="max-w-[34em] text-[clamp(0.9375rem,3.2vw,1.0625rem)] leading-[1.6] text-muted-foreground">
                 Production-ready blocks for agent workspaces, chat composers,
-                and full product flows — so you can ship real interfaces without
+                and full product flows - so you can ship real interfaces without
                 starting from a blank canvas.
               </p>
 

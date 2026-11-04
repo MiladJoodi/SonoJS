@@ -11,7 +11,7 @@ export type MockDataType = {
 }
 
 /**
- * LCG — not for security use.
+ * LCG - not for security use.
  * @see https://en.wikipedia.org/wiki/Linear_congruential_generator
  */
 export function* random(seed: number): Generator<number, number, unknown> {

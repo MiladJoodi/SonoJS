@@ -31,7 +31,7 @@ export default function BlockUsageBasedBillingDocsPage() {
       <BlocksPageHeader
         title="Usage-Based Billing"
         pathname="/blocks/payments-billing/usage-based-billing"
-        description="Plan quotas — upgrade CTAs, gauges, Progress meters, detailed cards, usage lists, or storage breakdown."
+        description="Plan quotas - upgrade CTAs, gauges, Progress meters, detailed cards, usage lists, or storage breakdown."
       />
 
       <div className="flex flex-col gap-8">

@@ -25,7 +25,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Line Chart Negative Values With Reference Lines — locked gallery chrome.
+ * Line Chart Negative Values With Reference Lines - locked gallery chrome.
  * Numeric X/Y path crossing the origin; type-required zero ReferenceLines.
  * Metric header scrubber; RTL-aware axes.
  * Installs to: components/charts/line-chart-negative-values-with-reference-lines.tsx
@@ -383,7 +383,7 @@ function LineChartNegativeValuesWithReferenceLines({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{pointLabel}</p>

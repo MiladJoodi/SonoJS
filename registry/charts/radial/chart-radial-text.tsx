@@ -21,7 +21,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Chart Radial Text (classic) — partial ring with centered value Label.
+ * Chart Radial Text (classic) - partial ring with centered value Label.
  * PolarGrid double circle; no Card shell. Tokens: `--chart-2` (accent ring).
  * Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/chart-radial-text.tsx
@@ -97,7 +97,7 @@ function ChartRadialText({
   const value = point?.sales ?? 0
   const caption = point
     ? (SLICE_LABELS[point.province] ?? point.province)
-    : "—"
+    : "-"
 
   // Classic partial sweep 0→250; RTL mirrors.
   const startAngle = 0

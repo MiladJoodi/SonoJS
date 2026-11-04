@@ -29,7 +29,7 @@ const exampleDefs = [
   {
     name: "dialog-no-close",
     title: "No Close Button",
-    description: "Same idea without a custom share field — footer Close only.",
+    description: "Same idea without a custom share field - footer Close only.",
     requires: ["button"],
   },
   {
@@ -160,27 +160,27 @@ export default async function DialogDocsPage() {
               type: "boolean",
               defaultValue: "true",
               description:
-                "On DialogContent — corner X. On DialogFooter — optional outline Close.",
+                "On DialogContent - corner X. On DialogFooter - optional outline Close.",
             },
             {
               name: "size",
               type: '"default" | "sm"',
               defaultValue: '"default"',
               description:
-                "On DialogContent — default 24rem (`max-w-sm`); `sm` → 20rem.",
+                "On DialogContent - default 24rem (`max-w-sm`); `sm` → 20rem.",
             },
             {
               name: "asChild",
               type: "boolean",
               defaultValue: "false",
               description:
-                "On DialogTrigger / DialogClose — merge props into the child.",
+                "On DialogTrigger / DialogClose - merge props into the child.",
             },
             {
               name: "open / onOpenChange",
               type: "boolean / (open: boolean) => void",
-              defaultValue: "—",
-              description: "On Dialog — controlled open state.",
+              defaultValue: "-",
+              description: "On Dialog - controlled open state.",
             },
           ]}
         />

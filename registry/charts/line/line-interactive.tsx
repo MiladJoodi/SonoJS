@@ -25,7 +25,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Line Interactive — locked gallery chrome + chart-local series toggle.
+ * Line Interactive - locked gallery chrome + chart-local series toggle.
  * Switch Store / Online period totals; single monotone line follows the active key.
  * Installs to: components/charts/line-interactive.tsx
  */
@@ -58,7 +58,7 @@ const AXIS_TICK_FILL =
 
 const SERIES_KEYS: LineInteractiveSeries[] = ["store", "online"]
 
-/** Daily Store × Online traffic — Apr–Jun 2024 (from FarsiUI interactive demo). */
+/** Daily Store × Online traffic - Apr–Jun 2024 (from FarsiUI interactive demo). */
 const DEMO_DATA: LineInteractivePoint[] = [
   { date: "2024-04-01", store: 222, online: 150 },
   { date: "2024-04-02", store: 97, online: 180 },
@@ -507,7 +507,7 @@ function LineInteractive({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">
@@ -520,7 +520,7 @@ function LineInteractive({
         </div>
       </header>
 
-      {/* Series toggle — chart-local interactive control */}
+      {/* Series toggle - chart-local interactive control */}
       <div className="flex flex-col overflow-hidden rounded-xl border border-border sm:flex-row">
         {SERIES_KEYS.map((key) => {
           const selected = activeSeries === key

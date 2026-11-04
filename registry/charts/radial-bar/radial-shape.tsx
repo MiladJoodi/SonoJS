@@ -22,7 +22,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Radial Shape — thick square-ended arc over a thin muted track + center Label.
+ * Radial Shape - thick square-ended arc over a thin muted track + center Label.
  * Teaching delta vs `radial-text`: no `cornerRadius`, heavier bar, decorative sweep.
  * Tokens: `--chart-1`. Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/radial-shape.tsx
@@ -62,7 +62,7 @@ const chartRadialContainerClassName =
 
 function RadialShape({
   title = "Monthly visitors",
-  subtitle = "Thick square-ended arc — decorative sweep with center total.",
+  subtitle = "Thick square-ended arc - decorative sweep with center total.",
   data = DEMO_DATA,
   centerLabel = "Visitors",
   className,
@@ -110,7 +110,7 @@ function RadialShape({
             >
               {formatNumber(value, locale)}
             </p>
-            <span className="text-xs text-muted-foreground">—</span>
+            <span className="text-xs text-muted-foreground">-</span>
           </div>
           <p className="text-xs text-muted-foreground">{centerLabel}</p>
         </div>
@@ -169,7 +169,7 @@ function RadialShape({
             />
             <RadialBar
               dataKey="visitors"
-              /* Square ends — teaching contrast vs radial-text cornerRadius. */
+              /* Square ends - teaching contrast vs radial-text cornerRadius. */
               cornerRadius={0}
               fill="var(--color-visitors)"
               isAnimationActive={!reducedMotion}

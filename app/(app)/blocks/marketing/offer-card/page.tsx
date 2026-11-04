@@ -14,7 +14,7 @@ import { blocksPageMetadata } from "@/lib/seo"
 export const metadata = blocksPageMetadata(
   "/blocks/marketing/offer-card",
   "Offer Card",
-  "Pro upsell offer cards — meteor borders, tiers, and a full-width ping/aurora sidebar CTA. Preview and install with the SonoJS CLI."
+  "Pro upsell offer cards - meteor borders, tiers, and a full-width ping/aurora sidebar CTA. Preview and install with the SonoJS CLI."
 )
 
 const usage = (name: string) =>
@@ -48,7 +48,7 @@ export default function BlockOfferCardDocsPage() {
       <BlocksPageHeader
         title="Offer Card"
         pathname="/blocks/marketing/offer-card"
-        description="Pro upsell cards — meteor borders on 01–05 (default speed 0.9), plus a full-width green-ping + aurora headline CTA (06)."
+        description="Pro upsell cards - meteor borders on 01–05 (default speed 0.9), plus a full-width green-ping + aurora headline CTA (06)."
       />
 
       <div className="flex flex-col gap-8">

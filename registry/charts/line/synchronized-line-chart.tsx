@@ -28,7 +28,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Synchronized Line Chart — locked gallery chrome (navy × orange).
+ * Synchronized Line Chart - locked gallery chrome (navy × orange).
  * Three syncId panels: Desktop line, Mobile line + Brush, Total area.
  * Metric header scrubber; RTL-aware axes.
  * Installs to: components/charts/synchronized-line-chart.tsx
@@ -58,7 +58,7 @@ const SYNC_ID = "sono-line-sync"
 const AXIS_TICK_FILL =
   "color-mix(in oklab, var(--foreground) 58%, transparent)"
 
-/** Short stage per sync panel — room for three stacked charts. */
+/** Short stage per sync panel - room for three stacked charts. */
 const syncPanelClassName = [
   "aspect-auto h-36 w-full min-w-0 max-w-none overflow-visible font-sans text-xs tabular-nums sm:h-40",
   "[&_.recharts-cartesian-axis-tick_text]:fill-muted-foreground [&_.recharts-surface]:overflow-visible",
@@ -161,7 +161,7 @@ type PlotRow = SynchronizedLinePoint & { total: number }
 
 function SynchronizedLineChart({
   title = "Website Traffic by Device – H1 2026",
-  subtitle = "Three synced panels — Desktop, Mobile + brush, and Total.",
+  subtitle = "Three synced panels - Desktop, Mobile + brush, and Total.",
   data = DEMO_DATA,
   className,
   plotDir,
@@ -263,7 +263,7 @@ function SynchronizedLineChart({
       }
       const local = Number(chartState.activeTooltipIndex)
       if (!Number.isFinite(local)) return
-      // Brush slices the plot — tooltip index is relative to the window.
+      // Brush slices the plot - tooltip index is relative to the window.
       const idx = Math.min(lastIndex, Math.max(0, startIndex + local))
       scrubbingRef.current = true
       setScrubbing(true)
@@ -492,7 +492,7 @@ function SynchronizedLineChart({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{monthLabel}</p>

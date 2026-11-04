@@ -83,7 +83,7 @@ export function ThinkingOrb({
     // draw at least one frame even when paused/offscreen
     frame((performance.now() / 1000) * effSpeed);
 
-    // pause offscreen + on hidden tabs — free when not visible
+    // pause offscreen + on hidden tabs - free when not visible
     let visible = true;
     const io =
       typeof IntersectionObserver !== "undefined"

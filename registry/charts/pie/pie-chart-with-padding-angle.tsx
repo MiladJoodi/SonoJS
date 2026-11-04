@@ -16,7 +16,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Pie Chart With Padding Angle — thin rounded donut with slice gaps.
+ * Pie Chart With Padding Angle - thin rounded donut with slice gaps.
  * Teaching geometry: `paddingAngle={5}` + `cornerRadius="50%"`; no on-slice labels.
  * Tokens: `--chart-1…4`. Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/pie-chart-with-padding-angle.tsx
@@ -263,7 +263,7 @@ function PieChartWithPaddingAngle({
                 <span className="font-normal">of total</span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{caption}</p>

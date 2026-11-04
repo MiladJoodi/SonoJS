@@ -62,13 +62,13 @@
   --accentText: var(--primary);
 }
 
-/* ---------- Toolbar — bold/large icons + labels ---------- */
+/* ---------- Toolbar - bold/large icons + labels ---------- */
 
 .markdown-editor-root [class*="_toolbarRoot_"] {
   z-index: 2;
   flex: 0 0 auto;
   flex-shrink: 0 !important;
-  /* Mobile / tablet: wrap — never horizontal scroll */
+  /* Mobile / tablet: wrap - never horizontal scroll */
   flex-wrap: wrap !important;
   align-items: center;
   align-content: flex-start;
@@ -77,7 +77,7 @@
   gap: 0.15rem;
   row-gap: 0.15rem;
   padding: 0.3rem 0.5rem;
-  /* Controls are 2.375rem (38px) — shorter than 44px, not SoftGroup-sm */
+  /* Controls are 2.375rem (38px) - shorter than 44px, not SoftGroup-sm */
   min-height: 2.875rem;
   max-height: none;
   background: var(--md-chrome) !important;
@@ -151,7 +151,7 @@
 }
 
 /*
- * View switcher — last among wrapped tools on mobile/tablet (no sticky /
+ * View switcher - last among wrapped tools on mobile/tablet (no sticky /
  * margin-auto, those force a lonely row + horizontal scroll).
  * Desktop (lg+): end-sticky again.
  */
@@ -182,7 +182,7 @@
   cursor: not-allowed;
 }
 
-/* Toolbar controls — keep 38px hit; glyphs fill the face (bold / large) */
+/* Toolbar controls - keep 38px hit; glyphs fill the face (bold / large) */
 .markdown-editor-root [class*="_toolbarToggleItem_"],
 .markdown-editor-root [class*="_toolbarButton_"] {
   box-sizing: border-box;
@@ -195,7 +195,7 @@
   align-items: center;
   justify-content: center;
   border-radius: 0.5rem;
-  /* Letter glyphs (B / I / S) — درشت inside same box */
+  /* Letter glyphs (B / I / S) - درشت inside same box */
   font-size: 1.05rem !important;
   font-weight: 800 !important;
   letter-spacing: -0.02em;
@@ -212,12 +212,12 @@
   line-height: 1;
 }
 
-/* Block type — main toolbar only (not the fenced-code language chip) */
+/* Block type - main toolbar only (not the fenced-code language chip) */
 .markdown-editor-root [class*="_toolbarRoot_"] [class*="_selectTrigger_"] {
   box-sizing: border-box;
   min-height: 2.375rem;
   height: 2.375rem;
-  /* Mobile: compact chip — “Block type” / “Heading N” truncated */
+  /* Mobile: compact chip - “Block type” / “Heading N” truncated */
   max-width: 5.25rem;
   width: 5.25rem;
   min-width: 0;
@@ -227,7 +227,7 @@
   padding-block: 0 !important;
   border-radius: 0.5rem;
   gap: 0.15rem;
-  /* Flat control — border only (MDX default uses drop-shadow) */
+  /* Flat control - border only (MDX default uses drop-shadow) */
   border: 1px solid color-mix(in oklab, var(--border) 70%, transparent) !important;
   background: var(--card) !important;
   box-shadow: none !important;
@@ -261,14 +261,14 @@
 .markdown-editor-root [class*="_toolbarButton_"] svg,
 .markdown-editor-root [class*="_toolbarRoot_"] [class*="_selectTrigger_"] svg,
 .markdown-editor-root .markdown-view-menu svg {
-  width: 1.25rem !important; /* 20px — درشت in 38px face */
+  width: 1.25rem !important; /* 20px - درشت in 38px face */
   height: 1.25rem !important;
   min-width: 1.25rem;
   min-height: 1.25rem;
   stroke-width: 2.5 !important;
 }
 
-/* Rich / Source / Diff tab labels — same weight language */
+/* Rich / Source / Diff tab labels - same weight language */
 .markdown-editor-root .markdown-view-tabs button {
   font-weight: 700 !important;
 }
@@ -325,7 +325,7 @@
   font-size: 16px; /* ≥16px avoids iOS input zoom */
   line-height: 1.65;
   color: var(--md-fg);
-  /* Keep text off the card edge — MDX task items used to pull -1rem into the corner */
+  /* Keep text off the card edge - MDX task items used to pull -1rem into the corner */
   padding: 1.5rem 1.5rem 3rem;
   max-width: none;
   overflow-wrap: anywhere;
@@ -342,7 +342,7 @@
 
 /*
  * Checklist lives inside a normal <ul>. Our disc/padding on ul would sit under
- * the custom checkbox and the label would paint on top of the box — drop both.
+ * the custom checkbox and the label would paint on top of the box - drop both.
  */
 .markdown-editor-root .markdown-mdx-content ul:has(
   > [class*="_listItemChecked_"],
@@ -357,7 +357,7 @@
   position: relative;
   margin-inline: 0 !important;
   margin-block: 0.55rem;
-  /* 16px box + 10px gap — text must clear the absolute checkbox */
+  /* 16px box + 10px gap - text must clear the absolute checkbox */
   padding-inline-start: 1.625rem !important;
   padding-inline-end: 0 !important;
   padding-left: 1.625rem !important; /* MDX also sets padding-left; keep LTR island in sync */
@@ -430,7 +430,7 @@
   text-wrap: balance;
 }
 
-/* Heading scale — each level smaller than the one above */
+/* Heading scale - each level smaller than the one above */
 .markdown-editor-root .markdown-mdx-content h1 {
   font-size: 1.75rem;
 }
@@ -524,7 +524,7 @@
   padding-inline-start: 0.45rem;
 }
 
-/* Task items keep custom checkbox — no disc/number */
+/* Task items keep custom checkbox - no disc/number */
 .markdown-editor-root .markdown-mdx-content li[class*="_listItemChecked_"],
 .markdown-editor-root .markdown-mdx-content li[class*="_listItemUnchecked_"],
 .markdown-editor-root .markdown-mdx-content li[class*="_nestedListItem_"] {
@@ -566,7 +566,7 @@
 
 /*
  * Static markdown tables (preview / rare non-editor tables).
- * Never style MDX `_tableEditor_` with these — tool cells break.
+ * Never style MDX `_tableEditor_` with these - tool cells break.
  */
 .markdown-editor-root .markdown-mdx-content table:not([class*="_tableEditor_"]) {
   border-collapse: collapse;
@@ -588,12 +588,12 @@
 }
 
 /*
- * MDX table editor — keep controls inside the grid footprint.
+ * MDX table editor - keep controls inside the grid footprint.
  * Generic th/td borders + overflow-x on the contenteditable were
  * shoving row/column tools outside and breaking the popovers.
  */
 .markdown-editor-root [class*="_tableEditor_"] {
-  /* Shrink-wrap so row/column tools sit flush — not stretched to card edges */
+  /* Shrink-wrap so row/column tools sit flush - not stretched to card edges */
   width: max-content !important;
   max-width: 100%;
   height: auto !important;
@@ -620,7 +620,7 @@
   font-weight: 600;
 }
 
-/* Side gutters (row menus / add-column / delete) — fixed narrow strip */
+/* Side gutters (row menus / add-column / delete) - fixed narrow strip */
 .markdown-editor-root [class*="_tableEditor_"] [class*="_toolCell_"],
 .markdown-editor-root [class*="_tableEditor_"] [class*="_tableToolsColumn_"] {
   border: none !important;
@@ -633,7 +633,7 @@
   text-align: center !important;
 }
 
-/* Column-handle cells above data columns — match column width, no border */
+/* Column-handle cells above data columns - match column width, no border */
 .markdown-editor-root [class*="_tableEditor_"] [data-tool-cell="true"] {
   border: none !important;
   background: transparent !important;
@@ -734,7 +734,7 @@
 }
 
 /*
- * Fenced code — same Dark+ chrome as docs `sono-code-block` (light + dark site).
+ * Fenced code - same Dark+ chrome as docs `sono-code-block` (light + dark site).
  */
 .markdown-editor-root [class*="_codeMirrorWrapper_"] {
   display: flex !important;
@@ -749,7 +749,7 @@
   position: relative;
 }
 
-/* Language + delete — full header bar (not a floating corner chip) */
+/* Language + delete - full header bar (not a floating corner chip) */
 .markdown-editor-root [class*="_codeMirrorWrapper_"] [class*="_codeMirrorToolbar_"] {
   position: static !important;
   inset: auto !important;
@@ -850,7 +850,7 @@
   color: inherit !important;
 }
 
-/* CM surface inside fenced code — force Dark+ over basicLight */
+/* CM surface inside fenced code - force Dark+ over basicLight */
 .markdown-editor-root [class*="_codeMirrorWrapper_"] > div:last-child {
   flex: 1 1 auto;
   min-height: 0;
@@ -907,7 +907,7 @@
 }
 
 /*
- * Scroll chain — MDX `mdxeditor-full-height` + reinforce so rich/source
+ * Scroll chain - MDX `mdxeditor-full-height` + reinforce so rich/source
  * content scrolls inside the card instead of clipping at the bottom.
  */
 .markdown-editor-root .markdown-mdx-editor.mdxeditor-full-height,
@@ -968,7 +968,7 @@
   overflow: auto;
 }
 
-/* Hide MDX built-in Source / MergeView — we use a custom Markdown pane. */
+/* Hide MDX built-in Source / MergeView - we use a custom Markdown pane. */
 .markdown-editor-root .mdxeditor-source-editor,
 .markdown-editor-root .mdxeditor-diff-editor {
   display: none !important;
@@ -993,7 +993,7 @@
   position: relative;
 }
 
-/* Shared Diff column header — identical 2rem strip on both panes */
+/* Shared Diff column header - identical 2rem strip on both panes */
 .markdown-editor-root[data-layout="diff"] .mdxeditor-rich-text-editor::before,
 .markdown-editor-root[data-layout="diff"] .markdown-pane-label {
   box-sizing: border-box;
@@ -1021,7 +1021,7 @@
 
 /*
  * Match content top insets so first lines sit opposite each other.
- * (Rich default padding was ~1.5–2rem; CM was ~0.5rem — looked unaligned.)
+ * (Rich default padding was ~1.5–2rem; CM was ~0.5rem - looked unaligned.)
  */
 .markdown-editor-root[data-layout="diff"] .mdxeditor-root-contenteditable,
 .markdown-editor-root[data-layout="diff"] [class*="_rootContentEditableWrapper_"] {
@@ -1143,7 +1143,7 @@
   }
 }
 
-/* Source / Diff markdown CM — card surface (not fenced-code Dark+) */
+/* Source / Diff markdown CM - card surface (not fenced-code Dark+) */
 .markdown-editor-root .markdown-source-pane-host .cm-editor,
 .markdown-editor-root .markdown-source-pane-host .cm-scroller {
   background: var(--md-surface) !important;
@@ -1166,7 +1166,7 @@
 /* (Fenced-code chrome + language chip styled above with --code-* tokens.) */
 
 /*
- * Line numbers — Source / Diff markdown panes (light card chrome).
+ * Line numbers - Source / Diff markdown panes (light card chrome).
  * Fenced code blocks keep Dark+ gutters (rules above on _codeMirrorWrapper_).
  */
 .markdown-editor-root .markdown-source-pane-host .cm-gutters,
@@ -1210,7 +1210,7 @@
   color: var(--foreground) !important;
 }
 
-/* Fenced-code gutters — reinforce Dark+ after shared CM rules */
+/* Fenced-code gutters - reinforce Dark+ after shared CM rules */
 .markdown-editor-root [class*="_codeMirrorWrapper_"] .cm-gutters {
   display: flex !important;
   visibility: visible !important;
@@ -1234,7 +1234,7 @@
 /*
  * MDX portals overlays into `.mdxeditor-popup-container` on document.body.
  * Keep position:relative (package default) so Radix fixed popovers/selects
- * still use the viewport — a full-screen fixed host broke the link dialog
+ * still use the viewport - a full-screen fixed host broke the link dialog
  * and squeezed the toolbar when the form opened.
  *
  * Surfaces below mirror SonoJS Dialog / Popover / Input / Button tokens.
@@ -1289,7 +1289,7 @@
 .mdxeditor-popup-container [class*="_dialogContent_"],
 .mdxeditor-popup-container [class*="_largeDialogContent_"] {
   filter: none !important;
-  /* 12px — SonoJS surface radius (avoid MDX --radius-* tokens) */
+  /* 12px - SonoJS surface radius (avoid MDX --radius-* tokens) */
   border-radius: 0.75rem !important;
   background: var(--card) !important;
   color: var(--foreground) !important;
@@ -1306,7 +1306,7 @@
   box-shadow: var(--shadow-soft) !important;
 }
 
-/* Heading / chevron selects — border only, no shadow */
+/* Heading / chevron selects - border only, no shadow */
 .mdxeditor-popup-container [class*="_selectContainer_"],
 .mdxeditor-popup-container [class*="_toolbarButtonDropdownContainer_"],
 .mdxeditor-popup-container [class*="_toolbarNodeKindSelectContainer_"],
@@ -1334,7 +1334,7 @@
   padding: 0.5rem !important;
 }
 
-/* Table column / row menus — compact icon strip, no wrap chaos */
+/* Table column / row menus - compact icon strip, no wrap chaos */
 .mdxeditor-popup-container [class*="_tableColumnEditorPopoverContent_"] {
   z-index: 201 !important;
   display: flex !important;
@@ -1394,7 +1394,7 @@
   background: var(--muted) !important;
 }
 
-/* Edit form inside link popover — stretch full width */
+/* Edit form inside link popover - stretch full width */
 .mdxeditor-popup-container [class*="_linkDialogPopoverContent_"]:has([class*="_multiFieldForm_"]),
 .mdxeditor-popup-container [class*="_linkDialogPopoverContent_"]:has([class*="_linkDialogEditForm_"]) {
   flex-direction: column;
@@ -1404,7 +1404,7 @@
   min-width: min(20rem, calc(100vw - 2rem));
 }
 
-/* Image / frontmatter modals — match DialogContent */
+/* Image / frontmatter modals - match DialogContent */
 .mdxeditor-popup-container [class*="_dialogOverlay_"] {
   z-index: 210 !important;
   background-color: rgb(0 0 0 / 0.5) !important;
@@ -1491,7 +1491,7 @@
   line-height: 1;
 }
 
-/* Inputs — Input component scale (46px / 12px radius) */
+/* Inputs - Input component scale (46px / 12px radius) */
 .mdxeditor-popup-container [class*="_textInput_"],
 .mdxeditor-popup-container [class*="_downshiftInput_"],
 .mdxeditor-popup-container [class*="_dialogInput_"],
@@ -1650,7 +1650,7 @@
   font-weight: 500;
 }
 
-/* Image dialog — one surface, no stacked chrome */
+/* Image dialog - one surface, no stacked chrome */
 .mdxeditor-popup-container [class*="_dialogContent_"] {
   border: 1px solid color-mix(in oklab, var(--border) 70%, transparent) !important;
   outline: none !important;
@@ -1665,7 +1665,7 @@
   display: block;
 }
 
-/* Buttons — Button default / outline */
+/* Buttons - Button default / outline */
 .mdxeditor-popup-container [class*="_primaryButton_"],
 .mdxeditor-popup-container [class*="_secondaryButton_"] {
   all: unset;
@@ -1789,7 +1789,7 @@
 
 /*
  * Block type menu only (Paragraph, Quote, Heading 1…6).
- * Do NOT apply to code-block language select — that shared
+ * Do NOT apply to code-block language select - that shared
  * `_selectContainer_` / `.mdxeditor-select-content` and made
  * languages look like oversized headings.
  */
@@ -1829,7 +1829,7 @@
   font-weight: 600 !important;
 }
 
-/* Code fence language list — uniform size + long-list scroll (esp. mobile) */
+/* Code fence language list - uniform size + long-list scroll (esp. mobile) */
 .mdxeditor-popup-container [class*="_toolbarCodeBlockLanguageSelectContent_"] {
   z-index: 220 !important;
   width: min(100vw - 1rem, 16rem) !important;
@@ -1857,7 +1857,7 @@
 
 @media (max-width: 767px) {
   .mdxeditor-popup-container [class*="_toolbarCodeBlockLanguageSelectContent_"] {
-    /* Room for ~8–9 languages; rest scrolls — avoids covering the whole phone */
+    /* Room for ~8–9 languages; rest scrolls - avoids covering the whole phone */
     width: min(100vw - 0.75rem, 18rem) !important;
     max-width: min(100vw - 0.75rem, 18rem) !important;
     max-height: min(42dvh, 18rem) !important;
@@ -1871,7 +1871,7 @@
     padding-block: 0.65rem !important;
   }
 
-  /* Language chip on the code block — easier to open on touch */
+  /* Language chip on the code block - easier to open on touch */
   .markdown-editor-root [class*="_codeMirrorToolbar_"] [class*="_selectTrigger_"] {
     height: 2rem !important;
     min-height: 2rem !important;
@@ -1902,7 +1902,7 @@
   font-size: 16px;
   line-height: 1.65;
   color: var(--foreground);
-  /* Full-bleed in the card — no centered max-width that leaves empty side gutters */
+  /* Full-bleed in the card - no centered max-width that leaves empty side gutters */
   width: 100%;
   max-width: none;
   margin-inline: 0;

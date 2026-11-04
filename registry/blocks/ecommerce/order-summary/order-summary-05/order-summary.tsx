@@ -11,7 +11,7 @@ function assetSrc(asset: string | { src: string }) {
   return typeof asset === "string" ? asset : asset.src
 }
 
-/** Account console — editable side panels + compact line cards. */
+/** Account console - editable side panels + compact line cards. */
 const PRODUCTS = [
   {
     id: 1,
@@ -122,7 +122,7 @@ export default function OrderSummary({
               Order console
             </h1>
             <p className="mt-2 text-start text-sm text-muted-foreground">
-              Confirmed — thank you for shopping with us.
+              Confirmed - thank you for shopping with us.
             </p>
           </div>
           <div className="inline-flex w-full items-center gap-2 rounded-[12px] border border-border/70 bg-card px-3.5 py-2.5 shadow-soft sm:ms-auto sm:w-auto">

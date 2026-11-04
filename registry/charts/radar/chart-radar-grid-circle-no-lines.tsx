@@ -16,7 +16,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Chart Radar Grid Circle No Lines (classic) — circular PolarGrid without
+ * Chart Radar Grid Circle No Lines (classic) - circular PolarGrid without
  * radial spokes + vertex dots. Locked metric scrub.
  * Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/chart-radar-grid-circle-no-lines.tsx
@@ -243,7 +243,7 @@ function ChartRadarGridCircleNoLines({
                 {formatPct(deltaPct)}
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{caption}</p>

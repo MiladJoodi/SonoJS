@@ -202,7 +202,7 @@ export default function ArticleLayout({
                   checklist at the end.”
                 </blockquote>
                 <figcaption className="mt-4 text-sm text-muted-foreground">
-                  — {ARTICLE.author.name}
+                  - {ARTICLE.author.name}
                 </figcaption>
               </figure>
 
@@ -212,7 +212,7 @@ export default function ArticleLayout({
                 </h2>
                 <p className="leading-7 text-muted-foreground">
                   Keep colors, radius, and spacing in CSS variables. Light and
-                  dark modes swap tokens without shipping a theme runtime —
+                  dark modes swap tokens without shipping a theme runtime -
                   consumers stay in control of the look while components stay
                   portable.
                 </p>

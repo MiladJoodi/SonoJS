@@ -26,7 +26,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Bar Label (classic) — locked gallery chrome; single-series Store bars with
+ * Bar Label (classic) - locked gallery chrome; single-series Store bars with
  * type-required always-on top value labels (neutral ink, not series-tinted).
  * Metric header scrubber. Installs to: components/charts/bar-label.tsx
  */
@@ -145,7 +145,7 @@ function niceMax(values: number[]) {
 
 function BarLabel({
   title = "Monthly store sales",
-  subtitle = "Store sessions with value labels — January to June 2026.",
+  subtitle = "Store sessions with value labels - January to June 2026.",
   data = DEMO_DATA,
   className,
   plotDir,
@@ -421,7 +421,7 @@ function BarLabel({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{monthLabel}</p>
@@ -521,7 +521,7 @@ function BarLabel({
               fill="var(--color-store)"
               radius={BAR_RADIUS}
               maxBarSize={barSize}
-              // Always-on top labels — enter animation makes values blink on load.
+              // Always-on top labels - enter animation makes values blink on load.
               isAnimationActive={false}
             >
               {data.map((_, index) => (

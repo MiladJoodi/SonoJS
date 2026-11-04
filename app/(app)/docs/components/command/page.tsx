@@ -105,25 +105,25 @@ export default async function CommandDocsPage() {
               name: "title",
               type: "string",
               defaultValue: '"Command Palette"',
-              description: "On CommandDialog — accessible dialog title.",
+              description: "On CommandDialog - accessible dialog title.",
             },
             {
               name: "description",
               type: "string",
               defaultValue: '"Search for a command to run..."',
-              description: "On CommandDialog — accessible dialog description.",
+              description: "On CommandDialog - accessible dialog description.",
             },
             {
               name: "showCloseButton",
               type: "boolean",
               defaultValue: "false",
-              description: "On CommandDialog — show the dialog close control.",
+              description: "On CommandDialog - show the dialog close control.",
             },
             {
               name: "heading",
               type: "string",
-              defaultValue: "—",
-              description: "On CommandGroup — section label above items.",
+              defaultValue: "-",
+              description: "On CommandGroup - section label above items.",
             },
           ]}
         />

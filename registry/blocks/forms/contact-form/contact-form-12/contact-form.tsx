@@ -68,7 +68,7 @@ export default function ContactForm({
             Get in touch
           </h2>
           <p className="text-base leading-relaxed text-muted-foreground">
-            Feel free to contact us — we&apos;ll get back to you as soon as
+            Feel free to contact us - we&apos;ll get back to you as soon as
             possible, usually within one business day.
           </p>
 

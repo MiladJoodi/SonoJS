@@ -1,5 +1,5 @@
 ---
-description: SonoJS RTL/LTR architecture — required for all registry UI, blocks, charts, and docs chrome
+description: SonoJS RTL/LTR architecture - required for all registry UI, blocks, charts, and docs chrome
 globs: registry/**/*.{tsx,ts},components/**/*.{tsx,ts},app/**/*.{tsx,ts},lib/**/*.{ts,tsx},hooks/**/*.{ts,tsx}
 alwaysApply: true
 ---
@@ -33,7 +33,7 @@ Use **logical** Tailwind / CSS only:
 
 - Directional icons (chevron, arrow, caret along inline axis): add class `icon-dir` (see `styles/direction.css`) or `rtl:rotate-180` / `[dir=rtl]:scale-x-[-1]`.
 - Do **not** mirror logos, brand marks, or bidirectional-neutral icons.
-- Sheet/drawer edges: use `getStartSide(dir)` / `getEndSide(dir)` from `@/lib/direction` — never hardcode only `left` or only `right` for start-edge chrome.
+- Sheet/drawer edges: use `getStartSide(dir)` / `getEndSide(dir)` from `@/lib/direction` - never hardcode only `left` or only `right` for start-edge chrome.
 
 ## Interaction
 

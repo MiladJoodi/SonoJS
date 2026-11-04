@@ -22,7 +22,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Radial Text — single progress ring with centered value + caption Label.
+ * Radial Text - single progress ring with centered value + caption Label.
  * Tokens: `--chart-1`. Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/radial-text.tsx
  */

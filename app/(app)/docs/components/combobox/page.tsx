@@ -108,7 +108,7 @@ export default async function ComboboxDocsPage() {
             {
               name: "items",
               type: "readonly T[]",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Options passed to the combobox root.",
             },
             {
@@ -121,13 +121,13 @@ export default async function ComboboxDocsPage() {
               name: "showClear",
               type: "boolean",
               defaultValue: "false",
-              description: "On ComboboxInput — show a clear button.",
+              description: "On ComboboxInput - show a clear button.",
             },
             {
               name: "showTrigger",
               type: "boolean",
               defaultValue: "true",
-              description: "On ComboboxInput — show the chevron trigger.",
+              description: "On ComboboxInput - show the chevron trigger.",
             },
             {
               name: "disabled",

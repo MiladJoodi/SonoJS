@@ -1,4 +1,4 @@
-/** Infer TypeScript interfaces from JSON — one shared type per shape. */
+/** Infer TypeScript interfaces from JSON - one shared type per shape. */
 
 function isPlainObject(value: unknown): value is Record<string, unknown> {
   return Boolean(value) && typeof value === "object" && !Array.isArray(value);
@@ -66,10 +66,10 @@ function inferMergedObject(
 ): string {
   const interfaceName = ensureInterfaceName(logicalName, ctx);
 
-  // Already emitted this logical name — reuse (shared type)
+  // Already emitted this logical name - reuse (shared type)
   if (ctx.interfaces.has(interfaceName)) {
     // Expand existing interface with any new keys/types from these objects
-    // For simplicity: rebuild from union of all objects seen — store samples on ctx
+    // For simplicity: rebuild from union of all objects seen - store samples on ctx
   }
 
   const allKeys = new Set<string>();

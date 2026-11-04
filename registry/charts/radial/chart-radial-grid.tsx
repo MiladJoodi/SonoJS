@@ -15,7 +15,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Chart Radial Grid (classic) — concentric radial bars with circular PolarGrid.
+ * Chart Radial Grid (classic) - concentric radial bars with circular PolarGrid.
  * Locked metric scrub chrome; no Card shell. Tokens: `--chart-1…5`.
  * Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/chart-radial-grid.tsx
@@ -105,7 +105,7 @@ const chartRadialContainerClassName =
 
 function ChartRadialGrid({
   title = "Sales by region",
-  subtitle = "Radial bars with circular grid — last 6 months.",
+  subtitle = "Radial bars with circular grid - last 6 months.",
   data = DEMO_DATA,
   className,
   plotDir,
@@ -266,7 +266,7 @@ function ChartRadialGrid({
                 <span className="font-normal">of total</span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{caption}</p>

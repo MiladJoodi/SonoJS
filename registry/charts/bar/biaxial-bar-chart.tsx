@@ -27,7 +27,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Biaxial Bar Chart — locked gallery chrome (navy × orange); type-required
+ * Biaxial Bar Chart - locked gallery chrome (navy × orange); type-required
  * dual Y-axes with independent scales (revenue vs orders). Metric header scrubber.
  * Installs to: components/charts/biaxial-bar-chart.tsx
  */
@@ -61,7 +61,7 @@ const AXIS_PRIMARY_FILL =
 const AXIS_SECONDARY_FILL =
   "color-mix(in oklab, var(--chart-2) 72%, var(--foreground))"
 
-/** Independent scales — revenue (left) vs orders (right). */
+/** Independent scales - revenue (left) vs orders (right). */
 const DEMO_DATA: BiaxialBarPoint[] = [
   { month: "2026-01-01", revenue: 4200, orders: 86 },
   { month: "2026-02-01", revenue: 3850, orders: 74 },
@@ -161,7 +161,7 @@ function niceMax(values: number[]) {
 
 function BiaxialBarChart({
   title = "Revenue vs orders",
-  subtitle = "Independent scales — revenue ($K-scale) and order count.",
+  subtitle = "Independent scales - revenue ($K-scale) and order count.",
   data = DEMO_DATA,
   className,
   plotDir,
@@ -457,7 +457,7 @@ function BiaxialBarChart({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">

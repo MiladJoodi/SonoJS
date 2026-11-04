@@ -26,7 +26,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Bar Default (classic) — locked gallery chrome; single-series Store bars.
+ * Bar Default (classic) - locked gallery chrome; single-series Store bars.
  * Metric header scrubber. Installs to: components/charts/bar-default.tsx
  */
 
@@ -145,7 +145,7 @@ function niceMax(values: number[]) {
 
 function BarDefault({
   title = "Monthly store sales",
-  subtitle = "Store sessions — January to June 2026.",
+  subtitle = "Store sessions - January to June 2026.",
   data = DEMO_DATA,
   className,
   plotDir,
@@ -416,7 +416,7 @@ function BarDefault({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{monthLabel}</p>

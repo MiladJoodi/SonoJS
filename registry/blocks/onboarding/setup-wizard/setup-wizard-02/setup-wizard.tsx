@@ -182,7 +182,7 @@ export default function SetupWizard({
                     Create your account
                   </h1>
                   <p className="text-sm text-muted-foreground">
-                    Tell us who you are — then we&apos;ll verify your email.
+                    Tell us who you are - then we&apos;ll verify your email.
                   </p>
                 </div>
                 <Field>
@@ -316,7 +316,7 @@ export default function SetupWizard({
                     Experience level
                   </h1>
                   <p className="text-sm text-muted-foreground">
-                    Pick what fits best — you can change this later.
+                    Pick what fits best - you can change this later.
                   </p>
                 </div>
                 <div

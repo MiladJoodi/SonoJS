@@ -1,4 +1,4 @@
-/** Home marketing bands — display order on `/`. */
+/** Home marketing bands - display order on `/`. */
 export { HomeBlocksSection, HomeChatComposer } from "./blocks"
 export {
   HomeChartsSection,

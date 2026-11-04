@@ -69,7 +69,7 @@ export default async function VoiceSelectorDocsPage() {
         pathname="/docs/components/voice-selector"
         description={
           <p className="leading-relaxed text-muted-foreground">
-            A searchable dialog for picking an AI voice — preview playback,
+            A searchable dialog for picking an AI voice - preview playback,
             accent / age / gender metadata, and a compact trigger.
           </p>
         }

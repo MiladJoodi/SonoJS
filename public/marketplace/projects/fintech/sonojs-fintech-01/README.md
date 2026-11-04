@@ -1,4 +1,4 @@
-# Pocket — marketplace assets
+# Pocket - marketplace assets
 
 Package: `pocket` (`1.0.0`)  
 Category: `fintech`  
@@ -11,9 +11,9 @@ Source: `E:\SonoJS-Templates\tr\Pocket`
 | File | Purpose |
 |---|---|
 | `cover-light.webp` | Catalog cover + detail hero (light; also used in dark until dark assets land) |
-| `cover-dark.webp` | Catalog cover (dark) — pending |
-| `main-light.webp` | Detail page hero (light) — pending (falls back to cover-light) |
-| `main-dark.webp` | Detail page hero (dark) — pending |
+| `cover-dark.webp` | Catalog cover (dark) - pending |
+| `main-light.webp` | Detail page hero (light) - pending (falls back to cover-light) |
+| `main-dark.webp` | Detail page hero (dark) - pending |
 
 ## Live
 

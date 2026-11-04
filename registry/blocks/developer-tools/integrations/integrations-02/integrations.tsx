@@ -57,7 +57,7 @@ const APPS: App[] = [
       {
         id: "history",
         label: "Read channel history",
-        description: "Optional — used only for threaded replies.",
+        description: "Optional - used only for threaded replies.",
       },
     ],
   },

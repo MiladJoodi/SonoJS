@@ -26,7 +26,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Scatter And Line Of Best Fit — locked gallery chrome (navy × orange).
+ * Scatter And Line Of Best Fit - locked gallery chrome (navy × orange).
  * Ad spend → sales scatter + dashed OLS fit line; metric scrubber.
  * Installs to: components/charts/scatter-and-line-of-best-fit.tsx
  */
@@ -450,7 +450,7 @@ function ScatterAndLineOfBestFit({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">

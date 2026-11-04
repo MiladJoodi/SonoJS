@@ -63,7 +63,7 @@ export default function ContactForm({
           Find us anytime
         </h2>
         <p className="text-base leading-relaxed text-muted-foreground">
-          Send a message, call the desk, or stop by — the map below points to
+          Send a message, call the desk, or stop by - the map below points to
           our main office.
         </p>
       </div>

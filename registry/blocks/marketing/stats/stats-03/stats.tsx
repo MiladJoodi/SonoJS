@@ -57,7 +57,7 @@ export default function Stats({
               style={{ backgroundColor: "var(--primary)" }}
             />
             <p className="mt-4 max-w-sm text-base leading-relaxed text-white/65">
-              Active listings across markets — capital that teams actually put
+              Active listings across markets - capital that teams actually put
               to work.
             </p>
           </div>

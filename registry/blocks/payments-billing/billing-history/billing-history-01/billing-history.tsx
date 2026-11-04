@@ -299,7 +299,7 @@ export default function BillingHistory({
               Transaction history
             </h1>
             <p className="mt-2 max-w-xl text-sm text-muted-foreground">
-              Every deposit, payment, and transfer — searchable, filterable, and
+              Every deposit, payment, and transfer - searchable, filterable, and
               export-ready.
             </p>
           </div>

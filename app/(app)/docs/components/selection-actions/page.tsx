@@ -46,7 +46,7 @@ export default async function SelectionActionsDocsPage() {
         pathname="/docs/components/selection-actions"
         description={
           <p className="leading-relaxed text-muted-foreground">
-            A contextual AI action bar that appears beneath selected text —
+            A contextual AI action bar that appears beneath selected text -
             explain, improve, shorten, fix grammar, or a custom edit.
           </p>
         }
@@ -92,7 +92,7 @@ export default async function SelectionActionsDocsPage() {
             {
               name: "className",
               type: "string",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Merge classes on the root.",
             },
           ]}

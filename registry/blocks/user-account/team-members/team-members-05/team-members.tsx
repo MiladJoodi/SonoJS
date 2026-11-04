@@ -103,7 +103,7 @@ export default function TeamMembers({
             Invite teammates
           </h1>
           <p className="mt-1 text-sm text-muted-foreground">
-            Add people by email — no modal, send right from the page.
+            Add people by email - no modal, send right from the page.
           </p>
         </div>
 

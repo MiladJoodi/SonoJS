@@ -44,7 +44,7 @@ export default function BlockCalendarDocsPage() {
       <BlocksPageHeader
         title="Calendar"
         pathname="/blocks/calendar-scheduling/calendar"
-        description="Production calendars — month agenda, week timeline, day focus, public booking, and team availability."
+        description="Production calendars - month agenda, week timeline, day focus, public booking, and team availability."
       />
 
       <div className="flex flex-col gap-8">

@@ -243,7 +243,7 @@ export default function ProductList({
             Hot list
           </h2>
           <p className="mt-2 max-w-lg text-start text-sm text-muted-foreground">
-            Soft spa tiles with warm product wells — MRP pricing and bag-first
+            Soft spa tiles with warm product wells - MRP pricing and bag-first
             CTAs.
           </p>
         </div>

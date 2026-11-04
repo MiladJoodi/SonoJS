@@ -28,10 +28,10 @@
     {
       "path": "components/blocks/marketing/banner-05/banner.tsx",
       "type": "registry:component",
-      "content": "\"use client\"\n\nimport type * as React from \"react\"\nimport { ArrowRightIcon, TicketIcon } from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\n\nexport default function Banner({\n  className,\n  ...props\n}: React.ComponentProps<\"div\">) {\n  return (\n    <div\n      className={cn(\n        \"mx-auto flex w-full max-w-lg items-center justify-center gap-2 rounded-full border border-primary/25 bg-primary px-4 py-2.5 text-center text-sm font-medium text-primary-foreground shadow-soft\",\n        className\n      )}\n      role=\"region\"\n      aria-label=\"Ticket offer\"\n      {...props}\n    >\n      <TicketIcon className=\"size-3.5 shrink-0 opacity-90\" aria-hidden />\n      <p className=\"min-w-0 text-balance\">\n        Conf 2026 early bird —{\" \"}\n        <a\n          href=\"#\"\n          className=\"cursor-pointer font-semibold underline underline-offset-2\"\n        >\n          get your ticket\n        </a>\n      </p>\n      <ArrowRightIcon className=\"size-3.5 shrink-0 icon-dir\" aria-hidden />\n    </div>\n  )\n}\n",
+      "content": "\"use client\"\n\nimport type * as React from \"react\"\nimport { ArrowRightIcon, TicketIcon } from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\n\nexport default function Banner({\n  className,\n  ...props\n}: React.ComponentProps<\"div\">) {\n  return (\n    <div\n      className={cn(\n        \"mx-auto flex w-full max-w-lg items-center justify-center gap-2 rounded-full border border-primary/25 bg-primary px-4 py-2.5 text-center text-sm font-medium text-primary-foreground shadow-soft\",\n        className\n      )}\n      role=\"region\"\n      aria-label=\"Ticket offer\"\n      {...props}\n    >\n      <TicketIcon className=\"size-3.5 shrink-0 opacity-90\" aria-hidden />\n      <p className=\"min-w-0 text-balance\">\n        Conf 2026 early bird -{\" \"}\n        <a\n          href=\"#\"\n          className=\"cursor-pointer font-semibold underline underline-offset-2\"\n        >\n          get your ticket\n        </a>\n      </p>\n      <ArrowRightIcon className=\"size-3.5 shrink-0 icon-dir\" aria-hidden />\n    </div>\n  )\n}\n",
       "target": "components/blocks/marketing/banner-05/banner.tsx"
     }
   ],
-  "version": "0.1.0+c9c3d2a86e47",
-  "generatedAt": "2026-11-03T21:57:48.548Z"
+  "version": "0.1.0+3fe3a15cbaf2",
+  "generatedAt": "2026-11-04T11:52:24.655Z"
 }

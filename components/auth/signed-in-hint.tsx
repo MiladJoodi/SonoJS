@@ -4,7 +4,7 @@ import * as React from "react"
 
 /**
  * Server cookie hint for first paint before Clerk JS finishes.
- * Same idea as SiteHeader `initialSignedIn` — avoid signed-in flash of guest chrome.
+ * Same idea as SiteHeader `initialSignedIn` - avoid signed-in flash of guest chrome.
  */
 const SignedInHintContext = React.createContext(false)
 

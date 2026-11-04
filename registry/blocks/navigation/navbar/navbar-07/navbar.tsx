@@ -161,7 +161,7 @@ export default function Navbar({
             </h1>
             <p className="max-w-xl text-sm text-muted-foreground">
               Scroll this frame. The bar stays locked while the reading column
-              moves — built for long guides, not landing pages.
+              moves - built for long guides, not landing pages.
             </p>
           </div>
           {chapters.map((chapter) => (

@@ -36,7 +36,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Bollinger Bands — close + SMA mid + upper/lower σ band fill.
+ * Bollinger Bands - close + SMA mid + upper/lower σ band fill.
  * Stacked transparent lower + bandTop fill; no neon; metric scrubber.
  * Installs to: components/charts/bollinger-bands.tsx
  */
@@ -192,7 +192,7 @@ function formatSessionPct(value: number, locale: string) {
 
 function BollingerBands({
   title = "Bollinger Bands",
-  subtitle = "Close with SMA mid and ±σ envelopes — band width tracks volatility.",
+  subtitle = "Close with SMA mid and ±σ envelopes - band width tracks volatility.",
   symbol = "AENE",
   symbolName,
   data = DEMO_DATA,
@@ -468,7 +468,7 @@ function BollingerBands({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">

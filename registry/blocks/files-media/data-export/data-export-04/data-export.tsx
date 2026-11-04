@@ -42,7 +42,7 @@ const INITIAL: ExportJob[] = [
     name: "Orders · Full dump",
     format: "XLSX",
     records: 12_480,
-    size: "—",
+    size: "-",
     createdAt: "Jun 22, 2026 · 14:18",
     status: "processing",
   },
@@ -51,7 +51,7 @@ const INITIAL: ExportJob[] = [
     name: "Analytics · Q2",
     format: "JSON",
     records: 0,
-    size: "—",
+    size: "-",
     createdAt: "Jun 21, 2026 · 09:04",
     status: "failed",
   },
@@ -107,7 +107,7 @@ export default function DataExport({
           ? {
               ...j,
               status: "processing",
-              size: "—",
+              size: "-",
               createdAt: "Just now",
             }
           : j
@@ -183,7 +183,7 @@ export default function DataExport({
                           </span>
                         </>
                       ) : null}
-                      {job.size !== "—" ? (
+                      {job.size !== "-" ? (
                         <>
                           {" · "}
                           <span dir="ltr">{job.size}</span>

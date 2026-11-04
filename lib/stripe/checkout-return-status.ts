@@ -42,7 +42,7 @@ export async function resolveCheckoutReturnStatus(
 
   const synced = await syncClerk(clerkUserId)
   if (synced.plan !== "pro") {
-    // Race: sub row briefly inconsistent — keep waiting
+    // Race: sub row briefly inconsistent - keep waiting
     return { status: "pending" }
   }
 

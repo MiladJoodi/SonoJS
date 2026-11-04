@@ -1,7 +1,7 @@
 // The shipped tunings: nine states × two sizes, baked from the inkform
 // mini-page tuning session. `count`/`size` are multipliers over the base
 // fine profiles; `speed` multiplies the shared clock. Resolved once per
-// (state, size) pair and cached — the render loop sees plain numbers.
+// (state, size) pair and cached - the render loop sees plain numbers.
 
 import type { ModeOpts } from "./engine/profiles";
 import { BASE_PROFILES, scaleCounts, scaleRadii } from "./engine/profiles";

@@ -27,7 +27,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Renko Chart — fixed brick-size price moves (not calendar time).
+ * Renko Chart - fixed brick-size price moves (not calendar time).
  * `RenkoBrickShape` + `toRenko`; locked chrome + metric scrubber.
  * Installs to: components/charts/renko-chart.tsx
  */
@@ -128,7 +128,7 @@ function useNarrowViewport() {
 
 function RenkoChart({
   title = "Renko Chart",
-  subtitle = "Price moves by brick size — the axis is brick count, not calendar time.",
+  subtitle = "Price moves by brick size - the axis is brick count, not calendar time.",
   symbol = "AENE",
   data = DEMO_DATA,
   brickSize = DEFAULT_BRICK,
@@ -374,7 +374,7 @@ function RenkoChart({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">

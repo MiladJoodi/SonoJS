@@ -29,7 +29,7 @@ npm run dev
 
 ### Stripe billing webhooks (Test mode)
 
-Forward **all** billing events SonoJS handles (Checkout + invoices + subscription lifecycle). Do **not** listen only to `invoice.paid` — new Checkout customers need `checkout.session.completed` (or subscription metadata on `invoice.paid`) to link Clerk and grant Pro.
+Forward **all** billing events SonoJS handles (Checkout + invoices + subscription lifecycle). Do **not** listen only to `invoice.paid` - new Checkout customers need `checkout.session.completed` (or subscription metadata on `invoice.paid`) to link Clerk and grant Pro.
 
 ```bash
 npm run stripe:listen
@@ -86,10 +86,10 @@ npm run sonojs -- add button --registry ./public/r --cwd /tmp/sonojs-smoke --ove
 
 Manual checks:
 
-1. `curl -I http://127.0.0.1:3000/r/registry.json` — expect `max-age=0, must-revalidate`.
-2. `curl -I http://127.0.0.1:3000/r/button.json` — same policy.
-3. `curl -I` a `/_next/static/...` asset from the page HTML — must **not** use the `/r` policy.
-4. Change a component → `npm run build` → restart → hard refresh docs and re-fetch `/r/button.json` — new content.
+1. `curl -I http://127.0.0.1:3000/r/registry.json` - expect `max-age=0, must-revalidate`.
+2. `curl -I http://127.0.0.1:3000/r/button.json` - same policy.
+3. `curl -I` a `/_next/static/...` asset from the page HTML - must **not** use the `/r` policy.
+4. Change a component → `npm run build` → restart → hard refresh docs and re-fetch `/r/button.json` - new content.
 5. Client-side navigation may briefly show a pre-deploy RSC payload until a full refresh; hard refresh after deploy is enough.
 
 ## Add a component
@@ -103,4 +103,4 @@ See `registry/README.md`.
 
 ## License
 
-MIT — see [`LICENSE`](./LICENSE).
+MIT - see [`LICENSE`](./LICENSE).

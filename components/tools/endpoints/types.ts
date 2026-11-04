@@ -67,7 +67,7 @@ export interface HttpRequest {
   updatedAt: number;
 }
 
-/** In-memory editor tab — requestId always equals request.id; never duplicates IDB rows. */
+/** In-memory editor tab - requestId always equals request.id; never duplicates IDB rows. */
 export interface EditorTab {
   id: string;
   requestId: string;

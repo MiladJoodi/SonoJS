@@ -1,6 +1,6 @@
-# Changelog Template — marketplace assets
+# Changelog Template - marketplace assets
 
-Package: `sono-changelog` (`1.0.0`) — Next.js 16.4 · React 19.2 · Tailwind CSS 4.1 · TypeScript 5.9  
+Package: `sono-changelog` (`1.0.0`) - Next.js 16.4 · React 19.2 · Tailwind CSS 4.1 · TypeScript 5.9  
 Category: `landing`  
 Slug / folder: `sonojs-landing-02`  
 Path: `public/marketplace/projects/landing/sonojs-landing-02/`  

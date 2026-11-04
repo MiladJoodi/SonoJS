@@ -16,7 +16,7 @@ import {
 import { getCursorUsage } from "@/lib/cursors-usage"
 import { cursorViewMetadata } from "@/lib/seo"
 
-/** Install / usage gates call Clerk auth — must be request-time. */
+/** Install / usage gates call Clerk auth - must be request-time. */
 export const dynamic = "force-dynamic"
 
 export function generateStaticParams() {
@@ -76,7 +76,7 @@ export default async function CursorViewPage({
             <CursorDemo id={id} />
           </CursorPreview>
 
-          {/* Free+ (signed in). Guests see AccessLocked — not install/code. */}
+          {/* Free+ (signed in). Guests see AccessLocked - not install/code. */}
           <DocsInstallation name={id} />
 
           {usage ? (

@@ -27,7 +27,7 @@ function assetSrc(asset: string | { src: string }) {
   return typeof asset === "string" ? asset : asset.src
 }
 
-/** Bitcoin orange accent — light cream shell + dark coffee shell via CSS vars. */
+/** Bitcoin orange accent - light cream shell + dark coffee shell via CSS vars. */
 const BTC_ORANGE = "#F39321"
 const BTC_AMBER = "#E07A12"
 
@@ -522,7 +522,7 @@ export default function CryptoPortfolio04({
                 className="mt-0.5 text-xs"
                 style={{ color: "var(--cp04-muted)" }}
               >
-                Warm book mix — BTC weighted
+                Warm book mix - BTC weighted
               </p>
             </div>
           </div>

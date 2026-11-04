@@ -401,7 +401,7 @@ export default function UserProfile({
                             {item.repo}
                           </span>{" "}
                           <span className="text-muted-foreground">
-                            — {item.message}
+                            - {item.message}
                           </span>
                         </p>
                         <p className="mt-0.5 text-xs text-muted-foreground">

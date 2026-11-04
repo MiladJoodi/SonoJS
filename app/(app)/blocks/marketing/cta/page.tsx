@@ -41,7 +41,7 @@ export default function BlockCtaDocsPage() {
       <BlocksPageHeader
         title="CTA"
         pathname="/blocks/marketing/cta"
-        description="Call-to-action sections for marketing pages — headline, copy, and a primary action."
+        description="Call-to-action sections for marketing pages - headline, copy, and a primary action."
       />
 
       <div className="flex flex-col gap-8">

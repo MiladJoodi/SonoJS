@@ -92,7 +92,7 @@ const ALL_POSTS: Post[] = [
     date: "Mar 15, 2026",
     readTime: "6 min",
     excerpt:
-      "Why pure CSS theming wins — and how oklch keeps contrast honest.",
+      "Why pure CSS theming wins - and how oklch keeps contrast honest.",
     cover: assetSrc(cover02),
     alt: "Theming mood board",
     popularity: 88,
@@ -118,7 +118,7 @@ const ALL_POSTS: Post[] = [
     date: "Mar 10, 2026",
     readTime: "12 min",
     excerpt:
-      "CSS-first config, @theme, and @source — a practical migration path.",
+      "CSS-first config, @theme, and @source - a practical migration path.",
     cover: assetSrc(cover04),
     alt: "Product headphones on desk",
     popularity: 91,
@@ -149,7 +149,7 @@ const ALL_POSTS: Post[] = [
     popularity: 85,
   },
   {
-    title: "SonoJS v1.2 — Calendar and Tree Components",
+    title: "SonoJS v1.2 - Calendar and Tree Components",
     category: "release",
     author: "SonoJS Team",
     initials: "SJ",
@@ -211,7 +211,7 @@ const ALL_POSTS: Post[] = [
     popularity: 81,
   },
   {
-    title: "SonoJS v1.1 — Data Table and Timeline",
+    title: "SonoJS v1.1 - Data Table and Timeline",
     category: "release",
     author: "SonoJS Team",
     initials: "SJ",
@@ -271,7 +271,7 @@ export default function BlogGrid({
             Editorial archive
           </h1>
           <p className="mt-2 text-base text-muted-foreground">
-            Dense list rows with thumbs, excerpts, and sort — built for
+            Dense list rows with thumbs, excerpts, and sort - built for
             scanning an archive.
           </p>
         </div>

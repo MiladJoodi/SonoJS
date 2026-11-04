@@ -43,7 +43,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Candlestick Indicators — OHLC + RSI(14) + MACD(12,26,9) synced panels.
+ * Candlestick Indicators - OHLC + RSI(14) + MACD(12,26,9) synced panels.
  * No neon; locked gallery chrome + metric scrubber.
  * Installs to: components/charts/candlestick-indicators.tsx
  */
@@ -425,7 +425,7 @@ function CandlestickIndicators({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">
@@ -478,7 +478,7 @@ function CandlestickIndicators({
               <strong className="text-foreground">
                 {active?.rsi != null
                   ? formatRsi(active.rsi, locale)
-                  : "—"}
+                  : "-"}
               </strong>
             </span>
             <span>
@@ -486,7 +486,7 @@ function CandlestickIndicators({
               <strong className="text-foreground">
                 {active?.macd != null
                   ? formatMacd(active.macd, locale)
-                  : "—"}
+                  : "-"}
               </strong>
             </span>
           </div>

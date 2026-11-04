@@ -43,7 +43,7 @@ export default function BlockCommandMenuDocsPage() {
       <BlocksPageHeader
         title="Command Menu"
         pathname="/blocks/navigation/command-menu"
-        description="Searchable command palettes — embedded create, global launcher, people scout, file jump, integrations, and slash actions."
+        description="Searchable command palettes - embedded create, global launcher, people scout, file jump, integrations, and slash actions."
       />
 
       <div className="flex flex-col gap-8">

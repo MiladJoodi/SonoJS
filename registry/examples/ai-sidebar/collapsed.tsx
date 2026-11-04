@@ -17,7 +17,7 @@ export function AiSidebarCollapsed() {
         user={{ name: "Alex Rivera", plan: "Pro" }}
       />
       <div className="hidden flex-1 items-center justify-center p-8 text-sm text-muted-foreground sm:flex">
-        Collapsed rail — click the panel icon to expand
+        Collapsed rail - click the panel icon to expand
       </div>
     </div>
   )

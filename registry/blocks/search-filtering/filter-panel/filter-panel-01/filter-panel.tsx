@@ -430,7 +430,7 @@ export default function FilterPanel({
                         dir="ltr"
                         className="text-xs font-semibold tabular-nums text-foreground"
                       >
-                        ${revenueRange[0]}K — ${revenueRange[1]}K
+                        ${revenueRange[0]}K - ${revenueRange[1]}K
                       </p>
                     </div>
                     <Slider
@@ -455,7 +455,7 @@ export default function FilterPanel({
                         dir="ltr"
                         className="text-xs font-semibold tabular-nums text-foreground"
                       >
-                        {recordsRange[0].toLocaleString("en-US")} —{" "}
+                        {recordsRange[0].toLocaleString("en-US")} -{" "}
                         {recordsRange[1].toLocaleString("en-US")}
                       </p>
                     </div>

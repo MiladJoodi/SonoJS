@@ -119,7 +119,7 @@ export default function Footer({
           </a>
           <h2 className="mt-6 text-h1 text-foreground">Get the latest news</h2>
           <p className="mt-3 max-w-xl text-base leading-relaxed text-muted-foreground">
-            Product notes, release highlights, and practical SonoJS patterns —
+            Product notes, release highlights, and practical SonoJS patterns -
             a short email when there is something worth opening.
           </p>
           <form

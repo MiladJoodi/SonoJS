@@ -20,7 +20,7 @@ export type UpsertPaymentInput = {
   currency?: string
   status: Payment["status"]
   claim: WebhookClaim
-  /** Stripe `event.created` — used to refuse older/stale status downgrades. */
+  /** Stripe `event.created` - used to refuse older/stale status downgrades. */
   lastStripeEventCreated?: number | null
 }
 

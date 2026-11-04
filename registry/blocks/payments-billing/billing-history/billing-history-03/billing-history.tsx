@@ -36,7 +36,7 @@ const INVOICES: Invoice[] = [
     tax: "$12.00",
     total: "$147.00",
     lines: [
-      { name: "Pro plan — monthly", qty: 1, price: "$49.00" },
+      { name: "Pro plan - monthly", qty: 1, price: "$49.00" },
       { name: "Additional seats × 2", qty: 2, price: "$86.00" },
     ],
   },
@@ -49,7 +49,7 @@ const INVOICES: Invoice[] = [
     subtotal: "$45.00",
     tax: "$4.00",
     total: "$49.00",
-    lines: [{ name: "Pro plan — monthly", qty: 1, price: "$49.00" }],
+    lines: [{ name: "Pro plan - monthly", qty: 1, price: "$49.00" }],
   },
   {
     id: "INV-2403",

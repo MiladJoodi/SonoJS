@@ -15,7 +15,7 @@ const features = [
   {
     title: "Customization",
     description:
-      "Tailor every aspect of the platform to your workflow — from design preferences to functional defaults.",
+      "Tailor every aspect of the platform to your workflow - from design preferences to functional defaults.",
     icon: Settings2Icon,
   },
   {

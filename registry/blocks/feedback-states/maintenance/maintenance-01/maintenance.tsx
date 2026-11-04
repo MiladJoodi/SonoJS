@@ -92,7 +92,7 @@ export default function Maintenance({
       )}
       {...props}
     >
-      {/* Full-bleed progress rail — not a card Progress bar */}
+      {/* Full-bleed progress rail - not a card Progress bar */}
       <div
         className="h-1 w-full bg-muted"
         role="progressbar"
@@ -144,7 +144,7 @@ export default function Maintenance({
         </ol>
 
         <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-end lg:gap-16">
-          {/* Editorial left — big quiet type, no wrench */}
+          {/* Editorial left - big quiet type, no wrench */}
           <div className="text-start">
             <Badge variant="secondary" className="mb-4">
               Scheduled window
@@ -227,12 +227,12 @@ export default function Maintenance({
           </div>
         </div>
 
-        {/* Notify as a quiet bottom bar — not a hero form */}
+        {/* Notify as a quiet bottom bar - not a hero form */}
         <div className="rounded-[12px] border border-border/70 bg-card px-4 py-4 shadow-soft sm:px-5">
           {subscribed ? (
             <p className="flex flex-wrap items-center justify-center gap-2 text-sm text-emerald-700 dark:text-emerald-300 sm:justify-start">
               <CheckIcon className="size-4 shrink-0" aria-hidden />
-              You&apos;re on the list — we&apos;ll email{" "}
+              You&apos;re on the list - we&apos;ll email{" "}
               <span className="font-medium text-foreground">{email}</span> when
               we&apos;re live.
             </p>

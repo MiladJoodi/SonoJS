@@ -42,7 +42,7 @@ export default function BlockNewsletterDocsPage() {
       <BlocksPageHeader
         title="Newsletter"
         pathname="/blocks/marketing/newsletter"
-        description="Email signup sections — headline, short copy, and a subscribe form."
+        description="Email signup sections - headline, short copy, and a subscribe form."
       />
 
       <div className="flex flex-col gap-8">

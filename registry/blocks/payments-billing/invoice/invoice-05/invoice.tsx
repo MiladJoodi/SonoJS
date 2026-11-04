@@ -29,7 +29,7 @@ const INVOICE = {
   supplyDate: "18 Jul 2026",
   dueDate: "3 Aug 2026",
   po: "PO-88421",
-  project: "Studio redesign — Phase 2",
+  project: "Studio redesign - Phase 2",
   terms: "Net 14 · Bank transfer",
   supplier: {
     name: "Northwind B.V.",

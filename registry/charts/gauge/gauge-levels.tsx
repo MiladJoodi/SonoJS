@@ -15,7 +15,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Gauge Levels — 20 soft traffic bands with needle at 86%.
+ * Gauge Levels - 20 soft traffic bands with needle at 86%.
  * react-gauge-chart; locked header chrome; English / Intl.
  * Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/gauge-levels.tsx
@@ -35,7 +35,7 @@ const DEMO_LEVELS = 20
 const DEMO_PERCENT = 0.86
 
 function GaugeLevels({
-  title = "Score gauge — 20 levels",
+  title = "Score gauge - 20 levels",
   subtitle = "Fine green → gold → red ramp with the needle at 86%.",
   levels = DEMO_LEVELS,
   percent = DEMO_PERCENT,

@@ -69,7 +69,7 @@ export default function PaymentForm({
             "var(--shadow-soft, 0 2px 4px -1px rgba(10, 10, 12, 0.04), 0 28px 56px -28px rgba(10, 10, 12, 0.18))",
         }}
       >
-        {/* Always-dark editorial rail — stable in light + dark themes */}
+        {/* Always-dark editorial rail - stable in light + dark themes */}
         <div className="relative flex flex-col justify-between gap-8 border-b border-border/70 bg-zinc-950 px-5 py-7 text-zinc-50 sm:gap-10 sm:px-8 sm:py-10 lg:border-e lg:border-b-0">
           <div className="text-start">
             <p className="text-[11px] font-semibold tracking-[0.2em] text-zinc-500 uppercase">

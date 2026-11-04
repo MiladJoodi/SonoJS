@@ -33,7 +33,7 @@ import { useNarrowViewport } from "../_lib/use-narrow-viewport"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Area Interactive — locked gallery chrome + **neon** chart-local series toggle.
+ * Area Interactive - locked gallery chrome + **neon** chart-local series toggle.
  * Switch Store / Online period totals; single monotone area follows the active key.
  * Installs to: components/charts/area-interactive.tsx
  */
@@ -65,7 +65,7 @@ const AXIS_TICK_FILL =
 
 const SERIES_KEYS: AreaInteractiveSeries[] = ["store", "online"]
 
-/** Daily Store × Online traffic — Apr–Jun 2024 (from FarsiUI interactive demo). */
+/** Daily Store × Online traffic - Apr–Jun 2024 (from FarsiUI interactive demo). */
 const DEMO_DATA: AreaInteractivePoint[] = [
   { date: "2024-04-01", store: 222, online: 150 },
   { date: "2024-04-02", store: 97, online: 180 },
@@ -500,7 +500,7 @@ function AreaInteractive({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">
@@ -513,7 +513,7 @@ function AreaInteractive({
         </div>
       </header>
 
-      {/* Series toggle — chart-local interactive control */}
+      {/* Series toggle - chart-local interactive control */}
       <div className="flex flex-col overflow-hidden rounded-xl border border-border sm:flex-row">
         {SERIES_KEYS.map((key) => {
           const selected = activeSeries === key

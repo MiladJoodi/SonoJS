@@ -15,13 +15,13 @@ import {
 export type ProArchiveDownloadProps = {
   slug: string
   filename: string
-  /** Unused visually — kept for call-site compatibility. */
+  /** Unused visually - kept for call-site compatibility. */
   title?: string
   className?: string
 }
 
 /**
- * Pro zip download — same chrome as CodePanel / AccessLocked (header + quiet body).
+ * Pro zip download - same chrome as CodePanel / AccessLocked (header + quiet body).
  */
 export function ProArchiveDownload({
   slug,
@@ -114,7 +114,7 @@ export function ProArchiveDownload({
             {error}
           </p>
         ) : (
-          <p>Pro zip — extract into your project.</p>
+          <p>Pro zip - extract into your project.</p>
         )}
       </div>
     </div>

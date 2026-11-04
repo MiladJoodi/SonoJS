@@ -18,7 +18,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Pie Responsive Container — fluid square ChartContainer stage + labeled pie.
+ * Pie Responsive Container - fluid square ChartContainer stage + labeled pie.
  * Locked metric scrub; EN regions; `--chart-1…4`; ChartLegend wrap row.
  * Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/pie-responsive-container.tsx
@@ -99,7 +99,7 @@ function formatPct(value: number) {
   return `${Math.round(value)}%`
 }
 
-/** Teaching square stage — fluid within a fixed outer height (FA pattern). */
+/** Teaching square stage - fluid within a fixed outer height (FA pattern). */
 const stageClassName =
   "mx-auto aspect-square h-full w-full max-w-[300px] overflow-visible font-sans text-xs tabular-nums [&_.recharts-surface]:overflow-visible [&_.recharts-pie-label-text]:fill-foreground"
 
@@ -266,7 +266,7 @@ function PieResponsiveContainer({
                 <span className="font-normal">of total</span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{caption}</p>

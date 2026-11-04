@@ -35,7 +35,7 @@ const DEFAULT_ROWS: ContentRow[] = [
   {
     title: "Your Success, Our Commitment",
     paragraphs: [
-      "We're a partner in progress—data-driven insights, tailored solutions, and a relentless focus on growth.",
+      "We're a partner in progress-data-driven insights, tailored solutions, and a relentless focus on growth.",
       "From optimizing performance to scaling outcomes, every solution stays aligned with your vision.",
     ],
     imageSrc: assetSrc(kpiImg),

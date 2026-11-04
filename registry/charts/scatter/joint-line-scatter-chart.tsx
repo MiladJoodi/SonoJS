@@ -26,7 +26,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Joint Line Scatter Chart — dual-series points joined with `lineType="joint"`.
+ * Joint Line Scatter Chart - dual-series points joined with `lineType="joint"`.
  * Teaching delta vs `simple-scatter-chart`: connecting stroke in data order.
  * Locked chrome + metric scrubber. Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/joint-line-scatter-chart.tsx
@@ -69,7 +69,7 @@ type FlatPoint = JointLineScatterPoint & {
   id: string
 }
 
-/** Group A — height (cm) × weight (kg). */
+/** Group A - height (cm) × weight (kg). */
 const DEMO_A: JointLineScatterPoint[] = [
   { x: 158, y: 52 },
   { x: 162, y: 58 },
@@ -81,7 +81,7 @@ const DEMO_A: JointLineScatterPoint[] = [
   { x: 180, y: 79 },
 ]
 
-/** Group B — slightly taller / heavier cluster. */
+/** Group B - slightly taller / heavier cluster. */
 const DEMO_B: JointLineScatterPoint[] = [
   { x: 166, y: 70 },
   { x: 169, y: 74 },
@@ -141,7 +141,7 @@ function flattenSeries(
 
 function JointLineScatterChart({
   title = "Height vs Weight",
-  subtitle = "Points joined in order — teaching joint line scatter.",
+  subtitle = "Points joined in order - teaching joint line scatter.",
   seriesA = DEMO_A,
   seriesB = DEMO_B,
   seriesALabel = "Group A",
@@ -449,7 +449,7 @@ function JointLineScatterChart({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{caption}</p>

@@ -26,7 +26,7 @@ import { useNarrowViewport } from "../_lib/use-narrow-viewport"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Chart Area Step (classic) — locked gallery chrome; single-series Store area.
+ * Chart Area Step (classic) - locked gallery chrome; single-series Store area.
  * Step curve (`type="step"`) + fill gradient + metric header scrubber.
  * Installs to: components/charts/chart-area-step.tsx
  */
@@ -117,7 +117,7 @@ function niceMax(values: number[]) {
 
 function ChartAreaStep({
   title = "Monthly store sales",
-  subtitle = "Step area — Store sessions, January to June 2026.",
+  subtitle = "Step area - Store sessions, January to June 2026.",
   data = DEMO_DATA,
   className,
   plotDir,
@@ -354,7 +354,7 @@ function ChartAreaStep({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{monthLabel}</p>

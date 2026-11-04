@@ -27,7 +27,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Bar Chart Range — locked gallery chrome; type-required ranged bars
+ * Bar Chart Range - locked gallery chrome; type-required ranged bars
  * (`[low, high]` per category). Single series `--chart-1`. Metric tracks high.
  * Installs to: components/charts/bar-chart-range.tsx
  */
@@ -51,7 +51,7 @@ export type BarChartRangeProps = {
 
 const NARROW_MQ = "(max-width: 639px)"
 const BAR_MS = 200
-/** Floating range bars — radius on all corners (~control scale). */
+/** Floating range bars - radius on all corners (~control scale). */
 const BAR_RADIUS: [number, number, number, number] = [8, 8, 8, 8]
 const AXIS_TICK_FILL =
   "color-mix(in oklab, var(--foreground) 58%, transparent)"
@@ -410,7 +410,7 @@ function BarChartRange({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">

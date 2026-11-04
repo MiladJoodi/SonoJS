@@ -35,7 +35,7 @@ export default function CommandMenu({
           Workspace
         </p>
         <p className="text-start text-xs text-muted-foreground">
-          Embedded create palette — no modal.
+          Embedded create palette - no modal.
         </p>
       </header>
 

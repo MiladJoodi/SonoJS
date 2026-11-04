@@ -53,7 +53,7 @@ export const CURSOR_FEATURED_IDS = new Set([
 ])
 
 export const cursorsCatalog: CursorsCatalogEntry[] = [
-  // Ported — pointer
+  // Ported - pointer
   {
     id: "smooth-cursor-follower",
     category: "pointer",
@@ -75,7 +75,7 @@ export const cursorsCatalog: CursorsCatalogEntry[] = [
     description: "Neon ring and trail with motion springs.",
     status: "ported",
   },
-  // Ported — trail
+  // Ported - trail
   {
     id: "rainbow-cursor",
     category: "trail",
@@ -90,7 +90,7 @@ export const cursorsCatalog: CursorsCatalogEntry[] = [
     description: "Rising bubble particles along the pointer path.",
     status: "ported",
   },
-  // Ported — interaction
+  // Ported - interaction
   {
     id: "ripple-cursor",
     category: "interaction",
@@ -126,7 +126,7 @@ export const cursorsCatalog: CursorsCatalogEntry[] = [
     description: "Contextual text or icon chip near the pointer.",
     status: "ported",
   },
-  // Ported — pointer (batch 2)
+  // Ported - pointer (batch 2)
   {
     id: "arrow-cursor",
     category: "pointer",
@@ -148,7 +148,7 @@ export const cursorsCatalog: CursorsCatalogEntry[] = [
     description: "Concentric rings with CSS perspective parallax.",
     status: "ported",
   },
-  // Ported — trail (batch 2)
+  // Ported - trail (batch 2)
   {
     id: "trail-cursor",
     category: "trail",
@@ -191,7 +191,7 @@ export const cursorsCatalog: CursorsCatalogEntry[] = [
     description: "Letters that wave behind the pointer like a flag.",
     status: "ported",
   },
-  // Ported — interaction (batch 2)
+  // Ported - interaction (batch 2)
   {
     id: "glitch-cursor",
     category: "interaction",
@@ -213,7 +213,7 @@ export const cursorsCatalog: CursorsCatalogEntry[] = [
     description: "Offset clones with staggered lag and opacity.",
     status: "ported",
   },
-  // Ported — 2026 trends
+  // Ported - 2026 trends
   {
     id: "agent-cursor",
     category: "interaction",

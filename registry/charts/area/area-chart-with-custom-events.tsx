@@ -34,7 +34,7 @@ import { useNarrowViewport } from "../_lib/use-narrow-viewport"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Area Chart With Custom Events — locked gallery chrome + **neon** (chart-local).
+ * Area Chart With Custom Events - locked gallery chrome + **neon** (chart-local).
  * Step area + chart-root handlers via `getRelativeCoordinate`; live event panel.
  * Metric header scrubber; RTL-aware axes.
  * Installs to: components/charts/area-chart-with-custom-events.tsx
@@ -446,7 +446,7 @@ function AreaChartWithCustomEvents({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{weekLabel}</p>

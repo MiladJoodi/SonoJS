@@ -22,7 +22,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Pie With Gradient — donut with radial + shine sector fills, center metric, channel cards.
+ * Pie With Gradient - donut with radial + shine sector fills, center metric, channel cards.
  * Active expand/ring; cards drive scrub. Tokens: `--chart-1…4`. Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/pie-with-gradient.tsx
  */
@@ -337,7 +337,7 @@ function CenterLabel({
 
 function PieWithGradient({
   title = "Sales by channel",
-  subtitle = "Gradient donut with channel cards — hover a slice or card.",
+  subtitle = "Gradient donut with channel cards - hover a slice or card.",
   data = DEMO_DATA,
   className,
   plotDir,
@@ -479,7 +479,7 @@ function PieWithGradient({
                 <span className="font-normal">of total</span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{caption}</p>

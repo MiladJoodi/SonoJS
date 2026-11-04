@@ -44,7 +44,7 @@ export default async function TaskRowsDocsPage() {
         pathname="/docs/components/task-rows"
         description={
           <p className="leading-relaxed text-muted-foreground">
-            Expandable task rows that show an AI agent&apos;s live progress —
+            Expandable task rows that show an AI agent&apos;s live progress -
             status icons, amounts, and nested detail lines.
           </p>
         }
@@ -75,7 +75,7 @@ export default async function TaskRowsDocsPage() {
             {
               name: "className",
               type: "string",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Optional class names on the root container.",
             },
           ]}

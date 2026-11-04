@@ -41,7 +41,7 @@ export function CardLivePreview({
         if (Comp) setDemo(() => Comp)
       })
       .catch(() => {
-        /* leave empty — icon underneath remains as fallback */
+        /* leave empty - icon underneath remains as fallback */
       })
 
     return () => {

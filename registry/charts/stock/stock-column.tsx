@@ -25,7 +25,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Stock Column — close price as columns tinted bullish/bearish per bar.
+ * Stock Column - close price as columns tinted bullish/bearish per bar.
  * Locked gallery chrome + semantic up/down; metric scrubber.
  * Installs to: components/charts/stock-column.tsx
  */
@@ -87,7 +87,7 @@ function useNarrowViewport() {
 
 function StockColumn({
   title = "Intraday Columns",
-  subtitle = "Close as columns — each bar tinted by the session open-to-close direction.",
+  subtitle = "Close as columns - each bar tinted by the session open-to-close direction.",
   data = DEMO_DATA,
   className,
   plotDir,
@@ -327,7 +327,7 @@ function StockColumn({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">

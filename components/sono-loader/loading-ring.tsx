@@ -51,7 +51,7 @@ function WaveLayer({
 }
 
 /**
- * Circular liquid-fill loader — muted ball, primary water rising from the bottom.
+ * Circular liquid-fill loader - muted ball, primary water rising from the bottom.
  * Styles are self-contained in `loading-ring.css` (scoped class names).
  */
 export function LoadingRing({

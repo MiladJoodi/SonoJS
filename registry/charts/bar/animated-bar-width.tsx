@@ -27,7 +27,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Animated Bar Width — locked gallery chrome; type-required width scrub
+ * Animated Bar Width - locked gallery chrome; type-required width scrub
  * (inactive bars scaleX 20%, active expands). Single series `--chart-1`.
  * Installs to: components/charts/animated-bar-width.tsx
  */
@@ -423,7 +423,7 @@ function AnimatedBarWidthChart({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{categoryLabel}</p>

@@ -16,7 +16,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Two Level Pie Chart — locked gallery chrome adapted for nested pies.
+ * Two Level Pie Chart - locked gallery chrome adapted for nested pies.
  * Inner = regions; outer = channels. Slice scrub updates the metric header.
  * Tokens: `--chart-1…5`. Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/two-level-pie-chart.tsx
@@ -51,7 +51,7 @@ const SERIES_VARS = [
   "var(--chart-5)",
 ] as const
 
-/** Inner ring — regional sales share. */
+/** Inner ring - regional sales share. */
 const DEMO_INNER: TwoLevelPieSlice[] = [
   { name: "west", value: 400 },
   { name: "midwest", value: 300 },
@@ -59,7 +59,7 @@ const DEMO_INNER: TwoLevelPieSlice[] = [
   { name: "northeast", value: 200 },
 ]
 
-/** Outer ring — channel mix nested around regions. */
+/** Outer ring - channel mix nested around regions. */
 const DEMO_OUTER: TwoLevelPieSlice[] = [
   { name: "store", value: 100 },
   { name: "online", value: 300 },
@@ -139,7 +139,7 @@ const chartPieContainerClassName =
 
 function TwoLevelPieChart({
   title = "Sales by region & channel",
-  subtitle = "Inner regions · outer channels — nested share.",
+  subtitle = "Inner regions · outer channels - nested share.",
   innerData = DEMO_INNER,
   outerData = DEMO_OUTER,
   className,
@@ -355,7 +355,7 @@ function TwoLevelPieChart({
                 <span className="font-normal">of ring</span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{caption}</p>

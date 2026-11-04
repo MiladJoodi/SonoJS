@@ -47,7 +47,7 @@ const DEFAULT_POSTS = [
     date: "June 10, 2023",
     title: "Food That Inspires",
     description:
-      "Bright meals, bold ideas—see how vibrant food presentation can spark imagination and joy.",
+      "Bright meals, bold ideas-see how vibrant food presentation can spark imagination and joy.",
     href: "#",
   },
   {

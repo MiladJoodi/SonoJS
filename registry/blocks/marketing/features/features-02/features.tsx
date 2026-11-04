@@ -28,7 +28,7 @@ const features = [
   {
     title: "Support",
     description:
-      "Our expert support team is available around the clock to assist you — ensuring your experience remains smooth.",
+      "Our expert support team is available around the clock to assist you - ensuring your experience remains smooth.",
     icon: HeadphonesIcon,
   },
   {
@@ -40,7 +40,7 @@ const features = [
   {
     title: "Global Reach",
     description:
-      "Whether you're a startup or enterprise — add users, features, or capabilities without disrupting performance.",
+      "Whether you're a startup or enterprise - add users, features, or capabilities without disrupting performance.",
     icon: Globe2Icon,
   },
   {

@@ -15,7 +15,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Custom Content Treemap — teaching `content` renderer (group fill + rank + label;
+ * Custom Content Treemap - teaching `content` renderer (group fill + rank + label;
  * leaves are stroke-only subdivisions). Locked metric scrub; `--chart-1…5`.
  * Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/custom-content-treemap.tsx
@@ -60,7 +60,7 @@ const GROUP_LABELS: Record<string, string> = {
 }
 
 /**
- * Flare-inspired sample (classic Custom Content Treemap) — nested branches
+ * Flare-inspired sample (classic Custom Content Treemap) - nested branches
  * flattened into five top-level groups (`--chart-1…5`).
  */
 const DEMO_DATA: CustomContentTreemapGroup[] = [
@@ -285,7 +285,7 @@ function CustomTreemapContent(props: CellProps) {
 
 function CustomContentTreemap({
   title = "Module size",
-  subtitle = "Custom Treemap content — group fill, rank, and label; leaves subdivide.",
+  subtitle = "Custom Treemap content - group fill, rank, and label; leaves subdivide.",
   data = DEMO_DATA,
   className,
   scrub = true,
@@ -461,7 +461,7 @@ function CustomContentTreemap({
                 <span className="font-normal">of total</span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{caption}</p>

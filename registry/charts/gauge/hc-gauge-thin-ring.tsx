@@ -14,7 +14,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Hc Gauge Thin Ring — thin outer plotBands with dial on HC_DIAL.
+ * Hc Gauge Thin Ring - thin outer plotBands with dial on HC_DIAL.
  * Soft violet → slate bands; locked header chrome; English / Intl.
  * Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/hc-gauge-thin-ring.tsx
@@ -102,7 +102,7 @@ function buildOptions(value: number): Options {
 }
 
 function HcGaugeThinRing({
-  title = "Score gauge — thin ring",
+  title = "Score gauge - thin ring",
   subtitle = "Narrow violet / slate bands on the outer ring with a theme dial.",
   value = DEMO_VALUE,
   className,

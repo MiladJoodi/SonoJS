@@ -35,7 +35,7 @@ export default function BlockAdvancedFiltersDocsPage() {
       <BlocksPageHeader
         title="Advanced Filters"
         pathname="/blocks/data-tables/advanced-filters"
-        description="Production-ready facet patterns — brand pickers, smart commerce, SEO consoles, rule builders, status pipelines, and range ladders."
+        description="Production-ready facet patterns - brand pickers, smart commerce, SEO consoles, rule builders, status pipelines, and range ladders."
       />
 
       <div className="flex flex-col gap-8">

@@ -92,7 +92,7 @@ export async function fetchRepoFileBytes(path: string): Promise<Buffer> {
     }
   }
 
-  // Large files: Contents API omits `content` — use authenticated download_url.
+  // Large files: Contents API omits `content` - use authenticated download_url.
   if (typeof data.download_url === "string" && data.download_url) {
     const res = await fetch(data.download_url, {
       headers: authHeaders(),

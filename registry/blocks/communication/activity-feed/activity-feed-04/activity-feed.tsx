@@ -202,7 +202,7 @@ export default function ActivityFeed({
             <div className="text-start">
               <CardTitle>Activity</CardTitle>
               <CardDescription>
-                Grouped by day — filter by team, code, or system.
+                Grouped by day - filter by team, code, or system.
               </CardDescription>
             </div>
             <Button

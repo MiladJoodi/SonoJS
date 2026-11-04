@@ -113,7 +113,7 @@ export default function Navbar({
           Minimal floating bar
         </h1>
         <p className="max-w-sm text-sm text-muted-foreground">
-          Logo, a few links, one CTA — for quiet product pages.
+          Logo, a few links, one CTA - for quiet product pages.
         </p>
       </main>
     </div>

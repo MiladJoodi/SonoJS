@@ -1,5 +1,6 @@
 import type { ReactNode } from "react"
 
+import { get3dAdjacent } from "@/lib/3d-nav"
 import { getDocsAdjacent } from "@/lib/docs-nav"
 import { cn } from "@/lib/utils"
 
@@ -19,7 +20,9 @@ export function DocsPageHeader({
   pathname: string
   className?: string
 }) {
-  const { previous, next } = getDocsAdjacent(pathname)
+  const { previous, next } = pathname.startsWith("/3d")
+    ? get3dAdjacent(pathname)
+    : getDocsAdjacent(pathname)
 
   return (
     <header className={cn("space-y-2", className)}>

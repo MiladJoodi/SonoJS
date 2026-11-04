@@ -27,7 +27,7 @@ export default function BentoGrid02({
     >
       <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-4 md:grid-cols-12 md:gap-5 md:items-stretch">
-          {/* Left column — editorial + stack */}
+          {/* Left column - editorial + stack */}
           <div className="flex flex-col gap-4 md:col-span-5 md:gap-5">
             <header className="flex flex-1 flex-col justify-center text-start md:py-2">
               <p className="text-sm font-medium text-muted-foreground">
@@ -79,7 +79,7 @@ export default function BentoGrid02({
             </article>
           </div>
 
-          {/* Right column — metric, quote, terminal */}
+          {/* Right column - metric, quote, terminal */}
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-12 md:col-span-7 md:gap-5">
             <article className="relative overflow-hidden rounded-[12px] bg-foreground p-6 text-background shadow-soft sm:col-span-7 dark:border dark:border-border/70 dark:bg-card dark:text-foreground">
               <p className="text-xs font-medium tracking-wide text-background/60 uppercase dark:text-muted-foreground">
@@ -107,7 +107,7 @@ export default function BentoGrid02({
                 sidebar in an afternoon.&rdquo;
               </blockquote>
               <footer className="mt-4 text-xs text-muted-foreground">
-                — Maya K., design eng
+                - Maya K., design eng
               </footer>
             </article>
 

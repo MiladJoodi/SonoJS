@@ -28,7 +28,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Line Chart Axis Interval — locked gallery chrome (navy × orange).
+ * Line Chart Axis Interval - locked gallery chrome (navy × orange).
  * Stacked demos of Recharts `interval` presets (plus dense `interval={1}`).
  * Installs to: components/charts/line-chart-axis-interval.tsx
  */
@@ -292,7 +292,7 @@ function LineChartAxisInterval({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">

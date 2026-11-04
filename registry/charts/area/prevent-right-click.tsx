@@ -32,7 +32,7 @@ import { useNarrowViewport } from "../_lib/use-narrow-viewport"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Prevent Right Click — locked gallery chrome + **neon** (chart-local).
+ * Prevent Right Click - locked gallery chrome + **neon** (chart-local).
  * Monotone area; `onContextMenu` calls `preventDefault` so the browser menu stays off.
  * Metric header scrubber; RTL-aware axes.
  * Installs to: components/charts/prevent-right-click.tsx
@@ -415,7 +415,7 @@ function PreventRightClick({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{monthLabel}</p>
@@ -560,7 +560,7 @@ function PreventRightClick({
       >
         {blockedFlash
           ? "Context menu blocked on the plot."
-          : "Try right-clicking the chart — the browser menu will not open."}
+          : "Try right-clicking the chart - the browser menu will not open."}
       </div>
 
       <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-muted-foreground">

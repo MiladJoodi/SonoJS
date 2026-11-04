@@ -69,7 +69,7 @@ export default async function SwitchDocsPage() {
         description={
           <p className="leading-relaxed text-muted-foreground">
           A control that toggles between checked and not checked. The thumb
-          travels along the inline axis — off at{" "}
+          travels along the inline axis - off at{" "}
           <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
             start
           </code>
@@ -77,7 +77,7 @@ export default async function SwitchDocsPage() {
           <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
             end
           </code>{" "}
-          — so it flips correctly in RTL.
+          - so it flips correctly in RTL.
         </p>
         }
       />
@@ -134,19 +134,19 @@ export default async function SwitchDocsPage() {
             {
               name: "checked",
               type: "boolean",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Controlled checked state.",
             },
             {
               name: "defaultChecked",
               type: "boolean",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Uncontrolled initial checked state.",
             },
             {
               name: "onCheckedChange",
               type: "(checked: boolean) => void",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Called when the checked state changes.",
             },
             {

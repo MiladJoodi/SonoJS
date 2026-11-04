@@ -19,28 +19,28 @@ const USER = {
   title: "Staff Design Engineer",
   location: "San Francisco, CA",
   summary:
-    "I connect design and engineering — tokens, component APIs, and documentation that teams actually ship with.",
+    "I connect design and engineering - tokens, component APIs, and documentation that teams actually ship with.",
 } as const
 
 const EXPERIENCE = [
   {
     role: "Staff Design Engineer",
     company: "Sono Labs",
-    dates: "2023 — Present",
+    dates: "2023 - Present",
     detail:
       "Lead the design-system program across web. Own accessibility reviews and registry releases.",
   },
   {
     role: "Senior Product Designer",
     company: "Northwind",
-    dates: "2020 — 2023",
+    dates: "2020 - 2023",
     detail:
       "Shipped onboarding and billing surfaces. Introduced shared Figma ↔ code token pipelines.",
   },
   {
     role: "Product Designer",
     company: "Brightlane",
-    dates: "2017 — 2020",
+    dates: "2017 - 2020",
     detail:
       "Designed B2B dashboards and established the first component inventory.",
   },

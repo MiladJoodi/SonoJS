@@ -9,7 +9,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         // White label on primary fill (contrast vs button bg, not page theme).
-        // ! important — portals inherit text-popover-foreground otherwise.
+        // ! important - portals inherit text-popover-foreground otherwise.
         default: "bg-primary !text-white hover:bg-primary/90",
         destructive:
           "bg-destructive text-white hover:bg-destructive/90 dark:bg-destructive/60",
@@ -22,7 +22,7 @@ const buttonVariants = cva(
         link: "text-primary underline-offset-4 hover:underline",
       },
       size: {
-        /* SonoJS default control height — 46px (same on mobile/tablet/desktop) */
+        /* SonoJS default control height - 46px (same on mobile/tablet/desktop) */
         default: "h-[46px] gap-2 px-4 has-[>svg]:px-3",
         xs: "h-8 gap-1 rounded-md px-2.5 text-xs has-[>svg]:px-2 [&_svg:not([class*='size-'])]:size-3.5",
         sm: "h-10 gap-1.5 rounded-md px-3 has-[>svg]:px-2.5 [&_svg:not([class*='size-'])]:size-3.5",

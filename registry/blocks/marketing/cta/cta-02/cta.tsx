@@ -62,7 +62,7 @@ export default function Cta({
               </h2>
 
               <p className="mt-4 max-w-md text-sm leading-relaxed text-zinc-400 sm:text-base">
-                Install a block. Keep your tokens. Ship before standup —
+                Install a block. Keep your tokens. Ship before standup -
                 without a second design pass.
               </p>
 

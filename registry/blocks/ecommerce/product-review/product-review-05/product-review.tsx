@@ -57,7 +57,7 @@ const REVIEWS = [
     rating: 5,
     date: "4 days ago",
     title: "Fantastic Support",
-    body: "Had a few questions before ordering and the customer service team was amazing—super responsive and knowledgeable. It really made a difference!",
+    body: "Had a few questions before ordering and the customer service team was amazing-super responsive and knowledgeable. It really made a difference!",
     images: [
       { src: assetSrc(photo01), alt: "Review image 1" },
       { src: assetSrc(photo02), alt: "Review image 2" },

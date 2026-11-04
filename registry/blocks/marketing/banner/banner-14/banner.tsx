@@ -21,7 +21,7 @@ export default function Banner({
     >
       <CreditCardIcon className="size-3.5 shrink-0 text-sky-400" aria-hidden />
       <span>
-        0% APR for 12 months on qualifying plans — pay monthly, keep cashflow
+        0% APR for 12 months on qualifying plans - pay monthly, keep cashflow
       </span>
       <a
         href="#"

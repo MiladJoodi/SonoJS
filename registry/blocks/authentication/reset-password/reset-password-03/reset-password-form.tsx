@@ -41,7 +41,7 @@ function PhotoPanel({ className }: { className?: string }) {
             Lock in a stronger password
           </p>
           <p className="mt-1 max-w-xs text-xs leading-relaxed text-white/90">
-            Use something unique — then you are back in your workspace.
+            Use something unique - then you are back in your workspace.
           </p>
         </div>
       </div>

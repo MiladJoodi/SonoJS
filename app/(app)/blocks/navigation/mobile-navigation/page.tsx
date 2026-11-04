@@ -63,7 +63,7 @@ export default function BlockMobileNavigationDocsPage() {
       <BlocksPageHeader
         title="Mobile Navigation"
         pathname="/blocks/navigation/mobile-navigation"
-        description="Production bottom bars and floating docks for app shells — distinct patterns with clear active states, labels, and safe-area padding."
+        description="Production bottom bars and floating docks for app shells - distinct patterns with clear active states, labels, and safe-area padding."
       />
 
       <div className="flex flex-col gap-8">

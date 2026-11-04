@@ -16,7 +16,7 @@ function slugFromHref(href: string) {
   return href.replace(/^\/docs\/components\//, "")
 }
 
-/** Sectioned thumb catalog — one card per component, groups from `componentsNav`. */
+/** Sectioned thumb catalog - one card per component, groups from `componentsNav`. */
 export function ComponentsDirectory({
   groups,
 }: {

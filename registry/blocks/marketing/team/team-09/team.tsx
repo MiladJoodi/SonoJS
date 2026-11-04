@@ -62,7 +62,7 @@ const DEFAULT_MEMBERS = [
     id: 3,
     name: "Sofia Alvarez",
     role: "Brand Designer",
-    bio: "Builds visual systems that feel timeless—typography, motion, and narrative as one.",
+    bio: "Builds visual systems that feel timeless-typography, motion, and narrative as one.",
     image: assetSrc(team04),
     linkedin: "#",
     x: "#",
@@ -81,7 +81,7 @@ const DEFAULT_MEMBERS = [
 export default function Team({
   title = "Editorial profiles",
   eyebrow = "Featured",
-  description = "Horizontal split cards with room for a short bio—magazine energy, product polish.",
+  description = "Horizontal split cards with room for a short bio-magazine energy, product polish.",
   members = DEFAULT_MEMBERS,
   className,
   ...props

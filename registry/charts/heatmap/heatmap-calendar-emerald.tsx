@@ -10,7 +10,7 @@ import {
 } from "../_lib/heatmap-shared"
 
 /**
- * Heatmap Calendar Emerald — same Sunday-start grid with soft green intensity.
+ * Heatmap Calendar Emerald - same Sunday-start grid with soft green intensity.
  * Uses `--chart-up` (works in light and dark).
  * Installs to: components/charts/heatmap-calendar-emerald.tsx
  */
@@ -18,12 +18,12 @@ import {
 const DEMO_END = new Date(2026, 9, 23)
 const DEMO_DATA = generateCalendarHeatData(365, 9107, DEMO_END)
 
-/** All props optional — demo fills `data` when omitted. */
+/** All props optional - demo fills `data` when omitted. */
 export type HeatmapCalendarEmeraldProps = Partial<CalendarHeatmapProps>
 
 function HeatmapCalendarEmerald({
   title = "Calendar Heatmap · Emerald",
-  subtitle = "Same year grid with a soft green intensity scale — readable in light and dark.",
+  subtitle = "Same year grid with a soft green intensity scale - readable in light and dark.",
   data = DEMO_DATA,
   days = 365,
   end = DEMO_END,
@@ -45,7 +45,7 @@ function HeatmapCalendarEmerald({
   )
 }
 
-/** Docs / gallery default export — `<HeatmapCalendarEmeraldDemo />` needs no props. */
+/** Docs / gallery default export - `<HeatmapCalendarEmeraldDemo />` needs no props. */
 export default function HeatmapCalendarEmeraldDemo(
   props: HeatmapCalendarEmeraldProps = {}
 ) {

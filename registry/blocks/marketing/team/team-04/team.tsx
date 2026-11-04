@@ -67,7 +67,7 @@ const DEFAULT_MEMBERS = [
 export default function Team({
   title = "A gallery of makers",
   eyebrow = "Directory",
-  description = "Compact portrait tiles for denser team pages—still airy, still premium.",
+  description = "Compact portrait tiles for denser team pages-still airy, still premium.",
   members = DEFAULT_MEMBERS,
   className,
   ...props

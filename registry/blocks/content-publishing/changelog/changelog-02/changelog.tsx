@@ -161,7 +161,7 @@ export default function Changelog({
             Product updates
           </h1>
           <p className="text-muted-foreground">
-            A dense feed of every shipped change — filter by type.
+            A dense feed of every shipped change - filter by type.
           </p>
         </header>
 

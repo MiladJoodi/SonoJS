@@ -1371,7 +1371,7 @@ export default async function ChartViewPage({
             <div className="flex min-h-48 flex-col items-center justify-center gap-2 text-center">
               <p className="text-sm font-medium text-foreground">Pending</p>
               <p className="max-w-md text-sm text-muted-foreground">
-                Skeleton only — ask to port this id. Direction toggle is ready
+                Skeleton only - ask to port this id. Direction toggle is ready
                 for when the English demo lands.
               </p>
             </div>
@@ -1474,7 +1474,7 @@ export default function Page() {
                       type: "boolean",
                       defaultValue: "true",
                       description:
-                        "Hover, touch, and keyboard scrub — dim inactive categories and update the metric header.",
+                        "Hover, touch, and keyboard scrub - dim inactive categories and update the metric header.",
                     },
                     {
                       name: "plotDir",

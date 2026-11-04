@@ -35,7 +35,7 @@ import { useNarrowViewport } from "../_lib/use-narrow-viewport"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Area Chart Fill By Value — locked gallery chrome + **neon** (chart-local).
+ * Area Chart Fill By Value - locked gallery chrome + **neon** (chart-local).
  * Single monotone area; fill splits at y=0 via userSpaceOnUse gradient.
  * Metric header scrubber; RTL-aware axes.
  * Installs to: components/charts/area-chart-fill-by-value.tsx
@@ -119,7 +119,7 @@ function formatCompact(value: number, locale: string) {
   }).format(value)
 }
 
-/** Split fill at y=0 — must render inside the AreaChart tree. */
+/** Split fill at y=0 - must render inside the AreaChart tree. */
 function SplitFillGradient({
   gradId,
   up,
@@ -156,7 +156,7 @@ function SplitFillGradient({
 
 function AreaChartFillByValue({
   title = "Net Sessions Change – H1–Jul 2026",
-  subtitle = "Area fill splits at zero — navy above, orange below.",
+  subtitle = "Area fill splits at zero - navy above, orange below.",
   data = DEMO_DATA,
   className,
   plotDir,
@@ -451,7 +451,7 @@ function AreaChartFillByValue({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{monthLabel}</p>

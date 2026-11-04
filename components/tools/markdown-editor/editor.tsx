@@ -52,7 +52,7 @@ type MarkdownEditorProps = {
   onError?: (message: string) => void
 }
 
-/** Lean list — duplicates (yml/sh/empty) dropped so the mobile picker stays short. */
+/** Lean list - duplicates (yml/sh/empty) dropped so the mobile picker stays short. */
 const CODE_BLOCK_LANGUAGES = {
   txt: "Plain text",
   js: "JavaScript",
@@ -239,7 +239,7 @@ export function MarkdownEditor({
     setMarkdown(md)
     editorRef.current?.setMarkdown(md)
     onChangeRef.current(md)
-    // setMarkdown may emit onChange async — keep the guard briefly.
+    // setMarkdown may emit onChange async - keep the guard briefly.
     window.setTimeout(() => {
       applyingSourceRef.current = false
     }, 50)
@@ -259,7 +259,7 @@ export function MarkdownEditor({
       imagePlugin({
         imageUploadHandler: imageToDataUrl,
         allowSetImageDimensions: true,
-        // Upload from device (data URL) or paste a Sono / own-host URL — no stock placeholders.
+        // Upload from device (data URL) or paste a Sono / own-host URL - no stock placeholders.
         imageAutocompleteSuggestions: [],
       }),
       tablePlugin(),
@@ -300,7 +300,7 @@ export function MarkdownEditor({
             onError={(payload) => {
               onErrorRef.current?.(
                 payload.error ||
-                  "Markdown parse error — switch to Source mode to fix."
+                  "Markdown parse error - switch to Source mode to fix."
               )
             }}
             className={

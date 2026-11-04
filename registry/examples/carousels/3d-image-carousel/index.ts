@@ -1,0 +1,1 @@
+export { ThreeDImageCarouselDefault } from "./default"

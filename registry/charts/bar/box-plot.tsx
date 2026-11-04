@@ -30,7 +30,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Box Plot — locked gallery chrome (navy × orange) + chart-local box geometry.
+ * Box Plot - locked gallery chrome (navy × orange) + chart-local box geometry.
  * IQR box + median line + whiskers + outliers; metric header scrubber.
  * Installs to: components/charts/box-plot.tsx
  */
@@ -64,11 +64,11 @@ export type BoxPlotProps = {
 const NARROW_MQ = "(max-width: 639px)"
 const AXIS_TICK_FILL =
   "color-mix(in oklab, var(--foreground) 58%, transparent)"
-/** Light ink on `--chart-1` box fill — `foreground` is black in light and unreadable. */
+/** Light ink on `--chart-1` box fill - `foreground` is black in light and unreadable. */
 const ON_BOX_LABEL_FILL = "#ffffff"
 const Y_DOMAIN: [number, number] = [0, 20]
 
-/** Class scores 0–20 — each column is score spread for one subject. */
+/** Class scores 0–20 - each column is score spread for one subject. */
 const DEMO_DATA: BoxPlotPoint[] = [
   { category: "Math", min: 8, q1: 12, median: 15, q3: 17, max: 19 },
   { category: "Physics", min: 6, q1: 10, median: 13, q3: 16, max: 18 },
@@ -190,7 +190,7 @@ function BoxPlotTooltip({
   active?: boolean
   payload?: ReadonlyArray<{ payload?: BoxPlotPoint }>
   locale: string
-  /** Page/preview writing direction — plot island is LTR. */
+  /** Page/preview writing direction - plot island is LTR. */
   dir: "ltr" | "rtl"
 }) {
   if (!(active && payload?.length)) return null
@@ -512,7 +512,7 @@ function BoxPlot({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">

@@ -801,7 +801,7 @@ export function ShowcasePreviewFor({
 }: {
   id: ShowcaseDemoId
   show: boolean
-  /** Entrance + stagger — false after first hero load. */
+  /** Entrance + stagger - false after first hero load. */
   animate?: boolean
 }) {
   return (

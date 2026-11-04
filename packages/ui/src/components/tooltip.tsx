@@ -5,11 +5,11 @@ import { useDirection } from "@sonojs/ui/hooks/use-direction"
 import { cn } from "@sonojs/ui/lib/utils"
 import { Tooltip as TooltipPrimitive } from "radix-ui"
 
-/** Mouse desktop only — no phone / narrow viewport / coarse touch. */
+/** Mouse desktop only - no phone / narrow viewport / coarse touch. */
 const DESKTOP_HOVER_MQ =
   "(hover: hover) and (pointer: fine) and (min-width: 768px)"
 
-/** True only on fine-pointer hover desktops — not phone/tablet touch. */
+/** True only on fine-pointer hover desktops - not phone/tablet touch. */
 function useDesktopHover() {
   const [ok, setOk] = React.useState(false)
 

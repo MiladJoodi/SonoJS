@@ -2,7 +2,7 @@
 
 Say which id to bring (e.g. `chart-area-default` or gallery `simple-bar-chart`). Then:
 
-## Locked visual pattern (canonical) — LOCKED
+## Locked visual pattern (canonical) - LOCKED
 
 **Source of truth:** `registry/charts/bar/simple-bar-chart.tsx`  
 **Do not restyle** without an explicit unlock. After any allowed edit: `npm run registry:build` so `public/r/simple-bar-chart.json` matches the site.
@@ -12,11 +12,11 @@ New / ported gallery charts should follow this chrome unless the chart type cann
 | Concern | Locked choice |
 |---|---|
 | Dual series | `--chart-1` navy `#1E3A8A` × `--chart-2` orange `#EA580C` (dark: `#3B82F6` / `#F97316`) |
-| Tokens | `globals.css` + `vega-tokens.css` + registry `cssVars` — no hex in the demo file |
+| Tokens | `globals.css` + `vega-tokens.css` + registry `cssVars` - no hex in the demo file |
 | Header | Title + subtitle; metric total + delta + active month (Intl); idle = last category |
 | Bars | Grouped flat fills, top radius `8` (= control), width 36/28, category gap 18%/16%, barGap 8/6 |
 | Scrub | Hover / touch / keyboard; inactive 40%; one neutral total above taller bar while scrubbing |
-| Value labels | Never series-colored; never always-on (default). Exception: pyramid tip `%` — see below |
+| Value labels | Never series-colored; never always-on (default). Exception: pyramid tip `%` - see below |
 | Grid | Horizontal only, dashed `4 4`, quiet border opacity |
 | Axes | No axis/tick lines; muted 12px tabular ticks; **no** rotated unit label |
 | Legend | Bottom center, `size-2` **rounded-full** dots (outside SVG) |
@@ -30,23 +30,23 @@ Do **not** invent a second dual-series palette for “variety.” Semantic `--ch
 
 ## Per-chart deviations
 
-Locked Simple Bar chrome is the **default starting point**. Chart-type or custom looks live in **that chart’s file** — do not fork the dual-series palette or restyle Simple/Stacked to match.
+Locked Simple Bar chrome is the **default starting point**. Chart-type or custom looks live in **that chart’s file** - do not fork the dual-series palette or restyle Simple/Stacked to match.
 
 | Where | Use for |
 |---|---|
 | Same `registry/charts/<category>/<slug>.tsx` | Chart-local UI (e.g. pyramid always-on tip `%` via `EndLabel`, SVG ink via `color-mix` on `--chart-*`) |
 | `registry/charts/_lib/` | Helpers shared by **2+** charts only |
-| Sibling `.css` + registry `files` entry | Only when the chart needs real stylesheet rules (keyframes, complex selectors) — not for SVG label geometry |
+| Sibling `.css` + registry `files` entry | Only when the chart needs real stylesheet rules (keyframes, complex selectors) - not for SVG label geometry |
 
-**Population pyramid:** tip percentages outside each bar are always-on and series-tinted via `color-mix(…, var(--chart-*), var(--foreground))` — never mix with `black` (breaks dark mode). No hover tooltip overlay.
+**Population pyramid:** tip percentages outside each bar are always-on and series-tinted via `color-mix(…, var(--chart-*), var(--foreground))` - never mix with `black` (breaks dark mode). No hover tooltip overlay.
 
-**Box plot:** custom `BoxShape` + `ErrorBar` whiskers + outlier `Scatter`; always-on median labels + median stroke use light ink (`#ffffff`) on the `--chart-1` box (never `foreground` — black-on-navy in light). Key legend (box / median / outlier); five-number tooltip. Metric header tracks median.
+**Box plot:** custom `BoxShape` + `ErrorBar` whiskers + outlier `Scatter`; always-on median labels + median stroke use light ink (`#ffffff`) on the `--chart-1` box (never `foreground` - black-on-navy in light). Key legend (box / median / outlier); five-number tooltip. Metric header tracks median.
 
 **On-fill labels:** any SVG text drawn on a series-colored fill must use light ink (`#ffffff`), same as `bar-chart-with-label-background`. Tip/scrub labels *outside* bars stay `var(--foreground)`. Never `color-mix(…, black)` for tip ink.
 
-**Scrub flicker:** `isAnimationActive={!reducedMotion && !liveScrubbing}` — Cell opacity changes must not re-run bar enter animation. Prefer stable `LabelList` + `useCallback` content over inline `label={() => …}`. Dim inactive labels with opacity; do not unmount them.
+**Scrub flicker:** `isAnimationActive={!reducedMotion && !liveScrubbing}` - Cell opacity changes must not re-run bar enter animation. Prefer stable `LabelList` + `useCallback` content over inline `label={() => …}`. Dim inactive labels with opacity; do not unmount them.
 
-**Always-on labels:** charts with permanent value ink (`bar-chart-with-label-background`, `bar-label`, `bar-label-custom`, `population-pyramid`, `box-plot`) use `isAnimationActive={false}` — enter animation grows height from 0 and makes labels blink on load.
+**Always-on labels:** charts with permanent value ink (`bar-chart-with-label-background`, `bar-label`, `bar-label-custom`, `population-pyramid`, `box-plot`) use `isAnimationActive={false}` - enter animation grows height from 0 and makes labels blink on load.
 
 **Waterfall:** floating `[bottom, top]` range bars from a running total; fills use semantic `--chart-up` / `--chart-down` + `--chart-1` for totals (not dual-series navy×orange for every step).
 
@@ -60,7 +60,7 @@ Locked Simple Bar chrome is the **default starting point**. Chart-type or custom
 
 **Ranged stacked:** Prep/Pack/Ship as `[start, end]` minute ranges inside `BarStack`; `--chart-3` for Ship; custom tooltip shows each stage window + total.
 
-**Tiny bar:** sparkline-style stage (`h-[100px]`, `max-w-[300px]`, golden aspect) — no axes / tooltip / legend; locked metric header + scrub still apply.
+**Tiny bar:** sparkline-style stage (`h-[100px]`, `max-w-[300px]`, golden aspect) - no axes / tooltip / legend; locked metric header + scrub still apply.
 
 **Animated bar width:** idle = all bars thin (`scaleX(20%)`); scrub expands only the active bar. `expanded = reducedMotion || (liveScrubbing && index === liveIndex)`.
 
@@ -68,13 +68,13 @@ Locked Simple Bar chrome is the **default starting point**. Chart-type or custom
 
 **bar-active:** Per-category fills (`--chart-1…5`); featured index keeps a dashed stroke (`activeBarIndex`, default `2`); idle metric returns to the featured bar (not last).
 
-**bar-horizontal:** `layout="vertical"` (category on Y, value on X); single series `--chart-1`; `XAxis.reversed` in RTL (bars grow left, Y on the right); tip radius stays `[0,8,8,0]` even in RTL (Recharts negative width — swapping to `[8,0,0,8]` rounds the base); tip label past the value tip; scrub uses Y.
+**bar-horizontal:** `layout="vertical"` (category on Y, value on X); single series `--chart-1`; `XAxis.reversed` in RTL (bars grow left, Y on the right); tip radius stays `[0,8,8,0]` even in RTL (Recharts negative width - swapping to `[8,0,0,8]` rounds the base); tip label past the value tip; scrub uses Y.
 
-**Horizontal RTL tip pattern:** tip at `x + width` always (width is negative when `XAxis.reversed`), `textAnchor` flip, tip gutter on the tip side. Same for `bar-label-custom`, `bar-mixed`, `timeline`. Always tip radius `[0,8,8,0]` — never swap corners in RTL.
+**Horizontal RTL tip pattern:** tip at `x + width` always (width is negative when `XAxis.reversed`), `textAnchor` flip, tip gutter on the tip side. Same for `bar-label-custom`, `bar-mixed`, `timeline`. Always tip radius `[0,8,8,0]` - never swap corners in RTL.
 
-**Custom tooltips:** plot islands are `dir="ltr"` — custom tooltip roots must set `dir={dir}` from `useChartDir` (box-plot, waterfall, ranged-stacked). `ChartTooltipContent` already does this via `useDirection`.
+**Custom tooltips:** plot islands are `dir="ltr"` - custom tooltip roots must set `dir={dir}` from `useChartDir` (box-plot, waterfall, ranged-stacked). `ChartTooltipContent` already does this via `useDirection`.
 
-**Bar label (classic):** vertical single-series with always-on top value labels (neutral ink) — exception to the default “never always-on” rule.
+**Bar label (classic):** vertical single-series with always-on top value labels (neutral ink) - exception to the default “never always-on” rule.
 
 **Bar label custom (classic):** horizontal (`layout="vertical"`) with always-on tip labels past the bar end; same scrub/Y-axis pattern as Bar Horizontal.
 
@@ -84,13 +84,13 @@ Locked Simple Bar chrome is the **default starting point**. Chart-type or custom
 
 **area-chart-range:** single `[low, high]` temperature band with **neon** (`--chart-up`); metric tracks high + span label; `ReferenceLine` at 0.
 
-**area-chart-connect-nulls:** single **neon** area; stacked pair — gap at nulls vs `connectNulls`; April omitted; metric shows `—` on the null month.
+**area-chart-connect-nulls:** single **neon** area; stacked pair - gap at nulls vs `connectNulls`; April omitted; metric shows `-` on the null month.
 
-**cardinal-area-chart:** side-by-side curve compare — `monotone` vs `natural` with **neon** up/down; shared scrub.
+**cardinal-area-chart:** side-by-side curve compare - `monotone` vs `natural` with **neon** up/down; shared scrub.
 
 **percent-area-chart:** three stacked areas with `stackOffset="expand"` (100% share) + **neon** on Desktop/Mobile; metric tracks dominant series %; Y ticks as percent.
 
-**synchronized-area-chart:** three `syncId` area panels — Desktop, Mobile + `Brush`, Total (`--chart-3`) with **neon** on Desktop/Mobile; shared metric scrubber; brush window offsets tooltip index.
+**synchronized-area-chart:** three `syncId` area panels - Desktop, Mobile + `Brush`, Total (`--chart-3`) with **neon** on Desktop/Mobile; shared metric scrubber; brush window offsets tooltip index.
 
 **tiny-area-chart:** sparkline stage (no axes / tooltip / legend) with locked metric header scrubber + **neon** single series; `isAnimationActive={false}`.
 
@@ -104,7 +104,7 @@ Locked Simple Bar chrome is the **default starting point**. Chart-type or custom
 
 **prevent-right-click:** **neon** monotone area; `onContextMenu` → `preventDefault` with brief blocked flash; mock seed `4390435` (H1 y-series).
 
-**area-interactive:** Store/Online toggle tabs show period totals; chart plots the active series only as a **neon** monotone area + gradient; dense daily X ticks (`minTickGap`); fullWidth preview — same interaction model as `line-interactive` / `bar-interactive`.
+**area-interactive:** Store/Online toggle tabs show period totals; chart plots the active series only as a **neon** monotone area + gradient; dense daily X ticks (`minTickGap`); fullWidth preview - same interaction model as `line-interactive` / `bar-interactive`.
 
 **area-step:** single **neon** `type="step"` area (Store H1 2026); flat segments between months; metric scrubber.
 
@@ -130,7 +130,7 @@ Locked Simple Bar chrome is the **default starting point**. Chart-type or custom
 
 **two-level-pie-chart:** nested pies (inner regions / outer channels); metric = idle outer total or scrub slice + “% of ring”; no on-slice labels; region legend only; `--chart-1…5`; RTL flips start/end angles.
 
-**straight-angle-pie-chart:** half-pie `startAngle`/`endAngle` 180↔0, `cy="100%"` `outerRadius="195%"` `aspect-[2.4]` (fills height — little dead air above); no on-slice labels; metric = idle total or scrub slice + “% of total”; RTL swaps sweep so flat edge stays bottom.
+**straight-angle-pie-chart:** half-pie `startAngle`/`endAngle` 180↔0, `cy="100%"` `outerRadius="195%"` `aspect-[2.4]` (fills height - little dead air above); no on-slice labels; metric = idle total or scrub slice + “% of total”; RTL swaps sweep so flat edge stays bottom.
 
 **custom-active-shape-pie-chart:** donut with `activeShape` callout + outer ring; tooltip body suppressed; idle returns to `defaultActiveIndex` (0); value ink `foreground`, percent muted; center name uses slice fill.
 
@@ -138,7 +138,7 @@ Locked Simple Bar chrome is the **default starting point**. Chart-type or custom
 
 **pie-chart-with-padding-angle:** thin donut (`innerRadius` 80% / `outerRadius` 100%) with `paddingAngle={5}` + `cornerRadius="50%"`; no on-slice labels; `ChartLegend`; metric scrub dims siblings.
 
-**pie-chart-in-grid:** CSS Grid teaching demo (`grid-cols-3` / `grid-rows-3`) — 2×2 + two 1×1 + 3×1 cells; shared donut `60%`/`80%`; English center labels; `isAnimationActive={false}`; no metric scrub; `fullWidth` preview.
+**pie-chart-in-grid:** CSS Grid teaching demo (`grid-cols-3` / `grid-rows-3`) - 2×2 + two 1×1 + 3×1 cells; shared donut `60%`/`80%`; English center labels; `isAnimationActive={false}`; no metric scrub; `fullWidth` preview.
 
 **pie-with-gradient:** donut with custom radial + shine `shape`, `paddingAngle={3}` `cornerRadius={10}`; active expand + outer ring; center disc idle = total / scrub = name + `%`; channel cards drive active; no hardcoded `dir`; English / `Intl`.
 
@@ -172,7 +172,7 @@ Locked Simple Bar chrome is the **default starting point**. Chart-type or custom
 
 **chart-pie-legend (classic):** full pie + `ChartLegend` / `ChartLegendContent nameKey="province"` wrap row (`basis-1/4`); taller stage `max-h-[300px]`; tooltip + metric scrub.
 
-**chart-pie-donut (classic):** payment-method donut (`innerRadius={60}`); card/gateway/cash/wallet/other; empty hole (no center Label — vs donut-text); locked metric scrub.
+**chart-pie-donut (classic):** payment-method donut (`innerRadius={60}`); card/gateway/cash/wallet/other; empty hole (no center Label - vs donut-text); locked metric scrub.
 
 **chart-pie-donut-active (classic):** province donut `innerRadius={60}` `strokeWidth={5}`; custom `shape` expands active `outerRadius+10`; idle returns to `defaultActiveIndex` (0); metric tracks featured/active slice.
 
@@ -186,9 +186,9 @@ Locked Simple Bar chrome is the **default starting point**. Chart-type or custom
 
 **dashed-line-chart:** same chrome as simple-line; both series use `strokeDasharray` (`3 4 5 2` / `6 4`); idle `dot={false}` (activeDot only); legend shows dashed stroke samples.
 
-**vertical-line-chart:** `layout="vertical"` (months on Y, values on X); dual `type="linear"` lines; portrait stage (`chartVerticalLineContainerClassName`); scrub via Y (Up/Down + `indexFromClientY`); `XAxis.reversed` + `YAxis` orientation/reversed for RTL — same pattern as bar-horizontal.
+**vertical-line-chart:** `layout="vertical"` (months on Y, values on X); dual `type="linear"` lines; portrait stage (`chartVerticalLineContainerClassName`); scrub via Y (Up/Down + `indexFromClientY`); `XAxis.reversed` + `YAxis` orientation/reversed for RTL - same pattern as bar-horizontal.
 
-**line-chart-connect-nulls:** single navy series; stacked pair — gap at nulls vs `connectNulls`; April omitted in demo data; metric shows `—` on the null month; shared scrub across both plots.
+**line-chart-connect-nulls:** single navy series; stacked pair - gap at nulls vs `connectNulls`; April omitted in demo data; metric shows `-` on the null month; shared scrub across both plots.
 
 **line-chart-with-reference-lines:** same chrome as simple-line; vertical `ReferenceLine` on March + horizontal at `y=200` (`--destructive`); label positions flip for RTL.
 
@@ -204,7 +204,7 @@ Locked Simple Bar chrome is the **default starting point**. Chart-type or custom
 
 **customized-dot-line-chart:** same chrome as simple-line; Desktop `dot`/`activeDot` are smile/frown faces (`--chart-3` / `--chart-2`) by `HAPPY_THRESHOLD` (200 sessions); Mobile keeps round dots.
 
-**synchronized-line-chart:** three `syncId` panels — Desktop line, Mobile line + `Brush`, Total area (`--chart-3`); shared metric scrubber; brush window offsets tooltip index.
+**synchronized-line-chart:** three `syncId` panels - Desktop line, Mobile line + `Brush`, Total area (`--chart-3`); shared metric scrubber; brush window offsets tooltip index.
 
 **synchronized-different-data:** two `syncId` panels (daily × every-5-days) with custom `syncMethod` (`closestDate`, ±2 days); metric scrubber tracks the dense daily series.
 
@@ -214,7 +214,7 @@ Locked Simple Bar chrome is the **default starting point**. Chart-type or custom
 
 **line-chart-negative-values-with-reference-lines:** numeric X/Y path through the origin; zero `ReferenceLine`s when `minX`/`minY` are negative; metric scrubber tracks Y at the active point.
 
-**compare-two-lines:** type-required hover compare — portfolio (navy) vs reinvestment dashed (orange) + principal (muted); gradient scrub after cursor; delta `ReferenceLine` segment; custom compare tooltip.
+**compare-two-lines:** type-required hover compare - portfolio (navy) vs reinvestment dashed (orange) + principal (muted); gradient scrub after cursor; delta `ReferenceLine` segment; custom compare tooltip.
 
 **dynamic-z-index-line-chart:** Desktop×Mobile×Orders (`--chart-3` amber); HTML legend hover dims that series to 0.45 and raises `zIndex` (paint order last); metric = sum of three; scrub default on.
 
@@ -222,7 +222,7 @@ Locked Simple Bar chrome is the **default starting point**. Chart-type or custom
 
 **animated-time-series:** dual Desktop×Mobile lines; circular sliding window (default 6 of 12); auto-advance ~800ms; pauses while scrubbing or `prefers-reduced-motion`.
 
-**line-interactive:** Store/Online toggle tabs show period totals; chart plots the active series only as a monotone line (`dot={false}` idle); dense daily X ticks (`minTickGap`); fullWidth preview — same interaction model as `bar-interactive`.
+**line-interactive:** Store/Online toggle tabs show period totals; chart plots the active series only as a monotone line (`dot={false}` idle); dense daily X ticks (`minTickGap`); fullWidth preview - same interaction model as `bar-interactive`.
 
 **line-step:** same chrome as simple-line; both series use `type="step"` (flat segments between categories).
 
@@ -246,9 +246,9 @@ Locked Simple Bar chrome is the **default starting point**. Chart-type or custom
 
 **target-price-chart:** Area `range` + Line `price` + dashed `target`; scrub price vs target.
 
-**Stock (category):** candle/OHLC bodies use semantic `--chart-up` / `--chart-down` when bullish/bearish — not navy×orange dual series for every bar. Preserve custom SVG shapes (`CandlestickShape`, `OhlcBar`, …) from `_lib` when ported. Overlays (SMA, bands) may use `--chart-1` / `--chart-2`.
+**Stock (category):** candle/OHLC bodies use semantic `--chart-up` / `--chart-down` when bullish/bearish - not navy×orange dual series for every bar. Preserve custom SVG shapes (`CandlestickShape`, `OhlcBar`, …) from `_lib` when ported. Overlays (SMA, bands) may use `--chart-1` / `--chart-2`.
 
-**asset-returns:** horizontal `layout="vertical"` return % bars; lookback tabs + max/min stats; custom tip-rounded shape with on-fill USD labels; `XAxis.reversed` in RTL (negative width — never clamp to 0); navy / orange lowest highlight; metric scrubber.
+**asset-returns:** horizontal `layout="vertical"` return % bars; lookback tabs + max/min stats; custom tip-rounded shape with on-fill USD labels; `XAxis.reversed` in RTL (negative width - never clamp to 0); navy / orange lowest highlight; metric scrubber.
 
 **monthly-savings:** channel tabs (Gold/USD/fund/bank/cash) + compound balance; type-required rounded-top `VerticalBar`; year-end / profit stats; metric scrubber across months.
 
@@ -256,7 +256,7 @@ Locked Simple Bar chrome is the **default starting point**. Chart-type or custom
 
 **candlestick-dashboard:** type-required symbol card (ticker + session badge + last) + candles + volume strip tinted by candle direction; scrub syncs header/volume.
 
-**candlestick-bar:** dual `syncId` panels — OHLC candles + signed change bars; type-required `Brush`; scrub maps through brush window.
+**candlestick-bar:** dual `syncId` panels - OHLC candles + signed change bars; type-required `Brush`; scrub maps through brush window.
 
 **candlestick-category:** category X (`label` date+time); type-required dashed orange `ReferenceLine` news marker; scrub highlights when on news.
 
@@ -270,7 +270,7 @@ Locked Simple Bar chrome is the **default starting point**. Chart-type or custom
 
 **stock-column:** close columns with per-bar `Cell` via `candleColor`; intraday mock data; `--chart-up`/`--chart-down`; metric scrubber.
 
-**stock-with-volume:** dual `syncId` panels — OHLC candles + volume bars tinted by candle direction; metric scrubber.
+**stock-with-volume:** dual `syncId` panels - OHLC candles + volume bars tinted by candle direction; metric scrubber.
 
 **stock-multi-series:** type-required summary cards + indexed % LineChart (AENE/FOLD/AUTO); chart-1…3; no neon; scrub updates cards + avg return.
 
@@ -290,11 +290,11 @@ Locked Simple Bar chrome is the **default starting point**. Chart-type or custom
 
 **order-book-depth:** dual `stepAfter` Areas (bid `--chart-up` / ask `--chart-down`); mid join; no neon; idle scrub on mid; metric scrubber.
 
-**drawdown-chart:** dual `syncId` panels — equity `Line` (`--chart-1`) + underwater drawdown `Area` (`--chart-down`); `runningDrawdown` in stock-shared; summary cards; no neon; metric scrubber.
+**drawdown-chart:** dual `syncId` panels - equity `Line` (`--chart-1`) + underwater drawdown `Area` (`--chart-down`); `runningDrawdown` in stock-shared; summary cards; no neon; metric scrubber.
 
 **bollinger-bands:** close `Line` (`--chart-1`) + dashed SMA mid (`--chart-3`) + ±σ envelope (`--chart-2` stacked Areas); `stdev` in stock-shared; phased series; no neon; metric scrubber.
 
-**candlestick-indicators:** triple `syncId` panels — OHLC candles + RSI(14) + MACD(12,26,9) hist/lines; `ema`/`rsi`/`macd` in stock-shared; no neon; metric scrubber.
+**candlestick-indicators:** triple `syncId` panels - OHLC candles + RSI(14) + MACD(12,26,9) hist/lines; `ema`/`rsi`/`macd` in stock-shared; no neon; metric scrubber.
 
 **multi-timeframe:** stacked Daily (`--chart-1`) / Weekly (`--chart-3`) / Monthly (`--chart-2`) close lines; weekly×5 / monthly×20 rollup from daily; per-panel scrub; no neon.
 
@@ -310,7 +310,7 @@ Locked Simple Bar chrome is the **default starting point**. Chart-type or custom
 
 **simple-treemap:** classic flat module-size treemap (Flare-inspired LOC, two levels); custom leaf tiles; `--chart-1…5` per group; locked metric scrub; EN names; plot `dir="ltr"`.
 
-**custom-content-treemap:** teaching `content` renderer — group (depth 1) fill + rank + centered label; leaves are transparent stroke subdivisions; `--chart-1…5`; locked metric scrub; plot `dir="ltr"`.
+**custom-content-treemap:** teaching `content` renderer - group (depth 1) fill + rank + centered label; leaves are transparent stroke subdivisions; `--chart-1…5`; locked metric scrub; plot `dir="ltr"`.
 
 **nested-treemap:** `type="nest"` drill-down with breadcrumb (styled over Recharts nest index); keeps `data → render` hierarchy; click group to zoom; `--chart-1…5`; locked metric scrub; plot `dir="ltr"`.
 
@@ -320,7 +320,7 @@ Locked Simple Bar chrome is the **default starting point**. Chart-type or custom
 
 **bundle-size-sunburst:** Recharts `SunburstChart` of tree-shaken client JS (bytes) by group; nested ring shades via `color-mix` on `--chart-1…5` (tracks light/dark cssVars); center disc inherits page `dir`; `SunburstTooltipContent` with `dir` + fill swatch; locked metric scrub (idle = total); white on-fill name labels; EN names; plot `dir="ltr"`. Shared: `sunburst-shared`.
 
-**sunburst-chart:** classic regional sales share (%) — region → channel → site (3 levels); same chrome / theme-aware shades / center / tooltip as Bundle Size; EN names; plot `dir="ltr"`. Shared: `sunburst-shared`.
+**sunburst-chart:** classic regional sales share (%) - region → channel → site (3 levels); same chrome / theme-aware shades / center / tooltip as Bundle Size; EN names; plot `dir="ltr"`. Shared: `sunburst-shared`.
 
 **sunburst-chart-theme-colors:** org headcount by team (Engineering / Sales / Marketing / Support); same `--chart-1…5` `colorizeTree` + tooltip/center RTL pattern; EN names; plot `dir="ltr"`. Shared: `sunburst-shared`.
 
@@ -342,7 +342,7 @@ Locked Simple Bar chrome is the **default starting point**. Chart-type or custom
 
 **chart-radar-dots (classic):** same as default + `dot={{ r: 4, fillOpacity: 1 }}`; English / `Intl`; featured.
 
-**chart-radar-lines-only (classic):** twin of gallery `radar-lines-only` — dual stroke-only + `radialLines={false}`; English / `Intl`.
+**chart-radar-lines-only (classic):** twin of gallery `radar-lines-only` - dual stroke-only + `radialLines={false}`; English / `Intl`.
 
 **chart-radar-label-custom (classic):** dual Store×Online; custom `PolarAngleAxis` tick renders `store/online` + month; English / `Intl`.
 
@@ -358,15 +358,15 @@ Locked Simple Bar chrome is the **default starting point**. Chart-type or custom
 
 **chart-radar-grid-fill (classic):** single Store; default polygon `PolarGrid` with `fill-(--color-store) opacity-20`; tip `hideLabel`; English / `Intl`.
 
-**chart-radar-multiple (classic):** twin of gallery `radar-multiple` — dual Store×Online filled polygons; tip `indicator="line"`; English / `Intl`.
+**chart-radar-multiple (classic):** twin of gallery `radar-multiple` - dual Store×Online filled polygons; tip `indicator="line"`; English / `Intl`.
 
 **chart-radar-legend (classic):** dual Store×Online + `ChartLegend` / `ChartLegendContent`; tip `indicator="line"`; English / `Intl`.
 
-**chart-radar-icons (classic):** twin of gallery `radar-icons` — Lucide icons in `chartConfig` + `ChartLegendContent`; English / `Intl`.
+**chart-radar-icons (classic):** twin of gallery `radar-icons` - Lucide icons in `chartConfig` + `ChartLegendContent`; English / `Intl`.
 
 **chart-radar-radius (classic):** dual Store×Online; `PolarRadiusAxis` (no `PolarAngleAxis`); tip `labelKey="month"` + `labelFormatter` → month value (not config label); radius `angle` 60 LTR / 120 RTL; English / `Intl`.
 
-**Radial bar (category):** header / legend inherit page `dir`; plot island `dir="ltr"` (polar SVG). Tokens `--chart-1…5` via registry `cssVars` (light/dark — no hex in demos except on-arc `#ffffff`). Track = muted mix / `fill-muted`. `ChartTooltip` + `ChartTooltipContent` (page `dir` via `useDirection`). Keyboard scrub / focus reverses in RTL. QA: LTR×RTL × light×dark before `ported`.
+**Radial bar (category):** header / legend inherit page `dir`; plot island `dir="ltr"` (polar SVG). Tokens `--chart-1…5` via registry `cssVars` (light/dark - no hex in demos except on-arc `#ffffff`). Track = muted mix / `fill-muted`. `ChartTooltip` + `ChartTooltipContent` (page `dir` via `useDirection`). Keyboard scrub / focus reverses in RTL. QA: LTR×RTL × light×dark before `ported`.
 
 **simple-radial-bar-chart:** concentric age-band rings (`RadialBar` + `background`); locked metric scrub (idle = total share); English / `Intl`; featured gallery starter.
 
@@ -378,7 +378,7 @@ Locked Simple Bar chrome is the **default starting point**. Chart-type or custom
 
 **radial-stacked:** half-ring Desktop×Mobile `stackId`; `PolarAngleAxis` domain = total; center Label total; navy×orange; tooltip + legend chips; English / `Intl`.
 
-**Scatter (category):** header / legend inherit page `dir`; plot island `dir="ltr"`; `XAxis.reversed` + `YAxis` orientation flip in RTL. Dual series navy×orange via `cssVars`. `ChartTooltip` + `ChartTooltipContent` (page `dir`). Scatter tooltip payload includes x+y (+z) — formatters render once (`index === 0`) from the row; `ChartTooltipContent` skips null formatter returns. Metric scrub across flattened points (sorted by X); keyboard reverses in RTL. QA: LTR×RTL × light×dark before `ported`.
+**Scatter (category):** header / legend inherit page `dir`; plot island `dir="ltr"`; `XAxis.reversed` + `YAxis` orientation flip in RTL. Dual series navy×orange via `cssVars`. `ChartTooltip` + `ChartTooltipContent` (page `dir`). Scatter tooltip payload includes x+y (+z) - formatters render once (`index === 0`) from the row; `ChartTooltipContent` skips null formatter returns. Metric scrub across flattened points (sorted by X); keyboard reverses in RTL. QA: LTR×RTL × light×dark before `ported`.
 
 **simple-scatter-chart:** dual `Scatter` (Group A / B) on continuous height×weight plane; custom circle `shape` for scrub dim/size; featured gallery starter; English / `Intl`.
 
@@ -442,7 +442,7 @@ Locked Simple Bar chrome is the **default starting point**. Chart-type or custom
 
 **Gauge CLI = demo:** `sonojs add <id>` installs the same `registry/charts/gauge/<id>.tsx` shown on `/charts/view/<id>`, plus shared (`gauge-shared` or `hc-gauge-shared`) and `chart-styles` (`use-chart-dir`), with npm deps logged as `+` lines. Keep `cssVars` in `registry-items.mjs` in sync with hex in the demo (and shared libs). Rebuild with `npm run registry:build` after edits.
 
-**RGC gauges:** `ChartGauge` is `memo`. Entrance: park at `0.001` with `animate={false}`, then animate to target (avoids library `prevPercent || percent` flash that drew the tip first). `ChartDemo` mounts the demo only after reveal (never under opacity-0 — that finished the sweep off-screen, then replayed). Splash dismiss is isolated. Pass **stable** `colors` / `arcsLength` refs. Use `animate={false}` to park the needle (gauge-no-animation).
+**RGC gauges:** `ChartGauge` is `memo`. Entrance: park at `0.001` with `animate={false}`, then animate to target (avoids library `prevPercent || percent` flash that drew the tip first). `ChartDemo` mounts the demo only after reveal (never under opacity-0 - that finished the sweep off-screen, then replayed). Splash dismiss is isolated. Pass **stable** `colors` / `arcsLength` refs. Use `animate={false}` to park the needle (gauge-no-animation).
 
 **gauge-default:** vivid **emerald / amber / rose** via scoped `--gauge-band-*`; default needle (`GAUGE_NEEDLE`); fixed 250×420 stage; plot `dir="ltr"`.
 
@@ -493,11 +493,11 @@ Locked Simple Bar chrome is the **default starting point**. Chart-type or custom
    - **Consumer install (`target`):** `components/charts/<slug>.tsx` (flat);
      helpers → `components/charts/_lib/…` (never `components/ui/` for demos).
      Build rewrites `_lib` imports for the flat target.
-   - Consumer imports: `@/components/ui/chart`, `@/lib/utils` — not `@sonojs/ui` or docs chrome
+   - Consumer imports: `@/components/ui/chart`, `@/lib/utils` - not `@sonojs/ui` or docs chrome
 3. **Content**
    - Convert FA copy / digits / Jalali / toman labels to **English**
    - Match the **Locked visual pattern** above (start from `simple-bar-chart` chrome)
-   - Default geometry **LTR**; still work under `ChartPreview` RTL toggle (layout chrome only — **do not** swap data to Persian when `dir=rtl`)
+   - Default geometry **LTR**; still work under `ChartPreview` RTL toggle (layout chrome only - **do not** swap data to Persian when `dir=rtl`)
 4. **Deps**
    - Register in `scripts/registry-items.mjs` (`registry:chart` or shared lib)
    - Complete `registryDependencies` + npm `dependencies` (recharts, highcharts, …)

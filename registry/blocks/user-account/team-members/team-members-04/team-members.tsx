@@ -91,7 +91,7 @@ const MEMBERS: Member[] = [
     role: "Member",
     status: "Invited",
     initials: "DP",
-    lastActive: "—",
+    lastActive: "-",
     avatar: assetSrc(avatar04),
   },
 ]

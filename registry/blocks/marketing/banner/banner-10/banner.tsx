@@ -19,7 +19,7 @@ export default function Banner({
       aria-label="Templates"
       {...props}
     >
-      <p>Marketing templates just dropped — hero, pricing, and CTA packs</p>
+      <p>Marketing templates just dropped - hero, pricing, and CTA packs</p>
       <a
         href="#"
         className="inline-flex cursor-pointer items-center gap-1 rounded-full bg-white px-3 py-1 text-xs font-semibold text-orange-700 transition hover:bg-orange-50 active:scale-[0.98]"

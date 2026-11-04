@@ -3,7 +3,7 @@
   "name": "checkout-08",
   "type": "registry:block",
   "title": "checkout-08",
-  "description": "Drawer checkout — Open trigger, end-edge Sheet titled Shopping cart with stacked delivery/card fields and Pay CTA (RTL/LTR).",
+  "description": "Drawer checkout - Open trigger, end-edge Sheet titled Shopping cart with stacked delivery/card fields and Pay CTA (RTL/LTR).",
   "access": "public",
   "registryDependencies": [
     "button",
@@ -65,6 +65,6 @@
       "target": "components/blocks/ecommerce/checkout-08/images/paypal.webp"
     }
   ],
-  "version": "0.1.0+c9c3d2a86e47",
-  "generatedAt": "2026-11-03T21:57:48.548Z"
+  "version": "0.1.0+3fe3a15cbaf2",
+  "generatedAt": "2026-11-04T11:52:24.655Z"
 }

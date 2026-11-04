@@ -25,7 +25,7 @@ const COVER = assetSrc(coverAsset)
 const ARTICLE = {
   title: "Building accessible design systems that scale",
   subtitle:
-    "Primitives, tokens, and CSS-first theming — a magazine-style long read for product teams.",
+    "Primitives, tokens, and CSS-first theming - a magazine-style long read for product teams.",
   author: { name: "Alex Rivera", role: "Lead Engineer" },
   date: "March 18, 2026",
   readTime: "8 min read",
@@ -130,7 +130,7 @@ export default function ArticleLayout({
             <p className="leading-7 text-muted-foreground">
               Primitives should own focus traps, keyboard navigation, and ARIA
               roles. You style the surface; behavior stays consistent out of
-              the box — so every product inherits the same interaction contract.
+              the box - so every product inherits the same interaction contract.
             </p>
             <blockquote className="border-s-2 border-foreground/20 ps-5 text-xl font-medium leading-snug tracking-tight text-foreground">
               Accessibility works best when it is the default path, not a
@@ -144,7 +144,7 @@ export default function ArticleLayout({
             </h2>
             <p className="leading-7 text-muted-foreground">
               Keep colors, radius, and spacing in CSS variables. Light and dark
-              modes swap tokens without shipping a theme runtime — consumers
+              modes swap tokens without shipping a theme runtime - consumers
               stay in control of the look while components stay portable.
             </p>
           </section>

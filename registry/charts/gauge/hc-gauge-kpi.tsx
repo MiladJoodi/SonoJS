@@ -16,7 +16,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Hc Gauge Kpi — three nested solidgauge KPI rings.
+ * Hc Gauge Kpi - three nested solidgauge KPI rings.
  * Soft Highcharts blues / violet / green; locked header chrome; English / Intl.
  * Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/hc-gauge-kpi.tsx
@@ -105,7 +105,7 @@ function buildOptions(rings: HcGaugeKpiRing[]): Options {
 
 function HcGaugeKpi({
   title = "KPI rings",
-  subtitle = "Three nested solid gauges — Conversion, Engagement, Retention.",
+  subtitle = "Three nested solid gauges - Conversion, Engagement, Retention.",
   rings = DEMO_RINGS,
   className,
 }: HcGaugeKpiProps) {
@@ -114,7 +114,7 @@ function HcGaugeKpi({
   const primary = rings[0]
   const metric = primary
     ? `${hcNum(primary.value, locale)}%`
-    : "—"
+    : "-"
   const options = React.useMemo(() => buildOptions(rings), [rings])
 
   return (

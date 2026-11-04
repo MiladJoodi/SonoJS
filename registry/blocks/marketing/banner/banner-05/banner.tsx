@@ -21,7 +21,7 @@ export default function Banner({
     >
       <TicketIcon className="size-3.5 shrink-0 opacity-90" aria-hidden />
       <p className="min-w-0 text-balance">
-        Conf 2026 early bird —{" "}
+        Conf 2026 early bird -{" "}
         <a
           href="#"
           className="cursor-pointer font-semibold underline underline-offset-2"

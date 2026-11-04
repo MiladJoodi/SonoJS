@@ -59,7 +59,7 @@ export type ClothesRackProps = {
    * Photographic cloth and light: addresses of tiling fabric scans (normal and roughness maps of jersey for the tees
    * and the shirt and of fleece for the crewneck), a greyscale heather grain, and an equirect .hdr studio. All
    * optional; without them the knit is drawn in code and the light is a plain room. The demo uses Poly Haven's CC0
-   * scans (Poly Haven CC0). The docs demo serves them from /media/clothes-rack.
+   * scans (Poly Haven CC0). The docs demo serves them from /media/3d/clothes-rack.
    */
   textures?: GarmentTextures;
   /** Extra classes for the outer box. Give it a size: the rack fills it. */
@@ -585,7 +585,7 @@ export function ClothesRack({
     function onPointerLeave(event: PointerEvent) {
       if (event.pointerType === "touch") return;
       hovering = false;
-      // The detail layer covers the canvas, which fires a leave too — keep the facing garment while the stage is open
+      // The detail layer covers the canvas, which fires a leave too - keep the facing garment while the stage is open
       if (!openRef.current && !closing) setActive(-1);
     }
 

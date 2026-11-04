@@ -131,28 +131,28 @@ export default async function FieldDocsPage() {
               type: '"vertical" | "horizontal" | "responsive"',
               defaultValue: '"vertical"',
               description:
-                "On Field — layout of label vs control. responsive uses @container/field-group.",
+                "On Field - layout of label vs control. responsive uses @container/field-group.",
             },
             {
               name: "variant",
               type: '"legend" | "label"',
               defaultValue: '"legend"',
               description:
-                "On FieldLegend — label sizes the legend like a FieldLabel.",
+                "On FieldLegend - label sizes the legend like a FieldLabel.",
             },
             {
               name: "data-invalid",
               type: "boolean",
-              defaultValue: "—",
+              defaultValue: "-",
               description:
-                "On Field — turns label/description/error into the destructive state.",
+                "On Field - turns label/description/error into the destructive state.",
             },
             {
               name: "errors",
               type: "Array<{ message?: string }>",
-              defaultValue: "—",
+              defaultValue: "-",
               description:
-                "On FieldError — renders one message or a list from form validators.",
+                "On FieldError - renders one message or a list from form validators.",
             },
           ]}
         />

@@ -29,7 +29,7 @@ export interface SpotlightCursorProps
 }
 
 /**
- * Soft vignette spotlight — content under the beam stays readable (no WebGL).
+ * Soft vignette spotlight - content under the beam stays readable (no WebGL).
  */
 export function SpotlightCursor({
   config = {},

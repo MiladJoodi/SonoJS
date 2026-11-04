@@ -35,7 +35,7 @@ const BRANDS = [
 ] as const
 
 const SHIPPING = [
-  { id: "any", label: "Any method", eta: "—" },
+  { id: "any", label: "Any method", eta: "-" },
   { id: "free", label: "Free shipping", eta: "3–7 days" },
   { id: "express", label: "Express", eta: "1–2 days" },
   { id: "standard", label: "Standard", eta: "3–5 days" },

@@ -15,7 +15,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Treemap With Padding And Gaps — same flat module layout as Simple, teaching
+ * Treemap With Padding And Gaps - same flat module layout as Simple, teaching
  * `nodeInset` (parent padding) + `nodeGap` (sibling gaps). Locked metric scrub;
  * `--chart-1…5`. Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/treemap-with-padding-and-gaps.tsx
@@ -66,7 +66,7 @@ const GROUP_LABELS: Record<string, string> = {
   legend: "Legend",
 }
 
-/** Same two-level Flare sample as Simple Treemap — teaching diff is inset/gap. */
+/** Same two-level Flare sample as Simple Treemap - teaching diff is inset/gap. */
 const DEMO_DATA: TreemapPaddingGroup[] = [
   {
     name: "axis",
@@ -207,7 +207,7 @@ function PaddingTreemapCell(props: CellProps) {
 
   if (width <= 0 || height <= 0) return null
 
-  // Group plate — muted so nodeInset gutters read against the stage.
+  // Group plate - muted so nodeInset gutters read against the stage.
   if (depth === 1) {
     return (
       <g>
@@ -271,7 +271,7 @@ function PaddingTreemapCell(props: CellProps) {
 
 function TreemapWithPaddingAndGaps({
   title = "Module size",
-  subtitle = "Same data as Simple — with nodeInset padding and nodeGap between tiles.",
+  subtitle = "Same data as Simple - with nodeInset padding and nodeGap between tiles.",
   data = DEMO_DATA,
   className,
   nodeInset = DEFAULT_INSET,
@@ -448,7 +448,7 @@ function TreemapWithPaddingAndGaps({
                 <span className="font-normal">of total</span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{caption}</p>

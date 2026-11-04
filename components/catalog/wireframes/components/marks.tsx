@@ -23,7 +23,7 @@ function Bars({ n = 3, wide }: { n?: number; wide?: boolean }) {
 /** Large, scan-readable CSS marks for component catalog thumbs. */
 export function getCssComponentMark(slug: string) {
   switch (slug) {
-    /* —— AI —— */
+    /* -- AI -- */
     case "agent-activity":
     case "agent-activity-2":
       return (
@@ -227,7 +227,7 @@ export function getCssComponentMark(slug: string) {
         </Frame>
       )
 
-    /* —— Forms —— */
+    /* -- Forms -- */
     case "button":
     case "rainbow-button":
       return (
@@ -391,7 +391,7 @@ export function getCssComponentMark(slug: string) {
         </Frame>
       )
 
-    /* —— Layout —— */
+    /* -- Layout -- */
     case "accordion":
       return (
         <Frame>
@@ -480,7 +480,7 @@ export function getCssComponentMark(slug: string) {
         </Frame>
       )
 
-    /* —— Overlays —— */
+    /* -- Overlays -- */
     case "alert-dialog":
     case "dialog":
       return (
@@ -571,7 +571,7 @@ export function getCssComponentMark(slug: string) {
         </Frame>
       )
 
-    /* —— Feedback —— */
+    /* -- Feedback -- */
     case "alert":
       return (
         <Frame>
@@ -646,7 +646,7 @@ export function getCssComponentMark(slug: string) {
         </Frame>
       )
 
-    /* —— Data —— */
+    /* -- Data -- */
     case "avatar":
       return (
         <Frame>
@@ -706,7 +706,7 @@ export function getCssComponentMark(slug: string) {
         </Frame>
       )
 
-    /* —— Navigation —— */
+    /* -- Navigation -- */
     case "breadcrumb":
       return (
         <Frame>

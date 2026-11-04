@@ -41,7 +41,7 @@ export default function BlockWorkspaceSetupDocsPage() {
       <BlocksPageHeader
         title="Workspace Setup"
         pathname="/blocks/onboarding/workspace-setup"
-        description="Compact form, plan picker, brand split, and create-with-invites — single-page create workspace."
+        description="Compact form, plan picker, brand split, and create-with-invites - single-page create workspace."
       />
 
       <div className="flex flex-col gap-8">

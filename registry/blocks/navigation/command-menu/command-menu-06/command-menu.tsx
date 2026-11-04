@@ -119,7 +119,7 @@ export default function CommandMenu({
           Slash studio
         </p>
         <p className="text-start text-xs text-muted-foreground">
-          Editor insert palette — keep the leading slash.
+          Editor insert palette - keep the leading slash.
         </p>
       </header>
 
@@ -201,7 +201,7 @@ export default function CommandMenu({
             <span className="font-mono" dir="ltr">
               /
             </span>{" "}
-            — this palette is for editor inserts, not app navigation.
+            - this palette is for editor inserts, not app navigation.
           </p>
         </Command>
       </CommandDialog>

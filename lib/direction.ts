@@ -64,7 +64,7 @@ export function resolveEdgeSide(
 
 /**
  * Read computed direction from an element (or documentElement).
- * Safe for SSR when `el` is undefined — returns DEFAULT_DIRECTION.
+ * Safe for SSR when `el` is undefined - returns DEFAULT_DIRECTION.
  */
 export function readElementDirection(
   el?: Element | null,

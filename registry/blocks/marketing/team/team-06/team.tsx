@@ -103,7 +103,7 @@ const DEFAULT_MEMBERS = [
 export default function Team({
   title = "Floating profiles",
   eyebrow = "Connect",
-  description = "Avatar-forward cards that lift off the canvas—ideal for social-first team pages.",
+  description = "Avatar-forward cards that lift off the canvas-ideal for social-first team pages.",
   members = DEFAULT_MEMBERS,
   className,
   ...props

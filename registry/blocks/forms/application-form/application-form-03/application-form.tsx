@@ -330,7 +330,7 @@ export default function ApplicationForm({
                 </SelectContent>
               </Select>
               <FieldDescription>
-                Approximate — we confirm timing after review.
+                Approximate - we confirm timing after review.
               </FieldDescription>
             </Field>
 

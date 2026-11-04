@@ -16,7 +16,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Chart Pie Stacked (classic) — nested Store (inner) × Online (outer) month rings.
+ * Chart Pie Stacked (classic) - nested Store (inner) × Online (outer) month rings.
  * Same chrome language as gallery `pie-stacked`. Tokens: `--chart-1…5`.
  * Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/chart-pie-stacked.tsx
@@ -148,7 +148,7 @@ const chartPieContainerClassName =
 
 function ChartPieStacked({
   title = "Store × Online by month",
-  subtitle = "Inner store ring · outer online ring — shared month colors.",
+  subtitle = "Inner store ring · outer online ring - shared month colors.",
   storeData = DEMO_STORE,
   onlineData = DEMO_ONLINE,
   className,
@@ -388,7 +388,7 @@ function ChartPieStacked({
                 <span className="font-normal">of ring</span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{caption}</p>

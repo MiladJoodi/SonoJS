@@ -347,7 +347,7 @@ export default function CryptoPortfolio03({
       `}</style>
 
       <div className="mx-auto max-w-6xl">
-        {/* Ticker — no border, just tone shift */}
+        {/* Ticker - no border, just tone shift */}
         <div className="overflow-hidden bg-black/35" dir="ltr">
           <div className="cp03-track flex w-max items-center gap-7 py-2.5 pe-8 ps-4">
             {loopTape.map((row, i) => {
@@ -475,7 +475,7 @@ export default function CryptoPortfolio03({
                 </p>
               </div>
               <p className="max-w-xs text-end text-xs text-zinc-500">
-                Streaming portfolio mark — demo area series updates every ~1.4s
+                Streaming portfolio mark - demo area series updates every ~1.4s
               </p>
             </div>
 

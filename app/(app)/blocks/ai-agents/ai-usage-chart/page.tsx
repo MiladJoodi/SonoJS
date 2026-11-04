@@ -78,7 +78,7 @@ export default function BlockAiUsageChartDocsPage() {
       <BlocksPageHeader
         title="AI Usage Chart"
         pathname="/blocks/ai-agents/ai-usage-chart"
-        description="Token consumption, model costs, request throughput, and latency — with SVG charts, metric cards, and model breakdown."
+        description="Token consumption, model costs, request throughput, and latency - with SVG charts, metric cards, and model breakdown."
       />
 
       <div className="flex flex-col gap-8">

@@ -1,0 +1,1 @@
+export { ThreeDBendCarouselDefault } from "./default"

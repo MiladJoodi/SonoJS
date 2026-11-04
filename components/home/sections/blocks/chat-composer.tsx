@@ -34,7 +34,7 @@ const MODELS = [
 ] as const
 
 const REPLIES = [
-  "Got it — I'd start with a clear outline, then fill in setup, API surface, and a couple of real usage examples.",
+  "Got it - I'd start with a clear outline, then fill in setup, API surface, and a couple of real usage examples.",
   "Here's a tight plan: measure the hot path, cut unused work, and cache the expensive reads first.",
   "I'll scan for the three highest-impact bugs, patch them, and note why each fix is safe.",
   "Sounds good. I can break that into small steps and ship a clean first draft you can iterate on.",
@@ -55,7 +55,7 @@ const SAMPLE_TURNS: Turn[] = [
   {
     id: "sample-a1",
     role: "assistant",
-    text: "Done — email, password, and a Sign in button with SonoJS Field and Button.",
+    text: "Done - email, password, and a Sign in button with SonoJS Field and Button.",
   },
   {
     id: "sample-u2",
@@ -65,7 +65,7 @@ const SAMPLE_TURNS: Turn[] = [
   {
     id: "sample-a2",
     role: "assistant",
-    text: "Added. Centered muted link under the actions — works in LTR and RTL.",
+    text: "Added. Centered muted link under the actions - works in LTR and RTL.",
   },
 ]
 

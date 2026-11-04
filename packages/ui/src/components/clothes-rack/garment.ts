@@ -1167,7 +1167,7 @@ uniform float uGrainAmt;
     // the baked fold shading (vertex colour) counts for more on light cloth: white needs it to read as cloth. The
     // inside of the cloth (the back face of a two-sided panel) is in the garment's own shadow, seen through the
     // neck and the sleeves.
-    // Always use vColor.rgb — Three may declare vColor as vec3 or vec4 under USE_COLOR / USE_COLOR_ALPHA, and
+    // Always use vColor.rgb - Three may declare vColor as vec3 or vec4 under USE_COLOR / USE_COLOR_ALPHA, and
     // some drivers type-check both #if branches. .rgb is valid for either.
     shader.fragmentShader = shader.fragmentShader.replace(
       "#include <color_fragment>",

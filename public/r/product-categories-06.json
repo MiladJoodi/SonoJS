@@ -3,7 +3,7 @@
   "name": "product-categories-06",
   "type": "registry:block",
   "title": "product-categories-06",
-  "description": "Offer desk — ticket-tagged promo cards with season copy and Explore links (RTL/LTR).",
+  "description": "Offer desk - ticket-tagged promo cards with season copy and Explore links (RTL/LTR).",
   "access": "public",
   "dependencies": [
     "lucide-react"
@@ -67,6 +67,6 @@
       "target": "components/blocks/ecommerce/product-categories-06/images/picks.webp"
     }
   ],
-  "version": "0.1.0+c9c3d2a86e47",
-  "generatedAt": "2026-11-03T21:57:48.548Z"
+  "version": "0.1.0+3fe3a15cbaf2",
+  "generatedAt": "2026-11-04T11:52:24.655Z"
 }

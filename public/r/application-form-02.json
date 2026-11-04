@@ -3,7 +3,7 @@
   "name": "application-form-02",
   "type": "registry:block",
   "title": "application-form-02",
-  "description": "Job application — role meta chips, portfolio, experience select, cover note, and consent.",
+  "description": "Job application - role meta chips, portfolio, experience select, cover note, and consent.",
   "access": "public",
   "dependencies": [],
   "registryDependencies": [
@@ -40,6 +40,6 @@
       "target": "components/blocks/forms/application-form-02/application-form.tsx"
     }
   ],
-  "version": "0.1.0+c9c3d2a86e47",
-  "generatedAt": "2026-11-03T21:57:48.548Z"
+  "version": "0.1.0+3fe3a15cbaf2",
+  "generatedAt": "2026-11-04T11:52:24.655Z"
 }

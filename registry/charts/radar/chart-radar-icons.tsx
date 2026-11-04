@@ -19,7 +19,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Chart Radar Icons (classic) — dual Store×Online with Lucide icons in
+ * Chart Radar Icons (classic) - dual Store×Online with Lucide icons in
  * chartConfig (ChartLegendContent). Twin of gallery `radar-icons`.
  * Locked metric scrub. Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/chart-radar-icons.tsx
@@ -87,7 +87,7 @@ function pointTotal(point: ChartRadarIconsPoint) {
 
 function ChartRadarIcons({
   title = "Radar icons",
-  subtitle = "Series icons from chartConfig — ChartLegendContent + tip.",
+  subtitle = "Series icons from chartConfig - ChartLegendContent + tip.",
   data = DEMO_DATA,
   className,
   plotDir,
@@ -258,7 +258,7 @@ function ChartRadarIcons({
                 {formatPct(deltaPct)}
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{caption}</p>

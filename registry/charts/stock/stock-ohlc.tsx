@@ -26,7 +26,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Stock OHLC — classic H–L stem with open/close ticks (`OhlcBar`).
+ * Stock OHLC - classic H–L stem with open/close ticks (`OhlcBar`).
  * Locked gallery chrome + semantic up/down; metric scrubber.
  * Installs to: components/charts/stock-ohlc.tsx
  */
@@ -83,7 +83,7 @@ function useNarrowViewport() {
 
 function StockOhlc({
   title = "Intraday OHLC",
-  subtitle = "High–low stems with open and close ticks — bullish and bearish strokes.",
+  subtitle = "High–low stems with open and close ticks - bullish and bearish strokes.",
   data = DEMO_DATA,
   className,
   plotDir,
@@ -334,7 +334,7 @@ function StockOhlc({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">

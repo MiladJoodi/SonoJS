@@ -5,7 +5,7 @@ import { createBillingCheckout } from "@/lib/stripe/billing-checkout"
 
 /**
  * Authenticated Stripe Checkout Session create (Test mode).
- * Pro access is granted only after the Stripe webhook reconciles Neon —
+ * Pro access is granted only after the Stripe webhook reconciles Neon -
  * never because the user lands on success_url.
  */
 export async function POST(req: Request) {

@@ -1,9 +1,9 @@
-// Ribbon: an undulating sash of parallel strands rides a great circle —
+// Ribbon: an undulating sash of parallel strands rides a great circle -
 // the "composing" state. The tuned preset freezes the 3D tumble
 // (spin 0), leaving the traveling undulation on a fixed band.
 //
 // The same painter also drives "breathing" (ring), via the `faceOn` flag:
-// a face-on circle whose radius — not its out-of-plane offset — undulates,
+// a face-on circle whose radius - not its out-of-plane offset - undulates,
 // so it reads as a ring slowly morphing rather than a sash in orbit.
 
 import type { Dot, ModeFrame } from "./types";
@@ -69,7 +69,7 @@ export const frameRibbon: ModeFrame = (size, t, o) => {
     for (let k = 0; k < segs; k++) {
       const a = (k / segs) * 2 * Math.PI;
       // the undulation: two traveling waves along the band; wobMul
-      // scales the deformation — 0 is a clean band
+      // scales the deformation - 0 is a clean band
       const wob =
         (0.16 * Math.sin(a * 3 - t * 1.7 + w * 0.22) +
           0.07 * Math.sin(a * 5 + t * 1.1)) *

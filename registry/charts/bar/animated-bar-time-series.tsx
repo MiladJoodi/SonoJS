@@ -26,7 +26,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Animated Bar Time Series — locked gallery chrome; type-required sliding
+ * Animated Bar Time Series - locked gallery chrome; type-required sliding
  * window over a longer series. Single series `--chart-1`.
  * Installs to: components/charts/animated-bar-time-series.tsx
  */
@@ -57,7 +57,7 @@ const DEFAULT_TICK_MS = 900
 const AXIS_TICK_FILL =
   "color-mix(in oklab, var(--foreground) 58%, transparent)"
 
-/** Stable English series (length 30) — circular window slides over this. */
+/** Stable English series (length 30) - circular window slides over this. */
 const DEMO_SERIES: AnimatedBarTimeSeriesPoint[] = [
   420, 510, 480, 560, 610, 540, 580, 620, 500, 640, 590, 670, 550, 600, 630,
   580, 650, 700, 560, 610, 580, 640, 690, 620, 570, 660, 710, 600, 650, 680,
@@ -196,7 +196,7 @@ function AnimatedBarTimeSeriesChart({
     [data]
   )
 
-  // Auto-advance — pause while scrubbing or when reduced-motion.
+  // Auto-advance - pause while scrubbing or when reduced-motion.
   React.useEffect(() => {
     if (reducedMotion || scrubbing || seriesLen === 0) return
     const id = window.setInterval(() => {
@@ -429,7 +429,7 @@ function AnimatedBarTimeSeriesChart({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{categoryLabel}</p>

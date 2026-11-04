@@ -45,7 +45,7 @@ export default async function PersonaDocsPage() {
         pathname="/docs/components/persona"
         description={
           <p className="leading-relaxed text-muted-foreground">
-            An animated AI visual powered by Rive WebGL2 — idle, listening,
+            An animated AI visual powered by Rive WebGL2 - idle, listening,
             thinking, speaking, and asleep, with multiple look variants.
           </p>
         }

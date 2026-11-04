@@ -3,7 +3,7 @@
   "name": "hero-12",
   "type": "registry:block",
   "title": "hero-12",
-  "description": "Full-bleed video background hero — muted looping film, dark scrim, dual CTAs, and feature stats.",
+  "description": "Full-bleed video background hero - muted looping film, dark scrim, dual CTAs, and feature stats.",
   "access": "member",
   "dependencies": [
     "lucide-react"
@@ -42,6 +42,6 @@
       "target": "components/blocks/marketing/hero-12/media/flower.mp4"
     }
   ],
-  "version": "0.1.0+c9c3d2a86e47",
-  "generatedAt": "2026-11-03T21:57:48.548Z"
+  "version": "0.1.0+3fe3a15cbaf2",
+  "generatedAt": "2026-11-04T11:52:24.655Z"
 }

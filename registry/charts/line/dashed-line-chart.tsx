@@ -26,7 +26,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Dashed Line Chart — locked gallery chrome (navy × orange).
+ * Dashed Line Chart - locked gallery chrome (navy × orange).
  * Dual monotone dashed lines (no idle dots) + metric header scrubber.
  * Installs to: components/charts/dashed-line-chart.tsx
  */
@@ -414,7 +414,7 @@ function DashedLineChart({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{monthLabel}</p>

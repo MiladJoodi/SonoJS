@@ -500,7 +500,7 @@ export const blocksNavCatalog: BlocksNavGroup[] = [
 
 /**
  * TEMP: sidebar / blocks index show only shipped blocks.
- * Coming-soon placeholders stay in `blocksNavCatalog` — restore by exporting that instead.
+ * Coming-soon placeholders stay in `blocksNavCatalog` - restore by exporting that instead.
  */
 export const blocksNav: BlocksNavGroup[] = blocksNavCatalog
   .map((group) => ({

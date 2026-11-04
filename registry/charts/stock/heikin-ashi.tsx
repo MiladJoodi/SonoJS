@@ -27,7 +27,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Heikin Ashi — smoothed trend candles via `toHeikinAshi`.
+ * Heikin Ashi - smoothed trend candles via `toHeikinAshi`.
  * Same `CandlestickShape`; locked gallery chrome + metric scrubber.
  * Installs to: components/charts/heikin-ashi.tsx
  */
@@ -37,7 +37,7 @@ export type HeikinAshiProps = {
   subtitle?: string
   /** Short ticker shown in the card header. */
   symbol?: string
-  /** Raw OHLC input — transformed to Heikin Ashi when provided. */
+  /** Raw OHLC input - transformed to Heikin Ashi when provided. */
   data?: MarketCandle[]
   className?: string
   /** Category order / Y-axis side. Omit to follow page `dir`. */
@@ -346,7 +346,7 @@ function HeikinAshi({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">

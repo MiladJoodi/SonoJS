@@ -41,7 +41,7 @@ export class StripeApiError extends Error {
   }
 }
 
-/** Stripe customer ↔ Clerk user mapping conflict — requires manual investigation. */
+/** Stripe customer ↔ Clerk user mapping conflict - requires manual investigation. */
 export class BillingIdentityConflictError extends Error {
   constructor(message: string) {
     super(message)

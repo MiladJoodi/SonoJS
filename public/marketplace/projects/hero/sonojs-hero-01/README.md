@@ -1,4 +1,4 @@
-# Otis — marketplace assets
+# Otis - marketplace assets
 
 Package: `otis` (`1.0.0`)  
 Category: `hero`  
@@ -11,10 +11,10 @@ Source: `C:\Users\Salam\Downloads\otis` (rebrand to `E:\SonoJS-Templates` when r
 | File | Purpose |
 |---|---|
 | `cover.mp4` | Catalog + detail cover (muted loop) |
-| `cover-light.webp` | Catalog cover (light) — pending |
-| `cover-dark.webp` | Catalog cover (dark) — pending |
-| `main-light.webp` | Detail still (light) — pending |
-| `main-dark.webp` | Detail still (dark) — pending |
+| `cover-light.webp` | Catalog cover (light) - pending |
+| `cover-dark.webp` | Catalog cover (dark) - pending |
+| `main-light.webp` | Detail still (light) - pending |
+| `main-dark.webp` | Detail still (dark) - pending |
 
 ## Live
 

@@ -50,7 +50,7 @@ export default function BlockArticleLayoutDocsPage() {
       <BlocksPageHeader
         title="Article Layout"
         pathname="/blocks/content-publishing/article-layout"
-        description="Five long-form layouts — classic sticky TOC, magazine cover, editorial split, product-docs hybrid, and series immersive with progress + sticky actions."
+        description="Five long-form layouts - classic sticky TOC, magazine cover, editorial split, product-docs hybrid, and series immersive with progress + sticky actions."
       />
 
       <div className="flex flex-col gap-8">

@@ -120,7 +120,7 @@ function HistoryPanel() {
           <span className="w-20 shrink-0 text-muted-foreground">{when}</span>
           <span>
             <span className="font-medium text-foreground">{who}</span>
-            <span className="text-muted-foreground"> — {what}</span>
+            <span className="text-muted-foreground"> - {what}</span>
           </span>
         </div>
       ))}

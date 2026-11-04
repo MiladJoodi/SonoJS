@@ -16,7 +16,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Chart Radar Grid Custom (classic) — single Store series with a custom
+ * Chart Radar Grid Custom (classic) - single Store series with a custom
  * PolarGrid (no radial spokes, single ring at 90). Locked metric scrub.
  * Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/chart-radar-grid-custom.tsx
@@ -243,7 +243,7 @@ function ChartRadarGridCustom({
                 {formatPct(deltaPct)}
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{caption}</p>

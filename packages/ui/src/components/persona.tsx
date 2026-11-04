@@ -95,7 +95,7 @@ const sources = {
 function getCurrentTheme(): "light" | "dark" {
   if (typeof window === "undefined") return "light"
   // Class-based theme (e.g. next-themes): `.dark` on, otherwise light.
-  // Do not fall back to prefers-color-scheme — that paints the orb dark while
+  // Do not fall back to prefers-color-scheme - that paints the orb dark while
   // the forced site theme is still light.
   return document.documentElement.classList.contains("dark") ? "dark" : "light"
 }

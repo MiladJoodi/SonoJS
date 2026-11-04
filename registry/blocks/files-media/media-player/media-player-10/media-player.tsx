@@ -49,7 +49,7 @@ export default function MediaPlayer({
           Mini dock player
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          PiP-style floating card — closed by default. Open, scrub, expand.
+          PiP-style floating card - closed by default. Open, scrub, expand.
         </p>
         <Button
           type="button"

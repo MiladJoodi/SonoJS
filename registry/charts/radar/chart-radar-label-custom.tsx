@@ -16,7 +16,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Chart Radar Label Custom (classic) — dual Store×Online with custom
+ * Chart Radar Label Custom (classic) - dual Store×Online with custom
  * PolarAngleAxis ticks (values + month). Locked metric scrub.
  * Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/chart-radar-label-custom.tsx
@@ -304,7 +304,7 @@ function ChartRadarLabelCustom({
                 {formatPct(deltaPct)}
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{caption}</p>

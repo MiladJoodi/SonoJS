@@ -113,7 +113,7 @@ async function writeClerkPlanMetadata(
     return { fingerprint, dirtyAfterWrite: false }
   } catch (err) {
     if (err instanceof LostClerkLeaseError) {
-      // May have written with a stale snapshot — force another sync from DB
+      // May have written with a stale snapshot - force another sync from DB
       if (wrote) {
         await requestClerkSync(clerkUserId)
       }
@@ -144,7 +144,7 @@ export async function syncClerkPlanFromDb(
     for (let i = 0; i < 5; i++) {
       const lease = await acquireClerkSyncLease(clerkUserId)
       if (!lease.acquired) {
-        // Another worker owns the lease — keep pending so they drain after release
+        // Another worker owns the lease - keep pending so they drain after release
         await requestClerkSync(clerkUserId)
         const active = await getActiveSubscriptionByClerkId(clerkUserId)
         return planFieldsFromSubscription(active)

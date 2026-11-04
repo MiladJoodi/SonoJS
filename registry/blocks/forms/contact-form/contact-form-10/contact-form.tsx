@@ -44,7 +44,7 @@ export default function ContactForm({
             >
             <p className="text-sm font-medium text-primary">On-site & remote</p>
             <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
-              Meet the team in person or collaborate online — same care either
+              Meet the team in person or collaborate online - same care either
               way.
             </p>
           </div>

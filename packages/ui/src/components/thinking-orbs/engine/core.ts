@@ -1,5 +1,5 @@
 // Shared primitives for the dotted 3D thought-orbs. Ported from inkform
-// (PlotterLab's HalftoneSphere lineage): honestly 3D — rotated,
+// (PlotterLab's HalftoneSphere lineage): honestly 3D - rotated,
 // depth-shaded, z-sorted. Depth is carried by dot size and ink weight
 // alone. Plain 2D canvas fills only: no ctx.filter, no SVG filters, so
 // every mode renders identically in Chrome, Safari and Firefox.
@@ -51,7 +51,7 @@ export function frac(x: number): number {
   return x - Math.floor(x);
 }
 
-/** Value noise on a 2D lattice — smooth, deterministic, cheap. */
+/** Value noise on a 2D lattice - smooth, deterministic, cheap. */
 export function vnoise(x: number, y: number): number {
   const xi = Math.floor(x);
   const yi = Math.floor(y);
@@ -109,7 +109,7 @@ export function makeProj(
 
 /**
  * Painter: z-sort far→near, matte grayscale dots. On dark substrates the
- * ink value is mirrored (1 - white) so near dots read bright — the same
+ * ink value is mirrored (1 - white) so near dots read bright - the same
  * depth language on an inverted substrate.
  */
 export function paint(
@@ -154,7 +154,7 @@ export function paintLines(
  * This runs in the GEOMETRY step, not the painter, so a frame is a complete
  * set of draw instructions: every value is final and the array order is the
  * order to draw in. That is what lets the RN and SwiftUI ports share this
- * output verbatim — a port draws the list, it never re-derives anything —
+ * output verbatim - a port draws the list, it never re-derives anything -
  * and what lets the golden-vector tests compare numbers instead of pixels.
  */
 export function finalizeFrame(

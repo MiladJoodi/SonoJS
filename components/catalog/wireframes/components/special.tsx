@@ -18,7 +18,7 @@ export function FluidOrbComponentMark() {
   )
 }
 
-/** Static Voice AI Orb — large, no live controls. */
+/** Static Voice AI Orb - large, no live controls. */
 export function VoiceAiOrbComponentMark() {
   const tint = "#7DFFB3"
   return (
@@ -53,7 +53,7 @@ export function VoiceAiOrbComponentMark() {
   )
 }
 
-/** Thinking orbs — three soft circles, large. */
+/** Thinking orbs - three soft circles, large. */
 export function ThinkingOrbsComponentMark() {
   return (
     <MarkFrame density="bold">

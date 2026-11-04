@@ -26,7 +26,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Bar Interactive — locked gallery chrome + chart-local series toggle.
+ * Bar Interactive - locked gallery chrome + chart-local series toggle.
  * Switch Store / Online totals; single-series daily bars follow the active key.
  * Installs to: components/charts/bar-interactive.tsx
  */
@@ -60,7 +60,7 @@ const AXIS_TICK_FILL =
 
 const SERIES_KEYS: BarInteractiveSeries[] = ["store", "online"]
 
-/** Daily Store × Online traffic — Apr–Jun 2024 (from FarsiUI interactive demo). */
+/** Daily Store × Online traffic - Apr–Jun 2024 (from FarsiUI interactive demo). */
 const DEMO_DATA: BarInteractivePoint[] = [
   { date: "2024-04-01", store: 222, online: 150 },
   { date: "2024-04-02", store: 97, online: 180 },
@@ -492,7 +492,7 @@ function BarInteractive({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">
@@ -505,7 +505,7 @@ function BarInteractive({
         </div>
       </header>
 
-      {/* Series toggle — chart-local interactive control */}
+      {/* Series toggle - chart-local interactive control */}
       <div className="flex flex-col overflow-hidden rounded-xl border border-border sm:flex-row">
         {SERIES_KEYS.map((key) => {
           const active = activeSeries === key

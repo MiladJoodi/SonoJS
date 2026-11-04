@@ -24,7 +24,7 @@ const exampleDefs = [
     name: "citations-stack",
     title: "Stack + list",
     description:
-      "`CitationStack` overlapping marks plus `CitationList` — same pattern under a streaming reply.",
+      "`CitationStack` overlapping marks plus `CitationList` - same pattern under a streaming reply.",
     requires: ["agent-disclosure"],
     npmRequires: ["lucide-react", "motion"],
   },
@@ -72,7 +72,7 @@ export default async function CitationsDocsPage() {
         pathname="/docs/components/citations"
         description={
           <p className="leading-relaxed text-muted-foreground">
-            Collapsible citations for linked sources in AI responses —
+            Collapsible citations for linked sources in AI responses -
             inline markers, favicon stacks, and an animated source list.
           </p>
         }
@@ -96,14 +96,14 @@ export default async function CitationsDocsPage() {
             {
               name: "citations",
               type: "CitationItem[]",
-              defaultValue: "—",
+              defaultValue: "-",
               description:
                 "Source rows with id, title, optional domain/url, and local `icon`.",
             },
             {
               name: "icon",
               type: "string",
-              defaultValue: "—",
+              defaultValue: "-",
               description:
                 "Bundled favicon URL on each item (use `citationIcons` or your own asset).",
             },
@@ -129,7 +129,7 @@ export default async function CitationsDocsPage() {
             {
               name: "Citation index / citationId",
               type: "number / string",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Inline superscript link into the list.",
             },
             {
@@ -141,7 +141,7 @@ export default async function CitationsDocsPage() {
             {
               name: "className",
               type: "string",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Optional class names on the root.",
             },
           ]}

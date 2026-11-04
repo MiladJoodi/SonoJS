@@ -16,7 +16,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Chart Pie Label (classic) — full pie with always-on numeric value labels.
+ * Chart Pie Label (classic) - full pie with always-on numeric value labels.
  * Label ink via `[&_.recharts-pie-label-text]:fill-foreground`. Tokens: `--chart-1…5`.
  * Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/chart-pie-label.tsx
@@ -265,7 +265,7 @@ function ChartPieLabel({
                 <span className="font-normal">of total</span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{caption}</p>
@@ -315,7 +315,7 @@ function ChartPieLabel({
               stroke="var(--background)"
               strokeWidth={2}
               label={({ value }) => formatNumber(Number(value), locale)}
-              // Always-on labels — skip enter animation to avoid blink.
+              // Always-on labels - skip enter animation to avoid blink.
               isAnimationActive={false}
               onMouseEnter={
                 scrub ? (_, index) => activate(index) : undefined

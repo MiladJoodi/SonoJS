@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils"
 
 type SliceConfig = Record<string, { label?: ReactNode } | undefined>
 
-/** Shared pie tooltip row — color swatch + slice label + en Intl value. */
+/** Shared pie tooltip row - color swatch + slice label + en Intl value. */
 export function pieTooltipRow({
   value,
   label,
@@ -72,7 +72,7 @@ export function pieSliceTooltip(
 }
 
 /**
- * Radial ring tooltip — does not rely on ChartTooltipContent's
+ * Radial ring tooltip - does not rely on ChartTooltipContent's
  * `formatter && item.name` gate (RadialBar often names the dataKey).
  * Pass `dir` from `useChartDir()` (plot island is `dir="ltr"`).
  */

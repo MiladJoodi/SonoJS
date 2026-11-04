@@ -6,7 +6,7 @@ import { FingerprintIcon, QrCodeIcon, SmartphoneIcon } from "lucide-react"
 import { Button } from "@sonojs/ui/components/button"
 import { cn } from "@/lib/utils"
 
-/** Decorative fake QR — SVG so modules never collapse to zero height. */
+/** Decorative fake QR - SVG so modules never collapse to zero height. */
 function FakeQrCode({ className }: { className?: string }) {
   // 21×21 modules; 1 = dark. Classic finder corners + dense middle pattern.
   const modules = [

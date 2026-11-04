@@ -26,7 +26,7 @@ type Stat = {
   isPositive: boolean
   description: string
   icon: LucideIcon
-  /** Chronological samples — higher = better. Trend should match `isPositive`. */
+  /** Chronological samples - higher = better. Trend should match `isPositive`. */
   sparkline: number[]
 }
 
@@ -110,7 +110,7 @@ function sparkGeometry(values: number[]) {
 
   const points = values.map((v, i) => {
     const x = (i / (values.length - 1)) * SPARK_W
-    // SVG y grows downward — larger values sit higher on screen.
+    // SVG y grows downward - larger values sit higher on screen.
     const y = SPARK_PAD + (1 - (v - min) / range) * plotH
     return { x, y }
   })

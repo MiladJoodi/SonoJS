@@ -62,7 +62,7 @@ function AlertDialogContent({
   // Portal renders under <body>; set dir explicitly so RTL from DirectionProvider still applies.
   const { dir } = useDirection()
 
-  // Inline maxWidth — Tailwind max-w-* source-order was letting
+  // Inline maxWidth - Tailwind max-w-* source-order was letting
   // max-w-[calc(100%-2rem)] win and stretch the dialog full-bleed.
   const maxWidth =
     size === "sm"
@@ -111,7 +111,7 @@ function AlertDialogFooter({
     <div
       data-slot="alert-dialog-footer"
       className={cn(
-        // Solid muted band — bg-muted/50 is invisible on light popover
+        // Solid muted band - bg-muted/50 is invisible on light popover
         "-mx-4 -mb-4 flex flex-col-reverse gap-2 rounded-b-xl border-t border-border bg-muted p-4 group-data-[size=sm]/alert-dialog-content:grid group-data-[size=sm]/alert-dialog-content:grid-cols-2 sm:flex-row sm:justify-end",
         className
       )}

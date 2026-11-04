@@ -326,7 +326,7 @@ export default function MegaMenu({
           Products mega with striped columns
         </h1>
         <p className="max-w-md text-sm text-muted-foreground">
-          Five category columns with alternating muted backgrounds — sheet on
+          Five category columns with alternating muted backgrounds - sheet on
           small screens.
         </p>
       </main>

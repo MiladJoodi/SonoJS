@@ -65,7 +65,7 @@ export default async function TranscriptionDocsPage() {
         pathname="/docs/components/transcription"
         description={
           <p className="leading-relaxed text-muted-foreground">
-            Interactive, time-synced transcript segments with click-to-seek —
+            Interactive, time-synced transcript segments with click-to-seek -
             render-props root plus styled segment buttons.
           </p>
         }
@@ -112,7 +112,7 @@ export default async function TranscriptionDocsPage() {
               name: "children",
               type: "(segment, index) => ReactNode",
               description:
-                "Render prop for each non-empty segment — typically `TranscriptionSegment`.",
+                "Render prop for each non-empty segment - typically `TranscriptionSegment`.",
             },
           ]}
         />

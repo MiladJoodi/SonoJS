@@ -97,7 +97,7 @@ function hourLabel(h: number) {
   return format(d, "h a")
 }
 
-/** Week timeline — hours × days with event bars. */
+/** Week timeline - hours × days with event bars. */
 export default function Calendar02() {
   const [anchor, setAnchor] = React.useState(() => new Date())
   const weekStart = startOfWeek(anchor, { weekStartsOn: 1 })

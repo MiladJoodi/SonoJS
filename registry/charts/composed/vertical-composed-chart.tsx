@@ -28,7 +28,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Vertical Composed Chart — locked gallery chrome (navy × orange).
+ * Vertical Composed Chart - locked gallery chrome (navy × orange).
  * `layout="vertical"`: Bar(sales) + Line(target) by region; metric scrubber.
  * Installs to: components/charts/vertical-composed-chart.tsx
  */
@@ -432,7 +432,7 @@ function VerticalComposedChart({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">

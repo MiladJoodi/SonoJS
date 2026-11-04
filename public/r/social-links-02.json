@@ -3,7 +3,7 @@
   "name": "social-links-02",
   "type": "registry:block",
   "title": "social-links-02",
-  "description": "Dark cinematic link-in-bio — cover photo, portrait, 2×2 destination grid, and Sono logo mark (RTL/LTR).",
+  "description": "Dark cinematic link-in-bio - cover photo, portrait, 2×2 destination grid, and Sono logo mark (RTL/LTR).",
   "access": "public",
   "dependencies": [
     "lucide-react"
@@ -53,6 +53,6 @@
       "target": "components/blocks/marketing/social-links-02/images/portrait.webp"
     }
   ],
-  "version": "0.1.0+c9c3d2a86e47",
-  "generatedAt": "2026-11-03T21:57:48.548Z"
+  "version": "0.1.0+3fe3a15cbaf2",
+  "generatedAt": "2026-11-04T11:52:24.655Z"
 }

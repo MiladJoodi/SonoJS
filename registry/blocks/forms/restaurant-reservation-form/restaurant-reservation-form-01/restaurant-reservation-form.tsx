@@ -450,7 +450,7 @@ export default function RestaurantReservationForm({
                 Until then, {name.trim().split(" ")[0]}.
               </h2>
               <p className="text-pretty text-sm leading-6 text-muted-foreground">
-                This is a demo — no table has been reserved and nothing was
+                This is a demo - no table has been reserved and nothing was
                 sent to {email.trim()}. The reference below is for illustration
                 only.
               </p>
@@ -645,7 +645,7 @@ export default function RestaurantReservationForm({
                   ) : (
                     <FieldDescription>
                       Nothing open for {party}{" "}
-                      {party === 1 ? "guest" : "guests"} that evening — try
+                      {party === 1 ? "guest" : "guests"} that evening - try
                       another date or a smaller party.
                     </FieldDescription>
                   )
@@ -865,7 +865,7 @@ export default function RestaurantReservationForm({
                   {recapOccasion}.
                 </p>
                 <footer className="mt-2 text-xs tracking-wide text-muted-foreground">
-                  — {RESTAURANT.name}. Tables are held for 15 minutes.
+                  - {RESTAURANT.name}. Tables are held for 15 minutes.
                 </footer>
               </blockquote>
 
@@ -891,7 +891,7 @@ export default function RestaurantReservationForm({
                 )}
               </Button>
               <p className="text-center text-xs leading-5 text-muted-foreground">
-                Demo form — nothing is booked, saved or emailed.
+                Demo form - nothing is booked, saved or emailed.
               </p>
             </div>
           </form>

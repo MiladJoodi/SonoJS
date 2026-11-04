@@ -23,7 +23,7 @@ const exampleDefs = [
   {
     name: "terminal-complete",
     title: "Complete",
-    description: "Finished output with `isStreaming={false}` — no caret or status.",
+    description: "Finished output with `isStreaming={false}` - no caret or status.",
     requires: ["button", "spinner"],
     npmRequires: ["ansi-to-react", "lucide-react"],
   },
@@ -68,7 +68,7 @@ export default async function TerminalDocsPage() {
         pathname="/docs/components/terminal"
         description={
           <p className="leading-relaxed text-muted-foreground">
-            A streaming terminal surface for ANSI build and agent logs — copy,
+            A streaming terminal surface for ANSI build and agent logs - copy,
             clear, and an optional streaming caret.
           </p>
         }

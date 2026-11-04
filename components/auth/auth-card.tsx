@@ -7,7 +7,7 @@ type AuthCardProps = React.ComponentProps<"div"> & {
   layout?: AuthFormLayout
 }
 
-/** Shared elevated auth surface — same chrome as login-01. */
+/** Shared elevated auth surface - same chrome as login-01. */
 export function AuthCard({
   className,
   children,

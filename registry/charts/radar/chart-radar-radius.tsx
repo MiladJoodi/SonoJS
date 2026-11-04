@@ -16,7 +16,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Chart Radar Radius (classic) — dual Store×Online with PolarRadiusAxis
+ * Chart Radar Radius (classic) - dual Store×Online with PolarRadiusAxis
  * (no PolarAngleAxis). Locked metric scrub.
  * Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/chart-radar-radius.tsx
@@ -254,7 +254,7 @@ function ChartRadarRadius({
                 {formatPct(deltaPct)}
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{caption}</p>

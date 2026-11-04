@@ -26,7 +26,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Candlestick — locked gallery chrome + semantic up/down candles.
+ * Candlestick - locked gallery chrome + semantic up/down candles.
  * Custom `CandlestickShape` (wick + body); metric scrubber.
  * Installs to: components/charts/candlestick.tsx
  */
@@ -336,7 +336,7 @@ function Candlestick({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">

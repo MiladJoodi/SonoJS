@@ -98,7 +98,7 @@ export default function OtpVerificationForm({
               role="alert"
             >
               <MailIcon className="size-3.5 shrink-0" aria-hidden />
-              Code expired or incorrect — try again
+              Code expired or incorrect - try again
             </p>
           ) : null}
         </div>

@@ -49,7 +49,7 @@ export default function Stats({
             Numbers that earn trust.
           </h2>
           <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/55">
-            Ratings, reach, and outcomes — the scoreboard teams check before
+            Ratings, reach, and outcomes - the scoreboard teams check before
             they ship with us.
           </p>
         </div>

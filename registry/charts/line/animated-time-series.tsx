@@ -19,7 +19,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Animated Time Series — locked gallery chrome (navy × orange).
+ * Animated Time Series - locked gallery chrome (navy × orange).
  * Type-required sliding circular window over a longer dual-series year.
  * Metric header scrubber; pauses auto-advance while scrubbing / reduced-motion.
  * Installs to: components/charts/animated-time-series.tsx
@@ -52,7 +52,7 @@ const DEFAULT_TICK_MS = 800
 const AXIS_TICK_FILL =
   "color-mix(in oklab, var(--foreground) 58%, transparent)"
 
-/** Stable English year (12 months) — circular window slides over this. */
+/** Stable English year (12 months) - circular window slides over this. */
 const DEMO_SERIES: AnimatedTimeSeriesPoint[] = [
   { month: "2026-01-01", desktop: 300, mobile: 600 },
   { month: "2026-02-01", desktop: 295, mobile: 520 },
@@ -220,7 +220,7 @@ function AnimatedTimeSeries({
     ? formatFullMonthYear(active.month, locale)
     : ""
 
-  // Auto-advance — pause while scrubbing or when reduced-motion.
+  // Auto-advance - pause while scrubbing or when reduced-motion.
   React.useEffect(() => {
     if (reducedMotion || scrubbing || seriesLen === 0) return
     const id = window.setInterval(() => {
@@ -421,7 +421,7 @@ function AnimatedTimeSeries({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{monthLabel}</p>

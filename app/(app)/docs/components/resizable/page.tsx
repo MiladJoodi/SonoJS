@@ -101,26 +101,26 @@ export default async function ResizableDocsPage() {
               name: "orientation",
               type: '"horizontal" | "vertical"',
               defaultValue: '"horizontal"',
-              description: "On `ResizablePanelGroup` — resize axis.",
+              description: "On `ResizablePanelGroup` - resize axis.",
             },
             {
               name: "defaultSize",
               type: "number | string",
-              defaultValue: "—",
+              defaultValue: "-",
               description:
-                'On `ResizablePanel` — initial size (prefer `"50%"`; bare numbers are pixels).',
+                'On `ResizablePanel` - initial size (prefer `"50%"`; bare numbers are pixels).',
             },
             {
               name: "minSize",
               type: "number | string",
-              defaultValue: "—",
-              description: "On `ResizablePanel` — minimum size constraint.",
+              defaultValue: "-",
+              description: "On `ResizablePanel` - minimum size constraint.",
             },
             {
               name: "withHandle",
               type: "boolean",
               defaultValue: "false",
-              description: "On `ResizableHandle` — show a visible grip.",
+              description: "On `ResizableHandle` - show a visible grip.",
             },
           ]}
         />

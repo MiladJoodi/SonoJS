@@ -196,7 +196,7 @@ export default function ProductList({
             Top Categories
           </h2>
           <p className="mx-auto mt-3 max-w-md text-sm text-muted-foreground">
-            Pedestal pods — dim the stage on hover and lift a frosted info plate.
+            Pedestal pods - dim the stage on hover and lift a frosted info plate.
           </p>
         </div>
 

@@ -3,7 +3,7 @@
   "name": "access-denied-01",
   "type": "registry:block",
   "title": "access-denied-01",
-  "description": "Access denied gate — locked resource card, signed-in identity, request access and switch account.",
+  "description": "Access denied gate - locked resource card, signed-in identity, request access and switch account.",
   "access": "public",
   "dependencies": [
     "lucide-react"
@@ -38,6 +38,6 @@
       "target": "components/blocks/feedback-states/access-denied-01/access-denied.tsx"
     }
   ],
-  "version": "0.1.0+c9c3d2a86e47",
-  "generatedAt": "2026-11-03T21:57:48.548Z"
+  "version": "0.1.0+3fe3a15cbaf2",
+  "generatedAt": "2026-11-04T11:52:24.655Z"
 }

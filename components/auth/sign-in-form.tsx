@@ -179,7 +179,7 @@ export function SignInForm({
 
   const handleOAuth = async (strategy: "oauth_google" | "oauth_github") => {
     setOauthError(null)
-    // Full-page redirect — reliable with Google/GitHub (no popup / COOP).
+    // Full-page redirect - reliable with Google/GitHub (no popup / COOP).
     const returnTo = rememberAuthReturnPath()
     const { error } = await signIn.sso({
       strategy,

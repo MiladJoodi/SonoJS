@@ -40,7 +40,7 @@ const BUSY: Busy[] = [
   { personId: "tc", dayOffset: 4, start: "15:00", end: "17:00", label: "Ship" },
 ]
 
-/** Team week — readable people × day chip matrix. */
+/** Team week - readable people × day chip matrix. */
 export default function Calendar05() {
   const [anchor, setAnchor] = React.useState(() => new Date())
   const weekStart = startOfWeek(anchor, { weekStartsOn: 1 })

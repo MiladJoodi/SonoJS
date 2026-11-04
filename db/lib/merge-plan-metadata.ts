@@ -1,4 +1,4 @@
-/** Pure merge helper — preserves unrelated Clerk publicMetadata keys. */
+/** Pure merge helper - preserves unrelated Clerk publicMetadata keys. */
 export function mergePlanPublicMetadata(
   existing: Record<string, unknown> | null | undefined,
   planFields: {

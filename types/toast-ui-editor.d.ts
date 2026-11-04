@@ -1,1 +1,1 @@
-/* Toast UI Editor removed — Markdown tool uses @mdxeditor/editor. */
+/* Toast UI Editor removed - Markdown tool uses @mdxeditor/editor. */

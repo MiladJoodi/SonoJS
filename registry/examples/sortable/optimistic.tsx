@@ -65,7 +65,7 @@ export function SortableOptimistic() {
           `Pinned "${moved.title}" at step ${meta.overIndex + 1}`,
         error: () => {
           setItems(previous)
-          return "Save failed — order restored"
+          return "Save failed - order restored"
         },
       }
     )

@@ -69,7 +69,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         {children}
-        {/* Required — without this, toast() shows nothing */}
+        {/* Required - without this, toast() shows nothing */}
         <Toaster />
       </body>
     </html>
@@ -106,7 +106,7 @@ export default async function SonnerDocsPage() {
           <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
             Toaster
           </code>{" "}
-          once in the root layout — without it,{" "}
+          once in the root layout - without it,{" "}
           <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
             toast()
           </code>{" "}
@@ -193,28 +193,28 @@ export default async function SonnerDocsPage() {
               name: "theme",
               type: '"light" | "dark" | "system"',
               defaultValue: "from next-themes",
-              description: "On `Toaster` — color scheme for toast chrome.",
+              description: "On `Toaster` - color scheme for toast chrome.",
             },
             {
               name: "dir",
               type: '"ltr" | "rtl"',
               defaultValue: "inherited",
               description:
-                "On `Toaster` — writing direction. Defaults from `useDirection`.",
+                "On `Toaster` - writing direction. Defaults from `useDirection`.",
             },
             {
               name: "position",
               type: "string",
               defaultValue: '"bottom-right"',
               description:
-                'On `Toaster` or toast options — e.g. `"top-center"`, `"bottom-left"`.',
+                'On `Toaster` or toast options - e.g. `"top-center"`, `"bottom-left"`.',
             },
             {
               name: "toast()",
               type: "(message, options?) => string | number",
-              defaultValue: "—",
+              defaultValue: "-",
               description:
-                "Imperative API from `sonner` — also `toast.success`, `.error`, `.promise`, etc.",
+                "Imperative API from `sonner` - also `toast.success`, `.error`, `.promise`, etc.",
             },
           ]}
         />

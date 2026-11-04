@@ -11,7 +11,7 @@ export const OG_IMAGE = {
   width: 1200,
   height: 630,
   type: "image/png",
-  alt: "SonoJS — React components, blocks, charts, and tools",
+  alt: "SonoJS - React components, blocks, charts, and tools",
 } as const
 
 function shareImages(alt?: string): NonNullable<Metadata["openGraph"]>["images"] {
@@ -135,7 +135,7 @@ export function noindexMetadata({
 }): Metadata {
   const desc =
     description ??
-    `${title} preview — not indexed. See the SonoJS docs and blocks catalogs.`
+    `${title} preview - not indexed. See the SonoJS docs and blocks catalogs.`
   if (path) {
     return pageMetadata({
       title,
@@ -194,7 +194,7 @@ export function chartViewMetadata(
 ): Metadata {
   return pageMetadata({
     title: `${title} chart`,
-    description: `Interactive ${title} chart demo for SonoJS — preview, install command, and source.`,
+    description: `Interactive ${title} chart demo for SonoJS - preview, install command, and source.`,
     path: `/charts/view/${id}`,
     index,
   })
@@ -219,7 +219,7 @@ export function cursorViewMetadata(
 ): Metadata {
   return pageMetadata({
     title: `${title} cursor`,
-    description: `Interactive ${title} cursor effect for SonoJS — preview, install command, and source.`,
+    description: `Interactive ${title} cursor effect for SonoJS - preview, install command, and source.`,
     path: `/cursors/view/${id}`,
     index,
   })

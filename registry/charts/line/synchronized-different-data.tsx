@@ -19,7 +19,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Synchronized Different Data — locked gallery chrome (navy × orange).
+ * Synchronized Different Data - locked gallery chrome (navy × orange).
  * Two syncId panels with different densities; `syncMethod` snaps within 2 days.
  * Metric header scrubber; RTL-aware axes.
  * Installs to: components/charts/synchronized-different-data.tsx
@@ -176,7 +176,7 @@ function formatCompact(value: number, locale: string) {
 
 function SynchronizedDifferentData({
   title = "Daily Sessions – Jan 2026",
-  subtitle = "Synced panels with different densities — snap within two days.",
+  subtitle = "Synced panels with different densities - snap within two days.",
   dailyData = DEMO_DAILY,
   sampledData = DEMO_SAMPLED,
   className,
@@ -545,7 +545,7 @@ function SynchronizedDifferentData({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{dateLabel}</p>

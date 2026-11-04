@@ -3,7 +3,7 @@
   "name": "data-export-01",
   "type": "registry:block",
   "title": "data-export-01",
-  "description": "Full export panel — format cards, collapsible field groups, progress, and success (RTL/LTR).",
+  "description": "Full export panel - format cards, collapsible field groups, progress, and success (RTL/LTR).",
   "access": "public",
   "dependencies": [
     "lucide-react"
@@ -41,6 +41,6 @@
       "target": "components/blocks/files-media/data-export-01/data-export.tsx"
     }
   ],
-  "version": "0.1.0+c9c3d2a86e47",
-  "generatedAt": "2026-11-03T21:57:48.548Z"
+  "version": "0.1.0+3fe3a15cbaf2",
+  "generatedAt": "2026-11-04T11:52:24.655Z"
 }

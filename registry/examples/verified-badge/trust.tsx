@@ -31,7 +31,7 @@ export function VerifiedBadgeTrust() {
           <ItemContent>
             <ItemTitle>Identity verified</ItemTitle>
             <ItemDescription>
-              Government ID checked — trust strip for checkout or onboarding.
+              Government ID checked - trust strip for checkout or onboarding.
             </ItemDescription>
           </ItemContent>
         </Item>

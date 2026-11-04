@@ -25,7 +25,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Scatter Chart With Cells — per-point color + symbol via `shape` (Cell is deprecated).
+ * Scatter Chart With Cells - per-point color + symbol via `shape` (Cell is deprecated).
  * Teaching delta: `Symbols` + `--chart-1…5` instead of uniform fill.
  * Locked chrome + metric scrubber. Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/scatter-chart-with-cells.tsx
@@ -77,7 +77,7 @@ const SYMBOL_TYPES: ReadonlyArray<SymbolType> = [
 
 type FlatPoint = ScatterChartWithCellsPoint & { id: string; index: number }
 
-/** Campus sample — each point gets a unique chart token + symbol. */
+/** Campus sample - each point gets a unique chart token + symbol. */
 const DEMO_DATA: ScatterChartWithCellsPoint[] = [
   { name: "Alpha", x: 158, y: 52 },
   { name: "Beta", x: 162, y: 68 },
@@ -432,7 +432,7 @@ function ScatterChartWithCells({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{caption}</p>

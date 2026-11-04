@@ -16,7 +16,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Radar Lines Only — dual Store×Online stroke-only polygons
+ * Radar Lines Only - dual Store×Online stroke-only polygons
  * (`fillOpacity={0}`, `PolarGrid radialLines={false}`). Locked metric scrub.
  * Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/radar-lines-only.tsx
@@ -82,7 +82,7 @@ function pointTotal(point: RadarLinesOnlyPoint) {
 
 function RadarLinesOnly({
   title = "Radar lines only",
-  subtitle = "Stroke-only dual series — no fill, polar grid without radial spokes.",
+  subtitle = "Stroke-only dual series - no fill, polar grid without radial spokes.",
   data = DEMO_DATA,
   className,
   plotDir,
@@ -252,7 +252,7 @@ function RadarLinesOnly({
                 {formatPct(deltaPct)}
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{caption}</p>

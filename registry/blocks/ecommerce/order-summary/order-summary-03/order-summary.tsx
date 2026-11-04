@@ -14,7 +14,7 @@ function assetSrc(asset: string | { src: string }) {
   return typeof asset === "string" ? asset : asset.src
 }
 
-/** Commerce success — celebration masthead, meta chips, sticky track card. */
+/** Commerce success - celebration masthead, meta chips, sticky track card. */
 const ITEMS = [
   {
     id: 1,

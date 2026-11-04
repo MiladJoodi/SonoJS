@@ -56,7 +56,7 @@ export default async function FileDiffDocsPage() {
         pathname="/docs/components/file-diff"
         description={
           <p className="leading-relaxed text-muted-foreground">
-            A collapsible code diff that shows added and removed lines —
+            A collapsible code diff that shows added and removed lines -
             streaming apply state, syntax tokens via{" "}
             <code className="rounded bg-muted px-1 py-0.5 text-[0.85em]">
               agent-code
@@ -84,13 +84,13 @@ export default async function FileDiffDocsPage() {
             {
               name: "file",
               type: "ReactNode",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Filename shown in the disclosure trigger.",
             },
             {
               name: "lines",
               type: "FileDiffLine[]",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Diff rows with type, line numbers, and content.",
             },
             {
@@ -120,7 +120,7 @@ export default async function FileDiffDocsPage() {
             {
               name: "copyText / onCopy",
               type: "string / () => void",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Enables the copy control in the panel footer.",
             },
             {
@@ -132,7 +132,7 @@ export default async function FileDiffDocsPage() {
             {
               name: "className",
               type: "string",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Optional class names on the root.",
             },
           ]}

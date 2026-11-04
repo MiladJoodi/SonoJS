@@ -22,7 +22,7 @@ export default function Banner({
       <p className="inline-flex flex-wrap items-center justify-center gap-2 px-4">
         <SparklesIcon className="size-3.5 text-primary" aria-hidden />
         <span>
-          Agent mode is live — attach context, review the diff, ship the PR
+          Agent mode is live - attach context, review the diff, ship the PR
         </span>
         <a
           href="#"

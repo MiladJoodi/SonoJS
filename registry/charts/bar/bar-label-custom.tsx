@@ -26,7 +26,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Bar Label Custom (classic) — locked chrome; horizontal `layout="vertical"`
+ * Bar Label Custom (classic) - locked chrome; horizontal `layout="vertical"`
  * with always-on tip value labels (neutral ink). Metric header scrubber.
  * Installs to: components/charts/bar-label-custom.tsx
  */
@@ -447,7 +447,7 @@ function BarLabelCustom({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{monthLabel}</p>
@@ -554,7 +554,7 @@ function BarLabelCustom({
               fill="var(--color-store)"
               radius={BAR_RADIUS}
               maxBarSize={barSize}
-              // Always-on tip labels — enter animation makes values blink on load.
+              // Always-on tip labels - enter animation makes values blink on load.
               isAnimationActive={false}
             >
               {data.map((_, index) => (

@@ -66,7 +66,7 @@ const INITIAL_COMMENTS: Comment[] = [
     role: "Maintainer",
     time: "2 hours ago",
     content:
-      "This is a solid approach for accessible dialogs. Also consider `inert` on the rest of the page while the modal is open — it’s supported in modern browsers now.",
+      "This is a solid approach for accessible dialogs. Also consider `inert` on the rest of the page while the modal is open - it’s supported in modern browsers now.",
     likes: 12,
     liked: false,
     replies: [
@@ -77,7 +77,7 @@ const INITIAL_COMMENTS: Comment[] = [
         avatar: assetSrc(alexImg),
         time: "1 hour ago",
         content:
-          "Great point — we added `inert` in v1.2 alongside the focus trap so screen readers stay inside the dialog.",
+          "Great point - we added `inert` in v1.2 alongside the focus trap so screen readers stay inside the dialog.",
         likes: 5,
         liked: false,
       },
@@ -113,7 +113,7 @@ const INITIAL_COMMENTS: Comment[] = [
     avatar: assetSrc(alexImg),
     time: "6 hours ago",
     content:
-      "Would love a follow-up on responsive tokens — should spacing scale at breakpoints, or should components own that?",
+      "Would love a follow-up on responsive tokens - should spacing scale at breakpoints, or should components own that?",
     likes: 15,
     liked: false,
     replies: [

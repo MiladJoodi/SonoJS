@@ -3,7 +3,7 @@
   "name": "media-player-01",
   "type": "registry:block",
   "title": "media-player-01",
-  "description": "Feature-dense watch player — scrubber, ±10s, volume, captions, speed/quality menu, fullscreen (RTL/LTR).",
+  "description": "Feature-dense watch player - scrubber, ±10s, volume, captions, speed/quality menu, fullscreen (RTL/LTR).",
   "access": "public",
   "dependencies": [
     "lucide-react"
@@ -51,6 +51,6 @@
       "target": "components/blocks/files-media/media-player-01/media/flower.mp4"
     }
   ],
-  "version": "0.1.0+c9c3d2a86e47",
-  "generatedAt": "2026-11-03T21:57:48.548Z"
+  "version": "0.1.0+3fe3a15cbaf2",
+  "generatedAt": "2026-11-04T11:52:24.655Z"
 }

@@ -26,7 +26,7 @@ async function writeOg() {
   const meta = await sharp(demoPath).metadata()
   if (meta.width !== 1200 || meta.height !== 807) {
     console.warn(
-      `demo.png is ${meta.width}×${meta.height}; expected 1200×807 — continuing with contain`
+      `demo.png is ${meta.width}×${meta.height}; expected 1200×807 - continuing with contain`
     )
   }
 

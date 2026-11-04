@@ -51,7 +51,7 @@ type User = {
 const USERS: User[] = [
   { id: "u1", name: "Ava Chen", email: "ava@northwind.dev", role: "admin", status: "active", lastActive: "Mar 28, 2026" },
   { id: "u2", name: "Ben Ortiz", email: "ben@northwind.dev", role: "editor", status: "active", lastActive: "Mar 27, 2026" },
-  { id: "u3", name: "Carla Moss", email: "carla@acme.co", role: "viewer", status: "invited", lastActive: "—" },
+  { id: "u3", name: "Carla Moss", email: "carla@acme.co", role: "viewer", status: "invited", lastActive: "-" },
   { id: "u4", name: "Elena Voss", email: "elena@harbor.health", role: "admin", status: "suspended", lastActive: "Mar 10, 2026" },
 ]
 
@@ -162,7 +162,7 @@ export default function TableToolbar01({
       email: `new${rows.length + 1}@northwind.dev`,
       role: "viewer",
       status: "invited",
-      lastActive: "—",
+      lastActive: "-",
     }
     setRows((prev) => [next, ...prev])
     setAddedNote(`Invited ${next.email}`)

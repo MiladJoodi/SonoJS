@@ -244,7 +244,7 @@ export default function UsageBasedBilling({
                       )}
                     >
                       {quota.tone === "danger"
-                        ? "Over limit — overage charges apply this period."
+                        ? "Over limit - overage charges apply this period."
                         : quota.usedLabel}
                     </p>
                   </div>

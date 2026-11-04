@@ -68,7 +68,7 @@ function settledSteps(file: string): StepState[] {
 
 export function HeroShowcase({ className }: { className?: string }) {
   const firstPrompt = PROMPTS[0]!
-  // Mount already settled — avoids empty→animate→paint that feels like a double load.
+  // Mount already settled - avoids empty→animate→paint that feels like a double load.
   const [active, setActive] = React.useState<ShowcaseDemoId>(firstPrompt.id)
   const [query, setQuery] = React.useState(firstPrompt.text)
   const [steps, setSteps] = React.useState<StepState[]>(() =>
@@ -112,7 +112,7 @@ export function HeroShowcase({ className }: { className?: string }) {
         className
       )}
     >
-      {/* Background shell only — fades at the bottom; foreground cards stay sharp */}
+      {/* Background shell only - fades at the bottom; foreground cards stay sharp */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 rounded-2xl border border-border/70 bg-muted/50 sm:rounded-3xl dark:bg-muted/30"

@@ -299,7 +299,7 @@ export default function Portfolio({
             </h1>
             <p className="p03-muted max-w-md text-sm leading-relaxed font-medium">
               A small studio shaping product interfaces. Pick a project from the
-              orbit — the featured case follows your cursor.
+              orbit - the featured case follows your cursor.
             </p>
 
             <div className="flex flex-col gap-2" aria-live="polite">

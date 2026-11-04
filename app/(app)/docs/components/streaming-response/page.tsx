@@ -64,7 +64,7 @@ export default async function StreamingResponseDocsPage() {
         pathname="/docs/components/streaming-response"
         description={
           <p className="leading-relaxed text-muted-foreground">
-            A streaming AI response surface with sources and feedback actions —
+            A streaming AI response surface with sources and feedback actions -
             copy, retry, thumbs, and a citations disclosure via{" "}
             <code className="rounded bg-muted px-1 py-0.5 text-[0.85em]">
               agent-disclosure
@@ -96,7 +96,7 @@ export default async function StreamingResponseDocsPage() {
             {
               name: "children",
               type: "ReactNode",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Response body (text or rendered markdown).",
             },
             {
@@ -108,13 +108,13 @@ export default async function StreamingResponseDocsPage() {
             {
               name: "copyText / onCopy",
               type: "string / () => void",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Enables the copy action.",
             },
             {
               name: "onRetry",
               type: "() => void",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Shows a retry control when provided.",
             },
             {
@@ -144,7 +144,7 @@ export default async function StreamingResponseDocsPage() {
             {
               name: "className",
               type: "string",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Optional class names on the root.",
             },
           ]}

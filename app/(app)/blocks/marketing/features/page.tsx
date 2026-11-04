@@ -43,7 +43,7 @@ export default function BlockFeaturesDocsPage() {
       <BlocksPageHeader
         title="Features"
         pathname="/blocks/marketing/features"
-        description="Feature grids for marketing pages — icon cards with title, description, and learn-more links."
+        description="Feature grids for marketing pages - icon cards with title, description, and learn-more links."
       />
 
       <div className="flex flex-col gap-8">

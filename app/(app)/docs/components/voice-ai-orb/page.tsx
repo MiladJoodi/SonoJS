@@ -23,14 +23,14 @@ const exampleDefs = [
     name: "voice-ai-orb-reasoning",
     title: "Reasoning",
     description:
-      'Thinking state with a spin ring — `defaultState="reasoning"`.',
+      'Thinking state with a spin ring - `defaultState="reasoning"`.',
     npmRequires: ["lucide-react"],
   },
   {
     name: "voice-ai-orb-speaking",
     title: "Speaking",
     description:
-      'TTS playback — larger core + taller EQ bars via `defaultState="speaking"`.',
+      'TTS playback - larger core + taller EQ bars via `defaultState="speaking"`.',
     npmRequires: ["lucide-react"],
   },
 ]
@@ -56,7 +56,7 @@ export default async function VoiceAiOrbDocsPage() {
         pathname="/docs/components/voice-ai-orb"
         description={
           <p className="leading-relaxed text-muted-foreground">
-            A voice-agent status orb for listening, reasoning, and speaking —
+            A voice-agent status orb for listening, reasoning, and speaking -
             with EQ bars, mute, and a short transcript.
           </p>
         }
@@ -114,7 +114,7 @@ export default async function VoiceAiOrbDocsPage() {
             {
               name: "className",
               type: "string",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Merge classes on the root.",
             },
           ]}

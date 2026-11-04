@@ -18,7 +18,7 @@ const LINES = [
   { t: 0, text: "City lights in the rearview glass" },
   { t: 1.2, text: "We chase the bass until the morning" },
   { t: 2.4, text: "Soft neon on the boulevard" },
-  { t: 3.6, text: "Sing it louder — don't stop now" },
+  { t: 3.6, text: "Sing it louder - don't stop now" },
   { t: 4.8, text: "Heartbeat sync to the downbeat" },
   { t: 6.0, text: "Hold my hand through the chorus" },
   { t: 7.2, text: "Fade the night into gold" },

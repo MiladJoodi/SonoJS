@@ -113,7 +113,7 @@ function AccessBadge({ access }: { access: string }) {
   )
 }
 
-/** Shared team folder — member strip + ACL badges. */
+/** Shared team folder - member strip + ACL badges. */
 export default function FileManager({
   className,
   ...props

@@ -28,7 +28,7 @@ export default function BlockProductFilterDocsPage() {
       <BlocksPageHeader
         title="Product Filter"
         pathname="/blocks/ecommerce/product-filter"
-        description="Catalog filter rails and drawers — brand search, sizes, price range, color swatches, and apply flows."
+        description="Catalog filter rails and drawers - brand search, sizes, price range, color swatches, and apply flows."
       />
 
       <div className="flex flex-col gap-8">

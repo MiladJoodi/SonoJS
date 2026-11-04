@@ -26,7 +26,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Monthly Savings — locked gallery chrome (navy × orange).
+ * Monthly Savings - locked gallery chrome (navy × orange).
  * Channel tabs + compound monthly balance bars; type-required rounded-top
  * `VerticalBar` shape; metric scrubber.
  * Installs to: components/charts/monthly-savings.tsx
@@ -504,7 +504,7 @@ function MonthlySavings({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">
@@ -568,7 +568,7 @@ function MonthlySavings({
               <span className="font-medium text-foreground">
                 {formatMoney(monthlyDeposit, locale)}
               </span>{" "}
-              — compound balance across the year
+              - compound balance across the year
             </p>
           </section>
 

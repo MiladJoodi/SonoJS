@@ -38,7 +38,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Candlestick Line — locked gallery chrome + type-required SMA overlay.
+ * Candlestick Line - locked gallery chrome + type-required SMA overlay.
  * OHLC candles with monotone moving-average line (`--chart-2`).
  * Installs to: components/charts/candlestick-line.tsx
  */
@@ -385,7 +385,7 @@ function CandlestickLine({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">

@@ -35,7 +35,7 @@ const REVIEWS = [
     rating: 4,
     date: "3 days ago",
     comment:
-      "Had a few questions before ordering and the customer service team was amazing—super responsive and knowledgeable. It really made a difference!",
+      "Had a few questions before ordering and the customer service team was amazing-super responsive and knowledgeable. It really made a difference!",
   },
   {
     id: 3,

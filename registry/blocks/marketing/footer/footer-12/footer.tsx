@@ -101,7 +101,7 @@ export default function Footer({
           <div className="mx-auto max-w-md text-center lg:ms-0 lg:me-0 lg:max-w-none lg:text-start">
             <p className="text-base leading-relaxed text-muted-foreground">
               SonoJS ships the components, blocks, and patterns you install
-              into your own app — kept in your repo, ready for both writing
+              into your own app - kept in your repo, ready for both writing
               directions.
             </p>
             <ul className="mt-6 flex flex-wrap justify-center gap-2 lg:justify-start">

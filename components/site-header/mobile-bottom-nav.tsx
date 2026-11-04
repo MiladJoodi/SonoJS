@@ -5,8 +5,10 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import {
   BookOpenIcon,
+  BoxIcon,
   ChartAreaIcon,
   EllipsisIcon,
+  GalleryHorizontalEndIcon,
   HouseIcon,
   LayoutGridIcon,
   LayoutTemplateIcon,
@@ -49,6 +51,8 @@ const MORE_ICONS: Record<string, LucideIcon> = {
   "/docs": BookOpenIcon,
   "/docs/mcp": PlugIcon,
   "/cursors": MousePointer2Icon,
+  "/3d": BoxIcon,
+  "/carousels": GalleryHorizontalEndIcon,
   "/tools": WrenchIcon,
   "https://icons.sonojs.com": ShapesIcon,
 }

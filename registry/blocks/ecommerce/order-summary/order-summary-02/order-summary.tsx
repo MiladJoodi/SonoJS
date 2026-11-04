@@ -12,7 +12,7 @@ function assetSrc(asset: string | { src: string }) {
   return typeof asset === "string" ? asset : asset.src
 }
 
-/** Fulfillment desk — wide sheet with per-line status chips and pipeline. */
+/** Fulfillment desk - wide sheet with per-line status chips and pipeline. */
 const ITEMS = [
   {
     id: 1,

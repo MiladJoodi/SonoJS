@@ -146,34 +146,34 @@ export default async function DropdownMenuDocsPage() {
               type: '"start" | "center" | "end"',
               defaultValue: '"center"',
               description:
-                "On DropdownMenuContent — prefer start/end over left/right assumptions.",
+                "On DropdownMenuContent - prefer start/end over left/right assumptions.",
             },
             {
               name: "inset",
               type: "boolean",
-              defaultValue: "—",
+              defaultValue: "-",
               description:
-                "On Item / SubTrigger / Label / Checkbox / Radio — indent to align with icons.",
+                "On Item / SubTrigger / Label / Checkbox / Radio - indent to align with icons.",
             },
             {
               name: "variant",
               type: '"default" | "destructive"',
               defaultValue: '"default"',
               description:
-                "On DropdownMenuItem — destructive styles for deletes.",
+                "On DropdownMenuItem - destructive styles for deletes.",
             },
             {
               name: "checked",
               type: "boolean",
-              defaultValue: "—",
-              description: "On DropdownMenuCheckboxItem — checked state.",
+              defaultValue: "-",
+              description: "On DropdownMenuCheckboxItem - checked state.",
             },
             {
               name: "asChild",
               type: "boolean",
               defaultValue: "false",
               description:
-                "On DropdownMenuTrigger — merge props into the child (e.g. Button).",
+                "On DropdownMenuTrigger - merge props into the child (e.g. Button).",
             },
           ]}
         />

@@ -7,7 +7,7 @@ import { LoadingRing } from "@/components/sono-loader"
 export const metadata = pageMetadata({
   title: "Marketplace",
   description:
-    "Browse SonoJS templates and full projects — filter by stack, preview live demos, and download source kits.",
+    "Browse SonoJS templates and full projects - filter by stack, preview live demos, and download source kits.",
   path: "/marketplace",
 })
 

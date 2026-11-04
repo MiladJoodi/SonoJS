@@ -74,7 +74,7 @@ function MenubarContent({
   sideOffset = 8,
   ...props
 }: React.ComponentProps<typeof MenubarPrimitive.Content>) {
-  // Portal under <body> — HTML dir for CSS; Root `dir` covers Radix positioning.
+  // Portal under <body> - HTML dir for CSS; Root `dir` covers Radix positioning.
   const { dir } = useDirection()
 
   return (

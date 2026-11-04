@@ -3,7 +3,7 @@
   "name": "empty-state-09",
   "type": "registry:block",
   "title": "empty-state-09",
-  "description": "First-run onboarding — checklist steps and start setup CTA.",
+  "description": "First-run onboarding - checklist steps and start setup CTA.",
   "access": "public",
   "dependencies": [
     "lucide-react"
@@ -38,6 +38,6 @@
       "target": "components/blocks/feedback-states/empty-state-09/empty-state.tsx"
     }
   ],
-  "version": "0.1.0+c9c3d2a86e47",
-  "generatedAt": "2026-11-03T21:57:48.548Z"
+  "version": "0.1.0+3fe3a15cbaf2",
+  "generatedAt": "2026-11-04T11:52:24.655Z"
 }

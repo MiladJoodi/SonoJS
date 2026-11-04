@@ -6,7 +6,7 @@ import { headers as nextHeaders } from "next/headers"
 /**
  * `auth()` requires Clerk middleware headers (`x-clerk-auth-status`).
  * On Next.js 16 `proxy.ts` those headers sometimes never reach RSC even
- * though the proxy ran — auth() then throws.
+ * though the proxy ran - auth() then throws.
  *
  * Fall back to authenticating the Cookie header directly so pages stay up.
  */
@@ -36,7 +36,7 @@ export async function getAuthUserId(): Promise<string | null> {
     if (state.status !== "signed-in") return null
     return state.toAuth().userId ?? null
   } catch (err) {
-    // Static/prerender contexts may reject headers()/cookies — treat as guest.
+    // Static/prerender contexts may reject headers()/cookies - treat as guest.
     console.error("getAuthUserId: cookie fallback failed", err)
     return null
   }

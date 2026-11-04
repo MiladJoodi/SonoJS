@@ -24,7 +24,7 @@ export default function Banner({
         aria-hidden
       />
       <span>
-        Free express shipping over $99 — code{" "}
+        Free express shipping over $99 - code{" "}
         <span
           dir="ltr"
           className="rounded bg-white/10 px-1.5 py-0.5 font-mono text-[11px] font-semibold tracking-wide text-amber-300"

@@ -106,7 +106,7 @@ export default async function DatePickerDocsPage() {
           <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
             Calendar
           </code>
-          . There is no separate Date Picker root — install both pieces and
+          . There is no separate Date Picker root - install both pieces and
           wire them together.
         </p>
         }

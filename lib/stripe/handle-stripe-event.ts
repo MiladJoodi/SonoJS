@@ -25,7 +25,7 @@ import type { StripeWebhookEvent } from "@/lib/stripe/verify-webhook"
  * `invoice.payment_action_required` as pending must NEVER grant or extend Pro.
  *
  * `invoice.payment_failed` must NOT force-cancel a subscription from the
- * invoice payload — access follows reconciled Stripe subscription status.
+ * invoice payload - access follows reconciled Stripe subscription status.
  *
  * Unlinked invoices (unknown customer, no clerkUserId): ack without payment
  * row or Pro grant; pipeline stores an audit note on the processed event.
@@ -42,7 +42,7 @@ function webhookLog(
   stage: string,
   fields: Record<string, string | boolean | number | null | undefined>
 ): void {
-  // Safe: no secrets, no full PII — ids and flags only
+  // Safe: no secrets, no full PII - ids and flags only
   console.info(
     `[stripe-webhook] ${stage}`,
     JSON.stringify(fields)
@@ -248,7 +248,7 @@ async function handleInvoiceEvent(
 
   /**
    * Pending (payment_action_required) records a payment row only.
-   * It must not grant Pro — Pro comes solely from reconciled subscription.
+   * It must not grant Pro - Pro comes solely from reconciled subscription.
    * upsertPayment refuses succeeded → pending downgrades.
    */
   webhookLog("upsert_payment", {
@@ -270,7 +270,7 @@ async function handleInvoiceEvent(
     lastStripeEventCreated: event.created,
   })
 
-  // Always reconcile live subscription when present — never invent cancel
+  // Always reconcile live subscription when present - never invent cancel
   // from invoice.payment_failed alone.
   if (stripeSubscriptionId) {
     webhookLog("reconcile", {

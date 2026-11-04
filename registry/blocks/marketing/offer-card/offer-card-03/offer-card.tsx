@@ -24,7 +24,7 @@ const FEATURES = [
   "RTL from day one",
 ]
 
-/** Glassmorphic Aura tier — default meteor speed 0.9. */
+/** Glassmorphic Aura tier - default meteor speed 0.9. */
 export default function OfferCard({
   className,
   speed = 0.9,
@@ -96,7 +96,7 @@ export default function OfferCard({
               <span className="offer-badge-shine font-black">Hard polish.</span>
             </h3>
             <p className="mt-2 text-[11px] leading-relaxed text-muted-foreground">
-              Meta-ready surfaces for pricing heroes — frosted glass, dual orbs,
+              Meta-ready surfaces for pricing heroes - frosted glass, dual orbs,
               and a violet meteor that never sleeps.
             </p>
 

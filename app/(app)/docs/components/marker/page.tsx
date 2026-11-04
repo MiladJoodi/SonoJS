@@ -41,7 +41,7 @@ const exampleDefs = [
     name: "marker-separator",
     title: "Separator",
     description:
-      'Use `variant="separator"` for labeled dividers — do not set `role="separator"`.',
+      'Use `variant="separator"` for labeled dividers - do not set `role="separator"`.',
   },
   {
     name: "marker-border",
@@ -90,7 +90,7 @@ export default async function MarkerDocsPage() {
         pathname="/docs/components/marker"
         description={
           <p className="leading-relaxed text-muted-foreground">
-          Inline status, system notes, bordered rows, and labeled separators —
+          Inline status, system notes, bordered rows, and labeled separators -
           useful in chat and agent threads. Presentational by default; set{" "}
           <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
             role=&quot;status&quot;
@@ -139,13 +139,13 @@ export default async function MarkerDocsPage() {
             {
               name: "role",
               type: "string",
-              defaultValue: "—",
+              defaultValue: "-",
               description: 'Use `"status"` for streaming / progress markers.',
             },
             {
               name: "className",
               type: "string",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Merge extra Tailwind classes on any part.",
             },
           ]}

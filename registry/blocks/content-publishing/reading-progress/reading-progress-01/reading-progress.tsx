@@ -22,7 +22,7 @@ const ARTICLE = {
   sections: [
     {
       heading: "Introduction",
-      body: "Modern front-end development demands more than just getting things to work — it requires systems that scale, components that compose, and designs that adapt. SonoJS is built to satisfy all three. In this guide, we walk through a full-featured interface, from project setup to production.",
+      body: "Modern front-end development demands more than just getting things to work - it requires systems that scale, components that compose, and designs that adapt. SonoJS is built to satisfy all three. In this guide, we walk through a full-featured interface, from project setup to production.",
     },
     {
       heading: "Setting Up the Project",
@@ -38,7 +38,7 @@ const ARTICLE = {
     },
     {
       heading: "Accessibility by Default",
-      body: "Interactive SonoJS components ship with correct ARIA attributes, keyboard navigation, and focus management. Overlays handle focus trapping. Your job is semantic HTML structure — use main, nav, section, and header landmarks appropriately.",
+      body: "Interactive SonoJS components ship with correct ARIA attributes, keyboard navigation, and focus management. Overlays handle focus trapping. Your job is semantic HTML structure - use main, nav, section, and header landmarks appropriately.",
     },
     {
       heading: "Production Checklist",
@@ -303,7 +303,7 @@ export default function ReadingProgress({
           </div>
           {progress >= 95 ? (
             <p className="mt-2 text-xs font-medium text-emerald-700 dark:text-emerald-300">
-              Article complete — thanks for reading.
+              Article complete - thanks for reading.
             </p>
           ) : null}
         </div>

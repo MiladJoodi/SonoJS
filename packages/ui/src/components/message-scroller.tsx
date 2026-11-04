@@ -368,7 +368,7 @@ function MessageScrollerProvider({
  })
  }
 
- // Do not scroll to scrollAnchor on (re)register — context identity changes
+ // Do not scroll to scrollAnchor on (re)register - context identity changes
  // remount effects and would yank the viewport while the user is reading up.
 
  requestAnimationFrame(() => {

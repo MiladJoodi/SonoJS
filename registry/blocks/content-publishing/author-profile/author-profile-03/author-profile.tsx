@@ -28,7 +28,7 @@ const AUTHOR = {
   initials: "RS",
   role: "Staff Engineer",
   company: "Orbit",
-  bio: "Passionate about developer tooling and performance. Writes about Rust, React, and bundle sizes — with a bias toward measurable wins.",
+  bio: "Passionate about developer tooling and performance. Writes about Rust, React, and bundle sizes - with a bias toward measurable wins.",
   followers: 8700,
   posts: 89,
   portrait: assetSrc(portrait02),

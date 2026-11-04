@@ -18,7 +18,7 @@ const STEPS = [
     label: "Email in",
     hint: "No password yet",
     title: "What’s your work email?",
-    body: "We’ll send a one-time code — then lock the account to this device.",
+    body: "We’ll send a one-time code - then lock the account to this device.",
   },
   {
     id: 2,
@@ -39,7 +39,7 @@ const STEPS = [
     label: "You’re in",
     hint: "Workspace ready",
     title: "Welcome to North",
-    body: "Signed in with a passkey. Next visit is one tap — no reset links.",
+    body: "Signed in with a passkey. Next visit is one tap - no reset links.",
   },
 ] as const
 
@@ -192,7 +192,7 @@ export default function HowItWorks({
                       Send code
                     </Button>
                     <p className="text-center text-[11px] text-muted-foreground">
-                      No password on this screen — on purpose.
+                      No password on this screen - on purpose.
                     </p>
                   </div>
                 ) : null}

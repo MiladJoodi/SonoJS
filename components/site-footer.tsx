@@ -10,6 +10,7 @@ const footerLinks = [
   { href: "/docs/components", label: "Components" },
   { href: "/blocks", label: "Blocks" },
   { href: "/charts", label: "Charts" },
+  { href: "/3d", label: "3D" },
 ] as const
 
 export function SiteFooter() {
@@ -44,7 +45,7 @@ export function SiteFooter() {
           </a>
         </nav>
         <p className="text-center">
-          {siteConfig.name} — component library docs
+          {siteConfig.name} - component library docs
         </p>
       </div>
     </footer>

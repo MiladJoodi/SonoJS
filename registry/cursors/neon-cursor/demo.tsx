@@ -13,7 +13,7 @@ export default function NeonCursorDemo() {
       <NeonCursor containerRef={stageRef} />
       <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
         <p className="pointer-events-none text-sm text-zinc-300">
-          Spring neon — click to pulse
+          Spring neon - click to pulse
         </p>
         <button
           type="button"

@@ -124,7 +124,7 @@ export const registry = {
       type: "registry:ui" as const,
       title: "Chart",
       description:
-        "Recharts helpers — ChartContainer, tooltip, legend, and theme CSS variables.",
+        "Recharts helpers - ChartContainer, tooltip, legend, and theme CSS variables.",
     },
     {
       name: "checkbox",
@@ -192,7 +192,7 @@ export const registry = {
       type: "registry:ui" as const,
       title: "Dropdown Menu",
       description:
-        "Displays a menu of actions triggered by a button — shortcuts, submenus, checkboxes, and radios.",
+        "Displays a menu of actions triggered by a button - shortcuts, submenus, checkboxes, and radios.",
     },
     {
       name: "electro-border",
@@ -247,7 +247,7 @@ export const registry = {
       type: "registry:ui" as const,
       title: "Inline Citation",
       description:
-        "Hoverable citations inline with text — source pills and a carousel of titles, URLs, and quotes.",
+        "Hoverable citations inline with text - source pills and a carousel of titles, URLs, and quotes.",
     },
     {
       name: "input",
@@ -316,14 +316,14 @@ export const registry = {
       type: "registry:ui" as const,
       title: "Mic Selector",
       description:
-        "A searchable popover for picking an audio input — permission-aware labels and live device updates.",
+        "A searchable popover for picking an audio input - permission-aware labels and live device updates.",
     },
     {
       name: "model-selector",
       type: "registry:ui" as const,
       title: "Model Selector",
       description:
-        "A searchable dialog for picking an AI model — grouped by chef, with provider logos.",
+        "A searchable dialog for picking an AI model - grouped by chef, with provider logos.",
     },
     {
       name: "open-in-chat",
@@ -466,7 +466,7 @@ export const registry = {
       type: "registry:ui" as const,
       title: "Select",
       description:
-        "Displays a list of options for the user to pick from—triggered by a button.",
+        "Displays a list of options for the user to pick from-triggered by a button.",
     },
     {
       name: "selection-actions",
@@ -519,7 +519,7 @@ export const registry = {
       type: "registry:ui" as const,
       title: "Tabs",
       description:
-        "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
+        "A set of layered sections of content-known as tab panels-that are displayed one at a time.",
     },
     {
       name: "sonner",
@@ -559,7 +559,7 @@ export const registry = {
       type: "registry:ui" as const,
       title: "Trace",
       description:
-        "Rows for agent steps — reasoning, tool calls, sources, and plans.",
+        "Rows for agent steps - reasoning, tool calls, sources, and plans.",
     },
     {
       name: "voice-ai-orb",
@@ -573,7 +573,7 @@ export const registry = {
       type: "registry:ui" as const,
       title: "Voice Selector",
       description:
-        "A searchable dialog for picking an AI voice — preview playback and metadata.",
+        "A searchable dialog for picking an AI voice - preview playback and metadata.",
     },
   ],
   blocks: [
@@ -618,7 +618,7 @@ export const registry = {
       type: "registry:ui" as const,
       title: "Chart",
       description:
-        "Recharts helpers — ChartContainer, tooltip, legend, and theme CSS variables.",
+        "Recharts helpers - ChartContainer, tooltip, legend, and theme CSS variables.",
     },
     {
       name: "chart-area-default",

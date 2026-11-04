@@ -25,7 +25,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Bundle Size Sunburst — tree-shaken client bundle (bytes) by package group.
+ * Bundle Size Sunburst - tree-shaken client bundle (bytes) by package group.
  * Locked metric scrub chrome + center disc; `--chart-1…5` + color-mix nest shades.
  * Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/bundle-size-sunburst.tsx
@@ -52,7 +52,7 @@ const GROUP_LABELS: Record<string, string> = {
   Output: "Output",
 }
 
-/** Sample tree-shaken bundle (bytes) — EN names. */
+/** Sample tree-shaken bundle (bytes) - EN names. */
 const DEMO_CHILDREN: BundleSizeSunburstBranch[] = [
   {
     name: "Dependencies",
@@ -103,7 +103,7 @@ const chartSunburstContainerClassName =
 
 function BundleSizeSunburst({
   title = "Client bundle size",
-  subtitle = "Tree-shaken JavaScript weight by group — hover a ring to scrub.",
+  subtitle = "Tree-shaken JavaScript weight by group - hover a ring to scrub.",
   data = DEMO_CHILDREN,
   className,
   scrub = true,
@@ -309,7 +309,7 @@ function BundleSizeSunburst({
                 <span className="font-normal">of bundle</span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{caption}</p>

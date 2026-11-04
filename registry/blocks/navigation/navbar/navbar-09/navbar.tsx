@@ -299,7 +299,7 @@ export default function Navbar({
                       className="size-16 shrink-0 rounded-[12px] object-cover"
                     />
                     <span className="text-sm text-foreground">
-                      Customer story — learn how teams ship with Sono.
+                      Customer story - learn how teams ship with Sono.
                     </span>
                   </a>
                 </div>
@@ -398,7 +398,7 @@ export default function Navbar({
         </h1>
         <p className="max-w-md text-sm text-muted-foreground">
           About, Support, and Partners columns plus a muted Customer stories
-          panel — sheet on small screens.
+          panel - sheet on small screens.
         </p>
       </main>
     </div>

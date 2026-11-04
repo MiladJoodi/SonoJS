@@ -33,7 +33,7 @@ export function DrawerSides() {
               <DrawerTitle>{label} drawer</DrawerTitle>
               <DrawerDescription>
                 {direction === "start" || direction === "end"
-                  ? `Opens from the inline-${direction} edge. Toggle LTR/RTL in the preview — the panel and animation follow writing direction.`
+                  ? `Opens from the inline-${direction} edge. Toggle LTR/RTL in the preview - the panel and animation follow writing direction.`
                   : `Opens from the ${direction} edge.`}
               </DrawerDescription>
             </DrawerHeader>

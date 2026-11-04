@@ -73,7 +73,7 @@ export function Example() {
 const directionSource = `import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Button } from "@/components/ui/button"
 
-// Prefer logical edges — they follow writing direction.
+// Prefer logical edges - they follow writing direction.
 <Sheet>
   <SheetTrigger asChild>
     <Button variant="outline">Open from end</Button>
@@ -112,7 +112,7 @@ export default async function SheetDocsPage() {
           <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
             &quot;end&quot;
           </code>{" "}
-          — SonoJS resolves them with{" "}
+          - SonoJS resolves them with{" "}
           <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
             getStartSide
           </code>{" "}
@@ -178,24 +178,24 @@ export default async function SheetDocsPage() {
               type: '"top" | "bottom" | "left" | "right" | "start" | "end"',
               defaultValue: '"end"',
               description:
-                "On `SheetContent` — prefer `start`/`end` for RTL; `left`/`right` stay physical.",
+                "On `SheetContent` - prefer `start`/`end` for RTL; `left`/`right` stay physical.",
             },
             {
               name: "showCloseButton",
               type: "boolean",
               defaultValue: "true",
-              description: "On `SheetContent` — show the corner close control.",
+              description: "On `SheetContent` - show the corner close control.",
             },
             {
               name: "open",
               type: "boolean",
-              defaultValue: "—",
-              description: "On `Sheet` — controlled open state.",
+              defaultValue: "-",
+              description: "On `Sheet` - controlled open state.",
             },
             {
               name: "onOpenChange",
               type: "(open: boolean) => void",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Called when open state changes.",
             },
           ]}

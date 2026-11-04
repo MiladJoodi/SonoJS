@@ -16,7 +16,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Radar Multiple — dual overlapping Store×Online filled polygons.
+ * Radar Multiple - dual overlapping Store×Online filled polygons.
  * Locked metric scrub. Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/radar-multiple.tsx
  */
@@ -252,7 +252,7 @@ function RadarMultiple({
                 {formatPct(deltaPct)}
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{caption}</p>

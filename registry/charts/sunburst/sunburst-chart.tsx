@@ -28,7 +28,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Sunburst Chart — regional sales share by channel (classic gallery baseline).
+ * Sunburst Chart - regional sales share by channel (classic gallery baseline).
  * Locked metric scrub chrome + center disc; `--chart-1…5` + color-mix nest shades.
  * Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/sunburst-chart.tsx
@@ -57,7 +57,7 @@ const GROUP_LABELS: Record<string, string> = {
 }
 
 /**
- * Regional sales share (%) — three levels (region → channel → site).
+ * Regional sales share (%) - three levels (region → channel → site).
  * Totals 100; EN names.
  *
  * Child names must be unique across the whole tree: Recharts keys sectors as
@@ -131,7 +131,7 @@ const chartSunburstContainerClassName =
 
 function SunburstChart({
   title = "Sales by region",
-  subtitle = "Branch and channel share — hover a ring to scrub.",
+  subtitle = "Branch and channel share - hover a ring to scrub.",
   data = DEMO_CHILDREN,
   className,
   scrub = true,
@@ -186,7 +186,7 @@ function SunburstChart({
   const liveIndex = liveScrubbing ? activeIndex : lastIndex
   const liveNode: FlatSunburstNode | undefined =
     nodes[liveIndex] ?? nodes[lastIndex]
-  // Demo values are already share points that sum to 100 — no second %.
+  // Demo values are already share points that sum to 100 - no second %.
   const metricValue = liveScrubbing && liveNode ? liveNode.value : total
   const caption =
     liveScrubbing && liveNode ? liveNode.name : "All regions"
@@ -320,7 +320,7 @@ function SunburstChart({
               {formatPct(metricValue)}
             </p>
             <span className="text-xs text-muted-foreground">
-              {liveScrubbing ? "share" : "—"}
+              {liveScrubbing ? "share" : "-"}
             </span>
           </div>
           <p className="text-xs text-muted-foreground">{caption}</p>

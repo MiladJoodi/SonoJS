@@ -364,7 +364,7 @@ export default function MegaMenu({
           Services mega menu
         </h1>
         <p className="max-w-md text-sm text-muted-foreground">
-          Four category columns plus a promo image — sheet with collapsible
+          Four category columns plus a promo image - sheet with collapsible
           Services on small screens.
         </p>
       </main>

@@ -4,7 +4,7 @@ import { CopyButton } from "@/components/docs/copy-button"
 import { cn } from "@/lib/utils"
 
 /**
- * Soft install hint — same bar as button-group example footers.
+ * Soft install hint - same bar as button-group example footers.
  * Shows only the install command (names live inside the command).
  */
 export function InstallNeedsHint({

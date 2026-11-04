@@ -261,7 +261,7 @@ export default function AdvancedFilters03() {
           <div className="min-w-0 flex-1 text-start">
             <p className="text-sm font-semibold">Keyword console</p>
             <p className="text-xs text-muted-foreground">
-              Navigate sections — denser than a scroll wall
+              Navigate sections - denser than a scroll wall
             </p>
           </div>
           <Button

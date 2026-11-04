@@ -15,7 +15,7 @@ export interface GradientCursorProps {
 }
 
 /**
- * Dual soft gradient blobs with spring lag — black-stage friendly.
+ * Dual soft gradient blobs with spring lag - black-stage friendly.
  */
 export function GradientCursor({
   containerRef,

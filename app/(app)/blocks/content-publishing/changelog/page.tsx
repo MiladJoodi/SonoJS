@@ -50,7 +50,7 @@ export default function BlockChangelogDocsPage() {
       <BlocksPageHeader
         title="Changelog"
         pathname="/blocks/content-publishing/changelog"
-        description="Five release layouts — classic timeline, product feed, featured latest, magazine grid, and accordion version history."
+        description="Five release layouts - classic timeline, product feed, featured latest, magazine grid, and accordion version history."
       />
 
       <div className="flex flex-col gap-8">

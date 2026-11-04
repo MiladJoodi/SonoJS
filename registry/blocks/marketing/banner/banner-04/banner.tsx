@@ -20,7 +20,7 @@ export default function Banner({
       {...props}
     >
       <p className="min-w-0 text-start">
-        Invite-only seats open this week —{" "}
+        Invite-only seats open this week -{" "}
         <span className="text-zinc-400">claim before Friday</span>
       </p>
       <div className="flex shrink-0 items-center gap-3">

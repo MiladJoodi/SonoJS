@@ -21,7 +21,7 @@ const exampleDefs = [
     name: "bubble-variants",
     title: "Variants",
     description:
-      "Switch `variant` — default, secondary, muted, tinted, outline, ghost, or destructive.",
+      "Switch `variant` - default, secondary, muted, tinted, outline, ghost, or destructive.",
   },
   {
     name: "bubble-alignment",
@@ -77,7 +77,7 @@ export default async function BubbleDocsPage() {
         pathname="/docs/components/bubble"
         description={
           <p className="leading-relaxed text-muted-foreground">
-          Displays conversational content in a message bubble — variants,
+          Displays conversational content in a message bubble - variants,
           alignment, grouping, reactions, and polymorphic link/button content.
         </p>
         }

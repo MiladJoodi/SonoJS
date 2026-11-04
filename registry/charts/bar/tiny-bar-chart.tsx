@@ -15,8 +15,8 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Tiny Bar Chart — locked header chrome + chart-local sparkline stage.
- * Compact single-series bars (no axes / tooltip / legend) — sparkline-style.
+ * Tiny Bar Chart - locked header chrome + chart-local sparkline stage.
+ * Compact single-series bars (no axes / tooltip / legend) - sparkline-style.
  * Installs to: components/charts/tiny-bar-chart.tsx
  */
 
@@ -106,7 +106,7 @@ function TinyBarChart({
   const liveRef = React.useRef<HTMLParagraphElement>(null)
   const scrubbingRef = React.useRef(false)
   const locale = "en"
-  // plotDir reserved for gallery API parity — sparkline has no axes to flip.
+  // plotDir reserved for gallery API parity - sparkline has no axes to flip.
   void plotDir
 
   const lastIndex = Math.max(0, data.length - 1)
@@ -157,7 +157,7 @@ function TinyBarChart({
       if (!el || data.length === 0) return lastIndex
       const rect = el.getBoundingClientRect()
       if (rect.width <= 0) return lastIndex
-      // Sparkline has no axes — category order stays LTR on the plot island.
+      // Sparkline has no axes - category order stays LTR on the plot island.
       const ratio = Math.min(
         1,
         Math.max(0, (clientX - rect.left) / rect.width)
@@ -327,7 +327,7 @@ function TinyBarChart({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{monthLabel}</p>

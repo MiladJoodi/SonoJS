@@ -191,7 +191,7 @@ export default function ProductList({
             Cover stories
           </h2>
           <p className="mt-2 max-w-md text-start text-sm text-muted-foreground">
-            Full-bleed looks — solid actions under the photo on mobile; glass
+            Full-bleed looks - solid actions under the photo on mobile; glass
             capsule on desktop hover.
           </p>
         </div>

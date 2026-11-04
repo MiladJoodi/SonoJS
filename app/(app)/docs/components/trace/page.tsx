@@ -16,7 +16,7 @@ const exampleDefs = [
     name: "trace-default",
     title: "Basic",
     description:
-      "A `TraceLine` with an icon and title — plain text when nothing expands.",
+      "A `TraceLine` with an icon and title - plain text when nothing expands.",
     npmRequires: ["lucide-react"],
   },
   {
@@ -127,7 +127,7 @@ export default async function TraceDocsPage() {
         pathname="/docs/components/trace"
         description={
           <p className="leading-relaxed text-muted-foreground">
-          Rows for agent steps — reasoning, tool calls, sources, and plans.
+          Rows for agent steps - reasoning, tool calls, sources, and plans.
           Each line shares the same shape; wrap it in a collapsible, link, or
           overlay trigger to add behavior. Use Message for replies and Marker
           for notes between turns. Layout uses logical properties so nested
@@ -180,28 +180,28 @@ export default async function TraceDocsPage() {
             {
               name: "status",
               type: '"running" | "error" | "pending"',
-              defaultValue: "—",
+              defaultValue: "-",
               description:
-                "On `TraceLine` — running shimmer, error color, or pending opacity. Omit when the step is done.",
+                "On `TraceLine` - running shimmer, error color, or pending opacity. Omit when the step is done.",
             },
             {
               name: "open",
               type: "boolean",
-              defaultValue: "—",
+              defaultValue: "-",
               description:
-                "On `TraceCollapsible` — controlled open state (pair with `onOpenChange`).",
+                "On `TraceCollapsible` - controlled open state (pair with `onOpenChange`).",
             },
             {
               name: "defaultOpen",
               type: "boolean",
               defaultValue: "false",
-              description: "On `TraceCollapsible` — start expanded.",
+              description: "On `TraceCollapsible` - start expanded.",
             },
             {
               name: "onOpenChange",
               type: "(open: boolean) => void",
-              defaultValue: "—",
-              description: "On `TraceCollapsible` — called when open changes.",
+              defaultValue: "-",
+              description: "On `TraceCollapsible` - called when open changes.",
             },
           ]}
         />

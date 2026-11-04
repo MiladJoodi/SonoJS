@@ -3,7 +3,7 @@
   "name": "checkout-05",
   "type": "registry:block",
   "title": "checkout-05",
-  "description": "Vertical-fields checkout — stacked form left, muted summary first on mobile, always-stacked card fields (RTL/LTR).",
+  "description": "Vertical-fields checkout - stacked form left, muted summary first on mobile, always-stacked card fields (RTL/LTR).",
   "access": "public",
   "registryDependencies": [
     "button",
@@ -85,6 +85,6 @@
       "target": "components/blocks/ecommerce/checkout-05/images/paypal.webp"
     }
   ],
-  "version": "0.1.0+c9c3d2a86e47",
-  "generatedAt": "2026-11-03T21:57:48.548Z"
+  "version": "0.1.0+3fe3a15cbaf2",
+  "generatedAt": "2026-11-04T11:52:24.655Z"
 }

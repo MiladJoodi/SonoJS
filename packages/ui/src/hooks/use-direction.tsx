@@ -22,7 +22,7 @@ export function DirectionContextProvider({
 }) {
   return (
     <DirectionContext.Provider value={dir}>
-      {/* Keep Radix primitives (Tabs, etc.) in sync — they default to dir="ltr" otherwise. */}
+      {/* Keep Radix primitives (Tabs, etc.) in sync - they default to dir="ltr" otherwise. */}
       <RadixDirection.DirectionProvider dir={dir}>
         {children}
       </RadixDirection.DirectionProvider>

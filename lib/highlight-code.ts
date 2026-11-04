@@ -18,7 +18,7 @@ export type CodeLang =
   | "shell"
   | "sh"
 
-/** VS Code Dark+ — the default dark editor theme. */
+/** VS Code Dark+ - the default dark editor theme. */
 const THEME = "dark-plus" as const
 
 const langs = [
@@ -75,7 +75,7 @@ function plainCodeHtml(code: string) {
   return `<pre class="shiki"><code>${escapeHtml(code)}</code></pre>`
 }
 
-/** Skip Shiki above this size — large registry sources (e.g. clothes-rack drapes) blow Vercel SSR budgets. */
+/** Skip Shiki above this size - large registry sources (e.g. clothes-rack drapes) blow Vercel SSR budgets. */
 const HIGHLIGHT_MAX_CHARS = 32_000
 
 /** Highlight source with VS Code Dark+ (shiki `dark-plus`). */

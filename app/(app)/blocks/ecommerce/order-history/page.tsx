@@ -32,7 +32,7 @@ export default function BlockOrderHistoryDocsPage() {
       <BlocksPageHeader
         title="Order History"
         pathname="/blocks/ecommerce/order-history"
-        description="Eight distinct production shells — timeline, action cards, shipment board, invoice groups, console table, ops ledger, delivery dossier, and merchant command center."
+        description="Eight distinct production shells - timeline, action cards, shipment board, invoice groups, console table, ops ledger, delivery dossier, and merchant command center."
       />
 
       <div className="flex flex-col gap-8">

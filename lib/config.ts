@@ -30,7 +30,7 @@ In this project root:
 1. Run: npx @sonojs/ui@latest mcp init
 2. Reload MCP in the client (Cursor: Settings → MCP, or restart).
 3. Verify with list_components / search_components, or get_add_command for "button".
-4. Install only via the returned \`npx @sonojs/ui@latest add …\` command — do not invent registry names or hand-edit unrelated MCP servers.
+4. Install only via the returned \`npx @sonojs/ui@latest add …\` command - do not invent registry names or hand-edit unrelated MCP servers.
 
 Ask before changing MCP config outside this project.`,
   links: {
@@ -45,6 +45,8 @@ Ask before changing MCP config outside this project.`,
     { href: "/blocks", label: "Blocks" },
     { href: "/charts", label: "Charts" },
     { href: "/cursors", label: "Cursors" },
+    { href: "/3d", label: "3D" },
+    { href: "/carousels", label: "Carousels" },
     { href: "/marketplace", label: "Marketplace" },
     { href: "/tools", label: "Tools" },
     {

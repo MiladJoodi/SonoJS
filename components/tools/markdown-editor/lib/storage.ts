@@ -64,7 +64,7 @@ export function hello(name: string) {
 ## Admonition
 
 :::tip
-Admonitions: tip, note, info, caution, danger — insert from the toolbar.
+Admonitions: tip, note, info, caution, danger - insert from the toolbar.
 :::
 
 ## Link
@@ -96,7 +96,7 @@ export function getInitialMarkdown(): string {
   return SAMPLE_MARKDOWN
 }
 
-/** Explicit persist — call on Save / leave tab, not on every keystroke. */
+/** Explicit persist - call on Save / leave tab, not on every keystroke. */
 export function saveDraft(markdown: string): MarkdownDraft {
   const draft: MarkdownDraft = {
     markdown,

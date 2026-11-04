@@ -594,7 +594,7 @@
   --border: #e4e4e7;
   --input: #e4e4e7;
   --ring: #2563eb;
-  /* Chart: 1â€“2 dual series (navy Ã— orange); 3â€“5 semantic only */
+  /* Chart: 1â€“2 dual series (navy Ã- orange); 3â€“5 semantic only */
   --chart-1: #1e3a8a;
   --chart-2: #ea580c;
   --chart-3: #f59e0b;
@@ -820,7 +820,7 @@ html:has([data-block-embed]) body {
 }
 
 @layer components {
-  /* Marketplace surfaces — light + dark (follows html.dark) */
+  /* Marketplace surfaces - light + dark (follows html.dark) */
   [data-marketplace] {
     --sm-bg: #f3f4f6;
     --sm-bg-elevated: #ffffff;

@@ -29,7 +29,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Line Bar Area Composed Chart — locked gallery chrome (navy × orange × amber).
+ * Line Bar Area Composed Chart - locked gallery chrome (navy × orange × amber).
  * ComposedChart: Area(orders) + Bar(online) + Line(store) + metric scrubber.
  * Installs to: components/charts/line-bar-area-composed-chart.tsx
  */
@@ -91,7 +91,7 @@ const SERIES_KEYS = ["orders", "online", "store"] as const
 
 const COMPOSED_TOOLTIP_CURSOR = {
   fill: "color-mix(in oklab, var(--foreground) 5%, transparent)",
-  // Recharts defaults stroke to #ccc — reads as a white/gray frame on the plot
+  // Recharts defaults stroke to #ccc - reads as a white/gray frame on the plot
   stroke: "transparent",
   strokeWidth: 0,
 } as const
@@ -560,7 +560,7 @@ function LineBarAreaComposedChart({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{monthLabel}</p>

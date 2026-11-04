@@ -27,7 +27,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Multi Timeframe — same symbol on daily / weekly / monthly close lines.
+ * Multi Timeframe - same symbol on daily / weekly / monthly close lines.
  * Aggregated from one daily series; no neon; locked chrome + per-panel scrub.
  * Installs to: components/charts/multi-timeframe.tsx
  */
@@ -39,7 +39,7 @@ export type MultiTimeframeProps = {
   subtitle?: string
   /** Short ticker shown in the header. */
   symbol?: string
-  /** Daily close series — weekly/monthly are derived. */
+  /** Daily close series - weekly/monthly are derived. */
   data?: TfPoint[]
   className?: string
   /** Category order / Y-axis side. Omit to follow page `dir`. */
@@ -513,7 +513,7 @@ function FrameChart({
 
 function MultiTimeframe({
   title = "Multi Timeframe",
-  subtitle = "Same symbol on daily, weekly, and monthly close paths — weekly and monthly roll up from daily.",
+  subtitle = "Same symbol on daily, weekly, and monthly close paths - weekly and monthly roll up from daily.",
   symbol = "AENE",
   data = DEMO_DAILY,
   className,

@@ -102,7 +102,7 @@ export async function getActiveSubscriptionByClerkId(
 
 /**
  * Latest subscription for account Billing UI (not access gating).
- * Any status — incomplete rows still surface so the tab matches Stripe/Neon.
+ * Any status - incomplete rows still surface so the tab matches Stripe/Neon.
  */
 export async function getBillingSubscriptionByClerkId(
   clerkUserId: string
@@ -142,7 +142,7 @@ async function resolvePlanIdFromStripePrice(
     if (byPrice) return byPrice.id
   }
   const monthly = await getPlanBySlug("pro-monthly")
-  if (!monthly) throw new Error("pro-monthly plan missing — run db:seed")
+  if (!monthly) throw new Error("pro-monthly plan missing - run db:seed")
   return monthly.id
 }
 

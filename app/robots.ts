@@ -17,7 +17,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      // /api is POST-only (contact + tools proxy) — no Disallow; not in sitemap.
+      // /api is POST-only (contact + tools proxy) - no Disallow; not in sitemap.
       // /view allowed so crawlers can see noindex meta + X-Robots-Tag.
     },
     sitemap: absoluteUrl("/sitemap.xml"),

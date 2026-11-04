@@ -5,7 +5,7 @@ import { resolveCheckoutReturnStatus } from "@/lib/stripe/checkout-return-status
 
 /**
  * Post-Checkout poll endpoint.
- * Does not trust Stripe redirect alone — Pro only when Neon has an
+ * Does not trust Stripe redirect alone - Pro only when Neon has an
  * active subscription; then syncs Clerk from DB.
  */
 export async function POST() {

@@ -608,7 +608,7 @@ export default function ProductOrderForm({
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={mainImage.src}
-                    alt={`${PRODUCT.name} — ${mainImage.label.toLowerCase()}`}
+                    alt={`${PRODUCT.name} - ${mainImage.label.toLowerCase()}`}
                     className="aspect-[4/5] w-full object-cover"
                   />
                   <Badge className="absolute start-3 top-3">
@@ -677,7 +677,7 @@ export default function ProductOrderForm({
                           title={
                             available
                               ? c.label
-                              : `${c.label} — unavailable in ${sizeLabel}`
+                              : `${c.label} - unavailable in ${sizeLabel}`
                           }
                           className={cn(
                             "relative flex size-11 cursor-pointer items-center justify-center rounded-full border border-transparent p-1 transition-colors has-[:focus-visible]:ring-[3px] has-[:focus-visible]:ring-ring/40 has-data-[state=checked]:border-foreground",
@@ -1206,12 +1206,12 @@ export default function ProductOrderForm({
                       {placeOrderLabel}
                     </Button>
                     <p className="text-center text-xs text-muted-foreground">
-                      Demo form — nothing is charged or shipped.
+                      Demo form - nothing is charged or shipped.
                     </p>
                   </aside>
                 </div>
 
-                {/* Mobile bottom sheet — sticky within the checkout wrapper (not a grid cell) */}
+                {/* Mobile bottom sheet - sticky within the checkout wrapper (not a grid cell) */}
                 <aside
                   aria-label="Order summary"
                   className="sticky bottom-3 z-20 mt-6 flex flex-col overflow-hidden rounded-[12px] border border-border/70 bg-card text-start shadow-soft lg:hidden"

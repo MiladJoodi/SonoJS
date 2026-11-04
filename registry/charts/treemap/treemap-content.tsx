@@ -15,7 +15,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Treemap Content — teaching `content={<Cell />}` (cloneElement props), with
+ * Treemap Content - teaching `content={<Cell />}` (cloneElement props), with
  * centered name + size on leaves. Distinct from Custom Content (group paint /
  * function content). Locked metric scrub; `--chart-1…5`.
  * Spec: `registry/charts/PORT.md`
@@ -178,7 +178,7 @@ type CellProps = Partial<TreemapNode> & {
 }
 
 /**
- * Passed as `content={<TreemapContentCell … />}` — Recharts cloneElement-injects
+ * Passed as `content={<TreemapContentCell … />}` - Recharts cloneElement-injects
  * node geometry props onto this element.
  */
 function TreemapContentCell(props: CellProps) {
@@ -276,7 +276,7 @@ function TreemapContentCell(props: CellProps) {
 
 function TreemapContentChart({
   title = "Module size",
-  subtitle = "Treemap content as a React element — centered name and size on each leaf.",
+  subtitle = "Treemap content as a React element - centered name and size on each leaf.",
   data = DEMO_DATA,
   className,
   scrub = true,
@@ -438,7 +438,7 @@ function TreemapContentChart({
                 <span className="font-normal">of total</span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{caption}</p>

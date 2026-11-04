@@ -83,7 +83,7 @@ function readGalleryHashCategory(): ChartCategory | null {
 
 /**
  * FarsiUI pattern:
- * - Gallery (`/charts`): flat category list — click scrolls, no expand/collapse.
+ * - Gallery (`/charts`): flat category list - click scrolls, no expand/collapse.
  * - Detail (view / category routes): collapsible folders; active category stays open;
  *   open state is user-toggled (+ session), not fight with scroll.
  */

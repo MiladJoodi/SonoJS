@@ -3,7 +3,7 @@
   "name": "usage-based-billing-02",
   "type": "registry:block",
   "title": "usage-based-billing-02",
-  "description": "Plan overview — radial capacity gauges for workspaces, blocks, registry items, and storage.",
+  "description": "Plan overview - radial capacity gauges for workspaces, blocks, registry items, and storage.",
   "access": "public",
   "dependencies": [
     "lucide-react",
@@ -37,6 +37,6 @@
       "target": "components/blocks/payments-billing/usage-based-billing-02/usage-based-billing.tsx"
     }
   ],
-  "version": "0.1.0+c9c3d2a86e47",
-  "generatedAt": "2026-11-03T21:57:48.548Z"
+  "version": "0.1.0+3fe3a15cbaf2",
+  "generatedAt": "2026-11-04T11:52:24.655Z"
 }

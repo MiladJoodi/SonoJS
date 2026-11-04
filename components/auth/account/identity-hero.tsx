@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils"
 import { Spinner } from "@sonojs/ui/components/spinner"
 
 /**
- * Account header — editable avatar + name/email; plan + expiry opposite.
+ * Account header - editable avatar + name/email; plan + expiry opposite.
  * Plan mark matches /pricing (Free gray · Monthly check green · Yearly primary).
  * Plan chip comes from billing summary only (never Clerk flash).
  */

@@ -13,7 +13,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Hc Gauge Semicircle — half-dial speedometer (−90° → 90°).
+ * Hc Gauge Semicircle - half-dial speedometer (−90° → 90°).
  * Soft gold → terracotta → red; locked header chrome; English / Intl.
  * Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/hc-gauge-semicircle.tsx
@@ -86,7 +86,7 @@ function buildOptions(value: number): Options {
 }
 
 function HcGaugeSemicircle({
-  title = "Speed gauge — semicircle",
+  title = "Speed gauge - semicircle",
   subtitle = "Half-dial speedometer (−90° → 90°) with soft gold to red bands.",
   value = DEMO_VALUE,
   className,

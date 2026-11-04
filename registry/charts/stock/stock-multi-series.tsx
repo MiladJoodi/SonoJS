@@ -26,7 +26,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Stock Multi Series — indexed relative-return lines for several tickers.
+ * Stock Multi Series - indexed relative-return lines for several tickers.
  * Type-required summary cards + % chart; no neon; metric scrubber.
  * Installs to: components/charts/stock-multi-series.tsx
  */
@@ -127,7 +127,7 @@ function useNarrowViewport() {
 
 function StockMultiSeries({
   title = "Multi-Ticker Returns",
-  subtitle = "Relative return from day one — compare symbols on different price bases.",
+  subtitle = "Relative return from day one - compare symbols on different price bases.",
   data = DEMO_DATA,
   className,
   plotDir,
@@ -402,7 +402,7 @@ function StockMultiSeries({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">
@@ -568,7 +568,7 @@ function StockMultiSeries({
                             <span className="font-medium text-foreground">
                               {abs != null
                                 ? formatCandlePrice(abs, locale)
-                                : "—"}
+                                : "-"}
                             </span>
                             <span
                               style={{

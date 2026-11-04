@@ -27,7 +27,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Scatter Chart With Labels — single series + always-on `LabelList` + `ZAxis`.
+ * Scatter Chart With Labels - single series + always-on `LabelList` + `ZAxis`.
  * Teaching delta vs `simple-scatter-chart` / `bubble-chart`: point name labels.
  * Locked chrome + metric scrubber. Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/scatter-chart-with-labels.tsx
@@ -69,7 +69,7 @@ const Z_RANGE: [number, number] = [120, 520]
 
 type FlatPoint = ScatterChartWithLabelsPoint & { id: string }
 
-/** Campus sample — height × weight × score with short labels. */
+/** Campus sample - height × weight × score with short labels. */
 const DEMO_DATA: ScatterChartWithLabelsPoint[] = [
   { name: "A", x: 158, y: 52, z: 120 },
   { name: "B", x: 162, y: 58, z: 180 },
@@ -117,7 +117,7 @@ function withIds(rows: ScatterChartWithLabelsPoint[]): FlatPoint[] {
 
 function ScatterChartWithLabels({
   title = "Campus height vs weight",
-  subtitle = "Always-on point labels — teaching LabelList on Scatter.",
+  subtitle = "Always-on point labels - teaching LabelList on Scatter.",
   data = DEMO_DATA,
   seriesLabel = "Campus",
   xLabel = "Height (cm)",
@@ -414,7 +414,7 @@ function ScatterChartWithLabels({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{caption}</p>
@@ -571,7 +571,7 @@ function ScatterChartWithLabels({
               data={plotData}
               fill="var(--color-sample)"
               stroke="none"
-              /* Always-on labels — no enter tween (avoids label blink). */
+              /* Always-on labels - no enter tween (avoids label blink). */
               isAnimationActive={false}
               shape={(props) => {
                 const point = props.payload as FlatPoint | undefined

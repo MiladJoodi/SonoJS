@@ -11,7 +11,7 @@ export function ToolApprovalDenied() {
       <ToolApproval
         tool="fs.write"
         title="Write to package.json?"
-        description="Denied — the agent will ask for a safer approach."
+        description="Denied - the agent will ask for a safer approach."
         status="denied"
         defaultOpen
         parameters={[

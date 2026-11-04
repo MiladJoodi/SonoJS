@@ -23,7 +23,7 @@ import { chartBarContainerClassName } from "../_lib/chart-styles"
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Custom Shape Bar Chart — locked gallery chrome; type-required bevelled
+ * Custom Shape Bar Chart - locked gallery chrome; type-required bevelled
  * bar path (diagonal cut on start edge + rounded end corner). Categorical
  * fills use `--chart-1…5` tokens. Metric header scrubber.
  * Installs to: components/charts/custom-shape-bar-chart.tsx
@@ -52,7 +52,7 @@ const BAR_MS = 200
 const AXIS_TICK_FILL =
   "color-mix(in oklab, var(--foreground) 58%, transparent)"
 
-/** Categorical ladder — existing design tokens, not a second dual-series pair. */
+/** Categorical ladder - existing design tokens, not a second dual-series pair. */
 const CATEGORY_COLORS = [
   "var(--chart-1)",
   "var(--chart-2)",
@@ -550,7 +550,7 @@ function CustomShapeBarChart({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">
@@ -767,7 +767,7 @@ function CustomShapeBarChart({
               <td>
                 {grandTotal > 0
                   ? `${((row.sales / grandTotal) * 100).toFixed(1)}%`
-                  : "—"}
+                  : "-"}
               </td>
             </tr>
           ))}

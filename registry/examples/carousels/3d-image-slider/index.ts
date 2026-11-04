@@ -1,0 +1,1 @@
+export { ThreeDImageSliderDefault } from "./default"

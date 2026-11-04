@@ -110,7 +110,7 @@ export default async function TextareaDocsPage() {
             {
               name: "placeholder",
               type: "string",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Hint text shown when empty.",
             },
             {
@@ -122,13 +122,13 @@ export default async function TextareaDocsPage() {
             {
               name: "aria-invalid",
               type: "boolean",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Marks the field invalid and applies error styles.",
             },
             {
               name: "…textarea props",
               type: 'React.ComponentProps<"textarea">',
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Native attributes pass through to the element.",
             },
           ]}

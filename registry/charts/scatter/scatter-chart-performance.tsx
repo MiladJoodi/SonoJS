@@ -26,7 +26,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Scatter Chart Performance — many Scatter series × many points (stress demo).
+ * Scatter Chart Performance - many Scatter series × many points (stress demo).
  * Teaching: `isAnimationActive={false}`; scrub focuses a series (not every point).
  * Locked chrome. Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/scatter-chart-performance.tsx
@@ -36,7 +36,7 @@ export type ScatterPerformancePoint = {
   x: number
   y: number
   z: number
-  /** Scatter series name — stamped on each mark for tooltip lookup. */
+  /** Scatter series name - stamped on each mark for tooltip lookup. */
   series: string
   passed: boolean
 }
@@ -81,7 +81,7 @@ const SCATTER_TOOLTIP_CURSOR = {
   strokeDasharray: "4 4",
 } as const
 
-/** Mulberry32 — stable across SSR/client (no Math.random). */
+/** Mulberry32 - stable across SSR/client (no Math.random). */
 function mulberry32(seed: number) {
   let t = seed >>> 0
   return () => {
@@ -139,7 +139,7 @@ function formatNumber(value: number, locale: string) {
 
 function ScatterChartPerformance({
   title = "Many-point scatter",
-  subtitle = "Performance stress — animation off; scrub focuses a whole series.",
+  subtitle = "Performance stress - animation off; scrub focuses a whole series.",
   datasets: datasetsProp,
   seriesCount = DEFAULT_SERIES,
   pointsPerSeries = DEFAULT_POINTS,

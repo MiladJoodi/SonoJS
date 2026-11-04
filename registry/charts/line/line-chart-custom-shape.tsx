@@ -28,7 +28,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Line Chart Custom Shape — locked gallery chrome (navy × orange).
+ * Line Chart Custom Shape - locked gallery chrome (navy × orange).
  * Dual monotone lines with opacity-fade entrance `shape` (Curve).
  * Installs to: components/charts/line-chart-custom-shape.tsx
  */
@@ -58,7 +58,7 @@ const AXIS_TICK_FILL =
 const SHAPE_MS = 500
 
 
-/** Entrance opacity fade — type-required custom Line `shape`. */
+/** Entrance opacity fade - type-required custom Line `shape`. */
 function OpacityFadeShape({
   animationElapsedTime = 1,
   isEntrance = false,
@@ -465,7 +465,7 @@ function LineChartCustomShape({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{monthLabel}</p>

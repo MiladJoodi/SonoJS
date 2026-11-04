@@ -1,6 +1,6 @@
 /**
  * Pending: Navigation → Command Menu (03)
- * Job: People scout — department chips, match highlight, avatar rows.
+ * Job: People scout - department chips, match highlight, avatar rows.
  * Audit: primary/15 highlight (dark/light) · wrapping chips · text-start ·
  * aria-pressed filters · no orphan separator.
  */

@@ -64,7 +64,7 @@ export default function ContactForm({
             How can we help?
           </h2>
           <p className="text-base leading-relaxed text-muted-foreground">
-            Drop us a line — whether it&apos;s a quick question or a full
+            Drop us a line - whether it&apos;s a quick question or a full
             project brief, we&apos;re ready to listen.
           </p>
         </div>

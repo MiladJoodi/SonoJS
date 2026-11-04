@@ -53,7 +53,7 @@ export default function ProductCategories({
             Top Categories
           </h2>
           <p className="max-w-xl text-sm text-zinc-400">
-            Tall campaign posters — tap a tile to open the aisle.
+            Tall campaign posters - tap a tile to open the aisle.
           </p>
         </div>
 

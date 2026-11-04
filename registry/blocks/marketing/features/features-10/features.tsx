@@ -64,7 +64,7 @@ export default function Features({
             </h2>
           </div>
           <p className="max-w-sm text-start text-base leading-relaxed text-muted-foreground md:text-end">
-            End-to-end solutions tailored to your goals — from discovery to
+            End-to-end solutions tailored to your goals - from discovery to
             measurable growth.
           </p>
         </div>

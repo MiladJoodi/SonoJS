@@ -39,7 +39,7 @@ export default function BlockUserProfileDocsPage() {
       <BlocksPageHeader
         title="User Profile"
         pathname="/blocks/user-account/user-profile"
-        description="Six styles — GitHub tabs, creator card, cover + work, account settings, resume timeline, and org directory."
+        description="Six styles - GitHub tabs, creator card, cover + work, account settings, resume timeline, and org directory."
       />
 
       <div className="flex flex-col gap-8">

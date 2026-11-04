@@ -53,7 +53,7 @@ export default function BlockFooterDocsPage() {
       <BlocksPageHeader
         title="Footer"
         pathname="/blocks/marketing/footer"
-        description="Site footers with link columns, newsletters, and legal chrome — sixteen distinct layouts, each ready to drop in."
+        description="Site footers with link columns, newsletters, and legal chrome - sixteen distinct layouts, each ready to drop in."
       />
 
       <div className="flex flex-col gap-8">

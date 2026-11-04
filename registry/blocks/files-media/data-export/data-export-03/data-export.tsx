@@ -81,7 +81,7 @@ export default function DataExport({
               </Badge>
             </div>
             <p className="mt-1 text-sm text-muted-foreground">
-              Deliver a recurring report to email — no manual download.
+              Deliver a recurring report to email - no manual download.
             </p>
           </div>
         </header>

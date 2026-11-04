@@ -31,7 +31,7 @@ export default function BlockTableToolbarDocsPage() {
       <BlocksPageHeader
         title="Table Toolbar"
         pathname="/blocks/data-tables/table-toolbar"
-        description="Five distinct toolbar products — from everyday admin filters to enterprise query builders — each with a working table."
+        description="Five distinct toolbar products - from everyday admin filters to enterprise query builders - each with a working table."
       />
 
       <div className="flex flex-col gap-8">

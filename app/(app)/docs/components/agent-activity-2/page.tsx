@@ -62,7 +62,7 @@ export default async function AgentActivity2DocsPage() {
         pathname="/docs/components/agent-activity-2"
         description={
           <p className="leading-relaxed text-muted-foreground">
-            An expandable agent trace for steps, reasoning, search, and coding —
+            An expandable agent trace for steps, reasoning, search, and coding -
             shimmer while working, then a settled summary.
           </p>
         }
@@ -96,7 +96,7 @@ export default async function AgentActivity2DocsPage() {
             {
               name: "className",
               type: "string",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Optional class names on the root section.",
             },
           ]}

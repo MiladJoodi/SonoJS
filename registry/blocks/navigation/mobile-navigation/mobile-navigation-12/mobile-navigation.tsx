@@ -41,7 +41,7 @@ export default function MobileNavigation({
           {activeItem?.label}
         </p>
         <p className="max-w-xs text-sm text-muted-foreground">
-          Morphing dock — the active tab blooms into a labeled droplet.
+          Morphing dock - the active tab blooms into a labeled droplet.
         </p>
       </div>
 

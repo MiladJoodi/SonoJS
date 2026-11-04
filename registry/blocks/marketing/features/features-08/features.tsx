@@ -33,7 +33,7 @@ const features = [
     title: "User-Friendly Interface",
     subtitle: "Streamlined for productivity",
     description:
-      "Navigate with ease using our intuitive interface designed for efficiency — for beginners and experts alike.",
+      "Navigate with ease using our intuitive interface designed for efficiency - for beginners and experts alike.",
     icon: AppWindowIcon,
     chip: "f08-chip-teal",
   },

@@ -15,7 +15,7 @@ const revalidateImmediately = [
 ] as const;
 
 const nextConfig: NextConfig = {
-  // Workspace package — must transpile + watch for HMR
+  // Workspace package - must transpile + watch for HMR
   transpilePackages: ["@sonojs/ui", "@mdxeditor/editor"],
   // Keep Shiki off Turbopack transforms (token colors / grammars stay intact)
   serverExternalPackages: ["shiki"],
@@ -33,7 +33,7 @@ const nextConfig: NextConfig = {
       "./node_modules/highcharts-react-official/**",
     ],
   },
-  // Slow disks freeze on Turbopack FS cache compaction — disable in local dev
+  // Slow disks freeze on Turbopack FS cache compaction - disable in local dev
   experimental: {
     turbopackFileSystemCacheForDev: false,
   },
@@ -80,7 +80,7 @@ const nextConfig: NextConfig = {
         ],
       },
       {
-        // Stable URLs, changing JSON — never immutable
+        // Stable URLs, changing JSON - never immutable
         source: "/r/:path*",
         headers: [...revalidateImmediately],
       },

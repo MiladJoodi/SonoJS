@@ -24,7 +24,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Bar Chart With Customized Event — locked gallery chrome + click selection.
+ * Bar Chart With Customized Event - locked gallery chrome + click selection.
  * Click (or scrub) a month → chips + detail panel stay in sync; average reference line.
  * Installs to: components/charts/bar-chart-with-customized-event.tsx
  */
@@ -159,7 +159,7 @@ function DeltaLine({
   if (value == null) {
     return (
       <p className="text-xs text-muted-foreground">
-        {label}: —
+        {label}: -
       </p>
     )
   }
@@ -377,7 +377,7 @@ function BarChartWithCustomizedEvent({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{monthLabel}</p>
@@ -488,7 +488,7 @@ function BarChartWithCustomizedEvent({
         </ChartContainer>
       </div>
 
-      {/* Month chips — synced with bar click */}
+      {/* Month chips - synced with bar click */}
       <div className="flex flex-wrap items-center justify-center gap-1.5">
         {data.map((item, index) => {
           const active = index === selected
@@ -510,7 +510,7 @@ function BarChartWithCustomizedEvent({
         })}
       </div>
 
-      {/* Selection detail panel — chart-local customized event surface */}
+      {/* Selection detail panel - chart-local customized event surface */}
       <div className="grid gap-3 rounded-xl border border-border bg-background px-4 py-3 sm:grid-cols-[1fr_auto]">
         <div className="space-y-3">
           <div className="flex flex-wrap items-baseline justify-between gap-2">

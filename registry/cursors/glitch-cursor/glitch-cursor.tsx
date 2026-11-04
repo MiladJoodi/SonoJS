@@ -15,7 +15,7 @@ export interface GlitchCursorProps {
 }
 
 /**
- * RGB-split layers with brief scramble on motion — black-stage friendly.
+ * RGB-split layers with brief scramble on motion - black-stage friendly.
  */
 export function GlitchCursor({ containerRef, className }: GlitchCursorProps) {
   const mouse = useRef({ x: 0, y: 0 })

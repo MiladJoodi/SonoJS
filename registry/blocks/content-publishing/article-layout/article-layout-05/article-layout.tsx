@@ -28,7 +28,7 @@ const ARTICLE = {
   chapter: "Chapter 3 of 8",
   title: "Building accessible design systems that scale",
   subtitle:
-    "Primitives, tokens, and CSS-first theming — part of a continuing series.",
+    "Primitives, tokens, and CSS-first theming - part of a continuing series.",
   author: { name: "Alex Rivera", role: "Lead Engineer" },
   date: "March 18, 2026",
   readTime: "8 min read",
@@ -187,7 +187,7 @@ export default function ArticleLayout({
             </h2>
             <p className="leading-7 text-muted-foreground">
               Keep colors, radius, and spacing in CSS variables. Light and dark
-              modes swap tokens without shipping a theme runtime — consumers
+              modes swap tokens without shipping a theme runtime - consumers
               stay in control of the look.
             </p>
           </section>

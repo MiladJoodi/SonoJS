@@ -26,7 +26,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Biaxial Line Chart — locked gallery chrome (navy × orange); type-required
+ * Biaxial Line Chart - locked gallery chrome (navy × orange); type-required
  * dual Y-axes with independent scales (revenue vs orders). Metric header scrubber.
  * Installs to: components/charts/biaxial-line-chart.tsx
  */
@@ -156,7 +156,7 @@ function niceMax(values: number[]) {
 
 function BiaxialLineChart({
   title = "Revenue vs orders",
-  subtitle = "Independent scales — revenue and order count.",
+  subtitle = "Independent scales - revenue and order count.",
   data = DEMO_DATA,
   className,
   plotDir,
@@ -467,7 +467,7 @@ function BiaxialLineChart({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">

@@ -26,7 +26,7 @@ export async function GET(
 
   try {
     const source = await getProComponentSource(slug)
-    // Metadata only — zip bytes via `/archive`. Never inline binary here.
+    // Metadata only - zip bytes via `/archive`. Never inline binary here.
     return NextResponse.json({
       ok: true,
       slug: source.slug,

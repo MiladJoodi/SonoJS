@@ -1,5 +1,5 @@
 ---
-description: SonoJS folder layout — group files per component, block, chart, or major section
+description: SonoJS folder layout - group files per component, block, chart, or major section
 globs: registry/**/*,packages/ui/**/*,app/(app)/docs/**/*,app/(app)/tools/**/*,components/**/*
 alwaysApply: true
 ---
@@ -42,11 +42,12 @@ UI components: author in `packages/ui/src/components/` only (`registry:build` �
 Rules:
 
 1. **Charts:** author under `registry/charts/<category>/<slug>.tsx`. Folder = catalog category (`bar`, `area`, …). Consumer install stays flat: `components/charts/<slug>.tsx`.
-2. **One folder per UI item name** (`button`, `login-01`). Folder name matches the registry / docs slug.
-3. **Examples** live under `registry/examples/<component>/`, not `registry/examples/<component>-<variant>.tsx` at the root of `examples/`.
-4. **Blocks** live under `registry/blocks/<category>/<name>/`. Category matches the docs catalog (`ai-agents`, `authentication`, …). Keep every file for that block inside its folder.
-5. Prefer a small `index.ts` barrel when the folder has multiple entry files consumers import together.
-6. Shared utilities stay in `lib/`, `hooks/`, or `packages/ui/src/lib` — not inside a random component folder unless they are private to that item.
+2. **3D (new items):** author under `packages/ui/src/components/3d/<slug>/`. Examples under `registry/examples/3d/<slug>/`. Docs under `app/(app)/3d/<slug>/`. Media under `public/media/3d/<slug>/`. Consumer install: `components/3d/<slug>/…`. Exceptions: `clothes-rack` stays flat (`components/clothes-rack`) and is also listed on `/3d`; CSS strip `marquee` stays flat (`components/ui/marquee`) with dual docs on `/3d/marquee`; the tilted photo columns live as `image-marquee` (`components/3d/image-marquee`).
+3. **One folder per UI item name** (`button`, `login-01`). Folder name matches the registry / docs slug.
+4. **Examples** live under `registry/examples/<component>/` (or `registry/examples/<category>/<component>/` for categories like `3d`), not `registry/examples/<component>-<variant>.tsx` at the root of `examples/`.
+5. **Blocks** live under `registry/blocks/<category>/<name>/`. Category matches the docs catalog (`ai-agents`, `authentication`, …). Keep every file for that block inside its folder.
+6. Prefer a small `index.ts` barrel when the folder has multiple entry files consumers import together.
+7. Shared utilities stay in `lib/`, `hooks/`, or `packages/ui/src/lib` - not inside a random component folder unless they are private to that item.
 
 ## `@sonojs/ui` package
 

@@ -26,7 +26,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Line Step — locked gallery chrome (navy × orange).
+ * Line Step - locked gallery chrome (navy × orange).
  * Dual step lines (`type="step"`) + metric header scrubber.
  * Installs to: components/charts/line-step.tsx
  */
@@ -144,7 +144,7 @@ function formatCompact(value: number, locale: string) {
 
 function LineStep({
   title = "Website Traffic by Device – H1 2026",
-  subtitle = "Step interpolation — flat segments between months.",
+  subtitle = "Step interpolation - flat segments between months.",
   data = DEMO_DATA,
   className,
   plotDir,
@@ -448,7 +448,7 @@ function LineStep({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{monthLabel}</p>

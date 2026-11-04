@@ -103,21 +103,21 @@ export default async function ContextMenuDocsPage() {
             {
               name: "inset",
               type: "boolean",
-              defaultValue: "—",
+              defaultValue: "-",
               description:
-                "On Item / SubTrigger / Label / Checkbox / Radio — indent to align with icons.",
+                "On Item / SubTrigger / Label / Checkbox / Radio - indent to align with icons.",
             },
             {
               name: "variant",
               type: '"default" | "destructive"',
               defaultValue: '"default"',
-              description: "On ContextMenuItem — destructive styles for deletes.",
+              description: "On ContextMenuItem - destructive styles for deletes.",
             },
             {
               name: "checked",
               type: "boolean",
-              defaultValue: "—",
-              description: "On ContextMenuCheckboxItem — checked state.",
+              defaultValue: "-",
+              description: "On ContextMenuCheckboxItem - checked state.",
             },
             {
               name: "disabled",

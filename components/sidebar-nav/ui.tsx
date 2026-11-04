@@ -3,7 +3,7 @@ import { ChevronDownIcon } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
-/** Shared sidebar list chrome — docs / blocks / charts / tools. */
+/** Shared sidebar list chrome - docs / blocks / charts / tools. */
 
 /**
  * Shared layout grid for docs / charts / blocks / tools.
@@ -21,14 +21,14 @@ export const OFFER_RAIL_CLASS =
 
 /**
  * Sticky docs nav (shadcn-style): stays while the page scrolls; list scrolls inside.
- * `self-start` is required in the layout grid — stretch makes sticky a no-op.
+ * `self-start` is required in the layout grid - stretch makes sticky a no-op.
  */
 export const SIDEBAR_SHELL_CLASS =
   "sticky top-[calc(var(--header-height)+0.6rem)] z-30 hidden h-[calc(100svh-var(--header-height)-2rem)] max-h-[calc(100svh-var(--header-height)-2rem)] w-full min-h-0 shrink-0 self-start overflow-hidden overscroll-none bg-transparent [--sidebar-menu-width:--spacing(56)] lg:flex"
 
 export const SIDEBAR_SEARCH_WRAP_CLASS = "shrink-0 pe-2 pt-2 pb-3"
 
-/** Scrollable nav list — soft thin bar (docs / blocks / charts / tools). */
+/** Scrollable nav list - soft thin bar (docs / blocks / charts / tools). */
 export const SIDEBAR_CONTENT_CLASS = "scrollbar-soft px-0 pb-8"
 
 export const SIDEBAR_SEARCH_INPUT_CLASS = "text-[13px]"

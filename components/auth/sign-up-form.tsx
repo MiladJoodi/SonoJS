@@ -211,7 +211,7 @@ export function SignUpForm({
     <AuthCard layout={layout}>
       <AuthCardHeader
         title="Create an account"
-        description="Name, email, and a password — or continue with Google / GitHub."
+        description="Name, email, and a password - or continue with Google / GitHub."
       />
 
       <form className="flex flex-col gap-4" onSubmit={handleSubmit}>

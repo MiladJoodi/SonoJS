@@ -5,7 +5,7 @@ import { pageMetadata } from "@/lib/seo"
 export const metadata = pageMetadata({
   title: "Charts",
   description:
-    "Browse SonoJS chart demos with live thumbnails — install React chart examples with the CLI.",
+    "Browse SonoJS chart demos with live thumbnails - install React chart examples with the CLI.",
   path: "/charts",
 })
 

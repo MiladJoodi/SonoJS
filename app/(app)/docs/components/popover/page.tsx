@@ -114,13 +114,13 @@ export default async function PopoverDocsPage() {
               name: "align",
               type: '"start" | "center" | "end"',
               defaultValue: '"center"',
-              description: "On `PopoverContent` — horizontal alignment.",
+              description: "On `PopoverContent` - horizontal alignment.",
             },
             {
               name: "side",
               type: '"top" | "right" | "bottom" | "left"',
               defaultValue: '"bottom"',
-              description: "On `PopoverContent` — preferred side of the trigger.",
+              description: "On `PopoverContent` - preferred side of the trigger.",
             },
             {
               name: "sideOffset",
@@ -132,7 +132,7 @@ export default async function PopoverDocsPage() {
               name: "asChild",
               type: "boolean",
               defaultValue: "false",
-              description: "On `PopoverTrigger` — merge onto a child control.",
+              description: "On `PopoverTrigger` - merge onto a child control.",
             },
           ]}
         />

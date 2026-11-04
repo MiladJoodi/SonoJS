@@ -5,6 +5,21 @@ import type { ComponentType } from "react"
 export type ExampleLoader = () => Promise<{ default: ComponentType<any> }>
 
 const folderModules = {
+  "3d/beam-circle": () => import("./examples/3d/beam-circle/_loaders"),
+  "3d/beam-circle-3d": () => import("./examples/3d/beam-circle-3d/_loaders"),
+  "3d/glass-coin-carousel": () => import("./examples/3d/glass-coin-carousel/_loaders"),
+  "3d/hanging-id-card": () => import("./examples/3d/hanging-id-card/_loaders"),
+  "3d/hover-gallery": () => import("./examples/3d/hover-gallery/_loaders"),
+  "3d/image-marquee": () => import("./examples/3d/image-marquee/_loaders"),
+  "3d/image-pageflip": () => import("./examples/3d/image-pageflip/_loaders"),
+  "3d/image-ring": () => import("./examples/3d/image-ring/_loaders"),
+  "3d/infinite-drift": () => import("./examples/3d/infinite-drift/_loaders"),
+  "3d/infinite-drift-2": () => import("./examples/3d/infinite-drift-2/_loaders"),
+  "3d/model-viewer": () => import("./examples/3d/model-viewer/_loaders"),
+  "3d/perspective-card": () => import("./examples/3d/perspective-card/_loaders"),
+  "3d/plasma-globe": () => import("./examples/3d/plasma-globe/_loaders"),
+  "3d/scroll-trigger": () => import("./examples/3d/scroll-trigger/_loaders"),
+  "3d/smokey-frame": () => import("./examples/3d/smokey-frame/_loaders"),
   "accordion": () => import("./examples/accordion/_loaders"),
   "agent-activity": () => import("./examples/agent-activity/_loaders"),
   "agent-activity-2": () => import("./examples/agent-activity-2/_loaders"),
@@ -23,6 +38,15 @@ const folderModules = {
   "calendar": () => import("./examples/calendar/_loaders"),
   "card": () => import("./examples/card/_loaders"),
   "carousel": () => import("./examples/carousel/_loaders"),
+  "carousels/3d-bend-carousel": () => import("./examples/carousels/3d-bend-carousel/_loaders"),
+  "carousels/3d-carousel": () => import("./examples/carousels/3d-carousel/_loaders"),
+  "carousels/3d-image-carousel": () => import("./examples/carousels/3d-image-carousel/_loaders"),
+  "carousels/3d-image-slider": () => import("./examples/carousels/3d-image-slider/_loaders"),
+  "carousels/3d-slider": () => import("./examples/carousels/3d-slider/_loaders"),
+  "carousels/angled-slider": () => import("./examples/carousels/angled-slider/_loaders"),
+  "carousels/chain-carousel": () => import("./examples/carousels/chain-carousel/_loaders"),
+  "carousels/cool-slide-gallery": () => import("./examples/carousels/cool-slide-gallery/_loaders"),
+  "carousels/stylish-carousel": () => import("./examples/carousels/stylish-carousel/_loaders"),
   "checkbox": () => import("./examples/checkbox/_loaders"),
   "citations": () => import("./examples/citations/_loaders"),
   "clothes-rack": () => import("./examples/clothes-rack/_loaders"),
@@ -107,11 +131,17 @@ const folderModules = {
   "voice-selector": () => import("./examples/voice-selector/_loaders"),
 } as const
 
-const FOLDERS_LONGEST_FIRST = ["image-generation-2","streaming-response","selection-actions","structured-output","image-generation","agent-activity-2","agent-code-block","message-scroller","inline-citation","navigation-menu","rainbow-button","electro-border","agent-activity","loading-states","model-selector","prompt-input-2","reasoning-text","verified-badge","voice-selector","approval-card","dropdown-menu","native-select","thinking-orbs","tool-approval","transcription","alert-dialog","button-group","context-menu","clothes-rack","mic-selector","open-in-chat","prompt-input","toggle-group","voice-ai-orb","collapsible","date-picker","input-group","radio-group","scroll-area","attachment","breadcrumb","code-block","data-table","hover-card","ai-sidebar","pagination","pro-button","tweet-card","accordion","citations","file-diff","fluid-orb","input-otp","resizable","separator","task-rows","todo-list","calendar","combobox","carousel","checkbox","progress","skeleton","sortable","terminal","timeline","textarea","command","marquee","menubar","message","persona","popover","spinner","tooltip","avatar","bubble","button","dialog","drawer","marker","select","slider","sonner","switch","toggle","badge","alert","empty","field","input","label","queue","sheet","table","trace","card","item","tabs","kbd"] as const
+const FOLDERS_LONGEST_FIRST = ["3d/glass-coin-carousel","carousels/cool-slide-gallery","image-generation-2","streaming-response","carousels/3d-image-carousel","selection-actions","structured-output","carousels/stylish-carousel","carousels/3d-bend-carousel","3d/perspective-card","3d/infinite-drift-2","image-generation","agent-activity-2","agent-code-block","message-scroller","carousels/3d-image-slider","3d/hanging-id-card","inline-citation","navigation-menu","carousels/chain-carousel","3d/scroll-trigger","3d/image-pageflip","3d/beam-circle-3d","3d/infinite-drift","rainbow-button","electro-border","agent-activity","loading-states","model-selector","prompt-input-2","reasoning-text","verified-badge","voice-selector","carousels/angled-slider","3d/hover-gallery","3d/image-marquee","approval-card","dropdown-menu","native-select","thinking-orbs","tool-approval","transcription","3d/model-viewer","3d/smokey-frame","3d/plasma-globe","alert-dialog","button-group","context-menu","clothes-rack","mic-selector","open-in-chat","prompt-input","toggle-group","voice-ai-orb","carousels/3d-carousel","3d/beam-circle","collapsible","date-picker","input-group","radio-group","scroll-area","3d/image-ring","attachment","breadcrumb","code-block","data-table","hover-card","ai-sidebar","pagination","pro-button","tweet-card","carousels/3d-slider","accordion","citations","file-diff","fluid-orb","input-otp","resizable","separator","task-rows","todo-list","calendar","combobox","carousel","checkbox","progress","skeleton","sortable","terminal","timeline","textarea","command","marquee","menubar","message","persona","popover","spinner","tooltip","avatar","bubble","button","dialog","drawer","marker","select","slider","sonner","switch","toggle","badge","alert","empty","field","input","label","queue","sheet","table","trace","card","item","tabs","kbd"] as const
+
+function exampleSlug(folder: string): string {
+  const i = folder.lastIndexOf("/")
+  return i === -1 ? folder : folder.slice(i + 1)
+}
 
 function folderForExample(name: string): string | undefined {
   for (const folder of FOLDERS_LONGEST_FIRST) {
-    if (name === folder || name.startsWith(`${folder}-`)) return folder
+    const slug = exampleSlug(folder)
+    if (name === slug || name.startsWith(`${slug}-`)) return folder
   }
   return undefined
 }

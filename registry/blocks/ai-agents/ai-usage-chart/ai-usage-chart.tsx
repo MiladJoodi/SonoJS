@@ -206,7 +206,7 @@ function formatCompact(value: number) {
   return String(value)
 }
 
-/** AI usage analytics surface — tokens, cost, requests, latency, model share. */
+/** AI usage analytics surface - tokens, cost, requests, latency, model share. */
 function AiUsageChart({
   title = "AI Usage & API Token Analytics",
   subtitle = "Monitor token consumption, model costs, request throughput, and latency.",

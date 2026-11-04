@@ -26,7 +26,7 @@ export default function BlockOrderSummaryDocsPage() {
       <BlocksPageHeader
         title="Order Summary"
         pathname="/blocks/ecommerce/order-summary"
-        description="Six production shells—boutique receipt, fulfillment board, commerce success, atelier split, account console, and invoice document."
+        description="Six production shells-boutique receipt, fulfillment board, commerce success, atelier split, account console, and invoice document."
       />
 
       <div className="flex flex-col gap-8">

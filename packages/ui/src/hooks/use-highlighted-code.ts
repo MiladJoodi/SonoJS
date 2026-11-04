@@ -61,7 +61,7 @@ export function useHighlightedCode(value: string, language: string) {
     setDone(next)
   }
 
-  // The last line is still being written — tokenize on every render.
+  // The last line is still being written - tokenize on every render.
   const tail = code.slice(end)
 
   return React.useMemo(() => {

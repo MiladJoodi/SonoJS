@@ -133,7 +133,7 @@ export type OfferCardProps = {
 }
 
 /**
- * Full-width sidebar-style Pro upsell — green ping badge, line-shadow + aurora
+ * Full-width sidebar-style Pro upsell - green ping badge, line-shadow + aurora
  * headline, checklist, centered lifetime price (no meteor border).
  */
 export default function OfferCard({

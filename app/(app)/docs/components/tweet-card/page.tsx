@@ -51,7 +51,7 @@ export default async function TweetCardDocsPage() {
             <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
               text
             </code>
-            — or use the SonoJS defaults.
+            - or use the SonoJS defaults.
           </p>
         }
       />

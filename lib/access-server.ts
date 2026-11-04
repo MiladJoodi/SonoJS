@@ -39,7 +39,7 @@ export async function getViewer(): Promise<Viewer> {
   const userId = await getAuthUserId()
   if (!userId) return { kind: "guest" }
 
-  // Prefer API user fetch — `currentUser()` also depends on middleware headers.
+  // Prefer API user fetch - `currentUser()` also depends on middleware headers.
   const client = await clerkClient()
   const user = await client.users.getUser(userId)
   const metadata = user.publicMetadata

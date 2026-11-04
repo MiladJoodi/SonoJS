@@ -102,7 +102,7 @@ export default async function SeparatorDocsPage() {
             {
               name: "className",
               type: "string",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Merge extra Tailwind classes (e.g. spacing).",
             },
           ]}

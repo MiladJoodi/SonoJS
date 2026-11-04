@@ -49,7 +49,7 @@ export default function BlockAuthorProfileDocsPage() {
       <BlocksPageHeader
         title="Author Profile"
         pathname="/blocks/content-publishing/author-profile"
-        description="Publishing identity — directory cards, profile hero, cover split, compact rows, spotlight theater, tabs workspace, type bio, team rail, stats dashboard, and social chip card."
+        description="Publishing identity - directory cards, profile hero, cover split, compact rows, spotlight theater, tabs workspace, type bio, team rail, stats dashboard, and social chip card."
       />
 
       <div className="flex flex-col gap-8">

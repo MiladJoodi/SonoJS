@@ -1,4 +1,4 @@
-# Casino Lobby — marketplace assets
+# Casino Lobby - marketplace assets
 
 Category: `betting`  
 Slug / folder: `sonojs-betting-01`  

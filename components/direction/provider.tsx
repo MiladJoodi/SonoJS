@@ -50,7 +50,7 @@ export function DirectionProvider({
 
 export { useDirection }
 
-/** Toggle control for docs / playgrounds — does not replace site chrome direction. */
+/** Toggle control for docs / playgrounds - does not replace site chrome direction. */
 export function DirectionToggle({
   value,
   onValueChange,

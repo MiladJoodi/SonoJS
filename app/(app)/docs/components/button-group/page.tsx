@@ -672,7 +672,7 @@ export default async function ButtonGroupDocsPage() {
               type: "boolean",
               defaultValue: "false",
               description:
-                "On ButtonGroupText — render as the child element.",
+                "On ButtonGroupText - render as the child element.",
             },
           ]}
         />

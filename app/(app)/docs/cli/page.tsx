@@ -5,7 +5,7 @@ import { docsGuideMetadata } from "@/lib/seo"
 export const metadata = docsGuideMetadata(
   "/docs/cli",
   "CLI",
-  "SonoJS copy-source CLI — init the design system and add components with npx @sonojs/ui."
+  "SonoJS copy-source CLI - init the design system and add components with npx @sonojs/ui."
 )
 
 export default function CliDocsPage() {
@@ -69,15 +69,15 @@ npx @sonojs/ui@latest mcp`}
         <h2 className="text-h3">Options</h2>
         <ul className="list-disc space-y-2 ps-5 text-sm leading-relaxed text-muted-foreground">
           <li>
-            <code className="sono-inline-code">--cwd</code> — project directory
+            <code className="sono-inline-code">--cwd</code> - project directory
           </li>
           <li>
-            <code className="sono-inline-code">--registry</code> — registry URL
+            <code className="sono-inline-code">--registry</code> - registry URL
             or local path (default:{" "}
             <code className="sono-inline-code">{siteConfig.url}/r</code>)
           </li>
           <li>
-            <code className="sono-inline-code">--overwrite</code> — replace
+            <code className="sono-inline-code">--overwrite</code> - replace
             existing files
           </li>
           <li>

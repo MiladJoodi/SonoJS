@@ -58,7 +58,7 @@ export default function MediaPlayer({
           id="media-player-02-heading"
           className="mb-3 text-start text-sm text-muted-foreground"
         >
-          Immersive cinema · S1 E3 — Garden light
+          Immersive cinema · S1 E3 - Garden light
         </p>
         <div
           className="relative overflow-hidden rounded-[12px] bg-black shadow-soft"
@@ -111,7 +111,7 @@ export default function MediaPlayer({
           {showNext ? (
             <div className="absolute end-4 bottom-24 w-64 overflow-hidden rounded-[12px] border border-white/15 bg-zinc-900/95 p-3 text-start text-white shadow-soft">
               <p className="text-xs text-white/60">Next episode</p>
-              <p className="mt-1 text-sm font-semibold">E4 — Morning dew</p>
+              <p className="mt-1 text-sm font-semibold">E4 - Morning dew</p>
               <div className="mt-3 flex gap-2">
                 <Button
                   type="button"

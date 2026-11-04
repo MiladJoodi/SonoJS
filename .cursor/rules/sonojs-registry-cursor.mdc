@@ -1,10 +1,10 @@
 ---
-description: Installable registry UI — cursor-pointer on every clickable control
+description: Installable registry UI - cursor-pointer on every clickable control
 globs: registry/**/*.{tsx,ts},packages/ui/src/components/**/*.{tsx,ts}
 alwaysApply: true
 ---
 
-# SonoJS registry — cursor pointer on clickables
+# SonoJS registry - cursor pointer on clickables
 
 Applies to **installable** sources: `packages/ui` (UI) and `registry/blocks|charts|examples` (what `sonojs add` ships).
 
@@ -16,7 +16,7 @@ Every interactive control must show a pointer cursor:
 - Accordion / Collapsible / Dialog / Sheet / Popover **triggers** and **close** buttons
 - Checkbox, Switch, Radio, Select trigger, Slider thumbs, menu items that activate
 - Use Tailwind `cursor-pointer`
-- Disabled: `disabled:cursor-not-allowed` and/or `disabled:pointer-events-none` — never leave a disabled control looking clickable
+- Disabled: `disabled:cursor-not-allowed` and/or `disabled:pointer-events-none` - never leave a disabled control looking clickable
 
 ```tsx
 // ✅

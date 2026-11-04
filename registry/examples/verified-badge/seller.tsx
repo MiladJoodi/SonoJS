@@ -45,7 +45,7 @@ export function VerifiedBadgeSeller() {
         </CardHeader>
         <CardContent>
           <p className="text-sm leading-relaxed text-muted-foreground">
-            Verified seller — ships worldwide with tracked delivery and easy
+            Verified seller - ships worldwide with tracked delivery and easy
             returns.
           </p>
         </CardContent>

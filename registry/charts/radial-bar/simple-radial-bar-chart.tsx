@@ -19,7 +19,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Simple Radial Bar Chart — concentric age-band rings with locked metric scrub.
+ * Simple Radial Bar Chart - concentric age-band rings with locked metric scrub.
  * Tokens: `--chart-1…5`. Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/simple-radial-bar-chart.tsx
  */
@@ -122,7 +122,7 @@ const chartRadialContainerClassName =
 
 function SimpleRadialBarChart({
   title = "Audience by age",
-  subtitle = "Share of visitors — last 30 days.",
+  subtitle = "Share of visitors - last 30 days.",
   data = DEMO_DATA,
   className,
   plotDir,
@@ -280,7 +280,7 @@ function SimpleRadialBarChart({
                 <span className="font-normal">of total</span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{caption}</p>

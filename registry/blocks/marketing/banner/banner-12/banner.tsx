@@ -20,7 +20,7 @@ export default function Banner({
       {...props}
     >
       <p className="min-w-0 text-start">
-        Ship responsive Tailwind UI faster — blocks that already look finished
+        Ship responsive Tailwind UI faster - blocks that already look finished
       </p>
       <a
         href="#"

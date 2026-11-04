@@ -212,7 +212,7 @@ function createId(prefix: string) {
   return `${prefix}-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`
 }
 function formatDate(value?: string, includeTime = false) {
-  if (!value) return "—"
+  if (!value) return "-"
   return new Date(value).toLocaleString("en-US", includeTime
     ? { dateStyle: "medium", timeStyle: "short" }
     : { dateStyle: "medium" })

@@ -27,7 +27,7 @@ import { cursorRegistryItems } from "./registry-cursor-items.mjs"
  * }} RegistryItemDef
  */
 
-/** Rainbow button — spectrum + motion (injected on `sonojs add`). */
+/** Rainbow button - spectrum + motion (injected on `sonojs add`). */
 const RAINBOW_BUTTON_CSS_VARS = {
   theme: {
     "animate-rainbow": "rainbow var(--speed, 2s) infinite linear",
@@ -55,7 +55,7 @@ const RAINBOW_BUTTON_CSS = {
   },
 }
 
-/** Infinite scrolling strip — injected on `sonojs add marquee`. */
+/** Infinite scrolling strip - injected on `sonojs add marquee`. */
 const MARQUEE_CSS_VARS = {
   theme: {
     "animate-marquee": "marquee var(--duration) infinite linear",
@@ -83,7 +83,7 @@ const MARQUEE_CSS = {
   },
 }
 
-/** Soft surfaces — install injects these so elevated cards match docs. */
+/** Soft surfaces - install injects these so elevated cards match docs. */
 const SOFT_SURFACE_CSS_VARS = {
   light: {
     canvas: "#f3f3f4",
@@ -2924,7 +2924,7 @@ const registryItemsRaw = [
     type: "registry:ui",
     title: "Dropdown Menu",
     description:
-      "Displays a menu of actions triggered by a button — shortcuts, submenus, checkboxes, and radios.",
+      "Displays a menu of actions triggered by a button - shortcuts, submenus, checkboxes, and radios.",
     dependencies: ["radix-ui", "lucide-react", "clsx", "tailwind-merge"],
     files: [
       {
@@ -3075,7 +3075,7 @@ const registryItemsRaw = [
     type: "registry:ui",
     title: "Inline Citation",
     description:
-      "Hoverable citations inline with text — source pills and a carousel of titles, URLs, and quotes.",
+      "Hoverable citations inline with text - source pills and a carousel of titles, URLs, and quotes.",
     dependencies: ["lucide-react", "clsx", "tailwind-merge"],
     registryDependencies: ["badge", "carousel", "hover-card"],
     files: [
@@ -3411,7 +3411,7 @@ const registryItemsRaw = [
     type: "registry:ui",
     title: "Mic Selector",
     description:
-      "A searchable popover for picking an audio input — permission-aware labels and live device updates.",
+      "A searchable popover for picking an audio input - permission-aware labels and live device updates.",
     dependencies: ["lucide-react", "clsx", "tailwind-merge"],
     registryDependencies: ["button", "command", "popover"],
     files: [
@@ -3427,7 +3427,7 @@ const registryItemsRaw = [
     type: "registry:ui",
     title: "Model Selector",
     description:
-      "A searchable dialog for picking an AI model — grouped by chef, with provider logos.",
+      "A searchable dialog for picking an AI model - grouped by chef, with provider logos.",
     dependencies: ["lucide-react", "clsx", "tailwind-merge"],
     registryDependencies: ["dialog", "command"],
     files: [
@@ -3658,14 +3658,14 @@ const registryItemsRaw = [
     description:
       "A calendar component that allows users to select a date or a range of dates.",
     dependencies: [
-      // v10 changes DayPicker classNames / dropdown DOM — keep on v9 with docs.
+      // v10 changes DayPicker classNames / dropdown DOM - keep on v9 with docs.
       "react-day-picker@^9.14.0",
       "date-fns",
       "lucide-react",
       "clsx",
       "tailwind-merge",
     ],
-    // popover: date-picker docs compose Calendar inside Popover — install with calendar
+    // popover: date-picker docs compose Calendar inside Popover - install with calendar
     registryDependencies: ["button", "popover"],
     files: [
       {
@@ -3789,7 +3789,7 @@ const registryItemsRaw = [
     type: "registry:ui",
     title: "Select",
     description:
-      "Displays a list of options for the user to pick from—triggered by a button.",
+      "Displays a list of options for the user to pick from-triggered by a button.",
     dependencies: ["radix-ui", "lucide-react", "clsx", "tailwind-merge"],
     files: [
       {
@@ -4120,7 +4120,7 @@ const registryItemsRaw = [
     type: "registry:ui",
     title: "Tabs",
     description:
-      "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
+      "A set of layered sections of content-known as tab panels-that are displayed one at a time.",
     dependencies: [
       "radix-ui",
       "class-variance-authority",
@@ -4279,6 +4279,593 @@ const registryItemsRaw = [
     ],
   },
   {
+    name: "image-ring",
+    type: "registry:ui",
+    title: "Image Ring",
+    description:
+      "A drag-spinnable 3D ring of images with inertia and entrance stagger.",
+    dependencies: ["motion"],
+    files: [
+      {
+        path: "packages/ui/src/components/3d/image-ring/index.tsx",
+        type: "registry:ui",
+        target: "components/3d/image-ring/index.tsx",
+      },
+      ...["01", "02", "03", "04", "05", "06", "07", "08", "09", "10"].map(
+        (n) => ({
+          path: `packages/ui/src/components/3d/image-ring/images/${n}.jpg`,
+          type: "registry:file",
+          target: `components/3d/image-ring/images/${n}.jpg`,
+        })
+      ),
+    ],
+  },
+  {
+    name: "glass-coin-carousel",
+    type: "registry:ui",
+    title: "Glass Coin Carousel",
+    description:
+      "A WebGL orbit of glass coins with fresnel shading and a center label.",
+    files: [
+      {
+        path: "packages/ui/src/components/3d/glass-coin-carousel/index.tsx",
+        type: "registry:ui",
+        target: "components/3d/glass-coin-carousel/index.tsx",
+      },
+    ],
+  },
+  {
+    name: "hover-gallery",
+    type: "registry:ui",
+    title: "Hover Gallery",
+    description:
+      "A 3D hover-expand gallery with keyboard focus, glow, and optional autoplay.",
+    dependencies: ["motion", "lucide-react"],
+    files: [
+      {
+        path: "packages/ui/src/components/3d/hover-gallery/index.tsx",
+        type: "registry:ui",
+        target: "components/3d/hover-gallery/index.tsx",
+      },
+      ...["01", "02", "03", "04", "05", "06", "07"].map((n) => ({
+        path: `packages/ui/src/components/3d/hover-gallery/images/${n}.jpg`,
+        type: "registry:file",
+        target: `components/3d/hover-gallery/images/${n}.jpg`,
+      })),
+    ],
+  },
+  {
+    name: "image-marquee",
+    type: "registry:ui",
+    title: "Image Marquee",
+    description:
+      "A tilted 3D column marquee of images with alternating scroll and optional links.",
+    dependencies: ["motion"],
+    files: [
+      {
+        path: "packages/ui/src/components/3d/image-marquee/index.tsx",
+        type: "registry:ui",
+        target: "components/3d/image-marquee/index.tsx",
+      },
+      ...[
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07",
+        "08",
+        "09",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18",
+      ].map((n) => ({
+        path: `packages/ui/src/components/3d/image-marquee/images/${n}.jpg`,
+        type: "registry:file",
+        target: `components/3d/image-marquee/images/${n}.jpg`,
+      })),
+    ],
+  },
+  {
+    name: "model-viewer",
+    type: "registry:ui",
+    title: "Model Viewer",
+    description:
+      "An interactive Three.js model viewer for GLTF, GLB, FBX, and OBJ with orbit, lights, and environment presets.",
+    dependencies: [
+      "three",
+      "@types/three",
+      "@react-three/fiber",
+      "@react-three/drei",
+    ],
+    files: [
+      {
+        path: "packages/ui/src/components/3d/model-viewer/index.tsx",
+        type: "registry:ui",
+        target: "components/3d/model-viewer/index.tsx",
+      },
+      ...[
+        "FlightHelmet.gltf",
+        "FlightHelmet.bin",
+        "FlightHelmet_Materials_RubberWoodMat_Normal.png",
+        "FlightHelmet_Materials_RubberWoodMat_OcclusionRoughMetal.png",
+        "FlightHelmet_Materials_RubberWoodMat_BaseColor.png",
+        "FlightHelmet_Materials_GlassPlasticMat_Normal.png",
+        "FlightHelmet_Materials_GlassPlasticMat_OcclusionRoughMetal.png",
+        "FlightHelmet_Materials_GlassPlasticMat_BaseColor.png",
+        "FlightHelmet_Materials_MetalPartsMat_Normal.png",
+        "FlightHelmet_Materials_MetalPartsMat_OcclusionRoughMetal.png",
+        "FlightHelmet_Materials_MetalPartsMat_BaseColor.png",
+        "FlightHelmet_Materials_LeatherPartsMat_Normal.png",
+        "FlightHelmet_Materials_LeatherPartsMat_OcclusionRoughMetal.png",
+        "FlightHelmet_Materials_LeatherPartsMat_BaseColor.png",
+        "FlightHelmet_Materials_LensesMat_Normal.png",
+        "FlightHelmet_Materials_LensesMat_OcclusionRoughMetal.png",
+        "FlightHelmet_Materials_LensesMat_BaseColor.png",
+      ].map((name) => ({
+        path: `packages/ui/src/components/3d/model-viewer/model/${name}`,
+        type: "registry:file",
+        // Install into public so the default `/media/3d/model-viewer/...` URL works
+        target: `public/media/3d/model-viewer/${name}`,
+      })),
+    ],
+  },
+  {
+    name: "perspective-card",
+    type: "registry:ui",
+    title: "Perspective Card",
+    description:
+      "A floating photo card that tilts, shines, and parallax-scrolls with the pointer.",
+    files: [
+      {
+        path: "packages/ui/src/components/3d/perspective-card/index.tsx",
+        type: "registry:ui",
+        target: "components/3d/perspective-card/index.tsx",
+      },
+      {
+        path: "packages/ui/src/components/3d/perspective-card/images/01.jpg",
+        type: "registry:file",
+        target: "components/3d/perspective-card/images/01.jpg",
+      },
+    ],
+  },
+  {
+    name: "scroll-trigger",
+    type: "registry:ui",
+    title: "Scroll Trigger",
+    description:
+      "Infinite horizontal rows whose speed reacts to page scroll velocity.",
+    dependencies: ["motion"],
+    files: [
+      {
+        path: "packages/ui/src/components/3d/scroll-trigger/index.tsx",
+        type: "registry:ui",
+        target: "components/3d/scroll-trigger/index.tsx",
+      },
+    ],
+  },
+  {
+    name: "smokey-frame",
+    type: "registry:ui",
+    title: "Smokey Frame",
+    description:
+      "A WebGL edge of animated smoke that can wrap any content.",
+    files: [
+      {
+        path: "packages/ui/src/components/3d/smokey-frame/index.tsx",
+        type: "registry:ui",
+        target: "components/3d/smokey-frame/index.tsx",
+      },
+    ],
+  },
+  {
+    name: "image-pageflip",
+    type: "registry:ui",
+    title: "Image Pageflip",
+    description:
+      "A 3D book of image leaves with peek, spine shift, controls, and optional autoplay.",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "packages/ui/src/components/3d/image-pageflip/index.tsx",
+        type: "registry:ui",
+        target: "components/3d/image-pageflip/index.tsx",
+      },
+      ...["01", "02", "03", "04", "05", "06", "07", "08", "09", "10"].map(
+        (n) => ({
+          path: `packages/ui/src/components/3d/image-pageflip/images/${n}.jpg`,
+          type: "registry:file",
+          target: `components/3d/image-pageflip/images/${n}.jpg`,
+        })
+      ),
+    ],
+  },
+  {
+    name: "beam-circle",
+    type: "registry:ui",
+    title: "Beam Circle",
+    description:
+      "Orbiting icons around a pulsing hub for loaders, brand marks, or dashboard ornaments.",
+    dependencies: ["motion"],
+    files: [
+      {
+        path: "packages/ui/src/components/3d/beam-circle/index.tsx",
+        type: "registry:ui",
+        target: "components/3d/beam-circle/index.tsx",
+      },
+      {
+        path: "packages/ui/src/components/3d/beam-circle/icons/index.ts",
+        type: "registry:component",
+        target: "components/3d/beam-circle/icons/index.ts",
+      },
+      {
+        path: "packages/ui/src/components/3d/beam-circle/icons/react.tsx",
+        type: "registry:component",
+        target: "components/3d/beam-circle/icons/react.tsx",
+      },
+      {
+        path: "packages/ui/src/components/3d/beam-circle/icons/nextjs.tsx",
+        type: "registry:component",
+        target: "components/3d/beam-circle/icons/nextjs.tsx",
+      },
+      {
+        path: "packages/ui/src/components/3d/beam-circle/icons/typescript.tsx",
+        type: "registry:component",
+        target: "components/3d/beam-circle/icons/typescript.tsx",
+      },
+      {
+        path: "packages/ui/src/components/3d/beam-circle/icons/tailwind.tsx",
+        type: "registry:component",
+        target: "components/3d/beam-circle/icons/tailwind.tsx",
+      },
+    ],
+  },
+  {
+    name: "3d-beam-circle",
+    type: "registry:ui",
+    title: "3D Beam Circle",
+    description:
+      "SVG orbital arcs with traveling badges - semi or full circle, no WebGL.",
+    files: [
+      {
+        path: "packages/ui/src/components/3d/beam-circle-3d/index.tsx",
+        type: "registry:ui",
+        target: "components/3d/beam-circle-3d/index.tsx",
+      },
+      {
+        path: "packages/ui/src/components/3d/beam-circle-3d/icons/index.ts",
+        type: "registry:component",
+        target: "components/3d/beam-circle-3d/icons/index.ts",
+      },
+      {
+        path: "packages/ui/src/components/3d/beam-circle-3d/icons/react.tsx",
+        type: "registry:component",
+        target: "components/3d/beam-circle-3d/icons/react.tsx",
+      },
+      {
+        path: "packages/ui/src/components/3d/beam-circle-3d/icons/nextjs.tsx",
+        type: "registry:component",
+        target: "components/3d/beam-circle-3d/icons/nextjs.tsx",
+      },
+      {
+        path: "packages/ui/src/components/3d/beam-circle-3d/icons/typescript.tsx",
+        type: "registry:component",
+        target: "components/3d/beam-circle-3d/icons/typescript.tsx",
+      },
+      {
+        path: "packages/ui/src/components/3d/beam-circle-3d/icons/tailwind.tsx",
+        type: "registry:component",
+        target: "components/3d/beam-circle-3d/icons/tailwind.tsx",
+      },
+    ],
+  },
+  {
+    name: "infinite-drift",
+    type: "registry:ui",
+    title: "Infinite Drift",
+    description:
+      "Curved image bands with inertial drag and scroll - Canvas 2D, no WebGL.",
+    files: [
+      {
+        path: "packages/ui/src/components/3d/infinite-drift/index.tsx",
+        type: "registry:ui",
+        target: "components/3d/infinite-drift/index.tsx",
+      },
+      ...Array.from({ length: 20 }, (_, i) => {
+        const n = String(i + 1).padStart(2, "0")
+        return {
+          path: `packages/ui/src/components/3d/infinite-drift/images/${n}.jpg`,
+          type: "registry:file",
+          target: `components/3d/infinite-drift/images/${n}.jpg`,
+        }
+      }),
+    ],
+  },
+  {
+    name: "infinite-drift-2",
+    type: "registry:ui",
+    title: "Infinite Drift 2",
+    description:
+      "WebGL glass-dome gallery with tiled atlas (16 photos), chromatic fringe, drag inertia, and auto drift.",
+    files: [
+      {
+        path: "packages/ui/src/components/3d/infinite-drift-2/index.tsx",
+        type: "registry:ui",
+        target: "components/3d/infinite-drift-2/index.tsx",
+      },
+      ...Array.from({ length: 16 }, (_, i) => {
+        const n = String(i + 1).padStart(2, "0")
+        return {
+          path: `packages/ui/src/components/3d/infinite-drift-2/images/${n}.jpg`,
+          type: "registry:file",
+          target: `components/3d/infinite-drift-2/images/${n}.jpg`,
+        }
+      }),
+    ],
+  },
+  {
+    name: "hanging-id-card",
+    type: "registry:ui",
+    title: "Hanging Id Card",
+    description:
+      "Premium pendulum ID badge with holographic face, metal lanyard, drag/flick physics, and mobile-safe touch.",
+    files: [
+      {
+        path: "packages/ui/src/components/3d/hanging-id-card/index.tsx",
+        type: "registry:ui",
+        target: "components/3d/hanging-id-card/index.tsx",
+      },
+    ],
+  },
+  {
+    name: "plasma-globe",
+    type: "registry:ui",
+    title: "Plasma Globe",
+    description:
+      "OGL plasma sphere with electric blue filaments, glass corona, pointer focus, and mobile quality tiers.",
+    dependencies: ["ogl"],
+    files: [
+      {
+        path: "packages/ui/src/components/3d/plasma-globe/index.tsx",
+        type: "registry:ui",
+        target: "components/3d/plasma-globe/index.tsx",
+      },
+    ],
+  },
+  {
+    name: "3d-image-carousel",
+    type: "registry:ui",
+    title: "3D Image Carousel",
+    description:
+      "A cascade-style 3D image carousel with drag, arrows, and optional autoplay.",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "packages/ui/src/components/carousels/3d-image-carousel/index.tsx",
+        type: "registry:ui",
+        target: "components/carousels/3d-image-carousel/index.tsx",
+      },
+      {
+        path: "packages/ui/src/components/carousels/3d-image-carousel/slides.ts",
+        type: "registry:ui",
+        target: "components/carousels/3d-image-carousel/slides.ts",
+      },
+      ...["01", "02", "03", "04", "05"].map((n) => ({
+        path: `packages/ui/src/components/carousels/3d-image-carousel/images/${n}.jpg`,
+        type: "registry:file",
+        target: `components/carousels/3d-image-carousel/images/${n}.jpg`,
+      })),
+    ],
+  },
+  {
+    name: "3d-carousel",
+    type: "registry:ui",
+    title: "3D Carousel",
+    description:
+      "Perspective product spotlight with spring stack, autoplay scrubber, and swipe.",
+    dependencies: ["motion", "lucide-react"],
+    files: [
+      {
+        path: "packages/ui/src/components/carousels/3d-carousel/index.tsx",
+        type: "registry:ui",
+        target: "components/carousels/3d-carousel/index.tsx",
+      },
+      {
+        path: "packages/ui/src/components/carousels/3d-carousel/items.ts",
+        type: "registry:ui",
+        target: "components/carousels/3d-carousel/items.ts",
+      },
+      ...["01", "02", "03"].map((n) => ({
+        path: `packages/ui/src/components/carousels/3d-carousel/images/${n}.jpg`,
+        type: "registry:file",
+        target: `components/carousels/3d-carousel/images/${n}.jpg`,
+      })),
+    ],
+  },
+  {
+    name: "3d-image-slider",
+    type: "registry:ui",
+    title: "3D Image Slider",
+    description:
+      "Orbital 3D cylinder gallery with hover pause, rim light, and drag scrub.",
+    dependencies: ["motion"],
+    files: [
+      {
+        path: "packages/ui/src/components/carousels/3d-image-slider/index.tsx",
+        type: "registry:ui",
+        target: "components/carousels/3d-image-slider/index.tsx",
+      },
+      {
+        path: "packages/ui/src/components/carousels/3d-image-slider/default-images.ts",
+        type: "registry:ui",
+        target: "components/carousels/3d-image-slider/default-images.ts",
+      },
+      ...["01", "02", "03", "04", "05", "06", "07", "08", "09", "10"].map(
+        (n) => ({
+          path: `packages/ui/src/components/carousels/3d-image-slider/images/${n}.jpg`,
+          type: "registry:file",
+          target: `components/carousels/3d-image-slider/images/${n}.jpg`,
+        })
+      ),
+    ],
+  },
+  {
+    name: "3d-bend-carousel",
+    type: "registry:ui",
+    title: "3D Bend Carousel",
+    description:
+      "Film-strip bend stack with tunnel vignette, glare, drag snap, and glass controls.",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "packages/ui/src/components/carousels/3d-bend-carousel/index.tsx",
+        type: "registry:ui",
+        target: "components/carousels/3d-bend-carousel/index.tsx",
+      },
+      {
+        path: "packages/ui/src/components/carousels/3d-bend-carousel/items.ts",
+        type: "registry:ui",
+        target: "components/carousels/3d-bend-carousel/items.ts",
+      },
+      ...["01", "02", "03", "04", "05", "06"].map((n) => ({
+        path: `packages/ui/src/components/carousels/3d-bend-carousel/images/${n}.jpg`,
+        type: "registry:file",
+        target: `components/carousels/3d-bend-carousel/images/${n}.jpg`,
+      })),
+    ],
+  },
+  {
+    name: "3d-slider",
+    type: "registry:ui",
+    title: "3D Slider",
+    description:
+      "Kinetic cascade deck with live progress rail, depth blur, and wheel scrub.",
+    files: [
+      {
+        path: "packages/ui/src/components/carousels/3d-slider/index.tsx",
+        type: "registry:ui",
+        target: "components/carousels/3d-slider/index.tsx",
+      },
+      {
+        path: "packages/ui/src/components/carousels/3d-slider/items.ts",
+        type: "registry:ui",
+        target: "components/carousels/3d-slider/items.ts",
+      },
+      ...["01", "02", "03", "04", "05"].map((n) => ({
+        path: `packages/ui/src/components/carousels/3d-slider/images/${n}.jpg`,
+        type: "registry:file",
+        target: `components/carousels/3d-slider/images/${n}.jpg`,
+      })),
+    ],
+  },
+  {
+    name: "angled-slider",
+    type: "registry:ui",
+    title: "Angled Slider",
+    description:
+      "Editorial poster marquee - angled cards lift, shine, and straighten on hover.",
+    dependencies: ["motion"],
+    files: [
+      {
+        path: "packages/ui/src/components/carousels/angled-slider/index.tsx",
+        type: "registry:ui",
+        target: "components/carousels/angled-slider/index.tsx",
+      },
+      {
+        path: "packages/ui/src/components/carousels/angled-slider/items.ts",
+        type: "registry:ui",
+        target: "components/carousels/angled-slider/items.ts",
+      },
+      ...["01", "02", "03", "04", "05", "06"].map((n) => ({
+        path: `packages/ui/src/components/carousels/angled-slider/images/${n}.jpg`,
+        type: "registry:file",
+        target: `components/carousels/angled-slider/images/${n}.jpg`,
+      })),
+    ],
+  },
+  {
+    name: "chain-carousel",
+    type: "registry:ui",
+    title: "Chain Carousel",
+    description:
+      "Dual-rail linked picker with glass hub, pulse bead, and searchable jump.",
+    dependencies: ["motion", "lucide-react"],
+    registryDependencies: ["input"],
+    files: [
+      {
+        path: "packages/ui/src/components/carousels/chain-carousel/index.tsx",
+        type: "registry:ui",
+        target: "components/carousels/chain-carousel/index.tsx",
+      },
+      {
+        path: "packages/ui/src/components/carousels/chain-carousel/items.ts",
+        type: "registry:ui",
+        target: "components/carousels/chain-carousel/items.ts",
+      },
+    ],
+  },
+  {
+    name: "stylish-carousel",
+    type: "registry:ui",
+    title: "Stylish Carousel",
+    description:
+      "Lookbook fan with polaroid frames, ground shadow, and spring physics.",
+    dependencies: ["motion", "lucide-react"],
+    files: [
+      {
+        path: "packages/ui/src/components/carousels/stylish-carousel/index.tsx",
+        type: "registry:ui",
+        target: "components/carousels/stylish-carousel/index.tsx",
+      },
+      {
+        path: "packages/ui/src/components/carousels/stylish-carousel/items.ts",
+        type: "registry:ui",
+        target: "components/carousels/stylish-carousel/items.ts",
+      },
+      ...["01", "02", "03", "04", "05", "06", "07", "08", "09", "10"].map(
+        (n) => ({
+          path: `packages/ui/src/components/carousels/stylish-carousel/images/${n}.jpg`,
+          type: "registry:file",
+          target: `components/carousels/stylish-carousel/images/${n}.jpg`,
+        })
+      ),
+    ],
+  },
+
+  {
+    name: "cool-slide-gallery",
+    type: "registry:ui",
+    title: "Cool Slide Gallery",
+    description:
+      "Museum coverflow with floor bloom, rim light, titles, and glass controls.",
+    dependencies: ["motion", "lucide-react"],
+    files: [
+      {
+        path: "packages/ui/src/components/carousels/cool-slide-gallery/index.tsx",
+        type: "registry:ui",
+        target: "components/carousels/cool-slide-gallery/index.tsx",
+      },
+      {
+        path: "packages/ui/src/components/carousels/cool-slide-gallery/slides.ts",
+        type: "registry:ui",
+        target: "components/carousels/cool-slide-gallery/slides.ts",
+      },
+      ...["01", "02", "03", "04", "05"].map((n) => ({
+        path: `packages/ui/src/components/carousels/cool-slide-gallery/images/${n}.jpg`,
+        type: "registry:file",
+        target: `components/carousels/cool-slide-gallery/images/${n}.jpg`,
+      })),
+    ],
+  },
+
+  {
     name: "verified-badge",
     type: "registry:ui",
     title: "Verified Badge",
@@ -4299,7 +4886,7 @@ const registryItemsRaw = [
     type: "registry:ui",
     title: "Trace",
     description:
-      "Rows for agent steps — reasoning, tool calls, sources, and plans.",
+      "Rows for agent steps - reasoning, tool calls, sources, and plans.",
     dependencies: ["lucide-react", "clsx", "tailwind-merge"],
     registryDependencies: ["collapsible"],
     files: [
@@ -4331,7 +4918,7 @@ const registryItemsRaw = [
     type: "registry:ui",
     title: "Voice Selector",
     description:
-      "A searchable dialog for picking an AI voice — preview playback and metadata.",
+      "A searchable dialog for picking an AI voice - preview playback and metadata.",
     dependencies: ["lucide-react@^1.61.0", "clsx", "tailwind-merge"],
     registryDependencies: ["button", "dialog", "command", "spinner"],
     files: [
@@ -5644,7 +6231,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "otp-verification-01",
     description:
-      "Email OTP card — masked address, 3–3 slots, resend countdown, different-email link (RTL/LTR).",
+      "Email OTP card - masked address, 3–3 slots, resend countdown, different-email link (RTL/LTR).",
     cssVars: SOFT_SURFACE_CSS_VARS,
     registryDependencies: ["button", "input-otp", "label"],
     dependencies: ["input-otp", "lucide-react"],
@@ -5662,7 +6249,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "otp-verification-02",
     description:
-      "SMS OTP card — continuous 6 slots, masked phone, change number, resend countdown (RTL/LTR).",
+      "SMS OTP card - continuous 6 slots, masked phone, change number, resend countdown (RTL/LTR).",
     cssVars: SOFT_SURFACE_CSS_VARS,
     registryDependencies: ["button", "input-otp", "label"],
     dependencies: ["input-otp", "lucide-react"],
@@ -5680,7 +6267,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "otp-verification-03",
     description:
-      "Split brand OTP — dark trust panel + light form with countdown (RTL/LTR).",
+      "Split brand OTP - dark trust panel + light form with countdown (RTL/LTR).",
     cssVars: SOFT_SURFACE_CSS_VARS,
     registryDependencies: ["button", "input-otp", "label"],
     dependencies: ["input-otp", "lucide-react"],
@@ -5698,7 +6285,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "otp-verification-04",
     description:
-      "Error-recovery OTP — invalid slots, alert copy, Try again + Resend (RTL/LTR).",
+      "Error-recovery OTP - invalid slots, alert copy, Try again + Resend (RTL/LTR).",
     cssVars: SOFT_SURFACE_CSS_VARS,
     registryDependencies: ["button", "input-otp", "label"],
     dependencies: ["input-otp", "lucide-react"],
@@ -5716,7 +6303,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "otp-verification-05",
     description:
-      "Trust-device OTP — fingerprint mark, 30-day trust checkbox, verify (RTL/LTR).",
+      "Trust-device OTP - fingerprint mark, 30-day trust checkbox, verify (RTL/LTR).",
     cssVars: SOFT_SURFACE_CSS_VARS,
     registryDependencies: ["button", "checkbox", "input-otp", "label"],
     dependencies: ["input-otp", "lucide-react"],
@@ -5734,7 +6321,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "otp-verification-06",
     description:
-      "Onboarding-step OTP — step 2 of 3 progress, Back / Continue funnel (RTL/LTR).",
+      "Onboarding-step OTP - step 2 of 3 progress, Back / Continue funnel (RTL/LTR).",
     registryDependencies: ["button", "input-otp", "label"],
     dependencies: ["input-otp", "lucide-react"],
     files: [
@@ -5751,7 +6338,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "two-factor-01",
     description:
-      "Authenticator TOTP challenge — 3–3 slots, 30s hint, use another method (RTL/LTR).",
+      "Authenticator TOTP challenge - 3–3 slots, 30s hint, use another method (RTL/LTR).",
     cssVars: SOFT_SURFACE_CSS_VARS,
     registryDependencies: ["button", "input-otp", "label"],
     dependencies: ["input-otp", "lucide-react"],
@@ -5769,7 +6356,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "two-factor-02",
     description:
-      "SMS 2FA — continuous 6 slots, resend countdown, try authenticator (RTL/LTR).",
+      "SMS 2FA - continuous 6 slots, resend countdown, try authenticator (RTL/LTR).",
     cssVars: SOFT_SURFACE_CSS_VARS,
     registryDependencies: ["button", "input-otp", "label"],
     dependencies: ["input-otp", "lucide-react"],
@@ -5787,7 +6374,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "two-factor-03",
     description:
-      "Backup code 2FA — mono input, codes-left chip, single-use warning (RTL/LTR).",
+      "Backup code 2FA - mono input, codes-left chip, single-use warning (RTL/LTR).",
     cssVars: SOFT_SURFACE_CSS_VARS,
     registryDependencies: ["badge", "button", "input", "label"],
     dependencies: ["lucide-react"],
@@ -5805,7 +6392,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "two-factor-04",
     description:
-      "Choose 2FA method — selectable cards with Recommended badge (RTL/LTR).",
+      "Choose 2FA method - selectable cards with Recommended badge (RTL/LTR).",
     cssVars: SOFT_SURFACE_CSS_VARS,
     registryDependencies: ["badge", "button"],
     dependencies: ["lucide-react"],
@@ -5823,7 +6410,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "two-factor-05",
     description:
-      "Passkey-as-2FA — Continue with passkey or enter authenticator code (RTL/LTR).",
+      "Passkey-as-2FA - Continue with passkey or enter authenticator code (RTL/LTR).",
     cssVars: SOFT_SURFACE_CSS_VARS,
     registryDependencies: ["button", "input-otp", "label"],
     dependencies: ["input-otp", "lucide-react"],
@@ -5841,7 +6428,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "two-factor-06",
     description:
-      "New-device alert split — location meta + approve with TOTP / deny (RTL/LTR).",
+      "New-device alert split - location meta + approve with TOTP / deny (RTL/LTR).",
     cssVars: SOFT_SURFACE_CSS_VARS,
     registryDependencies: ["button", "input-otp", "label"],
     dependencies: ["input-otp", "lucide-react"],
@@ -5859,7 +6446,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "social-login-01",
     description:
-      "Provider stack — full-width Google/Apple/GitHub/Facebook, create account (RTL/LTR).",
+      "Provider stack - full-width Google/Apple/GitHub/Facebook, create account (RTL/LTR).",
     cssVars: SOFT_SURFACE_CSS_VARS,
     registryDependencies: ["button"],
     files: [
@@ -5924,7 +6511,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "social-login-04",
     description:
-      "Photo-split social sign-in — cover panel + Google/Apple card (RTL/LTR).",
+      "Photo-split social sign-in - cover panel + Google/Apple card (RTL/LTR).",
     cssVars: SOFT_SURFACE_CSS_VARS,
     registryDependencies: ["button", "separator"],
     dependencies: [],
@@ -5967,7 +6554,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "social-login-06",
     description:
-      "Brand-split social sign-in — dark trust panel + Google/Apple + magic link (RTL/LTR).",
+      "Brand-split social sign-in - dark trust panel + Google/Apple + magic link (RTL/LTR).",
     cssVars: SOFT_SURFACE_CSS_VARS,
     registryDependencies: ["button", "input", "label", "separator"],
     dependencies: ["lucide-react"],
@@ -5986,7 +6573,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "passkey-01",
     description:
-      "Passkey-first sign-in — fingerprint mark, trust line, another-way link (RTL/LTR).",
+      "Passkey-first sign-in - fingerprint mark, trust line, another-way link (RTL/LTR).",
     cssVars: SOFT_SURFACE_CSS_VARS,
     registryDependencies: ["button"],
     dependencies: ["lucide-react"],
@@ -6020,7 +6607,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "passkey-03",
     description:
-      "Passkey setup wizard — numbered steps, progress, skip later (RTL/LTR).",
+      "Passkey setup wizard - numbered steps, progress, skip later (RTL/LTR).",
     cssVars: SOFT_SURFACE_CSS_VARS,
     registryDependencies: ["button"],
     dependencies: ["lucide-react"],
@@ -6037,7 +6624,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "passkey-04",
     description:
-      "Manage passkeys — device list, This device badge, Add / Revoke (RTL/LTR).",
+      "Manage passkeys - device list, This device badge, Add / Revoke (RTL/LTR).",
     cssVars: SOFT_SURFACE_CSS_VARS,
     registryDependencies: ["badge", "button"],
     dependencies: ["lucide-react"],
@@ -6054,7 +6641,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "passkey-05",
     description:
-      "Cross-device passkey — QR panel + use this device instead (RTL/LTR).",
+      "Cross-device passkey - QR panel + use this device instead (RTL/LTR).",
     cssVars: SOFT_SURFACE_CSS_VARS,
     registryDependencies: ["button"],
     dependencies: ["lucide-react"],
@@ -6071,7 +6658,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "passkey-06",
     description:
-      "Brand-split passkey sign-in — dark trust panel + light CTA form (RTL/LTR).",
+      "Brand-split passkey sign-in - dark trust panel + light CTA form (RTL/LTR).",
     cssVars: SOFT_SURFACE_CSS_VARS,
     registryDependencies: ["button"],
     dependencies: ["lucide-react"],
@@ -6088,7 +6675,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "account-recovery-01",
     description:
-      "Email recovery request — mail mark, trust line, back to sign in (RTL/LTR).",
+      "Email recovery request - mail mark, trust line, back to sign in (RTL/LTR).",
     cssVars: SOFT_SURFACE_CSS_VARS,
     registryDependencies: ["button", "input", "label"],
     dependencies: ["lucide-react"],
@@ -6129,7 +6716,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "account-recovery-03",
     description:
-      "Check inbox confirmation — masked email, open mail app, resend countdown (RTL/LTR).",
+      "Check inbox confirmation - masked email, open mail app, resend countdown (RTL/LTR).",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: ["button"],
@@ -6147,7 +6734,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "account-recovery-04",
     description:
-      "Backup recovery code — mono input, remaining badge, verify (RTL/LTR).",
+      "Backup recovery code - mono input, remaining badge, verify (RTL/LTR).",
     cssVars: SOFT_SURFACE_CSS_VARS,
     registryDependencies: ["badge", "button", "input", "label"],
     dependencies: ["lucide-react"],
@@ -6165,7 +6752,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "account-recovery-05",
     description:
-      "Choose recovery method — email, SMS, backup code, or support (RTL/LTR).",
+      "Choose recovery method - email, SMS, backup code, or support (RTL/LTR).",
     cssVars: SOFT_SURFACE_CSS_VARS,
     registryDependencies: ["badge", "button"],
     dependencies: ["lucide-react"],
@@ -6183,7 +6770,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "account-recovery-06",
     description:
-      "Brand-split locked recovery — dark trust panel + light email form (RTL/LTR).",
+      "Brand-split locked recovery - dark trust panel + light email form (RTL/LTR).",
     cssVars: SOFT_SURFACE_CSS_VARS,
     registryDependencies: ["button", "input", "label"],
     dependencies: ["lucide-react"],
@@ -6201,7 +6788,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "banner-01",
     description:
-      "Soft primary shipping strip with live pulse — free express + first-purchase deal (RTL/LTR).",
+      "Soft primary shipping strip with live pulse - free express + first-purchase deal (RTL/LTR).",
     files: [
       {
         path: "registry/blocks/marketing/banner/banner-01/banner.tsx",
@@ -6425,7 +7012,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "cookie-consent-01",
     description:
-      "Bottom floating cookie card — Accept / Reject / Manage with preference checkboxes (RTL/LTR).",
+      "Bottom floating cookie card - Accept / Reject / Manage with preference checkboxes (RTL/LTR).",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: ["badge", "button", "checkbox", "label"],
@@ -6442,7 +7029,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "cookie-consent-02",
     description:
-      "Full-width bottom cookie strip — Accept all / Reject all / Customize with prefs panel (RTL/LTR).",
+      "Full-width bottom cookie strip - Accept all / Reject all / Customize with prefs panel (RTL/LTR).",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: ["badge", "button", "checkbox", "label"],
@@ -6459,7 +7046,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "cookie-consent-03",
     description:
-      "Center cookie modal with backdrop — Accept all / Reject all / Customize with Switch categories (RTL/LTR).",
+      "Center cookie modal with backdrop - Accept all / Reject all / Customize with Switch categories (RTL/LTR).",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: ["button", "label", "switch"],
@@ -6476,7 +7063,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "cookie-consent-04",
     description:
-      "Dark bottom-end corner cookie card — Accept / Reject / Preferences with Switch toggles (RTL/LTR).",
+      "Dark bottom-end corner cookie card - Accept / Reject / Preferences with Switch toggles (RTL/LTR).",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: ["button", "label", "switch"],
@@ -6804,7 +7391,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "bento-grid-01",
     description:
-      "Product ops bento — installs chart, live team presence, latency, checklist, and command palette (RTL/LTR).",
+      "Product ops bento - installs chart, live team presence, latency, checklist, and command palette (RTL/LTR).",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: ["avatar"],
@@ -6821,7 +7408,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "bento-grid-02",
     description:
-      "Editorial design-system bento — dark metric, quote, CLI terminal, and stack chips (RTL/LTR).",
+      "Editorial design-system bento - dark metric, quote, CLI terminal, and stack chips (RTL/LTR).",
     access: "member",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
@@ -6871,7 +7458,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "how-it-works-03",
     description:
-      "Dark AI agent how-it-works — attach context, run tools, review diff, open PR (RTL/LTR).",
+      "Dark AI agent how-it-works - attach context, run tools, review diff, open PR (RTL/LTR).",
     cssVars: SOFT_SURFACE_CSS_VARS,
     registryDependencies: ["badge", "button"],
     dependencies: ["lucide-react"],
@@ -6888,7 +7475,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "how-it-works-04",
     description:
-      "Passkey sign-in how-it-works — email, device trust, create passkey, welcome (RTL/LTR).",
+      "Passkey sign-in how-it-works - email, device trust, create passkey, welcome (RTL/LTR).",
     cssVars: SOFT_SURFACE_CSS_VARS,
     registryDependencies: ["button"],
     dependencies: ["lucide-react"],
@@ -6905,7 +7492,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "article-layout-01",
     description:
-      "Classic article — cover figure, active sticky TOC, callout prose, author card, and prev/next.",
+      "Classic article - cover figure, active sticky TOC, callout prose, author card, and prev/next.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: ["avatar", "badge", "button", "separator"],
@@ -6934,7 +7521,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "article-layout-02",
     description:
-      "Magazine cover article — full-bleed hero scrim, narrow measure, jump chips, floating share stack.",
+      "Magazine cover article - full-bleed hero scrim, narrow measure, jump chips, floating share stack.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: ["avatar", "badge", "button"],
@@ -6957,7 +7544,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "article-layout-03",
     description:
-      "Editorial split — oversized title, drop-cap, sticky author/share rail, pull-quote, related cards.",
+      "Editorial split - oversized title, drop-cap, sticky author/share rail, pull-quote, related cards.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: ["avatar", "badge", "button"],
@@ -6980,7 +7567,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "article-layout-04",
     description:
-      "Product-docs article — breadcrumb, numbered sticky TOC, tip/warning panels, code surface callout.",
+      "Product-docs article - breadcrumb, numbered sticky TOC, tip/warning panels, code surface callout.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: ["avatar", "badge", "button", "separator"],
@@ -6997,7 +7584,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "article-layout-05",
     description:
-      "Series immersive article — reading progress, chapter chrome, sticky action bar, comments teaser.",
+      "Series immersive article - reading progress, chapter chrome, sticky action bar, comments teaser.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: ["avatar", "badge", "button", "separator"],
@@ -7017,7 +7604,7 @@ const registryItemsRaw = [
   },
   contentPublishingAuthorProfileBlock(
     "author-profile-01",
-    "Directory cards — portrait authors with follow, stats, tags, and recent posts.",
+    "Directory cards - portrait authors with follow, stats, tags, and recent posts.",
     {
       registryDependencies: ["avatar", "badge", "button"],
       images: AUTHOR_PROFILE_IMAGES,
@@ -7025,7 +7612,7 @@ const registryItemsRaw = [
   ),
   contentPublishingAuthorProfileBlock(
     "author-profile-02",
-    "Full profile hero — cover banner, overlapping avatar, stats strip, and posts.",
+    "Full profile hero - cover banner, overlapping avatar, stats strip, and posts.",
     {
       registryDependencies: ["avatar", "badge", "button"],
       images: AUTHOR_PROFILE_IMAGES,
@@ -7033,7 +7620,7 @@ const registryItemsRaw = [
   ),
   contentPublishingAuthorProfileBlock(
     "author-profile-03",
-    "Cover split — tall portrait beside identity, socials, and compact posts.",
+    "Cover split - tall portrait beside identity, socials, and compact posts.",
     {
       registryDependencies: ["avatar", "badge", "button"],
       images: AUTHOR_PROFILE_IMAGES,
@@ -7041,7 +7628,7 @@ const registryItemsRaw = [
   ),
   contentPublishingAuthorProfileBlock(
     "author-profile-04",
-    "Compact row directory — searchable author rows with follow actions.",
+    "Compact row directory - searchable author rows with follow actions.",
     {
       registryDependencies: ["avatar", "button", "input-group"],
       images: AUTHOR_PROFILE_IMAGES,
@@ -7049,7 +7636,7 @@ const registryItemsRaw = [
   ),
   contentPublishingAuthorProfileBlock(
     "author-profile-05",
-    "Spotlight theater — cinematic featured author plus also-writing stack.",
+    "Spotlight theater - cinematic featured author plus also-writing stack.",
     {
       registryDependencies: ["avatar", "badge", "button"],
       images: AUTHOR_PROFILE_IMAGES,
@@ -7057,7 +7644,7 @@ const registryItemsRaw = [
   ),
   contentPublishingAuthorProfileBlock(
     "author-profile-06",
-    "Tabs workspace — profile header with Posts, About, and Activity tabs.",
+    "Tabs workspace - profile header with Posts, About, and Activity tabs.",
     {
       registryDependencies: ["avatar", "badge", "button", "separator", "tabs"],
       images: AUTHOR_PROFILE_IMAGES,
@@ -7065,7 +7652,7 @@ const registryItemsRaw = [
   ),
   contentPublishingAuthorProfileBlock(
     "author-profile-07",
-    "Minimal type bio — typography-first author listing without covers.",
+    "Minimal type bio - typography-first author listing without covers.",
     {
       registryDependencies: ["button"],
       images: [],
@@ -7073,7 +7660,7 @@ const registryItemsRaw = [
   ),
   contentPublishingAuthorProfileBlock(
     "author-profile-08",
-    "Team rail — horizontal snap carousel of contributor cards.",
+    "Team rail - horizontal snap carousel of contributor cards.",
     {
       registryDependencies: ["avatar", "button"],
       images: AUTHOR_PROFILE_IMAGES,
@@ -7081,7 +7668,7 @@ const registryItemsRaw = [
   ),
   contentPublishingAuthorProfileBlock(
     "author-profile-09",
-    "Stats dashboard — elevated profile with metric tiles and progress bars.",
+    "Stats dashboard - elevated profile with metric tiles and progress bars.",
     {
       registryDependencies: ["avatar", "button", "separator"],
       images: AUTHOR_PROFILE_IMAGES,
@@ -7089,7 +7676,7 @@ const registryItemsRaw = [
   ),
   contentPublishingAuthorProfileBlock(
     "author-profile-10",
-    "Social chip card — top-writer badge, follow/share group, and link chips.",
+    "Social chip card - top-writer badge, follow/share group, and link chips.",
     {
       registryDependencies: ["avatar", "badge", "button", "button-group"],
       images: AUTHOR_PROFILE_IMAGES,
@@ -7097,7 +7684,7 @@ const registryItemsRaw = [
   ),
   contentPublishingBlogGridBlock(
     "blog-grid-01",
-    "Filter studio — cover cards with category chips, search, empty state, and pagination.",
+    "Filter studio - cover cards with category chips, search, empty state, and pagination.",
     {
       registryDependencies: [
         "avatar",
@@ -7112,7 +7699,7 @@ const registryItemsRaw = [
   ),
   contentPublishingBlogGridBlock(
     "blog-grid-02",
-    "Featured split magazine — large lead cover, stacked up-next, and secondary grid.",
+    "Featured split magazine - large lead cover, stacked up-next, and secondary grid.",
     {
       registryDependencies: ["avatar", "badge"],
       images: BLOG_GRID_COVERS,
@@ -7120,7 +7707,7 @@ const registryItemsRaw = [
   ),
   contentPublishingBlogGridBlock(
     "blog-grid-03",
-    "Bento mosaic — asymmetric magazine tiles with editor’s pick treatment.",
+    "Bento mosaic - asymmetric magazine tiles with editor’s pick treatment.",
     {
       registryDependencies: ["badge"],
       images: BLOG_GRID_COVERS,
@@ -7128,7 +7715,7 @@ const registryItemsRaw = [
   ),
   contentPublishingBlogGridBlock(
     "blog-grid-04",
-    "Editorial archive — searchable hairline rows with thumbs and Latest/Popular sort.",
+    "Editorial archive - searchable hairline rows with thumbs and Latest/Popular sort.",
     {
       registryDependencies: ["badge", "button", "empty", "input-group"],
       images: BLOG_GRID_COVERS,
@@ -7136,7 +7723,7 @@ const registryItemsRaw = [
   ),
   contentPublishingBlogGridBlock(
     "blog-grid-05",
-    "Cinematic theater — scrim cover tiles with category pills and load more.",
+    "Cinematic theater - scrim cover tiles with category pills and load more.",
     {
       registryDependencies: ["badge", "button"],
       images: BLOG_GRID_COVERS,
@@ -7144,7 +7731,7 @@ const registryItemsRaw = [
   ),
   contentPublishingBlogGridBlock(
     "blog-grid-06",
-    "Filter rail app shell — sticky category filters, sheet on mobile, cover card grid.",
+    "Filter rail app shell - sticky category filters, sheet on mobile, cover card grid.",
     {
       registryDependencies: [
         "avatar",
@@ -7159,7 +7746,7 @@ const registryItemsRaw = [
   ),
   contentPublishingBlogGridBlock(
     "blog-grid-07",
-    "Type index — typography-first editorial listing with category chips.",
+    "Type index - typography-first editorial listing with category chips.",
     {
       registryDependencies: ["button", "empty"],
       images: [],
@@ -7167,7 +7754,7 @@ const registryItemsRaw = [
   ),
   contentPublishingBlogGridBlock(
     "blog-grid-08",
-    "Topic rails — horizontal snap carousels per category with global search.",
+    "Topic rails - horizontal snap carousels per category with global search.",
     {
       registryDependencies: ["input-group"],
       images: BLOG_GRID_COVERS,
@@ -7175,7 +7762,7 @@ const registryItemsRaw = [
   ),
   contentPublishingBlogGridBlock(
     "blog-grid-09",
-    "Author atelier — people-first cards with follow toggle and soft covers.",
+    "Author atelier - people-first cards with follow toggle and soft covers.",
     {
       registryDependencies: ["avatar", "badge", "button"],
       images: BLOG_GRID_COVERS,
@@ -7183,7 +7770,7 @@ const registryItemsRaw = [
   ),
   contentPublishingBlogGridBlock(
     "blog-grid-10",
-    "Command density — search-forward list/grid toggle, badges, and pagination.",
+    "Command density - search-forward list/grid toggle, badges, and pagination.",
     {
       registryDependencies: [
         "badge",
@@ -7200,7 +7787,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "changelog-01",
     description:
-      "Classic changelog timeline — Latest hero card, typed badges, and show-older load-more.",
+      "Classic changelog timeline - Latest hero card, typed badges, and show-older load-more.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: ["badge", "button", "card", "separator"],
@@ -7217,7 +7804,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "changelog-02",
     description:
-      "Product update feed — sticky type filters and dense flat change rows.",
+      "Product update feed - sticky type filters and dense flat change rows.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: ["badge"],
@@ -7251,7 +7838,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "changelog-04",
     description:
-      "Magazine changelog — oversized latest version plus past-release card grid.",
+      "Magazine changelog - oversized latest version plus past-release card grid.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: ["badge", "button"],
@@ -7282,7 +7869,7 @@ const registryItemsRaw = [
   },
   communicationCommentsBlock(
     "comments-01",
-    "Nested discussion panel — white card on canvas, threaded replies, likes, load-more (RTL/LTR).",
+    "Nested discussion panel - white card on canvas, threaded replies, likes, load-more (RTL/LTR).",
     {
       registryDependencies: [
         "avatar",
@@ -7297,21 +7884,21 @@ const registryItemsRaw = [
   ),
   communicationCommentsBlock(
     "comments-02",
-    "Sorted comments panel — Newest/Top segment, flat rows, likes (RTL/LTR).",
+    "Sorted comments panel - Newest/Top segment, flat rows, likes (RTL/LTR).",
     {
       images: ["sarah.webp", "alex.webp", "david.webp", "maria.webp"],
     }
   ),
   communicationCommentsBlock(
     "comments-03",
-    "Review comments panel — line anchors, Open/All filter, Resolve/Unresolve (RTL/LTR).",
+    "Review comments panel - line anchors, Open/All filter, Resolve/Unresolve (RTL/LTR).",
     {
       images: ["sarah.webp", "alex.webp", "david.webp", "maria.webp"],
     }
   ),
   communicationCommentsBlock(
     "comments-04",
-    "Mentions panel — @ chips and reaction pills on a white card (RTL/LTR).",
+    "Mentions panel - @ chips and reaction pills on a white card (RTL/LTR).",
     {
       images: ["sarah.webp", "alex.webp", "david.webp", "maria.webp"],
     }
@@ -7321,7 +7908,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "reading-progress-01",
     description:
-      "Classic reading progress — quiet sticky bar, share rail, back-to-top, and percent card.",
+      "Classic reading progress - quiet sticky bar, share rail, back-to-top, and percent card.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: ["avatar", "badge"],
@@ -7339,7 +7926,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "reading-progress-02",
     description:
-      "Circular FAB reading progress — ring around back-to-top with compact share cluster.",
+      "Circular FAB reading progress - ring around back-to-top with compact share cluster.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: ["avatar", "badge"],
@@ -7357,7 +7944,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "reading-progress-03",
     description:
-      "Chapter-sync reading progress — sticky mini-TOC with active section and top bar.",
+      "Chapter-sync reading progress - sticky mini-TOC with active section and top bar.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: ["avatar", "badge"],
@@ -7375,7 +7962,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "reading-progress-04",
     description:
-      "Bottom-dock reading progress — percent, minutes left, and share/copy actions.",
+      "Bottom-dock reading progress - percent, minutes left, and share/copy actions.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: ["avatar", "badge"],
@@ -7393,7 +7980,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "reading-progress-05",
     description:
-      "Essay spine reader — end-edge vertical ticks, chapter HUD, and quiet typography (no top bar or bottom dock).",
+      "Essay spine reader - end-edge vertical ticks, chapter HUD, and quiet typography (no top bar or bottom dock).",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: [],
@@ -7413,23 +8000,23 @@ const registryItemsRaw = [
     ],
     [
       "offer-card-02",
-      "Pricing Most Popular Pro tier — meteor border (default speed 0.9), yearly billing, checklist.",
+      "Pricing Most Popular Pro tier - meteor border (default speed 0.9), yearly billing, checklist.",
     ],
     [
       "offer-card-03",
-      "Glassmorphic Aura studio card — violet meteor (default speed 0.9), dual orbs, lifetime price.",
+      "Glassmorphic Aura studio card - violet meteor (default speed 0.9), dual orbs, lifetime price.",
     ],
     [
       "offer-card-04",
-      "Dark enterprise seat card — emerald meteor (default speed 0.9), team features, sales CTA.",
+      "Dark enterprise seat card - emerald meteor (default speed 0.9), team features, sales CTA.",
     ],
     [
       "offer-card-05",
-      "Flash lifetime deal — amber meteor (default speed 0.9), countdown badge, deep discount.",
+      "Flash lifetime deal - amber meteor (default speed 0.9), countdown badge, deep discount.",
     ],
     [
       "offer-card-06",
-      "Full-width Pro upsell — green ping badge, line-shadow + aurora headline, checklist, lifetime price.",
+      "Full-width Pro upsell - green ping badge, line-shadow + aurora headline, checklist, lifetime price.",
     ],
   ].map(([slug, description]) => ({
     name: slug,
@@ -7482,7 +8069,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "cta-02",
     description:
-      "Dark asymmetric runway CTA — primary edge accent, invite form, avatar proof, and CLI teaser (RTL/LTR).",
+      "Dark asymmetric runway CTA - primary edge accent, invite form, avatar proof, and CLI teaser (RTL/LTR).",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: ["button"],
@@ -8478,7 +9065,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "advanced-filters-01",
     description:
-      "Searchable brand picker — letter avatars, density bars, and selected chips.",
+      "Searchable brand picker - letter avatars, density bars, and selected chips.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     registryDependencies: [
       "badge",
@@ -8502,7 +9089,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "advanced-filters-02",
     description:
-      "Smart commerce filters — live match pulse, icon accordion, shipping cards, and star tiles.",
+      "Smart commerce filters - live match pulse, icon accordion, shipping cards, and star tiles.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     registryDependencies: [
       "accordion",
@@ -8531,7 +9118,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "advanced-filters-03",
     description:
-      "SEO keyword console — side-rail section nav with pill radios and denser controls.",
+      "SEO keyword console - side-rail section nav with pill radios and denser controls.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     registryDependencies: [
       "badge",
@@ -8558,7 +9145,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "advanced-filters-04",
     description:
-      "Shop filter with vertical icon rails — price hero, shipping cards, and brand list.",
+      "Shop filter with vertical icon rails - price hero, shipping cards, and brand list.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     registryDependencies: [
       "badge",
@@ -8585,7 +9172,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "advanced-filters-05",
     description:
-      "Visual property rule builder — include/exclude rails, AND connectors, and live rule preview.",
+      "Visual property rule builder - include/exclude rails, AND connectors, and live rule preview.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     registryDependencies: [
       "badge",
@@ -8611,7 +9198,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "advanced-filters-06",
     description:
-      "Status pipeline filter — stacked share bar, tonal cards, and per-status density meters.",
+      "Status pipeline filter - stacked share bar, tonal cards, and per-status density meters.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     registryDependencies: ["badge", "button", "popover", "separator"],
     dependencies: ["lucide-react"],
@@ -8629,7 +9216,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "advanced-filters-07",
     description:
-      "Catalog cockpit — two-column ranges + chip facets with live SKU preview.",
+      "Catalog cockpit - two-column ranges + chip facets with live SKU preview.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     registryDependencies: [
       "badge",
@@ -8655,7 +9242,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "advanced-filters-08",
     description:
-      "Volume ladder range filter — density bars per bucket plus expandable custom From/To.",
+      "Volume ladder range filter - density bars per bucket plus expandable custom From/To.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     registryDependencies: [
       "badge",
@@ -8680,7 +9267,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "row-actions-01",
     description:
-      "Task table with soft muted icon actions — start, pause, complete, view, delete.",
+      "Task table with soft muted icon actions - start, pause, complete, view, delete.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     registryDependencies: ["badge", "button", "table", "tooltip"],
     dependencies: ["lucide-react"],
@@ -8740,15 +9327,15 @@ const registryItemsRaw = [
   },
   developerToolsApiKeysBlock(
     "api-keys-01",
-    "API keys settings — security banner, token table with copy and revoke actions, create-key dialog."
+    "API keys settings - security banner, token table with copy and revoke actions, create-key dialog."
   ),
   developerToolsWebhookManagementBlock(
     "webhook-management-01",
-    "Ops dashboard — add endpoint form, searchable active list, and sticky recent deliveries (RTL/LTR)."
+    "Ops dashboard - add endpoint form, searchable active list, and sticky recent deliveries (RTL/LTR)."
   ),
   developerToolsWebhookManagementBlock(
     "webhook-management-02",
-    "Delivery inspector — endpoint picker, delivery list, and request/response/headers panels (RTL/LTR).",
+    "Delivery inspector - endpoint picker, delivery list, and request/response/headers panels (RTL/LTR).",
     {
       registryDependencies: [
         "badge",
@@ -8761,7 +9348,7 @@ const registryItemsRaw = [
   ),
   developerToolsWebhookManagementBlock(
     "webhook-management-03",
-    "Compact endpoints table — enable switches, status badges, Test, and row actions (RTL/LTR).",
+    "Compact endpoints table - enable switches, status badges, Test, and row actions (RTL/LTR).",
     {
       registryDependencies: [
         "badge",
@@ -8775,11 +9362,11 @@ const registryItemsRaw = [
   ),
   developerToolsIntegrationsBlock(
     "integrations-01",
-    "Marketplace catalog — search, category chips, connect cards, and request CTA (RTL/LTR)."
+    "Marketplace catalog - search, category chips, connect cards, and request CTA (RTL/LTR)."
   ),
   developerToolsIntegrationsBlock(
     "integrations-02",
-    "Detail studio — app list, scopes checklist, enable switch, and connect/configure (RTL/LTR).",
+    "Detail studio - app list, scopes checklist, enable switch, and connect/configure (RTL/LTR).",
     {
       registryDependencies: [
         "badge",
@@ -8792,7 +9379,7 @@ const registryItemsRaw = [
   ),
   developerToolsIntegrationsBlock(
     "integrations-03",
-    "Compact connected list — status, last sync, enable switches, configure, and row menu (RTL/LTR).",
+    "Compact connected list - status, last sync, enable switches, configure, and row menu (RTL/LTR).",
     {
       registryDependencies: [
         "badge",
@@ -8804,11 +9391,11 @@ const registryItemsRaw = [
   ),
   developerToolsLogsViewerBlock(
     "logs-viewer-01",
-    "Live stream console — level chips, service select, search, auto-scroll, and realistic ops lines (RTL/LTR)."
+    "Live stream console - level chips, service select, search, auto-scroll, and realistic ops lines (RTL/LTR)."
   ),
   developerToolsLogsViewerBlock(
     "logs-viewer-02",
-    "Entry inspector — filtered list, attributes, stack traces, and copy JSON (RTL/LTR).",
+    "Entry inspector - filtered list, attributes, stack traces, and copy JSON (RTL/LTR).",
     {
       registryDependencies: [
         "badge",
@@ -8821,14 +9408,14 @@ const registryItemsRaw = [
   ),
   developerToolsLogsViewerBlock(
     "logs-viewer-03",
-    "Compact terminal tail — dark mono pane, level chips, pause/clear, and live ops lines (RTL/LTR).",
+    "Compact terminal tail - dark mono pane, level chips, pause/clear, and live ops lines (RTL/LTR).",
     {
       registryDependencies: ["badge", "button"],
     }
   ),
   developerToolsApiKeysBlock(
     "api-keys-02",
-    "Access tokens — compact list with scopes, dialog create flow, one-time secret reveal.",
+    "Access tokens - compact list with scopes, dialog create flow, one-time secret reveal.",
     {
       registryDependencies: [
         "alert",
@@ -8844,39 +9431,39 @@ const registryItemsRaw = [
   ),
   communicationNotificationCenterBlock(
     "notification-center-01",
-    "Notification inbox — tabs, avatars, inline actions, and mark all read."
+    "Notification inbox - tabs, avatars, inline actions, and mark all read."
   ),
   communicationNotificationCenterBlock(
     "notification-center-02",
-    "Header bell popover — badge count, compact unread list, mark all and view all.",
+    "Header bell popover - badge count, compact unread list, mark all and view all.",
     {
       registryDependencies: ["avatar", "badge", "button", "popover"],
     }
   ),
   communicationNotificationCenterBlock(
     "notification-center-03",
-    "Notification preferences — category toggles for in-app and email channels.",
+    "Notification preferences - category toggles for in-app and email channels.",
     {
       registryDependencies: ["button", "label", "separator", "switch"],
     }
   ),
   communicationActivityFeedBlock(
     "activity-feed-01",
-    "Workspace activity timeline — comment, commit, invite, upload, backup, and security events (RTL/LTR).",
+    "Workspace activity timeline - comment, commit, invite, upload, backup, and security events (RTL/LTR).",
     {
       images: ["sarah.webp", "alex.webp", "david.webp", "maria.webp"],
     }
   ),
   communicationActivityFeedBlock(
     "activity-feed-02",
-    "Rich activity timeline — release publish, comment thread, workspace join, and branch merge cards.",
+    "Rich activity timeline - release publish, comment thread, workspace join, and branch merge cards.",
     {
       images: ["sarah.webp", "alex.webp", "david.webp", "maria.webp"],
     }
   ),
   communicationActivityFeedBlock(
     "activity-feed-03",
-    "Compact project activity rail — avatar initials, timeline dots, and relative timestamps.",
+    "Compact project activity rail - avatar initials, timeline dots, and relative timestamps.",
     {
       registryDependencies: [],
       images: [],
@@ -8884,28 +9471,28 @@ const registryItemsRaw = [
   ),
   communicationActivityFeedBlock(
     "activity-feed-04",
-    "Day-grouped activity feed — sticky Today/Yesterday/Earlier headers with Team/Code/System chips (RTL/LTR).",
+    "Day-grouped activity feed - sticky Today/Yesterday/Earlier headers with Team/Code/System chips (RTL/LTR).",
     {
       images: ["sarah.webp", "alex.webp", "david.webp", "maria.webp"],
     }
   ),
   communicationActivityFeedBlock(
     "activity-feed-05",
-    "Split live activity — pulsing Live feed plus This week stats and highlights panel (RTL/LTR).",
+    "Split live activity - pulsing Live feed plus This week stats and highlights panel (RTL/LTR).",
     {
       images: ["sarah.webp", "alex.webp", "david.webp", "maria.webp"],
     }
   ),
   dashboardsAnalyticsDashboardBlock(
     "analytics-dashboard-01",
-    "Analytics overview — time-range KPIs with sparklines, revenue bars, traffic sources, top pages, and quick stats (RTL/LTR)."
+    "Analytics overview - time-range KPIs with sparklines, revenue bars, traffic sources, top pages, and quick stats (RTL/LTR)."
   ),
   {
     name: "crypto-portfolio-01",
     type: "registry:block",
     title: "crypto-portfolio-01",
     description:
-      "Production wallet portfolio — balance with 24h PnL, allocation, searchable assets with SVG sparklines, and recent activity.",
+      "Production wallet portfolio - balance with 24h PnL, allocation, searchable assets with SVG sparklines, and recent activity.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: [
@@ -8960,7 +9547,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "crypto-portfolio-02",
     description:
-      "Dark trading-desk crypto portfolio — live ticker tape, streaming equity sparkline, allocation bars, and flashing position cards.",
+      "Dark trading-desk crypto portfolio - live ticker tape, streaming equity sparkline, allocation bars, and flashing position cards.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: ["avatar", "badge", "button"],
@@ -9008,7 +9595,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "crypto-portfolio-03",
     description:
-      "Dark live crypto desk — streaming Recharts area charts for equity, per-asset markets, and stacked BTC/ETH/SOL exposure.",
+      "Dark live crypto desk - streaming Recharts area charts for equity, per-asset markets, and stacked BTC/ETH/SOL exposure.",
     access: "member",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react", "recharts"],
@@ -9057,7 +9644,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "crypto-portfolio-04",
     description:
-      "Bitcoin-orange / coffee portfolio — cream shell in light, dark coffee shell in dark, with warm equity and allocation.",
+      "Bitcoin-orange / coffee portfolio - cream shell in light, dark coffee shell in dark, with warm equity and allocation.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: ["avatar", "badge", "button"],
@@ -9105,7 +9692,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "kpi-cards-01",
     description:
-      "KPI cards grid — four metric cards with trend badges and sparklines.",
+      "KPI cards grid - four metric cards with trend badges and sparklines.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: ["badge", "card"],
@@ -9123,7 +9710,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "kpi-cards-02",
     description:
-      "Regional KPI strip — status dots, revenue totals, and segmented goal meters.",
+      "Regional KPI strip - status dots, revenue totals, and segmented goal meters.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: [],
@@ -9141,7 +9728,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "kpi-cards-03",
     description:
-      "Department budget cards — radial progress gauges with spend vs plan and view links.",
+      "Department budget cards - radial progress gauges with spend vs plan and view links.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react", "recharts"],
     registryDependencies: ["card", "chart"],
@@ -9159,7 +9746,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "kpi-cards-04",
     description:
-      "Product trend cards — area sparklines for registry installs, docs traffic, and CLI downloads.",
+      "Product trend cards - area sparklines for registry installs, docs traffic, and CLI downloads.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["recharts"],
     registryDependencies: ["card", "chart"],
@@ -9174,57 +9761,57 @@ const registryItemsRaw = [
   },
   calendarSchedulingCalendarBlock(
     "calendar-01",
-    "Month + day agenda — category dots, create/edit dialog, attendees (RTL/LTR).",
+    "Month + day agenda - category dots, create/edit dialog, attendees (RTL/LTR).",
     {
       images: ["sarah.webp", "alex.webp", "david.webp", "maria.webp"],
     }
   ),
   calendarSchedulingCalendarBlock(
     "calendar-02",
-    "Week timeline — hours × days grid, all-day strip, colored event bars (RTL/LTR).",
+    "Week timeline - hours × days grid, all-day strip, colored event bars (RTL/LTR).",
     {
       registryDependencies: ["badge", "button"],
     }
   ),
   calendarSchedulingCalendarBlock(
     "calendar-03",
-    "Day focus — mini-month side rail and timed agenda timeline (RTL/LTR).",
+    "Day focus - mini-month side rail and timed agenda timeline (RTL/LTR).",
     {
       registryDependencies: ["badge", "button", "calendar", "separator"],
     }
   ),
   calendarSchedulingCalendarBlock(
     "calendar-04",
-    "Public booking — service type, day chips, time slots, and confirm (RTL/LTR).",
+    "Public booking - service type, day chips, time slots, and confirm (RTL/LTR).",
     {
       registryDependencies: ["badge", "button", "separator"],
     }
   ),
   calendarSchedulingCalendarBlock(
     "calendar-05",
-    "Team week — people lanes with busy overlays Mon–Fri (RTL/LTR).",
+    "Team week - people lanes with busy overlays Mon–Fri (RTL/LTR).",
     {
       registryDependencies: ["avatar", "badge", "button"],
     }
   ),
   onboardingSetupWizardBlock(
     "setup-wizard-01",
-    "Compact card wizard — separated stepper band, account, OTP, experience, launch (RTL/LTR)."
+    "Compact card wizard - separated stepper band, account, OTP, experience, launch (RTL/LTR)."
   ),
   onboardingSetupWizardBlock(
     "setup-wizard-02",
-    "Vertical rail wizard — left step list, right panel, mobile progress (RTL/LTR)."
+    "Vertical rail wizard - left step list, right panel, mobile progress (RTL/LTR)."
   ),
   onboardingSetupWizardBlock(
     "setup-wizard-03",
-    "Brand-split wizard — dark progress panel + light step form (RTL/LTR)."
+    "Brand-split wizard - dark progress panel + light step form (RTL/LTR)."
   ),
   {
     name: "workspace-setup-01",
     type: "registry:block",
     title: "workspace-setup-01",
     description:
-      "Compact create-workspace card — name, email, auto slug, role, team size, and terms (RTL/LTR).",
+      "Compact create-workspace card - name, email, auto slug, role, team size, and terms (RTL/LTR).",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: [],
     registryDependencies: [
@@ -9250,7 +9837,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "workspace-setup-02",
     description:
-      "Org + plan picker — organization, region, and Creator/Team/Agency radio cards (RTL/LTR).",
+      "Org + plan picker - organization, region, and Creator/Team/Agency radio cards (RTL/LTR).",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: [
@@ -9276,7 +9863,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "workspace-setup-03",
     description:
-      "Brand-split create workspace — dark panel + light name/slug/role form (RTL/LTR).",
+      "Brand-split create workspace - dark panel + light name/slug/role form (RTL/LTR).",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: [
@@ -9300,7 +9887,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "workspace-setup-04",
     description:
-      "Create workspace + invite teammates — name, slug, and removable email chips (RTL/LTR).",
+      "Create workspace + invite teammates - name, slug, and removable email chips (RTL/LTR).",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: [
@@ -9324,7 +9911,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "progress-checklist-01",
     description:
-      "Onboarding progress checklist — expandable steps, circular progress, dismiss and feedback menu.",
+      "Onboarding progress checklist - expandable steps, circular progress, dismiss and feedback menu.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: [
@@ -9346,7 +9933,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "progress-checklist-02",
     description:
-      "Sequential onboarding cards — numbered steps, progress bar, and one active CTA at a time.",
+      "Sequential onboarding cards - numbered steps, progress bar, and one active CTA at a time.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: ["button"],
@@ -9364,7 +9951,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "progress-checklist-03",
     description:
-      "Workspace launch checklist — clickable steps with Progress bar and help footer.",
+      "Workspace launch checklist - clickable steps with Progress bar and help footer.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: ["progress"],
@@ -9382,7 +9969,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "progress-checklist-04",
     description:
-      "Quick-start accordion — sequential setup steps with icon panels and complete CTAs.",
+      "Quick-start accordion - sequential setup steps with icon panels and complete CTAs.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: ["accordion", "button"],
@@ -9400,7 +9987,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "progress-checklist-05",
     description:
-      "Deployment progress timeline — done, in-progress, and upcoming steps with a vertical rail.",
+      "Deployment progress timeline - done, in-progress, and upcoming steps with a vertical rail.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: [],
@@ -9418,7 +10005,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "data-import-01",
     description:
-      "Contacts import progress — overall percent, row count, and step checklist.",
+      "Contacts import progress - overall percent, row count, and step checklist.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: ["button", "progress"],
@@ -9436,7 +10023,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "data-import-02",
     description:
-      "Upload dropzone — format chips, dashed zone, selected file row, Continue.",
+      "Upload dropzone - format chips, dashed zone, selected file row, Continue.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: ["badge", "button"],
@@ -9454,7 +10041,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "data-import-03",
     description:
-      "Column mapping — source columns to destination selects with sample preview.",
+      "Column mapping - source columns to destination selects with sample preview.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: ["badge", "button", "select", "separator"],
@@ -9469,11 +10056,11 @@ const registryItemsRaw = [
   },
   searchFilteringSearchResultsBlock(
     "search-results-01",
-    "Knowledge SERP — start-edge type filters, sort, hit list, pagination, and empty state (RTL/LTR)."
+    "Knowledge SERP - start-edge type filters, sort, hit list, pagination, and empty state (RTL/LTR)."
   ),
   searchFilteringSearchResultsBlock(
     "search-results-02",
-    "Product PLP SERP — search, category pills, sort, and product card grid (RTL/LTR).",
+    "Product PLP SERP - search, category pills, sort, and product card grid (RTL/LTR).",
     {
       registryDependencies: [
         "badge",
@@ -9485,7 +10072,7 @@ const registryItemsRaw = [
   ),
   searchFilteringSearchResultsBlock(
     "search-results-03",
-    "People directory — role/dept checkboxes, avatar rows, status, message and invite (RTL/LTR).",
+    "People directory - role/dept checkboxes, avatar rows, status, message and invite (RTL/LTR).",
     {
       registryDependencies: [
         "avatar",
@@ -9500,7 +10087,7 @@ const registryItemsRaw = [
   ),
   searchFilteringSearchResultsBlock(
     "search-results-04",
-    "Advanced search results — SERP list, active chips, and compact Edit filters panel (RTL/LTR).",
+    "Advanced search results - SERP list, active chips, and compact Edit filters panel (RTL/LTR).",
     {
       registryDependencies: [
         "badge",
@@ -9515,11 +10102,11 @@ const registryItemsRaw = [
   ),
   searchFilteringFilterPanelBlock(
     "filter-panel-01",
-    "SaaS report filters — date range, multi-select dimensions, numeric sliders, and saved presets (RTL/LTR)."
+    "SaaS report filters - date range, multi-select dimensions, numeric sliders, and saved presets (RTL/LTR)."
   ),
   searchFilteringFilterPanelBlock(
     "filter-panel-02",
-    "Standalone ecommerce facet accordion — categories, brands, price, rating, color/size (RTL/LTR).",
+    "Standalone ecommerce facet accordion - categories, brands, price, rating, color/size (RTL/LTR).",
     {
       registryDependencies: [
         "accordion",
@@ -9533,7 +10120,7 @@ const registryItemsRaw = [
   ),
   searchFilteringFilterPanelBlock(
     "filter-panel-03",
-    "Data-table filter toolbar — status/priority/assignee popovers, active chips, and task table (RTL/LTR).",
+    "Data-table filter toolbar - status/priority/assignee popovers, active chips, and task table (RTL/LTR).",
     {
       registryDependencies: [
         "badge",
@@ -9546,7 +10133,7 @@ const registryItemsRaw = [
   ),
   searchFilteringFilterPanelBlock(
     "filter-panel-04",
-    "Chip strip + All filters sheet — applied chips, dense facets, no SERP listings (RTL/LTR).",
+    "Chip strip + All filters sheet - applied chips, dense facets, no SERP listings (RTL/LTR).",
     {
       registryDependencies: [
         "badge",
@@ -9562,7 +10149,7 @@ const registryItemsRaw = [
   ),
   searchFilteringFilterPanelBlock(
     "filter-panel-05",
-    "Job filter sidebar as hero — location, salary, remote, experience; muted preview strip (RTL/LTR).",
+    "Job filter sidebar as hero - location, salary, remote, experience; muted preview strip (RTL/LTR).",
     {
       registryDependencies: [
         "badge",
@@ -9580,7 +10167,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "billing-history-01",
     description:
-      "Transaction ledger — metric strip, search/filters, paginated table, and row actions (RTL/LTR).",
+      "Transaction ledger - metric strip, search/filters, paginated table, and row actions (RTL/LTR).",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: [
@@ -9608,7 +10195,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "billing-history-02",
     description:
-      "Invoice archive — month-grouped statements with status badges and PDF download (RTL/LTR).",
+      "Invoice archive - month-grouped statements with status badges and PDF download (RTL/LTR).",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: ["badge", "button", "separator"],
@@ -9626,7 +10213,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "billing-history-03",
     description:
-      "Receipt inspector — invoice list, line items, totals, and copy/print/PDF actions (RTL/LTR).",
+      "Receipt inspector - invoice list, line items, totals, and copy/print/PDF actions (RTL/LTR).",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: ["badge", "button", "separator"],
@@ -9641,7 +10228,7 @@ const registryItemsRaw = [
   },
   paymentsBillingSettingsBlock(
     "billing-settings-01",
-    "Compact billing overview — plan, Visa on file, and recent invoices (RTL/LTR).",
+    "Compact billing overview - plan, Visa on file, and recent invoices (RTL/LTR).",
     {
       registryDependencies: ["badge", "button", "separator"],
       images: ["visa.webp"],
@@ -9649,7 +10236,7 @@ const registryItemsRaw = [
   ),
   paymentsBillingSettingsBlock(
     "billing-settings-02",
-    "Billing preferences — email, receipt and renewal toggles (RTL/LTR).",
+    "Billing preferences - email, receipt and renewal toggles (RTL/LTR).",
     {
       registryDependencies: [
         "badge",
@@ -9663,14 +10250,14 @@ const registryItemsRaw = [
   ),
   paymentsBillingSettingsBlock(
     "billing-settings-03",
-    "Change plan — selectable Starter/Pro/Team radios with current badge (RTL/LTR).",
+    "Change plan - selectable Starter/Pro/Team radios with current badge (RTL/LTR).",
     {
       registryDependencies: ["badge", "button", "radio-group", "separator"],
     }
   ),
   paymentsBillingSettingsBlock(
     "billing-settings-04",
-    "Company & tax — legal name, billing address, country, and tax ID (RTL/LTR).",
+    "Company & tax - legal name, billing address, country, and tax ID (RTL/LTR).",
     {
       registryDependencies: [
         "button",
@@ -9683,11 +10270,11 @@ const registryItemsRaw = [
   ),
   paymentsUsageBasedBillingBlock(
     "usage-based-billing-01",
-    "Plan & usage — Pro summary with quota meters, status badges, and Enterprise CTA."
+    "Plan & usage - Pro summary with quota meters, status badges, and Enterprise CTA."
   ),
   paymentsUsageBasedBillingBlock(
     "usage-based-billing-02",
-    "Plan overview — radial capacity gauges for workspaces, blocks, registry items, and storage.",
+    "Plan overview - radial capacity gauges for workspaces, blocks, registry items, and storage.",
     {
       registryDependencies: ["card", "chart"],
       dependencies: ["lucide-react", "recharts"],
@@ -9695,7 +10282,7 @@ const registryItemsRaw = [
   ),
   paymentsUsageBasedBillingBlock(
     "usage-based-billing-03",
-    "Usage meters — Progress bars for installs, credits, storage, and API calls.",
+    "Usage meters - Progress bars for installs, credits, storage, and API calls.",
     {
       registryDependencies: ["card", "progress"],
       dependencies: [],
@@ -9703,7 +10290,7 @@ const registryItemsRaw = [
   ),
   paymentsUsageBasedBillingBlock(
     "usage-based-billing-04",
-    "Workspace usage cards — stacked bars, warnings, upgrade actions, and budget dialog.",
+    "Workspace usage cards - stacked bars, warnings, upgrade actions, and budget dialog.",
     {
       registryDependencies: [
         "button",
@@ -9717,7 +10304,7 @@ const registryItemsRaw = [
   ),
   paymentsUsageBasedBillingBlock(
     "usage-based-billing-05",
-    "30-day usage list — mini donut gauges, alternating rows, and upgrade CTA.",
+    "30-day usage list - mini donut gauges, alternating rows, and upgrade CTA.",
     {
       registryDependencies: ["button", "card", "chart"],
       dependencies: ["recharts"],
@@ -9725,7 +10312,7 @@ const registryItemsRaw = [
   ),
   paymentsUsageBasedBillingBlock(
     "usage-based-billing-06",
-    "Storage breakdown — segmented bar for components, assets, docs media, themes, and free space.",
+    "Storage breakdown - segmented bar for components, assets, docs media, themes, and free space.",
     {
       registryDependencies: ["card"],
       dependencies: [],
@@ -9733,7 +10320,7 @@ const registryItemsRaw = [
   ),
   paymentsUsageBasedBillingBlock(
     "usage-based-billing-07",
-    "Monthly usage cost card — trend badge, compute/storage/bandwidth bar, and settings link.",
+    "Monthly usage cost card - trend badge, compute/storage/bandwidth bar, and settings link.",
     {
       registryDependencies: ["badge", "card"],
       dependencies: [],
@@ -9741,11 +10328,11 @@ const registryItemsRaw = [
   ),
   paymentsTransferFundsBlock(
     "transfer-funds-01",
-    "Instant wallet transfer — Details → Review → Done with source currency, fee/arrival, and receipt (RTL/LTR)."
+    "Instant wallet transfer - Details → Review → Done with source currency, fee/arrival, and receipt (RTL/LTR)."
   ),
   paymentsTransferFundsBlock(
     "transfer-funds-02",
-    "Scheduled transfer — from/to, amount, Once/Weekly/Monthly, start date, and next-run review strip (RTL/LTR).",
+    "Scheduled transfer - from/to, amount, Once/Weekly/Monthly, start date, and next-run review strip (RTL/LTR).",
     {
       registryDependencies: [
         "badge",
@@ -9762,7 +10349,7 @@ const registryItemsRaw = [
   ),
   paymentsTransferFundsBlock(
     "transfer-funds-03",
-    "International wire — beneficiary IBAN/BIC, USD→EUR FX quote, fee, compliance note, and confirm (RTL/LTR).",
+    "International wire - beneficiary IBAN/BIC, USD→EUR FX quote, fee, compliance note, and confirm (RTL/LTR).",
     {
       registryDependencies: [
         "alert",
@@ -9777,40 +10364,40 @@ const registryItemsRaw = [
   ),
   paymentsInvoiceBlock(
     "invoice-01",
-    "Paid EU VAT invoice — From/Bill to, VAT line columns, totals, card receipt (RTL/LTR)."
+    "Paid EU VAT invoice - From/Bill to, VAT line columns, totals, card receipt (RTL/LTR)."
   ),
   paymentsInvoiceBlock(
     "invoice-02",
-    "Open VAT invoice — due banner, full tax table, SEPA IBAN/BIC payment panel (RTL/LTR).",
+    "Open VAT invoice - due banner, full tax table, SEPA IBAN/BIC payment panel (RTL/LTR).",
     {
       registryDependencies: ["alert", "badge", "button", "separator", "table"],
     }
   ),
   paymentsInvoiceBlock(
     "invoice-03",
-    "Reverse-charge B2B tax invoice — dual VAT IDs, 0% lines, legal note, wire instructions (RTL/LTR).",
+    "Reverse-charge B2B tax invoice - dual VAT IDs, 0% lines, legal note, wire instructions (RTL/LTR).",
     {
       registryDependencies: ["alert", "badge", "button", "separator", "table"],
     }
   ),
   paymentsInvoiceBlock(
     "invoice-04",
-    "Compact thermal receipt — narrow max-w-sm, qty×price lines, QR-style payment ref (RTL/LTR).",
+    "Compact thermal receipt - narrow max-w-sm, qty×price lines, QR-style payment ref (RTL/LTR).",
     {
       registryDependencies: ["badge", "button", "separator"],
     }
   ),
   paymentsInvoiceBlock(
     "invoice-05",
-    "Formal signed VAT invoice — dense PO/project meta, dual VAT, signature line and company stamp (RTL/LTR)."
+    "Formal signed VAT invoice - dense PO/project meta, dual VAT, signature line and company stamp (RTL/LTR)."
   ),
   paymentsInvoiceBlock(
     "invoice-06",
-    "Wide branded sales statement — primary rail, ship-to + bill-to, mixed 21%/9% VAT summary (RTL/LTR)."
+    "Wide branded sales statement - primary rail, ship-to + bill-to, mixed 21%/9% VAT summary (RTL/LTR)."
   ),
   paymentsPaymentMethodsBlock(
     "payment-methods-01",
-    "Cards & wallets — balances, Visa physical card with reveal/freeze, and recent activity (RTL/LTR).",
+    "Cards & wallets - balances, Visa physical card with reveal/freeze, and recent activity (RTL/LTR).",
     {
       registryDependencies: ["badge", "button", "dropdown-menu"],
       images: ["visa.webp"],
@@ -9818,7 +10405,7 @@ const registryItemsRaw = [
   ),
   paymentsPaymentMethodsBlock(
     "payment-methods-02",
-    "Saved methods manager — Visa/Mastercard/Amex/PayPal/ACH, default badge, set default and remove (RTL/LTR).",
+    "Saved methods manager - Visa/Mastercard/Amex/PayPal/ACH, default badge, set default and remove (RTL/LTR).",
     {
       registryDependencies: ["badge", "button", "dropdown-menu", "separator"],
       images: [
@@ -9831,7 +10418,7 @@ const registryItemsRaw = [
   ),
   paymentsPaymentMethodsBlock(
     "payment-methods-03",
-    "Add card dialog — primary Visa card chrome with open add-card form and brand strip (RTL/LTR).",
+    "Add card dialog - primary Visa card chrome with open add-card form and brand strip (RTL/LTR).",
     {
       registryDependencies: [
         "badge",
@@ -9845,30 +10432,30 @@ const registryItemsRaw = [
   ),
   feedbackAccessDeniedBlock(
     "access-denied-01",
-    "Access denied gate — locked resource card, signed-in identity, request access and switch account."
+    "Access denied gate - locked resource card, signed-in identity, request access and switch account."
   ),
   feedbackNotFoundBlock(
     "not-found-01",
-    "Not found — search field, suggested destinations, and home / back actions."
+    "Not found - search field, suggested destinations, and home / back actions."
   ),
   feedbackErrorStateBlock(
     "error-state-01",
-    "Server error — incident card with alert, trace id, retry, and support link."
+    "Server error - incident card with alert, trace id, retry, and support link."
   ),
   feedbackRateLimitBlock(
     "rate-limit-01",
-    "Rate limit 429 — cooldown meter, usage details, retry, and Pro upgrade CTA."
+    "Rate limit 429 - cooldown meter, usage details, retry, and Pro upgrade CTA."
   ),
   feedbackMaintenanceBlock(
     "maintenance-01",
-    "Maintenance — phase rail, ETA, systems board, and notify bar."
+    "Maintenance - phase rail, ETA, systems board, and notify bar."
   ),
   {
     name: "empty-state-01",
     type: "registry:block",
     title: "empty-state-01",
     description:
-      "Search no results — query field, filter chips, and clear / refine CTAs.",
+      "Search no results - query field, filter chips, and clear / refine CTAs.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: ["badge", "button", "empty", "input"],
@@ -9885,7 +10472,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "empty-state-02",
     description:
-      "Empty inbox — mail folder rail, list header, and compose CTA.",
+      "Empty inbox - mail folder rail, list header, and compose CTA.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: ["badge", "button", "empty"],
@@ -9902,7 +10489,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "empty-state-03",
     description:
-      "No projects — board chrome, dashed create tile, and create project CTA.",
+      "No projects - board chrome, dashed create tile, and create project CTA.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: ["button", "empty"],
@@ -9919,7 +10506,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "empty-state-04",
     description:
-      "Table no results — column header chrome and adjust / clear filters.",
+      "Table no results - column header chrome and adjust / clear filters.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: ["button", "empty"],
@@ -9936,7 +10523,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "empty-state-05",
     description:
-      "Empty team — avatar placeholders and invite members CTA.",
+      "Empty team - avatar placeholders and invite members CTA.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: ["avatar", "button", "empty"],
@@ -9953,7 +10540,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "empty-state-06",
     description:
-      "Empty files — breadcrumb chrome, dashed dropzone, and upload CTA.",
+      "Empty files - breadcrumb chrome, dashed dropzone, and upload CTA.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: ["button", "empty"],
@@ -9970,7 +10557,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "empty-state-07",
     description:
-      "Chart no data — metric header, placeholder plot, and connect source CTA.",
+      "Chart no data - metric header, placeholder plot, and connect source CTA.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: ["button", "empty", "separator"],
@@ -9987,7 +10574,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "empty-state-08",
     description:
-      "Quiet notifications — activity panel with all-caught-up empty and prefs.",
+      "Quiet notifications - activity panel with all-caught-up empty and prefs.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: ["button", "empty"],
@@ -10004,7 +10591,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "empty-state-09",
     description:
-      "First-run onboarding — checklist steps and start setup CTA.",
+      "First-run onboarding - checklist steps and start setup CTA.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: ["button", "checkbox", "empty", "separator"],
@@ -10022,7 +10609,7 @@ const registryItemsRaw = [
   ),
   userAccountSettingsBlock(
     "account-settings-01",
-    "Vertical settings shell — profile, security, notifications, API keys (RTL/LTR)."
+    "Vertical settings shell - profile, security, notifications, API keys (RTL/LTR)."
   ),
   userAccountSettingsBlock(
     "account-settings-02",
@@ -10042,7 +10629,7 @@ const registryItemsRaw = [
   ),
   userAccountSettingsBlock(
     "account-settings-03",
-    "Sessions & devices — revoke remote sessions with device marks (RTL/LTR).",
+    "Sessions & devices - revoke remote sessions with device marks (RTL/LTR).",
     {
       registryDependencies: ["badge", "button"],
       images: [],
@@ -10050,7 +10637,7 @@ const registryItemsRaw = [
   ),
   userAccountSettingsBlock(
     "account-settings-04",
-    "Connected accounts — Google, Apple, GitHub connect/disconnect (RTL/LTR).",
+    "Connected accounts - Google, Apple, GitHub connect/disconnect (RTL/LTR).",
     {
       registryDependencies: ["badge", "button"],
       images: [],
@@ -10059,7 +10646,7 @@ const registryItemsRaw = [
   ),
   userAccountSettingsBlock(
     "account-settings-05",
-    "Appearance — theme tiles, language, density (RTL/LTR).",
+    "Appearance - theme tiles, language, density (RTL/LTR).",
     {
       registryDependencies: ["button", "label", "radio-group", "select"],
       images: [],
@@ -10067,7 +10654,7 @@ const registryItemsRaw = [
   ),
   userAccountTeamMembersBlock(
     "team-members-01",
-    "Team table — invite dialog, seats badge, roles, status, and row actions (RTL/LTR).",
+    "Team table - invite dialog, seats badge, roles, status, and row actions (RTL/LTR).",
     {
       images: [
         "avatar-01.webp",
@@ -10079,7 +10666,7 @@ const registryItemsRaw = [
   ),
   userAccountTeamMembersBlock(
     "team-members-02",
-    "People card grid — role/status badges and overflow actions (RTL/LTR).",
+    "People card grid - role/status badges and overflow actions (RTL/LTR).",
     {
       registryDependencies: ["avatar", "badge", "button", "dropdown-menu"],
       images: [
@@ -10134,7 +10721,7 @@ const registryItemsRaw = [
   ),
   userAccountTeamMembersBlock(
     "team-members-05",
-    "Inline invite strip above current team list — no modal (RTL/LTR).",
+    "Inline invite strip above current team list - no modal (RTL/LTR).",
     {
       registryDependencies: [
         "avatar",
@@ -10168,7 +10755,7 @@ const registryItemsRaw = [
   ),
   userAccountRolesAndPermissionsBlock(
     "roles-and-permissions-01",
-    "RBAC matrix — role columns, resource groups, locked admin, discard/save.",
+    "RBAC matrix - role columns, resource groups, locked admin, discard/save.",
     {
       registryDependencies: [
         "badge",
@@ -10181,14 +10768,14 @@ const registryItemsRaw = [
   ),
   userAccountRolesAndPermissionsBlock(
     "roles-and-permissions-02",
-    "Role cards — member counts, scope chips, Edit and Duplicate actions.",
+    "Role cards - member counts, scope chips, Edit and Duplicate actions.",
     {
       registryDependencies: ["badge", "button", "separator"],
     }
   ),
   userAccountRolesAndPermissionsBlock(
     "roles-and-permissions-03",
-    "Role editor — left role list, name/description fields, grouped permission checklists.",
+    "Role editor - left role list, name/description fields, grouped permission checklists.",
     {
       registryDependencies: [
         "badge",
@@ -10203,12 +10790,12 @@ const registryItemsRaw = [
   ),
   userAccountUserProfileBlock(
     "user-profile-01",
-    "Public profile — header, follow actions, sidebar stats/skills, and repos/activity/starred tabs.",
+    "Public profile - header, follow actions, sidebar stats/skills, and repos/activity/starred tabs.",
     { images: ["avatar.avif"] }
   ),
   userAccountUserProfileBlock(
     "user-profile-02",
-    "Creator card — centered avatar, social row, followers strip, Follow and Message.",
+    "Creator card - centered avatar, social row, followers strip, Follow and Message.",
     {
       images: ["avatar.avif"],
       registryDependencies: ["avatar", "badge", "button"],
@@ -10216,7 +10803,7 @@ const registryItemsRaw = [
   ),
   userAccountUserProfileBlock(
     "user-profile-03",
-    "Cover profile — gradient banner, about column, and featured work icon grid.",
+    "Cover profile - gradient banner, about column, and featured work icon grid.",
     {
       images: ["avatar.webp"],
       registryDependencies: ["avatar", "badge", "button", "separator"],
@@ -10224,7 +10811,7 @@ const registryItemsRaw = [
   ),
   userAccountUserProfileBlock(
     "user-profile-04",
-    "Account settings profile — rail navigation and editable profile fields.",
+    "Account settings profile - rail navigation and editable profile fields.",
     {
       images: ["avatar.webp"],
       registryDependencies: [
@@ -10240,7 +10827,7 @@ const registryItemsRaw = [
   ),
   userAccountUserProfileBlock(
     "user-profile-05",
-    "Resume profile — editorial header, experience timeline, and skill chips.",
+    "Resume profile - editorial header, experience timeline, and skill chips.",
     {
       images: ["avatar.avif"],
       registryDependencies: ["avatar", "badge", "separator"],
@@ -10248,7 +10835,7 @@ const registryItemsRaw = [
   ),
   userAccountUserProfileBlock(
     "user-profile-06",
-    "Org directory member — role badge, availability, Message and Book time CTAs.",
+    "Org directory member - role badge, availability, Message and Book time CTAs.",
     {
       images: ["avatar.webp"],
       registryDependencies: ["avatar", "badge", "button", "separator"],
@@ -10256,11 +10843,11 @@ const registryItemsRaw = [
   ),
   paymentsBillingPaymentFormBlock(
     "payment-form-01",
-    "Card-terminal checkout — dark amount header, visual card mock, method tiles, PayPal and bank panels."
+    "Card-terminal checkout - dark amount header, visual card mock, method tiles, PayPal and bank panels."
   ),
   paymentsBillingPaymentFormBlock(
     "payment-form-02",
-    "Commerce checkout — step crumbs, method radios with brand marks, sticky order receipt and ship/delivery.",
+    "Commerce checkout - step crumbs, method radios with brand marks, sticky order receipt and ship/delivery.",
     {
       registryDependencies: ["button", "input", "label", "radio-group", "separator"],
       images: [
@@ -10273,18 +10860,18 @@ const registryItemsRaw = [
   ),
   paymentsBillingPaymentFormBlock(
     "payment-form-03",
-    "SaaS upgrade — primary plan banner with feature checklist, segmented methods, invoice bank details."
+    "SaaS upgrade - primary plan banner with feature checklist, segmented methods, invoice bank details."
   ),
   paymentsBillingPaymentFormBlock(
     "payment-form-04",
-    "Editorial subscription — dark typographic plan rail, quiet card form, brand strip and terms gate.",
+    "Editorial subscription - dark typographic plan rail, quiet card form, brand strip and terms gate.",
     {
       images: ["visa.webp", "american-express.webp", "master.webp"],
     }
   ),
   ecommerceProductListBlock(
     "product-list-01",
-    "Lookbook drop — portrait covers, index badges, hover Quick add (RTL/LTR).",
+    "Lookbook drop - portrait covers, index badges, hover Quick add (RTL/LTR).",
     {
       images: [
         "product-1.webp",
@@ -10298,7 +10885,7 @@ const registryItemsRaw = [
   ),
   ecommerceProductListBlock(
     "product-list-02",
-    "Spec desk laptops — dark product stages, rating chips, From + Specs CTA (RTL/LTR).",
+    "Spec desk laptops - dark product stages, rating chips, From + Specs CTA (RTL/LTR).",
     {
       images: [
         "laptop-1.webp",
@@ -10312,7 +10899,7 @@ const registryItemsRaw = [
   ),
   ecommerceProductListBlock(
     "product-list-03",
-    "Runway rail footwear — split media/copy cards, colorway dots, cart + wishlist (RTL/LTR).",
+    "Runway rail footwear - split media/copy cards, colorway dots, cart + wishlist (RTL/LTR).",
     {
       images: [
         "shoe-1.webp",
@@ -10327,7 +10914,7 @@ const registryItemsRaw = [
   ),
   ecommerceProductListBlock(
     "product-list-04",
-    "Atelier markdowns — discount ribbons, frosted price sheets over covers, dual CTAs (RTL/LTR).",
+    "Atelier markdowns - discount ribbons, frosted price sheets over covers, dual CTAs (RTL/LTR).",
     {
       images: [
         "fashion-1.webp",
@@ -10343,7 +10930,7 @@ const registryItemsRaw = [
   ),
   ecommerceProductListBlock(
     "product-list-05",
-    "Cover stories — full-bleed fashion with glass hover capsules for wishlist + cart (RTL/LTR).",
+    "Cover stories - full-bleed fashion with glass hover capsules for wishlist + cart (RTL/LTR).",
     {
       registryDependencies: [],
       images: [
@@ -10360,7 +10947,7 @@ const registryItemsRaw = [
   ),
   ecommerceProductListBlock(
     "product-list-06",
-    "Apothecary hot list — warm product wells, MRP chips, bag + save for later (RTL/LTR).",
+    "Apothecary hot list - warm product wells, MRP chips, bag + save for later (RTL/LTR).",
     {
       images: [
         "sunscreen-1.webp",
@@ -10376,7 +10963,7 @@ const registryItemsRaw = [
   ),
   ecommerceProductListBlock(
     "product-list-07",
-    "Pharmacy shelf — dense five-up grid, % badges, flush wishlist + Add to Bag bar (RTL/LTR).",
+    "Pharmacy shelf - dense five-up grid, % badges, flush wishlist + Add to Bag bar (RTL/LTR).",
     {
       registryDependencies: [],
       images: [
@@ -10395,7 +10982,7 @@ const registryItemsRaw = [
   ),
   ecommerceProductListBlock(
     "product-list-08",
-    "Category spotlights — pedestal pods, dim-on-hover stage, rising frosted info plate (RTL/LTR).",
+    "Category spotlights - pedestal pods, dim-on-hover stage, rising frosted info plate (RTL/LTR).",
     {
       registryDependencies: [],
       images: [
@@ -10412,7 +10999,7 @@ const registryItemsRaw = [
   ),
   ecommerceProductListBlock(
     "product-list-09",
-    "Ranked ticker — numbered trending tiles on muted board with live chip (RTL/LTR).",
+    "Ranked ticker - numbered trending tiles on muted board with live chip (RTL/LTR).",
     {
       registryDependencies: [],
       images: [
@@ -10431,7 +11018,7 @@ const registryItemsRaw = [
   ),
   ecommerceProductListBlock(
     "product-list-10",
-    "Concierge watch rows — soft cards with spec meta and directional chevron (RTL/LTR).",
+    "Concierge watch rows - soft cards with spec meta and directional chevron (RTL/LTR).",
     {
       registryDependencies: [],
       images: [
@@ -10448,7 +11035,7 @@ const registryItemsRaw = [
   ),
   ecommerceProductListBlock(
     "product-list-11",
-    "Museum pedestals — borderless watch gallery with soft shadow ellipses (RTL/LTR).",
+    "Museum pedestals - borderless watch gallery with soft shadow ellipses (RTL/LTR).",
     {
       registryDependencies: [],
       images: [
@@ -10464,7 +11051,7 @@ const registryItemsRaw = [
   ),
   ecommerceCheckoutBlock(
     "checkout-01",
-    "Fixed sidebar checkout — sticky muted bag with promo and totals left, delivery grid and Card/PayPal tiles right (RTL/LTR).",
+    "Fixed sidebar checkout - sticky muted bag with promo and totals left, delivery grid and Card/PayPal tiles right (RTL/LTR).",
     {
       images: [
         "sweater.webp",
@@ -10480,7 +11067,7 @@ const registryItemsRaw = [
   ),
   ecommerceCheckoutBlock(
     "checkout-02",
-    "Two-column checkout — delivery and payment form left, interactive bag with qty steppers and live totals right (RTL/LTR).",
+    "Two-column checkout - delivery and payment form left, interactive bag with qty steppers and live totals right (RTL/LTR).",
     {
       images: [
         "sneakers.webp",
@@ -10495,14 +11082,14 @@ const registryItemsRaw = [
   ),
   ecommerceCheckoutBlock(
     "checkout-03",
-    "Stepper checkout — Cart → Checkout → Order progress, form and promo left, sticky summary with Pay now right (RTL/LTR).",
+    "Stepper checkout - Cart → Checkout → Order progress, form and promo left, sticky summary with Pay now right (RTL/LTR).",
     {
       images: ["visa.webp", "amex.webp", "mastercard.webp", "paypal.webp"],
     }
   ),
   ecommerceCheckoutBlock(
     "checkout-04",
-    "Payment-form checkout — interactive bag left, delivery and payment right with card fields when Card is selected (RTL/LTR).",
+    "Payment-form checkout - interactive bag left, delivery and payment right with card fields when Card is selected (RTL/LTR).",
     {
       images: [
         "sneakers.webp",
@@ -10517,7 +11104,7 @@ const registryItemsRaw = [
   ),
   ecommerceCheckoutBlock(
     "checkout-05",
-    "Vertical-fields checkout — stacked form left, muted summary first on mobile, always-stacked card fields (RTL/LTR).",
+    "Vertical-fields checkout - stacked form left, muted summary first on mobile, always-stacked card fields (RTL/LTR).",
     {
       images: [
         "sneakers.webp",
@@ -10532,7 +11119,7 @@ const registryItemsRaw = [
   ),
   ecommerceCheckoutBlock(
     "checkout-06",
-    "One-column checkout — max-width stack with Checkout header, bag, muted totals, then two-column delivery and card grids (RTL/LTR).",
+    "One-column checkout - max-width stack with Checkout header, bag, muted totals, then two-column delivery and card grids (RTL/LTR).",
     {
       images: [
         "sneakers.webp",
@@ -10547,7 +11134,7 @@ const registryItemsRaw = [
   ),
   ecommerceCheckoutBlock(
     "checkout-07",
-    "Modal checkout — Open trigger, Dialog with totals strip, two-column fields, and Cancel / Pay footer (RTL/LTR).",
+    "Modal checkout - Open trigger, Dialog with totals strip, two-column fields, and Cancel / Pay footer (RTL/LTR).",
     {
       registryDependencies: [
         "button",
@@ -10562,7 +11149,7 @@ const registryItemsRaw = [
   ),
   ecommerceCheckoutBlock(
     "checkout-08",
-    "Drawer checkout — Open trigger, end-edge Sheet titled Shopping cart with stacked delivery/card fields and Pay CTA (RTL/LTR).",
+    "Drawer checkout - Open trigger, end-edge Sheet titled Shopping cart with stacked delivery/card fields and Pay CTA (RTL/LTR).",
     {
       registryDependencies: [
         "button",
@@ -10577,7 +11164,7 @@ const registryItemsRaw = [
   ),
   ecommerceCheckoutBlock(
     "checkout-09",
-    "Multi-step checkout — Shipping → Payment → Review stepper, address and method cards, sticky order summary (RTL/LTR).",
+    "Multi-step checkout - Shipping → Payment → Review stepper, address and method cards, sticky order summary (RTL/LTR).",
     {
       dependencies: ["lucide-react"],
       registryDependencies: [
@@ -10594,21 +11181,21 @@ const registryItemsRaw = [
   ),
   ecommerceOrderConfirmationBlock(
     "order-confirmation-01",
-    "Order confirmation — success header with copyable order ID, delivery timeline, shipping/payment cards, and totals (RTL/LTR).",
+    "Order confirmation - success header with copyable order ID, delivery timeline, shipping/payment cards, and totals (RTL/LTR).",
     {
       images: ["headphones.webp", "keyboard.webp", "mouse.webp"],
     }
   ),
   ecommerceOrderSummaryBlock(
     "order-summary-01",
-    "Boutique receipt ticket — success stamp header, order pipeline, ships-to card, compact line items, and invoice CTA (RTL/LTR).",
+    "Boutique receipt ticket - success stamp header, order pipeline, ships-to card, compact line items, and invoice CTA (RTL/LTR).",
     {
       images: ["watch.webp", "sneaker.webp"],
     }
   ),
   ecommerceOrderSummaryBlock(
     "order-summary-02",
-    "Fulfillment desk board — pipeline scrubber, status-colored chips per SKU, and settlement totals card (RTL/LTR).",
+    "Fulfillment desk board - pipeline scrubber, status-colored chips per SKU, and settlement totals card (RTL/LTR).",
     {
       registryDependencies: [],
       images: ["sunglass.webp", "sneaker.webp", "watch.webp"],
@@ -10616,7 +11203,7 @@ const registryItemsRaw = [
   ),
   ecommerceOrderSummaryBlock(
     "order-summary-03",
-    "Commerce success masthead — arrival chip, meta tiles with Mastercard mark, bag list, sticky Track order card (RTL/LTR).",
+    "Commerce success masthead - arrival chip, meta tiles with Mastercard mark, bag list, sticky Track order card (RTL/LTR).",
     {
       images: [
         "sneaker.webp",
@@ -10628,14 +11215,14 @@ const registryItemsRaw = [
   ),
   ecommerceOrderSummaryBlock(
     "order-summary-04",
-    "Split atelier sheet — muted start rail for shipping/billing + numbered magazine piece list (RTL/LTR).",
+    "Split atelier sheet - muted start rail for shipping/billing + numbered magazine piece list (RTL/LTR).",
     {
       images: ["sneaker.webp", "watch.webp", "watch-alt.webp"],
     }
   ),
   ecommerceOrderSummaryBlock(
     "order-summary-05",
-    "Account order console — order ID badge, compact line cards, and pencil-edit customer/shipping panels (RTL/LTR).",
+    "Account order console - order ID badge, compact line cards, and pencil-edit customer/shipping panels (RTL/LTR).",
     {
       registryDependencies: [],
       images: ["watch.webp", "watch-alt.webp"],
@@ -10643,7 +11230,7 @@ const registryItemsRaw = [
   ),
   ecommerceOrderSummaryBlock(
     "order-summary-06",
-    "Invoice document — numbered info tiles, SKU line sheet with Qty/Amount columns, and total-due footer (RTL/LTR).",
+    "Invoice document - numbered info tiles, SKU line sheet with Qty/Amount columns, and total-due footer (RTL/LTR).",
     {
       registryDependencies: [],
       images: ["laptop.webp", "watch.webp", "sunscreen.webp"],
@@ -10665,7 +11252,7 @@ const registryItemsRaw = [
   ),
   ecommerceProductDetailsBlock(
     "product-details-02",
-    "Beauty PDP — sticky main image over horizontal thumbs, qty stepper, cart/buy CTAs, pincode, and perk tiles.",
+    "Beauty PDP - sticky main image over horizontal thumbs, qty stepper, cart/buy CTAs, pincode, and perk tiles.",
     {
       registryDependencies: ["button", "input", "label", "separator"],
       images: [
@@ -10680,7 +11267,7 @@ const registryItemsRaw = [
   ),
   ecommerceProductDetailsBlock(
     "product-details-03",
-    "Fashion PDP — sticky full-size 2×2 mosaic gallery, size/color pickers, wishlist/cart, pincode, and review.",
+    "Fashion PDP - sticky full-size 2×2 mosaic gallery, size/color pickers, wishlist/cart, pincode, and review.",
     {
       dependencies: [],
       registryDependencies: ["button", "input", "separator"],
@@ -10695,7 +11282,7 @@ const registryItemsRaw = [
   ),
   ecommerceProductDetailsBlock(
     "product-details-04",
-    "Apparel PDP — sticky masonry mosaic gallery, size/color pickers, wishlist/cart, delivery, description, and reviews.",
+    "Apparel PDP - sticky masonry mosaic gallery, size/color pickers, wishlist/cart, delivery, description, and reviews.",
     {
       dependencies: [],
       registryDependencies: ["button", "input"],
@@ -10711,7 +11298,7 @@ const registryItemsRaw = [
   ),
   ecommerceProductDetailsBlock(
     "product-details-05",
-    "Laptop PDP — bordered card chrome, sticky gallery with horizontal thumbs, color swatches, and specs list.",
+    "Laptop PDP - bordered card chrome, sticky gallery with horizontal thumbs, color swatches, and specs list.",
     {
       dependencies: [],
       registryDependencies: ["button", "input", "label", "separator"],
@@ -10725,7 +11312,7 @@ const registryItemsRaw = [
   ),
   ecommerceProductDetailsBlock(
     "product-details-06",
-    "Sneakers PDP — title-first layout, mosaic hero with side angles, size/color pickers, delivery, description, and reviews.",
+    "Sneakers PDP - title-first layout, mosaic hero with side angles, size/color pickers, delivery, description, and reviews.",
     {
       dependencies: [],
       registryDependencies: ["button", "input"],
@@ -10739,7 +11326,7 @@ const registryItemsRaw = [
   ),
   ecommerceProductDetailsBlock(
     "product-details-07",
-    "Eyewear PDP — gallery thumbs, likes/share, colors, features checklist, and description.",
+    "Eyewear PDP - gallery thumbs, likes/share, colors, features checklist, and description.",
     {
       registryDependencies: ["button", "input", "separator"],
       images: [
@@ -10754,7 +11341,7 @@ const registryItemsRaw = [
   ),
   ecommerceProductDetailsBlock(
     "product-details-08",
-    "Tee PDP — sticky gallery with end-edge vertical thumbs, size grid, pincode, accordion details, and reviews.",
+    "Tee PDP - sticky gallery with end-edge vertical thumbs, size grid, pincode, accordion details, and reviews.",
     {
       dependencies: [],
       registryDependencies: ["accordion", "button", "input", "separator"],
@@ -10769,7 +11356,7 @@ const registryItemsRaw = [
   ),
   ecommerceProductDetailsBlock(
     "product-details-09",
-    "Headphones PDP — carousel gallery with thumbs, color/edition pickers, qty CTAs, trust badges, and Description/Specs/Reviews tabs (RTL/LTR).",
+    "Headphones PDP - carousel gallery with thumbs, color/edition pickers, qty CTAs, trust badges, and Description/Specs/Reviews tabs (RTL/LTR).",
     {
       registryDependencies: [
         "avatar",
@@ -10885,7 +11472,7 @@ const registryItemsRaw = [
   ),
   ecommerceShoppingCartBlock(
     "shopping-cart-10",
-    "Interactive cart — qty steppers, remove, promo code, sticky order summary with free shipping over $100 (RTL/LTR).",
+    "Interactive cart - qty steppers, remove, promo code, sticky order summary with free shipping over $100 (RTL/LTR).",
     {
       registryDependencies: [
         "badge",
@@ -10898,7 +11485,7 @@ const registryItemsRaw = [
   ),
   ecommerceWishlistBlock(
     "wishlist-01",
-    "Wishlist grid — savings header, share/add-all, discount badges, out-of-stock cards, and empty state (RTL/LTR).",
+    "Wishlist grid - savings header, share/add-all, discount badges, out-of-stock cards, and empty state (RTL/LTR).",
     {
       images: [
         "headphones.webp",
@@ -11020,7 +11607,7 @@ const registryItemsRaw = [
   ),
   ecommerceProductFilterBlock(
     "product-filter-03",
-    "Full filter panel — audience radios, category/brand/color search, sizes, price, and discount.",
+    "Full filter panel - audience radios, category/brand/color search, sizes, price, and discount.",
     {
       registryDependencies: ["checkbox", "label", "separator", "slider"],
       dependencies: ["lucide-react"],
@@ -11056,7 +11643,7 @@ const registryItemsRaw = [
   ),
   ecommerceProductReviewBlock(
     "product-review-02",
-    "Split review rows — buyer profile beside content on desktop, stacked on mobile.",
+    "Split review rows - buyer profile beside content on desktop, stacked on mobile.",
     {
       dependencies: ["lucide-react"],
       images: [
@@ -11102,7 +11689,7 @@ const registryItemsRaw = [
   ),
   ecommerceProductReviewBlock(
     "product-review-05",
-    "Two-column reviews — rating summary and write CTA beside images and review list.",
+    "Two-column reviews - rating summary and write CTA beside images and review list.",
     {
       dependencies: ["lucide-react"],
       images: [
@@ -11120,14 +11707,14 @@ const registryItemsRaw = [
   ),
   ecommerceOrderTrackingBlock(
     "order-tracking-01",
-    "Order tracking page — status steps, product lines, and billing summary with invoice CTA (RTL/LTR).",
+    "Order tracking page - status steps, product lines, and billing summary with invoice CTA (RTL/LTR).",
     {
       images: ["sneaker.webp", "watch.webp"],
     }
   ),
   ecommerceOrderTrackingBlock(
     "order-tracking-02",
-    "Order tracking split — products and billing left, vertical shipment timeline on the end edge (RTL/LTR).",
+    "Order tracking split - products and billing left, vertical shipment timeline on the end edge (RTL/LTR).",
     {
       registryDependencies: [],
       images: ["sneaker.webp", "watch.webp"],
@@ -11135,35 +11722,35 @@ const registryItemsRaw = [
   ),
   ecommerceOrderTrackingBlock(
     "order-tracking-03",
-    "Order tracking pipeline — responsive step rail, products, delivery info, and billing with invoice CTA (RTL/LTR).",
+    "Order tracking pipeline - responsive step rail, products, delivery info, and billing with invoice CTA (RTL/LTR).",
     {
       images: ["sneaker.webp", "watch.webp"],
     }
   ),
   ecommerceOrderTrackingBlock(
     "order-tracking-04",
-    "Order details card — summary meta, responsive tracking rail, line items with color, and end-aligned billing (RTL/LTR).",
+    "Order details card - summary meta, responsive tracking rail, line items with color, and end-aligned billing (RTL/LTR).",
     {
       images: ["sneaker.webp", "watch.webp", "watch-silver.webp"],
     }
   ),
   ecommerceOrderTrackingBlock(
     "order-tracking-05",
-    "Order tracking split — products, billing, and vertical timeline with customer info aside (RTL/LTR).",
+    "Order tracking split - products, billing, and vertical timeline with customer info aside (RTL/LTR).",
     {
       images: ["sneaker.webp", "watch.webp", "watch-silver.webp"],
     }
   ),
   ecommerceOrderTrackingBlock(
     "order-tracking-06",
-    "Compact order tracking — purchase summary, pricing, items with reorder, and three-step delivery rail (RTL/LTR).",
+    "Compact order tracking - purchase summary, pricing, items with reorder, and three-step delivery rail (RTL/LTR).",
     {
       images: ["sneaker.webp"],
     }
   ),
   ecommerceOrderTrackingBlock(
     "order-tracking-07",
-    "Order tracking overview — meta row, responsive step rail, product grid, and end-aligned billing (RTL/LTR).",
+    "Order tracking overview - meta row, responsive step rail, product grid, and end-aligned billing (RTL/LTR).",
     {
       registryDependencies: [],
       images: ["sneaker.webp", "watch.webp", "watch-silver.webp"],
@@ -11171,7 +11758,7 @@ const registryItemsRaw = [
   ),
   ecommerceProductCategoriesBlock(
     "product-categories-01",
-    "Lookbook orbit — numbered circular fashion tiles with offer captions and View all (RTL/LTR).",
+    "Lookbook orbit - numbered circular fashion tiles with offer captions and View all (RTL/LTR).",
     {
       dependencies: ["lucide-react"],
       images: [
@@ -11186,7 +11773,7 @@ const registryItemsRaw = [
   ),
   ecommerceProductCategoriesBlock(
     "product-categories-02",
-    "Poster wall — dark campaign grid with tall product posters and hover name captions (RTL/LTR).",
+    "Poster wall - dark campaign grid with tall product posters and hover name captions (RTL/LTR).",
     {
       images: [
         "sunglass-1.webp",
@@ -11202,7 +11789,7 @@ const registryItemsRaw = [
   ),
   ecommerceProductCategoriesBlock(
     "product-categories-03",
-    "Apothecary tray — muted shell with SKU-tagged beauty cards in a soft grid (RTL/LTR).",
+    "Apothecary tray - muted shell with SKU-tagged beauty cards in a soft grid (RTL/LTR).",
     {
       images: [
         "hair-brush.webp",
@@ -11220,7 +11807,7 @@ const registryItemsRaw = [
   ),
   ecommerceProductCategoriesBlock(
     "product-categories-04",
-    "Spotlight triptych — cinematic promo tiles with gradient overlays and Shop now CTAs (RTL/LTR).",
+    "Spotlight triptych - cinematic promo tiles with gradient overlays and Shop now CTAs (RTL/LTR).",
     {
       dependencies: ["lucide-react"],
       images: ["face-wash.webp", "skin-glow.webp", "face-primer.webp"],
@@ -11228,7 +11815,7 @@ const registryItemsRaw = [
   ),
   ecommerceProductCategoriesBlock(
     "product-categories-05",
-    "Lookbook index — editorial fashion portraits with index chips and primary rule header (RTL/LTR).",
+    "Lookbook index - editorial fashion portraits with index chips and primary rule header (RTL/LTR).",
     {
       images: [
         "ethnic.webp",
@@ -11246,7 +11833,7 @@ const registryItemsRaw = [
   ),
   ecommerceProductCategoriesBlock(
     "product-categories-06",
-    "Offer desk — ticket-tagged promo cards with season copy and Explore links (RTL/LTR).",
+    "Offer desk - ticket-tagged promo cards with season copy and Explore links (RTL/LTR).",
     {
       dependencies: ["lucide-react"],
       images: [
@@ -11260,7 +11847,7 @@ const registryItemsRaw = [
   ),
   ecommerceProductCategoriesBlock(
     "product-categories-07",
-    "Wellness shelf — snap-scroll beauty rail with chevron scrubbers (RTL/LTR).",
+    "Wellness shelf - snap-scroll beauty rail with chevron scrubbers (RTL/LTR).",
     {
       dependencies: ["lucide-react"],
       registryDependencies: ["button"],
@@ -11277,7 +11864,7 @@ const registryItemsRaw = [
   ),
   ecommerceProductCategoriesBlock(
     "product-categories-08",
-    "Marketplace hubs — four department boards with browse actions and 2×2 product tiles (RTL/LTR).",
+    "Marketplace hubs - four department boards with browse actions and 2×2 product tiles (RTL/LTR).",
     {
       dependencies: ["lucide-react"],
       images: [
@@ -11301,18 +11888,18 @@ const registryItemsRaw = [
   ),
   filesMediaDataExportBlock(
     "data-export-01",
-    "Full export panel — format cards, collapsible field groups, progress, and success (RTL/LTR)."
+    "Full export panel - format cards, collapsible field groups, progress, and success (RTL/LTR)."
   ),
   filesMediaDataExportBlock(
     "data-export-02",
-    "Compact export card — format, date range, headers checkbox, and Export (RTL/LTR).",
+    "Compact export card - format, date range, headers checkbox, and Export (RTL/LTR).",
     {
       registryDependencies: ["button", "checkbox", "label", "select"],
     }
   ),
   filesMediaDataExportBlock(
     "data-export-03",
-    "Scheduled export — frequency radios, format, email delivery, PII switch (RTL/LTR).",
+    "Scheduled export - frequency radios, format, email delivery, PII switch (RTL/LTR).",
     {
       registryDependencies: [
         "badge",
@@ -11329,18 +11916,18 @@ const registryItemsRaw = [
   ),
   filesMediaDataExportBlock(
     "data-export-04",
-    "Export history — ready/processing/failed/expired jobs with download and retry (RTL/LTR).",
+    "Export history - ready/processing/failed/expired jobs with download and retry (RTL/LTR).",
     {
       registryDependencies: ["badge", "button", "separator"],
     }
   ),
   filesMediaFileManagerBlock(
     "file-manager-01",
-    "Drive-style file manager — sidebar nav, breadcrumbs, storage meter, and grid or list views."
+    "Drive-style file manager - sidebar nav, breadcrumbs, storage meter, and grid or list views."
   ),
   filesMediaFileManagerBlock(
     "file-manager-02",
-    "Finder / Explorer — folder tree, path bar, dense table, and status line (RTL/LTR).",
+    "Finder / Explorer - folder tree, path bar, dense table, and status line (RTL/LTR).",
     {
       registryDependencies: [
         "button",
@@ -11352,7 +11939,7 @@ const registryItemsRaw = [
   ),
   filesMediaFileManagerBlock(
     "file-manager-03",
-    "Shared team folder — member strip, ACL badges, invite/copy link, and access table (RTL/LTR).",
+    "Shared team folder - member strip, ACL badges, invite/copy link, and access table (RTL/LTR).",
     {
       registryDependencies: [
         "avatar",
@@ -11365,7 +11952,7 @@ const registryItemsRaw = [
   ),
   filesMediaFileManagerBlock(
     "file-manager-04",
-    "Details inspector — file list with end-side properties panel and actions (RTL/LTR).",
+    "Details inspector - file list with end-side properties panel and actions (RTL/LTR).",
     {
       registryDependencies: [
         "avatar",
@@ -11377,7 +11964,7 @@ const registryItemsRaw = [
   ),
   filesMediaFileManagerBlock(
     "file-manager-05",
-    "Compact file picker dialog — breadcrumbs, multi-select list, Cancel/Attach (RTL/LTR).",
+    "Compact file picker dialog - breadcrumbs, multi-select list, Cancel/Attach (RTL/LTR).",
     {
       registryDependencies: [
         "badge",
@@ -11389,28 +11976,28 @@ const registryItemsRaw = [
   ),
   filesMediaFileUploadBlock(
     "file-upload-01",
-    "Multi-file drop zone — accept/size validation, progress queue, error retry, and mock upload (RTL/LTR).",
+    "Multi-file drop zone - accept/size validation, progress queue, error retry, and mock upload (RTL/LTR).",
     {
       registryDependencies: ["alert", "badge", "button", "progress"],
     }
   ),
   filesMediaFileUploadBlock(
     "file-upload-02",
-    "Product photo batch — image drop zone, thumbnail grid, cover mark, and upload progress (RTL/LTR).",
+    "Product photo batch - image drop zone, thumbnail grid, cover mark, and upload progress (RTL/LTR).",
     {
       registryDependencies: ["badge", "button", "progress"],
     }
   ),
   filesMediaFileUploadBlock(
     "file-upload-03",
-    "Single document slot — PDF/CSV empty or filled state with replace and remove (RTL/LTR).",
+    "Single document slot - PDF/CSV empty or filled state with replace and remove (RTL/LTR).",
     {
       registryDependencies: ["badge", "button"],
     }
   ),
   filesMediaFileUploadBlock(
     "file-upload-04",
-    "Dialog uploader — drop zone, attachment rows, error retry, and cancel/upload footer (RTL/LTR).",
+    "Dialog uploader - drop zone, attachment rows, error retry, and cancel/upload footer (RTL/LTR).",
     {
       registryDependencies: [
         "attachment",
@@ -11423,7 +12010,7 @@ const registryItemsRaw = [
   ),
   filesMediaMediaGalleryBlock(
     "media-gallery-01",
-    "Media asset gallery — tag filters, masonry or list, multi-select, and lightbox preview.",
+    "Media asset gallery - tag filters, masonry or list, multi-select, and lightbox preview.",
     [
       "gallery-1.webp",
       "gallery-2.webp",
@@ -11441,7 +12028,7 @@ const registryItemsRaw = [
   ),
   filesMediaMediaPlayerBlock(
     "media-player-01",
-    "Feature-dense watch player — scrubber, ±10s, volume, captions, speed/quality menu, fullscreen (RTL/LTR).",
+    "Feature-dense watch player - scrubber, ±10s, volume, captions, speed/quality menu, fullscreen (RTL/LTR).",
     ["flower.mp4"],
     {
       registryDependencies: [
@@ -11454,19 +12041,19 @@ const registryItemsRaw = [
   ),
   filesMediaMediaPlayerBlock(
     "media-player-02",
-    "Immersive cinema player — center play, skip intro, next-episode card, large scrub (RTL/LTR).",
+    "Immersive cinema player - center play, skip intro, next-episode card, large scrub (RTL/LTR).",
     ["flower.mp4"],
     { registryDependencies: ["button", "slider"] }
   ),
   filesMediaMediaPlayerBlock(
     "media-player-03",
-    "Clean embed player — minimal progress bar, play, fullscreen, elegant title (RTL/LTR).",
+    "Clean embed player - minimal progress bar, play, fullscreen, elegant title (RTL/LTR).",
     ["flower.mp4"],
     { registryDependencies: ["button"] }
   ),
   filesMediaMediaPlayerBlock(
     "media-player-04",
-    "Live stream + chat rail — LIVE badge, DVR scrubber, go-to-live, mock chat (RTL/LTR).",
+    "Live stream + chat rail - LIVE badge, DVR scrubber, go-to-live, mock chat (RTL/LTR).",
     ["flower.mp4"],
     {
       registryDependencies: [
@@ -11480,87 +12067,87 @@ const registryItemsRaw = [
   ),
   filesMediaMediaPlayerBlock(
     "media-player-05",
-    "Streaming next-up — episode chrome with countdown autoplay overlay and cancel (RTL/LTR).",
+    "Streaming next-up - episode chrome with countdown autoplay overlay and cancel (RTL/LTR).",
     ["flower.mp4"],
     { registryDependencies: ["button", "progress", "slider"] }
   ),
   filesMediaMediaPlayerBlock(
     "media-player-06",
-    "Info panel player — cast, trivia, chapter seek list beside the frame (RTL/LTR).",
+    "Info panel player - cast, trivia, chapter seek list beside the frame (RTL/LTR).",
     ["flower.mp4"],
     { registryDependencies: ["badge", "button", "separator", "slider"] }
   ),
   filesMediaMediaPlayerBlock(
     "media-player-07",
-    "Course lesson player — playlist sidebar, prev/next, speed select (RTL/LTR).",
+    "Course lesson player - playlist sidebar, prev/next, speed select (RTL/LTR).",
     ["flower.mp4"],
     { registryDependencies: ["badge", "button", "select", "slider"] }
   ),
   filesMediaMediaPlayerBlock(
     "media-player-08",
-    "Share embed — chapter chips, copy link, share, watch again (RTL/LTR).",
+    "Share embed - chapter chips, copy link, share, watch again (RTL/LTR).",
     ["flower.mp4"],
     { registryDependencies: ["badge", "button", "separator"] }
   ),
   filesMediaMediaPlayerBlock(
     "media-player-09",
-    "Vertical short — 9:16 frame, side actions, caption overlay (RTL/LTR).",
+    "Vertical short - 9:16 frame, side actions, caption overlay (RTL/LTR).",
     ["flower.mp4"],
     { registryDependencies: ["button"] }
   ),
   filesMediaMediaPlayerBlock(
     "media-player-10",
-    "Mini dock / PiP — floating card closed by default, transport bar, expand (RTL/LTR).",
+    "Mini dock / PiP - floating card closed by default, transport bar, expand (RTL/LTR).",
     ["flower.mp4"],
     { registryDependencies: ["button", "slider"] }
   ),
   filesMediaMusicPlayerBlock(
     "music-player-01",
-    "Minimal audio bar — play, title, seek (RTL/LTR)."
+    "Minimal audio bar - play, title, seek (RTL/LTR)."
   ),
   filesMediaMusicPlayerBlock(
     "music-player-02",
-    "Classic cover card — art, transport, scrubber (RTL/LTR)."
+    "Classic cover card - art, transport, scrubber (RTL/LTR)."
   ),
   filesMediaMusicPlayerBlock(
     "music-player-03",
-    "Streaming now-playing — dark canvas, green accent, shuffle/repeat/like (RTL/LTR)."
+    "Streaming now-playing - dark canvas, green accent, shuffle/repeat/like (RTL/LTR)."
   ),
   filesMediaMusicPlayerBlock(
     "music-player-04",
-    "Waveform scrubber — vertical bars that animate while playing (RTL/LTR)."
+    "Waveform scrubber - vertical bars that animate while playing (RTL/LTR)."
   ),
   filesMediaMusicPlayerBlock(
     "music-player-05",
-    "Lock-screen style — large cover, blurred gradient mesh, Playing Next (RTL/LTR)."
+    "Lock-screen style - large cover, blurred gradient mesh, Playing Next (RTL/LTR)."
   ),
   filesMediaMusicPlayerBlock(
     "music-player-06",
-    "Neon equalizer — glowing bars, fuchsia/cyan chrome (RTL/LTR)."
+    "Neon equalizer - glowing bars, fuchsia/cyan chrome (RTL/LTR)."
   ),
   filesMediaMusicPlayerBlock(
     "music-player-07",
-    "Synced lyrics — tappable scrolling lines with active highlight (RTL/LTR)."
+    "Synced lyrics - tappable scrolling lines with active highlight (RTL/LTR)."
   ),
   filesMediaMusicPlayerBlock(
     "music-player-08",
-    "Soft pastel player — round cover, pink theme, heart (RTL/LTR)."
+    "Soft pastel player - round cover, pink theme, heart (RTL/LTR)."
   ),
   filesMediaMusicPlayerBlock(
     "music-player-09",
-    "Cover-forward immersive — full-bleed art with overlay transport (RTL/LTR)."
+    "Cover-forward immersive - full-bleed art with overlay transport (RTL/LTR)."
   ),
   filesMediaMusicPlayerBlock(
     "music-player-10",
-    "Bottom mini dock — closed until Start listening (RTL/LTR)."
+    "Bottom mini dock - closed until Start listening (RTL/LTR)."
   ),
   filesMediaMusicPlayerBlock(
     "music-player-11",
-    "One UI-style phone player — large rounded art, blue play (RTL/LTR)."
+    "One UI-style phone player - large rounded art, blue play (RTL/LTR)."
   ),
   filesMediaMusicPlayerBlock(
     "music-player-12",
-    "Queue + now playing — up-next list with active row (RTL/LTR).",
+    "Queue + now playing - up-next list with active row (RTL/LTR).",
     ["demo.wav"],
     { registryDependencies: ["badge", "button", "separator", "slider"] }
   ),
@@ -12178,7 +12765,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "application-form-01",
     description:
-      "Early-access application on canvas — contact, company, pricing plan cards with perks, notes, and terms.",
+      "Early-access application on canvas - contact, company, pricing plan cards with perks, notes, and terms.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: [
@@ -12206,7 +12793,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "application-form-02",
     description:
-      "Job application — role meta chips, portfolio, experience select, cover note, and consent.",
+      "Job application - role meta chips, portfolio, experience select, cover note, and consent.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: [],
     registryDependencies: [
@@ -12233,7 +12820,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "application-form-03",
     description:
-      "Partnership RFP — company details, icon partnership-type cards with outcomes, brief, and start quarter.",
+      "Partnership RFP - company details, icon partnership-type cards with outcomes, brief, and start quarter.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: [
@@ -12260,7 +12847,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "application-form-04",
     description:
-      "Cohort enrollment stepper — profile, background, goals, and cohort radios on one card.",
+      "Cohort enrollment stepper - profile, background, goals, and cohort radios on one card.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: [
@@ -12287,7 +12874,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "appointment-booking-form-01",
     description:
-      "Clinic schedule board — services, specialists, inline calendar, time chips, and ticket-stub confirmation.",
+      "Clinic schedule board - services, specialists, inline calendar, time chips, and ticket-stub confirmation.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: [
       "date-fns",
@@ -12316,7 +12903,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "hotel-booking-form-01",
     description:
-      "Resort magazine booking — hero glass strip, horizontal room rows, receipt, and boarding-pass confirmation.",
+      "Resort magazine booking - hero glass strip, horizontal room rows, receipt, and boarding-pass confirmation.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: [
       "date-fns",
@@ -12371,7 +12958,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "event-registration-form-01",
     description:
-      "Conference ticket registration — perforated ticket cards, name badges, and badge-ID confirmation.",
+      "Conference ticket registration - perforated ticket cards, name badges, and badge-ID confirmation.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: [
@@ -12405,7 +12992,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "job-application-form-01",
     description:
-      "ATS careers pipeline — vertical step rail, dossier review, PDF drop zones, and application reference.",
+      "ATS careers pipeline - vertical step rail, dossier review, PDF drop zones, and application reference.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: [
@@ -12436,7 +13023,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "product-order-form-01",
     description:
-      "Ecommerce PDP order — sticky gallery, swatches, buy box checkout, and packing-slip confirmation.",
+      "Ecommerce PDP order - sticky gallery, swatches, buy box checkout, and packing-slip confirmation.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: [
@@ -12481,7 +13068,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "project-inquiry-form-01",
     description:
-      "Agency RFP brief — icon type grid, budget track, proposal review, and inquiry timeline confirmation.",
+      "Agency RFP brief - icon type grid, budget track, proposal review, and inquiry timeline confirmation.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: [
@@ -12508,7 +13095,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "restaurant-reservation-form-01",
     description:
-      "Fine-dining reservation book — portrait vignette, large party counter, scrolling time pills, menu-style recap.",
+      "Fine-dining reservation book - portrait vignette, large party counter, scrolling time pills, menu-style recap.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: [
       "date-fns",
@@ -12546,7 +13133,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "course-enrollment-form-01",
     description:
-      "EdTech syllabus enrollment — curriculum panel, cohort cards, promo chip, and enrollment receipt.",
+      "EdTech syllabus enrollment - curriculum panel, cohort cards, promo chip, and enrollment receipt.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["date-fns", "lucide-react"],
     registryDependencies: [
@@ -13364,7 +13951,7 @@ const registryItemsRaw = [
   ),
   marketingHeroBlock(
     "hero-09",
-    "Image-left split hero with accented headline and dual CTAs — no navigation chrome.",
+    "Image-left split hero with accented headline and dual CTAs - no navigation chrome.",
     ["mobile-app-img-3.webp"],
     ["button"]
   ),
@@ -13379,7 +13966,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "hero-11",
     description:
-      "Source & Stage hero — marketing copy with Design/Source toggle, live invite form over a code sheet (RTL/LTR).",
+      "Source & Stage hero - marketing copy with Design/Source toggle, live invite form over a code sheet (RTL/LTR).",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: ["badge", "button", "field", "input"],
@@ -13396,7 +13983,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "hero-12",
     description:
-      "Full-bleed video background hero — muted looping film, dark scrim, dual CTAs, and feature stats.",
+      "Full-bleed video background hero - muted looping film, dark scrim, dual CTAs, and feature stats.",
     access: "member",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
@@ -13429,7 +14016,7 @@ const registryItemsRaw = [
   ),
   marketingNewsletterBlock(
     "newsletter-04",
-    "Split muted panel — copy on the start side, email Input and Subscribe on the end."
+    "Split muted panel - copy on the start side, email Input and Subscribe on the end."
   ),
   marketingNewsletterBlock(
     "newsletter-05",
@@ -13459,7 +14046,7 @@ const registryItemsRaw = [
   ),
   marketingNewsletterBlock(
     "newsletter-10",
-    "Newsletter popup dialog — teaser stage, email subscribe form, and success state.",
+    "Newsletter popup dialog - teaser stage, email subscribe form, and success state.",
     {
       registryDependencies: ["button", "dialog", "input", "label"],
     }
@@ -13519,7 +14106,7 @@ const registryItemsRaw = [
   ),
   marketingPortfolioBlock(
     "portfolio-01",
-    "Featured case plus filtered project grid — primary-only badges, static filters, and a hard-stop closing CTA.",
+    "Featured case plus filtered project grid - primary-only badges, static filters, and a hard-stop closing CTA.",
     PORTFOLIO_IMAGES,
     {
       registryDependencies: ["badge", "button"],
@@ -13528,7 +14115,7 @@ const registryItemsRaw = [
   ),
   marketingPortfolioBlock(
     "portfolio-02",
-    "Case spotlight — filter chips, project rail (col-span-4), and detail stage (col-span-8).",
+    "Case spotlight - filter chips, project rail (col-span-4), and detail stage (col-span-8).",
     PORTFOLIO_IMAGES,
     {
       registryDependencies: ["badge", "button"],
@@ -13537,13 +14124,13 @@ const registryItemsRaw = [
   ),
   marketingPortfolioBlock(
     "portfolio-03",
-    "Light kinetic studio — cream canvas with dark mode, marquee, magnetic featured cover, and orbiting thumbs.",
+    "Light kinetic studio - cream canvas with dark mode, marquee, magnetic featured cover, and orbiting thumbs.",
     PORTFOLIO_IMAGES,
     { dependencies: ["lucide-react"] }
   ),
   marketingPortfolioBlock(
     "portfolio-04",
-    "Dark neon showreel — wide cover with a six-column thumbnail strip underneath.",
+    "Dark neon showreel - wide cover with a six-column thumbnail strip underneath.",
     PORTFOLIO_IMAGES,
     { dependencies: ["lucide-react"] }
   ),
@@ -13552,7 +14139,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "social-links-01",
     description:
-      "Creative social / link-in-bio page — glass profile card, tone-colored link stack, and soft atmosphere.",
+      "Creative social / link-in-bio page - glass profile card, tone-colored link stack, and soft atmosphere.",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: ["avatar", "badge"],
@@ -13569,7 +14156,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "social-links-02",
     description:
-      "Dark cinematic link-in-bio — cover photo, portrait, 2×2 destination grid, and Sono logo mark (RTL/LTR).",
+      "Dark cinematic link-in-bio - cover photo, portrait, 2×2 destination grid, and Sono logo mark (RTL/LTR).",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     files: [
@@ -13600,7 +14187,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "social-links-03",
     description:
-      "Split magazine social card — cover panel, portrait header, link stack, and Sono logo (RTL/LTR).",
+      "Split magazine social card - cover panel, portrait header, link stack, and Sono logo (RTL/LTR).",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: ["button"],
@@ -13632,7 +14219,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "social-links-04",
     description:
-      "Simple SonoJS-site social card — logo wordmark, muted nav-style links, and primary Get started (RTL/LTR).",
+      "Simple SonoJS-site social card - logo wordmark, muted nav-style links, and primary Get started (RTL/LTR).",
     cssVars: SOFT_SURFACE_CSS_VARS,
     dependencies: ["lucide-react"],
     registryDependencies: ["button"],
@@ -15025,7 +15612,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "navbar-09",
     description:
-      "Marketing navbar with medium Resources mega — About, Support, Partners, and Customer stories panel.",
+      "Marketing navbar with medium Resources mega - About, Support, Partners, and Customer stories panel.",
     registryDependencies: ["button", "navigation-menu", "sheet"],
     dependencies: ["lucide-react"],
     files: [
@@ -15046,7 +15633,7 @@ const registryItemsRaw = [
     type: "registry:block",
     title: "navbar-10",
     description:
-      "Marketing navbar with compact Resources menu — Data, Team hiring badge, and Blog.",
+      "Marketing navbar with compact Resources menu - Data, Team hiring badge, and Blog.",
     registryDependencies: ["badge", "button", "navigation-menu", "sheet"],
     dependencies: ["lucide-react"],
     files: [
@@ -15094,7 +15681,7 @@ const registryItemsRaw = [
     type: "registry:ui",
     title: "Chart",
     description:
-      "Recharts helpers — ChartContainer, tooltip, legend, and theme CSS variables.",
+      "Recharts helpers - ChartContainer, tooltip, legend, and theme CSS variables.",
     dependencies: ["recharts", "clsx", "tailwind-merge"],
     files: [
       {
@@ -15199,7 +15786,7 @@ const registryItemsRaw = [
     type: "registry:lib",
     title: "Heatmap shared",
     description:
-      "Calendar and matrix SVG heatmap helpers — EN/Gregorian, RTL-aware layout.",
+      "Calendar and matrix SVG heatmap helpers - EN/Gregorian, RTL-aware layout.",
     registryDependencies: ["chart-styles"],
     files: [
       {
@@ -15214,7 +15801,7 @@ const registryItemsRaw = [
     type: "registry:lib",
     title: "Sunburst shared",
     description:
-      "Sunburst tree colorize, name labels, and center disc — EN, locked palette shades.",
+      "Sunburst tree colorize, name labels, and center disc - EN, locked palette shades.",
     registryDependencies: ["chart-styles"],
     files: [
       {
@@ -15229,8 +15816,8 @@ const registryItemsRaw = [
     type: "registry:lib",
     title: "Gauge shared",
     description:
-      "react-gauge-chart helpers — fixed stage, soft traffic ramp, English percent labels.",
-    // lodash: peer of react-gauge-chart (undeclared) — required for lodash/isEqual
+      "react-gauge-chart helpers - fixed stage, soft traffic ramp, English percent labels.",
+    // lodash: peer of react-gauge-chart (undeclared) - required for lodash/isEqual
     dependencies: ["react-gauge-chart", "lodash"],
     registryDependencies: ["chart-styles"],
     files: [
@@ -15251,7 +15838,7 @@ const registryItemsRaw = [
     type: "registry:lib",
     title: "Hc Gauge shared",
     description:
-      "Highcharts gauge / solidgauge helpers — soft dial chrome, English labels, client mount.",
+      "Highcharts gauge / solidgauge helpers - soft dial chrome, English labels, client mount.",
     dependencies: ["highcharts", "highcharts-react-official"],
     registryDependencies: ["chart-styles"],
     files: [
@@ -15267,7 +15854,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Simple Bar Chart",
     description:
-      "Canonical grouped bar — Desktop×Mobile H1 2026, navy×orange, metric header scrubber, RTL-aware.",
+      "Canonical grouped bar - Desktop×Mobile H1 2026, navy×orange, metric header scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -15293,7 +15880,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Area Chart",
     description:
-      "Dual overlapping monotone areas with neon glow (style-vega) — Desktop×Mobile H1 2026, metric scrubber, RTL-aware.",
+      "Dual overlapping monotone areas with neon glow (style-vega) - Desktop×Mobile H1 2026, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -15323,7 +15910,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Stacked Area Chart",
     description:
-      "Three stacked monotone areas with neon glow (style-vega) — Desktop×Mobile×Tablet, metric scrubber, RTL-aware.",
+      "Three stacked monotone areas with neon glow (style-vega) - Desktop×Mobile×Tablet, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -15355,7 +15942,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Area Chart Range",
     description:
-      "Single-series low–high temperature band with neon glow (style-vega) — metric tracks high, RTL-aware.",
+      "Single-series low–high temperature band with neon glow (style-vega) - metric tracks high, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -15383,7 +15970,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Area Chart Connect Nulls",
     description:
-      "Single neon area — gap at nulls vs connectNulls bridge, metric scrubber, RTL-aware.",
+      "Single neon area - gap at nulls vs connectNulls bridge, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -15411,7 +15998,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Cardinal Area Chart",
     description:
-      "Side-by-side monotone vs natural area curves with neon glow (style-vega) — metric scrubber, RTL-aware.",
+      "Side-by-side monotone vs natural area curves with neon glow (style-vega) - metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -15441,7 +16028,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Percent Area Chart",
     description:
-      "100% stacked areas with neon glow (style-vega) — Desktop×Mobile×Tablet share scrubber, RTL-aware.",
+      "100% stacked areas with neon glow (style-vega) - Desktop×Mobile×Tablet share scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -15473,7 +16060,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Synchronized Area Chart",
     description:
-      "Three syncId area panels with neon glow (style-vega) — Desktop, Mobile + Brush, Total; metric scrubber, RTL-aware.",
+      "Three syncId area panels with neon glow (style-vega) - Desktop, Mobile + Brush, Total; metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -15505,7 +16092,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Tiny Area Chart",
     description:
-      "Compact single-series area sparkline with neon glow (style-vega) — locked header chrome, no axes, RTL-aware.",
+      "Compact single-series area sparkline with neon glow (style-vega) - locked header chrome, no axes, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -15533,7 +16120,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Area Chart Fill By Value",
     description:
-      "Single area fill split at y=0 with neon up/down (style-vega) — metric scrubber, RTL-aware.",
+      "Single area fill split at y=0 with neon up/down (style-vega) - metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -15563,7 +16150,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Area Chart Custom Animation",
     description:
-      "Single neon area with custom 900ms entrance animation — metric scrubber, RTL-aware.",
+      "Single neon area with custom 900ms entrance animation - metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -15591,7 +16178,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Range Area Chart Custom Animation",
     description:
-      "Neon [low, high] range area with custom 1200ms entrance animation — metric scrubber, RTL-aware.",
+      "Neon [low, high] range area with custom 1200ms entrance animation - metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -15619,7 +16206,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Area Chart With Custom Events",
     description:
-      "Neon step area with chart-root pointer events via getRelativeCoordinate — live event panel, metric scrubber, RTL-aware.",
+      "Neon step area with chart-root pointer events via getRelativeCoordinate - live event panel, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles", "chart-mock-data"],
     cssVars: {
@@ -15647,7 +16234,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Prevent Right Click",
     description:
-      "Neon monotone area with onContextMenu preventDefault — metric scrubber, RTL-aware.",
+      "Neon monotone area with onContextMenu preventDefault - metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles", "chart-mock-data"],
     cssVars: {
@@ -15675,7 +16262,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Area Interactive",
     description:
-      "Toggle Store/Online period totals with neon glow (style-vega), then scrub a daily monotone area — RTL-aware.",
+      "Toggle Store/Online period totals with neon glow (style-vega), then scrub a daily monotone area - RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -15705,7 +16292,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Area Step",
     description:
-      "Single neon step area (type=step) — Store H1 2026, metric scrubber, RTL-aware.",
+      "Single neon step area (type=step) - Store H1 2026, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -15733,7 +16320,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Area Gradient",
     description:
-      "Stacked Store×Online natural areas with neon glow gradients (style-vega) — metric scrubber, RTL-aware.",
+      "Stacked Store×Online natural areas with neon glow gradients (style-vega) - metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -15763,7 +16350,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Market Cards",
     description:
-      "Neon SVG area sparkline cards — 30-day up, KWD down, gold flat (style-vega glow); RTL-aware.",
+      "Neon SVG area sparkline cards - 30-day up, KWD down, gold flat (style-vega glow); RTL-aware.",
     access: "member",
     dependencies: [],
     registryDependencies: ["chart-styles"],
@@ -15796,7 +16383,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Area Default",
     description:
-      "Classic single-series natural Store area — locked chrome, metric scrubber, RTL-aware.",
+      "Classic single-series natural Store area - locked chrome, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -15820,7 +16407,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Area Linear",
     description:
-      "Classic single-series linear Store area — locked chrome, metric scrubber, RTL-aware.",
+      "Classic single-series linear Store area - locked chrome, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -15844,7 +16431,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Area Step",
     description:
-      "Classic single-series step Store area — locked chrome, metric scrubber, RTL-aware.",
+      "Classic single-series step Store area - locked chrome, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -15868,7 +16455,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Area Legend",
     description:
-      "Classic stacked Desktop×Mobile natural areas with ChartLegend — locked chrome, metric scrubber, RTL-aware.",
+      "Classic stacked Desktop×Mobile natural areas with ChartLegend - locked chrome, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -15894,7 +16481,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Area Stacked",
     description:
-      "Classic stacked Desktop×Mobile natural areas — locked chrome, metric scrubber, RTL-aware.",
+      "Classic stacked Desktop×Mobile natural areas - locked chrome, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -15920,7 +16507,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Area Stacked Expand",
     description:
-      "Classic 100% stacked Desktop×Mobile natural areas (stackOffset expand) — locked chrome, share scrubber, RTL-aware.",
+      "Classic 100% stacked Desktop×Mobile natural areas (stackOffset expand) - locked chrome, share scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -15946,7 +16533,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Area Icons",
     description:
-      "Classic stacked Desktop×Mobile natural areas with ChartLegend Lucide icons — locked chrome, metric scrubber, RTL-aware.",
+      "Classic stacked Desktop×Mobile natural areas with ChartLegend Lucide icons - locked chrome, metric scrubber, RTL-aware.",
     dependencies: ["recharts", "lucide-react"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -15972,7 +16559,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Area Axes",
     description:
-      "Classic stacked Store×Online natural areas with sparse Y-axis (tickCount 3) — locked chrome, metric scrubber, RTL-aware.",
+      "Classic stacked Store×Online natural areas with sparse Y-axis (tickCount 3) - locked chrome, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -15998,7 +16585,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Two Level Pie Chart",
     description:
-      "Nested region×channel pies — locked chrome, slice scrubber, RTL-aware.",
+      "Nested region×channel pies - locked chrome, slice scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -16030,7 +16617,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Straight Angle Pie Chart",
     description:
-      "Half-pie (180→0) province share — locked chrome, slice scrubber, RTL-aware.",
+      "Half-pie (180→0) province share - locked chrome, slice scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -16062,7 +16649,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Custom Active Shape Pie Chart",
     description:
-      "Donut with expanded active sector and callout — locked chrome, slice scrubber, RTL-aware.",
+      "Donut with expanded active sector and callout - locked chrome, slice scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -16092,7 +16679,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Pie Chart With Customized Label",
     description:
-      "Full pie with mid-slice percent labels — locked chrome, slice scrubber, RTL-aware.",
+      "Full pie with mid-slice percent labels - locked chrome, slice scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -16122,7 +16709,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Pie Chart With Padding Angle",
     description:
-      "Thin rounded donut with slice gaps — locked chrome, slice scrubber, RTL-aware.",
+      "Thin rounded donut with slice gaps - locked chrome, slice scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -16152,7 +16739,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Pie Chart In Grid",
     description:
-      "CSS Grid of responsive donuts — layout teaching demo, RTL-aware chrome.",
+      "CSS Grid of responsive donuts - layout teaching demo, RTL-aware chrome.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -16182,7 +16769,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Pie With Gradient",
     description:
-      "Gradient donut with channel cards — locked chrome, slice scrubber, RTL-aware.",
+      "Gradient donut with channel cards - locked chrome, slice scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -16212,7 +16799,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Pie Donut Text",
     description:
-      "Donut with centered ring-total text — locked chrome, slice scrubber, RTL-aware.",
+      "Donut with centered ring-total text - locked chrome, slice scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -16244,7 +16831,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Pie Interactive",
     description:
-      "Month Select drives active donut sector — locked chrome, RTL-aware.",
+      "Month Select drives active donut sector - locked chrome, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles", "select"],
     cssVars: {
@@ -16276,7 +16863,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Pie Stacked",
     description:
-      "Nested Store×Online month rings — locked chrome, slice scrubber, RTL-aware.",
+      "Nested Store×Online month rings - locked chrome, slice scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -16308,7 +16895,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Pie Simple",
     description:
-      "Classic full pie of province sales share — locked chrome, slice scrubber, RTL-aware.",
+      "Classic full pie of province sales share - locked chrome, slice scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -16340,7 +16927,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Pie Separator None",
     description:
-      "Full pie with no slice separators — locked chrome, slice scrubber, RTL-aware.",
+      "Full pie with no slice separators - locked chrome, slice scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -16372,7 +16959,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Pie Label",
     description:
-      "Full pie with always-on value labels — locked chrome, slice scrubber, RTL-aware.",
+      "Full pie with always-on value labels - locked chrome, slice scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -16404,7 +16991,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Pie Label Custom",
     description:
-      "Full pie with custom value labels (no leader lines) — locked chrome, slice scrubber, RTL-aware.",
+      "Full pie with custom value labels (no leader lines) - locked chrome, slice scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -16436,7 +17023,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Pie Label List",
     description:
-      "Full pie with on-slice province names via LabelList — locked chrome, slice scrubber, RTL-aware.",
+      "Full pie with on-slice province names via LabelList - locked chrome, slice scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -16468,7 +17055,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Pie Legend",
     description:
-      "Full pie with wrapped ChartLegend — locked chrome, slice scrubber, RTL-aware.",
+      "Full pie with wrapped ChartLegend - locked chrome, slice scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -16500,7 +17087,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Pie Donut",
     description:
-      "Payment-method donut — locked chrome, slice scrubber, RTL-aware.",
+      "Payment-method donut - locked chrome, slice scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -16532,7 +17119,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Pie Donut Active",
     description:
-      "Donut with expanded active sector — locked chrome, slice scrubber, RTL-aware.",
+      "Donut with expanded active sector - locked chrome, slice scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -16564,7 +17151,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Pie Donut Text",
     description:
-      "Classic donut with centered ring-total text — locked chrome, slice scrubber, RTL-aware.",
+      "Classic donut with centered ring-total text - locked chrome, slice scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -16596,7 +17183,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Radial Simple",
     description:
-      "Classic concentric radial bars of region sales — locked chrome, ring scrubber, RTL-aware.",
+      "Classic concentric radial bars of region sales - locked chrome, ring scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -16628,7 +17215,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Radial Label",
     description:
-      "Classic radial bars with inside-start name labels — locked chrome, ring scrubber, RTL-aware.",
+      "Classic radial bars with inside-start name labels - locked chrome, ring scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -16660,7 +17247,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Radial Grid",
     description:
-      "Classic radial bars with circular PolarGrid — locked chrome, ring scrubber, RTL-aware.",
+      "Classic radial bars with circular PolarGrid - locked chrome, ring scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -16692,7 +17279,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Radial Text",
     description:
-      "Classic partial radial ring with centered value text — locked chrome, RTL-aware.",
+      "Classic partial radial ring with centered value text - locked chrome, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -16724,7 +17311,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Radial Shape",
     description:
-      "Classic short radial arc with PolarGrid shape and centered value — locked chrome, RTL-aware.",
+      "Classic short radial arc with PolarGrid shape and centered value - locked chrome, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -16756,7 +17343,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Radial Stacked",
     description:
-      "Classic semicircle stacked Store×Online radial — locked navy×orange, centered total, RTL-aware.",
+      "Classic semicircle stacked Store×Online radial - locked navy×orange, centered total, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -16788,7 +17375,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Pie Stacked",
     description:
-      "Classic nested Store×Online month rings — locked chrome, ring scrubber, RTL-aware.",
+      "Classic nested Store×Online month rings - locked chrome, ring scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -16820,7 +17407,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Pie Interactive",
     description:
-      "Classic month Select drives active donut sector — locked chrome, RTL-aware.",
+      "Classic month Select drives active donut sector - locked chrome, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles", "select"],
     cssVars: {
@@ -16852,7 +17439,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Simple Line Chart",
     description:
-      "Dual monotone lines — Desktop×Mobile H1 2026, navy×orange, metric header scrubber, RTL-aware.",
+      "Dual monotone lines - Desktop×Mobile H1 2026, navy×orange, metric header scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -16878,7 +17465,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Dashed Line Chart",
     description:
-      "Dual dashed monotone lines — Desktop×Mobile H1 2026, navy×orange, metric header scrubber, RTL-aware.",
+      "Dual dashed monotone lines - Desktop×Mobile H1 2026, navy×orange, metric header scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -16904,7 +17491,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Vertical Line Chart",
     description:
-      "Dual linear lines, layout=vertical — Desktop×Mobile H1 2026, navy×orange, metric header scrubber, RTL-aware.",
+      "Dual linear lines, layout=vertical - Desktop×Mobile H1 2026, navy×orange, metric header scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -16930,7 +17517,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Line Chart Connect Nulls",
     description:
-      "Stacked gap vs connectNulls monotone lines — Desktop H1 2026 with a missing month, navy, metric scrubber, RTL-aware.",
+      "Stacked gap vs connectNulls monotone lines - Desktop H1 2026 with a missing month, navy, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -16954,7 +17541,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Line Chart With Reference Lines",
     description:
-      "Dual monotone lines with month + value ReferenceLines — Desktop×Mobile H1 2026, navy×orange, metric scrubber, RTL-aware.",
+      "Dual monotone lines with month + value ReferenceLines - Desktop×Mobile H1 2026, navy×orange, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -16980,7 +17567,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Customized Label Line Chart",
     description:
-      "Dual monotone lines with alternating Desktop point labels and angled X ticks — navy×orange, metric scrubber, RTL-aware.",
+      "Dual monotone lines with alternating Desktop point labels and angled X ticks - navy×orange, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -17006,7 +17593,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Highlight And Zoom Line Chart",
     description:
-      "Drag-to-zoom dual-axis Cost×Impressions lines with ReferenceArea highlight — navy×orange, RTL-aware.",
+      "Drag-to-zoom dual-axis Cost×Impressions lines with ReferenceArea highlight - navy×orange, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -17032,7 +17619,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Line Chart Axis Interval",
     description:
-      "Stacked Desktop×Mobile lines comparing Recharts axis interval presets — navy×orange, RTL-aware.",
+      "Stacked Desktop×Mobile lines comparing Recharts axis interval presets - navy×orange, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles", "chart-mock-data"],
     cssVars: {
@@ -17058,7 +17645,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Biaxial Line Chart",
     description:
-      "Dual Y-axis monotone lines — revenue×orders independent scales, navy×orange, metric scrubber, RTL-aware.",
+      "Dual Y-axis monotone lines - revenue×orders independent scales, navy×orange, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -17084,7 +17671,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Line Chart With X Axis Padding",
     description:
-      "Dual monotone lines with XAxis padding — Desktop×Mobile H1 2026, navy×orange, metric scrubber, RTL-aware.",
+      "Dual monotone lines with XAxis padding - Desktop×Mobile H1 2026, navy×orange, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -17110,7 +17697,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Customized Dot Line Chart",
     description:
-      "Dual monotone lines with smile/frown Desktop dots by threshold — navy×orange, metric scrubber, RTL-aware.",
+      "Dual monotone lines with smile/frown Desktop dots by threshold - navy×orange, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -17138,7 +17725,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Synchronized Line Chart",
     description:
-      "Three syncId panels — Desktop line, Mobile line + Brush, Total area; navy×orange, metric scrubber, RTL-aware.",
+      "Three syncId panels - Desktop line, Mobile line + Brush, Total area; navy×orange, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -17166,7 +17753,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Synchronized Different Data",
     description:
-      "Two syncId panels with different densities — closestDate syncMethod (±2 days), navy×orange, metric scrubber, RTL-aware.",
+      "Two syncId panels with different densities - closestDate syncMethod (±2 days), navy×orange, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -17192,7 +17779,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Line Chart Custom Shape",
     description:
-      "Dual monotone lines with opacity-fade entrance shape — Desktop×Mobile H1 2026, navy×orange, metric scrubber, RTL-aware.",
+      "Dual monotone lines with opacity-fade entrance shape - Desktop×Mobile H1 2026, navy×orange, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -17218,7 +17805,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Line Chart Has Multi Series",
     description:
-      "Overlapping multi-series lines (each Line owns partial categories) — New York×Chicago×Austin, navy×orange×amber, metric scrubber, RTL-aware.",
+      "Overlapping multi-series lines (each Line owns partial categories) - New York×Chicago×Austin, navy×orange×amber, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -17246,7 +17833,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Line Chart Negative Values With Reference Lines",
     description:
-      "Numeric X/Y path crossing the origin with zero ReferenceLines — navy, metric scrubber, RTL-aware.",
+      "Numeric X/Y path crossing the origin with zero ReferenceLines - navy, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -17271,7 +17858,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Compare Two Lines",
     description:
-      "Hover-compare portfolio vs reinvestment (+ principal) — navy×orange gradients, delta ReferenceLine, metric header, RTL-aware.",
+      "Hover-compare portfolio vs reinvestment (+ principal) - navy×orange gradients, delta ReferenceLine, metric header, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -17297,7 +17884,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Dynamic Z Index Line Chart",
     description:
-      "Three monotone lines; legend hover dims a series and raises its z-index — navy×orange×amber, metric scrubber, RTL-aware.",
+      "Three monotone lines; legend hover dims a series and raises its z-index - navy×orange×amber, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -17325,7 +17912,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Tiny Line Chart",
     description:
-      "Compact single-series sparkline — locked header chrome, no axes, RTL-aware.",
+      "Compact single-series sparkline - locked header chrome, no axes, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -17349,7 +17936,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Animated Time Series",
     description:
-      "Sliding six-month window over a dual-series year — navy×orange, metric scrubber, pauses on scrub / reduced-motion.",
+      "Sliding six-month window over a dual-series year - navy×orange, metric scrubber, pauses on scrub / reduced-motion.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -17375,7 +17962,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Line Interactive",
     description:
-      "Toggle Store/Online period totals, then scrub a daily monotone line — navy×orange locked chrome, RTL-aware.",
+      "Toggle Store/Online period totals, then scrub a daily monotone line - navy×orange locked chrome, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -17401,7 +17988,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Line Step",
     description:
-      "Dual step lines (type=step) — Desktop×Mobile H1 2026, navy×orange, metric scrubber, RTL-aware.",
+      "Dual step lines (type=step) - Desktop×Mobile H1 2026, navy×orange, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -17427,7 +18014,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Line Default",
     description:
-      "Classic single-series natural Store line — locked chrome, metric scrubber, RTL-aware.",
+      "Classic single-series natural Store line - locked chrome, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -17451,7 +18038,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Line Dots Colors",
     description:
-      "Natural sales line with per-region colored dots — locked chrome, metric scrubber, RTL-aware.",
+      "Natural sales line with per-region colored dots - locked chrome, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -17483,7 +18070,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Line Label Custom",
     description:
-      "Natural sales line with always-on region tip labels — locked chrome, metric scrubber, RTL-aware.",
+      "Natural sales line with always-on region tip labels - locked chrome, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -17509,7 +18096,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Line Bar Area Composed Chart",
     description:
-      "Composed Area(orders) + Bar(online) + Line(store) — navy×orange×amber, metric scrubber, RTL-aware.",
+      "Composed Area(orders) + Bar(online) + Line(store) - navy×orange×amber, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -17537,7 +18124,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Same Data Composed Chart",
     description:
-      "Composed Bar + trend Line on one sales series — navy×orange, metric scrubber, RTL-aware.",
+      "Composed Bar + trend Line on one sales series - navy×orange, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -17563,7 +18150,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Vertical Composed Chart",
     description:
-      "Vertical layout sales bars with target line — navy×orange, metric scrubber, RTL-aware.",
+      "Vertical layout sales bars with target line - navy×orange, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -17589,7 +18176,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Composed Chart With Axis Labels",
     description:
-      "Dual-axis revenue/cost/margin composed chart with axis labels — navy×orange×amber, metric scrubber, RTL-aware.",
+      "Dual-axis revenue/cost/margin composed chart with axis labels - navy×orange×amber, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -17617,7 +18204,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Scatter And Line Of Best Fit",
     description:
-      "Ad spend vs sales scatter with dashed OLS fit — navy×orange, metric scrubber, RTL-aware.",
+      "Ad spend vs sales scatter with dashed OLS fit - navy×orange, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -17643,7 +18230,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Banded Chart",
     description:
-      "Confidence band Area + actual sales Line — navy×orange, metric scrubber, RTL-aware.",
+      "Confidence band Area + actual sales Line - navy×orange, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -17669,7 +18256,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Target Price Chart",
     description:
-      "Share price, consensus range, dashed analyst target — navy×orange, metric scrubber, RTL-aware.",
+      "Share price, consensus range, dashed analyst target - navy×orange, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -17695,7 +18282,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Asset Returns",
     description:
-      "Horizontal asset return % bars with lookback tabs and max/min stats — navy×orange, metric scrubber, RTL-aware.",
+      "Horizontal asset return % bars with lookback tabs and max/min stats - navy×orange, metric scrubber, RTL-aware.",
     dependencies: ["recharts", "lucide-react"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -17721,7 +18308,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Monthly Savings",
     description:
-      "Compound monthly balance by savings channel with rounded-top bars — navy×orange, metric scrubber, RTL-aware.",
+      "Compound monthly balance by savings channel with rounded-top bars - navy×orange, metric scrubber, RTL-aware.",
     dependencies: ["recharts", "lucide-react"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -17747,7 +18334,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Candlestick",
     description:
-      "OHLC candlesticks with custom wick/body shape — semantic up/down, metric scrubber, RTL-aware.",
+      "OHLC candlesticks with custom wick/body shape - semantic up/down, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles", "stock-shared"],
     cssVars: {
@@ -17773,7 +18360,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Candlestick Dashboard",
     description:
-      "Symbol KPI card + OHLC candles + volume strip — semantic up/down, metric scrubber, RTL-aware.",
+      "Symbol KPI card + OHLC candles + volume strip - semantic up/down, metric scrubber, RTL-aware.",
     access: "member",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles", "stock-shared"],
@@ -17802,7 +18389,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Candlestick Bar",
     description:
-      "Synced OHLC candles + signed change bars with Brush — semantic up/down, metric scrubber, RTL-aware.",
+      "Synced OHLC candles + signed change bars with Brush - semantic up/down, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles", "stock-shared"],
     cssVars: {
@@ -17830,7 +18417,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Candlestick Category",
     description:
-      "Category-axis OHLC candles with dashed news ReferenceLine — semantic up/down, metric scrubber, RTL-aware.",
+      "Category-axis OHLC candles with dashed news ReferenceLine - semantic up/down, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles", "stock-shared"],
     cssVars: {
@@ -17858,7 +18445,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Candlestick Line",
     description:
-      "OHLC candles with SMA overlay line — semantic up/down + orange SMA, metric scrubber, RTL-aware.",
+      "OHLC candles with SMA overlay line - semantic up/down + orange SMA, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles", "stock-shared"],
     cssVars: {
@@ -17886,7 +18473,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Sparklines",
     description:
-      "KPI area spark cards + watchlist trend/volume minis — navy×orange×amber, metric scrubber, RTL-aware.",
+      "KPI area spark cards + watchlist trend/volume minis - navy×orange×amber, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles", "stock-shared"],
     cssVars: {
@@ -17918,7 +18505,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Stock Ohlc",
     description:
-      "Classic OHLC bars (H–L stem, open/close ticks) — semantic up/down, metric scrubber, RTL-aware.",
+      "Classic OHLC bars (H–L stem, open/close ticks) - semantic up/down, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles", "stock-shared"],
     cssVars: {
@@ -17944,7 +18531,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Stock Line",
     description:
-      "Close-price area with gradient fill + symbol card — navy stroke, metric scrubber, RTL-aware.",
+      "Close-price area with gradient fill + symbol card - navy stroke, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles", "stock-shared"],
     cssVars: {
@@ -17972,7 +18559,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Stock Column",
     description:
-      "Close as columns tinted bullish/bearish per bar — semantic up/down, metric scrubber, RTL-aware.",
+      "Close as columns tinted bullish/bearish per bar - semantic up/down, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles", "stock-shared"],
     cssVars: {
@@ -17998,7 +18585,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Stock With Volume",
     description:
-      "Synced OHLC candles + volume strip tinted by direction — semantic up/down, metric scrubber, RTL-aware.",
+      "Synced OHLC candles + volume strip tinted by direction - semantic up/down, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles", "stock-shared"],
     cssVars: {
@@ -18024,7 +18611,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Stock Multi Series",
     description:
-      "Indexed multi-ticker relative returns — navy×orange×amber lines, summary cards, metric scrubber, RTL-aware.",
+      "Indexed multi-ticker relative returns - navy×orange×amber lines, summary cards, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: [
       "chart",
@@ -18061,7 +18648,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Stock Trendline",
     description:
-      "Close price + dashed SMA overlay — navy×orange, symbol card, metric scrubber, RTL-aware.",
+      "Close price + dashed SMA overlay - navy×orange, symbol card, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles", "stock-shared"],
     cssVars: {
@@ -18091,7 +18678,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "KPI Area Charts",
     description:
-      "KPI mini areas + hero dual series + stacked/share variants — navy×orange×amber, metric scrubber, RTL-aware.",
+      "KPI mini areas + hero dual series + stacked/share variants - navy×orange×amber, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles", "stock-shared"],
     cssVars: {
@@ -18123,7 +18710,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Realtime Mountain Chart",
     description:
-      "Live mountain area with pulsing tip + play/pause — semantic up/down stroke, metric scrubber, RTL-aware.",
+      "Live mountain area with pulsing tip + play/pause - semantic up/down stroke, metric scrubber, RTL-aware.",
     access: "member",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles", "stock-shared"],
@@ -18152,7 +18739,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Realtime Candlestick",
     description:
-      "Live forming OHLC candles + volume strip, sticky Y domain, play/pause — semantic up/down, metric scrubber, RTL-aware.",
+      "Live forming OHLC candles + volume strip, sticky Y domain, play/pause - semantic up/down, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles", "stock-shared"],
     cssVars: {
@@ -18178,7 +18765,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Heikin Ashi",
     description:
-      "Smoothed Heikin Ashi candles via toHeikinAshi — semantic up/down, metric scrubber, RTL-aware.",
+      "Smoothed Heikin Ashi candles via toHeikinAshi - semantic up/down, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles", "stock-shared"],
     cssVars: {
@@ -18204,7 +18791,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Renko Chart",
     description:
-      "Fixed brick-size Renko bricks via toRenko — semantic up/down, metric scrubber, RTL-aware.",
+      "Fixed brick-size Renko bricks via toRenko - semantic up/down, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: [
       "chart",
@@ -18235,7 +18822,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Volume Profile",
     description:
-      "Horizontal volume-by-price bins with POC highlight — semantic up/down, metric scrubber, RTL-aware.",
+      "Horizontal volume-by-price bins with POC highlight - semantic up/down, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles", "stock-shared"],
     cssVars: {
@@ -18261,7 +18848,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Order Book Depth",
     description:
-      "Cumulative bid/ask step areas around mid — semantic up/down, metric scrubber, RTL-aware.",
+      "Cumulative bid/ask step areas around mid - semantic up/down, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: [
       "chart",
@@ -18292,7 +18879,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Drawdown Chart",
     description:
-      "Equity line + underwater drawdown area — dual synced panels, metric scrubber, RTL-aware.",
+      "Equity line + underwater drawdown area - dual synced panels, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles", "stock-shared"],
     cssVars: {
@@ -18320,7 +18907,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Bollinger Bands",
     description:
-      "Close + SMA mid + ±σ band fill — stacked envelope, metric scrubber, RTL-aware.",
+      "Close + SMA mid + ±σ band fill - stacked envelope, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: [
       "chart",
@@ -18357,7 +18944,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Candlestick Indicators",
     description:
-      "OHLC + RSI(14) + MACD(12,26,9) synced panels — metric scrubber, RTL-aware.",
+      "OHLC + RSI(14) + MACD(12,26,9) synced panels - metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles", "stock-shared"],
     cssVars: {
@@ -18389,7 +18976,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Multi Timeframe",
     description:
-      "Daily / weekly / monthly close lines from one series — metric scrubber, RTL-aware.",
+      "Daily / weekly / monthly close lines from one series - metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles", "stock-shared"],
     cssVars: {
@@ -18421,7 +19008,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Heatmap Calendar",
     description:
-      "Year of daily activity — Sunday-start SVG grid, navy intensity, holiday accents, RTL-aware.",
+      "Year of daily activity - Sunday-start SVG grid, navy intensity, holiday accents, RTL-aware.",
     access: "member",
     registryDependencies: ["heatmap-shared", "chart-styles"],
     cssVars: {
@@ -18445,7 +19032,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Heatmap Calendar Emerald",
     description:
-      "Sunday-start calendar heatmap with soft green (`--chart-up`) intensity — RTL-aware.",
+      "Sunday-start calendar heatmap with soft green (`--chart-up`) intensity - RTL-aware.",
     registryDependencies: ["heatmap-shared", "chart-styles"],
     cssVars: {
       light: {
@@ -18468,7 +19055,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Heatmap Matrix",
     description:
-      "Day × hour SVG intensity grid — navy `--chart-1`, floating tip, RTL-aware.",
+      "Day × hour SVG intensity grid - navy `--chart-1`, floating tip, RTL-aware.",
     registryDependencies: ["heatmap-shared", "chart-styles"],
     cssVars: {
       light: {
@@ -18491,7 +19078,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Heatmap Matrix Values",
     description:
-      "Day × hour SVG grid with in-cell values — soft green `--chart-up`, RTL-aware.",
+      "Day × hour SVG grid with in-cell values - soft green `--chart-up`, RTL-aware.",
     registryDependencies: ["heatmap-shared", "chart-styles"],
     cssVars: {
       light: {
@@ -18514,7 +19101,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Bundle Size Treemap",
     description:
-      "Client JS bundle weight by package group — flat Treemap, metric scrubber, RTL-aware.",
+      "Client JS bundle weight by package group - flat Treemap, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -18546,7 +19133,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Simple Treemap",
     description:
-      "Flat module-size treemap (classic baseline) — metric scrubber, RTL-aware.",
+      "Flat module-size treemap (classic baseline) - metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -18578,7 +19165,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Custom Content Treemap",
     description:
-      "Custom Treemap content — group fill, rank, and label; leaf strokes; metric scrubber.",
+      "Custom Treemap content - group fill, rank, and label; leaf strokes; metric scrubber.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -18610,7 +19197,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Nested Treemap",
     description:
-      "Nest drill-down treemap with breadcrumb — click groups to zoom; metric scrubber.",
+      "Nest drill-down treemap with breadcrumb - click groups to zoom; metric scrubber.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -18642,7 +19229,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Treemap With Padding And Gaps",
     description:
-      "Flat treemap teaching nodeInset + nodeGap — same data as Simple, metric scrubber.",
+      "Flat treemap teaching nodeInset + nodeGap - same data as Simple, metric scrubber.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -18674,7 +19261,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Treemap Content",
     description:
-      "Treemap content as a React element (cloneElement) — centered leaf labels, metric scrubber.",
+      "Treemap content as a React element (cloneElement) - centered leaf labels, metric scrubber.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -18706,7 +19293,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Bundle Size Sunburst",
     description:
-      "Tree-shaken client JS bundle (bytes) by group — Sunburst rings, metric scrubber, center disc.",
+      "Tree-shaken client JS bundle (bytes) by group - Sunburst rings, metric scrubber, center disc.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles", "sunburst-shared"],
     cssVars: {
@@ -18738,7 +19325,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Sunburst Chart",
     description:
-      "Regional sales share by channel — nested Sunburst rings, metric scrubber, center disc.",
+      "Regional sales share by channel - nested Sunburst rings, metric scrubber, center disc.",
     access: "member",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles", "sunburst-shared"],
@@ -18771,7 +19358,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Sunburst Chart Theme Colors",
     description:
-      "Org headcount by team — nested Sunburst with locked theme palette shades, metric scrubber, center disc.",
+      "Org headcount by team - nested Sunburst with locked theme palette shades, metric scrubber, center disc.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles", "sunburst-shared"],
     cssVars: {
@@ -18803,7 +19390,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Gauge Default",
     description:
-      "Vivid traffic gauge (emerald / amber / rose) — light/dark pairs, English metric header.",
+      "Vivid traffic gauge (emerald / amber / rose) - light/dark pairs, English metric header.",
     dependencies: ["react-gauge-chart", "lodash"],
     registryDependencies: ["gauge-shared", "chart-styles"],
     cssVars: {
@@ -18831,7 +19418,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Gauge Levels",
     description:
-      "20 soft traffic bands with needle at 86% — fixed stage, English metric header.",
+      "20 soft traffic bands with needle at 86% - fixed stage, English metric header.",
     dependencies: ["react-gauge-chart", "lodash"],
     registryDependencies: ["gauge-shared", "chart-styles"],
     cssVars: {
@@ -18859,7 +19446,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Gauge Custom Colors",
     description:
-      "Rose → sand gauge with thicker arc at 37% — fixed stage, English metric header.",
+      "Rose → sand gauge with thicker arc at 37% - fixed stage, English metric header.",
     dependencies: ["react-gauge-chart", "lodash"],
     registryDependencies: ["gauge-shared", "chart-styles"],
     cssVars: {
@@ -18885,7 +19472,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Gauge Corner Radius",
     description:
-      "Ten traffic bands with rounded corners and wider gaps — fixed stage, English metric header.",
+      "Ten traffic bands with rounded corners and wider gaps - fixed stage, English metric header.",
     dependencies: ["react-gauge-chart", "lodash"],
     registryDependencies: ["gauge-shared", "chart-styles"],
     cssVars: {
@@ -18913,7 +19500,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Gauge Custom Arcs",
     description:
-      "Uneven traffic arcs (30/50/20) at 37% — fixed stage, English metric header.",
+      "Uneven traffic arcs (30/50/20) at 37% - fixed stage, English metric header.",
     dependencies: ["react-gauge-chart", "lodash"],
     registryDependencies: ["gauge-shared", "chart-styles"],
     cssVars: {
@@ -18941,7 +19528,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Gauge No Animation",
     description:
-      "Fifteen traffic bands at 56% with needle animation off — fixed stage, English metric header.",
+      "Fifteen traffic bands at 56% with needle animation off - fixed stage, English metric header.",
     dependencies: ["react-gauge-chart", "lodash"],
     registryDependencies: ["gauge-shared", "chart-styles"],
     cssVars: {
@@ -18969,7 +19556,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Hc Gauge Default",
     description:
-      "Highcharts dial with soft traffic plotBands — English metric header.",
+      "Highcharts dial with soft traffic plotBands - English metric header.",
     dependencies: ["highcharts", "highcharts-react-official"],
     registryDependencies: ["hc-gauge-shared", "chart-styles"],
     cssVars: {
@@ -18997,7 +19584,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Hc Gauge Rounded Ends",
     description:
-      "Highcharts dial with rounded pane and dial tips — soft blue bands, English metric header.",
+      "Highcharts dial with rounded pane and dial tips - soft blue bands, English metric header.",
     dependencies: ["highcharts", "highcharts-react-official"],
     registryDependencies: ["hc-gauge-shared", "chart-styles"],
     cssVars: {
@@ -19025,7 +19612,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Hc Gauge Thin Ring",
     description:
-      "Highcharts thin outer ring bands — soft violet/slate, English metric header.",
+      "Highcharts thin outer ring bands - soft violet/slate, English metric header.",
     dependencies: ["highcharts", "highcharts-react-official"],
     registryDependencies: ["hc-gauge-shared", "chart-styles"],
     cssVars: {
@@ -19051,7 +19638,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Hc Gauge Semicircle",
     description:
-      "Highcharts half-dial speedometer — soft gold to red bands, English metric header.",
+      "Highcharts half-dial speedometer - soft gold to red bands, English metric header.",
     dependencies: ["highcharts", "highcharts-react-official"],
     registryDependencies: ["hc-gauge-shared", "chart-styles"],
     cssVars: {
@@ -19079,7 +19666,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Hc Gauge Custom Pivot",
     description:
-      "Highcharts dial with large hollow pivot — soft teal bands, English metric header.",
+      "Highcharts dial with large hollow pivot - soft teal bands, English metric header.",
     dependencies: ["highcharts", "highcharts-react-official"],
     registryDependencies: ["hc-gauge-shared", "chart-styles"],
     cssVars: {
@@ -19105,7 +19692,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Hc Gauge Combo",
     description:
-      "Highcharts solidgauge + dial on one value — soft teal/blue/violet, English metric header.",
+      "Highcharts solidgauge + dial on one value - soft teal/blue/violet, English metric header.",
     dependencies: ["highcharts", "highcharts-react-official"],
     registryDependencies: ["hc-gauge-shared", "chart-styles"],
     cssVars: {
@@ -19133,7 +19720,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Hc Gauge Fuel",
     description:
-      "Highcharts semicircle fuel solidgauge — soft rose/gold/green stops, English metric header.",
+      "Highcharts semicircle fuel solidgauge - soft rose/gold/green stops, English metric header.",
     dependencies: ["highcharts", "highcharts-react-official"],
     registryDependencies: ["hc-gauge-shared", "chart-styles"],
     cssVars: {
@@ -19161,7 +19748,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Hc Gauge Activity",
     description:
-      "Highcharts 360° activity ring — soft pink→rose gradient, English metric header.",
+      "Highcharts 360° activity ring - soft pink→rose gradient, English metric header.",
     access: "member",
     dependencies: ["highcharts", "highcharts-react-official"],
     registryDependencies: ["hc-gauge-shared", "chart-styles"],
@@ -19188,7 +19775,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Hc Gauge Kpi",
     description:
-      "Highcharts triple nested KPI rings — Conversion/Engagement/Retention, English metric header.",
+      "Highcharts triple nested KPI rings - Conversion/Engagement/Retention, English metric header.",
     dependencies: ["highcharts", "highcharts-react-official"],
     registryDependencies: ["hc-gauge-shared", "chart-styles"],
     cssVars: {
@@ -19216,7 +19803,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Hc Gauge Rounded Bands",
     description:
-      "Highcharts dial with individually rounded plotBands — teal / amber / rose, English metric header.",
+      "Highcharts dial with individually rounded plotBands - teal / amber / rose, English metric header.",
     dependencies: ["highcharts", "highcharts-react-official"],
     registryDependencies: ["hc-gauge-shared", "chart-styles"],
     cssVars: {
@@ -19244,7 +19831,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Hc Gauge Threshold",
     description:
-      "Highcharts solidgauge with zero threshold — red below / green above, English metric header.",
+      "Highcharts solidgauge with zero threshold - red below / green above, English metric header.",
     dependencies: ["highcharts", "highcharts-react-official"],
     registryDependencies: ["hc-gauge-shared", "chart-styles"],
     cssVars: {
@@ -19270,7 +19857,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Hc Gauge Custom Dial",
     description:
-      "Highcharts solidgauge arc with circular dot dial — soft blue accent, English metric header.",
+      "Highcharts solidgauge arc with circular dot dial - soft blue accent, English metric header.",
     dependencies: ["highcharts", "highcharts-react-official"],
     registryDependencies: ["hc-gauge-shared", "chart-styles"],
     cssVars: {
@@ -19294,7 +19881,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Stacked Bar Chart",
     description:
-      "Stacked Desktop+Mobile H1 2026 — navy×orange locked chrome, metric header scrubber, RTL-aware.",
+      "Stacked Desktop+Mobile H1 2026 - navy×orange locked chrome, metric header scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -19320,7 +19907,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Box Plot",
     description:
-      "IQR box + median + whiskers + outliers by category — navy×orange locked chrome, metric header scrubber, RTL-aware.",
+      "IQR box + median + whiskers + outliers by category - navy×orange locked chrome, metric header scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -19346,7 +19933,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Waterfall",
     description:
-      "P&L bridge with floating range bars — increase/decrease/total fills, locked chrome scrubber, RTL-aware.",
+      "P&L bridge with floating range bars - increase/decrease/total fills, locked chrome scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -19376,7 +19963,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Mix Bar Chart",
     description:
-      "Store+Online stacked beside Orders — navy×orange×amber, legend focus/lock, metric header scrubber, RTL-aware.",
+      "Store+Online stacked beside Orders - navy×orange×amber, legend focus/lock, metric header scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -19404,7 +19991,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Positive And Negative Bar Chart",
     description:
-      "Grouped Online×Store bars that cross zero — signed Y ticks, zero reference line, locked chrome scrubber, RTL-aware.",
+      "Grouped Online×Store bars that cross zero - signed Y ticks, zero reference line, locked chrome scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -19432,7 +20019,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Bar Chart With Customized Event",
     description:
-      "Click a month to drive chips + detail panel — average reference line, locked chrome, RTL-aware.",
+      "Click a month to drive chips + detail panel - average reference line, locked chrome, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -19460,7 +20047,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Bar Chart Has Background",
     description:
-      "Grouped Desktop×Mobile with a muted background track on Desktop — locked chrome scrubber, RTL-aware.",
+      "Grouped Desktop×Mobile with a muted background track on Desktop - locked chrome scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -19486,7 +20073,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Ranged Stacked Bar Chart",
     description:
-      "Prep/Pack/Ship minute ranges via BarStack — navy×orange×amber, locked chrome scrubber, RTL-aware.",
+      "Prep/Pack/Ship minute ranges via BarStack - navy×orange×amber, locked chrome scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -19514,7 +20101,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Tiny Bar Chart",
     description:
-      "Compact single-series sparkline bars — locked header chrome, no axes, RTL-aware.",
+      "Compact single-series sparkline bars - locked header chrome, no axes, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -19538,7 +20125,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Bar Active",
     description:
-      "Per-category fills with a dashed featured bar outline — locked chrome, metric scrubber, RTL-aware.",
+      "Per-category fills with a dashed featured bar outline - locked chrome, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -19570,7 +20157,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Population Pyramid",
     description:
-      "Horizontal Male×Female by age — navy×orange locked chrome, metric header scrubber, RTL-aware.",
+      "Horizontal Male×Female by age - navy×orange locked chrome, metric header scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -19596,7 +20183,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Timeline",
     description:
-      "Horizontal ranged cycles per test — semantic outcome colors, locked chrome scrubber, RTL-aware.",
+      "Horizontal ranged cycles per test - semantic outcome colors, locked chrome scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -19622,7 +20209,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Animated Bar Width",
     description:
-      "Single-series bars that expand on scrub — navy locked chrome, metric header, RTL-aware.",
+      "Single-series bars that expand on scrub - navy locked chrome, metric header, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -19648,7 +20235,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Animated Bar Time Series",
     description:
-      "Sliding window over a longer series — navy locked chrome, metric header scrubber, RTL-aware.",
+      "Sliding window over a longer series - navy locked chrome, metric header scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -19674,7 +20261,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Custom Shape Bar Chart",
     description:
-      "Bevelled custom bar paths by category — locked chrome, metric header scrubber, RTL-aware.",
+      "Bevelled custom bar paths by category - locked chrome, metric header scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -19706,7 +20293,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Brush Bar Chart",
     description:
-      "Bipolar dual-series with range brush — navy locked chrome, metric header scrubber, RTL-aware.",
+      "Bipolar dual-series with range brush - navy locked chrome, metric header scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -19732,7 +20319,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Biaxial Bar Chart",
     description:
-      "Dual Y-axes with independent scales — navy locked chrome, metric header scrubber, RTL-aware.",
+      "Dual Y-axes with independent scales - navy locked chrome, metric header scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -19758,7 +20345,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Bar Chart With Label Background",
     description:
-      "Stacked bars with inside segment labels — navy locked chrome, metric header scrubber, RTL-aware.",
+      "Stacked bars with inside segment labels - navy locked chrome, metric header scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -19784,7 +20371,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Bar Chart Range",
     description:
-      "Ranged [low, high] bars — navy locked chrome, metric header scrubber, RTL-aware.",
+      "Ranged [low, high] bars - navy locked chrome, metric header scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -19810,7 +20397,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Stacked Bar Chart With Horizontal Line",
     description:
-      "Three-stack sales with dashed target line — locked chrome, metric header scrubber, RTL-aware.",
+      "Three-stack sales with dashed target line - locked chrome, metric header scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -19838,7 +20425,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Bar Default",
     description:
-      "Single-series monthly store bars — navy locked chrome, metric header scrubber, RTL-aware.",
+      "Single-series monthly store bars - navy locked chrome, metric header scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -19864,7 +20451,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Bar Multiple",
     description:
-      "Grouped Desktop + Mobile bars — navy×orange locked chrome, metric header scrubber, RTL-aware.",
+      "Grouped Desktop + Mobile bars - navy×orange locked chrome, metric header scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -19890,7 +20477,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Bar Stacked",
     description:
-      "Stacked Desktop + Mobile bars — navy×orange locked chrome, metric header scrubber, RTL-aware.",
+      "Stacked Desktop + Mobile bars - navy×orange locked chrome, metric header scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -19916,7 +20503,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Bar Label",
     description:
-      "Single-series bars with always-on top labels — navy locked chrome, metric header scrubber, RTL-aware.",
+      "Single-series bars with always-on top labels - navy locked chrome, metric header scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -19942,7 +20529,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Bar Label Custom",
     description:
-      "Horizontal Store bars with always-on tip labels — navy locked chrome, metric header scrubber, RTL-aware.",
+      "Horizontal Store bars with always-on tip labels - navy locked chrome, metric header scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -19968,7 +20555,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Bar Interactive",
     description:
-      "Toggle Store/Online period totals, then scrub daily bars — navy×orange locked chrome, RTL-aware.",
+      "Toggle Store/Online period totals, then scrub daily bars - navy×orange locked chrome, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -19994,7 +20581,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Bar Horizontal",
     description:
-      "Horizontal single-series bars — navy locked chrome, metric header scrubber, RTL-aware.",
+      "Horizontal single-series bars - navy locked chrome, metric header scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -20020,7 +20607,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Bar Mixed",
     description:
-      "Horizontal bars with per-category colors — locked chrome, metric header scrubber, RTL-aware.",
+      "Horizontal bars with per-category colors - locked chrome, metric header scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -20052,7 +20639,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Bar Negative",
     description:
-      "Single-series signed bars with navy gains / orange losses and a zero line — locked chrome, metric scrubber, RTL-aware.",
+      "Single-series signed bars with navy gains / orange losses and a zero line - locked chrome, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -20084,7 +20671,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Simple Radial Bar Chart",
     description:
-      "Concentric age-band radial bars — locked chrome, ring scrubber, RTL-aware plot island.",
+      "Concentric age-band radial bars - locked chrome, ring scrubber, RTL-aware plot island.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -20116,7 +20703,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Radial Bar Chart Click To Focus Legend",
     description:
-      "Concentric radial bars with click-to-focus legend — dim siblings, locked chrome, RTL-aware.",
+      "Concentric radial bars with click-to-focus legend - dim siblings, locked chrome, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -20148,7 +20735,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Radial Text",
     description:
-      "Single progress ring with centered value Label — locked chrome, RTL-aware plot island.",
+      "Single progress ring with centered value Label - locked chrome, RTL-aware plot island.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -20172,7 +20759,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Radial Shape",
     description:
-      "Thick square-ended radial arc over a thin muted track with center Label — locked chrome, RTL-aware.",
+      "Thick square-ended radial arc over a thin muted track with center Label - locked chrome, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -20196,7 +20783,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Radial Stacked",
     description:
-      "Half-ring Desktop×Mobile stacked RadialBars with center total — locked chrome, RTL-aware.",
+      "Half-ring Desktop×Mobile stacked RadialBars with center total - locked chrome, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -20222,7 +20809,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Simple Scatter Chart",
     description:
-      "Dual-series height×weight scatter — locked navy×orange chrome, metric scrubber, RTL-aware.",
+      "Dual-series height×weight scatter - locked navy×orange chrome, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -20248,7 +20835,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Joint Line Scatter Chart",
     description:
-      "Dual-series scatter with joint connecting lines — locked navy×orange chrome, metric scrubber, RTL-aware.",
+      "Dual-series scatter with joint connecting lines - locked navy×orange chrome, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -20274,7 +20861,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Bubble Chart",
     description:
-      "Dual-series bubble scatter with ZAxis sizing — locked navy×orange chrome, metric scrubber, RTL-aware.",
+      "Dual-series bubble scatter with ZAxis sizing - locked navy×orange chrome, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -20300,7 +20887,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Custom Animation",
     description:
-      "Scatter dataset swap with animationInterpolateFn (crossfade / staggered / pop) — locked chrome, scrub, RTL-aware.",
+      "Scatter dataset swap with animationInterpolateFn (crossfade / staggered / pop) - locked chrome, scrub, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -20324,7 +20911,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Scatter Chart With Labels",
     description:
-      "Bubble scatter with always-on LabelList names — locked chrome, metric scrubber, RTL-aware.",
+      "Bubble scatter with always-on LabelList names - locked chrome, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -20348,7 +20935,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Multiple Y Axes Scatter Chart",
     description:
-      "Dual-series scatter with independent Y axes — locked navy×orange chrome, metric scrubber, RTL-aware.",
+      "Dual-series scatter with independent Y axes - locked navy×orange chrome, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -20374,7 +20961,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Scatter Chart With Cells",
     description:
-      "Per-point chart tokens + Symbols via shape (modern Cell) — locked chrome, scrub, RTL-aware.",
+      "Per-point chart tokens + Symbols via shape (modern Cell) - locked chrome, scrub, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -20406,7 +20993,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Scatter Chart Performance",
     description:
-      "Many Scatter series × many points stress demo — animation off, series-level scrub, pass/fail tint, RTL-aware.",
+      "Many Scatter series × many points stress demo - animation off, series-level scrub, pass/fail tint, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -20432,7 +21019,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Area Responsive Container",
     description:
-      "Fluid ChartContainer area stage with min-month and target ReferenceLines — locked chrome, metric scrubber, RTL-aware.",
+      "Fluid ChartContainer area stage with min-month and target ReferenceLines - locked chrome, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -20466,7 +21053,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Composed Responsive Container",
     description:
-      "Fluid ChartContainer composed stage — orders area, online bars, store line — locked chrome, metric scrubber, RTL-aware.",
+      "Fluid ChartContainer composed stage - orders area, online bars, store line - locked chrome, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -20496,7 +21083,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Pie Responsive Container",
     description:
-      "Fluid square ChartContainer pie stage with value labels and legend — locked chrome, slice scrubber, RTL-aware.",
+      "Fluid square ChartContainer pie stage with value labels and legend - locked chrome, slice scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -20528,7 +21115,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Legend Effect Opacity",
     description:
-      "Dual Online×Store lines — hover a legend item to dim the other series; locked chrome, metric scrubber, RTL-aware.",
+      "Dual Online×Store lines - hover a legend item to dim the other series; locked chrome, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -20556,7 +21143,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Legend Position",
     description:
-      "Dual Online×Store lines with top-aligned ChartLegend — locked chrome, metric scrubber, RTL-aware.",
+      "Dual Online×Store lines with top-aligned ChartLegend - locked chrome, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -20584,7 +21171,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Legend Styles",
     description:
-      "Dual Store×Online bars with custom card legend and period totals — locked chrome, metric scrubber, RTL-aware.",
+      "Dual Store×Online bars with custom card legend and period totals - locked chrome, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -20948,7 +21535,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Simple Radar Chart",
     description:
-      "Single-series skill radar polygon — locked chrome, metric scrubber, RTL-aware polar island.",
+      "Single-series skill radar polygon - locked chrome, metric scrubber, RTL-aware polar island.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -20976,7 +21563,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Specified Domain Radar Chart",
     description:
-      "Dual Alex×Sara radar with PolarRadiusAxis domain [0, 150] — locked chrome, metric scrubber, RTL-aware.",
+      "Dual Alex×Sara radar with PolarRadiusAxis domain [0, 150] - locked chrome, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -21004,7 +21591,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Range Radar Chart Custom Animation",
     description:
-      "Ceiling radar polygon with 1.6s entrance tween — locked chrome, metric scrubber, RTL-aware.",
+      "Ceiling radar polygon with 1.6s entrance tween - locked chrome, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -21032,7 +21619,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Radar Lines Only",
     description:
-      "Dual Store×Online stroke-only radar (no fill, no radial spokes) — locked chrome, metric scrubber, RTL-aware.",
+      "Dual Store×Online stroke-only radar (no fill, no radial spokes) - locked chrome, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -21060,7 +21647,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Radar Icons",
     description:
-      "Dual Store×Online radar with Lucide icons in chartConfig (ChartLegendContent) — locked chrome, metric scrubber, RTL-aware.",
+      "Dual Store×Online radar with Lucide icons in chartConfig (ChartLegendContent) - locked chrome, metric scrubber, RTL-aware.",
     dependencies: ["recharts", "lucide-react"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -21088,7 +21675,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Radar Multiple",
     description:
-      "Dual overlapping Store×Online filled radar polygons — locked chrome, metric scrubber, RTL-aware.",
+      "Dual overlapping Store×Online filled radar polygons - locked chrome, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -21116,7 +21703,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Radar Default",
     description:
-      "Classic single Store radar with default ChartTooltipContent — locked chrome, metric scrubber, RTL-aware.",
+      "Classic single Store radar with default ChartTooltipContent - locked chrome, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -21144,7 +21731,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Radar Dots",
     description:
-      "Classic single Store radar with solid vertex dots — locked chrome, metric scrubber, RTL-aware.",
+      "Classic single Store radar with solid vertex dots - locked chrome, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -21172,7 +21759,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Radar Lines Only",
     description:
-      "Classic dual Store×Online stroke-only radar (no fill, no radial spokes) — locked chrome, metric scrubber, RTL-aware.",
+      "Classic dual Store×Online stroke-only radar (no fill, no radial spokes) - locked chrome, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -21200,7 +21787,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Radar Label Custom",
     description:
-      "Classic dual Store×Online radar with custom angle ticks (values + month) — locked chrome, metric scrubber, RTL-aware.",
+      "Classic dual Store×Online radar with custom angle ticks (values + month) - locked chrome, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -21228,7 +21815,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Radar Grid Custom",
     description:
-      "Classic single Store radar with custom PolarGrid (no radial spokes, single ring) — locked chrome, metric scrubber, RTL-aware.",
+      "Classic single Store radar with custom PolarGrid (no radial spokes, single ring) - locked chrome, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -21254,7 +21841,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Radar Grid None",
     description:
-      "Classic single Store radar with no PolarGrid and vertex dots — locked chrome, metric scrubber, RTL-aware.",
+      "Classic single Store radar with no PolarGrid and vertex dots - locked chrome, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -21280,7 +21867,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Radar Grid Circle",
     description:
-      "Classic single Store radar with circular PolarGrid and vertex dots — locked chrome, metric scrubber, RTL-aware.",
+      "Classic single Store radar with circular PolarGrid and vertex dots - locked chrome, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -21306,7 +21893,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Radar Grid Circle No Lines",
     description:
-      "Classic single Store radar with circular PolarGrid, no radial spokes, and vertex dots — locked chrome, metric scrubber, RTL-aware.",
+      "Classic single Store radar with circular PolarGrid, no radial spokes, and vertex dots - locked chrome, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -21332,7 +21919,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Radar Grid Circle Fill",
     description:
-      "Classic single Store radar with circular PolarGrid tinted by series fill — locked chrome, metric scrubber, RTL-aware.",
+      "Classic single Store radar with circular PolarGrid tinted by series fill - locked chrome, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -21358,7 +21945,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Radar Grid Fill",
     description:
-      "Classic single Store radar with polygon PolarGrid tinted by series fill — locked chrome, metric scrubber, RTL-aware.",
+      "Classic single Store radar with polygon PolarGrid tinted by series fill - locked chrome, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -21384,7 +21971,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Radar Multiple",
     description:
-      "Classic dual Store×Online overlapping filled radar — locked chrome, metric scrubber, RTL-aware.",
+      "Classic dual Store×Online overlapping filled radar - locked chrome, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -21412,7 +21999,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Radar Legend",
     description:
-      "Classic dual Store×Online radar with ChartLegend — locked chrome, metric scrubber, RTL-aware.",
+      "Classic dual Store×Online radar with ChartLegend - locked chrome, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -21440,7 +22027,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Radar Icons",
     description:
-      "Classic dual Store×Online radar with Lucide icons in chartConfig — locked chrome, metric scrubber, RTL-aware.",
+      "Classic dual Store×Online radar with Lucide icons in chartConfig - locked chrome, metric scrubber, RTL-aware.",
     dependencies: ["recharts", "lucide-react"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -21468,7 +22055,7 @@ const registryItemsRaw = [
     type: "registry:chart",
     title: "Radar Radius",
     description:
-      "Classic dual Store×Online radar with PolarRadiusAxis (no angle axis) — locked chrome, metric scrubber, RTL-aware.",
+      "Classic dual Store×Online radar with PolarRadiusAxis (no angle axis) - locked chrome, metric scrubber, RTL-aware.",
     dependencies: ["recharts"],
     registryDependencies: ["chart", "chart-styles"],
     cssVars: {
@@ -21509,7 +22096,7 @@ function blockSourceNeedsSoftSurface(item) {
         return true
       }
     } catch {
-      /* missing source — skip */
+      /* missing source - skip */
     }
   }
   return false

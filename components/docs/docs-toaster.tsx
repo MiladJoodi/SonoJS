@@ -8,7 +8,7 @@ import { Toaster } from "@/components/ui/sonner"
 import { usePreviewDirection } from "./preview-direction"
 
 /**
- * Root docs Toaster — follows the active VariantPreview LTR/RTL toggle so
+ * Root docs Toaster - follows the active VariantPreview LTR/RTL toggle so
  * portaled toasts match the demo DirectionProvider.
  */
 export function DocsToaster(props: ToasterProps) {

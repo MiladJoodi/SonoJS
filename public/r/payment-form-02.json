@@ -3,7 +3,7 @@
   "name": "payment-form-02",
   "type": "registry:block",
   "title": "payment-form-02",
-  "description": "Commerce checkout — step crumbs, method radios with brand marks, sticky order receipt and ship/delivery.",
+  "description": "Commerce checkout - step crumbs, method radios with brand marks, sticky order receipt and ship/delivery.",
   "access": "public",
   "dependencies": [
     "lucide-react"
@@ -67,6 +67,6 @@
       "target": "components/blocks/payments-billing/payment-form-02/images/paypal.webp"
     }
   ],
-  "version": "0.1.0+c9c3d2a86e47",
-  "generatedAt": "2026-11-03T21:57:48.548Z"
+  "version": "0.1.0+3fe3a15cbaf2",
+  "generatedAt": "2026-11-04T11:52:24.655Z"
 }

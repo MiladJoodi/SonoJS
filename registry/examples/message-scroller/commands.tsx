@@ -23,7 +23,7 @@ const messages = [
   {
     id: "b",
     role: "assistant" as const,
-    text: "Prefer the last anchor — usually the latest user turn — not the absolute bottom.",
+    text: "Prefer the last anchor - usually the latest user turn - not the absolute bottom.",
   },
   { id: "c", role: "user" as const, text: "Can I jump to any message?" },
   {

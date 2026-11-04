@@ -88,7 +88,7 @@ if (!seoSrc.includes('url: "/og.png"') || !seoSrc.includes("summary_large_image"
 }
 if (fs.existsSync(path.join(root, "app/opengraph-image.tsx"))) {
   console.error(
-    "app/opengraph-image.tsx conflicts with static public/og.png — remove it"
+    "app/opengraph-image.tsx conflicts with static public/og.png - remove it"
   )
   failed = true
 }
@@ -98,5 +98,5 @@ if (failed) {
   process.exit(1)
 }
 
-console.log("verify:seo ok — run `npx vitest run lib/seo.test.ts` for sitemap integrity")
+console.log("verify:seo ok - run `npx vitest run lib/seo.test.ts` for sitemap integrity")
 void pathToFileURL

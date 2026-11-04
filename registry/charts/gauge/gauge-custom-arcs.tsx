@@ -14,7 +14,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Gauge Custom Arcs — uneven traffic arc lengths (30% / 50% / 20%).
+ * Gauge Custom Arcs - uneven traffic arc lengths (30% / 50% / 20%).
  * react-gauge-chart; locked header chrome; English / Intl.
  * Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/gauge-custom-arcs.tsx
@@ -34,11 +34,11 @@ export type GaugeCustomArcsProps = {
 
 const DEMO_PERCENT = 0.37
 const DEMO_ARC_PADDING = 0.02
-/** Stable ref — default `= [...arr]` would allocate every render and re-init the SVG. */
+/** Stable ref - default `= [...arr]` would allocate every render and re-init the SVG. */
 const DEMO_ARCS_LENGTH: number[] = [0.3, 0.5, 0.2]
 
 function GaugeCustomArcs({
-  title = "Score gauge — custom arcs",
+  title = "Score gauge - custom arcs",
   subtitle = "Uneven green / gold / red arcs (30% · 50% · 20%) with the needle at 37%.",
   arcsLength = DEMO_ARCS_LENGTH,
   percent = DEMO_PERCENT,

@@ -51,7 +51,7 @@ export function HomeToolsSection() {
               }}
             >
               <p className="max-w-[34em] text-[clamp(0.9375rem,3.2vw,1.0625rem)] leading-[1.6] text-muted-foreground">
-                Practical browser tools for everyday work — call APIs, inspect
+                Practical browser tools for everyday work - call APIs, inspect
                 responses, and clear friction without leaving your tab.
               </p>
 

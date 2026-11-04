@@ -206,7 +206,7 @@ function ChartTooltipContent({
     <div
       dir={dir}
       className={cn(
-        // Quiet panel — pointer-events-none so it never steals the next hover target.
+        // Quiet panel - pointer-events-none so it never steals the next hover target.
         "pointer-events-none grid min-w-[9rem] items-start gap-1.5 rounded-md border border-border bg-background px-2.5 py-2 text-xs shadow-sm",
         className
       )}
@@ -229,7 +229,7 @@ function ChartTooltipContent({
               item.color
 
             // Scatter payloads often include x + y (+ z); custom formatters
-            // may return null for non-primary rows — skip the wrapper entirely.
+            // may return null for non-primary rows - skip the wrapper entirely.
             if (formatter && item?.value !== undefined && item.name) {
               const formatted = formatter(
                 item.value,
@@ -357,7 +357,7 @@ function ChartLegendContent({
                 <div
                   className="size-2.5 shrink-0 rounded-[2px]"
                   style={{
-                    // Prefer config / CSS var — gradient `url(#…)` fills are not valid swatches.
+                    // Prefer config / CSS var - gradient `url(#…)` fills are not valid swatches.
                     backgroundColor:
                       itemConfig?.color ??
                       (typeof item.color === "string" &&

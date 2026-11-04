@@ -86,7 +86,7 @@ export default function HowItWorks({
             Book like people actually book.
           </h1>
           <p className="mt-2.5 max-w-md text-sm leading-relaxed text-muted-foreground">
-            One quiet desk — tap through service, day, time, confirm.
+            One quiet desk - tap through service, day, time, confirm.
           </p>
 
           <ol className="mt-6 space-y-0.5">
@@ -141,7 +141,7 @@ export default function HowItWorks({
 
           <div className="mt-auto hidden pt-6 lg:block">
             <p className="text-xs text-muted-foreground">
-              Try the panel — steps stay in sync.
+              Try the panel - steps stay in sync.
             </p>
           </div>
         </div>

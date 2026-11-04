@@ -133,24 +133,24 @@ export default async function MenubarDocsPage() {
               type: "boolean",
               defaultValue: "false",
               description:
-                "On `MenubarItem` / `MenubarLabel` / `MenubarSubTrigger` — indent to align with checkbox items.",
+                "On `MenubarItem` / `MenubarLabel` / `MenubarSubTrigger` - indent to align with checkbox items.",
             },
             {
               name: "variant",
               type: '"default" | "destructive"',
               defaultValue: '"default"',
-              description: "On `MenubarItem` — destructive styling for risky actions.",
+              description: "On `MenubarItem` - destructive styling for risky actions.",
             },
             {
               name: "align",
               type: '"start" | "center" | "end"',
               defaultValue: '"start"',
-              description: "On `MenubarContent` — popup alignment.",
+              description: "On `MenubarContent` - popup alignment.",
             },
             {
               name: "className",
               type: "string",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Merge extra Tailwind classes on any part.",
             },
           ]}

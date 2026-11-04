@@ -98,6 +98,11 @@ const BINARY_EXT = new Set([
   ".wav",
   ".mp3",
   ".ogg",
+  ".bin",
+  ".glb",
+  ".fbx",
+  ".hdr",
+  ".exr",
 ])
 
 function isBinaryRegistryPath(filePath) {

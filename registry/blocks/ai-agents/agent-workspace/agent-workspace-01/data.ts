@@ -150,7 +150,7 @@ export const threads: Thread[] = [
       {
         id: "o-2",
         role: "assistant",
-        text: "Subject: Welcome aboard — your first-week map\n\nHi {{name}}, glad you are here. This week: set up accounts, meet your buddy, and ship one small fix. Reply with any blockers and we will unblock fast.",
+        text: "Subject: Welcome aboard - your first-week map\n\nHi {{name}}, glad you are here. This week: set up accounts, meet your buddy, and ship one small fix. Reply with any blockers and we will unblock fast.",
         day: "week",
         thought: 3,
         reasoning: "Keep welcome mail short with three concrete first-week steps.",

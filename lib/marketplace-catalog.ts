@@ -80,24 +80,24 @@ export type MarketplaceProject = {
   /** When false: still listed, but Live/Buy stay disabled (Coming soon). */
   enabled: boolean
   /**
-   * Download gate — same model as docs (`public` | `member` | `pro`).
+   * Download gate - same model as docs (`public` | `member` | `pro`).
    * Templates default to `member` (signed-in free). Live preview stays public.
    */
   access?: "public" | "member" | "pro"
   badge: MarketplaceBadge | null
   coverVariant: MarketplaceCoverVariant
-  /** Catalog card cover (light) — file: cover-light.webp */
+  /** Catalog card cover (light) - file: cover-light.webp */
   coverImage?: string | null
-  /** Catalog card cover (dark) — file: cover-dark.webp */
+  /** Catalog card cover (dark) - file: cover-dark.webp */
   coverImageDark?: string | null
   /**
-   * Catalog / detail cover video — file: cover.mp4 (muted loop).
+   * Catalog / detail cover video - file: cover.mp4 (muted loop).
    * When set, UI prefers video over still covers.
    */
   coverVideo?: string | null
-  /** Detail-page hero (light) — file: main-light.webp; falls back to coverImage */
+  /** Detail-page hero (light) - file: main-light.webp; falls back to coverImage */
   detailCoverImage?: string | null
-  /** Detail-page hero (dark) — file: main-dark.webp */
+  /** Detail-page hero (dark) - file: main-dark.webp */
   detailCoverImageDark?: string | null
   liveUrl: string
   /** Optional public / absolute download URL (redirect). Prefer Pro registry zip via slug. */
@@ -373,7 +373,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
     tagline:
       "Sticky category tabs, always-on search, and wide game tiles for browsing.",
     description:
-      "Frontend-only casino catalogue lobby built with Vite, React 19, and Tailwind CSS 4. You get sticky top category tabs, search always available in the header, a compact promo ticker, wide landscape game tiles, game rails, live wins, promotions, providers, trust and about blocks, activity feed, menu sheet, and mobile bottom nav. Guest demo state only — no real backend. Static build ready for GitHub Pages.",
+      "Frontend-only casino catalogue lobby built with Vite, React 19, and Tailwind CSS 4. You get sticky top category tabs, search always available in the header, a compact promo ticker, wide landscape game tiles, game rails, live wins, promotions, providers, trust and about blocks, activity feed, menu sheet, and mobile bottom nav. Guest demo state only - no real backend. Static build ready for GitHub Pages.",
     category: "betting",
     stack: ["react", "vite", "tailwind", "typescript", "javascript"],
     priceLabel: "Free",
@@ -512,9 +512,9 @@ export const marketplaceProjects: MarketplaceProject[] = [
     slug: "sonojs-crypto-02",
     title: "Aether",
     tagline:
-      "Crypto exchange landing — markets, portfolio story, and a desk built for demos.",
+      "Crypto exchange landing - markets, portfolio story, and a desk built for demos.",
     description:
-      "Aether is a production-grade crypto exchange marketing desk by SonoJS. Built with Next.js, React, and Tailwind CSS. You get a light/dark landing with hero, featured coins, feature blocks, stats, process timeline, portfolio pitch, upgrade grid, perks, FAQ, auth screens, and documentation pages. Demo marketing surface only — paper / simulated flows, not financial advice. Static build ready for GitHub Pages.",
+      "Aether is a production-grade crypto exchange marketing desk by SonoJS. Built with Next.js, React, and Tailwind CSS. You get a light/dark landing with hero, featured coins, feature blocks, stats, process timeline, portfolio pitch, upgrade grid, perks, FAQ, auth screens, and documentation pages. Demo marketing surface only - paper / simulated flows, not financial advice. Static build ready for GitHub Pages.",
     category: "crypto",
     stack: ["nextjs", "react", "tailwind", "typescript"],
     priceLabel: "Free",
@@ -543,7 +543,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
     highlights: [
       {
         title: "Exchange-first landing",
-        body: "Hero, coin rails, and CTAs framed for a trading product — not a generic SaaS shell.",
+        body: "Hero, coin rails, and CTAs framed for a trading product - not a generic SaaS shell.",
       },
       {
         title: "Full marketing sections",
@@ -576,9 +576,9 @@ export const marketplaceProjects: MarketplaceProject[] = [
   {
     slug: "sonojs-fintech-01",
     title: "Pocket",
-    tagline: "Simple modern payments landing — clear hierarchy, ready to demo live.",
+    tagline: "Simple modern payments landing - clear hierarchy, ready to demo live.",
     description:
-      "Pocket is a frontend payments marketing landing by SonoJS. Built with Vite, React, and Tailwind CSS. You get a dark fintech hero, stats, feature business block, billing and card-deal sections, testimonials, client logos, CTA, and footer. Motion accents use Framer Motion. Single-page scroll landing with navbar anchors for Home, Features, Product, and Clients. Demo marketing surface only — no real payments or accounts. Static build ready for GitHub Pages.",
+      "Pocket is a frontend payments marketing landing by SonoJS. Built with Vite, React, and Tailwind CSS. You get a dark fintech hero, stats, feature business block, billing and card-deal sections, testimonials, client logos, CTA, and footer. Motion accents use Framer Motion. Single-page scroll landing with navbar anchors for Home, Features, Product, and Clients. Demo marketing surface only - no real payments or accounts. Static build ready for GitHub Pages.",
     category: "fintech",
     stack: ["react", "vite", "javascript", "tailwind"],
     priceLabel: "Free",
@@ -606,7 +606,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
     highlights: [
       {
         title: "Payments-first landing",
-        body: "Hero, stats, and product story framed for a simple payments brand — not a generic SaaS shell.",
+        body: "Hero, stats, and product story framed for a simple payments brand - not a generic SaaS shell.",
       },
       {
         title: "Billing and card deal blocks",
@@ -641,9 +641,9 @@ export const marketplaceProjects: MarketplaceProject[] = [
     slug: "sonojs-landing-01",
     title: "Mainline",
     tagline:
-      "Calm SaaS marketing site — ink & champagne, full-bleed hero, pricing and auth.",
+      "Calm SaaS marketing site - ink & champagne, full-bleed hero, pricing and auth.",
     description:
-      "Mainline is a premium product-marketing template by SonoJS. Built with Next.js 16, React 19, Tailwind CSS 4, and Motion. You get a full-bleed home (hero, logo marquee, features, resource allocation, testimonials, pricing, FAQ), plus About, Pricing, FAQ, Contact with form, Login, and Signup. Instrument Serif + Manrope, next-themes (default dark), MDX-ready content surfaces, and shadcn/ui blocks. Demo marketing and auth UI only — no real accounts or payments. Static build ready for GitHub Pages.",
+      "Mainline is a premium product-marketing template by SonoJS. Built with Next.js 16, React 19, Tailwind CSS 4, and Motion. You get a full-bleed home (hero, logo marquee, features, resource allocation, testimonials, pricing, FAQ), plus About, Pricing, FAQ, Contact with form, Login, and Signup. Instrument Serif + Manrope, next-themes (default dark), MDX-ready content surfaces, and shadcn/ui blocks. Demo marketing and auth UI only - no real accounts or payments. Static build ready for GitHub Pages.",
     category: "landing",
     stack: ["nextjs", "react", "tailwind", "typescript"],
     priceLabel: "Free",
@@ -674,7 +674,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
     highlights: [
       {
         title: "Product-first landing",
-        body: "Full-bleed hero, logo marquee, features, and a resource block that feel like a real SaaS launch — not a generic kit demo.",
+        body: "Full-bleed hero, logo marquee, features, and a resource block that feel like a real SaaS launch - not a generic kit demo.",
       },
       {
         title: "Pages that ship together",
@@ -709,9 +709,9 @@ export const marketplaceProjects: MarketplaceProject[] = [
     slug: "sonojs-landing-02",
     title: "Changelog Template",
     tagline:
-      "Minimal changelog template — product releases, features, and fixes in chronological order.",
+      "Minimal changelog template - product releases, features, and fixes in chronological order.",
     description:
-      "Changelog Template is a minimal changelog built with Next.js 16.4, React 19.2, and Tailwind CSS 4.1. Showcase product releases, features, and bug fixes in chronological order. Visual timeline with dates and versions, automatic dark mode, responsive layout, and MDX entries via Fumadocs. Write YYYY-MM-DD.mdx files under changelog/content — title, description, date, tags, and version in frontmatter. shadcn/ui components, full TypeScript, next-themes. Demo content only — no live CMS. Deploy to Vercel, Netlify, Cloudflare Pages, or static GitHub Pages.",
+      "Changelog Template is a minimal changelog built with Next.js 16.4, React 19.2, and Tailwind CSS 4.1. Showcase product releases, features, and bug fixes in chronological order. Visual timeline with dates and versions, automatic dark mode, responsive layout, and MDX entries via Fumadocs. Write YYYY-MM-DD.mdx files under changelog/content - title, description, date, tags, and version in frontmatter. shadcn/ui components, full TypeScript, next-themes. Demo content only - no live CMS. Deploy to Vercel, Netlify, Cloudflare Pages, or static GitHub Pages.",
     category: "landing",
     stack: ["nextjs", "react", "tailwind", "typescript"],
     priceLabel: "Free",
@@ -742,7 +742,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
     highlights: [
       {
         title: "Timeline design",
-        body: "Visual timeline with dates and versions — releases, features, and fixes in chronological order.",
+        body: "Visual timeline with dates and versions - releases, features, and fixes in chronological order.",
       },
       {
         title: "MDX changelog entries",
@@ -750,7 +750,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       },
       {
         title: "Dark mode",
-        body: "Automatic theme switching with next-themes — calm on every device.",
+        body: "Automatic theme switching with next-themes - calm on every device.",
       },
       {
         title: "Fast and fork-ready",
@@ -777,9 +777,9 @@ export const marketplaceProjects: MarketplaceProject[] = [
     slug: "sonojs-saas-01",
     title: "Glyph",
     tagline:
-      "AI SaaS starter — marketing shell, auth, pricing, and a text generator workspace.",
+      "AI SaaS starter - marketing shell, auth, pricing, and a text generator workspace.",
     description:
-      "Glyph is a Next.js AI SaaS starter by SonoJS. Built with Next.js 15, React 19, Tailwind CSS 4, AI SDK, and OpenAI. You get a calm marketing site, sign-in / sign-up / reset screens, readable pricing, FAQ, contact, and a text generator chat workspace. Light and dark share one token system. Framer Motion on the hero stays restrained. Demo marketing and UI surface — chat streaming needs a Node host and OPENAI_API_KEY; the GitHub Pages static export keeps marketing pages working without the API. Static build ready for GitHub Pages.",
+      "Glyph is a Next.js AI SaaS starter by SonoJS. Built with Next.js 15, React 19, Tailwind CSS 4, AI SDK, and OpenAI. You get a calm marketing site, sign-in / sign-up / reset screens, readable pricing, FAQ, contact, and a text generator chat workspace. Light and dark share one token system. Framer Motion on the hero stays restrained. Demo marketing and UI surface - chat streaming needs a Node host and OPENAI_API_KEY; the GitHub Pages static export keeps marketing pages working without the API. Static build ready for GitHub Pages.",
     category: "saas",
     stack: ["nextjs", "react", "tailwind", "typescript", "nodejs"],
     priceLabel: "Free",
@@ -808,11 +808,11 @@ export const marketplaceProjects: MarketplaceProject[] = [
     highlights: [
       {
         title: "Generator as the product",
-        body: "Text workspace with streaming chat patterns — OpenAI-ready, built to extend.",
+        body: "Text workspace with streaming chat patterns - OpenAI-ready, built to extend.",
       },
       {
         title: "Auth and pricing that ship",
-        body: "Sign in, sign up, reset, plan cards, and FAQ in one voice — ready to rebrand.",
+        body: "Sign in, sign up, reset, plan cards, and FAQ in one voice - ready to rebrand.",
       },
       {
         title: "Theme-aware shell",

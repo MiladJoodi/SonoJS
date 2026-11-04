@@ -8,7 +8,7 @@ import { CHART_SERIES_A } from "./chart-styles"
 import { useChartDir, type ChartDir } from "./use-chart-dir"
 
 /**
- * Shared Heatmap helpers — calendar + matrix SVG grids.
+ * Shared Heatmap helpers - calendar + matrix SVG grids.
  * EN / Gregorian; week starts Sunday (GitHub-style).
  * Layout flips with page `dir` via `useChartDir`.
  */
@@ -224,7 +224,7 @@ export type CalendarHeatmapProps = {
 
 export function CalendarHeatmap({
   title = "Calendar Heatmap",
-  subtitle = "Year of daily activity — Sunday-start weeks, intensity by count.",
+  subtitle = "Year of daily activity - Sunday-start weeks, intensity by count.",
   data,
   days = 365,
   end,

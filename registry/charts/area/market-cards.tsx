@@ -14,7 +14,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 import { useMarketNeon } from "../_lib/use-market-neon"
 
 /**
- * Market Cards — locked gallery chrome + **neon** SVG sparklines (chart-local).
+ * Market Cards - locked gallery chrome + **neon** SVG sparklines (chart-local).
  * Three asset cards: 30-day up / KWD down / gold flat.
  * Neon glow on branded skins (`useMarketNeon`); soft fill when raw.
  * Installs to: components/charts/market-cards.tsx
@@ -135,7 +135,7 @@ function Sparkline({
   )
 }
 
-/** Step-up then climb — 30-day trend sample. */
+/** Step-up then climb - 30-day trend sample. */
 export const TREND_POINTS: SparkPoint[] = [
   { x: 0, y: 78 },
   { x: 18, y: 72 },
@@ -332,14 +332,14 @@ function MarketTrendCard({
 
 function MarketCards({
   title = "Market snapshot",
-  subtitle = "Neon SVG area sparklines on asset cards — up, down, and flat tones.",
+  subtitle = "Neon SVG area sparklines on asset cards - up, down, and flat tones.",
   className,
   plotDir,
 }: MarketCardsProps) {
   const { ref } = useChartDir()
   const neon = useMarketNeon()
   const uid = React.useId().replace(/:/g, "")
-  // plotDir reserved for gallery API parity — cards inherit page dir.
+  // plotDir reserved for gallery API parity - cards inherit page dir.
   void plotDir
 
   return (
@@ -376,7 +376,7 @@ function MarketCards({
           <MarketAssetCard
             title="Gold gram"
             price={78.4}
-            badge="— 0%"
+            badge="- 0%"
             footerLabel="7 days"
             footerChange="0%"
             changeTone="muted"

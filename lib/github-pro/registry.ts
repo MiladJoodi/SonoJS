@@ -17,7 +17,7 @@ export type ProRegistryEntry = {
   type?: ProRegistryProductType
   category?: string
   variant?: string
-  /** Ready-made zip in the Pro repo — users download this as-is. */
+  /** Ready-made zip in the Pro repo - users download this as-is. */
   archive?: string
   /** Optional loose source paths (legacy / preview). */
   files?: string[]
@@ -91,8 +91,8 @@ export async function getProRegistryEntry(
   return registry[slug] ?? null
 }
 
-/** Alias — central product registry (same as fetchProRegistry). */
+/** Alias - central product registry (same as fetchProRegistry). */
 export const fetchProductRegistry = fetchProRegistry
 
-/** Alias — lookup by slug in the central product registry. */
+/** Alias - lookup by slug in the central product registry. */
 export const getProductRegistryEntry = getProRegistryEntry

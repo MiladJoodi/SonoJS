@@ -3,7 +3,7 @@
  *
  * create-next-app leaves prefers-color-scheme :root colors that fight
  * SonoJS class-based `.dark` + `--canvas`. Nested `@theme` in an imported
- * file is also unreliable under Next + `@tailwindcss/turbopack` — so we
+ * file is also unreliable under Next + `@tailwindcss/turbopack` - so we
  * put `@theme` / `@source` on the same file that `@import "tailwindcss"`.
  */
 
@@ -41,7 +41,7 @@ export function importLineForGlobals(cwd, globalsAbs) {
   return `@import "${rel}";`
 }
 
-/** Block-critical utilities — emit even if a path is missed by content scan. */
+/** Block-critical utilities - emit even if a path is missed by content scan. */
 export const SONOJS_SOURCE_INLINE_LINES = [
   '@source inline("border-destructive bg-destructive text-destructive data-[state=checked]:bg-destructive data-[state=checked]:border-destructive data-[invalid=true]:text-destructive data-[invalid=true]:[&_[data-slot=label]]:text-destructive data-[invalid=true]:[&_[data-slot=field-label]]:text-destructive");',
   '@source inline("ltr:data-[state=checked]:translate-x-[calc(100%-2px)] rtl:data-[state=checked]:-translate-x-[calc(100%-2px)]");',
@@ -50,7 +50,7 @@ export const SONOJS_SOURCE_INLINE_LINES = [
 ]
 
 /**
- * Same maps as templates/init/styles/sonojs.css — kept on the Tailwind entry
+ * Same maps as templates/init/styles/sonojs.css - kept on the Tailwind entry
  * so Turbopack always generates semantic color utilities.
  */
 export const SONOJS_THEME_INLINE_BLOCK = `@theme inline {
@@ -99,7 +99,7 @@ const ENTRY_MARKER = "/* sonojs-tailwind-entry */"
 
 /**
  * Remove create-next-app theme that fights SonoJS class-based `.dark`.
- * Tokens live in styles/sonojs.css — globals must not override --foreground
+ * Tokens live in styles/sonojs.css - globals must not override --foreground
  * via prefers-color-scheme while --canvas stays light.
  */
 export function stripCreateNextAppTheme(css) {
@@ -108,7 +108,7 @@ export function stripCreateNextAppTheme(css) {
   // @media (prefers-color-scheme: dark) { :root { … } }
   next = next.replace(
     /@media\s*\(\s*prefers-color-scheme\s*:\s*dark\s*\)\s*\{\s*:root\s*\{[\s\S]*?\}\s*\}/g,
-    `${ENTRY_MARKER} /* removed OS media :root colors — SonoJS uses class .dark */`
+    `${ENTRY_MARKER} /* removed OS media :root colors - SonoJS uses class .dark */`
   )
 
   // Bare :root color islands without SonoJS --primary (CNA or soft-surface-only patches)
@@ -117,7 +117,7 @@ export function stripCreateNextAppTheme(css) {
     const hasBgOrFg =
       /--background\s*:/.test(body) || /--foreground\s*:/.test(body)
     if (!hasPrimary && hasBgOrFg) {
-      return `${ENTRY_MARKER} /* removed conflicting :root — tokens in styles/sonojs.css */`
+      return `${ENTRY_MARKER} /* removed conflicting :root - tokens in styles/sonojs.css */`
     }
     return full
   })
@@ -174,7 +174,7 @@ export async function ensureGlobalsThemeEntry(cwd) {
     return {
       status: "missing",
       message:
-        'No globals.css found — add: @import "../styles/sonojs.css";',
+        'No globals.css found - add: @import "../styles/sonojs.css";',
     }
   }
 

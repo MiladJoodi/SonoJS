@@ -99,7 +99,7 @@ export default async function SpinnerDocsPage() {
             {
               name: "className",
               type: "string",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Merge classes (e.g. `size-6` for a larger spinner).",
             },
             {
@@ -111,7 +111,7 @@ export default async function SpinnerDocsPage() {
             {
               name: "…svg props",
               type: 'React.ComponentProps<"svg">',
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Pass-through props for the Lucide icon.",
             },
           ]}

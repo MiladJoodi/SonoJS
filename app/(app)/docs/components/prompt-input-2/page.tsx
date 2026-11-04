@@ -63,7 +63,7 @@ export default async function PromptInput2DocsPage() {
         description={
           <p className="leading-relaxed text-muted-foreground">
             A prompt bar for composing agent requests with model selection and
-            quick actions — auto-growing textarea, plus menu, and send / stop.
+            quick actions - auto-growing textarea, plus menu, and send / stop.
           </p>
         }
       />
@@ -96,7 +96,7 @@ export default async function PromptInput2DocsPage() {
             {
               name: "onValueChange",
               type: "(value: string) => void",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Fires when the textarea value changes.",
             },
             {
@@ -108,13 +108,13 @@ export default async function PromptInput2DocsPage() {
             {
               name: "model / defaultModel",
               type: "string",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Controlled or uncontrolled selected model value.",
             },
             {
               name: "onModelChange",
               type: "(model: string) => void",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Fires when the selected model changes.",
             },
             {
@@ -126,13 +126,13 @@ export default async function PromptInput2DocsPage() {
             {
               name: "onAction",
               type: "(action: string) => void",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Fires when a quick action is chosen.",
             },
             {
               name: "onSubmit",
               type: "(value: string, model?: string) => void",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Fires on Enter (without Shift) or send click.",
             },
             {
@@ -144,7 +144,7 @@ export default async function PromptInput2DocsPage() {
             {
               name: "onStop",
               type: "() => void",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Called when the stop control is pressed.",
             },
             {
@@ -156,13 +156,13 @@ export default async function PromptInput2DocsPage() {
             {
               name: "leadingAction",
               type: "ReactNode",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Optional control rendered after the actions menu.",
             },
             {
               name: "className",
               type: "string",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Optional class names on the form root.",
             },
           ]}

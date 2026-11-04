@@ -41,7 +41,7 @@ export default function BlockBillingSettingsDocsPage() {
       <BlocksPageHeader
         title="Billing Settings"
         pathname="/blocks/payments-billing/billing-settings"
-        description="Overview, preferences, change plan, and company & tax — elevated cards on a white stage."
+        description="Overview, preferences, change plan, and company & tax - elevated cards on a white stage."
       />
 
       <div className="flex flex-col gap-8">

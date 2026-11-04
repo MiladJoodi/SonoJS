@@ -108,7 +108,7 @@ export default async function MessageDocsPage() {
         pathname="/docs/components/message"
         description={
           <p className="leading-relaxed text-muted-foreground">
-          Layout for a single conversation row — avatar, alignment, header, and
+          Layout for a single conversation row - avatar, alignment, header, and
           footer around a message surface.           Compose the visible bubble with{" "}
           <a
             href="/docs/components/bubble"
@@ -157,12 +157,12 @@ export default async function MessageDocsPage() {
               type: '"start" | "end"',
               defaultValue: '"start"',
               description:
-                'On `Message` — logical side of the thread (`start` = incoming, `end` = outgoing). Mirrors with writing direction: LTR left/right, RTL right/left. Same `align` values as `Bubble`.',
+                'On `Message` - logical side of the thread (`start` = incoming, `end` = outgoing). Mirrors with writing direction: LTR left/right, RTL right/left. Same `align` values as `Bubble`.',
             },
             {
               name: "className",
               type: "string",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Merge extra Tailwind classes on any part.",
             },
           ]}

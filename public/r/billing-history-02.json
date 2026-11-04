@@ -3,7 +3,7 @@
   "name": "billing-history-02",
   "type": "registry:block",
   "title": "billing-history-02",
-  "description": "Invoice archive — month-grouped statements with status badges and PDF download (RTL/LTR).",
+  "description": "Invoice archive - month-grouped statements with status badges and PDF download (RTL/LTR).",
   "access": "public",
   "dependencies": [
     "lucide-react"
@@ -37,6 +37,6 @@
       "target": "components/blocks/payments-billing/billing-history-02/billing-history.tsx"
     }
   ],
-  "version": "0.1.0+c9c3d2a86e47",
-  "generatedAt": "2026-11-03T21:57:48.548Z"
+  "version": "0.1.0+3fe3a15cbaf2",
+  "generatedAt": "2026-11-04T11:52:24.655Z"
 }

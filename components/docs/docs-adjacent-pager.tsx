@@ -17,7 +17,7 @@ export type DocsAdjacentLink = {
 }
 
 /**
- * Prev/next beside a page title — white card chrome, LTR + `icon-dir` for RTL.
+ * Prev/next beside a page title - white card chrome, LTR + `icon-dir` for RTL.
  * Tooltip shows the adjacent page title.
  */
 export function DocsAdjacentPager({

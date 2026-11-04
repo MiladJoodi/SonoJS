@@ -65,7 +65,7 @@ export default function ContactForm({
           </h2>
           <p className="text-base leading-relaxed text-muted-foreground">
             Reach out for product questions, partnership ideas, or hands-on
-            support — our team will follow up quickly.
+            support - our team will follow up quickly.
           </p>
         </div>
 

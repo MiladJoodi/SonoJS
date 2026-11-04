@@ -86,22 +86,22 @@ export default async function ScrollAreaDocsPage() {
             {
               name: "className",
               type: "string",
-              defaultValue: "—",
+              defaultValue: "-",
               description:
-                "On `ScrollArea` — size the root (e.g. `h-72 w-48`) so content can overflow.",
+                "On `ScrollArea` - size the root (e.g. `h-72 w-48`) so content can overflow.",
             },
             {
               name: "orientation",
               type: '"vertical" | "horizontal"',
               defaultValue: '"vertical"',
-              description: "On `ScrollBar` — scrollbar axis.",
+              description: "On `ScrollBar` - scrollbar axis.",
             },
             {
               name: "type",
               type: '"auto" | "always" | "scroll" | "hover"',
               defaultValue: '"hover"',
               description:
-                "On `ScrollArea` — when the scrollbar is visible (Radix `type`).",
+                "On `ScrollArea` - when the scrollbar is visible (Radix `type`).",
             },
           ]}
         />

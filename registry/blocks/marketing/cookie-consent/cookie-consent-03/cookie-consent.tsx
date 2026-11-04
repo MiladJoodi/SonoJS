@@ -157,7 +157,7 @@ export default function CookieConsent03({
                       Necessary
                     </p>
                     <p className="mt-0.5 text-xs text-muted-foreground">
-                      Always on — security and core features.
+                      Always on - security and core features.
                     </p>
                   </div>
                   <Switch checked disabled aria-label="Necessary cookies" />

@@ -53,22 +53,22 @@ function StarIcon({
 const THUMBS = [
   {
     src: assetSrc(fashion1),
-    alt: "Women Embroidered A-line Kurta — front view",
+    alt: "Women Embroidered A-line Kurta - front view",
     label: "Front view",
   },
   {
     src: assetSrc(fashion2),
-    alt: "Women Embroidered A-line Kurta — side view",
+    alt: "Women Embroidered A-line Kurta - side view",
     label: "Side view",
   },
   {
     src: assetSrc(fashion3),
-    alt: "Women Embroidered A-line Kurta — back view",
+    alt: "Women Embroidered A-line Kurta - back view",
     label: "Back view",
   },
   {
     src: assetSrc(fashion4),
-    alt: "Women Embroidered A-line Kurta — detail view",
+    alt: "Women Embroidered A-line Kurta - detail view",
     label: "Detail view",
   },
 ] as const
@@ -286,7 +286,7 @@ export default function ProductDetails({
                   <div className="rounded-md bg-muted/40 p-4">
                     <p className="text-sm leading-relaxed text-muted-foreground">
                       Lightweight georgette with tonal embroidery, lined bodice,
-                      and an attached dupatta. Relaxed A-line silhouette — true
+                      and an attached dupatta. Relaxed A-line silhouette - true
                       to size.
                     </p>
                   </div>
@@ -372,7 +372,7 @@ export default function ProductDetails({
                     </time>
                   </div>
                   <p className="mt-3 text-[13px] leading-relaxed text-muted-foreground">
-                    Soft fabric and beautiful embroidery — true to size. Shipping
+                    Soft fabric and beautiful embroidery - true to size. Shipping
                     was impressively prompt.
                   </p>
                 </div>

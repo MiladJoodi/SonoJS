@@ -1,6 +1,6 @@
 import { MarkFrame } from "@/components/catalog/wireframes/mark-frame"
 
-/** Blog grid — featured + compact. */
+/** Blog grid - featured + compact. */
 export function ContentPublishingBlockWireframe() {
   return (
     <MarkFrame>

@@ -1,4 +1,4 @@
-// Orbits: particles on tilted orbits — the "working" state. No nucleus
+// Orbits: particles on tilted orbits - the "working" state. No nucleus
 // (the tuned preset runs coreless): just ghost paths and the particles
 // doing the work.
 
@@ -17,7 +17,7 @@ export const frameOrbits: ModeFrame = (size, t, o) => {
   const ghostN = o.ghostN ?? 40;
   const particles = o.particles ?? 3;
 
-  // orbits: each a tilted circle — a ghost path + running particles
+  // orbits: each a tilted circle - a ghost path + running particles
   for (let orb = 0; orb < orbitN; orb++) {
     const h1 = hashD(orb, 1.7);
     const h2 = hashD(orb, 5.2);

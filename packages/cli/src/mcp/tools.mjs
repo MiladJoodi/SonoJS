@@ -141,7 +141,7 @@ export const TOOL_DEFINITIONS = [
   {
     name: "get_add_command",
     description:
-      "Return the exact `npx @sonojs/ui@latest add <name>` command plus an Also-needs style hint for nested registry items and npm packages. Does not install or write files — the agent or user should run the command.",
+      "Return the exact `npx @sonojs/ui@latest add <name>` command plus an Also-needs style hint for nested registry items and npm packages. Does not install or write files - the agent or user should run the command.",
     inputSchema: {
       type: "object",
       properties: {

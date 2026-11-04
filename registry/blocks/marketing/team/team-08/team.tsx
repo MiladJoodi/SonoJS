@@ -67,7 +67,7 @@ const DEFAULT_MEMBERS = [
 export default function Team({
   title = "Hover and discover",
   eyebrow = "Interactive",
-  description = "Tight circular portraits that lift and layer on hover—playful without losing polish.",
+  description = "Tight circular portraits that lift and layer on hover-playful without losing polish.",
   members = DEFAULT_MEMBERS,
   className,
   ...props

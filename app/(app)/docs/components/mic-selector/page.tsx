@@ -67,7 +67,7 @@ export default async function MicSelectorDocsPage() {
         pathname="/docs/components/mic-selector"
         description={
           <p className="leading-relaxed text-muted-foreground">
-            A searchable popover for picking an audio input — permission-aware
+            A searchable popover for picking an audio input - permission-aware
             labels, live device updates, and width-matched content.
           </p>
         }

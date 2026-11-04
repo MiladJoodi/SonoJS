@@ -102,7 +102,7 @@ const ALL_POSTS: Post[] = [
     alt: "Creative imagination cover",
   },
   {
-    title: "SonoJS v1.2 — Calendar and Tree Components",
+    title: "SonoJS v1.2 - Calendar and Tree Components",
     category: "release",
     author: "SonoJS Team",
     date: "Mar 1, 2026",
@@ -142,7 +142,7 @@ const ALL_POSTS: Post[] = [
     alt: "Creative workspace",
   },
   {
-    title: "SonoJS v1.1 — Data Table and Timeline",
+    title: "SonoJS v1.1 - Data Table and Timeline",
     category: "release",
     author: "SonoJS Team",
     date: "Feb 10, 2026",
@@ -193,7 +193,7 @@ export default function BlogGrid({
               Topic rails
             </h1>
             <p className="mt-2 text-base text-muted-foreground">
-              Horizontal category shelves — scroll each rail like a shelf of
+              Horizontal category shelves - scroll each rail like a shelf of
               covers.
             </p>
           </div>

@@ -128,7 +128,7 @@ export default function ApplicationForm({
           </h1>
           <p className="mt-2 text-pretty text-sm leading-6 text-muted-foreground">
             Tell us about your team and pick a plan. We review applications
-            within two business days — no credit card required to apply.
+            within two business days - no credit card required to apply.
           </p>
         </header>
 
@@ -254,7 +254,7 @@ export default function ApplicationForm({
                   Select a plan <RequiredMark />
                 </FieldLabel>
                 <p className="text-sm text-muted-foreground">
-                  You can change this after approval — pick what fits today.
+                  You can change this after approval - pick what fits today.
                 </p>
               </div>
 
@@ -357,7 +357,7 @@ export default function ApplicationForm({
                   during early access.
                 </FieldDescription>
                 <FieldDescription>
-                  <sup>2</sup> We’ll schedule a short call — no credit card
+                  <sup>2</sup> We’ll schedule a short call - no credit card
                   required to apply.
                 </FieldDescription>
               </div>

@@ -24,7 +24,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Line Default (classic) — locked gallery chrome; single-series Store line.
+ * Line Default (classic) - locked gallery chrome; single-series Store line.
  * Natural curve (`type="natural"`) + metric header scrubber.
  * Installs to: components/charts/line-default.tsx
  */
@@ -144,7 +144,7 @@ function niceMax(values: number[]) {
 
 function LineDefault({
   title = "Monthly store sales",
-  subtitle = "Natural curve — Store sessions, January to June 2026.",
+  subtitle = "Natural curve - Store sessions, January to June 2026.",
   data = DEMO_DATA,
   className,
   plotDir,
@@ -377,7 +377,7 @@ function LineDefault({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{monthLabel}</p>

@@ -88,7 +88,7 @@ export default function SocialLinks({
                 Link deck
               </p>
               <p className="mt-1 text-sm leading-snug text-foreground">
-                Everything I ship — in one place.
+                Everything I ship - in one place.
               </p>
             </div>
           </div>

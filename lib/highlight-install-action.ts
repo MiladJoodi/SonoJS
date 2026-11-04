@@ -26,7 +26,7 @@ const MAX_CODE_CHARS = 400_000
 /**
  * Highlight install snippets for a registry block.
  * Caller supplies file/usage source (from static `/r/<name>.json` on the
- * client) — this action does not read `public/r` from disk (keeps functions
+ * client) - this action does not read `public/r` from disk (keeps functions
  * under the Vercel size limit).
  */
 export async function highlightBlockInstall(input: {

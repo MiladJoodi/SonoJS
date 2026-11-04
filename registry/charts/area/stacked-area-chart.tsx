@@ -34,7 +34,7 @@ import { useNarrowViewport } from "../_lib/use-narrow-viewport"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Stacked Area Chart — locked gallery chrome + **neon** (chart-local).
+ * Stacked Area Chart - locked gallery chrome + **neon** (chart-local).
  * Three stacked monotone areas + vertical fill gradients + metric scrubber.
  * Installs to: components/charts/stacked-area-chart.tsx
  */
@@ -446,7 +446,7 @@ function StackedAreaChart({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{monthLabel}</p>

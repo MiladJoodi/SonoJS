@@ -44,7 +44,7 @@ export default function BlockDashboardLayoutDocsPage() {
       <BlocksPageHeader
         title="Dashboard Layout"
         pathname="/blocks/application-layouts/dashboard-layout"
-        description="Three production shells—analytics overview, ops console, and team workspace—each with a distinct chrome pattern and ready-to-ship content stage."
+        description="Three production shells-analytics overview, ops console, and team workspace-each with a distinct chrome pattern and ready-to-ship content stage."
       />
 
       <div className="flex flex-col gap-8">

@@ -13,7 +13,7 @@ const codeBlockVariants = cva(
   {
     variants: {
       variant: {
-        // Always Dark+ chrome — Shiki tokens are light-on-dark in both site themes.
+        // Always Dark+ chrome - Shiki tokens are light-on-dark in both site themes.
         default:
           "border border-[var(--code-border)] bg-[var(--code-bg)] text-[var(--code-fg)] has-[>[data-slot=code-block-content]:focus-visible]:border-ring",
         destructive:

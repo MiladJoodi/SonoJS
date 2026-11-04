@@ -17,7 +17,7 @@ export default function McpDocsPage() {
           SonoJS ships an MCP stdio server inside{" "}
           <code className="sono-inline-code">@sonojs/ui</code>. Agents can list,
           search, and inspect registry items, then get the exact{" "}
-          <code className="sono-inline-code">add</code> command — no silent file
+          <code className="sono-inline-code">add</code> command - no silent file
           writes.
         </p>
       </header>
@@ -65,27 +65,27 @@ npx @sonojs/ui@latest mcp init --all`}
         />
         <ul className="list-disc space-y-2 ps-5 text-sm leading-relaxed text-muted-foreground">
           <li>
-            <strong>Cursor</strong> — project{" "}
+            <strong>Cursor</strong> - project{" "}
             <code className="sono-inline-code">.cursor/mcp.json</code>
           </li>
           <li>
-            <strong>VS Code / Copilot</strong> — project{" "}
+            <strong>VS Code / Copilot</strong> - project{" "}
             <code className="sono-inline-code">.vscode/mcp.json</code>
           </li>
           <li>
-            <strong>Claude Desktop</strong> — user{" "}
+            <strong>Claude Desktop</strong> - user{" "}
             <code className="sono-inline-code">claude_desktop_config.json</code>
           </li>
           <li>
-            <strong>Claude Code</strong> — project{" "}
+            <strong>Claude Code</strong> - project{" "}
             <code className="sono-inline-code">.mcp.json</code>
           </li>
           <li>
-            <strong>Codex</strong> —{" "}
+            <strong>Codex</strong> -{" "}
             <code className="sono-inline-code">~/.codex/config.toml</code>
           </li>
           <li>
-            <strong>Windsurf</strong> — Windsurf MCP config under{" "}
+            <strong>Windsurf</strong> - Windsurf MCP config under{" "}
             <code className="sono-inline-code">~/.codeium/windsurf/</code>
           </li>
         </ul>
@@ -100,19 +100,19 @@ npx @sonojs/ui@latest mcp init --all`}
         <h2 className="text-h3">Tools</h2>
         <ul className="list-disc space-y-2 ps-5 text-sm leading-relaxed text-muted-foreground">
           <li>
-            <code className="sono-inline-code">list_components</code> — registry
+            <code className="sono-inline-code">list_components</code> - registry
             index (name, title, type)
           </li>
           <li>
-            <code className="sono-inline-code">search_components</code> — filter
+            <code className="sono-inline-code">search_components</code> - filter
             by query
           </li>
           <li>
-            <code className="sono-inline-code">get_component</code> — summary,
+            <code className="sono-inline-code">get_component</code> - summary,
             deps, file list
           </li>
           <li>
-            <code className="sono-inline-code">get_add_command</code> — exact{" "}
+            <code className="sono-inline-code">get_add_command</code> - exact{" "}
             <code className="sono-inline-code">npx @sonojs/ui@latest add …</code>{" "}
             plus Also-needs style npm hint
           </li>
@@ -144,10 +144,10 @@ npx @sonojs/ui@latest mcp init --all`}
       <section className="space-y-4">
         <h2 className="text-h3">Reload tips</h2>
         <ul className="list-disc space-y-2 ps-5 text-sm leading-relaxed text-muted-foreground">
-          <li>Cursor — Settings → MCP, or restart Cursor</li>
-          <li>VS Code — reload the window</li>
-          <li>Claude Desktop — fully quit and reopen</li>
-          <li>Codex / Windsurf / Claude Code — restart the client</li>
+          <li>Cursor - Settings → MCP, or restart Cursor</li>
+          <li>VS Code - reload the window</li>
+          <li>Claude Desktop - fully quit and reopen</li>
+          <li>Codex / Windsurf / Claude Code - restart the client</li>
         </ul>
       </section>
     </article>

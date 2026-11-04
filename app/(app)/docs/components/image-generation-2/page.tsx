@@ -59,7 +59,7 @@ export default async function ImageGeneration2DocsPage() {
         description={
           <p className="leading-relaxed text-muted-foreground">
             An animated loading state that reveals an AI-generated image when
-            it is ready — canvas grid split, optional caption shimmer, then the
+            it is ready - canvas grid split, optional caption shimmer, then the
             photo.
           </p>
         }
@@ -87,7 +87,7 @@ export default async function ImageGeneration2DocsPage() {
             {
               name: "src",
               type: "string | null",
-              defaultValue: "—",
+              defaultValue: "-",
               description:
                 "Image URL. Arrival finishes the reveal; omit while waiting.",
             },
@@ -113,7 +113,7 @@ export default async function ImageGeneration2DocsPage() {
             {
               name: "caption",
               type: "string",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Shimmer status chip; fades out when revealed.",
             },
             {
@@ -125,19 +125,19 @@ export default async function ImageGeneration2DocsPage() {
             {
               name: "onRevealComplete",
               type: "() => void",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Fires once when the photo settle finishes.",
             },
             {
               name: "onError",
               type: "() => void",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Fires if the image fails to load (after CORS retry).",
             },
             {
               name: "className",
               type: "string",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Merge classes on the root frame.",
             },
           ]}

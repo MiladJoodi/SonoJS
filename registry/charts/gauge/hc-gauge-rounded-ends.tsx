@@ -13,7 +13,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Hc Gauge Rounded Ends — Highcharts dial with rounded pane / dial tips.
+ * Hc Gauge Rounded Ends - Highcharts dial with rounded pane / dial tips.
  * Soft blue bands; locked header chrome; English / Intl.
  * Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/hc-gauge-rounded-ends.tsx
@@ -87,7 +87,7 @@ function buildOptions(value: number): Options {
 }
 
 function HcGaugeRoundedEnds({
-  title = "Score gauge — rounded ends",
+  title = "Score gauge - rounded ends",
   subtitle = "Rounded pane and dial tips on a soft light-to-deep blue band.",
   value = DEMO_VALUE,
   className,

@@ -101,22 +101,55 @@ const EXAMPLE_FOLDERS = [
   "trace",
   "transcription",
   "clothes-rack",
+  "3d/image-ring",
+  "3d/glass-coin-carousel",
+  "3d/hover-gallery",
+  "3d/image-marquee",
+  "3d/model-viewer",
+  "3d/perspective-card",
+  "3d/scroll-trigger",
+  "3d/smokey-frame",
+  "3d/image-pageflip",
+  "3d/beam-circle",
+  "3d/beam-circle-3d",
+  "3d/infinite-drift",
+  "3d/infinite-drift-2",
+  "3d/hanging-id-card",
+  "3d/plasma-globe",
+  "carousels/3d-image-carousel",
+  "carousels/3d-carousel",
+  "carousels/3d-image-slider",
+  "carousels/3d-bend-carousel",
+  "carousels/3d-slider",
+  "carousels/angled-slider",
+  "carousels/chain-carousel",
+  "carousels/stylish-carousel",
+  "carousels/cool-slide-gallery",
   "tweet-card",
   "verified-badge",
   "voice-ai-orb",
   "voice-selector",
 ] as const
 
+function exampleSlug(folder: string): string {
+  const i = folder.lastIndexOf("/")
+  return i === -1 ? folder : folder.slice(i + 1)
+}
+
 function exampleFilePath(exampleName: string): string | null {
-  for (const folder of EXAMPLE_FOLDERS) {
-    const prefix = `${folder}-`
+  const foldersBySlugLength = [...EXAMPLE_FOLDERS].sort(
+    (a, b) => exampleSlug(b).length - exampleSlug(a).length
+  )
+  for (const folder of foldersBySlugLength) {
+    const slug = exampleSlug(folder)
+    const prefix = `${slug}-`
     if (!exampleName.startsWith(prefix)) continue
     const file = exampleName.slice(prefix.length)
     return path.join(
       process.cwd(),
       "registry",
       "examples",
-      folder,
+      ...folder.split("/"),
       `${file}.tsx`
     )
   }

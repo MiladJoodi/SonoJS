@@ -36,7 +36,7 @@ const exampleDefs = [
     name: "electro-border-border-only",
     title: "Border only",
     description:
-      "`effects={false}` — turbulent stroke without glow, aura, or overlay.",
+      "`effects={false}` - turbulent stroke without glow, aura, or overlay.",
   },
 ]
 
@@ -61,7 +61,7 @@ export default async function ElectroBorderDocsPage() {
         description={
           <p className="leading-relaxed text-muted-foreground">
             A dynamic SVG turbulence border with optional glow, aura, and
-            overlay — wrap any child for an energized frame.
+            overlay - wrap any child for an energized frame.
           </p>
         }
       />

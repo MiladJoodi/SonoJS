@@ -64,7 +64,7 @@ export default function BlockMusicPlayerDocsPage() {
       <BlocksPageHeader
         title="Music Player"
         pathname="/blocks/files-media/music-player"
-        description="Twelve audio players from minimal bar to neon EQ, waveform scrubber, lyrics, pastel, cover-forward, dock, One UI, and queue — separate from video Media Player."
+        description="Twelve audio players from minimal bar to neon EQ, waveform scrubber, lyrics, pastel, cover-forward, dock, One UI, and queue - separate from video Media Player."
       />
 
       <div className="flex flex-col gap-8">

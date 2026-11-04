@@ -118,7 +118,7 @@ export default function AdvancedFilters08() {
         <div className="border-b border-border/70 px-3.5 py-3 text-start">
           <p className="text-sm font-semibold">Volume ladder</p>
           <p className="text-xs text-muted-foreground">
-            Pick a bucket — bars show relative density
+            Pick a bucket - bars show relative density
           </p>
         </div>
 

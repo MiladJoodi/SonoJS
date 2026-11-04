@@ -26,7 +26,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Vertical Line Chart — locked gallery chrome (navy × orange).
+ * Vertical Line Chart - locked gallery chrome (navy × orange).
  * Dual linear lines, `layout="vertical"` (months on Y) + metric header scrubber.
  * Installs to: components/charts/vertical-line-chart.tsx
  */
@@ -464,7 +464,7 @@ function VerticalLineChart({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{monthLabel}</p>
@@ -500,7 +500,7 @@ function VerticalLineChart({
             layout="vertical"
             data={data}
             margin={
-              // Reserve tip-label gutter whenever scrub can show totals —
+              // Reserve tip-label gutter whenever scrub can show totals -
               // never toggle on hover (`liveScrubbing`) or the plot jumps.
               narrow
                 ? {

@@ -44,7 +44,7 @@ const INVOICE = {
   },
   items: [
     {
-      description: "Pro platform — annual subscription",
+      description: "Pro platform - annual subscription",
       qty: 1,
       unitNet: 420.0,
       vatRate: 21,

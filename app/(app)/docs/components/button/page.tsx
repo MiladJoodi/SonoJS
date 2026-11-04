@@ -40,7 +40,7 @@ const exampleDefs = [
   {
     name: "button-sizes",
     title: "Sizes",
-    description: "Control height with `size` — xs, sm, default, lg, and icon sizes.",
+    description: "Control height with `size` - xs, sm, default, lg, and icon sizes.",
   },
 ]
 

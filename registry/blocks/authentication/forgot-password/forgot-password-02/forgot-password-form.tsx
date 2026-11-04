@@ -41,7 +41,7 @@ function PhotoPanel({ className }: { className?: string }) {
             Reset access in a minute
           </p>
           <p className="mt-1 max-w-xs text-xs leading-relaxed text-white/90">
-            We send a recovery link — no password guessing required.
+            We send a recovery link - no password guessing required.
           </p>
         </div>
       </div>

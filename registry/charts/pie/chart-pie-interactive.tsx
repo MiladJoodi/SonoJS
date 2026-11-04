@@ -30,7 +30,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Chart Pie Interactive (classic) — month Select drives active sector + center value.
+ * Chart Pie Interactive (classic) - month Select drives active sector + center value.
  * Same chrome language as gallery `pie-interactive`. Tokens: `--chart-1…5`.
  * Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/chart-pie-interactive.tsx
@@ -118,7 +118,7 @@ const chartPieContainerClassName =
 
 function ChartPieInteractive({
   title = "Store sales by month",
-  subtitle = "Pick a month — the active slice expands and the center updates.",
+  subtitle = "Pick a month - the active slice expands and the center updates.",
   data = DEMO_DATA,
   className,
   plotDir,
@@ -149,7 +149,7 @@ function ChartPieInteractive({
 
   const activeSlice = data[activeIndex] ?? data[0]
   const metricValue = activeSlice?.store ?? 0
-  const caption = activeSlice ? monthLabel(activeSlice.month) : "—"
+  const caption = activeSlice ? monthLabel(activeSlice.month) : "-"
 
   const startAngle = plotRtl ? -270 : 90
   const endAngle = plotRtl ? 90 : -270

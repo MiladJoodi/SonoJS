@@ -48,7 +48,7 @@ type ScatterItem = {
   delay: number
 }
 
-/** Bare icon sizes — no chip / white tile. */
+/** Bare icon sizes - no chip / white tile. */
 const SIZE_ICON = {
   sm: "size-7 sm:size-8",
   md: "size-8 sm:size-9",
@@ -56,7 +56,7 @@ const SIZE_ICON = {
 } as const
 
 /**
- * Dense staggered lattice — unique icons, centers ~10% apart so they stay clear.
+ * Dense staggered lattice - unique icons, centers ~10% apart so they stay clear.
  */
 const SCATTER: ScatterItem[] = [
   { id: "react", Icon: ReactIcon, x: 5, y: 18, rot: -10, size: "lg", delay: 0 },

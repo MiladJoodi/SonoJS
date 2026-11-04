@@ -59,7 +59,7 @@ export function Example() {
 
 const directionSource = `import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
-// dir from useDirection — arrow keys and tab order follow LTR/RTL.
+// dir from useDirection - arrow keys and tab order follow LTR/RTL.
 // Vertical line indicator: after:-end-1 (inline end toward content).
 <Tabs orientation="vertical" defaultValue="account">
   <TabsList variant="line">
@@ -114,7 +114,7 @@ export default async function TabsDocsPage() {
       <section className="space-y-3">
         <h2 className="text-h3">Direction</h2>
         <p className="text-sm leading-relaxed text-muted-foreground">
-          Toggle LTR/RTL in the preview — horizontal tabs reverse order with the
+          Toggle LTR/RTL in the preview - horizontal tabs reverse order with the
           writing direction, and vertical line indicators stay on the content
           side via{" "}
           <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
@@ -136,14 +136,14 @@ export default async function TabsDocsPage() {
             {
               name: "defaultValue",
               type: "string",
-              defaultValue: "—",
-              description: "On `Tabs` — initially selected tab value.",
+              defaultValue: "-",
+              description: "On `Tabs` - initially selected tab value.",
             },
             {
               name: "value",
               type: "string",
-              defaultValue: "—",
-              description: "On `Tabs` — controlled selected value.",
+              defaultValue: "-",
+              description: "On `Tabs` - controlled selected value.",
             },
             {
               name: "orientation",
@@ -155,7 +155,7 @@ export default async function TabsDocsPage() {
               name: "variant",
               type: '"default" | "line"',
               defaultValue: '"default"',
-              description: "On `TabsList` — pill vs underline style.",
+              description: "On `TabsList` - pill vs underline style.",
             },
             {
               name: "dir",
@@ -168,7 +168,7 @@ export default async function TabsDocsPage() {
               name: "disabled",
               type: "boolean",
               defaultValue: "false",
-              description: "On `TabsTrigger` — disable a tab.",
+              description: "On `TabsTrigger` - disable a tab.",
             },
           ]}
         />

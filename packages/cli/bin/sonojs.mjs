@@ -24,7 +24,7 @@ import { cmdMcp } from "../src/mcp/cmd.mjs"
 import { resolveRegistryItem } from "../src/resolve.mjs"
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
-/** Published default — monorepo overrides via SONOJS_REGISTRY or --registry. */
+/** Published default - monorepo overrides via SONOJS_REGISTRY or --registry. */
 const defaultRegistry = "https://sonojs.com/r"
 
 function printHelp() {
@@ -34,10 +34,10 @@ function printHelp() {
   sonojs mcp [--registry <url-or-path>]
   sonojs mcp init [--client <name>] [--all] [--dry-run] [--cwd <dir>] [--registry <url-or-path>]
 
-init      — installs design system (styles/sonojs.css), lib/utils.ts, components.json
-add       — copies component(s) into components/ui/ (run init first)
-mcp       — run the SonoJS MCP stdio server (agents launch this)
-mcp init  — detect Cursor/VS Code/Claude/Codex/Windsurf and write MCP config
+init      - installs design system (styles/sonojs.css), lib/utils.ts, components.json
+add       - copies component(s) into components/ui/ (run init first)
+mcp       - run the SonoJS MCP stdio server (agents launch this)
+mcp init  - detect Cursor/VS Code/Claude/Codex/Windsurf and write MCP config
 
 Environment:
   SONOJS_REGISTRY   Default registry base (URL or local directory)
@@ -88,7 +88,7 @@ async function cmdInit(rest) {
   })
 
   console.log(
-    "SonoJS initialized (tokens in styles/sonojs.css; @theme on globals — class .dark only)"
+    "SonoJS initialized (tokens in styles/sonojs.css; @theme on globals - class .dark only)"
   )
   for (const file of written) console.log(`  + ${file}`)
   for (const file of skipped) {
@@ -194,7 +194,7 @@ async function cmdAdd(names, rest) {
       )
     } else if (cssResult.status === "missing") {
       console.log(
-        "  ! No styles/sonojs.css or globals.css — set --chart-* tokens manually from the registry item cssVars"
+        "  ! No styles/sonojs.css or globals.css - set --chart-* tokens manually from the registry item cssVars"
       )
     }
   }
@@ -207,12 +207,12 @@ async function cmdAdd(names, rest) {
       )
     } else if (keyframesResult.status === "missing") {
       console.log(
-        "  ! No styles/sonojs.css or globals.css — add registry keyframes manually from the item css field"
+        "  ! No styles/sonojs.css or globals.css - add registry keyframes manually from the item css field"
       )
     }
   }
 
-  // Sheet/Dialog/Popover enter-exit — install package + CSS import if missing
+  // Sheet/Dialog/Popover enter-exit - install package + CSS import if missing
   // (covers projects that inited before tw-animate was part of the baseline).
   npmDeps.add("tw-animate-css")
   installNpmDependencies(cwd, [...npmDeps])
@@ -257,7 +257,7 @@ async function cmdAdd(names, rest) {
 
   if (seen.has("sonner")) {
     console.log(`
-Next — mount <Toaster /> once in your root layout (inside ThemeProvider if you use one):
+Next - mount <Toaster /> once in your root layout (inside ThemeProvider if you use one):
   import { Toaster } from "@/components/ui/sonner"
   …
   <body>

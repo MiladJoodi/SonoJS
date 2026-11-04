@@ -49,7 +49,7 @@ export default async function ProgressDocsPage() {
         description={
           <p className="leading-relaxed text-muted-foreground">
           Displays an indicator showing the completion progress of a task.
-          Fills from the inline start — works in LTR and RTL.
+          Fills from the inline start - works in LTR and RTL.
         </p>
         }
       />
@@ -81,7 +81,7 @@ export default async function ProgressDocsPage() {
             {
               name: "value",
               type: "number | null | undefined",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Completion from `0` to `100`. Omit for indeterminate when supported by the primitive.",
             },
             {
@@ -93,7 +93,7 @@ export default async function ProgressDocsPage() {
             {
               name: "className",
               type: "string",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Merge extra Tailwind classes on the root track.",
             },
           ]}

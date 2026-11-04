@@ -5,7 +5,7 @@ import { pageMetadata } from "@/lib/seo"
 export const metadata = pageMetadata({
   title: "Blocks",
   description:
-    "Ready-made SonoJS UI blocks — authentication, navigation, marketing, ecommerce, and more. Preview variants and install with the CLI.",
+    "Ready-made SonoJS UI blocks - authentication, navigation, marketing, ecommerce, and more. Preview variants and install with the CLI.",
   path: "/blocks",
 })
 

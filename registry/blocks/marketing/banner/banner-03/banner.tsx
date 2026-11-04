@@ -20,7 +20,7 @@ export default function Banner({
       {...props}
     >
       <p className="min-w-0 text-start">
-        Passkeys are on — skip passwords on your next sign-in
+        Passkeys are on - skip passwords on your next sign-in
       </p>
       <div className="flex shrink-0 items-center gap-3">
         <button

@@ -22,7 +22,7 @@ const exampleDefs = [
     name: "rainbow-button-sizes",
     title: "Sizes",
     description:
-      "Same control scale as `Button` — xs, sm, default (`46px`), and lg.",
+      "Same control scale as `Button` - xs, sm, default (`46px`), and lg.",
   },
   {
     name: "rainbow-button-icon",
@@ -90,7 +90,7 @@ export default async function RainbowButtonDocsPage() {
               type: '"default" | "xs" | "sm" | "lg" | "icon" | "icon-xs" | "icon-sm" | "icon-lg"',
               defaultValue: '"default"',
               description:
-                "Same scale as Button — default `46px`, sm `40px`, lg `52px`, plus icon sizes.",
+                "Same scale as Button - default `46px`, sm `40px`, lg `52px`, plus icon sizes.",
             },
             {
               name: "asChild",

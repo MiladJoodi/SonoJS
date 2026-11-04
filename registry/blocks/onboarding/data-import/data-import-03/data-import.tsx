@@ -45,7 +45,7 @@ const COLUMNS = [
   {
     id: "col_d",
     source: "notes",
-    samples: ["VIP", "Intro call", "—"],
+    samples: ["VIP", "Intro call", "-"],
     defaultDest: "skip",
   },
 ] as const

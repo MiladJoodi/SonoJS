@@ -227,7 +227,7 @@ const DEFAULT_FEATURES = [
   {
     title: "Frictionless Workflow",
     description:
-      "From task boards to automation—we simplify your daily workflow so you can focus on what really matters.",
+      "From task boards to automation-we simplify your daily workflow so you can focus on what really matters.",
     icon: WorkflowMark,
   },
   {
@@ -239,13 +239,13 @@ const DEFAULT_FEATURES = [
   {
     title: "Real-Time Support",
     description:
-      "Our team is here whenever you need us. 24/7 chat, email, or scheduled onboarding—your success is our support priority.",
+      "Our team is here whenever you need us. 24/7 chat, email, or scheduled onboarding-your success is our support priority.",
     icon: SupportMark,
   },
   {
     title: "Unlimited Revisions",
     description:
-      "Keep refining until it feels just right. Our tools allow infinite adjustments—because good enough isn't good enough.",
+      "Keep refining until it feels just right. Our tools allow infinite adjustments-because good enough isn't good enough.",
     icon: RevisionsMark,
   },
 ] as const
@@ -259,7 +259,7 @@ export type ContentSectionFeature = {
 export default function ContentSection({
   eyebrow = "Tired of juggling tools and losing focus?",
   title = "Smart solutions for modern creators.",
-  description = "Upgrade your experience with premium features designed for control, flexibility, and performance—tools that help you build faster and smarter.",
+  description = "Upgrade your experience with premium features designed for control, flexibility, and performance-tools that help you build faster and smarter.",
   features = DEFAULT_FEATURES,
   className,
   ...props

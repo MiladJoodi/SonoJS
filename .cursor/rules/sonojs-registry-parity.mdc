@@ -1,9 +1,9 @@
 ---
-description: Docs UI and installable registry must be the same latest version — no stale payloads
+description: Docs UI and installable registry must be the same latest version - no stale payloads
 alwaysApply: true
 ---
 
-# SonoJS registry parity — single source
+# SonoJS registry parity - single source
 
 **Source of truth for UI:** `packages/ui/src/components/…`  
 `npm run registry:build` reads that source, rewrites imports to `@/…`, and writes `public/r/`.
@@ -12,7 +12,7 @@ alwaysApply: true
 |---|---|---|
 | Edit here | `packages/ui/src/components/…` | Docs preview + install payload |
 | Blocks / charts | `registry/blocks/`, `registry/charts/` | Still authored under `registry/` |
-| Built output | `public/r/<item>.json` | What `add` installs — never hand-edit |
+| Built output | `public/r/<item>.json` | What `add` installs - never hand-edit |
 
 Do **not** keep a second hand-edited copy under `registry/ui/`.
 

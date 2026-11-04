@@ -41,7 +41,7 @@ export default function BlockDataExportDocsPage() {
       <BlocksPageHeader
         title="Data Export"
         pathname="/blocks/files-media/data-export"
-        description="Full field picker, compact export card, scheduled email delivery, and export history — four production export flows."
+        description="Full field picker, compact export card, scheduled email delivery, and export history - four production export flows."
       />
 
       <div className="flex flex-col gap-8">

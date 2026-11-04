@@ -1,4 +1,4 @@
-/** Shared demo stage classes — full preview surface, no nested chrome. */
+/** Shared demo stage classes - full preview surface, no nested chrome. */
 export const CURSOR_STAGE_BASE =
   "relative h-[min(70vh,32rem)] min-h-[28rem] w-full overflow-hidden"
 

@@ -128,7 +128,7 @@ export default function TwoFactorForm({
             href="#"
             className="cursor-pointer font-medium text-destructive underline-offset-4 hover:underline"
           >
-            Deny — this wasn&apos;t me
+            Deny - this wasn&apos;t me
           </a>
         </p>
       </div>

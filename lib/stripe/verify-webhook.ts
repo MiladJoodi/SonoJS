@@ -66,7 +66,7 @@ function safeEqualHex(a: string, b: string): boolean {
 
 /**
  * Verify Stripe webhook signature (multi-v1 + timing-safe compare).
- * Call with the raw request body string — never a re-serialized JSON object.
+ * Call with the raw request body string - never a re-serialized JSON object.
  */
 export function verifyStripeWebhook(
   rawBody: string,

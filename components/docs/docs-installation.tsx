@@ -14,7 +14,7 @@ import { highlightCode } from "@/lib/highlight-code"
 /**
  * Installation: Command (`add`) + Manual (copy files from registry JSON).
  * Pass `names` when the page is a composition (e.g. date-picker → calendar + popover).
- * Gates on registry `access` (site only — CLI/MCP unchanged).
+ * Gates on registry `access` (site only - CLI/MCP unchanged).
  */
 export async function DocsInstallation({
   name,

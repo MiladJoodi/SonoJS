@@ -32,7 +32,7 @@ export default function BlockProductCategoriesDocsPage() {
       <BlocksPageHeader
         title="Product Categories"
         pathname="/blocks/ecommerce/product-categories"
-        description="Eight production category layouts — lookbook orbit, poster wall, apothecary tray, spotlight triptych, lookbook index, offer desk, wellness shelf, and marketplace hubs."
+        description="Eight production category layouts - lookbook orbit, poster wall, apothecary tray, spotlight triptych, lookbook index, offer desk, wellness shelf, and marketplace hubs."
       />
 
       <div className="flex flex-col gap-8">

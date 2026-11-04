@@ -1,4 +1,4 @@
-// Web: a constellation wires itself — the "connecting" state. Nodes drift
+// Web: a constellation wires itself - the "connecting" state. Nodes drift
 // on the sphere under slow value noise; any pair closer than `thr` grows an
 // edge, and bright packets run along randomly re-picked node pairs.
 

@@ -15,7 +15,7 @@ const exampleDefs = [
     name: "clothes-rack-default",
     title: "Default",
     description:
-      "Point at a garment to face it; click for the detail view. Parent must have a size — the rack fills it.",
+      "Point at a garment to face it; click for the detail view. Parent must have a size - the rack fills it.",
   },
 ]
 

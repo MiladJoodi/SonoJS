@@ -68,7 +68,7 @@ export default function MediaPlayer({
               id="media-player-05-heading"
               className="text-lg font-semibold tracking-tight"
             >
-              Episode 5 — Petal hour
+              Episode 5 - Petal hour
             </h1>
           </div>
           <p className="text-sm text-muted-foreground" dir="ltr">
@@ -93,7 +93,7 @@ export default function MediaPlayer({
               <div className="w-full max-w-sm rounded-[12px] border border-white/15 bg-zinc-900 p-5 text-start text-white shadow-soft">
                 <p className="text-xs text-white/60">Up next in {countdown}s</p>
                 <h2 className="mt-1 text-lg font-semibold">
-                  E6 — Night garden
+                  E6 - Night garden
                 </h2>
                 <Progress
                   value={((8 - (countdown ?? 0)) / 8) * 100}

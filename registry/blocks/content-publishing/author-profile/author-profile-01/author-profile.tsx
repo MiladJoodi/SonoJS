@@ -396,7 +396,7 @@ export default function AuthorProfile({
             Meet the people behind the content
           </h1>
           <p className="mt-3 text-base leading-relaxed text-muted-foreground">
-            Practitioners — engineers, designers, and builders sharing
+            Practitioners - engineers, designers, and builders sharing
             real-world experience.
           </p>
         </div>

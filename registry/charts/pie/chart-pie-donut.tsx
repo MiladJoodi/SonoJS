@@ -16,8 +16,8 @@ import { useChartDir } from "../_lib/use-chart-dir"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Chart Pie Donut (classic) — payment-method donut (`innerRadius={60}`).
- * Empty hole (no center Label) — distinct from Pie Donut Text. Tokens: `--chart-1…5`.
+ * Chart Pie Donut (classic) - payment-method donut (`innerRadius={60}`).
+ * Empty hole (no center Label) - distinct from Pie Donut Text. Tokens: `--chart-1…5`.
  * Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/chart-pie-donut.tsx
  */
@@ -106,7 +106,7 @@ const chartPieContainerClassName =
 
 function ChartPieDonut({
   title = "Payment methods",
-  subtitle = "Share by method — last 6 months.",
+  subtitle = "Share by method - last 6 months.",
   data = DEMO_DATA,
   className,
   plotDir,
@@ -267,7 +267,7 @@ function ChartPieDonut({
                 <span className="font-normal">of total</span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{caption}</p>

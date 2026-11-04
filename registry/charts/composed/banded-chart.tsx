@@ -27,7 +27,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Banded Chart — locked gallery chrome (navy × orange).
+ * Banded Chart - locked gallery chrome (navy × orange).
  * Confidence band (Area range) + actual sales Line; metric scrubber.
  * Installs to: components/charts/banded-chart.tsx
  */
@@ -456,7 +456,7 @@ function BandedChart({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">

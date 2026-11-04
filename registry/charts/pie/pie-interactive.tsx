@@ -30,7 +30,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Pie Interactive — month Select drives active sector + center value.
+ * Pie Interactive - month Select drives active sector + center value.
  * Hover can sync Select when `scrub`. Tokens: `--chart-1…5`. Spec: `registry/charts/PORT.md`
  * Classic twin: `chart-pie-interactive`.
  * Installs to: components/charts/pie-interactive.tsx
@@ -117,7 +117,7 @@ const chartPieContainerClassName =
 
 function PieInteractive({
   title = "Store sales by month",
-  subtitle = "Pick a month — the active slice expands and the center updates.",
+  subtitle = "Pick a month - the active slice expands and the center updates.",
   data = DEMO_DATA,
   className,
   plotDir,
@@ -148,7 +148,7 @@ function PieInteractive({
 
   const activeSlice = data[activeIndex] ?? data[0]
   const metricValue = activeSlice?.store ?? 0
-  const caption = activeSlice ? monthLabel(activeSlice.month) : "—"
+  const caption = activeSlice ? monthLabel(activeSlice.month) : "-"
 
   const startAngle = plotRtl ? -270 : 90
   const endAngle = plotRtl ? 90 : -270

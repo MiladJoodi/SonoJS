@@ -165,7 +165,7 @@ function InlineCitationCarouselItem({
   children,
   ...props
 }: InlineCitationCarouselItemProps) {
-  // Padding lives on an inner wrapper — Embla’s `-ms-4`/`ps-4` gutter would
+  // Padding lives on an inner wrapper - Embla’s `-ms-4`/`ps-4` gutter would
   // otherwise clip start-edge padding and glue text to the card border.
   return (
     <CarouselItem

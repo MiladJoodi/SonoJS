@@ -41,9 +41,19 @@ export const SONOJS_COMPONENT_ROOTS = new Set([
   "voice-selector",
 ])
 
-/** Install at `components/<name>` (sibling of `ui/`, not inside it). */
+/**
+ * Install at `components/<name>` (sibling of `ui/`, not inside it).
+ * `3d` nests as `components/3d/<item>/…`.
+ * `carousels` nests as `components/carousels/<item>/…`.
+ * `clothes-rack` stays flat under Components (also listed on `/3d`).
+ */
 /** @type {ReadonlySet<string>} */
-export const TOP_LEVEL_COMPONENT_ROOTS = new Set(["tweet-card", "clothes-rack"])
+export const TOP_LEVEL_COMPONENT_ROOTS = new Set([
+  "tweet-card",
+  "clothes-rack",
+  "3d",
+  "carousels",
+])
 
 /**
  * @param {string} spec - Path after `@sonojs/ui/components/`

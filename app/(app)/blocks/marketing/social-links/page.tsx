@@ -28,7 +28,7 @@ export default function BlockSocialLinksDocsPage() {
       <BlocksPageHeader
         title="Social Links"
         pathname="/blocks/marketing/social-links"
-        description="Link-in-bio profiles — glass card, dark cinematic, split magazine, and site-simple Sono chrome."
+        description="Link-in-bio profiles - glass card, dark cinematic, split magazine, and site-simple Sono chrome."
       />
 
       <div className="flex flex-col gap-8">

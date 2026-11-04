@@ -27,7 +27,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Candlestick Dashboard — locked gallery chrome + type-required symbol card.
+ * Candlestick Dashboard - locked gallery chrome + type-required symbol card.
  * KPI header (ticker / last / session change) + candles + volume strip.
  * Installs to: components/charts/candlestick-dashboard.tsx
  */
@@ -382,7 +382,7 @@ function CandlestickDashboard({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">
@@ -626,7 +626,7 @@ function CandlestickDashboard({
 
       <table className="sr-only">
         <caption>
-          {title}. {subtitle} {symbol} — {symbolName}.
+          {title}. {subtitle} {symbol} - {symbolName}.
         </caption>
         <thead>
           <tr>

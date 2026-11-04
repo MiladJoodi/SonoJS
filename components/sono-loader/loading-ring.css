@@ -1,4 +1,4 @@
-/* Self-contained liquid LoadingRing — scoped under .sonoLoadingRing (not CSS modules;
+/* Self-contained liquid LoadingRing - scoped under .sonoLoadingRing (not CSS modules;
    Tailwind v4 postcss + .module.css purity fails on injected preflight). */
 
 .sonoLoadingRing {

@@ -8,7 +8,7 @@ import type { OrbFrame } from "./core";
 
 /**
  * Geometry for one instant: pure math over (size, t, opts), no rendering
- * surface and no theme — `dark` only affects ink at paint time.
+ * surface and no theme - `dark` only affects ink at paint time.
  *
  * Deliberately closure-free and `Math`-only so the same function can run
  * inside a Reanimated worklet on the React Native UI thread, and so its

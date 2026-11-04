@@ -22,7 +22,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Legend Styles — dual bar + custom card legend with period totals.
+ * Legend Styles - dual bar + custom card legend with period totals.
  * Locked metric scrub; navy×orange; EN months.
  * Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/legend-styles.tsx
@@ -415,7 +415,7 @@ function LegendStyles({
                 {formatPct(deltaPct)}
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{caption}</p>

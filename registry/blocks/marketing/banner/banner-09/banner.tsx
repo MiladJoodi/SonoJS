@@ -25,7 +25,7 @@ export default function Banner({
           New
         </span>
         <span>
-          AI layout assistant — describe a page, get a block stack
+          AI layout assistant - describe a page, get a block stack
         </span>
         <a
           href="#"

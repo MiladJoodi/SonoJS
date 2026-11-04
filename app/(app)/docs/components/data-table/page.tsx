@@ -46,7 +46,7 @@ const exampleDefs = [
   },
 ]
 
-/** One file — no `./features` / `./payments` / `./column-helpers` imports. */
+/** One file - no `./features` / `./payments` / `./column-helpers` imports. */
 const usageSource = `"use client"
 
 import {
@@ -181,7 +181,7 @@ export default async function DataTableDocsPage() {
           <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
             @tanstack/react-table
           </code>
-          , then copy an example from the Code tab — each demo is a{" "}
+          , then copy an example from the Code tab - each demo is a{" "}
           <strong className="font-medium text-foreground">single file</strong>{" "}
           (no extra helpers to install). Prefer{" "}
           <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">

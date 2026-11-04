@@ -21,7 +21,7 @@ export function ListIndexNav({
   current,
   children,
   className,
-  /** Workspace shells sit below SiteHeader already — skip sticky header offset. */
+  /** Workspace shells sit below SiteHeader already - skip sticky header offset. */
   flush = false,
 }: {
   title?: string

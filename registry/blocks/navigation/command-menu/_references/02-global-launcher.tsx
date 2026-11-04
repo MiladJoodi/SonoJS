@@ -1,6 +1,6 @@
 /**
  * Pending: Navigation → Command Menu (02)
- * Job: Global ⌘K launcher — pages + actions + keyboard footer.
+ * Job: Global ⌘K launcher - pages + actions + keyboard footer.
  * Audit: semantic tokens · wrapping footer on narrow · shortcut/kbd dir=ltr ·
  * Enter hint uses ↵ (direction-neutral).
  */

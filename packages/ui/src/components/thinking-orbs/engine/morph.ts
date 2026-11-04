@@ -1,8 +1,8 @@
-// Morph: a dotted outline cycling circle → triangle → square → circle —
+// Morph: a dotted outline cycling circle → triangle → square → circle -
 // the "shaping" state. Each shape is a continuous closed path
 // parameterised by arc length (top-centre start, clockwise). Every
 // frame the engine blends the two neighbouring paths, then lays the
-// dots EVENLY along the blended outline — spacing stays uniform at
+// dots EVENLY along the blended outline - spacing stays uniform at
 // every instant of the morph, holds and transitions alike. Plain
 // circle fills only: no canvas/SVG filters, fully cross-browser.
 
@@ -71,7 +71,7 @@ const SEG = HOLD + MORPH;
 // This state was tuned in inkform, which paints it through a blur +
 // threshold "goo" filter; we draw plain circles instead, since `ctx.filter`
 // and SVG filter refs are not safe to rely on across Chrome / Safari /
-// Firefox. The dot GEOMETRY is identical either way — the threshold just
+// Firefox. The dot GEOMETRY is identical either way - the threshold just
 // yields a hard edge where a plain fill has an antialiased one, so these
 // dots read a touch softer than inkform's. Don't "correct" for that by
 // shrinking the radius: it makes the mark genuinely smaller than the tuning.

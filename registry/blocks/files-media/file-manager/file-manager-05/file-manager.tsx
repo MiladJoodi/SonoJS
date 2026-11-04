@@ -63,7 +63,7 @@ const ITEMS = [
   },
 ] as const
 
-/** Compact picker dialog — Attach from files. */
+/** Compact picker dialog - Attach from files. */
 export default function FileManager({
   className,
   ...props

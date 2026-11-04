@@ -28,7 +28,7 @@ export default function BlockApplicationFormDocsPage() {
       <BlocksPageHeader
         title="Application Form"
         pathname="/blocks/forms/application-form"
-        description="Early access, job apply, partnership RFP, and cohort enrollment — elevated cards on canvas."
+        description="Early access, job apply, partnership RFP, and cohort enrollment - elevated cards on canvas."
       />
 
       <div className="flex flex-col gap-8">

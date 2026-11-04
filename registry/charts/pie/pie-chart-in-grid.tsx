@@ -12,7 +12,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Pie Chart In Grid — CSS Grid of responsive donuts (layout teaching demo).
+ * Pie Chart In Grid - CSS Grid of responsive donuts (layout teaching demo).
  * Shared ring geometry; center cell captions; no metric scrub / on-slice labels.
  * Tokens: `--chart-1…4`. Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/pie-chart-in-grid.tsx
@@ -126,7 +126,7 @@ function GridDonut({
 
 function PieChartInGrid({
   title = "Pie charts in a CSS grid",
-  subtitle = "Same donut, different grid spans — resize the window to see responsive sizing.",
+  subtitle = "Same donut, different grid spans - resize the window to see responsive sizing.",
   data = DEMO_DATA,
   className,
 }: PieChartInGridProps) {
@@ -159,7 +159,7 @@ function PieChartInGrid({
         <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">
           grid-rows-3
         </code>{" "}
-        layout — try narrowing the viewport.
+        layout - try narrowing the viewport.
       </p>
 
       <div className="grid min-h-[400px] w-full grid-cols-3 grid-rows-3 gap-2.5 rounded-lg border border-border p-2.5">

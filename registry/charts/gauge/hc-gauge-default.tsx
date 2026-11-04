@@ -14,7 +14,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Hc Gauge Default — Highcharts dial with soft traffic plotBands.
+ * Hc Gauge Default - Highcharts dial with soft traffic plotBands.
  * Locked header chrome; English / Intl. Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/hc-gauge-default.tsx
  */
@@ -63,7 +63,7 @@ function buildOptions(value: number): Options {
 
 function HcGaugeDefault({
   title = "Score gauge",
-  subtitle = "Default Highcharts dial — soft green / gold / red bands.",
+  subtitle = "Default Highcharts dial - soft green / gold / red bands.",
   value = DEMO_VALUE,
   className,
 }: HcGaugeDefaultProps) {

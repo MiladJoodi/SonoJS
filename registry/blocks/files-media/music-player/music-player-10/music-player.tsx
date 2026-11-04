@@ -39,7 +39,7 @@ export default function MusicPlayer({
       <div className="mx-auto max-w-md px-4 text-center sm:px-6">
         <h1 className="text-lg font-semibold tracking-tight">Mini dock</h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          Bottom bar player — closed until you start listening.
+          Bottom bar player - closed until you start listening.
         </p>
         <Button
           type="button"

@@ -4,13 +4,13 @@ globs: lib/docs-nav.ts,app/(app)/docs/**/*
 alwaysApply: true
 ---
 
-# SonoJS docs — featured (green bullet) + Featured group
+# SonoJS docs - featured (green bullet) + Featured group
 
 ## Green bullet (`featured: true`)
 
 In `lib/docs-nav.ts`, `featured: true` shows a **bright green** sidebar bullet (`SidebarNavBullet`).
 
-Mark a docs page if it is **commonly used / core** for building UIs — something most apps reach for early:
+Mark a docs page if it is **commonly used / core** for building UIs - something most apps reach for early:
 
 - Primitives: Button, Input, Checkbox, Select, Switch, Label
 - Structure: Card, Accordion, Tabs, Dialog / Alert Dialog, Sheet
@@ -21,7 +21,7 @@ Do **not** feature niche / secondary items. Green should stay sparse.
 
 ## Featured group + `badge: "new"` (Components sidebar)
 
-Under `/docs/components`, the first collapsible group is **Featured** (`COMPONENTS_FEATURED_GROUP` in `lib/docs-nav.ts`) — a **manual** spotlight list (not every green-bullet item).
+Under `/docs/components`, the first collapsible group is **Featured** (`COMPONENTS_FEATURED_GROUP` in `lib/docs-nav.ts`) - a **manual** spotlight list (not every green-bullet item).
 
 - Add curated pages there with `badge: "new"` when you want a **New** chip.
 - Keep the same page in its normal category group (Social, Forms, …).

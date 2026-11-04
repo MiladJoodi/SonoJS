@@ -3,7 +3,7 @@
   "name": "setup-wizard-01",
   "type": "registry:block",
   "title": "setup-wizard-01",
-  "description": "Compact card wizard — separated stepper band, account, OTP, experience, launch (RTL/LTR).",
+  "description": "Compact card wizard - separated stepper band, account, OTP, experience, launch (RTL/LTR).",
   "access": "public",
   "dependencies": [
     "lucide-react"
@@ -40,6 +40,6 @@
       "target": "components/blocks/onboarding/setup-wizard-01/setup-wizard.tsx"
     }
   ],
-  "version": "0.1.0+c9c3d2a86e47",
-  "generatedAt": "2026-11-03T21:57:48.548Z"
+  "version": "0.1.0+3fe3a15cbaf2",
+  "generatedAt": "2026-11-04T11:52:24.655Z"
 }

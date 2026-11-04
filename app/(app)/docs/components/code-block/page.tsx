@@ -53,7 +53,7 @@ export default async function CodeBlockDocsPage() {
         description={
           <p className="leading-relaxed text-muted-foreground">
             A syntax-highlighted code block for AI-generated code, with copy
-            support — streaming Writing status, line numbers, and highlights.
+            support - streaming Writing status, line numbers, and highlights.
             Content stays{" "}
             <code className="sono-inline-code">dir=&quot;ltr&quot;</code>.
           </p>
@@ -82,7 +82,7 @@ export default async function CodeBlockDocsPage() {
             {
               name: "code",
               type: "string",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Source text to highlight.",
             },
             {
@@ -94,7 +94,7 @@ export default async function CodeBlockDocsPage() {
             {
               name: "filename",
               type: "ReactNode",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Optional filename in the header.",
             },
             {
@@ -136,13 +136,13 @@ export default async function CodeBlockDocsPage() {
             {
               name: "onCopy",
               type: "() => void",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Optional override for the copy action.",
             },
             {
               name: "className",
               type: "string",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Optional class names on the root.",
             },
           ]}

@@ -40,7 +40,7 @@ export default function SocialLoginForm({
             </h1>
             <p className="max-w-sm text-sm leading-relaxed text-zinc-400">
               Social sign-in gets people into the product without another
-              password — the default people expect in 2026.
+              password - the default people expect in 2026.
             </p>
           </div>
         </div>

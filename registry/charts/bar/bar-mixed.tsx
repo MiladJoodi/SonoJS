@@ -23,7 +23,7 @@ import { chartBarContainerClassName } from "../_lib/chart-styles"
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Bar Mixed (classic) — locked gallery chrome; type-required horizontal bars
+ * Bar Mixed (classic) - locked gallery chrome; type-required horizontal bars
  * with per-category fills (`--chart-1…5`). Metric header scrubber.
  * Installs to: components/charts/bar-mixed.tsx
  */
@@ -448,7 +448,7 @@ function BarMixed({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{activeRegion}</p>

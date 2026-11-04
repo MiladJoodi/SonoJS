@@ -15,7 +15,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Chart Radial Simple (classic) — concentric radial bars of region sales.
+ * Chart Radial Simple (classic) - concentric radial bars of region sales.
  * Locked metric scrub chrome; no Card shell. Tokens: `--chart-1…5`.
  * Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/chart-radial-simple.tsx
@@ -105,7 +105,7 @@ const chartRadialContainerClassName =
 
 function ChartRadialSimple({
   title = "Sales by region",
-  subtitle = "Radial bars — last 6 months.",
+  subtitle = "Radial bars - last 6 months.",
   data = DEMO_DATA,
   className,
   plotDir,
@@ -267,7 +267,7 @@ function ChartRadialSimple({
                 <span className="font-normal">of total</span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{caption}</p>

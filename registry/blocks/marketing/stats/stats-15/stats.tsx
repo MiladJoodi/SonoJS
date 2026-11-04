@@ -33,7 +33,7 @@ export default function Stats({
             <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
               Kickstart your online presence with a sleek, professional design
               built for modern startups. This template is fully responsive and
-              optimized for performance—ideal for showcasing your product and
+              optimized for performance-ideal for showcasing your product and
               converting visitors into customers.
             </p>
           </div>

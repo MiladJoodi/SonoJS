@@ -42,7 +42,7 @@ export default function BlockBlogDocsPage() {
       <BlocksPageHeader
         title="Blog"
         pathname="/blocks/marketing/blog"
-        description="Article grids and post cards — covers, titles, and short excerpts."
+        description="Article grids and post cards - covers, titles, and short excerpts."
       />
 
       <div className="flex flex-col gap-8">

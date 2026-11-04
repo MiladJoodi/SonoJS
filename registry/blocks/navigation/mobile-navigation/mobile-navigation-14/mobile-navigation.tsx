@@ -44,7 +44,7 @@ const islandCopy: Record<
   library: {
     tone: "play",
     title: "Now playing",
-    detail: "Midnight Drive — Nora",
+    detail: "Midnight Drive - Nora",
   },
   you: {
     tone: "idle",

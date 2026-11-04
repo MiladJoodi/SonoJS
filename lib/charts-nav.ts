@@ -29,7 +29,7 @@ export type ChartsNavGroup = {
   items: ChartsNavItem[]
 }
 
-/** One collapsible group per category — demos nested like FarsiUI chart shell. */
+/** One collapsible group per category - demos nested like FarsiUI chart shell. */
 export const chartsNav: ChartsNavGroup[] = CHART_CATEGORIES.map((category) => {
   const meta = CHART_CATEGORY_META[category]
   const entries = getChartsByCategory(category)

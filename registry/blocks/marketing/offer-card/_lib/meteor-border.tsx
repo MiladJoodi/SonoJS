@@ -291,7 +291,7 @@ export function MeteorBorder({
       className={cn("group relative overflow-hidden", className)}
       style={{ padding: borderWidth, borderRadius }}
     >
-      {/* Soft ring — sits under the card; keep transparent clip so corners
+      {/* Soft ring - sits under the card; keep transparent clip so corners
           never flash a dark fill through AA gaps (was bg-zinc-950). */}
       <div
         className="absolute inset-0 bg-foreground/10 dark:bg-white/10"

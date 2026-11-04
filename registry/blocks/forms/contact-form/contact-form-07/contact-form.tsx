@@ -68,7 +68,7 @@ export default function ContactForm({
             Connect with our studio
           </h2>
           <p className="text-base leading-relaxed text-muted-foreground">
-            Prefer a call, email, or a short brief? Use the form — or reach us
+            Prefer a call, email, or a short brief? Use the form - or reach us
             directly from the panel.
           </p>
         </div>

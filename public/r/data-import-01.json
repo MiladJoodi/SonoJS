@@ -3,7 +3,7 @@
   "name": "data-import-01",
   "type": "registry:block",
   "title": "data-import-01",
-  "description": "Contacts import progress — overall percent, row count, and step checklist.",
+  "description": "Contacts import progress - overall percent, row count, and step checklist.",
   "access": "public",
   "dependencies": [
     "lucide-react"
@@ -36,6 +36,6 @@
       "target": "components/blocks/onboarding/data-import-01/data-import.tsx"
     }
   ],
-  "version": "0.1.0+c9c3d2a86e47",
-  "generatedAt": "2026-11-03T21:57:48.548Z"
+  "version": "0.1.0+3fe3a15cbaf2",
+  "generatedAt": "2026-11-04T11:52:24.655Z"
 }

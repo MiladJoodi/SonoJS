@@ -27,7 +27,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Bubble Chart — dual-series scatter with `ZAxis` sizing (navy × orange).
+ * Bubble Chart - dual-series scatter with `ZAxis` sizing (navy × orange).
  * Teaching delta vs `simple-scatter-chart`: bubble radius encodes `z`.
  * Locked chrome + metric scrubber. Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/bubble-chart.tsx
@@ -75,7 +75,7 @@ type FlatPoint = BubbleChartPoint & {
   id: string
 }
 
-/** Group A — height × weight × activity score. */
+/** Group A - height × weight × activity score. */
 const DEMO_A: BubbleChartPoint[] = [
   { x: 158, y: 52, z: 80 },
   { x: 162, y: 58, z: 140 },
@@ -87,7 +87,7 @@ const DEMO_A: BubbleChartPoint[] = [
   { x: 180, y: 79, z: 280 },
 ]
 
-/** Group B — slightly taller / heavier cluster. */
+/** Group B - slightly taller / heavier cluster. */
 const DEMO_B: BubbleChartPoint[] = [
   { x: 166, y: 70, z: 120 },
   { x: 169, y: 74, z: 190 },
@@ -147,7 +147,7 @@ function flattenSeries(
 
 function BubbleChart({
   title = "Height vs Weight",
-  subtitle = "Bubble size encodes activity score — teaching ZAxis sizing.",
+  subtitle = "Bubble size encodes activity score - teaching ZAxis sizing.",
   seriesA = DEMO_A,
   seriesB = DEMO_B,
   seriesALabel = "Group A",
@@ -508,7 +508,7 @@ function BubbleChart({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{caption}</p>

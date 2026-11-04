@@ -8,7 +8,7 @@ import { Slot } from "radix-ui"
 const RAINBOW =
   "linear-gradient(90deg,var(--color-1),var(--color-5),var(--color-3),var(--color-4),var(--color-2))"
 
-/** Shell paints as inline styles — Tailwind never emits every long bg-[linear-gradient] utility. */
+/** Shell paints as inline styles - Tailwind never emits every long bg-[linear-gradient] utility. */
 const SHELLS = {
   default: {
     backgroundImage: `linear-gradient(#121213,#121213),linear-gradient(#121213 50%,rgba(18,18,19,0.6) 80%,rgba(18,18,19,0)),${RAINBOW}`,
@@ -44,13 +44,13 @@ const rainbowButtonVariants = cva(
     "outline-none focus-visible:ring-[3px] focus-visible:ring-ring/40 aria-invalid:border-destructive",
     "disabled:pointer-events-none disabled:opacity-50",
     "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
-    // Shared under-glow (single class — reliably emitted)
+    // Shared under-glow (single class - reliably emitted)
     "before:pointer-events-none before:absolute before:bottom-[-20%] before:left-1/2 before:-z-10 before:h-1/5 before:w-3/5 before:-translate-x-1/2 before:animate-rainbow before:bg-[linear-gradient(90deg,var(--color-1),var(--color-5),var(--color-3),var(--color-4),var(--color-2))] before:bg-[length:200%] before:[filter:blur(0.75rem)]"
   ),
   {
     variants: {
       size: {
-        /* Same scale as Button — default 46px on mobile/tablet/desktop */
+        /* Same scale as Button - default 46px on mobile/tablet/desktop */
         default: "h-[46px] gap-2 px-4 has-[>svg]:px-3",
         xs: "h-8 gap-1 rounded-md px-2.5 text-xs has-[>svg]:px-2 [&_svg:not([class*='size-'])]:size-3.5",
         sm: "h-10 gap-1.5 rounded-md px-3 has-[>svg]:px-2.5 [&_svg:not([class*='size-'])]:size-3.5",
@@ -109,7 +109,7 @@ function RainbowButton({
     asChild?: boolean
   }) {
   const Comp = asChild ? Slot.Root : "button"
-  // false on server + first hydration paint — avoids theme mismatch vs <html class="dark">
+  // false on server + first hydration paint - avoids theme mismatch vs <html class="dark">
   const mounted = React.useSyncExternalStore(
     () => () => {},
     () => true,

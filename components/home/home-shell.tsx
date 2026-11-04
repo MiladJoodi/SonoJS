@@ -3,7 +3,7 @@ import type { ReactNode } from "react"
 import { cn } from "@/lib/utils"
 
 /**
- * Homepage body — matches `I:/Github/new/Sono/SonoJs` effective width.
+ * Homepage body - matches `I:/Github/new/Sono/SonoJs` effective width.
  * That repo marks `max-w-[1180px]`, but unlayered `.workspace-shell`
  * (`--content-max: 1600px`) wins, so the visible column is 1600px.
  */

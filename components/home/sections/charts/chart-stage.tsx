@@ -103,7 +103,7 @@ export function HomeChartStage({
 
   return (
     <div className={cn("relative w-full min-w-0", className)}>
-      {/* Same white card every time — absolute lock so swap cannot resize it */}
+      {/* Same white card every time - absolute lock so swap cannot resize it */}
       <div className="relative w-full min-w-0 overflow-visible pb-4 sm:pb-6">
         <div className="relative h-[22rem] w-full sm:h-[25rem] lg:h-[27rem]">
           <div className="absolute inset-0 overflow-hidden rounded-[12px] border border-border/70 bg-card shadow-soft sm:rounded-[14px]">

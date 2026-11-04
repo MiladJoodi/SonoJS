@@ -62,7 +62,7 @@ export default function ProductCategories({
             Featured Categories
           </h2>
           <p className="mt-2 text-sm text-muted-foreground">
-            Three full-bleed drops — discount up front, checkout one tap away.
+            Three full-bleed drops - discount up front, checkout one tap away.
           </p>
         </div>
 

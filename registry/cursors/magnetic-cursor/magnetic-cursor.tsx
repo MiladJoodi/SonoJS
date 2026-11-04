@@ -110,7 +110,7 @@ export function Magnetic({
 
 export interface MagneticCursorProps extends MagneticProps {}
 
-/** Alias for {@link Magnetic} — installable cursor slug name. */
+/** Alias for {@link Magnetic} - installable cursor slug name. */
 export function MagneticCursor(props: MagneticCursorProps) {
   return <Magnetic {...props} />
 }

@@ -15,7 +15,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Bundle Size Treemap — hierarchical JS client bundle (KB) by package group.
+ * Bundle Size Treemap - hierarchical JS client bundle (KB) by package group.
  * Flat Recharts Treemap; locked metric scrub chrome; tokens `--chart-1…5`.
  * Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/bundle-size-treemap.tsx
@@ -61,7 +61,7 @@ const GROUP_LABELS: Record<string, string> = {
   polyfills: "Polyfills",
 }
 
-/** Sample client bundle (KB) — EN package names. */
+/** Sample client bundle (KB) - EN package names. */
 const DEMO_DATA: BundleSizeGroup[] = [
   {
     name: "framework",
@@ -269,7 +269,7 @@ function BundleTreemapCell(props: CellProps) {
 
 function BundleSizeTreemap({
   title = "Client bundle size",
-  subtitle = "JavaScript weight by package group — hover a tile to scrub.",
+  subtitle = "JavaScript weight by package group - hover a tile to scrub.",
   data = DEMO_DATA,
   className,
   scrub = true,
@@ -445,7 +445,7 @@ function BundleSizeTreemap({
                 <span className="font-normal">of bundle</span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{caption}</p>

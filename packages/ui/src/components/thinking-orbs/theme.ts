@@ -73,7 +73,7 @@ export function useResolvedDark(
   return autoDark;
 }
 
-/** Live `prefers-reduced-motion` — reduced users get a static frame. */
+/** Live `prefers-reduced-motion` - reduced users get a static frame. */
 export function useReducedMotion(): boolean {
   const [reduced, setReduced] = useState(
     () =>

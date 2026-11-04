@@ -69,7 +69,7 @@ export default async function KbdDocsPage() {
         description={
           <p className="leading-relaxed text-muted-foreground">
           Display keyboard keys and chords in docs, tooltips, buttons, and
-          search fields. Non-interactive —{" "}
+          search fields. Non-interactive -{" "}
           <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
             pointer-events-none
           </code>
@@ -105,13 +105,13 @@ export default async function KbdDocsPage() {
             {
               name: "className",
               type: "string",
-              defaultValue: "—",
-              description: "On `Kbd` or `KbdGroup` — merge extra Tailwind classes.",
+              defaultValue: "-",
+              description: "On `Kbd` or `KbdGroup` - merge extra Tailwind classes.",
             },
             {
               name: "…kbd props",
               type: "React.ComponentProps<\"kbd\">",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Native attributes pass through to the element.",
             },
           ]}

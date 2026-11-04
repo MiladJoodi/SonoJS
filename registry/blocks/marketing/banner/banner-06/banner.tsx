@@ -21,7 +21,7 @@ export default function Banner({
     >
       <TicketIcon className="size-3.5 shrink-0 text-primary" aria-hidden />
       <p className="min-w-0 text-balance">
-        Workshop pass —{" "}
+        Workshop pass -{" "}
         <a
           href="#"
           className="cursor-pointer font-semibold text-primary underline underline-offset-2"

@@ -31,7 +31,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Positive And Negative Bar Chart — locked gallery chrome (navy × orange).
+ * Positive And Negative Bar Chart - locked gallery chrome (navy × orange).
  * Grouped dual series that cross zero + signed Y ticks + zero reference line.
  * Installs to: components/charts/positive-and-negative-bar-chart.tsx
  */
@@ -493,7 +493,7 @@ function PositiveNegativeBarChart({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">

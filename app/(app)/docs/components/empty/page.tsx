@@ -96,7 +96,7 @@ export default async function EmptyDocsPage() {
         pathname="/docs/components/empty"
         description={
           <p className="leading-relaxed text-muted-foreground">
-          Display an empty state when there is no data yet — first-run screens,
+          Display an empty state when there is no data yet - first-run screens,
           cleared filters, offline users, or 404-style search.
         </p>
         }
@@ -131,14 +131,14 @@ export default async function EmptyDocsPage() {
               type: '"default" | "icon"',
               defaultValue: '"default"',
               description:
-                "On EmptyMedia — icon wraps children in a muted square; default is transparent for avatars.",
+                "On EmptyMedia - icon wraps children in a muted square; default is transparent for avatars.",
             },
             {
               name: "className",
               type: "string",
-              defaultValue: "—",
+              defaultValue: "-",
               description:
-                "On Empty — add border, background, or size utilities for layout variants.",
+                "On Empty - add border, background, or size utilities for layout variants.",
             },
           ]}
         />

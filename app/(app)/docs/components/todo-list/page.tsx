@@ -55,7 +55,7 @@ export default async function TodoListDocsPage() {
         description={
           <p className="leading-relaxed text-muted-foreground">
             A collapsible task list that shows an AI agent&apos;s plan and
-            progress — status icons, rolling counts, and disclosure animation.
+            progress - status icons, rolling counts, and disclosure animation.
           </p>
         }
       />
@@ -78,7 +78,7 @@ export default async function TodoListDocsPage() {
             {
               name: "items",
               type: "TodoItem[]",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Tasks with id, title, and optional status/detail.",
             },
             {
@@ -96,7 +96,7 @@ export default async function TodoListDocsPage() {
             {
               name: "onOpenChange",
               type: "(open: boolean) => void",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Fires when the header expands or collapses.",
             },
             {
@@ -114,7 +114,7 @@ export default async function TodoListDocsPage() {
             {
               name: "className",
               type: "string",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Optional class names on the root section.",
             },
           ]}

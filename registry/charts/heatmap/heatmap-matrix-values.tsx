@@ -11,7 +11,7 @@ import {
 } from "../_lib/heatmap-shared"
 
 /**
- * Heatmap Matrix Values — day × hour grid with in-cell counts when wide enough.
+ * Heatmap Matrix Values - day × hour grid with in-cell counts when wide enough.
  * Soft green `--chart-up`; RTL flips columns.
  * Installs to: components/charts/heatmap-matrix-values.tsx
  */
@@ -20,7 +20,7 @@ const HOURS = Array.from({ length: 24 }, (_, i) => String(i))
 const DEMO_VALUES = generateMatrixHeatData(7, 24, 5511)
 const DEMO_ROWS = [...EN_WEEKDAYS_FULL]
 
-/** All props optional — demo fills rows/cols/values when omitted. */
+/** All props optional - demo fills rows/cols/values when omitted. */
 export type HeatmapMatrixValuesProps = Partial<MatrixHeatmapProps>
 
 function HeatmapMatrixValues({
@@ -49,7 +49,7 @@ function HeatmapMatrixValues({
   )
 }
 
-/** Docs / gallery default export — `<HeatmapMatrixValuesDemo />` needs no props. */
+/** Docs / gallery default export - `<HeatmapMatrixValuesDemo />` needs no props. */
 export default function HeatmapMatrixValuesDemo(
   props: HeatmapMatrixValuesProps = {}
 ) {

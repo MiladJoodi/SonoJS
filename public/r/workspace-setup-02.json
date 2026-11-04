@@ -3,7 +3,7 @@
   "name": "workspace-setup-02",
   "type": "registry:block",
   "title": "workspace-setup-02",
-  "description": "Org + plan picker — organization, region, and Creator/Team/Agency radio cards (RTL/LTR).",
+  "description": "Org + plan picker - organization, region, and Creator/Team/Agency radio cards (RTL/LTR).",
   "access": "public",
   "dependencies": [
     "lucide-react"
@@ -41,6 +41,6 @@
       "target": "components/blocks/onboarding/workspace-setup-02/workspace-setup.tsx"
     }
   ],
-  "version": "0.1.0+c9c3d2a86e47",
-  "generatedAt": "2026-11-03T21:57:48.548Z"
+  "version": "0.1.0+3fe3a15cbaf2",
+  "generatedAt": "2026-11-04T11:52:24.655Z"
 }

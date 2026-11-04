@@ -52,7 +52,7 @@ function assetSrc(asset: string | { src: string }) {
 const COURSE = {
   title: "Design Systems in Practice",
   tagline:
-    "Build, document and ship a component library your team will actually use — from tokens to release process.",
+    "Build, document and ship a component library your team will actually use - from tokens to release process.",
   instructor: {
     name: "Dr. Lena Okafor",
     role: "Principal Design Engineer",
@@ -114,9 +114,9 @@ const COHORTS: Cohort[] = [
 ]
 
 const LEVELS = [
-  { value: "beginner", label: "Beginner — new to design systems" },
-  { value: "intermediate", label: "Intermediate — contributed to one" },
-  { value: "advanced", label: "Advanced — I maintain one today" },
+  { value: "beginner", label: "Beginner - new to design systems" },
+  { value: "intermediate", label: "Intermediate - contributed to one" },
+  { value: "advanced", label: "Advanced - I maintain one today" },
 ] as const
 
 type LevelId = (typeof LEVELS)[number]["value"]
@@ -276,7 +276,7 @@ export default function CourseEnrollmentForm({
   )
 
   const cohort = COHORTS.find((c) => c.id === cohortId)
-  const levelLabel = LEVELS.find((l) => l.value === level)?.label.split(" — ")[0]
+  const levelLabel = LEVELS.find((l) => l.value === level)?.label.split(" - ")[0]
 
   /* Pricing ----------------------------------------------------------------- */
 
@@ -506,7 +506,7 @@ export default function CourseEnrollmentForm({
                 You&apos;re in, {name.trim().split(" ")[0]}.
               </h2>
               <p className="mx-auto max-w-md text-pretty text-sm leading-6 text-muted-foreground">
-                This is a demo — you haven&apos;t been enrolled, charged or
+                This is a demo - you haven&apos;t been enrolled, charged or
                 emailed at {email.trim()}. The receipt below is for
                 illustration only.
               </p>
@@ -680,7 +680,7 @@ export default function CourseEnrollmentForm({
                 </RadioGroup>
                 {!show("cohort") ? (
                   <FieldDescription>
-                    Autumn weekend is full — join the next cohort instead.
+                    Autumn weekend is full - join the next cohort instead.
                   </FieldDescription>
                 ) : null}
                 <FieldError>{show("cohort")}</FieldError>
@@ -863,7 +863,7 @@ export default function CourseEnrollmentForm({
                           {PROMO.code}
                         </span>
                         <span className="truncate">
-                          applied — {PROMO.percent}% off
+                          applied - {PROMO.percent}% off
                         </span>
                       </span>
                       <button
@@ -1056,7 +1056,7 @@ export default function CourseEnrollmentForm({
                 )}
               </Button>
               <p className="text-center text-xs leading-5 text-muted-foreground">
-                Demo form — you won&apos;t be charged, enrolled or emailed.
+                Demo form - you won&apos;t be charged, enrolled or emailed.
               </p>
             </div>
           </form>

@@ -22,7 +22,7 @@ import { chartBarContainerClassName } from "../_lib/chart-styles"
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Waterfall — locked gallery chrome + chart-local up/down/total fills.
+ * Waterfall - locked gallery chrome + chart-local up/down/total fills.
  * Floating range bars from a running total; metric header scrubber.
  * Installs to: components/charts/waterfall.tsx
  */
@@ -30,7 +30,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 export type WaterfallRawPoint = {
   name: string
   value: number
-  /** Final / subtotal column — drawn from 0, does not advance the running total. */
+  /** Final / subtotal column - drawn from 0, does not advance the running total. */
   isTotal?: boolean
 }
 
@@ -55,7 +55,7 @@ export type WaterfallProps = {
 const NARROW_MQ = "(max-width: 639px)"
 const AXIS_TICK_FILL =
   "color-mix(in oklab, var(--foreground) 58%, transparent)"
-/** Top radius — matches `--radius-md` / control scale (~8px). */
+/** Top radius - matches `--radius-md` / control scale (~8px). */
 const BAR_RADIUS: [number, number, number, number] = [8, 8, 0, 0]
 
 const COLORS = {
@@ -64,7 +64,7 @@ const COLORS = {
   down: "var(--chart-down)",
 } as const
 
-/** P&L bridge — revenue in, costs out, profit total. */
+/** P&L bridge - revenue in, costs out, profit total. */
 const DEMO_RAW: WaterfallRawPoint[] = [
   { name: "Revenue", value: 420 },
   { name: "Services", value: 210 },
@@ -201,7 +201,7 @@ function WaterfallTooltip({
   active?: boolean
   payload?: ReadonlyArray<{ payload?: WaterfallPoint }>
   locale: string
-  /** Page/preview writing direction — plot island is LTR. */
+  /** Page/preview writing direction - plot island is LTR. */
   dir: "ltr" | "rtl"
 }) {
   if (!(active && payload?.length)) return null
@@ -477,7 +477,7 @@ function WaterfallChart({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">

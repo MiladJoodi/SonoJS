@@ -27,7 +27,7 @@ import { useNarrowViewport } from "../_lib/use-narrow-viewport"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Chart Area Stacked (classic) — locked gallery chrome; stacked Desktop×Mobile.
+ * Chart Area Stacked (classic) - locked gallery chrome; stacked Desktop×Mobile.
  * Natural areas + footer series keys + metric header scrubber.
  * Installs to: components/charts/chart-area-stacked.tsx
  * Distinct from gallery `stacked-area-chart` (three series) and classic `chart-area-legend`.
@@ -55,7 +55,7 @@ const AREA_MS = 200
 const AXIS_TICK_FILL =
   "color-mix(in oklab, var(--foreground) 58%, transparent)"
 
-/** Classic visitor volumes — Desktop×Mobile, January to June 2026. */
+/** Classic visitor volumes - Desktop×Mobile, January to June 2026. */
 const DEMO_DATA: ChartAreaStackedPoint[] = [
   { month: "2026-01-01", desktop: 186, mobile: 80 },
   { month: "2026-02-01", desktop: 305, mobile: 200 },
@@ -128,7 +128,7 @@ function niceMax(values: number[]) {
 
 function ChartAreaStacked({
   title = "Visitor traffic",
-  subtitle = "Stacked Desktop × Mobile — January to June 2026.",
+  subtitle = "Stacked Desktop × Mobile - January to June 2026.",
   data = DEMO_DATA,
   className,
   plotDir,
@@ -366,7 +366,7 @@ function ChartAreaStacked({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{monthLabel}</p>

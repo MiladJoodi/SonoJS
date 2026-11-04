@@ -16,7 +16,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Chart Pie Label List (classic) — full pie with always-on region name LabelList.
+ * Chart Pie Label List (classic) - full pie with always-on region name LabelList.
  * On-fill ink `#ffffff`; `isAnimationActive={false}`. Tokens: `--chart-1…5`.
  * Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/chart-pie-label-list.tsx
@@ -270,7 +270,7 @@ function ChartPieLabelList({
                 <span className="font-normal">of total</span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{caption}</p>
@@ -319,7 +319,7 @@ function ChartPieLabelList({
               endAngle={endAngle}
               stroke="var(--background)"
               strokeWidth={2}
-              // Always-on on-fill labels — skip enter animation to avoid blink.
+              // Always-on on-fill labels - skip enter animation to avoid blink.
               isAnimationActive={false}
               onMouseEnter={
                 scrub ? (_, index) => activate(index) : undefined

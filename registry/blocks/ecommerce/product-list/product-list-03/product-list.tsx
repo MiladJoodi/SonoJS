@@ -42,7 +42,7 @@ const PRODUCTS = [
     price: "$14.00",
     image: assetSrc(shoe3),
     alt: "Velvet Boots",
-    description: "Soft shaft, stacked heel — weekend dinner ready.",
+    description: "Soft shaft, stacked heel - weekend dinner ready.",
     tones: ["#3f1f1f", "#9a3412", "#fef3c7"],
   },
   {
@@ -204,7 +204,7 @@ export default function ProductList({
             Runway rail
           </h2>
           <p className="mt-2 max-w-lg text-start text-sm text-muted-foreground">
-            Split cards with colorways — shop like a buyer’s rack, not a grid of
+            Split cards with colorways - shop like a buyer’s rack, not a grid of
             twins.
           </p>
         </div>

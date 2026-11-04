@@ -1027,7 +1027,7 @@ export const PromptInput = React.forwardRef<HTMLDivElement, PromptInputProps>(
               </button>
             </div>
 
-            {/* Audio wave visualizer — sits before the mic/send control on the end edge */}
+            {/* Audio wave visualizer - sits before the mic/send control on the end edge */}
             <div
               className={cn(
                 "absolute end-12 bottom-2 z-10 flex h-8 items-center justify-end gap-[3px] transition-all duration-400 ease-[cubic-bezier(0.175,0.885,0.32,1.275)]",

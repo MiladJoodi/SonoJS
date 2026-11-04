@@ -27,7 +27,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Target Price Chart — locked gallery chrome (navy × orange).
+ * Target Price Chart - locked gallery chrome (navy × orange).
  * Consensus range Area + price Line + dashed analyst target; metric scrubber.
  * Installs to: components/charts/target-price-chart.tsx
  */
@@ -444,7 +444,7 @@ function TargetPriceChart({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">

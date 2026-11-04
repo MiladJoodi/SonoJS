@@ -59,7 +59,7 @@ export default async function AlertDocsPage() {
         pathname="/docs/components/alert"
         description={
           <p className="leading-relaxed text-muted-foreground">
-          Displays a callout for important messages — success, info, or errors —
+          Displays a callout for important messages - success, info, or errors -
           with optional icon, title, description, and action.
         </p>
         }

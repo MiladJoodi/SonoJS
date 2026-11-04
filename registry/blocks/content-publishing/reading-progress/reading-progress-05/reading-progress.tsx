@@ -10,7 +10,7 @@ const READ_MINUTES = 11
 const ARTICLE = {
   series: "Essay · Summer 2026",
   title: "The quiet interface: designing for attention, not dopamine",
-  dek: "A field note on slowing the scroll — progress as place, not a percentage shout.",
+  dek: "A field note on slowing the scroll - progress as place, not a percentage shout.",
   author: "Noor Haddad",
   role: "Design lead",
   date: "Aug 4, 2026",
@@ -20,7 +20,7 @@ const ARTICLE = {
       heading: "Signal over noise",
       paragraphs: [
         "Most reading chrome shouts. Bars race across the top, docks claim the thumb zone, pills float like notifications. The reader never forgets they are being measured.",
-        "A quieter pattern treats progress as place. You always know where you are in the essay, but the chrome stays at the edge — a spine, not a banner.",
+        "A quieter pattern treats progress as place. You always know where you are in the essay, but the chrome stays at the edge - a spine, not a banner.",
       ],
     },
     {
@@ -35,7 +35,7 @@ const ARTICLE = {
       id: "tempo",
       heading: "Tempo and remaining time",
       paragraphs: [
-        "Show remaining minutes only when it helps — mid-read, not at the first pixel. Round gently so the number does not jitter every scroll frame.",
+        "Show remaining minutes only when it helps - mid-read, not at the first pixel. Round gently so the number does not jitter every scroll frame.",
         "When the reader reaches the end, swap the HUD for a finished state. Completion should feel like closing a book, not clearing a quest.",
       ],
     },
@@ -44,7 +44,7 @@ const ARTICLE = {
       heading: "Typography as the product",
       paragraphs: [
         "If the chrome is quiet, the type has to carry the experience. Generous leading, a clear dek, and section titles that earn their weight.",
-        "Pull quotes and short paragraphs give the spine room to breathe. Short demos make every tick fire at once — long copy is part of the interaction design.",
+        "Pull quotes and short paragraphs give the spine room to breathe. Short demos make every tick fire at once - long copy is part of the interaction design.",
       ],
     },
     {
@@ -133,7 +133,7 @@ export default function ReadingProgress({
       aria-labelledby="reading-progress-05-heading"
       {...props}
     >
-      {/* End-edge vertical spine — exclusive to this variant */}
+      {/* End-edge vertical spine - exclusive to this variant */}
       <div
         className="pointer-events-none fixed end-3 top-1/2 z-40 hidden -translate-y-1/2 sm:end-5 md:flex"
         aria-hidden
@@ -201,7 +201,7 @@ export default function ReadingProgress({
         </div>
       </div>
 
-      {/* Mobile / compact HUD — bottom-end chip, not a full dock */}
+      {/* Mobile / compact HUD - bottom-end chip, not a full dock */}
       <div className="fixed end-4 bottom-4 z-40 md:hidden">
         <div
           className="flex items-center gap-3 rounded-full border border-border/70 bg-card/95 py-2 ps-3 pe-2.5 shadow-soft backdrop-blur-sm"
@@ -284,7 +284,7 @@ export default function ReadingProgress({
           </span>
         </div>
 
-        {/* Desktop chapter label under meta — tied to spine */}
+        {/* Desktop chapter label under meta - tied to spine */}
         <div
           className="sticky top-0 z-30 -mx-4 mb-10 hidden border-b border-border/60 bg-white/90 px-4 py-3 backdrop-blur-md md:block dark:bg-background/90"
           role="status"
@@ -322,7 +322,7 @@ export default function ReadingProgress({
               </h2>
               {index === 1 ? (
                 <blockquote className="mb-6 border-s-2 border-foreground/80 ps-5 text-xl font-medium leading-snug text-foreground">
-                  Progress should feel like place — a spine you can touch —
+                  Progress should feel like place - a spine you can touch -
                   not a timer racing the thumb.
                 </blockquote>
               ) : null}
@@ -343,7 +343,7 @@ export default function ReadingProgress({
         <footer className="mt-20 border-t border-border/70 pt-8 text-start">
           <p className="text-sm text-muted-foreground">
             {done
-              ? "You reached the end. The spine is full — close the tab when you’re ready."
+              ? "You reached the end. The spine is full - close the tab when you’re ready."
               : "Keep scrolling. The end-edge spine fills as each chapter crosses the reading line."}
           </p>
         </footer>

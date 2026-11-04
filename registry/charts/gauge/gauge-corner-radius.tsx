@@ -14,7 +14,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Gauge Corner Radius — 10 bands with rounded corners and wider arc padding.
+ * Gauge Corner Radius - 10 bands with rounded corners and wider arc padding.
  * react-gauge-chart; locked header chrome; English / Intl.
  * Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/gauge-corner-radius.tsx
@@ -40,7 +40,7 @@ const DEMO_ARC_PADDING = 0.1
 const DEMO_CORNER_RADIUS = 3
 
 function GaugeCornerRadius({
-  title = "Score gauge — corner radius",
+  title = "Score gauge - corner radius",
   subtitle = "Ten soft traffic bands with rounded corners and wider gaps.",
   levels = DEMO_LEVELS,
   arcPadding = DEMO_ARC_PADDING,

@@ -21,7 +21,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Chart Radial Shape (classic) — short arc ring with PolarGrid “shape” + center Label.
+ * Chart Radial Shape (classic) - short arc ring with PolarGrid “shape” + center Label.
  * No Card shell. Tokens: `--chart-2`. Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/chart-radial-shape.tsx
  */
@@ -96,7 +96,7 @@ function ChartRadialShape({
   const value = point?.sales ?? 0
   const caption = point
     ? (SLICE_LABELS[point.province] ?? point.province)
-    : "—"
+    : "-"
 
   // Classic short sweep →100°; RTL mirrors.
   const endAngle = plotRtl ? -100 : 100

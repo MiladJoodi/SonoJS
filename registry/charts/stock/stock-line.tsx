@@ -26,7 +26,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Stock Line — close-price area with gradient fill + type-required symbol card.
+ * Stock Line - close-price area with gradient fill + type-required symbol card.
  * No neon; locked gallery chrome + metric scrubber.
  * Installs to: components/charts/stock-line.tsx
  */
@@ -369,7 +369,7 @@ function StockLine({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">

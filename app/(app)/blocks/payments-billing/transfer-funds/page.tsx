@@ -40,7 +40,7 @@ export default function BlockTransferFundsDocsPage() {
       <BlocksPageHeader
         title="Transfer Funds"
         pathname="/blocks/payments-billing/transfer-funds"
-        description="Instant wallet transfer, scheduled/recurring sends, and international wire with FX — three distinct money-movement flows."
+        description="Instant wallet transfer, scheduled/recurring sends, and international wire with FX - three distinct money-movement flows."
       />
 
       <div className="flex flex-col gap-8">

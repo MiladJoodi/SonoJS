@@ -1,5 +1,5 @@
 ---
-description: Declare registry + npm deps; surface them via CLI + lines after add — not as docs Dependencies blocks
+description: Declare registry + npm deps; surface them via CLI + lines after add - not as docs Dependencies blocks
 alwaysApply: true
 ---
 
@@ -14,9 +14,9 @@ When adding or porting a registry component / block / chart, **dependencies must
 | `registryDependencies` | Other SonoJS registry items the source imports (`separator`, `button`, `spinner`, …). CLI installs them first and prints each as `+ path`. |
 | `dependencies` | npm packages the installed file needs (`react-day-picker`, `date-fns`, `recharts`, …). CLI prints each as `+ <pkg>` then `npm i …`. |
 
-Do **not** omit a dep because “the monorepo already has it” — consumers only get what the registry JSON lists.
+Do **not** omit a dep because “the monorepo already has it” - consumers only get what the registry JSON lists.
 
-**Pin versions when latest would break the component.** Example: calendar needs DayPicker v9 APIs — declare `react-day-picker@^9.14.0`, not bare `react-day-picker` (npm would pull v10 and drop dropdown border/radius). Versioned specs are always passed to `npm i` so a wrong major already in the consumer gets corrected.
+**Pin versions when latest would break the component.** Example: calendar needs DayPicker v9 APIs - declare `react-day-picker@^9.14.0`, not bare `react-day-picker` (npm would pull v10 and drop dropdown border/radius). Versioned specs are always passed to `npm i` so a wrong major already in the consumer gets corrected.
 
 After edits: `npm run registry:build` and confirm `public/r/<name>.json`.
 
@@ -24,7 +24,7 @@ After edits: `npm run registry:build` and confirm `public/r/<name>.json`.
 
 If a **docs example** imports another installable SonoJS component that the main item’s source also needs, add it to `registryDependencies`.
 
-If it is example-only chrome, keep it out of the item’s registry deps — still fine for the docs preview.
+If it is example-only chrome, keep it out of the item’s registry deps - still fine for the docs preview.
 
 ## Docs Installation + “Also needs”
 
@@ -36,8 +36,8 @@ Use shared `DocsInstallation` on every component docs page. Same visual language
 
 Renders:
 
-1. Code player — only `npx @sonojs/ui@latest add <name>`
-2. Soft bar under it when the item has deps — **Also needs** `npx … add button && npm i date-fns lucide-react react-day-picker` (command only; no duplicate name list)
+1. Code player - only `npx @sonojs/ui@latest add <name>`
+2. Soft bar under it when the item has deps - **Also needs** `npx … add button && npm i date-fns lucide-react react-day-picker` (command only; no duplicate name list)
 
 - `registryDependencies` → `npx @sonojs/ui@latest add …`
 - npm `dependencies` → `npm i …` for notable packages (**include** `lucide-react`, `react-day-picker`, `date-fns`, …)
@@ -61,7 +61,7 @@ Label stays **This example also needs**.
 `sonojs add <name>` must:
 
 1. Recursively install `registryDependencies` (each file logged with `+`).
-2. Collect `dependencies`, skip init baseline (`clsx`, `tailwind-merge`) and bare names already in the consumer `package.json`, then **run `npm i …` for the rest** (log each as `+ <pkg>`). Version-pinned specs (e.g. `react-day-picker@^9.14.0`) always install so the range is enforced. Do not only print a tip — missing packages cause TS2307.
+2. Collect `dependencies`, skip init baseline (`clsx`, `tailwind-merge`) and bare names already in the consumer `package.json`, then **run `npm i …` for the rest** (log each as `+ <pkg>`). Version-pinned specs (e.g. `react-day-picker@^9.14.0`) always install so the range is enforced. Do not only print a tip - missing packages cause TS2307.
 
 Shared helper: `packages/cli/src/install-npm.mjs` and `packages/ui/cli/src/install-npm.mjs` (keep in sync).
 

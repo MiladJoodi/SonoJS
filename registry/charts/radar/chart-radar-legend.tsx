@@ -18,7 +18,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Chart Radar Legend (classic) — dual Store×Online with ChartLegend /
+ * Chart Radar Legend (classic) - dual Store×Online with ChartLegend /
  * ChartLegendContent. Locked metric scrub.
  * Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/chart-radar-legend.tsx
@@ -255,7 +255,7 @@ function ChartRadarLegend({
                 {formatPct(deltaPct)}
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{caption}</p>

@@ -24,7 +24,7 @@ type DrawerRootProps = Omit<
 
 function Drawer({ direction = "bottom", ...props }: DrawerRootProps) {
   const { dir } = useDirection()
-  // Vaul only understands physical left/right — resolve logical edges first
+  // Vaul only understands physical left/right - resolve logical edges first
   // so open/close animation originates from the visual edge in both LTR and RTL.
   const resolvedDirection = resolveEdgeSide(direction, dir, "bottom")
 
@@ -91,7 +91,7 @@ function DrawerContent({
   children,
   ...props
 }: React.ComponentProps<typeof DrawerPrimitive.Content>) {
-  // Portal under <body> — set dir so text/logical CSS match DirectionProvider.
+  // Portal under <body> - set dir so text/logical CSS match DirectionProvider.
   const { dir } = useDirection()
 
   return (
@@ -102,7 +102,7 @@ function DrawerContent({
         dir={dir}
         className={cn(
           // Floating inset panel: full radius + border (not edge-flush).
-          // !select-text — Vaul sets [data-vaul-drawer]{user-select:none} on fine pointers.
+          // !select-text - Vaul sets [data-vaul-drawer]{user-select:none} on fine pointers.
           "sonojs group/drawer-content fixed z-50 flex h-auto flex-col overflow-hidden rounded-3xl border border-border bg-popover text-popover-foreground shadow-xl !select-text",
           // After resolveEdgeSide, Vaul's data attribute is always physical.
           "data-[vaul-drawer-direction=top]:inset-x-2 data-[vaul-drawer-direction=top]:top-2 data-[vaul-drawer-direction=top]:mb-24 data-[vaul-drawer-direction=top]:max-h-[calc(80vh-0.5rem)]",

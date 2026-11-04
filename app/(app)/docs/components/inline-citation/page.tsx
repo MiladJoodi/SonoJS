@@ -68,7 +68,7 @@ export default async function InlineCitationDocsPage() {
         pathname="/docs/components/inline-citation"
         description={
           <p className="leading-relaxed text-muted-foreground">
-            Hoverable citations inline with text — a pill shows source hostnames,
+            Hoverable citations inline with text - a pill shows source hostnames,
             and the card carousels full titles, URLs, and quotes.
           </p>
         }
@@ -97,7 +97,7 @@ export default async function InlineCitationDocsPage() {
               name: "InlineCitationCardTrigger sources",
               type: "string[]",
               description:
-                "Source URLs — first hostname is shown, plus `+N` when more exist.",
+                "Source URLs - first hostname is shown, plus `+N` when more exist.",
             },
             {
               name: "InlineCitationSource",

@@ -13,7 +13,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Hc Gauge Rounded Bands — dial with individually rounded plotBands.
+ * Hc Gauge Rounded Bands - dial with individually rounded plotBands.
  * Distinct teal / amber / rose scale (light + dark); locked header chrome.
  * Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/hc-gauge-rounded-bands.tsx
@@ -31,7 +31,7 @@ const DEMO_VALUE = 55
 
 const GAUGE_STAGE_ID = "hc-gauge-rounded-bands"
 
-/** Clear hue steps — not three near-identical blues. */
+/** Clear hue steps - not three near-identical blues. */
 const BAND_THEME = {
   light: {
     low: "#0D9488",
@@ -94,7 +94,7 @@ function buildOptions(value: number): Options {
 
 function HcGaugeRoundedBands({
   title = "Rounded bands",
-  subtitle = "Dial with individually rounded plot bands — teal / amber / rose.",
+  subtitle = "Dial with individually rounded plot bands - teal / amber / rose.",
   value = DEMO_VALUE,
   className,
 }: HcGaugeRoundedBandsProps) {

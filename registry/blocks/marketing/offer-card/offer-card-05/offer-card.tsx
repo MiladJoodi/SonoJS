@@ -22,10 +22,10 @@ const FEATURES = [
   "Everything in Pro",
   "All future updates",
   "Commercial license",
-  "No renewals — ever",
+  "No renewals - ever",
 ]
 
-/** Flash lifetime deal — default meteor speed 0.9. */
+/** Flash lifetime deal - default meteor speed 0.9. */
 export default function OfferCard({
   className,
   speed = 0.9,
@@ -88,7 +88,7 @@ export default function OfferCard({
               <span className="offer-badge-shine font-black">less.</span>
             </h3>
             <p className="mt-2 text-[11px] leading-relaxed text-muted-foreground">
-              One payment. Every block, chart, and update — locked in before the
+              One payment. Every block, chart, and update - locked in before the
               clock runs out.
             </p>
 

@@ -26,7 +26,7 @@ export default function BlockBentoGridDocsPage() {
       <BlocksPageHeader
         title="Bento Grid"
         pathname="/blocks/marketing/bento-grid"
-        description="Asymmetric marketing grids — product ops metrics or an editorial design-system layout."
+        description="Asymmetric marketing grids - product ops metrics or an editorial design-system layout."
       />
 
       <div className="flex flex-col gap-8">

@@ -97,7 +97,7 @@ export default async function MessageScrollerDocsPage() {
           <p className="leading-relaxed text-muted-foreground">
           A chat transcript scroller for turn anchoring, follow-output while
           streaming, history prepend without jumps, and jump-to-message
-          commands. Put it in a height-constrained parent — it fills available
+          commands. Put it in a height-constrained parent - it fills available
           space.
         </p>
         }
@@ -136,7 +136,7 @@ export default async function MessageScrollerDocsPage() {
               type: "boolean",
               defaultValue: "false",
               description:
-                "On `MessageScrollerProvider` — follow the live edge until the reader scrolls away.",
+                "On `MessageScrollerProvider` - follow the live edge until the reader scrolls away.",
             },
             {
               name: "defaultScrollPosition",
@@ -154,12 +154,12 @@ export default async function MessageScrollerDocsPage() {
               name: "scrollAnchor",
               type: "boolean",
               defaultValue: "false",
-              description: "On `MessageScrollerItem` — mark the start of a turn.",
+              description: "On `MessageScrollerItem` - mark the start of a turn.",
             },
             {
               name: "messageId",
               type: "string",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Stable id for jump / visibility tracking.",
             },
             {
@@ -167,7 +167,7 @@ export default async function MessageScrollerDocsPage() {
               type: '"start" | "end"',
               defaultValue: '"end"',
               description:
-                "On `MessageScrollerButton` — vertical transcript edge to jump to (not writing direction). Row LTR/RTL comes from `Message` `align` + inherited `dir`.",
+                "On `MessageScrollerButton` - vertical transcript edge to jump to (not writing direction). Row LTR/RTL comes from `Message` `align` + inherited `dir`.",
             },
           ]}
         />

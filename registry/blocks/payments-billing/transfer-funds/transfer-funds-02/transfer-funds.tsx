@@ -46,9 +46,9 @@ const DESTINATIONS = [
 ] as const
 
 function nextRunLabel(frequency: Frequency, start: string) {
-  if (!start) return "—"
+  if (!start) return "-"
   const d = new Date(start + "T12:00:00")
-  if (Number.isNaN(d.getTime())) return "—"
+  if (Number.isNaN(d.getTime())) return "-"
   const fmt = d.toLocaleDateString("en-US", {
     weekday: "short",
     month: "short",
@@ -102,7 +102,7 @@ export default function TransferFunds({
             <span className="font-semibold text-foreground tabular-nums" dir="ltr">
               ${Number.isFinite(amountNumber) ? amountNumber.toFixed(2) : "0.00"}
             </span>{" "}
-            to {destination?.label ?? "recipient"} —{" "}
+            to {destination?.label ?? "recipient"} -{" "}
             {nextRunLabel(frequency, startDate)}.
           </p>
           <Button
@@ -141,7 +141,7 @@ export default function TransferFunds({
               Schedule a transfer
             </h1>
             <p className="mt-1 text-sm text-muted-foreground">
-              One-time or recurring — runs automatically from your wallet.
+              One-time or recurring - runs automatically from your wallet.
             </p>
           </div>
         </header>
@@ -266,7 +266,7 @@ export default function TransferFunds({
                 id="tf-02-note"
                 value={note}
                 onChange={(e) => setNote(e.target.value)}
-                placeholder="e.g. Rent — Suite 400"
+                placeholder="e.g. Rent - Suite 400"
               />
             </Field>
           </FieldGroup>
@@ -287,7 +287,7 @@ export default function TransferFunds({
             </span>
             <span className="text-muted-foreground">
               {" "}
-              from {source?.label ?? "—"} → {destination?.label ?? "—"}
+              from {source?.label ?? "-"} → {destination?.label ?? "-"}
             </span>
           </p>
           <p className="text-start text-xs text-muted-foreground">

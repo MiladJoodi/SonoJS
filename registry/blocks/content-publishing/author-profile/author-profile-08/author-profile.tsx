@@ -121,7 +121,7 @@ export default function AuthorProfile({
               Contributors
             </h1>
             <p className="mt-2 max-w-md text-sm text-muted-foreground">
-              The people shaping design systems publishing — scroll to meet
+              The people shaping design systems publishing - scroll to meet
               everyone.
             </p>
           </div>

@@ -5,7 +5,7 @@ import seriouseatsIcon from "./media/seriouseats.svg"
 import tc39Icon from "./media/tc39.svg"
 import wikiIcon from "./media/wiki.svg"
 
-/** Bundled demo favicons — keep citations offline (no remote `/favicon.ico`). */
+/** Bundled demo favicons - keep citations offline (no remote `/favicon.ico`). */
 export const citationIcons = {
   mdn: mdnIcon,
   tc39: tc39Icon,

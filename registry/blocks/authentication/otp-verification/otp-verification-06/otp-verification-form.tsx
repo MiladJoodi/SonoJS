@@ -68,7 +68,7 @@ export default function OtpVerificationForm({
           Verify your email
         </h1>
         <p className="text-sm text-muted-foreground">
-          Almost done — enter the code we sent to{" "}
+          Almost done - enter the code we sent to{" "}
           <span dir="ltr" className="font-medium text-foreground">
             a***@company.com
           </span>

@@ -41,7 +41,7 @@ export default function MobileNavigation({
           {activeItem?.label}
         </p>
         <p className="max-w-xs text-sm text-muted-foreground">
-          Compact pill dock — the active tab expands to show its label.
+          Compact pill dock - the active tab expands to show its label.
         </p>
       </div>
 

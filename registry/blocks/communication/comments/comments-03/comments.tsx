@@ -55,7 +55,7 @@ const INITIAL: ReviewComment[] = [
     file: "button.tsx",
     line: "46",
     content:
-      "Default height should stay at 46px on mobile — don’t shrink below the control scale.",
+      "Default height should stay at 46px on mobile - don’t shrink below the control scale.",
     resolved: false,
     replies: [
       {
@@ -64,7 +64,7 @@ const INITIAL: ReviewComment[] = [
         initials: "AR",
         avatar: assetSrc(alexImg),
         time: "12m ago",
-        content: "Agreed — keeping `h-[46px]` and only adjusting padding.",
+        content: "Agreed - keeping `h-[46px]` and only adjusting padding.",
       },
     ],
   },
@@ -89,7 +89,7 @@ const INITIAL: ReviewComment[] = [
     time: "2h ago",
     file: "input.tsx",
     line: "28",
-    content: "Focus ring looks good — can we match the shared `--ring` token?",
+    content: "Focus ring looks good - can we match the shared `--ring` token?",
     resolved: false,
     replies: [],
   },

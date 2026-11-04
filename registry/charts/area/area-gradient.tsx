@@ -34,7 +34,7 @@ import { useNarrowViewport } from "../_lib/use-narrow-viewport"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Area Gradient — locked gallery chrome + **neon** fill/glow (chart-local).
+ * Area Gradient - locked gallery chrome + **neon** fill/glow (chart-local).
  * Dual stacked natural areas; branded skins use `--chart-up` / `--chart-down`
  * + drop-shadow bloom.
  * Installs to: components/charts/area-gradient.tsx
@@ -437,7 +437,7 @@ function AreaGradient({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{monthLabel}</p>

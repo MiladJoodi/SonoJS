@@ -54,7 +54,7 @@ const DIGEST_OPTIONS = [
     value: "important",
     id: "account-settings-02-digest-important",
     label: "Important only",
-    hint: "Security alerts and billing — nothing else",
+    hint: "Security alerts and billing - nothing else",
   },
   {
     value: "never",
@@ -259,13 +259,13 @@ export default function AccountSettings({
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="private">
-                        Private — members only
+                        Private - members only
                       </SelectItem>
                       <SelectItem value="invite">
-                        Invite-only — link required
+                        Invite-only - link required
                       </SelectItem>
                       <SelectItem value="public">
-                        Public — discoverable
+                        Public - discoverable
                       </SelectItem>
                     </SelectContent>
                   </Select>
@@ -283,7 +283,7 @@ export default function AccountSettings({
                     className="min-h-24 resize-y"
                   />
                   <FieldDescription>
-                    Shown only to members — not on public pages or the registry.
+                    Shown only to members - not on public pages or the registry.
                   </FieldDescription>
                 </Field>
               </div>

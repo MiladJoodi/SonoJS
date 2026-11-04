@@ -25,7 +25,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Line Label Custom (classic) — locked gallery chrome.
+ * Line Label Custom (classic) - locked gallery chrome.
  * Natural sales line with always-on region tip labels (`LabelList`).
  * Metric header scrubber; RTL-aware axes.
  * Installs to: components/charts/line-label-custom.tsx
@@ -408,7 +408,7 @@ function LineLabelCustom({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{categoryLabel}</p>

@@ -6,7 +6,7 @@ const DEFAULT_ITEMS = [
   {
     title: "Reliable & Easy to Use",
     description:
-      "Crafted for developers and operators alike—clean structure, thoughtful defaults, and layouts you can ship the same day.",
+      "Crafted for developers and operators alike-clean structure, thoughtful defaults, and layouts you can ship the same day.",
   },
   {
     title: "Modern & Clean Designs",
@@ -28,7 +28,7 @@ export type ContentSectionItem = {
 export default function ContentSection({
   eyebrow = "Why teams switch",
   title = "Why Choose Our Templates",
-  description = "Thoughtfully designed to help you build faster without compromising quality—clean code, modern layouts, effortless customization.",
+  description = "Thoughtfully designed to help you build faster without compromising quality-clean code, modern layouts, effortless customization.",
   items = DEFAULT_ITEMS,
   className,
   ...props

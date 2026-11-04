@@ -43,7 +43,7 @@ const exampleDefs = [
     name: "agent-activity-complete",
     title: "Complete",
     description:
-      '`status="complete"` collapses by default — click the summary to expand.',
+      '`status="complete"` collapses by default - click the summary to expand.',
     requires: ["agent-disclosure"],
     npmRequires: ["lucide-react", "motion"],
   },
@@ -75,7 +75,7 @@ export default async function AgentActivityDocsPage() {
         pathname="/docs/components/agent-activity"
         description={
           <p className="leading-relaxed text-muted-foreground">
-            A live timeline that shows an AI agent&apos;s work step by step —
+            A live timeline that shows an AI agent&apos;s work step by step -
             thinking shimmer while running, then a collapsible summary.
           </p>
         }
@@ -103,7 +103,7 @@ export default async function AgentActivityDocsPage() {
             {
               name: "items",
               type: "AgentActivityItem[]",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Chronological activity entries (step, text, search, tool, trace).",
             },
             {

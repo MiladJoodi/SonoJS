@@ -184,12 +184,12 @@ export default async function ItemDocsPage() {
               name: "variant (media)",
               type: '"default" | "icon" | "image"',
               defaultValue: '"default"',
-              description: "On `ItemMedia` — icon frame or image crop.",
+              description: "On `ItemMedia` - icon frame or image crop.",
             },
             {
               name: "className",
               type: "string",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Merge extra Tailwind classes on any part.",
             },
           ]}

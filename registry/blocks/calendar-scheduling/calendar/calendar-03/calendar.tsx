@@ -126,7 +126,7 @@ function formatRange(start: string, end: string) {
   return `${label(start)} – ${label(end)}`
 }
 
-/** Day focus — compact mini-month + timed agenda. */
+/** Day focus - compact mini-month + timed agenda. */
 export default function Calendar03() {
   const [selected, setSelected] = React.useState(() => atNoon(0))
   const [month, setMonth] = React.useState(() => new Date())

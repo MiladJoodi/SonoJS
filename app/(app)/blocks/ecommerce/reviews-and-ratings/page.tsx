@@ -46,7 +46,7 @@ export default function BlockReviewsRatingsDocsPage() {
       <BlocksPageHeader
         title="Reviews & Ratings"
         pathname="/blocks/ecommerce/reviews-and-ratings"
-        description="Premium star ratings, score cards, and review lists for product pages — gold stars, soft surfaces, LTR-locked chrome."
+        description="Premium star ratings, score cards, and review lists for product pages - gold stars, soft surfaces, LTR-locked chrome."
       />
 
       <div className="flex flex-col gap-8">

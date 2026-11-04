@@ -18,9 +18,9 @@ export default function ContentSection({
   eyebrow = "Analytics platform",
   title = "Discover the Future of Innovation",
   paragraphs = [
-    "Unlock the power of data-driven decision making with our intelligent dashboard tools. Track performance metrics, visualize trends, and gain meaningful insights—all in one place.",
+    "Unlock the power of data-driven decision making with our intelligent dashboard tools. Track performance metrics, visualize trends, and gain meaningful insights-all in one place.",
     "Seamlessly analyze key performance indicators across departments. From revenue growth to engagement stats, customize the view to focus on what matters most.",
-    "Our interface is designed for speed and clarity. No steep learning curves—just tools that turn data into action.",
+    "Our interface is designed for speed and clarity. No steep learning curves-just tools that turn data into action.",
   ],
   metrics = DEFAULT_METRICS,
   imageSrc = assetSrc(kpisDashboard),

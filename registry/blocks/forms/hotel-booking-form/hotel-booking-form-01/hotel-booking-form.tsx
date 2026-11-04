@@ -317,7 +317,7 @@ function Perforation() {
   )
 }
 
-/** Decorative barcode — pure CSS stripes, no data. */
+/** Decorative barcode - pure CSS stripes, no data. */
 function Barcode({ className }: { className?: string }) {
   return (
     <div
@@ -423,7 +423,7 @@ export default function HotelBookingForm({
       next.rooms = "Each room needs at least one adult. Reduce rooms or add adults."
     if (!room) next.room = "Choose a room type."
     else if (guests > capacity)
-      next.capacity = `${room.name} sleeps ${room.sleeps} per room — ${capacity} total for ${rooms} ${rooms === 1 ? "room" : "rooms"}, but you have ${guests} guests. Add a room or choose a larger type.`
+      next.capacity = `${room.name} sleeps ${room.sleeps} per room - ${capacity} total for ${rooms} ${rooms === 1 ? "room" : "rooms"}, but you have ${guests} guests. Add a room or choose a larger type.`
     if (name.trim().length < 2) next.name = "Enter the lead guest's full name."
     if (!EMAIL_RE.test(email.trim())) next.email = "Enter a valid email address."
     const digits = phone.replace(/\D/g, "")
@@ -450,7 +450,7 @@ export default function HotelBookingForm({
   ])
 
   const hasErrors = Object.values(errors).some(Boolean)
-  // Capacity mismatch is shown immediately — it's a live constraint, not a typo.
+  // Capacity mismatch is shown immediately - it's a live constraint, not a typo.
   const show = (key: keyof FormErrors) =>
     (attempted || key === "capacity") && errors[key] ? errors[key] : undefined
 
@@ -602,7 +602,7 @@ export default function HotelBookingForm({
                   <div className="min-w-0 shrink-0">
                     <Eyebrow>Check-in</Eyebrow>
                     <p className="mt-1 text-3xl font-semibold tracking-tight tabular-nums">
-                      {checkIn ? format(checkIn, "d MMM") : "—"}
+                      {checkIn ? format(checkIn, "d MMM") : "-"}
                     </p>
                     <p className="text-sm text-muted-foreground">
                       {checkIn ? format(checkIn, "EEEE yyyy") : ""}
@@ -623,7 +623,7 @@ export default function HotelBookingForm({
                   <div className="min-w-0 shrink-0 text-end">
                     <Eyebrow>Check-out</Eyebrow>
                     <p className="mt-1 text-3xl font-semibold tracking-tight tabular-nums">
-                      {checkOut ? format(checkOut, "d MMM") : "—"}
+                      {checkOut ? format(checkOut, "d MMM") : "-"}
                     </p>
                     <p className="text-sm text-muted-foreground">
                       {checkOut ? format(checkOut, "EEEE yyyy") : ""}
@@ -674,7 +674,7 @@ export default function HotelBookingForm({
                 </dl>
 
                 <p className="text-pretty text-xs leading-5 text-muted-foreground">
-                  Demo only — no room has been booked, charged or emailed. The
+                  Demo only - no room has been booked, charged or emailed. The
                   reference is for illustration.
                 </p>
               </div>
@@ -1044,7 +1044,7 @@ export default function HotelBookingForm({
                 <FieldError>{show("room")}</FieldError>
               </fieldset>
 
-              {/* Lead guest — quiet secondary panel */}
+              {/* Lead guest - quiet secondary panel */}
               <fieldset className="flex min-w-0 flex-col gap-5 rounded-[12px] border border-border/70 bg-muted/30 p-5 sm:p-6">
                 <legend className="sr-only">Lead guest</legend>
                 <div className="text-start">
@@ -1175,14 +1175,14 @@ export default function HotelBookingForm({
                   <div>
                     <Eyebrow>Check-in</Eyebrow>
                     <p className="mt-1 text-sm font-medium">
-                      {checkIn ? format(checkIn, "EEE, d MMM") : "—"}
+                      {checkIn ? format(checkIn, "EEE, d MMM") : "-"}
                     </p>
                     <p className="text-xs text-muted-foreground">from 3:00 PM</p>
                   </div>
                   <div>
                     <Eyebrow>Check-out</Eyebrow>
                     <p className="mt-1 text-sm font-medium">
-                      {checkOut ? format(checkOut, "EEE, d MMM") : "—"}
+                      {checkOut ? format(checkOut, "EEE, d MMM") : "-"}
                     </p>
                     <p className="text-xs text-muted-foreground">until 11:00 AM</p>
                   </div>
@@ -1236,7 +1236,7 @@ export default function HotelBookingForm({
                 <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
                   <span className="text-sm font-medium">Total (USD)</span>
                   <span className="text-3xl font-semibold tabular-nums tracking-tight">
-                    {hasStay ? currencyExact.format(total) : "—"}
+                    {hasStay ? currencyExact.format(total) : "-"}
                   </span>
                 </div>
 
@@ -1255,7 +1255,7 @@ export default function HotelBookingForm({
                   {submitContent}
                 </Button>
                 <p className="text-center text-xs leading-5 text-muted-foreground">
-                  Demo form — you won&apos;t be charged and nothing is booked.
+                  Demo form - you won&apos;t be charged and nothing is booked.
                 </p>
               </div>
             </aside>
@@ -1276,7 +1276,7 @@ export default function HotelBookingForm({
                     : "Choose dates to see your price"}
                 </p>
                 <p className="text-lg font-semibold tabular-nums leading-6">
-                  {hasStay ? currencyExact.format(total) : "—"}
+                  {hasStay ? currencyExact.format(total) : "-"}
                   <span className="ms-1.5 text-xs font-normal text-muted-foreground">
                     incl. taxes · demo
                   </span>

@@ -44,7 +44,7 @@ export type CursorUsageSnippet = {
 }
 
 /**
- * Minimal copy-paste usage — not the full component source.
+ * Minimal copy-paste usage - not the full component source.
  */
 export function getCursorUsage(id: string): CursorUsageSnippet {
   const name = cursorExportName(id)
@@ -84,7 +84,7 @@ import { ${name} } from "${path}"
 export default function Page() {
   return (
     <${name} className="min-h-svh">
-      {/* Put buttons / links inside — hover shows the chip */}
+      {/* Put buttons / links inside - hover shows the chip */}
     </${name}>
   )
 }
@@ -94,7 +94,7 @@ export default function Page() {
 
   return {
     blurb:
-      "1) Run the Command above. 2) Paste this into a client page. The long Manual code is the installed file — you do not rewrite it.",
+      "1) Run the Command above. 2) Paste this into a client page. The long Manual code is the installed file - you do not rewrite it.",
     code: `"use client"
 
 import { useRef } from "react"

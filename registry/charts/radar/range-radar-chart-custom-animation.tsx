@@ -22,7 +22,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Range Radar Chart Custom Animation — ceiling polygon with long entrance
+ * Range Radar Chart Custom Animation - ceiling polygon with long entrance
  * tween; data keeps [low, high] for metric span. Locked metric scrub.
  * Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/range-radar-chart-custom-animation.tsx
@@ -30,9 +30,9 @@ import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 export type RangeRadarPoint = {
   subject: string
-  /** Inclusive range floor (metric span only — not drawn). */
+  /** Inclusive range floor (metric span only - not drawn). */
   low: number
-  /** Range ceiling — plotted Radar series. */
+  /** Range ceiling - plotted Radar series. */
   high: number
 }
 
@@ -47,7 +47,7 @@ export type RangeRadarChartCustomAnimationProps = {
   scrub?: boolean
 }
 
-/** Custom entrance — pauses while scrubbing / reduced-motion. */
+/** Custom entrance - pauses while scrubbing / reduced-motion. */
 const ENTRANCE_MS = 1600
 const AXIS_TICK_FILL =
   "color-mix(in oklab, var(--foreground) 58%, transparent)"
@@ -87,7 +87,7 @@ function spanOf(point: RangeRadarPoint) {
 
 function RangeRadarChartCustomAnimation({
   title = "Range radar",
-  subtitle = "Ceiling polygon with a 1.6s entrance — scrub pauses the tween.",
+  subtitle = "Ceiling polygon with a 1.6s entrance - scrub pauses the tween.",
   data = DEMO_DATA,
   className,
   plotDir,
@@ -260,7 +260,7 @@ function RangeRadarChartCustomAnimation({
                 {formatPct(deltaPct)}
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{caption}</p>

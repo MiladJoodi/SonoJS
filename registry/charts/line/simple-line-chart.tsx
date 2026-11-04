@@ -26,7 +26,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Simple Line Chart — locked gallery chrome (navy × orange).
+ * Simple Line Chart - locked gallery chrome (navy × orange).
  * Dual monotone lines + metric header scrubber.
  * Installs to: components/charts/simple-line-chart.tsx
  */
@@ -448,7 +448,7 @@ function SimpleLineChart({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{monthLabel}</p>

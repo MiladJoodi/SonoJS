@@ -10,7 +10,7 @@ import {
 } from "@sonojs/ui/components/streaming-response"
 
 const FULL =
-  "Peach and apricot lead summer stone-fruit demand. Check cone inventory before promoting a waffle-bowl special — Joy Cone and The Konery both ship fast."
+  "Peach and apricot lead summer stone-fruit demand. Check cone inventory before promoting a waffle-bowl special - Joy Cone and The Konery both ship fast."
 
 const SOURCES = [
   {

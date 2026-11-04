@@ -18,14 +18,14 @@ import { Button } from "@sonojs/ui/components/button"
 export function AuthControls({
   initialSignedIn = false,
 }: {
-  /** From server auth cookie — first paint without waiting on Clerk JS. */
+  /** From server auth cookie - first paint without waiting on Clerk JS. */
   initialSignedIn?: boolean
 }) {
   const { isLoaded, isSignedIn } = useAuth()
   const [open, setOpen] = React.useState(false)
   const [mode, setMode] = React.useState<AuthDialogMode>("sign-in")
 
-  useEnsureUserPlan()
+  const { planReady } = useEnsureUserPlan()
 
   React.useEffect(() => {
     if (isSignedIn && open) setOpen(false)
@@ -34,7 +34,7 @@ export function AuthControls({
   const signedIn = isLoaded ? Boolean(isSignedIn) : initialSignedIn
 
   if (signedIn) {
-    return <UserMenu />
+    return <UserMenu planReady={planReady} />
   }
 
   return (

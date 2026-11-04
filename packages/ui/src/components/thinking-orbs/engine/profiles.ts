@@ -6,7 +6,7 @@ export interface ModeOpts {
   [key: string]: number | undefined;
 }
 
-// 2-D lattices (rings × dots-per-ring) come in pairs — each side takes
+// 2-D lattices (rings × dots-per-ring) come in pairs - each side takes
 // √scale so the TOTAL dot count scales by `scale`; flat lists scale
 // linearly. `iconD` sets the morph outline's sampling density.
 const COUNT_PAIRS: ReadonlyArray<readonly [string, string]> = [
@@ -17,7 +17,7 @@ const COUNT_PAIRS: ReadonlyArray<readonly [string, string]> = [
 const COUNT_KEYS = ["orbitN", "ghostN", "nodeN", "strandN", "signals"] as const;
 const ICON_DENSITY_KEYS = ["iconD"] as const;
 
-// Every key that sets a dot's rendered radius — scaling all of them keeps
+// Every key that sets a dot's rendered radius - scaling all of them keeps
 // a dot's near/far falloff intact while shrinking or growing the mark.
 const RADIUS_KEYS = [
   "rBase",
@@ -48,7 +48,7 @@ export function scaleCounts(opts: ModeOpts, scale: number): ModeOpts {
   for (const k of COUNT_KEYS) {
     const v = out[k];
     // 0 means the mode opted out of that layer entirely (ring has no ghost
-    // sphere) — scaling must not resurrect it as a single stray dot
+    // sphere) - scaling must not resurrect it as a single stray dot
     if (v != null && v !== 0 && !done.has(k))
       out[k] = Math.max(1, Math.round(v * scale));
   }
@@ -65,7 +65,7 @@ export function scaleRadii(opts: ModeOpts, scale: number): ModeOpts {
     const v = out[k];
     if (v != null) out[k] = v * scale;
   }
-  // remember the multiplier itself — spacing-derived radii (the morph
+  // remember the multiplier itself - spacing-derived radii (the morph
   // outline) use it, since they aren't based on any single radius key
   out.rSizeMul = (out.rSizeMul ?? 1) * scale;
   return out;

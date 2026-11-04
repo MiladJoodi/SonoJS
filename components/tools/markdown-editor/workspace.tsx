@@ -99,7 +99,7 @@ export function Workspace() {
     return latest ?? markdown
   }, [markdown])
 
-  /** Write to localStorage once — never on every keystroke. */
+  /** Write to localStorage once - never on every keystroke. */
   const persist = React.useCallback(
     (source?: string) => {
       const latest =
@@ -228,7 +228,7 @@ export function Workspace() {
         <header
           className={cn(
             "border-border/70 bg-background flex shrink-0 items-center justify-between gap-2 border-b px-3 py-2.5 sm:gap-3 sm:px-4",
-            /* Mobile: no second bar — actions sit on the Tools ListIndex row */
+            /* Mobile: no second bar - actions sit on the Tools ListIndex row */
             "max-lg:h-0 max-lg:min-h-0 max-lg:overflow-visible max-lg:border-0 max-lg:p-0"
           )}
         >
@@ -369,7 +369,7 @@ export function Workspace() {
           </div>
         </header>
       ) : (
-        /* Own chrome row — never float over Rich / Source / Diff */
+        /* Own chrome row - never float over Rich / Source / Diff */
         <div className="border-border/70 bg-background flex shrink-0 items-center justify-end border-b px-3 py-2">
           <Button
             type="button"
@@ -427,7 +427,7 @@ export function Workspace() {
           </span>
           <span className="tabular-nums">
             {stats.readingMinutes === 0
-              ? "—"
+              ? "-"
               : `${stats.readingMinutes} min read`}
           </span>
           <span className="text-muted-foreground/80 ms-auto hidden sm:inline">

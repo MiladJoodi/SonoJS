@@ -320,7 +320,7 @@ export default function Navbar({
           Cascading mega menus
         </h1>
         <p className="max-w-md text-sm text-muted-foreground">
-          Product, Solutions, and Resources — three panels, text-only rows.
+          Product, Solutions, and Resources - three panels, text-only rows.
         </p>
       </main>
     </div>

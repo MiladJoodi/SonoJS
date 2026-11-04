@@ -26,7 +26,7 @@ function money(n: number) {
   return n.toLocaleString("de-DE", { style: "currency", currency: "EUR" })
 }
 
-/** Compact thermal-style receipt — narrow width, dense lines. */
+/** Compact thermal-style receipt - narrow width, dense lines. */
 export default function Invoice({
   className,
   ...props
@@ -161,7 +161,7 @@ export default function Invoice({
               </span>
             </p>
             <p className="mt-1 text-[11px] text-muted-foreground">
-              Thank you — keep this receipt
+              Thank you - keep this receipt
             </p>
           </div>
         </article>

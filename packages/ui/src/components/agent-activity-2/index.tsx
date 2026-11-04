@@ -45,7 +45,7 @@ const traces: Record<
     rows: [
       {
         primary:
-          "Summer demand spikes for stone-fruit flavors — peach and apricot lead.",
+          "Summer demand spikes for stone-fruit flavors - peach and apricot lead.",
       },
       {
         primary:

@@ -1049,7 +1049,7 @@ export default function EventRegistrationForm({
                   )}
                 </Button>
                 <p className="text-xs leading-5 text-muted-foreground">
-                  Demo only. Submitting creates a simulated reference — nothing
+                  Demo only. Submitting creates a simulated reference - nothing
                   is charged, saved, or sent.
                 </p>
               </div>

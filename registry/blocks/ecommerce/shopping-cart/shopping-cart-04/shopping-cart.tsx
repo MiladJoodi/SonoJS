@@ -46,7 +46,7 @@ const INITIAL_ITEMS: CartItem[] = [
   },
   {
     id: 2,
-    name: "ThinkPad E16 40.64cms — 13th Gen Intel i5",
+    name: "ThinkPad E16 40.64cms - 13th Gen Intel i5",
     image: assetSrc(laptop2Img),
     alt: "ThinkPad E16",
     price: 1100,

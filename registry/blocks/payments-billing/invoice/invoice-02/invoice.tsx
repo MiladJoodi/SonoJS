@@ -45,13 +45,13 @@ const INVOICE = {
   },
   items: [
     {
-      description: "Team plan — monthly subscription",
+      description: "Team plan - monthly subscription",
       qty: 1,
       unitNet: 89.0,
       vatRate: 21,
     },
     {
-      description: "Usage overage — API calls",
+      description: "Usage overage - API calls",
       qty: 1,
       unitNet: 42.5,
       vatRate: 21,

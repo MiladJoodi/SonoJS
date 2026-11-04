@@ -329,7 +329,7 @@ export default function Navbar({
         </h1>
         <p className="max-w-md text-sm text-muted-foreground">
           End-aligned links and a narrow Resources panel with Data, Team, and
-          Blog — sheet on small screens.
+          Blog - sheet on small screens.
         </p>
       </main>
     </div>

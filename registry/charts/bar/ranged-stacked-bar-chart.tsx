@@ -27,7 +27,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Ranged Stacked Bar Chart — locked gallery chrome + chart-local stage ranges.
+ * Ranged Stacked Bar Chart - locked gallery chrome + chart-local stage ranges.
  * Prep / Pack / Ship as `[start, end]` minute ranges via Recharts `BarStack`.
  * Installs to: components/charts/ranged-stacked-bar-chart.tsx
  */
@@ -196,7 +196,7 @@ function RangedTooltip({
   active?: boolean
   payload?: ReadonlyArray<{ payload?: RangedStackedBarPoint }>
   locale: string
-  /** Page/preview writing direction — plot island is LTR. */
+  /** Page/preview writing direction - plot island is LTR. */
   dir: "ltr" | "rtl"
 }) {
   if (!(active && payload?.length)) return null
@@ -519,7 +519,7 @@ function RangedStackedBarChart({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{monthLabel}</p>

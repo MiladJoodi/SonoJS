@@ -24,7 +24,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Compare Two Lines — locked gallery chrome (navy × orange).
+ * Compare Two Lines - locked gallery chrome (navy × orange).
  * Type-required hover compare: portfolio vs reinvestment (+ principal).
  * Gradient scrub + delta ReferenceLine segment; metric header.
  * Installs to: components/charts/compare-two-lines.tsx
@@ -1065,7 +1065,7 @@ function CompareTwoLines({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{dateLabel}</p>
@@ -1329,8 +1329,8 @@ function CompareTwoLines({
             <tr key={row.date}>
               <td>{formatFullDate(row.date, locale)}</td>
               <td>{row.close}</td>
-              <td>{row.reinvestClose ?? "—"}</td>
-              <td>{row.netDeposits ?? "—"}</td>
+              <td>{row.reinvestClose ?? "-"}</td>
+              <td>{row.netDeposits ?? "-"}</td>
             </tr>
           ))}
         </tbody>

@@ -1,6 +1,6 @@
 /**
  * Pending: Navigation → Command Menu (04)
- * Job: IDE-style file jump — path muted, extension pill, ⌘P trigger.
+ * Job: IDE-style file jump - path muted, extension pill, ⌘P trigger.
  * Audit: path/ext dir=ltr islands · trigger w-full max-w · semantic tokens.
  */
 "use client"

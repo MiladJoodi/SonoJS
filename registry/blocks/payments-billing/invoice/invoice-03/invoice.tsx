@@ -44,12 +44,12 @@ const INVOICE = {
   },
   items: [
     {
-      description: "Enterprise platform license — annual",
+      description: "Enterprise platform license - annual",
       qty: 1,
       unitNet: 4800.0,
     },
     {
-      description: "Dedicated success manager — Q3",
+      description: "Dedicated success manager - Q3",
       qty: 1,
       unitNet: 1200.0,
     },

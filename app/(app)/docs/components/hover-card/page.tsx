@@ -46,7 +46,7 @@ export function Example() {
     <HoverCard>
       <HoverCardTrigger>Hover</HoverCardTrigger>
       <HoverCardContent>
-        Preview content for sighted users — links, profiles, and short facts.
+        Preview content for sighted users - links, profiles, and short facts.
       </HoverCardContent>
     </HoverCard>
   )
@@ -103,33 +103,33 @@ export default async function HoverCardDocsPage() {
               name: "openDelay",
               type: "number",
               defaultValue: "700",
-              description: "On HoverCard — ms before the card opens on hover.",
+              description: "On HoverCard - ms before the card opens on hover.",
             },
             {
               name: "closeDelay",
               type: "number",
               defaultValue: "300",
-              description: "On HoverCard — ms before the card closes.",
+              description: "On HoverCard - ms before the card closes.",
             },
             {
               name: "side",
               type: '"top" | "right" | "bottom" | "left"',
               defaultValue: '"bottom"',
-              description: "On HoverCardContent — physical edge for placement.",
+              description: "On HoverCardContent - physical edge for placement.",
             },
             {
               name: "align",
               type: '"start" | "center" | "end"',
               defaultValue: '"center"',
               description:
-                "On HoverCardContent — prefer start/end for RTL-aware layouts.",
+                "On HoverCardContent - prefer start/end for RTL-aware layouts.",
             },
             {
               name: "asChild",
               type: "boolean",
               defaultValue: "false",
               description:
-                "On HoverCardTrigger — merge props into the child (e.g. Button).",
+                "On HoverCardTrigger - merge props into the child (e.g. Button).",
             },
           ]}
         />

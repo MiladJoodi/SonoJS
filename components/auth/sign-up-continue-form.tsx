@@ -53,7 +53,7 @@ export function SignUpContinueForm() {
       await signUp.finalize({
         navigate: ({ session, decorateUrl }) => {
           if (session?.currentTask) {
-            // Session task pending — still leave the continue page.
+            // Session task pending - still leave the continue page.
             router.replace("/")
             return
           }
@@ -163,11 +163,11 @@ export function SignUpContinueForm() {
     if (needsUsername) {
       payload.username = String(form.get("username") ?? "").trim()
     }
-    // Always send when required — OAuth continue often only needs this.
+    // Always send when required - OAuth continue often only needs this.
     if (needsLegal) payload.legalAccepted = true
 
     if (Object.keys(payload).length === 0 && unknownMissing.length === 0) {
-      // Nothing to PATCH — try finalize anyway (edge status).
+      // Nothing to PATCH - try finalize anyway (edge status).
       if (signUp.status === "complete") {
         await finalize()
         return

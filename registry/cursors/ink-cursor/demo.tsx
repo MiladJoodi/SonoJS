@@ -12,7 +12,7 @@ export default function InkCursorDemo() {
     <div ref={stageRef} className={`${CURSOR_STAGE_LIGHT} cursor-none`}>
       <InkCursor containerRef={stageRef} />
       <p className="pointer-events-none absolute inset-0 flex items-center justify-center text-sm text-muted-foreground">
-        Liquid ink smear — move quickly
+        Liquid ink smear - move quickly
       </p>
     </div>
   )

@@ -23,7 +23,7 @@ export type CitationItem = {
   domain?: React.ReactNode
   url?: string
   /**
-   * Local favicon / mark (bundled asset URL). Prefer this over remote icons —
+   * Local favicon / mark (bundled asset URL). Prefer this over remote icons -
    * never load `/favicon.ico` from the open web in demos.
    */
   icon?: string

@@ -120,7 +120,7 @@ const ALL_RESULTS: SearchResult[] = [
     type: "video",
     title: "Build a dashboard in 15 minutes",
     snippet:
-      "Compose an analytics layout with SonoJS cards, charts, and data table blocks — step-by-step walkthrough.",
+      "Compose an analytics layout with SonoJS cards, charts, and data table blocks - step-by-step walkthrough.",
     href: "/docs/examples",
     date: "Jun 8, 2026",
     tags: ["tutorial", "video"],
@@ -140,7 +140,7 @@ const ALL_RESULTS: SearchResult[] = [
     type: "doc",
     title: "Accessibility guidelines",
     snippet:
-      "WCAG-oriented checklist for interactive controls — focus rings, keyboard maps, and RTL-safe layouts across the registry.",
+      "WCAG-oriented checklist for interactive controls - focus rings, keyboard maps, and RTL-safe layouts across the registry.",
     href: "/docs/accessibility",
     date: "Jun 2, 2026",
     tags: ["a11y", "docs"],
@@ -160,7 +160,7 @@ const ALL_RESULTS: SearchResult[] = [
     type: "article",
     title: "Direction and logical CSS",
     snippet:
-      "Build once for LTR and RTL with ms/me, start/end, and DirectionProvider — a core SonoJS system concern.",
+      "Build once for LTR and RTL with ms/me, start/end, and DirectionProvider - a core SonoJS system concern.",
     href: "/docs/direction",
     date: "May 25, 2026",
     tags: ["rtl", "layout"],

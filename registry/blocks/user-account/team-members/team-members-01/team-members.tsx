@@ -160,11 +160,11 @@ function InviteDialog() {
                   <SelectValue placeholder="Select role" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="admin">Admin — full access</SelectItem>
+                  <SelectItem value="admin">Admin - full access</SelectItem>
                   <SelectItem value="member">
-                    Member — can edit projects
+                    Member - can edit projects
                   </SelectItem>
-                  <SelectItem value="viewer">Viewer — read only</SelectItem>
+                  <SelectItem value="viewer">Viewer - read only</SelectItem>
                 </SelectContent>
               </Select>
             </Field>

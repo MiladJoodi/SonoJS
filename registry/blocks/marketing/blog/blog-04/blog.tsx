@@ -39,7 +39,7 @@ const DEFAULT_POSTS = [
     image: assetSrc(food22),
     title: "Futuristic Food Tech Trends",
     description:
-      "Dive into the innovations reshaping how we eat — from lab-grown meat to AI-assisted cooking.",
+      "Dive into the innovations reshaping how we eat - from lab-grown meat to AI-assisted cooking.",
     date: "15 March 2024",
     href: "#",
   },

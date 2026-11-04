@@ -32,7 +32,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Candlestick Category — locked gallery chrome + type-required news marker.
+ * Candlestick Category - locked gallery chrome + type-required news marker.
  * Category X labels (date + time) with dashed “News” ReferenceLine.
  * Installs to: components/charts/candlestick-category.tsx
  */
@@ -349,7 +349,7 @@ function CandlestickCategory({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">

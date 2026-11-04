@@ -84,7 +84,7 @@ export default async function ModelSelectorDocsPage() {
         pathname="/docs/components/model-selector"
         description={
           <p className="leading-relaxed text-muted-foreground">
-            A searchable dialog for picking an AI model — grouped by chef, with
+            A searchable dialog for picking an AI model - grouped by chef, with
             provider logos and a compact trigger.
           </p>
         }
@@ -134,7 +134,7 @@ export default async function ModelSelectorDocsPage() {
             {
               name: "ModelSelectorList / Group / Item / Empty",
               type: "Command* props",
-              description: "List chrome — same API as Command.",
+              description: "List chrome - same API as Command.",
             },
             {
               name: "ModelSelectorLogo",

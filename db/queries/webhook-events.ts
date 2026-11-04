@@ -125,7 +125,7 @@ export async function claimStripeWebhookEvent(
 /**
  * Succeeds only with the current claim_token while status=processing.
  * Optional auditNote is stored in last_error for investigation (e.g. unlinked
- * invoice) while status remains processed — does not imply failure.
+ * invoice) while status remains processed - does not imply failure.
  */
 export async function markStripeWebhookProcessed(
   stripeEventId: string,

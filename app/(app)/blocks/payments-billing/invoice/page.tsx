@@ -43,7 +43,7 @@ export default function BlockInvoiceDocsPage() {
       <BlocksPageHeader
         title="Invoice"
         pathname="/blocks/payments-billing/invoice"
-        description="EU / Stripe-grade VAT documents — paid classic, open SEPA, reverse-charge B2B, compact receipt, signed & stamped, and wide multi-rate statement."
+        description="EU / Stripe-grade VAT documents - paid classic, open SEPA, reverse-charge B2B, compact receipt, signed & stamped, and wide multi-rate statement."
       />
 
       <div className="flex flex-col gap-8">

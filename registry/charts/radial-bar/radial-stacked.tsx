@@ -22,7 +22,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Radial Stacked — half-ring Desktop×Mobile stacked along the arc + center total.
+ * Radial Stacked - half-ring Desktop×Mobile stacked along the arc + center total.
  * Tokens: `--chart-1` / `--chart-2`. Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/radial-stacked.tsx
  */
@@ -114,7 +114,7 @@ function RadialStacked({
             >
               {formatNumber(total, locale)}
             </p>
-            <span className="text-xs text-muted-foreground">—</span>
+            <span className="text-xs text-muted-foreground">-</span>
           </div>
           <p className="text-xs text-muted-foreground">{centerLabel}</p>
         </div>

@@ -16,7 +16,7 @@ const exampleDefs = [
     name: "tool-approval-running",
     title: "Running",
     description:
-      "Allow once to watch the live status roll — approving spinner, approved, running, then complete. Replay resets the demo.",
+      "Allow once to watch the live status roll - approving spinner, approved, running, then complete. Replay resets the demo.",
     requires: ["agent-code", "agent-disclosure"],
     npmRequires: ["lucide-react", "motion", "shiki"],
   },
@@ -24,7 +24,7 @@ const exampleDefs = [
     name: "tool-approval-default",
     title: "Pending",
     description:
-      "Terminal tool call with parameters open — same approve flow as Running.",
+      "Terminal tool call with parameters open - same approve flow as Running.",
     requires: ["agent-code", "agent-disclosure"],
     npmRequires: ["lucide-react", "motion", "shiki"],
   },
@@ -75,7 +75,7 @@ export default async function ToolApprovalDocsPage() {
         pathname="/docs/components/tool-approval"
         description={
           <p className="leading-relaxed text-muted-foreground">
-            A permission prompt for approving an AI agent&apos;s tool call —
+            A permission prompt for approving an AI agent&apos;s tool call -
             status badge, expandable parameters, and allow / deny actions.
           </p>
         }
@@ -103,7 +103,7 @@ export default async function ToolApprovalDocsPage() {
             {
               name: "tool",
               type: "ReactNode",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Tool name shown in mono under the title.",
             },
             {
@@ -115,7 +115,7 @@ export default async function ToolApprovalDocsPage() {
             {
               name: "description",
               type: "ReactNode",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Optional supporting copy under the tool name.",
             },
             {
@@ -141,13 +141,13 @@ export default async function ToolApprovalDocsPage() {
             {
               name: "onApprove / onAlwaysAllow / onDeny",
               type: "() => void",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Pending-state action handlers.",
             },
             {
               name: "className",
               type: "string",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Merge classes on the card root.",
             },
           ]}

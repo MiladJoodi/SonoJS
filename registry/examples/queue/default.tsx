@@ -183,7 +183,7 @@ export function QueueDefault() {
   if (messages.length === 0 && todos.length === 0) {
     return (
       <p className="py-10 text-center text-sm text-muted-foreground">
-        Queue is empty — refresh to reset the demo.
+        Queue is empty - refresh to reset the demo.
       </p>
     )
   }

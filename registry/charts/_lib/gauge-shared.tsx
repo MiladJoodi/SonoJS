@@ -19,13 +19,13 @@ export const gaugeChartStyle: CSSProperties = {
   maxWidth: 420,
 }
 
-/** Needle/text — theme foreground so dials stay readable in light and dark. */
+/** Needle/text - theme foreground so dials stay readable in light and dark. */
 export const GAUGE_NEEDLE = "var(--foreground)"
 
 /**
  * Soft traffic-light arcs (aligned with chart palette intensity).
  * Mid gold stays readable on light backgrounds.
- * Stable `string[]` — never spread a fresh array into `<GaugeChart colors={…} />`.
+ * Stable `string[]` - never spread a fresh array into `<GaugeChart colors={…} />`.
  */
 export const GAUGE_TRAFFIC_COLORS: string[] = ["#6cb87a", "#d4b45a", "#d96b5c"]
 

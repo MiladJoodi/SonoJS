@@ -25,7 +25,7 @@ const exampleDefs = [
     name: "structured-output-custom",
     title: "Custom rows",
     description:
-      "Pass `rows` to compare any models — icons resolve from the model name prefix.",
+      "Pass `rows` to compare any models - icons resolve from the model name prefix.",
   },
 ]
 
@@ -52,7 +52,7 @@ export default async function StructuredOutputDocsPage() {
         pathname="/docs/components/structured-output"
         description={
           <p className="leading-relaxed text-muted-foreground">
-            A structured table for comparing AI models and their results —
+            A structured table for comparing AI models and their results -
             model, context window, and input price.
           </p>
         }
@@ -87,7 +87,7 @@ export default async function StructuredOutputDocsPage() {
             {
               name: "className",
               type: "string",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Optional class names on the table root.",
             },
           ]}

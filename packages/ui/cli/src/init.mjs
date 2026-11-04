@@ -13,7 +13,7 @@ import { parseJsonText, stripBom } from "./strip-bom.mjs"
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const templatesRoot = path.resolve(__dirname, "../templates/init")
 
-/** Neon semantics — same hex as docs `style-vega` / registry cssVars. */
+/** Neon semantics - same hex as docs `style-vega` / registry cssVars. */
 export const CHART_NEON_CSS_VARS = {
   light: {
     "chart-up": "#16a34a",
@@ -72,7 +72,7 @@ export async function ensureChartNeonVars(cwd) {
   return applyRegistryCssVars(cwd, CHART_NEON_CSS_VARS)
 }
 
-/** Soft surfaces — same as docs `:root` / blocks (`bg-card` + `shadow-soft` on canvas). */
+/** Soft surfaces - same as docs `:root` / blocks (`bg-card` + `shadow-soft` on canvas). */
 export const SOFT_SURFACE_CSS_VARS = {
   light: {
     canvas: "#f3f3f4",

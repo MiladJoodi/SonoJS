@@ -27,7 +27,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Simple Bar Chart — **LOCKED** canonical gallery pattern (navy × orange).
+ * Simple Bar Chart - **LOCKED** canonical gallery pattern (navy × orange).
  * Do not restyle without an explicit unlock. Spec: `registry/charts/PORT.md`
  * + `.cursor/rules/sonojs-charts-locked.mdc`.
  * Grouped bars + metric header scrubber.
@@ -57,7 +57,7 @@ const BAR_MS = 200
 const BAR_GAP = 8
 /** Matches `--radius-md` / control scale (~8px). */
 const BAR_RADIUS: [number, number, number, number] = [8, 8, 0, 0]
-/** Axis tick fill — ≥4.5:1 on light/dark surfaces vs pure muted. */
+/** Axis tick fill - ≥4.5:1 on light/dark surfaces vs pure muted. */
 const AXIS_TICK_FILL =
   "color-mix(in oklab, var(--foreground) 58%, transparent)"
 
@@ -433,7 +433,7 @@ function SimpleBarChart({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{monthLabel}</p>

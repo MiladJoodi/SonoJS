@@ -16,7 +16,7 @@ const exampleDefs = [
     name: "code-block-streaming",
     title: "Streaming",
     description:
-      "Tokens arrive live with a Writing status — Replay remounts the stream.",
+      "Tokens arrive live with a Writing status - Replay remounts the stream.",
     npmRequires: ["lucide-react"],
   },
   {
@@ -156,28 +156,28 @@ export default async function CodePanelDocsPage() {
             {
               name: "language",
               type: "string",
-              defaultValue: "—",
+              defaultValue: "-",
               description:
-                "On CodeBlockContent — Shiki id (`tsx`, `json`, `bash`, …).",
+                "On CodeBlockContent - Shiki id (`tsx`, `json`, `bash`, …).",
             },
             {
               name: "wrap",
               type: "boolean",
               defaultValue: "false",
-              description: "On CodeBlockContent — wrap long lines.",
+              description: "On CodeBlockContent - wrap long lines.",
             },
             {
               name: "lineNumbers",
               type: "boolean",
               defaultValue: "false",
-              description: "On CodeBlockContent — show a line number gutter.",
+              description: "On CodeBlockContent - show a line number gutter.",
             },
             {
               name: "startLine",
               type: "number",
               defaultValue: "1",
               description:
-                "On CodeBlockContent — first line number in the gutter.",
+                "On CodeBlockContent - first line number in the gutter.",
             },
           ]}
         />

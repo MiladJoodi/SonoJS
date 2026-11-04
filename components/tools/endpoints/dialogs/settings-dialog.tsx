@@ -168,7 +168,7 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
             <div className="space-y-2 rounded-lg border border-border/80 bg-muted/30 px-3 py-3">
               <Label>Contact us</Label>
               <p className="text-xs text-muted-foreground">
-                Questions, feedback, or partnership — email us.
+                Questions, feedback, or partnership - email us.
               </p>
               <div className="flex flex-wrap items-center gap-2">
                 <div className="flex min-w-0 items-center gap-1.5">
@@ -246,7 +246,7 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
           <DialogHeader>
             <DialogTitle>Send message</DialogTitle>
             <DialogDescription>
-              Questions, feedback, or partnership — we will reply by email.
+              Questions, feedback, or partnership - we will reply by email.
             </DialogDescription>
           </DialogHeader>
 

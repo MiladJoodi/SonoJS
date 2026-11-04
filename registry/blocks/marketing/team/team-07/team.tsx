@@ -73,7 +73,7 @@ const DEFAULT_MEMBERS = [
 export default function Team({
   title = "Who you’ll work with",
   eyebrow = "Roster",
-  description = "A calm directory layout—avatars and titles in a soft band that reads well at any width.",
+  description = "A calm directory layout-avatars and titles in a soft band that reads well at any width.",
   members = DEFAULT_MEMBERS,
   className,
   ...props

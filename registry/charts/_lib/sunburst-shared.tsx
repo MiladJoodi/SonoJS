@@ -14,7 +14,7 @@ export const SERIES_VARS = [
   "var(--chart-5)",
 ] as const
 
-/** On-fill arc labels — light ink on series fills (PORT on-fill rule). */
+/** On-fill arc labels - light ink on series fills (PORT on-fill rule). */
 export const SUNBURST_LABEL_INK = "#ffffff"
 
 function nestMix(base: string, percentTowardWhite: number) {
@@ -23,7 +23,7 @@ function nestMix(base: string, percentTowardWhite: number) {
 }
 
 /**
- * Solid branch colors — children lighten toward white via `color-mix`.
+ * Solid branch colors - children lighten toward white via `color-mix`.
  * Base tokens are CSS vars so fills track light/dark `--chart-*`.
  */
 export function colorizeTree(
@@ -87,7 +87,7 @@ export function flattenSunburstNodes(
   return out
 }
 
-/** Simple labels on arcs — no outline stroke. */
+/** Simple labels on arcs - no outline stroke. */
 export const sunburstTextOptions = {
   fontFamily: "var(--font-sono-sans), var(--font-sans)",
   fontWeight: 600,
@@ -119,7 +119,7 @@ type SunburstTooltipPayloadItem = {
 }
 
 /**
- * Sunburst tooltip — name + value + fill swatch.
+ * Sunburst tooltip - name + value + fill swatch.
  * Pass `dir` from `useChartDir()` (plot island is `dir="ltr"`).
  */
 export function SunburstTooltipContent({
@@ -248,7 +248,7 @@ export function SunburstNameLabels({
   )
 }
 
-/** Center hole disc — name + value (+ optional unit). Pass page `dir`. */
+/** Center hole disc - name + value (+ optional unit). Pass page `dir`. */
 export function SunburstCenter({
   active,
   total,

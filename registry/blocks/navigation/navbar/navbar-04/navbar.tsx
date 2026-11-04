@@ -138,7 +138,7 @@ export default function Navbar({
             Clear bar over a dark hero
           </h1>
           <p className="max-w-md text-sm text-white/65">
-            Navigation floats on the landing atmosphere — no solid header fill.
+            Navigation floats on the landing atmosphere - no solid header fill.
           </p>
         </div>
       </div>

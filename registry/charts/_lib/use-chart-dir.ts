@@ -6,7 +6,7 @@ export type ChartDir = "ltr" | "rtl"
 
 /**
  * Reads writing direction from the nearest ancestor `[dir]` (not self).
- * Works after `sonojs add` — no docs DirectionProvider required.
+ * Works after `sonojs add` - no docs DirectionProvider required.
  */
 export function useChartDir(): {
   dir: ChartDir

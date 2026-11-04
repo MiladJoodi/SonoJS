@@ -3,7 +3,7 @@
   "name": "cookie-consent-02",
   "type": "registry:block",
   "title": "cookie-consent-02",
-  "description": "Full-width bottom cookie strip — Accept all / Reject all / Customize with prefs panel (RTL/LTR).",
+  "description": "Full-width bottom cookie strip - Accept all / Reject all / Customize with prefs panel (RTL/LTR).",
   "access": "public",
   "dependencies": [
     "lucide-react"
@@ -38,6 +38,6 @@
       "target": "components/blocks/marketing/cookie-consent-02/cookie-consent.tsx"
     }
   ],
-  "version": "0.1.0+c9c3d2a86e47",
-  "generatedAt": "2026-11-03T21:57:48.548Z"
+  "version": "0.1.0+3fe3a15cbaf2",
+  "generatedAt": "2026-11-04T11:52:24.655Z"
 }

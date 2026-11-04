@@ -13,7 +13,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Hc Gauge Custom Pivot — large hollow pivot with blunt dial.
+ * Hc Gauge Custom Pivot - large hollow pivot with blunt dial.
  * Soft teal bands; locked header chrome; English / Intl.
  * Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/hc-gauge-custom-pivot.tsx
@@ -99,7 +99,7 @@ function buildOptions(value: number): Options {
 }
 
 function HcGaugeCustomPivot({
-  title = "Score gauge — custom pivot",
+  title = "Score gauge - custom pivot",
   subtitle = "Large hollow pivot and blunt dial on soft teal bands (−150° → 150°).",
   value = DEMO_VALUE,
   className,

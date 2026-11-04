@@ -129,7 +129,7 @@ function money(n: number) {
   return n.toLocaleString("en-US", { style: "currency", currency: "USD" })
 }
 
-/** Product PLP SERP — search, category pills, sort, product grid (results hero). */
+/** Product PLP SERP - search, category pills, sort, product grid (results hero). */
 export default function SearchResults({
   className,
   ...props

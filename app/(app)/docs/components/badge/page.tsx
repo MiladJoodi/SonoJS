@@ -174,7 +174,7 @@ export default async function BadgeDocsPage() {
         pathname="/docs/components/badge"
         description={
           <p className="leading-relaxed text-muted-foreground">
-          Small status labels for counts, categories, and inline metadata —
+          Small status labels for counts, categories, and inline metadata -
           with variants, icons, and link composition.
         </p>
         }

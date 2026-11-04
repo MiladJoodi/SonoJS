@@ -115,7 +115,7 @@ function TimelineHeader({
   className,
   ...props
 }: React.ComponentProps<"div">) {
-  // No `relative` — Indicator/Separator position against TimelineItem.
+  // No `relative` - Indicator/Separator position against TimelineItem.
   return (
     <div data-slot="timeline-header" className={cn(className)} {...props} />
   )
@@ -169,7 +169,7 @@ function TimelineItem({ step, className, ...props }: TimelineItemProps) {
         "group/timeline-item relative flex flex-1 flex-col gap-0.5 has-[+[data-completed]]:**:data-[slot=timeline-separator]:bg-primary",
         // mt-12 clears -top-8 indicators (size-4/6) so overflow-x parents do not clip them.
         orientation === "horizontal" && "mt-12 pe-8 last:pe-0",
-        // Gutter comes from Timeline `ps-8` — do not margin items (avoids missing ms-* utilities).
+        // Gutter comes from Timeline `ps-8` - do not margin items (avoids missing ms-* utilities).
         orientation === "vertical" && "pb-6 last:pb-0",
         className
       )}

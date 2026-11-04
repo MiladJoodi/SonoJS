@@ -283,7 +283,7 @@ describe.runIf(hasDb)("concurrency race scenarios", () => {
     expect(claimSeed.outcome).toBe("acquired")
     if (claimSeed.outcome !== "acquired") return
 
-    // DB starts monthly — A will read this and attempt to write it to Clerk
+    // DB starts monthly - A will read this and attempt to write it to Clerk
     await upsertSubscriptionByStripeId({
       userId: user.id,
       planId: monthly!.id,

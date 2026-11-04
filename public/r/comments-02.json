@@ -3,7 +3,7 @@
   "name": "comments-02",
   "type": "registry:block",
   "title": "comments-02",
-  "description": "Sorted comments panel — Newest/Top segment, flat rows, likes (RTL/LTR).",
+  "description": "Sorted comments panel - Newest/Top segment, flat rows, likes (RTL/LTR).",
   "access": "public",
   "dependencies": [
     "lucide-react"
@@ -67,6 +67,6 @@
       "target": "components/blocks/communication/comments-02/images/maria.webp"
     }
   ],
-  "version": "0.1.0+c9c3d2a86e47",
-  "generatedAt": "2026-11-03T21:57:48.548Z"
+  "version": "0.1.0+3fe3a15cbaf2",
+  "generatedAt": "2026-11-04T11:52:24.655Z"
 }

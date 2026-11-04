@@ -27,7 +27,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Mix Bar Chart — locked gallery chrome + chart-local stacked×grouped mix.
+ * Mix Bar Chart - locked gallery chrome + chart-local stacked×grouped mix.
  * Store + Online stacked beside Orders; legend focus/lock dims other series.
  * Installs to: components/charts/mix-bar-chart.tsx
  */
@@ -62,7 +62,7 @@ const AXIS_TICK_FILL =
   "color-mix(in oklab, var(--foreground) 58%, transparent)"
 const MUTED_FILL =
   "color-mix(in oklab, var(--muted) 70%, transparent)"
-/** Third series — mix chart type needs chart-3 (semantic amber). */
+/** Third series - mix chart type needs chart-3 (semantic amber). */
 const CHART_SERIES_C = "var(--chart-3)"
 
 const DEMO_DATA: MixBarPoint[] = [
@@ -495,7 +495,7 @@ function MixBarChart({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{monthLabel}</p>

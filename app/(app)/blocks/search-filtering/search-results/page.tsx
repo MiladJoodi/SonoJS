@@ -41,7 +41,7 @@ export default function BlockSearchResultsDocsPage() {
       <BlocksPageHeader
         title="Search Results"
         pathname="/blocks/search-filtering/search-results"
-        description="SERP and directory layouts — knowledge results, product listings, people search, and advanced search with light refine."
+        description="SERP and directory layouts - knowledge results, product listings, people search, and advanced search with light refine."
       />
 
       <div className="flex flex-col gap-8">

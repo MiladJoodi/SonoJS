@@ -44,7 +44,7 @@ export default function BlockHeroDocsPage() {
       <BlocksPageHeader
         title="Hero"
         pathname="/blocks/marketing/hero"
-        description="Marketing heroes — headlines, CTAs, product stages, and brand imagery."
+        description="Marketing heroes - headlines, CTAs, product stages, and brand imagery."
       />
 
       <div className="flex flex-col gap-8">

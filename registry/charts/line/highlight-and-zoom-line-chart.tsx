@@ -29,7 +29,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Highlight And Zoom Line Chart — locked gallery chrome (navy × orange).
+ * Highlight And Zoom Line Chart - locked gallery chrome (navy × orange).
  * Drag a range to zoom; dual Y-axes (Cost × Impressions). RTL-aware.
  * Installs to: components/charts/highlight-and-zoom-line-chart.tsx
  */

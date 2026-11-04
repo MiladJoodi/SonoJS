@@ -23,7 +23,7 @@ const ARTICLE = {
   sections: [
     {
       heading: "Introduction",
-      body: "Modern front-end development demands more than just getting things to work — it requires systems that scale, components that compose, and designs that adapt. SonoJS is built to satisfy all three.",
+      body: "Modern front-end development demands more than just getting things to work - it requires systems that scale, components that compose, and designs that adapt. SonoJS is built to satisfy all three.",
     },
     {
       heading: "Setting Up the Project",

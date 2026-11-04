@@ -193,7 +193,7 @@ export default function ProductList({
               Top Laptops
             </h2>
             <p className="mt-2 max-w-xl text-start text-sm text-muted-foreground sm:text-base">
-              Spec-first picks with real review scores — dark product stages
+              Spec-first picks with real review scores - dark product stages
               keep hardware looking sharp.
             </p>
           </div>

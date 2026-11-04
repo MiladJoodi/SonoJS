@@ -95,7 +95,7 @@ function makeMoves(count: number): Move[] {
   return moves;
 }
 
-// --- Globe: lat/long field, a scan meridian sweeps — searching --------
+// --- Globe: lat/long field, a scan meridian sweeps - searching --------
 
 export const frameGlobe: ModeFrame = (size, t, o) => {
   const spin = 0.5;
@@ -146,7 +146,7 @@ export const frameGlobe: ModeFrame = (size, t, o) => {
   return finalizeFrame(dots, [], o.rMin);
 };
 
-// --- Rubik: bands twist in quarter turns, scramble → solve — solving --
+// --- Rubik: bands twist in quarter turns, scramble → solve - solving --
 
 export const frameRubik: ModeFrame = (size, t, o) => {
   const cx = size / 2;
@@ -175,7 +175,7 @@ export const frameRubik: ModeFrame = (size, t, o) => {
       );
       const [px, py, zr] = pt(x, y, z);
       const depth = (zr + 1) / 2;
-      // the band being turned inks a touch darker — the "hand"
+      // the band being turned inks a touch darker - the "hand"
       dots.push({
         x: px,
         y: py,
@@ -195,12 +195,12 @@ export const frameRubik: ModeFrame = (size, t, o) => {
   return finalizeFrame(dots, [], o.rMin);
 };
 
-// --- Wave: a waveform rolls through the rings — listening -------------
+// --- Wave: a waveform rolls through the rings - listening -------------
 
 export const frameWave: ModeFrame = (size, t, o) => {
   const cx = size / 2;
   const cy = size / 2;
-  // 0.76 base × 1.15 — the undulation pulls the sphere inward, so wave read
+  // 0.76 base × 1.15 - the undulation pulls the sphere inward, so wave read
   // ~15% smaller than the other lattice modes; scaled up to match them
   const R = (size / 2) * 0.874;
   const pt = makeProj(t * 0.18, 0.38, cx, cy, 1);
@@ -213,7 +213,7 @@ export const frameWave: ModeFrame = (size, t, o) => {
     const lat = -Math.PI / 2 + (ri / rings) * Math.PI;
     const cosLat = Math.cos(lat);
     const sinLat = Math.sin(lat);
-    // two waves, different tempi — organic, never quite repeating
+    // two waves, different tempi - organic, never quite repeating
     const w =
       0.62 * Math.sin(t * 2.1 - ri * 0.52) +
       0.38 * Math.sin(t * 1.27 + ri * 0.83);

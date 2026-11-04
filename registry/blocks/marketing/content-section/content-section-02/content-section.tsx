@@ -20,7 +20,7 @@ const DEFAULT_FEATURES = [
 export default function ContentSection({
   eyebrow = "Creative workspace",
   title = "Immerse Yourself in Creativity",
-  description = "Unlock imagination whether you're designing, writing, or building. This is your space to experiment boldly and turn vision into reality—one spark at a time.",
+  description = "Unlock imagination whether you're designing, writing, or building. This is your space to experiment boldly and turn vision into reality-one spark at a time.",
   features = DEFAULT_FEATURES,
   ctaLabel = "Get started",
   ctaHref = "#",

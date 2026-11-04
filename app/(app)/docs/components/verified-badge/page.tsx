@@ -25,7 +25,7 @@ const exampleDefs = [
     name: "verified-badge-variants",
     title: "Variants",
     description:
-      "X / Twitter tiers — `blue` Premium, `gold` business, `gray` government.",
+      "X / Twitter tiers - `blue` Premium, `gold` business, `gray` government.",
   },
   {
     name: "verified-badge-profile",
@@ -36,7 +36,7 @@ const exampleDefs = [
   {
     name: "verified-badge-comment",
     title: "Comment",
-    description: "Compact feed comment — username, tick, and timestamp.",
+    description: "Compact feed comment - username, tick, and timestamp.",
     requires: ["avatar"],
   },
   {
@@ -70,7 +70,7 @@ export default async function VerifiedBadgeDocsPage() {
         pathname="/docs/components/verified-badge"
         description={
           <p className="leading-relaxed text-muted-foreground">
-            Verified seal for creators, businesses, and institutions — X /
+            Verified seal for creators, businesses, and institutions - X /
             Twitter color tiers (`blue`, `gold`, `gray`). Place next to names,
             in comments, or on seller cards.
           </p>
@@ -105,7 +105,7 @@ export default async function VerifiedBadgeDocsPage() {
               type: '"blue" | "gold" | "gray"',
               defaultValue: '"blue"',
               description:
-                "X / Twitter tiers — Premium blue (`#1D9BF0`), business gold (`#E2B719`), government gray (`#829AAB`).",
+                "X / Twitter tiers - Premium blue (`#1D9BF0`), business gold (`#E2B719`), government gray (`#829AAB`).",
             },
             {
               name: "size",

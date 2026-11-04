@@ -119,7 +119,7 @@ export default function MediaPlayer({
           </Button>
         </div>
         <p className="mt-4 text-sm text-muted-foreground">
-          Vertical short — side actions + caption overlay
+          Vertical short - side actions + caption overlay
         </p>
       </div>
     </section>

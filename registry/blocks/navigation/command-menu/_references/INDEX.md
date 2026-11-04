@@ -1,11 +1,11 @@
-# Command Menu — pending sketches
+# Command Menu - pending sketches
 
 **Catalog:** Navigation → Command Menu  
 Each file is a *distinct* UX job. Port one at a time; do not ship `_references/`.
 
 | # | File | Job (why it exists) |
 |---|---|---|
-| 01 | `01-inline-create.tsx` | Embedded palette — no modal; lives in page chrome |
+| 01 | `01-inline-create.tsx` | Embedded palette - no modal; lives in page chrome |
 | 02 | `02-global-launcher.tsx` | Classic ⌘K app launcher + hint footer |
 | 03 | `03-people-scout.tsx` | People search with chip filters + match highlight |
 | 04 | `04-code-jump.tsx` | IDE-style file jump (path + type pill) |

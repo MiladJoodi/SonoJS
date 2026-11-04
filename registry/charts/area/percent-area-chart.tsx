@@ -34,7 +34,7 @@ import { useNarrowViewport } from "../_lib/use-narrow-viewport"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Percent Area Chart — locked gallery chrome + **neon** (chart-local).
+ * Percent Area Chart - locked gallery chrome + **neon** (chart-local).
  * Three stacked monotone areas with `stackOffset="expand"` (100% share).
  * Installs to: components/charts/percent-area-chart.tsx
  */
@@ -491,7 +491,7 @@ function PercentAreaChart({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">

@@ -23,7 +23,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Custom Active Shape Pie Chart — donut with expanded active sector + callout.
+ * Custom Active Shape Pie Chart - donut with expanded active sector + callout.
  * Tooltip suppressed (callout carries detail); locked metric scrub chrome.
  * Tokens: `--chart-1…4`. Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/custom-active-shape-pie-chart.tsx
@@ -227,7 +227,7 @@ function renderActiveShape(
 
 function CustomActiveShapePieChart({
   title = "Sales by region",
-  subtitle = "Active sector expands with a callout — hover or use arrow keys.",
+  subtitle = "Active sector expands with a callout - hover or use arrow keys.",
   data = DEMO_DATA,
   className,
   plotDir,
@@ -272,7 +272,7 @@ function CustomActiveShapePieChart({
     liveSlice && total > 0 ? (liveSlice.value / total) * 100 : null
   const caption = liveSlice
     ? (SLICE_LABELS[liveSlice.name] ?? liveSlice.name)
-    : "—"
+    : "-"
 
   const startAngle = plotRtl ? -270 : 90
   const endAngle = plotRtl ? 90 : -270
@@ -410,7 +410,7 @@ function CustomActiveShapePieChart({
                 <span className="font-normal">of total</span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{caption}</p>

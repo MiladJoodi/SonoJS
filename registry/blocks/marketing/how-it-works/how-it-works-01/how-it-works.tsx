@@ -102,7 +102,7 @@ const STEPS = [
   {
     n: "01",
     title: "Install what you need",
-    body: "CLI drop-in — one command, files in your project.",
+    body: "CLI drop-in - one command, files in your project.",
     meta: "CLI · React · Tailwind",
     Artifact: InstallArtifact,
   },
@@ -116,7 +116,7 @@ const STEPS = [
   {
     n: "03",
     title: "Compose the product",
-    body: "Stack primitives or start from a block — then shape it.",
+    body: "Stack primitives or start from a block - then shape it.",
     meta: "Components · Blocks",
     Artifact: BuildArtifact,
   },
@@ -154,7 +154,7 @@ export default function HowItWorks({
             </h1>
           </div>
           <p className="max-w-xs text-start text-sm leading-relaxed text-muted-foreground sm:text-end">
-            Install, theme, compose, ship — with a glimpse of each step.
+            Install, theme, compose, ship - with a glimpse of each step.
           </p>
         </header>
 

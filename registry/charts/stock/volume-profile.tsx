@@ -22,7 +22,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Volume Profile — horizontal volume-by-price bins with POC highlight.
+ * Volume Profile - horizontal volume-by-price bins with POC highlight.
  * Locked gallery chrome + metric scrubber.
  * Installs to: components/charts/volume-profile.tsx
  */
@@ -117,7 +117,7 @@ function useNarrowViewport() {
 
 function VolumeProfile({
   title = "Volume Profile",
-  subtitle = "Volume traded at each price level — POC marks the highest-volume bin.",
+  subtitle = "Volume traded at each price level - POC marks the highest-volume bin.",
   symbol = "AENE",
   data = DEMO_DATA,
   bins = DEFAULT_BINS,
@@ -353,7 +353,7 @@ function VolumeProfile({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">

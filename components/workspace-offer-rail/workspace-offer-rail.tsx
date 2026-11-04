@@ -16,7 +16,7 @@ const FREE_FEATURES = [
   "Free register & sign in",
   "Every component & block",
   "Charts, tools & CLI",
-  "All features — no paywall",
+  "All features - no paywall",
 ]
 
 /**
@@ -29,7 +29,7 @@ export function WorkspaceOfferRail({
   speed = 0.9,
 }: {
   className?: string
-  /** Meteor lap speed — same control as offer-card-01. */
+  /** Meteor lap speed - same control as offer-card-01. */
   speed?: number
 }) {
   const { isLoaded, isSignedIn } = useAuth()
@@ -61,7 +61,7 @@ export function WorkspaceOfferRail({
             <>
               Create a free account and unlock{" "}
               <span className="font-semibold text-foreground">everything</span>{" "}
-              — components, blocks, charts, and tools.{" "}
+              - components, blocks, charts, and tools.{" "}
               <span className="font-semibold text-foreground">No credit card</span>.
             </>
           }

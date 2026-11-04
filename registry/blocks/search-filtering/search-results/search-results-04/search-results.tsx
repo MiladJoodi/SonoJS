@@ -125,7 +125,7 @@ function money(n: number) {
   return n.toLocaleString("en-US", { style: "currency", currency: "USD" })
 }
 
-/** Advanced search results — SERP first, compact Edit filters panel (not a facet builder). */
+/** Advanced search results - SERP first, compact Edit filters panel (not a facet builder). */
 export default function SearchResults({
   className,
   ...props

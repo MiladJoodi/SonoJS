@@ -55,7 +55,7 @@ const DEFAULT_MEMBERS = [
 export default function Team({
   title = "Faces of the craft",
   eyebrow = "Studio",
-  description = "Portrait cards with cinematic overlays—built for dark and light canvases alike.",
+  description = "Portrait cards with cinematic overlays-built for dark and light canvases alike.",
   members = DEFAULT_MEMBERS,
   className,
   ...props

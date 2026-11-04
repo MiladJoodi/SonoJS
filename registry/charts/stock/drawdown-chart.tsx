@@ -35,7 +35,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Drawdown Chart — equity line + underwater drawdown area.
+ * Drawdown Chart - equity line + underwater drawdown area.
  * Dual syncId panels; no neon; locked gallery chrome + metric scrubber.
  * Installs to: components/charts/drawdown-chart.tsx
  */
@@ -117,7 +117,7 @@ function formatPct(value: number, locale: string, digits = 1) {
 
 function DrawdownChart({
   title = "Drawdown Chart",
-  subtitle = "Equity path with drawdown from the prior peak — underwater area below zero.",
+  subtitle = "Equity path with drawdown from the prior peak - underwater area below zero.",
   symbol = "AENE",
   data = DEMO_DATA,
   className,

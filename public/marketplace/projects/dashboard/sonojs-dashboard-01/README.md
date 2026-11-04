@@ -1,4 +1,4 @@
-# Commerce Admin Dashboard — marketplace assets
+# Commerce Admin Dashboard - marketplace assets
 
 Category: `dashboard`  
 Slug / folder: `sonojs-dashboard-01`  

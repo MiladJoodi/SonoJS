@@ -71,7 +71,7 @@ export default async function QueueDocsPage() {
         pathname="/docs/components/queue"
         description={
           <p className="leading-relaxed text-muted-foreground">
-            Collapsible sections for queued messages, todos, and attachments —
+            Collapsible sections for queued messages, todos, and attachments -
             built for AI workflow progress and pending work.
           </p>
         }
@@ -96,19 +96,19 @@ export default async function QueueDocsPage() {
               name: "defaultOpen",
               type: "boolean",
               defaultValue: "true",
-              description: "`QueueSection` — start expanded.",
+              description: "`QueueSection` - start expanded.",
             },
             {
               name: "completed",
               type: "boolean",
               defaultValue: "false",
               description:
-                "`QueueItemIndicator` / `Content` / `Description` — muted + strike-through.",
+                "`QueueItemIndicator` / `Content` / `Description` - muted + strike-through.",
             },
             {
               name: "count / label",
               type: "number / string",
-              description: "`QueueSectionLabel` — e.g. `3 Queued`.",
+              description: "`QueueSectionLabel` - e.g. `3 Queued`.",
             },
             {
               name: "QueueMessage / QueueTodo",

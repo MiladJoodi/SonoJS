@@ -24,7 +24,7 @@ import { CANDLE_DOWN, CANDLE_UP } from "../_lib/stock-shared"
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Sparklines — locked gallery chrome + type-required portfolio dashboard.
+ * Sparklines - locked gallery chrome + type-required portfolio dashboard.
  * KPI area cards + watchlist with trend/volume mini-charts (no neon).
  * Installs to: components/charts/sparklines.tsx
  */

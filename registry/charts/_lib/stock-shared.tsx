@@ -5,7 +5,7 @@ import { Rectangle, type BarShapeProps } from "recharts"
 import { between, random } from "./chart-mock-data"
 
 /**
- * Shared Stock gallery helpers — candle shapes, generators, indicators.
+ * Shared Stock gallery helpers - candle shapes, generators, indicators.
  * Semantic up/down via `--chart-up` / `--chart-down` (not navy×orange series).
  */
 
@@ -18,7 +18,7 @@ export type MarketCandle = {
   volume: number
 }
 
-/** Soft bullish / bearish fills — theme tokens. */
+/** Soft bullish / bearish fills - theme tokens. */
 export const CANDLE_UP = "var(--chart-up)"
 export const CANDLE_DOWN = "var(--chart-down)"
 
@@ -115,7 +115,7 @@ export function CandlestickShape(
 
 /**
  * Classic OHLC bar: vertical high–low stem, open tick left, close tick right.
- * Financial convention (open← / →close) — not mirrored for chart RTL.
+ * Financial convention (open← / →close) - not mirrored for chart RTL.
  */
 export function OhlcBar(props: BarShapeProps & { dimmed?: boolean }) {
   const {
@@ -166,7 +166,7 @@ export function OhlcBar(props: BarShapeProps & { dimmed?: boolean }) {
   )
 }
 
-/** Intraday OHLC walk — same API as Recharts market mock helpers. */
+/** Intraday OHLC walk - same API as Recharts market mock helpers. */
 export function generateMockMarketData(
   length: number,
   seed: number,
@@ -197,7 +197,7 @@ export function generateMockMarketData(
   return candles
 }
 
-/** Daily series with percent noise — shared Stock demo base. */
+/** Daily series with percent noise - shared Stock demo base. */
 export function generateNaturalCandles(
   length = 24,
   seed = 2141,
@@ -422,7 +422,7 @@ export function toRenko(
   return bricks
 }
 
-/** Solid Renko brick — gap between neighbors, rounded corners. */
+/** Solid Renko brick - gap between neighbors, rounded corners. */
 export function RenkoBrickShape(
   props: BarShapeProps & { dimmed?: boolean }
 ) {
@@ -461,7 +461,7 @@ export function formatCandleDay(time: number, locale = "en") {
   }).format(new Date(time))
 }
 
-/** Intraday axis / brush tick — UTC clock. */
+/** Intraday axis / brush tick - UTC clock. */
 export function formatCandleTime(time: number, locale = "en") {
   return new Intl.DateTimeFormat(locale, {
     hour: "numeric",

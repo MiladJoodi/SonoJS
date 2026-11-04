@@ -51,7 +51,7 @@ export function CodegenDialog({ open, onOpenChange }: CodegenDialogProps) {
         <DialogHeader>
           <DialogTitle>Generate code</DialogTitle>
           <DialogDescription>
-            Copy this request as client code. Variables are not resolved — export
+            Copy this request as client code. Variables are not resolved - export
             uses the values currently in the editor.
           </DialogDescription>
         </DialogHeader>

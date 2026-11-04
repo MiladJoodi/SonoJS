@@ -23,7 +23,7 @@ export function isMobileBottomNavMore(
 }
 
 /**
- * Primary tabs — usefulness-first for a UI kit.
+ * Primary tabs - usefulness-first for a UI kit.
  * Templates → marketplace. Home lives in More.
  */
 export const mobileBottomNav: MobileBottomNavItem[] = [
@@ -52,7 +52,7 @@ const PRIMARY_HREFS = new Set(
 
 const HOME_NAV_ITEM: SiteNavItem = { href: "/", label: "Home" }
 
-/** Remaining site nav links for the More drawer — Home first. */
+/** Remaining site nav links for the More drawer - Home first. */
 export function getMobileMoreNavItems(): SiteNavItem[] {
   const rest = siteConfig.navItems.filter(
     (item) => !PRIMARY_HREFS.has(item.href)

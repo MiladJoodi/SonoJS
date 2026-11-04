@@ -19,19 +19,19 @@ const exampleDefs = [
     name: "reasoning-text-cascade",
     title: "Cascade",
     description:
-      'Per-character spring enter/exit — `variant="cascade"` (default).',
+      'Per-character spring enter/exit - `variant="cascade"` (default).',
     npmRequires: ["motion"],
   },
   {
     name: "reasoning-text-swap",
     title: "Swap",
-    description: 'Whole-phrase fade/slide — `variant="swap"`.',
+    description: 'Whole-phrase fade/slide - `variant="swap"`.',
     npmRequires: ["motion"],
   },
   {
     name: "reasoning-text-scramble",
     title: "Scramble",
-    description: 'Mono glyph decode into the next phrase — `variant="scramble"`.',
+    description: 'Mono glyph decode into the next phrase - `variant="scramble"`.',
     npmRequires: ["motion"],
   },
 ]
@@ -63,7 +63,7 @@ export default async function ReasoningTextDocsPage() {
         description={
           <p className="leading-relaxed text-muted-foreground">
             Animated status text for showing that an AI agent is thinking and
-            working — ASCII loader plus shimmering phrase cycles.
+            working - ASCII loader plus shimmering phrase cycles.
           </p>
         }
       />
@@ -120,7 +120,7 @@ export default async function ReasoningTextDocsPage() {
             {
               name: "className",
               type: "string",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Merge classes on the status root.",
             },
           ]}

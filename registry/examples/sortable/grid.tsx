@@ -118,7 +118,7 @@ const priorityDot = {
 } as const
 
 function getItemSize(type: GridSortItem["type"]) {
-  // Mobile: 2 cols — featured spans full width. sm+: 3 cols with 2×2 featured.
+  // Mobile: 2 cols - featured spans full width. sm+: 3 cols with 2×2 featured.
   return type === "featured"
     ? "col-span-2 row-span-1 sm:col-span-2 sm:row-span-2"
     : "col-span-1 row-span-1"

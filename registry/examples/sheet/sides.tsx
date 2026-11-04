@@ -33,7 +33,7 @@ export function SheetSides() {
               <SheetTitle>{label} sheet</SheetTitle>
               <SheetDescription>
                 {side === "start" || side === "end"
-                  ? `Opens from the inline-${side} edge. Toggle LTR/RTL in the preview — the panel and slide animation follow writing direction.`
+                  ? `Opens from the inline-${side} edge. Toggle LTR/RTL in the preview - the panel and slide animation follow writing direction.`
                   : `Opens from the ${side} edge.`}
               </SheetDescription>
             </SheetHeader>

@@ -13,7 +13,7 @@ import { cn } from "@sonojs/ui/lib/utils"
 
 const visible = [
   "Deployed v2.4.1 to production",
-  "Merged PR #842 — fix checkout tax",
+  "Merged PR #842 - fix checkout tax",
 ]
 
 const hidden = [

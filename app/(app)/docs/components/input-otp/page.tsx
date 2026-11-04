@@ -141,20 +141,20 @@ export default async function InputOTPDocsPage() {
             {
               name: "maxLength",
               type: "number",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Required. Number of characters / slots.",
             },
             {
               name: "pattern",
               type: "string",
-              defaultValue: "—",
+              defaultValue: "-",
               description:
-                "Regexp string — e.g. `REGEXP_ONLY_DIGITS` from `input-otp`.",
+                "Regexp string - e.g. `REGEXP_ONLY_DIGITS` from `input-otp`.",
             },
             {
               name: "value / onChange",
               type: "string / (value) => void",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Controlled value API.",
             },
             {
@@ -166,13 +166,13 @@ export default async function InputOTPDocsPage() {
             {
               name: "index",
               type: "number",
-              defaultValue: "—",
-              description: "Required on `InputOTPSlot` — zero-based slot index.",
+              defaultValue: "-",
+              description: "Required on `InputOTPSlot` - zero-based slot index.",
             },
             {
               name: "containerClassName",
               type: "string",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Classes for the OTP container flex row.",
             },
           ]}

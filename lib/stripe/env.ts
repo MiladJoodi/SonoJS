@@ -1,4 +1,4 @@
-/** Stripe secrets — never log return values. */
+/** Stripe secrets - never log return values. */
 
 export function getStripeWebhookSecret(): string {
   const secret = process.env.STRIPE_WEBHOOK_SECRET?.trim()

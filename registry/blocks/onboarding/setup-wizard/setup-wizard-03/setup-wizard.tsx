@@ -99,7 +99,7 @@ export default function SetupWizard({
                 Set up in minutes
               </h1>
               <p className="max-w-sm text-sm leading-relaxed text-zinc-400">
-                Create an account, verify your email, and pick how you work —
+                Create an account, verify your email, and pick how you work -
                 then jump straight into the product.
               </p>
             </div>

@@ -74,11 +74,11 @@ function DialogContent({
   showCloseButton?: boolean
   size?: "default" | "sm"
 }) {
-  // Portal under <body> — inherit DirectionProvider unless the caller forces dir.
+  // Portal under <body> - inherit DirectionProvider unless the caller forces dir.
   const { dir: dirFromProvider } = useDirection()
   const dir = dirProp ?? dirFromProvider
 
-  // Inline maxWidth — Tailwind max-w-* source-order can let
+  // Inline maxWidth - Tailwind max-w-* source-order can let
   // max-w-[calc(100%-2rem)] win and stretch the panel full-bleed.
   // Match current registry default: sm:max-w-sm (24rem).
   const maxWidth =

@@ -239,7 +239,7 @@ export default function FileUpload({
         <div className="mb-8 text-start">
           <h1 className="text-2xl font-semibold tracking-tight">Upload files</h1>
           <p className="mt-1 text-muted-foreground">
-            Drag and drop files or click to browse — validated types and size.
+            Drag and drop files or click to browse - validated types and size.
           </p>
         </div>
 

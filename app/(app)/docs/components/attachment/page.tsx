@@ -74,7 +74,7 @@ export default async function AttachmentDocsPage() {
         pathname="/docs/components/attachment"
         description={
           <p className="leading-relaxed text-muted-foreground">
-          File and media attachment cards — sizes, upload states, image media,
+          File and media attachment cards - sizes, upload states, image media,
           and action buttons.
         </p>
         }
@@ -121,7 +121,7 @@ export default async function AttachmentDocsPage() {
               name: "variant",
               type: '"icon" | "image"',
               defaultValue: '"icon"',
-              description: "On AttachmentMedia — icon tile or image fill.",
+              description: "On AttachmentMedia - icon tile or image fill.",
             },
           ]}
         />

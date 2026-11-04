@@ -100,7 +100,7 @@ export default async function ImageGenerationDocsPage() {
             {
               name: "children",
               type: "ReactNode",
-              defaultValue: "—",
+              defaultValue: "-",
               description:
                 "Completed media (img / Next Image / canvas / video / custom).",
             },
@@ -114,7 +114,7 @@ export default async function ImageGenerationDocsPage() {
             {
               name: "prompt",
               type: "string",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Shown under the status line in quotes.",
             },
             {
@@ -151,13 +151,13 @@ export default async function ImageGenerationDocsPage() {
             {
               name: "onRetry",
               type: "() => void",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Shows Try again when `status` is `error`.",
             },
             {
               name: "className",
               type: "string",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Merge classes on the root.",
             },
           ]}

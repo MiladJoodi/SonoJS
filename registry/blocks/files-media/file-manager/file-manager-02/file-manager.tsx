@@ -57,7 +57,7 @@ const ROWS = [
     id: "1",
     name: "Q3 Campaign",
     kind: "folder" as const,
-    size: "—",
+    size: "-",
     modified: "Today 10:23",
   },
   {
@@ -92,7 +92,7 @@ const ROWS = [
     id: "6",
     name: "Assets",
     kind: "folder" as const,
-    size: "—",
+    size: "-",
     modified: "Oct 20",
   },
 ] as const
@@ -205,7 +205,7 @@ function TreeItem({
   )
 }
 
-/** Finder / Explorer — folder tree + dense table, path bar. */
+/** Finder / Explorer - folder tree + dense table, path bar. */
 export default function FileManager({
   className,
   ...props

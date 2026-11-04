@@ -30,7 +30,7 @@ const features = [
   {
     title: "Support",
     description:
-      "Our expert support team is available around the clock to assist you — ensuring your experience remains smooth.",
+      "Our expert support team is available around the clock to assist you - ensuring your experience remains smooth.",
     icon: HeadphonesIcon,
     chip: "bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300",
   },
@@ -44,7 +44,7 @@ const features = [
   {
     title: "Global Reach",
     description:
-      "Whether you're a startup or enterprise — add users, features, or capabilities without disrupting performance.",
+      "Whether you're a startup or enterprise - add users, features, or capabilities without disrupting performance.",
     icon: Globe2Icon,
     chip: "bg-orange-100 text-orange-700 dark:bg-orange-950 dark:text-orange-300",
   },

@@ -89,13 +89,13 @@ export default async function FluidOrbDocsPage() {
             {
               name: "className",
               type: "string",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Merge classes on the rounded wrapper.",
             },
             {
               name: "…div props",
               type: 'React.ComponentProps<"div">',
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Pass-through props for the wrapper.",
             },
           ]}

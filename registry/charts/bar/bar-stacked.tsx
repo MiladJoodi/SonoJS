@@ -27,7 +27,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Stacked Bar Chart — locked gallery chrome (navy × orange), same as Simple Bar.
+ * Stacked Bar Chart - locked gallery chrome (navy × orange), same as Simple Bar.
  * Stacked Desktop + Mobile columns + metric header scrubber.
  * Installs to: components/charts/bar-stacked.tsx
  */
@@ -52,10 +52,10 @@ export type BarStackedProps = {
 
 const NARROW_MQ = "(max-width: 639px)"
 const BAR_MS = 200
-/** Top segment only — matches `--radius-md` / control scale (~8px). */
+/** Top segment only - matches `--radius-md` / control scale (~8px). */
 const TOP_RADIUS: [number, number, number, number] = [8, 8, 0, 0]
 const FLAT_RADIUS: [number, number, number, number] = [0, 0, 0, 0]
-/** Axis tick fill — ≥4.5:1 on light/dark surfaces vs pure muted. */
+/** Axis tick fill - ≥4.5:1 on light/dark surfaces vs pure muted. */
 const AXIS_TICK_FILL =
   "color-mix(in oklab, var(--foreground) 58%, transparent)"
 
@@ -422,7 +422,7 @@ function BarStacked({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{monthLabel}</p>

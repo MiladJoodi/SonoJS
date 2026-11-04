@@ -19,7 +19,7 @@ export function VerifiedBadgeComment() {
           <span className="text-xs text-muted-foreground">2h</span>
         </div>
         <p className="mt-0.5 text-sm leading-relaxed text-foreground/90">
-          This layout finally feels right on mobile — love the spacing.
+          This layout finally feels right on mobile - love the spacing.
         </p>
       </div>
     </div>

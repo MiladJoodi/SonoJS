@@ -255,7 +255,7 @@ export default function ArticleLayout({
                 </h2>
                 <p className="mb-4 leading-7 text-muted-foreground">
                   Keep colors, radius, and spacing in CSS variables. Light and
-                  dark modes swap tokens without shipping a theme runtime —
+                  dark modes swap tokens without shipping a theme runtime -
                   consumers stay in control of the look.
                 </p>
                 <div className="flex gap-3 rounded-[12px] border border-border/70 bg-card p-4 shadow-soft">

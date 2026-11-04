@@ -294,7 +294,7 @@ export default function AnalyticsDashboard01() {
           <div>
             <h1 className="text-2xl font-semibold tracking-tight">Analytics</h1>
             <p className="mt-1 text-sm text-muted-foreground">
-              Your performance overview — updated in real time.
+              Your performance overview - updated in real time.
             </p>
           </div>
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center">

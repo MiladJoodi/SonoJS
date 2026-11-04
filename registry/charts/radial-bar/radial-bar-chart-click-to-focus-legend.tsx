@@ -19,7 +19,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Radial Bar Chart Click To Focus Legend — click a ring or legend chip to focus.
+ * Radial Bar Chart Click To Focus Legend - click a ring or legend chip to focus.
  * Dim others to 20%; click again to clear. Tokens: `--chart-1…5`.
  * Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/radial-bar-chart-click-to-focus-legend.tsx
@@ -58,7 +58,7 @@ const BAND_LABELS: Record<string, string> = {
   epsilon: "Epsilon",
 }
 
-/** Five concentric series — one unique `--chart-1…5` each (English labels). */
+/** Five concentric series - one unique `--chart-1…5` each (English labels). */
 const DEMO_DATA: RadialBarClickFocusPoint[] = [
   { band: "alpha", value: 86 },
   { band: "beta", value: 72 },
@@ -268,7 +268,7 @@ function RadialBarChartClickToFocusLegend({
               {formatNumber(metricValue, locale)}
             </p>
             <span className="text-xs text-muted-foreground">
-              {focused ? "focused" : "—"}
+              {focused ? "focused" : "-"}
             </span>
           </div>
           <p className="text-xs text-muted-foreground">{caption}</p>

@@ -3,7 +3,7 @@
   "name": "shopping-cart-10",
   "type": "registry:block",
   "title": "shopping-cart-10",
-  "description": "Interactive cart — qty steppers, remove, promo code, sticky order summary with free shipping over $100 (RTL/LTR).",
+  "description": "Interactive cart - qty steppers, remove, promo code, sticky order summary with free shipping over $100 (RTL/LTR).",
   "access": "public",
   "dependencies": [
     "lucide-react"
@@ -59,6 +59,6 @@
       "target": "components/blocks/ecommerce/shopping-cart-10/images/mouse.webp"
     }
   ],
-  "version": "0.1.0+c9c3d2a86e47",
-  "generatedAt": "2026-11-03T21:57:48.548Z"
+  "version": "0.1.0+3fe3a15cbaf2",
+  "generatedAt": "2026-11-04T11:52:24.655Z"
 }

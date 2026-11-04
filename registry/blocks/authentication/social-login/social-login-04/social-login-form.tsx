@@ -45,7 +45,7 @@ export default function SocialLoginForm({
               Pick up where you left off
             </p>
             <p className="mt-1 max-w-xs text-xs leading-relaxed text-white/90">
-              One tap with Google or Apple — your workspace stays in sync.
+              One tap with Google or Apple - your workspace stays in sync.
             </p>
           </div>
         </div>

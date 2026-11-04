@@ -67,7 +67,7 @@ export async function POST(req: NextRequest) {
 
   const data = body as Record<string, unknown>;
 
-  // Honeypot — bots fill hidden fields; humans leave empty
+  // Honeypot - bots fill hidden fields; humans leave empty
   if (typeof data.company === "string" && data.company.trim()) {
     return NextResponse.json({ ok: true });
   }

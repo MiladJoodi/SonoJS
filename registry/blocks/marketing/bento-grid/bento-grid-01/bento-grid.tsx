@@ -41,7 +41,7 @@ export default function BentoGrid01({
             id="bento-grid-01-heading"
             className="mt-2 text-h2 font-semibold tracking-tight text-foreground"
           >
-            See what shipped —
+            See what shipped -
             <span className="text-muted-foreground"> and what&apos;s next.</span>
           </h2>
         </header>
@@ -85,7 +85,7 @@ export default function BentoGrid01({
               ))}
             </div>
             <p className="mt-4 text-sm text-muted-foreground">
-              Registry installs across public docs — last bar is this week.
+              Registry installs across public docs - last bar is this week.
             </p>
           </article>
 
@@ -123,7 +123,7 @@ export default function BentoGrid01({
               ))}
             </ul>
             <p className="mt-5 border-t border-border/70 pt-4 text-sm text-muted-foreground">
-              Presence updates every few seconds — no extra sidebar chrome.
+              Presence updates every few seconds - no extra sidebar chrome.
             </p>
           </article>
 
@@ -145,7 +145,7 @@ export default function BentoGrid01({
               <div className="h-full w-[28%] rounded-full bg-primary" />
             </div>
             <p className="mt-2 text-xs text-muted-foreground">
-              Budget 500ms — still quiet.
+              Budget 500ms - still quiet.
             </p>
           </article>
 

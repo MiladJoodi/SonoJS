@@ -11,7 +11,7 @@ function toLink(
   return { href: chartViewHref(entry.id), title: entry.title }
 }
 
-/** Chart view prev/next — thin wrapper over shared docs pager. */
+/** Chart view prev/next - thin wrapper over shared docs pager. */
 export function ChartViewPager({
   previous,
   next,

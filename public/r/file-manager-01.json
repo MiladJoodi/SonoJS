@@ -3,7 +3,7 @@
   "name": "file-manager-01",
   "type": "registry:block",
   "title": "file-manager-01",
-  "description": "Drive-style file manager — sidebar nav, breadcrumbs, storage meter, and grid or list views.",
+  "description": "Drive-style file manager - sidebar nav, breadcrumbs, storage meter, and grid or list views.",
   "access": "public",
   "dependencies": [
     "lucide-react"
@@ -40,6 +40,6 @@
       "target": "components/blocks/files-media/file-manager-01/file-manager.tsx"
     }
   ],
-  "version": "0.1.0+c9c3d2a86e47",
-  "generatedAt": "2026-11-03T21:57:48.548Z"
+  "version": "0.1.0+3fe3a15cbaf2",
+  "generatedAt": "2026-11-04T11:52:24.655Z"
 }

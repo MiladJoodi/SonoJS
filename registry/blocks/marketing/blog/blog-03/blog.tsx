@@ -18,7 +18,7 @@ const DEFAULT_POSTS = [
     date: "10 Feb 2025",
     title: "A Guide to Igniting Your Imagination",
     description:
-      "Unlock creative potential with rituals that turn quiet sparks into bold, shippable ideas — for designers, writers, and builders alike.",
+      "Unlock creative potential with rituals that turn quiet sparks into bold, shippable ideas - for designers, writers, and builders alike.",
     author: "John Doe",
     authorImg: assetSrc(team1),
     role: "Creative Lead",
@@ -29,7 +29,7 @@ const DEFAULT_POSTS = [
     date: "7 Jun 2025",
     title: "Hacks to Supercharge Your Day",
     description:
-      "Small, compounding habits that reclaim hours each week — energy, focus, and a calmer cadence without burning out.",
+      "Small, compounding habits that reclaim hours each week - energy, focus, and a calmer cadence without burning out.",
     author: "Mark Adair",
     authorImg: assetSrc(team2),
     role: "Product Ops",
@@ -40,7 +40,7 @@ const DEFAULT_POSTS = [
     date: "5 Oct 2025",
     title: "Trends and Predictions",
     description:
-      "What’s next across design, tech, and culture — signal over noise so you stay prepared, inspired, and a step ahead.",
+      "What’s next across design, tech, and culture - signal over noise so you stay prepared, inspired, and a step ahead.",
     author: "Simon Konecki",
     authorImg: assetSrc(team3),
     role: "Strategy",

@@ -44,7 +44,7 @@ export default function BlockContactFormDocsPage() {
       <BlocksPageHeader
         title="Contact Form"
         pathname="/blocks/forms/contact-form"
-        description="Polished contact sections — elevated cards, clear hierarchy, and ready-to-ship form layouts for marketing and product pages."
+        description="Polished contact sections - elevated cards, clear hierarchy, and ready-to-ship form layouts for marketing and product pages."
       />
 
       <div className="flex flex-col gap-8">

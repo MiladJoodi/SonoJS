@@ -21,7 +21,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Pie Chart With Customized Label — full pie with mid-slice % labels.
+ * Pie Chart With Customized Label - full pie with mid-slice % labels.
  * On-fill ink `#ffffff` (PORT); locked metric scrub chrome.
  * Tokens: `--chart-1…4`. Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/pie-chart-with-customized-label.tsx
@@ -304,7 +304,7 @@ function PieChartWithCustomizedLabel({
                 <span className="font-normal">of total</span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{caption}</p>
@@ -355,7 +355,7 @@ function PieChartWithCustomizedLabel({
               strokeWidth={2}
               labelLine={false}
               label={renderCustomizedLabel}
-              // Always-on on-fill labels — skip enter animation to avoid blink.
+              // Always-on on-fill labels - skip enter animation to avoid blink.
               isAnimationActive={false}
               onMouseEnter={
                 scrub ? (_, index) => activate(index) : undefined

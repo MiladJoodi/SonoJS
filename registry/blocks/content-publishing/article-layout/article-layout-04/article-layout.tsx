@@ -194,7 +194,7 @@ export default function ArticleLayout({
                       </Badge>
                     </div>
                     <p className="mt-1.5 text-sm leading-relaxed text-foreground/80">
-                      Start from primitives that already own keyboard and ARIA —
+                      Start from primitives that already own keyboard and ARIA -
                       then layer visual tokens, not the other way around.
                     </p>
                   </div>

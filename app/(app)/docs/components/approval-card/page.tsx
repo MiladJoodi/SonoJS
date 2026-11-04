@@ -54,7 +54,7 @@ export default async function ApprovalCardDocsPage() {
         pathname="/docs/components/approval-card"
         description={
           <p className="leading-relaxed text-muted-foreground">
-            A review card for approving an AI agent&apos;s proposed action —
+            A review card for approving an AI agent&apos;s proposed action -
             simple approve/reject or a short question flow.
           </p>
         }
@@ -88,7 +88,7 @@ export default async function ApprovalCardDocsPage() {
             {
               name: "description",
               type: "ReactNode",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Body copy for simple (non-question) mode.",
             },
             {
@@ -107,25 +107,25 @@ export default async function ApprovalCardDocsPage() {
             {
               name: "onApprove / onReject / onRequestChanges",
               type: "() => void",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Simple-mode action handlers.",
             },
             {
               name: "onSubmit",
               type: "(answers) => void",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Called when the last question is submitted.",
             },
             {
               name: "result",
               type: "ReactNode",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Settled-state summary under the header.",
             },
             {
               name: "className",
               type: "string",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Merge classes on the card root.",
             },
           ]}

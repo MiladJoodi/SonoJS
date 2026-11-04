@@ -36,7 +36,7 @@ const shipment = [
   },
   {
     id: 4,
-    date: "Wed · —",
+    date: "Wed · -",
     title: "Delivered",
     description: "Awaiting signature at the delivery address.",
     done: false,

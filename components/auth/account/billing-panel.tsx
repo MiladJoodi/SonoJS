@@ -42,9 +42,9 @@ function formatMoney(amountCents: number, currency: string): string {
 }
 
 function formatDate(iso: string | null): string {
-  if (!iso) return "—"
+  if (!iso) return "-"
   const date = new Date(iso)
-  if (Number.isNaN(date.getTime())) return "—"
+  if (Number.isNaN(date.getTime())) return "-"
   return new Intl.DateTimeFormat(undefined, {
     year: "numeric",
     month: "short",
@@ -181,7 +181,7 @@ export function BillingPanel({
           <AlertTitle>Payment past due</AlertTitle>
           <AlertDescription>
             We could not collect your latest payment. Update your payment
-            method soon — Pro access may stop if the charge keeps failing.
+            method soon - Pro access may stop if the charge keeps failing.
           </AlertDescription>
         </Alert>
       ) : null}
@@ -300,7 +300,7 @@ export function BillingPanel({
                           </a>
                         </Button>
                       ) : (
-                        <span className="text-sm text-muted-foreground">—</span>
+                        <span className="text-sm text-muted-foreground">-</span>
                       )}
                     </TableCell>
                   </TableRow>

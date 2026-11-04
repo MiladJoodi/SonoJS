@@ -31,7 +31,7 @@ export default function BlockCrudManagementDocsPage() {
       <BlocksPageHeader
         title="CRUD Management"
         pathname="/blocks/data-tables/crud-management"
-        description="Five focused CRUD demos — users, products, orders, content, and support tickets."
+        description="Five focused CRUD demos - users, products, orders, content, and support tickets."
       />
 
       <div className="flex flex-col gap-8">

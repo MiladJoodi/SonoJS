@@ -5,11 +5,11 @@
  */
 
 /* -------------------------------------------------------------------------- */
-/* Light — soft gray canvas (no blue-tint fills; accents stay on primary only) */
+/* Light - soft gray canvas (no blue-tint fills; accents stay on primary only) */
 /* -------------------------------------------------------------------------- */
 
 .style-vega {
-  /* SonoJS primary — #2563EB */
+  /* SonoJS primary - #2563EB */
   --vega-primary: #2563eb;
   --vega-primary-foreground: #ffffff;
   --vega-primary-hover: #1d4ed8;
@@ -65,7 +65,7 @@
   --chart-3: var(--vega-chart-3);
   --chart-4: var(--vega-chart-4);
   
-  /* Neon area/spark semantics — shared SoT (market cards) */
+  /* Neon area/spark semantics - shared SoT (market cards) */
   --chart-up: #16a34a;
   --chart-down: #e11d48;
   --chart-mute: #52525b;
@@ -75,7 +75,7 @@
   --color-chart-4: var(--vega-chart-4);
   --color-chart-5: var(--vega-chart-5);
 
-  /* Border radius — SonoJS scale (aligned with app/globals.css) */
+  /* Border radius - SonoJS scale (aligned with app/globals.css) */
   --radius: 0.625rem;
   --radius-tooltip: calc(var(--radius) * 0.6);
   --radius-control: calc(var(--radius) * 0.8);
@@ -134,13 +134,13 @@
 }
 
 /* -------------------------------------------------------------------------- */
-/* Dark — calm sky-blue chrome (same family as light). Page background stays   */
+/* Dark - calm sky-blue chrome (same family as light). Page background stays   */
 /* Nova-dark flat; charts keep their own branded neon palette below.           */
 /* -------------------------------------------------------------------------- */
 
 html.dark .style-vega,
 .dark .style-vega {
-  /* Dark primary #396EF0 — closest darker to #3B82F6 with ≥4.5:1 vs white */
+  /* Dark primary #396EF0 - closest darker to #3B82F6 with ≥4.5:1 vs white */
   --vega-primary: #396ef0;
   --vega-primary-foreground: #ffffff;
   --vega-primary-hover: #1d4ed8;
@@ -155,7 +155,7 @@ html.dark .style-vega,
   --vega-chart-4: #818cf8;
   --vega-chart-5: #fb7185;
 
-  /* Neutral zinc shell — primary stays brand blue only */
+  /* Neutral zinc shell - primary stays brand blue only */
   --canvas: #09090b;
   --border-soft: color-mix(in oklab, #27272a 70%, transparent);
   --shadow-soft:
@@ -198,7 +198,7 @@ html.dark .style-vega,
   --chart-3: var(--vega-chart-3);
   --chart-4: var(--vega-chart-4);
   
-  /* Neon area/spark semantics — dark (brighter neon) */
+  /* Neon area/spark semantics - dark (brighter neon) */
   --chart-up: #4ADE80;
   --chart-down: #F25F70;
   --chart-mute: #d4d4d8;
@@ -249,7 +249,7 @@ html.dark .style-vega,
 }
 
 /*
- * One continuous canvas under hero + collage — never a second slab on
+ * One continuous canvas under hero + collage - never a second slab on
  * [data-collage-surface] (that hard edge read as a separator line).
  * Shell matches --background in light.
  */
@@ -312,7 +312,7 @@ html body.style-vega {
   --chart-3: var(--vega-chart-3);
   --chart-4: var(--vega-chart-4);
   
-  /* Neon area/spark semantics — shared SoT (market cards) */
+  /* Neon area/spark semantics - shared SoT (market cards) */
   --chart-up: #16a34a;
   --chart-down: #e11d48;
   --chart-mute: #52525b;
@@ -360,7 +360,7 @@ html.dark body.style-vega {
   --chart-3: var(--vega-chart-3);
   --chart-4: var(--vega-chart-4);
   
-  /* Neon area/spark semantics — dark (brighter neon) */
+  /* Neon area/spark semantics - dark (brighter neon) */
   --chart-up: #4ADE80;
   --chart-down: #F25F70;
   --chart-mute: #d4d4d8;

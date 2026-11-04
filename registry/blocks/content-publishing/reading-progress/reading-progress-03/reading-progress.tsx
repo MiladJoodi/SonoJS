@@ -18,8 +18,8 @@ const ARTICLE = {
       id: "intro",
       heading: "Introduction",
       paragraphs: [
-        "Modern front-end development demands more than just getting things to work — it requires systems that scale, components that compose, and designs that adapt across products and teams. SonoJS is built to satisfy all three without forcing a rigid architecture on your app.",
-        "This guide walks through the practical path from a fresh project to a production UI: setup, tokens, layout, accessibility, and a checklist you can reuse on every release. Keep this page open while you scroll — the chapter rail on the side tracks where you are.",
+        "Modern front-end development demands more than just getting things to work - it requires systems that scale, components that compose, and designs that adapt across products and teams. SonoJS is built to satisfy all three without forcing a rigid architecture on your app.",
+        "This guide walks through the practical path from a fresh project to a production UI: setup, tokens, layout, accessibility, and a checklist you can reuse on every release. Keep this page open while you scroll - the chapter rail on the side tracks where you are.",
         "If you are evaluating component kits, focus on install ergonomics, token ownership, and direction support. Those three decide whether a library survives the second product, not the first demo.",
       ],
     },
@@ -28,7 +28,7 @@ const ARTICLE = {
       heading: "Setting Up the Project",
       paragraphs: [
         "The fastest way to start is with the SonoJS CLI. Run npx @sonojs/ui@latest init and follow the prompts for your framework, theme tokens, and TypeScript setup. The CLI writes a components map, CSS entry, and baseline dependencies so add commands land in the right folders.",
-        "After init, add only the primitives you need. Prefer small increments — button, then field, then dialog — so review stays readable. Each add installs registry dependencies recursively and runs npm for missing packages.",
+        "After init, add only the primitives you need. Prefer small increments - button, then field, then dialog - so review stays readable. Each add installs registry dependencies recursively and runs npm for missing packages.",
         "Pin versions when a major would break APIs. DayPicker-style ranges are a good example: declare the major your source expects so consumers do not silently upgrade into a broken UI.",
       ],
     },
@@ -46,7 +46,7 @@ const ARTICLE = {
       heading: "Responsive Layouts",
       paragraphs: [
         "Prefer logical layout utilities so grids and stacks adapt without physical left/right assumptions. Use ms/me, ps/pe, and start/end so RTL and LTR inherit direction from the document.",
-        "Keep control heights consistent across breakpoints. Responsive work should change width, stacking, and gutters — not shrink buttons below the default control height.",
+        "Keep control heights consistent across breakpoints. Responsive work should change width, stacking, and gutters - not shrink buttons below the default control height.",
         "For sticky chrome like this chapter rail, make sure the reading column is tall enough that sticky has room to travel. Short demos make progress and active states flicker.",
       ],
     },
@@ -56,7 +56,7 @@ const ARTICLE = {
       paragraphs: [
         "Interactive components ship with correct ARIA attributes, keyboard navigation, and focus management. Overlays handle focus trapping and restore focus on close.",
         "Reading chrome should expose progress to assistive tech with a real progressbar role and live values. Chapter links need clear labels and visible focus rings.",
-        "Test with keyboard only once per release. If you cannot reach every control and see where focus is, the page is not ready — no matter how polished the visual design looks.",
+        "Test with keyboard only once per release. If you cannot reach every control and see where focus is, the page is not ready - no matter how polished the visual design looks.",
       ],
     },
     {
@@ -106,7 +106,7 @@ export default function ReadingProgress({
         Math.abs(prev - nextProgress) < 0.35 ? prev : nextProgress
       )
 
-      // Reading line ~28% from the top of the viewport — pick the last
+      // Reading line ~28% from the top of the viewport - pick the last
       // section whose heading has crossed it. Hysteresis via sticky last id.
       const marker = viewport * 0.28
       let nextId: (typeof ARTICLE.sections)[number]["id"] =

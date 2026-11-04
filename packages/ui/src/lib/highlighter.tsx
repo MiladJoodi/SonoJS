@@ -35,7 +35,7 @@ const aliases: Record<string, keyof typeof languages> = {
   zsh: "bash",
 }
 
-/** VS Code Dark+ — same theme in light and dark site modes. */
+/** VS Code Dark+ - same theme in light and dark site modes. */
 const THEME = "dark-plus" as const
 
 let highlighter: Promise<HighlighterCore> | undefined

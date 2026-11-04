@@ -31,7 +31,7 @@ const LIVE = [
     initials: "SJ",
     avatar: assetSrc(sarahImg),
     title: "Left feedback on Checkout",
-    body: "The empty-cart illustration feels a bit heavy — try a lighter stroke.",
+    body: "The empty-cart illustration feels a bit heavy - try a lighter stroke.",
     time: "Just now",
     icon: MessageSquareIcon,
     tone: "bg-sky-500/10 text-sky-600 dark:text-sky-400",

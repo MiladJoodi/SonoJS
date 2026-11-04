@@ -28,7 +28,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Sunburst Chart Theme Colors — team headcount by org (locked palette shades).
+ * Sunburst Chart Theme Colors - team headcount by org (locked palette shades).
  * Locked metric scrub chrome + center disc; `--chart-1…5` + color-mix nest shades.
  * Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/sunburst-chart-theme-colors.tsx
@@ -56,7 +56,7 @@ const GROUP_LABELS: Record<string, string> = {
   Support: "Support",
 }
 
-/** Sample org headcount — EN names; totals 150. */
+/** Sample org headcount - EN names; totals 150. */
 const DEMO_CHILDREN: SunburstThemeBranch[] = [
   {
     name: "Engineering",
@@ -124,7 +124,7 @@ const chartSunburstContainerClassName =
 
 function SunburstChartThemeColors({
   title = "Team headcount",
-  subtitle = "Org composition by team — hover a ring to scrub.",
+  subtitle = "Org composition by team - hover a ring to scrub.",
   data = DEMO_CHILDREN,
   className,
   scrub = true,

@@ -34,7 +34,7 @@ export default function PasskeyForm({
               No passwords. Just you.
             </h1>
             <p className="max-w-sm text-sm leading-relaxed text-zinc-400">
-              Passkeys replace shared secrets with a private key on your device —
+              Passkeys replace shared secrets with a private key on your device -
               the default people expect in 2026.
             </p>
           </div>

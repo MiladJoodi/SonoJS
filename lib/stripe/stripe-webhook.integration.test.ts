@@ -248,7 +248,7 @@ describe.runIf(hasDb)("stripe webhook integration", () => {
               object: "invoice",
               customer: customerId,
               subscription: stripeSub,
-              // No invoice.metadata — typical Checkout invoice
+              // No invoice.metadata - typical Checkout invoice
               amount_paid: 1200,
               currency: "usd",
             },

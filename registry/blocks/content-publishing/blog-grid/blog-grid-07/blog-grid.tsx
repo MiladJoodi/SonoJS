@@ -74,7 +74,7 @@ const ALL_POSTS: Post[] = [
     index: "04",
   },
   {
-    title: "SonoJS v1.2 — Calendar and Tree Components",
+    title: "SonoJS v1.2 - Calendar and Tree Components",
     category: "release",
     author: "SonoJS Team",
     date: "Mar 1, 2026",
@@ -114,7 +114,7 @@ export default function BlogGrid({
             Type index
           </h1>
           <p className="mt-2 text-base text-muted-foreground">
-            A literary table of contents — large titles, thin rules, no covers.
+            A literary table of contents - large titles, thin rules, no covers.
           </p>
         </div>
 

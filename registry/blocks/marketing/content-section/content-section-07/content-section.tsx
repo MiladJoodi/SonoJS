@@ -26,7 +26,7 @@ const DEFAULT_ROWS: ContentRow[] = [
   {
     title: "Master the Art of Job Hunting",
     description:
-      "Essential tips to land your first role with confidence—from standout resumes to interviews that stick.",
+      "Essential tips to land your first role with confidence-from standout resumes to interviews that stick.",
     imageSrc: assetSrc(digitalImg1),
     imageAlt: "Job hunting",
     mediaEnd: false,
@@ -37,7 +37,7 @@ const DEFAULT_ROWS: ContentRow[] = [
   {
     title: "Stand Out in a Competitive Market",
     description:
-      "Position yourself as the candidate companies want—strengths, personal brand, and aligned opportunities.",
+      "Position yourself as the candidate companies want-strengths, personal brand, and aligned opportunities.",
     imageSrc: assetSrc(digitalImg4),
     imageAlt: "Competitive market",
     mediaEnd: true,
@@ -50,7 +50,7 @@ const DEFAULT_ROWS: ContentRow[] = [
 export default function ContentSection({
   eyebrow = "Playbooks",
   title = "Seamless and Smart Operations",
-  description = "High-quality products and services that meet expectations—and consistently exceed them. Clarity, confidence, results.",
+  description = "High-quality products and services that meet expectations-and consistently exceed them. Clarity, confidence, results.",
   rows = DEFAULT_ROWS,
   className,
   ...props

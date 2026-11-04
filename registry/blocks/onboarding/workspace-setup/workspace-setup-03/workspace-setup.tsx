@@ -97,7 +97,7 @@ export default function WorkspaceSetup({
                 A home for your team
               </h1>
               <p className="max-w-sm text-sm leading-relaxed text-zinc-400">
-                Create a workspace, claim a URL, and start collaborating —
+                Create a workspace, claim a URL, and start collaborating -
                 without a multi-step signup.
               </p>
             </div>

@@ -26,7 +26,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Simple Scatter Chart — dual-series continuous plane (navy × orange).
+ * Simple Scatter Chart - dual-series continuous plane (navy × orange).
  * Locked chrome + metric scrubber. Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/simple-scatter-chart.tsx
  */
@@ -68,7 +68,7 @@ type FlatPoint = SimpleScatterPoint & {
   id: string
 }
 
-/** Group A — height (cm) × weight (kg). */
+/** Group A - height (cm) × weight (kg). */
 const DEMO_A: SimpleScatterPoint[] = [
   { x: 158, y: 52 },
   { x: 162, y: 58 },
@@ -80,7 +80,7 @@ const DEMO_A: SimpleScatterPoint[] = [
   { x: 180, y: 79 },
 ]
 
-/** Group B — slightly taller / heavier cluster. */
+/** Group B - slightly taller / heavier cluster. */
 const DEMO_B: SimpleScatterPoint[] = [
   { x: 166, y: 70 },
   { x: 169, y: 74 },
@@ -448,7 +448,7 @@ function SimpleScatterChart({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{caption}</p>

@@ -1,4 +1,4 @@
-# Casino Catalogue — marketplace assets
+# Casino Catalogue - marketplace assets
 
 Category: `betting`  
 Slug / folder: `sonojs-betting-03`  

@@ -28,7 +28,7 @@ export default function BlockPortfolioDocsPage() {
       <BlocksPageHeader
         title="Portfolio"
         pathname="/blocks/marketing/portfolio"
-        description="Featured case, spotlight rail, kinetic studio, and neon showreel — portfolio layouts for marketing sites."
+        description="Featured case, spotlight rail, kinetic studio, and neon showreel - portfolio layouts for marketing sites."
       />
 
       <div className="flex flex-col gap-8">

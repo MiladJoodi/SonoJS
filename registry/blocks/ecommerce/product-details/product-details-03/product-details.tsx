@@ -97,7 +97,7 @@ export default function ProductDetails({
       {...props}
     >
       <div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-start gap-8 max-sm:gap-8 sm:gap-12 lg:grid-cols-5 lg:gap-8">
-        {/* Full-size 2×2 mosaic — sticky */}
+        {/* Full-size 2×2 mosaic - sticky */}
         <div className="w-full min-w-0 lg:sticky lg:top-0 lg:col-span-3 lg:self-start">
           <div className="grid grid-cols-2 gap-0.5">
             {IMAGES.map((img) => (

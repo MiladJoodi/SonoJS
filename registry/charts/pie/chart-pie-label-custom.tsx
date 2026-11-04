@@ -16,7 +16,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Chart Pie Label Custom (classic) — custom always-on value labels, no label lines.
+ * Chart Pie Label Custom (classic) - custom always-on value labels, no label lines.
  * `labelLine={false}` + JSX label with `fill="var(--foreground)"`. Tokens: `--chart-1…5`.
  * Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/chart-pie-label-custom.tsx
@@ -265,7 +265,7 @@ function ChartPieLabelCustom({
                 <span className="font-normal">of total</span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{caption}</p>
@@ -340,7 +340,7 @@ function ChartPieLabelCustom({
                   </text>
                 )
               }}
-              // Always-on labels — skip enter animation to avoid blink.
+              // Always-on labels - skip enter animation to avoid blink.
               isAnimationActive={false}
               onMouseEnter={
                 scrub ? (_, index) => activate(index) : undefined

@@ -26,7 +26,7 @@ export default function BlockApiKeyManagementDocsPage() {
       <BlocksPageHeader
         title="API Key Management"
         pathname="/blocks/developer-tools/api-key-management"
-        description="Two patterns — admin key table with create dialog, and personal access tokens with one-time secret reveal."
+        description="Two patterns - admin key table with create dialog, and personal access tokens with one-time secret reveal."
       />
 
       <div className="flex flex-col gap-8">

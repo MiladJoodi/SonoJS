@@ -162,12 +162,12 @@ export function configureClient(clientId, opts = {}) {
   }
 
   if (!result.changed) {
-    log(`~ ${configPath} (${label} — already configured)`)
+    log(`~ ${configPath} (${label} - already configured)`)
     return { clientId, path: configPath, status: "unchanged", dryRun: !!opts.dryRun }
   }
 
   if (opts.dryRun) {
-    log(`+ ${configPath} (${label} — dry-run)`)
+    log(`+ ${configPath} (${label} - dry-run)`)
     return { clientId, path: configPath, status: "would-write", dryRun: true }
   }
 

@@ -25,7 +25,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Line Chart Connect Nulls — locked gallery chrome (navy).
+ * Line Chart Connect Nulls - locked gallery chrome (navy).
  * Two stacked monotone lines: gap at nulls vs `connectNulls` bridge.
  * Installs to: components/charts/line-chart-connect-nulls.tsx
  */
@@ -53,7 +53,7 @@ const LINE_MS = 200
 const AXIS_TICK_FILL =
   "color-mix(in oklab, var(--foreground) 58%, transparent)"
 
-/** April intentionally missing — gap vs connectNulls comparison. */
+/** April intentionally missing - gap vs connectNulls comparison. */
 const DEMO_DATA: ConnectNullsPoint[] = [
   { month: "2026-01-01", desktop: 186 },
   { month: "2026-02-01", desktop: 305 },
@@ -514,7 +514,7 @@ function LineChartConnectNulls({
               className="text-[2rem] font-semibold leading-9 tracking-tight text-foreground"
               aria-hidden
             >
-              {value == null ? "—" : formatNumber(value, locale)}
+              {value == null ? "-" : formatNumber(value, locale)}
             </p>
             {deltaPct != null ? (
               <span
@@ -535,7 +535,7 @@ function LineChartConnectNulls({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{monthLabel}</p>
@@ -598,7 +598,7 @@ function LineChartConnectNulls({
             <tr key={row.month}>
               <td>{formatFullMonthYear(row.month, locale)}</td>
               <td>
-                {row.desktop == null ? "—" : row.desktop}
+                {row.desktop == null ? "-" : row.desktop}
               </td>
             </tr>
           ))}

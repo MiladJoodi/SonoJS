@@ -38,7 +38,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Candlestick Bar — locked gallery chrome + type-required dual panel.
+ * Candlestick Bar - locked gallery chrome + type-required dual panel.
  * Synced candlesticks + signed change bars + Brush window.
  * Installs to: components/charts/candlestick-bar.tsx
  */
@@ -387,7 +387,7 @@ function CandlestickBar({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">

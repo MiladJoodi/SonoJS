@@ -29,7 +29,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Realtime Candlestick — live forming candle + volume strip.
+ * Realtime Candlestick - live forming candle + volume strip.
  * Ticks update the open candle; a new candle opens on an interval.
  * Type-required play/pause + sticky Y domain; no neon; metric scrubber.
  * Installs to: components/charts/realtime-candlestick.tsx
@@ -66,7 +66,7 @@ const WINDOW = 40
 const TICK_MS = 160
 const CANDLE_MS = 3_200
 const START_PRICE = 242
-/** Max abs drift per tick — keeps forming candle smooth. */
+/** Max abs drift per tick - keeps forming candle smooth. */
 const TICK_VOL = 0.00028
 /** How fast momentum fades toward 0. */
 const MOMENTUM_DECAY = 0.86
@@ -585,7 +585,7 @@ function RealtimeCandlestick({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">

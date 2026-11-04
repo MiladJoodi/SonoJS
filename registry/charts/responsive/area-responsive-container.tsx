@@ -26,7 +26,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Area Responsive Container — fluid ChartContainer stage + area + dual ReferenceLines.
+ * Area Responsive Container - fluid ChartContainer stage + area + dual ReferenceLines.
  * Locked metric scrub; EN months; `--chart-1` series, `--chart-2` / `--chart-4` refs.
  * Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/area-responsive-container.tsx
@@ -267,7 +267,7 @@ function AreaResponsiveContainer({
     [locale]
   )
 
-  /** Vertical ref — sit beside the line; angle keeps text readable. */
+  /** Vertical ref - sit beside the line; angle keeps text readable. */
   const minMonthLabel = React.useMemo(
     () => ({
       value: "Min month",
@@ -283,7 +283,7 @@ function AreaResponsiveContainer({
     [plotRtl]
   )
 
-  /** Horizontal ref — hug the Y-axis side (start in LTR / end in RTL). */
+  /** Horizontal ref - hug the Y-axis side (start in LTR / end in RTL). */
   const targetLabel = React.useMemo(
     () => ({
       value: "Target",
@@ -344,7 +344,7 @@ function AreaResponsiveContainer({
                 {formatPct(deltaPct)}
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{caption}</p>

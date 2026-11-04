@@ -64,7 +64,7 @@ const PRODUCT = {
   images: [
     {
       src: assetSrc(headphones1),
-      alt: "Wireless Headphones Pro 900 — front view on black",
+      alt: "Wireless Headphones Pro 900 - front view on black",
     },
     {
       src: assetSrc(headphones2),
@@ -113,7 +113,7 @@ const REVIEWS = [
     rating: 5,
     date: "Jun 12, 2026",
     title: "Best headphones I've ever owned",
-    body: "The ANC is incredible — completely blocks out my open-plan office. Sound is warm and detailed. Battery lasts all week on a single charge. Highly recommend.",
+    body: "The ANC is incredible - completely blocks out my open-plan office. Sound is warm and detailed. Battery lasts all week on a single charge. Highly recommend.",
     helpful: 142,
     verified: true,
   },

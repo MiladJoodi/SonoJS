@@ -66,7 +66,7 @@ export default function UsageBasedBilling({
             Usage this period
           </h2>
           <p className="mt-1 text-sm text-muted-foreground">
-            Quotas for your SonoJS workspace — installs, credits, storage, and API.
+            Quotas for your SonoJS workspace - installs, credits, storage, and API.
           </p>
         </header>
 

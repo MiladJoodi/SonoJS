@@ -146,7 +146,7 @@ export function ComponentVariantPreview({
     return () => ro.disconnect()
   }, [effectiveView, active])
 
-  // Root Toaster sits outside this island — publish dir so Sonner RTL matches.
+  // Root Toaster sits outside this island - publish dir so Sonner RTL matches.
   useRegisterPreviewDirection(
     dir,
     showDirection && effectiveView === "preview"

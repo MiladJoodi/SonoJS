@@ -29,7 +29,7 @@ export default function BlockProgressChecklistDocsPage() {
       <BlocksPageHeader
         title="Progress Checklist"
         pathname="/blocks/onboarding/progress-checklist"
-        description="Get-started checklists — accordion, sequential CTAs, Progress bar, or quick-start panels."
+        description="Get-started checklists - accordion, sequential CTAs, Progress bar, or quick-start panels."
       />
 
       <div className="flex flex-col gap-8">

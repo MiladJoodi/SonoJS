@@ -43,7 +43,7 @@ const PROJECTS: Project[] = [
   {
     title: "SonoJS Design System",
     category: "Design Systems",
-    desc: "A React component library with accessible primitives, tokens, and multi-theme support — built to ship product UI faster.",
+    desc: "A React component library with accessible primitives, tokens, and multi-theme support - built to ship product UI faster.",
     image: assetSrc(projectDesignSystem),
     alt: "Code editor showing a design system component library",
     client: "Internal project",

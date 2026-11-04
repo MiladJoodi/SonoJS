@@ -70,7 +70,7 @@ export default function BlockBannerDocsPage() {
       <BlocksPageHeader
         title="Banner"
         pathname="/blocks/marketing/banner"
-        description="Top-of-site announcement strips for launches, promos, passkeys, and deals — stack above your navbar."
+        description="Top-of-site announcement strips for launches, promos, passkeys, and deals - stack above your navbar."
       />
 
       <div className="flex flex-col gap-8">

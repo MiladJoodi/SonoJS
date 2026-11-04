@@ -19,7 +19,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Line Chart Has Multi Series — locked gallery chrome (navy × orange + semantic amber).
+ * Line Chart Has Multi Series - locked gallery chrome (navy × orange + semantic amber).
  * Type-required: each Line carries its own partial category `data` (overlapping windows).
  * Metric header scrubber; RTL-aware axes.
  * Installs to: components/charts/line-chart-has-multi-series.tsx
@@ -52,7 +52,7 @@ const LINE_MS = 200
 const AXIS_TICK_FILL =
   "color-mix(in oklab, var(--foreground) 58%, transparent)"
 
-/** Third series accent — type-required multi-series, not a dual-palette invent. */
+/** Third series accent - type-required multi-series, not a dual-palette invent. */
 const CHART_SERIES_C = "var(--chart-3)"
 
 const SERIES_COLORS = [CHART_SERIES_A, CHART_SERIES_B, CHART_SERIES_C] as const
@@ -221,7 +221,7 @@ function SeriesLine({
 
 function LineChartHasMultiSeries({
   title = "Regional Sessions – Early 2026",
-  subtitle = "Overlapping multi-series windows — each line owns its categories.",
+  subtitle = "Overlapping multi-series windows - each line owns its categories.",
   series: seriesProp = DEMO_SERIES,
   className,
   plotDir,
@@ -489,7 +489,7 @@ function LineChartHasMultiSeries({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{monthLabel}</p>
@@ -661,7 +661,7 @@ function LineChartHasMultiSeries({
               {seriesProp.map((s) => {
                 const hit = s.data.find((d) => d.category === category)
                 return (
-                  <td key={s.dataKey}>{hit ? hit.value : "—"}</td>
+                  <td key={s.dataKey}>{hit ? hit.value : "-"}</td>
                 )
               })}
               <td>{sumAtCategory(seriesProp, category)}</td>

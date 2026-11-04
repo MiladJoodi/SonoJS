@@ -177,7 +177,7 @@ export default function ProductList({
             </h2>
           </div>
           <p className="max-w-sm text-start text-sm text-muted-foreground sm:text-end">
-            Soft staples for everyday — tap Quick add, or hover on desktop.
+            Soft staples for everyday - tap Quick add, or hover on desktop.
           </p>
         </div>
 

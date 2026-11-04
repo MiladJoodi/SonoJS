@@ -1,0 +1,1 @@
+export { ThreeDSliderDefault } from "./default"

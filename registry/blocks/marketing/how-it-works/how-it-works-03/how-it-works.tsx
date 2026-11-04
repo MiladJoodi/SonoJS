@@ -46,7 +46,7 @@ const STEPS = [
 ] as const
 
 const STREAM = [
-  { kind: "think", text: "Checkout still uses password fields — swap to passkey first." },
+  { kind: "think", text: "Checkout still uses password fields - swap to passkey first." },
   { kind: "tool", text: "read_file · app/checkout/page.tsx" },
   { kind: "tool", text: "grep · Passkey|WebAuthn" },
   { kind: "out", text: "Drafting PasskeyButton + fallback SMS path…" },
@@ -78,7 +78,7 @@ export default function HowItWorks({
             An agent that ships with you in the loop.
           </h1>
           <p className="mt-2.5 max-w-md text-sm leading-relaxed text-zinc-400">
-            The 2026 loop everyone knows — attach context, let tools run, review
+            The 2026 loop everyone knows - attach context, let tools run, review
             the diff, open the PR. You stay the editor-in-chief.
           </p>
 

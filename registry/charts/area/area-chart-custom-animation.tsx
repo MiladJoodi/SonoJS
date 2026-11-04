@@ -31,7 +31,7 @@ import { useNarrowViewport } from "../_lib/use-narrow-viewport"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Area Chart Custom Animation — locked gallery chrome + **neon** (chart-local).
+ * Area Chart Custom Animation - locked gallery chrome + **neon** (chart-local).
  * Single monotone area with a longer entrance (`animationDuration` 900ms).
  * Metric header scrubber; RTL-aware axes.
  * Installs to: components/charts/area-chart-custom-animation.tsx
@@ -54,7 +54,7 @@ export type AreaChartCustomAnimationProps = {
   scrub?: boolean
 }
 
-/** Custom entrance — slower than the usual 200ms gallery tween. */
+/** Custom entrance - slower than the usual 200ms gallery tween. */
 const AREA_MS = 900
 const AXIS_TICK_FILL =
   "color-mix(in oklab, var(--foreground) 58%, transparent)"
@@ -376,7 +376,7 @@ function AreaChartCustomAnimation({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{monthLabel}</p>

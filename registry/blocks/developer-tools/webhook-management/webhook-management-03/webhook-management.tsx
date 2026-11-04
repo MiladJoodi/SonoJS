@@ -143,7 +143,7 @@ export default function WebhookManagement({
           <div className="text-start">
             <CardTitle>Endpoints</CardTitle>
             <CardDescription>
-              Compact list — enable, test, or edit each webhook.
+              Compact list - enable, test, or edit each webhook.
             </CardDescription>
           </div>
           <Button type="button" size="sm" className="cursor-pointer gap-1.5">

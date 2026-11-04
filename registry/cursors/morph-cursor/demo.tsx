@@ -13,7 +13,7 @@ export default function MorphCursorDemo() {
       <MorphCursor containerRef={stageRef} />
       <div className="absolute inset-0 flex flex-col items-center justify-center gap-5 p-8">
         <p className="pointer-events-none text-sm text-muted-foreground">
-          Semantic morph — try each hotspot
+          Semantic morph - try each hotspot
         </p>
         <div className="flex flex-wrap items-center justify-center gap-3">
           <a

@@ -31,7 +31,7 @@ export default function BlockOrderTrackingDocsPage() {
       <BlocksPageHeader
         title="Order Tracking"
         pathname="/blocks/ecommerce/order-tracking"
-        description="Shipment tracking layouts — status rails, vertical timelines, delivery details, and billing."
+        description="Shipment tracking layouts - status rails, vertical timelines, delivery details, and billing."
       />
 
       <div className="flex flex-col gap-8">

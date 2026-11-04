@@ -24,7 +24,7 @@ const FEATURES = [
   "Advanced theming tokens",
 ]
 
-/** Pricing “Most Popular” tier — slow elegant meteor (speed 0.9). */
+/** Pricing “Most Popular” tier - slow elegant meteor (speed 0.9). */
 export default function OfferCard({
   className,
   speed = 0.9,
@@ -89,7 +89,7 @@ export default function OfferCard({
               <span className="offer-badge-shine font-black">Pro</span>
             </h3>
             <p className="mt-2 text-[11.5px] leading-relaxed text-muted-foreground">
-              The plan teams pick for shipping UI faster — components, blocks,
+              The plan teams pick for shipping UI faster - components, blocks,
               and charts in one seat.
             </p>
 

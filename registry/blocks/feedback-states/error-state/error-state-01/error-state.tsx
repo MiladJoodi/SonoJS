@@ -50,7 +50,7 @@ export default function ErrorState({
               Something went wrong on our side
             </h1>
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-              The request failed unexpectedly. We&apos;ve logged the incident —
+              The request failed unexpectedly. We&apos;ve logged the incident -
               you can retry, or head home while we sort it out.
             </p>
           </div>

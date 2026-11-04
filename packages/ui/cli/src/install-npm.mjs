@@ -14,7 +14,7 @@ export const INIT_NPM_PACKAGES = [
   "tw-animate-css",
 ]
 
-/** Already covered by `sonojs init` — do not reinstall on every add. */
+/** Already covered by `sonojs init` - do not reinstall on every add. */
 export const INIT_BASELINE_NPM = new Set(["clsx", "tailwind-merge"])
 
 /** Bare name from npm install spec (`pkg`, `pkg@^1`, `@scope/pkg@2`). */
@@ -61,7 +61,7 @@ function runNpmInstall(cwd, specs) {
 
   if (result.status !== 0) {
     throw new Error(
-      `npm install failed — run manually:\n  npm i ${specs.join(" ")}`
+      `npm install failed - run manually:\n  npm i ${specs.join(" ")}`
     )
   }
 

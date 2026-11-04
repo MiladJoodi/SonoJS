@@ -4,17 +4,17 @@ globs: app/(app)/blocks/**/*.tsx,components/blocks/**/*.tsx,app/view/**/*.tsx
 alwaysApply: true
 ---
 
-# SonoJS blocks preview — login pattern
+# SonoJS blocks preview - login pattern
 
-Canonical surface: `/blocks/authentication/login` (`login-01` …). **Same stage / card rule everywhere** — docs `BlockExample`, `/view/[name]` embeds, and installable demos.
+Canonical surface: `/blocks/authentication/login` (`login-01` …). **Same stage / card rule everywhere** - docs `BlockExample`, `/view/[name]` embeds, and installable demos.
 
 ## Stage vs card
 
 | Layer | Token | Role |
 |---|---|---|
 | Desktop preview stage | `bg-canvas` (same as `--background`) | Soft gray page behind the demo |
-| Tablet/mobile letterbox | `bg-transparency` | Checkerboard void around the shrunk viewport — reads as transparent/empty, not solid white or muted fill |
-| Device bezel | none | No extra border/shadow around the phone — only the block’s own `bg-card` |
+| Tablet/mobile letterbox | `bg-transparency` | Checkerboard void around the shrunk viewport - reads as transparent/empty, not solid white or muted fill |
+| Device bezel | none | No extra border/shadow around the phone - only the block’s own `bg-card` |
 | Elevated UI card | `bg-card` + `border-border/70` + `shadow-soft` + `rounded-[12px]` | The floating form / panel |
 
 **Never** paint the `BlockExample` stage (or device iframe chrome) with `bg-card`. Card-on-card kills `shadow-soft`.
@@ -41,7 +41,7 @@ Canonical surface: `/blocks/authentication/login` (`login-01` …). **Same stage
   …
 >
 
-// ❌ Stage same color as the card — shadow disappears
+// ❌ Stage same color as the card - shadow disappears
 previewClassName="bg-card"
 ```
 

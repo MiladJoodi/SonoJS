@@ -178,14 +178,14 @@ export default async function TooltipDocsPage() {
               name: "side",
               type: '"top" | "right" | "bottom" | "left"',
               defaultValue: '"top"',
-              description: "On `TooltipContent` — preferred edge of the trigger.",
+              description: "On `TooltipContent` - preferred edge of the trigger.",
             },
             {
               name: "align",
               type: '"start" | "center" | "end"',
               defaultValue: '"center"',
               description:
-                "On `TooltipContent` — prefer `start`/`end` with writing direction.",
+                "On `TooltipContent` - prefer `start`/`end` with writing direction.",
             },
             {
               name: "sideOffset",
@@ -197,7 +197,7 @@ export default async function TooltipDocsPage() {
               name: "delayDuration",
               type: "number",
               defaultValue: "0",
-              description: "On `TooltipProvider` — open delay in ms.",
+              description: "On `TooltipProvider` - open delay in ms.",
             },
           ]}
         />

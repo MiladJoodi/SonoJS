@@ -3,7 +3,7 @@
   "name": "kpi-cards-02",
   "type": "registry:block",
   "title": "kpi-cards-02",
-  "description": "Regional KPI strip — status dots, revenue totals, and segmented goal meters.",
+  "description": "Regional KPI strip - status dots, revenue totals, and segmented goal meters.",
   "access": "public",
   "dependencies": [
     "lucide-react"
@@ -33,6 +33,6 @@
       "target": "components/blocks/dashboards-analytics/kpi-cards-02/kpi-cards.tsx"
     }
   ],
-  "version": "0.1.0+c9c3d2a86e47",
-  "generatedAt": "2026-11-03T21:57:48.548Z"
+  "version": "0.1.0+3fe3a15cbaf2",
+  "generatedAt": "2026-11-04T11:52:24.655Z"
 }

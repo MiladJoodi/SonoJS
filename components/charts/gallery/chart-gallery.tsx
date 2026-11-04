@@ -26,7 +26,7 @@ function publishActiveCategory(id: ChartCategory | null) {
 const GALLERY_TOP_CLEAR_PX = 96
 
 /**
- * Visual chart index — section per category, thumb cards → `/charts/view/[id]`.
+ * Visual chart index - section per category, thumb cards → `/charts/view/[id]`.
  * Same shell as the rest of the site (`workspace-shell`); denser cols for thumbs.
  */
 export function ChartGallery({

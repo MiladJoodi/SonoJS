@@ -12,7 +12,7 @@ function assetSrc(asset: string | { src: string }) {
   return typeof asset === "string" ? asset : asset.src
 }
 
-/** Invoice document — letterhead, info tiles, tabular line sheet. */
+/** Invoice document - letterhead, info tiles, tabular line sheet. */
 const PRODUCTS = [
   {
     id: 1,

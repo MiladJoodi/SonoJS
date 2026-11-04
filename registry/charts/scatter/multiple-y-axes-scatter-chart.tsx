@@ -26,7 +26,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Multiple Y Axes Scatter Chart — dual `yAxisId` (primary × secondary).
+ * Multiple Y Axes Scatter Chart - dual `yAxisId` (primary × secondary).
  * Teaching delta vs `simple-scatter-chart`: independent Y scales, tinted ticks.
  * Locked chrome + metric scrubber. Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/multiple-y-axes-scatter-chart.tsx
@@ -66,7 +66,7 @@ type FlatPoint = MultipleYAxesScatterPoint & {
   id: string
 }
 
-/** Group A — height × weight (primary Y, kg scale). */
+/** Group A - height × weight (primary Y, kg scale). */
 const DEMO_A: MultipleYAxesScatterPoint[] = [
   { x: 158, y: 52 },
   { x: 162, y: 58 },
@@ -78,7 +78,7 @@ const DEMO_A: MultipleYAxesScatterPoint[] = [
   { x: 180, y: 79 },
 ]
 
-/** Group B — spend × conversions (secondary Y, larger scale). */
+/** Group B - spend × conversions (secondary Y, larger scale). */
 const DEMO_B: MultipleYAxesScatterPoint[] = [
   { x: 160, y: 220 },
   { x: 164, y: 310 },
@@ -464,7 +464,7 @@ function MultipleYAxesScatterChart({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{caption}</p>

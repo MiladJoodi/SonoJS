@@ -332,7 +332,7 @@ export default function MegaMenu({
           Tools mega with app icons
         </h1>
         <p className="max-w-md text-sm text-muted-foreground">
-          Three columns of tool cards plus a release promo panel — sheet on
+          Three columns of tool cards plus a release promo panel - sheet on
           small screens.
         </p>
       </main>

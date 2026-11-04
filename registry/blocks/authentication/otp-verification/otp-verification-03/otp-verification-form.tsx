@@ -54,7 +54,7 @@ export default function OtpVerificationForm({
               Secure your account
             </h1>
             <p className="max-w-sm text-sm leading-relaxed text-zinc-400">
-              One short code confirms it&apos;s you — the same beat banks and
+              One short code confirms it&apos;s you - the same beat banks and
               workspaces use in 2026.
             </p>
           </div>

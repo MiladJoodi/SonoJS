@@ -16,7 +16,7 @@ const exampleDefs = [
     name: "marquee-default",
     title: "Default",
     description:
-      "Two horizontal rows — one forward, one `reverse` — with `pauseOnHover` and edge fades.",
+      "Two horizontal rows - one forward, one `reverse` - with `pauseOnHover` and edge fades.",
   },
   {
     name: "marquee-vertical",
@@ -64,6 +64,21 @@ export default async function MarqueeDocsPage() {
               --gap
             </code>
             . Install also injects the marquee keyframes into your theme CSS.
+            Also listed under{" "}
+            <a
+              href="/3d/marquee"
+              className="font-medium text-foreground underline-offset-4 hover:underline"
+            >
+              3D → Marquee
+            </a>
+            . For tilted photo columns, see{" "}
+            <a
+              href="/3d/image-marquee"
+              className="font-medium text-foreground underline-offset-4 hover:underline"
+            >
+              Image Marquee
+            </a>
+            .
           </p>
         }
       />
@@ -111,7 +126,7 @@ export default async function MarqueeDocsPage() {
             {
               name: "className",
               type: "string",
-              defaultValue: "—",
+              defaultValue: "-",
               description:
                 "Merge classes; set `[--duration:20s]` or `[--gap:1rem]` for timing and spacing.",
             },

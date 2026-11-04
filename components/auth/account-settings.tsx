@@ -17,13 +17,7 @@ import {
 
 import { AccountIdentityHero, BillingPanel } from "@/components/auth/account"
 import { useBillingSummary } from "@/hooks/use-billing-summary"
-import {
-  formatPlanExpiry,
-  getEffectivePlanExpiresAt,
-  getUserPlan,
-  getViewerPlanId,
-  planLabel,
-} from "@/lib/access"
+import { resolveAccountPlanDisplay } from "@/lib/account-plan-display"
 import { cn } from "@/lib/utils"
 import { GithubIcon } from "@/registry/icons/github"
 import { GoogleIcon } from "@/registry/icons/google"
@@ -190,6 +184,9 @@ export function AccountSettings({ className }: { className?: string }) {
     loading: billingLoading,
   } = useBillingSummary(Boolean(isLoaded && isSignedIn && user))
 
+  const [profileHydrated, setProfileHydrated] = React.useState(false)
+  const emailReloadAttempted = React.useRef(false)
+
   const updatePassword = useReverification(
     (params: {
       currentPassword?: string
@@ -210,6 +207,37 @@ export function AccountSettings({ className }: { className?: string }) {
     if (!user) return
     setFirstName(user.firstName ?? "")
     setLastName(user.lastName ?? "")
+  }, [user])
+
+  React.useEffect(() => {
+    if (!user) {
+      setProfileHydrated(false)
+      emailReloadAttempted.current = false
+      return
+    }
+
+    if (user.primaryEmailAddress?.emailAddress) {
+      setProfileHydrated(true)
+      return
+    }
+
+    if (emailReloadAttempted.current) {
+      setProfileHydrated(true)
+      return
+    }
+
+    emailReloadAttempted.current = true
+    let cancelled = false
+    void user
+      .reload()
+      .catch(() => {})
+      .finally(() => {
+        if (!cancelled) setProfileHydrated(true)
+      })
+
+    return () => {
+      cancelled = true
+    }
   }, [user])
 
   if (!isLoaded) {
@@ -239,15 +267,14 @@ export function AccountSettings({ className }: { className?: string }) {
 
   const email = user.primaryEmailAddress?.emailAddress
   const displayName = user.fullName || email || "Account"
-  // Plan chip = Clerk publicMetadata (same as site header / user menu).
-  // Billing tab below = Neon + Stripe money record (separate).
-  const metadata = user.publicMetadata
-  const isPro = getUserPlan(metadata) === "pro"
-  const planId = getViewerPlanId(metadata)
-  const planName = planLabel(metadata)
-  const planExpiryLabel = formatPlanExpiry(
-    getEffectivePlanExpiresAt(metadata)
+  // Hero plan: prefer billing summary (Stripe/Neon) so Clerk lag never shows Free.
+  // Clerk metadata is the Free fallback when billing has no active sub.
+  const planDisplay = resolveAccountPlanDisplay(
+    billingSummary?.subscription,
+    user.publicMetadata
   )
+  const { isPro, planId, planName, expiryLabel: planExpiryLabel } = planDisplay
+  const planLoading = billingLoading && !billingSummary
 
   const saveProfile = async (event: React.FormEvent) => {
     event.preventDefault()
@@ -400,6 +427,7 @@ export function AccountSettings({ className }: { className?: string }) {
           planId={planId}
           planName={planName}
           expiryLabel={planExpiryLabel}
+          planLoading={planLoading}
           avatarBusy={profileBusy}
           onPickAvatar={(file) => void onAvatarFile(file)}
           onRemoveAvatar={() => void removeAvatar()}
@@ -415,7 +443,7 @@ export function AccountSettings({ className }: { className?: string }) {
               aria-label="Account settings sections"
               className={cn(
                 "h-auto w-full rounded-[12px] border border-border/60 bg-card p-1 text-muted-foreground",
-                // Mobile: 2×2 grid — no tall vertical stack, no sideways scroll trap
+                // Mobile: 2×2 grid - no tall vertical stack, no sideways scroll trap
                 "grid grid-cols-2 gap-1 overflow-visible",
                 // Desktop: sidebar column
                 "md:flex md:flex-col md:items-stretch md:justify-start md:gap-0.5"
@@ -448,56 +476,66 @@ export function AccountSettings({ className }: { className?: string }) {
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6 py-6">
-                  <form className="grid gap-4" onSubmit={saveProfile}>
-                    <div className="grid gap-4 sm:grid-cols-2">
-                      <div className="grid gap-2">
-                        <Label htmlFor="account-first">First name</Label>
-                        <Input
-                          id="account-first"
-                          value={firstName}
-                          onChange={(e) => setFirstName(e.target.value)}
-                          disabled={profileBusy}
-                          className="shadow-none"
-                        />
+                  {!profileHydrated ? (
+                    <div className="flex min-h-40 items-center justify-center">
+                      <Spinner className="size-5 text-muted-foreground" />
+                    </div>
+                  ) : (
+                    <form className="grid gap-4" onSubmit={saveProfile}>
+                      <div className="grid gap-4 sm:grid-cols-2">
+                        <div className="grid gap-2">
+                          <Label htmlFor="account-first">First name</Label>
+                          <Input
+                            id="account-first"
+                            value={firstName}
+                            onChange={(e) => setFirstName(e.target.value)}
+                            disabled={profileBusy}
+                            className="shadow-none"
+                          />
+                        </div>
+                        <div className="grid gap-2">
+                          <Label htmlFor="account-last">Last name</Label>
+                          <Input
+                            id="account-last"
+                            value={lastName}
+                            onChange={(e) => setLastName(e.target.value)}
+                            disabled={profileBusy}
+                            className="shadow-none"
+                          />
+                        </div>
                       </div>
                       <div className="grid gap-2">
-                        <Label htmlFor="account-last">Last name</Label>
+                        <Label htmlFor="account-email">Email</Label>
                         <Input
-                          id="account-last"
-                          value={lastName}
-                          onChange={(e) => setLastName(e.target.value)}
-                          disabled={profileBusy}
-                          className="shadow-none"
+                          id="account-email"
+                          value={email ?? ""}
+                          readOnly
+                          dir="ltr"
+                          className="shadow-none opacity-80"
                         />
+                        <p className="text-xs text-muted-foreground">
+                          Primary email is managed by your sign-in method.
+                        </p>
                       </div>
-                    </div>
-                    <div className="grid gap-2">
-                      <Label htmlFor="account-email">Email</Label>
-                      <Input
-                        id="account-email"
-                        value={email ?? ""}
-                        readOnly
-                        dir="ltr"
-                        className="shadow-none opacity-80"
-                      />
-                      <p className="text-xs text-muted-foreground">
-                        Primary email is managed by your sign-in method.
-                      </p>
-                    </div>
-                    <FieldError message={profileError} />
-                    {profileMsg ? (
-                      <StatusMessage tone="success">{profileMsg}</StatusMessage>
-                    ) : null}
-                    <div>
-                      <Button
-                        type="submit"
-                        className="cursor-pointer shadow-none"
-                        disabled={profileBusy}
-                      >
-                        {profileBusy ? <Spinner className="size-4" /> : "Save profile"}
-                      </Button>
-                    </div>
-                  </form>
+                      <FieldError message={profileError} />
+                      {profileMsg ? (
+                        <StatusMessage tone="success">{profileMsg}</StatusMessage>
+                      ) : null}
+                      <div>
+                        <Button
+                          type="submit"
+                          className="cursor-pointer shadow-none"
+                          disabled={profileBusy}
+                        >
+                          {profileBusy ? (
+                            <Spinner className="size-4" />
+                          ) : (
+                            "Save profile"
+                          )}
+                        </Button>
+                      </div>
+                    </form>
+                  )}
                 </CardContent>
               </Card>
             </TabsContent>

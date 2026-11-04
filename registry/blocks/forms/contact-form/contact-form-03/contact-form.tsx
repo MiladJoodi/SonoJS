@@ -64,7 +64,7 @@ export default function ContactForm({
             Start a conversation
           </h2>
           <p className="text-base leading-relaxed text-muted-foreground">
-            Pick the channel that fits — or send a note and we&apos;ll route it
+            Pick the channel that fits - or send a note and we&apos;ll route it
             to the right person.
           </p>
         </div>

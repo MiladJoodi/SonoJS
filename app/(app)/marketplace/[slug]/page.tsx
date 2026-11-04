@@ -11,7 +11,7 @@ type PageProps = {
   params: Promise<{ slug: string }>
 }
 
-/** Auth-gated download CTA — must resolve per request. */
+/** Auth-gated download CTA - must resolve per request. */
 export const dynamic = "force-dynamic"
 
 export function generateStaticParams() {

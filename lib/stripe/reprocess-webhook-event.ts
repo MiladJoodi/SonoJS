@@ -30,7 +30,7 @@ export async function reprocessStripeWebhookEvent(
   stripeEventId: string,
   options?: {
     fetchImpl?: typeof fetch
-    /** Injected event (tests) — skips Stripe Event retrieve. */
+    /** Injected event (tests) - skips Stripe Event retrieve. */
     event?: StripeWebhookEvent
     /**
      * Override Clerk sync after DB writes (tests). Default: afterStripeEventDb.

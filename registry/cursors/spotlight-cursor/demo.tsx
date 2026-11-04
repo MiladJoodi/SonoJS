@@ -19,7 +19,7 @@ export default function SpotlightCursorDemo() {
           Find the details
         </p>
         <p className="max-w-sm text-sm leading-relaxed text-zinc-200">
-          Soft vignette with a warm beam — copy stays readable under the light.
+          Soft vignette with a warm beam - copy stays readable under the light.
         </p>
         <div className="mt-2 flex items-center gap-3">
           <div className="size-12 rounded-full bg-amber-400 shadow-[0_0_28px_rgba(251,191,36,0.55)]" />

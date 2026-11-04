@@ -118,19 +118,19 @@ export default async function RadioGroupDocsPage() {
             {
               name: "value",
               type: "string",
-              defaultValue: "—",
-              description: "On `RadioGroup` — controlled selected value.",
+              defaultValue: "-",
+              description: "On `RadioGroup` - controlled selected value.",
             },
             {
               name: "defaultValue",
               type: "string",
-              defaultValue: "—",
-              description: "On `RadioGroup` — uncontrolled initial value.",
+              defaultValue: "-",
+              description: "On `RadioGroup` - uncontrolled initial value.",
             },
             {
               name: "onValueChange",
               type: "(value: string) => void",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Called when the selected value changes.",
             },
             {
@@ -142,8 +142,8 @@ export default async function RadioGroupDocsPage() {
             {
               name: "item value",
               type: "string",
-              defaultValue: "—",
-              description: "On `RadioGroupItem` — required option value.",
+              defaultValue: "-",
+              description: "On `RadioGroupItem` - required option value.",
             },
           ]}
         />

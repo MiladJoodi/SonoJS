@@ -31,7 +31,7 @@ export default function BlockProductListDocsPage() {
       <BlocksPageHeader
         title="Product List"
         pathname="/blocks/ecommerce/product-list"
-        description="Eleven production catalog shells — lookbook, spec desk, runway rail, atelier sale, cover stories, apothecary, pharmacy shelf, spotlights, ranked ticker, concierge rows, and museum pedestals."
+        description="Eleven production catalog shells - lookbook, spec desk, runway rail, atelier sale, cover stories, apothecary, pharmacy shelf, spotlights, ranked ticker, concierge rows, and museum pedestals."
       />
 
       <div className="flex flex-col gap-8">

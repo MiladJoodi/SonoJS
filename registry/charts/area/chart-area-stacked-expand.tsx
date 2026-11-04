@@ -27,7 +27,7 @@ import { useNarrowViewport } from "../_lib/use-narrow-viewport"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Chart Area Stacked Expand (classic) — locked gallery chrome.
+ * Chart Area Stacked Expand (classic) - locked gallery chrome.
  * 100% stacked Desktop×Mobile (`stackOffset="expand"`) + metric scrubber.
  * Installs to: components/charts/chart-area-stacked-expand.tsx
  * Distinct from gallery `percent-area-chart` (three series).
@@ -58,7 +58,7 @@ const AXIS_TICK_FILL =
   "color-mix(in oklab, var(--foreground) 58%, transparent)"
 const SERIES_KEYS: SeriesKey[] = ["desktop", "mobile"]
 
-/** Classic visitor volumes — Desktop×Mobile, January to June 2026. */
+/** Classic visitor volumes - Desktop×Mobile, January to June 2026. */
 const DEMO_DATA: ChartAreaStackedExpandPoint[] = [
   { month: "2026-01-01", desktop: 186, mobile: 80 },
   { month: "2026-02-01", desktop: 305, mobile: 200 },
@@ -145,7 +145,7 @@ function formatFullMonthYear(month: string, locale: string) {
 
 function ChartAreaStackedExpand({
   title = "Visitor share",
-  subtitle = "100% stacked Desktop × Mobile — January to June 2026.",
+  subtitle = "100% stacked Desktop × Mobile - January to June 2026.",
   data = DEMO_DATA,
   className,
   plotDir,
@@ -391,7 +391,7 @@ function ChartAreaStackedExpand({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">

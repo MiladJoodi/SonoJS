@@ -17,7 +17,7 @@ export function EmptyInputGroup() {
   return (
     <Empty>
       <EmptyHeader>
-        <EmptyTitle>404 — Not found</EmptyTitle>
+        <EmptyTitle>404 - Not found</EmptyTitle>
         <EmptyDescription>
           The page you&apos;re looking for doesn&apos;t exist. Try searching for
           what you need below.

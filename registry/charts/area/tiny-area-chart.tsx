@@ -17,8 +17,8 @@ import { useChartDir } from "../_lib/use-chart-dir"
 import { useMarketNeon } from "../_lib/use-market-neon"
 
 /**
- * Tiny Area Chart — locked header chrome + **neon** chart-local sparkline stage.
- * Compact single-series area (no axes / tooltip / legend) — sparkline-style.
+ * Tiny Area Chart - locked header chrome + **neon** chart-local sparkline stage.
+ * Compact single-series area (no axes / tooltip / legend) - sparkline-style.
  * Installs to: components/charts/tiny-area-chart.tsx
  */
 
@@ -98,7 +98,7 @@ function TinyAreaChart({
       color,
     },
   } satisfies ChartConfig
-  // plotDir reserved for gallery API parity — sparkline has no axes to flip.
+  // plotDir reserved for gallery API parity - sparkline has no axes to flip.
   void plotDir
 
   const lastIndex = Math.max(0, data.length - 1)
@@ -149,7 +149,7 @@ function TinyAreaChart({
       if (!el || data.length === 0) return lastIndex
       const rect = el.getBoundingClientRect()
       if (rect.width <= 0) return lastIndex
-      // Sparkline has no axes — category order stays LTR on the plot island.
+      // Sparkline has no axes - category order stays LTR on the plot island.
       const ratio = Math.min(
         1,
         Math.max(0, (clientX - rect.left) / rect.width)
@@ -337,7 +337,7 @@ function TinyAreaChart({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{monthLabel}</p>

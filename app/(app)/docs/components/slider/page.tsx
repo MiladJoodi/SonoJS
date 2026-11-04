@@ -63,7 +63,7 @@ export default async function SliderDocsPage() {
           <p className="leading-relaxed text-muted-foreground">
           An input where the user selects a value from within a given range.
           Writing direction is passed through to Radix so the axis, range fill,
-          and keyboard arrows follow LTR/RTL — toggle direction in the preview.
+          and keyboard arrows follow LTR/RTL - toggle direction in the preview.
         </p>
         }
       />
@@ -116,19 +116,19 @@ export default async function SliderDocsPage() {
             {
               name: "value",
               type: "number[]",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Controlled thumb values (one or more).",
             },
             {
               name: "defaultValue",
               type: "number[]",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Uncontrolled initial values.",
             },
             {
               name: "onValueChange",
               type: "(value: number[]) => void",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Called while a thumb moves.",
             },
             {

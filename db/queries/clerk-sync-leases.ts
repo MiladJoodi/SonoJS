@@ -63,7 +63,7 @@ export async function acquireClerkSyncLease(
         holderToken,
         lockedUntil,
         updatedAt: now,
-        // pending intentionally untouched — cleared only after successful sync
+        // pending intentionally untouched - cleared only after successful sync
       })
       .where(
         and(

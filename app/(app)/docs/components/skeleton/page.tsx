@@ -84,14 +84,14 @@ export default async function SkeletonDocsPage() {
             {
               name: "className",
               type: "string",
-              defaultValue: "—",
+              defaultValue: "-",
               description:
                 "Set height, width, and radius (e.g. `h-4 w-full rounded-full`).",
             },
             {
               name: "…div props",
               type: 'React.ComponentProps<"div">',
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Native attributes pass through to the element.",
             },
           ]}

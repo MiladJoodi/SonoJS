@@ -4,7 +4,7 @@ import { FluidOrb } from "@sonojs/ui/components/fluid-orb"
 
 import { MarkFrame } from "@/components/catalog/wireframes/mark-frame"
 
-/** AI & Agents mark — FluidOrb frozen. */
+/** AI & Agents mark - FluidOrb frozen. */
 export function AiAgentsBlockWireframe() {
   return (
     <MarkFrame className="p-0">

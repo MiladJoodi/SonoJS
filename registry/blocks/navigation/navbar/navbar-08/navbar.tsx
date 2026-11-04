@@ -286,7 +286,7 @@ export default function Navbar({
                       className="size-16 shrink-0 rounded-[12px] object-cover"
                     />
                     <span className="text-sm text-foreground">
-                      Customer story — learn how teams ship with Sono.
+                      Customer story - learn how teams ship with Sono.
                     </span>
                   </a>
                 </div>
@@ -365,7 +365,7 @@ export default function Navbar({
               </NavigationMenu>
             </div>
 
-            {/* Sample uses a short md:h-4 rule; with 46px CTAs that looks orphaned — use gap instead */}
+            {/* Sample uses a short md:h-4 rule; with 46px CTAs that looks orphaned - use gap instead */}
             <div className="ms-2 flex shrink-0 flex-wrap items-center gap-1.5">
               <Button
                 variant="outline"
@@ -385,7 +385,7 @@ export default function Navbar({
           Navbar with Resources mega menu
         </h1>
         <p className="max-w-md text-sm text-muted-foreground">
-          End-aligned links, a three-column Resources panel, and auth actions —
+          End-aligned links, a three-column Resources panel, and auth actions -
           sheet on small screens.
         </p>
       </main>

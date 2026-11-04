@@ -18,7 +18,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Chart Pie Legend (classic) — full pie with bottom ChartLegend.
+ * Chart Pie Legend (classic) - full pie with bottom ChartLegend.
  * Compact bottom ChartLegend; locked metric scrub. Tokens: `--chart-1…5`.
  * Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/chart-pie-legend.tsx
@@ -269,7 +269,7 @@ function ChartPieLegend({
                 <span className="font-normal">of total</span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{caption}</p>

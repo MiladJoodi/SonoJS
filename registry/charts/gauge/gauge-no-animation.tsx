@@ -14,7 +14,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Gauge No Animation — 15 traffic bands, needle locked at 56% with animate off.
+ * Gauge No Animation - 15 traffic bands, needle locked at 56% with animate off.
  * react-gauge-chart; locked header chrome; English / Intl.
  * Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/gauge-no-animation.tsx
@@ -34,7 +34,7 @@ const DEMO_LEVELS = 15
 const DEMO_PERCENT = 0.56
 
 function GaugeNoAnimation({
-  title = "Score gauge — no animation",
+  title = "Score gauge - no animation",
   subtitle = "Fifteen soft traffic bands with the needle parked at 56% (no enter animation).",
   levels = DEMO_LEVELS,
   percent = DEMO_PERCENT,

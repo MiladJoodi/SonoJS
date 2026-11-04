@@ -258,7 +258,7 @@ function initialsOf(name: string) {
 function validate(data: FormData): Errors {
   const errors: Errors = {}
 
-  // Step 1 — personal
+  // Step 1 - personal
   if (!data.fullName.trim()) {
     errors.fullName = "Enter your full name."
   } else if (data.fullName.trim().length < 2) {
@@ -299,7 +299,7 @@ function validate(data: FormData): Errors {
     errors.portfolio = "Enter a valid URL, like https://yoursite.com."
   }
 
-  // Step 2 — experience
+  // Step 2 - experience
   if (!data.jobTitle.trim()) {
     errors.jobTitle = "Enter your current or most recent job title."
   }
@@ -329,15 +329,15 @@ function validate(data: FormData): Errors {
   }
 
   if (data.experience.trim().length < MIN_EXPERIENCE_CHARS) {
-    errors.experience = `Share a bit more — at least ${MIN_EXPERIENCE_CHARS} characters.`
+    errors.experience = `Share a bit more - at least ${MIN_EXPERIENCE_CHARS} characters.`
   }
 
-  // Step 3 — documents
+  // Step 3 - documents
   if (!data.resume) {
     errors.resume = "Upload your resume as a PDF."
   }
 
-  // Step 4 — consent
+  // Step 4 - consent
   if (!data.terms) {
     errors.terms = "Please confirm before submitting."
   }
@@ -983,7 +983,7 @@ export default function JobApplicationForm({
               Req. {POSTING.requisition}
             </span>
             <span className="max-w-56 leading-5">
-              Demo form — nothing is submitted or stored.
+              Demo form - nothing is submitted or stored.
             </span>
           </div>
         </header>
@@ -1019,7 +1019,7 @@ export default function JobApplicationForm({
                   </h2>
                   <p className="text-sm leading-6 text-muted-foreground">
                     Thanks, {data.fullName.trim().split(/\s+/)[0]}. This is a
-                    simulated confirmation — nothing was submitted and no email
+                    simulated confirmation - nothing was submitted and no email
                     was sent to {data.email.trim()}.
                   </p>
                 </div>
@@ -1241,7 +1241,7 @@ export default function JobApplicationForm({
                   </p>
                 </div>
 
-                {/* ------------------------- Step 1 — Personal ------------------------- */}
+                {/* ------------------------- Step 1 - Personal ------------------------- */}
                 {step === 1 ? (
                   <div className="flex flex-col gap-6">
                     <GroupLabel>Contact</GroupLabel>
@@ -1307,7 +1307,7 @@ export default function JobApplicationForm({
                   </div>
                 ) : null}
 
-                {/* ------------------------ Step 2 — Experience ------------------------ */}
+                {/* ------------------------ Step 2 - Experience ------------------------ */}
                 {step === 2 ? (
                   <div className="flex flex-col gap-6">
                     <GroupLabel>Current role</GroupLabel>
@@ -1495,7 +1495,7 @@ export default function JobApplicationForm({
                             <FieldError>{errorFor("experience")}</FieldError>
                           ) : (
                             <FieldDescription>
-                              Highlights are fine — no need to repeat your
+                              Highlights are fine - no need to repeat your
                               resume.
                             </FieldDescription>
                           )}
@@ -1508,7 +1508,7 @@ export default function JobApplicationForm({
                   </div>
                 ) : null}
 
-                {/* ------------------------ Step 3 — Documents ------------------------ */}
+                {/* ------------------------ Step 3 - Documents ------------------------ */}
                 {step === 3 ? (
                   <div className="flex flex-col gap-6">
                     <DocumentField
@@ -1548,7 +1548,7 @@ export default function JobApplicationForm({
                   </div>
                 ) : null}
 
-                {/* -------------------------- Step 4 — Review -------------------------- */}
+                {/* -------------------------- Step 4 - Review -------------------------- */}
                 {step === 4 ? (
                   <div className="flex flex-col gap-4">
                     <div className="flex items-center gap-4 rounded-[12px] border border-border/70 bg-muted/30 p-4">
@@ -1563,7 +1563,7 @@ export default function JobApplicationForm({
                           Candidate dossier · {POSTING.requisition}
                         </span>
                         <span className="truncate text-lg font-semibold tracking-tight">
-                          {data.fullName.trim() || "—"}
+                          {data.fullName.trim() || "-"}
                         </span>
                         <span className="truncate text-sm text-muted-foreground">
                           {[data.jobTitle.trim(), yearsLabel]
@@ -1682,7 +1682,7 @@ export default function JobApplicationForm({
                           className="min-w-0 flex-1 text-sm font-normal leading-relaxed text-muted-foreground"
                         >
                           I confirm the details above are accurate and agree to
-                          the hiring privacy notice. This is a demo — nothing is
+                          the hiring privacy notice. This is a demo - nothing is
                           stored.
                         </FieldLabel>
                         {errorFor("terms") ? (

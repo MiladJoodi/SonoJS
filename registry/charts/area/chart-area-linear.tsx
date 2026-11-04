@@ -26,7 +26,7 @@ import { useNarrowViewport } from "../_lib/use-narrow-viewport"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Chart Area Linear (classic) — locked gallery chrome; single-series Store area.
+ * Chart Area Linear (classic) - locked gallery chrome; single-series Store area.
  * Linear curve (`type="linear"`) + fill gradient + metric header scrubber.
  * Installs to: components/charts/chart-area-linear.tsx
  */
@@ -117,7 +117,7 @@ function niceMax(values: number[]) {
 
 function ChartAreaLinear({
   title = "Monthly store sales",
-  subtitle = "Linear area — Store sessions, January to June 2026.",
+  subtitle = "Linear area - Store sessions, January to June 2026.",
   data = DEMO_DATA,
   className,
   plotDir,
@@ -354,7 +354,7 @@ function ChartAreaLinear({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{monthLabel}</p>

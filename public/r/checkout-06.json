@@ -3,7 +3,7 @@
   "name": "checkout-06",
   "type": "registry:block",
   "title": "checkout-06",
-  "description": "One-column checkout — max-width stack with Checkout header, bag, muted totals, then two-column delivery and card grids (RTL/LTR).",
+  "description": "One-column checkout - max-width stack with Checkout header, bag, muted totals, then two-column delivery and card grids (RTL/LTR).",
   "access": "public",
   "registryDependencies": [
     "button",
@@ -85,6 +85,6 @@
       "target": "components/blocks/ecommerce/checkout-06/images/paypal.webp"
     }
   ],
-  "version": "0.1.0+c9c3d2a86e47",
-  "generatedAt": "2026-11-03T21:57:48.548Z"
+  "version": "0.1.0+3fe3a15cbaf2",
+  "generatedAt": "2026-11-04T11:52:24.655Z"
 }

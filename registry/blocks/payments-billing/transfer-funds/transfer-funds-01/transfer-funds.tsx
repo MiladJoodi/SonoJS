@@ -392,7 +392,7 @@ export default function TransferFunds({
                           {source.label}
                         </>
                       ) : (
-                        "—"
+                        "-"
                       )}
                     </dd>
                   </div>
@@ -413,7 +413,7 @@ export default function TransferFunds({
                           </span>
                         </>
                       ) : (
-                        "—"
+                        "-"
                       )}
                     </dd>
                   </div>
@@ -552,8 +552,8 @@ export default function TransferFunds({
                     Digital receipt
                   </div>
                   <p className="mt-2 text-muted-foreground">
-                    Sent from {source?.label ?? "—"} to{" "}
-                    {destination?.label ?? "—"}. Keep reference{" "}
+                    Sent from {source?.label ?? "-"} to{" "}
+                    {destination?.label ?? "-"}. Keep reference{" "}
                     <span className="font-mono text-foreground" dir="ltr">
                       {refId}
                     </span>{" "}

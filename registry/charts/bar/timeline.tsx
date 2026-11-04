@@ -24,7 +24,7 @@ import { chartBarContainerClassName } from "../_lib/chart-styles"
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Timeline — locked gallery chrome with type-required ranged horizontal bars.
+ * Timeline - locked gallery chrome with type-required ranged horizontal bars.
  * Outcome colors use semantic tokens (status); cycles = soft vs solid.
  * Installs to: components/charts/timeline-chart.tsx
  */
@@ -232,7 +232,7 @@ function TimelineBarShape({
 
 function TimelineChart({
   title = "Test timeline",
-  subtitle = "Two cycles per run — colored by outcome.",
+  subtitle = "Two cycles per run - colored by outcome.",
   data = DEMO_DATA,
   className,
   plotDir,
@@ -370,7 +370,7 @@ function TimelineChart({
   const onKeyDown = React.useCallback(
     (event: React.KeyboardEvent<HTMLDivElement>) => {
       if (!scrub) return
-      // Y categories are not reversed — Up/Left = previous row, Down/Right = next.
+      // Y categories are not reversed - Up/Left = previous row, Down/Right = next.
       switch (event.key) {
         case "ArrowUp":
         case "ArrowLeft":
@@ -578,7 +578,7 @@ function TimelineChart({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{rowLabel}</p>

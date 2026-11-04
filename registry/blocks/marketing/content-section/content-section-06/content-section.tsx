@@ -100,7 +100,7 @@ const DEFAULT_FEATURES = [
   {
     title: "Trending Now",
     description:
-      "Breakthrough ideas and must-know tools—stay current without the noise.",
+      "Breakthrough ideas and must-know tools-stay current without the noise.",
     icon: ReportMark,
   },
   {
@@ -115,7 +115,7 @@ export default function ContentSection({
   title = "Innovative Solutions for Modern Challenges",
   subtitle = "Your Success, Our Commitment",
   paragraphs = [
-    "Smart, scalable solutions tailored to evolving needs—from efficiency to growth, we're with you at every step.",
+    "Smart, scalable solutions tailored to evolving needs-from efficiency to growth, we're with you at every step.",
     "Beyond results, we aim to be a trusted long-term partner. Deep insights and dedicated support help you seize opportunities.",
   ],
   ctaLabel = "Learn more",

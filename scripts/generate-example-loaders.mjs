@@ -48,6 +48,21 @@ const FOLDER_ORDER = [
   "hover-card",
   "image-generation",
   "image-generation-2",
+  "3d/image-ring",
+  "3d/glass-coin-carousel",
+  "3d/hover-gallery",
+  "3d/image-marquee",
+  "3d/model-viewer",
+  "3d/perspective-card",
+  "3d/scroll-trigger",
+  "3d/smokey-frame",
+  "3d/image-pageflip",
+  "3d/beam-circle",
+  "3d/beam-circle-3d",
+  "3d/infinite-drift",
+  "3d/infinite-drift-2",
+  "3d/hanging-id-card",
+  "3d/plasma-globe",
   "inline-citation",
   "input-group",
   "input-otp",
@@ -239,6 +254,34 @@ function pickExport(candidates, folder, fileBase) {
   }
 }
 
+function exampleSlug(folderRel) {
+  const parts = folderRel.split("/")
+  return parts[parts.length - 1] ?? folderRel
+}
+
+/** Nested-safe: `button`, `3d/image-ring`, … */
+function discoverExampleDirs(dir, rel = "") {
+  const entries = fs.readdirSync(dir, { withFileTypes: true })
+  const hasTsx = entries.some(
+    (e) =>
+      e.isFile() &&
+      e.name.endsWith(".tsx") &&
+      e.name !== "index.tsx" &&
+      !e.name.startsWith("_")
+  )
+  /** @type {{ rel: string, abs: string, slug: string }[]} */
+  const found = []
+  if (hasTsx && rel) {
+    found.push({ rel, abs: dir, slug: exampleSlug(rel) })
+  }
+  for (const entry of entries) {
+    if (!entry.isDirectory()) continue
+    const nextRel = rel ? `${rel}/${entry.name}` : entry.name
+    found.push(...discoverExampleDirs(path.join(dir, entry.name), nextRel))
+  }
+  return found
+}
+
 function walkExamples() {
   /** @type {Map<string, { id: string, fileBase: string, exportName: string }[]>} */
   const byFolder = new Map()
@@ -247,15 +290,12 @@ function walkExamples() {
   /** @type {string[]} */
   const discoveredFolders = []
 
-  const folders = fs
-    .readdirSync(examplesDir, { withFileTypes: true })
-    .filter((d) => d.isDirectory())
-    .map((d) => d.name)
-    .sort()
+  const folders = discoverExampleDirs(examplesDir).sort((a, b) =>
+    a.rel.localeCompare(b.rel)
+  )
 
-  for (const folder of folders) {
+  for (const { rel: folder, abs: dir, slug } of folders) {
     discoveredFolders.push(folder)
-    const dir = path.join(examplesDir, folder)
     const files = fs
       .readdirSync(dir)
       .filter((f) => f.endsWith(".tsx") && f !== "index.tsx")
@@ -269,8 +309,8 @@ function walkExamples() {
       const abs = path.join(dir, file)
       const source = fs.readFileSync(abs, "utf8")
       const candidates = findComponentExports(source)
-      const picked = pickExport(candidates, folder, fileBase)
-      const id = `${folder}-${fileBase}`
+      const picked = pickExport(candidates, slug, fileBase)
+      const id = `${slug}-${fileBase}`
 
       if (picked.error) {
         errors.push(`${folder}/${file}: ${picked.error}`)
@@ -316,13 +356,16 @@ function emitFolderLoaders(folder, entries) {
 }
 
 function emitRouter(folders) {
-  // Longest-first for prefix match
+  // Longest slug first for id → folder matching (`image-ring` before `image`)
   const ordered = [...FOLDER_ORDER]
   for (const f of folders) {
     if (!ordered.includes(f)) ordered.unshift(f)
   }
-  // de-dupe while keeping first occurrence (longest list may need resort)
-  const unique = [...new Set(ordered)].sort((a, b) => b.length - a.length)
+  const unique = [...new Set(ordered)].sort((a, b) => {
+    const sa = exampleSlug(a)
+    const sb = exampleSlug(b)
+    return sb.length - sa.length || b.length - a.length
+  })
 
   const lines = [
     "/* eslint-disable */",
@@ -344,9 +387,15 @@ function emitRouter(folders) {
   lines.push(
     `const FOLDERS_LONGEST_FIRST = ${JSON.stringify(unique)} as const`,
     "",
+    "function exampleSlug(folder: string): string {",
+    '  const i = folder.lastIndexOf("/")',
+    "  return i === -1 ? folder : folder.slice(i + 1)",
+    "}",
+    "",
     "function folderForExample(name: string): string | undefined {",
     "  for (const folder of FOLDERS_LONGEST_FIRST) {",
-    '    if (name === folder || name.startsWith(`${folder}-`)) return folder',
+    "    const slug = exampleSlug(folder)",
+    "    if (name === slug || name.startsWith(`${slug}-`)) return folder",
     "  }",
     "  return undefined",
     "}",
@@ -385,14 +434,14 @@ for (const [folder, entries] of byFolder) {
   if (entries.length === 0) continue
   foldersWithExamples.push(folder)
   total += entries.length
-  const out = path.join(examplesDir, folder, "_loaders.ts")
+  const out = path.join(examplesDir, ...folder.split("/"), "_loaders.ts")
   fs.writeFileSync(out, emitFolderLoaders(folder, entries), "utf8")
 }
 
 // Remove stale _loaders.ts in folders that no longer have examples
 for (const folder of discoveredFolders) {
   if (foldersWithExamples.includes(folder)) continue
-  const stale = path.join(examplesDir, folder, "_loaders.ts")
+  const stale = path.join(examplesDir, ...folder.split("/"), "_loaders.ts")
   if (fs.existsSync(stale)) fs.unlinkSync(stale)
 }
 

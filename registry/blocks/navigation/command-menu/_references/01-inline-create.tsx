@@ -1,6 +1,6 @@
 /**
  * Pending: Navigation → Command Menu (01)
- * Job: Embedded create palette — no dialog. Sits in page chrome.
+ * Job: Embedded create palette - no dialog. Sits in page chrome.
  * Audit: semantic tokens (dark/light) · w-full min-w-0 (responsive) ·
  * text-start + shortcut dir=ltr (RTL).
  */

@@ -29,7 +29,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Custom Animation — scatter dataset swap with `animationInterpolateFn` (Recharts ≥3.9).
+ * Custom Animation - scatter dataset swap with `animationInterpolateFn` (Recharts ≥3.9).
  * Teaching delta: crossfade / staggered / pop between two point clouds.
  * Locked chrome + metric scrubber. Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/custom-animation.tsx
@@ -75,7 +75,7 @@ type AnimatedScatterPoint = ScatterPointItem & { opacity?: number }
 
 type FlatPoint = CustomAnimationPoint & { id: string }
 
-/** Morning sample — denser mid-range. */
+/** Morning sample - denser mid-range. */
 const DEMO_A: CustomAnimationPoint[] = [
   { x: 155, y: 54, z: 90 },
   { x: 160, y: 60, z: 140 },
@@ -89,7 +89,7 @@ const DEMO_A: CustomAnimationPoint[] = [
   { x: 194, y: 100, z: 300 },
 ]
 
-/** Afternoon sample — shifted up/right. */
+/** Afternoon sample - shifted up/right. */
 const DEMO_B: CustomAnimationPoint[] = [
   { x: 158, y: 62, z: 120 },
   { x: 163, y: 68, z: 170 },
@@ -241,7 +241,7 @@ function withIds(rows: CustomAnimationPoint[], prefix: string): FlatPoint[] {
 
 function CustomAnimation({
   title = "Custom scatter animation",
-  subtitle = "Swap datasets — crossfade, staggered, or pop via animationInterpolateFn.",
+  subtitle = "Swap datasets - crossfade, staggered, or pop via animationInterpolateFn.",
   dataA = DEMO_A,
   dataB = DEMO_B,
   seriesLabel = "Sample",
@@ -529,7 +529,7 @@ function CustomAnimation({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{caption}</p>

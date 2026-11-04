@@ -32,7 +32,7 @@ import { useNarrowViewport } from "../_lib/use-narrow-viewport"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Range Area Chart Custom Animation — locked gallery chrome + **neon** (chart-local).
+ * Range Area Chart Custom Animation - locked gallery chrome + **neon** (chart-local).
  * `[low, high]` ranged area with a longer entrance (`animationDuration` 1200ms).
  * Metric header scrubber; RTL-aware axes.
  * Installs to: components/charts/range-area-chart-custom-animation.tsx
@@ -56,7 +56,7 @@ export type RangeAreaChartCustomAnimationProps = {
   scrub?: boolean
 }
 
-/** Custom entrance — slower than the usual 200ms gallery tween. */
+/** Custom entrance - slower than the usual 200ms gallery tween. */
 const AREA_MS = 1200
 const AXIS_TICK_FILL =
   "color-mix(in oklab, var(--foreground) 58%, transparent)"
@@ -422,7 +422,7 @@ function RangeAreaChartCustomAnimation({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">

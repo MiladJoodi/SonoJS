@@ -101,7 +101,7 @@ function TweetText({ text }: { text: string }) {
   )
 }
 
-/** Static tweet-style card — props only, no fetch. */
+/** Static tweet-style card - props only, no fetch. */
 export function TweetCard({
   name = "SonoJS",
   handle = "_sonojs",

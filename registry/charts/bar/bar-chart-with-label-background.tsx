@@ -27,9 +27,9 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Bar Chart With Label Background — locked gallery chrome (navy × orange);
+ * Bar Chart With Label Background - locked gallery chrome (navy × orange);
  * type-required always-on inside segment labels (bar fill = label background,
- * light ink — not series-tinted). Stacked Online + Store + metric scrubber.
+ * light ink - not series-tinted). Stacked Online + Store + metric scrubber.
  * Installs to: components/charts/bar-chart-with-label-background.tsx
  */
 
@@ -477,7 +477,7 @@ function BarChartWithLabelBackground({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{monthLabel}</p>
@@ -575,7 +575,7 @@ function BarChartWithLabelBackground({
               fill="var(--color-online)"
               radius={FLAT_RADIUS}
               maxBarSize={barSize}
-              // Always-on inside labels — enter animation makes tip ink blink on load.
+              // Always-on inside labels - enter animation makes tip ink blink on load.
               isAnimationActive={false}
             >
               {data.map((_, index) => (

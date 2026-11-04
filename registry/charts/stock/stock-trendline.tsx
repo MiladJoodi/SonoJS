@@ -34,7 +34,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Stock Trendline — close price + dashed SMA overlay.
+ * Stock Trendline - close price + dashed SMA overlay.
  * Type-required symbol card; no neon; locked chrome + metric scrubber.
  * Installs to: components/charts/stock-trendline.tsx
  */
@@ -410,7 +410,7 @@ function StockTrendline({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">
@@ -598,7 +598,7 @@ function StockTrendline({
                           </span>
                           <span className="font-medium text-foreground">
                             {value == null
-                              ? "—"
+                              ? "-"
                               : formatCandlePrice(Number(value), locale)}
                           </span>
                         </div>

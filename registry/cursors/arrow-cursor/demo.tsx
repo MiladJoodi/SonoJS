@@ -12,7 +12,7 @@ export default function ArrowCursorDemo() {
     <div ref={stageRef} className={`${CURSOR_STAGE_LIGHT} cursor-none`}>
       <ArrowCursor containerRef={stageRef} />
       <p className="pointer-events-none absolute inset-0 flex items-center justify-center text-sm text-muted-foreground">
-        Move — the arrow tracks direction
+        Move - the arrow tracks direction
       </p>
     </div>
   )

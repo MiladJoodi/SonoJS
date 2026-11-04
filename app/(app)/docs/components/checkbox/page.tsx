@@ -91,19 +91,19 @@ export default async function CheckboxDocsPage() {
             {
               name: "checked",
               type: 'boolean | "indeterminate"',
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Controlled checked state.",
             },
             {
               name: "defaultChecked",
               type: 'boolean | "indeterminate"',
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Uncontrolled initial checked state.",
             },
             {
               name: "onCheckedChange",
               type: '(checked: boolean | "indeterminate") => void',
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Called when the checked state changes.",
             },
             {
@@ -115,7 +115,7 @@ export default async function CheckboxDocsPage() {
             {
               name: "aria-invalid",
               type: "boolean",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Shows the invalid (destructive) border.",
             },
           ]}

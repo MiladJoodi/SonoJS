@@ -20,7 +20,7 @@ const steps = [
   {
     n: "3",
     title: "Sign in faster next time",
-    body: "No password to remember — you can still keep a backup.",
+    body: "No password to remember - you can still keep a backup.",
   },
 ] as const
 

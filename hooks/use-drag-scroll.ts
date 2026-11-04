@@ -2,7 +2,7 @@
 
 import * as React from "react"
 
-/** Invisible drag-to-scroll — works over links/cards, no grab cursor. */
+/** Invisible drag-to-scroll - works over links/cards, no grab cursor. */
 export function useDragScroll<T extends HTMLElement>() {
   const ref = React.useRef<T>(null)
 

@@ -36,7 +36,7 @@ export default function AccountRecoveryForm({
               Locked out? We&apos;ll get you back.
             </h1>
             <p className="max-w-sm text-sm leading-relaxed text-zinc-400">
-              Account recovery restores access without exposing your password —
+              Account recovery restores access without exposing your password -
               start with the email on file.
             </p>
           </div>

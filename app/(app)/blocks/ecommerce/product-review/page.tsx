@@ -29,7 +29,7 @@ export default function BlockProductReviewDocsPage() {
       <BlocksPageHeader
         title="Product Review"
         pathname="/blocks/ecommerce/product-review"
-        description="Customer review lists and rating summaries — verified buyers, star scores, image strips, and helpful votes."
+        description="Customer review lists and rating summaries - verified buyers, star scores, image strips, and helpful votes."
       />
 
       <div className="flex flex-col gap-8">

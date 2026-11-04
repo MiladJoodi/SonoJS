@@ -22,7 +22,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Specified Domain Radar Chart — dual Alex×Sara polygons with fixed
+ * Specified Domain Radar Chart - dual Alex×Sara polygons with fixed
  * PolarRadiusAxis domain [0, 150]. Locked metric scrub.
  * Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/specified-domain-radar-chart.tsx
@@ -262,7 +262,7 @@ function SpecifiedDomainRadarChart({
                 {formatPct(deltaPct)}
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{caption}</p>

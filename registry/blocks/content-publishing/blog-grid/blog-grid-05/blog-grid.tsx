@@ -102,7 +102,7 @@ const ALL_POSTS: Post[] = [
     date: "Mar 15, 2026",
     readTime: "6 min",
     excerpt:
-      "Why pure CSS theming wins — and how oklch keeps contrast honest.",
+      "Why pure CSS theming wins - and how oklch keeps contrast honest.",
     cover: assetSrc(cover02),
     alt: "Theming mood board",
   },
@@ -126,7 +126,7 @@ const ALL_POSTS: Post[] = [
     date: "Mar 10, 2026",
     readTime: "12 min",
     excerpt:
-      "CSS-first config, @theme, and @source — a practical migration path.",
+      "CSS-first config, @theme, and @source - a practical migration path.",
     cover: assetSrc(cover04),
     alt: "Product headphones on desk",
   },
@@ -154,7 +154,7 @@ const ALL_POSTS: Post[] = [
     alt: "Creative imagination cover",
   },
   {
-    title: "SonoJS v1.2 — Calendar and Tree Components",
+    title: "SonoJS v1.2 - Calendar and Tree Components",
     category: "release",
     author: "SonoJS Team",
     initials: "SJ",
@@ -211,7 +211,7 @@ const ALL_POSTS: Post[] = [
     alt: "Creative workspace",
   },
   {
-    title: "SonoJS v1.1 — Data Table and Timeline",
+    title: "SonoJS v1.1 - Data Table and Timeline",
     category: "release",
     author: "SonoJS Team",
     initials: "SJ",
@@ -274,7 +274,7 @@ export default function BlogGrid({
             </h1>
             <p className="mt-2 text-base text-muted-foreground">
               Full-bleed video-ratio tiles with title and meta on a gradient
-              scrim — load more as you go.
+              scrim - load more as you go.
             </p>
           </div>
 

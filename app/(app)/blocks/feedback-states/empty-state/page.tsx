@@ -45,7 +45,7 @@ export default function BlockEmptyStateDocsPage() {
       <BlocksPageHeader
         title="Empty State"
         pathname="/blocks/feedback-states/empty-state"
-        description="Product-ready empties — search, inbox, projects, tables, team, files, charts, notifications, and first-run setup."
+        description="Product-ready empties - search, inbox, projects, tables, team, files, charts, notifications, and first-run setup."
       />
 
       <div className="flex flex-col gap-8">

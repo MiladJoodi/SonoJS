@@ -31,7 +31,7 @@ import { useNarrowViewport } from "../_lib/use-narrow-viewport"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Area Step — locked gallery chrome + **neon** (chart-local).
+ * Area Step - locked gallery chrome + **neon** (chart-local).
  * Single step area (`type="step"`) + metric header scrubber.
  * Installs to: components/charts/area-step.tsx
  */
@@ -108,7 +108,7 @@ function formatCompact(value: number, locale: string) {
 
 function AreaStep({
   title = "Store Visits – H1 2026",
-  subtitle = "Step area — flat segments between months.",
+  subtitle = "Step area - flat segments between months.",
   data = DEMO_DATA,
   className,
   plotDir,
@@ -373,7 +373,7 @@ function AreaStep({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{monthLabel}</p>

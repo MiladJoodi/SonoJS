@@ -1,0 +1,1 @@
+export { AngledSliderDefault } from "./default"

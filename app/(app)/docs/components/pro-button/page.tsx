@@ -24,7 +24,7 @@ const exampleDefs = [
     name: "pro-button-default",
     title: "Variants",
     description:
-      "`primary`, `secondary`, and `outline` — same control scale as Button.",
+      "`primary`, `secondary`, and `outline` - same control scale as Button.",
   },
 ]
 
@@ -68,7 +68,7 @@ export default async function ProButtonDocsPage() {
         pathname="/docs/components/pro-button"
         description={
           <p className="leading-relaxed text-muted-foreground">
-            Test Pro component — download the ready zip from the private{" "}
+            Test Pro component - download the ready zip from the private{" "}
             <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
               sonojs-pro
             </code>{" "}

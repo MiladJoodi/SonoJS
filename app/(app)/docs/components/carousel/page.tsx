@@ -104,7 +104,7 @@ export default async function CarouselDocsPage() {
             {
               name: "opts",
               type: "CarouselOptions",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Embla options such as align, loop, and direction.",
             },
             {
@@ -116,13 +116,13 @@ export default async function CarouselDocsPage() {
             {
               name: "plugins",
               type: "CarouselPlugin",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Embla plugins (for example Autoplay).",
             },
             {
               name: "setApi",
               type: "(api: CarouselApi) => void",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Receives the Embla API once the carousel is ready.",
             },
           ]}

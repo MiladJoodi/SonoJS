@@ -119,7 +119,7 @@ const SEED_TICKETS: Ticket[] = [
     slaDeadline: "2026-10-30T14:30:00Z",
     messages: [
       { id: "m-2", author: "customer", body: "Okta users bounce back to sign-in.", at: "2026-10-30T05:30:00Z", internal: false },
-      { id: "m-3", author: "agent", agentName: "Alex Rivera", body: "Reproducing now — checking the callback URL.", at: "2026-10-30T08:12:00Z", internal: false },
+      { id: "m-3", author: "agent", agentName: "Alex Rivera", body: "Reproducing now - checking the callback URL.", at: "2026-10-30T08:12:00Z", internal: false },
       { id: "m-4", author: "agent", agentName: "Alex Rivera", body: "Callback mismatch on the staging tenant.", at: "2026-10-30T10:54:00Z", internal: true },
     ],
   },
@@ -152,7 +152,7 @@ const SEED_TICKETS: Ticket[] = [
     slaDeadline: "2026-10-29T12:00:00Z",
     messages: [
       { id: "m-7", author: "customer", body: "Invitee sees access denied after accepting.", at: "2026-10-28T16:10:00Z", internal: false },
-      { id: "m-8", author: "agent", agentName: "Alex Rivera", body: "Invite used an old email alias — fixed.", at: "2026-10-29T08:15:00Z", internal: false },
+      { id: "m-8", author: "agent", agentName: "Alex Rivera", body: "Invite used an old email alias - fixed.", at: "2026-10-29T08:15:00Z", internal: false },
     ],
   },
 ]

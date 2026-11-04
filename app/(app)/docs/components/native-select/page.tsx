@@ -81,7 +81,7 @@ export default async function NativeSelectDocsPage() {
           <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
             select
           </code>{" "}
-          — height{" "}
+          - height{" "}
           <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
             h-[46px]
           </code>{" "}
@@ -123,7 +123,7 @@ export default async function NativeSelectDocsPage() {
               name: "size",
               type: '"default" | "sm"',
               defaultValue: '"default"',
-              description: "Control height — default `h-[46px]`, sm `h-10`.",
+              description: "Control height - default `h-[46px]`, sm `h-10`.",
             },
             {
               name: "disabled",
@@ -134,19 +134,19 @@ export default async function NativeSelectDocsPage() {
             {
               name: "aria-invalid",
               type: "boolean",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Marks the control invalid and applies destructive ring.",
             },
             {
               name: "label",
               type: "string",
-              defaultValue: "—",
-              description: "On `NativeSelectOptGroup` — group heading.",
+              defaultValue: "-",
+              description: "On `NativeSelectOptGroup` - group heading.",
             },
             {
               name: "className",
               type: "string",
-              defaultValue: "—",
+              defaultValue: "-",
               description: "Merge extra Tailwind classes on the select.",
             },
           ]}

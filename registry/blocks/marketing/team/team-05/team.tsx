@@ -67,7 +67,7 @@ const DEFAULT_MEMBERS = [
 export default function Team({
   title = "Quiet confidence",
   eyebrow = "Collective",
-  description = "Minimal avatars, generous space—let the portraits and titles do the work.",
+  description = "Minimal avatars, generous space-let the portraits and titles do the work.",
   members = DEFAULT_MEMBERS,
   className,
   ...props

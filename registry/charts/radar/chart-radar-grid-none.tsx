@@ -16,7 +16,7 @@ import { useChartDir } from "../_lib/use-chart-dir"
 import { usePrefersReducedMotion } from "../_lib/use-prefers-reduced-motion"
 
 /**
- * Chart Radar Grid None (classic) — single Store series with no PolarGrid
+ * Chart Radar Grid None (classic) - single Store series with no PolarGrid
  * and vertex dots. Locked metric scrub.
  * Spec: `registry/charts/PORT.md`
  * Installs to: components/charts/chart-radar-grid-none.tsx
@@ -73,7 +73,7 @@ function formatPct(value: number) {
 
 function ChartRadarGridNone({
   title = "Radar grid none",
-  subtitle = "No PolarGrid — filled polygon with vertex dots only.",
+  subtitle = "No PolarGrid - filled polygon with vertex dots only.",
   data = DEMO_DATA,
   className,
   plotDir,
@@ -243,7 +243,7 @@ function ChartRadarGridNone({
                 {formatPct(deltaPct)}
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">{caption}</p>

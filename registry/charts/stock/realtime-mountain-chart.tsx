@@ -24,7 +24,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Realtime Mountain Chart — live price area with pulsing tip.
+ * Realtime Mountain Chart - live price area with pulsing tip.
  * Type-required play/pause + `PulsingLiveDot`; no neon; metric scrubber.
  * Installs to: components/charts/realtime-mountain-chart.tsx
  */
@@ -509,7 +509,7 @@ function RealtimeMountainChart({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">

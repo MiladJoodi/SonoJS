@@ -181,7 +181,7 @@ export default function SocialLinks({
               </div>
 
               <p className="truncate text-sm text-muted-foreground">
-                Production-ready React components — copy the source, keep the craft.
+                Production-ready React components - copy the source, keep the craft.
               </p>
             </div>
 
@@ -265,7 +265,7 @@ export default function SocialLinks({
                 <BookOpenIcon className="size-3.5" aria-hidden />
               </span>
               <p className="min-w-0 flex-1 truncate text-xs text-muted-foreground">
-                New: portfolio, changelog, reading-progress — explore the catalog.
+                New: portfolio, changelog, reading-progress - explore the catalog.
               </p>
             </div>
 

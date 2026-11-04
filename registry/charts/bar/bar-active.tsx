@@ -23,7 +23,7 @@ import { chartBarContainerClassName } from "../_lib/chart-styles"
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Bar Active — locked gallery chrome + chart-local featured bar stroke.
+ * Bar Active - locked gallery chrome + chart-local featured bar stroke.
  * One category keeps a dashed outline (`activeBarIndex`); scrub updates the metric.
  * Installs to: components/charts/bar-active.tsx
  */
@@ -55,7 +55,7 @@ const AXIS_TICK_FILL =
   "color-mix(in oklab, var(--foreground) 58%, transparent)"
 const DEFAULT_ACTIVE_BAR = 2
 
-/** Browser share demo — English keys matching classic bar-active. */
+/** Browser share demo - English keys matching classic bar-active. */
 const DEMO_DATA: BarActivePoint[] = [
   { browser: "chrome", visitors: 187, fill: "var(--color-chrome)" },
   { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
@@ -177,7 +177,7 @@ function ActiveBarShape({
 
 function BarActive({
   title = "Visitors by Browser",
-  subtitle = "Featured bar keeps a dashed outline — scrub any category.",
+  subtitle = "Featured bar keeps a dashed outline - scrub any category.",
   data = DEMO_DATA,
   className,
   plotDir,
@@ -454,7 +454,7 @@ function BarActive({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">

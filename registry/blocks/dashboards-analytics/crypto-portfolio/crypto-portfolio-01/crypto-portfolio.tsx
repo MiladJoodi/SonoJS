@@ -166,7 +166,7 @@ function AssetMark({ asset }: { asset: Asset }) {
   )
 }
 
-/** Fixed SVG spark — avoids ResponsiveContainer 0×0 in table cells. */
+/** Fixed SVG spark - avoids ResponsiveContainer 0×0 in table cells. */
 function MiniArea({
   values,
   color,
@@ -225,7 +225,7 @@ export default function CryptoPortfolio({
 }: React.ComponentProps<"section">) {
   const [query, setQuery] = React.useState("")
   const [hidden, setHidden] = React.useState(false)
-  const [updatedAt, setUpdatedAt] = React.useState("—")
+  const [updatedAt, setUpdatedAt] = React.useState("-")
 
   React.useEffect(() => {
     const tick = () => {

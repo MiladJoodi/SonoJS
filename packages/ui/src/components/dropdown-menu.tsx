@@ -47,7 +47,7 @@ function DropdownMenuContent({
   sideOffset = 4,
   ...props
 }: React.ComponentProps<typeof DropdownMenuPrimitive.Content>) {
-  // Portal under <body> — HTML dir for CSS; Root `dir` covers Radix positioning.
+  // Portal under <body> - HTML dir for CSS; Root `dir` covers Radix positioning.
   const { dir } = useDirection()
 
   return (

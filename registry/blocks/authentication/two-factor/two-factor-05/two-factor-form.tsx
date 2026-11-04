@@ -43,7 +43,7 @@ export default function TwoFactorForm({
           </h1>
           <p className="text-sm text-muted-foreground">
             {mode === "passkey"
-              ? "Use Face ID, Touch ID, or your security key — the fastest 2FA path in 2026."
+              ? "Use Face ID, Touch ID, or your security key - the fastest 2FA path in 2026."
               : "Use a code from your authenticator if your passkey isn’t available."}
           </p>
         </div>

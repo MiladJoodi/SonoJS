@@ -29,7 +29,7 @@ import {
 import { useChartDir } from "../_lib/use-chart-dir"
 
 /**
- * Brush Bar Chart — locked gallery chrome (navy × orange); type-required
+ * Brush Bar Chart - locked gallery chrome (navy × orange); type-required
  * Recharts `Brush` range over a longer bipolar series + zero reference.
  * Metric header scrubber tracks the active category in the brush window.
  * Installs to: components/charts/brush-bar-chart.tsx
@@ -168,7 +168,7 @@ function niceAbsMax(values: number[]) {
 
 function BrushBarChart({
   title = "Channel volume",
-  subtitle = "Online vs store — drag the brush to zoom the range.",
+  subtitle = "Online vs store - drag the brush to zoom the range.",
   data = DEMO_DATA,
   className,
   plotDir,
@@ -223,7 +223,7 @@ function BrushBarChart({
   const [idleTrack, setIdleTrack] = React.useState(idleIndex)
   if (idleTrack !== idleIndex) {
     setIdleTrack(idleIndex)
-    // Use scrubbing state (not scrubbingRef) — refs must not be read during render.
+    // Use scrubbing state (not scrubbingRef) - refs must not be read during render.
     if (!scrubbing) setActiveIndex(idleIndex)
   }
 
@@ -297,7 +297,7 @@ function BrushBarChart({
       ) {
         return
       }
-      // Brush slices the plot — tooltip index is relative to the window.
+      // Brush slices the plot - tooltip index is relative to the window.
       const local = Number(chartState.activeTooltipIndex)
       if (!Number.isFinite(local)) return
       const idx = startIndex + local
@@ -521,7 +521,7 @@ function BrushBarChart({
                 </span>
               </span>
             ) : (
-              <span className="text-xs text-muted-foreground">—</span>
+              <span className="text-xs text-muted-foreground">-</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground">

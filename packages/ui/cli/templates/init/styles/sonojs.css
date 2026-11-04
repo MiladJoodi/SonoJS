@@ -1,5 +1,5 @@
 /**
- * SonoJS design system — theme tokens on `:root` / `.dark`.
+ * SonoJS design system - theme tokens on `:root` / `.dark`.
  * `init` imports this from globals.css; `add` only copies components.
  *
  * `tw-animate-css` powers Sheet/Dialog/Popover enter-exit (`animate-in`,
@@ -17,7 +17,7 @@
 @source inline("ltr:data-[state=checked]:translate-x-[calc(100%-2px)] rtl:data-[state=checked]:-translate-x-[calc(100%-2px)]");
 /* Elevated surfaces used by marketing / auth blocks */
 @source inline("bg-canvas bg-card text-card-foreground border-border/70 shadow-soft rounded-[12px] ring-border/70");
-/* Semantic colors — blocks/buttons even if a content path is missed */
+/* Semantic colors - blocks/buttons even if a content path is missed */
 @source inline("bg-primary hover:bg-primary/90 bg-primary/90 !text-white text-primary bg-destructive hover:bg-destructive/90 text-destructive text-muted-foreground bg-muted hover:bg-muted bg-secondary text-secondary-foreground bg-accent text-accent-foreground text-foreground text-background bg-foreground bg-background from-card via-card/70 to-transparent");
 
 /* Map utilities → CSS vars (values from :root) */
@@ -47,7 +47,7 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  /* Soft surfaces — elevated cards on canvas (docs / blocks parity) */
+  /* Soft surfaces - elevated cards on canvas (docs / blocks parity) */
   --color-canvas: var(--canvas);
   --color-border-soft: var(--border-soft);
   --shadow-soft: var(--shadow-soft);
@@ -277,7 +277,7 @@
   --leading-body: 1.5;
   --leading-heading: 1.2;
 
-  /* Control sizes — SonoJS (default = 32px / h-8) */
+  /* Control sizes - SonoJS (default = 32px / h-8) */
   --size-button-sm: 28px;
   --size-button-md: 32px;
   --size-button-lg: 36px;
@@ -292,7 +292,7 @@
   --size-icon-lg: 20px;
   --touch-target: 44px;
 
-  /* Radius — SonoJS (base 10px · control ~8 · surface 10) */
+  /* Radius - SonoJS (base 10px · control ~8 · surface 10) */
   --radius: 0.625rem;
   /* Aliases used by components (`rounded-(--cell-radius)` → --radius-md) */
   --radius-sm: calc(var(--radius) * 0.6);
@@ -305,7 +305,7 @@
   --radius-card: var(--radius-surface);
   --radius-dialog: var(--radius-surface);
 
-  /* Code Block chrome — VS Code Dark+ (same in light + dark host themes) */
+  /* Code Block chrome - VS Code Dark+ (same in light + dark host themes) */
   --code-bg: #1e1e1e;
   --code-fg: #d4d4d4;
   --code-border: #2b2b2b;
@@ -314,7 +314,7 @@
   --code-line-number: #858585;
   --code-selection: #264f78;
 
-  /* Soft surfaces — match docs site tokens */
+  /* Soft surfaces - match docs site tokens */
   --canvas: #f3f3f4;
   --border-soft: color-mix(in oklab, #e4e4e7 70%, transparent);
   --shadow-soft:
@@ -419,7 +419,7 @@
   box-shadow: var(--shadow-soft);
 }
 
-/* Directional icons — chevrons/arrows along the inline axis */
+/* Directional icons - chevrons/arrows along the inline axis */
 [dir="rtl"] .icon-dir {
   transform: scaleX(-1);
 }

@@ -14,7 +14,7 @@ const DEFAULT_FEATURES = [
   {
     title: "Full Template Downloads",
     description:
-      "Complete project starters—from dashboards to long-form layouts—ready the moment you need them.",
+      "Complete project starters-from dashboards to long-form layouts-ready the moment you need them.",
     href: "#",
   },
   {
@@ -38,7 +38,7 @@ const DEFAULT_FEATURES = [
   {
     title: "Commercial Use License",
     description:
-      "Client work, SaaS, and enterprise apps—full commercial freedom included.",
+      "Client work, SaaS, and enterprise apps-full commercial freedom included.",
     href: "#",
   },
 ] as const
@@ -53,7 +53,7 @@ export type ContentSectionFeature = {
 export default function ContentSection({
   eyebrow = "Premium plan",
   title = "Unlock Premium Features",
-  description = "More control, flexibility, and performance—tools that help you build faster without compromising craft.",
+  description = "More control, flexibility, and performance-tools that help you build faster without compromising craft.",
   features = DEFAULT_FEATURES,
   className,
   ...props
