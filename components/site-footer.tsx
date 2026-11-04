@@ -11,6 +11,7 @@ const footerLinks = [
   { href: "/blocks", label: "Blocks" },
   { href: "/charts", label: "Charts" },
   { href: "/3d", label: "3D" },
+  { href: "/ai", label: "AI" },
 ] as const
 
 export function SiteFooter() {

@@ -6,6 +6,10 @@ import { cn } from "@/lib/utils"
 const imgClass =
   "size-full object-contain object-center p-2.5 md:p-3 group-hover:scale-110 transition-transform duration-500"
 
+/** Shrink-wrap the bitmap so border-radius clips the image, not letterbox space. */
+const roundedImgClass =
+  "max-h-full max-w-full rounded-[8px] object-contain object-center transition-transform duration-500 group-hover:scale-110"
+
 /**
  * Charts-like catalog card: muted thumb plane + title bar.
  * Prefer `preview` (wireframe) over WebP thumbs when provided.
@@ -17,6 +21,8 @@ export function CatalogThumbCard({
   darkSrc,
   preview,
   className,
+  /** Round the thumb image itself (used on `/ai`). */
+  roundedThumb = false,
 }: {
   href: string
   title: string
@@ -24,6 +30,7 @@ export function CatalogThumbCard({
   darkSrc?: string
   preview?: ReactNode
   className?: string
+  roundedThumb?: boolean
 }) {
   const hasImages = Boolean(lightSrc && darkSrc)
 
@@ -45,6 +52,21 @@ export function CatalogThumbCard({
         {preview ? (
           <div className="size-full p-1 transition-transform duration-500 group-hover:scale-[1.04]">
             {preview}
+          </div>
+        ) : hasImages && roundedThumb ? (
+          <div className="flex size-full items-center justify-center p-2.5 md:p-3">
+            {/* eslint-disable-next-line @next/next/no-img-element -- static public webps */}
+            <img
+              src={lightSrc}
+              alt=""
+              className={cn(roundedImgClass, "dark:hidden")}
+            />
+            {/* eslint-disable-next-line @next/next/no-img-element -- static public webps */}
+            <img
+              src={darkSrc}
+              alt=""
+              className={cn(roundedImgClass, "hidden dark:block")}
+            />
           </div>
         ) : hasImages ? (
           <>

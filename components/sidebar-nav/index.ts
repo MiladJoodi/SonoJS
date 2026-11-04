@@ -6,6 +6,7 @@ export {
   CarouselsListIndex,
   CarouselsSidebar,
 } from "./carousels-sidebar"
+export { AiListIndex, AiSidebar } from "./ai-sidebar"
 export { BlocksListIndex, BlocksSidebar } from "./blocks-sidebar"
 export { ToolsListIndex, ToolsSidebar, ToolsSidebarToggle } from "./tools-sidebar"
 export { ListIndexNav } from "./list-index-nav"

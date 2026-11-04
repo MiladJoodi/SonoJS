@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation"
 
-/** Canonical AI Code Block docs live at `/docs/components/code-block`. */
+/** Canonical AI Code Block docs live at `/ai/code-block`. */
 export default function AgentCodeBlockDocsRedirect() {
-  redirect("/docs/components/code-block")
+  redirect("/ai/code-block")
 }

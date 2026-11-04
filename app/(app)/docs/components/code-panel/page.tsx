@@ -113,7 +113,7 @@ export default async function CodePanelDocsPage() {
             <code className="sono-inline-code">dir=&quot;ltr&quot;</code>. For
             the AI agent chrome, see{" "}
             <a
-              href="/docs/components/code-block"
+              href="/ai/code-block"
               className="font-medium text-foreground underline-offset-4 hover:underline"
             >
               Code Block

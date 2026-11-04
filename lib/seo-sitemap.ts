@@ -8,6 +8,7 @@ import {
   chartCategoryHref,
   chartViewHref,
 } from "@/lib/charts-catalog"
+import { getAiPages } from "@/lib/ai-nav"
 import { get3dPages } from "@/lib/3d-nav"
 import { getCarouselsPages } from "@/lib/carousels-nav"
 import { cursorsCatalog, cursorViewHref } from "@/lib/cursors-catalog"
@@ -99,11 +100,15 @@ export function buildSitemapPaths(): string[] {
   pushUnique(paths, "/charts")
   pushUnique(paths, "/cursors")
   pushUnique(paths, "/3d")
+  pushUnique(paths, "/ai")
   pushUnique(paths, "/carousels")
   pushUnique(paths, "/tools")
   pushUnique(paths, "/docs/components")
 
   for (const page of get3dPages()) {
+    pushUnique(paths, page.href)
+  }
+  for (const page of getAiPages()) {
     pushUnique(paths, page.href)
   }
   for (const page of getCarouselsPages()) {

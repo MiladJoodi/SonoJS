@@ -159,6 +159,14 @@ export function componentDocsMetadata(slug: string, title: string): Metadata {
   })
 }
 
+export function aiDocsMetadata(slug: string, title: string): Metadata {
+  return pageMetadata({
+    title,
+    description: `Use the SonoJS ${title} component in React with Tailwind. Install with the SonoJS CLI and own the source in your app.`,
+    path: `/ai/${slug}`,
+  })
+}
+
 export function docsGuideMetadata(
   path: string,
   title: string,

@@ -1,10 +1,19 @@
 import type { ReactNode } from "react"
 
+import { getAiAdjacent } from "@/lib/ai-nav"
+import { getCarouselsAdjacent } from "@/lib/carousels-nav"
 import { get3dAdjacent } from "@/lib/3d-nav"
 import { getDocsAdjacent } from "@/lib/docs-nav"
 import { cn } from "@/lib/utils"
 
 import { DocsAdjacentPager } from "./docs-adjacent-pager"
+
+function adjacentForPath(pathname: string) {
+  if (pathname.startsWith("/3d")) return get3dAdjacent(pathname)
+  if (pathname.startsWith("/ai")) return getAiAdjacent(pathname)
+  if (pathname.startsWith("/carousels")) return getCarouselsAdjacent(pathname)
+  return getDocsAdjacent(pathname)
+}
 
 /**
  * Docs page title row with prev/next. Long titles truncate; pager stays shrink-0.
@@ -20,9 +29,7 @@ export function DocsPageHeader({
   pathname: string
   className?: string
 }) {
-  const { previous, next } = pathname.startsWith("/3d")
-    ? get3dAdjacent(pathname)
-    : getDocsAdjacent(pathname)
+  const { previous, next } = adjacentForPath(pathname)
 
   return (
     <header className={cn("space-y-2", className)}>

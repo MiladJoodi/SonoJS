@@ -1,20 +1,13 @@
 "use client"
 
-import { useAuth } from "@clerk/nextjs"
-
-import { useSignedInHint } from "@/components/auth"
 import { WorkspaceOfferRail } from "@/components/workspace-offer-rail"
 
 /**
- * Guest offer rail for marketplace grids.
- * Server SignedInHint keeps the column out for members on first paint;
- * guests keep the column before Clerk JS loads (no jump-in).
+ * Offer rail column for marketplace grids (guests + members).
+ * Always reserve the xl column — copy switches inside WorkspaceOfferRail.
  */
 export function useMarketplaceOfferRail() {
-  const { isLoaded, isSignedIn } = useAuth()
-  const initialSignedIn = useSignedInHint()
-  const signedIn = isLoaded ? Boolean(isSignedIn) : initialSignedIn
-  return !signedIn
+  return true
 }
 
 export function MarketplaceOfferColumn() {
