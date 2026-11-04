@@ -168,7 +168,14 @@ export function ComponentVariantPreview({
       : undefined
 
   return (
-    <div className={cn("space-y-3", className)}>
+    <div
+      data-sono-toc="preview"
+      id="preview"
+      className={cn(
+        "space-y-3 scroll-mt-[calc(var(--header-height)+1.25rem)]",
+        className
+      )}
+    >
       {meta ? (
         <ExampleLead title={meta.title} description={meta.description} />
       ) : null}

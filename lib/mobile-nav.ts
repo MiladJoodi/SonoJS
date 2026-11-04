@@ -24,7 +24,7 @@ export function isMobileBottomNavMore(
 
 /**
  * Primary tabs - usefulness-first for a UI kit.
- * Templates → marketplace. Home lives in More.
+ * Marketplace lives in More until the catalog is ready. Home lives in More.
  */
 export const mobileBottomNav: MobileBottomNavItem[] = [
   {
@@ -34,12 +34,7 @@ export const mobileBottomNav: MobileBottomNavItem[] = [
     match: "prefix",
   },
   { id: "blocks", href: "/blocks", label: "Blocks", match: "prefix" },
-  {
-    id: "templates",
-    href: "/marketplace",
-    label: "Templates",
-    match: "prefix",
-  },
+  { id: "ai", href: "/ai", label: "AI", match: "prefix" },
   { id: "charts", href: "/charts", label: "Charts", match: "prefix" },
   { id: "more", label: "More" },
 ]
@@ -124,11 +119,11 @@ export function getMobileBottomNavActive(
 }
 
 /** Dock row height (glass only, excluding inset + safe-area). */
-export const MOBILE_BOTTOM_NAV_DOCK_HEIGHT = "3rem"
+export const MOBILE_BOTTOM_NAV_DOCK_HEIGHT = "3.375rem"
 
 /**
  * Total clearance for the floating dock: row + bottom inset (~0.75rem) + safe-area.
  * Used by the in-flow spacer.
  */
 export const MOBILE_BOTTOM_NAV_CLEARANCE =
-  "calc(3.75rem + env(safe-area-inset-bottom, 0px))"
+  "calc(4.125rem + env(safe-area-inset-bottom, 0px))"

@@ -3,6 +3,7 @@
 import * as React from "react"
 import { CheckIcon, CopyIcon } from "lucide-react"
 
+import { SITE_TOOLTIP_DELAY_MS } from "@/lib/site-tooltip"
 import { cn } from "@/lib/utils"
 import { Button } from "@sonojs/ui/components/button"
 import {
@@ -78,7 +79,7 @@ export function CopyButton({
   if (!tooltip) return button
 
   return (
-    <Tooltip>
+    <Tooltip delayDuration={SITE_TOOLTIP_DELAY_MS}>
       <TooltipTrigger asChild>{button}</TooltipTrigger>
       <TooltipContent side={tooltipSide}>{label}</TooltipContent>
     </Tooltip>

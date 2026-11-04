@@ -24,12 +24,23 @@ export const OFFER_RAIL_CLASS =
  * `self-start` is required in the layout grid - stretch makes sticky a no-op.
  */
 export const SIDEBAR_SHELL_CLASS =
-  "sticky top-[calc(var(--header-height)+0.6rem)] z-30 hidden h-[calc(100svh-var(--header-height)-2rem)] max-h-[calc(100svh-var(--header-height)-2rem)] w-full min-h-0 shrink-0 self-start overflow-hidden overscroll-none bg-transparent [--sidebar-menu-width:--spacing(56)] lg:flex"
+  "group/sidebar sticky top-[calc(var(--header-height)+0.6rem)] z-30 hidden h-[calc(100svh-var(--header-height)-2rem)] max-h-[calc(100svh-var(--header-height)-2rem)] w-full min-h-0 shrink-0 self-start overflow-hidden overscroll-none border-e border-border/50 bg-transparent [--sidebar-menu-width:--spacing(56)] lg:flex"
 
 export const SIDEBAR_SEARCH_WRAP_CLASS = "shrink-0 pe-2 pt-2 pb-3"
 
-/** Scrollable nav list - soft thin bar (docs / blocks / charts / tools). */
-export const SIDEBAR_CONTENT_CLASS = "scrollbar-soft px-0 pb-8"
+/**
+ * Scrollable nav list (docs / blocks / charts / tools / AI / 3D…).
+ * Scrollbar only on hover; shell `border-e` is the idle separator.
+ * Extra bottom padding so the last item isn’t flush against the viewport edge.
+ */
+export const SIDEBAR_CONTENT_CLASS = "scrollbar-sidebar px-0 pb-20 xl:pb-24"
+
+/**
+ * Mobile list-index sheet scroll area.
+ * Clears the floating bottom dock + home indicator so the last row stays tappable.
+ */
+export const SIDEBAR_MOBILE_SHEET_SCROLL_CLASS =
+  "no-scrollbar h-[calc(100svh-3.25rem)] overflow-y-auto overscroll-contain p-2 pb-[calc(5.5rem+env(safe-area-inset-bottom,0px))]"
 
 export const SIDEBAR_SEARCH_INPUT_CLASS = "text-[13px]"
 

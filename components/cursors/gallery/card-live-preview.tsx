@@ -3,7 +3,10 @@
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
-import { getCursorDemoLoader } from "@/registry/cursors/demo-loaders"
+import {
+  getCursorDemoLoader,
+  loadCursorDemoModule,
+} from "@/registry/cursors/demo-loaders"
 
 type CursorModule = Record<string, unknown>
 
@@ -22,23 +25,28 @@ function resolveDemo(mod: CursorModule): React.ComponentType | null {
 export function CardLivePreview({
   id,
   className,
+  onReady,
 }: {
   id: string
   className?: string
+  /** Fires once the demo component is ready to paint. */
+  onReady?: () => void
 }) {
-  const load = getCursorDemoLoader(id)
   const [Demo, setDemo] = React.useState<React.ComponentType | null>(null)
+  const onReadyRef = React.useRef(onReady)
+  onReadyRef.current = onReady
 
   React.useEffect(() => {
-    if (!load) return
     let cancelled = false
-    setDemo(null)
+    const pending = loadCursorDemoModule(id)
+    if (!pending) return
 
-    load()
+    pending
       .then((mod) => {
         if (cancelled) return
         const Comp = resolveDemo(mod)
-        if (Comp) setDemo(() => Comp)
+        if (!Comp) return
+        setDemo(() => Comp)
       })
       .catch(() => {
         /* leave empty - icon underneath remains as fallback */
@@ -47,9 +55,13 @@ export function CardLivePreview({
     return () => {
       cancelled = true
     }
-  }, [load])
+  }, [id])
 
-  if (!load) return null
+  React.useEffect(() => {
+    if (Demo) onReadyRef.current?.()
+  }, [Demo])
+
+  if (!getCursorDemoLoader(id)) return null
 
   return (
     <div
@@ -59,6 +71,8 @@ export function CardLivePreview({
         "absolute inset-0 overflow-hidden",
         // Fit tall demo stages into the thumb
         "[&>div]:h-full! [&>div]:min-h-0! [&>div]:max-h-full!",
+        // Kill white/black stage flash — match card media surface
+        "[&>div]:bg-transparent!",
         className
       )}
     >

@@ -42,7 +42,7 @@ import {
 const TAB_ICONS: Record<string, LucideIcon> = {
   components: LayoutGridIcon,
   blocks: LayoutTemplateIcon,
-  templates: StoreIcon,
+  ai: SparklesIcon,
   charts: ChartAreaIcon,
   more: EllipsisIcon,
 }
@@ -53,12 +53,13 @@ const MORE_ICONS: Record<string, LucideIcon> = {
   "/docs/mcp": PlugIcon,
   "/cursors": MousePointer2Icon,
   "/3d": BoxIcon,
-  "/ai": SparklesIcon,
   "/carousels": GalleryHorizontalEndIcon,
+  "/marketplace": StoreIcon,
   "/tools": WrenchIcon,
   "https://icons.sonojs.com": ShapesIcon,
 }
 
+/** v1 — soft pill active, stroke icons, no fill clutter. */
 function TabGlyph({
   Icon,
   active,
@@ -67,22 +68,18 @@ function TabGlyph({
   active: boolean
 }) {
   return (
-    <span className="relative inline-flex flex-col items-center gap-0.5">
+    <span
+      className={cn(
+        "inline-flex size-7 items-center justify-center rounded-full transition-[background-color,transform] duration-200",
+        active ? "scale-100 bg-primary/12" : "bg-transparent"
+      )}
+    >
       <Icon
         aria-hidden
-        strokeWidth={active ? 0 : 1.75}
+        strokeWidth={active ? 2 : 1.75}
         className={cn(
-          "size-5.5 shrink-0 transition-[color,transform,fill] duration-200",
-          active
-            ? "scale-[1.04] fill-primary text-primary"
-            : "text-muted-foreground"
-        )}
-      />
-      <span
-        aria-hidden
-        className={cn(
-          "h-0.5 w-3 rounded-full bg-primary transition-opacity duration-200",
-          active ? "opacity-100" : "opacity-0"
+          "size-[1.125rem] shrink-0 transition-colors duration-200",
+          active ? "text-primary" : "text-muted-foreground"
         )}
       />
     </span>
@@ -90,7 +87,7 @@ function TabGlyph({
 }
 
 const tabHitClass =
-  "inline-flex h-full min-w-0 cursor-pointer flex-col items-center justify-center gap-0.5 px-1 transition-[colors,transform] duration-150 active:scale-[0.96] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset"
+  "inline-flex h-full min-w-0 cursor-pointer flex-col items-center justify-center gap-0.5 px-1 transition-transform duration-150 active:scale-[0.96] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset"
 
 export function MobileBottomNav() {
   const pathname = usePathname()
@@ -120,15 +117,15 @@ export function MobileBottomNav() {
         data-mobile-bottom-nav=""
         className={cn(
           "pointer-events-none fixed inset-x-0 bottom-0 z-50 px-3 lg:hidden",
-          "pb-[max(0.625rem,env(safe-area-inset-bottom,0px))]"
+          "pb-[max(0.5rem,env(safe-area-inset-bottom,0px))]"
         )}
       >
         <nav
           aria-label="Mobile"
           className={cn(
-            "pointer-events-auto mx-auto max-w-lg overflow-hidden rounded-2xl",
-            "border border-black/10 bg-background/75 shadow-soft backdrop-blur-2xl backdrop-saturate-150",
-            "dark:border-white/10 dark:bg-background/55"
+            "pointer-events-auto mx-auto max-w-md overflow-hidden rounded-[1.25rem]",
+            "border border-border/60 bg-background/80 shadow-soft backdrop-blur-2xl backdrop-saturate-150",
+            "dark:border-white/10 dark:bg-background/60"
           )}
           style={{ height: MOBILE_BOTTOM_NAV_DOCK_HEIGHT }}
         >
@@ -140,7 +137,7 @@ export function MobileBottomNav() {
               const label = (
                 <span
                   className={cn(
-                    "max-w-full truncate text-[10px] font-medium leading-none tracking-tight transition-colors duration-200",
+                    "max-w-full truncate text-[11px] font-medium leading-none tracking-tight transition-colors duration-200",
                     isActive ? "text-primary" : "text-muted-foreground"
                   )}
                 >
@@ -190,30 +187,32 @@ export function MobileBottomNav() {
               Additional site sections
             </DrawerDescription>
           </DrawerHeader>
-          <nav className="flex flex-col gap-0.5 px-3 pb-[max(1.25rem,env(safe-area-inset-bottom,0px))]">
+          <nav className="grid grid-cols-2 gap-2 px-3 pb-[max(2rem,calc(1.25rem+env(safe-area-inset-bottom,0px)))]">
             {moreItems.map((item) => {
               const Icon = MORE_ICONS[item.href]
               const isActive =
                 !item.external && item.href === active.moreHref
               const rowClass = cn(
-                "flex h-11 cursor-pointer items-center gap-3 rounded-xl px-2.5 text-sm font-medium transition-colors",
+                "flex h-12 cursor-pointer flex-row items-center gap-2.5 rounded-[12px] border border-border/60 bg-card px-3 text-start transition-colors",
                 isActive
-                  ? "bg-primary/10 text-primary"
-                  : "text-foreground/90 hover:bg-muted hover:text-foreground"
+                  ? "border-primary/30 bg-primary/8 text-primary"
+                  : "text-foreground/90 hover:bg-muted/50"
               )
               const content = (
                 <>
                   <span
                     className={cn(
-                      "inline-flex size-8 shrink-0 items-center justify-center rounded-lg",
-                      isActive ? "bg-primary/15" : "bg-muted/60"
+                      "inline-flex size-7 shrink-0 items-center justify-center rounded-full",
+                      isActive ? "bg-primary/15" : "bg-muted/70"
                     )}
                   >
                     {Icon ? (
-                      <Icon className="size-4 shrink-0" aria-hidden />
+                      <Icon className="size-3.5 shrink-0" aria-hidden />
                     ) : null}
                   </span>
-                  {item.label}
+                  <span className="min-w-0 truncate text-[13px] font-medium leading-none">
+                    {item.label}
+                  </span>
                 </>
               )
 

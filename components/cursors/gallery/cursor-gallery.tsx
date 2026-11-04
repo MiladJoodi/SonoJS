@@ -1,10 +1,11 @@
 "use client"
 
+import { CatalogSection } from "@/components/catalog/catalog-section"
 import { cursorsCatalog } from "@/lib/cursors-catalog"
 
 import { CursorExampleCard } from "./example-card"
 
-/** Flat card grid - no category folders. */
+/** Flat card grid — shared catalog columns (same as 3D / AI / carousels). */
 export function CursorGallery() {
   const entries = [...cursorsCatalog].sort((a, b) => {
     if (a.status !== b.status) {
@@ -14,7 +15,7 @@ export function CursorGallery() {
   })
 
   return (
-    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+    <CatalogSection title="Cursors" count={entries.length} showHeader={false}>
       {entries.map((entry) => (
         <CursorExampleCard
           key={entry.id}
@@ -23,6 +24,6 @@ export function CursorGallery() {
           status={entry.status}
         />
       ))}
-    </div>
+    </CatalogSection>
   )
 }

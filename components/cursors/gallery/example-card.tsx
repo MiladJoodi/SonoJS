@@ -6,6 +6,7 @@ import { MousePointerClickIcon } from "lucide-react"
 
 import { cursorViewHref } from "@/lib/cursors-catalog"
 import { cn } from "@/lib/utils"
+import { prefetchCursorDemo } from "@/registry/cursors/demo-loaders"
 
 import { CardLivePreview } from "./card-live-preview"
 
@@ -21,6 +22,7 @@ export function CursorExampleCard({
   const router = useRouter()
   const pending = status === "pending"
   const [hovered, setHovered] = React.useState(false)
+  const [previewReady, setPreviewReady] = React.useState(false)
   const href = cursorViewHref(id)
   const label = pending ? `${title} (pending)` : title
 
@@ -34,9 +36,14 @@ export function CursorExampleCard({
       tabIndex={0}
       aria-label={label}
       onMouseEnter={() => {
-        if (!pending) setHovered(true)
+        if (pending) return
+        prefetchCursorDemo(id)
+        setHovered(true)
       }}
-      onMouseLeave={() => setHovered(false)}
+      onMouseLeave={() => {
+        setHovered(false)
+        setPreviewReady(false)
+      }}
       onClick={go}
       onKeyDown={(event) => {
         if (event.key === "Enter" || event.key === " ") {
@@ -58,10 +65,19 @@ export function CursorExampleCard({
         <MousePointerClickIcon
           className={cn(
             "size-10 text-muted-foreground/50 transition-[transform,opacity] duration-500",
-            hovered ? "scale-110 opacity-0" : "group-hover:scale-110"
+            previewReady ? "scale-110 opacity-0" : "group-hover:scale-110"
           )}
         />
-        {hovered && !pending ? <CardLivePreview id={id} /> : null}
+        {hovered && !pending ? (
+          <CardLivePreview
+            id={id}
+            onReady={() => setPreviewReady(true)}
+            className={cn(
+              "transition-opacity duration-300 ease-out",
+              previewReady ? "opacity-100" : "opacity-0"
+            )}
+          />
+        ) : null}
       </div>
       <div className="bg-card px-2.5 py-2 md:px-3 md:py-2.5">
         <span className="block truncate text-[13px] font-medium text-foreground md:text-sm">

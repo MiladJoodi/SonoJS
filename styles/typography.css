@@ -1,0 +1,61 @@
+/* Docs-site type scale utilities */
+
+@utility text-h1 {
+  font-size: var(--text-h1);
+  line-height: var(--leading-heading);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+
+  @media (min-width: 768px) {
+    font-size: var(--text-h1-lg);
+  }
+}
+
+@utility text-h2 {
+  font-size: var(--text-h2);
+  line-height: var(--leading-heading);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+
+  @media (min-width: 768px) {
+    font-size: var(--text-h2-lg);
+  }
+}
+
+@utility text-h3 {
+  font-size: var(--text-h3);
+  line-height: var(--leading-heading);
+  font-weight: 600;
+
+  @media (min-width: 768px) {
+    font-size: var(--text-h3-lg);
+  }
+}
+
+@utility text-h4 {
+  font-size: var(--text-h4);
+  line-height: var(--leading-heading);
+  font-weight: 600;
+
+  @media (min-width: 768px) {
+    font-size: var(--text-h4-lg);
+  }
+}
+
+@utility text-body {
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  font-weight: 400;
+}
+
+@utility text-secondary {
+  font-size: var(--text-secondary);
+  line-height: var(--leading-body);
+  font-weight: 400;
+}
+
+@utility text-caption {
+  font-size: var(--text-caption);
+  line-height: var(--leading-body);
+  font-weight: 400;
+}

@@ -7,17 +7,13 @@ import { ScrollToTop } from "@/components/scroll-to-top"
 import { SiteFooter } from "@/components/site-footer"
 import { MobileBottomNav, SiteHeader } from "@/components/site-header"
 import { getAuthUserId } from "@/lib/clerk-auth"
-import { getGithubStars } from "@/lib/github"
 
 export default async function AppLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  const [githubStars, userId] = await Promise.all([
-    getGithubStars(),
-    getAuthUserId(),
-  ])
+  const userId = await getAuthUserId()
   const signedIn = Boolean(userId)
 
   return (
@@ -31,10 +27,7 @@ export default async function AppLayout({
         </Suspense>
         <ScrollToTop />
         <MobileHeaderScroll />
-        <SiteHeader
-          githubStars={githubStars}
-          initialSignedIn={signedIn}
-        />
+        <SiteHeader initialSignedIn={signedIn} />
         <main className="flex min-h-0 flex-1 flex-col">{children}</main>
         <SiteFooter />
         <MobileBottomNav />

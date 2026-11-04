@@ -3,6 +3,7 @@
 import * as React from "react"
 import { ArrowDownToLineIcon, CheckIcon } from "lucide-react"
 
+import { SITE_TOOLTIP_DELAY_MS } from "@/lib/site-tooltip"
 import { cn } from "@/lib/utils"
 import { Button } from "@sonojs/ui/components/button"
 import { Spinner } from "@sonojs/ui/components/spinner"
@@ -83,7 +84,7 @@ export function ProArchiveDownload({
         <div className="min-w-0 flex-1 truncate font-mono text-[14px] font-normal text-[color:var(--code-header-fg)]">
           {filename}
         </div>
-        <Tooltip>
+        <Tooltip delayDuration={SITE_TOOLTIP_DELAY_MS}>
           <TooltipTrigger asChild>
             <Button
               type="button"

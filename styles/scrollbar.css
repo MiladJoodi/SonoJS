@@ -1,0 +1,83 @@
+/* Site scrollbars — keep out of globals.css */
+
+/* Thin, low-contrast scrollbar (always visible) — code panes, etc. */
+@utility scrollbar-soft {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+
+  &::-webkit-scrollbar {
+    width: var(--scrollbar-size);
+    height: var(--scrollbar-size);
+  }
+
+  &::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-thumb);
+    border-radius: var(--scrollbar-radius);
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: var(--scrollbar-thumb-hover);
+  }
+}
+
+@property --sidebar-scrollbar-alpha {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
+/*
+ * Docs sidebars: thumb fades in on hover (pointer devices).
+ * Pair with a border-e on the shell so the column still reads as separated.
+ * Alpha is animated via @property — native scrollbar-color does not fade smoothly.
+ */
+@utility scrollbar-sidebar {
+  --sidebar-scrollbar-alpha: 0;
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(
+      in oklab,
+      var(--scrollbar-thumb) calc(var(--sidebar-scrollbar-alpha) * 100%),
+      transparent
+    )
+    transparent;
+  transition: --sidebar-scrollbar-alpha 0.4s ease;
+
+  &::-webkit-scrollbar {
+    width: var(--scrollbar-size);
+    height: var(--scrollbar-size);
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: var(--scrollbar-radius);
+    background-color: color-mix(
+      in oklab,
+      var(--scrollbar-thumb) calc(var(--sidebar-scrollbar-alpha) * 100%),
+      transparent
+    );
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover,
+    :is(.group\/sidebar:hover) & {
+      --sidebar-scrollbar-alpha: 1;
+    }
+
+    &:hover::-webkit-scrollbar-thumb:hover,
+    :is(.group\/sidebar:hover) &::-webkit-scrollbar-thumb:hover {
+      background-color: color-mix(
+        in oklab,
+        var(--scrollbar-thumb-hover)
+          calc(var(--sidebar-scrollbar-alpha) * 100%),
+        transparent
+      );
+    }
+  }
+}

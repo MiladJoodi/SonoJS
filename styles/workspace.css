@@ -1,0 +1,34 @@
+/* Docs-site workspace frame + shared surface utilities */
+
+/**
+ * Site frame — header, footer, docs, charts, and blocks.
+ * Full viewport width with a modest gutter (≈ px-6). Homepage body uses
+ * `HomeShell` (~1180px) separately.
+ */
+.workspace-shell,
+.container-wrapper {
+  margin-inline: auto;
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+  padding-inline: 1.5rem;
+}
+
+@utility shadow-soft {
+  box-shadow: var(--shadow-soft);
+}
+
+@utility paused {
+  animation-play-state: paused;
+}
+
+/*
+ * Page articles set a reading column (`max-w-*`). Inside the workspace the
+ * main track is the column, so previews can use the free width. Component
+ * and chart internals keep their own sizes.
+ */
+[data-workspace-main] > article {
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
+}

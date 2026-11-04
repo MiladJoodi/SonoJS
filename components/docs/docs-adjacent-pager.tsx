@@ -1,8 +1,14 @@
 "use client"
 
+import * as React from "react"
 import Link from "next/link"
-import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react"
+import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react"
 
+import {
+  useWorkspacePanelsOptional,
+  WorkspacePanelToggle,
+} from "@/components/workspace-shell"
+import { SITE_TOOLTIP_DELAY_MS } from "@/lib/site-tooltip"
 import { cn } from "@/lib/utils"
 import { Button } from "@sonojs/ui/components/button"
 import {
@@ -16,9 +22,12 @@ export type DocsAdjacentLink = {
   title: string
 }
 
+const PAGER_BTN_CLASS =
+  "size-8 shrink-0 rounded-full border-border/70 bg-card shadow-none hover:bg-canvas md:size-7"
+
 /**
- * Prev/next beside a page title - white card chrome, LTR + `icon-dir` for RTL.
- * Tooltip shows the adjacent page title.
+ * Prev/next beside a page title - round chrome, LTR + `icon-dir` for RTL.
+ * Right panel toggle sits after next when workspace panels are available.
  */
 export function DocsAdjacentPager({
   previous,
@@ -29,38 +38,45 @@ export function DocsAdjacentPager({
   next?: DocsAdjacentLink | null
   className?: string
 }) {
-  if (!previous && !next) return null
+  const panels = useWorkspacePanelsOptional()
+
+  React.useLayoutEffect(() => {
+    if (!panels) return
+    return panels.registerHeaderActions()
+  }, [panels])
+
+  if (!previous && !next && !panels) return null
 
   return (
     <div className={cn("flex shrink-0 items-center gap-2", className)}>
       {previous ? (
-        <Tooltip delayDuration={400}>
+        <Tooltip delayDuration={SITE_TOOLTIP_DELAY_MS}>
           <TooltipTrigger asChild>
             <Button
               variant="outline"
               size="icon-xs"
-              className="size-8 shrink-0 border-border/70 bg-card shadow-none hover:bg-canvas md:size-7"
+              className={PAGER_BTN_CLASS}
               asChild
             >
               <Link
                 href={previous.href}
                 prefetch={false}
-                aria-label={`Previous: ${previous.title}`}
+                aria-label={`Prev: ${previous.title}`}
               >
-                <ArrowLeftIcon className="size-3.5 icon-dir" />
+                <ChevronLeftIcon className="size-3.5 icon-dir" />
               </Link>
             </Button>
           </TooltipTrigger>
-          <TooltipContent side="top">{previous.title}</TooltipContent>
+          <TooltipContent side="top">{`Prev: ${previous.title}`}</TooltipContent>
         </Tooltip>
       ) : null}
       {next ? (
-        <Tooltip delayDuration={400}>
+        <Tooltip delayDuration={SITE_TOOLTIP_DELAY_MS}>
           <TooltipTrigger asChild>
             <Button
               variant="outline"
               size="icon-xs"
-              className="size-8 shrink-0 border-border/70 bg-card shadow-none hover:bg-canvas md:size-7"
+              className={PAGER_BTN_CLASS}
               asChild
             >
               <Link
@@ -68,12 +84,18 @@ export function DocsAdjacentPager({
                 prefetch={false}
                 aria-label={`Next: ${next.title}`}
               >
-                <ArrowRightIcon className="size-3.5 icon-dir" />
+                <ChevronRightIcon className="size-3.5 icon-dir" />
               </Link>
             </Button>
           </TooltipTrigger>
-          <TooltipContent side="top">{next.title}</TooltipContent>
+          <TooltipContent side="top">{`Next: ${next.title}`}</TooltipContent>
         </Tooltip>
+      ) : null}
+      {panels ? (
+        <WorkspacePanelToggle
+          open={panels.rightOpen}
+          onToggle={panels.toggleRight}
+        />
       ) : null}
     </div>
   )

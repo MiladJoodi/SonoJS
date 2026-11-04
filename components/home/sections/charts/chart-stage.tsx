@@ -10,6 +10,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
+import { SITE_TOOLTIP_DELAY_MS } from "@/lib/site-tooltip"
 import { cn } from "@/lib/utils"
 import { LineBarAreaComposedChart } from "@/registry/charts/composed/line-bar-area-composed-chart"
 
@@ -83,7 +84,7 @@ export function HomeChartStage({
     : "Show Bitcoin candlestick"
 
   const nextButton = (
-    <Tooltip>
+    <Tooltip delayDuration={SITE_TOOLTIP_DELAY_MS}>
       <TooltipTrigger asChild>
         <button
           type="button"

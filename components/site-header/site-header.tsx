@@ -11,11 +11,9 @@ import { cn } from "@/lib/utils"
 import { Separator } from "@sonojs/ui/components/separator"
 
 export function SiteHeader({
-  githubStars = null,
   initialSignedIn = false,
   sticky = true,
 }: {
-  githubStars?: number | null
   /** Server auth hint so header chrome paints before Clerk JS loads. */
   initialSignedIn?: boolean
   /** When false, header scrolls away with the page (no sticky / hide-on-scroll). */
@@ -54,7 +52,7 @@ export function SiteHeader({
           <MainNav items={siteConfig.navItems} className="hidden lg:flex" />
 
           <div className="ms-auto flex shrink-0 items-center gap-1.5">
-            <GithubLink stars={githubStars} />
+            <GithubLink />
             <Separator orientation="vertical" className="mx-0.5 hidden sm:block" />
             <ModeSwitcher />
             <AuthControls initialSignedIn={initialSignedIn} />

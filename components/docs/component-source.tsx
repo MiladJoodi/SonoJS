@@ -24,7 +24,7 @@ export async function ComponentSource({
         <CopyButton value={code} className="shrink-0" />
       </div>
       <div
-        className="sono-code-shiki no-scrollbar font-mono text-[14px] leading-[1.65]"
+        className="sono-code-shiki no-scrollbar max-h-72 overflow-auto font-mono text-[14px] leading-[1.65]"
         dangerouslySetInnerHTML={{ __html: html }}
       />
     </div>

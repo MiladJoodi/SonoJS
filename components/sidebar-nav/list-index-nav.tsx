@@ -4,6 +4,7 @@ import * as React from "react"
 import { usePathname } from "next/navigation"
 import { MenuIcon } from "lucide-react"
 
+import { SIDEBAR_MOBILE_SHEET_SCROLL_CLASS } from "@/components/sidebar-nav/ui"
 import { useDirection } from "@/hooks/use-direction"
 import { getStartSide } from "@/lib/direction"
 import { cn } from "@/lib/utils"
@@ -91,7 +92,7 @@ export function ListIndexNav({
               Page and category index
             </SheetDescription>
           </SheetHeader>
-          <div className="no-scrollbar h-[calc(100svh-3.25rem)] overflow-y-auto overscroll-contain p-2 pb-8">
+          <div className={SIDEBAR_MOBILE_SHEET_SCROLL_CLASS}>
             {children}
           </div>
         </SheetContent>

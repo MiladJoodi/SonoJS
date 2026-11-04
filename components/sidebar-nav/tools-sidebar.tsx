@@ -3,7 +3,7 @@
 import * as React from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { PanelLeftIcon } from "lucide-react"
+import { PanelLeftCloseIcon, PanelLeftOpenIcon } from "lucide-react"
 
 import { ListIndexNav } from "@/components/sidebar-nav/list-index-nav"
 import {
@@ -57,7 +57,11 @@ export function ToolsSidebarToggle({
       aria-label={open ? "Hide tools sidebar" : "Show tools sidebar"}
       onClick={onToggle}
     >
-      <PanelLeftIcon className="size-4 icon-dir" />
+      {open ? (
+        <PanelLeftCloseIcon className="size-4 icon-dir" />
+      ) : (
+        <PanelLeftOpenIcon className="size-4 icon-dir" />
+      )}
     </Button>
   )
 }

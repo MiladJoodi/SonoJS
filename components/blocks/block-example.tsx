@@ -25,6 +25,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 import type { Direction } from "@/lib/direction"
+import { SITE_TOOLTIP_DELAY_MS } from "@/lib/site-tooltip"
 import { cn } from "@/lib/utils"
 
 type View = "preview" | "code"
@@ -136,6 +137,7 @@ export function BlockExample({
   return (
     <section
       id={name}
+      data-sono-toc-item={displayTitle}
       className="flex w-full min-w-0 scroll-mt-24 flex-col gap-2.5"
     >
       <div
@@ -160,7 +162,7 @@ export function BlockExample({
               {displayTitle}
             </a>
 
-            <Tooltip>
+            <Tooltip delayDuration={SITE_TOOLTIP_DELAY_MS}>
               <TooltipTrigger asChild>
                 <Link
                   href={`/view/${name}`}

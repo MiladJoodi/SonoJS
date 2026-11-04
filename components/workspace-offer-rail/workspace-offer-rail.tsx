@@ -13,6 +13,9 @@ import { siteConfig } from "@/lib/config"
 import { cn } from "@/lib/utils"
 import OfferCard from "@/registry/blocks/marketing/offer-card/offer-card-01/offer-card"
 
+import { WorkspaceContribute } from "./contribute"
+import { WorkspaceOnThisPage } from "./on-this-page"
+
 const FREE_FEATURES = [
   "Free register & sign in",
   "Every component & block",
@@ -141,6 +144,9 @@ export function WorkspaceOfferRail({
             </button>
           </p>
         )}
+
+        <WorkspaceOnThisPage />
+        <WorkspaceContribute />
       </div>
 
       {!isMember ? (
