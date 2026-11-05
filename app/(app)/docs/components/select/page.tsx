@@ -6,6 +6,7 @@ import {
   DocsApiProps,
   DocsInstallation,
   DocsPageHeader,
+  DocsRelated,
 } from "@/components/docs"
 import { withVariantCode } from "@/lib/docs-variant-examples"
 
@@ -99,24 +100,37 @@ export default async function SelectDocsPage() {
         title="Select"
         pathname="/docs/components/select"
         description={
-          <p className="leading-relaxed text-muted-foreground">
-          Displays a list of options triggered by a button. Content defaults to{" "}
-          <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
-            align=&quot;start&quot;
-          </code>{" "}
-          for writing-direction friendliness. For a native{" "}
-          <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
-            &lt;select&gt;
-          </code>
-          , see{" "}
-          <Link
-            href="/docs/components/native-select"
-            className="font-medium text-foreground underline-offset-4 hover:underline"
-          >
-            Native Select
-          </Link>
-          .
-        </p>
+          <div className="space-y-3 leading-relaxed text-muted-foreground">
+            <p>
+              Single-value dropdown for themes, roles, and form choices. Trigger
+              height matches Input; content defaults to{" "}
+              <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
+                align=&quot;start&quot;
+              </code>{" "}
+              so menus stay writing-direction friendly in LTR and RTL.
+            </p>
+            <p>
+              Prefer{" "}
+              <Link
+                href="/docs/components/combobox"
+                className="font-medium text-foreground underline-offset-4 hover:underline"
+              >
+                Combobox
+              </Link>{" "}
+              for searchable long lists, or{" "}
+              <Link
+                href="/docs/components/native-select"
+                className="font-medium text-foreground underline-offset-4 hover:underline"
+              >
+                Native Select
+              </Link>{" "}
+              when you need a plain{" "}
+              <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
+                &lt;select&gt;
+              </code>
+              .
+            </p>
+          </div>
         }
       />
 
@@ -189,6 +203,31 @@ export default async function SelectDocsPage() {
           ]}
         />
       </section>
+
+      <DocsRelated
+        links={[
+          {
+            href: "/docs/components/combobox",
+            title: "Combobox",
+            description: "typeahead over long option lists",
+          },
+          {
+            href: "/docs/components/native-select",
+            title: "Native Select",
+            description: "styled native select element",
+          },
+          {
+            href: "/docs/components/field",
+            title: "Field",
+            description: "label and validate the select",
+          },
+          {
+            href: "/docs/components/dropdown-menu",
+            title: "Dropdown Menu",
+            description: "action menus instead of value picking",
+          },
+        ]}
+      />
     </article>
   )
 }

@@ -4,6 +4,7 @@ import {
   DocsApiProps,
   DocsInstallation,
   DocsPageHeader,
+  DocsRelated,
 } from "@/components/docs"
 import { withVariantCode } from "@/lib/docs-variant-examples"
 
@@ -113,21 +114,26 @@ export default async function DialogDocsPage() {
         title="Dialog"
         pathname="/docs/components/dialog"
         description={
-          <p className="leading-relaxed text-muted-foreground">
-          A window overlaid on the primary content for focused tasks. Default
-          width is{" "}
-          <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
-            max-w-sm
-          </code>{" "}
-          (24rem). For irreversible confirmations, prefer{" "}
-          <a
-            href="/docs/components/alert-dialog"
-            className="font-medium text-foreground underline-offset-4 hover:underline"
-          >
-            Alert Dialog
-          </a>
-          .
-        </p>
+          <div className="space-y-3 leading-relaxed text-muted-foreground">
+            <p>
+              Modal overlay for focused tasks — edit forms, share links, and
+              short workflows without leaving the page. Default width is{" "}
+              <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
+                max-w-sm
+              </code>{" "}
+              (24rem) with focus trap and Escape to close.
+            </p>
+            <p>
+              For irreversible confirms, prefer{" "}
+              <a
+                href="/docs/components/alert-dialog"
+                className="font-medium text-foreground underline-offset-4 hover:underline"
+              >
+                Alert Dialog
+              </a>
+              . For side panels on mobile, see Sheet or Drawer.
+            </p>
+          </div>
         }
       />
 
@@ -185,6 +191,31 @@ export default async function DialogDocsPage() {
           ]}
         />
       </section>
+
+      <DocsRelated
+        links={[
+          {
+            href: "/docs/components/alert-dialog",
+            title: "Alert Dialog",
+            description: "destructive and irreversible confirms",
+          },
+          {
+            href: "/docs/components/sheet",
+            title: "Sheet",
+            description: "large edge panels for settings",
+          },
+          {
+            href: "/docs/components/drawer",
+            title: "Drawer",
+            description: "mobile-friendly edge sheets",
+          },
+          {
+            href: "/docs/components/popover",
+            title: "Popover",
+            description: "non-modal floating panels",
+          },
+        ]}
+      />
     </article>
   )
 }

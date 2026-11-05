@@ -12,6 +12,9 @@ import { cn } from "@/lib/utils"
 
 const TABS = ["Featured", "Popular", "New"] as const
 
+/** First visible featured cards in the horizontal strip (≈ one viewport row). */
+const MARKETPLACE_FEATURED_ATF_COUNT = 4
+
 function FeaturedMarquee({
   items,
   durationSec,
@@ -32,7 +35,11 @@ function FeaturedMarquee({
           key={`${item.slug}-${i}`}
           className="w-[260px] shrink-0 sm:w-[280px] lg:w-[300px]"
         >
-          <MarketplaceProductCard item={item} size="featured" />
+          <MarketplaceProductCard
+            item={item}
+            size="featured"
+            loading={i < MARKETPLACE_FEATURED_ATF_COUNT ? "eager" : "lazy"}
+          />
         </div>
       ))}
     </div>

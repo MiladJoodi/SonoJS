@@ -1,9 +1,11 @@
 import type { ReactNode } from "react"
 
+import { JsonLd } from "@/components/seo/json-ld"
 import { getAiAdjacent } from "@/lib/ai-nav"
 import { getCarouselsAdjacent } from "@/lib/carousels-nav"
 import { get3dAdjacent } from "@/lib/3d-nav"
 import { getDocsAdjacent } from "@/lib/docs-nav"
+import { breadcrumbListJsonLd } from "@/lib/seo-jsonld"
 import { cn } from "@/lib/utils"
 
 import { DocsAdjacentPager } from "./docs-adjacent-pager"
@@ -30,9 +32,11 @@ export function DocsPageHeader({
   className?: string
 }) {
   const { previous, next } = adjacentForPath(pathname)
+  const breadcrumbs = breadcrumbListJsonLd(pathname)
 
   return (
     <header className={cn("space-y-2", className)}>
+      {breadcrumbs ? <JsonLd data={breadcrumbs} /> : null}
       <div className="flex items-start justify-between gap-3">
         <h1 className="text-h1 min-w-0 flex-1 truncate" title={title}>
           {title}

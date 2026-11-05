@@ -10,7 +10,11 @@ import {
 import { ThemeProvider } from "@/components/theme-provider"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { siteConfig } from "@/lib/config"
-import { isProductionIndexingEnabled, OG_IMAGE } from "@/lib/seo"
+import {
+  isProductionIndexingEnabled,
+  OG_IMAGE,
+  twitterHandleFromConfig,
+} from "@/lib/seo"
 import { PRODUCTION_ORIGIN } from "@/lib/site-origin"
 
 import "./globals.css"
@@ -19,11 +23,15 @@ const geistSans = Geist({
   variable: "--font-sono-sans",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
+  adjustFontFallback: true,
 })
 
 const geistMono = Geist_Mono({
   variable: "--font-sono-mono",
   subsets: ["latin"],
+  display: "swap",
+  adjustFontFallback: true,
 })
 
 const indexing = isProductionIndexingEnabled()
@@ -46,9 +54,9 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   applicationName: siteConfig.name,
-  alternates: {
-    canonical: "/",
-  },
+  // Do not set a root canonical here — Next merges layout metadata onto
+  // children, so `canonical: "/"` would force the homepage onto routes that
+  // omit their own alternates (e.g. auth callbacks). Homepage uses pageMetadata.
   icons: {
     icon: [
       { url: "/favicon.svg", type: "image/svg+xml" },
@@ -70,6 +78,8 @@ export const metadata: Metadata = {
     title: siteConfig.name,
     description: siteConfig.description,
     images: [OG_IMAGE.url],
+    site: twitterHandleFromConfig(),
+    creator: twitterHandleFromConfig(),
   },
   robots: indexing
     ? { index: true, follow: true }

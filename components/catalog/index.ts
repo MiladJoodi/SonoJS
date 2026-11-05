@@ -1,5 +1,8 @@
 export { BlocksCategoryGrid } from "./blocks-category-grid"
-export { CATALOG_THUMB_GRID_CLASS } from "./catalog-grid"
+export {
+  CATALOG_ATF_THUMB_COUNT,
+  CATALOG_THUMB_GRID_CLASS,
+} from "./catalog-grid"
 export { CatalogSection } from "./catalog-section"
 export { CatalogThumbCard } from "./catalog-thumb-card"
 export {

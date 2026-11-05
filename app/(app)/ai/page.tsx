@@ -1,5 +1,6 @@
 import { CatalogSection } from "@/components/catalog/catalog-section"
 import { CatalogThumbCard } from "@/components/catalog/catalog-thumb-card"
+import { CATALOG_ATF_THUMB_COUNT } from "@/components/catalog/catalog-grid"
 import {
   aiSlugFromHref,
   aiThumbSrc,
@@ -28,7 +29,7 @@ export default function AiIndexPage() {
       </header>
 
       <CatalogSection title="Components" count={pages.length} showHeader={false}>
-        {pages.map((page) => {
+        {pages.map((page, index) => {
           const slug = aiSlugFromHref(page.href)
           const src = hasAiThumb(slug) ? aiThumbSrc(slug) : undefined
           return (
@@ -39,6 +40,7 @@ export default function AiIndexPage() {
               lightSrc={src}
               darkSrc={src}
               roundedThumb
+              loading={index < CATALOG_ATF_THUMB_COUNT ? "eager" : "lazy"}
             />
           )
         })}

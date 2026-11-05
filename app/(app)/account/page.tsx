@@ -9,6 +9,7 @@ import { Spinner } from "@sonojs/ui/components/spinner"
 export const metadata: Metadata = {
   title: "Account",
   robots: { index: false, follow: false },
+  alternates: { canonical: "/account" },
 }
 
 export default async function AccountPage() {

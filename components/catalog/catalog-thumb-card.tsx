@@ -29,6 +29,8 @@ export function CatalogThumbCard({
   roundedThumb = false,
   /** File base for dev capture (defaults to last path segment of `href`). */
   captureName,
+  /** Above-the-fold thumbs use `eager`; default keeps below-fold lazy. */
+  loading = "lazy",
 }: {
   href: string
   title: string
@@ -38,6 +40,7 @@ export function CatalogThumbCard({
   className?: string
   roundedThumb?: boolean
   captureName?: string
+  loading?: "eager" | "lazy"
 }) {
   const hasImages = Boolean(lightSrc && darkSrc)
   const previewRef = React.useRef<HTMLDivElement>(null)
@@ -77,12 +80,16 @@ export function CatalogThumbCard({
             <img
               src={lightSrc}
               alt=""
+              loading={loading}
+              decoding="async"
               className={cn(roundedImgClass, "dark:hidden")}
             />
             {/* eslint-disable-next-line @next/next/no-img-element -- static public webps */}
             <img
               src={darkSrc}
               alt=""
+              loading={loading}
+              decoding="async"
               className={cn(roundedImgClass, "hidden dark:block")}
             />
           </div>
@@ -92,12 +99,16 @@ export function CatalogThumbCard({
             <img
               src={lightSrc}
               alt=""
+              loading={loading}
+              decoding="async"
               className={cn(imgClass, "dark:hidden")}
             />
             {/* eslint-disable-next-line @next/next/no-img-element -- static public webps */}
             <img
               src={darkSrc}
               alt=""
+              loading={loading}
+              decoding="async"
               className={cn(imgClass, "hidden dark:block")}
             />
           </>
