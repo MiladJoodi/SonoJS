@@ -2,6 +2,7 @@ export {
   getUserByClerkId,
   getUserByStripeCustomerId,
   upsertUserFromClerk,
+  ensureUserFromClerk,
   setUserStripeCustomerId,
   clearUserStripeCustomerId,
   linkStripeCustomerToClerkUser,

@@ -1,10 +1,30 @@
 import "server-only"
 
+import { clerkClient } from "@clerk/nextjs/server"
 import { and, eq, sql } from "drizzle-orm"
 
 import { db } from "@/db"
 import { BillingIdentityConflictError, wrapDbError } from "@/db/errors"
 import { users, type NewUser, type User } from "@/db/schema"
+
+async function fetchClerkPrimaryEmail(
+  clerkUserId: string
+): Promise<string | null> {
+  try {
+    const client = await clerkClient()
+    const user = await client.users.getUser(clerkUserId)
+    const primary = user.emailAddresses.find(
+      (e) => e.id === user.primaryEmailAddressId
+    )
+    const raw =
+      primary?.emailAddress?.trim() ||
+      user.emailAddresses[0]?.emailAddress?.trim() ||
+      null
+    return raw ? raw.toLowerCase() : null
+  } catch {
+    return null
+  }
+}
 
 export async function getUserByClerkId(
   clerkUserId: string
@@ -66,6 +86,19 @@ export async function upsertUserFromClerk(input: {
 }
 
 /**
+ * Upsert Neon user and fill `email` from Clerk primary address when available.
+ * Safe to call repeatedly; backfills null email on later visits.
+ */
+export async function ensureUserFromClerk(
+  clerkUserId: string
+): Promise<User> {
+  const id = clerkUserId.trim()
+  if (!id) throw new Error("clerkUserId is required")
+  const email = await fetchClerkPrimaryEmail(id)
+  return upsertUserFromClerk({ clerkUserId: id, email })
+}
+
+/**
  * Link Stripe customer → Clerk user.
  * Never silently overwrites an existing mapping; conflicts throw
  * BillingIdentityConflictError for manual investigation.
@@ -81,7 +114,7 @@ export async function linkStripeCustomerToClerkUser(input: {
   }
 
   try {
-    const user = await upsertUserFromClerk({ clerkUserId })
+    const user = await ensureUserFromClerk(clerkUserId)
 
     if (user.stripeCustomerId === customerId) {
       return user
@@ -251,7 +284,7 @@ export async function resolveBillingUser(input: {
     }
 
     if (clerkUserId) {
-      const byClerk = await upsertUserFromClerk({ clerkUserId })
+      const byClerk = await ensureUserFromClerk(clerkUserId)
       if (
         customerId &&
         byClerk.stripeCustomerId &&

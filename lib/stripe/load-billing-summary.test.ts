@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest"
 
-const upsertUserFromClerk = vi.fn()
+const ensureUserFromClerk = vi.fn()
 const getUserByClerkId = vi.fn()
 const getBillingSubscriptionByClerkId = vi.fn()
 const listPaymentsByClerkId = vi.fn()
@@ -20,7 +20,7 @@ vi.mock("@clerk/nextjs/server", () => ({
 }))
 
 vi.mock("@/db/queries", () => ({
-  upsertUserFromClerk: (input: unknown) => upsertUserFromClerk(input),
+  ensureUserFromClerk: (id: string) => ensureUserFromClerk(id),
   getUserByClerkId: (id: string) => getUserByClerkId(id),
   getBillingSubscriptionByClerkId: (id: string) =>
     getBillingSubscriptionByClerkId(id),
@@ -56,7 +56,7 @@ const activeSub = {
 
 describe("loadBillingSummary", () => {
   beforeEach(() => {
-    upsertUserFromClerk.mockReset()
+    ensureUserFromClerk.mockReset()
     getUserByClerkId.mockReset()
     getBillingSubscriptionByClerkId.mockReset()
     listPaymentsByClerkId.mockReset()
@@ -72,7 +72,7 @@ describe("loadBillingSummary", () => {
   })
 
   it("uses Neon subscription when present", async () => {
-    upsertUserFromClerk.mockResolvedValue({ id: "u1" })
+    ensureUserFromClerk.mockResolvedValue({ id: "u1" })
     getUserByClerkId.mockResolvedValue({
       id: "u1",
       stripeCustomerId: "cus_1",
@@ -100,7 +100,7 @@ describe("loadBillingSummary", () => {
   })
 
   it("searches Stripe by clerkUserId when Neon has no stripeCustomerId", async () => {
-    upsertUserFromClerk.mockResolvedValue({ id: "u1" })
+    ensureUserFromClerk.mockResolvedValue({ id: "u1" })
     getUserByClerkId.mockResolvedValue({
       id: "u1",
       stripeCustomerId: null,
@@ -134,7 +134,7 @@ describe("loadBillingSummary", () => {
   })
 
   it("falls back to email when clerk metadata search misses (recreated account)", async () => {
-    upsertUserFromClerk.mockResolvedValue({ id: "u_new" })
+    ensureUserFromClerk.mockResolvedValue({ id: "u_new" })
     getUserByClerkId.mockResolvedValue({
       id: "u_new",
       stripeCustomerId: null,
@@ -175,7 +175,7 @@ describe("loadBillingSummary", () => {
   })
 
   it("returns null subscription when Stripe search and email miss", async () => {
-    upsertUserFromClerk.mockResolvedValue({ id: "u1" })
+    ensureUserFromClerk.mockResolvedValue({ id: "u1" })
     getUserByClerkId.mockResolvedValue({
       id: "u1",
       stripeCustomerId: null,

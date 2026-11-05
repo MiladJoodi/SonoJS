@@ -17,7 +17,7 @@ import {
   getUserByStripeCustomerId,
   linkStripeCustomerToClerkUser,
   listPaymentsByClerkId,
-  upsertUserFromClerk,
+  ensureUserFromClerk,
 } from "@/db/queries"
 
 export type BillingSummarySubscription = {
@@ -208,7 +208,7 @@ export async function loadBillingSummary(
   options?: { fetchImpl?: typeof fetch }
 ): Promise<BillingSummary> {
   const fetchImpl = options?.fetchImpl
-  await upsertUserFromClerk({ clerkUserId })
+  await ensureUserFromClerk(clerkUserId)
 
   const [user, neonSub, payments] = await Promise.all([
     getUserByClerkId(clerkUserId),

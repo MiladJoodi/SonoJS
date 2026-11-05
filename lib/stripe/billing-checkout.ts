@@ -3,7 +3,7 @@ import "server-only"
 import { StripeApiError } from "@/db/errors"
 import { getPlanBySlug } from "@/db/queries/plans"
 import { getActiveSubscriptionByClerkId } from "@/db/queries/subscriptions"
-import { upsertUserFromClerk } from "@/db/queries/users"
+import { ensureUserFromClerk } from "@/db/queries/users"
 import { siteConfig } from "@/lib/config"
 import { createCheckoutSession } from "@/lib/stripe/create-checkout-session"
 
@@ -40,7 +40,7 @@ export async function createBillingCheckout(input: {
   fetchImpl?: typeof fetch
   /** Test overrides */
   deps?: {
-    upsertUser?: typeof upsertUserFromClerk
+    upsertUser?: typeof ensureUserFromClerk
     getActiveSub?: typeof getActiveSubscriptionByClerkId
     getPlan?: typeof getPlanBySlug
     createSession?: typeof createCheckoutSession
@@ -50,13 +50,13 @@ export async function createBillingCheckout(input: {
     return { ok: false, status: 400, error: "InvalidPlanSlug" }
   }
 
-  const upsertUser = input.deps?.upsertUser ?? upsertUserFromClerk
+  const upsertUser = input.deps?.upsertUser ?? ensureUserFromClerk
   const getActiveSub =
     input.deps?.getActiveSub ?? getActiveSubscriptionByClerkId
   const getPlan = input.deps?.getPlan ?? getPlanBySlug
   const createSession = input.deps?.createSession ?? createCheckoutSession
 
-  const user = await upsertUser({ clerkUserId: input.clerkUserId })
+  const user = await upsertUser(input.clerkUserId)
 
   const active = await getActiveSub(input.clerkUserId)
   if (active) {
