@@ -48,6 +48,7 @@ export const blocksNavCatalog: BlocksNavGroup[] = [
     items: [
       "Agent Workspace",
       "AI Chat",
+      "Chat Starter",
       "Chat Composer",
       "Message Thread",
       "Agent Run Timeline",
@@ -68,6 +69,9 @@ export const blocksNavCatalog: BlocksNavGroup[] = [
         return block("ai-agents", title, { status: "ready", featured: true })
       }
       if (title === "AI Chat") {
+        return block("ai-agents", title, { status: "ready", featured: true })
+      }
+      if (title === "Chat Starter") {
         return block("ai-agents", title, { status: "ready", featured: true })
       }
       if (title === "Chat Composer") {
