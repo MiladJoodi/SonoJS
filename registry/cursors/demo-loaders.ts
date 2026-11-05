@@ -4,6 +4,8 @@ type DemoLoader = () => Promise<CursorModule>
 /** Stable map — do not recreate inside a function (breaks effect deps). */
 const LOADERS: Record<string, DemoLoader> = {
   "smooth-cursor-follower": () => import("./smooth-cursor-follower/demo"),
+  "smooth-cursor": () => import("./smooth-cursor/demo"),
+  "pointer-cursor": () => import("./pointer-cursor/demo"),
   "follow-cursor": () => import("./follow-cursor/demo"),
   "ripple-cursor": () => import("./ripple-cursor/demo"),
   "magnetic-cursor": () => import("./magnetic-cursor/demo"),

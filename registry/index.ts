@@ -88,6 +88,13 @@ export const registry = {
         "Small status labels for counts, categories, and inline metadata.",
     },
     {
+      name: "border-beam",
+      type: "registry:ui" as const,
+      title: "Border Beam",
+      description:
+        "An animated light beam that travels along a container border.",
+    },
+    {
       name: "breadcrumb",
       type: "registry:ui" as const,
       title: "Breadcrumb",
@@ -398,6 +405,13 @@ export const registry = {
       type: "registry:ui" as const,
       title: "Label",
       description: "Renders an accessible label associated with controls.",
+    },
+    {
+      name: "lens",
+      type: "registry:ui" as const,
+      title: "Lens",
+      description:
+        "Hover or static magnifier over images and other content.",
     },
     {
       name: "loading-states",

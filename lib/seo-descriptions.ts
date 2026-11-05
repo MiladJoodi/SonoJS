@@ -48,10 +48,14 @@ export const COMPONENT_META_DESCRIPTIONS: Record<string, string> = {
     "Popover calendar input for single dates — pairs with form Field and matches control height.",
   dialog:
     "Centered modal overlays for forms and confirmations — focus trap, escape to close, and accessible titles.",
+  "dotted-map":
+    "SVG dotted world map with markers, staggered dots, pulse rings, and custom overlays.",
   drawer:
     "Edge sheets for mobile filters and details — slide in from the side without losing page context.",
   "dropdown-menu":
     "Action menus anchored to a trigger — nested items, shortcuts, and checkbox/radio rows.",
+  "border-beam":
+    "Animated light beam that travels along a container border — size, duration, reverse, and spring transitions.",
   "electro-border":
     "Animated energy border accents for hero cards and featured panels.",
   empty:
@@ -72,6 +76,8 @@ export const COMPONENT_META_DESCRIPTIONS: Record<string, string> = {
     "Keyboard shortcut badges that match your docs and command palette chrome.",
   label:
     "Accessible form labels paired with controls — required markers and peer disabled styles.",
+  lens:
+    "Hover or static magnifier over images and other content — zoom factor, lens size, and fixed or default positions.",
   marker:
     "Highlight and annotation markers for docs and walkthrough copy.",
   marquee:
@@ -94,6 +100,8 @@ export const COMPONENT_META_DESCRIPTIONS: Record<string, string> = {
     "Highlighted CTA button for Pro and upgrade moments — stands out from default primary.",
   progress:
     "Linear progress for uploads and multi-step flows — determinate and indeterminate modes.",
+  "progressive-blur":
+    "Layered backdrop blur fade for scrollable edges — top, bottom, or both with tunable blur levels.",
   "radio-group":
     "Single-choice option sets for forms — clear selected state and keyboard roving focus.",
   "rainbow-button":

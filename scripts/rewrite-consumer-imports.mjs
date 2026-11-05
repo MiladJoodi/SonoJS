@@ -51,6 +51,9 @@ export const SONOJS_COMPONENT_ROOTS = new Set([
 export const TOP_LEVEL_COMPONENT_ROOTS = new Set([
   "tweet-card",
   "clothes-rack",
+  "dotted-map",
+  "lens",
+  "progressive-blur",
   "3d",
   "carousels",
 ])

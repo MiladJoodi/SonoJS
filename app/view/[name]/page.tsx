@@ -307,6 +307,7 @@ import AiChat01 from "@/registry/blocks/ai-agents/ai-chat/ai-chat-01/ai-chat"
 import AiChat02 from "@/registry/blocks/ai-agents/ai-chat/ai-chat-02/ai-chat"
 import AiChat03 from "@/registry/blocks/ai-agents/ai-chat/ai-chat-03/ai-chat"
 import AgentWorkspace01 from "@/registry/blocks/ai-agents/agent-workspace/agent-workspace-01/agent-workspace"
+import ChatStarter01 from "@/registry/blocks/ai-agents/chat-starter/chat-starter-01/chat-starter"
 import { AgentRunTimeline } from "@/registry/blocks/ai-agents/agent-run-timeline/agent-run-timeline"
 import { AiUsageChart } from "@/registry/blocks/ai-agents/ai-usage-chart/ai-usage-chart"
 import ChatComposer01 from "@/registry/blocks/ai-agents/chat-composer/chat-composer-01/chat-composer"
@@ -3004,6 +3005,13 @@ const views: Record<string, ComponentType> = {
     return (
       <div className="h-dvh w-full bg-white dark:bg-background">
         <AgentWorkspace01 />
+      </div>
+    )
+  },
+  "chat-starter-01": function ChatStarter01View() {
+    return (
+      <div className="h-dvh w-full bg-white dark:bg-background">
+        <ChatStarter01 />
       </div>
     )
   },

@@ -69,6 +69,11 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: "/blocks/ai-agents/chat-starter",
+        destination: "/blocks/ai-agents/agent-workspace#chat-starter-01",
+        permanent: true,
+      },
+      {
         source: "/docs/components/agent-code-block",
         destination: "/ai/code-block",
         permanent: true,

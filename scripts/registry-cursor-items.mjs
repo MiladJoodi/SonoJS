@@ -58,6 +58,34 @@ export const cursorRegistryItems = [
     ],
   },
   {
+    name: "smooth-cursor",
+    type: "registry:cursor",
+    title: "Smooth Cursor",
+    description: "Physics spring cursor with direction-aware rotation.",
+    dependencies: ["motion"],
+    files: [
+      {
+        path: "registry/cursors/smooth-cursor/smooth-cursor.tsx",
+        type: "registry:component",
+        target: "components/cursors/smooth-cursor.tsx",
+      },
+    ],
+  },
+  {
+    name: "pointer-cursor",
+    type: "registry:cursor",
+    title: "Pointer",
+    description: "Replace the system cursor with a custom glyph on hover.",
+    dependencies: ["motion"],
+    files: [
+      {
+        path: "registry/cursors/pointer-cursor/pointer-cursor.tsx",
+        type: "registry:component",
+        target: "components/cursors/pointer-cursor.tsx",
+      },
+    ],
+  },
+  {
     name: "follow-cursor",
     type: "registry:cursor",
     title: "Follow Cursor",

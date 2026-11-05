@@ -44,6 +44,12 @@ export const threeDNav: {
           featured: true,
         },
         {
+          title: "Globe",
+          href: "/3d/globe",
+          badge: "new",
+          featured: true,
+        },
+        {
           title: "Hanging Id Card",
           href: "/3d/hanging-id-card",
           badge: "new",
@@ -52,6 +58,12 @@ export const threeDNav: {
         {
           title: "Hover Gallery",
           href: "/3d/hover-gallery",
+          badge: "new",
+          featured: true,
+        },
+        {
+          title: "Icon Cloud",
+          href: "/3d/icon-cloud",
           badge: "new",
           featured: true,
         },
@@ -88,6 +100,12 @@ export const threeDNav: {
         {
           title: "Model Viewer",
           href: "/3d/model-viewer",
+          badge: "new",
+          featured: true,
+        },
+        {
+          title: "Orbiting Circles",
+          href: "/3d/orbiting-circles",
           badge: "new",
           featured: true,
         },

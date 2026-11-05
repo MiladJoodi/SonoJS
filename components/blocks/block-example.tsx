@@ -162,23 +162,6 @@ export function BlockExample({
               {displayTitle}
             </a>
 
-            <Tooltip delayDuration={SITE_TOOLTIP_DELAY_MS}>
-              <TooltipTrigger asChild>
-                <Link
-                  href={`/view/${name}`}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label="Open full preview"
-                  className="inline-flex size-8 shrink-0 cursor-pointer items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted/60 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40"
-                >
-                  <FullscreenIcon className="size-3.5" aria-hidden />
-                </Link>
-              </TooltipTrigger>
-              <TooltipContent side="top" className="text-xs">
-                Open full preview
-              </TooltipContent>
-            </Tooltip>
-
             {isPreview ? (
               <>
                 <SoftGroup label="Viewport">
@@ -198,6 +181,23 @@ export function BlockExample({
                 <DirectionToggle value={dir} onValueChange={setDir} />
               </>
             ) : null}
+
+            <Tooltip delayDuration={SITE_TOOLTIP_DELAY_MS}>
+              <TooltipTrigger asChild>
+                <Link
+                  href={`/view/${name}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Open full preview"
+                  className="inline-flex size-8 shrink-0 cursor-pointer items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted/60 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40"
+                >
+                  <FullscreenIcon className="size-3.5" aria-hidden />
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent side="top" className="text-xs">
+                Open full preview
+              </TooltipContent>
+            </Tooltip>
           </div>
 
           <div className="flex shrink-0 flex-wrap items-center gap-1.5">

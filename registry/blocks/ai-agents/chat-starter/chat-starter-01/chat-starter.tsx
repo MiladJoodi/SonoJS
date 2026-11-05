@@ -337,7 +337,7 @@ export default function ChatStarter({
   return (
     <div
       className={cn(
-        "relative flex w-full gap-4 overflow-hidden bg-background p-3",
+        "relative flex w-full gap-4 overflow-hidden bg-white p-3 dark:bg-background",
         contained ? "h-full min-h-0" : "h-dvh",
         className
       )}
