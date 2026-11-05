@@ -3018,6 +3018,11 @@ const registryItemsRaw = [
         type: "registry:ui",
         target: "components/border-beam/border-beam.tsx",
       },
+      {
+        path: "packages/ui/src/components/border-beam/index.ts",
+        type: "registry:file",
+        target: "components/border-beam/index.ts",
+      },
     ],
   },
   {
@@ -3402,6 +3407,21 @@ const registryItemsRaw = [
         path: "packages/ui/src/components/marker.tsx",
         type: "registry:ui",
         target: "components/ui/marker.tsx",
+      },
+    ],
+  },
+  {
+    name: "magic-card",
+    type: "registry:ui",
+    title: "Magic Card",
+    description:
+      "A spotlight effect that follows the pointer and highlights borders on hover.",
+    dependencies: ["motion"],
+    files: [
+      {
+        path: "packages/ui/src/components/magic-card/index.tsx",
+        type: "registry:ui",
+        target: "components/magic-card/index.tsx",
       },
     ],
   },
@@ -3982,6 +4002,30 @@ const registryItemsRaw = [
         path: "packages/cli/templates/init/hooks/use-direction.tsx",
         type: "registry:lib",
         target: "hooks/use-direction.tsx",
+      },
+    ],
+  },
+  {
+    name: "shine-border",
+    type: "registry:ui",
+    title: "Shine Border",
+    description: "An animated shine that runs along a container border.",
+    dependencies: ["clsx", "tailwind-merge"],
+    files: [
+      {
+        path: "packages/ui/src/components/shine-border/shine-border.tsx",
+        type: "registry:ui",
+        target: "components/shine-border/shine-border.tsx",
+      },
+      {
+        path: "packages/ui/src/components/shine-border/shine-border.css",
+        type: "registry:file",
+        target: "components/shine-border/shine-border.css",
+      },
+      {
+        path: "packages/ui/src/components/shine-border/index.ts",
+        type: "registry:file",
+        target: "components/shine-border/index.ts",
       },
     ],
   },

@@ -53,9 +53,11 @@ export const TOP_LEVEL_COMPONENT_ROOTS = new Set([
   "clothes-rack",
   "dotted-map",
   "lens",
+  "magic-card",
   "progressive-blur",
   "border-beam",
   "confetti",
+  "shine-border",
   "3d",
   "carousels",
 ])

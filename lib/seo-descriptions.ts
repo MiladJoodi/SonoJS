@@ -58,6 +58,8 @@ export const COMPONENT_META_DESCRIPTIONS: Record<string, string> = {
     "Animated light beam that travels along a container border — size, duration, reverse, and spring transitions.",
   confetti:
     "Canvas confetti bursts with Confetti and ConfettiButton — fireworks, stars, emoji, and custom shapes.",
+  "magic-card":
+    "Pointer-following spotlight card with gradient border highlight or soft orb glow.",
   "electro-border":
     "Animated energy border accents for hero cards and featured panels.",
   empty:
@@ -118,6 +120,8 @@ export const COMPONENT_META_DESCRIPTIONS: Record<string, string> = {
     "Horizontal and vertical rules to divide toolbars, menus, and card sections.",
   sheet:
     "Large side panels for settings and detail views — mobile-friendly alternative to dialogs.",
+  "shine-border":
+    "Animated shine along a container border — multi-stop or monotone colors with a companion CSS keyframe file.",
   skeleton:
     "Placeholder shimmer for loading lists and cards before data arrives.",
   slider:

@@ -138,6 +138,7 @@ const COMPONENT_THUMB_STEM: Partial<Record<string, string>> = {
   select: "select-default",
   separator: "separator-default",
   sheet: "sheet-default",
+  "shine-border": "shine-border-default",
   slider: "slider-default",
   sortable: "sortable-default",
   switch: "switch-default",

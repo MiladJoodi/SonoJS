@@ -125,6 +125,7 @@ export const componentsNav: {
         { title: "Electro Border", href: "/docs/components/electro-border" },
         { title: "Item", href: "/docs/components/item" },
         { title: "Lens", href: "/docs/components/lens" },
+        { title: "Magic Card", href: "/docs/components/magic-card" },
         { title: "Marquee", href: "/docs/components/marquee" },
         {
           title: "Progressive Blur",
@@ -133,6 +134,7 @@ export const componentsNav: {
         { title: "Resizable", href: "/docs/components/resizable" },
         { title: "Scroll Area", href: "/docs/components/scroll-area" },
         { title: "Separator", href: "/docs/components/separator" },
+        { title: "Shine Border", href: "/docs/components/shine-border" },
         { title: "Sortable", href: "/docs/components/sortable" },
         { title: "Tabs", href: "/docs/components/tabs", featured: true },
         { title: "Timeline", href: "/docs/components/timeline" },
