@@ -170,8 +170,12 @@ function MarketplaceProductsSection({
                 offerOpen ? "xl:grid-cols-3" : "xl:grid-cols-4"
               )}
             >
-              {filtered.map((item: MarketplacePreviewItem) => (
-                <MarketplaceProductCard key={item.slug} item={item} />
+              {filtered.map((item: MarketplacePreviewItem, index: number) => (
+                <MarketplaceProductCard
+                  key={item.slug}
+                  item={item}
+                  loading={index < 4 ? "eager" : "lazy"}
+                />
               ))}
             </div>
             {filtered.length === 0 ? (

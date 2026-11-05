@@ -5,6 +5,7 @@ import {
   DocsInstallation,
   type VariantExample,
   DocsPageHeader,
+  DocsRelated,
 } from "@/components/docs"
 import { highlightCode } from "@/lib/highlight-code"
 
@@ -470,10 +471,24 @@ export default async function CalendarDocsPage() {
         title="Calendar"
         pathname="/docs/components/calendar"
         description={
-          <p className="leading-relaxed text-muted-foreground">
-          A calendar component that allows users to select a date or a range of
-          dates. Built on React DayPicker.
-        </p>
+          <div className="space-y-3 leading-relaxed text-muted-foreground">
+            <p>
+              Month grid for single dates, multi-select, and ranges — booking,
+              filters, and scheduling UIs. Built on React DayPicker v9 with
+              SonoJS dropdown chrome for month and year.
+            </p>
+            <p>
+              Pair with{" "}
+              <a
+                href="/docs/components/date-picker"
+                className="font-medium text-foreground underline-offset-4 hover:underline"
+              >
+                Date Picker
+              </a>{" "}
+              when you need a popover trigger, or embed the grid in a card for
+              side-by-side presets and time fields.
+            </p>
+          </div>
         }
       />
 
@@ -519,6 +534,31 @@ export default async function CalendarDocsPage() {
           ]}
         />
       </section>
+
+      <DocsRelated
+        links={[
+          {
+            href: "/docs/components/date-picker",
+            title: "Date Picker",
+            description: "calendar in a popover with an input trigger",
+          },
+          {
+            href: "/docs/components/field",
+            title: "Field",
+            description: "label and validate date controls",
+          },
+          {
+            href: "/blocks/calendar-scheduling/calendar",
+            title: "Calendar blocks",
+            description: "full scheduling layouts",
+          },
+          {
+            href: "/blocks/forms/appointment-booking-form",
+            title: "Appointment booking",
+            description: "forms that pick dates and times",
+          },
+        ]}
+      />
     </article>
   )
 }

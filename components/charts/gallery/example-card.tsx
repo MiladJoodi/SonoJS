@@ -12,6 +12,7 @@ export function ChartExampleCard({
   id,
   title,
   status,
+  loading = "lazy",
 }: {
   id: string
   title: string
@@ -39,12 +40,16 @@ export function ChartExampleCard({
         <img
           src={chartThumbSrc(id, "light")}
           alt=""
+          loading={loading}
+          decoding="async"
           className={cn(imgClass, "dark:hidden")}
         />
         {/* eslint-disable-next-line @next/next/no-img-element -- static public webps */}
         <img
           src={chartThumbSrc(id, "dark")}
           alt=""
+          loading={loading}
+          decoding="async"
           className={cn(imgClass, "hidden dark:block")}
         />
       </div>

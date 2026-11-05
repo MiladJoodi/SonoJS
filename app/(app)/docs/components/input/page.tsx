@@ -4,6 +4,7 @@ import {
   DocsApiProps,
   DocsInstallation,
   DocsPageHeader,
+  DocsRelated,
 } from "@/components/docs"
 import { withVariantCode } from "@/lib/docs-variant-examples"
 
@@ -67,25 +68,37 @@ export default async function InputDocsPage() {
         title="Input"
         pathname="/docs/components/input"
         description={
-          <p className="leading-relaxed text-muted-foreground">
-          A text input for forms and data entry. Height{" "}
-          <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
-            h-[46px]
-          </code>
-          , white{" "}
-          <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
-            bg-card
-          </code>
-          , built-in focus and invalid styles. For icons or buttons inside the
-          control, see{" "}
-          <a
-            href="/docs/components/input-group"
-            className="font-medium text-foreground underline-offset-4 hover:underline"
-          >
-            Input Group
-          </a>
-          .
-        </p>
+          <div className="space-y-3 leading-relaxed text-muted-foreground">
+            <p>
+              Text field for email, search, and data entry. Matches the SonoJS
+              control scale at{" "}
+              <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
+                h-[46px]
+              </code>{" "}
+              with{" "}
+              <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
+                bg-card
+              </code>
+              , focus rings, and invalid styles built in.
+            </p>
+            <p>
+              Wire labels and errors with{" "}
+              <a
+                href="/docs/components/field"
+                className="font-medium text-foreground underline-offset-4 hover:underline"
+              >
+                Field
+              </a>
+              . For icons or inline buttons, use{" "}
+              <a
+                href="/docs/components/input-group"
+                className="font-medium text-foreground underline-offset-4 hover:underline"
+              >
+                Input Group
+              </a>
+              .
+            </p>
+          </div>
         }
       />
 
@@ -131,6 +144,31 @@ export default async function InputDocsPage() {
           ]}
         />
       </section>
+
+      <DocsRelated
+        links={[
+          {
+            href: "/docs/components/field",
+            title: "Field",
+            description: "label, description, and error around the input",
+          },
+          {
+            href: "/docs/components/input-group",
+            title: "Input Group",
+            description: "leading and trailing addons",
+          },
+          {
+            href: "/docs/components/textarea",
+            title: "Textarea",
+            description: "multi-line text entry",
+          },
+          {
+            href: "/docs/components/input-otp",
+            title: "Input OTP",
+            description: "one-time codes and MFA",
+          },
+        ]}
+      />
     </article>
   )
 }

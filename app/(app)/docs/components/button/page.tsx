@@ -4,6 +4,7 @@ import {
   DocsApiProps,
   DocsInstallation,
   DocsPageHeader,
+  DocsRelated,
 } from "@/components/docs"
 import { withVariantCode } from "@/lib/docs-variant-examples"
 
@@ -59,10 +60,24 @@ export default async function ButtonDocsPage() {
         title="Button"
         pathname="/docs/components/button"
         description={
-          <p className="leading-relaxed text-muted-foreground">
-          Primary uses brand blue; outline, secondary, and ghost stay neutral.
-          Comfort density with accessible focus rings.
-        </p>
+          <div className="space-y-3 leading-relaxed text-muted-foreground">
+            <p>
+              Primary actions use brand blue; outline, secondary, and ghost stay
+              neutral for secondary chrome. Default height is{" "}
+              <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
+                46px
+              </code>{" "}
+              with accessible focus rings on every size.
+            </p>
+            <p>
+              Use for CTAs, form submits, and toolbar actions. Pair icon-only
+              sizes with a clear{" "}
+              <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
+                aria-label
+              </code>
+              .
+            </p>
+          </div>
         }
       />
 
@@ -102,6 +117,31 @@ export default async function ButtonDocsPage() {
           ]}
         />
       </section>
+
+      <DocsRelated
+        links={[
+          {
+            href: "/docs/components/button-group",
+            title: "Button Group",
+            description: "related actions that share one border",
+          },
+          {
+            href: "/docs/components/pro-button",
+            title: "Pro Button",
+            description: "upgrade and Pro CTAs",
+          },
+          {
+            href: "/docs/components/field",
+            title: "Field",
+            description: "label and validate form controls around buttons",
+          },
+          {
+            href: "/blocks/authentication/login",
+            title: "Login blocks",
+            description: "full sign-in layouts that use Button",
+          },
+        ]}
+      />
     </article>
   )
 }

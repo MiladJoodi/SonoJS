@@ -69,6 +69,16 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: "/docs/components/agent-code-block",
+        destination: "/ai/code-block",
+        permanent: true,
+      },
+      {
+        source: "/docs/components/toast",
+        destination: "/docs/components/sonner",
+        permanent: true,
+      },
+      {
         source: "/docs/components/agent-activity",
         destination: "/ai/agent-activity",
         permanent: true,

@@ -1,5 +1,6 @@
 import { CatalogSection } from "@/components/catalog/catalog-section"
 import { CatalogThumbCard } from "@/components/catalog/catalog-thumb-card"
+import { CATALOG_ATF_THUMB_COUNT } from "@/components/catalog/catalog-grid"
 import {
   carouselSlugFromHref,
   carouselThumbSrc,
@@ -28,7 +29,7 @@ export default function CarouselsIndexPage() {
       </header>
 
       <CatalogSection title="Components" count={pages.length} showHeader={false}>
-        {pages.map((page) => {
+        {pages.map((page, index) => {
           const slug = carouselSlugFromHref(page.href)
           const src = hasCarouselThumb(slug) ? carouselThumbSrc(slug) : undefined
           return (
@@ -38,6 +39,7 @@ export default function CarouselsIndexPage() {
               title={page.title}
               lightSrc={src}
               darkSrc={src}
+              loading={index < CATALOG_ATF_THUMB_COUNT ? "eager" : "lazy"}
             />
           )
         })}

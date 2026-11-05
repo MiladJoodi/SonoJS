@@ -1,6 +1,10 @@
 import type { Metadata } from "next"
 
 import { siteConfig } from "@/lib/config"
+import {
+  aiMetaDescription,
+  componentMetaDescription,
+} from "@/lib/seo-descriptions"
 import { PRODUCTION_ORIGIN } from "@/lib/site-origin"
 
 export { PRODUCTION_ORIGIN }
@@ -14,16 +18,67 @@ export const OG_IMAGE = {
   alt: "SonoJS - React components, blocks, charts, and tools",
 } as const
 
-function shareImages(alt?: string): NonNullable<Metadata["openGraph"]>["images"] {
+/** Twitter/X handle from siteConfig.links.x (e.g. https://x.com/_sonojs → @_sonojs). */
+export function twitterHandleFromConfig(): string {
+  try {
+    const { pathname } = new URL(siteConfig.links.x)
+    const handle = pathname.replace(/^\/+/, "").split("/")[0]
+    if (!handle) return "@_sonojs"
+    return handle.startsWith("@") ? handle : `@${handle}`
+  } catch {
+    return "@_sonojs"
+  }
+}
+
+export type OgSection = "docs" | "blocks" | "charts" | "ai" | "default"
+
+export function ogSectionFromPath(path: string): OgSection {
+  const normalized = normalizePath(path)
+  if (normalized === "/docs" || normalized.startsWith("/docs/")) return "docs"
+  if (normalized === "/blocks" || normalized.startsWith("/blocks/")) return "blocks"
+  if (normalized === "/charts" || normalized.startsWith("/charts/")) return "charts"
+  if (normalized === "/ai" || normalized.startsWith("/ai/")) return "ai"
+  return "default"
+}
+
+const OG_SECTION_ALT: Record<OgSection, string> = {
+  docs: "SonoJS docs — React components for Tailwind apps",
+  blocks: "SonoJS blocks — ready-to-use interface sections",
+  charts: "SonoJS charts — interactive React chart demos",
+  ai: "SonoJS AI — components for agent and chat interfaces",
+  default: OG_IMAGE.alt,
+}
+
+export function ogImageAltForPath(path: string, titleFallback?: string): string {
+  const section = ogSectionFromPath(path)
+  if (section !== "default") return OG_SECTION_ALT[section]
+  return titleFallback ? `${titleFallback} — ${siteConfig.name}` : OG_SECTION_ALT.default
+}
+
+function shareImages(
+  path: string,
+  title?: string
+): NonNullable<Metadata["openGraph"]>["images"] {
   return [
     {
       url: OG_IMAGE.url,
       width: OG_IMAGE.width,
       height: OG_IMAGE.height,
       type: OG_IMAGE.type,
-      alt: alt ?? OG_IMAGE.alt,
+      alt: ogImageAltForPath(path, title),
     },
   ]
+}
+
+/** Append kind only when the title does not already end with that word. */
+export function withKindSuffix(
+  title: string,
+  kind: "chart" | "cursor"
+): string {
+  const trimmed = title.trim()
+  const pattern = kind === "chart" ? /\bcharts?\s*$/i : /\bcursors?\s*$/i
+  if (pattern.test(trimmed)) return trimmed
+  return `${trimmed} ${kind}`
 }
 
 /** Paths / prefixes that must never appear in the sitemap and use noindex. */
@@ -96,8 +151,9 @@ export function pageMetadata({
   const normalized = normalizePath(path)
   const url = absoluteUrl(normalized)
   const shouldIndex = index && !isNoindexPath(normalized)
+  const twitterHandle = twitterHandleFromConfig()
 
-  const images = shareImages(title)
+  const images = shareImages(normalized, title)
 
   return {
     title: absoluteTitle ? { absolute: title } : title,
@@ -119,6 +175,8 @@ export function pageMetadata({
       title,
       description,
       images: [OG_IMAGE.url],
+      site: twitterHandle,
+      creator: twitterHandle,
     },
     robots: robotsFor(shouldIndex),
   }
@@ -154,7 +212,7 @@ export function noindexMetadata({
 export function componentDocsMetadata(slug: string, title: string): Metadata {
   return pageMetadata({
     title,
-    description: `Use the SonoJS ${title} component in React with Tailwind. Install with the SonoJS CLI and own the source in your app.`,
+    description: componentMetaDescription(slug, title),
     path: `/docs/components/${slug}`,
   })
 }
@@ -162,7 +220,7 @@ export function componentDocsMetadata(slug: string, title: string): Metadata {
 export function aiDocsMetadata(slug: string, title: string): Metadata {
   return pageMetadata({
     title,
-    description: `Use the SonoJS ${title} component in React with Tailwind. Install with the SonoJS CLI and own the source in your app.`,
+    description: aiMetaDescription(slug, title),
     path: `/ai/${slug}`,
   })
 }
@@ -188,8 +246,12 @@ export function chartCategoryMetadata(
   title: string,
   description: string
 ): Metadata {
+  const trimmed = title.trim()
+  const displayTitle = /\bcharts?\s*$/i.test(trimmed)
+    ? trimmed
+    : `${trimmed} charts`
   return pageMetadata({
-    title: `${title} charts`,
+    title: displayTitle,
     description,
     path: `/charts/${category}`,
   })
@@ -200,9 +262,10 @@ export function chartViewMetadata(
   title: string,
   index: boolean
 ): Metadata {
+  const displayTitle = withKindSuffix(title, "chart")
   return pageMetadata({
-    title: `${title} chart`,
-    description: `Interactive ${title} chart demo for SonoJS - preview, install command, and source.`,
+    title: displayTitle,
+    description: `Interactive ${title} demo for SonoJS - preview, install command, and source.`,
     path: `/charts/view/${id}`,
     index,
   })
@@ -213,8 +276,12 @@ export function cursorCategoryMetadata(
   title: string,
   description: string
 ): Metadata {
+  const trimmed = title.trim()
+  const displayTitle = /\bcursors?\s*$/i.test(trimmed)
+    ? trimmed
+    : `${trimmed} cursors`
   return pageMetadata({
-    title: `${title} cursors`,
+    title: displayTitle,
     description,
     path: `/cursors/${category}`,
   })
@@ -225,9 +292,10 @@ export function cursorViewMetadata(
   title: string,
   index: boolean
 ): Metadata {
+  const displayTitle = withKindSuffix(title, "cursor")
   return pageMetadata({
-    title: `${title} cursor`,
-    description: `Interactive ${title} cursor effect for SonoJS - preview, install command, and source.`,
+    title: displayTitle,
+    description: `Interactive ${title} demo for SonoJS - preview, install command, and source.`,
     path: `/cursors/view/${id}`,
     index,
   })

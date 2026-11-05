@@ -13,6 +13,7 @@ import { get3dPages } from "@/lib/3d-nav"
 import { getCarouselsPages } from "@/lib/carousels-nav"
 import { cursorsCatalog, cursorViewHref } from "@/lib/cursors-catalog"
 import { getDocsComponentPages, getDocsGuidePages } from "@/lib/docs-nav"
+import { marketplaceProjects } from "@/lib/marketplace-catalog"
 import {
   absoluteUrl,
   isNoindexPath,
@@ -28,7 +29,11 @@ export type SitemapEntry = {
 const APP_ROOT = path.join(process.cwd(), "app", "(app)")
 
 /** Redirect sources that must never appear in the sitemap. */
-export const SITEMAP_REDIRECT_SOURCES = ["/blocks/login-01"] as const
+export const SITEMAP_REDIRECT_SOURCES = [
+  "/blocks/login-01",
+  "/docs/components/toast",
+  "/docs/components/agent-code-block",
+] as const
 
 function hrefToAppPageFile(href: string): string {
   const normalized = normalizePath(href)
@@ -67,6 +72,11 @@ export function sitemapPathExists(href: string): boolean {
     if (!id || id.includes("/")) return false
     return cursorsCatalog.some((e) => e.id === id && e.status === "ported")
   }
+  if (normalized.startsWith("/marketplace/")) {
+    const slug = normalized.slice("/marketplace/".length)
+    if (!slug || slug.includes("/")) return false
+    return marketplaceProjects.some((p) => p.slug === slug)
+  }
   return appPageFileCandidates(normalized).some((file) => existsSync(file))
 }
 
@@ -104,6 +114,11 @@ export function buildSitemapPaths(): string[] {
   pushUnique(paths, "/carousels")
   pushUnique(paths, "/tools")
   pushUnique(paths, "/docs/components")
+  pushUnique(paths, "/pricing")
+  pushUnique(paths, "/marketplace")
+  for (const project of marketplaceProjects) {
+    pushUnique(paths, `/marketplace/${project.slug}`)
+  }
 
   for (const page of get3dPages()) {
     pushUnique(paths, page.href)

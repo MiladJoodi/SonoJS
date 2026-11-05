@@ -12,10 +12,13 @@ export function MarketplaceProductCard({
   item,
   className,
   size = "default",
+  loading = "lazy",
 }: {
   item: MarketplacePreviewItem
   className?: string
   size?: "default" | "featured"
+  /** Above-the-fold covers use `eager`; default keeps below-fold lazy. */
+  loading?: "eager" | "lazy"
 }) {
   return (
     <article
@@ -56,6 +59,8 @@ export function MarketplaceProductCard({
                 src={item.coverSrc}
                 alt=""
                 draggable={false}
+                loading={loading}
+                decoding="async"
                 className={cn(
                   coverImgClass,
                   item.coverSrcDark ? "dark:hidden" : null
@@ -67,6 +72,8 @@ export function MarketplaceProductCard({
                   src={item.coverSrcDark}
                   alt=""
                   draggable={false}
+                  loading={loading}
+                  decoding="async"
                   className={cn(coverImgClass, "hidden dark:block")}
                 />
               ) : null}

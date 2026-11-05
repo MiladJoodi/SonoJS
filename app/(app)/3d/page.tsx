@@ -1,5 +1,6 @@
 import { CatalogSection } from "@/components/catalog/catalog-section"
 import { CatalogThumbCard } from "@/components/catalog/catalog-thumb-card"
+import { CATALOG_ATF_THUMB_COUNT } from "@/components/catalog/catalog-grid"
 import {
   hasThreeDThumb,
   threeDSlugFromHref,
@@ -28,7 +29,7 @@ export default function ThreeDIndexPage() {
       </header>
 
       <CatalogSection title="Components" count={pages.length} showHeader={false}>
-        {pages.map((page) => {
+        {pages.map((page, index) => {
           const slug = threeDSlugFromHref(page.href)
           const src = hasThreeDThumb(slug) ? threeDThumbSrc(slug) : undefined
           return (
@@ -38,6 +39,7 @@ export default function ThreeDIndexPage() {
               title={page.title}
               lightSrc={src}
               darkSrc={src}
+              loading={index < CATALOG_ATF_THUMB_COUNT ? "eager" : "lazy"}
             />
           )
         })}

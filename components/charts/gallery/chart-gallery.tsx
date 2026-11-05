@@ -2,7 +2,10 @@
 
 import * as React from "react"
 
-import { CATALOG_THUMB_GRID_CLASS } from "@/components/catalog/catalog-grid"
+import {
+  CATALOG_ATF_THUMB_COUNT,
+  CATALOG_THUMB_GRID_CLASS,
+} from "@/components/catalog/catalog-grid"
 import {
   CHART_CATEGORIES,
   CHART_CATEGORY_META,
@@ -133,7 +136,7 @@ export function ChartGallery({
 
   return (
     <div className="flex w-full min-w-0 flex-col gap-10 md:gap-12">
-      {categories.map((category) => {
+      {categories.map((category, categoryIndex) => {
         const meta = CHART_CATEGORY_META[category]
         const Icon = getChartCategoryIcon(category)
         const entries = getChartsByCategory(category)
@@ -164,12 +167,17 @@ export function ChartGallery({
             ) : null}
 
             <div className={CATALOG_THUMB_GRID_CLASS}>
-              {entries.map((entry) => (
+              {entries.map((entry, entryIndex) => (
                 <ChartExampleCard
                   key={entry.id}
                   id={entry.id}
                   title={entry.title}
                   status={entry.status}
+                  loading={
+                    categoryIndex === 0 && entryIndex < CATALOG_ATF_THUMB_COUNT
+                      ? "eager"
+                      : "lazy"
+                  }
                 />
               ))}
             </div>

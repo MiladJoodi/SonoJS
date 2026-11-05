@@ -2,6 +2,7 @@
 
 import { CatalogSection } from "@/components/catalog/catalog-section"
 import { CatalogThumbCard } from "@/components/catalog/catalog-thumb-card"
+import { CATALOG_ATF_THUMB_COUNT } from "@/components/catalog/catalog-grid"
 import {
   blockCategoryThumbSrc,
   hasBlockCategoryThumb,
@@ -25,7 +26,7 @@ export function BlocksCategoryGrid({
       showHeader={false}
       gridClassName="grid-cols-2"
     >
-      {groups.map((group) => {
+      {groups.map((group, index) => {
         const category = getBlocksCategorySlug(group)
         const useThumb = hasBlockCategoryThumb(category)
         const wireframe = useThumb
@@ -48,6 +49,7 @@ export function BlocksCategoryGrid({
                 : undefined
             }
             roundedThumb
+            loading={index < CATALOG_ATF_THUMB_COUNT ? "eager" : "lazy"}
           />
         )
       })}

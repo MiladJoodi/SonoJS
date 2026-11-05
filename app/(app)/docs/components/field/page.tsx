@@ -4,6 +4,7 @@ import {
   DocsApiProps,
   DocsInstallation,
   DocsPageHeader,
+  DocsRelated,
 } from "@/components/docs"
 import { withVariantCode } from "@/lib/docs-variant-examples"
 
@@ -94,11 +95,28 @@ export default async function FieldDocsPage() {
         title="Field"
         pathname="/docs/components/field"
         description={
-          <p className="leading-relaxed text-muted-foreground">
-          Combine labels, controls, and help text into accessible form fields
-          and grouped inputs. Supports vertical, horizontal, and responsive
-          orientations plus validation via `FieldError`.
-        </p>
+          <div className="space-y-3 leading-relaxed text-muted-foreground">
+            <p>
+              Form building block that wires label, control, description, and
+              error into one accessible unit. Use it as the layout primitive for
+              login, settings, and multi-step forms.
+            </p>
+            <p>
+              Supports vertical, horizontal, and responsive orientations, plus{" "}
+              <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
+                FieldSet
+              </code>{" "}
+              /{" "}
+              <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
+                FieldGroup
+              </code>{" "}
+              for related inputs and{" "}
+              <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
+                FieldError
+              </code>{" "}
+              for validation messages.
+            </p>
+          </div>
         }
       />
 
@@ -157,6 +175,36 @@ export default async function FieldDocsPage() {
           ]}
         />
       </section>
+
+      <DocsRelated
+        links={[
+          {
+            href: "/docs/components/input",
+            title: "Input",
+            description: "default text control inside Field",
+          },
+          {
+            href: "/docs/components/label",
+            title: "Label",
+            description: "standalone labels when not using FieldLabel",
+          },
+          {
+            href: "/docs/components/checkbox",
+            title: "Checkbox",
+            description: "boolean fields and choice cards",
+          },
+          {
+            href: "/docs/components/select",
+            title: "Select",
+            description: "single-value dropdown fields",
+          },
+          {
+            href: "/blocks/forms/contact-form",
+            title: "Contact form blocks",
+            description: "ready Field-based forms",
+          },
+        ]}
+      />
     </article>
   )
 }

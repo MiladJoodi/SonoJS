@@ -22,6 +22,44 @@ export default function DocsIndexPage() {
         Built for agents and humans: clear CLI, registry installs, and an MCP
         server so your tools can work with the same components.
       </p>
+      <p className="leading-relaxed text-muted-foreground">
+        Start with{" "}
+        <Link
+          href="/docs/installation"
+          className="font-medium text-foreground underline-offset-4 hover:underline"
+        >
+          Installation
+        </Link>
+        , browse{" "}
+        <Link
+          href="/docs/components"
+          className="font-medium text-foreground underline-offset-4 hover:underline"
+        >
+          Components
+        </Link>
+        , or jump to{" "}
+        <Link
+          href="/blocks"
+          className="font-medium text-foreground underline-offset-4 hover:underline"
+        >
+          Blocks
+        </Link>
+        ,{" "}
+        <Link
+          href="/ai"
+          className="font-medium text-foreground underline-offset-4 hover:underline"
+        >
+          AI
+        </Link>
+        , and{" "}
+        <Link
+          href="/charts"
+          className="font-medium text-foreground underline-offset-4 hover:underline"
+        >
+          Charts
+        </Link>{" "}
+        catalogs.
+      </p>
       <div className="flex flex-wrap gap-3">
         <Link
           href="/docs/installation"
