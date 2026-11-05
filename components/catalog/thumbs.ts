@@ -117,6 +117,7 @@ const COMPONENT_THUMB_STEM: Partial<Record<string, string>> = {
   drawer: "drawer-default",
   "dropdown-menu": "dropdown-menu-default",
   "border-beam": "border-beam-default",
+  confetti: "confetti-default",
   "electro-border": "electro-border-default",
   field: "field-default",
   "hover-card": "hover-card-default",

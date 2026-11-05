@@ -1,0 +1,8 @@
+export { ConfettiDefault } from "./default"
+export { ConfettiBasic } from "./basic"
+export { ConfettiRandomDirection } from "./random-direction"
+export { ConfettiFireworks } from "./fireworks"
+export { ConfettiSideCannons } from "./side-cannons"
+export { ConfettiStars } from "./stars"
+export { ConfettiCustomShapes } from "./custom-shapes"
+export { ConfettiEmoji } from "./emoji"

@@ -28,6 +28,7 @@ const EXAMPLE_FOLDERS = [
   "collapsible",
   "combobox",
   "command",
+  "confetti",
   "carousel",
   "checkbox",
   "citations",

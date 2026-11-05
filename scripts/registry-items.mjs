@@ -3021,6 +3021,27 @@ const registryItemsRaw = [
     ],
   },
   {
+    name: "confetti",
+    type: "registry:ui",
+    title: "Confetti",
+    description:
+      "Canvas confetti bursts with Confetti and ConfettiButton.",
+    dependencies: ["canvas-confetti", "@types/canvas-confetti"],
+    registryDependencies: ["button"],
+    files: [
+      {
+        path: "packages/ui/src/components/confetti/confetti.tsx",
+        type: "registry:ui",
+        target: "components/confetti/confetti.tsx",
+      },
+      {
+        path: "packages/ui/src/components/confetti/index.ts",
+        type: "registry:ui",
+        target: "components/confetti/index.ts",
+      },
+    ],
+  },
+  {
     name: "electro-border",
     type: "registry:ui",
     title: "Electro Border",

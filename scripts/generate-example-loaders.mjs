@@ -31,6 +31,7 @@ const FOLDER_ORDER = [
   "collapsible",
   "combobox",
   "command",
+  "confetti",
   "carousel",
   "checkbox",
   "citations",

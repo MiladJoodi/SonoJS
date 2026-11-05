@@ -120,6 +120,7 @@ export const componentsNav: {
         { title: "Border Beam", href: "/docs/components/border-beam" },
         { title: "Card", href: "/docs/components/card", featured: true },
         { title: "Collapsible", href: "/docs/components/collapsible" },
+        { title: "Confetti", href: "/docs/components/confetti" },
         { title: "Dotted Map", href: "/docs/components/dotted-map" },
         { title: "Electro Border", href: "/docs/components/electro-border" },
         { title: "Item", href: "/docs/components/item" },

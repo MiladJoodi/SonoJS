@@ -56,6 +56,8 @@ export const COMPONENT_META_DESCRIPTIONS: Record<string, string> = {
     "Action menus anchored to a trigger — nested items, shortcuts, and checkbox/radio rows.",
   "border-beam":
     "Animated light beam that travels along a container border — size, duration, reverse, and spring transitions.",
+  confetti:
+    "Canvas confetti bursts with Confetti and ConfettiButton — fireworks, stars, emoji, and custom shapes.",
   "electro-border":
     "Animated energy border accents for hero cards and featured panels.",
   empty:

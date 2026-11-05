@@ -95,6 +95,12 @@ export const registry = {
         "An animated light beam that travels along a container border.",
     },
     {
+      name: "confetti",
+      type: "registry:ui" as const,
+      title: "Confetti",
+      description: "Canvas confetti bursts with Confetti and ConfettiButton.",
+    },
+    {
       name: "breadcrumb",
       type: "registry:ui" as const,
       title: "Breadcrumb",

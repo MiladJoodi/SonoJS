@@ -54,6 +54,8 @@ export const TOP_LEVEL_COMPONENT_ROOTS = new Set([
   "dotted-map",
   "lens",
   "progressive-blur",
+  "border-beam",
+  "confetti",
   "3d",
   "carousels",
 ])
