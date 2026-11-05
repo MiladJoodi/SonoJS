@@ -5300,6 +5300,76 @@ const registryItemsRaw = [
     ],
   },
   {
+    name: "chat-starter-01",
+    type: "registry:block",
+    title: "chat-starter-01",
+    description:
+      "Deployable chat shell - history rail, demo streaming without a key, pill composer, and /api/chat for your own provider key (RTL/LTR).",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: [
+      "lucide-react",
+      "motion",
+      "ai@^5",
+      "@ai-sdk/react@^2",
+      "@ai-sdk/openai@^2",
+    ],
+    registryDependencies: [
+      "avatar",
+      "button",
+      "dropdown-menu",
+      "spinner",
+    ],
+    files: [
+      {
+        path: "registry/blocks/ai-agents/chat-starter/chat-starter-01/chat-starter.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/ai-agents/chat-starter-01/chat-starter.tsx",
+      },
+      {
+        path: "registry/blocks/ai-agents/chat-starter/chat-starter-01/nav-rail.tsx",
+        type: "registry:component",
+        target: "components/blocks/ai-agents/chat-starter-01/nav-rail.tsx",
+      },
+      {
+        path: "registry/blocks/ai-agents/chat-starter/chat-starter-01/history.tsx",
+        type: "registry:component",
+        target: "components/blocks/ai-agents/chat-starter-01/history.tsx",
+      },
+      {
+        path: "registry/blocks/ai-agents/chat-starter/chat-starter-01/message.tsx",
+        type: "registry:component",
+        target: "components/blocks/ai-agents/chat-starter-01/message.tsx",
+      },
+      {
+        path: "registry/blocks/ai-agents/chat-starter/chat-starter-01/composer.tsx",
+        type: "registry:component",
+        target: "components/blocks/ai-agents/chat-starter-01/composer.tsx",
+      },
+      {
+        path: "registry/blocks/ai-agents/chat-starter/chat-starter-01/actions.tsx",
+        type: "registry:component",
+        target: "components/blocks/ai-agents/chat-starter-01/actions.tsx",
+      },
+      {
+        path: "registry/blocks/ai-agents/chat-starter/chat-starter-01/demo-answers.ts",
+        type: "registry:file",
+        target: "components/blocks/ai-agents/chat-starter-01/demo-answers.ts",
+      },
+      {
+        path: "registry/blocks/ai-agents/chat-starter/chat-starter-01/demo-transport.ts",
+        type: "registry:file",
+        target:
+          "components/blocks/ai-agents/chat-starter-01/demo-transport.ts",
+      },
+      {
+        path: "registry/blocks/ai-agents/chat-starter/chat-starter-01/api/chat/route.ts",
+        type: "registry:file",
+        target: "app/api/chat/route.ts",
+      },
+    ],
+  },
+  {
     name: "login-01",
     type: "registry:block",
     title: "login-01",
