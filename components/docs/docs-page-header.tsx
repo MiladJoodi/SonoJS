@@ -40,7 +40,11 @@ export function DocsPageHeader({
         <DocsAdjacentPager
           previous={previous}
           next={next}
-          className="mt-1.5"
+          className={cn(
+            "mt-1.5",
+            /* Mobile: pager lives in Browse sticky bar */
+            "hidden lg:flex"
+          )}
         />
       </div>
       {description ? (

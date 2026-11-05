@@ -47,3 +47,16 @@ export function getToolsCurrentLabel(pathname: string): string | null {
   if (pathname === "/tools") return "Tools"
   return null
 }
+
+export function getToolsAdjacent(pathname: string): {
+  previous: ToolsNavItem | null
+  next: ToolsNavItem | null
+} {
+  const items = getAllToolItems()
+  const index = items.findIndex((item) => item.href === pathname)
+  if (index < 0) return { previous: null, next: null }
+  return {
+    previous: index > 0 ? items[index - 1]! : null,
+    next: index < items.length - 1 ? items[index + 1]! : null,
+  }
+}

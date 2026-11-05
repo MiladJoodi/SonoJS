@@ -78,6 +78,14 @@ function getStatusBadgeClass(status: ToolApprovalStatus) {
   return "border-rose-500/30 bg-rose-500/10 text-rose-600 dark:text-rose-400"
 }
 
+/** Solid status dot for narrow viewports (label lives in aria-label). */
+function getStatusDotClass(status: ToolApprovalStatus) {
+  if (status === "pending") return "bg-amber-500"
+  if (status === "approving" || status === "running") return "bg-blue-500"
+  if (status === "approved" || status === "complete") return "bg-emerald-500"
+  return "bg-rose-500"
+}
+
 function getStatusIconKey(status: ToolApprovalStatus) {
   if (status === "approving" || status === "running") return "busy"
   if (status === "error") return "error"
@@ -96,7 +104,8 @@ function ToolApprovalCode({
       code={code}
       language={language}
       className={cn(
-        "rounded-[12px] border border-border/70 bg-muted/30 px-2.5 py-2",
+        // Plain wrapped mono — no chrome, no horizontal scroll.
+        "overflow-x-visible whitespace-pre-wrap break-all border-0 bg-transparent p-0",
         className
       )}
     />
@@ -198,45 +207,64 @@ function ToolApproval({
         </span>
 
         <div className="min-w-0 flex-1">
-          <div className="flex min-w-0 items-start justify-between gap-3">
-            <div className="min-w-0 text-start">
-              <div className="font-medium text-foreground">{title}</div>
+          <div className="flex min-w-0 items-start justify-between gap-2 sm:gap-3">
+            <div className="min-w-0 flex-1 text-start">
+              <div className="truncate text-[15px] font-medium leading-snug text-foreground sm:text-sm">
+                {title}
+              </div>
               <div className="mt-0.5 truncate font-mono text-xs text-muted-foreground">
                 {tool}
               </div>
             </div>
+            {/* Mobile: color dot only. sm+: labeled status pill. */}
             <span
-              className={cn(
-                "relative inline-flex h-5.5 shrink-0 items-center overflow-hidden rounded-full border px-2 text-[11px] font-medium transition-colors",
-                getStatusBadgeClass(status)
-              )}
+              aria-label={getStatusCopy(status)}
+              title={getStatusCopy(status)}
+              className="mt-1.5 shrink-0 sm:mt-0.5"
             >
-              <AnimatePresence initial={false} mode="popLayout">
-                <motion.span
-                  key={status}
-                  className="inline-block whitespace-nowrap"
-                  initial={
-                    reduce ? false : { opacity: 0, y: "70%", filter: "blur(3px)" }
-                  }
-                  animate={{ opacity: 1, y: "0%", filter: "blur(0px)" }}
-                  exit={
-                    reduce
-                      ? undefined
-                      : { opacity: 0, y: "-70%", filter: "blur(3px)" }
-                  }
-                  transition={
-                    reduce
-                      ? { duration: 0 }
-                      : { type: "spring", stiffness: 460, damping: 30 }
-                  }
-                >
-                  {getStatusCopy(status)}
-                </motion.span>
-              </AnimatePresence>
+              <span
+                aria-hidden
+                className={cn(
+                  "block size-2.5 rounded-full sm:hidden",
+                  getStatusDotClass(status)
+                )}
+              />
+              <span
+                aria-hidden
+                className={cn(
+                  "relative hidden h-5.5 items-center overflow-hidden rounded-full border px-2 text-[11px] font-medium transition-colors sm:inline-flex",
+                  getStatusBadgeClass(status)
+                )}
+              >
+                <AnimatePresence initial={false} mode="popLayout">
+                  <motion.span
+                    key={status}
+                    className="inline-block whitespace-nowrap"
+                    initial={
+                      reduce
+                        ? false
+                        : { opacity: 0, y: "70%", filter: "blur(3px)" }
+                    }
+                    animate={{ opacity: 1, y: "0%", filter: "blur(0px)" }}
+                    exit={
+                      reduce
+                        ? undefined
+                        : { opacity: 0, y: "-70%", filter: "blur(3px)" }
+                    }
+                    transition={
+                      reduce
+                        ? { duration: 0 }
+                        : { type: "spring", stiffness: 460, damping: 30 }
+                    }
+                  >
+                    {getStatusCopy(status)}
+                  </motion.span>
+                </AnimatePresence>
+              </span>
             </span>
           </div>
           {description ? (
-            <p className="mt-2 text-start leading-5 text-muted-foreground">
+            <p className="mt-2 text-start text-[13px] leading-5 text-muted-foreground sm:text-sm">
               {description}
             </p>
           ) : null}
@@ -263,13 +291,13 @@ function ToolApproval({
       </div>
 
       <AgentDisclosure id={detailsId} open={currentOpen}>
-        <dl className="mx-4 mb-4 grid gap-2 rounded-[12px] border border-border/70 bg-background/70 p-3">
+        <dl className="mx-4 mb-4 grid gap-3 rounded-[12px] border border-border/70 bg-background/70 p-3 sm:gap-2">
           {parameters.map((parameter) => (
             <div
               key={parameter.id}
-              className="grid grid-cols-[minmax(0,7rem)_minmax(0,1fr)] items-start gap-3 text-xs"
+              className="grid grid-cols-1 items-start gap-1.5 text-xs sm:grid-cols-[minmax(0,7rem)_minmax(0,1fr)] sm:gap-3"
             >
-              <dt className="text-start text-muted-foreground">
+              <dt className="text-start font-medium text-muted-foreground sm:font-normal">
                 {parameter.label}
               </dt>
               <dd className="min-w-0 break-words text-start font-mono text-foreground/85">

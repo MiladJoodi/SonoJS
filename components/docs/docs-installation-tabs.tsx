@@ -45,7 +45,7 @@ function CliCodeFrame({
         <CopyButton value={code} tooltip={copyTooltip} className="shrink-0" />
       </div>
       <div
-        className="sono-code-shiki no-scrollbar font-mono text-[14px] leading-[1.65]"
+        className="sono-code-shiki no-scrollbar max-h-36 overflow-auto font-mono text-[14px] leading-[1.65]"
         dangerouslySetInnerHTML={{ __html: html }}
       />
     </div>
@@ -70,7 +70,7 @@ function ManualFileFrame({
           <CopyButton value={file.code} tooltip={copyTooltip} className="shrink-0" />
         </div>
         <div
-          className="sono-code-shiki no-scrollbar max-h-96 overflow-auto font-mono text-[14px] leading-[1.65]"
+          className="sono-code-shiki no-scrollbar max-h-36 overflow-auto font-mono text-[14px] leading-[1.65]"
           dangerouslySetInnerHTML={{ __html: file.html }}
         />
       </div>

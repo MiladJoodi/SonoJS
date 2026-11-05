@@ -22,7 +22,11 @@ import {
   SidebarNavLabel,
   sidebarItemStateClass,
 } from "@/components/sidebar-nav/ui"
-import { getToolsCurrentLabel, toolsNav } from "@/lib/tools-nav"
+import {
+  getToolsAdjacent,
+  getToolsCurrentLabel,
+  toolsNav,
+} from "@/lib/tools-nav"
 import { cn } from "@/lib/utils"
 import { Button } from "@sonojs/ui/components/button"
 import {
@@ -177,9 +181,17 @@ export function ToolsSidebar({
 export function ToolsListIndex({ flush = false }: { flush?: boolean }) {
   const pathname = usePathname()
   const current = getToolsCurrentLabel(pathname)
+  const { previous, next } = getToolsAdjacent(pathname)
 
   return (
-    <ListIndexNav title="Tools" current={current} flush={flush}>
+    <ListIndexNav
+      browseLabel="Browse Tools"
+      drawerTitle="Tools"
+      current={current}
+      previous={previous}
+      next={next}
+      flush={flush}
+    >
       <ToolsSidebarBody />
     </ListIndexNav>
   )

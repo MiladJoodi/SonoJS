@@ -36,7 +36,7 @@ export function BlocksPageHeader({
               : undefined
           }
           next={next ? { href: next.href, title: next.title } : undefined}
-          className="mt-1.5"
+          className="mt-1.5 hidden lg:flex"
         />
       </div>
       {description ? (

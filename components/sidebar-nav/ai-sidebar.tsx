@@ -24,7 +24,7 @@ import {
   SidebarNavLabel,
   sidebarItemStateClass,
 } from "@/components/sidebar-nav/ui"
-import { aiNav, getAiCurrentLabel } from "@/lib/ai-nav"
+import { aiNav, getAiAdjacent, getAiCurrentLabel } from "@/lib/ai-nav"
 import { cn } from "@/lib/utils"
 import {
   Sidebar,
@@ -152,9 +152,16 @@ export function AiSidebar() {
 export function AiListIndex() {
   const pathname = usePathname()
   const current = getAiCurrentLabel(pathname)
+  const { previous, next } = getAiAdjacent(pathname)
 
   return (
-    <ListIndexNav title="AI" current={current}>
+    <ListIndexNav
+      browseLabel="Browse Components"
+      drawerTitle="AI Components"
+      current={current}
+      previous={previous}
+      next={next}
+    >
       <AiSidebarBody />
     </ListIndexNav>
   )

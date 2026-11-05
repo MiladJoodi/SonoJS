@@ -43,7 +43,7 @@ export default function PaymentMethods({
   className,
   ...props
 }: React.ComponentProps<"section">) {
-  const [open, setOpen] = React.useState(true)
+  const [open, setOpen] = React.useState(false)
   const [number, setNumber] = React.useState("")
   const [expiry, setExpiry] = React.useState("")
   const [cvc, setCvc] = React.useState("")

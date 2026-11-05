@@ -2,7 +2,11 @@ export { BlocksCategoryGrid } from "./blocks-category-grid"
 export { CATALOG_THUMB_GRID_CLASS } from "./catalog-grid"
 export { CatalogSection } from "./catalog-section"
 export { CatalogThumbCard } from "./catalog-thumb-card"
-export { blockCategoryThumbSrc, componentThumbSrc } from "./thumbs"
+export {
+  blockCategoryThumbSrc,
+  componentThumbSrc,
+  hasBlockCategoryThumb,
+} from "./thumbs"
 export {
   AiAgentsBlockWireframe,
   getBlockCategoryWireframe,

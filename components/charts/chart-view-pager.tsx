@@ -3,6 +3,7 @@ import {
   type DocsAdjacentLink,
 } from "@/components/docs/docs-adjacent-pager"
 import { chartViewHref, type ChartsCatalogEntry } from "@/lib/charts-catalog"
+import { cn } from "@/lib/utils"
 
 function toLink(
   entry: ChartsCatalogEntry | null | undefined
@@ -25,7 +26,7 @@ export function ChartViewPager({
     <DocsAdjacentPager
       previous={toLink(previous)}
       next={toLink(next)}
-      className={className}
+      className={cn("hidden lg:flex", className)}
     />
   )
 }

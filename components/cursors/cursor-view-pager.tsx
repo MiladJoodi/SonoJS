@@ -6,6 +6,7 @@ import {
   cursorViewHref,
   type CursorsCatalogEntry,
 } from "@/lib/cursors-catalog"
+import { cn } from "@/lib/utils"
 
 function toLink(
   entry: CursorsCatalogEntry | null | undefined
@@ -27,7 +28,7 @@ export function CursorViewPager({
     <DocsAdjacentPager
       previous={toLink(previous)}
       next={toLink(next)}
-      className={className}
+      className={cn("hidden lg:flex", className)}
     />
   )
 }

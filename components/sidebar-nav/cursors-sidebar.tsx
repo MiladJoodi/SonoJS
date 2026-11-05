@@ -23,7 +23,11 @@ import {
   SidebarNavLabel,
   sidebarItemStateClass,
 } from "@/components/sidebar-nav/ui"
-import { cursorsNav, getCursorsCurrentLabel } from "@/lib/cursors-nav"
+import {
+  cursorsNav,
+  getCursorsAdjacent,
+  getCursorsCurrentLabel,
+} from "@/lib/cursors-nav"
 import { cn } from "@/lib/utils"
 import {
   Sidebar,
@@ -128,9 +132,16 @@ export function CursorsSidebar() {
 export function CursorsListIndex() {
   const pathname = usePathname()
   const current = getCursorsCurrentLabel(pathname)
+  const { previous, next } = getCursorsAdjacent(pathname)
 
   return (
-    <ListIndexNav title="Cursors" current={current}>
+    <ListIndexNav
+      browseLabel="Browse Cursors"
+      drawerTitle="Cursors"
+      current={current}
+      previous={previous}
+      next={next}
+    >
       <CursorsSidebarBody />
     </ListIndexNav>
   )

@@ -6,6 +6,7 @@ import {
   chartCategoryHref,
   chartViewHref,
   chartsCatalog,
+  getChartAdjacent,
   getChartCategoryIcon,
   getChartEntry,
   getChartsByCategory,
@@ -75,6 +76,23 @@ export function getChartsCurrentLabel(pathname: string): string | null {
   }
 
   return null
+}
+
+export function getChartsAdjacent(pathname: string): {
+  previous: { href: string; title: string } | null
+  next: { href: string; title: string } | null
+} {
+  if (!pathname.startsWith("/charts/view/")) {
+    return { previous: null, next: null }
+  }
+  const id = pathname.slice("/charts/view/".length)
+  const { previous, next } = getChartAdjacent(id)
+  return {
+    previous: previous
+      ? { href: chartViewHref(previous.id), title: previous.title }
+      : null,
+    next: next ? { href: chartViewHref(next.id), title: next.title } : null,
+  }
 }
 
 export function getChartsNavStats() {

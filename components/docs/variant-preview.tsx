@@ -155,7 +155,9 @@ export function ComponentVariantPreview({
   )
 
   const previewFrameClass = cn(
-    "flex min-h-32 items-center justify-center p-8",
+    // Mobile: light stage pad so page gutter + stage don’t crush demo width.
+    // Desktop keeps the roomy p-8 frame.
+    "flex min-h-32 items-center justify-center px-3 py-4 sm:p-8",
     // Only canvas paints a fill — transparent/card leave the stage empty.
     previewSurface === "canvas" && "bg-canvas",
     allowOverflow &&

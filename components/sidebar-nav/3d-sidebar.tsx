@@ -24,7 +24,7 @@ import {
   SidebarNavLabel,
   sidebarItemStateClass,
 } from "@/components/sidebar-nav/ui"
-import { get3dCurrentLabel, threeDNav } from "@/lib/3d-nav"
+import { get3dAdjacent, get3dCurrentLabel, threeDNav } from "@/lib/3d-nav"
 import { cn } from "@/lib/utils"
 import {
   Sidebar,
@@ -152,9 +152,16 @@ export function ThreeDSidebar() {
 export function ThreeDListIndex() {
   const pathname = usePathname()
   const current = get3dCurrentLabel(pathname)
+  const { previous, next } = get3dAdjacent(pathname)
 
   return (
-    <ListIndexNav title="3D" current={current}>
+    <ListIndexNav
+      browseLabel="Browse 3D"
+      drawerTitle="3D"
+      current={current}
+      previous={previous}
+      next={next}
+    >
       <ThreeDSidebarBody />
     </ListIndexNav>
   )

@@ -4,7 +4,11 @@ import * as React from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
-import { blocksNav, getBlocksCurrentLabel } from "@/lib/blocks-nav"
+import {
+  blocksNav,
+  getBlocksAdjacent,
+  getBlocksCurrentLabel,
+} from "@/lib/blocks-nav"
 import { cn } from "@/lib/utils"
 import { ListIndexNav } from "@/components/sidebar-nav/list-index-nav"
 import {
@@ -177,9 +181,18 @@ export function BlocksSidebar() {
 export function BlocksListIndex() {
   const pathname = usePathname()
   const current = getBlocksCurrentLabel(pathname)
+  const { previous, next } = getBlocksAdjacent(pathname)
 
   return (
-    <ListIndexNav title="Blocks" current={current}>
+    <ListIndexNav
+      browseLabel="Browse Blocks"
+      drawerTitle="Blocks"
+      current={current}
+      previous={
+        previous ? { href: previous.href, title: previous.title } : null
+      }
+      next={next ? { href: next.href, title: next.title } : null}
+    >
       <BlocksSidebarBody />
     </ListIndexNav>
   )

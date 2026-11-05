@@ -26,6 +26,7 @@ import {
 } from "@/components/sidebar-nav/ui"
 import {
   carouselsNav,
+  getCarouselsAdjacent,
   getCarouselsCurrentLabel,
 } from "@/lib/carousels-nav"
 import { cn } from "@/lib/utils"
@@ -155,9 +156,16 @@ export function CarouselsSidebar() {
 export function CarouselsListIndex() {
   const pathname = usePathname()
   const current = getCarouselsCurrentLabel(pathname)
+  const { previous, next } = getCarouselsAdjacent(pathname)
 
   return (
-    <ListIndexNav title="Carousels" current={current}>
+    <ListIndexNav
+      browseLabel="Browse Carousels"
+      drawerTitle="Carousels"
+      current={current}
+      previous={previous}
+      next={next}
+    >
       <CarouselsSidebarBody />
     </ListIndexNav>
   )

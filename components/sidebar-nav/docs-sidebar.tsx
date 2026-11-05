@@ -8,6 +8,7 @@ import {
   COMPONENTS_FEATURED_GROUP,
   componentsNav,
   docsNav,
+  getDocsAdjacent,
   getDocsCurrentLabel,
   isComponentsDocsPath,
   type DocsNavGroup,
@@ -285,10 +286,17 @@ export function DocsSidebar() {
 export function DocsListIndex() {
   const pathname = usePathname()
   const current = getDocsCurrentLabel(pathname)
-  const title = isComponentsDocsPath(pathname) ? "Components" : "Docs"
+  const isComponents = isComponentsDocsPath(pathname)
+  const { previous, next } = getDocsAdjacent(pathname)
 
   return (
-    <ListIndexNav title={title} current={current}>
+    <ListIndexNav
+      browseLabel={isComponents ? "Browse Components" : "Browse Docs"}
+      drawerTitle={isComponents ? "Components" : "Docs"}
+      current={current}
+      previous={previous}
+      next={next}
+    >
       <DocsSidebarBody />
     </ListIndexNav>
   )

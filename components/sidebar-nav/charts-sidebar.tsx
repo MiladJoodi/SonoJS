@@ -11,6 +11,7 @@ import {
 import {
   chartsNav,
   getChartsActiveCategoryId,
+  getChartsAdjacent,
   getChartsCurrentLabel,
 } from "@/lib/charts-nav"
 import type { ChartCategory } from "@/lib/charts-catalog"
@@ -372,9 +373,16 @@ export function ChartsSidebar() {
 export function ChartsListIndex() {
   const pathname = usePathname()
   const current = getChartsCurrentLabel(pathname)
+  const { previous, next } = getChartsAdjacent(pathname)
 
   return (
-    <ListIndexNav title="Charts" current={current}>
+    <ListIndexNav
+      browseLabel="Browse Charts"
+      drawerTitle="Charts"
+      current={current}
+      previous={previous}
+      next={next}
+    >
       <ChartsSidebarBody />
     </ListIndexNav>
   )
