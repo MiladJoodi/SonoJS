@@ -16,8 +16,7 @@ import {
 } from "lucide-react"
 
 import { AccountIdentityHero, BillingPanel } from "@/components/auth/account"
-import { useBillingSummary } from "@/hooks/use-billing-summary"
-import { resolveAccountPlanDisplay } from "@/lib/account-plan-display"
+import { usePlanDisplay } from "@/hooks/use-plan-display"
 import { cn } from "@/lib/utils"
 import { GithubIcon } from "@/registry/icons/github"
 import { GoogleIcon } from "@/registry/icons/google"
@@ -179,10 +178,15 @@ export function AccountSettings({ className }: { className?: string }) {
   const [deleteError, setDeleteError] = React.useState<string | null>(null)
 
   const {
-    summary: billingSummary,
-    error: billingError,
-    loading: billingLoading,
-  } = useBillingSummary(Boolean(isLoaded && isSignedIn && user))
+    isPro,
+    planId,
+    planName,
+    expiryLabel: planExpiryLabel,
+    planLoading,
+    billingSummary,
+    billingError,
+    billingLoading,
+  } = usePlanDisplay()
 
   const [profileHydrated, setProfileHydrated] = React.useState(false)
   const emailReloadAttempted = React.useRef(false)
@@ -267,14 +271,6 @@ export function AccountSettings({ className }: { className?: string }) {
 
   const email = user.primaryEmailAddress?.emailAddress
   const displayName = user.fullName || email || "Account"
-  // Hero plan: prefer billing summary (Stripe/Neon) so Clerk lag never shows Free.
-  // Clerk metadata is the Free fallback when billing has no active sub.
-  const planDisplay = resolveAccountPlanDisplay(
-    billingSummary?.subscription,
-    user.publicMetadata
-  )
-  const { isPro, planId, planName, expiryLabel: planExpiryLabel } = planDisplay
-  const planLoading = billingLoading && !billingSummary
 
   const saveProfile = async (event: React.FormEvent) => {
     event.preventDefault()

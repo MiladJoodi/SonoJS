@@ -6,6 +6,8 @@ import { useAuth, useUser } from "@clerk/nextjs"
 import { CheckCircle2Icon, Loader2Icon, XCircleIcon } from "lucide-react"
 
 import { fetchCheckoutStatus } from "@/components/pricing/fetch-checkout-status"
+import { invalidateBillingSummaryCache } from "@/hooks/use-billing-summary"
+import { invalidateEnsureUserPlanCache } from "@/hooks/use-ensure-user-plan"
 import { Alert, AlertDescription, AlertTitle } from "@sonojs/ui/components/alert"
 import { Button } from "@sonojs/ui/components/button"
 import { cn } from "@/lib/utils"
@@ -101,6 +103,8 @@ export function CheckoutReturnBanner() {
 
         if (result.data.status === "active") {
           confirmedRef.current = true
+          invalidateBillingSummaryCache()
+          invalidateEnsureUserPlanCache()
           await userRef.current?.reload()
           if (cancelled) return
           setPhase("success")

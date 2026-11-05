@@ -5,7 +5,7 @@ import { useClerk, useUser } from "@clerk/nextjs"
 import { LogOutIcon, SettingsIcon, UserIcon } from "lucide-react"
 
 import { PlanIcon } from "@/components/icons/plan/plan-icon"
-import { getUserPlan, getViewerPlanId } from "@/lib/access"
+import { usePlanDisplay } from "@/hooks/use-plan-display"
 import { getAuthReturnPath } from "@/lib/auth-return-path"
 import { cn } from "@/lib/utils"
 import { Avatar, AvatarFallback, AvatarImage } from "@sonojs/ui/components/avatar"
@@ -30,23 +30,16 @@ function initials(name?: string | null, email?: string | null) {
   return email?.[0]?.toUpperCase() ?? "?"
 }
 
-/** SonoJS user menu - avatar shell immediately; details fill in when Clerk user is ready. */
-export function UserMenu({
-  planReady = false,
-}: {
-  /** True after session ensure-plan heal finishes (avoids a false Free flash). */
-  planReady?: boolean
-}) {
+/** SonoJS user menu - avatar shell immediately; plan chip matches /account. */
+export function UserMenu() {
   const { user, isLoaded } = useUser()
   const { signOut } = useClerk()
   const ready = Boolean(isLoaded && user)
+  const { isPro, planId, planLoading } = usePlanDisplay()
 
   const name = user?.fullName
   const email = user?.primaryEmailAddress?.emailAddress
-  const metadata = user?.publicMetadata
-  const showPlan = ready && planReady
-  const isPro = showPlan ? getUserPlan(metadata) === "pro" : false
-  const planId = showPlan ? getViewerPlanId(metadata) : "free"
+  const showPlan = ready && !planLoading
 
   return (
     <DropdownMenu>
@@ -57,7 +50,7 @@ export function UserMenu({
           size="icon-xs"
           className="size-8 cursor-pointer rounded-full border border-border/70 bg-card p-0 shadow-none hover:bg-canvas"
           aria-label="Account menu"
-          aria-busy={!ready || !planReady}
+          aria-busy={!ready || planLoading}
         >
           <Avatar className="size-8">
             {ready && user?.imageUrl ? (

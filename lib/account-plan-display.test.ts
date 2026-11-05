@@ -71,4 +71,17 @@ describe("resolveAccountPlanDisplay", () => {
       source: "billing",
     })
   })
+
+  it("treats past_due billing as Pro to match Neon sync", () => {
+    const display = resolveAccountPlanDisplay(
+      { ...proMonthlySub, status: "past_due" },
+      { plan: "free" }
+    )
+    expect(display).toMatchObject({
+      isPro: true,
+      planId: "pro-monthly",
+      planName: "Pro Monthly",
+      source: "billing",
+    })
+  })
 })

@@ -8,7 +8,6 @@ import {
   type AuthDialogMode,
   UserMenu,
 } from "@/components/auth"
-import { useEnsureUserPlan } from "@/hooks/use-ensure-user-plan"
 import { Button } from "@sonojs/ui/components/button"
 
 /**
@@ -25,8 +24,6 @@ export function AuthControls({
   const [open, setOpen] = React.useState(false)
   const [mode, setMode] = React.useState<AuthDialogMode>("sign-in")
 
-  const { planReady } = useEnsureUserPlan()
-
   React.useEffect(() => {
     if (isSignedIn && open) setOpen(false)
   }, [isSignedIn, open])
@@ -34,7 +31,7 @@ export function AuthControls({
   const signedIn = isLoaded ? Boolean(isSignedIn) : initialSignedIn
 
   if (signedIn) {
-    return <UserMenu planReady={planReady} />
+    return <UserMenu />
   }
 
   return (

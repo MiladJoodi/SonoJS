@@ -11,7 +11,7 @@ import { Spinner } from "@sonojs/ui/components/spinner"
 /**
  * Account header - editable avatar + name/email; plan + expiry opposite.
  * Plan mark matches /pricing (Free gray · Monthly check green · Yearly primary).
- * Plan chip comes from billing summary only (never Clerk flash).
+ * Plan chip from shared usePlanDisplay (billing-preferring, same as header).
  */
 export function AccountIdentityHero({
   name,

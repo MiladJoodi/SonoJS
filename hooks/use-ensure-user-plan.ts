@@ -29,6 +29,50 @@ function metadataMatchesSynced(
   return expires === synced.planExpiresAt
 }
 
+/** One ensure-plan round-trip per user for concurrent header + account mounts. */
+const syncedUserIds = new Set<string>()
+const inFlightByUser = new Map<
+  string,
+  Promise<EnsurePlanResponse | null>
+>()
+const listeners = new Set<() => void>()
+
+function notifyEnsureListeners() {
+  for (const listener of listeners) listener()
+}
+
+async function ensurePlanRequest(): Promise<EnsurePlanResponse | null> {
+  const res = await fetch("/api/account/ensure-plan", { method: "POST" })
+  if (!res.ok) return null
+  return (await res.json()) as EnsurePlanResponse
+}
+
+function loadEnsurePlanShared(
+  userId: string,
+  force: boolean
+): Promise<EnsurePlanResponse | null> {
+  if (!force && syncedUserIds.has(userId)) {
+    return Promise.resolve(null)
+  }
+  const existing = inFlightByUser.get(userId)
+  if (existing) return existing
+
+  const promise = ensurePlanRequest()
+    .catch(() => null)
+    .finally(() => {
+      inFlightByUser.delete(userId)
+    })
+  inFlightByUser.set(userId, promise)
+  return promise
+}
+
+/** Clear session heal cache (e.g. after checkout confirms Pro). */
+export function invalidateEnsureUserPlanCache() {
+  syncedUserIds.clear()
+  inFlightByUser.clear()
+  notifyEnsureListeners()
+}
+
 /**
  * Session sync for Clerk plan metadata via `/api/account/ensure-plan`:
  * - Always heals from Neon (Free↔Pro drift)
@@ -39,65 +83,80 @@ export function useEnsureUserPlan() {
   const { isSignedIn } = useAuth()
   const { user, isLoaded } = useUser()
   const [planReady, setPlanReady] = React.useState(false)
-  const syncedUserId = React.useRef<string | null>(null)
-  const inFlight = React.useRef(false)
+  const [nonce, setNonce] = React.useState(0)
+  const localSyncedUserId = React.useRef<string | null>(null)
+  const forceNext = React.useRef(false)
+
+  React.useEffect(() => {
+    const onInvalidate = () => {
+      forceNext.current = true
+      localSyncedUserId.current = null
+      setPlanReady(false)
+      setNonce((n) => n + 1)
+    }
+    listeners.add(onInvalidate)
+    return () => {
+      listeners.delete(onInvalidate)
+    }
+  }, [])
 
   React.useEffect(() => {
     if (!isLoaded || !isSignedIn || !user) {
+      if (isLoaded && !isSignedIn) {
+        syncedUserIds.clear()
+        inFlightByUser.clear()
+      }
       setPlanReady(false)
-      syncedUserId.current = null
+      localSyncedUserId.current = null
       return
     }
 
-    if (syncedUserId.current === user.id) {
+    const force = forceNext.current
+    if (
+      !force &&
+      (localSyncedUserId.current === user.id || syncedUserIds.has(user.id))
+    ) {
+      localSyncedUserId.current = user.id
       setPlanReady(true)
       return
     }
 
-    if (inFlight.current) return
-    inFlight.current = true
-
+    forceNext.current = false
     let cancelled = false
 
-    void fetch("/api/account/ensure-plan", { method: "POST" })
-      .then((res) => (res.ok ? res.json() : null))
-      .then(async (data: EnsurePlanResponse | null) => {
-        if (cancelled || !data) {
-          if (!cancelled) {
-            syncedUserId.current = user.id
-            setPlanReady(true)
+    void loadEnsurePlanShared(user.id, force)
+      .then(async (data) => {
+        if (cancelled) return
+
+        if (data) {
+          const needsReload =
+            data.updated === true ||
+            !metadataMatchesSynced(user.publicMetadata, data)
+
+          if (needsReload) {
+            await user.reload()
           }
-          return
-        }
-
-        const needsReload =
-          data.updated === true ||
-          !metadataMatchesSynced(user.publicMetadata, data)
-
-        if (needsReload) {
-          await user.reload()
         }
 
         if (!cancelled) {
-          syncedUserId.current = user.id
+          syncedUserIds.add(user.id)
+          localSyncedUserId.current = user.id
           setPlanReady(true)
         }
       })
       .catch(() => {
         if (!cancelled) {
           // Don't block the chip forever on network errors
-          syncedUserId.current = user.id
+          syncedUserIds.add(user.id)
+          localSyncedUserId.current = user.id
           setPlanReady(true)
         }
-      })
-      .finally(() => {
-        inFlight.current = false
       })
 
     return () => {
       cancelled = true
     }
-  }, [isLoaded, isSignedIn, user])
+  }, [isLoaded, isSignedIn, user, nonce])
 
   return {
     planReady: Boolean(isLoaded && isSignedIn && user && planReady),

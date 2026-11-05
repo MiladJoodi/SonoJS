@@ -16,11 +16,12 @@ export type AccountPlanDisplay = {
   source: "billing" | "clerk"
 }
 
-const ACTIVE_STATUSES = new Set(["active", "trialing"])
+/** Match `getActiveSubscriptionByClerkId` active set. */
+const ACTIVE_STATUSES = new Set(["active", "trialing", "past_due"])
 
 /**
- * Prefer live billing summary for Account hero so Clerk metadata lag
- * never shows Free while Stripe/Neon already show Pro.
+ * Prefer live billing summary so Clerk metadata lag never shows Free
+ * while Stripe/Neon already show Pro. Shared by header + /account.
  */
 export function resolveAccountPlanDisplay(
   subscription: BillingSummarySubscription | null | undefined,
