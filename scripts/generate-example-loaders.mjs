@@ -111,6 +111,7 @@ const FOLDER_ORDER = [
   "switch",
   "table",
   "tabs",
+  "task-list",
   "task-rows",
   "terminal",
   "thinking-orbs",

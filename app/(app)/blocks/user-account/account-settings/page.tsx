@@ -7,6 +7,7 @@ import AccountSettings02 from "@/registry/blocks/user-account/account-settings/a
 import AccountSettings03 from "@/registry/blocks/user-account/account-settings/account-settings-03/account-settings"
 import AccountSettings04 from "@/registry/blocks/user-account/account-settings/account-settings-04/account-settings"
 import AccountSettings05 from "@/registry/blocks/user-account/account-settings/account-settings-05/account-settings"
+import AccountSettings06 from "@/registry/blocks/user-account/account-settings/account-settings-06/account-settings"
 
 import { blocksPageMetadata } from "@/lib/seo"
 
@@ -42,7 +43,7 @@ export default function BlockAccountSettingsDocsPage() {
       <BlocksPageHeader
         title="Account Settings"
         pathname="/blocks/user-account/account-settings"
-        description="Tabs shell, stacked workspace form, sessions, connected accounts, and appearance."
+        description="Tabs shell, stacked workspace form, sessions, connected accounts, appearance, and settings modal."
       />
 
       <div className="flex flex-col gap-8">
@@ -97,6 +98,18 @@ export default function BlockAccountSettingsDocsPage() {
           previewClassName="bg-canvas p-0"
         >
           <AccountSettings05 />
+        </BlockExample>
+
+        <ExampleRule />
+
+        <BlockExample
+          name="account-settings-06"
+          usage={[{ title: "app/page.tsx", code: usage("account-settings-06") }]}
+          previewAlign="center"
+          previewClassName="bg-canvas"
+          previewSize="compact"
+        >
+          <AccountSettings06 />
         </BlockExample>
       </div>
     </article>

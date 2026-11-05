@@ -89,6 +89,7 @@ const EXAMPLE_FOLDERS = [
   "switch",
   "table",
   "tabs",
+  "task-list",
   "task-rows",
   "terminal",
   "thinking-orbs",

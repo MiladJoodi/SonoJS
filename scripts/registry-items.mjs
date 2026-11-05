@@ -631,6 +631,8 @@ function userAccountSettingsBlock(
     ],
     images = ["avatar.webp"],
     icons = [],
+    /** Extra sibling `.tsx` files under the block folder (no extension). */
+    components = [],
   } = {}
 ) {
   return {
@@ -647,6 +649,11 @@ function userAccountSettingsBlock(
         type: "registry:component",
         target: `components/blocks/user-account/${slug}/account-settings.tsx`,
       },
+      ...components.map((name) => ({
+        path: `registry/blocks/user-account/account-settings/${slug}/${name}.tsx`,
+        type: "registry:component",
+        target: `components/blocks/user-account/${slug}/${name}.tsx`,
+      })),
       ...images.map((file) => ({
         path: `registry/blocks/user-account/account-settings/${slug}/images/${file}`,
         type: "registry:file",
@@ -2269,6 +2276,26 @@ const registryItemsRaw = [
         path: "packages/ui/src/components/ai-sidebar.tsx",
         type: "registry:ui",
         target: "components/sonojs/ai-sidebar.tsx",
+      },
+    ],
+  },
+  {
+    name: "task-list",
+    type: "registry:ui",
+    title: "Task List",
+    description:
+      "Streaming agent task log that reveals steps with soft height, blur, and a shimmering running title.",
+    dependencies: ["motion", "lucide-react", "clsx", "tailwind-merge"],
+    files: [
+      {
+        path: "packages/ui/src/components/task-list/index.tsx",
+        type: "registry:ui",
+        target: "components/sonojs/task-list/index.tsx",
+      },
+      {
+        path: "packages/ui/src/components/task-list/text-shimmer.tsx",
+        type: "registry:ui",
+        target: "components/sonojs/task-list/text-shimmer.tsx",
       },
     ],
   },
@@ -10667,6 +10694,31 @@ const registryItemsRaw = [
     {
       registryDependencies: ["button", "label", "radio-group", "select"],
       images: [],
+    }
+  ),
+  userAccountSettingsBlock(
+    "account-settings-06",
+    "Settings modal - General (WebGL plan flame), Profile, Tools, Storage (RTL/LTR).",
+    {
+      registryDependencies: [
+        "badge",
+        "button",
+        "checkbox",
+        "dialog",
+        "input",
+        "select",
+        "switch",
+      ],
+      images: ["plan-art.webp"],
+      components: [
+        "plan-art-flame",
+        "settings-modal",
+        "settings-general",
+        "settings-profile",
+        "settings-tools",
+        "settings-storage",
+        "settings-rows",
+      ],
     }
   ),
   userAccountTeamMembersBlock(

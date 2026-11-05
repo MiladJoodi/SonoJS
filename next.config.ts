@@ -204,6 +204,11 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: "/docs/components/task-list",
+        destination: "/ai/task-list",
+        permanent: true,
+      },
+      {
         source: "/docs/components/task-rows",
         destination: "/ai/task-rows",
         permanent: true,
