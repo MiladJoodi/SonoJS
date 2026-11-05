@@ -24,6 +24,7 @@ export const docsNav: {
     { title: "Introduction", href: "/docs" },
     { title: "Installation", href: "/docs/installation", featured: true },
     { title: "Guide", href: "/docs/guide" },
+    { title: "Tips", href: "/docs/tips", badge: "new" },
     { title: "CLI", href: "/docs/cli" },
     { title: "MCP Server", href: "/docs/mcp", featured: true },
     { title: "Direction (RTL / LTR)", href: "/docs/direction", featured: true },

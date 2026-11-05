@@ -6,6 +6,7 @@ export {
   blockCategoryThumbSrc,
   componentThumbSrc,
   hasBlockCategoryThumb,
+  hasComponentThumb,
 } from "./thumbs"
 export {
   AiAgentsBlockWireframe,

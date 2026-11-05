@@ -1,4 +1,5 @@
 export { AgentPromptCard } from "./agent-prompt-card"
+export { CodeBlockHeader } from "./code-block-header"
 export { CodePanel } from "./code-panel"
 export { ComponentsDirectory } from "./components-directory"
 export type { ComponentsDirectoryItem } from "./components-directory"

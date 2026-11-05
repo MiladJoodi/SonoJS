@@ -94,7 +94,66 @@ export function blockCategoryThumbSrc(
   return `/images/blocks/${category}-${theme}.webp`
 }
 
-/** Component thumbs: `public/images/components/{slug}-light|dark.webp`. */
+/**
+ * Component gallery thumbs while captures roll out.
+ * Keys = docs slug; values = file stem under `public/images/components/`
+ * (e.g. `button-default` → `button-default-light.png`).
+ */
+const COMPONENT_THUMB_STEM: Partial<Record<string, string>> = {
+  accordion: "accordion-default",
+  alert: "alert-default",
+  "alert-dialog": "alert-dialog-default",
+  button: "button-default",
+  "button-group": "button-group-default",
+  calendar: "calendar-basic",
+  card: "card-image",
+  checkbox: "checkbox-default",
+  collapsible: "collapsible-default",
+  combobox: "combobox-default",
+  command: "command-default",
+  "context-menu": "context-menu-default",
+  "date-picker": "date-picker-default",
+  dialog: "dialog-default",
+  drawer: "drawer-default",
+  "dropdown-menu": "dropdown-menu-default",
+  "electro-border": "electro-border-default",
+  field: "field-default",
+  "hover-card": "hover-card-default",
+  input: "input-default",
+  "input-group": "input-group-default",
+  "input-otp": "input-otp-default",
+  item: "item-default",
+  label: "label-default",
+  marquee: "marquee-default",
+  menubar: "menubar-default",
+  "native-select": "native-select-default",
+  popover: "popover-default",
+  "radio-group": "radio-group-default",
+  "rainbow-button": "rainbow-button-default",
+  resizable: "resizable-handle",
+  "scroll-area": "scroll-area-default",
+  select: "select-default",
+  separator: "separator-default",
+  sheet: "sheet-default",
+  slider: "slider-default",
+  sortable: "sortable-default",
+  switch: "switch-default",
+  tabs: "tabs-line",
+  textarea: "textarea-default",
+  timeline: "timeline-activity",
+  toggle: "toggle-with-text",
+  "toggle-group": "toggle-group-spacing",
+  tooltip: "tooltip-default",
+}
+
+/** True when a real PNG thumb pair exists (skip wireframe). */
+export function hasComponentThumb(slug: string) {
+  return slug in COMPONENT_THUMB_STEM
+}
+
+/** Component thumbs: override stem map or `{slug}-light|dark.webp`. */
 export function componentThumbSrc(slug: string, theme: "light" | "dark") {
+  const stem = COMPONENT_THUMB_STEM[slug]
+  if (stem) return `/images/components/${stem}-${theme}.png`
   return `/images/components/${slug}-${theme}.webp`
 }

@@ -37,8 +37,10 @@ Ask before changing MCP config outside this project.`,
     github: "https://github.com/MiladJoodi/SonoJS",
     /** New blank GitHub issue (report + feature request). */
     githubNewIssue: "https://github.com/MiladJoodi/SonoJS/issues/new",
+    x: "https://x.com/_sonojs",
+    linkedin: "https://www.linkedin.com/company/sonojs",
   },
-  /** `owner/repo` for GitHub API (stars, etc.). */
+  /** `owner/repo` for GitHub API. */
   githubRepo: "MiladJoodi/SonoJS",
   navItems: [
     { href: "/docs", label: "Docs" },

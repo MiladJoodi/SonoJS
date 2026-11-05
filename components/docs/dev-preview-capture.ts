@@ -40,12 +40,8 @@ function resolveCaptureRoot(frame: HTMLElement): HTMLElement {
   return frame
 }
 
-const IGNORE_SELECTOR = [
-  "[data-sono-capture-ignore]",
-  "button",
-  "[aria-label*='prev' i]",
-  "[aria-label*='next' i]",
-].join(",")
+/** Only opt-in chrome — never blanket `button` (hides Button / Toggle demos). */
+const IGNORE_SELECTOR = "[data-sono-capture-ignore]"
 
 function hideCaptureChrome(root: HTMLElement): () => void {
   const hidden: Array<{

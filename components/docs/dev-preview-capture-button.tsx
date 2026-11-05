@@ -2,12 +2,28 @@
 
 import * as React from "react"
 import { CameraIcon, CheckIcon, Loader2Icon } from "lucide-react"
+import { useTheme } from "next-themes"
 
 import { downloadTransparentPreviewPng } from "@/components/docs/dev-preview-capture"
 import { cn } from "@/lib/utils"
 
+function themeSuffix(resolved: string | undefined): "light" | "dark" {
+  return resolved === "dark" ? "dark" : "light"
+}
+
+function buildCaptureFilename(fileBase: string, theme: "light" | "dark") {
+  const safe =
+    (fileBase || "preview")
+      .replace(/[^\w.-]+/g, "-")
+      .replace(/^-+|-+$/g, "")
+      .replace(/-(light|dark)$/i, "")
+      .slice(0, 80) || "preview"
+  return `${safe}-${theme}.png`
+}
+
 /**
  * Dev-only: icon control left of LTR/RTL — downloads a transparent PNG.
+ * Filename follows `{slug}-light.png` / `{slug}-dark.png`.
  */
 export function DevPreviewCaptureButton({
   targetRef,
@@ -16,6 +32,7 @@ export function DevPreviewCaptureButton({
   targetRef: React.RefObject<HTMLElement | null>
   fileBase: string
 }) {
+  const { resolvedTheme } = useTheme()
   const [busy, setBusy] = React.useState(false)
   const [done, setDone] = React.useState(false)
 
@@ -25,12 +42,11 @@ export function DevPreviewCaptureButton({
     setBusy(true)
     setDone(false)
     try {
-      const safe =
-        (fileBase || "preview")
-          .replace(/[^\w.-]+/g, "-")
-          .replace(/^-+|-+$/g, "")
-          .slice(0, 80) || "preview"
-      await downloadTransparentPreviewPng(el, `${safe}.png`)
+      const theme = themeSuffix(resolvedTheme)
+      await downloadTransparentPreviewPng(
+        el,
+        buildCaptureFilename(fileBase, theme)
+      )
       setDone(true)
       window.setTimeout(() => setDone(false), 1600)
     } catch (err) {
@@ -38,7 +54,7 @@ export function DevPreviewCaptureButton({
     } finally {
       setBusy(false)
     }
-  }, [busy, fileBase, targetRef])
+  }, [busy, fileBase, resolvedTheme, targetRef])
 
   return (
     <button

@@ -6,6 +6,8 @@ import { AuthControls } from "@/components/site-header/auth-controls"
 import { GithubLink } from "@/components/site-header/github-link"
 import { MainNav } from "@/components/site-header/main-nav"
 import { ModeSwitcher } from "@/components/site-header/mode-switcher"
+// import { LinkedinLink } from "@/components/site-header/linkedin-link"
+// import { XLink } from "@/components/site-header/x-link"
 import { siteConfig } from "@/lib/config"
 import { cn } from "@/lib/utils"
 import { Separator } from "@sonojs/ui/components/separator"
@@ -53,6 +55,8 @@ export function SiteHeader({
 
           <div className="ms-auto flex shrink-0 items-center gap-1.5">
             <GithubLink />
+            {/* <XLink /> */}
+            {/* <LinkedinLink /> */}
             <Separator orientation="vertical" className="mx-0.5 hidden sm:block" />
             <ModeSwitcher />
             <AuthControls initialSignedIn={initialSignedIn} />

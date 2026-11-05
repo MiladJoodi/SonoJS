@@ -1,5 +1,6 @@
 "use client"
 
+import { CodeBlockHeader } from "@/components/docs/code-block-header"
 import { CopyButton } from "@/components/docs/copy-button"
 import { InstallNeedsHint } from "@/components/docs/install-needs-hint"
 import {
@@ -38,12 +39,13 @@ function CliCodeFrame({
 }) {
   return (
     <div className="sono-code-block rounded-none border-0">
-      <div className="flex min-w-0 items-center justify-between gap-2 border-b border-[color:var(--code-border)] px-4 py-2">
-        <div className="min-w-0 truncate font-mono text-[14px] font-normal text-[color:var(--code-header-fg)]">
-          CLI
-        </div>
-        <CopyButton value={code} tooltip={copyTooltip} className="shrink-0" />
-      </div>
+      <CodeBlockHeader title="CLI">
+        <CopyButton
+          value={code}
+          tooltip={copyTooltip}
+          className="size-6 shrink-0 [&_svg]:size-3"
+        />
+      </CodeBlockHeader>
       <div
         className="sono-code-shiki no-scrollbar max-h-36 overflow-auto font-mono text-[14px] leading-[1.65]"
         dangerouslySetInnerHTML={{ __html: html }}
@@ -62,13 +64,14 @@ function ManualFileFrame({
   return (
     <div className="overflow-hidden rounded-xl border border-border/80">
       <div className="sono-code-block rounded-none border-0">
-        <div className="flex min-w-0 items-center justify-between gap-2 border-b border-[color:var(--code-border)] px-4 py-2">
-          <div className="min-w-0 truncate font-mono text-[14px] font-normal text-[color:var(--code-header-fg)]">
-            {file.title}
-          </div>
+        <CodeBlockHeader title={file.title}>
           {/* Copy raw source only - never path or highlight HTML */}
-          <CopyButton value={file.code} tooltip={copyTooltip} className="shrink-0" />
-        </div>
+          <CopyButton
+            value={file.code}
+            tooltip={copyTooltip}
+            className="size-6 shrink-0 [&_svg]:size-3"
+          />
+        </CodeBlockHeader>
         <div
           className="sono-code-shiki no-scrollbar max-h-36 overflow-auto font-mono text-[14px] leading-[1.65]"
           dangerouslySetInnerHTML={{ __html: file.html }}

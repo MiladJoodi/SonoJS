@@ -38,6 +38,7 @@ export function ComponentsDirectory({
                 href={page.href}
                 title={page.title}
                 preview={getComponentWireframe(slug)}
+                captureName={slug}
               />
             )
           })}

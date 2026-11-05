@@ -1,6 +1,8 @@
 export { AuthControls } from "./auth-controls"
 export { SiteHeader } from "./site-header"
 export { GithubLink } from "./github-link"
+export { LinkedinLink } from "./linkedin-link"
+export { XLink } from "./x-link"
 export { MainNav } from "./main-nav"
 export { MobileBottomNav } from "./mobile-bottom-nav"
 export { ModeSwitcher } from "./mode-switcher"
