@@ -1,9 +1,11 @@
 /**
- * Gallery thumbs for `/3d`: `public/images/3d/{slug}-default.webp`.
- * (Charts use light/dark pairs; 3D starts with a single capture per item.)
+ * Gallery thumbs for `/3d`.
+ *
+ * - Most items: `public/images/3d/{slug}-default.webp` (same for light + dark).
+ * - Theme-sensitive: `public/images/3d/{slug}-light.webp` + `{slug}-dark.webp`.
  */
 
-const THUMB_SLUGS = new Set([
+const DEFAULT_THUMB_SLUGS = new Set([
   "beam-circle",
   "beam-circle-3d",
   "clothes-rack",
@@ -22,12 +24,22 @@ const THUMB_SLUGS = new Set([
   "smokey-frame",
 ])
 
-export function threeDThumbSrc(slug: string) {
+/** Separate captures for light and dark site themes. */
+const THEMED_THUMB_SLUGS = new Set([
+  "globe",
+  "icon-cloud",
+  "orbiting-circles",
+])
+
+export function threeDThumbSrc(slug: string, theme: "light" | "dark") {
+  if (THEMED_THUMB_SLUGS.has(slug)) {
+    return `/images/3d/${slug}-${theme}.webp`
+  }
   return `/images/3d/${slug}-default.webp`
 }
 
 export function hasThreeDThumb(slug: string) {
-  return THUMB_SLUGS.has(slug)
+  return DEFAULT_THUMB_SLUGS.has(slug) || THEMED_THUMB_SLUGS.has(slug)
 }
 
 export function threeDSlugFromHref(href: string) {

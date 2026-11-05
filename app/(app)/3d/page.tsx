@@ -31,14 +31,14 @@ export default function ThreeDIndexPage() {
       <CatalogSection title="Components" count={pages.length} showHeader={false}>
         {pages.map((page, index) => {
           const slug = threeDSlugFromHref(page.href)
-          const src = hasThreeDThumb(slug) ? threeDThumbSrc(slug) : undefined
+          const hasThumb = hasThreeDThumb(slug)
           return (
             <CatalogThumbCard
               key={page.href}
               href={page.href}
               title={page.title}
-              lightSrc={src}
-              darkSrc={src}
+              lightSrc={hasThumb ? threeDThumbSrc(slug, "light") : undefined}
+              darkSrc={hasThumb ? threeDThumbSrc(slug, "dark") : undefined}
               loading={index < CATALOG_ATF_THUMB_COUNT ? "eager" : "lazy"}
             />
           )
