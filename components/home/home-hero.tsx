@@ -86,7 +86,7 @@ export function HomeHero() {
                 <Link href="/docs">Get Started</Link>
               </Button>
               <Button variant="outline" asChild className="shrink-0">
-                <Link href="/docs/components">Explore Components</Link>
+                <Link href="/blocks">Explore Blocks</Link>
               </Button>
             </div>
 
