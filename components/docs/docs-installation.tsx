@@ -9,7 +9,7 @@ import {
   docsSourceUsesAppAlias,
   readRegistryInstallMeta,
 } from "@/lib/docs-install"
-import { highlightCode } from "@/lib/highlight-code"
+import { highlightCode, highlightInstallFile } from "@/lib/highlight-code"
 
 /**
  * Installation: Command (`add`) + Manual (copy files from registry JSON).
@@ -59,7 +59,8 @@ export async function DocsInstallation({
 
   const [cliHtml, ...fileHtmls] = await Promise.all([
     highlightCode(code, "bash"),
-    ...files.map((f) => highlightCode(f.content, "tsx")),
+    // Path-aware: SVG/images/binaries stay plain — Shiki×N assets timed out Vercel SSR.
+    ...files.map((f) => highlightInstallFile(f.title, f.content)),
   ])
 
   return (
