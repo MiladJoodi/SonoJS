@@ -75,6 +75,20 @@ export const cursorsCatalog: CursorsCatalogEntry[] = [
     description: "Neon ring and trail with motion springs.",
     status: "ported",
   },
+  {
+    id: "pointer-cursor",
+    category: "pointer",
+    title: "Pointer",
+    description: "Replace the system cursor with a custom glyph on hover.",
+    status: "ported",
+  },
+  {
+    id: "smooth-cursor",
+    category: "pointer",
+    title: "Smooth Cursor",
+    description: "Physics spring cursor with direction-aware rotation.",
+    status: "ported",
+  },
   // Ported - trail
   {
     id: "rainbow-cursor",

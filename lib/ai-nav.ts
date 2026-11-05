@@ -44,6 +44,7 @@ export const aiNav: {
         { title: "Selection Actions", href: "/ai/selection-actions" },
         { title: "Streaming Response", href: "/ai/streaming-response", featured: true },
         { title: "Structured Output", href: "/ai/structured-output" },
+        { title: "Task List", href: "/ai/task-list", featured: true, badge: "new" },
         { title: "Task Rows", href: "/ai/task-rows" },
         { title: "Terminal", href: "/ai/terminal" },
         { title: "Thinking Orbs", href: "/ai/thinking-orbs", featured: true },

@@ -631,6 +631,8 @@ function userAccountSettingsBlock(
     ],
     images = ["avatar.webp"],
     icons = [],
+    /** Extra sibling `.tsx` files under the block folder (no extension). */
+    components = [],
   } = {}
 ) {
   return {
@@ -647,6 +649,11 @@ function userAccountSettingsBlock(
         type: "registry:component",
         target: `components/blocks/user-account/${slug}/account-settings.tsx`,
       },
+      ...components.map((name) => ({
+        path: `registry/blocks/user-account/account-settings/${slug}/${name}.tsx`,
+        type: "registry:component",
+        target: `components/blocks/user-account/${slug}/${name}.tsx`,
+      })),
       ...images.map((file) => ({
         path: `registry/blocks/user-account/account-settings/${slug}/images/${file}`,
         type: "registry:file",
@@ -2273,6 +2280,26 @@ const registryItemsRaw = [
     ],
   },
   {
+    name: "task-list",
+    type: "registry:ui",
+    title: "Task List",
+    description:
+      "Streaming agent task log that reveals steps with soft height, blur, and a shimmering running title.",
+    dependencies: ["motion", "lucide-react", "clsx", "tailwind-merge"],
+    files: [
+      {
+        path: "packages/ui/src/components/task-list/index.tsx",
+        type: "registry:ui",
+        target: "components/sonojs/task-list/index.tsx",
+      },
+      {
+        path: "packages/ui/src/components/task-list/text-shimmer.tsx",
+        type: "registry:ui",
+        target: "components/sonojs/task-list/text-shimmer.tsx",
+      },
+    ],
+  },
+  {
     name: "task-rows",
     type: "registry:ui",
     title: "Task Rows",
@@ -2888,6 +2915,36 @@ const registryItemsRaw = [
     ],
   },
   {
+    name: "dotted-map",
+    type: "registry:ui",
+    title: "Dotted Map",
+    description:
+      "SVG dotted world map with markers, stagger, and optional pulse.",
+    dependencies: ["svg-dotted-map"],
+    files: [
+      {
+        path: "packages/ui/src/components/dotted-map/index.tsx",
+        type: "registry:ui",
+        target: "components/dotted-map/index.tsx",
+      },
+      {
+        path: "packages/ui/src/components/dotted-map/flags/index.ts",
+        type: "registry:ui",
+        target: "components/dotted-map/flags/index.ts",
+      },
+      {
+        path: "packages/ui/src/components/dotted-map/flags/kr.webp",
+        type: "registry:file",
+        target: "components/dotted-map/flags/kr.webp",
+      },
+      {
+        path: "packages/ui/src/components/dotted-map/flags/us.webp",
+        type: "registry:file",
+        target: "components/dotted-map/flags/us.webp",
+      },
+    ],
+  },
+  {
     name: "drawer",
     type: "registry:ui",
     title: "Drawer",
@@ -2945,6 +3002,21 @@ const registryItemsRaw = [
         path: "packages/ui/src/components/empty.tsx",
         type: "registry:ui",
         target: "components/ui/empty.tsx",
+      },
+    ],
+  },
+  {
+    name: "border-beam",
+    type: "registry:ui",
+    title: "Border Beam",
+    description:
+      "An animated light beam that travels along a container border.",
+    dependencies: ["motion"],
+    files: [
+      {
+        path: "packages/ui/src/components/border-beam/border-beam.tsx",
+        type: "registry:ui",
+        target: "components/border-beam/border-beam.tsx",
       },
     ],
   },
@@ -3596,6 +3668,21 @@ const registryItemsRaw = [
     ],
   },
   {
+    name: "lens",
+    type: "registry:ui",
+    title: "Lens",
+    description:
+      "Hover or static magnifier over images and other content.",
+    dependencies: ["motion"],
+    files: [
+      {
+        path: "packages/ui/src/components/lens/index.tsx",
+        type: "registry:ui",
+        target: "components/lens/index.tsx",
+      },
+    ],
+  },
+  {
     name: "loading-states",
     type: "registry:ui",
     title: "Loading States",
@@ -3701,6 +3788,19 @@ const registryItemsRaw = [
         path: "packages/ui/src/components/progress.tsx",
         type: "registry:ui",
         target: "components/ui/progress.tsx",
+      },
+    ],
+  },
+  {
+    name: "progressive-blur",
+    type: "registry:ui",
+    title: "Progressive Blur",
+    description: "Layered backdrop blur fade for scrollable edges.",
+    files: [
+      {
+        path: "packages/ui/src/components/progressive-blur/index.tsx",
+        type: "registry:ui",
+        target: "components/progressive-blur/index.tsx",
       },
     ],
   },
@@ -4642,6 +4742,102 @@ const registryItemsRaw = [
     ],
   },
   {
+    name: "orbiting-circles",
+    type: "registry:ui",
+    title: "Orbiting Circles",
+    description:
+      "CSS-driven icon orbits with optional path rings, reverse, and speed.",
+    files: [
+      {
+        path: "packages/ui/src/components/3d/orbiting-circles/index.tsx",
+        type: "registry:ui",
+        target: "components/3d/orbiting-circles/index.tsx",
+      },
+      {
+        path: "packages/ui/src/components/3d/orbiting-circles/icons.tsx",
+        type: "registry:ui",
+        target: "components/3d/orbiting-circles/icons.tsx",
+      },
+      {
+        path: "packages/ui/src/components/3d/orbiting-circles/orbiting-circles.css",
+        type: "registry:file",
+        target: "components/3d/orbiting-circles/orbiting-circles.css",
+      },
+    ],
+  },
+  {
+    name: "icon-cloud",
+    type: "registry:ui",
+    title: "Icon Cloud",
+    description:
+      "Interactive 3D tag cloud with drag spin and play/pause control.",
+    dependencies: ["lucide-react"],
+    registryDependencies: ["button"],
+    files: [
+      {
+        path: "packages/ui/src/components/3d/icon-cloud/index.tsx",
+        type: "registry:ui",
+        target: "components/3d/icon-cloud/index.tsx",
+      },
+      {
+        path: "packages/ui/src/components/3d/icon-cloud/images.ts",
+        type: "registry:ui",
+        target: "components/3d/icon-cloud/images.ts",
+      },
+      ...[
+        "typescript",
+        "javascript",
+        "dart",
+        "java",
+        "react",
+        "flutter",
+        "android",
+        "html5",
+        "css3",
+        "nodedotjs",
+        "express",
+        "nextdotjs",
+        "prisma",
+        "amazonaws",
+        "postgresql",
+        "firebase",
+        "nginx",
+        "vercel",
+        "testinglibrary",
+        "jest",
+        "cypress",
+        "docker",
+        "git",
+        "jira",
+        "github",
+        "gitlab",
+        "visualstudiocode",
+        "androidstudio",
+        "sonarqube",
+        "figma",
+      ].map((slug) => ({
+        path: `packages/ui/src/components/3d/icon-cloud/images/${slug}.svg`,
+        type: "registry:file",
+        target: `components/3d/icon-cloud/images/${slug}.svg`,
+      })),
+    ],
+  },
+  {
+    name: "globe",
+    type: "registry:ui",
+    title: "Globe",
+    description:
+      "Autorotating interactive WebGL globe with drag spin and city markers.",
+    dependencies: ["cobe@^0.6.5", "motion"],
+    files: [
+      {
+        path: "packages/ui/src/components/3d/globe/index.tsx",
+        type: "registry:ui",
+        target: "components/3d/globe/index.tsx",
+      },
+    ],
+  },
+  {
     name: "plasma-globe",
     type: "registry:ui",
     title: "Plasma Globe",
@@ -5269,6 +5465,76 @@ const registryItemsRaw = [
         path: "registry/blocks/ai-agents/agent-workspace/agent-workspace-01/types.ts",
         type: "registry:file",
         target: "components/blocks/ai-agents/agent-workspace-01/types.ts",
+      },
+    ],
+  },
+  {
+    name: "chat-starter-01",
+    type: "registry:block",
+    title: "chat-starter-01",
+    description:
+      "Deployable chat shell - history rail, demo streaming without a key, pill composer, and /api/chat for your own provider key (RTL/LTR).",
+    cssVars: SOFT_SURFACE_CSS_VARS,
+    dependencies: [
+      "lucide-react",
+      "motion",
+      "ai@^5",
+      "@ai-sdk/react@^2",
+      "@ai-sdk/openai@^2",
+    ],
+    registryDependencies: [
+      "avatar",
+      "button",
+      "dropdown-menu",
+      "spinner",
+    ],
+    files: [
+      {
+        path: "registry/blocks/ai-agents/chat-starter/chat-starter-01/chat-starter.tsx",
+        type: "registry:component",
+        target:
+          "components/blocks/ai-agents/chat-starter-01/chat-starter.tsx",
+      },
+      {
+        path: "registry/blocks/ai-agents/chat-starter/chat-starter-01/nav-rail.tsx",
+        type: "registry:component",
+        target: "components/blocks/ai-agents/chat-starter-01/nav-rail.tsx",
+      },
+      {
+        path: "registry/blocks/ai-agents/chat-starter/chat-starter-01/history.tsx",
+        type: "registry:component",
+        target: "components/blocks/ai-agents/chat-starter-01/history.tsx",
+      },
+      {
+        path: "registry/blocks/ai-agents/chat-starter/chat-starter-01/message.tsx",
+        type: "registry:component",
+        target: "components/blocks/ai-agents/chat-starter-01/message.tsx",
+      },
+      {
+        path: "registry/blocks/ai-agents/chat-starter/chat-starter-01/composer.tsx",
+        type: "registry:component",
+        target: "components/blocks/ai-agents/chat-starter-01/composer.tsx",
+      },
+      {
+        path: "registry/blocks/ai-agents/chat-starter/chat-starter-01/actions.tsx",
+        type: "registry:component",
+        target: "components/blocks/ai-agents/chat-starter-01/actions.tsx",
+      },
+      {
+        path: "registry/blocks/ai-agents/chat-starter/chat-starter-01/demo-answers.ts",
+        type: "registry:file",
+        target: "components/blocks/ai-agents/chat-starter-01/demo-answers.ts",
+      },
+      {
+        path: "registry/blocks/ai-agents/chat-starter/chat-starter-01/demo-transport.ts",
+        type: "registry:file",
+        target:
+          "components/blocks/ai-agents/chat-starter-01/demo-transport.ts",
+      },
+      {
+        path: "registry/blocks/ai-agents/chat-starter/chat-starter-01/api/chat/route.ts",
+        type: "registry:file",
+        target: "app/api/chat/route.ts",
       },
     ],
   },
@@ -10667,6 +10933,31 @@ const registryItemsRaw = [
     {
       registryDependencies: ["button", "label", "radio-group", "select"],
       images: [],
+    }
+  ),
+  userAccountSettingsBlock(
+    "account-settings-06",
+    "Settings modal - General (WebGL plan flame), Profile, Tools, Storage (RTL/LTR).",
+    {
+      registryDependencies: [
+        "badge",
+        "button",
+        "checkbox",
+        "dialog",
+        "input",
+        "select",
+        "switch",
+      ],
+      images: ["plan-art.webp"],
+      components: [
+        "plan-art-flame",
+        "settings-modal",
+        "settings-general",
+        "settings-profile",
+        "settings-tools",
+        "settings-storage",
+        "settings-rows",
+      ],
     }
   ),
   userAccountTeamMembersBlock(

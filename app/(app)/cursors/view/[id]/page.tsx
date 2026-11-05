@@ -72,7 +72,14 @@ export default async function CursorViewPage({
 
       {entry.status === "ported" ? (
         <>
-          <CursorPreview title="Preview">
+          <CursorPreview
+            title="Preview"
+            description={
+              id === "pointer-cursor"
+                ? "Hover each card. Same Pointer API: default arrow, className color, or custom children."
+                : undefined
+            }
+          >
             <CursorDemo id={id} />
           </CursorPreview>
 
@@ -80,20 +87,40 @@ export default async function CursorViewPage({
           <DocsInstallation name={id} />
 
           {usage ? (
-            <section className="space-y-3">
-              <h2 className="text-h3">Usage</h2>
-              <AccessGate access="member">
-                <div className="space-y-3">
-                  <p className="text-sm leading-relaxed text-muted-foreground">
-                    {usage.blurb}
-                  </p>
-                  <ComponentSource
-                    title="page.tsx"
-                    lang="tsx"
-                    code={usage.code}
-                  />
+            <section className="space-y-6">
+              <div className="space-y-3">
+                <h2 className="text-h3">Usage</h2>
+                <AccessGate access="member">
+                  <div className="space-y-3">
+                    <p className="text-sm leading-relaxed text-muted-foreground">
+                      {usage.blurb}
+                    </p>
+                    <ComponentSource
+                      title="Default"
+                      lang="tsx"
+                      code={usage.code}
+                    />
+                  </div>
+                </AccessGate>
+              </div>
+
+              {usage.examples?.map((example) => (
+                <div key={example.title} className="space-y-3">
+                  <div className="space-y-1.5">
+                    <h3 className="text-h4">{example.title}</h3>
+                    <p className="text-sm leading-relaxed text-muted-foreground">
+                      {example.description}
+                    </p>
+                  </div>
+                  <AccessGate access="member">
+                    <ComponentSource
+                      title={`${example.title.toLowerCase().replace(/\s+/g, "-")}.tsx`}
+                      lang="tsx"
+                      code={example.code}
+                    />
+                  </AccessGate>
                 </div>
-              </AccessGate>
+              ))}
             </section>
           ) : null}
         </>

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "lens",
+  "type": "registry:ui",
+  "title": "Lens",
+  "description": "Hover or static magnifier over images and other content.",
+  "access": "public",
+  "dependencies": [
+    "motion"
+  ],
+  "files": [
+    {
+      "path": "components/lens/index.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { AnimatePresence, motion, useMotionTemplate } from \"motion/react\"\n\nimport { cn } from \"@/lib/utils\"\n\ninterface Position {\n  x: number\n  y: number\n}\n\ninterface LensProps {\n  children: React.ReactNode\n  zoomFactor?: number\n  lensSize?: number\n  position?: Position\n  defaultPosition?: Position\n  isStatic?: boolean\n  duration?: number\n  lensColor?: string\n  ariaLabel?: string\n  className?: string\n}\n\nexport function Lens({\n  children,\n  zoomFactor = 1.3,\n  lensSize = 170,\n  isStatic = false,\n  position = { x: 0, y: 0 },\n  defaultPosition,\n  duration = 0.1,\n  lensColor = \"black\",\n  ariaLabel = \"Zoom Area\",\n  className,\n}: LensProps) {\n  if (zoomFactor < 1) {\n    throw new Error(\"zoomFactor must be greater than 1\")\n  }\n  if (lensSize < 0) {\n    throw new Error(\"lensSize must be greater than 0\")\n  }\n\n  const [isHovering, setIsHovering] = React.useState(false)\n  const [mousePosition, setMousePosition] = React.useState<Position>(position)\n  const containerRef = React.useRef<HTMLDivElement>(null)\n\n  const currentPosition = React.useMemo(() => {\n    if (isStatic) return position\n    if (defaultPosition && !isHovering) return defaultPosition\n    return mousePosition\n  }, [isStatic, position, defaultPosition, isHovering, mousePosition])\n\n  const handleMouseMove = React.useCallback(\n    (e: React.MouseEvent<HTMLDivElement>) => {\n      const rect = e.currentTarget.getBoundingClientRect()\n      setMousePosition({\n        x: e.clientX - rect.left,\n        y: e.clientY - rect.top,\n      })\n    },\n    []\n  )\n\n  const handleKeyDown = React.useCallback((e: React.KeyboardEvent) => {\n    if (e.key === \"Escape\") setIsHovering(false)\n  }, [])\n\n  const maskImage = useMotionTemplate`radial-gradient(circle ${\n    lensSize / 2\n  }px at ${currentPosition.x}px ${\n    currentPosition.y\n  }px, ${lensColor} 100%, transparent 100%)`\n\n  const LensContent = React.useMemo(() => {\n    const { x, y } = currentPosition\n\n    return (\n      <motion.div\n        initial={{ opacity: 0, scale: 0.58 }}\n        animate={{ opacity: 1, scale: 1 }}\n        exit={{ opacity: 0, scale: 0.8 }}\n        transition={{ duration }}\n        className=\"absolute inset-0 overflow-hidden\"\n        style={{\n          maskImage,\n          WebkitMaskImage: maskImage,\n          transformOrigin: `${x}px ${y}px`,\n          zIndex: 50,\n        }}\n      >\n        <div\n          className=\"absolute inset-0\"\n          style={{\n            transform: `scale(${zoomFactor})`,\n            transformOrigin: `${x}px ${y}px`,\n          }}\n        >\n          {children}\n        </div>\n      </motion.div>\n    )\n  }, [currentPosition, maskImage, zoomFactor, children, duration])\n\n  return (\n    <div\n      ref={containerRef}\n      className={cn(\n        \"relative z-20 cursor-pointer overflow-hidden rounded-xl\",\n        className\n      )}\n      onMouseEnter={() => setIsHovering(true)}\n      onMouseLeave={() => setIsHovering(false)}\n      onMouseMove={handleMouseMove}\n      onKeyDown={handleKeyDown}\n      role=\"region\"\n      aria-label={ariaLabel}\n      tabIndex={0}\n    >\n      {children}\n      {isStatic || defaultPosition ? (\n        LensContent\n      ) : (\n        <AnimatePresence mode=\"popLayout\">\n          {isHovering && LensContent}\n        </AnimatePresence>\n      )}\n    </div>\n  )\n}\n",
+      "target": "components/lens/index.tsx"
+    }
+  ],
+  "version": "0.1.0+1dfbd818b77d",
+  "generatedAt": "2026-11-05T15:54:12.720Z"
+}
