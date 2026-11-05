@@ -42,7 +42,7 @@ const exampleDefs = [
   },
 ]
 
-const usageSource = `import { BorderBeam } from "@/components/border-beam/border-beam"
+const usageSource = `import { BorderBeam } from "@/components/border-beam"
 
 export function Example() {
   return (

@@ -503,6 +503,12 @@ export const registry = {
         "A panel that slides in from an edge. Prefer side start/end for RTL-safe edges.",
     },
     {
+      name: "shine-border",
+      type: "registry:ui" as const,
+      title: "Shine Border",
+      description: "An animated shine that runs along a container border.",
+    },
+    {
       name: "skeleton",
       type: "registry:ui" as const,
       title: "Skeleton",
