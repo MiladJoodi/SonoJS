@@ -21,6 +21,7 @@ describe("buildCheckoutSessionFormBody", () => {
     expect(body.get("subscription_data[metadata][clerkUserId]")).toBe(
       "user_abc"
     )
+    expect(body.get("subscription_data[cancel_at_period_end]")).toBe("true")
     expect(body.get("customer")).toBeNull()
   })
 
@@ -73,6 +74,9 @@ describe("createCheckoutSession", () => {
     expect(postedBody).toContain("metadata%5BclerkUserId%5D=user_meta")
     expect(postedBody).toContain(
       "subscription_data%5Bmetadata%5D%5BclerkUserId%5D=user_meta"
+    )
+    expect(postedBody).toContain(
+      "subscription_data%5Bcancel_at_period_end%5D=true"
     )
     expect(postedBody).toContain("price_from_plan")
   })

@@ -89,8 +89,15 @@ export function MarketplaceProductCard({
           <p className="min-w-0 flex-1 truncate text-[15px] font-semibold tracking-tight text-[var(--sm-text)] transition-colors group-hover/card:text-primary">
             {item.title}
           </p>
-          <p className="shrink-0 text-[15px] font-bold tracking-tight text-[var(--sm-text)]">
-            {item.priceLabel}
+          <p
+            className={cn(
+              "shrink-0 text-[15px] font-bold tracking-tight",
+              item.access === "pro"
+                ? "text-primary"
+                : "text-[var(--sm-text)]"
+            )}
+          >
+            {item.access === "pro" ? "Pro" : item.priceLabel || "Free"}
           </p>
         </div>
         <p className="line-clamp-2 text-[12.5px] leading-snug text-[var(--sm-text-secondary)]">

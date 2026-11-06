@@ -15,6 +15,7 @@
     "start": "next start",
     "lint": "eslint",
     "test": "vitest run",
+    "test:db": "vitest run db/queries/concurrency-races.test.ts db/queries/idempotency.concurrency.test.ts lib/stripe/stripe-webhook.integration.test.ts",
     "verify:cache": "node scripts/verify-cache-headers.mjs",
     "generate:og": "node scripts/generate-og-assets.mjs",
     "verify:seo": "node scripts/verify-seo.mjs && vitest run lib/seo.test.ts",

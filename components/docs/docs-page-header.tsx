@@ -5,12 +5,14 @@ import { getAiAdjacent } from "@/lib/ai-nav"
 import { getCarouselsAdjacent } from "@/lib/carousels-nav"
 import { get3dAdjacent } from "@/lib/3d-nav"
 import { getDocsAdjacent } from "@/lib/docs-nav"
+import { getLegalAdjacent } from "@/lib/legal-nav"
 import { breadcrumbListJsonLd } from "@/lib/seo-jsonld"
 import { cn } from "@/lib/utils"
 
 import { DocsAdjacentPager } from "./docs-adjacent-pager"
 
 function adjacentForPath(pathname: string) {
+  if (pathname.startsWith("/legal")) return getLegalAdjacent(pathname)
   if (pathname.startsWith("/3d")) return get3dAdjacent(pathname)
   if (pathname.startsWith("/ai")) return getAiAdjacent(pathname)
   if (pathname.startsWith("/carousels")) return getCarouselsAdjacent(pathname)

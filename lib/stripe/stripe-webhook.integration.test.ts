@@ -15,8 +15,9 @@ import {
   signStripeWebhookBody,
   verifyStripeWebhook,
 } from "@/lib/stripe/verify-webhook"
+import { allowDbIntegrationTests } from "@/lib/test/allow-db-tests"
 
-const hasDb = Boolean(process.env.DATABASE_URL?.trim())
+const hasDb = allowDbIntegrationTests()
 
 describe("stripe webhook HTTP mapping", () => {
   it("maps pipeline results to Stripe retry-safe statuses", () => {
@@ -36,7 +37,7 @@ describe("stripe webhook HTTP mapping", () => {
   })
 })
 
-describe.runIf(hasDb)("stripe webhook integration", () => {
+describe.runIf(hasDb)("stripe webhook integration (opt-in: npm run test:db)", () => {
   let createDb: typeof import("@/db/client").createDb
   let schema: typeof import("@/db/schema")
   let claimStripeWebhookEvent: typeof import("@/db/queries/webhook-events").claimStripeWebhookEvent

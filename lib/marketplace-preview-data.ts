@@ -30,6 +30,7 @@ export type MarketplacePreviewItem = {
   updatedAt: string
   /** Index in `marketplaceProjects` - later = newer when dates tie. */
   catalogIndex: number
+  access: "public" | "member" | "pro"
 }
 
 export type MarketplacePreviewDetail = MarketplacePreviewItem & {
@@ -114,6 +115,7 @@ export function toMarketplaceItem(
     stack: project.stack,
     updatedAt: project.updatedAt,
     catalogIndex,
+    access: project.access ?? "member",
   }
 }
 

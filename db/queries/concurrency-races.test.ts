@@ -10,9 +10,11 @@ import { planFingerprint } from "@/db/lib/plan-fingerprint"
 
 config({ path: ".env.local" })
 
-const hasDb = Boolean(process.env.DATABASE_URL?.trim())
+import { allowDbIntegrationTests } from "@/lib/test/allow-db-tests"
 
-describe.runIf(hasDb)("concurrency race scenarios", () => {
+const hasDb = allowDbIntegrationTests()
+
+describe.runIf(hasDb)("concurrency race scenarios (opt-in: npm run test:db)", () => {
   let createDb: typeof import("@/db/client").createDb
   let schema: typeof import("@/db/schema")
   let claimStripeWebhookEvent: typeof import("@/db/queries/webhook-events").claimStripeWebhookEvent

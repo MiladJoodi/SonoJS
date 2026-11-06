@@ -32,6 +32,8 @@ export function buildCheckoutSessionFormBody(
     "subscription_data[metadata][clerkUserId]",
     input.clerkUserId.trim()
   )
+  // Manual renewal: no automatic next charge; user must checkout again.
+  body.set("subscription_data[cancel_at_period_end]", "true")
   const customerId = input.stripeCustomerId?.trim()
   if (customerId) body.set("customer", customerId)
   return body

@@ -52,7 +52,7 @@ export function getMobileMoreNavItems(): SiteNavItem[] {
   const rest = siteConfig.navItems.filter(
     (item) => !PRIMARY_HREFS.has(item.href)
   )
-  return [HOME_NAV_ITEM, ...rest]
+  return [HOME_NAV_ITEM, ...rest, ...siteConfig.footerNavItems]
 }
 
 /** Hide on tool workspaces and chart playground. */

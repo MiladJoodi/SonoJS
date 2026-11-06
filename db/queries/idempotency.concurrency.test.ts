@@ -6,9 +6,13 @@ import { LostClerkLeaseError, LostWebhookClaimError } from "@/db/errors"
 
 config({ path: ".env.local" })
 
-const hasDb = Boolean(process.env.DATABASE_URL?.trim())
+import { allowDbIntegrationTests } from "@/lib/test/allow-db-tests"
 
-describe.runIf(hasDb)("billing idempotency + concurrency", () => {
+const hasDb = allowDbIntegrationTests()
+
+describe.runIf(hasDb)(
+  "billing idempotency + concurrency (opt-in: npm run test:db)",
+  () => {
   let createDb: typeof import("@/db/client").createDb
   let schema: typeof import("@/db/schema")
   let claimStripeWebhookEvent: typeof import("@/db/queries/webhook-events").claimStripeWebhookEvent

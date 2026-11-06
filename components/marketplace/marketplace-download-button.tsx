@@ -42,10 +42,15 @@ export function MarketplaceDownloadButton({
     (access === "member" && signedIn) ||
     (access === "pro" && isPro)
 
-  const label =
-    project.priceCents === 0
-      ? "Download free"
-      : `Buy ${project.priceLabel}`
+  const label = (() => {
+    if (canDownload) {
+      if (access === "pro") return "Download"
+      if (project.priceCents === 0) return "Download free"
+      return `Buy ${project.priceLabel}`
+    }
+    if (access === "pro") return "Upgrade to Pro"
+    return "Sign in to download"
+  })()
 
   /** Zip comes from Pro registry via slug (or optional external downloadUrl). */
   const hasArchive = Boolean(project.downloadUrl) || project.enabled

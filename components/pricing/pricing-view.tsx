@@ -23,6 +23,7 @@ import {
 import { PlanIcon } from "@/components/icons/plan/plan-icon"
 import { ProIcon } from "@/components/icons/plan/pro"
 import { Button } from "@sonojs/ui/components/button"
+import { siteConfig } from "@/lib/config"
 import { cn } from "@/lib/utils"
 
 function isCheckoutPlanSlug(id: PlanId): id is CheckoutPlanSlug {
@@ -71,11 +72,13 @@ function PlanCard({
   index,
   reduceMotion,
   isSignedIn,
+  digitalConsent,
 }: {
   plan: Plan
   index: number
   reduceMotion: boolean | null
   isSignedIn: boolean
+  digitalConsent: boolean
 }) {
   const router = useRouter()
   const [loading, setLoading] = React.useState(false)
@@ -89,6 +92,11 @@ function PlanCard({
 
     if (!isSignedIn) {
       router.push("/sign-in?redirect_url=/pricing")
+      return
+    }
+
+    if (!digitalConsent) {
+      setError("Confirm the digital access notice below before checkout.")
       return
     }
 
@@ -225,7 +233,7 @@ function PlanCard({
           <Button
             type="button"
             variant="default"
-            disabled={loading}
+            disabled={loading || !digitalConsent}
             onClick={() => void onProCheckout()}
             className="w-full cursor-pointer shadow-none disabled:cursor-not-allowed"
           >
@@ -280,6 +288,7 @@ function PlanCard({
 export function PricingView() {
   const reduceMotion = useReducedMotion()
   const { isSignedIn } = useAuth()
+  const [digitalConsent, setDigitalConsent] = React.useState(false)
 
   return (
     <div className="relative overflow-x-clip">
@@ -326,7 +335,38 @@ export function PricingView() {
             Free, Monthly, or Yearly
           </h1>
           <p className="mx-auto mt-4 max-w-lg text-base text-muted-foreground">
-            Free to start. Pro for the full library and templates.
+            Free to start. Pro unlocks the full library for a fixed period.
+            Renewal is manual—there are no automatic charges for the next
+            period.
+          </p>
+          <p className="mx-auto mt-3 max-w-lg text-sm text-muted-foreground">
+            <Link
+              href={siteConfig.legal.terms}
+              className="cursor-pointer font-medium text-foreground underline-offset-4 hover:underline"
+            >
+              Terms
+            </Link>
+            {" · "}
+            <Link
+              href={siteConfig.legal.privacy}
+              className="cursor-pointer font-medium text-foreground underline-offset-4 hover:underline"
+            >
+              Privacy
+            </Link>
+            {" · "}
+            <Link
+              href={siteConfig.legal.license}
+              className="cursor-pointer font-medium text-foreground underline-offset-4 hover:underline"
+            >
+              License
+            </Link>
+            {" · "}
+            <Link
+              href={siteConfig.legal.refund}
+              className="cursor-pointer font-medium text-foreground underline-offset-4 hover:underline"
+            >
+              Refunds
+            </Link>
           </p>
         </motion.header>
 
@@ -334,6 +374,51 @@ export function PricingView() {
           <React.Suspense fallback={null}>
             <CheckoutReturnBanner />
           </React.Suspense>
+        </div>
+
+        <div className="mx-auto mb-6 w-full max-w-6xl rounded-[12px] border border-border/70 bg-card p-4 shadow-soft sm:p-5">
+          <label className="flex cursor-pointer items-start gap-3 text-start text-sm leading-relaxed text-muted-foreground">
+            <input
+              type="checkbox"
+              checked={digitalConsent}
+              onChange={(e) => setDigitalConsent(e.target.checked)}
+              className="mt-1 size-4 shrink-0 cursor-pointer rounded border-border accent-primary"
+            />
+            <span>
+              I understand Pro is digital content delivered immediately after
+              payment confirmation, and that this may affect any applicable
+              withdrawal rights. This does not waive mandatory consumer rights.
+              I agree to the{" "}
+              <Link
+                href={siteConfig.legal.terms}
+                className="font-medium text-foreground underline-offset-4 hover:underline"
+              >
+                Terms
+              </Link>
+              ,{" "}
+              <Link
+                href={siteConfig.legal.privacy}
+                className="font-medium text-foreground underline-offset-4 hover:underline"
+              >
+                Privacy Policy
+              </Link>
+              ,{" "}
+              <Link
+                href={siteConfig.legal.license}
+                className="font-medium text-foreground underline-offset-4 hover:underline"
+              >
+                Pro License
+              </Link>
+              , and{" "}
+              <Link
+                href={siteConfig.legal.refund}
+                className="font-medium text-foreground underline-offset-4 hover:underline"
+              >
+                Refund Policy
+              </Link>
+              .
+            </span>
+          </label>
         </div>
 
         <ul className="mx-auto grid w-full max-w-6xl items-stretch gap-5 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
@@ -344,6 +429,7 @@ export function PricingView() {
               index={index}
               reduceMotion={reduceMotion}
               isSignedIn={Boolean(isSignedIn)}
+              digitalConsent={digitalConsent}
             />
           ))}
         </ul>

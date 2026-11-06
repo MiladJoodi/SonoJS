@@ -4,7 +4,6 @@ import { clerkClient } from "@clerk/nextjs/server"
 
 import {
   canAccess,
-  getEffectivePlanExpiresAt,
   getUserPlan,
   isProExpired,
   type ContentAccess,
@@ -12,9 +11,13 @@ import {
   type Viewer,
 } from "@/lib/access"
 import { getAuthUserId } from "@/lib/clerk-auth"
+import {
+  resolveEntitlement,
+  viewerFromEntitlement,
+} from "@/lib/entitlement"
 
 /**
- * Persist Free when Pro has passed `planExpiresAt`.
+ * Persist Free when Pro has passed `planExpiresAt` in Clerk metadata.
  * Safe to call repeatedly; no-ops if not expired.
  */
 export async function syncExpiredPlanToFree(
@@ -30,33 +33,45 @@ export async function syncExpiredPlanToFree(
     publicMetadata: {
       plan: "free",
       planExpiresAt: null,
+      planInterval: null,
     },
   })
   return { updated: true, plan: "free" }
 }
 
+async function healClerkMetadataToFree(userId: string): Promise<void> {
+  try {
+    const client = await clerkClient()
+    const user = await client.users.getUser(userId)
+    const metadata = user.publicMetadata
+    if (getUserPlan(metadata) !== "pro" && !isProExpired(metadata)) return
+    await client.users.updateUserMetadata(userId, {
+      publicMetadata: {
+        plan: "free",
+        planExpiresAt: null,
+        planInterval: null,
+      },
+    })
+  } catch (err) {
+    console.error("Failed to heal Clerk plan metadata to Free:", err)
+  }
+}
+
+/**
+ * Server viewer for authorization.
+ * Neon subscription + period end is authoritative for Pro; Clerk is UI cache.
+ */
 export async function getViewer(): Promise<Viewer> {
   const userId = await getAuthUserId()
   if (!userId) return { kind: "guest" }
 
-  // Prefer API user fetch - `currentUser()` also depends on middleware headers.
-  const client = await clerkClient()
-  const user = await client.users.getUser(userId)
-  const metadata = user.publicMetadata
-
-  if (isProExpired(metadata)) {
-    void syncExpiredPlanToFree(userId, metadata).catch((err) => {
-      console.error("Failed to sync expired Pro → Free:", err)
-    })
-    return { kind: "free", userId, planExpiresAt: null }
+  const entitlement = await resolveEntitlement(userId)
+  if (entitlement.kind === "pro") {
+    return viewerFromEntitlement(userId, entitlement)
   }
 
-  const plan = getUserPlan(metadata)
-  return {
-    kind: plan,
-    userId,
-    planExpiresAt: getEffectivePlanExpiresAt(metadata),
-  }
+  void healClerkMetadataToFree(userId)
+  return { kind: "free", userId, planExpiresAt: null }
 }
 
 export async function canAccessContent(

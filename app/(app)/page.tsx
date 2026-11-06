@@ -4,6 +4,7 @@ import {
   HomeHero,
   HomeIconsSection,
   HomeMcpSection,
+  HomeThreeDSection,
   HomeToolsSection,
 } from "@/components/home"
 import { JsonLd } from "@/components/seo/json-ld"
@@ -31,6 +32,7 @@ export default function HomePage() {
       <HomeHero />
       <HomeBlocksSection />
       <HomeChartsSection />
+      <HomeThreeDSection />
       <HomeIconsSection />
       <HomeToolsSection />
       <HomeMcpSection />

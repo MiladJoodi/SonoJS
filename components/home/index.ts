@@ -11,6 +11,7 @@ export {
   HomeChartStage,
   HomeCandlestickChart,
   HomeIconsSection,
+  HomeThreeDSection,
   HomeToolsSection,
   HomeMcpSection,
 } from "./sections"

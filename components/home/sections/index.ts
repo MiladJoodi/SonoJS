@@ -6,5 +6,6 @@ export {
   HomeCandlestickChart,
 } from "./charts"
 export { HomeIconsSection } from "./icons"
+export { HomeThreeDSection } from "./three-d"
 export { HomeToolsSection } from "./tools"
 export { HomeMcpSection } from "./mcp"

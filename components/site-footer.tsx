@@ -6,47 +6,52 @@ import { usePathname } from "next/navigation"
 import { siteConfig } from "@/lib/config"
 
 const footerLinks = [
-  { href: "/docs", label: "Docs" },
-  { href: "/docs/components", label: "Components" },
-  { href: "/blocks", label: "Blocks" },
-  { href: "/charts", label: "Charts" },
-  { href: "/3d", label: "3D" },
-  { href: "/ai", label: "AI" },
+  ...siteConfig.footerNavItems,
+  { href: siteConfig.legal.root, label: "Legal" },
+  {
+    href: siteConfig.links.telegram || siteConfig.links.contact,
+    label: "Contact",
+    external: Boolean(siteConfig.links.telegram),
+  },
 ] as const
 
 export function SiteFooter() {
   const pathname = usePathname()
-  if (pathname === "/" || pathname.startsWith("/tools/")) {
+  if (pathname.startsWith("/tools/")) {
     return null
   }
 
   return (
-    <footer className="border-t border-border/60 py-8">
-      <div className="workspace-shell flex flex-col items-center gap-4 text-sm text-muted-foreground">
+    <footer className="border-t border-border/60 py-10">
+      <div className="workspace-shell flex flex-col items-center gap-4 text-center text-sm text-muted-foreground">
         <nav
           aria-label="Footer"
-          className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2"
+          className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2"
         >
-          {footerLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="cursor-pointer transition-colors hover:text-foreground"
-            >
-              {link.label}
-            </Link>
-          ))}
-          <a
-            href={siteConfig.links.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="cursor-pointer transition-colors hover:text-foreground"
-          >
-            GitHub
-          </a>
+          {footerLinks.map((link) =>
+            "external" in link && link.external ? (
+              <a
+                key={link.href}
+                href={link.href}
+                className="cursor-pointer transition-colors hover:text-foreground"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {link.label}
+              </a>
+            ) : (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="cursor-pointer transition-colors hover:text-foreground"
+              >
+                {link.label}
+              </Link>
+            )
+          )}
         </nav>
-        <p className="text-center">
-          {siteConfig.name} - component library docs
+        <p>
+          © {new Date().getFullYear()} {siteConfig.name}
         </p>
       </div>
     </footer>

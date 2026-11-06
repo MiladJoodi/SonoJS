@@ -9,6 +9,7 @@ export {
 export { AiListIndex, AiSidebar } from "./ai-sidebar"
 export { BlocksListIndex, BlocksSidebar } from "./blocks-sidebar"
 export { ToolsListIndex, ToolsSidebar, ToolsSidebarToggle } from "./tools-sidebar"
+export { LegalListIndex, LegalSidebar } from "./legal-sidebar"
 export { ListIndexNav } from "./list-index-nav"
 export {
   matchesNavQuery,

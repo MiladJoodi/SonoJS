@@ -24,9 +24,9 @@ function formatDate(iso: string) {
 }
 
 function accessLabel(access: MarketplacePreviewDetail["access"]) {
-  if (access === "pro") return "Pro only"
+  if (access === "pro") return "Pro"
   if (access === "public") return "Everyone"
-  return "Free account"
+  return "Free (signed in)"
 }
 
 function SectionLabel({ children }: { children: ReactNode }) {

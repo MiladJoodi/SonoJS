@@ -190,7 +190,8 @@ export function BillingPanel({
         <CardHeader className="border-b border-border/50 py-6">
           <CardTitle>Subscription</CardTitle>
           <CardDescription>
-            Your current plan and renewal status.
+            Pro is sold as a fixed period. It does not auto-renew—buy again from
+            Pricing when access ends.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4 py-6">
@@ -206,18 +207,24 @@ export function BillingPanel({
                   </Badge>
                 </div>
                 <p className="text-sm text-muted-foreground">
-                  Current period ends {formatDate(sub.currentPeriodEnd)}
+                  Access through {formatDate(sub.currentPeriodEnd)}
                 </p>
                 {sub.cancelAtPeriodEnd ? (
                   <p className="text-sm text-muted-foreground">
-                    Cancels at the end of the billing period.
+                    No automatic renewal. After this date, Pro ends unless you
+                    purchase another period.
                   </p>
-                ) : null}
+                ) : (
+                  <p className="text-sm text-muted-foreground">
+                    Renew manually from Pricing when you want another period.
+                  </p>
+                )}
               </div>
             </div>
           ) : (
             <p className="text-sm text-muted-foreground">
-              You are on the free plan. Upgrade anytime to unlock Pro.
+              You are on Free. Upgrade anytime for a fixed Pro period—no
+              automatic renewal charges.
             </p>
           )}
           {portalError ? (
