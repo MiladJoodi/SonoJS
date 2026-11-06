@@ -25,6 +25,7 @@ export type MarketplacePreviewItem = {
   rating: number
   reviewCount: number
   priceLabel: string
+  priceCents: number
   href: string
   stack: MarketplaceStack[]
   updatedAt: string
@@ -111,6 +112,7 @@ export function toMarketplaceItem(
     rating: project.rating,
     reviewCount: project.reviewCount,
     priceLabel: project.priceLabel || "Free",
+    priceCents: project.priceCents ?? 0,
     href: `/marketplace/${project.slug}`,
     stack: project.stack,
     updatedAt: project.updatedAt,

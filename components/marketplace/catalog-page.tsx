@@ -2,16 +2,15 @@
 
 import * as React from "react"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
-import { FilterIcon } from "lucide-react"
 
+import { MarketplaceCategoryRail } from "@/components/marketplace/category-rail"
 import { MarketplaceFeaturedSection } from "@/components/marketplace/featured-section"
 import { MarketplaceHero } from "@/components/marketplace/hero"
 import { MarketplaceProductCard } from "@/components/marketplace/product-card"
 import {
   applyMarketplaceProductsFilter,
   EMPTY_PRODUCTS_FILTER,
-  MarketplaceProductsFilter,
-  MarketplaceProductsToolbar,
+  type MarketplacePriceKey,
   type MarketplaceProductsFilterState,
   type MarketplaceSortKey,
 } from "@/components/marketplace/products-filter"
@@ -20,7 +19,6 @@ import {
   type MarketplacePreviewItem,
 } from "@/lib/marketplace-preview-data"
 import type { MarketplaceCategory } from "@/lib/marketplace-catalog"
-import { cn } from "@/lib/utils"
 
 const CATEGORY_IDS = [
   "dashboard",
@@ -36,17 +34,26 @@ const CATEGORY_IDS = [
 ] as const satisfies readonly MarketplaceCategory[]
 
 function parseSortParam(raw: string | null): MarketplaceSortKey {
-  if (raw === "rating" || raw === "name") return raw
-  return "default"
+  if (raw === "popular" || raw === "recent" || raw === "featured") return raw
+  // Legacy query values
+  if (raw === "rating") return "popular"
+  if (raw === "name" || raw === "default") return "featured"
+  return "featured"
+}
+
+function parsePriceParam(raw: string | null): MarketplacePriceKey {
+  if (raw === "free" || raw === "paid") return raw
+  return "all"
 }
 
 function parseCategoryParam(raw: string | null): MarketplaceCategory[] {
   if (!raw) return []
   const set = new Set<string>(CATEGORY_IDS)
-  return raw
+  const first = raw
     .split(",")
     .map((s) => s.trim())
-    .filter((s): s is MarketplaceCategory => set.has(s))
+    .find((s): s is MarketplaceCategory => set.has(s))
+  return first ? [first] : []
 }
 
 function MarketplaceProductsSection({
@@ -54,9 +61,6 @@ function MarketplaceProductsSection({
   filters,
   setFilters,
   filtered,
-  filtersOpen,
-  setFiltersOpen,
-  activeFilterCount,
   resultsRef,
   resultsMinHeight,
 }: {
@@ -66,9 +70,6 @@ function MarketplaceProductsSection({
     React.SetStateAction<MarketplaceProductsFilterState>
   >
   filtered: MarketplacePreviewItem[]
-  filtersOpen: boolean
-  setFiltersOpen: React.Dispatch<React.SetStateAction<boolean>>
-  activeFilterCount: number
   resultsRef: React.RefObject<HTMLDivElement | null>
   resultsMinHeight: number | undefined
 }) {
@@ -85,45 +86,13 @@ function MarketplaceProductsSection({
             </span>
           </p>
         </div>
-
-        <button
-          type="button"
-          aria-label="Filters"
-          aria-expanded={filtersOpen}
-          onClick={() => setFiltersOpen((v) => !v)}
-          className={cn(
-            "inline-flex h-10 cursor-pointer items-center gap-1.5 rounded-full border px-3.5 text-[13px] font-medium",
-            filtersOpen || activeFilterCount > 0
-              ? "border-primary/40 bg-primary/10 text-primary"
-              : "border-[var(--sm-border)] bg-[var(--sm-bg-elevated)] text-[var(--sm-text)]"
-          )}
-        >
-          <FilterIcon className="size-3.5" aria-hidden />
-          Filters
-          <span
-            className={cn(
-              "flex size-5 items-center justify-center rounded-full text-[10px] font-bold tabular-nums",
-              activeFilterCount > 0
-                ? "bg-primary text-primary-foreground"
-                : "bg-transparent text-transparent"
-            )}
-            aria-hidden={activeFilterCount === 0}
-          >
-            {activeFilterCount || 0}
-          </span>
-        </button>
       </div>
 
-      {filtersOpen ? (
-        <MarketplaceProductsFilter
-          items={items}
-          value={filters}
-          onChange={setFilters}
-          className="max-w-md"
-        />
-      ) : null}
-
-      <MarketplaceProductsToolbar value={filters} onChange={setFilters} />
+      <MarketplaceCategoryRail
+        items={items}
+        value={filters}
+        onChange={setFilters}
+      />
 
       <div
         ref={resultsRef}
@@ -161,12 +130,11 @@ export function MarketplaceCatalogPage() {
   const [filters, setFilters] = React.useState<MarketplaceProductsFilterState>(
     () => ({
       ...EMPTY_PRODUCTS_FILTER,
-      q: searchParams.get("q") ?? "",
       categories: parseCategoryParam(searchParams.get("category")),
       sort: parseSortParam(searchParams.get("sort")),
+      price: parsePriceParam(searchParams.get("price")),
     })
   )
-  const [filtersOpen, setFiltersOpen] = React.useState(false)
 
   const filtered = React.useMemo(
     () => applyMarketplaceProductsFilter(items, filters),
@@ -192,16 +160,14 @@ export function MarketplaceCatalogPage() {
 
   React.useEffect(() => {
     const params = new URLSearchParams()
-    if (filters.q.trim()) params.set("q", filters.q.trim())
     if (filters.categories.length) {
-      params.set("category", filters.categories.join(","))
+      params.set("category", filters.categories[0])
     }
-    if (filters.sort !== "default") params.set("sort", filters.sort)
+    if (filters.sort !== "featured") params.set("sort", filters.sort)
+    if (filters.price !== "all") params.set("price", filters.price)
     const qs = params.toString()
     router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false })
   }, [filters, pathname, router])
-
-  const activeFilterCount = filters.categories.length
 
   return (
     <div
@@ -221,9 +187,6 @@ export function MarketplaceCatalogPage() {
             filters={filters}
             setFilters={setFilters}
             filtered={filtered}
-            filtersOpen={filtersOpen}
-            setFiltersOpen={setFiltersOpen}
-            activeFilterCount={activeFilterCount}
             resultsRef={resultsRef}
             resultsMinHeight={resultsMinHeight}
           />

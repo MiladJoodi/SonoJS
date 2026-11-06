@@ -9,6 +9,20 @@ import { cn } from "@/lib/utils"
 const coverImgClass =
   "pointer-events-none absolute inset-0 size-full select-none object-cover object-top transition-transform duration-500 group-hover/card:scale-[1.04] motion-reduce:transition-none motion-reduce:group-hover/card:scale-100"
 
+function prefersFineHover() {
+  return (
+    typeof window !== "undefined" &&
+    window.matchMedia("(hover: hover) and (pointer: fine)").matches
+  )
+}
+
+function prefersReducedMotion() {
+  return (
+    typeof window !== "undefined" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  )
+}
+
 export function MarketplaceProductCard({
   item,
   className,
@@ -21,26 +35,57 @@ export function MarketplaceProductCard({
   /** Above-the-fold covers use `eager`; default keeps below-fold lazy. */
   loading?: "eager" | "lazy"
 }) {
+  const articleRef = React.useRef<HTMLElement>(null)
   const videoRef = React.useRef<HTMLVideoElement>(null)
+  const [inViewPlaying, setInViewPlaying] = React.useState(false)
   const hoverVideo = Boolean(item.coverVideo && item.coverSrc)
 
   function playHoverVideo() {
-    if (!hoverVideo) return
+    if (!hoverVideo || !prefersFineHover()) return
     const video = videoRef.current
     if (!video) return
     void video.play().catch(() => {})
   }
 
   function stopHoverVideo() {
-    if (!hoverVideo) return
+    if (!hoverVideo || !prefersFineHover()) return
     const video = videoRef.current
     if (!video) return
     video.pause()
     video.currentTime = 0
   }
 
+  React.useEffect(() => {
+    if (!hoverVideo) return
+    if (prefersFineHover() || prefersReducedMotion()) return
+
+    const root = articleRef.current
+    const video = videoRef.current
+    if (!root || !video) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        const visible =
+          entry.isIntersecting && entry.intersectionRatio >= 0.45
+        if (visible) {
+          setInViewPlaying(true)
+          void video.play().catch(() => {})
+        } else {
+          setInViewPlaying(false)
+          video.pause()
+          video.currentTime = 0
+        }
+      },
+      { threshold: [0, 0.45, 0.75] }
+    )
+
+    observer.observe(root)
+    return () => observer.disconnect()
+  }, [hoverVideo, item.coverVideo])
+
   return (
     <article
+      ref={articleRef}
       className={cn(
         "group/card relative flex h-full flex-col overflow-hidden rounded-[1.15rem] border border-[var(--sm-border)] bg-[var(--sm-bg-elevated)] transition-[border-color] duration-200 hover:border-primary/35",
         className
@@ -97,7 +142,8 @@ export function MarketplaceProductCard({
                 draggable={false}
                 className={cn(
                   coverImgClass,
-                  "opacity-0 transition-opacity duration-200 group-hover/card:opacity-100"
+                  "opacity-0 transition-opacity duration-200 group-hover/card:opacity-100",
+                  inViewPlaying && "opacity-100"
                 )}
               />
             </>

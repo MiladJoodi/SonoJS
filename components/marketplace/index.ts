@@ -1,4 +1,5 @@
 export { MarketplaceCatalogPage } from "./catalog-page"
+export { MarketplaceCategoryRail } from "./category-rail"
 export { MarketplaceDetailGallery } from "./detail-gallery"
 export { MarketplaceDetailPage } from "./detail-page"
 export { MarketplaceDetailPurchase } from "./detail-purchase"
@@ -8,11 +9,11 @@ export { MarketplaceDownloadButton } from "./marketplace-download-button"
 export { MarketplaceProductCard } from "./product-card"
 export {
   MarketplaceProductsFilter,
-  MarketplaceProductsToolbar,
   applyMarketplaceProductsFilter,
   EMPTY_PRODUCTS_FILTER,
 } from "./products-filter"
 export type {
+  MarketplacePriceKey,
   MarketplaceProductsFilterState,
   MarketplaceSortKey,
 } from "./products-filter"
