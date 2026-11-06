@@ -53,7 +53,15 @@ export async function GET(_req: Request, context: RouteContext) {
   }
 
   if (project.downloadUrl) {
-    return NextResponse.redirect(project.downloadUrl)
+    // External hosts (e.g. Google Drive share page): return a URL for the
+    // client to open. A 302 + fetch()/blob would save HTML instead of opening.
+    return NextResponse.json(
+      { openUrl: project.downloadUrl },
+      {
+        status: 200,
+        headers: { "Cache-Control": "private, no-store" },
+      }
+    )
   }
 
   try {

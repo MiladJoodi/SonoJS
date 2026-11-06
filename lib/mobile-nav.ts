@@ -23,8 +23,8 @@ export function isMobileBottomNavMore(
 }
 
 /**
- * Primary tabs - usefulness-first for a UI kit.
- * Marketplace lives in More until the catalog is ready. Home lives in More.
+ * Primary tabs - Marketplace is the center tab.
+ * Home, AI, Cursors, 3D, Carousels, Tools live in More.
  */
 export const mobileBottomNav: MobileBottomNavItem[] = [
   {
@@ -34,7 +34,12 @@ export const mobileBottomNav: MobileBottomNavItem[] = [
     match: "prefix",
   },
   { id: "blocks", href: "/blocks", label: "Blocks", match: "prefix" },
-  { id: "ai", href: "/ai", label: "AI", match: "prefix" },
+  {
+    id: "marketplace",
+    href: "/marketplace",
+    label: "Marketplace",
+    match: "prefix",
+  },
   { id: "charts", href: "/charts", label: "Charts", match: "prefix" },
   { id: "more", label: "More" },
 ]

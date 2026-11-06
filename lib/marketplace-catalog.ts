@@ -9,6 +9,7 @@ export type MarketplaceCategory =
   | "crypto"
   | "fintech"
   | "hero"
+  | "portfolio"
 
 export type MarketplaceStack =
   | "nextjs"
@@ -129,6 +130,7 @@ export const MARKETPLACE_CATEGORY_LABEL: Record<MarketplaceCategory, string> = {
   crypto: "Crypto & Trading",
   fintech: "Fintech & Payments",
   hero: "Hero & Interaction",
+  portfolio: "Portfolio",
 }
 
 export const MARKETPLACE_STACK_LABEL: Record<MarketplaceStack, string> = {
@@ -792,7 +794,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
     accent: "265",
     enabled: true,
     access: "member",
-    badge: "new",
+    badge: null,
     coverVariant: "landing",
     coverImage:
       "/marketplace/projects/landing/sonojs-landing-03/main.webp",
@@ -1122,7 +1124,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
     accent: "32",
     enabled: true,
     access: "member",
-    badge: "new",
+    badge: null,
     coverVariant: "shop",
     coverImage: "/marketplace/projects/ecommerce/sonojs-ecommerce-01/main.webp",
     coverImageDark: null,
@@ -1167,6 +1169,382 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
   },
+  {
+    slug: "sonojs-portfolio-01",
+    title: "Jack",
+    tagline:
+      "Dark 3D-creator portfolio - hero, marquee, services, and project cases.",
+    description:
+      "Jack is a dark personal portfolio for a 3D creator by SonoJS. Built with Vite, React 19, TypeScript, Tailwind CSS 3, Framer Motion, and Lucide. You get a full-viewport hero (Hi, i'm jack + magnetic portrait), image marquee, about, services (3D Modeling, Rendering, Motion Design, Branding, Web Design), project cases (Nextlevel Studio, Aura Brand Identity, Solaris Digital), and a contact footer. Motion helpers include FadeIn, Magnet, and AnimatedText. Demo content only - no CMS backend. Static build ready for Cloudflare Workers or GitHub Pages.",
+    category: "portfolio",
+    stack: ["react", "vite", "typescript", "tailwind", "lucide"],
+    priceLabel: "Free",
+    priceCents: 0,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 200,
+    accent: "200",
+    enabled: true,
+    access: "member",
+    badge: null,
+    coverVariant: "landing",
+    coverImage: "/marketplace/projects/portfolio/sonojs-portfolio-01/main.webp",
+    coverImageDark: null,
+    coverVideo: "/marketplace/projects/portfolio/sonojs-portfolio-01/cover.mp4",
+    detailCoverImage:
+      "/marketplace/projects/portfolio/sonojs-portfolio-01/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-portfolio-01.winbeta-com.workers.dev/",
+    downloadUrl:
+      "https://drive.google.com/file/d/1nwcl6fmYZ008PSbbXC-QFdrPn14DRHE7/view?usp=drive_link",
+    version: "1.0.0",
+    updatedAt: "2026-11-06",
+    firstReleasedAt: "2026-11-06",
+    screens: 6,
+    highlights: [
+      {
+        title: "Hero with magnetic portrait",
+        body: "Giant Hi, i'm jack headline, magnet-follow portrait, and Contact CTA over a dark stage.",
+      },
+      {
+        title: "Services and cases",
+        body: "3D Modeling, Rendering, Motion, Branding, Web Design - plus three project case layouts.",
+      },
+      {
+        title: "Motion polish",
+        body: "Framer Motion FadeIn / AnimatedText and a Magnet pointer pull on the portrait.",
+      },
+      {
+        title: "Static and fork-ready",
+        body: "Vite build to dist/. Open the live preview or download and run locally.",
+      },
+    ],
+    includes: [
+      "Full Vite + React 19 + TypeScript source (Jack)",
+      "Hero, marquee, about, services, projects, footer sections",
+      "Framer Motion helpers (FadeIn, Magnet, AnimatedText)",
+      "Project and service demo data + local image assets",
+      "Static build ready for Cloudflare Workers or GitHub Pages",
+    ],
+    requirements: [
+      "Node.js 20 or newer",
+      "Vite 8",
+      "React 19",
+      "TypeScript 5",
+      "Tailwind CSS 3",
+      "Framer Motion (included in package.json)",
+    ],
+  },
+  {
+    slug: "sonojs-hero-04",
+    title: "Mossline",
+    tagline:
+      "Scroll-driven climate hero - Measure the Living Planet with video, fog, and HUD.",
+    description:
+      "Mossline is a scroll-storytelling marketing hero for a climate / earth-sensing brand by SonoJS. Built as a single HTML page with local CSS, fonts, WebP plates, and a fly-in MP4. A sticky stage (~640vh story) drives camera motion, mist, floating rocks, HUD telemetry, and the headline Measure the Living Planet. Progress bar, SCROLL TO EXPLORE hint, and glass product cards (field sensors, living species baselines) continue the narrative. Demo UI only - no backend. Open index.html or host the folder statically on Cloudflare Workers.",
+    category: "hero",
+    stack: ["html", "css", "javascript"],
+    priceLabel: "Free",
+    priceCents: 0,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 95,
+    accent: "95",
+    enabled: true,
+    access: "member",
+    badge: null,
+    coverVariant: "hero",
+    coverImage: "/marketplace/projects/hero/sonojs-hero-04/main.webp",
+    coverImageDark: null,
+    coverVideo: "/marketplace/projects/hero/sonojs-hero-04/cover.mp4",
+    detailCoverImage: "/marketplace/projects/hero/sonojs-hero-04/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-hero-04.winbeta-com.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-06",
+    firstReleasedAt: "2026-11-06",
+    screens: 1,
+    highlights: [
+      {
+        title: "Scroll-scrubbed stage",
+        body: "Sticky full-viewport camera stage over a long story scroll - video fly-in, mist, and rock layers.",
+      },
+      {
+        title: "Climate brand chrome",
+        body: "Mossline wordmark, lime chips, HUD crosshair, and Measure the Living Planet headline.",
+      },
+      {
+        title: "Sensor story cards",
+        body: "Glass cards for field sensors and living-species baselines continue after the hero stage.",
+      },
+      {
+        title: "Zero-build static",
+        body: "One index.html plus local fonts, WebP plates, and flyin.mp4 - deploy anywhere static.",
+      },
+    ],
+    includes: [
+      "index.html (complete scroll story + HUD UI)",
+      "assets/fonts (Inter Tight + JetBrains Mono)",
+      "assets/img (hero still/cutout, island, rocks, sensor)",
+      "assets/video/flyin.mp4",
+      "Fog, rock bob, progress bar, and explore hint motion",
+    ],
+    requirements: [
+      "Modern browser (CSS mask, sticky, canvas/video)",
+      "No build step - open index.html or static-host the folder",
+      "Optional: Cloudflare Workers / Pages for hosting",
+    ],
+  },
+  {
+    slug: "sonojs-hero-05",
+    title: "Planet Jumping",
+    tagline:
+      "Ubernatural planet hopper - portal jumps between Mars, Earth, Venus with video transitions.",
+    description:
+      "Planet Jumping is a full-viewport interactive space hero by SonoJS (demo brand Ubernatural). Built as a single HTML page with vanilla JS, local videos, and canvas FX. Start on Mars with a video preloader, pick the next world from a planet rail (Mercury through Neptune), and travel through a portal with to-earth / to-venus / to-mars MP4 transitions. Giant planet titles, fact blocks, custom cursor, floating logo, and a soft bottom shade keep the chrome cinematic. Demo UI only - no backend. Open index.html or host the folder statically on Cloudflare Workers.",
+    category: "hero",
+    stack: ["html", "css", "javascript"],
+    priceLabel: "Free",
+    priceCents: 0,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 18,
+    accent: "18",
+    enabled: true,
+    access: "member",
+    badge: null,
+    coverVariant: "hero",
+    coverImage: "/marketplace/projects/hero/sonojs-hero-05/main.webp",
+    coverImageDark: null,
+    coverVideo: "/marketplace/projects/hero/sonojs-hero-05/cover.mp4",
+    detailCoverImage: "/marketplace/projects/hero/sonojs-hero-05/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-hero-05.winbeta-com.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-07",
+    firstReleasedAt: "2026-11-07",
+    screens: 1,
+    highlights: [
+      {
+        title: "Portal planet jumps",
+        body: "Click the Next portal to travel - video transitions between Mars, Earth, Venus and more.",
+      },
+      {
+        title: "Full planet rail",
+        body: "Mercury through Neptune in a side list; active world drives title, facts, and next destination.",
+      },
+      {
+        title: "Cinematic chrome",
+        body: "Custom cursor, floating Ubernatural logo, preloader percent, and soft bottom shade.",
+      },
+      {
+        title: "Zero-build static",
+        body: "One index.html plus local videos, mercury still, and logo - deploy anywhere static.",
+      },
+    ],
+    includes: [
+      "index.html (complete planet-jump experience)",
+      "assets/mars-background.mp4, to-mars / to-earth / to-venus transitions",
+      "assets/mercury.jpg and assets/logo.svg",
+      "Custom cursor, portal canvas, planet facts UI",
+    ],
+    requirements: [
+      "Modern browser (video, canvas, CSS transitions)",
+      "No build step - open index.html or static-host the folder",
+      "Optional: Cloudflare Workers / Pages for hosting",
+    ],
+  },
+  {
+    slug: "sonojs-hero-06",
+    title: "SpaceEdu",
+    tagline:
+      "Education space hero - swap Earth, Venus, and Mars with video skies and course CTA.",
+    description:
+      "SpaceEdu is a full-viewport planet education hero by SonoJS. Built as a single HTML page with local fonts, stills, cutouts, and looping sky videos. Click the side planets to feature EARTH, VENUS, or MARS - the sky video crossfades, title and copy update, and GET STARTED drives enrollment. Nav covers Planets, Tuition, Tutorials, Blog, and Enroll. prefers-reduced-motion falls back to still skies. Demo UI only - no backend. Open index.html or host the folder statically on Cloudflare Workers.",
+    category: "hero",
+    stack: ["html", "css", "javascript"],
+    priceLabel: "Free",
+    priceCents: 0,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 195,
+    accent: "195",
+    enabled: true,
+    access: "member",
+    badge: null,
+    coverVariant: "hero",
+    coverImage: "/marketplace/projects/hero/sonojs-hero-06/main.webp",
+    coverImageDark: null,
+    coverVideo: "/marketplace/projects/hero/sonojs-hero-06/cover.mp4",
+    detailCoverImage: "/marketplace/projects/hero/sonojs-hero-06/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-hero-06.winbeta-com.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-07",
+    firstReleasedAt: "2026-11-07",
+    screens: 1,
+    highlights: [
+      {
+        title: "Clickable side planets",
+        body: "Swap the featured world between Earth, Venus, and Mars - title, copy, and sky update together.",
+      },
+      {
+        title: "Video sky stage",
+        body: "Looping planet sky videos with still fallbacks and reduced-motion support.",
+      },
+      {
+        title: "Course enrollment chrome",
+        body: "PLANET eyebrow, serif headline, enrollment blurb, and GET STARTED CTA.",
+      },
+      {
+        title: "Zero-build static",
+        body: "One index.html plus fonts, stills, cutouts, and sky videos - deploy anywhere static.",
+      },
+    ],
+    includes: [
+      "index.html (complete SpaceEdu hero)",
+      "assets/video (earth / mars / venus sky loops)",
+      "assets/still and assets/cutout planet art",
+      "assets/fonts (Prata, Hanken Grotesk, Poppins)",
+      "CREDITS.txt",
+    ],
+    requirements: [
+      "Modern browser (video, CSS custom properties)",
+      "No build step - open index.html or static-host the folder",
+      "Optional: Cloudflare Workers / Pages for hosting",
+    ],
+  },
+  {
+    slug: "sonojs-hero-07",
+    title: "Lumen Roof",
+    tagline:
+      "Solar farmhouse hero - Morning / Night toggle with $0 bills for 7 years.",
+    description:
+      "Lumen Roof is a full-viewport solar marketing hero by SonoJS. Built as a single HTML page with Instrument Sans, layered WebP skies/grounds/house cuts, and a WebGL fog canvas. A glass Morning / Night toggle crossfades the scene and ink colors while the headline promises $0 Electricity Bills for the next 7 Years. Nav, Get an Instant Quote CTA, and Smart Controller caption complete the chrome. prefers-reduced-motion softens the blend. Demo UI only - no backend. Open index.html or host the folder statically on Cloudflare Workers.",
+    category: "hero",
+    stack: ["html", "css", "javascript"],
+    priceLabel: "Free",
+    priceCents: 0,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 48,
+    accent: "48",
+    enabled: true,
+    access: "member",
+    badge: null,
+    coverVariant: "hero",
+    coverImage: "/marketplace/projects/hero/sonojs-hero-07/main.webp",
+    coverImageDark: null,
+    coverVideo: "/marketplace/projects/hero/sonojs-hero-07/cover.mp4",
+    detailCoverImage: "/marketplace/projects/hero/sonojs-hero-07/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-hero-07.winbeta-com.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-07",
+    firstReleasedAt: "2026-11-07",
+    screens: 1,
+    highlights: [
+      {
+        title: "Morning / Night toggle",
+        body: "One control crossfades sky, ground, house cutouts, and UI ink between day and dusk.",
+      },
+      {
+        title: "Layered solar scene",
+        body: "Blurred sky, masked ground, farmhouse with panels, tilt blur, and WebGL fog.",
+      },
+      {
+        title: "Zero-bill pitch",
+        body: "$0 Electricity Bills for 7 Years plus Smart Controller caption and quote CTA.",
+      },
+      {
+        title: "Zero-build static",
+        body: "One index.html plus Instrument Sans and six WebP plates - deploy anywhere static.",
+      },
+    ],
+    includes: [
+      "index.html (complete Lumen Roof hero)",
+      "assets/images (sky / ground / house morning + night WebP)",
+      "assets/fonts (Instrument Sans)",
+      "WebGL fog canvas and day/night blend logic",
+    ],
+    requirements: [
+      "Modern browser (CSS color-mix, backdrop-filter; WebGL2 optional for fog)",
+      "No build step - open index.html or static-host the folder",
+      "Optional: Cloudflare Workers / Pages for hosting",
+    ],
+  },
+  {
+    slug: "sonojs-landing-04",
+    title: "HUM One",
+    tagline:
+      "Silence, engineered - ANC headphone landing with 3D hero, anatomy, and pre-order.",
+    description:
+      "HUM One is a cinematic product landing for noise-cancelling headphones by SonoJS (demo brand HUM Audio, Rotterdam). Built as a static HTML / CSS / JS site with GSAP, Lenis, ScrollTrigger, and Three.js. An intro gate measures the room and quiets the page; the hero mounts a live 3D headset with poster fallback. Sections cover anatomy (cushions, drivers, band, repair), ANC modes (Open / Adaptive / Full quiet), three colourways (Graphite, Fog, Violet), voice quotes, and a Pre-order · €349 close. Demo marketing UI only - no cart backend. Open index.html or host the folder on Cloudflare Workers.",
+    category: "landing",
+    stack: ["html", "css", "javascript", "threejs"],
+    priceLabel: "Free",
+    priceCents: 0,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 172,
+    accent: "172",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "landing",
+    coverImage: "/marketplace/projects/landing/sonojs-landing-04/main.webp",
+    coverImageDark: null,
+    coverVideo: "/marketplace/projects/landing/sonojs-landing-04/cover.mp4",
+    detailCoverImage:
+      "/marketplace/projects/landing/sonojs-landing-04/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-landing-04.winbeta-com.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-07",
+    firstReleasedAt: "2026-11-07",
+    screens: 1,
+    highlights: [
+      {
+        title: "Quiet intro gate",
+        body: "Room dB meter and Put them on entry - the page gets quieter as you scroll.",
+      },
+      {
+        title: "3D headset hero",
+        body: "Three.js headphones with poster still until the live scene is ready.",
+      },
+      {
+        title: "Anatomy to pre-order",
+        body: "Cushions, drivers, band, repair grid, ANC modes, colours, voices, and €349 CTA.",
+      },
+      {
+        title: "Static and fork-ready",
+        body: "HTML + vendor GSAP / Lenis / Three - open locally or deploy to Workers.",
+      },
+    ],
+    includes: [
+      "index.html + css/style.css",
+      "js (main, headphones, quiet, waves) + GSAP / Lenis / Three vendors",
+      "3D headphones model and hero posters",
+      "Product photography WebP set (anatomy, modes, colours, voices)",
+      "Local fonts (Red Hat Display, Be Vietnam Pro, Cutiva Mono)",
+    ],
+    requirements: [
+      "Modern browser (WebGL for 3D hero; poster fallback without it)",
+      "No build step - open index.html or static-host the folder",
+      "Optional: Cloudflare Workers / Pages for hosting",
+    ],
+  },
 ]
 
 export function getMarketplaceProject(
@@ -1201,6 +1579,7 @@ export function listMarketplaceCategories(): MarketplaceCategory[] {
     "crypto",
     "fintech",
     "hero",
+    "portfolio",
   ]
 }
 

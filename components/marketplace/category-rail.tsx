@@ -45,6 +45,7 @@ const RAIL_CATEGORY_LABEL: Record<MarketplaceCategory, string> = {
   crypto: "Crypto",
   fintech: "Fintech",
   hero: "Hero",
+  portfolio: "Portfolio",
 }
 
 const PRICE_OPTIONS: { key: MarketplacePriceKey; label: string }[] = [

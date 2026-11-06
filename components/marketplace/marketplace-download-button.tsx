@@ -49,7 +49,7 @@ export function MarketplaceDownloadButton({
       return `Buy ${project.priceLabel}`
     }
     if (access === "pro") return "Upgrade to Pro"
-    return "Sign in to download"
+    return "Sign in"
   })()
 
   /** Zip comes from Pro registry via slug (or optional external downloadUrl). */
@@ -70,15 +70,24 @@ export function MarketplaceDownloadButton({
     if (loading) return
     setLoading(true)
     setError(null)
+
+    // Open blank tab during the click gesture so popup blockers allow
+    // external hosts (Google Drive share page) after the auth check.
+    const externalTab = project.downloadUrl
+      ? window.open("about:blank", "_blank")
+      : null
+
     try {
       const res = await fetch(href, { credentials: "same-origin" })
 
       if (res.status === 401 || res.status === 403) {
+        externalTab?.close()
         handleDenied()
         return
       }
 
       if (res.status === 404) {
+        externalTab?.close()
         let code: string | undefined
         try {
           const body = (await res.json()) as { code?: string }
@@ -95,6 +104,7 @@ export function MarketplaceDownloadButton({
       }
 
       if (!res.ok) {
+        externalTab?.close()
         let message = `Download failed (${res.status}).`
         try {
           const body = (await res.json()) as { error?: string }
@@ -108,10 +118,24 @@ export function MarketplaceDownloadButton({
 
       const contentType = res.headers.get("content-type") ?? ""
       if (contentType.includes("application/json")) {
-        const body = (await res.json()) as { error?: string }
+        const body = (await res.json()) as {
+          error?: string
+          openUrl?: string
+        }
+        if (body.openUrl) {
+          if (externalTab) {
+            externalTab.location.href = body.openUrl
+          } else {
+            window.open(body.openUrl, "_blank", "noopener,noreferrer")
+          }
+          return
+        }
+        externalTab?.close()
         setError(body.error ?? "Download failed.")
         return
       }
+
+      externalTab?.close()
 
       const blob = await res.blob()
       const disposition = res.headers.get("Content-Disposition")
@@ -129,6 +153,7 @@ export function MarketplaceDownloadButton({
       a.remove()
       URL.revokeObjectURL(url)
     } catch {
+      externalTab?.close()
       setError("Download failed.")
     } finally {
       setLoading(false)

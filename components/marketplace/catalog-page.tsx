@@ -31,6 +31,7 @@ const CATEGORY_IDS = [
   "crypto",
   "fintech",
   "hero",
+  "portfolio",
 ] as const satisfies readonly MarketplaceCategory[]
 
 function parseSortParam(raw: string | null): MarketplaceSortKey {

@@ -42,7 +42,7 @@ import {
 const TAB_ICONS: Record<string, LucideIcon> = {
   components: LayoutGridIcon,
   blocks: LayoutTemplateIcon,
-  ai: SparklesIcon,
+  marketplace: StoreIcon,
   charts: ChartAreaIcon,
   more: EllipsisIcon,
 }
@@ -51,10 +51,10 @@ const MORE_ICONS: Record<string, LucideIcon> = {
   "/": HouseIcon,
   "/docs": BookOpenIcon,
   "/docs/mcp": PlugIcon,
+  "/ai": SparklesIcon,
   "/cursors": MousePointer2Icon,
   "/3d": BoxIcon,
   "/carousels": GalleryHorizontalEndIcon,
-  "/marketplace": StoreIcon,
   "/tools": WrenchIcon,
   "https://icons.sonojs.com": ShapesIcon,
 }
