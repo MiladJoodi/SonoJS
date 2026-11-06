@@ -15,7 +15,14 @@ export function LegalPage({
   className?: string
 }) {
   return (
-    <article className={cn("w-full min-w-0 space-y-3 pb-16", className)}>
+    <article
+      className={cn(
+        "w-full min-w-0 space-y-3",
+        /* Room so short/late TOC targets can scroll under the sticky header. */
+        "pb-[min(45vh,22rem)]",
+        className
+      )}
+    >
       <DocsPageHeader
         title={title}
         pathname={pathname}

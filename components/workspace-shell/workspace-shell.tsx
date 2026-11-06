@@ -3,7 +3,10 @@
 import * as React from "react"
 
 import { SIDEBAR_LAYOUT_MAIN_CLASS } from "@/components/sidebar-nav"
-import { WorkspaceOfferRail } from "@/components/workspace-offer-rail"
+import {
+  WorkspaceOfferRail,
+  type WorkspaceOfferRailMode,
+} from "@/components/workspace-offer-rail"
 import { cn } from "@/lib/utils"
 import { SidebarProvider } from "@sonojs/ui/components/sidebar"
 
@@ -20,11 +23,13 @@ function WorkspaceShellInner({
   children,
   providerClassName,
   showOfferRail = true,
+  offerRailMode = "full",
 }: {
   sidebar: React.ReactNode
   children: React.ReactNode
   providerClassName?: string
   showOfferRail?: boolean
+  offerRailMode?: WorkspaceOfferRailMode
 }) {
   const { rightOpen, toggleRight, headerActionsMounted } = useWorkspacePanels()
   const [motion, setMotion] = React.useState(false)
@@ -82,7 +87,13 @@ function WorkspaceShellInner({
 
       {showOfferRail ? (
         <div
-          className="hidden shrink-0 overflow-hidden xl:block"
+          className={cn(
+            "hidden shrink-0 xl:block",
+            /* Same sticky pattern as the left sidebar — overflow-hidden breaks sticky. */
+            "sticky top-[calc(var(--header-height)+0.6rem)] self-start",
+            "max-h-[calc(100svh-var(--header-height)-2rem)]",
+            rightOpen ? "overflow-x-hidden overflow-y-auto" : "overflow-hidden"
+          )}
           style={{
             width: rightOpen ? "var(--offer-rail-width)" : "0px",
             marginInlineStart: rightOpen ? "var(--sidebar-content-gap)" : "0px",
@@ -91,7 +102,7 @@ function WorkspaceShellInner({
           }}
         >
           <div className="w-(--offer-rail-width) min-w-(--offer-rail-width)">
-            <WorkspaceOfferRail />
+            <WorkspaceOfferRail mode={offerRailMode} />
           </div>
         </div>
       ) : null}
@@ -108,12 +119,15 @@ export function WorkspaceShell({
   listIndex,
   providerClassName,
   showOfferRail = true,
+  offerRailMode = "full",
 }: {
   sidebar: React.ReactNode
   children: React.ReactNode
   listIndex?: React.ReactNode
   providerClassName?: string
   showOfferRail?: boolean
+  /** `toc` = On this page + contribute only (no offer card). */
+  offerRailMode?: WorkspaceOfferRailMode
 }) {
   return (
     <div className="flex flex-1 flex-col">
@@ -124,6 +138,7 @@ export function WorkspaceShell({
             sidebar={sidebar}
             providerClassName={providerClassName}
             showOfferRail={showOfferRail}
+            offerRailMode={offerRailMode}
           >
             {children}
           </WorkspaceShellInner>

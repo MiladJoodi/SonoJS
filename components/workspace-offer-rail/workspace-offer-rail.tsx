@@ -30,18 +30,24 @@ const MEMBER_FEATURES = [
   "Star the repo to support us",
 ]
 
+export type WorkspaceOfferRailMode = "full" | "toc"
+
 /**
- * Desktop-only offer rail on workspace layouts (docs, blocks, charts, 3d,
- * carousels, ai, cursors, marketplace). Guests → free account; members → welcome.
+ * Desktop-only right rail on workspace layouts.
+ * - `full`: offer card + on-this-page + contribute (docs, blocks, …)
+ * - `toc`: on-this-page + contribute only (legal pages)
  */
 export function WorkspaceOfferRail({
   className,
   speed = 0.9,
+  mode = "full",
 }: {
   className?: string
   /** Meteor lap speed - same control as offer-card-01. */
   speed?: number
+  mode?: WorkspaceOfferRailMode
 }) {
+  const tocOnly = mode === "toc"
   const { isLoaded, isSignedIn } = useAuth()
   const initialSignedIn = useSignedInHint()
   const signedIn = isLoaded ? Boolean(isSignedIn) : initialSignedIn
@@ -57,99 +63,111 @@ export function WorkspaceOfferRail({
   return (
     <aside
       className={cn(OFFER_RAIL_CLASS, className)}
-      aria-label={isMember ? "Member welcome" : "Free account offer"}
+      aria-label={
+        tocOnly
+          ? "On this page"
+          : isMember
+            ? "Member welcome"
+            : "Free account offer"
+      }
     >
       <div className="w-full max-w-[300px] [&_h3]:text-lg [&_h3]:font-extrabold [&_h3]:leading-snug [&_h3]:tracking-tight [&_h3_span]:font-extrabold">
-        {isMember ? (
-          <OfferCard
-            speed={speed}
-            badge="You're in"
-            eyebrow="Keep"
-            headlineItalic="Shipping"
-            headlinePrefix="with"
-            productName="SonoJS"
-            description={
-              <>
-                Your free account is ready. Browse the library, install with the
-                CLI, or wire up{" "}
-                <span className="font-semibold text-foreground">MCP</span> in
-                your editor.
-              </>
-            }
-            features={MEMBER_FEATURES}
-            price="Free"
-            compareAt=""
-            tier="MEMBER"
-            ctaLabel="Star on GitHub"
-            ctaHref={siteConfig.links.github}
-            trustLead="Thanks for"
-            trustHighlight="joining"
-            trustTrail="the builders"
-          />
-        ) : (
-          <OfferCard
-            speed={speed}
-            badge="Free forever"
-            eyebrow="Start"
-            headlineItalic="Building"
-            headlinePrefix="with"
-            productName="SonoJS"
-            description={
-              <>
-                Create a free account and unlock{" "}
-                <span className="font-semibold text-foreground">everything</span>{" "}
-                - components, blocks, charts, and tools.{" "}
-                <span className="font-semibold text-foreground">
-                  No credit card
-                </span>
-                .
-              </>
-            }
-            features={FREE_FEATURES}
-            price="$0"
-            compareAt=""
-            tier="FREE"
-            ctaLabel="Create free account"
-            onCtaClick={() => {
-              setAuthMode("sign-up")
-              setAuthOpen(true)
-            }}
-            trustLead="Trusted by"
-            trustHighlight="builders"
-            trustTrail="shipping free"
-          />
-        )}
-        {isMember ? (
-          <p className="mt-2.5 text-center text-[11px] text-muted-foreground">
-            New here? Try{" "}
-            <a
-              href="/docs/mcp"
-              className="cursor-pointer font-semibold text-foreground underline-offset-2 hover:underline"
-            >
-              MCP setup
-            </a>
-          </p>
-        ) : (
-          <p className="mt-2.5 text-center text-[11px] text-muted-foreground">
-            Already have an account?{" "}
-            <button
-              type="button"
-              className="cursor-pointer font-semibold text-foreground underline-offset-2 hover:underline"
-              onClick={() => {
-                setAuthMode("sign-in")
-                setAuthOpen(true)
-              }}
-            >
-              Sign in
-            </button>
-          </p>
-        )}
+        {!tocOnly ? (
+          <>
+            {isMember ? (
+              <OfferCard
+                speed={speed}
+                badge="You're in"
+                eyebrow="Keep"
+                headlineItalic="Shipping"
+                headlinePrefix="with"
+                productName="SonoJS"
+                description={
+                  <>
+                    Your free account is ready. Browse the library, install with
+                    the CLI, or wire up{" "}
+                    <span className="font-semibold text-foreground">MCP</span>{" "}
+                    in your editor.
+                  </>
+                }
+                features={MEMBER_FEATURES}
+                price="Free"
+                compareAt=""
+                tier="MEMBER"
+                ctaLabel="Star on GitHub"
+                ctaHref={siteConfig.links.github}
+                trustLead="Thanks for"
+                trustHighlight="joining"
+                trustTrail="the builders"
+              />
+            ) : (
+              <OfferCard
+                speed={speed}
+                badge="Free forever"
+                eyebrow="Start"
+                headlineItalic="Building"
+                headlinePrefix="with"
+                productName="SonoJS"
+                description={
+                  <>
+                    Create a free account and unlock{" "}
+                    <span className="font-semibold text-foreground">
+                      everything
+                    </span>{" "}
+                    - components, blocks, charts, and tools.{" "}
+                    <span className="font-semibold text-foreground">
+                      No credit card
+                    </span>
+                    .
+                  </>
+                }
+                features={FREE_FEATURES}
+                price="$0"
+                compareAt=""
+                tier="FREE"
+                ctaLabel="Create free account"
+                onCtaClick={() => {
+                  setAuthMode("sign-up")
+                  setAuthOpen(true)
+                }}
+                trustLead="Trusted by"
+                trustHighlight="builders"
+                trustTrail="shipping free"
+              />
+            )}
+            {isMember ? (
+              <p className="mt-2.5 text-center text-[11px] text-muted-foreground">
+                New here? Try{" "}
+                <a
+                  href="/docs/mcp"
+                  className="cursor-pointer font-semibold text-foreground underline-offset-2 hover:underline"
+                >
+                  MCP setup
+                </a>
+              </p>
+            ) : (
+              <p className="mt-2.5 text-center text-[11px] text-muted-foreground">
+                Already have an account?{" "}
+                <button
+                  type="button"
+                  className="cursor-pointer font-semibold text-foreground underline-offset-2 hover:underline"
+                  onClick={() => {
+                    setAuthMode("sign-in")
+                    setAuthOpen(true)
+                  }}
+                >
+                  Sign in
+                </button>
+              </p>
+            )}
+          </>
+        ) : null}
 
-        <WorkspaceOnThisPage />
+        <WorkspaceOnThisPage className={tocOnly ? "mt-0 border-t-0 pt-0" : undefined} />
         <WorkspaceContribute />
       </div>
 
-      {!isMember ? (
+      {!tocOnly && !isMember ? (
         <AuthDialog
           open={authOpen}
           onOpenChange={setAuthOpen}

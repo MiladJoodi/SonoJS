@@ -974,6 +974,73 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Tailwind CSS 4",
     ],
   },
+  {
+    slug: "sonojs-hero-02",
+    title: "Juicy",
+    tagline:
+      "3D juice can carousel - scroll to spin, flavour themes, floating fruit, water ripple.",
+    description:
+      "Juicy is an interactive juice product showcase by SonoJS. Built with Next.js 15, React 19, Tailwind CSS 4, React Three Fiber, and Three.js. A wheel of four juice cans turns with the mouse wheel, arrow keys, or buttons, and the page takes on the colours of the flavour in front (Lemon Ginger, Blueberry Açai, Mango Burst, Raspberry Rosé). Floating fruit, ice and leaves, a pointer water ripple, and a phone layout are included. Sign-in and cart are demo UI only - no backend. Static build ready for GitHub Pages.",
+    category: "hero",
+    stack: ["nextjs", "react", "tailwind", "typescript", "threejs"],
+    priceLabel: "Free",
+    priceCents: 0,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 42,
+    accent: "42",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "hero",
+    coverImage: "/marketplace/projects/hero/sonojs-hero-02/main.webp",
+    coverImageDark: null,
+    coverVideo: "/marketplace/projects/hero/sonojs-hero-02/cover.mp4",
+    detailCoverImage: "/marketplace/projects/hero/sonojs-hero-02/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs.github.io/sonojs-hero-02/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-06",
+    firstReleasedAt: "2026-11-06",
+    screens: 1,
+    highlights: [
+      {
+        title: "3D can wheel",
+        body: "Four juice cans on a React Three Fiber carousel - spin with wheel, keys, or buttons.",
+      },
+      {
+        title: "Theme per flavour",
+        body: "Background, glow, and chrome shift with Lemon Ginger, Blueberry Açai, Mango Burst, or Raspberry Rosé.",
+      },
+      {
+        title: "Scene polish",
+        body: "Floating fruit, ice, leaves, and a pointer water ripple keep the showcase lively.",
+      },
+      {
+        title: "Static and fork-ready",
+        body: "Open the live preview or download and run locally. GitHub Pages export included.",
+      },
+    ],
+    includes: [
+      "Full Next.js 15 + React 19 + TypeScript source (Juicy)",
+      "3D carousel (Three.js, @react-three/fiber, @react-three/drei)",
+      "Flavour themes, floating fruit, ice/leaf decor, water ripple",
+      "Demo sign-in form and cart panel (no backend)",
+      "Responsive phone layout",
+      "Static build ready for GitHub Pages",
+    ],
+    requirements: [
+      "Node.js 22 or newer (or Docker)",
+      "Next.js 15",
+      "React 19",
+      "Tailwind CSS 4",
+      "TypeScript 5",
+      "Yarn 4 (Corepack) or npm",
+      "Three.js / React Three Fiber (included in package.json)",
+    ],
+  },
 ]
 
 export function getMarketplaceProject(

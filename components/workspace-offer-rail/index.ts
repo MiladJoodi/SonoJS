@@ -1,3 +1,6 @@
 export { WorkspaceContribute } from "./contribute"
 export { WorkspaceOnThisPage } from "./on-this-page"
-export { WorkspaceOfferRail } from "./workspace-offer-rail"
+export {
+  WorkspaceOfferRail,
+  type WorkspaceOfferRailMode,
+} from "./workspace-offer-rail"

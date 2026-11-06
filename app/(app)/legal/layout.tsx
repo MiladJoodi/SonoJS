@@ -10,7 +10,7 @@ export default function LegalLayout({
     <WorkspaceShell
       listIndex={<LegalListIndex />}
       sidebar={<LegalSidebar />}
-      showOfferRail={false}
+      offerRailMode="toc"
       providerClassName="[--top-spacing:var(--space-4)] lg:[--top-spacing:var(--space-4)]"
     >
       {children}

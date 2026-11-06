@@ -1,3 +1,6 @@
+import { readFile } from "node:fs/promises"
+import path from "node:path"
+
 import { AccessGate } from "@/components/access/access-gate"
 import {
   ComponentSource,
@@ -6,7 +9,6 @@ import {
   DocsPageHeader,
 } from "@/components/docs"
 import { ProArchiveDownload } from "@/components/pro"
-import { canAccessContent } from "@/lib/access-server"
 import { withVariantCode } from "@/lib/docs-variant-examples"
 import {
   getProComponentSource,
@@ -34,32 +36,38 @@ export function Example() {
   return <ProButton>Primary</ProButton>
 }`
 
-async function loadProMeta() {
+async function readProButtonSource() {
+  return readFile(
+    path.join(process.cwd(), "components/pro/pro-button.tsx"),
+    "utf8"
+  )
+}
+
+async function loadProArchive() {
   try {
     const source = await getProComponentSource("pro-button")
-    return { ok: true as const, source }
-  } catch (err) {
-    if (err instanceof ProComponentNotFoundError) {
-      return { ok: false as const, error: err.message }
-    }
-    if (err instanceof GitHubProApiError) {
-      return { ok: false as const, error: err.message }
-    }
+    if (!source.archive) return null
     return {
-      ok: false as const,
-      error: err instanceof Error ? err.message : "Failed to load Pro meta",
+      filename: source.archive.split("/").pop() ?? "archive.zip",
+      name: source.name,
     }
+  } catch (err) {
+    if (
+      err instanceof ProComponentNotFoundError ||
+      err instanceof GitHubProApiError
+    ) {
+      return null
+    }
+    return null
   }
 }
 
 export default async function ProButtonDocsPage() {
-  const examples = await withVariantCode(exampleDefs)
-  const canViewSource = await canAccessContent("pro")
-  const loaded = canViewSource ? await loadProMeta() : null
-  const archiveName =
-    loaded?.ok && loaded.source.archive
-      ? (loaded.source.archive.split("/").pop() ?? "archive.zip")
-      : "archive.zip"
+  const [examples, source, archive] = await Promise.all([
+    withVariantCode(exampleDefs),
+    readProButtonSource(),
+    loadProArchive(),
+  ])
 
   return (
     <article className="w-full min-w-0 space-y-10">
@@ -68,11 +76,12 @@ export default async function ProButtonDocsPage() {
         pathname="/docs/components/pro-button"
         description={
           <p className="leading-relaxed text-muted-foreground">
-            Test Pro component - download the ready zip from the private{" "}
+            Test Pro component - preview is public; source is Pro-gated. Optional
+            zip download when an archive is set in{" "}
             <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
               sonojs-pro
-            </code>{" "}
-            registry (manual install, no CLI).
+            </code>
+            .
           </p>
         }
       />
@@ -81,36 +90,30 @@ export default async function ProButtonDocsPage() {
         <ComponentVariantPreview examples={examples} />
       </section>
 
-      <section className="space-y-3">
-        <h2 className="text-h3">Installation</h2>
-        <AccessGate access="pro">
-          {loaded?.ok && loaded.source.archive ? (
+      {archive ? (
+        <section className="space-y-3">
+          <h2 className="text-h3">Installation</h2>
+          <AccessGate access="pro">
             <ProArchiveDownload
               slug="pro-button"
-              filename={archiveName}
-              title={loaded.source.name}
+              filename={archive.filename}
+              title={archive.name}
             />
-          ) : (
-            <div className="sono-code-block px-4 py-3 font-mono text-[14px] leading-[1.65] text-(--code-header-fg)">
-              <p className="text-(--code-fg)">Could not resolve Pro archive</p>
-              <p className="mt-1">
-                {loaded && !loaded.ok
-                  ? loaded.error
-                  : "Registry entry has no archive field."}
-              </p>
-            </div>
-          )}
-        </AccessGate>
-      </section>
+          </AccessGate>
+        </section>
+      ) : null}
 
       <section className="space-y-3">
         <h2 className="text-h3">Usage</h2>
         <AccessGate access="pro">
-          <ComponentSource
-            title="pro-button.tsx"
-            lang="tsx"
-            code={usageSource}
-          />
+          <ComponentSource title="usage.tsx" lang="tsx" code={usageSource} />
+        </AccessGate>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-h3">Source</h2>
+        <AccessGate access="pro">
+          <ComponentSource title="pro-button.tsx" lang="tsx" code={source} />
         </AccessGate>
       </section>
 

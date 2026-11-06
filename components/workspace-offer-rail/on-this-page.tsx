@@ -39,6 +39,15 @@ function headerOffsetPx() {
   return header + 20
 }
 
+/** Brief flash so short/nearby sections still feel like navigation. */
+function flashHeading(el: HTMLElement) {
+  el.classList.remove("sono-toc-flash")
+  // Force reflow so re-adding the class restarts the animation.
+  void el.offsetWidth
+  el.classList.add("sono-toc-flash")
+  window.setTimeout(() => el.classList.remove("sono-toc-flash"), 900)
+}
+
 function ensureId(el: HTMLElement, fallback: string) {
   if (!el.id) {
     const base = slugify(el.textContent || fallback) || fallback
@@ -256,14 +265,11 @@ export function WorkspaceOnThisPage({ className }: { className?: string }) {
                         window.clearTimeout(unlockTimerRef.current)
                       }
 
-                      const top =
-                        window.scrollY +
-                        el.getBoundingClientRect().top -
-                        headerOffsetPx()
-                      window.scrollTo({
-                        top: Math.max(0, top),
-                        behavior: "smooth",
-                      })
+                      // Prefer scroll-margin on the heading (scrollIntoView).
+                      // Short nearby sections may barely move — still flash so
+                      // the jump is obvious.
+                      el.scrollIntoView({ behavior: "smooth", block: "start" })
+                      flashHeading(el)
                       history.replaceState(null, "", `#${item.id}`)
 
                       // Keep the clicked item after smooth-scroll. Scroll handler
