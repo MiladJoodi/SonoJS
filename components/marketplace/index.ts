@@ -5,10 +5,6 @@ export { MarketplaceDetailPurchase } from "./detail-purchase"
 export { MarketplaceFeaturedSection } from "./featured-section"
 export { MarketplaceHero } from "./hero"
 export { MarketplaceDownloadButton } from "./marketplace-download-button"
-export {
-  MarketplaceOfferColumn,
-  useMarketplaceOfferRail,
-} from "./marketplace-offer-column"
 export { MarketplaceProductCard } from "./product-card"
 export {
   MarketplaceProductsFilter,

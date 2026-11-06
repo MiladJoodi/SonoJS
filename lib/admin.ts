@@ -44,6 +44,17 @@ export async function isAdminEmail(email: string | null | undefined): Promise<bo
   return parseAdminEmails().has(email.trim().toLowerCase())
 }
 
+/** True when the signed-in Clerk user is listed in ADMIN_EMAILS. */
+export async function isCurrentUserAdmin(): Promise<boolean> {
+  try {
+    await requireAdmin()
+    return true
+  } catch (err) {
+    if (err instanceof AdminAuthError) return false
+    throw err
+  }
+}
+
 /**
  * Require a signed-in Clerk user whose primary email is listed in ADMIN_EMAILS.
  */

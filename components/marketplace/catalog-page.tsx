@@ -4,10 +4,6 @@ import * as React from "react"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { FilterIcon } from "lucide-react"
 
-import {
-  MarketplaceOfferColumn,
-  useMarketplaceOfferRail,
-} from "@/components/marketplace/marketplace-offer-column"
 import { MarketplaceFeaturedSection } from "@/components/marketplace/featured-section"
 import { MarketplaceHero } from "@/components/marketplace/hero"
 import { MarketplaceProductCard } from "@/components/marketplace/product-card"
@@ -19,11 +15,6 @@ import {
   type MarketplaceProductsFilterState,
   type MarketplaceSortKey,
 } from "@/components/marketplace/products-filter"
-import {
-  useWorkspacePanels,
-  WorkspacePanelToggle,
-  WorkspacePanelsProvider,
-} from "@/components/workspace-shell"
 import {
   getMarketplacePreviewItems,
   type MarketplacePreviewItem,
@@ -81,10 +72,6 @@ function MarketplaceProductsSection({
   resultsRef: React.RefObject<HTMLDivElement | null>
   resultsMinHeight: number | undefined
 }) {
-  const showOfferRail = useMarketplaceOfferRail()
-  const { rightOpen, toggleRight } = useWorkspacePanels()
-  const offerOpen = showOfferRail && rightOpen
-
   return (
     <>
       <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
@@ -126,13 +113,7 @@ function MarketplaceProductsSection({
         </button>
       </div>
 
-      <div
-        className={cn(
-          "grid gap-6 lg:grid-cols-[240px_minmax(0,1fr)] lg:items-start lg:gap-8 xl:grid-cols-[260px_minmax(0,1fr)]",
-          offerOpen &&
-            "xl:grid-cols-[260px_minmax(0,1fr)_var(--offer-rail-width)]"
-        )}
-      >
+      <div className="grid gap-6 lg:grid-cols-[240px_minmax(0,1fr)] lg:items-start lg:gap-8 xl:grid-cols-[260px_minmax(0,1fr)]">
         <div
           className={cn(mobileFiltersOpen ? "block" : "hidden", "lg:block")}
         >
@@ -146,14 +127,6 @@ function MarketplaceProductsSection({
         </div>
 
         <div className="relative min-w-0 space-y-4">
-          {showOfferRail ? (
-            <div className="absolute end-0 top-0 z-20">
-              <WorkspacePanelToggle
-                open={rightOpen}
-                onToggle={toggleRight}
-              />
-            </div>
-          ) : null}
           <MarketplaceProductsToolbar value={filters} onChange={setFilters} />
 
           <div
@@ -164,12 +137,7 @@ function MarketplaceProductsSection({
                 : undefined
             }
           >
-            <div
-              className={cn(
-                "grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3",
-                offerOpen ? "xl:grid-cols-3" : "xl:grid-cols-4"
-              )}
-            >
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {filtered.map((item: MarketplacePreviewItem, index: number) => (
                 <MarketplaceProductCard
                   key={item.slug}
@@ -185,8 +153,6 @@ function MarketplaceProductsSection({
             ) : null}
           </div>
         </div>
-
-        {offerOpen ? <MarketplaceOfferColumn /> : null}
       </div>
     </>
   )
@@ -256,19 +222,17 @@ export function MarketplaceCatalogPage() {
 
       <div className="mx-auto w-full max-w-[1600px] px-4 pb-6 sm:px-6 lg:px-8 lg:pb-8">
         <section id="marketplace-all" className="scroll-mt-24">
-          <WorkspacePanelsProvider>
-            <MarketplaceProductsSection
-              items={items}
-              filters={filters}
-              setFilters={setFilters}
-              filtered={filtered}
-              mobileFiltersOpen={mobileFiltersOpen}
-              setMobileFiltersOpen={setMobileFiltersOpen}
-              activeFilterCount={activeFilterCount}
-              resultsRef={resultsRef}
-              resultsMinHeight={resultsMinHeight}
-            />
-          </WorkspacePanelsProvider>
+          <MarketplaceProductsSection
+            items={items}
+            filters={filters}
+            setFilters={setFilters}
+            filtered={filtered}
+            mobileFiltersOpen={mobileFiltersOpen}
+            setMobileFiltersOpen={setMobileFiltersOpen}
+            activeFilterCount={activeFilterCount}
+            resultsRef={resultsRef}
+            resultsMinHeight={resultsMinHeight}
+          />
         </section>
       </div>
     </div>

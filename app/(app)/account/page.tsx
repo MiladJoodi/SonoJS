@@ -3,6 +3,7 @@ import { Suspense } from "react"
 import { redirect } from "next/navigation"
 
 import { AccountSettings } from "@/components/auth/account-settings"
+import { isCurrentUserAdmin } from "@/lib/admin"
 import { getAuthUserId } from "@/lib/clerk-auth"
 import { Spinner } from "@sonojs/ui/components/spinner"
 
@@ -16,6 +17,8 @@ export default async function AccountPage() {
   const userId = await getAuthUserId()
   if (!userId) redirect("/sign-in")
 
+  const showAdminLink = await isCurrentUserAdmin()
+
   return (
     <Suspense
       fallback={
@@ -24,7 +27,7 @@ export default async function AccountPage() {
         </div>
       }
     >
-      <AccountSettings />
+      <AccountSettings showAdminLink={showAdminLink} />
     </Suspense>
   )
 }

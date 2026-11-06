@@ -3,6 +3,7 @@
 import * as React from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { useReverification, useUser } from "@clerk/nextjs"
+import { isReverificationCancelledError } from "@clerk/nextjs/errors"
 import {
   CheckIcon,
   CreditCardIcon,
@@ -16,6 +17,10 @@ import {
 } from "lucide-react"
 
 import { AccountIdentityHero, BillingPanel } from "@/components/auth/account"
+import {
+  ReverificationDialog,
+  type ReverificationRequest,
+} from "@/components/auth/reverification-dialog"
 import { usePlanDisplay } from "@/hooks/use-plan-display"
 import { cn } from "@/lib/utils"
 import { GithubIcon } from "@/registry/icons/github"
@@ -152,7 +157,14 @@ function StatusMessage({
   )
 }
 
-export function AccountSettings({ className }: { className?: string }) {
+export function AccountSettings({
+  className,
+  showAdminLink = false,
+}: {
+  className?: string
+  /** Server-checked: primary email is in ADMIN_EMAILS. */
+  showAdminLink?: boolean
+}) {
   const { isLoaded, isSignedIn, user } = useUser()
   const router = useRouter()
   const searchParams = useSearchParams()
@@ -190,6 +202,17 @@ export function AccountSettings({ className }: { className?: string }) {
 
   const [profileHydrated, setProfileHydrated] = React.useState(false)
   const emailReloadAttempted = React.useRef(false)
+  const [reverifyRequest, setReverifyRequest] =
+    React.useState<ReverificationRequest | null>(null)
+
+  const reverifyOptions = React.useMemo(
+    () => ({
+      onNeedsReverification: (properties: ReverificationRequest) => {
+        setReverifyRequest(properties)
+      },
+    }),
+    []
+  )
 
   const updatePassword = useReverification(
     (params: {
@@ -202,10 +225,11 @@ export function AccountSettings({ className }: { className?: string }) {
           : {}),
         newPassword: params.newPassword,
         signOutOfOtherSessions: true,
-      })
+      }),
+    reverifyOptions
   )
 
-  const deleteUser = useReverification(() => user?.delete())
+  const deleteUser = useReverification(() => user?.delete(), reverifyOptions)
 
   React.useEffect(() => {
     if (!user) return
@@ -343,6 +367,7 @@ export function AccountSettings({ className }: { className?: string }) {
       setNewPassword("")
       setConfirmPassword("")
     } catch (err) {
+      if (isReverificationCancelledError(err)) return
       setPasswordError(
         err instanceof Error ? err.message : "Could not update password."
       )
@@ -400,14 +425,17 @@ export function AccountSettings({ className }: { className?: string }) {
       await deleteUser()
       router.replace("/")
     } catch (err) {
-      setDeleteError(
-        err instanceof Error ? err.message : "Could not delete account."
-      )
+      if (!isReverificationCancelledError(err)) {
+        setDeleteError(
+          err instanceof Error ? err.message : "Could not delete account."
+        )
+      }
       setDeleteBusy(false)
     }
   }
 
   return (
+    <>
     <main
       className={cn(
         "w-full min-w-0 bg-canvas py-8 text-foreground sm:py-10",
@@ -425,6 +453,7 @@ export function AccountSettings({ className }: { className?: string }) {
           expiryLabel={planExpiryLabel}
           planLoading={planLoading}
           avatarBusy={profileBusy}
+          showAdminLink={showAdminLink}
           onPickAvatar={(file) => void onAvatarFile(file)}
           onRemoveAvatar={() => void removeAvatar()}
         />
@@ -744,5 +773,10 @@ export function AccountSettings({ className }: { className?: string }) {
         </Tabs>
       </div>
     </main>
+    <ReverificationDialog
+      request={reverifyRequest}
+      onDismiss={() => setReverifyRequest(null)}
+    />
+    </>
   )
 }

@@ -1,11 +1,13 @@
 "use client"
 
 import Link from "next/link"
+import { LayoutDashboardIcon } from "lucide-react"
 
 import { AccountAvatarEditor } from "@/components/auth/account/avatar-editor"
 import { PlanIcon } from "@/components/icons/plan/plan-icon"
 import type { PlanId } from "@/components/pricing/pricing-data"
 import { cn } from "@/lib/utils"
+import { Button } from "@sonojs/ui/components/button"
 import { Spinner } from "@sonojs/ui/components/spinner"
 
 /**
@@ -23,6 +25,7 @@ export function AccountIdentityHero({
   expiryLabel,
   planLoading,
   avatarBusy,
+  showAdminLink = false,
   onPickAvatar,
   onRemoveAvatar,
 }: {
@@ -35,6 +38,8 @@ export function AccountIdentityHero({
   expiryLabel: string | null
   planLoading?: boolean
   avatarBusy?: boolean
+  /** From server: email is in ADMIN_EMAILS. */
+  showAdminLink?: boolean
   onPickAvatar: (file: File) => void
   onRemoveAvatar: () => void
 }) {
@@ -59,6 +64,19 @@ export function AccountIdentityHero({
               <p className="truncate text-sm text-muted-foreground" dir="ltr">
                 {email}
               </p>
+            ) : null}
+            {showAdminLink ? (
+              <Button
+                asChild
+                variant="outline"
+                size="sm"
+                className="mt-2 h-8 cursor-pointer shadow-none"
+              >
+                <Link href="/admin">
+                  <LayoutDashboardIcon className="size-3.5" aria-hidden />
+                  Admin
+                </Link>
+              </Button>
             ) : null}
           </div>
         </div>

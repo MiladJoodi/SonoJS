@@ -9,6 +9,8 @@ export { AccountIdentityHero } from "./account"
 export { AccountSettings } from "./account-settings"
 export { AuthDialog } from "./auth-dialog"
 export type { AuthDialogMode } from "./auth-dialog"
+export { ReverificationDialog } from "./reverification-dialog"
+export type { ReverificationRequest } from "./reverification-dialog"
 export {
   SignedInHintProvider,
   useSignedInHint,
