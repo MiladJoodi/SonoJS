@@ -17,29 +17,12 @@ import { cn } from "@/lib/utils"
 import { Button } from "@sonojs/ui/components/button"
 import { Input } from "@sonojs/ui/components/input"
 import { Label } from "@sonojs/ui/components/label"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@sonojs/ui/components/select"
 import { Spinner } from "@sonojs/ui/components/spinner"
 import { Textarea } from "@sonojs/ui/components/textarea"
-
-const TOPIC_OPTIONS = [
-  { value: "billing", label: "Billing & payments" },
-  { value: "pro", label: "Pro access" },
-  { value: "partnership", label: "Partnership" },
-  { value: "other", label: "Something else" },
-] as const
-
-type TopicValue = (typeof TOPIC_OPTIONS)[number]["value"]
 
 export function ContactForm({ className }: { className?: string }) {
   const [name, setName] = React.useState("")
   const [email, setEmail] = React.useState("")
-  const [topic, setTopic] = React.useState<TopicValue | "">("")
   const [message, setMessage] = React.useState("")
   const [honeypot, setHoneypot] = React.useState("")
   const [busy, setBusy] = React.useState(false)
@@ -60,7 +43,6 @@ export function ContactForm({ className }: { className?: string }) {
         body: JSON.stringify({
           name,
           email,
-          topic: topic || undefined,
           message,
           company: honeypot,
         }),
@@ -76,7 +58,6 @@ export function ContactForm({ className }: { className?: string }) {
       setSent(true)
       setName("")
       setEmail("")
-      setTopic("")
       setMessage("")
     } catch {
       setError("Could not send. Try again.")
@@ -165,33 +146,6 @@ export function ContactForm({ className }: { className?: string }) {
             disabled={busy}
             className="shadow-none"
           />
-        </div>
-
-        <div className="grid gap-1.5">
-          <Label htmlFor="contact-topic">Topic</Label>
-          <Select
-            value={topic || undefined}
-            onValueChange={(v) => setTopic(v as TopicValue)}
-            disabled={busy}
-          >
-            <SelectTrigger
-              id="contact-topic"
-              className="h-[46px] w-full cursor-pointer shadow-none"
-            >
-              <SelectValue placeholder="Optional" />
-            </SelectTrigger>
-            <SelectContent>
-              {TOPIC_OPTIONS.map((opt) => (
-                <SelectItem
-                  key={opt.value}
-                  value={opt.value}
-                  className="cursor-pointer"
-                >
-                  {opt.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
         </div>
 
         <div className="grid gap-1.5">

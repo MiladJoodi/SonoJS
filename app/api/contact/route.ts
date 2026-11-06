@@ -36,24 +36,9 @@ function isValidEmail(value: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
 }
 
-const TOPIC_LABELS: Record<string, string> = {
-  billing: "Billing & payments",
-  pro: "Pro access",
-  partnership: "Partnership",
-  other: "Something else",
-}
-
-function normalizeTopic(value: unknown): string | null {
-  if (typeof value !== "string") return null
-  const key = value.trim()
-  if (!key || !(key in TOPIC_LABELS)) return null
-  return TOPIC_LABELS[key]!
-}
-
 async function sendViaResend(input: {
   name: string
   email: string
-  topic: string | null
   message: string
   ip: string
 }): Promise<{ ok: true } | { ok: false; error: string }> {
@@ -66,18 +51,14 @@ async function sendViaResend(input: {
   }
 
   const resend = new Resend(apiKey)
-  const subject = input.topic
-    ? `SonoJS contact — ${input.topic} — ${input.name}`
-    : `SonoJS contact — ${input.name}`
   const { error } = await resend.emails.send({
     from,
     to: [to],
     replyTo: input.email,
-    subject,
+    subject: `SonoJS contact — ${input.name}`,
     text: [
       `Name: ${input.name}`,
       `Email: ${input.email}`,
-      ...(input.topic ? [`Topic: ${input.topic}`] : []),
       `IP: ${input.ip}`,
       "",
       input.message,
@@ -141,7 +122,6 @@ export async function POST(req: NextRequest) {
 
   const name = typeof data.name === "string" ? data.name.trim() : ""
   const email = typeof data.email === "string" ? data.email.trim() : ""
-  const topic = normalizeTopic(data.topic)
   const message = typeof data.message === "string" ? data.message.trim() : ""
 
   if (!name || name.length > MAX_NAME) {
@@ -169,7 +149,6 @@ export async function POST(req: NextRequest) {
       "",
       `Name: ${name}`,
       `Email: ${email}`,
-      ...(topic ? [`Topic: ${topic}`] : []),
       `IP: ${ip}`,
       "",
       message,
@@ -185,7 +164,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ok: true })
   }
 
-  const emailResult = await sendViaResend({ name, email, topic, message, ip })
+  const emailResult = await sendViaResend({ name, email, message, ip })
   if (!emailResult.ok) {
     return NextResponse.json(
       { ok: false, error: emailResult.error },
