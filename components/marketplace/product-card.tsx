@@ -1,5 +1,6 @@
 "use client"
 
+import * as React from "react"
 import Link from "next/link"
 
 import type { MarketplacePreviewItem } from "@/lib/marketplace-preview-data"
@@ -20,12 +21,32 @@ export function MarketplaceProductCard({
   /** Above-the-fold covers use `eager`; default keeps below-fold lazy. */
   loading?: "eager" | "lazy"
 }) {
+  const videoRef = React.useRef<HTMLVideoElement>(null)
+  const hoverVideo = Boolean(item.coverVideo && item.coverSrc)
+
+  function playHoverVideo() {
+    if (!hoverVideo) return
+    const video = videoRef.current
+    if (!video) return
+    void video.play().catch(() => {})
+  }
+
+  function stopHoverVideo() {
+    if (!hoverVideo) return
+    const video = videoRef.current
+    if (!video) return
+    video.pause()
+    video.currentTime = 0
+  }
+
   return (
     <article
       className={cn(
         "group/card relative flex h-full flex-col overflow-hidden rounded-[1.15rem] border border-[var(--sm-border)] bg-[var(--sm-bg-elevated)] transition-[border-color] duration-200 hover:border-primary/35",
         className
       )}
+      onMouseEnter={playHoverVideo}
+      onMouseLeave={stopHoverVideo}
     >
       <Link
         href={item.href}
@@ -41,7 +62,46 @@ export function MarketplaceProductCard({
             size === "featured" ? "aspect-[16/11]" : "aspect-[16/10.5]"
           )}
         >
-          {item.coverVideo ? (
+          {hoverVideo ? (
+            <>
+              {/* eslint-disable-next-line @next/next/no-img-element -- theme pair under /public */}
+              <img
+                src={item.coverSrc}
+                alt=""
+                draggable={false}
+                loading={loading}
+                decoding="async"
+                className={cn(
+                  coverImgClass,
+                  item.coverSrcDark ? "dark:hidden" : null
+                )}
+              />
+              {item.coverSrcDark ? (
+                // eslint-disable-next-line @next/next/no-img-element -- theme pair under /public
+                <img
+                  src={item.coverSrcDark}
+                  alt=""
+                  draggable={false}
+                  loading={loading}
+                  decoding="async"
+                  className={cn(coverImgClass, "hidden dark:block")}
+                />
+              ) : null}
+              <video
+                ref={videoRef}
+                src={item.coverVideo!}
+                muted
+                loop
+                playsInline
+                preload="none"
+                draggable={false}
+                className={cn(
+                  coverImgClass,
+                  "opacity-0 transition-opacity duration-200 group-hover/card:opacity-100"
+                )}
+              />
+            </>
+          ) : item.coverVideo ? (
             <video
               src={item.coverVideo}
               muted

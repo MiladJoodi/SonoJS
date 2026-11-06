@@ -91,8 +91,9 @@ export type MarketplaceProject = {
   /** Catalog card cover (dark) - file: cover-dark.webp */
   coverImageDark?: string | null
   /**
-   * Catalog / detail cover video - file: cover.mp4 (muted loop).
-   * When set, UI prefers video over still covers.
+   * Catalog / detail cover video - file: cover.mp4 (muted).
+   * With a still cover: catalog card plays on hover.
+   * Video-only: catalog autoplays. Detail gallery prefers video when set.
    */
   coverVideo?: string | null
   /** Detail-page hero (light) - file: main-light.webp; falls back to coverImage */
@@ -723,7 +724,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
     accent: "42",
     enabled: true,
     access: "member",
-    badge: "new",
+    badge: null,
     coverVariant: "landing",
     coverImage:
       "/marketplace/projects/landing/sonojs-landing-02/cover-light.webp",
@@ -771,6 +772,75 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Tailwind CSS 4.1",
       "TypeScript 5.9",
       "pnpm (or npm) to install and run",
+    ],
+  },
+  {
+    slug: "sonojs-landing-03",
+    title: "Aether",
+    tagline:
+      "Cinematic AI SaaS landing - WebGL hero, Lenis scroll, pricing and FAQ.",
+    description:
+      "Aether is a premium AI/SaaS landing page template built by SonoJS. It uses Next.js 16, React 19, Tailwind CSS 4, Three.js, Framer Motion, and Lenis to create a polished, interactive experience. The page includes a WebGL hero section, logo marquee, product features, how it works, a live studio showcase, pricing, FAQ, and footer CTAs. It uses Syne and DM Sans for typography, with customizable accent colors and a centralized site config for managing content. The hero animation loads on the client, pauses when out of view, and respects reduced-motion preferences. There’s no backend, authentication, or CMS to set up. The template is also easy to customize, fork, and deploy to GitHub Pages.",
+    category: "landing",
+    stack: ["nextjs", "react", "tailwind", "typescript", "threejs"],
+    priceLabel: "Free",
+    priceCents: 0,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 265,
+    accent: "265",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "landing",
+    coverImage:
+      "/marketplace/projects/landing/sonojs-landing-03/main.webp",
+    coverImageDark: null,
+    coverVideo:
+      "/marketplace/projects/landing/sonojs-landing-03/cover.mp4",
+    detailCoverImage:
+      "/marketplace/projects/landing/sonojs-landing-03/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs.github.io/sonojs-landing-03/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-06",
+    firstReleasedAt: "2026-11-06",
+    screens: 1,
+    highlights: [
+      {
+        title: "WebGL hero that sells the product",
+        body: "Interactive Three.js scene via React Three Fiber - cinematic first impression without a generic kit look.",
+      },
+      {
+        title: "One-page SaaS story",
+        body: "Hero, logos, features, steps, showcase, pricing, and FAQ share one Aether brand system.",
+      },
+      {
+        title: "Motion with restraint",
+        body: "Framer Motion + Lenis smooth scroll; the canvas pauses when off-screen and respects reduced motion.",
+      },
+      {
+        title: "Edit content in one file",
+        body: "Brand name, copy, pricing, and FAQ live in content/site.ts - swap the demo brand before you ship.",
+      },
+    ],
+    includes: [
+      "Full Next.js 16 + React 19 + TypeScript source (Aether)",
+      "WebGL hero (Three.js, @react-three/fiber, @react-three/drei)",
+      "Landing sections: logos, features, steps, showcase, pricing, FAQ",
+      "Framer Motion, Lenis, Tailwind CSS 4, Syne + DM Sans",
+      "Central content config (content/site.ts)",
+      "Static-friendly build for GitHub Pages",
+    ],
+    requirements: [
+      "Node.js 20 or newer",
+      "Next.js 16",
+      "React 19",
+      "Tailwind CSS 4",
+      "TypeScript 5",
+      "Three.js / React Three Fiber (included in package.json)",
     ],
   },
   {

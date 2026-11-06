@@ -152,6 +152,8 @@ export function getMarketplacePreviewDetail(
     ...base,
     coverSrc: cover,
     coverSrcDark: coverDark,
+    // Detail gallery uses stills (main.webp). Cover video is catalog-card only.
+    coverVideo: cover ? null : base.coverVideo,
     description: project.description,
     version: project.version,
     liveUrl: project.liveUrl,
