@@ -1,6 +1,7 @@
 import { ClerkProvider } from "@clerk/nextjs"
 import type { Metadata } from "next"
-import { Geist, Geist_Mono } from "next/font/google"
+import { GeistMono } from "geist/font/mono"
+import { GeistSans } from "geist/font/sans"
 import { Analytics } from "@vercel/analytics/next"
 
 import {
@@ -19,20 +20,9 @@ import { PRODUCTION_ORIGIN } from "@/lib/site-origin"
 
 import "./globals.css"
 
-const geistSans = Geist({
-  variable: "--font-sono-sans",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-  display: "swap",
-  adjustFontFallback: true,
-})
-
-const geistMono = Geist_Mono({
-  variable: "--font-sono-mono",
-  subsets: ["latin"],
-  display: "swap",
-  adjustFontFallback: true,
-})
+/** Local Geist (not next/font/google) - avoids Turbopack Google Fonts URL flakes. */
+const geistSans = GeistSans
+const geistMono = GeistMono
 
 const indexing = isProductionIndexingEnabled()
 

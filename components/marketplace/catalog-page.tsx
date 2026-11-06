@@ -54,8 +54,8 @@ function MarketplaceProductsSection({
   filters,
   setFilters,
   filtered,
-  mobileFiltersOpen,
-  setMobileFiltersOpen,
+  filtersOpen,
+  setFiltersOpen,
   activeFilterCount,
   resultsRef,
   resultsMinHeight,
@@ -66,15 +66,15 @@ function MarketplaceProductsSection({
     React.SetStateAction<MarketplaceProductsFilterState>
   >
   filtered: MarketplacePreviewItem[]
-  mobileFiltersOpen: boolean
-  setMobileFiltersOpen: React.Dispatch<React.SetStateAction<boolean>>
+  filtersOpen: boolean
+  setFiltersOpen: React.Dispatch<React.SetStateAction<boolean>>
   activeFilterCount: number
   resultsRef: React.RefObject<HTMLDivElement | null>
   resultsMinHeight: number | undefined
 }) {
   return (
-    <>
-      <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
+    <div className="space-y-4">
+      <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
           <h2 className="text-lg font-bold tracking-tight text-[var(--sm-text)] sm:text-xl">
             All products
@@ -89,16 +89,17 @@ function MarketplaceProductsSection({
         <button
           type="button"
           aria-label="Filters"
-          aria-expanded={mobileFiltersOpen}
-          onClick={() => setMobileFiltersOpen((v) => !v)}
+          aria-expanded={filtersOpen}
+          onClick={() => setFiltersOpen((v) => !v)}
           className={cn(
-            "inline-flex h-10 cursor-pointer items-center gap-1.5 rounded-full border px-3.5 text-[13px] font-medium lg:hidden",
-            mobileFiltersOpen || activeFilterCount > 0
+            "inline-flex h-10 cursor-pointer items-center gap-1.5 rounded-full border px-3.5 text-[13px] font-medium",
+            filtersOpen || activeFilterCount > 0
               ? "border-primary/40 bg-primary/10 text-primary"
               : "border-[var(--sm-border)] bg-[var(--sm-bg-elevated)] text-[var(--sm-text)]"
           )}
         >
           <FilterIcon className="size-3.5" aria-hidden />
+          Filters
           <span
             className={cn(
               "flex size-5 items-center justify-center rounded-full text-[10px] font-bold tabular-nums",
@@ -113,48 +114,41 @@ function MarketplaceProductsSection({
         </button>
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-[240px_minmax(0,1fr)] lg:items-start lg:gap-8 xl:grid-cols-[260px_minmax(0,1fr)]">
-        <div
-          className={cn(mobileFiltersOpen ? "block" : "hidden", "lg:block")}
-        >
-          <div className="lg:sticky lg:top-24">
-            <MarketplaceProductsFilter
-              items={items}
-              value={filters}
-              onChange={setFilters}
+      {filtersOpen ? (
+        <MarketplaceProductsFilter
+          items={items}
+          value={filters}
+          onChange={setFilters}
+          className="max-w-md"
+        />
+      ) : null}
+
+      <MarketplaceProductsToolbar value={filters} onChange={setFilters} />
+
+      <div
+        ref={resultsRef}
+        style={
+          resultsMinHeight && filtered.length < items.length
+            ? { minHeight: resultsMinHeight }
+            : undefined
+        }
+      >
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
+          {filtered.map((item: MarketplacePreviewItem, index: number) => (
+            <MarketplaceProductCard
+              key={item.slug}
+              item={item}
+              loading={index < 6 ? "eager" : "lazy"}
             />
-          </div>
+          ))}
         </div>
-
-        <div className="relative min-w-0 space-y-4">
-          <MarketplaceProductsToolbar value={filters} onChange={setFilters} />
-
-          <div
-            ref={resultsRef}
-            style={
-              resultsMinHeight && filtered.length < items.length
-                ? { minHeight: resultsMinHeight }
-                : undefined
-            }
-          >
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              {filtered.map((item: MarketplacePreviewItem, index: number) => (
-                <MarketplaceProductCard
-                  key={item.slug}
-                  item={item}
-                  loading={index < 4 ? "eager" : "lazy"}
-                />
-              ))}
-            </div>
-            {filtered.length === 0 ? (
-              <p className="py-12 text-center text-[14px] text-[var(--sm-text-faint)]">
-                Nothing matches these filters.
-              </p>
-            ) : null}
-          </div>
-        </div>
+        {filtered.length === 0 ? (
+          <p className="py-12 text-center text-[14px] text-[var(--sm-text-faint)]">
+            Nothing matches these filters.
+          </p>
+        ) : null}
       </div>
-    </>
+    </div>
   )
 }
 
@@ -172,7 +166,7 @@ export function MarketplaceCatalogPage() {
       sort: parseSortParam(searchParams.get("sort")),
     })
   )
-  const [mobileFiltersOpen, setMobileFiltersOpen] = React.useState(false)
+  const [filtersOpen, setFiltersOpen] = React.useState(false)
 
   const filtered = React.useMemo(
     () => applyMarketplaceProductsFilter(items, filters),
@@ -220,15 +214,15 @@ export function MarketplaceCatalogPage() {
         <MarketplaceFeaturedSection items={items} />
       </div>
 
-      <div className="mx-auto w-full max-w-[1600px] px-4 pb-6 sm:px-6 lg:px-8 lg:pb-8">
+      <div className="w-full px-4 pb-6 sm:px-6 lg:px-8 lg:pb-8">
         <section id="marketplace-all" className="scroll-mt-24">
           <MarketplaceProductsSection
             items={items}
             filters={filters}
             setFilters={setFilters}
             filtered={filtered}
-            mobileFiltersOpen={mobileFiltersOpen}
-            setMobileFiltersOpen={setMobileFiltersOpen}
+            filtersOpen={filtersOpen}
+            setFiltersOpen={setFiltersOpen}
             activeFilterCount={activeFilterCount}
             resultsRef={resultsRef}
             resultsMinHeight={resultsMinHeight}

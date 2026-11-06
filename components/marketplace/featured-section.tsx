@@ -74,7 +74,7 @@ export function MarketplaceFeaturedSection({
       id="marketplace-browse"
       className={cn("w-full scroll-mt-24", className)}
     >
-      <div className="mx-auto mb-4 flex w-full max-w-[1600px] items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
+      <div className="mb-4 flex w-full items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
         <h2 className="min-w-0 shrink truncate text-lg font-bold tracking-tight text-[var(--sm-text)] sm:text-xl">
           <span aria-hidden className="me-2">
             🔥

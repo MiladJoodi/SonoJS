@@ -51,6 +51,7 @@
     "clsx": "^2.1.1",
     "cobe": "^0.6.5",
     "drizzle-orm": "^0.45.4",
+    "geist": "^1.9.2",
     "highcharts": "^13.1.1",
     "highcharts-react-official": "^3.2.3",
     "lodash": "^4.18.1",
