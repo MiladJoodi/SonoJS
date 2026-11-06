@@ -40,6 +40,17 @@ npm run stripe:listen
 
 Put the CLI `whsec_…` in `.env.local` as `STRIPE_WEBHOOK_SECRET`. Requires `STRIPE_SECRET_KEY` (`sk_test_…`) and Neon `plans.stripe_price_id` for Checkout.
 
+### Admin plan dashboard
+
+Grant/revoke complimentary Pro without editing Neon by hand:
+
+```bash
+# .env.local — your Clerk primary email(s), comma-separated
+ADMIN_EMAILS=you@example.com
+```
+
+Restart `npm run dev`, sign in with that email, open `/admin`.
+
 **Ops reprocess (unlinked invoice only):** if an `invoice.paid` was ACK'd as `processed` with an `unlinked_invoice` audit note and the Subscription later has `metadata.clerkUserId`, reclaim is **not** done by Stripe retries (idempotency unchanged). Use:
 
 ```bash

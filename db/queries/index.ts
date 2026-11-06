@@ -9,6 +9,13 @@ export {
   resolveBillingUser,
 } from "./users"
 export {
+  listUsersWithPlan,
+  grantManualPro,
+  revokeToFree,
+  type AdminPlanSlug,
+  type AdminUserRow,
+} from "./admin-billing"
+export {
   listActivePlans,
   getPlanBySlug,
   getPlanById,
