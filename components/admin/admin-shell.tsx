@@ -34,7 +34,8 @@ export function AdminShell({
         </div>
         <nav className="flex flex-wrap gap-1.5" aria-label="Admin sections">
           {NAV.map((item) => {
-            const active = item.exact
+            const exact = "exact" in item && item.exact
+            const active = exact
               ? pathname === item.href
               : pathname === item.href || pathname.startsWith(`${item.href}/`)
             return (
