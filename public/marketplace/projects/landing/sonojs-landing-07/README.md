@@ -1,0 +1,28 @@
+# Melli - marketplace assets
+
+Package: Melli (`1.0.0`) - HTML · CSS · JavaScript · Three.js  
+Category: `landing`  
+Slug / folder: `sonojs-landing-07`  
+Path: `public/marketplace/projects/landing/sonojs-landing-07/`  
+Source: `E:\dl\prompt\18`
+
+3D motion academy scroll landing. Demo brand: **Melli** / **Melli_Motion**.
+
+## Images / video
+
+| File | Purpose |
+|---|---|
+| `main.webp` | Catalog card poster + detail page hero |
+| `cover.mp4` | Catalog card only — plays on hover / in-view on mobile |
+
+## Live / package
+
+- Demo: https://sonojs-landing-07.winbeta-com.workers.dev/
+- Source: `E:\dl\prompt\18`
+- Zip: `products/landing/sonojs-landing-07/sonojs-landing-07.zip`
+
+## Access
+
+- Live preview: public
+- Download: `member` (signed-in free)
+- Zip via Pro registry slug `sonojs-landing-07`
