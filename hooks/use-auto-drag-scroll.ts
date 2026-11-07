@@ -5,6 +5,8 @@ import * as React from "react"
 /**
  * Horizontal strip: soft auto-scroll + click-drag scrub.
  * Capture starts only after a real drag so card links still navigate.
+ * Auto-scroll rAF runs only while the strip is on-screen, the tab is
+ * visible, motion is allowed, and the pointer is not scrubbing.
  */
 export function useAutoDragScroll(durationSec: number) {
   const ref = React.useRef<HTMLDivElement>(null)
@@ -21,6 +23,8 @@ export function useAutoDragScroll(durationSec: number) {
     let left0 = 0
     let last = performance.now()
     let raf = 0
+    let inView = true
+    let reducedMotion = false
     const DRAG_PX = 8
 
     const measure = () => {
@@ -32,20 +36,66 @@ export function useAutoDragScroll(durationSec: number) {
       el.scrollLeft = ((el.scrollLeft % setWidth) + setWidth) % setWidth
     }
 
-    const ro = new ResizeObserver(measure)
+    const shouldRun = () =>
+      !reducedMotion && !document.hidden && inView && !down && setWidth > 0
+
+    const stopRaf = () => {
+      if (!raf) return
+      cancelAnimationFrame(raf)
+      raf = 0
+    }
+
+    const tick = (now: number) => {
+      raf = 0
+      if (!shouldRun()) return
+      const dt = now - last
+      last = now
+      el.scrollLeft += (setWidth / (durationSec * 1000)) * dt
+      wrap()
+      raf = requestAnimationFrame(tick)
+    }
+
+    const startRaf = () => {
+      if (raf || !shouldRun()) return
+      last = performance.now()
+      raf = requestAnimationFrame(tick)
+    }
+
+    const syncRaf = () => {
+      if (shouldRun()) startRaf()
+      else stopRaf()
+    }
+
+    const ro = new ResizeObserver(() => {
+      measure()
+      syncRaf()
+    })
     ro.observe(el)
     measure()
 
-    const tick = (now: number) => {
-      const dt = now - last
-      last = now
-      if (!down && setWidth > 0) {
-        el.scrollLeft += (setWidth / (durationSec * 1000)) * dt
-        wrap()
-      }
-      raf = requestAnimationFrame(tick)
+    const motionMq = window.matchMedia("(prefers-reduced-motion: reduce)")
+    const syncMotion = () => {
+      reducedMotion = motionMq.matches
+      syncRaf()
     }
-    raf = requestAnimationFrame(tick)
+    syncMotion()
+    motionMq.addEventListener("change", syncMotion)
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        inView = entry.isIntersecting
+        syncRaf()
+      },
+      { threshold: 0 }
+    )
+    io.observe(el)
+
+    const onVisibility = () => {
+      syncRaf()
+    }
+    document.addEventListener("visibilitychange", onVisibility)
+
+    startRaf()
 
     const onDown = (e: PointerEvent) => {
       if (e.pointerType === "mouse" && e.button !== 0) return
@@ -53,6 +103,7 @@ export function useAutoDragScroll(durationSec: number) {
       dragged = false
       x0 = e.clientX
       left0 = el.scrollLeft
+      stopRaf()
     }
 
     const onMove = (e: PointerEvent) => {
@@ -82,8 +133,8 @@ export function useAutoDragScroll(durationSec: number) {
       } catch {
         /* ignore */
       }
-      last = performance.now()
       wrap()
+      syncRaf()
     }
 
     const onClick = (e: MouseEvent) => {
@@ -103,8 +154,11 @@ export function useAutoDragScroll(durationSec: number) {
     el.addEventListener("dragstart", blockNativeDrag, true)
 
     return () => {
-      cancelAnimationFrame(raf)
+      stopRaf()
       ro.disconnect()
+      io.disconnect()
+      motionMq.removeEventListener("change", syncMotion)
+      document.removeEventListener("visibilitychange", onVisibility)
       el.removeEventListener("pointerdown", onDown)
       el.removeEventListener("pointermove", onMove)
       el.removeEventListener("pointerup", onUp)

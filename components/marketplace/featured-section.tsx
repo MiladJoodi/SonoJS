@@ -15,6 +15,9 @@ const TABS = ["Featured", "Popular", "New"] as const
 /** First visible featured cards in the horizontal strip (≈ one viewport row). */
 const MARKETPLACE_FEATURED_ATF_COUNT = 4
 
+/** Cap unique cards before ×3 marquee (keeps DOM + video observers bounded). */
+const MARKETPLACE_FEATURED_MAX = 12
+
 function FeaturedMarquee({
   items,
   durationSec,
@@ -67,7 +70,8 @@ export function MarketplaceFeaturedSection({
         ? [...items].sort(compareMarketplaceNewest)
         : items
 
-  const durationSec = Math.max(28, ordered.length * 7)
+  const featured = ordered.slice(0, MARKETPLACE_FEATURED_MAX)
+  const durationSec = Math.max(28, featured.length * 7)
 
   return (
     <section
@@ -100,12 +104,12 @@ export function MarketplaceFeaturedSection({
         </div>
       </div>
 
-      {ordered.length === 0 ? (
+      {featured.length === 0 ? (
         <p className="px-4 py-8 text-center text-[13px] text-[var(--sm-text-faint)] sm:px-6 lg:px-8">
           Nothing featured yet.
         </p>
       ) : (
-        <FeaturedMarquee items={ordered} durationSec={durationSec} />
+        <FeaturedMarquee items={featured} durationSec={durationSec} />
       )}
     </section>
   )

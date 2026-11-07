@@ -4,6 +4,14 @@ import * as React from "react"
 import Link from "next/link"
 
 import type { MarketplacePreviewItem } from "@/lib/marketplace-preview-data"
+import {
+  MARKETPLACE_VIDEO_VISIBILITY_MIN,
+  clearMarketplaceVideoVisibility,
+  releaseMarketplaceVideoPlay,
+  reportMarketplaceVideoVisibility,
+  requestMarketplaceVideoPlay,
+  useMarketplaceActiveVideo,
+} from "@/hooks/use-marketplace-active-video"
 import { cn } from "@/lib/utils"
 
 const coverImgClass =
@@ -35,53 +43,70 @@ export function MarketplaceProductCard({
   /** Above-the-fold covers use `eager`; default keeps below-fold lazy. */
   loading?: "eager" | "lazy"
 }) {
+  const videoId = React.useId()
   const articleRef = React.useRef<HTMLElement>(null)
   const videoRef = React.useRef<HTMLVideoElement>(null)
-  const [inViewPlaying, setInViewPlaying] = React.useState(false)
   const hoverVideo = Boolean(item.coverVideo && item.coverSrc)
+  const isActive = useMarketplaceActiveVideo(videoId)
 
   function playHoverVideo() {
-    if (!hoverVideo || !prefersFineHover()) return
-    const video = videoRef.current
-    if (!video) return
-    void video.play().catch(() => {})
+    if (!hoverVideo || prefersReducedMotion() || !prefersFineHover()) return
+    requestMarketplaceVideoPlay(videoId)
   }
 
   function stopHoverVideo() {
     if (!hoverVideo || !prefersFineHover()) return
-    const video = videoRef.current
-    if (!video) return
-    video.pause()
-    video.currentTime = 0
+    releaseMarketplaceVideoPlay(videoId)
   }
 
+  // Mobile / coarse: report visibility; coordinator picks one winner.
   React.useEffect(() => {
     if (!hoverVideo) return
     if (prefersFineHover() || prefersReducedMotion()) return
 
     const root = articleRef.current
-    const video = videoRef.current
-    if (!root || !video) return
+    if (!root) return
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        const visible =
-          entry.isIntersecting && entry.intersectionRatio >= 0.45
-        if (visible) {
-          setInViewPlaying(true)
-          void video.play().catch(() => {})
-        } else {
-          setInViewPlaying(false)
-          video.pause()
-          video.currentTime = 0
-        }
+        reportMarketplaceVideoVisibility({
+          id: videoId,
+          ratio: entry.isIntersecting ? entry.intersectionRatio : 0,
+        })
       },
-      { threshold: [0, 0.45, 0.75] }
+      {
+        threshold: [0, MARKETPLACE_VIDEO_VISIBILITY_MIN, 0.75, 1],
+      }
     )
 
     observer.observe(root)
-    return () => observer.disconnect()
-  }, [hoverVideo, item.coverVideo])
+    return () => {
+      observer.disconnect()
+      clearMarketplaceVideoVisibility(videoId)
+    }
+  }, [hoverVideo, videoId])
+
+  // Bind src only while active; unload decode buffers when inactive.
+  React.useEffect(() => {
+    if (!hoverVideo || !item.coverVideo) return
+    const video = videoRef.current
+    if (!video) return
+
+    if (isActive) {
+      if (video.getAttribute("src") !== item.coverVideo) {
+        video.src = item.coverVideo
+        video.load()
+      }
+      void video.play().catch(() => {})
+      return
+    }
+
+    video.pause()
+    if (video.getAttribute("src")) {
+      video.removeAttribute("src")
+      video.load()
+    }
+  }, [hoverVideo, isActive, item.coverVideo])
 
   return (
     <article
@@ -134,7 +159,6 @@ export function MarketplaceProductCard({
               ) : null}
               <video
                 ref={videoRef}
-                src={item.coverVideo!}
                 muted
                 loop
                 playsInline
@@ -142,8 +166,8 @@ export function MarketplaceProductCard({
                 draggable={false}
                 className={cn(
                   coverImgClass,
-                  "opacity-0 transition-opacity duration-200 group-hover/card:opacity-100",
-                  inViewPlaying && "opacity-100"
+                  "opacity-0 transition-opacity duration-200",
+                  isActive && "opacity-100"
                 )}
               />
             </>
