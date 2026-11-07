@@ -27,6 +27,7 @@ export type MarketplaceStack =
   | "nodejs"
   | "d3"
   | "threejs"
+  | "gsap"
   | "reactquery"
   | "zustand"
   | "axios"
@@ -149,6 +150,7 @@ export const MARKETPLACE_STACK_LABEL: Record<MarketplaceStack, string> = {
   nodejs: "Node.js",
   d3: "D3",
   threejs: "Three.js",
+  gsap: "GSAP",
   reactquery: "React Query",
   zustand: "Zustand",
   axios: "Axios",
@@ -1244,7 +1246,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
     description:
       "Folio is a wheel-driven infinite portfolio reel by SonoJS. Built with Vite, React 19, TypeScript, Tailwind CSS 4, and GSAP. Scroll or wheel through stacked project titles and synced image strips; open a case for a 3D-tilt detail view. Local Geist Variable font and all folio stills under public/folio - no CDN at runtime. Demo selected-work UI only - no CMS. Static build ready for Cloudflare Workers.",
     category: "portfolio",
-    stack: ["react", "vite", "typescript", "tailwind"],
+    stack: ["react", "vite", "typescript", "tailwind", "gsap"],
     priceLabel: "Free",
     priceCents: 0,
     rating: 0,
@@ -1555,7 +1557,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
     description:
       "HUM One is a cinematic product landing for noise-cancelling headphones by SonoJS (demo brand HUM Audio, Rotterdam). Built as a static HTML / CSS / JS site with GSAP, Lenis, ScrollTrigger, and Three.js. An intro gate measures the room and quiets the page; the hero mounts a live 3D headset with poster fallback. Sections cover anatomy (cushions, drivers, band, repair), ANC modes (Open / Adaptive / Full quiet), three colourways (Graphite, Fog, Violet), voice quotes, and a Pre-order · €349 close. Demo marketing UI only - no cart backend. Open index.html or host the folder on Cloudflare Workers.",
     category: "landing",
-    stack: ["html", "css", "javascript", "threejs"],
+    stack: ["html", "css", "javascript", "threejs", "gsap"],
     priceLabel: "Free",
     priceCents: 0,
     rating: 0,
@@ -1745,7 +1747,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
     description:
       "Cinema Reel is a vertical film-festival landing by SonoJS. Built with Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS 4, and GSAP. Snap-scroll through festival slides with parallax frames, an old-reel entrance timeline, and a 3D-tilt detail modal. All slide images and award SVGs ship under public/ - no remote media URLs. Demo festival chrome only - no ticket backend. Deploy with Next.js on Cloudflare Workers or Node.",
     category: "landing",
-    stack: ["nextjs", "react", "typescript", "tailwind"],
+    stack: ["nextjs", "react", "typescript", "tailwind", "gsap"],
     priceLabel: "Free",
     priceCents: 0,
     rating: 0,
@@ -1933,7 +1935,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
     description:
       "Atlas is a full-viewport interactive 3D Earth explorer by SonoJS. Built with Vite, React 19, TypeScript, Three.js, and GSAP. Custom day/night Earth shaders, clouds, and stars; pixel-accurate country picking via a GeoJSON-rasterized ID map; fly-to and panel UI for curated places plus local Wikimedia assets under public/assets/atlas. Self-hosted Poppins and Inter. Demo explorer UI only - no backend. Static build ready for Cloudflare Workers.",
     category: "hero",
-    stack: ["react", "vite", "typescript", "threejs"],
+    stack: ["react", "vite", "typescript", "threejs", "gsap"],
     priceLabel: "Free",
     priceCents: 0,
     rating: 0,
@@ -1998,7 +2000,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
     description:
       "Liquid Type is a full-viewport typography hero by SonoJS. Built with Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS 4, GSAP, and Geist. The headline Words have weight responds to the cursor with spring physics - variable font weight, scale, trail dots, and ripples. Light/dark theme chrome and local media (liquid-type / membrane webm) under public/media. Demo type study only - no CMS. Deploy with Next.js on Cloudflare Workers or Node.",
     category: "hero",
-    stack: ["nextjs", "react", "typescript", "tailwind"],
+    stack: ["nextjs", "react", "typescript", "tailwind", "gsap"],
     priceLabel: "Free",
     priceCents: 0,
     rating: 0,
@@ -2062,7 +2064,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
     description:
       "Membrane is a full-viewport interactive mesh hero by SonoJS. Built with Vite, React 19, TypeScript, Tailwind CSS 4, and GSAP. A 50×30 spring-physics canvas surface deforms under the cursor, with a staggered content entrance. Playfair Display and Geist Variable ship via Fontsource; award SVGs, avatars, and thumbnail live under public/ - no remote media URLs. Demo mesh study only - no CMS. Static build ready for Cloudflare Workers.",
     category: "hero",
-    stack: ["react", "vite", "typescript", "tailwind"],
+    stack: ["react", "vite", "typescript", "tailwind", "gsap"],
     priceLabel: "Free",
     priceCents: 0,
     rating: 0,
@@ -2173,6 +2175,7 @@ export function listMarketplaceStacks(): MarketplaceStack[] {
     "nodejs",
     "d3",
     "threejs",
+    "gsap",
     "reactquery",
     "zustand",
     "axios",

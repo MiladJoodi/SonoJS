@@ -4,6 +4,7 @@ import {
   MARKETPLACE_STACK_LABEL,
   type MarketplaceStack,
 } from "@/lib/marketplace-catalog"
+import { GsapIcon } from "@/components/icons"
 import {
   CssIcon,
   HtmlIcon,
@@ -63,6 +64,7 @@ const STACK_INITIAL: Record<MarketplaceStack, string> = {
   nodejs: "No",
   d3: "D3",
   threejs: "3",
+  gsap: "GS",
   reactquery: "RQ",
   zustand: "Zu",
   axios: "Ax",
@@ -159,6 +161,8 @@ export function StackIcon({
   if (stack === "nodejs") return <NodejsIcon {...props} />
   if (stack === "d3") return <D3Icon {...props} />
   if (stack === "threejs") return <ThreejsIcon {...props} />
+  if (stack === "gsap")
+    return <BrandMark Icon={GsapIcon} size={size} className={className} />
   if (stack === "reactquery") return <ReactQueryIcon {...props} />
   if (stack === "socketio") return <SocketioIcon {...props} />
   if (stack === "prisma") return <PrismaIcon {...props} />
