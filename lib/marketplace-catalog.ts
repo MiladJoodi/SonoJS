@@ -4495,6 +4495,71 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Tailwind CSS 4",
     ],
   },
+  {
+    slug: "sonojs-hero-45",
+    title: "Equilibrium",
+    tagline:
+      "Live Better, Feel Whole Every Day - wellness video hero with liquid glass nav.",
+    description:
+      "Equilibrium is a full-viewport wellness marketing hero by SonoJS. Built with Vite, React 19, TypeScript, Tailwind CSS 3, and Lucide. Full-bleed looping bg-video.mp4, infinity wordmark, liquid-glass nav (Home / Wellness / Routine / Our Team), Log in / Begin Now, Live Better, Feel Whole Every Day headline, companion-app copy, and Start Today / Discover How CTAs plus mobile menu. Demo wellness chrome only - no auth backend. Vite build ready for Cloudflare Workers.",
+    category: "hero",
+    stack: ["react", "vite", "typescript", "tailwind", "lucide"],
+    priceLabel: "Free",
+    priceCents: 0,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 200,
+    accent: "200",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "hero",
+    coverImage: "/marketplace/projects/hero/sonojs-hero-45/main.webp",
+    coverImageDark: null,
+    coverVideo: "/marketplace/projects/hero/sonojs-hero-45/cover.mp4",
+    detailCoverImage: "/marketplace/projects/hero/sonojs-hero-45/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-hero-45.winbeta-com.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-09",
+    firstReleasedAt: "2026-11-09",
+    screens: 1,
+    highlights: [
+      {
+        title: "Wellness video stage",
+        body: "Full-bleed /assets/bg-video.mp4 with bottom-anchored Live Better copy.",
+      },
+      {
+        title: "Liquid-glass chrome",
+        body: "Frosted nav, Log in / Begin Now, and a mobile liquid-glass menu sheet.",
+      },
+      {
+        title: "Dual CTAs",
+        body: "Start Today and Discover How pills over the companion-app pitch.",
+      },
+      {
+        title: "Vite and fork-ready",
+        body: "Vite 8 + React 19 + TypeScript + Tailwind 3 + Lucide - npm run build to dist/.",
+      },
+    ],
+    includes: [
+      "Full Vite + React 19 + TypeScript source (Equilibrium)",
+      "App.tsx hero with video, liquid-glass nav, and CTAs",
+      "Tailwind CSS 3 + PostCSS",
+      "public/assets/bg-video.mp4",
+      "public/fonts (Geist)",
+      "lucide-react",
+    ],
+    requirements: [
+      "Node.js 20 or newer",
+      "Vite 8",
+      "React 19",
+      "Tailwind CSS 3",
+      "Lucide React",
+    ],
+  },
 ]
 
 export function getMarketplaceProject(
