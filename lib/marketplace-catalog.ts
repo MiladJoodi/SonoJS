@@ -4560,6 +4560,71 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Lucide React",
     ],
   },
+  {
+    slug: "sonojs-hero-46",
+    title: "Asme",
+    tagline:
+      "Built for the curious - faded video hero with newsletter glass pill.",
+    description:
+      "Asme is a full-viewport studio marketing hero by SonoJS. Built with Vite, React 18, TypeScript, Tailwind CSS 3, and Lucide. Looping hero.mp4 with soft fade-in/out at loop edges, liquid-glass nav (Features / Pricing / About + Sign Up / Login), Built for the curious Instrument Serif headline, email newsletter pill, Manifesto CTA, and Instagram / Twitter footers. Demo studio chrome only - no newsletter backend. Vite build ready for Cloudflare Workers.",
+    category: "hero",
+    stack: ["react", "vite", "typescript", "tailwind", "lucide"],
+    priceLabel: "Free",
+    priceCents: 0,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 35,
+    accent: "35",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "hero",
+    coverImage: "/marketplace/projects/hero/sonojs-hero-46/main.webp",
+    coverImageDark: null,
+    coverVideo: "/marketplace/projects/hero/sonojs-hero-46/cover.mp4",
+    detailCoverImage: "/marketplace/projects/hero/sonojs-hero-46/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-hero-46.winbeta-com.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-09",
+    firstReleasedAt: "2026-11-09",
+    screens: 1,
+    highlights: [
+      {
+        title: "Faded video loop",
+        body: "hero.mp4 fades out near the end and fades back in on restart.",
+      },
+      {
+        title: "Curious display type",
+        body: "Instrument Serif Built for the curious over a dark video stage.",
+      },
+      {
+        title: "Newsletter glass pill",
+        body: "Liquid-glass email form, Manifesto CTA, and social footer icons.",
+      },
+      {
+        title: "Vite and fork-ready",
+        body: "Vite 8 + React 18 + TypeScript + Tailwind 3 + Lucide - npm run build to dist/.",
+      },
+    ],
+    includes: [
+      "Full Vite + React 18 + TypeScript source (Asme)",
+      "App.tsx hero with faded video, nav, newsletter, and socials",
+      "Tailwind CSS 3 + PostCSS",
+      "public/assets/hero.mp4",
+      "public/fonts (Instrument Serif)",
+      "lucide-react",
+    ],
+    requirements: [
+      "Node.js 20 or newer",
+      "Vite 8",
+      "React 18",
+      "Tailwind CSS 3",
+      "Lucide React",
+    ],
+  },
 ]
 
 export function getMarketplaceProject(
