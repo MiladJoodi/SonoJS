@@ -55,6 +55,7 @@ Ask before changing MCP config outside this project.`,
         ? `https://t.me/${process.env.NEXT_PUBLIC_TELEGRAM_USERNAME.trim().replace(/^@/, "")}`
         : ""),
     contact: "/contact",
+    buyMeACoffee: "https://buymeacoffee.com/sonojs",
   },
 
   legal: {

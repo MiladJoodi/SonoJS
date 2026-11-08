@@ -13,6 +13,11 @@ const footerLinks = [
     label: "Contact",
     external: Boolean(siteConfig.links.telegram),
   },
+  {
+    href: siteConfig.links.buyMeACoffee,
+    label: "Buy me a coffee",
+    external: true,
+  },
 ] as const
 
 export function SiteFooter() {
@@ -35,7 +40,11 @@ export function SiteFooter() {
                 href={link.href}
                 className="cursor-pointer transition-colors hover:text-foreground"
                 target="_blank"
-                rel="noopener noreferrer"
+                rel={
+                  link.href === siteConfig.links.buyMeACoffee
+                    ? "nofollow noopener noreferrer"
+                    : "noopener noreferrer"
+                }
               >
                 {link.label}
               </a>
