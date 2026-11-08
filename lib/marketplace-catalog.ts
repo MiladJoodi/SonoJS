@@ -4181,6 +4181,66 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Tailwind CSS 4",
     ],
   },
+  {
+    slug: "sonojs-hero-40",
+    title: "Signal",
+    tagline:
+      "Find Signal to Action - falcon video login stage for fast-moving teams.",
+    description:
+      "Signal is a full-viewport login marketing hero by SonoJS. Built as a single HTML page with FreeSans + Eloquia and a looping peregrine-falcon video (falcon.mp4 + poster.webp). Built for fast-moving teams badge, Find Signal to Action headline on the photo pane, Welcome Back! login card with email/password, Google continue, and responsive stacked / tabport layouts. Demo auth chrome only - no real login backend. Open index.html or host the folder statically on Cloudflare Workers.",
+    category: "hero",
+    stack: ["html", "css", "javascript"],
+    priceLabel: "Free",
+    priceCents: 0,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 210,
+    accent: "210",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "hero",
+    coverImage: "/marketplace/projects/hero/sonojs-hero-40/main.webp",
+    coverImageDark: null,
+    coverVideo: "/marketplace/projects/hero/sonojs-hero-40/cover.mp4",
+    detailCoverImage: "/marketplace/projects/hero/sonojs-hero-40/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-hero-40.winbeta-com.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-08",
+    firstReleasedAt: "2026-11-08",
+    screens: 1,
+    highlights: [
+      {
+        title: "Falcon video pane",
+        body: "Looping falcon.mp4 dive with poster.webp on the left photo stage.",
+      },
+      {
+        title: "Signal to Action copy",
+        body: "Built for fast-moving teams badge plus Find Signal to Action headline.",
+      },
+      {
+        title: "Welcome Back login card",
+        body: "Email / password fields, Log in CTA, OR divider, and Google continue.",
+      },
+      {
+        title: "Zero-build static",
+        body: "One index.html with inlined CSS/JS and self-hosted FreeSans + Eloquia.",
+      },
+    ],
+    includes: [
+      "index.html (complete Signal login hero)",
+      "assets/falcon.mp4 and poster.webp",
+      "assets/FreeSans.woff2, FreeSansBold.woff2, Eloquia.woff2",
+    ],
+    requirements: [
+      "Modern browser (HTML5 video + CSS)",
+      "No build step - open index.html or static-host the folder",
+      "Optional: Cloudflare Workers / Pages for hosting",
+    ],
+  },
 ]
 
 export function getMarketplaceProject(
