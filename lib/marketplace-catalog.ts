@@ -3678,6 +3678,67 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Lucide React",
     ],
   },
+  {
+    slug: "sonojs-hero-34",
+    title: "Agrumi",
+    tagline:
+      "Ceramics for good dogs - video hero with six summer glaze bowls.",
+    description:
+      "Agrumi is a full-viewport ceramic dog-bowl product hero by SonoJS. Shipped as a zero-build static package (bundled React SPA). Full-bleed looping hero.mp4 with poster still, hand-glazed ceramic bowls with ears pitch, Shop the bowls CTA, 4.9★ / 12,000 good dogs social proof, and a six-glaze gallery (Limone, Arancia, Menta, Latte, Cielo, Vetro) with tinted swatches. Demo product chrome only - no checkout backend. Open index.html or host the folder statically on Cloudflare Workers.",
+    category: "hero",
+    stack: ["html", "css", "javascript"],
+    priceLabel: "Free",
+    priceCents: 0,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 48,
+    accent: "48",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "hero",
+    coverImage: "/marketplace/projects/hero/sonojs-hero-34/main.webp",
+    coverImageDark: null,
+    coverVideo: "/marketplace/projects/hero/sonojs-hero-34/cover.mp4",
+    detailCoverImage: "/marketplace/projects/hero/sonojs-hero-34/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-hero-34.winbeta-com.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-08",
+    firstReleasedAt: "2026-11-08",
+    screens: 1,
+    highlights: [
+      {
+        title: "Video product stage",
+        body: "Looping hero.mp4 with hero-poster.webp preload for a warm ceramic launch.",
+      },
+      {
+        title: "Shop the bowls CTA",
+        body: "Hand-glazed Puglia pitch, social proof, and a clear Shop the bowls button.",
+      },
+      {
+        title: "Six summer glazes",
+        body: "Limone through Vetro with tinted swatches, notes, and $48 price chrome.",
+      },
+      {
+        title: "Zero-build static",
+        body: "index.html + bundled assets/ CSS/JS, fonts/, and media/ - open or static-host.",
+      },
+    ],
+    includes: [
+      "index.html (complete Agrumi hero)",
+      "assets/ bundled CSS + JS",
+      "fonts/ (self-hosted)",
+      "media/hero.mp4, hero-poster.webp, and six glaze stills",
+    ],
+    requirements: [
+      "Modern browser (HTML5 video + CSS)",
+      "No build step - open index.html or static-host the folder",
+      "Optional: Cloudflare Workers / Pages for hosting",
+    ],
+  },
 ]
 
 export function getMarketplaceProject(
