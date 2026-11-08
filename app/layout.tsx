@@ -4,6 +4,7 @@ import { GeistMono } from "geist/font/mono"
 import { GeistSans } from "geist/font/sans"
 import { Analytics } from "@vercel/analytics/next"
 
+import { SonoGoogleOneTap } from "@/components/auth/google-one-tap"
 import {
   DocsToaster,
   PreviewDirectionProvider,
@@ -95,6 +96,7 @@ export default function RootLayout({
     >
       <body className="style-vega flex min-h-full flex-col font-sans text-body">
         <ClerkProvider>
+          <SonoGoogleOneTap />
           <ThemeProvider
             attribute="class"
             defaultTheme="system"

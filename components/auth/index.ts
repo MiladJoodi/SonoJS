@@ -16,6 +16,7 @@ export {
   useSignedInHint,
 } from "./signed-in-hint"
 export { ForgotPasswordForm } from "./forgot-password-form"
+export { SonoGoogleOneTap } from "./google-one-tap"
 export { SignInForm } from "./sign-in-form"
 export { SignUpContinueForm } from "./sign-up-continue-form"
 export { SignUpForm } from "./sign-up-form"
