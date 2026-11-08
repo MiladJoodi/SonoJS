@@ -4119,6 +4119,68 @@ export const marketplaceProjects: MarketplaceProject[] = [
     ],
     runCommand: ".\\serve.ps1",
   },
+  {
+    slug: "sonojs-hero-39",
+    title: "Mainframe",
+    tagline:
+      "Meet A.R.I.A. - scrub-video studio hero with typewriter CTAs.",
+    description:
+      "Mainframe is a full-viewport studio marketing hero by SonoJS. Built with Vite, React 19, TypeScript, and Tailwind CSS 4. Scroll-scrubbed hero.mp4 stage, Mainframe® nav (Labs / Studio / Openings / Shop), blurred Meet A.R.I.A. intro, typewriter Glad you stopped in… line, action pills (Pitch us an idea, Come work here, Send a brief hello, See how we operate), and copyable hello@mainframe.co. Demo studio chrome only - no CRM backend. Vite build ready for Cloudflare Workers.",
+    category: "hero",
+    stack: ["react", "vite", "typescript", "tailwind"],
+    priceLabel: "Free",
+    priceCents: 0,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 0,
+    accent: "0",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "hero",
+    coverImage: "/marketplace/projects/hero/sonojs-hero-39/main.webp",
+    coverImageDark: null,
+    coverVideo: "/marketplace/projects/hero/sonojs-hero-39/cover.mp4",
+    detailCoverImage: "/marketplace/projects/hero/sonojs-hero-39/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-hero-39.winbeta-com.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-08",
+    firstReleasedAt: "2026-11-08",
+    screens: 1,
+    highlights: [
+      {
+        title: "Scrub video stage",
+        body: "Scroll-driven ScrubVideo over public/hero.mp4 as a full-bleed backdrop.",
+      },
+      {
+        title: "A.R.I.A. typewriter",
+        body: "Adaptive Response Interface Agent intro with blinking Glad you stopped in… copy.",
+      },
+      {
+        title: "Action pills + email",
+        body: "Pitch / work / hello / operate pills plus one-click copy of hello@mainframe.co.",
+      },
+      {
+        title: "Vite and fork-ready",
+        body: "Vite 8 + React 19 + TypeScript + Tailwind 4 - npm run build to dist/.",
+      },
+    ],
+    includes: [
+      "Full Vite + React 19 + TypeScript source (Mainframe)",
+      "Hero, Navbar, ScrubVideo, useTypewriter",
+      "Tailwind CSS 4 via @tailwindcss/vite",
+      "public/hero.mp4",
+    ],
+    requirements: [
+      "Node.js 20 or newer",
+      "Vite 8",
+      "React 19",
+      "Tailwind CSS 4",
+    ],
+  },
 ]
 
 export function getMarketplaceProject(
