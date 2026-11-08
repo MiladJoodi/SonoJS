@@ -3484,6 +3484,70 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Lucide React",
     ],
   },
+  {
+    slug: "sonojs-hero-33",
+    title: "Apogee",
+    tagline:
+      "Elevate your essential data to new heights - video hero with revenue card.",
+    description:
+      "Apogee is a full-viewport data-platform marketing hero by SonoJS. Built with Vite, React 19, TypeScript, Tailwind CSS 3, Lucide, and Suisse. Full-bleed looping hero.mp4 stage, glass Platform / Solutions / Developers / Resources nav with mobile menu, Elevate your essential data to new heights headline, advanced-reasoning subcopy, Book a demo / Talk with the team CTAs, and a frosted Revenue Growth card with animated bar chart ($14.2M, +32.4%). Demo analytics chrome only - no live data backend. Vite build ready for Cloudflare Workers.",
+    category: "hero",
+    stack: ["react", "vite", "typescript", "tailwind", "lucide"],
+    priceLabel: "Free",
+    priceCents: 0,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 220,
+    accent: "220",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "hero",
+    coverImage: "/marketplace/projects/hero/sonojs-hero-33/main.webp",
+    coverImageDark: null,
+    coverVideo: "/marketplace/projects/hero/sonojs-hero-33/cover.mp4",
+    detailCoverImage: "/marketplace/projects/hero/sonojs-hero-33/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-hero-33.winbeta-com.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-08",
+    firstReleasedAt: "2026-11-08",
+    screens: 1,
+    highlights: [
+      {
+        title: "Video stage + glass nav",
+        body: "Full-bleed hero.mp4 with frosted Platform nav and mobile menu chrome.",
+      },
+      {
+        title: "Staggered entrance",
+        body: "Headline, subcopy, and dual CTAs fade in with timed Animate wrappers.",
+      },
+      {
+        title: "Revenue Growth card",
+        body: "Glass $14.2M metric with growing bars, +32.4% badge, and time labels.",
+      },
+      {
+        title: "Vite and fork-ready",
+        body: "Vite 5 + React 19 + TypeScript + Tailwind 3 + Lucide + Suisse - npm run build to dist/.",
+      },
+    ],
+    includes: [
+      "Full Vite + React 19 + TypeScript source (Apogee)",
+      "Hero.tsx with nav, CTAs, and Revenue Growth card",
+      "Tailwind CSS 3 + PostCSS",
+      "public/assets/hero.mp4 and Suisse font files",
+      "lucide-react",
+    ],
+    requirements: [
+      "Node.js 20 or newer",
+      "Vite 5",
+      "React 19",
+      "Tailwind CSS 3",
+      "Lucide React",
+    ],
+  },
 ]
 
 export function getMarketplaceProject(
