@@ -42,6 +42,8 @@ export type MarketplacePreviewDetail = MarketplacePreviewItem & {
   highlights: { title: string; body: string }[]
   includes: string[]
   requirements: string[]
+  /** Copyable local run command when the package needs a static server / CLI. */
+  runCommand: string | null
   stackLabels: string[]
   categoryLabel: string
   gallery: string[]
@@ -163,6 +165,7 @@ export function getMarketplacePreviewDetail(
     highlights: project.highlights,
     includes: project.includes,
     requirements: project.requirements,
+    runCommand: project.runCommand ?? null,
     stackLabels: project.stack.map((s) => MARKETPLACE_STACK_LABEL[s]),
     categoryLabel: MARKETPLACE_CATEGORY_LABEL[project.category],
     gallery: cover ? [cover] : [],

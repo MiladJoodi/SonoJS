@@ -4,6 +4,8 @@ import type { ReactNode } from "react"
 import Link from "next/link"
 import { CheckIcon } from "lucide-react"
 
+import { CodeBlockHeader } from "@/components/docs/code-block-header"
+import { CopyButton } from "@/components/docs/copy-button"
 import { MarketplaceDetailGallery } from "@/components/marketplace/detail-gallery"
 import { MarketplaceDetailPurchase } from "@/components/marketplace/detail-purchase"
 import { MarketplaceProductCard } from "@/components/marketplace/product-card"
@@ -111,6 +113,28 @@ export function MarketplaceDetailPage({
                         </li>
                       ))}
                     </ul>
+                  </section>
+                ) : null}
+
+                {detail.runCommand ? (
+                  <section className="space-y-3 px-5 py-5 sm:px-6 sm:py-6">
+                    <SectionLabel>Run locally</SectionLabel>
+                    <p className="text-sm leading-relaxed text-[var(--sm-text-secondary)]">
+                      From the unzipped project folder:
+                    </p>
+                    <div className="overflow-hidden rounded-[12px] border border-[var(--sm-border)]">
+                      <div className="sono-code-block rounded-none border-0">
+                        <CodeBlockHeader title="Terminal">
+                          <CopyButton
+                            value={detail.runCommand}
+                            className="size-6 shrink-0 [&_svg]:size-3"
+                          />
+                        </CodeBlockHeader>
+                        <pre className="no-scrollbar overflow-x-auto px-4 py-3 font-mono text-[14px] leading-[1.65] text-[var(--code-foreground,#d4d4d4)]">
+                          <code>{detail.runCommand}</code>
+                        </pre>
+                      </div>
+                    </div>
                   </section>
                 ) : null}
 

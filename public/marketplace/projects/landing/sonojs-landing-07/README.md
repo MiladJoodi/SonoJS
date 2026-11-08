@@ -21,6 +21,14 @@ Source: `E:\dl\prompt\18`
 - Source: `E:\dl\prompt\18`
 - Zip: `products/landing/sonojs-landing-07/sonojs-landing-07.zip`
 
+## Run locally
+
+```bash
+npx serve .
+```
+
+ES modules / Three.js need a static server (`file://` will not work).
+
 ## Access
 
 - Live preview: public

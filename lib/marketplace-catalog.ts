@@ -112,6 +112,8 @@ export type MarketplaceProject = {
   highlights: { title: string; body: string }[]
   includes: string[]
   requirements: string[]
+  /** Optional local run command shown on the detail page (copyable). */
+  runCommand?: string
 }
 
 export const MARKETPLACE_BADGE_LABEL: Record<MarketplaceBadge, string> = {
@@ -1810,7 +1812,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
     tagline:
       "Master 3D artistry - scroll landing with a live bee GLB and floral parallax.",
     description:
-      "Melli is a lilac 3D-motion academy landing by SonoJS (demo brand Melli_Motion). Built as a single HTML page with Poppins, vanilla scroll parallax, and Three.js. A fixed bee GLB (GLTFLoader + RoomEnvironment) flies across themed sections - Imagine your next site, Universe of 3D Motion, Claim Early Invite, Study and Build, and a Prepared to fly high footer. Floral PNG accents and light/dark section themes. Demo course marketing UI only - no waitlist backend. Open index.html with local assets/vendor or host on Cloudflare Workers.",
+      "Melli is a lilac 3D-motion academy landing by SonoJS (demo brand Melli_Motion). Built as a single HTML page with Poppins, vanilla scroll parallax, and Three.js. A fixed bee GLB (GLTFLoader + RoomEnvironment) flies across themed sections - Imagine your next site, Universe of 3D Motion, Claim Early Invite, Study and Build, and a Prepared to fly high footer. Floral PNG accents and light/dark section themes. Demo course marketing UI only - no waitlist backend. Run locally with npx serve . (ES modules need a static server) or host on Cloudflare Workers.",
     category: "landing",
     stack: ["html", "css", "javascript", "threejs"],
     priceLabel: "Free",
@@ -1862,9 +1864,10 @@ export const marketplaceProjects: MarketplaceProject[] = [
     ],
     requirements: [
       "Modern browser (ES modules, WebGL)",
-      "No build step - open index.html or static-host the folder",
+      "Local static server - ES modules will not load via file://",
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
+    runCommand: "npx serve .",
   },
   {
     slug: "sonojs-hero-09",
@@ -2361,6 +2364,252 @@ export const marketplaceProjects: MarketplaceProject[] = [
     ],
     requirements: [
       "Modern browser (CSS oklch overlays, video autoplay muted)",
+      "No build step - open index.html or static-host the folder",
+      "Optional: Cloudflare Workers / Pages for hosting",
+    ],
+  },
+  {
+    slug: "sonojs-hero-17",
+    title: "Portiva",
+    tagline:
+      "Creative agency hero - full-bleed video, word-by-word reveal, Chat CTAs.",
+    description:
+      "Portiva is a full-viewport creative agency hero by SonoJS. Built as a single HTML page with Inter, Tailwind via a local vendor script, and a looping hero.mp4 stage. Word-by-word headline reveal (Less complexity, more impact in every project), 3000+ Customers proof, Chat With Us / Our Works CTAs, and a centered About / Brands / Careers / Partners nav. Demo agency chrome only - no chat backend. Open index.html or host the folder statically on Cloudflare Workers.",
+    category: "hero",
+    stack: ["html", "css", "javascript", "tailwind"],
+    priceLabel: "Free",
+    priceCents: 0,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 25,
+    accent: "25",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "hero",
+    coverImage: "/marketplace/projects/hero/sonojs-hero-17/main.webp",
+    coverImageDark: null,
+    coverVideo: "/marketplace/projects/hero/sonojs-hero-17/cover.mp4",
+    detailCoverImage: "/marketplace/projects/hero/sonojs-hero-17/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-hero-17.winbeta-com.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-08",
+    firstReleasedAt: "2026-11-08",
+    screens: 1,
+    highlights: [
+      {
+        title: "Full-bleed video stage",
+        body: "Looping hero.mp4 with a soft dark wash for readable type and CTAs.",
+      },
+      {
+        title: "Word-by-word reveal",
+        body: "Staggered headline entrance plus fade-in for nav, proof, and buttons.",
+      },
+      {
+        title: "Agency chrome",
+        body: "Portiva wordmark, centered nav, Chat with us chip, and 3000+ Customers stars.",
+      },
+      {
+        title: "Zero-build static",
+        body: "One index.html plus Inter fonts, hero video, and vendor/tailwindcss.js.",
+      },
+    ],
+    includes: [
+      "index.html (complete Portiva hero)",
+      "assets/video/hero.mp4",
+      "assets/fonts (Inter + inter.css)",
+      "vendor/tailwindcss.js",
+      "Word reveal and fade-in script",
+    ],
+    requirements: [
+      "Modern browser (video autoplay muted, CSS transitions)",
+      "No build step - open index.html or static-host the folder",
+      "Optional: Cloudflare Workers / Pages for hosting",
+    ],
+  },
+  {
+    slug: "sonojs-hero-18",
+    title: "Trav",
+    tagline:
+      "Begin Your Next Big Adventure - travel app hero with video stage and Download CTA.",
+    description:
+      "Trav is a full-viewport travel app hero by SonoJS. Built as a single HTML page with Inter, Tailwind via a local vendor script, and a looping hero.mp4 stage. Centered map-pin mark, word-staggered Begin Your Next Big Adventure headline, trip-planning subcopy, and a glowing Download Now CTA. Desktop nav (Home / Our Story / FAQ / Policies) plus a mobile fullscreen menu. Demo travel chrome only - no app store backend. Open index.html or host the folder statically on Cloudflare Workers.",
+    category: "hero",
+    stack: ["html", "css", "javascript", "tailwind"],
+    priceLabel: "Free",
+    priceCents: 0,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 195,
+    accent: "195",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "hero",
+    coverImage: "/marketplace/projects/hero/sonojs-hero-18/main.webp",
+    coverImageDark: null,
+    coverVideo: "/marketplace/projects/hero/sonojs-hero-18/cover.mp4",
+    detailCoverImage: "/marketplace/projects/hero/sonojs-hero-18/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-hero-18.winbeta-com.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-08",
+    firstReleasedAt: "2026-11-08",
+    screens: 1,
+    highlights: [
+      {
+        title: "Full-bleed travel video",
+        body: "Fixed looping hero.mp4 with a soft dark wash for readable type.",
+      },
+      {
+        title: "Word-stagger entrance",
+        body: "Headline and subcopy animate word-by-word; pin and CTA fade in after.",
+      },
+      {
+        title: "Responsive chrome",
+        body: "Desktop nav links plus a fullscreen mobile menu with open/close controls.",
+      },
+      {
+        title: "Zero-build static",
+        body: "One index.html plus Inter fonts, hero video, and vendor/tailwindcss.js.",
+      },
+    ],
+    includes: [
+      "index.html (complete Trav hero)",
+      "assets/video/hero.mp4",
+      "assets/fonts (Inter + inter.css)",
+      "vendor/tailwindcss.js",
+      "Word stagger and mobile menu script",
+    ],
+    requirements: [
+      "Modern browser (video autoplay muted, CSS animations)",
+      "No build step - open index.html or static-host the folder",
+      "Optional: Cloudflare Workers / Pages for hosting",
+    ],
+  },
+  {
+    slug: "sonojs-hero-19",
+    title: "Nearby Homes",
+    tagline:
+      "Be the first to know - rounded video card hero with email subscribe.",
+    description:
+      "Nearby Homes is a centered subscribe hero by SonoJS. Built as a single HTML page with Tailwind via a local script and a looping hero.mp4 inside a rounded card (max 1400px, 550px tall). Word-staggered Be the first to know about nearby homes headline, moving-professionals subcopy, and a glass email + Subscribe pill. Staggered entrance for card, type, and form. Demo waitlist chrome only - submit is prevented. Open index.html or host the folder statically on Cloudflare Workers.",
+    category: "hero",
+    stack: ["html", "css", "javascript", "tailwind"],
+    priceLabel: "Free",
+    priceCents: 0,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 210,
+    accent: "210",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "hero",
+    coverImage: "/marketplace/projects/hero/sonojs-hero-19/main.webp",
+    coverImageDark: null,
+    coverVideo: "/marketplace/projects/hero/sonojs-hero-19/cover.mp4",
+    detailCoverImage: "/marketplace/projects/hero/sonojs-hero-19/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-hero-19.winbeta-com.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-08",
+    firstReleasedAt: "2026-11-08",
+    screens: 1,
+    highlights: [
+      {
+        title: "Rounded video card",
+        body: "Hero.mp4 fills a 550px soft-shadow card with a 50% dark wash for readable type.",
+      },
+      {
+        title: "Word-stagger headline",
+        body: "Be the first to know about nearby homes reveals word-by-word, then subcopy and form.",
+      },
+      {
+        title: "Subscribe pill",
+        body: "Glass email shell with a black Subscribe button - stacked layout on small screens.",
+      },
+      {
+        title: "Zero-build static",
+        body: "One index.html plus assets/hero.mp4 and assets/tailwindcss.js.",
+      },
+    ],
+    includes: [
+      "index.html (complete Nearby Homes / Hero Subscribe)",
+      "assets/hero.mp4",
+      "assets/tailwindcss.js",
+      "Entrance + form preventDefault script",
+    ],
+    requirements: [
+      "Modern browser (video autoplay muted, CSS transitions)",
+      "No build step - open index.html or static-host the folder",
+      "Optional: Cloudflare Workers / Pages for hosting",
+    ],
+  },
+  {
+    slug: "sonojs-hero-20",
+    title: "Lumina Vision",
+    tagline:
+      "Intelligence Unbound - auto-automation hero with video stage and brand ticker.",
+    description:
+      "Lumina Vision is a full-viewport auto-automation hero by SonoJS. Built as a single HTML page with Space Grotesk, local CSS/JS, and a looping hero.mp4 stage. Initialize Vision tag, Intelligence Unbound headline, Start Automating CTA with orbit accent, play/pause control, and a footer Auto-Automation Ecosystem brand ticker (Google, Cust.io, Hummel, Copper, Tesla). Demo vision-product chrome only - no backend. Open index.html or host the folder statically on Cloudflare Workers.",
+    category: "hero",
+    stack: ["html", "css", "javascript"],
+    priceLabel: "Free",
+    priceCents: 0,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 280,
+    accent: "280",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "hero",
+    coverImage: "/marketplace/projects/hero/sonojs-hero-20/main.webp",
+    coverImageDark: null,
+    coverVideo: "/marketplace/projects/hero/sonojs-hero-20/cover.mp4",
+    detailCoverImage: "/marketplace/projects/hero/sonojs-hero-20/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-hero-20.winbeta-com.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-08",
+    firstReleasedAt: "2026-11-08",
+    screens: 1,
+    highlights: [
+      {
+        title: "Full-bleed vision video",
+        body: "Looping hero.mp4 with overlay wash and an Initialize Vision / Intelligence Unbound stack.",
+      },
+      {
+        title: "Orbit CTA + playback",
+        body: "Start Automating button with orbit accent, plus a play/pause control in the nav.",
+      },
+      {
+        title: "Ecosystem ticker",
+        body: "Footer marquee of demo partners - Google, Cust.io, Hummel, Copper, Tesla.",
+      },
+      {
+        title: "Zero-build static",
+        body: "index.html + styles.css + script.js with Space Grotesk and assets/video/hero.mp4.",
+      },
+    ],
+    includes: [
+      "index.html (complete Lumina Vision / auto-automation hero)",
+      "styles.css and script.js",
+      "assets/video/hero.mp4",
+      "assets/fonts (Space Grotesk)",
+    ],
+    requirements: [
+      "Modern browser (video autoplay muted, CSS animations)",
       "No build step - open index.html or static-host the folder",
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
