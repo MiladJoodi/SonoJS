@@ -3170,6 +3170,69 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
   },
+  {
+    slug: "sonojs-hero-28",
+    title: "Qumica",
+    tagline:
+      "Ready to elevate your digital infrastructure - video hero with Generate CTAs.",
+    description:
+      "Qumica is a full-viewport digital-infrastructure marketing hero by SonoJS. Built with Vite, React 19, TypeScript, Tailwind CSS 4, and Lucide. Full-bleed looping hero video, floating glass pill nav (About / Platform / Solutions + Generate), Trusted by 500+ teams avatar row with stars, Ready to elevate your digital infrastructure headline (Instrument Serif italic on elevate), Generate / View Platform CTAs, and an Integrating with leading automation marquee (Zapier, Make, n8n, UiPath, Tray.io, Workato). Demo automation-platform chrome only - no generate backend. Vite build ready for Cloudflare Workers.",
+    category: "hero",
+    stack: ["react", "vite", "typescript", "tailwind", "lucide"],
+    priceLabel: "Free",
+    priceCents: 0,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 25,
+    accent: "25",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "hero",
+    coverImage: "/marketplace/projects/hero/sonojs-hero-28/main.webp",
+    coverImageDark: null,
+    coverVideo: "/marketplace/projects/hero/sonojs-hero-28/cover.mp4",
+    detailCoverImage: "/marketplace/projects/hero/sonojs-hero-28/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-hero-28.winbeta-com.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-08",
+    firstReleasedAt: "2026-11-08",
+    screens: 1,
+    highlights: [
+      {
+        title: "Video stage + glass nav",
+        body: "Full-bleed hero-bg.mp4 with a floating pill nav and Generate chrome.",
+      },
+      {
+        title: "Social proof + CTAs",
+        body: "Avatar stack, five-star row, shimmer Generate button, and View Platform.",
+      },
+      {
+        title: "Automation marquee",
+        body: "Integrating with leading automation logos - Zapier through Workato.",
+      },
+      {
+        title: "Vite and fork-ready",
+        body: "Vite 8 + React 19 + TypeScript + Tailwind 4 + Lucide - npm run build to dist/.",
+      },
+    ],
+    includes: [
+      "Full Vite + React 19 + TypeScript source (Qumica)",
+      "HeroSection with video, nav, CTAs, and integrations marquee",
+      "Tailwind CSS 4 via @tailwindcss/vite",
+      "Local hero video + avatar stills",
+    ],
+    requirements: [
+      "Node.js 20 or newer",
+      "Vite 8",
+      "React 19",
+      "Tailwind CSS 4",
+      "Lucide React",
+    ],
+  },
 ]
 
 export function getMarketplaceProject(
