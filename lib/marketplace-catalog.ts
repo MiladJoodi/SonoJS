@@ -5001,6 +5001,66 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
   },
+  {
+    slug: "sonojs-hero-53",
+    title: "Heritage Grove",
+    tagline:
+      "Full-viewport craft footer - Shop, Heritage, Care & The Letter.",
+    description:
+      "Heritage Grove is a full-viewport site-footer marketing piece by SonoJS. Built as a single HTML page with Cormorant Garamond + Poppins over a looping footer-bg.mp4 (poster still). Brand blurb Crafting digital experiences…, Shop / Heritage / Care & Service link columns, The Letter newsletter signup, contact strip, and legal notices on a cream canvas. Demo commerce chrome only - no mail backend. Open index.html or host the folder statically on Cloudflare Workers.",
+    category: "hero",
+    stack: ["html", "css"],
+    priceLabel: "Free",
+    priceCents: 0,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 175,
+    accent: "175",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "hero",
+    coverImage: "/marketplace/projects/hero/sonojs-hero-53/main.webp",
+    coverImageDark: null,
+    coverVideo: "/marketplace/projects/hero/sonojs-hero-53/cover.mp4",
+    detailCoverImage: "/marketplace/projects/hero/sonojs-hero-53/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-hero-53.winbeta-com.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-09",
+    firstReleasedAt: "2026-11-09",
+    screens: 1,
+    highlights: [
+      {
+        title: "Video footer stage",
+        body: "Looping footer-bg.mp4 with poster still under a cream craft layout.",
+      },
+      {
+        title: "Link columns",
+        body: "Shop, Heritage, and Care & Service nav groups with Cormorant titles.",
+      },
+      {
+        title: "The Letter signup",
+        body: "Newsletter field plus contact strip and privacy / terms / cookie notices.",
+      },
+      {
+        title: "Zero-build static",
+        body: "One index.html with inlined CSS plus footer-bg.mp4 and footer-poster.png.",
+      },
+    ],
+    includes: [
+      "index.html (complete Heritage Grove footer)",
+      "footer-bg.mp4",
+      "footer-poster.png",
+    ],
+    requirements: [
+      "Modern browser (HTML5 video + CSS)",
+      "No build step - open index.html or static-host the folder",
+      "Optional: Cloudflare Workers / Pages for hosting",
+    ],
+  },
 ]
 
 export function getMarketplaceProject(
