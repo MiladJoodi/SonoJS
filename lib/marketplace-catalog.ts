@@ -1357,6 +1357,66 @@ export const marketplaceProjects: MarketplaceProject[] = [
     ],
   },
   {
+    slug: "sonojs-ecommerce-05",
+    title: "Vertex",
+    tagline:
+      "Streamline the shop - Vision virtual storefront with GLOW skincare.",
+    description:
+      "Vertex is a single-file Vision virtual-shop marketing page by SonoJS. Built as self-contained HTML with inline CSS/JS (Poppins + Playfair Display). SHOPS / VERTEX wordmark, Origin · Learn how · Core · Prices nav, Build new shop CTA, Streamline the shop / Process headlines, and a GLOW Skin Care product stage with Serum Radiance C, Nourishing Lotion, Kit Sunset Renewal, Defender SPF 60, promo trust chips, and intro animation. Demo storefront chrome only - no cart backend. Open index.html or host the folder statically on Cloudflare Workers.",
+    category: "ecommerce",
+    stack: ["html", "css", "javascript"],
+    priceLabel: "Free",
+    priceCents: 0,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 195,
+    accent: "195",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "shop",
+    coverImage: "/marketplace/projects/ecommerce/sonojs-ecommerce-05/main.webp",
+    coverImageDark: null,
+    coverVideo: "/marketplace/projects/ecommerce/sonojs-ecommerce-05/cover.mp4",
+    detailCoverImage:
+      "/marketplace/projects/ecommerce/sonojs-ecommerce-05/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-ecommerce-05.sonojs.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-09",
+    firstReleasedAt: "2026-11-09",
+    screens: 1,
+    highlights: [
+      {
+        title: "VERTEX virtual stage",
+        body: "Fixed 1172×657 canvas with SHOPS badge, Build new shop CTA, and starfield glow.",
+      },
+      {
+        title: "Streamline the shop",
+        body: "Process headline for restructuring store systems / e-commerce orchestration.",
+      },
+      {
+        title: "GLOW skincare rail",
+        body: "Serum Radiance C, lotions, kits, and SPF cards with sale prices and trust chips.",
+      },
+      {
+        title: "Zero-build static",
+        body: "One index.html with inline CSS/JS plus local WebP product assets.",
+      },
+    ],
+    includes: [
+      "index.html (complete Vision / Vertex storefront UI)",
+      "Inline CSS + intro animation script",
+      "assets/*.webp product and hero stills",
+    ],
+    requirements: [
+      "Modern browser",
+      "Static file host (or open index.html locally)",
+    ],
+  },
+  {
     slug: "sonojs-portfolio-01",
     title: "Jack",
     tagline:
