@@ -17,7 +17,7 @@ Interactive 3D Earth explorer. Demo brand: **Atlas**.
 
 ## Live / package
 
-- Demo: https://sonojs-hero-11.winbeta-com.workers.dev/
+- Demo: https://sonojs-hero-11.sonojs.workers.dev/
 - Source: `E:\dl\prompt\12`
 - Download: Google Drive  
   https://drive.google.com/file/d/1SkqOMkM8hlCQQFIBfKcHbLvelcHkN6yg/view?usp=drive_link

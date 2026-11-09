@@ -17,7 +17,7 @@ Rounded video subscribe hero. Demo brand: **Nearby Homes**.
 
 ## Live / package
 
-- Demo: https://sonojs-hero-19.winbeta-com.workers.dev/
+- Demo: https://sonojs-hero-19.sonojs.workers.dev/
 - Source: `E:\dl\prompt\23`
 - Zip: `products/heroes/sonojs-hero-19/sonojs-hero-19.zip`
 

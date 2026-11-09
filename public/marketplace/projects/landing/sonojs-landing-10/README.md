@@ -17,7 +17,7 @@ AI ecommerce store-builder marketing landing. Demo brand: **Rovela**.
 
 ## Live / package
 
-- Demo: https://sonojs-landing-10.winbeta-com.workers.dev/
+- Demo: https://sonojs-landing-10.sonojs.workers.dev/
 - Source: `E:\dl\prompt\41`
 - Zip: `products/landing/sonojs-landing-10/sonojs-landing-10.zip`
 

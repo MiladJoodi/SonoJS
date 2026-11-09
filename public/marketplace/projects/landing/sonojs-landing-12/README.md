@@ -17,7 +17,7 @@ Concept studio landing (revenue-share software & search). Demo brand: **Plum**.
 
 ## Live / package
 
-- Demo: https://sonojs-landing-12.winbeta-com.workers.dev/
+- Demo: https://sonojs-landing-12.sonojs.workers.dev/
 - Source: `E:\dl\prompt2\48`
 - Zip: `products/landing/sonojs-landing-12/sonojs-landing-12.zip`
 - Local: `npx --yes serve . -l 5173` (see `run.txt`)

@@ -17,7 +17,7 @@ Multi-scene clarity/focus marketing hero. Demo brand: **Lumora**.
 
 ## Live / package
 
-- Demo: https://sonojs-hero-50.winbeta-com.workers.dev/
+- Demo: https://sonojs-hero-50.sonojs.workers.dev/
 - Source: `E:\dl\prompt2\61`
 - Zip: `products/heroes/sonojs-hero-50/sonojs-hero-50.zip`
 - Local: `npm install` then `npm run dev`

@@ -17,7 +17,7 @@ Dual-phone onboarding hero. Demo brand: **Kova**.
 
 ## Live / package
 
-- Demo: https://sonojs-hero-49.winbeta-com.workers.dev/
+- Demo: https://sonojs-hero-49.sonojs.workers.dev/
 - Source: `E:\dl\prompt2\60`
 - Zip: `products/heroes/sonojs-hero-49/sonojs-hero-49.zip`
 

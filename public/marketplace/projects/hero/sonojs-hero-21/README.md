@@ -17,7 +17,7 @@ AI 3D-scene product hero. Demo brand: **SceneAI**.
 
 ## Live / package
 
-- Demo: https://sonojs-hero-21.winbeta-com.workers.dev/
+- Demo: https://sonojs-hero-21.sonojs.workers.dev/
 - Source: `E:\dl\prompt\25`
 - Zip: `products/heroes/sonojs-hero-21/sonojs-hero-21.zip`
 

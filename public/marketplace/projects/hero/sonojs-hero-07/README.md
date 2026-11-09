@@ -17,7 +17,7 @@ Solar farmhouse day/night hero. Demo brand: **Lumen Roof**.
 
 ## Live / package
 
-- Demo: https://sonojs-hero-07.winbeta-com.workers.dev/
+- Demo: https://sonojs-hero-07.sonojs.workers.dev/
 - Source: `E:\dl\prompt\06` (`index.html` + `assets/`)
 - Zip: `products/heroes/sonojs-hero-07/sonojs-hero-07.zip`
 

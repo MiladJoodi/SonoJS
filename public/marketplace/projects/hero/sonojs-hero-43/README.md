@@ -17,7 +17,7 @@ Digital-workers marketing hero. Demo brand: **Axon**.
 
 ## Live / package
 
-- Demo: https://sonojs-hero-43.winbeta-com.workers.dev/
+- Demo: https://sonojs-hero-43.sonojs.workers.dev/
 - Source: `E:\dl\prompt\46`
 - Zip: `products/heroes/sonojs-hero-43/sonojs-hero-43.zip`
 - Local: `npm install` then `npm run dev`

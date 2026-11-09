@@ -17,7 +17,7 @@ AI workflow marketing hero with boomerang video. Demo brand: **LinkFlow™**.
 
 ## Live / package
 
-- Demo: https://sonojs-hero-54.winbeta-com.workers.dev/
+- Demo: https://sonojs-hero-54.sonojs.workers.dev/
 - Source: `E:\dl\prompt2\64`
 - Zip: `products/heroes/sonojs-hero-54/sonojs-hero-54.zip`
 - Local: `npm install` then `npm run dev`

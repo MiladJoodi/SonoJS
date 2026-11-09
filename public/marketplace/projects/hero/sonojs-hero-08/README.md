@@ -17,7 +17,7 @@ Cadet Skyranger hero with helmet toggle. Demo brand: **Lumora**.
 
 ## Live / package
 
-- Demo: https://sonojs-hero-08.winbeta-com.workers.dev/
+- Demo: https://sonojs-hero-08.sonojs.workers.dev/
 - Source: `E:\dl\prompt\08` (`index.html` + `assets/`)
 - Zip: `products/heroes/sonojs-hero-08/sonojs-hero-08.zip`
 

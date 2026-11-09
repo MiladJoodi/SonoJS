@@ -17,7 +17,7 @@ Productivity marketing hero with full-bleed video and dashboard preview. Demo br
 
 ## Live / package
 
-- Demo: https://sonojs-hero-32.winbeta-com.workers.dev/
+- Demo: https://sonojs-hero-32.sonojs.workers.dev/
 - Source: `E:\dl\prompt\39`
 - Zip: `products/heroes/sonojs-hero-32/sonojs-hero-32.zip`
 

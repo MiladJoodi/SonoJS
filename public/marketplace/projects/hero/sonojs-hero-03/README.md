@@ -17,7 +17,7 @@ Full-bleed private-jet video hero. Demo brand: **SkyElite**.
 
 ## Live / repo
 
-- Demo: https://sonojs-hero-03.winbeta-com.workers.dev/
+- Demo: https://sonojs-hero-03.sonojs.workers.dev/
 - Source: `E:\dl\prompt\02`
 
 ## Access

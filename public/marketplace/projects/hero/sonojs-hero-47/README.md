@@ -17,7 +17,7 @@ Fintech index hero with grid nodes. Demo brand: **LŪMEN // ÍNDEX**.
 
 ## Live / package
 
-- Demo: https://sonojs-hero-47.winbeta-com.workers.dev/
+- Demo: https://sonojs-hero-47.sonojs.workers.dev/
 - Source: `E:\dl\prompt2\58`
 - Zip: `products/heroes/sonojs-hero-47/sonojs-hero-47.zip`
 - Local: `npm install` then `npm run dev`

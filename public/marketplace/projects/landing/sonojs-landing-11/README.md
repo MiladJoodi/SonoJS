@@ -17,7 +17,7 @@ Fragrance collection landing (Le Verger). Demo brand: **SYKÉA**.
 
 ## Live / package
 
-- Demo: https://sonojs-landing-11.winbeta-com.workers.dev/
+- Demo: https://sonojs-landing-11.sonojs.workers.dev/
 - Source: `E:\dl\prompt2\47`
 - Zip: `products/landing/sonojs-landing-11/sonojs-landing-11.zip`
 - Local: `node serve.mjs` → http://127.0.0.1:4785

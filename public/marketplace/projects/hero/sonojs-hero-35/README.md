@@ -17,7 +17,7 @@ Interactive jelly-fruit playground (wobble / works). Demo brand: **Gummy Grove**
 
 ## Live / package
 
-- Demo: https://sonojs-hero-35.winbeta-com.workers.dev/
+- Demo: https://sonojs-hero-35.sonojs.workers.dev/
 - Source: `E:\dl\prompt\45`
 - Zip: `products/heroes/sonojs-hero-35/sonojs-hero-35.zip`
 - Local: `npx wrangler dev` (serves `public/`)

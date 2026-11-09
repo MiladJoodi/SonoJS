@@ -17,7 +17,7 @@ Login hero with falcon video stage. Demo brand: **Signal**.
 
 ## Live / package
 
-- Demo: https://sonojs-hero-40.winbeta-com.workers.dev/
+- Demo: https://sonojs-hero-40.sonojs.workers.dev/
 - Source: `E:\dl\prompt2\52`
 - Zip: `products/heroes/sonojs-hero-40/sonojs-hero-40.zip`
 

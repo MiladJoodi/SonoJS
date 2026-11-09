@@ -17,7 +17,7 @@ Cross-border finance video hero. Demo brand: **Sellix**.
 
 ## Live / package
 
-- Demo: https://sonojs-hero-09.winbeta-com.workers.dev/
+- Demo: https://sonojs-hero-09.sonojs.workers.dev/
 - Source: `E:\dl\prompt\10` (`index.html` + `assets/`)
 - Zip: `products/heroes/sonojs-hero-09/sonojs-hero-09.zip`
 

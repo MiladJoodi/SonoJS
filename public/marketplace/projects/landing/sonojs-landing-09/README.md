@@ -17,7 +17,7 @@ AI / intelligence-layer SaaS landing. Demo brand: **Plety**.
 
 ## Live / package
 
-- Demo: https://sonojs-landing-09.winbeta-com.workers.dev/
+- Demo: https://sonojs-landing-09.sonojs.workers.dev/
 - Source: `E:\dl\prompt\32`
 - Zip: `products/landing/sonojs-landing-09/sonojs-landing-09.zip`
 

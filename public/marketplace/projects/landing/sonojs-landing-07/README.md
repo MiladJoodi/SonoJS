@@ -17,7 +17,7 @@ Source: `E:\dl\prompt\18`
 
 ## Live / package
 
-- Demo: https://sonojs-landing-07.winbeta-com.workers.dev/
+- Demo: https://sonojs-landing-07.sonojs.workers.dev/
 - Source: `E:\dl\prompt\18`
 - Zip: `products/landing/sonojs-landing-07/sonojs-landing-07.zip`
 

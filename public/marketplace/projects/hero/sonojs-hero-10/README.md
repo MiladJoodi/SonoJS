@@ -17,7 +17,7 @@ Orbital art carousel hero. Demo brand: **Visionaries**.
 
 ## Live / package
 
-- Demo: https://sonojs-hero-10.winbeta-com.workers.dev/
+- Demo: https://sonojs-hero-10.sonojs.workers.dev/
 - Source: `E:\dl\prompt\11`
 - Zip: `products/heroes/sonojs-hero-10/sonojs-hero-10.zip`
 

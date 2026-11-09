@@ -18,7 +18,7 @@ No `cover.mp4` for this item.
 
 ## Live / package
 
-- Demo: https://sonojs-hero-26.winbeta-com.workers.dev/
+- Demo: https://sonojs-hero-26.sonojs.workers.dev/
 - Source: `E:\dl\prompt\33`
 - Zip: `products/heroes/sonojs-hero-26/sonojs-hero-26.zip`
 

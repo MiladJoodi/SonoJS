@@ -17,7 +17,7 @@ Spatial try-on storefront. Demo brand: **VirtualFit**.
 
 ## Live / package
 
-- Demo: https://sonojs-ecommerce-01.winbeta-com.workers.dev/
+- Demo: https://sonojs-ecommerce-01.sonojs.workers.dev/
 - Package folder: `E:\SonoJS-pro\products\ecommerce\sonojs-ecommerce-01\sonojs-ecommerce-01`
 - Entry: `virtualfit.html` + `virtualfit-assets/`
 

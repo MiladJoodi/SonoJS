@@ -17,7 +17,7 @@ AI trip-planner marketing hero. Demo brand: **wandor**.
 
 ## Live / package
 
-- Demo: https://sonojs-hero-42.winbeta-com.workers.dev/
+- Demo: https://sonojs-hero-42.sonojs.workers.dev/
 - Source: `E:\dl\prompt2\54`
 - Zip: `products/heroes/sonojs-hero-42/sonojs-hero-42.zip`
 - Local: `npm install` then `npm run dev`

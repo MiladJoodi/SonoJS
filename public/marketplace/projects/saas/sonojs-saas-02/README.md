@@ -17,7 +17,7 @@ Multi-page recipe catalog with pantry search and cook mode. Demo brand: **Forkfu
 
 ## Live / package
 
-- Demo: https://sonojs-saas-02.winbeta-com.workers.dev/
+- Demo: https://sonojs-saas-02.sonojs.workers.dev/
 - Source: `E:\dl\prompt\42`
 - Zip: `products/saas/sonojs-saas-02/sonojs-saas-02.zip`
 

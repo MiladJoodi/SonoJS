@@ -17,7 +17,7 @@ AI app-builder marketing hero. Demo brand: **Fastshot**.
 
 ## Live / package
 
-- Demo: https://sonojs-hero-52.winbeta-com.workers.dev/
+- Demo: https://sonojs-hero-52.sonojs.workers.dev/
 - Source: `E:\dl\prompt2\62`
 - Zip: `products/heroes/sonojs-hero-52/sonojs-hero-52.zip`
 

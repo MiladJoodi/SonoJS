@@ -17,7 +17,7 @@ Full-viewport AI-product marketing hero. Demo brand: **JungleMind**.
 
 ## Live / package
 
-- Demo: https://sonojs-hero-56.winbeta-com.workers.dev/
+- Demo: https://sonojs-hero-56.sonojs.workers.dev/
 - Zip: `products/heroes/sonojs-hero-56/sonojs-hero-56.zip`
 - Local: open `index.html` or serve the unzipped folder statically
 

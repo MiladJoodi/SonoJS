@@ -17,7 +17,7 @@ Personal portfolio marketing site. Demo brand: **Michael Smith**.
 
 ## Live / package
 
-- Demo: https://sonojs-portfolio-03.winbeta-com.workers.dev/
+- Demo: https://sonojs-portfolio-03.sonojs.workers.dev/
 - Source: `E:\dl\prompt2\67`
 - Zip: `products/portfolio/sonojs-portfolio-03/sonojs-portfolio-03.zip`
 - Local: `npm install` then `npm run dev`

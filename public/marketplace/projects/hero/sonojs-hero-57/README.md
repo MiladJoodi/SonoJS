@@ -17,7 +17,7 @@ Full-viewport creative-studio footer / closing hero with gaze-scrub video. Demo 
 
 ## Live / package
 
-- Demo: https://sonojs-hero-57.winbeta-com.workers.dev/
+- Demo: https://sonojs-hero-57.sonojs.workers.dev/
 - Source: `E:\dl\prompt2\69`
 - Zip: `products/heroes/sonojs-hero-57/sonojs-hero-57.zip`
 - Local: `npm install` then `npm run dev`

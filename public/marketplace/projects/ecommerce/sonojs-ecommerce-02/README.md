@@ -17,7 +17,7 @@ Spanish-language Apple-style product marketing page. Demo brand: **MacBook Neo**
 
 ## Live / package
 
-- Demo: https://sonojs-ecommerce-02.winbeta-com.workers.dev/
+- Demo: https://sonojs-ecommerce-02.sonojs.workers.dev/
 - Source: `E:\dl\prompt2\72`
 - Zip: `products/ecommerce/sonojs-ecommerce-02/sonojs-ecommerce-02.zip`
 - Local: open `index.html` or serve the folder statically

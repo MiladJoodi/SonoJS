@@ -17,7 +17,7 @@ Construction materials video hero. Demo brand: **Hexora**.
 
 ## Live / package
 
-- Demo: https://sonojs-hero-22.winbeta-com.workers.dev/
+- Demo: https://sonojs-hero-22.sonojs.workers.dev/
 - Source: `E:\dl\prompt\26`
 - Zip: `products/heroes/sonojs-hero-22/sonojs-hero-22.zip`
 

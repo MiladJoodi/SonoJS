@@ -17,7 +17,7 @@ Sales & analytics marketing hero with glass dashboard mockup. Demo brand: **Scal
 
 ## Live / package
 
-- Demo: https://sonojs-hero-31.winbeta-com.workers.dev/
+- Demo: https://sonojs-hero-31.sonojs.workers.dev/
 - Source: `E:\dl\prompt\38`
 - Zip: `products/heroes/sonojs-hero-31/sonojs-hero-31.zip`
 

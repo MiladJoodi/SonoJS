@@ -17,7 +17,7 @@ Night visual-archive hero with gold portrait reveal. Demo brand: **faruq®**.
 
 ## Live / package
 
-- Demo: https://sonojs-hero-25.winbeta-com.workers.dev/
+- Demo: https://sonojs-hero-25.sonojs.workers.dev/
 - Source: `E:\dl\prompt\31`
 - Zip: `products/heroes/sonojs-hero-25/sonojs-hero-25.zip`
 

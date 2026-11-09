@@ -17,7 +17,7 @@ Project management video hero. Demo brand: **Sprints**.
 
 ## Live / package
 
-- Demo: https://sonojs-hero-23.winbeta-com.workers.dev/
+- Demo: https://sonojs-hero-23.sonojs.workers.dev/
 - Source: `E:\dl\prompt\28`
 - Zip: `products/heroes/sonojs-hero-23/sonojs-hero-23.zip`
 

@@ -17,7 +17,7 @@ Multi-section studio marketing landing. Demo brand: **Asme**.
 
 ## Live / package
 
-- Demo: https://sonojs-landing-13.winbeta-com.workers.dev/
+- Demo: https://sonojs-landing-13.sonojs.workers.dev/
 - Source: `E:\dl\prompt2\66`
 - Zip: `products/landing/sonojs-landing-13/sonojs-landing-13.zip`
 - Local: `npm install` then `npm run dev`

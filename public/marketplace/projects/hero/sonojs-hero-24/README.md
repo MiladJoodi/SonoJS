@@ -17,7 +17,7 @@ Travel airline video hero. Demo brand: **Airlines**.
 
 ## Live / package
 
-- Demo: https://sonojs-hero-24.winbeta-com.workers.dev/
+- Demo: https://sonojs-hero-24.sonojs.workers.dev/
 - Source: `E:\dl\prompt\30`
 - Zip: `products/heroes/sonojs-hero-24/sonojs-hero-24.zip`
 

@@ -17,7 +17,7 @@ Data-privacy marketing hero. Demo brand: **securify**.
 
 ## Live / package
 
-- Demo: https://sonojs-hero-48.winbeta-com.workers.dev/
+- Demo: https://sonojs-hero-48.sonojs.workers.dev/
 - Source: `E:\dl\prompt2\59`
 - Zip: `products/heroes/sonojs-hero-48/sonojs-hero-48.zip`
 - Local: `npm install` then `npm run dev`

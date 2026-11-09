@@ -17,7 +17,7 @@ Full-viewport craft commerce footer. Demo brand: **Heritage Grove**.
 
 ## Live / package
 
-- Demo: https://sonojs-hero-53.winbeta-com.workers.dev/
+- Demo: https://sonojs-hero-53.sonojs.workers.dev/
 - Source: `E:\dl\prompt2\65`
 - Zip: `products/heroes/sonojs-hero-53/sonojs-hero-53.zip`
 

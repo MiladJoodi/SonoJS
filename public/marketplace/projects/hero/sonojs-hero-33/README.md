@@ -17,7 +17,7 @@ Data-platform marketing hero with video stage and revenue growth card. Demo bran
 
 ## Live / package
 
-- Demo: https://sonojs-hero-33.winbeta-com.workers.dev/
+- Demo: https://sonojs-hero-33.sonojs.workers.dev/
 - Source: `E:\dl\prompt\40`
 - Zip: `products/heroes/sonojs-hero-33/sonojs-hero-33.zip`
 

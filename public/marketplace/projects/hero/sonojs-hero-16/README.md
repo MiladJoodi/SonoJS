@@ -17,7 +17,7 @@ Memorial product hero. Demo brand: **NeuroLink**.
 
 ## Live / package
 
-- Demo: https://sonojs-hero-16.winbeta-com.workers.dev/
+- Demo: https://sonojs-hero-16.sonojs.workers.dev/
 - Source: `E:\dl\prompt\20`
 - Zip: `products/heroes/sonojs-hero-16/sonojs-hero-16.zip`
 

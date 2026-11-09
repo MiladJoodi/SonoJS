@@ -17,7 +17,7 @@ Travel app video hero. Demo brand: **Trav**.
 
 ## Live / package
 
-- Demo: https://sonojs-hero-18.winbeta-com.workers.dev/
+- Demo: https://sonojs-hero-18.sonojs.workers.dev/
 - Source: `E:\dl\prompt\22`
 - Zip: `products/heroes/sonojs-hero-18/sonojs-hero-18.zip`
 

@@ -17,7 +17,7 @@ Noise-cancelling headphone product landing. Demo brand: **HUM One** / HUM Audio.
 
 ## Live / package
 
-- Demo: https://sonojs-landing-04.winbeta-com.workers.dev/
+- Demo: https://sonojs-landing-04.sonojs.workers.dev/
 - Source: `E:\dl\prompt\07\hum`
 - Zip: `products/landing/sonojs-landing-04/sonojs-landing-04.zip`
 

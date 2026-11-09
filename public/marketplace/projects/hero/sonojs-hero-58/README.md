@@ -17,7 +17,7 @@ Full-viewport travel / itinerary marketing hero. Demo brand: **Wanderful**.
 
 ## Live / package
 
-- Demo: https://sonojs-hero-58.winbeta-com.workers.dev/
+- Demo: https://sonojs-hero-58.sonojs.workers.dev/
 - Source: `E:\dl\prompt2\71`
 - Zip: `products/heroes/sonojs-hero-58/sonojs-hero-58.zip`
 - Local: `npm install` then `npm run dev`

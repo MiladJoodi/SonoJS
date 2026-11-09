@@ -17,7 +17,7 @@ Creative agency video hero. Demo brand: **Portiva**.
 
 ## Live / package
 
-- Demo: https://sonojs-hero-17.winbeta-com.workers.dev/
+- Demo: https://sonojs-hero-17.sonojs.workers.dev/
 - Source: `E:\dl\prompt\21`
 - Zip: `products/heroes/sonojs-hero-17/sonojs-hero-17.zip`
 

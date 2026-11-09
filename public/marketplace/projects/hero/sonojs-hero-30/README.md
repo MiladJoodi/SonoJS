@@ -17,7 +17,7 @@ Productivity marketing hero with video stage and dashboard preview. Demo brand: 
 
 ## Live / package
 
-- Demo: https://sonojs-hero-30.winbeta-com.workers.dev/
+- Demo: https://sonojs-hero-30.sonojs.workers.dev/
 - Source: `E:\dl\prompt\37`
 - Zip: `products/heroes/sonojs-hero-30/sonojs-hero-30.zip`
 

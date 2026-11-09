@@ -17,7 +17,7 @@ Cursor-driven variable typography hero. Demo brand: **Liquid Type**.
 
 ## Live / package
 
-- Demo: https://sonojs-hero-12.winbeta-com.workers.dev/
+- Demo: https://sonojs-hero-12.sonojs.workers.dev/
 - Source: `E:\dl\prompt\16`
 - Zip: `products/heroes/sonojs-hero-12/sonojs-hero-12.zip`
 

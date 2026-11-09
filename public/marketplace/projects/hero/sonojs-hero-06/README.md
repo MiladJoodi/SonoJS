@@ -17,7 +17,7 @@ Planet education hero. Demo brand: **SpaceEdu**.
 
 ## Live / package
 
-- Demo: https://sonojs-hero-06.winbeta-com.workers.dev/
+- Demo: https://sonojs-hero-06.sonojs.workers.dev/
 - Source: `E:\dl\prompt\05` (`index.html` + `assets/`)
 - Zip: `products/heroes/sonojs-hero-06/sonojs-hero-06.zip`
 

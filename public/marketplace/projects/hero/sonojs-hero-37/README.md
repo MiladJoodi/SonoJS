@@ -17,7 +17,7 @@ Tactical techwear hero with light-reveal mask. Demo brand: **VIRIDIA**.
 
 ## Live / package
 
-- Demo: https://sonojs-hero-37.winbeta-com.workers.dev/
+- Demo: https://sonojs-hero-37.sonojs.workers.dev/
 - Source: `E:\dl\prompt2\50`
 - Zip: `products/heroes/sonojs-hero-37/sonojs-hero-37.zip`
 - Local: `npx --yes serve -l 8765`

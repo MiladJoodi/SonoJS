@@ -17,7 +17,7 @@ Scroll-driven climate sensing hero. Demo brand: **Mossline**.
 
 ## Live / package
 
-- Demo: https://sonojs-hero-04.winbeta-com.workers.dev/
+- Demo: https://sonojs-hero-04.sonojs.workers.dev/
 - Source: `E:\dl\prompt\02` (`index.html` + `assets/`)
 - Zip: `products/heroes/sonojs-hero-04/sonojs-hero-04.zip`
 

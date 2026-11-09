@@ -17,7 +17,7 @@ Premium automation & fintech hero with full-bleed video. Demo brand: **Alumica**
 
 ## Live / package
 
-- Demo: https://sonojs-hero-29.winbeta-com.workers.dev/
+- Demo: https://sonojs-hero-29.sonojs.workers.dev/
 - Source: `E:\dl\prompt\36`
 - Zip: `products/heroes/sonojs-hero-29/sonojs-hero-29.zip`
 

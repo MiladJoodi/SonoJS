@@ -17,7 +17,7 @@ Vacation-rentals marketplace homepage. Demo brand: **Airbnb**.
 
 ## Live / package
 
-- Demo: https://sonojs-ecommerce-03.winbeta-com.workers.dev/
+- Demo: https://sonojs-ecommerce-03.sonojs.workers.dev/
 - Source: `E:\dl\prompt2\75`
 - Zip: `products/ecommerce/sonojs-ecommerce-03/sonojs-ecommerce-03.zip`
 - Local: open `index.html` or serve the folder statically

@@ -17,7 +17,7 @@ Wellness marketing hero with liquid-glass nav. Demo brand: **Equilibrium**.
 
 ## Live / package
 
-- Demo: https://sonojs-hero-45.winbeta-com.workers.dev/
+- Demo: https://sonojs-hero-45.sonojs.workers.dev/
 - Source: `E:\dl\prompt2\56`
 - Zip: `products/heroes/sonojs-hero-45/sonojs-hero-45.zip`
 - Local: `npm install` then `npm run dev`

@@ -17,7 +17,7 @@ Studio hero with faded video and newsletter glass pill. Demo brand: **Asme**.
 
 ## Live / package
 
-- Demo: https://sonojs-hero-46.winbeta-com.workers.dev/
+- Demo: https://sonojs-hero-46.sonojs.workers.dev/
 - Source: `E:\dl\prompt2\57`
 - Zip: `products/heroes/sonojs-hero-46/sonojs-hero-46.zip`
 - Local: `npm install` then `npm run dev`
