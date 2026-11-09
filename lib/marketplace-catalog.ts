@@ -5061,6 +5061,71 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
   },
+  {
+    slug: "sonojs-hero-54",
+    title: "LinkFlow",
+    tagline:
+      "Close the rift linking signals and action - boomerang video hero.",
+    description:
+      "LinkFlow is a full-viewport AI-workflow marketing hero by SonoJS. Built with Vite, React 18, TypeScript, Tailwind CSS 3, and Lucide. Boomerang hero-bg.mp4 stage, LinkFlow™ mark, Purpose / The Process / Tariffs nav with Try it Live, Close the rift linking signals and action headline (Neue Haas), FluxEngine™ bottom pitch, Sign Me Up / Enter chrome, and How we build? play control. Demo integration chrome only - no live connectors. Vite build ready for Cloudflare Workers.",
+    category: "hero",
+    stack: ["react", "vite", "typescript", "tailwind", "lucide"],
+    priceLabel: "Free",
+    priceCents: 0,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 130,
+    accent: "130",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "hero",
+    coverImage: "/marketplace/projects/hero/sonojs-hero-54/main.webp",
+    coverImageDark: null,
+    coverVideo: "/marketplace/projects/hero/sonojs-hero-54/cover.mp4",
+    detailCoverImage: "/marketplace/projects/hero/sonojs-hero-54/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-hero-54.winbeta-com.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-09",
+    firstReleasedAt: "2026-11-09",
+    screens: 1,
+    highlights: [
+      {
+        title: "Boomerang video stage",
+        body: "hero-bg.mp4 plays forward/back via BoomerangVideoBg for a seamless loop feel.",
+      },
+      {
+        title: "Signals-to-action type",
+        body: "Close the rift linking signals and action with soft green Neue Haas display.",
+      },
+      {
+        title: "FluxEngine chrome",
+        body: "Try it Live / Know More CTAs, Sign Me Up / Enter, and How we build? control.",
+      },
+      {
+        title: "Vite and fork-ready",
+        body: "Vite 5 + React 18 + TypeScript + Tailwind 3 + Lucide - npm run build to dist/.",
+      },
+    ],
+    includes: [
+      "Full Vite + React 18 + TypeScript source (LinkFlow)",
+      "App.tsx + BoomerangVideoBg",
+      "Tailwind CSS 3 + PostCSS",
+      "public/videos/hero-bg.mp4",
+      "public/fonts (Inter + Neue Haas)",
+      "lucide-react",
+    ],
+    requirements: [
+      "Node.js 20 or newer",
+      "Vite 5",
+      "React 18",
+      "Tailwind CSS 3",
+      "Lucide React",
+    ],
+  },
 ]
 
 export function getMarketplaceProject(
