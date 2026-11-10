@@ -7,28 +7,24 @@ import {
   MARKETPLACE_CATEGORY_LABEL,
   type MarketplaceCategory,
   type MarketplaceStack,
-} from "@/lib/marketplace-catalog"
+} from "@/lib/marketplace-catalog-meta"
 import {
   compareMarketplaceNewest,
   type MarketplacePreviewItem,
 } from "@/lib/marketplace-preview-data"
 import { cn } from "@/lib/utils"
 
-export type MarketplaceSortKey = "featured" | "popular" | "recent"
-
 export type MarketplacePriceKey = "all" | "free" | "paid"
 
 export type MarketplaceProductsFilterState = {
   categories: MarketplaceCategory[]
   stacks: MarketplaceStack[]
-  sort: MarketplaceSortKey
   price: MarketplacePriceKey
 }
 
 export const EMPTY_PRODUCTS_FILTER: MarketplaceProductsFilterState = {
   categories: [],
   stacks: [],
-  sort: "featured",
   price: "all",
 }
 
@@ -52,19 +48,8 @@ export function applyMarketplaceProductsFilter(
     next = next.filter((i) => i.priceCents > 0)
   }
 
-  if (state.sort === "popular") {
-    next = [...next].sort(
-      (a, b) =>
-        b.reviewCount - a.reviewCount ||
-        b.rating - a.rating ||
-        a.title.localeCompare(b.title)
-    )
-  } else if (state.sort === "recent") {
-    next = [...next].sort(compareMarketplaceNewest)
-  }
-  // featured: keep catalog order
-
-  return next
+  // Always newest first (later catalog entry wins on same day)
+  return [...next].sort(compareMarketplaceNewest)
 }
 
 function toggleIn<T>(list: T[], value: T): T[] {

@@ -15,7 +15,6 @@ export {
 export type {
   MarketplacePriceKey,
   MarketplaceProductsFilterState,
-  MarketplaceSortKey,
 } from "./products-filter"
 export { MarketplaceStarRating } from "./star-rating"
 export { StackChip, StackIcon } from "./stack-icon"

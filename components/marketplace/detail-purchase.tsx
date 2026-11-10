@@ -7,7 +7,7 @@ import { StackChip } from "@/components/marketplace/stack-icon"
 import {
   MARKETPLACE_BADGE_LABEL,
   type MarketplaceBadge,
-} from "@/lib/marketplace-catalog"
+} from "@/lib/marketplace-catalog-meta"
 import type { MarketplacePreviewDetail } from "@/lib/marketplace-preview-data"
 import { cn } from "@/lib/utils"
 

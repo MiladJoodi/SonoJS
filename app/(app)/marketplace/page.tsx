@@ -1,6 +1,7 @@
 import { Suspense } from "react"
 
 import { MarketplaceCatalogPage } from "@/components/marketplace"
+import { getMarketplacePreviewItems } from "@/lib/marketplace-preview-data"
 import { pageMetadata } from "@/lib/seo"
 import { LoadingRing } from "@/components/sono-loader"
 
@@ -12,6 +13,8 @@ export const metadata = pageMetadata({
 })
 
 export default function MarketplacePage() {
+  const items = getMarketplacePreviewItems()
+
   return (
     <Suspense
       fallback={
@@ -20,7 +23,7 @@ export default function MarketplacePage() {
         </div>
       }
     >
-      <MarketplaceCatalogPage />
+      <MarketplaceCatalogPage items={items} />
     </Suspense>
   )
 }

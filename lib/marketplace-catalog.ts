@@ -1,185 +1,23 @@
-export type MarketplaceCategory =
-  | "dashboard"
-  | "landing"
-  | "saas"
-  | "auth"
-  | "ecommerce"
-  | "ai"
-  | "betting"
-  | "crypto"
-  | "fintech"
-  | "hero"
-  | "portfolio"
-
-export type MarketplaceStack =
-  | "nextjs"
-  | "react"
-  | "vite"
-  | "vercel"
-  | "bun"
-  | "lucide"
-  | "tailwind"
-  | "typescript"
-  | "javascript"
-  | "html"
-  | "css"
-  | "sass"
-  | "nodejs"
-  | "d3"
-  | "threejs"
-  | "gsap"
-  | "reactquery"
-  | "zustand"
-  | "axios"
-  | "reactrouter"
-  | "socketio"
-  | "recharts"
-  | "chartjs"
-  | "lightweightcharts"
-  | "clerk"
-  | "authjs"
-  | "jwt"
-  | "linkedin"
-  | "indeed"
-  | "github"
-  | "medium"
-  | "devto"
-  | "stripe"
-  | "visa"
-  | "resend"
-  | "drizzle"
-  | "prisma"
-  | "npm"
-  | "gmail"
-
-export type MarketplaceBadge = "bestseller" | "new" | "free"
-
-export type MarketplaceCoverVariant =
-  | "dashboard"
-  | "landing"
-  | "auth"
-  | "shop"
-  | "ai"
-  | "saas"
-  | "hero"
-
-export type MarketplaceProject = {
-  slug: string
-  title: string
-  tagline: string
-  description: string
-  category: MarketplaceCategory
-  stack: MarketplaceStack[]
-  priceLabel: string
-  priceCents: number
-  rating: number
-  reviewCount: number
-  salesLabel: string
-  /** Cover tint / accent hue for prototype thumbnails & halos */
-  coverHue: number
-  /** Accent token used for cover glow (defaults to coverHue) */
-  accent: string
-  /** When false: still listed, but Live/Buy stay disabled (Coming soon). */
-  enabled: boolean
-  /**
-   * Download gate - same model as docs (`public` | `member` | `pro`).
-   * Templates default to `member` (signed-in free). Live preview stays public.
-   */
-  access?: "public" | "member" | "pro"
-  badge: MarketplaceBadge | null
-  coverVariant: MarketplaceCoverVariant
-  /** Catalog card cover (light) - file: cover-light.webp */
-  coverImage?: string | null
-  /** Catalog card cover (dark) - file: cover-dark.webp */
-  coverImageDark?: string | null
-  /**
-   * Catalog / detail cover video - file: cover.mp4 (muted).
-   * With a still cover: catalog card plays on hover.
-   * Video-only: catalog autoplays. Detail gallery prefers video when set.
-   */
-  coverVideo?: string | null
-  /** Detail-page hero (light) - file: main-light.webp; falls back to coverImage */
-  detailCoverImage?: string | null
-  /** Detail-page hero (dark) - file: main-dark.webp */
-  detailCoverImageDark?: string | null
-  liveUrl: string
-  /** Optional public / absolute download URL (redirect). Prefer Pro registry zip via slug. */
-  downloadUrl: string
-  version: string
-  updatedAt: string
-  firstReleasedAt: string
-  screens: number
-  highlights: { title: string; body: string }[]
-  includes: string[]
-  requirements: string[]
-  /** Optional local run command shown on the detail page (copyable). */
-  runCommand?: string
-}
-
-export const MARKETPLACE_BADGE_LABEL: Record<MarketplaceBadge, string> = {
-  bestseller: "Bestseller",
-  new: "New",
-  free: "Free",
-}
-
-export const MARKETPLACE_CATEGORY_LABEL: Record<MarketplaceCategory, string> = {
-  dashboard: "Admin & Dashboard",
-  landing: "Landing & Marketing",
-  saas: "SaaS Starter",
-  auth: "Authentication",
-  ecommerce: "Ecommerce",
-  ai: "AI & Agents",
-  betting: "Betting & Casino",
-  crypto: "Crypto & Trading",
-  fintech: "Fintech & Payments",
-  hero: "Hero & Interaction",
-  portfolio: "Portfolio",
-}
-
-export const MARKETPLACE_STACK_LABEL: Record<MarketplaceStack, string> = {
-  nextjs: "Next.js",
-  react: "React",
-  vite: "Vite",
-  vercel: "Vercel",
-  bun: "Bun",
-  lucide: "Lucide",
-  tailwind: "Tailwind CSS",
-  typescript: "TypeScript",
-  javascript: "JavaScript",
-  html: "HTML",
-  css: "CSS",
-  sass: "Sass",
-  nodejs: "Node.js",
-  d3: "D3",
-  threejs: "Three.js",
-  gsap: "GSAP",
-  reactquery: "React Query",
-  zustand: "Zustand",
-  axios: "Axios",
-  reactrouter: "React Router",
-  socketio: "Socket.IO",
-  recharts: "Recharts",
-  chartjs: "Chart.js",
-  lightweightcharts: "Lightweight Charts",
-  clerk: "Clerk",
-  authjs: "Auth.js",
-  jwt: "JWT",
-  linkedin: "LinkedIn",
-  indeed: "Indeed",
-  github: "GitHub",
-  medium: "Medium",
-  devto: "DEV",
-  stripe: "Stripe",
-  visa: "Visa",
-  resend: "Resend",
-  drizzle: "Drizzle",
-  prisma: "Prisma",
-  npm: "npm",
-  gmail: "Gmail",
-}
+export type {
+  MarketplaceBadge,
+  MarketplaceCategory,
+  MarketplaceCoverVariant,
+  MarketplaceProject,
+  MarketplaceStack,
+} from "@/lib/marketplace-catalog-meta"
+export {
+  MARKETPLACE_BADGE_LABEL,
+  MARKETPLACE_CATEGORY_LABEL,
+  MARKETPLACE_STACK_LABEL,
+} from "@/lib/marketplace-catalog-meta"
+import type {
+  MarketplaceCategory,
+  MarketplaceProject,
+  MarketplaceStack,
+} from "@/lib/marketplace-catalog-meta"
 
 export const marketplaceProjects: MarketplaceProject[] = [
-  {
+{
     slug: "sonojs-dashboard-01",
     title: "Commerce Admin Dashboard",
     tagline:
@@ -245,7 +83,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "TypeScript 5",
     ],
   },
-  {
+{
     slug: "sonojs-dashboard-02",
     title: "Vantage",
     tagline:
@@ -319,7 +157,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "TypeScript 5+",
     ],
   },
-  {
+{
     slug: "sonojs-betting-01",
     title: "Casino Lobby",
     tagline:
@@ -383,7 +221,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "TypeScript 5",
     ],
   },
-  {
+{
     slug: "sonojs-betting-02",
     title: "Casino Homepage",
     tagline:
@@ -448,7 +286,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "TypeScript 5",
     ],
   },
-  {
+{
     slug: "sonojs-betting-03",
     title: "Casino Catalogue",
     tagline:
@@ -513,7 +351,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "TypeScript 5",
     ],
   },
-  {
+{
     slug: "sonojs-crypto-01",
     title: "Helix",
     tagline:
@@ -589,7 +427,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Lightweight Charts 5",
     ],
   },
-  {
+{
     slug: "sonojs-crypto-02",
     title: "Aether",
     tagline:
@@ -654,7 +492,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "TypeScript 5",
     ],
   },
-  {
+{
     slug: "sonojs-fintech-01",
     title: "Pocket",
     tagline: "Simple modern payments landing - clear hierarchy, ready to demo live.",
@@ -718,7 +556,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Framer Motion 11",
     ],
   },
-  {
+{
     slug: "sonojs-landing-01",
     title: "Mainline",
     tagline:
@@ -786,7 +624,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "TypeScript 5",
     ],
   },
-  {
+{
     slug: "sonojs-landing-02",
     title: "Changelog Template",
     tagline:
@@ -854,7 +692,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "pnpm (or npm) to install and run",
     ],
   },
-  {
+{
     slug: "sonojs-landing-03",
     title: "Aether",
     tagline:
@@ -923,7 +761,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Three.js / React Three Fiber (included in package.json)",
     ],
   },
-  {
+{
     slug: "sonojs-saas-01",
     title: "Glyph",
     tagline:
@@ -990,7 +828,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "OPENAI_API_KEY for live chat (optional on static demo)",
     ],
   },
-  {
+{
     slug: "sonojs-hero-01",
     title: "Otis",
     tagline:
@@ -1054,7 +892,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Tailwind CSS 4",
     ],
   },
-  {
+{
     slug: "sonojs-hero-02",
     title: "Juicy",
     tagline:
@@ -1121,7 +959,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Three.js / React Three Fiber (included in package.json)",
     ],
   },
-  {
+{
     slug: "sonojs-hero-03",
     title: "SkyElite",
     tagline:
@@ -1184,7 +1022,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Tailwind CSS 4",
     ],
   },
-  {
+{
     slug: "sonojs-ecommerce-01",
     title: "VirtualFit",
     tagline:
@@ -1247,7 +1085,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
   },
-  {
+{
     slug: "sonojs-ecommerce-02",
     title: "MacBook Neo",
     tagline:
@@ -1308,7 +1146,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Static file host (or open index.html locally)",
     ],
   },
-  {
+{
     slug: "sonojs-ecommerce-03",
     title: "Airbnb",
     tagline:
@@ -1369,7 +1207,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Static file host (or open index.html locally)",
     ],
   },
-  {
+{
     slug: "sonojs-ecommerce-04",
     title: "Shop",
     tagline:
@@ -1430,7 +1268,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Static file host (or open index.html locally)",
     ],
   },
-  {
+{
     slug: "sonojs-ecommerce-05",
     title: "Vertex",
     tagline:
@@ -1490,7 +1328,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Static file host (or open index.html locally)",
     ],
   },
-  {
+{
     slug: "sonojs-ecommerce-06",
     title: "iPhone Duo",
     tagline:
@@ -1552,7 +1390,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Vite 8",
     ],
   },
-  {
+{
     slug: "sonojs-ecommerce-07",
     title: "Marcus Thorne",
     tagline:
@@ -1614,7 +1452,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "React 19",
     ],
   },
-  {
+{
     slug: "sonojs-portfolio-01",
     title: "Jack",
     tagline:
@@ -1681,7 +1519,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Framer Motion (included in package.json)",
     ],
   },
-  {
+{
     slug: "sonojs-portfolio-02",
     title: "Folio",
     tagline:
@@ -1746,7 +1584,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "GSAP (included in package.json)",
     ],
   },
-  {
+{
     slug: "sonojs-portfolio-03",
     title: "Michael Smith",
     tagline:
@@ -1814,7 +1652,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "React Router",
     ],
   },
-  {
+{
     slug: "sonojs-portfolio-04",
     title: "Collage",
     tagline:
@@ -1878,7 +1716,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "TypeScript 5+",
     ],
   },
-  {
+{
     slug: "sonojs-portfolio-05",
     title: "Alpenglow",
     tagline:
@@ -1943,7 +1781,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "TypeScript 5+",
     ],
   },
-  {
+{
     slug: "sonojs-hero-04",
     title: "Mossline",
     tagline:
@@ -2005,7 +1843,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
   },
-  {
+{
     slug: "sonojs-hero-05",
     title: "Planet Jumping",
     tagline:
@@ -2066,7 +1904,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
   },
-  {
+{
     slug: "sonojs-hero-06",
     title: "SpaceEdu",
     tagline:
@@ -2128,7 +1966,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
   },
-  {
+{
     slug: "sonojs-hero-07",
     title: "Lumen Roof",
     tagline:
@@ -2189,7 +2027,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
   },
-  {
+{
     slug: "sonojs-landing-04",
     title: "HUM One",
     tagline:
@@ -2252,7 +2090,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
   },
-  {
+{
     slug: "sonojs-hero-08",
     title: "Lumora",
     tagline:
@@ -2313,7 +2151,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
   },
-  {
+{
     slug: "sonojs-landing-05",
     title: "VEYRA",
     tagline:
@@ -2379,7 +2217,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Tailwind CSS 3",
     ],
   },
-  {
+{
     slug: "sonojs-landing-06",
     title: "Cinema Reel",
     tagline:
@@ -2444,7 +2282,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "GSAP (included in package.json)",
     ],
   },
-  {
+{
     slug: "sonojs-landing-07",
     title: "Melli",
     tagline:
@@ -2507,7 +2345,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
     ],
     runCommand: "npx serve .",
   },
-  {
+{
     slug: "sonojs-landing-08",
     title: "Sabrina Residences",
     tagline:
@@ -2569,7 +2407,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
   },
-  {
+{
     slug: "sonojs-landing-09",
     title: "Plety",
     tagline:
@@ -2632,7 +2470,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Network access for CDN hero/feature videos",
     ],
   },
-  {
+{
     slug: "sonojs-hero-09",
     title: "Sellix",
     tagline:
@@ -2693,7 +2531,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
   },
-  {
+{
     slug: "sonojs-hero-10",
     title: "Visionaries",
     tagline:
@@ -2755,7 +2593,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "TypeScript 5+",
     ],
   },
-  {
+{
     slug: "sonojs-hero-11",
     title: "Atlas",
     tagline:
@@ -2820,7 +2658,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "WebGL2-capable browser",
     ],
   },
-  {
+{
     slug: "sonojs-hero-12",
     title: "Liquid Type",
     tagline:
@@ -2884,7 +2722,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "GSAP + geist (included in package.json)",
     ],
   },
-  {
+{
     slug: "sonojs-hero-13",
     title: "Membrane",
     tagline:
@@ -2948,7 +2786,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "GSAP (included in package.json)",
     ],
   },
-  {
+{
     slug: "sonojs-hero-14",
     title: "Pink Rider",
     tagline:
@@ -3009,7 +2847,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
   },
-  {
+{
     slug: "sonojs-hero-15",
     title: "VELORA",
     tagline:
@@ -3070,7 +2908,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
   },
-  {
+{
     slug: "sonojs-hero-16",
     title: "NeuroLink",
     tagline:
@@ -3131,7 +2969,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
   },
-  {
+{
     slug: "sonojs-hero-17",
     title: "Portiva",
     tagline:
@@ -3193,7 +3031,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
   },
-  {
+{
     slug: "sonojs-hero-18",
     title: "Trav",
     tagline:
@@ -3255,7 +3093,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
   },
-  {
+{
     slug: "sonojs-hero-19",
     title: "Nearby Homes",
     tagline:
@@ -3316,7 +3154,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
   },
-  {
+{
     slug: "sonojs-hero-20",
     title: "Lumina Vision",
     tagline:
@@ -3377,7 +3215,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
   },
-  {
+{
     slug: "sonojs-hero-21",
     title: "SceneAI",
     tagline:
@@ -3437,7 +3275,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Tailwind CSS 4",
     ],
   },
-  {
+{
     slug: "sonojs-hero-22",
     title: "Hexora",
     tagline:
@@ -3499,7 +3337,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "lucide-react (included in package.json)",
     ],
   },
-  {
+{
     slug: "sonojs-hero-23",
     title: "Sprints",
     tagline:
@@ -3561,7 +3399,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
   },
-  {
+{
     slug: "sonojs-hero-24",
     title: "Airlines",
     tagline:
@@ -3623,7 +3461,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
   },
-  {
+{
     slug: "sonojs-hero-25",
     title: "faruq®",
     tagline:
@@ -3684,7 +3522,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
   },
-  {
+{
     slug: "sonojs-hero-26",
     title: "Healcure",
     tagline:
@@ -3746,7 +3584,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
   },
-  {
+{
     slug: "sonojs-hero-27",
     title: "JetCrest",
     tagline:
@@ -3808,7 +3646,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
   },
-  {
+{
     slug: "sonojs-hero-28",
     title: "Qumica",
     tagline:
@@ -3871,7 +3709,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Lucide React",
     ],
   },
-  {
+{
     slug: "sonojs-hero-29",
     title: "Alumica",
     tagline:
@@ -3932,7 +3770,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
   },
-  {
+{
     slug: "sonojs-hero-30",
     title: "Brightly",
     tagline:
@@ -3995,7 +3833,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Tailwind CSS 4",
     ],
   },
-  {
+{
     slug: "sonojs-hero-31",
     title: "Scalable",
     tagline:
@@ -4058,7 +3896,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "TanStack React Router",
     ],
   },
-  {
+{
     slug: "sonojs-hero-32",
     title: "Oasis",
     tagline:
@@ -4122,7 +3960,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Lucide React",
     ],
   },
-  {
+{
     slug: "sonojs-hero-33",
     title: "Apogee",
     tagline:
@@ -4186,7 +4024,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Lucide React",
     ],
   },
-  {
+{
     slug: "sonojs-landing-10",
     title: "Rovela",
     tagline:
@@ -4251,7 +4089,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Lucide React",
     ],
   },
-  {
+{
     slug: "sonojs-saas-02",
     title: "Forkful",
     tagline:
@@ -4316,7 +4154,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Lucide React",
     ],
   },
-  {
+{
     slug: "sonojs-saas-03",
     title: "Auros",
     tagline:
@@ -4380,7 +4218,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Three.js",
     ],
   },
-  {
+{
     slug: "sonojs-saas-04",
     title: "AuthKit",
     tagline:
@@ -4443,7 +4281,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Tailwind CSS 4",
     ],
   },
-  {
+{
     slug: "sonojs-saas-05",
     title: "Resend",
     tagline:
@@ -4506,7 +4344,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Tailwind CSS 4",
     ],
   },
-  {
+{
     slug: "sonojs-saas-06",
     title: "Meridian",
     tagline:
@@ -4571,7 +4409,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Framer Motion",
     ],
   },
-  {
+{
     slug: "sonojs-saas-07",
     title: "Eclipse",
     tagline:
@@ -4633,7 +4471,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Static file host (npx --yes serve . or python -m http.server)",
     ],
   },
-  {
+{
     slug: "sonojs-saas-08",
     title: "Forma",
     tagline:
@@ -4695,7 +4533,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Static file host (npx --yes http-server -p 8765)",
     ],
   },
-  {
+{
     slug: "sonojs-saas-09",
     title: "Yunjian",
     tagline:
@@ -4757,130 +4595,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Static file host (npx --yes serve .)",
     ],
   },
-  {
-    slug: "sonojs-saas-10",
-    title: "North Form",
-    tagline:
-      "Independent creative studio - identity, motion, and digital systems.",
-    description:
-      "North Form is a dark editorial creative-studio marketing site by SonoJS (demo brand: NORTH/FORM). Self-contained HTML with inline CSS/JS plus local image and video assets. Hero We build visual systems where identity, motion, image and digital become one language., selected work (Silent Geometry, Outer State, Still Moving, Future Matter), art direction / identity / digital services, Ways to Work Together plans, archive collaborations with hover previews, cinematic CTA, FAQ, and contact form. Demo studio chrome only - no CRM backend. Run with npx --yes serve . or host statically on Cloudflare Workers.",
-    category: "saas",
-    stack: ["html", "css", "javascript"],
-    priceLabel: "Free",
-    priceCents: 0,
-    rating: 0,
-    reviewCount: 0,
-    salesLabel: "",
-    coverHue: 75,
-    accent: "75",
-    enabled: true,
-    access: "member",
-    badge: "new",
-    coverVariant: "saas",
-    coverImage: "/marketplace/projects/saas/sonojs-saas-10/main.webp",
-    coverImageDark: null,
-    coverVideo: "/marketplace/projects/saas/sonojs-saas-10/cover.mp4",
-    detailCoverImage: "/marketplace/projects/saas/sonojs-saas-10/main.webp",
-    detailCoverImageDark: null,
-    liveUrl: "https://sonojs-saas-10.sonojs2.workers.dev/",
-    downloadUrl: "",
-    version: "1.0.0",
-    updatedAt: "2026-11-11",
-    firstReleasedAt: "2026-11-11",
-    screens: 8,
-    runCommand: "npx --yes serve .",
-    highlights: [
-      {
-        title: "Visual systems hero",
-        body: "Independent / 2026 mark into a cinematic hero with scroll progress and acid accents.",
-      },
-      {
-        title: "Selected work + archive",
-        body: "Case media (Silent Geometry → Future Matter) and hover-preview archive rows.",
-      },
-      {
-        title: "Services and plans",
-        body: "Art Direction, Identity Systems, Digital Experiences, plus Ways to Work Together.",
-      },
-      {
-        title: "Zero-build static",
-        body: "npx --yes serve . for local preview - one index.html + assets/.",
-      },
-    ],
-    includes: [
-      "index.html (NORTH/FORM Creative Studio)",
-      "Inline CSS + interactive JS",
-      "assets/images project and portrait stills",
-      "assets/videos hero.mp4 + project-01.mp4",
-    ],
-    requirements: [
-      "Modern browser",
-      "Static file host (npx --yes serve .)",
-    ],
-  },
-  {
-    slug: "sonojs-saas-11",
-    title: "Fluxora",
-    tagline:
-      "AI product platform - deploy, automate, and scale with human-centered design.",
-    description:
-      "Fluxora is a dark AI-infrastructure marketing site by SonoJS (demo brand: Fluxora). Zero-build static HTML with Tailwind CDN, local CSS/JS, Chart.js, Iconify, and Unicorn Studio background. Hero Powering the next wave of AI-driven products with Start Free / Watch demo, product-team social proof, deploy-config preview, delivery stats, Custom AI Agents + Adaptive Automations, marquee testimonials, ACR Candle Pro trading-indicator showcase, Auden problem/solution + Auden 2.0 mentorship CTA, and platform footer. Demo product chrome only - no auth or billing backend. Run with npx --yes serve . or host statically on Cloudflare Workers.",
-    category: "saas",
-    stack: ["html", "css", "javascript"],
-    priceLabel: "Free",
-    priceCents: 0,
-    rating: 0,
-    reviewCount: 0,
-    salesLabel: "",
-    coverHue: 215,
-    accent: "215",
-    enabled: true,
-    access: "member",
-    badge: "new",
-    coverVariant: "saas",
-    coverImage: "/marketplace/projects/saas/sonojs-saas-11/main.webp",
-    coverImageDark: null,
-    coverVideo: "/marketplace/projects/saas/sonojs-saas-11/cover.mp4",
-    detailCoverImage: "/marketplace/projects/saas/sonojs-saas-11/main.webp",
-    detailCoverImageDark: null,
-    liveUrl: "https://sonojs-saas-11.sonojs2.workers.dev/",
-    downloadUrl: "",
-    version: "1.0.0",
-    updatedAt: "2026-11-11",
-    firstReleasedAt: "2026-11-11",
-    screens: 8,
-    runCommand: "npx --yes serve .",
-    highlights: [
-      {
-        title: "AI product hero",
-        body: "Start Free / Watch demo into deploy-config preview and delivery success metrics.",
-      },
-      {
-        title: "Agents + automations",
-        body: "Custom AI Agents code card and Adaptive Automations with design-ops testimonial.",
-      },
-      {
-        title: "Trading + mentorship chapters",
-        body: "ACR Candle Pro live chart strip and Auden 2.0 problem/solution + pricing CTA.",
-      },
-      {
-        title: "Zero-build static",
-        body: "npx --yes serve . - Tailwind CDN, Chart.js, Iconify, Unicorn Studio vendor.",
-      },
-    ],
-    includes: [
-      "index.html (Fluxora)",
-      "css/styles.css + js/app.js",
-      "vendor/ chart.umd.min.js, iconify.min.js, unicornStudio.umd.js",
-      "assets/images avatars, product stills, trading chrome",
-    ],
-    requirements: [
-      "Modern browser",
-      "Network for Google Fonts + Tailwind CDN (or mirror locally)",
-      "Static file host (npx --yes serve .)",
-    ],
-  },
-  {
+{
     slug: "sonojs-hero-34",
     title: "Agrumi",
     tagline:
@@ -4941,7 +4656,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
   },
-  {
+{
     slug: "sonojs-hero-35",
     title: "Gummy Grove",
     tagline:
@@ -5003,7 +4718,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
     ],
     runCommand: "npx wrangler dev",
   },
-  {
+{
     slug: "sonojs-hero-36",
     title: "Parrot",
     tagline:
@@ -5066,7 +4781,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
     ],
     runCommand: "npm run dev",
   },
-  {
+{
     slug: "sonojs-landing-11",
     title: "SYKÉA",
     tagline:
@@ -5130,7 +4845,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
     ],
     runCommand: "node serve.mjs",
   },
-  {
+{
     slug: "sonojs-landing-12",
     title: "Plum",
     tagline:
@@ -5194,7 +4909,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
     ],
     runCommand: "npx --yes serve . -l 5173",
   },
-  {
+{
     slug: "sonojs-hero-37",
     title: "VIRIDIA",
     tagline:
@@ -5257,7 +4972,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
     ],
     runCommand: "npx --yes serve -l 8765",
   },
-  {
+{
     slug: "sonojs-hero-38",
     title: "Earshot",
     tagline:
@@ -5321,7 +5036,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
     ],
     runCommand: ".\\serve.ps1",
   },
-  {
+{
     slug: "sonojs-hero-39",
     title: "Mainframe",
     tagline:
@@ -5383,7 +5098,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Tailwind CSS 4",
     ],
   },
-  {
+{
     slug: "sonojs-hero-40",
     title: "Signal",
     tagline:
@@ -5443,7 +5158,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
   },
-  {
+{
     slug: "sonojs-hero-41",
     title: "Aethera",
     tagline:
@@ -5506,7 +5221,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Tailwind CSS 4",
     ],
   },
-  {
+{
     slug: "sonojs-hero-42",
     title: "Wandor",
     tagline:
@@ -5571,7 +5286,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Lucide React",
     ],
   },
-  {
+{
     slug: "sonojs-hero-43",
     title: "Axon",
     tagline:
@@ -5634,7 +5349,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Tailwind CSS 4",
     ],
   },
-  {
+{
     slug: "sonojs-hero-44",
     title: "404",
     tagline:
@@ -5697,7 +5412,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Tailwind CSS 4",
     ],
   },
-  {
+{
     slug: "sonojs-hero-45",
     title: "Equilibrium",
     tagline:
@@ -5762,7 +5477,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Lucide React",
     ],
   },
-  {
+{
     slug: "sonojs-hero-46",
     title: "Asme",
     tagline:
@@ -5827,7 +5542,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Lucide React",
     ],
   },
-  {
+{
     slug: "sonojs-hero-47",
     title: "Lūmen",
     tagline:
@@ -5892,7 +5607,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Lucide React",
     ],
   },
-  {
+{
     slug: "sonojs-hero-48",
     title: "securify",
     tagline:
@@ -5954,7 +5669,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Tailwind CSS 3",
     ],
   },
-  {
+{
     slug: "sonojs-hero-49",
     title: "Kova",
     tagline:
@@ -6014,7 +5729,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
   },
-  {
+{
     slug: "sonojs-hero-50",
     title: "Lumora",
     tagline:
@@ -6079,7 +5794,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Lucide React",
     ],
   },
-  {
+{
     slug: "sonojs-hero-51",
     title: "Bloom",
     tagline:
@@ -6144,7 +5859,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Lucide React",
     ],
   },
-  {
+{
     slug: "sonojs-hero-52",
     title: "Fastshot",
     tagline:
@@ -6203,7 +5918,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
   },
-  {
+{
     slug: "sonojs-hero-53",
     title: "Heritage Grove",
     tagline:
@@ -6263,7 +5978,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
   },
-  {
+{
     slug: "sonojs-hero-54",
     title: "LinkFlow",
     tagline:
@@ -6328,7 +6043,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Lucide React",
     ],
   },
-  {
+{
     slug: "sonojs-hero-55",
     title: "Cinematic",
     tagline:
@@ -6392,7 +6107,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Lucide React",
     ],
   },
-  {
+{
     slug: "sonojs-hero-56",
     title: "JungleMind",
     tagline:
@@ -6452,7 +6167,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Static file host (or open index.html locally)",
     ],
   },
-  {
+{
     slug: "sonojs-hero-57",
     title: "Studio",
     tagline:
@@ -6515,7 +6230,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "TypeScript 5+",
     ],
   },
-  {
+{
     slug: "sonojs-hero-58",
     title: "Wanderful",
     tagline:
@@ -6580,7 +6295,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Lucide React",
     ],
   },
-  {
+{
     slug: "sonojs-hero-59",
     title: "Fluxora",
     tagline:
@@ -6641,7 +6356,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "React 19",
     ],
   },
-  {
+{
     slug: "sonojs-hero-60",
     title: "Foldcraft",
     tagline:
@@ -6705,7 +6420,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Lucide React",
     ],
   },
-  {
+{
     slug: "sonojs-hero-61",
     title: "Lumina",
     tagline:
@@ -6770,7 +6485,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Lucide React",
     ],
   },
-  {
+{
     slug: "sonojs-hero-62",
     title: "Power AI",
     tagline:
@@ -6834,7 +6549,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Lucide React",
     ],
   },
-  {
+{
     slug: "sonojs-hero-63",
     title: "Phototropism",
     tagline:
@@ -6897,7 +6612,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Lenis",
     ],
   },
-  {
+{
     slug: "sonojs-hero-64",
     title: "Visor",
     tagline:
@@ -6960,7 +6675,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Motion",
     ],
   },
-  {
+{
     slug: "sonojs-hero-65",
     title: "Monsoon",
     tagline:
@@ -7023,7 +6738,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Framer Motion",
     ],
   },
-  {
+{
     slug: "sonojs-hero-66",
     title: "Aurora",
     tagline:
@@ -7087,7 +6802,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Framer Motion",
     ],
   },
-  {
+{
     slug: "sonojs-hero-67",
     title: "Glacier",
     tagline:
@@ -7151,7 +6866,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Framer Motion",
     ],
   },
-  {
+{
     slug: "sonojs-landing-13",
     title: "Asme",
     tagline:
@@ -7216,7 +6931,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Lucide React",
     ],
   },
-  {
+{
     slug: "sonojs-landing-14",
     title: "Selene",
     tagline:
@@ -7280,7 +6995,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Lenis",
     ],
   },
-  {
+{
     slug: "sonojs-landing-15",
     title: "Kollektiva",
     tagline:
@@ -7342,7 +7057,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Tailwind CSS 3",
     ],
   },
-  {
+{
     slug: "sonojs-landing-16",
     title: "Altura",
     tagline:
@@ -7404,7 +7119,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Static file host (npx --yes serve . or python -m http.server)",
     ],
   },
-  {
+{
     slug: "sonojs-landing-17",
     title: "Mercury",
     tagline:
@@ -7467,7 +7182,7 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Tailwind CSS 4",
     ],
   },
-  {
+{
     slug: "sonojs-landing-18",
     title: "Dala",
     tagline:
@@ -7528,6 +7243,129 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Node.js 20 or newer",
       "Vite 8",
       "Wrangler (optional deploy)",
+    ],
+  },
+{
+    slug: "sonojs-saas-10",
+    title: "North Form",
+    tagline:
+      "Independent creative studio - identity, motion, and digital systems.",
+    description:
+      "North Form is a dark editorial creative-studio marketing site by SonoJS (demo brand: NORTH/FORM). Self-contained HTML with inline CSS/JS plus local image and video assets. Hero We build visual systems where identity, motion, image and digital become one language., selected work (Silent Geometry, Outer State, Still Moving, Future Matter), art direction / identity / digital services, Ways to Work Together plans, archive collaborations with hover previews, cinematic CTA, FAQ, and contact form. Demo studio chrome only - no CRM backend. Run with npx --yes serve . or host statically on Cloudflare Workers.",
+    category: "saas",
+    stack: ["html", "css", "javascript"],
+    priceLabel: "Free",
+    priceCents: 0,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 75,
+    accent: "75",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "saas",
+    coverImage: "/marketplace/projects/saas/sonojs-saas-10/main.webp",
+    coverImageDark: null,
+    coverVideo: "/marketplace/projects/saas/sonojs-saas-10/cover.mp4",
+    detailCoverImage: "/marketplace/projects/saas/sonojs-saas-10/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-saas-10.sonojs2.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-11",
+    firstReleasedAt: "2026-11-11",
+    screens: 8,
+    runCommand: "npx --yes serve .",
+    highlights: [
+      {
+        title: "Visual systems hero",
+        body: "Independent / 2026 mark into a cinematic hero with scroll progress and acid accents.",
+      },
+      {
+        title: "Selected work + archive",
+        body: "Case media (Silent Geometry → Future Matter) and hover-preview archive rows.",
+      },
+      {
+        title: "Services and plans",
+        body: "Art Direction, Identity Systems, Digital Experiences, plus Ways to Work Together.",
+      },
+      {
+        title: "Zero-build static",
+        body: "npx --yes serve . for local preview - one index.html + assets/.",
+      },
+    ],
+    includes: [
+      "index.html (NORTH/FORM Creative Studio)",
+      "Inline CSS + interactive JS",
+      "assets/images project and portrait stills",
+      "assets/videos hero.mp4 + project-01.mp4",
+    ],
+    requirements: [
+      "Modern browser",
+      "Static file host (npx --yes serve .)",
+    ],
+  },
+{
+    slug: "sonojs-saas-11",
+    title: "Fluxora",
+    tagline:
+      "AI product platform - deploy, automate, and scale with human-centered design.",
+    description:
+      "Fluxora is a dark AI-infrastructure marketing site by SonoJS (demo brand: Fluxora). Zero-build static HTML with Tailwind CDN, local CSS/JS, Chart.js, Iconify, and Unicorn Studio background. Hero Powering the next wave of AI-driven products with Start Free / Watch demo, product-team social proof, deploy-config preview, delivery stats, Custom AI Agents + Adaptive Automations, marquee testimonials, ACR Candle Pro trading-indicator showcase, Auden problem/solution + Auden 2.0 mentorship CTA, and platform footer. Demo product chrome only - no auth or billing backend. Run with npx --yes serve . or host statically on Cloudflare Workers.",
+    category: "saas",
+    stack: ["html", "css", "javascript"],
+    priceLabel: "Free",
+    priceCents: 0,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 215,
+    accent: "215",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "saas",
+    coverImage: "/marketplace/projects/saas/sonojs-saas-11/main.webp",
+    coverImageDark: null,
+    coverVideo: "/marketplace/projects/saas/sonojs-saas-11/cover.mp4",
+    detailCoverImage: "/marketplace/projects/saas/sonojs-saas-11/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-saas-11.sonojs2.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-11",
+    firstReleasedAt: "2026-11-11",
+    screens: 8,
+    runCommand: "npx --yes serve .",
+    highlights: [
+      {
+        title: "AI product hero",
+        body: "Start Free / Watch demo into deploy-config preview and delivery success metrics.",
+      },
+      {
+        title: "Agents + automations",
+        body: "Custom AI Agents code card and Adaptive Automations with design-ops testimonial.",
+      },
+      {
+        title: "Trading + mentorship chapters",
+        body: "ACR Candle Pro live chart strip and Auden 2.0 problem/solution + pricing CTA.",
+      },
+      {
+        title: "Zero-build static",
+        body: "npx --yes serve . - Tailwind CDN, Chart.js, Iconify, Unicorn Studio vendor.",
+      },
+    ],
+    includes: [
+      "index.html (Fluxora)",
+      "css/styles.css + js/app.js",
+      "vendor/ chart.umd.min.js, iconify.min.js, unicornStudio.umd.js",
+      "assets/images avatars, product stills, trading chrome",
+    ],
+    requirements: [
+      "Modern browser",
+      "Network for Google Fonts + Tailwind CDN (or mirror locally)",
+      "Static file host (npx --yes serve .)",
     ],
   },
 ]

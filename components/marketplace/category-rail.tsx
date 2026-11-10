@@ -1,37 +1,18 @@
 "use client"
 
 import * as React from "react"
-import {
-  ChevronDownIcon,
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  TagIcon,
-} from "lucide-react"
+import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react"
 
 import {
   MARKETPLACE_CATEGORY_LABEL,
   type MarketplaceCategory,
-} from "@/lib/marketplace-catalog"
+} from "@/lib/marketplace-catalog-meta"
 import type { MarketplacePreviewItem } from "@/lib/marketplace-preview-data"
 import {
   type MarketplacePriceKey,
   type MarketplaceProductsFilterState,
-  type MarketplaceSortKey,
 } from "@/components/marketplace/products-filter"
 import { cn } from "@/lib/utils"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
-  DropdownMenuTrigger,
-} from "@sonojs/ui/components/dropdown-menu"
-
-const SORT_TABS: { key: MarketplaceSortKey; label: string }[] = [
-  { key: "featured", label: "Featured" },
-  { key: "popular", label: "Popular" },
-  { key: "recent", label: "Recent" },
-]
 
 /** Compact labels for the horizontal rail (full names stay in catalog). */
 const RAIL_CATEGORY_LABEL: Record<MarketplaceCategory, string> = {
@@ -49,9 +30,9 @@ const RAIL_CATEGORY_LABEL: Record<MarketplaceCategory, string> = {
 }
 
 const PRICE_OPTIONS: { key: MarketplacePriceKey; label: string }[] = [
-  { key: "all", label: "All prices" },
+  { key: "all", label: "All" },
   { key: "free", label: "Free" },
-  { key: "paid", label: "Paid" },
+  { key: "paid", label: "Pro" },
 ]
 
 export function MarketplaceCategoryRail({
@@ -113,9 +94,6 @@ export function MarketplaceCategoryRail({
   }
 
   const activeCategory = value.categories[0] ?? null
-  const priceActive = value.price !== "all"
-  const priceLabel =
-    PRICE_OPTIONS.find((o) => o.key === value.price)?.label ?? "Pricing"
 
   return (
     <div
@@ -124,41 +102,8 @@ export function MarketplaceCategoryRail({
         className
       )}
     >
-      {/* Sort — left */}
-      <div
-        role="tablist"
-        aria-label="Sort products"
-        className="flex shrink-0 items-center gap-0.5 rounded-[10px] bg-[var(--sm-chip)] p-1 sm:me-2"
-      >
-        {SORT_TABS.map((tab) => {
-          const active = value.sort === tab.key
-          return (
-            <button
-              key={tab.key}
-              type="button"
-              role="tab"
-              aria-selected={active}
-              onClick={() => onChange({ ...value, sort: tab.key })}
-              className={cn(
-                "inline-flex h-9 shrink-0 cursor-pointer items-center rounded-lg px-3 text-[13px] font-medium whitespace-nowrap transition-colors",
-                active
-                  ? "bg-[var(--sm-bg-elevated)] text-[var(--sm-text)] shadow-sm ring-1 ring-[var(--sm-border)]"
-                  : "text-[var(--sm-text-secondary)] hover:text-[var(--sm-text)]"
-              )}
-            >
-              {tab.label}
-            </button>
-          )
-        })}
-      </div>
-
-      <span
-        aria-hidden
-        className="hidden w-px shrink-0 self-stretch bg-[var(--sm-border)] sm:block"
-      />
-
-      {/* Categories — center */}
-      <div className="relative min-w-0 flex-1 sm:mx-2">
+      {/* Categories */}
+      <div className="relative min-w-0 flex-1 sm:me-2">
         {canScrollStart ? (
           <>
             <div
@@ -267,39 +212,32 @@ export function MarketplaceCategoryRail({
         className="hidden w-px shrink-0 self-stretch bg-[var(--sm-border)] sm:block"
       />
 
-      {/* Pricing — right */}
-      <div className="flex shrink-0 items-center sm:ms-2">
-        <DropdownMenu>
-          <DropdownMenuTrigger
-            className={cn(
-              "inline-flex h-9 w-full cursor-pointer items-center justify-center gap-1.5 rounded-[10px] border px-3.5 text-[13px] font-medium whitespace-nowrap transition-colors sm:w-auto",
-              priceActive
-                ? "border-primary/40 bg-primary/10 text-primary"
-                : "border-[var(--sm-border)] bg-[var(--sm-chip)] text-[var(--sm-text)] hover:bg-[var(--sm-bg-elevated)]"
-            )}
-          >
-            <TagIcon className="size-3.5 opacity-70" aria-hidden />
-            {priceActive ? priceLabel : "Pricing"}
-            <ChevronDownIcon className="size-3.5 opacity-70" aria-hidden />
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="min-w-36">
-            <DropdownMenuRadioGroup
-              value={value.price}
-              onValueChange={(next) =>
-                onChange({
-                  ...value,
-                  price: next as MarketplacePriceKey,
-                })
-              }
+      {/* Pricing — segmented, side by side */}
+      <div
+        role="tablist"
+        aria-label="Price"
+        className="flex shrink-0 items-center gap-0.5 rounded-[10px] bg-[var(--sm-chip)] p-1 sm:ms-2"
+      >
+        {PRICE_OPTIONS.map((opt) => {
+          const active = value.price === opt.key
+          return (
+            <button
+              key={opt.key}
+              type="button"
+              role="tab"
+              aria-selected={active}
+              onClick={() => onChange({ ...value, price: opt.key })}
+              className={cn(
+                "inline-flex h-9 shrink-0 cursor-pointer items-center rounded-lg px-3 text-[13px] font-medium whitespace-nowrap transition-colors",
+                active
+                  ? "bg-[var(--sm-bg-elevated)] text-[var(--sm-text)] shadow-sm ring-1 ring-[var(--sm-border)]"
+                  : "text-[var(--sm-text-secondary)] hover:text-[var(--sm-text)]"
+              )}
             >
-              {PRICE_OPTIONS.map((opt) => (
-                <DropdownMenuRadioItem key={opt.key} value={opt.key}>
-                  {opt.label}
-                </DropdownMenuRadioItem>
-              ))}
-            </DropdownMenuRadioGroup>
-          </DropdownMenuContent>
-        </DropdownMenu>
+              {opt.label}
+            </button>
+          )
+        })}
       </div>
     </div>
   )

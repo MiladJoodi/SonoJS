@@ -11,7 +11,7 @@ import {
 } from "@/components/auth"
 import { FreeIcon } from "@/components/icons/plan/free"
 import { ProIcon } from "@/components/icons/plan/pro"
-import type { MarketplaceProject } from "@/lib/marketplace-catalog"
+import type { MarketplaceProject } from "@/lib/marketplace-catalog-meta"
 import { getUserPlan, normalizeContentAccess } from "@/lib/access"
 import { Button } from "@sonojs/ui/components/button"
 import { Spinner } from "@sonojs/ui/components/spinner"

@@ -3,7 +3,7 @@
 import {
   MARKETPLACE_STACK_LABEL,
   type MarketplaceStack,
-} from "@/lib/marketplace-catalog"
+} from "@/lib/marketplace-catalog-meta"
 import { GsapIcon } from "@/components/icons"
 import {
   CssIcon,

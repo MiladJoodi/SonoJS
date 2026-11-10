@@ -10,7 +10,7 @@ import {
 } from "@/lib/marketplace-preview-data"
 import { cn } from "@/lib/utils"
 
-const TABS = ["Featured", "Popular", "New"] as const
+const TABS = ["Featured", "Popular"] as const
 
 /** First visible featured cards in the horizontal strip (≈ one viewport row). */
 const MARKETPLACE_FEATURED_ATF_COUNT = 4
@@ -66,9 +66,7 @@ export function MarketplaceFeaturedSection({
             b.rating - a.rating ||
             a.title.localeCompare(b.title)
         )
-      : tab === "New"
-        ? [...items].sort(compareMarketplaceNewest)
-        : items
+      : [...items].sort(compareMarketplaceNewest)
 
   const featured = ordered.slice(0, MARKETPLACE_FEATURED_MAX)
   const durationSec = Math.max(28, featured.length * 7)

@@ -12,13 +12,10 @@ import {
   EMPTY_PRODUCTS_FILTER,
   type MarketplacePriceKey,
   type MarketplaceProductsFilterState,
-  type MarketplaceSortKey,
 } from "@/components/marketplace/products-filter"
-import {
-  getMarketplacePreviewItems,
-  type MarketplacePreviewItem,
-} from "@/lib/marketplace-preview-data"
-import type { MarketplaceCategory } from "@/lib/marketplace-catalog"
+import type { MarketplacePreviewItem } from "@/lib/marketplace-preview-data"
+import type { MarketplaceCategory } from "@/lib/marketplace-catalog-meta"
+import { Button } from "@sonojs/ui/components/button"
 
 const CATEGORY_IDS = [
   "dashboard",
@@ -34,13 +31,10 @@ const CATEGORY_IDS = [
   "portfolio",
 ] as const satisfies readonly MarketplaceCategory[]
 
-function parseSortParam(raw: string | null): MarketplaceSortKey {
-  if (raw === "popular" || raw === "recent" || raw === "featured") return raw
-  // Legacy query values
-  if (raw === "rating") return "popular"
-  if (raw === "name" || raw === "default") return "featured"
-  return "featured"
-}
+/** Initial / reset window size for All products. */
+const MARKETPLACE_PAGE_SIZE = 24
+/** Eager-load covers for the first N *visible* cards. */
+const MARKETPLACE_EAGER_COVERS = 6
 
 function parsePriceParam(raw: string | null): MarketplacePriceKey {
   if (raw === "free" || raw === "paid") return raw
@@ -74,6 +68,42 @@ function MarketplaceProductsSection({
   resultsRef: React.RefObject<HTMLDivElement | null>
   resultsMinHeight: number | undefined
 }) {
+  const [visibleCount, setVisibleCount] = React.useState(MARKETPLACE_PAGE_SIZE)
+  const sentinelRef = React.useRef<HTMLDivElement>(null)
+
+  // Reset window whenever filter (or result set) changes.
+  React.useEffect(() => {
+    setVisibleCount(MARKETPLACE_PAGE_SIZE)
+  }, [
+    filters.categories.join(","),
+    filters.price,
+    filters.stacks.join(","),
+    filtered.length,
+  ])
+
+  const visible = filtered.slice(0, visibleCount)
+  const hasMore = visibleCount < filtered.length
+
+  const loadMore = React.useCallback(() => {
+    setVisibleCount((n) => Math.min(n + MARKETPLACE_PAGE_SIZE, filtered.length))
+  }, [filtered.length])
+
+  React.useEffect(() => {
+    if (!hasMore) return
+    const node = sentinelRef.current
+    if (!node) return
+    if (typeof IntersectionObserver === "undefined") return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) loadMore()
+      },
+      { root: null, rootMargin: "240px 0px", threshold: 0 }
+    )
+    observer.observe(node)
+    return () => observer.disconnect()
+  }, [hasMore, loadMore, visible.length])
+
   return (
     <div className="space-y-4">
       <div className="flex flex-wrap items-end justify-between gap-3">
@@ -104,11 +134,11 @@ function MarketplaceProductsSection({
         }
       >
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
-          {filtered.map((item: MarketplacePreviewItem, index: number) => (
+          {visible.map((item: MarketplacePreviewItem, index: number) => (
             <MarketplaceProductCard
               key={item.slug}
               item={item}
-              loading={index < 6 ? "eager" : "lazy"}
+              loading={index < MARKETPLACE_EAGER_COVERS ? "eager" : "lazy"}
             />
           ))}
         </div>
@@ -117,22 +147,41 @@ function MarketplaceProductsSection({
             Nothing matches these filters.
           </p>
         ) : null}
+        {hasMore ? (
+          <div className="flex flex-col items-center gap-3 pt-6 pb-2">
+            <div ref={sentinelRef} className="h-px w-full" aria-hidden />
+            <Button
+              type="button"
+              variant="outline"
+              onClick={loadMore}
+              className="cursor-pointer border-[var(--sm-border)] bg-[var(--sm-bg-elevated)] shadow-none"
+            >
+              Load more
+            </Button>
+            <p className="text-[12px] tabular-nums text-[var(--sm-text-faint)]">
+              Showing {visible.length} of {filtered.length}
+            </p>
+          </div>
+        ) : null}
       </div>
     </div>
   )
 }
 
-export function MarketplaceCatalogPage() {
+export function MarketplaceCatalogPage({
+  items,
+}: {
+  /** Thin list rows from the server - no long product bodies. */
+  items: MarketplacePreviewItem[]
+}) {
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
-  const items = React.useMemo(() => getMarketplacePreviewItems(), [])
 
   const [filters, setFilters] = React.useState<MarketplaceProductsFilterState>(
     () => ({
       ...EMPTY_PRODUCTS_FILTER,
       categories: parseCategoryParam(searchParams.get("category")),
-      sort: parseSortParam(searchParams.get("sort")),
       price: parsePriceParam(searchParams.get("price")),
     })
   )
@@ -164,7 +213,6 @@ export function MarketplaceCatalogPage() {
     if (filters.categories.length) {
       params.set("category", filters.categories[0])
     }
-    if (filters.sort !== "featured") params.set("sort", filters.sort)
     if (filters.price !== "all") params.set("price", filters.price)
     const qs = params.toString()
     router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false })

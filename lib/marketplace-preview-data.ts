@@ -1,16 +1,21 @@
 import {
   getMarketplaceProject,
   getRelatedMarketplaceProjects,
+  marketplaceProjects,
+} from "@/lib/marketplace-catalog"
+import {
   MARKETPLACE_CATEGORY_LABEL,
   MARKETPLACE_STACK_LABEL,
-  marketplaceProjects,
   type MarketplaceBadge,
   type MarketplaceCategory,
   type MarketplaceProject,
   type MarketplaceStack,
-} from "@/lib/marketplace-catalog"
+} from "@/lib/marketplace-catalog-meta"
 
-/** Card/list row for marketplace UI (live `/marketplace` hrefs). */
+/**
+ * Thin card/list row for marketplace UI (no long `description` / highlight bodies).
+ * Build on the server and pass into client catalog chrome.
+ */
 export type MarketplacePreviewItem = {
   slug: string
   title: string
