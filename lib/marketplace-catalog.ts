@@ -1491,6 +1491,68 @@ export const marketplaceProjects: MarketplaceProject[] = [
     ],
   },
   {
+    slug: "sonojs-ecommerce-06",
+    title: "iPhone Duo",
+    tagline:
+      "Hello, hello. - foldable product launch with highlights carousel.",
+    description:
+      "iPhone Duo is an Apple-style foldable product launch landing by SonoJS (demo product: iPhone Duo). Built with Vite 8, HTML, CSS, and vanilla JavaScript. Global Apple nav, sticky product bar (Explore / Buy), white-gallery hero Hello, hello. with foldable video, From $1999 pricing, Get the highlights carousel (Display, iOS, Titanium, Camera, A20 Pro, Battery, Siri AI), Open/Closed/Tent/Laptop poses, and chapter sections for Display, iOS, Design, Camera, Chip, and Siri AI ending in a Buy CTA. prefers-reduced-motion reveals. Demo product chrome only - no checkout backend. Vite build ready for Cloudflare Workers.",
+    category: "ecommerce",
+    stack: ["vite", "html", "css", "javascript"],
+    priceLabel: "Free",
+    priceCents: 0,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 220,
+    accent: "220",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "shop",
+    coverImage: "/marketplace/projects/ecommerce/sonojs-ecommerce-06/main.webp",
+    coverImageDark: null,
+    coverVideo: "/marketplace/projects/ecommerce/sonojs-ecommerce-06/cover.mp4",
+    detailCoverImage:
+      "/marketplace/projects/ecommerce/sonojs-ecommerce-06/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-ecommerce-06.sonojs.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-10",
+    firstReleasedAt: "2026-11-10",
+    screens: 8,
+    highlights: [
+      {
+        title: "White-gallery hero",
+        body: "Hello, hello. foldable hero video with New badge, pricing, and Buy CTA.",
+      },
+      {
+        title: "Highlights carousel",
+        body: "Autoplay highlight cards for Display through Siri AI with pause + dots.",
+      },
+      {
+        title: "Poses + chapters",
+        body: "Open / Closed / Tent / Laptop plus Display, Camera, A20 Pro, and Siri AI sections.",
+      },
+      {
+        title: "Vite and fork-ready",
+        body: "Vite 8 + HTML/CSS/JS - npm run build to dist/ for Workers.",
+      },
+    ],
+    includes: [
+      "Full Vite landing source (iPhone Duo)",
+      "index.html product launch page + src/main.js",
+      "src/styles/main.css + tokens.css",
+      "Hero / highlights / design / versatility videos",
+      "Product stills and editorial images",
+    ],
+    requirements: [
+      "Node.js 20 or newer",
+      "Vite 8",
+    ],
+  },
+  {
     slug: "sonojs-portfolio-01",
     title: "Jack",
     tagline:
