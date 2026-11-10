@@ -17,4 +17,4 @@ export function getStripeSecretKey(): string {
 }
 
 /** Must match retrieve helpers and Dashboard webhook endpoint API version. */
-export const STRIPE_API_VERSION = "2024-11-20.acacia" as const
+export const STRIPE_API_VERSION = "2025-03-31.basil" as const

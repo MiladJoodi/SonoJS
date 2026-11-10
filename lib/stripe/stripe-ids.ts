@@ -1,6 +1,6 @@
 /**
  * Normalize Stripe expandable references (string id or expanded `{ id }`).
- * Compatible with API version 2024-11-20.acacia webhook payloads.
+ * Compatible with API version 2025-03-31.basil webhook payloads.
  */
 export function stripeId(
   ref: string | { id?: string | null } | null | undefined

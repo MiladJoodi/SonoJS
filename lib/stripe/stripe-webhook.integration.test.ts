@@ -33,7 +33,7 @@ describe("stripe webhook HTTP mapping", () => {
   })
 
   it("documents API version used by retrieve helpers", () => {
-    expect(STRIPE_API_VERSION).toBe("2024-11-20.acacia")
+    expect(STRIPE_API_VERSION).toBe("2025-03-31.basil")
   })
 })
 

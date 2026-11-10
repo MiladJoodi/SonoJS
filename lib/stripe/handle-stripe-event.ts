@@ -21,7 +21,7 @@ import {
 import type { StripeWebhookEvent } from "@/lib/stripe/verify-webhook"
 
 /**
- * Stripe webhook event dispatch (API version 2024-11-20.acacia).
+ * Stripe webhook event dispatch (API version 2025-03-31.basil).
  *
  * Pro / plan access is determined ONLY from Neon subscription state after
  * `reconcileSubscriptionFromStripe` (live Stripe retrieve). Recording

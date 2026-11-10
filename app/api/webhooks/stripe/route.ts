@@ -20,7 +20,7 @@ import {
  *
  * Local: `npm run stripe:listen` (see README). Do not use `--events invoice.paid` alone.
  *
- * API version: 2024-11-20.acacia - keep webhook endpoint + retrieve in sync.
+ * API version: 2025-03-31.basil - keep webhook endpoint + retrieve in sync.
  *
  * HTTP:
  * - 400 invalid signature
