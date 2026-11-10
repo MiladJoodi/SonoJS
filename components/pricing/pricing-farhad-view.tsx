@@ -159,9 +159,6 @@ function FarhadCard({
             </h2>
 
             <div className="flex flex-wrap items-baseline gap-2">
-              <span className="text-lg font-medium text-muted-foreground line-through decoration-muted-foreground/60">
-                $99
-              </span>
               <span className="text-4xl font-semibold tracking-tight text-foreground">
                 $1
               </span>
@@ -208,35 +205,6 @@ function ProPlanCard({
   index: number
   reduceMotion: boolean | null
 }) {
-  const router = useRouter()
-  const { isSignedIn } = useAuth()
-  const [loading, setLoading] = React.useState(false)
-  const [error, setError] = React.useState<string | null>(null)
-
-  async function onProCheckout() {
-    if (plan.id !== "pro-monthly" && plan.id !== "pro-yearly") return
-    setError(null)
-    if (!isSignedIn) {
-      router.push("/sign-in?redirect_url=/pricing-farhad")
-      return
-    }
-    setLoading(true)
-    try {
-      const result = await startCheckout(plan.id)
-      if (!result.ok) {
-        if (result.unauthorized) {
-          router.push("/sign-in?redirect_url=/pricing-farhad")
-          return
-        }
-        setError(result.error)
-        return
-      }
-      window.location.assign(result.url)
-    } finally {
-      setLoading(false)
-    }
-  }
-
   return (
     <motion.li
       initial={reduceMotion ? false : { opacity: 0, y: 28 }}
@@ -312,24 +280,11 @@ function ProPlanCard({
         <Button
           type="button"
           variant="default"
-          disabled={loading}
-          onClick={() => void onProCheckout()}
-          className="w-full cursor-pointer shadow-none disabled:cursor-not-allowed"
+          disabled
+          className="w-full cursor-not-allowed shadow-none disabled:opacity-60"
         >
-          {loading ? (
-            <span className="inline-flex items-center gap-2">
-              <Loader2Icon className="size-4 animate-spin" aria-hidden />
-              Redirecting…
-            </span>
-          ) : (
-            plan.cta
-          )}
+          {plan.cta}
         </Button>
-        {error ? (
-          <p role="alert" className="text-center text-sm text-destructive">
-            {error}
-          </p>
-        ) : null}
       </div>
     </motion.li>
   )
