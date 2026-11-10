@@ -4510,6 +4510,68 @@ export const marketplaceProjects: MarketplaceProject[] = [
     ],
   },
   {
+    slug: "sonojs-saas-07",
+    title: "Eclipse",
+    tagline:
+      "The Last Frontier - scroll-driven sci-fi universe with Three.js.",
+    description:
+      "Eclipse is a full-page interactive sci-fi universe experience by SonoJS (demo brand: ECLIPSE — The Last Frontier). Zero-build static HTML with local Tailwind, Three.js, GSAP ScrollTrigger, and runtime.js. Seven scroll chapters from The Awakening through Beyond the Veil: cinema backdrops, WebGL universe canvas, planet drag / shuttle boost toys, Field Archive lightbox (12 fragments), faction chooser (Wayfarers / Vesper Accord / Keepers), sound and reduce-motion toggles, and chapter index. Serve with a static server so assets load. Demo world chrome only - no account backend. Host on Cloudflare Workers.",
+    category: "saas",
+    stack: ["html", "css", "javascript", "threejs", "gsap"],
+    priceLabel: "Free",
+    priceCents: 0,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 230,
+    accent: "230",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "saas",
+    coverImage: "/marketplace/projects/saas/sonojs-saas-07/main.webp",
+    coverImageDark: null,
+    coverVideo: "/marketplace/projects/saas/sonojs-saas-07/cover.mp4",
+    detailCoverImage: "/marketplace/projects/saas/sonojs-saas-07/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-saas-07.sonojs.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-10",
+    firstReleasedAt: "2026-11-10",
+    screens: 7,
+    runCommand: "npx --yes serve .",
+    highlights: [
+      {
+        title: "Seven chapter scroll",
+        body: "Awakening → Beyond the Veil with cinema layers, vignette, and chapter nav.",
+      },
+      {
+        title: "WebGL universe toys",
+        body: "Three.js canvas with drag-the-planet and boost-engines shuttle play.",
+      },
+      {
+        title: "Archive + factions",
+        body: "Field Archive of 12 fragments and Wayfarers / Vesper / Keepers chooser.",
+      },
+      {
+        title: "Zero-build static",
+        body: "index.html + js/runtime.js + vendor (three/gsap/tailwind) + assets/ - serve locally.",
+      },
+    ],
+    includes: [
+      "index.html (ECLIPSE — The Last Frontier)",
+      "js/runtime.js",
+      "vendor/three.min.js, gsap.min.js, ScrollTrigger.min.js, tailwind.js",
+      "Chapter + archive WebP art set",
+      "fonts/ attributions",
+    ],
+    requirements: [
+      "Modern browser with WebGL",
+      "Static file host (npx --yes serve . or python -m http.server)",
+    ],
+  },
+  {
     slug: "sonojs-hero-34",
     title: "Agrumi",
     tagline:
