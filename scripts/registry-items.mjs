@@ -4551,50 +4551,6 @@ const registryItemsRaw = [
     ],
   },
   {
-    name: "model-viewer",
-    type: "registry:ui",
-    title: "Model Viewer",
-    description:
-      "An interactive Three.js model viewer for GLTF, GLB, FBX, and OBJ with orbit, lights, and environment presets.",
-    dependencies: [
-      "three",
-      "@types/three",
-      "@react-three/fiber",
-      "@react-three/drei",
-    ],
-    files: [
-      {
-        path: "packages/ui/src/components/3d/model-viewer/index.tsx",
-        type: "registry:ui",
-        target: "components/3d/model-viewer/index.tsx",
-      },
-      ...[
-        "FlightHelmet.gltf",
-        "FlightHelmet.bin",
-        "FlightHelmet_Materials_RubberWoodMat_Normal.png",
-        "FlightHelmet_Materials_RubberWoodMat_OcclusionRoughMetal.png",
-        "FlightHelmet_Materials_RubberWoodMat_BaseColor.png",
-        "FlightHelmet_Materials_GlassPlasticMat_Normal.png",
-        "FlightHelmet_Materials_GlassPlasticMat_OcclusionRoughMetal.png",
-        "FlightHelmet_Materials_GlassPlasticMat_BaseColor.png",
-        "FlightHelmet_Materials_MetalPartsMat_Normal.png",
-        "FlightHelmet_Materials_MetalPartsMat_OcclusionRoughMetal.png",
-        "FlightHelmet_Materials_MetalPartsMat_BaseColor.png",
-        "FlightHelmet_Materials_LeatherPartsMat_Normal.png",
-        "FlightHelmet_Materials_LeatherPartsMat_OcclusionRoughMetal.png",
-        "FlightHelmet_Materials_LeatherPartsMat_BaseColor.png",
-        "FlightHelmet_Materials_LensesMat_Normal.png",
-        "FlightHelmet_Materials_LensesMat_OcclusionRoughMetal.png",
-        "FlightHelmet_Materials_LensesMat_BaseColor.png",
-      ].map((name) => ({
-        path: `packages/ui/src/components/3d/model-viewer/model/${name}`,
-        type: "registry:file",
-        // Install into public so the default `/media/3d/model-viewer/...` URL works
-        target: `public/media/3d/model-viewer/${name}`,
-      })),
-    ],
-  },
-  {
     name: "perspective-card",
     type: "registry:ui",
     title: "Perspective Card",

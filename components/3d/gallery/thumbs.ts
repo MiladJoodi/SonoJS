@@ -17,7 +17,6 @@ const DEFAULT_THUMB_SLUGS = new Set([
   "image-ring",
   "infinite-drift",
   "infinite-drift-2",
-  "model-viewer",
   "perspective-card",
   "plasma-globe",
   "scroll-trigger",

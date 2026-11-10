@@ -113,7 +113,6 @@ const EXAMPLE_FOLDERS = [
   "3d/glass-coin-carousel",
   "3d/hover-gallery",
   "3d/image-marquee",
-  "3d/model-viewer",
   "3d/perspective-card",
   "3d/scroll-trigger",
   "3d/smokey-frame",

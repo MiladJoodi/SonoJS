@@ -75,8 +75,6 @@
     "./components/confetti/*": "./src/components/confetti/*",
     "./components/shine-border": "./src/components/shine-border/index.ts",
     "./components/shine-border/*": "./src/components/shine-border/*",
-    "./components/3d/model-viewer": "./src/components/3d/model-viewer/index.tsx",
-    "./components/3d/model-viewer/*": "./src/components/3d/model-viewer/*",
     "./components/3d/perspective-card": "./src/components/3d/perspective-card/index.tsx",
     "./components/3d/perspective-card/*": "./src/components/3d/perspective-card/*",
     "./components/3d/scroll-trigger": "./src/components/3d/scroll-trigger/index.tsx",

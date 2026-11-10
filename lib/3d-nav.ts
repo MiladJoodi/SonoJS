@@ -98,12 +98,6 @@ export const threeDNav: {
           featured: true,
         },
         {
-          title: "Model Viewer",
-          href: "/3d/model-viewer",
-          badge: "new",
-          featured: true,
-        },
-        {
           title: "Orbiting Circles",
           href: "/3d/orbiting-circles",
           badge: "new",
