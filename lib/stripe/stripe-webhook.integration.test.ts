@@ -85,12 +85,16 @@ describe.runIf(hasDb)("stripe webhook integration (opt-in: npm run test:db)", ()
     periodEnd = 1_900_000_000,
     metadata: Record<string, string> = {}
   ): typeof fetch {
-    return async () =>
-      new Response(
+    let cancelAtPeriodEnd = false
+    return async (_url, init) => {
+      if (String(init?.method ?? "GET").toUpperCase() === "POST") {
+        cancelAtPeriodEnd = true
+      }
+      return new Response(
         JSON.stringify({
           id: stripeSub,
           status,
-          cancel_at_period_end: false,
+          cancel_at_period_end: cancelAtPeriodEnd,
           current_period_start: 1_700_000_000,
           current_period_end: periodEnd,
           canceled_at: null,
@@ -100,6 +104,7 @@ describe.runIf(hasDb)("stripe webhook integration (opt-in: npm run test:db)", ()
         }),
         { status: 200, headers: { "Content-Type": "application/json" } }
       )
+    }
   }
 
   it("POST rejects invalid signature with 400", async () => {

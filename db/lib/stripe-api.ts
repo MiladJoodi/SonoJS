@@ -87,6 +87,61 @@ export async function fetchStripeSubscription(
 }
 
 /**
+ * Mark subscription to end after the current period (manual renewal).
+ * Checkout Session cannot set this via subscription_data - apply after create.
+ */
+export async function setStripeSubscriptionCancelAtPeriodEnd(
+  stripeSubscriptionId: string,
+  cancelAtPeriodEnd: boolean,
+  fetchImpl: typeof fetch = fetch
+): Promise<StripeSubscriptionSnapshot> {
+  const body = new URLSearchParams()
+  body.set("cancel_at_period_end", cancelAtPeriodEnd ? "true" : "false")
+
+  const res = await fetchImpl(
+    `https://api.stripe.com/v1/subscriptions/${encodeURIComponent(stripeSubscriptionId)}`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${getStripeSecret()}`,
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Stripe-Version": STRIPE_API_VERSION,
+      },
+      body: body.toString(),
+    }
+  )
+
+  if (!res.ok) {
+    const text = await res.text().catch(() => "")
+    throw new StripeApiError(
+      `Stripe subscription cancel_at_period_end update failed (${res.status}): ${text.slice(0, 300)}`,
+      res.status
+    )
+  }
+
+  const data = (await res.json()) as StripeSubscriptionJson
+  const priceId = data.items?.data?.[0]?.price?.id ?? null
+  const metadata =
+    data.metadata &&
+    typeof data.metadata === "object" &&
+    !Array.isArray(data.metadata)
+      ? { ...data.metadata }
+      : {}
+
+  return {
+    id: data.id,
+    status: data.status,
+    cancelAtPeriodEnd: Boolean(data.cancel_at_period_end),
+    currentPeriodStart: data.current_period_start ?? null,
+    currentPeriodEnd: data.current_period_end ?? null,
+    canceledAt: data.canceled_at ?? null,
+    endedAt: data.ended_at ?? null,
+    priceId,
+    metadata,
+  }
+}
+
+/**
  * Retrieve a historical Stripe Event by id (ops reprocess / diagnostics).
  * Does not create charges or mutate Stripe objects.
  */

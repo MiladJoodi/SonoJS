@@ -1,7 +1,10 @@
 import "server-only"
 
 import type { WebhookClaim } from "@/db/queries/claim-guard"
-import { fetchStripeSubscription } from "@/db/lib/stripe-api"
+import {
+  fetchStripeSubscription,
+  setStripeSubscriptionCancelAtPeriodEnd,
+} from "@/db/lib/stripe-api"
 import { getSubscriptionByStripeId } from "@/db/queries/subscriptions"
 import { upsertPayment } from "@/db/queries/payments"
 import { reconcileSubscriptionFromStripe } from "@/db/queries/subscriptions"
@@ -116,6 +119,23 @@ async function handleSubscriptionEvent(
   if (!user) {
     throw new Error(
       "Cannot reconcile subscription: Stripe customer is not linked to a Clerk user"
+    )
+  }
+
+  // New subs: end after current period so renewal requires a fresh Checkout.
+  if (
+    event.type === "customer.subscription.created" &&
+    obj.cancel_at_period_end !== true
+  ) {
+    webhookLog("manual_renewal", {
+      eventId: event.id,
+      type: event.type,
+      stripeSubscriptionId,
+    })
+    await setStripeSubscriptionCancelAtPeriodEnd(
+      stripeSubscriptionId,
+      true,
+      options?.fetchImpl
     )
   }
 
@@ -322,6 +342,16 @@ async function handleCheckoutCompleted(
     obj.subscription as string | { id?: string } | null
   )
   if (stripeSubscriptionId) {
+    webhookLog("manual_renewal", {
+      eventId: event.id,
+      type: event.type,
+      stripeSubscriptionId,
+    })
+    await setStripeSubscriptionCancelAtPeriodEnd(
+      stripeSubscriptionId,
+      true,
+      options?.fetchImpl
+    )
     await reconcileSubscriptionFromStripe({
       userId: user.id,
       stripeSubscriptionId,

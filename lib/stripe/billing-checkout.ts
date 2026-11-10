@@ -100,6 +100,7 @@ export async function createBillingCheckout(input: {
     return { ok: true, url: session.url, sessionId: session.id }
   } catch (err) {
     if (err instanceof StripeApiError) {
+      console.error("createBillingCheckout: Stripe failed", err.message)
       const status =
         err.status >= 400 && err.status < 600 ? err.status : 502
       return {
