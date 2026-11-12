@@ -54,6 +54,7 @@ export const TOP_LEVEL_COMPONENT_ROOTS = new Set([
   "dotted-map",
   "lens",
   "magic-card",
+  "phone-input",
   "progressive-blur",
   "border-beam",
   "confetti",

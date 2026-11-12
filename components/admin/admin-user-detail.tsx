@@ -264,7 +264,7 @@ export function AdminUserDetailPanel({ userId }: { userId: string }) {
                       <td className={adminTdClass}>
                         <div className="flex min-w-0 flex-col gap-0.5">
                           <Link
-                            href={`/marketplace/${d.slug}`}
+                            href={`/templates/${d.slug}`}
                             className="cursor-pointer truncate underline-offset-4 hover:underline"
                           >
                             {d.title}

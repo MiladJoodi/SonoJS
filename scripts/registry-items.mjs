@@ -3356,6 +3356,32 @@ const registryItemsRaw = [
     ],
   },
   {
+    name: "phone-input",
+    type: "registry:ui",
+    title: "Phone Input",
+    description:
+      "Phone number field with country dial code picker and optional CDN flags.",
+    dependencies: ["lucide-react", "clsx", "tailwind-merge"],
+    registryDependencies: ["input-group", "popover"],
+    files: [
+      {
+        path: "packages/ui/src/components/phone-input/index.ts",
+        type: "registry:ui",
+        target: "components/phone-input/index.ts",
+      },
+      {
+        path: "packages/ui/src/components/phone-input/phone-input.tsx",
+        type: "registry:ui",
+        target: "components/phone-input/phone-input.tsx",
+      },
+      {
+        path: "packages/ui/src/components/phone-input/countries.json",
+        type: "registry:file",
+        target: "components/phone-input/countries.json",
+      },
+    ],
+  },
+  {
     name: "item",
     type: "registry:ui",
     title: "Item",

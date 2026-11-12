@@ -70,6 +70,7 @@ const EXAMPLE_FOLDERS = [
   "persona",
   "navigation-menu",
   "pagination",
+  "phone-input",
   "popover",
   "progress",
   "progressive-blur",

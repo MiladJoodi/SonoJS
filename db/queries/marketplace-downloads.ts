@@ -18,9 +18,9 @@ import { db } from "@/db"
 import { wrapDbError } from "@/db/errors"
 import { marketplaceDownloads, users } from "@/db/schema"
 import {
-  getMarketplaceProject,
-  marketplaceProjects,
-} from "@/lib/marketplace-catalog"
+  getTemplateProject,
+  templateProjects,
+} from "@/lib/templates-catalog"
 
 export type MarketplaceDownloadSource = "zip" | "external"
 
@@ -70,7 +70,7 @@ export type AdminDownloadSearchResult = {
   pageSize: number
 }
 
-export async function recordMarketplaceDownload(input: {
+export async function recordTemplateDownload(input: {
   userId: string
   clerkUserId: string
   slug: string
@@ -94,7 +94,7 @@ export async function recordMarketplaceDownload(input: {
   }
 }
 
-export async function listMarketplaceDownloadsByUserId(
+export async function listTemplateDownloadsByUserId(
   userId: string,
   options?: { limit?: number }
 ): Promise<MarketplaceDownloadRow[]> {
@@ -122,7 +122,7 @@ export async function listMarketplaceDownloadsByUserId(
       userId: r.userId,
       clerkUserId: r.clerkUserId,
       slug: r.slug,
-      title: getMarketplaceProject(r.slug)?.title ?? r.slug,
+      title: getTemplateProject(r.slug)?.title ?? r.slug,
       source: r.source,
       createdAt: r.createdAt.toISOString(),
     }))
@@ -131,7 +131,7 @@ export async function listMarketplaceDownloadsByUserId(
   }
 }
 
-export async function countMarketplaceDownloadsByUserId(
+export async function countTemplateDownloadsByUserId(
   userId: string
 ): Promise<number> {
   const id = userId.trim()
@@ -163,7 +163,7 @@ function mapAdminDownloadRow(r: {
     clerkUserId: r.clerkUserId,
     email: r.email,
     slug: r.slug,
-    title: getMarketplaceProject(r.slug)?.title ?? r.slug,
+    title: getTemplateProject(r.slug)?.title ?? r.slug,
     source: r.source,
     createdAt: r.createdAt.toISOString(),
   }
@@ -172,7 +172,7 @@ function mapAdminDownloadRow(r: {
 function catalogSlugsMatchingQuery(q: string): string[] {
   const needle = q.trim().toLowerCase()
   if (!needle) return []
-  return marketplaceProjects
+  return templateProjects
     .filter(
       (p) =>
         p.slug.toLowerCase().includes(needle) ||
@@ -283,7 +283,7 @@ export async function searchAdminMarketplaceDownloads(
   }
 }
 
-export async function countMarketplaceDownloadsByUserIds(
+export async function countTemplateDownloadsByUserIds(
   userIds: string[]
 ): Promise<Map<string, number>> {
   const ids = [...new Set(userIds.map((id) => id.trim()).filter(Boolean))]
@@ -346,7 +346,7 @@ export async function listTopMarketplaceDownloadsBySlug(options?: {
 
     return rows.map((r) => ({
       slug: r.slug,
-      title: getMarketplaceProject(r.slug)?.title ?? r.slug,
+      title: getTemplateProject(r.slug)?.title ?? r.slug,
       downloads: r.n,
     }))
   } catch (err) {

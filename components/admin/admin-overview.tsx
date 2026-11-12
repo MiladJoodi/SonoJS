@@ -397,7 +397,7 @@ export function AdminOverview() {
             {(topDownloads ?? []).map((d, i) => (
               <RecentRow
                 key={d.slug}
-                href={`/marketplace/${d.slug}`}
+                href={`/templates/${d.slug}`}
                 primary={
                   <span className="truncate" dir="ltr">
                     <span className="text-muted-foreground tabular-nums">

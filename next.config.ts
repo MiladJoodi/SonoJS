@@ -14,6 +14,18 @@ const revalidateImmediately = [
   },
 ] as const;
 
+/**
+ * Temporary SEO bridge. Delete this block after ~2026-08 once
+ * Search Console shows near-zero hits on /marketplace.
+ */
+const marketplaceToTemplatesRedirects = [
+  ["/marketplace", "/templates"],
+  ["/marketplace/projects/:path*", "/templates/projects/:path*"],
+  ["/marketplace/hero/:path*", "/templates/hero/:path*"],
+  ["/marketplace/:slug", "/templates/:slug"],
+  ["/api/marketplace/:slug/download", "/api/templates/:slug/download"],
+] as const;
+
 const nextConfig: NextConfig = {
   // Workspace package - must transpile + watch for HMR
   transpilePackages: ["@sonojs/ui", "@mdxeditor/editor"],
@@ -63,6 +75,11 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      ...marketplaceToTemplatesRedirects.map(([source, destination]) => ({
+        source,
+        destination,
+        permanent: true as const,
+      })),
       {
         source: "/terms",
         destination: "/legal/terms",

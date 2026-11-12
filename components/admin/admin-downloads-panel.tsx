@@ -147,7 +147,7 @@ export function AdminDownloadsPanel() {
     <Card className="border-border/60 shadow-none">
       <CardHeader className="flex flex-row items-start justify-between gap-3 border-b border-border/50 space-y-0">
         <div className="space-y-1.5">
-          <CardTitle>Marketplace downloads</CardTitle>
+          <CardTitle>Template downloads</CardTitle>
           <CardDescription>
             Who downloaded what — search by email, clerk id, product name, or
             slug.
@@ -178,7 +178,7 @@ export function AdminDownloadsPanel() {
                       {i + 1}.
                     </span>
                     <Link
-                      href={`/marketplace/${item.slug}`}
+                      href={`/templates/${item.slug}`}
                       className="min-w-0 cursor-pointer truncate text-sm font-medium underline-offset-4 hover:underline"
                     >
                       {item.title}
@@ -316,7 +316,7 @@ export function AdminDownloadsPanel() {
                       <td className={adminTdClass}>
                         <div className="flex min-w-0 flex-col gap-0.5">
                           <Link
-                            href={`/marketplace/${d.slug}`}
+                            href={`/templates/${d.slug}`}
                             className="cursor-pointer truncate underline-offset-4 hover:underline"
                           >
                             {d.title}

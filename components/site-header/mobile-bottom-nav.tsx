@@ -41,7 +41,7 @@ import {
 const TAB_ICONS: Record<string, LucideIcon> = {
   components: LayoutGridIcon,
   blocks: LayoutTemplateIcon,
-  marketplace: StoreIcon,
+  templates: StoreIcon,
   charts: ChartAreaIcon,
   more: EllipsisIcon,
 }

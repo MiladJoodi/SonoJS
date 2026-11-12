@@ -31,6 +31,11 @@ export const toolsNav: ToolsNavItem[] = [
     description:
       "Full Markdown editor: rich text, source, diff, tables, code, images, and more. Drafts auto-save.",
   },
+  {
+    title: "Flags",
+    href: toolHref("flags"),
+    description: "Browse flags and copy CDN URLs.",
+  },
 ]
 
 export function getAllToolItems(): ToolsNavItem[] {

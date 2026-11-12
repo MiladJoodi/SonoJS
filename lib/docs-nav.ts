@@ -95,6 +95,7 @@ export const componentsNav: {
         { title: "Input OTP", href: "/docs/components/input-otp" },
         { title: "Label", href: "/docs/components/label", featured: true },
         { title: "Native Select", href: "/docs/components/native-select" },
+        { title: "Phone Input", href: "/docs/components/phone-input" },
         {
           title: "Radio Group",
           href: "/docs/components/radio-group",

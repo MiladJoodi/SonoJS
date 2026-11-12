@@ -119,6 +119,8 @@
     "./components/carousels/stylish-carousel/*": "./src/components/carousels/stylish-carousel/*",
     "./components/carousels/cool-slide-gallery": "./src/components/carousels/cool-slide-gallery/index.tsx",
     "./components/carousels/cool-slide-gallery/*": "./src/components/carousels/cool-slide-gallery/*",
+    "./components/phone-input": "./src/components/phone-input/index.ts",
+    "./components/phone-input/*": "./src/components/phone-input/*",
     "./components/*": "./src/components/*.tsx",
     "./hooks/*": "./src/hooks/*",
     "./hooks/use-direction": "./src/hooks/use-direction.tsx",

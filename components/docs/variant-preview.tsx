@@ -31,7 +31,7 @@ export type VariantExample = {
   codeHtml?: string
   /**
    * Extra registry items this example needs (not required by the main
-   * component). Shown as “This example also needs” under the Code tab only.
+   * component). Shown as “Also needs” under the Code tab only.
    */
   requires?: string[]
   /**

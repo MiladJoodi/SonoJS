@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils"
  * Shows each install step as its own copyable command (no shell chaining).
  */
 export function InstallNeedsHint({
-  label = "This example also needs",
+  label = "Also needs",
   registry = [],
   npm = [],
   className,
@@ -29,20 +29,21 @@ export function InstallNeedsHint({
   return (
     <div
       className={cn(
-        "space-y-1.5 border-t border-border/60 bg-muted/20 px-3 py-2 text-[12.5px] text-muted-foreground",
+        "space-y-1.5 border-t border-border/60 bg-card px-3 py-2 text-[12.5px] text-muted-foreground",
         className
       )}
     >
       <span className="block">{label}</span>
       {commands.map((command) => (
-        <div key={command} className="flex items-start gap-1.5">
-          <code className="min-w-0 flex-1 whitespace-normal break-all rounded-md border border-border/70 bg-background px-1.5 py-0.5 font-mono text-[11.5px] leading-snug text-foreground">
+        <div key={command} className="flex max-w-full items-center gap-1">
+          <code className="min-w-0 whitespace-normal break-all rounded-md bg-muted/50 px-1.5 py-0.5 font-mono text-[11.5px] leading-snug text-foreground">
             {command}
           </code>
           <CopyButton
             value={command}
             tooltip={copyTooltip}
-            className="mt-0.5 shrink-0 text-muted-foreground hover:bg-muted hover:text-foreground"
+            tone="chrome"
+            className="shrink-0"
           />
         </div>
       ))}

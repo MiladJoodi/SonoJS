@@ -23,7 +23,7 @@ export function isMobileBottomNavMore(
 }
 
 /**
- * Primary tabs - Marketplace is the center tab.
+ * Primary tabs - Templates is the center tab.
  * Home, AI, Cursors, 3D, Carousels, Tools live in More.
  */
 export const mobileBottomNav: MobileBottomNavItem[] = [
@@ -35,9 +35,9 @@ export const mobileBottomNav: MobileBottomNavItem[] = [
   },
   { id: "blocks", href: "/blocks", label: "Blocks", match: "prefix" },
   {
-    id: "marketplace",
-    href: "/marketplace",
-    label: "Marketplace",
+    id: "templates",
+    href: "/templates",
+    label: "Templates",
     match: "prefix",
   },
   { id: "charts", href: "/charts", label: "Charts", match: "prefix" },
@@ -60,12 +60,12 @@ export function getMobileMoreNavItems(): SiteNavItem[] {
   return [HOME_NAV_ITEM, ...rest, ...siteConfig.footerNavItems]
 }
 
-/** Hide on tool workspaces, chart playground, and marketplace product pages. */
+/** Hide on tool workspaces, chart playground, and template product pages. */
 export function shouldShowMobileBottomNav(pathname: string): boolean {
   if (pathname.startsWith("/tools/")) return false
   if (pathname.startsWith("/charts/view")) return false
-  // Catalog stays; product detail (`/marketplace/[slug]`) hides the tab bar.
-  if (/^\/marketplace\/[^/]+/.test(pathname)) return false
+  // Catalog stays; product detail (`/templates/[slug]`) hides the tab bar.
+  if (/^\/templates\/[^/]+/.test(pathname)) return false
   return true
 }
 

@@ -72,7 +72,7 @@ const SECTION_LABELS: Record<string, string> = {
   carousels: "Carousels",
   cursors: "Cursors",
   tools: "Tools",
-  marketplace: "Marketplace",
+  templates: "Templates",
   pricing: "Pricing",
 }
 
@@ -95,7 +95,7 @@ export function isBreadcrumbLinkedPath(
     return (
       SECTION_LABELS[parts[0]] !== undefined ||
       parts[0] === "pricing" ||
-      parts[0] === "marketplace"
+      parts[0] === "templates"
     )
   }
 

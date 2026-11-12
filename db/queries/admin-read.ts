@@ -23,9 +23,9 @@ import { db } from "@/db"
 import { wrapDbError } from "@/db/errors"
 import type { AdminUserRow } from "@/db/queries/admin-billing"
 import {
-  countMarketplaceDownloadsByUserId,
-  countMarketplaceDownloadsByUserIds,
-  listMarketplaceDownloadsByUserId,
+  countTemplateDownloadsByUserId,
+  countTemplateDownloadsByUserIds,
+  listTemplateDownloadsByUserId,
   listTopMarketplaceDownloadsBySlug,
   searchAdminMarketplaceDownloads,
   type MarketplaceDownloadRow,
@@ -695,8 +695,8 @@ export async function getAdminUserDetail(
     const [plan, downloads, downloadsTotal, clerkFullName, subRows, paymentRows] =
       await Promise.all([
         getEffectivePlanForUser(user),
-        listMarketplaceDownloadsByUserId(user.id, { limit: 50 }),
-        countMarketplaceDownloadsByUserId(user.id),
+        listTemplateDownloadsByUserId(user.id, { limit: 50 }),
+        countTemplateDownloadsByUserId(user.id),
         softClerkFullName(user.clerkUserId),
         db
           .select({
@@ -955,7 +955,7 @@ export async function searchAdminUsers(
       if (!bestByUser.has(hit.userId)) bestByUser.set(hit.userId, hit)
     }
 
-    const downloadCounts = await countMarketplaceDownloadsByUserIds(userIds)
+    const downloadCounts = await countTemplateDownloadsByUserIds(userIds)
 
     const mapped: AdminUserRow[] = pageUsers.map((u) => {
       const hit = bestByUser.get(u.id)

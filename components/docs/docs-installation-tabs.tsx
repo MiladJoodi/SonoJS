@@ -146,7 +146,6 @@ export function DocsInstallationTabs({
           />
           {hasCommandNeeds ? (
             <InstallNeedsHint
-              label="Also needs"
               registry={alsoNeedsRegistry}
               npm={alsoNeedsNpm}
               copyTooltip={copyTooltip}

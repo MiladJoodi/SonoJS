@@ -16,11 +16,11 @@ export {
   type AdminUserRow,
 } from "./admin-billing"
 export {
-  recordMarketplaceDownload,
-  listMarketplaceDownloadsByUserId,
+  recordTemplateDownload,
+  listTemplateDownloadsByUserId,
   searchAdminMarketplaceDownloads,
-  countMarketplaceDownloadsByUserId,
-  countMarketplaceDownloadsByUserIds,
+  countTemplateDownloadsByUserId,
+  countTemplateDownloadsByUserIds,
   listTopMarketplaceDownloadsBySlug,
   type AdminDownloadSearchParams,
   type AdminDownloadSearchResult,

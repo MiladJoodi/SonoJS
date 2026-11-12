@@ -1,4 +1,31 @@
-/* Site scrollbars — keep out of globals.css */
+/* Site scrollbars — keep out of globals.css.
+ * Also import from registry-catalog.css + site-extended.css so catalog /
+ * marketplace sidebars keep the thin thumb (those bundles source(none)).
+ */
+
+/* Document scroll — same thin / low-contrast chrome as panes. */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+html::-webkit-scrollbar {
+  width: var(--scrollbar-size);
+  height: var(--scrollbar-size);
+}
+
+html::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+
+html::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb);
+  border-radius: var(--scrollbar-radius);
+}
+
+html::-webkit-scrollbar-thumb:hover {
+  background-color: var(--scrollbar-thumb-hover);
+}
 
 /* Thin, low-contrast scrollbar (always visible) — code panes, etc. */
 @utility scrollbar-soft {

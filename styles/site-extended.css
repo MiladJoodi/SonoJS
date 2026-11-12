@@ -1,5 +1,5 @@
 /**
- * Non-catalog route utilities (marketplace, tools, admin, pricing, legal, …).
+ * Non-catalog route utilities (templates, tools, admin, pricing, legal, …).
  *
  * No Tailwind preflight — that lives in app/globals.css.
  * Import only from layouts that need these surfaces (never root / homepage-only).
@@ -10,16 +10,18 @@
 
 @import "./sono-theme.css";
 @import "./vega-tokens.css";
-@import "./marketplace.css";
+@import "./scrollbar.css";
+@import "./templates.css";
 @import "./code-chrome.css";
 @import "./shimmer.css";
+@import "./chrome-utilities.css";
 
 /* Full installable UI — route pages use many primitives beyond the shell set. */
 @source "../packages/ui/src/**/*.{ts,tsx}";
 
 @source "../components/admin/**/*.{ts,tsx}";
 @source "../components/tools/**/*.{ts,tsx}";
-@source "../components/marketplace/**/*.{ts,tsx}";
+@source "../components/templates/**/*.{ts,tsx}";
 @source "../components/pricing/**/*.{ts,tsx}";
 @source "../components/contact/**/*.{ts,tsx}";
 @source "../components/legal/**/*.{ts,tsx}";
@@ -37,7 +39,7 @@
 
 @source "../registry/blocks/marketing/offer-card/**/*.{ts,tsx}";
 
-@source "../app/(app)/marketplace/**/*.{ts,tsx}";
+@source "../app/(app)/templates/**/*.{ts,tsx}";
 @source "../app/(app)/admin/**/*.{ts,tsx}";
 @source "../app/(app)/tools/**/*.{ts,tsx}";
 @source "../app/(app)/pricing/**/*.{ts,tsx}";

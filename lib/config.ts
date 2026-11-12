@@ -77,7 +77,7 @@ Ask before changing MCP config outside this project.`,
     { href: "/3d", label: "3D" },
     { href: "/ai", label: "AI" },
     { href: "/carousels", label: "Carousels" },
-    { href: "/marketplace", label: "Marketplace" },
+    { href: "/templates", label: "Templates" },
     { href: "/pricing", label: "Pricing" },
   ] satisfies SiteNavItem[],
   /** Secondary explore links shown in the site footer. */

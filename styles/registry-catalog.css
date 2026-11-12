@@ -13,6 +13,7 @@
 
 @import "./sono-theme.css";
 @import "./vega-tokens.css";
+@import "./scrollbar.css";
 @import "./code-chrome.css";
 @import "./shimmer.css";
 @import "./chrome-utilities.css";
