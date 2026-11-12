@@ -8105,6 +8105,67 @@ export const templateProjects: TemplateProject[] = [
     ],
   },
   {
+    slug: "sonojs-saas-15",
+    title: "Flowstate",
+    tagline:
+      "Deep Work in a Distracted World - WebGL fluid waitlist hero.",
+    description:
+      "Flowstate is a deep-work SaaS waitlist hero by SonoJS (demo brand: Flowstate). Zero-build static HTML with Onest fonts, custom CSS, Lenis smooth scroll, and a full-bleed WebGL fluid/ink canvas behind the copy. Hero Deep Work in a Distracted World with 10K+ already in flow badge, email Join Waitlist form, pill nav (How it works / Pricing / Products / Blog), and Get Started. Word-stagger reveals on load. Demo waitlist chrome only - form submit prevented, no backend. Run with npx --yes serve . or host statically on Cloudflare Workers.",
+    category: "saas",
+    stack: ["html", "css", "javascript"],
+    priceLabel: "Free",
+    priceCents: 0,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 220,
+    accent: "220",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "saas",
+    coverImage: "/templates/projects/saas/sonojs-saas-15/main.webp",
+    coverImageDark: null,
+    coverVideo: "/templates/projects/saas/sonojs-saas-15/cover.mp4",
+    detailCoverImage: "/templates/projects/saas/sonojs-saas-15/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-saas-15.sonojs2.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-13",
+    firstReleasedAt: "2026-11-13",
+    screens: 1,
+    runCommand: "npx --yes serve .",
+    highlights: [
+      {
+        title: "WebGL fluid stage",
+        body: "Interactive ink/fluid canvas behind the hero - pointer-driven swirls.",
+      },
+      {
+        title: "Deep Work hero",
+        body: "10K+ badge, word-stagger title, and Join Waitlist email bar.",
+      },
+      {
+        title: "Lenis smooth scroll",
+        body: "Vendored Lenis with pill nav and Get Started chrome.",
+      },
+      {
+        title: "Zero-build static",
+        body: "npx --yes serve . - index.html, css/, js/main.js, Onest fonts.",
+      },
+    ],
+    includes: [
+      "index.html (Flowstate — Deep Work waitlist)",
+      "css/styles.css + fonts/onest.css + local woff2",
+      "js/main.js (Lenis + WebGL fluid simulation)",
+      "vendor/lenis.mjs",
+    ],
+    requirements: [
+      "Modern browser with WebGL",
+      "Static file host (npx --yes serve .)",
+    ],
+  },
+  {
     slug: "sonojs-hero-72",
     title: "Oryon",
     tagline:
@@ -8597,6 +8658,68 @@ export const templateProjects: TemplateProject[] = [
     requirements: [
       "Modern browser with WebGL",
       "Static file host (npx --yes serve .)",
+    ],
+  },
+  {
+    slug: "sonojs-landing-28",
+    title: "Gravity",
+    tagline:
+      "Less noise. More gravity. - WebGL sphere physics digital studio.",
+    description:
+      "Gravity is a scroll-cinema digital studio landing by SonoJS (demo brand: Gravity). Zero-build static HTML with local CSS, vendored Three.js, and vanilla JS. Loader calibrates a gravity field into hero Less noise. More gravity.; scroll chapters drop spheres with Verlet collision physics, reassemble into form with cursor ripples, then release weightless into the lens. Studio Controls panel swaps hero palettes (Royal Blue, Rose Blush, Volt Lime, Arctic Sky). Works / Services / Team / Story nav and collaborate footer. Demo studio chrome only - no CRM backend. Run with npx serve . or host statically on Cloudflare Workers.",
+    category: "landing",
+    stack: ["html", "css", "javascript", "threejs"],
+    priceLabel: "Free",
+    priceCents: 0,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 250,
+    accent: "250",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "landing",
+    coverImage: "/templates/projects/landing/sonojs-landing-28/main.webp",
+    coverImageDark: null,
+    coverVideo: "/templates/projects/landing/sonojs-landing-28/cover.mp4",
+    detailCoverImage:
+      "/templates/projects/landing/sonojs-landing-28/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-landing-28.sonojs2.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-13",
+    firstReleasedAt: "2026-11-13",
+    screens: 5,
+    runCommand: "npx serve .",
+    highlights: [
+      {
+        title: "Verlet gravity field",
+        body: "Real-time 3D sphere collisions - mass, momentum, restitution - as you scroll.",
+      },
+      {
+        title: "Chaos → form → release",
+        body: "Drop, reassemble with cursor ripples, then weightless fly-through into the lens.",
+      },
+      {
+        title: "Studio Controls",
+        body: "Four live hero palettes (Royal Blue, Rose, Volt Lime, Arctic) mid-scroll.",
+      },
+      {
+        title: "Zero-build static",
+        body: "npx serve . - index.html, css/, js/main.js, vendored Three.js.",
+      },
+    ],
+    includes: [
+      "index.html + css/styles.css + js/main.js (Gravity studio)",
+      "vendor/three/three.module.js (import map)",
+      "vendor/fonts (local woff2 + fonts.css)",
+      "Studio Controls palette UI",
+    ],
+    requirements: [
+      "Modern browser with WebGL",
+      "Static file host (npx serve .)",
     ],
   },
 ]
