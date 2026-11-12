@@ -55,6 +55,7 @@ export const TOP_LEVEL_COMPONENT_ROOTS = new Set([
   "dropzone",
   "lens",
   "magic-card",
+  "multi-select",
   "phone-input",
   "progressive-blur",
   "border-beam",

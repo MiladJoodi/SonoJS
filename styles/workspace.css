@@ -32,18 +32,3 @@
   max-width: none;
   margin-inline: 0;
 }
-
-/* TOC click feedback when scroll distance is tiny (short nearby sections). */
-@keyframes sono-toc-flash {
-  0% {
-    background-color: color-mix(in oklab, var(--primary) 22%, transparent);
-  }
-  100% {
-    background-color: transparent;
-  }
-}
-
-.sono-toc-flash {
-  border-radius: 0.375rem;
-  animation: sono-toc-flash 0.85s ease-out;
-}

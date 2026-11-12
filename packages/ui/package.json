@@ -121,6 +121,8 @@
     "./components/carousels/cool-slide-gallery/*": "./src/components/carousels/cool-slide-gallery/*",
     "./components/phone-input": "./src/components/phone-input/index.ts",
     "./components/phone-input/*": "./src/components/phone-input/*",
+    "./components/multi-select": "./src/components/multi-select/index.ts",
+    "./components/multi-select/*": "./src/components/multi-select/*",
     "./components/*": "./src/components/*.tsx",
     "./hooks/*": "./src/hooks/*",
     "./hooks/use-direction": "./src/hooks/use-direction.tsx",

@@ -43,6 +43,11 @@ export const componentsNav: {
       title: COMPONENTS_FEATURED_GROUP,
       pages: [
         {
+          title: "Multi Select",
+          href: "/docs/components/multi-select",
+          badge: "new",
+        },
+        {
           title: "Dropzone",
           href: "/docs/components/dropzone",
           badge: "new",
@@ -104,6 +109,11 @@ export const componentsNav: {
         { title: "Input Group", href: "/docs/components/input-group" },
         { title: "Input OTP", href: "/docs/components/input-otp" },
         { title: "Label", href: "/docs/components/label", featured: true },
+        {
+          title: "Multi Select",
+          href: "/docs/components/multi-select",
+          featured: true,
+        },
         { title: "Native Select", href: "/docs/components/native-select" },
         { title: "Phone Input", href: "/docs/components/phone-input" },
         {

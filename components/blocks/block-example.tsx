@@ -137,7 +137,6 @@ export function BlockExample({
   return (
     <section
       id={name}
-      data-sono-toc-item={displayTitle}
       className="flex w-full min-w-0 scroll-mt-24 flex-col gap-2.5"
     >
       <div

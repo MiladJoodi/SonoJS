@@ -3626,6 +3626,27 @@ const registryItemsRaw = [
     ],
   },
   {
+    name: "multi-select",
+    type: "registry:ui",
+    title: "Multi Select",
+    description:
+      "Popover multi-select with searchable checkbox list, removable chips, and clear.",
+    dependencies: ["lucide-react", "clsx", "tailwind-merge"],
+    registryDependencies: ["popover", "command", "badge", "button"],
+    files: [
+      {
+        path: "packages/ui/src/components/multi-select/index.ts",
+        type: "registry:ui",
+        target: "components/multi-select/index.ts",
+      },
+      {
+        path: "packages/ui/src/components/multi-select/multi-select.tsx",
+        type: "registry:ui",
+        target: "components/multi-select/multi-select.tsx",
+      },
+    ],
+  },
+  {
     name: "native-select",
     type: "registry:ui",
     title: "Native Select",

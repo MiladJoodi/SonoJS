@@ -9,12 +9,11 @@ import {
 } from "@/components/auth/auth-dialog"
 import { useSignedInHint } from "@/components/auth/signed-in-hint"
 import { OFFER_RAIL_CLASS } from "@/components/sidebar-nav"
-import { siteConfig } from "@/lib/config"
+import { templateProjects } from "@/lib/templates-catalog"
 import { cn } from "@/lib/utils"
 import OfferCard from "@/registry/blocks/marketing/offer-card/offer-card-01/offer-card"
 
 import { WorkspaceContribute } from "./contribute"
-import { WorkspaceOnThisPage } from "./on-this-page"
 
 const FREE_FEATURES = [
   "Free register & sign in",
@@ -23,19 +22,23 @@ const FREE_FEATURES = [
   "All features - no paywall",
 ]
 
-const MEMBER_FEATURES = [
-  "Full library unlocked",
-  "CLI + MCP install flow",
-  "Docs, blocks & charts",
-  "Star the repo to support us",
+const TEMPLATE_FEATURES = [
+  "Live demos",
+  "Full source download",
+  "Filter by stack",
 ]
+
+/** Free enabled kits shown on the signed-in offer card (+N FREE). */
+const FREE_TEMPLATE_COUNT = templateProjects.filter(
+  (p) => p.enabled && (p.priceCents ?? 0) === 0
+).length
 
 export type WorkspaceOfferRailMode = "full" | "toc"
 
 /**
  * Desktop-only right rail on workspace layouts.
- * - `full`: offer card + on-this-page + contribute (docs, blocks, …)
- * - `toc`: on-this-page + contribute only (legal pages)
+ * - `full`: offer card + contribute (docs, blocks, …)
+ * - `toc`: contribute only (legal pages)
  */
 export function WorkspaceOfferRail({
   className,
@@ -65,9 +68,9 @@ export function WorkspaceOfferRail({
       className={cn(OFFER_RAIL_CLASS, className)}
       aria-label={
         tocOnly
-          ? "On this page"
+          ? "Contribute"
           : isMember
-            ? "Member welcome"
+            ? "Templates offer"
             : "Free account offer"
       }
     >
@@ -77,28 +80,21 @@ export function WorkspaceOfferRail({
             {isMember ? (
               <OfferCard
                 speed={speed}
-                badge="You're in"
-                eyebrow="Keep"
-                headlineItalic="Shipping"
-                headlinePrefix="with"
-                productName="SonoJS"
-                description={
-                  <>
-                    Your free account is ready. Browse the library, install with
-                    the CLI, or wire up{" "}
-                    <span className="font-semibold text-foreground">MCP</span>{" "}
-                    in your editor.
-                  </>
-                }
-                features={MEMBER_FEATURES}
-                price="Free"
+                badge="Free kits"
+                eyebrow="Full projects"
+                headlineItalic="Browse"
+                headlinePrefix="our"
+                productName="Templates"
+                description="Live demos, then download the source and customize."
+                features={TEMPLATE_FEATURES}
+                price={`+${FREE_TEMPLATE_COUNT}`}
                 compareAt=""
-                tier="MEMBER"
-                ctaLabel="Star on GitHub"
-                ctaHref={siteConfig.links.github}
-                trustLead="Thanks for"
-                trustHighlight="joining"
-                trustTrail="the builders"
+                tier="FREE"
+                ctaLabel="View templates"
+                ctaHref="/templates"
+                trustLead="Preview ·"
+                trustHighlight="download ·"
+                trustTrail="ship"
               />
             ) : (
               <OfferCard
@@ -135,17 +131,7 @@ export function WorkspaceOfferRail({
                 trustTrail="shipping free"
               />
             )}
-            {isMember ? (
-              <p className="mt-2.5 text-center text-[11px] text-muted-foreground">
-                New here? Try{" "}
-                <a
-                  href="/docs/mcp"
-                  className="cursor-pointer font-semibold text-foreground underline-offset-2 hover:underline"
-                >
-                  MCP setup
-                </a>
-              </p>
-            ) : (
+            {isMember ? null : (
               <p className="mt-2.5 text-center text-[11px] text-muted-foreground">
                 Already have an account?{" "}
                 <button
@@ -163,8 +149,7 @@ export function WorkspaceOfferRail({
           </>
         ) : null}
 
-        <WorkspaceOnThisPage className={tocOnly ? "mt-0 border-t-0 pt-0" : undefined} />
-        <WorkspaceContribute />
+        <WorkspaceContribute className={tocOnly ? "mt-0 border-t-0 pt-0" : undefined} />
       </div>
 
       {!tocOnly && !isMember ? (

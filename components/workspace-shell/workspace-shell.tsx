@@ -126,7 +126,7 @@ export function WorkspaceShell({
   listIndex?: React.ReactNode
   providerClassName?: string
   showOfferRail?: boolean
-  /** `toc` = On this page + contribute only (no offer card). */
+  /** `toc` = contribute only (no offer card). */
   offerRailMode?: WorkspaceOfferRailMode
 }) {
   return (

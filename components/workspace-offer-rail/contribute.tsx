@@ -14,6 +14,8 @@ type ContributeItem = {
   icon: LucideIcon
   href?: string
   disabled?: boolean
+  /** Extra `rel` tokens (e.g. sponsored / UGC links). */
+  nofollow?: boolean
 }
 
 const ITEMS: ContributeItem[] = [
@@ -35,7 +37,8 @@ const ITEMS: ContributeItem[] = [
   {
     label: "Donate",
     icon: HeartIcon,
-    disabled: true,
+    href: siteConfig.links.buyMeACoffee,
+    nofollow: true,
   },
 ]
 
@@ -79,7 +82,11 @@ export function WorkspaceContribute({ className }: { className?: string }) {
               <a
                 href={item.href}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel={
+                  item.nofollow
+                    ? "noopener noreferrer nofollow"
+                    : "noopener noreferrer"
+                }
                 className={cn(linkClass, "cursor-pointer")}
               >
                 <Icon className="size-3.5 shrink-0 opacity-70" aria-hidden />

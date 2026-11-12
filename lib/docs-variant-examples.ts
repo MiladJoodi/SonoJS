@@ -66,6 +66,7 @@ const EXAMPLE_FOLDERS = [
   "message",
   "mic-selector",
   "model-selector",
+  "multi-select",
   "open-in-chat",
   "native-select",
   "persona",
