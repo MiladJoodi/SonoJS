@@ -4,7 +4,6 @@ Package: JetCrest (`1.0.0`) - HTML · CSS · JavaScript · Tailwind (vendor)
 Category: `hero`  
 Slug / folder: `sonojs-hero-27`  
 Path: `public/marketplace/projects/hero/sonojs-hero-27/`  
-Source: `E:\dl\prompt\34`
 
 Private-aviation hero with nested video stage. Demo brand: **Jetfly** / **JetCrest**.
 
@@ -18,7 +17,6 @@ Private-aviation hero with nested video stage. Demo brand: **Jetfly** / **JetCre
 ## Live / package
 
 - Demo: https://sonojs-hero-27.sonojs.workers.dev/
-- Source: `E:\dl\prompt\34`
 - Zip: `products/heroes/sonojs-hero-27/sonojs-hero-27.zip`
 
 ## Access

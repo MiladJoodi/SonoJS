@@ -4,7 +4,6 @@ Package: `visionaries` (`1.0.0`) - Vite · React 19 · TypeScript
 Category: `hero`  
 Slug / folder: `sonojs-hero-10`  
 Path: `public/marketplace/projects/hero/sonojs-hero-10/`  
-Source: `E:\dl\prompt\11`
 
 Orbital art carousel hero. Demo brand: **Visionaries**.
 
@@ -18,7 +17,6 @@ Orbital art carousel hero. Demo brand: **Visionaries**.
 ## Live / package
 
 - Demo: https://sonojs-hero-10.sonojs.workers.dev/
-- Source: `E:\dl\prompt\11`
 - Zip: `products/heroes/sonojs-hero-10/sonojs-hero-10.zip`
 
 ## Access

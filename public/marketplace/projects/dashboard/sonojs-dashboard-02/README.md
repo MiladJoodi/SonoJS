@@ -4,7 +4,6 @@ Package: Vantage (`1.0.0`) - React · Vite · TypeScript · Tailwind · Recharts
 Category: `dashboard`  
 Slug / folder: `sonojs-dashboard-02`  
 Path: `public/marketplace/projects/dashboard/sonojs-dashboard-02/`  
-Source: `E:\dl\prompt3\85`
 
 Product analytics admin (demo: Acme Inc / Vantage). Overview, Analytics, Customers, Reports, Settings, Login.
 
@@ -18,7 +17,6 @@ Product analytics admin (demo: Acme Inc / Vantage). Overview, Analytics, Custome
 ## Live / package
 
 - Demo: https://sonojs-dashboard-02.sonojs.workers.dev/
-- Source: `E:\dl\prompt3\85`
 - Zip: `products/dashboards/sonojs-dashboard-02/sonojs-dashboard-02.zip`
 - Local: `npm install` then `npm run dev`
 

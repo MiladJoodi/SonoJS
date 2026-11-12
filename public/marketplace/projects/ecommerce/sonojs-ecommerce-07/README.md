@@ -4,7 +4,6 @@ Package: Marcus Thorne (`1.0.0`) - React · Vite · CSS · Bodoni Moda · Hanken
 Category: `ecommerce`  
 Slug / folder: `sonojs-ecommerce-07`  
 Path: `public/marketplace/projects/ecommerce/sonojs-ecommerce-07/`  
-Source: `E:\dl\prompt3\100`
 
 Editorial photographer & filmmaker commission site. Demo brand: **Marcus Thorne**.
 
@@ -18,7 +17,6 @@ Editorial photographer & filmmaker commission site. Demo brand: **Marcus Thorne*
 ## Live / package
 
 - Demo: https://sonojs-ecommerce-07.sonojs2.workers.dev/
-- Source: `E:\dl\prompt3\100`
 - Zip: `products/ecommerce/sonojs-ecommerce-07/sonojs-ecommerce-07.zip`
 - Local: `npm install` then `npm run dev`
 

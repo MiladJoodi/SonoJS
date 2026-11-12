@@ -3,7 +3,6 @@
 Category: `betting`  
 Slug / folder: `sonojs-betting-03`  
 Path: `public/marketplace/projects/betting/sonojs-betting-03/`  
-Source: `E:\SonoJS-Templates\apps\betting\03`
 
 ## Images
 

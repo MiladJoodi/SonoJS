@@ -4,7 +4,6 @@ Package: Resend (`1.0.0`) - React · Vite · TypeScript · Tailwind 4 · Domaine
 Category: `saas`  
 Slug / folder: `sonojs-saas-05`  
 Path: `public/marketplace/projects/saas/sonojs-saas-05/`  
-Source: `E:\dl\prompt3\96`
 
 Developer email platform landing. Demo brand: **Resend** — Email for developers.
 
@@ -18,7 +17,6 @@ Developer email platform landing. Demo brand: **Resend** — Email for developer
 ## Live / package
 
 - Demo: https://sonojs-saas-05.sonojs.workers.dev/
-- Source: `E:\dl\prompt3\96`
 - Zip: `products/saas/sonojs-saas-05/sonojs-saas-05.zip`
 - Local: `npm install` then `npm run dev`
 

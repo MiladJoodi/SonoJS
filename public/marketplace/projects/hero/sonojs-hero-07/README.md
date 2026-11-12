@@ -4,7 +4,6 @@ Package: `lumen-roof` (`1.0.0`) - HTML · CSS · vanilla JS
 Category: `hero`  
 Slug / folder: `sonojs-hero-07`  
 Path: `public/marketplace/projects/hero/sonojs-hero-07/`  
-Source: `E:\dl\prompt\06`
 
 Solar farmhouse day/night hero. Demo brand: **Lumen Roof**.
 
@@ -18,7 +17,6 @@ Solar farmhouse day/night hero. Demo brand: **Lumen Roof**.
 ## Live / package
 
 - Demo: https://sonojs-hero-07.sonojs.workers.dev/
-- Source: `E:\dl\prompt\06` (`index.html` + `assets/`)
 - Zip: `products/heroes/sonojs-hero-07/sonojs-hero-07.zip`
 
 ## Access

@@ -4,7 +4,6 @@ Package: Earshot (`1.0.0`) - HTML · CSS · JavaScript (static SPA)
 Category: `hero`  
 Slug / folder: `sonojs-hero-38`  
 Path: `public/marketplace/projects/hero/sonojs-hero-38/`  
-Source: `E:\dl\prompt2\49`
 
 Open-world runner hero with frame cinema. Demo brand: **Earshot**.
 
@@ -18,7 +17,6 @@ Open-world runner hero with frame cinema. Demo brand: **Earshot**.
 ## Live / package
 
 - Demo: https://sonojs-hero-38.sonojs.workers.dev/
-- Source: `E:\dl\prompt2\49`
 - Zip: `products/heroes/sonojs-hero-38/sonojs-hero-38.zip`
 - Local: `.\serve.ps1` → http://localhost:8080
 

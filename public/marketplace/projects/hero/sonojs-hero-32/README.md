@@ -4,7 +4,6 @@ Package: Oasis (`1.0.0`) - React · Vite · JavaScript · Tailwind · Lucide
 Category: `hero`  
 Slug / folder: `sonojs-hero-32`  
 Path: `public/marketplace/projects/hero/sonojs-hero-32/`  
-Source: `E:\dl\prompt\39`
 
 Productivity marketing hero with full-bleed video and dashboard preview. Demo brand: **Oasis**.
 
@@ -18,7 +17,6 @@ Productivity marketing hero with full-bleed video and dashboard preview. Demo br
 ## Live / package
 
 - Demo: https://sonojs-hero-32.sonojs.workers.dev/
-- Source: `E:\dl\prompt\39`
 - Zip: `products/heroes/sonojs-hero-32/sonojs-hero-32.zip`
 
 ## Access

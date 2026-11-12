@@ -4,7 +4,6 @@ Package: Forkful (`1.0.0`) - React · Vite · TypeScript · Tailwind · Lucide
 Category: `saas`  
 Slug / folder: `sonojs-saas-02`  
 Path: `public/marketplace/projects/saas/sonojs-saas-02/`  
-Source: `E:\dl\prompt\42`
 
 Multi-page recipe catalog with pantry search and cook mode. Demo brand: **Forkful**.
 
@@ -18,7 +17,6 @@ Multi-page recipe catalog with pantry search and cook mode. Demo brand: **Forkfu
 ## Live / package
 
 - Demo: https://sonojs-saas-02.sonojs.workers.dev/
-- Source: `E:\dl\prompt\42`
 - Zip: `products/saas/sonojs-saas-02/sonojs-saas-02.zip`
 
 ## Access

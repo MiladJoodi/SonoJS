@@ -4,7 +4,6 @@ Package: Nearby Homes / Hero Subscribe (`1.0.0`) - HTML · CSS · JavaScript · 
 Category: `hero`  
 Slug / folder: `sonojs-hero-19`  
 Path: `public/marketplace/projects/hero/sonojs-hero-19/`  
-Source: `E:\dl\prompt\23`
 
 Rounded video subscribe hero. Demo brand: **Nearby Homes**.
 
@@ -18,7 +17,6 @@ Rounded video subscribe hero. Demo brand: **Nearby Homes**.
 ## Live / package
 
 - Demo: https://sonojs-hero-19.sonojs.workers.dev/
-- Source: `E:\dl\prompt\23`
 - Zip: `products/heroes/sonojs-hero-19/sonojs-hero-19.zip`
 
 ## Access

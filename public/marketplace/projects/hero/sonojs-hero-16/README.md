@@ -4,7 +4,6 @@ Package: NeuroLink (`1.0.0`) - HTML · CSS · JavaScript
 Category: `hero`  
 Slug / folder: `sonojs-hero-16`  
 Path: `public/marketplace/projects/hero/sonojs-hero-16/`  
-Source: `E:\dl\prompt\20`
 
 Memorial product hero. Demo brand: **NeuroLink**.
 
@@ -18,7 +17,6 @@ Memorial product hero. Demo brand: **NeuroLink**.
 ## Live / package
 
 - Demo: https://sonojs-hero-16.sonojs.workers.dev/
-- Source: `E:\dl\prompt\20`
 - Zip: `products/heroes/sonojs-hero-16/sonojs-hero-16.zip`
 
 ## Access

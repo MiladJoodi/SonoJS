@@ -4,7 +4,6 @@ Package: Lūmen (`1.0.0`) - React · Vite · TypeScript · Tailwind · Lucide
 Category: `hero`  
 Slug / folder: `sonojs-hero-47`  
 Path: `public/marketplace/projects/hero/sonojs-hero-47/`  
-Source: `E:\dl\prompt2\58`
 
 Fintech index hero with grid nodes. Demo brand: **LŪMEN // ÍNDEX**.
 
@@ -18,7 +17,6 @@ Fintech index hero with grid nodes. Demo brand: **LŪMEN // ÍNDEX**.
 ## Live / package
 
 - Demo: https://sonojs-hero-47.sonojs.workers.dev/
-- Source: `E:\dl\prompt2\58`
 - Zip: `products/heroes/sonojs-hero-47/sonojs-hero-47.zip`
 - Local: `npm install` then `npm run dev`
 

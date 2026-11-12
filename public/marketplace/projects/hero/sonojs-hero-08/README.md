@@ -4,7 +4,6 @@ Package: `lumora` (`1.0.0`) - HTML · CSS · vanilla JS
 Category: `hero`  
 Slug / folder: `sonojs-hero-08`  
 Path: `public/marketplace/projects/hero/sonojs-hero-08/`  
-Source: `E:\dl\prompt\08`
 
 Cadet Skyranger hero with helmet toggle. Demo brand: **Lumora**.
 
@@ -18,7 +17,6 @@ Cadet Skyranger hero with helmet toggle. Demo brand: **Lumora**.
 ## Live / package
 
 - Demo: https://sonojs-hero-08.sonojs.workers.dev/
-- Source: `E:\dl\prompt\08` (`index.html` + `assets/`)
 - Zip: `products/heroes/sonojs-hero-08/sonojs-hero-08.zip`
 
 ## Access

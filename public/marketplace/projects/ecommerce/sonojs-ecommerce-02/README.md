@@ -4,7 +4,6 @@ Package: MacBook Neo (`1.0.0`) - HTML · CSS · JavaScript
 Category: `ecommerce`  
 Slug / folder: `sonojs-ecommerce-02`  
 Path: `public/marketplace/projects/ecommerce/sonojs-ecommerce-02/`  
-Source: `E:\dl\prompt2\72`
 
 Spanish-language Apple-style product marketing page. Demo brand: **MacBook Neo**.
 
@@ -18,7 +17,6 @@ Spanish-language Apple-style product marketing page. Demo brand: **MacBook Neo**
 ## Live / package
 
 - Demo: https://sonojs-ecommerce-02.sonojs.workers.dev/
-- Source: `E:\dl\prompt2\72`
 - Zip: `products/ecommerce/sonojs-ecommerce-02/sonojs-ecommerce-02.zip`
 - Local: open `index.html` or serve the folder statically
 

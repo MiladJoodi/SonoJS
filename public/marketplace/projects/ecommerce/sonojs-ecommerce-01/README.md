@@ -4,7 +4,6 @@ Package: `virtualfit` (`1.0.0`) - HTML · CSS · vanilla JS
 Category: `ecommerce`  
 Slug / folder: `sonojs-ecommerce-01`  
 Path: `public/marketplace/projects/ecommerce/sonojs-ecommerce-01/`  
-Source: `E:\SonoJS-pro\products\ecommerce\sonojs-ecommerce-01\sonojs-ecommerce-01`
 
 Spatial try-on storefront. Demo brand: **VirtualFit**.
 
@@ -18,7 +17,6 @@ Spatial try-on storefront. Demo brand: **VirtualFit**.
 ## Live / package
 
 - Demo: https://sonojs-ecommerce-01.sonojs.workers.dev/
-- Package folder: `E:\SonoJS-pro\products\ecommerce\sonojs-ecommerce-01\sonojs-ecommerce-01`
 - Entry: `virtualfit.html` + `virtualfit-assets/`
 
 ## Access

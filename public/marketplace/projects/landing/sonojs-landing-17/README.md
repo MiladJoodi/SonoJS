@@ -4,7 +4,6 @@ Package: Mercury (`1.0.0`) - Vite · HTML · CSS · JavaScript · Tailwind 4
 Category: `landing`  
 Slug / folder: `sonojs-landing-17`  
 Path: `public/marketplace/projects/landing/sonojs-landing-17/`  
-Source: `E:\dl\prompt3\90`
 
 Online business banking landing. Demo brand: **Mercury** — Radically different banking.
 
@@ -18,7 +17,6 @@ Online business banking landing. Demo brand: **Mercury** — Radically different
 ## Live / package
 
 - Demo: https://sonojs-landing-17.sonojs.workers.dev/
-- Source: `E:\dl\prompt3\90`
 - Zip: `products/landing/sonojs-landing-17/sonojs-landing-17.zip`
 - Local: `npm install` then `npm run dev`
 

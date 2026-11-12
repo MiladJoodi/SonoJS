@@ -4,7 +4,6 @@ Package: Qumica (`1.0.0`) - React · Vite · TypeScript · Tailwind · Lucide
 Category: `hero`  
 Slug / folder: `sonojs-hero-28`  
 Path: `public/marketplace/projects/hero/sonojs-hero-28/`  
-Source: `E:\dl\prompt\35`
 
 Digital-infrastructure marketing hero with full-bleed video. Demo brand: **Qumica**.
 
@@ -18,7 +17,6 @@ Digital-infrastructure marketing hero with full-bleed video. Demo brand: **Qumic
 ## Live / package
 
 - Demo: https://sonojs-hero-28.sonojs.workers.dev/
-- Source: `E:\dl\prompt\35`
 - Zip: `products/heroes/sonojs-hero-28/sonojs-hero-28.zip`
 
 ## Access

@@ -4,7 +4,6 @@ Package: Visor (`1.0.0`) - React · Vite · TypeScript · Tailwind 4 · Motion �
 Category: `hero`  
 Slug / folder: `sonojs-hero-64`  
 Path: `public/marketplace/projects/hero/sonojs-hero-64/`  
-Source: `E:\dl\prompt3\86`
 
 Cinematic VR product hero. Demo brand: **Visor** / Visor Vision X1.
 
@@ -18,7 +17,6 @@ Cinematic VR product hero. Demo brand: **Visor** / Visor Vision X1.
 ## Live / package
 
 - Demo: https://sonojs-hero-64.sonojs.workers.dev/
-- Source: `E:\dl\prompt3\86`
 - Zip: `products/heroes/sonojs-hero-64/sonojs-hero-64.zip`
 - Local: `npm install` then `npm run dev`
 

@@ -4,7 +4,6 @@ Package: Designer Studio (`1.0.0`) - HTML · CSS · JavaScript · GSAP
 Category: `saas`  
 Slug / folder: `sonojs-saas-12`  
 Path: `public/marketplace/projects/saas/sonojs-saas-12/`  
-Source: `E:\dl\prompt3\103`
 
 Pixel-level design studio marketing site. Demo brand: **Designer Studio**.
 
@@ -18,7 +17,6 @@ Pixel-level design studio marketing site. Demo brand: **Designer Studio**.
 ## Live / package
 
 - Demo: https://sonojs-saas-12.sonojs2.workers.dev/
-- Source: `E:\dl\prompt3\103`
 - Zip: `products/saas/sonojs-saas-12/sonojs-saas-12.zip`
 - Local: `npx --yes serve .`
 

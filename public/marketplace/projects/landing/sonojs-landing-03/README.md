@@ -4,7 +4,6 @@ Package: `aether-saas-landing` (`1.0.0`) - Next.js 16 · React 19 · Tailwind CS
 Category: `landing`  
 Slug / folder: `sonojs-landing-03`  
 Path: `public/marketplace/projects/landing/sonojs-landing-03/`  
-Source: `E:\dl\delete`
 
 Premium AI / SaaS landing with an interactive WebGL hero. Demo brand: **Aether**.
 

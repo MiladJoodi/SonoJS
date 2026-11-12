@@ -4,7 +4,6 @@ Package: `otis` (`1.0.0`)
 Category: `hero`  
 Slug / folder: `sonojs-hero-01`  
 Path: `public/marketplace/projects/hero/sonojs-hero-01/`  
-Source: `C:\Users\Salam\Downloads\otis` (rebrand to `E:\SonoJS-Templates` when ready)
 
 ## Images / video
 

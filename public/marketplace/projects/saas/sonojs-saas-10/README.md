@@ -4,7 +4,6 @@ Package: North Form (`1.0.0`) - HTML · CSS · JavaScript
 Category: `saas`  
 Slug / folder: `sonojs-saas-10`  
 Path: `public/marketplace/projects/saas/sonojs-saas-10/`  
-Source: `E:\dl\prompt3\101`
 
 Independent creative studio site. Demo brand: **NORTH/FORM**.
 
@@ -18,7 +17,6 @@ Independent creative studio site. Demo brand: **NORTH/FORM**.
 ## Live / package
 
 - Demo: https://sonojs-saas-10.sonojs2.workers.dev/
-- Source: `E:\dl\prompt3\101`
 - Zip: `products/saas/sonojs-saas-10/sonojs-saas-10.zip`
 - Local: `npx --yes serve .`
 

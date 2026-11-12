@@ -4,7 +4,6 @@ Package: Auros (`1.0.0`) - React · Vite · TypeScript · Tailwind 4 · Three.js
 Category: `saas`  
 Slug / folder: `sonojs-saas-03`  
 Path: `public/marketplace/projects/saas/sonojs-saas-03/`  
-Source: `E:\dl\prompt3\93`
 
 Crypto liquidity / trading-firm marketing site. Demo brand: **Auros** — Making Digital Markets Liquid.
 
@@ -18,7 +17,6 @@ Crypto liquidity / trading-firm marketing site. Demo brand: **Auros** — Making
 ## Live / package
 
 - Demo: https://sonojs-saas-03.sonojs.workers.dev/
-- Source: `E:\dl\prompt3\93`
 - Zip: `products/saas/sonojs-saas-03/sonojs-saas-03.zip`
 - Local: `npm install` then `npm run dev`
 

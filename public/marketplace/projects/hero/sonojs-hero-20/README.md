@@ -4,7 +4,6 @@ Package: Lumina Vision / auto-automation (`1.0.0`) - HTML · CSS · JavaScript
 Category: `hero`  
 Slug / folder: `sonojs-hero-20`  
 Path: `public/marketplace/projects/hero/sonojs-hero-20/`  
-Source: `E:\dl\prompt\24`
 
 Auto-automation video hero. Demo brand: **Lumina Vision** / **auto-automation**.
 
@@ -18,7 +17,6 @@ Auto-automation video hero. Demo brand: **Lumina Vision** / **auto-automation**.
 ## Live / package
 
 - Demo: https://sonojs-hero-20.sonojs.workers.dev/
-- Source: `E:\dl\prompt\24`
 - Zip: `products/heroes/sonojs-hero-20/sonojs-hero-20.zip`
 
 ## Access

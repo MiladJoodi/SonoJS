@@ -4,7 +4,6 @@ Package: `planet-jumping` (`1.0.0`) - HTML · CSS · vanilla JS
 Category: `hero`  
 Slug / folder: `sonojs-hero-05`  
 Path: `public/marketplace/projects/hero/sonojs-hero-05/`  
-Source: `E:\dl\prompt\04`
 
 Interactive planet-hopper hero. Demo brand: **Ubernatural** / **Planet Jumping**.
 
@@ -18,7 +17,6 @@ Interactive planet-hopper hero. Demo brand: **Ubernatural** / **Planet Jumping**
 ## Live / package
 
 - Demo: https://sonojs-hero-05.sonojs.workers.dev/
-- Source: `E:\dl\prompt\04` (`index.html` + `assets/`)
 - Zip: `products/heroes/sonojs-hero-05/sonojs-hero-05.zip`
 
 ## Access

@@ -4,7 +4,6 @@ Package: Yunjian (`1.0.0`) - HTML · CSS · JavaScript · Three.js
 Category: `saas`  
 Slug / folder: `sonojs-saas-09`  
 Path: `public/marketplace/projects/saas/sonojs-saas-09/`  
-Source: `E:\dl\prompt3\99`
 
 Cinematic mountain retreat. Demo brand: **Yunjian Retreat** / 云间 — Stay above the clouds.
 
@@ -18,7 +17,6 @@ Cinematic mountain retreat. Demo brand: **Yunjian Retreat** / 云间 — Stay ab
 ## Live / package
 
 - Demo: https://sonojs-saas-09.sonojs.workers.dev/
-- Source: `E:\dl\prompt3\99`
 - Zip: `products/saas/sonojs-saas-09/sonojs-saas-09.zip`
 - Local: `npx --yes serve .` (needed for ES modules / Three.js; do not open `file://`)
 

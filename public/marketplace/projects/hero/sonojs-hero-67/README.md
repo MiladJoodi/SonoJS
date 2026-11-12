@@ -4,7 +4,6 @@ Package: Glacier (`1.0.0`) - React · Vite · TypeScript · Tailwind 4 · Framer
 Category: `hero`  
 Slug / folder: `sonojs-hero-67`  
 Path: `public/marketplace/projects/hero/sonojs-hero-67/`  
-Source: `E:\dl\prompt3\89`
 
 Full-bleed exhibition hero. Demo brand: **Glacier** — Frozen In Time.
 
@@ -18,7 +17,6 @@ Full-bleed exhibition hero. Demo brand: **Glacier** — Frozen In Time.
 ## Live / package
 
 - Demo: https://sonojs-hero-67.sonojs.workers.dev/
-- Source: `E:\dl\prompt3\89`
 - Zip: `products/heroes/sonojs-hero-67/sonojs-hero-67.zip`
 - Local: `npm install` then `npm run dev`
 

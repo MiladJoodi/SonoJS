@@ -4,7 +4,6 @@ Package: `sono-changelog` (`1.0.0`) - Next.js 16.4 · React 19.2 · Tailwind CSS
 Category: `landing`  
 Slug / folder: `sonojs-landing-02`  
 Path: `public/marketplace/projects/landing/sonojs-landing-02/`  
-Source: `E:\SonoJS-Templates\tr`
 
 A minimal changelog template built using Next.js. Used to showcase product releases, features, and bug fixes in chronological order.
 

@@ -4,7 +4,6 @@ Package: Portiva (`1.0.0`) - HTML · CSS · JavaScript · Tailwind (vendor)
 Category: `hero`  
 Slug / folder: `sonojs-hero-17`  
 Path: `public/marketplace/projects/hero/sonojs-hero-17/`  
-Source: `E:\dl\prompt\21`
 
 Creative agency video hero. Demo brand: **Portiva**.
 
@@ -18,7 +17,6 @@ Creative agency video hero. Demo brand: **Portiva**.
 ## Live / package
 
 - Demo: https://sonojs-hero-17.sonojs.workers.dev/
-- Source: `E:\dl\prompt\21`
 - Zip: `products/heroes/sonojs-hero-17/sonojs-hero-17.zip`
 
 ## Access

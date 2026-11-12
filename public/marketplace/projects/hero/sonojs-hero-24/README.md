@@ -4,7 +4,6 @@ Package: Airlines (`1.0.0`) - HTML · CSS · JavaScript · Tailwind (vendor)
 Category: `hero`  
 Slug / folder: `sonojs-hero-24`  
 Path: `public/marketplace/projects/hero/sonojs-hero-24/`  
-Source: `E:\dl\prompt\30`
 
 Travel airline video hero. Demo brand: **Airlines**.
 
@@ -18,7 +17,6 @@ Travel airline video hero. Demo brand: **Airlines**.
 ## Live / package
 
 - Demo: https://sonojs-hero-24.sonojs.workers.dev/
-- Source: `E:\dl\prompt\30`
 - Zip: `products/heroes/sonojs-hero-24/sonojs-hero-24.zip`
 
 ## Access

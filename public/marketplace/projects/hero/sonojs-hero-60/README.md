@@ -4,7 +4,6 @@ Package: Foldcraft (`1.0.0`) - React · Vite · Tailwind · Lucide
 Category: `hero`  
 Slug / folder: `sonojs-hero-60`  
 Path: `public/marketplace/projects/hero/sonojs-hero-60/`  
-Source: `E:\dl\prompt2\77`
 
 Full-viewport brand / studio marketing hero. Demo brand: **Foldcraft**.
 
@@ -18,7 +17,6 @@ Full-viewport brand / studio marketing hero. Demo brand: **Foldcraft**.
 ## Live / package
 
 - Demo: https://sonojs-hero-60.sonojs.workers.dev/
-- Source: `E:\dl\prompt2\77`
 - Zip: `products/heroes/sonojs-hero-60/sonojs-hero-60.zip`
 - Local: `npm install` then `npm run dev`
 

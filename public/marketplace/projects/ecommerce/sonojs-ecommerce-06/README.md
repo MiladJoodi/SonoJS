@@ -4,7 +4,6 @@ Package: iPhone Duo (`1.0.0`) - Vite · HTML · CSS · JavaScript
 Category: `ecommerce`  
 Slug / folder: `sonojs-ecommerce-06`  
 Path: `public/marketplace/projects/ecommerce/sonojs-ecommerce-06/`  
-Source: `E:\dl\prompt3\92`
 
 Foldable product launch landing. Demo product: **iPhone Duo** — Hello, hello.
 
@@ -18,7 +17,6 @@ Foldable product launch landing. Demo product: **iPhone Duo** — Hello, hello.
 ## Live / package
 
 - Demo: https://sonojs-ecommerce-06.sonojs.workers.dev/
-- Source: `E:\dl\prompt3\92`
 - Zip: `products/ecommerce/sonojs-ecommerce-06/sonojs-ecommerce-06.zip`
 - Local: `npm install` then `npm run dev`
 

@@ -4,7 +4,6 @@ Package: Power AI (`1.0.0`) - React · Vite · TypeScript · Tailwind · Lucide
 Category: `hero`  
 Slug / folder: `sonojs-hero-62`  
 Path: `public/marketplace/projects/hero/sonojs-hero-62/`  
-Source: `E:\dl\prompt3\81`
 
 Full-viewport AI-product marketing hero. Demo brand: **Power AI**.
 
@@ -18,7 +17,6 @@ Full-viewport AI-product marketing hero. Demo brand: **Power AI**.
 ## Live / package
 
 - Demo: https://sonojs-hero-62.sonojs.workers.dev/
-- Source: `E:\dl\prompt3\81`
 - Zip: `products/heroes/sonojs-hero-62/sonojs-hero-62.zip`
 - Local: `npm install` then `npm run dev`
 

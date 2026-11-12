@@ -4,7 +4,6 @@ Package: Fluxora (`1.0.0`) - React · Vite · CSS
 Category: `hero`  
 Slug / folder: `sonojs-hero-59`  
 Path: `public/marketplace/projects/hero/sonojs-hero-59/`  
-Source: `E:\dl\prompt2\76`
 
 Full-viewport product / agency marketing hero. Demo brand: **Fluxora**.
 
@@ -18,7 +17,6 @@ Full-viewport product / agency marketing hero. Demo brand: **Fluxora**.
 ## Live / package
 
 - Demo: https://sonojs-hero-59.sonojs.workers.dev/
-- Source: `E:\dl\prompt2\76`
 - Zip: `products/heroes/sonojs-hero-59/sonojs-hero-59.zip`
 - Local: `npm install` then `npm run dev`
 

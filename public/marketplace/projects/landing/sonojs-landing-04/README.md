@@ -4,7 +4,6 @@ Package: `hum-one` (`1.0.0`) - HTML · CSS · JS · Three.js · GSAP · Lenis
 Category: `landing`  
 Slug / folder: `sonojs-landing-04`  
 Path: `public/marketplace/projects/landing/sonojs-landing-04/`  
-Source: `E:\dl\prompt\07\hum`
 
 Noise-cancelling headphone product landing. Demo brand: **HUM One** / HUM Audio.
 
@@ -18,7 +17,6 @@ Noise-cancelling headphone product landing. Demo brand: **HUM One** / HUM Audio.
 ## Live / package
 
 - Demo: https://sonojs-landing-04.sonojs.workers.dev/
-- Source: `E:\dl\prompt\07\hum`
 - Zip: `products/landing/sonojs-landing-04/sonojs-landing-04.zip`
 
 ## Access

@@ -4,7 +4,6 @@ Package: `juicy` (`1.0.0`) - Next.js 15 · React 19 · Tailwind CSS 4 · Three.j
 Category: `hero`  
 Slug / folder: `sonojs-hero-02`  
 Path: `public/marketplace/projects/hero/sonojs-hero-02/`  
-Source: `E:\dl\New folder`
 
 Interactive 3D juice product showcase. Demo brand: **Juicy**.
 

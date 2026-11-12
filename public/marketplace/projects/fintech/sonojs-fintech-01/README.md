@@ -4,7 +4,6 @@ Package: `pocket` (`1.0.0`)
 Category: `fintech`  
 Slug / folder: `sonojs-fintech-01`  
 Path: `public/marketplace/projects/fintech/sonojs-fintech-01/`  
-Source: `E:\SonoJS-Templates\tr\Pocket`
 
 ## Images
 

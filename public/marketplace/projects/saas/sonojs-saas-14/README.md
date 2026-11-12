@@ -4,7 +4,6 @@ Package: Luma (`1.0.0`) - HTML · CSS · JavaScript
 Category: `saas`  
 Slug / folder: `sonojs-saas-14`  
 Path: `public/marketplace/projects/saas/sonojs-saas-14/`  
-Source: `E:\dl\prompt3\113`
 
 AI apps & websites creation studio. Demo brand: **Luma**.
 
@@ -18,7 +17,6 @@ AI apps & websites creation studio. Demo brand: **Luma**.
 ## Live / package
 
 - Demo: https://sonojs-saas-14.sonojs2.workers.dev/
-- Source: `E:\dl\prompt3\113`
 - Zip: `products/saas/sonojs-saas-14/sonojs-saas-14.zip`
 - Local: `npx --yes serve .`
 

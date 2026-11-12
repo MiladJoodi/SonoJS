@@ -4,7 +4,6 @@ Package: faruq® (`1.0.0`) - HTML · CSS · JavaScript
 Category: `hero`  
 Slug / folder: `sonojs-hero-25`  
 Path: `public/marketplace/projects/hero/sonojs-hero-25/`  
-Source: `E:\dl\prompt\31`
 
 Night visual-archive hero with gold portrait reveal. Demo brand: **faruq®**.
 
@@ -18,7 +17,6 @@ Night visual-archive hero with gold portrait reveal. Demo brand: **faruq®**.
 ## Live / package
 
 - Demo: https://sonojs-hero-25.sonojs.workers.dev/
-- Source: `E:\dl\prompt\31`
 - Zip: `products/heroes/sonojs-hero-25/sonojs-hero-25.zip`
 
 ## Access

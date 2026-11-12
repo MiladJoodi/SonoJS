@@ -4,7 +4,6 @@ Package: `plety` (`1.0.0`) - Vite · React 19 · JavaScript · Tailwind CSS 4
 Category: `landing`  
 Slug / folder: `sonojs-landing-09`  
 Path: `public/marketplace/projects/landing/sonojs-landing-09/`  
-Source: `E:\dl\prompt\32`
 
 AI / intelligence-layer SaaS landing. Demo brand: **Plety**.
 
@@ -18,7 +17,6 @@ AI / intelligence-layer SaaS landing. Demo brand: **Plety**.
 ## Live / package
 
 - Demo: https://sonojs-landing-09.sonojs.workers.dev/
-- Source: `E:\dl\prompt\32`
 - Zip: `products/landing/sonojs-landing-09/sonojs-landing-09.zip`
 
 ## Access

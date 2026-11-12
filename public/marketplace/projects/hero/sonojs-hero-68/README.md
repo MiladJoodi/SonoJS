@@ -4,7 +4,6 @@ Package: Weblex (`1.0.0`) - React · Vite · TypeScript · Tailwind · Lucide
 Category: `hero`  
 Slug / folder: `sonojs-hero-68`  
 Path: `public/marketplace/projects/hero/sonojs-hero-68/`  
-Source: `E:\dl\prompt3\107`
 
 Dark website-builder hero. Demo brand: **Weblex**.
 
@@ -18,7 +17,6 @@ Dark website-builder hero. Demo brand: **Weblex**.
 ## Live / package
 
 - Demo: https://sonojs-hero-68.sonojs2.workers.dev/ (may still show Hello world until redeploy)
-- Source: `E:\dl\prompt3\107`
 - Zip: `products/heroes/sonojs-hero-68/sonojs-hero-68.zip`
 - Local: `npm run dev` / `npm run build`
 

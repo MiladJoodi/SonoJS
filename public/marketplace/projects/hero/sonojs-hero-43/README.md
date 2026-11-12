@@ -4,7 +4,6 @@ Package: Axon (`1.0.0`) - React · Vite · TypeScript · Tailwind
 Category: `hero`  
 Slug / folder: `sonojs-hero-43`  
 Path: `public/marketplace/projects/hero/sonojs-hero-43/`  
-Source: `E:\dl\prompt\46`
 
 Digital-workers marketing hero. Demo brand: **Axon**.
 
@@ -18,7 +17,6 @@ Digital-workers marketing hero. Demo brand: **Axon**.
 ## Live / package
 
 - Demo: https://sonojs-hero-43.sonojs.workers.dev/
-- Source: `E:\dl\prompt\46`
 - Zip: `products/heroes/sonojs-hero-43/sonojs-hero-43.zip`
 - Local: `npm install` then `npm run dev`
 

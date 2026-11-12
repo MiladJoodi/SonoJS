@@ -4,7 +4,6 @@ Package: `mossline` (`1.0.0`) - HTML · CSS · vanilla JS
 Category: `hero`  
 Slug / folder: `sonojs-hero-04`  
 Path: `public/marketplace/projects/hero/sonojs-hero-04/`  
-Source: `E:\dl\prompt\02`
 
 Scroll-driven climate sensing hero. Demo brand: **Mossline**.
 
@@ -18,7 +17,6 @@ Scroll-driven climate sensing hero. Demo brand: **Mossline**.
 ## Live / package
 
 - Demo: https://sonojs-hero-04.sonojs.workers.dev/
-- Source: `E:\dl\prompt\02` (`index.html` + `assets/`)
 - Zip: `products/heroes/sonojs-hero-04/sonojs-hero-04.zip`
 
 ## Access

@@ -4,7 +4,6 @@ Package: `helix` (`1.0.0`)
 Category: `crypto`  
 Slug / folder: `sonojs-crypto-01`  
 Path: `public/marketplace/projects/crypto/sonojs-crypto-01/`  
-Source: `E:\SonoJS-Templates\tr`
 
 ## Images
 

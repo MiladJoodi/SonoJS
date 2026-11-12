@@ -4,7 +4,6 @@ Package: Aethera (`1.0.0`) - React · Vite · TypeScript · Tailwind
 Category: `hero`  
 Slug / folder: `sonojs-hero-41`  
 Path: `public/marketplace/projects/hero/sonojs-hero-41/`  
-Source: `E:\dl\prompt2\53`
 
 Studio hero with soft video stage. Demo brand: **Aethera®**.
 
@@ -18,7 +17,6 @@ Studio hero with soft video stage. Demo brand: **Aethera®**.
 ## Live / package
 
 - Demo: https://sonojs-hero-41.sonojs.workers.dev/
-- Source: `E:\dl\prompt2\53`
 - Zip: `products/heroes/sonojs-hero-41/sonojs-hero-41.zip`
 - Local: `npm install` then `npm run dev`
 

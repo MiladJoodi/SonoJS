@@ -4,7 +4,6 @@ Package: Equilibrium (`1.0.0`) - React · Vite · TypeScript · Tailwind · Luci
 Category: `hero`  
 Slug / folder: `sonojs-hero-45`  
 Path: `public/marketplace/projects/hero/sonojs-hero-45/`  
-Source: `E:\dl\prompt2\56`
 
 Wellness marketing hero with liquid-glass nav. Demo brand: **Equilibrium**.
 
@@ -18,7 +17,6 @@ Wellness marketing hero with liquid-glass nav. Demo brand: **Equilibrium**.
 ## Live / package
 
 - Demo: https://sonojs-hero-45.sonojs.workers.dev/
-- Source: `E:\dl\prompt2\56`
 - Zip: `products/heroes/sonojs-hero-45/sonojs-hero-45.zip`
 - Local: `npm install` then `npm run dev`
 

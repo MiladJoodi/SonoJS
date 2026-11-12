@@ -4,7 +4,6 @@ Package: `sonojs` Folio (`1.0.0`) - Vite · React 19 · TypeScript · Tailwind C
 Category: `portfolio`  
 Slug / folder: `sonojs-portfolio-02`  
 Path: `public/marketplace/projects/portfolio/sonojs-portfolio-02/`  
-Source: `E:\dl\prompt\14`
 
 Wheel-jacked infinite portfolio reel. Demo brand: **Folio**.
 
@@ -18,7 +17,6 @@ Wheel-jacked infinite portfolio reel. Demo brand: **Folio**.
 ## Live / package
 
 - Demo: https://sonojs-portfolio-02.sonojs.workers.dev/
-- Source: `E:\dl\prompt\14`
 - Zip: `products/portfolio/sonojs-portfolio-02/sonojs-portfolio-02.zip`
 
 ## Access

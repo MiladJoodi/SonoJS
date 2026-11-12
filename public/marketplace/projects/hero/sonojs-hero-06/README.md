@@ -4,7 +4,6 @@ Package: `spaceedu` (`1.0.0`) - HTML · CSS · vanilla JS
 Category: `hero`  
 Slug / folder: `sonojs-hero-06`  
 Path: `public/marketplace/projects/hero/sonojs-hero-06/`  
-Source: `E:\dl\prompt\05`
 
 Planet education hero. Demo brand: **SpaceEdu**.
 
@@ -18,7 +17,6 @@ Planet education hero. Demo brand: **SpaceEdu**.
 ## Live / package
 
 - Demo: https://sonojs-hero-06.sonojs.workers.dev/
-- Source: `E:\dl\prompt\05` (`index.html` + `assets/`)
 - Zip: `products/heroes/sonojs-hero-06/sonojs-hero-06.zip`
 
 ## Access

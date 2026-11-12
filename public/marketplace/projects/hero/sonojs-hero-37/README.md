@@ -4,7 +4,6 @@ Package: VIRIDIA (`1.0.0`) - HTML · CSS · JavaScript (static SPA)
 Category: `hero`  
 Slug / folder: `sonojs-hero-37`  
 Path: `public/marketplace/projects/hero/sonojs-hero-37/`  
-Source: `E:\dl\prompt2\50`
 
 Tactical techwear hero with light-reveal mask. Demo brand: **VIRIDIA**.
 
@@ -18,7 +17,6 @@ Tactical techwear hero with light-reveal mask. Demo brand: **VIRIDIA**.
 ## Live / package
 
 - Demo: https://sonojs-hero-37.sonojs.workers.dev/
-- Source: `E:\dl\prompt2\50`
 - Zip: `products/heroes/sonojs-hero-37/sonojs-hero-37.zip`
 - Local: `npx --yes serve -l 8765`
 

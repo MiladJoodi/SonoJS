@@ -4,7 +4,6 @@ Package: `sonojs-membrane` (`1.0.0`) - Vite · React 19 · TypeScript · Tailwin
 Category: `hero`  
 Slug / folder: `sonojs-hero-13`  
 Path: `public/marketplace/projects/hero/sonojs-hero-13/`  
-Source: `E:\dl\prompt\15`
 
 Interactive mesh hero. Demo brand: **Membrane**.
 
@@ -18,7 +17,6 @@ Interactive mesh hero. Demo brand: **Membrane**.
 ## Live / package
 
 - Demo: https://sonojs-hero-13.sonojs.workers.dev/
-- Source: `E:\dl\prompt\15`
 - Zip: `products/heroes/sonojs-hero-13/sonojs-hero-13.zip`
 
 ## Access

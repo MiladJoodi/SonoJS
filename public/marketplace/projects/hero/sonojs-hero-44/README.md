@@ -4,7 +4,6 @@ Package: 404 (`1.0.0`) - React · Vite · TypeScript · Tailwind
 Category: `hero`  
 Slug / folder: `sonojs-hero-44`  
 Path: `public/marketplace/projects/hero/sonojs-hero-44/`  
-Source: `E:\dl\prompt2\55`
 
 Cinematic 404 error-page hero. Demo brand: **LGPSM**.
 
@@ -18,7 +17,6 @@ Cinematic 404 error-page hero. Demo brand: **LGPSM**.
 ## Live / package
 
 - Demo: https://sonojs-hero-44.sonojs.workers.dev/
-- Source: `E:\dl\prompt2\55`
 - Zip: `products/heroes/sonojs-hero-44/sonojs-hero-44.zip`
 - Local: `npm install` then `npm run dev`
 

@@ -4,7 +4,6 @@ Package: Wandor (`1.0.0`) - React · Vite · TypeScript · Tailwind · Lucide
 Category: `hero`  
 Slug / folder: `sonojs-hero-42`  
 Path: `public/marketplace/projects/hero/sonojs-hero-42/`  
-Source: `E:\dl\prompt2\54`
 
 AI trip-planner marketing hero. Demo brand: **wandor**.
 
@@ -18,7 +17,6 @@ AI trip-planner marketing hero. Demo brand: **wandor**.
 ## Live / package
 
 - Demo: https://sonojs-hero-42.sonojs.workers.dev/
-- Source: `E:\dl\prompt2\54`
 - Zip: `products/heroes/sonojs-hero-42/sonojs-hero-42.zip`
 - Local: `npm install` then `npm run dev`
 

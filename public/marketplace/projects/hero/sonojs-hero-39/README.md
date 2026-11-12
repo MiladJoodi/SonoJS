@@ -4,7 +4,6 @@ Package: Mainframe (`1.0.0`) - React · Vite · TypeScript · Tailwind
 Category: `hero`  
 Slug / folder: `sonojs-hero-39`  
 Path: `public/marketplace/projects/hero/sonojs-hero-39/`  
-Source: `E:\dl\prompt2\51`
 
 Studio hero with scrub video and A.R.I.A. typewriter. Demo brand: **Mainframe®**.
 
@@ -18,7 +17,6 @@ Studio hero with scrub video and A.R.I.A. typewriter. Demo brand: **Mainframe®*
 ## Live / package
 
 - Demo: https://sonojs-hero-39.sonojs.workers.dev/
-- Source: `E:\dl\prompt2\51`
 - Zip: `products/heroes/sonojs-hero-39/sonojs-hero-39.zip`
 - Local: `npm install` then `npm run dev`
 

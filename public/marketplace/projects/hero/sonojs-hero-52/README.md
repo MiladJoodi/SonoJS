@@ -4,7 +4,6 @@ Package: Fastshot (`1.0.0`) - HTML · CSS · JavaScript
 Category: `hero`  
 Slug / folder: `sonojs-hero-52`  
 Path: `public/marketplace/projects/hero/sonojs-hero-52/`  
-Source: `E:\dl\prompt2\62`
 
 AI app-builder marketing hero. Demo brand: **Fastshot**.
 
@@ -18,7 +17,6 @@ AI app-builder marketing hero. Demo brand: **Fastshot**.
 ## Live / package
 
 - Demo: https://sonojs-hero-52.sonojs.workers.dev/
-- Source: `E:\dl\prompt2\62`
 - Zip: `products/heroes/sonojs-hero-52/sonojs-hero-52.zip`
 
 ## Access

@@ -4,7 +4,6 @@ Package: Liquid Type (`0.1.0`) - Next.js 16 · React 19 · TypeScript · Tailwin
 Category: `hero`  
 Slug / folder: `sonojs-hero-12`  
 Path: `public/marketplace/projects/hero/sonojs-hero-12/`  
-Source: `E:\dl\prompt\16`
 
 Cursor-driven variable typography hero. Demo brand: **Liquid Type**.
 
@@ -18,7 +17,6 @@ Cursor-driven variable typography hero. Demo brand: **Liquid Type**.
 ## Live / package
 
 - Demo: https://sonojs-hero-12.sonojs.workers.dev/
-- Source: `E:\dl\prompt\16`
 - Zip: `products/heroes/sonojs-hero-12/sonojs-hero-12.zip`
 
 ## Access

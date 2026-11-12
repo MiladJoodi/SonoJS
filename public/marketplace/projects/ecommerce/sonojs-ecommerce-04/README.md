@@ -4,7 +4,6 @@ Package: Shop (`1.0.0`) - HTML · CSS · JavaScript · Inter
 Category: `ecommerce`  
 Slug / folder: `sonojs-ecommerce-04`  
 Path: `public/marketplace/projects/ecommerce/sonojs-ecommerce-04/`  
-Source: `E:\dl\prompt2\73`
 
 Multi-category shopping homepage. Demo brand: **Shop**.
 
@@ -18,7 +17,6 @@ Multi-category shopping homepage. Demo brand: **Shop**.
 ## Live / package
 
 - Demo: https://sonojs-ecommerce-04.sonojs.workers.dev/
-- Source: `E:\dl\prompt2\73`
 - Zip: `products/ecommerce/sonojs-ecommerce-04/sonojs-ecommerce-04.zip`
 - Local: open `index.html` or serve the folder statically
 

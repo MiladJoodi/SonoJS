@@ -4,7 +4,6 @@ Package: Meridian (`1.0.0`) - React · Vite · TypeScript · Tailwind 4 · Frame
 Category: `saas`  
 Slug / folder: `sonojs-saas-06`  
 Path: `public/marketplace/projects/saas/sonojs-saas-06/`  
-Source: `E:\dl\prompt3\95`
 
 Applied AI lab marketing site. Demo brand: **The Meridian Company** / Helm.
 
@@ -18,7 +17,6 @@ Applied AI lab marketing site. Demo brand: **The Meridian Company** / Helm.
 ## Live / package
 
 - Demo: https://sonojs-saas-06.sonojs.workers.dev/
-- Source: `E:\dl\prompt3\95`
 - Zip: `products/saas/sonojs-saas-06/sonojs-saas-06.zip`
 - Local: `npm install` then `npm run dev`
 

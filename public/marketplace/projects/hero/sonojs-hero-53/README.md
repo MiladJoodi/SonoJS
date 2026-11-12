@@ -4,7 +4,6 @@ Package: Heritage Grove (`1.0.0`) - HTML · CSS
 Category: `hero`  
 Slug / folder: `sonojs-hero-53`  
 Path: `public/marketplace/projects/hero/sonojs-hero-53/`  
-Source: `E:\dl\prompt2\65`
 
 Full-viewport craft commerce footer. Demo brand: **Heritage Grove**.
 
@@ -18,7 +17,6 @@ Full-viewport craft commerce footer. Demo brand: **Heritage Grove**.
 ## Live / package
 
 - Demo: https://sonojs-hero-53.sonojs.workers.dev/
-- Source: `E:\dl\prompt2\65`
 - Zip: `products/heroes/sonojs-hero-53/sonojs-hero-53.zip`
 
 ## Access

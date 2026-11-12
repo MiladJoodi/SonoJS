@@ -4,7 +4,6 @@ Package: Sprints (`1.0.0`) - HTML · CSS · JavaScript · Tailwind (vendor)
 Category: `hero`  
 Slug / folder: `sonojs-hero-23`  
 Path: `public/marketplace/projects/hero/sonojs-hero-23/`  
-Source: `E:\dl\prompt\28`
 
 Project management video hero. Demo brand: **Sprints**.
 
@@ -18,7 +17,6 @@ Project management video hero. Demo brand: **Sprints**.
 ## Live / package
 
 - Demo: https://sonojs-hero-23.sonojs.workers.dev/
-- Source: `E:\dl\prompt\28`
 - Zip: `products/heroes/sonojs-hero-23/sonojs-hero-23.zip`
 
 ## Access

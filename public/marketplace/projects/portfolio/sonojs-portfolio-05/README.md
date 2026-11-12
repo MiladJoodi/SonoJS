@@ -4,7 +4,6 @@ Package: Alpenglow (`1.0.0`) - React · Vite · TypeScript · Tailwind · Lucide
 Category: `portfolio`  
 Slug / folder: `sonojs-portfolio-05`  
 Path: `public/marketplace/projects/portfolio/sonojs-portfolio-05/`  
-Source: `E:\dl\prompt3\84`
 
 Winter mountain photography portfolio. Demo brand: **Alpenglow Photo Co.**
 
@@ -18,7 +17,6 @@ Winter mountain photography portfolio. Demo brand: **Alpenglow Photo Co.**
 ## Live / package
 
 - Demo: https://sonojs-portfolio-05.sonojs.workers.dev/
-- Source: `E:\dl\prompt3\84`
 - Zip: `products/portfolio/sonojs-portfolio-05/sonojs-portfolio-05.zip`
 - Local: `npm install` then `npm run dev`
 

@@ -4,7 +4,6 @@ Package: `glyph` (`1.0.0`)
 Category: `saas`  
 Slug / folder: `sonojs-saas-01`  
 Path: `public/marketplace/projects/saas/sonojs-saas-01/`  
-Source: `E:\SonoJS-Templates\tr`
 
 ## Images
 

@@ -4,7 +4,6 @@ Package: Scalable (`1.0.0`) - React · Vite · TypeScript · Tailwind
 Category: `hero`  
 Slug / folder: `sonojs-hero-31`  
 Path: `public/marketplace/projects/hero/sonojs-hero-31/`  
-Source: `E:\dl\prompt\38`
 
 Sales & analytics marketing hero with glass dashboard mockup. Demo brand: **Scalable**.
 
@@ -18,7 +17,6 @@ Sales & analytics marketing hero with glass dashboard mockup. Demo brand: **Scal
 ## Live / package
 
 - Demo: https://sonojs-hero-31.sonojs.workers.dev/
-- Source: `E:\dl\prompt\38`
 - Zip: `products/heroes/sonojs-hero-31/sonojs-hero-31.zip`
 
 ## Access

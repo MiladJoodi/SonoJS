@@ -4,7 +4,6 @@ Package: Gummy Grove (`1.0.0`) - HTML · CSS · JavaScript · Three.js (static S
 Category: `hero`  
 Slug / folder: `sonojs-hero-35`  
 Path: `public/marketplace/projects/hero/sonojs-hero-35/`  
-Source: `E:\dl\prompt\45`
 
 Interactive jelly-fruit playground (wobble / works). Demo brand: **Gummy Grove**.
 
@@ -18,7 +17,6 @@ Interactive jelly-fruit playground (wobble / works). Demo brand: **Gummy Grove**
 ## Live / package
 
 - Demo: https://sonojs-hero-35.sonojs.workers.dev/
-- Source: `E:\dl\prompt\45`
 - Zip: `products/heroes/sonojs-hero-35/sonojs-hero-35.zip`
 - Local: `npx wrangler dev` (serves `public/`)
 

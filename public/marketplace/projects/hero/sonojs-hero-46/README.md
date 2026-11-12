@@ -4,7 +4,6 @@ Package: Asme (`1.0.0`) - React · Vite · TypeScript · Tailwind · Lucide
 Category: `hero`  
 Slug / folder: `sonojs-hero-46`  
 Path: `public/marketplace/projects/hero/sonojs-hero-46/`  
-Source: `E:\dl\prompt2\57`
 
 Studio hero with faded video and newsletter glass pill. Demo brand: **Asme**.
 
@@ -18,7 +17,6 @@ Studio hero with faded video and newsletter glass pill. Demo brand: **Asme**.
 ## Live / package
 
 - Demo: https://sonojs-hero-46.sonojs.workers.dev/
-- Source: `E:\dl\prompt2\57`
 - Zip: `products/heroes/sonojs-hero-46/sonojs-hero-46.zip`
 - Local: `npm install` then `npm run dev`
 

@@ -4,7 +4,6 @@ Package: Kollektiva (`1.0.0`) - React · Vite · TypeScript · Tailwind
 Category: `landing`  
 Slug / folder: `sonojs-landing-15`  
 Path: `public/marketplace/projects/landing/sonojs-landing-15/`  
-Source: `E:\dl\prompt3\80`
 
 Studio talent marketing landing with portrait carousel. Demo brand: **Kollektiva**.
 
@@ -18,7 +17,6 @@ Studio talent marketing landing with portrait carousel. Demo brand: **Kollektiva
 ## Live / package
 
 - Demo: https://sonojs-landing-15.sonojs.workers.dev/
-- Source: `E:\dl\prompt3\80`
 - Zip: `products/landing/sonojs-landing-15/sonojs-landing-15.zip`
 - Local: `npm install` then `npm run dev`
 

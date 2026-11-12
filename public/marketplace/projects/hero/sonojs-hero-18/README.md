@@ -4,7 +4,6 @@ Package: Trav (`1.0.0`) - HTML · CSS · JavaScript · Tailwind (vendor)
 Category: `hero`  
 Slug / folder: `sonojs-hero-18`  
 Path: `public/marketplace/projects/hero/sonojs-hero-18/`  
-Source: `E:\dl\prompt\22`
 
 Travel app video hero. Demo brand: **Trav**.
 
@@ -18,7 +17,6 @@ Travel app video hero. Demo brand: **Trav**.
 ## Live / package
 
 - Demo: https://sonojs-hero-18.sonojs.workers.dev/
-- Source: `E:\dl\prompt\22`
 - Zip: `products/heroes/sonojs-hero-18/sonojs-hero-18.zip`
 
 ## Access

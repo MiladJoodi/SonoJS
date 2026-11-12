@@ -4,7 +4,6 @@ Package: Aurora (`1.0.0`) - React · Vite · TypeScript · Tailwind 4 · Framer 
 Category: `hero`  
 Slug / folder: `sonojs-hero-66`  
 Path: `public/marketplace/projects/hero/sonojs-hero-66/`  
-Source: `E:\dl\prompt3\88`
 
 Full-bleed video marketing hero. Demo brand: **Aurora** — Design That Lights the Way.
 
@@ -18,7 +17,6 @@ Full-bleed video marketing hero. Demo brand: **Aurora** — Design That Lights t
 ## Live / package
 
 - Demo: https://sonojs-hero-66.sonojs.workers.dev/
-- Source: `E:\dl\prompt3\88`
 - Zip: `products/heroes/sonojs-hero-66/sonojs-hero-66.zip`
 - Local: `npm install` then `npm run dev`
 

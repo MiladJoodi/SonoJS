@@ -4,7 +4,6 @@ Package: `atlas` (`1.0.0`) - Vite · React 19 · TypeScript · Three.js · GSAP
 Category: `hero`  
 Slug / folder: `sonojs-hero-11`  
 Path: `public/marketplace/projects/hero/sonojs-hero-11/`  
-Source: `E:\dl\prompt\12`
 
 Interactive 3D Earth explorer. Demo brand: **Atlas**.
 
@@ -18,7 +17,6 @@ Interactive 3D Earth explorer. Demo brand: **Atlas**.
 ## Live / package
 
 - Demo: https://sonojs-hero-11.sonojs.workers.dev/
-- Source: `E:\dl\prompt\12`
 - Download: Google Drive  
   https://drive.google.com/file/d/1SkqOMkM8hlCQQFIBfKcHbLvelcHkN6yg/view?usp=drive_link
 - Zip (Pro registry fallback): `products/heroes/sonojs-hero-11/sonojs-hero-11.zip`

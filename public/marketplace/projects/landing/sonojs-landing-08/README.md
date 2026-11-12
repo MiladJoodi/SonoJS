@@ -4,7 +4,6 @@ Package: Sabrina Residences (`1.0.0`) - HTML · CSS · JavaScript · Lucide
 Category: `landing`  
 Slug / folder: `sonojs-landing-08`  
 Path: `public/marketplace/projects/landing/sonojs-landing-08/`  
-Source: `E:\dl\prompt\29`
 
 Real-estate marketing landing. Demo brand: **Sabrina Residences**.
 
@@ -18,7 +17,6 @@ Real-estate marketing landing. Demo brand: **Sabrina Residences**.
 ## Live / package
 
 - Demo: https://sonojs-landing-08.sonojs.workers.dev/
-- Source: `E:\dl\prompt\29`
 - Zip: `products/landing/sonojs-landing-08/sonojs-landing-08.zip`
 
 ## Access

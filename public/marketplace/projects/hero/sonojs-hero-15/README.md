@@ -4,7 +4,6 @@ Package: VELORA (`1.0.0`) - HTML · CSS · JavaScript
 Category: `hero`  
 Slug / folder: `sonojs-hero-15`  
 Path: `public/marketplace/projects/hero/sonojs-hero-15/`  
-Source: `E:\dl\prompt\19`
 
 Full-bleed luxury car rental hero. Demo brand: **VELORA** / **Regal Drive**.
 
@@ -18,7 +17,6 @@ Full-bleed luxury car rental hero. Demo brand: **VELORA** / **Regal Drive**.
 ## Live / package
 
 - Demo: https://sonojs-hero-15.sonojs.workers.dev/
-- Source: `E:\dl\prompt\19`
 - Zip: `products/heroes/sonojs-hero-15/sonojs-hero-15.zip`
 
 ## Access

@@ -4,7 +4,6 @@ Package: `aether` (`1.0.0`)
 Category: `crypto`  
 Slug / folder: `sonojs-crypto-02`  
 Path: `public/marketplace/projects/crypto/sonojs-crypto-02/`  
-Static preview reference: `E:\dl\sonojs-crypto-02`  
 Zip: `products/crypto/sonojs-crypto-02/sonojs-crypto-02.zip` (SonoJS-pro)
 
 ## Images

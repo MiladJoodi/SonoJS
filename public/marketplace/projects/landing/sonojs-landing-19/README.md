@@ -4,7 +4,6 @@ Package: CØFF (`1.0.0`) - HTML · CSS · JavaScript · Tailwind · GSAP · Thre
 Category: `landing`  
 Slug / folder: `sonojs-landing-19`  
 Path: `public/marketplace/projects/landing/sonojs-landing-19/`  
-Source: `E:\dl\prompt3\106`
 
 Specialty coffee bar & roastery landing. Demo brand: **CØFF**.
 
@@ -18,7 +17,6 @@ Specialty coffee bar & roastery landing. Demo brand: **CØFF**.
 ## Live / package
 
 - Demo: https://sonojs-landing-19.sonojs2.workers.dev/
-- Source: `E:\dl\prompt3\106`
 - Zip: `products/landing/sonojs-landing-19/sonojs-landing-19.zip`
 - Local: `npx --yes serve .`
 

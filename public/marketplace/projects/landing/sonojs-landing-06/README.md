@@ -4,7 +4,6 @@ Package: `sonojs-cinema-reel` (`1.0.0`) - Next.js 16 · React 19 · TypeScript �
 Category: `landing`  
 Slug / folder: `sonojs-landing-06`  
 Path: `public/marketplace/projects/landing/sonojs-landing-06/`  
-Source: `E:\dl\prompt\13`
 
 Vertical film-festival slider. Demo brand: **Cinema Reel**.
 
@@ -18,7 +17,6 @@ Vertical film-festival slider. Demo brand: **Cinema Reel**.
 ## Live / package
 
 - Demo: https://sonojs-landing-06.sonojs.workers.dev/
-- Source: `E:\dl\prompt\13`
 - Zip: `products/landing/sonojs-landing-06/sonojs-landing-06.zip`
 
 ## Access

@@ -4,7 +4,6 @@ Package: Pestguard (`1.0.0`) - HTML · CSS · JavaScript
 Category: `landing`  
 Slug / folder: `sonojs-landing-20`  
 Path: `public/marketplace/projects/landing/sonojs-landing-20/`  
-Source: `E:\dl\prompt3\108`
 
 Premium UK pest-control landing. Demo brand: **Pestguard**.
 
@@ -18,7 +17,6 @@ Premium UK pest-control landing. Demo brand: **Pestguard**.
 ## Live / package
 
 - Demo: https://sonojs-landing-20.sonojs2.workers.dev/
-- Source: `E:\dl\prompt3\108`
 - Zip: `products/landing/sonojs-landing-20/sonojs-landing-20.zip`
 - Local: `npx --yes serve .`
 

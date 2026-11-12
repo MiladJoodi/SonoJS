@@ -4,7 +4,6 @@ Package: Altura (`1.0.0`) - HTML · CSS · JavaScript
 Category: `landing`  
 Slug / folder: `sonojs-landing-16`  
 Path: `public/marketplace/projects/landing/sonojs-landing-16/`  
-Source: `altura-coastal-residences` (Downloads)
 
 Luxury coastal residences landing with layered hero and scroll tour. Demo brand: **Altura**.
 

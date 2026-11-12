@@ -4,7 +4,6 @@ Package: `veyra` (`1.0.0`) - Vite · React 18 · TypeScript · Tailwind CSS 3 ·
 Category: `landing`  
 Slug / folder: `sonojs-landing-05`  
 Path: `public/marketplace/projects/landing/sonojs-landing-05/`  
-Source: `E:\dl\prompt\09\veyra-interactive-car`
 
 Interactive electric-vehicle design study. Demo brand: **VEYRA**.
 
@@ -18,7 +17,6 @@ Interactive electric-vehicle design study. Demo brand: **VEYRA**.
 ## Live / package
 
 - Demo: https://sonojs-landing-05.sonojs.workers.dev/
-- Source: `E:\dl\prompt\09\veyra-interactive-car`
 - Zip: `products/landing/sonojs-landing-05/sonojs-landing-05.zip`
 
 ## Access

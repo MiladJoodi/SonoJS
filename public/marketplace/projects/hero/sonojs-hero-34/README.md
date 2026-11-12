@@ -4,7 +4,6 @@ Package: Agrumi (`1.0.0`) - HTML · CSS · JavaScript (static SPA)
 Category: `hero`  
 Slug / folder: `sonojs-hero-34`  
 Path: `public/marketplace/projects/hero/sonojs-hero-34/`  
-Source: `E:\dl\prompt\44`
 
 Ceramic dog-bowl product hero with video stage and six glaze gallery. Demo brand: **Agrumi**.
 
@@ -18,7 +17,6 @@ Ceramic dog-bowl product hero with video stage and six glaze gallery. Demo brand
 ## Live / package
 
 - Demo: https://sonojs-hero-34.sonojs.workers.dev/
-- Source: `E:\dl\prompt\44`
 - Zip: `products/heroes/sonojs-hero-34/sonojs-hero-34.zip`
 
 ## Access

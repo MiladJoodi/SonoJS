@@ -4,7 +4,6 @@ Package: Bloom (`1.0.0`) - React · Vite · TypeScript · Tailwind · Lucide
 Category: `hero`  
 Slug / folder: `sonojs-hero-51`  
 Path: `public/marketplace/projects/hero/sonojs-hero-51/`  
-Source: `E:\dl\prompt2\63`
 
 AI plant-design marketing hero. Demo brand: **bloom**.
 
@@ -18,7 +17,6 @@ AI plant-design marketing hero. Demo brand: **bloom**.
 ## Live / package
 
 - Demo: https://sonojs-hero-51.sonojs.workers.dev/
-- Source: `E:\dl\prompt2\63`
 - Zip: `products/heroes/sonojs-hero-51/sonojs-hero-51.zip`
 - Local: `npm install` then `npm run dev`
 

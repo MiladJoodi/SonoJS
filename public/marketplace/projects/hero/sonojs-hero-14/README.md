@@ -4,7 +4,6 @@ Package: Pink Rider (`1.0.0`) - HTML · CSS · JavaScript
 Category: `hero`  
 Slug / folder: `sonojs-hero-14`  
 Path: `public/marketplace/projects/hero/sonojs-hero-14/`  
-Source: `E:\dl\prompt\17`
 
 Hover-to-reveal fashion hero. Demo brand: **Mina Hwang-Seo** / **Pink Rider**.
 
@@ -18,7 +17,6 @@ Hover-to-reveal fashion hero. Demo brand: **Mina Hwang-Seo** / **Pink Rider**.
 ## Live / package
 
 - Demo: https://sonojs-hero-14.sonojs.workers.dev/
-- Source: `E:\dl\prompt\17`
 - Zip: `products/heroes/sonojs-hero-14/sonojs-hero-14.zip`
 
 ## Access

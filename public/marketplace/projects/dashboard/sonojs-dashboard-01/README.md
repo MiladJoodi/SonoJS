@@ -3,7 +3,6 @@
 Category: `dashboard`  
 Slug / folder: `sonojs-dashboard-01`  
 Path: `public/marketplace/projects/dashboard/sonojs-dashboard-01/`  
-Source: `E:\SonoJS-Templates\apps\dashboard\02`
 
 ## Images
 

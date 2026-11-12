@@ -4,7 +4,6 @@ Package: Oryon (`1.0.0`) - HTML · CSS · JavaScript
 Category: `hero`  
 Slug / folder: `sonojs-hero-72`  
 Path: `public/marketplace/projects/hero/sonojs-hero-72/`  
-Source: `E:\dl\prompt3\114`
 
 AI text-to-video marketing hero. Demo brand: **Oryon**.
 
@@ -18,7 +17,6 @@ AI text-to-video marketing hero. Demo brand: **Oryon**.
 ## Live / package
 
 - Demo: https://sonojs-hero-72.sonojs2.workers.dev/
-- Source: `E:\dl\prompt3\114`
 - Zip: `products/heroes/sonojs-hero-72/sonojs-hero-72.zip`
 - Local: `npx --yes serve .`
 

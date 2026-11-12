@@ -4,7 +4,6 @@ Package: Vertex (`1.0.0`) - HTML · CSS · JavaScript · Poppins · Playfair Dis
 Category: `ecommerce`  
 Slug / folder: `sonojs-ecommerce-05`  
 Path: `public/marketplace/projects/ecommerce/sonojs-ecommerce-05/`  
-Source: `E:\dl\prompt2\79`
 
 Vision virtual-shop marketing page. Demo brand: **VERTEX**.
 
@@ -18,7 +17,6 @@ Vision virtual-shop marketing page. Demo brand: **VERTEX**.
 ## Live / package
 
 - Demo: https://sonojs-ecommerce-05.sonojs.workers.dev/
-- Source: `E:\dl\prompt2\79`
 - Zip: `products/ecommerce/sonojs-ecommerce-05/sonojs-ecommerce-05.zip`
 - Local: open `index.html` or serve the folder statically
 

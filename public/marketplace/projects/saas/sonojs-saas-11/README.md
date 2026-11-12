@@ -4,7 +4,6 @@ Package: Fluxora (`1.0.0`) - HTML · CSS · JavaScript
 Category: `saas`  
 Slug / folder: `sonojs-saas-11`  
 Path: `public/marketplace/projects/saas/sonojs-saas-11/`  
-Source: `E:\dl\prompt3\102`
 
 AI product platform marketing site. Demo brand: **Fluxora**.
 
@@ -18,7 +17,6 @@ AI product platform marketing site. Demo brand: **Fluxora**.
 ## Live / package
 
 - Demo: https://sonojs-saas-11.sonojs2.workers.dev/
-- Source: `E:\dl\prompt3\102`
 - Zip: `products/saas/sonojs-saas-11/sonojs-saas-11.zip`
 - Local: `npx --yes serve .`
 

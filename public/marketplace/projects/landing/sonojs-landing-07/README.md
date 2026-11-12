@@ -4,7 +4,6 @@ Package: Melli (`1.0.0`) - HTML · CSS · JavaScript · Three.js
 Category: `landing`  
 Slug / folder: `sonojs-landing-07`  
 Path: `public/marketplace/projects/landing/sonojs-landing-07/`  
-Source: `E:\dl\prompt\18`
 
 3D motion academy scroll landing. Demo brand: **Melli** / **Melli_Motion**.
 
@@ -18,7 +17,6 @@ Source: `E:\dl\prompt\18`
 ## Live / package
 
 - Demo: https://sonojs-landing-07.sonojs.workers.dev/
-- Source: `E:\dl\prompt\18`
 - Zip: `products/landing/sonojs-landing-07/sonojs-landing-07.zip`
 
 ## Run locally

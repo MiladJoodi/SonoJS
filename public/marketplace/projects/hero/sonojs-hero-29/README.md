@@ -4,7 +4,6 @@ Package: Alumica (`1.0.0`) - HTML · CSS
 Category: `hero`  
 Slug / folder: `sonojs-hero-29`  
 Path: `public/marketplace/projects/hero/sonojs-hero-29/`  
-Source: `E:\dl\prompt\36`
 
 Premium automation & fintech hero with full-bleed video. Demo brand: **Alumica**.
 
@@ -18,7 +17,6 @@ Premium automation & fintech hero with full-bleed video. Demo brand: **Alumica**
 ## Live / package
 
 - Demo: https://sonojs-hero-29.sonojs.workers.dev/
-- Source: `E:\dl\prompt\36`
 - Zip: `products/heroes/sonojs-hero-29/sonojs-hero-29.zip`
 
 ## Access

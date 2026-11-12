@@ -4,7 +4,6 @@ Package: Monsoon (`1.0.0`) - React · Vite · TypeScript · Tailwind 4 · Framer
 Category: `hero`  
 Slug / folder: `sonojs-hero-65`  
 Path: `public/marketplace/projects/hero/sonojs-hero-65/`  
-Source: `E:\dl\prompt3\87`
 
 Full-bleed video marketing hero. Demo brand: **Monsoon** — Weather any storm.
 
@@ -18,7 +17,6 @@ Full-bleed video marketing hero. Demo brand: **Monsoon** — Weather any storm.
 ## Live / package
 
 - Demo: https://sonojs-hero-65.sonojs.workers.dev/
-- Source: `E:\dl\prompt3\87`
 - Zip: `products/heroes/sonojs-hero-65/sonojs-hero-65.zip`
 - Local: `npm install` then `npm run dev`
 

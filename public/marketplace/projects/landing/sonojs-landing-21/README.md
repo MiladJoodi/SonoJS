@@ -4,7 +4,6 @@ Package: Brixzon (`1.0.0`) - HTML · CSS · JavaScript
 Category: `landing`  
 Slug / folder: `sonojs-landing-21`  
 Path: `public/marketplace/projects/landing/sonojs-landing-21/`  
-Source: `E:\dl\prompt3\109`
 
 Design-build architecture & construction landing. Demo brand: **Brixzon**.
 
@@ -18,7 +17,6 @@ Design-build architecture & construction landing. Demo brand: **Brixzon**.
 ## Live / package
 
 - Demo: https://sonojs-landing-21.sonojs2.workers.dev/
-- Source: `E:\dl\prompt3\109`
 - Zip: `products/landing/sonojs-landing-21/sonojs-landing-21.zip`
 - Local: `npx --yes serve .`
 

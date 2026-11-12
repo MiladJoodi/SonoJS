@@ -4,7 +4,6 @@ Package: Signal (`1.0.0`) - HTML · CSS · JavaScript
 Category: `hero`  
 Slug / folder: `sonojs-hero-40`  
 Path: `public/marketplace/projects/hero/sonojs-hero-40/`  
-Source: `E:\dl\prompt2\52`
 
 Login hero with falcon video stage. Demo brand: **Signal**.
 
@@ -18,7 +17,6 @@ Login hero with falcon video stage. Demo brand: **Signal**.
 ## Live / package
 
 - Demo: https://sonojs-hero-40.sonojs.workers.dev/
-- Source: `E:\dl\prompt2\52`
 - Zip: `products/heroes/sonojs-hero-40/sonojs-hero-40.zip`
 
 ## Access

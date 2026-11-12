@@ -4,7 +4,6 @@ Package: Eclipse (`1.0.0`) - HTML · CSS · JavaScript · Three.js · GSAP · Sc
 Category: `saas`  
 Slug / folder: `sonojs-saas-07`  
 Path: `public/marketplace/projects/saas/sonojs-saas-07/`  
-Source: `E:\dl\prompt3\97`
 
 Interactive sci-fi scroll universe. Demo brand: **ECLIPSE — The Last Frontier**.
 
@@ -18,7 +17,6 @@ Interactive sci-fi scroll universe. Demo brand: **ECLIPSE — The Last Frontier*
 ## Live / package
 
 - Demo: https://sonojs-saas-07.sonojs.workers.dev/
-- Source: `E:\dl\prompt3\97`
 - Zip: `products/saas/sonojs-saas-07/sonojs-saas-07.zip`
 - Local: `npx --yes serve .` (needed so assets load; do not open `index.html` as file://)
 

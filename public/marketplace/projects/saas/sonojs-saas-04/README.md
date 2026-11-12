@@ -4,7 +4,6 @@ Package: AuthKit (`1.0.0`) - Next.js · React · TypeScript · Tailwind 4 · Ope
 Category: `saas`  
 Slug / folder: `sonojs-saas-04`  
 Path: `public/marketplace/projects/saas/sonojs-saas-04/`  
-Source: `E:\dl\prompt3\94`
 
 Auth product marketing landing. Demo brand: **AuthKit** — The world's best login box.
 
@@ -18,7 +17,6 @@ Auth product marketing landing. Demo brand: **AuthKit** — The world's best log
 ## Live / package
 
 - Demo: https://sonojs-saas-04.sonojs.workers.dev/
-- Source: `E:\dl\prompt3\94`
 - Zip: `products/saas/sonojs-saas-04/sonojs-saas-04.zip`
 - Local: `npm install` then `npm run dev`
 

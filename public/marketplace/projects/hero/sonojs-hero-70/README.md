@@ -4,7 +4,6 @@ Package: Kelo (`1.0.0`) - HTML · CSS · JavaScript
 Category: `hero`  
 Slug / folder: `sonojs-hero-70`  
 Path: `public/marketplace/projects/hero/sonojs-hero-70/`  
-Source: `E:\dl\prompt3\111`
 
 AI sales platform marketing page. Demo brand: **Kelo**.
 
@@ -18,7 +17,6 @@ AI sales platform marketing page. Demo brand: **Kelo**.
 ## Live / package
 
 - Demo: https://sonojs-hero-70.sonojs2.workers.dev/
-- Source: `E:\dl\prompt3\111`
 - Zip: `products/heroes/sonojs-hero-70/sonojs-hero-70.zip`
 - Local: `npx --yes serve .`
 

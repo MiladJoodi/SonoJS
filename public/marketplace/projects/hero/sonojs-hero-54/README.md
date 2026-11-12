@@ -4,7 +4,6 @@ Package: LinkFlow (`1.0.0`) - React · Vite · TypeScript · Tailwind · Lucide
 Category: `hero`  
 Slug / folder: `sonojs-hero-54`  
 Path: `public/marketplace/projects/hero/sonojs-hero-54/`  
-Source: `E:\dl\prompt2\64`
 
 AI workflow marketing hero with boomerang video. Demo brand: **LinkFlow™**.
 
@@ -18,7 +17,6 @@ AI workflow marketing hero with boomerang video. Demo brand: **LinkFlow™**.
 ## Live / package
 
 - Demo: https://sonojs-hero-54.sonojs.workers.dev/
-- Source: `E:\dl\prompt2\64`
 - Zip: `products/heroes/sonojs-hero-54/sonojs-hero-54.zip`
 - Local: `npm install` then `npm run dev`
 

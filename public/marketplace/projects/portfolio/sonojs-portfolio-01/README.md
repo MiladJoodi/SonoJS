@@ -4,7 +4,6 @@ Package: `jack` (`1.0.0`) - Vite · React 19 · TypeScript · Tailwind CSS 3 · 
 Category: `portfolio`  
 Slug / folder: `sonojs-portfolio-01`  
 Path: `public/marketplace/projects/portfolio/sonojs-portfolio-01/`  
-Source: `E:\dl\prompt\01`
 
 Dark personal portfolio for a 3D creator. Demo brand: **Jack**.
 
@@ -18,7 +17,6 @@ Dark personal portfolio for a 3D creator. Demo brand: **Jack**.
 ## Live / package
 
 - Demo: https://sonojs-portfolio-01.sonojs.workers.dev/
-- Source: `E:\dl\prompt\01`
 - Zip: `products/portfolio/sonojs-portfolio-01/sonojs-portfolio-01.zip`
 
 ## Access

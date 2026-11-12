@@ -4,7 +4,6 @@ Package: `skyelite` (`1.0.0`) - Vite · React 19 · TypeScript · Tailwind CSS 4
 Category: `hero`  
 Slug / folder: `sonojs-hero-03`  
 Path: `public/marketplace/projects/hero/sonojs-hero-03/`  
-Source: `E:\dl\prompt\02`
 
 Full-bleed private-jet video hero. Demo brand: **SkyElite**.
 
@@ -18,7 +17,6 @@ Full-bleed private-jet video hero. Demo brand: **SkyElite**.
 ## Live / repo
 
 - Demo: https://sonojs-hero-03.sonojs.workers.dev/
-- Source: `E:\dl\prompt\02`
 
 ## Access
 

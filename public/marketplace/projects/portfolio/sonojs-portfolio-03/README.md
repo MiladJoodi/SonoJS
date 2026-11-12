@@ -4,7 +4,6 @@ Package: Michael Smith (`1.0.0`) - React · Vite · TypeScript · Tailwind · GS
 Category: `portfolio`  
 Slug / folder: `sonojs-portfolio-03`  
 Path: `public/marketplace/projects/portfolio/sonojs-portfolio-03/`  
-Source: `E:\dl\prompt2\67`
 
 Personal portfolio marketing site. Demo brand: **Michael Smith**.
 
@@ -18,7 +17,6 @@ Personal portfolio marketing site. Demo brand: **Michael Smith**.
 ## Live / package
 
 - Demo: https://sonojs-portfolio-03.sonojs.workers.dev/
-- Source: `E:\dl\prompt2\67`
 - Zip: `products/portfolio/sonojs-portfolio-03/sonojs-portfolio-03.zip`
 - Local: `npm install` then `npm run dev`
 

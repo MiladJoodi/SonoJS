@@ -4,7 +4,6 @@ Package: Asme (`1.0.0`) - React · Vite · TypeScript · Tailwind · Lucide
 Category: `landing`  
 Slug / folder: `sonojs-landing-13`  
 Path: `public/marketplace/projects/landing/sonojs-landing-13/`  
-Source: `E:\dl\prompt2\66`
 
 Multi-section studio marketing landing. Demo brand: **Asme**.
 
@@ -18,7 +17,6 @@ Multi-section studio marketing landing. Demo brand: **Asme**.
 ## Live / package
 
 - Demo: https://sonojs-landing-13.sonojs.workers.dev/
-- Source: `E:\dl\prompt2\66`
 - Zip: `products/landing/sonojs-landing-13/sonojs-landing-13.zip`
 - Local: `npm install` then `npm run dev`
 

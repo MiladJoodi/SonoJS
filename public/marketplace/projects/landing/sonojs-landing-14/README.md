@@ -4,7 +4,6 @@ Package: Selene (`1.0.0`) - React · Vite · TypeScript · Tailwind · Lenis
 Category: `landing`  
 Slug / folder: `sonojs-landing-14`  
 Path: `public/marketplace/projects/landing/sonojs-landing-14/`  
-Source: `E:\dl\prompt2\74`
 
 Concept lunar-expedition marketing landing. Demo brand: **SELENE**.
 
@@ -18,7 +17,6 @@ Concept lunar-expedition marketing landing. Demo brand: **SELENE**.
 ## Live / package
 
 - Demo: https://sonojs-landing-14.sonojs.workers.dev/
-- Source: `E:\dl\prompt2\74`
 - Zip: `products/landing/sonojs-landing-14/sonojs-landing-14.zip`
 - Local: `npm install` then `npm run dev`
 

@@ -4,7 +4,6 @@ Package: BTI (`1.0.0`) - HTML · CSS · JavaScript · Tailwind
 Category: `portfolio`  
 Slug / folder: `sonojs-portfolio-06`  
 Path: `public/marketplace/projects/portfolio/sonojs-portfolio-06/`  
-Source: `E:\dl\prompt3\105`
 
 Leadership-firm portfolio. Demo brand: **Blue Thinking International (BTI)**.
 
@@ -19,7 +18,6 @@ No `cover.mp4` yet - catalog uses the still only.
 ## Live / package
 
 - Demo: https://sonojs-portfolio-06.sonojs2.workers.dev/ (may still show Hello world until redeploy)
-- Source: `E:\dl\prompt3\105`
 - Zip: `products/portfolio/sonojs-portfolio-06/sonojs-portfolio-06.zip`
 - Local: `npx --yes serve .`
 

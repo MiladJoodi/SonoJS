@@ -4,7 +4,6 @@ Package: AI Automation Agency (`1.0.0`) - HTML · CSS · JavaScript · Lucide
 Category: `saas`  
 Slug / folder: `sonojs-saas-13`  
 Path: `public/marketplace/projects/saas/sonojs-saas-13/`  
-Source: `E:\dl\prompt3\104`
 
 AI automation agency marketing site. Demo brand: **AI Automation Agency**.
 
@@ -18,7 +17,6 @@ AI automation agency marketing site. Demo brand: **AI Automation Agency**.
 ## Live / package
 
 - Demo: https://sonojs-saas-13.sonojs2.workers.dev/
-- Source: `E:\dl\prompt3\104`
 - Zip: `products/saas/sonojs-saas-13/sonojs-saas-13.zip`
 - Local: `npx --yes serve .`
 

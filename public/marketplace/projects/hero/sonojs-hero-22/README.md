@@ -4,7 +4,6 @@ Package: Hexora (`1.0.0`) - Vite · React 19 · JavaScript · Tailwind CSS 3 · 
 Category: `hero`  
 Slug / folder: `sonojs-hero-22`  
 Path: `public/marketplace/projects/hero/sonojs-hero-22/`  
-Source: `E:\dl\prompt\26`
 
 Construction materials video hero. Demo brand: **Hexora**.
 
@@ -18,7 +17,6 @@ Construction materials video hero. Demo brand: **Hexora**.
 ## Live / package
 
 - Demo: https://sonojs-hero-22.sonojs.workers.dev/
-- Source: `E:\dl\prompt\26`
 - Zip: `products/heroes/sonojs-hero-22/sonojs-hero-22.zip`
 
 ## Access
