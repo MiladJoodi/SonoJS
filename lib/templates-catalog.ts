@@ -7613,6 +7613,69 @@ export const templateProjects: TemplateProject[] = [
     ],
   },
   {
+    slug: "sonojs-portfolio-07",
+    title: "Kimi Antonelli",
+    tagline:
+      "GRIDO1 Racing Systems - F1 driver portfolio with 3D helmet hero.",
+    description:
+      "Kimi Antonelli is a Formula 1 driver portfolio by SonoJS (demo brand: GRIDO1 Racing Systems / Kimi Antonelli). Zero-build static HTML with inline CSS (Oswald + Space Grotesk), Three.js r185 (GLTF/DRACO/RGBE loaders), and Lenis smooth scroll via CDN import map. Hero driver_012 with interactive 3D helmet GLB, Spa next-race card, season stats (races / podiums / points), From karts to F1 timeline, paddock journal story, and Keep pushing forward footer. Demo motorsport chrome only - no live timing backend. Run with npx serve . or host statically on Cloudflare Workers.",
+    category: "portfolio",
+    stack: ["html", "css", "javascript", "threejs"],
+    priceLabel: "Free",
+    priceCents: 0,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 190,
+    accent: "190",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "landing",
+    coverImage: "/templates/projects/portfolio/sonojs-portfolio-07/main.webp",
+    coverImageDark: null,
+    coverVideo: "/templates/projects/portfolio/sonojs-portfolio-07/cover.mp4",
+    detailCoverImage:
+      "/templates/projects/portfolio/sonojs-portfolio-07/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-portfolio-07.sonojs2.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-13",
+    firstReleasedAt: "2026-11-13",
+    screens: 5,
+    runCommand: "npx serve .",
+    highlights: [
+      {
+        title: "3D helmet hero",
+        body: "Interactive helmet3.glb with DRACO, studio HDR, and depth/normal maps.",
+      },
+      {
+        title: "Season + next race",
+        body: "Spa-Francorchamps card, live-feel stats, and championship standings chrome.",
+      },
+      {
+        title: "Karts to F1 timeline",
+        body: "2012→2026 story beats with paddock journal and Keep pushing forward close.",
+      },
+      {
+        title: "Zero-build static",
+        body: "npx serve . - single index.html, Three.js + Lenis CDN, assets/.",
+      },
+    ],
+    includes: [
+      "index.html (KIMI — GRIDO1 Racing Systems)",
+      "assets/hero/scene helmet3.glb + person maps + studio-light.hdr",
+      "assets/timeline + paddock + footer stills",
+      "Three.js r185 + Lenis via import map (CDN)",
+    ],
+    requirements: [
+      "Modern browser with WebGL",
+      "Network for Three.js / Lenis CDN (or vendor locally)",
+      "Static file host (npx serve .)",
+    ],
+  },
+  {
     slug: "sonojs-landing-19",
     title: "CØFF",
     tagline:
