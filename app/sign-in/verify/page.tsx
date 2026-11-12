@@ -4,7 +4,11 @@ import * as React from "react"
 import Link from "next/link"
 import { useSignIn } from "@clerk/nextjs"
 
-import { AuthCard, AuthCardHeader, AuthPageShell } from "@/components/auth"
+import {
+  AuthCard,
+  AuthCardHeader,
+  AuthPageShell,
+} from "@/components/auth/auth-card"
 import { Spinner } from "@sonojs/ui/components/spinner"
 
 export default function SignInEmailLinkVerifyPage() {

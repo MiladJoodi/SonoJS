@@ -95,7 +95,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="style-vega flex min-h-full flex-col font-sans text-body">
-        <ClerkProvider>
+        <ClerkProvider prefetchUI={false}>
           <SonoGoogleOneTap />
           <ThemeProvider
             attribute="class"
@@ -109,7 +109,8 @@ export default function RootLayout({
                 <DocsToaster />
               </TooltipProvider>
             </PreviewDirectionProvider>
-            <Analytics />
+            {/* Local prod builds have no /_vercel/insights endpoint; keep Analytics on Vercel only. */}
+            {process.env.VERCEL ? <Analytics /> : null}
           </ThemeProvider>
         </ClerkProvider>
       </body>

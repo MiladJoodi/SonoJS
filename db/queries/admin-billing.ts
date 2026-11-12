@@ -23,6 +23,8 @@ export type AdminUserRow = {
   status: string | null
   currentPeriodEnd: string | null
   stripeSubscriptionId: string | null
+  /** Present on admin user list/search rows. */
+  downloadsCount?: number
 }
 
 function manualStripeSubId(clerkUserId: string): string {

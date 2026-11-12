@@ -24,6 +24,7 @@ export function ChartExampleCard({
   return (
     <Link
       href={chartViewHref(id)}
+      prefetch={false}
       aria-label={pending ? `${title} (pending)` : title}
       className={cn(
         "group flex w-full cursor-pointer flex-col overflow-hidden rounded-[12px] border border-border/70 bg-card text-start no-underline outline-none",

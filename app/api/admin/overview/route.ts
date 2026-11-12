@@ -1,13 +1,13 @@
 import { NextResponse } from "next/server"
 
-import { getAdminOverviewKpis } from "@/db/queries/admin-read"
+import { getAdminOverview } from "@/db/queries/admin-read"
 import { AdminAuthError, requireAdmin } from "@/lib/admin"
 
 export async function GET() {
   try {
     await requireAdmin()
-    const kpis = await getAdminOverviewKpis()
-    return NextResponse.json({ kpis })
+    const overview = await getAdminOverview()
+    return NextResponse.json({ overview })
   } catch (err) {
     if (err instanceof AdminAuthError) {
       return NextResponse.json({ error: err.message }, { status: err.status })

@@ -10,12 +10,47 @@ import {
   ProComponentNotFoundError,
 } from "@/lib/github-pro"
 import { getMarketplaceProject } from "@/lib/marketplace-catalog"
+import { recordMarketplaceDownload } from "@/db/queries/marketplace-downloads"
+import { ensureUserFromClerk } from "@/db/queries/users"
 
 export const runtime = "nodejs"
 export const dynamic = "force-dynamic"
 
 type RouteContext = {
   params: Promise<{ slug: string }>
+}
+
+async function resolveNeonUserForLog(): Promise<{
+  userId: string
+  clerkUserId: string
+} | null> {
+  try {
+    const viewer = await getViewer()
+    if (viewer.kind === "guest" || !viewer.userId) return null
+    const user = await ensureUserFromClerk(viewer.userId)
+    return { userId: user.id, clerkUserId: user.clerkUserId }
+  } catch (err) {
+    console.error("marketplace download: resolve user for log failed:", err)
+    return null
+  }
+}
+
+async function safeLogDownload(input: {
+  slug: string
+  source: "zip" | "external"
+}): Promise<void> {
+  try {
+    const neon = await resolveNeonUserForLog()
+    if (!neon) return
+    await recordMarketplaceDownload({
+      userId: neon.userId,
+      clerkUserId: neon.clerkUserId,
+      slug: input.slug,
+      source: input.source,
+    })
+  } catch (err) {
+    console.error("marketplace download: log failed:", err)
+  }
 }
 
 /**
@@ -55,6 +90,7 @@ export async function GET(_req: Request, context: RouteContext) {
   if (project.downloadUrl) {
     // External hosts (e.g. Google Drive share page): return a URL for the
     // client to open. A 302 + fetch()/blob would save HTML instead of opening.
+    await safeLogDownload({ slug: project.slug, source: "external" })
     return NextResponse.json(
       { openUrl: project.downloadUrl },
       {
@@ -66,6 +102,7 @@ export async function GET(_req: Request, context: RouteContext) {
 
   try {
     const { filename, bytes } = await getProComponentArchive(project.slug)
+    await safeLogDownload({ slug: project.slug, source: "zip" })
     return new NextResponse(new Uint8Array(bytes), {
       status: 200,
       headers: {

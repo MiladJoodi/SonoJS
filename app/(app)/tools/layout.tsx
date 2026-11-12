@@ -12,6 +12,8 @@ import {
 import { cn } from "@/lib/utils"
 import { SidebarProvider } from "@sonojs/ui/components/sidebar"
 
+import "@/styles/site-extended.css"
+
 const TOOLS_SIDEBAR_KEY = "sonojs-tools-sidebar"
 const SIDEBAR_MOTION = "200ms linear"
 

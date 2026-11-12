@@ -47,6 +47,19 @@ const PROMPTS: {
   },
 ]
 
+function sleep(ms: number) {
+  return new Promise<void>((resolve) => {
+    window.setTimeout(resolve, ms)
+  })
+}
+
+function prefersReducedMotion() {
+  return (
+    typeof window !== "undefined" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  )
+}
+
 function pickPrompt(text: string): ShowcaseDemoId {
   const t = text.toLowerCase()
   if (/pric|plan|tier|bill/.test(t)) return "pricing"
@@ -67,41 +80,107 @@ function settledSteps(file: string): StepState[] {
 }
 
 export function HeroShowcase({ className }: { className?: string }) {
-  const firstPrompt = PROMPTS[0]!
-  // Mount already settled - avoids empty→animate→paint that feels like a double load.
-  const [active, setActive] = React.useState<ShowcaseDemoId>(firstPrompt.id)
-  const [query, setQuery] = React.useState(firstPrompt.text)
-  const [steps, setSteps] = React.useState<StepState[]>(() =>
-    settledSteps(firstPrompt.file)
-  )
-  const [showCanvas, setShowCanvas] = React.useState(true)
+  const [active, setActive] = React.useState<ShowcaseDemoId>("login")
+  const [query, setQuery] = React.useState("")
+  const [steps, setSteps] = React.useState<StepState[]>([])
+  const [showCanvas, setShowCanvas] = React.useState(false)
   const [previewKey, setPreviewKey] = React.useState(0)
-  const [motionOn, setMotionOn] = React.useState(false)
+  /** Typing + entrance only on first load; later swaps just change content. */
+  const [motionOn, setMotionOn] = React.useState(true)
 
   const runRef = React.useRef(0)
+  const introDoneRef = React.useRef(false)
 
-  const swapTo = React.useCallback((text: string, id: ShowcaseDemoId) => {
-    runRef.current += 1
-    const prompt = PROMPTS.find((p) => p.id === id) ?? PROMPTS[0]!
-    setMotionOn(false)
-    setActive(id)
-    setQuery(text)
-    setSteps(settledSteps(prompt.file))
-    setShowCanvas(true)
-    setPreviewKey((k) => k + 1)
-  }, [])
+  const build = React.useCallback(
+    async (text: string, id: ShowcaseDemoId, mode: "intro" | "swap") => {
+      const run = ++runRef.current
+      const prompt = PROMPTS.find((p) => p.id === id) ?? PROMPTS[0]!
+      const reduced = prefersReducedMotion()
+
+      // After first play: only swap content — no typewriter / step / entrance.
+      if (mode === "swap" || introDoneRef.current) {
+        introDoneRef.current = true
+        setMotionOn(false)
+        setActive(id)
+        setQuery(text)
+        setSteps(settledSteps(prompt.file))
+        setShowCanvas(true)
+        setPreviewKey((k) => k + 1)
+        return
+      }
+
+      setMotionOn(true)
+      setActive(id)
+      setShowCanvas(false)
+      setSteps([])
+      setPreviewKey((k) => k + 1)
+
+      if (reduced) {
+        setQuery(text)
+      } else {
+        setQuery("")
+        for (let i = 0; i < text.length; i++) {
+          if (run !== runRef.current) return
+          setQuery(text.slice(0, i + 1))
+          await sleep(24)
+        }
+        await sleep(260)
+      }
+
+      if (run !== runRef.current) return
+
+      const labels = [
+        "Reading your project",
+        "Composing with SonoJS components",
+        `Wrote ${prompt.file}`,
+      ]
+      const stepDelay = reduced ? 260 : 420
+
+      for (let j = 0; j < labels.length; j++) {
+        if (run !== runRef.current) return
+        const label = labels[j]!
+        setSteps((prev) => [
+          ...prev.map((s) => ({ ...s, done: true })),
+          { label, on: false, done: false },
+        ])
+        await sleep(16)
+        if (run !== runRef.current) return
+        setSteps((prev) =>
+          prev.map((s, i) => (i === j ? { ...s, on: true } : s))
+        )
+        await sleep(stepDelay)
+        if (run !== runRef.current) return
+        setSteps((prev) =>
+          prev.map((s, i) => (i === j ? { ...s, done: true } : s))
+        )
+      }
+
+      if (run !== runRef.current) return
+      setShowCanvas(true)
+      introDoneRef.current = true
+    },
+    []
+  )
+
+  React.useEffect(() => {
+    const first = PROMPTS[0]!
+    void build(first.text, first.id, "intro")
+    return () => {
+      runRef.current += 1
+    }
+  }, [build])
 
   function selectChip(id: ShowcaseDemoId) {
     if (id === active) return
     const prompt = PROMPTS.find((p) => p.id === id)!
-    swapTo(prompt.text, id)
+    void build(prompt.text, id, "swap")
   }
 
   function onSubmit(e: React.FormEvent) {
     e.preventDefault()
     const v = query.trim()
     if (!v) return
-    swapTo(v, pickPrompt(v))
+    void build(v, pickPrompt(v), "swap")
   }
 
   return (
@@ -137,7 +216,6 @@ export function HeroShowcase({ className }: { className?: string }) {
               type="button"
               role="tab"
               aria-selected={selected}
-              aria-pressed={selected}
               onClick={() => selectChip(p.id)}
               className={cn(
                 "inline-flex min-h-11 shrink-0 cursor-pointer items-center rounded-full border px-3 py-2 text-xs transition-colors sm:min-h-0 sm:px-3 sm:py-1.5 sm:text-[13px]",

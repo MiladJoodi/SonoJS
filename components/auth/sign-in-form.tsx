@@ -41,6 +41,9 @@ function navigateAfterAuth(
   }
 }
 
+/** Default: password. Magic link is secondary (existing accounts only). */
+type SignInMethod = "password" | "email"
+
 export function SignInForm({
   layout = "card",
   onSwitchMode,
@@ -50,6 +53,7 @@ export function SignInForm({
   const { isSignedIn } = useAuth()
   const { signIn, errors, fetchStatus } = useSignIn()
   const router = useRouter()
+  const [method, setMethod] = React.useState<SignInMethod>("password")
   const [code, setCode] = React.useState("")
   const [emailAddress, setEmailAddress] = React.useState("")
   const [magicLinkSent, setMagicLinkSent] = React.useState(false)
@@ -123,7 +127,8 @@ export function SignInForm({
     }
   }
 
-  const handleMagicLink = async () => {
+  const handleMagicLink = async (event?: React.FormEvent<HTMLFormElement>) => {
+    event?.preventDefault()
     const email = emailAddress.trim()
     if (!email) {
       setMagicLinkError("Enter your email first.")
@@ -290,69 +295,25 @@ export function SignInForm({
     </Link>
   )
 
-  return (
-    <AuthCard layout={layout}>
-      <AuthCardHeader
-        title="Sign in"
-        description="Password, magic link, or a social account."
-      />
+  const signUpLink = onSwitchMode ? (
+    <button
+      type="button"
+      className="cursor-pointer font-medium text-foreground underline-offset-4 hover:underline"
+      onClick={onSwitchMode}
+    >
+      Sign up
+    </button>
+  ) : (
+    <Link
+      href="/sign-up"
+      className="cursor-pointer font-medium text-foreground underline-offset-4 hover:underline"
+    >
+      Sign up
+    </Link>
+  )
 
-      <form className="flex flex-col gap-4" onSubmit={handlePassword}>
-        <div className="grid gap-2">
-          <Label htmlFor="sign-in-email">Email</Label>
-          <Input
-            id="sign-in-email"
-            name="email"
-            type="email"
-            dir="ltr"
-            autoComplete="email"
-            placeholder="name@example.com"
-            required
-            disabled={busy}
-            value={emailAddress}
-            onChange={(e) => {
-              setEmailAddress(e.target.value)
-              if (magicLinkError) setMagicLinkError(null)
-            }}
-            className="shadow-none"
-          />
-          <AuthFieldError
-            message={
-              errors.fields.identifier?.message ?? magicLinkError
-            }
-          />
-        </div>
-        <div className="grid gap-2">
-          <div className="flex items-center gap-3">
-            <Label htmlFor="sign-in-password">Password</Label>
-            {forgotControl}
-          </div>
-          <Input
-            id="sign-in-password"
-            name="password"
-            type="password"
-            autoComplete="current-password"
-            placeholder="••••••••"
-            required
-            disabled={busy}
-            className="shadow-none"
-          />
-          <AuthFieldError message={errors.fields.password?.message} />
-        </div>
-        <Button type="submit" className="mt-1 w-full shadow-none" disabled={busy}>
-          {busy ? <Spinner className="size-4" /> : "Sign in"}
-        </Button>
-        {errors.global?.[0] ? (
-          <AuthFieldError message={errors.global[0].message} />
-        ) : null}
-      </form>
-
-      <div className="flex items-center gap-3">
-        <Separator className="flex-1" />
-        <span className="text-xs text-muted-foreground">or</span>
-        <Separator className="flex-1" />
-      </div>
-
+  const oauthFirst = (
+    <>
       <div className="grid grid-cols-2 gap-2">
         <Button
           type="button"
@@ -377,34 +338,154 @@ export function SignInForm({
       </div>
       {oauthError ? <AuthFieldError message={oauthError} /> : null}
 
-      <Button
-        type="button"
-        variant="outline"
-        className="w-full border-border/70 bg-card shadow-none hover:bg-muted"
-        disabled={busy}
-        onClick={() => void handleMagicLink()}
-      >
-        {busy ? <Spinner className="size-4" /> : "Email me a magic link"}
-      </Button>
+      <div className="flex items-center gap-3">
+        <Separator className="flex-1" />
+        <span className="text-xs text-muted-foreground">or</span>
+        <Separator className="flex-1" />
+      </div>
+    </>
+  )
 
-      <p className="text-center text-sm text-muted-foreground">
-        New here?{" "}
-        {onSwitchMode ? (
+  if (method === "email") {
+    return (
+      <AuthCard layout={layout}>
+        <AuthCardHeader
+          title="Email me a link"
+          description="For existing accounts. We’ll send a sign-in link to your inbox."
+        />
+
+        {oauthFirst}
+
+        <form
+          className="flex flex-col gap-4"
+          onSubmit={(e) => void handleMagicLink(e)}
+        >
+          <div className="grid gap-2">
+            <Label htmlFor="sign-in-email-link">Email</Label>
+            <Input
+              id="sign-in-email-link"
+              name="email"
+              type="email"
+              dir="ltr"
+              autoComplete="email"
+              placeholder="name@example.com"
+              required
+              disabled={busy}
+              value={emailAddress}
+              onChange={(e) => {
+                setEmailAddress(e.target.value)
+                if (magicLinkError) setMagicLinkError(null)
+              }}
+              className="shadow-none"
+            />
+            <AuthFieldError
+              message={errors.fields.identifier?.message ?? magicLinkError}
+            />
+          </div>
+          <Button
+            type="submit"
+            className="mt-1 w-full shadow-none"
+            disabled={busy}
+          >
+            {busy ? <Spinner className="size-4" /> : "Email me a link"}
+          </Button>
+          {errors.global?.[0] ? (
+            <AuthFieldError message={errors.global[0].message} />
+          ) : null}
+        </form>
+
+        <p className="text-center text-sm text-muted-foreground">
+          Don&apos;t have an account? {signUpLink}
+          {" · "}
           <button
             type="button"
             className="cursor-pointer font-medium text-foreground underline-offset-4 hover:underline"
-            onClick={onSwitchMode}
+            disabled={busy}
+            onClick={() => {
+              setMagicLinkError(null)
+              setMethod("password")
+            }}
           >
-            Create an account
+            Use password
           </button>
-        ) : (
-          <Link
-            href="/sign-up"
-            className="cursor-pointer font-medium text-foreground underline-offset-4 hover:underline"
-          >
-            Create an account
-          </Link>
-        )}
+        </p>
+      </AuthCard>
+    )
+  }
+
+  return (
+    <AuthCard layout={layout}>
+      <AuthCardHeader
+        title="Sign in"
+        description="Continue with Google or GitHub, or use your email and password."
+      />
+
+      {oauthFirst}
+
+      <form className="flex flex-col gap-4" onSubmit={handlePassword}>
+        <div className="grid gap-2">
+          <Label htmlFor="sign-in-email">Email</Label>
+          <Input
+            id="sign-in-email"
+            name="email"
+            type="email"
+            dir="ltr"
+            autoComplete="email"
+            placeholder="name@example.com"
+            required
+            disabled={busy}
+            value={emailAddress}
+            onChange={(e) => {
+              setEmailAddress(e.target.value)
+              if (magicLinkError) setMagicLinkError(null)
+            }}
+            className="shadow-none"
+          />
+          <AuthFieldError message={errors.fields.identifier?.message} />
+        </div>
+        <div className="grid gap-2">
+          <div className="flex items-center gap-3">
+            <Label htmlFor="sign-in-password">Password</Label>
+            {forgotControl}
+          </div>
+          <Input
+            id="sign-in-password"
+            name="password"
+            type="password"
+            autoComplete="current-password"
+            placeholder="••••••••"
+            required
+            disabled={busy}
+            className="shadow-none"
+          />
+          <AuthFieldError message={errors.fields.password?.message} />
+        </div>
+        <Button
+          type="submit"
+          className="mt-1 w-full shadow-none"
+          disabled={busy}
+        >
+          {busy ? <Spinner className="size-4" /> : "Sign in"}
+        </Button>
+        {errors.global?.[0] ? (
+          <AuthFieldError message={errors.global[0].message} />
+        ) : null}
+      </form>
+
+      <p className="text-center text-sm text-muted-foreground">
+        Don&apos;t have an account? {signUpLink}
+        {" · "}
+        <button
+          type="button"
+          className="cursor-pointer font-medium text-foreground underline-offset-4 hover:underline"
+          disabled={busy}
+          onClick={() => {
+            setMagicLinkError(null)
+            setMethod("email")
+          }}
+        >
+          Magic link
+        </button>
       </p>
     </AuthCard>
   )

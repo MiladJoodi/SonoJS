@@ -33,6 +33,7 @@ export default function ChartAreaCategoryPage() {
           <li key={entry.id}>
             <Link
               href={chartViewHref(entry.id)}
+              prefetch={false}
               className="flex cursor-pointer items-center justify-between gap-4 px-4 py-3 transition-colors hover:bg-muted/40"
             >
               <span className="min-w-0">

@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import Link from "next/link"
+import { ExternalLinkIcon } from "lucide-react"
 
 import { AdminRefreshButton } from "@/components/admin/admin-refresh-button"
 import {
@@ -12,6 +13,7 @@ import {
 } from "@/components/admin/admin-format"
 import { AdminStatus } from "@/components/admin/admin-status"
 import { PlanGrantForm } from "@/components/admin/plan-grant-form"
+import { CopyButton } from "@/components/docs/copy-button"
 import { cn } from "@/lib/utils"
 import {
   adminFetchJson,
@@ -79,6 +81,11 @@ export function AdminUserDetailPanel({ userId }: { userId: string }) {
 
   if (!detail) return null
 
+  const headerLabel =
+    detail.user.email ||
+    detail.user.clerkFullName ||
+    detail.user.clerkUserId
+
   return (
     <div className="flex flex-col gap-6">
       <div className="flex items-center justify-between gap-3">
@@ -90,37 +97,42 @@ export function AdminUserDetailPanel({ userId }: { userId: string }) {
             Users
           </Link>
           <span className="mx-1.5">/</span>
-          <span dir="ltr">{detail.user.email || detail.user.clerkUserId}</span>
+          <span dir="ltr">{headerLabel}</span>
         </p>
         <AdminRefreshButton onClick={refresh} refreshing={refreshing} />
       </div>
 
       <Card className="border-border/60 shadow-none">
         <CardHeader className="border-b border-border/50">
-          <CardTitle>Identity</CardTitle>
+          <CardTitle dir="ltr">
+            {detail.user.email || "No email"}
+          </CardTitle>
           <CardDescription>
-            Effective plan:{" "}
-            {detail.plan.plan === "pro"
-              ? detail.plan.planName || detail.plan.planSlug || "Pro"
-              : "Free"}
+            {detail.user.clerkFullName ? (
+              <span dir="ltr">{detail.user.clerkFullName}</span>
+            ) : (
+              "Clerk profile name unavailable"
+            )}
           </CardDescription>
         </CardHeader>
         <CardContent className="grid gap-2 pt-4 text-sm sm:grid-cols-2">
           <p>
-            <span className="text-muted-foreground">Email · </span>
-            <span dir="ltr">{detail.user.email || "—"}</span>
+            <span className="text-muted-foreground">Plan · </span>
+            {detail.plan.plan === "pro"
+              ? detail.plan.planName || detail.plan.planSlug || "Pro"
+              : "Free"}
           </p>
           <p>
-            <span className="text-muted-foreground">Clerk · </span>
-            <span className="font-mono text-xs" dir="ltr">
-              {detail.user.clerkUserId}
-            </span>
+            <span className="text-muted-foreground">Expires · </span>
+            <span dir="ltr">{formatDate(detail.plan.currentPeriodEnd)}</span>
           </p>
           <p>
-            <span className="text-muted-foreground">Neon id · </span>
-            <span className="font-mono text-xs" dir="ltr">
-              {detail.user.id}
-            </span>
+            <span className="text-muted-foreground">Downloads · </span>
+            <span dir="ltr">{detail.downloadsTotal}</span>
+          </p>
+          <p>
+            <span className="text-muted-foreground">Created · </span>
+            <span dir="ltr">{formatDate(detail.user.createdAt)}</span>
           </p>
           <p>
             <span className="text-muted-foreground">Stripe customer · </span>
@@ -128,10 +140,49 @@ export function AdminUserDetailPanel({ userId }: { userId: string }) {
               {detail.user.stripeCustomerId || "—"}
             </span>
           </p>
-          <p>
-            <span className="text-muted-foreground">Created · </span>
-            <span dir="ltr">{formatDate(detail.user.createdAt)}</span>
-          </p>
+        </CardContent>
+      </Card>
+
+      <Card className="border-border/60 shadow-none">
+        <CardHeader className="border-b border-border/50">
+          <CardTitle>Clerk</CardTitle>
+          <CardDescription>
+            Copy IDs or open the Clerk dashboard (no app-specific profile URL
+            configured).
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-3 pt-4 text-sm">
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="text-muted-foreground">Clerk id</span>
+            <span className="font-mono text-xs" dir="ltr">
+              {detail.user.clerkUserId}
+            </span>
+            <CopyButton
+              value={detail.user.clerkUserId}
+              tone="chrome"
+              tooltipIdle="Copy Clerk id"
+            />
+          </div>
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="text-muted-foreground">Neon id</span>
+            <span className="font-mono text-xs" dir="ltr">
+              {detail.user.id}
+            </span>
+            <CopyButton
+              value={detail.user.id}
+              tone="chrome"
+              tooltipIdle="Copy Neon id"
+            />
+          </div>
+          <a
+            href="https://dashboard.clerk.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex cursor-pointer items-center gap-1.5 text-sm underline-offset-4 hover:underline"
+          >
+            Open Clerk dashboard
+            <ExternalLinkIcon className="size-3.5" />
+          </a>
         </CardContent>
       </Card>
 
@@ -177,6 +228,65 @@ export function AdminUserDetailPanel({ userId }: { userId: string }) {
                         dir="ltr"
                       >
                         {formatDate(s.currentPeriodEnd)}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </CardContent>
+      </Card>
+
+      <Card className="border-border/60 shadow-none">
+        <CardHeader className="border-b border-border/50">
+          <CardTitle>Downloads</CardTitle>
+          <CardDescription>
+            Latest {detail.downloads.length} of {detail.downloadsTotal}
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="pt-4">
+          {detail.downloads.length === 0 ? (
+            <p className="text-sm text-muted-foreground">No downloads yet.</p>
+          ) : (
+            <div className="overflow-x-auto">
+              <table className="w-full min-w-160 text-start text-sm">
+                <thead>
+                  <tr className="border-b border-border/60">
+                    <th className={adminThClass}>Product</th>
+                    <th className={adminThClass}>Source</th>
+                    <th className={adminThClass}>When</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {detail.downloads.map((d) => (
+                    <tr key={d.id} className="border-b border-border/40">
+                      <td className={adminTdClass}>
+                        <div className="flex min-w-0 flex-col gap-0.5">
+                          <Link
+                            href={`/marketplace/${d.slug}`}
+                            className="cursor-pointer truncate underline-offset-4 hover:underline"
+                          >
+                            {d.title}
+                          </Link>
+                          {d.title !== d.slug ? (
+                            <span
+                              className="truncate font-mono text-xs text-muted-foreground"
+                              dir="ltr"
+                            >
+                              {d.slug}
+                            </span>
+                          ) : null}
+                        </div>
+                      </td>
+                      <td className={adminTdClass}>
+                        <AdminStatus status={d.source} />
+                      </td>
+                      <td
+                        className={cn(adminTdClass, "text-muted-foreground")}
+                        dir="ltr"
+                      >
+                        {formatDate(d.createdAt)}
                       </td>
                     </tr>
                   ))}

@@ -2,6 +2,7 @@ export { HomeHero } from "./home-hero"
 export { HomeShell } from "./home-shell"
 export { HeroShowcase } from "./hero-showcase"
 export { PlatformBadges } from "./platform-badges"
+export { HomeSectionExploreLink } from "./section-explore-link"
 export { CommandBar } from "./command-bar"
 
 export {

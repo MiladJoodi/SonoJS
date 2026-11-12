@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { ArrowLeftIcon, Share2Icon } from "lucide-react"
+import { ArrowLeftIcon } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
@@ -62,7 +62,7 @@ export function MarketplaceDetailGallery({
         <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-violet-700/20" />
       )}
 
-      <div className="absolute inset-x-0 top-0 flex items-start justify-between p-3 lg:hidden">
+      <div className="absolute inset-x-0 top-0 flex items-start p-3 lg:hidden">
         <Link
           href="/marketplace"
           aria-label="Back"
@@ -70,13 +70,6 @@ export function MarketplaceDetailGallery({
         >
           <ArrowLeftIcon className="size-4 icon-dir" />
         </Link>
-        <button
-          type="button"
-          aria-label="Share"
-          className="flex size-10 cursor-pointer items-center justify-center rounded-full border border-white/20 bg-[var(--sm-overlay)] text-white backdrop-blur-md"
-        >
-          <Share2Icon className="size-4" />
-        </button>
       </div>
     </div>
   )

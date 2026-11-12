@@ -1,6 +1,8 @@
 import { LegalListIndex, LegalSidebar } from "@/components/sidebar-nav"
 import { WorkspaceShell } from "@/components/workspace-shell"
 
+import "@/styles/site-extended.css"
+
 export default function LegalLayout({
   children,
 }: {

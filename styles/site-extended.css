@@ -1,0 +1,74 @@
+/**
+ * Non-catalog route utilities (marketplace, tools, admin, pricing, legal, …).
+ *
+ * No Tailwind preflight — that lives in app/globals.css.
+ * Import only from layouts that need these surfaces (never root / homepage-only).
+ */
+@layer theme, utilities;
+@import "tailwindcss/theme.css" layer(theme) source(none);
+@import "tailwindcss/utilities.css" layer(utilities) source(none);
+
+@import "./sono-theme.css";
+@import "./vega-tokens.css";
+@import "./marketplace.css";
+@import "./code-chrome.css";
+@import "./shimmer.css";
+
+/* Full installable UI — route pages use many primitives beyond the shell set. */
+@source "../packages/ui/src/**/*.{ts,tsx}";
+
+@source "../components/admin/**/*.{ts,tsx}";
+@source "../components/tools/**/*.{ts,tsx}";
+@source "../components/marketplace/**/*.{ts,tsx}";
+@source "../components/pricing/**/*.{ts,tsx}";
+@source "../components/contact/**/*.{ts,tsx}";
+@source "../components/legal/**/*.{ts,tsx}";
+@source "../components/access/**/*.{ts,tsx}";
+@source "../components/pro/**/*.{ts,tsx}";
+@source "../components/sidebar-nav/**/*.{ts,tsx}";
+@source "../components/workspace-shell/**/*.{ts,tsx}";
+@source "../components/workspace-offer-rail/**/*.{ts,tsx}";
+@source "../components/sono-loader/**/*.{ts,tsx}";
+@source "../components/catalog/**/*.{ts,tsx}";
+@source "../components/icons/**/*.{ts,tsx}";
+/* Account route chrome — removed from homepage globals (Phase L2). */
+@source "../components/auth/account/**/*.{ts,tsx}";
+@source "../components/auth/account-settings.tsx";
+
+@source "../registry/blocks/marketing/offer-card/**/*.{ts,tsx}";
+
+@source "../app/(app)/marketplace/**/*.{ts,tsx}";
+@source "../app/(app)/admin/**/*.{ts,tsx}";
+@source "../app/(app)/tools/**/*.{ts,tsx}";
+@source "../app/(app)/pricing/**/*.{ts,tsx}";
+@source "../app/(app)/account/**/*.{ts,tsx}";
+@source "../app/(app)/contact/**/*.{ts,tsx}";
+@source "../app/(app)/legal/**/*.{ts,tsx}";
+
+@source not "../.tmp-chrome-thumbs";
+
+@source inline("ltr:data-[state=checked]:translate-x-[calc(100%-2px)] rtl:data-[state=checked]:-translate-x-[calc(100%-2px)]");
+@source inline("grid-rows-[0fr] grid-rows-[1fr] transition-[grid-template-rows]");
+
+/* Sidebar collapsible — same ownership as registry-catalog.css */
+@keyframes docs-collapsible-down {
+  from {
+    height: 0;
+    opacity: 0;
+  }
+  to {
+    height: var(--radix-collapsible-content-height);
+    opacity: 1;
+  }
+}
+
+@keyframes docs-collapsible-up {
+  from {
+    height: var(--radix-collapsible-content-height);
+    opacity: 1;
+  }
+  to {
+    height: 0;
+    opacity: 0;
+  }
+}

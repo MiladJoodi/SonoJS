@@ -78,10 +78,12 @@ Ask before changing MCP config outside this project.`,
     { href: "/ai", label: "AI" },
     { href: "/carousels", label: "Carousels" },
     { href: "/marketplace", label: "Marketplace" },
+    { href: "/pricing", label: "Pricing" },
   ] satisfies SiteNavItem[],
   /** Secondary explore links shown in the site footer. */
   footerNavItems: [
     { href: "/tools", label: "Tools" },
+    { href: "/pricing", label: "Pricing" },
     {
       href: "https://icons.sonojs.com",
       label: "Icons",

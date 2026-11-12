@@ -39,16 +39,16 @@ export const PLANS: Plan[] = [
   {
     id: "free",
     name: "Free",
-    description: "Public + member access with an account.",
+    description: "Public and member library with a free account.",
     price: "0",
     currency: "forever",
     priceNote: "",
     features: [
-      "Public & member components",
+      "Public and member components",
       "Live previews",
-      "CLI for public & member",
-      "Account & profile",
-      "Support by email",
+      "CLI for public and member items",
+      "Account and profile",
+      "Email support",
     ],
     cta: "Create account",
     href: "/sign-up",
@@ -56,18 +56,18 @@ export const PLANS: Plan[] = [
   {
     id: "pro-monthly",
     name: "Pro Monthly",
-    description: "Full Pro access for 30 days. Manual renewal—no auto-charge.",
+    description:
+      "Full Pro library for 30 days. One payment. No automatic renewal.",
     price: "12",
     currency: "/ month",
     priceNote: "",
     features: [
       "Everything in Free",
-      "Pro components & blocks",
-      "Templates",
+      "Pro components",
+      "Pro blocks",
       "Pro charts",
-      "Pro badge",
-      "Online Telegram support",
-      "Ends after the paid period unless you buy again",
+      "All templates",
+      "Telegram support",
     ],
     cta: "Get Pro Monthly",
     href: "/sign-up",
@@ -75,22 +75,22 @@ export const PLANS: Plan[] = [
   {
     id: "pro-yearly",
     name: "Pro Yearly",
-    description: "Full Pro access for 12 months. Manual renewal—no auto-charge.",
+    description:
+      "Full Pro library for 12 months. One payment. Lowest price per month.",
     price: "99",
     currency: "/ year",
     priceNote: "",
     compareAtPrice: "144",
-    savingsNote: "Save 31% · $8.25/mo",
+    savingsNote: "Save 31% · equals $8.25/mo",
     featured: true,
     badge: "Best Value",
     features: [
       "Everything in Free",
-      "Pro components & blocks",
-      "Templates",
+      "Pro components",
+      "Pro blocks",
       "Pro charts",
-      "Pro badge",
-      "Online Telegram support",
-      "Ends after the paid period unless you buy again",
+      "All templates",
+      "Telegram support",
     ],
     cta: "Get Pro Yearly",
     href: "/sign-up",
@@ -98,9 +98,9 @@ export const PLANS: Plan[] = [
 ]
 
 export const TABLE_HEADERS = [
-  { id: "free" as const, name: "Free", sub: "Signed in" },
-  { id: "pro-monthly" as const, name: "Pro Monthly", sub: "$12 / month" },
-  { id: "pro-yearly" as const, name: "Pro Yearly", sub: "$99 / year" },
+  { id: "free" as const, name: "Free", sub: "With account" },
+  { id: "pro-monthly" as const, name: "Pro Monthly", sub: "$12 / 30 days" },
+  { id: "pro-yearly" as const, name: "Pro Yearly", sub: "$99 / 12 months" },
 ]
 
 export const COMPARISON: ComparisonSection[] = [
@@ -108,28 +108,32 @@ export const COMPARISON: ComparisonSection[] = [
     category: "Access",
     features: [
       {
-        label: "Public docs & previews",
+        label: "Public docs and previews",
         values: [true, true, true],
       },
       {
-        label: "Member-only components",
+        label: "Member components",
         values: [true, true, true],
       },
       {
-        label: "Pro-only components & blocks",
+        label: "Pro components",
         values: [false, true, true],
       },
       {
-        label: "Templates",
+        label: "Pro blocks",
         values: [false, true, true],
       },
       {
-        label: "Account & profile",
+        label: "Pro charts",
+        values: [false, true, true],
+      },
+      {
+        label: "All templates",
+        values: [false, true, true],
+      },
+      {
+        label: "Account and profile",
         values: [true, true, true],
-      },
-      {
-        label: "Pro badge",
-        values: [false, true, true],
       },
     ],
   },
@@ -138,32 +142,32 @@ export const COMPARISON: ComparisonSection[] = [
     features: [
       {
         label: "UI components",
-        values: ["Public + member", "Full library", "Full library"],
+        values: ["Public and member", "Full library", "Full library"],
       },
       {
         label: "Blocks",
-        values: ["Member installs", "All installs", "All installs"],
+        values: ["Member only", "All blocks", "All blocks"],
       },
       {
         label: "Charts",
-        values: ["Free charts", "Free + Pro charts", "Free + Pro charts"],
+        values: ["Free charts", "Free and Pro charts", "Free and Pro charts"],
       },
       {
         label: "Templates",
-        values: [false, true, true],
+        values: [false, "All templates", "All templates"],
       },
       {
-        label: "Registry",
+        label: "Registry installs",
         values: [true, true, true],
       },
       {
-        label: "Free updates",
+        label: "Updates during access",
         values: [true, true, true],
       },
     ],
   },
   {
-    category: "Install & agents",
+    category: "Install and agents",
     features: [
       {
         label: "CLI for public items",
@@ -178,7 +182,7 @@ export const COMPARISON: ComparisonSection[] = [
         values: [true, true, true],
       },
       {
-        label: "Agent-friendly docs",
+        label: "Docs for AI coding agents",
         values: [true, true, true],
       },
     ],
@@ -188,7 +192,7 @@ export const COMPARISON: ComparisonSection[] = [
     features: [
       {
         label: "Support",
-        values: ["Email", "Online Telegram", "Online Telegram"],
+        values: ["Email", "Telegram", "Telegram"],
       },
     ],
   },

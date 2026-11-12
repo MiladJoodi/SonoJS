@@ -8,7 +8,7 @@ import { DownloadIcon } from "lucide-react"
 import {
   AuthDialog,
   type AuthDialogMode,
-} from "@/components/auth"
+} from "@/components/auth/auth-dialog"
 import { FreeIcon } from "@/components/icons/plan/free"
 import { ProIcon } from "@/components/icons/plan/pro"
 import type { MarketplaceProject } from "@/lib/marketplace-catalog-meta"

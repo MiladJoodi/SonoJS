@@ -36,3 +36,8 @@ export {
   subscriptionReconcileLeases,
   type SubscriptionReconcileLease,
 } from "./subscription-reconcile-leases"
+export {
+  marketplaceDownloads,
+  type MarketplaceDownload,
+  type NewMarketplaceDownload,
+} from "./marketplace-downloads"

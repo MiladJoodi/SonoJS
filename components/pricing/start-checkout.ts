@@ -8,7 +8,7 @@ const ERROR_MESSAGES: Record<string, string> = {
   Unauthorized: "Please sign in to continue.",
   InvalidPlanSlug: "That plan is not available.",
   InvalidJson: "Something went wrong. Please try again.",
-  AlreadySubscribed: "You already have an active Pro subscription.",
+  AlreadySubscribed: "You already have active Pro access.",
   PriceNotConfigured:
     "Checkout is not configured for this plan yet. Please try again later.",
   PlanNotFound: "That plan is not available.",

@@ -29,6 +29,13 @@
       "when": 1793419561284,
       "tag": "0003_dear_loki",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1794408322749,
+      "tag": "0004_marketplace_downloads",
+      "breakpoints": true
     }
   ]
 }

@@ -1,6 +1,8 @@
 import { DocsListIndex, DocsSidebar } from "@/components/sidebar-nav"
 import { WorkspaceShell } from "@/components/workspace-shell"
 
+import "@/styles/registry-catalog.css"
+
 /**
  * Docs HTML is still cache-friendly via `next.config` Cache-Control on `/docs`.
  * Do not force-static: Installation gates call Clerk `auth()`, which needs the

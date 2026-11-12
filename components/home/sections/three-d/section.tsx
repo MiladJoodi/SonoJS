@@ -1,10 +1,8 @@
-import Link from "next/link"
-
 import { HomeShell } from "@/components/home/home-shell"
+import { HomeSectionExploreLink } from "@/components/home/section-explore-link"
 import { HomeSectionHeading } from "@/components/home/section-heading"
-import { HomeOrbitStage } from "@/components/home/sections/three-d/orbit-stage"
+import { HomeOrbitStageLazy } from "@/components/home/sections/three-d/orbit-stage-lazy"
 import { get3dPages } from "@/lib/3d-nav"
-import { Button } from "@sonojs/ui/components/button"
 
 const FEATURES = [
   "CSS orbits, WebGL stages, and model viewers",
@@ -81,27 +79,25 @@ export function HomeThreeDSection() {
               </ul>
 
               <p className="mt-6 text-sm font-medium tabular-nums tracking-tight text-foreground">
-                <span className="text-[1.25rem] font-semibold text-primary">
+                <span className="me-2.5 text-[1.25rem] font-semibold text-primary">
                   {count}+
-                </span>{" "}
+                </span>
                 3D pieces. Ready to install.
+                <HomeSectionExploreLink href="/3d" className="ms-3">
+                  Explore
+                </HomeSectionExploreLink>
               </p>
-
-              <div className="mt-7 w-full sm:w-auto">
-                <Button asChild className="w-full sm:w-auto">
-                  <Link href="/3d">Explore 3D</Link>
-                </Button>
-              </div>
             </div>
           </div>
 
           <div
-            className="relative order-2 mx-auto w-full min-w-0 max-w-[28rem] lg:mx-0 lg:max-w-none"
+            className="relative order-2 mx-auto w-full min-w-0 lg:mx-0"
             style={{
+              maxWidth: "26rem",
               animation: "sono-fade-up 520ms var(--motion-ease) 80ms both",
             }}
           >
-            <HomeOrbitStage />
+            <HomeOrbitStageLazy />
           </div>
         </div>
       </HomeShell>

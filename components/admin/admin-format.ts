@@ -9,6 +9,11 @@ export function formatCents(amountCents: number, currency = "usd"): string {
   }
 }
 
+/** Compact integer for admin KPI cards (`1,234`). */
+export function formatCount(n: number): string {
+  return new Intl.NumberFormat("en-US").format(n)
+}
+
 function pad2(n: number) {
   return String(n).padStart(2, "0")
 }

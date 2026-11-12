@@ -7,7 +7,7 @@ import { LockIcon } from "lucide-react"
 import {
   AuthDialog,
   type AuthDialogMode,
-} from "@/components/auth"
+} from "@/components/auth/auth-dialog"
 import { ProIcon } from "@/components/icons/plan/pro"
 import type { ContentAccess } from "@/lib/access"
 import { cn } from "@/lib/utils"

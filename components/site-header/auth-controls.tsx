@@ -1,18 +1,24 @@
 "use client"
 
-import * as React from "react"
-import { useAuth } from "@clerk/nextjs"
+import dynamic from "next/dynamic"
 
-import {
-  AuthDialog,
-  type AuthDialogMode,
-  UserMenu,
-} from "@/components/auth"
-import { Button } from "@sonojs/ui/components/button"
+import { UserMenuLazy } from "@/components/auth/user-menu-lazy"
+
+import { GuestAuthControls } from "./guest-auth-controls"
+
+const SignedInAuthControls = dynamic(
+  () =>
+    import("./signed-in-auth-controls").then((m) => m.SignedInAuthControls),
+  {
+    loading: () => <UserMenuLazy />,
+    ssr: true,
+  }
+)
 
 /**
  * Header auth chrome.
- * Server session hint → instant Sign in / avatar shell before Clerk JS finishes.
+ * Server session hint picks the branch; guest path never imports Clerk.
+ * Signed-in Clerk hooks load in a separate chunk so MainNav can hydrate first.
  */
 export function AuthControls({
   initialSignedIn = false,
@@ -20,37 +26,9 @@ export function AuthControls({
   /** From server auth cookie - first paint without waiting on Clerk JS. */
   initialSignedIn?: boolean
 }) {
-  const { isLoaded, isSignedIn } = useAuth()
-  const [open, setOpen] = React.useState(false)
-  const [mode, setMode] = React.useState<AuthDialogMode>("sign-in")
-
-  React.useEffect(() => {
-    if (isSignedIn && open) setOpen(false)
-  }, [isSignedIn, open])
-
-  const signedIn = isLoaded ? Boolean(isSignedIn) : initialSignedIn
-
-  if (signedIn) {
-    return <UserMenu />
+  if (initialSignedIn) {
+    return <SignedInAuthControls initialSignedIn />
   }
 
-  return (
-    <AuthDialog
-      open={open}
-      onOpenChange={setOpen}
-      defaultMode={mode}
-      trigger={
-        <Button
-          type="button"
-          variant="ghost"
-          size="sm"
-          className="h-8 cursor-pointer rounded-md px-2.5 text-[12.5px] font-medium"
-          onClick={() => setMode("sign-in")}
-          aria-busy={!isLoaded}
-        >
-          Sign in
-        </Button>
-      }
-    />
-  )
+  return <GuestAuthControls />
 }

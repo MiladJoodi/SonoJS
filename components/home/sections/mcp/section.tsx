@@ -1,9 +1,7 @@
-import Link from "next/link"
-
 import { HomeShell } from "@/components/home/home-shell"
+import { HomeSectionExploreLink } from "@/components/home/section-explore-link"
 import { HomeSectionHeading } from "@/components/home/section-heading"
-import { HomeParallaxImage } from "@/components/home/sections/parallax-image"
-import { Button } from "@sonojs/ui/components/button"
+import { HomeParallaxImageLazy } from "@/components/home/sections/parallax-image-lazy"
 
 export function HomeMcpSection() {
   return (
@@ -56,11 +54,11 @@ export function HomeMcpSection() {
                 documentation, and build interfaces directly in your codebase.
               </p>
 
-              <div className="mt-7 w-full sm:w-auto">
-                <Button asChild className="w-full sm:w-auto">
-                  <Link href="/docs/mcp">Explore MCP</Link>
-                </Button>
-              </div>
+              <p className="mt-6 text-sm font-medium tracking-tight text-foreground">
+                <HomeSectionExploreLink href="/docs/mcp">
+                  Explore
+                </HomeSectionExploreLink>
+              </p>
             </div>
           </div>
 
@@ -70,7 +68,7 @@ export function HomeMcpSection() {
               animation: "sono-fade-up 520ms var(--motion-ease) 80ms both",
             }}
           >
-            <HomeParallaxImage
+            <HomeParallaxImageLazy
               src="/images/docs/mcp.png"
               alt="SonoJS MCP for AI coding agents"
               width={1672}

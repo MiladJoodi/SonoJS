@@ -1,0 +1,378 @@
+/**
+ * Shared SonoJS design tokens + Tailwind @theme.
+ * Imported by app/globals.css (site shell) and styles/registry-catalog.css
+ * (catalog surfaces). Keep tokens here so both CSS entries resolve the same
+ * utilities (bg-primary, rounded-md, etc.) without duplicating hand-maintained
+ * values in two places.
+ */
+@custom-variant style-vega (&:where(.style-vega *));
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  @keyframes scroll-fade-reveal-t {
+    from {
+      --scroll-fade-t: 0px;
+    }
+    to {
+      --scroll-fade-t: var(
+        --_scroll-fade-size-t,
+        var(--scroll-fade-size, min(12%, calc(var(--spacing) * 10)))
+      );
+    }
+  }
+  @keyframes scroll-fade-reveal-b {
+    from {
+      --scroll-fade-b: var(
+        --_scroll-fade-size-b,
+        var(--scroll-fade-size, min(12%, calc(var(--spacing) * 10)))
+      );
+    }
+    to {
+      --scroll-fade-b: 0px;
+    }
+  }
+
+  @keyframes tw-shimmer {
+    from {
+      background-position: 100% 0;
+    }
+    to {
+      background-position: 0 0;
+    }
+  }
+
+  @keyframes caret-blink {
+    0%,
+    70%,
+    100% {
+      opacity: 1;
+    }
+    20%,
+    50% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes rainbow {
+    0% {
+      background-position: 0%;
+    }
+    100% {
+      background-position: 200%;
+    }
+  }
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(calc(-100% - var(--gap)));
+    }
+  }
+
+  @keyframes marquee-vertical {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(calc(-100% - var(--gap)));
+    }
+  }
+
+  --animate-caret-blink: caret-blink 1.25s ease-out infinite;
+  --animate-rainbow: rainbow var(--speed, 2s) infinite linear;
+  --animate-marquee: marquee var(--duration) infinite linear;
+  --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
+
+  --breakpoint-3xl: 1600px;
+  /* geist/font sets --font-geist-*; keep Sono aliases for charts/tools. */
+  --font-sono-sans: var(--font-geist-sans);
+  --font-sono-mono: var(--font-geist-mono);
+  --font-sans: var(--font-sono-sans);
+  --font-mono: var(--font-sono-mono);
+  --font-heading: var(--font-sono-sans);
+  /* Tailwind rounded-* â†” SonoJS radius scale (base 12px) */
+  --radius-sm: calc(var(--radius) * 0.5); /* ~6px â€” tooltips */
+  --radius-md: var(--radius); /* 12px â€” controls */
+  --radius-lg: var(--radius); /* 12px â€” surfaces / cards */
+  --radius-xl: calc(var(--radius) * 1.333);
+  --radius-2xl: calc(var(--radius) * 1.667);
+  --radius-3xl: calc(var(--radius) * 2);
+  --radius-4xl: calc(var(--radius) * 2.333);
+  --color-canvas: var(--canvas);
+  --color-border-soft: var(--border-soft);
+  --shadow-soft: var(--shadow-soft);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-surface: var(--surface);
+  --color-surface-foreground: var(--surface-foreground);
+  --color-code: var(--code);
+  --color-code-foreground: var(--code-foreground);
+}
+
+:root {
+  --header-height: 3.5rem;
+
+  /* Layout */
+  --content-max: 1400px;
+  --sidebar-width: 240px;
+  --offer-rail-width: 300px;
+  /* Gap between sticky sidebar column and main content (docs / charts / blocks) */
+  --sidebar-content-gap: var(--space-6);
+  --page-gutter: 16px;
+  --card-padding: 24px;
+  --form-gap: 16px;
+  --section-gap: 48px;
+
+  /* Spacing scale (4px base) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* Typography */
+  --text-h1: 32px;
+  --text-h1-lg: 40px;
+  --text-h2: 26px;
+  --text-h2-lg: 32px;
+  --text-h3: 22px;
+  --text-h3-lg: 24px;
+  --text-h4: 18px;
+  --text-h4-lg: 20px;
+  --text-body: 16px;
+  --text-secondary: 14px;
+  --text-caption: 12px;
+  --text-button: 14px;
+  --text-code: 14px;
+  --leading-body: 1.5;
+  --leading-heading: 1.2;
+  --leading-code: 1.65;
+  --code-tab-size: 2;
+
+  /*
+   * Code block chrome â€” VS Code Dark+ surface (independent of brand primary).
+   * Token colors come from shiki `dark-plus` (inline), not these refs.
+   * Refs kept for docs / future line-number UI.
+   */
+  --code-bg: #1e1e1e;
+  --code-fg: #d4d4d4;
+  --code-border: #2b2b2b;
+  --code-header-bg: #252526;
+  --code-header-fg: #858585;
+  --code-line-number: #858585;
+  --code-selection: #264f78;
+  --code-syntax-keyword: #c586c0;
+  --code-syntax-string: #ce9178;
+  --code-syntax-function: #dcdcaa;
+  --code-syntax-variable: #9cdcfe;
+  --code-syntax-number: #b5cea8;
+  --code-syntax-type: #4ec9b0;
+  --code-syntax-comment: #6a9955;
+  --code-syntax-operator: #d4d4d4;
+  --code: var(--code-bg);
+  --code-foreground: var(--code-fg);
+
+  /* Control sizes â€” SonoJS (default = 46px; same on mobile/tablet/desktop) */
+  --size-button-sm: 40px;
+  --size-button-md: 46px;
+  --size-button-lg: 52px;
+  --size-input: 46px;
+  --size-checkbox: 16px; /* size-4 */
+  --size-switch-w: 32px; /* w-8 */
+  --size-switch-h: 1.15rem;
+  --size-avatar: 32px;
+  --size-badge: 22px;
+  --size-icon-inline: 14px;
+  --size-icon: 16px;
+  --size-icon-lg: 20px;
+  --touch-target: 46px;
+
+  /*
+   * Border radius â€” SonoJS
+   * Base 0.75rem (12px) for controls + cards Â· tooltip ~6px
+   */
+  --radius: 0.75rem;
+  --radius-tooltip: calc(var(--radius) * 0.5);
+  --radius-control: var(--radius);
+  --radius-surface: var(--radius);
+  --radius-button: var(--radius-control);
+  --radius-sidebar-button: var(--radius-control);
+  --radius-input: var(--radius-control);
+  --radius-card: var(--radius-surface);
+  --radius-code: var(--radius-surface);
+  --radius-dialog: var(--radius-surface);
+
+  /*
+   * Soft surface system â€” reuse site-wide
+   * canvas: page shell Â· border-soft: zinc-200/70 Â· shadow-soft: elevated card
+   */
+  --canvas: #f3f3f4;
+  --border-soft: color-mix(in oklab, #e4e4e7 70%, transparent);
+  --shadow-soft:
+    0 2px 4px -1px rgba(10, 10, 12, 0.04),
+    0 28px 56px -28px rgba(10, 10, 12, 0.18);
+
+  /* Neutral chrome â€” primary only on actions */
+  --background: var(--canvas);
+  --foreground: #09090b;
+  --card: #ffffff;
+  --card-foreground: #09090b;
+  --popover: #ffffff;
+  --popover-foreground: #09090b;
+  --primary: #2563eb;
+  --primary-foreground: #ffffff;
+  --primary-hover: #1d4ed8;
+  --primary-hover-foreground: #ffffff;
+  --primary-active: #1e40af;
+  --secondary: #f4f4f5;
+  --secondary-foreground: #18181b;
+  --muted: #f4f4f5;
+  --muted-foreground: #71717a;
+  --accent: #f4f4f5;
+  --accent-foreground: #18181b;
+  --destructive: #dc2626;
+  --border: #e4e4e7;
+  --input: #e4e4e7;
+  --ring: #2563eb;
+  /* Chart: 1â€“2 dual series (navy Ã- orange); 3â€“5 semantic only */
+  --chart-1: #1e3a8a;
+  --chart-2: #ea580c;
+  --chart-3: #f59e0b;
+  --chart-4: #6366f1;
+  --chart-5: #e11d48;
+  /* Neon semantics â€” match style-vega / install cssVars */
+  --chart-up: #16a34a;
+  --chart-down: #e11d48;
+  --chart-mute: #52525b;
+  /* Rainbow button spectrum */
+  --color-1: hsl(0 100% 63%);
+  --color-2: hsl(270 100% 63%);
+  --color-3: hsl(210 100% 63%);
+  --color-4: hsl(195 100% 63%);
+  --color-5: hsl(90 100% 63%);
+  --sidebar: #ffffff;
+  --sidebar-foreground: #09090b;
+  --sidebar-primary: #2563eb;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f4f4f5;
+  --sidebar-accent-foreground: #18181b;
+  --sidebar-border: #e4e4e7;
+  --sidebar-ring: #2563eb;
+  --surface: #f8fafc;
+  --surface-foreground: #09090b;
+  --motion-fast: 180ms;
+  --motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Soft sidebars scrollbars â€” docs / blocks / charts / embed previews */
+  --scrollbar-size: 4px;
+  --scrollbar-track: transparent;
+  --scrollbar-radius: 999px;
+  --scrollbar-thumb: color-mix(in oklab, var(--muted-foreground) 22%, transparent);
+  --scrollbar-thumb-hover: color-mix(
+    in oklab,
+    var(--muted-foreground) 38%,
+    transparent
+  );
+}
+
+/* BlockExample mobile/tablet iframe: only soft scrollbar, not the OS chrome bar. */
+html:has([data-block-embed]) {
+  height: 100%;
+  overflow: hidden;
+}
+html:has([data-block-embed]) body {
+  height: 100%;
+  overflow: hidden;
+}
+
+.dark {
+  --canvas: #09090b;
+  --border-soft: color-mix(in oklab, #27272a 70%, transparent);
+  --shadow-soft:
+    0 2px 4px -1px rgba(0, 0, 0, 0.24),
+    0 28px 56px -28px rgba(0, 0, 0, 0.48);
+
+  --background: var(--canvas);
+  --foreground: #fafafa;
+  --card: #18181b;
+  --card-foreground: #fafafa;
+  --popover: #18181b;
+  --popover-foreground: #fafafa;
+  /* Dark primary #396ef0 â€” closest darker to #3b82f6 with â‰¥4.5:1 vs white */
+  --primary: #396ef0;
+  --primary-foreground: #ffffff;
+  --primary-hover: #1d4ed8;
+  --primary-hover-foreground: #ffffff;
+  --primary-active: #1e40af;
+  --secondary: #27272a;
+  --secondary-foreground: #fafafa;
+  --muted: #27272a;
+  --muted-foreground: #a1a1aa;
+  --accent: #27272a;
+  --accent-foreground: #fafafa;
+  --destructive: #f87171;
+  --border: #27272a;
+  --input: #27272a;
+  --ring: #396ef0;
+  --chart-1: #3b82f6;
+  --chart-2: #f97316;
+  --chart-3: #fbbf24;
+  --chart-4: #818cf8;
+  --chart-5: #fb7185;
+  /* Neon semantics â€” match style-vega / install cssVars */
+  --chart-up: #4ade80;
+  --chart-down: #f25f70;
+  --chart-mute: #d4d4d8;
+  /* Rainbow button spectrum */
+  --color-1: hsl(0 100% 63%);
+  --color-2: hsl(270 100% 63%);
+  --color-3: hsl(210 100% 63%);
+  --color-4: hsl(195 100% 63%);
+  --color-5: hsl(90 100% 63%);
+  --sidebar: #09090b;
+  --sidebar-foreground: #fafafa;
+  --sidebar-primary: #396ef0;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #27272a;
+  --sidebar-accent-foreground: #fafafa;
+  --sidebar-border: #27272a;
+  --sidebar-ring: #396ef0;
+  --surface: #18181b;
+  --surface-foreground: #a1a1aa;
+  /* Code tokens stay Dark Modern in both themes (see :root --code-*) */
+}

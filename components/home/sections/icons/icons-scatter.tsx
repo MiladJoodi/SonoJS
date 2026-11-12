@@ -3,17 +3,15 @@
 import * as React from "react"
 import type { ComponentType, SVGProps } from "react"
 
-import {
-  ClaudeIcon,
-  CodexIcon,
-  CopilotIcon,
-  CursorIcon,
-  NextjsIcon,
-  OpencodeIcon,
-  ReactIcon,
-  TailwindIcon,
-  TypescriptIcon,
-} from "@/components/icons"
+import { NextjsIcon } from "@/components/icons/brand/nextjs"
+import { ReactIcon } from "@/components/icons/brand/react"
+import { TailwindIcon } from "@/components/icons/brand/tailwind"
+import { TypescriptIcon } from "@/components/icons/brand/typescript"
+import { ClaudeIcon } from "@/components/icons/tools/claude"
+import { CodexIcon } from "@/components/icons/tools/codex"
+import { CopilotIcon } from "@/components/icons/tools/copilot"
+import { CursorIcon } from "@/components/icons/tools/cursor"
+import { OpencodeIcon } from "@/components/icons/tools/opencode"
 import { AdobeXdIcon } from "@/registry/icons/adobe-xd"
 import { AppleIcon } from "@/registry/icons/apple"
 import { AsanaIcon } from "@/registry/icons/asana"
@@ -100,24 +98,26 @@ export function IconsScatter({ className }: { className?: string }) {
   const chipRefs = React.useRef<(HTMLDivElement | null)[]>([])
   const rafRef = React.useRef(0)
   const mouseRef = React.useRef<{ x: number; y: number } | null>(null)
+  const sizeRef = React.useRef({ width: 0, height: 0, left: 0, top: 0 })
+  const finePointerRef = React.useRef(false)
 
   const tick = React.useCallback(() => {
     rafRef.current = 0
     const mouse = mouseRef.current
-    const root = rootRef.current
-    if (!root) return
+    const { width, height } = sizeRef.current
+    if (width <= 0 || height <= 0) return
 
-    chipRefs.current.forEach((chip) => {
+    SCATTER.forEach((item, index) => {
+      const chip = chipRefs.current[index]
       if (!chip) return
       if (!mouse) {
         chip.style.setProperty("--mx", "0px")
         chip.style.setProperty("--my", "0px")
         return
       }
-      const rect = chip.getBoundingClientRect()
-      const rootRect = root.getBoundingClientRect()
-      const cx = rect.left + rect.width / 2 - rootRect.left
-      const cy = rect.top + rect.height / 2 - rootRect.top
+      // Lattice % positions - one root size, no per-chip getBoundingClientRect.
+      const cx = (item.x / 100) * width
+      const cy = (item.y / 100) * height
       const dx = mouse.x - cx
       const dy = mouse.y - cy
       const dist = Math.hypot(dx, dy)
@@ -137,11 +137,56 @@ export function IconsScatter({ className }: { className?: string }) {
     rafRef.current = requestAnimationFrame(tick)
   }, [tick])
 
-  React.useEffect(() => {
-    return () => {
-      if (rafRef.current) cancelAnimationFrame(rafRef.current)
+  const syncSize = React.useCallback(() => {
+    const root = rootRef.current
+    if (!root) return
+    const rect = root.getBoundingClientRect()
+    sizeRef.current = {
+      width: rect.width,
+      height: rect.height,
+      left: rect.left,
+      top: rect.top,
     }
   }, [])
+
+  React.useEffect(() => {
+    const root = rootRef.current
+    if (!root) return
+
+    const mq =
+      typeof window.matchMedia === "function"
+        ? window.matchMedia("(pointer: fine)")
+        : null
+    finePointerRef.current = mq?.matches ?? false
+    const onMq = () => {
+      finePointerRef.current = mq?.matches ?? false
+      if (!finePointerRef.current) {
+        mouseRef.current = null
+        schedule()
+      }
+    }
+    mq?.addEventListener("change", onMq)
+
+    syncSize()
+    const ro =
+      typeof ResizeObserver !== "undefined"
+        ? new ResizeObserver(() => syncSize())
+        : null
+    ro?.observe(root)
+
+    const onScroll = () => {
+      // Only remeasure while actively magnetizing (avoids scroll layout thrash).
+      if (finePointerRef.current && mouseRef.current) syncSize()
+    }
+    window.addEventListener("scroll", onScroll, { passive: true })
+
+    return () => {
+      mq?.removeEventListener("change", onMq)
+      ro?.disconnect()
+      window.removeEventListener("scroll", onScroll)
+      if (rafRef.current) cancelAnimationFrame(rafRef.current)
+    }
+  }, [schedule, syncSize])
 
   return (
     <div
@@ -151,13 +196,15 @@ export function IconsScatter({ className }: { className?: string }) {
         className
       )}
       aria-hidden
+      onMouseEnter={() => {
+        if (finePointerRef.current) syncSize()
+      }}
       onMouseMove={(e) => {
-        const root = rootRef.current
-        if (!root) return
-        const rect = root.getBoundingClientRect()
+        if (!finePointerRef.current) return
+        const { left, top } = sizeRef.current
         mouseRef.current = {
-          x: e.clientX - rect.left,
-          y: e.clientY - rect.top,
+          x: e.clientX - left,
+          y: e.clientY - top,
         }
         schedule()
       }}

@@ -1,5 +1,6 @@
 export { AdminShell } from "./admin-shell"
 export { AdminOverview } from "./admin-overview"
+export { AdminDownloadsPanel } from "./admin-downloads-panel"
 export { AdminUsersPanel } from "./admin-users-panel"
 export { AdminUserDetailPanel } from "./admin-user-detail"
 export { AdminPaymentsPanel } from "./admin-payments-panel"

@@ -1,9 +1,7 @@
-import Link from "next/link"
-
 import { HomeShell } from "@/components/home/home-shell"
+import { HomeSectionExploreLink } from "@/components/home/section-explore-link"
 import { HomeSectionHeading } from "@/components/home/section-heading"
-import { HomeParallaxImage } from "@/components/home/sections/parallax-image"
-import { Button } from "@sonojs/ui/components/button"
+import { HomeParallaxImageLazy } from "@/components/home/sections/parallax-image-lazy"
 
 export function HomeToolsSection() {
   return (
@@ -55,11 +53,11 @@ export function HomeToolsSection() {
                 responses, and clear friction without leaving your tab.
               </p>
 
-              <div className="mt-7 w-full sm:w-auto">
-                <Button asChild className="w-full sm:w-auto">
-                  <Link href="/tools">Explore Tools</Link>
-                </Button>
-              </div>
+              <p className="mt-6 text-sm font-medium tracking-tight text-foreground">
+                <HomeSectionExploreLink href="/tools">
+                  Explore
+                </HomeSectionExploreLink>
+              </p>
             </div>
           </div>
 
@@ -69,7 +67,7 @@ export function HomeToolsSection() {
               animation: "sono-fade-up 520ms var(--motion-ease) 80ms both",
             }}
           >
-            <HomeParallaxImage
+            <HomeParallaxImageLazy
               src="/images/docs/tools.png"
               alt="SonoJS developer tools preview"
               width={1672}

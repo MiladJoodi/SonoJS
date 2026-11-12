@@ -1,10 +1,8 @@
-import Link from "next/link"
-
 import { HomeShell } from "@/components/home/home-shell"
+import { HomeSectionExploreLink } from "@/components/home/section-explore-link"
 import { HomeSectionHeading } from "@/components/home/section-heading"
-import { IconsScatter } from "@/components/home/sections/icons/icons-scatter"
+import { IconsScatterLazy } from "@/components/home/sections/icons/icons-scatter-lazy"
 import { siteConfig } from "@/lib/config"
-import { Button } from "@sonojs/ui/components/button"
 
 const FEATURES = [
   "Developer and technology icons",
@@ -83,17 +81,11 @@ export function HomeIconsSection() {
                 ))}
               </ul>
 
-              <div className="mt-7 w-full sm:w-auto">
-                <Button asChild className="w-full sm:w-auto">
-                  <Link
-                    href={ICONS_HREF}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Explore Icons
-                  </Link>
-                </Button>
-              </div>
+              <p className="mt-6 text-sm font-medium tracking-tight text-foreground">
+                <HomeSectionExploreLink href={ICONS_HREF} external>
+                  Explore
+                </HomeSectionExploreLink>
+              </p>
             </div>
           </div>
 
@@ -103,7 +95,7 @@ export function HomeIconsSection() {
               animation: "sono-fade-up 520ms var(--motion-ease) 80ms both",
             }}
           >
-            <IconsScatter />
+            <IconsScatterLazy />
           </div>
         </div>
       </HomeShell>

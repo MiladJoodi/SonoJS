@@ -32,6 +32,8 @@ export type MarketplacePreviewItem = {
   priceLabel: string
   priceCents: number
   href: string
+  /** External live demo when set. */
+  liveUrl: string | null
   stack: MarketplaceStack[]
   updatedAt: string
   /** Index in `marketplaceProjects` - later = newer when dates tie. */
@@ -121,6 +123,7 @@ export function toMarketplaceItem(
     priceLabel: project.priceLabel || "Free",
     priceCents: project.priceCents ?? 0,
     href: `/marketplace/${project.slug}`,
+    liveUrl: project.liveUrl?.trim() ? project.liveUrl.trim() : null,
     stack: project.stack,
     updatedAt: project.updatedAt,
     catalogIndex,

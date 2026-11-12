@@ -4,7 +4,7 @@ import { pageMetadata } from "@/lib/seo"
 export const metadata = pageMetadata({
   title: "Pricing",
   description:
-    "SonoJS plans: Guest, Free, and Pro - browse public docs, unlock member components, or get the full library.",
+    "SonoJS pricing: Free account for public and member access, or Pro Monthly and Pro Yearly for the full library. One payment per period. No automatic renewal.",
   path: "/pricing",
 })
 

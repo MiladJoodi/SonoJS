@@ -31,19 +31,15 @@ export function HomeHero() {
         }}
       />
 
-      <HomeShell className="flex flex-1 flex-col justify-center pt-6 pb-[max(3rem,calc(1.5rem+env(safe-area-inset-bottom)))] sm:pt-14 sm:pb-20 lg:pt-16 lg:pb-24">
-        <div className="grid items-start gap-7 sm:gap-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-center lg:gap-[clamp(2.5rem,6vw,5.5rem)]">
+      {/* Shell stays top-padded (not justify-center) — avoids viewport/scrollbar CLS. */}
+      <HomeShell className="flex flex-1 flex-col pt-6 pb-[max(3rem,calc(1.5rem+env(safe-area-inset-bottom)))] sm:pt-14 sm:pb-20 lg:pt-16 lg:pb-24">
+        <div className="grid gap-7 sm:gap-10 max-lg:items-start lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-center lg:gap-[clamp(2.5rem,6vw,5.5rem)]">
           <section
-            className="min-w-0 text-start"
+            className="min-w-0 text-start lg:self-center"
             aria-labelledby="home-hero-heading"
           >
-            <p
-              className="mb-3.5 sm:mb-8"
-              style={{
-                animation:
-                  "sono-fade-in var(--motion-fast) var(--motion-ease) both",
-              }}
-            >
+            {/* ATF paints fully opaque — no opacity-0 / translateY entrance (CLS). */}
+            <p className="mb-3.5 sm:mb-8">
               <span
                 className="inline-block bg-primary px-[0.55em] py-[0.18em] text-[clamp(1.5rem,5vw,2.25rem)] font-semibold tracking-[-0.03em] text-primary-foreground"
                 style={{
@@ -57,31 +53,16 @@ export function HomeHero() {
             <h1
               id="home-hero-heading"
               className="text-balance text-[clamp(2rem,7.5vw,3.75rem)] leading-[1.08] font-semibold tracking-[-0.04em] text-foreground"
-              style={{
-                animation: "sono-fade-up 520ms var(--motion-ease) 60ms both",
-              }}
             >
-              React components, blocks, and tools for your projects.
+              React UI you can copy, customize, and keep.
             </h1>
 
-            <p
-              className="mt-3.5 max-w-[36em] text-[clamp(0.9375rem,3.5vw,1.125rem)] leading-[1.6] text-muted-foreground sm:mt-6"
-              style={{
-                animation: "sono-fade-up 520ms var(--motion-ease) 120ms both",
-              }}
-            >
-              A customizable React UI library with ready-to-use components,
-              interface blocks, charts, and icons. Use the SonoJS CLI to add
-              components to your project, or connect an AI coding agent through
-              MCP.
+            <p className="mt-3.5 max-w-[36em] text-[clamp(0.9375rem,3.5vw,1.125rem)] leading-[1.6] text-muted-foreground sm:mt-6">
+              Production-ready components, blocks, and charts. Drop them into
+              your codebase with the CLI, or connect AI agents with MCP.
             </p>
 
-            <div
-              className="mt-6 flex flex-row flex-wrap items-center justify-center gap-2.5 sm:mt-9 sm:justify-start sm:gap-3"
-              style={{
-                animation: "sono-fade-up 520ms var(--motion-ease) 180ms both",
-              }}
-            >
+            <div className="mt-6 flex flex-row flex-wrap items-center justify-center gap-2.5 sm:mt-9 sm:justify-start sm:gap-3">
               <Button asChild className="shrink-0">
                 <Link href="/docs">Get Started</Link>
               </Button>
@@ -90,22 +71,12 @@ export function HomeHero() {
               </Button>
             </div>
 
-            <div
-              className="mt-5 sm:mt-7"
-              style={{
-                animation: "sono-fade-up 520ms var(--motion-ease) 240ms both",
-              }}
-            >
+            <div className="mt-5 sm:mt-7">
               <PlatformBadges className="[&>div>ul]:mx-auto sm:[&>div>ul]:mx-0" />
             </div>
           </section>
 
-          <div
-            className="min-w-0"
-            style={{
-              animation: "sono-fade-up 520ms var(--motion-ease) 200ms both",
-            }}
-          >
+          <div className="min-w-0">
             <HeroShowcase />
           </div>
         </div>

@@ -324,41 +324,10 @@ export function PricingView() {
             Pricing
           </p>
           <h1 className="text-balance text-[clamp(1.75rem,5vw,2.75rem)] font-semibold tracking-[-0.03em] text-foreground">
-            Free, Monthly, or Yearly
+            Free to start. Pro when you need it.
           </h1>
           <p className="mx-auto mt-4 max-w-lg text-base text-muted-foreground">
-            Free to start. Pro unlocks the full library for a fixed period.
-            Renewal is manual—there are no automatic charges for the next
-            period.
-          </p>
-          <p className="mx-auto mt-3 max-w-lg text-sm text-muted-foreground">
-            <Link
-              href={siteConfig.legal.terms}
-              className="cursor-pointer font-medium text-foreground underline-offset-4 hover:underline"
-            >
-              Terms
-            </Link>
-            {" · "}
-            <Link
-              href={siteConfig.legal.privacy}
-              className="cursor-pointer font-medium text-foreground underline-offset-4 hover:underline"
-            >
-              Privacy
-            </Link>
-            {" · "}
-            <Link
-              href={siteConfig.legal.license}
-              className="cursor-pointer font-medium text-foreground underline-offset-4 hover:underline"
-            >
-              License
-            </Link>
-            {" · "}
-            <Link
-              href={siteConfig.legal.refund}
-              className="cursor-pointer font-medium text-foreground underline-offset-4 hover:underline"
-            >
-              Refunds
-            </Link>
+            One payment per period. No automatic renewal.
           </p>
         </motion.header>
 
@@ -483,43 +452,41 @@ export function PricingView() {
         >
           <ProIcon className="size-3.5 shrink-0 text-primary" />
           <span>
-            Yearly ={" "}
+            Pro Yearly works out to{" "}
             <span className="font-medium text-foreground">$8.25/mo</span>
             {" · "}
-            save ~31% vs Monthly
+            about 31% less than paying Monthly for a year
           </span>
         </motion.p>
 
-        <p className="mx-auto mt-8 max-w-2xl text-center text-sm leading-relaxed text-muted-foreground">
-          By purchasing Pro you agree to our{" "}
+        <p className="mx-auto mt-8 max-w-2xl text-center text-sm text-muted-foreground">
           <Link
             href={siteConfig.legal.terms}
             className="cursor-pointer font-medium text-foreground underline-offset-4 hover:underline"
           >
             Terms
           </Link>
-          ,{" "}
+          {" · "}
           <Link
             href={siteConfig.legal.privacy}
             className="cursor-pointer font-medium text-foreground underline-offset-4 hover:underline"
           >
             Privacy
           </Link>
-          ,{" "}
+          {" · "}
           <Link
             href={siteConfig.legal.license}
             className="cursor-pointer font-medium text-foreground underline-offset-4 hover:underline"
           >
             License
           </Link>
-          , and{" "}
+          {" · "}
           <Link
             href={siteConfig.legal.refund}
             className="cursor-pointer font-medium text-foreground underline-offset-4 hover:underline"
           >
-            Refund
-          </Link>{" "}
-          policies. Pro is digital access delivered after payment confirmation.
+            Refunds
+          </Link>
         </p>
       </div>
     </div>

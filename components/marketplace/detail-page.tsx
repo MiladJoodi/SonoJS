@@ -7,7 +7,11 @@ import { CheckIcon } from "lucide-react"
 import { CodeBlockHeader } from "@/components/docs/code-block-header"
 import { CopyButton } from "@/components/docs/copy-button"
 import { MarketplaceDetailGallery } from "@/components/marketplace/detail-gallery"
-import { MarketplaceDetailPurchase } from "@/components/marketplace/detail-purchase"
+import {
+  MarketplaceDetailActions,
+  MarketplaceDetailPurchase,
+} from "@/components/marketplace/detail-purchase"
+import { MarketplaceDownloadButton } from "@/components/marketplace/marketplace-download-button"
 import { MarketplaceProductCard } from "@/components/marketplace/product-card"
 import type { MarketplacePreviewDetail } from "@/lib/marketplace-preview-data"
 
@@ -19,32 +23,11 @@ function SectionLabel({ children }: { children: ReactNode }) {
   )
 }
 
-function formatDate(iso: string) {
-  try {
-    return new Intl.DateTimeFormat("en", {
-      month: "short",
-      day: "numeric",
-      year: "numeric",
-    }).format(new Date(iso))
-  } catch {
-    return iso
-  }
-}
-
 export function MarketplaceDetailPage({
   detail,
-  downloadCta,
 }: {
   detail: MarketplacePreviewDetail
-  downloadCta: ReactNode
 }) {
-  const specs = [
-    ["Version", `v${detail.version}`],
-    ["Last update", formatDate(detail.updatedAt)],
-    ["Pages", String(detail.screens)],
-    ["Category", detail.categoryLabel],
-  ] as const
-
   return (
     <div data-marketplace="" className="min-h-0 flex-1 bg-[var(--sm-bg)] text-[var(--sm-text)]">
       <div className="mx-auto w-full max-w-[1400px] px-4 py-5 sm:px-6 sm:py-7 lg:px-8 lg:py-8">
@@ -60,7 +43,7 @@ export function MarketplaceDetailPage({
             <div className="lg:hidden">
               <MarketplaceDetailPurchase
                 detail={detail}
-                downloadCta={downloadCta}
+                showActions={false}
               />
             </div>
 
@@ -137,44 +120,6 @@ export function MarketplaceDetailPage({
                     </div>
                   </section>
                 ) : null}
-
-                <section className="grid gap-6 px-5 py-5 sm:grid-cols-2 sm:gap-8 sm:px-6 sm:py-6">
-                  <div className="space-y-3">
-                    <SectionLabel>Details</SectionLabel>
-                    <dl className="space-y-2">
-                      {specs.map(([k, v]) => (
-                        <div
-                          key={k}
-                          className="flex items-baseline justify-between gap-4 text-sm"
-                        >
-                          <dt className="text-[var(--sm-text-faint)]">{k}</dt>
-                          <dd className="text-end font-medium text-[var(--sm-text)]">
-                            {v}
-                          </dd>
-                        </div>
-                      ))}
-                    </dl>
-                  </div>
-                  {detail.requirements.length > 0 ? (
-                    <div className="space-y-3">
-                      <SectionLabel>You need</SectionLabel>
-                      <ul className="space-y-2">
-                        {detail.requirements.map((item) => (
-                          <li
-                            key={item}
-                            className="flex items-center gap-2 text-sm text-[var(--sm-text)]"
-                          >
-                            <span
-                              className="size-1 shrink-0 rounded-full bg-[var(--sm-text-faint)]"
-                              aria-hidden
-                            />
-                            {item}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ) : null}
-                </section>
               </div>
             </article>
           </div>
@@ -183,7 +128,9 @@ export function MarketplaceDetailPage({
             <div className="sticky top-24">
               <MarketplaceDetailPurchase
                 detail={detail}
-                downloadCta={downloadCta}
+                downloadCta={
+                  <MarketplaceDownloadButton project={detail.project} />
+                }
               />
             </div>
           </aside>
@@ -209,6 +156,22 @@ export function MarketplaceDetailPage({
             </div>
           </section>
         ) : null}
+
+        {/* Space for sticky Download / Live bar (tab bar hidden on product pages). */}
+        <div
+          className="h-[calc(4.75rem+env(safe-area-inset-bottom,0px))] lg:hidden"
+          aria-hidden
+        />
+      </div>
+
+      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-[var(--sm-border)] bg-[var(--sm-bg-elevated)]/95 px-4 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom,0px))] backdrop-blur-md lg:hidden">
+        <MarketplaceDetailActions
+          detail={detail}
+          downloadCta={
+            <MarketplaceDownloadButton project={detail.project} />
+          }
+          className="mx-auto max-w-lg"
+        />
       </div>
     </div>
   )

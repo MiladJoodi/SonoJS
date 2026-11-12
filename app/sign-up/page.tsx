@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 
-import { AuthPageShell, SignUpForm } from "@/components/auth"
+import { AuthPageShell } from "@/components/auth/auth-card"
+import { SignUpForm } from "@/components/auth/sign-up-form"
 
 export const metadata: Metadata = {
   title: "Sign up",

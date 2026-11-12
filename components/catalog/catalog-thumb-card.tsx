@@ -54,6 +54,7 @@ export function CatalogThumbCard({
   return (
     <Link
       href={href}
+      prefetch={false}
       aria-label={title}
       className={cn(
         "group flex w-full cursor-pointer flex-col overflow-hidden rounded-[12px] border border-border/70 bg-card text-start no-underline outline-none",

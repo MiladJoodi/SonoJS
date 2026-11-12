@@ -1,5 +1,4 @@
 export { PricingView } from "./pricing-view"
-export { PricingFarhadView } from "./pricing-farhad-view"
 export { CheckoutReturnBanner } from "./checkout-return-banner"
 export {
   COMPARISON,

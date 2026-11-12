@@ -2,7 +2,10 @@ export { MarketplaceCatalogPage } from "./catalog-page"
 export { MarketplaceCategoryRail } from "./category-rail"
 export { MarketplaceDetailGallery } from "./detail-gallery"
 export { MarketplaceDetailPage } from "./detail-page"
-export { MarketplaceDetailPurchase } from "./detail-purchase"
+export {
+  MarketplaceDetailActions,
+  MarketplaceDetailPurchase,
+} from "./detail-purchase"
 export { MarketplaceFeaturedSection } from "./featured-section"
 export { MarketplaceHero } from "./hero"
 export { MarketplaceDownloadButton } from "./marketplace-download-button"

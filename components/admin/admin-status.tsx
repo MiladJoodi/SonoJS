@@ -40,7 +40,9 @@ function toneForStatus(status: string | null | undefined): Tone {
     return "danger"
   }
 
-  if (s === "manual" || s === "stripe") return "info"
+  if (s === "manual" || s === "stripe" || s === "zip" || s === "external") {
+    return "info"
+  }
 
   return "muted"
 }

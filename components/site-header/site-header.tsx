@@ -1,5 +1,3 @@
-"use client"
-
 import Link from "next/link"
 
 import { AuthControls } from "@/components/site-header/auth-controls"
@@ -10,8 +8,11 @@ import { ModeSwitcher } from "@/components/site-header/mode-switcher"
 // import { XLink } from "@/components/site-header/x-link"
 import { siteConfig } from "@/lib/config"
 import { cn } from "@/lib/utils"
-import { Separator } from "@sonojs/ui/components/separator"
 
+/**
+ * Server shell + client islands (MainNav, ModeSwitcher, AuthControls).
+ * Keeps nav out of the Clerk auth chunk so header links hydrate independently.
+ */
 export function SiteHeader({
   initialSignedIn = false,
   sticky = true,
@@ -32,7 +33,7 @@ export function SiteHeader({
       )}
     >
       <div className="container-wrapper">
-        <div className="relative flex h-(--header-height) items-center gap-2 sm:gap-2.5 **:data-[slot=separator]:h-4!">
+        <div className="relative flex h-(--header-height) items-center gap-2 sm:gap-2.5">
           <Link
             href="/"
             prefetch={false}
@@ -57,7 +58,11 @@ export function SiteHeader({
             <GithubLink />
             {/* <XLink /> */}
             {/* <LinkedinLink /> */}
-            <Separator orientation="vertical" className="mx-0.5 hidden sm:block" />
+            {/* Static divider — avoid Radix Separator + hidden/sm:block (stuck display:none). */}
+            <span
+              aria-hidden
+              className="mx-0.5 inline-block h-4 w-px shrink-0 self-center bg-border max-sm:hidden"
+            />
             <ModeSwitcher />
             <AuthControls initialSignedIn={initialSignedIn} />
           </div>

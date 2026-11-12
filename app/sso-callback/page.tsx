@@ -3,7 +3,7 @@
 import { HandleSSOCallback } from "@clerk/nextjs"
 import { useRouter } from "next/navigation"
 
-import { AuthPageShell } from "@/components/auth"
+import { AuthPageShell } from "@/components/auth/auth-card"
 import { takeAuthReturnPath } from "@/lib/auth-return-path"
 import { Spinner } from "@sonojs/ui/components/spinner"
 

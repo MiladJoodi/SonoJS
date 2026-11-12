@@ -21,16 +21,11 @@ import {
   formatCandleCompact,
   formatCandleDay,
   formatCandlePrice,
-  formatCandleTime,
   type MarketCandle,
 } from "@/registry/charts/_lib/stock-shared"
 import { useChartDir } from "@/registry/charts/_lib/use-chart-dir"
 
 type OhlcvRow = MarketCandle & { vol: number }
-
-type Timeframe = "1H" | "4H" | "1D" | "1W"
-
-const TIMEFRAMES: readonly Timeframe[] = ["1H", "4H", "1D", "1W"] as const
 
 const NARROW_MQ = "(max-width: 639px)"
 const AXIS_TICK_FILL =
@@ -41,6 +36,8 @@ const BAR_TOOLTIP_CURSOR = {
 
 const BTC_START = 67_420
 const BTC_START_TIME = Date.UTC(2026, 2, 10, 14, 0)
+/** Home demo is fixed to the daily series. */
+const DAY_MS = 24 * 60 * 60 * 1000
 
 const chartConfig = {
   candle: { label: "Close", color: CANDLE_UP },
@@ -86,26 +83,11 @@ function generateOhlcv(
   return rows
 }
 
-const SERIES: Record<Timeframe, OhlcvRow[]> = {
-  "1H": generateOhlcv(96, 4201, 60 * 60 * 1000, BTC_START, BTC_START_TIME, 18),
-  "4H": generateOhlcv(84, 4202, 4 * 60 * 60 * 1000, BTC_START, BTC_START_TIME, 28),
-  "1D": generateOhlcv(72, 4203, 24 * 60 * 60 * 1000, BTC_START, BTC_START_TIME, 42),
-  "1W": generateOhlcv(52, 4204, 7 * 24 * 60 * 60 * 1000, BTC_START, BTC_START_TIME, 55),
-}
+const SERIES_1D = generateOhlcv(72, 4203, DAY_MS, BTC_START, BTC_START_TIME, 42)
 
 const MIN_ZOOM_CANDLES = 8
-const DEFAULT_VISIBLE: Record<Timeframe, number> = {
-  "1H": 40,
-  "4H": 36,
-  "1D": 32,
-  "1W": 24,
-}
-const NARROW_VISIBLE: Record<Timeframe, number> = {
-  "1H": 28,
-  "4H": 24,
-  "1D": 22,
-  "1W": 16,
-}
+const DEFAULT_VISIBLE = 32
+const NARROW_VISIBLE = 22
 
 function useNarrowViewport() {
   const [narrow, setNarrow] = React.useState(false)
@@ -129,16 +111,7 @@ function formatSessionPct(value: number, locale: string) {
   }).format(value)}%`
 }
 
-function formatAxisLabel(time: number, timeframe: Timeframe, locale: string) {
-  if (timeframe === "1H" || timeframe === "4H") {
-    return formatCandleTime(time, locale)
-  }
-  if (timeframe === "1W") {
-    return new Intl.DateTimeFormat(locale, {
-      month: "short",
-      day: "numeric",
-    }).format(new Date(time))
-  }
+function formatAxisLabel(time: number, locale: string) {
   return formatCandleDay(time, locale)
 }
 
@@ -191,7 +164,6 @@ function OhlcRow({
 type BtcTooltipProps = {
   active?: boolean
   payload?: Array<{ payload?: OhlcvRow }>
-  timeframe: Timeframe
   locale: string
   compact?: boolean
 }
@@ -199,7 +171,6 @@ type BtcTooltipProps = {
 function BtcTooltip({
   active,
   payload,
-  timeframe,
   locale,
   compact = false,
 }: BtcTooltipProps) {
@@ -215,7 +186,7 @@ function BtcTooltip({
     return (
       <div className="pointer-events-none min-w-0 max-w-[9.5rem] rounded-[8px] border border-border/70 bg-card px-2 py-1.5 shadow-soft">
         <p className="text-[9px] font-medium leading-tight text-muted-foreground">
-          {formatAxisLabel(row.time, timeframe, locale)}
+          {formatAxisLabel(row.time, locale)}
         </p>
         <div className="mt-1 flex items-baseline gap-1.5">
           <p
@@ -239,7 +210,7 @@ function BtcTooltip({
     <div className="pointer-events-none min-w-[11.5rem] rounded-[12px] border border-border/70 bg-card px-3 py-2.5 shadow-soft">
       <div className="flex items-center justify-between gap-3">
         <p className="text-[11px] font-medium text-muted-foreground">
-          {formatAxisLabel(row.time, timeframe, locale)}
+          {formatAxisLabel(row.time, locale)}
         </p>
         <span
           className="rounded-md px-1.5 py-0.5 text-[10px] font-semibold tabular-nums"
@@ -285,7 +256,7 @@ function BtcTooltip({
 
 export type HomeCandlestickChartProps = {
   className?: string
-  /** Renders after the timeframe tabs (e.g. next-chart control). */
+  /** Renders in the header trailing slot (e.g. next-chart control). */
   trailing?: React.ReactNode
 }
 
@@ -299,31 +270,26 @@ export function HomeCandlestickChart({
   const chartAreaRef = React.useRef<HTMLDivElement>(null)
   const locale = "en"
 
-  const [timeframe, setTimeframe] = React.useState<Timeframe>("1D")
-  const fullData = SERIES[timeframe]
+  const fullData = SERIES_1D
   const seriesLast = Math.max(0, fullData.length - 1)
-  const defaultVisible = narrow
-    ? NARROW_VISIBLE[timeframe]
-    : DEFAULT_VISIBLE[timeframe]
+  const defaultVisible = narrow ? NARROW_VISIBLE : DEFAULT_VISIBLE
 
   const [view, setView] = React.useState(() => {
     const end = seriesLast
-    const start = Math.max(0, end - (DEFAULT_VISIBLE["1D"] - 1))
+    const start = Math.max(0, end - (DEFAULT_VISIBLE - 1))
     return { start, end }
   })
   const [seriesTrack, setSeriesTrack] = React.useState({
-    timeframe,
     seriesLast,
     defaultVisible,
   })
   if (
-    seriesTrack.timeframe !== timeframe ||
     seriesTrack.seriesLast !== seriesLast ||
     seriesTrack.defaultVisible !== defaultVisible
   ) {
     const end = seriesLast
     const start = Math.max(0, end - (defaultVisible - 1))
-    setSeriesTrack({ timeframe, seriesLast, defaultVisible })
+    setSeriesTrack({ seriesLast, defaultVisible })
     setView({ start, end })
   }
 
@@ -345,9 +311,7 @@ export function HomeCandlestickChart({
       ? ((active.close - active.open) / active.open) * 100
       : 0
   const sessionUp = sessionPct >= 0
-  const timeLabel = active
-    ? formatAxisLabel(active.time, timeframe, locale)
-    : ""
+  const timeLabel = active ? formatAxisLabel(active.time, locale) : ""
 
   const yAxisWidth = narrow ? 44 : 52
   const chartMargin = React.useMemo(
@@ -443,16 +407,15 @@ export function HomeCandlestickChart({
   const tooltipContent = React.useCallback(
     (props: Record<string, unknown>) => (
       <BtcTooltip
-        {...(props as Omit<BtcTooltipProps, "timeframe" | "locale" | "compact">)}
-        timeframe={timeframe}
+        {...(props as Omit<BtcTooltipProps, "locale" | "compact">)}
         locale={locale}
         compact={narrow}
       />
     ),
-    [locale, narrow, timeframe]
+    [locale, narrow]
   )
 
-  const ariaLabel = `Bitcoin BTC/USD candlestick, ${timeframe}, ${timeLabel} last ${formatCandlePrice(total, locale)}`
+  const ariaLabel = `Bitcoin BTC/USD daily candlestick, ${timeLabel} last ${formatCandlePrice(total, locale)}`
 
   return (
     <div
@@ -497,35 +460,9 @@ export function HomeCandlestickChart({
             </div>
           </div>
 
-          <div className="flex shrink-0 items-center gap-2">
-            <div
-              role="tablist"
-              aria-label="Chart timeframe"
-              className="flex items-center gap-0.5"
-            >
-              {TIMEFRAMES.map((tf) => {
-                const selected = tf === timeframe
-                return (
-                  <button
-                    key={tf}
-                    type="button"
-                    role="tab"
-                    aria-selected={selected}
-                    onClick={() => setTimeframe(tf)}
-                    className={cn(
-                      "h-8 min-w-8 cursor-pointer rounded-md border px-2 text-xs font-medium tabular-nums transition-colors",
-                      selected
-                        ? "border-primary text-foreground"
-                        : "border-transparent text-muted-foreground hover:bg-muted/70 hover:text-foreground"
-                    )}
-                  >
-                    {tf}
-                  </button>
-                )
-              })}
-            </div>
-            {trailing}
-          </div>
+          {trailing ? (
+            <div className="flex shrink-0 items-center gap-2">{trailing}</div>
+          ) : null}
         </div>
 
         <div
@@ -533,13 +470,13 @@ export function HomeCandlestickChart({
           dir="ltr"
           role="img"
           aria-label={ariaLabel}
-          className="touch-pan-y"
+          className="touch-pan-y outline-none [-webkit-tap-highlight-color:transparent] focus:outline-none focus-visible:outline-none [&_.recharts-wrapper]:outline-none [&_.recharts-surface]:outline-none [&_svg]:outline-none [&_svg]:focus:outline-none [&_svg]:focus-visible:outline-none"
         >
           <ChartContainer
             config={chartConfig}
             className={cn(
               chartBarContainerClassName,
-              "aspect-auto h-[240px] max-h-[300px] max-w-none sm:h-[280px]"
+              "aspect-auto h-[240px] max-h-[300px] max-w-none outline-none sm:h-[280px] [-webkit-tap-highlight-color:transparent] focus:outline-none focus-visible:outline-none"
             )}
           >
             <BarChart
@@ -564,7 +501,7 @@ export function HomeCandlestickChart({
                 minTickGap={narrow ? 48 : 40}
                 tick={{ fontSize: 11, fill: AXIS_TICK_FILL }}
                 tickFormatter={(value: number) =>
-                  formatAxisLabel(Number(value), timeframe, locale)
+                  formatAxisLabel(Number(value), locale)
                 }
               />
               <YAxis

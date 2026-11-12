@@ -2,7 +2,8 @@
 
 import type { ComponentType, SVGProps } from "react"
 
-import { GmailIcon, ThreejsIcon } from "@/components/icons"
+import { GmailIcon } from "@/components/icons/stack/gmail"
+import { ThreejsIcon } from "@/components/icons/stack/threejs"
 import { cn } from "@/lib/utils"
 import { AppleIcon } from "@/registry/icons/apple"
 import { BitcoinIcon } from "@/registry/icons/bitcoin"
@@ -119,9 +120,10 @@ export function HomeOrbitStage({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "relative mx-auto flex aspect-square w-full max-w-[22rem] items-center justify-center sm:max-w-[26rem]",
+        "relative mx-auto flex w-full items-center justify-center",
         className
       )}
+      style={{ width: "100%", maxWidth: "26rem", aspectRatio: "1 / 1" }}
     >
       <OrbitingCircles
         className="border-0 bg-transparent shadow-none"

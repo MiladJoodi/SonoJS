@@ -1,10 +1,8 @@
-import Link from "next/link"
-
 import { HomeShell } from "@/components/home/home-shell"
+import { HomeSectionExploreLink } from "@/components/home/section-explore-link"
 import { HomeSectionHeading } from "@/components/home/section-heading"
-import { HomeChatComposer } from "./chat-composer"
+import { HomeChatComposerLazy } from "./chat-composer-lazy"
 import { getBlocksStats } from "@/lib/blocks-nav"
-import { Button } from "@sonojs/ui/components/button"
 
 const FEATURES = [
   "Model picker and send controls",
@@ -83,17 +81,14 @@ export function HomeBlocksSection() {
               </ul>
 
               <p className="mt-6 text-sm font-medium tabular-nums tracking-tight text-foreground">
-                <span className="text-[1.25rem] font-semibold text-primary">
+                <span className="me-2.5 text-[1.25rem] font-semibold text-primary">
                   {ready}+
-                </span>{" "}
+                </span>
                 blocks. Ready to build with.
+                <HomeSectionExploreLink href="/blocks" className="ms-3">
+                  Explore
+                </HomeSectionExploreLink>
               </p>
-
-              <div className="mt-7 w-full sm:w-auto">
-                <Button asChild className="w-full sm:w-auto">
-                  <Link href="/blocks">Explore Blocks</Link>
-                </Button>
-              </div>
             </div>
           </div>
 
@@ -104,9 +99,7 @@ export function HomeBlocksSection() {
             }}
           >
             {/* overflow-visible + bottom pad so shadow-soft on input/bubbles isn’t clipped */}
-            <div className="flex h-[22rem] w-full overflow-visible pb-5 sm:h-[25rem] sm:pb-6 lg:h-[27rem]">
-              <HomeChatComposer />
-            </div>
+            <HomeChatComposerLazy />
           </div>
         </div>
       </HomeShell>

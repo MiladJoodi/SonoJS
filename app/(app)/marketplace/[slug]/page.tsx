@@ -1,7 +1,6 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 
-import { MarketplaceDownloadButton } from "@/components/marketplace/marketplace-download-button"
 import { MarketplaceDetailPage } from "@/components/marketplace/detail-page"
 import { marketplaceProjects } from "@/lib/marketplace-catalog"
 import { getMarketplacePreviewDetail } from "@/lib/marketplace-preview-data"
@@ -42,10 +41,5 @@ export default async function MarketplaceProjectPage({ params }: PageProps) {
   const detail = getMarketplacePreviewDetail(slug)
   if (!detail) notFound()
 
-  return (
-    <MarketplaceDetailPage
-      detail={detail}
-      downloadCta={<MarketplaceDownloadButton project={detail.project} />}
-    />
-  )
+  return <MarketplaceDetailPage detail={detail} />
 }

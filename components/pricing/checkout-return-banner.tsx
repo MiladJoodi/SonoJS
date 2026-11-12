@@ -136,7 +136,7 @@ export function CheckoutReturnBanner() {
         <Loader2Icon className="size-4 animate-spin text-primary" aria-hidden />
         <AlertTitle>Confirming your payment</AlertTitle>
         <AlertDescription>
-          Stripe checkout finished. We are verifying your subscription - this
+          Stripe checkout finished. We are verifying your Pro access. This
           usually takes a few seconds.
         </AlertDescription>
       </Alert>
@@ -154,8 +154,8 @@ export function CheckoutReturnBanner() {
         <AlertTitle>Still confirming your payment</AlertTitle>
         <AlertDescription className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <span>
-            Your payment may still be processing. Check again in a moment -
-            Pro unlocks as soon as the subscription is confirmed.
+            Your payment may still be processing. Check again in a moment.
+            Pro unlocks as soon as access is confirmed.
           </span>
           <Button
             type="button"

@@ -18,6 +18,7 @@ type HomeParallaxImageProps = {
 
 /**
  * Home section product shot: not draggable; soft slide toward the cursor.
+ * Fine-pointer only; rect cached via ResizeObserver (no per-move layout thrash).
  */
 export function HomeParallaxImage({
   src,
@@ -32,6 +33,9 @@ export function HomeParallaxImage({
   const rafRef = React.useRef(0)
   const targetRef = React.useRef({ x: 0, y: 0 })
   const currentRef = React.useRef({ x: 0, y: 0 })
+  const sizeRef = React.useRef({ width: 0, height: 0, left: 0, top: 0 })
+  const finePointerRef = React.useRef(false)
+  const hoveringRef = React.useRef(false)
 
   const tick = React.useCallback(() => {
     const img = imgRef.current
@@ -56,27 +60,76 @@ export function HomeParallaxImage({
     rafRef.current = requestAnimationFrame(tick)
   }, [tick])
 
-  React.useEffect(() => {
-    return () => {
-      if (rafRef.current) cancelAnimationFrame(rafRef.current)
+  const syncRect = React.useCallback(() => {
+    const root = rootRef.current
+    if (!root) return
+    const rect = root.getBoundingClientRect()
+    sizeRef.current = {
+      width: rect.width,
+      height: rect.height,
+      left: rect.left,
+      top: rect.top,
     }
   }, [])
+
+  React.useEffect(() => {
+    const root = rootRef.current
+    if (!root) return
+
+    const mq =
+      typeof window.matchMedia === "function"
+        ? window.matchMedia("(pointer: fine)")
+        : null
+    finePointerRef.current = mq?.matches ?? false
+    const onMq = () => {
+      finePointerRef.current = mq?.matches ?? false
+      if (!finePointerRef.current) {
+        targetRef.current = { x: 0, y: 0 }
+        schedule()
+      }
+    }
+    mq?.addEventListener("change", onMq)
+
+    syncRect()
+    const ro =
+      typeof ResizeObserver !== "undefined"
+        ? new ResizeObserver(() => syncRect())
+        : null
+    ro?.observe(root)
+
+    const onScroll = () => {
+      // Only remeasure while the pointer is over the image.
+      if (finePointerRef.current && hoveringRef.current) syncRect()
+    }
+    window.addEventListener("scroll", onScroll, { passive: true })
+
+    return () => {
+      mq?.removeEventListener("change", onMq)
+      ro?.disconnect()
+      window.removeEventListener("scroll", onScroll)
+      if (rafRef.current) cancelAnimationFrame(rafRef.current)
+    }
+  }, [schedule, syncRect])
 
   return (
     <div
       ref={rootRef}
       className="relative w-full select-none"
       onMouseMove={(e) => {
-        const root = rootRef.current
-        if (!root) return
-        const rect = root.getBoundingClientRect()
-        if (rect.width <= 0 || rect.height <= 0) return
-        const nx = ((e.clientX - rect.left) / rect.width) * 2 - 1
-        const ny = ((e.clientY - rect.top) / rect.height) * 2 - 1
+        if (!finePointerRef.current) return
+        const { width, height, left, top } = sizeRef.current
+        if (width <= 0 || height <= 0) return
+        const nx = ((e.clientX - left) / width) * 2 - 1
+        const ny = ((e.clientY - top) / height) * 2 - 1
         targetRef.current = { x: nx * SLIDE, y: ny * SLIDE }
         schedule()
       }}
+      onMouseEnter={() => {
+        hoveringRef.current = true
+        if (finePointerRef.current) syncRect()
+      }}
       onMouseLeave={() => {
+        hoveringRef.current = false
         targetRef.current = { x: 0, y: 0 }
         schedule()
       }}

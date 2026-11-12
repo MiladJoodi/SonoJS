@@ -27,7 +27,6 @@ import {
   isMobileBottomNavMore,
   mobileBottomNav,
   MOBILE_BOTTOM_NAV_CLEARANCE,
-  MOBILE_BOTTOM_NAV_DOCK_HEIGHT,
   shouldShowMobileBottomNav,
 } from "@/lib/mobile-nav"
 import { cn } from "@/lib/utils"
@@ -59,7 +58,10 @@ const MORE_ICONS: Record<string, LucideIcon> = {
   "https://icons.sonojs.com": ShapesIcon,
 }
 
-/** v1 — soft pill active, stroke icons, no fill clutter. */
+/**
+ * Instagram / YouTube style: bare icon + caption, no pill chrome.
+ * Active = primary stroke + label; idle = muted.
+ */
 function TabGlyph({
   Icon,
   active,
@@ -68,26 +70,20 @@ function TabGlyph({
   active: boolean
 }) {
   return (
-    <span
+    <Icon
+      aria-hidden
+      strokeWidth={active ? 2.25 : 1.75}
+      absoluteStrokeWidth
       className={cn(
-        "inline-flex size-7 items-center justify-center rounded-full transition-[background-color,transform] duration-200",
-        active ? "scale-100 bg-primary/12" : "bg-transparent"
+        "size-[22px] shrink-0 transition-colors duration-150",
+        active ? "text-primary" : "text-muted-foreground"
       )}
-    >
-      <Icon
-        aria-hidden
-        strokeWidth={active ? 2 : 1.75}
-        className={cn(
-          "size-[1.125rem] shrink-0 transition-colors duration-200",
-          active ? "text-primary" : "text-muted-foreground"
-        )}
-      />
-    </span>
+    />
   )
 }
 
 const tabHitClass =
-  "inline-flex h-full min-w-0 cursor-pointer flex-col items-center justify-center gap-0.5 px-1 transition-transform duration-150 active:scale-[0.96] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset"
+  "inline-flex h-full min-w-0 flex-1 cursor-pointer flex-col items-center justify-center gap-0.5 px-0.5 transition-opacity duration-150 active:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset"
 
 export function MobileBottomNav() {
   const pathname = usePathname()
@@ -113,71 +109,65 @@ export function MobileBottomNav() {
         style={{ height: MOBILE_BOTTOM_NAV_CLEARANCE }}
       />
 
-      <div
+      <nav
         data-mobile-bottom-nav=""
+        aria-label="Mobile"
         className={cn(
-          "pointer-events-none fixed inset-x-0 bottom-0 z-50 px-3 lg:hidden",
-          "pb-[max(0.5rem,env(safe-area-inset-bottom,0px))]"
+          "fixed inset-x-0 bottom-0 z-50 lg:hidden",
+          "border-t border-border/70 bg-background/95 backdrop-blur-md supports-[backdrop-filter]:bg-background/80",
+          "pb-[env(safe-area-inset-bottom,0px)]"
         )}
       >
-        <nav
-          aria-label="Mobile"
-          className={cn(
-            "pointer-events-auto mx-auto max-w-md overflow-hidden rounded-[1.25rem]",
-            "border border-border/60 bg-background/80 shadow-soft backdrop-blur-2xl backdrop-saturate-150",
-            "dark:border-white/10 dark:bg-background/60"
-          )}
-          style={{ height: MOBILE_BOTTOM_NAV_DOCK_HEIGHT }}
-        >
-          <div className="grid h-full grid-cols-5">
-            {mobileBottomNav.map((item) => {
-              const Icon = TAB_ICONS[item.id] ?? EllipsisIcon
-              const isActive = active.tabId === item.id
+        <div className="mx-auto flex h-12 max-w-lg items-stretch">
+          {mobileBottomNav.map((item) => {
+            const Icon = TAB_ICONS[item.id] ?? EllipsisIcon
+            const isActive = active.tabId === item.id
 
-              const label = (
-                <span
-                  className={cn(
-                    "max-w-full truncate text-[11px] font-medium leading-none tracking-tight transition-colors duration-200",
-                    isActive ? "text-primary" : "text-muted-foreground"
-                  )}
-                >
-                  {item.label}
-                </span>
-              )
+            const label = (
+              <span
+                className={cn(
+                  "max-w-full truncate text-[10px] leading-none tracking-tight",
+                  isActive
+                    ? "font-semibold text-primary"
+                    : "font-medium text-muted-foreground"
+                )}
+              >
+                {item.label}
+              </span>
+            )
 
-              if (isMobileBottomNavMore(item)) {
-                return (
-                  <button
-                    key={item.id}
-                    type="button"
-                    onClick={() => setMoreOpen(true)}
-                    aria-current={isActive ? "page" : undefined}
-                    aria-expanded={moreOpen}
-                    aria-haspopup="dialog"
-                    className={tabHitClass}
-                  >
-                    <TabGlyph Icon={Icon} active={isActive} />
-                    {label}
-                  </button>
-                )
-              }
-
+            if (isMobileBottomNavMore(item)) {
               return (
-                <Link
+                <button
                   key={item.id}
-                  href={item.href}
-                  prefetch={false}
+                  type="button"
+                  onClick={() => setMoreOpen(true)}
                   aria-current={isActive ? "page" : undefined}
+                  aria-expanded={moreOpen}
+                  aria-haspopup="dialog"
                   className={tabHitClass}
                 >
                   <TabGlyph Icon={Icon} active={isActive} />
                   {label}
-                </Link>
+                </button>
               )
-            })}
-          </div>
-        </nav>
-      </div>
+            }
+
+            return (
+              <Link
+                key={item.id}
+                href={item.href}
+                prefetch={false}
+                aria-current={isActive ? "page" : undefined}
+                className={tabHitClass}
+              >
+                <TabGlyph Icon={Icon} active={isActive} />
+                {label}
+              </Link>
+            )
+          })}
+        </div>
+      </nav>
 
       <Drawer open={moreOpen} onOpenChange={setMoreOpen} direction="bottom">
         <DrawerContent className="max-h-[min(80vh,32rem)]">

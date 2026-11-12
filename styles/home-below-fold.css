@@ -1,0 +1,76 @@
+/**
+ * Homepage below-the-fold (section shells + demos).
+ *
+ * Owns utilities for blocks / charts / icons / 3D / tools / mcp sections
+ * (including section.tsx shells, index barrels, lazy islands, parallax) plus
+ * deferred hero panels (pricing / player / palette / chart).
+ *
+ * No Tailwind preflight — that lives in app/globals.css.
+ * Homepage (`app/(app)/page.tsx`) imports this synchronously so section shells
+ * never paint unstyled. Islands may still `await loadHomeBelowFoldCss()`.
+ */
+@layer theme, utilities;
+@import "tailwindcss/theme.css" layer(theme) source(none);
+@import "tailwindcss/utilities.css" layer(utilities) source(none);
+
+@import "./sono-theme.css";
+@import "./vega-tokens.css";
+
+/* Section shells + islands (moved out of globals critical path). */
+@source "../components/home/sections/**/*.{ts,tsx}";
+/* Lazy hero panels (pricing / player / palette / chart). */
+@source "../components/home/hero-showcase-chart.tsx";
+@source "../components/home/hero-showcase-chart-lazy.tsx";
+@source "../components/home/hero-showcase-pricing.tsx";
+@source "../components/home/hero-showcase-player.tsx";
+@source "../components/home/hero-showcase-palette.tsx";
+@source "../components/home/lazy-when-visible.tsx";
+
+/* Brand / registry icons used by homepage scatter + orbit. */
+@source "../components/icons/**/*.{ts,tsx}";
+@source "../registry/icons/**/*.{ts,tsx}";
+@source "../registry/charts/_lib/**/*.{ts,tsx}";
+@source "../registry/charts/composed/**/*.{ts,tsx}";
+
+/* UI used only by deferred homepage islands. */
+@source "../packages/ui/src/components/chart.tsx";
+@source "../packages/ui/src/components/select.tsx";
+@source "../packages/ui/src/components/textarea.tsx";
+@source "../packages/ui/src/components/tooltip.tsx";
+@source "../packages/ui/src/components/3d/orbiting-circles/**/*.{ts,tsx}";
+
+@source not "../.tmp-chrome-thumbs";
+
+@source inline("ltr:data-[state=checked]:translate-x-[calc(100%-2px)] rtl:data-[state=checked]:-translate-x-[calc(100%-2px)]");
+
+/* Owned here (not globals): icons scatter + hero player equalizer. */
+@keyframes sono-icon-drift {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) translateY(0);
+  }
+  50% {
+    transform: translate(-50%, -50%) translateY(-6px);
+  }
+}
+
+.sono-icon-drift {
+  transform: translate(-50%, -50%);
+  animation: sono-icon-drift 5.6s var(--motion-ease) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sono-icon-drift {
+    animation: none;
+    transform: translate(-50%, -50%);
+  }
+}
+
+@keyframes sono-eq {
+  from {
+    transform: scaleY(0.25);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}

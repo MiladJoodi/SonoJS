@@ -60,10 +60,12 @@ export function getMobileMoreNavItems(): SiteNavItem[] {
   return [HOME_NAV_ITEM, ...rest, ...siteConfig.footerNavItems]
 }
 
-/** Hide on tool workspaces and chart playground. */
+/** Hide on tool workspaces, chart playground, and marketplace product pages. */
 export function shouldShowMobileBottomNav(pathname: string): boolean {
   if (pathname.startsWith("/tools/")) return false
   if (pathname.startsWith("/charts/view")) return false
+  // Catalog stays; product detail (`/marketplace/[slug]`) hides the tab bar.
+  if (/^\/marketplace\/[^/]+/.test(pathname)) return false
   return true
 }
 
@@ -123,12 +125,12 @@ export function getMobileBottomNavActive(
   return { tabId: null, moreHref: null }
 }
 
-/** Dock row height (glass only, excluding inset + safe-area). */
-export const MOBILE_BOTTOM_NAV_DOCK_HEIGHT = "3.375rem"
+/** Tab row height (edge-to-edge bar, excluding safe-area). */
+export const MOBILE_BOTTOM_NAV_DOCK_HEIGHT = "3rem"
 
 /**
- * Total clearance for the floating dock: row + bottom inset (~0.75rem) + safe-area.
+ * Total clearance for the bottom tab bar: row + safe-area.
  * Used by the in-flow spacer.
  */
 export const MOBILE_BOTTOM_NAV_CLEARANCE =
-  "calc(4.125rem + env(safe-area-inset-bottom, 0px))"
+  "calc(3rem + env(safe-area-inset-bottom, 0px))"

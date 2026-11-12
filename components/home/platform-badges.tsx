@@ -1,13 +1,11 @@
-import {
-  ClaudeIcon,
-  CodexIcon,
-  CopilotIcon,
-  CursorIcon,
-  NextjsIcon,
-  ReactIcon,
-  TailwindIcon,
-  TypescriptIcon,
-} from "@/components/icons"
+import { NextjsIcon } from "@/components/icons/brand/nextjs"
+import { ReactIcon } from "@/components/icons/brand/react"
+import { TailwindIcon } from "@/components/icons/brand/tailwind"
+import { TypescriptIcon } from "@/components/icons/brand/typescript"
+import { ClaudeIcon } from "@/components/icons/tools/claude"
+import { CodexIcon } from "@/components/icons/tools/codex"
+import { CopilotIcon } from "@/components/icons/tools/copilot"
+import { CursorIcon } from "@/components/icons/tools/cursor"
 import { cn } from "@/lib/utils"
 
 const PLATFORMS = [
@@ -41,11 +39,12 @@ export function PlatformBadges({ className }: { className?: string }) {
             <li key={label} className="shrink-0">
               <span
                 title={label}
-                aria-label={label}
-                className="inline-flex size-8 items-center justify-center rounded-full border border-border/70 bg-card/80 text-foreground shadow-soft backdrop-blur-sm sm:h-9 sm:w-auto sm:gap-1.5 sm:px-3 sm:text-sm sm:font-medium"
+                className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-border/70 bg-card/80 text-foreground shadow-soft backdrop-blur-sm sm:h-9 sm:w-auto sm:gap-1.5 sm:px-3 sm:text-sm sm:font-medium"
               >
-                <Icon className="size-3.5 sm:size-4" aria-hidden />
-                <span className="hidden sm:inline">{label}</span>
+                <Icon className="size-3.5 shrink-0 sm:size-4" aria-hidden />
+                {/* Desktop: visible label. Mobile: icon-only + sr-only name (no aria-label on span). */}
+                <span className="hidden shrink-0 sm:inline">{label}</span>
+                <span className="sr-only sm:hidden">{label}</span>
               </span>
             </li>
           ))}

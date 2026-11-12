@@ -1,6 +1,6 @@
 import { Suspense } from "react"
 
-import { SignedInHintProvider } from "@/components/auth"
+import { SignedInHintProvider } from "@/components/auth/signed-in-hint"
 import { MobileHeaderScroll } from "@/components/mobile-header-scroll"
 import { NavigationProgress } from "@/components/navigation-progress"
 import { ScrollToTop } from "@/components/scroll-to-top"

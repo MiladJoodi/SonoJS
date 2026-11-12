@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import Link from "next/link"
+import { ExternalLinkIcon } from "lucide-react"
 
 import type { MarketplacePreviewItem } from "@/lib/marketplace-preview-data"
 import {
@@ -120,6 +121,7 @@ export function MarketplaceProductCard({
     >
       <Link
         href={item.href}
+        prefetch={false}
         draggable={false}
         className="absolute inset-0 z-10 cursor-pointer rounded-[1.15rem] outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
         aria-label={item.title}
@@ -211,6 +213,25 @@ export function MarketplaceProductCard({
           ) : (
             <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-violet-700/20" />
           )}
+
+          {item.liveUrl ? (
+            <a
+              href={item.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              onMouseDown={(e) => e.stopPropagation()}
+              aria-label={`Open live demo for ${item.title}`}
+              className={cn(
+                "absolute end-2.5 top-2.5 z-20 inline-flex size-9 cursor-pointer items-center justify-center rounded-full bg-background/90 text-foreground shadow-soft backdrop-blur-md transition-[opacity,transform,background-color] duration-200 hover:bg-background",
+                "opacity-100",
+                "[@media(hover:hover)_and_(pointer:fine)]:translate-y-0.5 [@media(hover:hover)_and_(pointer:fine)]:opacity-0",
+                "[@media(hover:hover)_and_(pointer:fine)]:group-hover/card:translate-y-0 [@media(hover:hover)_and_(pointer:fine)]:group-hover/card:opacity-100"
+              )}
+            >
+              <ExternalLinkIcon className="size-3.5 shrink-0" aria-hidden />
+            </a>
+          ) : null}
         </div>
       </div>
 

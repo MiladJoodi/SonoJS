@@ -3,7 +3,6 @@
 import * as React from "react"
 import { ChevronsRightIcon } from "lucide-react"
 
-import { ChartDemo } from "@/components/charts"
 import { HomeCandlestickChart } from "./candlestick-chart"
 import {
   Tooltip,
@@ -12,7 +11,6 @@ import {
 } from "@/components/ui/tooltip"
 import { SITE_TOOLTIP_DELAY_MS } from "@/lib/site-tooltip"
 import { cn } from "@/lib/utils"
-import { LineBarAreaComposedChart } from "@/registry/charts/composed/line-bar-area-composed-chart"
 
 type HomeChartKind = "candlestick" | "composed"
 
@@ -24,9 +22,77 @@ type HomeChartStageProps = {
   className?: string
 }
 
+function ChartDemoHost({
+  chartId,
+  className,
+}: {
+  chartId: string
+  className?: string
+}) {
+  const [Demo, setDemo] = React.useState<React.ComponentType<{
+    id: string
+  }> | null>(null)
+
+  React.useEffect(() => {
+    let cancelled = false
+    import("@/components/charts")
+      .then((mod) => {
+        if (!cancelled) setDemo(() => mod.ChartDemo)
+      })
+      .catch(() => {
+        /* reserved frame stays empty */
+      })
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
+  return (
+    <div
+      className={cn(
+        "relative w-full min-w-0 overflow-hidden rounded-[12px]",
+        "min-h-[20rem] border border-border/70 bg-canvas shadow-soft sm:min-h-[24rem]",
+        className
+      )}
+    >
+      <div className="relative z-10 flex min-h-[20rem] w-full items-center justify-center p-4 sm:min-h-[24rem] sm:p-6">
+        <div className="w-full min-w-0">{Demo ? <Demo id={chartId} /> : null}</div>
+      </div>
+    </div>
+  )
+}
+
+function LineBarAreaComposedHost({ className }: { className?: string }) {
+  const [Comp, setComp] = React.useState<React.ComponentType<{
+    scrub?: boolean
+    className?: string
+  }> | null>(null)
+
+  React.useEffect(() => {
+    let cancelled = false
+    import("@/registry/charts/composed/line-bar-area-composed-chart")
+      .then((mod) => {
+        if (!cancelled) setComp(() => mod.LineBarAreaComposedChart)
+      })
+      .catch(() => {
+        /* keep frame */
+      })
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
+  if (!Comp) {
+    return <div className="h-full w-full" aria-hidden />
+  }
+
+  return <Comp scrub={false} className={className} />
+}
+
 /**
  * Product-shot frame for the home charts band.
  * Default: BTC candlestick ↔ Line Bar Area Composed, with a swap control.
+ * Composed chart + ChartDemo load only when selected / requested.
  */
 export function HomeChartStage({
   chartId,
@@ -41,21 +107,7 @@ export function HomeChartStage({
   }
 
   if (chartId) {
-    return (
-      <div
-        className={cn(
-          "relative w-full min-w-0 overflow-hidden rounded-[12px]",
-          "min-h-[20rem] border border-border/70 bg-canvas shadow-soft sm:min-h-[24rem]",
-          className
-        )}
-      >
-        <div className="relative z-10 flex min-h-[20rem] w-full items-center justify-center p-4 sm:min-h-[24rem] sm:p-6">
-          <div className="w-full min-w-0">
-            <ChartDemo id={chartId} />
-          </div>
-        </div>
-      </div>
-    )
+    return <ChartDemoHost chartId={chartId} className={className} />
   }
 
   if (!showProduct) {
@@ -128,8 +180,7 @@ export function HomeChartStage({
                   )}
                 />
               ) : (
-                <LineBarAreaComposedChart
-                  scrub={false}
+                <LineBarAreaComposedHost
                   className={cn(
                     "flex h-full max-w-none flex-col gap-2.5 overflow-hidden p-2.5 pe-11 sm:gap-3.5 sm:p-4 sm:pe-14",
                     "[&>header]:shrink-0 [&>header]:gap-2",

@@ -135,9 +135,13 @@ export function useAdminFetch<T>(
 export async function adminFetchJson<T>(
   url: string,
   pick: (json: Record<string, unknown>, res: Response) => T,
-  fallbackError: string
+  fallbackError: string,
+  init?: RequestInit
 ): Promise<T> {
-  const res = await fetch(url)
+  const res = await fetch(url, init)
+  if (init?.signal?.aborted) {
+    throw new DOMException("Aborted", "AbortError")
+  }
   const json = (await res.json().catch(() => ({}))) as Record<string, unknown>
   if (!res.ok) {
     throw new Error(

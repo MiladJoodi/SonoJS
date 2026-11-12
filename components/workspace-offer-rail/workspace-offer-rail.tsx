@@ -6,8 +6,8 @@ import { useAuth } from "@clerk/nextjs"
 import {
   AuthDialog,
   type AuthDialogMode,
-  useSignedInHint,
-} from "@/components/auth"
+} from "@/components/auth/auth-dialog"
+import { useSignedInHint } from "@/components/auth/signed-in-hint"
 import { OFFER_RAIL_CLASS } from "@/components/sidebar-nav"
 import { siteConfig } from "@/lib/config"
 import { cn } from "@/lib/utils"

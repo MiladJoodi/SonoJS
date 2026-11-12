@@ -11,24 +11,6 @@ import {
 import type { MarketplacePreviewDetail } from "@/lib/marketplace-preview-data"
 import { cn } from "@/lib/utils"
 
-function formatDate(iso: string) {
-  try {
-    return new Intl.DateTimeFormat("en", {
-      month: "short",
-      day: "numeric",
-      year: "numeric",
-    }).format(new Date(iso))
-  } catch {
-    return iso
-  }
-}
-
-function accessLabel(access: MarketplacePreviewDetail["access"]) {
-  if (access === "pro") return "Pro"
-  if (access === "public") return "Everyone"
-  return "Free (signed in)"
-}
-
 function SectionLabel({ children }: { children: ReactNode }) {
   return (
     <h2 className="text-[11px] font-semibold tracking-[0.08em] text-[var(--sm-text-faint)] uppercase">
@@ -43,13 +25,53 @@ function badgeClass(badge: MarketplaceBadge) {
   return "bg-amber-500/95"
 }
 
-export function MarketplaceDetailPurchase({
+export function MarketplaceDetailActions({
   detail,
   downloadCta,
   className,
 }: {
   detail: MarketplacePreviewDetail
   downloadCta: ReactNode
+  className?: string
+}) {
+  return (
+    <div className={cn("flex items-stretch gap-2", className)}>
+      <div className="min-w-0 flex-1 [&_button]:h-[46px] [&_button]:w-full">
+        {downloadCta}
+      </div>
+      {detail.liveUrl ? (
+        <a
+          href={detail.liveUrl}
+          target="_blank"
+          rel="noreferrer"
+          className="inline-flex h-[46px] min-w-0 flex-1 cursor-pointer items-center justify-center gap-2 rounded-md border border-[var(--sm-border)] bg-[var(--sm-chip)] text-sm font-medium text-[var(--sm-text)] hover:border-primary/40"
+        >
+          <ExternalLinkIcon className="size-4 shrink-0" />
+          Live preview
+        </a>
+      ) : (
+        <button
+          type="button"
+          disabled
+          className="inline-flex h-[46px] min-w-0 flex-1 cursor-not-allowed items-center justify-center gap-2 rounded-md border border-[var(--sm-border)] bg-[var(--sm-chip)] text-sm font-medium text-[var(--sm-text-faint)]"
+        >
+          Live soon
+        </button>
+      )}
+    </div>
+  )
+}
+
+export function MarketplaceDetailPurchase({
+  detail,
+  downloadCta = null,
+  showActions = true,
+  className,
+}: {
+  detail: MarketplacePreviewDetail
+  downloadCta?: ReactNode
+  /** When false, hide Download / Live (e.g. mobile sticky bar owns them). */
+  showActions?: boolean
   className?: string
 }) {
   return (
@@ -76,64 +98,32 @@ export function MarketplaceDetailPurchase({
               </span>
             ) : null}
           </div>
-          <h1 className="text-balance text-xl font-semibold tracking-tight text-[var(--sm-text)]">
-            {detail.title}
-          </h1>
+          <div className="flex items-start justify-between gap-3">
+            <h1 className="min-w-0 text-balance text-lg font-semibold tracking-tight text-[var(--sm-text)] sm:text-xl">
+              {detail.title}
+            </h1>
+            <p
+              className={cn(
+                "shrink-0 pt-0.5 text-sm font-semibold tabular-nums sm:text-base",
+                detail.access === "pro"
+                  ? "text-primary"
+                  : "text-[var(--sm-text-secondary)]"
+              )}
+            >
+              {detail.priceLabel}
+            </p>
+          </div>
           <p className="text-sm leading-snug text-[var(--sm-text-secondary)]">
             {detail.tagline}
           </p>
         </div>
 
-        <div className="space-y-2">
-          <p className="text-3xl font-semibold tracking-tight tabular-nums text-[var(--sm-text)]">
-            {detail.priceLabel}
-          </p>
-          <div className="flex items-stretch gap-2">
-            <div className="min-w-0 flex-1 [&_button]:h-[46px] [&_button]:w-full">
-              {downloadCta}
-            </div>
-            {detail.liveUrl ? (
-              <a
-                href={detail.liveUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex h-[46px] min-w-0 flex-1 cursor-pointer items-center justify-center gap-2 rounded-md border border-[var(--sm-border)] bg-[var(--sm-chip)] text-sm font-medium text-[var(--sm-text)] hover:border-primary/40"
-              >
-                <ExternalLinkIcon className="size-4 shrink-0" />
-                Live preview
-              </a>
-            ) : (
-              <button
-                type="button"
-                disabled
-                className="inline-flex h-[46px] min-w-0 flex-1 cursor-not-allowed items-center justify-center gap-2 rounded-md border border-[var(--sm-border)] bg-[var(--sm-chip)] text-sm font-medium text-[var(--sm-text-faint)]"
-              >
-                Live soon
-              </button>
-            )}
-          </div>
-        </div>
-
-        <div className="space-y-3 border-t border-[var(--sm-border)] pt-4">
-          <SectionLabel>Quick facts</SectionLabel>
-          <dl className="grid grid-cols-2 gap-x-3 gap-y-3">
-            {(
-              [
-                ["Pages", String(detail.screens)],
-                ["Version", `v${detail.version}`],
-                ["Last update", formatDate(detail.updatedAt)],
-                ["Who can download", accessLabel(detail.access)],
-              ] as const
-            ).map(([k, v]) => (
-              <div key={k} className="min-w-0 space-y-0.5">
-                <dt className="text-[11px] text-[var(--sm-text-faint)]">{k}</dt>
-                <dd className="truncate text-sm font-medium text-[var(--sm-text)]">
-                  {v}
-                </dd>
-              </div>
-            ))}
-          </dl>
-        </div>
+        {showActions ? (
+          <MarketplaceDetailActions
+            detail={detail}
+            downloadCta={downloadCta}
+          />
+        ) : null}
 
         <div className="space-y-3 border-t border-[var(--sm-border)] pt-4">
           <SectionLabel>Made with</SectionLabel>

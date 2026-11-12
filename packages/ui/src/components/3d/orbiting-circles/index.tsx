@@ -51,6 +51,13 @@ export function OrbitingCircles({
           xmlns="http://www.w3.org/2000/svg"
           version="1.1"
           className="pointer-events-none absolute inset-0 size-full"
+          /* Inline absolute — if utilities load late, SVG must not enter document flow. */
+          style={{
+            position: "absolute",
+            inset: 0,
+            width: "100%",
+            height: "100%",
+          }}
           aria-hidden
         >
           <circle
