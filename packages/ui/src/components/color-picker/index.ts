@@ -13,9 +13,7 @@ export {
   hsvaToHsla,
   hslaToHsva,
   hsvaToHex,
-  generateHarmony,
   DEFAULT_SWATCHES,
   type HsvaColor,
   type ColorFormat,
-  type ColorHarmony,
 } from "./color-utils"

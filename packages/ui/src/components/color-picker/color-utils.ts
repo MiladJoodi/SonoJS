@@ -13,14 +13,6 @@ export type ColorFormat =
   | "hsl"
   | "hsla"
 
-export type ColorHarmony =
-  | "complementary"
-  | "analogous"
-  | "triadic"
-  | "split-complementary"
-  | "tetradic"
-  | "monochromatic"
-
 function clamp(n: number, min: number, max: number) {
   return Math.min(max, Math.max(min, n))
 }
@@ -244,57 +236,6 @@ export function colorsEqual(a: string, b: string): boolean {
     Math.abs(ca.v - cb.v) < 0.5 &&
     Math.abs(ca.a - cb.a) < 0.01
   )
-}
-
-function rotateHue(hsva: HsvaColor, deg: number): HsvaColor {
-  return { ...hsva, h: (((hsva.h + deg) % 360) + 360) % 360 }
-}
-
-export function generateHarmony(
-  base: string | HsvaColor,
-  harmony: ColorHarmony
-): string[] {
-  const hsva = typeof base === "string" ? parseColor(base) : base
-  if (!hsva) return []
-  const hex = (c: HsvaColor) => hsvaToHex(c, false)
-
-  switch (harmony) {
-    case "complementary":
-      return [hex(hsva), hex(rotateHue(hsva, 180))]
-    case "analogous":
-      return [
-        hex(rotateHue(hsva, -30)),
-        hex(hsva),
-        hex(rotateHue(hsva, 30)),
-      ]
-    case "triadic":
-      return [
-        hex(hsva),
-        hex(rotateHue(hsva, 120)),
-        hex(rotateHue(hsva, 240)),
-      ]
-    case "split-complementary":
-      return [
-        hex(hsva),
-        hex(rotateHue(hsva, 150)),
-        hex(rotateHue(hsva, 210)),
-      ]
-    case "tetradic":
-      return [
-        hex(hsva),
-        hex(rotateHue(hsva, 90)),
-        hex(rotateHue(hsva, 180)),
-        hex(rotateHue(hsva, 270)),
-      ]
-    case "monochromatic": {
-      const hsla = hsvaToHsla(hsva)
-      return [20, 40, 60, 80].map((l) =>
-        hex(hslaToHsva(hsla.h, hsla.s, l, 1))
-      )
-    }
-    default:
-      return [hex(hsva)]
-  }
 }
 
 export const DEFAULT_SWATCHES = [

@@ -100,10 +100,6 @@ export const componentsNav: {
           featured: true,
         },
         {
-          title: "Color Palette",
-          href: "/docs/components/color-palette",
-        },
-        {
           title: "Color Picker",
           href: "/docs/components/color-picker",
           featured: true,
@@ -124,10 +120,6 @@ export const componentsNav: {
           featured: true,
         },
         { title: "Field", href: "/docs/components/field", featured: true },
-        {
-          title: "Gradient Picker",
-          href: "/docs/components/gradient-picker",
-        },
         { title: "Input", href: "/docs/components/input", featured: true },
         { title: "Input Group", href: "/docs/components/input-group" },
         { title: "Input OTP", href: "/docs/components/input-otp" },

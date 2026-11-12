@@ -1453,6 +1453,67 @@ export const templateProjects: TemplateProject[] = [
     ],
   },
 {
+    slug: "sonojs-ecommerce-08",
+    title: "Diet Soda",
+    tagline:
+      "Pure Zero - 3D can hero with flavor swap and floating bubbles.",
+    description:
+      "Diet Soda is a full-viewport beverage product experience by SonoJS (demo brand: Soda / Diet Soda). Zero-build static HTML with inline CSS, GSAP, and Google model-viewer for the can, leaves, and berries (GLB). Hero Pure Zero with Shop Now, DESIGN AWARDS Premium Beverage 2025 badge, Diet Classic / Zero Lime flavor cards ($2.99) that recolor the radial backdrop and swap the 3D can, floating bubble sprites, and glass nav (Home · Ingredients · Taste · Eco · Reviews). Demo storefront chrome only - no cart backend. Run with npx --yes serve . or host statically on Cloudflare Workers.",
+    category: "ecommerce",
+    stack: ["html", "css", "javascript", "gsap"],
+    priceLabel: "Free",
+    priceCents: 0,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 160,
+    accent: "160",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "shop",
+    coverImage: "/templates/projects/ecommerce/sonojs-ecommerce-08/main.webp",
+    coverImageDark: null,
+    coverVideo: "/templates/projects/ecommerce/sonojs-ecommerce-08/cover.mp4",
+    detailCoverImage:
+      "/templates/projects/ecommerce/sonojs-ecommerce-08/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-ecommerce-08.sonojs2.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-13",
+    firstReleasedAt: "2026-11-13",
+    screens: 4,
+    highlights: [
+      {
+        title: "3D can stage",
+        body: "Interactive model-viewer can with orbit controls, leaves, and berry GLBs.",
+      },
+      {
+        title: "Flavor swap",
+        body: "Diet Classic / Zero Lime cards recolor the gradient and swap the can texture.",
+      },
+      {
+        title: "GSAP + bubbles",
+        body: "Entrance motion and floating bubble sprites over a glass header nav.",
+      },
+      {
+        title: "Zero-build static",
+        body: "index.html + vendor GSAP / model-viewer - serve with npx --yes serve .",
+      },
+    ],
+    includes: [
+      "index.html (Diet Soda Pure Zero hero)",
+      "vendor/gsap.min.js + vendor/model-viewer.min.js",
+      "assets GLBs (can, leaves, cherry/blueberry) + soda PNGs",
+      "Outfit / Inter / Manrope / Galada (Google Fonts)",
+    ],
+    requirements: [
+      "Modern browser with WebGL",
+      "Static file host (npx --yes serve .)",
+    ],
+  },
+{
     slug: "sonojs-portfolio-01",
     title: "Jack",
     tagline:
@@ -8102,6 +8163,67 @@ export const templateProjects: TemplateProject[] = [
     requirements: [
       "Modern browser",
       "Static file host (npx --yes serve .)",
+    ],
+  },
+  {
+    slug: "sonojs-hero-73",
+    title: "Laocoön",
+    tagline:
+      "The Statue of Laocoön - scroll-driven Three.js bronze sculpture hero.",
+    description:
+      "Laocoön is a full-scroll WebGL sculpture hero by SonoJS (demo brand: Laocoön). Zero-build static HTML with inline CSS, Three.js r160 (import map + GLTFLoader), and vanilla JS. Fixed #webgl canvas with bronze_horse.glb, spark particles, shader backdrop, and scroll-scrubbed camera through Bronze and Time, Marble Emotion, Liquid Metal, and Eternal Moment chapters. Glass header (Bronze · Marble · Fluid · Digital), custom dual-ring cursor, Italiana / Outfit / Playfair Display. Demo editorial chrome only - no CMS backend. Run with npx serve . or host statically on Cloudflare Workers.",
+    category: "hero",
+    stack: ["html", "css", "javascript", "threejs"],
+    priceLabel: "Free",
+    priceCents: 0,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 28,
+    accent: "28",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "hero",
+    coverImage: "/templates/projects/hero/sonojs-hero-73/main.webp",
+    coverImageDark: null,
+    coverVideo: "/templates/projects/hero/sonojs-hero-73/cover.mp4",
+    detailCoverImage: "/templates/projects/hero/sonojs-hero-73/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-hero-73.sonojs2.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-13",
+    firstReleasedAt: "2026-11-13",
+    screens: 4,
+    runCommand: "npx serve .",
+    highlights: [
+      {
+        title: "Scroll-scrubbed WebGL",
+        body: "Camera orbits the GLB through four editorial chapters as you scroll.",
+      },
+      {
+        title: "Bronze sculpture stage",
+        body: "GLTFLoader + AnimationMixer, sparks, fog, and ACES tone mapping.",
+      },
+      {
+        title: "Cinematic chrome",
+        body: "Custom cursor, chapter nav, and Italiana / Playfair display type.",
+      },
+      {
+        title: "Zero-build static",
+        body: "Single index.html + assets - run with npx serve .",
+      },
+    ],
+    includes: [
+      "index.html (The Statue of Laocoön)",
+      "Three.js r160 via import map + GLTFLoader",
+      "assets/bronze_horse.glb + 1.png",
+      "Inline CSS (Italiana, Outfit, Playfair Display)",
+    ],
+    requirements: [
+      "Modern browser with WebGL",
+      "Static file host (npx serve .)",
     ],
   },
   {

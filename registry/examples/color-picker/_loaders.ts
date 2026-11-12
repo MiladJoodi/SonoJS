@@ -5,22 +5,6 @@ import type { ComponentType } from "react"
 export type ExampleLoader = () => Promise<{ default: ComponentType<any> }>
 
 export const exampleLoaders = {
-  "color-picker-compact": () =>
-    import("./compact").then((m) => ({
-      default: m.ColorPickerCompact,
-    })),
-  "color-picker-controlled": () =>
-    import("./controlled").then((m) => ({
-      default: m.ColorPickerControlled,
-    })),
-  "color-picker-custom-styling": () =>
-    import("./custom-styling").then((m) => ({
-      default: m.ColorPickerCustomStyling,
-    })),
-  "color-picker-custom-swatches": () =>
-    import("./custom-swatches").then((m) => ({
-      default: m.ColorPickerCustomSwatches,
-    })),
   "color-picker-default": () =>
     import("./default").then((m) => ({
       default: m.ColorPickerDefault,
@@ -28,22 +12,6 @@ export const exampleLoaders = {
   "color-picker-disabled": () =>
     import("./disabled").then((m) => ({
       default: m.ColorPickerDisabled,
-    })),
-  "color-picker-eyedropper": () =>
-    import("./eyedropper").then((m) => ({
-      default: m.ColorPickerEyedropper,
-    })),
-  "color-picker-formats": () =>
-    import("./formats").then((m) => ({
-      default: m.ColorPickerFormats,
-    })),
-  "color-picker-gallery": () =>
-    import("./gallery").then((m) => ({
-      default: m.ColorPickerGallery,
-    })),
-  "color-picker-history": () =>
-    import("./history").then((m) => ({
-      default: m.ColorPickerHistory,
     })),
   "color-picker-opacity": () =>
     import("./opacity").then((m) => ({
@@ -53,9 +21,9 @@ export const exampleLoaders = {
     import("./popover").then((m) => ({
       default: m.ColorPickerPopoverExample,
     })),
-  "color-picker-presets": () =>
-    import("./presets").then((m) => ({
-      default: m.ColorPickerPresets,
+  "color-picker-swatches": () =>
+    import("./swatches").then((m) => ({
+      default: m.ColorPickerSwatches,
     })),
 } as const satisfies Record<string, ExampleLoader>
 

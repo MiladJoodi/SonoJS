@@ -1,1 +1,0 @@
-export { ColorPaletteDefault } from "./default"

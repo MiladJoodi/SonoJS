@@ -2875,27 +2875,6 @@ const registryItemsRaw = [
     ],
   },
   {
-    name: "color-palette",
-    type: "registry:ui",
-    title: "Color Palette",
-    description:
-      "Generate complementary, analogous, and other color harmonies from a base color.",
-    dependencies: ["lucide-react", "clsx", "tailwind-merge"],
-    registryDependencies: ["color-picker", "button", "popover"],
-    files: [
-      {
-        path: "packages/ui/src/components/color-palette/index.ts",
-        type: "registry:ui",
-        target: "components/color-palette/index.ts",
-      },
-      {
-        path: "packages/ui/src/components/color-palette/color-palette.tsx",
-        type: "registry:ui",
-        target: "components/color-palette/color-palette.tsx",
-      },
-    ],
-  },
-  {
     name: "combobox",
     type: "registry:ui",
     title: "Combobox",
@@ -4972,33 +4951,6 @@ const registryItemsRaw = [
         type: "registry:file",
         target: `components/3d/icon-cloud/images/${slug}.svg`,
       })),
-    ],
-  },
-  {
-    name: "gradient-picker",
-    type: "registry:ui",
-    title: "Gradient Picker",
-    description:
-      "Linear and radial gradient editor with stops, angle, live preview, and CSS copy.",
-    dependencies: ["lucide-react", "clsx", "tailwind-merge"],
-    registryDependencies: [
-      "color-picker",
-      "slider",
-      "button",
-      "popover",
-      "toggle-group",
-    ],
-    files: [
-      {
-        path: "packages/ui/src/components/gradient-picker/index.ts",
-        type: "registry:ui",
-        target: "components/gradient-picker/index.ts",
-      },
-      {
-        path: "packages/ui/src/components/gradient-picker/gradient-picker.tsx",
-        type: "registry:ui",
-        target: "components/gradient-picker/gradient-picker.tsx",
-      },
     ],
   },
   {

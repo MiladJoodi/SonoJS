@@ -95,7 +95,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="style-vega flex min-h-full flex-col font-sans text-body">
-        <ClerkProvider prefetchUI={false}>
+        <ClerkProvider>
           <SonoGoogleOneTap />
           <ThemeProvider
             attribute="class"

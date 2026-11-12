@@ -51,11 +51,9 @@ export const SONOJS_COMPONENT_ROOTS = new Set([
 export const TOP_LEVEL_COMPONENT_ROOTS = new Set([
   "tweet-card",
   "clothes-rack",
-  "color-palette",
   "color-picker",
   "dotted-map",
   "dropzone",
-  "gradient-picker",
   "lens",
   "magic-card",
   "multi-select",
