@@ -43,6 +43,16 @@ export const componentsNav: {
       title: COMPONENTS_FEATURED_GROUP,
       pages: [
         {
+          title: "Color Picker",
+          href: "/docs/components/color-picker",
+          badge: "new",
+        },
+        {
+          title: "Password Input",
+          href: "/docs/components/password-input",
+          badge: "new",
+        },
+        {
           title: "Multi Select",
           href: "/docs/components/multi-select",
           badge: "new",
@@ -90,6 +100,15 @@ export const componentsNav: {
           featured: true,
         },
         {
+          title: "Color Palette",
+          href: "/docs/components/color-palette",
+        },
+        {
+          title: "Color Picker",
+          href: "/docs/components/color-picker",
+          featured: true,
+        },
+        {
           title: "Combobox",
           href: "/docs/components/combobox",
           featured: true,
@@ -105,6 +124,10 @@ export const componentsNav: {
           featured: true,
         },
         { title: "Field", href: "/docs/components/field", featured: true },
+        {
+          title: "Gradient Picker",
+          href: "/docs/components/gradient-picker",
+        },
         { title: "Input", href: "/docs/components/input", featured: true },
         { title: "Input Group", href: "/docs/components/input-group" },
         { title: "Input OTP", href: "/docs/components/input-otp" },
@@ -115,6 +138,11 @@ export const componentsNav: {
           featured: true,
         },
         { title: "Native Select", href: "/docs/components/native-select" },
+        {
+          title: "Password Input",
+          href: "/docs/components/password-input",
+          featured: true,
+        },
         { title: "Phone Input", href: "/docs/components/phone-input" },
         {
           title: "Radio Group",

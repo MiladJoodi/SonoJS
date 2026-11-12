@@ -1,0 +1,34 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "color-palette",
+  "type": "registry:ui",
+  "title": "Color Palette",
+  "description": "Generate complementary, analogous, and other color harmonies from a base color.",
+  "access": "public",
+  "dependencies": [
+    "lucide-react",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "color-picker",
+    "button",
+    "popover"
+  ],
+  "files": [
+    {
+      "path": "components/color-palette/index.ts",
+      "type": "registry:ui",
+      "content": "export {\n  ColorPalette,\n  HARMONIES,\n  type ColorPaletteProps,\n} from \"./color-palette\"\n",
+      "target": "components/color-palette/index.ts"
+    },
+    {
+      "path": "components/color-palette/color-palette.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { CheckIcon, CopyIcon } from \"lucide-react\"\n\nimport { Button } from \"@/components/ui/button\"\nimport {\n  ColorPicker,\n  generateHarmony,\n  type ColorHarmony,\n} from \"@/components/color-picker\"\nimport {\n  Popover,\n  PopoverContent,\n  PopoverTrigger,\n} from \"@/components/ui/popover\"\nimport { cn } from \"@/lib/utils\"\n\nconst HARMONIES: { value: ColorHarmony; label: string }[] = [\n  { value: \"complementary\", label: \"Complementary\" },\n  { value: \"analogous\", label: \"Analogous\" },\n  { value: \"triadic\", label: \"Triadic\" },\n  { value: \"split-complementary\", label: \"Split complementary\" },\n  { value: \"tetradic\", label: \"Tetradic\" },\n  { value: \"monochromatic\", label: \"Monochromatic\" },\n]\n\nexport type ColorPaletteProps = {\n  baseColor?: string\n  defaultBaseColor?: string\n  onBaseColorChange?: (color: string) => void\n  harmony?: ColorHarmony\n  defaultHarmony?: ColorHarmony\n  onHarmonyChange?: (harmony: ColorHarmony) => void\n  disabled?: boolean\n  className?: string\n}\n\nfunction ColorPalette({\n  baseColor: baseProp,\n  defaultBaseColor = \"#3B82F6\",\n  onBaseColorChange,\n  harmony: harmonyProp,\n  defaultHarmony = \"analogous\",\n  onHarmonyChange,\n  disabled = false,\n  className,\n}: ColorPaletteProps) {\n  const isBaseControlled = baseProp !== undefined\n  const isHarmonyControlled = harmonyProp !== undefined\n  const [baseUncontrolled, setBaseUncontrolled] =\n    React.useState(defaultBaseColor)\n  const [harmonyUncontrolled, setHarmonyUncontrolled] =\n    React.useState<ColorHarmony>(defaultHarmony)\n  const [copied, setCopied] = React.useState<string | null>(null)\n\n  const base = isBaseControlled ? baseProp : baseUncontrolled\n  const harmony = isHarmonyControlled ? harmonyProp : harmonyUncontrolled\n  const colors = React.useMemo(\n    () => generateHarmony(base, harmony),\n    [base, harmony]\n  )\n\n  const setBase = (color: string) => {\n    if (disabled) return\n    if (!isBaseControlled) setBaseUncontrolled(color)\n    onBaseColorChange?.(color)\n  }\n\n  const setHarmony = (next: ColorHarmony) => {\n    if (disabled) return\n    if (!isHarmonyControlled) setHarmonyUncontrolled(next)\n    onHarmonyChange?.(next)\n  }\n\n  const copyColor = async (color: string) => {\n    try {\n      await navigator.clipboard.writeText(color)\n      setCopied(color)\n      window.setTimeout(() => setCopied(null), 1500)\n    } catch {\n      // ignore\n    }\n  }\n\n  return (\n    <div\n      data-slot=\"color-palette\"\n      className={cn(\n        \"flex w-full max-w-md flex-col gap-4 rounded-[12px] border border-border/70 bg-card p-4 shadow-soft\",\n        className\n      )}\n    >\n      <div className=\"flex items-center gap-3\">\n        <Popover>\n          <PopoverTrigger asChild>\n            <button\n              type=\"button\"\n              disabled={disabled}\n              aria-label=\"Pick base color\"\n              className=\"size-12 shrink-0 cursor-pointer rounded-md border border-border/70 shadow-xs disabled:cursor-not-allowed disabled:opacity-50\"\n              style={{ backgroundColor: base }}\n            />\n          </PopoverTrigger>\n          <PopoverContent className=\"w-auto border-0 bg-transparent p-0 shadow-none\">\n            <ColorPicker\n              value={base}\n              onValueChange={setBase}\n              compact\n              showCopy\n            />\n          </PopoverContent>\n        </Popover>\n        <div className=\"min-w-0 space-y-1\">\n          <p className=\"text-sm font-medium text-foreground\">Base color</p>\n          <p className=\"font-mono text-xs text-muted-foreground\">{base}</p>\n        </div>\n      </div>\n\n      <div className=\"flex flex-wrap gap-1.5\">\n        {HARMONIES.map((item) => (\n          <Button\n            key={item.value}\n            type=\"button\"\n            size=\"xs\"\n            variant={harmony === item.value ? \"secondary\" : \"outline\"}\n            disabled={disabled}\n            className=\"h-8 cursor-pointer\"\n            onClick={() => setHarmony(item.value)}\n          >\n            {item.label}\n          </Button>\n        ))}\n      </div>\n\n      <div\n        className=\"grid gap-2\"\n        style={{\n          gridTemplateColumns: `repeat(${Math.min(colors.length, 4)}, minmax(0, 1fr))`,\n        }}\n      >\n        {colors.map((color) => (\n          <button\n            key={color}\n            type=\"button\"\n            disabled={disabled}\n            onClick={() => {\n              void copyColor(color)\n            }}\n            className=\"group flex cursor-pointer flex-col overflow-hidden rounded-md border border-border/70 text-start transition-colors hover:border-border disabled:cursor-not-allowed disabled:opacity-50\"\n          >\n            <span\n              className=\"h-16 w-full\"\n              style={{ backgroundColor: color }}\n            />\n            <span className=\"flex items-center justify-between gap-1 bg-card px-2 py-1.5 font-mono text-[11px] text-muted-foreground\">\n              {color}\n              {copied === color ? (\n                <CheckIcon className=\"size-3.5 text-emerald-500\" />\n              ) : (\n                <CopyIcon className=\"size-3.5 opacity-0 transition-opacity group-hover:opacity-100\" />\n              )}\n            </span>\n          </button>\n        ))}\n      </div>\n    </div>\n  )\n}\n\nexport { ColorPalette, HARMONIES }\n",
+      "target": "components/color-palette/color-palette.tsx"
+    }
+  ],
+  "version": "0.1.0+9ee5e8a224d9",
+  "generatedAt": "2026-11-12T19:28:08.035Z"
+}

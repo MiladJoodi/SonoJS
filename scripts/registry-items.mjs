@@ -2849,6 +2849,53 @@ const registryItemsRaw = [
     ],
   },
   {
+    name: "color-picker",
+    type: "registry:ui",
+    title: "Color Picker",
+    description:
+      "HSVA color panel with hue/opacity sliders, format input, swatches, copy, and EyeDropper.",
+    dependencies: ["lucide-react", "clsx", "tailwind-merge"],
+    registryDependencies: ["slider", "input-group", "button"],
+    files: [
+      {
+        path: "packages/ui/src/components/color-picker/index.ts",
+        type: "registry:ui",
+        target: "components/color-picker/index.ts",
+      },
+      {
+        path: "packages/ui/src/components/color-picker/color-utils.ts",
+        type: "registry:ui",
+        target: "components/color-picker/color-utils.ts",
+      },
+      {
+        path: "packages/ui/src/components/color-picker/color-picker.tsx",
+        type: "registry:ui",
+        target: "components/color-picker/color-picker.tsx",
+      },
+    ],
+  },
+  {
+    name: "color-palette",
+    type: "registry:ui",
+    title: "Color Palette",
+    description:
+      "Generate complementary, analogous, and other color harmonies from a base color.",
+    dependencies: ["lucide-react", "clsx", "tailwind-merge"],
+    registryDependencies: ["color-picker", "button", "popover"],
+    files: [
+      {
+        path: "packages/ui/src/components/color-palette/index.ts",
+        type: "registry:ui",
+        target: "components/color-palette/index.ts",
+      },
+      {
+        path: "packages/ui/src/components/color-palette/color-palette.tsx",
+        type: "registry:ui",
+        target: "components/color-palette/color-palette.tsx",
+      },
+    ],
+  },
+  {
     name: "combobox",
     type: "registry:ui",
     title: "Combobox",
@@ -3368,6 +3415,27 @@ const registryItemsRaw = [
         path: "packages/ui/src/components/input-otp.tsx",
         type: "registry:ui",
         target: "components/ui/input-otp.tsx",
+      },
+    ],
+  },
+  {
+    name: "password-input",
+    type: "registry:ui",
+    title: "Password Input",
+    description:
+      "Password field with show/hide, optional strength meter, requirements checklist, copy, and Caps Lock warning.",
+    dependencies: ["lucide-react", "clsx", "tailwind-merge"],
+    registryDependencies: ["input-group"],
+    files: [
+      {
+        path: "packages/ui/src/components/password-input/index.ts",
+        type: "registry:ui",
+        target: "components/password-input/index.ts",
+      },
+      {
+        path: "packages/ui/src/components/password-input/password-input.tsx",
+        type: "registry:ui",
+        target: "components/password-input/password-input.tsx",
       },
     ],
   },
@@ -4904,6 +4972,33 @@ const registryItemsRaw = [
         type: "registry:file",
         target: `components/3d/icon-cloud/images/${slug}.svg`,
       })),
+    ],
+  },
+  {
+    name: "gradient-picker",
+    type: "registry:ui",
+    title: "Gradient Picker",
+    description:
+      "Linear and radial gradient editor with stops, angle, live preview, and CSS copy.",
+    dependencies: ["lucide-react", "clsx", "tailwind-merge"],
+    registryDependencies: [
+      "color-picker",
+      "slider",
+      "button",
+      "popover",
+      "toggle-group",
+    ],
+    files: [
+      {
+        path: "packages/ui/src/components/gradient-picker/index.ts",
+        type: "registry:ui",
+        target: "components/gradient-picker/index.ts",
+      },
+      {
+        path: "packages/ui/src/components/gradient-picker/gradient-picker.tsx",
+        type: "registry:ui",
+        target: "components/gradient-picker/gradient-picker.tsx",
+      },
     ],
   },
   {
