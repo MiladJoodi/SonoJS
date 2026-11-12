@@ -132,8 +132,12 @@ export function ComponentVariantPreview({
   }, [examples])
 
   // Lock the preview frame to the tallest measured height so load/swap does not jump.
+  // Reset when leaving Preview (e.g. Code tab) so remounted demos don’t keep a stale tall stage.
   React.useEffect(() => {
-    if (effectiveView !== "preview") return
+    if (effectiveView !== "preview") {
+      setFrameMinHeight(undefined)
+      return
+    }
     const el = frameRef.current
     if (!el || typeof ResizeObserver === "undefined") return
 

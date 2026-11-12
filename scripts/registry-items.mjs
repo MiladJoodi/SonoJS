@@ -2977,6 +2977,22 @@ const registryItemsRaw = [
     ],
   },
   {
+    name: "dropzone",
+    type: "registry:ui",
+    title: "Dropzone",
+    description:
+      "Native drag-and-drop file zone with validation, previews, and optional progress — no upload library.",
+    dependencies: ["lucide-react", "clsx", "tailwind-merge"],
+    registryDependencies: ["button", "progress"],
+    files: [
+      {
+        path: "packages/ui/src/components/dropzone.tsx",
+        type: "registry:ui",
+        target: "components/dropzone.tsx",
+      },
+    ],
+  },
+  {
     name: "dropdown-menu",
     type: "registry:ui",
     title: "Dropdown Menu",

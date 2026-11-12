@@ -38,6 +38,7 @@ const EXAMPLE_FOLDERS = [
   "dialog",
   "dotted-map",
   "drawer",
+  "dropzone",
   "dropdown-menu",
   "electro-border",
   "empty",

@@ -52,6 +52,7 @@ export const TOP_LEVEL_COMPONENT_ROOTS = new Set([
   "tweet-card",
   "clothes-rack",
   "dotted-map",
+  "dropzone",
   "lens",
   "magic-card",
   "phone-input",

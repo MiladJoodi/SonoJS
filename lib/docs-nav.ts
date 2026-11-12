@@ -43,6 +43,11 @@ export const componentsNav: {
       title: COMPONENTS_FEATURED_GROUP,
       pages: [
         {
+          title: "Dropzone",
+          href: "/docs/components/dropzone",
+          badge: "new",
+        },
+        {
           title: "Clothes Rack",
           href: "/docs/components/clothes-rack",
           badge: "new",
@@ -87,6 +92,11 @@ export const componentsNav: {
         {
           title: "Date Picker",
           href: "/docs/components/date-picker",
+          featured: true,
+        },
+        {
+          title: "Dropzone",
+          href: "/docs/components/dropzone",
           featured: true,
         },
         { title: "Field", href: "/docs/components/field", featured: true },
