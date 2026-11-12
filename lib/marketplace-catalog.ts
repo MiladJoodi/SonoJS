@@ -8414,6 +8414,69 @@ export const marketplaceProjects: MarketplaceProject[] = [
       "Modern browser with WebGL (or use simple view)",
     ],
   },
+  {
+    slug: "sonojs-landing-27",
+    title: "AETHER",
+    tagline:
+      "Deep Field Planetary Survey - four worlds, telemetry, and plates.",
+    description:
+      "AETHER is a deep-field planetary survey marketing landing by SonoJS (demo brand: AETHER / Deep Field Survey). Zero-build static HTML with local CSS/JS, GSAP ScrollTrigger, Lenis, SplitType, and Three.js. Preloader telemetry link into a HUD scroll experience across Meridian, Kesh, Veld, and Orrin - survey briefs, surface dossiers, instrument ledger, ring system, field archive, and comparative table. Local planet stills and fly/spin MP4 plates under assets/. Demo survey chrome only - no mission backend. Run with npx --yes serve . (do not open file://) or host on Cloudflare Workers.",
+    category: "landing",
+    stack: ["html", "css", "javascript", "threejs", "gsap"],
+    priceLabel: "Free",
+    priceCents: 0,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 215,
+    accent: "215",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "landing",
+    coverImage: "/marketplace/projects/landing/sonojs-landing-27/main.webp",
+    coverImageDark: null,
+    coverVideo: "/marketplace/projects/landing/sonojs-landing-27/cover.mp4",
+    detailCoverImage:
+      "/marketplace/projects/landing/sonojs-landing-27/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-landing-27.sonojs2.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-12",
+    firstReleasedAt: "2026-11-12",
+    screens: 6,
+    runCommand: "npx --yes serve .",
+    highlights: [
+      {
+        title: "Four-world survey",
+        body: "Meridian, Kesh, Veld, and Orrin chapters with HUD telemetry chrome.",
+      },
+      {
+        title: "Scroll cinema",
+        body: "GSAP ScrollTrigger + Lenis with Three.js starfield and custom cursor.",
+      },
+      {
+        title: "Field archive",
+        body: "Imaging plates, instrument ledger, ring system, and comparative table.",
+      },
+      {
+        title: "Zero-build static",
+        body: "npx --yes serve . - index.html, style.css, script.js, and assets/.",
+      },
+    ],
+    includes: [
+      "index.html + style.css + script.js (AETHER survey)",
+      "assets/img planet stills",
+      "assets/video aether-fly.mp4 + aether-spin.mp4",
+      "assets/vendor GSAP, Lenis, SplitType, Three.js",
+      "run.txt",
+    ],
+    requirements: [
+      "Modern browser with WebGL",
+      "Static file host (npx --yes serve .)",
+    ],
+  },
 ]
 
 export function getMarketplaceProject(
