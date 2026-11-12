@@ -9,7 +9,6 @@ import {
 } from "@/components/auth/auth-dialog"
 import { useSignedInHint } from "@/components/auth/signed-in-hint"
 import { OFFER_RAIL_CLASS } from "@/components/sidebar-nav"
-import { templateProjects } from "@/lib/templates-catalog"
 import { cn } from "@/lib/utils"
 import OfferCard from "@/registry/blocks/marketing/offer-card/offer-card-01/offer-card"
 
@@ -23,15 +22,11 @@ const FREE_FEATURES = [
 ]
 
 const TEMPLATE_FEATURES = [
+  "+120 free templates",
   "Live demos",
   "Full source download",
   "Filter by stack",
 ]
-
-/** Free enabled kits shown on the signed-in offer card (+N FREE). */
-const FREE_TEMPLATE_COUNT = templateProjects.filter(
-  (p) => p.enabled && (p.priceCents ?? 0) === 0
-).length
 
 export type WorkspaceOfferRailMode = "full" | "toc"
 
@@ -87,9 +82,9 @@ export function WorkspaceOfferRail({
                 productName="Templates"
                 description="Live demos, then download the source and customize."
                 features={TEMPLATE_FEATURES}
-                price={`+${FREE_TEMPLATE_COUNT}`}
+                price="Free"
                 compareAt=""
-                tier="FREE"
+                tier="KITS"
                 ctaLabel="View templates"
                 ctaHref="/templates"
                 trustLead="Preview ·"
