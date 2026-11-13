@@ -1,5 +1,6 @@
 export { AuthControls } from "./auth-controls"
 export { SiteHeader } from "./site-header"
+export { ProPromoBanner } from "./pro-promo-banner"
 export { GithubLink } from "./github-link"
 export { LinkedinLink } from "./linkedin-link"
 export { XLink } from "./x-link"

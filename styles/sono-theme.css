@@ -141,7 +141,10 @@
 }
 
 :root {
-  --header-height: 3.5rem;
+  /* Full sticky chrome = promo strip + nav (sidebars / scroll-mt use this). */
+  --promo-banner-height: 2rem;
+  --nav-height: 3.5rem;
+  --header-height: calc(var(--promo-banner-height) + var(--nav-height));
 
   /* Layout */
   --content-max: 1400px;

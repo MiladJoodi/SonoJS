@@ -5,7 +5,8 @@ import { usePathname } from "next/navigation"
 
 const LG_BREAKPOINT = 1024
 const SCROLL_THRESHOLD = 10
-const TOP_REVEAL_OFFSET = 64
+/** Reveal chrome again near the top (nav + promo banner). */
+const TOP_REVEAL_OFFSET = 96
 
 function isIndexedRoute(pathname: string) {
   return (
