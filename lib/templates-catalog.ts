@@ -8229,6 +8229,67 @@ export const templateProjects: TemplateProject[] = [
     ],
   },
   {
+    slug: "sonojs-saas-16",
+    title: "Ascend",
+    tagline:
+      "Scale Smarter, Not Harder - revenue command center with WebGL planet.",
+    description:
+      "Ascend is a revenue-platform SaaS marketing site by SonoJS (demo brand: Ascend). Zero-build static HTML with Inter fonts, custom CSS, Lenis, and vendored Three.js with a full-bleed planet.glb / clouds stage behind the page. Hero Scale Smarter, Not Harder with Start Free / Schedule a Consult CTAs and trusted-by logos; features grid (workflows, analytics, leads, triggers, enterprise, global); live pipeline metrics; and closing CTA. Demo CRM chrome only - no backend. Run with npx --yes serve . or host statically on Cloudflare Workers.",
+    category: "saas",
+    stack: ["html", "css", "javascript", "threejs"],
+    priceLabel: "Free",
+    priceCents: 0,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 265,
+    accent: "265",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "saas",
+    coverImage: "/templates/projects/saas/sonojs-saas-16/main.webp",
+    coverImageDark: null,
+    coverVideo: "/templates/projects/saas/sonojs-saas-16/cover.mp4",
+    detailCoverImage: "/templates/projects/saas/sonojs-saas-16/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-saas-16.sonojs2.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-13",
+    firstReleasedAt: "2026-11-13",
+    screens: 4,
+    runCommand: "npx --yes serve .",
+    highlights: [
+      {
+        title: "WebGL planet stage",
+        body: "Full-bleed Three.js planet.glb + clouds behind the marketing page.",
+      },
+      {
+        title: "Scale Smarter hero",
+        body: "Dual CTAs, trusted logos, and reveal-on-scroll feature cards.",
+      },
+      {
+        title: "Revenue metrics",
+        body: "Live pipeline chrome and funnel stats into Start Free / Talk to Sales.",
+      },
+      {
+        title: "Zero-build static",
+        body: "npx --yes serve . - index.html, css/, js/main.js, vendor Three + Lenis + Draco.",
+      },
+    ],
+    includes: [
+      "index.html (Ascend — Scale Smarter, Not Harder)",
+      "css/styles.css + fonts/inter local woff2",
+      "js/main.js + assets/planet.glb, planet-lights.glb, planet-clouds.png",
+      "vendor/three + vendor/lenis + vendor/draco",
+    ],
+    requirements: [
+      "Modern browser with WebGL",
+      "Static file host (npx --yes serve .)",
+    ],
+  },
+  {
     slug: "sonojs-hero-72",
     title: "Oryon",
     tagline:
