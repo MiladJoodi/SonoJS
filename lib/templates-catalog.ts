@@ -8540,6 +8540,70 @@ export const templateProjects: TemplateProject[] = [
     ],
   },
   {
+    slug: "sonojs-hero-76",
+    title: "Design World",
+    tagline:
+      "explore new ideas - interactive cuboid studio hero with slide chapters.",
+    description:
+      "Design World is an experimental studio hero by SonoJS (demo brand: Design World Studio). Built with Vite 8, React 19, TypeScript, Tailwind CSS 4, Framer Motion, Lucide, Poppins, and Radix Dialog. Draggable refractive CuboidStage over a looping video plate, four slide chapters (explore new ideas / shape the void / bend the light / make it move), magnetic circular controls, pagination dots, cursor spotlight, and Enter Design World dialog. Demo immersive chrome only - no CMS backend. Vite build ready for Cloudflare Workers.",
+    category: "hero",
+    stack: ["react", "vite", "typescript", "tailwind", "lucide"],
+    priceLabel: "Free",
+    priceCents: 0,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 280,
+    accent: "280",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "hero",
+    coverImage: "/templates/projects/hero/sonojs-hero-76/main.webp",
+    coverImageDark: null,
+    coverVideo: "/templates/projects/hero/sonojs-hero-76/cover.mp4",
+    detailCoverImage: "/templates/projects/hero/sonojs-hero-76/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-hero-76.sonojs2.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-14",
+    firstReleasedAt: "2026-11-14",
+    screens: 4,
+    runCommand: "npm install && npm run dev",
+    highlights: [
+      {
+        title: "Draggable cuboid stage",
+        body: "Inertia-tilt refractive cuboid over a looping cinematic video plate.",
+      },
+      {
+        title: "Four idea slides",
+        body: "Letter-stagger headlines from explore new ideas through make it move.",
+      },
+      {
+        title: "Magnetic controls",
+        body: "Circular prev/next, pagination dots, and cursor spotlight on black.",
+      },
+      {
+        title: "Vite and fork-ready",
+        body: "Vite 8 + React 19 + Tailwind 4 + Framer Motion - npm run build to dist/.",
+      },
+    ],
+    includes: [
+      "Full Vite + React 19 + TypeScript source (Design World)",
+      "components/design-world (CuboidStage, HeroCopy, CircularControls, ExploreDialog…)",
+      "public/media cuboid video plate",
+      "Tailwind CSS 4 + framer-motion + lucide-react + Poppins + Radix Dialog",
+    ],
+    requirements: [
+      "Node.js 20 or newer",
+      "Vite 8",
+      "React 19",
+      "Tailwind CSS 4",
+      "Framer Motion",
+    ],
+  },
+  {
     slug: "sonojs-landing-22",
     title: "Vizurai",
     tagline: "Worlds that move. - cinematic VFX studio landing.",
@@ -8974,6 +9038,130 @@ export const templateProjects: TemplateProject[] = [
       "Static file host (npx serve .)",
     ],
   },
+  {
+    slug: "sonojs-landing-29",
+    title: "Nexura",
+    tagline:
+      "High-performance ad creatives that drive growth - ecom agency site.",
+    description:
+      "Nexura is a multi-page creative-agency marketing site by SonoJS (demo brand: Nexura Studio). Zero-build static HTML with vendored Tailwind, Iconify, DotGothic16 + JetBrains Mono, and vanilla JS. Home hero High-performance ad creatives that drive growth over looping hero.mp4, interactive Tasks kanban, features (static ads / UGC / analytics), selected work, testimonials, retainer pricing (Starter / Growth / Scale), plus Services, Pricing, Projects, About, Blog, Contact, 404, and documentation pages. Demo agency chrome only - no CRM backend. Run with npx serve . or host statically on Cloudflare Workers.",
+    category: "landing",
+    stack: ["html", "css", "javascript", "tailwind"],
+    priceLabel: "Free",
+    priceCents: 0,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 220,
+    accent: "220",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "landing",
+    coverImage: "/templates/projects/landing/sonojs-landing-29/main.webp",
+    coverImageDark: null,
+    coverVideo: "/templates/projects/landing/sonojs-landing-29/cover.mp4",
+    detailCoverImage:
+      "/templates/projects/landing/sonojs-landing-29/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-landing-29.sonojs2.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-14",
+    firstReleasedAt: "2026-11-14",
+    screens: 9,
+    runCommand: "npx serve .",
+    highlights: [
+      {
+        title: "Video agency hero",
+        body: "Full-bleed hero.mp4 with ROAS stats and trusted-by logo marquee.",
+      },
+      {
+        title: "Interactive kanban",
+        body: "Drag/drop Tasks board with Active / In Progress / Done columns.",
+      },
+      {
+        title: "Full multi-page set",
+        body: "Services, Pricing toggle, Projects filters, About, Blog, Contact, 404, docs.",
+      },
+      {
+        title: "Zero-build static",
+        body: "npx serve . - vendored Tailwind + Iconify, fully offline after download.",
+      },
+    ],
+    includes: [
+      "Multi-page HTML (index, services, pricing, projects, about, blog, contact, 404, docs)",
+      "assets/css/main.css + fonts (DotGothic16, JetBrains Mono)",
+      "assets/js (main, kanban, pricing, projects, contact)",
+      "assets/vendor Tailwind + Iconify + hero.mp4 / images",
+    ],
+    requirements: [
+      "Modern browser",
+      "Static file host (npx serve .)",
+    ],
+  },
+  {
+    slug: "sonojs-website-01",
+    title: "Empire Owl Salon",
+    tagline:
+      "Royal hair, wise hands, homestyle care - full multi-page salon site.",
+    description:
+      "Empire Owl Salon is a multi-page independent salon website by SonoJS (demo brand: Empire Owl Salon, Langford BC). Zero-build static HTML with Tailwind CDN, Lucide, DM Sans + Newsreader, and vanilla JS. Home hero Royal hair, wise hands, homestyle care with booking strip, lookbook marquee, services accordion, before/after slider, testimonials, FAQs, and map; plus About, Services, Service detail, Pricing, Gallery lightbox, Team, 3-step Booking wizard, Blog, Blog post, Contact, and 404. Demo salon chrome only - booking form has no backend. Run with npx serve . or host statically on Cloudflare Workers.",
+    category: "website",
+    stack: ["html", "css", "javascript", "tailwind", "lucide"],
+    priceLabel: "Free",
+    priceCents: 0,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 28,
+    accent: "28",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "landing",
+    coverImage: "/templates/projects/website/sonojs-website-01/main.webp",
+    coverImageDark: null,
+    coverVideo: null,
+    detailCoverImage:
+      "/templates/projects/website/sonojs-website-01/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-website-01.sonojs2.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-14",
+    firstReleasedAt: "2026-11-14",
+    screens: 12,
+    runCommand: "npx serve .",
+    highlights: [
+      {
+        title: "Full salon site",
+        body: "Home through booking, gallery, team, journal, contact, and 404.",
+      },
+      {
+        title: "3-step booking wizard",
+        body: "Service → time → details with success state (demo, no backend).",
+      },
+      {
+        title: "Lookbook + before/after",
+        body: "Filterable gallery lightbox and transformation slider on home.",
+      },
+      {
+        title: "Zero-build static",
+        body: "npx serve . - Tailwind CDN, Lucide, local CSS/JS and images.",
+      },
+    ],
+    includes: [
+      "12 HTML pages (home, about, services, pricing, gallery, team, booking, blog, contact, 404…)",
+      "css/main.css + DM Sans / Newsreader",
+      "js booking / nav / gallery helpers",
+      "assets/images salon stills + hero-salon.webp",
+    ],
+    requirements: [
+      "Modern browser",
+      "Static file host (npx serve .)",
+    ],
+  },
 ]
 
 export function getTemplateProject(
@@ -9009,6 +9197,7 @@ export function listTemplateCategories(): TemplateCategory[] {
     "fintech",
     "hero",
     "portfolio",
+    "website",
   ]
 }
 

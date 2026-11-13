@@ -12,6 +12,7 @@ export type TemplateCategory =
   | "fintech"
   | "hero"
   | "portfolio"
+  | "website"
 
 export type TemplateStack =
   | "nextjs"
@@ -136,6 +137,7 @@ export const TEMPLATE_CATEGORY_LABEL: Record<TemplateCategory, string> = {
   fintech: "Fintech & Payments",
   hero: "Hero & Interaction",
   portfolio: "Portfolio",
+  website: "Websites",
 }
 
 export const TEMPLATE_STACK_LABEL: Record<TemplateStack, string> = {

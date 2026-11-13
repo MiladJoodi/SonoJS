@@ -41,6 +41,7 @@ const RAIL_CATEGORY_LABEL: Record<TemplateCategory, string> = {
   fintech: "Fintech",
   hero: "Hero",
   portfolio: "Portfolio",
+  website: "Websites",
 }
 
 const PRICE_OPTIONS: { key: TemplatePriceKey; label: string }[] = [

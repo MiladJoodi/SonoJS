@@ -29,6 +29,7 @@ const CATEGORY_IDS = [
   "fintech",
   "hero",
   "portfolio",
+  "website",
 ] as const satisfies readonly TemplateCategory[]
 
 /** Initial / reset window size for All products. */
