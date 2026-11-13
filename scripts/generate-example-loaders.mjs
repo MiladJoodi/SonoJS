@@ -63,6 +63,7 @@ const FOLDER_ORDER = [
   "3d/beam-circle-3d",
   "3d/infinite-drift",
   "3d/infinite-drift-2",
+  "3d/hanging-bag",
   "3d/hanging-id-card",
   "3d/plasma-globe",
   "inline-citation",

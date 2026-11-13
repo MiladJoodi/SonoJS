@@ -64,11 +64,14 @@ const nextConfig: NextConfig = {
       "*.hdr": {
         type: "asset",
       },
+      "*.ttf": {
+        type: "asset",
+      },
     },
   },
   webpack: (config) => {
     config.module.rules.push({
-      test: /\.(mp4|wav|mp3|hdr)$/i,
+      test: /\.(mp4|wav|mp3|hdr|ttf)$/i,
       type: "asset/resource",
     })
     return config

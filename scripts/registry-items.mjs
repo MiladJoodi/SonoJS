@@ -4859,6 +4859,83 @@ const registryItemsRaw = [
     ],
   },
   {
+    name: "hanging-bag",
+    type: "registry:ui",
+    title: "Hanging Bag",
+    description:
+      "React Three Fiber dry-cleaner carousel of pastel project bags on a chrome elliptical rack.",
+    dependencies: [
+      "three",
+      "@types/three",
+      "@react-three/fiber",
+      "@react-three/drei",
+      "@react-three/postprocessing",
+      "postprocessing",
+    ],
+    files: [
+      {
+        path: "packages/ui/src/components/3d/hanging-bag/index.tsx",
+        type: "registry:ui",
+        target: "components/3d/hanging-bag/index.tsx",
+      },
+      {
+        path: "packages/ui/src/components/3d/hanging-bag/hanging-bag.tsx",
+        type: "registry:ui",
+        target: "components/3d/hanging-bag/hanging-bag.tsx",
+      },
+      {
+        path: "packages/ui/src/components/3d/hanging-bag/carousel.tsx",
+        type: "registry:ui",
+        target: "components/3d/hanging-bag/carousel.tsx",
+      },
+      {
+        path: "packages/ui/src/components/3d/hanging-bag/hanging-bag-mesh.tsx",
+        type: "registry:ui",
+        target: "components/3d/hanging-bag/hanging-bag-mesh.tsx",
+      },
+      {
+        path: "packages/ui/src/components/3d/hanging-bag/rack-geometry.tsx",
+        type: "registry:ui",
+        target: "components/3d/hanging-bag/rack-geometry.tsx",
+      },
+      {
+        path: "packages/ui/src/components/3d/hanging-bag/effects.tsx",
+        type: "registry:ui",
+        target: "components/3d/hanging-bag/effects.tsx",
+      },
+      {
+        path: "packages/ui/src/components/3d/hanging-bag/card-texture.ts",
+        type: "registry:ui",
+        target: "components/3d/hanging-bag/card-texture.ts",
+      },
+      {
+        path: "packages/ui/src/components/3d/hanging-bag/hanger-geometry.ts",
+        type: "registry:ui",
+        target: "components/3d/hanging-bag/hanger-geometry.ts",
+      },
+      {
+        path: "packages/ui/src/components/3d/hanging-bag/track.ts",
+        type: "registry:ui",
+        target: "components/3d/hanging-bag/track.ts",
+      },
+      {
+        path: "packages/ui/src/components/3d/hanging-bag/projects.ts",
+        type: "registry:ui",
+        target: "components/3d/hanging-bag/projects.ts",
+      },
+      {
+        path: "packages/ui/src/components/3d/hanging-bag/load-fonts.ts",
+        type: "registry:ui",
+        target: "components/3d/hanging-bag/load-fonts.ts",
+      },
+      {
+        path: "packages/ui/src/components/3d/hanging-bag/fonts/PermanentMarker-Regular.ttf",
+        type: "registry:file",
+        target: "components/3d/hanging-bag/fonts/PermanentMarker-Regular.ttf",
+      },
+    ],
+  },
+  {
     name: "hanging-id-card",
     type: "registry:ui",
     title: "Hanging Id Card",

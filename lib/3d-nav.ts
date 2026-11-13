@@ -50,6 +50,12 @@ export const threeDNav: {
           featured: true,
         },
         {
+          title: "Hanging Bag",
+          href: "/3d/hanging-bag",
+          badge: "new",
+          featured: true,
+        },
+        {
           title: "Hanging Id Card",
           href: "/3d/hanging-id-card",
           badge: "new",

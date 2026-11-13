@@ -10,6 +10,7 @@ const DEFAULT_THUMB_SLUGS = new Set([
   "beam-circle-3d",
   "clothes-rack",
   "glass-coin-carousel",
+  "hanging-bag",
   "hanging-id-card",
   "hover-gallery",
   "image-marquee",
