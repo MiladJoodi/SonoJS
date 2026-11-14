@@ -30,5 +30,5 @@ npx serve .
 ## Access
 
 - Live preview: public
-- Download: paid one-time (`$1` test price) via product entitlement
+- Download: paid one-time (`$29`) via product entitlement
 - Zip via Pro registry slug `sonojs-website-09`
