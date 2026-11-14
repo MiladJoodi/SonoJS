@@ -9534,6 +9534,68 @@ export const templateProjects: TemplateProject[] = [
       "Static file host (npx serve .)",
     ],
   },
+  {
+    slug: "sonojs-website-08",
+    title: "Synqor",
+    tagline:
+      "Orchestrate work that survives production - durable AI jobs marketing site.",
+    description:
+      "Synqor is a multi-page premium HTML SaaS marketing kit by SonoJS (demo brand: Synqor). Zero-build static HTML with custom CSS design tokens, self-hosted Sora + IBM Plex fonts, local SVG icons, and vanilla JS. Home hero Orchestrate work that survives production with console mock panels, connectors, how-it-works, pricing with yearly toggle, testimonials, and FAQ; plus Pricing, About, Integrations, Blog with 3 full posts, Contact, FAQ, Login, Signup, and 404. Demo product chrome only - forms have no backend. Run with npx serve . or host statically on Cloudflare Workers.",
+    category: "website",
+    stack: ["html", "css", "javascript"],
+    priceLabel: "$29",
+    priceCents: 2900,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 160,
+    accent: "160",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "landing",
+    coverImage: "/templates/projects/website/sonojs-website-08/main.webp",
+    coverImageDark: null,
+    coverVideo: "/templates/projects/website/sonojs-website-08/cover.mp4",
+    detailCoverImage:
+      "/templates/projects/website/sonojs-website-08/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-website-08.sonojs2.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-14",
+    firstReleasedAt: "2026-11-14",
+    screens: 12,
+    runCommand: "npx serve .",
+    highlights: [
+      {
+        title: "Full SaaS marketing kit",
+        body: "Home, pricing, about, integrations, blog + posts, contact, FAQ, auth, 404.",
+      },
+      {
+        title: "Ops console demos",
+        body: "Approvals, connector health, step traces, queues, and yearly pricing toggle.",
+      },
+      {
+        title: "Offline-friendly assets",
+        body: "Self-hosted fonts + local icons; no Iconify / Google Fonts CDN required.",
+      },
+      {
+        title: "Zero-build static",
+        body: "npx serve . - progressive enhancement; usable with JS disabled.",
+      },
+    ],
+    includes: [
+      "12+ HTML pages (home, pricing, about, integrations, blog, 3 posts, contact, FAQ, auth, 404)",
+      "assets/css (tokens, base, components, pages) + self-hosted fonts",
+      "assets/js (data, nav, pricing, blog, auth, contact, integrations…)",
+      "Local icons + images + README for buyers",
+    ],
+    requirements: [
+      "Modern browser",
+      "Static file host (npx serve .)",
+    ],
+  },
 ]
 
 export function getTemplateProject(
