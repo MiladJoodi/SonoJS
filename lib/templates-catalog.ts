@@ -9719,6 +9719,67 @@ export const templateProjects: TemplateProject[] = [
       "Static file host",
     ],
   },
+  {
+    slug: "sonojs-website-11",
+    title: "United Motors",
+    tagline:
+      "Luxury Lifestyle Rentals — exotic fleet site for Los Angeles.",
+    description:
+      "United Motors is a multi-page premium luxury car rental website by SonoJS (demo brand: United Motors Group, Beverly Hills / Los Angeles). Zero-build static HTML with custom CSS design tokens, self-hosted Oswald + Source Sans 3, local SVG icons, and vanilla JS. Home hero Luxury Lifestyle Rentals with featured-car carousel, quick-book bar, category specials, how-it-works, gallery, testimonials, and blog teasers; plus Garage with search/sort/pagination, Car detail, Booking wizard, Compare (up to 3), Services, About, Blog with 3 posts, Contact, FAQ, and 404. Demo rental chrome only — favorites, compare, and booking drafts use localStorage, no backend. Host statically (Cloudflare Workers demo included).",
+    category: "website",
+    stack: ["html", "css", "javascript"],
+    priceLabel: "$29",
+    priceCents: 2900,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 38,
+    accent: "38",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "landing",
+    coverImage: "/templates/projects/website/sonojs-website-11/main.webp",
+    coverImageDark: null,
+    coverVideo: "/templates/projects/website/sonojs-website-11/cover.mp4",
+    detailCoverImage:
+      "/templates/projects/website/sonojs-website-11/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-website-11.sonojs2.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-15",
+    firstReleasedAt: "2026-11-15",
+    screens: 14,
+    highlights: [
+      {
+        title: "Full rental marketing kit",
+        body: "Garage, car detail, booking, compare, services, blog, contact, FAQ, 404.",
+      },
+      {
+        title: "Fleet tools demos",
+        body: "Favorites, compare (up to 3), garage filters/search, booking wizard with confirmation.",
+      },
+      {
+        title: "Hero + quick book",
+        body: "Featured-car carousel and date pickup bar that seeds a booking draft.",
+      },
+      {
+        title: "Zero-build static",
+        body: "Self-hosted fonts, local icons, Unsplash fleet photography placeholders.",
+      },
+    ],
+    includes: [
+      "14 HTML pages (home, garage, car, booking, compare, services, about, blog ×3, contact, FAQ, 404)",
+      "assets/css (tokens, base, components, pages) + self-hosted Oswald + Source Sans 3",
+      "assets/js (data, main, forms, garage, car, booking…) — localStorage favs/compare/booking",
+      "assets/img fleet photos + icons.svg + README",
+    ],
+    requirements: [
+      "Modern browser",
+      "Static file host",
+    ],
+  },
 ]
 
 export function getTemplateProject(
