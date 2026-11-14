@@ -9224,6 +9224,130 @@ export const templateProjects: TemplateProject[] = [
       "Static file host (npx serve .)",
     ],
   },
+  {
+    slug: "sonojs-website-03",
+    title: "Vidalli Andrea",
+    tagline:
+      "Handcrafted jewelry - bilingual boutique with cart and lookbook.",
+    description:
+      "Vidalli Andrea is a bilingual (EN/DE) luxury jewelry boutique website by SonoJS (demo brand: Vidalli Andrea, Krottendorf AT). Zero-build static HTML with local Cormorant Garamond + Manrope, custom CSS, and vanilla JS. Home hero Handcrafted with signature pieces, atelier story, lookbook, and service promises; full shop with filters, product detail, cart drawer, wishlist, checkout, account, journal, FAQ, contact, and 404 — mirrored under de/. Demo storefront chrome only - localStorage cart, no payment backend. Run with npx serve . or host statically on Cloudflare Workers.",
+    category: "website",
+    stack: ["html", "css", "javascript"],
+    priceLabel: "Free",
+    priceCents: 0,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 40,
+    accent: "40",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "shop",
+    coverImage: "/templates/projects/website/sonojs-website-03/main.webp",
+    coverImageDark: null,
+    coverVideo: "/templates/projects/website/sonojs-website-03/cover.mp4",
+    detailCoverImage:
+      "/templates/projects/website/sonojs-website-03/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-website-03.sonojs2.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-14",
+    firstReleasedAt: "2026-11-14",
+    screens: 14,
+    runCommand: "npx serve .",
+    highlights: [
+      {
+        title: "EN + DE boutique",
+        body: "14 layouts mirrored in English and German with a language switcher.",
+      },
+      {
+        title: "Shop + cart demo",
+        body: "Filters, product variants, wishlist, bag drawer, and checkout UI via localStorage.",
+      },
+      {
+        title: "Lookbook & atelier",
+        body: "Editorial lookbook chapters plus craft story and service promises.",
+      },
+      {
+        title: "Zero-build static",
+        body: "npx serve . - pure HTML / CSS / JS with local fonts and images.",
+      },
+    ],
+    includes: [
+      "14 EN HTML pages + de/ German mirrors",
+      "assets/css/main.css + local Cormorant Garamond / Manrope",
+      "assets/js (products, cart, main)",
+      "assets/images jewelry stills + documentation/",
+    ],
+    requirements: [
+      "Modern browser",
+      "Static file host (npx serve .)",
+    ],
+  },
+  {
+    slug: "sonojs-website-04",
+    title: "TITAN",
+    tagline:
+      "Train harder. Recover smarter. - premium fitness club multi-page site.",
+    description:
+      "TITAN is a multi-page premium gym & fitness website by SonoJS (demo brand: TITAN). Zero-build static HTML with compiled Tailwind CSS, Outfit + Syne, Lucide, GSAP, Lenis, Swiper, Leaflet, and a Three.js WebGL performance sculpture. Home hero Train harder / Recover smarter / Own your edge with trial CTAs, zones, classes, memberships, and testimonials; plus About, Classes, Schedule, Trainers, Gallery, Shop, Product, Pricing, Blog, Contact, Login, and 404. Demo club chrome only - forms have no backend. Run with npx serve . (optional npm run build:css). Host statically on Cloudflare Workers.",
+    category: "website",
+    stack: ["html", "css", "javascript", "tailwind", "lucide", "gsap", "threejs"],
+    priceLabel: "Free",
+    priceCents: 0,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 80,
+    accent: "80",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "landing",
+    coverImage: "/templates/projects/website/sonojs-website-04/main.webp",
+    coverImageDark: null,
+    coverVideo: "/templates/projects/website/sonojs-website-04/cover.mp4",
+    detailCoverImage:
+      "/templates/projects/website/sonojs-website-04/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-website-04.sonojs2.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-14",
+    firstReleasedAt: "2026-11-14",
+    screens: 14,
+    runCommand: "npx serve .",
+    highlights: [
+      {
+        title: "Full gym site",
+        body: "Home, classes, schedule, trainers, gallery, shop, pricing, blog, login, 404.",
+      },
+      {
+        title: "WebGL performance lab",
+        body: "Interactive Three.js sculpture demo for kinetic session load.",
+      },
+      {
+        title: "Motion stack",
+        body: "GSAP + Lenis + Swiper carousels and magnetic primary CTAs.",
+      },
+      {
+        title: "Zero-build static",
+        body: "npx serve . - prebuilt CSS; optional Tailwind watch via npm run build:css.",
+      },
+    ],
+    includes: [
+      "14 HTML pages (home, about, classes, schedule, trainers, gallery, shop, pricing…)",
+      "assets/css main + extras (Tailwind-built)",
+      "assets/js (main, interactions, three-scene, partials)",
+      "assets/vendor GSAP, Lenis, Swiper, Three, Lucide, Leaflet, GLightbox",
+    ],
+    requirements: [
+      "Modern browser with WebGL",
+      "Static file host (npx serve .)",
+    ],
+  },
 ]
 
 export function getTemplateProject(
