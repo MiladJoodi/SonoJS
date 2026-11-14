@@ -9162,6 +9162,68 @@ export const templateProjects: TemplateProject[] = [
       "Static file host (npx serve .)",
     ],
   },
+  {
+    slug: "sonojs-website-02",
+    title: "NULLWAVE",
+    tagline:
+      "Cyberpunk music for reading & coding - listener-supported net radio.",
+    description:
+      "NULLWAVE is a multi-page cyberpunk net-radio website by SonoJS (demo brand: NULLWAVE). Zero-build static HTML with custom CSS and vanilla JS. Home hero Cyberpunk music for reading & coding with mini player, Today on air schedule, four stations (Focus / Night drive / Deep read / Tape room), signal chain, layered bed mixer, archive mixes, membership CTA; plus Schedule, Stations, Archive, Player, About, Blog, Membership, Contact, Support, Legal, and 404. Demo radio chrome only - no live stream backend. Run with npx serve . or host statically on Cloudflare Workers.",
+    category: "website",
+    stack: ["html", "css", "javascript"],
+    priceLabel: "Free",
+    priceCents: 0,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 200,
+    accent: "200",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "landing",
+    coverImage: "/templates/projects/website/sonojs-website-02/main.webp",
+    coverImageDark: null,
+    coverVideo: "/templates/projects/website/sonojs-website-02/cover.mp4",
+    detailCoverImage:
+      "/templates/projects/website/sonojs-website-02/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-website-02.sonojs2.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-14",
+    firstReleasedAt: "2026-11-14",
+    screens: 13,
+    runCommand: "npx serve .",
+    highlights: [
+      {
+        title: "Full radio site",
+        body: "Home, schedule, stations, archive, player, membership, blog, support, legal, 404.",
+      },
+      {
+        title: "Four stations + mixer",
+        body: "Focus / Night drive / Deep read / Tape room with Rain · Drone · Machine layers.",
+      },
+      {
+        title: "On-air chrome",
+        body: "Live badge, mini player, and full player page for the stream UI.",
+      },
+      {
+        title: "Zero-build static",
+        body: "npx serve . - pure HTML / CSS / JS, no framework.",
+      },
+    ],
+    includes: [
+      "13 HTML pages (home, schedule, stations, archive, player, blog, membership…)",
+      "css/main.css + css/pages.css + fonts.css",
+      "js (main, player, mixer, schedule, signal)",
+      "assets/img editorial stills + documentation/",
+    ],
+    requirements: [
+      "Modern browser",
+      "Static file host (npx serve .)",
+    ],
+  },
 ]
 
 export function getTemplateProject(
