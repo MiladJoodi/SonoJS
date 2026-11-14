@@ -9,6 +9,7 @@ import {
   ChartAreaIcon,
   EllipsisIcon,
   GalleryHorizontalEndIcon,
+  GlobeIcon,
   HouseIcon,
   LayoutGridIcon,
   LayoutTemplateIcon,
@@ -54,6 +55,7 @@ const MORE_ICONS: Record<string, LucideIcon> = {
   "/cursors": MousePointer2Icon,
   "/3d": BoxIcon,
   "/carousels": GalleryHorizontalEndIcon,
+  "/websites": GlobeIcon,
   "/tools": WrenchIcon,
   "https://icons.sonojs.com": ShapesIcon,
 }

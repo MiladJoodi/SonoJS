@@ -1,8 +1,9 @@
-/* Docs-site templates surfaces */
+/* Docs-site templates + websites shop surfaces (same token chrome) */
 
 @layer components {
-  /* Templates surfaces - light + dark (follows html.dark) */
-  [data-templates] {
+  /* Shared shop tokens - light + dark (follows html.dark) */
+  [data-templates],
+  [data-websites] {
     --sm-bg: #f3f4f6;
     --sm-bg-elevated: #ffffff;
     --sm-sidebar: #ffffff;
@@ -24,7 +25,8 @@
     color-scheme: light;
   }
 
-  .dark [data-templates] {
+  .dark [data-templates],
+  .dark [data-websites] {
     --sm-bg: #0a0c10;
     --sm-bg-elevated: #12151c;
     --sm-sidebar: rgb(12 14 20 / 0.95);

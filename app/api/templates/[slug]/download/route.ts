@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server"
 
 import { normalizeContentAccess } from "@/lib/access"
-import { canAccessContent, getViewer } from "@/lib/access-server"
+import { getViewer } from "@/lib/access-server"
 import {
   getProComponentArchive,
   GitHubProApiError,
@@ -9,8 +9,13 @@ import {
   ProArchiveNotFoundError,
   ProComponentNotFoundError,
 } from "@/lib/github-pro"
+import {
+  canDownloadCatalogProject,
+  projectRequiresPurchase,
+} from "@/lib/product-entitlement-access"
 import { getTemplateProject } from "@/lib/templates-catalog"
 import { recordTemplateDownload } from "@/db/queries/marketplace-downloads"
+import { userOwnsProductSlug } from "@/db/queries/product-entitlements"
 import { ensureUserFromClerk } from "@/db/queries/users"
 
 export const runtime = "nodejs"
@@ -54,8 +59,9 @@ async function safeLogDownload(input: {
 }
 
 /**
- * Member/pro-gated templates download.
- * Zip path comes from the central Pro registry (`registry/registry.json`) via slug.
+ * Catalog download (templates + websites via shared API).
+ * Free/member/pro tiers follow ContentAccess.
+ * Paid items (`priceCents > 0`) require a product entitlement — Pro alone is not enough.
  */
 export async function GET(_req: Request, context: RouteContext) {
   const { slug } = await context.params
@@ -65,18 +71,27 @@ export async function GET(_req: Request, context: RouteContext) {
     return NextResponse.json({ error: "Not found" }, { status: 404 })
   }
 
+  const viewer = await getViewer()
   const access = normalizeContentAccess(project.access ?? "member")
-  if (access !== "public" && !(await canAccessContent(access))) {
-    const viewer = await getViewer()
-    if (viewer.kind === "guest") {
-      return NextResponse.json(
-        { error: "Sign in required to download.", code: "auth_required" },
-        { status: 401 }
-      )
-    }
+  const requiresPurchase = projectRequiresPurchase(project)
+
+  let ownsProduct = false
+  if (requiresPurchase && viewer.kind !== "guest" && viewer.userId) {
+    // Ownership is always checked server-side for the catalog slug — never trust client.
+    ownsProduct = await userOwnsProductSlug(viewer.userId, project.slug)
+  }
+
+  const gate = canDownloadCatalogProject({
+    viewer,
+    access,
+    requiresPurchase,
+    ownsProduct,
+  })
+
+  if (!gate.ok) {
     return NextResponse.json(
-      { error: "Pro plan required.", code: "pro_required" },
-      { status: 403 }
+      { error: gate.error, code: gate.code },
+      { status: gate.status }
     )
   }
 

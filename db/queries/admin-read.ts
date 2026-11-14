@@ -32,6 +32,7 @@ import {
   type TopMarketplaceDownloadRow,
 } from "@/db/queries/marketplace-downloads"
 import { listPaymentsByClerkId } from "@/db/queries/payments"
+import { listProductLibraryByClerkId } from "@/db/queries/product-entitlements"
 import {
   marketplaceDownloads,
   payments,
@@ -143,6 +144,15 @@ export type AdminSubscriptionRow = {
   lastReconciledAt: string | null
 }
 
+export type AdminUserProductEntitlement = {
+  slug: string
+  title: string
+  href: string
+  source: "purchase" | "admin_grant"
+  amountCents: number | null
+  createdAt: string
+}
+
 export type AdminUserDetail = {
   user: {
     id: string
@@ -155,6 +165,7 @@ export type AdminUserDetail = {
   plan: AdminUserRow
   downloadsTotal: number
   downloads: MarketplaceDownloadRow[]
+  productEntitlements: AdminUserProductEntitlement[]
   subscriptions: AdminSubscriptionRow[]
   payments: Array<{
     id: string
@@ -692,34 +703,42 @@ export async function getAdminUserDetail(
     })
     if (!user) return null
 
-    const [plan, downloads, downloadsTotal, clerkFullName, subRows, paymentRows] =
-      await Promise.all([
-        getEffectivePlanForUser(user),
-        listTemplateDownloadsByUserId(user.id, { limit: 50 }),
-        countTemplateDownloadsByUserId(user.id),
-        softClerkFullName(user.clerkUserId),
-        db
-          .select({
-            id: subscriptions.id,
-            userId: subscriptions.userId,
-            email: users.email,
-            clerkUserId: users.clerkUserId,
-            planSlug: plans.slug,
-            planName: plans.name,
-            status: subscriptions.status,
-            stripeSubscriptionId: subscriptions.stripeSubscriptionId,
-            currentPeriodEnd: subscriptions.currentPeriodEnd,
-            cancelAtPeriodEnd: subscriptions.cancelAtPeriodEnd,
-            lastReconciledAt: subscriptions.lastReconciledAt,
-          })
-          .from(subscriptions)
-          .innerJoin(plans, eq(subscriptions.planId, plans.id))
-          .leftJoin(users, eq(subscriptions.userId, users.id))
-          .where(eq(subscriptions.userId, user.id))
-          .orderBy(desc(subscriptions.updatedAt))
-          .limit(50),
-        listPaymentsByClerkId(user.clerkUserId, { limit: 50 }),
-      ])
+    const [
+      plan,
+      downloads,
+      downloadsTotal,
+      clerkFullName,
+      subRows,
+      paymentRows,
+      libraryItems,
+    ] = await Promise.all([
+      getEffectivePlanForUser(user),
+      listTemplateDownloadsByUserId(user.id, { limit: 50 }),
+      countTemplateDownloadsByUserId(user.id),
+      softClerkFullName(user.clerkUserId),
+      db
+        .select({
+          id: subscriptions.id,
+          userId: subscriptions.userId,
+          email: users.email,
+          clerkUserId: users.clerkUserId,
+          planSlug: plans.slug,
+          planName: plans.name,
+          status: subscriptions.status,
+          stripeSubscriptionId: subscriptions.stripeSubscriptionId,
+          currentPeriodEnd: subscriptions.currentPeriodEnd,
+          cancelAtPeriodEnd: subscriptions.cancelAtPeriodEnd,
+          lastReconciledAt: subscriptions.lastReconciledAt,
+        })
+        .from(subscriptions)
+        .innerJoin(plans, eq(subscriptions.planId, plans.id))
+        .leftJoin(users, eq(subscriptions.userId, users.id))
+        .where(eq(subscriptions.userId, user.id))
+        .orderBy(desc(subscriptions.updatedAt))
+        .limit(50),
+      listPaymentsByClerkId(user.clerkUserId, { limit: 50 }),
+      listProductLibraryByClerkId(user.clerkUserId, { limit: 100 }),
+    ])
 
     return {
       user: {
@@ -733,6 +752,14 @@ export async function getAdminUserDetail(
       plan,
       downloadsTotal,
       downloads,
+      productEntitlements: libraryItems.map((item) => ({
+        slug: item.slug,
+        title: item.title,
+        href: item.href,
+        source: item.source,
+        amountCents: item.amountCents,
+        createdAt: item.createdAt,
+      })),
       subscriptions: subRows.map((r) => {
         const stripeId = r.stripeSubscriptionId
         return {

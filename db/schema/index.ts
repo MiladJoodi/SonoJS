@@ -41,3 +41,10 @@ export {
   type MarketplaceDownload,
   type NewMarketplaceDownload,
 } from "./marketplace-downloads"
+export {
+  productEntitlements,
+  productEntitlementSourceEnum,
+  type ProductEntitlement,
+  type NewProductEntitlement,
+  type ProductEntitlementSource,
+} from "./product-entitlements"

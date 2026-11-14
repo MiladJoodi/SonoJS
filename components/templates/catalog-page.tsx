@@ -17,7 +17,8 @@ import type { TemplatePreviewItem } from "@/lib/templates-preview-data"
 import type { TemplateCategory } from "@/lib/templates-catalog-meta"
 import { Button } from "@sonojs/ui/components/button"
 
-const CATEGORY_IDS = [
+/** Templates rail - website packs live on `/websites`. */
+const TEMPLATE_CATEGORY_IDS = [
   "dashboard",
   "landing",
   "saas",
@@ -29,8 +30,10 @@ const CATEGORY_IDS = [
   "fintech",
   "hero",
   "portfolio",
-  "website",
 ] as const satisfies readonly TemplateCategory[]
+
+/** Websites surface still uses the shared rail (single Website chip). */
+const WEBSITE_CATEGORY_IDS = ["website"] as const satisfies readonly TemplateCategory[]
 
 /** Initial / reset window size for All products. */
 const TEMPLATES_PAGE_SIZE = 24
@@ -42,9 +45,12 @@ function parsePriceParam(raw: string | null): TemplatePriceKey {
   return "all"
 }
 
-function parseCategoryParam(raw: string | null): TemplateCategory[] {
+function parseCategoryParam(
+  raw: string | null,
+  allowed: readonly TemplateCategory[]
+): TemplateCategory[] {
   if (!raw) return []
-  const set = new Set<string>(CATEGORY_IDS)
+  const set = new Set<string>(allowed)
   const first = raw
     .split(",")
     .map((s) => s.trim())
@@ -72,7 +78,6 @@ function TemplateProductsSection({
   const [visibleCount, setVisibleCount] = React.useState(TEMPLATES_PAGE_SIZE)
   const sentinelRef = React.useRef<HTMLDivElement>(null)
 
-  // Reset window whenever filter (or result set) changes.
   React.useEffect(() => {
     setVisibleCount(TEMPLATES_PAGE_SIZE)
   }, [
@@ -171,18 +176,29 @@ function TemplateProductsSection({
 
 export function TemplateCatalogPage({
   items,
+  surface = "templates",
+  hero,
 }: {
   /** Thin list rows from the server - no long product bodies. */
   items: TemplatePreviewItem[]
+  /** `websites` scopes tokens with `data-websites` and uses website category ids. */
+  surface?: "templates" | "websites"
+  /** Optional hero override (Websites injects its own). */
+  hero?: React.ReactNode
 }) {
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
+  const isWebsites = surface === "websites"
+  const categoryIds = isWebsites ? WEBSITE_CATEGORY_IDS : TEMPLATE_CATEGORY_IDS
 
   const [filters, setFilters] = React.useState<TemplateProductsFilterState>(
     () => ({
       ...EMPTY_PRODUCTS_FILTER,
-      categories: parseCategoryParam(searchParams.get("category")),
+      categories: parseCategoryParam(
+        searchParams.get("category"),
+        categoryIds
+      ),
       price: parsePriceParam(searchParams.get("price")),
     })
   )
@@ -222,16 +238,20 @@ export function TemplateCatalogPage({
   return (
     <div
       data-templates=""
+      data-websites={isWebsites ? "" : undefined}
       className="min-h-0 flex-1 bg-[var(--sm-bg)] text-[var(--sm-text)]"
     >
-      <TemplateHero />
+      {hero ?? <TemplateHero />}
 
       <div className="w-full py-8 lg:py-10">
         <TemplateFeaturedSection items={items} />
       </div>
 
       <div className="w-full px-4 pb-6 sm:px-6 lg:px-8 lg:pb-8">
-        <section id="templates-all" className="scroll-mt-24">
+        <section
+          id={isWebsites ? "websites-all" : "templates-all"}
+          className="scroll-mt-24"
+        >
           <TemplateProductsSection
             items={items}
             filters={filters}

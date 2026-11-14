@@ -10,6 +10,7 @@ export function TemplateDetailGallery({
   image,
   imageDark,
   video,
+  catalogHref = "/templates",
   className,
 }: {
   title: string
@@ -18,6 +19,8 @@ export function TemplateDetailGallery({
   imageDark?: string | null
   /** When set, plays instead of the still image. */
   video?: string | null
+  /** Back link target (Templates or Websites catalog). */
+  catalogHref?: string
   className?: string
 }) {
   return (
@@ -64,7 +67,7 @@ export function TemplateDetailGallery({
 
       <div className="absolute inset-x-0 top-0 flex items-start p-3 lg:hidden">
         <Link
-          href="/templates"
+          href={catalogHref}
           aria-label="Back"
           className="flex size-10 cursor-pointer items-center justify-center rounded-full border border-white/20 bg-[var(--sm-overlay)] text-white backdrop-blur-md"
         >

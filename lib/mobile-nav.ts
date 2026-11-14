@@ -64,8 +64,9 @@ export function getMobileMoreNavItems(): SiteNavItem[] {
 export function shouldShowMobileBottomNav(pathname: string): boolean {
   if (pathname.startsWith("/tools/")) return false
   if (pathname.startsWith("/charts/view")) return false
-  // Catalog stays; product detail (`/templates/[slug]`) hides the tab bar.
+  // Catalog stays; product detail hides the tab bar.
   if (/^\/templates\/[^/]+/.test(pathname)) return false
+  if (/^\/websites\/[^/]+/.test(pathname)) return false
   return true
 }
 

@@ -13,7 +13,10 @@ import {
 } from "@/components/templates/detail-purchase"
 import { TemplateDownloadButton } from "@/components/templates/template-download-button"
 import { TemplateProductCard } from "@/components/templates/product-card"
-import type { TemplatePreviewDetail } from "@/lib/templates-preview-data"
+import {
+  catalogBasePathForProject,
+  type TemplatePreviewDetail,
+} from "@/lib/templates-preview-data"
 
 function SectionLabel({ children }: { children: ReactNode }) {
   return (
@@ -25,11 +28,22 @@ function SectionLabel({ children }: { children: ReactNode }) {
 
 export function TemplateDetailPage({
   detail,
+  ownsProduct = false,
 }: {
   detail: TemplatePreviewDetail
+  /** Server-resolved product entitlement for paid items. */
+  ownsProduct?: boolean
 }) {
+  const catalogHref = catalogBasePathForProject(detail.project)
+
+  const isWebsite = detail.project.category === "website"
+
   return (
-    <div data-templates="" className="min-h-0 flex-1 bg-[var(--sm-bg)] text-[var(--sm-text)]">
+    <div
+      data-templates=""
+      data-websites={isWebsite ? "" : undefined}
+      className="min-h-0 flex-1 bg-[var(--sm-bg)] text-[var(--sm-text)]"
+    >
       <div className="mx-auto w-full max-w-[1400px] px-4 py-5 sm:px-6 sm:py-7 lg:px-8 lg:py-8">
         <div className="grid items-stretch gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(300px,340px)] lg:gap-x-8 xl:grid-cols-[minmax(0,1fr)_360px]">
           <div className="flex min-w-0 flex-col gap-6 lg:col-start-1">
@@ -38,6 +52,7 @@ export function TemplateDetailPage({
               image={detail.coverSrc || detail.gallery[0] || ""}
               imageDark={detail.coverSrcDark}
               video={detail.coverVideo}
+              catalogHref={catalogHref}
             />
 
             <div className="lg:hidden">
@@ -129,7 +144,10 @@ export function TemplateDetailPage({
               <TemplateDetailPurchase
                 detail={detail}
                 downloadCta={
-                  <TemplateDownloadButton project={detail.project} />
+                  <TemplateDownloadButton
+                    project={detail.project}
+                    ownsProduct={ownsProduct}
+                  />
                 }
               />
             </div>
@@ -143,7 +161,7 @@ export function TemplateDetailPage({
                 Related products
               </h2>
               <Link
-                href="/templates"
+                href={catalogHref}
                 className="cursor-pointer text-sm font-medium text-primary hover:underline"
               >
                 View all
@@ -168,7 +186,10 @@ export function TemplateDetailPage({
         <TemplateDetailActions
           detail={detail}
           downloadCta={
-            <TemplateDownloadButton project={detail.project} />
+            <TemplateDownloadButton
+              project={detail.project}
+              ownsProduct={ownsProduct}
+            />
           }
           className="mx-auto max-w-lg"
         />

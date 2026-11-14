@@ -2,12 +2,36 @@
 
 import * as React from "react"
 import Image from "next/image"
-import { ShoppingBagIcon } from "lucide-react"
+import { ShoppingBagIcon, type LucideIcon } from "lucide-react"
 import { useTheme } from "next-themes"
 
 import { cn } from "@/lib/utils"
 
-export function TemplateHero({ className }: { className?: string }) {
+export type TemplateHeroProps = {
+  className?: string
+  /** Eyebrow above the H1 */
+  eyebrow?: string
+  title?: React.ReactNode
+  description?: string
+  /** Background stills under /public - defaults to Templates art */
+  darkImageSrc?: string
+  lightImageSrc?: string
+  Icon?: LucideIcon
+}
+
+export function TemplateHero({
+  className,
+  eyebrow = "Templates",
+  title = (
+    <>
+      Ship faster with <span className="text-primary">ready projects</span>
+    </>
+  ),
+  description = "Free templates and full-stack projects - ready to ship, designed to feel like a real product.",
+  darkImageSrc = "/templates/hero/hero-bg-v2.png",
+  lightImageSrc = "/templates/hero/hero-bg-light.png",
+  Icon = ShoppingBagIcon,
+}: TemplateHeroProps) {
   const { resolvedTheme } = useTheme()
   const [mounted, setMounted] = React.useState(false)
   React.useEffect(() => setMounted(true), [])
@@ -26,7 +50,7 @@ export function TemplateHero({ className }: { className?: string }) {
         className="pointer-events-none absolute inset-0 select-none [&_img]:pointer-events-none [&_img]:select-none"
       >
         <Image
-          src="/templates/hero/hero-bg-v2.png"
+          src={darkImageSrc}
           alt=""
           fill
           priority
@@ -38,7 +62,7 @@ export function TemplateHero({ className }: { className?: string }) {
           )}
         />
         <Image
-          src="/templates/hero/hero-bg-light.png"
+          src={lightImageSrc}
           alt=""
           fill
           priority
@@ -63,8 +87,8 @@ export function TemplateHero({ className }: { className?: string }) {
       <div className="relative z-10 mx-auto w-full max-w-[1100px]">
         <div className={cn("mx-auto max-w-xl", isDark ? "text-white" : "text-zinc-900")}>
           <p className="mb-2 inline-flex items-center justify-center gap-1.5 text-sm font-medium text-primary">
-            <ShoppingBagIcon className="size-4" aria-hidden />
-            Templates
+            <Icon className="size-4" aria-hidden />
+            {eyebrow}
           </p>
           <h1
             className={cn(
@@ -72,8 +96,7 @@ export function TemplateHero({ className }: { className?: string }) {
               isDark ? "text-white" : "text-zinc-900"
             )}
           >
-            Ship faster with{" "}
-            <span className="text-primary">ready projects</span>
+            {title}
           </h1>
           <p
             className={cn(
@@ -81,8 +104,7 @@ export function TemplateHero({ className }: { className?: string }) {
               isDark ? "text-white/70" : "text-zinc-600"
             )}
           >
-            Free templates and full-stack projects - ready to ship,
-            designed to feel like a real product.
+            {description}
           </p>
         </div>
       </div>

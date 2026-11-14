@@ -106,6 +106,25 @@ export function templateDetailCoverSrcDark(
   )
 }
 
+/** Catalog surface for a project - websites are a separate shop from Templates. */
+export function isWebsiteProject(
+  project: Pick<TemplateProject, "category">
+): boolean {
+  return project.category === "website"
+}
+
+export function catalogBasePathForProject(
+  project: Pick<TemplateProject, "category">
+): "/templates" | "/websites" {
+  return isWebsiteProject(project) ? "/websites" : "/templates"
+}
+
+export function catalogHrefForProject(
+  project: Pick<TemplateProject, "category" | "slug">
+): string {
+  return `${catalogBasePathForProject(project)}/${project.slug}`
+}
+
 export function toTemplateItem(
   project: TemplateProject,
   catalogIndex = 0
@@ -122,7 +141,7 @@ export function toTemplateItem(
     reviewCount: project.reviewCount,
     priceLabel: project.priceLabel || "Free",
     priceCents: project.priceCents ?? 0,
-    href: `/templates/${project.slug}`,
+    href: catalogHrefForProject(project),
     liveUrl: project.liveUrl?.trim() ? project.liveUrl.trim() : null,
     stack: project.stack,
     updatedAt: project.updatedAt,
@@ -141,19 +160,33 @@ export function compareTemplateNewest(
   return b.catalogIndex - a.catalogIndex
 }
 
-export function getTemplatePreviewItems(): TemplatePreviewItem[] {
+export type TemplateCatalogSurface = "templates" | "websites"
+
+export function getTemplatePreviewItems(
+  surface: TemplateCatalogSurface = "templates"
+): TemplatePreviewItem[] {
   return templateProjects
     .map((p, i) => ({ p, i }))
     .filter(({ p }) => p.enabled)
+    .filter(({ p }) =>
+      surface === "websites" ? isWebsiteProject(p) : !isWebsiteProject(p)
+    )
     .map(({ p, i }) => toTemplateItem(p, i))
     .sort(compareTemplateNewest)
 }
 
+export function getWebsitePreviewItems(): TemplatePreviewItem[] {
+  return getTemplatePreviewItems("websites")
+}
+
 export function getTemplatePreviewDetail(
-  slug: string
+  slug: string,
+  surface?: TemplateCatalogSurface
 ): TemplatePreviewDetail | null {
   const project = getTemplateProject(slug)
   if (!project || !project.enabled) return null
+  if (surface === "websites" && !isWebsiteProject(project)) return null
+  if (surface === "templates" && isWebsiteProject(project)) return null
 
   const catalogIndex = templateProjects.findIndex((p) => p.slug === slug)
   const base = toTemplateItem(project, catalogIndex < 0 ? 0 : catalogIndex)

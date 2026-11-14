@@ -22,6 +22,7 @@
 @source "../components/admin/**/*.{ts,tsx}";
 @source "../components/tools/**/*.{ts,tsx}";
 @source "../components/templates/**/*.{ts,tsx}";
+@source "../components/websites/**/*.{ts,tsx}";
 @source "../components/pricing/**/*.{ts,tsx}";
 @source "../components/contact/**/*.{ts,tsx}";
 @source "../components/legal/**/*.{ts,tsx}";
@@ -40,6 +41,7 @@
 @source "../registry/blocks/marketing/offer-card/**/*.{ts,tsx}";
 
 @source "../app/(app)/templates/**/*.{ts,tsx}";
+@source "../app/(app)/websites/**/*.{ts,tsx}";
 @source "../app/(app)/admin/**/*.{ts,tsx}";
 @source "../app/(app)/tools/**/*.{ts,tsx}";
 @source "../app/(app)/pricing/**/*.{ts,tsx}";

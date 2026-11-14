@@ -26,6 +26,14 @@ const marketplaceToTemplatesRedirects = [
   ["/api/marketplace/:slug/download", "/api/templates/:slug/download"],
 ] as const;
 
+/** Website packs moved off Templates into `/websites`. */
+const templatesWebsiteRedirects = [
+  {
+    source: "/templates/sonojs-website-:id",
+    destination: "/websites/sonojs-website-:id",
+  },
+] as const;
+
 const nextConfig: NextConfig = {
   // Workspace package - must transpile + watch for HMR
   transpilePackages: ["@sonojs/ui", "@mdxeditor/editor"],
@@ -79,6 +87,11 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       ...marketplaceToTemplatesRedirects.map(([source, destination]) => ({
+        source,
+        destination,
+        permanent: true as const,
+      })),
+      ...templatesWebsiteRedirects.map(({ source, destination }) => ({
         source,
         destination,
         permanent: true as const,

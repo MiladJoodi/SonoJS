@@ -13,6 +13,7 @@ import {
 } from "@/components/admin/admin-format"
 import { AdminStatus } from "@/components/admin/admin-status"
 import { PlanGrantForm } from "@/components/admin/plan-grant-form"
+import { ProductEntitlementGrantForm } from "@/components/admin/product-entitlement-grant-form"
 import { CopyButton } from "@/components/docs/copy-button"
 import { cn } from "@/lib/utils"
 import {
@@ -21,6 +22,7 @@ import {
   useAdminFetch,
 } from "@/components/admin/use-admin-fetch"
 import type { AdminUserDetail } from "@/db/queries/admin-read"
+import { Button } from "@sonojs/ui/components/button"
 import {
   Card,
   CardContent,
@@ -53,6 +55,41 @@ export function AdminUserDetailPanel({ userId }: { userId: string }) {
     invalidateAdminCache("/api/admin")
     refresh()
   }, [refresh])
+
+  const [revokingSlug, setRevokingSlug] = React.useState<string | null>(null)
+  const [revokeError, setRevokeError] = React.useState<string | null>(null)
+
+  const revokeProduct = React.useCallback(
+    async (productSlug: string) => {
+      if (!detail?.user.clerkUserId || revokingSlug) return
+      setRevokingSlug(productSlug)
+      setRevokeError(null)
+      try {
+        const res = await fetch("/api/admin/product-entitlements", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            clerkUserId: detail.user.clerkUserId,
+            productSlug,
+            action: "revoke",
+          }),
+        })
+        const data = (await res.json().catch(() => ({}))) as { error?: string }
+        if (!res.ok) {
+          throw new Error(data.error || "Could not revoke")
+        }
+        invalidateAdminCache("/api/admin")
+        refresh()
+      } catch (err) {
+        setRevokeError(
+          err instanceof Error ? err.message : "Could not revoke"
+        )
+      } finally {
+        setRevokingSlug(null)
+      }
+    },
+    [detail?.user.clerkUserId, refresh, revokingSlug]
+  )
 
   if (loading && !detail) {
     return (
@@ -190,6 +227,92 @@ export function AdminUserDetailPanel({ userId }: { userId: string }) {
         initialClerkUserId={detail.user.clerkUserId}
         onSuccess={onGrantSuccess}
       />
+
+      <ProductEntitlementGrantForm
+        initialClerkUserId={detail.user.clerkUserId}
+        onSuccess={onGrantSuccess}
+      />
+
+      <Card className="border-border/60 shadow-none">
+        <CardHeader className="border-b border-border/50">
+          <CardTitle>Product entitlements</CardTitle>
+          <CardDescription>
+            Active owned products (purchase or admin grant).
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-3 pt-4">
+          {revokeError ? (
+            <p className="text-sm text-destructive">{revokeError}</p>
+          ) : null}
+          {detail.productEntitlements.length === 0 ? (
+            <p className="text-sm text-muted-foreground">None.</p>
+          ) : (
+            <div className="overflow-x-auto">
+              <table className="w-full min-w-180 text-start text-sm">
+                <thead>
+                  <tr className="border-b border-border/60">
+                    <th className={adminThClass}>Product</th>
+                    <th className={adminThClass}>Source</th>
+                    <th className={adminThClass}>Amount</th>
+                    <th className={adminThClass}>When</th>
+                    <th className={adminThClass}> </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {detail.productEntitlements.map((e) => (
+                    <tr key={e.slug} className="border-b border-border/40">
+                      <td className={adminTdClass}>
+                        <Link
+                          href={e.href}
+                          className="cursor-pointer underline-offset-4 hover:underline"
+                        >
+                          {e.title}
+                        </Link>
+                        <p className="font-mono text-xs text-muted-foreground" dir="ltr">
+                          {e.slug}
+                        </p>
+                      </td>
+                      <td className={adminTdClass}>
+                        <AdminStatus
+                          status={
+                            e.source === "admin_grant" ? "manual" : "stripe"
+                          }
+                        />
+                      </td>
+                      <td className={adminTdClass} dir="ltr">
+                        {e.amountCents != null
+                          ? formatCents(e.amountCents)
+                          : "—"}
+                      </td>
+                      <td
+                        className={cn(adminTdClass, "text-muted-foreground")}
+                        dir="ltr"
+                      >
+                        {formatDate(e.createdAt)}
+                      </td>
+                      <td className={adminTdClass}>
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          className="h-8 cursor-pointer shadow-none disabled:cursor-not-allowed"
+                          disabled={revokingSlug === e.slug}
+                          onClick={() => void revokeProduct(e.slug)}
+                        >
+                          {revokingSlug === e.slug ? (
+                            <Spinner className="size-3.5" />
+                          ) : null}
+                          Revoke
+                        </Button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </CardContent>
+      </Card>
 
       <Card className="border-border/60 shadow-none">
         <CardHeader className="border-b border-border/50">

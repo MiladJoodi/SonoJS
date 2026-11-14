@@ -9109,8 +9109,8 @@ export const templateProjects: TemplateProject[] = [
       "Empire Owl Salon is a multi-page independent salon website by SonoJS (demo brand: Empire Owl Salon, Langford BC). Zero-build static HTML with Tailwind CDN, Lucide, DM Sans + Newsreader, and vanilla JS. Home hero Royal hair, wise hands, homestyle care with booking strip, lookbook marquee, services accordion, before/after slider, testimonials, FAQs, and map; plus About, Services, Service detail, Pricing, Gallery lightbox, Team, 3-step Booking wizard, Blog, Blog post, Contact, and 404. Demo salon chrome only - booking form has no backend. Run with npx serve . or host statically on Cloudflare Workers.",
     category: "website",
     stack: ["html", "css", "javascript", "tailwind", "lucide"],
-    priceLabel: "Free",
-    priceCents: 0,
+    priceLabel: "$29",
+    priceCents: 2900,
     rating: 0,
     reviewCount: 0,
     salesLabel: "",
@@ -9171,8 +9171,8 @@ export const templateProjects: TemplateProject[] = [
       "NULLWAVE is a multi-page cyberpunk net-radio website by SonoJS (demo brand: NULLWAVE). Zero-build static HTML with custom CSS and vanilla JS. Home hero Cyberpunk music for reading & coding with mini player, Today on air schedule, four stations (Focus / Night drive / Deep read / Tape room), signal chain, layered bed mixer, archive mixes, membership CTA; plus Schedule, Stations, Archive, Player, About, Blog, Membership, Contact, Support, Legal, and 404. Demo radio chrome only - no live stream backend. Run with npx serve . or host statically on Cloudflare Workers.",
     category: "website",
     stack: ["html", "css", "javascript"],
-    priceLabel: "Free",
-    priceCents: 0,
+    priceLabel: "$29",
+    priceCents: 2900,
     rating: 0,
     reviewCount: 0,
     salesLabel: "",
@@ -9233,8 +9233,8 @@ export const templateProjects: TemplateProject[] = [
       "Vidalli Andrea is a bilingual (EN/DE) luxury jewelry boutique website by SonoJS (demo brand: Vidalli Andrea, Krottendorf AT). Zero-build static HTML with local Cormorant Garamond + Manrope, custom CSS, and vanilla JS. Home hero Handcrafted with signature pieces, atelier story, lookbook, and service promises; full shop with filters, product detail, cart drawer, wishlist, checkout, account, journal, FAQ, contact, and 404 — mirrored under de/. Demo storefront chrome only - localStorage cart, no payment backend. Run with npx serve . or host statically on Cloudflare Workers.",
     category: "website",
     stack: ["html", "css", "javascript"],
-    priceLabel: "Free",
-    priceCents: 0,
+    priceLabel: "$29",
+    priceCents: 2900,
     rating: 0,
     reviewCount: 0,
     salesLabel: "",
@@ -9295,8 +9295,8 @@ export const templateProjects: TemplateProject[] = [
       "TITAN is a multi-page premium gym & fitness website by SonoJS (demo brand: TITAN). Zero-build static HTML with compiled Tailwind CSS, Outfit + Syne, Lucide, GSAP, Lenis, Swiper, Leaflet, and a Three.js WebGL performance sculpture. Home hero Train harder / Recover smarter / Own your edge with trial CTAs, zones, classes, memberships, and testimonials; plus About, Classes, Schedule, Trainers, Gallery, Shop, Product, Pricing, Blog, Contact, Login, and 404. Demo club chrome only - forms have no backend. Run with npx serve . (optional npm run build:css). Host statically on Cloudflare Workers.",
     category: "website",
     stack: ["html", "css", "javascript", "tailwind", "lucide", "gsap", "threejs"],
-    priceLabel: "Free",
-    priceCents: 0,
+    priceLabel: "$29",
+    priceCents: 2900,
     rating: 0,
     reviewCount: 0,
     salesLabel: "",
@@ -9357,8 +9357,8 @@ export const templateProjects: TemplateProject[] = [
       "ORNA is a multi-page luxury rug marketplace website by SonoJS (demo brand: ORNA Atelier). Zero-build static HTML with custom CSS design tokens, vanilla JS, and vendored Lenis, GSAP + ScrollTrigger, and Swiper. Home hero Handwoven Luxury Underfoot with Signatures gallery filters, loom video, room stories, and journal; plus Shop, Product, Cart, Checkout, Wishlist, Lookbook, About, Journal, Contact, FAQ, Account, and 404. Demo storefront chrome only - localStorage cart/wishlist, no payment backend. Run with npx serve . or host statically on Cloudflare Workers.",
     category: "website",
     stack: ["html", "css", "javascript", "gsap"],
-    priceLabel: "Free",
-    priceCents: 0,
+    priceLabel: "$29",
+    priceCents: 2900,
     rating: 0,
     reviewCount: 0,
     salesLabel: "",
@@ -9419,8 +9419,8 @@ export const templateProjects: TemplateProject[] = [
       "KÁVA & Co. is a multi-page premium café website by SonoJS (demo brand: KÁVA & Co. Coffee, Mill Bay Centre). Built with Vite, React 19, TypeScript, Tailwind CSS 4, Framer Motion, React Router, and Lucide. Home hero with scroll-scrub cinema, ritual, daily board, reviews, and visit CTA; plus Menu with 3D tilt cards, About, Gallery lightbox, Reserve multi-step form, Contact, Journal, and journal posts. Dark/light theme toggle. Demo café chrome only - forms have no backend. Run with npm install && npm run dev or host the Vite build on Cloudflare Workers.",
     category: "website",
     stack: ["react", "vite", "typescript", "tailwind", "lucide", "reactrouter"],
-    priceLabel: "Free",
-    priceCents: 0,
+    priceLabel: "$29",
+    priceCents: 2900,
     rating: 0,
     reviewCount: 0,
     salesLabel: "",
@@ -9472,6 +9472,68 @@ export const templateProjects: TemplateProject[] = [
       "npm install && npm run dev",
     ],
   },
+  {
+    slug: "sonojs-website-07",
+    title: "Velora",
+    tagline:
+      "Run agent pipelines with a clear audit trail - ops console multi-page site.",
+    description:
+      "Velora is a multi-page premium HTML marketing site by SonoJS (demo brand: Velora). Zero-build static HTML with custom CSS design tokens (copper/sage), self-hosted Public Sans + Syne, local SVG icon sprite, and vanilla JS. Home hero Run agent pipelines with a clear audit trail plus mock console, architecture bento, use-case tabs, pricing with yearly toggle, and testimonials; plus Features, Pricing, About, Careers, Blog, Blog post, Docs, Contact, and 404. Demo product chrome only - forms have no backend. Run with npx serve . or host statically on Cloudflare Workers.",
+    category: "website",
+    stack: ["html", "css", "javascript"],
+    priceLabel: "$29",
+    priceCents: 2900,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 28,
+    accent: "28",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "landing",
+    coverImage: "/templates/projects/website/sonojs-website-07/main.webp",
+    coverImageDark: null,
+    coverVideo: "/templates/projects/website/sonojs-website-07/cover.mp4",
+    detailCoverImage:
+      "/templates/projects/website/sonojs-website-07/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-website-07.sonojs2.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-14",
+    firstReleasedAt: "2026-11-14",
+    screens: 10,
+    runCommand: "npx serve .",
+    highlights: [
+      {
+        title: "Full SaaS marketing site",
+        body: "Home, features, pricing, about, careers, blog, docs, contact, and 404.",
+      },
+      {
+        title: "Ops-console mock UI",
+        body: "Pipeline hub mock window, use-case tabs, and yearly pricing toggle.",
+      },
+      {
+        title: "Offline-friendly assets",
+        body: "Local icon sprite + self-hosted fonts; no Iconify / Google Fonts CDN required.",
+      },
+      {
+        title: "Zero-build static",
+        body: "npx serve . - progressive enhancement; usable with JS disabled.",
+      },
+    ],
+    includes: [
+      "10 HTML pages (home, features, pricing, about, careers, blog, docs, contact, 404)",
+      "css/tokens.css + fonts.css + main.css + pages.css",
+      "js/ (data, app, pricing, tabs, carousel, forms, blog) + partials/",
+      "assets/icons.svg + fonts + covers/illustrations + README",
+    ],
+    requirements: [
+      "Modern browser",
+      "Static file host (npx serve .)",
+    ],
+  },
 ]
 
 export function getTemplateProject(
@@ -9484,11 +9546,23 @@ export function getRelatedTemplateProjects(
   project: TemplateProject,
   limit = 3
 ): TemplateProject[] {
+  const isWebsite = project.category === "website"
+  const sameSurface = (p: TemplateProject) =>
+    isWebsite ? p.category === "website" : p.category !== "website"
+
   return templateProjects
-    .filter((p) => p.slug !== project.slug && p.category === project.category)
+    .filter(
+      (p) =>
+        p.slug !== project.slug &&
+        sameSurface(p) &&
+        p.category === project.category
+    )
     .concat(
       templateProjects.filter(
-        (p) => p.slug !== project.slug && p.category !== project.category
+        (p) =>
+          p.slug !== project.slug &&
+          sameSurface(p) &&
+          p.category !== project.category
       )
     )
     .slice(0, limit)

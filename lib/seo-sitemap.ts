@@ -76,7 +76,16 @@ export function sitemapPathExists(href: string): boolean {
   if (normalized.startsWith("/templates/")) {
     const slug = normalized.slice("/templates/".length)
     if (!slug || slug.includes("/")) return false
-    return templateProjects.some((p) => p.slug === slug)
+    return templateProjects.some(
+      (p) => p.slug === slug && p.category !== "website"
+    )
+  }
+  if (normalized.startsWith("/websites/")) {
+    const slug = normalized.slice("/websites/".length)
+    if (!slug || slug.includes("/")) return false
+    return templateProjects.some(
+      (p) => p.slug === slug && p.category === "website"
+    )
   }
   return appPageFileCandidates(normalized).some((file) => existsSync(file))
 }
@@ -117,8 +126,13 @@ export function buildSitemapPaths(): string[] {
   pushUnique(paths, "/docs/components")
   pushUnique(paths, "/pricing")
   pushUnique(paths, "/templates")
+  pushUnique(paths, "/websites")
   for (const project of templateProjects) {
-    pushUnique(paths, `/templates/${project.slug}`)
+    if (project.category === "website") {
+      pushUnique(paths, `/websites/${project.slug}`)
+    } else {
+      pushUnique(paths, `/templates/${project.slug}`)
+    }
   }
 
   for (const page of get3dPages()) {

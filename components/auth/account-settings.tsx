@@ -11,12 +11,17 @@ import {
   EyeOffIcon,
   KeyIcon,
   Link2Icon,
+  PackageIcon,
   ShieldIcon,
   Trash2Icon,
   UserIcon,
 } from "lucide-react"
 
-import { AccountIdentityHero, BillingPanel } from "@/components/auth/account"
+import {
+  AccountIdentityHero,
+  BillingPanel,
+  LibraryPanel,
+} from "@/components/auth/account"
 import {
   ReverificationDialog,
   type ReverificationRequest,
@@ -55,6 +60,7 @@ const NAV = [
   { value: "security", label: "Security", icon: ShieldIcon },
   { value: "connections", label: "Connections", icon: Link2Icon },
   { value: "billing", label: "Billing", icon: CreditCardIcon },
+  { value: "library", label: "Library", icon: PackageIcon },
   { value: "danger", label: "Danger zone", icon: Trash2Icon },
 ] as const
 
@@ -732,6 +738,14 @@ export function AccountSettings({
                 loading={billingLoading}
                 loadError={billingError}
               />
+            </TabsContent>
+
+            <TabsContent
+              value="library"
+              forceMount
+              className="mt-0 data-[state=inactive]:hidden"
+            >
+              <LibraryPanel />
             </TabsContent>
 
             <TabsContent value="danger" className="mt-0">

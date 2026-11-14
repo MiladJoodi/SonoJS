@@ -9,15 +9,20 @@ import { getSubscriptionByStripeId } from "@/db/queries/subscriptions"
 import { upsertPayment } from "@/db/queries/payments"
 import { reconcileSubscriptionFromStripe } from "@/db/queries/subscriptions"
 import { syncClerkPlanFromDb } from "@/db/queries/sync-clerk-plan"
+import { grantProductEntitlement } from "@/db/queries/product-entitlements"
 import {
+  ensureUserFromClerk,
   linkStripeCustomerToClerkUser,
   resolveBillingUser,
 } from "@/db/queries/users"
 import type { Payment, User } from "@/db/schema"
+import { projectRequiresPurchase } from "@/lib/product-entitlement-access"
+import { PRODUCT_CHECKOUT_KIND } from "@/lib/stripe/create-product-checkout-session"
 import {
   stripeId,
   stripeMetadataClerkUserId,
 } from "@/lib/stripe/stripe-ids"
+import { getTemplateProject } from "@/lib/templates-catalog"
 import type { StripeWebhookEvent } from "@/lib/stripe/verify-webhook"
 
 /**
@@ -310,17 +315,176 @@ async function handleInvoiceEvent(
   return { clerkUserId: user.clerkUserId, shouldSyncClerk: true }
 }
 
+async function handleProductPurchaseCheckout(
+  event: StripeWebhookEvent,
+  claim: WebhookClaim,
+  obj: Record<string, unknown>
+): Promise<HandleStripeEventResult> {
+  const metadata = asRecord(obj.metadata)
+  const clerkUserId =
+    stripeMetadataClerkUserId(metadata ?? undefined) ??
+    (typeof obj.client_reference_id === "string"
+      ? obj.client_reference_id.trim() || null
+      : null)
+
+  const productSlugRaw = metadata?.productSlug
+  const productSlug =
+    typeof productSlugRaw === "string" ? productSlugRaw.trim() : ""
+
+  const sessionId = stripeId(obj.id as string)
+  const paymentIntentId = stripeId(
+    obj.payment_intent as string | { id?: string } | null
+  )
+  const paymentStatus =
+    typeof obj.payment_status === "string" ? obj.payment_status : ""
+  const amountTotal =
+    typeof obj.amount_total === "number" && Number.isFinite(obj.amount_total)
+      ? obj.amount_total
+      : null
+  const currency =
+    typeof obj.currency === "string" ? obj.currency.trim().toLowerCase() : ""
+
+  if (!clerkUserId || !productSlug || !sessionId) {
+    return {
+      clerkUserId,
+      shouldSyncClerk: false,
+      auditNote:
+        "product_checkout missing clerkUserId, productSlug, or session id",
+    }
+  }
+
+  if (paymentStatus !== "paid") {
+    webhookLog("product_checkout_not_paid", {
+      eventId: event.id,
+      type: event.type,
+      paymentStatus,
+      productSlug,
+    })
+    return {
+      clerkUserId,
+      shouldSyncClerk: false,
+      auditNote: `product_checkout_not_paid status=${paymentStatus}`,
+    }
+  }
+
+  const project = getTemplateProject(productSlug)
+  if (!project || !project.enabled || !projectRequiresPurchase(project)) {
+    return {
+      clerkUserId,
+      shouldSyncClerk: false,
+      auditNote: `product_checkout_invalid_slug slug=${productSlug}`,
+    }
+  }
+
+  const catalogAmount = Math.floor(project.priceCents)
+  if (amountTotal !== catalogAmount || (currency && currency !== "usd")) {
+    webhookLog("product_checkout_amount_mismatch", {
+      eventId: event.id,
+      type: event.type,
+      productSlug,
+      amountTotal: amountTotal ?? -1,
+      catalogAmount,
+      currency: currency || "none",
+    })
+    return {
+      clerkUserId,
+      shouldSyncClerk: false,
+      auditNote: `product_checkout_amount_mismatch paid=${amountTotal} catalog=${catalogAmount}`,
+    }
+  }
+
+  const stripeCustomerId = stripeId(
+    obj.customer as string | { id?: string } | null
+  )
+
+  let user: User
+  if (stripeCustomerId) {
+    user = await linkStripeCustomerToClerkUser({
+      clerkUserId,
+      stripeCustomerId,
+    })
+  } else {
+    user = await ensureUserFromClerk(clerkUserId)
+  }
+
+  // Idempotent: unique (user, slug) + unique stripe session id
+  await grantProductEntitlement({
+    userId: user.id,
+    clerkUserId: user.clerkUserId,
+    productSlug: project.slug,
+    source: "purchase",
+    stripeCheckoutSessionId: sessionId,
+    amountCents: catalogAmount,
+  })
+
+  webhookLog("product_entitlement_granted", {
+    eventId: event.id,
+    type: event.type,
+    productSlug: project.slug,
+    amountCents: catalogAmount,
+  })
+
+  // One-time Checkout has no invoice — record via payment_intent for Billing /
+  // admin Payments history (same `payments` table as Pro invoices).
+  if (paymentIntentId) {
+    await upsertPayment({
+      userId: user.id,
+      subscriptionId: null,
+      stripeInvoiceId: null,
+      stripePaymentIntentId: paymentIntentId,
+      amountCents: catalogAmount,
+      currency: currency || "usd",
+      status: "succeeded",
+      claim,
+      lastStripeEventCreated: event.created,
+    })
+    webhookLog("product_payment_recorded", {
+      eventId: event.id,
+      type: event.type,
+      productSlug: project.slug,
+      amountCents: catalogAmount,
+    })
+  } else {
+    webhookLog("product_payment_missing_pi", {
+      eventId: event.id,
+      type: event.type,
+      productSlug: project.slug,
+      sessionId,
+    })
+  }
+
+  return {
+    clerkUserId: user.clerkUserId,
+    shouldSyncClerk: false,
+    auditNote: paymentIntentId
+      ? `product_entitlement_granted slug=${project.slug}`
+      : `product_entitlement_granted slug=${project.slug}; payment_row_skipped_no_pi`,
+  }
+}
+
 async function handleCheckoutCompleted(
   event: StripeWebhookEvent,
   claim: WebhookClaim,
   obj: Record<string, unknown>,
   options?: HandleStripeEventOptions
 ): Promise<HandleStripeEventResult> {
+  const metadata = asRecord(obj.metadata)
+  const kind =
+    typeof metadata?.kind === "string" ? metadata.kind.trim() : ""
+  const mode = typeof obj.mode === "string" ? obj.mode : ""
+
+  if (
+    kind === PRODUCT_CHECKOUT_KIND ||
+    (mode === "payment" && typeof metadata?.productSlug === "string")
+  ) {
+    return handleProductPurchaseCheckout(event, claim, obj)
+  }
+
   const stripeCustomerId = stripeId(
     obj.customer as string | { id?: string } | null
   )
   const clerkUserId =
-    stripeMetadataClerkUserId(asRecord(obj.metadata)) ??
+    stripeMetadataClerkUserId(metadata ?? undefined) ??
     (typeof obj.client_reference_id === "string"
       ? obj.client_reference_id.trim() || null
       : null)

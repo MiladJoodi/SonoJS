@@ -4,6 +4,7 @@ import { notFound } from "next/navigation"
 import { TemplateDetailPage } from "@/components/templates/detail-page"
 import { templateProjects } from "@/lib/templates-catalog"
 import { getTemplatePreviewDetail } from "@/lib/templates-preview-data"
+import { resolveProductOwnership } from "@/lib/resolve-product-ownership"
 import { pageMetadata } from "@/lib/seo"
 
 type PageProps = {
@@ -14,14 +15,16 @@ type PageProps = {
 export const dynamic = "force-dynamic"
 
 export function generateStaticParams() {
-  return templateProjects.map((p) => ({ slug: p.slug }))
+  return templateProjects
+    .filter((p) => p.category !== "website")
+    .map((p) => ({ slug: p.slug }))
 }
 
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { slug } = await params
-  const detail = getTemplatePreviewDetail(slug)
+  const detail = getTemplatePreviewDetail(slug, "templates")
   if (!detail) {
     return pageMetadata({
       title: "Project",
@@ -38,8 +41,13 @@ export async function generateMetadata({
 
 export default async function TemplateProjectPage({ params }: PageProps) {
   const { slug } = await params
-  const detail = getTemplatePreviewDetail(slug)
+  const detail = getTemplatePreviewDetail(slug, "templates")
   if (!detail) notFound()
 
-  return <TemplateDetailPage detail={detail} />
+  const ownsProduct = await resolveProductOwnership(
+    detail.slug,
+    detail.priceCents
+  )
+
+  return <TemplateDetailPage detail={detail} ownsProduct={ownsProduct} />
 }
