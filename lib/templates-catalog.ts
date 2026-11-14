@@ -9596,6 +9596,68 @@ export const templateProjects: TemplateProject[] = [
       "Static file host (npx serve .)",
     ],
   },
+  {
+    slug: "sonojs-website-09",
+    title: "Maison Vale",
+    tagline:
+      "Seasonal Canadian fine dining in Montréal - restaurant multi-page site.",
+    description:
+      "Maison Vale is a multi-page premium restaurant website by SonoJS (demo brand: Maison Vale, Montréal). Zero-build static HTML with custom CSS design tokens, dark/light theme, self-hosted Playfair Display + Source Sans 3, local SVG icons, and vanilla JS. Home hero Seasonal Canadian fine dining in Montréal with story, chef special, menu preview, gallery, testimonials, and reservation form; plus Menu with filters and cart, Order + confirmation, Reservations + confirmation, About, Gallery lightbox, Journal with 3 posts, Contact, FAQ, and 404. Demo restaurant chrome only - cart/reservations use localStorage, no backend. Run with npx serve . or host statically on Cloudflare Workers.",
+    category: "website",
+    stack: ["html", "css", "javascript"],
+    priceLabel: "$1",
+    priceCents: 100,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 28,
+    accent: "28",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "landing",
+    coverImage: "/templates/projects/website/sonojs-website-09/main.webp",
+    coverImageDark: null,
+    coverVideo: "/templates/projects/website/sonojs-website-09/cover.mp4",
+    detailCoverImage:
+      "/templates/projects/website/sonojs-website-09/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-website-09.sonojs2.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-15",
+    firstReleasedAt: "2026-11-15",
+    screens: 15,
+    runCommand: "npx serve .",
+    highlights: [
+      {
+        title: "Full restaurant site",
+        body: "Menu, gallery, journal, reservations, online order, contact, FAQ, and 404.",
+      },
+      {
+        title: "Order + reserve demos",
+        body: "Cart with pickup/delivery checkout and reservation flow with confirmations.",
+      },
+      {
+        title: "Dark / light theme",
+        body: "Header toggle with preference saved locally; copper accent fine-dining tokens.",
+      },
+      {
+        title: "Zero-build static",
+        body: "npx serve . - self-hosted fonts, local icons, real food photography.",
+      },
+    ],
+    includes: [
+      "15 HTML pages (home, menu, order, reservations, gallery, blog ×3, about, contact, FAQ, 404…)",
+      "assets/css (tokens, base, components, layout) + self-hosted fonts",
+      "assets/js (data, cart, main) — localStorage cart & booking demos",
+      "assets/img food/interior photos + icons.svg + README",
+    ],
+    requirements: [
+      "Modern browser",
+      "Static file host (npx serve .)",
+    ],
+  },
 ]
 
 export function getTemplateProject(
