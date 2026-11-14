@@ -9348,6 +9348,130 @@ export const templateProjects: TemplateProject[] = [
       "Static file host (npx serve .)",
     ],
   },
+  {
+    slug: "sonojs-website-05",
+    title: "ORNA",
+    tagline:
+      "Handwoven luxury underfoot - rug atelier storefront with lookbook.",
+    description:
+      "ORNA is a multi-page luxury rug marketplace website by SonoJS (demo brand: ORNA Atelier). Zero-build static HTML with custom CSS design tokens, vanilla JS, and vendored Lenis, GSAP + ScrollTrigger, and Swiper. Home hero Handwoven Luxury Underfoot with Signatures gallery filters, loom video, room stories, and journal; plus Shop, Product, Cart, Checkout, Wishlist, Lookbook, About, Journal, Contact, FAQ, Account, and 404. Demo storefront chrome only - localStorage cart/wishlist, no payment backend. Run with npx serve . or host statically on Cloudflare Workers.",
+    category: "website",
+    stack: ["html", "css", "javascript", "gsap"],
+    priceLabel: "Free",
+    priceCents: 0,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 18,
+    accent: "18",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "shop",
+    coverImage: "/templates/projects/website/sonojs-website-05/main.webp",
+    coverImageDark: null,
+    coverVideo: "/templates/projects/website/sonojs-website-05/cover.mp4",
+    detailCoverImage:
+      "/templates/projects/website/sonojs-website-05/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-website-05.sonojs2.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-14",
+    firstReleasedAt: "2026-11-14",
+    screens: 14,
+    runCommand: "npx serve .",
+    highlights: [
+      {
+        title: "Full rug storefront",
+        body: "Shop filters, PDP, cart drawer, wishlist, checkout, account, and 404.",
+      },
+      {
+        title: "Lookbook & journal",
+        body: "Editorial room stories, loom video, and atelier journal articles.",
+      },
+      {
+        title: "Motion stack",
+        body: "GSAP + ScrollTrigger, Lenis smooth scroll, and Swiper carousels.",
+      },
+      {
+        title: "Zero-build static",
+        body: "npx serve . - custom CSS tokens, local images/videos, no build step.",
+      },
+    ],
+    includes: [
+      "14 HTML pages (home, shop, product, cart, checkout, lookbook, journal…)",
+      "assets/css (base, components, layout, main + pages/)",
+      "assets/js (products, cart, shop-filters, animations, main)",
+      "assets/vendor Lenis, GSAP, ScrollTrigger, Swiper + images/videos + documentation/",
+    ],
+    requirements: [
+      "Modern browser",
+      "Static file host (npx serve .)",
+    ],
+  },
+  {
+    slug: "sonojs-website-06",
+    title: "KÁVA & Co.",
+    tagline:
+      "A new era of coffee in Mill Bay - cinematic café multi-page site.",
+    description:
+      "KÁVA & Co. is a multi-page premium café website by SonoJS (demo brand: KÁVA & Co. Coffee, Mill Bay Centre). Built with Vite, React 19, TypeScript, Tailwind CSS 4, Framer Motion, React Router, and Lucide. Home hero with scroll-scrub cinema, ritual, daily board, reviews, and visit CTA; plus Menu with 3D tilt cards, About, Gallery lightbox, Reserve multi-step form, Contact, Journal, and journal posts. Dark/light theme toggle. Demo café chrome only - forms have no backend. Run with npm install && npm run dev or host the Vite build on Cloudflare Workers.",
+    category: "website",
+    stack: ["react", "vite", "typescript", "tailwind", "lucide", "reactrouter"],
+    priceLabel: "Free",
+    priceCents: 0,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 28,
+    accent: "28",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "landing",
+    coverImage: "/templates/projects/website/sonojs-website-06/main.webp",
+    coverImageDark: null,
+    coverVideo: "/templates/projects/website/sonojs-website-06/cover.mp4",
+    detailCoverImage:
+      "/templates/projects/website/sonojs-website-06/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-website-06.sonojs2.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-14",
+    firstReleasedAt: "2026-11-14",
+    screens: 8,
+    runCommand: "npm install && npm run dev",
+    highlights: [
+      {
+        title: "Full café site",
+        body: "Home, menu, about, gallery, reserve, contact, journal + post routes.",
+      },
+      {
+        title: "Motion system",
+        body: "Framer Motion loader, page transitions, magnetic CTAs, tilt cards, marquee.",
+      },
+      {
+        title: "Menu + reserve demos",
+        body: "Filterable menu with detail modal and multi-step reservation UI.",
+      },
+      {
+        title: "Vite React pack",
+        body: "npm install && npm run dev - Tailwind 4, dark/light theme, local images.",
+      },
+    ],
+    includes: [
+      "8 routes (home, menu, about, gallery, reserve, contact, journal, post)",
+      "src/components motion kit (Loader, MagneticButton, TiltCard, Reveal…)",
+      "src/data site / menu / content editable copy",
+      "public/images café stills + Tailwind 4 + Framer Motion + Lucide",
+    ],
+    requirements: [
+      "Node.js 18+",
+      "npm install && npm run dev",
+    ],
+  },
 ]
 
 export function getTemplateProject(
