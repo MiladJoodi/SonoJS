@@ -3,6 +3,13 @@ import { getStripeSecretKey, STRIPE_API_VERSION } from "@/lib/stripe/env"
 
 export const PRODUCT_CHECKOUT_KIND = "product_purchase" as const
 
+/**
+ * Stripe product tax code for Managed Payments (live).
+ * Matches Dashboard preset: Digital > Software > SaaS > no mobile/plugin > business use.
+ * @see https://docs.stripe.com/tax/tax-codes
+ */
+export const PRODUCT_CHECKOUT_TAX_CODE = "txcd_10103001" as const
+
 export type CreateProductCheckoutSessionInput = {
   clerkUserId: string
   productSlug: string
@@ -38,7 +45,13 @@ export function buildProductCheckoutSessionFormBody(
   body.set("mode", "payment")
   body.set("line_items[0][price_data][currency]", currency)
   body.set("line_items[0][price_data][unit_amount]", String(amount))
+  // Catalog price = amount charged (tax included), same as Pro plan Checkout.
+  body.set("line_items[0][price_data][tax_behavior]", "inclusive")
   body.set("line_items[0][price_data][product_data][name]", productTitle)
+  body.set(
+    "line_items[0][price_data][product_data][tax_code]",
+    PRODUCT_CHECKOUT_TAX_CODE
+  )
   body.set(
     "line_items[0][price_data][product_data][metadata][productSlug]",
     productSlug

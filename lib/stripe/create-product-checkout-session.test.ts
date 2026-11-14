@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest"
 
 import {
   PRODUCT_CHECKOUT_KIND,
+  PRODUCT_CHECKOUT_TAX_CODE,
   buildProductCheckoutSessionFormBody,
 } from "@/lib/stripe/create-product-checkout-session"
 
@@ -21,6 +22,12 @@ describe("buildProductCheckoutSessionFormBody", () => {
     expect(body.get("line_items[0][price_data][currency]")).toBe("usd")
     expect(body.get("line_items[0][price_data][product_data][name]")).toBe(
       "ORNA"
+    )
+    expect(
+      body.get("line_items[0][price_data][product_data][tax_code]")
+    ).toBe(PRODUCT_CHECKOUT_TAX_CODE)
+    expect(body.get("line_items[0][price_data][tax_behavior]")).toBe(
+      "inclusive"
     )
     expect(body.get("metadata[kind]")).toBe(PRODUCT_CHECKOUT_KIND)
     expect(body.get("metadata[productSlug]")).toBe("sonojs-website-05")
