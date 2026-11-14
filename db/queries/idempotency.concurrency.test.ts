@@ -253,6 +253,114 @@ describe.runIf(hasDb)(
     expect(rows[0]?.n).toBe(1)
   })
 
+  it("merges invoice.paid onto existing PI-only product payment row", async () => {
+    const evtPi = `evt_pay_merge_pi_${suffix}`
+    const evtInv = `evt_pay_merge_inv_${suffix}`
+    const piClaim = await claimStripeWebhookEvent({
+      stripeEventId: evtPi,
+      type: "checkout.session.completed",
+    })
+    const invClaim = await claimStripeWebhookEvent({
+      stripeEventId: evtInv,
+      type: "invoice.paid",
+    })
+    expect(piClaim.outcome).toBe("acquired")
+    expect(invClaim.outcome).toBe("acquired")
+    if (piClaim.outcome !== "acquired" || invClaim.outcome !== "acquired") return
+
+    const user = await upsertUserFromClerk({
+      clerkUserId: `user_pay_merge_${suffix}`,
+    })
+    const pi = `pi_merge_${suffix}`
+    const invoice = `in_merge_${suffix}`
+
+    await upsertPayment({
+      userId: user.id,
+      stripePaymentIntentId: pi,
+      amountCents: 2900,
+      status: "succeeded",
+      claim: { stripeEventId: evtPi, claimToken: piClaim.claimToken },
+      lastStripeEventCreated: 1_000,
+    })
+
+    // Basil-style invoice: no top-level PI on the upsert call when linked by PI id
+    await upsertPayment({
+      userId: user.id,
+      stripeInvoiceId: invoice,
+      stripePaymentIntentId: pi,
+      amountCents: 2900,
+      status: "succeeded",
+      claim: { stripeEventId: evtInv, claimToken: invClaim.claimToken },
+      lastStripeEventCreated: 2_000,
+    })
+
+    const db = createDb()
+    const byPi = await db
+      .select()
+      .from(schema.payments)
+      .where(eq(schema.payments.stripePaymentIntentId, pi))
+    expect(byPi).toHaveLength(1)
+    expect(byPi[0]?.stripeInvoiceId).toBe(invoice)
+    expect(byPi[0]?.status).toBe("succeeded")
+
+    const byInv = await db
+      .select()
+      .from(schema.payments)
+      .where(eq(schema.payments.stripeInvoiceId, invoice))
+    expect(byInv).toHaveLength(1)
+    expect(byInv[0]?.id).toBe(byPi[0]?.id)
+  })
+
+  it("merges basil invoice without PI onto sole recent PI-only row", async () => {
+    const evtPi = `evt_pay_basil_pi_${suffix}`
+    const evtInv = `evt_pay_basil_inv_${suffix}`
+    const piClaim = await claimStripeWebhookEvent({
+      stripeEventId: evtPi,
+      type: "checkout.session.completed",
+    })
+    const invClaim = await claimStripeWebhookEvent({
+      stripeEventId: evtInv,
+      type: "invoice.paid",
+    })
+    expect(piClaim.outcome).toBe("acquired")
+    expect(invClaim.outcome).toBe("acquired")
+    if (piClaim.outcome !== "acquired" || invClaim.outcome !== "acquired") return
+
+    const user = await upsertUserFromClerk({
+      clerkUserId: `user_pay_basil_${suffix}`,
+    })
+    const pi = `pi_basil_${suffix}`
+    const invoice = `in_basil_${suffix}`
+
+    await upsertPayment({
+      userId: user.id,
+      stripePaymentIntentId: pi,
+      amountCents: 100,
+      status: "succeeded",
+      claim: { stripeEventId: evtPi, claimToken: piClaim.claimToken },
+      lastStripeEventCreated: 1_000,
+    })
+
+    await upsertPayment({
+      userId: user.id,
+      stripeInvoiceId: invoice,
+      stripePaymentIntentId: null,
+      amountCents: 100,
+      status: "succeeded",
+      claim: { stripeEventId: evtInv, claimToken: invClaim.claimToken },
+      lastStripeEventCreated: 2_000,
+    })
+
+    const db = createDb()
+    const rows = await db
+      .select()
+      .from(schema.payments)
+      .where(eq(schema.payments.userId, user.id))
+    expect(rows).toHaveLength(1)
+    expect(rows[0]?.stripePaymentIntentId).toBe(pi)
+    expect(rows[0]?.stripeInvoiceId).toBe(invoice)
+  })
+
   it("reconcileSubscriptionFromStripe uses Stripe snapshot (mocked)", async () => {
     const eventId = `evt_rec_${suffix}`
     const claim = await claimStripeWebhookEvent({

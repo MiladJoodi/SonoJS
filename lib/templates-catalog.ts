@@ -9658,6 +9658,67 @@ export const templateProjects: TemplateProject[] = [
       "Static file host (npx serve .)",
     ],
   },
+  {
+    slug: "sonojs-website-10",
+    title: "Shimago",
+    tagline:
+      "Hot. Fresh. Loaded. — street-style pizzeria site for Ludhiana.",
+    description:
+      "Shimago is a multi-page premium pizzeria website by SonoJS (demo brand: Shimago Pizzeria, Ludhiana). Zero-build static HTML with custom CSS design tokens, dark/light theme, self-hosted Outfit font, local SVG icons, and vanilla JS. Home hero Hot. Fresh. Loaded. with featured pies, about, gallery, blog, and contact; plus full Menu with filters and search, Cart, Checkout (delivery/takeaway mock), About, Gallery, Blog with 3 posts, Contact, FAQ, and 404. Demo restaurant chrome only — cart and checkout use localStorage, no backend. Host statically (Cloudflare Workers demo included).",
+    category: "website",
+    stack: ["html", "css", "javascript"],
+    priceLabel: "$29",
+    priceCents: 2900,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 12,
+    accent: "12",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "landing",
+    coverImage: "/templates/projects/website/sonojs-website-10/main.webp",
+    coverImageDark: null,
+    coverVideo: "/templates/projects/website/sonojs-website-10/cover.mp4",
+    detailCoverImage:
+      "/templates/projects/website/sonojs-website-10/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-website-10.sonojs2.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-15",
+    firstReleasedAt: "2026-11-15",
+    screens: 13,
+    highlights: [
+      {
+        title: "Full pizzeria site",
+        body: "Menu, cart, checkout, gallery, blog, about, contact, FAQ, and 404.",
+      },
+      {
+        title: "Cart + checkout demos",
+        body: "localStorage cart with delivery/takeaway checkout and order confirmation.",
+      },
+      {
+        title: "Dark / light theme",
+        body: "Header toggle with preference saved locally; street-style pizza tokens.",
+      },
+      {
+        title: "Zero-build static",
+        body: "Self-hosted fonts, local icons, Unsplash food photography placeholders.",
+      },
+    ],
+    includes: [
+      "13 HTML pages (home, menu, cart, checkout, gallery, blog ×3, about, contact, FAQ, 404)",
+      "assets/css (tokens, base, layout, components) + self-hosted Outfit",
+      "assets/js (data, cart, toast, main) — localStorage cart & checkout demos",
+      "assets/img food photos + icons.svg + README",
+    ],
+    requirements: [
+      "Modern browser",
+      "Static file host",
+    ],
+  },
 ]
 
 export function getTemplateProject(

@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest"
 
 import {
   stripeId,
+  stripeInvoicePaymentIntentId,
   stripeMetadataClerkUserId,
 } from "@/lib/stripe/stripe-ids"
 
@@ -32,5 +33,35 @@ describe("stripeMetadataClerkUserId", () => {
     expect(stripeMetadataClerkUserId({ clerk_user_id: "user_b" })).toBe(
       "user_b"
     )
+  })
+})
+
+describe("stripeInvoicePaymentIntentId", () => {
+  it("reads legacy payment_intent", () => {
+    expect(
+      stripeInvoicePaymentIntentId({ payment_intent: "pi_legacy" })
+    ).toBe("pi_legacy")
+  })
+
+  it("reads basil payments.data[].payment.payment_intent", () => {
+    expect(
+      stripeInvoicePaymentIntentId({
+        payments: {
+          data: [
+            {
+              payment: {
+                type: "payment_intent",
+                payment_intent: "pi_basil",
+              },
+            },
+          ],
+        },
+      })
+    ).toBe("pi_basil")
+  })
+
+  it("returns null when missing", () => {
+    expect(stripeInvoicePaymentIntentId({})).toBeNull()
+    expect(stripeInvoicePaymentIntentId(null)).toBeNull()
   })
 })

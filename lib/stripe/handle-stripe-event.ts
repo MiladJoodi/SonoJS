@@ -20,6 +20,7 @@ import { projectRequiresPurchase } from "@/lib/product-entitlement-access"
 import { PRODUCT_CHECKOUT_KIND } from "@/lib/stripe/create-product-checkout-session"
 import {
   stripeId,
+  stripeInvoicePaymentIntentId,
   stripeMetadataClerkUserId,
 } from "@/lib/stripe/stripe-ids"
 import { getTemplateProject } from "@/lib/templates-catalog"
@@ -179,9 +180,8 @@ async function handleInvoiceEvent(
   const stripeSubscriptionId = stripeId(
     obj.subscription as string | { id?: string } | null
   )
-  const piId = stripeId(
-    obj.payment_intent as string | { id?: string } | null
-  )
+  // basil: PI is under payments.data[].payment, not top-level payment_intent
+  const piId = stripeInvoicePaymentIntentId(obj)
 
   webhookLog("resolve_user", {
     eventId: event.id,
