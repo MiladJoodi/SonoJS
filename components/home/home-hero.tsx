@@ -58,8 +58,9 @@ export function HomeHero() {
             </h1>
 
             <p className="mt-3.5 max-w-[36em] text-[clamp(0.9375rem,3.5vw,1.125rem)] leading-[1.6] text-muted-foreground sm:mt-6">
-              Production-ready components, blocks, and charts. Drop them into
-              your codebase with the CLI, or connect AI agents with MCP.
+              Production-ready components, blocks, charts, and website packs.
+              Drop them into your codebase with the CLI, or connect AI agents
+              with MCP.
             </p>
 
             <div className="mt-6 flex flex-row flex-wrap items-center justify-center gap-2.5 sm:mt-9 sm:justify-start sm:gap-3">
@@ -72,7 +73,7 @@ export function HomeHero() {
             </div>
 
             <div className="mt-5 sm:mt-7">
-              <PlatformBadges className="[&>div>ul]:mx-auto sm:[&>div>ul]:mx-0" />
+              <PlatformBadges />
             </div>
           </section>
 

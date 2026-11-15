@@ -73,11 +73,6 @@ export function ShowcaseLoginPreview({
           Continue with GitHub
         </button>
       </Stagger>
-      <Stagger i={6} show={show}>
-        <p className="mt-3.5 text-center text-[13px] text-muted-foreground">
-          Forgot your password?
-        </p>
-      </Stagger>
     </DemoCard>
   )
 }

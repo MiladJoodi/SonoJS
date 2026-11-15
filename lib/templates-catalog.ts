@@ -11221,6 +11221,130 @@ export const templateProjects: TemplateProject[] = [
       "Static file host (`npx serve .` — not file://)",
     ],
   },
+  {
+    slug: "sonojs-website-35",
+    title: "Aura Financial",
+    tagline:
+      "Hybrid wealth OS — marketing site plus markets, trade, portfolio, treasury.",
+    description:
+      "Aura Financial is a multi-page premium fintech / wealth website template by SonoJS (demo brand: Aura Financial · Future Banking). Zero-build static HTML/CSS/JS with dark/light theme and fully offline vendors (local Tailwind runtime, Iconify, Chart.js, fonts). Marketing landing with Unicorn hero plus local CSS fallback; Philosophy, Ecosystem, Rates, Pricing, Security, Partners, Blog, Docs, Careers, Press, Contact, Status, and legal pages. Auth (login / signup / verify / forgot) with demo session. Full mock app shell: dashboard, markets, trade, portfolio, yield, treasury, watchlist, orders, asset detail, billing, checkout, notifications, settings, audit log, help. Command palette (Ctrl/Cmd+K), mobile bottom nav, mock datasets. Demo only — no live brokerage. Host statically (Cloudflare Workers demo included).",
+    category: "website",
+    websiteVertical: "fintech",
+    stack: ["html", "css", "javascript", "tailwind", "chartjs"],
+    priceLabel: "$49",
+    priceCents: 4900,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 198,
+    accent: "198",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "landing",
+    coverImage: "/templates/projects/website/sonojs-website-35/main.webp",
+    coverImageDark: null,
+    coverVideo: "/templates/projects/website/sonojs-website-35/cover.mp4",
+    detailCoverImage:
+      "/templates/projects/website/sonojs-website-35/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-website-35.sonojs2.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-16",
+    firstReleasedAt: "2026-11-16",
+    screens: 47,
+    highlights: [
+      {
+        title: "Marketing + full app shell",
+        body: "Landing through docs/legal, then dashboard, markets, trade, portfolio.",
+      },
+      {
+        title: "Wealth workflows",
+        body: "Yield, multi-sig treasury, billing, mock checkout, audit log.",
+      },
+      {
+        title: "Dark / light + mobile",
+        body: "Persisted theme, drawer nav, app bottom nav, command palette.",
+      },
+      {
+        title: "Zero-build static",
+        body: "47 HTML pages — offline Tailwind, Chart.js, Unicorn CSS fallback.",
+      },
+    ],
+    includes: [
+      "47 HTML pages (marketing, auth, app shell, docs, legal…)",
+      "CSS + local fonts/images · offline Tailwind / Iconify / Chart.js",
+      "JS — mock store, markets/trade, auth, theme, shared chrome",
+      "README for buyers",
+    ],
+    requirements: [
+      "Modern browser",
+      "Static file host (`npx serve .` — not file://)",
+    ],
+  },
+  {
+    slug: "sonojs-website-36",
+    title: "Rivi",
+    tagline:
+      "Clarity onchain — consumer crypto wallet with marketing site and app shell.",
+    description:
+      "Rivi is a multi-page premium consumer crypto wallet website template by SonoJS (demo brand: Rivi · Clarity Onchain). Zero-build static HTML/CSS/JS with dark/light theme and fully offline vendors (local Tailwind runtime, Iconify, Chart.js, GSAP, QR). Marketing landing with phone mock; Features, How it works, Pricing, Security, Roadmap, About, Careers, Blog, Download, Contact, FAQ, Partners, Press, Help, and legal pages. Auth (sign-in / sign-up / forgot / onboarding) with demo session (jordan@rivi.app). App shell: dashboard, wallet, asset detail, send / receive / swap, activity, contacts, cards, notifications, settings, profile, billing, checkout, support. Mobile bottom nav and shared chrome. Demo only — no real chain, custody, or payments. Host statically (Cloudflare Workers demo included).",
+    category: "website",
+    websiteVertical: "crypto",
+    stack: ["html", "css", "javascript", "tailwind", "chartjs", "gsap"],
+    priceLabel: "$39",
+    priceCents: 3900,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 18,
+    accent: "18",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "landing",
+    coverImage: "/templates/projects/website/sonojs-website-36/main.webp",
+    coverImageDark: null,
+    coverVideo: "/templates/projects/website/sonojs-website-36/cover.mp4",
+    detailCoverImage:
+      "/templates/projects/website/sonojs-website-36/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-website-36.sonojs2.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-16",
+    firstReleasedAt: "2026-11-16",
+    screens: 42,
+    highlights: [
+      {
+        title: "Wallet + marketing kit",
+        body: "Landing with phone mock, then full send / receive / swap flows.",
+      },
+      {
+        title: "Calm consumer crypto UX",
+        body: "Dashboard, wallet filters, activity, cards, billing checkout.",
+      },
+      {
+        title: "Dark / light + mobile",
+        body: "Persisted theme, bottom nav, toast/modals, demo auth.",
+      },
+      {
+        title: "Zero-build static",
+        body: "42 HTML pages — offline Tailwind, Chart.js, GSAP, QR.",
+      },
+    ],
+    includes: [
+      "42 HTML pages (marketing, auth, wallet app, legal…)",
+      "CSS + local fonts/images · offline Tailwind / Iconify / Chart.js / GSAP",
+      "JS — mock store, wallet flows, auth, theme, shared chrome",
+      "README for buyers",
+    ],
+    requirements: [
+      "Modern browser",
+      "Static file host (`npx serve .` — not file://)",
+    ],
+  },
 ]
 
 export function getTemplateProject(
