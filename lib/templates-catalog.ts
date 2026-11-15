@@ -10477,6 +10477,130 @@ export const templateProjects: TemplateProject[] = [
       "Static file host",
     ],
   },
+  {
+    slug: "sonojs-website-23",
+    title: "Sono",
+    tagline:
+      "Mobile-first casino, sports, and shop — lobby to checkout.",
+    description:
+      "Sono is a multi-page premium mobile-first casino & betting website template by SonoJS (demo brand: Sono). Zero-build static HTML/CSS/JS with design tokens, dark/light mode, and vanilla catalog chrome. Home hero The best casino experience with games, casinos, sports boards, and shop CTAs; plus Games (list/detail), Casinos, Sports (list/event), Tournaments, Bonuses, Pricing, Shop (catalog → product → cart → multi-step checkout → success + wishlist), Account (profile, wallet, orders), Auth (login/register/forgot), Blog, FAQ, About, Contact, Privacy, Terms, and 404. Demo only — cart, coupons (SONO10 / VIP20), and wallet are mock; no real-money backend. Host statically (Cloudflare Workers demo included).",
+    category: "website",
+    websiteVertical: "betting",
+    stack: ["html", "css", "javascript"],
+    priceLabel: "$49",
+    priceCents: 4900,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 265,
+    accent: "265",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "landing",
+    coverImage: "/templates/projects/website/sonojs-website-23/main.webp",
+    coverImageDark: null,
+    coverVideo: "/templates/projects/website/sonojs-website-23/cover.mp4",
+    detailCoverImage:
+      "/templates/projects/website/sonojs-website-23/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-website-23.sonojs2.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-15",
+    firstReleasedAt: "2026-11-15",
+    screens: 33,
+    highlights: [
+      {
+        title: "Casino + sports + shop",
+        body: "Games, casinos, sports boards, tournaments, bonuses, full shop checkout.",
+      },
+      {
+        title: "Account & wallet demos",
+        body: "Profile, wallet, orders, auth, coupons SONO10 / VIP20.",
+      },
+      {
+        title: "Mobile-first chrome",
+        body: "Tokenized CSS, dark/light mode, filters, search, pagination.",
+      },
+      {
+        title: "Zero-build static",
+        body: "33 HTML pages — no React/Vite; serve with any static host.",
+      },
+    ],
+    includes: [
+      "33 HTML pages (home, games, sports, shop, account, auth, legal…)",
+      "CSS design tokens + page styles · local imagery",
+      "JS — catalog, cart/checkout, wallet demos, shared shell",
+      "README for buyers",
+    ],
+    requirements: [
+      "Modern browser",
+      "Static file host (JSON data needs HTTP, not file://)",
+    ],
+  },
+  {
+    slug: "sonojs-website-24",
+    title: "Nuts",
+    tagline:
+      "Casino affiliate hub — reviews, shop, blog, and mobile-first UX.",
+    description:
+      "Nuts is a multi-page premium casino affiliate website template by SonoJS (demo brand: Nuts). Zero-build static HTML/CSS/JS with design tokens, dark/light theme toggle, and mobile bottom nav. Home hero Simply the Best Affiliate Programs with blog strips, trusted casinos, membership packs, and shop teaser; plus Casinos (list/detail), Games, Bonuses, Shop (catalog → product → cart → checkout → order success + wishlist), Compare, Blog (list/single), Pricing, Account, FAQ, About, Contact, and 404. Demo affiliate/commerce chrome only — cart and filters are mock, no real-money backend. Host statically (Cloudflare Workers demo included).",
+    category: "website",
+    websiteVertical: "betting",
+    stack: ["html", "css", "javascript"],
+    priceLabel: "$39",
+    priceCents: 3900,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 145,
+    accent: "145",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "landing",
+    coverImage: "/templates/projects/website/sonojs-website-24/main.webp",
+    coverImageDark: null,
+    coverVideo: "/templates/projects/website/sonojs-website-24/cover.mp4",
+    detailCoverImage:
+      "/templates/projects/website/sonojs-website-24/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-website-24.sonojs2.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-15",
+    firstReleasedAt: "2026-11-15",
+    screens: 20,
+    highlights: [
+      {
+        title: "Affiliate casino hub",
+        body: "Casino reviews, bonuses, games, compare, membership pricing.",
+      },
+      {
+        title: "Shop + cart demos",
+        body: "Catalog, product, wishlist, checkout, order success.",
+      },
+      {
+        title: "Content-ready blog",
+        body: "List and single posts with filters and mobile-first chrome.",
+      },
+      {
+        title: "Zero-build static",
+        body: "20 HTML pages — tokens, dark/light, no React/Vite.",
+      },
+    ],
+    includes: [
+      "20 HTML pages (home, casinos, shop, blog, pricing, account…)",
+      "CSS design tokens + page styles · local imagery",
+      "JS — filters, cart demos, theme toggle, shared shell",
+      "README for buyers",
+    ],
+    requirements: [
+      "Modern browser",
+      "Static file host",
+    ],
+  },
 ]
 
 export function getTemplateProject(
