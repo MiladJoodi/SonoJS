@@ -10601,6 +10601,130 @@ export const templateProjects: TemplateProject[] = [
       "Static file host",
     ],
   },
+  {
+    slug: "sonojs-website-25",
+    title: "Nexa Casino",
+    tagline:
+      "Premium online casino — lobby, wallet, shop, and welcome bonus hero.",
+    description:
+      "Nexa Casino is a multi-page premium online casino website template by SonoJS (demo brand: Nexa Casino). Zero-build static HTML/CSS/JS with a full-bleed welcome-bonus hero (100% up to €140 BONUS), games lobby, and shop chrome. Home with top slots, new games, hot bonuses, clients, blog teaser, and jackpot band; plus Games (list/detail), Providers, Tournaments, Bonuses, Promotions, Shop (product → cart → checkout → order success + favorites), Wallet, Account, Orders, Auth (login/register), Blog (list/post), FAQ, About, Contact, Responsible gaming, Privacy, Terms, and 404. Demo casino chrome only — cart and wallet are mock, no real-money backend. Host statically (Cloudflare Workers demo included).",
+    category: "website",
+    websiteVertical: "betting",
+    stack: ["html", "css", "javascript"],
+    priceLabel: "$49",
+    priceCents: 4900,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 350,
+    accent: "350",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "landing",
+    coverImage: "/templates/projects/website/sonojs-website-25/main.webp",
+    coverImageDark: null,
+    coverVideo: "/templates/projects/website/sonojs-website-25/cover.mp4",
+    detailCoverImage:
+      "/templates/projects/website/sonojs-website-25/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-website-25.sonojs2.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-15",
+    firstReleasedAt: "2026-11-15",
+    screens: 27,
+    highlights: [
+      {
+        title: "Bonus hero + lobby",
+        body: "€140 welcome hero, top slots, new games, jackpot and promotions.",
+      },
+      {
+        title: "Wallet & shop demos",
+        body: "Wallet, cart, checkout, favorites, orders — mock commerce chrome.",
+      },
+      {
+        title: "Full casino pages",
+        body: "Providers, tournaments, bonuses, blog, responsible gaming, legal.",
+      },
+      {
+        title: "Zero-build static",
+        body: "27 HTML pages — single CSS app bundle, no React/Vite.",
+      },
+    ],
+    includes: [
+      "27 HTML pages (home, games, wallet, shop, auth, blog, legal…)",
+      "CSS app stylesheet · local fonts & casino imagery",
+      "JS — lobby filters, cart/wallet demos, shared shell",
+      "README for buyers",
+    ],
+    requirements: [
+      "Modern browser",
+      "Static file host",
+    ],
+  },
+  {
+    slug: "sonojs-website-26",
+    title: "Nuts Hub",
+    tagline:
+      "Casino & gambling hub — games, bonuses, sports slip, and merch shop.",
+    description:
+      "Nuts Hub is a multi-page premium online casino & gambling hub template by SonoJS (demo brand: Nuts). Zero-build static HTML/CSS/JS with dark/light theme, mobile bottom nav, and vendored GSAP + Swiper. Home with featured tables & slots, services, bonus board, casino picks, membership plans, merch drop, and blog; plus Games (list/detail), Casinos, Bonuses, Sports slip demo, Poker vertical, Shop (product → cart → 3-step checkout → order success + wishlist), Pricing, Account, Auth (login/register), Blog, Search, FAQ, About, Contact, Privacy, Terms, and 404. Demo only — promo codes NUTS10 / WELCOME15 / FREESHIP and bets are mock localStorage, no real-money backend. Host statically (Cloudflare Workers demo included).",
+    category: "website",
+    websiteVertical: "betting",
+    stack: ["html", "css", "javascript"],
+    priceLabel: "$49",
+    priceCents: 4900,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 330,
+    accent: "330",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "landing",
+    coverImage: "/templates/projects/website/sonojs-website-26/main.webp",
+    coverImageDark: null,
+    coverVideo: "/templates/projects/website/sonojs-website-26/cover.mp4",
+    detailCoverImage:
+      "/templates/projects/website/sonojs-website-26/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-website-26.sonojs2.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-15",
+    firstReleasedAt: "2026-11-15",
+    screens: 27,
+    highlights: [
+      {
+        title: "Full gambling hub",
+        body: "Games, casinos, bonuses, sports slip, poker, memberships.",
+      },
+      {
+        title: "Merch shop demos",
+        body: "Catalog → cart → 3-step checkout, wishlist, promo codes.",
+      },
+      {
+        title: "Mobile-first chrome",
+        body: "Bottom nav, dark/light theme, filters, search, sort.",
+      },
+      {
+        title: "Zero-build static",
+        body: "27 HTML pages — GSAP/Swiper vendored, serve with any host.",
+      },
+    ],
+    includes: [
+      "27 HTML pages (home, games, sports, shop, account, blog, legal…)",
+      "CSS design system · local fonts & imagery · libs/ (GSAP, Swiper)",
+      "JS — catalogs, cart/checkout, fake auth, shared shell",
+      "README for buyers",
+    ],
+    requirements: [
+      "Modern browser",
+      "Static file host (fetch + ES modules need HTTP, not file://)",
+    ],
+  },
 ]
 
 export function getTemplateProject(
