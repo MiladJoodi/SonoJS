@@ -10479,11 +10479,11 @@ export const templateProjects: TemplateProject[] = [
   },
   {
     slug: "sonojs-website-23",
-    title: "Sono",
+    title: "Betora",
     tagline:
       "Mobile-first casino, sports, and shop — lobby to checkout.",
     description:
-      "Sono is a multi-page premium mobile-first casino & betting website template by SonoJS (demo brand: Sono). Zero-build static HTML/CSS/JS with design tokens, dark/light mode, and vanilla catalog chrome. Home hero The best casino experience with games, casinos, sports boards, and shop CTAs; plus Games (list/detail), Casinos, Sports (list/event), Tournaments, Bonuses, Pricing, Shop (catalog → product → cart → multi-step checkout → success + wishlist), Account (profile, wallet, orders), Auth (login/register/forgot), Blog, FAQ, About, Contact, Privacy, Terms, and 404. Demo only — cart, coupons (SONO10 / VIP20), and wallet are mock; no real-money backend. Host statically (Cloudflare Workers demo included).",
+      "Betora is a multi-page premium mobile-first casino & betting website template by SonoJS (demo brand: Betora). Zero-build static HTML/CSS/JS with design tokens, dark/light mode, and vanilla catalog chrome. Home hero The best casino experience with games, casinos, sports boards, and shop CTAs; plus Games (list/detail), Casinos, Sports (list/event), Tournaments, Bonuses, Pricing, Shop (catalog → product → cart → multi-step checkout → success + wishlist), Account (profile, wallet, orders), Auth (login/register/forgot), Blog, FAQ, About, Contact, Privacy, Terms, and 404. Demo only — cart, coupons (SONO10 / VIP20), and wallet are mock; no real-money backend. Host statically (Cloudflare Workers demo included).",
     category: "website",
     websiteVertical: "betting",
     stack: ["html", "css", "javascript"],
@@ -10723,6 +10723,130 @@ export const templateProjects: TemplateProject[] = [
     requirements: [
       "Modern browser",
       "Static file host (fetch + ES modules need HTTP, not file://)",
+    ],
+  },
+  {
+    slug: "sonojs-website-27",
+    title: "JACKPOT Premium",
+    tagline:
+      "Casino affiliate OS — games, memberships, wallet, and payouts.",
+    description:
+      "JACKPOT Premium is a large multi-page casino affiliate HTML template by SonoJS (demo brand: JACKPOT Premium). Zero-build static HTML/CSS/JS with Bootstrap, Slick, and design tokens. Multiple home variants (affiliate, casino, poker); games catalog with detail/compare/wishlist; bonuses, platforms/partners, membership pricing + checkout stepper; account hub (wallet redeem, affiliate analytics, orders, payouts, settings); blog layouts, gallery, careers, press, testimonials; auth (login/register/forgot/OTP); responsible gambling, AML/KYC, privacy, terms, FAQs, search, notifications, coming soon, maintenance, and 404. Demo affiliate chrome only — fake data and localStorage flows, no real-money backend. Host statically (Cloudflare Workers demo included; open /html/).",
+    category: "website",
+    websiteVertical: "betting",
+    stack: ["html", "css", "javascript"],
+    priceLabel: "$59",
+    priceCents: 5900,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 45,
+    accent: "45",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "landing",
+    coverImage: "/templates/projects/website/sonojs-website-27/main.webp",
+    coverImageDark: null,
+    coverVideo: "/templates/projects/website/sonojs-website-27/cover.mp4",
+    detailCoverImage:
+      "/templates/projects/website/sonojs-website-27/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-website-27.sonojs2.workers.dev/html/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-15",
+    firstReleasedAt: "2026-11-15",
+    screens: 58,
+    highlights: [
+      {
+        title: "Affiliate + casino stack",
+        body: "Games, bonuses, platforms, compare, memberships, wallet, payouts.",
+      },
+      {
+        title: "Account & checkout demos",
+        body: "Stepper checkout, orders, affiliate analytics, redeem wallet.",
+      },
+      {
+        title: "Many home variants",
+        body: "Affiliate, casino, and poker landing layouts in one kit.",
+      },
+      {
+        title: "Zero-build static",
+        body: "58 HTML pages under html/ — Bootstrap + tokens, no React/Vite.",
+      },
+    ],
+    includes: [
+      "58 HTML pages (homes, games, account, blog, legal, auth…)",
+      "CSS tokens + Bootstrap/vendor · local imagery",
+      "JS — filters, cart/checkout, wallet demos, shared shell",
+      "README for buyers",
+    ],
+    requirements: [
+      "Modern browser",
+      "Static file host (open html/index.html via HTTP)",
+    ],
+  },
+  {
+    slug: "sonojs-website-28",
+    title: "FORGE",
+    tagline:
+      "Premium fitness OS — programs, merch shop, and booking demos.",
+    description:
+      "FORGE is a multi-page premium fitness / personal-trainer website template by SonoJS (demo brand: FORGE). Zero-build static HTML/CSS/JS with design tokens, dark/light theme, mobile bottom nav, and self-hosted vendors (GSAP, Lenis, Swiper, Chart.js, Three.js). Home hero No fluff. No excuses. Just results.; plus Programs catalog + detail (level, duration, weekly plan mock), Booking multi-step with fake slots, Shop (product → cart → checkout → wishlist), Results filters, Gallery lightbox, Pricing/memberships, Account dashboard with charts, Auth (login/register), Blog, Method, Testimonials, FAQ search, Contact, Documentation, and 404. Demo only — coupons SONO10 / FORGE20 / FREESHIP and bookings are mock localStorage, no real payments. Host statically (Cloudflare Workers demo included; open /pages/).",
+    category: "website",
+    websiteVertical: "fitness",
+    stack: ["html", "css", "javascript", "gsap", "threejs"],
+    priceLabel: "$39",
+    priceCents: 3900,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 210,
+    accent: "210",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "landing",
+    coverImage: "/templates/projects/website/sonojs-website-28/main.webp",
+    coverImageDark: null,
+    coverVideo: "/templates/projects/website/sonojs-website-28/cover.mp4",
+    detailCoverImage:
+      "/templates/projects/website/sonojs-website-28/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-website-28.sonojs2.workers.dev/pages/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-15",
+    firstReleasedAt: "2026-11-15",
+    screens: 25,
+    highlights: [
+      {
+        title: "Coach fitness OS",
+        body: "Programs, booking slots, pricing, results, and account dashboard.",
+      },
+      {
+        title: "Merch shop demos",
+        body: "Catalog → cart → checkout, wishlist, coupons FORGE20 / SONO10.",
+      },
+      {
+        title: "Motion + 3D accents",
+        body: "GSAP/Lenis motion; Three.js sculpture on About.",
+      },
+      {
+        title: "Zero-build static",
+        body: "25 HTML pages — self-hosted fonts & vendors, no React/Vite.",
+      },
+    ],
+    includes: [
+      "25 HTML pages under pages/ (home, programs, shop, booking, account…)",
+      "CSS tokens + components · local imagery · assets/vendor",
+      "JS — store, booking, cart/checkout, theme, shared chrome",
+      "README for buyers",
+    ],
+    requirements: [
+      "Modern browser",
+      "Static file host (open /pages/ via HTTP, not file://)",
     ],
   },
 ]

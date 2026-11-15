@@ -1,12 +1,12 @@
-# Sono - marketplace assets
+# Betora - marketplace assets
 
-Package: Sono (`1.0.0`) - HTML · CSS · JavaScript  
+Package: Betora (`1.0.0`) - HTML · CSS · JavaScript  
 Category: `website` · Vertical: `betting`  
 Slug / folder: `sonojs-website-23`  
 Path: `public/templates/projects/website/sonojs-website-23/`  
 Source: `E:\New folder\04`
 
-Mobile-first casino, sports, and shop frontend. Demo brand: **Sono**.
+Mobile-first casino, sports, and shop frontend. Demo brand: **Betora**.
 
 ## Images / video
 
