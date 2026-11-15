@@ -10415,6 +10415,68 @@ export const templateProjects: TemplateProject[] = [
       "Static file host",
     ],
   },
+  {
+    slug: "sonojs-website-22",
+    title: "NovaSpin Casino",
+    tagline:
+      "Premium casino frontend — lobby, wallet, VIP, and compliance pages.",
+    description:
+      "NovaSpin Casino is a multi-page premium casino website template by SonoJS (demo brand: NovaSpin Casino · EU / US ready). Zero-build static HTML with Bootstrap, self-hosted icon fonts, and vanilla JS. Home hero with winners ticker, stats strip, featured games, promotions, and why-NovaSpin; plus Games lobby, game details, cards / dice / roulette demos, providers, tournaments, leaderboard, promotions & bonuses, VIP, dashboard, profile, deposit / withdraw, bet history, transactions, notifications, KYC / AML, responsible gaming, fairness, affiliates, blog, support tickets, auth (sign-in / sign-up / forgot / reset), FAQ, contact, cookie / privacy / terms / policy, and 404. Demo casino chrome only — mock wallet and interactive games, no real-money backend. Host statically (Cloudflare Workers demo included).",
+    category: "website",
+    websiteVertical: "betting",
+    stack: ["html", "css", "javascript"],
+    priceLabel: "$49",
+    priceCents: 4900,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 280,
+    accent: "280",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "landing",
+    coverImage: "/templates/projects/website/sonojs-website-22/main.webp",
+    coverImageDark: null,
+    coverVideo: "/templates/projects/website/sonojs-website-22/cover.mp4",
+    detailCoverImage:
+      "/templates/projects/website/sonojs-website-22/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-website-22.sonojs2.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-15",
+    firstReleasedAt: "2026-11-15",
+    screens: 40,
+    highlights: [
+      {
+        title: "Full casino frontend",
+        body: "Lobby, games, VIP, wallet, KYC, promotions, blog, support, legal.",
+      },
+      {
+        title: "Interactive demos",
+        body: "Mock wallet, cards / dice / roulette, tournaments, leaderboard.",
+      },
+      {
+        title: "Compliance-ready pages",
+        body: "Responsible gaming, AML/KYC, fairness, cookies, privacy, terms.",
+      },
+      {
+        title: "Zero-build static",
+        body: "40 HTML pages — Bootstrap + local assets, no build step.",
+      },
+    ],
+    includes: [
+      "40 HTML pages (home, games, wallet, VIP, KYC, auth, legal…)",
+      "CSS (Bootstrap + premium theme) · icon fonts · local imagery",
+      "JS — mock wallet, game demos, shared shell",
+      "README for buyers",
+    ],
+    requirements: [
+      "Modern browser",
+      "Static file host",
+    ],
+  },
 ]
 
 export function getTemplateProject(
