@@ -9997,6 +9997,7 @@ export const templateProjects: TemplateProject[] = [
     updatedAt: "2026-11-15",
     firstReleasedAt: "2026-11-15",
     screens: 31,
+    runCommand: "npx serve .",
     highlights: [
       {
         title: "Marketing + app shell",
@@ -10012,7 +10013,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "No framework build",
-        body: "HTML + CSS + ES modules; static host required for fetch/modules.",
+        body: "npx serve . — HTML + CSS + ES modules (not file://).",
       },
     ],
     includes: [
@@ -10023,7 +10024,7 @@ export const templateProjects: TemplateProject[] = [
     ],
     requirements: [
       "Modern browser",
-      "Static HTTP host (ES modules / fetch — not file://)",
+      "Static HTTP host (npx serve . — ES modules / fetch)",
       "Network access for CDN assets (Tailwind, Leaflet, Chart.js, fonts)",
     ],
   },

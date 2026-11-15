@@ -19,6 +19,13 @@ Map-first real-estate workspace. Demo brand: **Nestora**.
 
 - Demo: https://sonojs-website-15.sonojs2.workers.dev/
 - Zip: `products/webiste/sonojs-website-15/sonojs-website-15.zip`
+- Local: `npx serve .`
+
+## Run locally
+
+```bash
+npx serve .
+```
 
 ## Access
 
