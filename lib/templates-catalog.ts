@@ -11159,6 +11159,68 @@ export const templateProjects: TemplateProject[] = [
       "Static file host (`npx serve .` — not file://)",
     ],
   },
+  {
+    slug: "sonojs-website-34",
+    title: "LottoPulse",
+    tagline:
+      "Premium lottery platform — draws, number picker, wallet checkout, results.",
+    description:
+      "LottoPulse is a multi-page premium lottery website template by SonoJS (demo brand: LottoPulse). Zero-build static HTML/CSS/JS with dark/light theme (FOUC-safe) and fully offline assets (local Tailwind runtime, fonts, icons). Landing with jackpot hero and lottery carousel; Lotteries catalog with search, type filters, and sorting; lottery detail with number picker, Quick Pick, progress, and add-to-cart; Cart → coupon LOTTO10 → wallet checkout → order success → My tickets; Results board + ticket checker; How it works, Pricing packs, Winners, Blog, FAQ, Contact; Auth (sign-in / sign-up / forgot / reset) plus Account and Wallet demos. Mobile bottom nav. Demo experience only — no real-money gambling backend. Host statically (Cloudflare Workers demo included).",
+    category: "website",
+    websiteVertical: "lottery",
+    stack: ["html", "css", "javascript", "tailwind"],
+    priceLabel: "$49",
+    priceCents: 4900,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 38,
+    accent: "38",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "landing",
+    coverImage: "/templates/projects/website/sonojs-website-34/main.webp",
+    coverImageDark: null,
+    coverVideo: "/templates/projects/website/sonojs-website-34/cover.mp4",
+    detailCoverImage:
+      "/templates/projects/website/sonojs-website-34/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-website-34.sonojs2.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-16",
+    firstReleasedAt: "2026-11-16",
+    screens: 26,
+    highlights: [
+      {
+        title: "Full lottery product flow",
+        body: "Catalog → number picker → cart → wallet checkout → my tickets.",
+      },
+      {
+        title: "Results + ticket checker",
+        body: "Published draws demo plus compare-your-numbers UI.",
+      },
+      {
+        title: "Auth & wallet demos",
+        body: "Sign-in, account, wallet, coupon LOTTO10 — offline localStorage.",
+      },
+      {
+        title: "Zero-build static",
+        body: "26 HTML pages — dark/light, mobile bottom nav, offline Tailwind.",
+      },
+    ],
+    includes: [
+      "26 HTML pages (landing, lotteries, picker, cart, results, auth…)",
+      "CSS + local fonts/images · offline Tailwind runtime",
+      "JS — demo store, shop flow, auth, theme, shared chrome",
+      "README for buyers",
+    ],
+    requirements: [
+      "Modern browser",
+      "Static file host (`npx serve .` — not file://)",
+    ],
+  },
 ]
 
 export function getTemplateProject(
