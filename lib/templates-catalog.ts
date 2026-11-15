@@ -10973,6 +10973,68 @@ export const templateProjects: TemplateProject[] = [
       "Static file host (`npx serve .` — not file://)",
     ],
   },
+  {
+    slug: "sonojs-website-31",
+    title: "Banking ProX",
+    tagline:
+      "Digital banking dashboard — accounts, cards, payments, and wallet.",
+    description:
+      "Banking ProX is a multi-page premium digital banking / fintech dashboard + marketing website template by SonoJS (demo brand: Banking ProX). Zero-build static HTML/CSS/JS with dark/light/system theme and fully offline vendors (Tailwind runtime, ApexCharts, Lucide, AOS, GSAP, local fonts). Marketing landing with features, pricing, about, and help/FAQ; auth demos (sign-in / sign-up / forgot / reset); full banking app shell — dashboard, accounts, cards, wallet, payments, beneficiaries, transactions, loans, budget, investments, analytics, customers, messages, notifications, security, rewards, support, profile, and settings. Demo only — transfers use mock localStorage, no real bank backend. Host statically (Cloudflare Workers demo included).",
+    category: "website",
+    websiteVertical: "fintech",
+    stack: ["html", "css", "javascript", "tailwind", "gsap"],
+    priceLabel: "$49",
+    priceCents: 4900,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 195,
+    accent: "195",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "landing",
+    coverImage: "/templates/projects/website/sonojs-website-31/main.webp",
+    coverImageDark: null,
+    coverVideo: "/templates/projects/website/sonojs-website-31/cover.mp4",
+    detailCoverImage:
+      "/templates/projects/website/sonojs-website-31/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-website-31.sonojs2.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-15",
+    firstReleasedAt: "2026-11-15",
+    screens: 27,
+    highlights: [
+      {
+        title: "Full banking app shell",
+        body: "Accounts, cards, wallet, payments, loans, budget, investments.",
+      },
+      {
+        title: "Marketing + auth",
+        body: "Landing, pricing, about, help, sign-in/up, password reset demos.",
+      },
+      {
+        title: "Offline fintech stack",
+        body: "ApexCharts, AOS, GSAP — local assets, mock transfers.",
+      },
+      {
+        title: "Zero-build static",
+        body: "27 HTML pages — dark/light/system theme, mobile-ready.",
+      },
+    ],
+    includes: [
+      "27 HTML pages (landing, auth, banking app suite…)",
+      "CSS + local fonts · offline ApexCharts / Lucide / AOS / GSAP",
+      "JS — theme, transfer demos, page charts, shared shell",
+      "README for buyers",
+    ],
+    requirements: [
+      "Modern browser",
+      "Static file host (`npx serve .` — not file://)",
+    ],
+  },
 ]
 
 export function getTemplateProject(
