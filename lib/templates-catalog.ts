@@ -11035,6 +11035,130 @@ export const templateProjects: TemplateProject[] = [
       "Static file host (`npx serve .` — not file://)",
     ],
   },
+  {
+    slug: "sonojs-website-32",
+    title: "Meridian Trust",
+    tagline:
+      "Investor relations suite — stock, financials, reports, and IR portal.",
+    description:
+      "Meridian Trust is a multi-page premium investor-relations website template by SonoJS (demo brand: Meridian Trust · NYSE ticker MRDN). Zero-build static HTML/CSS/JS with dark/light theme, AOS motion, and offline Tailwind + Chart.js + local Solar icons. Home IR narrative with live quote strip; Investor Hub, stock quote charts, financials, dividends, bonds, reports, presentations, events, newsroom, governance, leadership, sustainability, history, careers → apply, FAQ, contact, search, privacy/terms; plus investor portal after demo login (watchlist, saved reports, applications, alerts). Demo only — all figures and portal data are mock localStorage, no real IR backend. Host statically (Cloudflare Workers demo included).",
+    category: "website",
+    websiteVertical: "fintech",
+    stack: ["html", "css", "javascript", "tailwind"],
+    priceLabel: "$39",
+    priceCents: 3900,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 215,
+    accent: "215",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "landing",
+    coverImage: "/templates/projects/website/sonojs-website-32/main.webp",
+    coverImageDark: null,
+    coverVideo: "/templates/projects/website/sonojs-website-32/cover.mp4",
+    detailCoverImage:
+      "/templates/projects/website/sonojs-website-32/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-website-32.sonojs2.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-16",
+    firstReleasedAt: "2026-11-16",
+    screens: 27,
+    highlights: [
+      {
+        title: "Full IR suite",
+        body: "Stock, financials, dividends, bonds, reports, presentations, events.",
+      },
+      {
+        title: "Investor portal demo",
+        body: "Login → watchlist, saved reports, applications, alerts (localStorage).",
+      },
+      {
+        title: "Corporate storytelling",
+        body: "Governance, leadership, sustainability, history, careers + apply.",
+      },
+      {
+        title: "Zero-build static",
+        body: "27 HTML pages — offline vendors, dark/light, mobile nav.",
+      },
+    ],
+    includes: [
+      "27 HTML pages (home, IR hub, portal, careers, legal…)",
+      "CSS + local fonts/icons · offline Chart.js / AOS / Tailwind runtime",
+      "JS — mock IR dataset, charts, portal session, shared chrome",
+      "README for buyers",
+    ],
+    requirements: [
+      "Modern browser",
+      "Static file host (`npx serve .` — not file://)",
+    ],
+  },
+  {
+    slug: "sonojs-website-33",
+    title: "SpendLow",
+    tagline:
+      "B2B fintech for banks — landing, pricing, ROI, and case studies.",
+    description:
+      "SpendLow is a multi-page premium B2B fintech marketing website template by SonoJS (demo brand: SpendLow — financial autopilot for banks). Zero-build static HTML/CSS/JS with dark/light/system theme and fully offline vendors (Tailwind runtime, Iconify, local fonts & photography). Landing with product story; Solutions, Security, Partners, Careers, Contact; Pricing with size filters, monthly/yearly, coupon SPENDLOW10 and local checkout demo; ROI calculator with saved scenarios; Resources + case studies (search/filter + detail); demo request → success reference → Account history; Auth (sign-in / sign-up / forgot / reset) and lightweight Account. Demo only — no real bank backend. Host statically (Cloudflare Workers demo included).",
+    category: "website",
+    websiteVertical: "fintech",
+    stack: ["html", "css", "javascript", "tailwind"],
+    priceLabel: "$39",
+    priceCents: 3900,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 250,
+    accent: "250",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "landing",
+    coverImage: "/templates/projects/website/sonojs-website-33/main.webp",
+    coverImageDark: null,
+    coverVideo: "/templates/projects/website/sonojs-website-33/cover.mp4",
+    detailCoverImage:
+      "/templates/projects/website/sonojs-website-33/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-website-33.sonojs2.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-16",
+    firstReleasedAt: "2026-11-16",
+    screens: 22,
+    highlights: [
+      {
+        title: "Bank-ready marketing kit",
+        body: "Landing, solutions, security, partners, careers, contact.",
+      },
+      {
+        title: "Pricing + ROI demos",
+        body: "Plans, SPENDLOW10 checkout demo, ROI calculator scenarios.",
+      },
+      {
+        title: "Resources & case studies",
+        body: "Search/filter content plus detail pages and demo request flow.",
+      },
+      {
+        title: "Zero-build static",
+        body: "22 HTML pages — offline assets, dark/light/system, mobile nav.",
+      },
+    ],
+    includes: [
+      "22 HTML pages (landing, solutions, pricing, ROI, auth, account…)",
+      "CSS + local fonts/images · offline Tailwind / Iconify",
+      "JS — theme, pricing/ROI demos, auth, shared chrome",
+      "README for buyers",
+    ],
+    requirements: [
+      "Modern browser",
+      "Static file host (`npx serve .` — not file://)",
+    ],
+  },
 ]
 
 export function getTemplateProject(

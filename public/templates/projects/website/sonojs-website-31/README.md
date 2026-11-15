@@ -4,7 +4,8 @@ Package: Banking ProX (`1.0.0`) - HTML · CSS · JavaScript
 Category: `website` · Vertical: `fintech`  
 Slug / folder: `sonojs-website-31`  
 Path: `public/templates/projects/website/sonojs-website-31/`  
-Package: `products/webiste/sonojs-website-31/sonojs-website-31.zip`
+Source: `E:\New folder\10`  
+Zip: `products/webiste/sonojs-website-31/sonojs-website-31.zip`
 
 Digital banking dashboard + marketing site. Demo brand: **Banking ProX**.
 
