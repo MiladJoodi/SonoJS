@@ -6,10 +6,12 @@ import {
 import {
   TEMPLATE_CATEGORY_LABEL,
   TEMPLATE_STACK_LABEL,
+  WEBSITE_VERTICAL_LABEL,
   type TemplateBadge,
   type TemplateCategory,
   type TemplateProject,
   type TemplateStack,
+  type WebsiteVertical,
 } from "@/lib/templates-catalog-meta"
 
 /**
@@ -21,6 +23,10 @@ export type TemplatePreviewItem = {
   title: string
   tagline: string
   category: TemplateCategory
+  /**
+   * `/websites` industry chip. Null on Templates catalog items.
+   */
+  websiteVertical: WebsiteVertical | null
   /** Light / default cover under /public */
   coverSrc: string
   /** Dark-mode cover when available */
@@ -134,6 +140,7 @@ export function toTemplateItem(
     title: project.title,
     tagline: project.tagline,
     category: project.category,
+    websiteVertical: project.websiteVertical ?? null,
     coverSrc: templateCoverSrc(project),
     coverSrcDark: templateCoverSrcDark(project),
     coverVideo: templateCoverVideo(project),
@@ -208,7 +215,9 @@ export function getTemplatePreviewDetail(
     requirements: project.requirements,
     runCommand: project.runCommand ?? null,
     stackLabels: project.stack.map((s) => TEMPLATE_STACK_LABEL[s]),
-    categoryLabel: TEMPLATE_CATEGORY_LABEL[project.category],
+    categoryLabel: project.websiteVertical
+      ? WEBSITE_VERTICAL_LABEL[project.websiteVertical]
+      : TEMPLATE_CATEGORY_LABEL[project.category],
     gallery: cover ? [cover] : [],
     badge: project.badge,
     access: project.access ?? "member",

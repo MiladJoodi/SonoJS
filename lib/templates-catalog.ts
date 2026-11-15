@@ -9108,6 +9108,7 @@ export const templateProjects: TemplateProject[] = [
     description:
       "Empire Owl Salon is a multi-page independent salon website by SonoJS (demo brand: Empire Owl Salon, Langford BC). Zero-build static HTML with Tailwind CDN, Lucide, DM Sans + Newsreader, and vanilla JS. Home hero Royal hair, wise hands, homestyle care with booking strip, lookbook marquee, services accordion, before/after slider, testimonials, FAQs, and map; plus About, Services, Service detail, Pricing, Gallery lightbox, Team, 3-step Booking wizard, Blog, Blog post, Contact, and 404. Demo salon chrome only - booking form has no backend. Run with npx serve . or host statically on Cloudflare Workers.",
     category: "website",
+    websiteVertical: "beauty",
     stack: ["html", "css", "javascript", "tailwind", "lucide"],
     priceLabel: "$29",
     priceCents: 2900,
@@ -9170,6 +9171,7 @@ export const templateProjects: TemplateProject[] = [
     description:
       "NULLWAVE is a multi-page cyberpunk net-radio website by SonoJS (demo brand: NULLWAVE). Zero-build static HTML with custom CSS and vanilla JS. Home hero Cyberpunk music for reading & coding with mini player, Today on air schedule, four stations (Focus / Night drive / Deep read / Tape room), signal chain, layered bed mixer, archive mixes, membership CTA; plus Schedule, Stations, Archive, Player, About, Blog, Membership, Contact, Support, Legal, and 404. Demo radio chrome only - no live stream backend. Run with npx serve . or host statically on Cloudflare Workers.",
     category: "website",
+    websiteVertical: "media",
     stack: ["html", "css", "javascript"],
     priceLabel: "$29",
     priceCents: 2900,
@@ -9232,6 +9234,7 @@ export const templateProjects: TemplateProject[] = [
     description:
       "Vidalli Andrea is a bilingual (EN/DE) luxury jewelry boutique website by SonoJS (demo brand: Vidalli Andrea, Krottendorf AT). Zero-build static HTML with local Cormorant Garamond + Manrope, custom CSS, and vanilla JS. Home hero Handcrafted with signature pieces, atelier story, lookbook, and service promises; full shop with filters, product detail, cart drawer, wishlist, checkout, account, journal, FAQ, contact, and 404 — mirrored under de/. Demo storefront chrome only - localStorage cart, no payment backend. Run with npx serve . or host statically on Cloudflare Workers.",
     category: "website",
+    websiteVertical: "ecommerce",
     stack: ["html", "css", "javascript"],
     priceLabel: "$29",
     priceCents: 2900,
@@ -9294,6 +9297,7 @@ export const templateProjects: TemplateProject[] = [
     description:
       "TITAN is a multi-page premium gym & fitness website by SonoJS (demo brand: TITAN). Zero-build static HTML with compiled Tailwind CSS, Outfit + Syne, Lucide, GSAP, Lenis, Swiper, Leaflet, and a Three.js WebGL performance sculpture. Home hero Train harder / Recover smarter / Own your edge with trial CTAs, zones, classes, memberships, and testimonials; plus About, Classes, Schedule, Trainers, Gallery, Shop, Product, Pricing, Blog, Contact, Login, and 404. Demo club chrome only - forms have no backend. Run with npx serve . (optional npm run build:css). Host statically on Cloudflare Workers.",
     category: "website",
+    websiteVertical: "fitness",
     stack: ["html", "css", "javascript", "tailwind", "lucide", "gsap", "threejs"],
     priceLabel: "$29",
     priceCents: 2900,
@@ -9356,6 +9360,7 @@ export const templateProjects: TemplateProject[] = [
     description:
       "ORNA is a multi-page luxury rug marketplace website by SonoJS (demo brand: ORNA Atelier). Zero-build static HTML with custom CSS design tokens, vanilla JS, and vendored Lenis, GSAP + ScrollTrigger, and Swiper. Home hero Handwoven Luxury Underfoot with Signatures gallery filters, loom video, room stories, and journal; plus Shop, Product, Cart, Checkout, Wishlist, Lookbook, About, Journal, Contact, FAQ, Account, and 404. Demo storefront chrome only - localStorage cart/wishlist, no payment backend. Run with npx serve . or host statically on Cloudflare Workers.",
     category: "website",
+    websiteVertical: "ecommerce",
     stack: ["html", "css", "javascript", "gsap"],
     priceLabel: "$29",
     priceCents: 2900,
@@ -9418,6 +9423,7 @@ export const templateProjects: TemplateProject[] = [
     description:
       "KÁVA & Co. is a multi-page premium café website by SonoJS (demo brand: KÁVA & Co. Coffee, Mill Bay Centre). Built with Vite, React 19, TypeScript, Tailwind CSS 4, Framer Motion, React Router, and Lucide. Home hero with scroll-scrub cinema, ritual, daily board, reviews, and visit CTA; plus Menu with 3D tilt cards, About, Gallery lightbox, Reserve multi-step form, Contact, Journal, and journal posts. Dark/light theme toggle. Demo café chrome only - forms have no backend. Run with npm install && npm run dev or host the Vite build on Cloudflare Workers.",
     category: "website",
+    websiteVertical: "food-beverage",
     stack: ["react", "vite", "typescript", "tailwind", "lucide", "reactrouter"],
     priceLabel: "$29",
     priceCents: 2900,
@@ -9480,6 +9486,7 @@ export const templateProjects: TemplateProject[] = [
     description:
       "Velora is a multi-page premium HTML marketing site by SonoJS (demo brand: Velora). Zero-build static HTML with custom CSS design tokens (copper/sage), self-hosted Public Sans + Syne, local SVG icon sprite, and vanilla JS. Home hero Run agent pipelines with a clear audit trail plus mock console, architecture bento, use-case tabs, pricing with yearly toggle, and testimonials; plus Features, Pricing, About, Careers, Blog, Blog post, Docs, Contact, and 404. Demo product chrome only - forms have no backend. Run with npx serve . or host statically on Cloudflare Workers.",
     category: "website",
+    websiteVertical: "saas",
     stack: ["html", "css", "javascript"],
     priceLabel: "$29",
     priceCents: 2900,
@@ -9542,6 +9549,7 @@ export const templateProjects: TemplateProject[] = [
     description:
       "Synqor is a multi-page premium HTML SaaS marketing kit by SonoJS (demo brand: Synqor). Zero-build static HTML with custom CSS design tokens, self-hosted Sora + IBM Plex fonts, local SVG icons, and vanilla JS. Home hero Orchestrate work that survives production with console mock panels, connectors, how-it-works, pricing with yearly toggle, testimonials, and FAQ; plus Pricing, About, Integrations, Blog with 3 full posts, Contact, FAQ, Login, Signup, and 404. Demo product chrome only - forms have no backend. Run with npx serve . or host statically on Cloudflare Workers.",
     category: "website",
+    websiteVertical: "saas",
     stack: ["html", "css", "javascript"],
     priceLabel: "$29",
     priceCents: 2900,
@@ -9604,6 +9612,7 @@ export const templateProjects: TemplateProject[] = [
     description:
       "Maison Vale is a multi-page premium restaurant website by SonoJS (demo brand: Maison Vale, Montréal). Zero-build static HTML with custom CSS design tokens, dark/light theme, self-hosted Playfair Display + Source Sans 3, local SVG icons, and vanilla JS. Home hero Seasonal Canadian fine dining in Montréal with story, chef special, menu preview, gallery, testimonials, and reservation form; plus Menu with filters and cart, Order + confirmation, Reservations + confirmation, About, Gallery lightbox, Journal with 3 posts, Contact, FAQ, and 404. Demo restaurant chrome only - cart/reservations use localStorage, no backend. Run with npx serve . or host statically on Cloudflare Workers.",
     category: "website",
+    websiteVertical: "restaurant",
     stack: ["html", "css", "javascript"],
     priceLabel: "$29",
     priceCents: 2900,
@@ -9666,6 +9675,7 @@ export const templateProjects: TemplateProject[] = [
     description:
       "Shimago is a multi-page premium pizzeria website by SonoJS (demo brand: Shimago Pizzeria, Ludhiana). Zero-build static HTML with custom CSS design tokens, dark/light theme, self-hosted Outfit font, local SVG icons, and vanilla JS. Home hero Hot. Fresh. Loaded. with featured pies, about, gallery, blog, and contact; plus full Menu with filters and search, Cart, Checkout (delivery/takeaway mock), About, Gallery, Blog with 3 posts, Contact, FAQ, and 404. Demo restaurant chrome only — cart and checkout use localStorage, no backend. Host statically (Cloudflare Workers demo included).",
     category: "website",
+    websiteVertical: "restaurant",
     stack: ["html", "css", "javascript"],
     priceLabel: "$29",
     priceCents: 2900,
@@ -9727,6 +9737,7 @@ export const templateProjects: TemplateProject[] = [
     description:
       "United Motors is a multi-page premium luxury car rental website by SonoJS (demo brand: United Motors Group, Beverly Hills / Los Angeles). Zero-build static HTML with custom CSS design tokens, self-hosted Oswald + Source Sans 3, local SVG icons, and vanilla JS. Home hero Luxury Lifestyle Rentals with featured-car carousel, quick-book bar, category specials, how-it-works, gallery, testimonials, and blog teasers; plus Garage with search/sort/pagination, Car detail, Booking wizard, Compare (up to 3), Services, About, Blog with 3 posts, Contact, FAQ, and 404. Demo rental chrome only — favorites, compare, and booking drafts use localStorage, no backend. Host statically (Cloudflare Workers demo included).",
     category: "website",
+    websiteVertical: "automotive",
     stack: ["html", "css", "javascript"],
     priceLabel: "$29",
     priceCents: 2900,
@@ -9788,6 +9799,7 @@ export const templateProjects: TemplateProject[] = [
     description:
       "Northline Residences is a multi-page premium real-estate agency website by SonoJS (demo brand: Northline Residences, Miami). Zero-build static HTML with custom CSS design tokens (ink, stone, champagne), light/dark theme, self-hosted Fraunces + Outfit, local SVG icons, and vanilla JS. Home hero Homes with a Miami horizon with featured listings, neighborhoods, advisors, testimonials, and journal teasers; plus Listings with filter/search/sort, Listing detail with gallery and inquire, Agents + profiles, Neighborhoods + detail, Services, About, Sell valuation, Favorites, Compare (up to 3), Blog with 3 posts, Contact, FAQ, and 404. Demo agency chrome only — favorites and compare use localStorage, forms are mock, no backend. Host statically (Cloudflare Workers demo included).",
     category: "website",
+    websiteVertical: "real-estate",
     stack: ["html", "css", "javascript"],
     priceLabel: "$29",
     priceCents: 2900,
@@ -9849,6 +9861,7 @@ export const templateProjects: TemplateProject[] = [
     description:
       "EstateVault is a multi-page premium real-estate marketplace website by SonoJS (demo brand: EstateVault). Static HTML with CSS and vanilla JS — no build step. Mobile-first UI with bottom nav, dark/light theme, and a large demo dataset (listings, agents, markets, blog, FAQ). Home hero Find your next home with confidence with buy/rent search filters and featured listings; plus Listings, Listing detail, Buy/Rent flows, Sell, List property, Agents, Markets, Compare, Favorites, Virtual tour + booking, Mortgage, Offer, Concierge, Dashboard, Auth (login/register), Blog, Contact, FAQ, Careers, Press, Partners, Privacy, Terms, Sitemap, and more. Demo marketplace chrome only — favorites, compare, and flows use localStorage; forms have no backend. Uses CDN helpers (Tailwind, Lucide, GSAP, Leaflet, Google Fonts) for polish. Host statically (Cloudflare Workers demo included).",
     category: "website",
+    websiteVertical: "real-estate",
     stack: ["html", "css", "javascript"],
     priceLabel: "$29",
     priceCents: 2900,
@@ -9911,6 +9924,7 @@ export const templateProjects: TemplateProject[] = [
     description:
       "Lumina is a multi-page premium real-estate media agency website by SonoJS (demo brand: Lumina). Dark-luxury static HTML with modular CSS and ES-module JavaScript — no Vite/React build. Home hero Stop being a Local Secret with 3D canvas treatment, trusted-by strip, reel showcase, retainer packages, and process; plus Pricing → Cart → Checkout → success, Add-ons, Work portfolio + case studies, Booking calendar, Client portal (demo login), Services, Process, Markets, Team, Testimonials, Blog, Contact, FAQ, Privacy, Terms, and 404. Demo commerce chrome only — cart, theme, orders, and bookings use localStorage; checkout is mock. CDN helpers: Iconify, GSAP/ScrollTrigger, Three.js, Google Fonts. Needs a static HTTP server for ES modules (not file://). Host on Cloudflare Workers (demo included).",
     category: "website",
+    websiteVertical: "agency",
     stack: ["html", "css", "javascript"],
     priceLabel: "$29",
     priceCents: 2900,
@@ -9973,6 +9987,7 @@ export const templateProjects: TemplateProject[] = [
     description:
       "Nestora is a multi-page premium map-first real-estate product website by SonoJS (demo brand: Nestora). Static HTML with CSS and vanilla ES-module JavaScript — no Vite/React/Next. Marketing landing Homes, mapped with quiet precision plus About, Pricing, Blog, Contact, FAQ, Careers, Privacy, and Terms; plus a full app shell: Dashboard with Leaflet map, Listings search (filters/sort/pagination), Property detail (gallery, tour booking, messaging, 3D teaser), Map explore, Favorites, Compare (max 3), Agents, Tours, Inbox, Notifications, Add Property wizard, My Listings, Checkout + Orders (boost commerce demo), Analytics (Chart.js), Settings (dark/light), and Help. Demo product chrome only — fake data and localStorage sessions; auth is prefilled demo. CDN: Tailwind, Lucide, Leaflet, Chart.js, GSAP, Three.js, Google Fonts. Needs a static HTTP server for ES modules. Host on Cloudflare Workers (demo included).",
     category: "website",
+    websiteVertical: "real-estate",
     stack: ["html", "css", "javascript"],
     priceLabel: "$29",
     priceCents: 2900,
@@ -10036,6 +10051,7 @@ export const templateProjects: TemplateProject[] = [
     description:
       "AURUM is a multi-page premium ultra-luxury real-estate website by SonoJS (demo brand: AURUM, Dubai, UAE · AED). Zero-build static HTML with cinematic dark design tokens, optional light theme, self-hosted Syne + Outfit, local SVG icons, and vanilla JS. Home hero AURUM with full-bleed Gulf imagery, featured residences, districts, and VIP CTA; plus Residences with search/filters/sort, Residence detail with gallery and inquire, Neighborhoods + detail, Private Office (sealed placements), About, Team, Blog with posts, Contact, FAQ, Favorites (localStorage), and 404. Demo agency chrome only — favorites and forms are mock, no backend. Host statically (Cloudflare Workers demo included).",
     category: "website",
+    websiteVertical: "real-estate",
     stack: ["html", "css", "javascript"],
     priceLabel: "$29",
     priceCents: 2900,
@@ -10097,6 +10113,7 @@ export const templateProjects: TemplateProject[] = [
     description:
       "Empire is a multi-page premium late-night grill restaurant website by SonoJS (demo brand: Empire). Zero-build static HTML with dark charcoal design tokens, light/dark theme, self-hosted Bebas Neue + Manrope, local SVG icons, and vanilla JS. Home hero Empire Late Night Icon with signature carousel, menu filters, late-night band, gallery, and outlets across New York, London, Berlin, and Los Angeles; plus full Menu, Dish detail with add-ons, Cart → Checkout → success, Locations, Gallery, Blog, Reservation, Catering, Contact, FAQ, Careers, legal pages, and 404. Demo restaurant chrome only — cart and checkout use localStorage, forms are mock, no backend. Host statically (Cloudflare Workers demo included).",
     category: "website",
+    websiteVertical: "restaurant",
     stack: ["html", "css", "javascript"],
     priceLabel: "$29",
     priceCents: 2900,
@@ -10158,6 +10175,7 @@ export const templateProjects: TemplateProject[] = [
     description:
       "Pastry Mania is a multi-page premium boutique bakery website by SonoJS (demo brand: Pastry Mania, Pearl District, Portland, OR · USD). Zero-build static HTML with warm cocoa design tokens, light/dark theme, self-hosted Fraunces + Manrope, local SVG icons, and vanilla JS. Home hero Cakes made for the moment with featured cakes, occasions, custom CTA, and reviews; plus Menu with search/chips/sort, Product detail (sizes/flavors), Custom Order wizard, Gallery, About, Blog, FAQ, Contact, Cart → Checkout → order success, Visit/hours, Privacy, Terms, and 404. Demo bakery chrome only — cart and checkout use localStorage, WhatsApp quote link and forms are mock, no backend. Host statically (Cloudflare Workers demo included).",
     category: "website",
+    websiteVertical: "food-beverage",
     stack: ["html", "css", "javascript"],
     priceLabel: "$29",
     priceCents: 2900,
@@ -10219,6 +10237,7 @@ export const templateProjects: TemplateProject[] = [
     description:
       "Aureum is a multi-page premium luxury watch store by SonoJS (demo brand: Aureum, New York HQ · USD). Zero-build static HTML with dark gold design tokens, self-hosted display + sans fonts, local icons, and vanilla JS. Home hero Aureum with 3D/canvas treatment, trust strip, festive offers, new arrivals, and collections; plus Shop, Product detail, Collections, Offers, Cart → Checkout → confirmation, Wishlist, Search, Lookbook, Journal, About, Contact, FAQ, Stores, Account, Admin demo, Privacy, Terms, Shipping, Returns, and 404. Demo commerce chrome only — cart, wishlist, and orders use localStorage; promo codes and admin login are mock, no backend. Host statically (Cloudflare Workers demo included).",
     category: "website",
+    websiteVertical: "ecommerce",
     stack: ["html", "css", "javascript"],
     priceLabel: "$29",
     priceCents: 2900,
@@ -10265,6 +10284,130 @@ export const templateProjects: TemplateProject[] = [
       "25 HTML pages (home, shop, product, collections, cart, checkout, lookbook, admin…)",
       "CSS tokens + self-hosted fonts · local product photography",
       "JS — catalog, cart/wishlist store, shop filters, admin demo",
+      "README for buyers",
+    ],
+    requirements: [
+      "Modern browser",
+      "Static file host",
+    ],
+  },
+  {
+    slug: "sonojs-website-20",
+    title: "Island Roaster",
+    tagline:
+      "Specialty coffee, roasted to order on the Atlantic coast.",
+    description:
+      "Island Roaster is a multi-page premium specialty coffee storefront by SonoJS (demo brand: Island Roaster, Portland, Maine · USD). Zero-build static HTML with coastal craft design tokens, self-hosted fonts, local icons, and vanilla JS. Home hero Specialty coffee, roasted to order with featured coffees, roast journey, origins map, brew tips, and journal; plus Shop with filters, Product detail (weight/grind), Cart → Checkout, Gear, Subscriptions, Origins, Brew guides, Roast schedule, Wholesale, About, Journal, Contact, FAQ, Shipping & returns, Privacy, Terms, Cookies, and 404. Demo commerce chrome only — cart and subscriptions use localStorage; promo codes ISLAND10 / FREESHIP are mock, no backend. Host statically (Cloudflare Workers demo included).",
+    category: "website",
+    websiteVertical: "food-beverage",
+    stack: ["html", "css", "javascript"],
+    priceLabel: "$29",
+    priceCents: 2900,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 28,
+    accent: "28",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "landing",
+    coverImage: "/templates/projects/website/sonojs-website-20/main.webp",
+    coverImageDark: null,
+    coverVideo: "/templates/projects/website/sonojs-website-20/cover.mp4",
+    detailCoverImage:
+      "/templates/projects/website/sonojs-website-20/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-website-20.sonojs2.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-15",
+    firstReleasedAt: "2026-11-15",
+    screens: 22,
+    highlights: [
+      {
+        title: "Full coffee storefront",
+        body: "Shop, product, gear, subscriptions, origins, brew guides, wholesale, journal.",
+      },
+      {
+        title: "Roast journey demos",
+        body: "Interactive origins map, roast-level slider, brew recipes, shipping estimator.",
+      },
+      {
+        title: "Cart + promos",
+        body: "localStorage cart/checkout with ISLAND10 and FREESHIP mock codes.",
+      },
+      {
+        title: "Zero-build static",
+        body: "Local fonts and photography — Portland ME HQ, US & EU shipping story.",
+      },
+    ],
+    includes: [
+      "22 HTML pages (home, shop, product, cart, checkout, gear, subscriptions, origins…)",
+      "CSS + self-hosted fonts · local coffee photography",
+      "JS — cart, shop filters, roast journey, mock forms",
+      "README for buyers",
+    ],
+    requirements: [
+      "Modern browser",
+      "Static file host",
+    ],
+  },
+  {
+    slug: "sonojs-website-21",
+    title: "Maison.",
+    tagline:
+      "Quiet luxury for every day — women's fashion storefront.",
+    description:
+      "Maison. is a multi-page premium quiet-luxury women's fashion store by SonoJS (demo brand: Maison. · USD). Zero-build static HTML with refined design tokens, self-hosted fonts, local icons, and vanilla JS. Home hero Quiet luxury for every day with category shop, new arrivals, archive sale countdown, bestsellers, and trust strip; plus Shop with filters/sort, Product detail (gallery, color/size), Cart → Checkout, Wishlist, Search, Lookbook, Journal, Stores (NY / London / Paris / Milan / LA / Berlin), Account (login/register/orders/track), Sale, Careers, Sustainability, FAQ, Contact, Shipping, Privacy, Terms, and 404. Demo commerce chrome only — cart and wishlist use localStorage; checkout is mock, no backend. Host statically (Cloudflare Workers demo included).",
+    category: "website",
+    websiteVertical: "ecommerce",
+    stack: ["html", "css", "javascript"],
+    priceLabel: "$29",
+    priceCents: 2900,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 32,
+    accent: "32",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "landing",
+    coverImage: "/templates/projects/website/sonojs-website-21/main.webp",
+    coverImageDark: null,
+    coverVideo: "/templates/projects/website/sonojs-website-21/cover.mp4",
+    detailCoverImage:
+      "/templates/projects/website/sonojs-website-21/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-website-21.sonojs2.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-15",
+    firstReleasedAt: "2026-11-15",
+    screens: 26,
+    highlights: [
+      {
+        title: "Full fashion storefront",
+        body: "Shop, PDP, sale, lookbook, wishlist, account, stores, journal, legal.",
+      },
+      {
+        title: "Commerce demos",
+        body: "localStorage cart/wishlist, filters, color/size, mock checkout.",
+      },
+      {
+        title: "Quiet-luxury chrome",
+        body: "Brand-forward hero, archive sale countdown, multi-city boutiques.",
+      },
+      {
+        title: "Zero-build static",
+        body: "Local fonts and photography — no CDN fonts or Unsplash hotlinks.",
+      },
+    ],
+    includes: [
+      "26 HTML pages (home, shop, product, cart, checkout, lookbook, account, stores…)",
+      "CSS design system + self-hosted fonts · local fashion photography",
+      "JS — catalog, cart/wishlist store, shared UI shell",
       "README for buyers",
     ],
     requirements: [

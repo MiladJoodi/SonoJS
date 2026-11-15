@@ -7,6 +7,7 @@ import {
   TEMPLATE_CATEGORY_LABEL,
   type TemplateCategory,
   type TemplateStack,
+  type WebsiteVertical,
 } from "@/lib/templates-catalog-meta"
 import {
   compareTemplateNewest,
@@ -16,8 +17,11 @@ import { cn } from "@/lib/utils"
 
 export type TemplatePriceKey = "all" | "free" | "paid"
 
+/** Templates use TemplateCategory; websites use WebsiteVertical in the same field. */
+export type CatalogRailCategory = TemplateCategory | WebsiteVertical
+
 export type TemplateProductsFilterState = {
-  categories: TemplateCategory[]
+  categories: CatalogRailCategory[]
   stacks: TemplateStack[]
   price: TemplatePriceKey
 }
@@ -35,7 +39,12 @@ export function applyTemplateProductsFilter(
   let next = items
 
   if (state.categories.length > 0) {
-    next = next.filter((i) => state.categories.includes(i.category))
+    next = next.filter((i) => {
+      if (i.websiteVertical) {
+        return state.categories.includes(i.websiteVertical)
+      }
+      return state.categories.includes(i.category)
+    })
   }
 
   if (state.stacks.length > 0) {
@@ -72,6 +81,7 @@ export function TemplateProductsFilter({
   const categories = React.useMemo(() => {
     const counts = new Map<TemplateCategory, number>()
     for (const item of items) {
+      if (item.websiteVertical) continue
       counts.set(item.category, (counts.get(item.category) ?? 0) + 1)
     }
     return [...counts.entries()].sort(([a], [b]) =>

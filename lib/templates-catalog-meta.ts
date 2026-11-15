@@ -14,6 +14,22 @@ export type TemplateCategory =
   | "portfolio"
   | "website"
 
+/**
+ * Industry vertical for `/websites` catalog chips (keep `category: "website"`).
+ * Add new keys here as the store grows.
+ */
+export type WebsiteVertical =
+  | "real-estate"
+  | "saas"
+  | "restaurant"
+  | "food-beverage"
+  | "ecommerce"
+  | "automotive"
+  | "beauty"
+  | "fitness"
+  | "media"
+  | "agency"
+
 export type TemplateStack =
   | "nextjs"
   | "react"
@@ -72,6 +88,10 @@ export type TemplateProject = {
   tagline: string
   description: string
   category: TemplateCategory
+  /**
+   * `/websites` horizontal filter chip. Required when `category === "website"`.
+   */
+  websiteVertical?: WebsiteVertical
   stack: TemplateStack[]
   priceLabel: string
   priceCents: number
@@ -139,6 +159,48 @@ export const TEMPLATE_CATEGORY_LABEL: Record<TemplateCategory, string> = {
   portfolio: "Portfolio",
   website: "Websites",
 }
+
+/** Full labels (sheet / detail). */
+export const WEBSITE_VERTICAL_LABEL: Record<WebsiteVertical, string> = {
+  "real-estate": "Real Estate",
+  saas: "SaaS",
+  restaurant: "Restaurant",
+  "food-beverage": "Food & Beverage",
+  ecommerce: "Ecommerce",
+  automotive: "Automotive",
+  beauty: "Beauty & Salon",
+  fitness: "Fitness",
+  media: "Media",
+  agency: "Agency",
+}
+
+/** Compact labels for the horizontal websites rail. */
+export const WEBSITE_VERTICAL_RAIL_LABEL: Record<WebsiteVertical, string> = {
+  "real-estate": "Real Estate",
+  saas: "SaaS",
+  restaurant: "Restaurant",
+  "food-beverage": "Food & Drink",
+  ecommerce: "Ecommerce",
+  automotive: "Automotive",
+  beauty: "Beauty",
+  fitness: "Fitness",
+  media: "Media",
+  agency: "Agency",
+}
+
+/** Ordered chip list for `/websites` (only chips with items appear). */
+export const WEBSITE_VERTICAL_IDS = [
+  "real-estate",
+  "saas",
+  "restaurant",
+  "food-beverage",
+  "ecommerce",
+  "automotive",
+  "beauty",
+  "fitness",
+  "media",
+  "agency",
+] as const satisfies readonly WebsiteVertical[]
 
 export const TEMPLATE_STACK_LABEL: Record<TemplateStack, string> = {
   nextjs: "Next.js",

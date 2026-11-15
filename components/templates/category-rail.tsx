@@ -10,10 +10,15 @@ import {
 
 import {
   TEMPLATE_CATEGORY_LABEL,
+  WEBSITE_VERTICAL_IDS,
+  WEBSITE_VERTICAL_LABEL,
+  WEBSITE_VERTICAL_RAIL_LABEL,
   type TemplateCategory,
+  type WebsiteVertical,
 } from "@/lib/templates-catalog-meta"
 import type { TemplatePreviewItem } from "@/lib/templates-preview-data"
 import {
+  type CatalogRailCategory,
   type TemplatePriceKey,
   type TemplateProductsFilterState,
 } from "@/components/templates/products-filter"
@@ -28,7 +33,7 @@ import {
   SheetTitle,
 } from "@sonojs/ui/components/sheet"
 
-/** Compact labels for the horizontal rail (full names stay in catalog). */
+/** Compact labels for the Templates horizontal rail. */
 const RAIL_CATEGORY_LABEL: Record<TemplateCategory, string> = {
   dashboard: "Dashboard",
   landing: "Landing",
@@ -50,26 +55,66 @@ const PRICE_OPTIONS: { key: TemplatePriceKey; label: string }[] = [
   { key: "paid", label: "Pro" },
 ]
 
-function useCategoryCounts(items: TemplatePreviewItem[]) {
+function railLabel(id: CatalogRailCategory, surface: "templates" | "websites") {
+  if (surface === "websites") {
+    return WEBSITE_VERTICAL_RAIL_LABEL[id as WebsiteVertical] ?? id
+  }
+  return RAIL_CATEGORY_LABEL[id as TemplateCategory] ?? id
+}
+
+function sheetLabel(id: CatalogRailCategory, surface: "templates" | "websites") {
+  if (surface === "websites") {
+    return WEBSITE_VERTICAL_LABEL[id as WebsiteVertical] ?? id
+  }
+  return TEMPLATE_CATEGORY_LABEL[id as TemplateCategory] ?? id
+}
+
+function useCategoryCounts(
+  items: TemplatePreviewItem[],
+  surface: "templates" | "websites"
+) {
   return React.useMemo(() => {
-    const counts = new Map<TemplateCategory, number>()
+    const counts = new Map<CatalogRailCategory, number>()
     for (const item of items) {
-      counts.set(item.category, (counts.get(item.category) ?? 0) + 1)
+      if (surface === "websites") {
+        if (!item.websiteVertical) continue
+        counts.set(
+          item.websiteVertical,
+          (counts.get(item.websiteVertical) ?? 0) + 1
+        )
+      } else {
+        counts.set(item.category, (counts.get(item.category) ?? 0) + 1)
+      }
     }
-    return [...counts.entries()].sort(([a], [b]) =>
-      TEMPLATE_CATEGORY_LABEL[a].localeCompare(TEMPLATE_CATEGORY_LABEL[b])
+
+    const entries = [...counts.entries()]
+    if (surface === "websites") {
+      const order = new Map(
+        WEBSITE_VERTICAL_IDS.map((id, i) => [id, i] as const)
+      )
+      return entries.sort(
+        ([a], [b]) => (order.get(a as WebsiteVertical) ?? 99) - (order.get(b as WebsiteVertical) ?? 99)
+      )
+    }
+    return entries.sort(([a], [b]) =>
+      TEMPLATE_CATEGORY_LABEL[a as TemplateCategory].localeCompare(
+        TEMPLATE_CATEGORY_LABEL[b as TemplateCategory]
+      )
     )
-  }, [items])
+  }, [items, surface])
 }
 
 function activeFilterCount(value: TemplateProductsFilterState) {
   return (value.categories.length > 0 ? 1 : 0) + (value.price !== "all" ? 1 : 0)
 }
 
-function filterSummary(value: TemplateProductsFilterState) {
+function filterSummary(
+  value: TemplateProductsFilterState,
+  surface: "templates" | "websites"
+) {
   const parts: string[] = []
   const cat = value.categories[0]
-  if (cat) parts.push(RAIL_CATEGORY_LABEL[cat])
+  if (cat) parts.push(railLabel(cat, surface))
   if (value.price === "free") parts.push("Free")
   else if (value.price === "paid") parts.push("Pro")
   return parts.join(" · ")
@@ -120,12 +165,14 @@ function CategoryPills({
   value,
   onChange,
   layout,
+  surface,
 }: {
   items: TemplatePreviewItem[]
-  categories: [TemplateCategory, number][]
+  categories: [CatalogRailCategory, number][]
   value: TemplateProductsFilterState
   onChange: (next: TemplateProductsFilterState) => void
   layout: "rail" | "sheet"
+  surface: "templates" | "websites"
 }) {
   const activeCategory = value.categories[0] ?? null
   const scrollerRef = React.useRef<HTMLDivElement>(null)
@@ -218,8 +265,8 @@ function CategoryPills({
     return pill(
       active,
       layout === "sheet"
-        ? TEMPLATE_CATEGORY_LABEL[cat]
-        : RAIL_CATEGORY_LABEL[cat],
+        ? sheetLabel(cat, surface)
+        : railLabel(cat, surface),
       count,
       () =>
         onChange({
@@ -296,16 +343,19 @@ export function TemplateCategoryRail({
   value,
   onChange,
   className,
+  surface = "templates",
 }: {
   items: TemplatePreviewItem[]
   value: TemplateProductsFilterState
   onChange: (next: TemplateProductsFilterState) => void
   className?: string
+  /** Websites rail shows industry verticals instead of template categories. */
+  surface?: "templates" | "websites"
 }) {
-  const categories = useCategoryCounts(items)
+  const categories = useCategoryCounts(items, surface)
   const [open, setOpen] = React.useState(false)
   const activeCount = activeFilterCount(value)
-  const summary = filterSummary(value)
+  const summary = filterSummary(value, surface)
   const hasActive = activeCount > 0
 
   return (
@@ -323,6 +373,7 @@ export function TemplateCategoryRail({
           value={value}
           onChange={onChange}
           layout="rail"
+          surface={surface}
         />
         <span aria-hidden className="h-5 w-px shrink-0 bg-[var(--sm-border)]" />
         <PriceSegment value={value} onChange={onChange} />
@@ -415,6 +466,7 @@ export function TemplateCategoryRail({
                 value={value}
                 onChange={onChange}
                 layout="sheet"
+                surface={surface}
               />
             </div>
 

@@ -14,7 +14,11 @@ import {
   type TemplateProductsFilterState,
 } from "@/components/templates/products-filter"
 import type { TemplatePreviewItem } from "@/lib/templates-preview-data"
-import type { TemplateCategory } from "@/lib/templates-catalog-meta"
+import {
+  WEBSITE_VERTICAL_IDS,
+  type TemplateCategory,
+} from "@/lib/templates-catalog-meta"
+import type { CatalogRailCategory } from "@/components/templates/products-filter"
 import { Button } from "@sonojs/ui/components/button"
 
 /** Templates rail - website packs live on `/websites`. */
@@ -32,8 +36,8 @@ const TEMPLATE_CATEGORY_IDS = [
   "portfolio",
 ] as const satisfies readonly TemplateCategory[]
 
-/** Websites surface still uses the shared rail (single Website chip). */
-const WEBSITE_CATEGORY_IDS = ["website"] as const satisfies readonly TemplateCategory[]
+/** Industry verticals for `/websites` horizontal chips. */
+const WEBSITE_CATEGORY_IDS = WEBSITE_VERTICAL_IDS
 
 /** Initial / reset window size for All products. */
 const TEMPLATES_PAGE_SIZE = 24
@@ -47,14 +51,14 @@ function parsePriceParam(raw: string | null): TemplatePriceKey {
 
 function parseCategoryParam(
   raw: string | null,
-  allowed: readonly TemplateCategory[]
-): TemplateCategory[] {
+  allowed: readonly CatalogRailCategory[]
+): CatalogRailCategory[] {
   if (!raw) return []
   const set = new Set<string>(allowed)
   const first = raw
     .split(",")
     .map((s) => s.trim())
-    .find((s): s is TemplateCategory => set.has(s))
+    .find((s): s is CatalogRailCategory => set.has(s))
   return first ? [first] : []
 }
 
@@ -65,6 +69,7 @@ function TemplateProductsSection({
   filtered,
   resultsRef,
   resultsMinHeight,
+  surface,
 }: {
   items: TemplatePreviewItem[]
   filters: TemplateProductsFilterState
@@ -74,6 +79,7 @@ function TemplateProductsSection({
   filtered: TemplatePreviewItem[]
   resultsRef: React.RefObject<HTMLDivElement | null>
   resultsMinHeight: number | undefined
+  surface: "templates" | "websites"
 }) {
   const [visibleCount, setVisibleCount] = React.useState(TEMPLATES_PAGE_SIZE)
   const sentinelRef = React.useRef<HTMLDivElement>(null)
@@ -129,6 +135,7 @@ function TemplateProductsSection({
         items={items}
         value={filters}
         onChange={setFilters}
+        surface={surface}
       />
 
       <div
@@ -259,6 +266,7 @@ export function TemplateCatalogPage({
             filtered={filtered}
             resultsRef={resultsRef}
             resultsMinHeight={resultsMinHeight}
+            surface={surface}
           />
         </section>
       </div>
