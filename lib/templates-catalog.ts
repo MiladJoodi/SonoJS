@@ -10849,6 +10849,130 @@ export const templateProjects: TemplateProject[] = [
       "Static file host (open /pages/ via HTTP, not file://)",
     ],
   },
+  {
+    slug: "sonojs-website-29",
+    title: "Crypo",
+    tagline:
+      "Crypto exchange UI — markets, trading screens, and wallet settings.",
+    description:
+      "Crypo is a multi-page premium cryptocurrency exchange & trading website template by SonoJS (demo brand: Crypo). Zero-build static HTML/CSS/JS with Bootstrap-era chrome and trading dashboards. Landing variants (home + landing two); exchange layouts (classic, fluid, live price, ticker); markets hub with market overview, crypto list, capital, capital bar, screener, heat map, cross rates, symbol info, and technical analysis; plus Settings (profile, wallet), Auth (signin/signup/reset), and 404. Demo trading chrome only — charts and balances are mock, no real exchange backend. Host statically (Cloudflare Workers demo included; open /pages/home/).",
+    category: "website",
+    websiteVertical: "crypto",
+    stack: ["html", "css", "javascript"],
+    priceLabel: "$49",
+    priceCents: 4900,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 200,
+    accent: "200",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "landing",
+    coverImage: "/templates/projects/website/sonojs-website-29/main.webp",
+    coverImageDark: null,
+    coverVideo: "/templates/projects/website/sonojs-website-29/cover.mp4",
+    detailCoverImage:
+      "/templates/projects/website/sonojs-website-29/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-website-29.sonojs2.workers.dev/pages/home/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-15",
+    firstReleasedAt: "2026-11-15",
+    screens: 25,
+    highlights: [
+      {
+        title: "Exchange + markets suite",
+        body: "Multiple exchange layouts, screener, heat map, cross rates, TA.",
+      },
+      {
+        title: "Landing variants",
+        body: "Home and alternate landing for crypto product marketing.",
+      },
+      {
+        title: "Wallet & account chrome",
+        body: "Settings, profile, wallet, signin/signup/reset demos.",
+      },
+      {
+        title: "Zero-build static",
+        body: "25 HTML pages under pages/ — no React/Vite.",
+      },
+    ],
+    includes: [
+      "25 HTML pages (landings, exchange, markets, settings, auth…)",
+      "CSS theme + page styles · local assets",
+      "JS — theme boot, exchange/market demos, shared shell",
+      "README for buyers",
+    ],
+    requirements: [
+      "Modern browser",
+      "Static file host (open /pages/home/ via HTTP)",
+    ],
+  },
+  {
+    slug: "sonojs-website-30",
+    title: "TradeX",
+    tagline:
+      "Stock trading OS — dashboard, tickets, analytics, and marketing site.",
+    description:
+      "TradeX is a multi-page premium stock trading dashboard + marketing website template by SonoJS (demo brand: TradeX). Zero-build static HTML/CSS/JS with dark/light/system theme and fully offline vendors (Tailwind runtime, ApexCharts, Chart.js, Lucide, local fonts). Marketing landing with features, pricing, about, and help/FAQ; auth demos (sign-in / sign-up / forgot / reset); full app shell — dashboard, markets, stocks, stock details, trade ticket, portfolio, watchlists, orders, transactions, analytics, performance, dividends, calendar, market news, research, reports, alerts, profile, and settings. Demo only — charts and fills use mock localStorage (TRADEX10 coupon), no live market APIs. Host statically (Cloudflare Workers demo included).",
+    category: "website",
+    websiteVertical: "fintech",
+    stack: ["html", "css", "javascript", "tailwind"],
+    priceLabel: "$49",
+    priceCents: 4900,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 220,
+    accent: "220",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "landing",
+    coverImage: "/templates/projects/website/sonojs-website-30/main.webp",
+    coverImageDark: null,
+    coverVideo: "/templates/projects/website/sonojs-website-30/cover.mp4",
+    detailCoverImage:
+      "/templates/projects/website/sonojs-website-30/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-website-30.sonojs2.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-15",
+    firstReleasedAt: "2026-11-15",
+    screens: 28,
+    highlights: [
+      {
+        title: "Full trading app shell",
+        body: "Markets, trade ticket, portfolio, watchlists, orders, analytics.",
+      },
+      {
+        title: "Marketing + auth",
+        body: "Landing, pricing, about, help, sign-in/up, password reset demos.",
+      },
+      {
+        title: "Offline chart stack",
+        body: "ApexCharts & Chart.js mock series — no CDN, no live APIs.",
+      },
+      {
+        title: "Zero-build static",
+        body: "28 HTML pages — dark/light/system theme, mobile sidebar.",
+      },
+    ],
+    includes: [
+      "28 HTML pages (landing, auth, trading app suite…)",
+      "CSS + local fonts · offline ApexCharts / Chart.js / Lucide",
+      "JS — theme, trade fills, page demos, shared shell",
+      "README for buyers",
+    ],
+    requirements: [
+      "Modern browser",
+      "Static file host (`npx serve .` — not file://)",
+    ],
+  },
 ]
 
 export function getTemplateProject(
