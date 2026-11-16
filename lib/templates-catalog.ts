@@ -11978,7 +11978,7 @@ export const templateProjects: TemplateProject[] = [
     accent: "220",
     enabled: true,
     access: "member",
-    badge: "new",
+    badge: null,
     coverVariant: "landing",
     coverImage: "/templates/projects/website/sonojs-website-40/main.webp",
     coverImageDark: null,
@@ -12019,6 +12019,68 @@ export const templateProjects: TemplateProject[] = [
     requirements: [
       "Modern browser",
       "Static file host (`npx serve .` — not file://)",
+    ],
+  },
+  {
+    slug: "sonojs-website-41",
+    title: "SportOdds",
+    tagline:
+      "Sportsbook kit — live odds, event markets, casino, and wallet demo.",
+    description:
+      "SportOdds is a multi-page premium sportsbook website template by SonoJS (demo brand: SportOdds). Zero-build static HTML with navy + mint sportsbook UI, local Tailwind (preflight off), and vanilla JS. Home odds board; Sports and Live boards; Event detail markets; Casino and Live Casino; Promotions / Lucky Drops; Betslip check; Auth and account (dashboard, deposit, withdraw, bet history, transactions). Demo wallet in localStorage only — no real-money backend. Host statically (e.g. Cloudflare Workers).",
+    category: "website",
+    websiteVertical: "betting",
+    stack: ["html", "css", "javascript", "tailwind"],
+    priceLabel: "$49",
+    priceCents: 4900,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 160,
+    accent: "160",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "landing",
+    coverImage: "/templates/projects/website/sonojs-website-41/main.webp",
+    coverImageDark: null,
+    coverVideo: "/templates/projects/website/sonojs-website-41/cover.mp4",
+    detailCoverImage:
+      "/templates/projects/website/sonojs-website-41/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-website-41.sonojs2.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-17",
+    firstReleasedAt: "2026-11-17",
+    screens: 21,
+    highlights: [
+      {
+        title: "Sportsbook-first UX",
+        body: "Dense navy + mint boards for sports, live, and event markets.",
+      },
+      {
+        title: "Slip + wallet demo",
+        body: "Betslip flows with mock deposit, withdraw, and bet history.",
+      },
+      {
+        title: "Casino secondary rails",
+        body: "Casino and live casino grids beside the core odds product.",
+      },
+      {
+        title: "Zero-build static",
+        body: "21 HTML pages — Tailwind local + vanilla JS, offline fonts.",
+      },
+    ],
+    includes: [
+      "21 HTML pages (home, sports, live, event, casino, account…)",
+      "CSS — SportOdds main + layout + modern layer",
+      "JS — Tailwind runtime, ui/main modules, demo store",
+      "assets/ fonts, logo, hero, game art",
+    ],
+    requirements: [
+      "Modern browser",
+      "Static file host (not file://)",
     ],
   },
 ]
