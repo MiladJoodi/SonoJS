@@ -32,6 +32,7 @@ export type WebsiteVertical =
   | "betting"
   | "lottery"
   | "forex"
+  | "cyber"
   | "crypto"
   | "fintech"
 
@@ -180,6 +181,7 @@ export const WEBSITE_VERTICAL_LABEL: Record<WebsiteVertical, string> = {
   betting: "Betting & Casino",
   lottery: "Lottery",
   forex: "Forex & Mentorship",
+  cyber: "Cybersecurity",
   crypto: "Crypto & Trading",
   fintech: "Fintech & Trading",
 }
@@ -199,6 +201,7 @@ export const WEBSITE_VERTICAL_RAIL_LABEL: Record<WebsiteVertical, string> = {
   betting: "Casino",
   lottery: "Lottery",
   forex: "Forex",
+  cyber: "Cyber",
   crypto: "Crypto",
   fintech: "Fintech",
 }
@@ -218,6 +221,7 @@ export const WEBSITE_VERTICAL_IDS = [
   "betting",
   "lottery",
   "forex",
+  "cyber",
   "crypto",
   "fintech",
 ] as const satisfies readonly WebsiteVertical[]
