@@ -1,4 +1,4 @@
-# Juicy - marketplace assets
+# Juicy
 
 Package: `juicy` (`1.0.0`) - Next.js 15 · React 19 · Tailwind CSS 4 · Three.js · React Three Fiber  
 Category: `hero`  

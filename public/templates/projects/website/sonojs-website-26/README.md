@@ -1,4 +1,4 @@
-# Nuts Hub - marketplace assets
+# Nuts Hub
 
 Package: Nuts Hub (`1.0.0`) - HTML · CSS · JavaScript  
 Category: `website` · Vertical: `betting`  

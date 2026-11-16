@@ -1,4 +1,4 @@
-# Shimago - marketplace assets
+# Shimago
 
 Package: Shimago (`1.0.0`) - HTML · CSS · JavaScript  
 Category: `website`  

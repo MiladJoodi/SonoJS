@@ -1,4 +1,4 @@
-# Roadster - marketplace assets
+# Roadster
 
 Package: Roadster (`1.0.0`) - React · Vite · TypeScript · Tailwind · Framer Motion · Lucide  
 Category: `hero`  

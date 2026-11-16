@@ -1,4 +1,4 @@
-# AuthKit - marketplace assets
+# AuthKit
 
 Package: AuthKit (`1.0.0`) - Next.js · React · TypeScript · Tailwind 4 · OpenNext  
 Category: `saas`  

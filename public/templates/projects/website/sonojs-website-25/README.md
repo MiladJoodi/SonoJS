@@ -1,4 +1,4 @@
-# Nexa Casino - marketplace assets
+# Nexa Casino
 
 Package: Nexa Casino (`1.0.0`) - HTML · CSS · JavaScript  
 Category: `website` · Vertical: `betting`  

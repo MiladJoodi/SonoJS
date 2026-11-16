@@ -1,4 +1,4 @@
-# Kelo - marketplace assets
+# Kelo
 
 Package: Kelo (`1.0.0`) - HTML · CSS · JavaScript  
 Category: `hero`  

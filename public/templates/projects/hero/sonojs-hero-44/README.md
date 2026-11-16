@@ -1,4 +1,4 @@
-# 404 - marketplace assets
+# 404
 
 Package: 404 (`1.0.0`) - React · Vite · TypeScript · Tailwind  
 Category: `hero`  

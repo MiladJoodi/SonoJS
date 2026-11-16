@@ -1,4 +1,4 @@
-# faruq® - marketplace assets
+# faruq®
 
 Package: faruq® (`1.0.0`) - HTML · CSS · JavaScript  
 Category: `hero`  

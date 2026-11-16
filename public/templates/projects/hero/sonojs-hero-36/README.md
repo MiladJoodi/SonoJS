@@ -1,4 +1,4 @@
-# Parrot - marketplace assets
+# Parrot
 
 Package: Parrot (`1.0.0`) - HTML · CSS · JavaScript (static SPA)  
 Category: `hero`  

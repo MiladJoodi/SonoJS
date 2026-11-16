@@ -1,4 +1,4 @@
-# Signal - marketplace assets
+# Signal
 
 Package: Signal (`1.0.0`) - HTML · CSS · JavaScript  
 Category: `hero`  

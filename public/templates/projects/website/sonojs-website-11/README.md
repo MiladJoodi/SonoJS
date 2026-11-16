@@ -1,4 +1,4 @@
-# United Motors - marketplace assets
+# United Motors
 
 Package: United Motors (`1.0.0`) - HTML · CSS · JavaScript  
 Category: `website`  

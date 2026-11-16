@@ -1,4 +1,4 @@
-# Lumen Roof - marketplace assets
+# Lumen Roof
 
 Package: `lumen-roof` (`1.0.0`) - HTML · CSS · vanilla JS  
 Category: `hero`  

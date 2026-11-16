@@ -1,4 +1,4 @@
-# Eclipse - marketplace assets
+# Eclipse
 
 Package: Eclipse (`1.0.0`) - HTML · CSS · JavaScript · Three.js · GSAP · ScrollTrigger  
 Category: `saas`  

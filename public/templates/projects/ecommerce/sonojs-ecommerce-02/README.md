@@ -1,4 +1,4 @@
-# MacBook Neo - marketplace assets
+# MacBook Neo
 
 Package: MacBook Neo (`1.0.0`) - HTML · CSS · JavaScript  
 Category: `ecommerce`  

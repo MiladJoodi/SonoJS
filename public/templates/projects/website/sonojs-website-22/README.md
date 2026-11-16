@@ -1,4 +1,4 @@
-# NovaSpin Casino - marketplace assets
+# NovaSpin Casino
 
 Package: NovaSpin Casino (`1.0.0`) - HTML · CSS · JavaScript  
 Category: `website` · Vertical: `betting`  

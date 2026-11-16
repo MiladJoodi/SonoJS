@@ -1,4 +1,4 @@
-# Sellix - marketplace assets
+# Sellix
 
 Package: `sellix` (`1.0.0`) - HTML · CSS · vanilla JS  
 Category: `hero`  

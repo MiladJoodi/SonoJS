@@ -1,4 +1,4 @@
-# North Form - marketplace assets
+# North Form
 
 Package: North Form (`1.0.0`) - HTML · CSS · JavaScript  
 Category: `saas`  

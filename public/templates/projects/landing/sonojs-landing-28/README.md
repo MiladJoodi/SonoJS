@@ -1,4 +1,4 @@
-# Gravity - marketplace assets
+# Gravity
 
 Package: Gravity (`1.0.0`) - HTML · CSS · JavaScript · Three.js  
 Category: `landing`  

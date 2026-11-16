@@ -1,4 +1,4 @@
-# Design World - marketplace assets
+# Design World
 
 Package: Design World (`1.0.0`) - React · Vite · TypeScript · Tailwind · Framer Motion · Lucide · Poppins  
 Category: `hero`  

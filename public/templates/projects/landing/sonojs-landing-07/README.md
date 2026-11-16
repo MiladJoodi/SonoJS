@@ -1,4 +1,4 @@
-# Melli - marketplace assets
+# Melli
 
 Package: Melli (`1.0.0`) - HTML · CSS · JavaScript · Three.js  
 Category: `landing`  

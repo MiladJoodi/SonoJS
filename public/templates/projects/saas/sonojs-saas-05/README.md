@@ -1,4 +1,4 @@
-# Resend - marketplace assets
+# Resend
 
 Package: Resend (`1.0.0`) - React · Vite · TypeScript · Tailwind 4 · Domaine  
 Category: `saas`  

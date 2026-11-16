@@ -1,4 +1,4 @@
-# Nestora - marketplace assets
+# Nestora
 
 Package: Nestora (`1.0.0`) - HTML · CSS · JavaScript  
 Category: `website`  

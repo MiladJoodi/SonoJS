@@ -1,4 +1,4 @@
-# VIRIDIA - marketplace assets
+# VIRIDIA
 
 Package: VIRIDIA (`1.0.0`) - HTML · CSS · JavaScript (static SPA)  
 Category: `hero`  

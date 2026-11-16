@@ -1,4 +1,4 @@
-# Glacier - marketplace assets
+# Glacier
 
 Package: Glacier (`1.0.0`) - React · Vite · TypeScript · Tailwind 4 · Framer Motion · Playfair Display  
 Category: `hero`  

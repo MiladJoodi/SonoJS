@@ -1,4 +1,4 @@
-# Alumica - marketplace assets
+# Alumica
 
 Package: Alumica (`1.0.0`) - HTML · CSS  
 Category: `hero`  

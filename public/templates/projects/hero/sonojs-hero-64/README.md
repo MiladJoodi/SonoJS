@@ -1,4 +1,4 @@
-# Visor - marketplace assets
+# Visor
 
 Package: Visor (`1.0.0`) - React · Vite · TypeScript · Tailwind 4 · Motion · Lucide  
 Category: `hero`  

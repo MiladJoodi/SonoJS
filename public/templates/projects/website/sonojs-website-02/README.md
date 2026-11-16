@@ -1,4 +1,4 @@
-# NULLWAVE - marketplace assets
+# NULLWAVE
 
 Package: NULLWAVE (`1.0.0`) - HTML · CSS · JavaScript  
 Category: `website`  

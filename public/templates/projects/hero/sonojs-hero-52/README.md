@@ -1,4 +1,4 @@
-# Fastshot - marketplace assets
+# Fastshot
 
 Package: Fastshot (`1.0.0`) - HTML · CSS · JavaScript  
 Category: `hero`  

@@ -1,4 +1,4 @@
-# Atlas - marketplace assets
+# Atlas
 
 Package: `atlas` (`1.0.0`) - Vite · React 19 · TypeScript · Three.js · GSAP  
 Category: `hero`  

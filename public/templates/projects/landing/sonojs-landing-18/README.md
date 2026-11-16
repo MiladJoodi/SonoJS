@@ -1,4 +1,4 @@
-# Dala - marketplace assets
+# Dala
 
 Package: Dala (`1.0.0`) - Vite · HTML · CSS · JavaScript · WebGL · Wrangler  
 Category: `landing`  

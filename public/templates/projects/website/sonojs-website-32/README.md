@@ -1,4 +1,4 @@
-# Meridian Trust - marketplace assets
+# Meridian Trust
 
 Package: Meridian Trust (`1.0.0`) - HTML · CSS · JavaScript  
 Category: `website` · Vertical: `fintech`  

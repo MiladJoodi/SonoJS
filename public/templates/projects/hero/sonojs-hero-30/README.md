@@ -1,4 +1,4 @@
-# Brightly - marketplace assets
+# Brightly
 
 Package: Brightly (`1.0.0`) - React · Vite · JavaScript · Tailwind  
 Category: `hero`  

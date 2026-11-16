@@ -1,4 +1,4 @@
-# JetCrest - marketplace assets
+# JetCrest
 
 Package: JetCrest (`1.0.0`) - HTML · CSS · JavaScript · Tailwind (vendor)  
 Category: `hero`  

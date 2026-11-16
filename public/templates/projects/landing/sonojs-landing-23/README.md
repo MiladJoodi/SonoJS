@@ -1,4 +1,4 @@
-# Leon Vasari - marketplace assets
+# Leon Vasari
 
 Package: Leon Vasari (`1.0.0`) - HTML · CSS · JavaScript  
 Category: `landing`  

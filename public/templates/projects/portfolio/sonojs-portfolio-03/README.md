@@ -1,4 +1,4 @@
-# Michael Smith - marketplace assets
+# Michael Smith
 
 Package: Michael Smith (`1.0.0`) - React · Vite · TypeScript · Tailwind · GSAP · Framer Motion · React Router  
 Category: `portfolio`  

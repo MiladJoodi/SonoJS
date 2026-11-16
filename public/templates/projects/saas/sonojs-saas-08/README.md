@@ -1,4 +1,4 @@
-# Forma - marketplace assets
+# Forma
 
 Package: Forma (`1.0.0`) - HTML · CSS · JavaScript · DM Sans · Instrument Serif  
 Category: `saas`  

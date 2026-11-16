@@ -1,4 +1,4 @@
-# Portiva - marketplace assets
+# Portiva
 
 Package: Portiva (`1.0.0`) - HTML · CSS · JavaScript · Tailwind (vendor)  
 Category: `hero`  

@@ -1,4 +1,4 @@
-# Vertex - marketplace assets
+# Vertex
 
 Package: Vertex (`1.0.0`) - HTML · CSS · JavaScript · Poppins · Playfair Display  
 Category: `ecommerce`  

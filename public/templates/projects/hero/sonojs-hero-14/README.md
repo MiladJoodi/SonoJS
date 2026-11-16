@@ -1,4 +1,4 @@
-# Pink Rider - marketplace assets
+# Pink Rider
 
 Package: Pink Rider (`1.0.0`) - HTML · CSS · JavaScript  
 Category: `hero`  

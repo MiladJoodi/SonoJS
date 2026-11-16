@@ -1,4 +1,4 @@
-# NeuroLink - marketplace assets
+# NeuroLink
 
 Package: NeuroLink (`1.0.0`) - HTML · CSS · JavaScript  
 Category: `hero`  

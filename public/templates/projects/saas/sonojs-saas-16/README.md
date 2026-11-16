@@ -1,4 +1,4 @@
-# Ascend - marketplace assets
+# Ascend
 
 Package: Ascend (`1.0.0`) - HTML · CSS · JavaScript · Three.js · Lenis  
 Category: `saas`  

@@ -1,4 +1,4 @@
-# Equilibrium - marketplace assets
+# Equilibrium
 
 Package: Equilibrium (`1.0.0`) - React · Vite · TypeScript · Tailwind · Lucide  
 Category: `hero`  

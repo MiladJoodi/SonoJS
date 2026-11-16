@@ -1,4 +1,4 @@
-# iPhone Duo - marketplace assets
+# iPhone Duo
 
 Package: iPhone Duo (`1.0.0`) - Vite · HTML · CSS · JavaScript  
 Category: `ecommerce`  

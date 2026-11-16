@@ -1,4 +1,4 @@
-# SYKÉA - marketplace assets
+# SYKÉA
 
 Package: SYKÉA (`1.0.0`) - HTML · CSS · JavaScript (static SPA)  
 Category: `landing`  

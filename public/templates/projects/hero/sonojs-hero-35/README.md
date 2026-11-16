@@ -1,4 +1,4 @@
-# Gummy Grove - marketplace assets
+# Gummy Grove
 
 Package: Gummy Grove (`1.0.0`) - HTML · CSS · JavaScript · Three.js (static SPA)  
 Category: `hero`  

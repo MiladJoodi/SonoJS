@@ -1,4 +1,4 @@
-# Sabrina Residences - marketplace assets
+# Sabrina Residences
 
 Package: Sabrina Residences (`1.0.0`) - HTML · CSS · JavaScript · Lucide  
 Category: `landing`  

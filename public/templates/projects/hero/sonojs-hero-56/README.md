@@ -1,4 +1,4 @@
-# JungleMind - marketplace assets
+# JungleMind
 
 Package: JungleMind (`1.0.0`) - HTML · CSS · JavaScript · Poppins  
 Category: `hero`  

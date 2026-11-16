@@ -1,4 +1,4 @@
-# Yunjian - marketplace assets
+# Yunjian
 
 Package: Yunjian (`1.0.0`) - HTML · CSS · JavaScript · Three.js  
 Category: `saas`  

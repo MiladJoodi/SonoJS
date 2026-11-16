@@ -1,4 +1,4 @@
-# Rivi - marketplace assets
+# Rivi
 
 Package: Rivi (`1.0.0`) - HTML · CSS · JavaScript · Tailwind · Chart.js · GSAP  
 Category: `website` · Vertical: `crypto`  

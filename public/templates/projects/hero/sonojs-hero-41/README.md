@@ -1,4 +1,4 @@
-# Aethera - marketplace assets
+# Aethera
 
 Package: Aethera (`1.0.0`) - React · Vite · TypeScript · Tailwind  
 Category: `hero`  

@@ -1,4 +1,4 @@
-# Luma - marketplace assets
+# Luma
 
 Package: Luma (`1.0.0`) - HTML · CSS · JavaScript  
 Category: `saas`  

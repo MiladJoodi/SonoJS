@@ -1,4 +1,4 @@
-# Aether - marketplace assets
+# Aether
 
 Package: `aether-saas-landing` (`1.0.0`) - Next.js 16 · React 19 · Tailwind CSS 4 · Three.js · Framer Motion · Lenis  
 Category: `landing`  

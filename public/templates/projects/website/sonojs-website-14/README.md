@@ -1,4 +1,4 @@
-# Lumina - marketplace assets
+# Lumina
 
 Package: Lumina (`1.0.0`) - HTML · CSS · JavaScript  
 Category: `website`  

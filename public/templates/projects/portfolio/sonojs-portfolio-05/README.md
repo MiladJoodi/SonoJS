@@ -1,4 +1,4 @@
-# Alpenglow - marketplace assets
+# Alpenglow
 
 Package: Alpenglow (`1.0.0`) - React · Vite · TypeScript · Tailwind · Lucide · Archivo  
 Category: `portfolio`  

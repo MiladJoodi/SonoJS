@@ -1,4 +1,4 @@
-# Northline Residences - marketplace assets
+# Northline Residences
 
 Package: Northline Residences (`1.0.0`) - HTML · CSS · JavaScript  
 Category: `website`  

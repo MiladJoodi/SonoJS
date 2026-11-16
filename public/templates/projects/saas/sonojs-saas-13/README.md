@@ -1,4 +1,4 @@
-# AI Automation Agency - marketplace assets
+# AI Automation Agency
 
 Package: AI Automation Agency (`1.0.0`) - HTML · CSS · JavaScript · Lucide  
 Category: `saas`  

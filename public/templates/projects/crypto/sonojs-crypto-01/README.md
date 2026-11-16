@@ -1,4 +1,4 @@
-# Helix - marketplace assets
+# Helix
 
 Package: `helix` (`1.0.0`)  
 Category: `crypto`  

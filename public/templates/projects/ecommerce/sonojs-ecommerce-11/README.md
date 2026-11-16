@@ -1,4 +1,4 @@
-# Maison Verrel - marketplace assets
+# Maison Verrel
 
 Package: Maison Verrel (`1.0.0`) - HTML · CSS · JavaScript  
 Category: `ecommerce` (templates surface — not `/websites`)  

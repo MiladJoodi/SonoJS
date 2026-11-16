@@ -1,4 +1,4 @@
-# Nullline - marketplace assets
+# Nullline
 
 Package: Nullline (`1.0.0`) - HTML · CSS · JavaScript · Tailwind · GSAP · Three.js  
 Category: `website` · Vertical: `cyber`  

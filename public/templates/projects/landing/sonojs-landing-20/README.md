@@ -1,4 +1,4 @@
-# Pestguard - marketplace assets
+# Pestguard
 
 Package: Pestguard (`1.0.0`) - HTML · CSS · JavaScript  
 Category: `landing`  

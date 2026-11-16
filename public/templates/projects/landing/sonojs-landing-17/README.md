@@ -1,4 +1,4 @@
-# Mercury - marketplace assets
+# Mercury
 
 Package: Mercury (`1.0.0`) - Vite · HTML · CSS · JavaScript · Tailwind 4  
 Category: `landing`  

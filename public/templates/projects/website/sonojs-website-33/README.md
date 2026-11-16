@@ -1,4 +1,4 @@
-# SpendLow - marketplace assets
+# SpendLow
 
 Package: SpendLow (`1.0.0`) - HTML · CSS · JavaScript  
 Category: `website` · Vertical: `fintech`  

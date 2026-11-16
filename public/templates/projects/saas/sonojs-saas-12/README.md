@@ -1,4 +1,4 @@
-# Designer Studio - marketplace assets
+# Designer Studio
 
 Package: Designer Studio (`1.0.0`) - HTML · CSS · JavaScript · GSAP  
 Category: `saas`  

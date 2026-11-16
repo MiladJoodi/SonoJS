@@ -1,4 +1,4 @@
-# Maison Vale - marketplace assets
+# Maison Vale
 
 Package: Maison Vale (`1.0.0`) - HTML · CSS · JavaScript  
 Category: `website`  

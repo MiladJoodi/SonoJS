@@ -1,4 +1,4 @@
-# Airbnb - marketplace assets
+# Airbnb
 
 Package: Airbnb (`1.0.0`) - HTML · CSS · JavaScript · DM Sans  
 Category: `ecommerce`  

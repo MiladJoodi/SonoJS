@@ -1,4 +1,4 @@
-# Liquid Type - marketplace assets
+# Liquid Type
 
 Package: Liquid Type (`0.1.0`) - Next.js 16 · React 19 · TypeScript · Tailwind CSS 4 · GSAP · Geist  
 Category: `hero`  

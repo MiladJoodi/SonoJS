@@ -1,4 +1,4 @@
-# Aureum - marketplace assets
+# Aureum
 
 Package: Aureum (`1.0.0`) - HTML · CSS · JavaScript  
 Category: `website`  

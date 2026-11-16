@@ -1,4 +1,4 @@
-# Nexura - marketplace assets
+# Nexura
 
 Package: Nexura (`1.0.0`) - HTML · CSS · JavaScript · Tailwind · Iconify  
 Category: `landing`  

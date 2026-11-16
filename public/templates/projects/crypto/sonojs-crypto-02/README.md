@@ -1,4 +1,4 @@
-# Aether - marketplace assets
+# Aether
 
 Package: `aether` (`1.0.0`)  
 Category: `crypto`  

@@ -1,4 +1,4 @@
-# Foldcraft - marketplace assets
+# Foldcraft
 
 Package: Foldcraft (`1.0.0`) - React · Vite · Tailwind · Lucide  
 Category: `hero`  

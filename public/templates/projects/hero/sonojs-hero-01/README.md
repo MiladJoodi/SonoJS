@@ -1,4 +1,4 @@
-# Otis - marketplace assets
+# Otis
 
 Package: `otis` (`1.0.0`)  
 Category: `hero`  

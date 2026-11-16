@@ -1,4 +1,4 @@
-# Healcure - marketplace assets
+# Healcure
 
 Package: Healcure (`1.0.0`) - HTML · CSS · JavaScript · Tailwind (vendor)  
 Category: `hero`  

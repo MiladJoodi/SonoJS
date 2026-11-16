@@ -1,4 +1,4 @@
-# AETHER - marketplace assets
+# AETHER
 
 Package: AETHER (`1.0.0`) - HTML · CSS · JavaScript · Three.js · GSAP  
 Category: `landing`  

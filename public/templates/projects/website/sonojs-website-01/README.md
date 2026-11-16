@@ -1,4 +1,4 @@
-# Empire Owl Salon - marketplace assets
+# Empire Owl Salon
 
 Package: Empire Owl Salon (`1.0.0`) - HTML · CSS · JavaScript · Tailwind · Lucide  
 Category: `website`  

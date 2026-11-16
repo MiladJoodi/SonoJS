@@ -1,4 +1,4 @@
-# Auros - marketplace assets
+# Auros
 
 Package: Auros (`1.0.0`) - React · Vite · TypeScript · Tailwind 4 · Three.js · Matter  
 Category: `saas`  

@@ -1,4 +1,4 @@
-# Forkful - marketplace assets
+# Forkful
 
 Package: Forkful (`1.0.0`) - React · Vite · TypeScript · Tailwind · Lucide  
 Category: `saas`  

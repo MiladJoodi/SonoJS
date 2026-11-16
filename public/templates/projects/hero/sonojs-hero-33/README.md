@@ -1,4 +1,4 @@
-# Apogee - marketplace assets
+# Apogee
 
 Package: Apogee (`1.0.0`) - React · Vite · TypeScript · Tailwind · Lucide  
 Category: `hero`  

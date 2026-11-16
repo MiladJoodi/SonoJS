@@ -1,4 +1,4 @@
-# Nearby Homes - marketplace assets
+# Nearby Homes
 
 Package: Nearby Homes / Hero Subscribe (`1.0.0`) - HTML · CSS · JavaScript · Tailwind (vendor)  
 Category: `hero`  

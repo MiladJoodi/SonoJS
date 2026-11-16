@@ -1,4 +1,4 @@
-# Bloom - marketplace assets
+# Bloom
 
 Package: Bloom (`1.0.0`) - React · Vite · TypeScript · Tailwind · Lucide  
 Category: `hero`  

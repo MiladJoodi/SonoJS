@@ -1,4 +1,4 @@
-# Axon - marketplace assets
+# Axon
 
 Package: Axon (`1.0.0`) - React · Vite · TypeScript · Tailwind  
 Category: `hero`  

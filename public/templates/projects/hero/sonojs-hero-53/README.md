@@ -1,4 +1,4 @@
-# Heritage Grove - marketplace assets
+# Heritage Grove
 
 Package: Heritage Grove (`1.0.0`) - HTML · CSS  
 Category: `hero`  

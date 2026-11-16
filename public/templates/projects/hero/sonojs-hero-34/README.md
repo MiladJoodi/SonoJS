@@ -1,4 +1,4 @@
-# Agrumi - marketplace assets
+# Agrumi
 
 Package: Agrumi (`1.0.0`) - HTML · CSS · JavaScript (static SPA)  
 Category: `hero`  

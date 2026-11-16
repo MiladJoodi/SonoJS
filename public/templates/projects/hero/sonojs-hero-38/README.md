@@ -1,4 +1,4 @@
-# Earshot - marketplace assets
+# Earshot
 
 Package: Earshot (`1.0.0`) - HTML · CSS · JavaScript (static SPA)  
 Category: `hero`  

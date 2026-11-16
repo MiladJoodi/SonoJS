@@ -1,4 +1,4 @@
-# Kollektiva - marketplace assets
+# Kollektiva
 
 Package: Kollektiva (`1.0.0`) - React · Vite · TypeScript · Tailwind  
 Category: `landing`  

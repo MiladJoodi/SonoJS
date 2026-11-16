@@ -1,4 +1,4 @@
-# Planet Jumping - marketplace assets
+# Planet Jumping
 
 Package: `planet-jumping` (`1.0.0`) - HTML · CSS · vanilla JS  
 Category: `hero`  

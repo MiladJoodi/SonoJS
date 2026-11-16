@@ -1,4 +1,4 @@
-# FundedDesk - marketplace assets
+# FundedDesk
 
 Package: FundedDesk (`1.0.0`) - HTML · CSS · JavaScript · Tailwind · Chart.js  
 Category: `website` · Vertical: `forex`  

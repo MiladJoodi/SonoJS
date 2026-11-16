@@ -1,4 +1,4 @@
-# Velara - marketplace assets
+# Velara
 
 Package: Velara (`1.0.0`) - HTML · CSS · JavaScript  
 Category: `hero`  

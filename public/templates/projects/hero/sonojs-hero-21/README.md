@@ -1,4 +1,4 @@
-# SceneAI - marketplace assets
+# SceneAI
 
 Package: SceneAI (`1.0.0`) - Vite · JavaScript · Tailwind CSS 4  
 Category: `hero`  

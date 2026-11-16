@@ -1,4 +1,4 @@
-# Cyanotype Archive - marketplace assets
+# Cyanotype Archive
 
 Package: Cyanotype Archive (`1.0.0`) - HTML · CSS · JavaScript  
 Category: `landing`  

@@ -1,4 +1,4 @@
-# Plum - marketplace assets
+# Plum
 
 Package: Plum (`1.0.0`) - HTML · CSS · JavaScript (static SPA)  
 Category: `landing`  

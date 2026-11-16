@@ -1,4 +1,4 @@
-# Phototropism - marketplace assets
+# Phototropism
 
 Package: Phototropism (`1.0.0`) - React · Vite · TypeScript · GSAP · Lenis · CSS  
 Category: `hero`  

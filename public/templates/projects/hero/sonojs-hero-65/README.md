@@ -1,4 +1,4 @@
-# Monsoon - marketplace assets
+# Monsoon
 
 Package: Monsoon (`1.0.0`) - React · Vite · TypeScript · Tailwind 4 · Framer Motion · Inter  
 Category: `hero`  

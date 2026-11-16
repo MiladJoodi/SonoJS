@@ -1,4 +1,4 @@
-# TITAN - marketplace assets
+# TITAN
 
 Package: TITAN (`1.0.0`) - HTML · CSS · JavaScript · Tailwind · GSAP · Three.js · Lucide  
 Category: `website`  

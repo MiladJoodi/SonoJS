@@ -1,4 +1,4 @@
-# Studio - marketplace assets
+# Studio
 
 Package: Studio (`1.0.0`) - Next.js · React · TypeScript · Epilogue · DM Sans  
 Category: `hero`  

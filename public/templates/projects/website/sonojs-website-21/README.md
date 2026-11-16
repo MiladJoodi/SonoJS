@@ -1,4 +1,4 @@
-# Maison. - marketplace assets
+# Maison.
 
 Package: Maison. (`1.0.0`) - HTML · CSS · JavaScript  
 Category: `website` · Vertical: `ecommerce`  

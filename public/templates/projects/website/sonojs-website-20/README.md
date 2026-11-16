@@ -1,4 +1,4 @@
-# Island Roaster - marketplace assets
+# Island Roaster
 
 Package: Island Roaster (`1.0.0`) - HTML · CSS · JavaScript  
 Category: `website` · Vertical: `food-beverage`  

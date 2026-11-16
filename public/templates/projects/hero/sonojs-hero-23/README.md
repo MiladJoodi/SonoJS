@@ -1,4 +1,4 @@
-# Sprints - marketplace assets
+# Sprints
 
 Package: Sprints (`1.0.0`) - HTML · CSS · JavaScript · Tailwind (vendor)  
 Category: `hero`  

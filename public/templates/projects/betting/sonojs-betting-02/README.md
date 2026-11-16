@@ -1,4 +1,4 @@
-# Casino Homepage - marketplace assets
+# Casino Homepage
 
 Category: `betting`  
 Slug / folder: `sonojs-betting-02`  

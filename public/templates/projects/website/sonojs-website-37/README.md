@@ -1,4 +1,4 @@
-# Auden FX - marketplace assets
+# Auden FX
 
 Package: Auden FX (`1.0.0`) - HTML · CSS · JavaScript · Tailwind · GSAP · Three.js · Chart.js  
 Category: `website` · Vertical: `forex`  

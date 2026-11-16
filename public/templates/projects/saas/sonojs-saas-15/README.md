@@ -1,4 +1,4 @@
-# Flowstate - marketplace assets
+# Flowstate
 
 Package: Flowstate (`1.0.0`) - HTML · CSS · JavaScript · Lenis · WebGL  
 Category: `saas`  

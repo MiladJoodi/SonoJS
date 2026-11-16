@@ -1,4 +1,4 @@
-# Folio - marketplace assets
+# Folio
 
 Package: `sonojs` Folio (`1.0.0`) - Vite · React 19 · TypeScript · Tailwind CSS 4 · GSAP · Geist Variable  
 Category: `portfolio`  

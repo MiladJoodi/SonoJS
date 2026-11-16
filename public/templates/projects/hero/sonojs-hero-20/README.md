@@ -1,4 +1,4 @@
-# Lumina Vision - marketplace assets
+# Lumina Vision
 
 Package: Lumina Vision / auto-automation (`1.0.0`) - HTML · CSS · JavaScript  
 Category: `hero`  

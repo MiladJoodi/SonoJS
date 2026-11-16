@@ -1,4 +1,4 @@
-# Marcus Thorne - marketplace assets
+# Marcus Thorne
 
 Package: Marcus Thorne (`1.0.0`) - React · Vite · CSS · Bodoni Moda · Hanken Grotesk  
 Category: `ecommerce`  

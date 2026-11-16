@@ -1,4 +1,4 @@
-# SkyElite - marketplace assets
+# SkyElite
 
 Package: `skyelite` (`1.0.0`) - Vite · React 19 · TypeScript · Tailwind CSS 4 · Lucide  
 Category: `hero`  

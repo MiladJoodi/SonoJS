@@ -1,4 +1,4 @@
-# Qumica - marketplace assets
+# Qumica
 
 Package: Qumica (`1.0.0`) - React · Vite · TypeScript · Tailwind · Lucide  
 Category: `hero`  

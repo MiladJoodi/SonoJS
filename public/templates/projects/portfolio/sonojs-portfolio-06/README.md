@@ -1,4 +1,4 @@
-# BTI - marketplace assets
+# BTI
 
 Package: BTI (`1.0.0`) - HTML · CSS · JavaScript · Tailwind  
 Category: `portfolio`  

@@ -1,4 +1,4 @@
-# Laocoön - marketplace assets
+# Laocoön
 
 Package: Laocoön (`1.0.0`) - HTML · CSS · JavaScript · Three.js  
 Category: `hero`  

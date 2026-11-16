@@ -1,4 +1,4 @@
-# Mainline - marketplace assets
+# Mainline
 
 Package: `sono-mainline` (`1.2.0`)  
 Category: `landing`  

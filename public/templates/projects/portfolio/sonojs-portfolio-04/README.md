@@ -1,4 +1,4 @@
-# Collage - marketplace assets
+# Collage
 
 Package: Collage (`1.0.0`) - React · Vite · TypeScript · CSS · Jost  
 Category: `portfolio`  

@@ -1,4 +1,4 @@
-# Altura - marketplace assets
+# Altura
 
 Package: Altura (`1.0.0`) - HTML · CSS · JavaScript  
 Category: `landing`  

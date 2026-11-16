@@ -1,4 +1,4 @@
-# Airlines - marketplace assets
+# Airlines
 
 Package: Airlines (`1.0.0`) - HTML · CSS · JavaScript · Tailwind (vendor)  
 Category: `hero`  

@@ -1,4 +1,4 @@
-# Pocket - marketplace assets
+# Pocket
 
 Package: `pocket` (`1.0.0`)  
 Category: `fintech`  

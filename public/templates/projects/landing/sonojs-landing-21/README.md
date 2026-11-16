@@ -1,4 +1,4 @@
-# Brixzon - marketplace assets
+# Brixzon
 
 Package: Brixzon (`1.0.0`) - HTML · CSS · JavaScript  
 Category: `landing`  

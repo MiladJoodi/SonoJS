@@ -1,4 +1,4 @@
-# EstateVault - marketplace assets
+# EstateVault
 
 Package: EstateVault (`1.0.0`) - HTML · CSS · JavaScript  
 Category: `website`  

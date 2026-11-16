@@ -1,4 +1,4 @@
-# Banking ProX - marketplace assets
+# Banking ProX
 
 Package: Banking ProX (`1.0.0`) - HTML · CSS · JavaScript  
 Category: `website` · Vertical: `fintech`  

@@ -1,4 +1,4 @@
-# Kimi Antonelli - marketplace assets
+# Kimi Antonelli
 
 Package: Kimi Antonelli (`1.0.0`) - HTML · CSS · JavaScript · Three.js · Lenis  
 Category: `portfolio`  

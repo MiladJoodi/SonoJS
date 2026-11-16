@@ -1,4 +1,4 @@
-# Glyph - marketplace assets
+# Glyph
 
 Package: `glyph` (`1.0.0`)  
 Category: `saas`  

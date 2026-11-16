@@ -1,4 +1,4 @@
-# Vidalli Andrea - marketplace assets
+# Vidalli Andrea
 
 Package: Vidalli Andrea (`1.0.0`) - HTML · CSS · JavaScript  
 Category: `website`  

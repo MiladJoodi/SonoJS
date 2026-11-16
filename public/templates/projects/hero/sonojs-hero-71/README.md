@@ -1,4 +1,4 @@
-# Kelo Chatbot - marketplace assets
+# Kelo Chatbot
 
 Package: Kelo Chatbot (`1.0.0`) - HTML · CSS · JavaScript  
 Category: `hero`  

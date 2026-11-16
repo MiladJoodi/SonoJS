@@ -1,4 +1,4 @@
-# Meridian - marketplace assets
+# Meridian
 
 Package: Meridian (`1.0.0`) - React · Vite · TypeScript · Tailwind 4 · Framer Motion · React Router  
 Category: `saas`  

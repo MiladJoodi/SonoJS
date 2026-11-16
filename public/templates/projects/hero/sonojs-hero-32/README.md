@@ -1,4 +1,4 @@
-# Oasis - marketplace assets
+# Oasis
 
 Package: Oasis (`1.0.0`) - React · Vite · JavaScript · Tailwind · Lucide  
 Category: `hero`  

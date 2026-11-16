@@ -1,4 +1,4 @@
-# Pastry Mania - marketplace assets
+# Pastry Mania
 
 Package: Pastry Mania (`1.0.0`) - HTML · CSS · JavaScript  
 Category: `website`  

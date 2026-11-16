@@ -1,4 +1,4 @@
-# VEYRA - marketplace assets
+# VEYRA
 
 Package: `veyra` (`1.0.0`) - Vite · React 18 · TypeScript · Tailwind CSS 3 · Lucide  
 Category: `landing`  

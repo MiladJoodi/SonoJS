@@ -1,4 +1,4 @@
-# VirtualFit - marketplace assets
+# VirtualFit
 
 Package: `virtualfit` (`1.0.0`) - HTML · CSS · vanilla JS  
 Category: `ecommerce`  

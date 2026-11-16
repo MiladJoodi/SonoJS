@@ -1,4 +1,4 @@
-# HINA - marketplace assets
+# HINA
 
 Package: HINA (`1.0.0`) - HTML · CSS · JavaScript  
 Category: `ecommerce` (templates surface — not `/websites`)  

@@ -1,4 +1,4 @@
-# Vantage - marketplace assets
+# Vantage
 
 Package: Vantage (`1.0.0`) - React · Vite · TypeScript · Tailwind · Recharts  
 Category: `dashboard`  

@@ -1,4 +1,4 @@
-# Wanderful - marketplace assets
+# Wanderful
 
 Package: Wanderful (`1.0.0`) - React · Vite · TypeScript · Tailwind · GSAP · Lucide  
 Category: `hero`  

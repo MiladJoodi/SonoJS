@@ -1,4 +1,4 @@
-# HUM One - marketplace assets
+# HUM One
 
 Package: `hum-one` (`1.0.0`) - HTML · CSS · JS · Three.js · GSAP · Lenis  
 Category: `landing`  

@@ -1,4 +1,4 @@
-# Lumora - marketplace assets
+# Lumora
 
 Package: `lumora` (`1.0.0`) - HTML · CSS · vanilla JS  
 Category: `hero`  

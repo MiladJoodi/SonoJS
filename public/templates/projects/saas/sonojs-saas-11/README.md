@@ -1,4 +1,4 @@
-# Fluxora - marketplace assets
+# Fluxora
 
 Package: Fluxora (`1.0.0`) - HTML · CSS · JavaScript  
 Category: `saas`  

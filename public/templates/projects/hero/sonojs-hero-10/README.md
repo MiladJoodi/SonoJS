@@ -1,4 +1,4 @@
-# Visionaries - marketplace assets
+# Visionaries
 
 Package: `visionaries` (`1.0.0`) - Vite · React 19 · TypeScript  
 Category: `hero`  

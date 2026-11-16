@@ -1,4 +1,4 @@
-# LottoPulse - marketplace assets
+# LottoPulse
 
 Package: LottoPulse (`1.0.0`) - HTML · CSS · JavaScript · Tailwind  
 Category: `website` · Vertical: `lottery`  

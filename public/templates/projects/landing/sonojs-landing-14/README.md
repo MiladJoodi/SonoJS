@@ -1,4 +1,4 @@
-# Selene - marketplace assets
+# Selene
 
 Package: Selene (`1.0.0`) - React · Vite · TypeScript · Tailwind · Lenis  
 Category: `landing`  

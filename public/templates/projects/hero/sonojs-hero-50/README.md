@@ -1,4 +1,4 @@
-# Lumora - marketplace assets
+# Lumora
 
 Package: Lumora (`1.0.0`) - React · Vite · TypeScript · Tailwind · Lucide  
 Category: `hero`  

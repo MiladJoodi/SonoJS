@@ -1,4 +1,4 @@
-# STILLWATER - marketplace assets
+# STILLWATER
 
 Package: STILLWATER (`1.0.0`) - HTML · CSS · JavaScript  
 Category: `landing`  

@@ -1,4 +1,4 @@
-# VELL - marketplace assets
+# VELL
 
 Package: VELL (`1.0.0`) - HTML · CSS · JavaScript  
 Category: `ecommerce` (templates surface — not `/websites`)  

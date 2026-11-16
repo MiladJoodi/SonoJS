@@ -1,4 +1,4 @@
-# ORNA - marketplace assets
+# ORNA
 
 Package: ORNA (`1.0.0`) - HTML · CSS · JavaScript · GSAP · Lenis · Swiper  
 Category: `website`  

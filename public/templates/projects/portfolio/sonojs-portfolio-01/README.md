@@ -1,4 +1,4 @@
-# Jack - marketplace assets
+# Jack
 
 Package: `jack` (`1.0.0`) - Vite · React 19 · TypeScript · Tailwind CSS 3 · Framer Motion · Lucide  
 Category: `portfolio`  

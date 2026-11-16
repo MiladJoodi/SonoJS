@@ -1,4 +1,4 @@
-# securify - marketplace assets
+# securify
 
 Package: securify (`1.0.0`) - React · Vite · TypeScript · Tailwind  
 Category: `hero`  

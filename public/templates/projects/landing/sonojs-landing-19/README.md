@@ -1,4 +1,4 @@
-# CØFF - marketplace assets
+# CØFF
 
 Package: CØFF (`1.0.0`) - HTML · CSS · JavaScript · Tailwind · GSAP · Three.js  
 Category: `landing`  

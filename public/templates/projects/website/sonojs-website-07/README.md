@@ -1,4 +1,4 @@
-# Velora - marketplace assets
+# Velora
 
 Package: Velora (`1.0.0`) - HTML · CSS · JavaScript  
 Category: `website`  

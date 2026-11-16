@@ -1,4 +1,4 @@
-# Aura Financial - marketplace assets
+# Aura Financial
 
 Package: Aura Financial (`1.0.0`) - HTML · CSS · JavaScript · Tailwind · Chart.js  
 Category: `website` · Vertical: `fintech`  

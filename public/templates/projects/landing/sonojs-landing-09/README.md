@@ -1,4 +1,4 @@
-# Plety - marketplace assets
+# Plety
 
 Package: `plety` (`1.0.0`) - Vite · React 19 · JavaScript · Tailwind CSS 4  
 Category: `landing`  

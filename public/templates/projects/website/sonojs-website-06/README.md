@@ -1,4 +1,4 @@
-# KÁVA & Co. - marketplace assets
+# KÁVA & Co.
 
 Package: KÁVA & Co. (`1.0.0`) - React · Vite · TypeScript · Tailwind · Framer Motion · Lucide  
 Category: `website`  

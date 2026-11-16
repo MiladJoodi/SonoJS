@@ -1,4 +1,4 @@
-# SpaceEdu - marketplace assets
+# SpaceEdu
 
 Package: `spaceedu` (`1.0.0`) - HTML · CSS · vanilla JS  
 Category: `hero`  

@@ -1,4 +1,4 @@
-# Hexora - marketplace assets
+# Hexora
 
 Package: Hexora (`1.0.0`) - Vite · React 19 · JavaScript · Tailwind CSS 3 · Lucide  
 Category: `hero`  

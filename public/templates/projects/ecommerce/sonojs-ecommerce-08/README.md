@@ -1,4 +1,4 @@
-# Diet Soda - marketplace assets
+# Diet Soda
 
 Package: Diet Soda (`1.0.0`) - HTML · CSS · JavaScript · GSAP · model-viewer  
 Category: `ecommerce`  

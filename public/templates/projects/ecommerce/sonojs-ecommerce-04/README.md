@@ -1,4 +1,4 @@
-# Shop - marketplace assets
+# Shop
 
 Package: Shop (`1.0.0`) - HTML · CSS · JavaScript · Inter  
 Category: `ecommerce`  

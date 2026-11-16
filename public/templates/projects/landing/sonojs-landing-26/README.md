@@ -1,4 +1,4 @@
-# GOODKIND - marketplace assets
+# GOODKIND
 
 Package: GOODKIND (`1.0.0`) - Vite · React · TypeScript · Three.js · Tailwind  
 Category: `landing`  

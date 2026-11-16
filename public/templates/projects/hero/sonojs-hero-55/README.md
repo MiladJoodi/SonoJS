@@ -1,4 +1,4 @@
-# Cinematic - marketplace assets
+# Cinematic
 
 Package: Cinematic (`1.0.0`) - React · Vite · TypeScript · Tailwind · Lucide  
 Category: `hero`  

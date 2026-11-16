@@ -1,4 +1,4 @@
-# Membrane - marketplace assets
+# Membrane
 
 Package: `sonojs-membrane` (`1.0.0`) - Vite · React 19 · TypeScript · Tailwind CSS 4 · GSAP · Playfair Display · Geist  
 Category: `hero`  

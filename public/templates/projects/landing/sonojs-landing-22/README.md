@@ -1,4 +1,4 @@
-# Vizurai - marketplace assets
+# Vizurai
 
 Package: Vizurai (`1.0.0`) - HTML · CSS · JavaScript  
 Category: `landing`  

@@ -1,4 +1,4 @@
-# JACKPOT Premium - marketplace assets
+# JACKPOT Premium
 
 Package: JACKPOT Premium (`1.0.0`) - HTML · CSS · JavaScript  
 Category: `website` · Vertical: `betting`  

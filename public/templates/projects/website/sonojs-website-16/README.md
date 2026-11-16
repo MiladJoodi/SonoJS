@@ -1,4 +1,4 @@
-# AURUM - marketplace assets
+# AURUM
 
 Package: AURUM (`1.0.0`) - HTML · CSS · JavaScript  
 Category: `website`  

@@ -1,4 +1,4 @@
-# Aurora - marketplace assets
+# Aurora
 
 Package: Aurora (`1.0.0`) - React · Vite · TypeScript · Tailwind 4 · Framer Motion · Plus Jakarta Sans  
 Category: `hero`  

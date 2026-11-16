@@ -1,4 +1,4 @@
-# Rovela - marketplace assets
+# Rovela
 
 Package: Rovela (`1.0.0`) - Next.js · React · TypeScript · Tailwind · Lucide  
 Category: `landing`  

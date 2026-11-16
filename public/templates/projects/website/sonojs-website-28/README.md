@@ -1,4 +1,4 @@
-# FORGE - marketplace assets
+# FORGE
 
 Package: FORGE (`1.0.0`) - HTML · CSS · JavaScript  
 Category: `website` · Vertical: `fitness`  

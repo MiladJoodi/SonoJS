@@ -1,4 +1,4 @@
-# Cinema Reel - marketplace assets
+# Cinema Reel
 
 Package: `sonojs-cinema-reel` (`1.0.0`) - Next.js 16 · React 19 · TypeScript · Tailwind CSS 4 · GSAP  
 Category: `landing`  

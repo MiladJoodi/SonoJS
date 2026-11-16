@@ -1,4 +1,4 @@
-# Mossline - marketplace assets
+# Mossline
 
 Package: `mossline` (`1.0.0`) - HTML · CSS · vanilla JS  
 Category: `hero`  
