@@ -11345,6 +11345,130 @@ export const templateProjects: TemplateProject[] = [
       "Static file host (`npx serve .` — not file://)",
     ],
   },
+  {
+    slug: "sonojs-website-37",
+    title: "Auden FX",
+    tagline:
+      "FX education — ACRCandel indicator, mentorship, and member portal.",
+    description:
+      "Auden FX is a multi-page premium forex education & mentorship website template by SonoJS (demo brand: Auden FX · ACRCandel). Zero-build static HTML/CSS/JS with dark/light theme and fully offline vendors (local Tailwind runtime, Iconify, GSAP, Three.js, Chart.js). Marketing landing with WebGL hero; Indicator, Mentorship, Pricing, How it works, About, Blog, Testimonials, FAQ, Contact, Partners, Careers, Press, Download, Help, and legal including risk disclaimer. Auth (sign-in / sign-up / forgot / onboarding) with demo session. Commerce: mock checkout, order success, billing, license unlock. Member portal: dashboard, lessons, signals, journal, community, resources, settings, profile, notifications, support. Demo only — not financial advice, no live brokerage. Host statically (Cloudflare Workers demo included).",
+    category: "website",
+    websiteVertical: "forex",
+    stack: ["html", "css", "javascript", "tailwind", "chartjs", "gsap", "threejs"],
+    priceLabel: "$49",
+    priceCents: 4900,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 12,
+    accent: "12",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "landing",
+    coverImage: "/templates/projects/website/sonojs-website-37/main.webp",
+    coverImageDark: null,
+    coverVideo: "/templates/projects/website/sonojs-website-37/cover.mp4",
+    detailCoverImage:
+      "/templates/projects/website/sonojs-website-37/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-website-37.sonojs2.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-16",
+    firstReleasedAt: "2026-11-16",
+    screens: 42,
+    highlights: [
+      {
+        title: "Indicator + mentorship kit",
+        body: "ACRCandel marketing, pricing paths, and private mentorship story.",
+      },
+      {
+        title: "Member portal",
+        body: "Lessons, signals, journal, community, license, and resources.",
+      },
+      {
+        title: "Mock commerce",
+        body: "Checkout, billing, entitlements in localStorage — demo only.",
+      },
+      {
+        title: "Zero-build static",
+        body: "42 HTML pages — WebGL hero, dark/light, offline vendors.",
+      },
+    ],
+    includes: [
+      "42 HTML pages (marketing, auth, portal, commerce, legal…)",
+      "CSS + local fonts/images · offline Tailwind / GSAP / Three.js / Chart.js",
+      "JS — mock store, shop, portal, auth, theme, shared chrome",
+      "README for buyers",
+    ],
+    requirements: [
+      "Modern browser",
+      "Static file host (`npx serve .` — not file://)",
+    ],
+  },
+  {
+    slug: "sonojs-website-38",
+    title: "FundedDesk",
+    tagline:
+      "Prop-firm kit — evaluations, rules, checkout, and trader dashboard.",
+    description:
+      "FundedDesk is a multi-page premium prop-firm website template by SonoJS (demo brand: FundedDesk — fictional firm, simulated evaluations only). Zero-build static HTML/CSS/JS with dark/light theme and fully offline vendors (local Tailwind runtime, Lucide, Chart.js). Marketing home with interactive program pricing; Programs catalog with search/filter; Objectives, Rules, Platforms, Competitions, About, Testimonials, Blog, Affiliate, Community, Brand kit, FAQ, Contact, Support, and legal. Auth (login / signup) with demo session. Mock checkout with coupon HELLO (20% off) and order success. Trader dashboard with equity chart, accounts, trades, payouts, and settings. Mobile bottom nav. Demo only — no live brokerage or real payouts. Host statically (Cloudflare Workers demo included).",
+    category: "website",
+    websiteVertical: "forex",
+    stack: ["html", "css", "javascript", "tailwind", "chartjs"],
+    priceLabel: "$39",
+    priceCents: 3900,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 160,
+    accent: "160",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "landing",
+    coverImage: "/templates/projects/website/sonojs-website-38/main.webp",
+    coverImageDark: null,
+    coverVideo: "/templates/projects/website/sonojs-website-38/cover.mp4",
+    detailCoverImage:
+      "/templates/projects/website/sonojs-website-38/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-website-38.sonojs2.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-16",
+    firstReleasedAt: "2026-11-16",
+    screens: 26,
+    highlights: [
+      {
+        title: "Prop evaluation commerce",
+        body: "Programs, pricing tabs, checkout with HELLO coupon, order success.",
+      },
+      {
+        title: "Trader dashboard",
+        body: "Equity chart, accounts, trades, payouts — simulated demo data.",
+      },
+      {
+        title: "Rules & competitions",
+        body: "Objectives, platforms, affiliate, community, legal disclaimers.",
+      },
+      {
+        title: "Zero-build static",
+        body: "26 HTML pages — dark/light, mobile nav, offline Tailwind / Chart.js.",
+      },
+    ],
+    includes: [
+      "26 HTML pages (marketing, auth, checkout, dashboard, legal…)",
+      "CSS + local assets · offline Tailwind / Lucide / Chart.js",
+      "JS — programs, checkout, dashboard, auth, theme, shared chrome",
+      "README for buyers",
+    ],
+    requirements: [
+      "Modern browser",
+      "Static file host (`npx serve .` — not file://)",
+    ],
+  },
 ]
 
 export function getTemplateProject(
