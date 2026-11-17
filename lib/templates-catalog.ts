@@ -12393,6 +12393,69 @@ export const templateProjects: TemplateProject[] = [
       "Static file host (not file://)",
     ],
   },
+  {
+    slug: "sonojs-website-47",
+    title: "BoiBook",
+    tagline:
+      "Dense crypto sportsbook — live boards, SGM, casino demo, and wallet theater.",
+    description:
+      "BoiBook is a multi-page premium sportsbook website template by SonoJS (demo brand: BoiBook). Zero-build static HTML/CSS/vanilla JS with an ink void + toxic lime peak-hour UI. Full-bleed live ticker, sport rails, and bet slip; Sports / In-Play / Upcoming boards; deep Event markets with Same-Game Multi builder; Casino and Live Casino lobbies plus playable demo game chrome; Wallet with multi-step deposit/withdraw; Account, My Bets (cashout demo), Transactions; Promos, Esports, auth, Help/18+. Demo only — localStorage slip/wallet, no real bets or APIs. Host statically (e.g. Cloudflare Workers); run with npx serve . from project root (not file://).",
+    category: "website",
+    websiteVertical: "betting",
+    stack: ["html", "css", "javascript"],
+    priceLabel: "$49",
+    priceCents: 4900,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 95,
+    accent: "95",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "landing",
+    coverImage: "/templates/projects/website/sonojs-website-47/main.webp",
+    coverImageDark: null,
+    coverVideo: "/templates/projects/website/sonojs-website-47/cover.mp4",
+    detailCoverImage:
+      "/templates/projects/website/sonojs-website-47/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-website-47.sonojs2.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-17",
+    firstReleasedAt: "2026-11-17",
+    screens: 21,
+    runCommand: "npx serve .",
+    highlights: [
+      {
+        title: "Peak-hour sportsbook UX",
+        body: "Ticker, dense boards, fat slip, odds heat, and mobile FAB.",
+      },
+      {
+        title: "Event + SGM depth",
+        body: "Deep market tabs and a working same-game multi builder demo.",
+      },
+      {
+        title: "Casino + wallet theater",
+        body: "Playable game chrome plus multi-step deposit/withdraw ledger.",
+      },
+      {
+        title: "Zero-build static",
+        body: "21 HTML pages — local fonts/images; run with npx serve .",
+      },
+    ],
+    includes: [
+      "21 HTML pages (home, sports, event, casino, wallet, auth…)",
+      "css/styles.css · js chrome/slip/live/data modules",
+      "Rich local image pack (matches, casino, promos, crests)",
+      "serve.json + README (18+ demo notes)",
+    ],
+    requirements: [
+      "Modern browser",
+      "Static file host (`npx serve .` — not file://)",
+    ],
+  },
 ]
 
 export function getTemplateProject(
