@@ -45,7 +45,6 @@ export const BACKGROUND_FEATURED_IDS = new Set([
   "wave-interference",
   "plasma-effect",
   "galaxy-spiral",
-  "fluid-dynamics",
   "wave-equation",
   "smoke-wind",
   "fireflies",
@@ -236,15 +235,6 @@ export const backgroundsCatalog: BackgroundsCatalogEntry[] = [
     technique: "canvas-2d",
   },
   
-  {
-    id: "fluid-dynamics",
-    collection: "creative-lab",
-    title: "Fluid Dynamics",
-    description: "WebGL2 Navier-Stokes fluid with vorticity confinement.",
-    htmlPath: "/backgrounds/creative-lab/fluid-dynamics.html",
-    previewPath: "/backgrounds/creative-lab/previews/fluid-dynamics.webp",
-    technique: "webgl",
-  },
   {
     id: "wave-equation",
     collection: "creative-lab",
