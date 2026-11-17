@@ -12706,6 +12706,69 @@ export const templateProjects: TemplateProject[] = [
       "Static file host (`npx serve .` — not file://)",
     ],
   },
+  {
+    slug: "sonojs-website-52",
+    title: "Funding Future",
+    tagline:
+      "Match-Trader prop desk — Instant / One-Phase / Two-Phase plus trader portal.",
+    description:
+      "Funding Future is a multi-page premium prop / funded-trading website template by SonoJS (demo brand: Funding Future). Zero-build static HTML/CSS/vanilla JS with a violet-ledger + orange-punch system, local Jost, canvas ambience, and Match-Trader / Match2Pay narrative. Marketing for challenge, pricing calculator, rules, payouts (14-day + fee refund), scaling, reviews, FAQ, about, affiliates, careers, contact, and blog; auth + checkout with demo coupons; trader portal (dashboard, challenge status, Chart.js stats, positions, payouts, certificates, settings, help); legal and status pages. Demo only — localStorage entitlements, not a live broker. Host statically (e.g. Cloudflare Workers); run with npx serve . from project root (not file://).",
+    category: "website",
+    websiteVertical: "fintech",
+    stack: ["html", "css", "javascript"],
+    priceLabel: "$39",
+    priceCents: 3900,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 280,
+    accent: "280",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "landing",
+    coverImage: "/templates/projects/website/sonojs-website-52/main.webp",
+    coverImageDark: null,
+    coverVideo: "/templates/projects/website/sonojs-website-52/cover.mp4",
+    detailCoverImage:
+      "/templates/projects/website/sonojs-website-52/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-website-52.sonojs2.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-17",
+    firstReleasedAt: "2026-11-17",
+    screens: 36,
+    runCommand: "npx serve .",
+    highlights: [
+      {
+        title: "Match-Trader prop story",
+        body: "Instant / One-Phase / Two-Phase rails with fee-refund payout narrative.",
+      },
+      {
+        title: "Pricing + checkout demo",
+        body: "Live size calc, sticky CTA, coupons, entitlement unlock into the portal.",
+      },
+      {
+        title: "Trader portal",
+        body: "Dashboard, challenge simulate-pass, Chart.js stats, positions, payouts.",
+      },
+      {
+        title: "Zero-build static",
+        body: "36 HTML pages — local GSAP/Chart.js, Jost fonts, violet/orange system.",
+      },
+    ],
+    includes: [
+      "36 HTML pages (home, marketing, auth, checkout, app, legal…)",
+      "css tokens · site · pages · app + local Jost",
+      "JS chrome/auth/ui + page modules + local GSAP/Chart.js",
+      "images pack + README + serve.json",
+    ],
+    requirements: [
+      "Modern browser",
+      "Static file host (`npx serve .` — not file://)",
+    ],
+  },
 ]
 
 export function getTemplateProject(
