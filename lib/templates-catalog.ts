@@ -12456,6 +12456,68 @@ export const templateProjects: TemplateProject[] = [
       "Static file host (`npx serve .` — not file://)",
     ],
   },
+  {
+    slug: "sonojs-website-48",
+    title: "RedFunding",
+    tagline:
+      "Futures prop evaluations without consistency rules — desk + trader portal.",
+    description:
+      "RedFunding is a multi-page premium futures prop / evaluation website template by SonoJS (demo brand: RedFunding). Zero-build static HTML/CSS/vanilla JS with a minimal dark + crimson (#ce1126) system and local fonts. Marketing for challenge, pricing calculator, rules (explicit consistency NONE), payouts, scaling, reviews, FAQ, about, affiliates, careers, contact, and blog; auth + checkout demo; trader portal (dashboard, challenge status, Chart.js stats, positions, payouts, certificates, settings, help); legal and utility pages. Demo only — localStorage entitlements, not a live broker. Host statically (e.g. Cloudflare Workers); serve from project root (not file://).",
+    category: "website",
+    websiteVertical: "fintech",
+    stack: ["html", "css", "javascript"],
+    priceLabel: "$39",
+    priceCents: 3900,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 355,
+    accent: "355",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "landing",
+    coverImage: "/templates/projects/website/sonojs-website-48/main.webp",
+    coverImageDark: null,
+    coverVideo: "/templates/projects/website/sonojs-website-48/cover.mp4",
+    detailCoverImage:
+      "/templates/projects/website/sonojs-website-48/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-website-48.sonojs2.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-17",
+    firstReleasedAt: "2026-11-17",
+    screens: 36,
+    highlights: [
+      {
+        title: "Futures-first prop story",
+        body: "Consistency NONE hook, Mini/Micro ladders, drawdown-only rails.",
+      },
+      {
+        title: "Pricing + checkout demo",
+        body: "Live size calculator, sticky CTA, and entitlement unlock flow.",
+      },
+      {
+        title: "Trader portal",
+        body: "Dashboard rings, Chart.js stats, positions, payouts, certificates.",
+      },
+      {
+        title: "Zero-build static",
+        body: "36 HTML pages — local GSAP/Chart.js, fonts, and imagery.",
+      },
+    ],
+    includes: [
+      "36 HTML pages (home, marketing, auth, checkout, app, legal…)",
+      "css/site.css · chrome · portal styles",
+      "JS — mock data, auth/commerce, page modules, local vendors",
+      "Local fonts and images",
+    ],
+    requirements: [
+      "Modern browser",
+      "Static file host (not file://)",
+    ],
+  },
 ]
 
 export function getTemplateProject(
