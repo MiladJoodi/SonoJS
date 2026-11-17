@@ -35,6 +35,7 @@ export type WebsiteVertical =
   | "cyber"
   | "crypto"
   | "fintech"
+  | "healthcare"
 
 export type TemplateStack =
   | "nextjs"
@@ -184,6 +185,7 @@ export const WEBSITE_VERTICAL_LABEL: Record<WebsiteVertical, string> = {
   cyber: "Cybersecurity",
   crypto: "Crypto & Trading",
   fintech: "Fintech & Trading",
+  healthcare: "Healthcare",
 }
 
 /** Compact labels for the horizontal websites rail. */
@@ -204,6 +206,7 @@ export const WEBSITE_VERTICAL_RAIL_LABEL: Record<WebsiteVertical, string> = {
   cyber: "Cyber",
   crypto: "Crypto",
   fintech: "Fintech",
+  healthcare: "Healthcare",
 }
 
 /** Ordered chip list for `/websites` (only chips with items appear). */
@@ -224,6 +227,7 @@ export const WEBSITE_VERTICAL_IDS = [
   "cyber",
   "crypto",
   "fintech",
+  "healthcare",
 ] as const satisfies readonly WebsiteVertical[]
 
 export const TEMPLATE_STACK_LABEL: Record<TemplateStack, string> = {

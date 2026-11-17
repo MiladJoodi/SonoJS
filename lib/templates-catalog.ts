@@ -1696,7 +1696,68 @@ export const templateProjects: TemplateProject[] = [
       "Static file host",
     ],
   },
-{
+  {
+    slug: "sonojs-ecommerce-12",
+    title: "Blendy",
+    tagline:
+      "Real fruit smoothie stage with flavour tabs, parallax bottles, and autoplay.",
+    description:
+      "Blendy is a single-page interactive smoothie storefront stage by SonoJS (demo brand: Blendy). Zero-build static HTML with inline CSS/JS and self-hosted Poppins + Baloo 2. Full-viewport flavour scenes for Berry, Kiwi, Banana, and Strawberry using local WebP sprite sheets, parallax fruit/bottle layers, tab underline, prev/next, and idle autoplay (respects reduced motion). Brand chrome with Cart / Register links and a SHOP NOW CTA. Demo marketing chrome only. No checkout backend. Host statically (e.g. Cloudflare Workers).",
+    category: "ecommerce",
+    stack: ["html", "css", "javascript"],
+    priceLabel: "Free",
+    priceCents: 0,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 270,
+    accent: "270",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "shop",
+    coverImage: "/templates/projects/ecommerce/sonojs-ecommerce-12/main.webp",
+    coverImageDark: null,
+    coverVideo: "/templates/projects/ecommerce/sonojs-ecommerce-12/cover.mp4",
+    detailCoverImage:
+      "/templates/projects/ecommerce/sonojs-ecommerce-12/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-ecommerce-12.sonojs2.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-17",
+    firstReleasedAt: "2026-11-17",
+    screens: 1,
+    highlights: [
+      {
+        title: "Flavour stage",
+        body: "Berry, Kiwi, Banana, Strawberry scenes with color-matched canvases.",
+      },
+      {
+        title: "Parallax bottles",
+        body: "Sprite-sheet fruit and bottle layers with smooth tab / arrow transitions.",
+      },
+      {
+        title: "Brand chrome",
+        body: "Blendy logo, flavour tabs, Cart / Register, and SHOP NOW CTA.",
+      },
+      {
+        title: "Zero-build static",
+        body: "Single index.html + fonts/ + images/ WebP sheets. Static host only.",
+      },
+    ],
+    includes: [
+      "index.html (inline CSS + JS)",
+      "fonts/ Poppins + Baloo 2 (woff2)",
+      "images/ berry · kiwi · banana · strawberry sprite sheets",
+      "Interactive flavour stage demo (no checkout backend)",
+    ],
+    requirements: [
+      "Modern browser",
+      "Static file host",
+    ],
+  },
+  {
     slug: "sonojs-portfolio-01",
     title: "Jack",
     tagline:
@@ -12826,6 +12887,69 @@ export const templateProjects: TemplateProject[] = [
       "assets/css · js · images · fonts · webfonts (fully local)",
       "demo-auth / demo-wallet / demo-chrome helpers + serve.json",
       "README + CHANGELOG",
+    ],
+    requirements: [
+      "Modern browser",
+      "Static file host (`npx serve .`)",
+    ],
+  },
+  {
+    slug: "sonojs-website-54",
+    title: "Aurelia Advisory",
+    tagline:
+      "Dark healthcare AI advisory with services, cases, booking demo, and portal.",
+    description:
+      "Aurelia Advisory is a multi-page premium healthcare AI advisory website template by SonoJS (demo brand: Aurelia Advisory · Dr. Mira Vale, MD). Zero-build static HTML/CSS/vanilla JS with a black canvas, crimson accent, glass panels, self-hosted Inter, and local Lucide-style icons. Marketing home, about, services (Strategy Sprint, Clinical AI Readiness, Executive Education), industries, case studies, speaking, insights, FAQ, contact, book consult (multi-step + AURELIA10), privacy/terms, 404. Auth unlocks a client portal with sessions, HTML briefs, and account. Demo only. Not medical advice. localStorage booking/auth theater, no live payments. Host statically (e.g. Cloudflare Workers); run with npx serve . from the project root.",
+    category: "website",
+    websiteVertical: "healthcare",
+    stack: ["html", "css", "javascript"],
+    priceLabel: "$29",
+    priceCents: 2900,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 0,
+    accent: "0",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "landing",
+    coverImage: "/websites/projects/sonojs-website-54/main.webp",
+    coverImageDark: null,
+    coverVideo: "/websites/projects/sonojs-website-54/cover.webm",
+    detailCoverImage:
+      "/websites/projects/sonojs-website-54/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-website-54.sonojs2.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-18",
+    firstReleasedAt: "2026-11-18",
+    screens: 26,
+    runCommand: "npx serve .",
+    highlights: [
+      {
+        title: "Advisory marketing",
+        body: "Services, industries, case studies, speaking, and insights with cinematic stills.",
+      },
+      {
+        title: "Consult booking demo",
+        body: "Multi-step book flow with AURELIA10 credit note and localStorage persistence.",
+      },
+      {
+        title: "Client portal",
+        body: "Login, sessions, HTML briefs, and account chrome for walkthroughs.",
+      },
+      {
+        title: "Zero-build static",
+        body: "26 HTML pages, local Inter fonts and icons; run with npx serve .",
+      },
+    ],
+    includes: [
+      "26 HTML pages (home, services, cases, book, portal, legal…)",
+      "assets/css tokens · base · components · pages",
+      "assets/js chrome · booking · auth · content · motion · icons",
+      "assets/images WebP pack + fonts + serve.json + README",
     ],
     requirements: [
       "Modern browser",
