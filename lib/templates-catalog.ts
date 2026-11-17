@@ -12518,6 +12518,68 @@ export const templateProjects: TemplateProject[] = [
       "Static file host (not file://)",
     ],
   },
+  {
+    slug: "sonojs-website-49",
+    title: "Aether Funded",
+    tagline:
+      "Forex & crypto prop firm — glass desk, MT5/cTrader, and trader portal.",
+    description:
+      "Aether Funded is a multi-page premium forex & crypto prop-firm website template by SonoJS (demo brand: Aether Funded). Zero-build static HTML/CSS/vanilla JS with a kinetic blue-glass system and local fonts. Marketing for challenge, pricing calculator, rules (pairs, lot size, daily DD, weekend crypto hold), payouts (14-day cycle, fee refund), scaling, reviews, FAQ, about, affiliates, careers, contact, and blog; auth + checkout with demo coupons; trader portal (dashboard, challenge status, Chart.js stats, positions, payouts, certificates, settings, help); legal and utility pages. Demo only — localStorage entitlements, not a live broker. Host statically (e.g. Cloudflare Workers); serve from project root (not file://).",
+    category: "website",
+    websiteVertical: "fintech",
+    stack: ["html", "css", "javascript"],
+    priceLabel: "$39",
+    priceCents: 3900,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 220,
+    accent: "220",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "landing",
+    coverImage: "/templates/projects/website/sonojs-website-49/main.webp",
+    coverImageDark: null,
+    coverVideo: "/templates/projects/website/sonojs-website-49/cover.mp4",
+    detailCoverImage:
+      "/templates/projects/website/sonojs-website-49/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-website-49.sonojs2.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-17",
+    firstReleasedAt: "2026-11-17",
+    screens: 36,
+    highlights: [
+      {
+        title: "FX + crypto prop story",
+        body: "Pairs board, lot calculator, weekend hold, MT5 & cTrader framing.",
+      },
+      {
+        title: "Pricing + checkout demo",
+        body: "Size rail, live fee/payout calc, coupons, entitlement unlock.",
+      },
+      {
+        title: "Trader portal",
+        body: "Dashboard rings, stats charts, positions, payouts, certificates.",
+      },
+      {
+        title: "Zero-build static",
+        body: "36 HTML pages — local GSAP/Chart.js, fonts, and imagery.",
+      },
+    ],
+    includes: [
+      "36 HTML pages (home, marketing, auth, checkout, app, legal…)",
+      "css tokens · site · pages · app",
+      "JS — mock data, auth/commerce, page modules, local vendors",
+      "Local fonts and images",
+    ],
+    requirements: [
+      "Modern browser",
+      "Static file host (not file://)",
+    ],
+  },
 ]
 
 export function getTemplateProject(

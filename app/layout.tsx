@@ -9,6 +9,10 @@ import {
   DocsToaster,
   PreviewDirectionProvider,
 } from "@/components/docs"
+import {
+  GoogleTagManager,
+  GoogleTagManagerNoscript,
+} from "@/components/google-tag-manager"
 import { ThemeProvider } from "@/components/theme-provider"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { siteConfig } from "@/lib/config"
@@ -95,6 +99,9 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="style-vega flex min-h-full flex-col font-sans text-body">
+        {process.env.VERCEL_ENV === "production" ? (
+          <GoogleTagManagerNoscript />
+        ) : null}
         <ClerkProvider>
           <SonoGoogleOneTap />
           <ThemeProvider
@@ -111,6 +118,9 @@ export default function RootLayout({
             </PreviewDirectionProvider>
             {/* Local prod builds have no /_vercel/insights endpoint; keep Analytics on Vercel only. */}
             {process.env.VERCEL ? <Analytics /> : null}
+            {process.env.VERCEL_ENV === "production" ? (
+              <GoogleTagManager />
+            ) : null}
           </ThemeProvider>
         </ClerkProvider>
       </body>
