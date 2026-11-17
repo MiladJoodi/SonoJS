@@ -12269,6 +12269,68 @@ export const templateProjects: TemplateProject[] = [
       "Static file host (not file://)",
     ],
   },
+  {
+    slug: "sonojs-website-45",
+    title: "Deploy Engine",
+    tagline:
+      "Capital-markets deploy controls — operator HUD, pricing, and docs.",
+    description:
+      "Deploy Engine is a multi-page premium B2B capital-markets SaaS website template by SonoJS (demo brand: Deploy Engine v3.0). Zero-build static HTML/CSS/vanilla JS with a teal + market-gold system and local Figtree / Syne / JetBrains Mono. Interactive Three.js hero with operator CONFIG HUD (volatility, concentration, spread, liquidity); platform, features, solutions, security, pricing, customers; docs hub (getting started, API, SDK, webhooks); changelog, status, about, careers, contact, legal. Demo marketing only — forms use localStorage, no backend. Host statically (e.g. Cloudflare Workers); serve from project root (WebGL required for home hero; static fallback included).",
+    category: "website",
+    websiteVertical: "saas",
+    stack: ["html", "css", "javascript"],
+    priceLabel: "$39",
+    priceCents: 3900,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 160,
+    accent: "160",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "landing",
+    coverImage: "/templates/projects/website/sonojs-website-45/main.webp",
+    coverImageDark: null,
+    coverVideo: "/templates/projects/website/sonojs-website-45/cover.mp4",
+    detailCoverImage:
+      "/templates/projects/website/sonojs-website-45/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-website-45.sonojs2.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-17",
+    firstReleasedAt: "2026-11-17",
+    screens: 21,
+    highlights: [
+      {
+        title: "Operator WebGL hero",
+        body: "Market Tracker stage with CONFIG HUD and designed WebGL fallback.",
+      },
+      {
+        title: "Full SaaS story",
+        body: "Platform, pricing, customers, security, careers, and contact demos.",
+      },
+      {
+        title: "Docs hub",
+        body: "Getting started, API overview, SDK, and webhooks with code samples.",
+      },
+      {
+        title: "Zero-build static",
+        body: "21 HTML pages — local Three.js + Lucide vendors, tokens CSS.",
+      },
+    ],
+    includes: [
+      "21 HTML pages (home, product, docs, company, legal…)",
+      "assets/css tokens · components · hero · pages",
+      "assets/js hero + page modules + mock data",
+      "Local fonts and vendor Three.js / Lucide",
+    ],
+    requirements: [
+      "Modern browser (WebGL for home hero)",
+      "Static file host (not file://)",
+    ],
+  },
 ]
 
 export function getTemplateProject(
