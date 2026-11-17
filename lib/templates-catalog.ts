@@ -12643,6 +12643,69 @@ export const templateProjects: TemplateProject[] = [
       "Static file host (`npx serve .` — not file://)",
     ],
   },
+  {
+    slug: "sonojs-website-51",
+    title: "Estetico Café",
+    tagline:
+      "Warm café & restaurant — interactive menu, Visit Notes, and table booking.",
+    description:
+      "Estetico Café is a multi-page premium café & restaurant website template by SonoJS (demo brand: Estetico Café, New York). Zero-build static HTML/CSS/vanilla JS with local Tailwind + Lucide + Inter, light/dark theme, and soft stone aesthetic. Home with cinematic hero; interactive menu (search, diet filters, sort) and dish detail; Visit Notes favorites (localStorage); multi-step reservation with confirmation code and cancel; gallery, events, journal, location, contact, FAQ, careers, privacy/terms, style guide, 404. Demo only — no online cart or payments (sit-down booking). Host statically (e.g. Cloudflare Workers); run with npx serve . from project root (not file://).",
+    category: "website",
+    websiteVertical: "restaurant",
+    stack: ["html", "css", "javascript", "tailwind"],
+    priceLabel: "$29",
+    priceCents: 2900,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 30,
+    accent: "30",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "landing",
+    coverImage: "/templates/projects/website/sonojs-website-51/main.webp",
+    coverImageDark: null,
+    coverVideo: "/templates/projects/website/sonojs-website-51/cover.mp4",
+    detailCoverImage:
+      "/templates/projects/website/sonojs-website-51/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-website-51.sonojs2.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-17",
+    firstReleasedAt: "2026-11-17",
+    screens: 20,
+    runCommand: "npx serve .",
+    highlights: [
+      {
+        title: "Reservation demo",
+        body: "Multi-step booking with seating preference, confirm code, and cancel.",
+      },
+      {
+        title: "Menu + Visit Notes",
+        body: "Filterable menu, dish pages, and localStorage favorites list.",
+      },
+      {
+        title: "Full café site map",
+        body: "Gallery, events, journal, location, careers, FAQ, and legal.",
+      },
+      {
+        title: "Zero-build static",
+        body: "20 HTML pages — local Tailwind/Lucide/Inter; npx serve .",
+      },
+    ],
+    includes: [
+      "20 HTML pages (home, menu, reservation, visit-notes, gallery…)",
+      "css/style.css + self-hosted Inter fonts",
+      "JS layout/data/menu/reservation/storage + local Tailwind & Lucide",
+      "assets/images pack + README",
+    ],
+    requirements: [
+      "Modern browser",
+      "Static file host (`npx serve .` — not file://)",
+    ],
+  },
 ]
 
 export function getTemplateProject(
