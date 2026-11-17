@@ -1,7 +1,7 @@
 # Clarity Stream
 
 Package: Clarity Stream (`1.0.0`) - HTML · CSS · JavaScript  
-Category: `saas` (templates surface — not `/websites`)  
+Category: `saas` (templates surface, not `/websites`)  
 Slug / folder: `sonojs-saas-19`  
 Path: `public/templates/projects/saas/sonojs-saas-19/`  
 Source: `E:\dl\prompt5\171`

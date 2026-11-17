@@ -89,7 +89,7 @@ function WorkspaceShellInner({
         <div
           className={cn(
             "hidden shrink-0 xl:block",
-            /* Same sticky pattern as the left sidebar — overflow-hidden breaks sticky. */
+            /* Same sticky pattern as the left sidebar, overflow-hidden breaks sticky. */
             "sticky top-[calc(var(--header-height)+0.6rem)] self-start",
             "max-h-[calc(100svh-var(--header-height)-2rem)]",
             rightOpen ? "overflow-x-hidden overflow-y-auto" : "overflow-hidden"

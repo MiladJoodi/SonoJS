@@ -194,7 +194,7 @@ export function AdminPaymentsPanel() {
                             {r.email || r.clerkUserId || r.userId}
                           </Link>
                         ) : (
-                          r.email || "—"
+                          r.email || ", "
                         )}
                       </td>
                       <td className={adminTdClass} dir="ltr">
@@ -210,7 +210,7 @@ export function AdminPaymentsPanel() {
                         )}
                         dir="ltr"
                       >
-                        {r.stripeInvoiceId || "—"}
+                        {r.stripeInvoiceId || ", "}
                       </td>
                     </tr>
                   ))}

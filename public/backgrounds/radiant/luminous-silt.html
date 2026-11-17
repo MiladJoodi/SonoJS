@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luminous Silt</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; overflow: hidden; background: #0a0a0a; }
+  canvas { display: block; width: 100vw; height: 100vh; }
+  .label {
+    position: fixed;
+    top: 20px;
+    left: 24px;
+    font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(200, 149, 108, 0.5);
+    z-index: 10;
+    pointer-events: none;
+    user-select: none;
+  }
+  html.embed .label { display: none; }
+</style>
+<script>if(/\bembed=1\b/.test(location.search))document.documentElement.classList.add("embed")</script>
+</head>
+<body>
+<div class="label">Luminous Silt</div>
+<canvas id="canvas"></canvas>
+<script>
+// ─────────────────────────────────────────────
+// Luminous Silt — Dense particle color clouds
+// ─────────────────────────────────────────────
+(function () {
+  var canvas = document.getElementById('canvas');
+  var ctx = canvas.getContext('2d');
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ── Tunable params ──
+  var DRIFT_SPEED = 0.6;
+  var DENSITY = 1.0;
+
+  // ── DPR capped at 1.5 for perf with 18K particles ──
+  var dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+  var W, H;
+  var BASE_COUNT = 18000;
+  var particleCount;
+
+  // ── Particle data in typed arrays ──
+  var posX, posY, velScale, brightnessIdx, isSparkle;
+
+  // ── Noise implementation ──
+  // Perlin-style hash-based 2D value noise
+  var PERM = new Uint8Array(512);
+  var GRAD = [
+    [1, 1], [-1, 1], [1, -1], [-1, -1],
+    [1, 0], [-1, 0], [0, 1], [0, -1]
+  ];
+
+  function initNoise(seed) {
+    var p = new Uint8Array(256);
+    var i, j, tmp;
+    for (i = 0; i < 256; i++) p[i] = i;
+    for (i = 255; i > 0; i--) {
+      seed = (seed * 16807 + 0) % 2147483647;
+      j = seed % (i + 1);
+      tmp = p[i]; p[i] = p[j]; p[j] = tmp;
+    }
+    for (i = 0; i < 512; i++) PERM[i] = p[i & 255];
+  }
+
+  function fade(t) { return t * t * t * (t * (t * 6 - 15) + 10); }
+
+  function noise2D(x, y) {
+    var xi = Math.floor(x);
+    var yi = Math.floor(y);
+    var xf = x - xi;
+    var yf = y - yi;
+    xi = xi & 255;
+    yi = yi & 255;
+    var u = fade(xf);
+    var v = fade(yf);
+
+    var g00 = GRAD[PERM[PERM[xi] + yi] & 7];
+    var g10 = GRAD[PERM[PERM[xi + 1] + yi] & 7];
+    var g01 = GRAD[PERM[PERM[xi] + yi + 1] & 7];
+    var g11 = GRAD[PERM[PERM[xi + 1] + yi + 1] & 7];
+
+    var n00 = g00[0] * xf + g00[1] * yf;
+    var n10 = g10[0] * (xf - 1) + g10[1] * yf;
+    var n01 = g01[0] * xf + g01[1] * (yf - 1);
+    var n11 = g11[0] * (xf - 1) + g11[1] * (yf - 1);
+
+    var nx0 = n00 + u * (n10 - n00);
+    var nx1 = n01 + u * (n11 - n01);
+    return nx0 + v * (nx1 - nx0);
+  }
+
+  initNoise(42);
+
+  // ── Color gradient corners ──
+  // Bilinear interpolation across canvas with slow rotation
+  var CORNER_TL = [50, 80, 220];     // deep cobalt blue
+  var CORNER_TR = [180, 70, 140];    // rose/violet
+  var CORNER_BL = [40, 170, 170];    // teal
+  var CORNER_BR = [240, 150, 50];    // amber/orange
+  var CENTER_C  = [230, 215, 190];   // warm white
+
+  var ALPHA_LEVELS = [0.03, 0.045, 0.06, 0.09, 0.18, 0.27];
+  var NUM_ALPHAS = ALPHA_LEVELS.length;
+  var NUM_NORMAL_ALPHAS = 4; // first 4 are normal, last 2 are sparkle-only
+
+  // ── Quantized color palette for bucketing ──
+  // Discretize the gradient into a grid of color cells
+  var COLOR_GRID_SIZE = 12; // 12x12 = 144 color cells
+  var NUM_COLORS = COLOR_GRID_SIZE * COLOR_GRID_SIZE;
+  var NUM_BUCKETS = NUM_COLORS * NUM_ALPHAS;
+
+  // COLOR_STRINGS[colorIdx * NUM_ALPHAS + alphaIdx]
+  var COLOR_STRINGS = new Array(NUM_BUCKETS);
+
+  // Compute gradient color for normalized coordinates (0-1)
+  // with center blending and corner rotation
+  function gradientColor(nx, ny, rotAngle) {
+    // Rotate the corner assignment
+    var cos_r = Math.cos(rotAngle);
+    var sin_r = Math.sin(rotAngle);
+    // Rotate UV around center
+    var cx = nx - 0.5;
+    var cy = ny - 0.5;
+    var rx = cx * cos_r - cy * sin_r + 0.5;
+    var ry = cx * sin_r + cy * cos_r + 0.5;
+    // Clamp rotated coords
+    rx = rx < 0 ? 0 : rx > 1 ? 1 : rx;
+    ry = ry < 0 ? 0 : ry > 1 ? 1 : ry;
+
+    // Bilinear interpolation of corners
+    var r = CORNER_TL[0] * (1 - rx) * (1 - ry)
+          + CORNER_TR[0] * rx * (1 - ry)
+          + CORNER_BL[0] * (1 - rx) * ry
+          + CORNER_BR[0] * rx * ry;
+    var g = CORNER_TL[1] * (1 - rx) * (1 - ry)
+          + CORNER_TR[1] * rx * (1 - ry)
+          + CORNER_BL[1] * (1 - rx) * ry
+          + CORNER_BR[1] * rx * ry;
+    var b = CORNER_TL[2] * (1 - rx) * (1 - ry)
+          + CORNER_TR[2] * rx * (1 - ry)
+          + CORNER_BL[2] * (1 - rx) * ry
+          + CORNER_BR[2] * rx * ry;
+
+    // Blend toward warm white center based on proximity to center
+    var distFromCenter = Math.sqrt(cx * cx + cy * cy) * 2; // 0 at center, ~1.4 at corner
+    var centerWeight = 1 - Math.min(distFromCenter, 1);
+    centerWeight = centerWeight * centerWeight; // sharpen falloff
+    r = r + (CENTER_C[0] - r) * centerWeight;
+    g = g + (CENTER_C[1] - g) * centerWeight;
+    b = b + (CENTER_C[2] - b) * centerWeight;
+
+    return [(r + 0.5) | 0, (g + 0.5) | 0, (b + 0.5) | 0];
+  }
+
+  function rebuildColorStrings(rotAngle) {
+    for (var gy = 0; gy < COLOR_GRID_SIZE; gy++) {
+      for (var gx = 0; gx < COLOR_GRID_SIZE; gx++) {
+        var nx = (gx + 0.5) / COLOR_GRID_SIZE;
+        var ny = (gy + 0.5) / COLOR_GRID_SIZE;
+        var c = gradientColor(nx, ny, rotAngle);
+        var ci = gy * COLOR_GRID_SIZE + gx;
+        for (var ai = 0; ai < NUM_ALPHAS; ai++) {
+          COLOR_STRINGS[ci * NUM_ALPHAS + ai] = 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',' + ALPHA_LEVELS[ai] + ')';
+        }
+      }
+    }
+  }
+
+  rebuildColorStrings(0);
+
+  // ── Bucketing: fixed-size typed arrays to avoid GC ──
+  var bucketData;
+  var bucketLen;
+  var MAX_PER_BUCKET;
+
+  function allocBuckets() {
+    // With 864 buckets and 18K particles, average ~21 per bucket.
+    // Allow generous headroom but not full particleCount per bucket.
+    MAX_PER_BUCKET = Math.ceil(particleCount / NUM_BUCKETS * 8) + 32;
+    bucketData = new Uint32Array(NUM_BUCKETS * MAX_PER_BUCKET);
+    bucketLen = new Uint32Array(NUM_BUCKETS);
+  }
+
+  // ── Particle initialization ──
+  function initParticles() {
+    particleCount = Math.round(BASE_COUNT * DENSITY);
+    posX = new Float32Array(particleCount);
+    posY = new Float32Array(particleCount);
+    velScale = new Float32Array(particleCount);
+    brightnessIdx = new Uint8Array(particleCount);
+    isSparkle = new Uint8Array(particleCount);
+
+    for (var i = 0; i < particleCount; i++) {
+      posX[i] = Math.random() * W;
+      posY[i] = Math.random() * H;
+      velScale[i] = 0.3 + Math.random() * 0.7;
+      brightnessIdx[i] = (Math.random() * NUM_NORMAL_ALPHAS) | 0;
+      // ~5% of particles are sparkles — always use highest alpha bucket
+      isSparkle[i] = Math.random() < 0.05 ? 1 : 0;
+    }
+    allocBuckets();
+  }
+
+  // ── Resize ──
+  function resize() {
+    W = window.innerWidth;
+    H = window.innerHeight;
+    canvas.width = Math.round(W * dpr);
+    canvas.height = Math.round(H * dpr);
+    canvas.style.width = W + 'px';
+    canvas.style.height = H + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.fillStyle = '#000';
+    ctx.fillRect(0, 0, W, H);
+    initParticles();
+  }
+
+  window.addEventListener('resize', resize);
+
+  // ── Mouse state ──
+  var mouseX = 0, mouseY = 0;
+  var mouseActive = false;
+  var mouseDown = false;
+
+  canvas.addEventListener('mousemove', function(e) { mouseX = e.clientX; mouseY = e.clientY; mouseActive = true; });
+  canvas.addEventListener('mouseleave', function() { mouseActive = false; });
+  canvas.addEventListener('mousedown', function(e) { mouseDown = true; mouseX = e.clientX; mouseY = e.clientY; mouseActive = true; });
+  canvas.addEventListener('mouseup', function() { mouseDown = false; });
+  canvas.addEventListener('touchstart', function(e) { e.preventDefault(); mouseDown = true; mouseActive = true; mouseX = e.touches[0].clientX; mouseY = e.touches[0].clientY; }, { passive: false });
+  canvas.addEventListener('touchmove', function(e) { e.preventDefault(); mouseX = e.touches[0].clientX; mouseY = e.touches[0].clientY; }, { passive: false });
+  canvas.addEventListener('touchend', function() { mouseDown = false; mouseActive = false; });
+
+  // ── Animation state ──
+  var time = 0;
+  var paused = false;
+  var frameCount = 0;
+
+  resize();
+
+  // ── Color palette rebuild interval ──
+  var COLOR_REBUILD_INTERVAL = 8; // rebuild color strings every N frames
+
+  // ── Main draw loop ──
+  function draw() {
+    if (paused) {
+      requestAnimationFrame(draw);
+      return;
+    }
+
+    var dt = prefersReduced ? 0 : 1;
+    time += 0.0006 * DRIFT_SPEED * dt;
+    frameCount++;
+
+    // Slowly rotating color map
+    var rotAngle = time * 0.1;
+
+    // Rebuild quantized color palette periodically as rotation changes
+    if (frameCount % COLOR_REBUILD_INTERVAL === 0) {
+      rebuildColorStrings(rotAngle);
+    }
+
+    // Fade overlay: semi-transparent black for trailing effect
+    ctx.fillStyle = 'rgba(0,0,0,0.035)';
+    ctx.fillRect(0, 0, W, H);
+
+    // ── Reset bucket counts ──
+    for (var b = 0; b < NUM_BUCKETS; b++) bucketLen[b] = 0;
+
+    // ── Update particles and assign to buckets ──
+    var noiseScale = 0.003;
+    var speed = 1.2 * DRIFT_SPEED;
+    var PI2 = Math.PI * 2;
+    var invW = 1 / W;
+    var invH = 1 / H;
+    var gridSize = COLOR_GRID_SIZE;
+
+    for (var i = 0; i < particleCount; i++) {
+      var px = posX[i];
+      var py = posY[i];
+
+      // Flow field: single noise sample for angle
+      var angle = noise2D(px * noiseScale, py * noiseScale + time * 10) * PI2;
+
+      // Update position
+      var v = velScale[i] * speed;
+      px += Math.cos(angle) * v;
+      py += Math.sin(angle) * v;
+
+      // Mouse interaction: repel on hover, attract on click
+      if (mouseActive) {
+        var mdx = px - mouseX;
+        var mdy = py - mouseY;
+        var md = Math.sqrt(mdx * mdx + mdy * mdy);
+        if (md > 1 && md < 150) {
+          var mForce = mouseDown ? -3.0 : 4.0;
+          var falloff = (1 - md / 150);
+          falloff *= falloff;
+          px += (mdx / md) * mForce * falloff;
+          py += (mdy / md) * mForce * falloff;
+        }
+      }
+
+      // Wrap around edges
+      if (px < 0) px += W;
+      else if (px >= W) px -= W;
+      if (py < 0) py += H;
+      else if (py >= H) py -= H;
+
+      posX[i] = px;
+      posY[i] = py;
+
+      // Map particle position to quantized color grid cell
+      var gx = (px * invW * gridSize) | 0;
+      var gy = (py * invH * gridSize) | 0;
+      if (gx >= gridSize) gx = gridSize - 1;
+      if (gy >= gridSize) gy = gridSize - 1;
+      var ci = gy * gridSize + gx;
+
+      // Alpha bucket: sparkle particles use the high-alpha sparkle buckets (indices 4-5)
+      var bi = isSparkle[i] ? (NUM_NORMAL_ALPHAS + ((brightnessIdx[i]) & 1)) : brightnessIdx[i];
+      var bucketId = ci * NUM_ALPHAS + bi;
+      var bLen = bucketLen[bucketId];
+      if (bLen < MAX_PER_BUCKET) {
+        bucketData[bucketId * MAX_PER_BUCKET + bLen] = i;
+        bucketLen[bucketId] = bLen + 1;
+      }
+    }
+
+    // ── Draw particles batched by color+alpha ──
+    for (var bid = 0; bid < NUM_BUCKETS; bid++) {
+      var count = bucketLen[bid];
+      if (count === 0) continue;
+
+      ctx.fillStyle = COLOR_STRINGS[bid];
+      var baseOffset = bid * MAX_PER_BUCKET;
+
+      for (var k = 0; k < count; k++) {
+        var idx = bucketData[baseOffset + k];
+        ctx.fillRect(posX[idx], posY[idx], 2, 2);
+      }
+    }
+
+    requestAnimationFrame(draw);
+  }
+
+  // Initial black fill
+  ctx.fillStyle = '#000';
+  ctx.fillRect(0, 0, W, H);
+
+  requestAnimationFrame(draw);
+
+  // ── Visibility pause ──
+  document.addEventListener('visibilitychange', function () {
+    paused = document.hidden;
+  });
+
+  // ── PostMessage param API ──
+  window.addEventListener('message', function (e) {
+    if (e.data && e.data.type === 'param') {
+      switch (e.data.name) {
+        case 'DRIFT_SPEED':
+          DRIFT_SPEED = e.data.value;
+          break;
+        case 'DENSITY':
+          DENSITY = e.data.value;
+          initParticles();
+          break;
+      }
+    }
+  });
+})();
+</script>
+</body>
+</html>

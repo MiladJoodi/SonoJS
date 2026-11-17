@@ -253,7 +253,7 @@ export function TemplateDownloadButton({
         if (cancelled) return
         if (data.status === "owned") {
           setOwnsProduct(true)
-          setStatusNote("Purchase confirmed — you can download now.")
+          setStatusNote("Purchase confirmed, you can download now.")
           router.replace(pathname, { scroll: false })
           router.refresh()
           return
@@ -265,7 +265,7 @@ export function TemplateDownloadButton({
         window.setTimeout(poll, 1500)
       } else if (!cancelled) {
         setStatusNote(
-          "Payment received — access may take a moment. Refresh if Download stays locked."
+          "Payment received, access may take a moment. Refresh if Download stays locked."
         )
       }
     }

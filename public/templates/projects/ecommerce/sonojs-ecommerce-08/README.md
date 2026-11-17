@@ -23,7 +23,7 @@ Full-viewport zero-sugar soda product hero. Demo brand: **Soda / Diet Soda**.
 
 ## Run locally
 
-Do not open `index.html` via `file://` — scripts and GLBs need a static server.
+Do not open `index.html` via `file://`, scripts and GLBs need a static server.
 
 ```bash
 npx --yes serve .

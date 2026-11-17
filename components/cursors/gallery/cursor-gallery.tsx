@@ -5,7 +5,7 @@ import { cursorsCatalog } from "@/lib/cursors-catalog"
 
 import { CursorExampleCard } from "./example-card"
 
-/** Flat card grid — shared catalog columns (same as 3D / AI / carousels). */
+/** Flat card grid, shared catalog columns (same as 3D / AI / carousels). */
 export function CursorGallery() {
   const entries = [...cursorsCatalog].sort((a, b) => {
     if (a.status !== b.status) {

@@ -11,11 +11,11 @@ export const maxDuration = 30
 /**
  * Chat runtime for the SonoJS chat starter.
  *
- * GET  — probe whether a key is configured (and which model).
- * POST — stream a UI-message reply using AI_API_KEY (OpenAI-compatible).
+ * GET , probe whether a key is configured (and which model).
+ * POST, stream a UI-message reply using AI_API_KEY (OpenAI-compatible).
  *
  * Set AI_API_KEY in the environment. Optionally set CHAT_MODEL
- * (default `gpt-4o-mini`). Keys stay server-side — never use NEXT_PUBLIC_.
+ * (default `gpt-4o-mini`). Keys stay server-side. Never use NEXT_PUBLIC_.
  */
 
 function resolveKey() {

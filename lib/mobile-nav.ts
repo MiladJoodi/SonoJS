@@ -52,12 +52,19 @@ const PRIMARY_HREFS = new Set(
 
 const HOME_NAV_ITEM: SiteNavItem = { href: "/", label: "Home" }
 
-/** Remaining site nav links for the More drawer - Home first. */
+/** Remaining site nav links for the More drawer - Home first. Deduped by href. */
 export function getMobileMoreNavItems(): SiteNavItem[] {
   const rest = siteConfig.navItems.filter(
     (item) => !PRIMARY_HREFS.has(item.href)
   )
-  return [HOME_NAV_ITEM, ...rest, ...siteConfig.footerNavItems]
+  const seen = new Set<string>(["/"])
+  const out: SiteNavItem[] = [HOME_NAV_ITEM]
+  for (const item of [...rest, ...siteConfig.footerNavItems]) {
+    if (seen.has(item.href)) continue
+    seen.add(item.href)
+    out.push(item)
+  }
+  return out
 }
 
 /** Hide on tool workspaces, chart playground, and template product pages. */

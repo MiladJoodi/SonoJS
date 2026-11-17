@@ -40,7 +40,7 @@ Ask before changing MCP config outside this project.`,
     x: "https://x.com/_sonojs",
     linkedin: "https://www.linkedin.com/company/sonojs",
     youtube: "https://www.youtube.com/@SonoJSDev",
-    /** Support inbox — override with SUPPORT_EMAIL / NEXT_PUBLIC_SUPPORT_EMAIL. */
+    /** Support inbox, override with SUPPORT_EMAIL / NEXT_PUBLIC_SUPPORT_EMAIL. */
     supportEmail:
       process.env.NEXT_PUBLIC_SUPPORT_EMAIL?.trim() ||
       process.env.SUPPORT_EMAIL?.trim() ||
@@ -74,6 +74,7 @@ Ask before changing MCP config outside this project.`,
     { href: "/blocks", label: "Blocks" },
     { href: "/charts", label: "Charts" },
     { href: "/cursors", label: "Cursors" },
+    { href: "/backgrounds", label: "Backgrounds" },
     { href: "/3d", label: "3D" },
     { href: "/ai", label: "AI" },
     { href: "/carousels", label: "Carousels" },

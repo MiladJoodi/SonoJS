@@ -5,7 +5,7 @@ Category: `hero`
 Slug / folder: `sonojs-hero-65`  
 Path: `public/templates/projects/hero/sonojs-hero-65/`  
 
-Full-bleed video marketing hero. Demo brand: **Monsoon** — Weather any storm.
+Full-bleed video marketing hero. Demo brand: **Monsoon**. Weather any storm.
 
 ## Images / video
 

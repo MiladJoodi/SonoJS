@@ -12,7 +12,7 @@ Full-bleed luxury car rental hero. Demo brand: **VELORA** / **Regal Drive**.
 | File | Purpose |
 |---|---|
 | `main.webp` | Catalog card poster + detail page hero |
-| `cover.mp4` | Catalog card only — plays on hover / in-view on mobile |
+| `cover.mp4` | Catalog card only. Plays on hover / in-view on mobile |
 
 ## Live / package
 

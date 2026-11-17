@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laser Precision</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; overflow: hidden; background: #2a2a2a; }
+  canvas { display: block; width: 100vw; height: 100vh; }
+  .label {
+    position: fixed;
+    top: 20px;
+    left: 24px;
+    font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(90, 75, 60, 0.6);
+    z-index: 10;
+    pointer-events: none;
+    user-select: none;
+  }
+  html.embed .label { display: none; }
+</style>
+<script>if(/\bembed=1\b/.test(location.search))document.documentElement.classList.add("embed")</script>
+</head>
+<body>
+<div class="label">Laser Precision</div>
+<canvas id="canvas"></canvas>
+<script>
+// ─────────────────────────────────────────────
+// 48 · Laser Precision — Industrial burning laser
+// ─────────────────────────────────────────────
+(function () {
+  var canvas = document.getElementById('canvas');
+  var ctx = canvas.getContext('2d');
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var _pad = parseFloat(new URLSearchParams(location.search).get('p')) || 1;
+
+  // ── Tunable parameters ──
+  var DRAW_SPEED = 1.0;
+  var BRIGHTNESS = 1.0;
+
+  var width, height, dpr, cx, cy, minDim;
+  var HERO_CENTER_X = 0;
+  var HERO_CENTER_Y = 0;
+  var HERO_SCALE = 0;
+
+  // ── Offscreen burn layer — persistent scorched trails ──
+  var burnCanvas = document.createElement('canvas');
+  var burnCtx = burnCanvas.getContext('2d');
+
+  // ── Offscreen heat distortion layer ──
+  var heatCanvas = document.createElement('canvas');
+  var heatCtx = heatCanvas.getContext('2d');
+
+  function resize() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    width = window.innerWidth;
+    height = window.innerHeight;
+    canvas.width = Math.round(width * dpr);
+    canvas.height = Math.round(height * dpr);
+    canvas.style.width = width + 'px';
+    canvas.style.height = height + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    // Resize burn canvas
+    burnCanvas.width = Math.round(width * dpr);
+    burnCanvas.height = Math.round(height * dpr);
+    burnCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    // Resize heat canvas
+    heatCanvas.width = Math.round(width * dpr);
+    heatCanvas.height = Math.round(height * dpr);
+    heatCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    cx = HERO_SCALE > 0 ? width * HERO_CENTER_X : width / 2;
+    cy = HERO_SCALE > 0 ? height * HERO_CENTER_Y : height / 2;
+    minDim = Math.min(width, height);
+  }
+
+  window.addEventListener('resize', resize);
+  resize();
+
+  // ── Shape definitions ──
+
+  function makeCircle(centerX, centerY, radius, segments) {
+    var pts = [];
+    for (var i = 0; i <= segments; i++) {
+      var a = (i / segments) * Math.PI * 2 - Math.PI / 2;
+      pts.push({ x: centerX + Math.cos(a) * radius, y: centerY + Math.sin(a) * radius });
+    }
+    return pts;
+  }
+
+  function makePolygon(centerX, centerY, radius, sides, rotation) {
+    var pts = [];
+    for (var i = 0; i <= sides; i++) {
+      var a = (i / sides) * Math.PI * 2 + (rotation || 0);
+      pts.push({ x: centerX + Math.cos(a) * radius, y: centerY + Math.sin(a) * radius });
+    }
+    return pts;
+  }
+
+  function makeStar(centerX, centerY, outerR, innerR, points, rotation) {
+    var pts = [];
+    var total = points * 2;
+    for (var i = 0; i <= total; i++) {
+      var a = (i / total) * Math.PI * 2 + (rotation || 0) - Math.PI / 2;
+      var r = (i % 2 === 0) ? outerR : innerR;
+      pts.push({ x: centerX + Math.cos(a) * r, y: centerY + Math.sin(a) * r });
+    }
+    return pts;
+  }
+
+  function makeDiamond(centerX, centerY, w, h) {
+    return [
+      { x: centerX, y: centerY - h },
+      { x: centerX + w, y: centerY },
+      { x: centerX, y: centerY + h },
+      { x: centerX - w, y: centerY },
+      { x: centerX, y: centerY - h }
+    ];
+  }
+
+  function makeSpiral(centerX, centerY, maxR, turns, segments) {
+    var pts = [];
+    for (var i = 0; i <= segments; i++) {
+      var t = i / segments;
+      var a = t * turns * Math.PI * 2 - Math.PI / 2;
+      var r = t * maxR;
+      pts.push({ x: centerX + Math.cos(a) * r, y: centerY + Math.sin(a) * r });
+    }
+    return pts;
+  }
+
+  // ── Shape queue ──
+  var shapeIndex = 0;
+
+  function generateShapeSet() {
+    var scale = minDim * 0.55 / _pad;
+    if (HERO_SCALE > 0) scale *= HERO_SCALE;
+    var set = [];
+
+    switch (shapeIndex % 7) {
+      case 0:
+        // Shift down by r/4 to visually center the triangle composition
+        var triOff = scale * 0.85 * 0.25;
+        set.push(makePolygon(cx, cy + triOff, scale * 0.85, 3, -Math.PI / 2));
+        set.push(makeCircle(cx, cy + triOff, scale * 0.42, 48));
+        set.push(makePolygon(cx, cy + triOff, scale * 0.35, 3, Math.PI / 2));
+        break;
+      case 1:
+        set.push(makeDiamond(cx, cy, scale * 0.7, scale * 0.85));
+        set.push(makeDiamond(cx, cy, scale * 0.4, scale * 0.5));
+        set.push(makeCircle(cx, cy, scale * 0.55, 48));
+        break;
+      case 2:
+        set.push(makeStar(cx, cy, scale * 0.85, scale * 0.35, 5, 0));
+        set.push(makePolygon(cx, cy, scale * 0.55, 5, -Math.PI / 2));
+        set.push(makeCircle(cx, cy, scale * 0.28, 36));
+        break;
+      case 3:
+        set.push(makePolygon(cx, cy, scale * 0.85, 6, -Math.PI / 6));
+        set.push(makePolygon(cx, cy, scale * 0.5, 6, 0));
+        set.push(makeCircle(cx, cy, scale * 0.7, 48));
+        break;
+      case 4:
+        set.push(makeCircle(cx, cy, scale * 0.8, 64));
+        set.push(makeStar(cx, cy, scale * 0.75, scale * 0.3, 8, 0));
+        set.push(makePolygon(cx, cy, scale * 0.4, 4, Math.PI / 4));
+        break;
+      case 5:
+        set.push(makeSpiral(cx, cy, scale * 0.7, 3, 120));
+        set.push(makeCircle(cx, cy, scale * 0.8, 48));
+        break;
+      case 6:
+        set.push(makePolygon(cx, cy, scale * 0.85, 4, Math.PI / 4));
+        set.push(makePolygon(cx, cy, scale * 0.55, 4, 0));
+        set.push(makePolygon(cx, cy, scale * 0.3, 4, Math.PI / 4));
+        break;
+    }
+
+    shapeIndex++;
+    return set;
+  }
+
+  // ── Laser beam state ──
+  var lasers = [];
+  var sparks = [];
+  var smokeParticles = [];
+  var phase = 'drawing';
+  var phaseTimer = 0;
+  var globalTime = 0;
+  var HOLD_TIME = 2.5;
+  var FADE_TIME = 1.8;
+  var fadeAlpha = 1;
+  var HOT_ZONE = 120; // pixels of hot beam glow near the tip
+
+  function Laser(polyline) {
+    this.points = polyline;
+    this.totalLength = 0;
+    this.segLengths = [];
+
+    for (var i = 1; i < polyline.length; i++) {
+      var dx = polyline[i].x - polyline[i - 1].x;
+      var dy = polyline[i].y - polyline[i - 1].y;
+      var len = Math.sqrt(dx * dx + dy * dy);
+      this.segLengths.push(len);
+      this.totalLength += len;
+    }
+
+    this.drawnLength = 0;
+    this.speed = (180 + Math.random() * 120) * DRAW_SPEED;
+    this.done = false;
+    this.tipX = polyline[0].x;
+    this.tipY = polyline[0].y;
+    this.prevTipX = polyline[0].x;
+    this.prevTipY = polyline[0].y;
+  }
+
+  Laser.prototype.posAt = function (dist) {
+    var d = 0;
+    for (var i = 0; i < this.segLengths.length; i++) {
+      if (d + this.segLengths[i] >= dist) {
+        var t = this.segLengths[i] > 0 ? (dist - d) / this.segLengths[i] : 0;
+        var p0 = this.points[i];
+        var p1 = this.points[i + 1];
+        return { x: p0.x + (p1.x - p0.x) * t, y: p0.y + (p1.y - p0.y) * t };
+      }
+      d += this.segLengths[i];
+    }
+    var last = this.points[this.points.length - 1];
+    return { x: last.x, y: last.y };
+  };
+
+  Laser.prototype.update = function (dt) {
+    if (this.done) return;
+
+    this.prevTipX = this.tipX;
+    this.prevTipY = this.tipY;
+
+    this.drawnLength += this.speed * dt;
+
+    if (this.drawnLength >= this.totalLength) {
+      this.drawnLength = this.totalLength;
+      this.done = true;
+    }
+
+    var tip = this.posAt(this.drawnLength);
+    this.tipX = tip.x;
+    this.tipY = tip.y;
+
+    // Burn the trail into the burn canvas
+    burnScorch(this.prevTipX, this.prevTipY, this.tipX, this.tipY);
+
+    // Sparks at tip — more intense, like cutting metal
+    if (Math.random() < 0.85) {
+      emitSparks(tip.x, tip.y, 2 + Math.floor(Math.random() * 4));
+    }
+
+    // Smoke wisps rising from burn point
+    if (Math.random() < 0.6) {
+      emitSmoke(tip.x, tip.y, 1 + Math.floor(Math.random() * 2));
+    }
+
+    if (this.done) {
+      emitSparks(tip.x, tip.y, 25);
+      emitSmoke(tip.x, tip.y, 8);
+    }
+  };
+
+  // ── Burn scorched trail onto burn canvas ──
+  // Only draw a simple solid groove line here.
+  // The emboss (shadow/highlight) is applied at compositing time in the render loop,
+  // so the shadow follows the full continuous path smoothly with no per-segment artifacts.
+  function burnScorch(x1, y1, x2, y2) {
+    burnCtx.lineCap = 'round';
+
+    // Dark groove — incised into the lighter brushed metal surface
+    burnCtx.beginPath();
+    burnCtx.moveTo(x1, y1);
+    burnCtx.lineTo(x2, y2);
+    burnCtx.strokeStyle = 'rgba(15, 12, 10, 0.6)';
+    burnCtx.lineWidth = 5;
+    burnCtx.stroke();
+
+    // Slightly lighter charred center
+    burnCtx.beginPath();
+    burnCtx.moveTo(x1, y1);
+    burnCtx.lineTo(x2, y2);
+    burnCtx.strokeStyle = 'rgba(35, 28, 22, 0.4)';
+    burnCtx.lineWidth = 3;
+    burnCtx.stroke();
+  }
+
+  // ── Spark system — hot metal sparks ──
+  function emitSparks(x, y, count) {
+    for (var i = 0; i < count; i++) {
+      var angle = Math.random() * Math.PI * 2;
+      // Bias sparks downward slightly (gravity) but mostly radial
+      var speed = 80 + Math.random() * 280;
+      var life = 0.2 + Math.random() * 0.8;
+      sparks.push({
+        x: x + (Math.random() - 0.5) * 4,
+        y: y + (Math.random() - 0.5) * 4,
+        vx: Math.cos(angle) * speed * (0.5 + Math.random() * 0.5),
+        vy: Math.sin(angle) * speed * (0.5 + Math.random() * 0.5),
+        life: life,
+        maxLife: life,
+        size: 0.5 + Math.random() * 2.5,
+        bright: Math.random() > 0.3 // some sparks are white-hot, others amber
+      });
+    }
+  }
+
+  function updateSparks(dt) {
+    for (var i = sparks.length - 1; i >= 0; i--) {
+      var s = sparks[i];
+      s.x += s.vx * dt;
+      s.y += s.vy * dt;
+      // Air resistance
+      s.vx *= 0.96;
+      s.vy *= 0.96;
+      // Gravity pulls sparks down
+      s.vy += 180 * dt;
+      s.life -= dt;
+      if (s.life <= 0) sparks.splice(i, 1);
+    }
+  }
+
+  function drawSparks() {
+    for (var i = 0; i < sparks.length; i++) {
+      var s = sparks[i];
+      var t = s.life / s.maxLife;
+      var alpha = t * BRIGHTNESS * fadeAlpha;
+      var r = s.size * (0.3 + t * 0.7);
+
+      // Spark trail (motion blur)
+      var trailLen = Math.sqrt(s.vx * s.vx + s.vy * s.vy) * 0.015;
+      if (trailLen > 1) {
+        var nx = s.vx / (trailLen / 0.015);
+        var ny = s.vy / (trailLen / 0.015);
+        ctx.beginPath();
+        ctx.moveTo(s.x, s.y);
+        ctx.lineTo(s.x - nx * trailLen, s.y - ny * trailLen);
+        ctx.strokeStyle = s.bright
+          ? 'rgba(255, 255, 255, ' + (alpha * 0.6).toFixed(4) + ')'
+          : 'rgba(255, 180, 60, ' + (alpha * 0.5).toFixed(4) + ')';
+        ctx.lineWidth = r * 0.7;
+        ctx.lineCap = 'round';
+        ctx.stroke();
+      }
+
+      // Spark core
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, r, 0, Math.PI * 2);
+      ctx.fillStyle = s.bright
+        ? 'rgba(255, 255, 255, ' + (alpha * 0.95).toFixed(4) + ')'
+        : 'rgba(255, 200, 80, ' + (alpha * 0.9).toFixed(4) + ')';
+      ctx.fill();
+
+      // Hot glow around spark
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, r * 3, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255, 140, 40, ' + (alpha * 0.15).toFixed(4) + ')';
+      ctx.fill();
+    }
+  }
+
+  // ── Smoke / heat wisp system ──
+  function emitSmoke(x, y, count) {
+    for (var i = 0; i < count; i++) {
+      smokeParticles.push({
+        x: x + (Math.random() - 0.5) * 8,
+        y: y + (Math.random() - 0.5) * 4,
+        vx: (Math.random() - 0.5) * 20,
+        vy: -(15 + Math.random() * 40), // rises upward
+        life: 0.8 + Math.random() * 1.5,
+        maxLife: 0.8 + Math.random() * 1.5,
+        size: 4 + Math.random() * 12,
+        growRate: 8 + Math.random() * 16,
+        opacity: 0.06 + Math.random() * 0.1
+      });
+    }
+  }
+
+  function updateSmoke(dt) {
+    for (var i = smokeParticles.length - 1; i >= 0; i--) {
+      var s = smokeParticles[i];
+      s.x += s.vx * dt;
+      s.y += s.vy * dt;
+      // Slight horizontal drift
+      s.vx += (Math.random() - 0.5) * 10 * dt;
+      s.vx *= 0.98;
+      // Smoke decelerates as it rises
+      s.vy *= 0.985;
+      // Smoke expands
+      s.size += s.growRate * dt;
+      s.life -= dt;
+      if (s.life <= 0) smokeParticles.splice(i, 1);
+    }
+  }
+
+  function drawSmoke() {
+    for (var i = 0; i < smokeParticles.length; i++) {
+      var s = smokeParticles[i];
+      var t = s.life / s.maxLife;
+      // Fade in quickly, fade out slowly
+      var fadeIn = Math.min(1, (1 - t) * 5);
+      var fadeOut = t;
+      var alpha = fadeIn * fadeOut * s.opacity * BRIGHTNESS * fadeAlpha;
+
+      if (alpha < 0.002) continue;
+
+      var grad = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.size);
+      // Warm tinted smoke near burn, fading to neutral
+      var warmth = t * 0.5;
+      var r = Math.round(80 + warmth * 120);
+      var g = Math.round(60 + warmth * 40);
+      var b = Math.round(50 + warmth * 20);
+      grad.addColorStop(0, 'rgba(' + r + ', ' + g + ', ' + b + ', ' + (alpha * 0.8).toFixed(4) + ')');
+      grad.addColorStop(0.5, 'rgba(' + r + ', ' + g + ', ' + b + ', ' + (alpha * 0.3).toFixed(4) + ')');
+      grad.addColorStop(1, 'rgba(' + r + ', ' + g + ', ' + b + ', 0)');
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  // ── Draw active laser beam — only the HOT ZONE near the tip ──
+  // In real laser engraving, only the area near the laser is hot/glowing.
+  // Behind the tip, the material has already cooled and shows the incised groove.
+  function drawActiveBeam(laser) {
+    if (laser.drawnLength <= 0 || laser.done) return;
+
+    var b = BRIGHTNESS * fadeAlpha;
+
+    // Build only the hot zone: the last HOT_ZONE pixels of the drawn path
+    var hotStart = Math.max(0, laser.drawnLength - HOT_ZONE);
+    var hotPath = [];
+    var d = 0;
+
+    for (var i = 0; i < laser.segLengths.length; i++) {
+      var segEnd = d + laser.segLengths[i];
+
+      // Skip segments entirely before the hot zone
+      if (segEnd <= hotStart) { d = segEnd; continue; }
+
+      // Skip segments entirely past the drawn length
+      if (d >= laser.drawnLength) break;
+
+      // Clip segment start to hot zone start
+      var clippedStart = Math.max(d, hotStart);
+      var clippedEnd = Math.min(segEnd, laser.drawnLength);
+
+      var t0 = laser.segLengths[i] > 0 ? (clippedStart - d) / laser.segLengths[i] : 0;
+      var t1 = laser.segLengths[i] > 0 ? (clippedEnd - d) / laser.segLengths[i] : 0;
+
+      var p0 = laser.points[i];
+      var p1 = laser.points[i + 1];
+
+      if (hotPath.length === 0) {
+        hotPath.push({
+          x: p0.x + (p1.x - p0.x) * t0,
+          y: p0.y + (p1.y - p0.y) * t0,
+          dist: clippedStart
+        });
+      }
+      hotPath.push({
+        x: p0.x + (p1.x - p0.x) * t1,
+        y: p0.y + (p1.y - p0.y) * t1,
+        dist: clippedEnd
+      });
+
+      d = segEnd;
+    }
+
+    if (hotPath.length < 2) return;
+
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+
+    // Draw beam layers with per-point alpha fading from cool→hot along the path
+    var layers = [
+      { color: [200, 60, 20], alpha: 0.06, width: 40 },
+      { color: [220, 120, 40], alpha: 0.12, width: 22 },
+      { color: [255, 160, 60], alpha: 0.2, width: 12 },
+      { color: [255, 220, 160], alpha: 0.4, width: 5 },
+      { color: [255, 250, 240], alpha: 0.7, width: 2.2 },
+      { color: [255, 255, 255], alpha: 0.9, width: 0.8 }
+    ];
+
+    for (var l = 0; l < layers.length; l++) {
+      var layer = layers[l];
+      // Draw each sub-segment with fading alpha
+      for (var j = 1; j < hotPath.length; j++) {
+        var fadeT0 = (hotPath[j - 1].dist - hotStart) / HOT_ZONE; // 0 at cool end, 1 at tip
+        var fadeT1 = (hotPath[j].dist - hotStart) / HOT_ZONE;
+        var segAlpha = ((fadeT0 + fadeT1) / 2); // average fade for this sub-segment
+        segAlpha = segAlpha * segAlpha; // quadratic falloff — hot near tip, fades fast
+        var a = b * layer.alpha * segAlpha;
+        if (a < 0.002) continue;
+
+        ctx.beginPath();
+        ctx.moveTo(hotPath[j - 1].x, hotPath[j - 1].y);
+        ctx.lineTo(hotPath[j].x, hotPath[j].y);
+        ctx.strokeStyle = 'rgba(' + layer.color[0] + ', ' + layer.color[1] + ', ' + layer.color[2] + ', ' + a.toFixed(4) + ')';
+        ctx.lineWidth = layer.width;
+        ctx.stroke();
+      }
+    }
+  }
+
+  // ── Draw the laser tip — intensely hot burning point ──
+  function drawLaserTip(x, y) {
+    var b = BRIGHTNESS * fadeAlpha;
+    var flicker = 0.85 + Math.random() * 0.15; // slight intensity flicker
+
+    // Layer 1: Very large soft heat bloom
+    var grad5 = ctx.createRadialGradient(x, y, 0, x, y, 120);
+    grad5.addColorStop(0, 'rgba(255, 100, 20, ' + (b * flicker * 0.12).toFixed(4) + ')');
+    grad5.addColorStop(0.3, 'rgba(200, 60, 10, ' + (b * flicker * 0.05).toFixed(4) + ')');
+    grad5.addColorStop(1, 'rgba(150, 40, 10, 0)');
+    ctx.fillStyle = grad5;
+    ctx.beginPath();
+    ctx.arc(x, y, 120, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Layer 2: Medium orange heat glow
+    var grad4 = ctx.createRadialGradient(x, y, 0, x, y, 60);
+    grad4.addColorStop(0, 'rgba(255, 160, 40, ' + (b * flicker * 0.3).toFixed(4) + ')');
+    grad4.addColorStop(0.4, 'rgba(255, 120, 30, ' + (b * flicker * 0.12).toFixed(4) + ')');
+    grad4.addColorStop(1, 'rgba(200, 80, 20, 0)');
+    ctx.fillStyle = grad4;
+    ctx.beginPath();
+    ctx.arc(x, y, 60, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Layer 3: Bright amber burning corona
+    var grad3 = ctx.createRadialGradient(x, y, 0, x, y, 30);
+    grad3.addColorStop(0, 'rgba(255, 220, 140, ' + (b * flicker * 0.55).toFixed(4) + ')');
+    grad3.addColorStop(0.3, 'rgba(255, 180, 80, ' + (b * flicker * 0.3).toFixed(4) + ')');
+    grad3.addColorStop(1, 'rgba(255, 140, 50, 0)');
+    ctx.fillStyle = grad3;
+    ctx.beginPath();
+    ctx.arc(x, y, 30, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Layer 4: White-hot burning core
+    var grad2 = ctx.createRadialGradient(x, y, 0, x, y, 14);
+    grad2.addColorStop(0, 'rgba(255, 255, 255, ' + (b * flicker * 0.95).toFixed(4) + ')');
+    grad2.addColorStop(0.25, 'rgba(255, 255, 245, ' + (b * flicker * 0.8).toFixed(4) + ')');
+    grad2.addColorStop(0.5, 'rgba(255, 240, 210, ' + (b * flicker * 0.45).toFixed(4) + ')');
+    grad2.addColorStop(1, 'rgba(255, 200, 130, 0)');
+    ctx.fillStyle = grad2;
+    ctx.beginPath();
+    ctx.arc(x, y, 14, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Layer 5: Overexposed center point
+    var grad1 = ctx.createRadialGradient(x, y, 0, x, y, 5);
+    grad1.addColorStop(0, 'rgba(255, 255, 255, ' + (b * flicker).toFixed(4) + ')');
+    grad1.addColorStop(0.5, 'rgba(255, 255, 255, ' + (b * flicker * 0.7).toFixed(4) + ')');
+    grad1.addColorStop(1, 'rgba(255, 255, 255, 0)');
+    ctx.fillStyle = grad1;
+    ctx.beginPath();
+    ctx.arc(x, y, 5, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Pulsating heat distortion ring — drawn as irregular bright speckles
+    var speckleCount = 6 + Math.floor(Math.random() * 4);
+    for (var i = 0; i < speckleCount; i++) {
+      var angle = Math.random() * Math.PI * 2;
+      var dist = 6 + Math.random() * 18;
+      var sx = x + Math.cos(angle) * dist;
+      var sy = y + Math.sin(angle) * dist;
+      var sr = 0.5 + Math.random() * 1.5;
+      ctx.beginPath();
+      ctx.arc(sx, sy, sr, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255, 240, 200, ' + (b * flicker * (0.2 + Math.random() * 0.3)).toFixed(4) + ')';
+      ctx.fill();
+    }
+  }
+
+  // ── Draw heat distortion (shimmering air near the beam) ──
+  function drawHeatDistortion(laser) {
+    if (laser.drawnLength <= 0) return;
+
+    var b = BRIGHTNESS * fadeAlpha;
+    // Draw wavy heat lines near the tip rising upward
+    var tipX = laser.tipX;
+    var tipY = laser.tipY;
+
+    for (var i = 0; i < 3; i++) {
+      var offsetX = (Math.random() - 0.5) * 30;
+      var startY = tipY - 5;
+      var endY = tipY - 25 - Math.random() * 30;
+      var waveAmp = 3 + Math.random() * 6;
+
+      ctx.beginPath();
+      for (var t = 0; t <= 1; t += 0.05) {
+        var py = startY + (endY - startY) * t;
+        var px = tipX + offsetX + Math.sin(t * Math.PI * 3 + globalTime * 8 + i * 2) * waveAmp * t;
+        if (t === 0) ctx.moveTo(px, py);
+        else ctx.lineTo(px, py);
+      }
+      var distAlpha = b * (0.04 + Math.random() * 0.06);
+      ctx.strokeStyle = 'rgba(255, 200, 140, ' + distAlpha.toFixed(4) + ')';
+      ctx.lineWidth = 0.5 + Math.random() * 1;
+      ctx.stroke();
+    }
+  }
+
+  // ── Initialize a shape set ──
+  function startNewShape() {
+    var shapes = generateShapeSet();
+    lasers = [];
+    sparks = [];
+    smokeParticles = [];
+    phase = 'drawing';
+    phaseTimer = 0;
+    fadeAlpha = 1;
+
+    // Clear burn canvas for new shape
+    burnCtx.clearRect(0, 0, width, height);
+
+    for (var i = 0; i < shapes.length; i++) {
+      lasers.push(new Laser(shapes[i]));
+    }
+  }
+
+  startNewShape();
+
+  // ── Surface texture — brushed metal grain ──
+  function drawSurface() {
+    // Horizontal brushed-metal grain lines (subtle)
+    if (Math.random() > 0.4) return;
+
+    for (var i = 0; i < 60; i++) {
+      var y = Math.random() * height;
+      var x = Math.random() * width;
+      var len = 3 + Math.random() * 12;
+      var bright = Math.random() > 0.5;
+      var alpha = 0.02 + Math.random() * 0.03;
+      ctx.fillStyle = bright
+        ? 'rgba(90, 85, 80, ' + alpha.toFixed(4) + ')'
+        : 'rgba(40, 38, 35, ' + alpha.toFixed(4) + ')';
+      ctx.fillRect(x, y, len, 1);
+    }
+  }
+
+  // ── Click interaction: laser burst at cursor position ──
+  function onBurstClick(e) {
+    var rect = canvas.getBoundingClientRect();
+    var bx = e.clientX - rect.left;
+    var by = e.clientY - rect.top;
+    emitSparks(bx, by, 30 + Math.floor(Math.random() * 20));
+    emitSmoke(bx, by, 10 + Math.floor(Math.random() * 6));
+    // Burn a scorched spot at the click location
+    burnScorch(bx - 2, by - 2, bx + 2, by + 2);
+    burnScorch(bx - 2, by + 2, bx + 2, by - 2);
+  }
+  // Click to burst, drag to continuously fire laser
+  var laserDown = false;
+  canvas.addEventListener('mousedown', function(e) { laserDown = true; onBurstClick(e); });
+  canvas.addEventListener('mousemove', function(e) {
+    if (laserDown) onBurstClick(e);
+  });
+  canvas.addEventListener('mouseup', function() { laserDown = false; });
+  canvas.addEventListener('touchstart', function(e) {
+    e.preventDefault(); laserDown = true;
+    onBurstClick({ clientX: e.touches[0].clientX, clientY: e.touches[0].clientY });
+  }, { passive: false });
+  canvas.addEventListener('touchmove', function(e) {
+    e.preventDefault();
+    if (laserDown) onBurstClick({ clientX: e.touches[0].clientX, clientY: e.touches[0].clientY });
+  }, { passive: false });
+  canvas.addEventListener('touchend', function() { laserDown = false; });
+
+  // ── Main render loop ──
+  var lastTime = 0;
+  var animId;
+
+  function render(timestamp) {
+    if (!lastTime) lastTime = timestamp;
+    var dt = Math.min((timestamp - lastTime) / 1000, 0.05);
+    lastTime = timestamp;
+    globalTime += dt;
+
+    if (prefersReduced) dt *= 0.15;
+
+    // ── Clear — brushed metal surface ──
+    ctx.clearRect(0, 0, width, height);
+    // Base: warm-tinted medium gray (brushed steel)
+    ctx.fillStyle = '#3d3937';
+    ctx.fillRect(0, 0, width, height);
+
+    // ── Brushed metal grain texture ──
+    drawSurface();
+
+    // ── Phase management ──
+    switch (phase) {
+      case 'drawing':
+        var allDone = true;
+        for (var i = 0; i < lasers.length; i++) {
+          lasers[i].update(dt);
+          if (!lasers[i].done) allDone = false;
+        }
+        if (allDone) {
+          phase = 'holding';
+          phaseTimer = 0;
+        }
+        break;
+
+      case 'holding':
+        phaseTimer += dt;
+        if (phaseTimer >= HOLD_TIME) {
+          phase = 'fading';
+          phaseTimer = 0;
+        }
+        break;
+
+      case 'fading':
+        phaseTimer += dt;
+        fadeAlpha = Math.max(0, 1 - phaseTimer / FADE_TIME);
+        if (phaseTimer >= FADE_TIME) {
+          startNewShape();
+        }
+        break;
+    }
+
+    // ── Update particles ──
+    updateSparks(dt);
+    updateSmoke(dt);
+
+    // ── Draw burn layer with emboss shadows applied at compositing level ──
+    // This gives smooth continuous shadow along entire groove paths.
+
+    // Brushed metal surface: dark grooves with classic emboss.
+    // Shadow on upper-left (groove wall blocks light) — dark, clearly visible on light surface.
+    // Highlight on lower-right (bottom lip catches light).
+
+    // Pass 1: Dark shadow (upper-left of groove)
+    ctx.save();
+    ctx.globalAlpha = fadeAlpha;
+    ctx.shadowOffsetX = -2;
+    ctx.shadowOffsetY = -2;
+    ctx.shadowBlur = 3;
+    ctx.shadowColor = 'rgba(0, 0, 0, 0.6)';
+    ctx.drawImage(burnCanvas, 0, 0, width, height);
+    ctx.restore();
+
+    // Pass 2: Bright highlight (lower-right lip catching light)
+    ctx.save();
+    ctx.globalAlpha = fadeAlpha * 0.5;
+    ctx.shadowOffsetX = 2.5;
+    ctx.shadowOffsetY = 2.5;
+    ctx.shadowBlur = 2;
+    ctx.shadowColor = 'rgba(255, 255, 250, 0.45)';
+    ctx.drawImage(burnCanvas, 0, 0, width, height);
+    ctx.restore();
+
+    // Pass 3: Subtle warm glow near recent burns
+    if (phase !== 'fading') {
+      var glowBase = phase === 'drawing' ? 0.03 : 0.01;
+      ctx.save();
+      ctx.globalAlpha = (glowBase + Math.sin(globalTime * 2) * 0.01) * BRIGHTNESS * fadeAlpha;
+      ctx.globalCompositeOperation = 'screen';
+      ctx.filter = 'blur(8px)';
+      ctx.drawImage(burnCanvas, 0, 0, width, height);
+      ctx.filter = 'none';
+      ctx.restore();
+    }
+
+    // ── Draw smoke (behind the beam) ──
+    drawSmoke();
+
+    // ── Draw active beams ──
+    for (var i = 0; i < lasers.length; i++) {
+      drawActiveBeam(lasers[i]);
+    }
+
+    // ── Draw heat distortion ──
+    if (phase === 'drawing') {
+      for (var i = 0; i < lasers.length; i++) {
+        if (!lasers[i].done) {
+          drawHeatDistortion(lasers[i]);
+        }
+      }
+    }
+
+    // ── Draw laser tips ──
+    if (phase === 'drawing') {
+      for (var i = 0; i < lasers.length; i++) {
+        if (!lasers[i].done) {
+          drawLaserTip(lasers[i].tipX, lasers[i].tipY);
+        }
+      }
+    }
+
+    // ── Draw sparks (on top of everything) ──
+    drawSparks();
+
+    // ── Vignette — darken edges of the metal plate ──
+    var maxDim = Math.max(width, height);
+    var vig = ctx.createRadialGradient(cx, cy, maxDim * 0.15, cx, cy, maxDim * 0.72);
+    vig.addColorStop(0, 'rgba(0, 0, 0, 0)');
+    vig.addColorStop(0.5, 'rgba(0, 0, 0, 0.1)');
+    vig.addColorStop(1, 'rgba(0, 0, 0, 0.45)');
+    ctx.fillStyle = vig;
+    ctx.fillRect(0, 0, width, height);
+
+    animId = requestAnimationFrame(render);
+  }
+
+  animId = requestAnimationFrame(render);
+
+  // ── Visibility pause ──
+  document.addEventListener('visibilitychange', function () {
+    if (!document.hidden) {
+      lastTime = 0;
+    }
+  });
+
+  // ── PostMessage listener for parameter updates ──
+  window.addEventListener('message', function (e) {
+    if (e.data && e.data.type === 'param') {
+      switch (e.data.name) {
+        case 'DRAW_SPEED': DRAW_SPEED = e.data.value; break;
+        case 'BRIGHTNESS': BRIGHTNESS = e.data.value; break;
+        case 'SHAPE': shapeIndex = Math.round(e.data.value) - 1; startNewShape(); break;
+        case 'CENTER_X': HERO_CENTER_X = e.data.value; resize(); startNewShape(); break;
+        case 'CENTER_Y': HERO_CENTER_Y = e.data.value; resize(); startNewShape(); break;
+        case 'SCALE': HERO_SCALE = e.data.value; resize(); startNewShape(); break;
+      }
+    }
+  });
+})();
+</script>
+</body>
+</html>

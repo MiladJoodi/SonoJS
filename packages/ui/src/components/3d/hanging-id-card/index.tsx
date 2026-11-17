@@ -504,7 +504,7 @@ export function HangingIdCard({
               aria-hidden
             />
 
-            {/* Slim lanyard slot — keep light, not a heavy black bar */}
+            {/* Slim lanyard slot, keep light, not a heavy black bar */}
             <div className="relative z-10 flex justify-center border-b border-zinc-200/70 bg-gradient-to-b from-zinc-50 to-zinc-100/90 pt-2.5 pb-1 dark:border-zinc-800 dark:from-zinc-800 dark:to-zinc-900">
               <div className="flex h-2 w-8 items-center justify-center rounded-full border border-zinc-300/80 bg-zinc-200/90 shadow-inner dark:border-zinc-600 dark:bg-zinc-800">
                 <div className="h-0.5 w-5 rounded-full bg-zinc-400/90 dark:bg-zinc-600" />

@@ -1,4 +1,4 @@
-# Phase 0 baseline — production performance
+# Phase 0 baseline, production performance
 
 **Date:** 2026-11-04  
 **Build ID:** `EKZa7tcfvEznMGATF4A0G`  
@@ -27,7 +27,7 @@
 
 ### Client graph checks (from manifests)
 
-- **Login:** all `login-01` … `login-16` appear in the client-reference manifest (2 hits each) — confirms all 16 variants ship in the route client graph.
+- **Login:** all `login-01` … `login-16` appear in the client-reference manifest (2 hits each), confirms all 16 variants ship in the route client graph.
 - **Charts gallery:** `demo-loaders` = 0, `recharts` = 0, `highcharts` = 0, `ChartDemo` = 0; `chart-demo` string = 2 (path mention only). Phase 2 still worth confirming with analyzer HTML after webpack analyze build.
 
 ## Hard navigation TTFB (`next start`, warm, 3 samples)
@@ -65,6 +65,6 @@ Source: [`phase-0-ttfb.json`](./phase-0-ttfb.json)
 - [x] Production build succeeded (`BUILD_ID` present)  
 - [x] First Load approx recorded for Login, FAQ, Charts, Chart View  
 - [x] Production TTFB recorded  
-- [ ] Full LCP/INP + soft-nav Lab numbers — deferred to manual/DevTools in Phase 1 validation  
+- [ ] Full LCP/INP + soft-nav Lab numbers, deferred to manual/DevTools in Phase 1 validation  
 
 **Phase 0 gate: PASS for proceeding to Phase 1 (Login),** with the caveat that soft-nav/LCP/INP Lab baselines should be captured in Chrome before claiming Phase 1 wins.

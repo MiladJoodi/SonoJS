@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>001 — Particle Gravity Field · creative-lab</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #000; overflow: hidden; }
+    canvas { display: block; }
+  
+    html.embed #ui,
+    html.embed #info,
+    html.embed #controls,
+    html.embed #stats,
+    html.embed #hint,
+    html.embed .panel,
+    html.embed header,
+    html.embed footer { display: none !important; }
+  </style>
+  <script>if(/\bembed=1\b/.test(location.search))document.documentElement.classList.add("embed")</script>
+</head>
+<body>
+<canvas id="c"></canvas>
+
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+
+let W, H;
+function resize() {
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+// Gravity attractors
+const mouse = { x: W / 2, y: H / 2, active: false };
+window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; mouse.active = true; });
+
+function getAttractors() {
+  const a = [
+    { x: W * 0.3, y: H * 0.4, strength: 3200 },
+    { x: W * 0.7, y: H * 0.6, strength: 3200 },
+  ];
+  if (mouse.active) a.push({ x: mouse.x, y: mouse.y, strength: 5000 });
+  return a;
+}
+
+// Particle class
+class Particle {
+  constructor() { this.reset(); }
+  reset() {
+    this.x = Math.random() * W;
+    this.y = Math.random() * H;
+    this.vx = (Math.random() - 0.5) * 1.5;
+    this.vy = (Math.random() - 0.5) * 1.5;
+    this.mass = 0.6 + Math.random() * 0.8;
+  }
+  update(attractors) {
+    for (const a of attractors) {
+      const dx = a.x - this.x;
+      const dy = a.y - this.y;
+      const distSq = dx * dx + dy * dy;
+      const dist = Math.sqrt(distSq) + 1;
+      // Gravitational force, softened
+      const force = (a.strength / (distSq + 400)) / this.mass;
+      this.vx += (dx / dist) * force;
+      this.vy += (dy / dist) * force;
+    }
+    // Velocity damping
+    this.vx *= 0.985;
+    this.vy *= 0.985;
+    this.x += this.vx;
+    this.y += this.vy;
+
+    // Wrap edges
+    if (this.x < 0) this.x += W;
+    if (this.x > W) this.x -= W;
+    if (this.y < 0) this.y += H;
+    if (this.y > H) this.y -= H;
+  }
+  get speed() {
+    return Math.sqrt(this.vx * this.vx + this.vy * this.vy);
+  }
+  get color() {
+    const s = Math.min(this.speed / 6, 1);
+    // blue(0,80,255) → cyan(0,200,255) → white
+    const r = Math.round(s * 255);
+    const g = Math.round(80 + s * 175);
+    const b = 255;
+    return `rgb(${r},${g},${b})`;
+  }
+}
+
+const NUM = 200;
+const particles = Array.from({ length: NUM }, () => new Particle());
+
+function draw() {
+  // Trail fade
+  ctx.fillStyle = 'rgba(0,0,0,0.18)';
+  ctx.fillRect(0, 0, W, H);
+
+  const attractors = getAttractors();
+
+  // Draw attractor glows
+  for (const a of attractors) {
+    const grd = ctx.createRadialGradient(a.x, a.y, 0, a.x, a.y, 60);
+    grd.addColorStop(0, 'rgba(88,166,255,0.18)');
+    grd.addColorStop(1, 'transparent');
+    ctx.fillStyle = grd;
+    ctx.beginPath();
+    ctx.arc(a.x, a.y, 60, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  for (const p of particles) {
+    p.update(attractors);
+    const s = Math.min(p.speed / 6, 1);
+    const radius = 1 + s * 1.5;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, radius, 0, Math.PI * 2);
+    ctx.fillStyle = p.color;
+    ctx.globalAlpha = 0.7 + s * 0.3;
+    ctx.fill();
+  }
+  ctx.globalAlpha = 1;
+
+  requestAnimationFrame(draw);
+}
+
+draw();
+</script>
+</body>
+</html>

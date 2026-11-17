@@ -219,7 +219,7 @@ export function AdminPlansPanel() {
                         dir="ltr"
                         title={r.stripePriceId ?? undefined}
                       >
-                        {r.stripePriceId || "— missing —"}
+                        {r.stripePriceId || ",  missing , "}
                       </td>
                     </tr>
                   ))}

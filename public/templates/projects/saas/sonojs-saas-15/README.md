@@ -23,7 +23,7 @@ Deep-work waitlist hero with interactive fluid canvas. Demo brand: **Flowstate**
 
 ## Run locally
 
-Do not open `index.html` via `file://` — ES modules and WebGL need a static server.
+Do not open `index.html` via `file://`. ES modules and WebGL need a static server.
 
 ```bash
 npx --yes serve .

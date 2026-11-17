@@ -1,7 +1,7 @@
 # Minimal
 
 Package: Minimal (`1.0.0`) - HTML · CSS · JavaScript  
-Category: `saas` (templates surface — not `/websites`)  
+Category: `saas` (templates surface, not `/websites`)  
 Slug / folder: `sonojs-saas-18`  
 Path: `public/templates/projects/saas/sonojs-saas-18/`  
 Source: `E:\dl\prompt5\170`

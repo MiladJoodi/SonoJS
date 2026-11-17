@@ -121,7 +121,7 @@ export function DocsInstallationTabs({
     alsoNeedsRegistry.length > 0
       ? `npx @sonojs/ui@latest add ${alsoNeedsRegistry.join(" ")}`
       : null
-  // Separate steps — never chain with && (PowerShell 5.x rejects it).
+  // Separate steps. Never chain with && (PowerShell 5.x rejects it).
   const dependencyCommands = [registryAdd, manualNpmCommand].filter(
     (c): c is string => Boolean(c)
   )

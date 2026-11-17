@@ -5,7 +5,7 @@ Category: `saas`
 Slug / folder: `sonojs-saas-08`  
 Path: `public/templates/projects/saas/sonojs-saas-08/`  
 
-AI website-builder marketing concept. Demo brand: **Forma** — Build at the speed of imagination.
+AI website-builder marketing concept. Demo brand: **Forma**. Build at the speed of imagination.
 
 ## Images / video
 

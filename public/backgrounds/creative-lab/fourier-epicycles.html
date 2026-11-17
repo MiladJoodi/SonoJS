@@ -1,0 +1,424 @@
+<!-- TITLE: 021 Fourier Epicycles -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>021 — Fourier Epicycles · creative-lab</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 100%; height: 100%; overflow: hidden; }
+    body {
+      background: radial-gradient(circle at top, #111827 0%, #05070d 52%, #020308 100%);
+      color: #e6edf3;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    canvas { display: block; width: 100%; height: 100%; cursor: crosshair; }
+    .panel {
+      position: fixed;
+      top: 16px;
+      left: 16px;
+      width: 344px;
+      max-width: calc(100vw - 32px);
+      padding: 14px 16px;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 14px;
+      background: rgba(7, 10, 18, 0.76);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 20px 45px rgba(0,0,0,0.42);
+      z-index: 2;
+    }
+    .panel h1 { font-size: 15px; margin-bottom: 8px; }
+    .panel p, .panel label, .panel span, .panel button {
+      font-size: 12px;
+      line-height: 1.6;
+      color: rgba(230, 237, 243, 0.84);
+    }
+    .controls {
+      display: grid;
+      grid-template-columns: 96px 1fr 56px;
+      gap: 8px 10px;
+      align-items: center;
+      margin: 12px 0 10px;
+    }
+    input[type="range"] { width: 100%; accent-color: #7dd3fc; }
+    button {
+      width: 100%;
+      min-height: 32px;
+      margin-top: 10px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px;
+      color: #f8fafc;
+      padding: 7px 10px;
+      cursor: pointer;
+    }
+    .actions {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .meta {
+      display: grid;
+      grid-template-columns: auto auto;
+      gap: 2px 14px;
+      font-family: "SF Mono", "Fira Code", monospace;
+    }
+    .meta strong { color: #7dd3fc; font-weight: 500; }
+    .footer {
+      position: fixed;
+      right: 16px;
+      bottom: 12px;
+      font-size: 11px;
+      color: rgba(255,255,255,0.38);
+      font-family: monospace;
+    }
+  
+    html.embed #ui,
+    html.embed #info,
+    html.embed #controls,
+    html.embed #stats,
+    html.embed #hint,
+    html.embed .panel,
+    html.embed header,
+    html.embed footer { display: none !important; }
+  </style>
+  <script>if(/\bembed=1\b/.test(location.search))document.documentElement.classList.add("embed")</script>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+
+<div class="panel">
+  <h1>Fourier Epicycles</h1>
+  <p>Draw any path, release, and the shape gets decomposed into rotating circles. The trace rebuilds itself from low to high frequency harmonics.</p>
+  <div class="controls">
+    <label for="harmonics">Harmonics</label>
+    <input id="harmonics" type="range" min="4" max="128" step="1" value="48">
+    <span id="harmonicsValue">48</span>
+
+    <label for="speed">Speed</label>
+    <input id="speed" type="range" min="0.2" max="2.5" step="0.01" value="0.9">
+    <span id="speedValue">0.90</span>
+
+    <label for="scale">Scale</label>
+    <input id="scale" type="range" min="0.5" max="1.8" step="0.01" value="1">
+    <span id="scaleValue">1.00</span>
+  </div>
+  <div class="meta">
+    <span>Samples</span><strong id="samplesLabel">0</strong>
+    <span>Mode</span><strong id="modeLabel">draw</strong>
+    <span>Trace</span><strong id="traceLabel">0%</strong>
+  </div>
+  <div class="actions">
+    <button id="presetBtn" type="button">Preset</button>
+    <button id="clearBtn" type="button">Clear</button>
+    <button id="replayBtn" type="button">Replay</button>
+  </div>
+</div>
+
+<div class="footer">Draw with mouse or touch</div>
+
+<script>
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+const harmonicsInput = document.getElementById('harmonics');
+const speedInput = document.getElementById('speed');
+const scaleInput = document.getElementById('scale');
+const harmonicsValue = document.getElementById('harmonicsValue');
+const speedValue = document.getElementById('speedValue');
+const scaleValue = document.getElementById('scaleValue');
+const samplesLabel = document.getElementById('samplesLabel');
+const modeLabel = document.getElementById('modeLabel');
+const traceLabel = document.getElementById('traceLabel');
+const presetBtn = document.getElementById('presetBtn');
+const clearBtn = document.getElementById('clearBtn');
+const replayBtn = document.getElementById('replayBtn');
+
+let width = 0;
+let height = 0;
+let dpr = 1;
+let drawing = false;
+let points = [];
+let trace = [];
+let coeffs = [];
+let time = 0;
+let lastTime = performance.now();
+let scaleFit = 1;
+let offsetX = 0;
+let offsetY = 0;
+
+function resize() {
+  dpr = Math.min(window.devicePixelRatio || 1, 2);
+  width = window.innerWidth;
+  height = window.innerHeight;
+  canvas.width = Math.floor(width * dpr);
+  canvas.height = Math.floor(height * dpr);
+  canvas.style.width = `${width}px`;
+  canvas.style.height = `${height}px`;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
+
+function samplePreset() {
+  const preset = [];
+  const count = 260;
+  for (let i = 0; i < count; i++) {
+    const t = i / count * Math.PI * 2;
+    const r = 150 + Math.sin(t * 5) * 28;
+    const heart = {
+      x: 16 * Math.pow(Math.sin(t), 3),
+      y: -(13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t))
+    };
+    preset.push({
+      x: heart.x * 16 + Math.cos(t) * r * 0.08,
+      y: heart.y * 16 + Math.sin(t * 2) * 12
+    });
+  }
+  return preset;
+}
+
+function resamplePath(path, count = 256) {
+  if (path.length < 2) return [];
+  const lengths = [0];
+  let total = 0;
+  for (let i = 1; i < path.length; i++) {
+    total += Math.hypot(path[i].x - path[i - 1].x, path[i].y - path[i - 1].y);
+    lengths.push(total);
+  }
+  if (total < 1) return [];
+  const sampled = [];
+  for (let i = 0; i < count; i++) {
+    const target = (i / count) * total;
+    let index = 1;
+    while (index < lengths.length && lengths[index] < target) index++;
+    const a = path[index - 1];
+    const b = path[Math.min(index, path.length - 1)];
+    const span = Math.max(0.0001, lengths[index] - lengths[index - 1]);
+    const t = (target - lengths[index - 1]) / span;
+    sampled.push({
+      x: a.x + (b.x - a.x) * t,
+      y: a.y + (b.y - a.y) * t
+    });
+  }
+  return sampled;
+}
+
+function computeFourier(path) {
+  const sampled = resamplePath(path);
+  samplesLabel.textContent = String(sampled.length);
+  if (!sampled.length) {
+    coeffs = [];
+    return;
+  }
+
+  let minX = Infinity;
+  let minY = Infinity;
+  let maxX = -Infinity;
+  let maxY = -Infinity;
+  for (const point of sampled) {
+    minX = Math.min(minX, point.x);
+    minY = Math.min(minY, point.y);
+    maxX = Math.max(maxX, point.x);
+    maxY = Math.max(maxY, point.y);
+  }
+
+  offsetX = (minX + maxX) * 0.5;
+  offsetY = (minY + maxY) * 0.5;
+  const span = Math.max(maxX - minX, maxY - minY, 1);
+  scaleFit = Math.min(width, height) * 0.34 / span;
+
+  const complex = sampled.map((point) => ({ re: point.x - offsetX, im: point.y - offsetY }));
+  const N = complex.length;
+  coeffs = [];
+  for (let k = 0; k < N; k++) {
+    let re = 0;
+    let im = 0;
+    for (let n = 0; n < N; n++) {
+      const phi = (2 * Math.PI * k * n) / N;
+      re += complex[n].re * Math.cos(phi) + complex[n].im * Math.sin(phi);
+      im += -complex[n].re * Math.sin(phi) + complex[n].im * Math.cos(phi);
+    }
+    re /= N;
+    im /= N;
+    const freq = k <= N / 2 ? k : k - N;
+    coeffs.push({
+      freq,
+      amp: Math.hypot(re, im),
+      phase: Math.atan2(im, re),
+      re,
+      im
+    });
+  }
+  coeffs.sort((a, b) => b.amp - a.amp);
+  replay();
+}
+
+function replay() {
+  time = 0;
+  trace = [];
+}
+
+function setPath(path) {
+  points = path.slice();
+  computeFourier(points);
+}
+
+function screenPoint(point) {
+  const zoom = Number(scaleInput.value) * scaleFit;
+  return {
+    x: width * 0.5 + point.x * zoom,
+    y: height * 0.52 + point.y * zoom
+  };
+}
+
+function drawRawPath() {
+  if (points.length < 2) return;
+  ctx.beginPath();
+  ctx.moveTo(points[0].x, points[0].y);
+  for (let i = 1; i < points.length; i++) ctx.lineTo(points[i].x, points[i].y);
+  ctx.strokeStyle = 'rgba(125, 211, 252, 0.9)';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+}
+
+function drawEpicycles(dt) {
+  const limit = Math.min(Number(harmonicsInput.value), coeffs.length);
+  if (!limit) return;
+  let x = 0;
+  let y = 0;
+  const zoom = Number(scaleInput.value) * scaleFit;
+  const epicyclePoints = [];
+
+  for (let i = 0; i < limit; i++) {
+    const c = coeffs[i];
+    const prevX = x;
+    const prevY = y;
+    const angle = c.phase + c.freq * time * Math.PI * 2;
+    x += c.amp * Math.cos(angle);
+    y += c.amp * Math.sin(angle);
+    epicyclePoints.push({ prevX, prevY, x, y, r: c.amp });
+  }
+
+  for (const item of epicyclePoints) {
+    const center = screenPoint({ x: item.prevX, y: item.prevY });
+    const end = screenPoint({ x: item.x, y: item.y });
+    ctx.beginPath();
+    ctx.arc(center.x, center.y, item.r * zoom, 0, Math.PI * 2);
+    ctx.strokeStyle = 'rgba(148, 163, 184, 0.18)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(center.x, center.y);
+    ctx.lineTo(end.x, end.y);
+    ctx.strokeStyle = 'rgba(250, 204, 21, 0.85)';
+    ctx.stroke();
+  }
+
+  const current = screenPoint({ x, y });
+  trace.unshift(current);
+  if (trace.length > 1200) trace.pop();
+
+  ctx.beginPath();
+  for (let i = 0; i < trace.length; i++) {
+    const point = trace[i];
+    if (i === 0) ctx.moveTo(point.x, point.y);
+    else ctx.lineTo(point.x, point.y);
+  }
+  ctx.strokeStyle = 'rgba(96, 165, 250, 0.95)';
+  ctx.lineWidth = 2.2;
+  ctx.shadowBlur = 16;
+  ctx.shadowColor = 'rgba(96, 165, 250, 0.75)';
+  ctx.stroke();
+  ctx.shadowBlur = 0;
+
+  const speed = Number(speedInput.value);
+  time = (time + dt * speed) % 1;
+  if (time < dt * speed * 1.15) trace = [current];
+  traceLabel.textContent = `${Math.round(time * 100)}%`;
+  modeLabel.textContent = 'play';
+}
+
+function render(now) {
+  const dt = Math.min(0.033, (now - lastTime) / 1000);
+  lastTime = now;
+  ctx.fillStyle = 'rgba(2, 5, 12, 0.18)';
+  ctx.fillRect(0, 0, width, height);
+
+  const gradient = ctx.createRadialGradient(width * 0.5, height * 0.52, 80, width * 0.5, height * 0.52, Math.max(width, height) * 0.55);
+  gradient.addColorStop(0, 'rgba(20, 30, 55, 0.08)');
+  gradient.addColorStop(1, 'rgba(2, 5, 12, 0)');
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0, 0, width, height);
+
+  if (drawing) {
+    modeLabel.textContent = 'draw';
+    drawRawPath();
+  } else if (coeffs.length) {
+    drawEpicycles(dt);
+  }
+
+  requestAnimationFrame(render);
+}
+
+function pointerPos(event) {
+  const rect = canvas.getBoundingClientRect();
+  return {
+    x: event.clientX - rect.left,
+    y: event.clientY - rect.top
+  };
+}
+
+canvas.addEventListener('pointerdown', (event) => {
+  drawing = true;
+  points = [];
+  trace = [];
+  coeffs = [];
+  const pos = pointerPos(event);
+  points.push(pos);
+});
+
+canvas.addEventListener('pointermove', (event) => {
+  if (!drawing) return;
+  const pos = pointerPos(event);
+  const prev = points[points.length - 1];
+  if (!prev || Math.hypot(pos.x - prev.x, pos.y - prev.y) > 2) points.push(pos);
+});
+
+function finishDrawing() {
+  if (!drawing) return;
+  drawing = false;
+  if (points.length > 8) computeFourier(points);
+}
+
+canvas.addEventListener('pointerup', finishDrawing);
+canvas.addEventListener('pointerleave', finishDrawing);
+
+harmonicsInput.addEventListener('input', () => harmonicsValue.textContent = harmonicsInput.value);
+speedInput.addEventListener('input', () => speedValue.textContent = Number(speedInput.value).toFixed(2));
+scaleInput.addEventListener('input', () => scaleValue.textContent = Number(scaleInput.value).toFixed(2));
+presetBtn.addEventListener('click', () => setPath(samplePreset()));
+clearBtn.addEventListener('click', () => {
+  points = [];
+  trace = [];
+  coeffs = [];
+  samplesLabel.textContent = '0';
+  modeLabel.textContent = 'draw';
+  traceLabel.textContent = '0%';
+});
+replayBtn.addEventListener('click', replay);
+
+window.addEventListener('resize', () => {
+  resize();
+  if (points.length) computeFourier(points);
+});
+
+resize();
+setPath(samplePreset());
+harmonicsValue.textContent = harmonicsInput.value;
+speedValue.textContent = Number(speedInput.value).toFixed(2);
+scaleValue.textContent = Number(scaleInput.value).toFixed(2);
+requestAnimationFrame(render);
+</script>
+</body>
+</html>

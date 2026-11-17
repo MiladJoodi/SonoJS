@@ -25,7 +25,7 @@
 @source "../components/mobile-header-scroll.tsx";
 @source "../components/theme-provider.tsx";
 @source "../components/direction/**/*.{ts,tsx}";
-/* Auth shell only — account/* + account-settings live in site-extended (Phase L2). */
+/* Auth shell only. Account/* + account-settings live in site-extended (Phase L2). */
 @source "../components/auth/auth-dialog.tsx";
 @source "../components/auth/auth-card.tsx";
 @source "../components/auth/user-menu.tsx";
@@ -61,7 +61,7 @@
 @source "../components/icons/tools/copilot.tsx";
 @source "../components/icons/tools/cursor.tsx";
 
-/* Shell + auth-form UI primitives (explicit — not full packages/ui).
+/* Shell + auth-form UI primitives (explicit, not full packages/ui).
    Account-only: card / tabs / badge / alert / table / input-group → site-extended. */
 @source "../packages/ui/src/components/button.tsx";
 @source "../packages/ui/src/components/separator.tsx";
@@ -89,7 +89,7 @@
 
 @source not "../.tmp-chrome-thumbs";
 
-/* Switch thumb LTR/RTL — compound variants sometimes missing from the sheet. */
+/* Switch thumb LTR/RTL, compound variants sometimes missing from the sheet. */
 @source inline("ltr:data-[state=checked]:translate-x-[calc(100%-2px)] rtl:data-[state=checked]:-translate-x-[calc(100%-2px)]");
 @source inline("grid-rows-[0fr] grid-rows-[1fr] transition-[grid-template-rows]");
 
@@ -108,7 +108,7 @@
   }
 
   ::selection {
-    /* Light: soft primary wash. Dark: stronger mix — 22% vanishes on #09090b. */
+    /* Light: soft primary wash. Dark: stronger mix, 22% vanishes on #09090b. */
     background: color-mix(in oklab, var(--primary) 22%, transparent);
     color: var(--foreground);
   }

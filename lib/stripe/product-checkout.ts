@@ -24,7 +24,7 @@ export type ProductCheckoutFailure = {
 
 /**
  * Start one-time Checkout for a catalog product.
- * Price always comes from the catalog — never from the request body.
+ * Price always comes from the catalog. Never from the request body.
  */
 export async function createProductCheckout(input: {
   clerkUserId: string

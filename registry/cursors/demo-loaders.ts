@@ -1,7 +1,7 @@
 type CursorModule = Record<string, unknown>
 type DemoLoader = () => Promise<CursorModule>
 
-/** Stable map — do not recreate inside a function (breaks effect deps). */
+/** Stable map, do not recreate inside a function (breaks effect deps). */
 const LOADERS: Record<string, DemoLoader> = {
   "smooth-cursor-follower": () => import("./smooth-cursor-follower/demo"),
   "smooth-cursor": () => import("./smooth-cursor/demo"),
@@ -34,7 +34,7 @@ const LOADERS: Record<string, DemoLoader> = {
   "glass-cursor": () => import("./glass-cursor/demo"),
 }
 
-/** In-flight / resolved dynamic imports — revisiting a card is instant. */
+/** In-flight / resolved dynamic imports, revisiting a card is instant. */
 const moduleCache = new Map<string, Promise<CursorModule>>()
 
 export function getCursorDemoLoader(id: string): DemoLoader | null {

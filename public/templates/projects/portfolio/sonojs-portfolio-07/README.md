@@ -23,7 +23,7 @@ F1 driver portfolio with 3D helmet hero. Demo brand: **GRIDO1 Racing Systems / K
 
 ## Run locally
 
-Do not open `index.html` via `file://` — ES modules, GLB, and HDR need a static server (CDN for Three.js / Lenis).
+Do not open `index.html` via `file://`. ES modules, GLB, and HDR need a static server (CDN for Three.js / Lenis).
 
 ```bash
 npx serve .

@@ -167,7 +167,7 @@ function drawRoundedImage(
   h: number,
   radius: number
 ) {
-  // Soft corners only — no drop shadow (shadows were bridging lane gaps).
+  // Soft corners only. No drop shadow (shadows were bridging lane gaps).
   ctx.save()
   roundedPath(ctx, x, y, w, h, radius)
   ctx.clip()

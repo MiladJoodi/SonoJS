@@ -5,7 +5,7 @@ Category: `saas`
 Slug / folder: `sonojs-saas-07`  
 Path: `public/templates/projects/saas/sonojs-saas-07/`  
 
-Interactive sci-fi scroll universe. Demo brand: **ECLIPSE — The Last Frontier**.
+Interactive sci-fi scroll universe. Demo brand: **ECLIPSE. The Last Frontier**.
 
 ## Images / video
 

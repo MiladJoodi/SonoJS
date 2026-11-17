@@ -435,7 +435,7 @@ export function TemplateCategoryRail({
             showCloseButton={false}
             className="max-h-[85dvh] gap-0 rounded-t-[16px] border-[var(--sm-border)] bg-[var(--sm-bg-elevated)] p-0"
           >
-            {/* Grabber — classic bottom-sheet cue */}
+            {/* Grabber, classic bottom-sheet cue */}
             <div className="flex justify-center pt-3 pb-1" aria-hidden>
               <span className="h-1 w-10 rounded-full bg-[var(--sm-border)]" />
             </div>

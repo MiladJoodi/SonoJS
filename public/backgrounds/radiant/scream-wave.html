@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scream Wave</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; overflow: hidden; background: #0a0a0a; }
+  canvas { display: block; width: 100vw; height: 100vh; }
+  .label {
+    position: fixed;
+    top: 20px;
+    left: 24px;
+    font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(200, 149, 108, 0.5);
+    z-index: 10;
+    pointer-events: none;
+    user-select: none;
+  }
+  html.embed .label { display: none; }
+</style>
+<script>if(/\bembed=1\b/.test(location.search))document.documentElement.classList.add("embed")</script>
+</head>
+<body>
+<div class="label">Scream Wave</div>
+<canvas id="canvas"></canvas>
+<script>
+// ─────────────────────────────────────────────
+// Scream Wave — Emotional waveform: calm verse to screaming chorus
+// ─────────────────────────────────────────────
+(function () {
+  var canvas = document.getElementById('canvas');
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var urlParams = new URLSearchParams(window.location.search);
+  var pixelScale = parseFloat(urlParams.get('p')) || 1;
+
+  var gl = canvas.getContext('webgl', { alpha: false, antialias: false, preserveDrawingBuffer: false });
+  if (!gl) return;
+
+  var intensityVal = 1.0;
+  var waveSpeedVal = 0.8;
+  var running = true;
+
+  var vertSrc = [
+    'attribute vec2 a_pos;',
+    'void main() { gl_Position = vec4(a_pos, 0.0, 1.0); }'
+  ].join('\n');
+
+  var fragSrc = [
+    'precision highp float;',
+    'uniform float u_time;',
+    'uniform vec2 u_res;',
+    'uniform float u_intensity;',
+    'uniform float u_waveSpeed;',
+    'uniform vec2 u_mouse;',
+    '',
+    '#define PI 3.14159265359',
+    '#define CYCLE 7.0',
+    '',
+    '// ── Hash for noise ──',
+    'float hash(float n) {',
+    '  return fract(sin(n) * 43758.5453123);',
+    '}',
+    '',
+    'float hash2(vec2 p) {',
+    '  return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);',
+    '}',
+    '',
+    '// ── Value noise ──',
+    'float noise(float x) {',
+    '  float i = floor(x);',
+    '  float f = fract(x);',
+    '  f = f * f * (3.0 - 2.0 * f);',
+    '  return mix(hash(i), hash(i + 1.0), f);',
+    '}',
+    '',
+    '// ── 2D noise for visual grain ──',
+    'float noise2d(vec2 p) {',
+    '  vec2 i = floor(p);',
+    '  vec2 f = fract(p);',
+    '  f = f * f * (3.0 - 2.0 * f);',
+    '  float a = hash2(i);',
+    '  float b = hash2(i + vec2(1.0, 0.0));',
+    '  float c = hash2(i + vec2(0.0, 1.0));',
+    '  float d = hash2(i + vec2(1.0, 1.0));',
+    '  return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);',
+    '}',
+    '',
+    '// ── Emotional intensity envelope ──',
+    '// Returns 0..1 representing the emotional arc',
+    'float emotionCurve(float t) {',
+    '  // Phase timing within 7s cycle:',
+    '  // 0.0 - 1.5: calm (0.0 - 0.214)',
+    '  // 1.5 - 3.5: building (0.214 - 0.5)',
+    '  // 3.5 - 5.0: scream (0.5 - 0.714)',
+    '  // 5.0 - 7.0: collapse (0.714 - 1.0)',
+    '  float phase = fract(t / CYCLE);',
+    '',
+    '  // Calm: gentle sine breathing (wider transitions for smooth blending)',
+    '  float calm = smoothstep(0.0, 0.06, phase) * (1.0 - smoothstep(0.14, 0.25, phase));',
+    '  float calmVal = 0.08 + 0.04 * sin(phase * PI * 20.0);',
+    '',
+    '  // Building: exponential ramp (overlapping transitions)',
+    '  float buildStart = 0.214;',
+    '  float buildEnd = 0.5;',
+    '  float build = smoothstep(buildStart - 0.03, buildStart + 0.04, phase) * (1.0 - smoothstep(buildEnd - 0.04, buildEnd + 0.02, phase));',
+    '  float buildProgress = clamp((phase - buildStart) / (buildEnd - buildStart), 0.0, 1.0);',
+    '  // Smooth the progress curve itself',
+    '  buildProgress = buildProgress * buildProgress * (3.0 - 2.0 * buildProgress);',
+    '  float buildVal = 0.1 + buildProgress * buildProgress * 0.85;',
+    '',
+    '  // Scream: peak with turbulence (wider entry/exit)',
+    '  float screamStart = 0.5;',
+    '  float screamEnd = 0.714;',
+    '  float scream = smoothstep(screamStart - 0.03, screamStart + 0.03, phase) * (1.0 - smoothstep(screamEnd - 0.04, screamEnd + 0.01, phase));',
+    '  float screamProgress = clamp((phase - screamStart) / (screamEnd - screamStart), 0.0, 1.0);',
+    '  float screamVal = 0.95 + 0.05 * sin(screamProgress * PI);',
+    '',
+    '  // Collapse: flash spike then exponential decay with flutter',
+    '  float collapseStart = 0.714;',
+    '  float collapse = smoothstep(collapseStart - 0.04, collapseStart + 0.03, phase);',
+    '  float collapseProgress = clamp((phase - collapseStart) / (1.0 - collapseStart), 0.0, 1.0);',
+    '  // Brief brightness flash at the start of collapse',
+    '  float collapseFlash = exp(-collapseProgress * 20.0) * 0.25;',
+    '  // Decaying flutter/wobble',
+    '  float flutter = sin(collapseProgress * 40.0) * exp(-collapseProgress * 5.0) * 0.08;',
+    '  float collapseVal = (0.95 + collapseFlash) * exp(-collapseProgress * 4.5) + flutter;',
+    '  collapseVal = max(collapseVal, 0.0);',
+    '',
+    '  return calmVal * calm + buildVal * build + screamVal * scream + collapseVal * collapse;',
+    '}',
+    '',
+    '// ── Waveform function ──',
+    '// x: position along wave, t: time, emotion: 0..1 intensity',
+    'float waveform(float x, float t, float emotion, float speed) {',
+    '  float baseFreq = 3.0;',
+    '  float timeOsc = t * speed;',
+    '',
+    '  // Base sine wave',
+    '  float wave = sin(x * baseFreq * PI * 2.0 + timeOsc * 4.0);',
+    '',
+    '  // Subtle second harmonic always present (warmth in calm phase)',
+    '  wave += sin(x * baseFreq * 2.0 * PI * 2.0 + timeOsc * 3.0 + 0.8) * 0.12;',
+    '',
+    '  // Add harmonics that increase with emotion',
+    '  float harmonics = emotion * emotion;',
+    '  wave += sin(x * baseFreq * 2.0 * PI * 2.0 + timeOsc * 6.0 + 0.5) * harmonics * 0.5;',
+    '  wave += sin(x * baseFreq * 3.0 * PI * 2.0 + timeOsc * 8.0 + 1.2) * harmonics * harmonics * 0.35;',
+    '  wave += sin(x * baseFreq * 5.0 * PI * 2.0 + timeOsc * 12.0 + 2.1) * harmonics * harmonics * 0.2;',
+    '  wave += sin(x * baseFreq * 7.0 * PI * 2.0 - timeOsc * 5.0 + 3.7) * pow(harmonics, 3.0) * 0.15;',
+    '',
+    '  // High frequency noise at peak emotion',
+    '  float noiseAmt = smoothstep(0.7, 1.0, emotion);',
+    '  wave += (noise(x * 40.0 + timeOsc * 15.0) - 0.5) * 2.0 * noiseAmt * 0.6;',
+    '  wave += (noise(x * 80.0 - timeOsc * 20.0) - 0.5) * 2.0 * noiseAmt * noiseAmt * 0.3;',
+    '',
+    '  // Amplitude scales with emotion',
+    '  float amplitude = 0.05 + emotion * 0.45;',
+    '  wave *= amplitude;',
+    '',
+    '  // Hard clipping at scream peak - creates that harsh distortion',
+    '  float clipThreshold = mix(0.5, 0.12, smoothstep(0.8, 1.0, emotion));',
+    '  wave = clamp(wave, -clipThreshold, clipThreshold);',
+    '',
+    '  return wave;',
+    '}',
+    '',
+    'void main() {',
+    '  vec2 fragCoord = gl_FragCoord.xy;',
+    '  vec2 uv = fragCoord / u_res;',
+    '  float aspect = u_res.x / u_res.y;',
+    '  float t = u_time;',
+    '',
+    '  // ── Mouse: shift distortion center ──',
+    '  vec2 mouseShift = vec2(0.0);',
+    '  if (u_mouse.x > 0.0) {',
+    '    vec2 mNorm = u_mouse / u_res;',
+    '    mouseShift = (mNorm - 0.5) * 0.3;',
+    '  }',
+    '',
+    '  // Emotional intensity',
+    '  float emotion = emotionCurve(t) * u_intensity;',
+    '  emotion = clamp(emotion, 0.0, 1.0);',
+    '',
+    '  // ── Background ──',
+    '  // Dark, with subtle color that shifts with emotion',
+    '  vec3 bgCalm = vec3(0.02, 0.01, 0.04);',
+    '  vec3 bgScream = vec3(0.06, 0.01, 0.01);',
+    '  vec3 bg = mix(bgCalm, bgScream, emotion);',
+    '',
+    '  // Subtle radial gradient behind the wave',
+    '  float centerDist = length(uv - vec2(0.5, 0.5));',
+    '  float bgGlow = exp(-centerDist * centerDist * 3.0);',
+    '  vec3 bgGlowColor = mix(vec3(0.05, 0.02, 0.08), vec3(0.12, 0.02, 0.02), emotion);',
+    '  bg += bgGlowColor * bgGlow * (0.3 + emotion * 0.5);',
+    '',
+    '  // ── Screen noise at peak ──',
+    '  float screenNoise = 0.0;',
+    '  float noiseIntensity = smoothstep(0.6, 1.0, emotion);',
+    '  if (noiseIntensity > 0.0) {',
+    '    screenNoise = (noise2d(fragCoord * 0.8 + t * 100.0) - 0.5) * noiseIntensity * 0.15;',
+    '    screenNoise += (noise2d(fragCoord * 2.5 + t * 200.0) - 0.5) * noiseIntensity * noiseIntensity * 0.08;',
+    '  }',
+    '',
+    '  // ── Chromatic aberration offset ──',
+    '  float chromatic = smoothstep(0.5, 1.0, emotion) * 0.025 * u_intensity;',
+    '',
+    '  // Vertical jitter during scream',
+    '  float jitter = smoothstep(0.85, 1.0, emotion) * (noise(t * 30.0) - 0.5) * 0.015;',
+    '',
+    '  // ── Horizontal glitch displacement during scream ──',
+    '  float glitchAmt = smoothstep(0.8, 1.0, emotion);',
+    '  float glitchBand = step(0.92, noise(floor(uv.y * 25.0) + floor(t * 8.0) * 7.3));',
+    '  float glitchOffset = glitchBand * glitchAmt * (noise(t * 50.0 + uv.y * 10.0) - 0.5) * 0.06;',
+    '',
+    '  // ── Compute waveform SDF for each RGB channel ──',
+    '  // Map uv.x to wave x coordinate',
+    '  float waveX = uv.x + glitchOffset - mouseShift.x;',
+    '',
+    '  // Centered y coordinate (-0.5 to 0.5) with mouse shift',
+    '  float yCenter = uv.y - 0.5 + jitter - mouseShift.y;',
+    '',
+    '  // Compute wave value at this x',
+    '  float speed = u_waveSpeed;',
+    '',
+    '  // Red channel - offset for chromatic aberration',
+    '  float waveR = waveform(waveX - chromatic, t, emotion, speed);',
+    '  float distR = abs(yCenter - waveR);',
+    '',
+    '  // Green channel - center',
+    '  float waveG = waveform(waveX, t, emotion, speed);',
+    '  float distG = abs(yCenter - waveG);',
+    '',
+    '  // Blue channel - opposite offset',
+    '  float waveB = waveform(waveX + chromatic, t, emotion, speed);',
+    '  float distB = abs(yCenter - waveB);',
+    '',
+    '  // ── Wave thickness and glow ──',
+    '  // Core line thickness (thicker base for warm calm, thicker still during scream)',
+    '  float lineThickness = 0.003 + emotion * 0.004;',
+    '',
+    '  // Inner glow radius (wider base glow for warmth)',
+    '  float glowRadius = 0.022 + emotion * 0.038;',
+    '',
+    '  // Outer bloom',
+    '  float bloomRadius = 0.08 + emotion * 0.14;',
+    '',
+    '  // ── Color palette based on emotion ──',
+    '  // Calm: warm lavender/purple with golden undertone',
+    '  vec3 calmColor = vec3(0.62, 0.42, 0.88);',
+    '  // Building: hot pink/magenta',
+    '  vec3 buildColor = vec3(0.95, 0.2, 0.6);',
+    '  // Scream: harsh white/red',
+    '  vec3 screamCoreColor = vec3(1.0, 0.95, 0.9);',
+    '  vec3 screamGlowColor = vec3(1.0, 0.25, 0.1);',
+    '',
+    '  // Interpolate colors',
+    '  float buildPhase = smoothstep(0.1, 0.6, emotion);',
+    '  float screamPhase = smoothstep(0.7, 0.95, emotion);',
+    '',
+    '  vec3 coreColor = mix(calmColor, buildColor, buildPhase);',
+    '  coreColor = mix(coreColor, screamCoreColor, screamPhase);',
+    '',
+    '  vec3 glowColor = mix(calmColor * 0.6, buildColor * 0.7, buildPhase);',
+    '  glowColor = mix(glowColor, screamGlowColor, screamPhase);',
+    '',
+    '  // ── Compute per-channel intensities ──',
+    '  // Core line',
+    '  float coreR = smoothstep(lineThickness, 0.0, distR);',
+    '  float coreG = smoothstep(lineThickness, 0.0, distG);',
+    '  float coreB = smoothstep(lineThickness, 0.0, distB);',
+    '',
+    '  // Inner glow',
+    '  float glowR = exp(-distR * distR / (glowRadius * glowRadius));',
+    '  float glowG = exp(-distG * distG / (glowRadius * glowRadius));',
+    '  float glowB = exp(-distB * distB / (glowRadius * glowRadius));',
+    '',
+    '  // Outer bloom',
+    '  float bloomR = exp(-distR * distR / (bloomRadius * bloomRadius));',
+    '  float bloomG = exp(-distG * distG / (bloomRadius * bloomRadius));',
+    '  float bloomB = exp(-distB * distB / (bloomRadius * bloomRadius));',
+    '',
+    '  // ── Compose final color ──',
+    '  vec3 col = bg;',
+    '',
+    '  // When emotion is low, render as single-color (no chromatic split)',
+    '  // When emotion is high, split into RGB channels',
+    '  float splitAmount = smoothstep(0.4, 0.9, emotion);',
+    '',
+    '  // Unified wave (low emotion)',
+    '  float unifiedCore = smoothstep(lineThickness, 0.0, distG);',
+    '  float unifiedGlow = exp(-distG * distG / (glowRadius * glowRadius));',
+    '  float unifiedBloom = exp(-distG * distG / (bloomRadius * bloomRadius));',
+    '',
+    '  // Core brightness increases during scream',
+    '  float coreBright = 2.0 + smoothstep(0.8, 1.0, emotion) * 1.5;',
+    '',
+    '  vec3 unifiedCol = coreColor * unifiedCore * coreBright',
+    '                  + glowColor * unifiedGlow * 0.9',
+    '                  + glowColor * 0.35 * unifiedBloom;',
+    '',
+    '  // Split wave (high emotion) - chromatic aberration',
+    '  vec3 splitCol = vec3(0.0);',
+    '  // Red channel gets the red-shifted wave',
+    '  splitCol.r = coreColor.r * coreR * coreBright + glowColor.r * glowR * 0.9 + glowColor.r * 0.35 * bloomR;',
+    '  // Green channel gets the center wave',
+    '  splitCol.g = coreColor.g * coreG * coreBright + glowColor.g * glowG * 0.9 + glowColor.g * 0.35 * bloomG;',
+    '  // Blue channel gets the blue-shifted wave',
+    '  splitCol.b = coreColor.b * coreB * coreBright + glowColor.b * glowB * 0.9 + glowColor.b * 0.35 * bloomB;',
+    '',
+    '  vec3 waveCol = mix(unifiedCol, splitCol, splitAmount);',
+    '  col += waveCol;',
+    '',
+    '  // ── Reflection: mirrored faded wave below center ──',
+    '  // Mirror the y coordinate around center (0.5)',
+    '  float reflUvY = 1.0 - uv.y;',
+    '  float reflYCenter = reflUvY - 0.5 + jitter;',
+    '  float reflDistG = abs(reflYCenter - waveG);',
+    '  // Fade: strongest just below center, fading to nothing toward bottom',
+    '  float belowCenter = uv.y - 0.5;',
+    '  float reflFade = step(0.0, belowCenter) * (1.0 - smoothstep(0.0, 0.35, belowCenter)) * 0.2;',
+    '  float reflGlow = exp(-reflDistG * reflDistG / (glowRadius * glowRadius * 3.0));',
+    '  float reflBloom = exp(-reflDistG * reflDistG / (bloomRadius * bloomRadius * 2.5));',
+    '  vec3 reflCol = glowColor * reflGlow * 0.45 + glowColor * reflBloom * 0.12;',
+    '  col += reflCol * reflFade;',
+    '',
+    '  // ── Horizontal scan lines during scream (subtle CRT effect) ──',
+    '  float scanline = smoothstep(0.8, 1.0, emotion) * 0.08;',
+    '  float scan = sin(fragCoord.y * 1.5) * 0.5 + 0.5;',
+    '  col *= 1.0 - scanline * scan;',
+    '',
+    '  // ── Screen noise ──',
+    '  col += vec3(screenNoise);',
+    '',
+    '  // ── Subtle edge darkening (vignette) ──',
+    '  vec2 vigUV = uv - 0.5;',
+    '  float vig = 1.0 - dot(vigUV, vigUV) * 1.8;',
+    '  vig = clamp(vig, 0.0, 1.0);',
+    '  col *= 0.5 + vig * 0.5;',
+    '',
+    '  // ── Pulsing brightness at scream peak ──',
+    '  float pulse = 1.0 + smoothstep(0.85, 1.0, emotion) * sin(t * 25.0) * 0.15;',
+    '  col *= pulse;',
+    '',
+    '  // ── Tone mapping ──',
+    '  col = col / (1.0 + col * 0.4);',
+    '  col = pow(col, vec3(0.95));',
+    '  col = max(col, vec3(0.0));',
+    '',
+    '  gl_FragColor = vec4(col, 1.0);',
+    '}'
+  ].join('\n');
+
+  function compile(type, src) {
+    var s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
+
+    }
+    return s;
+  }
+
+  var prog = gl.createProgram();
+  gl.attachShader(prog, compile(gl.VERTEX_SHADER, vertSrc));
+  gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, fragSrc));
+  gl.linkProgram(prog);
+  if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) {
+
+  }
+  gl.useProgram(prog);
+
+  var buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+  var aPos = gl.getAttribLocation(prog, 'a_pos');
+  gl.enableVertexAttribArray(aPos);
+  gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+
+  var uTime = gl.getUniformLocation(prog, 'u_time');
+  var uRes = gl.getUniformLocation(prog, 'u_res');
+  var uIntensity = gl.getUniformLocation(prog, 'u_intensity');
+  var uWaveSpeed = gl.getUniformLocation(prog, 'u_waveSpeed');
+  var uMouse = gl.getUniformLocation(prog, 'u_mouse');
+
+  var mouseXVal = -1.0, mouseYVal = -1.0;
+
+  canvas.addEventListener('mousemove', function(e) {
+    mouseXVal = e.clientX * dpr;
+    mouseYVal = (canvas.clientHeight - e.clientY) * dpr;
+  });
+  canvas.addEventListener('mouseleave', function() {
+    mouseXVal = -1.0; mouseYVal = -1.0;
+  });
+  canvas.addEventListener('touchstart', function(e) {
+    e.preventDefault();
+    var touch = e.touches[0];
+    mouseXVal = touch.clientX * dpr;
+    mouseYVal = (canvas.clientHeight - touch.clientY) * dpr;
+  }, { passive: false });
+  canvas.addEventListener('touchmove', function(e) {
+    e.preventDefault();
+    var touch = e.touches[0];
+    mouseXVal = touch.clientX * dpr;
+    mouseYVal = (canvas.clientHeight - touch.clientY) * dpr;
+  }, { passive: false });
+  canvas.addEventListener('touchend', function() {
+    mouseXVal = -1.0; mouseYVal = -1.0;
+  });
+
+  var dpr = Math.min(window.devicePixelRatio || 1, 2) * pixelScale;
+  var needsResize = true;
+
+  function resize() {
+    needsResize = false;
+    var w = Math.round(canvas.clientWidth * dpr);
+    var h = Math.round(canvas.clientHeight * dpr);
+    if (canvas.width !== w || canvas.height !== h) {
+      canvas.width = w;
+      canvas.height = h;
+      gl.viewport(0, 0, w, h);
+      gl.uniform2f(uRes, canvas.width, canvas.height);
+    }
+  }
+
+  function render(now) {
+    if (!running) return;
+    if (needsResize) resize();
+    gl.uniform1f(uTime, prefersReduced ? 0.0 : now * 0.001);
+    gl.uniform1f(uIntensity, intensityVal);
+    gl.uniform1f(uWaveSpeed, waveSpeedVal);
+    gl.uniform2f(uMouse, mouseXVal, mouseYVal);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+    requestAnimationFrame(render);
+  }
+
+  window.addEventListener('resize', function () {
+    needsResize = true;
+  });
+
+  resize();
+
+  requestAnimationFrame(render);
+
+  document.addEventListener('visibilitychange', function() {
+    if (document.hidden) {
+      running = false;
+    } else {
+      running = true;
+      requestAnimationFrame(render);
+    }
+  });
+
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        if (!running) {
+          running = true;
+          requestAnimationFrame(render);
+        }
+      } else {
+        running = false;
+      }
+    });
+  }, { threshold: 0.1 });
+  observer.observe(canvas);
+
+  window.addEventListener('message', function(e) {
+    if (e.data && e.data.type === 'param') {
+      switch (e.data.name) {
+        case 'INTENSITY': intensityVal = e.data.value; break;
+        case 'WAVE_SPEED': waveSpeedVal = e.data.value; break;
+      }
+    }
+  });
+})();
+</script>
+</body>
+</html>

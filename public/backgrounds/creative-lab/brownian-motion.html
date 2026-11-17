@@ -1,0 +1,300 @@
+<!-- TITLE: 026 Brownian Motion -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>026 — Brownian Motion · creative-lab</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 100%; height: 100%; overflow: hidden; }
+    body {
+      background: #020308;
+      color: #e6edf3;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    canvas { display: block; width: 100%; height: 100%; cursor: crosshair; }
+    .panel {
+      position: fixed;
+      top: 16px;
+      left: 16px;
+      width: 344px;
+      max-width: calc(100vw - 32px);
+      padding: 14px 16px;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 14px;
+      background: rgba(10, 12, 16, 0.76);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 20px 45px rgba(0,0,0,0.38);
+      z-index: 2;
+    }
+    .panel h1 { font-size: 15px; margin-bottom: 8px; }
+    .panel p, .panel label, .panel span, .panel button {
+      font-size: 12px;
+      line-height: 1.6;
+      color: rgba(230, 237, 243, 0.84);
+    }
+    .controls {
+      display: grid;
+      grid-template-columns: 88px 1fr 60px;
+      gap: 8px 10px;
+      align-items: center;
+      margin: 12px 0 10px;
+    }
+    input[type="range"] { width: 100%; accent-color: #7dd3fc; }
+    button {
+      width: 100%;
+      min-height: 32px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px;
+      color: #f8fafc;
+      padding: 7px 10px;
+      cursor: pointer;
+    }
+    .actions {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .meta {
+      display: grid;
+      grid-template-columns: auto auto;
+      gap: 2px 14px;
+      font-family: "SF Mono", "Fira Code", monospace;
+    }
+    .meta strong { color: #7dd3fc; font-weight: 500; }
+  
+    html.embed #ui,
+    html.embed #info,
+    html.embed #controls,
+    html.embed #stats,
+    html.embed #hint,
+    html.embed .panel,
+    html.embed header,
+    html.embed footer { display: none !important; }
+  </style>
+  <script>if(/\bembed=1\b/.test(location.search))document.documentElement.classList.add("embed")</script>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+
+<div class="panel">
+  <h1>Brownian Motion</h1>
+  <p>Particles perform a random walk while their visitation density accumulates into a glowing heat map. Click to inject new bursts into the field.</p>
+  <div class="controls">
+    <label for="count">Particles</label>
+    <input id="count" type="range" min="300" max="4000" step="50" value="1800">
+    <span id="countValue">1800</span>
+
+    <label for="jitter">Jitter</label>
+    <input id="jitter" type="range" min="0.1" max="3.5" step="0.01" value="1.2">
+    <span id="jitterValue">1.20</span>
+
+    <label for="drift">Drift</label>
+    <input id="drift" type="range" min="0" max="2.5" step="0.01" value="0.55">
+    <span id="driftValue">0.55</span>
+
+    <label for="fade">Fade</label>
+    <input id="fade" type="range" min="0.001" max="0.08" step="0.001" value="0.012">
+    <span id="fadeValue">0.012</span>
+  </div>
+  <div class="meta">
+    <span>Heat max</span><strong id="heatLabel">0.00</strong>
+    <span>Pointer</span><strong id="pointerLabel">idle</strong>
+    <span>Resolution</span><strong id="resolutionLabel">0×0</strong>
+  </div>
+  <div class="actions">
+    <button id="resetBtn" type="button">Reset</button>
+    <button id="burstBtn" type="button">Center burst</button>
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d', { alpha: false });
+const countInput = document.getElementById('count');
+const jitterInput = document.getElementById('jitter');
+const driftInput = document.getElementById('drift');
+const fadeInput = document.getElementById('fade');
+const heatLabel = document.getElementById('heatLabel');
+const pointerLabel = document.getElementById('pointerLabel');
+const resolutionLabel = document.getElementById('resolutionLabel');
+const resetBtn = document.getElementById('resetBtn');
+const burstBtn = document.getElementById('burstBtn');
+const valueSpans = {
+  count: document.getElementById('countValue'),
+  jitter: document.getElementById('jitterValue'),
+  drift: document.getElementById('driftValue'),
+  fade: document.getElementById('fadeValue')
+};
+
+let width = 0;
+let height = 0;
+let dpr = 1;
+let cols = 0;
+let rows = 0;
+let heat = new Float32Array(0);
+let imageData = null;
+const bufferCanvas = document.createElement('canvas');
+const bufferCtx = bufferCanvas.getContext('2d', { alpha: false });
+let particles = [];
+const pointer = { x: 0, y: 0, inside: false };
+
+function clamp(value, min, max) {
+  return Math.max(min, Math.min(max, value));
+}
+
+function index(x, y) {
+  return y * cols + x;
+}
+
+function resize() {
+  dpr = Math.min(window.devicePixelRatio || 1, 2);
+  width = window.innerWidth;
+  height = window.innerHeight;
+  canvas.width = Math.floor(width * dpr);
+  canvas.height = Math.floor(height * dpr);
+  canvas.style.width = `${width}px`;
+  canvas.style.height = `${height}px`;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  cols = Math.max(120, Math.floor(width / 4));
+  rows = Math.max(72, Math.floor(height / 4));
+  heat = new Float32Array(cols * rows);
+  bufferCanvas.width = cols;
+  bufferCanvas.height = rows;
+  imageData = bufferCtx.createImageData(cols, rows);
+  resolutionLabel.textContent = `${cols}×${rows}`;
+  resetParticles();
+}
+
+function createParticle(x = width * 0.5, y = height * 0.5) {
+  return {
+    x,
+    y,
+    hue: 180 + Math.random() * 120
+  };
+}
+
+function resetParticles() {
+  particles = Array.from({ length: Number(countInput.value) }, () => createParticle(width * 0.5 + (Math.random() - 0.5) * 60, height * 0.5 + (Math.random() - 0.5) * 60));
+  heat.fill(0);
+}
+
+function burst(x, y) {
+  for (let i = 0; i < Math.min(220, particles.length); i++) {
+    const p = particles[Math.floor(Math.random() * particles.length)];
+    p.x = x + (Math.random() - 0.5) * 30;
+    p.y = y + (Math.random() - 0.5) * 30;
+  }
+}
+
+function ensureCount() {
+  const target = Number(countInput.value);
+  while (particles.length < target) particles.push(createParticle());
+  particles.length = target;
+}
+
+function simulate() {
+  ensureCount();
+  const jitter = Number(jitterInput.value);
+  const drift = Number(driftInput.value);
+  const fade = Number(fadeInput.value);
+
+  for (let i = 0; i < heat.length; i++) heat[i] *= 1 - fade;
+  let maxHeat = 0;
+
+  for (const particle of particles) {
+    const swirlX = Math.sin(particle.y * 0.015 + performance.now() * 0.0012) * drift;
+    const swirlY = Math.cos(particle.x * 0.014 - performance.now() * 0.0011) * drift;
+    particle.x += (Math.random() - 0.5) * jitter * 6 + swirlX;
+    particle.y += (Math.random() - 0.5) * jitter * 6 + swirlY;
+
+    if (pointer.inside) {
+      const dx = pointer.x - particle.x;
+      const dy = pointer.y - particle.y;
+      const dist = Math.hypot(dx, dy);
+      if (dist < 120 && dist > 0) {
+        particle.x -= (dx / dist) * 1.4;
+        particle.y -= (dy / dist) * 1.4;
+      }
+    }
+
+    if (particle.x < 0 || particle.x >= width || particle.y < 0 || particle.y >= height) {
+      particle.x = (particle.x + width) % width;
+      particle.y = (particle.y + height) % height;
+    }
+
+    const gx = clamp(Math.floor((particle.x / width) * cols), 0, cols - 1);
+    const gy = clamp(Math.floor((particle.y / height) * rows), 0, rows - 1);
+    const id = index(gx, gy);
+    heat[id] += 1.8;
+    maxHeat = Math.max(maxHeat, heat[id]);
+  }
+
+  const data = imageData.data;
+  for (let i = 0; i < heat.length; i++) {
+    const value = clamp(heat[i] / Math.max(4, maxHeat * 0.85), 0, 1);
+    data[i * 4] = 8 + value * 255;
+    data[i * 4 + 1] = 10 + Math.pow(value, 1.4) * 190;
+    data[i * 4 + 2] = 18 + Math.pow(value, 3) * 255;
+    data[i * 4 + 3] = 255;
+  }
+  bufferCtx.putImageData(imageData, 0, 0);
+
+  ctx.fillStyle = '#020308';
+  ctx.fillRect(0, 0, width, height);
+  ctx.imageSmoothingEnabled = true;
+  ctx.drawImage(bufferCanvas, 0, 0, width, height);
+
+  ctx.globalCompositeOperation = 'lighter';
+  for (let i = 0; i < Math.min(800, particles.length); i++) {
+    const particle = particles[i];
+    ctx.fillStyle = `hsla(${particle.hue}, 100%, 72%, 0.08)`;
+    ctx.fillRect(particle.x, particle.y, 1.4, 1.4);
+  }
+  ctx.globalCompositeOperation = 'source-over';
+
+  heatLabel.textContent = maxHeat.toFixed(2);
+}
+
+function frame() {
+  simulate();
+  requestAnimationFrame(frame);
+}
+
+function setPointer(event) {
+  const rect = canvas.getBoundingClientRect();
+  pointer.x = event.clientX - rect.left;
+  pointer.y = event.clientY - rect.top;
+  pointer.inside = true;
+  pointerLabel.textContent = 'active';
+}
+
+canvas.addEventListener('pointermove', setPointer);
+canvas.addEventListener('pointerenter', setPointer);
+canvas.addEventListener('pointerleave', () => {
+  pointer.inside = false;
+  pointerLabel.textContent = 'idle';
+});
+canvas.addEventListener('pointerdown', (event) => {
+  setPointer(event);
+  burst(pointer.x, pointer.y);
+});
+resetBtn.addEventListener('click', resetParticles);
+burstBtn.addEventListener('click', () => burst(width * 0.5, height * 0.5));
+for (const input of [countInput, jitterInput, driftInput, fadeInput]) {
+  input.addEventListener('input', () => {
+    valueSpans[input.id].textContent = Number(input.value).toFixed(input === countInput ? 0 : input === fadeInput ? 3 : 2);
+    if (input === countInput) ensureCount();
+  });
+  valueSpans[input.id].textContent = Number(input.value).toFixed(input === countInput ? 0 : input === fadeInput ? 3 : 2);
+}
+window.addEventListener('resize', resize);
+
+resize();
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>

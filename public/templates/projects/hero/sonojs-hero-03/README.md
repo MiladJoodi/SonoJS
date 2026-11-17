@@ -12,7 +12,7 @@ Full-bleed private-jet video hero. Demo brand: **SkyElite**.
 | File | Purpose |
 |---|---|
 | `main.webp` | Catalog card poster + detail page hero |
-| `cover.mp4` | Catalog card only — plays on hover |
+| `cover.mp4` | Catalog card only. Plays on hover |
 
 ## Live / repo
 

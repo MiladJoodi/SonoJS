@@ -64,7 +64,7 @@ export function SiteHeader({
               <GithubLink />
               {/* <XLink /> */}
               {/* <LinkedinLink /> */}
-              {/* Static divider — avoid Radix Separator + hidden/sm:block (stuck display:none). */}
+              {/* Static divider, avoid Radix Separator + hidden/sm:block (stuck display:none). */}
               <span
                 aria-hidden
                 className="mx-0.5 inline-block h-4 w-px shrink-0 self-center bg-border max-sm:hidden"

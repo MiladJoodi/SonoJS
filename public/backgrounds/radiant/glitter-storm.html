@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Glitter Storm</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; overflow: hidden; background: #0a0a0a; }
+  canvas { display: block; width: 100vw; height: 100vh; }
+  .label {
+    position: fixed;
+    top: 20px;
+    left: 24px;
+    font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(200, 149, 108, 0.5);
+    z-index: 10;
+    pointer-events: none;
+    user-select: none;
+  }
+  html.embed .label { display: none; }
+</style>
+<script>if(/\bembed=1\b/.test(location.search))document.documentElement.classList.add("embed")</script>
+</head>
+<body>
+<div class="label">Glitter Storm</div>
+<canvas id="canvas"></canvas>
+<script>
+(function() {
+  'use strict';
+
+  var canvas = document.getElementById('canvas');
+  var ctx = canvas.getContext('2d');
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var urlParams = new URLSearchParams(window.location.search);
+  var pixelScale = parseFloat(urlParams.get('p')) || 1;
+
+  // ── Tunable params ──
+  var SPARKLE_RATE    = 1.0;  // spotlight rotation speed multiplier
+  var DENSITY         = 1.0;  // particle count multiplier
+  var DENSITY_PER_PX  = 0.004; // particles per CSS pixel² at density 1.0
+
+  // ── Color palette: hot pink, gold, rose gold, silver, magenta ──
+  var PALETTE = [
+    [255,  20, 147],  // hot pink
+    [255, 215,   0],  // gold
+    [183, 110, 121],  // rose gold
+    [192, 192, 192],  // silver
+    [255,   0, 255],  // magenta
+    [255, 110, 175],  // light pink
+    [220, 178,  50],  // warm gold
+    [215, 215, 235],  // cool silver
+  ];
+
+  // ── Mouse state ──
+  var mouseX = 0, mouseY = 0;
+  var mouseActive = false;
+  var mouseDown = false;
+
+  // ── Runtime state ──
+  var W = 0, H = 0, dpr = 1;
+  var particles = [];
+  var lights = [];
+  var vigGrad = null;
+
+  var paused = false;
+  var lastTime = 0;
+  var simTime  = 0;
+  var sortTimer = 0;
+
+  // ── Resize ──
+  function resize() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2) * pixelScale;
+    W = Math.round(window.innerWidth  * dpr);
+    H = Math.round(window.innerHeight * dpr);
+    canvas.width  = W;
+    canvas.height = H;
+    vigGrad = null;
+  }
+
+  // ── Particles ──
+  function mkParticle() {
+    var col = PALETTE[(Math.random() * PALETTE.length) | 0];
+    var z   = Math.random();
+    return {
+      x:  Math.random() * W,
+      y:  Math.random() * H,
+      z:  z,
+      vx: (Math.random() - 0.5) * 0.25,
+      vy: (Math.random() - 0.5) * 0.18,
+      baseVx: 0,
+      baseVy: 0,
+      theta:  Math.random() * 6.2832,
+      phi:    Math.random() * 6.2832,
+      dTheta: (Math.random() - 0.5) * 3.2,
+      dPhi:   (Math.random() - 0.5) * 2.8,
+      r: col[0], g: col[1], b: col[2],
+      baseR:  1.0 + Math.random() * 1.8,
+      spec:   0,
+      sr: 255, sg: 255, sb: 255,
+      flareAngle: Math.random() * Math.PI
+    };
+  }
+
+  function particleTarget() {
+    var cssW = W / dpr, cssH = H / dpr;
+    return Math.max(200, Math.min(6000, Math.round(cssW * cssH * DENSITY_PER_PX * DENSITY)));
+  }
+
+  function initParticles() {
+    var n = particleTarget();
+    particles = [];
+    for (var i = 0; i < n; i++) {
+      var pp = mkParticle();
+      pp.baseVx = pp.vx;
+      pp.baseVy = pp.vy;
+      particles.push(pp);
+    }
+    particles.sort(function(a, b) { return a.z - b.z; });
+  }
+
+  // ── Lights — three rotating spots, orbit as 3D direction vectors ──
+  //   Each light is described purely as a unit direction in 3D space
+  //   that sweeps around. We only need the direction, not a position.
+  function initLights() {
+    lights = [
+      { theta: 0.70, phi: 0,             dPhi:  0.45 },
+      { theta: 0.85, phi: 2.09,          dPhi: -0.31 },
+      { theta: 0.60, phi: 4.19,          dPhi:  0.22 }
+    ];
+  }
+
+  // Compute normalised direction for each light
+  function getLightDirs(dt) {
+    var sr = prefersReduced ? SPARKLE_RATE * 0.05 : SPARKLE_RATE;
+    var dirs = [];
+    for (var i = 0; i < lights.length; i++) {
+      var L = lights[i];
+      L.phi += L.dPhi * sr * dt;
+      var st = Math.sin(L.theta);
+      dirs.push({
+        x: st * Math.cos(L.phi),
+        y: st * Math.sin(L.phi),
+        z: Math.cos(L.theta)
+      });
+    }
+    return dirs;
+  }
+
+  // ── Update ──
+  function update(dt, dirs) {
+    var TWO_PI = 6.2832;
+    for (var i = 0; i < particles.length; i++) {
+      var p = particles[i];
+
+      if (!prefersReduced) {
+        p.theta += p.dTheta * dt;
+        p.phi   += p.dPhi   * dt;
+        p.x     += p.vx * dt * 60;
+        p.y     += p.vy * dt * 60;
+        // wrap
+        if (p.x < -8)   p.x += W + 16;
+        if (p.x > W + 8) p.x -= W + 16;
+        if (p.y < -8)   p.y += H + 16;
+        if (p.y > H + 8) p.y -= H + 16;
+      }
+
+      // Surface normal of the tumbling disc
+      var st = Math.sin(p.theta);
+      var ct = Math.cos(p.theta);
+      var sp = Math.sin(p.phi);
+      var cp = Math.cos(p.phi);
+      var nx = st * cp;
+      var ny = st * sp;
+      var nz = ct;
+
+      // Mouse: gentle wind nudge — temporary, particles recover naturally
+      if (mouseActive) {
+        var mdx = mouseX * dpr - p.x;
+        var mdy = mouseY * dpr - p.y;
+        var mdist = Math.sqrt(mdx * mdx + mdy * mdy);
+        if (mdist > 1 && mdist < W * 0.3) {
+          var wind = (1 - mdist / (W * 0.3));
+          wind *= wind * 0.8;
+          // Nudge particles away from cursor
+          p.vx -= (mdx / mdist) * wind * 0.04;
+          p.vy -= (mdy / mdist) * wind * 0.04;
+        }
+      }
+
+      // Restore velocity toward original drift
+      p.vx += (p.baseVx - p.vx) * 0.03;
+      p.vy += (p.baseVy - p.vy) * 0.03;
+
+      // Specular: |dot(N, L)|  — mirrors on both sides of disc
+      var smax = 0;
+      var sr2 = p.r, sg2 = p.g, sb2 = p.b;
+      for (var li = 0; li < dirs.length; li++) {
+        var d = dirs[li];
+        var dot = Math.abs(nx * d.x + ny * d.y + nz * d.z);
+        if (dot > 0.92) {
+          var s = (dot - 0.92) / 0.08; // 0..1 in narrow alignment cone
+          s = s * s * s * s;            // very sharp peak
+          s = s * 4.0;                  // drive past 1.0 for vivid flare
+          if (s > smax) {
+            smax = s;
+            var t = Math.min(s, 1.0);
+            sr2 = p.r + (255 - p.r) * t * 0.4;
+            sg2 = p.g + (255 - p.g) * t * 0.4;
+            sb2 = p.b + (255 - p.b) * t * 0.4;
+          }
+        }
+      }
+      p.spec = smax;
+      p.sr   = sr2;
+      p.sg   = sg2;
+      p.sb   = sb2;
+    }
+  }
+
+  // ── Vignette ──
+  function getVignette() {
+    if (vigGrad) return vigGrad;
+    var cx = W * 0.5, cy = H * 0.5;
+    var r  = Math.max(W, H) * 0.75;
+    vigGrad = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
+    vigGrad.addColorStop(0,    'rgba(0,0,0,0)');
+    vigGrad.addColorStop(0.55, 'rgba(0,0,0,0)');
+    vigGrad.addColorStop(1.0,  'rgba(0,0,0,0.88)');
+    return vigGrad;
+  }
+
+  // ── Draw ──
+  function draw() {
+    var t = simTime;
+
+    // Persistence fade — keep a trail but not too opaque
+    ctx.globalAlpha = 1;
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.fillStyle = 'rgba(10,10,10,0.18)';
+    ctx.fillRect(0, 0, W, H);
+
+    // Subtle warm dark base so black isn't pure black
+    ctx.fillStyle = 'rgba(20,5,12,0.06)';
+    ctx.fillRect(0, 0, W, H);
+
+    // Faint wandering background bloom (pink/magenta)
+    var bx = W * (0.5 + Math.sin(t * 0.14) * 0.22);
+    var by = H * (0.5 + Math.cos(t * 0.11) * 0.20);
+    var bg = ctx.createRadialGradient(bx, by, 0, bx, by, Math.max(W, H) * 0.7);
+    bg.addColorStop(0,   'rgba(90,0,50,0.10)');
+    bg.addColorStop(0.45,'rgba(50,0,70,0.02)');
+    bg.addColorStop(1,   'rgba(0,0,0,0)');
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, W, H);
+
+    // ── Particles back-to-front ──
+    for (var i = 0; i < particles.length; i++) {
+      var p  = particles[i];
+      var r  = (p.baseR * (0.35 + p.z * 1.3)) * dpr;
+      var sp = p.spec;
+
+      if (sp > 0.015) {
+        var fr = Math.round(Math.min(p.sr, 255));
+        var fg = Math.round(Math.min(p.sg, 255));
+        var fb = Math.round(Math.min(p.sb, 255));
+        var fa = Math.min(0.92, 0.55 + p.z * 0.4 + sp * 0.25);
+
+        // Glow halo for reasonably bright sparkles
+        if (sp > 0.3) {
+          var glowR  = r * (1.5 + sp * 1.5);
+          var glowA  = Math.min(sp * 0.35, 0.5);
+          var gg = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, glowR);
+          gg.addColorStop(0,    'rgba(' + fr + ',' + fg + ',' + fb + ',' + glowA + ')');
+          gg.addColorStop(0.3,  'rgba(' + fr + ',' + fg + ',' + fb + ',' + (glowA * 0.25) + ')');
+          gg.addColorStop(0.7,  'rgba(' + p.r + ',' + p.g + ',' + p.b + ',' + (glowA * 0.08) + ')');
+          gg.addColorStop(1,    'rgba(' + p.r + ',' + p.g + ',' + p.b + ',0)');
+          ctx.fillStyle = gg;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, glowR, 0, 6.2832);
+          ctx.fill();
+
+          // Star-cross flare for the very brightest flashes
+          if (sp > 0.8) {
+            var starLen = glowR * 1.8;
+            var starA   = Math.min((sp - 0.8) * 1.5, 0.6);
+            var ca = Math.cos(p.flareAngle), sa = Math.sin(p.flareAngle);
+            ctx.strokeStyle = 'rgba(' + fr + ',' + fg + ',' + fb + ',' + starA + ')';
+            ctx.lineWidth = Math.max(0.5, r * 0.4);
+            ctx.beginPath();
+            ctx.moveTo(p.x - starLen * ca, p.y - starLen * sa);
+            ctx.lineTo(p.x + starLen * ca, p.y + starLen * sa);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(p.x + starLen * sa, p.y - starLen * ca);
+            ctx.lineTo(p.x - starLen * sa, p.y + starLen * ca);
+            ctx.stroke();
+          }
+        }
+
+        // Disc body — use setTransform for scale+rotate (faster than save/restore)
+        var sx = Math.max(0.12, Math.abs(Math.cos(p.phi)));
+        var sy = Math.max(0.12, Math.abs(Math.cos(p.theta)));
+        var cosPhi = Math.cos(p.phi), sinPhi = Math.sin(p.phi);
+        ctx.setTransform(cosPhi * sx, sinPhi * sx, -sinPhi * sy, cosPhi * sy, p.x, p.y);
+        ctx.fillStyle = 'rgba(' + fr + ',' + fg + ',' + fb + ',' + fa + ')';
+        ctx.beginPath();
+        ctx.arc(0, 0, r, 0, 6.2832);
+        ctx.fill();
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+
+      } else {
+        // Dim ambient flake — small, transparent, no glow
+        var da = (0.55 + p.z * 0.4) * 0.55;
+        if (da < 0.05) continue;
+        var sx = Math.max(0.12, Math.abs(Math.cos(p.phi)));
+        var sy = Math.max(0.12, Math.abs(Math.cos(p.theta)));
+        var cosPhi = Math.cos(p.phi), sinPhi = Math.sin(p.phi);
+        ctx.setTransform(cosPhi * sx, sinPhi * sx, -sinPhi * sy, cosPhi * sy, p.x, p.y);
+        ctx.fillStyle = 'rgba(' + p.r + ',' + p.g + ',' + p.b + ',' + da + ')';
+        ctx.beginPath();
+        ctx.arc(0, 0, r, 0, 6.2832);
+        ctx.fill();
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+      }
+    }
+
+    // Vignette
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.fillStyle = getVignette();
+    ctx.fillRect(0, 0, W, H);
+  }
+
+  // ── Loop ──
+  function frame(now) {
+    if (paused) return;
+    if (!lastTime) lastTime = now;
+    var rawDt = Math.min((now - lastTime) / 1000, 0.05);
+    lastTime = now;
+
+    var dt = prefersReduced ? rawDt * 0.05 : rawDt;
+    simTime += dt;
+
+    var dirs = getLightDirs(dt);
+    update(dt, dirs);
+
+    // Periodic depth re-sort (amortised cost)
+    sortTimer += dt;
+    if (sortTimer > 1.5) {
+      sortTimer = 0;
+      particles.sort(function(a, b) { return a.z - b.z; });
+    }
+
+    draw();
+
+    requestAnimationFrame(frame);
+  }
+
+  // ── Boot ──
+  function init() {
+    resize();
+    initParticles();
+    initLights();
+    requestAnimationFrame(frame);
+  }
+
+  canvas.addEventListener('mousedown', function(e) { mouseDown = true; mouseActive = true; mouseX = e.clientX; mouseY = e.clientY; });
+  canvas.addEventListener('mousemove', function(e) { if (mouseDown) { mouseX = e.clientX; mouseY = e.clientY; } });
+  canvas.addEventListener('mouseup', function() { mouseDown = false; mouseActive = false; });
+  canvas.addEventListener('mouseleave', function() { mouseDown = false; mouseActive = false; });
+  canvas.addEventListener('touchstart', function(e) { e.preventDefault(); mouseDown = true; mouseActive = true; mouseX = e.touches[0].clientX; mouseY = e.touches[0].clientY; }, { passive: false });
+  canvas.addEventListener('touchmove', function(e) { e.preventDefault(); mouseX = e.touches[0].clientX; mouseY = e.touches[0].clientY; }, { passive: false });
+  canvas.addEventListener('touchend', function() { mouseDown = false; mouseActive = false; });
+
+  window.addEventListener('resize', function() {
+    resize();
+    initLights();
+    // Reinit if particle target count changed meaningfully, otherwise just reposition
+    var newTarget = particleTarget();
+    if (Math.abs(newTarget - particles.length) / Math.max(particles.length, 1) > 0.15) {
+      initParticles();
+    } else {
+      for (var i = 0; i < particles.length; i++) {
+        particles[i].x = Math.random() * W;
+        particles[i].y = Math.random() * H;
+      }
+    }
+  });
+
+  document.addEventListener('visibilitychange', function() {
+    if (document.hidden) {
+      paused = true;
+    } else {
+      paused = false;
+      lastTime = 0;
+      requestAnimationFrame(frame);
+    }
+  });
+
+  window.addEventListener('message', function(e) {
+    if (!e.data || e.data.type !== 'param') return;
+    switch (e.data.name) {
+      case 'SPARKLE_RATE':
+        SPARKLE_RATE = Math.max(0.3, Math.min(2.0, +e.data.value));
+        break;
+      case 'DENSITY':
+        DENSITY = Math.max(0.3, Math.min(4.0, +e.data.value));
+        initParticles();
+        break;
+    }
+  });
+
+  init();
+})();
+</script>
+</body>
+</html>

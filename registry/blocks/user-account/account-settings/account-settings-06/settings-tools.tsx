@@ -110,7 +110,7 @@ export function SettingsTools() {
               description={
                 server.status === "connected"
                   ? server.summary
-                  : "Connection error — show output"
+                  : "Connection error, show output"
               }
             >
               <div className="flex items-center gap-2">

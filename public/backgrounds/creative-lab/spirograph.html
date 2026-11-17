@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>#053 Spirograph — creative-lab</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:#07070f;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#d4dce8}
+canvas{display:block;width:100vw;height:100vh;position:fixed;top:0;left:0}
+#ui{position:fixed;top:16px;left:16px;z-index:10;background:rgba(7,7,18,0.90);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(120,200,255,0.14);border-radius:13px;padding:14px 16px;min-width:258px;font-size:0.82rem}
+h1{font-size:0.68rem;letter-spacing:0.15em;text-transform:uppercase;color:#3890c0;margin-bottom:10px}
+.section{font-size:0.62rem;letter-spacing:0.11em;text-transform:uppercase;color:#2060a0;margin:10px 0 5px;border-top:1px solid rgba(80,180,255,0.08);padding-top:8px}
+.row{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.row label{width:82px;color:#7090b8;flex-shrink:0;font-size:0.76rem}
+.row input[type=range]{flex:1;accent-color:#40b4ff;cursor:pointer}
+.val{width:40px;text-align:right;color:#40b4ff;font-size:0.73rem;font-variant-numeric:tabular-nums}
+.btn-row{display:flex;gap:5px;margin-top:8px}
+button{flex:1;background:rgba(64,180,255,0.07);border:1px solid rgba(64,180,255,0.18);color:#40b4ff;border-radius:7px;padding:5px 4px;font-size:0.73rem;cursor:pointer;transition:background .15s,border-color .15s}
+button:hover{background:rgba(64,180,255,0.16)}
+button.active{background:rgba(64,180,255,0.22);border-color:rgba(64,180,255,0.45);color:#80d4ff}
+.type-row{display:flex;gap:5px;margin-bottom:8px}
+.type-row button{font-size:0.72rem;padding:5px 4px}
+.eq{margin-top:6px;font-size:0.66rem;color:#2a5070;line-height:1.6;font-family:monospace;border-top:1px solid rgba(80,180,255,0.06);padding-top:8px}
+#info{position:fixed;top:16px;right:16px;z-index:10;background:rgba(7,7,18,0.84);backdrop-filter:blur(12px);border:1px solid rgba(80,180,255,0.09);border-radius:11px;padding:11px 16px;font-size:0.73rem;color:#406080;text-align:right;line-height:2}
+#info span{color:#4090c0;font-variant-numeric:tabular-nums}
+#hint{position:fixed;bottom:36px;left:50%;transform:translateX(-50%);color:rgba(64,180,255,0.18);font-size:0.70rem;pointer-events:none;white-space:nowrap;transition:opacity 1s}
+input[type=checkbox]{accent-color:#40b4ff;cursor:pointer;width:13px;height:13px}
+
+    html.embed #ui,
+    html.embed #info,
+    html.embed #controls,
+    html.embed #stats,
+    html.embed #hint,
+    html.embed .panel,
+    html.embed header,
+    html.embed footer { display: none !important; }
+  </style>
+  <script>if(/\bembed=1\b/.test(location.search))document.documentElement.classList.add("embed")</script>
+</head>
+<body>
+<canvas id="c"></canvas>
+
+<div id="ui">
+  <h1>053 · Spirograph</h1>
+
+  <div class="type-row">
+    <button class="active" id="btn-hypo">Hypotrochoid</button>
+    <button id="btn-epi">Epitrochoid</button>
+  </div>
+
+  <div class="section">Parameters</div>
+  <div class="row">
+    <label>R (outer)</label>
+    <input type="range" id="sR" min="40" max="200" value="120" step="1">
+    <span class="val" id="vR">120</span>
+  </div>
+  <div class="row">
+    <label>r (inner)</label>
+    <input type="range" id="sr" min="5" max="120" value="47" step="1">
+    <span class="val" id="vr">47</span>
+  </div>
+  <div class="row">
+    <label>d (pen)</label>
+    <input type="range" id="sd" min="1" max="200" value="80" step="1">
+    <span class="val" id="vd">80</span>
+  </div>
+
+  <div class="section">Drawing</div>
+  <div class="row">
+    <label>Speed</label>
+    <input type="range" id="sSpeed" min="1" max="60" value="12" step="1">
+    <span class="val" id="vSpeed">12</span>
+  </div>
+  <div class="row">
+    <label>Trail fade</label>
+    <input type="range" id="sFade" min="0" max="20" value="0" step="1">
+    <span class="val" id="vFade">0</span>
+  </div>
+  <div class="row">
+    <label>Line width</label>
+    <input type="range" id="sLine" min="1" max="6" value="2" step="0.5">
+    <span class="val" id="vLine">2</span>
+  </div>
+
+  <div class="section">Visual</div>
+  <div class="row">
+    <label>Color mode</label>
+    <select id="sColor" style="flex:1;background:rgba(64,180,255,0.07);border:1px solid rgba(64,180,255,0.18);color:#40b4ff;border-radius:6px;padding:3px 6px;font-size:0.73rem;cursor:pointer">
+      <option value="rainbow">Rainbow</option>
+      <option value="hue-shift">Hue shift</option>
+      <option value="cyan">Cyan</option>
+      <option value="gold">Gold</option>
+      <option value="white">White</option>
+    </select>
+  </div>
+  <div class="row">
+    <label>Show gears</label>
+    <input type="checkbox" id="chkGears" checked>
+  </div>
+  <div class="row">
+    <label>Show trace</label>
+    <input type="checkbox" id="chkTrace" checked>
+  </div>
+
+  <div class="btn-row">
+    <button id="btnPlay">⏸ Pause</button>
+    <button id="btnReset">↺ Reset</button>
+    <button id="btnPreset">★ Preset</button>
+  </div>
+
+  <div class="eq" id="eq-text"></div>
+</div>
+
+<div id="info">
+  Loops: <span id="stLoops">—</span><br>
+  Angle: <span id="stAngle">—</span>°<br>
+  Points: <span id="stPts">—</span>
+</div>
+
+<div id="hint">Drag to rotate · Scroll to zoom</div>
+
+
+
+<script>
+// ─── Canvas setup ─────────────────────────────────────────────────────────────
+const cvs = document.getElementById('c');
+const ctx = cvs.getContext('2d');
+let W, H, cx, cy, scale = 1, offsetX = 0, offsetY = 0;
+
+function resize() {
+  W = cvs.width  = cvs.offsetWidth  * devicePixelRatio;
+  H = cvs.height = cvs.offsetHeight * devicePixelRatio;
+  cx = W / 2; cy = H / 2;
+  baseScale = Math.min(W, H) / 520;
+  if (!userScale) scale = baseScale;
+  redraw = true;
+}
+
+let baseScale = 1;
+let userScale = false;
+
+window.addEventListener('resize', resize);
+
+// ─── State ────────────────────────────────────────────────────────────────────
+let mode = 'hypo';  // 'hypo' or 'epi'
+let R = 120, r = 47, d = 80;
+let speed = 12;
+let fade = 0;
+let lineW = 2;
+let colorMode = 'rainbow';
+let showGears = true;
+let showTrace = true;
+let playing = true;
+let t = 0;
+let redraw = false;
+
+// Computed curve points (full loop)
+let curvePoints = [];
+let drawnUpTo = 0;  // index into curvePoints
+let loopCount = 0;
+let colorOffset = 0;
+
+// Orbit path layer (persistent canvas)
+const offC = document.createElement('canvas');
+const offCtx = offC.getContext('2d');
+
+// ─── LCM / period ─────────────────────────────────────────────────────────────
+function gcd(a, b) { a = Math.abs(a); b = Math.abs(b); while(b){ let t=b; b=a%b; a=t; } return a; }
+function lcm(a, b) { return a / gcd(a,b) * b; }
+
+function computePeriod(R, r) {
+  // period = 2π * r / gcd(R,r) — t goes from 0 to period for one full loop
+  const g = gcd(Math.round(R), Math.round(r));
+  const periods = Math.round(R) / g;
+  return 2 * Math.PI * periods;
+}
+
+// ─── Curve math ───────────────────────────────────────────────────────────────
+function hypoX(t, R, r, d) { return (R - r) * Math.cos(t) + d * Math.cos((R - r) / r * t); }
+function hypoY(t, R, r, d) { return (R - r) * Math.sin(t) - d * Math.sin((R - r) / r * t); }
+function epiX(t, R, r, d)  { return (R + r) * Math.cos(t) - d * Math.cos((R + r) / r * t); }
+function epiY(t, R, r, d)  { return (R + r) * Math.sin(t) - d * Math.sin((R + r) / r * t); }
+
+function getPoint(t) {
+  if (mode === 'hypo') return [hypoX(t,R,r,d), hypoY(t,R,r,d)];
+  else                 return [epiX(t,R,r,d),  epiY(t,R,r,d)];
+}
+
+function buildCurve() {
+  const period = computePeriod(R, r);
+  const steps = Math.max(1200, Math.round(period / (Math.PI * 2) * 600));
+  curvePoints = [];
+  for (let i = 0; i <= steps; i++) {
+    const tt = (i / steps) * period;
+    const [px, py] = getPoint(tt);
+    curvePoints.push([px, py]);
+  }
+  return period;
+}
+
+// ─── Color ────────────────────────────────────────────────────────────────────
+function getColor(progress, idx) {
+  const a = 0.85;
+  switch(colorMode) {
+    case 'rainbow':    return `hsla(${(progress * 360 + colorOffset) % 360},90%,65%,${a})`;
+    case 'hue-shift':  return `hsla(${(idx * 1.2 + colorOffset) % 360},80%,60%,${a})`;
+    case 'cyan':       return `hsla(195,90%,${55 + progress*20}%,${a})`;
+    case 'gold':       return `hsla(${40 + progress*20},95%,${50+progress*15}%,${a})`;
+    case 'white':      return `rgba(240,245,255,${a})`;
+    default:           return `hsla(200,80%,60%,${a})`;
+  }
+}
+
+// ─── Off-screen draw ──────────────────────────────────────────────────────────
+function resizeOff() {
+  offC.width  = W;
+  offC.height = H;
+}
+
+function resetDraw() {
+  t = 0;
+  drawnUpTo = 0;
+  loopCount = 0;
+  colorOffset = 0;
+  buildCurve();
+  resizeOff();
+  offCtx.clearRect(0, 0, W, H);
+  redraw = true;
+}
+
+// ─── UI wiring ────────────────────────────────────────────────────────────────
+function wire(id, valId, cb) {
+  const el = document.getElementById(id);
+  const vl = document.getElementById(valId);
+  el.addEventListener('input', () => { vl.textContent = el.value; cb(+el.value); });
+}
+
+wire('sR', 'vR', v => { R = v; resetDraw(); updateEq(); });
+wire('sr', 'vr', v => { r = v; resetDraw(); updateEq(); });
+wire('sd', 'vd', v => { d = v; resetDraw(); });
+wire('sSpeed', 'vSpeed', v => { speed = v; });
+wire('sFade',  'vFade',  v => { fade = v; });
+wire('sLine',  'vLine',  v => { lineW = v; });
+
+document.getElementById('sColor').addEventListener('change', e => { colorMode = e.target.value; resetDraw(); });
+document.getElementById('chkGears').addEventListener('change', e => { showGears = e.target.checked; });
+document.getElementById('chkTrace').addEventListener('change', e => { showTrace = e.target.checked; });
+
+document.getElementById('btn-hypo').addEventListener('click', () => {
+  mode='hypo'; setActive('btn-hypo','btn-epi'); resetDraw(); updateEq();
+});
+document.getElementById('btn-epi').addEventListener('click', () => {
+  mode='epi'; setActive('btn-epi','btn-hypo'); resetDraw(); updateEq();
+});
+function setActive(a, b) {
+  document.getElementById(a).classList.add('active');
+  document.getElementById(b).classList.remove('active');
+}
+
+const playBtn = document.getElementById('btnPlay');
+playBtn.addEventListener('click', () => {
+  playing = !playing;
+  playBtn.textContent = playing ? '⏸ Pause' : '▶ Play';
+});
+
+document.getElementById('btnReset').addEventListener('click', resetDraw);
+
+// Presets
+const presets = [
+  {R:120,r:47,d:80,mode:'hypo'},
+  {R:150,r:50,d:120,mode:'hypo'},
+  {R:100,r:36,d:100,mode:'hypo'},
+  {R:120,r:80,d:40,mode:'epi'},
+  {R:100,r:33,d:66,mode:'hypo'},
+  {R:90, r:60,d:90, mode:'epi'},
+  {R:130,r:26,d:78,mode:'hypo'},
+  {R:110,r:55,d:45,mode:'epi'},
+  {R:100,r:25,d:100,mode:'hypo'},
+  {R:150,r:75,d:60,mode:'epi'},
+];
+let presetIdx = 0;
+document.getElementById('btnPreset').addEventListener('click', () => {
+  const p = presets[presetIdx++ % presets.length];
+  R=p.R; r=p.r; d=p.d; mode=p.mode;
+  document.getElementById('sR').value = R; document.getElementById('vR').textContent = R;
+  document.getElementById('sr').value = r; document.getElementById('vr').textContent = r;
+  document.getElementById('sd').value = d; document.getElementById('vd').textContent = d;
+  setActive(mode==='hypo'?'btn-hypo':'btn-epi', mode==='hypo'?'btn-epi':'btn-hypo');
+  resetDraw(); updateEq();
+});
+
+function updateEq() {
+  const el = document.getElementById('eq-text');
+  if (mode === 'hypo') {
+    el.innerHTML =
+      `x = (R−r)cos t + d·cos((R−r)t/r)<br>` +
+      `y = (R−r)sin t − d·sin((R−r)t/r)<br>` +
+      `R=${R}, r=${r}, d=${d}`;
+  } else {
+    el.innerHTML =
+      `x = (R+r)cos t − d·cos((R+r)t/r)<br>` +
+      `y = (R+r)sin t − d·sin((R+r)t/r)<br>` +
+      `R=${R}, r=${r}, d=${d}`;
+  }
+}
+
+// ─── Pan / Zoom ───────────────────────────────────────────────────────────────
+let drag = false, dragX = 0, dragY = 0;
+cvs.addEventListener('mousedown', e => { drag=true; dragX=e.clientX; dragY=e.clientY; });
+cvs.addEventListener('mousemove', e => {
+  if (!drag) return;
+  offsetX += (e.clientX - dragX) * devicePixelRatio;
+  offsetY += (e.clientY - dragY) * devicePixelRatio;
+  dragX = e.clientX; dragY = e.clientY;
+});
+cvs.addEventListener('mouseup', () => drag=false);
+cvs.addEventListener('mouseleave', () => drag=false);
+cvs.addEventListener('wheel', e => {
+  e.preventDefault();
+  const factor = e.deltaY < 0 ? 1.1 : 0.91;
+  scale *= factor; userScale = true;
+}, {passive:false});
+
+// Touch
+let lastTouchDist = 0;
+cvs.addEventListener('touchstart', e => {
+  if (e.touches.length === 1) { drag=true; dragX=e.touches[0].clientX; dragY=e.touches[0].clientY; }
+  if (e.touches.length === 2) {
+    drag=false;
+    const dx=e.touches[0].clientX-e.touches[1].clientX;
+    const dy=e.touches[0].clientY-e.touches[1].clientY;
+    lastTouchDist = Math.hypot(dx,dy);
+  }
+}, {passive:true});
+cvs.addEventListener('touchmove', e => {
+  if (e.touches.length === 1 && drag) {
+    offsetX += (e.touches[0].clientX - dragX)*devicePixelRatio;
+    offsetY += (e.touches[0].clientY - dragY)*devicePixelRatio;
+    dragX=e.touches[0].clientX; dragY=e.touches[0].clientY;
+  }
+  if (e.touches.length === 2) {
+    const dx=e.touches[0].clientX-e.touches[1].clientX;
+    const dy=e.touches[0].clientY-e.touches[1].clientY;
+    const dist=Math.hypot(dx,dy);
+    scale *= dist/lastTouchDist; userScale=true; lastTouchDist=dist;
+  }
+}, {passive:true});
+cvs.addEventListener('touchend', () => { drag=false; });
+
+// ─── Draw gears ───────────────────────────────────────────────────────────────
+function drawGears(t) {
+  const s = scale;
+  ctx.save();
+  ctx.translate(cx + offsetX, cy + offsetY);
+  ctx.scale(s, s);
+
+  const Ra = R, ra = r;
+  const Rc = mode === 'hypo' ? Ra - ra : Ra + ra;
+  // angle of rolling circle center
+  const phi = t;
+  // center of rolling circle
+  const ox = Rc * Math.cos(phi);
+  const oy = Rc * Math.sin(phi);
+
+  // outer fixed circle
+  ctx.beginPath();
+  ctx.arc(0, 0, Ra, 0, Math.PI * 2);
+  ctx.strokeStyle = 'rgba(64,150,220,0.18)';
+  ctx.lineWidth = 1 / s;
+  ctx.stroke();
+
+  if (mode === 'epi') {
+    // also draw outer boundary
+    ctx.beginPath();
+    ctx.arc(0, 0, Ra + 2*ra, 0, Math.PI*2);
+    ctx.strokeStyle = 'rgba(64,150,220,0.06)';
+    ctx.stroke();
+  }
+
+  // rolling circle
+  ctx.beginPath();
+  ctx.arc(ox, oy, ra, 0, Math.PI * 2);
+  ctx.strokeStyle = 'rgba(80,200,255,0.28)';
+  ctx.lineWidth = 1 / s;
+  ctx.stroke();
+
+  // center dot
+  ctx.beginPath();
+  ctx.arc(ox, oy, 2/s, 0, Math.PI*2);
+  ctx.fillStyle = 'rgba(80,200,255,0.5)';
+  ctx.fill();
+
+  // pen arm
+  const rollAngle = mode === 'hypo'
+    ? -(Ra - ra) / ra * t
+    :  (Ra + ra) / ra * t;
+  const px = ox + d * Math.cos(rollAngle);
+  const py = oy + d * Math.sin(rollAngle);
+
+  ctx.beginPath();
+  ctx.moveTo(ox, oy);
+  ctx.lineTo(px, py);
+  ctx.strokeStyle = 'rgba(80,200,255,0.35)';
+  ctx.lineWidth = 1.2 / s;
+  ctx.stroke();
+
+  // pen dot
+  ctx.beginPath();
+  ctx.arc(px, py, 3.5/s, 0, Math.PI*2);
+  ctx.fillStyle = 'rgba(100,220,255,0.90)';
+  ctx.fill();
+
+  ctx.restore();
+}
+
+// ─── Main frame ───────────────────────────────────────────────────────────────
+let period = computePeriod(R, r);
+let frame0 = 0;
+let totalPts = 0;
+
+function drawOrbitSegment(from, to) {
+  if (from >= curvePoints.length - 1) return;
+  to = Math.min(to, curvePoints.length - 1);
+
+  const s = scale;
+  offCtx.save();
+  offCtx.translate(cx + offsetX, cy + offsetY);
+  offCtx.scale(s, s);
+  offCtx.lineWidth = lineW / s;
+  offCtx.lineJoin = 'round';
+  offCtx.lineCap  = 'round';
+
+  for (let i = from; i < to; i++) {
+    const progress = i / (curvePoints.length - 1);
+    offCtx.beginPath();
+    offCtx.strokeStyle = getColor(progress, i);
+    offCtx.moveTo(curvePoints[i][0],   curvePoints[i][1]);
+    offCtx.lineTo(curvePoints[i+1][0], curvePoints[i+1][1]);
+    offCtx.stroke();
+    totalPts++;
+  }
+
+  offCtx.restore();
+}
+
+function frame(ts) {
+  requestAnimationFrame(frame);
+
+  if (!frame0) { frame0 = ts; resize(); resetDraw(); updateEq(); }
+
+  const dt = Math.min(ts - frame0, 50);
+  frame0 = ts;
+
+  if (playing) {
+    // Advance t
+    const stepsPerFrame = Math.round(speed * dt / 16);
+    const targetIdx = Math.min(drawnUpTo + stepsPerFrame, curvePoints.length - 1);
+
+    if (drawnUpTo < curvePoints.length - 1) {
+      if (fade > 0) {
+        // fade mode — draw to offscreen with fade
+        offCtx.fillStyle = `rgba(7,7,15,${fade / 100})`;
+        offCtx.fillRect(0, 0, W, H);
+      }
+      drawOrbitSegment(drawnUpTo, targetIdx);
+      drawnUpTo = targetIdx;
+      t = (drawnUpTo / (curvePoints.length - 1)) * period;
+    } else {
+      // loop complete
+      loopCount++;
+      colorOffset = (colorOffset + 30) % 360;
+      drawnUpTo = 0;
+      t = 0;
+      // fade or clear
+      if (fade === 0) {
+        offCtx.clearRect(0, 0, W, H);
+        resizeOff(); // reapply transform
+      }
+    }
+  }
+
+  // composite
+  ctx.clearRect(0, 0, W, H);
+
+  // subtle bg gradient
+  const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, Math.max(W,H)*0.6);
+  grad.addColorStop(0, 'rgba(10,12,24,1)');
+  grad.addColorStop(1, 'rgba(4,5,10,1)');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, W, H);
+
+  // orbit
+  if (showTrace) ctx.drawImage(offC, 0, 0);
+
+  // gears overlay
+  if (showGears) drawGears(t);
+
+  // stats every 6th frame
+  if (Math.round(ts/16) % 6 === 0) {
+    document.getElementById('stLoops').textContent = loopCount;
+    document.getElementById('stAngle').textContent = (t * 180 / Math.PI).toFixed(1);
+    document.getElementById('stPts').textContent = (drawnUpTo / 1000).toFixed(1) + 'k';
+  }
+}
+
+// ─── Init ─────────────────────────────────────────────────────────────────────
+resize();
+updateEq();
+requestAnimationFrame(frame);
+
+// Fade hint
+setTimeout(() => {
+  const h = document.getElementById('hint');
+  h.style.opacity = '0';
+}, 3000);
+</script>
+</body>
+</html>

@@ -10,7 +10,7 @@ export type AiNavGroup = {
   pages: AiNavPage[]
 }
 
-/** Sidebar + index for `/ai`. Docs-only catalog — install targets stay in packages/ui. */
+/** Sidebar + index for `/ai`. Docs-only catalog, install targets stay in packages/ui. */
 export const aiNav: {
   top: AiNavPage[]
   groups: AiNavGroup[]

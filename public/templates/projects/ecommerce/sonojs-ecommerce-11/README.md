@@ -1,7 +1,7 @@
 # Maison Verrel
 
 Package: Maison Verrel (`1.0.0`) - HTML · CSS · JavaScript  
-Category: `ecommerce` (templates surface — not `/websites`)  
+Category: `ecommerce` (templates surface, not `/websites`)  
 Slug / folder: `sonojs-ecommerce-11`  
 Path: `public/templates/projects/ecommerce/sonojs-ecommerce-11/`  
 Source: `E:\dl\prompt5\165`

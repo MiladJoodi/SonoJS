@@ -206,7 +206,7 @@ export function AdminStripePanel() {
                         )}
                         title={r.lastError ?? undefined}
                       >
-                        {r.lastError || "—"}
+                        {r.lastError || ", "}
                       </td>
                     </tr>
                   ))}

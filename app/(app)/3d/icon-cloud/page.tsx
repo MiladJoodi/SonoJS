@@ -20,7 +20,7 @@ const exampleDefs = [
     name: "icon-cloud-default",
     title: "Default",
     description:
-      "Local tech icons on a Fibonacci sphere — drag to spin, click an icon to focus, or pause with the control.",
+      "Local tech icons on a Fibonacci sphere, drag to spin, click an icon to focus, or pause with the control.",
     requires: ["button"],
     npmRequires: ["lucide-react"],
   },
@@ -61,7 +61,7 @@ export default async function IconCloudDocsPage() {
               <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
                 defaultIconCloudImages
               </code>
-              — no CDN at runtime. Pass{" "}
+             . No CDN at runtime. Pass{" "}
               <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
                 icons
               </code>{" "}

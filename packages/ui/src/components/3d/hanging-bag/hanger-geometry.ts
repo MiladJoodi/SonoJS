@@ -2,7 +2,7 @@ import * as THREE from "three"
 
 let cached: THREE.TubeGeometry | null = null
 
-/** One shared chrome hanger geometry — classic dry-cleaner silhouette */
+/** One shared chrome hanger geometry, classic dry-cleaner silhouette */
 export function getHangerGeometry() {
   if (cached && (cached.parameters as { radius?: number }).radius === 0.014) {
     return cached

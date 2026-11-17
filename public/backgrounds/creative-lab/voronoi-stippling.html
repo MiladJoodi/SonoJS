@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>#065 Voronoi Stippling — creative-lab</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:#f4ede0;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#1a0e00}
+canvas{display:block;position:fixed;top:0;left:0;width:100vw;height:100vh}
+#ui{position:fixed;top:16px;left:16px;z-index:10;background:rgba(244,237,224,0.93);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(0,0,0,0.1);border-radius:12px;padding:14px 16px;min-width:236px;font-size:0.82rem}
+h1{font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:#9a7050;margin-bottom:6px}
+.info{color:#9a8878;font-size:0.72rem;margin-bottom:8px;line-height:1.45}
+.statrow{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px;color:#9a8878;font-size:0.76rem}
+.statrow span{font-variant-numeric:tabular-nums;font-size:0.79rem;color:#4a2c10}
+.sep{height:1px;background:rgba(0,0,0,0.07);margin:8px 0}
+.row{display:flex;align-items:center;gap:7px;margin-bottom:5px}
+.row label{width:114px;color:#6a4828;flex-shrink:0;font-size:0.77rem}
+.row input[type=range]{flex:1;accent-color:#8a3010;cursor:pointer;height:3px}
+.val{width:40px;text-align:right;color:#8a3010;font-size:0.73rem;font-variant-numeric:tabular-nums}
+.btn-row{display:flex;gap:4px;margin-top:7px;flex-wrap:wrap}
+button{flex:1;min-width:46px;background:rgba(138,48,16,0.06);border:1px solid rgba(138,48,16,0.18);color:#8a3010;border-radius:6px;padding:5px 3px;font-size:0.71rem;cursor:pointer;transition:background .14s,border-color .14s}
+button:hover{background:rgba(138,48,16,0.15);border-color:rgba(138,48,16,0.38)}
+button.active{background:rgba(138,48,16,0.22);border-color:rgba(138,48,16,0.5);color:#4a1800}
+#file-btn{width:100%;margin-top:5px;padding:6px;font-size:0.73rem}
+#hint{position:fixed;bottom:14px;left:16px;color:rgba(0,0,0,0.22);font-size:0.67rem;pointer-events:none;line-height:1.9}
+
+    html.embed #ui,
+    html.embed #info,
+    html.embed #controls,
+    html.embed #stats,
+    html.embed #hint,
+    html.embed .panel,
+    html.embed header,
+    html.embed footer { display: none !important; }
+  </style>
+  <script>if(/\bembed=1\b/.test(location.search))document.documentElement.classList.add("embed")</script>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="ui">
+  <h1>065 · Voronoi Stippling</h1>
+  <div class="info">Lloyd's relaxation · image→dot art</div>
+  <div class="statrow">Points <span id="v-pts">—</span></div>
+  <div class="statrow">Iteration <span id="v-iter">—</span></div>
+  <div class="statrow">FPS <span id="v-fps">—</span></div>
+  <div class="sep"></div>
+  <div class="row"><label>Point count</label>
+    <input type="range" id="s-n" min="100" max="3000" value="1200" step="50">
+    <span class="val" id="v-n">1200</span></div>
+  <div class="row"><label>Dot size</label>
+    <input type="range" id="s-sz" min="0.4" max="5" value="1.8" step="0.1">
+    <span class="val" id="v-sz">1.8</span></div>
+  <div class="row"><label>Relax speed</label>
+    <input type="range" id="s-spd" min="1" max="8" value="2" step="1">
+    <span class="val" id="v-spd">2</span></div>
+  <div class="sep"></div>
+  <div class="btn-row">
+    <button id="btn-p0" class="active">Portrait</button>
+    <button id="btn-p1">Flower</button>
+    <button id="btn-p2">Galaxy</button>
+    <button id="btn-p3">Wave</button>
+  </div>
+  <div class="btn-row">
+    <button id="btn-varysize">Vary size</button>
+    <button id="btn-showimg">Show img</button>
+    <button id="btn-invert">Invert</button>
+  </div>
+  <div class="btn-row">
+    <button id="btn-reset">Reset</button>
+    <button id="btn-pause">Pause</button>
+  </div>
+  <button id="file-btn">📁 Load Image</button>
+  <input type="file" id="file-in" accept="image/*" style="display:none">
+</div>
+<div id="hint">Click: add points · Right-click: remove nearby · Scroll: zoom dots</div>
+
+
+<script>
+// ─── Canvas ──────────────────────────────────────────────────────────────────
+const canvas = document.getElementById('c');
+const ctx    = canvas.getContext('2d');
+let W, H;
+function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+resize();
+window.addEventListener('resize', () => { resize(); needReset = true; });
+
+// ─── Parameters ──────────────────────────────────────────────────────────────
+let N          = 1200;
+let dotSize    = 1.8;
+let relaxSpeed = 2;
+let varySize   = false;
+let showImg    = false;
+let invertMode = false;
+let paused     = false;
+let needReset  = false;
+
+// ─── Density image (256×256 greyscale) ───────────────────────────────────────
+const DRES = 256;
+const offC = document.createElement('canvas');
+offC.width = offC.height = DRES;
+const offX = offC.getContext('2d');
+let density = new Float32Array(DRES * DRES); // 0=white, 1=black
+
+function extractDensity() {
+  const id = offX.getImageData(0, 0, DRES, DRES).data;
+  for (let i = 0; i < DRES * DRES; i++) {
+    const r = id[i*4], g = id[i*4+1], b = id[i*4+2];
+    density[i] = 1 - (0.299*r + 0.587*g + 0.114*b) / 255;
+  }
+}
+
+// ─── Preset generators ───────────────────────────────────────────────────────
+function genPortrait() {
+  offX.fillStyle = '#fff'; offX.fillRect(0,0,DRES,DRES);
+  const cx = DRES/2, cy = DRES*0.43;
+  // Head gradient
+  const hg = offX.createRadialGradient(cx, cy, 0, cx, cy, DRES*0.41);
+  hg.addColorStop(0,'#111'); hg.addColorStop(0.45,'#333');
+  hg.addColorStop(0.72,'#888'); hg.addColorStop(1,'#fff');
+  offX.beginPath(); offX.ellipse(cx, cy, DRES*0.27, DRES*0.37, 0, 0, Math.PI*2);
+  offX.fillStyle = hg; offX.fill();
+  // Eyes
+  [[cx-DRES*0.09, cy-DRES*0.06],[cx+DRES*0.09, cy-DRES*0.06]].forEach(([ex,ey]) => {
+    offX.fillStyle='#111'; offX.beginPath(); offX.ellipse(ex,ey,DRES*0.055,DRES*0.028,0,0,Math.PI*2); offX.fill();
+    offX.fillStyle='#fff'; offX.beginPath(); offX.ellipse(ex-DRES*0.01,ey-DRES*0.008,DRES*0.018,DRES*0.013,0,0,Math.PI*2); offX.fill();
+  });
+  // Eyebrows
+  offX.strokeStyle='#111'; offX.lineWidth=2.5; offX.lineCap='round';
+  [[-1,1]].forEach(()=>{
+    offX.beginPath(); offX.moveTo(cx-DRES*0.14,cy-DRES*0.12); offX.quadraticCurveTo(cx-DRES*0.09,cy-DRES*0.135,cx-DRES*0.04,cy-DRES*0.12); offX.stroke();
+    offX.beginPath(); offX.moveTo(cx+DRES*0.04,cy-DRES*0.12); offX.quadraticCurveTo(cx+DRES*0.09,cy-DRES*0.135,cx+DRES*0.14,cy-DRES*0.12); offX.stroke();
+  });
+  // Nose
+  offX.strokeStyle='#555'; offX.lineWidth=1.8;
+  offX.beginPath(); offX.moveTo(cx,cy-DRES*0.005); offX.lineTo(cx-DRES*0.04,cy+DRES*0.07);
+  offX.lineTo(cx+DRES*0.04,cy+DRES*0.07); offX.stroke();
+  // Mouth
+  offX.strokeStyle='#333'; offX.lineWidth=2.2;
+  offX.beginPath(); offX.arc(cx, cy+DRES*0.13, DRES*0.085, 0.15, Math.PI-0.15); offX.stroke();
+  // Philtrum
+  offX.beginPath(); offX.moveTo(cx,cy+DRES*0.075); offX.lineTo(cx,cy+DRES*0.10); offX.stroke();
+  // Neck
+  offX.fillStyle='#666';
+  offX.beginPath(); offX.rect(cx-DRES*0.07,cy+DRES*0.35,DRES*0.14,DRES*0.12); offX.fill();
+  // Shoulders
+  offX.fillStyle='#444';
+  offX.beginPath(); offX.ellipse(cx,cy+DRES*0.53,DRES*0.32,DRES*0.1,0,0,Math.PI*2); offX.fill();
+  // Hair
+  offX.fillStyle='#000';
+  offX.beginPath(); offX.ellipse(cx,cy-DRES*0.33,DRES*0.3,DRES*0.12,0,0,Math.PI*2); offX.fill();
+  offX.beginPath(); offX.ellipse(cx-DRES*0.27,cy-DRES*0.08,DRES*0.08,DRES*0.2,-0.3,0,Math.PI*2); offX.fill();
+  offX.beginPath(); offX.ellipse(cx+DRES*0.27,cy-DRES*0.08,DRES*0.08,DRES*0.2,0.3,0,Math.PI*2); offX.fill();
+}
+
+function genFlower() {
+  offX.fillStyle='#fff'; offX.fillRect(0,0,DRES,DRES);
+  const cx=DRES/2, cy=DRES/2, petals=10;
+  for (let p=0; p<petals; p++) {
+    const a = (p/petals)*Math.PI*2;
+    const r = DRES*0.34;
+    const px = cx+Math.cos(a)*r*0.48, py = cy+Math.sin(a)*r*0.48;
+    const pg = offX.createRadialGradient(px,py,0,px,py,r*0.52);
+    pg.addColorStop(0,'rgba(30,30,30,0.9)'); pg.addColorStop(1,'rgba(200,200,200,0)');
+    offX.beginPath(); offX.ellipse(px,py,r*0.48,r*0.2,a,0,Math.PI*2);
+    offX.fillStyle=pg; offX.fill();
+  }
+  // Stamen dots
+  for (let i=0; i<120; i++) {
+    const a2=Math.random()*Math.PI*2, r2=Math.random()*DRES*0.115;
+    offX.fillStyle='rgba(0,0,0,0.7)';
+    offX.beginPath(); offX.arc(cx+Math.cos(a2)*r2,cy+Math.sin(a2)*r2,1.2,0,Math.PI*2); offX.fill();
+  }
+  // Center
+  const cg=offX.createRadialGradient(cx,cy,0,cx,cy,DRES*0.13);
+  cg.addColorStop(0,'#000'); cg.addColorStop(0.6,'#444'); cg.addColorStop(1,'rgba(80,80,80,0)');
+  offX.beginPath(); offX.arc(cx,cy,DRES*0.14,0,Math.PI*2); offX.fillStyle=cg; offX.fill();
+}
+
+function genGalaxy() {
+  offX.fillStyle='#fff'; offX.fillRect(0,0,DRES,DRES);
+  const cx=DRES/2, cy=DRES/2;
+  const drawArm = (offset, tight) => {
+    for (let i=1; i<=600; i++) {
+      const t=i/600, r=t*DRES*0.45, a=t*Math.PI*(tight?6:5)+offset;
+      const spread = DRES*0.015*(1-t*0.5);
+      const sx=cx+Math.cos(a)*r+( Math.random()-0.5)*spread*2;
+      const sy=cy+Math.sin(a)*r+( Math.random()-0.5)*spread*2;
+      const alpha=Math.min(0.95,(1-t*0.55)*0.85);
+      const size=Math.max(0.5,(1-t)*2.8+Math.random()*0.8);
+      offX.fillStyle=`rgba(0,0,0,${alpha})`;
+      offX.beginPath(); offX.arc(sx,sy,size,0,Math.PI*2); offX.fill();
+    }
+  };
+  drawArm(0, false); drawArm(Math.PI, false); drawArm(0.9, true);
+  // Core
+  const bg=offX.createRadialGradient(cx,cy,0,cx,cy,DRES*0.07);
+  bg.addColorStop(0,'#000'); bg.addColorStop(0.7,'rgba(0,0,0,0.6)'); bg.addColorStop(1,'rgba(0,0,0,0)');
+  offX.beginPath(); offX.arc(cx,cy,DRES*0.07,0,Math.PI*2); offX.fillStyle=bg; offX.fill();
+}
+
+function genWave() {
+  const id=offX.createImageData(DRES,DRES);
+  for (let y=0; y<DRES; y++) {
+    for (let x=0; x<DRES; x++) {
+      const nx=x/DRES-0.5, ny=y/DRES-0.5;
+      const r=Math.sqrt(nx*nx+ny*ny);
+      const wave1=Math.sin(r*Math.PI*18 - 1)*0.5+0.5;
+      const wave2=Math.sin(nx*Math.PI*12)*Math.sin(ny*Math.PI*12)*0.5+0.5;
+      const wave3=Math.sin((nx+ny)*Math.PI*14)*0.5+0.5;
+      const v=(wave1*0.5+wave2*0.3+wave3*0.2);
+      const sharpened=Math.pow(v,1.4);
+      const k=Math.floor((1-sharpened)*220+18);
+      const i=(y*DRES+x)*4;
+      id.data[i]=id.data[i+1]=id.data[i+2]=k; id.data[i+3]=255;
+    }
+  }
+  offX.putImageData(id,0,0);
+}
+
+// ─── Stipple state ────────────────────────────────────────────────────────────
+let pts     = [];         // [{x,y}] normalized [0,1]
+let ptArea  = [];         // approximate cell pixel count (for dot sizing)
+let iter    = 0;
+
+// Weighted importance sampling for initial point placement
+function weightedSample(count) {
+  let total = 0;
+  const cdf = new Float64Array(DRES*DRES+1);
+  for (let i=0; i<DRES*DRES; i++) { total += density[i]+0.008; cdf[i+1]=total; }
+  const out = [];
+  for (let k=0; k<count; k++) {
+    const r=Math.random()*total;
+    let lo=0, hi=DRES*DRES;
+    while (lo<hi) { const m=(lo+hi)>>1; if (cdf[m+1]<r) lo=m+1; else hi=m; }
+    const idx=Math.min(lo, DRES*DRES-1);
+    out.push({ x:(idx%DRES)/DRES+Math.random()/DRES, y:Math.floor(idx/DRES)/DRES+Math.random()/DRES });
+  }
+  return out;
+}
+
+function resetPoints() {
+  pts     = weightedSample(N);
+  ptArea  = new Float64Array(N);
+  iter    = 0;
+}
+
+// ─── Lloyd's relaxation ───────────────────────────────────────────────────────
+const GRID = 32; // spatial grid resolution
+
+function lloydStep() {
+  const n = pts.length;
+  // Build spatial hash grid
+  const cells = new Array(GRID*GRID).fill(null).map(()=>[]);
+  for (let i=0; i<n; i++) {
+    const gx=Math.min(GRID-1,Math.floor(pts[i].x*GRID));
+    const gy=Math.min(GRID-1,Math.floor(pts[i].y*GRID));
+    cells[gy*GRID+gx].push(i);
+  }
+
+  // Centroid accumulators
+  const wx = new Float64Array(n), wy = new Float64Array(n), wt = new Float64Array(n);
+  const cnt = new Int32Array(n);
+
+  // For each density pixel, find nearest point and accumulate
+  const SEARCH = 2;
+  for (let py=0; py<DRES; py++) {
+    for (let px=0; px<DRES; px++) {
+      const nx=(px+0.5)/DRES, ny=(py+0.5)/DRES;
+      const gcx=Math.min(GRID-1,Math.floor(nx*GRID));
+      const gcy=Math.min(GRID-1,Math.floor(ny*GRID));
+      let bestD=Infinity, bestI=-1;
+      for (let dy=-SEARCH; dy<=SEARCH; dy++) {
+        const cy2=gcy+dy; if (cy2<0||cy2>=GRID) continue;
+        for (let dx=-SEARCH; dx<=SEARCH; dx++) {
+          const cx2=gcx+dx; if (cx2<0||cx2>=GRID) continue;
+          for (const i of cells[cy2*GRID+cx2]) {
+            const ddx=pts[i].x-nx, ddy=pts[i].y-ny;
+            const d2=ddx*ddx+ddy*ddy;
+            if (d2<bestD) { bestD=d2; bestI=i; }
+          }
+        }
+      }
+      if (bestI>=0) {
+        const w=density[py*DRES+px]+0.004;
+        wx[bestI]+=nx*w; wy[bestI]+=ny*w; wt[bestI]+=w; cnt[bestI]++;
+      }
+    }
+  }
+
+  // Move each point to weighted centroid
+  for (let i=0; i<n; i++) {
+    if (wt[i]>0) { pts[i].x=wx[i]/wt[i]; pts[i].y=wy[i]/wt[i]; }
+    pts[i].x=Math.max(0,Math.min(1,pts[i].x));
+    pts[i].y=Math.max(0,Math.min(1,pts[i].y));
+    ptArea[i]=cnt[i];
+  }
+  iter++;
+}
+
+// ─── Rendering ───────────────────────────────────────────────────────────────
+const BG_LIGHT = '#f4ede0', DOT_LIGHT = '#1a0800';
+const BG_DARK  = '#0e0a06', DOT_DARK  = '#ecdfc8';
+let lastTime=0, fpsArr=[];
+
+function draw(ts) {
+  requestAnimationFrame(draw);
+  const dt=ts-lastTime; lastTime=ts;
+  if (dt>0) { fpsArr.push(1000/dt); if (fpsArr.length>40) fpsArr.shift(); }
+  const fps=(fpsArr.reduce((a,b)=>a+b,0)/fpsArr.length)||0;
+
+  if (needReset) { resetPoints(); needReset=false; }
+  if (!paused && pts.length>0) for (let s=0; s<relaxSpeed; s++) lloydStep();
+
+  // Background
+  ctx.fillStyle = invertMode ? BG_DARK : BG_LIGHT;
+  ctx.fillRect(0,0,W,H);
+
+  // Compute drawing area (square, centered, with margin)
+  const side   = Math.min(W,H)*0.88;
+  const ox     = (W-side)/2;
+  const oy     = (H-side)/2;
+
+  // Optional: show source density map
+  if (showImg) {
+    ctx.globalAlpha = 0.12;
+    ctx.drawImage(offC, ox, oy, side, side);
+    ctx.globalAlpha = 1;
+  }
+
+  // Draw dots
+  const avgArea = (DRES*DRES) / Math.max(1, pts.length);
+  ctx.fillStyle = invertMode ? DOT_DARK : DOT_LIGHT;
+  for (let i=0; i<pts.length; i++) {
+    const sx = ox + pts[i].x * side;
+    const sy = oy + pts[i].y * side;
+    let r = dotSize;
+    if (varySize) {
+      // Smaller dot in dense areas, larger in sparse
+      const area = ptArea[i] || avgArea;
+      r = dotSize * Math.sqrt(area / avgArea) * 0.55 + dotSize * 0.35;
+      r = Math.max(0.3, Math.min(dotSize*3, r));
+    }
+    ctx.beginPath(); ctx.arc(sx, sy, r, 0, Math.PI*2); ctx.fill();
+  }
+
+  // Stats
+  document.getElementById('v-pts').textContent  = pts.length;
+  document.getElementById('v-iter').textContent = iter;
+  document.getElementById('v-fps').textContent  = fps.toFixed(0);
+}
+
+// ─── Mouse interaction ────────────────────────────────────────────────────────
+canvas.addEventListener('click', e => {
+  const side = Math.min(W,H)*0.88;
+  const ox=(W-side)/2, oy=(H-side)/2;
+  const nx=(e.clientX-ox)/side, ny=(e.clientY-oy)/side;
+  if (nx>=0&&nx<=1&&ny>=0&&ny<=1) { pts.push({x:nx,y:ny}); ptArea.push(0); N=pts.length; document.getElementById('s-n').value=N; document.getElementById('v-n').textContent=N; }
+});
+canvas.addEventListener('contextmenu', e => {
+  e.preventDefault();
+  const side=Math.min(W,H)*0.88, ox=(W-side)/2, oy=(H-side)/2;
+  const nx=(e.clientX-ox)/side, ny=(e.clientY-oy)/side;
+  const THRESH=0.025*0.025;
+  pts=pts.filter(p=>{ const d=(p.x-nx)**2+(p.y-ny)**2; return d>THRESH; });
+  N=pts.length; document.getElementById('s-n').value=N; document.getElementById('v-n').textContent=N;
+});
+canvas.addEventListener('wheel', e => {
+  e.preventDefault();
+  dotSize=Math.max(0.3,Math.min(8,dotSize*(e.deltaY>0?0.93:1.07)));
+  document.getElementById('s-sz').value=dotSize.toFixed(1);
+  document.getElementById('v-sz').textContent=dotSize.toFixed(1);
+}, {passive:false});
+
+// ─── Controls ─────────────────────────────────────────────────────────────────
+function slider(id,vid,cb) {
+  const el=document.getElementById(id), v=document.getElementById(vid);
+  el.addEventListener('input',()=>{ v.textContent=el.value; cb(+el.value); });
+}
+slider('s-n',   'v-n',   v=>{ N=v; needReset=true; });
+slider('s-sz',  'v-sz',  v=>{ dotSize=v; });
+slider('s-spd', 'v-spd', v=>{ relaxSpeed=v; });
+
+const PRESETS=[genPortrait,genFlower,genGalaxy,genWave];
+const PBTN=['btn-p0','btn-p1','btn-p2','btn-p3'];
+PBTN.forEach((id,i)=>document.getElementById(id).addEventListener('click',()=>{
+  PBTN.forEach(b=>document.getElementById(b).classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  PRESETS[i](); extractDensity(); needReset=true;
+}));
+
+document.getElementById('btn-varysize').addEventListener('click',function(){
+  varySize=!varySize; this.classList.toggle('active',varySize);
+});
+document.getElementById('btn-showimg').addEventListener('click',function(){
+  showImg=!showImg; this.classList.toggle('active',showImg);
+});
+document.getElementById('btn-invert').addEventListener('click',function(){
+  invertMode=!invertMode; this.classList.toggle('active',invertMode);
+  document.body.style.background=invertMode?BG_DARK:BG_LIGHT;
+});
+document.getElementById('btn-reset').addEventListener('click',()=>{ iter=0; resetPoints(); });
+document.getElementById('btn-pause').addEventListener('click',function(){
+  paused=!paused; this.classList.toggle('active',paused); this.textContent=paused?'Resume':'Pause';
+});
+
+document.getElementById('file-btn').addEventListener('click',()=>document.getElementById('file-in').click());
+document.getElementById('file-in').addEventListener('change',function(){
+  const file=this.files[0]; if(!file) return;
+  const img=new Image(), url=URL.createObjectURL(file);
+  img.onload=()=>{
+    offX.clearRect(0,0,DRES,DRES); offX.drawImage(img,0,0,DRES,DRES);
+    URL.revokeObjectURL(url); extractDensity();
+    PBTN.forEach(b=>document.getElementById(b).classList.remove('active'));
+    needReset=true;
+  };
+  img.src=url;
+});
+
+// ─── Init ─────────────────────────────────────────────────────────────────────
+genPortrait();
+extractDensity();
+resetPoints();
+requestAnimationFrame(draw);
+</script>
+</body>
+</html>

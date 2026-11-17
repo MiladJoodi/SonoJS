@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>#033 Pendulum Wave · creative-lab</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #060a10;
+    overflow: hidden;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    color: #c9d1d9;
+    user-select: none;
+  }
+  canvas { display: block; }
+  #ui {
+    position: fixed;
+    top: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: rgba(13,17,23,0.82);
+    border: 1px solid #30363d;
+    border-radius: 10px;
+    padding: 10px 22px;
+    backdrop-filter: blur(8px);
+    font-size: 0.78rem;
+    color: #8b949e;
+    pointer-events: none;
+    z-index: 10;
+  }
+  #ui .title { color: #58a6ff; font-weight: 700; font-size: 0.9rem; letter-spacing: 0.03em; }
+  #ui .sep { color: #30363d; }
+  #sync-bar-wrap {
+    width: 120px;
+    height: 4px;
+    background: #21262d;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  #sync-bar { height: 100%; background: linear-gradient(90deg,#58a6ff,#bc8cff); border-radius: 2px; transition: width 0.1s linear; }
+  #controls {
+    position: fixed;
+    bottom: 52px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+  }
+  .btn {
+    background: rgba(13,17,23,0.85);
+    border: 1px solid #30363d;
+    border-radius: 7px;
+    color: #8b949e;
+    font-family: inherit;
+    font-size: 0.75rem;
+    padding: 7px 14px;
+    cursor: pointer;
+    transition: border-color .2s, color .2s;
+    backdrop-filter: blur(6px);
+  }
+  .btn:hover { border-color: #58a6ff; color: #58a6ff; }
+  .btn.active { border-color: #bc8cff; color: #bc8cff; }
+
+    html.embed #ui,
+    html.embed #info,
+    html.embed #controls,
+    html.embed #stats,
+    html.embed #hint,
+    html.embed .panel,
+    html.embed header,
+    html.embed footer { display: none !important; }
+  </style>
+  <script>if(/\bembed=1\b/.test(location.search))document.documentElement.classList.add("embed")</script>
+</head>
+<body>
+
+<div id="ui">
+  <span class="title">Pendulum Wave</span>
+  <span class="sep">|</span>
+  <span>Sync in</span>
+  <div id="sync-bar-wrap"><div id="sync-bar" style="width:0%"></div></div>
+  <span id="sync-time">60.0s</span>
+  <span class="sep">|</span>
+  <span id="phase-label">Released</span>
+</div>
+
+<div id="controls">
+  <button class="btn" id="btn-reset">⟳ Reset</button>
+  <button class="btn" id="btn-trails">Trails ON</button>
+  <button class="btn" id="btn-count" title="Toggle pendulum count">N=15</button>
+  <button class="btn" id="btn-angle">Angle: 30°</button>
+</div>
+
+<canvas id="c"></canvas>
+
+
+
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+
+// ── Config ─────────────────────────────────────────────────────────────────
+const SYNC_PERIOD = 60;   // seconds until all pendulums re-sync
+const g = 9.81;           // m/s²
+const SCALE = 1;          // pixels per metre (computed from window)
+
+let N = 15;
+let startAngle = Math.PI / 6;  // 30°
+let showTrails = true;
+let startTime = null;
+let animId = null;
+
+// trail storage: array of arrays of {x,y} for each pendulum
+let trails = [];
+
+// pendulum parameters
+let pendulums = [];
+
+function buildPendulums() {
+  pendulums = [];
+  for (let i = 0; i < N; i++) {
+    // Pendulum i completes (N + i) full oscillations in SYNC_PERIOD seconds
+    const cyclesInSync = N + i;
+    const T = SYNC_PERIOD / cyclesInSync;       // period (s)
+    const L = g * T * T / (4 * Math.PI * Math.PI); // length (m)
+    const hue = (i / N) * 260 + 180;            // blue→purple→red arc
+    pendulums.push({ L, T, cyclesInSync, hue });
+  }
+  trails = pendulums.map(() => []);
+}
+
+// ── Layout ──────────────────────────────────────────────────────────────────
+let W, H, originY, pivotXs, maxL, displayScale;
+
+function resize() {
+  W = canvas.width  = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+
+  maxL = pendulums.reduce((m, p) => Math.max(m, p.L), 0);
+  // scale so longest pendulum uses ~55% of canvas height (leaving room for UI)
+  displayScale = (H * 0.55) / maxL;
+  originY = H * 0.16;  // support bar Y
+
+  const margin = W * 0.1;
+  const spacing = (W - 2 * margin) / (N - 1);
+  pivotXs = pendulums.map((_, i) => margin + i * spacing);
+  trails = pendulums.map(() => []);  // clear trails on resize
+}
+
+// ── Drawing ──────────────────────────────────────────────────────────────────
+function drawSupportBar() {
+  const x0 = pivotXs[0] - 16;
+  const x1 = pivotXs[N - 1] + 16;
+  const y  = originY;
+
+  // mounting beam
+  ctx.save();
+  const grad = ctx.createLinearGradient(x0, y - 8, x0, y + 8);
+  grad.addColorStop(0, '#3d444d');
+  grad.addColorStop(0.5, '#6e7681');
+  grad.addColorStop(1, '#21262d');
+  ctx.fillStyle = grad;
+  ctx.beginPath();
+  ctx.roundRect(x0, y - 6, x1 - x0, 12, 4);
+  ctx.fill();
+
+  // pivot dots
+  for (let i = 0; i < N; i++) {
+    ctx.beginPath();
+    ctx.arc(pivotXs[i], y, 3, 0, Math.PI * 2);
+    ctx.fillStyle = '#8b949e';
+    ctx.fill();
+  }
+  ctx.restore();
+}
+
+function bobColor(hue, alpha = 1) {
+  return `hsla(${hue},80%,65%,${alpha})`;
+}
+
+function drawPendulum(i, angle, t) {
+  const px = pivotXs[i];
+  const py = originY;
+  const L  = pendulums[i].L * displayScale;
+  const hue = pendulums[i].hue;
+
+  const bx = px + Math.sin(angle) * L;
+  const by = py + Math.cos(angle) * L;
+
+  // string
+  ctx.save();
+  ctx.beginPath();
+  ctx.moveTo(px, py);
+  ctx.lineTo(bx, by);
+  ctx.strokeStyle = `hsla(${hue},50%,45%,0.45)`;
+  ctx.lineWidth = 1.2;
+  ctx.stroke();
+
+  // trail
+  if (showTrails) {
+    const trail = trails[i];
+    if (trail.length > 1) {
+      ctx.beginPath();
+      ctx.moveTo(trail[0].x, trail[0].y);
+      for (let k = 1; k < trail.length; k++) {
+        ctx.lineTo(trail[k].x, trail[k].y);
+      }
+      ctx.strokeStyle = bobColor(hue, 0.18);
+      ctx.lineWidth = 3;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      ctx.stroke();
+    }
+  }
+
+  // bob glow
+  const glow = ctx.createRadialGradient(bx, by, 0, bx, by, 14);
+  glow.addColorStop(0, bobColor(hue, 0.35));
+  glow.addColorStop(1, 'transparent');
+  ctx.beginPath();
+  ctx.arc(bx, by, 14, 0, Math.PI * 2);
+  ctx.fillStyle = glow;
+  ctx.fill();
+
+  // bob core
+  const core = ctx.createRadialGradient(bx - 3, by - 3, 1, bx, by, 8);
+  core.addColorStop(0, bobColor(hue + 20, 1));
+  core.addColorStop(1, bobColor(hue - 20, 0.9));
+  ctx.beginPath();
+  ctx.arc(bx, by, 8, 0, Math.PI * 2);
+  ctx.fillStyle = core;
+  ctx.shadowColor = bobColor(hue, 0.8);
+  ctx.shadowBlur = 18;
+  ctx.fill();
+  ctx.shadowBlur = 0;
+
+  ctx.restore();
+  return { x: bx, y: by };
+}
+
+// ── Phase label ──────────────────────────────────────────────────────────────
+const phaseNames = [
+  { frac: 0,    label: '◼ All aligned' },
+  { frac: 0.08, label: '~ Wave forming' },
+  { frac: 0.17, label: '〰 Rolling wave' },
+  { frac: 0.33, label: '⁘ Split pairs' },
+  { frac: 0.5,  label: '⇆ Counter-phase' },
+  { frac: 0.67, label: '⁘ Split pairs' },
+  { frac: 0.83, label: '〰 Rolling wave' },
+  { frac: 0.92, label: '~ Wave forming' },
+  { frac: 1.0,  label: '◼ Full sync!' },
+];
+
+function phaseLabel(frac) {
+  let best = phaseNames[0];
+  let bestDist = Infinity;
+  for (const p of phaseNames) {
+    const d = Math.abs(p.frac - frac);
+    if (d < bestDist) { bestDist = d; best = p; }
+  }
+  return best.label;
+}
+
+// ── Sync ring ────────────────────────────────────────────────────────────────
+function drawSyncRing(frac) {
+  // Draw a glowing arc at the bottom center showing sync progress
+  const cx = W / 2;
+  const cy = H - 120;
+  const r = 28;
+  const start = -Math.PI / 2;
+  const end = start + frac * Math.PI * 2;
+
+  ctx.save();
+  ctx.beginPath();
+  ctx.arc(cx, cy, r, 0, Math.PI * 2);
+  ctx.strokeStyle = '#21262d';
+  ctx.lineWidth = 3;
+  ctx.stroke();
+
+  if (frac > 0.001) {
+    const g2 = ctx.createLinearGradient(cx - r, cy, cx + r, cy);
+    g2.addColorStop(0, '#58a6ff');
+    g2.addColorStop(1, '#bc8cff');
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, start, end);
+    ctx.strokeStyle = g2;
+    ctx.lineWidth = 3;
+    ctx.lineCap = 'round';
+    ctx.shadowColor = '#58a6ff';
+    ctx.shadowBlur = 8;
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+  }
+
+  const rem = SYNC_PERIOD * (1 - frac);
+  ctx.fillStyle = '#8b949e';
+  ctx.font = '9px monospace';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(rem.toFixed(1), cx, cy);
+  ctx.restore();
+}
+
+// ── Main loop ────────────────────────────────────────────────────────────────
+const TRAIL_MAX = 120;
+const TRAIL_STEP_MS = 16;
+let lastTrailMs = 0;
+
+function frame(ts) {
+  if (!startTime) startTime = ts;
+  const elapsed = (ts - startTime) / 1000;  // seconds
+
+  // Clear
+  ctx.clearRect(0, 0, W, H);
+
+  // Subtle grid lines (very faint)
+  ctx.save();
+  ctx.strokeStyle = 'rgba(33,38,45,0.3)';
+  ctx.lineWidth = 1;
+  for (let x = 0; x < W; x += 80) {
+    ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
+  }
+  for (let y = 0; y < H; y += 80) {
+    ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+  }
+  ctx.restore();
+
+  drawSupportBar();
+
+  // Compute angles and draw
+  const addTrail = ts - lastTrailMs > TRAIL_STEP_MS;
+  if (addTrail) lastTrailMs = ts;
+
+  const frac = (elapsed % SYNC_PERIOD) / SYNC_PERIOD;
+
+  for (let i = 0; i < N; i++) {
+    const p = pendulums[i];
+    const omega = (2 * Math.PI) / p.T;
+    const angle = startAngle * Math.cos(omega * elapsed);
+    const pos = drawPendulum(i, angle, elapsed);
+
+    if (addTrail && showTrails) {
+      trails[i].push(pos);
+      if (trails[i].length > TRAIL_MAX) trails[i].shift();
+    }
+  }
+
+  // Bottom envelope line connecting all bobs
+  {
+    ctx.save();
+    ctx.beginPath();
+    let first = true;
+    for (let i = 0; i < N; i++) {
+      const p = pendulums[i];
+      const omega = (2 * Math.PI) / p.T;
+      const angle = startAngle * Math.cos(omega * elapsed);
+      const L = p.L * displayScale;
+      const bx = pivotXs[i] + Math.sin(angle) * L;
+      const by = originY + Math.cos(angle) * L;
+      if (first) { ctx.moveTo(bx, by); first = false; }
+      else ctx.lineTo(bx, by);
+    }
+    ctx.strokeStyle = 'rgba(88,166,255,0.18)';
+    ctx.lineWidth = 2;
+    ctx.lineJoin = 'round';
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  drawSyncRing(frac);
+
+  // Update UI elements
+  const rem = SYNC_PERIOD - (elapsed % SYNC_PERIOD);
+  document.getElementById('sync-time').textContent = rem.toFixed(1) + 's';
+  document.getElementById('sync-bar').style.width = (frac * 100) + '%';
+  document.getElementById('phase-label').textContent = phaseLabel(frac);
+
+  animId = requestAnimationFrame(frame);
+}
+
+// ── Boot + controls ──────────────────────────────────────────────────────────
+function restart() {
+  if (animId) cancelAnimationFrame(animId);
+  startTime = null;
+  lastTrailMs = 0;
+  buildPendulums();
+  resize();
+  animId = requestAnimationFrame(frame);
+}
+
+window.addEventListener('resize', () => {
+  resize();
+  trails = pendulums.map(() => []);
+});
+
+document.getElementById('btn-reset').addEventListener('click', restart);
+
+const btnTrails = document.getElementById('btn-trails');
+btnTrails.addEventListener('click', () => {
+  showTrails = !showTrails;
+  btnTrails.textContent = `Trails ${showTrails ? 'ON' : 'OFF'}`;
+  btnTrails.classList.toggle('active', showTrails);
+  if (!showTrails) trails = pendulums.map(() => []);
+});
+btnTrails.classList.add('active');
+
+const COUNTS = [10, 15, 20];
+let countIdx = 1;
+const btnCount = document.getElementById('btn-count');
+btnCount.addEventListener('click', () => {
+  countIdx = (countIdx + 1) % COUNTS.length;
+  N = COUNTS[countIdx];
+  btnCount.textContent = `N=${N}`;
+  restart();
+});
+
+const ANGLES = [15, 20, 30, 45];
+let angleIdx = 2;
+const btnAngle = document.getElementById('btn-angle');
+btnAngle.addEventListener('click', () => {
+  angleIdx = (angleIdx + 1) % ANGLES.length;
+  startAngle = ANGLES[angleIdx] * Math.PI / 180;
+  btnAngle.textContent = `Angle: ${ANGLES[angleIdx]}°`;
+  restart();
+});
+
+// Click on canvas: restart
+canvas.addEventListener('click', restart);
+
+restart();
+</script>
+</body>
+</html>

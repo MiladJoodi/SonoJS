@@ -42,17 +42,17 @@ export function ogSectionFromPath(path: string): OgSection {
 }
 
 const OG_SECTION_ALT: Record<OgSection, string> = {
-  docs: "SonoJS docs — React components for Tailwind apps",
-  blocks: "SonoJS blocks — ready-to-use interface sections",
-  charts: "SonoJS charts — interactive React chart demos",
-  ai: "SonoJS AI — components for agent and chat interfaces",
+  docs: "SonoJS docs. React components for Tailwind apps",
+  blocks: "SonoJS blocks, ready-to-use interface sections",
+  charts: "SonoJS charts, interactive React chart demos",
+  ai: "SonoJS AI, components for agent and chat interfaces",
   default: OG_IMAGE.alt,
 }
 
 export function ogImageAltForPath(path: string, titleFallback?: string): string {
   const section = ogSectionFromPath(path)
   if (section !== "default") return OG_SECTION_ALT[section]
-  return titleFallback ? `${titleFallback} — ${siteConfig.name}` : OG_SECTION_ALT.default
+  return titleFallback ? `${titleFallback}, ${siteConfig.name}` : OG_SECTION_ALT.default
 }
 
 function shareImages(

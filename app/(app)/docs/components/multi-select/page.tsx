@@ -17,7 +17,7 @@ const exampleDefs = [
     name: "multi-select-gallery",
     title: "Gallery",
     description:
-      "Skills picker card with live chip count — searchable list and removable badges.",
+      "Skills picker card with live chip count, searchable list and removable badges.",
     requires: ["popover", "command", "badge", "button"],
     npmRequires: ["lucide-react"],
   },

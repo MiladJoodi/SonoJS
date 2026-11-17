@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Slow Burn</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; overflow: hidden; background: #0a0a0a; }
+  canvas { display: block; width: 100vw; height: 100vh; }
+  .label {
+    position: fixed;
+    top: 20px;
+    left: 24px;
+    font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(200, 149, 108, 0.5);
+    z-index: 10;
+    pointer-events: none;
+    user-select: none;
+  }
+  html.embed .label { display: none; }
+</style>
+<script>if(/\bembed=1\b/.test(location.search))document.documentElement.classList.add("embed")</script>
+</head>
+<body>
+<div class="label">Slow Burn</div>
+<canvas id="canvas"></canvas>
+<script>
+// ─────────────────────────────────────────────
+// Slow Burn — Atmospheric radial heat with turbulence and shimmer
+// ─────────────────────────────────────────────
+(function () {
+  var canvas = document.getElementById('canvas');
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var urlParams = new URLSearchParams(window.location.search);
+  var pixelScale = parseFloat(urlParams.get('p')) || 1;
+
+  var gl = canvas.getContext('webgl', { alpha: true, antialias: false, preserveDrawingBuffer: false });
+  if (!gl) return;
+
+  // Tunable parameters
+  var HEAT_INTENSITY = 1.0;
+  var TURBULENCE = 1.0;
+
+  var vertSrc = [
+    'attribute vec2 a_pos;',
+    'void main() { gl_Position = vec4(a_pos, 0.0, 1.0); }'
+  ].join('\n');
+
+  var fragSrc = [
+    'precision highp float;',
+    'uniform float u_time;',
+    'uniform vec2 u_res;',
+    'uniform float u_heat;',
+    'uniform float u_turbulence;',
+    'uniform vec2 u_center;',
+    'uniform float u_scale;',
+    'uniform vec2 u_mouse;',
+    '',
+    '#define PI 3.14159265359',
+    '#define TAU 6.28318530718',
+    '',
+    '// ── Hash functions ──',
+    'float hash(vec2 p) {',
+    '  vec3 p3 = fract(vec3(p.xyx) * 0.1031);',
+    '  p3 += dot(p3, p3.yzx + 33.33);',
+    '  return fract((p3.x + p3.y) * p3.z);',
+    '}',
+    '',
+    'vec2 hash2(vec2 p) {',
+    '  vec3 p3 = fract(vec3(p.xyx) * vec3(0.1031, 0.1030, 0.0973));',
+    '  p3 += dot(p3, p3.yzx + 33.33);',
+    '  return fract((p3.xx + p3.yz) * p3.zy);',
+    '}',
+    '',
+    '// ── Smooth value noise ──',
+    'float vnoise(vec2 p) {',
+    '  vec2 i = floor(p);',
+    '  vec2 f = fract(p);',
+    '  f = f * f * f * (f * (f * 6.0 - 15.0) + 10.0);',
+    '  return mix(',
+    '    mix(hash(i), hash(i + vec2(1.0, 0.0)), f.x),',
+    '    mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), f.x),',
+    '    f.y',
+    '  );',
+    '}',
+    '',
+    '// ── Gradient noise (returns value + analytical derivatives) ──',
+    'vec3 noised(vec2 p) {',
+    '  vec2 i = floor(p);',
+    '  vec2 f = fract(p);',
+    '  vec2 u = f * f * f * (f * (f * 6.0 - 15.0) + 10.0);',
+    '  vec2 du = 30.0 * f * f * (f * (f - 2.0) + 1.0);',
+    '  float a = hash(i);',
+    '  float b = hash(i + vec2(1.0, 0.0));',
+    '  float c = hash(i + vec2(0.0, 1.0));',
+    '  float d = hash(i + vec2(1.0, 1.0));',
+    '  float val = a + (b - a) * u.x + (c - a) * u.y + (a - b - c + d) * u.x * u.y;',
+    '  vec2 deriv = du * (vec2(b - a + (a - b - c + d) * u.y, c - a + (a - b - c + d) * u.x));',
+    '  return vec3(val, deriv);',
+    '}',
+    '',
+    '// ── FBM with rotation between octaves ──',
+    'float fbm(vec2 p, int octaves) {',
+    '  float v = 0.0, a = 0.5;',
+    '  mat2 rot = mat2(0.8, 0.6, -0.6, 0.8);',
+    '  for (int i = 0; i < 8; i++) {',
+    '    if (i >= octaves) break;',
+    '    v += a * vnoise(p);',
+    '    p = rot * p * 2.05 + vec2(1.7, 9.2);',
+    '    a *= 0.5;',
+    '  }',
+    '  return v;',
+    '}',
+    '',
+    '// ── FBM with derivatives for distortion ──',
+    'vec3 fbmd(vec2 p, int octaves) {',
+    '  float v = 0.0, a = 0.5;',
+    '  vec2 d = vec2(0.0);',
+    '  mat2 rot = mat2(0.8, 0.6, -0.6, 0.8);',
+    '  for (int i = 0; i < 8; i++) {',
+    '    if (i >= octaves) break;',
+    '    vec3 n = noised(p);',
+    '    v += a * n.x;',
+    '    d += a * n.yz;',
+    '    p = rot * p * 2.05 + vec2(1.7, 9.2);',
+    '    a *= 0.5;',
+    '  }',
+    '  return vec3(v, d);',
+    '}',
+    '',
+    '// ── Ridged noise for veins ──',
+    'float ridged(vec2 p, int octaves) {',
+    '  float v = 0.0, a = 0.5;',
+    '  mat2 rot = mat2(0.8, 0.6, -0.6, 0.8);',
+    '  for (int i = 0; i < 6; i++) {',
+    '    if (i >= octaves) break;',
+    '    float n = vnoise(p);',
+    '    n = 1.0 - abs(n * 2.0 - 1.0);',
+    '    n = n * n;',
+    '    v += a * n;',
+    '    p = rot * p * 2.1 + vec2(3.2, 1.3);',
+    '    a *= 0.5;',
+    '  }',
+    '  return v;',
+    '}',
+    '',
+    '// ── Temperature color mapping ──',
+    '// Maps a 0-1 temperature value to a rich color palette:',
+    '// cool charcoal -> slate blue -> burnt sienna -> deep copper -> bright amber -> white-hot core',
+    'vec3 tempColor(float temp, float luminosityVar) {',
+    '  // Deep charcoal base',
+    '  vec3 c0 = vec3(0.04, 0.04, 0.055);',
+    '  // Cool slate blue',
+    '  vec3 c1 = vec3(0.08, 0.09, 0.14);',
+    '  // Neutral dark warm',
+    '  vec3 c2 = vec3(0.18, 0.12, 0.10);',
+    '  // Burnt sienna — brighter',
+    '  vec3 c3 = vec3(0.70, 0.28, 0.10);',
+    '  // Deep copper — bright',
+    '  vec3 c4 = vec3(1.2, 0.55, 0.14);',
+    '  // Warm amber — bright HDR',
+    '  vec3 c5 = vec3(1.8, 1.0, 0.25);',
+    '  // Bright amber — very bright HDR',
+    '  vec3 c6 = vec3(2.5, 1.6, 0.6);',
+    '  // White-hot core — very bright HDR',
+    '  vec3 c7 = vec3(3.5, 3.0, 2.5);',
+    '',
+    '  vec3 col;',
+    '  if (temp < 0.12) {',
+    '    col = mix(c0, c1, temp / 0.12);',
+    '  } else if (temp < 0.25) {',
+    '    col = mix(c1, c2, (temp - 0.12) / 0.13);',
+    '  } else if (temp < 0.38) {',
+    '    col = mix(c2, c3, (temp - 0.25) / 0.13);',
+    '  } else if (temp < 0.52) {',
+    '    col = mix(c3, c4, (temp - 0.38) / 0.14);',
+    '  } else if (temp < 0.68) {',
+    '    col = mix(c4, c5, (temp - 0.52) / 0.16);',
+    '  } else if (temp < 0.85) {',
+    '    col = mix(c5, c6, (temp - 0.68) / 0.17);',
+    '  } else {',
+    '    col = mix(c6, c7, (temp - 0.85) / 0.15);',
+    '  }',
+    '',
+    '  // Luminosity variation — brightness modulation',
+    '  col *= 1.0 + luminosityVar * 0.25;',
+    '',
+    '  return col;',
+    '}',
+    '',
+    'void main() {',
+    '  vec2 origin = u_scale > 0.0 ? u_center : vec2(0.5);',
+    '  float sc = u_scale > 0.0 ? u_scale : 1.0;',
+    '  vec2 uv = (gl_FragCoord.xy - u_res * origin) / (min(u_res.x, u_res.y) * sc);',
+    '  float t = u_time;',
+    '  float heat = u_heat;',
+    '  float turb = u_turbulence;',
+    '',
+    '  // Aspect-corrected radial distance from center',
+    '  float dist = length(uv);',
+    '',
+    '  // Mouse: creates a secondary heat source at cursor',
+    '  float mouseHeat = 0.0;',
+    '  if (u_mouse.x > 0.0) {',
+    '    vec2 mUV = (u_mouse - u_res * origin) / (min(u_res.x, u_res.y) * sc);',
+    '    float mDist = length(uv - mUV);',
+    '    mouseHeat = exp(-mDist * mDist * 4.0);',
+    '  }',
+    '',
+    '  // ──────────────────────────────────────────',
+    '  // Layer 1: Base temperature field',
+    '  // Radial gradient from hot center to cool edges',
+    '  // with heavily animated turbulent noise deforming the boundary',
+    '  // ──────────────────────────────────────────',
+    '',
+    '  // Multi-scale turbulence applied to the radial distance',
+    '  // Use cos/sin of angle instead of raw angle to avoid atan discontinuity seam',
+    '  float angle = atan(uv.y, uv.x);',
+    '  float ca = cos(angle);',
+    '  float sa = sin(angle);',
+    '',
+    '  // Large-scale turbulence — slow breathing of the boundary',
+    '  float turb1 = fbm(vec2(ca * 1.5 + sa * 0.7 + t * 0.08, dist * 2.0 - t * 0.05) * 1.8, 5) * turb;',
+    '',
+    '  // Medium-scale turbulence — faster, more detail',
+    '  float turb2 = fbm(vec2(ca * 3.0 - sa * 1.5 - t * 0.12, dist * 3.5 + t * 0.07) * 2.5 + vec2(50.0, 30.0), 4) * turb;',
+    '',
+    '  // Fine-scale turbulence — rapid small variations',
+    '  float turb3 = fbm(vec2(ca * 5.0 + sa * 2.5 + t * 0.2, dist * 5.0 - t * 0.15) * 3.0 + vec2(100.0, 70.0), 3) * turb;',
+    '',
+    '  // Combine turbulence at different scales',
+    '  float turbTotal = turb1 * 0.45 + turb2 * 0.35 + turb3 * 0.2;',
+    '',
+    '  // Deform the radial distance with turbulence',
+    '  // The deformation is stronger at medium distances (the transition zone)',
+    '  float deformStrength = smoothstep(0.0, 0.3, dist) * smoothstep(0.9, 0.4, dist);',
+    '  float deformedDist = dist + (turbTotal - 0.5) * 0.35 * deformStrength;',
+    '',
+    '  // Slow pulsation of the overall hot zone size',
+    '  float pulse = sin(t * 0.15) * 0.04 + sin(t * 0.23 + 1.7) * 0.03 + sin(t * 0.37 + 3.1) * 0.02;',
+    '  deformedDist -= pulse * heat;',
+    '',
+    '  // Map deformed distance to temperature (0 = cool edge, 1 = hot center)',
+    '  float tempRange = 0.65 / heat;',
+    '  float temp = 1.0 - smoothstep(0.0, tempRange, deformedDist);',
+    '  // Add a sharper core',
+    '  float coreBoost = (1.0 - smoothstep(0.0, 0.15 / heat, deformedDist));',
+    '  temp = temp * 0.7 + coreBoost * 0.3;',
+    '  // Mouse heat source: boost temperature at cursor',
+    '  temp += mouseHeat * 0.6;',
+    '  temp = clamp(temp, 0.0, 1.0);',
+    '',
+    '  // ──────────────────────────────────────────',
+    '  // Layer 2: Color mapping with luminosity variation',
+    '  // ──────────────────────────────────────────',
+    '',
+    '  // Luminosity variation from noise — adds color richness',
+    '  float lumVar = fbm(uv * 4.0 + t * 0.06, 3) * 2.0 - 1.0;',
+    '',
+    '  vec3 col = tempColor(temp, lumVar);',
+    '',
+    '  // ──────────────────────────────────────────',
+    '  // Layer 3: Heat shimmer (UV distortion)',
+    '  // Distort the color field based on animated noise derivatives.',
+    '  // Strongest in the hot areas, zero at the cool edges.',
+    '  // ──────────────────────────────────────────',
+    '',
+    '  // Heat shimmer — distort color using noise derivatives (no re-sampling)',
+    '  vec3 shimmerNoise = fbmd(uv * 8.0 + vec2(t * 0.3, t * 0.25), 4);',
+    '  float shimmerWave = shimmerNoise.x;',
+    '  vec2 shimmerDir = shimmerNoise.yz;',
+    '',
+    '  // Shimmer creates bright/dark ripples in hot areas',
+    '  float shimmerStrength = temp * temp * turb;',
+    '  float shimmerRipple = dot(shimmerDir, vec2(0.7, 0.7));',
+    '  shimmerRipple = shimmerRipple * shimmerRipple * shimmerStrength;',
+    '  col += col * shimmerRipple * 0.4;',
+    '',
+    '  // Extra shimmer highlights',
+    '  float shimmerHighlight = pow(max(shimmerWave, 0.0), 4.0) * temp * temp;',
+    '  col += vec3(1.0, 0.8, 0.4) * shimmerHighlight * 0.2 * heat;',
+    '',
+    '  // ──────────────────────────────────────────',
+    '  // Layer 4: Turbulent veins (ridged noise convection currents)',
+    '  // Bright amber-gold filaments visible within the hot zone',
+    '  // ──────────────────────────────────────────',
+    '',
+    '  // Primary vein network',
+    '  float veins1 = ridged(uv * 5.0 + vec2(t * 0.06, -t * 0.04), 4);',
+    '  // Secondary vein network at different scale/angle',
+    '  float veins2 = ridged(uv * 8.0 + vec2(-t * 0.08, t * 0.05) + vec2(20.0, 40.0), 3);',
+    '  // Tertiary fine detail',
+    '  float veins3 = ridged(uv * 13.0 + vec2(t * 0.1, t * 0.07) + vec2(60.0, 90.0), 2);',
+    '',
+    '  float veins = veins1 * 0.5 + veins2 * 0.35 + veins3 * 0.15;',
+    '',
+    '  // Sharpen the veins into filaments',
+    '  veins = smoothstep(0.3, 0.75, veins);',
+    '  veins = pow(veins, 2.0);',
+    '',
+    '  // Veins only visible in the hot zone',
+    '  float veinMask = smoothstep(0.15, 0.5, temp) * smoothstep(1.0, 0.7, temp);',
+    '  float veinIntensity = veins * veinMask * 0.7 * heat;',
+    '',
+    '  // Vein color — brighter amber-gold against the copper background',
+    '  vec3 veinColor = vec3(1.0, 0.72, 0.22);',
+    '  // Add slight color variation along the veins',
+    '  veinColor = mix(veinColor, vec3(1.0, 0.58, 0.15), veins2);',
+    '  col += veinColor * veinIntensity;',
+    '',
+    '  // ──────────────────────────────────────────',
+    '  // Layer 5: Ember particles',
+    '  // Sparse bright points drifting upward in the hot zone.',
+    '  // Computed in the fragment shader using grid-based hashing.',
+    '  // ──────────────────────────────────────────',
+    '',
+    '  // Grid for ember placement',
+    '  float emberScale = 18.0;',
+    '  vec2 emberUV = uv * emberScale;',
+    '  // Slow upward drift',
+    '  emberUV.y -= t * 0.4;',
+    '  // Very slight horizontal wander',
+    '  emberUV.x += sin(t * 0.3 + uv.y * 4.0) * 0.15;',
+    '',
+    '  vec2 emberId = floor(emberUV);',
+    '  vec2 emberF = fract(emberUV) - 0.5;',
+    '',
+    '  float embers = 0.0;',
+    '  // Check 3x3 neighborhood for sub-pixel positioning',
+    '  for (int ey = -1; ey <= 1; ey++) {',
+    '    for (int ex = -1; ex <= 1; ex++) {',
+    '      vec2 neighbor = vec2(float(ex), float(ey));',
+    '      vec2 cellId = emberId + neighbor;',
+    '      vec2 rnd = hash2(cellId);',
+    '',
+    '      // Sparse: only ~8% of cells have an ember',
+    '      if (rnd.x > 0.08) continue;',
+    '',
+    '      // Random position within cell',
+    '      vec2 emberPos = neighbor + rnd - 0.5;',
+    '      float emberDist = length(emberF - emberPos);',
+    '',
+    '      // Animated brightness — embers flicker and fade in/out',
+    '      float phase = hash(cellId + vec2(77.0, 33.0));',
+    '      float life = fract(phase + t * 0.08);',
+    '      float brightness = sin(life * PI) * sin(life * PI);',
+    '      // Extra flicker',
+    '      brightness *= 0.5 + 0.5 * sin(t * 5.0 + phase * TAU);',
+    '',
+    '      // Ember glow (very small, bright)',
+    '      float glow = smoothstep(0.08, 0.0, emberDist);',
+    '      // Tiny bright core',
+    '      float core = smoothstep(0.025, 0.0, emberDist) * 2.0;',
+    '',
+    '      embers += (glow + core) * brightness;',
+    '    }',
+    '  }',
+    '',
+    '  // Map ember grid back to world space for temperature masking',
+    '  float emberTemp = temp;',
+    '  // Embers only in hot zone',
+    '  float emberMask = smoothstep(0.2, 0.5, emberTemp);',
+    '  embers *= emberMask;',
+    '',
+    '  // Ember color — bright amber-white',
+    '  vec3 emberColor = vec3(1.0, 0.85, 0.5);',
+    '  col += emberColor * embers * 0.12 * heat;',
+    '',
+    '  // ──────────────────────────────────────────',
+    '  // Layer 6: Film grain',
+    '  // Warm-toned noise, denser in the transition zone',
+    '  // ──────────────────────────────────────────',
+    '',
+    '  float grainSeed = hash(gl_FragCoord.xy + fract(t * 43.758) * 1000.0);',
+    '  float grain = (grainSeed - 0.5);',
+    '',
+    '  // Grain density higher in the transition zone',
+    '  float transitionMask = smoothstep(0.1, 0.35, temp) * smoothstep(0.7, 0.35, temp);',
+    '  float grainStrength = 0.012 + transitionMask * 0.018;',
+    '',
+    '  // Warm tint to the grain',
+    '  vec3 grainColor = vec3(grain * 1.1, grain * 0.95, grain * 0.75);',
+    '  col += grainColor * grainStrength;',
+    '',
+    '  // ──────────────────────────────────────────',
+    '  // Final adjustments',
+    '  // ──────────────────────────────────────────',
+    '',
+    '  // Subtle vignette to deepen the edges further',
+    '  float vig = length(uv * 1.1);',
+    '  float vignette = 1.0 - smoothstep(0.5, 1.3, vig) * 0.3;',
+    '  col *= vignette;',
+    '',
+    '  // ACES filmic tone mapping — preserves bright highlights',
+    '  col = col * (2.51 * col + 0.03) / (col * (2.43 * col + 0.59) + 0.14);',
+    '',
+    '  // Ensure no negative values',
+    '  col = max(col, vec3(0.0));',
+    '',
+    '  gl_FragColor = vec4(col, 1.0);',
+    '}'
+  ].join('\n');
+
+  function compile(type, src) {
+    var s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
+
+    }
+    return s;
+  }
+
+  var prog = gl.createProgram();
+  gl.attachShader(prog, compile(gl.VERTEX_SHADER, vertSrc));
+  gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, fragSrc));
+  gl.linkProgram(prog);
+  if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) {
+
+  }
+  gl.useProgram(prog);
+
+  var buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+  var aPos = gl.getAttribLocation(prog, 'a_pos');
+  gl.enableVertexAttribArray(aPos);
+  gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+
+  var uTime = gl.getUniformLocation(prog, 'u_time');
+  var uRes = gl.getUniformLocation(prog, 'u_res');
+  var uHeat = gl.getUniformLocation(prog, 'u_heat');
+  var uTurbulence = gl.getUniformLocation(prog, 'u_turbulence');
+  var uCenter = gl.getUniformLocation(prog, 'u_center');
+  var uScale = gl.getUniformLocation(prog, 'u_scale');
+  var uMouse = gl.getUniformLocation(prog, 'u_mouse');
+  var centerX = 0.0;
+  var centerY = 0.0;
+  var scaleVal = 0.0;
+
+  var mouseXVal = -1, mouseYVal = -1;
+
+  var urlParams = new URLSearchParams(window.location.search);
+  var pixelScale = parseFloat(urlParams.get('p')) || 1;
+  var dpr = 1.0 / pixelScale;
+  var canvasScale = dpr / pixelScale;
+  canvas.addEventListener('mousemove', function(e) {
+    mouseXVal = e.clientX * canvasScale;
+    mouseYVal = (canvas.clientHeight - e.clientY) * canvasScale;
+  });
+  canvas.addEventListener('mouseleave', function() {
+    mouseXVal = -1; mouseYVal = -1;
+  });
+  canvas.addEventListener('touchstart', function(e) {
+    e.preventDefault();
+    var touch = e.touches[0];
+    mouseXVal = touch.clientX * canvasScale;
+    mouseYVal = (canvas.clientHeight - touch.clientY) * canvasScale;
+  }, { passive: false });
+  canvas.addEventListener('touchmove', function(e) {
+    e.preventDefault();
+    var touch = e.touches[0];
+    mouseXVal = touch.clientX * canvasScale;
+    mouseYVal = (canvas.clientHeight - touch.clientY) * canvasScale;
+  }, { passive: false });
+  canvas.addEventListener('touchend', function() {
+    mouseXVal = -1; mouseYVal = -1;
+  });
+  var needsResize = true;
+
+  function resize() {
+    needsResize = false;
+    var scale = 1.0 / pixelScale;
+    var w = Math.round(canvas.clientWidth * dpr * scale);
+    var h = Math.round(canvas.clientHeight * dpr * scale);
+    if (canvas.width !== w || canvas.height !== h) {
+      canvas.width = w;
+      canvas.height = h;
+      gl.viewport(0, 0, w, h);
+      gl.uniform2f(uRes, canvas.width, canvas.height);
+    }
+  }
+
+  var running = true;
+
+  function render(now) {
+    if (!running) { requestAnimationFrame(render); return; }
+    if (needsResize) resize();
+    gl.uniform1f(uTime, prefersReduced ? 0.0 : now * 0.001);
+    gl.uniform1f(uHeat, HEAT_INTENSITY);
+    gl.uniform1f(uTurbulence, TURBULENCE);
+    gl.uniform2f(uCenter, centerX, centerY);
+    gl.uniform1f(uScale, scaleVal);
+    gl.uniform2f(uMouse, mouseXVal, mouseYVal);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+    requestAnimationFrame(render);
+  }
+
+  window.addEventListener('resize', function () {
+    needsResize = true;
+  });
+
+  resize();
+
+  requestAnimationFrame(render);
+
+  // ── Pause when offscreen ──
+  document.addEventListener('visibilitychange', function () {
+    running = !document.hidden;
+  });
+
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      running = entry.isIntersecting && !document.hidden;
+    });
+  }, { threshold: 0.1 });
+  observer.observe(canvas);
+
+  // ── PostMessage API for parameter control ──
+  window.addEventListener('message', function (e) {
+    if (e.data && e.data.type === 'param') {
+      switch (e.data.name) {
+        case 'HEAT_INTENSITY': HEAT_INTENSITY = e.data.value; break;
+        case 'TURBULENCE': TURBULENCE = e.data.value; break;
+        case 'CENTER_X': centerX = e.data.value; break;
+        case 'CENTER_Y': centerY = e.data.value; break;
+        case 'SCALE': scaleVal = e.data.value; break;
+      }
+    }
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phase Transition</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; overflow: hidden; background: #0a0a0a; }
+  canvas { display: block; width: 100vw; height: 100vh; }
+  .label {
+    position: fixed; top: 20px; left: 24px;
+    font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+    font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+    color: rgba(200, 149, 108, 0.5); z-index: 10; pointer-events: none; user-select: none;
+  }
+  html.embed .label { display: none; }
+</style>
+<script>if(/\bembed=1\b/.test(location.search))document.documentElement.classList.add("embed")</script>
+</head>
+<body>
+<div class="label">Phase Transition</div>
+<canvas id="canvas"></canvas>
+<script>
+// ─────────────────────────────────────────────
+// Phase Transition — Order-chaos wavefront across a particle lattice
+// ─────────────────────────────────────────────
+(function() {
+  var canvas = document.getElementById('canvas');
+  var ctx = canvas.getContext('2d');
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var pixelScale = parseFloat(new URLSearchParams(location.search).get('p')) || 1;
+
+  // ── Tunable parameters ──
+  var WAVE_SPEED = 0.5;
+  var PARTICLE_DENSITY = 1.0;
+
+  var width, height, dpr, cx, cy;
+
+  function resize() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2) * pixelScale;
+    width = window.innerWidth;
+    height = window.innerHeight;
+    canvas.width = Math.round(width * dpr);
+    canvas.height = Math.round(height * dpr);
+    canvas.style.width = width + 'px';
+    canvas.style.height = height + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    cx = width / 2;
+    cy = height / 2;
+  }
+
+  var needsResize = false;
+  window.addEventListener('resize', function() {
+    needsResize = true;
+  });
+  resize();
+
+  // ── Simplex-style noise (2D) ──
+  // Permutation table
+  var perm = new Uint8Array(512);
+  var grad2 = [
+    [1,0],[-1,0],[0,1],[0,-1],
+    [1,1],[-1,1],[1,-1],[-1,-1]
+  ];
+  (function initNoise() {
+    var p = new Uint8Array(256);
+    for (var i = 0; i < 256; i++) p[i] = i;
+    for (var i = 255; i > 0; i--) {
+      var j = (Math.random() * (i + 1)) | 0;
+      var tmp = p[i]; p[i] = p[j]; p[j] = tmp;
+    }
+    for (var i = 0; i < 512; i++) perm[i] = p[i & 255];
+  })();
+
+  function noise2d(x, y) {
+    var ix = Math.floor(x) & 255;
+    var iy = Math.floor(y) & 255;
+    var fx = x - Math.floor(x);
+    var fy = y - Math.floor(y);
+    var ux = fx * fx * (3 - 2 * fx);
+    var uy = fy * fy * (3 - 2 * fy);
+
+    var g00 = grad2[perm[ix + perm[iy]] & 7];
+    var g10 = grad2[perm[ix + 1 + perm[iy]] & 7];
+    var g01 = grad2[perm[ix + perm[iy + 1]] & 7];
+    var g11 = grad2[perm[ix + 1 + perm[iy + 1]] & 7];
+
+    var d00 = g00[0] * fx + g00[1] * fy;
+    var d10 = g10[0] * (fx - 1) + g10[1] * fy;
+    var d01 = g01[0] * fx + g01[1] * (fy - 1);
+    var d11 = g11[0] * (fx - 1) + g11[1] * (fy - 1);
+
+    var nx0 = d00 + ux * (d10 - d00);
+    var nx1 = d01 + ux * (d11 - d01);
+    return nx0 + uy * (nx1 - nx0);
+  }
+
+  // Fractal Brownian motion
+  function fbm(x, y, octaves) {
+    var val = 0, amp = 0.5, freq = 1;
+    for (var i = 0; i < octaves; i++) {
+      val += amp * noise2d(x * freq, y * freq);
+      amp *= 0.5;
+      freq *= 2;
+    }
+    return val;
+  }
+
+  // ── Particle system using typed arrays ──
+  var COUNT = 0;
+  var posX, posY, velX, velY, homeX, homeY;
+  var latticeCol, latticeRow;
+  var cols, rows, spacingX, spacingY;
+
+  function initParticles() {
+    // Compute grid
+    var area = width * height;
+    var baseCount = 2500 * PARTICLE_DENSITY;
+    // Scale count with area relative to 1920x1080
+    COUNT = Math.round(baseCount * Math.sqrt(area / (1920 * 1080)));
+    COUNT = Math.max(400, Math.min(COUNT, 5000));
+
+    // Grid dimensions
+    var aspect = width / height;
+    rows = Math.round(Math.sqrt(COUNT / aspect));
+    cols = Math.round(rows * aspect);
+    COUNT = rows * cols;
+
+    spacingX = width / (cols + 1);
+    spacingY = height / (rows + 1);
+
+    posX = new Float32Array(COUNT);
+    posY = new Float32Array(COUNT);
+    velX = new Float32Array(COUNT);
+    velY = new Float32Array(COUNT);
+    homeX = new Float32Array(COUNT);
+    homeY = new Float32Array(COUNT);
+    latticeCol = new Int32Array(COUNT);
+    latticeRow = new Int32Array(COUNT);
+
+    var idx = 0;
+    for (var r = 0; r < rows; r++) {
+      for (var c = 0; c < cols; c++) {
+        var hx = (c + 1) * spacingX;
+        var hy = (r + 1) * spacingY;
+        homeX[idx] = hx;
+        homeY[idx] = hy;
+        // Start particles scattered randomly so the first wavefront gathers them
+        posX[idx] = hx + (Math.random() - 0.5) * spacingX * 0.3;
+        posY[idx] = hy + (Math.random() - 0.5) * spacingY * 0.3;
+        velX[idx] = 0;
+        velY[idx] = 0;
+        latticeCol[idx] = c;
+        latticeRow[idx] = r;
+        idx++;
+      }
+    }
+  }
+
+  initParticles();
+
+  // ── Wavefront state ──
+  // The wavefront sweeps as a normalized position (0..1) across the canvas
+  var wavePos = 0;       // 0 = left edge, 1 = right edge
+  var waveDir = 1;       // +1 = left to right, -1 = right to left
+  var wavePhase = 0;     // 0 = ordered behind wave, 1 = chaotic behind wave
+  var waveCycleTime = 0;
+
+  // Trail buffer: offscreen canvas for trail effect
+  var trailCanvas = document.createElement('canvas');
+  var trailCtx = trailCanvas.getContext('2d');
+
+  function resizeTrail() {
+    trailCanvas.width = canvas.width;
+    trailCanvas.height = canvas.height;
+    trailCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    trailCtx.fillStyle = '#0a0a0a';
+    trailCtx.fillRect(0, 0, width, height);
+  }
+  resizeTrail();
+
+  // ── Pre-rendered glow sprites ──
+  var GLOW_RES = 64;
+
+  function makeGlowSprite(r, g, b) {
+    var c = document.createElement('canvas');
+    c.width = GLOW_RES * 2;
+    c.height = GLOW_RES * 2;
+    var gc = c.getContext('2d');
+    var grad = gc.createRadialGradient(GLOW_RES, GLOW_RES, 0, GLOW_RES, GLOW_RES, GLOW_RES);
+    grad.addColorStop(0, 'rgba(' + r + ',' + g + ',' + b + ', 0.6)');
+    grad.addColorStop(0.3, 'rgba(' + r + ',' + g + ',' + b + ', 0.2)');
+    grad.addColorStop(0.7, 'rgba(' + r + ',' + g + ',' + b + ', 0.04)');
+    grad.addColorStop(1, 'rgba(' + r + ',' + g + ',' + b + ', 0)');
+    gc.fillStyle = grad;
+    gc.beginPath();
+    gc.arc(GLOW_RES, GLOW_RES, GLOW_RES, 0, Math.PI * 2);
+    gc.fill();
+    return c;
+  }
+
+  var glowOrdered = makeGlowSprite(0x80, 0xa0, 0xc8);
+  var glowChaotic = makeGlowSprite(0xd0, 0xa0, 0x78);
+  var glowWave = makeGlowSprite(0xe0, 0xf0, 0xff);
+
+  // ── Color helpers ──
+  function lerpColor(r1, g1, b1, r2, g2, b2, t) {
+    return [
+      r1 + (r2 - r1) * t,
+      g1 + (g2 - g1) * t,
+      b1 + (b2 - b1) * t
+    ];
+  }
+
+  // Ordered: cool blue (#6080b0) to ice white (#b0c0d0)
+  // Chaotic: warm amber (#c8956c) to hot white (#e0d0c0)
+  var ORD_R = 0x60, ORD_G = 0x80, ORD_B = 0xb0;
+  var ORD_HI_R = 0xb0, ORD_HI_G = 0xc0, ORD_HI_B = 0xd0;
+  var CHA_R = 0xc8, CHA_G = 0x95, CHA_B = 0x6c;
+  var CHA_HI_R = 0xe0, CHA_HI_G = 0xd0, CHA_HI_B = 0xc0;
+  var WAVE_R = 0xd0, WAVE_G = 0xe0, WAVE_B = 0xff;
+
+  // ── Physics constants ──
+  var SPRING_K = 4.0;
+  var DAMPING = 3.5;
+  var TURBULENCE_SCALE = 0.003;
+  var TURBULENCE_STRENGTH = 120;
+
+  // ── Paused state ──
+  var paused = false;
+  var lastTime = 0;
+
+  // ── Main update ──
+  function update(dt, time) {
+    // Advance wavefront
+    var cycleDuration = (width * 1.4) / (WAVE_SPEED * 180);
+    waveCycleTime += dt;
+
+    // Wavefront position: sweeps left to right, then right to left
+    var rawProgress = waveCycleTime / cycleDuration;
+    var cycleIndex = Math.floor(rawProgress);
+    var withinCycle = rawProgress - cycleIndex;
+
+    // Ease the wavefront with a smooth step
+    var eased = withinCycle * withinCycle * (3 - 2 * withinCycle);
+
+    if (cycleIndex % 2 === 0) {
+      wavePos = eased;
+      waveDir = 1;
+      wavePhase = cycleIndex % 4 < 2 ? 0 : 1;
+    } else {
+      wavePos = 1 - eased;
+      waveDir = -1;
+      wavePhase = cycleIndex % 4 < 2 ? 0 : 1;
+    }
+
+    // Mouse overrides wave position — directly controls the boundary
+    if (mouseActive) {
+      wavePos = mouseWavePos;
+    }
+
+    // Wave position in pixels
+    var wavePx = wavePos * width;
+    // Transition width: how wide the wavefront band is
+    var transWidth = width * 0.12;
+
+    // Noise time offset for turbulence animation
+    var noiseT = time * 0.4;
+
+    for (var i = 0; i < COUNT; i++) {
+      var px = posX[i];
+      var py = posY[i];
+
+      // Compute phase for this particle based on distance to wavefront
+      var distToWave = (px - wavePx) * waveDir;
+      // Particles behind the wave: distToWave < 0 means the wave has passed
+      // phase: 0 = fully ordered, 1 = fully chaotic
+      var phase;
+      if (wavePhase === 0) {
+        // Wave brings chaos: behind wave = chaotic, ahead = ordered
+        phase = 1 - smoothstep(-transWidth, transWidth, distToWave);
+      } else {
+        // Wave brings order: behind wave = ordered, ahead = chaotic
+        phase = smoothstep(-transWidth, transWidth, distToWave);
+      }
+
+      // Transition zone energy (brightest at the wavefront)
+      var transEnergy = 1 - Math.abs(distToWave) / transWidth;
+      transEnergy = Math.max(0, transEnergy);
+      transEnergy = transEnergy * transEnergy;
+
+      // ── Ordered forces: spring toward home ──
+      var dx = homeX[i] - px;
+      var dy = homeY[i] - py;
+      var springFx = dx * SPRING_K;
+      var springFy = dy * SPRING_K;
+      var dampFx = -velX[i] * DAMPING;
+      var dampFy = -velY[i] * DAMPING;
+      var orderedFx = springFx + dampFx;
+      var orderedFy = springFy + dampFy;
+
+      // ── Chaotic forces: noise-based turbulence ──
+      var nx = px * TURBULENCE_SCALE;
+      var ny = py * TURBULENCE_SCALE;
+      var angle = fbm(nx + noiseT, ny + noiseT * 0.7, 3) * Math.PI * 4;
+      var turbFx = Math.cos(angle) * TURBULENCE_STRENGTH;
+      var turbFy = Math.sin(angle) * TURBULENCE_STRENGTH;
+      // Add swirl
+      var swirlAngle = Math.atan2(py - cy, px - cx);
+      var swirlDist = Math.sqrt((px - cx) * (px - cx) + (py - cy) * (py - cy));
+      var swirlStrength = 30 * Math.min(1, swirlDist / (width * 0.3));
+      turbFx += Math.cos(swirlAngle + Math.PI * 0.5) * swirlStrength;
+      turbFy += Math.sin(swirlAngle + Math.PI * 0.5) * swirlStrength;
+      // Drag in chaotic state
+      var chaoticDampX = -velX[i] * 1.2;
+      var chaoticDampY = -velY[i] * 1.2;
+      var chaoticFx = turbFx + chaoticDampX;
+      var chaoticFy = turbFy + chaoticDampY;
+
+      // ── Wavefront kick: extra energy at the transition boundary ──
+      var kickFx = 0, kickFy = 0;
+      if (transEnergy > 0.01) {
+        var kickAngle = fbm(nx * 2 + noiseT * 1.5, ny * 2 + 100, 2) * Math.PI * 2;
+        var kickStrength = transEnergy * 200;
+        kickFx = Math.cos(kickAngle) * kickStrength;
+        kickFy = Math.sin(kickAngle) * kickStrength;
+      }
+
+      // ── Blend forces ──
+      var fx = orderedFx * (1 - phase) + chaoticFx * phase + kickFx;
+      var fy = orderedFy * (1 - phase) + chaoticFy * phase + kickFy;
+
+      velX[i] += fx * dt;
+      velY[i] += fy * dt;
+
+      // Clamp velocity
+      var speed = Math.sqrt(velX[i] * velX[i] + velY[i] * velY[i]);
+      var maxSpeed = 300;
+      if (speed > maxSpeed) {
+        velX[i] = velX[i] / speed * maxSpeed;
+        velY[i] = velY[i] / speed * maxSpeed;
+      }
+
+      posX[i] += velX[i] * dt;
+      posY[i] += velY[i] * dt;
+
+      // Soft boundary: push particles back toward canvas
+      var margin = 20;
+      if (posX[i] < -margin) { posX[i] = -margin; velX[i] = Math.abs(velX[i]) * 0.5; }
+      if (posX[i] > width + margin) { posX[i] = width + margin; velX[i] = -Math.abs(velX[i]) * 0.5; }
+      if (posY[i] < -margin) { posY[i] = -margin; velY[i] = Math.abs(velY[i]) * 0.5; }
+      if (posY[i] > height + margin) { posY[i] = height + margin; velY[i] = -Math.abs(velY[i]) * 0.5; }
+    }
+  }
+
+  function smoothstep(edge0, edge1, x) {
+    var t = Math.max(0, Math.min(1, (x - edge0) / (edge1 - edge0)));
+    return t * t * (3 - 2 * t);
+  }
+
+  // ── Rendering ──
+  function render(timestamp) {
+    if (paused) { requestAnimationFrame(render); return; }
+
+    if (needsResize) {
+      needsResize = false;
+      resize();
+      initParticles();
+      resizeTrail();
+    }
+
+    if (!lastTime) lastTime = timestamp;
+    var dt = Math.min((timestamp - lastTime) / 1000, 0.033);
+    lastTime = timestamp;
+
+    if (prefersReduced) dt *= 0.15;
+
+    var time = timestamp / 1000;
+
+    update(dt, time);
+
+    // ── Trail layer: fade previous frame ──
+    trailCtx.fillStyle = 'rgba(10, 10, 10, 0.15)';
+    trailCtx.fillRect(0, 0, width, height);
+
+    // Wavefront position for rendering
+    var wavePx = wavePos * width;
+    var transWidth = width * 0.12;
+    var noiseT = time * 0.4;
+
+    // ── Layer 1: Background energy noise ──
+    // Draw subtle noise-based background patches in ordered vs chaotic zones
+    // (skip in reduced-motion)
+    if (!prefersReduced) {
+      var bgStep = 40;
+      for (var bx = 0; bx < width; bx += bgStep) {
+        for (var by = 0; by < height; by += bgStep) {
+          var distToWave = (bx - wavePx) * waveDir;
+          var bgPhase;
+          if (wavePhase === 0) {
+            bgPhase = 1 - smoothstep(-transWidth, transWidth, distToWave);
+          } else {
+            bgPhase = smoothstep(-transWidth, transWidth, distToWave);
+          }
+
+          var nVal = fbm(bx * 0.005 + noiseT * 0.3, by * 0.005 + noiseT * 0.2, 2);
+          var bgAlpha = (0.01 + Math.abs(nVal) * 0.04) * bgPhase;
+          if (bgAlpha < 0.003) continue;
+
+          trailCtx.fillStyle = 'rgba(' + CHA_R + ',' + CHA_G + ',' + CHA_B + ',' + bgAlpha.toFixed(3) + ')';
+          trailCtx.fillRect(bx, by, bgStep, bgStep);
+        }
+      }
+    }
+
+    // ── Layer 2: Lattice connections in ordered regions ──
+    trailCtx.lineWidth = 0.5;
+    for (var i = 0; i < COUNT; i++) {
+      var c = latticeCol[i];
+      var r = latticeRow[i];
+
+      var distToWave = (posX[i] - wavePx) * waveDir;
+      var phase;
+      if (wavePhase === 0) {
+        phase = 1 - smoothstep(-transWidth, transWidth, distToWave);
+      } else {
+        phase = smoothstep(-transWidth, transWidth, distToWave);
+      }
+
+      // Only draw connections in ordered regions (phase < 0.5)
+      if (phase > 0.5) continue;
+
+      var orderedAmount = 1 - phase * 2; // 0..1 scale of how ordered
+      var lineAlpha = orderedAmount * 0.08;
+      if (lineAlpha < 0.005) continue;
+
+      // Connect to right neighbor
+      if (c < cols - 1) {
+        var j = i + 1;
+        var dx = posX[j] - posX[i];
+        var dy = posY[j] - posY[i];
+        var dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < spacingX * 2) {
+          var alpha = lineAlpha * (1 - dist / (spacingX * 2));
+          trailCtx.strokeStyle = 'rgba(64, 80, 112, ' + alpha.toFixed(3) + ')';
+          trailCtx.beginPath();
+          trailCtx.moveTo(posX[i], posY[i]);
+          trailCtx.lineTo(posX[j], posY[j]);
+          trailCtx.stroke();
+        }
+      }
+
+      // Connect to bottom neighbor
+      if (r < rows - 1) {
+        var j = i + cols;
+        var dx = posX[j] - posX[i];
+        var dy = posY[j] - posY[i];
+        var dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < spacingY * 2) {
+          var alpha = lineAlpha * (1 - dist / (spacingY * 2));
+          trailCtx.strokeStyle = 'rgba(64, 80, 112, ' + alpha.toFixed(3) + ')';
+          trailCtx.beginPath();
+          trailCtx.moveTo(posX[i], posY[i]);
+          trailCtx.lineTo(posX[j], posY[j]);
+          trailCtx.stroke();
+        }
+      }
+    }
+
+    // ── Layer 3: Phase wavefront band ──
+    if (!prefersReduced) {
+      var waveGlowWidth = transWidth * 2.5;
+      var grad = trailCtx.createLinearGradient(wavePx - waveGlowWidth, 0, wavePx + waveGlowWidth, 0);
+      grad.addColorStop(0, 'rgba(208, 224, 255, 0)');
+      grad.addColorStop(0.3, 'rgba(208, 224, 255, 0.02)');
+      grad.addColorStop(0.5, 'rgba(220, 235, 255, 0.06)');
+      grad.addColorStop(0.7, 'rgba(208, 224, 255, 0.02)');
+      grad.addColorStop(1, 'rgba(208, 224, 255, 0)');
+      trailCtx.fillStyle = grad;
+      trailCtx.fillRect(wavePx - waveGlowWidth, 0, waveGlowWidth * 2, height);
+
+      // Bright core line
+      trailCtx.strokeStyle = 'rgba(220, 235, 255, 0.12)';
+      trailCtx.lineWidth = 2;
+      trailCtx.beginPath();
+      // Slightly wavy line
+      for (var y = 0; y < height; y += 8) {
+        var wobble = fbm(y * 0.01 + time * 0.5, time * 0.3, 2) * 15;
+        if (y === 0) {
+          trailCtx.moveTo(wavePx + wobble, y);
+        } else {
+          trailCtx.lineTo(wavePx + wobble, y);
+        }
+      }
+      trailCtx.stroke();
+    }
+
+    // ── Layer 4: Particles with chaotic trails ──
+    // Chaotic particles leave dots on the trail canvas
+    for (var i = 0; i < COUNT; i++) {
+      var distToWave = (posX[i] - wavePx) * waveDir;
+      var phase;
+      if (wavePhase === 0) {
+        phase = 1 - smoothstep(-transWidth, transWidth, distToWave);
+      } else {
+        phase = smoothstep(-transWidth, transWidth, distToWave);
+      }
+
+      // Only chaotic particles leave trails
+      if (phase > 0.3) {
+        var speed = Math.sqrt(velX[i] * velX[i] + velY[i] * velY[i]);
+        var trailAlpha = phase * Math.min(1, speed / 100) * 0.15;
+        if (trailAlpha > 0.005) {
+          var col = lerpColor(ORD_R, ORD_G, ORD_B, CHA_R, CHA_G, CHA_B, phase);
+          trailCtx.fillStyle = 'rgba(' + Math.round(col[0]) + ',' + Math.round(col[1]) + ',' + Math.round(col[2]) + ',' + trailAlpha.toFixed(3) + ')';
+          trailCtx.beginPath();
+          trailCtx.arc(posX[i], posY[i], 1.5, 0, Math.PI * 2);
+          trailCtx.fill();
+        }
+      }
+    }
+
+    // ── Composite trail canvas onto main canvas ──
+    ctx.drawImage(trailCanvas, 0, 0, trailCanvas.width, trailCanvas.height, 0, 0, width, height);
+
+    // ── Layer 5: Particle cores (drawn fresh each frame) ──
+    for (var i = 0; i < COUNT; i++) {
+      var px = posX[i];
+      var py = posY[i];
+
+      var distToWave = (px - wavePx) * waveDir;
+      var phase;
+      if (wavePhase === 0) {
+        phase = 1 - smoothstep(-transWidth, transWidth, distToWave);
+      } else {
+        phase = smoothstep(-transWidth, transWidth, distToWave);
+      }
+
+      var transEnergy = 1 - Math.abs(distToWave) / transWidth;
+      transEnergy = Math.max(0, transEnergy);
+      transEnergy = transEnergy * transEnergy;
+
+      // Particle size: larger in transition zone
+      var baseSize = 1.2 + phase * 0.8;
+      var size = baseSize + transEnergy * 2.5;
+
+      // Color: blend between ordered (blue) and chaotic (amber)
+      var speed = Math.sqrt(velX[i] * velX[i] + velY[i] * velY[i]);
+      var energyBright = Math.min(1, speed / 150);
+
+      var r, g, b;
+      if (transEnergy > 0.1) {
+        // Wavefront particles: bright white with a color tint
+        var t = transEnergy;
+        r = WAVE_R + (255 - WAVE_R) * t * 0.5;
+        g = WAVE_G + (255 - WAVE_G) * t * 0.5;
+        b = WAVE_B + (255 - WAVE_B) * t * 0.3;
+      } else if (phase < 0.5) {
+        // Ordered: cool blue to ice white based on proximity to lattice
+        var dx = px - homeX[i];
+        var dy = py - homeY[i];
+        var distFromHome = Math.sqrt(dx * dx + dy * dy);
+        var settled = 1 - Math.min(1, distFromHome / spacingX);
+        r = ORD_R + (ORD_HI_R - ORD_R) * settled;
+        g = ORD_G + (ORD_HI_G - ORD_G) * settled;
+        b = ORD_B + (ORD_HI_B - ORD_B) * settled;
+      } else {
+        // Chaotic: warm amber to hot white based on speed
+        r = CHA_R + (CHA_HI_R - CHA_R) * energyBright;
+        g = CHA_G + (CHA_HI_G - CHA_G) * energyBright;
+        b = CHA_B + (CHA_HI_B - CHA_B) * energyBright;
+      }
+
+      var alpha = 0.6 + transEnergy * 0.4 + energyBright * 0.15;
+      alpha = Math.min(1, alpha);
+
+      // Draw glow for energetic particles using pre-rendered sprites
+      if (transEnergy > 0.05 || (phase > 0.5 && speed > 50)) {
+        var glowSize = size * 3;
+        var glowAlpha = (transEnergy * 0.3 + energyBright * 0.08) * alpha;
+        if (glowAlpha > 0.005) {
+          var sprite = transEnergy > 0.1 ? glowWave : (phase < 0.5 ? glowOrdered : glowChaotic);
+          ctx.globalAlpha = Math.min(glowAlpha, 0.8);
+          ctx.drawImage(sprite, px - glowSize, py - glowSize, glowSize * 2, glowSize * 2);
+          ctx.globalAlpha = 1;
+        }
+      }
+
+      // Core dot
+      ctx.fillStyle = 'rgba(' + Math.round(r) + ',' + Math.round(g) + ',' + Math.round(b) + ',' + alpha.toFixed(3) + ')';
+      ctx.beginPath();
+      ctx.arc(px, py, size, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Bright center for wavefront particles
+      if (transEnergy > 0.3) {
+        ctx.fillStyle = 'rgba(255, 255, 255, ' + (transEnergy * 0.5).toFixed(3) + ')';
+        ctx.beginPath();
+        ctx.arc(px, py, size * 0.4, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    // ── Vignette ──
+    var maxDim = Math.max(width, height);
+    var vignette = ctx.createRadialGradient(cx, cy, maxDim * 0.3, cx, cy, maxDim * 0.85);
+    vignette.addColorStop(0, 'rgba(10, 10, 10, 0)');
+    vignette.addColorStop(1, 'rgba(10, 10, 10, 0.4)');
+    ctx.fillStyle = vignette;
+    ctx.fillRect(0, 0, width, height);
+
+    requestAnimationFrame(render);
+  }
+
+  requestAnimationFrame(render);
+
+  // Mouse: hover position controls wave boundary, click toggles order/chaos
+  var mouseActive = false;
+  var mouseWavePos = 0.5;
+  canvas.addEventListener('mousemove', function(e) {
+    mouseActive = true;
+    mouseWavePos = e.clientX / width;
+  });
+  canvas.addEventListener('mouseleave', function() { mouseActive = false; });
+  canvas.addEventListener('touchstart', function(e) {
+    e.preventDefault();
+    mouseActive = true;
+    mouseWavePos = e.touches[0].clientX / width;
+    wavePhase = 1 - wavePhase;
+  }, { passive: false });
+  canvas.addEventListener('touchmove', function(e) {
+    e.preventDefault();
+    mouseWavePos = e.touches[0].clientX / width;
+  }, { passive: false });
+  canvas.addEventListener('touchend', function() { mouseActive = false; });
+
+  // ── Visibility pause ──
+  document.addEventListener('visibilitychange', function() {
+    paused = document.hidden;
+    if (!paused) lastTime = 0;
+  });
+
+  // ── PostMessage listener for parameter updates ──
+  window.addEventListener('message', function(e) {
+    if (e.data && e.data.type === 'param') {
+      switch (e.data.name) {
+        case 'WAVE_SPEED': WAVE_SPEED = e.data.value; break;
+        case 'PARTICLE_DENSITY':
+          PARTICLE_DENSITY = e.data.value;
+          initParticles();
+          resizeTrail();
+          break;
+      }
+    }
+  });
+})();
+</script>
+</body>
+</html>

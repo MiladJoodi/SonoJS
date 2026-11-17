@@ -383,7 +383,7 @@ function ColorPicker({
                 aria-label="Opacity"
                 style={
                   {
-                    // colored overlay via CSS variable on track using box-shadow hack avoided —
+                    // colored overlay via CSS variable on track using box-shadow hack avoided , 
                     // show percent below
                   } as React.CSSProperties
                 }

@@ -17,7 +17,7 @@ const MAX_FILES = 8
 export function DropzoneGallery() {
   const [files, setFiles] = React.useState<DropzoneFile[]>([])
 
-  // One shared ticker — every non-done file advances until 100%.
+  // One shared ticker, every non-done file advances until 100%.
   React.useEffect(() => {
     const timer = window.setInterval(() => {
       setFiles((prev) => {
@@ -51,7 +51,7 @@ export function DropzoneGallery() {
                 Product gallery
               </h3>
               <p className="text-xs text-muted-foreground">
-                Drag shots in — previews and progress included.
+                Drag shots in, previews and progress included.
               </p>
             </div>
           </div>

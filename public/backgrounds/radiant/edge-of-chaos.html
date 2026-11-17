@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Edge of Chaos</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; overflow: hidden; background: #0a0a0a; }
+  canvas { display: block; width: 100vw; height: 100vh; }
+  .label {
+    position: fixed;
+    top: 20px;
+    left: 24px;
+    font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(200, 149, 108, 0.5);
+    z-index: 10;
+    pointer-events: none;
+    user-select: none;
+  }
+  html.embed .label { display: none; }
+</style>
+<script>if(/\bembed=1\b/.test(location.search))document.documentElement.classList.add("embed")</script>
+</head>
+<body>
+<div class="label">Edge of Chaos</div>
+<canvas id="canvas"></canvas>
+<script>
+(function() {
+  var canvas = document.getElementById('canvas');
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var urlParams = new URLSearchParams(window.location.search);
+  var pixelScale = parseFloat(urlParams.get('p')) || 1;
+
+  var PATTERN_SPEED = 1.0;
+  var WARMTH = 1.0;
+  var BG_BRIGHTNESS = 0.0;
+  var POP_RATE = 1.0;
+
+  var gl = canvas.getContext('webgl', { alpha: false, antialias: false, preserveDrawingBuffer: false });
+  if (!gl) return;
+
+  // Float texture support
+  var floatExt = gl.getExtension('OES_texture_float');
+  var floatLinear = gl.getExtension('OES_texture_float_linear');
+  var halfFloatExt = null;
+  var halfFloatLinear = null;
+  var texType = gl.UNSIGNED_BYTE;
+  var useFloat = false;
+
+  if (floatExt) {
+    texType = gl.FLOAT;
+    useFloat = true;
+  } else {
+    halfFloatExt = gl.getExtension('OES_texture_half_float');
+    halfFloatLinear = gl.getExtension('OES_texture_half_float_linear');
+    if (halfFloatExt) {
+      texType = halfFloatExt.HALF_FLOAT_OES;
+      useFloat = true;
+    }
+  }
+
+  // Simulation at 256x256 so patterns are large relative to display
+  // Sim resolution based on actual canvas size, capped for performance
+  var canvasW = canvas.clientWidth || 512;
+  var canvasH = canvas.clientHeight || 512;
+  var simScale = Math.min(1, 512 / Math.max(canvasW, canvasH));
+  var simWidth = Math.max(128, Math.min(768, Math.round(canvasW * simScale)));
+  var simHeight = Math.max(128, Math.min(768, Math.round(canvasH * simScale)));
+  var dpr = Math.min(window.devicePixelRatio || 1, 2) * pixelScale;
+  var displayWidth, displayHeight;
+
+  // Shared vertex shader
+  var vertSrc = [
+    'attribute vec2 a_pos;',
+    'varying vec2 v_uv;',
+    'void main() {',
+    '  v_uv = a_pos * 0.5 + 0.5;',
+    '  gl_Position = vec4(a_pos, 0.0, 1.0);',
+    '}'
+  ].join('\n');
+
+  // Reaction-diffusion simulation shader
+  // For UNSIGNED_BYTE fallback: u is stored in R+B (16-bit), v in G+A (16-bit)
+  var rdFragSrc = useFloat ? [
+    'precision highp float;',
+    'varying vec2 v_uv;',
+    'uniform sampler2D u_state;',
+    'uniform vec2 u_texelSize;',
+    'uniform float u_feed;',
+    'uniform float u_kill;',
+    'uniform float u_dt;',
+    '',
+    'void main() {',
+    '  vec4 state = texture2D(u_state, v_uv);',
+    '  float u = state.r;',
+    '  float v = state.g;',
+    '',
+    '  vec2 dx = vec2(u_texelSize.x, 0.0);',
+    '  vec2 dy = vec2(0.0, u_texelSize.y);',
+    '',
+    '  // 9-point Laplacian',
+    '  float uL = texture2D(u_state, v_uv - dx).r;',
+    '  float uR = texture2D(u_state, v_uv + dx).r;',
+    '  float uU = texture2D(u_state, v_uv + dy).r;',
+    '  float uD = texture2D(u_state, v_uv - dy).r;',
+    '  float uTL = texture2D(u_state, v_uv - dx + dy).r;',
+    '  float uTR = texture2D(u_state, v_uv + dx + dy).r;',
+    '  float uBL = texture2D(u_state, v_uv - dx - dy).r;',
+    '  float uBR = texture2D(u_state, v_uv + dx - dy).r;',
+    '',
+    '  float vL = texture2D(u_state, v_uv - dx).g;',
+    '  float vR = texture2D(u_state, v_uv + dx).g;',
+    '  float vU = texture2D(u_state, v_uv + dy).g;',
+    '  float vD = texture2D(u_state, v_uv - dy).g;',
+    '  float vTL = texture2D(u_state, v_uv - dx + dy).g;',
+    '  float vTR = texture2D(u_state, v_uv + dx + dy).g;',
+    '  float vBL = texture2D(u_state, v_uv - dx - dy).g;',
+    '  float vBR = texture2D(u_state, v_uv + dx - dy).g;',
+    '',
+    '  float lapU = (uL + uR + uU + uD) * 0.2 + (uTL + uTR + uBL + uBR) * 0.05 - u;',
+    '  float lapV = (vL + vR + vU + vD) * 0.2 + (vTL + vTR + vBL + vBR) * 0.05 - v;',
+    '',
+    '  float Du = 0.2097;',
+    '  float Dv = 0.105;',
+    '  float uvv = u * v * v;',
+    '',
+    '  float newU = u + (Du * lapU - uvv + u_feed * (1.0 - u)) * u_dt;',
+    '  float newV = v + (Dv * lapV + uvv - (u_feed + u_kill) * v) * u_dt;',
+    '',
+    '  newU = clamp(newU, 0.0, 1.0);',
+    '  newV = clamp(newV, 0.0, 1.0);',
+    '',
+    '  gl_FragColor = vec4(newU, newV, 0.0, 1.0);',
+    '}'
+  ].join('\n') : [
+    // UNSIGNED_BYTE fallback: encode u into R+B, v into G+A for 16-bit precision
+    'precision highp float;',
+    'varying vec2 v_uv;',
+    'uniform sampler2D u_state;',
+    'uniform vec2 u_texelSize;',
+    'uniform float u_feed;',
+    'uniform float u_kill;',
+    'uniform float u_dt;',
+    '',
+    '// Decode 16-bit value from two 8-bit channels',
+    'float decode(float hi, float lo) {',
+    '  return hi + lo / 255.0;',
+    '}',
+    '',
+    '// Encode float into two 8-bit channels',
+    'vec2 encode(float val) {',
+    '  float hi = floor(val * 255.0) / 255.0;',
+    '  float lo = (val - hi) * 255.0;',
+    '  return vec2(hi, lo);',
+    '}',
+    '',
+    'float sampleU(vec2 coord) {',
+    '  vec4 s = texture2D(u_state, coord);',
+    '  return decode(s.r, s.b);',
+    '}',
+    '',
+    'float sampleV(vec2 coord) {',
+    '  vec4 s = texture2D(u_state, coord);',
+    '  return decode(s.g, s.a);',
+    '}',
+    '',
+    'void main() {',
+    '  float u = sampleU(v_uv);',
+    '  float v = sampleV(v_uv);',
+    '',
+    '  vec2 dx = vec2(u_texelSize.x, 0.0);',
+    '  vec2 dy = vec2(0.0, u_texelSize.y);',
+    '',
+    '  float uL = sampleU(v_uv - dx);',
+    '  float uR = sampleU(v_uv + dx);',
+    '  float uU = sampleU(v_uv + dy);',
+    '  float uD = sampleU(v_uv - dy);',
+    '  float uTL = sampleU(v_uv - dx + dy);',
+    '  float uTR = sampleU(v_uv + dx + dy);',
+    '  float uBL = sampleU(v_uv - dx - dy);',
+    '  float uBR = sampleU(v_uv + dx - dy);',
+    '',
+    '  float vL = sampleV(v_uv - dx);',
+    '  float vR = sampleV(v_uv + dx);',
+    '  float vU = sampleV(v_uv + dy);',
+    '  float vD = sampleV(v_uv - dy);',
+    '  float vTL = sampleV(v_uv - dx + dy);',
+    '  float vTR = sampleV(v_uv + dx + dy);',
+    '  float vBL = sampleV(v_uv - dx - dy);',
+    '  float vBR = sampleV(v_uv + dx - dy);',
+    '',
+    '  float lapU = (uL + uR + uU + uD) * 0.2 + (uTL + uTR + uBL + uBR) * 0.05 - u;',
+    '  float lapV = (vL + vR + vU + vD) * 0.2 + (vTL + vTR + vBL + vBR) * 0.05 - v;',
+    '',
+    '  float Du = 0.2097;',
+    '  float Dv = 0.105;',
+    '  float uvv = u * v * v;',
+    '',
+    '  float newU = u + (Du * lapU - uvv + u_feed * (1.0 - u)) * u_dt;',
+    '  float newV = v + (Dv * lapV + uvv - (u_feed + u_kill) * v) * u_dt;',
+    '',
+    '  newU = clamp(newU, 0.0, 1.0);',
+    '  newV = clamp(newV, 0.0, 1.0);',
+    '',
+    '  vec2 encU = encode(newU);',
+    '  vec2 encV = encode(newV);',
+    '  gl_FragColor = vec4(encU.x, encV.x, encU.y, encV.y);',
+    '}'
+  ].join('\n');
+
+  // Seed/clear shader with mode: 0=seed (set v high), 1=clear (kill v, restore u)
+  var seedFragSrc = useFloat ? [
+    'precision highp float;',
+    'varying vec2 v_uv;',
+    'uniform sampler2D u_state;',
+    'uniform vec2 u_seedPos;',
+    'uniform float u_seedRadius;',
+    'uniform float u_seedActive;',
+    'uniform float u_mode;',
+    '',
+    'void main() {',
+    '  vec4 state = texture2D(u_state, v_uv);',
+    '  if (u_seedActive > 0.5) {',
+    '    float dist = length(v_uv - u_seedPos);',
+    '    if (dist < u_seedRadius) {',
+    '      float falloff = smoothstep(u_seedRadius, u_seedRadius * 0.2, dist);',
+    '      if (u_mode < 0.5) {',
+    '        // Seed mode: introduce v chemical',
+    '        state.r = mix(state.r, 0.5, falloff);',
+    '        state.g = mix(state.g, 0.25 + falloff * 0.2, falloff);',
+    '      } else {',
+    '        // Clear mode: kill v, restore u (pop event)',
+    '        state.r = mix(state.r, 1.0, falloff);',
+    '        state.g = mix(state.g, 0.0, falloff);',
+    '      }',
+    '    }',
+    '  }',
+    '  gl_FragColor = state;',
+    '}'
+  ].join('\n') : [
+    'precision highp float;',
+    'varying vec2 v_uv;',
+    'uniform sampler2D u_state;',
+    'uniform vec2 u_seedPos;',
+    'uniform float u_seedRadius;',
+    'uniform float u_seedActive;',
+    'uniform float u_mode;',
+    '',
+    'float decode(float hi, float lo) {',
+    '  return hi + lo / 255.0;',
+    '}',
+    'vec2 encode(float val) {',
+    '  float hi = floor(val * 255.0) / 255.0;',
+    '  float lo = (val - hi) * 255.0;',
+    '  return vec2(hi, lo);',
+    '}',
+    '',
+    'void main() {',
+    '  vec4 state = texture2D(u_state, v_uv);',
+    '  float u = decode(state.r, state.b);',
+    '  float v = decode(state.g, state.a);',
+    '  if (u_seedActive > 0.5) {',
+    '    float dist = length(v_uv - u_seedPos);',
+    '    if (dist < u_seedRadius) {',
+    '      float falloff = smoothstep(u_seedRadius, u_seedRadius * 0.2, dist);',
+    '      if (u_mode < 0.5) {',
+    '        u = mix(u, 0.5, falloff);',
+    '        v = mix(v, 0.25 + falloff * 0.2, falloff);',
+    '      } else {',
+    '        u = mix(u, 1.0, falloff);',
+    '        v = mix(v, 0.0, falloff);',
+    '      }',
+    '    }',
+    '  }',
+    '  vec2 encU = encode(u);',
+    '  vec2 encV = encode(v);',
+    '  gl_FragColor = vec4(encU.x, encV.x, encU.y, encV.y);',
+    '}'
+  ].join('\n');
+
+  // Bloom blur shader (separable Gaussian, 13-tap)
+  var blurFragSrc = [
+    'precision highp float;',
+    'varying vec2 v_uv;',
+    'uniform sampler2D u_tex;',
+    'uniform vec2 u_dir;',
+    'uniform vec2 u_texelSize;',
+    '',
+    'void main() {',
+    '  vec3 sum = vec3(0.0);',
+    '  sum += texture2D(u_tex, v_uv - 6.0 * u_dir * u_texelSize).rgb * 0.0044;',
+    '  sum += texture2D(u_tex, v_uv - 5.0 * u_dir * u_texelSize).rgb * 0.0115;',
+    '  sum += texture2D(u_tex, v_uv - 4.0 * u_dir * u_texelSize).rgb * 0.0257;',
+    '  sum += texture2D(u_tex, v_uv - 3.0 * u_dir * u_texelSize).rgb * 0.0488;',
+    '  sum += texture2D(u_tex, v_uv - 2.0 * u_dir * u_texelSize).rgb * 0.0799;',
+    '  sum += texture2D(u_tex, v_uv - 1.0 * u_dir * u_texelSize).rgb * 0.1133;',
+    '  sum += texture2D(u_tex, v_uv).rgb * 0.1340;',
+    '  sum += texture2D(u_tex, v_uv + 1.0 * u_dir * u_texelSize).rgb * 0.1133;',
+    '  sum += texture2D(u_tex, v_uv + 2.0 * u_dir * u_texelSize).rgb * 0.0799;',
+    '  sum += texture2D(u_tex, v_uv + 3.0 * u_dir * u_texelSize).rgb * 0.0488;',
+    '  sum += texture2D(u_tex, v_uv + 4.0 * u_dir * u_texelSize).rgb * 0.0257;',
+    '  sum += texture2D(u_tex, v_uv + 5.0 * u_dir * u_texelSize).rgb * 0.0115;',
+    '  sum += texture2D(u_tex, v_uv + 6.0 * u_dir * u_texelSize).rgb * 0.0044;',
+    '  gl_FragColor = vec4(sum, 1.0);',
+    '}'
+  ].join('\n');
+
+  // Bright extraction shader for bloom
+  var brightFragSrc = [
+    'precision highp float;',
+    'varying vec2 v_uv;',
+    'uniform sampler2D u_state;',
+    'uniform float u_useFloat;',
+    '',
+    'float decodeV(vec4 s) {',
+    '  if (u_useFloat > 0.5) return s.g;',
+    '  return s.g + s.a / 255.0;',
+    '}',
+    '',
+    'void main() {',
+    '  vec4 state = texture2D(u_state, v_uv);',
+    '  float v = decodeV(state);',
+    '  // Only pass through bright areas for bloom',
+    '  float bright = smoothstep(0.15, 0.5, v) * v;',
+    '  gl_FragColor = vec4(bright, bright, bright, 1.0);',
+    '}'
+  ].join('\n');
+
+  // Display shader with rich palette, edge detection, bloom, grain, vignette
+  var displayFragSrc = [
+    'precision highp float;',
+    'varying vec2 v_uv;',
+    'uniform sampler2D u_state;',
+    'uniform sampler2D u_bloom;',
+    'uniform float u_time;',
+    'uniform vec2 u_res;',
+    'uniform vec2 u_simTexel;',
+    'uniform float u_warmth;',
+    'uniform float u_bgBright;',
+    'uniform float u_useFloat;',
+    '',
+    'float hash(vec2 p) {',
+    '  return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);',
+    '}',
+    '',
+    'float decodeV(vec4 s) {',
+    '  if (u_useFloat > 0.5) return s.g;',
+    '  return s.g + s.a / 255.0;',
+    '}',
+    '',
+    'vec3 palette(float t) {',
+    '  // 10-stop stained glass ember palette',
+    '  // Low t = background between patterns, high t = deep inside patterns',
+    '  vec3 c0 = vec3(0.04, 0.025, 0.06);',          // warm dark plum
+    '  vec3 c1 = vec3(0.07, 0.035, 0.09);',         // deeper plum
+    '  vec3 c2 = vec3(0.12, 0.04, 0.08);',          // wine-plum
+    '  vec3 c3 = vec3(0.18, 0.03, 0.06);',          // deep wine crimson
+    '  vec3 c4 = vec3(0.40, 0.06, 0.02);',          // burnt umber
+    '  vec3 c5 = vec3(0.62, 0.18, 0.03);',          // dark amber
+    '  vec3 c6 = vec3(0.82, 0.38, 0.06);',          // rich amber
+    '  vec3 c7 = vec3(0.92, 0.58, 0.12);',          // bright gold
+    '  vec3 c8 = vec3(0.88, 0.52, 0.18);',          // cooler amber for inner depth
+    '  vec3 c9 = vec3(1.0, 0.88, 0.55);',           // warm white-gold core
+    '',
+    '  // Apply warmth shift',
+    '  float w = (u_warmth - 1.0) * 0.4;',
+    '  c5 += vec3(0.08, 0.03, 0.0) * w;',
+    '  c6 += vec3(0.1, 0.06, 0.0) * w;',
+    '  c7 += vec3(0.05, 0.08, 0.0) * w;',
+    '',
+    '  vec3 col;',
+    '  if (t < 0.03) {',
+    '    col = mix(c0, c1, t / 0.03);',
+    '  } else if (t < 0.08) {',
+    '    col = mix(c1, c2, (t - 0.03) / 0.05);',
+    '  } else if (t < 0.15) {',
+    '    col = mix(c2, c3, (t - 0.08) / 0.07);',
+    '  } else if (t < 0.25) {',
+    '    col = mix(c3, c4, (t - 0.15) / 0.10);',
+    '  } else if (t < 0.38) {',
+    '    col = mix(c4, c5, (t - 0.25) / 0.13);',
+    '  } else if (t < 0.52) {',
+    '    col = mix(c5, c6, (t - 0.38) / 0.14);',
+    '  } else if (t < 0.66) {',
+    '    col = mix(c6, c7, (t - 0.52) / 0.14);',
+    '  } else if (t < 0.80) {',
+    '    col = mix(c7, c8, (t - 0.66) / 0.14);',
+    '  } else if (t < 0.92) {',
+    '    col = mix(c8, c9, (t - 0.80) / 0.12);',
+    '  } else {',
+    '    col = mix(c9, vec3(1.0, 0.95, 0.80), (t - 0.92) / 0.08);',
+    '  }',
+    '  return col;',
+    '}',
+    '',
+    'void main() {',
+    '  // Sample v chemical',
+    '  vec4 state = texture2D(u_state, v_uv);',
+    '  float val = decodeV(state);',
+    '',
+    '  // Shape the v value: pull down the mid/high range so filled areas are darker',
+    '  // This makes the pattern read as dark channels with glowing edges, not bright worms',
+    '  float t = val;',
+    '  t = pow(t, 2.5);',
+    '  t = clamp(t * 1.5, 0.0, 1.0);',
+    '',
+    '  vec3 col = palette(t);',
+    '',
+    '  // Sobel edge detection on v for rim lighting',
+    '  float sL  = decodeV(texture2D(u_state, v_uv - vec2(u_simTexel.x, 0.0)));',
+    '  float sR  = decodeV(texture2D(u_state, v_uv + vec2(u_simTexel.x, 0.0)));',
+    '  float sU  = decodeV(texture2D(u_state, v_uv + vec2(0.0, u_simTexel.y)));',
+    '  float sD  = decodeV(texture2D(u_state, v_uv - vec2(0.0, u_simTexel.y)));',
+    '  float sTL = decodeV(texture2D(u_state, v_uv + vec2(-u_simTexel.x, u_simTexel.y)));',
+    '  float sTR = decodeV(texture2D(u_state, v_uv + vec2( u_simTexel.x, u_simTexel.y)));',
+    '  float sBL = decodeV(texture2D(u_state, v_uv + vec2(-u_simTexel.x,-u_simTexel.y)));',
+    '  float sBR = decodeV(texture2D(u_state, v_uv + vec2( u_simTexel.x,-u_simTexel.y)));',
+    '',
+    '  // Sobel operators',
+    '  float gx = -sTL - 2.0*sL - sBL + sTR + 2.0*sR + sBR;',
+    '  float gy = -sTL - 2.0*sU - sTR + sBL + 2.0*sD + sBR;',
+    '  float grad = length(vec2(gx, gy)) * 5.0;',
+    '  grad = clamp(grad, 0.0, 1.0);',
+    '',
+    '  // Brighter, warmer gold rim lighting on edges',
+    '  // Strong edge glow — this is the primary visual element',
+    '  vec3 rimColor = vec3(1.0, 0.75, 0.22);',
+    '  col += rimColor * grad * 1.2 * u_warmth;',
+    '  // Secondary cooler rim for depth',
+    '  col += vec3(0.4, 0.25, 0.6) * grad * 0.15;',
+    '',
+    '  // Background brightness: lift the entire image toward a bg color',
+    '  // At bgBright=0: original dark look. At bgBright=1: bg is white, patterns stay visible on top.',
+    '  vec3 bgCol = mix(vec3(0.02, 0.01, 0.03), vec3(1.0, 1.0, 1.0), u_bgBright);',
+    '  // Use additive-style blend: bg lifts the floor, pattern detail rides on top',
+    '  col = bgCol + col * (1.0 - u_bgBright * 0.3);',
+    '',
+    '  // Add bloom',
+    '  vec3 bloom = texture2D(u_bloom, v_uv).rgb;',
+    '  vec3 bloomTinted = palette(clamp(bloom.r * 2.5, 0.0, 1.0));',
+    '  col += bloomTinted * 0.4 * u_warmth;',
+    '',
+    '  // Film grain',
+    '  vec2 grainUV = v_uv * u_res;',
+    '  float grain = hash(grainUV + vec2(fract(u_time * 7.3), fract(u_time * 11.1)));',
+    '  grain = (grain - 0.5) * 0.03;',
+    '  col += grain;',
+    '',
+    '  // Vignette',
+    '  vec2 vigUV = v_uv * 2.0 - 1.0;',
+    '  float vig = 1.0 - dot(vigUV * 0.5, vigUV * 0.5);',
+    '  vig = clamp(vig, 0.0, 1.0);',
+    '  vig = vig * vig;',
+    '  col *= 0.3 + vig * 0.7;',
+    '',
+    '  // Tone mapping (Reinhard)',
+    '  col = col / (1.0 + col * 0.15);',
+    '',
+    '  // Gamma',
+    '  col = pow(col, vec3(0.95));',
+    '',
+    '  gl_FragColor = vec4(col, 1.0);',
+    '}'
+  ].join('\n');
+
+  // Shader compilation
+  function compileShader(type, src) {
+    var s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
+
+    }
+    return s;
+  }
+
+  function createProgram(vSrc, fSrc) {
+    var prog = gl.createProgram();
+    gl.attachShader(prog, compileShader(gl.VERTEX_SHADER, vSrc));
+    gl.attachShader(prog, compileShader(gl.FRAGMENT_SHADER, fSrc));
+    gl.linkProgram(prog);
+    if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) {
+
+    }
+    return prog;
+  }
+
+  // Create programs
+  var rdProgram = createProgram(vertSrc, rdFragSrc);
+  var seedProgram = createProgram(vertSrc, seedFragSrc);
+  var blurProgram = createProgram(vertSrc, blurFragSrc);
+  var brightProgram = createProgram(vertSrc, brightFragSrc);
+  var displayProgram = createProgram(vertSrc, displayFragSrc);
+
+
+  // Uniform locations
+  var rdUniforms = {
+    state: gl.getUniformLocation(rdProgram, 'u_state'),
+    texelSize: gl.getUniformLocation(rdProgram, 'u_texelSize'),
+    feed: gl.getUniformLocation(rdProgram, 'u_feed'),
+    kill: gl.getUniformLocation(rdProgram, 'u_kill'),
+    dt: gl.getUniformLocation(rdProgram, 'u_dt')
+  };
+
+  var seedUniforms = {
+    state: gl.getUniformLocation(seedProgram, 'u_state'),
+    seedPos: gl.getUniformLocation(seedProgram, 'u_seedPos'),
+    seedRadius: gl.getUniformLocation(seedProgram, 'u_seedRadius'),
+    seedActive: gl.getUniformLocation(seedProgram, 'u_seedActive'),
+    mode: gl.getUniformLocation(seedProgram, 'u_mode')
+  };
+
+  var blurUniforms = {
+    tex: gl.getUniformLocation(blurProgram, 'u_tex'),
+    dir: gl.getUniformLocation(blurProgram, 'u_dir'),
+    texelSize: gl.getUniformLocation(blurProgram, 'u_texelSize')
+  };
+
+  var brightUniforms = {
+    state: gl.getUniformLocation(brightProgram, 'u_state'),
+    useFloat: gl.getUniformLocation(brightProgram, 'u_useFloat')
+  };
+
+  var displayUniforms = {
+    state: gl.getUniformLocation(displayProgram, 'u_state'),
+    bloom: gl.getUniformLocation(displayProgram, 'u_bloom'),
+    time: gl.getUniformLocation(displayProgram, 'u_time'),
+    res: gl.getUniformLocation(displayProgram, 'u_res'),
+    simTexel: gl.getUniformLocation(displayProgram, 'u_simTexel'),
+    warmth: gl.getUniformLocation(displayProgram, 'u_warmth'),
+    bgBright: gl.getUniformLocation(displayProgram, 'u_bgBright'),
+    useFloat: gl.getUniformLocation(displayProgram, 'u_useFloat')
+  };
+
+  // Full-screen triangle
+  var quadBuf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, quadBuf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+
+  function bindQuad(prog) {
+    var aPos = gl.getAttribLocation(prog, 'a_pos');
+    gl.enableVertexAttribArray(aPos);
+    gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+  }
+
+  // Framebuffer / texture creation
+  function createFBO(w, h, type, filter, wrap) {
+    var wrapMode = wrap || gl.CLAMP_TO_EDGE;
+    var tex = gl.createTexture();
+    gl.bindTexture(gl.TEXTURE_2D, tex);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, filter);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, filter);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, wrapMode);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, wrapMode);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, w, h, 0, gl.RGBA, type, null);
+
+    var fbo = gl.createFramebuffer();
+    gl.bindFramebuffer(gl.FRAMEBUFFER, fbo);
+    gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, tex, 0);
+
+    var status = gl.checkFramebufferStatus(gl.FRAMEBUFFER);
+    if (status !== gl.FRAMEBUFFER_COMPLETE) {
+
+    }
+    gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+
+    return { fbo: fbo, tex: tex, width: w, height: h };
+  }
+
+  // Simulation FBOs (ping-pong) with REPEAT wrapping
+  var simFilter = (useFloat && (floatLinear || halfFloatLinear)) ? gl.LINEAR : gl.NEAREST;
+  var simFBO0, simFBO1;
+  // Bloom FBOs
+  var bloomFBO0, bloomFBO1, bloomFBO2;
+
+  function initFBOs() {
+    var actualTexType = texType;
+
+    simFBO0 = createFBO(simWidth, simHeight, actualTexType, simFilter, gl.CLAMP_TO_EDGE);
+    gl.bindFramebuffer(gl.FRAMEBUFFER, simFBO0.fbo);
+    var status = gl.checkFramebufferStatus(gl.FRAMEBUFFER);
+    gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+
+    if (status !== gl.FRAMEBUFFER_COMPLETE && actualTexType !== gl.UNSIGNED_BYTE) {
+      actualTexType = gl.UNSIGNED_BYTE;
+      useFloat = false;
+      simFilter = gl.LINEAR;
+      gl.deleteTexture(simFBO0.tex);
+      gl.deleteFramebuffer(simFBO0.fbo);
+      simFBO0 = createFBO(simWidth, simHeight, actualTexType, simFilter, gl.CLAMP_TO_EDGE);
+    }
+
+    simFBO1 = createFBO(simWidth, simHeight, actualTexType, simFilter, gl.CLAMP_TO_EDGE);
+
+    // Bloom at quarter resolution
+    var bloomW = Math.floor(simWidth / 2);
+    var bloomH = Math.floor(simHeight / 2);
+    bloomFBO0 = createFBO(bloomW, bloomH, gl.UNSIGNED_BYTE, gl.LINEAR);
+    bloomFBO1 = createFBO(bloomW, bloomH, gl.UNSIGNED_BYTE, gl.LINEAR);
+    bloomFBO2 = createFBO(bloomW, bloomH, gl.UNSIGNED_BYTE, gl.LINEAR);
+  }
+
+  // Seed the initial state with dense coverage across the entire grid
+  function seedInitialState() {
+    var dataSize = simWidth * simHeight * 4;
+    var data;
+
+    if (useFloat) {
+      data = new Float32Array(dataSize);
+    } else {
+      data = new Uint8Array(dataSize);
+    }
+
+    // Fill: u=1, v=0 everywhere
+    for (var i = 0; i < simWidth * simHeight; i++) {
+      var idx = i * 4;
+      if (useFloat) {
+        data[idx] = 1.0;
+        data[idx + 1] = 0.0;
+        data[idx + 2] = 0.0;
+        data[idx + 3] = 1.0;
+      } else {
+        // encode u=1.0: hi=1.0 (255), lo=0 (0)
+        data[idx] = 255;
+        data[idx + 1] = 0;
+        data[idx + 2] = 0;
+        data[idx + 3] = 0;
+      }
+    }
+
+    // Seed MANY dense circles of v on the u=1/v=0 background
+    // This gives the Gray-Scott model proper initial conditions
+    var numSpots = 150;
+    for (var s = 0; s < numSpots; s++) {
+      var cx = Math.floor(Math.random() * simWidth);
+      var cy = Math.floor(Math.random() * simHeight);
+      var r = 3 + Math.floor(Math.random() * 10);
+      for (var dy = -r; dy <= r; dy++) {
+        for (var dx = -r; dx <= r; dx++) {
+          if (dx * dx + dy * dy <= r * r) {
+            var px = (cx + dx + simWidth) % simWidth;
+            var py = (cy + dy + simHeight) % simHeight;
+            var idx = (py * simWidth + px) * 4;
+            var vVal = 0.25 + Math.random() * 0.15;
+            var uVal = 0.5 + Math.random() * 0.1;
+            if (useFloat) {
+              data[idx] = uVal;
+              data[idx + 1] = vVal;
+            } else {
+              var uHi = Math.floor(uVal * 255) / 255;
+              var uLo = (uVal - uHi) * 255;
+              var vHi = Math.floor(vVal * 255) / 255;
+              var vLo = (vVal - vHi) * 255;
+              data[idx] = Math.floor(uHi * 255);
+              data[idx + 1] = Math.floor(vHi * 255);
+              data[idx + 2] = Math.floor(uLo * 255);
+              data[idx + 3] = Math.floor(vLo * 255);
+            }
+          }
+        }
+      }
+    }
+
+    gl.bindTexture(gl.TEXTURE_2D, simFBO0.tex);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, simWidth, simHeight, 0, gl.RGBA, useFloat ? texType : gl.UNSIGNED_BYTE, data);
+    gl.bindTexture(gl.TEXTURE_2D, simFBO1.tex);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, simWidth, simHeight, 0, gl.RGBA, useFloat ? texType : gl.UNSIGNED_BYTE, data);
+  }
+
+  // Resize display canvas
+  function resize() {
+    displayWidth = Math.round(canvas.clientWidth * dpr);
+    displayHeight = Math.round(canvas.clientHeight * dpr);
+    if (canvas.width !== displayWidth || canvas.height !== displayHeight) {
+      canvas.width = displayWidth;
+      canvas.height = displayHeight;
+    }
+  }
+
+  // Initialize
+  resize();
+  initFBOs();
+  seedInitialState();
+
+  // Draw fullscreen triangle
+  function drawFullscreen(prog, targetFBO, targetW, targetH) {
+    if (targetFBO) {
+      gl.bindFramebuffer(gl.FRAMEBUFFER, targetFBO.fbo);
+    } else {
+      gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+    }
+    gl.viewport(0, 0, targetW, targetH);
+    gl.bindBuffer(gl.ARRAY_BUFFER, quadBuf);
+    bindQuad(prog);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+  }
+
+  var currentFBO = 0;
+
+  // State
+  var frameCount = 0;
+  var paused = false;
+  var lastTime = 0;
+  var elapsedSim = 0;
+  var needsResize = false;
+
+  // Pop event timing: first pop after 2-4 seconds
+  var nextPopTime = 2 + Math.random() * 2;
+
+  window.addEventListener('resize', function() {
+    needsResize = true;
+  });
+
+  // Apply a seed or clear spot via the GPU shader
+  // mode: 0 = seed (introduce v), 1 = clear (kill v, "pop")
+  function applySpot(x, y, radius, mode) {
+    var srcFBO = currentFBO === 0 ? simFBO0 : simFBO1;
+    var dstFBO = currentFBO === 0 ? simFBO1 : simFBO0;
+
+    gl.useProgram(seedProgram);
+    gl.activeTexture(gl.TEXTURE0);
+    gl.bindTexture(gl.TEXTURE_2D, srcFBO.tex);
+    gl.uniform1i(seedUniforms.state, 0);
+    gl.uniform2f(seedUniforms.seedPos, x, y);
+    gl.uniform1f(seedUniforms.seedRadius, radius);
+    gl.uniform1f(seedUniforms.seedActive, 1.0);
+    gl.uniform1f(seedUniforms.mode, mode);
+    drawFullscreen(seedProgram, dstFBO, simWidth, simHeight);
+    currentFBO = 1 - currentFBO;
+  }
+
+  // Main render loop
+  function render(now) {
+    if (paused) {
+      requestAnimationFrame(render);
+      return;
+    }
+
+    if (needsResize) {
+      needsResize = false;
+      resize();
+    }
+
+    if (!lastTime) lastTime = now;
+    var dt = Math.min((now - lastTime) / 1000, 0.05);
+    lastTime = now;
+
+    if (prefersReduced) dt *= 0.1;
+
+    var time = now * 0.001;
+    elapsedSim += dt;
+
+    // Gray-Scott parameters: coral growth zone with tiny drift
+    // Base: f=0.0545, k=0.062
+    var f = 0.0545 + Math.sin(elapsedSim * 0.03) * 0.002;
+    var k = 0.062 + Math.sin(elapsedSim * 0.023 + 1.5) * 0.001;
+
+    // 16-20 simulation steps per frame for fast pattern evolution
+    var stepsPerFrame = Math.round(18 * PATTERN_SPEED);
+    stepsPerFrame = Math.max(4, Math.min(24, stepsPerFrame));
+    var simDt = 1.0;
+
+    gl.useProgram(rdProgram);
+    gl.uniform2f(rdUniforms.texelSize, 1.0 / simWidth, 1.0 / simHeight);
+    gl.uniform1f(rdUniforms.dt, simDt);
+    gl.uniform1f(rdUniforms.feed, f);
+    gl.uniform1f(rdUniforms.kill, k);
+
+    for (var step = 0; step < stepsPerFrame; step++) {
+      var srcFBO = currentFBO === 0 ? simFBO0 : simFBO1;
+      var dstFBO = currentFBO === 0 ? simFBO1 : simFBO0;
+
+      gl.activeTexture(gl.TEXTURE0);
+      gl.bindTexture(gl.TEXTURE_2D, srcFBO.tex);
+      gl.uniform1i(rdUniforms.state, 0);
+      drawFullscreen(rdProgram, dstFBO, simWidth, simHeight);
+      currentFBO = 1 - currentFBO;
+    }
+
+    // Pop events: continuous pop-and-grow cycle
+    nextPopTime -= dt;
+    if (nextPopTime <= 0) {
+      // 2-4 pops per event, bigger radii
+      var numPops = 2 + Math.floor(Math.random() * 3);
+      for (var pp = 0; pp < numPops; pp++) {
+        applySpot(
+          0.05 + Math.random() * 0.9,
+          0.05 + Math.random() * 0.9,
+          0.08 + Math.random() * 0.15,
+          1.0  // clear mode
+        );
+      }
+      // Next pop in 0.8-1.8 seconds
+      nextPopTime = (0.8 + Math.random() * 1.0) / POP_RATE;
+    }
+
+    // Current simulation result
+    var resultFBO = currentFBO === 0 ? simFBO0 : simFBO1;
+
+    // Bloom: extract bright areas
+    var bloomW = bloomFBO0.width;
+    var bloomH = bloomFBO0.height;
+
+    gl.useProgram(brightProgram);
+    gl.activeTexture(gl.TEXTURE0);
+    gl.bindTexture(gl.TEXTURE_2D, resultFBO.tex);
+    gl.uniform1i(brightUniforms.state, 0);
+    gl.uniform1f(brightUniforms.useFloat, useFloat ? 1.0 : 0.0);
+    drawFullscreen(brightProgram, bloomFBO2, bloomW, bloomH);
+
+    // Two-pass Gaussian bloom
+    gl.useProgram(blurProgram);
+
+    // Pass 1: horizontal
+    gl.activeTexture(gl.TEXTURE0);
+    gl.bindTexture(gl.TEXTURE_2D, bloomFBO2.tex);
+    gl.uniform1i(blurUniforms.tex, 0);
+    gl.uniform2f(blurUniforms.dir, 1.0, 0.0);
+    gl.uniform2f(blurUniforms.texelSize, 1.0 / bloomW, 1.0 / bloomH);
+    drawFullscreen(blurProgram, bloomFBO0, bloomW, bloomH);
+
+    // Pass 1: vertical
+    gl.activeTexture(gl.TEXTURE0);
+    gl.bindTexture(gl.TEXTURE_2D, bloomFBO0.tex);
+    gl.uniform1i(blurUniforms.tex, 0);
+    gl.uniform2f(blurUniforms.dir, 0.0, 1.0);
+    gl.uniform2f(blurUniforms.texelSize, 1.0 / bloomW, 1.0 / bloomH);
+    drawFullscreen(blurProgram, bloomFBO1, bloomW, bloomH);
+
+    // Pass 2: wider blur for softer glow
+    gl.activeTexture(gl.TEXTURE0);
+    gl.bindTexture(gl.TEXTURE_2D, bloomFBO1.tex);
+    gl.uniform2f(blurUniforms.dir, 1.0, 0.0);
+    gl.uniform2f(blurUniforms.texelSize, 2.0 / bloomW, 2.0 / bloomH);
+    drawFullscreen(blurProgram, bloomFBO0, bloomW, bloomH);
+
+    gl.activeTexture(gl.TEXTURE0);
+    gl.bindTexture(gl.TEXTURE_2D, bloomFBO0.tex);
+    gl.uniform2f(blurUniforms.dir, 0.0, 1.0);
+    gl.uniform2f(blurUniforms.texelSize, 2.0 / bloomW, 2.0 / bloomH);
+    drawFullscreen(blurProgram, bloomFBO1, bloomW, bloomH);
+
+    // Display pass
+    gl.useProgram(displayProgram);
+    gl.activeTexture(gl.TEXTURE0);
+    gl.bindTexture(gl.TEXTURE_2D, resultFBO.tex);
+    gl.uniform1i(displayUniforms.state, 0);
+    gl.activeTexture(gl.TEXTURE1);
+    gl.bindTexture(gl.TEXTURE_2D, bloomFBO1.tex);
+    gl.uniform1i(displayUniforms.bloom, 1);
+    gl.uniform1f(displayUniforms.time, time);
+    gl.uniform2f(displayUniforms.res, displayWidth, displayHeight);
+    gl.uniform2f(displayUniforms.simTexel, 1.0 / simWidth, 1.0 / simHeight);
+    gl.uniform1f(displayUniforms.warmth, WARMTH);
+    gl.uniform1f(displayUniforms.bgBright, BG_BRIGHTNESS);
+    gl.uniform1f(displayUniforms.useFloat, useFloat ? 1.0 : 0.0);
+    drawFullscreen(displayProgram, null, displayWidth, displayHeight);
+
+    frameCount++;
+    requestAnimationFrame(render);
+  }
+
+  requestAnimationFrame(render);
+
+  // Visibility pause
+  document.addEventListener('visibilitychange', function() {
+    paused = document.hidden;
+    if (!paused) lastTime = 0;
+  });
+
+  // Mouse/touch interaction: click to inject perturbation
+  function handleInteraction(clientX, clientY) {
+    // Convert client coords to simulation UV (0-1)
+    var rect = canvas.getBoundingClientRect();
+    var uvX = (clientX - rect.left) / rect.width;
+    var uvY = 1.0 - (clientY - rect.top) / rect.height;
+    uvX = Math.max(0.02, Math.min(0.98, uvX));
+    uvY = Math.max(0.02, Math.min(0.98, uvY));
+    // Inject a seed spot (mode 0 = introduce v chemical)
+    applySpot(uvX, uvY, 0.06 + Math.random() * 0.06, 0.0);
+    // Also inject a couple nearby for organic spread
+    for (var i = 0; i < 2; i++) {
+      applySpot(
+        uvX + (Math.random() - 0.5) * 0.12,
+        uvY + (Math.random() - 0.5) * 0.12,
+        0.04 + Math.random() * 0.05,
+        0.0
+      );
+    }
+  }
+
+  canvas.addEventListener('click', function(e) {
+    handleInteraction(e.clientX, e.clientY);
+  });
+  canvas.addEventListener('touchstart', function(e) {
+    e.preventDefault();
+    var t = e.touches[0];
+    handleInteraction(t.clientX, t.clientY);
+  }, { passive: false });
+
+  // PostMessage param listener
+  window.addEventListener('message', function(e) {
+    if (e.data && e.data.type === 'param') {
+      switch (e.data.name) {
+        case 'PATTERN_SPEED': PATTERN_SPEED = e.data.value; break;
+        case 'WARMTH': WARMTH = e.data.value; break;
+        case 'POP_RATE': POP_RATE = e.data.value; break;
+      }
+    }
+  });
+})();
+</script>
+</body>
+</html>

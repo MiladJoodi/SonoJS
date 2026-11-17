@@ -12,7 +12,7 @@ Premium AI / SaaS landing with an interactive WebGL hero. Demo brand: **Aether**
 | File | Purpose |
 |---|---|
 | `main.webp` | Catalog card poster + detail page hero |
-| `cover.mp4` | Catalog card only — plays on hover |
+| `cover.mp4` | Catalog card only. Plays on hover |
 
 ## Live / repo
 

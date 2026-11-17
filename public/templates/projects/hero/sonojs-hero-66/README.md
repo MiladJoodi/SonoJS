@@ -5,7 +5,7 @@ Category: `hero`
 Slug / folder: `sonojs-hero-66`  
 Path: `public/templates/projects/hero/sonojs-hero-66/`  
 
-Full-bleed video marketing hero. Demo brand: **Aurora** — Design That Lights the Way.
+Full-bleed video marketing hero. Demo brand: **Aurora**. Design That Lights the Way.
 
 ## Images / video
 

@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>030 — Fireworks</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      background: #000;
+      overflow: hidden;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+    
+    canvas {
+      display: block;
+    }
+    
+    .controls {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: rgba(0, 0, 0, 0.75);
+      padding: 16px 20px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      z-index: 100;
+      color: #fff;
+      font-size: 13px;
+      min-width: 220px;
+    }
+    
+    .controls h3 {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: #fff;
+      letter-spacing: 0.5px;
+    }
+    
+    .control-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    
+    .control-row label {
+      color: rgba(255, 255, 255, 0.7);
+    }
+    
+    .control-row input[type="range"] {
+      width: 100px;
+      accent-color: #ff6b6b;
+    }
+    
+    .control-row span {
+      width: 32px;
+      text-align: right;
+      color: #ff6b6b;
+      font-family: 'SF Mono', monospace;
+      font-size: 12px;
+    }
+    
+    .btn {
+      width: 100%;
+      padding: 10px;
+      margin-top: 8px;
+      background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+      border: none;
+      border-radius: 8px;
+      color: #000;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 20px rgba(255, 107, 107, 0.4);
+    }
+    
+    .btn:active {
+      transform: translateY(0);
+    }
+    
+    .hint {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 11px;
+      line-height: 1.5;
+    }
+    
+    
+    
+  
+    html.embed #ui,
+    html.embed #info,
+    html.embed #controls,
+    html.embed #stats,
+    html.embed #hint,
+    html.embed .panel,
+    html.embed header,
+    html.embed footer { display: none !important; }
+  </style>
+  <script>if(/\bembed=1\b/.test(location.search))document.documentElement.classList.add("embed")</script>
+</head>
+<body>
+
+<canvas id="canvas"></canvas>
+
+<div class="controls">
+  <h3>🎆 Fireworks</h3>
+  <div class="control-row">
+    <label>Particles</label>
+    <input type="range" id="particles" min="50" max="300" value="150">
+    <span id="particlesVal">150</span>
+  </div>
+  <div class="control-row">
+    <label>Gravity</label>
+    <input type="range" id="gravity" min="1" max="20" value="10">
+    <span id="gravityVal">10</span>
+  </div>
+  <div class="control-row">
+    <label>Trail Length</label>
+    <input type="range" id="trail" min="1" max="20" value="10">
+    <span id="trailVal">10</span>
+  </div>
+  <div class="control-row">
+    <label>Auto Launch</label>
+    <input type="range" id="autoRate" min="0" max="100" value="30">
+    <span id="autoRateVal">30</span>
+  </div>
+  <button class="btn" id="burstBtn">✨ Burst (Space)</button>
+  <div class="hint">
+    Click anywhere to launch<br>
+    Hold for rapid fire
+  </div>
+</div>
+
+
+
+<script>
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+
+let W, H;
+function resize() {
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+// Controls
+const particlesInput = document.getElementById('particles');
+const gravityInput = document.getElementById('gravity');
+const trailInput = document.getElementById('trail');
+const autoRateInput = document.getElementById('autoRate');
+const burstBtn = document.getElementById('burstBtn');
+
+let particleCount = 150;
+let gravity = 0.1;
+let trailAlpha = 0.1;
+let autoRate = 30;
+
+function updateControls() {
+  particleCount = +particlesInput.value;
+  gravity = +gravityInput.value / 100;
+  trailAlpha = (21 - +trailInput.value) / 100;
+  autoRate = +autoRateInput.value;
+  
+  document.getElementById('particlesVal').textContent = particleCount;
+  document.getElementById('gravityVal').textContent = gravityInput.value;
+  document.getElementById('trailVal').textContent = trailInput.value;
+  document.getElementById('autoRateVal').textContent = autoRate;
+}
+
+[particlesInput, gravityInput, trailInput, autoRateInput].forEach(el => {
+  el.addEventListener('input', updateControls);
+});
+updateControls();
+
+// Color palettes
+const palettes = [
+  ['#ff6b6b', '#ff8787', '#ffa8a8', '#ffc9c9', '#ffe3e3'], // Red
+  ['#ffd43b', '#ffe066', '#ffec99', '#fff3bf', '#fff9db'], // Gold
+  ['#69db7c', '#8ce99a', '#b2f2bb', '#d3f9d8', '#ebfbee'], // Green
+  ['#4dabf7', '#74c0fc', '#a5d8ff', '#d0ebff', '#e7f5ff'], // Blue
+  ['#da77f2', '#e599f7', '#eebefa', '#f3d9fa', '#f8f0fc'], // Purple
+  ['#ff922b', '#ffa94d', '#ffc078', '#ffd8a8', '#ffedd1'], // Orange
+  ['#20c997', '#38d9a9', '#63e6be', '#96f2d7', '#c3fae8'], // Teal
+  ['#f06595', '#f783ac', '#faa2c1', '#fcc2d7', '#ffdeeb'], // Pink
+];
+
+// Particles
+const rockets = [];
+const particles = [];
+const sparkles = [];
+
+class Rocket {
+  constructor(x, targetY) {
+    this.x = x;
+    this.y = H;
+    this.targetY = targetY;
+    this.vy = -Math.random() * 4 - 10;
+    this.vx = (Math.random() - 0.5) * 2;
+    this.trail = [];
+    this.hue = Math.random() * 360;
+    this.dead = false;
+  }
+  
+  update() {
+    this.trail.push({ x: this.x, y: this.y, alpha: 1 });
+    if (this.trail.length > 15) this.trail.shift();
+    
+    this.x += this.vx;
+    this.y += this.vy;
+    this.vy += gravity * 0.5;
+    
+    // Explode when velocity slows or reaches target
+    if (this.vy >= -2 || this.y <= this.targetY) {
+      this.explode();
+      this.dead = true;
+    }
+    
+    // Update trail alpha
+    for (let i = 0; i < this.trail.length; i++) {
+      this.trail[i].alpha -= 0.07;
+    }
+  }
+  
+  explode() {
+    const palette = palettes[Math.floor(Math.random() * palettes.length)];
+    const baseAngle = Math.random() * Math.PI * 2;
+    
+    // Main burst
+    for (let i = 0; i < particleCount; i++) {
+      const angle = (i / particleCount) * Math.PI * 2 + baseAngle + (Math.random() - 0.5) * 0.5;
+      const speed = Math.random() * 6 + 2;
+      const color = palette[Math.floor(Math.random() * palette.length)];
+      
+      particles.push(new Particle(
+        this.x, this.y,
+        Math.cos(angle) * speed,
+        Math.sin(angle) * speed,
+        color,
+        Math.random() * 2 + 1
+      ));
+    }
+    
+    // Inner sparkles
+    for (let i = 0; i < particleCount / 3; i++) {
+      const angle = Math.random() * Math.PI * 2;
+      const speed = Math.random() * 3 + 1;
+      
+      sparkles.push(new Sparkle(
+        this.x, this.y,
+        Math.cos(angle) * speed,
+        Math.sin(angle) * speed
+      ));
+    }
+    
+    // Secondary bursts (ring effect)
+    if (Math.random() > 0.5) {
+      const ringParticles = Math.floor(particleCount / 2);
+      const ringRadius = 4;
+      for (let i = 0; i < ringParticles; i++) {
+        const angle = (i / ringParticles) * Math.PI * 2;
+        const color = palette[0];
+        
+        particles.push(new Particle(
+          this.x, this.y,
+          Math.cos(angle) * ringRadius,
+          Math.sin(angle) * ringRadius,
+          color,
+          1.5
+        ));
+      }
+    }
+  }
+  
+  draw() {
+    // Draw trail
+    ctx.beginPath();
+    for (let i = 0; i < this.trail.length; i++) {
+      const t = this.trail[i];
+      if (t.alpha <= 0) continue;
+      
+      if (i === 0) {
+        ctx.moveTo(t.x, t.y);
+      } else {
+        ctx.lineTo(t.x, t.y);
+      }
+    }
+    ctx.strokeStyle = `hsla(${this.hue}, 100%, 70%, 0.6)`;
+    ctx.lineWidth = 2;
+    ctx.stroke();
+    
+    // Draw rocket head
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, 3, 0, Math.PI * 2);
+    ctx.fillStyle = `hsl(${this.hue}, 100%, 80%)`;
+    ctx.fill();
+    
+    // Glow
+    const grad = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, 15);
+    grad.addColorStop(0, `hsla(${this.hue}, 100%, 70%, 0.5)`);
+    grad.addColorStop(1, 'transparent');
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, 15, 0, Math.PI * 2);
+    ctx.fill();
+  }
+}
+
+class Particle {
+  constructor(x, y, vx, vy, color, size) {
+    this.x = x;
+    this.y = y;
+    this.vx = vx;
+    this.vy = vy;
+    this.color = color;
+    this.size = size;
+    this.alpha = 1;
+    this.decay = Math.random() * 0.015 + 0.008;
+    this.trail = [];
+    this.trailMax = 8;
+  }
+  
+  update() {
+    this.trail.push({ x: this.x, y: this.y, alpha: this.alpha });
+    if (this.trail.length > this.trailMax) this.trail.shift();
+    
+    this.x += this.vx;
+    this.y += this.vy;
+    this.vy += gravity;
+    this.vx *= 0.99;
+    this.vy *= 0.99;
+    this.alpha -= this.decay;
+    this.size *= 0.995;
+  }
+  
+  draw() {
+    // Draw trail
+    for (let i = 0; i < this.trail.length; i++) {
+      const t = this.trail[i];
+      const trailAlpha = (i / this.trail.length) * this.alpha * 0.5;
+      const trailSize = this.size * (i / this.trail.length);
+      
+      ctx.beginPath();
+      ctx.arc(t.x, t.y, trailSize, 0, Math.PI * 2);
+      ctx.fillStyle = this.hexToRgba(this.color, trailAlpha);
+      ctx.fill();
+    }
+    
+    // Draw particle
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fillStyle = this.hexToRgba(this.color, this.alpha);
+    ctx.fill();
+    
+    // Glow
+    if (this.alpha > 0.3) {
+      const grad = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size * 3);
+      grad.addColorStop(0, this.hexToRgba(this.color, this.alpha * 0.3));
+      grad.addColorStop(1, 'transparent');
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size * 3, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+  
+  hexToRgba(hex, alpha) {
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+  }
+}
+
+class Sparkle {
+  constructor(x, y, vx, vy) {
+    this.x = x;
+    this.y = y;
+    this.vx = vx;
+    this.vy = vy;
+    this.alpha = 1;
+    this.size = Math.random() * 2 + 0.5;
+    this.decay = Math.random() * 0.02 + 0.015;
+    this.twinkle = Math.random() * Math.PI * 2;
+  }
+  
+  update() {
+    this.x += this.vx;
+    this.y += this.vy;
+    this.vy += gravity * 0.5;
+    this.vx *= 0.98;
+    this.vy *= 0.98;
+    this.alpha -= this.decay;
+    this.twinkle += 0.3;
+  }
+  
+  draw() {
+    const flicker = 0.5 + Math.sin(this.twinkle) * 0.5;
+    const finalAlpha = this.alpha * flicker;
+    
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(255, 255, 255, ${finalAlpha})`;
+    ctx.fill();
+  }
+}
+
+function launchRocket(x, targetY) {
+  if (targetY === undefined) {
+    targetY = H * 0.15 + Math.random() * H * 0.35;
+  }
+  rockets.push(new Rocket(x, targetY));
+}
+
+function randomLaunch() {
+  const x = Math.random() * W * 0.8 + W * 0.1;
+  launchRocket(x);
+}
+
+// Animation loop
+let lastAutoLaunch = 0;
+function animate(time) {
+  // Fade trail
+  ctx.fillStyle = `rgba(0, 0, 0, ${trailAlpha})`;
+  ctx.fillRect(0, 0, W, H);
+  
+  // Auto launch
+  if (autoRate > 0 && time - lastAutoLaunch > (101 - autoRate) * 30) {
+    randomLaunch();
+    lastAutoLaunch = time;
+  }
+  
+  // Update and draw rockets
+  for (let i = rockets.length - 1; i >= 0; i--) {
+    rockets[i].update();
+    rockets[i].draw();
+    if (rockets[i].dead) {
+      rockets.splice(i, 1);
+    }
+  }
+  
+  // Update and draw particles
+  for (let i = particles.length - 1; i >= 0; i--) {
+    particles[i].update();
+    particles[i].draw();
+    if (particles[i].alpha <= 0) {
+      particles.splice(i, 1);
+    }
+  }
+  
+  // Update and draw sparkles
+  for (let i = sparkles.length - 1; i >= 0; i--) {
+    sparkles[i].update();
+    sparkles[i].draw();
+    if (sparkles[i].alpha <= 0) {
+      sparkles.splice(i, 1);
+    }
+  }
+  
+  requestAnimationFrame(animate);
+}
+
+// Event listeners
+let isHolding = false;
+let holdInterval;
+
+canvas.addEventListener('mousedown', (e) => {
+  launchRocket(e.clientX, e.clientY);
+  isHolding = true;
+  holdInterval = setInterval(() => {
+    if (isHolding) {
+      launchRocket(
+        e.clientX + (Math.random() - 0.5) * 100,
+        e.clientY + (Math.random() - 0.5) * 50
+      );
+    }
+  }, 150);
+});
+
+canvas.addEventListener('mouseup', () => {
+  isHolding = false;
+  clearInterval(holdInterval);
+});
+
+canvas.addEventListener('mouseleave', () => {
+  isHolding = false;
+  clearInterval(holdInterval);
+});
+
+canvas.addEventListener('touchstart', (e) => {
+  e.preventDefault();
+  const touch = e.touches[0];
+  launchRocket(touch.clientX, touch.clientY);
+});
+
+burstBtn.addEventListener('click', () => {
+  for (let i = 0; i < 5; i++) {
+    setTimeout(() => randomLaunch(), i * 100);
+  }
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.code === 'Space') {
+    e.preventDefault();
+    for (let i = 0; i < 5; i++) {
+      setTimeout(() => randomLaunch(), i * 100);
+    }
+  }
+});
+
+// Start
+animate(0);
+</script>
+
+</body>
+</html>

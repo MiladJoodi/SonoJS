@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Strange Attractor (Lorenz)</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0a0a0a;
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  }
+  canvas {
+    display: block;
+    width: 100vw;
+    height: 100vh;
+  }
+  .label {
+    position: fixed;
+    top: 20px;
+    left: 24px;
+    color: rgba(200, 149, 108, 0.6);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    z-index: 10;
+    pointer-events: none;
+  }
+  html.embed .label { display: none; }
+</style>
+<script>if(/\bembed=1\b/.test(location.search))document.documentElement.classList.add("embed")</script>
+</head>
+<body>
+<div class="label">Strange Attractor</div>
+<canvas id="canvas"></canvas>
+<script>
+(function() {
+  const canvas = document.getElementById('canvas');
+  const ctx = canvas.getContext('2d');
+
+  // High-DPI support
+  function resize() {
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width = window.innerWidth * dpr;
+    canvas.height = window.innerHeight * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  // Lorenz parameters
+  const SIGMA = 10;
+  let RHO = 28;
+  const BETA = 8 / 3;
+  const DT = 0.005;
+  let TRAIL_LENGTH = 2000;
+  let STEPS_PER_FRAME = 4;
+
+  // Warm palette with variations
+  const COLORS = [
+    { r: 200, g: 149, b: 108 }, // amber #c8956c
+    { r: 212, g: 165, b: 116 }, // gold #d4a574
+    { r: 224, g: 120, b: 80 },  // coral #e07850
+    { r: 190, g: 140, b: 100 }, // muted amber
+    { r: 230, g: 150, b: 90 },  // warm gold
+    { r: 210, g: 110, b: 70 },  // deep coral
+    { r: 180, g: 160, b: 120 }, // pale gold
+  ];
+
+  // Particle class
+  class Particle {
+    constructor(x, y, z, color) {
+      this.x = x;
+      this.y = y;
+      this.z = z;
+      this.color = color;
+      this.trail = [];
+    }
+
+    step() {
+      const dx = SIGMA * (this.y - this.x);
+      const dy = this.x * (RHO - this.z) - this.y;
+      const dz = this.x * this.y - BETA * this.z;
+
+      this.x += dx * DT;
+      this.y += dy * DT;
+      this.z += dz * DT;
+
+      this.trail.push({ x: this.x, y: this.y, z: this.z });
+      if (this.trail.length > TRAIL_LENGTH) {
+        this.trail.shift();
+      }
+    }
+  }
+
+  // Create particles with slightly different starting positions
+  const particles = [];
+  const numParticles = 7;
+  for (let i = 0; i < numParticles; i++) {
+    const offset = i * 0.3;
+    particles.push(new Particle(
+      1 + offset,
+      1 + offset * 0.5,
+      1 + offset * 0.2,
+      COLORS[i % COLORS.length]
+    ));
+  }
+
+  // Mouse drag to rotate view
+  let mouseDown = false;
+  let lastMouseX = 0;
+  let manualRotation = 0;
+  let autoRotate = true;
+
+  canvas.addEventListener('mousedown', function(e) { mouseDown = true; lastMouseX = e.clientX; autoRotate = false; });
+  canvas.addEventListener('mousemove', function(e) {
+    if (mouseDown) {
+      manualRotation += (e.clientX - lastMouseX) * 0.005;
+      lastMouseX = e.clientX;
+    }
+  });
+  canvas.addEventListener('mouseup', function() { mouseDown = false; });
+  canvas.addEventListener('dblclick', function() { autoRotate = true; });
+  canvas.addEventListener('touchstart', function(e) { e.preventDefault(); mouseDown = true; lastMouseX = e.touches[0].clientX; autoRotate = false; }, { passive: false });
+  canvas.addEventListener('touchmove', function(e) {
+    e.preventDefault();
+    if (mouseDown) {
+      manualRotation += (e.touches[0].clientX - lastMouseX) * 0.005;
+      lastMouseX = e.touches[0].clientX;
+    }
+  }, { passive: false });
+  canvas.addEventListener('touchend', function() { mouseDown = false; });
+
+  // Pre-run to build up trails
+  for (let i = 0; i < 800; i++) {
+    particles.forEach(p => p.step());
+  }
+
+  // 3D projection with rotation
+  let rotationAngle = 0;
+
+  function project(x, y, z, angle) {
+    // Rotate around Y axis
+    const cosA = Math.cos(angle);
+    const sinA = Math.sin(angle);
+    const rx = x * cosA - z * sinA;
+    const rz = x * sinA + z * cosA;
+    const ry = y;
+
+    // Simple perspective projection
+    const perspective = 200;
+    const distance = 120;
+    const scale = perspective / (perspective + rz - distance);
+
+    return {
+      x: rx * scale,
+      y: ry * scale,
+      scale: scale
+    };
+  }
+
+  function drawTrail(particle, angle, centerX, centerY, scaleFactor) {
+    const trail = particle.trail;
+    const len = trail.length;
+    if (len < 2) return;
+
+    const col = particle.color;
+
+    // Glow pass — thicker, lower alpha
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    for (let i = 1; i < len; i++) {
+      const t = i / len; // 0 at tail, 1 at head
+      const alpha = t * t * 0.12;
+      if (alpha < 0.005) continue;
+
+      const p0 = project(trail[i - 1].x, trail[i - 1].y, trail[i - 1].z, angle);
+      const p1 = project(trail[i].x, trail[i].y, trail[i].z, angle);
+
+      ctx.beginPath();
+      ctx.moveTo(centerX + p0.x * scaleFactor, centerY - p0.y * scaleFactor);
+      ctx.lineTo(centerX + p1.x * scaleFactor, centerY - p1.y * scaleFactor);
+      ctx.strokeStyle = `rgba(${col.r}, ${col.g}, ${col.b}, ${alpha})`;
+      ctx.lineWidth = 4 * p1.scale;
+      ctx.stroke();
+    }
+
+    // Crisp pass — thin, higher alpha
+    for (let i = 1; i < len; i++) {
+      const t = i / len;
+      const alpha = t * t * 0.7;
+      if (alpha < 0.01) continue;
+
+      const p0 = project(trail[i - 1].x, trail[i - 1].y, trail[i - 1].z, angle);
+      const p1 = project(trail[i].x, trail[i].y, trail[i].z, angle);
+
+      ctx.beginPath();
+      ctx.moveTo(centerX + p0.x * scaleFactor, centerY - p0.y * scaleFactor);
+      ctx.lineTo(centerX + p1.x * scaleFactor, centerY - p1.y * scaleFactor);
+      ctx.strokeStyle = `rgba(${col.r}, ${col.g}, ${col.b}, ${alpha})`;
+      ctx.lineWidth = 1.2 * p1.scale;
+      ctx.stroke();
+    }
+
+    // Bright head dot
+    const head = trail[len - 1];
+    const hp = project(head.x, head.y, head.z, angle);
+    const hx = centerX + hp.x * scaleFactor;
+    const hy = centerY - hp.y * scaleFactor;
+
+    // Outer glow
+    const gradient = ctx.createRadialGradient(hx, hy, 0, hx, hy, 8 * hp.scale);
+    gradient.addColorStop(0, `rgba(${col.r}, ${col.g}, ${col.b}, 0.8)`);
+    gradient.addColorStop(0.4, `rgba(${col.r}, ${col.g}, ${col.b}, 0.2)`);
+    gradient.addColorStop(1, `rgba(${col.r}, ${col.g}, ${col.b}, 0)`);
+    ctx.beginPath();
+    ctx.arc(hx, hy, 8 * hp.scale, 0, Math.PI * 2);
+    ctx.fillStyle = gradient;
+    ctx.fill();
+
+    // Core dot
+    ctx.beginPath();
+    ctx.arc(hx, hy, 1.5 * hp.scale, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(${Math.min(255, col.r + 60)}, ${Math.min(255, col.g + 60)}, ${Math.min(255, col.b + 40)}, 0.9)`;
+    ctx.fill();
+  }
+
+  function animate() {
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+
+    // Full clear each frame — trails come from stored trail data
+    ctx.fillStyle = '#0a0a0a';
+    ctx.fillRect(0, 0, w, h);
+
+    // Advance simulation
+    for (let s = 0; s < STEPS_PER_FRAME; s++) {
+      particles.forEach(p => p.step());
+    }
+
+    // Slow rotation (auto or manual)
+    if (autoRotate) {
+      rotationAngle += 0.002;
+    } else {
+      rotationAngle = manualRotation;
+    }
+
+    // Determine scale to fill canvas nicely
+    // ?p=N increases the divisor, shrinking the attractor for embedded contexts
+    const _pad = parseFloat(new URLSearchParams(location.search).get('p')) || 1;
+    const scaleFactor = Math.min(w, h) / (140 * _pad);
+
+    const centerX = w / 2;
+    const centerY = h / 2;
+
+    // Center the attractor: Lorenz y is symmetric (~[-25,25]), z center ~25
+    const yOffset = 0;
+    const zOffset = -25;
+
+    particles.forEach(p => {
+      // Temporarily offset trail for centered projection
+      const offsetTrail = p.trail;
+      const originalTrail = p.trail;
+
+      // Create offset trail
+      p.trail = offsetTrail.map(pt => ({
+        x: pt.x,
+        y: pt.y + yOffset,
+        z: pt.z + zOffset
+      }));
+
+      drawTrail(p, rotationAngle, centerX, centerY, scaleFactor);
+
+      // Restore
+      p.trail = originalTrail;
+    });
+
+    requestAnimationFrame(animate);
+  }
+
+  // Start with a full clear
+  ctx.fillStyle = '#0a0a0a';
+  ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
+
+  animate();
+
+  window.addEventListener('message', function(e) {
+    if (e.data && e.data.type === 'param') {
+      switch (e.data.name) {
+        case 'STEPS_PER_FRAME': STEPS_PER_FRAME = Math.round(e.data.value); break;
+        case 'TRAIL_LENGTH': TRAIL_LENGTH = Math.round(e.data.value); break;
+        case 'RHO': RHO = e.data.value; break;
+      }
+    }
+  });
+})();
+</script>
+</body>
+</html>

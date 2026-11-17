@@ -20,7 +20,7 @@ const exampleDefs = [
     name: "hanging-bag-default",
     title: "Default",
     description:
-      "Scroll to spin the rack, drag to orbit, Ctrl+scroll to zoom. Heavy WebGL — Chromium recommended; HDR Environment loads from the network.",
+      "Scroll to spin the rack, drag to orbit, Ctrl+scroll to zoom. Heavy WebGL. Chromium recommended; HDR Environment loads from the network.",
   },
 ]
 
@@ -42,7 +42,7 @@ export default async function HangingBagDocsPage() {
         pathname="/3d/hanging-bag"
         description={
           <p className="leading-relaxed text-muted-foreground">
-            Pastel project bags on wire hangers ride a chrome elliptical rail —
+            Pastel project bags on wire hangers ride a chrome elliptical rail , 
             auto-rotate, wheel to spin, orbit to inspect. Built with{" "}
             <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
               @react-three/fiber

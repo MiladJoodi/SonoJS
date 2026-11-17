@@ -116,7 +116,7 @@ export default async function DialogDocsPage() {
         description={
           <div className="space-y-3 leading-relaxed text-muted-foreground">
             <p>
-              Modal overlay for focused tasks — edit forms, share links, and
+              Modal overlay for focused tasks, edit forms, share links, and
               short workflows without leaving the page. Default width is{" "}
               <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
                 max-w-sm

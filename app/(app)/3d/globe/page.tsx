@@ -20,7 +20,7 @@ const exampleDefs = [
     name: "globe-default",
     title: "Default",
     description:
-      "Slow autorotation with orange markers — drag horizontally to spin the globe.",
+      "Slow autorotation with orange markers, drag horizontally to spin the globe.",
     npmRequires: ["cobe", "motion"],
   },
 ]
@@ -102,7 +102,7 @@ export default async function GlobeDocsPage() {
               type: "COBEOptions",
               defaultValue: "GLOBE_CONFIG",
               description:
-                "Cobe options — size, colors, markers, and map quality. See cobe.vercel.app for the full shape.",
+                "Cobe options, size, colors, markers, and map quality. See cobe.vercel.app for the full shape.",
             },
           ]}
         />

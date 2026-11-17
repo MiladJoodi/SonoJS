@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>#032 Kaleidoscope — creative-lab</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0d1117;
+      color: #e6edf3;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    header {
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      width: 100%;
+      border-bottom: 1px solid #21262d;
+      flex-shrink: 0;
+    }
+
+    .num-badge {
+      font-size: 0.72rem;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      color: #58a6ff;
+      background: rgba(88, 166, 255, 0.1);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    header h1 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #e6edf3;
+      flex: 1;
+    }
+
+    #canvas-wrap {
+      position: relative;
+      flex: 1;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    canvas {
+      display: block;
+      cursor: crosshair;
+    }
+
+    /* hidden video for webcam capture */
+    #src-video {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Controls panel */
+    #controls {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(13,17,23,0.85);
+      border: 1px solid #30363d;
+      border-radius: 10px;
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-width: 190px;
+      backdrop-filter: blur(8px);
+      font-size: 0.8rem;
+    }
+
+    #controls .ctrl-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    #controls label {
+      color: #8b949e;
+      white-space: nowrap;
+    }
+
+    #controls input[type=range] {
+      -webkit-appearance: none;
+      width: 100px;
+      height: 3px;
+      background: #30363d;
+      border-radius: 2px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    #controls input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 12px;
+      height: 12px;
+      background: #58a6ff;
+      border-radius: 50%;
+    }
+
+    #controls .val {
+      color: #58a6ff;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.72rem;
+      min-width: 26px;
+      text-align: right;
+    }
+
+    .ctrl-btn {
+      width: 100%;
+      padding: 6px 10px;
+      background: rgba(88,166,255,0.1);
+      border: 1px solid rgba(88,166,255,0.3);
+      border-radius: 6px;
+      color: #58a6ff;
+      font-size: 0.78rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .ctrl-btn:hover {
+      background: rgba(88,166,255,0.22);
+    }
+
+    .ctrl-btn.active {
+      background: rgba(88,166,255,0.3);
+      border-color: #58a6ff;
+    }
+
+    .divider {
+      height: 1px;
+      background: #21262d;
+    }
+
+    /* Source indicator */
+    #source-label {
+      text-align: center;
+      font-size: 0.72rem;
+      color: #8b949e;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+    }
+
+    #source-label span {
+      color: #3fb950;
+    }
+
+    /* Hint overlay */
+    #hint {
+      position: absolute;
+      bottom: 48px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(13,17,23,0.7);
+      border: 1px solid #30363d;
+      border-radius: 6px;
+      padding: 6px 14px;
+      font-size: 0.75rem;
+      color: #8b949e;
+      pointer-events: none;
+      opacity: 1;
+      transition: opacity 1s;
+    }
+
+
+
+  
+    html.embed #ui,
+    html.embed #info,
+    html.embed #controls,
+    html.embed #stats,
+    html.embed #hint,
+    html.embed .panel,
+    html.embed header,
+    html.embed footer { display: none !important; }
+  </style>
+  <script>if(/\bembed=1\b/.test(location.search))document.documentElement.classList.add("embed")</script>
+</head>
+<body>
+
+<header>
+  <span class="num-badge">#032</span>
+  <h1>Kaleidoscope</h1>
+</header>
+
+<div id="canvas-wrap">
+  <canvas id="c"></canvas>
+  <video id="src-video" autoplay playsinline muted></video>
+
+  <div id="controls">
+    <div id="source-label">source: <span id="src-name">generative</span></div>
+
+    <div class="divider"></div>
+
+    <div class="ctrl-row">
+      <label>Segments</label>
+      <input type="range" id="seg-slider" min="3" max="24" value="8" step="1">
+      <span class="val" id="seg-val">8</span>
+    </div>
+
+    <div class="ctrl-row">
+      <label>Rotation</label>
+      <input type="range" id="rot-slider" min="-3" max="3" value="0.4" step="0.05">
+      <span class="val" id="rot-val">0.40</span>
+    </div>
+
+    <div class="ctrl-row">
+      <label>Zoom</label>
+      <input type="range" id="zoom-slider" min="0.2" max="2.5" value="1.0" step="0.05">
+      <span class="val" id="zoom-val">1.00</span>
+    </div>
+
+    <div class="ctrl-row">
+      <label>Hue Shift</label>
+      <input type="range" id="hue-slider" min="0" max="360" value="0" step="1">
+      <span class="val" id="hue-val">0</span>
+    </div>
+
+    <div class="divider"></div>
+
+    <button class="ctrl-btn" id="webcam-btn">📷 Use Webcam</button>
+    <button class="ctrl-btn" id="freeze-btn">❄ Freeze Source</button>
+  </div>
+
+  <div id="hint">Move mouse · Scroll to zoom · Drag to pan source</div>
+</div>
+
+
+
+<script>
+// ─── Config ───────────────────────────────────────────────────────────────────
+const canvas = document.getElementById('c');
+const ctx    = canvas.getContext('2d');
+const video  = document.getElementById('src-video');
+
+// Off-screen source canvas (what we sample from)
+const srcCanvas = document.createElement('canvas');
+const srcCtx    = srcCanvas.getContext('2d');
+
+// Config state
+let segments     = 8;
+let rotSpeed     = 0.4;       // degrees per frame
+let zoom         = 1.0;
+let hueShift     = 0;
+let angle        = 0;
+let useWebcam    = false;
+let frozen       = false;
+let webcamStream = null;
+
+// Generative source state
+let genTime = 0;
+const GEN_W = 512;
+const GEN_H = 512;
+
+// Source offset (panning)
+let srcOffX = 0, srcOffY = 0;
+let isDragging = false;
+let dragStartX = 0, dragStartY = 0;
+let dragStartOX = 0, dragStartOY = 0;
+
+// ─── Resize ────────────────────────────────────────────────────────────────────
+function resize() {
+  const wrap = document.getElementById('canvas-wrap');
+  const W = wrap.clientWidth;
+  const H = wrap.clientHeight;
+  canvas.width  = W;
+  canvas.height = H;
+}
+window.addEventListener('resize', resize);
+resize();
+
+// ─── Controls wiring ──────────────────────────────────────────────────────────
+function wire(sliderId, valId, decimals, cb) {
+  const sl = document.getElementById(sliderId);
+  const vl = document.getElementById(valId);
+  vl.textContent = parseFloat(sl.value).toFixed(decimals);
+  sl.addEventListener('input', () => {
+    const v = parseFloat(sl.value);
+    vl.textContent = v.toFixed(decimals);
+    cb(v);
+  });
+}
+
+wire('seg-slider',  'seg-val',  0, v => { segments = v; });
+wire('rot-slider',  'rot-val',  2, v => { rotSpeed = v; });
+wire('zoom-slider', 'zoom-val', 2, v => { zoom     = v; });
+wire('hue-slider',  'hue-val',  0, v => { hueShift = v; });
+
+// Webcam button
+document.getElementById('webcam-btn').addEventListener('click', async () => {
+  const btn = document.getElementById('webcam-btn');
+  if (useWebcam) {
+    stopWebcam();
+    btn.classList.remove('active');
+    btn.textContent = '📷 Use Webcam';
+    document.getElementById('src-name').textContent = 'generative';
+  } else {
+    try {
+      webcamStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } });
+      video.srcObject = webcamStream;
+      await video.play();
+      useWebcam = true;
+      srcCanvas.width  = video.videoWidth  || 640;
+      srcCanvas.height = video.videoHeight || 480;
+      btn.classList.add('active');
+      btn.textContent = '🚫 Stop Webcam';
+      document.getElementById('src-name').textContent = 'webcam';
+    } catch (e) {
+      alert('Webcam unavailable: ' + e.message);
+    }
+  }
+});
+
+function stopWebcam() {
+  if (webcamStream) {
+    webcamStream.getTracks().forEach(t => t.stop());
+    webcamStream = null;
+  }
+  useWebcam = false;
+}
+
+// Freeze button
+document.getElementById('freeze-btn').addEventListener('click', () => {
+  const btn = document.getElementById('freeze-btn');
+  frozen = !frozen;
+  btn.classList.toggle('active', frozen);
+  btn.textContent = frozen ? '▶ Unfreeze' : '❄ Freeze Source';
+});
+
+// ─── Mouse interaction ────────────────────────────────────────────────────────
+canvas.addEventListener('mousedown', e => {
+  isDragging = true;
+  dragStartX = e.clientX;
+  dragStartY = e.clientY;
+  dragStartOX = srcOffX;
+  dragStartOY = srcOffY;
+});
+window.addEventListener('mousemove', e => {
+  if (!isDragging) return;
+  srcOffX = dragStartOX + (e.clientX - dragStartX);
+  srcOffY = dragStartOY + (e.clientY - dragStartY);
+});
+window.addEventListener('mouseup', () => { isDragging = false; });
+
+canvas.addEventListener('wheel', e => {
+  e.preventDefault();
+  const delta = e.deltaY > 0 ? -0.05 : 0.05;
+  zoom = Math.min(2.5, Math.max(0.2, zoom + delta));
+  const sl = document.getElementById('zoom-slider');
+  sl.value = zoom;
+  document.getElementById('zoom-val').textContent = zoom.toFixed(2);
+}, { passive: false });
+
+// Touch support
+let lastTouchDist = 0;
+canvas.addEventListener('touchstart', e => {
+  if (e.touches.length === 1) {
+    isDragging = true;
+    dragStartX = e.touches[0].clientX;
+    dragStartY = e.touches[0].clientY;
+    dragStartOX = srcOffX;
+    dragStartOY = srcOffY;
+  } else if (e.touches.length === 2) {
+    const dx = e.touches[0].clientX - e.touches[1].clientX;
+    const dy = e.touches[0].clientY - e.touches[1].clientY;
+    lastTouchDist = Math.hypot(dx, dy);
+  }
+}, { passive: true });
+canvas.addEventListener('touchmove', e => {
+  if (e.touches.length === 1 && isDragging) {
+    srcOffX = dragStartOX + (e.touches[0].clientX - dragStartX);
+    srcOffY = dragStartOY + (e.touches[0].clientY - dragStartY);
+  } else if (e.touches.length === 2) {
+    const dx = e.touches[0].clientX - e.touches[1].clientX;
+    const dy = e.touches[0].clientY - e.touches[1].clientY;
+    const dist = Math.hypot(dx, dy);
+    zoom = Math.min(2.5, Math.max(0.2, zoom * (dist / lastTouchDist)));
+    lastTouchDist = dist;
+  }
+  e.preventDefault();
+}, { passive: false });
+canvas.addEventListener('touchend', () => { isDragging = false; });
+
+// ─── Generative source renderer ───────────────────────────────────────────────
+function renderGenerativeSource(t) {
+  srcCanvas.width  = GEN_W;
+  srcCanvas.height = GEN_H;
+  const sc = srcCtx;
+  const W  = GEN_W, H = GEN_H;
+
+  // Animated plasma-like background
+  sc.fillStyle = '#000';
+  sc.fillRect(0, 0, W, H);
+
+  const imgData = sc.createImageData(W, H);
+  const d = imgData.data;
+  const speed = t * 0.012;
+
+  for (let y = 0; y < H; y += 2) {
+    for (let x = 0; x < W; x += 2) {
+      const nx = x / W;
+      const ny = y / H;
+
+      // Multiple overlapping sine waves = plasma
+      const v1 = Math.sin(nx * 10 + speed);
+      const v2 = Math.sin(ny * 8  - speed * 1.3);
+      const v3 = Math.sin((nx + ny) * 6 + speed * 0.7);
+      const v4 = Math.sin(Math.hypot(nx - 0.5, ny - 0.5) * 14 - speed * 1.6);
+
+      const v = (v1 + v2 + v3 + v4) / 4; // -1..1
+
+      // Map to hue + saturation
+      const hue = ((v + 1) * 180 + speed * 40 + hueShift) % 360;
+      const sat = 80 + 20 * Math.abs(v);
+      const lum = 40 + 25 * v;
+
+      // hsl to rgb inline
+      const [r, g, b] = hsl2rgb(hue, sat / 100, lum / 100);
+
+      const i = (y * W + x) * 4;
+      d[i]   = r; d[i+1] = g; d[i+2] = b; d[i+3] = 255;
+      // Fill 2x2 block
+      const i2 = ((y+1) * W + x) * 4;
+      d[i2]  = r; d[i2+1] = g; d[i2+2] = b; d[i2+3] = 255;
+      d[i+4] = r; d[i+5] = g; d[i+6] = b; d[i+7] = 255;
+      d[i2+4]=r; d[i2+5]=g; d[i2+6]=b; d[i2+7]=255;
+    }
+  }
+  sc.putImageData(imgData, 0, 0);
+
+  // Add layered circles for texture
+  for (let i = 0; i < 6; i++) {
+    const phase = speed + i * 1.05;
+    const cx = W/2 + Math.cos(phase * 0.7 + i) * W * 0.25;
+    const cy = H/2 + Math.sin(phase * 0.5 + i) * H * 0.25;
+    const r  = 40 + 80 * Math.abs(Math.sin(phase + i));
+    const hue = (i * 60 + speed * 30 + hueShift) % 360;
+    const grad = sc.createRadialGradient(cx, cy, 0, cx, cy, r);
+    grad.addColorStop(0, `hsla(${hue}, 100%, 70%, 0.4)`);
+    grad.addColorStop(1, `hsla(${hue}, 80%,  30%, 0)`);
+    sc.beginPath();
+    sc.arc(cx, cy, r, 0, Math.PI*2);
+    sc.fillStyle = grad;
+    sc.fill();
+  }
+}
+
+function hsl2rgb(h, s, l) {
+  const a = s * Math.min(l, 1 - l);
+  const f = n => {
+    const k = (n + h/30) % 12;
+    return Math.round(255 * (l - a * Math.max(-1, Math.min(k-3, 9-k, 1))));
+  };
+  return [f(0), f(8), f(4)];
+}
+
+// ─── Update source canvas from webcam ─────────────────────────────────────────
+function updateSourceFromWebcam() {
+  if (video.readyState >= 2) {
+    const vw = video.videoWidth || 640;
+    const vh = video.videoHeight || 480;
+    srcCanvas.width  = vw;
+    srcCanvas.height = vh;
+    srcCtx.drawImage(video, 0, 0, vw, vh);
+    if (hueShift !== 0) {
+      // Apply hue rotation via CSS filter on a temp canvas
+      srcCtx.filter = `hue-rotate(${hueShift}deg)`;
+      srcCtx.drawImage(srcCanvas, 0, 0);
+      srcCtx.filter = 'none';
+    }
+  }
+}
+
+// ─── Kaleidoscope render ───────────────────────────────────────────────────────
+function drawKaleidoscope() {
+  const W = canvas.width;
+  const H = canvas.height;
+  const cx = W / 2;
+  const cy = H / 2;
+
+  const srcW = srcCanvas.width;
+  const srcH = srcCanvas.height;
+
+  // The "radius" of the kaleidoscope — largest circle fitting canvas
+  const radius = Math.min(cx, cy);
+
+  ctx.clearRect(0, 0, W, H);
+
+  // Draw background
+  ctx.fillStyle = '#0d1117';
+  ctx.fillRect(0, 0, W, H);
+
+  const segAngle = (Math.PI * 2) / segments;
+  const sliceAngle = segAngle;
+
+  ctx.save();
+  ctx.translate(cx, cy);
+
+  for (let s = 0; s < segments; s++) {
+    ctx.save();
+    ctx.rotate(s * segAngle + (angle * Math.PI / 180));
+
+    // Clip to wedge
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.arc(0, 0, radius * 1.5, -sliceAngle/2, sliceAngle/2);
+    ctx.closePath();
+    ctx.clip();
+
+    // Mirror every other slice
+    if (s % 2 === 1) {
+      ctx.scale(1, -1);
+    }
+
+    // Map the wedge to a source region
+    // We tile the source around the center
+    const scale = (radius / (srcW * 0.5)) * zoom;
+    ctx.scale(scale, scale);
+    ctx.translate(
+      -srcW/2 + srcOffX / scale,
+      -srcH/2 + srcOffY / scale
+    );
+
+    ctx.drawImage(srcCanvas, 0, 0, srcW, srcH);
+
+    ctx.restore();
+  }
+
+  ctx.restore();
+
+  // Vignette
+  const vgrad = ctx.createRadialGradient(cx, cy, radius * 0.5, cx, cy, radius * 1.1);
+  vgrad.addColorStop(0, 'rgba(0,0,0,0)');
+  vgrad.addColorStop(1, 'rgba(0,0,0,0.65)');
+  ctx.fillStyle = vgrad;
+  ctx.fillRect(0, 0, W, H);
+
+  // Central glow ring
+  const ggrad = ctx.createRadialGradient(cx, cy, 0, cx, cy, 30);
+  ggrad.addColorStop(0, 'rgba(255,255,255,0.18)');
+  ggrad.addColorStop(1, 'rgba(255,255,255,0)');
+  ctx.fillStyle = ggrad;
+  ctx.beginPath();
+  ctx.arc(cx, cy, 30, 0, Math.PI * 2);
+  ctx.fill();
+}
+
+// ─── Animation loop ───────────────────────────────────────────────────────────
+let lastTime = 0;
+
+function loop(ts) {
+  const dt = Math.min((ts - lastTime) / 16.67, 3); // normalized to 60fps
+  lastTime = ts;
+
+  if (!frozen) {
+    if (useWebcam) {
+      updateSourceFromWebcam();
+    } else {
+      genTime += dt;
+      renderGenerativeSource(genTime);
+    }
+  }
+
+  angle += rotSpeed * dt;
+  drawKaleidoscope();
+
+  requestAnimationFrame(loop);
+}
+
+// ─── Init generative source ──────────────────────────────────────────────────
+srcCanvas.width  = GEN_W;
+srcCanvas.height = GEN_H;
+renderGenerativeSource(0);
+
+// Hide hint after 4 seconds
+setTimeout(() => {
+  const hint = document.getElementById('hint');
+  if (hint) hint.style.opacity = '0';
+  setTimeout(() => hint && hint.remove(), 1000);
+}, 4000);
+
+requestAnimationFrame(loop);
+</script>
+</body>
+</html>

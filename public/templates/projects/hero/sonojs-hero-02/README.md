@@ -12,7 +12,7 @@ Interactive 3D juice product showcase. Demo brand: **Juicy**.
 | File | Purpose |
 |---|---|
 | `main.webp` | Catalog card poster + detail page hero |
-| `cover.mp4` | Catalog card only — plays on hover |
+| `cover.mp4` | Catalog card only. Plays on hover |
 
 ## Live / repo
 

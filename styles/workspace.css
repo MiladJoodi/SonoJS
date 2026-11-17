@@ -1,7 +1,7 @@
 /* Docs-site workspace frame + shared surface utilities */
 
 /**
- * Site frame — header, footer, docs, charts, and blocks.
+ * Site frame, header, footer, docs, charts, and blocks.
  * Full viewport width with a modest gutter (≈ px-6). Homepage body uses
  * `HomeShell` (~1180px) separately.
  */

@@ -227,7 +227,7 @@ async function mergeInvoiceOntoExistingPaymentIntent(input: {
     }
   }
 
-  // Basil invoice.paid may omit PI entirely — attach only when a single
+  // Basil invoice.paid may omit PI entirely, attach only when a single
   // recent PI-only row matches user+amount (avoids merging two same-price buys).
   if (!targetId && !piId) {
     const recent = await db.execute(sql`
@@ -285,7 +285,7 @@ async function mergeInvoiceOntoExistingPaymentIntent(input: {
     await assertClaimOrThrow(claim)
     const payment = await getPaymentByStripeInvoiceId(invoiceId)
     if (payment) return { payment, applied: false }
-    // Stale/refused update — keep the PI row; do not fall through to insert
+    // Stale/refused update, keep the PI row; do not fall through to insert
     // (would unique-violate on stripe_payment_intent_id).
     const again = await db.query.payments.findFirst({
       where: eq(payments.id, targetId),

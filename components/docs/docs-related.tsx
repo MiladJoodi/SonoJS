@@ -8,7 +8,7 @@ export type DocsRelatedLink = {
 
 /**
  * Contextual “Related” links for docs SEO / crawl paths.
- * Keep copy short — not a second nav.
+ * Keep copy short, not a second nav.
  */
 export function DocsRelated({
   links,
@@ -33,7 +33,7 @@ export function DocsRelated({
             </Link>
             {link.description ? (
               <span className="text-muted-foreground">
-                {" — "}
+                {", "}
                 {link.description}
               </span>
             ) : null}

@@ -1,7 +1,7 @@
 /**
  * Dev-only: capture a preview as a transparent PNG and download it.
  *
- * Paths (never FO + SVG restamp — that caused ghost icons):
+ * Paths (never FO + SVG restamp, that caused ghost icons):
  * - Canvas-dominant demos → composite canvas bitmaps only
  * - CSS 3D / image galleries → visual bitmap (getBoundingClientRect + drawImage)
  * - Other DOM → foreignObject (sanitized, no external url())
@@ -31,7 +31,7 @@ function resolveCaptureRoot(frame: HTMLElement): HTMLElement {
   if (!marked) return frame
   const rect = marked.getBoundingClientRect()
   if (rect.width >= 1 && rect.height >= 1) return marked
-  // display:contents / collapsed — fall back to first sized child, else frame
+  // display:contents / collapsed, fall back to first sized child, else frame
   for (const child of marked.children) {
     if (!(child instanceof HTMLElement)) continue
     const r = child.getBoundingClientRect()
@@ -40,7 +40,7 @@ function resolveCaptureRoot(frame: HTMLElement): HTMLElement {
   return frame
 }
 
-/** Only opt-in chrome — never blanket `button` (hides Button / Toggle demos). */
+/** Only opt-in chrome. Never blanket `button` (hides Button / Toggle demos). */
 const IGNORE_SELECTOR = "[data-sono-capture-ignore]"
 
 function hideCaptureChrome(root: HTMLElement): () => void {
@@ -166,7 +166,7 @@ function prepareWebglAlpha(root: HTMLElement): () => void {
       (canvas.getContext("webgl", {
         preserveDrawingBuffer: true,
       } as WebGLContextAttributes) as WebGLRenderingContext | null)
-    // Existing context ignores new attrs — still returns the live context.
+    // Existing context ignores new attrs, still returns the live context.
     if (!gl) continue
 
     const prev = new Float32Array(
@@ -345,7 +345,7 @@ function canvasCoverage(root: HTMLElement): number {
 
 /**
  * FO cannot paint CSS 3D (image-marquee perspective / rotateX / rotateZ).
- * Do NOT key off "many imgs" alone — card strips like scroll-trigger have
+ * Do NOT key off "many imgs" alone, card strips like scroll-trigger have
  * lots of avatars but need FO so text / borders / bg-card stay in the shot.
  */
 function needsVisualDomCapture(root: HTMLElement): boolean {
@@ -554,7 +554,7 @@ function parseRadiusPx(value: string, fallback = 8): number {
 
 function isPlausibleOrbitalCard(r: DOMRectReadOnly, root: DOMRectReadOnly) {
   if (r.width < 28 || r.height < 36) return false
-  // Edge-on / back faces project to extreme AABBs — drop them.
+  // Edge-on / back faces project to extreme AABBs, drop them.
   if (r.width > root.width * 0.7) return false
   if (r.height > root.height * 0.92) return false
   const aspect = r.width / r.height
@@ -793,7 +793,7 @@ async function captureCanvasDominant(
   return out
 }
 
-/** DOM-only path (beam-circle etc.) — FO once, no SVG restamp. */
+/** DOM-only path (beam-circle etc.). FO once, no SVG restamp. */
 async function captureDomOnly(
   root: HTMLElement,
   width: number,
@@ -931,7 +931,7 @@ async function captureDomOnly(
     )
   }
 
-  // After style copy — drop chrome so FO has no arrows/buttons.
+  // After style copy, drop chrome so FO has no arrows/buttons.
   for (const node of clone.querySelectorAll(IGNORE_SELECTOR)) {
     node.remove()
   }

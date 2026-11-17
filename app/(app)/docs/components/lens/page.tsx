@@ -23,7 +23,7 @@ const exampleDefs = [
     name: "lens-static",
     title: "Static",
     description:
-      "`isStatic` keeps the lens fixed at `position` — useful for marketing frames.",
+      "`isStatic` keeps the lens fixed at `position`, useful for marketing frames.",
     requires: ["card", "button"],
   },
   {
@@ -55,7 +55,7 @@ export default async function LensDocsPage() {
         pathname="/docs/components/lens"
         description={
           <p className="leading-relaxed text-muted-foreground">
-            An interactive magnifier for images, videos, and other elements —
+            An interactive magnifier for images, videos, and other elements , 
             follow the pointer, stay static, or start from a default spot.
           </p>
         }

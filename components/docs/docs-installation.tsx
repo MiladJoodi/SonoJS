@@ -59,7 +59,7 @@ export async function DocsInstallation({
 
   const [cliHtml, ...fileHtmls] = await Promise.all([
     highlightCode(code, "bash"),
-    // Path-aware: SVG/images/binaries stay plain — Shiki×N assets timed out Vercel SSR.
+    // Path-aware: SVG/images/binaries stay plain. Shiki×N assets timed out Vercel SSR.
     ...files.map((f) => highlightInstallFile(f.title, f.content)),
   ])
 

@@ -69,7 +69,7 @@ export function WorkspacePanelsProvider({
     setRightOpen(!rightOpen)
   }, [rightOpen, setRightOpen])
 
-  // Ctrl+] right — physical key (layout-independent).
+  // Ctrl+] right, physical key (layout-independent).
   React.useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
       if (!(event.ctrlKey || event.metaKey) || event.altKey || event.shiftKey) {

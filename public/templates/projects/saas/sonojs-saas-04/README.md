@@ -5,7 +5,7 @@ Category: `saas`
 Slug / folder: `sonojs-saas-04`  
 Path: `public/templates/projects/saas/sonojs-saas-04/`  
 
-Auth product marketing landing. Demo brand: **AuthKit** — The world's best login box.
+Auth product marketing landing. Demo brand: **AuthKit**. The world's best login box.
 
 ## Images / video
 

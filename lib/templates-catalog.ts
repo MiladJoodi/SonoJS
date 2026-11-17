@@ -87,9 +87,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-dashboard-02",
     title: "Vantage",
     tagline:
-      "Product analytics dashboard - live KPIs, funnels, cohorts, and customer health.",
+      "Product analytics dashboard with live KPIs, funnels, cohorts, and customer health.",
     description:
-      "Vantage is a product-analytics admin by SonoJS (demo workspace: Acme Inc). Built with Vite 7, React 19, TypeScript, Tailwind CSS 3, Recharts, Lucide, Framer Motion, GSAP, React Router, and Sonner. Overview streams MRR, active users, conversion, and session KPIs with live activity feed, revenue chart, traffic sources, and top pages. Analytics adds metric comparison, conversion funnel, retention heatmap, cohort table, and geo breakdown. Customers includes segment chips, sortable health table, and detail drawer. Reports covers template gallery, builder, schedules, and exports. Settings has general, appearance, billing, API keys, notifications, and danger zone. Login page with dashboard mock. Demo chrome only - fictional metrics, no backend. Vite build ready for Cloudflare Workers.",
+      "Vantage is a product-analytics admin by SonoJS (demo workspace: Acme Inc). Built with Vite 7, React 19, TypeScript, Tailwind CSS 3, Recharts, Lucide, Framer Motion, GSAP, React Router, and Sonner. Overview streams MRR, active users, conversion, and session KPIs with live activity feed, revenue chart, traffic sources, and top pages. Analytics adds metric comparison, conversion funnel, retention heatmap, cohort table, and geo breakdown. Customers includes segment chips, sortable health table, and detail drawer. Reports covers template gallery, builder, schedules, and exports. Settings has general, appearance, billing, API keys, notifications, and danger zone. Login page with dashboard mock. Demo chrome only. Fictional metrics, no backend. Vite build ready for Cloudflare Workers.",
     category: "dashboard",
     stack: [
       "react",
@@ -139,7 +139,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Vite and fork-ready",
-        body: "Vite 7 + React 19 + Tailwind 3 + Recharts - npm run build to dist/ for Workers.",
+        body: "Vite 7 + React 19 + Tailwind 3 + Recharts, npm run build to dist/ for Workers.",
       },
     ],
     includes: [
@@ -292,7 +292,7 @@ export const templateProjects: TemplateProject[] = [
     tagline:
       "Sticky category tabs, always-on search, and wide game tiles for browsing.",
     description:
-      "Frontend-only casino catalogue lobby built with Vite, React 19, and Tailwind CSS 4. You get sticky top category tabs, search always available in the header, a compact promo ticker, wide landscape game tiles, game rails, live wins, promotions, providers, trust and about blocks, activity feed, menu sheet, and mobile bottom nav. Guest demo state only - no real backend. Static build ready for GitHub Pages.",
+      "Frontend-only casino catalogue lobby built with Vite, React 19, and Tailwind CSS 4. You get sticky top category tabs, search always available in the header, a compact promo ticker, wide landscape game tiles, game rails, live wins, promotions, providers, trust and about blocks, activity feed, menu sheet, and mobile bottom nav. Guest demo state only. No real backend. Static build ready for GitHub Pages.",
     category: "betting",
     stack: ["react", "vite", "tailwind", "typescript", "javascript"],
     priceLabel: "Free",
@@ -431,9 +431,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-crypto-02",
     title: "Aether",
     tagline:
-      "Crypto exchange landing - markets, portfolio story, and a desk built for demos.",
+      "Crypto exchange landing, markets, portfolio story, and a desk built for demos.",
     description:
-      "Aether is a production-grade crypto exchange marketing desk by SonoJS. Built with Next.js, React, and Tailwind CSS. You get a light/dark landing with hero, featured coins, feature blocks, stats, process timeline, portfolio pitch, upgrade grid, perks, FAQ, auth screens, and documentation pages. Demo marketing surface only - paper / simulated flows, not financial advice. Static build ready for GitHub Pages.",
+      "Aether is a production-grade crypto exchange marketing desk by SonoJS. Built with Next.js, React, and Tailwind CSS. You get a light/dark landing with hero, featured coins, feature blocks, stats, process timeline, portfolio pitch, upgrade grid, perks, FAQ, auth screens, and documentation pages. Demo marketing surface only. Paper / simulated flows, not financial advice. Static build ready for GitHub Pages.",
     category: "crypto",
     stack: ["nextjs", "react", "tailwind", "typescript"],
     priceLabel: "Free",
@@ -462,7 +462,7 @@ export const templateProjects: TemplateProject[] = [
     highlights: [
       {
         title: "Exchange-first landing",
-        body: "Hero, coin rails, and CTAs framed for a trading product - not a generic SaaS shell.",
+        body: "Hero, coin rails, and CTAs framed for a trading product, not a generic SaaS shell.",
       },
       {
         title: "Full marketing sections",
@@ -495,9 +495,9 @@ export const templateProjects: TemplateProject[] = [
 {
     slug: "sonojs-fintech-01",
     title: "Pocket",
-    tagline: "Simple modern payments landing - clear hierarchy, ready to demo live.",
+    tagline: "Simple modern payments landing, clear hierarchy, ready to demo live.",
     description:
-      "Pocket is a frontend payments marketing landing by SonoJS. Built with Vite, React, and Tailwind CSS. You get a dark fintech hero, stats, feature business block, billing and card-deal sections, testimonials, client logos, CTA, and footer. Motion accents use Framer Motion. Single-page scroll landing with navbar anchors for Home, Features, Product, and Clients. Demo marketing surface only - no real payments or accounts. Static build ready for GitHub Pages.",
+      "Pocket is a frontend payments marketing landing by SonoJS. Built with Vite, React, and Tailwind CSS. You get a dark fintech hero, stats, feature business block, billing and card-deal sections, testimonials, client logos, CTA, and footer. Motion accents use Framer Motion. Single-page scroll landing with navbar anchors for Home, Features, Product, and Clients. Demo marketing surface only. No real payments or accounts. Static build ready for GitHub Pages.",
     category: "fintech",
     stack: ["react", "vite", "javascript", "tailwind"],
     priceLabel: "Free",
@@ -525,7 +525,7 @@ export const templateProjects: TemplateProject[] = [
     highlights: [
       {
         title: "Payments-first landing",
-        body: "Hero, stats, and product story framed for a simple payments brand - not a generic SaaS shell.",
+        body: "Hero, stats, and product story framed for a simple payments brand, not a generic SaaS shell.",
       },
       {
         title: "Billing and card deal blocks",
@@ -560,9 +560,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-landing-01",
     title: "Mainline",
     tagline:
-      "Calm SaaS marketing site - ink & champagne, full-bleed hero, pricing and auth.",
+      "Calm SaaS marketing site, ink & champagne, full-bleed hero, pricing and auth.",
     description:
-      "Mainline is a premium product-marketing template by SonoJS. Built with Next.js 16, React 19, Tailwind CSS 4, and Motion. You get a full-bleed home (hero, logo marquee, features, resource allocation, testimonials, pricing, FAQ), plus About, Pricing, FAQ, Contact with form, Login, and Signup. Instrument Serif + Manrope, next-themes (default dark), MDX-ready content surfaces, and shadcn/ui blocks. Demo marketing and auth UI only - no real accounts or payments. Static build ready for GitHub Pages.",
+      "Mainline is a premium product-marketing template by SonoJS. Built with Next.js 16, React 19, Tailwind CSS 4, and Motion. You get a full-bleed home (hero, logo marquee, features, resource allocation, testimonials, pricing, FAQ), plus About, Pricing, FAQ, Contact with form, Login, and Signup. Instrument Serif + Manrope, next-themes (default dark), MDX-ready content surfaces, and shadcn/ui blocks. Demo marketing and auth UI only. No real accounts or payments. Static build ready for GitHub Pages.",
     category: "landing",
     stack: ["nextjs", "react", "tailwind", "typescript"],
     priceLabel: "Free",
@@ -593,7 +593,7 @@ export const templateProjects: TemplateProject[] = [
     highlights: [
       {
         title: "Product-first landing",
-        body: "Full-bleed hero, logo marquee, features, and a resource block that feel like a real SaaS launch - not a generic kit demo.",
+        body: "Full-bleed hero, logo marquee, features, and a resource block that feel like a real SaaS launch, not a generic kit demo.",
       },
       {
         title: "Pages that ship together",
@@ -628,9 +628,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-landing-02",
     title: "Changelog Template",
     tagline:
-      "Minimal changelog template - product releases, features, and fixes in chronological order.",
+      "Minimal changelog template, product releases, features, and fixes in chronological order.",
     description:
-      "Changelog Template is a minimal changelog built with Next.js 16.4, React 19.2, and Tailwind CSS 4.1. Showcase product releases, features, and bug fixes in chronological order. Visual timeline with dates and versions, automatic dark mode, responsive layout, and MDX entries via Fumadocs. Write YYYY-MM-DD.mdx files under changelog/content - title, description, date, tags, and version in frontmatter. shadcn/ui components, full TypeScript, next-themes. Demo content only - no live CMS. Deploy to Vercel, Netlify, Cloudflare Pages, or static GitHub Pages.",
+      "Changelog Template is a minimal changelog built with Next.js 16.4, React 19.2, and Tailwind CSS 4.1. Showcase product releases, features, and bug fixes in chronological order. Visual timeline with dates and versions, automatic dark mode, responsive layout, and MDX entries via Fumadocs. Write YYYY-MM-DD.mdx files under changelog/content, title, description, date, tags, and version in frontmatter. shadcn/ui components, full TypeScript, next-themes. Demo content only. No live CMS. Deploy to Vercel, Netlify, Cloudflare Pages, or static GitHub Pages.",
     category: "landing",
     stack: ["nextjs", "react", "tailwind", "typescript"],
     priceLabel: "Free",
@@ -661,7 +661,7 @@ export const templateProjects: TemplateProject[] = [
     highlights: [
       {
         title: "Timeline design",
-        body: "Visual timeline with dates and versions - releases, features, and fixes in chronological order.",
+        body: "Visual timeline with dates and versions, releases, features, and fixes in chronological order.",
       },
       {
         title: "MDX changelog entries",
@@ -669,7 +669,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Dark mode",
-        body: "Automatic theme switching with next-themes - calm on every device.",
+        body: "Automatic theme switching with next-themes, calm on every device.",
       },
       {
         title: "Fast and fork-ready",
@@ -696,7 +696,7 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-landing-03",
     title: "Aether",
     tagline:
-      "Cinematic AI SaaS landing - WebGL hero, Lenis scroll, pricing and FAQ.",
+      "Cinematic AI SaaS landing. WebGL hero, Lenis scroll, pricing and FAQ.",
     description:
       "Aether is a premium AI/SaaS landing page template built by SonoJS. It uses Next.js 16, React 19, Tailwind CSS 4, Three.js, Framer Motion, and Lenis to create a polished, interactive experience. The page includes a WebGL hero section, logo marquee, product features, how it works, a live studio showcase, pricing, FAQ, and footer CTAs. It uses Syne and DM Sans for typography, with customizable accent colors and a centralized site config for managing content. The hero animation loads on the client, pauses when out of view, and respects reduced-motion preferences. There’s no backend, authentication, or CMS to set up. The template is also easy to customize, fork, and deploy to GitHub Pages.",
     category: "landing",
@@ -729,7 +729,7 @@ export const templateProjects: TemplateProject[] = [
     highlights: [
       {
         title: "WebGL hero that sells the product",
-        body: "Interactive Three.js scene via React Three Fiber - cinematic first impression without a generic kit look.",
+        body: "Interactive Three.js scene via React Three Fiber, cinematic first impression without a generic kit look.",
       },
       {
         title: "One-page SaaS story",
@@ -741,7 +741,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Edit content in one file",
-        body: "Brand name, copy, pricing, and FAQ live in content/site.ts - swap the demo brand before you ship.",
+        body: "Brand name, copy, pricing, and FAQ live in content/site.ts, swap the demo brand before you ship.",
       },
     ],
     includes: [
@@ -765,9 +765,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-saas-01",
     title: "Glyph",
     tagline:
-      "AI SaaS starter - marketing shell, auth, pricing, and a text generator workspace.",
+      "AI SaaS starter, marketing shell, auth, pricing, and a text generator workspace.",
     description:
-      "Glyph is a Next.js AI SaaS starter by SonoJS. Built with Next.js 15, React 19, Tailwind CSS 4, AI SDK, and OpenAI. You get a calm marketing site, sign-in / sign-up / reset screens, readable pricing, FAQ, contact, and a text generator chat workspace. Light and dark share one token system. Framer Motion on the hero stays restrained. Demo marketing and UI surface - chat streaming needs a Node host and OPENAI_API_KEY; the GitHub Pages static export keeps marketing pages working without the API. Static build ready for GitHub Pages.",
+      "Glyph is a Next.js AI SaaS starter by SonoJS. Built with Next.js 15, React 19, Tailwind CSS 4, AI SDK, and OpenAI. You get a calm marketing site, sign-in / sign-up / reset screens, readable pricing, FAQ, contact, and a text generator chat workspace. Light and dark share one token system. Framer Motion on the hero stays restrained. Demo marketing and UI surface, chat streaming needs a Node host and OPENAI_API_KEY; the GitHub Pages static export keeps marketing pages working without the API. Static build ready for GitHub Pages.",
     category: "saas",
     stack: ["nextjs", "react", "tailwind", "typescript", "nodejs"],
     priceLabel: "Free",
@@ -796,11 +796,11 @@ export const templateProjects: TemplateProject[] = [
     highlights: [
       {
         title: "Generator as the product",
-        body: "Text workspace with streaming chat patterns - OpenAI-ready, built to extend.",
+        body: "Text workspace with streaming chat patterns. OpenAI-ready, built to extend.",
       },
       {
         title: "Auth and pricing that ship",
-        body: "Sign in, sign up, reset, plan cards, and FAQ in one voice - ready to rebrand.",
+        body: "Sign in, sign up, reset, plan cards, and FAQ in one voice, ready to rebrand.",
       },
       {
         title: "Theme-aware shell",
@@ -896,9 +896,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-02",
     title: "Juicy",
     tagline:
-      "3D juice can carousel - scroll to spin, flavour themes, floating fruit, water ripple.",
+      "3D juice can carousel, scroll to spin, flavour themes, floating fruit, water ripple.",
     description:
-      "Juicy is an interactive juice product showcase by SonoJS. Built with Next.js 15, React 19, Tailwind CSS 4, React Three Fiber, and Three.js. A wheel of four juice cans turns with the mouse wheel, arrow keys, or buttons, and the page takes on the colours of the flavour in front (Lemon Ginger, Blueberry Açai, Mango Burst, Raspberry Rosé). Floating fruit, ice and leaves, a pointer water ripple, and a phone layout are included. Sign-in and cart are demo UI only - no backend. Static build ready for GitHub Pages.",
+      "Juicy is an interactive juice product showcase by SonoJS. Built with Next.js 15, React 19, Tailwind CSS 4, React Three Fiber, and Three.js. A wheel of four juice cans turns with the mouse wheel, arrow keys, or buttons, and the page takes on the colours of the flavour in front (Lemon Ginger, Blueberry Açai, Mango Burst, Raspberry Rosé). Floating fruit, ice and leaves, a pointer water ripple, and a phone layout are included. Sign-in and cart are demo UI only. No backend. Static build ready for GitHub Pages.",
     category: "hero",
     stack: ["nextjs", "react", "tailwind", "typescript", "threejs"],
     priceLabel: "Free",
@@ -926,7 +926,7 @@ export const templateProjects: TemplateProject[] = [
     highlights: [
       {
         title: "3D can wheel",
-        body: "Four juice cans on a React Three Fiber carousel - spin with wheel, keys, or buttons.",
+        body: "Four juice cans on a React Three Fiber carousel, spin with wheel, keys, or buttons.",
       },
       {
         title: "Theme per flavour",
@@ -963,9 +963,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-03",
     title: "SkyElite",
     tagline:
-      "Full-bleed private-jet video hero - Premium. Accessible. Book Now.",
+      "Full-bleed private-jet video hero. Premium. Accessible. Book Now.",
     description:
-      "SkyElite is a full-viewport marketing hero for a private-jet brand. Built with Vite, React 19, TypeScript, Tailwind CSS 4, and Lucide. A looping jet video fills the screen behind a clear nav, stacked Premium / Accessible headline, short line, and Discover / Book Now CTAs. Includes a mobile menu. Demo UI only - no booking backend. Static build ready for Workers or GitHub Pages.",
+      "SkyElite is a full-viewport marketing hero for a private-jet brand. Built with Vite, React 19, TypeScript, Tailwind CSS 4, and Lucide. A looping jet video fills the screen behind a clear nav, stacked Premium / Accessible headline, short line, and Discover / Book Now CTAs. Includes a mobile menu. Demo UI only. No booking backend. Static build ready for Workers or GitHub Pages.",
     category: "hero",
     stack: ["react", "vite", "typescript", "tailwind", "lucide"],
     priceLabel: "Free",
@@ -993,7 +993,7 @@ export const templateProjects: TemplateProject[] = [
     highlights: [
       {
         title: "Full-bleed video plane",
-        body: "Edge-to-edge looping jet footage as the hero background - muted, autoplay, playsInline.",
+        body: "Edge-to-edge looping jet footage as the hero background, muted, autoplay, playsInline.",
       },
       {
         title: "Brand-first type",
@@ -1001,7 +1001,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Tight CTA pair",
-        body: "Discover and Book Now sit under one short supporting line - demo controls only.",
+        body: "Discover and Book Now sit under one short supporting line, demo controls only.",
       },
       {
         title: "Static and fork-ready",
@@ -1026,9 +1026,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-ecommerce-01",
     title: "VirtualFit",
     tagline:
-      "Spatial try-on - drag the garment arc, try on, pick size and color.",
+      "Spatial try-on, drag the garment arc, try on, pick size and color.",
     description:
-      "VirtualFit is a single-file spatial try-on storefront by SonoJS. Built with plain HTML, CSS, and vanilla JavaScript - no framework. A blurred room backdrop holds a model stage while a glass garment carousel arcs across the bottom. Drag or scroll to browse tops (Basic T-shirt, Sweater, Linen Shirt, Grey Hoodie, Ringer Tee), tap TRY ON for a scan reveal, then set size (S–XL) and color on the buy card. Custom cursor modes (TRY ON / DRAG), category tabs, side rail, and prefers-reduced-motion support. Assets ship locally (Inter woff2 + WebP room/model/garment sprites). Demo UI only - no cart backend. Open virtualfit.html or host as static assets on Cloudflare Workers.",
+      "VirtualFit is a single-file spatial try-on storefront by SonoJS. Built with plain HTML, CSS, and vanilla JavaScript. No framework. A blurred room backdrop holds a model stage while a glass garment carousel arcs across the bottom. Drag or scroll to browse tops (Basic T-shirt, Sweater, Linen Shirt, Grey Hoodie, Ringer Tee), tap TRY ON for a scan reveal, then set size (S-XL) and color on the buy card. Custom cursor modes (TRY ON / DRAG), category tabs, side rail, and prefers-reduced-motion support. Assets ship locally (Inter woff2 + WebP room/model/garment sprites). Demo UI only. No cart backend. Open virtualfit.html or host as static assets on Cloudflare Workers.",
     category: "ecommerce",
     stack: ["html", "css", "javascript"],
     priceLabel: "Free",
@@ -1065,11 +1065,11 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Buy card controls",
-        body: "Size chips (S–XL), color dots with rolling Color · label, and live name/price updates.",
+        body: "Size chips (S-XL), color dots with rolling Color · label, and live name/price updates.",
       },
       {
         title: "Zero-build static",
-        body: "One HTML file plus local fonts and WebP sprites - open locally or deploy to Workers.",
+        body: "One HTML file plus local fonts and WebP sprites, open locally or deploy to Workers.",
       },
     ],
     includes: [
@@ -1081,7 +1081,7 @@ export const templateProjects: TemplateProject[] = [
     ],
     requirements: [
       "Modern browser (CSS backdrop-filter, pointer events)",
-      "No build step - open virtualfit.html or static-host the folder",
+      "No build step, open virtualfit.html or static-host the folder",
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
   },
@@ -1089,9 +1089,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-ecommerce-02",
     title: "MacBook Neo",
     tagline:
-      "Hola, Neo. - Spanish product page with hero video and color swatches.",
+      "Hola, Neo. Spanish product page with hero video and color swatches.",
     description:
-      "MacBook Neo is a Spanish-language Apple-style product marketing page by SonoJS. Built as static HTML, CSS, and vanilla JavaScript - no framework. Promo bar for 12-month financing, Apple-style nav (Tienda → Soporte), Hola, Neo. hero with looping hero.mp4 from 799 €, Lo principal feature card, Cuatro colores swatches (Cítrico, Rosa nube, Plata, Índigo…), day-to-day tiles (battery, Liquid Retina, Apple Intelligence), details / Continuidad / A18 Pro bands, closing Comprar CTA, and legal footnotes. Scroll elevates the nav; IntersectionObserver reveals sections. Demo storefront chrome only - no cart backend. Open index.html or host the folder statically on Cloudflare Workers.",
+      "MacBook Neo is a Spanish-language Apple-style product marketing page by SonoJS. Built as static HTML, CSS, and vanilla JavaScript. No framework. Promo bar for 12-month financing, Apple-style nav (Tienda → Soporte), Hola, Neo. hero with looping hero.mp4 from 799 €, Lo principal feature card, Cuatro colores swatches (Cítrico, Rosa nube, Plata, Índigo…), day-to-day tiles (battery, Liquid Retina, Apple Intelligence), details / Continuidad / A18 Pro bands, closing Comprar CTA, and legal footnotes. Scroll elevates the nav; IntersectionObserver reveals sections. Demo storefront chrome only. No cart backend. Open index.html or host the folder statically on Cloudflare Workers.",
     category: "ecommerce",
     stack: ["html", "css", "javascript"],
     priceLabel: "Free",
@@ -1132,7 +1132,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "index.html + styles.css + main.js with local images/videos - deploy anywhere static.",
+        body: "index.html + styles.css + main.js with local images/videos, deploy anywhere static.",
       },
     ],
     includes: [
@@ -1150,9 +1150,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-ecommerce-03",
     title: "Airbnb",
     tagline:
-      "Vacation rentals marketplace - search bar, carousels, wish hearts.",
+      "Vacation rentals marketplace, search bar, carousels, wish hearts.",
     description:
-      "Airbnb is a vacation-rentals marketplace homepage recreation by SonoJS. Built as static HTML, CSS, and vanilla JavaScript with local DM Sans. Pill tabs for All / Homes / Experiences / Services, Become a host chrome, Where · When · Who search bar, and horizontal listing carousels (Popular homes in Madrid, Great hotels, Stay in Prague, Available next month) with Guest favorite badges, ratings, nightly prices, and wish-heart saves. Carousel prev/next, tab switching, scroll-elevated nav, and reveal-on-view. Demo booking UI only - no search or payments backend. Open index.html or host the folder statically on Cloudflare Workers.",
+      "Airbnb is a vacation-rentals marketplace homepage recreation by SonoJS. Built as static HTML, CSS, and vanilla JavaScript with local DM Sans. Pill tabs for All / Homes / Experiences / Services, Become a host chrome, Where · When · Who search bar, and horizontal listing carousels (Popular homes in Madrid, Great hotels, Stay in Prague, Available next month) with Guest favorite badges, ratings, nightly prices, and wish-heart saves. Carousel prev/next, tab switching, scroll-elevated nav, and reveal-on-view. Demo booking UI only. No search or payments backend. Open index.html or host the folder statically on Cloudflare Workers.",
     category: "ecommerce",
     stack: ["html", "css", "javascript"],
     priceLabel: "Free",
@@ -1193,7 +1193,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "index.html + styles.css + main.js with local DM Sans and listing JPGs - deploy anywhere static.",
+        body: "index.html + styles.css + main.js with local DM Sans and listing JPGs, deploy anywhere static.",
       },
     ],
     includes: [
@@ -1211,9 +1211,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-ecommerce-04",
     title: "Shop",
     tagline:
-      "Shopping designed around you - floating brand constellation + category pills.",
+      "Shopping designed around you, floating brand constellation + category pills.",
     description:
-      "Shop is a multi-category shopping homepage recreation by SonoJS. Built as static HTML, CSS, and vanilla JavaScript with Inter. Download Shop app banner, icon sidebar (Home / Explore / Bag / Deals / Saved), floating brand constellation (Polène, Everlane, Native Union…), shop wordmark with search, and video category pills for Women · Men · Beauty · Home · Baby & Toddler · Sporting goods · Gifts. Category rails feature Comfrt, YoungLA, K-Beauty, Glossier, Atelier, and gift edits with product stills. Cookie bar + pill video autoplay helpers. Demo storefront chrome only - no cart or Shop Pay backend. Open index.html or host the folder statically on Cloudflare Workers.",
+      "Shop is a multi-category shopping homepage recreation by SonoJS. Built as static HTML, CSS, and vanilla JavaScript with Inter. Download Shop app banner, icon sidebar (Home / Explore / Bag / Deals / Saved), floating brand constellation (Polène, Everlane, Native Union…), shop wordmark with search, and video category pills for Women · Men · Beauty · Home · Baby & Toddler · Sporting goods · Gifts. Category rails feature Comfrt, YoungLA, K-Beauty, Glossier, Atelier, and gift edits with product stills. Cookie bar + pill video autoplay helpers. Demo storefront chrome only. No cart or Shop Pay backend. Open index.html or host the folder statically on Cloudflare Workers.",
     category: "ecommerce",
     stack: ["html", "css", "javascript"],
     priceLabel: "Free",
@@ -1272,9 +1272,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-ecommerce-05",
     title: "Vertex",
     tagline:
-      "Streamline the shop - Vision virtual storefront with GLOW skincare.",
+      "Streamline the shop. Vision virtual storefront with GLOW skincare.",
     description:
-      "Vertex is a single-file Vision virtual-shop marketing page by SonoJS. Built as self-contained HTML with inline CSS/JS (Poppins + Playfair Display). SHOPS / VERTEX wordmark, Origin · Learn how · Core · Prices nav, Build new shop CTA, Streamline the shop / Process headlines, and a GLOW Skin Care product stage with Serum Radiance C, Nourishing Lotion, Kit Sunset Renewal, Defender SPF 60, promo trust chips, and intro animation. Demo storefront chrome only - no cart backend. Open index.html or host the folder statically on Cloudflare Workers.",
+      "Vertex is a single-file Vision virtual-shop marketing page by SonoJS. Built as self-contained HTML with inline CSS/JS (Poppins + Playfair Display). SHOPS / VERTEX wordmark, Origin · Learn how · Core · Prices nav, Build new shop CTA, Streamline the shop / Process headlines, and a GLOW Skin Care product stage with Serum Radiance C, Nourishing Lotion, Kit Sunset Renewal, Defender SPF 60, promo trust chips, and intro animation. Demo storefront chrome only. No cart backend. Open index.html or host the folder statically on Cloudflare Workers.",
     category: "ecommerce",
     stack: ["html", "css", "javascript"],
     priceLabel: "Free",
@@ -1332,9 +1332,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-ecommerce-06",
     title: "iPhone Duo",
     tagline:
-      "Hello, hello. - foldable product launch with highlights carousel.",
+      "Hello, hello. foldable product launch with highlights carousel.",
     description:
-      "iPhone Duo is an Apple-style foldable product launch landing by SonoJS (demo product: iPhone Duo). Built with Vite 8, HTML, CSS, and vanilla JavaScript. Global Apple nav, sticky product bar (Explore / Buy), white-gallery hero Hello, hello. with foldable video, From $1999 pricing, Get the highlights carousel (Display, iOS, Titanium, Camera, A20 Pro, Battery, Siri AI), Open/Closed/Tent/Laptop poses, and chapter sections for Display, iOS, Design, Camera, Chip, and Siri AI ending in a Buy CTA. prefers-reduced-motion reveals. Demo product chrome only - no checkout backend. Vite build ready for Cloudflare Workers.",
+      "iPhone Duo is an Apple-style foldable product launch landing by SonoJS (demo product: iPhone Duo). Built with Vite 8, HTML, CSS, and vanilla JavaScript. Global Apple nav, sticky product bar (Explore / Buy), white-gallery hero Hello, hello. with foldable video, From $1999 pricing, Get the highlights carousel (Display, iOS, Titanium, Camera, A20 Pro, Battery, Siri AI), Open/Closed/Tent/Laptop poses, and chapter sections for Display, iOS, Design, Camera, Chip, and Siri AI ending in a Buy CTA. prefers-reduced-motion reveals. Demo product chrome only. No checkout backend. Vite build ready for Cloudflare Workers.",
     category: "ecommerce",
     stack: ["vite", "html", "css", "javascript"],
     priceLabel: "Free",
@@ -1375,7 +1375,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Vite and fork-ready",
-        body: "Vite 8 + HTML/CSS/JS - npm run build to dist/ for Workers.",
+        body: "Vite 8 + HTML/CSS/JS, npm run build to dist/ for Workers.",
       },
     ],
     includes: [
@@ -1394,9 +1394,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-ecommerce-07",
     title: "Marcus Thorne",
     tagline:
-      "Images that stop the scroll. - editorial photographer & filmmaker site.",
+      "Images that stop the scroll. editorial photographer & filmmaker site.",
     description:
-      "Marcus Thorne is a fashion/beauty photographer-filmmaker commission site by SonoJS (demo brand: Marcus Thorne, Amsterdam). Built with Vite 6, React 19, custom CSS (Bodoni Moda + Hanken Grotesk). Full-bleed hero-loop.mp4 with Images that stop the scroll., Book a shoot / Watch the reel CTAs, One photographer. One eye. statement, four commission services (Editorial, Still Life, Brand Content, Motion), selected campaigns (Solstice Aura, Maison Vesper, Kuro Objects, Velvet Botanica), results quotes, brief-to-delivery steps, about Marcus, motion reel, and contact. Demo studio chrome only - mailto booking only. Vite build ready for Cloudflare Workers.",
+      "Marcus Thorne is a fashion/beauty photographer-filmmaker commission site by SonoJS (demo brand: Marcus Thorne, Amsterdam). Built with Vite 6, React 19, custom CSS (Bodoni Moda + Hanken Grotesk). Full-bleed hero-loop.mp4 with Images that stop the scroll. Book a shoot / Watch the reel CTAs, One photographer. One eye. statement, four commission services (Editorial, Still Life, Brand Content, Motion), selected campaigns (Solstice Aura, Maison Vesper, Kuro Objects, Velvet Botanica), results quotes, brief-to-delivery steps, about Marcus, motion reel, and contact. Demo studio chrome only. Mailto booking only. Vite build ready for Cloudflare Workers.",
     category: "ecommerce",
     stack: ["react", "vite", "css"],
     priceLabel: "Free",
@@ -1437,7 +1437,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Vite and fork-ready",
-        body: "Vite 6 + React 19 + custom CSS - npm run build to dist/.",
+        body: "Vite 6 + React 19 + custom CSS, npm run build to dist/.",
       },
     ],
     includes: [
@@ -1456,9 +1456,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-ecommerce-08",
     title: "Diet Soda",
     tagline:
-      "Pure Zero - 3D can hero with flavor swap and floating bubbles.",
+      "Pure Zero, 3D can hero with flavor swap and floating bubbles.",
     description:
-      "Diet Soda is a full-viewport beverage product experience by SonoJS (demo brand: Soda / Diet Soda). Zero-build static HTML with inline CSS, GSAP, and Google model-viewer for the can, leaves, and berries (GLB). Hero Pure Zero with Shop Now, DESIGN AWARDS Premium Beverage 2025 badge, Diet Classic / Zero Lime flavor cards ($2.99) that recolor the radial backdrop and swap the 3D can, floating bubble sprites, and glass nav (Home · Ingredients · Taste · Eco · Reviews). Demo storefront chrome only - no cart backend. Run with npx --yes serve . or host statically on Cloudflare Workers.",
+      "Diet Soda is a full-viewport beverage product experience by SonoJS (demo brand: Soda / Diet Soda). Zero-build static HTML with inline CSS, GSAP, and Google model-viewer for the can, leaves, and berries (GLB). Hero Pure Zero with Shop Now, DESIGN AWARDS Premium Beverage 2025 badge, Diet Classic / Zero Lime flavor cards ($2.99) that recolor the radial backdrop and swap the 3D can, floating bubble sprites, and glass nav (Home · Ingredients · Taste · Eco · Reviews). Demo storefront chrome only. No cart backend. Run with npx --yes serve . or host statically on Cloudflare Workers.",
     category: "ecommerce",
     stack: ["html", "css", "javascript", "gsap"],
     priceLabel: "Free",
@@ -1499,7 +1499,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "index.html + vendor GSAP / model-viewer - serve with npx --yes serve .",
+        body: "index.html + vendor GSAP / model-viewer, serve with npx --yes serve .",
       },
     ],
     includes: [
@@ -1517,9 +1517,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-ecommerce-09",
     title: "VELL",
     tagline:
-      "Create a character — fashion look builder with cart, favourites, and library.",
+      "Create a character fashion look with cart, favourites, and library.",
     description:
-      "VELL is a single-page interactive character / fashion look creator by SonoJS (demo brand: VELL). Zero-build static HTML/CSS/vanilla JS. Glass UI with DNA · BODY · STYLE · PERSONALITY · STORY tabs; side tools for Face, Hair, Makeup, Body, Outfits, Accessories, Tattoos, and Details; look gallery with category filters (Everyday, Athletic, Sleep, Formal, Party, Street); piece-level add-to-cart, favourites, and library badges; lighting filters and frame modes. Demo storefront chrome only — no checkout backend. Run with npx --yes serve . or host statically on Cloudflare Workers.",
+      "VELL is a single-page interactive character / fashion look creator by SonoJS (demo brand: VELL). Zero-build static HTML/CSS/vanilla JS. Glass UI with DNA · BODY · STYLE · PERSONALITY · STORY tabs; side tools for Face, Hair, Makeup, Body, Outfits, Accessories, Tattoos, and Details; look gallery with category filters (Everyday, Athletic, Sleep, Formal, Party, Street); piece-level add-to-cart, favourites, and library badges; lighting filters and frame modes. Demo storefront chrome only. No checkout backend. Run with npx --yes serve . or host statically on Cloudflare Workers.",
     category: "ecommerce",
     stack: ["html", "css", "javascript"],
     priceLabel: "Free",
@@ -1560,7 +1560,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "index.html + styles.css + app.js + local WebP assets — npx serve .",
+        body: "index.html + styles.css + app.js + local WebP assets, npx serve .",
       },
     ],
     includes: [
@@ -1571,7 +1571,7 @@ export const templateProjects: TemplateProject[] = [
     ],
     requirements: [
       "Modern browser",
-      "Static file host (`npx --yes serve .` — not file://)",
+      "Static file host (`npx --yes serve .`)",
     ],
     runCommand: "npx --yes serve .",
   },
@@ -1579,9 +1579,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-ecommerce-10",
     title: "HINA",
     tagline:
-      "Little Wardrobe — interactive children's clothing rail with peek details.",
+      "Little Wardrobe interactive children's clothing rail with peek details.",
     description:
-      "HINA is a single-page interactive children's clothing lookbook by SonoJS (demo brand: HINA · Little Wardrobe). Zero-build static HTML/CSS/vanilla JS. Soft wall stage with a hanging garment rail (12 pieces), scroll/drag index, product titles and material/colour/size copy, VIEW DETAILS peek flow (on hanger / fabric / detail), and glass top nav chrome. Demo storefront chrome only — no cart backend. Host statically (e.g. Cloudflare Workers).",
+      "HINA is a single-page interactive children's clothing lookbook by SonoJS (demo brand: HINA · Little Wardrobe). Zero-build static HTML/CSS/vanilla JS. Soft wall stage with a hanging garment rail (12 pieces), scroll/drag index, product titles and material/colour/size copy, VIEW DETAILS peek flow (on hanger / fabric / detail), and glass top nav chrome. Demo storefront chrome only. No cart backend. Host statically (e.g. Cloudflare Workers).",
     category: "ecommerce",
     stack: ["html", "css", "javascript"],
     priceLabel: "Free",
@@ -1610,7 +1610,7 @@ export const templateProjects: TemplateProject[] = [
     highlights: [
       {
         title: "Hanging wardrobe rail",
-        body: "Interactive rail of soft kidswear pieces with index 01–12.",
+        body: "Interactive rail of soft kidswear pieces with index 01-12.",
       },
       {
         title: "Peek product details",
@@ -1622,7 +1622,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "index.html + css/ + js/ + assets — static host only.",
+        body: "index.html + css/ + js/ + assets, static host only.",
       },
     ],
     includes: [
@@ -1633,16 +1633,16 @@ export const templateProjects: TemplateProject[] = [
     ],
     requirements: [
       "Modern browser",
-      "Static file host (not file://)",
+      "Static file host",
     ],
   },
   {
     slug: "sonojs-ecommerce-11",
     title: "Maison Verrel",
     tagline:
-      "The Rail — evening & tailoring lookbook with hover pieces and quick view.",
+      "The Rail, evening & tailoring lookbook with hover pieces and quick view.",
     description:
-      "Maison Verrel is a single-page interactive fashion rail / lookbook by SonoJS (demo brand: Maison Verrel · The Rail). Zero-build static HTML/CSS/vanilla JS. Curved clothing rail with hover labels and click-to-look-closer quick view (front/back, sizes, add to cart), glass brand nav, NEW COLLECTION / Evening & Tailoring hero, and a demo cart drawer. Demo storefront chrome only — no checkout backend. Host statically (e.g. Cloudflare Workers).",
+      "Maison Verrel is a single-page interactive fashion rail / lookbook by SonoJS (demo brand: Maison Verrel · The Rail). Zero-build static HTML/CSS/vanilla JS. Curved clothing rail with hover labels and click-to-look-closer quick view (front/back, sizes, add to cart), glass brand nav, NEW COLLECTION / Evening & Tailoring hero, and a demo cart drawer. Demo storefront chrome only. No checkout backend. Host statically (e.g. Cloudflare Workers).",
     category: "ecommerce",
     stack: ["html", "css", "javascript"],
     priceLabel: "Free",
@@ -1671,7 +1671,7 @@ export const templateProjects: TemplateProject[] = [
     highlights: [
       {
         title: "Interactive fashion rail",
-        body: "Curved rail of evening & tailoring pieces — hover a piece, click closer.",
+        body: "Curved rail of evening & tailoring pieces, hover a piece, click closer.",
       },
       {
         title: "Quick view + cart",
@@ -1683,7 +1683,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "index.html + styles.css + app.js + asset sheets — static host only.",
+        body: "index.html + styles.css + app.js + asset sheets, static host only.",
       },
     ],
     includes: [
@@ -1693,16 +1693,16 @@ export const templateProjects: TemplateProject[] = [
     ],
     requirements: [
       "Modern browser",
-      "Static file host (not file://)",
+      "Static file host",
     ],
   },
 {
     slug: "sonojs-portfolio-01",
     title: "Jack",
     tagline:
-      "Dark 3D-creator portfolio - hero, marquee, services, and project cases.",
+      "Dark 3D-creator portfolio, hero, marquee, services, and project cases.",
     description:
-      "Jack is a dark personal portfolio for a 3D creator by SonoJS. Built with Vite, React 19, TypeScript, Tailwind CSS 3, Framer Motion, and Lucide. You get a full-viewport hero (Hi, i'm jack + magnetic portrait), image marquee, about, services (3D Modeling, Rendering, Motion Design, Branding, Web Design), project cases (Nextlevel Studio, Aura Brand Identity, Solaris Digital), and a contact footer. Motion helpers include FadeIn, Magnet, and AnimatedText. Demo content only - no CMS backend. Static build ready for Cloudflare Workers or GitHub Pages.",
+      "Jack is a dark personal portfolio for a 3D creator by SonoJS. Built with Vite, React 19, TypeScript, Tailwind CSS 3, Framer Motion, and Lucide. You get a full-viewport hero (Hi, i'm jack + magnetic portrait), image marquee, about, services (3D Modeling, Rendering, Motion Design, Branding, Web Design), project cases (Nextlevel Studio, Aura Brand Identity, Solaris Digital), and a contact footer. Motion helpers include FadeIn, Magnet, and AnimatedText. Demo content only. No CMS backend. Static build ready for Cloudflare Workers or GitHub Pages.",
     category: "portfolio",
     stack: ["react", "vite", "typescript", "tailwind", "lucide"],
     priceLabel: "Free",
@@ -1736,7 +1736,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Services and cases",
-        body: "3D Modeling, Rendering, Motion, Branding, Web Design - plus three project case layouts.",
+        body: "3D Modeling, Rendering, Motion, Branding, Web Design, plus three project case layouts.",
       },
       {
         title: "Motion polish",
@@ -1767,9 +1767,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-portfolio-02",
     title: "Folio",
     tagline:
-      "Wheel-jacked infinite portfolio reel - titles, images, and tilt detail.",
+      "Wheel-jacked infinite portfolio reel, titles, images, and tilt detail.",
     description:
-      "Folio is a wheel-driven infinite portfolio reel by SonoJS. Built with Vite, React 19, TypeScript, Tailwind CSS 4, and GSAP. Scroll or wheel through stacked project titles and synced image strips; open a case for a 3D-tilt detail view. Local Geist Variable font and all folio stills under public/folio - no CDN at runtime. Demo selected-work UI only - no CMS. Static build ready for Cloudflare Workers.",
+      "Folio is a wheel-driven infinite portfolio reel by SonoJS. Built with Vite, React 19, TypeScript, Tailwind CSS 4, and GSAP. Scroll or wheel through stacked project titles and synced image strips; open a case for a 3D-tilt detail view. Local Geist Variable font and all folio stills under public/folio. No CDN at runtime. Demo selected-work UI only. No CMS. Static build ready for Cloudflare Workers.",
     category: "portfolio",
     stack: ["react", "vite", "typescript", "tailwind", "gsap"],
     priceLabel: "Free",
@@ -1806,11 +1806,11 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Local media only",
-        body: "Geist Variable and public/folio images ship in-repo - no remote CDN at runtime.",
+        body: "Geist Variable and public/folio images ship in-repo. No remote CDN at runtime.",
       },
       {
         title: "Static and fork-ready",
-        body: "Vite build to dist/ - deploy on Cloudflare Workers or any static host.",
+        body: "Vite build to dist/, deploy on Cloudflare Workers or any static host.",
       },
     ],
     includes: [
@@ -1832,9 +1832,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-portfolio-03",
     title: "Michael Smith",
     tagline:
-      "Collection '26 personal portfolio - HLS hero, selected work, journal.",
+      "Collection '26 personal portfolio. HLS hero, selected work, journal.",
     description:
-      "Michael Smith is a personal portfolio marketing site by SonoJS. Built with Vite, React 19, TypeScript, Tailwind CSS 4, Framer Motion, GSAP, React Router, and hls.js. Loading screen into a Collection '26 hero with Michael Smith display type, rotating Creative / Fullstack / Founder / Scholar roles, and local hero.mp4 (HLS fallback). Selected Work masonry (Automotive Motion, Urban Architecture, Human Perspective, Brand Identity), journal and explorations grids, 20+ / 95+ / 200% stats, and a BUILDING THE FUTURE contact marquee. Demo portfolio chrome only - no CMS. Vite build ready for Cloudflare Workers.",
+      "Michael Smith is a personal portfolio marketing site by SonoJS. Built with Vite, React 19, TypeScript, Tailwind CSS 4, Framer Motion, GSAP, React Router, and hls.js. Loading screen into a Collection '26 hero with Michael Smith display type, rotating Creative / Fullstack / Founder / Scholar roles, and local hero.mp4 (HLS fallback). Selected Work masonry (Automotive Motion, Urban Architecture, Human Perspective, Brand Identity), journal and explorations grids, 20+ / 95+ / 200% stats, and a BUILDING THE FUTURE contact marquee. Demo portfolio chrome only. No CMS. Vite build ready for Cloudflare Workers.",
     category: "portfolio",
     stack: ["react", "vite", "typescript", "tailwind", "gsap", "reactrouter"],
     priceLabel: "Free",
@@ -1863,7 +1863,7 @@ export const templateProjects: TemplateProject[] = [
     highlights: [
       {
         title: "Collection '26 hero",
-        body: "HLS / local hero.mp4 stage, Michael Smith type, and rotating Creative–Scholar roles.",
+        body: "HLS / local hero.mp4 stage, Michael Smith type, and rotating Creative-Scholar roles.",
       },
       {
         title: "Selected work grid",
@@ -1875,7 +1875,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Vite and fork-ready",
-        body: "Vite 8 + React 19 + TypeScript + Tailwind 4 + GSAP + Framer Motion + React Router - npm run build to dist/.",
+        body: "Vite 8 + React 19 + TypeScript + Tailwind 4 + GSAP + Framer Motion + React Router, npm run build to dist/.",
       },
     ],
     includes: [
@@ -1900,9 +1900,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-portfolio-04",
     title: "Collage",
     tagline:
-      "Noor Halberg film collage - drag a contact-sheet of prints.",
+      "Noor Halberg film collage, drag a contact-sheet of prints.",
     description:
-      "Collage is an interactive photographer portfolio by SonoJS (demo: Noor Halberg, Copenhagen). Built with Vite, React 19, TypeScript, custom CSS, and Jost Variable. An endless contact-sheet table of 16 film prints (Interiors, Architecture, Travel, Still life, Portrait) with drag momentum, random/linear layout modes, category labels, lightbox full stills, about/contact popovers, and live Copenhagen clock. Demo portfolio chrome only - no booking backend. Vite build ready for Cloudflare Workers.",
+      "Collage is an interactive photographer portfolio by SonoJS (demo: Noor Halberg, Copenhagen). Built with Vite, React 19, TypeScript, custom CSS, and Jost Variable. An endless contact-sheet table of 16 film prints (Interiors, Architecture, Travel, Still life, Portrait) with drag momentum, random/linear layout modes, category labels, lightbox full stills, about/contact popovers, and live Copenhagen clock. Demo portfolio chrome only. No booking backend. Vite build ready for Cloudflare Workers.",
     category: "portfolio",
     stack: ["react", "vite", "typescript", "css"],
     priceLabel: "Free",
@@ -1939,11 +1939,11 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Category + lightbox",
-        body: "Interiors–Portrait filters, full WebP lightbox, about/contact chrome.",
+        body: "Interiors-Portrait filters, full WebP lightbox, about/contact chrome.",
       },
       {
         title: "Vite and fork-ready",
-        body: "Vite 7 + React 19 + TypeScript + Jost Variable - npm run build to dist/.",
+        body: "Vite 7 + React 19 + TypeScript + Jost Variable, npm run build to dist/.",
       },
     ],
     includes: [
@@ -1964,9 +1964,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-portfolio-05",
     title: "Alpenglow",
     tagline:
-      "Winter mountain photography portfolio - gallery, print shop, and booking.",
+      "Winter mountain photography portfolio, gallery, print shop, and booking.",
     description:
-      "Alpenglow is a winter mountain photographer portfolio by SonoJS (demo brand: Alpenglow Photo Co.). Built with Vite 6, React 18, TypeScript, Tailwind CSS 3, Lucide, and Archivo. Full-bleed Ken Burns hero (Chasing light above the treeline), selected-work gallery with ski / backcountry / landscape / resort filters and lightbox, featured expedition story (Whistler Spearhead Traverse), services for athlete shoots and campaigns, archival print shop with cart drawer, about + kit, clients strip, and booking form. Demo portfolio chrome only - no payment or booking backend. Vite build ready for Cloudflare Workers.",
+      "Alpenglow is a winter mountain photographer portfolio by SonoJS (demo brand: Alpenglow Photo Co.). Built with Vite 6, React 18, TypeScript, Tailwind CSS 3, Lucide, and Archivo. Full-bleed Ken Burns hero (Chasing light above the treeline), selected-work gallery with ski / backcountry / landscape / resort filters and lightbox, featured expedition story (Whistler Spearhead Traverse), services for athlete shoots and campaigns, archival print shop with cart drawer, about + kit, clients strip, and booking form. Demo portfolio chrome only. No payment or booking backend. Vite build ready for Cloudflare Workers.",
     category: "portfolio",
     stack: ["react", "vite", "typescript", "tailwind", "lucide"],
     priceLabel: "Free",
@@ -2003,11 +2003,11 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Print shop cart",
-        body: "Editioned archival prints with qty cart drawer - demo checkout chrome only.",
+        body: "Editioned archival prints with qty cart drawer, demo checkout chrome only.",
       },
       {
         title: "Vite and fork-ready",
-        body: "Vite 6 + React 18 + Tailwind 3 + Lucide + Archivo - npm run build to dist/.",
+        body: "Vite 6 + React 18 + Tailwind 3 + Lucide + Archivo, npm run build to dist/.",
       },
     ],
     includes: [
@@ -2029,9 +2029,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-04",
     title: "Mossline",
     tagline:
-      "Scroll-driven climate hero - Measure the Living Planet with video, fog, and HUD.",
+      "Scroll-driven climate hero. Measure the Living Planet with video, fog, and HUD.",
     description:
-      "Mossline is a scroll-storytelling marketing hero for a climate / earth-sensing brand by SonoJS. Built as a single HTML page with local CSS, fonts, WebP plates, and a fly-in MP4. A sticky stage (~640vh story) drives camera motion, mist, floating rocks, HUD telemetry, and the headline Measure the Living Planet. Progress bar, SCROLL TO EXPLORE hint, and glass product cards (field sensors, living species baselines) continue the narrative. Demo UI only - no backend. Open index.html or host the folder statically on Cloudflare Workers.",
+      "Mossline is a scroll-storytelling marketing hero for a climate / earth-sensing brand by SonoJS. Built as a single HTML page with local CSS, fonts, WebP plates, and a fly-in MP4. A sticky stage (~640vh story) drives camera motion, mist, floating rocks, HUD telemetry, and the headline Measure the Living Planet. Progress bar, SCROLL TO EXPLORE hint, and glass product cards (field sensors, living species baselines) continue the narrative. Demo UI only. No backend. Open index.html or host the folder statically on Cloudflare Workers.",
     category: "hero",
     stack: ["html", "css", "javascript"],
     priceLabel: "Free",
@@ -2059,7 +2059,7 @@ export const templateProjects: TemplateProject[] = [
     highlights: [
       {
         title: "Scroll-scrubbed stage",
-        body: "Sticky full-viewport camera stage over a long story scroll - video fly-in, mist, and rock layers.",
+        body: "Sticky full-viewport camera stage over a long story scroll, video fly-in, mist, and rock layers.",
       },
       {
         title: "Climate brand chrome",
@@ -2071,7 +2071,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "One index.html plus local fonts, WebP plates, and flyin.mp4 - deploy anywhere static.",
+        body: "One index.html plus local fonts, WebP plates, and flyin.mp4, deploy anywhere static.",
       },
     ],
     includes: [
@@ -2083,7 +2083,7 @@ export const templateProjects: TemplateProject[] = [
     ],
     requirements: [
       "Modern browser (CSS mask, sticky, canvas/video)",
-      "No build step - open index.html or static-host the folder",
+      "No build step, open index.html or static-host the folder",
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
   },
@@ -2091,9 +2091,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-05",
     title: "Planet Jumping",
     tagline:
-      "Ubernatural planet hopper - portal jumps between Mars, Earth, Venus with video transitions.",
+      "Ubernatural planet hopper, portal jumps between Mars, Earth, Venus with video transitions.",
     description:
-      "Planet Jumping is a full-viewport interactive space hero by SonoJS (demo brand Ubernatural). Built as a single HTML page with vanilla JS, local videos, and canvas FX. Start on Mars with a video preloader, pick the next world from a planet rail (Mercury through Neptune), and travel through a portal with to-earth / to-venus / to-mars MP4 transitions. Giant planet titles, fact blocks, custom cursor, floating logo, and a soft bottom shade keep the chrome cinematic. Demo UI only - no backend. Open index.html or host the folder statically on Cloudflare Workers.",
+      "Planet Jumping is a full-viewport interactive space hero by SonoJS (demo brand Ubernatural). Built as a single HTML page with vanilla JS, local videos, and canvas FX. Start on Mars with a video preloader, pick the next world from a planet rail (Mercury through Neptune), and travel through a portal with to-earth / to-venus / to-mars MP4 transitions. Giant planet titles, fact blocks, custom cursor, floating logo, and a soft bottom shade keep the chrome cinematic. Demo UI only. No backend. Open index.html or host the folder statically on Cloudflare Workers.",
     category: "hero",
     stack: ["html", "css", "javascript"],
     priceLabel: "Free",
@@ -2121,7 +2121,7 @@ export const templateProjects: TemplateProject[] = [
     highlights: [
       {
         title: "Portal planet jumps",
-        body: "Click the Next portal to travel - video transitions between Mars, Earth, Venus and more.",
+        body: "Click the Next portal to travel, video transitions between Mars, Earth, Venus and more.",
       },
       {
         title: "Full planet rail",
@@ -2133,7 +2133,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "One index.html plus local videos, mercury still, and logo - deploy anywhere static.",
+        body: "One index.html plus local videos, mercury still, and logo, deploy anywhere static.",
       },
     ],
     includes: [
@@ -2144,7 +2144,7 @@ export const templateProjects: TemplateProject[] = [
     ],
     requirements: [
       "Modern browser (video, canvas, CSS transitions)",
-      "No build step - open index.html or static-host the folder",
+      "No build step, open index.html or static-host the folder",
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
   },
@@ -2152,9 +2152,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-06",
     title: "SpaceEdu",
     tagline:
-      "Education space hero - swap Earth, Venus, and Mars with video skies and course CTA.",
+      "Education space hero, swap Earth, Venus, and Mars with video skies and course CTA.",
     description:
-      "SpaceEdu is a full-viewport planet education hero by SonoJS. Built as a single HTML page with local fonts, stills, cutouts, and looping sky videos. Click the side planets to feature EARTH, VENUS, or MARS - the sky video crossfades, title and copy update, and GET STARTED drives enrollment. Nav covers Planets, Tuition, Tutorials, Blog, and Enroll. prefers-reduced-motion falls back to still skies. Demo UI only - no backend. Open index.html or host the folder statically on Cloudflare Workers.",
+      "SpaceEdu is a full-viewport planet education hero by SonoJS. Built as a single HTML page with local fonts, stills, cutouts, and looping sky videos. Click the side planets to feature EARTH, VENUS, or MARS, the sky video crossfades, title and copy update, and GET STARTED drives enrollment. Nav covers Planets, Tuition, Tutorials, Blog, and Enroll. prefers-reduced-motion falls back to still skies. Demo UI only. No backend. Open index.html or host the folder statically on Cloudflare Workers.",
     category: "hero",
     stack: ["html", "css", "javascript"],
     priceLabel: "Free",
@@ -2182,7 +2182,7 @@ export const templateProjects: TemplateProject[] = [
     highlights: [
       {
         title: "Clickable side planets",
-        body: "Swap the featured world between Earth, Venus, and Mars - title, copy, and sky update together.",
+        body: "Swap the featured world between Earth, Venus, and Mars, title, copy, and sky update together.",
       },
       {
         title: "Video sky stage",
@@ -2194,7 +2194,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "One index.html plus fonts, stills, cutouts, and sky videos - deploy anywhere static.",
+        body: "One index.html plus fonts, stills, cutouts, and sky videos, deploy anywhere static.",
       },
     ],
     includes: [
@@ -2206,7 +2206,7 @@ export const templateProjects: TemplateProject[] = [
     ],
     requirements: [
       "Modern browser (video, CSS custom properties)",
-      "No build step - open index.html or static-host the folder",
+      "No build step, open index.html or static-host the folder",
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
   },
@@ -2214,9 +2214,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-07",
     title: "Lumen Roof",
     tagline:
-      "Solar farmhouse hero - Morning / Night toggle with $0 bills for 7 years.",
+      "Solar farmhouse hero. Morning / Night toggle with $0 bills for 7 years.",
     description:
-      "Lumen Roof is a full-viewport solar marketing hero by SonoJS. Built as a single HTML page with Instrument Sans, layered WebP skies/grounds/house cuts, and a WebGL fog canvas. A glass Morning / Night toggle crossfades the scene and ink colors while the headline promises $0 Electricity Bills for the next 7 Years. Nav, Get an Instant Quote CTA, and Smart Controller caption complete the chrome. prefers-reduced-motion softens the blend. Demo UI only - no backend. Open index.html or host the folder statically on Cloudflare Workers.",
+      "Lumen Roof is a full-viewport solar marketing hero by SonoJS. Built as a single HTML page with Instrument Sans, layered WebP skies/grounds/house cuts, and a WebGL fog canvas. A glass Morning / Night toggle crossfades the scene and ink colors while the headline promises $0 Electricity Bills for the next 7 Years. Nav, Get an Instant Quote CTA, and Smart Controller caption complete the chrome. prefers-reduced-motion softens the blend. Demo UI only. No backend. Open index.html or host the folder statically on Cloudflare Workers.",
     category: "hero",
     stack: ["html", "css", "javascript"],
     priceLabel: "Free",
@@ -2256,7 +2256,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "One index.html plus Instrument Sans and six WebP plates - deploy anywhere static.",
+        body: "One index.html plus Instrument Sans and six WebP plates, deploy anywhere static.",
       },
     ],
     includes: [
@@ -2267,7 +2267,7 @@ export const templateProjects: TemplateProject[] = [
     ],
     requirements: [
       "Modern browser (CSS color-mix, backdrop-filter; WebGL2 optional for fog)",
-      "No build step - open index.html or static-host the folder",
+      "No build step, open index.html or static-host the folder",
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
   },
@@ -2275,9 +2275,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-landing-04",
     title: "HUM One",
     tagline:
-      "Silence, engineered - ANC headphone landing with 3D hero, anatomy, and pre-order.",
+      "Silence, engineered. ANC headphone landing with 3D hero, anatomy, and pre-order.",
     description:
-      "HUM One is a cinematic product landing for noise-cancelling headphones by SonoJS (demo brand HUM Audio, Rotterdam). Built as a static HTML / CSS / JS site with GSAP, Lenis, ScrollTrigger, and Three.js. An intro gate measures the room and quiets the page; the hero mounts a live 3D headset with poster fallback. Sections cover anatomy (cushions, drivers, band, repair), ANC modes (Open / Adaptive / Full quiet), three colourways (Graphite, Fog, Violet), voice quotes, and a Pre-order · €349 close. Demo marketing UI only - no cart backend. Open index.html or host the folder on Cloudflare Workers.",
+      "HUM One is a cinematic product landing for noise-cancelling headphones by SonoJS (demo brand HUM Audio, Rotterdam). Built as a static HTML / CSS / JS site with GSAP, Lenis, ScrollTrigger, and Three.js. An intro gate measures the room and quiets the page; the hero mounts a live 3D headset with poster fallback. Sections cover anatomy (cushions, drivers, band, repair), ANC modes (Open / Adaptive / Full quiet), three colourways (Graphite, Fog, Violet), voice quotes, and a Pre-order · €349 close. Demo marketing UI only. No cart backend. Open index.html or host the folder on Cloudflare Workers.",
     category: "landing",
     stack: ["html", "css", "javascript", "threejs", "gsap"],
     priceLabel: "Free",
@@ -2306,7 +2306,7 @@ export const templateProjects: TemplateProject[] = [
     highlights: [
       {
         title: "Quiet intro gate",
-        body: "Room dB meter and Put them on entry - the page gets quieter as you scroll.",
+        body: "Room dB meter and Put them on entry, the page gets quieter as you scroll.",
       },
       {
         title: "3D headset hero",
@@ -2318,7 +2318,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Static and fork-ready",
-        body: "HTML + vendor GSAP / Lenis / Three - open locally or deploy to Workers.",
+        body: "HTML + vendor GSAP / Lenis / Three, open locally or deploy to Workers.",
       },
     ],
     includes: [
@@ -2330,7 +2330,7 @@ export const templateProjects: TemplateProject[] = [
     ],
     requirements: [
       "Modern browser (WebGL for 3D hero; poster fallback without it)",
-      "No build step - open index.html or static-host the folder",
+      "No build step, open index.html or static-host the folder",
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
   },
@@ -2338,9 +2338,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-08",
     title: "Lumora",
     tagline:
-      "Cadet Skyranger hero - head-turn video stage with toggleable helmet overlay.",
+      "Cadet Skyranger hero, head-turn video stage with toggleable helmet overlay.",
     description:
-      "Lumora is a full-viewport Cadet Skyranger marketing hero by SonoJS. Built as a single HTML page with Urbanist and Archivo Italic, a fixed artboard frame, plate background, masked head-turn MP4, and a screen-blend helmet still. Push Me toggles the helmet on and off with a short motion. Custom fine-pointer cursor, intro stagger for logo / menu / SKYRANGER headline / captions. Demo UI only - no backend. Open index.html or host the folder statically on Cloudflare Workers.",
+      "Lumora is a full-viewport Cadet Skyranger marketing hero by SonoJS. Built as a single HTML page with Urbanist and Archivo Italic, a fixed artboard frame, plate background, masked head-turn MP4, and a screen-blend helmet still. Push Me toggles the helmet on and off with a short motion. Custom fine-pointer cursor, intro stagger for logo / menu / SKYRANGER headline / captions. Demo UI only. No backend. Open index.html or host the folder statically on Cloudflare Workers.",
     category: "hero",
     stack: ["html", "css", "javascript"],
     priceLabel: "Free",
@@ -2368,7 +2368,7 @@ export const templateProjects: TemplateProject[] = [
     highlights: [
       {
         title: "Head-turn stage",
-        body: "Masked looping head-turn video over a plate still - cadet portrait as the hero plane.",
+        body: "Masked looping head-turn video over a plate still, cadet portrait as the hero plane.",
       },
       {
         title: "Helmet toggle",
@@ -2391,7 +2391,7 @@ export const templateProjects: TemplateProject[] = [
     ],
     requirements: [
       "Modern browser (CSS mask, Web Animations API)",
-      "No build step - open index.html or static-host the folder",
+      "No build step, open index.html or static-host the folder",
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
   },
@@ -2399,9 +2399,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-landing-05",
     title: "VEYRA",
     tagline:
-      "Electric, inside out - hover films, cutaways, paint and wheel configurator.",
+      "Electric, inside out, hover films, cutaways, paint and wheel configurator.",
     description:
-      "VEYRA is an interactive automotive design study by SonoJS. Built with Vite, React 18, TypeScript, Tailwind CSS 3, and Lucide. Explore an electric vehicle through short hover films (hood / battery open and close), click-to-detail cutaways, and a compact appearance configurator for five paints and three wheel designs. Media-driven interaction - no WebGL model required. Space Grotesk, blue studio frame, electric-green controls. Demo concept only - not a real automaker. Static build ready for Cloudflare Workers or GitHub Pages.",
+      "VEYRA is an interactive automotive design study by SonoJS. Built with Vite, React 18, TypeScript, Tailwind CSS 3, and Lucide. Explore an electric vehicle through short hover films (hood / battery open and close), click-to-detail cutaways, and a compact appearance configurator for five paints and three wheel designs. Media-driven interaction. No WebGL model required. Space Grotesk, blue studio frame, electric-green controls. Demo concept only. Not a real automaker. Static build ready for Cloudflare Workers or GitHub Pages.",
     category: "landing",
     stack: ["react", "vite", "typescript", "tailwind", "lucide"],
     priceLabel: "Free",
@@ -2430,7 +2430,7 @@ export const templateProjects: TemplateProject[] = [
     highlights: [
       {
         title: "Hover-driven films",
-        body: "Electric drive and battery zones play forward/reverse video on hover - click for cutaway detail.",
+        body: "Electric drive and battery zones play forward/reverse video on hover, click for cutaway detail.",
       },
       {
         title: "Appearance configurator",
@@ -2442,7 +2442,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Static and fork-ready",
-        body: "Vite build to dist/ with bundled hover films - no API key or GPU required to run.",
+        body: "Vite build to dist/ with bundled hover films. No API key or GPU required to run.",
       },
     ],
     includes: [
@@ -2465,9 +2465,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-landing-06",
     title: "Cinema Reel",
     tagline:
-      "Vertical film-festival slider - snap physics, parallax frames, and tilt modal.",
+      "Vertical film-festival slider, snap physics, parallax frames, and tilt modal.",
     description:
-      "Cinema Reel is a vertical film-festival landing by SonoJS. Built with Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS 4, and GSAP. Snap-scroll through festival slides with parallax frames, an old-reel entrance timeline, and a 3D-tilt detail modal. All slide images and award SVGs ship under public/ - no remote media URLs. Demo festival chrome only - no ticket backend. Deploy with Next.js on Cloudflare Workers or Node.",
+      "Cinema Reel is a vertical film-festival landing by SonoJS. Built with Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS 4, and GSAP. Snap-scroll through festival slides with parallax frames, an old-reel entrance timeline, and a 3D-tilt detail modal. All slide images and award SVGs ship under public/. No remote media URLs. Demo festival chrome only. No ticket backend. Deploy with Next.js on Cloudflare Workers or Node.",
     category: "landing",
     stack: ["nextjs", "react", "typescript", "tailwind", "gsap"],
     priceLabel: "Free",
@@ -2504,11 +2504,11 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Local media only",
-        body: "All stills and award SVGs live under public/ - no remote image URLs in source.",
+        body: "All stills and award SVGs live under public/. No remote image URLs in source.",
       },
       {
         title: "Next App Router ready",
-        body: "Next.js 16 + React 19 + Tailwind 4 - deploy on Workers or any Node host.",
+        body: "Next.js 16 + React 19 + Tailwind 4, deploy on Workers or any Node host.",
       },
     ],
     includes: [
@@ -2530,9 +2530,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-landing-07",
     title: "Melli",
     tagline:
-      "Master 3D artistry - scroll landing with a live bee GLB and floral parallax.",
+      "Master 3D artistry, scroll landing with a live bee GLB and floral parallax.",
     description:
-      "Melli is a lilac 3D-motion academy landing by SonoJS (demo brand Melli_Motion). Built as a single HTML page with Poppins, vanilla scroll parallax, and Three.js. A fixed bee GLB (GLTFLoader + RoomEnvironment) flies across themed sections - Imagine your next site, Universe of 3D Motion, Claim Early Invite, Study and Build, and a Prepared to fly high footer. Floral PNG accents and light/dark section themes. Demo course marketing UI only - no waitlist backend. Run locally with npx serve . (ES modules need a static server) or host on Cloudflare Workers.",
+      "Melli is a lilac 3D-motion academy landing by SonoJS (demo brand Melli_Motion). Built as a single HTML page with Poppins, vanilla scroll parallax, and Three.js. A fixed bee GLB (GLTFLoader + RoomEnvironment) flies across themed sections. Imagine your next site, Universe of 3D Motion, Claim Early Invite, Study and Build, and a Prepared to fly high footer. Floral PNG accents and light/dark section themes. Demo course marketing UI only. No waitlist backend. Run locally with npx serve . (ES modules need a static server) or host on Cloudflare Workers.",
     category: "landing",
     stack: ["html", "css", "javascript", "threejs"],
     priceLabel: "Free",
@@ -2584,7 +2584,7 @@ export const templateProjects: TemplateProject[] = [
     ],
     requirements: [
       "Modern browser (ES modules, WebGL)",
-      "Local static server - ES modules will not load via file://",
+      "Local static server (ES modules need HTTP)",
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
     runCommand: "npx serve .",
@@ -2593,9 +2593,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-landing-08",
     title: "Sabrina Residences",
     tagline:
-      "Real-estate landing - hero house plate, video card, and latest listings gallery.",
+      "Real-estate landing, hero house plate, video card, and latest listings gallery.",
     description:
-      "Sabrina Residences is a real-estate marketing landing by SonoJS. Built as a single HTML page with local CSS/JS, vendor fonts, and Lucide icons. Full-bleed hero house PNG, pill nav (HOME / PROPERTIES / AGENT / PARTNER), BA/EN language switch, SIGN IN, Explore Properties CTA, a looping video card with segment bars, and an OUR LATEST Houses gallery (three listing plates). Word-in entrance animations and mobile hamburger menu. Demo property chrome only - no CRM backend. Open index.html or host the folder statically on Cloudflare Workers.",
+      "Sabrina Residences is a real-estate marketing landing by SonoJS. Built as a single HTML page with local CSS/JS, vendor fonts, and Lucide icons. Full-bleed hero house PNG, pill nav (HOME / PROPERTIES / AGENT / PARTNER), BA/EN language switch, SIGN IN, Explore Properties CTA, a looping video card with segment bars, and an OUR LATEST Houses gallery (three listing plates). Word-in entrance animations and mobile hamburger menu. Demo property chrome only. No CRM backend. Open index.html or host the folder statically on Cloudflare Workers.",
     category: "landing",
     stack: ["html", "css", "javascript", "lucide"],
     priceLabel: "Free",
@@ -2642,12 +2642,12 @@ export const templateProjects: TemplateProject[] = [
     includes: [
       "index.html (complete Sabrina Residences landing)",
       "styles.css and script.js",
-      "assets/images (hero-house + house 1–3) and assets/videos/hero.mp4",
+      "assets/images (hero-house + house 1-3) and assets/videos/hero.mp4",
       "vendor fonts + lucide.min.js",
     ],
     requirements: [
       "Modern browser (video autoplay muted, CSS transitions)",
-      "No build step - open index.html or static-host the folder",
+      "No build step, open index.html or static-host the folder",
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
   },
@@ -2655,9 +2655,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-landing-09",
     title: "Plety",
     tagline:
-      "The intelligence layer for clear decisions - AI SaaS landing with video features.",
+      "The intelligence layer for clear decisions. AI SaaS landing with video features.",
     description:
-      "Plety is a dark AI/SaaS product landing by SonoJS. Built with Vite, React 19, and Tailwind CSS 4. Full-bleed hero video, Announcing API 2.0 badge, The intelligence layer for clear decisions headline, Get started / Learn more CTAs, trusted-by marquee, AI chat and feature video sections, FAQ, and footer. Demo intelligence-platform chrome only - media loads from CDN; no API backend. Vite build ready for Cloudflare Workers.",
+      "Plety is a dark AI/SaaS product landing by SonoJS. Built with Vite, React 19, and Tailwind CSS 4. Full-bleed hero video, Announcing API 2.0 badge, The intelligence layer for clear decisions headline, Get started / Learn more CTAs, trusted-by marquee, AI chat and feature video sections, FAQ, and footer. Demo intelligence-platform chrome only. Media loads from CDN; no API backend. Vite build ready for Cloudflare Workers.",
     category: "landing",
     stack: ["react", "vite", "javascript", "tailwind"],
     priceLabel: "Free",
@@ -2698,7 +2698,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Vite and fork-ready",
-        body: "Vite 8 + React 19 + Tailwind 4 - npm run build to dist/ for static hosting.",
+        body: "Vite 8 + React 19 + Tailwind 4, npm run build to dist/ for static hosting.",
       },
     ],
     includes: [
@@ -2718,9 +2718,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-09",
     title: "Sellix",
     tagline:
-      "Cross-border finance hero - full-bleed video stage, glass nav, Get Started CTAs.",
+      "Cross-border finance hero, full-bleed video stage, glass nav, Get Started CTAs.",
     description:
-      "Sellix is a full-viewport cross-border finance marketing hero by SonoJS. Built as a single HTML page with Plus Jakarta Sans, a looping background MP4 (poster still until active), glass dark nav, and a stacked Cross-border finance headline with Get Started / secondary CTAs. Mobile burger menu included. Demo fintech chrome only - no backend. Open index.html or host the folder statically on Cloudflare Workers.",
+      "Sellix is a full-viewport cross-border finance marketing hero by SonoJS. Built as a single HTML page with Plus Jakarta Sans, a looping background MP4 (poster still until active), glass dark nav, and a stacked Cross-border finance headline with Get Started / secondary CTAs. Mobile burger menu included. Demo fintech chrome only. No backend. Open index.html or host the folder statically on Cloudflare Workers.",
     category: "hero",
     stack: ["html", "css", "javascript"],
     priceLabel: "Free",
@@ -2748,7 +2748,7 @@ export const templateProjects: TemplateProject[] = [
     highlights: [
       {
         title: "Full-bleed video plane",
-        body: "Centered cover video with poster fallback - fades in when ready.",
+        body: "Centered cover video with poster fallback, fades in when ready.",
       },
       {
         title: "Glass finance chrome",
@@ -2771,7 +2771,7 @@ export const templateProjects: TemplateProject[] = [
     ],
     requirements: [
       "Modern browser (CSS dvh, video autoplay muted)",
-      "No build step - open index.html or static-host the folder",
+      "No build step, open index.html or static-host the folder",
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
   },
@@ -2779,9 +2779,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-10",
     title: "Visionaries",
     tagline:
-      "Orbital art carousel - drag or wheel through painted scenes with glass chrome.",
+      "Orbital art carousel, drag or wheel through painted scenes with glass chrome.",
     description:
-      "Visionaries is a full-viewport interactive art hero by SonoJS. Built with Vite, React 19, and TypeScript. A ring of scene cards (Emerald Gate, Mirror, Crossing, Threshold, and more) orbits with drag, wheel, and autoplay; the featured piece fills the stage with title and caption. Chromium glass displacement, chroma accents, and phone layout scaling are included. Local scene JPGs under public/visionaries. Demo gallery UI only - no CMS. Static build ready for Cloudflare Workers.",
+      "Visionaries is a full-viewport interactive art hero by SonoJS. Built with Vite, React 19, and TypeScript. A ring of scene cards (Emerald Gate, Mirror, Crossing, Threshold, and more) orbits with drag, wheel, and autoplay; the featured piece fills the stage with title and caption. Chromium glass displacement, chroma accents, and phone layout scaling are included. Local scene JPGs under public/visionaries. Demo gallery UI only. No CMS. Static build ready for Cloudflare Workers.",
     category: "hero",
     stack: ["react", "vite", "typescript"],
     priceLabel: "Free",
@@ -2821,7 +2821,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Static and fork-ready",
-        body: "Vite build to dist/ with local visionaries JPGs - deploy anywhere static.",
+        body: "Vite build to dist/ with local visionaries JPGs, deploy anywhere static.",
       },
     ],
     includes: [
@@ -2841,9 +2841,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-11",
     title: "Atlas",
     tagline:
-      "Interactive 3D Earth explorer - country pick, fly-to, and landmark cards.",
+      "Interactive 3D Earth explorer, country pick, fly-to, and landmark cards.",
     description:
-      "Atlas is a full-viewport interactive 3D Earth explorer by SonoJS. Built with Vite, React 19, TypeScript, Three.js, and GSAP. Custom day/night Earth shaders, clouds, and stars; pixel-accurate country picking via a GeoJSON-rasterized ID map; fly-to and panel UI for curated places plus local Wikimedia assets under public/assets/atlas. Self-hosted Poppins and Inter. Demo explorer UI only - no backend. Static build ready for Cloudflare Workers.",
+      "Atlas is a full-viewport interactive 3D Earth explorer by SonoJS. Built with Vite, React 19, TypeScript, Three.js, and GSAP. Custom day/night Earth shaders, clouds, and stars; pixel-accurate country picking via a GeoJSON-rasterized ID map; fly-to and panel UI for curated places plus local Wikimedia assets under public/assets/atlas. Self-hosted Poppins and Inter. Demo explorer UI only. No backend. Static build ready for Cloudflare Workers.",
     category: "hero",
     stack: ["react", "vite", "typescript", "threejs", "gsap"],
     priceLabel: "Free",
@@ -2872,7 +2872,7 @@ export const templateProjects: TemplateProject[] = [
     highlights: [
       {
         title: "Physics-lit Earth",
-        body: "Custom Three.js day / night / specular / cloud shaders - not a stock MeshStandardMaterial globe.",
+        body: "Custom Three.js day / night / specular / cloud shaders, not a stock MeshStandardMaterial globe.",
       },
       {
         title: "Pixel-accurate countries",
@@ -2884,7 +2884,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Static and fork-ready",
-        body: "Vite build to dist/ with local atlas textures and content.json - deploy anywhere static.",
+        body: "Vite build to dist/ with local atlas textures and content.json, deploy anywhere static.",
       },
     ],
     includes: [
@@ -2906,9 +2906,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-12",
     title: "Liquid Type",
     tagline:
-      "Cursor-driven variable typography - every character springs with weight.",
+      "Cursor-driven variable typography, every character springs with weight.",
     description:
-      "Liquid Type is a full-viewport typography hero by SonoJS. Built with Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS 4, GSAP, and Geist. The headline Words have weight responds to the cursor with spring physics - variable font weight, scale, trail dots, and ripples. Light/dark theme chrome and local media (liquid-type / membrane webm) under public/media. Demo type study only - no CMS. Deploy with Next.js on Cloudflare Workers or Node.",
+      "Liquid Type is a full-viewport typography hero by SonoJS. Built with Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS 4, GSAP, and Geist. The headline Words have weight responds to the cursor with spring physics, variable font weight, scale, trail dots, and ripples. Light/dark theme chrome and local media (liquid-type / membrane webm) under public/media. Demo type study only. No CMS. Deploy with Next.js on Cloudflare Workers or Node.",
     category: "hero",
     stack: ["nextjs", "react", "typescript", "tailwind", "gsap"],
     priceLabel: "Free",
@@ -2936,7 +2936,7 @@ export const templateProjects: TemplateProject[] = [
     highlights: [
       {
         title: "Spring-weight type",
-        body: "Each character tracks the cursor with dampened weight and scale - Words have weight.",
+        body: "Each character tracks the cursor with dampened weight and scale. Words have weight.",
       },
       {
         title: "Trail and ripples",
@@ -2944,11 +2944,11 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Liquid media accents",
-        body: "Local liquid-type / membrane webm and PNG under public/media - no remote CDN.",
+        body: "Local liquid-type / membrane webm and PNG under public/media. No remote CDN.",
       },
       {
         title: "Next App Router ready",
-        body: "Next.js 16 + React 19 + Tailwind 4 + Geist - deploy on Workers or any Node host.",
+        body: "Next.js 16 + React 19 + Tailwind 4 + Geist, deploy on Workers or any Node host.",
       },
     ],
     includes: [
@@ -2970,9 +2970,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-13",
     title: "Membrane",
     tagline:
-      "Interactive mesh hero - spring-physics canvas that deforms under the cursor.",
+      "Interactive mesh hero, spring-physics canvas that deforms under the cursor.",
     description:
-      "Membrane is a full-viewport interactive mesh hero by SonoJS. Built with Vite, React 19, TypeScript, Tailwind CSS 4, and GSAP. A 50×30 spring-physics canvas surface deforms under the cursor, with a staggered content entrance. Playfair Display and Geist Variable ship via Fontsource; award SVGs, avatars, and thumbnail live under public/ - no remote media URLs. Demo mesh study only - no CMS. Static build ready for Cloudflare Workers.",
+      "Membrane is a full-viewport interactive mesh hero by SonoJS. Built with Vite, React 19, TypeScript, Tailwind CSS 4, and GSAP. A 50×30 spring-physics canvas surface deforms under the cursor, with a staggered content entrance. Playfair Display and Geist Variable ship via Fontsource; award SVGs, avatars, and thumbnail live under public/. No remote media URLs. Demo mesh study only. No CMS. Static build ready for Cloudflare Workers.",
     category: "hero",
     stack: ["react", "vite", "typescript", "tailwind", "gsap"],
     priceLabel: "Free",
@@ -3008,11 +3008,11 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Local chrome only",
-        body: "Award SVGs, avatars, and thumbnail under public/ - Playfair + Geist via Fontsource.",
+        body: "Award SVGs, avatars, and thumbnail under public/. Playfair + Geist via Fontsource.",
       },
       {
         title: "Static and fork-ready",
-        body: "Vite build to dist/ - deploy on Cloudflare Workers or any static host.",
+        body: "Vite build to dist/, deploy on Cloudflare Workers or any static host.",
       },
     ],
     includes: [
@@ -3034,9 +3034,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-14",
     title: "Pink Rider",
     tagline:
-      "Hover-to-reveal fashion hero - canvas brush paints the pink rider suit.",
+      "Hover-to-reveal fashion hero, canvas brush paints the pink rider suit.",
     description:
-      "Pink Rider is a full-viewport fashion reveal hero by SonoJS (demo brand Mina Hwang-Seo). Built as a single HTML page with local CSS, Inter Tight fonts, and two PNG plates. Dual Dream Ride / Ride Pretty marquees sit behind a centered figure; moving the cursor paints a canvas reveal from front to back (the pink rider look). Custom accent cursor, SS27 tag, and mobile-friendly hint chrome. Demo lookbook UI only - no backend. Open index.html or host the folder statically on Cloudflare Workers.",
+      "Pink Rider is a full-viewport fashion reveal hero by SonoJS (demo brand Mina Hwang-Seo). Built as a single HTML page with local CSS, Inter Tight fonts, and two PNG plates. Dual Dream Ride / Ride Pretty marquees sit behind a centered figure; moving the cursor paints a canvas reveal from front to back (the pink rider look). Custom accent cursor, SS27 tag, and mobile-friendly hint chrome. Demo lookbook UI only. No backend. Open index.html or host the folder statically on Cloudflare Workers.",
     category: "hero",
     stack: ["html", "css", "javascript"],
     priceLabel: "Free",
@@ -3087,7 +3087,7 @@ export const templateProjects: TemplateProject[] = [
     ],
     requirements: [
       "Modern browser (Canvas 2D, CSS svh, backdrop-filter optional)",
-      "No build step - open index.html or static-host the folder",
+      "No build step, open index.html or static-host the folder",
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
   },
@@ -3095,9 +3095,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-15",
     title: "VELORA",
     tagline:
-      "Regal Drive - full-bleed luxury car rental hero with looping video stage.",
+      "Regal Drive, full-bleed luxury car rental hero with looping video stage.",
     description:
-      "VELORA is a full-viewport luxury car rental hero by SonoJS. Built as a single HTML page with Archivo, a looping hero.mp4 stage, gradient overlay, and centered REGAL DRIVE display type. Nav includes Home / About / Cars / Contact, a Browse cars chip, and a Discover Now CTA over Rent Your Dream Luxury Car copy. Demo rental chrome only - no booking backend. Open index.html or host the folder statically on Cloudflare Workers.",
+      "VELORA is a full-viewport luxury car rental hero by SonoJS. Built as a single HTML page with Archivo, a looping hero.mp4 stage, gradient overlay, and centered REGAL DRIVE display type. Nav includes Home / About / Cars / Contact, a Browse cars chip, and a Discover Now CTA over Rent Your Dream Luxury Car copy. Demo rental chrome only. No booking backend. Open index.html or host the folder statically on Cloudflare Workers.",
     category: "hero",
     stack: ["html", "css", "javascript"],
     priceLabel: "Free",
@@ -3143,12 +3143,12 @@ export const templateProjects: TemplateProject[] = [
     includes: [
       "index.html (complete VELORA hero)",
       "assets/hero.mp4",
-      "assets/fonts (Archivo 400–800 + archivo.css)",
+      "assets/fonts (Archivo 400-800 + archivo.css)",
       "Video autoplay helper script",
     ],
     requirements: [
       "Modern browser (CSS background-clip text, video autoplay muted)",
-      "No build step - open index.html or static-host the folder",
+      "No build step, open index.html or static-host the folder",
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
   },
@@ -3156,9 +3156,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-16",
     title: "NeuroLink",
     tagline:
-      "Where Memories Live Forever - memorial hero with video stage and Create CTA.",
+      "Where Memories Live Forever, memorial hero with video stage and Create CTA.",
     description:
-      "NeuroLink is a full-viewport memorial product hero by SonoJS. Built as a single HTML page with Inter, a dark night sky video stage, vignette and bottom glow overlays, and soft star dots. Centered copy reads Where Memories Live Forever with Create Memorial CTA; nav covers How It Works, Tributes, Pricing, Support, and Sign In. Demo memorial chrome only - no account backend. Open index.html or host the folder statically on Cloudflare Workers.",
+      "NeuroLink is a full-viewport memorial product hero by SonoJS. Built as a single HTML page with Inter, a dark night sky video stage, vignette and bottom glow overlays, and soft star dots. Centered copy reads Where Memories Live Forever with Create Memorial CTA; nav covers How It Works, Tributes, Pricing, Support, and Sign In. Demo memorial chrome only. No account backend. Open index.html or host the folder statically on Cloudflare Workers.",
     category: "hero",
     stack: ["html", "css", "javascript"],
     priceLabel: "Free",
@@ -3209,7 +3209,7 @@ export const templateProjects: TemplateProject[] = [
     ],
     requirements: [
       "Modern browser (CSS oklch overlays, video autoplay muted)",
-      "No build step - open index.html or static-host the folder",
+      "No build step, open index.html or static-host the folder",
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
   },
@@ -3217,9 +3217,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-17",
     title: "Portiva",
     tagline:
-      "Creative agency hero - full-bleed video, word-by-word reveal, Chat CTAs.",
+      "Creative agency hero, full-bleed video, word-by-word reveal, Chat CTAs.",
     description:
-      "Portiva is a full-viewport creative agency hero by SonoJS. Built as a single HTML page with Inter, Tailwind via a local vendor script, and a looping hero.mp4 stage. Word-by-word headline reveal (Less complexity, more impact in every project), 3000+ Customers proof, Chat With Us / Our Works CTAs, and a centered About / Brands / Careers / Partners nav. Demo agency chrome only - no chat backend. Open index.html or host the folder statically on Cloudflare Workers.",
+      "Portiva is a full-viewport creative agency hero by SonoJS. Built as a single HTML page with Inter, Tailwind via a local vendor script, and a looping hero.mp4 stage. Word-by-word headline reveal (Less complexity, more impact in every project), 3000+ Customers proof, Chat With Us / Our Works CTAs, and a centered About / Brands / Careers / Partners nav. Demo agency chrome only. No chat backend. Open index.html or host the folder statically on Cloudflare Workers.",
     category: "hero",
     stack: ["html", "css", "javascript", "tailwind"],
     priceLabel: "Free",
@@ -3271,7 +3271,7 @@ export const templateProjects: TemplateProject[] = [
     ],
     requirements: [
       "Modern browser (video autoplay muted, CSS transitions)",
-      "No build step - open index.html or static-host the folder",
+      "No build step, open index.html or static-host the folder",
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
   },
@@ -3279,9 +3279,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-18",
     title: "Trav",
     tagline:
-      "Begin Your Next Big Adventure - travel app hero with video stage and Download CTA.",
+      "Begin Your Next Big Adventure, travel app hero with video stage and Download CTA.",
     description:
-      "Trav is a full-viewport travel app hero by SonoJS. Built as a single HTML page with Inter, Tailwind via a local vendor script, and a looping hero.mp4 stage. Centered map-pin mark, word-staggered Begin Your Next Big Adventure headline, trip-planning subcopy, and a glowing Download Now CTA. Desktop nav (Home / Our Story / FAQ / Policies) plus a mobile fullscreen menu. Demo travel chrome only - no app store backend. Open index.html or host the folder statically on Cloudflare Workers.",
+      "Trav is a full-viewport travel app hero by SonoJS. Built as a single HTML page with Inter, Tailwind via a local vendor script, and a looping hero.mp4 stage. Centered map-pin mark, word-staggered Begin Your Next Big Adventure headline, trip-planning subcopy, and a glowing Download Now CTA. Desktop nav (Home / Our Story / FAQ / Policies) plus a mobile fullscreen menu. Demo travel chrome only. No app store backend. Open index.html or host the folder statically on Cloudflare Workers.",
     category: "hero",
     stack: ["html", "css", "javascript", "tailwind"],
     priceLabel: "Free",
@@ -3333,7 +3333,7 @@ export const templateProjects: TemplateProject[] = [
     ],
     requirements: [
       "Modern browser (video autoplay muted, CSS animations)",
-      "No build step - open index.html or static-host the folder",
+      "No build step, open index.html or static-host the folder",
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
   },
@@ -3341,9 +3341,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-19",
     title: "Nearby Homes",
     tagline:
-      "Be the first to know - rounded video card hero with email subscribe.",
+      "Be the first to know, rounded video card hero with email subscribe.",
     description:
-      "Nearby Homes is a centered subscribe hero by SonoJS. Built as a single HTML page with Tailwind via a local script and a looping hero.mp4 inside a rounded card (max 1400px, 550px tall). Word-staggered Be the first to know about nearby homes headline, moving-professionals subcopy, and a glass email + Subscribe pill. Staggered entrance for card, type, and form. Demo waitlist chrome only - submit is prevented. Open index.html or host the folder statically on Cloudflare Workers.",
+      "Nearby Homes is a centered subscribe hero by SonoJS. Built as a single HTML page with Tailwind via a local script and a looping hero.mp4 inside a rounded card (max 1400px, 550px tall). Word-staggered Be the first to know about nearby homes headline, moving-professionals subcopy, and a glass email + Subscribe pill. Staggered entrance for card, type, and form. Demo waitlist chrome only. Submit is prevented. Open index.html or host the folder statically on Cloudflare Workers.",
     category: "hero",
     stack: ["html", "css", "javascript", "tailwind"],
     priceLabel: "Free",
@@ -3379,7 +3379,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Subscribe pill",
-        body: "Glass email shell with a black Subscribe button - stacked layout on small screens.",
+        body: "Glass email shell with a black Subscribe button, stacked layout on small screens.",
       },
       {
         title: "Zero-build static",
@@ -3394,7 +3394,7 @@ export const templateProjects: TemplateProject[] = [
     ],
     requirements: [
       "Modern browser (video autoplay muted, CSS transitions)",
-      "No build step - open index.html or static-host the folder",
+      "No build step, open index.html or static-host the folder",
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
   },
@@ -3402,9 +3402,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-20",
     title: "Lumina Vision",
     tagline:
-      "Intelligence Unbound - auto-automation hero with video stage and brand ticker.",
+      "Intelligence Unbound, auto-automation hero with video stage and brand ticker.",
     description:
-      "Lumina Vision is a full-viewport auto-automation hero by SonoJS. Built as a single HTML page with Space Grotesk, local CSS/JS, and a looping hero.mp4 stage. Initialize Vision tag, Intelligence Unbound headline, Start Automating CTA with orbit accent, play/pause control, and a footer Auto-Automation Ecosystem brand ticker (Google, Cust.io, Hummel, Copper, Tesla). Demo vision-product chrome only - no backend. Open index.html or host the folder statically on Cloudflare Workers.",
+      "Lumina Vision is a full-viewport auto-automation hero by SonoJS. Built as a single HTML page with Space Grotesk, local CSS/JS, and a looping hero.mp4 stage. Initialize Vision tag, Intelligence Unbound headline, Start Automating CTA with orbit accent, play/pause control, and a footer Auto-Automation Ecosystem brand ticker (Google, Cust.io, Hummel, Copper, Tesla). Demo vision-product chrome only. No backend. Open index.html or host the folder statically on Cloudflare Workers.",
     category: "hero",
     stack: ["html", "css", "javascript"],
     priceLabel: "Free",
@@ -3440,7 +3440,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Ecosystem ticker",
-        body: "Footer marquee of demo partners - Google, Cust.io, Hummel, Copper, Tesla.",
+        body: "Footer marquee of demo partners. Google, Cust.io, Hummel, Copper, Tesla.",
       },
       {
         title: "Zero-build static",
@@ -3455,7 +3455,7 @@ export const templateProjects: TemplateProject[] = [
     ],
     requirements: [
       "Modern browser (video autoplay muted, CSS animations)",
-      "No build step - open index.html or static-host the folder",
+      "No build step, open index.html or static-host the folder",
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
   },
@@ -3463,9 +3463,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-21",
     title: "SceneAI",
     tagline:
-      "Create awesome 3D scenes with AI - V2.0 engine hero with Generate and Demo CTAs.",
+      "Create awesome 3D scenes with AI. V2.0 engine hero with Generate and Demo CTAs.",
     description:
-      "SceneAI is a full-viewport AI 3D-scene product hero by SonoJS. Built with Vite, vanilla JS, and Tailwind CSS 4. Looping hero.mp4 stage, glass nav (Home / How it works / Plans / Download), V2.0 Engine Now Live badge, Create awesome 3D scenes with AI headline, Generate Now / Watch Demo CTAs, and Active Creators / Scenes Rendered stats. Demo generative chrome only - no AI backend. Vite build ready for Cloudflare Workers.",
+      "SceneAI is a full-viewport AI 3D-scene product hero by SonoJS. Built with Vite, vanilla JS, and Tailwind CSS 4. Looping hero.mp4 stage, glass nav (Home / How it works / Plans / Download), V2.0 Engine Now Live badge, Create awesome 3D scenes with AI headline, Generate Now / Watch Demo CTAs, and Active Creators / Scenes Rendered stats. Demo generative chrome only. No AI backend. Vite build ready for Cloudflare Workers.",
     category: "hero",
     stack: ["vite", "javascript", "tailwind"],
     priceLabel: "Free",
@@ -3505,7 +3505,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Vite and fork-ready",
-        body: "Vite 8 + Tailwind 4 - npm run build to dist/ for static hosting.",
+        body: "Vite 8 + Tailwind 4, npm run build to dist/ for static hosting.",
       },
     ],
     includes: [
@@ -3523,9 +3523,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-22",
     title: "Hexora",
     tagline:
-      "Build Strong, Build Smart - construction materials hero with video stage.",
+      "Build Strong, Build Smart, construction materials hero with video stage.",
     description:
-      "Hexora is a full-viewport construction-materials hero by SonoJS. Built with Vite, React 19, Tailwind CSS 3, and Lucide. Looping video stage, word-staggered Build Strong, Build Smart headline, Get a Quote CTA, centered Products / Pricing / Solutions / Resources nav, phone + Contact Us, and a mobile fullscreen menu. Demo materials brand chrome only - no quote backend. Vite build ready for Cloudflare Workers.",
+      "Hexora is a full-viewport construction-materials hero by SonoJS. Built with Vite, React 19, Tailwind CSS 3, and Lucide. Looping video stage, word-staggered Build Strong, Build Smart headline, Get a Quote CTA, centered Products / Pricing / Solutions / Resources nav, phone + Contact Us, and a mobile fullscreen menu. Demo materials brand chrome only. No quote backend. Vite build ready for Cloudflare Workers.",
     category: "hero",
     stack: ["react", "vite", "javascript", "tailwind", "lucide"],
     priceLabel: "Free",
@@ -3565,7 +3565,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Vite and fork-ready",
-        body: "Vite 8 + React 19 + Tailwind 3 + Lucide - npm run build to dist/.",
+        body: "Vite 8 + React 19 + Tailwind 3 + Lucide, npm run build to dist/.",
       },
     ],
     includes: [
@@ -3585,9 +3585,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-23",
     title: "Sprints",
     tagline:
-      "Think Ahead. Move Fast. - project management hero with video stage and CTAs.",
+      "Think Ahead. Move Fast. project management hero with video stage and CTAs.",
     description:
-      "Sprints is a full-viewport project-management hero by SonoJS. Built as a single HTML page with Inter, Tailwind via a local script, and a looping hero.mp4 stage. Word-group headline Think Ahead. Move Fast. Exceed Expectations., Try for Free / See Pricing CTAs, desktop nav with Pages + Get Started, mobile fullscreen menu, and a bottom partner-logo row. Demo PM chrome only - no signup backend. Open index.html or host the folder statically on Cloudflare Workers.",
+      "Sprints is a full-viewport project-management hero by SonoJS. Built as a single HTML page with Inter, Tailwind via a local script, and a looping hero.mp4 stage. Word-group headline Think Ahead. Move Fast. Exceed Expectations. Try for Free / See Pricing CTAs, desktop nav with Pages + Get Started, mobile fullscreen menu, and a bottom partner-logo row. Demo PM chrome only. No signup backend. Open index.html or host the folder statically on Cloudflare Workers.",
     category: "hero",
     stack: ["html", "css", "javascript", "tailwind"],
     priceLabel: "Free",
@@ -3639,7 +3639,7 @@ export const templateProjects: TemplateProject[] = [
     ],
     requirements: [
       "Modern browser (video autoplay muted, CSS animations)",
-      "No build step - open index.html or static-host the folder",
+      "No build step, open index.html or static-host the folder",
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
   },
@@ -3647,9 +3647,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-24",
     title: "Airlines",
     tagline:
-      "Travel the World Without Any Stress - airline hero with video stage and CTAs.",
+      "Travel the World Without Any Stress, airline hero with video stage and CTAs.",
     description:
-      "Airlines is a full-viewport travel hero by SonoJS. Built as a single HTML page with Inter, Tailwind via a local script, and a looping hero.mp4 stage. Fade-in Travel the World Without Any Stress headline, planning subcopy, Start Exploring CTA, desktop nav (About / Services / Locations / Places / Support) with Start Travel chip, and a mobile menu. Demo airline chrome only - no booking backend. Open index.html or host the folder statically on Cloudflare Workers.",
+      "Airlines is a full-viewport travel hero by SonoJS. Built as a single HTML page with Inter, Tailwind via a local script, and a looping hero.mp4 stage. Fade-in Travel the World Without Any Stress headline, planning subcopy, Start Exploring CTA, desktop nav (About / Services / Locations / Places / Support) with Start Travel chip, and a mobile menu. Demo airline chrome only. No booking backend. Open index.html or host the folder statically on Cloudflare Workers.",
     category: "hero",
     stack: ["html", "css", "javascript", "tailwind"],
     priceLabel: "Free",
@@ -3701,7 +3701,7 @@ export const templateProjects: TemplateProject[] = [
     ],
     requirements: [
       "Modern browser (video autoplay muted, CSS animations)",
-      "No build step - open index.html or static-host the folder",
+      "No build step, open index.html or static-host the folder",
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
   },
@@ -3709,9 +3709,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-25",
     title: "faruq®",
     tagline:
-      "Stories in light + motion - gold portrait reveal for a night visual archive.",
+      "Stories in light + motion, gold portrait reveal for a night visual archive.",
     description:
-      "faruq® is a full-viewport visual-archive hero by SonoJS. Built as a single HTML page with Archivo, local CSS/JS, and dual portrait plates (clean + gold). On fine pointers, a masked gold layer follows the cursor with lerp; mobile keeps the static stack. Headline stories in light + motion, night-work copy, and selected work — vol.01 chrome. Demo photographer archive UI only - no CMS. Open index.html or host the folder statically on Cloudflare Workers.",
+      "faruq® is a full-viewport visual-archive hero by SonoJS. Built as a single HTML page with Archivo, local CSS/JS, and dual portrait plates (clean + gold). On fine pointers, a masked gold layer follows the cursor with lerp; mobile keeps the static stack. Headline stories in light + motion, night-work copy, and selected work, vol.01 chrome. Demo photographer archive UI only. No CMS. Open index.html or host the folder statically on Cloudflare Workers.",
     category: "hero",
     stack: ["html", "css", "javascript"],
     priceLabel: "Free",
@@ -3762,7 +3762,7 @@ export const templateProjects: TemplateProject[] = [
     ],
     requirements: [
       "Modern browser (CSS mask / -webkit-mask)",
-      "No build step - open index.html or static-host the folder",
+      "No build step, open index.html or static-host the folder",
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
   },
@@ -3770,9 +3770,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-26",
     title: "Healcure",
     tagline:
-      "Healthcare for Good - clinic hero with still stage and Book Appointment CTAs.",
+      "Healthcare for Good, clinic hero with still stage and Book Appointment CTAs.",
     description:
-      "Healcure is a full-viewport healthcare hero by SonoJS. Built as a single HTML page with Plus Jakarta Sans, Tailwind via a local vendor script, and a still hero-bg.png stage (no looping video). Trusted 20,000+ Patients badge, Healthcare for Good Today. Tomorrow. Always. word reveal, Book An Appointment / About Us CTAs, desktop nav, and a mobile panel menu. Demo clinic chrome only - no booking backend. Open index.html or host the folder statically on Cloudflare Workers.",
+      "Healcure is a full-viewport healthcare hero by SonoJS. Built as a single HTML page with Plus Jakarta Sans, Tailwind via a local vendor script, and a still hero-bg.png stage (no looping video). Trusted 20,000+ Patients badge, Healthcare for Good Today. Tomorrow. Always. word reveal, Book An Appointment / About Us CTAs, desktop nav, and a mobile panel menu. Demo clinic chrome only. No booking backend. Open index.html or host the folder statically on Cloudflare Workers.",
     category: "hero",
     stack: ["html", "css", "javascript", "tailwind"],
     priceLabel: "Free",
@@ -3800,7 +3800,7 @@ export const templateProjects: TemplateProject[] = [
     highlights: [
       {
         title: "Still healthcare stage",
-        body: "Full-bleed hero-bg.png with dark gradient wash - no video dependency.",
+        body: "Full-bleed hero-bg.png with dark gradient wash. No video dependency.",
       },
       {
         title: "Word-reveal headline",
@@ -3824,7 +3824,7 @@ export const templateProjects: TemplateProject[] = [
     ],
     requirements: [
       "Modern browser (CSS transitions)",
-      "No build step - open index.html or static-host the folder",
+      "No build step, open index.html or static-host the folder",
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
   },
@@ -3832,9 +3832,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-27",
     title: "JetCrest",
     tagline:
-      "Gulfstream Charters On Your Schedule - nested video stage with Instant Charter CTA.",
+      "Gulfstream Charters On Your Schedule, nested video stage with Instant Charter CTA.",
     description:
-      "JetCrest is a full-viewport private-aviation hero by SonoJS. Built as a single HTML page with Inter, Tailwind via a local vendor script, and a looping Gulfstream cabin video inside a nested rounded stage on a white page frame. Jetfly header with Fleet / Services / Safety / About us and Request a quote, Gulfstream Charters On Your Schedule word reveal (accent on Your), supporting charter copy, and Instant Charter Request CTA. Demo charter chrome only - no booking backend. Open index.html or host the folder statically on Cloudflare Workers.",
+      "JetCrest is a full-viewport private-aviation hero by SonoJS. Built as a single HTML page with Inter, Tailwind via a local vendor script, and a looping Gulfstream cabin video inside a nested rounded stage on a white page frame. Jetfly header with Fleet / Services / Safety / About us and Request a quote, Gulfstream Charters On Your Schedule word reveal (accent on Your), supporting charter copy, and Instant Charter Request CTA. Demo charter chrome only. No booking backend. Open index.html or host the folder statically on Cloudflare Workers.",
     category: "hero",
     stack: ["html", "css", "javascript", "tailwind"],
     priceLabel: "Free",
@@ -3886,7 +3886,7 @@ export const templateProjects: TemplateProject[] = [
     ],
     requirements: [
       "Modern browser (HTML5 video + CSS transitions)",
-      "No build step - open index.html or static-host the folder",
+      "No build step, open index.html or static-host the folder",
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
   },
@@ -3894,9 +3894,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-28",
     title: "Qumica",
     tagline:
-      "Ready to elevate your digital infrastructure - video hero with Generate CTAs.",
+      "Ready to elevate your digital infrastructure, video hero with Generate CTAs.",
     description:
-      "Qumica is a full-viewport digital-infrastructure marketing hero by SonoJS. Built with Vite, React 19, TypeScript, Tailwind CSS 4, and Lucide. Full-bleed looping hero video, floating glass pill nav (About / Platform / Solutions + Generate), Trusted by 500+ teams avatar row with stars, Ready to elevate your digital infrastructure headline (Instrument Serif italic on elevate), Generate / View Platform CTAs, and an Integrating with leading automation marquee (Zapier, Make, n8n, UiPath, Tray.io, Workato). Demo automation-platform chrome only - no generate backend. Vite build ready for Cloudflare Workers.",
+      "Qumica is a full-viewport digital-infrastructure marketing hero by SonoJS. Built with Vite, React 19, TypeScript, Tailwind CSS 4, and Lucide. Full-bleed looping hero video, floating glass pill nav (About / Platform / Solutions + Generate), Trusted by 500+ teams avatar row with stars, Ready to elevate your digital infrastructure headline (Instrument Serif italic on elevate), Generate / View Platform CTAs, and an Integrating with leading automation marquee (Zapier, Make, n8n, UiPath, Tray.io, Workato). Demo automation-platform chrome only. No generate backend. Vite build ready for Cloudflare Workers.",
     category: "hero",
     stack: ["react", "vite", "typescript", "tailwind", "lucide"],
     priceLabel: "Free",
@@ -3932,11 +3932,11 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Automation marquee",
-        body: "Integrating with leading automation logos - Zapier through Workato.",
+        body: "Integrating with leading automation logos. Zapier through Workato.",
       },
       {
         title: "Vite and fork-ready",
-        body: "Vite 8 + React 19 + TypeScript + Tailwind 4 + Lucide - npm run build to dist/.",
+        body: "Vite 8 + React 19 + TypeScript + Tailwind 4 + Lucide, npm run build to dist/.",
       },
     ],
     includes: [
@@ -3957,9 +3957,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-29",
     title: "Alumica",
     tagline:
-      "Redefining Automation & Fintech - video hero with glass nav and Join Today.",
+      "Redefining Automation & Fintech, video hero with glass nav and Join Today.",
     description:
-      "Alumica is a full-viewport automation and fintech marketing hero by SonoJS. Built as a single HTML page with Inter and local CSS. Full-bleed looping hero.mp4 with dark overlay, diamond logo mark, glass pill nav (Home / Pricing / About Us / Blog / Contact), Sign In, Best Intelligence Layer 2026 badge, Redefining the Future of Automation & Fintech headline, unify-intelligent-automation copy, Join Today CTA, and community avatar strip. Demo intelligence-layer chrome only - no auth backend. Open index.html or host the folder statically on Cloudflare Workers.",
+      "Alumica is a full-viewport automation and fintech marketing hero by SonoJS. Built as a single HTML page with Inter and local CSS. Full-bleed looping hero.mp4 with dark overlay, diamond logo mark, glass pill nav (Home / Pricing / About Us / Blog / Contact), Sign In, Best Intelligence Layer 2026 badge, Redefining the Future of Automation & Fintech headline, unify-intelligent-automation copy, Join Today CTA, and community avatar strip. Demo intelligence-layer chrome only. No auth backend. Open index.html or host the folder statically on Cloudflare Workers.",
     category: "hero",
     stack: ["html", "css"],
     priceLabel: "Free",
@@ -4010,7 +4010,7 @@ export const templateProjects: TemplateProject[] = [
     ],
     requirements: [
       "Modern browser (HTML5 video + CSS backdrop-filter)",
-      "No build step - open index.html or static-host the folder",
+      "No build step, open index.html or static-host the folder",
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
   },
@@ -4018,9 +4018,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-30",
     title: "Brightly",
     tagline:
-      "Organize your day, master your productivity flow - video hero with dashboard preview.",
+      "Organize your day, master your productivity flow, video hero with dashboard preview.",
     description:
-      "Brightly is a full-viewport productivity marketing hero by SonoJS. Built with Vite, React 19, Tailwind CSS 4, and Syne. Full-bleed looping hero.mp4 with bottom fade to canvas, sunburst brand mark, Product / Customer / Pricing / Resources / Company nav (mobile overlay menu), word-reveal headline Organize your day, master your productivity flow, supporting project-management copy, Get started CTA, and a floating dashboard.svg preview. Demo productivity chrome only - no auth backend. Vite build ready for Cloudflare Workers.",
+      "Brightly is a full-viewport productivity marketing hero by SonoJS. Built with Vite, React 19, Tailwind CSS 4, and Syne. Full-bleed looping hero.mp4 with bottom fade to canvas, sunburst brand mark, Product / Customer / Pricing / Resources / Company nav (mobile overlay menu), word-reveal headline Organize your day, master your productivity flow, supporting project-management copy, Get started CTA, and a floating dashboard.svg preview. Demo productivity chrome only. No auth backend. Vite build ready for Cloudflare Workers.",
     category: "hero",
     stack: ["react", "vite", "javascript", "tailwind"],
     priceLabel: "Free",
@@ -4060,7 +4060,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Vite and fork-ready",
-        body: "Vite 8 + React 19 + Tailwind 4 + Syne - npm run build to dist/.",
+        body: "Vite 8 + React 19 + Tailwind 4 + Syne, npm run build to dist/.",
       },
     ],
     includes: [
@@ -4081,9 +4081,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-31",
     title: "Scalable",
     tagline:
-      "Manage your sales and analytics in one place - glass dashboard hero.",
+      "Manage your sales and analytics in one place, glass dashboard hero.",
     description:
-      "Scalable is a full-viewport sales-and-analytics marketing hero by SonoJS. Built with Vite, React 19, TypeScript, Tailwind CSS 4, and TanStack Router. Ambient hero-gradient.mp4 wash, sticky nav with Changelog New pill and Book Your Demo, Zapier Integration status pill, Manage your sales and analytics in one place headline (serif italic on one place), trusted-brand logo row, and a glass dashboard mockup with profit/revenue stats, period tabs, and progress rows. Demo analytics chrome only - no live data backend. Vite build ready for Cloudflare Workers.",
+      "Scalable is a full-viewport sales-and-analytics marketing hero by SonoJS. Built with Vite, React 19, TypeScript, Tailwind CSS 4, and TanStack Router. Ambient hero-gradient.mp4 wash, sticky nav with Changelog New pill and Book Your Demo, Zapier Integration status pill, Manage your sales and analytics in one place headline (serif italic on one place), trusted-brand logo row, and a glass dashboard mockup with profit/revenue stats, period tabs, and progress rows. Demo analytics chrome only. No live data backend. Vite build ready for Cloudflare Workers.",
     category: "hero",
     stack: ["react", "vite", "typescript", "tailwind"],
     priceLabel: "Free",
@@ -4115,7 +4115,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Sales headline + demo CTA",
-        body: "Zapier Integration pill, italic one place., and Book Your Demo chrome.",
+        body: "Zapier Integration pill, italic one place. and Book Your Demo chrome.",
       },
       {
         title: "Glass analytics mockup",
@@ -4123,7 +4123,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Vite and fork-ready",
-        body: "Vite 8 + React 19 + TypeScript + Tailwind 4 + TanStack Router - npm run build to dist/.",
+        body: "Vite 8 + React 19 + TypeScript + Tailwind 4 + TanStack Router, npm run build to dist/.",
       },
     ],
     includes: [
@@ -4144,9 +4144,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-32",
     title: "Oasis",
     tagline:
-      "Master your day, boost productivity - video hero with dashboard preview.",
+      "Master your day, boost productivity, video hero with dashboard preview.",
     description:
-      "Oasis is a full-viewport productivity marketing hero by SonoJS. Built with Vite, React 19, Tailwind CSS 4, Lucide, and Inter. Full-bleed looping hero-video.mp4 stage (no wash overlay), scroll-aware blur nav with Product / Customer / Pricing / Resources / Company and Log in, mobile full-screen menu, word-reveal Master your day / boost productivity headline, project-management subcopy, Get started / How it works CTAs, and a floating dashboard.png preview. Demo productivity chrome only - no auth backend. Vite build ready for Cloudflare Workers.",
+      "Oasis is a full-viewport productivity marketing hero by SonoJS. Built with Vite, React 19, Tailwind CSS 4, Lucide, and Inter. Full-bleed looping hero-video.mp4 stage (no wash overlay), scroll-aware blur nav with Product / Customer / Pricing / Resources / Company and Log in, mobile full-screen menu, word-reveal Master your day / boost productivity headline, project-management subcopy, Get started / How it works CTAs, and a floating dashboard.png preview. Demo productivity chrome only. No auth backend. Vite build ready for Cloudflare Workers.",
     category: "hero",
     stack: ["react", "vite", "javascript", "tailwind", "lucide"],
     priceLabel: "Free",
@@ -4186,7 +4186,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Vite and fork-ready",
-        body: "Vite 8 + React 19 + Tailwind 4 + Lucide + Inter - npm run build to dist/.",
+        body: "Vite 8 + React 19 + Tailwind 4 + Lucide + Inter, npm run build to dist/.",
       },
     ],
     includes: [
@@ -4208,9 +4208,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-33",
     title: "Apogee",
     tagline:
-      "Elevate your essential data to new heights - video hero with revenue card.",
+      "Elevate your essential data to new heights, video hero with revenue card.",
     description:
-      "Apogee is a full-viewport data-platform marketing hero by SonoJS. Built with Vite, React 19, TypeScript, Tailwind CSS 3, Lucide, and Suisse. Full-bleed looping hero.mp4 stage, glass Platform / Solutions / Developers / Resources nav with mobile menu, Elevate your essential data to new heights headline, advanced-reasoning subcopy, Book a demo / Talk with the team CTAs, and a frosted Revenue Growth card with animated bar chart ($14.2M, +32.4%). Demo analytics chrome only - no live data backend. Vite build ready for Cloudflare Workers.",
+      "Apogee is a full-viewport data-platform marketing hero by SonoJS. Built with Vite, React 19, TypeScript, Tailwind CSS 3, Lucide, and Suisse. Full-bleed looping hero.mp4 stage, glass Platform / Solutions / Developers / Resources nav with mobile menu, Elevate your essential data to new heights headline, advanced-reasoning subcopy, Book a demo / Talk with the team CTAs, and a frosted Revenue Growth card with animated bar chart ($14.2M, +32.4%). Demo analytics chrome only. No live data backend. Vite build ready for Cloudflare Workers.",
     category: "hero",
     stack: ["react", "vite", "typescript", "tailwind", "lucide"],
     priceLabel: "Free",
@@ -4250,7 +4250,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Vite and fork-ready",
-        body: "Vite 5 + React 19 + TypeScript + Tailwind 3 + Lucide + Suisse - npm run build to dist/.",
+        body: "Vite 5 + React 19 + TypeScript + Tailwind 3 + Lucide + Suisse, npm run build to dist/.",
       },
     ],
     includes: [
@@ -4272,9 +4272,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-landing-10",
     title: "Rovela",
     tagline:
-      "Your dream store is one sentence away - AI ecommerce landing with merchant stories.",
+      "Your dream store is one sentence away. AI ecommerce landing with merchant stories.",
     description:
-      "Rovela is a full-page AI ecommerce store-builder landing by SonoJS. Built with Next.js 16, React 19, Tailwind CSS 4, Framer Motion, and Lucide. Rotating Your dream store headline over hero video, Start selling fast how-it-works, Boost your existing store stats, Built on Rovela merchant stories, 100+ expert features grid, merchants gallery, closing CTA, footer, and chat FAB. Demo store-builder marketing chrome only - no live AI backend. Next.js build ready for Cloudflare Workers.",
+      "Rovela is a full-page AI ecommerce store-builder landing by SonoJS. Built with Next.js 16, React 19, Tailwind CSS 4, Framer Motion, and Lucide. Rotating Your dream store headline over hero video, Start selling fast how-it-works, Boost your existing store stats, Built on Rovela merchant stories, 100+ expert features grid, merchants gallery, closing CTA, footer, and chat FAB. Demo store-builder marketing chrome only. No live AI backend. Next.js build ready for Cloudflare Workers.",
     category: "landing",
     stack: ["nextjs", "react", "typescript", "tailwind", "lucide"],
     priceLabel: "Free",
@@ -4314,7 +4314,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Next.js and fork-ready",
-        body: "Next.js 16 + React 19 + Tailwind 4 + Framer Motion + Lucide - npm run build.",
+        body: "Next.js 16 + React 19 + Tailwind 4 + Framer Motion + Lucide, npm run build.",
       },
     ],
     includes: [
@@ -4339,7 +4339,7 @@ export const templateProjects: TemplateProject[] = [
     tagline:
       "Recipe catalog with pantry search and hands-free cook mode.",
     description:
-      "Forkful is a multi-page recipe catalog product by SonoJS. Built with Vite, React 19, TypeScript, Tailwind CSS 3, Lucide, and React Router. Home marketing hero with search, full /recipes catalog, pantry ingredient matching, recipe detail pages, hands-free step-by-step cook mode, and favorites. Demo recipe chrome only - local data, no auth or payments. Vite build ready for Cloudflare Workers.",
+      "Forkful is a multi-page recipe catalog product by SonoJS. Built with Vite, React 19, TypeScript, Tailwind CSS 3, Lucide, and React Router. Home marketing hero with search, full /recipes catalog, pantry ingredient matching, recipe detail pages, hands-free step-by-step cook mode, and favorites. Demo recipe chrome only. Local data, no auth or payments. Vite build ready for Cloudflare Workers.",
     category: "saas",
     stack: ["react", "vite", "typescript", "tailwind", "lucide", "reactrouter"],
     priceLabel: "Free",
@@ -4379,7 +4379,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Vite and fork-ready",
-        body: "Vite 7 + React 19 + TypeScript + Tailwind 3 + React Router - npm run build to dist/.",
+        body: "Vite 7 + React 19 + TypeScript + Tailwind 3 + React Router, npm run build to dist/.",
       },
     ],
     includes: [
@@ -4402,9 +4402,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-saas-03",
     title: "Auros",
     tagline:
-      "Making Digital Markets Liquid - crypto liquidity firm site with Three.js.",
+      "Making Digital Markets Liquid, crypto liquidity firm site with Three.js.",
     description:
-      "Auros is a crypto liquidity / trading-firm marketing site by SonoJS (demo brand: Auros). Built with Vite 8, React 19, TypeScript, Tailwind CSS 4, Three.js, and Matter. Hero Making Digital Markets Liquid over a particle sphere, Unlock Liquidity CTA, We Drive pillars, Explore Auros video cards (Trading, Liquidity Solutions, Careers), stats, global presence, partner logos (Jupiter, Pyth, Drift, and more), insights, and footer. Demo institutional chrome only - no trading backend. Vite build ready for Cloudflare Workers.",
+      "Auros is a crypto liquidity / trading-firm marketing site by SonoJS (demo brand: Auros). Built with Vite 8, React 19, TypeScript, Tailwind CSS 4, Three.js, and Matter. Hero Making Digital Markets Liquid over a particle sphere, Unlock Liquidity CTA, We Drive pillars, Explore Auros video cards (Trading, Liquidity Solutions, Careers), stats, global presence, partner logos (Jupiter, Pyth, Drift, and more), insights, and footer. Demo institutional chrome only. No trading backend. Vite build ready for Cloudflare Workers.",
     category: "saas",
     stack: ["react", "vite", "typescript", "tailwind", "threejs"],
     priceLabel: "Free",
@@ -4444,7 +4444,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Vite and fork-ready",
-        body: "Vite 8 + React 19 + Tailwind 4 + Three.js - npm run build to dist/.",
+        body: "Vite 8 + React 19 + Tailwind 4 + Three.js, npm run build to dist/.",
       },
     ],
     includes: [
@@ -4466,9 +4466,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-saas-04",
     title: "AuthKit",
     tagline:
-      "The world's best login box - auth product landing with floating forms.",
+      "The world's best login box, auth product landing with floating forms.",
     description:
-      "AuthKit is an authentication-product marketing landing by SonoJS (demo brand: AuthKit / WorkOS). Built with Next.js 16, React 19, TypeScript, Tailwind CSS 4, and OpenNext for Cloudflare. Hero Introducing AuthKit with pointer-tilt floating auth cards (social sign-in, email, verify code), theme toggle, feature row (SSO, MFA, Magic Auth, and more), extensibility, brand customization, Radix section, security, platform (SAML/SCIM/RBAC), testimonials, and CTA. Local fonts only - no external CDN. Demo product chrome only - no real auth backend. Deployable via OpenNext + Wrangler.",
+      "AuthKit is an authentication-product marketing landing by SonoJS (demo brand: AuthKit / WorkOS). Built with Next.js 16, React 19, TypeScript, Tailwind CSS 4, and OpenNext for Cloudflare. Hero Introducing AuthKit with pointer-tilt floating auth cards (social sign-in, email, verify code), theme toggle, feature row (SSO, MFA, Magic Auth, and more), extensibility, brand customization, Radix section, security, platform (SAML/SCIM/RBAC), testimonials, and CTA. Local fonts only. No external CDN. Demo product chrome only. No real auth backend. Deployable via OpenNext + Wrangler.",
     category: "saas",
     stack: ["nextjs", "react", "typescript", "tailwind"],
     priceLabel: "Free",
@@ -4496,7 +4496,7 @@ export const templateProjects: TemplateProject[] = [
     highlights: [
       {
         title: "Floating auth stage",
-        body: "Pointer-tilt AuthFormCard stack - social, email, and verify - under a giant AuthKit mark.",
+        body: "Pointer-tilt AuthFormCard stack, social, email, and verify, under a giant AuthKit mark.",
       },
       {
         title: "Feature + Radix story",
@@ -4508,7 +4508,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Next.js and Workers-ready",
-        body: "Next.js 16 + Tailwind 4 + OpenNext/Wrangler - npm run build / deploy.",
+        body: "Next.js 16 + Tailwind 4 + OpenNext/Wrangler, npm run build / deploy.",
       },
     ],
     includes: [
@@ -4529,9 +4529,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-saas-05",
     title: "Resend",
     tagline:
-      "Email for developers - transactional email product landing.",
+      "Email for developers, transactional email product landing.",
     description:
-      "Resend is a developer email-platform marketing landing by SonoJS (demo brand: Resend). Built with Vite 8, React 19, TypeScript, Tailwind CSS 4, Domaine, ABC Favorit, Commit Mono, and Inter. Dark hero Email for developers with Get started CTA, logo grid, Integrate, feature cards, visual email editor, Beyond Editing analytics, React Email, deliverability grid, customer quote, dashboard stills, testimonials, and final CTA. Includes Spline cube asset + image fallbacks. Demo product chrome only - no sending backend. Vite build ready for Cloudflare Workers.",
+      "Resend is a developer email-platform marketing landing by SonoJS (demo brand: Resend). Built with Vite 8, React 19, TypeScript, Tailwind CSS 4, Domaine, ABC Favorit, Commit Mono, and Inter. Dark hero Email for developers with Get started CTA, logo grid, Integrate, feature cards, visual email editor, Beyond Editing analytics, React Email, deliverability grid, customer quote, dashboard stills, testimonials, and final CTA. Includes Spline cube asset + image fallbacks. Demo product chrome only. No sending backend. Vite build ready for Cloudflare Workers.",
     category: "saas",
     stack: ["react", "vite", "typescript", "tailwind", "resend"],
     priceLabel: "Free",
@@ -4571,7 +4571,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Vite and fork-ready",
-        body: "Vite 8 + React 19 + Tailwind 4 - npm run build to dist/ for Workers.",
+        body: "Vite 8 + React 19 + Tailwind 4, npm run build to dist/ for Workers.",
       },
     ],
     includes: [
@@ -4592,9 +4592,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-saas-06",
     title: "Meridian",
     tagline:
-      "Agentic companies are arriving - AI lab site for Helm orchestration.",
+      "Agentic companies are arriving. AI lab site for Helm orchestration.",
     description:
-      "Meridian is a multi-page applied-AI lab marketing site by SonoJS (demo brand: The Meridian Company / Helm). Built with Vite 8, React 19, TypeScript, Tailwind CSS 4, Framer Motion, and React Router. Day/dawn/dusk/night hero crossfade, New York City eyebrow, mission copy, Coding–Sales agent fields into Helm natural-language orchestrator with typewriter phrases and HelmDiagram, customer stories, About / Writing / Careers / Role / Privacy routes, cookie banner, and Get Helm CTA. Local PP Mondwest + AF fonts. Demo product chrome only - no waitlist backend. Vite build ready for Cloudflare Workers.",
+      "Meridian is a multi-page applied-AI lab marketing site by SonoJS (demo brand: The Meridian Company / Helm). Built with Vite 8, React 19, TypeScript, Tailwind CSS 4, Framer Motion, and React Router. Day/dawn/dusk/night hero crossfade, New York City eyebrow, mission copy, Coding-Sales agent fields into Helm natural-language orchestrator with typewriter phrases and HelmDiagram, customer stories, About / Writing / Careers / Role / Privacy routes, cookie banner, and Get Helm CTA. Local PP Mondwest + AF fonts. Demo product chrome only. No waitlist backend. Vite build ready for Cloudflare Workers.",
     category: "saas",
     stack: ["react", "vite", "typescript", "tailwind", "reactrouter"],
     priceLabel: "Free",
@@ -4634,7 +4634,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Vite and fork-ready",
-        body: "Vite 8 + React 19 + Tailwind 4 + React Router - npm run build to dist/.",
+        body: "Vite 8 + React 19 + Tailwind 4 + React Router, npm run build to dist/.",
       },
     ],
     includes: [
@@ -4657,9 +4657,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-saas-07",
     title: "Eclipse",
     tagline:
-      "The Last Frontier - scroll-driven sci-fi universe with Three.js.",
+      "The Last Frontier, scroll-driven sci-fi universe with Three.js.",
     description:
-      "Eclipse is a full-page interactive sci-fi universe experience by SonoJS (demo brand: ECLIPSE — The Last Frontier). Zero-build static HTML with local Tailwind, Three.js, GSAP ScrollTrigger, and runtime.js. Seven scroll chapters from The Awakening through Beyond the Veil: cinema backdrops, WebGL universe canvas, planet drag / shuttle boost toys, Field Archive lightbox (12 fragments), faction chooser (Wayfarers / Vesper Accord / Keepers), sound and reduce-motion toggles, and chapter index. Serve with a static server so assets load. Demo world chrome only - no account backend. Host on Cloudflare Workers.",
+      "Eclipse is a full-page interactive sci-fi universe experience by SonoJS (demo brand: ECLIPSE. The Last Frontier). Zero-build static HTML with local Tailwind, Three.js, GSAP ScrollTrigger, and runtime.js. Seven scroll chapters from The Awakening through Beyond the Veil: cinema backdrops, WebGL universe canvas, planet drag / shuttle boost toys, Field Archive lightbox (12 fragments), faction chooser (Wayfarers / Vesper Accord / Keepers), sound and reduce-motion toggles, and chapter index. Serve with a static server so assets load. Demo world chrome only. No account backend. Host on Cloudflare Workers.",
     category: "saas",
     stack: ["html", "css", "javascript", "threejs", "gsap"],
     priceLabel: "Free",
@@ -4700,11 +4700,11 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "index.html + js/runtime.js + vendor (three/gsap/tailwind) + assets/ - serve locally.",
+        body: "index.html + js/runtime.js + vendor (three/gsap/tailwind) + assets/, serve locally.",
       },
     ],
     includes: [
-      "index.html (ECLIPSE — The Last Frontier)",
+      "index.html (ECLIPSE. The Last Frontier)",
       "js/runtime.js",
       "vendor/three.min.js, gsap.min.js, ScrollTrigger.min.js, tailwind.js",
       "Chapter + archive WebP art set",
@@ -4719,7 +4719,7 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-saas-08",
     title: "Forma",
     tagline:
-      "Build at the speed of imagination. - AI website-builder concept demo.",
+      "Build at the speed of imagination. AI website-builder concept demo.",
     description:
       "Forma is a dark, copper-accented AI website-builder marketing concept by SonoJS (demo brand: Forma). Self-contained HTML with inline CSS/JS plus local DM Sans and Instrument Serif. Hero Build at the speed of imagination. with prompt composer (Editorial / Minimal / Bold), scroll showcase of three starting points (Serein, Orbit, Offscript), Imagine → Compose → Create flow, craft feature cards, Curious/Creator/Studio pricing, FAQ, ⌘K quick actions, interactive studio dialog with local template matching, device previews, and Export HTML. No live AI, accounts, or payments. Run locally with npx --yes http-server -p 8765 or host the folder statically on Cloudflare Workers.",
     category: "saas",
@@ -4781,9 +4781,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-saas-09",
     title: "Yunjian",
     tagline:
-      "Stay above the clouds. - cinematic Zhangjiajie mountain retreat.",
+      "Stay above the clouds. cinematic Zhangjiajie mountain retreat.",
     description:
-      "Yunjian is a cinematic mountain-retreat marketing site by SonoJS (demo brand: Yunjian Retreat / 云间, Zhangjiajie). Zero-build static HTML with local CSS, JS modules, Three.js 0.166.1 fog, and Chinese/Latin fonts. Loading seal into Stay above the clouds. hero, scroll chapters for Cliff Suites, Sky Terrace, Mountain Table, and Lantern Night, five-panel chronicle gallery, three-night passage planner, and private stay booking dialog. Mist parallax scene layers. Demo hospitality chrome only - no booking backend. Run with npx --yes serve . (do not open file://).",
+      "Yunjian is a cinematic mountain-retreat marketing site by SonoJS (demo brand: Yunjian Retreat / 云间, Zhangjiajie). Zero-build static HTML with local CSS, JS modules, Three.js 0.166.1 fog, and Chinese/Latin fonts. Loading seal into Stay above the clouds. hero, scroll chapters for Cliff Suites, Sky Terrace, Mountain Table, and Lantern Night, five-panel chronicle gallery, three-night passage planner, and private stay booking dialog. Mist parallax scene layers. Demo hospitality chrome only. No booking backend. Run with npx --yes serve . over HTTP.",
     category: "saas",
     stack: ["html", "css", "javascript", "threejs"],
     priceLabel: "Free",
@@ -4824,11 +4824,11 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "npx --yes serve . so ES modules and Three.js fog load (not file://).",
+        body: "npx --yes serve . so ES modules and Three.js fog load over HTTP.",
       },
     ],
     includes: [
-      "index.html (Yunjian — Above the Clouds)",
+      "index.html (Yunjian. Above the Clouds)",
       "css/yunjian.css + js/yunjian.js + js/img-fallback.js",
       "vendor/three@0.166.1/",
       "assets/ scenes, gallery, thumbs, textures",
@@ -4843,9 +4843,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-34",
     title: "Agrumi",
     tagline:
-      "Ceramics for good dogs - video hero with six summer glaze bowls.",
+      "Ceramics for good dogs, video hero with six summer glaze bowls.",
     description:
-      "Agrumi is a full-viewport ceramic dog-bowl product hero by SonoJS. Shipped as a zero-build static package (bundled React SPA). Full-bleed looping hero.mp4 with poster still, hand-glazed ceramic bowls with ears pitch, Shop the bowls CTA, 4.9★ / 12,000 good dogs social proof, and a six-glaze gallery (Limone, Arancia, Menta, Latte, Cielo, Vetro) with tinted swatches. Demo product chrome only - no checkout backend. Open index.html or host the folder statically on Cloudflare Workers.",
+      "Agrumi is a full-viewport ceramic dog-bowl product hero by SonoJS. Shipped as a zero-build static package (bundled React SPA). Full-bleed looping hero.mp4 with poster still, hand-glazed ceramic bowls with ears pitch, Shop the bowls CTA, 4.9★ / 12,000 good dogs social proof, and a six-glaze gallery (Limone, Arancia, Menta, Latte, Cielo, Vetro) with tinted swatches. Demo product chrome only. No checkout backend. Open index.html or host the folder statically on Cloudflare Workers.",
     category: "hero",
     stack: ["html", "css", "javascript"],
     priceLabel: "Free",
@@ -4885,7 +4885,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "index.html + bundled assets/ CSS/JS, fonts/, and media/ - open or static-host.",
+        body: "index.html + bundled assets/ CSS/JS, fonts/, and media/, open or static-host.",
       },
     ],
     includes: [
@@ -4896,7 +4896,7 @@ export const templateProjects: TemplateProject[] = [
     ],
     requirements: [
       "Modern browser (HTML5 video + CSS)",
-      "No build step - open index.html or static-host the folder",
+      "No build step, open index.html or static-host the folder",
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
   },
@@ -4904,9 +4904,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-35",
     title: "Gummy Grove",
     tagline:
-      "wobble / works - grab jelly fruit, toss it, slice it, watch it settle.",
+      "wobble / works, grab jelly fruit, toss it, slice it, watch it settle.",
     description:
-      "Gummy Grove is an interactive jelly-fruit playground hero by SonoJS. Shipped as a zero-build static SPA with Satoshi and a bundled Three.js jelly shader. Grab a squishy avocado, fig, sakura, blood orange, or starfruit - toss it, slice it, and watch the wobble settle. Demo interaction chrome only - no cart or backend. Serve the public/ folder (or npm run dev via Wrangler) / host on Cloudflare Workers.",
+      "Gummy Grove is an interactive jelly-fruit playground hero by SonoJS. Shipped as a zero-build static SPA with Satoshi and a bundled Three.js jelly shader. Grab a squishy avocado, fig, sakura, blood orange, or starfruit, toss it, slice it, and watch the wobble settle. Demo interaction chrome only. No cart or backend. Serve the public/ folder (or npm run dev via Wrangler) / host on Cloudflare Workers.",
     category: "hero",
     stack: ["html", "css", "javascript", "threejs"],
     priceLabel: "Free",
@@ -4946,7 +4946,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Workers-ready",
-        body: "wrangler.toml assets SPA - npm run dev locally or deploy to Cloudflare.",
+        body: "wrangler.toml assets SPA, npm run dev locally or deploy to Cloudflare.",
       },
     ],
     includes: [
@@ -4957,7 +4957,7 @@ export const templateProjects: TemplateProject[] = [
     ],
     requirements: [
       "Modern browser (WebGL)",
-      "Static host for public/ - or Wrangler for local/dev deploy",
+      "Static host for public/, or Wrangler for local/dev deploy",
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
     runCommand: "npx wrangler dev",
@@ -4966,9 +4966,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-36",
     title: "Parrot",
     tagline:
-      "The Tropical Talker - macaw video hero with scroll-driven color stage.",
+      "The Tropical Talker, macaw video hero with scroll-driven color stage.",
     description:
-      "Parrot is a full-viewport tropical macaw marketing hero by SonoJS. Shipped as a zero-build static SPA (bundled React) with Anton + Montserrat. Looping macaw-flight video, first/last still plates, The Tropical Talker. headline, and a multicoloured macaw perched on a mossy branch color story. Demo product chrome only - no backend. Run locally with npm run dev (serve on :3000) or host the folder statically on Cloudflare Workers.",
+      "Parrot is a full-viewport tropical macaw marketing hero by SonoJS. Shipped as a zero-build static SPA (bundled React) with Anton + Montserrat. Looping macaw-flight video, first/last still plates, The Tropical Talker. headline, and a multicoloured macaw perched on a mossy branch color story. Demo product chrome only. No backend. Run locally with npm run dev (serve on :3000) or host the folder statically on Cloudflare Workers.",
     category: "hero",
     stack: ["html", "css", "javascript"],
     priceLabel: "Free",
@@ -5004,11 +5004,11 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Color story chrome",
-        body: "Multicoloured macaw on a mossy branch - scroll-driven color presentation.",
+        body: "Multicoloured macaw on a mossy branch, scroll-driven color presentation.",
       },
       {
         title: "Zero-build static",
-        body: "index.html + bundled assets/ - npm run dev serves on port 3000.",
+        body: "index.html + bundled assets/, npm run dev serves on port 3000.",
       },
     ],
     includes: [
@@ -5020,7 +5020,7 @@ export const templateProjects: TemplateProject[] = [
     ],
     requirements: [
       "Modern browser (HTML5 video + CSS)",
-      "Node.js optional - npm run dev uses serve; or static-host the folder",
+      "Node.js optional, npm run dev uses serve; or static-host the folder",
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
     runCommand: "npm run dev",
@@ -5029,9 +5029,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-landing-11",
     title: "SYKÉA",
     tagline:
-      "Le Verger - six eaux de parfum from one Aegean fig orchard.",
+      "Le Verger, six eaux de parfum from one Aegean fig orchard.",
     description:
-      "SYKÉA is a full-page fragrance collection landing by SonoJS (Le Verger). Shipped as a zero-build static SPA with self-hosted fonts and a dense WebP frame sequence (desktop + mobile). Six eaux de parfum from one Aegean fig orchard - Figue Verte, Figue Noire, Olivier Blanc, Thym Sauvage, Pierre Chaude, Lait de Figue - with Shop the collection / Discovery set chrome. Demo perfume marketing only - no checkout backend. Run locally with node serve.mjs (port 4785) or host the folder statically on Cloudflare Workers.",
+      "SYKÉA is a full-page fragrance collection landing by SonoJS (Le Verger). Shipped as a zero-build static SPA with self-hosted fonts and a dense WebP frame sequence (desktop + mobile). Six eaux de parfum from one Aegean fig orchard. Figue Verte, Figue Noire, Olivier Blanc, Thym Sauvage, Pierre Chaude, Lait de Figue, with Shop the collection / Discovery set chrome. Demo perfume marketing only. No checkout backend. Run locally with node serve.mjs (port 4785) or host the folder statically on Cloudflare Workers.",
     category: "landing",
     stack: ["html", "css", "javascript"],
     priceLabel: "Free",
@@ -5071,7 +5071,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Custom local server",
-        body: "serve.mjs - run node serve.mjs for http://127.0.0.1:4785.",
+        body: "serve.mjs, run node serve.mjs for http://127.0.0.1:4785.",
       },
     ],
     includes: [
@@ -5093,9 +5093,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-landing-12",
     title: "Plum",
     tagline:
-      "Puts you in plum position - revenue-share software & search studio.",
+      "Puts you in plum position, revenue-share software & search studio.",
     description:
-      "Plum is a full-page concept-studio landing by SonoJS. Shipped as a zero-build static SPA with self-hosted fonts, hero paintings (desktop + mobile), and multi-track WebP frame sequences. Puts you in plum position. headline, hand-painted custom software + rankings copy, revenue-share FAQ chrome, and scroll cinema stages. Demo studio marketing only - no booking backend. Run locally with npx --yes serve . -l 5173 (see run.txt) or host the folder statically on Cloudflare Workers.",
+      "Plum is a full-page concept-studio landing by SonoJS. Shipped as a zero-build static SPA with self-hosted fonts, hero paintings (desktop + mobile), and multi-track WebP frame sequences. Puts you in plum position. headline, hand-painted custom software + rankings copy, revenue-share FAQ chrome, and scroll cinema stages. Demo studio marketing only. No booking backend. Run locally with npx --yes serve . -l 5173 (see run.txt) or host the folder statically on Cloudflare Workers.",
     category: "landing",
     stack: ["html", "css", "javascript"],
     priceLabel: "Free",
@@ -5127,7 +5127,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Frame-sequence cinema",
-        body: "Multi-track WebP frames under frames/a–f drive scroll-led motion.",
+        body: "Multi-track WebP frames under frames/a-f drive scroll-led motion.",
       },
       {
         title: "Revenue-share story",
@@ -5135,7 +5135,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Documented run command",
-        body: "run.txt - npx --yes serve . -l 5173 (bundled miniserve bins also included).",
+        body: "run.txt, npx --yes serve . -l 5173 (bundled miniserve bins also included).",
       },
     ],
     includes: [
@@ -5157,9 +5157,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-37",
     title: "VIRIDIA",
     tagline:
-      "Tactical Techwear - move the light to reveal the masked hero.",
+      "Tactical Techwear, move the light to reveal the masked hero.",
     description:
-      "VIRIDIA is a full-viewport tactical techwear marketing hero by SonoJS. Shipped as a zero-build static SPA with Chakra Petch + Poppins. Dual-plate hero (hero-masked.png / hero-unmasked.jpg) with Move the light to reveal interaction, We Adapt. We Shield. We Disappear. field copy for low light and high stakes, and See the collection CTA. Demo apparel chrome only - no checkout backend. Run locally with npx --yes serve -l 8765 or host the folder statically on Cloudflare Workers.",
+      "VIRIDIA is a full-viewport tactical techwear marketing hero by SonoJS. Shipped as a zero-build static SPA with Chakra Petch + Poppins. Dual-plate hero (hero-masked.png / hero-unmasked.jpg) with Move the light to reveal interaction, We Adapt. We Shield. We Disappear. field copy for low light and high stakes, and See the collection CTA. Demo apparel chrome only. No checkout backend. Run locally with npx --yes serve -l 8765 or host the folder statically on Cloudflare Workers.",
     category: "hero",
     stack: ["html", "css", "javascript"],
     priceLabel: "Free",
@@ -5220,9 +5220,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-38",
     title: "Earshot",
     tagline:
-      "Run until the world changes - open-world runner with frame cinema.",
+      "Run until the world changes, open-world runner with frame cinema.",
     description:
-      "Earshot is a full-viewport open-world runner marketing hero by SonoJS. Shipped as a zero-build static SPA with self-hosted fonts and dense WebP frame sequences (desktop, mobile, loop). Carry the satchel across salt mirrors, citrus roads, tide causeways and aurora snowfields - every mile repaints the world. Demo game chrome only - no playable backend. Run locally with .\\serve.ps1 (defaults to port 8080 via npx serve) or host the folder statically on Cloudflare Workers.",
+      "Earshot is a full-viewport open-world runner marketing hero by SonoJS. Shipped as a zero-build static SPA with self-hosted fonts and dense WebP frame sequences (desktop, mobile, loop). Carry the satchel across salt mirrors, citrus roads, tide causeways and aurora snowfields, every mile repaints the world. Demo game chrome only. No playable backend. Run locally with .\\serve.ps1 (defaults to port 8080 via npx serve) or host the folder statically on Cloudflare Workers.",
     category: "hero",
     stack: ["html", "css", "javascript"],
     priceLabel: "Free",
@@ -5254,7 +5254,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "World-repaint pitch",
-        body: "Salt mirrors, citrus roads, tide causeways, aurora snowfields - every mile changes the world.",
+        body: "Salt mirrors, citrus roads, tide causeways, aurora snowfields, every mile changes the world.",
       },
       {
         title: "Runner brand chrome",
@@ -5262,7 +5262,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "PowerShell serve script",
-        body: ".\\serve.ps1 - npx serve on :8080 (Python http.server fallback).",
+        body: ".\\serve.ps1, npx serve on :8080 (Python http.server fallback).",
       },
     ],
     includes: [
@@ -5284,9 +5284,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-39",
     title: "Mainframe",
     tagline:
-      "Meet A.R.I.A. - scrub-video studio hero with typewriter CTAs.",
+      "Meet A.R.I.A. scrub-video studio hero with typewriter CTAs.",
     description:
-      "Mainframe is a full-viewport studio marketing hero by SonoJS. Built with Vite, React 19, TypeScript, and Tailwind CSS 4. Scroll-scrubbed hero.mp4 stage, Mainframe® nav (Labs / Studio / Openings / Shop), blurred Meet A.R.I.A. intro, typewriter Glad you stopped in… line, action pills (Pitch us an idea, Come work here, Send a brief hello, See how we operate), and copyable hello@mainframe.co. Demo studio chrome only - no CRM backend. Vite build ready for Cloudflare Workers.",
+      "Mainframe is a full-viewport studio marketing hero by SonoJS. Built with Vite, React 19, TypeScript, and Tailwind CSS 4. Scroll-scrubbed hero.mp4 stage, Mainframe® nav (Labs / Studio / Openings / Shop), blurred Meet A.R.I.A. intro, typewriter Glad you stopped in… line, action pills (Pitch us an idea, Come work here, Send a brief hello, See how we operate), and copyable hello@mainframe.co. Demo studio chrome only. No CRM backend. Vite build ready for Cloudflare Workers.",
     category: "hero",
     stack: ["react", "vite", "typescript", "tailwind"],
     priceLabel: "Free",
@@ -5326,7 +5326,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Vite and fork-ready",
-        body: "Vite 8 + React 19 + TypeScript + Tailwind 4 - npm run build to dist/.",
+        body: "Vite 8 + React 19 + TypeScript + Tailwind 4, npm run build to dist/.",
       },
     ],
     includes: [
@@ -5346,9 +5346,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-40",
     title: "Signal",
     tagline:
-      "Find Signal to Action - falcon video login stage for fast-moving teams.",
+      "Find Signal to Action, falcon video login stage for fast-moving teams.",
     description:
-      "Signal is a full-viewport login marketing hero by SonoJS. Built as a single HTML page with FreeSans + Eloquia and a looping peregrine-falcon video (falcon.mp4 + poster.webp). Built for fast-moving teams badge, Find Signal to Action headline on the photo pane, Welcome Back! login card with email/password, Google continue, and responsive stacked / tabport layouts. Demo auth chrome only - no real login backend. Open index.html or host the folder statically on Cloudflare Workers.",
+      "Signal is a full-viewport login marketing hero by SonoJS. Built as a single HTML page with FreeSans + Eloquia and a looping peregrine-falcon video (falcon.mp4 + poster.webp). Built for fast-moving teams badge, Find Signal to Action headline on the photo pane, Welcome Back! login card with email/password, Google continue, and responsive stacked / tabport layouts. Demo auth chrome only. No real login backend. Open index.html or host the folder statically on Cloudflare Workers.",
     category: "hero",
     stack: ["html", "css", "javascript"],
     priceLabel: "Free",
@@ -5398,7 +5398,7 @@ export const templateProjects: TemplateProject[] = [
     ],
     requirements: [
       "Modern browser (HTML5 video + CSS)",
-      "No build step - open index.html or static-host the folder",
+      "No build step, open index.html or static-host the folder",
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
   },
@@ -5406,9 +5406,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-41",
     title: "Aethera",
     tagline:
-      "Beyond silence, we build the eternal - soft video hero with Begin Journey.",
+      "Beyond silence, we build the eternal, soft video hero with Begin Journey.",
     description:
-      "Aethera is a full-viewport studio marketing hero by SonoJS. Built with Vite, React 19, TypeScript, and Tailwind CSS 4. Soft looping hero.mp4 with edge fade, Aethera® nav (Home / Studio / About / Journal / Reach Us), Beyond silence, we build the eternal. display headline (Instrument Serif italics), deep-work platform copy, and Begin Journey CTAs. Demo studio chrome only - no contact backend. Vite build ready for Cloudflare Workers.",
+      "Aethera is a full-viewport studio marketing hero by SonoJS. Built with Vite, React 19, TypeScript, and Tailwind CSS 4. Soft looping hero.mp4 with edge fade, Aethera® nav (Home / Studio / About / Journal / Reach Us), Beyond silence, we build the eternal. display headline (Instrument Serif italics), deep-work platform copy, and Begin Journey CTAs. Demo studio chrome only. No contact backend. Vite build ready for Cloudflare Workers.",
     category: "hero",
     stack: ["react", "vite", "typescript", "tailwind"],
     priceLabel: "Free",
@@ -5448,7 +5448,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Vite and fork-ready",
-        body: "Vite 8 + React 19 + TypeScript + Tailwind 4 - npm run build to dist/.",
+        body: "Vite 8 + React 19 + TypeScript + Tailwind 4, npm run build to dist/.",
       },
     ],
     includes: [
@@ -5469,9 +5469,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-42",
     title: "Wandor",
     tagline:
-      "Where will you go next? - AI trip planner hero with Plan My Trip.",
+      "Where will you go next?. AI trip planner hero with Plan My Trip.",
     description:
-      "Wandor is a full-viewport travel-AI marketing hero by SonoJS. Built with Vite, React 19, TypeScript, Tailwind CSS 3, and Lucide. Full-bleed looping hero-bg.mp4 with soft top wash, wandor display mark, Discover / Pricing / FAQs + Login / Plan My Trip nav, Where will you go next? headline, personalized-itinerary copy, glass prompt card (Japan sample brief), upload chrome, and Plan My Trip CTA. Demo trip-planner chrome only - no AI backend. Vite build ready for Cloudflare Workers.",
+      "Wandor is a full-viewport travel-AI marketing hero by SonoJS. Built with Vite, React 19, TypeScript, Tailwind CSS 3, and Lucide. Full-bleed looping hero-bg.mp4 with soft top wash, wandor display mark, Discover / Pricing / FAQs + Login / Plan My Trip nav, Where will you go next? headline, personalized-itinerary copy, glass prompt card (Japan sample brief), upload chrome, and Plan My Trip CTA. Demo trip-planner chrome only. No AI backend. Vite build ready for Cloudflare Workers.",
     category: "hero",
     stack: ["react", "vite", "typescript", "tailwind", "lucide"],
     priceLabel: "Free",
@@ -5511,7 +5511,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Vite and fork-ready",
-        body: "Vite 8 + React 19 + TypeScript + Tailwind 3 + Lucide - npm run build to dist/.",
+        body: "Vite 8 + React 19 + TypeScript + Tailwind 3 + Lucide, npm run build to dist/.",
       },
     ],
     includes: [
@@ -5534,9 +5534,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-43",
     title: "Axon",
     tagline:
-      "Deploy digital workers for mundane workflows - YC-funded agent hero.",
+      "Deploy digital workers for mundane workflows. YC-funded agent hero.",
     description:
-      "Axon is a full-viewport digital-workers marketing hero by SonoJS. Built with Vite, React 19, TypeScript, and Tailwind CSS 4. Full-bleed looping hero-bg.mp4, frosted glass nav (Features / Plans / Security / About), Funded by Y Combinator badge, Deploy digital workers for mundane workflows headline (Instrument Serif), team-capacity copy, and Get Early Access CTA. Demo agent-platform chrome only - no waitlist backend. Vite build ready for Cloudflare Workers.",
+      "Axon is a full-viewport digital-workers marketing hero by SonoJS. Built with Vite, React 19, TypeScript, and Tailwind CSS 4. Full-bleed looping hero-bg.mp4, frosted glass nav (Features / Plans / Security / About), Funded by Y Combinator badge, Deploy digital workers for mundane workflows headline (Instrument Serif), team-capacity copy, and Get Early Access CTA. Demo agent-platform chrome only. No waitlist backend. Vite build ready for Cloudflare Workers.",
     category: "hero",
     stack: ["react", "vite", "typescript", "tailwind"],
     priceLabel: "Free",
@@ -5576,7 +5576,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Vite and fork-ready",
-        body: "Vite 8 + React 19 + TypeScript + Tailwind 4 - npm run build to dist/.",
+        body: "Vite 8 + React 19 + TypeScript + Tailwind 4, npm run build to dist/.",
       },
     ],
     includes: [
@@ -5597,9 +5597,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-44",
     title: "404",
     tagline:
-      "The path may be broken - cinematic 404 stage with LGPSM mark.",
+      "The path may be broken, cinematic 404 stage with LGPSM mark.",
     description:
-      "404 is a full-viewport cinematic error-page hero by SonoJS (demo brand LGPSM). Built with Vite, React 19, TypeScript, and Tailwind CSS 4. Full-bleed looping hero-bg.mp4, white LGPSM wordmark, oversized gradient 404 numeral in Geist Mono, and The path may be broken, but the journey isn't. Let's get you back. copy. Demo 404 chrome only - no routing backend. Vite build ready for Cloudflare Workers.",
+      "404 is a full-viewport cinematic error-page hero by SonoJS (demo brand LGPSM). Built with Vite, React 19, TypeScript, and Tailwind CSS 4. Full-bleed looping hero-bg.mp4, white LGPSM wordmark, oversized gradient 404 numeral in Geist Mono, and The path may be broken, but the journey isn't. Let's get you back. copy. Demo 404 chrome only. No routing backend. Vite build ready for Cloudflare Workers.",
     category: "hero",
     stack: ["react", "vite", "typescript", "tailwind"],
     priceLabel: "Free",
@@ -5639,7 +5639,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Vite and fork-ready",
-        body: "Vite 8 + React 19 + TypeScript + Tailwind 4 - npm run build to dist/.",
+        body: "Vite 8 + React 19 + TypeScript + Tailwind 4, npm run build to dist/.",
       },
     ],
     includes: [
@@ -5660,9 +5660,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-45",
     title: "Equilibrium",
     tagline:
-      "Live Better, Feel Whole Every Day - wellness video hero with liquid glass nav.",
+      "Live Better, Feel Whole Every Day, wellness video hero with liquid glass nav.",
     description:
-      "Equilibrium is a full-viewport wellness marketing hero by SonoJS. Built with Vite, React 19, TypeScript, Tailwind CSS 3, and Lucide. Full-bleed looping bg-video.mp4, infinity wordmark, liquid-glass nav (Home / Wellness / Routine / Our Team), Log in / Begin Now, Live Better, Feel Whole Every Day headline, companion-app copy, and Start Today / Discover How CTAs plus mobile menu. Demo wellness chrome only - no auth backend. Vite build ready for Cloudflare Workers.",
+      "Equilibrium is a full-viewport wellness marketing hero by SonoJS. Built with Vite, React 19, TypeScript, Tailwind CSS 3, and Lucide. Full-bleed looping bg-video.mp4, infinity wordmark, liquid-glass nav (Home / Wellness / Routine / Our Team), Log in / Begin Now, Live Better, Feel Whole Every Day headline, companion-app copy, and Start Today / Discover How CTAs plus mobile menu. Demo wellness chrome only. No auth backend. Vite build ready for Cloudflare Workers.",
     category: "hero",
     stack: ["react", "vite", "typescript", "tailwind", "lucide"],
     priceLabel: "Free",
@@ -5702,7 +5702,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Vite and fork-ready",
-        body: "Vite 8 + React 19 + TypeScript + Tailwind 3 + Lucide - npm run build to dist/.",
+        body: "Vite 8 + React 19 + TypeScript + Tailwind 3 + Lucide, npm run build to dist/.",
       },
     ],
     includes: [
@@ -5725,9 +5725,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-46",
     title: "Asme",
     tagline:
-      "Built for the curious - faded video hero with newsletter glass pill.",
+      "Built for the curious, faded video hero with newsletter glass pill.",
     description:
-      "Asme is a full-viewport studio marketing hero by SonoJS. Built with Vite, React 18, TypeScript, Tailwind CSS 3, and Lucide. Looping hero.mp4 with soft fade-in/out at loop edges, liquid-glass nav (Features / Pricing / About + Sign Up / Login), Built for the curious Instrument Serif headline, email newsletter pill, Manifesto CTA, and Instagram / Twitter footers. Demo studio chrome only - no newsletter backend. Vite build ready for Cloudflare Workers.",
+      "Asme is a full-viewport studio marketing hero by SonoJS. Built with Vite, React 18, TypeScript, Tailwind CSS 3, and Lucide. Looping hero.mp4 with soft fade-in/out at loop edges, liquid-glass nav (Features / Pricing / About + Sign Up / Login), Built for the curious Instrument Serif headline, email newsletter pill, Manifesto CTA, and Instagram / Twitter footers. Demo studio chrome only. No newsletter backend. Vite build ready for Cloudflare Workers.",
     category: "hero",
     stack: ["react", "vite", "typescript", "tailwind", "lucide"],
     priceLabel: "Free",
@@ -5767,7 +5767,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Vite and fork-ready",
-        body: "Vite 8 + React 18 + TypeScript + Tailwind 3 + Lucide - npm run build to dist/.",
+        body: "Vite 8 + React 18 + TypeScript + Tailwind 3 + Lucide, npm run build to dist/.",
       },
     ],
     includes: [
@@ -5790,9 +5790,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-47",
     title: "Lūmen",
     tagline:
-      "Liquid Assets. Luminous Returns. - fintech index hero with grid nodes.",
+      "Liquid Assets. Luminous Returns. fintech index hero with grid nodes.",
     description:
-      "Lūmen is a full-viewport private-banking / index marketing hero by SonoJS (LŪMEN // ÍNDEX). Built with Vite, React 18, TypeScript, Tailwind CSS 3, and Lucide. Full-bleed looping hero.mp4, Graphik + Manrope type, numbered ECOSYSTEM / LIQUIDITY_POOLS / LUMEN_INDEX / GOVERNANCE nav, wallet CONNECTED / PRIME_MEMBER chrome, Liquid Assets. Luminous Returns. headline, animated grid + CORE_ENTITY / LUMINOUS_INSIGHT / CONNECTIVITY node callouts, Explore Private Banking CTA, and NOT A BANK — AN ECOSYSTEM panel. Demo fintech chrome only - no wallet backend. Vite build ready for Cloudflare Workers.",
+      "Lūmen is a full-viewport private-banking / index marketing hero by SonoJS (LŪMEN // ÍNDEX). Built with Vite, React 18, TypeScript, Tailwind CSS 3, and Lucide. Full-bleed looping hero.mp4, Graphik + Manrope type, numbered ECOSYSTEM / LIQUIDITY_POOLS / LUMEN_INDEX / GOVERNANCE nav, wallet CONNECTED / PRIME_MEMBER chrome, Liquid Assets. Luminous Returns. headline, animated grid + CORE_ENTITY / LUMINOUS_INSIGHT / CONNECTIVITY node callouts, Explore Private Banking CTA, and NOT A BANK. AN ECOSYSTEM panel. Demo fintech chrome only. No wallet backend. Vite build ready for Cloudflare Workers.",
     category: "hero",
     stack: ["react", "vite", "typescript", "tailwind", "lucide"],
     priceLabel: "Free",
@@ -5832,7 +5832,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Vite and fork-ready",
-        body: "Vite 5 + React 18 + TypeScript + Tailwind 3 + Lucide - npm run build to dist/.",
+        body: "Vite 5 + React 18 + TypeScript + Tailwind 3 + Lucide, npm run build to dist/.",
       },
     ],
     includes: [
@@ -5855,9 +5855,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-48",
     title: "securify",
     tagline:
-      "protect your data - privacy video hero with stacked stats.",
+      "protect your data, privacy video hero with stacked stats.",
     description:
-      "securify is a full-viewport data-privacy marketing hero by SonoJS. Built with Vite, React 19, TypeScript, and Tailwind CSS 3. Full-bleed looping hero-bg.mp4, frosted pill nav (platform / solutions / company / support) with get started, oversized staggered protect / your / data type, privacy-everywhere copy, and +65k / +1.5b / +300k metric callouts. Demo security chrome only - no auth backend. Vite build ready for Cloudflare Workers.",
+      "securify is a full-viewport data-privacy marketing hero by SonoJS. Built with Vite, React 19, TypeScript, and Tailwind CSS 3. Full-bleed looping hero-bg.mp4, frosted pill nav (platform / solutions / company / support) with get started, oversized staggered protect / your / data type, privacy-everywhere copy, and +65k / +1.5b / +300k metric callouts. Demo security chrome only. No auth backend. Vite build ready for Cloudflare Workers.",
     category: "hero",
     stack: ["react", "vite", "typescript", "tailwind"],
     priceLabel: "Free",
@@ -5897,7 +5897,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Vite and fork-ready",
-        body: "Vite 8 + React 19 + TypeScript + Tailwind 3 - npm run build to dist/.",
+        body: "Vite 8 + React 19 + TypeScript + Tailwind 3, npm run build to dist/.",
       },
     ],
     includes: [
@@ -5917,9 +5917,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-49",
     title: "Kova",
     tagline:
-      "Onboarding twin phones - Turn your ideas into cinematic scenes.",
+      "Onboarding twin phones. Turn your ideas into cinematic scenes.",
     description:
-      "Kova is a dual-phone onboarding marketing hero by SonoJS. Built as a single HTML page with soft pink/violet page wash and two stacked phone frames. Welcome phone loops welcome.mp4 with Turn your ideas into cinematic scenes + Start creating; styles phone loops styles.mp4 with Every scene, styled the way you imagine, Explore styles / Join Kova, and Log in. Demo AI-video chrome only - no render backend. Open index.html or host the folder statically on Cloudflare Workers.",
+      "Kova is a dual-phone onboarding marketing hero by SonoJS. Built as a single HTML page with soft pink/violet page wash and two stacked phone frames. Welcome phone loops welcome.mp4 with Turn your ideas into cinematic scenes + Start creating; styles phone loops styles.mp4 with Every scene, styled the way you imagine, Explore styles / Join Kova, and Log in. Demo AI-video chrome only. No render backend. Open index.html or host the folder statically on Cloudflare Workers.",
     category: "hero",
     stack: ["html", "css", "javascript"],
     priceLabel: "Free",
@@ -5969,7 +5969,7 @@ export const templateProjects: TemplateProject[] = [
     ],
     requirements: [
       "Modern browser (HTML5 video + CSS)",
-      "No build step - open index.html or static-host the folder",
+      "No build step, open index.html or static-host the folder",
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
   },
@@ -5977,9 +5977,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-50",
     title: "Lumora",
     tagline:
-      "Clarity in an Endlessly Noisy Universe - multi-scene video hero.",
+      "Clarity in an Endlessly Noisy Universe, multi-scene video hero.",
     description:
-      "Lumora is a full-viewport focus/clarity marketing hero by SonoJS. Built with Vite, React 19, TypeScript, Tailwind CSS 4, and Lucide. Four switchable looping scenes (Golden Hour, Still Water, Deep Woods, Quiet Dawn) under a bobbing overlay.png, liquid-glass nav (How It Works / Features / Pricing / Community + Get Started), Over 10,000 minds badge, Clarity in an Endlessly Noisy Universe headline (Instrument Serif), email Get Early Access, scene switcher, and stats strip. Demo wellness chrome only - no waitlist backend. Vite build ready for Cloudflare Workers.",
+      "Lumora is a full-viewport focus/clarity marketing hero by SonoJS. Built with Vite, React 19, TypeScript, Tailwind CSS 4, and Lucide. Four switchable looping scenes (Golden Hour, Still Water, Deep Woods, Quiet Dawn) under a bobbing overlay.png, liquid-glass nav (How It Works / Features / Pricing / Community + Get Started), Over 10,000 minds badge, Clarity in an Endlessly Noisy Universe headline (Instrument Serif), email Get Early Access, scene switcher, and stats strip. Demo wellness chrome only. No waitlist backend. Vite build ready for Cloudflare Workers.",
     category: "hero",
     stack: ["react", "vite", "typescript", "tailwind", "lucide"],
     priceLabel: "Free",
@@ -6019,7 +6019,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Vite and fork-ready",
-        body: "Vite 8 + React 19 + TypeScript + Tailwind 4 + Lucide - npm run build to dist/.",
+        body: "Vite 8 + React 19 + TypeScript + Tailwind 4 + Lucide, npm run build to dist/.",
       },
     ],
     includes: [
@@ -6042,9 +6042,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-51",
     title: "Bloom",
     tagline:
-      "AI Plant Design - Innovating the spirit of bloom AI.",
+      "AI Plant Design. Innovating the spirit of bloom AI.",
     description:
-      "Bloom is a full-viewport AI plant-design marketing hero by SonoJS. Built with Vite, React 19, TypeScript, Tailwind CSS 3, and Lucide. Full-bleed looping hero-bg.mp4, liquid-glass left panel with bloom mark, Innovating the spirit of bloom AI headline, Explore Now CTA, Artistic Gallery / AI Generation / 3D Structures pills, VISIONARY DESIGN quote, and a right-rail ecosystem with socials, Processing / Growth Archive cards, and floral sculpting preview. Demo botanical-AI chrome only - no generation backend. Vite build ready for Cloudflare Workers.",
+      "Bloom is a full-viewport AI plant-design marketing hero by SonoJS. Built with Vite, React 19, TypeScript, Tailwind CSS 3, and Lucide. Full-bleed looping hero-bg.mp4, liquid-glass left panel with bloom mark, Innovating the spirit of bloom AI headline, Explore Now CTA, Artistic Gallery / AI Generation / 3D Structures pills, VISIONARY DESIGN quote, and a right-rail ecosystem with socials, Processing / Growth Archive cards, and floral sculpting preview. Demo botanical-AI chrome only. No generation backend. Vite build ready for Cloudflare Workers.",
     category: "hero",
     stack: ["react", "vite", "typescript", "tailwind", "lucide"],
     priceLabel: "Free",
@@ -6084,7 +6084,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Vite and fork-ready",
-        body: "Vite 6 + React 19 + TypeScript + Tailwind 3 + Lucide - npm run build to dist/.",
+        body: "Vite 6 + React 19 + TypeScript + Tailwind 3 + Lucide, npm run build to dist/.",
       },
     ],
     includes: [
@@ -6107,9 +6107,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-52",
     title: "Fastshot",
     tagline:
-      "Describe an app. We'll build it. - prompt card hero with Sonnet chrome.",
+      "Describe an app. We'll build it. prompt card hero with Sonnet chrome.",
     description:
-      "Fastshot is a full-viewport AI app-builder marketing hero by SonoJS. Built as a single HTML page with Inter and a looping assets/hero.mp4 stage. Fastshot nav (Features / Examples / Pricing / Docs + Get Started), Describe an app. We'll build it. headline, prompt card with fintech sample brief, Attach Screens / Attach a Figma / Today's Theme chips, Sonnet 4.5 model pill, and Built by engineers from proof logos. Demo builder chrome only - no generation backend. Open index.html or host the folder statically on Cloudflare Workers.",
+      "Fastshot is a full-viewport AI app-builder marketing hero by SonoJS. Built as a single HTML page with Inter and a looping assets/hero.mp4 stage. Fastshot nav (Features / Examples / Pricing / Docs + Get Started), Describe an app. We'll build it. headline, prompt card with fintech sample brief, Attach Screens / Attach a Figma / Today's Theme chips, Sonnet 4.5 model pill, and Built by engineers from proof logos. Demo builder chrome only. No generation backend. Open index.html or host the folder statically on Cloudflare Workers.",
     category: "hero",
     stack: ["html", "css", "javascript"],
     priceLabel: "Free",
@@ -6158,7 +6158,7 @@ export const templateProjects: TemplateProject[] = [
     ],
     requirements: [
       "Modern browser (HTML5 video + CSS)",
-      "No build step - open index.html or static-host the folder",
+      "No build step, open index.html or static-host the folder",
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
   },
@@ -6166,9 +6166,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-53",
     title: "Heritage Grove",
     tagline:
-      "Full-viewport craft footer - Shop, Heritage, Care & The Letter.",
+      "Full-viewport craft footer. Shop, Heritage, Care & The Letter.",
     description:
-      "Heritage Grove is a full-viewport site-footer marketing piece by SonoJS. Built as a single HTML page with Cormorant Garamond + Poppins over a looping footer-bg.mp4 (poster still). Brand blurb Crafting digital experiences…, Shop / Heritage / Care & Service link columns, The Letter newsletter signup, contact strip, and legal notices on a cream canvas. Demo commerce chrome only - no mail backend. Open index.html or host the folder statically on Cloudflare Workers.",
+      "Heritage Grove is a full-viewport site-footer marketing piece by SonoJS. Built as a single HTML page with Cormorant Garamond + Poppins over a looping footer-bg.mp4 (poster still). Brand blurb Crafting digital experiences…, Shop / Heritage / Care & Service link columns, The Letter newsletter signup, contact strip, and legal notices on a cream canvas. Demo commerce chrome only. No mail backend. Open index.html or host the folder statically on Cloudflare Workers.",
     category: "hero",
     stack: ["html", "css"],
     priceLabel: "Free",
@@ -6218,7 +6218,7 @@ export const templateProjects: TemplateProject[] = [
     ],
     requirements: [
       "Modern browser (HTML5 video + CSS)",
-      "No build step - open index.html or static-host the folder",
+      "No build step, open index.html or static-host the folder",
       "Optional: Cloudflare Workers / Pages for hosting",
     ],
   },
@@ -6226,9 +6226,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-54",
     title: "LinkFlow",
     tagline:
-      "Close the rift linking signals and action - boomerang video hero.",
+      "Close the rift linking signals and action, boomerang video hero.",
     description:
-      "LinkFlow is a full-viewport AI-workflow marketing hero by SonoJS. Built with Vite, React 18, TypeScript, Tailwind CSS 3, and Lucide. Boomerang hero-bg.mp4 stage, LinkFlow™ mark, Purpose / The Process / Tariffs nav with Try it Live, Close the rift linking signals and action headline (Neue Haas), FluxEngine™ bottom pitch, Sign Me Up / Enter chrome, and How we build? play control. Demo integration chrome only - no live connectors. Vite build ready for Cloudflare Workers.",
+      "LinkFlow is a full-viewport AI-workflow marketing hero by SonoJS. Built with Vite, React 18, TypeScript, Tailwind CSS 3, and Lucide. Boomerang hero-bg.mp4 stage, LinkFlow™ mark, Purpose / The Process / Tariffs nav with Try it Live, Close the rift linking signals and action headline (Neue Haas), FluxEngine™ bottom pitch, Sign Me Up / Enter chrome, and How we build? play control. Demo integration chrome only. No live connectors. Vite build ready for Cloudflare Workers.",
     category: "hero",
     stack: ["react", "vite", "typescript", "tailwind", "lucide"],
     priceLabel: "Free",
@@ -6268,7 +6268,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Vite and fork-ready",
-        body: "Vite 5 + React 18 + TypeScript + Tailwind 3 + Lucide - npm run build to dist/.",
+        body: "Vite 5 + React 18 + TypeScript + Tailwind 3 + Lucide, npm run build to dist/.",
       },
     ],
     includes: [
@@ -6291,9 +6291,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-55",
     title: "Cinematic",
     tagline:
-      "Step Through. Work Smarter. - liquid-glass film hero with video stage.",
+      "Step Through. Work Smarter. liquid-glass film hero with video stage.",
     description:
-      "Cinematic is a full-viewport film / streaming marketing hero by SonoJS. Built with Vite, React 19, TypeScript, Tailwind CSS 4, and Lucide. Looping hero-bg.mp4 with bottom blur mask, CINEMATIC mark, Movies / TV Series / Editor's Pick nav with Search and profile glass pills, 8.7/10 IMDB · 132 min · April 2025 meta, Step Through. Work Smarter. headline, Watch Now / Learn More CTAs, and Previous / Next carousel chrome. Demo UI only - no player backend. Vite build ready for Cloudflare Workers.",
+      "Cinematic is a full-viewport film / streaming marketing hero by SonoJS. Built with Vite, React 19, TypeScript, Tailwind CSS 4, and Lucide. Looping hero-bg.mp4 with bottom blur mask, CINEMATIC mark, Movies / TV Series / Editor's Pick nav with Search and profile glass pills, 8.7/10 IMDB · 132 min · April 2025 meta, Step Through. Work Smarter. headline, Watch Now / Learn More CTAs, and Previous / Next carousel chrome. Demo UI only. No player backend. Vite build ready for Cloudflare Workers.",
     category: "hero",
     stack: ["react", "vite", "typescript", "tailwind", "lucide"],
     priceLabel: "Free",
@@ -6333,7 +6333,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Vite and fork-ready",
-        body: "Vite 8 + React 19 + TypeScript + Tailwind 4 + Lucide - npm run build to dist/.",
+        body: "Vite 8 + React 19 + TypeScript + Tailwind 4 + Lucide, npm run build to dist/.",
       },
     ],
     includes: [
@@ -6355,9 +6355,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-56",
     title: "JungleMind",
     tagline:
-      "The thinking engine shaped for what counts. - AI prompt hero on video.",
+      "The thinking engine shaped for what counts. AI prompt hero on video.",
     description:
-      "JungleMind is a full-viewport AI-product marketing hero by SonoJS. Built as a single HTML page with Poppins, local hero.mp4 / hero-poster.webp, and vanilla JS mobile menu. Diamond JungleMind mark, Help / API / Credits / News nav with Request Access, Now · JungleMind 3.0 is here badge, The thinking engine shaped for what counts. headline, and an Ask JungleMind prompt card (attachment, mic, send). Demo UI only - no model backend. Open index.html or host the folder statically on Cloudflare Workers.",
+      "JungleMind is a full-viewport AI-product marketing hero by SonoJS. Built as a single HTML page with Poppins, local hero.mp4 / hero-poster.webp, and vanilla JS mobile menu. Diamond JungleMind mark, Help / API / Credits / News nav with Request Access, Now · JungleMind 3.0 is here badge, The thinking engine shaped for what counts. headline, and an Ask JungleMind prompt card (attachment, mic, send). Demo UI only. No model backend. Open index.html or host the folder statically on Cloudflare Workers.",
     category: "hero",
     stack: ["html", "css", "javascript"],
     priceLabel: "Free",
@@ -6397,7 +6397,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "One index.html plus Poppins woff2, hero.mp4, and poster - deploy anywhere static.",
+        body: "One index.html plus Poppins woff2, hero.mp4, and poster, deploy anywhere static.",
       },
     ],
     includes: [
@@ -6415,9 +6415,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-57",
     title: "Studio",
     tagline:
-      "imagination meets craft - gaze-scrub studio footer hero.",
+      "imagination meets craft, gaze-scrub studio footer hero.",
     description:
-      "Studio is a full-viewport creative-studio footer / closing hero by SonoJS. Built with Next.js 15, React 19, and TypeScript (custom CSS, Epilogue + DM Sans). Pointer-driven footer-scrub.mp4 seeks through a gaze orbit via gaze-frames.json so the eyes follow the cursor on desktop; mobile loops the clip. Columns for have a fresh idea? / imagination meets craft, Made · Story · In the lab · Say hey, and say hey contact with let’s team up! / social icons. Demo studio chrome only - no contact backend. Next.js build ready for Cloudflare Workers.",
+      "Studio is a full-viewport creative-studio footer / closing hero by SonoJS. Built with Next.js 15, React 19, and TypeScript (custom CSS, Epilogue + DM Sans). Pointer-driven footer-scrub.mp4 seeks through a gaze orbit via gaze-frames.json so the eyes follow the cursor on desktop; mobile loops the clip. Columns for have a fresh idea? / imagination meets craft, Made · Story · In the lab · Say hey, and say hey contact with let’s team up! / social icons. Demo studio chrome only. No contact backend. Next.js build ready for Cloudflare Workers.",
     category: "hero",
     stack: ["nextjs", "react", "typescript"],
     priceLabel: "Free",
@@ -6457,7 +6457,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Next.js and fork-ready",
-        body: "Next 15 + React 19 + TypeScript + local DM Sans / Epilogue - npm run build.",
+        body: "Next 15 + React 19 + TypeScript + local DM Sans / Epilogue, npm run build.",
       },
     ],
     includes: [
@@ -6478,9 +6478,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-58",
     title: "Wanderful",
     tagline:
-      "Venture without edges. - parallax travel hero with liquid-glass nav.",
+      "Venture without edges. parallax travel hero with liquid-glass nav.",
     description:
-      "Wanderful is a full-viewport travel / itinerary marketing hero by SonoJS. Built with Vite, React 19, TypeScript, Tailwind CSS 3, GSAP, and Lucide. Looping hero.mp4 with mouse-parallax scale stage, Wanderful™ mark, JOURNEY / BENEFITS / JOURNAL / GUIDEBOOK glass pill nav, GET ROAMING CTA, Venture without edges. / Uncover with keen instinct. headline, Plan my escape today button, and SECURE BY DESIGN lock note. Demo travel chrome only - no booking backend. Vite build ready for Cloudflare Workers.",
+      "Wanderful is a full-viewport travel / itinerary marketing hero by SonoJS. Built with Vite, React 19, TypeScript, Tailwind CSS 3, GSAP, and Lucide. Looping hero.mp4 with mouse-parallax scale stage, Wanderful™ mark, JOURNEY / BENEFITS / JOURNAL / GUIDEBOOK glass pill nav, GET ROAMING CTA, Venture without edges. / Uncover with keen instinct. headline, Plan my escape today button, and SECURE BY DESIGN lock note. Demo travel chrome only. No booking backend. Vite build ready for Cloudflare Workers.",
     category: "hero",
     stack: ["react", "vite", "typescript", "tailwind", "gsap", "lucide"],
     priceLabel: "Free",
@@ -6516,11 +6516,11 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Liquid-glass chrome",
-        body: "Wanderful™ mark, JOURNEY–GUIDEBOOK pill nav, GET ROAMING, and secure lock note.",
+        body: "Wanderful™ mark, JOURNEY-GUIDEBOOK pill nav, GET ROAMING, and secure lock note.",
       },
       {
         title: "Vite and fork-ready",
-        body: "Vite 8 + React 19 + TypeScript + Tailwind 3 + GSAP + Lucide - npm run build to dist/.",
+        body: "Vite 8 + React 19 + TypeScript + Tailwind 3 + GSAP + Lucide, npm run build to dist/.",
       },
     ],
     includes: [
@@ -6543,9 +6543,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-59",
     title: "Fluxora",
     tagline:
-      "Technology Crafted for All Not Machines - flame video hero.",
+      "Technology Crafted for All Not Machines, flame video hero.",
     description:
-      "Fluxora is a full-viewport product / agency marketing hero by SonoJS. Built with Vite, React 19, and plain CSS (no Tailwind). Looping hero-loop.mp4 stage with scrim and rule lines, Fluxora mark, Features / How It Works / About pill nav with Get Started, Hub support peoples from all over the world note, Technology Crafted for All Not Machines headline, Get started flame CTA, 650+ Happy Clients proof, 150+ / 98% stats, and a partner / bar chart side panel. Demo UI only - no product backend. Vite build ready for Cloudflare Workers.",
+      "Fluxora is a full-viewport product / agency marketing hero by SonoJS. Built with Vite, React 19, and plain CSS (no Tailwind). Looping hero-loop.mp4 stage with scrim and rule lines, Fluxora mark, Features / How It Works / About pill nav with Get Started, Hub support peoples from all over the world note, Technology Crafted for All Not Machines headline, Get started flame CTA, 650+ Happy Clients proof, 150+ / 98% stats, and a partner / bar chart side panel. Demo UI only. No product backend. Vite build ready for Cloudflare Workers.",
     category: "hero",
     stack: ["react", "vite", "javascript", "css"],
     priceLabel: "Free",
@@ -6585,7 +6585,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Vite and fork-ready",
-        body: "Vite 8 + React 19 + plain CSS modules - npm run build to dist/.",
+        body: "Vite 8 + React 19 + plain CSS modules, npm run build to dist/.",
       },
     ],
     includes: [
@@ -6604,9 +6604,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-60",
     title: "Foldcraft",
     tagline:
-      "Shaping visual narratives, one pixel at a time. - studio video hero.",
+      "Shaping visual narratives, one pixel at a time. studio video hero.",
     description:
-      "Foldcraft is a full-viewport brand / studio marketing hero by SonoJS. Built with Vite, React 19, Tailwind CSS 4, and Lucide. Looping hero.mp4 stage, Foldcraft mark, Home / Projects / Studio / Reach Us nav with Let's Talk, Brand & Visual Storytelling kicker, Shaping visual narratives, one pixel at a time. headline, craft/motion pitch, and Explore Work CTA. Mobile full-screen menu. Demo studio chrome only - no contact backend. Vite build ready for Cloudflare Workers.",
+      "Foldcraft is a full-viewport brand / studio marketing hero by SonoJS. Built with Vite, React 19, Tailwind CSS 4, and Lucide. Looping hero.mp4 stage, Foldcraft mark, Home / Projects / Studio / Reach Us nav with Let's Talk, Brand & Visual Storytelling kicker, Shaping visual narratives, one pixel at a time. headline, craft/motion pitch, and Explore Work CTA. Mobile full-screen menu. Demo studio chrome only. No contact backend. Vite build ready for Cloudflare Workers.",
     category: "hero",
     stack: ["react", "vite", "javascript", "tailwind", "lucide"],
     priceLabel: "Free",
@@ -6646,7 +6646,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Vite and fork-ready",
-        body: "Vite 8 + React 19 + Tailwind 4 + Lucide - npm run build to dist/.",
+        body: "Vite 8 + React 19 + Tailwind 4 + Lucide, npm run build to dist/.",
       },
     ],
     includes: [
@@ -6668,9 +6668,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-61",
     title: "Lumina",
     tagline:
-      "See the world with luminous focus - video stage + liquid-glass footer.",
+      "See the world with luminous focus, video stage + liquid-glass footer.",
     description:
-      "Lumina is a full-viewport editorial / media marketing hero by SonoJS. Built with Vite, React 19, TypeScript, Tailwind CSS 4, Motion, and Lucide. Fixed looping background.mp4, Clarity for curious minds kicker, See the world with luminous focus headline, Explore Lumina CTA, and a rising liquid-glass LUMINA footer with Discover / The Mission / Concierge columns plus social icons. Demo media chrome only - no CMS backend. Vite build ready for Cloudflare Workers.",
+      "Lumina is a full-viewport editorial / media marketing hero by SonoJS. Built with Vite, React 19, TypeScript, Tailwind CSS 4, Motion, and Lucide. Fixed looping background.mp4, Clarity for curious minds kicker, See the world with luminous focus headline, Explore Lumina CTA, and a rising liquid-glass LUMINA footer with Discover / The Mission / Concierge columns plus social icons. Demo media chrome only. No CMS backend. Vite build ready for Cloudflare Workers.",
     category: "hero",
     stack: ["react", "vite", "typescript", "tailwind", "lucide"],
     priceLabel: "Free",
@@ -6710,7 +6710,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Vite and fork-ready",
-        body: "Vite 8 + React 19 + TypeScript + Tailwind 4 + Motion + Lucide - npm run build to dist/.",
+        body: "Vite 8 + React 19 + TypeScript + Tailwind 4 + Motion + Lucide, npm run build to dist/.",
       },
     ],
     includes: [
@@ -6735,7 +6735,7 @@ export const templateProjects: TemplateProject[] = [
     tagline:
       "The most powerful AI ever deployed in talent acquisition.",
     description:
-      "Power AI is a full-viewport AI talent-acquisition marketing hero by SonoJS. Built with Vite, React 19, TypeScript, Tailwind CSS 4, Lucide, and Geist / General Sans. Soft-fade hero-bg.mp4 stage (crossfade restart), Power AI logo nav with Features / Solutions / Plans / Learning and Sign Up, oversized Power + gradient AI headline, The most powerful AI ever deployed in talent acquisition subcopy, Schedule a Consult CTA, and a bottom LogoMarquee of partner marks. Demo AI chrome only - no hiring backend. Vite build ready for Cloudflare Workers.",
+      "Power AI is a full-viewport AI talent-acquisition marketing hero by SonoJS. Built with Vite, React 19, TypeScript, Tailwind CSS 4, Lucide, and Geist / General Sans. Soft-fade hero-bg.mp4 stage (crossfade restart), Power AI logo nav with Features / Solutions / Plans / Learning and Sign Up, oversized Power + gradient AI headline, The most powerful AI ever deployed in talent acquisition subcopy, Schedule a Consult CTA, and a bottom LogoMarquee of partner marks. Demo AI chrome only. No hiring backend. Vite build ready for Cloudflare Workers.",
     category: "hero",
     stack: ["react", "vite", "typescript", "tailwind", "lucide"],
     priceLabel: "Free",
@@ -6775,7 +6775,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Vite and fork-ready",
-        body: "Vite 8 + React 19 + TypeScript + Tailwind 4 + Lucide - npm run build to dist/.",
+        body: "Vite 8 + React 19 + TypeScript + Tailwind 4 + Lucide, npm run build to dist/.",
       },
     ],
     includes: [
@@ -6797,9 +6797,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-63",
     title: "Phototropism",
     tagline:
-      "Everything here leans toward you. - scroll meadow canvas hero.",
+      "Everything here leans toward you. scroll meadow canvas hero.",
     description:
-      "Phototropism is a full-viewport interactive meadow marketing hero by SonoJS. Built with Vite, React 19, TypeScript, GSAP ScrollTrigger, Lenis, and Instrument Serif / Inter / IBM Plex Mono. A canvas 2D meadow (daisies, tulips, bells, dandelions) leans toward pointer light while scroll drives time-of-day from dawn to night. Headline Everything here leans toward you. with letter anchors plants grow toward, planted counter, and clock readout. prefers-reduced-motion softens the motion. Demo UI only - no backend. Vite build ready for Cloudflare Workers.",
+      "Phototropism is a full-viewport interactive meadow marketing hero by SonoJS. Built with Vite, React 19, TypeScript, GSAP ScrollTrigger, Lenis, and Instrument Serif / Inter / IBM Plex Mono. A canvas 2D meadow (daisies, tulips, bells, dandelions) leans toward pointer light while scroll drives time-of-day from dawn to night. Headline Everything here leans toward you. with letter anchors plants grow toward, planted counter, and clock readout. prefers-reduced-motion softens the motion. Demo UI only. No backend. Vite build ready for Cloudflare Workers.",
     category: "hero",
     stack: ["react", "vite", "typescript", "gsap", "css"],
     priceLabel: "Free",
@@ -6839,7 +6839,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Vite and fork-ready",
-        body: "Vite 7 + React 19 + TypeScript + GSAP + Lenis - npm run build to dist/.",
+        body: "Vite 7 + React 19 + TypeScript + GSAP + Lenis, npm run build to dist/.",
       },
     ],
     includes: [
@@ -6860,9 +6860,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-64",
     title: "Visor",
     tagline:
-      "FUTURE VISION - cinematic VR product hero with synced video and cards.",
+      "FUTURE VISION, cinematic VR product hero with synced video and cards.",
     description:
-      "Visor is a VR product marketing hero by SonoJS (demo brand: Visor / Visor Vision X1). Built with Vite 6, React 19, TypeScript, Tailwind CSS 4, Motion, and Lucide. A 16:9 cinematic frame plays dual-synced hero.mp4 with oversized FUTURE VISION type, play/pause chrome, and hover hotspots. Below: a Buy Now $600 pill and three feature cards (empowering businesses, Discover Advanced VR Innovation, reviews) that open buy / get-started / learn-more / reviews modals. Navbar Explore–About. Demo product chrome only - no checkout backend. Vite build ready for Cloudflare Workers.",
+      "Visor is a VR product marketing hero by SonoJS (demo brand: Visor / Visor Vision X1). Built with Vite 6, React 19, TypeScript, Tailwind CSS 4, Motion, and Lucide. A 16:9 cinematic frame plays dual-synced hero.mp4 with oversized FUTURE VISION type, play/pause chrome, and hover hotspots. Below: a Buy Now $600 pill and three feature cards (empowering businesses, Discover Advanced VR Innovation, reviews) that open buy / get-started / learn-more / reviews modals. Navbar Explore-About. Demo product chrome only. No checkout backend. Vite build ready for Cloudflare Workers.",
     category: "hero",
     stack: ["react", "vite", "typescript", "tailwind", "lucide"],
     priceLabel: "Free",
@@ -6898,11 +6898,11 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Modal flows",
-        body: "Buy, get started, learn more, and reviews dialogs - demo alerts only.",
+        body: "Buy, get started, learn more, and reviews dialogs, demo alerts only.",
       },
       {
         title: "Vite and fork-ready",
-        body: "Vite 6 + React 19 + Tailwind 4 + Motion + Lucide - npm run build to dist/.",
+        body: "Vite 6 + React 19 + Tailwind 4 + Motion + Lucide, npm run build to dist/.",
       },
     ],
     includes: [
@@ -6923,9 +6923,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-65",
     title: "Monsoon",
     tagline:
-      "Weather any storm - full-bleed video hero with glass nav and CTAs.",
+      "Weather any storm, full-bleed video hero with glass nav and CTAs.",
     description:
-      "Monsoon is a resilient-ops marketing hero by SonoJS (demo brand: Monsoon). Built with Vite 8, React 19, TypeScript, Tailwind CSS 4, Framer Motion, and Inter Variable. Full-viewport looping hero.mp4 with soft overlays, floating glass pill nav (Product–Contact), eyebrow For teams that never stop, headline Weather any storm, short product subcopy, Get Started / See Plans CTAs, and a Trusted by teams at sponsor strip (Northwind, Vantage, Kestrel, Meridian, Sonaris). Demo chrome only - no signup backend. Vite build ready for Cloudflare Workers.",
+      "Monsoon is a resilient-ops marketing hero by SonoJS (demo brand: Monsoon). Built with Vite 8, React 19, TypeScript, Tailwind CSS 4, Framer Motion, and Inter Variable. Full-viewport looping hero.mp4 with soft overlays, floating glass pill nav (Product-Contact), eyebrow For teams that never stop, headline Weather any storm, short product subcopy, Get Started / See Plans CTAs, and a Trusted by teams at sponsor strip (Northwind, Vantage, Kestrel, Meridian, Sonaris). Demo chrome only. No signup backend. Vite build ready for Cloudflare Workers.",
     category: "hero",
     stack: ["react", "vite", "typescript", "tailwind"],
     priceLabel: "Free",
@@ -6957,7 +6957,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Glass pill nav",
-        body: "Fixed frosted Monsoon nav with Product–Contact links over the video.",
+        body: "Fixed frosted Monsoon nav with Product-Contact links over the video.",
       },
       {
         title: "CTAs + sponsors",
@@ -6965,7 +6965,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Vite and fork-ready",
-        body: "Vite 8 + React 19 + Tailwind 4 + Framer Motion - npm run build to dist/.",
+        body: "Vite 8 + React 19 + Tailwind 4 + Framer Motion, npm run build to dist/.",
       },
     ],
     includes: [
@@ -6986,9 +6986,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-66",
     title: "Aurora",
     tagline:
-      "Design That Lights the Way - left-aligned video hero with social strip.",
+      "Design That Lights the Way, left-aligned video hero with social strip.",
     description:
-      "Aurora is a brand-design marketing hero by SonoJS (demo brand: Aurora). Built with Vite 8, React 19, TypeScript, Tailwind CSS 4, Framer Motion, Plus Jakarta Sans, and Inter. Full-viewport looping hero.mp4 with soft overlays and a green ambient glow. Left-anchored copy: trusted-by avatar pill, headline Design That Lights the Way, short brand subcopy, Get Started CTA plus play button, and bottom social icons (X, LinkedIn, Instagram). Fixed top nav with Product–Contact links and Contact Us pill. Demo chrome only - no signup backend. Vite build ready for Cloudflare Workers.",
+      "Aurora is a brand-design marketing hero by SonoJS (demo brand: Aurora). Built with Vite 8, React 19, TypeScript, Tailwind CSS 4, Framer Motion, Plus Jakarta Sans, and Inter. Full-viewport looping hero.mp4 with soft overlays and a green ambient glow. Left-anchored copy: trusted-by avatar pill, headline Design That Lights the Way, short brand subcopy, Get Started CTA plus play button, and bottom social icons (X, LinkedIn, Instagram). Fixed top nav with Product-Contact links and Contact Us pill. Demo chrome only. No signup backend. Vite build ready for Cloudflare Workers.",
     category: "hero",
     stack: ["react", "vite", "typescript", "tailwind"],
     priceLabel: "Free",
@@ -7024,11 +7024,11 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Nav + social strip",
-        body: "Fixed Product–Contact nav with Contact Us pill and bottom social icons.",
+        body: "Fixed Product-Contact nav with Contact Us pill and bottom social icons.",
       },
       {
         title: "Vite and fork-ready",
-        body: "Vite 8 + React 19 + Tailwind 4 + Framer Motion - npm run build to dist/.",
+        body: "Vite 8 + React 19 + Tailwind 4 + Framer Motion, npm run build to dist/.",
       },
     ],
     includes: [
@@ -7050,9 +7050,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-67",
     title: "Glacier",
     tagline:
-      "Frozen In Time - centered exhibition hero with Playfair lockup.",
+      "Frozen In Time, centered exhibition hero with Playfair lockup.",
     description:
-      "Glacier is an exhibition / editorial marketing hero by SonoJS (demo brand: Glacier). Built with Vite 8, React 19, TypeScript, Tailwind CSS 4, Framer Motion, Playfair Display, and Inter. Full-viewport looping hero.mp4 with soft overlays, centered Glacier Presents mark, stacked Frozen / In Time Playfair headline, italic journey subcopy, oval Enter Exhibit CTA, bottom footer with socials, Privacy / Terms, and Scroll To Navigate. Compact icon dock nav (home, tasks, calendar, goals). Demo chrome only - no exhibit backend. Vite build ready for Cloudflare Workers.",
+      "Glacier is an exhibition / editorial marketing hero by SonoJS (demo brand: Glacier). Built with Vite 8, React 19, TypeScript, Tailwind CSS 4, Framer Motion, Playfair Display, and Inter. Full-viewport looping hero.mp4 with soft overlays, centered Glacier Presents mark, stacked Frozen / In Time Playfair headline, italic journey subcopy, oval Enter Exhibit CTA, bottom footer with socials, Privacy / Terms, and Scroll To Navigate. Compact icon dock nav (home, tasks, calendar, goals). Demo chrome only. No exhibit backend. Vite build ready for Cloudflare Workers.",
     category: "hero",
     stack: ["react", "vite", "typescript", "tailwind"],
     priceLabel: "Free",
@@ -7092,7 +7092,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Vite and fork-ready",
-        body: "Vite 8 + React 19 + Tailwind 4 + Framer Motion - npm run build to dist/.",
+        body: "Vite 8 + React 19 + Tailwind 4 + Framer Motion, npm run build to dist/.",
       },
     ],
     includes: [
@@ -7114,9 +7114,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-landing-13",
     title: "Asme",
     tagline:
-      "Know it then all. - multi-section studio landing with video chapters.",
+      "Know it then all. multi-section studio landing with video chapters.",
     description:
-      "Asme is a full-page studio marketing landing by SonoJS. Built with Vite, React 19, TypeScript, Tailwind CSS 4, Framer Motion, and Lucide. Faded hero.mp4 with Know it then all. Instrument Serif headline, newsletter glass pill, Manifesto CTA, About Us (Pioneering ideas…), featured video chapter, Innovation x Vision philosophy reel, and Research & Insight / Design & Execution service cards with looping MP4s. Demo studio chrome only - no newsletter backend. Vite build ready for Cloudflare Workers.",
+      "Asme is a full-page studio marketing landing by SonoJS. Built with Vite, React 19, TypeScript, Tailwind CSS 4, Framer Motion, and Lucide. Faded hero.mp4 with Know it then all. Instrument Serif headline, newsletter glass pill, Manifesto CTA, About Us (Pioneering ideas…), featured video chapter, Innovation x Vision philosophy reel, and Research & Insight / Design & Execution service cards with looping MP4s. Demo studio chrome only. No newsletter backend. Vite build ready for Cloudflare Workers.",
     category: "landing",
     stack: ["react", "vite", "typescript", "tailwind", "lucide"],
     priceLabel: "Free",
@@ -7156,7 +7156,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Vite and fork-ready",
-        body: "Vite 8 + React 19 + TypeScript + Tailwind 4 + Lucide + Framer Motion - npm run build to dist/.",
+        body: "Vite 8 + React 19 + TypeScript + Tailwind 4 + Lucide + Framer Motion, npm run build to dist/.",
       },
     ],
     includes: [
@@ -7179,9 +7179,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-landing-14",
     title: "Selene",
     tagline:
-      "EARTHRISE - concept lunar expedition landing with parallax layers.",
+      "EARTHRISE, concept lunar expedition landing with parallax layers.",
     description:
-      "Selene is a concept lunar-expedition marketing landing by SonoJS. Built with Vite, React 19, TypeScript, Tailwind CSS 4, and Lenis smooth scroll. SELENE wordmark, EARTHRISE parallax hero (sky / earth / moonscape / astronaut / ground / frame layers for desktop and mobile), Mission log (Launch → First steps), scroll-drawn 384,400 km Trajectory, Orbiter / Lander / Resident mission cards, and Reserve countdown to a concept launch window. Demo expedition chrome only - no booking backend. Vite build ready for Cloudflare Workers.",
+      "Selene is a concept lunar-expedition marketing landing by SonoJS. Built with Vite, React 19, TypeScript, Tailwind CSS 4, and Lenis smooth scroll. SELENE wordmark, EARTHRISE parallax hero (sky / earth / moonscape / astronaut / ground / frame layers for desktop and mobile), Mission log (Launch → First steps), scroll-drawn 384,400 km Trajectory, Orbiter / Lander / Resident mission cards, and Reserve countdown to a concept launch window. Demo expedition chrome only. No booking backend. Vite build ready for Cloudflare Workers.",
     category: "landing",
     stack: ["react", "vite", "typescript", "tailwind"],
     priceLabel: "Free",
@@ -7221,7 +7221,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Vite and fork-ready",
-        body: "Vite 6 + React 19 + TypeScript + Tailwind 4 + Lenis - npm run build to dist/.",
+        body: "Vite 6 + React 19 + TypeScript + Tailwind 4 + Lenis, npm run build to dist/.",
       },
     ],
     includes: [
@@ -7243,9 +7243,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-landing-15",
     title: "Kollektiva",
     tagline:
-      "The talent you build with each day - portrait team carousel landing.",
+      "The talent you build with each day, portrait team carousel landing.",
     description:
-      "Kollektiva is a studio talent marketing landing by SonoJS. Built with Vite, React 18, TypeScript, and Tailwind CSS 3. Full-viewport portrait carousel for eight creatives (Andrei Baranov, Daria Lebedeva, Ivan Sorokin, Anna Fedorova, Pavel Smirnov, Olga Kravtsova, Igor Zakharenko, Ksenia Romanova) with role labels, bio copy, and avatar strip controls. Headline: Kollektiva is the talent you build with each day. Demo studio chrome only - no hiring backend. Vite build ready for Cloudflare Workers.",
+      "Kollektiva is a studio talent marketing landing by SonoJS. Built with Vite, React 18, TypeScript, and Tailwind CSS 3. Full-viewport portrait carousel for eight creatives (Andrei Baranov, Daria Lebedeva, Ivan Sorokin, Anna Fedorova, Pavel Smirnov, Olga Kravtsova, Igor Zakharenko, Ksenia Romanova) with role labels, bio copy, and avatar strip controls. Headline: Kollektiva is the talent you build with each day. Demo studio chrome only. No hiring backend. Vite build ready for Cloudflare Workers.",
     category: "landing",
     stack: ["react", "vite", "typescript", "tailwind"],
     priceLabel: "Free",
@@ -7285,7 +7285,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Vite and fork-ready",
-        body: "Vite 8 + React 18 + TypeScript + Tailwind 3 - npm run build to dist/.",
+        body: "Vite 8 + React 18 + TypeScript + Tailwind 3, npm run build to dist/.",
       },
     ],
     includes: [
@@ -7305,9 +7305,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-landing-16",
     title: "Altura",
     tagline:
-      "Architect-led homes on the California coast - layered hero + tour scrub.",
+      "Architect-led homes on the California coast, layered hero + tour scrub.",
     description:
-      "Altura is a luxury coastal residences landing by SonoJS. Built as static HTML, CSS, and vanilla JavaScript - no framework or build step. Layered dusk hero with giant altura wordmark behind house-fg.webp, refractive glass nav (Residences / Buy / Rent / Sell with us / Journal), Villas · Penthouses · Estates tags, Casa Pietra featured card ($11.85M, Laguna Beach), and a 421-frame scroll-scrub walkthrough through eight rooms ending in Book a private viewing. Serve with a static server so tour frames load. Demo real-estate chrome only - no booking backend. Host on Cloudflare Workers.",
+      "Altura is a luxury coastal residences landing by SonoJS. Built as static HTML, CSS, and vanilla JavaScript. No framework or build step. Layered dusk hero with giant altura wordmark behind house-fg.webp, refractive glass nav (Residences / Buy / Rent / Sell with us / Journal), Villas · Penthouses · Estates tags, Casa Pietra featured card ($11.85M, Laguna Beach), and a 421-frame scroll-scrub walkthrough through eight rooms ending in Book a private viewing. Serve with a static server so tour frames load. Demo real-estate chrome only. No booking backend. Host on Cloudflare Workers.",
     category: "landing",
     stack: ["html", "css", "javascript"],
     priceLabel: "Free",
@@ -7348,7 +7348,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "index.html + css/ + js/ + assets/ - serve locally with npx serve (do not open file://).",
+        body: "index.html + css/ + js/ + assets/, serve locally with npx serve over HTTP.",
       },
     ],
     includes: [
@@ -7367,9 +7367,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-landing-17",
     title: "Mercury",
     tagline:
-      "Radically different banking - fintech landing with scrub hero and product grids.",
+      "Radically different banking, fintech landing with scrub hero and product grids.",
     description:
-      "Mercury is a multi-section online business banking landing by SonoJS (demo brand: Mercury). Built with Vite 7, Tailwind CSS 4, vanilla JavaScript, Arcadia + Tiempos Headline + IBM Plex Mono. Announcement bar for Agent Controls, sticky header with Products–Pricing and Open account, full-bleed responsive hero video scrub (lg/md/sm) with Radically different banking, email capture, Launch demo, and FDIC disclaimer. Product cards (banking, cards, payments, accounting), logo cloud, Linear / Gainful testimonials, accordion feature split, get-started media cards, stats, security, press grid, business/personal CTAs, and footer. Demo fintech chrome only - no account backend. Vite build ready for Cloudflare Workers.",
+      "Mercury is a multi-section online business banking landing by SonoJS (demo brand: Mercury). Built with Vite 7, Tailwind CSS 4, vanilla JavaScript, Arcadia + Tiempos Headline + IBM Plex Mono. Announcement bar for Agent Controls, sticky header with Products-Pricing and Open account, full-bleed responsive hero video scrub (lg/md/sm) with Radically different banking, email capture, Launch demo, and FDIC disclaimer. Product cards (banking, cards, payments, accounting), logo cloud, Linear / Gainful testimonials, accordion feature split, get-started media cards, stats, security, press grid, business/personal CTAs, and footer. Demo fintech chrome only. No account backend. Vite build ready for Cloudflare Workers.",
     category: "landing",
     stack: ["vite", "html", "css", "javascript", "tailwind"],
     priceLabel: "Free",
@@ -7410,7 +7410,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Vite and fork-ready",
-        body: "Vite 7 + Tailwind 4 + vanilla JS - npm run build to dist/ for Workers.",
+        body: "Vite 7 + Tailwind 4 + vanilla JS, npm run build to dist/ for Workers.",
       },
     ],
     includes: [
@@ -7430,9 +7430,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-landing-18",
     title: "Dala",
     tagline:
-      "Unlock collective wisdom. - AI workplace search landing with WebGL.",
+      "Unlock collective wisdom. AI workplace search landing with WebGL.",
     description:
-      "Dala is a dark, motion-heavy AI workplace-search marketing landing by SonoJS (demo brand: Dala). Packaged with Vite 8 + Wrangler for local/Workers hosting; original CSS, vendor JS, and WebGL canvas stay under public/. Site loader (Your workplace has the answer. Ask Dala to find it.), sticky header with Manifesto / Team / Blog / Request Access, split-text manifesto chapters, team portrait slider (Haroun, Poppy, Joel), Build with us careers blurb, investors strip with WebGL pyramid accents, cookie notice, and footer CTA. Demo product chrome only - no waitlist backend. Vite build ready for Cloudflare Workers.",
+      "Dala is a dark, motion-heavy AI workplace-search marketing landing by SonoJS (demo brand: Dala). Packaged with Vite 8 + Wrangler for local/Workers hosting; original CSS, vendor JS, and WebGL canvas stay under public/. Site loader (Your workplace has the answer. Ask Dala to find it.), sticky header with Manifesto / Team / Blog / Request Access, split-text manifesto chapters, team portrait slider (Haroun, Poppy, Joel), Build with us careers blurb, investors strip with WebGL pyramid accents, cookie notice, and footer CTA. Demo product chrome only. No waitlist backend. Vite build ready for Cloudflare Workers.",
     category: "landing",
     stack: ["vite", "html", "css", "javascript", "gsap", "threejs"],
     priceLabel: "Free",
@@ -7473,7 +7473,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Vite and fork-ready",
-        body: "Vite 8 + Wrangler - self-hosted CSS/JS/assets, npm run build to dist/.",
+        body: "Vite 8 + Wrangler, self-hosted CSS/JS/assets, npm run build to dist/.",
       },
     ],
     includes: [
@@ -7493,9 +7493,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-saas-10",
     title: "North Form",
     tagline:
-      "Independent creative studio - identity, motion, and digital systems.",
+      "Independent creative studio, identity, motion, and digital systems.",
     description:
-      "North Form is a dark editorial creative-studio marketing site by SonoJS (demo brand: NORTH/FORM). Self-contained HTML with inline CSS/JS plus local image and video assets. Hero We build visual systems where identity, motion, image and digital become one language., selected work (Silent Geometry, Outer State, Still Moving, Future Matter), art direction / identity / digital services, Ways to Work Together plans, archive collaborations with hover previews, cinematic CTA, FAQ, and contact form. Demo studio chrome only - no CRM backend. Run with npx --yes serve . or host statically on Cloudflare Workers.",
+      "North Form is a dark editorial creative-studio marketing site by SonoJS (demo brand: NORTH/FORM). Self-contained HTML with inline CSS/JS plus local image and video assets. Hero We build visual systems where identity, motion, image and digital become one language. selected work (Silent Geometry, Outer State, Still Moving, Future Matter), art direction / identity / digital services, Ways to Work Together plans, archive collaborations with hover previews, cinematic CTA, FAQ, and contact form. Demo studio chrome only. No CRM backend. Run with npx --yes serve . or host statically on Cloudflare Workers.",
     category: "saas",
     stack: ["html", "css", "javascript"],
     priceLabel: "Free",
@@ -7536,7 +7536,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "npx --yes serve . for local preview - one index.html + assets/.",
+        body: "npx --yes serve . for local preview, one index.html + assets/.",
       },
     ],
     includes: [
@@ -7554,9 +7554,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-saas-11",
     title: "Fluxora",
     tagline:
-      "AI product platform - deploy, automate, and scale with human-centered design.",
+      "AI product platform, deploy, automate, and scale with human-centered design.",
     description:
-      "Fluxora is a dark AI-infrastructure marketing site by SonoJS (demo brand: Fluxora). Zero-build static HTML with Tailwind CDN, local CSS/JS, Chart.js, Iconify, and Unicorn Studio background. Hero Powering the next wave of AI-driven products with Start Free / Watch demo, product-team social proof, deploy-config preview, delivery stats, Custom AI Agents + Adaptive Automations, marquee testimonials, ACR Candle Pro trading-indicator showcase, Auden problem/solution + Auden 2.0 mentorship CTA, and platform footer. Demo product chrome only - no auth or billing backend. Run with npx --yes serve . or host statically on Cloudflare Workers.",
+      "Fluxora is a dark AI-infrastructure marketing site by SonoJS (demo brand: Fluxora). Zero-build static HTML with Tailwind CDN, local CSS/JS, Chart.js, Iconify, and Unicorn Studio background. Hero Powering the next wave of AI-driven products with Start Free / Watch demo, product-team social proof, deploy-config preview, delivery stats, Custom AI Agents + Adaptive Automations, marquee testimonials, ACR Candle Pro trading-indicator showcase, Auden problem/solution + Auden 2.0 mentorship CTA, and platform footer. Demo product chrome only. No auth or billing backend. Run with npx --yes serve . or host statically on Cloudflare Workers.",
     category: "saas",
     stack: ["html", "css", "javascript"],
     priceLabel: "Free",
@@ -7597,7 +7597,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "npx --yes serve . - Tailwind CDN, Chart.js, Iconify, Unicorn Studio vendor.",
+        body: "npx --yes serve . Tailwind CDN, Chart.js, Iconify, Unicorn Studio vendor.",
       },
     ],
     includes: [
@@ -7616,9 +7616,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-saas-12",
     title: "Designer Studio",
     tagline:
-      "Designing at the pixel level - award-winning web design studio site.",
+      "Designing at the pixel level, award-winning web design studio site.",
     description:
-      "Designer Studio is a dark, precision-focused design-studio marketing site by SonoJS (demo brand: Designer Studio / Pixel Engineered). Zero-build static HTML with local Tailwind, Inter + JetBrains Mono fonts, Iconify/Solar icons, GSAP ScrollTrigger, and a WebGL ambient canvas. Hero Designing at the pixel level with Available for projects badge, View portfolio / Get in touch CTAs, Precision / 60fps / Zero Compromise metrics, Selected Works grid (Fintech, E-Commerce, AI Dashboard, Creative Agency), Discovery → Design → Development process, philosophy manifesto, and Studio footer status. Demo studio chrome only - no CRM backend. Run with npx --yes serve . or host statically on Cloudflare Workers.",
+      "Designer Studio is a dark, precision-focused design-studio marketing site by SonoJS (demo brand: Designer Studio / Pixel Engineered). Zero-build static HTML with local Tailwind, Inter + JetBrains Mono fonts, Iconify/Solar icons, GSAP ScrollTrigger, and a WebGL ambient canvas. Hero Designing at the pixel level with Available for projects badge, View portfolio / Get in touch CTAs, Precision / 60fps / Zero Compromise metrics, Selected Works grid (Fintech, E-Commerce, AI Dashboard, Creative Agency), Discovery → Design → Development process, philosophy manifesto, and Studio footer status. Demo studio chrome only. No CRM backend. Run with npx --yes serve . or host statically on Cloudflare Workers.",
     category: "saas",
     stack: ["html", "css", "javascript", "gsap"],
     priceLabel: "Free",
@@ -7659,11 +7659,11 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "npx --yes serve . - local Tailwind, GSAP, fonts, and Iconify vendor.",
+        body: "npx --yes serve . local Tailwind, GSAP, fonts, and Iconify vendor.",
       },
     ],
     includes: [
-      "index.html (Designer Studio — Pixel Engineered)",
+      "index.html (Designer Studio. Pixel Engineered)",
       "fonts/fonts.css + Inter / JetBrains Mono woff2",
       "vendor/ tailwindcss.js, gsap, ScrollTrigger, iconify, solar-icons",
     ],
@@ -7676,9 +7676,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-saas-13",
     title: "AI Automation Agency",
     tagline:
-      "Automate with AI agents - agency site for custom workflows and tooling.",
+      "Automate with AI agents, agency site for custom workflows and tooling.",
     description:
-      "AI Automation Agency is a dark glassmorphism AI-agency marketing site by SonoJS (demo brand: AI Automation Agency). Zero-build static HTML with local Tailwind, Lucide, Iconify, site CSS, bundled fonts, and Unicorn Studio background. Hero Automate with AI agents with Book a free audit / View our work, trusted-by strip, Ingest → Transform → Deliver pipeline chrome (Kafka / Postgres / agent latency), Lead Qualification and Custom Workflows cards, Connect all your tools integrations chapter with agent trigger API preview, expert marketplace cards (Sales Automation, Support Agents), and Ready to automate CTA plus product/resources footer. Demo agency chrome only - no booking backend. Run with npx --yes serve . or host statically on Cloudflare Workers.",
+      "AI Automation Agency is a dark glassmorphism AI-agency marketing site by SonoJS (demo brand: AI Automation Agency). Zero-build static HTML with local Tailwind, Lucide, Iconify, site CSS, bundled fonts, and Unicorn Studio background. Hero Automate with AI agents with Book a free audit / View our work, trusted-by strip, Ingest → Transform → Deliver pipeline chrome (Kafka / Postgres / agent latency), Lead Qualification and Custom Workflows cards, Connect all your tools integrations chapter with agent trigger API preview, expert marketplace cards (Sales Automation, Support Agents), and Ready to automate CTA plus product/resources footer. Demo agency chrome only. No booking backend. Run with npx --yes serve . or host statically on Cloudflare Workers.",
     category: "saas",
     stack: ["html", "css", "javascript", "lucide"],
     priceLabel: "Free",
@@ -7719,7 +7719,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "npx --yes serve . - local Tailwind, Lucide, Iconify, fonts, Unicorn Studio.",
+        body: "npx --yes serve . local Tailwind, Lucide, Iconify, fonts, Unicorn Studio.",
       },
     ],
     includes: [
@@ -7737,9 +7737,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-portfolio-06",
     title: "BTI",
     tagline:
-      "Leadership is changing. Are you? - Blue Thinking International portfolio.",
+      "Leadership is changing. Are you?. Blue Thinking International portfolio.",
     description:
-      "BTI is a dark editorial leadership-firm portfolio by SonoJS (demo brand: Blue Thinking International). Zero-build static HTML with local Tailwind, Almarai + Instrument Serif fonts, and a looping hero.mp4 stage. Hero Leadership is changing. Are you? with Discover Our Approach CTA, Our Conviction / Founders / Services / Approach / Impact / Contact nav, Leadership Team portraits (Bruno Raynal and partners), Integral Leadership Programs & Coaching Certification chapter, impact/contact close, and BTI footer. Demo consulting chrome only - no CRM backend. Run with npx --yes serve . or host statically on Cloudflare Workers. Live Workers demo may still show Hello world until redeployed.",
+      "BTI is a dark editorial leadership-firm portfolio by SonoJS (demo brand: Blue Thinking International). Zero-build static HTML with local Tailwind, Almarai + Instrument Serif fonts, and a looping hero.mp4 stage. Hero Leadership is changing. Are you? with Discover Our Approach CTA, Our Conviction / Founders / Services / Approach / Impact / Contact nav, Leadership Team portraits (Bruno Raynal and partners), Integral Leadership Programs & Coaching Certification chapter, impact/contact close, and BTI footer. Demo consulting chrome only. No CRM backend. Run with npx --yes serve . or host statically on Cloudflare Workers. Live Workers demo may still show Hello world until redeployed.",
     category: "portfolio",
     stack: ["html", "css", "javascript", "tailwind"],
     priceLabel: "Free",
@@ -7781,11 +7781,11 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "npx --yes serve . - local Tailwind, fonts, images, and hero video.",
+        body: "npx --yes serve . local Tailwind, fonts, images, and hero video.",
       },
     ],
     includes: [
-      "index.html (BTI - Blue Thinking International)",
+      "index.html (BTI. Blue Thinking International)",
       "assets/css/fonts.css",
       "assets/js/tailwind.js",
       "assets/fonts woff2 + images portraits/stills + video/hero.mp4",
@@ -7799,9 +7799,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-portfolio-07",
     title: "Kimi Antonelli",
     tagline:
-      "GRIDO1 Racing Systems - F1 driver portfolio with 3D helmet hero.",
+      "GRIDO1 Racing Systems. F1 driver portfolio with 3D helmet hero.",
     description:
-      "Kimi Antonelli is a Formula 1 driver portfolio by SonoJS (demo brand: GRIDO1 Racing Systems / Kimi Antonelli). Zero-build static HTML with inline CSS (Oswald + Space Grotesk), Three.js r185 (GLTF/DRACO/RGBE loaders), and Lenis smooth scroll via CDN import map. Hero driver_012 with interactive 3D helmet GLB, Spa next-race card, season stats (races / podiums / points), From karts to F1 timeline, paddock journal story, and Keep pushing forward footer. Demo motorsport chrome only - no live timing backend. Run with npx serve . or host statically on Cloudflare Workers.",
+      "Kimi Antonelli is a Formula 1 driver portfolio by SonoJS (demo brand: GRIDO1 Racing Systems / Kimi Antonelli). Zero-build static HTML with inline CSS (Oswald + Space Grotesk), Three.js r185 (GLTF/DRACO/RGBE loaders), and Lenis smooth scroll via CDN import map. Hero driver_012 with interactive 3D helmet GLB, Spa next-race card, season stats (races / podiums / points), From karts to F1 timeline, paddock journal story, and Keep pushing forward footer. Demo motorsport chrome only. No live timing backend. Run with npx serve . or host statically on Cloudflare Workers.",
     category: "portfolio",
     stack: ["html", "css", "javascript", "threejs"],
     priceLabel: "Free",
@@ -7843,11 +7843,11 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "npx serve . - single index.html, Three.js + Lenis CDN, assets/.",
+        body: "npx serve . single index.html, Three.js + Lenis CDN, assets/.",
       },
     ],
     includes: [
-      "index.html (KIMI — GRIDO1 Racing Systems)",
+      "index.html (KIMI. GRIDO1 Racing Systems)",
       "assets/hero/scene helmet3.glb + person maps + studio-light.hdr",
       "assets/timeline + paddock + footer stills",
       "Three.js r185 + Lenis via import map (CDN)",
@@ -7862,9 +7862,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-landing-19",
     title: "CØFF",
     tagline:
-      "L'Art de l'Extraction. - specialty coffee bar and roastery landing.",
+      "L'Art de l'Extraction. specialty coffee bar and roastery landing.",
     description:
-      "CØFF is a French specialty coffee bar and roastery marketing landing by SonoJS (demo brand: CØFF / Bar à Café de Spécialité). Zero-build static HTML with local Tailwind, GSAP ScrollTrigger, Three.js WebGL background, Iconify, and Manrope / Playfair Display / JetBrains Mono fonts. Hero L'Art de l'Extraction. with Découvrir nos grains / Réserver une table CTAs, De la ferme à la tasse origin story, farm/SCA stats, Finca El Paraiso micro-lot product card with cart chrome, certified review quote, and Paris bar address footer. Demo hospitality chrome only - no checkout or reservation backend. Run with npx --yes serve . or host statically on Cloudflare Workers.",
+      "CØFF is a French specialty coffee bar and roastery marketing landing by SonoJS (demo brand: CØFF / Bar à Café de Spécialité). Zero-build static HTML with local Tailwind, GSAP ScrollTrigger, Three.js WebGL background, Iconify, and Manrope / Playfair Display / JetBrains Mono fonts. Hero L'Art de l'Extraction. with Découvrir nos grains / Réserver une table CTAs, De la ferme à la tasse origin story, farm/SCA stats, Finca El Paraiso micro-lot product card with cart chrome, certified review quote, and Paris bar address footer. Demo hospitality chrome only. No checkout or reservation backend. Run with npx --yes serve . or host statically on Cloudflare Workers.",
     category: "landing",
     stack: ["html", "css", "javascript", "tailwind", "gsap", "threejs"],
     priceLabel: "Free",
@@ -7906,7 +7906,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "npx --yes serve . - local Tailwind, GSAP, Three.js, fonts, and stills.",
+        body: "npx --yes serve . local Tailwind, GSAP, Three.js, fonts, and stills.",
       },
     ],
     includes: [
@@ -7924,9 +7924,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-68",
     title: "Weblex",
     tagline:
-      "Turn your big idea into a stunning website - dark video website-builder hero.",
+      "Turn your big idea into a stunning website, dark video website-builder hero.",
     description:
-      "Weblex is a full-viewport dark website-builder marketing hero by SonoJS (demo brand: Weblex). Built with Vite 8, React 19, TypeScript, Tailwind CSS 4, Framer Motion, Lucide, and Radix Dialog. Looping hero video stage with transparent navbar, Introducing Smart Website Builder badge, Turn your big idea into a stunning website headline, Get Started Now CTA, and dialog chrome. Spring staggered entrances with scroll fade. Demo product chrome only - no builder backend. Vite build ready for Cloudflare Workers. Live Workers demo may still show Hello world until redeployed.",
+      "Weblex is a full-viewport dark website-builder marketing hero by SonoJS (demo brand: Weblex). Built with Vite 8, React 19, TypeScript, Tailwind CSS 4, Framer Motion, Lucide, and Radix Dialog. Looping hero video stage with transparent navbar, Introducing Smart Website Builder badge, Turn your big idea into a stunning website headline, Get Started Now CTA, and dialog chrome. Spring staggered entrances with scroll fade. Demo product chrome only. No builder backend. Vite build ready for Cloudflare Workers. Live Workers demo may still show Hello world until redeployed.",
     category: "hero",
     stack: ["react", "vite", "typescript", "tailwind", "lucide"],
     priceLabel: "Free",
@@ -7966,7 +7966,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Vite and fork-ready",
-        body: "Vite 8 + React 19 + Tailwind 4 + Framer Motion - npm run build to dist/.",
+        body: "Vite 8 + React 19 + Tailwind 4 + Framer Motion, npm run build to dist/.",
       },
     ],
     includes: [
@@ -7986,9 +7986,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-landing-20",
     title: "Pestguard",
     tagline:
-      "Protect the places that matter. - premium UK pest control landing.",
+      "Protect the places that matter. premium UK pest control landing.",
     description:
-      "Pestguard is a premium British pest-control marketing landing by SonoJS (demo brand: Pestguard). Zero-build static HTML with custom theme CSS, local fonts, vanilla JS, and a looping hero.mp4 stage. Hero Protect the places that matter. with Discreet. Science-led. Nationwide. eyebrow, Book an inspection / Our services CTAs, trust strip (years, response window, eco, BPCA), four service cards (Residential, Commercial, Termite & wood, Wildlife), Inspect → Treat → Protect process, reviews (4.9 / 1,200+), contact CTA with placeholder UK phone/email, and Pestguard footer. Demo service chrome only - no booking backend. Run with npx --yes serve . or host statically on Cloudflare Workers.",
+      "Pestguard is a premium British pest-control marketing landing by SonoJS (demo brand: Pestguard). Zero-build static HTML with custom theme CSS, local fonts, vanilla JS, and a looping hero.mp4 stage. Hero Protect the places that matter. with Discreet. Science-led. Nationwide. eyebrow, Book an inspection / Our services CTAs, trust strip (years, response window, eco, BPCA), four service cards (Residential, Commercial, Termite & wood, Wildlife), Inspect → Treat → Protect process, reviews (4.9 / 1,200+), contact CTA with placeholder UK phone/email, and Pestguard footer. Demo service chrome only. No booking backend. Run with npx --yes serve . or host statically on Cloudflare Workers.",
     category: "landing",
     stack: ["html", "css", "javascript"],
     priceLabel: "Free",
@@ -8030,11 +8030,11 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "npx --yes serve . - theme.css, fonts, main.js, images, and hero video.",
+        body: "npx --yes serve . theme.css, fonts, main.js, images, and hero video.",
       },
     ],
     includes: [
-      "index.html (Pestguard — Premium Pest Control)",
+      "index.html (Pestguard. Premium Pest Control)",
       "css/theme.css + css/fonts.css",
       "js/main.js",
       "assets/images service stills + video/hero.mp4 + fonts",
@@ -8048,9 +8048,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-landing-21",
     title: "Brixzon",
     tagline:
-      "Spaces defined by craft, purpose, and lasting integrity. - design-build studio.",
+      "Spaces defined by craft, purpose, and lasting integrity. design-build studio.",
     description:
-      "Brixzon is a design-build architecture and construction marketing landing by SonoJS (demo brand: Brixzon ®, Est. 1996). Zero-build static HTML with custom CSS, Inter Tight + Tanker fonts, hero.js slat stage, and main.js interactions. Hero Spaces defined by craft, purpose, and lasting integrity. with Explore our capabilities CTA, four disciplines (Design-Build, Parametric Engineering, Civic & Urban, Residences & Master Planning), filterable Selected Work grid, Discover → Design → Engineer → Build → Handover process, practice stats, client voices, collab contact form, and Brixzon footer. Demo studio chrome only - no CRM backend. Run with npx --yes serve . or host statically on Cloudflare Workers.",
+      "Brixzon is a design-build architecture and construction marketing landing by SonoJS (demo brand: Brixzon ®, Est. 1996). Zero-build static HTML with custom CSS, Inter Tight + Tanker fonts, hero.js slat stage, and main.js interactions. Hero Spaces defined by craft, purpose, and lasting integrity. with Explore our capabilities CTA, four disciplines (Design-Build, Parametric Engineering, Civic & Urban, Residences & Master Planning), filterable Selected Work grid, Discover → Design → Engineer → Build → Handover process, practice stats, client voices, collab contact form, and Brixzon footer. Demo studio chrome only. No CRM backend. Run with npx --yes serve . or host statically on Cloudflare Workers.",
     category: "landing",
     stack: ["html", "css", "javascript"],
     priceLabel: "Free",
@@ -8092,11 +8092,11 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "npx --yes serve . - style.css, animations, hero.js, main.js, and image sets.",
+        body: "npx --yes serve . style.css, animations, hero.js, main.js, and image sets.",
       },
     ],
     includes: [
-      "index.html (Brixzon — Architecture & Construction)",
+      "index.html (Brixzon. Architecture & Construction)",
       "css/style.css + css/animations.css",
       "js/hero.js + js/main.js",
       "assets/fonts Inter Tight + Tanker; images hero/about/projects/services",
@@ -8110,9 +8110,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-69",
     title: "Velara",
     tagline:
-      "One platform. Borderless money. - global payments marketing hero.",
+      "One platform. Borderless money. global payments marketing hero.",
     description:
-      "Velara is a dark global-payments marketing page by SonoJS (demo brand: Velara / Move Money Smarter). Zero-build static HTML with custom CSS, Inter fonts, animations, and vanilla JS. Hero One platform. Borderless money. with Try for Free / See how it works CTAs, 180+ countries / FX markup / live tracking stats, Transfer Tracking + live rate chrome, Built For A Global World chapter, Why Velara pillars, live corridor rates table, customer stories, account signup form, and Velara footer. Includes world-map.mp4 asset. Demo fintech chrome only - no payments backend. Run with npx --yes serve . or host statically on Cloudflare Workers.",
+      "Velara is a dark global-payments marketing page by SonoJS (demo brand: Velara / Move Money Smarter). Zero-build static HTML with custom CSS, Inter fonts, animations, and vanilla JS. Hero One platform. Borderless money. with Try for Free / See how it works CTAs, 180+ countries / FX markup / live tracking stats, Transfer Tracking + live rate chrome, Built For A Global World chapter, Why Velara pillars, live corridor rates table, customer stories, account signup form, and Velara footer. Includes world-map.mp4 asset. Demo fintech chrome only. No payments backend. Run with npx --yes serve . or host statically on Cloudflare Workers.",
     category: "hero",
     stack: ["html", "css", "javascript"],
     priceLabel: "Free",
@@ -8153,11 +8153,11 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "npx --yes serve . - style.css, animations, main.js, Inter fonts, world-map.mp4.",
+        body: "npx --yes serve . style.css, animations, main.js, Inter fonts, world-map.mp4.",
       },
     ],
     includes: [
-      "index.html (Velara — Move Money Smarter)",
+      "index.html (Velara. Move Money Smarter)",
       "css/style.css + css/animations.css",
       "js/main.js",
       "assets/fonts Inter + videos/world-map.mp4",
@@ -8171,9 +8171,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-70",
     title: "Kelo",
     tagline:
-      "Let AI take your sales to the next level - AI sales platform hero.",
+      "Let AI take your sales to the next level. AI sales platform hero.",
     description:
-      "Kelo is a dark AI sales-platform marketing page by SonoJS (demo brand: Kelo). Zero-build static HTML with custom CSS, DM Sans fonts, animations, vanilla JS, and a full-page looping hero.mp4 backdrop. Hero Let AI take your sales to the next level with Get 14 Days Free Trial CTA, floating analytics dashboard chrome (revenue, monthly sales, sales overview, returning visits), Features (pipeline analytics, AI deal coaching, team workflows), Solutions for startups/growth/enterprise, Starter / Growth / Enterprise pricing, About + email capture, and Kelo footer. Demo SaaS chrome only - no CRM backend. Run with npx --yes serve . or host statically on Cloudflare Workers.",
+      "Kelo is a dark AI sales-platform marketing page by SonoJS (demo brand: Kelo). Zero-build static HTML with custom CSS, DM Sans fonts, animations, vanilla JS, and a full-page looping hero.mp4 backdrop. Hero Let AI take your sales to the next level with Get 14 Days Free Trial CTA, floating analytics dashboard chrome (revenue, monthly sales, sales overview, returning visits), Features (pipeline analytics, AI deal coaching, team workflows), Solutions for startups/growth/enterprise, Starter / Growth / Enterprise pricing, About + email capture, and Kelo footer. Demo SaaS chrome only. No CRM backend. Run with npx --yes serve . or host statically on Cloudflare Workers.",
     category: "hero",
     stack: ["html", "css", "javascript"],
     priceLabel: "Free",
@@ -8214,11 +8214,11 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "npx --yes serve . - style.css, animations, main.js, DM Sans, hero.mp4.",
+        body: "npx --yes serve . style.css, animations, main.js, DM Sans, hero.mp4.",
       },
     ],
     includes: [
-      "index.html (Kelo — AI Sales Platform)",
+      "index.html (Kelo. AI Sales Platform)",
       "css/style.css + css/animations.css",
       "js/main.js",
       "assets/fonts DM Sans + images + videos/hero.mp4",
@@ -8232,9 +8232,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-71",
     title: "Kelo Chatbot",
     tagline:
-      "The Future of The Next-Gen Chatbot - AI customer support hero.",
+      "The Future of The Next-Gen Chatbot. AI customer support hero.",
     description:
-      "Kelo Chatbot is a dark next-gen AI chatbot marketing hero by SonoJS (demo brand: Kelo). Zero-build static HTML with custom CSS, DM Sans fonts, animations, vanilla JS, and a full-bleed looping hero-original.mp4 backdrop (0.6× playback). Hero The Future of The Next-Gen Chatbot with Get 14 Days Free Trial CTA, trusted-by logo strip, Features (instant resolutions, human handoff, brand-safe tone), Solutions for e-commerce/SaaS/marketplaces, Starter / Growth / Enterprise pricing, About email capture, and Kelo footer. Demo support chrome only - no chatbot backend. Run with npx --yes serve . or host statically on Cloudflare Workers. Live Workers demo may still show Hello world until redeployed.",
+      "Kelo Chatbot is a dark next-gen AI chatbot marketing hero by SonoJS (demo brand: Kelo). Zero-build static HTML with custom CSS, DM Sans fonts, animations, vanilla JS, and a full-bleed looping hero-original.mp4 backdrop (0.6× playback). Hero The Future of The Next-Gen Chatbot with Get 14 Days Free Trial CTA, trusted-by logo strip, Features (instant resolutions, human handoff, brand-safe tone), Solutions for e-commerce/SaaS/marketplaces, Starter / Growth / Enterprise pricing, About email capture, and Kelo footer. Demo support chrome only. No chatbot backend. Run with npx --yes serve . or host statically on Cloudflare Workers. Live Workers demo may still show Hello world until redeployed.",
     category: "hero",
     stack: ["html", "css", "javascript"],
     priceLabel: "Free",
@@ -8275,11 +8275,11 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "npx --yes serve . - style.css, animations, main.js, DM Sans, hero videos.",
+        body: "npx --yes serve . style.css, animations, main.js, DM Sans, hero videos.",
       },
     ],
     includes: [
-      "index.html (Kelo — Next-Gen Chatbot)",
+      "index.html (Kelo. Next-Gen Chatbot)",
       "css/style.css + css/animations.css",
       "js/main.js",
       "assets/fonts DM Sans + logo strip + videos/hero.mp4 + hero-original.mp4",
@@ -8293,9 +8293,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-saas-14",
     title: "Luma",
     tagline:
-      "Build at the speed of desire. - AI apps & websites creation studio.",
+      "Build at the speed of desire. AI apps & websites creation studio.",
     description:
-      "Luma is a neon AI product-builder marketing site by SonoJS (demo brand: Luma / Build Apps & Websites with AI). Zero-build static HTML with custom CSS, Space Grotesk fonts, animations, and vanilla JS. Hero Build at the speed of desire. with Start Creation Free / Watch it generate CTAs and prompt chrome, Features (Generate, Style, Ship, Collaborate), Studio canvas with Landing/Dashboard/Checkout tabs, Prompt → Compose → Refine → Launch process, Ready to Build CTA, Free / Pro / Team pricing, and Luma footer. Demo builder chrome only - no generation backend. Run with npx --yes serve . or host statically on Cloudflare Workers.",
+      "Luma is a neon AI product-builder marketing site by SonoJS (demo brand: Luma / Build Apps & Websites with AI). Zero-build static HTML with custom CSS, Space Grotesk fonts, animations, and vanilla JS. Hero Build at the speed of desire. with Start Creation Free / Watch it generate CTAs and prompt chrome, Features (Generate, Style, Ship, Collaborate), Studio canvas with Landing/Dashboard/Checkout tabs, Prompt → Compose → Refine → Launch process, Ready to Build CTA, Free / Pro / Team pricing, and Luma footer. Demo builder chrome only. No generation backend. Run with npx --yes serve . or host statically on Cloudflare Workers.",
     category: "saas",
     stack: ["html", "css", "javascript"],
     priceLabel: "Free",
@@ -8336,11 +8336,11 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "npx --yes serve . - style.css, animations, main.js, Space Grotesk.",
+        body: "npx --yes serve . style.css, animations, main.js, Space Grotesk.",
       },
     ],
     includes: [
-      "index.html (Luma — Build Apps & Websites with AI)",
+      "index.html (Luma. Build Apps & Websites with AI)",
       "css/style.css + css/animations.css",
       "js/main.js",
       "assets/fonts Space Grotesk",
@@ -8354,9 +8354,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-saas-15",
     title: "Flowstate",
     tagline:
-      "Deep Work in a Distracted World - WebGL fluid waitlist hero.",
+      "Deep Work in a Distracted World. WebGL fluid waitlist hero.",
     description:
-      "Flowstate is a deep-work SaaS waitlist hero by SonoJS (demo brand: Flowstate). Zero-build static HTML with Onest fonts, custom CSS, Lenis smooth scroll, and a full-bleed WebGL fluid/ink canvas behind the copy. Hero Deep Work in a Distracted World with 10K+ already in flow badge, email Join Waitlist form, pill nav (How it works / Pricing / Products / Blog), and Get Started. Word-stagger reveals on load. Demo waitlist chrome only - form submit prevented, no backend. Run with npx --yes serve . or host statically on Cloudflare Workers.",
+      "Flowstate is a deep-work SaaS waitlist hero by SonoJS (demo brand: Flowstate). Zero-build static HTML with Onest fonts, custom CSS, Lenis smooth scroll, and a full-bleed WebGL fluid/ink canvas behind the copy. Hero Deep Work in a Distracted World with 10K+ already in flow badge, email Join Waitlist form, pill nav (How it works / Pricing / Products / Blog), and Get Started. Word-stagger reveals on load. Demo waitlist chrome only. Form submit prevented, no backend. Run with npx --yes serve . or host statically on Cloudflare Workers.",
     category: "saas",
     stack: ["html", "css", "javascript"],
     priceLabel: "Free",
@@ -8385,7 +8385,7 @@ export const templateProjects: TemplateProject[] = [
     highlights: [
       {
         title: "WebGL fluid stage",
-        body: "Interactive ink/fluid canvas behind the hero - pointer-driven swirls.",
+        body: "Interactive ink/fluid canvas behind the hero, pointer-driven swirls.",
       },
       {
         title: "Deep Work hero",
@@ -8397,11 +8397,11 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "npx --yes serve . - index.html, css/, js/main.js, Onest fonts.",
+        body: "npx --yes serve . index.html, css/, js/main.js, Onest fonts.",
       },
     ],
     includes: [
-      "index.html (Flowstate — Deep Work waitlist)",
+      "index.html (Flowstate. Deep Work waitlist)",
       "css/styles.css + fonts/onest.css + local woff2",
       "js/main.js (Lenis + WebGL fluid simulation)",
       "vendor/lenis.mjs",
@@ -8415,9 +8415,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-saas-16",
     title: "Ascend",
     tagline:
-      "Scale Smarter, Not Harder - revenue command center with WebGL planet.",
+      "Scale Smarter, Not Harder, revenue command center with WebGL planet.",
     description:
-      "Ascend is a revenue-platform SaaS marketing site by SonoJS (demo brand: Ascend). Zero-build static HTML with Inter fonts, custom CSS, Lenis, and vendored Three.js with a full-bleed planet.glb / clouds stage behind the page. Hero Scale Smarter, Not Harder with Start Free / Schedule a Consult CTAs and trusted-by logos; features grid (workflows, analytics, leads, triggers, enterprise, global); live pipeline metrics; and closing CTA. Demo CRM chrome only - no backend. Run with npx --yes serve . or host statically on Cloudflare Workers.",
+      "Ascend is a revenue-platform SaaS marketing site by SonoJS (demo brand: Ascend). Zero-build static HTML with Inter fonts, custom CSS, Lenis, and vendored Three.js with a full-bleed planet.glb / clouds stage behind the page. Hero Scale Smarter, Not Harder with Start Free / Schedule a Consult CTAs and trusted-by logos; features grid (workflows, analytics, leads, triggers, enterprise, global); live pipeline metrics; and closing CTA. Demo CRM chrome only. No backend. Run with npx --yes serve . or host statically on Cloudflare Workers.",
     category: "saas",
     stack: ["html", "css", "javascript", "threejs"],
     priceLabel: "Free",
@@ -8458,11 +8458,11 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "npx --yes serve . - index.html, css/, js/main.js, vendor Three + Lenis + Draco.",
+        body: "npx --yes serve . index.html, css/, js/main.js, vendor Three + Lenis + Draco.",
       },
     ],
     includes: [
-      "index.html (Ascend — Scale Smarter, Not Harder)",
+      "index.html (Ascend. Scale Smarter, Not Harder)",
       "css/styles.css + fonts/inter local woff2",
       "js/main.js + assets/planet.glb, planet-lights.glb, planet-clouds.png",
       "vendor/three + vendor/lenis + vendor/draco",
@@ -8476,9 +8476,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-saas-17",
     title: "Visionary",
     tagline:
-      "Design that shapes the future — multi-page studio site with Spline hero.",
+      "Design that shapes the future, multi-page studio site with Spline hero.",
     description:
-      "Visionary is a multi-page design-studio marketing site by SonoJS (demo brand: Visionary). Zero-build static HTML/CSS/vanilla JS with local Manrope, design tokens, and theme toggle. Home hero Design that shapes the future over an embedded Spline ambient scene, capabilities strips, selected work rail, process spine, clients marquee, journal teaser, plus Work, Services, Process, Pricing, About, Team, Careers, Blog, Clients, Contact, FAQ, legal, and 404. Demo studio chrome only — no CRM backend. Host statically (e.g. Cloudflare Workers). Note: hero Spline iframe needs network.",
+      "Visionary is a multi-page design-studio marketing site by SonoJS (demo brand: Visionary). Zero-build static HTML/CSS/vanilla JS with local Manrope, design tokens, and theme toggle. Home hero Design that shapes the future over an embedded Spline ambient scene, capabilities strips, selected work rail, process spine, clients marquee, journal teaser, plus Work, Services, Process, Pricing, About, Team, Careers, Blog, Clients, Contact, FAQ, legal, and 404. Demo studio chrome only. No CRM backend. Host statically (e.g. Cloudflare Workers). Note: hero Spline iframe needs network.",
     category: "saas",
     stack: ["html", "css", "javascript"],
     priceLabel: "Free",
@@ -8518,7 +8518,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "Tokenized CSS + local Manrope + theme toggle — static host only.",
+        body: "Tokenized CSS + local Manrope + theme toggle, static host only.",
       },
     ],
     includes: [
@@ -8529,7 +8529,7 @@ export const templateProjects: TemplateProject[] = [
     ],
     requirements: [
       "Modern browser",
-      "Static file host (not file://)",
+      "Static file host",
       "Network for Spline hero iframe",
     ],
   },
@@ -8537,9 +8537,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-saas-18",
     title: "Minimal",
     tagline:
-      "Minimal Design Studio — multi-page studio site with ambient Spline stage.",
+      "Minimal Design Studio, multi-page studio site with ambient Spline stage.",
     description:
-      "Minimal is a multi-page design-studio marketing site by SonoJS (demo brand: Minimal Design Studio). Zero-build static HTML/CSS/vanilla JS with design tokens, theme toggle, and an ambient Spline hero stage. Home with selected work, process, and journal teasers; plus Work, Process, Journal, About, Contact, and related studio pages. Demo studio chrome only — no CRM backend. Host statically (e.g. Cloudflare Workers). Note: Spline stage may need network.",
+      "Minimal is a multi-page design-studio marketing site by SonoJS (demo brand: Minimal Design Studio). Zero-build static HTML/CSS/vanilla JS with design tokens, theme toggle, and an ambient Spline hero stage. Home with selected work, process, and journal teasers; plus Work, Process, Journal, About, Contact, and related studio pages. Demo studio chrome only. No CRM backend. Host statically (e.g. Cloudflare Workers). Note: Spline stage may need network.",
     category: "saas",
     stack: ["html", "css", "javascript"],
     priceLabel: "Free",
@@ -8567,7 +8567,7 @@ export const templateProjects: TemplateProject[] = [
     highlights: [
       {
         title: "Minimal studio voice",
-        body: "Clean hero, selected work, process, and journal — restraint-first UI.",
+        body: "Clean hero, selected work, process, and journal, restraint-first UI.",
       },
       {
         title: "Ambient Spline stage",
@@ -8579,7 +8579,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "Tokenized CSS + theme toggle — templates surface, static host only.",
+        body: "Tokenized CSS + theme toggle, templates surface, static host only.",
       },
     ],
     includes: [
@@ -8590,7 +8590,7 @@ export const templateProjects: TemplateProject[] = [
     ],
     requirements: [
       "Modern browser",
-      "Static file host (not file://)",
+      "Static file host",
       "Network for Spline stage when used",
     ],
   },
@@ -8598,9 +8598,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-saas-19",
     title: "Clarity Stream",
     tagline:
-      "Streamline your digital experience — spatial SaaS with Spline hero.",
+      "Streamline your digital experience, spatial SaaS with Spline hero.",
     description:
-      "Clarity Stream is a multi-page premium SaaS marketing template by SonoJS (demo brand: Clarity Stream). Zero-build static HTML/CSS/vanilla JS with dark theme and an immersive Spline hero. Home with bento product surfaces, workflow, solutions, social proof, and pricing; plus features, solutions, pricing, auth/onboarding, playground, blog/resources, and a mock app shell. Demo SaaS chrome only — no live backend. Host statically (e.g. Cloudflare Workers). Note: Spline hero iframe needs network.",
+      "Clarity Stream is a multi-page premium SaaS marketing template by SonoJS (demo brand: Clarity Stream). Zero-build static HTML/CSS/vanilla JS with dark theme and an immersive Spline hero. Home with bento product surfaces, workflow, solutions, social proof, and pricing; plus features, solutions, pricing, auth/onboarding, playground, blog/resources, and a mock app shell. Demo SaaS chrome only. No live backend. Host statically (e.g. Cloudflare Workers). Note: Spline hero iframe needs network.",
     category: "saas",
     stack: ["html", "css", "javascript"],
     priceLabel: "Free",
@@ -8640,7 +8640,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "49 HTML pages — templates surface, static host only.",
+        body: "49 HTML pages, templates surface, static host only.",
       },
     ],
     includes: [
@@ -8651,7 +8651,7 @@ export const templateProjects: TemplateProject[] = [
     ],
     requirements: [
       "Modern browser",
-      "Static file host (not file://)",
+      "Static file host",
       "Network for Spline hero iframe",
     ],
   },
@@ -8659,9 +8659,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-72",
     title: "Oryon",
     tagline:
-      "Turn Your Words into Cinematic Reality - AI text-to-video hero.",
+      "Turn Your Words into Cinematic Reality. AI text-to-video hero.",
     description:
-      "Oryon is a full-viewport AI text-to-video marketing hero by SonoJS (demo brand: Oryon). Zero-build static HTML with Outfit fonts, modular CSS (variables, base, nav, hero, animations), dual-video crossfade background, and vanilla JS. Hero Turn Your Words into Cinematic Reality with AI Engine Ready badge, Start Creating / Watch Demo CTAs, and Trusted by 10,000+ creators avatar strip. Demo generation chrome only - no video API backend. Run with npx --yes serve . or host statically on Cloudflare Workers.",
+      "Oryon is a full-viewport AI text-to-video marketing hero by SonoJS (demo brand: Oryon). Zero-build static HTML with Outfit fonts, modular CSS (variables, base, nav, hero, animations), dual-video crossfade background, and vanilla JS. Hero Turn Your Words into Cinematic Reality with AI Engine Ready badge, Start Creating / Watch Demo CTAs, and Trusted by 10,000+ creators avatar strip. Demo generation chrome only. No video API backend. Run with npx --yes serve . or host statically on Cloudflare Workers.",
     category: "hero",
     stack: ["html", "css", "javascript"],
     priceLabel: "Free",
@@ -8702,11 +8702,11 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "npx --yes serve . - main.js + video-crossfade.js, no build step.",
+        body: "npx --yes serve . main.js + video-crossfade.js, no build step.",
       },
     ],
     includes: [
-      "index.html (Oryon — Turn Your Words into Cinematic Reality)",
+      "index.html (Oryon. Turn Your Words into Cinematic Reality)",
       "css/ variables, base, nav, hero, animations",
       "js/main.js + js/video-crossfade.js",
       "assets/fonts Outfit + videos/background.mp4 + avatars",
@@ -8720,9 +8720,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-73",
     title: "Laocoön",
     tagline:
-      "The Statue of Laocoön - scroll-driven Three.js bronze sculpture hero.",
+      "The Statue of Laocoön, scroll-driven Three.js bronze sculpture hero.",
     description:
-      "Laocoön is a full-scroll WebGL sculpture hero by SonoJS (demo brand: Laocoön). Zero-build static HTML with inline CSS, Three.js r160 (import map + GLTFLoader), and vanilla JS. Fixed #webgl canvas with bronze_horse.glb, spark particles, shader backdrop, and scroll-scrubbed camera through Bronze and Time, Marble Emotion, Liquid Metal, and Eternal Moment chapters. Glass header (Bronze · Marble · Fluid · Digital), custom dual-ring cursor, Italiana / Outfit / Playfair Display. Demo editorial chrome only - no CMS backend. Run with npx serve . or host statically on Cloudflare Workers.",
+      "Laocoön is a full-scroll WebGL sculpture hero by SonoJS (demo brand: Laocoön). Zero-build static HTML with inline CSS, Three.js r160 (import map + GLTFLoader), and vanilla JS. Fixed #webgl canvas with bronze_horse.glb, spark particles, shader backdrop, and scroll-scrubbed camera through Bronze and Time, Marble Emotion, Liquid Metal, and Eternal Moment chapters. Glass header (Bronze · Marble · Fluid · Digital), custom dual-ring cursor, Italiana / Outfit / Playfair Display. Demo editorial chrome only. No CMS backend. Run with npx serve . or host statically on Cloudflare Workers.",
     category: "hero",
     stack: ["html", "css", "javascript", "threejs"],
     priceLabel: "Free",
@@ -8763,7 +8763,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "Single index.html + assets - run with npx serve .",
+        body: "Single index.html + assets, run with npx serve .",
       },
     ],
     includes: [
@@ -8781,9 +8781,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-74",
     title: "Moss Valley",
     tagline:
-      "Interactive Experience - cinematic mist valley with tilt feature cards.",
+      "Interactive Experience, cinematic mist valley with tilt feature cards.",
     description:
-      "Moss Valley is a cinematic interactive hero by SonoJS (demo brand: Moss Valley). Built with Vite 8, React 19, TypeScript, Tailwind CSS 4, Framer Motion, Lucide, and Radix Dialog. Full-bleed looping valley video with glass nav, Interactive Experience badge, Enter Valley / Experience details CTAs, scroll-linked FeatureCards (Canopy Depth, Trail Cartography, River Cadence) with spring tilt physics, and reduced-motion fallbacks. Demo immersive chrome only - no CMS backend. Vite build ready for Cloudflare Workers. Live Workers demo may still show Hello world until redeployed.",
+      "Moss Valley is a cinematic interactive hero by SonoJS (demo brand: Moss Valley). Built with Vite 8, React 19, TypeScript, Tailwind CSS 4, Framer Motion, Lucide, and Radix Dialog. Full-bleed looping valley video with glass nav, Interactive Experience badge, Enter Valley / Experience details CTAs, scroll-linked FeatureCards (Canopy Depth, Trail Cartography, River Cadence) with spring tilt physics, and reduced-motion fallbacks. Demo immersive chrome only. No CMS backend. Vite build ready for Cloudflare Workers. Live Workers demo may still show Hello world until redeployed.",
     category: "hero",
     stack: ["react", "vite", "typescript", "tailwind", "lucide"],
     priceLabel: "Free",
@@ -8824,7 +8824,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Vite and fork-ready",
-        body: "Vite 8 + React 19 + Tailwind 4 + Framer Motion - npm run build to dist/.",
+        body: "Vite 8 + React 19 + Tailwind 4 + Framer Motion, npm run build to dist/.",
       },
     ],
     includes: [
@@ -8845,9 +8845,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-75",
     title: "Roadster",
     tagline:
-      "Tesla Hover Game - night chase HUD with thrusters and tilt cards.",
+      "Tesla Hover Game, night chase HUD with thrusters and tilt cards.",
     description:
-      "Roadster is a cinematic Tesla Hover Game hero by SonoJS (demo brand: Roadster / Hover Chase). Built with Vite 8, React 19, TypeScript, Tailwind CSS 4, Framer Motion, Lucide, and Radix Dialog. Full-bleed night desert video with glass nav, Ignite Thrusters / Briefing CTAs, pointer-tilt InteractiveCards (Pursuit Lift, Starlit asphalt theatre), live HUD gauges (speed, altitude, Night Chase timer), and pause/boost game clock. Demo product-demo chrome only - no real vehicle backend. Vite build ready for Cloudflare Workers. Live Workers demo may still show Hello world until redeployed.",
+      "Roadster is a cinematic Tesla Hover Game hero by SonoJS (demo brand: Roadster / Hover Chase). Built with Vite 8, React 19, TypeScript, Tailwind CSS 4, Framer Motion, Lucide, and Radix Dialog. Full-bleed night desert video with glass nav, Ignite Thrusters / Briefing CTAs, pointer-tilt InteractiveCards (Pursuit Lift, Starlit asphalt theatre), live HUD gauges (speed, altitude, Night Chase timer), and pause/boost game clock. Demo product-demo chrome only. No real vehicle backend. Vite build ready for Cloudflare Workers. Live Workers demo may still show Hello world until redeployed.",
     category: "hero",
     stack: ["react", "vite", "typescript", "tailwind", "lucide"],
     priceLabel: "Free",
@@ -8888,7 +8888,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Vite and fork-ready",
-        body: "Vite 8 + React 19 + Tailwind 4 + Framer Motion - npm run build to dist/.",
+        body: "Vite 8 + React 19 + Tailwind 4 + Framer Motion, npm run build to dist/.",
       },
     ],
     includes: [
@@ -8909,9 +8909,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-hero-76",
     title: "Design World",
     tagline:
-      "explore new ideas - interactive cuboid studio hero with slide chapters.",
+      "explore new ideas, interactive cuboid studio hero with slide chapters.",
     description:
-      "Design World is an experimental studio hero by SonoJS (demo brand: Design World Studio). Built with Vite 8, React 19, TypeScript, Tailwind CSS 4, Framer Motion, Lucide, Poppins, and Radix Dialog. Draggable refractive CuboidStage over a looping video plate, four slide chapters (explore new ideas / shape the void / bend the light / make it move), magnetic circular controls, pagination dots, cursor spotlight, and Enter Design World dialog. Demo immersive chrome only - no CMS backend. Vite build ready for Cloudflare Workers.",
+      "Design World is an experimental studio hero by SonoJS (demo brand: Design World Studio). Built with Vite 8, React 19, TypeScript, Tailwind CSS 4, Framer Motion, Lucide, Poppins, and Radix Dialog. Draggable refractive CuboidStage over a looping video plate, four slide chapters (explore new ideas / shape the void / bend the light / make it move), magnetic circular controls, pagination dots, cursor spotlight, and Enter Design World dialog. Demo immersive chrome only. No CMS backend. Vite build ready for Cloudflare Workers.",
     category: "hero",
     stack: ["react", "vite", "typescript", "tailwind", "lucide"],
     priceLabel: "Free",
@@ -8952,7 +8952,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Vite and fork-ready",
-        body: "Vite 8 + React 19 + Tailwind 4 + Framer Motion - npm run build to dist/.",
+        body: "Vite 8 + React 19 + Tailwind 4 + Framer Motion, npm run build to dist/.",
       },
     ],
     includes: [
@@ -8972,9 +8972,9 @@ export const templateProjects: TemplateProject[] = [
   {
     slug: "sonojs-landing-22",
     title: "Vizurai",
-    tagline: "Worlds that move. - cinematic VFX studio landing.",
+    tagline: "Worlds that move. cinematic VFX studio landing.",
     description:
-      "Vizurai is a cinematic VFX studio marketing site by SonoJS (demo brand: Vizurai Studios). Zero-build static HTML with custom CSS, Instrument Sans + Syne, GSAP + ScrollTrigger + SplitType, and vanilla JS. Preloader, custom cursor, grain/vignette, hero Worlds that move. over looping plate video, Start a project / Watch reel CTAs, horizontal Selected work panels (Transit, Canyon, Spirits, Ice Run, Close), craft pin (LIGHT / MOTION / STORY), five-step process, and contact with socials. Demo studio chrome only - no CRM backend. Run with npx --yes serve . or host statically on Cloudflare Workers.",
+      "Vizurai is a cinematic VFX studio marketing site by SonoJS (demo brand: Vizurai Studios). Zero-build static HTML with custom CSS, Instrument Sans + Syne, GSAP + ScrollTrigger + SplitType, and vanilla JS. Preloader, custom cursor, grain/vignette, hero Worlds that move. over looping plate video, Start a project / Watch reel CTAs, horizontal Selected work panels (Transit, Canyon, Spirits, Ice Run, Close), craft pin (LIGHT / MOTION / STORY), five-step process, and contact with socials. Demo studio chrome only. No CRM backend. Run with npx --yes serve . or host statically on Cloudflare Workers.",
     category: "landing",
     stack: ["html", "css", "javascript"],
     priceLabel: "Free",
@@ -9016,11 +9016,11 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "npx --yes serve . - styles.css, main.js, GSAP CDN, plate video + poster.",
+        body: "npx --yes serve . styles.css, main.js, GSAP CDN, plate video + poster.",
       },
     ],
     includes: [
-      "index.html (Vizurai Studios — Worlds That Move)",
+      "index.html (Vizurai Studios. Worlds That Move)",
       "css/styles.css",
       "js/main.js",
       "assets/ poster.jpg + vizurai-studios-plate.mp4",
@@ -9033,9 +9033,9 @@ export const templateProjects: TemplateProject[] = [
   {
     slug: "sonojs-landing-23",
     title: "Leon Vasari",
-    tagline: "Archive Edition - film archive landing with decade shelves.",
+    tagline: "Archive Edition, film archive landing with decade shelves.",
     description:
-      "Leon Vasari is a premium film-archive marketing experience by SonoJS (demo brand: Leon Vasari / Archive Edition). Single-file static HTML with inline CSS/JS, Inter Tight, Newsreader, Noto Sans JP / Serif SC, custom cursor, grain and vignette. Horizontal decade shelves (1950s to 1980s), drag/scroll film spines, detail sheet with Watch the film, bilingual JP/EN chrome, and paper-lacquer print aesthetic. Demo archive UI only - no streaming backend. Run with npx --yes serve . or host statically on Cloudflare Workers.",
+      "Leon Vasari is a premium film-archive marketing experience by SonoJS (demo brand: Leon Vasari / Archive Edition). Single-file static HTML with inline CSS/JS, Inter Tight, Newsreader, Noto Sans JP / Serif SC, custom cursor, grain and vignette. Horizontal decade shelves (1950s to 1980s), drag/scroll film spines, detail sheet with Watch the film, bilingual JP/EN chrome, and paper-lacquer print aesthetic. Demo archive UI only. No streaming backend. Run with npx --yes serve . or host statically on Cloudflare Workers.",
     category: "landing",
     stack: ["html", "css", "javascript"],
     priceLabel: "Free",
@@ -9077,11 +9077,11 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "npx --yes serve . - single index.html plus local fonts and cover art.",
+        body: "npx --yes serve . single index.html plus local fonts and cover art.",
       },
     ],
     includes: [
-      "index.html (Leon Vasari — Archive Edition)",
+      "index.html (Leon Vasari. Archive Edition)",
       "assets/fonts (Inter Tight, Newsreader, Noto) + fonts.css",
       "assets/images covers.webp, film.webp, film2.webp, spines.webp",
       "manifest.json",
@@ -9095,9 +9095,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-landing-24",
     title: "Cyanotype Archive",
     tagline:
-      "Leon Vasari cyanotype film archive - blue-print shelves and bilingual detail.",
+      "Leon Vasari cyanotype film archive, blue-print shelves and bilingual detail.",
     description:
-      "Cyanotype Archive is a film-archive marketing experience by SonoJS (demo brand: Leon Vasari / Cyanotype Film Archive 1958-1989). Single-file static HTML with inline CSS/JS, Inter Tight, Newsreader, Noto Sans JP / Serif SC, custom cursor, and cyanotype wash palette. Horizontal reel shelves, drag/scroll spines, bilingual JP/EN detail sheet with Watch the film, Reels / Notes / Index chrome. Demo archive UI only - no streaming backend. Run with npx --yes serve . or host statically on Cloudflare Workers.",
+      "Cyanotype Archive is a film-archive marketing experience by SonoJS (demo brand: Leon Vasari / Cyanotype Film Archive 1958-1989). Single-file static HTML with inline CSS/JS, Inter Tight, Newsreader, Noto Sans JP / Serif SC, custom cursor, and cyanotype wash palette. Horizontal reel shelves, drag/scroll spines, bilingual JP/EN detail sheet with Watch the film, Reels / Notes / Index chrome. Demo archive UI only. No streaming backend. Run with npx --yes serve . or host statically on Cloudflare Workers.",
     category: "landing",
     stack: ["html", "css", "javascript"],
     priceLabel: "Free",
@@ -9139,11 +9139,11 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "npx --yes serve . - single index.html plus local fonts and sheet art.",
+        body: "npx --yes serve . single index.html plus local fonts and sheet art.",
       },
     ],
     includes: [
-      "index.html (Leon Vasari — Cyanotype Archive)",
+      "index.html (Leon Vasari. Cyanotype Archive)",
       "assets/fonts (Inter Tight, Newsreader, Noto) + fonts.css",
       "assets/sheets covers.webp, film.webp, film2.webp, spines.webp",
     ],
@@ -9156,9 +9156,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-landing-25",
     title: "STILLWATER",
     tagline:
-      "Breathing app landing - 4-7-8 guide, soft stage, calm practice chrome.",
+      "Breathing app landing, 4-7-8 guide, soft stage, calm practice chrome.",
     description:
-      "STILLWATER is a breathing-app marketing landing by SonoJS. Shipped as a zero-build static site with Cormorant Garamond + Inter, bundled CSS/JS under assets/, and a soft paper theme. Hero stage with 4-7-8 inhale/hold/exhale guide, practice and teachers sections, pricing, and CTA band. Demo wellness chrome only - no booking backend. Run locally with npx --yes serve . (ES modules need a static server) or host on Cloudflare Workers.",
+      "STILLWATER is a breathing-app marketing landing by SonoJS. Shipped as a zero-build static site with Cormorant Garamond + Inter, bundled CSS/JS under assets/, and a soft paper theme. Hero stage with 4-7-8 inhale/hold/exhale guide, practice and teachers sections, pricing, and CTA band. Demo wellness chrome only. No booking backend. Run locally with npx --yes serve . (ES modules need a static server) or host on Cloudflare Workers.",
     category: "landing",
     stack: ["html", "css", "javascript"],
     priceLabel: "Free",
@@ -9200,7 +9200,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "npx --yes serve . - index.html plus assets/ CSS, JS, and fonts.",
+        body: "npx --yes serve . index.html plus assets/ CSS, JS, and fonts.",
       },
     ],
     includes: [
@@ -9217,9 +9217,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-landing-26",
     title: "GOODKIND",
     tagline:
-      "For the love of good company - cinematic 3D pet boutique.",
+      "For the love of good company, cinematic 3D pet boutique.",
     description:
-      "GOODKIND is a cinematic scroll-driven pet-boutique landing by SonoJS. Built with Vite 8, React 19, TypeScript, Tailwind CSS 4, React Three Fiber, Three.js, GSAP, and Lenis. Chapters for The arrival, Good company, Everyday objects, Our point of view, and A little closer. Illustrated pet companions (dog, cat, rabbit, parrot), product cards with dialog chrome, adaptive WebGL quality with a simple HTML fallback. Demo shop chrome only - no checkout backend. Run with npm install && npm run dev (port 5174) or host the Vite build on Cloudflare Workers.",
+      "GOODKIND is a cinematic scroll-driven pet-boutique landing by SonoJS. Built with Vite 8, React 19, TypeScript, Tailwind CSS 4, React Three Fiber, Three.js, GSAP, and Lenis. Chapters for The arrival, Good company, Everyday objects, Our point of view, and A little closer. Illustrated pet companions (dog, cat, rabbit, parrot), product cards with dialog chrome, adaptive WebGL quality with a simple HTML fallback. Demo shop chrome only. No checkout backend. Run with npm install && npm run dev (port 5174) or host the Vite build on Cloudflare Workers.",
     category: "landing",
     stack: ["react", "vite", "typescript", "tailwind", "threejs", "gsap"],
     priceLabel: "Free",
@@ -9283,9 +9283,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-landing-27",
     title: "AETHER",
     tagline:
-      "Deep Field Planetary Survey - four worlds, telemetry, and plates.",
+      "Deep Field Planetary Survey, four worlds, telemetry, and plates.",
     description:
-      "AETHER is a deep-field planetary survey marketing landing by SonoJS (demo brand: AETHER / Deep Field Survey). Zero-build static HTML with local CSS/JS, GSAP ScrollTrigger, Lenis, SplitType, and Three.js. Preloader telemetry link into a HUD scroll experience across Meridian, Kesh, Veld, and Orrin - survey briefs, surface dossiers, instrument ledger, ring system, field archive, and comparative table. Local planet stills and fly/spin MP4 plates under assets/. Demo survey chrome only - no mission backend. Run with npx --yes serve . (do not open file://) or host on Cloudflare Workers.",
+      "AETHER is a deep-field planetary survey marketing landing by SonoJS (demo brand: AETHER / Deep Field Survey). Zero-build static HTML with local CSS/JS, GSAP ScrollTrigger, Lenis, SplitType, and Three.js. Preloader telemetry link into a HUD scroll experience across Meridian, Kesh, Veld, and Orrin, survey briefs, surface dossiers, instrument ledger, ring system, field archive, and comparative table. Local planet stills and fly/spin MP4 plates under assets/. Demo survey chrome only. No mission backend. Run with npx --yes serve . over HTTP, or host on Cloudflare Workers.",
     category: "landing",
     stack: ["html", "css", "javascript", "threejs", "gsap"],
     priceLabel: "Free",
@@ -9327,7 +9327,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "npx --yes serve . - index.html, style.css, script.js, and assets/.",
+        body: "npx --yes serve . index.html, style.css, script.js, and assets/.",
       },
     ],
     includes: [
@@ -9346,9 +9346,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-landing-28",
     title: "Gravity",
     tagline:
-      "Less noise. More gravity. - WebGL sphere physics digital studio.",
+      "Less noise. More gravity. WebGL sphere physics digital studio.",
     description:
-      "Gravity is a scroll-cinema digital studio landing by SonoJS (demo brand: Gravity). Zero-build static HTML with local CSS, vendored Three.js, and vanilla JS. Loader calibrates a gravity field into hero Less noise. More gravity.; scroll chapters drop spheres with Verlet collision physics, reassemble into form with cursor ripples, then release weightless into the lens. Studio Controls panel swaps hero palettes (Royal Blue, Rose Blush, Volt Lime, Arctic Sky). Works / Services / Team / Story nav and collaborate footer. Demo studio chrome only - no CRM backend. Run with npx serve . or host statically on Cloudflare Workers.",
+      "Gravity is a scroll-cinema digital studio landing by SonoJS (demo brand: Gravity). Zero-build static HTML with local CSS, vendored Three.js, and vanilla JS. Loader calibrates a gravity field into hero Less noise. More gravity.; scroll chapters drop spheres with Verlet collision physics, reassemble into form with cursor ripples, then release weightless into the lens. Studio Controls panel swaps hero palettes (Royal Blue, Rose Blush, Volt Lime, Arctic Sky). Works / Services / Team / Story nav and collaborate footer. Demo studio chrome only. No CRM backend. Run with npx serve . or host statically on Cloudflare Workers.",
     category: "landing",
     stack: ["html", "css", "javascript", "threejs"],
     priceLabel: "Free",
@@ -9378,7 +9378,7 @@ export const templateProjects: TemplateProject[] = [
     highlights: [
       {
         title: "Verlet gravity field",
-        body: "Real-time 3D sphere collisions - mass, momentum, restitution - as you scroll.",
+        body: "Real-time 3D sphere collisions, mass, momentum, restitution, as you scroll.",
       },
       {
         title: "Chaos → form → release",
@@ -9390,7 +9390,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "npx serve . - index.html, css/, js/main.js, vendored Three.js.",
+        body: "npx serve . index.html, css/, js/main.js, vendored Three.js.",
       },
     ],
     includes: [
@@ -9408,9 +9408,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-landing-29",
     title: "Nexura",
     tagline:
-      "High-performance ad creatives that drive growth - ecom agency site.",
+      "High-performance ad creatives that drive growth, ecom agency site.",
     description:
-      "Nexura is a multi-page creative-agency marketing site by SonoJS (demo brand: Nexura Studio). Zero-build static HTML with vendored Tailwind, Iconify, DotGothic16 + JetBrains Mono, and vanilla JS. Home hero High-performance ad creatives that drive growth over looping hero.mp4, interactive Tasks kanban, features (static ads / UGC / analytics), selected work, testimonials, retainer pricing (Starter / Growth / Scale), plus Services, Pricing, Projects, About, Blog, Contact, 404, and documentation pages. Demo agency chrome only - no CRM backend. Run with npx serve . or host statically on Cloudflare Workers.",
+      "Nexura is a multi-page creative-agency marketing site by SonoJS (demo brand: Nexura Studio). Zero-build static HTML with vendored Tailwind, Iconify, DotGothic16 + JetBrains Mono, and vanilla JS. Home hero High-performance ad creatives that drive growth over looping hero.mp4, interactive Tasks kanban, features (static ads / UGC / analytics), selected work, testimonials, retainer pricing (Starter / Growth / Scale), plus Services, Pricing, Projects, About, Blog, Contact, 404, and documentation pages. Demo agency chrome only. No CRM backend. Run with npx serve . or host statically on Cloudflare Workers.",
     category: "landing",
     stack: ["html", "css", "javascript", "tailwind"],
     priceLabel: "Free",
@@ -9452,7 +9452,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "npx serve . - vendored Tailwind + Iconify, fully offline after download.",
+        body: "npx serve . vendored Tailwind + Iconify, fully offline after download.",
       },
     ],
     includes: [
@@ -9470,9 +9470,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-landing-30",
     title: "Nectarline",
     tagline:
-      "Supply Side Studio — programmatic curation landing with pond + koi scene.",
+      "Supply Side Studio, programmatic curation landing with pond + koi scene.",
     description:
-      "Nectarline is a single-page marketing landing by SonoJS (demo brand: Nectarline · Supply Side Studio®). Zero-build static HTML/CSS/vanilla JS with vendored Three.js. Fixed pond video + day/night layers and a WebGL koi scene (koi.glb), product workspace mock (deals, forecasts, format mix), audience / CTV / performance packs, use-case cards, and CTA footer. Demo SaaS chrome only — no backend. Run with npx serve . or host statically on Cloudflare Workers.",
+      "Nectarline is a single-page marketing landing by SonoJS (demo brand: Nectarline · Supply Side Studio®). Zero-build static HTML/CSS/vanilla JS with vendored Three.js. Fixed pond video + day/night layers and a WebGL koi scene (koi.glb), product workspace mock (deals, forecasts, format mix), audience / CTV / performance packs, use-case cards, and CTA footer. Demo SaaS chrome only. No backend. Run with npx serve . or host statically on Cloudflare Workers.",
     category: "landing",
     stack: ["html", "css", "javascript", "threejs"],
     priceLabel: "Free",
@@ -9510,11 +9510,11 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Calm SaaS chrome",
-        body: "Nectarline nav, CTAs, and footer status — demo brand only.",
+        body: "Nectarline nav, CTAs, and footer status, demo brand only.",
       },
       {
         title: "Zero-build static",
-        body: "index.html + styles.css + app.js / koi.js + vendored three — npx serve .",
+        body: "index.html + styles.css + app.js / koi.js + vendored three, npx serve .",
       },
     ],
     includes: [
@@ -9531,9 +9531,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-website-01",
     title: "Empire Owl Salon",
     tagline:
-      "Royal hair, wise hands, homestyle care - full multi-page salon site.",
+      "Royal hair, wise hands, homestyle care, full multi-page salon site.",
     description:
-      "Empire Owl Salon is a multi-page independent salon website by SonoJS (demo brand: Empire Owl Salon, Langford BC). Zero-build static HTML with Tailwind CDN, Lucide, DM Sans + Newsreader, and vanilla JS. Home hero Royal hair, wise hands, homestyle care with booking strip, lookbook marquee, services accordion, before/after slider, testimonials, FAQs, and map; plus About, Services, Service detail, Pricing, Gallery lightbox, Team, 3-step Booking wizard, Blog, Blog post, Contact, and 404. Demo salon chrome only - booking form has no backend. Run with npx serve . or host statically on Cloudflare Workers.",
+      "Empire Owl Salon is a multi-page independent salon website by SonoJS (demo brand: Empire Owl Salon, Langford BC). Zero-build static HTML with Tailwind CDN, Lucide, DM Sans + Newsreader, and vanilla JS. Home hero Royal hair, wise hands, homestyle care with booking strip, lookbook marquee, services accordion, before/after slider, testimonials, FAQs, and map; plus About, Services, Service detail, Pricing, Gallery lightbox, Team, 3-step Booking wizard, Blog, Blog post, Contact, and 404. Demo salon chrome only. Booking form has no backend. Run with npx serve . or host statically on Cloudflare Workers.",
     category: "website",
     websiteVertical: "beauty",
     stack: ["html", "css", "javascript", "tailwind", "lucide"],
@@ -9548,11 +9548,11 @@ export const templateProjects: TemplateProject[] = [
     access: "member",
     badge: "new",
     coverVariant: "landing",
-    coverImage: "/templates/projects/website/sonojs-website-01/main.webp",
+    coverImage: "/websites/projects/sonojs-website-01/main.webp",
     coverImageDark: null,
     coverVideo: null,
     detailCoverImage:
-      "/templates/projects/website/sonojs-website-01/main.webp",
+      "/websites/projects/sonojs-website-01/main.webp",
     detailCoverImageDark: null,
     liveUrl: "https://sonojs-website-01.sonojs2.workers.dev/",
     downloadUrl: "",
@@ -9576,7 +9576,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "npx serve . - Tailwind CDN, Lucide, local CSS/JS and images.",
+        body: "npx serve . Tailwind CDN, Lucide, local CSS/JS and images.",
       },
     ],
     includes: [
@@ -9594,9 +9594,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-website-02",
     title: "NULLWAVE",
     tagline:
-      "Cyberpunk music for reading & coding - listener-supported net radio.",
+      "Cyberpunk music for reading & coding, listener-supported net radio.",
     description:
-      "NULLWAVE is a multi-page cyberpunk net-radio website by SonoJS (demo brand: NULLWAVE). Zero-build static HTML with custom CSS and vanilla JS. Home hero Cyberpunk music for reading & coding with mini player, Today on air schedule, four stations (Focus / Night drive / Deep read / Tape room), signal chain, layered bed mixer, archive mixes, membership CTA; plus Schedule, Stations, Archive, Player, About, Blog, Membership, Contact, Support, Legal, and 404. Demo radio chrome only - no live stream backend. Run with npx serve . or host statically on Cloudflare Workers.",
+      "NULLWAVE is a multi-page cyberpunk net-radio website by SonoJS (demo brand: NULLWAVE). Zero-build static HTML with custom CSS and vanilla JS. Home hero Cyberpunk music for reading & coding with mini player, Today on air schedule, four stations (Focus / Night drive / Deep read / Tape room), signal chain, layered bed mixer, archive mixes, membership CTA; plus Schedule, Stations, Archive, Player, About, Blog, Membership, Contact, Support, Legal, and 404. Demo radio chrome only. No live stream backend. Run with npx serve . or host statically on Cloudflare Workers.",
     category: "website",
     websiteVertical: "media",
     stack: ["html", "css", "javascript"],
@@ -9611,11 +9611,11 @@ export const templateProjects: TemplateProject[] = [
     access: "member",
     badge: "new",
     coverVariant: "landing",
-    coverImage: "/templates/projects/website/sonojs-website-02/main.webp",
+    coverImage: "/websites/projects/sonojs-website-02/main.webp",
     coverImageDark: null,
-    coverVideo: "/templates/projects/website/sonojs-website-02/cover.mp4",
+    coverVideo: "/websites/projects/sonojs-website-02/cover.mp4",
     detailCoverImage:
-      "/templates/projects/website/sonojs-website-02/main.webp",
+      "/websites/projects/sonojs-website-02/main.webp",
     detailCoverImageDark: null,
     liveUrl: "https://sonojs-website-02.sonojs2.workers.dev/",
     downloadUrl: "",
@@ -9639,7 +9639,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "npx serve . - pure HTML / CSS / JS, no framework.",
+        body: "npx serve . pure HTML / CSS / JS, no framework.",
       },
     ],
     includes: [
@@ -9657,9 +9657,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-website-03",
     title: "Vidalli Andrea",
     tagline:
-      "Handcrafted jewelry - bilingual boutique with cart and lookbook.",
+      "Handcrafted jewelry, bilingual boutique with cart and lookbook.",
     description:
-      "Vidalli Andrea is a bilingual (EN/DE) luxury jewelry boutique website by SonoJS (demo brand: Vidalli Andrea, Krottendorf AT). Zero-build static HTML with local Cormorant Garamond + Manrope, custom CSS, and vanilla JS. Home hero Handcrafted with signature pieces, atelier story, lookbook, and service promises; full shop with filters, product detail, cart drawer, wishlist, checkout, account, journal, FAQ, contact, and 404 — mirrored under de/. Demo storefront chrome only - localStorage cart, no payment backend. Run with npx serve . or host statically on Cloudflare Workers.",
+      "Vidalli Andrea is a bilingual (EN/DE) luxury jewelry boutique website by SonoJS (demo brand: Vidalli Andrea, Krottendorf AT). Zero-build static HTML with local Cormorant Garamond + Manrope, custom CSS, and vanilla JS. Home hero Handcrafted with signature pieces, atelier story, lookbook, and service promises; full shop with filters, product detail, cart drawer, wishlist, checkout, account, journal, FAQ, contact, and 404, mirrored under de/. Demo storefront chrome only. LocalStorage cart, no payment backend. Run with npx serve . or host statically on Cloudflare Workers.",
     category: "website",
     websiteVertical: "ecommerce",
     stack: ["html", "css", "javascript"],
@@ -9674,11 +9674,11 @@ export const templateProjects: TemplateProject[] = [
     access: "member",
     badge: "new",
     coverVariant: "shop",
-    coverImage: "/templates/projects/website/sonojs-website-03/main.webp",
+    coverImage: "/websites/projects/sonojs-website-03/main.webp",
     coverImageDark: null,
-    coverVideo: "/templates/projects/website/sonojs-website-03/cover.mp4",
+    coverVideo: "/websites/projects/sonojs-website-03/cover.mp4",
     detailCoverImage:
-      "/templates/projects/website/sonojs-website-03/main.webp",
+      "/websites/projects/sonojs-website-03/main.webp",
     detailCoverImageDark: null,
     liveUrl: "https://sonojs-website-03.sonojs2.workers.dev/",
     downloadUrl: "",
@@ -9702,7 +9702,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "npx serve . - pure HTML / CSS / JS with local fonts and images.",
+        body: "npx serve . pure HTML / CSS / JS with local fonts and images.",
       },
     ],
     includes: [
@@ -9720,9 +9720,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-website-04",
     title: "TITAN",
     tagline:
-      "Train harder. Recover smarter. - premium fitness club multi-page site.",
+      "Train harder. Recover smarter. premium fitness club multi-page site.",
     description:
-      "TITAN is a multi-page premium gym & fitness website by SonoJS (demo brand: TITAN). Zero-build static HTML with compiled Tailwind CSS, Outfit + Syne, Lucide, GSAP, Lenis, Swiper, Leaflet, and a Three.js WebGL performance sculpture. Home hero Train harder / Recover smarter / Own your edge with trial CTAs, zones, classes, memberships, and testimonials; plus About, Classes, Schedule, Trainers, Gallery, Shop, Product, Pricing, Blog, Contact, Login, and 404. Demo club chrome only - forms have no backend. Run with npx serve . (optional npm run build:css). Host statically on Cloudflare Workers.",
+      "TITAN is a multi-page premium gym & fitness website by SonoJS (demo brand: TITAN). Zero-build static HTML with compiled Tailwind CSS, Outfit + Syne, Lucide, GSAP, Lenis, Swiper, Leaflet, and a Three.js WebGL performance sculpture. Home hero Train harder / Recover smarter / Own your edge with trial CTAs, zones, classes, memberships, and testimonials; plus About, Classes, Schedule, Trainers, Gallery, Shop, Product, Pricing, Blog, Contact, Login, and 404. Demo club chrome only. Forms have no backend. Run with npx serve . (optional npm run build:css). Host statically on Cloudflare Workers.",
     category: "website",
     websiteVertical: "fitness",
     stack: ["html", "css", "javascript", "tailwind", "lucide", "gsap", "threejs"],
@@ -9737,11 +9737,11 @@ export const templateProjects: TemplateProject[] = [
     access: "member",
     badge: "new",
     coverVariant: "landing",
-    coverImage: "/templates/projects/website/sonojs-website-04/main.webp",
+    coverImage: "/websites/projects/sonojs-website-04/main.webp",
     coverImageDark: null,
-    coverVideo: "/templates/projects/website/sonojs-website-04/cover.mp4",
+    coverVideo: "/websites/projects/sonojs-website-04/cover.mp4",
     detailCoverImage:
-      "/templates/projects/website/sonojs-website-04/main.webp",
+      "/websites/projects/sonojs-website-04/main.webp",
     detailCoverImageDark: null,
     liveUrl: "https://sonojs-website-04.sonojs2.workers.dev/",
     downloadUrl: "",
@@ -9765,7 +9765,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "npx serve . - prebuilt CSS; optional Tailwind watch via npm run build:css.",
+        body: "npx serve . prebuilt CSS; optional Tailwind watch via npm run build:css.",
       },
     ],
     includes: [
@@ -9783,9 +9783,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-website-05",
     title: "ORNA",
     tagline:
-      "Handwoven luxury underfoot - rug atelier storefront with lookbook.",
+      "Handwoven luxury underfoot, rug atelier storefront with lookbook.",
     description:
-      "ORNA is a multi-page luxury rug marketplace website by SonoJS (demo brand: ORNA Atelier). Zero-build static HTML with custom CSS design tokens, vanilla JS, and vendored Lenis, GSAP + ScrollTrigger, and Swiper. Home hero Handwoven Luxury Underfoot with Signatures gallery filters, loom video, room stories, and journal; plus Shop, Product, Cart, Checkout, Wishlist, Lookbook, About, Journal, Contact, FAQ, Account, and 404. Demo storefront chrome only - localStorage cart/wishlist, no payment backend. Run with npx serve . or host statically on Cloudflare Workers.",
+      "ORNA is a multi-page luxury rug marketplace website by SonoJS (demo brand: ORNA Atelier). Zero-build static HTML with custom CSS design tokens, vanilla JS, and vendored Lenis, GSAP + ScrollTrigger, and Swiper. Home hero Handwoven Luxury Underfoot with Signatures gallery filters, loom video, room stories, and journal; plus Shop, Product, Cart, Checkout, Wishlist, Lookbook, About, Journal, Contact, FAQ, Account, and 404. Demo storefront chrome only. LocalStorage cart/wishlist, no payment backend. Run with npx serve . or host statically on Cloudflare Workers.",
     category: "website",
     websiteVertical: "ecommerce",
     stack: ["html", "css", "javascript", "gsap"],
@@ -9800,11 +9800,11 @@ export const templateProjects: TemplateProject[] = [
     access: "member",
     badge: "new",
     coverVariant: "shop",
-    coverImage: "/templates/projects/website/sonojs-website-05/main.webp",
+    coverImage: "/websites/projects/sonojs-website-05/main.webp",
     coverImageDark: null,
-    coverVideo: "/templates/projects/website/sonojs-website-05/cover.mp4",
+    coverVideo: "/websites/projects/sonojs-website-05/cover.mp4",
     detailCoverImage:
-      "/templates/projects/website/sonojs-website-05/main.webp",
+      "/websites/projects/sonojs-website-05/main.webp",
     detailCoverImageDark: null,
     liveUrl: "https://sonojs-website-05.sonojs2.workers.dev/",
     downloadUrl: "",
@@ -9828,7 +9828,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "npx serve . - custom CSS tokens, local images/videos, no build step.",
+        body: "npx serve . custom CSS tokens, local images/videos, no build step.",
       },
     ],
     includes: [
@@ -9846,9 +9846,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-website-06",
     title: "KÁVA & Co.",
     tagline:
-      "A new era of coffee in Mill Bay - cinematic café multi-page site.",
+      "A new era of coffee in Mill Bay, cinematic café multi-page site.",
     description:
-      "KÁVA & Co. is a multi-page premium café website by SonoJS (demo brand: KÁVA & Co. Coffee, Mill Bay Centre). Built with Vite, React 19, TypeScript, Tailwind CSS 4, Framer Motion, React Router, and Lucide. Home hero with scroll-scrub cinema, ritual, daily board, reviews, and visit CTA; plus Menu with 3D tilt cards, About, Gallery lightbox, Reserve multi-step form, Contact, Journal, and journal posts. Dark/light theme toggle. Demo café chrome only - forms have no backend. Run with npm install && npm run dev or host the Vite build on Cloudflare Workers.",
+      "KÁVA & Co. is a multi-page premium café website by SonoJS (demo brand: KÁVA & Co. Coffee, Mill Bay Centre). Built with Vite, React 19, TypeScript, Tailwind CSS 4, Framer Motion, React Router, and Lucide. Home hero with scroll-scrub cinema, ritual, daily board, reviews, and visit CTA; plus Menu with 3D tilt cards, About, Gallery lightbox, Reserve multi-step form, Contact, Journal, and journal posts. Dark/light theme toggle. Demo café chrome only. Forms have no backend. Run with npm install && npm run dev or host the Vite build on Cloudflare Workers.",
     category: "website",
     websiteVertical: "food-beverage",
     stack: ["react", "vite", "typescript", "tailwind", "lucide", "reactrouter"],
@@ -9863,11 +9863,11 @@ export const templateProjects: TemplateProject[] = [
     access: "member",
     badge: "new",
     coverVariant: "landing",
-    coverImage: "/templates/projects/website/sonojs-website-06/main.webp",
+    coverImage: "/websites/projects/sonojs-website-06/main.webp",
     coverImageDark: null,
-    coverVideo: "/templates/projects/website/sonojs-website-06/cover.mp4",
+    coverVideo: "/websites/projects/sonojs-website-06/cover.mp4",
     detailCoverImage:
-      "/templates/projects/website/sonojs-website-06/main.webp",
+      "/websites/projects/sonojs-website-06/main.webp",
     detailCoverImageDark: null,
     liveUrl: "https://sonojs-website-06.sonojs2.workers.dev/",
     downloadUrl: "",
@@ -9891,7 +9891,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Vite React pack",
-        body: "npm install && npm run dev - Tailwind 4, dark/light theme, local images.",
+        body: "npm install && npm run dev. Tailwind 4, dark/light theme, local images.",
       },
     ],
     includes: [
@@ -9909,9 +9909,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-website-07",
     title: "Velora",
     tagline:
-      "Run agent pipelines with a clear audit trail - ops console multi-page site.",
+      "Run agent pipelines with a clear audit trail, ops console multi-page site.",
     description:
-      "Velora is a multi-page premium HTML marketing site by SonoJS (demo brand: Velora). Zero-build static HTML with custom CSS design tokens (copper/sage), self-hosted Public Sans + Syne, local SVG icon sprite, and vanilla JS. Home hero Run agent pipelines with a clear audit trail plus mock console, architecture bento, use-case tabs, pricing with yearly toggle, and testimonials; plus Features, Pricing, About, Careers, Blog, Blog post, Docs, Contact, and 404. Demo product chrome only - forms have no backend. Run with npx serve . or host statically on Cloudflare Workers.",
+      "Velora is a multi-page premium HTML marketing site by SonoJS (demo brand: Velora). Zero-build static HTML with custom CSS design tokens (copper/sage), self-hosted Public Sans + Syne, local SVG icon sprite, and vanilla JS. Home hero Run agent pipelines with a clear audit trail plus mock console, architecture bento, use-case tabs, pricing with yearly toggle, and testimonials; plus Features, Pricing, About, Careers, Blog, Blog post, Docs, Contact, and 404. Demo product chrome only. Forms have no backend. Run with npx serve . or host statically on Cloudflare Workers.",
     category: "website",
     websiteVertical: "saas",
     stack: ["html", "css", "javascript"],
@@ -9926,11 +9926,11 @@ export const templateProjects: TemplateProject[] = [
     access: "member",
     badge: "new",
     coverVariant: "landing",
-    coverImage: "/templates/projects/website/sonojs-website-07/main.webp",
+    coverImage: "/websites/projects/sonojs-website-07/main.webp",
     coverImageDark: null,
-    coverVideo: "/templates/projects/website/sonojs-website-07/cover.mp4",
+    coverVideo: "/websites/projects/sonojs-website-07/cover.mp4",
     detailCoverImage:
-      "/templates/projects/website/sonojs-website-07/main.webp",
+      "/websites/projects/sonojs-website-07/main.webp",
     detailCoverImageDark: null,
     liveUrl: "https://sonojs-website-07.sonojs2.workers.dev/",
     downloadUrl: "",
@@ -9954,7 +9954,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "npx serve . - progressive enhancement; usable with JS disabled.",
+        body: "npx serve . progressive enhancement; usable with JS disabled.",
       },
     ],
     includes: [
@@ -9972,9 +9972,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-website-08",
     title: "Synqor",
     tagline:
-      "Orchestrate work that survives production - durable AI jobs marketing site.",
+      "Orchestrate work that survives production, durable AI jobs marketing site.",
     description:
-      "Synqor is a multi-page premium HTML SaaS marketing kit by SonoJS (demo brand: Synqor). Zero-build static HTML with custom CSS design tokens, self-hosted Sora + IBM Plex fonts, local SVG icons, and vanilla JS. Home hero Orchestrate work that survives production with console mock panels, connectors, how-it-works, pricing with yearly toggle, testimonials, and FAQ; plus Pricing, About, Integrations, Blog with 3 full posts, Contact, FAQ, Login, Signup, and 404. Demo product chrome only - forms have no backend. Run with npx serve . or host statically on Cloudflare Workers.",
+      "Synqor is a multi-page premium HTML SaaS marketing kit by SonoJS (demo brand: Synqor). Zero-build static HTML with custom CSS design tokens, self-hosted Sora + IBM Plex fonts, local SVG icons, and vanilla JS. Home hero Orchestrate work that survives production with console mock panels, connectors, how-it-works, pricing with yearly toggle, testimonials, and FAQ; plus Pricing, About, Integrations, Blog with 3 full posts, Contact, FAQ, Login, Signup, and 404. Demo product chrome only. Forms have no backend. Run with npx serve . or host statically on Cloudflare Workers.",
     category: "website",
     websiteVertical: "saas",
     stack: ["html", "css", "javascript"],
@@ -9989,11 +9989,11 @@ export const templateProjects: TemplateProject[] = [
     access: "member",
     badge: "new",
     coverVariant: "landing",
-    coverImage: "/templates/projects/website/sonojs-website-08/main.webp",
+    coverImage: "/websites/projects/sonojs-website-08/main.webp",
     coverImageDark: null,
-    coverVideo: "/templates/projects/website/sonojs-website-08/cover.mp4",
+    coverVideo: "/websites/projects/sonojs-website-08/cover.mp4",
     detailCoverImage:
-      "/templates/projects/website/sonojs-website-08/main.webp",
+      "/websites/projects/sonojs-website-08/main.webp",
     detailCoverImageDark: null,
     liveUrl: "https://sonojs-website-08.sonojs2.workers.dev/",
     downloadUrl: "",
@@ -10017,7 +10017,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "npx serve . - progressive enhancement; usable with JS disabled.",
+        body: "npx serve . progressive enhancement; usable with JS disabled.",
       },
     ],
     includes: [
@@ -10035,9 +10035,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-website-09",
     title: "Maison Vale",
     tagline:
-      "Seasonal Canadian fine dining in Montréal - restaurant multi-page site.",
+      "Seasonal Canadian fine dining in Montréal, restaurant multi-page site.",
     description:
-      "Maison Vale is a multi-page premium restaurant website by SonoJS (demo brand: Maison Vale, Montréal). Zero-build static HTML with custom CSS design tokens, dark/light theme, self-hosted Playfair Display + Source Sans 3, local SVG icons, and vanilla JS. Home hero Seasonal Canadian fine dining in Montréal with story, chef special, menu preview, gallery, testimonials, and reservation form; plus Menu with filters and cart, Order + confirmation, Reservations + confirmation, About, Gallery lightbox, Journal with 3 posts, Contact, FAQ, and 404. Demo restaurant chrome only - cart/reservations use localStorage, no backend. Run with npx serve . or host statically on Cloudflare Workers.",
+      "Maison Vale is a multi-page premium restaurant website by SonoJS (demo brand: Maison Vale, Montréal). Zero-build static HTML with custom CSS design tokens, dark/light theme, self-hosted Playfair Display + Source Sans 3, local SVG icons, and vanilla JS. Home hero Seasonal Canadian fine dining in Montréal with story, chef special, menu preview, gallery, testimonials, and reservation form; plus Menu with filters and cart, Order + confirmation, Reservations + confirmation, About, Gallery lightbox, Journal with 3 posts, Contact, FAQ, and 404. Demo restaurant chrome only. Cart/reservations use localStorage, no backend. Run with npx serve . or host statically on Cloudflare Workers.",
     category: "website",
     websiteVertical: "restaurant",
     stack: ["html", "css", "javascript"],
@@ -10052,11 +10052,11 @@ export const templateProjects: TemplateProject[] = [
     access: "member",
     badge: "new",
     coverVariant: "landing",
-    coverImage: "/templates/projects/website/sonojs-website-09/main.webp",
+    coverImage: "/websites/projects/sonojs-website-09/main.webp",
     coverImageDark: null,
-    coverVideo: "/templates/projects/website/sonojs-website-09/cover.mp4",
+    coverVideo: "/websites/projects/sonojs-website-09/cover.mp4",
     detailCoverImage:
-      "/templates/projects/website/sonojs-website-09/main.webp",
+      "/websites/projects/sonojs-website-09/main.webp",
     detailCoverImageDark: null,
     liveUrl: "https://sonojs-website-09.sonojs2.workers.dev/",
     downloadUrl: "",
@@ -10080,13 +10080,13 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "npx serve . - self-hosted fonts, local icons, real food photography.",
+        body: "npx serve . self-hosted fonts, local icons, real food photography.",
       },
     ],
     includes: [
       "15 HTML pages (home, menu, order, reservations, gallery, blog ×3, about, contact, FAQ, 404…)",
       "assets/css (tokens, base, components, layout) + self-hosted fonts",
-      "assets/js (data, cart, main) — localStorage cart & booking demos",
+      "assets/js (data, cart, main), localStorage cart & booking demos",
       "assets/img food/interior photos + icons.svg + README",
     ],
     requirements: [
@@ -10098,9 +10098,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-website-10",
     title: "Shimago",
     tagline:
-      "Hot. Fresh. Loaded. — street-style pizzeria site for Ludhiana.",
+      "Hot. Fresh. Loaded. street-style pizzeria site for Ludhiana.",
     description:
-      "Shimago is a multi-page premium pizzeria website by SonoJS (demo brand: Shimago Pizzeria, Ludhiana). Zero-build static HTML with custom CSS design tokens, dark/light theme, self-hosted Outfit font, local SVG icons, and vanilla JS. Home hero Hot. Fresh. Loaded. with featured pies, about, gallery, blog, and contact; plus full Menu with filters and search, Cart, Checkout (delivery/takeaway mock), About, Gallery, Blog with 3 posts, Contact, FAQ, and 404. Demo restaurant chrome only — cart and checkout use localStorage, no backend. Host statically (Cloudflare Workers demo included).",
+      "Shimago is a multi-page premium pizzeria website by SonoJS (demo brand: Shimago Pizzeria, Ludhiana). Zero-build static HTML with custom CSS design tokens, dark/light theme, self-hosted Outfit font, local SVG icons, and vanilla JS. Home hero Hot. Fresh. Loaded. with featured pies, about, gallery, blog, and contact; plus full Menu with filters and search, Cart, Checkout (delivery/takeaway mock), About, Gallery, Blog with 3 posts, Contact, FAQ, and 404. Demo restaurant chrome only. Cart and checkout use localStorage, no backend. Host statically (Cloudflare Workers demo included).",
     category: "website",
     websiteVertical: "restaurant",
     stack: ["html", "css", "javascript"],
@@ -10115,11 +10115,11 @@ export const templateProjects: TemplateProject[] = [
     access: "member",
     badge: "new",
     coverVariant: "landing",
-    coverImage: "/templates/projects/website/sonojs-website-10/main.webp",
+    coverImage: "/websites/projects/sonojs-website-10/main.webp",
     coverImageDark: null,
-    coverVideo: "/templates/projects/website/sonojs-website-10/cover.mp4",
+    coverVideo: "/websites/projects/sonojs-website-10/cover.mp4",
     detailCoverImage:
-      "/templates/projects/website/sonojs-website-10/main.webp",
+      "/websites/projects/sonojs-website-10/main.webp",
     detailCoverImageDark: null,
     liveUrl: "https://sonojs-website-10.sonojs2.workers.dev/",
     downloadUrl: "",
@@ -10148,7 +10148,7 @@ export const templateProjects: TemplateProject[] = [
     includes: [
       "13 HTML pages (home, menu, cart, checkout, gallery, blog ×3, about, contact, FAQ, 404)",
       "assets/css (tokens, base, layout, components) + self-hosted Outfit",
-      "assets/js (data, cart, toast, main) — localStorage cart & checkout demos",
+      "assets/js (data, cart, toast, main), localStorage cart & checkout demos",
       "assets/img food photos + icons.svg + README",
     ],
     requirements: [
@@ -10160,9 +10160,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-website-11",
     title: "United Motors",
     tagline:
-      "Luxury Lifestyle Rentals — exotic fleet site for Los Angeles.",
+      "Luxury Lifestyle Rentals, exotic fleet site for Los Angeles.",
     description:
-      "United Motors is a multi-page premium luxury car rental website by SonoJS (demo brand: United Motors Group, Beverly Hills / Los Angeles). Zero-build static HTML with custom CSS design tokens, self-hosted Oswald + Source Sans 3, local SVG icons, and vanilla JS. Home hero Luxury Lifestyle Rentals with featured-car carousel, quick-book bar, category specials, how-it-works, gallery, testimonials, and blog teasers; plus Garage with search/sort/pagination, Car detail, Booking wizard, Compare (up to 3), Services, About, Blog with 3 posts, Contact, FAQ, and 404. Demo rental chrome only — favorites, compare, and booking drafts use localStorage, no backend. Host statically (Cloudflare Workers demo included).",
+      "United Motors is a multi-page premium luxury car rental website by SonoJS (demo brand: United Motors Group, Beverly Hills / Los Angeles). Zero-build static HTML with custom CSS design tokens, self-hosted Oswald + Source Sans 3, local SVG icons, and vanilla JS. Home hero Luxury Lifestyle Rentals with featured-car carousel, quick-book bar, category specials, how-it-works, gallery, testimonials, and blog teasers; plus Garage with search/sort/pagination, Car detail, Booking wizard, Compare (up to 3), Services, About, Blog with 3 posts, Contact, FAQ, and 404. Demo rental chrome only. Favorites, compare, and booking drafts use localStorage, no backend. Host statically (Cloudflare Workers demo included).",
     category: "website",
     websiteVertical: "automotive",
     stack: ["html", "css", "javascript"],
@@ -10177,11 +10177,11 @@ export const templateProjects: TemplateProject[] = [
     access: "member",
     badge: "new",
     coverVariant: "landing",
-    coverImage: "/templates/projects/website/sonojs-website-11/main.webp",
+    coverImage: "/websites/projects/sonojs-website-11/main.webp",
     coverImageDark: null,
-    coverVideo: "/templates/projects/website/sonojs-website-11/cover.mp4",
+    coverVideo: "/websites/projects/sonojs-website-11/cover.mp4",
     detailCoverImage:
-      "/templates/projects/website/sonojs-website-11/main.webp",
+      "/websites/projects/sonojs-website-11/main.webp",
     detailCoverImageDark: null,
     liveUrl: "https://sonojs-website-11.sonojs2.workers.dev/",
     downloadUrl: "",
@@ -10210,7 +10210,7 @@ export const templateProjects: TemplateProject[] = [
     includes: [
       "14 HTML pages (home, garage, car, booking, compare, services, about, blog ×3, contact, FAQ, 404)",
       "assets/css (tokens, base, components, pages) + self-hosted Oswald + Source Sans 3",
-      "assets/js (data, main, forms, garage, car, booking…) — localStorage favs/compare/booking",
+      "assets/js (data, main, forms, garage, car, booking…), localStorage favs/compare/booking",
       "assets/img fleet photos + icons.svg + README",
     ],
     requirements: [
@@ -10222,9 +10222,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-website-12",
     title: "Northline Residences",
     tagline:
-      "Homes with a Miami horizon — luxury real-estate agency site.",
+      "Homes with a Miami horizon, luxury real-estate agency site.",
     description:
-      "Northline Residences is a multi-page premium real-estate agency website by SonoJS (demo brand: Northline Residences, Miami). Zero-build static HTML with custom CSS design tokens (ink, stone, champagne), light/dark theme, self-hosted Fraunces + Outfit, local SVG icons, and vanilla JS. Home hero Homes with a Miami horizon with featured listings, neighborhoods, advisors, testimonials, and journal teasers; plus Listings with filter/search/sort, Listing detail with gallery and inquire, Agents + profiles, Neighborhoods + detail, Services, About, Sell valuation, Favorites, Compare (up to 3), Blog with 3 posts, Contact, FAQ, and 404. Demo agency chrome only — favorites and compare use localStorage, forms are mock, no backend. Host statically (Cloudflare Workers demo included).",
+      "Northline Residences is a multi-page premium real-estate agency website by SonoJS (demo brand: Northline Residences, Miami). Zero-build static HTML with custom CSS design tokens (ink, stone, champagne), light/dark theme, self-hosted Fraunces + Outfit, local SVG icons, and vanilla JS. Home hero Homes with a Miami horizon with featured listings, neighborhoods, advisors, testimonials, and journal teasers; plus Listings with filter/search/sort, Listing detail with gallery and inquire, Agents + profiles, Neighborhoods + detail, Services, About, Sell valuation, Favorites, Compare (up to 3), Blog with 3 posts, Contact, FAQ, and 404. Demo agency chrome only. Favorites and compare use localStorage, forms are mock, no backend. Host statically (Cloudflare Workers demo included).",
     category: "website",
     websiteVertical: "real-estate",
     stack: ["html", "css", "javascript"],
@@ -10239,11 +10239,11 @@ export const templateProjects: TemplateProject[] = [
     access: "member",
     badge: "new",
     coverVariant: "landing",
-    coverImage: "/templates/projects/website/sonojs-website-12/main.webp",
+    coverImage: "/websites/projects/sonojs-website-12/main.webp",
     coverImageDark: null,
-    coverVideo: "/templates/projects/website/sonojs-website-12/cover.mp4",
+    coverVideo: "/websites/projects/sonojs-website-12/cover.mp4",
     detailCoverImage:
-      "/templates/projects/website/sonojs-website-12/main.webp",
+      "/websites/projects/sonojs-website-12/main.webp",
     detailCoverImageDark: null,
     liveUrl: "https://sonojs-website-12.sonojs2.workers.dev/",
     downloadUrl: "",
@@ -10262,7 +10262,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Miami market locked",
-        body: "Brickell, Coral Gables, South Beach, Coconut Grove — one coherent city.",
+        body: "Brickell, Coral Gables, South Beach, Coconut Grove, one coherent city.",
       },
       {
         title: "Zero-build static",
@@ -10272,7 +10272,7 @@ export const templateProjects: TemplateProject[] = [
     includes: [
       "19 HTML pages (home, listings, detail, agents, neighborhoods, sell, compare, favorites, blog ×3, …)",
       "assets/css (tokens, base, components, layout, pages) + Fraunces + Outfit",
-      "assets/js (data, listings, favorites, compare, forms…) — localStorage demos",
+      "assets/js (data, listings, favorites, compare, forms…), localStorage demos",
       "assets/img listings/agents/neighborhoods + icons.svg + README",
     ],
     requirements: [
@@ -10284,9 +10284,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-website-13",
     title: "EstateVault",
     tagline:
-      "Find your next home with confidence — curated real-estate marketplace.",
+      "Find your next home with confidence, curated real-estate marketplace.",
     description:
-      "EstateVault is a multi-page premium real-estate marketplace website by SonoJS (demo brand: EstateVault). Static HTML with CSS and vanilla JS — no build step. Mobile-first UI with bottom nav, dark/light theme, and a large demo dataset (listings, agents, markets, blog, FAQ). Home hero Find your next home with confidence with buy/rent search filters and featured listings; plus Listings, Listing detail, Buy/Rent flows, Sell, List property, Agents, Markets, Compare, Favorites, Virtual tour + booking, Mortgage, Offer, Concierge, Dashboard, Auth (login/register), Blog, Contact, FAQ, Careers, Press, Partners, Privacy, Terms, Sitemap, and more. Demo marketplace chrome only — favorites, compare, and flows use localStorage; forms have no backend. Uses CDN helpers (Tailwind, Lucide, GSAP, Leaflet, Google Fonts) for polish. Host statically (Cloudflare Workers demo included).",
+      "EstateVault is a multi-page premium real-estate marketplace website by SonoJS (demo brand: EstateVault). Static HTML with CSS and vanilla JS. No build step. Mobile-first UI with bottom nav, dark/light theme, and a large demo dataset (listings, agents, markets, blog, FAQ). Home hero Find your next home with confidence with buy/rent search filters and featured listings; plus Listings, Listing detail, Buy/Rent flows, Sell, List property, Agents, Markets, Compare, Favorites, Virtual tour + booking, Mortgage, Offer, Concierge, Dashboard, Auth (login/register), Blog, Contact, FAQ, Careers, Press, Partners, Privacy, Terms, Sitemap, and more. Demo marketplace chrome only. Favorites, compare, and flows use localStorage; forms have no backend. Uses CDN helpers (Tailwind, Lucide, GSAP, Leaflet, Google Fonts) for polish. Host statically (Cloudflare Workers demo included).",
     category: "website",
     websiteVertical: "real-estate",
     stack: ["html", "css", "javascript"],
@@ -10301,11 +10301,11 @@ export const templateProjects: TemplateProject[] = [
     access: "member",
     badge: "new",
     coverVariant: "landing",
-    coverImage: "/templates/projects/website/sonojs-website-13/main.webp",
+    coverImage: "/websites/projects/sonojs-website-13/main.webp",
     coverImageDark: null,
-    coverVideo: "/templates/projects/website/sonojs-website-13/cover.mp4",
+    coverVideo: "/websites/projects/sonojs-website-13/cover.mp4",
     detailCoverImage:
-      "/templates/projects/website/sonojs-website-13/main.webp",
+      "/websites/projects/sonojs-website-13/main.webp",
     detailCoverImageDark: null,
     liveUrl: "https://sonojs-website-13.sonojs2.workers.dev/",
     downloadUrl: "",
@@ -10347,9 +10347,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-website-14",
     title: "Lumina",
     tagline:
-      "Stop being a local secret — real-estate media for elite agents.",
+      "Stop being a local secret, real-estate media for elite agents.",
     description:
-      "Lumina is a multi-page premium real-estate media agency website by SonoJS (demo brand: Lumina). Dark-luxury static HTML with modular CSS and ES-module JavaScript — no Vite/React build. Home hero Stop being a Local Secret with 3D canvas treatment, trusted-by strip, reel showcase, retainer packages, and process; plus Pricing → Cart → Checkout → success, Add-ons, Work portfolio + case studies, Booking calendar, Client portal (demo login), Services, Process, Markets, Team, Testimonials, Blog, Contact, FAQ, Privacy, Terms, and 404. Demo commerce chrome only — cart, theme, orders, and bookings use localStorage; checkout is mock. CDN helpers: Iconify, GSAP/ScrollTrigger, Three.js, Google Fonts. Needs a static HTTP server for ES modules (not file://). Host on Cloudflare Workers (demo included).",
+      "Lumina is a multi-page premium real-estate media agency website by SonoJS (demo brand: Lumina). Dark-luxury static HTML with modular CSS and ES-module JavaScript. No Vite/React build. Home hero Stop being a Local Secret with 3D canvas treatment, trusted-by strip, reel showcase, retainer packages, and process; plus Pricing → Cart → Checkout → success, Add-ons, Work portfolio + case studies, Booking calendar, Client portal (demo login), Services, Process, Markets, Team, Testimonials, Blog, Contact, FAQ, Privacy, Terms, and 404. Demo commerce chrome only. Cart, theme, orders, and bookings use localStorage; checkout is mock. CDN helpers: Iconify, GSAP/ScrollTrigger, Three.js, Google Fonts. Needs a static HTTP server for ES modules. Host on Cloudflare Workers (demo included).",
     category: "website",
     websiteVertical: "agency",
     stack: ["html", "css", "javascript"],
@@ -10364,11 +10364,11 @@ export const templateProjects: TemplateProject[] = [
     access: "member",
     badge: "new",
     coverVariant: "landing",
-    coverImage: "/templates/projects/website/sonojs-website-14/main.webp",
+    coverImage: "/websites/projects/sonojs-website-14/main.webp",
     coverImageDark: null,
-    coverVideo: "/templates/projects/website/sonojs-website-14/cover.mp4",
+    coverVideo: "/websites/projects/sonojs-website-14/cover.mp4",
     detailCoverImage:
-      "/templates/projects/website/sonojs-website-14/main.webp",
+      "/websites/projects/sonojs-website-14/main.webp",
     detailCoverImageDark: null,
     liveUrl: "https://sonojs-website-14.sonojs2.workers.dev/",
     downloadUrl: "",
@@ -10402,7 +10402,7 @@ export const templateProjects: TemplateProject[] = [
     ],
     requirements: [
       "Modern browser",
-      "Static HTTP host (ES modules / fetch — not file://)",
+      "Static HTTP host (ES modules / fetch)",
       "Network access for CDN assets (Iconify, GSAP, Three.js, fonts)",
     ],
   },
@@ -10410,9 +10410,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-website-15",
     title: "Nestora",
     tagline:
-      "Homes, mapped with quiet precision — map-first real-estate workspace.",
+      "Homes, mapped with quiet precision, map-first real-estate workspace.",
     description:
-      "Nestora is a multi-page premium map-first real-estate product website by SonoJS (demo brand: Nestora). Static HTML with CSS and vanilla ES-module JavaScript — no Vite/React/Next. Marketing landing Homes, mapped with quiet precision plus About, Pricing, Blog, Contact, FAQ, Careers, Privacy, and Terms; plus a full app shell: Dashboard with Leaflet map, Listings search (filters/sort/pagination), Property detail (gallery, tour booking, messaging, 3D teaser), Map explore, Favorites, Compare (max 3), Agents, Tours, Inbox, Notifications, Add Property wizard, My Listings, Checkout + Orders (boost commerce demo), Analytics (Chart.js), Settings (dark/light), and Help. Demo product chrome only — fake data and localStorage sessions; auth is prefilled demo. CDN: Tailwind, Lucide, Leaflet, Chart.js, GSAP, Three.js, Google Fonts. Needs a static HTTP server for ES modules. Host on Cloudflare Workers (demo included).",
+      "Nestora is a multi-page premium map-first real-estate product website by SonoJS (demo brand: Nestora). Static HTML with CSS and vanilla ES-module JavaScript. No Vite/React/Next. Marketing landing Homes, mapped with quiet precision plus About, Pricing, Blog, Contact, FAQ, Careers, Privacy, and Terms; plus a full app shell: Dashboard with Leaflet map, Listings search (filters/sort/pagination), Property detail (gallery, tour booking, messaging, 3D teaser), Map explore, Favorites, Compare (max 3), Agents, Tours, Inbox, Notifications, Add Property wizard, My Listings, Checkout + Orders (boost commerce demo), Analytics (Chart.js), Settings (dark/light), and Help. Demo product chrome only. Fake data and localStorage sessions; auth is prefilled demo. CDN: Tailwind, Lucide, Leaflet, Chart.js, GSAP, Three.js, Google Fonts. Needs a static HTTP server for ES modules. Host on Cloudflare Workers (demo included).",
     category: "website",
     websiteVertical: "real-estate",
     stack: ["html", "css", "javascript"],
@@ -10427,11 +10427,11 @@ export const templateProjects: TemplateProject[] = [
     access: "member",
     badge: "new",
     coverVariant: "landing",
-    coverImage: "/templates/projects/website/sonojs-website-15/main.webp",
+    coverImage: "/websites/projects/sonojs-website-15/main.webp",
     coverImageDark: null,
-    coverVideo: "/templates/projects/website/sonojs-website-15/cover.mp4",
+    coverVideo: "/websites/projects/sonojs-website-15/cover.mp4",
     detailCoverImage:
-      "/templates/projects/website/sonojs-website-15/main.webp",
+      "/websites/projects/sonojs-website-15/main.webp",
     detailCoverImageDark: null,
     liveUrl: "https://sonojs-website-15.sonojs2.workers.dev/",
     downloadUrl: "",
@@ -10455,7 +10455,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "No framework build",
-        body: "npx serve . — HTML + CSS + ES modules (not file://).",
+        body: "npx serve . HTML + CSS + ES modules over HTTP.",
       },
     ],
     includes: [
@@ -10466,7 +10466,7 @@ export const templateProjects: TemplateProject[] = [
     ],
     requirements: [
       "Modern browser",
-      "Static HTTP host (npx serve . — ES modules / fetch)",
+      "Static HTTP host (npx serve . ES modules / fetch)",
       "Network access for CDN assets (Tailwind, Leaflet, Chart.js, fonts)",
     ],
   },
@@ -10474,9 +10474,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-website-16",
     title: "AURUM",
     tagline:
-      "Private residences on the Gulf — ultra-luxury Dubai real estate.",
+      "Private residences on the Gulf, ultra-luxury Dubai real estate.",
     description:
-      "AURUM is a multi-page premium ultra-luxury real-estate website by SonoJS (demo brand: AURUM, Dubai, UAE · AED). Zero-build static HTML with cinematic dark design tokens, optional light theme, self-hosted Syne + Outfit, local SVG icons, and vanilla JS. Home hero AURUM with full-bleed Gulf imagery, featured residences, districts, and VIP CTA; plus Residences with search/filters/sort, Residence detail with gallery and inquire, Neighborhoods + detail, Private Office (sealed placements), About, Team, Blog with posts, Contact, FAQ, Favorites (localStorage), and 404. Demo agency chrome only — favorites and forms are mock, no backend. Host statically (Cloudflare Workers demo included).",
+      "AURUM is a multi-page premium ultra-luxury real-estate website by SonoJS (demo brand: AURUM, Dubai, UAE · AED). Zero-build static HTML with cinematic dark design tokens, optional light theme, self-hosted Syne + Outfit, local SVG icons, and vanilla JS. Home hero AURUM with full-bleed Gulf imagery, featured residences, districts, and VIP CTA; plus Residences with search/filters/sort, Residence detail with gallery and inquire, Neighborhoods + detail, Private Office (sealed placements), About, Team, Blog with posts, Contact, FAQ, Favorites (localStorage), and 404. Demo agency chrome only. Favorites and forms are mock, no backend. Host statically (Cloudflare Workers demo included).",
     category: "website",
     websiteVertical: "real-estate",
     stack: ["html", "css", "javascript"],
@@ -10491,11 +10491,11 @@ export const templateProjects: TemplateProject[] = [
     access: "member",
     badge: "new",
     coverVariant: "landing",
-    coverImage: "/templates/projects/website/sonojs-website-16/main.webp",
+    coverImage: "/websites/projects/sonojs-website-16/main.webp",
     coverImageDark: null,
-    coverVideo: "/templates/projects/website/sonojs-website-16/cover.mp4",
+    coverVideo: "/websites/projects/sonojs-website-16/cover.mp4",
     detailCoverImage:
-      "/templates/projects/website/sonojs-website-16/main.webp",
+      "/websites/projects/sonojs-website-16/main.webp",
     detailCoverImageDark: null,
     liveUrl: "https://sonojs-website-16.sonojs2.workers.dev/",
     downloadUrl: "",
@@ -10518,13 +10518,13 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "HTML + CSS + vanilla JS — no React/Vite; host on any static CDN.",
+        body: "HTML + CSS + vanilla JS. No React/Vite; host on any static CDN.",
       },
     ],
     includes: [
       "14 HTML pages (home, residences, detail, neighborhoods, private office, team, blog…)",
       "assets/css + self-hosted Syne + Outfit · local icons and photography",
-      "assets/js — filters, favorites, forms (mock), theme",
+      "assets/js, filters, favorites, forms (mock), theme",
       "README for buyers",
     ],
     requirements: [
@@ -10536,9 +10536,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-website-17",
     title: "Empire",
     tagline:
-      "Late Night Icon — charcoal grill, kebabs, and biryani until 3 AM.",
+      "Late Night Icon, charcoal grill, kebabs, and biryani until 3 AM.",
     description:
-      "Empire is a multi-page premium late-night grill restaurant website by SonoJS (demo brand: Empire). Zero-build static HTML with dark charcoal design tokens, light/dark theme, self-hosted Bebas Neue + Manrope, local SVG icons, and vanilla JS. Home hero Empire Late Night Icon with signature carousel, menu filters, late-night band, gallery, and outlets across New York, London, Berlin, and Los Angeles; plus full Menu, Dish detail with add-ons, Cart → Checkout → success, Locations, Gallery, Blog, Reservation, Catering, Contact, FAQ, Careers, legal pages, and 404. Demo restaurant chrome only — cart and checkout use localStorage, forms are mock, no backend. Host statically (Cloudflare Workers demo included).",
+      "Empire is a multi-page premium late-night grill restaurant website by SonoJS (demo brand: Empire). Zero-build static HTML with dark charcoal design tokens, light/dark theme, self-hosted Bebas Neue + Manrope, local SVG icons, and vanilla JS. Home hero Empire Late Night Icon with signature carousel, menu filters, late-night band, gallery, and outlets across New York, London, Berlin, and Los Angeles; plus full Menu, Dish detail with add-ons, Cart → Checkout → success, Locations, Gallery, Blog, Reservation, Catering, Contact, FAQ, Careers, legal pages, and 404. Demo restaurant chrome only. Cart and checkout use localStorage, forms are mock, no backend. Host statically (Cloudflare Workers demo included).",
     category: "website",
     websiteVertical: "restaurant",
     stack: ["html", "css", "javascript"],
@@ -10553,11 +10553,11 @@ export const templateProjects: TemplateProject[] = [
     access: "member",
     badge: "new",
     coverVariant: "landing",
-    coverImage: "/templates/projects/website/sonojs-website-17/main.webp",
+    coverImage: "/websites/projects/sonojs-website-17/main.webp",
     coverImageDark: null,
-    coverVideo: "/templates/projects/website/sonojs-website-17/cover.mp4",
+    coverVideo: "/websites/projects/sonojs-website-17/cover.mp4",
     detailCoverImage:
-      "/templates/projects/website/sonojs-website-17/main.webp",
+      "/websites/projects/sonojs-website-17/main.webp",
     detailCoverImageDark: null,
     liveUrl: "https://sonojs-website-17.sonojs2.workers.dev/",
     downloadUrl: "",
@@ -10580,13 +10580,13 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "Self-hosted fonts, local photos/icons, light/dark theme — no CDN fonts.",
+        body: "Self-hosted fonts, local photos/icons, light/dark theme. No CDN fonts.",
       },
     ],
     includes: [
       "21 HTML pages (home, menu, dish, cart, checkout, locations, gallery, blog, legal…)",
       "assets/css/premium.css + Bebas Neue + Manrope · local icons",
-      "assets/js — cart, menu filters, theme, shared UI shell",
+      "assets/js, cart, menu filters, theme, shared UI shell",
       "assets/img food photography + README",
     ],
     requirements: [
@@ -10598,9 +10598,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-website-18",
     title: "Pastry Mania",
     tagline:
-      "Cakes made for the moment — Portland boutique bakery storefront.",
+      "Cakes made for the moment. Portland boutique bakery storefront.",
     description:
-      "Pastry Mania is a multi-page premium boutique bakery website by SonoJS (demo brand: Pastry Mania, Pearl District, Portland, OR · USD). Zero-build static HTML with warm cocoa design tokens, light/dark theme, self-hosted Fraunces + Manrope, local SVG icons, and vanilla JS. Home hero Cakes made for the moment with featured cakes, occasions, custom CTA, and reviews; plus Menu with search/chips/sort, Product detail (sizes/flavors), Custom Order wizard, Gallery, About, Blog, FAQ, Contact, Cart → Checkout → order success, Visit/hours, Privacy, Terms, and 404. Demo bakery chrome only — cart and checkout use localStorage, WhatsApp quote link and forms are mock, no backend. Host statically (Cloudflare Workers demo included).",
+      "Pastry Mania is a multi-page premium boutique bakery website by SonoJS (demo brand: Pastry Mania, Pearl District, Portland, OR · USD). Zero-build static HTML with warm cocoa design tokens, light/dark theme, self-hosted Fraunces + Manrope, local SVG icons, and vanilla JS. Home hero Cakes made for the moment with featured cakes, occasions, custom CTA, and reviews; plus Menu with search/chips/sort, Product detail (sizes/flavors), Custom Order wizard, Gallery, About, Blog, FAQ, Contact, Cart → Checkout → order success, Visit/hours, Privacy, Terms, and 404. Demo bakery chrome only. Cart and checkout use localStorage, WhatsApp quote link and forms are mock, no backend. Host statically (Cloudflare Workers demo included).",
     category: "website",
     websiteVertical: "food-beverage",
     stack: ["html", "css", "javascript"],
@@ -10615,11 +10615,11 @@ export const templateProjects: TemplateProject[] = [
     access: "member",
     badge: "new",
     coverVariant: "landing",
-    coverImage: "/templates/projects/website/sonojs-website-18/main.webp",
+    coverImage: "/websites/projects/sonojs-website-18/main.webp",
     coverImageDark: null,
-    coverVideo: "/templates/projects/website/sonojs-website-18/cover.mp4",
+    coverVideo: "/websites/projects/sonojs-website-18/cover.mp4",
     detailCoverImage:
-      "/templates/projects/website/sonojs-website-18/main.webp",
+      "/websites/projects/sonojs-website-18/main.webp",
     detailCoverImageDark: null,
     liveUrl: "https://sonojs-website-18.sonojs2.workers.dev/",
     downloadUrl: "",
@@ -10638,17 +10638,17 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Portland boutique lock",
-        body: "Pearl District HQ, USD pricing, visit hours — coherent bakery brand.",
+        body: "Pearl District HQ, USD pricing, visit hours, coherent bakery brand.",
       },
       {
         title: "Zero-build static",
-        body: "Self-hosted fonts, local cake photography, light/dark theme — no CDN fonts.",
+        body: "Self-hosted fonts, local cake photography, light/dark theme. No CDN fonts.",
       },
     ],
     includes: [
       "18 HTML pages (home, menu, product, custom order, cart, checkout, gallery, blog, legal…)",
       "css tokens + Fraunces + Manrope · local icons",
-      "js — cart, menu, custom-order, theme, shared shell",
+      "js, cart, menu, custom-order, theme, shared shell",
       "assets/img cake photography + README",
     ],
     requirements: [
@@ -10660,9 +10660,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-website-19",
     title: "Aureum",
     tagline:
-      "Luxury timepieces — precision watches and clocks for US & EU.",
+      "Luxury timepieces, precision watches and clocks for US & EU.",
     description:
-      "Aureum is a multi-page premium luxury watch store by SonoJS (demo brand: Aureum, New York HQ · USD). Zero-build static HTML with dark gold design tokens, self-hosted display + sans fonts, local icons, and vanilla JS. Home hero Aureum with 3D/canvas treatment, trust strip, festive offers, new arrivals, and collections; plus Shop, Product detail, Collections, Offers, Cart → Checkout → confirmation, Wishlist, Search, Lookbook, Journal, About, Contact, FAQ, Stores, Account, Admin demo, Privacy, Terms, Shipping, Returns, and 404. Demo commerce chrome only — cart, wishlist, and orders use localStorage; promo codes and admin login are mock, no backend. Host statically (Cloudflare Workers demo included).",
+      "Aureum is a multi-page premium luxury watch store by SonoJS (demo brand: Aureum, New York HQ · USD). Zero-build static HTML with dark gold design tokens, self-hosted display + sans fonts, local icons, and vanilla JS. Home hero Aureum with 3D/canvas treatment, trust strip, festive offers, new arrivals, and collections; plus Shop, Product detail, Collections, Offers, Cart → Checkout → confirmation, Wishlist, Search, Lookbook, Journal, About, Contact, FAQ, Stores, Account, Admin demo, Privacy, Terms, Shipping, Returns, and 404. Demo commerce chrome only. Cart, wishlist, and orders use localStorage; promo codes and admin login are mock, no backend. Host statically (Cloudflare Workers demo included).",
     category: "website",
     websiteVertical: "ecommerce",
     stack: ["html", "css", "javascript"],
@@ -10677,11 +10677,11 @@ export const templateProjects: TemplateProject[] = [
     access: "member",
     badge: "new",
     coverVariant: "landing",
-    coverImage: "/templates/projects/website/sonojs-website-19/main.webp",
+    coverImage: "/websites/projects/sonojs-website-19/main.webp",
     coverImageDark: null,
-    coverVideo: "/templates/projects/website/sonojs-website-19/cover.mp4",
+    coverVideo: "/websites/projects/sonojs-website-19/cover.mp4",
     detailCoverImage:
-      "/templates/projects/website/sonojs-website-19/main.webp",
+      "/websites/projects/sonojs-website-19/main.webp",
     detailCoverImageDark: null,
     liveUrl: "https://sonojs-website-19.sonojs2.workers.dev/",
     downloadUrl: "",
@@ -10704,13 +10704,13 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "Local fonts and imagery — open on any static host.",
+        body: "Local fonts and imagery, open on any static host.",
       },
     ],
     includes: [
       "25 HTML pages (home, shop, product, collections, cart, checkout, lookbook, admin…)",
       "CSS tokens + self-hosted fonts · local product photography",
-      "JS — catalog, cart/wishlist store, shop filters, admin demo",
+      "JS, catalog, cart/wishlist store, shop filters, admin demo",
       "README for buyers",
     ],
     requirements: [
@@ -10724,7 +10724,7 @@ export const templateProjects: TemplateProject[] = [
     tagline:
       "Specialty coffee, roasted to order on the Atlantic coast.",
     description:
-      "Island Roaster is a multi-page premium specialty coffee storefront by SonoJS (demo brand: Island Roaster, Portland, Maine · USD). Zero-build static HTML with coastal craft design tokens, self-hosted fonts, local icons, and vanilla JS. Home hero Specialty coffee, roasted to order with featured coffees, roast journey, origins map, brew tips, and journal; plus Shop with filters, Product detail (weight/grind), Cart → Checkout, Gear, Subscriptions, Origins, Brew guides, Roast schedule, Wholesale, About, Journal, Contact, FAQ, Shipping & returns, Privacy, Terms, Cookies, and 404. Demo commerce chrome only — cart and subscriptions use localStorage; promo codes ISLAND10 / FREESHIP are mock, no backend. Host statically (Cloudflare Workers demo included).",
+      "Island Roaster is a multi-page premium specialty coffee storefront by SonoJS (demo brand: Island Roaster, Portland, Maine · USD). Zero-build static HTML with coastal craft design tokens, self-hosted fonts, local icons, and vanilla JS. Home hero Specialty coffee, roasted to order with featured coffees, roast journey, origins map, brew tips, and journal; plus Shop with filters, Product detail (weight/grind), Cart → Checkout, Gear, Subscriptions, Origins, Brew guides, Roast schedule, Wholesale, About, Journal, Contact, FAQ, Shipping & returns, Privacy, Terms, Cookies, and 404. Demo commerce chrome only. Cart and subscriptions use localStorage; promo codes ISLAND10 / FREESHIP are mock, no backend. Host statically (Cloudflare Workers demo included).",
     category: "website",
     websiteVertical: "food-beverage",
     stack: ["html", "css", "javascript"],
@@ -10739,11 +10739,11 @@ export const templateProjects: TemplateProject[] = [
     access: "member",
     badge: "new",
     coverVariant: "landing",
-    coverImage: "/templates/projects/website/sonojs-website-20/main.webp",
+    coverImage: "/websites/projects/sonojs-website-20/main.webp",
     coverImageDark: null,
-    coverVideo: "/templates/projects/website/sonojs-website-20/cover.mp4",
+    coverVideo: "/websites/projects/sonojs-website-20/cover.mp4",
     detailCoverImage:
-      "/templates/projects/website/sonojs-website-20/main.webp",
+      "/websites/projects/sonojs-website-20/main.webp",
     detailCoverImageDark: null,
     liveUrl: "https://sonojs-website-20.sonojs2.workers.dev/",
     downloadUrl: "",
@@ -10766,13 +10766,13 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "Local fonts and photography — Portland ME HQ, US & EU shipping story.",
+        body: "Local fonts and photography. Portland ME HQ, US & EU shipping story.",
       },
     ],
     includes: [
       "22 HTML pages (home, shop, product, cart, checkout, gear, subscriptions, origins…)",
       "CSS + self-hosted fonts · local coffee photography",
-      "JS — cart, shop filters, roast journey, mock forms",
+      "JS, cart, shop filters, roast journey, mock forms",
       "README for buyers",
     ],
     requirements: [
@@ -10784,9 +10784,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-website-21",
     title: "Maison.",
     tagline:
-      "Quiet luxury for every day — women's fashion storefront.",
+      "Quiet luxury for every day, women's fashion storefront.",
     description:
-      "Maison. is a multi-page premium quiet-luxury women's fashion store by SonoJS (demo brand: Maison. · USD). Zero-build static HTML with refined design tokens, self-hosted fonts, local icons, and vanilla JS. Home hero Quiet luxury for every day with category shop, new arrivals, archive sale countdown, bestsellers, and trust strip; plus Shop with filters/sort, Product detail (gallery, color/size), Cart → Checkout, Wishlist, Search, Lookbook, Journal, Stores (NY / London / Paris / Milan / LA / Berlin), Account (login/register/orders/track), Sale, Careers, Sustainability, FAQ, Contact, Shipping, Privacy, Terms, and 404. Demo commerce chrome only — cart and wishlist use localStorage; checkout is mock, no backend. Host statically (Cloudflare Workers demo included).",
+      "Maison. is a multi-page premium quiet-luxury women's fashion store by SonoJS (demo brand: Maison. · USD). Zero-build static HTML with refined design tokens, self-hosted fonts, local icons, and vanilla JS. Home hero Quiet luxury for every day with category shop, new arrivals, archive sale countdown, bestsellers, and trust strip; plus Shop with filters/sort, Product detail (gallery, color/size), Cart → Checkout, Wishlist, Search, Lookbook, Journal, Stores (NY / London / Paris / Milan / LA / Berlin), Account (login/register/orders/track), Sale, Careers, Sustainability, FAQ, Contact, Shipping, Privacy, Terms, and 404. Demo commerce chrome only. Cart and wishlist use localStorage; checkout is mock, no backend. Host statically (Cloudflare Workers demo included).",
     category: "website",
     websiteVertical: "ecommerce",
     stack: ["html", "css", "javascript"],
@@ -10801,11 +10801,11 @@ export const templateProjects: TemplateProject[] = [
     access: "member",
     badge: "new",
     coverVariant: "landing",
-    coverImage: "/templates/projects/website/sonojs-website-21/main.webp",
+    coverImage: "/websites/projects/sonojs-website-21/main.webp",
     coverImageDark: null,
-    coverVideo: "/templates/projects/website/sonojs-website-21/cover.mp4",
+    coverVideo: "/websites/projects/sonojs-website-21/cover.mp4",
     detailCoverImage:
-      "/templates/projects/website/sonojs-website-21/main.webp",
+      "/websites/projects/sonojs-website-21/main.webp",
     detailCoverImageDark: null,
     liveUrl: "https://sonojs-website-21.sonojs2.workers.dev/",
     downloadUrl: "",
@@ -10828,13 +10828,13 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "Local fonts and photography — no CDN fonts or Unsplash hotlinks.",
+        body: "Local fonts and photography. No CDN fonts or Unsplash hotlinks.",
       },
     ],
     includes: [
       "26 HTML pages (home, shop, product, cart, checkout, lookbook, account, stores…)",
       "CSS design system + self-hosted fonts · local fashion photography",
-      "JS — catalog, cart/wishlist store, shared UI shell",
+      "JS, catalog, cart/wishlist store, shared UI shell",
       "README for buyers",
     ],
     requirements: [
@@ -10846,9 +10846,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-website-22",
     title: "NovaSpin Casino",
     tagline:
-      "Premium casino frontend — lobby, wallet, VIP, and compliance pages.",
+      "Premium casino frontend, lobby, wallet, VIP, and compliance pages.",
     description:
-      "NovaSpin Casino is a multi-page premium casino website template by SonoJS (demo brand: NovaSpin Casino · EU / US ready). Zero-build static HTML with Bootstrap, self-hosted icon fonts, and vanilla JS. Home hero with winners ticker, stats strip, featured games, promotions, and why-NovaSpin; plus Games lobby, game details, cards / dice / roulette demos, providers, tournaments, leaderboard, promotions & bonuses, VIP, dashboard, profile, deposit / withdraw, bet history, transactions, notifications, KYC / AML, responsible gaming, fairness, affiliates, blog, support tickets, auth (sign-in / sign-up / forgot / reset), FAQ, contact, cookie / privacy / terms / policy, and 404. Demo casino chrome only — mock wallet and interactive games, no real-money backend. Host statically (Cloudflare Workers demo included).",
+      "NovaSpin Casino is a multi-page premium casino website template by SonoJS (demo brand: NovaSpin Casino · EU / US ready). Zero-build static HTML with Bootstrap, self-hosted icon fonts, and vanilla JS. Home hero with winners ticker, stats strip, featured games, promotions, and why-NovaSpin; plus Games lobby, game details, cards / dice / roulette demos, providers, tournaments, leaderboard, promotions & bonuses, VIP, dashboard, profile, deposit / withdraw, bet history, transactions, notifications, KYC / AML, responsible gaming, fairness, affiliates, blog, support tickets, auth (sign-in / sign-up / forgot / reset), FAQ, contact, cookie / privacy / terms / policy, and 404. Demo casino chrome only. Mock wallet and interactive games, no real-money backend. Host statically (Cloudflare Workers demo included).",
     category: "website",
     websiteVertical: "betting",
     stack: ["html", "css", "javascript"],
@@ -10863,11 +10863,11 @@ export const templateProjects: TemplateProject[] = [
     access: "member",
     badge: "new",
     coverVariant: "landing",
-    coverImage: "/templates/projects/website/sonojs-website-22/main.webp",
+    coverImage: "/websites/projects/sonojs-website-22/main.webp",
     coverImageDark: null,
-    coverVideo: "/templates/projects/website/sonojs-website-22/cover.mp4",
+    coverVideo: "/websites/projects/sonojs-website-22/cover.mp4",
     detailCoverImage:
-      "/templates/projects/website/sonojs-website-22/main.webp",
+      "/websites/projects/sonojs-website-22/main.webp",
     detailCoverImageDark: null,
     liveUrl: "https://sonojs-website-22.sonojs2.workers.dev/",
     downloadUrl: "",
@@ -10890,13 +10890,13 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "40 HTML pages — Bootstrap + local assets, no build step.",
+        body: "40 HTML pages. Bootstrap + local assets, no build step.",
       },
     ],
     includes: [
       "40 HTML pages (home, games, wallet, VIP, KYC, auth, legal…)",
       "CSS (Bootstrap + premium theme) · icon fonts · local imagery",
-      "JS — mock wallet, game demos, shared shell",
+      "JS, mock wallet, game demos, shared shell",
       "README for buyers",
     ],
     requirements: [
@@ -10908,9 +10908,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-website-23",
     title: "Betora",
     tagline:
-      "Mobile-first casino, sports, and shop — lobby to checkout.",
+      "Mobile-first casino, sports, and shop, lobby to checkout.",
     description:
-      "Betora is a multi-page premium mobile-first casino & betting website template by SonoJS (demo brand: Betora). Zero-build static HTML/CSS/JS with design tokens, dark/light mode, and vanilla catalog chrome. Home hero The best casino experience with games, casinos, sports boards, and shop CTAs; plus Games (list/detail), Casinos, Sports (list/event), Tournaments, Bonuses, Pricing, Shop (catalog → product → cart → multi-step checkout → success + wishlist), Account (profile, wallet, orders), Auth (login/register/forgot), Blog, FAQ, About, Contact, Privacy, Terms, and 404. Demo only — cart, coupons (SONO10 / VIP20), and wallet are mock; no real-money backend. Host statically (Cloudflare Workers demo included).",
+      "Betora is a multi-page premium mobile-first casino & betting website template by SonoJS (demo brand: Betora). Zero-build static HTML/CSS/JS with design tokens, dark/light mode, and vanilla catalog chrome. Home hero The best casino experience with games, casinos, sports boards, and shop CTAs; plus Games (list/detail), Casinos, Sports (list/event), Tournaments, Bonuses, Pricing, Shop (catalog → product → cart → multi-step checkout → success + wishlist), Account (profile, wallet, orders), Auth (login/register/forgot), Blog, FAQ, About, Contact, Privacy, Terms, and 404. Demo only. Cart, coupons (SONO10 / VIP20), and wallet are mock; no real-money backend. Host statically (Cloudflare Workers demo included).",
     category: "website",
     websiteVertical: "betting",
     stack: ["html", "css", "javascript"],
@@ -10925,11 +10925,11 @@ export const templateProjects: TemplateProject[] = [
     access: "member",
     badge: "new",
     coverVariant: "landing",
-    coverImage: "/templates/projects/website/sonojs-website-23/main.webp",
+    coverImage: "/websites/projects/sonojs-website-23/main.webp",
     coverImageDark: null,
-    coverVideo: "/templates/projects/website/sonojs-website-23/cover.mp4",
+    coverVideo: "/websites/projects/sonojs-website-23/cover.mp4",
     detailCoverImage:
-      "/templates/projects/website/sonojs-website-23/main.webp",
+      "/websites/projects/sonojs-website-23/main.webp",
     detailCoverImageDark: null,
     liveUrl: "https://sonojs-website-23.sonojs2.workers.dev/",
     downloadUrl: "",
@@ -10952,27 +10952,27 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "33 HTML pages — no React/Vite; serve with any static host.",
+        body: "33 HTML pages. No React/Vite; serve with any static host.",
       },
     ],
     includes: [
       "33 HTML pages (home, games, sports, shop, account, auth, legal…)",
       "CSS design tokens + page styles · local imagery",
-      "JS — catalog, cart/checkout, wallet demos, shared shell",
+      "JS, catalog, cart/checkout, wallet demos, shared shell",
       "README for buyers",
     ],
     requirements: [
       "Modern browser",
-      "Static file host (JSON data needs HTTP, not file://)",
+      "Static file host (JSON data needs HTTP)",
     ],
   },
   {
     slug: "sonojs-website-24",
     title: "Nuts",
     tagline:
-      "Casino affiliate hub — reviews, shop, blog, and mobile-first UX.",
+      "Casino affiliate hub, reviews, shop, blog, and mobile-first UX.",
     description:
-      "Nuts is a multi-page premium casino affiliate website template by SonoJS (demo brand: Nuts). Zero-build static HTML/CSS/JS with design tokens, dark/light theme toggle, and mobile bottom nav. Home hero Simply the Best Affiliate Programs with blog strips, trusted casinos, membership packs, and shop teaser; plus Casinos (list/detail), Games, Bonuses, Shop (catalog → product → cart → checkout → order success + wishlist), Compare, Blog (list/single), Pricing, Account, FAQ, About, Contact, and 404. Demo affiliate/commerce chrome only — cart and filters are mock, no real-money backend. Host statically (Cloudflare Workers demo included).",
+      "Nuts is a multi-page premium casino affiliate website template by SonoJS (demo brand: Nuts). Zero-build static HTML/CSS/JS with design tokens, dark/light theme toggle, and mobile bottom nav. Home hero Simply the Best Affiliate Programs with blog strips, trusted casinos, membership packs, and shop teaser; plus Casinos (list/detail), Games, Bonuses, Shop (catalog → product → cart → checkout → order success + wishlist), Compare, Blog (list/single), Pricing, Account, FAQ, About, Contact, and 404. Demo affiliate/commerce chrome only. Cart and filters are mock, no real-money backend. Host statically (Cloudflare Workers demo included).",
     category: "website",
     websiteVertical: "betting",
     stack: ["html", "css", "javascript"],
@@ -10987,11 +10987,11 @@ export const templateProjects: TemplateProject[] = [
     access: "member",
     badge: "new",
     coverVariant: "landing",
-    coverImage: "/templates/projects/website/sonojs-website-24/main.webp",
+    coverImage: "/websites/projects/sonojs-website-24/main.webp",
     coverImageDark: null,
-    coverVideo: "/templates/projects/website/sonojs-website-24/cover.mp4",
+    coverVideo: "/websites/projects/sonojs-website-24/cover.mp4",
     detailCoverImage:
-      "/templates/projects/website/sonojs-website-24/main.webp",
+      "/websites/projects/sonojs-website-24/main.webp",
     detailCoverImageDark: null,
     liveUrl: "https://sonojs-website-24.sonojs2.workers.dev/",
     downloadUrl: "",
@@ -11014,13 +11014,13 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "20 HTML pages — tokens, dark/light, no React/Vite.",
+        body: "20 HTML pages, tokens, dark/light, no React/Vite.",
       },
     ],
     includes: [
       "20 HTML pages (home, casinos, shop, blog, pricing, account…)",
       "CSS design tokens + page styles · local imagery",
-      "JS — filters, cart demos, theme toggle, shared shell",
+      "JS, filters, cart demos, theme toggle, shared shell",
       "README for buyers",
     ],
     requirements: [
@@ -11032,9 +11032,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-website-25",
     title: "Nexa Casino",
     tagline:
-      "Premium online casino — lobby, wallet, shop, and welcome bonus hero.",
+      "Premium online casino, lobby, wallet, shop, and welcome bonus hero.",
     description:
-      "Nexa Casino is a multi-page premium online casino website template by SonoJS (demo brand: Nexa Casino). Zero-build static HTML/CSS/JS with a full-bleed welcome-bonus hero (100% up to €140 BONUS), games lobby, and shop chrome. Home with top slots, new games, hot bonuses, clients, blog teaser, and jackpot band; plus Games (list/detail), Providers, Tournaments, Bonuses, Promotions, Shop (product → cart → checkout → order success + favorites), Wallet, Account, Orders, Auth (login/register), Blog (list/post), FAQ, About, Contact, Responsible gaming, Privacy, Terms, and 404. Demo casino chrome only — cart and wallet are mock, no real-money backend. Host statically (Cloudflare Workers demo included).",
+      "Nexa Casino is a multi-page premium online casino website template by SonoJS (demo brand: Nexa Casino). Zero-build static HTML/CSS/JS with a full-bleed welcome-bonus hero (100% up to €140 BONUS), games lobby, and shop chrome. Home with top slots, new games, hot bonuses, clients, blog teaser, and jackpot band; plus Games (list/detail), Providers, Tournaments, Bonuses, Promotions, Shop (product → cart → checkout → order success + favorites), Wallet, Account, Orders, Auth (login/register), Blog (list/post), FAQ, About, Contact, Responsible gaming, Privacy, Terms, and 404. Demo casino chrome only. Cart and wallet are mock, no real-money backend. Host statically (Cloudflare Workers demo included).",
     category: "website",
     websiteVertical: "betting",
     stack: ["html", "css", "javascript"],
@@ -11049,11 +11049,11 @@ export const templateProjects: TemplateProject[] = [
     access: "member",
     badge: "new",
     coverVariant: "landing",
-    coverImage: "/templates/projects/website/sonojs-website-25/main.webp",
+    coverImage: "/websites/projects/sonojs-website-25/main.webp",
     coverImageDark: null,
-    coverVideo: "/templates/projects/website/sonojs-website-25/cover.mp4",
+    coverVideo: "/websites/projects/sonojs-website-25/cover.mp4",
     detailCoverImage:
-      "/templates/projects/website/sonojs-website-25/main.webp",
+      "/websites/projects/sonojs-website-25/main.webp",
     detailCoverImageDark: null,
     liveUrl: "https://sonojs-website-25.sonojs2.workers.dev/",
     downloadUrl: "",
@@ -11068,7 +11068,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Wallet & shop demos",
-        body: "Wallet, cart, checkout, favorites, orders — mock commerce chrome.",
+        body: "Wallet, cart, checkout, favorites, orders, mock commerce chrome.",
       },
       {
         title: "Full casino pages",
@@ -11076,13 +11076,13 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "27 HTML pages — single CSS app bundle, no React/Vite.",
+        body: "27 HTML pages, single CSS app bundle, no React/Vite.",
       },
     ],
     includes: [
       "27 HTML pages (home, games, wallet, shop, auth, blog, legal…)",
       "CSS app stylesheet · local fonts & casino imagery",
-      "JS — lobby filters, cart/wallet demos, shared shell",
+      "JS, lobby filters, cart/wallet demos, shared shell",
       "README for buyers",
     ],
     requirements: [
@@ -11094,9 +11094,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-website-26",
     title: "Nuts Hub",
     tagline:
-      "Casino & gambling hub — games, bonuses, sports slip, and merch shop.",
+      "Casino & gambling hub, games, bonuses, sports slip, and merch shop.",
     description:
-      "Nuts Hub is a multi-page premium online casino & gambling hub template by SonoJS (demo brand: Nuts). Zero-build static HTML/CSS/JS with dark/light theme, mobile bottom nav, and vendored GSAP + Swiper. Home with featured tables & slots, services, bonus board, casino picks, membership plans, merch drop, and blog; plus Games (list/detail), Casinos, Bonuses, Sports slip demo, Poker vertical, Shop (product → cart → 3-step checkout → order success + wishlist), Pricing, Account, Auth (login/register), Blog, Search, FAQ, About, Contact, Privacy, Terms, and 404. Demo only — promo codes NUTS10 / WELCOME15 / FREESHIP and bets are mock localStorage, no real-money backend. Host statically (Cloudflare Workers demo included).",
+      "Nuts Hub is a multi-page premium online casino & gambling hub template by SonoJS (demo brand: Nuts). Zero-build static HTML/CSS/JS with dark/light theme, mobile bottom nav, and vendored GSAP + Swiper. Home with featured tables & slots, services, bonus board, casino picks, membership plans, merch drop, and blog; plus Games (list/detail), Casinos, Bonuses, Sports slip demo, Poker vertical, Shop (product → cart → 3-step checkout → order success + wishlist), Pricing, Account, Auth (login/register), Blog, Search, FAQ, About, Contact, Privacy, Terms, and 404. Demo only. Promo codes NUTS10 / WELCOME15 / FREESHIP and bets are mock localStorage, no real-money backend. Host statically (Cloudflare Workers demo included).",
     category: "website",
     websiteVertical: "betting",
     stack: ["html", "css", "javascript"],
@@ -11111,11 +11111,11 @@ export const templateProjects: TemplateProject[] = [
     access: "member",
     badge: "new",
     coverVariant: "landing",
-    coverImage: "/templates/projects/website/sonojs-website-26/main.webp",
+    coverImage: "/websites/projects/sonojs-website-26/main.webp",
     coverImageDark: null,
-    coverVideo: "/templates/projects/website/sonojs-website-26/cover.mp4",
+    coverVideo: "/websites/projects/sonojs-website-26/cover.mp4",
     detailCoverImage:
-      "/templates/projects/website/sonojs-website-26/main.webp",
+      "/websites/projects/sonojs-website-26/main.webp",
     detailCoverImageDark: null,
     liveUrl: "https://sonojs-website-26.sonojs2.workers.dev/",
     downloadUrl: "",
@@ -11138,27 +11138,27 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "27 HTML pages — GSAP/Swiper vendored, serve with any host.",
+        body: "27 HTML pages. GSAP/Swiper vendored, serve with any host.",
       },
     ],
     includes: [
       "27 HTML pages (home, games, sports, shop, account, blog, legal…)",
       "CSS design system · local fonts & imagery · libs/ (GSAP, Swiper)",
-      "JS — catalogs, cart/checkout, fake auth, shared shell",
+      "JS, catalogs, cart/checkout, fake auth, shared shell",
       "README for buyers",
     ],
     requirements: [
       "Modern browser",
-      "Static file host (fetch + ES modules need HTTP, not file://)",
+      "Static file host (fetch + ES modules need HTTP)",
     ],
   },
   {
     slug: "sonojs-website-27",
     title: "JACKPOT Premium",
     tagline:
-      "Casino affiliate OS — games, memberships, wallet, and payouts.",
+      "Casino affiliate OS, games, memberships, wallet, and payouts.",
     description:
-      "JACKPOT Premium is a large multi-page casino affiliate HTML template by SonoJS (demo brand: JACKPOT Premium). Zero-build static HTML/CSS/JS with Bootstrap, Slick, and design tokens. Multiple home variants (affiliate, casino, poker); games catalog with detail/compare/wishlist; bonuses, platforms/partners, membership pricing + checkout stepper; account hub (wallet redeem, affiliate analytics, orders, payouts, settings); blog layouts, gallery, careers, press, testimonials; auth (login/register/forgot/OTP); responsible gambling, AML/KYC, privacy, terms, FAQs, search, notifications, coming soon, maintenance, and 404. Demo affiliate chrome only — fake data and localStorage flows, no real-money backend. Host statically (Cloudflare Workers demo included; open /html/).",
+      "JACKPOT Premium is a large multi-page casino affiliate HTML template by SonoJS (demo brand: JACKPOT Premium). Zero-build static HTML/CSS/JS with Bootstrap, Slick, and design tokens. Multiple home variants (affiliate, casino, poker); games catalog with detail/compare/wishlist; bonuses, platforms/partners, membership pricing + checkout stepper; account hub (wallet redeem, affiliate analytics, orders, payouts, settings); blog layouts, gallery, careers, press, testimonials; auth (login/register/forgot/OTP); responsible gambling, AML/KYC, privacy, terms, FAQs, search, notifications, coming soon, maintenance, and 404. Demo affiliate chrome only. Fake data and localStorage flows, no real-money backend. Host statically (Cloudflare Workers demo included; open /html/).",
     category: "website",
     websiteVertical: "betting",
     stack: ["html", "css", "javascript"],
@@ -11173,11 +11173,11 @@ export const templateProjects: TemplateProject[] = [
     access: "member",
     badge: "new",
     coverVariant: "landing",
-    coverImage: "/templates/projects/website/sonojs-website-27/main.webp",
+    coverImage: "/websites/projects/sonojs-website-27/main.webp",
     coverImageDark: null,
-    coverVideo: "/templates/projects/website/sonojs-website-27/cover.mp4",
+    coverVideo: "/websites/projects/sonojs-website-27/cover.mp4",
     detailCoverImage:
-      "/templates/projects/website/sonojs-website-27/main.webp",
+      "/websites/projects/sonojs-website-27/main.webp",
     detailCoverImageDark: null,
     liveUrl: "https://sonojs-website-27.sonojs2.workers.dev/html/",
     downloadUrl: "",
@@ -11200,13 +11200,13 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "58 HTML pages under html/ — Bootstrap + tokens, no React/Vite.",
+        body: "58 HTML pages under html/. Bootstrap + tokens, no React/Vite.",
       },
     ],
     includes: [
       "58 HTML pages (homes, games, account, blog, legal, auth…)",
       "CSS tokens + Bootstrap/vendor · local imagery",
-      "JS — filters, cart/checkout, wallet demos, shared shell",
+      "JS, filters, cart/checkout, wallet demos, shared shell",
       "README for buyers",
     ],
     requirements: [
@@ -11218,9 +11218,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-website-28",
     title: "FORGE",
     tagline:
-      "Premium fitness OS — programs, merch shop, and booking demos.",
+      "Premium fitness OS, programs, merch shop, and booking demos.",
     description:
-      "FORGE is a multi-page premium fitness / personal-trainer website template by SonoJS (demo brand: FORGE). Zero-build static HTML/CSS/JS with design tokens, dark/light theme, mobile bottom nav, and self-hosted vendors (GSAP, Lenis, Swiper, Chart.js, Three.js). Home hero No fluff. No excuses. Just results.; plus Programs catalog + detail (level, duration, weekly plan mock), Booking multi-step with fake slots, Shop (product → cart → checkout → wishlist), Results filters, Gallery lightbox, Pricing/memberships, Account dashboard with charts, Auth (login/register), Blog, Method, Testimonials, FAQ search, Contact, Documentation, and 404. Demo only — coupons SONO10 / FORGE20 / FREESHIP and bookings are mock localStorage, no real payments. Host statically (Cloudflare Workers demo included; open /pages/).",
+      "FORGE is a multi-page premium fitness / personal-trainer website template by SonoJS (demo brand: FORGE). Zero-build static HTML/CSS/JS with design tokens, dark/light theme, mobile bottom nav, and self-hosted vendors (GSAP, Lenis, Swiper, Chart.js, Three.js). Home hero No fluff. No excuses. Just results.; plus Programs catalog + detail (level, duration, weekly plan mock), Booking multi-step with fake slots, Shop (product → cart → checkout → wishlist), Results filters, Gallery lightbox, Pricing/memberships, Account dashboard with charts, Auth (login/register), Blog, Method, Testimonials, FAQ search, Contact, Documentation, and 404. Demo only. Coupons SONO10 / FORGE20 / FREESHIP and bookings are mock localStorage, no real payments. Host statically (Cloudflare Workers demo included; open /pages/).",
     category: "website",
     websiteVertical: "fitness",
     stack: ["html", "css", "javascript", "gsap", "threejs"],
@@ -11235,11 +11235,11 @@ export const templateProjects: TemplateProject[] = [
     access: "member",
     badge: "new",
     coverVariant: "landing",
-    coverImage: "/templates/projects/website/sonojs-website-28/main.webp",
+    coverImage: "/websites/projects/sonojs-website-28/main.webp",
     coverImageDark: null,
-    coverVideo: "/templates/projects/website/sonojs-website-28/cover.mp4",
+    coverVideo: "/websites/projects/sonojs-website-28/cover.mp4",
     detailCoverImage:
-      "/templates/projects/website/sonojs-website-28/main.webp",
+      "/websites/projects/sonojs-website-28/main.webp",
     detailCoverImageDark: null,
     liveUrl: "https://sonojs-website-28.sonojs2.workers.dev/pages/",
     downloadUrl: "",
@@ -11262,27 +11262,27 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "25 HTML pages — self-hosted fonts & vendors, no React/Vite.",
+        body: "25 HTML pages, self-hosted fonts & vendors, no React/Vite.",
       },
     ],
     includes: [
       "25 HTML pages under pages/ (home, programs, shop, booking, account…)",
       "CSS tokens + components · local imagery · assets/vendor",
-      "JS — store, booking, cart/checkout, theme, shared chrome",
+      "JS, store, booking, cart/checkout, theme, shared chrome",
       "README for buyers",
     ],
     requirements: [
       "Modern browser",
-      "Static file host (open /pages/ via HTTP, not file://)",
+      "Static file host (serve /pages/ over HTTP)",
     ],
   },
   {
     slug: "sonojs-website-29",
     title: "Crypo",
     tagline:
-      "Crypto exchange UI — markets, trading screens, and wallet settings.",
+      "Crypto exchange UI, markets, trading screens, and wallet settings.",
     description:
-      "Crypo is a multi-page premium cryptocurrency exchange & trading website template by SonoJS (demo brand: Crypo). Zero-build static HTML/CSS/JS with Bootstrap-era chrome and trading dashboards. Landing variants (home + landing two); exchange layouts (classic, fluid, live price, ticker); markets hub with market overview, crypto list, capital, capital bar, screener, heat map, cross rates, symbol info, and technical analysis; plus Settings (profile, wallet), Auth (signin/signup/reset), and 404. Demo trading chrome only — charts and balances are mock, no real exchange backend. Host statically (Cloudflare Workers demo included; open /pages/home/).",
+      "Crypo is a multi-page premium cryptocurrency exchange & trading website template by SonoJS (demo brand: Crypo). Zero-build static HTML/CSS/JS with Bootstrap-era chrome and trading dashboards. Landing variants (home + landing two); exchange layouts (classic, fluid, live price, ticker); markets hub with market overview, crypto list, capital, capital bar, screener, heat map, cross rates, symbol info, and technical analysis; plus Settings (profile, wallet), Auth (signin/signup/reset), and 404. Demo trading chrome only. Charts and balances are mock, no real exchange backend. Host statically (Cloudflare Workers demo included; open /pages/home/).",
     category: "website",
     websiteVertical: "crypto",
     stack: ["html", "css", "javascript"],
@@ -11297,11 +11297,11 @@ export const templateProjects: TemplateProject[] = [
     access: "member",
     badge: "new",
     coverVariant: "landing",
-    coverImage: "/templates/projects/website/sonojs-website-29/main.webp",
+    coverImage: "/websites/projects/sonojs-website-29/main.webp",
     coverImageDark: null,
-    coverVideo: "/templates/projects/website/sonojs-website-29/cover.mp4",
+    coverVideo: "/websites/projects/sonojs-website-29/cover.mp4",
     detailCoverImage:
-      "/templates/projects/website/sonojs-website-29/main.webp",
+      "/websites/projects/sonojs-website-29/main.webp",
     detailCoverImageDark: null,
     liveUrl: "https://sonojs-website-29.sonojs2.workers.dev/pages/home/",
     downloadUrl: "",
@@ -11324,13 +11324,13 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "25 HTML pages under pages/ — no React/Vite.",
+        body: "25 HTML pages under pages/. No React/Vite.",
       },
     ],
     includes: [
       "25 HTML pages (landings, exchange, markets, settings, auth…)",
       "CSS theme + page styles · local assets",
-      "JS — theme boot, exchange/market demos, shared shell",
+      "JS, theme boot, exchange/market demos, shared shell",
       "README for buyers",
     ],
     requirements: [
@@ -11342,9 +11342,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-website-30",
     title: "TradeX",
     tagline:
-      "Stock trading OS — dashboard, tickets, analytics, and marketing site.",
+      "Stock trading OS, dashboard, tickets, analytics, and marketing site.",
     description:
-      "TradeX is a multi-page premium stock trading dashboard + marketing website template by SonoJS (demo brand: TradeX). Zero-build static HTML/CSS/JS with dark/light/system theme and fully offline vendors (Tailwind runtime, ApexCharts, Chart.js, Lucide, local fonts). Marketing landing with features, pricing, about, and help/FAQ; auth demos (sign-in / sign-up / forgot / reset); full app shell — dashboard, markets, stocks, stock details, trade ticket, portfolio, watchlists, orders, transactions, analytics, performance, dividends, calendar, market news, research, reports, alerts, profile, and settings. Demo only — charts and fills use mock localStorage (TRADEX10 coupon), no live market APIs. Host statically (Cloudflare Workers demo included).",
+      "TradeX is a multi-page premium stock trading dashboard + marketing website template by SonoJS (demo brand: TradeX). Zero-build static HTML/CSS/JS with dark/light/system theme and fully offline vendors (Tailwind runtime, ApexCharts, Chart.js, Lucide, local fonts). Marketing landing with features, pricing, about, and help/FAQ; auth demos (sign-in / sign-up / forgot / reset); full app shell, dashboard, markets, stocks, stock details, trade ticket, portfolio, watchlists, orders, transactions, analytics, performance, dividends, calendar, market news, research, reports, alerts, profile, and settings. Demo only. Charts and fills use mock localStorage (TRADEX10 coupon), no live market APIs. Host statically (Cloudflare Workers demo included).",
     category: "website",
     websiteVertical: "fintech",
     stack: ["html", "css", "javascript", "tailwind"],
@@ -11359,11 +11359,11 @@ export const templateProjects: TemplateProject[] = [
     access: "member",
     badge: "new",
     coverVariant: "landing",
-    coverImage: "/templates/projects/website/sonojs-website-30/main.webp",
+    coverImage: "/websites/projects/sonojs-website-30/main.webp",
     coverImageDark: null,
-    coverVideo: "/templates/projects/website/sonojs-website-30/cover.mp4",
+    coverVideo: "/websites/projects/sonojs-website-30/cover.mp4",
     detailCoverImage:
-      "/templates/projects/website/sonojs-website-30/main.webp",
+      "/websites/projects/sonojs-website-30/main.webp",
     detailCoverImageDark: null,
     liveUrl: "https://sonojs-website-30.sonojs2.workers.dev/",
     downloadUrl: "",
@@ -11382,31 +11382,31 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Offline chart stack",
-        body: "ApexCharts & Chart.js mock series — no CDN, no live APIs.",
+        body: "ApexCharts & Chart.js mock series. No CDN, no live APIs.",
       },
       {
         title: "Zero-build static",
-        body: "28 HTML pages — dark/light/system theme, mobile sidebar.",
+        body: "28 HTML pages, dark/light/system theme, mobile sidebar.",
       },
     ],
     includes: [
       "28 HTML pages (landing, auth, trading app suite…)",
       "CSS + local fonts · offline ApexCharts / Chart.js / Lucide",
-      "JS — theme, trade fills, page demos, shared shell",
+      "JS, theme, trade fills, page demos, shared shell",
       "README for buyers",
     ],
     requirements: [
       "Modern browser",
-      "Static file host (`npx serve .` — not file://)",
+      "Static file host (`npx serve .`)",
     ],
   },
   {
     slug: "sonojs-website-31",
     title: "Banking ProX",
     tagline:
-      "Digital banking dashboard — accounts, cards, payments, and wallet.",
+      "Digital banking dashboard, accounts, cards, payments, and wallet.",
     description:
-      "Banking ProX is a multi-page premium digital banking / fintech dashboard + marketing website template by SonoJS (demo brand: Banking ProX). Zero-build static HTML/CSS/JS with dark/light/system theme and fully offline vendors (Tailwind runtime, ApexCharts, Lucide, AOS, GSAP, local fonts). Marketing landing with features, pricing, about, and help/FAQ; auth demos (sign-in / sign-up / forgot / reset); full banking app shell — dashboard, accounts, cards, wallet, payments, beneficiaries, transactions, loans, budget, investments, analytics, customers, messages, notifications, security, rewards, support, profile, and settings. Demo only — transfers use mock localStorage, no real bank backend. Host statically (Cloudflare Workers demo included).",
+      "Banking ProX is a multi-page premium digital banking / fintech dashboard + marketing website template by SonoJS (demo brand: Banking ProX). Zero-build static HTML/CSS/JS with dark/light/system theme and fully offline vendors (Tailwind runtime, ApexCharts, Lucide, AOS, GSAP, local fonts). Marketing landing with features, pricing, about, and help/FAQ; auth demos (sign-in / sign-up / forgot / reset); full banking app shell, dashboard, accounts, cards, wallet, payments, beneficiaries, transactions, loans, budget, investments, analytics, customers, messages, notifications, security, rewards, support, profile, and settings. Demo only. Transfers use mock localStorage, no real bank backend. Host statically (Cloudflare Workers demo included).",
     category: "website",
     websiteVertical: "fintech",
     stack: ["html", "css", "javascript", "tailwind", "gsap"],
@@ -11421,11 +11421,11 @@ export const templateProjects: TemplateProject[] = [
     access: "member",
     badge: "new",
     coverVariant: "landing",
-    coverImage: "/templates/projects/website/sonojs-website-31/main.webp",
+    coverImage: "/websites/projects/sonojs-website-31/main.webp",
     coverImageDark: null,
-    coverVideo: "/templates/projects/website/sonojs-website-31/cover.mp4",
+    coverVideo: "/websites/projects/sonojs-website-31/cover.mp4",
     detailCoverImage:
-      "/templates/projects/website/sonojs-website-31/main.webp",
+      "/websites/projects/sonojs-website-31/main.webp",
     detailCoverImageDark: null,
     liveUrl: "https://sonojs-website-31.sonojs2.workers.dev/",
     downloadUrl: "",
@@ -11444,31 +11444,31 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Offline fintech stack",
-        body: "ApexCharts, AOS, GSAP — local assets, mock transfers.",
+        body: "ApexCharts, AOS, GSAP, local assets, mock transfers.",
       },
       {
         title: "Zero-build static",
-        body: "27 HTML pages — dark/light/system theme, mobile-ready.",
+        body: "27 HTML pages, dark/light/system theme, mobile-ready.",
       },
     ],
     includes: [
       "27 HTML pages (landing, auth, banking app suite…)",
       "CSS + local fonts · offline ApexCharts / Lucide / AOS / GSAP",
-      "JS — theme, transfer demos, page charts, shared shell",
+      "JS, theme, transfer demos, page charts, shared shell",
       "README for buyers",
     ],
     requirements: [
       "Modern browser",
-      "Static file host (`npx serve .` — not file://)",
+      "Static file host (`npx serve .`)",
     ],
   },
   {
     slug: "sonojs-website-32",
     title: "Meridian Trust",
     tagline:
-      "Investor relations suite — stock, financials, reports, and IR portal.",
+      "Investor relations suite, stock, financials, reports, and IR portal.",
     description:
-      "Meridian Trust is a multi-page premium investor-relations website template by SonoJS (demo brand: Meridian Trust · NYSE ticker MRDN). Zero-build static HTML/CSS/JS with dark/light theme, AOS motion, and offline Tailwind + Chart.js + local Solar icons. Home IR narrative with live quote strip; Investor Hub, stock quote charts, financials, dividends, bonds, reports, presentations, events, newsroom, governance, leadership, sustainability, history, careers → apply, FAQ, contact, search, privacy/terms; plus investor portal after demo login (watchlist, saved reports, applications, alerts). Demo only — all figures and portal data are mock localStorage, no real IR backend. Host statically (Cloudflare Workers demo included).",
+      "Meridian Trust is a multi-page premium investor-relations website template by SonoJS (demo brand: Meridian Trust · NYSE ticker MRDN). Zero-build static HTML/CSS/JS with dark/light theme, AOS motion, and offline Tailwind + Chart.js + local Solar icons. Home IR narrative with live quote strip; Investor Hub, stock quote charts, financials, dividends, bonds, reports, presentations, events, newsroom, governance, leadership, sustainability, history, careers → apply, FAQ, contact, search, privacy/terms; plus investor portal after demo login (watchlist, saved reports, applications, alerts). Demo only. All figures and portal data are mock localStorage, no real IR backend. Host statically (Cloudflare Workers demo included).",
     category: "website",
     websiteVertical: "fintech",
     stack: ["html", "css", "javascript", "tailwind"],
@@ -11483,11 +11483,11 @@ export const templateProjects: TemplateProject[] = [
     access: "member",
     badge: "new",
     coverVariant: "landing",
-    coverImage: "/templates/projects/website/sonojs-website-32/main.webp",
+    coverImage: "/websites/projects/sonojs-website-32/main.webp",
     coverImageDark: null,
-    coverVideo: "/templates/projects/website/sonojs-website-32/cover.mp4",
+    coverVideo: "/websites/projects/sonojs-website-32/cover.mp4",
     detailCoverImage:
-      "/templates/projects/website/sonojs-website-32/main.webp",
+      "/websites/projects/sonojs-website-32/main.webp",
     detailCoverImageDark: null,
     liveUrl: "https://sonojs-website-32.sonojs2.workers.dev/",
     downloadUrl: "",
@@ -11510,27 +11510,27 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "27 HTML pages — offline vendors, dark/light, mobile nav.",
+        body: "27 HTML pages, offline vendors, dark/light, mobile nav.",
       },
     ],
     includes: [
       "27 HTML pages (home, IR hub, portal, careers, legal…)",
       "CSS + local fonts/icons · offline Chart.js / AOS / Tailwind runtime",
-      "JS — mock IR dataset, charts, portal session, shared chrome",
+      "JS, mock IR dataset, charts, portal session, shared chrome",
       "README for buyers",
     ],
     requirements: [
       "Modern browser",
-      "Static file host (`npx serve .` — not file://)",
+      "Static file host (`npx serve .`)",
     ],
   },
   {
     slug: "sonojs-website-33",
     title: "SpendLow",
     tagline:
-      "B2B fintech for banks — landing, pricing, ROI, and case studies.",
+      "B2B fintech for banks, landing, pricing, ROI, and case studies.",
     description:
-      "SpendLow is a multi-page premium B2B fintech marketing website template by SonoJS (demo brand: SpendLow — financial autopilot for banks). Zero-build static HTML/CSS/JS with dark/light/system theme and fully offline vendors (Tailwind runtime, Iconify, local fonts & photography). Landing with product story; Solutions, Security, Partners, Careers, Contact; Pricing with size filters, monthly/yearly, coupon SPENDLOW10 and local checkout demo; ROI calculator with saved scenarios; Resources + case studies (search/filter + detail); demo request → success reference → Account history; Auth (sign-in / sign-up / forgot / reset) and lightweight Account. Demo only — no real bank backend. Host statically (Cloudflare Workers demo included).",
+      "SpendLow is a multi-page premium B2B fintech marketing website template by SonoJS (demo brand: SpendLow, financial autopilot for banks). Zero-build static HTML/CSS/JS with dark/light/system theme and fully offline vendors (Tailwind runtime, Iconify, local fonts & photography). Landing with product story; Solutions, Security, Partners, Careers, Contact; Pricing with size filters, monthly/yearly, coupon SPENDLOW10 and local checkout demo; ROI calculator with saved scenarios; Resources + case studies (search/filter + detail); demo request → success reference → Account history; Auth (sign-in / sign-up / forgot / reset) and lightweight Account. Demo only. No real bank backend. Host statically (Cloudflare Workers demo included).",
     category: "website",
     websiteVertical: "fintech",
     stack: ["html", "css", "javascript", "tailwind"],
@@ -11545,11 +11545,11 @@ export const templateProjects: TemplateProject[] = [
     access: "member",
     badge: "new",
     coverVariant: "landing",
-    coverImage: "/templates/projects/website/sonojs-website-33/main.webp",
+    coverImage: "/websites/projects/sonojs-website-33/main.webp",
     coverImageDark: null,
-    coverVideo: "/templates/projects/website/sonojs-website-33/cover.mp4",
+    coverVideo: "/websites/projects/sonojs-website-33/cover.mp4",
     detailCoverImage:
-      "/templates/projects/website/sonojs-website-33/main.webp",
+      "/websites/projects/sonojs-website-33/main.webp",
     detailCoverImageDark: null,
     liveUrl: "https://sonojs-website-33.sonojs2.workers.dev/",
     downloadUrl: "",
@@ -11572,27 +11572,27 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "22 HTML pages — offline assets, dark/light/system, mobile nav.",
+        body: "22 HTML pages, offline assets, dark/light/system, mobile nav.",
       },
     ],
     includes: [
       "22 HTML pages (landing, solutions, pricing, ROI, auth, account…)",
       "CSS + local fonts/images · offline Tailwind / Iconify",
-      "JS — theme, pricing/ROI demos, auth, shared chrome",
+      "JS, theme, pricing/ROI demos, auth, shared chrome",
       "README for buyers",
     ],
     requirements: [
       "Modern browser",
-      "Static file host (`npx serve .` — not file://)",
+      "Static file host (`npx serve .`)",
     ],
   },
   {
     slug: "sonojs-website-34",
     title: "LottoPulse",
     tagline:
-      "Premium lottery platform — draws, number picker, wallet checkout, results.",
+      "Premium lottery platform, draws, number picker, wallet checkout, results.",
     description:
-      "LottoPulse is a multi-page premium lottery website template by SonoJS (demo brand: LottoPulse). Zero-build static HTML/CSS/JS with dark/light theme (FOUC-safe) and fully offline assets (local Tailwind runtime, fonts, icons). Landing with jackpot hero and lottery carousel; Lotteries catalog with search, type filters, and sorting; lottery detail with number picker, Quick Pick, progress, and add-to-cart; Cart → coupon LOTTO10 → wallet checkout → order success → My tickets; Results board + ticket checker; How it works, Pricing packs, Winners, Blog, FAQ, Contact; Auth (sign-in / sign-up / forgot / reset) plus Account and Wallet demos. Mobile bottom nav. Demo experience only — no real-money gambling backend. Host statically (Cloudflare Workers demo included).",
+      "LottoPulse is a multi-page premium lottery website template by SonoJS (demo brand: LottoPulse). Zero-build static HTML/CSS/JS with dark/light theme (FOUC-safe) and fully offline assets (local Tailwind runtime, fonts, icons). Landing with jackpot hero and lottery carousel; Lotteries catalog with search, type filters, and sorting; lottery detail with number picker, Quick Pick, progress, and add-to-cart; Cart → coupon LOTTO10 → wallet checkout → order success → My tickets; Results board + ticket checker; How it works, Pricing packs, Winners, Blog, FAQ, Contact; Auth (sign-in / sign-up / forgot / reset) plus Account and Wallet demos. Mobile bottom nav. Demo experience only. No real-money gambling backend. Host statically (Cloudflare Workers demo included).",
     category: "website",
     websiteVertical: "lottery",
     stack: ["html", "css", "javascript", "tailwind"],
@@ -11607,11 +11607,11 @@ export const templateProjects: TemplateProject[] = [
     access: "member",
     badge: "new",
     coverVariant: "landing",
-    coverImage: "/templates/projects/website/sonojs-website-34/main.webp",
+    coverImage: "/websites/projects/sonojs-website-34/main.webp",
     coverImageDark: null,
-    coverVideo: "/templates/projects/website/sonojs-website-34/cover.mp4",
+    coverVideo: "/websites/projects/sonojs-website-34/cover.mp4",
     detailCoverImage:
-      "/templates/projects/website/sonojs-website-34/main.webp",
+      "/websites/projects/sonojs-website-34/main.webp",
     detailCoverImageDark: null,
     liveUrl: "https://sonojs-website-34.sonojs2.workers.dev/",
     downloadUrl: "",
@@ -11630,31 +11630,31 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Auth & wallet demos",
-        body: "Sign-in, account, wallet, coupon LOTTO10 — offline localStorage.",
+        body: "Sign-in, account, wallet, coupon LOTTO10, offline localStorage.",
       },
       {
         title: "Zero-build static",
-        body: "26 HTML pages — dark/light, mobile bottom nav, offline Tailwind.",
+        body: "26 HTML pages, dark/light, mobile bottom nav, offline Tailwind.",
       },
     ],
     includes: [
       "26 HTML pages (landing, lotteries, picker, cart, results, auth…)",
       "CSS + local fonts/images · offline Tailwind runtime",
-      "JS — demo store, shop flow, auth, theme, shared chrome",
+      "JS, demo store, shop flow, auth, theme, shared chrome",
       "README for buyers",
     ],
     requirements: [
       "Modern browser",
-      "Static file host (`npx serve .` — not file://)",
+      "Static file host (`npx serve .`)",
     ],
   },
   {
     slug: "sonojs-website-35",
     title: "Aura Financial",
     tagline:
-      "Hybrid wealth OS — marketing site plus markets, trade, portfolio, treasury.",
+      "Hybrid wealth OS, marketing site plus markets, trade, portfolio, treasury.",
     description:
-      "Aura Financial is a multi-page premium fintech / wealth website template by SonoJS (demo brand: Aura Financial · Future Banking). Zero-build static HTML/CSS/JS with dark/light theme and fully offline vendors (local Tailwind runtime, Iconify, Chart.js, fonts). Marketing landing with Unicorn hero plus local CSS fallback; Philosophy, Ecosystem, Rates, Pricing, Security, Partners, Blog, Docs, Careers, Press, Contact, Status, and legal pages. Auth (login / signup / verify / forgot) with demo session. Full mock app shell: dashboard, markets, trade, portfolio, yield, treasury, watchlist, orders, asset detail, billing, checkout, notifications, settings, audit log, help. Command palette (Ctrl/Cmd+K), mobile bottom nav, mock datasets. Demo only — no live brokerage. Host statically (Cloudflare Workers demo included).",
+      "Aura Financial is a multi-page premium fintech / wealth website template by SonoJS (demo brand: Aura Financial · Future Banking). Zero-build static HTML/CSS/JS with dark/light theme and fully offline vendors (local Tailwind runtime, Iconify, Chart.js, fonts). Marketing landing with Unicorn hero plus local CSS fallback; Philosophy, Ecosystem, Rates, Pricing, Security, Partners, Blog, Docs, Careers, Press, Contact, Status, and legal pages. Auth (login / signup / verify / forgot) with demo session. Full mock app shell: dashboard, markets, trade, portfolio, yield, treasury, watchlist, orders, asset detail, billing, checkout, notifications, settings, audit log, help. Command palette (Ctrl/Cmd+K), mobile bottom nav, mock datasets. Demo only. No live brokerage. Host statically (Cloudflare Workers demo included).",
     category: "website",
     websiteVertical: "fintech",
     stack: ["html", "css", "javascript", "tailwind", "chartjs"],
@@ -11669,11 +11669,11 @@ export const templateProjects: TemplateProject[] = [
     access: "member",
     badge: "new",
     coverVariant: "landing",
-    coverImage: "/templates/projects/website/sonojs-website-35/main.webp",
+    coverImage: "/websites/projects/sonojs-website-35/main.webp",
     coverImageDark: null,
-    coverVideo: "/templates/projects/website/sonojs-website-35/cover.mp4",
+    coverVideo: "/websites/projects/sonojs-website-35/cover.mp4",
     detailCoverImage:
-      "/templates/projects/website/sonojs-website-35/main.webp",
+      "/websites/projects/sonojs-website-35/main.webp",
     detailCoverImageDark: null,
     liveUrl: "https://sonojs-website-35.sonojs2.workers.dev/",
     downloadUrl: "",
@@ -11696,27 +11696,27 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "47 HTML pages — offline Tailwind, Chart.js, Unicorn CSS fallback.",
+        body: "47 HTML pages, offline Tailwind, Chart.js, Unicorn CSS fallback.",
       },
     ],
     includes: [
       "47 HTML pages (marketing, auth, app shell, docs, legal…)",
       "CSS + local fonts/images · offline Tailwind / Iconify / Chart.js",
-      "JS — mock store, markets/trade, auth, theme, shared chrome",
+      "JS, mock store, markets/trade, auth, theme, shared chrome",
       "README for buyers",
     ],
     requirements: [
       "Modern browser",
-      "Static file host (`npx serve .` — not file://)",
+      "Static file host (`npx serve .`)",
     ],
   },
   {
     slug: "sonojs-website-36",
     title: "Rivi",
     tagline:
-      "Clarity onchain — consumer crypto wallet with marketing site and app shell.",
+      "Clarity onchain, consumer crypto wallet with marketing site and app shell.",
     description:
-      "Rivi is a multi-page premium consumer crypto wallet website template by SonoJS (demo brand: Rivi · Clarity Onchain). Zero-build static HTML/CSS/JS with dark/light theme and fully offline vendors (local Tailwind runtime, Iconify, Chart.js, GSAP, QR). Marketing landing with phone mock; Features, How it works, Pricing, Security, Roadmap, About, Careers, Blog, Download, Contact, FAQ, Partners, Press, Help, and legal pages. Auth (sign-in / sign-up / forgot / onboarding) with demo session (jordan@rivi.app). App shell: dashboard, wallet, asset detail, send / receive / swap, activity, contacts, cards, notifications, settings, profile, billing, checkout, support. Mobile bottom nav and shared chrome. Demo only — no real chain, custody, or payments. Host statically (Cloudflare Workers demo included).",
+      "Rivi is a multi-page premium consumer crypto wallet website template by SonoJS (demo brand: Rivi · Clarity Onchain). Zero-build static HTML/CSS/JS with dark/light theme and fully offline vendors (local Tailwind runtime, Iconify, Chart.js, GSAP, QR). Marketing landing with phone mock; Features, How it works, Pricing, Security, Roadmap, About, Careers, Blog, Download, Contact, FAQ, Partners, Press, Help, and legal pages. Auth (sign-in / sign-up / forgot / onboarding) with demo session (jordan@rivi.app). App shell: dashboard, wallet, asset detail, send / receive / swap, activity, contacts, cards, notifications, settings, profile, billing, checkout, support. Mobile bottom nav and shared chrome. Demo only. No real chain, custody, or payments. Host statically (Cloudflare Workers demo included).",
     category: "website",
     websiteVertical: "crypto",
     stack: ["html", "css", "javascript", "tailwind", "chartjs", "gsap"],
@@ -11731,11 +11731,11 @@ export const templateProjects: TemplateProject[] = [
     access: "member",
     badge: "new",
     coverVariant: "landing",
-    coverImage: "/templates/projects/website/sonojs-website-36/main.webp",
+    coverImage: "/websites/projects/sonojs-website-36/main.webp",
     coverImageDark: null,
-    coverVideo: "/templates/projects/website/sonojs-website-36/cover.mp4",
+    coverVideo: "/websites/projects/sonojs-website-36/cover.mp4",
     detailCoverImage:
-      "/templates/projects/website/sonojs-website-36/main.webp",
+      "/websites/projects/sonojs-website-36/main.webp",
     detailCoverImageDark: null,
     liveUrl: "https://sonojs-website-36.sonojs2.workers.dev/",
     downloadUrl: "",
@@ -11758,27 +11758,27 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "42 HTML pages — offline Tailwind, Chart.js, GSAP, QR.",
+        body: "42 HTML pages, offline Tailwind, Chart.js, GSAP, QR.",
       },
     ],
     includes: [
       "42 HTML pages (marketing, auth, wallet app, legal…)",
       "CSS + local fonts/images · offline Tailwind / Iconify / Chart.js / GSAP",
-      "JS — mock store, wallet flows, auth, theme, shared chrome",
+      "JS, mock store, wallet flows, auth, theme, shared chrome",
       "README for buyers",
     ],
     requirements: [
       "Modern browser",
-      "Static file host (`npx serve .` — not file://)",
+      "Static file host (`npx serve .`)",
     ],
   },
   {
     slug: "sonojs-website-37",
     title: "Auden FX",
     tagline:
-      "FX education — ACRCandel indicator, mentorship, and member portal.",
+      "FX education. ACRCandel indicator, mentorship, and member portal.",
     description:
-      "Auden FX is a multi-page premium forex education & mentorship website template by SonoJS (demo brand: Auden FX · ACRCandel). Zero-build static HTML/CSS/JS with dark/light theme and fully offline vendors (local Tailwind runtime, Iconify, GSAP, Three.js, Chart.js). Marketing landing with WebGL hero; Indicator, Mentorship, Pricing, How it works, About, Blog, Testimonials, FAQ, Contact, Partners, Careers, Press, Download, Help, and legal including risk disclaimer. Auth (sign-in / sign-up / forgot / onboarding) with demo session. Commerce: mock checkout, order success, billing, license unlock. Member portal: dashboard, lessons, signals, journal, community, resources, settings, profile, notifications, support. Demo only — not financial advice, no live brokerage. Host statically (Cloudflare Workers demo included).",
+      "Auden FX is a multi-page premium forex education & mentorship website template by SonoJS (demo brand: Auden FX · ACRCandel). Zero-build static HTML/CSS/JS with dark/light theme and fully offline vendors (local Tailwind runtime, Iconify, GSAP, Three.js, Chart.js). Marketing landing with WebGL hero; Indicator, Mentorship, Pricing, How it works, About, Blog, Testimonials, FAQ, Contact, Partners, Careers, Press, Download, Help, and legal including risk disclaimer. Auth (sign-in / sign-up / forgot / onboarding) with demo session. Commerce: mock checkout, order success, billing, license unlock. Member portal: dashboard, lessons, signals, journal, community, resources, settings, profile, notifications, support. Demo only. Not financial advice, no live brokerage. Host statically (Cloudflare Workers demo included).",
     category: "website",
     websiteVertical: "forex",
     stack: ["html", "css", "javascript", "tailwind", "chartjs", "gsap", "threejs"],
@@ -11793,11 +11793,11 @@ export const templateProjects: TemplateProject[] = [
     access: "member",
     badge: "new",
     coverVariant: "landing",
-    coverImage: "/templates/projects/website/sonojs-website-37/main.webp",
+    coverImage: "/websites/projects/sonojs-website-37/main.webp",
     coverImageDark: null,
-    coverVideo: "/templates/projects/website/sonojs-website-37/cover.mp4",
+    coverVideo: "/websites/projects/sonojs-website-37/cover.mp4",
     detailCoverImage:
-      "/templates/projects/website/sonojs-website-37/main.webp",
+      "/websites/projects/sonojs-website-37/main.webp",
     detailCoverImageDark: null,
     liveUrl: "https://sonojs-website-37.sonojs2.workers.dev/",
     downloadUrl: "",
@@ -11816,31 +11816,31 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Mock commerce",
-        body: "Checkout, billing, entitlements in localStorage — demo only.",
+        body: "Checkout, billing, entitlements in localStorage, demo only.",
       },
       {
         title: "Zero-build static",
-        body: "42 HTML pages — WebGL hero, dark/light, offline vendors.",
+        body: "42 HTML pages. WebGL hero, dark/light, offline vendors.",
       },
     ],
     includes: [
       "42 HTML pages (marketing, auth, portal, commerce, legal…)",
       "CSS + local fonts/images · offline Tailwind / GSAP / Three.js / Chart.js",
-      "JS — mock store, shop, portal, auth, theme, shared chrome",
+      "JS, mock store, shop, portal, auth, theme, shared chrome",
       "README for buyers",
     ],
     requirements: [
       "Modern browser",
-      "Static file host (`npx serve .` — not file://)",
+      "Static file host (`npx serve .`)",
     ],
   },
   {
     slug: "sonojs-website-38",
     title: "FundedDesk",
     tagline:
-      "Prop-firm kit — evaluations, rules, checkout, and trader dashboard.",
+      "Prop-firm kit, evaluations, rules, checkout, and trader dashboard.",
     description:
-      "FundedDesk is a multi-page premium prop-firm website template by SonoJS (demo brand: FundedDesk — fictional firm, simulated evaluations only). Zero-build static HTML/CSS/JS with dark/light theme and fully offline vendors (local Tailwind runtime, Lucide, Chart.js). Marketing home with interactive program pricing; Programs catalog with search/filter; Objectives, Rules, Platforms, Competitions, About, Testimonials, Blog, Affiliate, Community, Brand kit, FAQ, Contact, Support, and legal. Auth (login / signup) with demo session. Mock checkout with coupon HELLO (20% off) and order success. Trader dashboard with equity chart, accounts, trades, payouts, and settings. Mobile bottom nav. Demo only — no live brokerage or real payouts. Host statically (Cloudflare Workers demo included).",
+      "FundedDesk is a multi-page premium prop-firm website template by SonoJS (demo brand: FundedDesk, fictional firm, simulated evaluations only). Zero-build static HTML/CSS/JS with dark/light theme and fully offline vendors (local Tailwind runtime, Lucide, Chart.js). Marketing home with interactive program pricing; Programs catalog with search/filter; Objectives, Rules, Platforms, Competitions, About, Testimonials, Blog, Affiliate, Community, Brand kit, FAQ, Contact, Support, and legal. Auth (login / signup) with demo session. Mock checkout with coupon HELLO (20% off) and order success. Trader dashboard with equity chart, accounts, trades, payouts, and settings. Mobile bottom nav. Demo only. No live brokerage or real payouts. Host statically (Cloudflare Workers demo included).",
     category: "website",
     websiteVertical: "forex",
     stack: ["html", "css", "javascript", "tailwind", "chartjs"],
@@ -11855,11 +11855,11 @@ export const templateProjects: TemplateProject[] = [
     access: "member",
     badge: "new",
     coverVariant: "landing",
-    coverImage: "/templates/projects/website/sonojs-website-38/main.webp",
+    coverImage: "/websites/projects/sonojs-website-38/main.webp",
     coverImageDark: null,
-    coverVideo: "/templates/projects/website/sonojs-website-38/cover.mp4",
+    coverVideo: "/websites/projects/sonojs-website-38/cover.mp4",
     detailCoverImage:
-      "/templates/projects/website/sonojs-website-38/main.webp",
+      "/websites/projects/sonojs-website-38/main.webp",
     detailCoverImageDark: null,
     liveUrl: "https://sonojs-website-38.sonojs2.workers.dev/",
     downloadUrl: "",
@@ -11874,7 +11874,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Trader dashboard",
-        body: "Equity chart, accounts, trades, payouts — simulated demo data.",
+        body: "Equity chart, accounts, trades, payouts, simulated demo data.",
       },
       {
         title: "Rules & competitions",
@@ -11882,27 +11882,27 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "26 HTML pages — dark/light, mobile nav, offline Tailwind / Chart.js.",
+        body: "26 HTML pages, dark/light, mobile nav, offline Tailwind / Chart.js.",
       },
     ],
     includes: [
       "26 HTML pages (marketing, auth, checkout, dashboard, legal…)",
       "CSS + local assets · offline Tailwind / Lucide / Chart.js",
-      "JS — programs, checkout, dashboard, auth, theme, shared chrome",
+      "JS, programs, checkout, dashboard, auth, theme, shared chrome",
       "README for buyers",
     ],
     requirements: [
       "Modern browser",
-      "Static file host (`npx serve .` — not file://)",
+      "Static file host (`npx serve .`)",
     ],
   },
   {
     slug: "sonojs-website-39",
     title: "Nullline",
     tagline:
-      "Cybersecurity advisory — WebGL hero, services, models, and schedule-a-call.",
+      "Cybersecurity advisory. WebGL hero, services, models, and schedule-a-call.",
     description:
-      "Nullline is a multi-page premium cybersecurity advisory website template by SonoJS (demo brand: Nullline — fictional firm). Zero-build static HTML/CSS/JS with dark/light theme and fully offline vendors (local Tailwind runtime, GSAP, Lenis, Iconify, Three.js). Marketing home with pinned WebGL stage; About, Process, Deliverables, Services, Engagement models, Pricing, FAQ, and case studies; Contact → thanks lead demo (localStorage); legal terms/privacy and 404. No auth, dashboard, or live checkout — marketing + inquiry flow only. Host statically (Cloudflare Workers demo included).",
+      "Nullline is a multi-page premium cybersecurity advisory website template by SonoJS (demo brand: Nullline, fictional firm). Zero-build static HTML/CSS/JS with dark/light theme and fully offline vendors (local Tailwind runtime, GSAP, Lenis, Iconify, Three.js). Marketing home with pinned WebGL stage; About, Process, Deliverables, Services, Engagement models, Pricing, FAQ, and case studies; Contact → thanks lead demo (localStorage); legal terms/privacy and 404. No auth, dashboard, or live checkout, marketing + inquiry flow only. Host statically (Cloudflare Workers demo included).",
     category: "website",
     websiteVertical: "cyber",
     stack: ["html", "css", "javascript", "tailwind", "gsap", "threejs"],
@@ -11917,11 +11917,11 @@ export const templateProjects: TemplateProject[] = [
     access: "member",
     badge: null,
     coverVariant: "landing",
-    coverImage: "/templates/projects/website/sonojs-website-39/main.webp",
+    coverImage: "/websites/projects/sonojs-website-39/main.webp",
     coverImageDark: null,
-    coverVideo: "/templates/projects/website/sonojs-website-39/cover.mp4",
+    coverVideo: "/websites/projects/sonojs-website-39/cover.mp4",
     detailCoverImage:
-      "/templates/projects/website/sonojs-website-39/main.webp",
+      "/websites/projects/sonojs-website-39/main.webp",
     detailCoverImageDark: null,
     liveUrl: "https://sonojs-website-39.sonojs2.workers.dev/",
     downloadUrl: "",
@@ -11944,18 +11944,18 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "15 HTML pages — GSAP/Lenis/Three offline, dark/light theme.",
+        body: "15 HTML pages. GSAP/Lenis/Three offline, dark/light theme.",
       },
     ],
     includes: [
       "15 HTML pages (home, services, models, cases, contact, legal…)",
       "CSS + local fonts · offline Tailwind / GSAP / Lenis / Three.js",
-      "JS — theme, chrome, contact demo, motion",
+      "JS, theme, chrome, contact demo, motion",
       "README for buyers",
     ],
     requirements: [
       "Modern browser",
-      "Static file host (`npx serve .` — not file://)",
+      "Static file host (`npx serve .`)",
     ],
     runCommand: "npx serve .",
   },
@@ -11963,9 +11963,9 @@ export const templateProjects: TemplateProject[] = [
     slug: "sonojs-website-40",
     title: "Orbital",
     tagline:
-      "Global project operations — marketing site, auth, and ops app shell.",
+      "Global project operations, marketing site, auth, and ops app shell.",
     description:
-      "Orbital is a multi-page premium SaaS website template by SonoJS (demo brand: Orbital — Global project operations). Zero-build static HTML/CSS/vanilla JS with design tokens and an interactive globe hero. Marketing home (product preview, coverage, solutions, customers, integrations, pricing, blog), Features, Demo, Solutions, Customers, Case studies, Integrations, Pricing, Security, Status, Changelog, Careers, About, Contact, plus auth (sign-in / sign-up / forgot / verify / onboarding) and app shell (dashboard, projects, project detail, analytics, team, billing, settings, notifications). Demo ops chrome only — no live backend. Run with npx serve . or host statically on Cloudflare Workers.",
+      "Orbital is a multi-page premium SaaS website template by SonoJS (demo brand: Orbital. Global project operations). Zero-build static HTML/CSS/vanilla JS with design tokens and an interactive globe hero. Marketing home (product preview, coverage, solutions, customers, integrations, pricing, blog), Features, Demo, Solutions, Customers, Case studies, Integrations, Pricing, Security, Status, Changelog, Careers, About, Contact, plus auth (sign-in / sign-up / forgot / verify / onboarding) and app shell (dashboard, projects, project detail, analytics, team, billing, settings, notifications). Demo ops chrome only. No live backend. Run with npx serve . or host statically on Cloudflare Workers.",
     category: "website",
     websiteVertical: "saas",
     stack: ["html", "css", "javascript"],
@@ -11980,11 +11980,11 @@ export const templateProjects: TemplateProject[] = [
     access: "member",
     badge: null,
     coverVariant: "landing",
-    coverImage: "/templates/projects/website/sonojs-website-40/main.webp",
+    coverImage: "/websites/projects/sonojs-website-40/main.webp",
     coverImageDark: null,
-    coverVideo: "/templates/projects/website/sonojs-website-40/cover.mp4",
+    coverVideo: "/websites/projects/sonojs-website-40/cover.mp4",
     detailCoverImage:
-      "/templates/projects/website/sonojs-website-40/main.webp",
+      "/websites/projects/sonojs-website-40/main.webp",
     detailCoverImageDark: null,
     liveUrl: "https://sonojs-website-40.sonojs2.workers.dev/",
     downloadUrl: "",
@@ -12008,26 +12008,26 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "52 HTML pages — tokens CSS + vanilla JS; run with npx serve .",
+        body: "52 HTML pages, tokens CSS + vanilla JS; run with npx serve .",
       },
     ],
     includes: [
       "52 HTML pages (marketing, auth, app shell, blog, legal…)",
       "CSS tokens · base · components · layout · pages",
-      "JS — layout, theme, globe, charts, auth helpers, data modules",
+      "JS, layout, theme, globe, charts, auth helpers, data modules",
     ],
     requirements: [
       "Modern browser",
-      "Static file host (`npx serve .` — not file://)",
+      "Static file host (`npx serve .`)",
     ],
   },
   {
     slug: "sonojs-website-41",
     title: "SportOdds",
     tagline:
-      "Sportsbook kit — live odds, event markets, casino, and wallet demo.",
+      "Sportsbook kit, live odds, event markets, casino, and wallet demo.",
     description:
-      "SportOdds is a multi-page premium sportsbook website template by SonoJS (demo brand: SportOdds). Zero-build static HTML with navy + mint sportsbook UI, local Tailwind (preflight off), and vanilla JS. Home odds board; Sports and Live boards; Event detail markets; Casino and Live Casino; Promotions / Lucky Drops; Betslip check; Auth and account (dashboard, deposit, withdraw, bet history, transactions). Demo wallet in localStorage only — no real-money backend. Host statically (e.g. Cloudflare Workers).",
+      "SportOdds is a multi-page premium sportsbook website template by SonoJS (demo brand: SportOdds). Zero-build static HTML with navy + mint sportsbook UI, local Tailwind (preflight off), and vanilla JS. Home odds board; Sports and Live boards; Event detail markets; Casino and Live Casino; Promotions / Lucky Drops; Betslip check; Auth and account (dashboard, deposit, withdraw, bet history, transactions). Demo wallet in localStorage only. No real-money backend. Host statically (e.g. Cloudflare Workers).",
     category: "website",
     websiteVertical: "betting",
     stack: ["html", "css", "javascript", "tailwind"],
@@ -12042,11 +12042,11 @@ export const templateProjects: TemplateProject[] = [
     access: "member",
     badge: "new",
     coverVariant: "landing",
-    coverImage: "/templates/projects/website/sonojs-website-41/main.webp",
+    coverImage: "/websites/projects/sonojs-website-41/main.webp",
     coverImageDark: null,
-    coverVideo: "/templates/projects/website/sonojs-website-41/cover.mp4",
+    coverVideo: "/websites/projects/sonojs-website-41/cover.mp4",
     detailCoverImage:
-      "/templates/projects/website/sonojs-website-41/main.webp",
+      "/websites/projects/sonojs-website-41/main.webp",
     detailCoverImageDark: null,
     liveUrl: "https://sonojs-website-41.sonojs2.workers.dev/",
     downloadUrl: "",
@@ -12069,27 +12069,27 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "21 HTML pages — Tailwind local + vanilla JS, offline fonts.",
+        body: "21 HTML pages. Tailwind local + vanilla JS, offline fonts.",
       },
     ],
     includes: [
       "21 HTML pages (home, sports, live, event, casino, account…)",
-      "CSS — SportOdds main + layout + modern layer",
-      "JS — Tailwind runtime, ui/main modules, demo store",
+      "CSS. SportOdds main + layout + modern layer",
+      "JS. Tailwind runtime, ui/main modules, demo store",
       "assets/ fonts, logo, hero, game art",
     ],
     requirements: [
       "Modern browser",
-      "Static file host (not file://)",
+      "Static file host",
     ],
   },
   {
     slug: "sonojs-website-42",
     title: "Vyra",
     tagline:
-      "On-chain signals crypto terminal — markets, trade, bots, and watchlist.",
+      "On-chain signals crypto terminal, markets, trade, bots, and watchlist.",
     description:
-      "Vyra is a multi-page premium crypto dashboard & on-chain signals website template by SonoJS (demo brand: Vyra). Zero-build static HTML with Tailwind-built CSS and vanilla JS. Marketing home; dense app shell for dashboard, coin, exchanges, categories, news, watchlist, trade, signals, meme explorer, top traders, bots / bot builder, rules, community, portfolio, alerts, profile, settings, and pricing; plus auth (login / register / forgot) and utility pages. Demo terminal only — Chart.js + localStorage mocks, no live exchange APIs. Host statically (e.g. Cloudflare Workers); open via HTTP (root redirects to marketing home).",
+      "Vyra is a multi-page premium crypto dashboard & on-chain signals website template by SonoJS (demo brand: Vyra). Zero-build static HTML with Tailwind-built CSS and vanilla JS. Marketing home; dense app shell for dashboard, coin, exchanges, categories, news, watchlist, trade, signals, meme explorer, top traders, bots / bot builder, rules, community, portfolio, alerts, profile, settings, and pricing; plus auth (login / register / forgot) and utility pages. Demo terminal only. Chart.js + localStorage mocks, no live exchange APIs. Host statically (e.g. Cloudflare Workers); open via HTTP (root redirects to marketing home).",
     category: "website",
     websiteVertical: "crypto",
     stack: ["html", "css", "javascript", "tailwind"],
@@ -12104,11 +12104,11 @@ export const templateProjects: TemplateProject[] = [
     access: "member",
     badge: "new",
     coverVariant: "landing",
-    coverImage: "/templates/projects/website/sonojs-website-42/main.webp",
+    coverImage: "/websites/projects/sonojs-website-42/main.webp",
     coverImageDark: null,
-    coverVideo: "/templates/projects/website/sonojs-website-42/cover.mp4",
+    coverVideo: "/websites/projects/sonojs-website-42/cover.mp4",
     detailCoverImage:
-      "/templates/projects/website/sonojs-website-42/main.webp",
+      "/websites/projects/sonojs-website-42/main.webp",
     detailCoverImageDark: null,
     liveUrl: "https://sonojs-website-42.sonojs2.workers.dev/",
     downloadUrl: "",
@@ -12131,27 +12131,27 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "26 HTML pages — Tailwind CSS + vanilla JS, local fonts and Chart.js.",
+        body: "26 HTML pages. Tailwind CSS + vanilla JS, local fonts and Chart.js.",
       },
     ],
     includes: [
       "26 HTML pages (marketing, terminal, bots, auth…)",
-      "CSS — Tailwind build + Vyra layer",
-      "JS — data module, chrome shell, page bundles, Chart.js vendor",
+      "CSS. Tailwind build + Vyra layer",
+      "JS, data module, chrome shell, page bundles, Chart.js vendor",
       "fonts/ and images/ assets",
     ],
     requirements: [
       "Modern browser",
-      "Static file host (not file://)",
+      "Static file host",
     ],
   },
   {
     slug: "sonojs-website-43",
     title: "Architect",
     tagline:
-      "Perpetual futures exchange — markets, trade terminal, and portfolio demo.",
+      "Perpetual futures exchange, markets, trade terminal, and portfolio demo.",
     description:
-      "Architect is a multi-page premium perpetual futures exchange website template by SonoJS (demo brand: Architect). Zero-build static HTML/CSS/vanilla JS with an institutional navy + teal system and local Inter / Instrument Sans. Marketing home with live mock terminal preview; Markets board; Trade (chart, order book, form, tape); Portfolio and Account; Fees from mock tiers; docs/SDK/developers; institutional, brokerage, security, blog, help, contact, careers, status, legal; plus auth (login / signup / forgot / verify). Demo exchange only — Chart.js + localStorage mocks, no live matching engine. Host statically (e.g. Cloudflare Workers); serve from project root (not file://).",
+      "Architect is a multi-page premium perpetual futures exchange website template by SonoJS (demo brand: Architect). Zero-build static HTML/CSS/vanilla JS with an institutional navy + teal system and local Inter / Instrument Sans. Marketing home with live mock terminal preview; Markets board; Trade (chart, order book, form, tape); Portfolio and Account; Fees from mock tiers; docs/SDK/developers; institutional, brokerage, security, blog, help, contact, careers, status, legal; plus auth (login / signup / forgot / verify). Demo exchange only. Chart.js + localStorage mocks, no live matching engine. Host statically (e.g. Cloudflare Workers); serve from the project root.",
     category: "website",
     websiteVertical: "crypto",
     stack: ["html", "css", "javascript"],
@@ -12166,11 +12166,11 @@ export const templateProjects: TemplateProject[] = [
     access: "member",
     badge: "new",
     coverVariant: "landing",
-    coverImage: "/templates/projects/website/sonojs-website-43/main.webp",
+    coverImage: "/websites/projects/sonojs-website-43/main.webp",
     coverImageDark: null,
-    coverVideo: "/templates/projects/website/sonojs-website-43/cover.mp4",
+    coverVideo: "/websites/projects/sonojs-website-43/cover.mp4",
     detailCoverImage:
-      "/templates/projects/website/sonojs-website-43/main.webp",
+      "/websites/projects/sonojs-website-43/main.webp",
     detailCoverImageDark: null,
     liveUrl: "https://sonojs-website-43.sonojs2.workers.dev/",
     downloadUrl: "",
@@ -12193,27 +12193,27 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "29 HTML pages — tokens CSS + vanilla JS, local fonts and Chart.js.",
+        body: "29 HTML pages, tokens CSS + vanilla JS, local fonts and Chart.js.",
       },
     ],
     includes: [
       "29 HTML pages (home, markets, trade, portfolio, docs, auth…)",
-      "CSS — tokens, components, layout, app pages",
-      "JS — shell, mock data, markets/trade/home features, Chart.js",
+      "CSS, tokens, components, layout, app pages",
+      "JS, shell, mock data, markets/trade/home features, Chart.js",
       "Local Inter + Instrument Sans fonts",
     ],
     requirements: [
       "Modern browser",
-      "Static file host (not file://)",
+      "Static file host",
     ],
   },
   {
     slug: "sonojs-website-44",
     title: "Trenox",
     tagline:
-      "Prop trading kit — funded challenges, payouts, pricing, and integrations.",
+      "Prop trading kit, funded challenges, payouts, pricing, and integrations.",
     description:
-      "Trenox is a multi-page premium prop / funded-trading website template by SonoJS (demo brand: Trenox). Zero-build static HTML/CSS/vanilla JS with a teal edition visual system and local Inter Tight fonts. Three home variants; about and features variants; pricing plus challenge product pages; trading-partner integrations (ChartDesk, MT5 Bridge, PayoutRail, and more); blog; FAQ, career, contact; auth and challenge enrollment checkout demo; challenge-plans drawer (not ecommerce cart). Demo marketing only — no live brokerage. Host statically (e.g. Cloudflare Workers); root redirects to pages/index.html.",
+      "Trenox is a multi-page premium prop / funded-trading website template by SonoJS (demo brand: Trenox). Zero-build static HTML/CSS/vanilla JS with a teal edition visual system and local Inter Tight fonts. Three home variants; about and features variants; pricing plus challenge product pages; trading-partner integrations (ChartDesk, MT5 Bridge, PayoutRail, and more); blog; FAQ, career, contact; auth and challenge enrollment checkout demo; challenge-plans drawer (not ecommerce cart). Demo marketing only. No live brokerage. Host statically (e.g. Cloudflare Workers); root redirects to pages/index.html.",
     category: "website",
     websiteVertical: "fintech",
     stack: ["html", "css", "javascript"],
@@ -12228,11 +12228,11 @@ export const templateProjects: TemplateProject[] = [
     access: "member",
     badge: "new",
     coverVariant: "landing",
-    coverImage: "/templates/projects/website/sonojs-website-44/main.webp",
+    coverImage: "/websites/projects/sonojs-website-44/main.webp",
     coverImageDark: null,
-    coverVideo: "/templates/projects/website/sonojs-website-44/cover.mp4",
+    coverVideo: "/websites/projects/sonojs-website-44/cover.mp4",
     detailCoverImage:
-      "/templates/projects/website/sonojs-website-44/main.webp",
+      "/websites/projects/sonojs-website-44/main.webp",
     detailCoverImageDark: null,
     liveUrl: "https://sonojs-website-44.sonojs2.workers.dev/",
     downloadUrl: "",
@@ -12255,7 +12255,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "42 HTML pages — local CSS/JS/fonts/images; challenge drawer demo.",
+        body: "42 HTML pages, local CSS/JS/fonts/images; challenge drawer demo.",
       },
     ],
     includes: [
@@ -12266,16 +12266,16 @@ export const templateProjects: TemplateProject[] = [
     ],
     requirements: [
       "Modern browser",
-      "Static file host (not file://)",
+      "Static file host",
     ],
   },
   {
     slug: "sonojs-website-45",
     title: "Deploy Engine",
     tagline:
-      "Capital-markets deploy controls — operator HUD, pricing, and docs.",
+      "Capital-markets deploy controls, operator HUD, pricing, and docs.",
     description:
-      "Deploy Engine is a multi-page premium B2B capital-markets SaaS website template by SonoJS (demo brand: Deploy Engine v3.0). Zero-build static HTML/CSS/vanilla JS with a teal + market-gold system and local Figtree / Syne / JetBrains Mono. Interactive Three.js hero with operator CONFIG HUD (volatility, concentration, spread, liquidity); platform, features, solutions, security, pricing, customers; docs hub (getting started, API, SDK, webhooks); changelog, status, about, careers, contact, legal. Demo marketing only — forms use localStorage, no backend. Host statically (e.g. Cloudflare Workers); serve from project root (WebGL required for home hero; static fallback included).",
+      "Deploy Engine is a multi-page premium B2B capital-markets SaaS website template by SonoJS (demo brand: Deploy Engine v3.0). Zero-build static HTML/CSS/vanilla JS with a teal + market-gold system and local Figtree / Syne / JetBrains Mono. Interactive Three.js hero with operator CONFIG HUD (volatility, concentration, spread, liquidity); platform, features, solutions, security, pricing, customers; docs hub (getting started, API, SDK, webhooks); changelog, status, about, careers, contact, legal. Demo marketing only. Forms use localStorage, no backend. Host statically (e.g. Cloudflare Workers); serve from project root (WebGL required for home hero; static fallback included).",
     category: "website",
     websiteVertical: "saas",
     stack: ["html", "css", "javascript"],
@@ -12290,11 +12290,11 @@ export const templateProjects: TemplateProject[] = [
     access: "member",
     badge: "new",
     coverVariant: "landing",
-    coverImage: "/templates/projects/website/sonojs-website-45/main.webp",
+    coverImage: "/websites/projects/sonojs-website-45/main.webp",
     coverImageDark: null,
-    coverVideo: "/templates/projects/website/sonojs-website-45/cover.mp4",
+    coverVideo: "/websites/projects/sonojs-website-45/cover.mp4",
     detailCoverImage:
-      "/templates/projects/website/sonojs-website-45/main.webp",
+      "/websites/projects/sonojs-website-45/main.webp",
     detailCoverImageDark: null,
     liveUrl: "https://sonojs-website-45.sonojs2.workers.dev/",
     downloadUrl: "",
@@ -12317,7 +12317,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "21 HTML pages — local Three.js + Lucide vendors, tokens CSS.",
+        body: "21 HTML pages, local Three.js + Lucide vendors, tokens CSS.",
       },
     ],
     includes: [
@@ -12328,16 +12328,16 @@ export const templateProjects: TemplateProject[] = [
     ],
     requirements: [
       "Modern browser (WebGL for home hero)",
-      "Static file host (not file://)",
+      "Static file host",
     ],
   },
   {
     slug: "sonojs-website-46",
     title: "Aurum Orbit",
     tagline:
-      "Prop funded challenges — cinematic WebGL home plus trader portal demo.",
+      "Prop funded challenges, cinematic WebGL home plus trader portal demo.",
     description:
-      "Aurum Orbit is a multi-page premium prop / funded-trading website template by SonoJS (demo brand: Aurum Orbit). Zero-build static HTML/CSS/vanilla JS with a cinematic WebGL home hero, gold/ink visual system, and local fonts. Marketing for challenge, pricing calculator, rules, payouts, scaling, reviews, FAQ, about, affiliates, careers, contact, and blog; auth + checkout demo; trader portal (dashboard, challenge status, Chart.js stats, positions, payouts, certificates, settings, help); legal and utility pages. Demo only — localStorage entitlements, no live brokerage. Host statically (e.g. Cloudflare Workers); serve from project root (WebGL required for home).",
+      "Aurum Orbit is a multi-page premium prop / funded-trading website template by SonoJS (demo brand: Aurum Orbit). Zero-build static HTML/CSS/vanilla JS with a cinematic WebGL home hero, gold/ink visual system, and local fonts. Marketing for challenge, pricing calculator, rules, payouts, scaling, reviews, FAQ, about, affiliates, careers, contact, and blog; auth + checkout demo; trader portal (dashboard, challenge status, Chart.js stats, positions, payouts, certificates, settings, help); legal and utility pages. Demo only. LocalStorage entitlements, no live brokerage. Host statically (e.g. Cloudflare Workers); serve from project root (WebGL required for home).",
     category: "website",
     websiteVertical: "fintech",
     stack: ["html", "css", "javascript"],
@@ -12352,11 +12352,11 @@ export const templateProjects: TemplateProject[] = [
     access: "member",
     badge: "new",
     coverVariant: "landing",
-    coverImage: "/templates/projects/website/sonojs-website-46/main.webp",
+    coverImage: "/websites/projects/sonojs-website-46/main.webp",
     coverImageDark: null,
-    coverVideo: "/templates/projects/website/sonojs-website-46/cover.mp4",
+    coverVideo: "/websites/projects/sonojs-website-46/cover.mp4",
     detailCoverImage:
-      "/templates/projects/website/sonojs-website-46/main.webp",
+      "/websites/projects/sonojs-website-46/main.webp",
     detailCoverImageDark: null,
     liveUrl: "https://sonojs-website-46.sonojs2.workers.dev/",
     downloadUrl: "",
@@ -12379,27 +12379,27 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "45 HTML pages — local GSAP/Chart.js/Three experience, fonts, images.",
+        body: "45 HTML pages, local GSAP/Chart.js/Three experience, fonts, images.",
       },
     ],
     includes: [
       "45 HTML pages (home, marketing, auth, checkout, app, legal…)",
       "CSS tokens · chrome · kit · portal · cinematic home",
-      "JS — mock data, auth/commerce, page modules, local vendors",
+      "JS, mock data, auth/commerce, page modules, local vendors",
       "Local fonts and imagery",
     ],
     requirements: [
       "Modern browser (WebGL for home hero)",
-      "Static file host (not file://)",
+      "Static file host",
     ],
   },
   {
     slug: "sonojs-website-47",
     title: "BoiBook",
     tagline:
-      "Dense crypto sportsbook — live boards, SGM, casino demo, and wallet theater.",
+      "Dense crypto sportsbook, live boards, SGM, casino demo, and wallet theater.",
     description:
-      "BoiBook is a multi-page premium sportsbook website template by SonoJS (demo brand: BoiBook). Zero-build static HTML/CSS/vanilla JS with an ink void + toxic lime peak-hour UI. Full-bleed live ticker, sport rails, and bet slip; Sports / In-Play / Upcoming boards; deep Event markets with Same-Game Multi builder; Casino and Live Casino lobbies plus playable demo game chrome; Wallet with multi-step deposit/withdraw; Account, My Bets (cashout demo), Transactions; Promos, Esports, auth, Help/18+. Demo only — localStorage slip/wallet, no real bets or APIs. Host statically (e.g. Cloudflare Workers); run with npx serve . from project root (not file://).",
+      "BoiBook is a multi-page premium sportsbook website template by SonoJS (demo brand: BoiBook). Zero-build static HTML/CSS/vanilla JS with an ink void + toxic lime peak-hour UI. Full-bleed live ticker, sport rails, and bet slip; Sports / In-Play / Upcoming boards; deep Event markets with Same-Game Multi builder; Casino and Live Casino lobbies plus playable demo game chrome; Wallet with multi-step deposit/withdraw; Account, My Bets (cashout demo), Transactions; Promos, Esports, auth, Help/18+. Demo only. LocalStorage slip/wallet, no real bets or APIs. Host statically (e.g. Cloudflare Workers); run with npx serve . from the project root.",
     category: "website",
     websiteVertical: "betting",
     stack: ["html", "css", "javascript"],
@@ -12414,11 +12414,11 @@ export const templateProjects: TemplateProject[] = [
     access: "member",
     badge: "new",
     coverVariant: "landing",
-    coverImage: "/templates/projects/website/sonojs-website-47/main.webp",
+    coverImage: "/websites/projects/sonojs-website-47/main.webp",
     coverImageDark: null,
-    coverVideo: "/templates/projects/website/sonojs-website-47/cover.mp4",
+    coverVideo: "/websites/projects/sonojs-website-47/cover.mp4",
     detailCoverImage:
-      "/templates/projects/website/sonojs-website-47/main.webp",
+      "/websites/projects/sonojs-website-47/main.webp",
     detailCoverImageDark: null,
     liveUrl: "https://sonojs-website-47.sonojs2.workers.dev/",
     downloadUrl: "",
@@ -12442,7 +12442,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "21 HTML pages — local fonts/images; run with npx serve .",
+        body: "21 HTML pages, local fonts/images; run with npx serve .",
       },
     ],
     includes: [
@@ -12453,16 +12453,16 @@ export const templateProjects: TemplateProject[] = [
     ],
     requirements: [
       "Modern browser",
-      "Static file host (`npx serve .` — not file://)",
+      "Static file host (`npx serve .`)",
     ],
   },
   {
     slug: "sonojs-website-48",
     title: "RedFunding",
     tagline:
-      "Futures prop evaluations without consistency rules — desk + trader portal.",
+      "Futures prop evaluations without consistency rules, desk + trader portal.",
     description:
-      "RedFunding is a multi-page premium futures prop / evaluation website template by SonoJS (demo brand: RedFunding). Zero-build static HTML/CSS/vanilla JS with a minimal dark + crimson (#ce1126) system and local fonts. Marketing for challenge, pricing calculator, rules (explicit consistency NONE), payouts, scaling, reviews, FAQ, about, affiliates, careers, contact, and blog; auth + checkout demo; trader portal (dashboard, challenge status, Chart.js stats, positions, payouts, certificates, settings, help); legal and utility pages. Demo only — localStorage entitlements, not a live broker. Host statically (e.g. Cloudflare Workers); serve from project root (not file://).",
+      "RedFunding is a multi-page premium futures prop / evaluation website template by SonoJS (demo brand: RedFunding). Zero-build static HTML/CSS/vanilla JS with a minimal dark + crimson (#ce1126) system and local fonts. Marketing for challenge, pricing calculator, rules (explicit consistency NONE), payouts, scaling, reviews, FAQ, about, affiliates, careers, contact, and blog; auth + checkout demo; trader portal (dashboard, challenge status, Chart.js stats, positions, payouts, certificates, settings, help); legal and utility pages. Demo only. LocalStorage entitlements, not a live broker. Host statically (e.g. Cloudflare Workers); serve from the project root.",
     category: "website",
     websiteVertical: "fintech",
     stack: ["html", "css", "javascript"],
@@ -12477,11 +12477,11 @@ export const templateProjects: TemplateProject[] = [
     access: "member",
     badge: "new",
     coverVariant: "landing",
-    coverImage: "/templates/projects/website/sonojs-website-48/main.webp",
+    coverImage: "/websites/projects/sonojs-website-48/main.webp",
     coverImageDark: null,
-    coverVideo: "/templates/projects/website/sonojs-website-48/cover.mp4",
+    coverVideo: "/websites/projects/sonojs-website-48/cover.mp4",
     detailCoverImage:
-      "/templates/projects/website/sonojs-website-48/main.webp",
+      "/websites/projects/sonojs-website-48/main.webp",
     detailCoverImageDark: null,
     liveUrl: "https://sonojs-website-48.sonojs2.workers.dev/",
     downloadUrl: "",
@@ -12504,27 +12504,27 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "36 HTML pages — local GSAP/Chart.js, fonts, and imagery.",
+        body: "36 HTML pages, local GSAP/Chart.js, fonts, and imagery.",
       },
     ],
     includes: [
       "36 HTML pages (home, marketing, auth, checkout, app, legal…)",
       "css/site.css · chrome · portal styles",
-      "JS — mock data, auth/commerce, page modules, local vendors",
+      "JS, mock data, auth/commerce, page modules, local vendors",
       "Local fonts and images",
     ],
     requirements: [
       "Modern browser",
-      "Static file host (not file://)",
+      "Static file host",
     ],
   },
   {
     slug: "sonojs-website-49",
     title: "Aether Funded",
     tagline:
-      "Forex & crypto prop firm — glass desk, MT5/cTrader, and trader portal.",
+      "Forex & crypto prop firm, glass desk, MT5/cTrader, and trader portal.",
     description:
-      "Aether Funded is a multi-page premium forex & crypto prop-firm website template by SonoJS (demo brand: Aether Funded). Zero-build static HTML/CSS/vanilla JS with a kinetic blue-glass system and local fonts. Marketing for challenge, pricing calculator, rules (pairs, lot size, daily DD, weekend crypto hold), payouts (14-day cycle, fee refund), scaling, reviews, FAQ, about, affiliates, careers, contact, and blog; auth + checkout with demo coupons; trader portal (dashboard, challenge status, Chart.js stats, positions, payouts, certificates, settings, help); legal and utility pages. Demo only — localStorage entitlements, not a live broker. Host statically (e.g. Cloudflare Workers); serve from project root (not file://).",
+      "Aether Funded is a multi-page premium forex & crypto prop-firm website template by SonoJS (demo brand: Aether Funded). Zero-build static HTML/CSS/vanilla JS with a kinetic blue-glass system and local fonts. Marketing for challenge, pricing calculator, rules (pairs, lot size, daily DD, weekend crypto hold), payouts (14-day cycle, fee refund), scaling, reviews, FAQ, about, affiliates, careers, contact, and blog; auth + checkout with demo coupons; trader portal (dashboard, challenge status, Chart.js stats, positions, payouts, certificates, settings, help); legal and utility pages. Demo only. LocalStorage entitlements, not a live broker. Host statically (e.g. Cloudflare Workers); serve from the project root.",
     category: "website",
     websiteVertical: "fintech",
     stack: ["html", "css", "javascript"],
@@ -12539,11 +12539,11 @@ export const templateProjects: TemplateProject[] = [
     access: "member",
     badge: "new",
     coverVariant: "landing",
-    coverImage: "/templates/projects/website/sonojs-website-49/main.webp",
+    coverImage: "/websites/projects/sonojs-website-49/main.webp",
     coverImageDark: null,
-    coverVideo: "/templates/projects/website/sonojs-website-49/cover.mp4",
+    coverVideo: "/websites/projects/sonojs-website-49/cover.mp4",
     detailCoverImage:
-      "/templates/projects/website/sonojs-website-49/main.webp",
+      "/websites/projects/sonojs-website-49/main.webp",
     detailCoverImageDark: null,
     liveUrl: "https://sonojs-website-49.sonojs2.workers.dev/",
     downloadUrl: "",
@@ -12566,27 +12566,27 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "36 HTML pages — local GSAP/Chart.js, fonts, and imagery.",
+        body: "36 HTML pages, local GSAP/Chart.js, fonts, and imagery.",
       },
     ],
     includes: [
       "36 HTML pages (home, marketing, auth, checkout, app, legal…)",
       "css tokens · site · pages · app",
-      "JS — mock data, auth/commerce, page modules, local vendors",
+      "JS, mock data, auth/commerce, page modules, local vendors",
       "Local fonts and images",
     ],
     requirements: [
       "Modern browser",
-      "Static file host (not file://)",
+      "Static file host",
     ],
   },
   {
     slug: "sonojs-website-50",
     title: "CRAV",
     tagline:
-      "Artisan smashed burgers — menu, cart, checkout, and locations demo.",
+      "Artisan smashed burgers with menu, cart, checkout, and locations demo.",
     description:
-      "CRAV is a multi-page premium smashed-burger restaurant website template by SonoJS (demo brand: CRAV). Zero-build static HTML/CSS/vanilla JS with a cinematic home hero, local Tailwind + Iconify + GSAP/Swiper, and English UI. Full menu with search, category and dietary filters, and sort; product detail with prefs/qty; cart (localStorage) and checkout (pickup/delivery + slots) into order-success; locations with Order here; about, ingredients, careers, FAQ, contact, privacy/terms, 404. Demo only — no real payments. Host statically (e.g. Cloudflare Workers); run with npx serve . from project root (not file://).",
+      "CRAV is a multi-page premium smashed-burger restaurant website template by SonoJS (demo brand: CRAV). Zero-build static HTML/CSS/vanilla JS with a cinematic home hero, local Tailwind + Iconify + GSAP/Swiper, and English UI. Full menu with search, category and dietary filters, and sort; product detail with prefs/qty; cart (localStorage) and checkout (pickup/delivery + slots) into order-success; locations with Order here; about, ingredients, careers, FAQ, contact, privacy/terms, 404. Demo only. No real payments. Host statically (e.g. Cloudflare Workers); run with npx serve . from the project root.",
     category: "website",
     websiteVertical: "restaurant",
     stack: ["html", "css", "javascript", "tailwind"],
@@ -12601,11 +12601,11 @@ export const templateProjects: TemplateProject[] = [
     access: "member",
     badge: "new",
     coverVariant: "landing",
-    coverImage: "/templates/projects/website/sonojs-website-50/main.webp",
+    coverImage: "/websites/projects/sonojs-website-50/main.webp",
     coverImageDark: null,
-    coverVideo: "/templates/projects/website/sonojs-website-50/cover.mp4",
+    coverVideo: "/websites/projects/sonojs-website-50/cover.mp4",
     detailCoverImage:
-      "/templates/projects/website/sonojs-website-50/main.webp",
+      "/websites/projects/sonojs-website-50/main.webp",
     detailCoverImageDark: null,
     liveUrl: "https://sonojs-website-50.sonojs2.workers.dev/",
     downloadUrl: "",
@@ -12629,7 +12629,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "17 HTML pages — local Tailwind/fonts/GSAP/Swiper; npx serve .",
+        body: "17 HTML pages, local Tailwind/fonts/GSAP/Swiper; npx serve .",
       },
     ],
     includes: [
@@ -12640,16 +12640,16 @@ export const templateProjects: TemplateProject[] = [
     ],
     requirements: [
       "Modern browser",
-      "Static file host (`npx serve .` — not file://)",
+      "Static file host (`npx serve .`)",
     ],
   },
   {
     slug: "sonojs-website-51",
     title: "Estetico Café",
     tagline:
-      "Warm café & restaurant — interactive menu, Visit Notes, and table booking.",
+      "Warm café & restaurant, interactive menu, Visit Notes, and table booking.",
     description:
-      "Estetico Café is a multi-page premium café & restaurant website template by SonoJS (demo brand: Estetico Café, New York). Zero-build static HTML/CSS/vanilla JS with local Tailwind + Lucide + Inter, light/dark theme, and soft stone aesthetic. Home with cinematic hero; interactive menu (search, diet filters, sort) and dish detail; Visit Notes favorites (localStorage); multi-step reservation with confirmation code and cancel; gallery, events, journal, location, contact, FAQ, careers, privacy/terms, style guide, 404. Demo only — no online cart or payments (sit-down booking). Host statically (e.g. Cloudflare Workers); run with npx serve . from project root (not file://).",
+      "Estetico Café is a multi-page premium café & restaurant website template by SonoJS (demo brand: Estetico Café, New York). Zero-build static HTML/CSS/vanilla JS with local Tailwind + Lucide + Inter, light/dark theme, and soft stone aesthetic. Home with cinematic hero; interactive menu (search, diet filters, sort) and dish detail; Visit Notes favorites (localStorage); multi-step reservation with confirmation code and cancel; gallery, events, journal, location, contact, FAQ, careers, privacy/terms, style guide, 404. Demo only. No online cart or payments (sit-down booking). Host statically (e.g. Cloudflare Workers); run with npx serve . from the project root.",
     category: "website",
     websiteVertical: "restaurant",
     stack: ["html", "css", "javascript", "tailwind"],
@@ -12664,11 +12664,11 @@ export const templateProjects: TemplateProject[] = [
     access: "member",
     badge: "new",
     coverVariant: "landing",
-    coverImage: "/templates/projects/website/sonojs-website-51/main.webp",
+    coverImage: "/websites/projects/sonojs-website-51/main.webp",
     coverImageDark: null,
-    coverVideo: "/templates/projects/website/sonojs-website-51/cover.mp4",
+    coverVideo: "/websites/projects/sonojs-website-51/cover.mp4",
     detailCoverImage:
-      "/templates/projects/website/sonojs-website-51/main.webp",
+      "/websites/projects/sonojs-website-51/main.webp",
     detailCoverImageDark: null,
     liveUrl: "https://sonojs-website-51.sonojs2.workers.dev/",
     downloadUrl: "",
@@ -12692,7 +12692,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "20 HTML pages — local Tailwind/Lucide/Inter; npx serve .",
+        body: "20 HTML pages, local Tailwind/Lucide/Inter; npx serve .",
       },
     ],
     includes: [
@@ -12703,16 +12703,16 @@ export const templateProjects: TemplateProject[] = [
     ],
     requirements: [
       "Modern browser",
-      "Static file host (`npx serve .` — not file://)",
+      "Static file host (`npx serve .`)",
     ],
   },
   {
     slug: "sonojs-website-52",
     title: "Funding Future",
     tagline:
-      "Match-Trader prop desk — Instant / One-Phase / Two-Phase plus trader portal.",
+      "Match-Trader prop desk. Instant / One-Phase / Two-Phase plus trader portal.",
     description:
-      "Funding Future is a multi-page premium prop / funded-trading website template by SonoJS (demo brand: Funding Future). Zero-build static HTML/CSS/vanilla JS with a violet-ledger + orange-punch system, local Jost, canvas ambience, and Match-Trader / Match2Pay narrative. Marketing for challenge, pricing calculator, rules, payouts (14-day + fee refund), scaling, reviews, FAQ, about, affiliates, careers, contact, and blog; auth + checkout with demo coupons; trader portal (dashboard, challenge status, Chart.js stats, positions, payouts, certificates, settings, help); legal and status pages. Demo only — localStorage entitlements, not a live broker. Host statically (e.g. Cloudflare Workers); run with npx serve . from project root (not file://).",
+      "Funding Future is a multi-page premium prop / funded-trading website template by SonoJS (demo brand: Funding Future). Zero-build static HTML/CSS/vanilla JS with a violet-ledger + orange-punch system, local Jost, canvas ambience, and Match-Trader / Match2Pay narrative. Marketing for challenge, pricing calculator, rules, payouts (14-day + fee refund), scaling, reviews, FAQ, about, affiliates, careers, contact, and blog; auth + checkout with demo coupons; trader portal (dashboard, challenge status, Chart.js stats, positions, payouts, certificates, settings, help); legal and status pages. Demo only. LocalStorage entitlements, not a live broker. Host statically (e.g. Cloudflare Workers); run with npx serve . from the project root.",
     category: "website",
     websiteVertical: "fintech",
     stack: ["html", "css", "javascript"],
@@ -12727,11 +12727,11 @@ export const templateProjects: TemplateProject[] = [
     access: "member",
     badge: "new",
     coverVariant: "landing",
-    coverImage: "/templates/projects/website/sonojs-website-52/main.webp",
+    coverImage: "/websites/projects/sonojs-website-52/main.webp",
     coverImageDark: null,
-    coverVideo: "/templates/projects/website/sonojs-website-52/cover.mp4",
+    coverVideo: "/websites/projects/sonojs-website-52/cover.mp4",
     detailCoverImage:
-      "/templates/projects/website/sonojs-website-52/main.webp",
+      "/websites/projects/sonojs-website-52/main.webp",
     detailCoverImageDark: null,
     liveUrl: "https://sonojs-website-52.sonojs2.workers.dev/",
     downloadUrl: "",
@@ -12755,7 +12755,7 @@ export const templateProjects: TemplateProject[] = [
       },
       {
         title: "Zero-build static",
-        body: "36 HTML pages — local GSAP/Chart.js, Jost fonts, violet/orange system.",
+        body: "36 HTML pages, local GSAP/Chart.js, Jost fonts, violet/orange system.",
       },
     ],
     includes: [
@@ -12766,7 +12766,70 @@ export const templateProjects: TemplateProject[] = [
     ],
     requirements: [
       "Modern browser",
-      "Static file host (`npx serve .` — not file://)",
+      "Static file host (`npx serve .`)",
+    ],
+  },
+  {
+    slug: "sonojs-website-53",
+    title: "Casino Live",
+    tagline:
+      "Dark live-casino lobby with demo wallet, LIVE10 promo, and auth portal.",
+    description:
+      "Casino Live is a multi-page premium live-casino marketing website template by SonoJS (demo brand: Casino Live). Zero-build static HTML/CSS/vanilla JS with Bootstrap, jQuery, Swiper, and local Roboto. Home lobby with top games, how-to-play, free-spin theater, and blog rails; Our Game library with search/filters and single-game demo spin; promotions, about, FAQ, contact, responsible gaming, privacy/terms, 404. Auth (login/register) unlocks a dashboard plus multi-step deposit/withdraw with promo LIVE10 (10% demo credit), deposit/withdraw/transaction history, and account/security settings. Demo only. 18+ framing, localStorage wallet theater, no real money. Host statically (e.g. Cloudflare Workers); run with npx serve . from the project root.",
+    category: "website",
+    websiteVertical: "betting",
+    stack: ["html", "css", "javascript"],
+    priceLabel: "$29",
+    priceCents: 2900,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 245,
+    accent: "245",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "landing",
+    coverImage: "/websites/projects/sonojs-website-53/main.webp",
+    coverImageDark: null,
+    coverVideo: "/websites/projects/sonojs-website-53/cover.mp4",
+    detailCoverImage:
+      "/websites/projects/sonojs-website-53/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-website-53.sonojs2.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-17",
+    firstReleasedAt: "2026-11-17",
+    screens: 23,
+    runCommand: "npx serve .",
+    highlights: [
+      {
+        title: "Lobby + game library",
+        body: "Dark home, Our Game filters, and single-game demo spin chrome.",
+      },
+      {
+        title: "Wallet theater",
+        body: "Deposit/withdraw flows, LIVE10 bonus, and localStorage ledger.",
+      },
+      {
+        title: "Auth portal",
+        body: "Login/register into dashboard, history pages, and settings.",
+      },
+      {
+        title: "Zero-build static",
+        body: "23 HTML pages, local Bootstrap/jQuery/Swiper/Roboto; npx serve .",
+      },
+    ],
+    includes: [
+      "23 HTML pages (home, games, promos, auth, wallet, legal…)",
+      "assets/css · js · images · fonts · webfonts (fully local)",
+      "demo-auth / demo-wallet / demo-chrome helpers + serve.json",
+      "README + CHANGELOG",
+    ],
+    requirements: [
+      "Modern browser",
+      "Static file host (`npx serve .`)",
     ],
   },
 ]

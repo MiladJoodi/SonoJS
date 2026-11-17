@@ -7,7 +7,7 @@ const ERROR_MESSAGES: Record<string, string> = {
   InvalidSlug: "That product is not available.",
   InvalidJson: "Something went wrong. Please try again.",
   ProductNotFound: "That product is not available.",
-  ProductNotForSale: "This product is free — use Download instead.",
+  ProductNotForSale: "This product is free, use Download instead.",
   AlreadyOwned: "You already own this product.",
   PriceNotConfigured:
     "Checkout is not configured for this product yet. Please try again later.",

@@ -23,7 +23,7 @@ Scroll-driven WebGL sculpture hero. Demo brand: **Laocoön**.
 
 ## Run locally
 
-Do not open `index.html` via `file://` — Three.js import maps and the GLB need a static server.
+Do not open `index.html` via `file://`. Three.js import maps and the GLB need a static server.
 
 ```bash
 npx serve .

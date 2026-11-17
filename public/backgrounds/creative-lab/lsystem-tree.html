@@ -1,0 +1,421 @@
+<!-- TITLE: 008 L-System Tree -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>008 — L-System Tree · creative-lab</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 100%; height: 100%; overflow: hidden; }
+    body {
+      background: #0a0a0a;
+      color: #e6edf3;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    canvas { display: block; width: 100%; height: 100%; }
+    .panel {
+      position: fixed;
+      top: 16px;
+      left: 16px;
+      width: 320px;
+      max-width: calc(100vw - 32px);
+      padding: 14px 16px;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 14px;
+      background: rgba(10, 12, 16, 0.76);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 20px 45px rgba(0,0,0,0.38);
+      z-index: 2;
+    }
+    .panel h1 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .panel p,
+    .panel label,
+    .panel select,
+    .meta {
+      font-size: 12px;
+      line-height: 1.55;
+      color: rgba(230, 237, 243, 0.8);
+    }
+    .controls {
+      display: grid;
+      grid-template-columns: 78px 1fr 48px;
+      gap: 8px 10px;
+      align-items: center;
+      margin: 12px 0 10px;
+    }
+    select,
+    input[type="range"] {
+      width: 100%;
+    }
+    select {
+      grid-column: span 2;
+      background: rgba(255,255,255,0.05);
+      color: #e6edf3;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px;
+      padding: 8px 10px;
+    }
+    input[type="range"] { accent-color: #7dd3fc; }
+    .meta {
+      display: grid;
+      grid-template-columns: auto auto;
+      gap: 2px 16px;
+      font-family: "SF Mono", "Fira Code", monospace;
+      margin-top: 8px;
+    }
+    .meta strong { color: #7dd3fc; font-weight: 500; }
+    .footer {
+      position: fixed;
+      right: 16px;
+      bottom: 12px;
+      font-size: 11px;
+      color: rgba(255,255,255,0.38);
+      font-family: monospace;
+      z-index: 2;
+    }
+    .footer a { color: inherit; text-decoration: none; }
+    .footer a:hover { color: rgba(255,255,255,0.72); }
+  
+    html.embed #ui,
+    html.embed #info,
+    html.embed #controls,
+    html.embed #stats,
+    html.embed #hint,
+    html.embed .panel,
+    html.embed header,
+    html.embed footer { display: none !important; }
+  </style>
+  <script>if(/\bembed=1\b/.test(location.search))document.documentElement.classList.add("embed")</script>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+
+<div class="panel">
+  <h1>L-System Tree</h1>
+  <p>Pure-JS rewriting engine with animated turtle drawing. Change the preset, then use arrow keys to nudge angle and branch length while it redraws.</p>
+  <div class="controls">
+    <label for="preset">Preset</label>
+    <select id="preset">
+      <option value="tree">Classic tree</option>
+      <option value="koch">Koch snowflake</option>
+      <option value="dragon">Dragon curve</option>
+      <option value="fern">Fern</option>
+    </select>
+
+    <label for="iterations">Iter</label>
+    <input id="iterations" type="range" min="1" max="7" value="5">
+    <span id="iterationsValue">5</span>
+
+    <label for="angle">Angle</label>
+    <input id="angle" type="range" min="0" max="90" value="25">
+    <span id="angleValue">25</span>
+
+    <label for="length">Length</label>
+    <input id="length" type="range" min="4" max="24" value="11">
+    <span id="lengthValue">11</span>
+
+    <label for="speed">Speed</label>
+    <input id="speed" type="range" min="1" max="300" value="90">
+    <span id="speedValue">90</span>
+  </div>
+  <div class="meta">
+    <span>Symbols</span><strong id="symbolLabel">0</strong>
+    <span>Segments</span><strong id="segmentLabel">0</strong>
+    <span>Status</span><strong id="statusLabel">Ready</strong>
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+
+const presetInput = document.getElementById('preset');
+const iterationsInput = document.getElementById('iterations');
+const angleInput = document.getElementById('angle');
+const lengthInput = document.getElementById('length');
+const speedInput = document.getElementById('speed');
+const iterationsValue = document.getElementById('iterationsValue');
+const angleValue = document.getElementById('angleValue');
+const lengthValue = document.getElementById('lengthValue');
+const speedValue = document.getElementById('speedValue');
+const symbolLabel = document.getElementById('symbolLabel');
+const segmentLabel = document.getElementById('segmentLabel');
+const statusLabel = document.getElementById('statusLabel');
+
+let width = 0;
+let height = 0;
+let dpr = 1;
+let commands = [];
+let progress = 0;
+let lastTime = performance.now();
+const MAX_SYMBOLS = 180000;
+
+const presets = {
+  tree: {
+    axiom: 'F',
+    rules: { F: 'FF-[-F+F+F]+[+F-F-F]' },
+    angle: 25,
+    length: 11,
+    startAngle: -90,
+    startX: 0.5,
+    startY: 0.93,
+    colorA: [104, 192, 130],
+    colorB: [232, 249, 244],
+    lineScale: 0.18,
+  },
+  koch: {
+    axiom: 'F--F--F',
+    rules: { F: 'F+F--F+F' },
+    angle: 60,
+    length: 7,
+    startAngle: 0,
+    startX: 0.22,
+    startY: 0.68,
+    colorA: [92, 204, 255],
+    colorB: [255, 255, 255],
+    lineScale: 0.08,
+  },
+  dragon: {
+    axiom: 'FX',
+    rules: { X: 'X+YF+', Y: '-FX-Y' },
+    angle: 90,
+    length: 9,
+    startAngle: 0,
+    startX: 0.34,
+    startY: 0.56,
+    colorA: [160, 126, 255],
+    colorB: [90, 240, 220],
+    lineScale: 0.06,
+  },
+  fern: {
+    axiom: 'X',
+    rules: { X: 'F+[[X]-X]-F[-FX]+X', F: 'FF' },
+    angle: 22,
+    length: 6,
+    startAngle: -90,
+    startX: 0.5,
+    startY: 0.96,
+    colorA: [76, 168, 96],
+    colorB: [218, 246, 224],
+    lineScale: 0.12,
+  },
+};
+
+function resize() {
+  dpr = Math.min(window.devicePixelRatio || 1, 2);
+  width = window.innerWidth;
+  height = window.innerHeight;
+  canvas.width = Math.floor(width * dpr);
+  canvas.height = Math.floor(height * dpr);
+  canvas.style.width = `${width}px`;
+  canvas.style.height = `${height}px`;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
+
+function clamp(value, min, max) {
+  return Math.max(min, Math.min(max, value));
+}
+
+function lerp(a, b, t) {
+  return a + (b - a) * t;
+}
+
+function rewriteLSystem(axiom, rules, iterations) {
+  let current = axiom;
+  let truncated = false;
+  for (let i = 0; i < iterations; i++) {
+    let next = '';
+    for (const ch of current) {
+      next += rules[ch] || ch;
+      if (next.length > MAX_SYMBOLS) {
+        truncated = true;
+        break;
+      }
+    }
+    current = next;
+    if (truncated) break;
+  }
+  return { sequence: current, truncated };
+}
+
+function strokeColor(preset, depth, maxDepth) {
+  const t = maxDepth ? depth / maxDepth : 0;
+  const r = Math.round(lerp(preset.colorA[0], preset.colorB[0], t));
+  const g = Math.round(lerp(preset.colorA[1], preset.colorB[1], t));
+  const b = Math.round(lerp(preset.colorA[2], preset.colorB[2], t));
+  return `rgb(${r},${g},${b})`;
+}
+
+function buildCommands() {
+  const preset = presets[presetInput.value];
+  const iterations = Number(iterationsInput.value);
+  const angleDeg = Number(angleInput.value);
+  const baseLength = Number(lengthInput.value);
+  const { sequence, truncated } = rewriteLSystem(preset.axiom, preset.rules, iterations);
+  const stack = [];
+  const list = [];
+  let x = width * preset.startX;
+  let y = height * preset.startY;
+  let heading = preset.startAngle * Math.PI / 180;
+  let depth = 0;
+  let maxDepth = 0;
+
+  for (const symbol of sequence) {
+    if (symbol === 'F' || symbol === 'G') {
+      const taper = Math.max(0.45, 1 - depth * preset.lineScale);
+      const length = baseLength * taper;
+      const nx = x + Math.cos(heading) * length;
+      const ny = y + Math.sin(heading) * length;
+      list.push({
+        x1: x,
+        y1: y,
+        x2: nx,
+        y2: ny,
+        depth,
+        width: Math.max(1, 4.2 * taper),
+      });
+      x = nx;
+      y = ny;
+    } else if (symbol === '+') {
+      heading += angleDeg * Math.PI / 180;
+    } else if (symbol === '-') {
+      heading -= angleDeg * Math.PI / 180;
+    } else if (symbol === '[') {
+      stack.push({ x, y, heading, depth });
+      depth++;
+      if (depth > maxDepth) maxDepth = depth;
+    } else if (symbol === ']') {
+      const state = stack.pop();
+      if (state) {
+        x = state.x;
+        y = state.y;
+        heading = state.heading;
+        depth = state.depth;
+      }
+    }
+  }
+
+  commands = list.map(item => ({ ...item, color: strokeColor(preset, item.depth, maxDepth) }));
+  progress = 0;
+  symbolLabel.textContent = sequence.length.toLocaleString();
+  segmentLabel.textContent = commands.length.toLocaleString();
+  statusLabel.textContent = truncated ? 'Capped' : commands.length ? 'Drawing' : 'Empty';
+}
+
+function drawBackground() {
+  const bg = ctx.createLinearGradient(0, 0, 0, height);
+  bg.addColorStop(0, '#071119');
+  bg.addColorStop(0.52, '#091612');
+  bg.addColorStop(1, '#0a0a0a');
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, width, height);
+
+  ctx.strokeStyle = 'rgba(255,255,255,0.03)';
+  ctx.lineWidth = 1;
+  for (let y = 0; y < height; y += 36) {
+    ctx.beginPath();
+    ctx.moveTo(0, y + 0.5);
+    ctx.lineTo(width, y + 0.5);
+    ctx.stroke();
+  }
+}
+
+function render() {
+  const now = performance.now();
+  const dt = Math.min(0.05, (now - lastTime) / 1000);
+  lastTime = now;
+  progress = Math.min(commands.length, progress + dt * Number(speedInput.value));
+
+  drawBackground();
+  const visible = Math.floor(progress);
+  for (let i = 0; i < visible; i++) {
+    const segment = commands[i];
+    ctx.beginPath();
+    ctx.moveTo(segment.x1, segment.y1);
+    ctx.lineTo(segment.x2, segment.y2);
+    ctx.strokeStyle = segment.color;
+    ctx.lineWidth = segment.width;
+    ctx.lineCap = 'round';
+    ctx.stroke();
+  }
+
+  if (visible < commands.length) {
+    const segment = commands[visible];
+    if (segment) {
+      const t = progress - visible;
+      ctx.beginPath();
+      ctx.moveTo(segment.x1, segment.y1);
+      ctx.lineTo(lerp(segment.x1, segment.x2, t), lerp(segment.y1, segment.y2, t));
+      ctx.strokeStyle = segment.color;
+      ctx.lineWidth = segment.width;
+      ctx.lineCap = 'round';
+      ctx.stroke();
+    }
+    statusLabel.textContent = 'Drawing';
+  } else {
+    statusLabel.textContent = 'Complete';
+  }
+
+  requestAnimationFrame(render);
+}
+
+function syncInputs() {
+  const preset = presets[presetInput.value];
+  iterationsValue.textContent = iterationsInput.value;
+  angleValue.textContent = angleInput.value;
+  lengthValue.textContent = lengthInput.value;
+  speedValue.textContent = speedInput.value;
+  if (!document.activeElement || document.activeElement === document.body) {
+    angleInput.value = String(preset.angle);
+    lengthInput.value = String(preset.length);
+    angleValue.textContent = angleInput.value;
+    lengthValue.textContent = lengthInput.value;
+  }
+}
+
+function applyPreset(resetInputs) {
+  const preset = presets[presetInput.value];
+  if (resetInputs) {
+    angleInput.value = String(preset.angle);
+    lengthInput.value = String(preset.length);
+  }
+  syncInputs();
+  buildCommands();
+}
+
+window.addEventListener('resize', () => {
+  resize();
+  buildCommands();
+});
+
+[presetInput, iterationsInput, angleInput, lengthInput, speedInput].forEach(element => {
+  element.addEventListener('input', () => {
+    syncInputs();
+    if (element !== speedInput) buildCommands();
+  });
+});
+
+presetInput.addEventListener('change', () => applyPreset(true));
+
+window.addEventListener('keydown', event => {
+  if (event.key === 'ArrowLeft') angleInput.value = String(clamp(Number(angleInput.value) - 1, 0, 90));
+  else if (event.key === 'ArrowRight') angleInput.value = String(clamp(Number(angleInput.value) + 1, 0, 90));
+  else if (event.key === 'ArrowDown') lengthInput.value = String(clamp(Number(lengthInput.value) - 1, 4, 24));
+  else if (event.key === 'ArrowUp') lengthInput.value = String(clamp(Number(lengthInput.value) + 1, 4, 24));
+  else if (event.key.toLowerCase() === 'r') applyPreset(true);
+  else return;
+  syncInputs();
+  buildCommands();
+});
+
+resize();
+applyPreset(true);
+render();
+</script>
+</body>
+</html>

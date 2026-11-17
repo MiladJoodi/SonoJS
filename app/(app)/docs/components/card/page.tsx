@@ -95,7 +95,7 @@ export default async function CardDocsPage() {
           <div className="space-y-3 leading-relaxed text-muted-foreground">
             <p>
               Elevated surface for forms, pricing, and feature blocks. Compose
-              with header, content, footer, and optional action slots —
+              with header, content, footer, and optional action slots , 
               including image, overlay, and edge-to-edge layouts.
             </p>
             <p>

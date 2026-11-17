@@ -5,7 +5,7 @@ Category: `landing`
 Slug / folder: `sonojs-landing-18`  
 Path: `public/templates/projects/landing/sonojs-landing-18/`  
 
-AI workplace-search marketing landing. Demo brand: **Dala** — Unlock collective wisdom.
+AI workplace-search marketing landing. Demo brand: **Dala**. Unlock collective wisdom.
 
 ## Images / video
 

@@ -1,0 +1,350 @@
+<!-- TITLE: 023 Boids Flocking -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>023 — Boids Flocking · creative-lab</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 100%; height: 100%; overflow: hidden; }
+    body {
+      background: radial-gradient(circle at top, #0f172a 0%, #04060c 55%, #020308 100%);
+      color: #e6edf3;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    canvas { display: block; width: 100%; height: 100%; cursor: none; }
+    .panel {
+      position: fixed;
+      top: 16px;
+      left: 16px;
+      width: 352px;
+      max-width: calc(100vw - 32px);
+      padding: 14px 16px;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 14px;
+      background: rgba(10, 12, 16, 0.76);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 20px 45px rgba(0,0,0,0.38);
+      z-index: 2;
+    }
+    .panel h1 { font-size: 15px; margin-bottom: 8px; }
+    .panel p, .panel label, .panel span, .panel button {
+      font-size: 12px;
+      line-height: 1.6;
+      color: rgba(230, 237, 243, 0.84);
+    }
+    .controls {
+      display: grid;
+      grid-template-columns: 104px 1fr 56px;
+      gap: 8px 10px;
+      align-items: center;
+      margin: 12px 0 10px;
+    }
+    input[type="range"] { width: 100%; accent-color: #7dd3fc; }
+    button {
+      width: 100%;
+      min-height: 32px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px;
+      color: #f8fafc;
+      padding: 7px 10px;
+      cursor: pointer;
+    }
+    .actions {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .meta {
+      display: grid;
+      grid-template-columns: auto auto;
+      gap: 2px 14px;
+      font-family: "SF Mono", "Fira Code", monospace;
+    }
+    .meta strong { color: #7dd3fc; font-weight: 500; }
+  
+    html.embed #ui,
+    html.embed #info,
+    html.embed #controls,
+    html.embed #stats,
+    html.embed #hint,
+    html.embed .panel,
+    html.embed header,
+    html.embed footer { display: none !important; }
+  </style>
+  <script>if(/\bembed=1\b/.test(location.search))document.documentElement.classList.add("embed")</script>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+
+<div class="panel">
+  <h1>Boids Flocking</h1>
+  <p>Alignment, cohesion, and separation push the flock into emergent motion. Move the pointer to steer the swarm with a soft attractor field.</p>
+  <div class="controls">
+    <label for="alignRadius">Align radius</label>
+    <input id="alignRadius" type="range" min="20" max="180" step="1" value="72">
+    <span id="alignRadiusValue">72</span>
+
+    <label for="cohesionRadius">Cohere radius</label>
+    <input id="cohesionRadius" type="range" min="20" max="220" step="1" value="110">
+    <span id="cohesionRadiusValue">110</span>
+
+    <label for="separationRadius">Separate</label>
+    <input id="separationRadius" type="range" min="8" max="90" step="1" value="28">
+    <span id="separationRadiusValue">28</span>
+
+    <label for="count">Boids</label>
+    <input id="count" type="range" min="60" max="360" step="1" value="180">
+    <span id="countValue">180</span>
+  </div>
+  <div class="meta">
+    <span>Avg speed</span><strong id="speedLabel">0.00</strong>
+    <span>Pointer</span><strong id="pointerLabel">repel</strong>
+    <span>Neighbors</span><strong id="neighborsLabel">0</strong>
+  </div>
+  <div class="actions">
+    <button id="modeBtn" type="button">Switch mode</button>
+    <button id="resetBtn" type="button">Reset flock</button>
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+const alignRadiusInput = document.getElementById('alignRadius');
+const cohesionRadiusInput = document.getElementById('cohesionRadius');
+const separationRadiusInput = document.getElementById('separationRadius');
+const countInput = document.getElementById('count');
+const speedLabel = document.getElementById('speedLabel');
+const pointerLabel = document.getElementById('pointerLabel');
+const neighborsLabel = document.getElementById('neighborsLabel');
+const modeBtn = document.getElementById('modeBtn');
+const resetBtn = document.getElementById('resetBtn');
+const valueSpans = {
+  alignRadius: document.getElementById('alignRadiusValue'),
+  cohesionRadius: document.getElementById('cohesionRadiusValue'),
+  separationRadius: document.getElementById('separationRadiusValue'),
+  count: document.getElementById('countValue')
+};
+
+let width = 0;
+let height = 0;
+let dpr = 1;
+let boids = [];
+let pointerMode = 'repel';
+const pointer = { x: 0, y: 0, inside: false };
+
+function resize() {
+  dpr = Math.min(window.devicePixelRatio || 1, 2);
+  width = window.innerWidth;
+  height = window.innerHeight;
+  canvas.width = Math.floor(width * dpr);
+  canvas.height = Math.floor(height * dpr);
+  canvas.style.width = `${width}px`;
+  canvas.style.height = `${height}px`;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
+
+function createBoid() {
+  const angle = Math.random() * Math.PI * 2;
+  const speed = 1.5 + Math.random() * 1.6;
+  return {
+    x: Math.random() * width,
+    y: Math.random() * height,
+    vx: Math.cos(angle) * speed,
+    vy: Math.sin(angle) * speed,
+    hue: 180 + Math.random() * 90,
+    neighbors: 0
+  };
+}
+
+function resetBoids() {
+  boids = Array.from({ length: Number(countInput.value) }, createBoid);
+}
+
+function updateBoidCount() {
+  const target = Number(countInput.value);
+  while (boids.length < target) boids.push(createBoid());
+  boids.length = target;
+}
+
+function clampMagnitude(vector, max) {
+  const mag = Math.hypot(vector.x, vector.y);
+  if (mag > max && mag > 0) {
+    vector.x = (vector.x / mag) * max;
+    vector.y = (vector.y / mag) * max;
+  }
+}
+
+function frame() {
+  updateBoidCount();
+  const alignRadius = Number(alignRadiusInput.value);
+  const cohesionRadius = Number(cohesionRadiusInput.value);
+  const separationRadius = Number(separationRadiusInput.value);
+  const maxSpeed = 3.2;
+  const maxForce = 0.06;
+  let totalSpeed = 0;
+  let totalNeighbors = 0;
+
+  ctx.fillStyle = 'rgba(2, 4, 10, 0.22)';
+  ctx.fillRect(0, 0, width, height);
+
+  for (let i = 0; i < boids.length; i++) {
+    const boid = boids[i];
+    const alignment = { x: 0, y: 0 };
+    const cohesion = { x: 0, y: 0 };
+    const separation = { x: 0, y: 0 };
+    let alignCount = 0;
+    let cohesionCount = 0;
+    let separationCount = 0;
+
+    for (let j = 0; j < boids.length; j++) {
+      if (i === j) continue;
+      const other = boids[j];
+      let dx = other.x - boid.x;
+      let dy = other.y - boid.y;
+      if (Math.abs(dx) > width * 0.5) dx -= Math.sign(dx) * width;
+      if (Math.abs(dy) > height * 0.5) dy -= Math.sign(dy) * height;
+      const dist = Math.hypot(dx, dy);
+      if (dist < alignRadius) {
+        alignment.x += other.vx;
+        alignment.y += other.vy;
+        alignCount++;
+      }
+      if (dist < cohesionRadius) {
+        cohesion.x += dx;
+        cohesion.y += dy;
+        cohesionCount++;
+      }
+      if (dist < separationRadius && dist > 0) {
+        separation.x -= dx / dist;
+        separation.y -= dy / dist;
+        separationCount++;
+      }
+    }
+
+    const force = { x: 0, y: 0 };
+    boid.neighbors = alignCount;
+    totalNeighbors += alignCount;
+
+    if (alignCount) {
+      alignment.x /= alignCount;
+      alignment.y /= alignCount;
+      const mag = Math.hypot(alignment.x, alignment.y) || 1;
+      force.x += ((alignment.x / mag) * maxSpeed - boid.vx) * 0.045;
+      force.y += ((alignment.y / mag) * maxSpeed - boid.vy) * 0.045;
+    }
+    if (cohesionCount) {
+      force.x += (cohesion.x / cohesionCount) * 0.00055;
+      force.y += (cohesion.y / cohesionCount) * 0.00055;
+    }
+    if (separationCount) {
+      force.x += separation.x * 0.04;
+      force.y += separation.y * 0.04;
+    }
+
+    if (pointer.inside) {
+      let dx = pointer.x - boid.x;
+      let dy = pointer.y - boid.y;
+      const dist = Math.hypot(dx, dy);
+      if (dist < 200 && dist > 0) {
+        const strength = (1 - dist / 200) * 0.22;
+        const sign = pointerMode === 'attract' ? 1 : -1;
+        force.x += (dx / dist) * strength * sign;
+        force.y += (dy / dist) * strength * sign;
+      }
+    }
+
+    clampMagnitude(force, maxForce);
+    boid.vx += force.x;
+    boid.vy += force.y;
+    const speed = Math.hypot(boid.vx, boid.vy) || 1;
+    if (speed > maxSpeed) {
+      boid.vx = (boid.vx / speed) * maxSpeed;
+      boid.vy = (boid.vy / speed) * maxSpeed;
+    }
+
+    boid.x = (boid.x + boid.vx + width) % width;
+    boid.y = (boid.y + boid.vy + height) % height;
+    totalSpeed += Math.hypot(boid.vx, boid.vy);
+  }
+
+  if (pointer.inside) {
+    const gradient = ctx.createRadialGradient(pointer.x, pointer.y, 0, pointer.x, pointer.y, 140);
+    gradient.addColorStop(0, pointerMode === 'attract' ? 'rgba(56, 189, 248, 0.18)' : 'rgba(248, 113, 113, 0.18)');
+    gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+    ctx.fillStyle = gradient;
+    ctx.beginPath();
+    ctx.arc(pointer.x, pointer.y, 140, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  for (const boid of boids) {
+    const angle = Math.atan2(boid.vy, boid.vx);
+    const glow = ctx.createLinearGradient(
+      boid.x - Math.cos(angle) * 10,
+      boid.y - Math.sin(angle) * 10,
+      boid.x + Math.cos(angle) * 10,
+      boid.y + Math.sin(angle) * 10
+    );
+    glow.addColorStop(0, `hsla(${boid.hue}, 90%, 40%, 0.18)`);
+    glow.addColorStop(1, `hsla(${boid.hue + 40}, 95%, 72%, 0.95)`);
+    ctx.save();
+    ctx.translate(boid.x, boid.y);
+    ctx.rotate(angle);
+    ctx.beginPath();
+    ctx.moveTo(11, 0);
+    ctx.lineTo(-7, 5.2);
+    ctx.lineTo(-4, 0);
+    ctx.lineTo(-7, -5.2);
+    ctx.closePath();
+    ctx.fillStyle = glow;
+    ctx.shadowBlur = 14;
+    ctx.shadowColor = `hsla(${boid.hue + 20}, 95%, 68%, 0.6)`;
+    ctx.fill();
+    ctx.restore();
+  }
+
+  speedLabel.textContent = (totalSpeed / Math.max(1, boids.length)).toFixed(2);
+  neighborsLabel.textContent = Math.round(totalNeighbors / Math.max(1, boids.length)).toString();
+  requestAnimationFrame(frame);
+}
+
+function setPointer(event) {
+  const rect = canvas.getBoundingClientRect();
+  pointer.x = event.clientX - rect.left;
+  pointer.y = event.clientY - rect.top;
+  pointer.inside = true;
+}
+
+canvas.addEventListener('pointermove', setPointer);
+canvas.addEventListener('pointerenter', setPointer);
+canvas.addEventListener('pointerleave', () => { pointer.inside = false; });
+modeBtn.addEventListener('click', () => {
+  pointerMode = pointerMode === 'repel' ? 'attract' : 'repel';
+  pointerLabel.textContent = pointerMode;
+});
+resetBtn.addEventListener('click', resetBoids);
+for (const input of [alignRadiusInput, cohesionRadiusInput, separationRadiusInput, countInput]) {
+  input.addEventListener('input', () => {
+    valueSpans[input.id].textContent = input.value;
+    if (input === countInput) updateBoidCount();
+  });
+  valueSpans[input.id].textContent = input.value;
+}
+
+window.addEventListener('resize', () => {
+  resize();
+  resetBoids();
+});
+
+resize();
+resetBoids();
+pointerLabel.textContent = pointerMode;
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>

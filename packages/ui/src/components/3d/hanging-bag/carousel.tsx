@@ -41,7 +41,7 @@ export function Carousel({ items }: Props) {
   useEffect(() => {
     const el = gl.domElement
     const onWheel = (e: WheelEvent) => {
-      // Only when the pointer is over this canvas — never steal page scroll.
+      // Only when the pointer is over this canvas. Never steal page scroll.
       e.preventDefault()
       e.stopPropagation()
 

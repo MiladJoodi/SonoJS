@@ -23,7 +23,7 @@ Scroll-cinema digital studio with Verlet sphere physics. Demo brand: **Gravity**
 
 ## Run locally
 
-Do not open `index.html` via `file://` — Three.js modules need a static server.
+Do not open `index.html` via `file://`. Three.js modules need a static server.
 
 ```bash
 npx serve .

@@ -31,14 +31,14 @@ export function HomeHero() {
         }}
       />
 
-      {/* Shell stays top-padded (not justify-center) — avoids viewport/scrollbar CLS. */}
+      {/* Shell stays top-padded (not justify-center), avoids viewport/scrollbar CLS. */}
       <HomeShell className="flex flex-1 flex-col pt-6 pb-[max(3rem,calc(1.5rem+env(safe-area-inset-bottom)))] sm:pt-14 sm:pb-20 lg:pt-16 lg:pb-24">
         <div className="grid gap-7 sm:gap-10 max-lg:items-start lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-center lg:gap-[clamp(2.5rem,6vw,5.5rem)]">
           <section
             className="min-w-0 text-start lg:self-center"
             aria-labelledby="home-hero-heading"
           >
-            {/* ATF paints fully opaque — no opacity-0 / translateY entrance (CLS). */}
+            {/* ATF paints fully opaque. No opacity-0 / translateY entrance (CLS). */}
             <p className="mb-3.5 sm:mb-8">
               <span
                 className="inline-block bg-primary px-[0.55em] py-[0.18em] text-[clamp(1.5rem,5vw,2.25rem)] font-semibold tracking-[-0.03em] text-primary-foreground"

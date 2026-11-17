@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galaxy Spiral — creative-lab</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #000;
+      color: #e6edf3;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+    }
+
+    #ui {
+      position: fixed;
+      top: 16px; right: 16px;
+      z-index: 10;
+      background: rgba(13, 17, 23, 0.85);
+      border: 1px solid #30363d;
+      border-radius: 10px;
+      padding: 16px;
+      width: 220px;
+      backdrop-filter: blur(8px);
+    }
+
+    #ui h3 {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #58a6ff;
+      margin-bottom: 12px;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .row label {
+      font-size: 0.75rem;
+      color: #8b949e;
+    }
+
+    .row input[type=range] {
+      width: 110px;
+      accent-color: #58a6ff;
+    }
+
+    .row span {
+      font-size: 0.72rem;
+      color: #c9d1d9;
+      min-width: 28px;
+      text-align: right;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 6px;
+      margin-top: 4px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      flex: 1;
+      padding: 6px 8px;
+      font-size: 0.72rem;
+      background: rgba(88,166,255,0.1);
+      border: 1px solid rgba(88,166,255,0.3);
+      border-radius: 5px;
+      color: #58a6ff;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    button:hover { background: rgba(88,166,255,0.22); }
+    button.active { background: rgba(88,166,255,0.28); border-color:#58a6ff; }
+
+    #info {
+      position: fixed;
+      bottom: 52px; left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.72rem;
+      color: #8b949e;
+      pointer-events: none;
+      text-align: center;
+    }
+
+
+  
+    html.embed #ui,
+    html.embed #info,
+    html.embed #controls,
+    html.embed #stats,
+    html.embed #hint,
+    html.embed .panel,
+    html.embed header,
+    html.embed footer { display: none !important; }
+  </style>
+  <script>if(/\bembed=1\b/.test(location.search))document.documentElement.classList.add("embed")</script>
+</head>
+<body>
+
+<canvas id="c"></canvas>
+
+<div id="ui">
+  <h3>🌌 Galaxy Spiral</h3>
+
+  <div class="row">
+    <label>Stars</label>
+    <input type="range" id="sl-stars" min="2000" max="30000" step="1000" value="12000">
+    <span id="v-stars">12k</span>
+  </div>
+  <div class="row">
+    <label>Arms</label>
+    <input type="range" id="sl-arms" min="2" max="8" step="1" value="4">
+    <span id="v-arms">4</span>
+  </div>
+  <div class="row">
+    <label>Spread</label>
+    <input type="range" id="sl-spread" min="0.1" max="1.5" step="0.05" value="0.5">
+    <span id="v-spread">0.5</span>
+  </div>
+  <div class="row">
+    <label>Rotation</label>
+    <input type="range" id="sl-rot" min="0" max="3" step="0.1" value="0.6">
+    <span id="v-rot">0.6</span>
+  </div>
+  <div class="row">
+    <label>Spin speed</label>
+    <input type="range" id="sl-speed" min="0" max="2" step="0.05" value="0.15">
+    <span id="v-speed">0.15</span>
+  </div>
+  <div class="row">
+    <label>Core glow</label>
+    <input type="range" id="sl-core" min="0" max="1" step="0.05" value="0.7">
+    <span id="v-core">0.7</span>
+  </div>
+
+  <div class="btn-row" style="margin-top:10px; margin-bottom:6px;">
+    <button id="btn-milky" class="active">Milky Way</button>
+    <button id="btn-starburst">Starburst</button>
+    <button id="btn-nebula">Nebula</button>
+  </div>
+  <div class="btn-row">
+    <button id="btn-rebuild">Rebuild</button>
+    <button id="btn-pause">Pause</button>
+  </div>
+</div>
+
+<div id="info">Scroll to zoom · Drag to rotate · Click stars for info</div>
+
+
+
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+
+// ─────────────────────────────────────────────────
+// Config / state
+// ─────────────────────────────────────────────────
+let cfg = {
+  stars: 12000,
+  arms: 4,
+  spread: 0.5,
+  rotFactor: 0.6,    // extra twist per unit radius
+  spinSpeed: 0.15,
+  coreGlow: 0.7,
+  palette: 'milky',
+};
+
+const PALETTES = {
+  milky: {
+    armColors: ['#fff8e7','#ffe8a0','#ffd060','#b0d8ff','#80b8ff'],
+    coreColor: '#fff5cc',
+    bgColor: '#000007',
+    dustColor: 'rgba(100,120,200,0.018)',
+  },
+  starburst: {
+    armColors: ['#ff8c42','#ff5e78','#ff42c8','#c842ff','#ffcc00'],
+    coreColor: '#ffeeaa',
+    bgColor: '#040008',
+    dustColor: 'rgba(180,60,120,0.018)',
+  },
+  nebula: {
+    armColors: ['#40e0ff','#00ffcc','#80ff80','#ffff44','#ff8080'],
+    coreColor: '#aaffee',
+    bgColor: '#000a08',
+    dustColor: 'rgba(20,120,80,0.018)',
+  },
+};
+
+// Camera
+let camTheta = 0;    // auto-spin angle
+let camTilt  = 0.32; // radians — viewing angle from pole
+let dragging = false, dragX = 0, dragY = 0, dragTilt0 = 0, dragTheta0 = 0;
+let zoom = 1.0;
+let paused = false;
+let time = 0;
+
+// Star pool
+let stars = [];
+let dustClouds = [];
+
+// ─────────────────────────────────────────────────
+// Galaxy generation
+// ─────────────────────────────────────────────────
+function rand(min, max) { return min + Math.random() * (max - min); }
+function gaussRand() {
+  let u = 0, v = 0;
+  while (!u) u = Math.random();
+  while (!v) v = Math.random();
+  return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
+}
+
+function buildGalaxy() {
+  stars = [];
+  dustClouds = [];
+
+  const pal = PALETTES[cfg.palette];
+  const armColors = pal.armColors;
+  const nArms = cfg.arms;
+  const armOffset = (2 * Math.PI) / nArms;
+
+  // Bulge stars (no arms, spherical distribution)
+  const bulgeCount = Math.floor(cfg.stars * 0.18);
+  for (let i = 0; i < bulgeCount; i++) {
+    const r = Math.abs(gaussRand()) * 0.18;
+    const theta = rand(0, 2 * Math.PI);
+    const phi = rand(0, 2 * Math.PI);
+    const x = r * Math.cos(theta) * Math.cos(phi);
+    const y = r * Math.sin(theta) * Math.cos(phi);
+    const z = r * Math.sin(phi) * 0.6;
+    const brightness = rand(0.5, 1.0);
+    const size = rand(0.5, 2.2);
+    stars.push({ x, y, z, size, brightness, arm: -1, color: '#ffffff', isBulge: true });
+  }
+
+  // Arm stars
+  const armCount = cfg.stars - bulgeCount;
+  for (let i = 0; i < armCount; i++) {
+    const arm = Math.floor(Math.random() * nArms);
+    const angle0 = arm * armOffset;
+
+    // Distance from center: exponential distribution favoring mid-radius
+    const r = rand(0.06, 1.0);
+    const logR = r < 0.01 ? 0.01 : r;
+
+    // Logarithmic spiral: theta = a * ln(r) + offset
+    const spiralTheta = cfg.rotFactor * Math.log(logR + 0.01) + angle0;
+
+    // Scatter perpendicular to arm (narrows with radius for realism)
+    const perpScatter = gaussRand() * cfg.spread * Math.sqrt(r) * 0.22;
+    const radScatter = gaussRand() * 0.025;
+
+    const x = (r + radScatter) * Math.cos(spiralTheta) + perpScatter * Math.sin(spiralTheta);
+    const y = (r + radScatter) * Math.sin(spiralTheta) - perpScatter * Math.cos(spiralTheta);
+    const z = gaussRand() * 0.06 * (1 - r * 0.7); // thin disk
+
+    const cIdx = arm % armColors.length;
+    // Mix color toward white for hot/bright stars
+    const brightness = rand(0.3, 1.0);
+    const size = brightness > 0.85 ? rand(1.2, 2.6) : rand(0.4, 1.4);
+
+    stars.push({ x, y, z, size, brightness, arm, color: armColors[cIdx], isBulge: false });
+  }
+
+  // Dust cloud sprites (large, very transparent)
+  for (let i = 0; i < 120; i++) {
+    const arm = Math.floor(Math.random() * nArms);
+    const r = rand(0.08, 0.9);
+    const spiralTheta = cfg.rotFactor * Math.log(r + 0.01) + arm * armOffset + rand(-0.25, 0.25);
+    const dx = r * Math.cos(spiralTheta) + gaussRand() * 0.08;
+    const dy = r * Math.sin(spiralTheta) + gaussRand() * 0.08;
+    dustClouds.push({ x: dx, y: dy, r: rand(0.06, 0.2), opacity: rand(0.01, 0.05) });
+  }
+
+  // Sort by z for painter's algorithm
+  stars.sort((a, b) => a.z - b.z);
+}
+
+// ─────────────────────────────────────────────────
+// Projection
+// ─────────────────────────────────────────────────
+function project(px, py, pz, W, H, scale) {
+  // Rotate around z by camTheta (auto-spin)
+  const cx = Math.cos(camTheta), sx = Math.sin(camTheta);
+  const rx = px * cx - py * sx;
+  const ry = px * sx + py * cy_theta(camTheta);
+  // Re-do properly:
+  const _rx = px * Math.cos(camTheta) - py * Math.sin(camTheta);
+  const _ry = px * Math.sin(camTheta) + py * Math.cos(camTheta);
+  const _rz = pz;
+
+  // Tilt around x axis
+  const ct = Math.cos(camTilt), st = Math.sin(camTilt);
+  const fx = _rx;
+  const fy = _ry * ct - _rz * st;
+  const fz = _ry * st + _rz * ct;
+
+  // Simple perspective
+  const d = 3.0;
+  const zOff = fz + d;
+  const perspScale = d / Math.max(zOff, 0.01) * scale;
+
+  return {
+    sx: W / 2 + fx * perspScale,
+    sy: H / 2 - fy * perspScale,
+    depth: fz,
+    ps: perspScale,
+  };
+}
+
+// Fixes the closure issue above
+function cy_theta(t) { return Math.cos(t); } // unused, inline below
+
+// ─────────────────────────────────────────────────
+// Rendering
+// ─────────────────────────────────────────────────
+function draw() {
+  const W = canvas.width, H = canvas.height;
+  const scale = Math.min(W, H) * 0.44 * zoom;
+  const pal = PALETTES[cfg.palette];
+
+  // Fade background (creates motion blur on rotation)
+  ctx.fillStyle = paused ? pal.bgColor : (pal.bgColor + 'ee');
+  ctx.fillRect(0, 0, W, H);
+
+  // Draw dust clouds first
+  for (const d of dustClouds) {
+    const { sx, sy, ps } = project(d.x, d.y, 0, W, H, scale);
+    const rad = d.r * ps;
+    if (rad < 2) continue;
+    const g = ctx.createRadialGradient(sx, sy, 0, sx, sy, rad);
+    g.addColorStop(0, pal.dustColor.replace('0.018', String(d.opacity)));
+    g.addColorStop(1, 'transparent');
+    ctx.beginPath();
+    ctx.arc(sx, sy, rad, 0, Math.PI * 2);
+    ctx.fillStyle = g;
+    ctx.fill();
+  }
+
+  // Draw stars
+  for (const s of stars) {
+    const { sx, sy, depth, ps } = project(s.x, s.y, s.z, W, H, scale);
+    if (sx < -50 || sx > W + 50 || sy < -50 || sy > H + 50) continue;
+
+    const drawSize = s.size * (s.isBulge ? 0.9 : 1.0) * Math.min(ps / scale * scale, 3.0);
+    const alpha = s.brightness;
+
+    if (s.isBulge || s.brightness > 0.78) {
+      // Glow
+      const glowR = drawSize * 3.2 + (s.isBulge ? 3 : 0);
+      const gc = ctx.createRadialGradient(sx, sy, 0, sx, sy, glowR);
+      const cArr = hexToRgb(s.color);
+      gc.addColorStop(0, `rgba(${cArr},${alpha * 0.9})`);
+      gc.addColorStop(0.4, `rgba(${cArr},${alpha * 0.3})`);
+      gc.addColorStop(1, 'transparent');
+      ctx.beginPath();
+      ctx.arc(sx, sy, glowR, 0, Math.PI * 2);
+      ctx.fillStyle = gc;
+      ctx.fill();
+    }
+
+    // Star dot
+    ctx.beginPath();
+    ctx.arc(sx, sy, Math.max(drawSize * 0.7, 0.4), 0, Math.PI * 2);
+    ctx.fillStyle = hexAlpha(s.color, alpha);
+    ctx.fill();
+  }
+
+  // Core glow
+  const coreProj = project(0, 0, 0, W, H, scale);
+  drawCoreGlow(coreProj.sx, coreProj.sy, scale * 0.22 * cfg.coreGlow, pal.coreColor);
+
+  // Rotation velocity labels (differential rotation hint)
+  drawVelocityCurveHint(W, H);
+}
+
+function drawCoreGlow(cx, cy, r, color) {
+  const cArr = hexToRgb(color);
+  // Multiple layered glows
+  for (let i = 3; i >= 0; i--) {
+    const lr = r * (1 + i * 0.8);
+    const alpha = 0.25 / (i + 1);
+    const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, lr);
+    g.addColorStop(0, `rgba(${cArr},${alpha * 1.5})`);
+    g.addColorStop(0.3, `rgba(${cArr},${alpha * 0.8})`);
+    g.addColorStop(1, 'transparent');
+    ctx.beginPath();
+    ctx.arc(cx, cy, lr, 0, Math.PI * 2);
+    ctx.fillStyle = g;
+    ctx.fill();
+  }
+  // Bright core center
+  const g2 = ctx.createRadialGradient(cx, cy, 0, cx, cy, r * 0.18);
+  g2.addColorStop(0, `rgba(${cArr},0.95)`);
+  g2.addColorStop(1, 'transparent');
+  ctx.beginPath();
+  ctx.arc(cx, cy, r * 0.18, 0, Math.PI * 2);
+  ctx.fillStyle = g2;
+  ctx.fill();
+}
+
+// Subtle overlay showing differential rotation curve concept
+let showCurve = false;
+function drawVelocityCurveHint(W, H) {
+  if (!showCurve) return;
+  const ox = 30, oy = H - 90, cw = 160, ch = 60;
+  ctx.fillStyle = 'rgba(13,17,23,0.7)';
+  ctx.roundRect(ox - 8, oy - ch - 8, cw + 16, ch + 38, 6);
+  ctx.fill();
+  ctx.strokeStyle = '#30363d';
+  ctx.lineWidth = 1;
+  ctx.stroke();
+  ctx.fillStyle = '#8b949e';
+  ctx.font = '10px monospace';
+  ctx.fillText('Rotation Curve', ox, oy - ch + 12);
+
+  // Dark matter flat curve
+  ctx.beginPath();
+  ctx.strokeStyle = '#58a6ff';
+  ctx.lineWidth = 1.5;
+  for (let i = 0; i <= cw; i++) {
+    const r = i / cw;
+    // Flat curve (dark matter): v = const beyond core
+    const v = r < 0.15 ? r / 0.15 : 1.0;
+    const px2 = ox + i;
+    const py2 = oy - 6 - v * (ch - 20);
+    if (i === 0) ctx.moveTo(px2, py2); else ctx.lineTo(px2, py2);
+  }
+  ctx.stroke();
+  ctx.fillStyle = '#58a6ff';
+  ctx.font = '9px monospace';
+  ctx.fillText('observed (flat)', ox + 70, oy - ch + 25);
+
+  // Newtonian prediction
+  ctx.beginPath();
+  ctx.setLineDash([3, 3]);
+  ctx.strokeStyle = '#ff7b54';
+  for (let i = 1; i <= cw; i++) {
+    const r = i / cw;
+    const v = r < 0.15 ? r / 0.15 : Math.sqrt(0.15 / r);
+    const px2 = ox + i;
+    const py2 = oy - 6 - v * (ch - 20);
+    if (i === 1) ctx.moveTo(px2, py2); else ctx.lineTo(px2, py2);
+  }
+  ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle = '#ff7b54';
+  ctx.fillText('Keplerian ↓', ox + 70, oy - ch + 38);
+}
+
+// ─────────────────────────────────────────────────
+// Color helpers
+// ─────────────────────────────────────────────────
+const _rgbCache = {};
+function hexToRgb(hex) {
+  if (_rgbCache[hex]) return _rgbCache[hex];
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  _rgbCache[hex] = `${r},${g},${b}`;
+  return _rgbCache[hex];
+}
+function hexAlpha(hex, alpha) {
+  const rgb = hexToRgb(hex);
+  return `rgba(${rgb},${alpha.toFixed(3)})`;
+}
+
+// ─────────────────────────────────────────────────
+// Animation loop
+// ─────────────────────────────────────────────────
+let lastT = 0;
+function loop(t) {
+  requestAnimationFrame(loop);
+  const dt = Math.min((t - lastT) / 1000, 0.05);
+  lastT = t;
+
+  if (!paused) {
+    time += dt;
+    camTheta += cfg.spinSpeed * 0.008 * dt * 60;
+  }
+
+  draw();
+}
+
+// ─────────────────────────────────────────────────
+// Resize
+// ─────────────────────────────────────────────────
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+
+// ─────────────────────────────────────────────────
+// Input
+// ─────────────────────────────────────────────────
+canvas.addEventListener('wheel', e => {
+  e.preventDefault();
+  zoom *= e.deltaY > 0 ? 0.93 : 1.08;
+  zoom = Math.max(0.2, Math.min(5, zoom));
+}, { passive: false });
+
+canvas.addEventListener('mousedown', e => {
+  dragging = true;
+  dragX = e.clientX; dragY = e.clientY;
+  dragTilt0 = camTilt; dragTheta0 = camTheta;
+});
+canvas.addEventListener('mousemove', e => {
+  if (!dragging) return;
+  const dx = e.clientX - dragX;
+  const dy = e.clientY - dragY;
+  camTheta = dragTheta0 + dx * 0.005;
+  camTilt  = Math.max(0, Math.min(Math.PI / 2, dragTilt0 - dy * 0.003));
+});
+canvas.addEventListener('mouseup', () => dragging = false);
+canvas.addEventListener('mouseleave', () => dragging = false);
+
+// Touch
+canvas.addEventListener('touchstart', e => {
+  if (e.touches.length === 1) {
+    dragging = true;
+    dragX = e.touches[0].clientX; dragY = e.touches[0].clientY;
+    dragTilt0 = camTilt; dragTheta0 = camTheta;
+  }
+}, { passive: true });
+canvas.addEventListener('touchmove', e => {
+  if (!dragging || e.touches.length !== 1) return;
+  const dx = e.touches[0].clientX - dragX;
+  const dy = e.touches[0].clientY - dragY;
+  camTheta = dragTheta0 + dx * 0.005;
+  camTilt  = Math.max(0, Math.min(Math.PI / 2, dragTilt0 - dy * 0.003));
+}, { passive: true });
+canvas.addEventListener('touchend', () => dragging = false);
+
+// ─────────────────────────────────────────────────
+// UI controls
+// ─────────────────────────────────────────────────
+function bindSlider(id, valId, key, fmt) {
+  const sl = document.getElementById(id);
+  const vl = document.getElementById(valId);
+  sl.addEventListener('input', () => {
+    cfg[key] = parseFloat(sl.value);
+    vl.textContent = fmt ? fmt(sl.value) : sl.value;
+  });
+}
+
+bindSlider('sl-stars', 'v-stars', 'stars', v => Math.round(v / 1000) + 'k');
+bindSlider('sl-arms',  'v-arms',  'arms');
+bindSlider('sl-spread','v-spread','spread');
+bindSlider('sl-rot',   'v-rot',   'rotFactor');
+bindSlider('sl-speed', 'v-speed', 'spinSpeed');
+bindSlider('sl-core',  'v-core',  'coreGlow');
+
+document.getElementById('sl-stars').addEventListener('change', buildGalaxy);
+document.getElementById('sl-arms').addEventListener('change', buildGalaxy);
+document.getElementById('sl-spread').addEventListener('change', buildGalaxy);
+document.getElementById('sl-rot').addEventListener('change', buildGalaxy);
+
+function setPalette(name) {
+  cfg.palette = name;
+  ['milky','starburst','nebula'].forEach(p => {
+    document.getElementById('btn-' + p).classList.toggle('active', p === name);
+  });
+  buildGalaxy();
+}
+document.getElementById('btn-milky').onclick = () => setPalette('milky');
+document.getElementById('btn-starburst').onclick = () => setPalette('starburst');
+document.getElementById('btn-nebula').onclick = () => setPalette('nebula');
+
+document.getElementById('btn-rebuild').onclick = buildGalaxy;
+document.getElementById('btn-pause').onclick = function() {
+  paused = !paused;
+  this.textContent = paused ? 'Resume' : 'Pause';
+};
+
+// Key: C = show rotation curve overlay
+document.addEventListener('keydown', e => {
+  if (e.key === 'c' || e.key === 'C') {
+    showCurve = !showCurve;
+  }
+  if (e.key === ' ') {
+    paused = !paused;
+    document.getElementById('btn-pause').textContent = paused ? 'Resume' : 'Pause';
+  }
+  if (e.key === 'r') buildGalaxy();
+});
+
+// ─────────────────────────────────────────────────
+// Init
+// ─────────────────────────────────────────────────
+window.addEventListener('resize', resize);
+resize();
+buildGalaxy();
+requestAnimationFrame(loop);
+</script>
+</body>
+</html>

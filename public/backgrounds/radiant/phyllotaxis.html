@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phyllotaxis Spiral</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0a0a0a;
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  }
+  canvas {
+    display: block;
+    width: 100vw;
+    height: 100vh;
+  }
+  .label {
+    position: fixed;
+    top: 20px;
+    left: 24px;
+    color: rgba(200, 149, 108, 0.6);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    z-index: 10;
+    pointer-events: none;
+  }
+  html.embed .label { display: none; }
+</style>
+<script>if(/\bembed=1\b/.test(location.search))document.documentElement.classList.add("embed")</script>
+</head>
+<body>
+<div class="label">Phyllotaxis Spiral</div>
+<canvas id="canvas"></canvas>
+<script>
+(function() {
+  const canvas = document.getElementById('canvas');
+  const ctx = canvas.getContext('2d');
+
+  let width, height, cx, cy, dpr;
+
+  function resize() {
+    dpr = window.devicePixelRatio || 1;
+    width = window.innerWidth;
+    height = window.innerHeight;
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+    canvas.style.width = width + 'px';
+    canvas.style.height = height + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    cx = width / 2;
+    cy = height / 2;
+  }
+
+  window.addEventListener('resize', resize);
+  resize();
+
+  // Golden angle in radians
+  const GOLDEN_ANGLE = 137.508 * (Math.PI / 180);
+  let MAX_POINTS = 2000;
+  let SPREAD = Math.min(width, height) * 0.0065;
+
+  // Warm palette
+  const colors = [
+    { r: 200, g: 149, b: 108 }, // amber #c8956c
+    { r: 212, g: 165, b: 116 }, // gold  #d4a574
+    { r: 224, g: 120, b: 80 },  // coral #e07850
+  ];
+
+  function lerpColor(a, b, t) {
+    return {
+      r: a.r + (b.r - a.r) * t,
+      g: a.g + (b.g - a.g) * t,
+      b: a.b + (b.b - a.b) * t,
+    };
+  }
+
+  function getColor(index) {
+    const cycle = (index * 0.015) % 3;
+    const segment = Math.floor(cycle);
+    const t = cycle - segment;
+    const from = colors[segment % 3];
+    const to = colors[(segment + 1) % 3];
+    return lerpColor(from, to, t);
+  }
+
+  // Points array
+  let points = [];
+  let pointIndex = 0;
+  let globalTime = 0;
+
+  function addPoint() {
+    const n = pointIndex;
+    const angle = n * GOLDEN_ANGLE;
+    const radius = SPREAD * Math.sqrt(n);
+    const color = getColor(n);
+
+    points.push({
+      n: n,
+      baseAngle: angle,
+      baseRadius: radius,
+      color: color,
+      birth: globalTime,
+      opacity: 0,
+    });
+
+    pointIndex++;
+
+    // Remove oldest if exceeding max
+    if (points.length > MAX_POINTS) {
+      points.shift();
+    }
+  }
+
+  function drawGlow(time) {
+    // Center glow
+    const pulseIntensity = 0.4 + 0.15 * Math.sin(time * 1.5);
+    const gradient = ctx.createRadialGradient(cx, cy, 0, cx, cy, 120);
+    gradient.addColorStop(0, `rgba(200, 149, 108, ${pulseIntensity * 0.35})`);
+    gradient.addColorStop(0.3, `rgba(212, 165, 116, ${pulseIntensity * 0.15})`);
+    gradient.addColorStop(0.7, `rgba(224, 120, 80, ${pulseIntensity * 0.05})`);
+    gradient.addColorStop(1, 'rgba(224, 120, 80, 0)');
+    ctx.fillStyle = gradient;
+    ctx.beginPath();
+    ctx.arc(cx, cy, 120, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  function drawConnections(time, rotation) {
+    // Draw subtle connections between nearby points
+    // For performance, only check a subset
+    const len = points.length;
+    if (len < 2) return;
+
+    ctx.lineWidth = 0.5;
+
+    // Connect sequential neighbors in the spiral (every ~5-8 apart creates the lattice)
+    const strides = [1, 8, 13, 21]; // Fibonacci numbers create the natural lattice
+
+    for (let s = 0; s < strides.length; s++) {
+      const stride = strides[s];
+      const baseAlpha = s === 0 ? 0.06 : (s === 1 ? 0.04 : 0.025);
+
+      for (let i = 0; i < len - stride; i++) {
+        const p1 = points[i];
+        const p2 = points[i + stride];
+
+        if (!p1 || !p2) continue;
+
+        // Calculate positions
+        const age1 = globalTime - p1.birth;
+        const age2 = globalTime - p2.birth;
+        const fadeIn1 = Math.min(1, age1 / 60);
+        const fadeIn2 = Math.min(1, age2 / 60);
+
+        // Skip if either point not yet visible
+        if (fadeIn1 < 0.1 || fadeIn2 < 0.1) continue;
+
+        const pulse1 = 1 + 0.08 * Math.sin(time * 2 + p1.n * 0.1);
+        const pulse2 = 1 + 0.08 * Math.sin(time * 2 + p2.n * 0.1);
+
+        const r1 = p1.baseRadius * pulse1;
+        const r2 = p2.baseRadius * pulse2;
+        const a1 = p1.baseAngle + rotation;
+        const a2 = p2.baseAngle + rotation;
+
+        const fx1 = Math.cos(a1) * r1, fy1 = Math.sin(a1) * r1;
+        const cXt = Math.cos(tiltX), cYt = Math.cos(tiltY);
+        const sYt = Math.sin(tiltX), sXt = Math.sin(-tiltY);
+        const z1 = fx1 * sYt + fy1 * sXt;
+        const p1p = 1 + z1 * 0.0008;
+        const x1 = cx + fx1 * cXt * p1p;
+        const y1 = cy + fy1 * cYt * p1p;
+        const fx2 = Math.cos(a2) * r2, fy2 = Math.sin(a2) * r2;
+        const z2 = fx2 * sYt + fy2 * sXt;
+        const p2p = 1 + z2 * 0.0008;
+        const x2 = cx + fx2 * cXt * p2p;
+        const y2 = cy + fy2 * cYt * p2p;
+
+        const dx = x2 - x1;
+        const dy = y2 - y1;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        // Only draw if reasonably close
+        if (dist > 80) continue;
+
+        const distAlpha = Math.max(0, 1 - dist / 80);
+        const alpha = baseAlpha * distAlpha * fadeIn1 * fadeIn2 * p1.opacity * p2.opacity;
+
+        if (alpha < 0.003) continue;
+
+        const col = p1.color;
+        ctx.strokeStyle = `rgba(${col.r|0}, ${col.g|0}, ${col.b|0}, ${alpha})`;
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
+        ctx.stroke();
+      }
+    }
+  }
+
+  function draw(timestamp) {
+    const time = timestamp / 1000;
+    globalTime++;
+
+    ctx.clearRect(0, 0, width, height);
+
+    // Very subtle overall rotation
+    const rotation = time * 0.02;
+
+    // Keep center at canvas center
+    cx = width / 2;
+    cy = height / 2;
+
+    // Add new points (1-2 per frame)
+    const pointsToAdd = pointIndex < 200 ? 2 : 1;
+    for (let i = 0; i < pointsToAdd; i++) {
+      if (pointIndex < MAX_POINTS * 2) { // Keep adding beyond max, old ones get removed
+        addPoint();
+      }
+    }
+
+    // Draw center glow
+    drawGlow(time);
+
+    // Draw connections
+    drawConnections(time, rotation);
+
+    // Draw points
+    const len = points.length;
+    for (let i = 0; i < len; i++) {
+      const p = points[i];
+      const age = globalTime - p.birth;
+
+      // Fade in
+      const fadeIn = Math.min(1, age / 40);
+      p.opacity = fadeIn;
+
+      // Fade out oldest points (bottom 10%)
+      let fadeOut = 1;
+      if (i < len * 0.1) {
+        fadeOut = i / (len * 0.1);
+      }
+
+      // Size grows with age, then stabilizes
+      const baseSize = 1.2 + Math.min(2.5, age * 0.02);
+
+      // Pulse / breathing based on index
+      const pulse = 1 + 0.12 * Math.sin(time * 2 + p.n * 0.1);
+      const size = baseSize * pulse;
+
+      // Position with rotation + 3D tilt
+      const r = p.baseRadius * pulse;
+      const angle = p.baseAngle + rotation;
+      const flatX = Math.cos(angle) * r;
+      const flatY = Math.sin(angle) * r;
+      // Apply pseudo-3D tilt: compress axes based on tilt angle
+      const cosX = Math.cos(tiltX);
+      const cosY = Math.cos(tiltY);
+      // Perspective foreshortening
+      const z = flatX * Math.sin(tiltX) + flatY * Math.sin(-tiltY);
+      const perspective = 1 + z * 0.0008;
+      const x = cx + flatX * cosX * perspective;
+      const y = cy + flatY * cosY * perspective;
+
+      // Skip if off screen
+      if (x < -20 || x > width + 20 || y < -20 || y > height + 20) continue;
+
+      const col = p.color;
+      const alpha = fadeIn * fadeOut * (0.6 + 0.4 * pulse);
+
+      // Glow around each point
+      if (size > 2 && alpha > 0.3) {
+        const glowGrad = ctx.createRadialGradient(x, y, 0, x, y, size * 4);
+        glowGrad.addColorStop(0, `rgba(${col.r|0}, ${col.g|0}, ${col.b|0}, ${alpha * 0.15})`);
+        glowGrad.addColorStop(1, `rgba(${col.r|0}, ${col.g|0}, ${col.b|0}, 0)`);
+        ctx.fillStyle = glowGrad;
+        ctx.beginPath();
+        ctx.arc(x, y, size * 4, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      // Main point
+      ctx.fillStyle = `rgba(${col.r|0}, ${col.g|0}, ${col.b|0}, ${alpha})`;
+      ctx.beginPath();
+      ctx.arc(x, y, size, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Bright center
+      if (alpha > 0.4) {
+        ctx.fillStyle = `rgba(255, 240, 220, ${alpha * 0.5})`;
+        ctx.beginPath();
+        ctx.arc(x, y, size * 0.4, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    // Vignette overlay
+    const vignette = ctx.createRadialGradient(cx, cy, Math.min(width, height) * 0.2, cx, cy, Math.max(width, height) * 0.75);
+    vignette.addColorStop(0, 'rgba(10, 10, 10, 0)');
+    vignette.addColorStop(1, 'rgba(10, 10, 10, 0.7)');
+    ctx.fillStyle = vignette;
+    ctx.fillRect(0, 0, width, height);
+
+    requestAnimationFrame(draw);
+  }
+
+  // Mouse: drag to tilt the spiral in pseudo-3D
+  var mouseDown = false, lastMX = 0, lastMY = 0;
+  var tiltX = 0, tiltY = 0; // tilt angles
+
+  canvas.addEventListener('mousedown', function(e) { mouseDown = true; lastMX = e.clientX; lastMY = e.clientY; });
+  canvas.addEventListener('mousemove', function(e) {
+    if (mouseDown) {
+      tiltX += (e.clientX - lastMX) * 0.003;
+      tiltY += (e.clientY - lastMY) * 0.003;
+      tiltY = Math.max(-0.8, Math.min(0.8, tiltY));
+      lastMX = e.clientX; lastMY = e.clientY;
+    }
+  });
+  canvas.addEventListener('mouseup', function() { mouseDown = false; });
+  canvas.addEventListener('dblclick', function() { tiltX = 0; tiltY = 0; });
+  canvas.addEventListener('touchstart', function(e) { e.preventDefault(); mouseDown = true; lastMX = e.touches[0].clientX; lastMY = e.touches[0].clientY; }, { passive: false });
+  canvas.addEventListener('touchmove', function(e) {
+    e.preventDefault();
+    if (mouseDown) {
+      tiltX += (e.touches[0].clientX - lastMX) * 0.003;
+      tiltY += (e.touches[0].clientY - lastMY) * 0.003;
+      tiltY = Math.max(-0.8, Math.min(0.8, tiltY));
+      lastMX = e.touches[0].clientX; lastMY = e.touches[0].clientY;
+    }
+  }, { passive: false });
+  canvas.addEventListener('touchend', function() { mouseDown = false; });
+
+  requestAnimationFrame(draw);
+
+  window.addEventListener('message', function(e) {
+    if (e.data && e.data.type === 'param') {
+      switch (e.data.name) {
+        case 'MAX_POINTS': MAX_POINTS = Math.round(e.data.value); break;
+        case 'SPREAD': SPREAD = Math.min(width, height) * e.data.value; break;
+      }
+    }
+  });
+})();
+</script>
+</body>
+</html>

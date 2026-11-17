@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tesseract Shadow</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0a0a0a;
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  }
+  canvas {
+    display: block;
+    width: 100vw;
+    height: 100vh;
+  }
+  .label {
+    position: fixed;
+    top: 20px;
+    left: 24px;
+    color: rgba(200, 149, 108, 0.6);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    z-index: 10;
+    pointer-events: none;
+  }
+  html.embed .label { display: none; }
+</style>
+<script>if(/\bembed=1\b/.test(location.search))document.documentElement.classList.add("embed")</script>
+</head>
+<body>
+<div class="label">Tesseract Shadow</div>
+<canvas id="canvas"></canvas>
+<script>
+(function() {
+  var canvas = document.getElementById('canvas');
+  var ctx = canvas.getContext('2d');
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var urlParams = new URLSearchParams(window.location.search);
+  var pixelScale = parseFloat(urlParams.get('p')) || 1;
+
+  // Parameters
+  var ROTATION_SPEED = 0.3;
+  var PROJECTION_DEPTH = 1.0;
+  var HERO_CENTER_X = 0;
+  var HERO_CENTER_Y = 0;
+  var HERO_SCALE = 0;
+
+  var width, height, cx, cy, dpr;
+  var needsResize = true;
+
+  function resize() {
+    needsResize = false;
+    dpr = Math.min(window.devicePixelRatio || 1, 2) * pixelScale;
+    width = window.innerWidth;
+    height = window.innerHeight;
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    cx = HERO_SCALE > 0 ? width * HERO_CENTER_X : width / 2;
+    cy = HERO_SCALE > 0 ? height * HERO_CENTER_Y : height / 2;
+  }
+  window.addEventListener('resize', function () {
+    needsResize = true;
+  });
+  resize();
+
+  // ── 4D Tesseract geometry ──
+
+  // 16 vertices: all combinations of +/-1 in 4 dimensions
+  var vertices4D = [];
+  for (var i = 0; i < 16; i++) {
+    vertices4D.push([
+      (i & 1) ? 1 : -1,
+      (i & 2) ? 1 : -1,
+      (i & 4) ? 1 : -1,
+      (i & 8) ? 1 : -1
+    ]);
+  }
+
+  // 32 edges: connect vertices that differ in exactly one coordinate
+  var edges = [];
+  for (var i = 0; i < 16; i++) {
+    for (var j = i + 1; j < 16; j++) {
+      var diff = 0;
+      var diffAxis = -1;
+      for (var k = 0; k < 4; k++) {
+        if (vertices4D[i][k] !== vertices4D[j][k]) {
+          diff++;
+          diffAxis = k;
+        }
+      }
+      if (diff === 1) {
+        edges.push([i, j, diffAxis]);
+      }
+    }
+  }
+
+  // 24 faces (square faces of the tesseract): each face connects 4 vertices
+  // that share 2 fixed coordinates and differ in exactly 2 coordinates
+  var faces = [];
+  for (var i = 0; i < 16; i++) {
+    for (var j = i + 1; j < 16; j++) {
+      for (var k = j + 1; k < 16; k++) {
+        for (var l = k + 1; l < 16; l++) {
+          // Check if these 4 vertices form a face (differ in exactly 2 axes)
+          var xor01 = i ^ j, xor02 = i ^ k, xor03 = i ^ l;
+          var xor12 = j ^ k, xor13 = j ^ l, xor23 = k ^ l;
+          // All 4 should share exactly 2 fixed coordinates
+          var combined = xor01 | xor02 | xor03;
+          var bits = 0;
+          for (var bb = 0; bb < 4; bb++) if (combined & (1 << bb)) bits++;
+          if (bits !== 2) continue;
+          // Verify it's a proper square: exactly 4 edges among the 6 pairs
+          var edgeCount = 0;
+          var pairs = [[xor01],[xor02],[xor03],[xor12],[xor13],[xor23]];
+          for (var pp = 0; pp < 6; pp++) {
+            var x = pairs[pp][0], bc = 0;
+            for (var bbb = 0; bbb < 4; bbb++) if (x & (1 << bbb)) bc++;
+            if (bc === 1) edgeCount++;
+          }
+          if (edgeCount === 4) {
+            // Find which 2 axes vary
+            var axisA = -1, axisB = -1;
+            for (var bb2 = 0; bb2 < 4; bb2++) {
+              if (combined & (1 << bb2)) {
+                if (axisA < 0) axisA = bb2; else axisB = bb2;
+              }
+            }
+            // Order vertices as a quad (so they draw correctly)
+            // i has both axes at their base, find the two that differ by one axis each
+            var v0 = i, v1 = -1, v2 = -1, v3 = -1;
+            var others = [j, k, l];
+            for (var oo = 0; oo < 3; oo++) {
+              var xv = v0 ^ others[oo], nBits = 0;
+              for (var bbb2 = 0; bbb2 < 4; bbb2++) if (xv & (1 << bbb2)) nBits++;
+              if (nBits === 1 && (xv & (1 << axisA))) v1 = others[oo];
+              else if (nBits === 1 && (xv & (1 << axisB))) v3 = others[oo];
+              else if (nBits === 2) v2 = others[oo];
+            }
+            if (v1 >= 0 && v2 >= 0 && v3 >= 0) {
+              faces.push([v0, v1, v2, v3, axisA, axisB]);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // ── 4D Rotation ──
+  // Rotate in a plane defined by axes a and b
+  function rotate4D(v, a, b, angle) {
+    var out = [v[0], v[1], v[2], v[3]];
+    var c = Math.cos(angle);
+    var s = Math.sin(angle);
+    out[a] = v[a] * c - v[b] * s;
+    out[b] = v[a] * s + v[b] * c;
+    return out;
+  }
+
+  // ── Projection: 4D -> 2D ──
+  var currentProjDepth = PROJECTION_DEPTH;
+  function project(v4) {
+    // 4D -> 3D perspective projection
+    var viewDist4 = 3.0 + currentProjDepth * 1.5;
+    var scale4 = viewDist4 / (viewDist4 - v4[3]);
+    var x3 = v4[0] * scale4;
+    var y3 = v4[1] * scale4;
+    var z3 = v4[2] * scale4;
+
+    // 3D -> 2D perspective projection
+    var viewDist3 = 5.0;
+    var scale3 = viewDist3 / (viewDist3 - z3);
+    var x2 = x3 * scale3;
+    var y2 = y3 * scale3;
+
+    // Depth value for shading (combined 4D and 3D depth)
+    var depth = (v4[3] + 1) / 2 * 0.5 + (z3 + 1.5) / 3 * 0.5;
+
+    return {
+      x: x2,
+      y: y2,
+      depth: depth,
+      scale: scale4 * scale3
+    };
+  }
+
+  // ── Edge color based on axis ──
+  function edgeColor(axis, depth) {
+    // axis 0 = x, 1 = y, 2 = z, 3 = w
+    var r, g, b;
+    switch (axis) {
+      case 0: // x-axis: hot amber-gold
+        r = 235; g = 165; b = 80;
+        break;
+      case 1: // y-axis: rose amber
+        r = 240; g = 140; b = 100;
+        break;
+      case 2: // z-axis: vivid teal
+        r = 50; g = 195; b = 180;
+        break;
+      case 3: // w-axis: electric blue-violet
+        r = 120 + Math.round(depth * 40); g = 80 + Math.round(depth * 20); b = 220 + Math.round(depth * 35);
+        break;
+      default:
+        r = 150; g = 150; b = 150;
+    }
+    return { r: r, g: g, b: b };
+  }
+
+  // ── Trail history ──
+  var trailHistory = [];
+  var TRAIL_COUNT = 4;
+  var trailInterval = 0;
+  var TRAIL_FRAME_SKIP = 6;
+
+  // ── Dust particles ──
+  var particles = [];
+  var PARTICLE_COUNT = 60;
+  for (var i = 0; i < PARTICLE_COUNT; i++) {
+    particles.push({
+      x: (Math.random() - 0.5) * 3.5,
+      y: (Math.random() - 0.5) * 3.5,
+      z: (Math.random() - 0.5) * 3.5,
+      vx: (Math.random() - 0.5) * 0.004,
+      vy: (Math.random() - 0.5) * 0.004,
+      vz: (Math.random() - 0.5) * 0.004,
+      size: 0.6 + Math.random() * 2.0,
+      brightness: 0.4 + Math.random() * 0.6,
+      phase: Math.random() * Math.PI * 2,
+      colorIdx: Math.floor(Math.random() * 4) // pick a random axis color
+    });
+  }
+
+  // ── Mouse drag to rotate ──
+  var mouseDown = false;
+  var lastMX = 0, lastMY = 0;
+  var mouseRotX = 0, mouseRotY = 0;
+  canvas.addEventListener('mousedown', function(e) { mouseDown = true; lastMX = e.clientX; lastMY = e.clientY; });
+  canvas.addEventListener('mousemove', function(e) {
+    if (mouseDown) {
+      mouseRotX += (e.clientX - lastMX) * 0.01;
+      mouseRotY += (e.clientY - lastMY) * 0.01;
+      lastMX = e.clientX; lastMY = e.clientY;
+    }
+  });
+  canvas.addEventListener('mouseup', function() { mouseDown = false; });
+  canvas.addEventListener('touchstart', function(e) { e.preventDefault(); mouseDown = true; lastMX = e.touches[0].clientX; lastMY = e.touches[0].clientY; }, { passive: false });
+  canvas.addEventListener('touchmove', function(e) {
+    e.preventDefault();
+    if (mouseDown) {
+      mouseRotX += (e.touches[0].clientX - lastMX) * 0.01;
+      mouseRotY += (e.touches[0].clientY - lastMY) * 0.01;
+      lastMX = e.touches[0].clientX; lastMY = e.touches[0].clientY;
+    }
+  }, { passive: false });
+  canvas.addEventListener('touchend', function() { mouseDown = false; });
+
+  // ── Visibility pause ──
+  var running = true;
+  document.addEventListener('visibilitychange', function() {
+    running = !document.hidden;
+    if (running) requestAnimationFrame(draw);
+  });
+
+  var startTime = null;
+
+  function draw(timestamp) {
+    if (!running) return;
+
+    if (!startTime) startTime = timestamp;
+    var elapsed = (timestamp - startTime) / 1000;
+    var time = prefersReduced ? 0 : elapsed;
+
+    if (needsResize) resize();
+
+    var scale = Math.min(width, height) * 0.28;
+    if (HERO_SCALE > 0) scale *= HERO_SCALE;
+
+    // Breathing projection depth: slow oscillation
+    var breathe = Math.sin(time * 0.15) * 0.25 + Math.sin(time * 0.37) * 0.1;
+    var projDepth = PROJECTION_DEPTH + breathe;
+
+    // Rotation speed with subtle surges (integrated for smooth motion)
+    // Integral of (1 + 0.15*sin(0.11*t) + 0.08*sin(0.29*t)) dt
+    //   = t - (0.15/0.11)*cos(0.11*t) + (0.08/0.29)*cos(0.29*t) + C
+    var integratedTime = time
+      - (0.15 / 0.11) * Math.cos(time * 0.11)
+      - (0.08 / 0.29) * Math.cos(time * 0.29);
+    var spd = ROTATION_SPEED;
+
+    // Rotation angles in different 4D planes (+ mouse drag offset)
+    var angleXW = integratedTime * spd * 0.7 + mouseRotX;
+    var angleYZ = integratedTime * spd * 0.5 + mouseRotY;
+    var angleXY = integratedTime * spd * 0.23;
+    var angleZW = integratedTime * spd * 0.17;
+
+    // Set breathing projection for this frame
+    currentProjDepth = projDepth;
+
+    // Compute rotated and projected vertices
+    function computeFrame(aXW, aYZ, aXY, aZW) {
+      var projected = [];
+      for (var i = 0; i < 16; i++) {
+        var v = vertices4D[i].slice();
+        // Apply 4D rotations in multiple planes
+        v = rotate4D(v, 0, 3, aXW); // XW plane
+        v = rotate4D(v, 1, 2, aYZ); // YZ plane
+        v = rotate4D(v, 0, 1, aXY); // XY plane
+        v = rotate4D(v, 2, 3, aZW); // ZW plane
+        projected.push(project(v));
+      }
+      return projected;
+    }
+
+    var currentFrame = computeFrame(angleXW, angleYZ, angleXY, angleZW);
+
+    // Record trail
+    trailInterval++;
+    if (trailInterval >= TRAIL_FRAME_SKIP) {
+      trailInterval = 0;
+      trailHistory.push(currentFrame);
+      if (trailHistory.length > TRAIL_COUNT) {
+        trailHistory.shift();
+      }
+    }
+
+    // Clear
+    ctx.fillStyle = '#0a0a0a';
+    ctx.fillRect(0, 0, width, height);
+
+    // ── Layer 1: Background coordinate grid ──
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.04)';
+    ctx.lineWidth = 0.5;
+    var gridSpacing = 40;
+    var gridOffsetX = cx % gridSpacing;
+    var gridOffsetY = cy % gridSpacing;
+    for (var gx = gridOffsetX; gx < width; gx += gridSpacing) {
+      ctx.beginPath();
+      ctx.moveTo(gx, 0);
+      ctx.lineTo(gx, height);
+      ctx.stroke();
+    }
+    for (var gy = gridOffsetY; gy < height; gy += gridSpacing) {
+      ctx.beginPath();
+      ctx.moveTo(0, gy);
+      ctx.lineTo(width, gy);
+      ctx.stroke();
+    }
+
+    // Subtle crosshair at center
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.06)';
+    ctx.lineWidth = 0.5;
+    ctx.beginPath();
+    ctx.moveTo(cx - 40, cy);
+    ctx.lineTo(cx + 40, cy);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(cx, cy - 40);
+    ctx.lineTo(cx, cy + 40);
+    ctx.stroke();
+
+    // ── Radial energy pulse from center ──
+    var pulsePhase = time * 0.4;
+    for (var ring = 0; ring < 3; ring++) {
+      var ringT = (pulsePhase + ring * 0.33) % 1.0;
+      var ringRadius = ringT * Math.min(width, height) * 0.6;
+      var ringAlpha = (1.0 - ringT) * 0.035;
+      ctx.strokeStyle = 'rgba(176, 192, 224, ' + ringAlpha + ')';
+      ctx.lineWidth = 1.0 + (1.0 - ringT) * 1.5;
+      ctx.beginPath();
+      ctx.arc(cx, cy, ringRadius, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+
+    // ── Layer 3: Rotation trails ──
+    for (var t = 0; t < trailHistory.length; t++) {
+      var trailFrame = trailHistory[t];
+      var trailAlpha = ((t + 1) / (trailHistory.length + 1)) * 0.12;
+
+      ctx.lineWidth = 0.5;
+      for (var e = 0; e < edges.length; e++) {
+        var a = trailFrame[edges[e][0]];
+        var b = trailFrame[edges[e][1]];
+        var axis = edges[e][2];
+        var col = edgeColor(axis, (a.depth + b.depth) * 0.5);
+        var alpha = trailAlpha * (0.3 + (a.depth + b.depth) * 0.35);
+
+        ctx.strokeStyle = 'rgba(' + col.r + ',' + col.g + ',' + col.b + ',' + alpha + ')';
+        ctx.beginPath();
+        ctx.moveTo(cx + a.x * scale, cy + a.y * scale);
+        ctx.lineTo(cx + b.x * scale, cy + b.y * scale);
+        ctx.stroke();
+      }
+    }
+
+    // ── Layer 6: Reactive particles ──
+    // Compute the tesseract's bounding center in screen space for attraction
+    var tCenterX = 0, tCenterY = 0;
+    for (var vi = 0; vi < 16; vi++) {
+      tCenterX += currentFrame[vi].x;
+      tCenterY += currentFrame[vi].y;
+    }
+    tCenterX /= 16;
+    tCenterY /= 16;
+
+    for (var i = 0; i < PARTICLE_COUNT; i++) {
+      var p = particles[i];
+
+      // Gentle attraction toward the tesseract center
+      var dx = tCenterX - p.x;
+      var dy = tCenterY - p.y;
+      var dist = Math.sqrt(dx * dx + dy * dy + p.z * p.z) + 0.01;
+      var attract = 0.0003 / (dist * 0.5 + 0.2);
+      p.vx += dx * attract;
+      p.vy += dy * attract;
+      p.vz += -p.z * attract * 0.5;
+
+      // Damping
+      p.vx *= 0.998;
+      p.vy *= 0.998;
+      p.vz *= 0.998;
+
+      // Drift
+      p.x += p.vx + Math.sin(time * 0.3 + p.phase) * 0.002;
+      p.y += p.vy + Math.cos(time * 0.25 + p.phase) * 0.002;
+      p.z += p.vz + Math.sin(time * 0.2 + p.phase * 1.5) * 0.002;
+
+      // Wrap around
+      if (p.x > 3.5) p.x = -3.5;
+      if (p.x < -3.5) p.x = 3.5;
+      if (p.y > 3.5) p.y = -3.5;
+      if (p.y < -3.5) p.y = 3.5;
+      if (p.z > 3.5) p.z = -3.5;
+      if (p.z < -3.5) p.z = 3.5;
+
+      // Project 3D -> 2D
+      var pDist = 5.0;
+      var pScale = pDist / (pDist - p.z);
+      var px = cx + p.x * pScale * scale * 0.8;
+      var py = cy + p.y * pScale * scale * 0.8;
+
+      var flicker = 0.5 + 0.5 * Math.sin(time * 2.5 + p.phase * 3);
+      var pAlpha = p.brightness * flicker * 0.35 * pScale;
+
+      // Color particles with axis colors
+      var pc = edgeColor(p.colorIdx, 0.6);
+      var pR = Math.round(pc.r * 0.7 + 176 * 0.3);
+      var pG = Math.round(pc.g * 0.7 + 192 * 0.3);
+      var pB = Math.round(pc.b * 0.7 + 224 * 0.3);
+
+      // Soft glow around particle
+      var pGlowSize = p.size * pScale * 3;
+      var pglow = ctx.createRadialGradient(px, py, 0, px, py, pGlowSize);
+      pglow.addColorStop(0, 'rgba(' + pR + ',' + pG + ',' + pB + ',' + (pAlpha * 0.5) + ')');
+      pglow.addColorStop(1, 'rgba(' + pR + ',' + pG + ',' + pB + ', 0)');
+      ctx.fillStyle = pglow;
+      ctx.beginPath();
+      ctx.arc(px, py, pGlowSize, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Core dot
+      ctx.fillStyle = 'rgba(' + pR + ',' + pG + ',' + pB + ',' + pAlpha + ')';
+      ctx.beginPath();
+      ctx.arc(px, py, p.size * pScale, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    // ── Face fills for volume ──
+    // Sort faces by average depth (back to front)
+    var sortedFaces = [];
+    for (var fi = 0; fi < faces.length; fi++) {
+      var f = faces[fi];
+      var fAvgDepth = (currentFrame[f[0]].depth + currentFrame[f[1]].depth + currentFrame[f[2]].depth + currentFrame[f[3]].depth) * 0.25;
+      sortedFaces.push({ idx: fi, depth: fAvgDepth });
+    }
+    sortedFaces.sort(function(a, b) { return a.depth - b.depth; });
+
+    for (var fsi = 0; fsi < sortedFaces.length; fsi++) {
+      var f = faces[sortedFaces[fsi].idx];
+      var fDepth = sortedFaces[fsi].depth;
+      var fCol = edgeColor(f[4], fDepth); // use first varying axis for color
+      var fAlpha = 0.015 + fDepth * 0.03;
+
+      ctx.fillStyle = 'rgba(' + fCol.r + ',' + fCol.g + ',' + fCol.b + ',' + fAlpha + ')';
+      ctx.beginPath();
+      ctx.moveTo(cx + currentFrame[f[0]].x * scale, cy + currentFrame[f[0]].y * scale);
+      ctx.lineTo(cx + currentFrame[f[1]].x * scale, cy + currentFrame[f[1]].y * scale);
+      ctx.lineTo(cx + currentFrame[f[2]].x * scale, cy + currentFrame[f[2]].y * scale);
+      ctx.lineTo(cx + currentFrame[f[3]].x * scale, cy + currentFrame[f[3]].y * scale);
+      ctx.closePath();
+      ctx.fill();
+    }
+
+    // ── Sort edges by average depth for painter's algorithm ──
+    var sortedEdges = [];
+    for (var e = 0; e < edges.length; e++) {
+      var a = currentFrame[edges[e][0]];
+      var b = currentFrame[edges[e][1]];
+      sortedEdges.push({
+        idx: e,
+        depth: (a.depth + b.depth) * 0.5
+      });
+    }
+    sortedEdges.sort(function(a, b) { return a.depth - b.depth; });
+
+    // ── Layer 1: Wireframe edges with multi-pass bloom ──
+    for (var si = 0; si < sortedEdges.length; si++) {
+      var e = sortedEdges[si].idx;
+      var a = currentFrame[edges[e][0]];
+      var b = currentFrame[edges[e][1]];
+      var axis = edges[e][2];
+      var avgDepth = (a.depth + b.depth) * 0.5;
+
+      var col = edgeColor(axis, avgDepth);
+
+      // Depth-based opacity: closer = brighter
+      var alpha = 0.2 + avgDepth * 0.7;
+      // Depth-based line width
+      var lw = 0.8 + avgDepth * 2.2;
+
+      var ax1 = cx + a.x * scale;
+      var ay1 = cy + a.y * scale;
+      var bx1 = cx + b.x * scale;
+      var by1 = cy + b.y * scale;
+
+      // Outermost bloom pass (very wide, very dim)
+      ctx.strokeStyle = 'rgba(' + col.r + ',' + col.g + ',' + col.b + ',' + (alpha * 0.08) + ')';
+      ctx.lineWidth = lw + 12;
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+      ctx.moveTo(ax1, ay1);
+      ctx.lineTo(bx1, by1);
+      ctx.stroke();
+
+      // Mid bloom pass
+      ctx.strokeStyle = 'rgba(' + col.r + ',' + col.g + ',' + col.b + ',' + (alpha * 0.15) + ')';
+      ctx.lineWidth = lw + 6;
+      ctx.beginPath();
+      ctx.moveTo(ax1, ay1);
+      ctx.lineTo(bx1, by1);
+      ctx.stroke();
+
+      // Inner glow pass
+      ctx.strokeStyle = 'rgba(' + col.r + ',' + col.g + ',' + col.b + ',' + (alpha * 0.35) + ')';
+      ctx.lineWidth = lw + 3;
+      ctx.beginPath();
+      ctx.moveTo(ax1, ay1);
+      ctx.lineTo(bx1, by1);
+      ctx.stroke();
+
+      // Main edge line (bright core)
+      ctx.strokeStyle = 'rgba(' + col.r + ',' + col.g + ',' + col.b + ',' + alpha + ')';
+      ctx.lineWidth = lw;
+      ctx.beginPath();
+      ctx.moveTo(ax1, ay1);
+      ctx.lineTo(bx1, by1);
+      ctx.stroke();
+
+      // Hot white center for front-facing edges
+      if (avgDepth > 0.55) {
+        var whiteAlpha = (avgDepth - 0.55) * 0.6;
+        ctx.strokeStyle = 'rgba(255, 255, 255, ' + whiteAlpha + ')';
+        ctx.lineWidth = Math.max(0.5, lw * 0.35);
+        ctx.beginPath();
+        ctx.moveTo(ax1, ay1);
+        ctx.lineTo(bx1, by1);
+        ctx.stroke();
+      }
+    }
+
+    // ── Layer 2: Vertex glow ──
+    for (var i = 0; i < 16; i++) {
+      var v = currentFrame[i];
+      var sx = cx + v.x * scale;
+      var sy = cy + v.y * scale;
+
+      // Determine dominant axis color for this vertex based on its position
+      // Use the strongest varying axis for tinting
+      var vPulse = 0.85 + 0.15 * Math.sin(time * 1.5 + i * 0.4);
+
+      var glowSize = (8 + v.depth * 24) * vPulse;
+      var glowAlpha = (0.12 + v.depth * 0.5) * vPulse;
+
+      // Wide outer halo
+      var halo = ctx.createRadialGradient(sx, sy, 0, sx, sy, glowSize * 1.5);
+      halo.addColorStop(0, 'rgba(160, 180, 220, ' + (glowAlpha * 0.2) + ')');
+      halo.addColorStop(1, 'rgba(160, 180, 220, 0)');
+      ctx.fillStyle = halo;
+      ctx.beginPath();
+      ctx.arc(sx, sy, glowSize * 1.5, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Inner glow
+      var glow = ctx.createRadialGradient(sx, sy, 0, sx, sy, glowSize);
+      glow.addColorStop(0, 'rgba(200, 210, 240, ' + glowAlpha + ')');
+      glow.addColorStop(0.35, 'rgba(176, 192, 224, ' + (glowAlpha * 0.45) + ')');
+      glow.addColorStop(1, 'rgba(176, 192, 224, 0)');
+      ctx.fillStyle = glow;
+      ctx.beginPath();
+      ctx.arc(sx, sy, glowSize, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Bright core
+      var coreSize = 1.8 + v.depth * 3.0;
+      var coreAlpha = (0.4 + v.depth * 0.6) * vPulse;
+      ctx.fillStyle = 'rgba(230, 235, 255, ' + coreAlpha + ')';
+      ctx.beginPath();
+      ctx.arc(sx, sy, coreSize, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    // ── Vignette ──
+    var vig = ctx.createRadialGradient(cx, cy, Math.min(width, height) * 0.25, cx, cy, Math.max(width, height) * 0.7);
+    vig.addColorStop(0, 'rgba(10, 10, 10, 0)');
+    vig.addColorStop(1, 'rgba(10, 10, 10, 0.55)');
+    ctx.fillStyle = vig;
+    ctx.fillRect(0, 0, width, height);
+
+    requestAnimationFrame(draw);
+  }
+
+  requestAnimationFrame(draw);
+
+  // ── PostMessage listener for parameter updates ──
+  window.addEventListener('message', function(e) {
+    if (e.data && e.data.type === 'param') {
+      switch (e.data.name) {
+        case 'ROTATION_SPEED': ROTATION_SPEED = e.data.value; break;
+        case 'PROJECTION_DEPTH': PROJECTION_DEPTH = e.data.value; break;
+        case 'CENTER_X': HERO_CENTER_X = e.data.value; resize(); break;
+        case 'CENTER_Y': HERO_CENTER_Y = e.data.value; resize(); break;
+        case 'SCALE': HERO_SCALE = e.data.value; resize(); break;
+      }
+    }
+  });
+})();
+</script>
+</body>
+</html>

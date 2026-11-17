@@ -12,7 +12,7 @@ Construction materials video hero. Demo brand: **Hexora**.
 | File | Purpose |
 |---|---|
 | `main.webp` | Catalog card poster + detail page hero |
-| `cover.mov` | Catalog card only — plays on hover / in-view on mobile |
+| `cover.mov` | Catalog card only. Plays on hover / in-view on mobile |
 
 ## Live / package
 

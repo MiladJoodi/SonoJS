@@ -3007,7 +3007,7 @@ const registryItemsRaw = [
     type: "registry:ui",
     title: "Dropzone",
     description:
-      "Native drag-and-drop file zone with validation, previews, and optional progress — no upload library.",
+      "Native drag-and-drop file zone with validation, previews, and optional progress. No upload library.",
     dependencies: ["lucide-react", "clsx", "tailwind-merge"],
     registryDependencies: ["button", "progress"],
     files: [

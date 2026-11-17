@@ -1,0 +1,346 @@
+<!-- TITLE: 007 Noise Terrain -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>007 — Noise Terrain · creative-lab</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 100%; height: 100%; overflow: hidden; }
+    body {
+      background: #0a0a0a;
+      color: #e6edf3;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    canvas { display: block; width: 100%; height: 100%; }
+    .panel {
+      position: fixed;
+      top: 16px;
+      left: 16px;
+      min-width: 290px;
+      padding: 14px 16px;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 14px;
+      background: rgba(10, 12, 16, 0.72);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 20px 45px rgba(0,0,0,0.38);
+      z-index: 2;
+    }
+    .panel h1 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .panel p,
+    .panel label,
+    .meta {
+      font-size: 12px;
+      line-height: 1.6;
+      color: rgba(230, 237, 243, 0.78);
+    }
+    .controls {
+      display: grid;
+      grid-template-columns: 62px 1fr 46px;
+      gap: 8px 10px;
+      align-items: center;
+      margin: 12px 0 10px;
+    }
+    input[type="range"] {
+      width: 100%;
+      accent-color: #7dd3fc;
+    }
+    .meta {
+      display: grid;
+      grid-template-columns: auto auto;
+      gap: 2px 16px;
+      font-family: "SF Mono", "Fira Code", monospace;
+    }
+    .meta strong { color: #7dd3fc; font-weight: 500; }
+    .footer {
+      position: fixed;
+      right: 16px;
+      bottom: 12px;
+      font-size: 11px;
+      color: rgba(255,255,255,0.38);
+      font-family: monospace;
+      z-index: 2;
+    }
+    .footer a { color: inherit; text-decoration: none; }
+    .footer a:hover { color: rgba(255,255,255,0.72); }
+  
+    html.embed #ui,
+    html.embed #info,
+    html.embed #controls,
+    html.embed #stats,
+    html.embed #hint,
+    html.embed .panel,
+    html.embed header,
+    html.embed footer { display: none !important; }
+  </style>
+  <script>if(/\bembed=1\b/.test(location.search))document.documentElement.classList.add("embed")</script>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+
+<div class="panel">
+  <h1>Noise Terrain</h1>
+  <p>Animated isometric heightmap with pure-JS gradient noise. Drag to pan, use the wheel to change vertical exaggeration, and tune the flow below.</p>
+  <div class="controls">
+    <label for="speed">Speed</label>
+    <input id="speed" type="range" min="0" max="100" value="38">
+    <span id="speedValue">0.38</span>
+
+    <label for="scale">Scale</label>
+    <input id="scale" type="range" min="18" max="120" value="54">
+    <span id="scaleValue">54</span>
+  </div>
+  <div class="meta">
+    <span>Relief</span><strong id="reliefLabel">1.00x</strong>
+    <span>Grid</span><strong id="gridLabel">64x64</strong>
+    <span>Pan</span><strong id="panLabel">0, 0</strong>
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+const speedInput = document.getElementById('speed');
+const scaleInput = document.getElementById('scale');
+const speedValue = document.getElementById('speedValue');
+const scaleValue = document.getElementById('scaleValue');
+const reliefLabel = document.getElementById('reliefLabel');
+const gridLabel = document.getElementById('gridLabel');
+const panLabel = document.getElementById('panLabel');
+
+let width = 0;
+let height = 0;
+let dpr = 1;
+let isoX = 14;
+let isoY = 7;
+let relief = 1;
+let panX = 0;
+let panY = -50;
+let dragging = false;
+let prevX = 0;
+let prevY = 0;
+let lastTime = performance.now();
+let noiseOffsetX = 0;
+let noiseOffsetY = 0;
+
+const terrain = {
+  cols: 64,
+  rows: 64,
+  data: [],
+};
+
+const gradients = new Map();
+function gradient(ix, iy) {
+  const key = `${ix},${iy}`;
+  if (!gradients.has(key)) {
+    const value = Math.sin(ix * 127.1 + iy * 311.7) * 43758.5453123;
+    const angle = (value - Math.floor(value)) * Math.PI * 2;
+    gradients.set(key, { x: Math.cos(angle), y: Math.sin(angle) });
+  }
+  return gradients.get(key);
+}
+
+function fade(t) {
+  return t * t * t * (t * (t * 6 - 15) + 10);
+}
+
+function lerp(a, b, t) {
+  return a + (b - a) * t;
+}
+
+function dotGridGradient(ix, iy, x, y) {
+  const g = gradient(ix, iy);
+  return (x - ix) * g.x + (y - iy) * g.y;
+}
+
+function perlin2(x, y) {
+  const x0 = Math.floor(x);
+  const x1 = x0 + 1;
+  const y0 = Math.floor(y);
+  const y1 = y0 + 1;
+  const sx = fade(x - x0);
+  const sy = fade(y - y0);
+
+  const n0 = dotGridGradient(x0, y0, x, y);
+  const n1 = dotGridGradient(x1, y0, x, y);
+  const ix0 = lerp(n0, n1, sx);
+
+  const n2 = dotGridGradient(x0, y1, x, y);
+  const n3 = dotGridGradient(x1, y1, x, y);
+  const ix1 = lerp(n2, n3, sx);
+
+  return lerp(ix0, ix1, sy);
+}
+
+function fractalNoise(x, y) {
+  let amplitude = 1;
+  let frequency = 1;
+  let sum = 0;
+  let norm = 0;
+  for (let i = 0; i < 4; i++) {
+    sum += perlin2(x * frequency, y * frequency) * amplitude;
+    norm += amplitude;
+    amplitude *= 0.5;
+    frequency *= 2;
+  }
+  return sum / norm;
+}
+
+function clamp(value, min, max) {
+  return Math.max(min, Math.min(max, value));
+}
+
+function resize() {
+  dpr = Math.min(window.devicePixelRatio || 1, 2);
+  width = window.innerWidth;
+  height = window.innerHeight;
+  canvas.width = Math.floor(width * dpr);
+  canvas.height = Math.floor(height * dpr);
+  canvas.style.width = `${width}px`;
+  canvas.style.height = `${height}px`;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
+
+function updateGridInfo() {
+  gridLabel.textContent = `${terrain.cols}x${terrain.rows}`;
+  panLabel.textContent = `${Math.round(panX)}, ${Math.round(panY)}`;
+  reliefLabel.textContent = `${relief.toFixed(2)}x`;
+  speedValue.textContent = (Number(speedInput.value) / 100).toFixed(2);
+  scaleValue.textContent = scaleInput.value;
+}
+
+function heightColor(h) {
+  const stops = [
+    { t: 0.0, c: [12, 38, 92] },
+    { t: 0.35, c: [33, 116, 86] },
+    { t: 0.62, c: [115, 82, 52] },
+    { t: 1.0, c: [242, 245, 250] },
+  ];
+  const t = clamp((h + 1) * 0.5, 0, 1);
+  for (let i = 0; i < stops.length - 1; i++) {
+    const a = stops[i];
+    const b = stops[i + 1];
+    if (t >= a.t && t <= b.t) {
+      const k = (t - a.t) / (b.t - a.t);
+      const r = Math.round(lerp(a.c[0], b.c[0], k));
+      const g = Math.round(lerp(a.c[1], b.c[1], k));
+      const bValue = Math.round(lerp(a.c[2], b.c[2], k));
+      return `rgb(${r},${g},${bValue})`;
+    }
+  }
+  return 'rgb(242,245,250)';
+}
+
+function buildTerrain() {
+  const scale = Number(scaleInput.value);
+  terrain.data = [];
+  for (let y = 0; y < terrain.rows; y++) {
+    const row = [];
+    for (let x = 0; x < terrain.cols; x++) {
+      const nx = (x + noiseOffsetX) / scale;
+      const ny = (y + noiseOffsetY) / scale;
+      row.push(fractalNoise(nx, ny));
+    }
+    terrain.data.push(row);
+  }
+}
+
+function isoPoint(x, y, h) {
+  return {
+    x: width * 0.5 + panX + (x - y) * isoX,
+    y: height * 0.22 + panY + (x + y) * isoY - h * 48 * relief,
+  };
+}
+
+function drawCell(x, y) {
+  const h00 = terrain.data[y][x];
+  const h10 = terrain.data[y][x + 1];
+  const h11 = terrain.data[y + 1][x + 1];
+  const h01 = terrain.data[y + 1][x];
+
+  const p00 = isoPoint(x, y, h00);
+  const p10 = isoPoint(x + 1, y, h10);
+  const p11 = isoPoint(x + 1, y + 1, h11);
+  const p01 = isoPoint(x, y + 1, h01);
+
+  const avg = (h00 + h10 + h11 + h01) * 0.25;
+  const shade = clamp(0.78 + ((h10 - h01) * 0.3 + (h11 - h00) * 0.2), 0.4, 1.2);
+  const base = heightColor(avg).match(/\d+/g).map(Number);
+  const fill = `rgb(${Math.round(base[0] * shade)},${Math.round(base[1] * shade)},${Math.round(base[2] * shade)})`;
+
+  ctx.beginPath();
+  ctx.moveTo(p00.x, p00.y);
+  ctx.lineTo(p10.x, p10.y);
+  ctx.lineTo(p11.x, p11.y);
+  ctx.lineTo(p01.x, p01.y);
+  ctx.closePath();
+  ctx.fillStyle = fill;
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(255,255,255,0.035)';
+  ctx.lineWidth = 1;
+  ctx.stroke();
+}
+
+function draw() {
+  const now = performance.now();
+  const dt = Math.min(0.05, (now - lastTime) / 1000);
+  lastTime = now;
+
+  noiseOffsetX += dt * Number(speedInput.value) * 0.18;
+  noiseOffsetY += dt * Number(speedInput.value) * 0.11;
+  buildTerrain();
+
+  const bg = ctx.createLinearGradient(0, 0, 0, height);
+  bg.addColorStop(0, '#06111e');
+  bg.addColorStop(0.45, '#0a1721');
+  bg.addColorStop(1, '#0a0a0a');
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, width, height);
+
+  for (let y = 0; y < terrain.rows - 1; y++) {
+    for (let x = terrain.cols - 2; x >= 0; x--) {
+      drawCell(x, y);
+    }
+  }
+
+  requestAnimationFrame(draw);
+}
+
+window.addEventListener('resize', resize);
+canvas.addEventListener('pointerdown', event => {
+  dragging = true;
+  prevX = event.clientX;
+  prevY = event.clientY;
+});
+window.addEventListener('pointerup', () => {
+  dragging = false;
+});
+window.addEventListener('pointermove', event => {
+  if (!dragging) return;
+  panX += event.clientX - prevX;
+  panY += event.clientY - prevY;
+  prevX = event.clientX;
+  prevY = event.clientY;
+  updateGridInfo();
+});
+window.addEventListener('wheel', event => {
+  event.preventDefault();
+  relief = clamp(relief + (event.deltaY < 0 ? 0.08 : -0.08), 0.35, 2.4);
+  updateGridInfo();
+}, { passive: false });
+
+speedInput.addEventListener('input', updateGridInfo);
+scaleInput.addEventListener('input', updateGridInfo);
+
+resize();
+updateGridInfo();
+buildTerrain();
+draw();
+</script>
+</body>
+</html>

@@ -18,7 +18,7 @@ const exampleDefs = [
     name: "progressive-blur-default",
     title: "Default",
     description:
-      "Bottom-edge fade over a scrollable list — `position=\"bottom\"` and `height=\"40%\"`.",
+      "Bottom-edge fade over a scrollable list, `position=\"bottom\"` and `height=\"40%\"`.",
     requires: ["scroll-area"],
   },
 ]
@@ -58,7 +58,7 @@ export default async function ProgressiveBlurDocsPage() {
         pathname="/docs/components/progressive-blur"
         description={
           <p className="leading-relaxed text-muted-foreground">
-            Layered backdrop blur that softens the edge of scrollable content —
+            Layered backdrop blur that softens the edge of scrollable content , 
             place it inside a relative overflow container and pick{" "}
             <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
               top

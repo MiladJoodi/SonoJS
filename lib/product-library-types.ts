@@ -1,4 +1,4 @@
-/** Shared library DTO — safe for client components (no server-only). */
+/** Shared library DTO, safe for client components (no server-only). */
 
 export type ProductLibraryItem = {
   slug: string

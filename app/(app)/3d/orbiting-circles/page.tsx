@@ -20,7 +20,7 @@ const exampleDefs = [
     name: "orbiting-circles-default",
     title: "Default",
     description:
-      "Two rings — outer clockwise and inner reverse at higher speed. Compose any children as orbiting nodes.",
+      "Two rings, outer clockwise and inner reverse at higher speed. Compose any children as orbiting nodes.",
   },
 ]
 
@@ -70,7 +70,7 @@ export default async function OrbitingCirclesDocsPage() {
           <div className="space-y-3 leading-relaxed text-muted-foreground">
             <p>
               Place icons (or any nodes) on a circular path that rotates with
-              pure CSS. Nest multiple rings for layered motion — flip{" "}
+              pure CSS. Nest multiple rings for layered motion, flip{" "}
               <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
                 reverse
               </code>{" "}
@@ -89,7 +89,7 @@ export default async function OrbitingCirclesDocsPage() {
               <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
                 orbiting-circles.css
               </code>{" "}
-              next to the component — not in your global stylesheet. Respects{" "}
+              next to the component, not in your global stylesheet. Respects{" "}
               <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
                 prefers-reduced-motion
               </code>
@@ -120,7 +120,7 @@ export default async function OrbitingCirclesDocsPage() {
             {
               name: "children",
               type: "ReactNode",
-              description: "Orbiting nodes — evenly spaced around the ring.",
+              description: "Orbiting nodes, evenly spaced around the ring.",
             },
             {
               name: "radius",
@@ -144,7 +144,7 @@ export default async function OrbitingCirclesDocsPage() {
               name: "speed",
               type: "number",
               defaultValue: "1",
-              description: "Divides duration — higher is faster.",
+              description: "Divides duration, higher is faster.",
             },
             {
               name: "reverse",

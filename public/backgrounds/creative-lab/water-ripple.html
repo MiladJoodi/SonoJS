@@ -1,0 +1,325 @@
+<!-- TITLE: 015 Water Ripple -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>015 — Water Ripple · creative-lab</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 100%; height: 100%; overflow: hidden; }
+    body {
+      background: #0a0a0a;
+      color: #e6edf3;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    canvas { display: block; width: 100%; height: 100%; cursor: crosshair; }
+    .panel {
+      position: fixed;
+      top: 16px;
+      left: 16px;
+      width: 320px;
+      max-width: calc(100vw - 32px);
+      padding: 14px 16px;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 14px;
+      background: rgba(7, 12, 18, 0.8);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 20px 45px rgba(0,0,0,0.38);
+      z-index: 2;
+    }
+    .panel h1 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .panel p,
+    .panel label,
+    .panel button,
+    .panel select,
+    .panel span {
+      font-size: 12px;
+      line-height: 1.6;
+      color: rgba(230, 237, 243, 0.84);
+    }
+    .controls {
+      display: grid;
+      grid-template-columns: 92px 1fr 52px;
+      gap: 8px 10px;
+      align-items: center;
+      margin: 12px 0 10px;
+    }
+    .controls .wide { grid-column: span 2; }
+    input[type="range"], select {
+      width: 100%;
+      accent-color: #60a5fa;
+    }
+    select, button {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px;
+      padding: 7px 9px;
+      color: #f8fafc;
+    }
+    .buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .meta {
+      display: grid;
+      grid-template-columns: auto auto;
+      gap: 2px 16px;
+      font-family: "SF Mono", "Fira Code", monospace;
+      color: rgba(230, 237, 243, 0.75);
+    }
+    .meta strong { color: #7dd3fc; font-weight: 500; }
+  
+    html.embed #ui,
+    html.embed #info,
+    html.embed #controls,
+    html.embed #stats,
+    html.embed #hint,
+    html.embed .panel,
+    html.embed header,
+    html.embed footer { display: none !important; }
+  </style>
+  <script>if(/\bembed=1\b/.test(location.search))document.documentElement.classList.add("embed")</script>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+
+<div class="panel">
+  <h1>Water Ripple Simulation</h1>
+  <p>Click to inject wave energy into a damped height field. Ripples overlap, interfere, and fade into the blue-black surface.</p>
+  <div class="controls">
+    <label for="viscosity">Viscosity</label>
+    <input id="viscosity" type="range" min="0.86" max="0.995" step="0.001" value="0.972">
+    <span id="viscosityValue">0.972</span>
+
+    <label for="strength">Ripple str.</label>
+    <input id="strength" type="range" min="20" max="220" step="1" value="110">
+    <span id="strengthValue">110</span>
+
+    <label for="color">Color</label>
+    <select id="color" class="wide">
+      <option value="blue">Neon blue</option>
+      <option value="green">Neon green</option>
+      <option value="white">White</option>
+    </select>
+
+    <label for="auto">Auto-ripple</label>
+    <input id="auto" type="checkbox" checked>
+    <span id="autoLabel">on</span>
+  </div>
+  <div class="meta">
+    <span>Grid</span><strong id="gridLabel">0 × 0</strong>
+    <span>Energy</span><strong id="energyLabel">0.00</strong>
+  </div>
+  <div class="buttons">
+    <button id="clear">Clear</button>
+    <button id="pulse">Center pulse</button>
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+const viscosityInput = document.getElementById('viscosity');
+const strengthInput = document.getElementById('strength');
+const colorInput = document.getElementById('color');
+const autoInput = document.getElementById('auto');
+const clearButton = document.getElementById('clear');
+const pulseButton = document.getElementById('pulse');
+const viscosityValue = document.getElementById('viscosityValue');
+const strengthValue = document.getElementById('strengthValue');
+const autoLabel = document.getElementById('autoLabel');
+const gridLabel = document.getElementById('gridLabel');
+const energyLabel = document.getElementById('energyLabel');
+
+let width = 0;
+let height = 0;
+let simWidth = 0;
+let simHeight = 0;
+let dpr = 1;
+let current = new Float32Array(0);
+let previous = new Float32Array(0);
+let imageData = null;
+let autoTimer = 0;
+let lastTime = performance.now();
+
+function clamp(value, min, max) {
+  return Math.max(min, Math.min(max, value));
+}
+
+function idx(x, y) {
+  return y * simWidth + x;
+}
+
+function resize() {
+  dpr = Math.min(window.devicePixelRatio || 1, 2);
+  width = window.innerWidth;
+  height = window.innerHeight;
+  canvas.width = Math.floor(width * dpr);
+  canvas.height = Math.floor(height * dpr);
+  canvas.style.width = `${width}px`;
+  canvas.style.height = `${height}px`;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+  const scale = Math.max(2, Math.round(Math.min(width, height) / 180));
+  simWidth = Math.max(80, Math.floor(width / scale));
+  simHeight = Math.max(50, Math.floor(height / scale));
+  current = new Float32Array(simWidth * simHeight);
+  previous = new Float32Array(simWidth * simHeight);
+  imageData = ctx.createImageData(simWidth, simHeight);
+  gridLabel.textContent = `${simWidth} × ${simHeight}`;
+}
+
+function getPalette(mode) {
+  if (mode === 'green') {
+    return { low: [4, 12, 18], glow: [16, 255, 200] };
+  }
+  if (mode === 'white') {
+    return { low: [8, 12, 18], glow: [235, 245, 255] };
+  }
+  return { low: [4, 10, 18], glow: [64, 180, 255] };
+}
+
+function disturb(canvasX, canvasY, amount) {
+  const simX = Math.floor((canvasX / width) * simWidth);
+  const simY = Math.floor((canvasY / height) * simHeight);
+  const radius = clamp(Math.round(Math.min(simWidth, simHeight) * 0.05), 3, 10);
+
+  for (let y = -radius; y <= radius; y++) {
+    for (let x = -radius; x <= radius; x++) {
+      const px = simX + x;
+      const py = simY + y;
+      if (px < 1 || px >= simWidth - 1 || py < 1 || py >= simHeight - 1) {
+        continue;
+      }
+      const dist = Math.hypot(x, y) / radius;
+      if (dist > 1) {
+        continue;
+      }
+      const falloff = Math.cos(dist * Math.PI * 0.5);
+      previous[idx(px, py)] += amount * falloff;
+    }
+  }
+}
+
+function clearField() {
+  current.fill(0);
+  previous.fill(0);
+}
+
+function renderField() {
+  const palette = getPalette(colorInput.value);
+  const pixels = imageData.data;
+  let totalEnergy = 0;
+
+  for (let y = 0; y < simHeight; y++) {
+    for (let x = 0; x < simWidth; x++) {
+      const i = idx(x, y);
+      const h = current[i];
+      const left = current[idx(Math.max(0, x - 1), y)];
+      const right = current[idx(Math.min(simWidth - 1, x + 1), y)];
+      const up = current[idx(x, Math.max(0, y - 1))];
+      const down = current[idx(x, Math.min(simHeight - 1, y + 1))];
+      const normalX = (right - left) * 0.5;
+      const normalY = (down - up) * 0.5;
+      const shade = clamp(0.32 + (normalX + normalY) * 0.45 + h * 0.015, 0, 1);
+      const glow = clamp(Math.abs(h) / 90, 0, 1);
+      const p = i * 4;
+
+      pixels[p] = Math.round(palette.low[0] + palette.glow[0] * shade * 0.3 + palette.glow[0] * glow * 0.7);
+      pixels[p + 1] = Math.round(palette.low[1] + palette.glow[1] * shade * 0.25 + palette.glow[1] * glow * 0.75);
+      pixels[p + 2] = Math.round(palette.low[2] + palette.glow[2] * shade * 0.35 + palette.glow[2] * glow * 0.65);
+      pixels[p + 3] = 255;
+      totalEnergy += Math.abs(h);
+    }
+  }
+
+  energyLabel.textContent = (totalEnergy / (simWidth * simHeight)).toFixed(2);
+  ctx.fillStyle = '#02070d';
+  ctx.fillRect(0, 0, width, height);
+  ctx.imageSmoothingEnabled = true;
+  ctx.drawImage(createImageBitmap ? canvasFromImageData(imageData) : canvasFromImageData(imageData), 0, 0, width, height);
+}
+
+function canvasFromImageData(data) {
+  const buffer = canvasFromImageData.buffer || document.createElement('canvas');
+  buffer.width = data.width;
+  buffer.height = data.height;
+  const bufferCtx = buffer.getContext('2d');
+  bufferCtx.putImageData(data, 0, 0);
+  canvasFromImageData.buffer = buffer;
+  return buffer;
+}
+
+function stepSimulation() {
+  const damping = Number(viscosityInput.value);
+  for (let y = 1; y < simHeight - 1; y++) {
+    for (let x = 1; x < simWidth - 1; x++) {
+      const i = idx(x, y);
+      const next = (
+        previous[idx(x - 1, y)] +
+        previous[idx(x + 1, y)] +
+        previous[idx(x, y - 1)] +
+        previous[idx(x, y + 1)]
+      ) * 0.5 - current[i];
+      current[i] = next * damping;
+    }
+  }
+  const swap = previous;
+  previous = current;
+  current = swap;
+}
+
+function animate(now) {
+  const dt = Math.min(0.033, (now - lastTime) / 1000);
+  lastTime = now;
+
+  autoTimer += dt;
+  if (autoInput.checked && autoTimer > 0.42) {
+    autoTimer = 0;
+    disturb(Math.random() * width, Math.random() * height, Number(strengthInput.value) * (0.55 + Math.random() * 0.7));
+  }
+
+  stepSimulation();
+  renderField();
+  requestAnimationFrame(animate);
+}
+
+canvas.addEventListener('pointerdown', (event) => {
+  disturb(event.clientX, event.clientY, Number(strengthInput.value));
+});
+
+clearButton.addEventListener('click', clearField);
+pulseButton.addEventListener('click', () => {
+  disturb(width * 0.5, height * 0.5, Number(strengthInput.value) * 1.35);
+});
+
+viscosityInput.addEventListener('input', () => {
+  viscosityValue.textContent = Number(viscosityInput.value).toFixed(3);
+});
+
+strengthInput.addEventListener('input', () => {
+  strengthValue.textContent = strengthInput.value;
+});
+
+autoInput.addEventListener('change', () => {
+  autoLabel.textContent = autoInput.checked ? 'on' : 'off';
+});
+
+window.addEventListener('resize', resize);
+
+resize();
+viscosityValue.textContent = Number(viscosityInput.value).toFixed(3);
+strengthValue.textContent = strengthInput.value;
+autoLabel.textContent = autoInput.checked ? 'on' : 'off';
+disturb(width * 0.5, height * 0.5, Number(strengthInput.value));
+requestAnimationFrame(animate);
+</script>
+</body>
+</html>

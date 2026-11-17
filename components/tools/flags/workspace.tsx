@@ -39,7 +39,7 @@ export function Workspace() {
     }
   }, [])
 
-  // Deep-link ?c=US — only open when a code is present (never fight close).
+  // Deep-link ?c=US, only open when a code is present (never fight close).
   React.useEffect(() => {
     const code = searchParams.get("c")
     if (!code) return
@@ -128,7 +128,7 @@ export function Workspace() {
             <p className="max-w-xl text-sm leading-relaxed text-muted-foreground">
               {visible.length === FLAG_COUNTRIES.length
                 ? `Browse ${FLAG_COUNTRIES.length} flags and copy CDN URLs.`
-                : `Showing ${visible.length} of ${FLAG_COUNTRIES.length} flags — copy CDN URLs.`}{" "}
+                : `Showing ${visible.length} of ${FLAG_COUNTRIES.length} flags, copy CDN URLs.`}{" "}
               Also on npm as{" "}
               <a
                 href="https://www.npmjs.com/package/@sonojs/flags"

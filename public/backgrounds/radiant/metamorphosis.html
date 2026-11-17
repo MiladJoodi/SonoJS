@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Metamorphosis</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; overflow: hidden; background: #0a0a0a; }
+  canvas { display: block; width: 100vw; height: 100vh; }
+  .label {
+    position: fixed;
+    top: 20px;
+    left: 24px;
+    font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(200, 149, 108, 0.5);
+    z-index: 10;
+    pointer-events: none;
+    user-select: none;
+  }
+  html.embed .label { display: none; }
+</style>
+<script>if(/\bembed=1\b/.test(location.search))document.documentElement.classList.add("embed")</script>
+</head>
+<body>
+<div class="label">Metamorphosis</div>
+<canvas id="canvas"></canvas>
+<script>
+// ─────────────────────────────────────────────
+// 20 · Metamorphosis — Raymarched metaballs with liquid-metal surface
+// ─────────────────────────────────────────────
+(function () {
+  var canvas = document.getElementById('canvas');
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // URL param for embed scaling
+  var urlParams = new URLSearchParams(window.location.search);
+  var pixelScale = parseFloat(urlParams.get('p')) || 1;
+
+  var gl = canvas.getContext('webgl', { alpha: true, antialias: false, preserveDrawingBuffer: false });
+  if (!gl) return;
+
+  var vertSrc = [
+    'attribute vec2 a_pos;',
+    'void main() { gl_Position = vec4(a_pos, 0.0, 1.0); }'
+  ].join('\n');
+
+  var fragSrc = [
+    'precision highp float;',
+    'uniform float u_time;',
+    'uniform vec2 u_res;',
+    'uniform float u_morphSpeed;',
+    'uniform float u_blobCount;',
+    'uniform vec2 u_mouse;',
+    '',
+    '#define PI 3.14159265359',
+    '#define TAU 6.28318530718',
+    '#define MAX_STEPS 48',
+    '#define MAX_DIST 20.0',
+    '#define SURF_DIST 0.002',
+    '#define BLOB_MAX 6',
+    '',
+    '// Precomputed blob data — set once per pixel in main(),',
+    '// read many times in scene(). Avoids redundant trig across',
+    '// ~120 scene() calls per hit pixel (march + normal + shadow + AO).',
+    'vec3 g_pos[BLOB_MAX];',
+    'vec3 g_radStretch[BLOB_MAX];',
+    'mat2 g_rotXY[BLOB_MAX];',
+    'mat2 g_rotYZ[BLOB_MAX];',
+    'int g_count;',
+    '',
+    'float smin(float a, float b, float k) {',
+    '  float h = clamp(0.5 + 0.5 * (b - a) / k, 0.0, 1.0);',
+    '  return mix(b, a, h) - k * h * (1.0 - h);',
+    '}',
+    '',
+    'float sdEllipsoid(vec3 p, vec3 r) {',
+    '  float k0 = length(p / r);',
+    '  float k1 = length(p / (r * r));',
+    '  return k0 * (k0 - 1.0) / k1;',
+    '}',
+    '',
+    'float scene(vec3 p) {',
+    '  float d = MAX_DIST;',
+    '  for (int i = 0; i < BLOB_MAX; i++) {',
+    '    if (i >= g_count) break;',
+    '    vec3 q = p - g_pos[i];',
+    '    q = vec3(g_rotXY[i] * q.xy, q.z);',
+    '    q = vec3(q.x, g_rotYZ[i] * q.yz);',
+    '    d = smin(d, sdEllipsoid(q, g_radStretch[i]), 0.6);',
+    '  }',
+    '  return d;',
+    '}',
+    '',
+    '// Tetrahedron normal — 4 scene evals instead of 6',
+    'vec3 calcNormal(vec3 p) {',
+    '  vec2 e = vec2(0.002, -0.002);',
+    '  return normalize(',
+    '    e.xyy * scene(p + e.xyy) +',
+    '    e.yyx * scene(p + e.yyx) +',
+    '    e.yxy * scene(p + e.yxy) +',
+    '    e.xxx * scene(p + e.xxx)',
+    '  );',
+    '}',
+    '',
+    'float softShadow(vec3 ro, vec3 rd, float mint, float maxt, float k) {',
+    '  float res = 1.0;',
+    '  float ph = 1e10;',
+    '  float t = mint;',
+    '  for (int i = 0; i < 16; i++) {',
+    '    float h = scene(ro + rd * t);',
+    '    if (h < 0.001) return 0.0;',
+    '    float y = h * h / (2.0 * ph);',
+    '    float d = sqrt(h * h - y * y);',
+    '    res = min(res, k * d / max(0.0, t - y));',
+    '    ph = h;',
+    '    t += h;',
+    '    if (t > maxt) break;',
+    '  }',
+    '  return clamp(res, 0.0, 1.0);',
+    '}',
+    '',
+    'float calcAO(vec3 p, vec3 n) {',
+    '  float occ = 0.0;',
+    '  float sca = 1.0;',
+    '  for (int i = 0; i < 3; i++) {',
+    '    float h = 0.01 + 0.12 * float(i) / 2.0;',
+    '    float d = scene(p + h * n);',
+    '    occ += (h - d) * sca;',
+    '    sca *= 0.95;',
+    '  }',
+    '  return clamp(1.0 - 3.0 * occ, 0.0, 1.0);',
+    '}',
+    '',
+    'float fresnel(float cosTheta, float f0) {',
+    '  return f0 + (1.0 - f0) * pow(1.0 - cosTheta, 5.0);',
+    '}',
+    '',
+    'vec3 envMap(vec3 rd) {',
+    '  float y = rd.y * 0.5 + 0.5;',
+    '  vec3 sky = mix(',
+    '    vec3(0.02, 0.015, 0.01),',
+    '    vec3(0.08, 0.05, 0.03),',
+    '    y',
+    '  );',
+    '  float sun = pow(max(dot(rd, normalize(vec3(2.0, 3.0, 1.0))), 0.0), 32.0);',
+    '  sky += vec3(1.0, 0.85, 0.6) * sun * 0.5;',
+    '  float fill = pow(max(dot(rd, normalize(vec3(-2.0, 1.0, -1.0))), 0.0), 8.0);',
+    '  sky += vec3(0.6, 0.35, 0.3) * fill * 0.15;',
+    '  float rim = pow(max(dot(rd, normalize(vec3(0.0, 0.5, -2.0))), 0.0), 16.0);',
+    '  sky += vec3(0.8, 0.5, 0.25) * rim * 0.2;',
+    '  return sky;',
+    '}',
+    '',
+    'void main() {',
+    '  vec2 uv = (gl_FragCoord.xy - u_res * 0.5) / min(u_res.x, u_res.y);',
+    '  float t = u_time;',
+    '  float speed = t * u_morphSpeed;',
+    '',
+    '  // Precompute all blob data once (positions, radii, rotations)',
+    '  g_count = int(u_blobCount);',
+    '  for (int i = 0; i < BLOB_MAX; i++) {',
+    '    if (i >= g_count) break;',
+    '    float fi = float(i);',
+    '    float phase = fi * TAU / 6.0;',
+    '    g_pos[i] = vec3(',
+    '      sin(speed * 0.7 + phase) * 0.8 + sin(speed * 0.3 + phase * 2.3) * 0.3,',
+    '      cos(speed * 0.5 + phase * 1.4) * 0.6 + sin(speed * 0.8 + phase * 0.7) * 0.25,',
+    '      sin(speed * 0.6 + phase * 1.8) * 0.5 + cos(speed * 0.4 + phase * 2.1) * 0.2',
+    '    );',
+    '    float base = 0.45 + fi * 0.03;',
+    '    float pulse = sin(speed * 1.2 + fi * 1.7) * 0.08 + sin(speed * 0.5 + fi * 3.1) * 0.05;',
+    '    float r = base + pulse;',
+    '    float sx = 1.0 + sin(speed * 0.9 + fi * 2.3) * 0.25;',
+    '    float sy = 1.0 + cos(speed * 0.7 + fi * 1.9) * 0.2;',
+    '    float sz = 1.0 + sin(speed * 1.1 + fi * 2.7) * 0.2;',
+    '    float norm = pow(1.0 / (sx * sy * sz), 0.333);',
+    '    g_radStretch[i] = vec3(r) * vec3(sx, sy, sz) * norm;',
+    '    float ca = cos(speed * 0.3 + fi * 1.1), sa = sin(speed * 0.3 + fi * 1.1);',
+    '    g_rotXY[i] = mat2(ca, -sa, sa, ca);',
+    '    float cb = cos(speed * 0.2 + fi * 0.9), sb = sin(speed * 0.2 + fi * 0.9);',
+    '    g_rotYZ[i] = mat2(cb, -sb, sb, cb);',
+    '  }',
+    '',
+    '  // ── Mouse: attract blobs toward cursor (per-blob, distance-based) ──',
+    '  if (u_mouse.x > 0.0) {',
+    '    vec2 mUV = (u_mouse - u_res * 0.5) / min(u_res.x, u_res.y);',
+    '    vec3 mouseWorld = vec3(mUV.x * 3.0, mUV.y * 3.0, 0.5);',
+    '    for (int i = 0; i < BLOB_MAX; i++) {',
+    '      if (i >= g_count) break;',
+    '      vec3 toMouse = mouseWorld - g_pos[i];',
+    '      float mDist = length(toMouse);',
+    '      float pull = 0.6 / (1.0 + mDist * mDist * 2.0);',
+    '      g_pos[i] += toMouse * pull;',
+    '    }',
+    '  }',
+    '',
+    '  vec3 ro = vec3(0.0, 0.3, 3.8);',
+    '  vec3 target = vec3(0.0);',
+    '  vec3 fwd = normalize(target - ro);',
+    '  vec3 right = normalize(cross(fwd, vec3(0.0, 1.0, 0.0)));',
+    '  vec3 up = cross(right, fwd);',
+    '  vec3 rd = normalize(fwd * 1.5 + right * uv.x + up * uv.y);',
+    '',
+    '  // Bounding sphere early-out — skip raymarch for rays that miss entirely',
+    '  float bsB = dot(ro, rd);',
+    '  float bsC = dot(ro, ro) - 6.25;', // radius 2.5 squared
+    '  float bsDisc = bsB * bsB - bsC;',
+    '',
+    '  float totalDist = 0.0;',
+    '  float dist;',
+    '  vec3 p;',
+    '  bool hit = false;',
+    '',
+    '  if (bsDisc > 0.0) {',
+    '    float sqrtDisc = sqrt(bsDisc);',
+    '    float t0 = -bsB - sqrtDisc;',
+    '    float t1 = -bsB + sqrtDisc;',
+    '    if (t1 > 0.0) {',
+    '      totalDist = max(t0, 0.0);',
+    '      float marchLimit = min(t1, MAX_DIST);',
+    '      for (int i = 0; i < MAX_STEPS; i++) {',
+    '        p = ro + rd * totalDist;',
+    '        dist = scene(p);',
+    '        if (dist < SURF_DIST) { hit = true; break; }',
+    '        if (totalDist > marchLimit) break;',
+    '        totalDist += dist;',
+    '      }',
+    '    }',
+    '  }',
+    '',
+    '  vec3 col = vec3(0.0);',
+    '',
+    '  if (hit) {',
+    '    vec3 n = calcNormal(p);',
+    '    vec3 v = normalize(ro - p);',
+    '',
+    '    float surfaceVar = sin(p.x * 5.0 + t * 0.3) * sin(p.y * 7.0 + t * 0.2) * sin(p.z * 6.0 + t * 0.4);',
+    '    vec3 baseColor = vec3(0.85, 0.65, 0.3);',
+    '    vec3 roseColor = vec3(0.8, 0.5, 0.45);',
+    '    vec3 copperColor = vec3(0.75, 0.45, 0.25);',
+    '',
+    '    float colorMix1 = sin(p.x * 3.0 + p.z * 2.0 + t * u_morphSpeed * 0.4) * 0.5 + 0.5;',
+    '    float colorMix2 = sin(p.y * 4.0 - p.x * 2.5 + t * u_morphSpeed * 0.3) * 0.5 + 0.5;',
+    '    vec3 albedo = mix(baseColor, roseColor, colorMix1 * 0.3);',
+    '    albedo = mix(albedo, copperColor, colorMix2 * 0.25);',
+    '',
+    '    float metallic = 0.9;',
+    '    float roughness = 0.15;',
+    '',
+    '    vec3 lightDir1 = normalize(vec3(2.0, 3.0, 1.5));',
+    '    vec3 lightCol1 = vec3(1.0, 0.9, 0.75) * 1.6;',
+    '    vec3 lightDir2 = normalize(vec3(-2.0, 1.0, -1.0));',
+    '    vec3 lightCol2 = vec3(0.7, 0.4, 0.35) * 0.6;',
+    '    vec3 lightDir3 = normalize(vec3(0.0, 0.5, -2.0));',
+    '    vec3 lightCol3 = vec3(0.9, 0.6, 0.3) * 0.8;',
+    '',
+    '    float diff1 = max(dot(n, lightDir1), 0.0);',
+    '    float diff2 = max(dot(n, lightDir2), 0.0);',
+    '    float diff3 = max(dot(n, lightDir3), 0.0);',
+    '',
+    '    float specPow = mix(256.0, 32.0, roughness);',
+    '    vec3 h1 = normalize(lightDir1 + v);',
+    '    vec3 h2 = normalize(lightDir2 + v);',
+    '    vec3 h3 = normalize(lightDir3 + v);',
+    '    float spec1 = pow(max(dot(n, h1), 0.0), specPow);',
+    '    float spec2 = pow(max(dot(n, h2), 0.0), specPow);',
+    '    float spec3 = pow(max(dot(n, h3), 0.0), specPow);',
+    '',
+    '    float NdotV = max(dot(n, v), 0.0);',
+    '    float fres = fresnel(NdotV, 0.04 + metallic * 0.76);',
+    '',
+    '    float shadow = softShadow(p + n * 0.01, lightDir1, 0.02, 5.0, 16.0);',
+    '    float ao = calcAO(p, n);',
+    '',
+    '    vec3 diffuse = albedo * (1.0 - metallic) * (',
+    '      lightCol1 * diff1 * shadow +',
+    '      lightCol2 * diff2 +',
+    '      lightCol3 * diff3',
+    '    );',
+    '',
+    '    vec3 specColor = mix(vec3(0.04), albedo, metallic);',
+    '    vec3 specular = specColor * (',
+    '      lightCol1 * spec1 * shadow * 1.5 +',
+    '      lightCol2 * spec2 * 0.8 +',
+    '      lightCol3 * spec3 * 1.0',
+    '    );',
+    '',
+    '    vec3 reflDir = reflect(-v, n);',
+    '    vec3 envRefl = envMap(reflDir);',
+    '    vec3 envContrib = envRefl * mix(vec3(0.04), albedo, metallic) * fres;',
+    '',
+    '    float rimFactor = pow(1.0 - NdotV, 4.0);',
+    '    vec3 rimColor = vec3(0.9, 0.6, 0.35) * rimFactor * 0.8;',
+    '',
+    '    float subsurface = pow(max(dot(-v, lightDir1), 0.0), 3.0) * (1.0 - metallic) * 0.2;',
+    '    vec3 sssColor = vec3(1.0, 0.7, 0.4) * subsurface;',
+    '',
+    '    col = diffuse + specular + envContrib + rimColor + sssColor;',
+    '    col *= ao;',
+    '',
+    '    float topSpec = pow(max(dot(n, h1), 0.0), 512.0) * shadow;',
+    '    col += vec3(1.0, 0.98, 0.92) * topSpec * 2.0;',
+    '',
+    '  } else {',
+    '    col = vec3(0.012, 0.01, 0.008);',
+    '  }',
+    '',
+    '  float floorY = -1.2;',
+    '  if (rd.y < 0.0) {',
+    '    float floorT = (floorY - ro.y) / rd.y;',
+    '    if (floorT > 0.0 && floorT < MAX_DIST && !hit) {',
+    '      vec3 floorP = ro + rd * floorT;',
+    '      float floorDist = length(floorP.xz);',
+    '      float glow = exp(-floorDist * floorDist * 1.5) * 0.15;',
+    '      glow *= 0.8 + 0.2 * sin(t * u_morphSpeed * 0.5);',
+    '      vec3 glowColor = vec3(0.6, 0.4, 0.2) * glow;',
+    '      float caustic = sin(floorP.x * 8.0 + t * 0.5) * sin(floorP.z * 8.0 + t * 0.7);',
+    '      caustic = caustic * caustic;',
+    '      glowColor += vec3(0.4, 0.25, 0.1) * caustic * glow * 2.0;',
+    '      col += glowColor;',
+    '    }',
+    '  }',
+    '',
+    '  if (!hit) {',
+    '    float closestT = max(-dot(ro, rd), 0.0);',
+    '    vec3 closestP = ro + rd * closestT;',
+    '    float closestDist = length(closestP);',
+    '    float atmosGlow = exp(-closestDist * closestDist * 0.8) * 0.08;',
+    '    col += vec3(0.5, 0.35, 0.15) * atmosGlow;',
+    '  }',
+    '',
+    '  col = col * (2.51 * col + 0.03) / (col * (2.43 * col + 0.59) + 0.14);',
+    '  col = pow(col, vec3(0.95, 0.98, 1.04));',
+    '  float vig = 1.0 - dot(uv, uv) * 0.25;',
+    '  col *= vig;',
+    '',
+    '  gl_FragColor = vec4(col, 1.0);',
+    '}'
+  ].join('\n');
+
+  function compile(type, src) {
+    var s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
+
+    }
+    return s;
+  }
+
+  var prog = gl.createProgram();
+  gl.attachShader(prog, compile(gl.VERTEX_SHADER, vertSrc));
+  gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, fragSrc));
+  gl.linkProgram(prog);
+  if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) {
+
+  }
+  gl.useProgram(prog);
+
+  var buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+  var aPos = gl.getAttribLocation(prog, 'a_pos');
+  gl.enableVertexAttribArray(aPos);
+  gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+
+  var uTime = gl.getUniformLocation(prog, 'u_time');
+  var uRes = gl.getUniformLocation(prog, 'u_res');
+  var uMorphSpeed = gl.getUniformLocation(prog, 'u_morphSpeed');
+  var uBlobCount = gl.getUniformLocation(prog, 'u_blobCount');
+  var uMouse = gl.getUniformLocation(prog, 'u_mouse');
+
+  var morphSpeedVal = 0.5;
+  var blobCountVal = 4.0;
+
+  var dpr = Math.min(window.devicePixelRatio || 1, 1) * pixelScale;
+  var mouseX = -1.0, mouseY = -1.0;
+  canvas.addEventListener('mousemove', function (e) {
+    mouseX = e.clientX * dpr;
+    mouseY = (canvas.clientHeight - e.clientY) * dpr;
+  });
+  canvas.addEventListener('mouseleave', function () {
+    mouseX = -1.0; mouseY = -1.0;
+  });
+  var needsResize = true;
+
+  function resize() {
+    needsResize = false;
+    var w = Math.round(canvas.clientWidth * dpr);
+    var h = Math.round(canvas.clientHeight * dpr);
+    if (canvas.width !== w || canvas.height !== h) {
+      canvas.width = w;
+      canvas.height = h;
+      gl.viewport(0, 0, w, h);
+      gl.uniform2f(uRes, canvas.width, canvas.height);
+    }
+  }
+
+  function render(now) {
+    if (needsResize) resize();
+    gl.uniform1f(uTime, prefersReduced ? 0.0 : now * 0.001);
+    gl.uniform1f(uMorphSpeed, morphSpeedVal);
+    gl.uniform1f(uBlobCount, blobCountVal);
+    gl.uniform2f(uMouse, mouseX, mouseY);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+    requestAnimationFrame(render);
+  }
+
+  window.addEventListener('resize', function () {
+    needsResize = true;
+  });
+
+  resize();
+
+  requestAnimationFrame(render);
+
+  window.addEventListener('message', function(e) {
+    if (e.data && e.data.type === 'param') {
+      switch (e.data.name) {
+        case 'MORPH_SPEED': morphSpeedVal = e.data.value; break;
+        case 'BLOB_COUNT': blobCountVal = e.data.value; break;
+      }
+    }
+  });
+})();
+</script>
+</body>
+</html>

@@ -281,7 +281,7 @@ export function AdminUsersPanel() {
                             className="cursor-pointer underline-offset-4 hover:underline"
                             onClick={(e) => e.stopPropagation()}
                           >
-                            {u.email || "—"}
+                            {u.email || ", "}
                           </Link>
                         </td>
                         <td
@@ -323,7 +323,7 @@ export function AdminUsersPanel() {
                           ) : u.stripeSubscriptionId ? (
                             <AdminStatus status="stripe" />
                           ) : (
-                            <span className="text-muted-foreground">—</span>
+                            <span className="text-muted-foreground">, </span>
                           )}
                         </td>
                       </tr>

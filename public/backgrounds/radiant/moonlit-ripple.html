@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moonlit Ripple</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; overflow: hidden; background: #0a0a0a; }
+  canvas { display: block; width: 100vw; height: 100vh; }
+  .label {
+    position: fixed;
+    top: 20px;
+    left: 24px;
+    font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(200, 149, 108, 0.5);
+    z-index: 10;
+    pointer-events: none;
+    user-select: none;
+  }
+  html.embed .label { display: none; }
+</style>
+<script>if(/\bembed=1\b/.test(location.search))document.documentElement.classList.add("embed")</script>
+</head>
+<body>
+<div class="label">Moonlit Ripple</div>
+<canvas id="canvas"></canvas>
+<script>
+// ─────────────────────────────────────────────
+// Moonlit Ripple — Moon reflection on dark water with concentric ripple interference
+// ─────────────────────────────────────────────
+(function () {
+  var canvas = document.getElementById('canvas');
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var gl = canvas.getContext('webgl', { alpha: true, antialias: false, preserveDrawingBuffer: false });
+  if (!gl) return;
+
+  var vertSrc = [
+    'attribute vec2 a_pos;',
+    'void main() { gl_Position = vec4(a_pos, 0.0, 1.0); }'
+  ].join('\n');
+
+  var fragSrc = [
+    'precision highp float;',
+    'uniform float u_time;',
+    'uniform vec2 u_res;',
+    'uniform float u_rippleSpeed;',
+    'uniform float u_moonGlow;',
+    'uniform vec2 u_mouse;',
+    'uniform float u_tilt;',
+    'uniform float u_waves;',
+    '',
+    '#define PI 3.14159265359',
+    '#define WAVE_LAYERS 7',
+    '',
+    '// ── Multi-directional waves with analytical normals ──',
+    'vec4 sea(vec2 p, float t) {',
+    '  float h = 0.0;',
+    '  vec2 dh = vec2(0.0);',
+    '  float freq = 1.0;',
+    '  float baseAmp = 0.2 * u_waves;',
+    '  // Higher intensity = slower amplitude decay = more high-freq energy (choppier)',
+    '  float decay = mix(0.55, 0.38, clamp(u_waves / 3.0, 0.0, 1.0));',
+    '  float amp = baseAmp;',
+    '  float angle = 0.0;',
+    '  for (int i = 0; i < WAVE_LAYERS; i++) {',
+    '    float c = cos(angle);',
+    '    float s = sin(angle);',
+    '    // Rotate sampling position per layer (breaks alignment)',
+    '    vec2 pp = vec2(c * p.x + s * p.y, -s * p.x + c * p.y);',
+    '    float fi = float(i);',
+    '    float spd = sqrt(freq) * 0.8;',
+    '    // Sample along y of rotated space + per-layer offset',
+    '    float phase = (pp.y + fi) * freq - t * spd;',
+    '    float sn = sin(phase);',
+    '    float cn = cos(phase);',
+    '    h += sn * amp;',
+    '    // Derivative in rotated space, then rotate back',
+    '    float dy = freq * amp * cn;',
+    '    dh += vec2(-s * dy, c * dy);',
+    '    angle += fi + 1.2;',
+    '    freq *= 1.3;',
+    '    amp *= decay;',
+    '  }',
+    '  vec3 N = normalize(vec3(-dh.x, 1.0, -dh.y));',
+    '  return vec4(h, N);',
+    '}',
+    '',
+    '// ── Moon direction in 3D ──',
+    'vec3 moonDir() {',
+    '  return normalize(vec3(0.15, 0.35, 1.0));',
+    '}',
+    '',
+    '// Simple hash for moon texture',
+    'float hash(vec2 p) {',
+    '  return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);',
+    '}',
+    '',
+    '// ── Night sky color with textured moon disc ──',
+    'vec3 skyColor(vec3 rd) {',
+    '  vec3 md = moonDir();',
+    '  // Warm base tones — blue scheme hue-rotates these to cool moonlit blue',
+    '  vec3 skyDark = vec3(0.06, 0.03, 0.02);',
+    '  vec3 skyHoriz = vec3(0.09, 0.05, 0.04);',
+    '  vec3 sky = mix(skyHoriz, skyDark, max(rd.y, 0.0));',
+    '  vec3 moonCol = vec3(0.98, 0.92, 0.85);',
+    '  float moonDot = max(dot(rd, md), 0.0);',
+    '  float moonAngle = acos(clamp(moonDot, 0.0, 1.0));',
+    '  float moonRadius = 0.04;',
+    '  float disc = smoothstep(moonRadius, moonRadius * 0.7, moonAngle);',
+    '  // Crater texture — project rd onto moon-tangent plane',
+    '  if (disc > 0.0) {',
+    '    vec3 up = vec3(0.0, 1.0, 0.0);',
+    '    vec3 right = normalize(cross(up, md));',
+    '    vec3 mup = cross(md, right);',
+    '    vec2 muv = vec2(dot(rd - md, right), dot(rd - md, mup)) * 25.0;',
+    '    float crater = hash(floor(muv * 2.0)) * 0.25;',
+    '    crater += hash(floor(muv * 4.0)) * 0.15;',
+    '    float darkening = 1.0 - crater * smoothstep(moonRadius * 0.9, moonRadius * 0.4, moonAngle);',
+    '    // Slight limb darkening',
+    '    float limb = smoothstep(0.0, moonRadius, moonAngle);',
+    '    darkening *= mix(1.0, 0.7, limb * limb);',
+    '    sky += moonCol * disc * 0.85 * darkening;',
+    '  }',
+    '  // Bloom (scales with moonGlow, disc does not)',
+    '  sky += moonCol * 0.25 * pow(moonDot, 40.0) * u_moonGlow;',
+    '  sky += moonCol * 1.2 * pow(moonDot, 400.0) * u_moonGlow;',
+    '  return sky;',
+    '}',
+    '',
+    'void main() {',
+    '  float aspect = u_res.x / u_res.y;',
+    '  vec2 uv = -1.0 + 2.0 * gl_FragCoord.xy / u_res;',
+    '  uv.x *= aspect;',
+    '  float t = u_time * u_rippleSpeed;',
+    '',
+    '  // ── 3D Camera — tilt: 0=horizontal, 0.5=default, 1=top-down ──',
+    '  float tiltRad = u_tilt * 0.7;',
+    '  vec3 ro = vec3(0.0, 8.0, 0.0);',
+    '  vec3 ww = normalize(vec3(0.0, -sin(tiltRad), cos(tiltRad)));',
+    '  vec3 uu = normalize(cross(vec3(0.0, 1.0, 0.0), ww));',
+    '  vec3 vv = normalize(cross(ww, uu));',
+    '  vec3 rd = normalize(uv.x * uu + uv.y * vv + 2.5 * ww);',
+    '',
+    '  vec3 md = moonDir();',
+    '  vec3 moonCol = vec3(0.98, 0.92, 0.85);',
+    '',
+    '  // ── Sky (above horizon) ──',
+    '  vec3 sky = skyColor(rd);',
+    '  vec3 col = sky;',
+    '',
+    '  // ── Ray-plane intersection (water at y=0) ──',
+    '  float dsea = -ro.y / rd.y;',
+    '',
+    '  if (dsea > 0.0) {',
+    '    vec3 wp = ro + dsea * rd;',
+    '',
+    '    // ── Sample waves ──',
+    '    vec4 s = sea(wp.xz, t);',
+    '    float h = s.x;',
+    '    vec3 nor = s.yzw;',
+    '',
+    '    // ── Mouse ripple — concentric rings that affect normals ──',
+    '    if (u_mouse.x > 0.0) {',
+    '      vec2 mUV = -1.0 + 2.0 * u_mouse / u_res;',
+    '      mUV.x *= aspect;',
+    '      vec3 mrd = normalize(mUV.x * uu + mUV.y * vv + 2.5 * ww);',
+    '      float mdsea = -ro.y / mrd.y;',
+    '      if (mdsea > 0.0) {',
+    '        vec3 mwp = ro + mdsea * mrd;',
+    '        vec2 mdelta = wp.xz - mwp.xz;',
+    '        float md2 = length(mdelta);',
+    '        float mfreq = 4.0;',
+    '        float mphase = md2 * mfreq - t * 5.0;',
+    '        float mamp = exp(-md2 * 0.15) * 0.4 * u_waves;',
+    '        h += sin(mphase) * mamp;',
+    '        // Analytical normal contribution from mouse ripple',
+    '        float mcos = cos(mphase) * mamp * mfreq;',
+    '        vec2 mgrad = md2 > 0.01 ? (mdelta / md2) * mcos : vec2(0.0);',
+    '        nor = normalize(nor + vec3(-mgrad.x, 0.0, -mgrad.y) * 2.0);',
+    '      }',
+    '    }',
+    '    // Flatten normal with distance (perspective detail fade)',
+    '    nor = mix(nor, vec3(0.0, 1.0, 0.0), smoothstep(0.0, 300.0, dsea));',
+    '',
+    '    // ── Fresnel ──',
+    '    float fre = clamp(1.0 - dot(-nor, rd), 0.0, 1.0);',
+    '    fre = pow(fre, 3.0);',
+    '',
+    '    // ── Diffuse moonlight ──',
+    '    float dif = mix(0.25, 1.0, max(dot(nor, md), 0.0));',
+    '',
+    '    // ── Reflection & refraction ──',
+    '    vec3 refl = skyColor(reflect(rd, nor));',
+    '    vec3 seaCol1 = vec3(0.05, 0.02, 0.01);',
+    '    vec3 seaCol2 = vec3(0.10, 0.06, 0.04);',
+    '    vec3 refr = seaCol1 + dif * moonCol * seaCol2 * 0.15 * u_moonGlow;',
+    '',
+    '    col = mix(refr, 0.9 * refl, fre);',
+    '',
+    '    // ── Wave crest highlight ──',
+    '    float atten = max(1.0 - dsea * dsea * 0.0005, 0.0);',
+    '    col += seaCol2 * (wp.y - h) * 1.5 * atten;',
+    '',
+    '    // ── Distance fog (fade to sky at horizon) ──',
+    '    col = mix(col, sky, 1.0 - exp(-0.008 * dsea));',
+    '  }',
+    '',
+    '  // ── Gamma ──',
+    '  col = pow(max(col, vec3(0.0)), vec3(0.85));',
+    '',
+    '  gl_FragColor = vec4(col, 1.0);',
+    '}',
+  ].join('\n');
+
+  function compile(type, src) {
+    var s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    return s;
+  }
+
+  var prog = gl.createProgram();
+  gl.attachShader(prog, compile(gl.VERTEX_SHADER, vertSrc));
+  gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, fragSrc));
+  gl.linkProgram(prog);
+  gl.useProgram(prog);
+
+  var buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+  var aPos = gl.getAttribLocation(prog, 'a_pos');
+  gl.enableVertexAttribArray(aPos);
+  gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+
+  var uTime = gl.getUniformLocation(prog, 'u_time');
+  var uRes = gl.getUniformLocation(prog, 'u_res');
+  var uRippleSpeed = gl.getUniformLocation(prog, 'u_rippleSpeed');
+  var uMoonGlow = gl.getUniformLocation(prog, 'u_moonGlow');
+  var uMouse = gl.getUniformLocation(prog, 'u_mouse');
+  var uTilt = gl.getUniformLocation(prog, 'u_tilt');
+  var uWaves = gl.getUniformLocation(prog, 'u_waves');
+  var rippleSpeedVal = 0.5;
+  var moonGlowVal = 1.0;
+  var tiltVal = 0.15;
+  var wavesVal = 1.0;
+  var mouseX = -1.0, mouseY = -1.0;
+
+  var dpr = Math.min(window.devicePixelRatio || 1, 2);
+  var needsResize = true;
+  var running = true;
+
+  function resize() {
+    needsResize = false;
+    var w = Math.round(canvas.clientWidth * dpr);
+    var h = Math.round(canvas.clientHeight * dpr);
+    if (canvas.width !== w || canvas.height !== h) {
+      canvas.width = w;
+      canvas.height = h;
+      gl.viewport(0, 0, w, h);
+      gl.uniform2f(uRes, canvas.width, canvas.height);
+    }
+  }
+
+  function render(now) {
+    if (!running) { requestAnimationFrame(render); return; }
+    if (needsResize) resize();
+    gl.uniform1f(uTime, prefersReduced ? 0.0 : now * 0.001);
+    gl.uniform1f(uRippleSpeed, rippleSpeedVal);
+    gl.uniform1f(uMoonGlow, moonGlowVal);
+    gl.uniform1f(uTilt, tiltVal);
+    gl.uniform1f(uWaves, wavesVal);
+    gl.uniform2f(uMouse, mouseX, mouseY);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+    requestAnimationFrame(render);
+  }
+
+  window.addEventListener('resize', function () {
+    needsResize = true;
+  });
+
+  resize();
+
+  requestAnimationFrame(render);
+
+  document.addEventListener('visibilitychange', function () {
+    running = !document.hidden;
+  });
+
+  canvas.addEventListener('mousemove', function(e) {
+    mouseX = e.clientX * dpr;
+    mouseY = (canvas.clientHeight - e.clientY) * dpr;
+  });
+  canvas.addEventListener('mouseleave', function() {
+    mouseX = -1.0; mouseY = -1.0;
+  });
+  canvas.addEventListener('touchstart', function(e) {
+    var touch = e.touches[0];
+    mouseX = touch.clientX * dpr;
+    mouseY = (canvas.clientHeight - touch.clientY) * dpr;
+  }, { passive: true });
+  canvas.addEventListener('touchmove', function(e) {
+    var touch = e.touches[0];
+    mouseX = touch.clientX * dpr;
+    mouseY = (canvas.clientHeight - touch.clientY) * dpr;
+  }, { passive: true });
+  canvas.addEventListener('touchend', function() {
+    mouseX = -1.0; mouseY = -1.0;
+  });
+
+  window.addEventListener('message', function(e) {
+    if (e.data && e.data.type === 'param') {
+      switch (e.data.name) {
+        case 'RIPPLE_SPEED': rippleSpeedVal = e.data.value; break;
+        case 'MOON_GLOW': moonGlowVal = e.data.value; break;
+        case 'CAMERA_TILT': tiltVal = e.data.value; break;
+        case 'WAVE_INTENSITY': wavesVal = e.data.value; break;
+      }
+    }
+  });
+})();
+</script>
+</body>
+</html>

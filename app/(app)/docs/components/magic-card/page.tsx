@@ -53,7 +53,7 @@ export default async function MagicCardDocsPage() {
         description={
           <p className="leading-relaxed text-muted-foreground">
             A spotlight that follows the pointer and highlights the border on
-            hover — gradient fill or soft orb glow.
+            hover, gradient fill or soft orb glow.
           </p>
         }
       />

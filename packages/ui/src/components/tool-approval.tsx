@@ -104,7 +104,7 @@ function ToolApprovalCode({
       code={code}
       language={language}
       className={cn(
-        // Plain wrapped mono — no chrome, no horizontal scroll.
+        // Plain wrapped mono. No chrome, no horizontal scroll.
         "overflow-x-visible whitespace-pre-wrap break-all border-0 bg-transparent p-0",
         className
       )}

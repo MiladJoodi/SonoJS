@@ -1,0 +1,559 @@
+<!-- TITLE: 020 Smoke Simulation -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>020 — Smoke Simulation · creative-lab</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 100%; height: 100%; overflow: hidden; }
+    body {
+      background: #03050a;
+      color: #e6edf3;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    canvas { display: block; width: 100%; height: 100%; cursor: crosshair; }
+    .panel {
+      position: fixed;
+      top: 16px;
+      left: 16px;
+      width: 344px;
+      max-width: calc(100vw - 32px);
+      padding: 14px 16px;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 14px;
+      background: rgba(10, 12, 16, 0.76);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 20px 45px rgba(0,0,0,0.38);
+      z-index: 2;
+    }
+    .panel h1 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .panel p,
+    .panel label,
+    .panel span,
+    .panel select,
+    .panel button,
+    .panel input {
+      font-size: 12px;
+      line-height: 1.6;
+      color: rgba(230, 237, 243, 0.84);
+    }
+    .controls {
+      display: grid;
+      grid-template-columns: 108px 1fr 54px;
+      gap: 8px 10px;
+      align-items: center;
+      margin: 12px 0 10px;
+    }
+    input[type="range"] {
+      width: 100%;
+      accent-color: #7dd3fc;
+    }
+    select,
+    button {
+      width: 100%;
+      min-height: 32px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px;
+      color: #f8fafc;
+      padding: 6px 8px;
+    }
+    button {
+      margin-top: 10px;
+      cursor: pointer;
+    }
+    .meta {
+      display: grid;
+      grid-template-columns: auto auto;
+      gap: 2px 16px;
+      font-family: "SF Mono", "Fira Code", monospace;
+    }
+    .meta strong { color: #7dd3fc; font-weight: 500; }
+    .footer {
+      position: fixed;
+      right: 16px;
+      bottom: 12px;
+      font-size: 11px;
+      color: rgba(255,255,255,0.38);
+      font-family: monospace;
+      z-index: 2;
+    }
+    .footer a { color: inherit; text-decoration: none; }
+    .footer a:hover { color: rgba(255,255,255,0.72); }
+  
+    html.embed #ui,
+    html.embed #info,
+    html.embed #controls,
+    html.embed #stats,
+    html.embed #hint,
+    html.embed .panel,
+    html.embed header,
+    html.embed footer { display: none !important; }
+  </style>
+  <script>if(/\bembed=1\b/.test(location.search))document.documentElement.classList.add("embed")</script>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+
+<div class="panel">
+  <h1>Smoke Simulation</h1>
+  <p>Drag to inject density and momentum into a simplified fluid field. Diffusion, buoyancy, and curl confinement keep the plume soft, colorful, and alive.</p>
+  <div class="controls">
+    <label for="brush">Brush size</label>
+    <input id="brush" type="range" min="10" max="120" step="1" value="42">
+    <span id="brushValue">42</span>
+
+    <label for="velocity">Velocity scale</label>
+    <input id="velocity" type="range" min="0.5" max="8" step="0.1" value="3.2">
+    <span id="velocityValue">3.2</span>
+
+    <label for="diffusion">Diffusion</label>
+    <input id="diffusion" type="range" min="0.001" max="0.08" step="0.001" value="0.016">
+    <span id="diffusionValue">0.016</span>
+
+    <label for="vorticity">Vorticity</label>
+    <input id="vorticity" type="range" min="0" max="5" step="0.1" value="1.9">
+    <span id="vorticityValue">1.9</span>
+
+    <label for="mode">Color mode</label>
+    <select id="mode">
+      <option value="smoke">Smoke</option>
+      <option value="fire">Fire</option>
+      <option value="neon">Neon</option>
+    </select>
+    <span id="modeValue">SMK</span>
+  </div>
+  <div class="meta">
+    <span>Resolution</span><strong id="resolutionLabel">0×0</strong>
+    <span>Pointer</span><strong id="pointerLabel">idle</strong>
+    <span>Density</span><strong id="densityLabel">0.00</strong>
+  </div>
+  <button id="clear">Clear</button>
+</div>
+
+<script>
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d', { alpha: false });
+const brushInput = document.getElementById('brush');
+const velocityInput = document.getElementById('velocity');
+const diffusionInput = document.getElementById('diffusion');
+const vorticityInput = document.getElementById('vorticity');
+const modeInput = document.getElementById('mode');
+const clearButton = document.getElementById('clear');
+const brushValue = document.getElementById('brushValue');
+const velocityValue = document.getElementById('velocityValue');
+const diffusionValue = document.getElementById('diffusionValue');
+const vorticityValue = document.getElementById('vorticityValue');
+const modeValue = document.getElementById('modeValue');
+const resolutionLabel = document.getElementById('resolutionLabel');
+const pointerLabel = document.getElementById('pointerLabel');
+const densityLabel = document.getElementById('densityLabel');
+
+let width = 0;
+let height = 0;
+let dpr = 1;
+let cols = 0;
+let rows = 0;
+let cellSize = 0;
+let density = new Float32Array(0);
+let densityNext = new Float32Array(0);
+let tempField = new Float32Array(0);
+let vx = new Float32Array(0);
+let vy = new Float32Array(0);
+let vxNext = new Float32Array(0);
+let vyNext = new Float32Array(0);
+let curl = new Float32Array(0);
+let divergence = new Float32Array(0);
+let pressure = new Float32Array(0);
+let pressureNext = new Float32Array(0);
+let imageData = null;
+const bufferCanvas = document.createElement('canvas');
+const bufferCtx = bufferCanvas.getContext('2d');
+let lastTime = performance.now();
+let accumulator = 0;
+
+const pointer = {
+  x: 0,
+  y: 0,
+  lastX: 0,
+  lastY: 0,
+  down: false,
+  active: false,
+};
+
+function clamp(value, min, max) {
+  return Math.max(min, Math.min(max, value));
+}
+
+function index(x, y) {
+  return y * cols + x;
+}
+
+function bilerp(field, x, y) {
+  const x0 = clamp(Math.floor(x), 0, cols - 1);
+  const y0 = clamp(Math.floor(y), 0, rows - 1);
+  const x1 = clamp(x0 + 1, 0, cols - 1);
+  const y1 = clamp(y0 + 1, 0, rows - 1);
+  const tx = clamp(x - x0, 0, 1);
+  const ty = clamp(y - y0, 0, 1);
+  const a = field[index(x0, y0)];
+  const b = field[index(x1, y0)];
+  const c = field[index(x0, y1)];
+  const d = field[index(x1, y1)];
+  return a * (1 - tx) * (1 - ty) + b * tx * (1 - ty) + c * (1 - tx) * ty + d * tx * ty;
+}
+
+function allocate() {
+  cellSize = Math.max(5, Math.round(Math.min(width, height) / 140));
+  cols = Math.max(70, Math.floor(width / cellSize));
+  rows = Math.max(44, Math.floor(height / cellSize));
+  const count = cols * rows;
+  density = new Float32Array(count);
+  densityNext = new Float32Array(count);
+  tempField = new Float32Array(count);
+  vx = new Float32Array(count);
+  vy = new Float32Array(count);
+  vxNext = new Float32Array(count);
+  vyNext = new Float32Array(count);
+  curl = new Float32Array(count);
+  divergence = new Float32Array(count);
+  pressure = new Float32Array(count);
+  pressureNext = new Float32Array(count);
+  imageData = ctx.createImageData(cols, rows);
+  bufferCanvas.width = cols;
+  bufferCanvas.height = rows;
+  resolutionLabel.textContent = `${cols}×${rows}`;
+  seedPlume();
+}
+
+function seedPlume() {
+  for (let y = Math.floor(rows * 0.72); y < rows; y++) {
+    for (let x = Math.floor(cols * 0.32); x < Math.floor(cols * 0.68); x++) {
+      const id = index(x, y);
+      const edge = Math.abs(x - cols * 0.5) / (cols * 0.18);
+      density[id] = Math.max(0, 0.18 - edge * 0.18) * (1 - (y - rows * 0.72) / Math.max(1, rows * 0.28));
+      vy[id] = -0.4;
+    }
+  }
+}
+
+function resize() {
+  dpr = Math.min(window.devicePixelRatio || 1, 2);
+  width = window.innerWidth;
+  height = window.innerHeight;
+  canvas.width = Math.floor(width * dpr);
+  canvas.height = Math.floor(height * dpr);
+  canvas.style.width = `${width}px`;
+  canvas.style.height = `${height}px`;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  allocate();
+}
+
+function diffuse(field, target, rate, dt) {
+  target.set(field);
+  const alpha = rate * dt * cols * rows * 0.0012;
+  for (let iteration = 0; iteration < 5; iteration++) {
+    for (let y = 1; y < rows - 1; y++) {
+      for (let x = 1; x < cols - 1; x++) {
+        const id = index(x, y);
+        target[id] = (field[id] + alpha * (
+          target[index(x - 1, y)] +
+          target[index(x + 1, y)] +
+          target[index(x, y - 1)] +
+          target[index(x, y + 1)]
+        )) / (1 + alpha * 4);
+      }
+    }
+  }
+}
+
+function advect(field, target, dt) {
+  const scale = dt * 0.9;
+  for (let y = 0; y < rows; y++) {
+    for (let x = 0; x < cols; x++) {
+      const id = index(x, y);
+      const px = x - vx[id] * scale;
+      const py = y - vy[id] * scale;
+      target[id] = bilerp(field, px, py);
+    }
+  }
+}
+
+function computeCurl() {
+  for (let y = 1; y < rows - 1; y++) {
+    for (let x = 1; x < cols - 1; x++) {
+      const id = index(x, y);
+      const duDy = (vx[index(x, y + 1)] - vx[index(x, y - 1)]) * 0.5;
+      const dvDx = (vy[index(x + 1, y)] - vy[index(x - 1, y)]) * 0.5;
+      curl[id] = dvDx - duDy;
+    }
+  }
+}
+
+function applyVorticity(dt) {
+  computeCurl();
+  const strength = Number(vorticityInput.value);
+  for (let y = 2; y < rows - 2; y++) {
+    for (let x = 2; x < cols - 2; x++) {
+      const id = index(x, y);
+      const left = Math.abs(curl[index(x - 1, y)]);
+      const right = Math.abs(curl[index(x + 1, y)]);
+      const up = Math.abs(curl[index(x, y - 1)]);
+      const down = Math.abs(curl[index(x, y + 1)]);
+      let nx = right - left;
+      let ny = down - up;
+      const length = Math.hypot(nx, ny) || 1;
+      nx /= length;
+      ny /= length;
+      const force = curl[id] * strength;
+      vx[id] += nx * force * dt;
+      vy[id] += ny * force * dt;
+    }
+  }
+}
+
+function project() {
+  divergence.fill(0);
+  pressure.fill(0);
+  pressureNext.fill(0);
+
+  for (let y = 1; y < rows - 1; y++) {
+    for (let x = 1; x < cols - 1; x++) {
+      const id = index(x, y);
+      divergence[id] = -0.5 * (
+        vx[index(x + 1, y)] - vx[index(x - 1, y)] +
+        vy[index(x, y + 1)] - vy[index(x, y - 1)]
+      );
+    }
+  }
+
+  for (let iteration = 0; iteration < 14; iteration++) {
+    for (let y = 1; y < rows - 1; y++) {
+      for (let x = 1; x < cols - 1; x++) {
+        const id = index(x, y);
+        pressureNext[id] = (
+          divergence[id] +
+          pressure[index(x - 1, y)] +
+          pressure[index(x + 1, y)] +
+          pressure[index(x, y - 1)] +
+          pressure[index(x, y + 1)]
+        ) * 0.25;
+      }
+    }
+    const swap = pressure;
+    pressure = pressureNext;
+    pressureNext = swap;
+  }
+
+  for (let y = 1; y < rows - 1; y++) {
+    for (let x = 1; x < cols - 1; x++) {
+      const id = index(x, y);
+      vx[id] -= 0.5 * (pressure[index(x + 1, y)] - pressure[index(x - 1, y)]);
+      vy[id] -= 0.5 * (pressure[index(x, y + 1)] - pressure[index(x, y - 1)]);
+    }
+  }
+}
+
+function applyForces(dt) {
+  for (let y = 0; y < rows; y++) {
+    for (let x = 0; x < cols; x++) {
+      const id = index(x, y);
+      const buoyancy = density[id] * 0.65;
+      vy[id] -= (0.22 + buoyancy) * dt;
+      vx[id] += Math.sin(performance.now() * 0.0003 + y * 0.12) * 0.005;
+      density[id] *= 0.996;
+    }
+  }
+}
+
+function injectFromPointer() {
+  if (!pointer.down) {
+    return;
+  }
+  const radius = Number(brushInput.value) / cellSize;
+  const velocityScale = Number(velocityInput.value) * 0.12;
+  const px = (pointer.x / width) * cols;
+  const py = (pointer.y / height) * rows;
+  const dx = (pointer.x - pointer.lastX) * velocityScale;
+  const dy = (pointer.y - pointer.lastY) * velocityScale;
+
+  for (let y = Math.floor(py - radius); y <= Math.ceil(py + radius); y++) {
+    if (y < 1 || y >= rows - 1) {
+      continue;
+    }
+    for (let x = Math.floor(px - radius); x <= Math.ceil(px + radius); x++) {
+      if (x < 1 || x >= cols - 1) {
+        continue;
+      }
+      const dist = Math.hypot(x - px, y - py);
+      if (dist > radius) {
+        continue;
+      }
+      const falloff = 1 - dist / Math.max(0.001, radius);
+      const id = index(x, y);
+      density[id] = clamp(density[id] + falloff * 0.14, 0, 2.4);
+      vx[id] += dx * falloff;
+      vy[id] += dy * falloff - falloff * 0.08;
+    }
+  }
+}
+
+function step(dt) {
+  applyForces(dt);
+  injectFromPointer();
+
+  diffuse(vx, vxNext, Number(diffusionInput.value) * 0.55, dt);
+  diffuse(vy, vyNext, Number(diffusionInput.value) * 0.55, dt);
+  [vx, vxNext] = [vxNext, vx];
+  [vy, vyNext] = [vyNext, vy];
+
+  applyVorticity(dt);
+  project();
+
+  advect(vx, vxNext, dt);
+  advect(vy, vyNext, dt);
+  [vx, vxNext] = [vxNext, vx];
+  [vy, vyNext] = [vyNext, vy];
+  project();
+
+  diffuse(density, tempField, Number(diffusionInput.value), dt);
+  advect(tempField, densityNext, dt);
+  [density, densityNext] = [densityNext, density];
+}
+
+function palette(value, mode) {
+  const t = clamp(value, 0, 1.2);
+  if (mode === 'fire') {
+    return [
+      Math.min(255, 80 + t * 220),
+      Math.min(255, t * t * 210),
+      Math.min(255, Math.max(0, (t - 0.3) * 140)),
+    ];
+  }
+  if (mode === 'neon') {
+    return [
+      Math.min(255, 30 + t * 80),
+      Math.min(255, 110 + t * 200),
+      Math.min(255, 180 + t * 190),
+    ];
+  }
+  return [
+    Math.min(255, 18 + t * 95),
+    Math.min(255, 28 + t * 150),
+    Math.min(255, 45 + t * 185),
+  ];
+}
+
+function render() {
+  const pixels = imageData.data;
+  let totalDensity = 0;
+  const mode = modeInput.value;
+  for (let y = 0; y < rows; y++) {
+    for (let x = 0; x < cols; x++) {
+      const id = index(x, y);
+      const amount = density[id];
+      totalDensity += amount;
+      const [r, g, b] = palette(amount, mode);
+      const velocityGlow = clamp(Math.hypot(vx[id], vy[id]) * 18, 0, 55);
+      const offset = id * 4;
+      pixels[offset] = clamp(r + velocityGlow, 0, 255);
+      pixels[offset + 1] = clamp(g + velocityGlow * 0.6, 0, 255);
+      pixels[offset + 2] = clamp(b + velocityGlow * 0.4, 0, 255);
+      pixels[offset + 3] = 255;
+    }
+  }
+
+  ctx.fillStyle = '#03050a';
+  ctx.fillRect(0, 0, width, height);
+  bufferCtx.putImageData(imageData, 0, 0);
+  ctx.save();
+  ctx.globalCompositeOperation = 'lighter';
+  ctx.filter = 'blur(12px) saturate(130%)';
+  ctx.drawImage(bufferCanvas, 0, 0, width, height);
+  ctx.filter = 'blur(0px)';
+  ctx.globalAlpha = 0.96;
+  ctx.drawImage(bufferCanvas, 0, 0, width, height);
+  ctx.restore();
+
+  densityLabel.textContent = (totalDensity / Math.max(1, cols * rows)).toFixed(2);
+}
+
+function frame(now) {
+  const dt = Math.min(0.022, (now - lastTime) / 1000);
+  lastTime = now;
+  accumulator += dt;
+  while (accumulator >= 1 / 60) {
+    step(1 / 60);
+    accumulator -= 1 / 60;
+  }
+  render();
+  requestAnimationFrame(frame);
+}
+
+function clearSimulation() {
+  density.fill(0);
+  densityNext.fill(0);
+  tempField.fill(0);
+  vx.fill(0);
+  vy.fill(0);
+  vxNext.fill(0);
+  vyNext.fill(0);
+  seedPlume();
+}
+
+function updateLabels() {
+  brushValue.textContent = brushInput.value;
+  velocityValue.textContent = velocityInput.value;
+  diffusionValue.textContent = diffusionInput.value;
+  vorticityValue.textContent = vorticityInput.value;
+  modeValue.textContent = modeInput.value.slice(0, 3).toUpperCase();
+}
+
+canvas.addEventListener('pointerdown', event => {
+  pointer.down = true;
+  pointer.active = true;
+  pointer.x = pointer.lastX = event.clientX;
+  pointer.y = pointer.lastY = event.clientY;
+  pointerLabel.textContent = `${Math.round(pointer.x)},${Math.round(pointer.y)}`;
+});
+
+canvas.addEventListener('pointermove', event => {
+  pointer.active = true;
+  pointer.lastX = pointer.x;
+  pointer.lastY = pointer.y;
+  pointer.x = event.clientX;
+  pointer.y = event.clientY;
+  pointerLabel.textContent = `${Math.round(pointer.x)},${Math.round(pointer.y)}`;
+});
+
+canvas.addEventListener('pointerup', () => {
+  pointer.down = false;
+});
+window.addEventListener('pointerup', () => {
+  pointer.down = false;
+});
+
+canvas.addEventListener('pointerleave', () => {
+  pointer.down = false;
+  pointer.active = false;
+  pointerLabel.textContent = 'idle';
+});
+
+[brushInput, velocityInput, diffusionInput, vorticityInput, modeInput].forEach(input => {
+  input.addEventListener('input', updateLabels);
+});
+clearButton.addEventListener('click', clearSimulation);
+window.addEventListener('resize', resize);
+
+updateLabels();
+resize();
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>

@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Navier–Stokes</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; overflow: hidden; background: #0a0a0a; }
+  canvas { display: block; width: 100%; height: 100%; touch-action: none; }
+  .label {
+    position: fixed; top: 20px; left: 24px; z-index: 10;
+    font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+    font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+    color: rgba(200, 149, 108, 0.5); pointer-events: none; user-select: none;
+  }
+  .fallback { position: fixed; inset: 0; display: grid; place-content: center;
+    padding: 24px; color: #c8956c; font: 14px/1.6 system-ui, sans-serif; }
+  .fallback[hidden] { display: none; }
+  html.embed .label { display: none; }
+</style>
+<script>if(/\bembed=1\b/.test(location.search))document.documentElement.classList.add("embed")</script>
+</head>
+<body>
+<div class="label">Navier–Stokes</div>
+<canvas id="canvas" aria-label="A turbulent fluid jet. Move your cursor or drag to stir the fluid."></canvas>
+<p class="fallback" hidden>This fluid simulation needs WebGL 2. Try a browser with hardware acceleration enabled.</p>
+<script>
+/*
+ * Navier–Stokes — a driven, incompressible 2D fluid with passive dye.
+ * Semi-Lagrangian advection, vorticity confinement, Jacobi pressure projection.
+ * This is a visual numerical approximation, not a model of the 3D regularity problem.
+ * Visual reference: C. Fukushima & J. Westerweel, TU Delft, turbulent jet (2007):
+ * https://commons.wikimedia.org/wiki/File:False_color_image_of_the_far_field_of_a_submerged_turbulent_jet.jpg
+ * No source image pixels are used. All imagery is generated in real time.
+ */
+(function () {
+  'use strict';
+  const canvas = document.getElementById('canvas');
+  const fallback = document.querySelector('.fallback');
+  const gl = canvas.getContext('webgl2', { alpha: false, antialias: false, depth: false, stencil: false });
+  if (!gl || !gl.getExtension('EXT_color_buffer_float')) { fallback.hidden = false; return; }
+  const linear = !!gl.getExtension('OES_texture_float_linear');
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  const settings = { FLOW: 1, TURBULENCE: 18, WIDTH: 0.13, SPECTRUM: 1, REVERSE: 0 };
+  const limits = { FLOW: [0, 2], TURBULENCE: [0, 35], WIDTH: [0.06, 0.25], SPECTRUM: [0, 1], REVERSE: [0, 1] };
+  let width = 0, height = 0, aspect = 1, simW = 0, simH = 0;
+  let velocity, dye, pressure, curl, divergence;
+  let time = 0, previous = 0, raf = 0, lost = false, resizePending = true;
+  const pointer = { x: -1, y: -1, dx: 0, dy: 0, active: false };
+  const targets = [];
+  const vertex = `#version 300 es
+    in vec2 position;
+    out vec2 uv;
+    void main() { uv = position * 0.5 + 0.5; gl_Position = vec4(position, 0., 1.); }
+  `;
+  const common = `#version 300 es
+    precision highp float;
+    precision highp sampler2D;
+    in vec2 uv;
+    out vec4 color;
+    uniform sampler2D source, flow, field;
+    uniform vec2 texel;
+    uniform float dt, t, aspect, turbulence, jetWidth, spectrum, reverseFlow;
+    uniform vec4 pointer;
+    uniform float pointerActive;
+    vec4 sampleLinear(sampler2D image, vec2 p) {
+      ${linear ? 'return texture(image, p);' : `
+      vec2 size = vec2(textureSize(image, 0));
+      vec2 q = p * size - 0.5, f = fract(q), base = (floor(q) + 0.5) / size;
+      return mix(mix(texture(image, base), texture(image, base + vec2(1.,0.) / size), f.x),
+        mix(texture(image, base + vec2(0.,1.) / size), texture(image, base + 1. / size), f.x), f.y);`}
+    }
+    float hash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
+    float noise(vec2 p) {
+      vec2 i = floor(p), f = fract(p); f = f*f*(3.-2.*f);
+      return mix(mix(hash(i), hash(i+vec2(1,0)), f.x),
+        mix(hash(i+vec2(0,1)), hash(i+vec2(1,1)), f.x), f.y);
+    }
+    // Curling coordinate map seeds an already-developed jet on load and resize.
+    vec2 seedPosition(vec2 p) {
+      for (int i=0; i<12; i++) {
+        float n = float(i), x = 0.13 + n * 0.085;
+        vec2 center = vec2(x * aspect, 0.5 + sin(n*2.4)*(.065 + x*.14));
+        vec2 q = p-center;
+        float radius = .065+x*.065;
+        float angle = (mod(n,2.)*2.-1.) * 4.8 * exp(-dot(q,q)/(radius*radius));
+        p = center + mat2(cos(angle),-sin(angle),sin(angle),cos(angle))*q;
+      }
+      return p;
+    }
+  `;
+  function program(body) {
+    const p = gl.createProgram();
+    for (const [type, code] of [[gl.VERTEX_SHADER, vertex], [gl.FRAGMENT_SHADER, common + body]]) {
+      const s = gl.createShader(type);
+      gl.shaderSource(s, code); gl.compileShader(s);
+      if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s));
+      gl.attachShader(p, s); gl.deleteShader(s);
+    }
+    gl.bindAttribLocation(p, 0, 'position'); gl.linkProgram(p);
+    if (!gl.getProgramParameter(p, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(p));
+    const uniforms = {};
+    for (let i=0; i<gl.getProgramParameter(p, gl.ACTIVE_UNIFORMS); i++) {
+      const name = gl.getActiveUniform(p, i).name;
+      uniforms[name] = gl.getUniformLocation(p, name);
+    }
+    return { p, uniforms };
+  }
+  let shaders;
+  try {
+    shaders = {
+      seedVelocity: program(`void main() {
+        vec2 p = vec2(uv.x*aspect, uv.y), v = vec2(30.,0.);
+        for (int i=0; i<12; i++) {
+          float n=float(i), x=.13+n*.085;
+          vec2 d=p-vec2(x*aspect,.5+sin(n*2.4)*(.065+x*.14));
+          float r=.065+x*.065;
+          v += vec2(-d.y,d.x) * (mod(n,2.)*2.-1.) * 800. * exp(-dot(d,d)/(r*r));
+        }
+        color=vec4(v,0,1);
+      }`),
+      seedDye: program(`void main() {
+        vec2 p=seedPosition(vec2(uv.x*aspect,uv.y));
+        float y=p.y-.5 + (noise(p*9.)-.5)*.085;
+        float w=jetWidth*(.38+uv.x*.95);
+        float band=exp(-pow(abs(y)/w, 4.));
+        float thread=.65+.24*sin(p.y*230.+noise(p*22.)*5.)+.11*noise(p*95.);
+        float d=band*thread*(.95-uv.x*.35);
+        color=vec4(d,d*(.5+.5*sin(p.x*14.+p.y*32.)),0,1);
+      }`),
+      advectVelocity: program(`void main() {
+        vec2 v=texture(flow,uv).xy;
+        color=vec4(sampleLinear(source,uv-dt*v*texel).xy/(1.+dt*.12),0,1);
+      }`),
+      force: program(`void main() {
+        vec2 v=texture(source,uv).xy;
+        float center=.5 + sin(t*2.3)*.017 + sin(t*4.7)*.008;
+        float j=exp(-pow((uv.y-center)/(jetWidth*.43),4.));
+        float inlet=exp(-uv.x*uv.x/0.0025);
+        v=mix(v,vec2(85.*j+10.,sin(t*6.+uv.y*20.)*8.*j),inlet*.32);
+        // Small alternating shear perturbations make the jet shed eddies.
+        v.y+=dt*turbulence*2.5*sin(uv.x*38.-t*5.)*exp(-pow((uv.y-.5)/(jetWidth*1.8),2.));
+        if(pointerActive>0.) {
+          vec2 d=(uv-pointer.xy)*vec2(aspect,1.);
+          float brush=exp(-dot(d,d)/.0035);
+          v+=brush*(pointer.zw*900.+vec2(-d.y,d.x)*95.)*dt*60.;
+        }
+        color=vec4(clamp(v,vec2(-180.),vec2(180.)),0,1);
+      }`),
+      curl: program(`void main() {
+        float l=texture(source,uv-vec2(texel.x,0)).y;
+        float r=texture(source,uv+vec2(texel.x,0)).y;
+        float b=texture(source,uv-vec2(0,texel.y)).x;
+        float u=texture(source,uv+vec2(0,texel.y)).x;
+        color=vec4(.5*(r-l-u+b),0,0,1);
+      }`),
+      confine: program(`void main() {
+        float l=abs(texture(field,uv-vec2(texel.x,0)).x);
+        float r=abs(texture(field,uv+vec2(texel.x,0)).x);
+        float b=abs(texture(field,uv-vec2(0,texel.y)).x);
+        float u=abs(texture(field,uv+vec2(0,texel.y)).x);
+        vec2 n=vec2(u-b,l-r); n/=length(n)+.0001;
+        vec2 v=texture(source,uv).xy + n*texture(field,uv).x*turbulence*dt;
+        color=vec4(clamp(v,vec2(-180.),vec2(180.)),0,1);
+      }`),
+      divergence: program(`void main() {
+        float l=texture(source,uv-vec2(texel.x,0)).x;
+        float r=texture(source,uv+vec2(texel.x,0)).x;
+        float b=texture(source,uv-vec2(0,texel.y)).y;
+        float u=texture(source,uv+vec2(0,texel.y)).y;
+        color=vec4(.5*(r-l+u-b),0,0,1);
+      }`),
+      pressure: program(`void main() {
+        float l=texture(source,uv-vec2(texel.x,0)).x;
+        float r=texture(source,uv+vec2(texel.x,0)).x;
+        float b=texture(source,uv-vec2(0,texel.y)).x;
+        float u=texture(source,uv+vec2(0,texel.y)).x;
+        color=vec4((l+r+b+u-texture(field,uv).x)*.25,0,0,1);
+      }`),
+      project: program(`void main() {
+        float l=texture(field,uv-vec2(texel.x,0)).x;
+        float r=texture(field,uv+vec2(texel.x,0)).x;
+        float b=texture(field,uv-vec2(0,texel.y)).x;
+        float u=texture(field,uv+vec2(0,texel.y)).x;
+        color=vec4(texture(source,uv).xy-.5*vec2(r-l,u-b),0,1);
+      }`),
+      advectDye: program(`void main() {
+        vec2 v=sampleLinear(flow,uv).xy;
+        vec2 back=uv-dt*v*texel;
+        vec2 d=sampleLinear(source,back).xy*exp(-dt*.09);
+        float center=.5+sin(t*2.3)*.017+sin(t*4.7)*.008;
+        float jet=exp(-pow((uv.y-center)/(jetWidth*.43),4.));
+        float stripes=.72+.28*sin(uv.y*280.+t*3.+sin(uv.y*115.-t*2.));
+        float inlet=(1.-smoothstep(.015,.045,uv.x))*jet;
+        d=mix(d,vec2(stripes,stripes*(.5+.5*sin(t*1.7+uv.y*37.))),inlet);
+        if(pointerActive>0.) {
+          vec2 p=(uv-pointer.xy)*vec2(aspect,1.);
+          d+=exp(-dot(p,p)/.0014)*vec2(.6,.3)*dt*3.;
+        }
+        // Open inlet/outlet; fade dye before it reaches the top and bottom edges.
+        d*=smoothstep(0.,.035,uv.y)*smoothstep(0.,.035,1.-uv.y);
+        color=vec4(clamp(d,0.,1.4),0,1);
+      }`),
+      display: program(`void main() {
+        vec2 displayUV=vec2(mix(uv.x,1.-uv.x,reverseFlow),uv.y);
+        vec2 d=sampleLinear(source,displayUV).xy;
+        float density=clamp(d.x*1.5,0.,1.);
+        vec3 col=vec3(.0392157);
+        col=mix(col,vec3(.20,.052,.014),smoothstep(.015,.18,density));
+        col=mix(col,vec3(.70,.235,.055),smoothstep(.12,.52,density));
+        col=mix(col,vec3(.96,.65,.27),smoothstep(.42,.83,density));
+        col=mix(col,vec3(1.,.91,.65),smoothstep(.76,1.,density));
+        // A second advected tracer reveals fine layers inside the same density.
+        col*=.8+.2*smoothstep(0.,.7,d.y);
+        vec3 heat=clamp(1.5-abs(4.*density-vec3(3.,2.,1.)),0.,1.);
+        heat=mix(vec3(.012,.024,.45),heat,smoothstep(0.,.09,density));
+        color=vec4(mix(col,heat,spectrum),1.);
+      }`)
+    };
+  } catch (error) {
+     fallback.hidden = false; return;
+  }
+  const triangle = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, triangle);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 3,-1, -1,3]), gl.STATIC_DRAW);
+  gl.enableVertexAttribArray(0); gl.vertexAttribPointer(0,2,gl.FLOAT,false,0,0);
+  gl.disable(gl.BLEND); gl.disable(gl.DEPTH_TEST);
+
+  function target(w,h) {
+    const texture=gl.createTexture(), fbo=gl.createFramebuffer();
+    gl.bindTexture(gl.TEXTURE_2D,texture);
+    gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,linear?gl.LINEAR:gl.NEAREST);
+    gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,linear?gl.LINEAR:gl.NEAREST);
+    gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
+    gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA16F,w,h,0,gl.RGBA,gl.HALF_FLOAT,null);
+    gl.bindFramebuffer(gl.FRAMEBUFFER,fbo);
+    gl.framebufferTexture2D(gl.FRAMEBUFFER,gl.COLOR_ATTACHMENT0,gl.TEXTURE_2D,texture,0);
+    if(gl.checkFramebufferStatus(gl.FRAMEBUFFER)!==gl.FRAMEBUFFER_COMPLETE) {
+      gl.deleteTexture(texture); gl.deleteFramebuffer(fbo); throw new Error('Float framebuffer unavailable');
+    }
+    gl.clearColor(0,0,0,0); gl.clear(gl.COLOR_BUFFER_BIT);
+    const result={ texture,fbo,w,h }; targets.push(result); return result;
+  }
+  function pair(w,h) { return { read:target(w,h),write:target(w,h),swap() { [this.read,this.write]=[this.write,this.read]; } }; }
+  function draw(shader,output,textures={},delta=0) {
+    gl.useProgram(shader.p);
+    const u=shader.uniforms;
+    gl.uniform2f(u.texel,1/simW,1/simH);
+    gl.uniform1f(u.dt,delta); gl.uniform1f(u.t,time);
+    gl.uniform1f(u.aspect,aspect); gl.uniform1f(u.turbulence,settings.TURBULENCE);
+    gl.uniform1f(u.jetWidth,settings.WIDTH); gl.uniform1f(u.spectrum,settings.SPECTRUM);
+    // Mirror the presentation and input together; simulation coordinates stay consistent.
+    const reverse=settings.REVERSE>=.5;
+    gl.uniform1f(u.reverseFlow,reverse?1:0);
+    gl.uniform4f(u.pointer,reverse?1-pointer.x:pointer.x,pointer.y,reverse?-pointer.dx:pointer.dx,pointer.dy);
+    gl.uniform1f(u.pointerActive,pointer.active?1:0);
+    let unit=0;
+    for(const [name,texture] of Object.entries(textures)) {
+      gl.activeTexture(gl.TEXTURE0+unit); gl.bindTexture(gl.TEXTURE_2D,texture.texture);
+      gl.uniform1i(u[name],unit++);
+    }
+    gl.bindFramebuffer(gl.FRAMEBUFFER,output?output.fbo:null);
+    gl.viewport(0,0,output?output.w:width,output?output.h:height);
+    gl.drawArrays(gl.TRIANGLES,0,3);
+  }
+  function resize() {
+    resizePending=false;
+    const dpr=Math.min(devicePixelRatio||1,2);
+    // Cap display area as well as simulation sizes so large monitors stay affordable.
+    const scale=Math.min(dpr,Math.sqrt(2200000/(innerWidth*innerHeight)));
+    width=canvas.width=Math.max(1,Math.round(innerWidth*scale));
+    height=canvas.height=Math.max(1,Math.round(innerHeight*scale)); aspect=width/height;
+    const base=Math.min(192,480/Math.max(aspect,1));
+    const sw=Math.max(1,Math.round(base*aspect));
+    const sh=Math.max(1,Math.round(base));
+    if(sw===simW && sh===simH) return;
+    simW=sw; simH=sh;
+    for(const old of targets) { gl.deleteTexture(old.texture); gl.deleteFramebuffer(old.fbo); }
+    targets.length=0;
+    velocity=pair(simW,simH); pressure=pair(simW,simH);
+    curl=target(simW,simH); divergence=target(simW,simH);
+    const dyeScale=Math.min(3,1024/Math.max(simW,simH));
+    dye=pair(Math.round(simW*dyeScale),Math.round(simH*dyeScale));
+    draw(shaders.seedVelocity,velocity.read); draw(shaders.seedDye,dye.read);
+  }
+  function step(delta) {
+    time+=delta;
+    draw(shaders.advectVelocity,velocity.write,{source:velocity.read,flow:velocity.read},delta); velocity.swap();
+    draw(shaders.force,velocity.write,{source:velocity.read},delta); velocity.swap();
+    draw(shaders.curl,curl,{source:velocity.read});
+    draw(shaders.confine,velocity.write,{source:velocity.read,field:curl},delta); velocity.swap();
+    draw(shaders.divergence,divergence,{source:velocity.read});
+    // Reset pressure before each solve; the jet has open, zero-gradient boundaries.
+    gl.bindFramebuffer(gl.FRAMEBUFFER,pressure.read.fbo); gl.clear(gl.COLOR_BUFFER_BIT);
+    for(let i=0;i<16;i++) { draw(shaders.pressure,pressure.write,{source:pressure.read,field:divergence}); pressure.swap(); }
+    draw(shaders.project,velocity.write,{source:velocity.read,field:pressure.read}); velocity.swap();
+    draw(shaders.advectDye,dye.write,{source:dye.read,flow:velocity.read},delta); dye.swap();
+    pointer.dx=pointer.dy=0;
+  }
+  function render(now) {
+    raf=0;
+    if(lost || document.hidden) return;
+    try { if(resizePending) resize(); }
+    catch(error) {  fallback.hidden=false; return; }
+    const delta=previous?Math.min((now-previous)/1000,1/30):1/60; previous=now;
+    if(!reduced.matches && settings.FLOW>0) step(delta*settings.FLOW);
+    draw(shaders.display,null,{source:dye.read});
+    if(!reduced.matches && settings.FLOW>0) raf=requestAnimationFrame(render);
+  }
+  function wake() { if(!raf && !lost && !document.hidden) raf=requestAnimationFrame(render); }
+  function move(x,y) {
+    const nx=x/innerWidth, ny=1-y/innerHeight;
+    if(pointer.active) {
+      pointer.dx=Math.max(-.06,Math.min(.06,pointer.dx+nx-pointer.x));
+      pointer.dy=Math.max(-.06,Math.min(.06,pointer.dy+ny-pointer.y));
+    }
+    pointer.x=nx; pointer.y=ny; pointer.active=true;
+    wake();
+  }
+  function resetPointer() { pointer.active=false; pointer.dx=pointer.dy=0; }
+  canvas.addEventListener('mousemove',e=>move(e.clientX,e.clientY));
+  canvas.addEventListener('mouseleave',resetPointer);
+  canvas.addEventListener('touchstart',e=>{ e.preventDefault(); move(e.touches[0].clientX,e.touches[0].clientY); },{passive:false});
+  canvas.addEventListener('touchmove',e=>{ e.preventDefault(); move(e.touches[0].clientX,e.touches[0].clientY); },{passive:false});
+  canvas.addEventListener('touchend',resetPointer); canvas.addEventListener('touchcancel',resetPointer);
+  addEventListener('resize',()=>{ resizePending=true; wake(); });
+  document.addEventListener('visibilitychange',()=>{
+    cancelAnimationFrame(raf); raf=0; previous=0; resetPointer(); if(!document.hidden) wake();
+  });
+  reduced.addEventListener('change',()=>{ previous=0; wake(); });
+  addEventListener('message',e=>{
+    const data=e.data;
+    if(!data || data.type!=='param' || !Object.hasOwn(limits,data.name) || !Number.isFinite(data.value)) return;
+    const [min,max]=limits[data.name]; settings[data.name]=Math.max(min,Math.min(max,data.value));
+    if(reduced.matches && data.name==='WIDTH' && dye) draw(shaders.seedDye,dye.read);
+    previous=0; wake();
+  });
+  canvas.addEventListener('webglcontextlost',e=>{ e.preventDefault(); lost=true; cancelAnimationFrame(raf); raf=0; });
+  canvas.addEventListener('webglcontextrestored',()=>location.reload());
+  wake();
+})();
+</script>
+</body>
+</html>

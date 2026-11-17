@@ -1,0 +1,299 @@
+<!-- TITLE: 016 Star Field -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>016 — Star Field · creative-lab</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 100%; height: 100%; overflow: hidden; }
+    body {
+      background: #000000;
+      color: #e6edf3;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    canvas { display: block; width: 100%; height: 100%; }
+    .panel {
+      position: fixed;
+      top: 16px;
+      left: 16px;
+      width: 320px;
+      max-width: calc(100vw - 32px);
+      padding: 14px 16px;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 14px;
+      background: rgba(8, 8, 10, 0.82);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 20px 45px rgba(0,0,0,0.46);
+      z-index: 2;
+    }
+    .panel h1 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .panel p,
+    .panel label,
+    .panel button,
+    .panel select,
+    .panel span {
+      font-size: 12px;
+      line-height: 1.6;
+      color: rgba(230, 237, 243, 0.84);
+    }
+    .controls {
+      display: grid;
+      grid-template-columns: 92px 1fr 52px;
+      gap: 8px 10px;
+      align-items: center;
+      margin: 12px 0 10px;
+    }
+    .controls .wide { grid-column: span 2; }
+    input[type="range"], select {
+      width: 100%;
+      accent-color: #f8fafc;
+    }
+    select, button {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px;
+      padding: 7px 9px;
+      color: #f8fafc;
+    }
+    .buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .meta {
+      display: grid;
+      grid-template-columns: auto auto;
+      gap: 2px 16px;
+      font-family: "SF Mono", "Fira Code", monospace;
+    }
+    .meta strong { color: #ffffff; font-weight: 500; }
+  
+    html.embed #ui,
+    html.embed #info,
+    html.embed #controls,
+    html.embed #stats,
+    html.embed #hint,
+    html.embed .panel,
+    html.embed header,
+    html.embed footer { display: none !important; }
+  </style>
+  <script>if(/\bembed=1\b/.test(location.search))document.documentElement.classList.add("embed")</script>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+
+<div class="panel">
+  <h1>3D Star Field</h1>
+  <p>Stars stream toward the camera with subtle steering from the pointer. Push the warp drive to turn points into streaks.</p>
+  <div class="controls">
+    <label for="speed">Speed</label>
+    <input id="speed" type="range" min="0.2" max="5.5" step="0.1" value="1.6">
+    <span id="speedValue">1.6</span>
+
+    <label for="count">Star count</label>
+    <input id="count" type="range" min="180" max="1400" step="20" value="720">
+    <span id="countValue">720</span>
+
+    <label for="colorMode">Color mode</label>
+    <select id="colorMode" class="wide">
+      <option value="white">White</option>
+      <option value="rainbow">Rainbow</option>
+      <option value="nebula">Nebula</option>
+    </select>
+  </div>
+  <div class="meta">
+    <span>Warp</span><strong id="warpLabel">idle</strong>
+    <span>Direction</span><strong id="directionLabel">0.00, 0.00</strong>
+  </div>
+  <div class="buttons">
+    <button id="warp">Warp</button>
+    <button id="pause">Pause</button>
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+const speedInput = document.getElementById('speed');
+const countInput = document.getElementById('count');
+const colorModeInput = document.getElementById('colorMode');
+const warpButton = document.getElementById('warp');
+const pauseButton = document.getElementById('pause');
+const speedValue = document.getElementById('speedValue');
+const countValue = document.getElementById('countValue');
+const warpLabel = document.getElementById('warpLabel');
+const directionLabel = document.getElementById('directionLabel');
+
+let width = 0;
+let height = 0;
+let dpr = 1;
+let stars = [];
+let paused = false;
+let burst = 0;
+let lastTime = performance.now();
+let mouseTargetX = 0;
+let mouseTargetY = 0;
+let steerX = 0;
+let steerY = 0;
+const depth = 1400;
+
+function lerp(a, b, t) {
+  return a + (b - a) * t;
+}
+
+function resize() {
+  dpr = Math.min(window.devicePixelRatio || 1, 2);
+  width = window.innerWidth;
+  height = window.innerHeight;
+  canvas.width = Math.floor(width * dpr);
+  canvas.height = Math.floor(height * dpr);
+  canvas.style.width = `${width}px`;
+  canvas.style.height = `${height}px`;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
+
+function randomRange(min, max) {
+  return min + Math.random() * (max - min);
+}
+
+function createStar() {
+  return {
+    x: randomRange(-width, width),
+    y: randomRange(-height, height),
+    z: randomRange(1, depth),
+    size: randomRange(0.5, 2.2),
+    hue: Math.random() * 360,
+  };
+}
+
+function buildStars() {
+  const count = Number(countInput.value);
+  stars = Array.from({ length: count }, createStar);
+  countValue.textContent = countInput.value;
+}
+
+function resetStar(star, far = true) {
+  star.x = randomRange(-width, width);
+  star.y = randomRange(-height, height);
+  star.z = far ? depth : randomRange(depth * 0.5, depth);
+  star.size = randomRange(0.5, 2.2);
+  star.hue = Math.random() * 360;
+}
+
+function colorForStar(star, intensity) {
+  if (colorModeInput.value === 'rainbow') {
+    return `hsla(${star.hue}, 90%, ${65 + intensity * 25}%, ${0.35 + intensity * 0.65})`;
+  }
+  if (colorModeInput.value === 'nebula') {
+    const hue = 195 + Math.sin(star.hue * 0.03) * 70;
+    return `hsla(${hue}, 85%, ${58 + intensity * 20}%, ${0.28 + intensity * 0.68})`;
+  }
+  return `rgba(255,255,255,${0.35 + intensity * 0.65})`;
+}
+
+function animate(now) {
+  const dt = Math.min(0.033, (now - lastTime) / 1000);
+  lastTime = now;
+
+  steerX = lerp(steerX, mouseTargetX, dt * 2.8);
+  steerY = lerp(steerY, mouseTargetY, dt * 2.8);
+  directionLabel.textContent = `${steerX.toFixed(2)}, ${steerY.toFixed(2)}`;
+
+  if (!paused) {
+    burst = Math.max(0, burst - dt * 1.25);
+  }
+  const baseSpeed = Number(speedInput.value);
+  const speed = paused ? 0 : baseSpeed + burst * 7.5;
+  warpLabel.textContent = burst > 0.05 ? `x${speed.toFixed(1)}` : 'idle';
+
+  ctx.fillStyle = 'rgba(0, 0, 0, 0.45)';
+  ctx.fillRect(0, 0, width, height);
+  ctx.save();
+  ctx.translate(width * 0.5 + steerX * width * 0.12, height * 0.5 + steerY * height * 0.12);
+
+  for (let i = 0; i < stars.length; i++) {
+    const star = stars[i];
+    const previousZ = star.z;
+
+    if (!paused) {
+      star.z -= speed * dt * 340;
+      star.x -= steerX * dt * 46 * (1 + speed * 0.15);
+      star.y -= steerY * dt * 46 * (1 + speed * 0.15);
+    }
+
+    if (star.z <= 2 || Math.abs(star.x) > width * 1.4 || Math.abs(star.y) > height * 1.4) {
+      resetStar(star);
+      continue;
+    }
+
+    const perspective = 480 / star.z;
+    const sx = star.x * perspective;
+    const sy = star.y * perspective;
+    const prevPerspective = 480 / Math.max(previousZ, 2);
+    const px = star.x * prevPerspective;
+    const py = star.y * prevPerspective;
+    const intensity = Math.min(1, 1 - star.z / depth + speed * 0.05);
+    const streak = Math.max(0, speed - 1) * 7;
+
+    ctx.strokeStyle = colorForStar(star, intensity);
+    ctx.fillStyle = colorForStar(star, intensity);
+    ctx.lineWidth = Math.max(0.6, star.size * perspective * 0.9);
+
+    if (streak > 1.5) {
+      ctx.beginPath();
+      ctx.moveTo(px, py);
+      ctx.lineTo(sx, sy);
+      ctx.stroke();
+    }
+
+    ctx.beginPath();
+    ctx.arc(sx, sy, Math.max(0.8, star.size * perspective * 1.2), 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  ctx.restore();
+  requestAnimationFrame(animate);
+}
+
+speedInput.addEventListener('input', () => {
+  speedValue.textContent = Number(speedInput.value).toFixed(1);
+});
+
+countInput.addEventListener('input', buildStars);
+warpButton.addEventListener('click', () => {
+  burst = 1;
+});
+pauseButton.addEventListener('click', () => {
+  paused = !paused;
+  pauseButton.textContent = paused ? 'Resume' : 'Pause';
+});
+
+canvas.addEventListener('pointermove', (event) => {
+  mouseTargetX = (event.clientX / width - 0.5) * 2;
+  mouseTargetY = (event.clientY / height - 0.5) * 2;
+});
+
+canvas.addEventListener('pointerleave', () => {
+  mouseTargetX = 0;
+  mouseTargetY = 0;
+});
+
+window.addEventListener('resize', () => {
+  resize();
+  buildStars();
+});
+
+resize();
+buildStars();
+speedValue.textContent = Number(speedInput.value).toFixed(1);
+requestAnimationFrame(animate);
+</script>
+</body>
+</html>

@@ -24,7 +24,7 @@ const exampleDefs = [
     name: "dropzone-default",
     title: "Basic",
     description:
-      "Multi-file drop zone with type and size limits. Native drag and drop — no upload library.",
+      "Multi-file drop zone with type and size limits. Native drag and drop. No upload library.",
     requires: ["button", "progress"],
     npmRequires: ["lucide-react"],
   },
@@ -108,7 +108,7 @@ export default async function DropzoneDocsPage() {
         description={
           <p className="leading-relaxed text-muted-foreground">
             Lightweight file drop zone with browse, validation, image previews,
-            and optional progress. Built on native drag and drop — no upload
+            and optional progress. Built on native drag and drop. No upload
             library. Control chrome matches SonoJS{" "}
             <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
               rounded-[12px]

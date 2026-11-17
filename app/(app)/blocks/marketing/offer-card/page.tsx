@@ -141,7 +141,7 @@ export default function BlockOfferCardDocsPage() {
           {...shell}
         >
           <div className="flex w-full justify-center">
-            {/* Keep mounted in docs preview — Close / CTA are visual-only here. */}
+            {/* Keep mounted in docs preview. Close / CTA are visual-only here. */}
             <OfferCard07 open />
           </div>
         </BlockExample>

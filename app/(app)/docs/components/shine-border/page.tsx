@@ -50,7 +50,7 @@ export default async function ShineBorderDocsPage() {
         description={
           <p className="leading-relaxed text-muted-foreground">
             An animated shine that runs along the border of its container.
-            Animation lives in a companion CSS file — no globals edit required.
+            Animation lives in a companion CSS file. No globals edit required.
           </p>
         }
       />

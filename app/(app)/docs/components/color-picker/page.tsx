@@ -24,7 +24,7 @@ const exampleDefs = [
     name: "color-picker-popover",
     title: "In a form",
     description:
-      "Accent color field — trigger opens the picker in a popover.",
+      "Accent color field, trigger opens the picker in a popover.",
     requires: [
       "slider",
       "input-group",

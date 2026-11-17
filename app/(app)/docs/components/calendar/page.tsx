@@ -473,7 +473,7 @@ export default async function CalendarDocsPage() {
         description={
           <div className="space-y-3 leading-relaxed text-muted-foreground">
             <p>
-              Month grid for single dates, multi-select, and ranges — booking,
+              Month grid for single dates, multi-select, and ranges, booking,
               filters, and scheduling UIs. Built on React DayPicker v9 with
               SonoJS dropdown chrome for month and year.
             </p>

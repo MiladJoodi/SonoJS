@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Radiant Geometry</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; overflow: hidden; background: #0a0a0a; }
+  canvas { display: block; width: 100vw; height: 100vh; }
+  .label {
+    position: fixed;
+    top: 20px;
+    left: 24px;
+    font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(200, 149, 108, 0.5);
+    z-index: 10;
+    pointer-events: none;
+    user-select: none;
+  }
+  html.embed .label { display: none; }
+</style>
+<script>if(/\bembed=1\b/.test(location.search))document.documentElement.classList.add("embed")</script>
+</head>
+<body>
+<div class="label">Sacred Strange</div>
+<canvas id="canvas"></canvas>
+<script>
+// ─────────────────────────────────────────────
+// Radiant Geometry — Unified parametric golden geometry
+// ─────────────────────────────────────────────
+(function () {
+  var canvas = document.getElementById('canvas');
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // URL param for embed scaling
+  var urlParams = new URLSearchParams(window.location.search);
+  var pixelScale = parseFloat(urlParams.get('p')) || 1;
+
+  var gl = canvas.getContext('webgl', { alpha: true, antialias: false, preserveDrawingBuffer: false });
+  if (!gl) return;
+
+  var vertSrc = [
+    'attribute vec2 a_pos;',
+    'void main() { gl_Position = vec4(a_pos, 0.0, 1.0); }'
+  ].join('\n');
+
+  var fragSrc = [
+    'precision highp float;',
+    'uniform float u_time;',
+    'uniform vec2 u_res;',
+    'uniform float u_rotationSpeed;',
+    'uniform float u_complexity;',
+    'uniform float u_pattern;',
+    'uniform vec2 u_mouse;',
+    '',
+    '#define PI 3.14159265359',
+    '#define TAU 6.28318530718',
+    '#define PHI 1.6180339887',
+    '#define SQRT3 1.7320508',
+    '',
+    '// ── Rotation matrix ──',
+    'mat2 rot(float a) {',
+    '  float c = cos(a), s = sin(a);',
+    '  return mat2(c, -s, s, c);',
+    '}',
+    '',
+    '// ── Golden color palette ──',
+    'vec3 gold(float t) {',
+    '  vec3 a = vec3(0.45, 0.32, 0.14);',
+    '  vec3 b = vec3(0.45, 0.35, 0.2);',
+    '  vec3 c = vec3(1.0, 0.8, 0.5);',
+    '  vec3 d = vec3(0.0, 0.1, 0.25);',
+    '  return a + b * cos(TAU * (c * t + d));',
+    '}',
+    '',
+    '// ════════════════════════════════════════════════════════════',
+    '// SDF PRIMITIVES',
+    '// ════════════════════════════════════════════════════════════',
+    '',
+    '// ── Polar fold: mirror UV into 1/N sector ──',
+    'vec2 polarFold(vec2 p, float n) {',
+    '  float angle = atan(p.y, p.x);',
+    '  float sector = TAU / n;',
+    '  angle = mod(angle + sector * 0.5, sector) - sector * 0.5;',
+    '  angle = abs(angle);',
+    '  float r = length(p);',
+    '  return vec2(cos(angle), sin(angle)) * r;',
+    '}',
+    '',
+    '// ── SDF: line segment ──',
+    'float sdSegment(vec2 p, vec2 a, vec2 b) {',
+    '  vec2 pa = p - a;',
+    '  vec2 ba = b - a;',
+    '  float h = clamp(dot(pa, ba) / dot(ba, ba), 0.0, 1.0);',
+    '  return length(pa - ba * h);',
+    '}',
+    '',
+    '// ── SDF: circle ring ──',
+    'float sdRing(vec2 p, float r) {',
+    '  return abs(length(p) - r);',
+    '}',
+    '',
+    '// ── SDF: regular polygon outline ──',
+    'float sdPolygon(vec2 p, float r, float n) {',
+    '  float angle = atan(p.y, p.x);',
+    '  float sector = TAU / n;',
+    '  float a = mod(angle + sector * 0.5, sector) - sector * 0.5;',
+    '  float rp = length(p);',
+    '  vec2 q = vec2(cos(a), abs(sin(a))) * rp;',
+    '  vec2 edge = vec2(cos(sector * 0.5), sin(sector * 0.5)) * r;',
+    '  vec2 d = q - edge * clamp(dot(q, edge) / dot(edge, edge), 0.0, 1.0);',
+    '  return length(d) * sign(q.x * edge.y - q.y * edge.x);',
+    '}',
+    '',
+    '// ── Hexagonal distance ──',
+    'float hexDist(vec2 p) {',
+    '  p = abs(p);',
+    '  return max(p.x + p.y * 0.577350269, p.y * 1.154700538);',
+    '}',
+    '',
+    '// ── Convert SDF distance to glowing line ──',
+    'vec3 glowLine(float d, vec3 coreColor, vec3 bloomColor, float lineWidth, float bloomWidth) {',
+    '  float core = lineWidth / (abs(d) + lineWidth);',
+    '  core = pow(core, 2.0);',
+    '  float bloom = bloomWidth / (abs(d) + bloomWidth);',
+    '  bloom = pow(bloom, 1.5);',
+    '  return coreColor * core + bloomColor * bloom * 0.4;',
+    '}',
+    '',
+    '// ════════════════════════════════════════════════════════════',
+    '// CORE PARAMETRIC STAR MOTIF',
+    '// A single configurable star/rosette drawn via polar fold + SDF segments.',
+    '// symmetry: N-fold (doubled for mirror => 2N fold lines)',
+    '// innerRatio: how far inward the zig-zag reaches (0..1)',
+    '// ringCount: how many concentric rings to add',
+    '// petalInfluence: 0 = pure star, 1 = add flower-of-life petal arcs',
+    '// ════════════════════════════════════════════════════════════',
+    '',
+    'float starMotif(vec2 p, float symmetry, float breathe, float innerRatio, float petalInfluence) {',
+    '  float d = 1e9;',
+    '  float doubleSym = symmetry * 2.0;',
+    '  vec2 fp = polarFold(p, doubleSym);',
+    '  ',
+    '  // Outer star arm: tip -> mid kink',
+    '  vec2 a1 = vec2(0.5 * breathe, 0.0);',
+    '  vec2 b1 = vec2(mix(0.35, 0.32, innerRatio) * breathe, mix(0.15, 0.13, innerRatio) * breathe);',
+    '  d = min(d, sdSegment(fp, a1, b1));',
+    '  ',
+    '  // Mid kink -> inner ring',
+    '  float innerR = mix(0.22, 0.18, innerRatio);',
+    '  vec2 a2 = b1;',
+    '  vec2 b2 = vec2(innerR * breathe, 0.0);',
+    '  d = min(d, sdSegment(fp, a2, b2));',
+    '  ',
+    '  // Inner star arm: inner ring -> inner kink',
+    '  vec2 a3 = b2;',
+    '  vec2 b3 = vec2(mix(0.12, 0.10, innerRatio) * breathe, mix(0.07, 0.06, innerRatio) * breathe);',
+    '  d = min(d, sdSegment(fp, a3, b3));',
+    '  ',
+    '  // Inner kink -> center',
+    '  vec2 a4 = b3;',
+    '  vec2 b4 = vec2(0.0, 0.0);',
+    '  d = min(d, sdSegment(fp, a4, b4));',
+    '  ',
+    '  // Outer ring',
+    '  d = min(d, sdRing(p, 0.5 * breathe));',
+    '  ',
+    '  // Inner ring',
+    '  d = min(d, sdRing(p, innerR * breathe));',
+    '  ',
+    '  // Petal arcs (flower-of-life style) when petalInfluence > 0',
+    '  if (petalInfluence > 0.01) {',
+    '    float petalR = 0.5 * breathe * 0.35 / PHI;',
+    '    vec2 petalCenter = vec2(0.5 * breathe, 0.0);',
+    '    float petal = abs(length(fp - petalCenter) - petalR) - 0.002;',
+    '    d = min(d, mix(1e9, petal, petalInfluence));',
+    '    ',
+    '    // Inner petal arc',
+    '    vec2 innerPetalCenter = vec2(0.5 * breathe * 0.65, 0.0);',
+    '    float innerPetalR = 0.5 * breathe * 0.25;',
+    '    float innerPetal = abs(length(fp - innerPetalCenter) - innerPetalR) - 0.0015;',
+    '    d = min(d, mix(1e9, innerPetal, petalInfluence));',
+    '  }',
+    '  ',
+    '  return d;',
+    '}',
+    '',
+    '// ════════════════════════════════════════════════════════════',
+    '// TILED vs SINGLE rendering',
+    '// tilingMix: 0 = tiled repeat, 1 = single central',
+    '// For tiling, we use hex grid (lower pattern) or square grid',
+    '// ════════════════════════════════════════════════════════════',
+    '',
+    '// ── Hex-tile a motif ──',
+    'float hexTileMotif(vec2 p, float scale, float symmetry, float breathe, float innerRatio, float petalInfl) {',
+    '  p *= scale;',
+    '  vec2 s = vec2(1.0, SQRT3);',
+    '  vec2 h = s * 0.5;',
+    '  vec2 a = mod(p, s) - h;',
+    '  vec2 b = mod(p - h, s) - h;',
+    '  vec2 gUV = dot(a, a) < dot(b, b) ? a : b;',
+    '  float d = starMotif(gUV, symmetry, breathe, innerRatio, petalInfl);',
+    '  return d / scale;',
+    '}',
+    '',
+    '// ── Square-tile a motif ──',
+    'float squareTileMotif(vec2 p, float scale, float symmetry, float breathe, float innerRatio, float petalInfl) {',
+    '  p *= scale;',
+    '  vec2 cell = mod(p + 0.5, 1.0) - 0.5;',
+    '  float d = starMotif(cell, symmetry, breathe, innerRatio, petalInfl);',
+    '  return d / scale;',
+    '}',
+    '',
+    '// ── Single central motif (no tiling) ──',
+    'float centralMotif(vec2 p, float scale, float symmetry, float breathe, float innerRatio, float petalInfl) {',
+    '  p *= scale;',
+    '  float d = starMotif(p, symmetry, breathe, innerRatio, petalInfl);',
+    '  return d / scale;',
+    '}',
+    '',
+    '// ── Unified layer: blends between tiled and central based on tilingMix ──',
+    'float geometryLayer(vec2 p, float scale, float symmetry, float breathe, float innerRatio, float petalInfl, float tilingMix) {',
+    '  // Tiling scale ramps up as we go toward single central',
+    '  // At tilingMix=0: normal tiled scale. At tilingMix=1: scale drops to show one big motif',
+    '  float tiledScale = scale;',
+    '  float centralScale = scale * 0.35;',
+    '  float effectiveScale = mix(tiledScale, centralScale, tilingMix);',
+    '  ',
+    '  if (tilingMix < 0.01) {',
+    '    return hexTileMotif(p, effectiveScale, symmetry, breathe, innerRatio, petalInfl);',
+    '  } else if (tilingMix > 0.99) {',
+    '    return centralMotif(p, effectiveScale, symmetry, breathe, innerRatio, petalInfl);',
+    '  } else {',
+    '    // Blend: cross-fade SDF distances',
+    '    float dTiled = hexTileMotif(p, mix(tiledScale, tiledScale * 0.6, tilingMix), symmetry, breathe, innerRatio, petalInfl);',
+    '    float dCentral = centralMotif(p, mix(centralScale * 1.5, centralScale, tilingMix), symmetry, breathe, innerRatio, petalInfl);',
+    '    return mix(dTiled, dCentral, tilingMix);',
+    '  }',
+    '}',
+    '',
+    '// ── Golden spiral SDF ──',
+    'float goldenSpiral(vec2 uv, float t, float rotSpd) {',
+    '  float r = length(uv);',
+    '  float a = atan(uv.y, uv.x);',
+    '  float spiralPhase = log(max(r, 0.001)) / log(PHI) * PI * 0.5;',
+    '  float spiralD = abs(mod(a - spiralPhase + t * rotSpd * 0.2 + PI, TAU) - PI);',
+    '  spiralD = min(spiralD, abs(mod(a - spiralPhase + t * rotSpd * 0.2 + PI + PI, TAU) - PI));',
+    '  float fade = smoothstep(0.0, 0.05, r) * smoothstep(0.5, 0.35, r);',
+    '  return spiralD * fade + (1.0 - fade);',
+    '}',
+    '',
+    '// ════════════════════════════════════════════════════════════',
+    '// MAIN COMPOSITE',
+    '// ════════════════════════════════════════════════════════════',
+    '',
+    'void main() {',
+    '  vec2 uv = (gl_FragCoord.xy - u_res * 0.5) / min(u_res.x, u_res.y);',
+    '  // Drag rotation offset',
+    '  uv = rot(u_mouse.x) * uv;',
+    '  float t = u_time;',
+    '  float rotSpeed = u_rotationSpeed;',
+    '  float complexity = u_complexity;',
+    '  float pat = clamp(u_pattern, 0.0, 1.0);',
+    '  float r = length(uv);',
+    '  ',
+    '  // ── Pattern-driven parameters ──',
+    '  // tilingMix: 0 = full tiling, 1 = single central mandala',
+    '  float tilingMix = pat;',
+    '  ',
+    '  // Symmetry increases with pattern: 6-fold at 0, up to 10 at 1.0',
+    '  float baseSym = mix(6.0, 10.0, pat);',
+    '  ',
+    '  // Spiral arm influence: none at 0, strong at 1',
+    '  float spiralInfluence = smoothstep(0.2, 0.8, pat);',
+    '  ',
+    '  // Central glow: subtle at 0, dominant at 1',
+    '  float centralGlowStr = mix(0.03, 0.12, pat);',
+    '  ',
+    '  // Petal/flower influence: none at 0, full at 1',
+    '  float petalInfluence = smoothstep(0.3, 0.9, pat);',
+    '  ',
+    '  // Object mask for mandala end (tighter focus)',
+    '  float objectRadius = mix(1.0, 0.48, pat * pat);',
+    '  float objectFade = mix(1.0, smoothstep(objectRadius, objectRadius * 0.7, r), pat);',
+    '  ',
+    '  // Breathe factor',
+    '  float breathe = 1.0 + 0.03 * sin(t * 0.6);',
+    '  ',
+    '  // ── Color palette ──',
+    '  vec3 dimGold = vec3(0.35, 0.25, 0.12);',
+    '  vec3 medGold = vec3(0.7, 0.50, 0.22);',
+    '  vec3 brightGold = vec3(0.95, 0.72, 0.32);',
+    '  vec3 coreGlow = vec3(1.0, 0.82, 0.55);',
+    '  vec3 hotGold = vec3(1.0, 0.92, 0.72);',
+    '  ',
+    '  // ── Background ──',
+    '  vec3 col = vec3(0.02, 0.015, 0.01);',
+    '  ',
+    '  // Number of active layers driven by complexity',
+    '  // complexity range is 0.3..2.0, map to 2..6 layers',
+    '  float numLayers = 2.0 + (complexity - 0.3) * (4.0 / 1.7);',
+    '  numLayers = clamp(numLayers, 2.0, 6.0);',
+    '  ',
+    '  // ════════════════════════════════════════',
+    '  // LAYER 1: Primary structural layer',
+    '  // Large-scale pattern, slowest rotation',
+    '  // ════════════════════════════════════════',
+    '  {',
+    '    float sym1 = floor(baseSym);',
+    '    float rot1 = t * rotSpeed * 0.04;',
+    '    vec2 p1 = rot(rot1) * uv;',
+    '    float scale1 = mix(2.5, 1.8, pat) * complexity;',
+    '    float d1 = geometryLayer(p1, scale1, sym1, breathe, 0.0, petalInfluence * 0.3, tilingMix);',
+    '    col += glowLine(d1, medGold, dimGold * 1.5, 0.002, 0.016);',
+    '  }',
+    '  ',
+    '  // ════════════════════════════════════════',
+    '  // LAYER 2: Counter-rotating overlay',
+    '  // Higher symmetry, opposite rotation',
+    '  // ════════════════════════════════════════',
+    '  if (numLayers > 2.0) {',
+    '    float sym2 = floor(baseSym + 2.0);',
+    '    float rot2 = -t * rotSpeed * 0.06;',
+    '    vec2 p2 = rot(rot2) * uv;',
+    '    float scale2 = mix(3.5, 2.2, pat) * complexity;',
+    '    float innerR2 = mix(0.3, 0.6, pat);',
+    '    float d2 = geometryLayer(p2, scale2, sym2, breathe, innerR2, petalInfluence * 0.5, tilingMix);',
+    '    float layer2alpha = min(numLayers - 2.0, 1.0);',
+    '    col += glowLine(d2, brightGold * 0.8, dimGold * 1.2, 0.0015, 0.014) * layer2alpha;',
+    '  }',
+    '  ',
+    '  // ════════════════════════════════════════',
+    '  // LAYER 3: Fine detail / girih overlay',
+    '  // 10-fold or higher, faster rotation',
+    '  // ════════════════════════════════════════',
+    '  if (numLayers > 3.0) {',
+    '    float sym3 = floor(mix(5.0, 8.0, pat));',
+    '    float rot3 = t * rotSpeed * 0.09;',
+    '    vec2 p3 = rot(rot3) * uv;',
+    '    float scale3 = mix(4.0, 2.5, pat) * complexity;',
+    '    float d3 = geometryLayer(p3, scale3, sym3, breathe * (1.0 + 0.01 * sin(t * 0.5 + 2.0)), 0.5, petalInfluence * 0.7, tilingMix);',
+    '    float layer3alpha = min(numLayers - 3.0, 1.0);',
+    '    col += glowLine(d3, coreGlow * 0.6, medGold * 0.7, 0.0012, 0.012) * layer3alpha;',
+    '  }',
+    '  ',
+    '  // ════════════════════════════════════════',
+    '  // LAYER 4: Central rosette / mandala ring',
+    '  // Strongest near center, petal-heavy at high pattern',
+    '  // ════════════════════════════════════════',
+    '  if (numLayers > 4.0) {',
+    '    float sym4 = floor(mix(8.0, 12.0, pat));',
+    '    float rot4 = t * rotSpeed * mix(0.03, 0.05, pat);',
+    '    vec2 p4 = rot(rot4) * uv;',
+    '    float d4 = centralMotif(p4, mix(2.2, 1.8, pat), sym4, breathe, 0.7, petalInfluence);',
+    '    float centralFade = smoothstep(mix(0.5, 0.48, pat), 0.12, r);',
+    '    float layer4alpha = min(numLayers - 4.0, 1.0);',
+    '    col += glowLine(d4, hotGold * 0.7, coreGlow * 0.5, 0.0025, 0.022) * centralFade * layer4alpha;',
+    '  }',
+    '  ',
+    '  // ════════════════════════════════════════',
+    '  // LAYER 5: Polygon ring lattice',
+    '  // Concentric polygon outlines at varying fold counts',
+    '  // ════════════════════════════════════════',
+    '  if (numLayers > 5.0) {',
+    '    float ringBreath = 1.0 + 0.04 * sin(t * 0.4);',
+    '    float rScale = mix(0.12, 0.10, pat) * ringBreath;',
+    '    float ringD = 1e9;',
+    '    float polySides1 = mix(6.0, 8.0, pat);',
+    '    float polySides2 = mix(8.0, 10.0, pat);',
+    '    float pr0 = abs(sdPolygon(rot(t * rotSpeed * 0.02) * uv, rScale * 1.0, polySides1));',
+    '    float pr1 = abs(sdPolygon(rot(-t * rotSpeed * 0.025) * uv, rScale * 2.0, polySides2));',
+    '    float pr2 = abs(sdPolygon(rot(t * rotSpeed * 0.015) * uv, rScale * 3.0, 12.0));',
+    '    float pr3 = abs(sdPolygon(rot(-t * rotSpeed * 0.018) * uv, rScale * 4.0, polySides1));',
+    '    ringD = min(ringD, pr0);',
+    '    ringD = min(ringD, pr1);',
+    '    ringD = min(ringD, pr2);',
+    '    ringD = min(ringD, pr3);',
+    '    float layer5alpha = min(numLayers - 5.0, 1.0);',
+    '    col += glowLine(ringD, brightGold * 0.5, dimGold * 0.5, 0.0012, 0.01) * layer5alpha;',
+    '  }',
+    '  ',
+    '  // ════════════════════════════════════════',
+    '  // GOLDEN SPIRAL ARMS (pattern > ~0.2)',
+    '  // ════════════════════════════════════════',
+    '  if (spiralInfluence > 0.01) {',
+    '    float spiral = goldenSpiral(uv, t, rotSpeed);',
+    '    float spiralGlow = 0.015 / (spiral + 0.015);',
+    '    col += gold(0.7 + t * 0.01) * spiralGlow * 0.25 * spiralInfluence;',
+    '  }',
+    '  ',
+    '  // ════════════════════════════════════════',
+    '  // DECORATIVE ELEMENTS (boundary rings, dots)',
+    '  // Fade in toward mandala end',
+    '  // ════════════════════════════════════════',
+    '  if (pat > 0.3) {',
+    '    float decoFade = smoothstep(0.3, 0.7, pat);',
+    '    ',
+    '    // Outer boundary ring',
+    '    float outerRing = abs(r - objectRadius + 0.01) - 0.003;',
+    '    float outerGlow = 0.004 / (abs(outerRing) + 0.004);',
+    '    col += gold(0.5 + t * 0.015) * outerGlow * 0.35 * decoFade;',
+    '    ',
+    '    // Second outer ring',
+    '    float outerRing2 = abs(r - objectRadius + 0.035) - 0.002;',
+    '    float outerGlow2 = 0.003 / (abs(outerRing2) + 0.003);',
+    '    col += gold(0.6) * outerGlow2 * 0.2 * decoFade;',
+    '    ',
+    '    // Decorative dots at outer ring intersections',
+    '    float dotAngle = atan(uv.y, uv.x);',
+    '    float dotSymmetry = mix(6.0, 12.0, pat);',
+    '    float dotA = mod(dotAngle + PI / dotSymmetry, TAU / dotSymmetry) - PI / dotSymmetry;',
+    '    vec2 dotP = vec2(cos(dotA), sin(dotA)) * r;',
+    '    vec2 dotCenter = vec2(objectRadius - 0.01, 0.0);',
+    '    float dotD = length(dotP - dotCenter) - 0.008;',
+    '    float dotGlow = 0.004 / (abs(dotD) + 0.004);',
+    '    col += vec3(1.0, 0.9, 0.65) * dotGlow * 0.3 * decoFade;',
+    '  }',
+    '  ',
+    '  // ════════════════════════════════════════',
+    '  // CENTER PULSE',
+    '  // ════════════════════════════════════════',
+    '  float centerPulse = 0.8 + 0.2 * sin(t * 1.5);',
+    '  float centerGlowD = exp(-r * r * mix(3.0, 6.0, pat)) * centralGlowStr * 2.0 * centerPulse;',
+    '  col += hotGold * centerGlowD;',
+    '  ',
+    '  // Inner center ring (stronger at mandala end)',
+    '  if (pat > 0.2) {',
+    '    float ringPulse = 0.9 + 0.1 * sin(t * 2.3 + 1.0);',
+    '    float innerRing = abs(r - 0.03 * ringPulse) - 0.002;',
+    '    float innerRingGlow = 0.003 / (abs(innerRing) + 0.003);',
+    '    col += vec3(1.0, 0.88, 0.6) * innerRingGlow * 0.3 * smoothstep(0.2, 0.6, pat);',
+    '  }',
+    '  ',
+    '  // ════════════════════════════════════════',
+    '  // AMBIENT RADIAL GLOW',
+    '  // ════════════════════════════════════════',
+    '  float ambientGlow = exp(-r * r * mix(2.5, 4.0, pat)) * mix(0.1, 0.14, pat);',
+    '  col += vec3(0.5, 0.35, 0.16) * ambientGlow;',
+    '  ',
+    '  // ════════════════════════════════════════',
+    '  // APPLY OBJECT MASK (tighter at mandala end)',
+    '  // ════════════════════════════════════════',
+    '  col *= objectFade;',
+    '  ',
+    '  // ── Subtle pulse ──',
+    '  float pulse = 0.92 + 0.08 * sin(t * 0.3);',
+    '  col *= pulse;',
+    '  ',
+    '  // ── Vignette ──',
+    '  float vig = 1.0 - r * r * mix(0.35, 0.25, pat);',
+    '  vig = max(vig, 0.0);',
+    '  col *= (0.65 + vig * 0.35);',
+    '  ',
+    '  // ── Tone mapping ──',
+    '  col = col / (1.0 + col * 0.3);',
+    '  ',
+    '  // ── Warmth boost ──',
+    '  col = pow(col, vec3(0.95, 0.98, 1.06));',
+    '  ',
+    '  gl_FragColor = vec4(col, 1.0);',
+    '}'
+  ].join('\n');
+
+  function compile(type, src) {
+    var s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
+
+    }
+    return s;
+  }
+
+  var prog = gl.createProgram();
+  gl.attachShader(prog, compile(gl.VERTEX_SHADER, vertSrc));
+  gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, fragSrc));
+  gl.linkProgram(prog);
+  if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) {
+
+  }
+  gl.useProgram(prog);
+
+  var buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+  var aPos = gl.getAttribLocation(prog, 'a_pos');
+  gl.enableVertexAttribArray(aPos);
+  gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+
+  var uTime = gl.getUniformLocation(prog, 'u_time');
+  var uRes = gl.getUniformLocation(prog, 'u_res');
+  var uRotationSpeed = gl.getUniformLocation(prog, 'u_rotationSpeed');
+  var uComplexity = gl.getUniformLocation(prog, 'u_complexity');
+  var uPattern = gl.getUniformLocation(prog, 'u_pattern');
+  var uMouse = gl.getUniformLocation(prog, 'u_mouse');
+
+  // Drag to rotate the geometry
+  var mouseRotOffset = 0;
+  var mouseDown = false, lastMX = 0;
+
+  canvas.addEventListener('mousedown', function(e) { mouseDown = true; lastMX = e.clientX; });
+  canvas.addEventListener('mousemove', function(e) {
+    if (mouseDown) { mouseRotOffset += (e.clientX - lastMX) * 0.003; lastMX = e.clientX; }
+  });
+  canvas.addEventListener('mouseup', function() { mouseDown = false; });
+  canvas.addEventListener('touchstart', function(e) { e.preventDefault(); mouseDown = true; lastMX = e.touches[0].clientX; }, { passive: false });
+  canvas.addEventListener('touchmove', function(e) {
+    e.preventDefault();
+    if (mouseDown) { mouseRotOffset += (e.touches[0].clientX - lastMX) * 0.003; lastMX = e.touches[0].clientX; }
+  }, { passive: false });
+  canvas.addEventListener('touchend', function() { mouseDown = false; });
+
+  var rotationSpeedVal = 0.3;
+  var complexityVal = 1.0;
+  var patternVal = 0.05;
+
+  var dpr = Math.min(window.devicePixelRatio || 1, 2) * pixelScale;
+  var needsResize = true;
+  var paused = false;
+
+  function resize() {
+    needsResize = false;
+    var w = Math.round(canvas.clientWidth * dpr);
+    var h = Math.round(canvas.clientHeight * dpr);
+    if (canvas.width !== w || canvas.height !== h) {
+      canvas.width = w;
+      canvas.height = h;
+      gl.viewport(0, 0, w, h);
+      gl.uniform2f(uRes, canvas.width, canvas.height);
+    }
+  }
+
+  function render(now) {
+    if (paused) {
+      requestAnimationFrame(render);
+      return;
+    }
+    if (needsResize) resize();
+    gl.uniform1f(uTime, prefersReduced ? 0.0 : now * 0.001);
+    gl.uniform1f(uRotationSpeed, rotationSpeedVal);
+    gl.uniform1f(uComplexity, complexityVal);
+    gl.uniform1f(uPattern, patternVal);
+    gl.uniform2f(uMouse, mouseRotOffset, 0.0);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+    requestAnimationFrame(render);
+  }
+
+  window.addEventListener('resize', function () {
+    needsResize = true;
+  });
+
+  resize();
+
+  requestAnimationFrame(render);
+
+  // ── Visibility pause ──
+  document.addEventListener('visibilitychange', function() {
+    paused = document.hidden;
+  });
+
+  window.addEventListener('message', function(e) {
+    if (e.data && e.data.type === 'param') {
+      switch (e.data.name) {
+        case 'ROTATION_SPEED': rotationSpeedVal = e.data.value; break;
+        case 'PATTERN_COMPLEXITY': complexityVal = e.data.value; break;
+        case 'PATTERN': patternVal = e.data.value; break;
+      }
+    }
+  });
+})();
+</script>
+</body>
+</html>

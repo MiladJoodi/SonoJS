@@ -5,7 +5,7 @@ import { pageMetadata } from "@/lib/seo"
 export const metadata = pageMetadata({
   title: "Blocks",
   description:
-    "Copy-ready UI sections for auth, marketing, ecommerce, dashboards, and more — preview variants, then install with the CLI.",
+    "Copy-ready UI sections for auth, marketing, ecommerce, dashboards, and more, preview variants, then install with the CLI.",
   path: "/blocks",
 })
 
@@ -16,7 +16,7 @@ export default function BlocksIndexPage() {
         <h1 className="text-h1">Blocks</h1>
         <p className="leading-relaxed text-muted-foreground">
           Copy-ready sections for auth, marketing, ecommerce, dashboards, and
-          more — open a category, preview variants, install with the CLI.
+          more, open a category, preview variants, install with the CLI.
         </p>
       </header>
 

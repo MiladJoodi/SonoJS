@@ -25,7 +25,7 @@ function assetSrc(asset: string | { src: string }) {
   return typeof asset === "string" ? asset : asset.src
 }
 
-/** Original demo atlas — 16 artistic stills (4×4 WebGL grid). */
+/** Original demo atlas, 16 artistic stills (4×4 WebGL grid). */
 const BUNDLED_IMAGES = [
   image01,
   image02,

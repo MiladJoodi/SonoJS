@@ -2,7 +2,7 @@
 
 import { EffectComposer, Vignette } from "@react-three/postprocessing"
 
-/** Vignette only — Bloom was compositing bright card pixels over the chrome rail */
+/** Vignette only. Bloom was compositing bright card pixels over the chrome rail */
 export function Effects() {
   return (
     <EffectComposer multisampling={4}>

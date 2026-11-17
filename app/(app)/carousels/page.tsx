@@ -12,7 +12,7 @@ import { pageMetadata } from "@/lib/seo"
 export const metadata = pageMetadata({
   title: "Carousels",
   description:
-    "Installable carousels for React — preview live, then add with the CLI.",
+    "Installable carousels for React, preview live, then add with the CLI.",
   path: "/carousels",
 })
 
@@ -24,7 +24,7 @@ export default function CarouselsIndexPage() {
       <header className="space-y-2">
         <h1 className="text-h1">Carousels</h1>
         <p className="text-muted-foreground">
-          Installable carousels for React — preview live, then add with the CLI.
+          Installable carousels for React, preview live, then add with the CLI.
         </p>
       </header>
 

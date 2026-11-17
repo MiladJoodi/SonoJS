@@ -23,7 +23,7 @@ Breathing-app marketing landing. Demo brand: **STILLWATER**.
 
 ## Run locally
 
-Do not open `index.html` via `file://` — ES modules need a static server.
+Do not open `index.html` via `file://`. ES modules need a static server.
 
 ```bash
 npx --yes serve .

@@ -5,7 +5,7 @@ Category: `saas`
 Slug / folder: `sonojs-saas-05`  
 Path: `public/templates/projects/saas/sonojs-saas-05/`  
 
-Developer email platform landing. Demo brand: **Resend** — Email for developers.
+Developer email platform landing. Demo brand: **Resend**. Email for developers.
 
 ## Images / video
 

@@ -71,7 +71,7 @@ export function AdminStatus({
   className?: string
 }) {
   if (!status) {
-    return <span className={cn("text-muted-foreground", className)}>—</span>
+    return <span className={cn("text-muted-foreground", className)}>, </span>
   }
 
   const tone = toneForStatus(status)

@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>#063 Fireflies — creative-lab</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:#000;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#d6eaaa}
+canvas{display:block;position:fixed;top:0;left:0;width:100vw;height:100vh;cursor:crosshair}
+#ui{position:fixed;top:16px;left:16px;z-index:10;background:rgba(3,10,3,0.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(110,190,55,0.16);border-radius:12px;padding:14px 16px;min-width:254px;font-size:0.82rem}
+h1{font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:#80c840;margin-bottom:10px}
+.info{color:#2e4418;font-size:0.73rem;margin-bottom:9px}
+.statrow{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px;color:#3d5222;font-size:0.77rem}
+.statrow span{color:#80c840;font-variant-numeric:tabular-nums;font-size:0.8rem}
+.sep{height:1px;background:rgba(110,190,55,0.12);margin:8px 0}
+.row{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.row label{width:116px;color:#8ab060;flex-shrink:0;font-size:0.79rem}
+.row input[type=range]{flex:1;accent-color:#80c840;cursor:pointer}
+.val{width:40px;text-align:right;color:#80c840;font-size:0.74rem;font-variant-numeric:tabular-nums}
+.btn-row{display:flex;gap:5px;margin-top:10px}
+button{flex:1;background:rgba(110,190,55,0.07);border:1px solid rgba(110,190,55,0.2);color:#80c840;border-radius:6px;padding:5px 3px;font-size:0.73rem;cursor:pointer;transition:background .15s,border-color .15s}
+button:hover{background:rgba(110,190,55,0.18);border-color:rgba(110,190,55,0.4)}
+button.active{background:rgba(110,190,55,0.28);border-color:rgba(110,190,55,0.55)}
+#sync-wrap{margin-top:4px;height:5px;background:rgba(110,190,55,0.1);border-radius:3px;overflow:hidden}
+#sync-bar{height:100%;width:0%;background:linear-gradient(90deg,#1e3a0a,#80c840);border-radius:3px;transition:width .12s linear}
+#hint{position:fixed;bottom:14px;left:16px;color:rgba(110,190,55,0.25);font-size:0.68rem;pointer-events:none;line-height:1.8}
+
+    html.embed #ui,
+    html.embed #info,
+    html.embed #controls,
+    html.embed #stats,
+    html.embed #hint,
+    html.embed .panel,
+    html.embed header,
+    html.embed footer { display: none !important; }
+  </style>
+  <script>if(/\bembed=1\b/.test(location.search))document.documentElement.classList.add("embed")</script>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="ui">
+  <h1>063 · Fireflies</h1>
+  <div class="info">Kuramoto phase-coupled oscillators</div>
+  <div class="statrow">Count     <span id="v-n">200</span></div>
+  <div class="statrow">FPS       <span id="v-fps">—</span></div>
+  <div class="statrow">Sync R    <span id="v-r">0.000</span></div>
+  <div id="sync-wrap"><div id="sync-bar"></div></div>
+  <div class="sep"></div>
+  <div class="row"><label>Coupling K</label>
+    <input type="range" id="s-k"   min="0" max="15" value="4"   step="0.1">
+    <span class="val" id="v-k">4.0</span></div>
+  <div class="row"><label>Freq spread σ</label>
+    <input type="range" id="s-w"   min="0" max="3"  value="0.8" step="0.05">
+    <span class="val" id="v-w">0.80</span></div>
+  <div class="row"><label>Couple radius</label>
+    <input type="range" id="s-rr"  min="30" max="500" value="180" step="5">
+    <span class="val" id="v-rr">180</span></div>
+  <div class="row"><label>Count</label>
+    <input type="range" id="s-cnt" min="40" max="400" value="200" step="5">
+    <span class="val" id="v-cnt">200</span></div>
+  <div class="row"><label>Speed</label>
+    <input type="range" id="s-spd" min="0.2" max="3" value="1.0" step="0.1">
+    <span class="val" id="v-spd">1.0×</span></div>
+  <div class="btn-row">
+    <button id="btn-perturb">Perturb</button>
+    <button id="btn-sync">Sync all</button>
+    <button id="btn-pause">Pause</button>
+    <button id="btn-reset">Reset</button>
+  </div>
+</div>
+<div id="hint">Click / drag canvas to trigger nearby fireflies</div>
+
+
+<script>
+'use strict';
+
+const canvas = document.getElementById('c');
+const ctx    = canvas.getContext('2d');
+const TWO_PI = Math.PI * 2;
+
+// ── Parameters ──────────────────────────────────────────────────────────────
+let N          = 200;
+let K          = 4.0;    // coupling strength (rad/s equivalent)
+let freqSpread = 0.8;    // natural frequency spread (Hz)
+let coupleR    = 180;    // spatial coupling radius (px)
+let simSpeed   = 1.0;
+let paused     = false;
+
+// ── State arrays ─────────────────────────────────────────────────────────────
+let xs, ys, thetas, omegas, flashI;
+
+function initFireflies(keepPos = false) {
+  const W = canvas.width, H = canvas.height;
+  const oldX = xs, oldY = ys;
+  xs      = new Float32Array(N);
+  ys      = new Float32Array(N);
+  thetas  = new Float32Array(N);
+  omegas  = new Float32Array(N);
+  flashI  = new Float32Array(N);
+  for (let i = 0; i < N; i++) {
+    if (keepPos && oldX && i < oldX.length) {
+      xs[i] = oldX[i]; ys[i] = oldY[i];
+    } else {
+      xs[i] = W * (0.05 + Math.random() * 0.9);
+      ys[i] = H * (0.06 + Math.random() * 0.72); // above ground line
+    }
+    thetas[i] = Math.random() * TWO_PI;
+    omegas[i] = 1.0 + (Math.random() - 0.5) * 2 * freqSpread; // Hz
+    flashI[i] = 0;
+  }
+}
+
+// ── Glow sprite (pre-rendered, reused each frame) ─────────────────────────
+let glowSprite = null;
+function buildGlowSprite() {
+  const S = 128;
+  const off = document.createElement('canvas');
+  off.width = S; off.height = S;
+  const oc = off.getContext('2d');
+  const g = oc.createRadialGradient(S/2, S/2, 0, S/2, S/2, S/2);
+  g.addColorStop(0,    'rgba(255,255,220,1)');
+  g.addColorStop(0.08, 'rgba(220,255,140,0.9)');
+  g.addColorStop(0.25, 'rgba(160,230,60,0.4)');
+  g.addColorStop(0.55, 'rgba(80,180,20,0.1)');
+  g.addColorStop(1,    'rgba(20,120,0,0)');
+  oc.fillStyle = g;
+  oc.fillRect(0, 0, S, S);
+  glowSprite = off;
+}
+
+// ── Background (pre-rendered forest night scene) ──────────────────────────
+let bgCanvas = null;
+
+function mulberry32(seed) {
+  return () => {
+    seed = (seed + 0x6D2B79F5) | 0;
+    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+    t = t + Math.imul(t ^ (t >>> 7), 61 | t) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+function buildBackground() {
+  const W = canvas.width, H = canvas.height;
+  const off = document.createElement('canvas');
+  off.width = W; off.height = H;
+  const bc = off.getContext('2d');
+
+  // Sky
+  const sky = bc.createLinearGradient(0, 0, 0, H * 0.85);
+  sky.addColorStop(0,   '#010608');
+  sky.addColorStop(0.4, '#010d04');
+  sky.addColorStop(1,   '#001a03');
+  bc.fillStyle = sky;
+  bc.fillRect(0, 0, W, H);
+
+  // Moon
+  const mx = W * 0.80, my = H * 0.11, mr = Math.min(W, H) * 0.032;
+  const moonHalo = bc.createRadialGradient(mx, my, 0, mx, my, mr * 3.5);
+  moonHalo.addColorStop(0,   'rgba(230,255,180,0.35)');
+  moonHalo.addColorStop(0.4, 'rgba(190,240,130,0.12)');
+  moonHalo.addColorStop(1,   'rgba(80,180,50,0)');
+  bc.fillStyle = moonHalo;
+  bc.fillRect(mx - mr*4, my - mr*4, mr*8, mr*8);
+  bc.beginPath();
+  bc.arc(mx, my, mr, 0, TWO_PI);
+  bc.fillStyle = '#dff7c8';
+  bc.fill();
+
+  // Stars
+  const rng1 = mulberry32(7331);
+  for (let s = 0; s < 280; s++) {
+    const sx = rng1() * W, sy = rng1() * H * 0.62;
+    const br = 0.08 + rng1() * 0.38, sr = 0.28 + rng1() * 0.55;
+    bc.beginPath();
+    bc.arc(sx, sy, sr, 0, TWO_PI);
+    bc.fillStyle = `rgba(200,218,255,${br})`;
+    bc.fill();
+  }
+
+  // Ground strip
+  const groundY = H * 0.83;
+  const grd = bc.createLinearGradient(0, groundY, 0, H);
+  grd.addColorStop(0, '#010b01');
+  grd.addColorStop(1, '#000400');
+  bc.fillStyle = grd;
+  bc.fillRect(0, groundY, W, H - groundY);
+
+  // Treeline (layered conifers)
+  const rng2 = mulberry32(1234);
+  bc.fillStyle = '#000800';
+
+  // Back layer: smaller, denser
+  const backCount = Math.ceil(W / 18);
+  for (let t = 0; t < backCount; t++) {
+    const tx = (t / backCount) * W + (rng2() - 0.5) * 22;
+    const th = H * (0.10 + rng2() * 0.09);
+    const tw = th * (0.22 + rng2() * 0.14);
+    for (let tier = 0; tier < 3; tier++) {
+      const yBase = groundY - tier * th * 0.22;
+      const yTop  = yBase   - th * (0.52 - tier * 0.08);
+      const hw    = tw * (0.65 - tier * 0.10);
+      bc.beginPath();
+      bc.moveTo(tx - hw, yBase);
+      bc.lineTo(tx + hw, yBase);
+      bc.lineTo(tx, yTop);
+      bc.closePath();
+      bc.fill();
+    }
+  }
+
+  // Front layer: taller, sparser
+  const rng3 = mulberry32(5678);
+  bc.fillStyle = '#000500';
+  const frontCount = Math.ceil(W / 30);
+  for (let t = 0; t < frontCount; t++) {
+    const tx = (t / frontCount) * W + (rng3() - 0.5) * 28;
+    const th = H * (0.16 + rng3() * 0.14);
+    const tw = th * (0.30 + rng3() * 0.16);
+    for (let tier = 0; tier < 4; tier++) {
+      const yBase = groundY - tier * th * 0.20;
+      const yTop  = yBase   - th * (0.55 - tier * 0.07);
+      const hw    = tw * (0.72 - tier * 0.12) * Math.max(0.3, 1 - tier * 0.1);
+      if (hw <= 0) continue;
+      bc.beginPath();
+      bc.moveTo(tx - hw, yBase);
+      bc.lineTo(tx + hw, yBase);
+      bc.lineTo(tx, yTop);
+      bc.closePath();
+      bc.fill();
+    }
+  }
+
+  bgCanvas = off;
+}
+
+// ── Physics: spatial Kuramoto update ────────────────────────────────────────
+function step(dt) {
+  const coupleR2 = coupleR * coupleR;
+
+  // Precompute sin/cos to avoid repeat trig
+  const sinT = new Float32Array(N);
+  const cosT = new Float32Array(N);
+  for (let i = 0; i < N; i++) {
+    sinT[i] = Math.sin(thetas[i]);
+    cosT[i] = Math.cos(thetas[i]);
+  }
+
+  for (let i = 0; i < N; i++) {
+    const xi = xs[i], yi = ys[i];
+    const si = sinT[i], ci = cosT[i];
+    let coupSin = 0.0, wSum = 0.0;
+
+    for (let j = 0; j < N; j++) {
+      if (i === j) continue;
+      const dx = xs[j] - xi, dy = ys[j] - yi;
+      const d2 = dx * dx + dy * dy;
+      if (d2 < coupleR2) {
+        const w = 1.0 - d2 / coupleR2; // linear weight, 1 at centre
+        // sin(θj - θi) = sinT[j]*ci - cosT[j]*si  (trig identity)
+        coupSin += w * (sinT[j] * ci - cosT[j] * si);
+        wSum    += w;
+      }
+    }
+
+    const coupling = wSum > 0 ? K * coupSin / wSum : 0;
+    const prev = thetas[i];
+    thetas[i] += (omegas[i] * TWO_PI + coupling) * dt;
+
+    // Phase wrap + flash detection
+    if (thetas[i] >= TWO_PI) {
+      thetas[i] -= TWO_PI;
+      flashI[i]  = 1.0;
+    } else if (thetas[i] < 0) {
+      thetas[i] += TWO_PI;
+    }
+    // Unused reference to prev — only to signal intent
+    void prev;
+
+    // Decay flash: ~0.3 s half-life
+    flashI[i] *= Math.exp(-dt * 3.5);
+  }
+}
+
+// ── Render ────────────────────────────────────────────────────────────────
+function draw() {
+  const W = canvas.width, H = canvas.height;
+
+  // Background
+  ctx.globalCompositeOperation = 'source-over';
+  ctx.globalAlpha = 1;
+  if (bgCanvas) ctx.drawImage(bgCanvas, 0, 0);
+  else { ctx.fillStyle = '#000a01'; ctx.fillRect(0, 0, W, H); }
+
+  // Fireflies — additive blending creates natural glow overlap
+  ctx.globalCompositeOperation = 'lighter';
+
+  for (let i = 0; i < N; i++) {
+    const theta = thetas[i];
+    // cos^20 gives narrow flash peak at θ=0; always a tiny ambient glow
+    const c = Math.cos(theta);
+    const phasePeak = c > 0 ? Math.pow(c, 20) : 0;
+    const flash     = flashI[i];
+    const bright    = Math.max(phasePeak, flash * 0.6) + 0.015;
+    if (bright < 0.02) continue;
+
+    const glowR = 10 + bright * 70;
+    const draw2 = glowR * 2;
+    ctx.globalAlpha = Math.min(1, bright * 0.85);
+    if (glowSprite) {
+      ctx.drawImage(glowSprite, xs[i] - glowR, ys[i] - glowR, draw2, draw2);
+    }
+    // Bright core dot
+    ctx.globalAlpha = Math.min(1, bright * 2.5);
+    const coreR = 1.5 + flash * 3.5;
+    ctx.beginPath();
+    ctx.arc(xs[i], ys[i], coreR, 0, TWO_PI);
+    ctx.fillStyle = bright > 0.5 ? '#ffffc0' : '#c8ff80';
+    ctx.fill();
+  }
+
+  ctx.globalAlpha = 1;
+  ctx.globalCompositeOperation = 'source-over';
+}
+
+// ── Order parameter (computed in stats update, not every frame) ───────────
+function orderParameter() {
+  let sx = 0, sy = 0;
+  for (let i = 0; i < N; i++) {
+    sx += Math.cos(thetas[i]);
+    sy += Math.sin(thetas[i]);
+  }
+  return Math.sqrt(sx * sx + sy * sy) / N;
+}
+
+// ── Animation loop ─────────────────────────────────────────────────────────
+let lastTs = 0, fAcc = 0, fCount = 0;
+
+function frame(ts) {
+  const dtMs = Math.min(ts - lastTs, 50);
+  lastTs = ts;
+
+  fCount++;
+  fAcc += dtMs;
+  if (fAcc >= 500) {
+    document.getElementById('v-fps').textContent = Math.round(fCount * 1000 / fAcc);
+    const R = orderParameter();
+    document.getElementById('v-r').textContent    = R.toFixed(3);
+    document.getElementById('sync-bar').style.width = (R * 100).toFixed(1) + '%';
+    fCount = 0; fAcc = 0;
+  }
+
+  if (!paused) step((dtMs / 1000) * simSpeed);
+  draw();
+  requestAnimationFrame(frame);
+}
+
+// ── Interaction ────────────────────────────────────────────────────────────
+let dragging = false;
+function triggerNear(clientX, clientY, radius) {
+  const rect = canvas.getBoundingClientRect();
+  const px = (clientX - rect.left)  * (canvas.width  / rect.width);
+  const py = (clientY - rect.top)   * (canvas.height / rect.height);
+  const r2 = radius * radius;
+  for (let i = 0; i < N; i++) {
+    const dx = xs[i] - px, dy = ys[i] - py;
+    if (dx*dx + dy*dy < r2) { thetas[i] = 0; flashI[i] = 1.0; }
+  }
+}
+canvas.addEventListener('mousedown', e => { dragging = true; triggerNear(e.clientX, e.clientY, 65); });
+canvas.addEventListener('mousemove', e => { if (dragging) triggerNear(e.clientX, e.clientY, 45); });
+canvas.addEventListener('mouseup',   () => { dragging = false; });
+canvas.addEventListener('mouseleave',() => { dragging = false; });
+canvas.addEventListener('touchstart', e => { e.preventDefault(); const t = e.touches[0]; triggerNear(t.clientX, t.clientY, 70); }, { passive: false });
+canvas.addEventListener('touchmove',  e => { e.preventDefault(); const t = e.touches[0]; triggerNear(t.clientX, t.clientY, 50); }, { passive: false });
+
+// ── Resize ─────────────────────────────────────────────────────────────────
+function resize() {
+  canvas.width  = window.innerWidth;
+  canvas.height = window.innerHeight;
+  buildBackground();
+}
+window.addEventListener('resize', () => { resize(); initFireflies(); });
+
+// ── UI bindings ────────────────────────────────────────────────────────────
+function bindSlider(id, cb, dispId, fmt) {
+  const el = document.getElementById(id);
+  const vEl = document.getElementById(dispId);
+  el.addEventListener('input', () => {
+    const v = parseFloat(el.value); cb(v);
+    vEl.textContent = fmt ? fmt(v) : v;
+  });
+}
+bindSlider('s-k',   v => { K = v; },             'v-k',   v => v.toFixed(1));
+bindSlider('s-w',   v => { freqSpread = v; resetFreqs(); }, 'v-w', v => v.toFixed(2));
+bindSlider('s-rr',  v => { coupleR = v; },         'v-rr',  v => v | 0);
+bindSlider('s-cnt', v => {
+  N = v | 0;
+  document.getElementById('v-n').textContent   = N;
+  document.getElementById('v-cnt').textContent = N;
+  initFireflies(true);
+}, 'v-cnt', v => v | 0);
+bindSlider('s-spd', v => { simSpeed = v; }, 'v-spd', v => v.toFixed(1) + '×');
+
+function resetFreqs() {
+  for (let i = 0; i < N; i++)
+    omegas[i] = 1.0 + (Math.random() - 0.5) * 2 * freqSpread;
+}
+
+document.getElementById('btn-perturb').addEventListener('click', () => {
+  for (let i = 0; i < N; i++) thetas[i] = Math.random() * TWO_PI;
+});
+document.getElementById('btn-sync').addEventListener('click', () => {
+  for (let i = 0; i < N; i++) { thetas[i] = 0; flashI[i] = 1.0; }
+});
+document.getElementById('btn-pause').addEventListener('click', function () {
+  paused = !paused;
+  this.textContent = paused ? 'Resume' : 'Pause';
+  this.classList.toggle('active', paused);
+});
+document.getElementById('btn-reset').addEventListener('click', () => { initFireflies(); });
+
+// ── Boot ───────────────────────────────────────────────────────────────────
+buildGlowSprite();
+resize();          // also calls buildBackground
+initFireflies();
+requestAnimationFrame(ts => { lastTs = ts; requestAnimationFrame(frame); });
+</script>
+</body>
+</html>

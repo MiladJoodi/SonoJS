@@ -5,7 +5,7 @@ Category: `hero`
 Slug / folder: `sonojs-hero-67`  
 Path: `public/templates/projects/hero/sonojs-hero-67/`  
 
-Full-bleed exhibition hero. Demo brand: **Glacier** — Frozen In Time.
+Full-bleed exhibition hero. Demo brand: **Glacier**. Frozen In Time.
 
 ## Images / video
 

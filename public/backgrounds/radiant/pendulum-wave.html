@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pendulum Wave</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0a0a0a;
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  }
+  canvas {
+    display: block;
+    width: 100vw;
+    height: 100vh;
+  }
+  .label {
+    position: fixed;
+    top: 20px;
+    left: 24px;
+    color: rgba(200, 149, 108, 0.6);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    z-index: 10;
+    pointer-events: none;
+  }
+  html.embed .label { display: none; }
+</style>
+<script>if(/\bembed=1\b/.test(location.search))document.documentElement.classList.add("embed")</script>
+</head>
+<body>
+<div class="label">Pendulum Wave</div>
+<canvas id="canvas"></canvas>
+<script>
+(function() {
+  const canvas = document.getElementById('canvas');
+  const ctx = canvas.getContext('2d');
+
+  function resize() {
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width = window.innerWidth * dpr;
+    canvas.height = window.innerHeight * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  // Configuration
+  let NUM_PENDULUMS = 20;
+  let CYCLE_DURATION = 60; // seconds for full pattern cycle
+  const BASE_OSCILLATIONS = 30; // longest pendulum completes this many in one cycle
+  const AMPLITUDE_DEG = 35;
+  const AMPLITUDE_RAD = AMPLITUDE_DEG * Math.PI / 180;
+  const TRAIL_LENGTH = 50;
+  const GRAVITY = 9.81;
+
+  // Colors: gradient from amber (left) to coral (right)
+  const AMBER = { r: 200, g: 149, b: 108 };  // #c8956c
+  const GOLD  = { r: 212, g: 165, b: 116 };  // #d4a574
+  const CORAL = { r: 224, g: 120, b: 80 };   // #e07850
+
+  function lerpColor(a, b, t) {
+    return {
+      r: Math.round(a.r + (b.r - a.r) * t),
+      g: Math.round(a.g + (b.g - a.g) * t),
+      b: Math.round(a.b + (b.b - a.b) * t)
+    };
+  }
+
+  function getColor(i) {
+    const t = i / (NUM_PENDULUMS - 1);
+    if (t < 0.5) {
+      return lerpColor(AMBER, GOLD, t * 2);
+    } else {
+      return lerpColor(GOLD, CORAL, (t - 0.5) * 2);
+    }
+  }
+
+  // Pendulum class
+  class Pendulum {
+    constructor(index) {
+      this.index = index;
+      this.color = getColor(index);
+
+      // Each pendulum makes (BASE_OSCILLATIONS + index) full swings in CYCLE_DURATION
+      const oscillations = BASE_OSCILLATIONS + index;
+      this.period = CYCLE_DURATION / oscillations;
+      this.omega = 2 * Math.PI / this.period;
+
+      // Derive the pendulum length from period: T = 2pi * sqrt(L/g) => L = g * (T / 2pi)^2
+      this.length = GRAVITY * Math.pow(this.period / (2 * Math.PI), 2);
+
+      this.trail = [];
+    }
+
+    getAngle(time) {
+      return AMPLITUDE_RAD * Math.cos(this.omega * time);
+    }
+
+    getBobPosition(time, pivotX, pivotY, displayLength) {
+      const angle = this.getAngle(time);
+      return {
+        x: pivotX + Math.sin(angle) * displayLength,
+        y: pivotY + Math.cos(angle) * displayLength
+      };
+    }
+  }
+
+  // Create pendulums
+  const pendulums = [];
+  for (let i = 0; i < NUM_PENDULUMS; i++) {
+    pendulums.push(new Pendulum(i));
+  }
+
+  // Normalize display lengths so they look good on screen
+  // The shortest pendulum (highest index) should be shortest on screen
+  let maxPhysicalLength = pendulums[0].length;
+  let minPhysicalLength = pendulums[NUM_PENDULUMS - 1].length;
+
+  // Mouse interaction: click to apply a gravity wave from click position
+  var clickImpulses = [];
+
+  canvas.addEventListener('click', function(e) {
+    clickImpulses.push({ x: e.clientX, y: e.clientY, time: 0, strength: 0.15 });
+  });
+  canvas.addEventListener('touchstart', function(e) {
+    e.preventDefault();
+    clickImpulses.push({ x: e.touches[0].clientX, y: e.touches[0].clientY, time: 0, strength: 0.15 });
+  }, { passive: false });
+
+  let startTime = null;
+
+  function animate(timestamp) {
+    if (!startTime) startTime = timestamp;
+    const time = (timestamp - startTime) / 1000;
+
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+
+    // Clear
+    ctx.fillStyle = '#0a0a0a';
+    ctx.fillRect(0, 0, w, h);
+
+    // Layout
+    const margin = w * 0.1;
+    const usableWidth = w - margin * 2;
+    const pivotY = h * 0.08;
+    const maxDisplayLength = h * 0.72;
+    const minDisplayLength = h * 0.38;
+
+    // Draw subtle horizontal reference line at rest position (bob y when angle=0)
+    // Use the average display length for the reference
+    const avgDisplayLength = (maxDisplayLength + minDisplayLength) / 2;
+    const restY = pivotY + avgDisplayLength;
+
+    // Multiple subtle reference lines
+    ctx.strokeStyle = 'rgba(200, 149, 108, 0.04)';
+    ctx.lineWidth = 1;
+    for (let i = 0; i < 3; i++) {
+      const refLen = minDisplayLength + (maxDisplayLength - minDisplayLength) * (i / 2);
+      const ry = pivotY + refLen;
+      ctx.beginPath();
+      ctx.moveTo(margin * 0.5, ry);
+      ctx.lineTo(w - margin * 0.5, ry);
+      ctx.stroke();
+    }
+
+    // Draw pivot bar
+    ctx.strokeStyle = 'rgba(200, 149, 108, 0.15)';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(margin - 20, pivotY);
+    ctx.lineTo(w - margin + 20, pivotY);
+    ctx.stroke();
+
+    // Update click impulses
+    for (var ci = clickImpulses.length - 1; ci >= 0; ci--) {
+      clickImpulses[ci].time += 1/60;
+      clickImpulses[ci].strength *= 0.98;
+      if (clickImpulses[ci].strength < 0.001) clickImpulses.splice(ci, 1);
+    }
+
+    // Calculate bob positions and update trails
+    const bobPositions = [];
+    for (let i = 0; i < NUM_PENDULUMS; i++) {
+      const p = pendulums[i];
+      const pivotX = margin + (usableWidth / (NUM_PENDULUMS - 1)) * i;
+
+      // Map physical length to display length
+      const lengthRatio = (p.length - minPhysicalLength) / (maxPhysicalLength - minPhysicalLength);
+      const displayLength = minDisplayLength + (maxDisplayLength - minDisplayLength) * lengthRatio;
+
+      const bob = p.getBobPosition(time, pivotX, pivotY, displayLength);
+
+      // Apply click impulses as displacement
+      for (var ci = 0; ci < clickImpulses.length; ci++) {
+        var imp = clickImpulses[ci];
+        var dx = pivotX - imp.x;
+        var dy = bob.y - imp.y;
+        var dist = Math.sqrt(dx * dx + dy * dy);
+        var wave = Math.sin(dist * 0.02 - imp.time * 8) * imp.strength * displayLength;
+        var falloff = Math.exp(-dist * 0.003);
+        bob.x += wave * falloff;
+      }
+
+      bobPositions.push({ x: bob.x, y: bob.y, pivotX, pivotY, displayLength });
+
+      // Update trail
+      p.trail.push({ x: bob.x, y: bob.y });
+      if (p.trail.length > TRAIL_LENGTH) {
+        p.trail.shift();
+      }
+    }
+
+    // Draw trails
+    for (let i = 0; i < NUM_PENDULUMS; i++) {
+      const p = pendulums[i];
+      const col = p.color;
+      const trail = p.trail;
+
+      if (trail.length < 2) continue;
+
+      for (let j = 1; j < trail.length; j++) {
+        const t = j / trail.length;
+        const alpha = t * t * 0.25;
+
+        ctx.beginPath();
+        ctx.moveTo(trail[j - 1].x, trail[j - 1].y);
+        ctx.lineTo(trail[j].x, trail[j].y);
+        ctx.strokeStyle = `rgba(${col.r}, ${col.g}, ${col.b}, ${alpha})`;
+        ctx.lineWidth = 2;
+        ctx.lineCap = 'round';
+        ctx.stroke();
+      }
+    }
+
+    // Draw connection line between adjacent bobs
+    if (bobPositions.length > 1) {
+      // Glow pass
+      ctx.beginPath();
+      ctx.moveTo(bobPositions[0].x, bobPositions[0].y);
+      for (let i = 1; i < bobPositions.length; i++) {
+        // Smooth curve through points
+        if (i < bobPositions.length - 1) {
+          const cpx = (bobPositions[i].x + bobPositions[i + 1].x) / 2;
+          const cpy = (bobPositions[i].y + bobPositions[i + 1].y) / 2;
+          ctx.quadraticCurveTo(bobPositions[i].x, bobPositions[i].y, cpx, cpy);
+        } else {
+          ctx.lineTo(bobPositions[i].x, bobPositions[i].y);
+        }
+      }
+      ctx.strokeStyle = 'rgba(212, 165, 116, 0.08)';
+      ctx.lineWidth = 6;
+      ctx.stroke();
+
+      // Crisp pass
+      ctx.beginPath();
+      ctx.moveTo(bobPositions[0].x, bobPositions[0].y);
+      for (let i = 1; i < bobPositions.length; i++) {
+        if (i < bobPositions.length - 1) {
+          const cpx = (bobPositions[i].x + bobPositions[i + 1].x) / 2;
+          const cpy = (bobPositions[i].y + bobPositions[i + 1].y) / 2;
+          ctx.quadraticCurveTo(bobPositions[i].x, bobPositions[i].y, cpx, cpy);
+        } else {
+          ctx.lineTo(bobPositions[i].x, bobPositions[i].y);
+        }
+      }
+      ctx.strokeStyle = 'rgba(212, 165, 116, 0.15)';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    }
+
+    // Draw pendulums (strings and bobs)
+    for (let i = 0; i < NUM_PENDULUMS; i++) {
+      const p = pendulums[i];
+      const col = p.color;
+      const bob = bobPositions[i];
+
+      // String (thin line from pivot to bob)
+      ctx.beginPath();
+      ctx.moveTo(bob.pivotX, bob.pivotY);
+      ctx.lineTo(bob.x, bob.y);
+      ctx.strokeStyle = `rgba(${col.r}, ${col.g}, ${col.b}, 0.2)`;
+      ctx.lineWidth = 1;
+      ctx.stroke();
+
+      // Pivot point (small dot)
+      ctx.beginPath();
+      ctx.arc(bob.pivotX, bob.pivotY, 2, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${col.r}, ${col.g}, ${col.b}, 0.3)`;
+      ctx.fill();
+
+      // Bob glow (large soft circle)
+      const glowRadius = 18;
+      const glow = ctx.createRadialGradient(bob.x, bob.y, 0, bob.x, bob.y, glowRadius);
+      glow.addColorStop(0, `rgba(${col.r}, ${col.g}, ${col.b}, 0.3)`);
+      glow.addColorStop(0.3, `rgba(${col.r}, ${col.g}, ${col.b}, 0.1)`);
+      glow.addColorStop(1, `rgba(${col.r}, ${col.g}, ${col.b}, 0)`);
+      ctx.beginPath();
+      ctx.arc(bob.x, bob.y, glowRadius, 0, Math.PI * 2);
+      ctx.fillStyle = glow;
+      ctx.fill();
+
+      // Bob mid glow
+      const midGlow = ctx.createRadialGradient(bob.x, bob.y, 0, bob.x, bob.y, 8);
+      midGlow.addColorStop(0, `rgba(${Math.min(255, col.r + 40)}, ${Math.min(255, col.g + 40)}, ${Math.min(255, col.b + 30)}, 0.6)`);
+      midGlow.addColorStop(1, `rgba(${col.r}, ${col.g}, ${col.b}, 0)`);
+      ctx.beginPath();
+      ctx.arc(bob.x, bob.y, 8, 0, Math.PI * 2);
+      ctx.fillStyle = midGlow;
+      ctx.fill();
+
+      // Bob core (bright small circle)
+      ctx.beginPath();
+      ctx.arc(bob.x, bob.y, 3, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${Math.min(255, col.r + 60)}, ${Math.min(255, col.g + 60)}, ${Math.min(255, col.b + 50)}, 0.9)`;
+      ctx.fill();
+    }
+
+    requestAnimationFrame(animate);
+  }
+
+  requestAnimationFrame(animate);
+
+  window.addEventListener('message', function(e) {
+    if (e.data && e.data.type === 'param') {
+      var changed = false;
+      switch (e.data.name) {
+        case 'NUM_PENDULUMS': NUM_PENDULUMS = Math.round(e.data.value); changed = true; break;
+        case 'CYCLE_DURATION': CYCLE_DURATION = e.data.value; changed = true; break;
+      }
+      if (changed) {
+        pendulums.length = 0;
+        for (var i = 0; i < NUM_PENDULUMS; i++) {
+          pendulums.push(new Pendulum(i));
+        }
+        maxPhysicalLength = pendulums[0].length;
+        minPhysicalLength = pendulums[NUM_PENDULUMS - 1].length;
+      }
+    }
+  });
+})();
+</script>
+</body>
+</html>

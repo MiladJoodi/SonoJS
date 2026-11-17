@@ -1,7 +1,7 @@
 /**
  * Non-catalog route utilities (templates, tools, admin, pricing, legal, …).
  *
- * No Tailwind preflight — that lives in app/globals.css.
+ * No Tailwind preflight, that lives in app/globals.css.
  * Import only from layouts that need these surfaces (never root / homepage-only).
  */
 @layer theme, utilities;
@@ -16,7 +16,7 @@
 @import "./shimmer.css";
 @import "./chrome-utilities.css";
 
-/* Full installable UI — route pages use many primitives beyond the shell set. */
+/* Full installable UI, route pages use many primitives beyond the shell set. */
 @source "../packages/ui/src/**/*.{ts,tsx}";
 
 @source "../components/admin/**/*.{ts,tsx}";
@@ -34,7 +34,7 @@
 @source "../components/sono-loader/**/*.{ts,tsx}";
 @source "../components/catalog/**/*.{ts,tsx}";
 @source "../components/icons/**/*.{ts,tsx}";
-/* Account route chrome — removed from homepage globals (Phase L2). */
+/* Account route chrome, removed from homepage globals (Phase L2). */
 @source "../components/auth/account/**/*.{ts,tsx}";
 @source "../components/auth/account-settings.tsx";
 
@@ -54,7 +54,7 @@
 @source inline("ltr:data-[state=checked]:translate-x-[calc(100%-2px)] rtl:data-[state=checked]:-translate-x-[calc(100%-2px)]");
 @source inline("grid-rows-[0fr] grid-rows-[1fr] transition-[grid-template-rows]");
 
-/* Sidebar collapsible — same ownership as registry-catalog.css */
+/* Sidebar collapsible, same ownership as registry-catalog.css */
 @keyframes docs-collapsible-down {
   from {
     height: 0;

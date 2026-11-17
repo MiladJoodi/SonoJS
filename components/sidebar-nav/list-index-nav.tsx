@@ -25,12 +25,12 @@ export type ListIndexAdjacentLink = {
   title: string
 }
 
-/** Same chrome as DocsAdjacentPager — round outline prev/next. */
+/** Same chrome as DocsAdjacentPager, round outline prev/next. */
 const PAGER_BTN_CLASS =
   "size-8 shrink-0 rounded-full border-border/70 bg-card shadow-none hover:bg-canvas"
 
 /**
- * Mobile catalog index — sticky Browse bar + bottom sheet + optional prev/next.
+ * Mobile catalog index, sticky Browse bar + bottom sheet + optional prev/next.
  * Desktop sidebars stay separate; this is `lg:hidden` only.
  */
 export function ListIndexNav({
@@ -65,7 +65,7 @@ export function ListIndexNav({
     setOpen(false)
   }, [pathname])
 
-  // Scroll active row inside the sheet only — never the page behind.
+  // Scroll active row inside the sheet only. Never the page behind.
   React.useEffect(() => {
     if (!open) return
     const id = window.setTimeout(() => {

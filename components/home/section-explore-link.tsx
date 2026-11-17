@@ -5,7 +5,7 @@ import { ArrowRightIcon } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 /**
- * Quiet inline section CTA — text + arrow, not a primary Button.
+ * Quiet inline section CTA, text + arrow, not a primary Button.
  */
 export function HomeSectionExploreLink({
   href,

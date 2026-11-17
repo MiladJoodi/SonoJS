@@ -40,7 +40,7 @@ export default function BlockAgentWorkspaceDocsPage() {
           <div className="space-y-1">
             <h2 className="text-h3">Agent Workspace</h2>
             <p className="text-sm text-muted-foreground">
-              Full product shell — sidebar threads, model picker, streaming
+              Full product shell, sidebar threads, model picker, streaming
               conversation, stop/retry, and command search.
             </p>
           </div>
@@ -76,7 +76,7 @@ export default function Page() {
           <div className="space-y-1">
             <h2 className="text-h3">Chat Starter</h2>
             <p className="text-sm text-muted-foreground">
-              Deployable starter — history rail, setup notice, scripted demo
+              Deployable starter, history rail, setup notice, scripted demo
               replies when no key is set, and an installable{" "}
               <code className="text-foreground">/api/chat</code> route for your
               own provider key.

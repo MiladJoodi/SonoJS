@@ -317,7 +317,7 @@ export const ImagePageflip = React.forwardRef<
             />
           ) : null}
 
-          {/* Soft ground shadow only — oval blur, never a page-sized card (that read as a blank leaf) */}
+          {/* Soft ground shadow only. Oval blur, never a page-sized card (that read as a blank leaf) */}
           {shadowIntensity > 0 ? (
             <div
               aria-hidden

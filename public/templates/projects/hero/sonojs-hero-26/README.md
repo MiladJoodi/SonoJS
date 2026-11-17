@@ -5,7 +5,7 @@ Category: `hero`
 Slug / folder: `sonojs-hero-26`  
 Path: `public/templates/projects/hero/sonojs-hero-26/`  
 
-Healthcare clinic hero (still image only — no cover video). Demo brand: **Healcure**.
+Healthcare clinic hero (still image only. No cover video). Demo brand: **Healcure**.
 
 ## Images / video
 

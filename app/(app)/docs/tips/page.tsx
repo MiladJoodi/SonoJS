@@ -13,7 +13,7 @@ export default function TipsDocsPage() {
       <header className="space-y-3">
         <h1 className="text-h1">Tips</h1>
         <p className="leading-relaxed text-muted-foreground">
-          Short notes from real setup issues — path aliases, installs, and
+          Short notes from real setup issues, path aliases, installs, and
           things that break quietly until TypeScript complains.
         </p>
       </header>

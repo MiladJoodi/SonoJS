@@ -2,7 +2,7 @@ import Script from "next/script"
 
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID ?? "GTM-NZW3MWGC"
 
-/** Google Tag Manager — visit / conversion tags from the GTM container. */
+/** Google Tag Manager, visit / conversion tags from the GTM container. */
 export function GoogleTagManager() {
   return (
     <>

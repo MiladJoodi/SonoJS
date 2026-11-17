@@ -83,7 +83,7 @@ export function createCardTexture(project: HangingBagItem) {
   ctx.fillStyle = "#64748b"
   ctx.font = `500 ${26 * S * 0.55}px ${SANS}`
   ctx.textAlign = "right"
-  ctx.fillText(`${project.start} — ${project.end}`, W - 52, 85)
+  ctx.fillText(`${project.start}, ${project.end}`, W - 52, 85)
 
   ctx.fillStyle = "#e11d48"
   ctx.font = `700 ${78 * S * 0.9}px ${SANS}`

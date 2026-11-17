@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neon Revival</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; overflow: hidden; background: #0a0a0a; }
+  canvas { display: block; width: 100vw; height: 100vh; }
+  .label {
+    position: fixed;
+    top: 20px;
+    left: 24px;
+    font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(200, 149, 108, 0.5);
+    z-index: 10;
+    pointer-events: none;
+    user-select: none;
+  }
+  html.embed .label { display: none; }
+</style>
+<script>if(/\bembed=1\b/.test(location.search))document.documentElement.classList.add("embed")</script>
+</head>
+<body>
+<div class="label">Neon Revival</div>
+<canvas id="canvas"></canvas>
+<script>
+// ─────────────────────────────────────────────
+// 29 · Neon Revival — Glowing neon tube art installation
+// Inspired by Doja Cat — hot pink, electric blue, warm amber
+// ─────────────────────────────────────────────
+(function () {
+  var canvas = document.getElementById('canvas');
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var urlParams = new URLSearchParams(window.location.search);
+  var pixelScale = parseFloat(urlParams.get('p')) || 1;
+
+  var gl = canvas.getContext('webgl', { alpha: true, antialias: false, preserveDrawingBuffer: false });
+  if (!gl) return;
+
+  var vertSrc = [
+    'attribute vec2 a_pos;',
+    'void main() { gl_Position = vec4(a_pos, 0.0, 1.0); }'
+  ].join('\n');
+
+  var fragSrc = [
+    'precision highp float;',
+    'uniform float u_time;',
+    'uniform vec2 u_res;',
+    'uniform float u_glowIntensity;',
+    'uniform float u_flickerRate;',
+    'uniform float u_shape;',
+    'uniform vec2 u_center;',
+    'uniform float u_scale;',
+    'uniform vec2 u_mouse;',
+    '',
+    '#define PI 3.14159265359',
+    '#define TAU 6.28318530718',
+    '',
+    '// ── Hash / noise ──',
+    'float hash(float n) {',
+    '  return fract(sin(n) * 43758.5453123);',
+    '}',
+    '',
+    'float hash2(vec2 p) {',
+    '  return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);',
+    '}',
+    '',
+    'float noise(vec2 p) {',
+    '  vec2 i = floor(p);',
+    '  vec2 f = fract(p);',
+    '  f = f * f * (3.0 - 2.0 * f);',
+    '  float a = hash2(i);',
+    '  float b = hash2(i + vec2(1.0, 0.0));',
+    '  float c = hash2(i + vec2(0.0, 1.0));',
+    '  float d = hash2(i + vec2(1.0, 1.0));',
+    '  return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);',
+    '}',
+    '',
+    '// ── Signed distance functions for neon tube shapes ──',
+    '',
+    '// Distance to a line segment',
+    'float sdSegment(vec2 p, vec2 a, vec2 b) {',
+    '  vec2 pa = p - a, ba = b - a;',
+    '  float h = clamp(dot(pa, ba) / dot(ba, ba), 0.0, 1.0);',
+    '  return length(pa - ba * h);',
+    '}',
+    '',
+    '// Distance to a circle (ring)',
+    'float sdCircle(vec2 p, vec2 center, float radius) {',
+    '  return abs(length(p - center) - radius);',
+    '}',
+    '',
+    '// Distance to an arc (portion of a circle)',
+    'float sdArc(vec2 p, vec2 center, float radius, float startAngle, float sweep) {',
+    '  vec2 d = p - center;',
+    '  float angle = atan(d.y, d.x);',
+    '  // Normalize angle relative to start',
+    '  float a = mod(angle - startAngle + PI, TAU) - PI;',
+    '  if (a >= 0.0 && a <= sweep) {',
+    '    return abs(length(d) - radius);',
+    '  }',
+    '  // Distance to endpoints',
+    '  vec2 e1 = center + radius * vec2(cos(startAngle), sin(startAngle));',
+    '  vec2 e2 = center + radius * vec2(cos(startAngle + sweep), sin(startAngle + sweep));',
+    '  return min(length(p - e1), length(p - e2));',
+    '}',
+    '',
+    '// Distance to a triangle (outline only)',
+    'float sdTriangle(vec2 p, vec2 a, vec2 b, vec2 c) {',
+    '  float d1 = sdSegment(p, a, b);',
+    '  float d2 = sdSegment(p, b, c);',
+    '  float d3 = sdSegment(p, c, a);',
+    '  return min(min(d1, d2), d3);',
+    '}',
+    '',
+    '// Distance to a rounded rectangle outline',
+    'float sdRoundRect(vec2 p, vec2 center, vec2 halfSize, float radius) {',
+    '  vec2 d = abs(p - center) - halfSize + radius;',
+    '  return abs(length(max(d, 0.0)) + min(max(d.x, d.y), 0.0) - radius);',
+    '}',
+    '',
+    '// Distance to a heart shape',
+    'float sdHeart(vec2 p, vec2 center, float size) {',
+    '  vec2 q = (p - center) / size;',
+    '  q.y -= 0.2;',
+    '  // Heart as two arcs + a V bottom',
+    '  float a1 = sdArc(q, vec2(-0.28, 0.18), 0.36, 0.3, PI);',
+    '  float a2 = sdArc(q, vec2(0.28, 0.18), 0.36, -0.15, PI);',
+    '  float v1 = sdSegment(q, vec2(-0.56, -0.02), vec2(0.0, -0.65));',
+    '  float v2 = sdSegment(q, vec2(0.56, -0.02), vec2(0.0, -0.65));',
+    '  return min(min(a1, a2), min(v1, v2)) * size;',
+    '}',
+    '',
+    '// Distance to a five-pointed star outline',
+    'float sdStar(vec2 p, vec2 center, float outerR, float innerR) {',
+    '  float d = 1e10;',
+    '  for (int i = 0; i < 5; i++) {',
+    '    float fi = float(i);',
+    '    float a1 = fi * TAU / 5.0 - PI / 2.0;',
+    '    float a2 = (fi + 0.5) * TAU / 5.0 - PI / 2.0;',
+    '    float a3 = (fi + 1.0) * TAU / 5.0 - PI / 2.0;',
+    '    vec2 outer1 = center + outerR * vec2(cos(a1), sin(a1));',
+    '    vec2 inner1 = center + innerR * vec2(cos(a2), sin(a2));',
+    '    vec2 outer2 = center + outerR * vec2(cos(a3), sin(a3));',
+    '    d = min(d, sdSegment(p, outer1, inner1));',
+    '    d = min(d, sdSegment(p, inner1, outer2));',
+    '  }',
+    '  return d;',
+    '}',
+    '',
+    '// Distance to a diamond (rhombus outline)',
+    'float sdDiamond(vec2 p, vec2 center, vec2 halfSize) {',
+    '  vec2 a = center + vec2(0.0, halfSize.y);',
+    '  vec2 b = center + vec2(halfSize.x, 0.0);',
+    '  vec2 c = center + vec2(0.0, -halfSize.y);',
+    '  vec2 dd = center + vec2(-halfSize.x, 0.0);',
+    '  float d1 = sdSegment(p, a, b);',
+    '  float d2 = sdSegment(p, b, c);',
+    '  float d3 = sdSegment(p, c, dd);',
+    '  float d4 = sdSegment(p, dd, a);',
+    '  return min(min(d1, d2), min(d3, d4));',
+    '}',
+    '',
+    '// ── Neon glow rendering ──',
+    '// Converts SDF distance to a neon tube glow',
+    'vec3 neonGlow(float dist, vec3 color, float tubeWidth, float brightness) {',
+    '  // Hot white core',
+    '  float core = exp(-dist * dist / (tubeWidth * tubeWidth * 0.3));',
+    '  // Bright colored inner glow',
+    '  float inner = exp(-dist * dist / (tubeWidth * tubeWidth * 2.5));',
+    '  // Medium spread glow',
+    '  float mid = exp(-dist * dist / (tubeWidth * tubeWidth * 12.0));',
+    '  // Wide bloom',
+    '  float bloom = exp(-dist * dist / (tubeWidth * tubeWidth * 50.0));',
+    '  // Very wide atmospheric scatter',
+    '  float scatter = exp(-dist * dist / (tubeWidth * tubeWidth * 200.0));',
+    '',
+    '  vec3 white = vec3(1.0, 0.97, 0.95);',
+    '  vec3 result = white * core * 1.5;',
+    '  result += mix(white, color, 0.5) * inner * 1.0;',
+    '  result += color * mid * 0.6;',
+    '  result += color * bloom * 0.25;',
+    '  result += color * scatter * 0.08;',
+    '',
+    '  return result * brightness;',
+    '}',
+    '',
+    '// ── Flicker function ──',
+    '// Returns brightness multiplier [0, 1]',
+    'float flicker(float t, float id, float rate) {',
+    '  float phase = hash(id * 13.37) * TAU;',
+    '  float speed = 3.0 + hash(id * 7.91) * 8.0;',
+    '  float base = sin(t * speed + phase);',
+    '',
+    '  // Occasional brief cutout',
+    '  float cutout = step(0.92 - rate * 0.15, sin(t * speed * 2.3 + phase * 1.7));',
+    '  float dim = 1.0 - cutout * 0.7;',
+    '',
+    '  // 60Hz buzz',
+    '  float buzz = 0.97 + 0.03 * sin(t * 376.99);',
+    '',
+    '  // Slow pulse',
+    '  float pulse = 0.92 + 0.08 * sin(t * 0.5 + phase);',
+    '',
+    '  return pulse * buzz * dim;',
+    '}',
+    '',
+    '// ── Fade-in animation ──',
+    'float fadeIn(float t, float delay, float duration) {',
+    '  return smoothstep(delay, delay + duration, t);',
+    '}',
+    '',
+    '// ── Scene composition ──',
+    'void main() {',
+    '  vec2 origin = u_scale > 0.0 ? u_center : vec2(0.5);',
+    '  float sc = u_scale > 0.0 ? u_scale : 1.0;',
+    '  vec2 uv = (gl_FragCoord.xy - u_res * origin) / (min(u_res.x, u_res.y) * sc);',
+    '  float aspect = u_res.x / u_res.y;',
+    '',
+    '  // ── Drag: 3D perspective tilt (compression only, no stretch) ──',
+    '  {',
+    '    float tiltX = u_mouse.x;',
+    '    float tiltY = u_mouse.y;',
+    '    uv.x /= max(cos(tiltX), 0.3);',
+    '    uv.y /= max(cos(tiltY), 0.3);',
+    '  }',
+    '',
+    '  float t = u_time;',
+    '',
+    '  // Tube thickness — responsive to resolution',
+    '  float tw = 0.012;',
+    '',
+    '  // ── Dark background with subtle texture ──',
+    '  vec3 col = vec3(0.02, 0.018, 0.025);',
+    '  // Brick wall texture',
+    '  float brickNoise = noise(gl_FragCoord.xy * 0.15) * 0.015;',
+    '  float brickY = step(0.95, fract(uv.y * 12.0)) * 0.008;',
+    '  float brickX = step(0.95, fract((uv.x + step(0.5, fract(uv.y * 6.0)) * 0.04) * 8.0)) * 0.006;',
+    '  col += brickNoise - brickY - brickX;',
+    '',
+    '  // ── Neon colors ──',
+    '  vec3 hotPink = vec3(1.0, 0.08, 0.45);',
+    '  vec3 electricBlue = vec3(0.1, 0.5, 1.0);',
+    '  vec3 warmAmber = vec3(1.0, 0.65, 0.15);',
+    '  vec3 softPink = vec3(1.0, 0.35, 0.55);',
+    '  vec3 deepBlue = vec3(0.15, 0.3, 0.95);',
+    '  // Shape 2 — Crown',
+    '  vec3 goldAmber = vec3(1.0, 0.75, 0.05);',
+    '  vec3 richGold = vec3(1.0, 0.85, 0.2);',
+    '  // Shape 3 — Lips',
+    '  vec3 crimson = vec3(0.9, 0.05, 0.15);',
+    '  vec3 deepPink = vec3(1.0, 0.15, 0.38);',
+    '  // Shape 4 — Butterfly',
+    '  vec3 lavender = vec3(0.7, 0.3, 1.0);',
+    '  vec3 cyan = vec3(0.05, 0.85, 1.0);',
+    '',
+    '  // ── Accumulate neon light ──',
+    '  vec3 neon = vec3(0.0);',
+    '  float dist;',
+    '  float fl;',
+    '  float fi;',
+    '',
+    '',
+    '  // ═══════════════════════════════════════',
+    '  // SHAPE 1: "Crown"',
+    '  // Drag queen tiara: horizontal band + 5 triangular peaks + jewel circles + accent stars',
+    '  // ═══════════════════════════════════════',
+    '  if (u_shape < 1.5) {',
+    '',
+    '  // ELEMENT 1: Horizontal band across crown base — warm amber',
+    '  fi = 41.0;',
+    '  dist = sdSegment(uv, vec2(-0.32, -0.05), vec2(0.32, -0.05));',
+    '  fl = flicker(t, fi, u_flickerRate) * fadeIn(t, 0.2, 1.5);',
+    '  neon += neonGlow(dist, warmAmber, tw, fl * u_glowIntensity);',
+    '',
+    '  // ELEMENT 2: Center peak (tallest) — hot pink',
+    '  fi = 42.0;',
+    '  dist = sdTriangle(uv, vec2(-0.06, -0.05), vec2(0.0, 0.32), vec2(0.06, -0.05));',
+    '  fl = flicker(t, fi, u_flickerRate) * fadeIn(t, 0.4, 1.4);',
+    '  neon += neonGlow(dist, hotPink, tw, fl * u_glowIntensity * 1.05);',
+    '',
+    '  // ELEMENT 3: Inner left peak — hot pink',
+    '  fi = 43.0;',
+    '  dist = sdTriangle(uv, vec2(-0.18, -0.05), vec2(-0.12, 0.18), vec2(-0.06, -0.05));',
+    '  fl = flicker(t, fi, u_flickerRate) * fadeIn(t, 0.55, 1.4);',
+    '  neon += neonGlow(dist, hotPink, tw, fl * u_glowIntensity);',
+    '',
+    '  // ELEMENT 4: Inner right peak — hot pink',
+    '  fi = 44.0;',
+    '  dist = sdTriangle(uv, vec2(0.06, -0.05), vec2(0.12, 0.18), vec2(0.18, -0.05));',
+    '  fl = flicker(t, fi, u_flickerRate) * fadeIn(t, 0.6, 1.4);',
+    '  neon += neonGlow(dist, hotPink, tw, fl * u_glowIntensity);',
+    '',
+    '  // ELEMENT 5: Outer left peak — soft pink',
+    '  fi = 45.0;',
+    '  dist = sdTriangle(uv, vec2(-0.32, -0.05), vec2(-0.25, 0.12), vec2(-0.18, -0.05));',
+    '  fl = flicker(t, fi, u_flickerRate) * fadeIn(t, 0.7, 1.4);',
+    '  neon += neonGlow(dist, softPink, tw, fl * u_glowIntensity * 0.9);',
+    '',
+    '  // ELEMENT 6: Outer right peak — soft pink',
+    '  fi = 46.0;',
+    '  dist = sdTriangle(uv, vec2(0.18, -0.05), vec2(0.25, 0.12), vec2(0.32, -0.05));',
+    '  fl = flicker(t, fi, u_flickerRate) * fadeIn(t, 0.75, 1.4);',
+    '  neon += neonGlow(dist, softPink, tw, fl * u_glowIntensity * 0.9);',
+    '',
+    '  // ELEMENTS 7-11: Jewel circles at each peak tip — warm amber',
+    '  fi = 47.0;',
+    '  {',
+    '    float jp = 0.8 + 0.2 * sin(t * 1.9);',
+    '    float dj1 = sdCircle(uv, vec2(0.0, 0.32), 0.018);',
+    '    float dj2 = sdCircle(uv, vec2(-0.12, 0.18), 0.018);',
+    '    float dj3 = sdCircle(uv, vec2(0.12, 0.18), 0.018);',
+    '    float dj4 = sdCircle(uv, vec2(-0.25, 0.12), 0.018);',
+    '    float dj5 = sdCircle(uv, vec2(0.25, 0.12), 0.018);',
+    '    dist = min(min(min(dj1, dj2), min(dj3, dj4)), dj5);',
+    '    fl = flicker(t, fi, u_flickerRate * 0.5) * fadeIn(t, 1.2, 1.0) * jp;',
+    '    neon += neonGlow(dist, warmAmber, tw * 0.65, fl * u_glowIntensity * 1.15);',
+    '  }',
+    '',
+    '  // ELEMENT 12: Left accent star — electric blue',
+    '  fi = 48.0;',
+    '  {',
+    '    float sp = 0.85 + 0.15 * sin(t * 1.7);',
+    '    dist = sdStar(uv, vec2(-0.50, 0.05), 0.06, 0.025);',
+    '    fl = flicker(t, fi, u_flickerRate) * fadeIn(t, 1.0, 1.2) * sp;',
+    '    neon += neonGlow(dist, electricBlue, tw * 0.85, fl * u_glowIntensity);',
+    '  }',
+    '',
+    '  // ELEMENT 13: Right accent star — electric blue',
+    '  fi = 49.0;',
+    '  {',
+    '    float sp2 = 0.85 + 0.15 * sin(t * 1.7 + 1.2);',
+    '    dist = sdStar(uv, vec2(0.50, 0.05), 0.06, 0.025);',
+    '    fl = flicker(t, fi, u_flickerRate) * fadeIn(t, 1.1, 1.2) * sp2;',
+    '    neon += neonGlow(dist, electricBlue, tw * 0.85, fl * u_glowIntensity);',
+    '  }',
+    '',
+    '  // REFLECTION — shape 1 (Crown)',
+    '  {',
+    '    float reflY = -0.14;',
+    '    if (uv.y < reflY) {',
+    '      vec2 rUV = vec2(uv.x, 2.0 * reflY - uv.y);',
+    '      float reflDist = reflY - uv.y;',
+    '      float reflAtten = exp(-reflDist * 5.0) * 0.15;',
+    '      rUV.x += sin(uv.y * 25.0 + t * 2.0) * 0.005;',
+    '      rUV.y += cos(uv.x * 20.0 + t * 1.5) * 0.003;',
+    '      vec3 reflNeon = vec3(0.0);',
+    '      float rfl;',
+    '      dist = sdSegment(rUV, vec2(-0.32, -0.05), vec2(0.32, -0.05));',
+    '      rfl = flicker(t, 41.0, u_flickerRate) * fadeIn(t, 0.2, 1.5);',
+    '      reflNeon += neonGlow(dist, warmAmber, tw * 1.2, rfl * u_glowIntensity);',
+    '      dist = sdTriangle(rUV, vec2(-0.06, -0.05), vec2(0.0, 0.32), vec2(0.06, -0.05));',
+    '      rfl = flicker(t, 42.0, u_flickerRate) * fadeIn(t, 0.4, 1.4);',
+    '      reflNeon += neonGlow(dist, hotPink, tw * 1.1, rfl * u_glowIntensity * 1.05);',
+    '      dist = sdTriangle(rUV, vec2(-0.18, -0.05), vec2(-0.12, 0.18), vec2(-0.06, -0.05));',
+    '      rfl = flicker(t, 43.0, u_flickerRate) * fadeIn(t, 0.55, 1.4);',
+    '      reflNeon += neonGlow(dist, hotPink, tw * 1.1, rfl * u_glowIntensity);',
+    '      dist = sdTriangle(rUV, vec2(0.06, -0.05), vec2(0.12, 0.18), vec2(0.18, -0.05));',
+    '      rfl = flicker(t, 44.0, u_flickerRate) * fadeIn(t, 0.6, 1.4);',
+    '      reflNeon += neonGlow(dist, hotPink, tw * 1.1, rfl * u_glowIntensity);',
+    '      dist = sdTriangle(rUV, vec2(-0.32, -0.05), vec2(-0.25, 0.12), vec2(-0.18, -0.05));',
+    '      rfl = flicker(t, 45.0, u_flickerRate) * fadeIn(t, 0.7, 1.4);',
+    '      reflNeon += neonGlow(dist, softPink, tw * 1.1, rfl * u_glowIntensity * 0.9);',
+    '      dist = sdTriangle(rUV, vec2(0.18, -0.05), vec2(0.25, 0.12), vec2(0.32, -0.05));',
+    '      rfl = flicker(t, 46.0, u_flickerRate) * fadeIn(t, 0.75, 1.4);',
+    '      reflNeon += neonGlow(dist, softPink, tw * 1.1, rfl * u_glowIntensity * 0.9);',
+    '      {',
+    '        float rjp = 0.8 + 0.2 * sin(t * 1.9);',
+    '        float dj1 = sdCircle(rUV, vec2(0.0, 0.32), 0.018);',
+    '        float dj2 = sdCircle(rUV, vec2(-0.12, 0.18), 0.018);',
+    '        float dj3 = sdCircle(rUV, vec2(0.12, 0.18), 0.018);',
+    '        float dj4 = sdCircle(rUV, vec2(-0.25, 0.12), 0.018);',
+    '        float dj5 = sdCircle(rUV, vec2(0.25, 0.12), 0.018);',
+    '        dist = min(min(min(dj1, dj2), min(dj3, dj4)), dj5);',
+    '        rfl = flicker(t, 47.0, u_flickerRate * 0.5) * fadeIn(t, 1.2, 1.0) * rjp;',
+    '        reflNeon += neonGlow(dist, warmAmber, tw * 0.8, rfl * u_glowIntensity * 1.15);',
+    '      }',
+    '      neon += reflNeon * reflAtten;',
+    '    }',
+    '  }',
+    '',
+    '  } // end shape 1',
+    '',
+    '',
+    '  // ═══════════════════════════════════════',
+    '  // SHAPE 2: "Starburst"',
+    '  // Central dot + 8 radiating rays + outer ring + tip dots',
+    '  // ═══════════════════════════════════════',
+    '  else if (u_shape < 2.5) {',
+    '',
+    '  // ELEMENT 1: Central bright dot',
+    '  fi = 21.0;',
+    '  {',
+    '    float dotPulse = 0.85 + 0.15 * sin(t * 2.2);',
+    '    dist = sdCircle(uv, vec2(0.0, 0.0), 0.04);',
+    '    fl = flicker(t, fi, u_flickerRate * 0.4) * fadeIn(t, 0.2, 1.0) * dotPulse;',
+    '    neon += neonGlow(dist, hotPink, tw * 0.6, fl * u_glowIntensity * 1.3);',
+    '  }',
+    '',
+    '  // ELEMENT 2: Outer ring — warm amber',
+    '  fi = 22.0;',
+    '  dist = sdCircle(uv, vec2(0.0, 0.0), 0.38);',
+    '  fl = flicker(t, fi, u_flickerRate) * fadeIn(t, 0.3, 1.5);',
+    '  neon += neonGlow(dist, warmAmber, tw * 0.9, fl * u_glowIntensity * 0.9);',
+    '',
+    '  // ELEMENTS 3-10: 8 evenly spaced rays, alternating pink and blue',
+    '  // Ray 0: 0 deg (right)',
+    '  fi = 23.0;',
+    '  dist = sdSegment(uv, vec2(0.06, 0.0), vec2(0.32, 0.0));',
+    '  fl = flicker(t, fi, u_flickerRate) * fadeIn(t, 0.5, 1.2);',
+    '  neon += neonGlow(dist, hotPink, tw * 0.75, fl * u_glowIntensity * 0.9);',
+    '',
+    '  // Ray 1: 45 deg',
+    '  fi = 24.0;',
+    '  dist = sdSegment(uv, vec2(0.042, 0.042), vec2(0.226, 0.226));',
+    '  fl = flicker(t, fi, u_flickerRate) * fadeIn(t, 0.6, 1.2);',
+    '  neon += neonGlow(dist, electricBlue, tw * 0.75, fl * u_glowIntensity * 0.9);',
+    '',
+    '  // Ray 2: 90 deg (up)',
+    '  fi = 25.0;',
+    '  dist = sdSegment(uv, vec2(0.0, 0.06), vec2(0.0, 0.32));',
+    '  fl = flicker(t, fi, u_flickerRate) * fadeIn(t, 0.7, 1.2);',
+    '  neon += neonGlow(dist, hotPink, tw * 0.75, fl * u_glowIntensity * 0.9);',
+    '',
+    '  // Ray 3: 135 deg',
+    '  fi = 26.0;',
+    '  dist = sdSegment(uv, vec2(-0.042, 0.042), vec2(-0.226, 0.226));',
+    '  fl = flicker(t, fi, u_flickerRate) * fadeIn(t, 0.8, 1.2);',
+    '  neon += neonGlow(dist, electricBlue, tw * 0.75, fl * u_glowIntensity * 0.9);',
+    '',
+    '  // Ray 4: 180 deg (left)',
+    '  fi = 27.0;',
+    '  dist = sdSegment(uv, vec2(-0.06, 0.0), vec2(-0.32, 0.0));',
+    '  fl = flicker(t, fi, u_flickerRate) * fadeIn(t, 0.9, 1.2);',
+    '  neon += neonGlow(dist, hotPink, tw * 0.75, fl * u_glowIntensity * 0.9);',
+    '',
+    '  // Ray 5: 225 deg',
+    '  fi = 28.0;',
+    '  dist = sdSegment(uv, vec2(-0.042, -0.042), vec2(-0.226, -0.226));',
+    '  fl = flicker(t, fi, u_flickerRate) * fadeIn(t, 1.0, 1.2);',
+    '  neon += neonGlow(dist, electricBlue, tw * 0.75, fl * u_glowIntensity * 0.9);',
+    '',
+    '  // Ray 6: 270 deg (down)',
+    '  fi = 29.0;',
+    '  dist = sdSegment(uv, vec2(0.0, -0.06), vec2(0.0, -0.32));',
+    '  fl = flicker(t, fi, u_flickerRate) * fadeIn(t, 1.1, 1.2);',
+    '  neon += neonGlow(dist, hotPink, tw * 0.75, fl * u_glowIntensity * 0.9);',
+    '',
+    '  // Ray 7: 315 deg',
+    '  fi = 30.0;',
+    '  dist = sdSegment(uv, vec2(0.042, -0.042), vec2(0.226, -0.226));',
+    '  fl = flicker(t, fi, u_flickerRate) * fadeIn(t, 1.2, 1.2);',
+    '  neon += neonGlow(dist, electricBlue, tw * 0.75, fl * u_glowIntensity * 0.9);',
+    '',
+    '  // ELEMENT 11: Small circles at the 4 cardinal ray tips (where they meet the ring)',
+    '  fi = 31.0;',
+    '  {',
+    '    float tipPulse = 0.8 + 0.2 * sin(t * 1.5);',
+    '    float dc1 = sdCircle(uv, vec2(0.38, 0.0), 0.022);',
+    '    float dc2 = sdCircle(uv, vec2(-0.38, 0.0), 0.022);',
+    '    float dc3 = sdCircle(uv, vec2(0.0, 0.38), 0.022);',
+    '    float dc4 = sdCircle(uv, vec2(0.0, -0.38), 0.022);',
+    '    dist = min(min(dc1, dc2), min(dc3, dc4));',
+    '    fl = flicker(t, fi, u_flickerRate * 0.5) * fadeIn(t, 2.0, 1.0) * tipPulse;',
+    '    neon += neonGlow(dist, warmAmber, tw * 0.5, fl * u_glowIntensity * 1.1);',
+    '  }',
+    '',
+    '  // REFLECTION — shape 2',
+    '  {',
+    '    float reflY = -0.44;',
+    '    if (uv.y < reflY) {',
+    '      vec2 rUV = vec2(uv.x, 2.0 * reflY - uv.y);',
+    '      float reflDist = reflY - uv.y;',
+    '      float reflAtten = exp(-reflDist * 3.5) * 0.25;',
+    '      rUV.x += sin(uv.y * 25.0 + t * 2.0) * 0.005;',
+    '      rUV.y += cos(uv.x * 20.0 + t * 1.5) * 0.003;',
+    '      vec3 reflNeon = vec3(0.0);',
+    '      float rfl;',
+    '      dist = sdCircle(rUV, vec2(0.0, 0.0), 0.38);',
+    '      rfl = flicker(t, 22.0, u_flickerRate) * fadeIn(t, 0.3, 1.5);',
+    '      reflNeon += neonGlow(dist, warmAmber, tw * 1.2, rfl * u_glowIntensity * 0.9);',
+    '      dist = sdCircle(rUV, vec2(0.0, 0.0), 0.04);',
+    '      rfl = flicker(t, 21.0, u_flickerRate * 0.4) * fadeIn(t, 0.2, 1.0);',
+    '      reflNeon += neonGlow(dist, hotPink, tw, rfl * u_glowIntensity * 1.3);',
+    '      dist = sdSegment(rUV, vec2(0.06, 0.0), vec2(0.32, 0.0));',
+    '      rfl = flicker(t, 23.0, u_flickerRate) * fadeIn(t, 0.5, 1.2);',
+    '      reflNeon += neonGlow(dist, hotPink, tw, rfl * u_glowIntensity * 0.9);',
+    '      dist = sdSegment(rUV, vec2(-0.06, 0.0), vec2(-0.32, 0.0));',
+    '      rfl = flicker(t, 27.0, u_flickerRate) * fadeIn(t, 0.9, 1.2);',
+    '      reflNeon += neonGlow(dist, hotPink, tw, rfl * u_glowIntensity * 0.9);',
+    '      neon += reflNeon * reflAtten;',
+    '    }',
+    '  }',
+    '',
+    '  } // end shape 2',
+    '',
+    '',
+    '  // ═══════════════════════════════════════',
+    '  // SHAPE 3: "Heart"',
+    '  // Bold neon heart centerpiece + flanking stars + jewel accent + horizontal connector',
+    '  // ═══════════════════════════════════════',
+    '  else if (u_shape < 3.5) {',
+    '',
+    '  // ELEMENT 1: Large heart — hot pink, dominant centerpiece',
+    '  fi = 1.0;',
+    '  {',
+    '    float heartPulse = 0.9 + 0.1 * sin(t * 1.4);',
+    '    dist = sdHeart(uv, vec2(0.0, 0.10), 0.28);',
+    '    fl = flicker(t, fi, u_flickerRate) * fadeIn(t, 0.2, 1.5) * heartPulse;',
+    '    neon += neonGlow(dist, hotPink, tw, fl * u_glowIntensity * 1.1);',
+    '  }',
+    '',
+    '  // ELEMENT 2: Thin horizontal connector line behind heart — soft pink',
+    '  fi = 2.0;',
+    '  dist = sdSegment(uv, vec2(-0.48, 0.10), vec2(0.48, 0.10));',
+    '  fl = flicker(t, fi, u_flickerRate * 0.7) * fadeIn(t, 0.5, 1.2);',
+    '  neon += neonGlow(dist, softPink, tw * 0.55, fl * u_glowIntensity * 0.75);',
+    '',
+    '  // ELEMENT 3: Left flanking star — warm amber',
+    '  fi = 3.0;',
+    '  {',
+    '    float sp = 0.85 + 0.15 * sin(t * 1.6);',
+    '    dist = sdStar(uv, vec2(-0.48, 0.10), 0.065, 0.028);',
+    '    fl = flicker(t, fi, u_flickerRate) * fadeIn(t, 0.8, 1.2) * sp;',
+    '    neon += neonGlow(dist, warmAmber, tw * 0.85, fl * u_glowIntensity * 1.0);',
+    '  }',
+    '',
+    '  // ELEMENT 4: Right flanking star — warm amber',
+    '  fi = 4.0;',
+    '  {',
+    '    float sp2 = 0.85 + 0.15 * sin(t * 1.6 + 1.0);',
+    '    dist = sdStar(uv, vec2(0.48, 0.10), 0.065, 0.028);',
+    '    fl = flicker(t, fi, u_flickerRate) * fadeIn(t, 0.9, 1.2) * sp2;',
+    '    neon += neonGlow(dist, warmAmber, tw * 0.85, fl * u_glowIntensity * 1.0);',
+    '  }',
+    '',
+    '  // ELEMENT 5: Jewel dot at bottom tip of heart — electric blue',
+    '  fi = 5.0;',
+    '  {',
+    '    float jp = 0.8 + 0.2 * sin(t * 2.1);',
+    '    dist = sdCircle(uv, vec2(0.0, -0.14), 0.02);',
+    '    fl = flicker(t, fi, u_flickerRate * 0.5) * fadeIn(t, 1.3, 1.0) * jp;',
+    '    neon += neonGlow(dist, electricBlue, tw * 0.6, fl * u_glowIntensity * 1.2);',
+    '  }',
+    '',
+    '  // REFLECTION — shape 3 (Heart)',
+    '  {',
+    '    float reflY = -0.20;',
+    '    if (uv.y < reflY) {',
+    '      vec2 rUV = vec2(uv.x, 2.0 * reflY - uv.y);',
+    '      float reflDist = reflY - uv.y;',
+    '      float reflAtten = exp(-reflDist * 3.5) * 0.25;',
+    '      rUV.x += sin(uv.y * 25.0 + t * 2.0) * 0.005;',
+    '      rUV.y += cos(uv.x * 20.0 + t * 1.5) * 0.003;',
+    '      vec3 reflNeon = vec3(0.0);',
+    '      float rfl;',
+    '      dist = sdHeart(rUV, vec2(0.0, 0.10), 0.28);',
+    '      rfl = flicker(t, 1.0, u_flickerRate) * fadeIn(t, 0.2, 1.5);',
+    '      reflNeon += neonGlow(dist, hotPink, tw * 1.2, rfl * u_glowIntensity * 1.1);',
+    '      dist = sdSegment(rUV, vec2(-0.48, 0.10), vec2(0.48, 0.10));',
+    '      rfl = flicker(t, 2.0, u_flickerRate * 0.7) * fadeIn(t, 0.5, 1.2);',
+    '      reflNeon += neonGlow(dist, softPink, tw * 0.7, rfl * u_glowIntensity * 0.75);',
+    '      neon += reflNeon * reflAtten;',
+    '    }',
+    '  }',
+    '',
+    '  } // end shape 3',
+    '',
+    '',
+    '  // ═══════════════════════════════════════',
+    '  // SHAPE 4: "Lightning Bolt"',
+    '  // Bold zigzag bolt + entry/exit circles + sparkle stars + energy ring',
+    '  // Bolt path: (0.0,0.35) -> (0.14,0.12) -> (-0.04,0.08) -> (0.10,-0.12)',
+    '  // ═══════════════════════════════════════',
+    '  else {',
+    '',
+    '  // ELEMENTS 1-3: Bolt zigzag segments — hot pink, full tube width',
+    '  fi = 61.0;',
+    '  dist = sdSegment(uv, vec2(0.0, 0.35), vec2(0.14, 0.12));',
+    '  fl = flicker(t, fi, u_flickerRate) * fadeIn(t, 0.2, 1.5);',
+    '  neon += neonGlow(dist, hotPink, tw, fl * u_glowIntensity * 1.1);',
+    '',
+    '  fi = 62.0;',
+    '  dist = sdSegment(uv, vec2(0.14, 0.12), vec2(-0.04, 0.08));',
+    '  fl = flicker(t, fi, u_flickerRate) * fadeIn(t, 0.4, 1.4);',
+    '  neon += neonGlow(dist, hotPink, tw, fl * u_glowIntensity * 1.1);',
+    '',
+    '  fi = 63.0;',
+    '  dist = sdSegment(uv, vec2(-0.04, 0.08), vec2(0.10, -0.12));',
+    '  fl = flicker(t, fi, u_flickerRate) * fadeIn(t, 0.6, 1.4);',
+    '  neon += neonGlow(dist, hotPink, tw, fl * u_glowIntensity * 1.1);',
+    '',
+    '  // ELEMENT 4: Entry circle at bolt top — warm amber',
+    '  fi = 66.0;',
+    '  {',
+    '    float ep = 0.8 + 0.2 * sin(t * 2.0);',
+    '    dist = sdCircle(uv, vec2(0.0, 0.35), 0.025);',
+    '    fl = flicker(t, fi, u_flickerRate * 0.5) * fadeIn(t, 1.2, 1.0) * ep;',
+    '    neon += neonGlow(dist, warmAmber, tw * 0.7, fl * u_glowIntensity * 1.2);',
+    '  }',
+    '',
+    '  // ELEMENT 5: Exit circle at bolt bottom — warm amber',
+    '  fi = 67.0;',
+    '  {',
+    '    float ep2 = 0.8 + 0.2 * sin(t * 2.0 + 1.5);',
+    '    dist = sdCircle(uv, vec2(0.10, -0.12), 0.025);',
+    '    fl = flicker(t, fi, u_flickerRate * 0.5) * fadeIn(t, 1.3, 1.0) * ep2;',
+    '    neon += neonGlow(dist, warmAmber, tw * 0.7, fl * u_glowIntensity * 1.2);',
+    '  }',
+    '',
+    '  // ELEMENT 6: Sparkle star upper-left — electric blue',
+    '  fi = 68.0;',
+    '  {',
+    '    float sp = 0.85 + 0.15 * sin(t * 1.8);',
+    '    dist = sdStar(uv, vec2(-0.30, 0.12), 0.055, 0.023);',
+    '    fl = flicker(t, fi, u_flickerRate) * fadeIn(t, 1.0, 1.2) * sp;',
+    '    neon += neonGlow(dist, electricBlue, tw * 0.8, fl * u_glowIntensity);',
+    '  }',
+    '',
+    '  // ELEMENT 7: Sparkle star lower-right — electric blue',
+    '  fi = 69.0;',
+    '  {',
+    '    float sp2 = 0.85 + 0.15 * sin(t * 1.8 + 1.3);',
+    '    dist = sdStar(uv, vec2(0.30, 0.12), 0.055, 0.023);',
+    '    fl = flicker(t, fi, u_flickerRate) * fadeIn(t, 1.1, 1.2) * sp2;',
+    '    neon += neonGlow(dist, electricBlue, tw * 0.8, fl * u_glowIntensity);',
+    '  }',
+    '',
+    '  // ELEMENT 8: Energy ring centered on bolt midpoint — soft pink',
+    '  // Bolt spans y=0.35 to y=-0.12, midpoint y=0.115; x center ~0.05',
+    '  fi = 70.0;',
+    '  {',
+    '    float rp = 0.7 + 0.3 * sin(t * 0.9);',
+    '    dist = sdCircle(uv, vec2(0.05, 0.115), 0.24);',
+    '    fl = flicker(t, fi, u_flickerRate * 0.6) * fadeIn(t, 0.9, 1.5) * rp;',
+    '    neon += neonGlow(dist, softPink, tw * 0.6, fl * u_glowIntensity * 0.7);',
+    '  }',
+    '',
+    '  // REFLECTION — shape 4',
+    '  {',
+    '    float reflY = -0.20;',
+    '    if (uv.y < reflY) {',
+    '      vec2 rUV = vec2(uv.x, 2.0 * reflY - uv.y);',
+    '      float reflDist = reflY - uv.y;',
+    '      float reflAtten = exp(-reflDist * 3.5) * 0.25;',
+    '      rUV.x += sin(uv.y * 25.0 + t * 2.0) * 0.005;',
+    '      rUV.y += cos(uv.x * 20.0 + t * 1.5) * 0.003;',
+    '      vec3 reflNeon = vec3(0.0);',
+    '      float rfl;',
+    '      dist = sdSegment(rUV, vec2(0.0, 0.35), vec2(0.14, 0.12));',
+    '      rfl = flicker(t, 61.0, u_flickerRate) * fadeIn(t, 0.2, 1.5);',
+    '      reflNeon += neonGlow(dist, hotPink, tw * 1.2, rfl * u_glowIntensity * 1.1);',
+    '      dist = sdSegment(rUV, vec2(0.14, 0.12), vec2(-0.04, 0.08));',
+    '      rfl = flicker(t, 62.0, u_flickerRate) * fadeIn(t, 0.4, 1.4);',
+    '      reflNeon += neonGlow(dist, hotPink, tw * 1.1, rfl * u_glowIntensity * 1.1);',
+    '      dist = sdSegment(rUV, vec2(-0.04, 0.08), vec2(0.10, -0.12));',
+    '      rfl = flicker(t, 63.0, u_flickerRate) * fadeIn(t, 0.6, 1.4);',
+    '      reflNeon += neonGlow(dist, hotPink, tw * 1.1, rfl * u_glowIntensity * 1.1);',
+    '      neon += reflNeon * reflAtten;',
+    '    }',
+    '  }',
+    '',
+    '  } // end shape 4',
+    '',
+    '',
+    '  // ═══════════════════════════════════════',
+    '  // FULL SIGN FLICKER — occasional whole-sign blink',
+    '  // ═══════════════════════════════════════',
+    '  {',
+    '    float fullFlick = 1.0;',
+    '    float flickerCycle = mod(t, 12.0);',
+    '    if (flickerCycle > 8.0 && flickerCycle < 8.15) fullFlick = 0.1;',
+    '    if (flickerCycle > 8.18 && flickerCycle < 8.22) fullFlick = 0.05;',
+    '    if (flickerCycle > 8.28 && flickerCycle < 8.32) fullFlick = 0.15;',
+    '    neon *= fullFlick;',
+    '  }',
+    '',
+    '',
+    '  // ── Combine ──',
+    '  col += neon;',
+    '',
+    '  // ── Vignette ──',
+    '  float vDist = length(uv);',
+    '  float vignette = 1.0 - smoothstep(0.5, 1.4, vDist);',
+    '  col *= 0.65 + vignette * 0.35;',
+    '',
+    '  // ── Tone mapping — prevent blowout ──',
+    '  col = col / (1.0 + col * 0.3);',
+    '',
+    '  // ── Subtle warm color grade ──',
+    '  col = pow(col, vec3(0.95, 1.0, 1.05));',
+    '',
+    '  gl_FragColor = vec4(col, 1.0);',
+    '}'
+  ].join('\n');
+
+  function compile(type, src) {
+    var s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
+
+    }
+    return s;
+  }
+
+  var prog = gl.createProgram();
+  gl.attachShader(prog, compile(gl.VERTEX_SHADER, vertSrc));
+  gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, fragSrc));
+  gl.linkProgram(prog);
+  if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) {
+
+  }
+  gl.useProgram(prog);
+
+  var buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+  var aPos = gl.getAttribLocation(prog, 'a_pos');
+  gl.enableVertexAttribArray(aPos);
+  gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+
+  var uTime = gl.getUniformLocation(prog, 'u_time');
+  var uRes = gl.getUniformLocation(prog, 'u_res');
+  var uGlowIntensity = gl.getUniformLocation(prog, 'u_glowIntensity');
+  var uFlickerRate = gl.getUniformLocation(prog, 'u_flickerRate');
+  var uShape = gl.getUniformLocation(prog, 'u_shape');
+  var uCenter = gl.getUniformLocation(prog, 'u_center');
+  var uScale = gl.getUniformLocation(prog, 'u_scale');
+  var uMouse = gl.getUniformLocation(prog, 'u_mouse');
+
+  // Drag to rotate the neon sign in 3D, click to cycle shapes
+  var mouseDown = false, lastMX = 0, lastMY = 0, dragged = false;
+  var tiltX = 0, tiltY = 0;
+
+  canvas.addEventListener('mousedown', function(e) { mouseDown = true; dragged = false; lastMX = e.clientX; lastMY = e.clientY; });
+  canvas.addEventListener('mousemove', function(e) {
+    if (mouseDown) {
+      tiltX += (e.clientX - lastMX) * 0.004;
+      tiltY += (e.clientY - lastMY) * 0.004;
+      tiltX = Math.max(-1.0, Math.min(1.0, tiltX));
+      tiltY = Math.max(-0.8, Math.min(0.8, tiltY));
+      lastMX = e.clientX; lastMY = e.clientY;
+      if (Math.abs(tiltX) + Math.abs(tiltY) > 0.02) dragged = true;
+    }
+  });
+  canvas.addEventListener('mouseup', function() {
+    if (!dragged) shapeVal = (shapeVal % 4) + 1;
+    mouseDown = false;
+  });
+  canvas.addEventListener('touchstart', function(e) {
+    e.preventDefault(); mouseDown = true; dragged = false;
+    lastMX = e.touches[0].clientX; lastMY = e.touches[0].clientY;
+  }, { passive: false });
+  canvas.addEventListener('touchmove', function(e) {
+    e.preventDefault();
+    if (mouseDown) {
+      tiltX += (e.touches[0].clientX - lastMX) * 0.004;
+      tiltY += (e.touches[0].clientY - lastMY) * 0.004;
+      tiltX = Math.max(-1.0, Math.min(1.0, tiltX));
+      tiltY = Math.max(-0.8, Math.min(0.8, tiltY));
+      lastMX = e.touches[0].clientX; lastMY = e.touches[0].clientY;
+      dragged = true;
+    }
+  }, { passive: false });
+  canvas.addEventListener('touchend', function() {
+    if (!dragged) shapeVal = (shapeVal % 4) + 1;
+    mouseDown = false;
+  });
+
+  var glowIntensityVal = 1.0;
+  var flickerRateVal = 0.5;
+  var shapeVal = 1;
+  var centerX = 0.0;
+  var centerY = 0.0;
+  var scaleVal = 0.0;
+
+  var dpr = Math.min(window.devicePixelRatio || 1, 2) * pixelScale;
+  var needsResize = true;
+
+  function resize() {
+    needsResize = false;
+    var w = Math.round(canvas.clientWidth * dpr);
+    var h = Math.round(canvas.clientHeight * dpr);
+    if (canvas.width !== w || canvas.height !== h) {
+      canvas.width = w;
+      canvas.height = h;
+      gl.viewport(0, 0, w, h);
+      gl.uniform2f(uRes, canvas.width, canvas.height);
+    }
+  }
+
+  function render(now) {
+    if (needsResize) resize();
+    gl.uniform1f(uTime, prefersReduced ? 0.0 : now * 0.001);
+    gl.uniform1f(uGlowIntensity, glowIntensityVal);
+    gl.uniform1f(uFlickerRate, flickerRateVal);
+    gl.uniform1f(uShape, shapeVal);
+    gl.uniform2f(uCenter, centerX, centerY);
+    gl.uniform1f(uScale, scaleVal);
+    gl.uniform2f(uMouse, tiltX, tiltY);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+    requestAnimationFrame(render);
+  }
+
+  window.addEventListener('resize', function () {
+    needsResize = true;
+  });
+
+  resize();
+
+  requestAnimationFrame(render);
+
+  // ── Visibility pause ──
+  var lastTime = 0;
+  document.addEventListener('visibilitychange', function() {
+    if (!document.hidden) {
+      lastTime = 0;
+    }
+  });
+
+  // ── PostMessage listener for parameter updates ──
+  window.addEventListener('message', function(e) {
+    if (e.data && e.data.type === 'param') {
+      switch (e.data.name) {
+        case 'GLOW_INTENSITY': glowIntensityVal = e.data.value; break;
+        case 'FLICKER_RATE': flickerRateVal = e.data.value; break;
+        case 'CENTER_X': centerX = e.data.value; break;
+        case 'CENTER_Y': centerY = e.data.value; break;
+        case 'SCALE': scaleVal = e.data.value; break;
+        case 'SHAPE': shapeVal = e.data.value; break;
+      }
+    }
+  });
+})();
+</script>
+</body>
+</html>

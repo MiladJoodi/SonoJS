@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>#035 — Wave Interference · creative-lab</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0a0a14;
+      color: #e6edf3;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    #canvas {
+      display: block;
+      cursor: crosshair;
+      flex: 1;
+      min-height: 0;
+    }
+
+    #controls {
+      background: rgba(13, 17, 27, 0.92);
+      border-top: 1px solid #21262d;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      font-size: 0.78rem;
+      color: #8b949e;
+    }
+
+    .ctrl-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .ctrl-group label { color: #c9d1d9; white-space: nowrap; }
+
+    input[type=range] {
+      -webkit-appearance: none;
+      width: 90px;
+      height: 4px;
+      background: #30363d;
+      border-radius: 2px;
+      outline: none;
+    }
+
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 13px; height: 13px;
+      background: #58a6ff;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    select {
+      background: #161b22;
+      border: 1px solid #30363d;
+      color: #c9d1d9;
+      padding: 3px 7px;
+      border-radius: 4px;
+      font-size: 0.78rem;
+      outline: none;
+      cursor: pointer;
+    }
+
+    button {
+      background: rgba(88, 166, 255, 0.1);
+      border: 1px solid rgba(88, 166, 255, 0.35);
+      color: #58a6ff;
+      padding: 4px 12px;
+      border-radius: 5px;
+      font-size: 0.78rem;
+      cursor: pointer;
+      transition: background 0.15s;
+      white-space: nowrap;
+    }
+
+    button:hover { background: rgba(88, 166, 255, 0.22); }
+    button.active { background: rgba(88, 166, 255, 0.3); border-color: #58a6ff; }
+
+    .sep { color: #30363d; }
+    .info { margin-left: auto; color: #58a6ff; font-family: monospace; font-size: 0.72rem; }
+
+  
+    html.embed #ui,
+    html.embed #info,
+    html.embed #controls,
+    html.embed #stats,
+    html.embed #hint,
+    html.embed .panel,
+    html.embed header,
+    html.embed footer { display: none !important; }
+  </style>
+  <script>if(/\bembed=1\b/.test(location.search))document.documentElement.classList.add("embed")</script>
+</head>
+<body>
+
+<canvas id="canvas"></canvas>
+
+<div id="controls">
+  <div class="ctrl-group">
+    <label>Mode</label>
+    <select id="modeSelect">
+      <option value="ripple">Ripple Sources</option>
+      <option value="doubleSlit">Double Slit</option>
+      <option value="standing">Standing Wave</option>
+    </select>
+  </div>
+  <span class="sep">|</span>
+  <div class="ctrl-group">
+    <label>Wavelength</label>
+    <input type="range" id="wlSlider" min="20" max="120" value="55">
+    <span id="wlVal">55</span>
+  </div>
+  <div class="ctrl-group">
+    <label>Speed</label>
+    <input type="range" id="spSlider" min="0.5" max="6" step="0.1" value="2.5">
+    <span id="spVal">2.5</span>
+  </div>
+  <div class="ctrl-group">
+    <label>Damping</label>
+    <input type="range" id="dampSlider" min="0" max="0.015" step="0.001" value="0.004">
+    <span id="dampVal">0.004</span>
+  </div>
+  <span class="sep">|</span>
+  <div class="ctrl-group">
+    <label>Palette</label>
+    <select id="paletteSelect">
+      <option value="plasma">Plasma</option>
+      <option value="ocean">Ocean</option>
+      <option value="fire">Fire</option>
+      <option value="mono">Mono</option>
+    </select>
+  </div>
+  <span class="sep">|</span>
+  <button id="showSlitBtn">Slit Overlay</button>
+  <button id="clearBtn">Clear Sources</button>
+  <span class="info" id="infoLabel">Click to add sources</span>
+</div>
+
+
+
+<script>
+'use strict';
+
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+
+// ── State ────────────────────────────────────────────────────────────────────
+let W, H;
+let imgData, pxData; // ImageData for pixel painting
+
+let sources = [];       // { x, y, phase }
+let slitMode = false;
+
+// Controls
+let wavelength   = 55;
+let waveSpeed    = 2.5;
+let damping      = 0.004;
+let mode         = 'ripple';
+let palette      = 'plasma';
+let showSlitOverlay = false;
+
+let t = 0;
+let frameId;
+
+// Double-slit preset
+const SLIT_SRC_COUNT = 16;  // virtual coherent sources from slits
+
+// ── Palette functions ────────────────────────────────────────────────────────
+function plasmaColor(v) {
+  // v in [0,1]
+  const r = Math.sin(v * Math.PI * 2 + 0) * 127 + 128;
+  const g = Math.sin(v * Math.PI * 2 + 2) * 127 + 128;
+  const b = Math.sin(v * Math.PI * 2 + 4) * 127 + 128;
+  return [r | 0, g | 0, b | 0];
+}
+
+function oceanColor(v) {
+  // deep blue → cyan → white
+  const r = v < 0.5 ? 0 : (v - 0.5) * 2 * 200;
+  const g = v * 180;
+  const b = 100 + v * 155;
+  return [r | 0, g | 0, b | 0];
+}
+
+function fireColor(v) {
+  const r = Math.min(255, v * 3 * 255) | 0;
+  const g = Math.max(0, Math.min(255, (v - 0.33) * 3 * 255)) | 0;
+  const b = Math.max(0, Math.min(255, (v - 0.66) * 3 * 255)) | 0;
+  return [r, g, b];
+}
+
+function monoColor(v) {
+  const c = (v * 255) | 0;
+  return [c, c, c];
+}
+
+function applyPalette(amplitude) {
+  // amplitude in [-1, 1] → color
+  const v = amplitude * 0.5 + 0.5; // [0,1]
+  switch (palette) {
+    case 'plasma': return plasmaColor(v);
+    case 'ocean':  return oceanColor(v);
+    case 'fire':   return fireColor(v);
+    case 'mono':   return monoColor(v);
+    default:       return plasmaColor(v);
+  }
+}
+
+// ── Wave computation ─────────────────────────────────────────────────────────
+// For each pixel, sum contributions from all sources
+// A(r) = cos(2π r/λ - ωt) * envelope(r)
+// envelope: 1/sqrt(r) for 2D, with damping
+
+function computeAmplitude(px, py, srcs) {
+  let sum = 0;
+  const k = (2 * Math.PI) / wavelength;
+  const omega = waveSpeed;
+  for (let i = 0; i < srcs.length; i++) {
+    const s = srcs[i];
+    const dx = px - s.x;
+    const dy = py - s.y;
+    const r = Math.sqrt(dx * dx + dy * dy);
+    if (r < 0.5) continue;
+    const envelope = Math.exp(-damping * r) / Math.sqrt(r + 1);
+    sum += envelope * Math.cos(k * r - omega * t + s.phase);
+  }
+  return sum;
+}
+
+// ── Double-slit setup ────────────────────────────────────────────────────────
+function buildSlitSources() {
+  // Two slits, each approximated by multiple point sources
+  const slitY = H * 0.38;
+  const slitSep = W * 0.04;       // slit separation
+  const slitWidth = W * 0.018;    // slit width (each slit has ~8 sub-sources)
+  const sub = 8;
+  const srcs = [];
+  for (let s = 0; s < 2; s++) {
+    const cx = W / 2 + (s === 0 ? -slitSep / 2 : slitSep / 2);
+    for (let j = 0; j < sub; j++) {
+      const offset = (j / (sub - 1) - 0.5) * slitWidth;
+      srcs.push({ x: cx + offset, y: slitY, phase: 0 });
+    }
+  }
+  return srcs;
+}
+
+// ── Standing wave setup ──────────────────────────────────────────────────────
+function buildStandingSources() {
+  // Two opposing coherent sources at left & right edge midpoints
+  return [
+    { x: W * 0.12, y: H * 0.5, phase: 0 },
+    { x: W * 0.88, y: H * 0.5, phase: Math.PI },
+  ];
+}
+
+// ── Render ───────────────────────────────────────────────────────────────────
+function render() {
+  let activeSrcs;
+  if (mode === 'doubleSlit') {
+    activeSrcs = buildSlitSources();
+  } else if (mode === 'standing') {
+    activeSrcs = buildStandingSources();
+  } else {
+    activeSrcs = sources.length > 0 ? sources : [];
+  }
+
+  if (activeSrcs.length === 0) {
+    // blank with gradient background
+    ctx.fillStyle = '#0a0a14';
+    ctx.fillRect(0, 0, W, H);
+  } else {
+    // Paint pixels
+    const data = pxData;
+    const stride = W * 4;
+
+    // Compute normalization by sampling max amplitude
+    let maxAmp = 0;
+    const sampleStep = 12;
+    for (let y = 0; y < H; y += sampleStep) {
+      for (let x = 0; x < W; x += sampleStep) {
+        const a = Math.abs(computeAmplitude(x, y, activeSrcs));
+        if (a > maxAmp) maxAmp = a;
+      }
+    }
+    const norm = maxAmp > 0.001 ? 1 / maxAmp : 1;
+
+    for (let y = 0; y < H; y++) {
+      for (let x = 0; x < W; x++) {
+        const amp = computeAmplitude(x, y, activeSrcs) * norm;
+        const [r, g, b] = applyPalette(amp);
+        const i = (y * W + x) * 4;
+        data[i]   = r;
+        data[i+1] = g;
+        data[i+2] = b;
+        data[i+3] = 255;
+      }
+    }
+    ctx.putImageData(imgData, 0, 0);
+  }
+
+  // Draw source markers (ripple mode)
+  if (mode === 'ripple') {
+    for (const s of sources) {
+      const pulse = (Math.cos(waveSpeed * t) + 1) * 0.5;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, 5 + pulse * 4, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(255,255,255,${0.5 + pulse * 0.5})`;
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, 3, 0, Math.PI * 2);
+      ctx.fillStyle = '#fff';
+      ctx.fill();
+    }
+  }
+
+  // Draw double-slit barrier overlay
+  if (mode === 'doubleSlit' && showSlitOverlay) {
+    const slitY = H * 0.38;
+    const slitSep = W * 0.04;
+    const slitWidth = W * 0.018;
+    const barH = 4;
+    ctx.fillStyle = 'rgba(255,255,255,0.15)';
+    // Barrier line minus slits
+    const cx = W / 2;
+    const s1L = cx - slitSep / 2 - slitWidth / 2;
+    const s1R = cx - slitSep / 2 + slitWidth / 2;
+    const s2L = cx + slitSep / 2 - slitWidth / 2;
+    const s2R = cx + slitSep / 2 + slitWidth / 2;
+    // left segment
+    ctx.fillRect(0, slitY - barH / 2, s1L, barH);
+    // middle segment
+    ctx.fillRect(s1R, slitY - barH / 2, s2L - s1R, barH);
+    // right segment
+    ctx.fillRect(s2R, slitY - barH / 2, W - s2R, barH);
+    // slit labels
+    ctx.fillStyle = 'rgba(88,166,255,0.7)';
+    ctx.font = '11px monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText('Slit A', cx - slitSep / 2, slitY - 10);
+    ctx.fillText('Slit B', cx + slitSep / 2, slitY - 10);
+  }
+
+  // Standing wave: source markers
+  if (mode === 'standing') {
+    const srcs = buildStandingSources();
+    for (const s of srcs) {
+      const pulse = (Math.cos(waveSpeed * t + s.phase) + 1) * 0.5;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, 6 + pulse * 5, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(88,166,255,${0.4 + pulse * 0.6})`;
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, 4, 0, Math.PI * 2);
+      ctx.fillStyle = '#58a6ff';
+      ctx.fill();
+    }
+  }
+
+  // Source count info
+  if (mode === 'ripple') {
+    document.getElementById('infoLabel').textContent =
+      sources.length === 0
+        ? 'Click to add sources'
+        : `${sources.length} source${sources.length > 1 ? 's' : ''} — click to add`;
+  } else if (mode === 'doubleSlit') {
+    document.getElementById('infoLabel').textContent = `Double Slit — λ=${wavelength}px`;
+  } else {
+    document.getElementById('infoLabel').textContent = 'Standing Wave — opposing sources';
+  }
+}
+
+// ── Animation ────────────────────────────────────────────────────────────────
+function frame() {
+  t += 0.055;
+  render();
+  frameId = requestAnimationFrame(frame);
+}
+
+// ── Resize ───────────────────────────────────────────────────────────────────
+function resize() {
+  const rect = canvas.parentElement.getBoundingClientRect();
+  // canvas fills between controls and footer
+  W = canvas.offsetWidth || window.innerWidth;
+  H = canvas.offsetHeight;
+  canvas.width  = W;
+  canvas.height = H;
+  imgData = ctx.createImageData(W, H);
+  pxData  = new Uint8ClampedArray(imgData.data.buffer);
+  // refresh imgData reference
+  imgData = new ImageData(pxData, W, H);
+}
+
+window.addEventListener('resize', () => { resize(); });
+resize();
+
+// ── Interaction ──────────────────────────────────────────────────────────────
+canvas.addEventListener('click', (e) => {
+  if (mode !== 'ripple') return;
+  const rect = canvas.getBoundingClientRect();
+  sources.push({
+    x: e.clientX - rect.left,
+    y: e.clientY - rect.top,
+    phase: 0,
+  });
+  // Max 6 sources
+  if (sources.length > 6) sources.shift();
+});
+
+canvas.addEventListener('contextmenu', (e) => {
+  e.preventDefault();
+  if (mode !== 'ripple') return;
+  const rect = canvas.getBoundingClientRect();
+  const mx = e.clientX - rect.left;
+  const my = e.clientY - rect.top;
+  // Remove nearest source within 30px
+  let best = -1, bestD = Infinity;
+  for (let i = 0; i < sources.length; i++) {
+    const d = Math.hypot(sources[i].x - mx, sources[i].y - my);
+    if (d < bestD) { bestD = d; best = i; }
+  }
+  if (best >= 0 && bestD < 30) sources.splice(best, 1);
+});
+
+// ── Control bindings ─────────────────────────────────────────────────────────
+document.getElementById('modeSelect').addEventListener('change', (e) => {
+  mode = e.target.value;
+  sources = [];
+});
+
+document.getElementById('wlSlider').addEventListener('input', (e) => {
+  wavelength = +e.target.value;
+  document.getElementById('wlVal').textContent = wavelength;
+});
+
+document.getElementById('spSlider').addEventListener('input', (e) => {
+  waveSpeed = +e.target.value;
+  document.getElementById('spVal').textContent = waveSpeed.toFixed(1);
+});
+
+document.getElementById('dampSlider').addEventListener('input', (e) => {
+  damping = +e.target.value;
+  document.getElementById('dampVal').textContent = damping.toFixed(3);
+});
+
+document.getElementById('paletteSelect').addEventListener('change', (e) => {
+  palette = e.target.value;
+});
+
+const slitBtn = document.getElementById('showSlitBtn');
+slitBtn.addEventListener('click', () => {
+  showSlitOverlay = !showSlitOverlay;
+  slitBtn.classList.toggle('active', showSlitOverlay);
+});
+
+document.getElementById('clearBtn').addEventListener('click', () => {
+  sources = [];
+});
+
+// ── Default: start with 2 sources centered for nice patterns ────────────────
+function placeDefaultSources() {
+  sources = [
+    { x: W * 0.38, y: H * 0.5, phase: 0 },
+    { x: W * 0.62, y: H * 0.5, phase: 0 },
+  ];
+}
+placeDefaultSources();
+
+frame();
+</script>
+</body>
+</html>

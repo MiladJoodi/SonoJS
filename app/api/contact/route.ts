@@ -55,7 +55,7 @@ async function sendViaResend(input: {
     from,
     to: [to],
     replyTo: input.email,
-    subject: `SonoJS contact — ${input.name}`,
+    subject: `SonoJS contact, ${input.name}`,
     text: [
       `Name: ${input.name}`,
       `Email: ${input.email}`,

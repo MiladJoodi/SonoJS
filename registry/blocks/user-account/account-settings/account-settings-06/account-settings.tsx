@@ -14,7 +14,7 @@ function assetSrc(asset: string | { src: string }) {
 }
 
 /**
- * Account settings modal — multi-page shell (General / Profile / Tools /
+ * Account settings modal, multi-page shell (General / Profile / Tools /
  * Storage) with an animated WebGL plan card on General.
  */
 export default function AccountSettings({

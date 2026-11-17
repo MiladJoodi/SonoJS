@@ -22,7 +22,7 @@ function buildCaptureFilename(fileBase: string, theme: "light" | "dark") {
 }
 
 /**
- * Dev-only: icon control left of LTR/RTL — downloads a transparent PNG.
+ * Dev-only: icon control left of LTR/RTL, downloads a transparent PNG.
  * Filename follows `{slug}-light.png` / `{slug}-dark.png`.
  */
 export function DevPreviewCaptureButton({

@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spark Chamber</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; overflow: hidden; background: #0a0a0a; }
+  canvas { display: block; width: 100vw; height: 100vh; }
+  .label {
+    position: fixed;
+    top: 20px;
+    left: 24px;
+    font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(200, 149, 108, 0.5);
+    z-index: 10;
+    pointer-events: none;
+    user-select: none;
+  }
+  html.embed .label { display: none; }
+</style>
+<script>if(/\bembed=1\b/.test(location.search))document.documentElement.classList.add("embed")</script>
+</head>
+<body>
+<div class="label">Spark Chamber</div>
+<canvas id="canvas"></canvas>
+<script>
+(function() {
+  var canvas = document.getElementById('canvas');
+  var ctx = canvas.getContext('2d');
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var dpr = Math.min(window.devicePixelRatio || 1, 2);
+  var W = 0;
+  var H = 0;
+
+  // Tunable parameters via postMessage
+  var EMISSION_RATE = 1.0;
+  var FIELD_STRENGTH = 1.0;
+
+  // Physics constants
+  var BASE_B = 0.008;
+  var DRAG = 0.999;
+  var SUB_STEPS = 4;
+  var MIN_ENERGY = 0.04;
+  var MAX_PARTICLES = 25;
+  var MAX_TRAIL_POINTS = 800;
+  var MAX_GHOST_TRAILS = 150;
+  var DECAY_CHANCE = 0.005;
+  var DECAY_MIN_AGE = 60;
+  var GHOST_FADE_DURATION = 8000;
+
+  var particles = [];
+  var ghostTrails = [];
+  var flashes = [];
+  var frameCount = 0;
+  var running = true;
+  var lastTime = 0;
+  var spawnAccum = 0;
+
+  // Offscreen canvas for vignette
+  var vigCanvas = document.createElement('canvas');
+  var vigCtx = vigCanvas.getContext('2d');
+
+  function resize() {
+    W = window.innerWidth;
+    H = window.innerHeight;
+    canvas.width = W * dpr;
+    canvas.height = H * dpr;
+    canvas.style.width = W + 'px';
+    canvas.style.height = H + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    vigCanvas.width = W * dpr;
+    vigCanvas.height = H * dpr;
+    vigCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    buildVignette();
+  }
+
+  function buildVignette() {
+    vigCtx.clearRect(0, 0, W, H);
+    var cx = W * 0.5;
+    var cy = H * 0.5;
+    var maxR = Math.sqrt(cx * cx + cy * cy);
+    var grad = vigCtx.createRadialGradient(cx, cy, maxR * 0.3, cx, cy, maxR);
+    grad.addColorStop(0, 'rgba(0,0,0,0)');
+    grad.addColorStop(0.5, 'rgba(0,0,0,0)');
+    grad.addColorStop(0.8, 'rgba(0,0,0,0.25)');
+    grad.addColorStop(1, 'rgba(0,0,0,0.65)');
+    vigCtx.fillStyle = grad;
+    vigCtx.fillRect(0, 0, W, H);
+  }
+
+  // Mouse interaction: click to spawn particles
+  canvas.addEventListener('click', function(e) {
+    var speed = 3 + Math.random() * 4;
+    var angle = Math.random() * Math.PI * 2;
+    spawnParticle(e.clientX, e.clientY, Math.cos(angle) * speed, Math.sin(angle) * speed, 0.9, Math.random() < 0.5 ? 1 : -1);
+    createFlash(e.clientX, e.clientY, 0.8);
+  });
+  canvas.addEventListener('touchstart', function(e) {
+    e.preventDefault();
+    var t = e.touches[0];
+    var speed = 3 + Math.random() * 4;
+    var angle = Math.random() * Math.PI * 2;
+    spawnParticle(t.clientX, t.clientY, Math.cos(angle) * speed, Math.sin(angle) * speed, 0.9, Math.random() < 0.5 ? 1 : -1);
+    createFlash(t.clientX, t.clientY, 0.8);
+  }, { passive: false });
+
+  window.addEventListener('resize', resize);
+  resize();
+
+  // --- Color helpers ---
+
+  function energyColor(energy) {
+    var r, g, b;
+    if (energy > 0.8) {
+      // Bright warm white
+      r = 255; g = 240; b = 210;
+    } else if (energy > 0.5) {
+      // Rich gold
+      var t = (energy - 0.5) / 0.3;
+      r = 210 + 45 * t;
+      g = 165 + 75 * t;
+      b = 90 + 120 * t;
+    } else if (energy > 0.2) {
+      // Warm amber
+      var t = (energy - 0.2) / 0.3;
+      r = 170 + 40 * t;
+      g = 110 + 55 * t;
+      b = 55 + 35 * t;
+    } else {
+      // Dim copper
+      var t = energy / 0.2;
+      r = 120 + 50 * t;
+      g = 75 + 35 * t;
+      b = 40 + 15 * t;
+    }
+    return { r: r, g: g, b: b };
+  }
+
+  function rgba(c, a) {
+    return 'rgba(' + Math.round(c.r) + ',' + Math.round(c.g) + ',' + Math.round(c.b) + ',' + a + ')';
+  }
+
+  // --- Particle spawning ---
+
+  function spawnParticle(x, y, vx, vy, energy, charge) {
+    if (particles.length >= MAX_PARTICLES) return null;
+
+    var p = {
+      x: x !== undefined ? x : 0,
+      y: y !== undefined ? y : 0,
+      vx: vx !== undefined ? vx : 0,
+      vy: vy !== undefined ? vy : 0,
+      charge: charge !== undefined ? charge : (Math.random() < 0.5 ? 1 : -1),
+      mass: 0.8 + Math.random() * 0.4,
+      energy: energy !== undefined ? energy : 1.0,
+      alive: true,
+      age: 0,
+      trail: []
+    };
+
+    if (x === undefined) {
+      var speed = 3 + Math.random() * 4;
+      p.energy = 0.7 + Math.random() * 0.3;
+      var margin = 5;
+      var roll = Math.random();
+
+      if (roll < 0.7) {
+        // 70% from left edge, heading right with mild spread
+        p.x = margin;
+        p.y = H * 0.05 + Math.random() * H * 0.9;
+        var angle = -Math.PI / 6 + Math.random() * (Math.PI / 3); // ±30° around rightward
+        p.vx = Math.cos(angle) * speed;
+        p.vy = Math.sin(angle) * speed;
+      } else if (roll < 0.9) {
+        // 20% from bottom edge, heading up
+        p.x = W * 0.1 + Math.random() * W * 0.8;
+        p.y = H - margin;
+        var angle = -Math.PI / 2 + (-Math.PI / 6 + Math.random() * (Math.PI / 3)); // ±30° around upward
+        p.vx = Math.cos(angle) * speed;
+        p.vy = Math.sin(angle) * speed;
+      } else {
+        // 10% from top edge, heading down
+        p.x = W * 0.1 + Math.random() * W * 0.8;
+        p.y = margin;
+        var angle = Math.PI / 2 + (-Math.PI / 6 + Math.random() * (Math.PI / 3)); // ±30° around downward
+        p.vx = Math.cos(angle) * speed;
+        p.vy = Math.sin(angle) * speed;
+      }
+    }
+
+    // Record initial trail point
+    p.trail.push({ x: p.x, y: p.y, energy: p.energy });
+
+    particles.push(p);
+    return p;
+  }
+
+  // --- Decay flash ---
+
+  function createFlash(x, y, energy) {
+    flashes.push({
+      x: x,
+      y: y,
+      radius: 0,
+      maxRadius: 8 + energy * 25,
+      alpha: 0.6 + energy * 0.4,
+      life: 1.0,
+      decay: 0.06 + Math.random() * 0.04
+    });
+  }
+
+  // --- Move a particle's trail to ghosts ---
+
+  function retireTrail(p) {
+    if (p.trail.length < 2) return;
+    ghostTrails.push({
+      points: p.trail,
+      fadeStart: performance.now()
+    });
+    // Cap ghost trails
+    while (ghostTrails.length > MAX_GHOST_TRAILS) {
+      ghostTrails.shift();
+    }
+  }
+
+  // --- Physics update (single sub-step) ---
+
+  function subStep(B) {
+    var i, p;
+    for (i = particles.length - 1; i >= 0; i--) {
+      p = particles[i];
+      if (!p.alive) continue;
+
+      // Lorentz force: ax = q*B*vy/m, ay = -q*B*vx/m
+      var forceFactor = p.charge * B / p.mass;
+      var ax = forceFactor * p.vy;
+      var ay = -forceFactor * p.vx;
+
+      p.vx += ax;
+      p.vy += ay;
+      p.vx *= DRAG;
+      p.vy *= DRAG;
+
+      p.x += p.vx;
+      p.y += p.vy;
+
+      // Update energy from speed (scaled for higher base speed)
+      var speed = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
+      p.energy = Math.min(1.0, speed / 6.0);
+
+      // Record trail point
+      p.trail.push({ x: p.x, y: p.y, energy: p.energy });
+      if (p.trail.length > MAX_TRAIL_POINTS) {
+        p.trail.shift();
+      }
+
+      p.age++;
+    }
+  }
+
+  // --- Main update ---
+
+  function update(dt, now) {
+    if (prefersReduced) return;
+
+    var B = BASE_B * FIELD_STRENGTH;
+    var i, p;
+
+    // Spawn new particles (~9 per second at rate 1.0)
+    spawnAccum += dt * EMISSION_RATE * 6;
+    while (spawnAccum >= 1 && particles.length < MAX_PARTICLES) {
+      spawnParticle();
+      spawnAccum -= 1;
+    }
+    if (spawnAccum > 3) spawnAccum = 0;
+
+    // Sub-step physics
+    for (var s = 0; s < SUB_STEPS; s++) {
+      subStep(B);
+    }
+
+    // Check for decay events and particle death
+    for (i = particles.length - 1; i >= 0; i--) {
+      p = particles[i];
+      if (!p.alive) continue;
+
+      // Decay event
+      if (p.age > DECAY_MIN_AGE && Math.random() < DECAY_CHANCE && p.energy > 0.15) {
+        var numChildren = 2 + (Math.random() < 0.4 ? 1 : 0);
+        var parentSpeed = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
+        var parentAngle = Math.atan2(p.vy, p.vx);
+        var childSpeed = parentSpeed * 0.65;
+
+        createFlash(p.x, p.y, p.energy);
+
+        for (var c = 0; c < numChildren; c++) {
+          var spread = (Math.PI * 0.3) + Math.random() * (Math.PI * 0.5);
+          var sign = (c === 0) ? 1 : -1;
+          if (numChildren === 3 && c === 2) sign = (Math.random() < 0.5 ? 1 : -1) * 0.5;
+          var childAngle = parentAngle + spread * sign;
+          var cs = childSpeed * (0.7 + Math.random() * 0.6);
+          var childEnergy = p.energy * 0.55 * (0.6 + Math.random() * 0.4);
+          var newCharge = (Math.random() < 0.5) ? 1 : -1;
+
+          spawnParticle(
+            p.x, p.y,
+            Math.cos(childAngle) * cs,
+            Math.sin(childAngle) * cs,
+            childEnergy,
+            newCharge
+          );
+        }
+
+        p.alive = false;
+        retireTrail(p);
+        continue;
+      }
+
+      // Kill if energy depleted
+      if (p.energy < MIN_ENERGY) {
+        p.alive = false;
+        retireTrail(p);
+        continue;
+      }
+
+      // Kill if offscreen
+      var margin = 200;
+      if (p.x < -margin || p.x > W + margin || p.y < -margin || p.y > H + margin) {
+        p.alive = false;
+        retireTrail(p);
+      }
+    }
+
+    // Remove dead particles
+    for (i = particles.length - 1; i >= 0; i--) {
+      if (!particles[i].alive) {
+        particles.splice(i, 1);
+      }
+    }
+
+    // Expire old ghost trails
+    for (i = ghostTrails.length - 1; i >= 0; i--) {
+      var elapsed = now - ghostTrails[i].fadeStart;
+      if (elapsed > GHOST_FADE_DURATION) {
+        ghostTrails.splice(i, 1);
+      }
+    }
+
+    // Update flashes
+    for (i = flashes.length - 1; i >= 0; i--) {
+      var f = flashes[i];
+      f.life -= f.decay;
+      f.radius += (f.maxRadius - f.radius) * 0.3;
+      if (f.life <= 0) {
+        flashes.splice(i, 1);
+      }
+    }
+
+    frameCount++;
+  }
+
+  // --- Trail rendering ---
+
+  function drawTrail(points, globalAlpha, ghostFade) {
+    if (points.length < 2) return;
+
+    var len = points.length;
+    var startIdx = 0;
+
+    // For ghost trails, progressively shorten from the tail
+    if (ghostFade !== undefined && ghostFade < 1.0) {
+      var visibleFraction = ghostFade; // linear shortening — no sudden snap
+      startIdx = Math.floor(len * (1 - visibleFraction));
+      if (startIdx >= len - 1) return;
+    }
+
+    var visibleLen = len - startIdx;
+    var i, pt, prevPt, e, positionFade, alpha, w, c;
+
+    for (i = Math.max(startIdx + 1, 1); i < len; i++) {
+      pt = points[i];
+      prevPt = points[i - 1];
+
+      // Position fade: quadratic curve, older points toward the tail are dimmer
+      var normalizedPos = (i - startIdx) / visibleLen;
+      positionFade = Math.sqrt(normalizedPos); // square root — keeps tail visible longer
+
+      e = pt.energy;
+      alpha = (0.35 + e * 0.65) * positionFade * globalAlpha;
+      if (alpha < 0.005) continue;
+
+      w = Math.sqrt(e) * 4.0;
+      if (w < 0.8) w = 0.8;
+      w *= positionFade;
+      if (w < 0.5) w = 0.5;
+
+      c = energyColor(e);
+
+      ctx.beginPath();
+      ctx.moveTo(prevPt.x, prevPt.y);
+      ctx.lineTo(pt.x, pt.y);
+      ctx.strokeStyle = rgba(c, alpha);
+      ctx.lineWidth = w;
+      ctx.lineCap = 'round';
+      ctx.stroke();
+
+      // Bright core line for high-energy sections
+      if (e > 0.4 && globalAlpha > 0.3) {
+        var coreAlpha = (e - 0.4) * 1.5 * positionFade * globalAlpha;
+        if (coreAlpha > 0.8) coreAlpha = 0.8;
+        if (coreAlpha > 0.01) {
+          ctx.beginPath();
+          ctx.moveTo(prevPt.x, prevPt.y);
+          ctx.lineTo(pt.x, pt.y);
+          ctx.strokeStyle = 'rgba(255, 245, 225, ' + coreAlpha + ')';
+          ctx.lineWidth = w * 0.3;
+          ctx.stroke();
+        }
+      }
+    }
+  }
+
+  // --- Film grain ---
+
+  function drawGrain() {
+    var grainCount = Math.floor(W * H * 0.0002);
+    var i, gx, gy;
+    ctx.fillStyle = 'rgba(200, 180, 160, 0.03)';
+    for (i = 0; i < grainCount; i++) {
+      gx = Math.random() * W;
+      gy = Math.random() * H;
+      ctx.fillRect(gx, gy, 1, 1);
+    }
+  }
+
+  // --- Main render ---
+
+  function render(now) {
+    // 1. Clear canvas
+    ctx.fillStyle = '#0a0a0a';
+    ctx.fillRect(0, 0, W, H);
+
+    // 2. Draw ghost trails (progressive fade from tail)
+    var gi, ghost, ghostFade, elapsed;
+    for (gi = 0; gi < ghostTrails.length; gi++) {
+      ghost = ghostTrails[gi];
+      elapsed = now - ghost.fadeStart;
+      ghostFade = Math.max(0, 1 - elapsed / GHOST_FADE_DURATION);
+      if (ghostFade > 0.005) {
+        drawTrail(ghost.points, ghostFade, ghostFade);
+      }
+    }
+
+    // 3. Draw alive particle trails
+    var i, p;
+    for (i = 0; i < particles.length; i++) {
+      p = particles[i];
+      drawTrail(p.trail, 1.0);
+    }
+
+    // 4. Draw particle head glows (more prominent)
+    for (i = 0; i < particles.length; i++) {
+      p = particles[i];
+      var e = p.energy;
+      var headR = 3 + e * 6;
+      var headAlpha = 0.5 + e * 0.5;
+      var headGrad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, headR);
+
+      if (e > 0.7) {
+        headGrad.addColorStop(0, 'rgba(255, 245, 220, ' + headAlpha + ')');
+        headGrad.addColorStop(0.3, 'rgba(255, 210, 160, ' + (headAlpha * 0.7) + ')');
+      } else {
+        headGrad.addColorStop(0, 'rgba(240, 200, 150, ' + headAlpha + ')');
+        headGrad.addColorStop(0.3, 'rgba(210, 165, 120, ' + (headAlpha * 0.5) + ')');
+      }
+      headGrad.addColorStop(1, 'rgba(200, 149, 108, 0)');
+
+      ctx.fillStyle = headGrad;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, headR, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    // 5. Draw decay flashes
+    for (i = 0; i < flashes.length; i++) {
+      var f = flashes[i];
+      var flashAlpha = f.life * f.alpha;
+      var fGrad = ctx.createRadialGradient(f.x, f.y, 0, f.x, f.y, f.radius);
+      fGrad.addColorStop(0, 'rgba(255, 240, 220, ' + (flashAlpha * 0.9) + ')');
+      fGrad.addColorStop(0.2, 'rgba(255, 200, 140, ' + (flashAlpha * 0.5) + ')');
+      fGrad.addColorStop(0.5, 'rgba(200, 149, 108, ' + (flashAlpha * 0.2) + ')');
+      fGrad.addColorStop(1, 'rgba(200, 149, 108, 0)');
+      ctx.fillStyle = fGrad;
+      ctx.beginPath();
+      ctx.arc(f.x, f.y, f.radius, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    // 6. Vignette overlay
+    ctx.drawImage(vigCanvas, 0, 0, W, H);
+
+    // 7. Sparse film grain
+    drawGrain();
+  }
+
+  // --- Animation loop ---
+
+  function loop(now) {
+    requestAnimationFrame(loop);
+    if (!running) return;
+
+    var dt = 0;
+    if (lastTime > 0) {
+      dt = (now - lastTime) * 0.001;
+      if (dt > 0.1) dt = 0.1;
+    }
+    lastTime = now;
+
+    if (dt > 0) {
+      update(dt, now);
+      render(now);
+    }
+  }
+
+  // Initial fill
+  ctx.fillStyle = '#0a0a0a';
+  ctx.fillRect(0, 0, W, H);
+
+  // Seed with initial particles (fewer for background use)
+  for (var s = 0; s < 5; s++) {
+    spawnParticle();
+  }
+
+  requestAnimationFrame(loop);
+
+  // Pause when offscreen
+  document.addEventListener('visibilitychange', function() {
+    running = !document.hidden;
+    if (running) lastTime = 0;
+  });
+
+  // PostMessage API for parameter control
+  window.addEventListener('message', function(e) {
+    if (e.data && e.data.type === 'param') {
+      switch (e.data.name) {
+        case 'EMISSION_RATE': EMISSION_RATE = e.data.value; break;
+        case 'FIELD_STRENGTH': FIELD_STRENGTH = e.data.value; break;
+      }
+    }
+  });
+})();
+</script>
+</body>
+</html>

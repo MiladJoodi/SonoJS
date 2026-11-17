@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stardust Veil</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; overflow: hidden; background: #0a0a0a; }
+  canvas { display: block; width: 100vw; height: 100vh; }
+  .label {
+    position: fixed;
+    top: 20px;
+    left: 24px;
+    font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(200, 149, 108, 0.5);
+    z-index: 10;
+    pointer-events: none;
+    user-select: none;
+  }
+  html.embed .label { display: none; }
+</style>
+<script>if(/\bembed=1\b/.test(location.search))document.documentElement.classList.add("embed")</script>
+</head>
+<body>
+<div class="label">Stardust Veil</div>
+<canvas id="canvas"></canvas>
+<script>
+// ─────────────────────────────────────────────
+// Stardust Veil — Dense shimmering cosmic stardust curtain
+// Multi-layer parallax particles, aurora ribbons, celestial wind
+// ─────────────────────────────────────────────
+(function () {
+  var canvas = document.getElementById('canvas');
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var gl = canvas.getContext('webgl', { alpha: false, antialias: false, preserveDrawingBuffer: false });
+  if (!gl) return;
+
+  var vertSrc = [
+    'attribute vec2 a_pos;',
+    'void main() { gl_Position = vec4(a_pos, 0.0, 1.0); }'
+  ].join('\n');
+
+  var fragSrc = [
+    'precision highp float;',
+    'uniform float u_time;',
+    'uniform vec2 u_res;',
+    'uniform float u_driftSpeed;',
+    'uniform float u_starDensity;',
+    'uniform vec2 u_mouse;',
+    '',
+    '#define PI 3.14159265359',
+    '#define TAU 6.28318530718',
+    '',
+    '// ══════════════════════════════════════════',
+    '// Hash & Noise primitives',
+    '// ══════════════════════════════════════════',
+    '',
+    'float hash(vec2 p) {',
+    '  return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);',
+    '}',
+    '',
+    'float hash1(float n) {',
+    '  return fract(sin(n) * 43758.5453123);',
+    '}',
+    '',
+    'vec2 hash2(vec2 p) {',
+    '  return vec2(',
+    '    fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453),',
+    '    fract(sin(dot(p, vec2(269.5, 183.3))) * 43758.5453)',
+    '  );',
+    '}',
+    '',
+    '// Smooth value noise',
+    'float noise(vec2 p) {',
+    '  vec2 i = floor(p);',
+    '  vec2 f = fract(p);',
+    '  f = f * f * (3.0 - 2.0 * f);',
+    '  float a = hash(i);',
+    '  float b = hash(i + vec2(1.0, 0.0));',
+    '  float c = hash(i + vec2(0.0, 1.0));',
+    '  float d = hash(i + vec2(1.0, 1.0));',
+    '  return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);',
+    '}',
+    '',
+    '// FBM — configurable octaves (up to 7)',
+    'float fbm(vec2 p, int octaves) {',
+    '  float val = 0.0;',
+    '  float amp = 0.5;',
+    '  float freq = 1.0;',
+    '  for (int i = 0; i < 7; i++) {',
+    '    if (i >= octaves) break;',
+    '    val += amp * noise(p * freq);',
+    '    freq *= 2.03;',
+    '    amp *= 0.49;',
+    '    p += vec2(1.7, 9.2);',
+    '  }',
+    '  return val;',
+    '}',
+    '',
+    '// Domain-warped FBM for organic nebula shapes (single warp, 3+3+4 octaves)',
+    'float warpedFbm(vec2 p, float t) {',
+    '  vec2 q = vec2(',
+    '    fbm(p + t * 0.02, 3),',
+    '    fbm(p + vec2(5.2, 1.3) + t * 0.015, 3)',
+    '  );',
+    '  return fbm(p + 3.0 * q, 4);',
+    '}',
+    '',
+    '// ══════════════════════════════════════════',
+    '// Layer 1: Background Nebula',
+    '// Soft domain-warped FBM in deep purples and midnight blues',
+    '// ══════════════════════════════════════════',
+    '',
+    'vec3 backgroundNebula(vec2 uv, float t) {',
+    '  vec2 p = uv * 1.8;',
+    '  float n1 = warpedFbm(p, t);',
+    '',
+    '  // Deep purple/midnight base colors',
+    '  vec3 deepPurple = vec3(0.06, 0.02, 0.10);',
+    '  vec3 midnightBlue = vec3(0.03, 0.03, 0.09);',
+    '  vec3 darkMauve = vec3(0.08, 0.03, 0.07);',
+    '',
+    '  vec3 col = mix(deepPurple, midnightBlue, n1);',
+    '  col = mix(col, darkMauve, smoothstep(0.3, 0.7, n1) * 0.5);',
+    '',
+    '  // Subtle brightness variation',
+    '  float bright = smoothstep(0.35, 0.65, n1) * 0.06;',
+    '  col += bright;',
+    '',
+    '  return col;',
+    '}',
+    '',
+    '// ══════════════════════════════════════════',
+    '// Layer 2: Aurora Ribbons',
+    '// Ridged noise bands in lavender, soft pink, pale gold',
+    '// ══════════════════════════════════════════',
+    '',
+    'vec3 auroraRibbons(vec2 uv, float t) {',
+    '  vec3 col = vec3(0.0);',
+    '  float drift = u_driftSpeed;',
+    '',
+    '  // Three flowing aurora bands',
+    '  for (int i = 0; i < 3; i++) {',
+    '    float fi = float(i);',
+    '    float yOffset = -0.4 + fi * 0.25 + sin(fi * 1.7) * 0.1;',
+    '',
+    '    // Domain-warped y coordinate for organic undulation',
+    '    vec2 warpP = uv * vec2(1.5, 2.0) + vec2(t * 0.03 * drift + fi * 3.0, fi * 2.7);',
+    '    float warpX = fbm(warpP, 3) * 0.4;',
+    '    float warpY = fbm(warpP + vec2(3.3, 7.7), 3) * 0.3;',
+    '',
+    '    vec2 warped = vec2(uv.x + warpX, uv.y + warpY);',
+    '',
+    '    // Ridged noise: fold to create bright narrow lines',
+    '    float ribbonNoise = fbm(vec2(warped.x * 2.5 + t * 0.04 * drift, warped.y * 3.0 + yOffset) + fi * 5.0, 4);',
+    '    float ridged = 1.0 - abs(ribbonNoise * 2.0 - 1.0);',
+    '    ridged = pow(ridged, 4.0);',
+    '',
+    '    // Secondary ridge layer for finer detail',
+    '    float ribbonNoise2 = fbm(vec2(warped.x * 4.0 - t * 0.025 * drift, warped.y * 5.0 + yOffset * 1.5) + fi * 8.0, 3);',
+    '    float ridged2 = 1.0 - abs(ribbonNoise2 * 2.0 - 1.0);',
+    '    ridged2 = pow(ridged2, 5.0);',
+    '',
+    '    float ribbon = ridged * 0.7 + ridged2 * 0.3;',
+    '',
+    '    // Color per band: lavender, soft pink, pale gold, rose',
+    '    vec3 bandColor;',
+    '    if (i == 0) bandColor = vec3(0.55, 0.45, 0.80);',   // lavender
+    '    else if (i == 1) bandColor = vec3(0.80, 0.50, 0.60);', // soft pink
+    '    else if (i == 2) bandColor = vec3(0.85, 0.75, 0.50);', // pale gold
+    '    else bandColor = vec3(0.70, 0.45, 0.70);',             // rose-purple
+    '',
+    '    // Slow breathing per band',
+    '    float breath = 0.6 + 0.4 * sin(t * 0.08 + fi * 1.3);',
+    '',
+    '    col += bandColor * ribbon * breath * 0.18;',
+    '  }',
+    '',
+    '  return col;',
+    '}',
+    '',
+    '// ══════════════════════════════════════════',
+    '// Layer 3: Far stardust field',
+    '// High-frequency noise, tiny dim cool-toned stars, slow drift',
+    '// ══════════════════════════════════════════',
+    '',
+    'float starLayer(vec2 uv, float scale, float threshold, float t, float speed, float seed) {',
+    '  // Tile the space for star grid',
+    '  vec2 p = uv * scale;',
+    '  // Drift over time',
+    '  p.y += t * speed * u_driftSpeed;',
+    '  p.x += t * speed * u_driftSpeed * 0.3 + sin(t * 0.05) * 0.2;',
+    '',
+    '  vec2 cell = floor(p);',
+    '  vec2 f = fract(p);',
+    '',
+    '  float stars = 0.0;',
+    '',
+    '  // Check surrounding cells for star centers',
+    '  for (int dy = -1; dy <= 1; dy++) {',
+    '    for (int dx = -1; dx <= 1; dx++) {',
+    '      vec2 neighbor = vec2(float(dx), float(dy));',
+    '      vec2 cellId = cell + neighbor;',
+    '      vec2 starCenter = hash2(cellId + seed);',
+    '',
+    '      // Distance from fragment to this star center',
+    '      vec2 diff = neighbor + starCenter - f;',
+    '      float dist = length(diff);',
+    '',
+    '      // Threshold: only some cells contain stars (density control)',
+    '      float present = step(threshold, hash(cellId * 0.7 + seed + 77.0));',
+    '',
+    '      // Brightness varies per star',
+    '      float brightness = hash(cellId * 1.3 + seed + 33.0);',
+    '',
+    '      // Per-star twinkle phase',
+    '      float twinklePhase = hash(cellId * 2.1 + seed + 99.0) * TAU;',
+    '      float twinkleSpeed = 0.8 + hash(cellId * 3.7 + seed + 55.0) * 2.0;',
+    '      float twinkle = 0.5 + 0.5 * sin(t * twinkleSpeed + twinklePhase);',
+    '',
+    '      // Star point: sharp core + soft glow',
+    '      float starSize = 0.015 + brightness * 0.02;',
+    '      float core = smoothstep(starSize, starSize * 0.1, dist);',
+    '      float glow = exp(-dist * dist / (starSize * starSize * 4.0));',
+    '',
+    '      stars += (core * 1.2 + glow * 0.4) * brightness * twinkle * present;',
+    '    }',
+    '  }',
+    '',
+    '  return stars * u_starDensity;',
+    '}',
+    '',
+    '// ══════════════════════════════════════════',
+    '// Layer 5: Near star glow halos and flare pulses',
+    '// ══════════════════════════════════════════',
+    '',
+    'float starFlare(vec2 uv, float scale, float t, float seed) {',
+    '  vec2 p = uv * scale;',
+    '  p.y += t * 0.12 * u_driftSpeed;',
+    '  p.x += t * 0.04 * u_driftSpeed;',
+    '',
+    '  vec2 cell = floor(p);',
+    '  vec2 f = fract(p);',
+    '  float flare = 0.0;',
+    '',
+    '  for (int dy = -1; dy <= 1; dy++) {',
+    '    for (int dx = -1; dx <= 1; dx++) {',
+    '      vec2 neighbor = vec2(float(dx), float(dy));',
+    '      vec2 cellId = cell + neighbor;',
+    '      vec2 starCenter = hash2(cellId + seed);',
+    '      vec2 diff = neighbor + starCenter - f;',
+    '      float dist = length(diff);',
+    '',
+    '      // Only bright stars flare',
+    '      float isBright = step(0.82, hash(cellId * 1.3 + seed + 33.0));',
+    '      float present = step(0.7, hash(cellId * 0.7 + seed + 77.0));',
+    '',
+    '      // Periodic flare pulses',
+    '      float flarePhase = hash(cellId * 4.1 + seed + 111.0) * TAU;',
+    '      float flareRate = 0.3 + hash(cellId * 5.3 + seed + 222.0) * 0.4;',
+    '      float flarePulse = pow(max(sin(t * flareRate + flarePhase), 0.0), 12.0);',
+    '',
+    '      // Wide glow halo',
+    '      float haloSize = 0.08 + flarePulse * 0.06;',
+    '      float halo = exp(-dist * dist / (haloSize * haloSize));',
+    '',
+    '      flare += halo * flarePulse * isBright * present;',
+    '    }',
+    '  }',
+    '',
+    '  return flare * u_starDensity;',
+    '}',
+    '',
+    '// ══════════════════════════════════════════',
+    '// Layer 6: Connecting threads',
+    '// Faint curved lines between nearby bright stars',
+    '// ══════════════════════════════════════════',
+    '',
+    'float connectingThreads(vec2 uv, float scale, float t, float seed) {',
+    '  vec2 p = uv * scale;',
+    '  p.y += t * 0.08 * u_driftSpeed;',
+    '  p.x += t * 0.025 * u_driftSpeed;',
+    '',
+    '  vec2 cell = floor(p);',
+    '  vec2 f = fract(p);',
+    '  float threads = 0.0;',
+    '',
+    '  // For each cell, check connections to neighbors',
+    '  for (int dy = -1; dy <= 1; dy++) {',
+    '    for (int dx = -1; dx <= 1; dx++) {',
+    '      vec2 neighbor = vec2(float(dx), float(dy));',
+    '      vec2 cellId = cell + neighbor;',
+    '',
+    '      // Only connect from bright cells',
+    '      float present1 = step(0.6, hash(cellId * 0.7 + seed + 77.0));',
+    '      if (present1 < 0.5) continue;',
+    '',
+    '      vec2 star1 = neighbor + hash2(cellId + seed) - f;',
+    '',
+    '      // Check a few neighbor cells for connections',
+    '      for (int ny = -1; ny <= 1; ny++) {',
+    '        for (int nx = 0; nx <= 1; nx++) {',
+    '          if (nx == 0 && ny <= 0) continue;',
+    '          vec2 neighbor2 = neighbor + vec2(float(nx), float(ny));',
+    '          vec2 cellId2 = cell + neighbor2;',
+    '',
+    '          float present2 = step(0.6, hash(cellId2 * 0.7 + seed + 77.0));',
+    '          if (present2 < 0.5) continue;',
+    '',
+    '          vec2 star2 = neighbor2 + hash2(cellId2 + seed) - f;',
+    '',
+    '          // Distance between the two stars',
+    '          float starDist = length(star2 - star1);',
+    '          if (starDist > 1.5) continue;',
+    '',
+    '          // Point-to-line-segment distance',
+    '          vec2 pa = -star1;',
+    '          vec2 ba = star2 - star1;',
+    '          float h = clamp(dot(pa, ba) / dot(ba, ba), 0.0, 1.0);',
+    '          float d = length(pa - ba * h);',
+    '',
+    '          // Curvature: sine wave offset perpendicular to line',
+    '          float curve = sin(h * PI + t * 0.3) * 0.015;',
+    '          d = abs(d - curve);',
+    '',
+    '          // Thin glowing line',
+    '          float lineWidth = 0.008;',
+    '          float line = exp(-d * d / (lineWidth * lineWidth));',
+    '',
+    '          // Fade at endpoints',
+    '          float endFade = smoothstep(0.0, 0.15, h) * smoothstep(1.0, 0.85, h);',
+    '',
+    '          threads += line * endFade * 0.3;',
+    '        }',
+    '      }',
+    '    }',
+    '  }',
+    '',
+    '  return threads;',
+    '}',
+    '',
+    '// ══════════════════════════════════════════',
+    '// Layer 7: Traveling brightness wave',
+    '// Diagonal sweep every ~5 seconds',
+    '// ══════════════════════════════════════════',
+    '',
+    'float travelingWave(vec2 uv, float t) {',
+    '  // Diagonal direction',
+    '  float diag = uv.x * 0.7 + uv.y * 0.3;',
+    '',
+    '  // Wave period ~5 seconds, position sweeps across',
+    '  float wavePeriod = 5.0;',
+    '  float wavePos = fract(t / wavePeriod) * 3.0 - 1.0;',
+    '',
+    '  // Soft gaussian wave front',
+    '  float waveWidth = 0.35;',
+    '  float wave = exp(-(diag - wavePos) * (diag - wavePos) / (waveWidth * waveWidth));',
+    '',
+    '  // Second wave offset for more richness',
+    '  float wavePos2 = fract((t + 2.5) / (wavePeriod * 1.3)) * 3.0 - 1.0;',
+    '  float wave2 = exp(-(diag - wavePos2) * (diag - wavePos2) / (waveWidth * 1.5 * waveWidth * 1.5));',
+    '',
+    '  return wave * 0.35 + wave2 * 0.2;',
+    '}',
+    '',
+    '// ══════════════════════════════════════════',
+    '// Main composition',
+    '// ══════════════════════════════════════════',
+    '',
+    'void main() {',
+    '  vec2 uv = (gl_FragCoord.xy - u_res * 0.5) / min(u_res.x, u_res.y);',
+    '',
+    '  // ── Mouse: gravitational lensing — warp UV near cursor ──',
+    '  if (u_mouse.x > 0.0) {',
+    '    vec2 mUV = (u_mouse - u_res * 0.5) / min(u_res.x, u_res.y);',
+    '    vec2 delta = uv - mUV;',
+    '    float d = length(delta);',
+    '    float warpStrength = 0.08 / (d + 0.1);',
+    '    uv += delta * warpStrength;',
+    '  }',
+    '',
+    '  float t = u_time;',
+    '',
+    '  // ── Layer 1: Background nebula ──',
+    '  vec3 col = backgroundNebula(uv, t);',
+    '',
+    '  // ── Layer 2: Aurora ribbons ──',
+    '  vec3 aurora = auroraRibbons(uv, t);',
+    '  col += aurora;',
+    '',
+    '  // ── Layer 3: Far stardust field ──',
+    '  // High density, small, slow, cool-toned',
+    '  float farStars = starLayer(uv, 35.0, 0.35, t, 0.02, 0.0);',
+    '  vec3 farStarColor = vec3(0.65, 0.72, 0.90);  // cool white-blue',
+    '  col += farStarColor * farStars * 0.25;',
+    '',
+    '  // ── Layer 4: Mid stardust field ──',
+    '  // Medium density, brighter, pink/lavender, medium speed',
+    '  float midStars = starLayer(uv, 18.0, 0.45, t, 0.06, 100.0);',
+    '  vec3 midStarColor = vec3(0.80, 0.65, 0.85);  // pink-lavender',
+    '  col += midStarColor * midStars * 0.45;',
+    '',
+    '  // ── Layer 5: Near stardust field ──',
+    '  // Fewer but larger, warm gold/pink, fastest',
+    '  float nearStars = starLayer(uv, 8.0, 0.65, t, 0.12, 200.0);',
+    '  vec3 nearStarColor = vec3(0.90, 0.75, 0.60);  // warm gold-pink',
+    '  col += nearStarColor * nearStars * 0.55;',
+    '',
+    '  // Near star glow halos and flare pulses',
+    '  float flares = starFlare(uv, 8.0, t, 200.0);',
+    '  vec3 flareColor = vec3(1.0, 0.85, 0.70);  // warm bright',
+    '  col += flareColor * flares * 0.6;',
+    '',
+    '  // ── Layer 6: Connecting threads ──',
+    '  float threads = connectingThreads(uv, 8.0, t, 200.0);',
+    '  vec3 threadColor = vec3(0.60, 0.50, 0.75);  // subtle lavender',
+    '  col += threadColor * threads * 0.15;',
+    '',
+    '  // Mid-layer threads too',
+    '  float threads2 = connectingThreads(uv, 18.0, t, 100.0);',
+    '  col += threadColor * threads2 * 0.08;',
+    '',
+    '  // ── Layer 7: Traveling brightness wave ──',
+    '  float wave = travelingWave(uv, t);',
+    '  // Wave brightens all existing content',
+    '  col *= 1.0 + wave;',
+    '  // Also adds a subtle color wash',
+    '  vec3 waveColor = vec3(0.70, 0.60, 0.85);  // lavender wind',
+    '  col += waveColor * wave * 0.04;',
+    '',
+    '  // ── Mouse: removed (gravitational lensing applied earlier to UV) ──',
+    '',
+    '  // ── Additional depth: faint overall shimmer ──',
+    '  float shimmer = noise(uv * 12.0 + t * 0.5) * noise(uv * 8.0 - t * 0.3);',
+    '  col += vec3(0.75, 0.65, 0.85) * shimmer * 0.015;',
+    '',
+    '  // ── Vignette — subtle darkening at edges ──',
+    '  float dist = length(uv);',
+    '  float vignette = 1.0 - smoothstep(0.5, 1.4, dist);',
+    '  col *= 0.7 + vignette * 0.3;',
+    '',
+    '  // ── Film grain ──',
+    '  float grain = (fract(sin(dot(gl_FragCoord.xy, vec2(12.9898, 78.233)) + fract(t * 0.1) * 100.0) * 43758.5453) - 0.5) * 0.012;',
+    '  col += grain;',
+    '',
+    '  // ── Tone mapping: soft S-curve ──',
+    '  col = max(col, vec3(0.0));',
+    '  col = col / (col + 0.85) * 1.15;',
+    '',
+    '  // ── Subtle color grading: slight warmth in highlights, cool in shadows ──',
+    '  col = pow(col, vec3(0.97, 1.0, 1.04));',
+    '',
+    '  gl_FragColor = vec4(clamp(col, 0.0, 1.0), 1.0);',
+    '}'
+  ].join('\n');
+
+  function compile(type, src) {
+    var s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
+
+    }
+    return s;
+  }
+
+  var prog = gl.createProgram();
+  gl.attachShader(prog, compile(gl.VERTEX_SHADER, vertSrc));
+  gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, fragSrc));
+  gl.linkProgram(prog);
+  if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) {
+
+  }
+  gl.useProgram(prog);
+
+  var buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+  var aPos = gl.getAttribLocation(prog, 'a_pos');
+  gl.enableVertexAttribArray(aPos);
+  gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+
+  var uTime = gl.getUniformLocation(prog, 'u_time');
+  var uRes = gl.getUniformLocation(prog, 'u_res');
+  var uDriftSpeed = gl.getUniformLocation(prog, 'u_driftSpeed');
+  var uStarDensity = gl.getUniformLocation(prog, 'u_starDensity');
+  var uMouse = gl.getUniformLocation(prog, 'u_mouse');
+
+  var driftSpeedVal = 0.4;
+  var starDensityVal = 1.0;
+
+  // Render at 1x — soft cosmic dust doesn't need retina resolution
+  var dpr = 1.0;
+  var mouseX = -1.0, mouseY = -1.0;
+  canvas.addEventListener('mousemove', function (e) {
+    mouseX = e.clientX * dpr;
+    mouseY = (canvas.clientHeight - e.clientY) * dpr;
+  });
+  canvas.addEventListener('mouseleave', function () {
+    mouseX = -1.0; mouseY = -1.0;
+  });
+  var needsResize = true;
+  var running = true;
+
+  function resize() {
+    needsResize = false;
+    var w = Math.round(canvas.clientWidth * dpr);
+    var h = Math.round(canvas.clientHeight * dpr);
+    if (canvas.width !== w || canvas.height !== h) {
+      canvas.width = w;
+      canvas.height = h;
+      gl.viewport(0, 0, w, h);
+      gl.uniform2f(uRes, canvas.width, canvas.height);
+    }
+  }
+
+  function render(now) {
+    if (!running) return;
+    if (needsResize) resize();
+    gl.uniform1f(uTime, prefersReduced ? 0.0 : now * 0.001);
+    gl.uniform1f(uDriftSpeed, driftSpeedVal);
+    gl.uniform1f(uStarDensity, starDensityVal);
+    gl.uniform2f(uMouse, mouseX, mouseY);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+    requestAnimationFrame(render);
+  }
+
+  window.addEventListener('resize', function () {
+    needsResize = true;
+  });
+
+  resize();
+
+  requestAnimationFrame(render);
+
+  document.addEventListener('visibilitychange', function() {
+    if (document.hidden) {
+      running = false;
+    } else {
+      running = true;
+      requestAnimationFrame(render);
+    }
+  });
+
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        if (!running) {
+          running = true;
+          requestAnimationFrame(render);
+        }
+      } else {
+        running = false;
+      }
+    });
+  }, { threshold: 0.1 });
+  observer.observe(canvas);
+
+  window.addEventListener('message', function(e) {
+    if (e.data && e.data.type === 'param') {
+      switch (e.data.name) {
+        case 'DRIFT_SPEED': driftSpeedVal = e.data.value; break;
+        case 'STAR_DENSITY': starDensityVal = e.data.value; break;
+      }
+    }
+  });
+})();
+</script>
+</body>
+</html>

@@ -185,8 +185,8 @@ export function HangingBag({
             color: isDark ? "#94a3b8" : "#64748b",
           }}
         >
-          <span>Drag — orbit X / Y / Z</span>
-          <span>Scroll — spin rack · Ctrl+scroll — zoom</span>
+          <span>Drag, orbit X / Y / Z</span>
+          <span>Scroll, spin rack · Ctrl+scroll, zoom</span>
         </div>
       ) : null}
     </div>

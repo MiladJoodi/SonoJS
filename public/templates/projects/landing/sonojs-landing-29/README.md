@@ -23,7 +23,7 @@ Multi-page ecom creative-agency site. Demo brand: **Nexura Studio**.
 
 ## Run locally
 
-Do not open only via `file://` if you want multi-page nav and media to behave consistently — use a static server.
+Do not open only via `file://` if you want multi-page nav and media to behave consistently, use a static server.
 
 ```bash
 npx serve .

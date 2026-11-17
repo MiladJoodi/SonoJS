@@ -5,7 +5,7 @@
  * (including section.tsx shells, index barrels, lazy islands, parallax) plus
  * deferred hero panels (pricing / player / palette / chart).
  *
- * No Tailwind preflight — that lives in app/globals.css.
+ * No Tailwind preflight, that lives in app/globals.css.
  * Homepage (`app/(app)/page.tsx`) imports this synchronously so section shells
  * never paint unstyled. Islands may still `await loadHomeBelowFoldCss()`.
  */

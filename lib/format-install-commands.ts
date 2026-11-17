@@ -1,9 +1,9 @@
 /**
  * Separate install steps for docs / MCP hints.
- * Never chain with `&&` or `;` — PowerShell 5.x rejects `&&`, and separate
+ * Never chain with `&&` or `;`. PowerShell 5.x rejects `&&`, and separate
  * copyable commands are safer across shells.
  *
- * Client-safe (no Node fs) — keep this file free of server-only imports.
+ * Client-safe (no Node fs), keep this file free of server-only imports.
  */
 export function formatInstallCommands(opts: {
   registry?: string[]

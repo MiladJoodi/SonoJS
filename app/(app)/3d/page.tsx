@@ -12,7 +12,7 @@ import { pageMetadata } from "@/lib/seo"
 export const metadata = pageMetadata({
   title: "3D",
   description:
-    "Installable 3D scenes for React — preview live, then add with the CLI.",
+    "Installable 3D scenes for React, preview live, then add with the CLI.",
   path: "/3d",
 })
 
@@ -24,7 +24,7 @@ export default function ThreeDIndexPage() {
       <header className="space-y-2">
         <h1 className="text-h1">3D</h1>
         <p className="text-muted-foreground">
-          Installable 3D scenes for React — preview live, then add with the CLI.
+          Installable 3D scenes for React, preview live, then add with the CLI.
         </p>
       </header>
 

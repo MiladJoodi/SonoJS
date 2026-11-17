@@ -97,7 +97,7 @@ export function HeroShowcase({ className }: { className?: string }) {
       const prompt = PROMPTS.find((p) => p.id === id) ?? PROMPTS[0]!
       const reduced = prefersReducedMotion()
 
-      // After first play: only swap content — no typewriter / step / entrance.
+      // After first play: only swap content. No typewriter / step / entrance.
       if (mode === "swap" || introDoneRef.current) {
         introDoneRef.current = true
         setMotionOn(false)

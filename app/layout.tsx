@@ -49,7 +49,7 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   applicationName: siteConfig.name,
-  // Do not set a root canonical here — Next merges layout metadata onto
+  // Do not set a root canonical here. Next merges layout metadata onto
   // children, so `canonical: "/"` would force the homepage onto routes that
   // omit their own alternates (e.g. auth callbacks). Homepage uses pageMetadata.
   icons: {

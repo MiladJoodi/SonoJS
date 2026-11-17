@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>#047 Smoke + Wind — creative-lab</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:#06080d;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#dde6f0}
+canvas{display:block;width:100vw;height:100vh;position:fixed;top:0;left:0}
+#ui{position:fixed;top:16px;left:16px;z-index:10;background:rgba(6,8,14,0.78);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(120,200,255,0.14);border-radius:12px;padding:14px 16px;min-width:228px;font-size:0.82rem}
+h1{font-size:0.7rem;letter-spacing:0.13em;text-transform:uppercase;color:#5a8aaa;margin-bottom:11px}
+.row{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.row label{width:86px;color:#b0c4d8;flex-shrink:0;font-size:0.78rem}
+.row input[type=range]{flex:1;accent-color:#7ec8ff;cursor:pointer}
+.val{width:38px;text-align:right;color:#7ec8ff;font-size:0.74rem;font-variant-numeric:tabular-nums}
+.btn-row{display:flex;gap:5px;margin-top:9px}
+button{flex:1;background:rgba(126,200,255,0.08);border:1px solid rgba(126,200,255,0.2);color:#7ec8ff;border-radius:6px;padding:5px 4px;font-size:0.74rem;cursor:pointer;transition:background .15s}
+button:hover{background:rgba(126,200,255,0.18)}
+button.active{background:rgba(126,200,255,0.26);border-color:rgba(126,200,255,0.45)}
+#hint{position:fixed;bottom:14px;left:16px;color:rgba(160,200,255,0.28);font-size:0.7rem}
+
+    html.embed #ui,
+    html.embed #info,
+    html.embed #controls,
+    html.embed #stats,
+    html.embed #hint,
+    html.embed .panel,
+    html.embed header,
+    html.embed footer { display: none !important; }
+  </style>
+  <script>if(/\bembed=1\b/.test(location.search))document.documentElement.classList.add("embed")</script>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="ui">
+  <h1>047 · Smoke + Wind</h1>
+  <div class="row"><label>Wind speed</label><input type="range" id="s-wspeed" min="0" max="100" value="28"><span class="val" id="v-wspeed">28</span></div>
+  <div class="row"><label>Wind from</label><input type="range" id="s-wdir" min="0" max="359" value="225"><span class="val" id="v-wdir">SW</span></div>
+  <div class="row"><label>Turbulence</label><input type="range" id="s-turb" min="0" max="100" value="42"><span class="val" id="v-turb">42</span></div>
+  <div class="row"><label>Emission</label><input type="range" id="s-emit" min="0" max="100" value="65"><span class="val" id="v-emit">65</span></div>
+  <div class="row"><label>Dissipation</label><input type="range" id="s-diss" min="80" max="100" value="98"><span class="val" id="v-diss">0.98</span></div>
+  <div class="btn-row">
+    <button id="btn-clear">Clear</button>
+    <button id="btn-arrows" class="active">Arrows</button>
+    <button id="btn-pause">Pause</button>
+  </div>
+</div>
+<div id="hint">Click / drag to add smoke</div>
+
+
+<script>
+'use strict';
+
+// ── Canvas & offscreen grid ──────────────────────────────────────────────────
+const canvas = document.getElementById('c');
+const ctx    = canvas.getContext('2d');
+let W, H;
+
+// Simulation grid (low-res, scaled up for smooth rendering)
+const GW = 180, GH = 135;
+const off = document.createElement('canvas');
+off.width = GW; off.height = GH;
+const octx = off.getContext('2d');
+
+function resize() {
+  W = canvas.width  = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+// ── Simulation fields ────────────────────────────────────────────────────────
+const N = GW * GH;
+let dens  = new Float32Array(N);   // smoke density
+let densP = new Float32Array(N);   // prev density
+let uu    = new Float32Array(N);   // x-velocity
+let vv    = new Float32Array(N);   // y-velocity
+let uuP   = new Float32Array(N);
+let vvP   = new Float32Array(N);
+
+// ── Parameters (live) ───────────────────────────────────────────────────────
+let windSpeed   = 28;
+let windDirDeg  = 225;   // "wind from" compass degrees (0=N, 90=E, ...)
+let turbulence  = 42;
+let emission    = 65;
+let dissipation = 0.98;
+let paused      = false;
+let showArrows  = true;
+let simTime     = 0;
+
+// ── Helpers ──────────────────────────────────────────────────────────────────
+function IX(x, y) {
+  return ((x|0) < 0 ? 0 : (x|0) >= GW ? GW-1 : (x|0)) +
+         (((y|0) < 0 ? 0 : (y|0) >= GH ? GH-1 : (y|0))) * GW;
+}
+
+function bilinear(arr, px, py) {
+  px = Math.max(0.5, Math.min(GW - 1.5, px));
+  py = Math.max(0.5, Math.min(GH - 1.5, py));
+  const i0 = px|0, i1 = i0+1;
+  const j0 = py|0, j1 = j0+1;
+  const s1 = px-i0, s0 = 1-s1;
+  const t1 = py-j0, t0 = 1-t1;
+  return s0*(t0*arr[IX(i0,j0)] + t1*arr[IX(i0,j1)]) +
+         s1*(t0*arr[IX(i1,j0)] + t1*arr[IX(i1,j1)]);
+}
+
+// Semi-Lagrangian back-trace advection
+function advect(dst, src, uField, vField, dt) {
+  // Scale so velocity "1" = full grid width in 1 second
+  const dtx = dt * GW * 0.55;
+  const dty = dt * GH * 0.55;
+  for (let j = 0; j < GH; j++) {
+    for (let i = 0; i < GW; i++) {
+      const k  = IX(i, j);
+      const px = i - dtx * uField[k];
+      const py = j - dty * vField[k];
+      dst[k] = bilinear(src, px, py);
+    }
+  }
+}
+
+// ── Noise / turbulence ───────────────────────────────────────────────────────
+// Hash → value in [0,1)
+function hash21(x, y) {
+  let n = (x*127 + y*311) ^ ((x*311) ^ (y*127));
+  n = ((n ^ (n << 13)) >>> 0);
+  n = ((n ^ (n >>> 17)) >>> 0);
+  n = ((n ^ (n <<  5)) >>> 0);
+  return (n >>> 0) / 4294967296;
+}
+
+// Smooth 2-D value noise
+function valueNoise(x, y) {
+  const ix = Math.floor(x), iy = Math.floor(y);
+  const fx = x-ix, fy = y-iy;
+  const ux = fx*fx*(3-2*fx), uy = fy*fy*(3-2*fy);
+  const a = hash21(ix,   iy  );
+  const b = hash21(ix+1, iy  );
+  const c = hash21(ix,   iy+1);
+  const d = hash21(ix+1, iy+1);
+  return a + (b-a)*ux + (c-a)*uy + (d+a-b-c)*ux*uy;
+}
+
+// Fractional Brownian motion (2 octaves)
+function fbm(x, y) {
+  return valueNoise(x,   y  ) * 0.6 +
+         valueNoise(x*2, y*2) * 0.3 +
+         valueNoise(x*4, y*4) * 0.1;
+}
+
+// Curl of fbm → divergence-free turbulence velocity
+function curlNoise(x, y, t) {
+  const e  = 0.12;
+  const sc = 0.048;
+  const tx = t * 0.22, ty = t * 0.18;
+  const n1 = fbm(x*sc + tx,   y*sc + ty  );
+  const n2 = fbm(x*sc + tx+e, y*sc + ty  );
+  const n3 = fbm(x*sc + tx,   y*sc + ty+e);
+  // gradient of noise, rotated 90° = curl
+  const dndx = (n2 - n1) / e;
+  const dndy = (n3 - n1) / e;
+  return { cu: -dndy, cv: dndx };
+}
+
+// ── Velocity field update ────────────────────────────────────────────────────
+// "Wind from" compass: N=0°, E=90°, S=180°, W=270°
+// So actual blow direction is (windDirDeg + 180) deg from N, then convert to canvas coords:
+//   x = sin(blowRad), y = -cos(blowRad)  (y increases downward)
+function computeWindComponents() {
+  const blowRad = ((windDirDeg + 180) % 360) * Math.PI / 180;
+  const speed   = windSpeed * 0.00035;
+  return { wu: Math.sin(blowRad) * speed, wv: -Math.cos(blowRad) * speed };
+}
+
+function updateVelocity(dt) {
+  // Self-advect velocity
+  uuP.set(uu); vvP.set(vv);
+  advect(uu, uuP, uuP, vvP, dt);
+  advect(vv, vvP, uuP, vvP, dt);
+
+  const { wu, wv } = computeWindComponents();
+  const turbStr    = turbulence * 0.0004;
+  const sc         = 0.048;
+
+  for (let j = 0; j < GH; j++) {
+    for (let i = 0; i < GW; i++) {
+      const { cu, cv } = curlNoise(i, j, simTime);
+      const k = IX(i, j);
+      // Blend toward target: global wind + curl turbulence
+      uu[k] = uu[k] * 0.94 + wu + cu * turbStr;
+      vv[k] = vv[k] * 0.94 + wv + cv * turbStr;
+    }
+  }
+}
+
+// ── Smoke sources ────────────────────────────────────────────────────────────
+const SOURCES = [
+  { x: GW * 0.32, y: GH * 0.82, r: 5, str: 1.0 },
+  { x: GW * 0.68, y: GH * 0.82, r: 4, str: 0.8 },
+];
+
+function emitSmoke() {
+  const baseStr = emission * 0.025;
+  for (const src of SOURCES) {
+    const r2 = src.r * src.r;
+    const ri = Math.ceil(src.r);
+    for (let dj = -ri; dj <= ri; dj++) {
+      for (let di = -ri; di <= ri; di++) {
+        const d2 = di*di + dj*dj;
+        if (d2 > r2) continue;
+        const x = (src.x + di)|0, y = (src.y + dj)|0;
+        if (x < 0 || x >= GW || y < 0 || y >= GH) continue;
+        const falloff = 1 - Math.sqrt(d2) / src.r;
+        dens[IX(x,y)] = Math.min(1, dens[IX(x,y)] + baseStr * src.str * falloff);
+      }
+    }
+  }
+}
+
+// ── Simulation step ──────────────────────────────────────────────────────────
+function step(dt) {
+  updateVelocity(dt);
+
+  // Advect density
+  densP.set(dens);
+  advect(dens, densP, uu, vv, dt);
+
+  // Dissipate + floor clamp
+  const diss = dissipation;
+  for (let i = 0; i < N; i++) {
+    dens[i] = Math.max(0, dens[i] * diss - 0.0006);
+  }
+
+  emitSmoke();
+  simTime += dt;
+}
+
+// ── Rendering ────────────────────────────────────────────────────────────────
+const imgData = octx.createImageData(GW, GH);
+const px      = imgData.data;
+
+// Dark background → steel blue → near-white smoke
+function smokeColor(d) {
+  d = Math.min(1, d);
+  let r, g, b;
+  if (d < 0.35) {
+    const t = d / 0.35;
+    r = t * 60;
+    g = t * 95;
+    b = t * 160;
+  } else if (d < 0.7) {
+    const t = (d - 0.35) / 0.35;
+    r = 60  + t * 115;
+    g = 95  + t * 105;
+    b = 160 + t * 65;
+  } else {
+    const t = (d - 0.7) / 0.3;
+    r = 175 + t * 80;
+    g = 200 + t * 55;
+    b = 225 + t * 30;
+  }
+  return [r|0, g|0, b|0];
+}
+
+function renderField() {
+  for (let i = 0; i < N; i++) {
+    const [r, g, b] = smokeColor(dens[i]);
+    const p = i << 2;
+    px[p  ] = r;
+    px[p+1] = g;
+    px[p+2] = b;
+    px[p+3] = 255;
+  }
+  octx.putImageData(imgData, 0, 0);
+
+  // Scale up to full canvas with smooth interpolation
+  ctx.imageSmoothingEnabled = true;
+  ctx.imageSmoothingQuality = 'high';
+  ctx.drawImage(off, 0, 0, W, H);
+}
+
+function renderArrows() {
+  const STEP = 18;          // grid cells between arrows
+  const scaleX = W / GW;
+  const scaleY = H / GH;
+  const arrowScale = 320;
+
+  ctx.save();
+  for (let j = Math.floor(STEP/2); j < GH; j += STEP) {
+    for (let i = Math.floor(STEP/2); i < GW; i += STEP) {
+      const k  = IX(i, j);
+      const dx = uu[k] * arrowScale;
+      const dy = vv[k] * arrowScale;
+      const len = Math.sqrt(dx*dx + dy*dy);
+      if (len < 1) continue;
+
+      const sx = (i + 0.5) * scaleX;
+      const sy = (j + 0.5) * scaleY;
+      const ex = sx + dx * scaleX;
+      const ey = sy + dy * scaleY;
+
+      // Opacity proportional to speed
+      const alpha = Math.min(0.65, len / 14);
+      ctx.strokeStyle = `rgba(120,190,255,${alpha.toFixed(2)})`;
+      ctx.fillStyle   = `rgba(120,190,255,${alpha.toFixed(2)})`;
+      ctx.lineWidth   = 0.8;
+
+      ctx.beginPath();
+      ctx.moveTo(sx, sy);
+      ctx.lineTo(ex, ey);
+      ctx.stroke();
+
+      // Arrowhead
+      const nx = dx/len, ny = dy/len;
+      const hs = 4 * scaleX;  // head size
+      ctx.beginPath();
+      ctx.moveTo(ex, ey);
+      ctx.lineTo(ex - nx*hs + ny*hs*0.4, ey - ny*hs - nx*hs*0.4);
+      ctx.lineTo(ex - nx*hs - ny*hs*0.4, ey - ny*hs + nx*hs*0.4);
+      ctx.closePath();
+      ctx.fill();
+    }
+  }
+  ctx.restore();
+}
+
+function render() {
+  renderField();
+  if (showArrows) renderArrows();
+}
+
+// ── Mouse interaction ────────────────────────────────────────────────────────
+let mouseDown = false;
+
+function gridCoords(e) {
+  const rect = canvas.getBoundingClientRect();
+  return {
+    gx: (e.clientX - rect.left)  / rect.width  * GW,
+    gy: (e.clientY - rect.top)   / rect.height * GH,
+  };
+}
+
+function addSmokeAt(gx, gy, radius = 6, strength = 0.35) {
+  const ri = Math.ceil(radius);
+  for (let dj = -ri; dj <= ri; dj++) {
+    for (let di = -ri; di <= ri; di++) {
+      const d2 = di*di + dj*dj;
+      if (d2 > radius*radius) continue;
+      const x = (gx + di)|0, y = (gy + dj)|0;
+      if (x < 0 || x >= GW || y < 0 || y >= GH) continue;
+      const falloff = 1 - Math.sqrt(d2) / radius;
+      dens[IX(x,y)] = Math.min(1, dens[IX(x,y)] + strength * falloff);
+    }
+  }
+}
+
+canvas.addEventListener('mousedown', e => { mouseDown = true; const {gx,gy} = gridCoords(e); addSmokeAt(gx, gy); });
+canvas.addEventListener('mousemove', e => { if (mouseDown) { const {gx,gy} = gridCoords(e); addSmokeAt(gx, gy, 5, 0.2); }});
+canvas.addEventListener('mouseup',   () => mouseDown = false);
+canvas.addEventListener('mouseleave',() => mouseDown = false);
+
+canvas.addEventListener('touchstart', e => {
+  e.preventDefault();
+  const t = e.touches[0];
+  const {gx,gy} = gridCoords(t);
+  addSmokeAt(gx, gy);
+}, {passive:false});
+canvas.addEventListener('touchmove', e => {
+  e.preventDefault();
+  const t = e.touches[0];
+  const {gx,gy} = gridCoords(t);
+  addSmokeAt(gx, gy, 5, 0.22);
+}, {passive:false});
+
+// ── UI wiring ────────────────────────────────────────────────────────────────
+const COMPASS = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW','N'];
+function compassName(deg) {
+  return COMPASS[Math.round(((deg % 360) + 360) % 360 / 22.5)];
+}
+
+function wire(sliderId, valId, onInput, fmt) {
+  const sl = document.getElementById(sliderId);
+  const vl = document.getElementById(valId);
+  const apply = () => {
+    const v = parseFloat(sl.value);
+    onInput(v);
+    vl.textContent = fmt ? fmt(v) : v;
+  };
+  sl.addEventListener('input', apply);
+  apply();
+}
+
+wire('s-wspeed', 'v-wspeed', v => windSpeed   = v);
+wire('s-wdir',   'v-wdir',   v => windDirDeg  = v, v => compassName(v));
+wire('s-turb',   'v-turb',   v => turbulence  = v);
+wire('s-emit',   'v-emit',   v => emission    = v);
+wire('s-diss',   'v-diss',   v => dissipation = v / 100, v => (v/100).toFixed(2));
+
+document.getElementById('btn-clear').addEventListener('click', () => {
+  dens.fill(0); uu.fill(0); vv.fill(0);
+});
+
+const btnArrows = document.getElementById('btn-arrows');
+btnArrows.addEventListener('click', () => {
+  showArrows = !showArrows;
+  btnArrows.classList.toggle('active', showArrows);
+});
+
+const btnPause = document.getElementById('btn-pause');
+btnPause.addEventListener('click', () => {
+  paused = !paused;
+  btnPause.classList.toggle('active', paused);
+  btnPause.textContent = paused ? 'Resume' : 'Pause';
+  if (!paused) { lastT = performance.now(); loop(); }
+});
+
+// ── Main loop ────────────────────────────────────────────────────────────────
+let lastT = performance.now();
+function loop() {
+  if (paused) return;
+  const now = performance.now();
+  const dt  = Math.min((now - lastT) / 1000, 0.05);
+  lastT = now;
+
+  step(dt);
+  render();
+  requestAnimationFrame(loop);
+}
+loop();
+</script>
+</body>
+</html>

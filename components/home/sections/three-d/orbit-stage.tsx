@@ -57,7 +57,7 @@ function TelegramIcon({ className, ...props }: SVGProps<SVGSVGElement>) {
   )
 }
 
-/** Outer ring — well-known brands. */
+/** Outer ring, well-known brands. */
 const OUTER: Array<{
   Icon: IconComp
   label: string
@@ -92,7 +92,7 @@ const OUTER: Array<{
   },
 ]
 
-/** Inner ring — product stack. */
+/** Inner ring, product stack. */
 const INNER: Array<{
   Icon: IconComp
   label: string

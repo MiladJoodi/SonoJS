@@ -71,7 +71,7 @@ export function CardLivePreview({
         "absolute inset-0 overflow-hidden",
         // Fit tall demo stages into the thumb
         "[&>div]:h-full! [&>div]:min-h-0! [&>div]:max-h-full!",
-        // Kill white/black stage flash — match card media surface
+        // Kill white/black stage flash, match card media surface
         "[&>div]:bg-transparent!",
         className
       )}

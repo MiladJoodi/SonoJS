@@ -45,7 +45,7 @@ Put the CLI `whsec_…` in `.env.local` as `STRIPE_WEBHOOK_SECRET`. Requires `ST
 Grant/revoke complimentary Pro without editing Neon by hand:
 
 ```bash
-# .env.local — your Clerk primary email(s), comma-separated
+# .env.local: your Clerk primary email(s), comma-separated
 ADMIN_EMAILS=you@example.com
 ```
 

@@ -18,6 +18,8 @@ import {
   ShapesIcon,
   SparklesIcon,
   StoreIcon,
+  TagIcon,
+  WallpaperIcon,
   WrenchIcon,
   type LucideIcon,
 } from "lucide-react"
@@ -53,9 +55,11 @@ const MORE_ICONS: Record<string, LucideIcon> = {
   "/docs/mcp": PlugIcon,
   "/ai": SparklesIcon,
   "/cursors": MousePointer2Icon,
+  "/backgrounds": WallpaperIcon,
   "/3d": BoxIcon,
   "/carousels": GalleryHorizontalEndIcon,
   "/websites": GlobeIcon,
+  "/pricing": TagIcon,
   "/tools": WrenchIcon,
   "https://icons.sonojs.com": ShapesIcon,
 }

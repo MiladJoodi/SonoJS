@@ -61,7 +61,7 @@ async function safeLogDownload(input: {
 /**
  * Catalog download (templates + websites via shared API).
  * Free/member/pro tiers follow ContentAccess.
- * Paid items (`priceCents > 0`) require a product entitlement — Pro alone is not enough.
+ * Paid items (`priceCents > 0`) require a product entitlement. Pro alone is not enough.
  */
 export async function GET(_req: Request, context: RouteContext) {
   const { slug } = await context.params
@@ -77,7 +77,7 @@ export async function GET(_req: Request, context: RouteContext) {
 
   let ownsProduct = false
   if (requiresPurchase && viewer.kind !== "guest" && viewer.userId) {
-    // Ownership is always checked server-side for the catalog slug — never trust client.
+    // Ownership is always checked server-side for the catalog slug. Never trust client.
     ownsProduct = await userOwnsProductSlug(viewer.userId, project.slug)
   }
 

@@ -5,7 +5,7 @@ Category: `landing`
 Slug / folder: `sonojs-landing-17`  
 Path: `public/templates/projects/landing/sonojs-landing-17/`  
 
-Online business banking landing. Demo brand: **Mercury** — Radically different banking.
+Online business banking landing. Demo brand: **Mercury**. Radically different banking.
 
 ## Images / video
 

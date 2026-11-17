@@ -174,7 +174,7 @@ export function AdminUserDetailPanel({ userId }: { userId: string }) {
           <p>
             <span className="text-muted-foreground">Stripe customer · </span>
             <span className="font-mono text-xs" dir="ltr">
-              {detail.user.stripeCustomerId || "—"}
+              {detail.user.stripeCustomerId || ", "}
             </span>
           </p>
         </CardContent>
@@ -282,7 +282,7 @@ export function AdminUserDetailPanel({ userId }: { userId: string }) {
                       <td className={adminTdClass} dir="ltr">
                         {e.amountCents != null
                           ? formatCents(e.amountCents)
-                          : "—"}
+                          : ", "}
                       </td>
                       <td
                         className={cn(adminTdClass, "text-muted-foreground")}
@@ -460,7 +460,7 @@ export function AdminUserDetailPanel({ userId }: { userId: string }) {
                         )}
                         dir="ltr"
                       >
-                        {p.stripeInvoiceId || "—"}
+                        {p.stripeInvoiceId || ", "}
                       </td>
                     </tr>
                   ))}

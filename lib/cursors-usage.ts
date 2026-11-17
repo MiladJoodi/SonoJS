@@ -86,7 +86,7 @@ export default function Page() {
   if (id === "pointer-cursor") {
     return {
       blurb:
-        "Nest <Pointer /> inside the element you want to hover. There is no variant prop — the default arrow shows when you pass nothing; use className to recolor it, or children to replace the glyph entirely (SVG, emoji, or a motion node).",
+        "Nest <Pointer /> inside the element you want to hover. There is no variant prop, the default arrow shows when you pass nothing; use className to recolor it, or children to replace the glyph entirely (SVG, emoji, or a motion node).",
       code: `"use client"
 
 import { ${name} } from "${path}"
@@ -144,7 +144,7 @@ export default function Page() {
         },
         {
           title: "Emoji",
-          description: "Children can be text or an emoji — not only SVG.",
+          description: "Children can be text or an emoji, not only SVG.",
           code: `"use client"
 
 import { ${name} } from "${path}"

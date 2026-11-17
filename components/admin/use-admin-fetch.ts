@@ -2,7 +2,7 @@
 
 import * as React from "react"
 
-/** Fresh window for tab switches — show cache instantly, revalidate after. */
+/** Fresh window for tab switches, show cache instantly, revalidate after. */
 const STALE_MS = 60_000
 
 type CacheEntry = {
@@ -84,7 +84,7 @@ export function useAdminFetch<T>(
         setLoading(false)
         setRefreshing(true)
       } else {
-        // URL changed or cold miss — don't flash previous key's rows
+        // URL changed or cold miss, don't flash previous key's rows
         setData(null)
         setError(null)
         setLoading(true)

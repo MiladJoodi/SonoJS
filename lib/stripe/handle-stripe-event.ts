@@ -424,7 +424,7 @@ async function handleProductPurchaseCheckout(
     amountCents: catalogAmount,
   })
 
-  // One-time Checkout has no invoice — record via payment_intent for Billing /
+  // One-time Checkout has no invoice, record via payment_intent for Billing /
   // admin Payments history (same `payments` table as Pro invoices).
   if (paymentIntentId) {
     await upsertPayment({

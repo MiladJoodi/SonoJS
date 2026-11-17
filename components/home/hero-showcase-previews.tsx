@@ -106,7 +106,7 @@ function ShowcasePanelLazy({
     let cancelled = false
     void (async () => {
       try {
-        // Panel utilities + sono-eq live in home-below-fold.css — wait to avoid FOUC.
+        // Panel utilities + sono-eq live in home-below-fold.css, wait to avoid FOUC.
         await loadHomeBelowFoldCss()
         if (cancelled) return
         const Panel =

@@ -47,14 +47,14 @@
 }
 
 @layer base {
-  /* Code blocks — selection independent of brand primary */
+  /* Code blocks, selection independent of brand primary */
   .sono-code-block ::selection,
   .sono-code-block *::selection {
     background: var(--code-selection);
     color: var(--code-fg);
   }
 
-  /* Drawer soft panes only — never re-show code horizontal bars. */
+  /* Drawer soft panes only. Never re-show code horizontal bars. */
   [data-slot="drawer-content"] .scrollbar-soft {
     scrollbar-width: thin;
     scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
@@ -88,7 +88,7 @@
 }
 
 @layer components {
-  /* Shiki output — lock typography (nested @utility rules were not sticking) */
+  /* Shiki output, lock typography (nested @utility rules were not sticking) */
   .sono-code-shiki pre,
   .sono-code-shiki pre.shiki,
   .sono-code-shiki code,

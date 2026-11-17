@@ -149,7 +149,7 @@ export function AdminDownloadsPanel() {
         <div className="space-y-1.5">
           <CardTitle>Template downloads</CardTitle>
           <CardDescription>
-            Who downloaded what — search by email, clerk id, product name, or
+            Who downloaded what, search by email, clerk id, product name, or
             slug.
           </CardDescription>
         </div>
@@ -310,7 +310,7 @@ export function AdminDownloadsPanel() {
                           href={`/admin/users/${d.userId}`}
                           className="cursor-pointer underline-offset-4 hover:underline"
                         >
-                          {d.email || d.clerkUserId || "—"}
+                          {d.email || d.clerkUserId || ", "}
                         </Link>
                       </td>
                       <td className={adminTdClass}>

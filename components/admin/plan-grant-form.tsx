@@ -89,7 +89,7 @@ export function PlanGrantForm({
         <CardTitle>Change plan</CardTitle>
         <CardDescription>
           Paste a Clerk user id (`user_…`). Pro writes Neon + syncs Clerk.
-          Revoke updates Neon and Clerk only — a live Stripe subscription can
+          Revoke updates Neon and Clerk only. A live Stripe subscription can
           restore Pro on the next webhook.
         </CardDescription>
       </CardHeader>

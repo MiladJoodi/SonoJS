@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>#070 Sand + Water — creative-lab</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:#0e0e12;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#dde0e8}
+canvas{display:block;position:fixed;top:0;left:0;image-rendering:pixelated;image-rendering:crisp-edges;cursor:crosshair}
+#ui{position:fixed;top:16px;left:16px;z-index:10;background:rgba(8,8,14,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:14px 16px;min-width:212px;font-size:.82rem;user-select:none}
+h1{font-size:.68rem;letter-spacing:.13em;text-transform:uppercase;color:#5a6a8a;margin-bottom:11px}
+.mat-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-bottom:10px}
+.mb{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:7px;padding:5px 8px;font-size:.74rem;cursor:pointer;transition:background .13s,border-color .13s;display:flex;align-items:center;gap:6px;color:#bbb;line-height:1}
+.mb:hover{background:rgba(255,255,255,.1)}
+.mb.sel{background:rgba(255,200,80,.12);border-color:rgba(255,200,80,.45);color:#ffd070}
+.dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;box-shadow:0 0 4px currentColor}
+.row{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.row label{width:68px;color:#99a0b0;flex-shrink:0;font-size:.77rem}
+.row input[type=range]{flex:1;accent-color:#ffa040;cursor:pointer}
+.val{width:26px;text-align:right;color:#ffa040;font-size:.72rem;font-variant-numeric:tabular-nums}
+.btns{display:flex;gap:4px;margin-top:9px}
+.btn{flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#bbb;border-radius:7px;padding:5px 3px;font-size:.72rem;cursor:pointer;transition:background .13s}
+.btn:hover{background:rgba(255,255,255,.14)}
+#tip{font-size:.63rem;color:rgba(255,255,255,.2);text-align:center;margin-top:8px;line-height:1.6}
+
+    html.embed #ui,
+    html.embed #info,
+    html.embed #controls,
+    html.embed #stats,
+    html.embed #hint,
+    html.embed .panel,
+    html.embed header,
+    html.embed footer { display: none !important; }
+  </style>
+  <script>if(/\bembed=1\b/.test(location.search))document.documentElement.classList.add("embed")</script>
+</head>
+<body>
+<canvas id="c"></canvas>
+
+<div id="ui">
+  <h1>070 · Sand + Water</h1>
+  <div class="mat-grid" id="mats"></div>
+  <div class="row"><label>Brush</label><input type="range" id="sb" min="1" max="20" value="5"><span class="val" id="vb">5</span></div>
+  <div class="row"><label>Speed</label><input type="range" id="ss" min="1" max="6" value="2"><span class="val" id="vs">2</span></div>
+  <div class="btns">
+    <button class="btn" id="bclear">Clear</button>
+    <button class="btn" id="bpause">Pause</button>
+  </div>
+  <div id="tip">1–8 keys · scroll = brush size<br>left drag paint · right drag erase</div>
+</div>
+
+
+
+<script>
+'use strict';
+
+// ── material ids ─────────────────────────────────────────────
+const E=0, SA=1, WA=2, ST=3, WD=4, OI=5, FI=6, AC=7;
+// steam is internal (id 8), not user-selectable
+const SM=8;
+
+const DEFS = [
+  { id:SA, name:'Sand',  col:'#d4aa55', glow:'#d4aa55' },
+  { id:WA, name:'Water', col:'#3a8fd4', glow:'#3a8fd4' },
+  { id:ST, name:'Stone', col:'#7a7a85', glow:'#7a7a85' },
+  { id:WD, name:'Wood',  col:'#9b6535', glow:'#9b6535' },
+  { id:OI, name:'Oil',   col:'#b09428', glow:'#b09428' },
+  { id:FI, name:'Fire',  col:'#ff6020', glow:'#ff6020' },
+  { id:AC, name:'Acid',  col:'#5eee1a', glow:'#5eee1a' },
+  { id:E,  name:'Erase', col:'#404050', glow:'#404050' },
+];
+
+// ── canvas / grid ─────────────────────────────────────────────
+const cv = document.getElementById('c');
+const ctx = cv.getContext('2d');
+const CELL = 3;  // pixels per cell
+
+let W, H, N;
+let grid, cv2, lf, moved;
+let imgData, px;
+let tick = 0;
+
+function initGrid() {
+  W = Math.ceil(window.innerWidth / CELL);
+  H = Math.ceil(window.innerHeight / CELL);
+  N = W * H;
+  cv.width = W; cv.height = H;
+  cv.style.width  = window.innerWidth  + 'px';
+  cv.style.height = window.innerHeight + 'px';
+  grid  = new Uint8Array(N);   // material
+  cv2   = new Uint8Array(N);   // color variation 0-63
+  lf    = new Uint8Array(N);   // lifetime (fire/steam/acid)
+  moved = new Uint8Array(N);   // already updated this frame
+  imgData = ctx.createImageData(W, H);
+  px = imgData.data;
+  for (let i = 3; i < px.length; i += 4) px[i] = 255;
+}
+initGrid();
+window.addEventListener('resize', initGrid);
+
+// ── material palette UI ───────────────────────────────────────
+let sel = SA;
+const matsEl = document.getElementById('mats');
+DEFS.forEach((d, ki) => {
+  const b = document.createElement('button');
+  b.className = 'mb' + (d.id === sel ? ' sel' : '');
+  b.innerHTML = `<span class="dot" style="background:${d.col};color:${d.glow}"></span>${d.name}`;
+  b.dataset.id = d.id;
+  b.onclick = () => choose(d.id);
+  matsEl.appendChild(b);
+});
+function choose(id) {
+  sel = id;
+  document.querySelectorAll('.mb').forEach(b => b.classList.toggle('sel', +b.dataset.id === sel));
+}
+window.addEventListener('keydown', e => {
+  const k = parseInt(e.key) - 1;
+  if (k >= 0 && k < DEFS.length) choose(DEFS[k].id);
+});
+
+// ── controls ──────────────────────────────────────────────────
+let brush = 5, speed = 2, paused = false;
+const sbEl=document.getElementById('sb'), vbEl=document.getElementById('vb');
+const ssEl=document.getElementById('ss'), vsEl=document.getElementById('vs');
+sbEl.oninput = () => { brush = +sbEl.value; vbEl.textContent = brush; };
+ssEl.oninput = () => { speed = +ssEl.value; vsEl.textContent = speed; };
+document.getElementById('bclear').onclick = () => { grid.fill(0); cv2.fill(0); lf.fill(0); };
+const bpEl = document.getElementById('bpause');
+bpEl.onclick = () => { paused = !paused; bpEl.textContent = paused ? 'Resume' : 'Pause'; };
+cv.addEventListener('wheel', e => {
+  e.preventDefault();
+  brush = Math.max(1, Math.min(20, brush - Math.sign(e.deltaY)));
+  sbEl.value = brush; vbEl.textContent = brush;
+}, { passive: false });
+
+// ── painting ──────────────────────────────────────────────────
+let mdown = false, mright = false;
+function paint(px2, py) {
+  const cx = (px2 / CELL) | 0, cy = (py / CELL) | 0, r = brush;
+  const r2 = r * r;
+  for (let dy = -r; dy <= r; dy++) {
+    for (let dx = -r; dx <= r; dx++) {
+      if (dx*dx + dy*dy > r2) continue;
+      const x = cx + dx, y = cy + dy;
+      if (x < 0 || x >= W || y < 0 || y >= H) continue;
+      const i = y * W + x;
+      const mat = mright ? E : sel;
+      if (mat === E) { grid[i] = 0; lf[i] = 0; }
+      else {
+        grid[i] = mat;
+        cv2[i] = (Math.random() * 64) | 0;
+        if (mat === FI)      lf[i] = (80 + Math.random() * 80) | 0;
+        else if (mat === SM) lf[i] = (50 + Math.random() * 30) | 0;
+        else if (mat === AC) lf[i] = (120 + Math.random() * 80) | 0;
+        else                 lf[i] = 0;
+      }
+    }
+  }
+}
+cv.addEventListener('mousedown',   e => { mdown=true; mright=(e.button===2); paint(e.clientX,e.clientY); });
+cv.addEventListener('mousemove',   e => { if(mdown) paint(e.clientX,e.clientY); });
+cv.addEventListener('mouseup',     () => mdown=false);
+cv.addEventListener('mouseleave',  () => mdown=false);
+cv.addEventListener('contextmenu', e => e.preventDefault());
+cv.addEventListener('touchstart',  e => { e.preventDefault(); mdown=true; mright=false; paint(e.touches[0].clientX,e.touches[0].clientY); },{ passive:false });
+cv.addEventListener('touchmove',   e => { e.preventDefault(); if(mdown) paint(e.touches[0].clientX,e.touches[0].clientY); },{ passive:false });
+cv.addEventListener('touchend',    () => mdown=false);
+
+// ── sim helpers ───────────────────────────────────────────────
+function get(x, y) {
+  if (x < 0 || x >= W || y < 0 || y >= H) return ST;
+  return grid[y * W + x];
+}
+function isFree(m) { return m === E; }
+function isLiq(m)  { return m === WA || m === OI || m === AC; }
+
+function swp(x1, y1, x2, y2) {
+  const a = y1*W+x1, b = y2*W+x2;
+  let t = grid[a]; grid[a] = grid[b]; grid[b] = t;
+  t = cv2[a]; cv2[a] = cv2[b]; cv2[b] = t;
+  t = lf[a];  lf[a]  = lf[b];  lf[b]  = t;
+}
+function set(x, y, mat, life2) {
+  if (x < 0 || x >= W || y < 0 || y >= H) return;
+  const i = y*W+x;
+  grid[i] = mat; cv2[i] = (Math.random()*64)|0; lf[i] = life2|0;
+}
+
+// ── per-material updates ──────────────────────────────────────
+function upSand(x, y) {
+  const b = get(x, y+1);
+  // Fall through empty or liquid
+  if (isFree(b) || isLiq(b)) { swp(x,y,x,y+1); moved[(y+1)*W+x]=1; return; }
+  // Diagonal slide
+  const d = Math.random() < .5 ? 1 : -1;
+  const bl = get(x+d,y+1), br = get(x-d,y+1);
+  if ((isFree(bl)||isLiq(bl)) && get(x+d,y)!==SA && get(x+d,y)!==ST) {
+    swp(x,y,x+d,y+1); moved[(y+1)*W+(x+d)]=1; return;
+  }
+  if ((isFree(br)||isLiq(br)) && get(x-d,y)!==SA && get(x-d,y)!==ST) {
+    swp(x,y,x-d,y+1); moved[(y+1)*W+(x-d)]=1;
+  }
+}
+
+function upWater(x, y) {
+  // Sink through oil
+  if (get(x,y+1)===OI) { swp(x,y,x,y+1); moved[(y+1)*W+x]=1; return; }
+  if (isFree(get(x,y+1))) { swp(x,y,x,y+1); moved[(y+1)*W+x]=1; return; }
+  const d = Math.random() < .5 ? 1 : -1;
+  if (isFree(get(x+d,y+1))) { swp(x,y,x+d,y+1); moved[(y+1)*W+(x+d)]=1; return; }
+  if (isFree(get(x-d,y+1))) { swp(x,y,x-d,y+1); moved[(y+1)*W+(x-d)]=1; return; }
+  // Horizontal spread through same material to find empty
+  for (let s=1; s<=6; s++) {
+    const m = get(x+s*d, y);
+    if (isFree(m)) { swp(x,y,x+s*d,y); moved[y*W+(x+s*d)]=1; return; }
+    if (m !== WA) break;
+  }
+  for (let s=1; s<=6; s++) {
+    const m = get(x-s*d, y);
+    if (isFree(m)) { swp(x,y,x-s*d,y); moved[y*W+(x-s*d)]=1; return; }
+    if (m !== WA) break;
+  }
+}
+
+function upOil(x, y) {
+  // Rise through water
+  if (get(x,y-1)===WA) { swp(x,y,x,y-1); moved[(y-1)*W+x]=1; return; }
+  // Fall through empty
+  if (isFree(get(x,y+1))) { swp(x,y,x,y+1); moved[(y+1)*W+x]=1; return; }
+  const d = Math.random() < .5 ? 1 : -1;
+  if (isFree(get(x+d,y+1))) { swp(x,y,x+d,y+1); moved[(y+1)*W+(x+d)]=1; return; }
+  if (isFree(get(x-d,y+1))) { swp(x,y,x-d,y+1); moved[(y+1)*W+(x-d)]=1; return; }
+  // Spread sideways
+  for (let s=1; s<=5; s++) {
+    const m = get(x+s*d,y);
+    if (isFree(m)) { swp(x,y,x+s*d,y); moved[y*W+(x+s*d)]=1; return; }
+    if (m !== OI) break;
+  }
+  for (let s=1; s<=5; s++) {
+    const m = get(x-s*d,y);
+    if (isFree(m)) { swp(x,y,x-s*d,y); moved[y*W+(x-s*d)]=1; return; }
+    if (m !== OI) break;
+  }
+}
+
+function upFire(x, y) {
+  const i = y*W+x;
+  if (--lf[i] <= 0) { set(x,y,SM,(30+Math.random()*25)|0); return; }
+  const nbrs = [[0,-1],[0,1],[1,0],[-1,0],[1,-1],[-1,-1]];
+  for (const [dx,dy] of nbrs) {
+    const nm = get(x+dx,y+dy);
+    // Ignite oil and wood
+    if ((nm===OI||nm===WD) && Math.random()<.04) {
+      set(x+dx,y+dy,FI,(70+Math.random()*70)|0);
+    }
+    // Water extinguishes fire → steam
+    if (nm===WA && Math.random()<.25) {
+      set(x,y,SM,(40+Math.random()*20)|0);
+      set(x+dx,y+dy,SM,(30+Math.random()*20)|0);
+      return;
+    }
+  }
+  // Rise
+  if (isFree(get(x,y-1)) || get(x,y-1)===SM) { swp(x,y,x,y-1); moved[(y-1)*W+x]=1; return; }
+  const d = Math.random()<.5?1:-1;
+  if (isFree(get(x+d,y-1))) { swp(x,y,x+d,y-1); moved[(y-1)*W+(x+d)]=1; }
+}
+
+function upSteam(x, y) {
+  const i = y*W+x;
+  if (--lf[i] <= 0) { grid[i]=E; return; }
+  if (Math.random() > .55) return; // slower movement
+  if (isFree(get(x,y-1))) { swp(x,y,x,y-1); moved[(y-1)*W+x]=1; return; }
+  const d = Math.random()<.5?1:-1;
+  if (isFree(get(x+d,y-1))) { swp(x,y,x+d,y-1); moved[(y-1)*W+(x+d)]=1; return; }
+  if (isFree(get(x-d,y-1))) { swp(x,y,x-d,y-1); moved[(y-1)*W+(x-d)]=1; return; }
+  if (isFree(get(x+d,y))) { swp(x,y,x+d,y); moved[y*W+(x+d)]=1; return; }
+  if (isFree(get(x-d,y))) { swp(x,y,x-d,y); moved[y*W+(x-d)]=1; }
+}
+
+function upAcid(x, y) {
+  const i = y*W+x;
+  if (--lf[i] <= 0) { grid[i]=E; return; }
+  if (isFree(get(x,y+1))) { swp(x,y,x,y+1); moved[(y+1)*W+x]=1; return; }
+  const d = Math.random()<.5?1:-1;
+  if (isFree(get(x+d,y+1))) { swp(x,y,x+d,y+1); moved[(y+1)*W+(x+d)]=1; return; }
+  if (isFree(get(x-d,y+1))) { swp(x,y,x-d,y+1); moved[(y+1)*W+(x-d)]=1; return; }
+  // Dissolve sand, stone, wood
+  const nb = [[0,1],[1,0],[-1,0],[0,-1]];
+  for (const [dx,dy] of nb) {
+    const nm = get(x+dx,y+dy);
+    if ((nm===SA||nm===ST||nm===WD) && Math.random()<.025) {
+      set(x+dx,y+dy,E,0);
+      lf[i] -= 30;
+      if (lf[i] <= 0) { grid[i]=E; return; }
+    }
+  }
+  // Spread sideways
+  for (let s=1; s<=4; s++) {
+    const m = get(x+s*d,y);
+    if (isFree(m)) { swp(x,y,x+s*d,y); moved[y*W+(x+s*d)]=1; return; }
+    if (m!==AC && m!==WA) break;
+  }
+  for (let s=1; s<=4; s++) {
+    const m = get(x-s*d,y);
+    if (isFree(m)) { swp(x,y,x-s*d,y); moved[y*W+(x-s*d)]=1; return; }
+    if (m!==AC && m!==WA) break;
+  }
+}
+
+// ── simulation step ───────────────────────────────────────────
+// Reusable column-order array
+const colOrd = new Uint16Array(4096);
+function step() {
+  moved.fill(0);
+  // Randomize column order each frame to eliminate directional bias
+  for (let i=0; i<W; i++) colOrd[i] = i;
+  for (let i=W-1; i>0; i--) {
+    const j = (Math.random()*(i+1))|0;
+    const t = colOrd[i]; colOrd[i]=colOrd[j]; colOrd[j]=t;
+  }
+  // Iterate bottom-to-top, randomised columns
+  for (let y=H-1; y>=0; y--) {
+    for (let ci=0; ci<W; ci++) {
+      const x = colOrd[ci];
+      const i = y*W+x;
+      if (moved[i]) continue;
+      const m = grid[i];
+      if      (m===SA) upSand(x,y);
+      else if (m===WA) upWater(x,y);
+      else if (m===OI) upOil(x,y);
+      else if (m===FI) upFire(x,y);
+      else if (m===SM) upSteam(x,y);
+      else if (m===AC) upAcid(x,y);
+    }
+  }
+}
+
+// ── colour lookup ─────────────────────────────────────────────
+function setPixel(i, r, g, b) {
+  const p = i << 2;
+  px[p]=r; px[p+1]=g; px[p+2]=b;
+}
+
+function render() {
+  const t = tick;
+  for (let y=0; y<H; y++) {
+    for (let x=0; x<W; x++) {
+      const i = y*W+x;
+      const m = grid[i], v = cv2[i], life = lf[i];
+      let r, g, b;
+      switch (m) {
+        case E:
+          r=14; g=14; b=17;
+          break;
+        case SA: {
+          const vf = v * 0.45;
+          r = (192 + vf)|0; g = (150 + vf*0.6)|0; b = (62 + vf*0.25)|0;
+          break;
+        }
+        case WA: {
+          // Subtle shimmer using x+y+tick
+          const sh = ((x+y+((t>>2)&0xff))&7) < 2 ? 8 : 0;
+          r = (22+(v>>3))|0; g = (88+(v>>2)+sh)|0; b = (190+(v>>3))|0;
+          break;
+        }
+        case ST: {
+          const gv = (75+(v>>1))|0;
+          r=gv; g=gv; b=(gv+5)|0;
+          break;
+        }
+        case WD: {
+          r=(100+(v>>1))|0; g=(62+(v>>2))|0; b=(28+(v>>3))|0;
+          break;
+        }
+        case OI: {
+          r=(138+(v>>1))|0; g=(98+(v>>2))|0; b=(14+(v>>3))|0;
+          break;
+        }
+        case FI: {
+          // Animated flicker: each cell has its own phase via cv2
+          const ph = (t + v) % 14;
+          if (ph < 3)       { r=255; g=(50+v)|0; b=0; }
+          else if (ph < 7)  { r=255; g=(130+(v>>1))|0; b=0; }
+          else if (ph < 11) { r=255; g=(190+(v>>2))|0; b=10; }
+          else              { r=240+(v>>3)|0; g=220; b=(30+(v>>2))|0; }
+          break;
+        }
+        case SM: {
+          // Steam fades with lifetime
+          const f = Math.min(1, life / 55);
+          const base = (145+(v>>1))|0;
+          r = (14 + (base-14)*f)|0;
+          g = (14 + (base+5-14)*f)|0;
+          b = (17 + (base+10-17)*f)|0;
+          break;
+        }
+        case AC: {
+          // Bright green, slightly animated
+          const ph2 = (t + v*2) % 10;
+          const boost = ph2 < 2 ? 20 : 0;
+          r=(40+(v>>2))|0; g=(185+(v>>1)+boost)|0; b=(18+(v>>3))|0;
+          break;
+        }
+        default:
+          r=0; g=0; b=0;
+      }
+      setPixel(i, r, g, b);
+    }
+  }
+  ctx.putImageData(imgData, 0, 0);
+}
+
+// ── main loop ─────────────────────────────────────────────────
+function loop() {
+  if (!paused) {
+    for (let s=0; s<speed; s++) step();
+  }
+  render();
+  tick++;
+  requestAnimationFrame(loop);
+}
+loop();
+</script>
+</body>
+</html>

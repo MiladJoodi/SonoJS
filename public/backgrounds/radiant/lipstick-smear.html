@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lipstick Smear</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; overflow: hidden; background: #0a0a0a; }
+  canvas { display: block; width: 100vw; height: 100vh; }
+  .label {
+    position: fixed;
+    top: 20px;
+    left: 24px;
+    font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(200, 149, 108, 0.5);
+    z-index: 10;
+    pointer-events: none;
+    user-select: none;
+  }
+  html.embed .label { display: none; }
+</style>
+<script>if(/\bembed=1\b/.test(location.search))document.documentElement.classList.add("embed")</script>
+</head>
+<body>
+<div class="label">Lipstick Smear</div>
+<canvas id="canvas"></canvas>
+<script>
+(function() {
+  'use strict';
+
+  var canvas = document.getElementById('canvas');
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var urlParams = new URLSearchParams(window.location.search);
+  var pixelScale = parseFloat(urlParams.get('p')) || 1.0;
+
+  // Tunable params
+  var VISCOSITY = 0.8;        // 0.1–2.0: how thick/slow the fluid feels
+  var COLOR_INTENSITY = 1.0;  // 0.3–2.0: dye brightness
+
+  var gl = canvas.getContext('webgl', {
+    alpha: false,
+    antialias: false,
+    preserveDrawingBuffer: false,
+    powerPreference: 'high-performance'
+  });
+  if (!gl) {  return; }
+
+  // Float texture support
+  var extFloat = gl.getExtension('OES_texture_float');
+  gl.getExtension('OES_texture_float_linear');
+  var extHalf  = gl.getExtension('OES_texture_half_float');
+  gl.getExtension('OES_texture_half_float_linear');
+  // Prefer FLOAT for best precision in fluid sim (velocity, pressure need range beyond 1.0).
+  // Fall back to HALF_FLOAT, then UNSIGNED_BYTE.
+  var texType = gl.UNSIGNED_BYTE;
+  if (extHalf) texType = extHalf.HALF_FLOAT_OES;
+  if (extFloat) texType = gl.FLOAT;
+
+  // For UNSIGNED_BYTE fallback, scale values 0-1 to 0-255
+  var isFloat = (texType === gl.FLOAT || (extHalf && texType === extHalf.HALF_FLOAT_OES));
+
+  // Simulation grid resolution (lower than display for performance)
+  var SIM_SCALE = 0.30;
+  var simW = 128, simH = 128;
+  var dispW = 800, dispH = 600;
+
+  // ── Shared vertex shader ─────────────────────────────────────────────────
+  var VS = [
+    'attribute vec2 a_pos;',
+    'varying vec2 v_uv;',
+    'void main(){',
+    '  v_uv = a_pos * 0.5 + 0.5;',
+    '  gl_Position = vec4(a_pos, 0.0, 1.0);',
+    '}'
+  ].join('\n');
+
+  // ── Advection: trace back along velocity, sample quantity ───────────────
+  // Velocity stored in grid-cells per second.  Advection displacement:
+  //   pos_uv = uv - (vel_grid * txl) * dt
+  // where txl converts grid→UV.  Max stable vel ≈ simW/s so displacement < 1 grid cell/frame.
+  var FS_ADVECT = [
+    'precision highp float;',
+    'varying vec2 v_uv;',
+    'uniform sampler2D u_vel;',
+    'uniform sampler2D u_qty;',
+    'uniform vec2 u_txl;',
+    'uniform float u_dt;',
+    'uniform float u_diss;',
+    'void main(){',
+    '  vec2 vel = texture2D(u_vel, v_uv).xy;',
+    '  // vel in grid/s → multiply by txl to get UV/s',
+    '  vec2 pos = clamp(v_uv - vel * u_txl * u_dt, vec2(0.0), vec2(1.0));',
+    '  gl_FragColor = u_diss * texture2D(u_qty, pos);',
+    '}'
+  ].join('\n');
+
+  // ── Divergence of velocity ───────────────────────────────────────────────
+  // vel is in grid-cells/s.  Central-difference divergence in grid units:
+  //   div = 0.5 * (vR.x - vL.x + vT.y - vB.y)
+  var FS_DIV = [
+    'precision highp float;',
+    'varying vec2 v_uv;',
+    'uniform sampler2D u_vel;',
+    'uniform vec2 u_txl;',
+    'void main(){',
+    '  float L = texture2D(u_vel, v_uv - vec2(u_txl.x, 0.0)).x;',
+    '  float R = texture2D(u_vel, v_uv + vec2(u_txl.x, 0.0)).x;',
+    '  float B = texture2D(u_vel, v_uv - vec2(0.0, u_txl.y)).y;',
+    '  float T = texture2D(u_vel, v_uv + vec2(0.0, u_txl.y)).y;',
+    '  gl_FragColor = vec4(0.5 * (R - L + T - B), 0.0, 0.0, 1.0);',
+    '}'
+  ].join('\n');
+
+  // ── Jacobi pressure iteration ────────────────────────────────────────────
+  // Poisson: nabla²p = div.  In grid units with h=1: p = (pL+pR+pB+pT - div) / 4
+  var FS_PRESSURE = [
+    'precision highp float;',
+    'varying vec2 v_uv;',
+    'uniform sampler2D u_pres;',
+    'uniform sampler2D u_div;',
+    'uniform vec2 u_txl;',
+    'void main(){',
+    '  float L = texture2D(u_pres, v_uv - vec2(u_txl.x, 0.0)).x;',
+    '  float R = texture2D(u_pres, v_uv + vec2(u_txl.x, 0.0)).x;',
+    '  float B = texture2D(u_pres, v_uv - vec2(0.0, u_txl.y)).x;',
+    '  float T = texture2D(u_pres, v_uv + vec2(0.0, u_txl.y)).x;',
+    '  float d = texture2D(u_div, v_uv).x;',
+    '  gl_FragColor = vec4((L + R + B + T - d) * 0.25, 0.0, 0.0, 1.0);',
+    '}'
+  ].join('\n');
+
+  // ── Subtract pressure gradient from velocity ─────────────────────────────
+  // v_new = v - 0.5 * (pR - pL, pT - pB)   (grid units, h=1)
+  var FS_GRAD = [
+    'precision highp float;',
+    'varying vec2 v_uv;',
+    'uniform sampler2D u_pres;',
+    'uniform sampler2D u_vel;',
+    'uniform vec2 u_txl;',
+    'void main(){',
+    '  float L = texture2D(u_pres, v_uv - vec2(u_txl.x, 0.0)).x;',
+    '  float R = texture2D(u_pres, v_uv + vec2(u_txl.x, 0.0)).x;',
+    '  float B = texture2D(u_pres, v_uv - vec2(0.0, u_txl.y)).x;',
+    '  float T = texture2D(u_pres, v_uv + vec2(0.0, u_txl.y)).x;',
+    '  vec2 v = texture2D(u_vel, v_uv).xy;',
+    '  gl_FragColor = vec4(v - 0.5 * vec2(R - L, T - B), 0.0, 1.0);',
+    '}'
+  ].join('\n');
+
+  // ── Vorticity curl ────────────────────────────────────────────────────────
+  // curl = dvy/dx - dvx/dy, in grid units
+  var FS_VORT = [
+    'precision highp float;',
+    'varying vec2 v_uv;',
+    'uniform sampler2D u_vel;',
+    'uniform vec2 u_txl;',
+    'void main(){',
+    '  float L = texture2D(u_vel, v_uv - vec2(u_txl.x, 0.0)).y;',
+    '  float R = texture2D(u_vel, v_uv + vec2(u_txl.x, 0.0)).y;',
+    '  float B = texture2D(u_vel, v_uv - vec2(0.0, u_txl.y)).x;',
+    '  float T = texture2D(u_vel, v_uv + vec2(0.0, u_txl.y)).x;',
+    '  gl_FragColor = vec4(0.5 * (R - L - (T - B)), 0.0, 0.0, 1.0);',
+    '}'
+  ].join('\n');
+
+  // ── Vorticity confinement (adds swirl) ────────────────────────────────────
+  var FS_VORTF = [
+    'precision highp float;',
+    'varying vec2 v_uv;',
+    'uniform sampler2D u_vel;',
+    'uniform sampler2D u_vort;',
+    'uniform vec2 u_txl;',
+    'uniform float u_curl;',
+    'uniform float u_dt;',
+    'void main(){',
+    '  float L = abs(texture2D(u_vort, v_uv - vec2(u_txl.x, 0.0)).x);',
+    '  float R = abs(texture2D(u_vort, v_uv + vec2(u_txl.x, 0.0)).x);',
+    '  float B = abs(texture2D(u_vort, v_uv - vec2(0.0, u_txl.y)).x);',
+    '  float T = abs(texture2D(u_vort, v_uv + vec2(0.0, u_txl.y)).x);',
+    '  float c = texture2D(u_vort, v_uv).x;',
+    '  vec2 eta = normalize(vec2(T - B, R - L) + vec2(1e-5));',
+    '  vec2 f = u_curl * vec2(eta.y, -eta.x) * c;',
+    '  vec2 v = texture2D(u_vel, v_uv).xy;',
+    '  gl_FragColor = vec4(v + f * u_dt, 0.0, 1.0);',
+    '}'
+  ].join('\n');
+
+  // ── Gaussian splat into a field ───────────────────────────────────────────
+  // u_rad: Gaussian radius in UV units (e.g. 0.05 = 5% of screen width)
+  var FS_SPLAT = [
+    'precision highp float;',
+    'varying vec2 v_uv;',
+    'uniform sampler2D u_src;',
+    'uniform vec2 u_pt;',
+    'uniform vec3 u_val;',
+    'uniform float u_rad;',
+    'uniform float u_asp;',   // width/height
+    'void main(){',
+    '  vec2 d = v_uv - u_pt;',
+    '  d.x *= u_asp;',
+    '  float g = exp(-dot(d,d) / (u_rad * u_rad));',
+    '  vec4 base = texture2D(u_src, v_uv);',
+    '  gl_FragColor = vec4(base.xyz + g * u_val, 1.0);',
+    '}'
+  ].join('\n');
+
+  // ── Display / composite ───────────────────────────────────────────────────
+  var FS_DISPLAY = [
+    'precision highp float;',
+    'varying vec2 v_uv;',
+    'uniform sampler2D u_dye;',
+    'uniform vec2 u_res;',
+    'uniform float u_intensity;',
+    '',
+    'float luma(vec3 c){ return dot(c, vec3(0.2126,0.7152,0.0722)); }',
+    '',
+    'void main(){',
+    '  vec4 dyeSamp = texture2D(u_dye, v_uv);',
+    '  vec3 col = dyeSamp.rgb * u_intensity;',
+    '',
+    '  // Rose-gold metallic rim sheen on pigmented areas',
+    '  float pg = luma(col);',
+    '  vec2 vn = v_uv * 2.0 - 1.0;',
+    '  float rim = max(0.0, dot(normalize(vn + vec2(0.0)), normalize(vec2(0.5, 0.8))));',
+    '  rim = pow(rim, 5.0);',
+    '  col += vec3(1.0, 0.72, 0.78) * rim * pg * 0.7;',
+    '',
+    '  // Bloom: two-pass cross — tight inner + wide outer for soft diffuse glow',
+    '  vec2 bx1 = 3.0 / u_res;',
+    '  vec3 b1 = (',
+    '    texture2D(u_dye, v_uv + vec2(bx1.x,0.0)).rgb +',
+    '    texture2D(u_dye, v_uv - vec2(bx1.x,0.0)).rgb +',
+    '    texture2D(u_dye, v_uv + vec2(0.0,bx1.y)).rgb +',
+    '    texture2D(u_dye, v_uv - vec2(0.0,bx1.y)).rgb',
+    '  ) * 0.25 * u_intensity;',
+    '  vec2 bx2 = 7.0 / u_res;',
+    '  vec3 b2 = (',
+    '    texture2D(u_dye, v_uv + vec2(bx2.x,0.0)).rgb +',
+    '    texture2D(u_dye, v_uv - vec2(bx2.x,0.0)).rgb +',
+    '    texture2D(u_dye, v_uv + vec2(0.0,bx2.y)).rgb +',
+    '    texture2D(u_dye, v_uv - vec2(0.0,bx2.y)).rgb',
+    '  ) * 0.25 * u_intensity;',
+    '  vec3 b = b1 * 0.6 + b2 * 0.4;',
+    '  col += b * max(0.0, luma(b) - 0.40) * 0.35;',
+    '',
+    '  // Vignette',
+    '  float vig = pow(1.0 - dot(vn * vec2(0.6,0.75), vn * vec2(0.6,0.75)), 0.5);',
+    '  col *= clamp(vig, 0.0, 1.0);',
+    '',
+    '  // Tone map: Reinhard keeps saturation at high values',
+    '  col = col / (col + vec3(0.75));',
+    '',
+    '  // Gamma',
+    '  col = pow(max(col, vec3(0.0)), vec3(0.9));',
+    '',
+    '  gl_FragColor = vec4(col, 1.0);',
+    '}'
+  ].join('\n');
+
+  // ── Compile / link ────────────────────────────────────────────────────────
+  function compShader(type, src) {
+    var s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
+
+      return null;
+    }
+    return s;
+  }
+
+  function mkProg(fs) {
+    var v = compShader(gl.VERTEX_SHADER, VS);
+    var f = compShader(gl.FRAGMENT_SHADER, fs);
+    if (!v || !f) return null;
+    var p = gl.createProgram();
+    gl.attachShader(p, v); gl.attachShader(p, f);
+    gl.linkProgram(p);
+    if (!gl.getProgramParameter(p, gl.LINK_STATUS)) {
+
+      return null;
+    }
+    // Cache uniforms
+    p.u = {};
+    var n = gl.getProgramParameter(p, gl.ACTIVE_UNIFORMS);
+    for (var i = 0; i < n; i++) {
+      var info = gl.getActiveUniform(p, i);
+      p.u[info.name] = gl.getUniformLocation(p, info.name);
+    }
+    p.apos = gl.getAttribLocation(p, 'a_pos');
+    return p;
+  }
+
+  var pAdvect  = mkProg(FS_ADVECT);
+  var pDiv     = mkProg(FS_DIV);
+  var pPres    = mkProg(FS_PRESSURE);
+  var pGrad    = mkProg(FS_GRAD);
+  var pVort    = mkProg(FS_VORT);
+  var pVortF   = mkProg(FS_VORTF);
+  var pSplat   = mkProg(FS_SPLAT);
+  var pDisplay = mkProg(FS_DISPLAY);
+
+  if (!pAdvect||!pDiv||!pPres||!pGrad||!pVort||!pVortF||!pSplat||!pDisplay) {
+     return;
+  }
+
+  // ── Full-screen triangle ──────────────────────────────────────────────────
+  var quadBuf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, quadBuf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 3,-1, -1,3]), gl.STATIC_DRAW);
+
+  function useP(prog) {
+    gl.useProgram(prog);
+    gl.bindBuffer(gl.ARRAY_BUFFER, quadBuf);
+    gl.enableVertexAttribArray(prog.apos);
+    gl.vertexAttribPointer(prog.apos, 2, gl.FLOAT, false, 0, 0);
+  }
+
+  function setTex(prog, name, unit, texture) {
+    if (prog.u[name] == null) return;
+    gl.uniform1i(prog.u[name], unit);
+    gl.activeTexture(gl.TEXTURE0 + unit);
+    gl.bindTexture(gl.TEXTURE_2D, texture);
+  }
+
+  var DRAW = function(){ gl.drawArrays(gl.TRIANGLES, 0, 3); };
+
+  // ── FBO creation ──────────────────────────────────────────────────────────
+  function mkTex(w, h, type) {
+    var t = gl.createTexture();
+    gl.bindTexture(gl.TEXTURE_2D, t);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, w, h, 0, gl.RGBA, type, null);
+    return t;
+  }
+
+  function mkFBO(w, h, type) {
+    var tex = mkTex(w, h, type);
+    var fbo = gl.createFramebuffer();
+    gl.bindFramebuffer(gl.FRAMEBUFFER, fbo);
+    gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, tex, 0);
+    var st = gl.checkFramebufferStatus(gl.FRAMEBUFFER);
+    gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+    if (st !== gl.FRAMEBUFFER_COMPLETE) {
+
+    }
+    return { fbo: fbo, tex: tex, w: w, h: h };
+  }
+
+  function mkDouble(w, h, type) {
+    return {
+      a: mkFBO(w, h, type), b: mkFBO(w, h, type),
+      get read()  { return this._r || (this._r = this.a); },
+      get write() { return this._w || (this._w = this.b); },
+      swap: function() { var tmp=this._r; this._r=this._w; this._w=tmp; }
+    };
+  }
+
+  // ── Simulation state ──────────────────────────────────────────────────────
+  var velBuf, dyeBuf, presBuf, divFBO, vortFBO;
+
+  function resize() {
+    var dpr = Math.min(window.devicePixelRatio || 1, 2) * pixelScale;
+    dispW = Math.max(1, Math.round(canvas.clientWidth  * dpr));
+    dispH = Math.max(1, Math.round(canvas.clientHeight * dpr));
+    simW  = Math.max(1, Math.round(dispW * SIM_SCALE));
+    simH  = Math.max(1, Math.round(dispH * SIM_SCALE));
+    canvas.width  = dispW;
+    canvas.height = dispH;
+
+    // Use FLOAT for sim buffers (velocity, pressure), UBYTE for dye if needed
+    var simType = texType;
+
+    velBuf  = mkDouble(simW, simH, simType);
+    dyeBuf  = mkDouble(simW, simH, simType);
+    presBuf = mkDouble(simW, simH, simType);
+    divFBO  = mkFBO(simW, simH, simType);
+    vortFBO = mkFBO(simW, simH, simType);
+  }
+
+  // ── Render helpers ────────────────────────────────────────────────────────
+  function toFBO(buf) {
+    if (buf) {
+      gl.bindFramebuffer(gl.FRAMEBUFFER, buf.fbo);
+      gl.viewport(0, 0, buf.w, buf.h);
+    } else {
+      gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+      gl.viewport(0, 0, dispW, dispH);
+    }
+  }
+
+  function clearFBO(buf) {
+    toFBO(buf);
+    gl.clearColor(0,0,0,0);
+    gl.clear(gl.COLOR_BUFFER_BIT);
+  }
+
+  // ── Simulation passes ─────────────────────────────────────────────────────
+
+  function advect(vel, qty, out, diss, dt) {
+    useP(pAdvect); toFBO(out.write);
+    setTex(pAdvect, 'u_vel', 0, vel.read.tex);
+    setTex(pAdvect, 'u_qty', 1, qty.read.tex);
+    gl.uniform2f(pAdvect.u['u_txl'], 1.0/simW, 1.0/simH);
+    gl.uniform1f(pAdvect.u['u_dt'],   dt);
+    gl.uniform1f(pAdvect.u['u_diss'], diss);
+    DRAW(); out.swap();
+  }
+
+  function computeDiv(vel) {
+    useP(pDiv); toFBO(divFBO);
+    setTex(pDiv, 'u_vel', 0, vel.read.tex);
+    gl.uniform2f(pDiv.u['u_txl'], 1.0/simW, 1.0/simH);
+    DRAW();
+  }
+
+  function solvePressure(iters) {
+    clearFBO(presBuf.read); clearFBO(presBuf.write);
+    for (var i=0; i<iters; i++) {
+      useP(pPres); toFBO(presBuf.write);
+      setTex(pPres, 'u_pres', 0, presBuf.read.tex);
+      setTex(pPres, 'u_div',  1, divFBO.tex);
+      gl.uniform2f(pPres.u['u_txl'], 1.0/simW, 1.0/simH);
+      DRAW(); presBuf.swap();
+    }
+  }
+
+  function subtractGrad(vel) {
+    useP(pGrad); toFBO(velBuf.write);
+    setTex(pGrad, 'u_pres', 0, presBuf.read.tex);
+    setTex(pGrad, 'u_vel',  1, vel.read.tex);
+    gl.uniform2f(pGrad.u['u_txl'], 1.0/simW, 1.0/simH);
+    DRAW(); velBuf.swap();
+  }
+
+  function addVorticity(vel, curlStr, dt) {
+    // Compute curl
+    useP(pVort); toFBO(vortFBO);
+    setTex(pVort, 'u_vel', 0, vel.read.tex);
+    gl.uniform2f(pVort.u['u_txl'], 1.0/simW, 1.0/simH);
+    DRAW();
+    // Apply confinement force
+    useP(pVortF); toFBO(velBuf.write);
+    setTex(pVortF, 'u_vel',  0, vel.read.tex);
+    setTex(pVortF, 'u_vort', 1, vortFBO.tex);
+    gl.uniform2f(pVortF.u['u_txl'], 1.0/simW, 1.0/simH);
+    gl.uniform1f(pVortF.u['u_curl'], curlStr);
+    gl.uniform1f(pVortF.u['u_dt'],   dt);
+    DRAW(); velBuf.swap();
+  }
+
+  // Splat: inject vel or dye. val = [x,y,z], radius in UV units.
+  function splat(buf, cx, cy, vx, vy, vz, rad) {
+    useP(pSplat); toFBO(buf.write);
+    setTex(pSplat, 'u_src', 0, buf.read.tex);
+    gl.uniform2f(pSplat.u['u_pt'],  cx, cy);
+    gl.uniform3f(pSplat.u['u_val'], vx, vy, vz);
+    gl.uniform1f(pSplat.u['u_rad'], rad);
+    gl.uniform1f(pSplat.u['u_asp'], simW / simH);
+    DRAW(); buf.swap();
+  }
+
+  // ── Hot pink/red/magenta palette ──────────────────────────────────────────
+  var PAL = [
+    [1.00, 0.08, 0.58],   // hot pink  #FF1493
+    [0.86, 0.08, 0.24],   // crimson   #DC143C
+    [1.00, 0.00, 1.00],   // magenta   #FF00FF
+    [0.72, 0.43, 0.47],   // rose gold #B76E79
+    [0.95, 0.18, 0.45],   // deep pink
+    [0.80, 0.02, 0.28],   // dark rose
+  ];
+
+  // ── Autonomous emitters (orbit paths, spread across whole canvas) ──────────
+  // Fixed centers cover all quadrants so the whole canvas fills with color
+  var EMITTER_DEFS = [
+    { cx:0.22, cy:0.35, rx:0.18, ry:0.28, spd:0.28, cBase:0 },  // top-left, hot pink
+    { cx:0.78, cy:0.30, rx:0.18, ry:0.25, spd:0.24, cBase:1 },  // top-right, crimson
+    { cx:0.25, cy:0.70, rx:0.20, ry:0.24, spd:0.32, cBase:2 },  // bottom-left, magenta
+    { cx:0.75, cy:0.72, rx:0.18, ry:0.24, spd:0.26, cBase:3 },  // bottom-right, rose gold
+    { cx:0.50, cy:0.50, rx:0.32, ry:0.28, spd:0.20, cBase:4 },  // center sweep
+    { cx:0.50, cy:0.18, rx:0.38, ry:0.14, spd:0.35, cBase:5 },  // top sweep, dark rose
+  ];
+  var emitters = [];
+  for (var ei = 0; ei < EMITTER_DEFS.length; ei++) {
+    var def = EMITTER_DEFS[ei];
+    emitters.push({
+      cx: def.cx, cy: def.cy,
+      rx: def.rx, ry: def.ry,
+      phase:    (ei / EMITTER_DEFS.length) * Math.PI * 2,
+      spd:      def.spd + Math.random() * 0.08,
+      velScale: 8.0 + Math.random() * 6.0,
+      dyeRad: 0.055 + Math.random() * 0.035,
+      velRad: 0.045 + Math.random() * 0.025,
+      cBase:  def.cBase,
+      cPhase: Math.random() * Math.PI * 2,
+      px: def.cx, py: def.cy
+    });
+  }
+
+  function runEmitters(t, dt) {
+    for (var i = 0; i < emitters.length; i++) {
+      var e = emitters[i];
+      var nx = e.cx + Math.cos(t * e.spd + e.phase)               * e.rx;
+      var ny = e.cy + Math.sin(t * e.spd * 0.73 + e.phase + 1.2)  * e.ry;
+      nx = Math.max(0.05, Math.min(0.95, nx));
+      ny = Math.max(0.05, Math.min(0.95, ny));
+
+      // Velocity: direction of motion, scaled to create meaningful advection
+      // Magnitude ~20-50 UV/s so per-frame displacement (vel*dt) is 0.3-0.8 UV
+      var dx = nx - e.px, dy = ny - e.py;
+      var dlen = Math.sqrt(dx*dx + dy*dy) + 1e-6;
+      var vx = (dx / dlen) * e.velScale;
+      var vy = (dy / dlen) * e.velScale;
+
+      // Color interpolation
+      var cf = Math.sin(t * 0.28 + e.cPhase) * 0.5 + 0.5;
+      var ca = PAL[e.cBase], cb = PAL[(e.cBase+1) % PAL.length];
+      var cr = ca[0]*(1-cf)+cb[0]*cf;
+      var cg = ca[1]*(1-cf)+cb[1]*cf;
+      var cbv = ca[2]*(1-cf)+cb[2]*cf;
+
+      // Scale dye injection by dt — keep values modest so colors stay saturated, not white
+      var dyeStr = Math.min(dt * 12.0, 0.16);
+      splat(velBuf, nx, ny, vx,           vy,           0,                e.velRad);
+      splat(dyeBuf, nx, ny, cr * dyeStr,  cg * dyeStr,  cbv * dyeStr,     e.dyeRad);
+
+      e.px = nx; e.py = ny;
+    }
+  }
+
+  // ── Pre-seed canvas with rich initial blobs ───────────────────────────────
+  function seed() {
+    // Cover the whole canvas with initial blobs from all palette colors
+    var pts = [
+      [0.15, 0.20, 0], [0.50, 0.18, 1], [0.85, 0.22, 2],
+      [0.12, 0.55, 3], [0.45, 0.50, 4], [0.80, 0.48, 5],
+      [0.20, 0.80, 0], [0.55, 0.78, 2], [0.88, 0.75, 1],
+      [0.35, 0.35, 3], [0.65, 0.65, 4], [0.50, 0.90, 5],
+    ];
+    for (var s = 0; s < pts.length; s++) {
+      var sx = pts[s][0], sy = pts[s][1], ci = pts[s][2];
+      var c = PAL[ci % PAL.length];
+      // Inject velocity in random directions for initial turbulence — strong enough to advect
+      splat(velBuf, sx, sy, (Math.random()-0.5)*8.0, (Math.random()-0.5)*8.0, 0, 0.10);
+      // Dye at moderate strength — not so strong it washes to white
+      splat(dyeBuf, sx, sy, c[0]*0.70, c[1]*0.70, c[2]*0.70, 0.10);
+    }
+  }
+
+  // ── Main step ─────────────────────────────────────────────────────────────
+  var simTime = 0.0, lastT = 0.0, paused = false;
+
+  function step(dt) {
+    // Higher viscosity = more dissipation = slower fluid
+    // Viscosity 0.8 → velDiss≈0.988, dyeDiss≈0.996 — thick fluid, slow decay
+    var velDiss = Math.max(0.994 - VISCOSITY*0.006, 0.96);
+    var dyeDiss = Math.max(0.998 - VISCOSITY*0.003, 0.98);
+    var curl    = Math.max(5.0, 18.0 - VISCOSITY*8.0);
+
+    // 1. Self-advect velocity
+    advect(velBuf, velBuf, velBuf, velDiss, dt);
+    // 2. Vorticity confinement
+    addVorticity(velBuf, curl, dt);
+    // 3. Inject emitter forces + dye
+    runEmitters(simTime, dt);
+    // 4. Project to divergence-free
+    computeDiv(velBuf);
+    solvePressure(25);
+    subtractGrad(velBuf);
+    // 5. Advect dye
+    advect(velBuf, dyeBuf, dyeBuf, dyeDiss, dt);
+  }
+
+  // ── Render loop ───────────────────────────────────────────────────────────
+  function render(now) {
+    if (!paused && !prefersReduced) {
+      var dt = lastT ? Math.min((now - lastT) / 1000.0, 0.033) : 0.016;
+      lastT    = now;
+      simTime += dt;
+      step(dt);
+    }
+
+    // Composite to screen
+    toFBO(null);
+    useP(pDisplay);
+    setTex(pDisplay, 'u_dye', 0, dyeBuf.read.tex);
+    gl.uniform2f(pDisplay.u['u_res'],       dispW, dispH);
+    gl.uniform1f(pDisplay.u['u_intensity'], COLOR_INTENSITY);
+    DRAW();
+
+    requestAnimationFrame(render);
+  }
+
+  document.addEventListener('visibilitychange', function() {
+    paused = document.hidden;
+    if (!paused) lastT = 0;
+  });
+
+  var resizeTimer;
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function(){ resize(); seed(); }, 250);
+  });
+
+  window.addEventListener('message', function(e) {
+    if (!e.data || e.data.type !== 'param') return;
+    if (e.data.name === 'VISCOSITY')
+      VISCOSITY = Math.max(0.1, Math.min(2.0, +e.data.value || VISCOSITY));
+    if (e.data.name === 'COLOR_INTENSITY')
+      COLOR_INTENSITY = Math.max(0.3, Math.min(2.0, +e.data.value || COLOR_INTENSITY));
+  });
+
+  // ── Mouse/touch interaction: drag to smear/push fluid ──
+  var mouseDown = false;
+  var prevMouseX = 0, prevMouseY = 0;
+
+  function getUV(clientX, clientY) {
+    var rect = canvas.getBoundingClientRect();
+    return {
+      x: (clientX - rect.left) / rect.width,
+      y: 1.0 - (clientY - rect.top) / rect.height
+    };
+  }
+
+  function handleDrag(clientX, clientY) {
+    var uv = getUV(clientX, clientY);
+    var dx = uv.x - prevMouseX;
+    var dy = uv.y - prevMouseY;
+    prevMouseX = uv.x;
+    prevMouseY = uv.y;
+
+    var len = Math.sqrt(dx * dx + dy * dy);
+    if (len < 0.0001) return;
+
+    // Splat velocity in drag direction (strong push)
+    var velStr = Math.min(len * 200, 1.0) * 25.0;
+    splat(velBuf, uv.x, uv.y, dx / len * velStr, dy / len * velStr, 0, 0.04);
+
+    // Splat dye - pick a random palette color for variety
+    var ci = Math.floor(Math.random() * PAL.length);
+    var c = PAL[ci];
+    var dyeStr = 0.12;
+    splat(dyeBuf, uv.x, uv.y, c[0] * dyeStr, c[1] * dyeStr, c[2] * dyeStr, 0.035);
+  }
+
+  canvas.addEventListener('mousedown', function(e) {
+    mouseDown = true;
+    var uv = getUV(e.clientX, e.clientY);
+    prevMouseX = uv.x;
+    prevMouseY = uv.y;
+  });
+  canvas.addEventListener('mousemove', function(e) {
+    if (!mouseDown) return;
+    handleDrag(e.clientX, e.clientY);
+  });
+  window.addEventListener('mouseup', function() {
+    mouseDown = false;
+  });
+  canvas.addEventListener('touchstart', function(e) {
+    e.preventDefault();
+    mouseDown = true;
+    var t = e.touches[0];
+    var uv = getUV(t.clientX, t.clientY);
+    prevMouseX = uv.x;
+    prevMouseY = uv.y;
+  }, { passive: false });
+  canvas.addEventListener('touchmove', function(e) {
+    e.preventDefault();
+    if (!mouseDown) return;
+    var t = e.touches[0];
+    handleDrag(t.clientX, t.clientY);
+  }, { passive: false });
+  canvas.addEventListener('touchend', function() {
+    mouseDown = false;
+  });
+
+  // ── Boot ──────────────────────────────────────────────────────────────────
+  resize();
+  seed();
+  requestAnimationFrame(render);
+
+})();
+</script>
+</body>
+</html>

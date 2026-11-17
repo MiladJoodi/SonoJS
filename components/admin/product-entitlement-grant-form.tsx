@@ -124,7 +124,7 @@ export function ProductEntitlementGrantForm({
         <CardTitle>Product access</CardTitle>
         <CardDescription>
           Search by title or slug, then grant or revoke. Works for large catalogs
-          — type to filter instead of scrolling a long list.
+         , type to filter instead of scrolling a long list.
         </CardDescription>
       </CardHeader>
       <CardContent className="pt-6">
@@ -186,7 +186,7 @@ export function ProductEntitlementGrantForm({
               </p>
             ) : (
               <p className="text-xs text-muted-foreground">
-                {GRANTABLE.length} products available — type to narrow the list.
+                {GRANTABLE.length} products available, type to narrow the list.
               </p>
             )}
           </div>

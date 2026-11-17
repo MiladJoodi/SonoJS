@@ -1,5 +1,5 @@
 /* Docs-site text shimmer (attachment uploading/processing).
- * Install path keeps its own copy in packages/ui/cli templates — do not dedupe. */
+ * Install path keeps its own copy in packages/ui/cli templates, do not dedupe. */
 
 @property --shimmer-angle {
   syntax: "<angle>";

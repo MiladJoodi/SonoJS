@@ -1,0 +1,278 @@
+<!-- TITLE: 009 Matrix Rain -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>009 — Matrix Rain · creative-lab</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 100%; height: 100%; overflow: hidden; }
+    body {
+      background: #0a0a0a;
+      color: #e6edf3;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    canvas { display: block; width: 100%; height: 100%; cursor: crosshair; }
+    .panel {
+      position: fixed;
+      top: 16px;
+      left: 16px;
+      width: 300px;
+      max-width: calc(100vw - 32px);
+      padding: 14px 16px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(10, 12, 16, 0.76);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 20px 45px rgba(0,0,0,0.38);
+      z-index: 2;
+    }
+    .panel h1 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .panel p,
+    .panel label,
+    .meta {
+      font-size: 12px;
+      line-height: 1.6;
+      color: rgba(230, 237, 243, 0.8);
+    }
+    .controls {
+      display: grid;
+      grid-template-columns: 62px 1fr 54px;
+      gap: 8px 10px;
+      align-items: center;
+      margin: 12px 0 10px;
+    }
+    input[type="range"],
+    select {
+      width: 100%;
+    }
+    input[type="range"] { accent-color: #7dd3fc; }
+    select {
+      background: rgba(255,255,255,0.05);
+      color: #e6edf3;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px;
+      padding: 8px 10px;
+    }
+    .meta {
+      display: grid;
+      grid-template-columns: auto auto;
+      gap: 2px 16px;
+      font-family: "SF Mono", "Fira Code", monospace;
+    }
+    .meta strong { color: #7dd3fc; font-weight: 500; }
+    .footer {
+      position: fixed;
+      right: 16px;
+      bottom: 12px;
+      font-size: 11px;
+      color: rgba(255,255,255,0.38);
+      font-family: monospace;
+      z-index: 2;
+    }
+    .footer a { color: inherit; text-decoration: none; }
+    .footer a:hover { color: rgba(255,255,255,0.72); }
+  
+    html.embed #ui,
+    html.embed #info,
+    html.embed #controls,
+    html.embed #stats,
+    html.embed #hint,
+    html.embed .panel,
+    html.embed header,
+    html.embed footer { display: none !important; }
+  </style>
+  <script>if(/\bembed=1\b/.test(location.search))document.documentElement.classList.add("embed")</script>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+
+<div class="panel">
+  <h1>Matrix Rain</h1>
+  <p>Katakana and ASCII streams with randomized glyphs, glowing heads, fading trails, and click-generated disruption ripples.</p>
+  <div class="controls">
+    <label for="density">Density</label>
+    <input id="density" type="range" min="6" max="34" value="16">
+    <span id="densityValue">16</span>
+
+    <label for="speed">Speed</label>
+    <input id="speed" type="range" min="2" max="28" value="11">
+    <span id="speedValue">11</span>
+
+    <label for="color">Color</label>
+    <select id="color">
+      <option value="green">Green classic</option>
+      <option value="red">Red</option>
+      <option value="cyan">Cyan</option>
+    </select>
+    <span id="modeValue">mix</span>
+  </div>
+  <div class="meta">
+    <span>Columns</span><strong id="columnsLabel">0</strong>
+    <span>Glyphs</span><strong id="glyphLabel">0</strong>
+    <span>Ripples</span><strong id="rippleLabel">0</strong>
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+
+const densityInput = document.getElementById('density');
+const speedInput = document.getElementById('speed');
+const colorInput = document.getElementById('color');
+const densityValue = document.getElementById('densityValue');
+const speedValue = document.getElementById('speedValue');
+const modeValue = document.getElementById('modeValue');
+const columnsLabel = document.getElementById('columnsLabel');
+const glyphLabel = document.getElementById('glyphLabel');
+const rippleLabel = document.getElementById('rippleLabel');
+
+let width = 0;
+let height = 0;
+let dpr = 1;
+let fontSize = 20;
+let columns = [];
+let ripples = [];
+let lastTime = performance.now();
+
+const glyphPool = 'ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜヲン0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const palettes = {
+  green: { head: '#d8ffe2', main: '#5cff85', glow: 'rgba(92,255,133,0.22)' },
+  red: { head: '#ffd8d8', main: '#ff5f5f', glow: 'rgba(255,95,95,0.2)' },
+  cyan: { head: '#d8fbff', main: '#58f4ff', glow: 'rgba(88,244,255,0.2)' },
+};
+
+function randomGlyph() {
+  return glyphPool[(Math.random() * glyphPool.length) | 0];
+}
+
+function createColumn(index) {
+  const length = 10 + ((Math.random() * 22) | 0);
+  return {
+    x: index * fontSize,
+    y: Math.random() * -height,
+    speed: 0.5 + Math.random() * 1.4,
+    length,
+    chars: Array.from({ length }, randomGlyph),
+  };
+}
+
+function resize() {
+  dpr = Math.min(window.devicePixelRatio || 1, 2);
+  width = window.innerWidth;
+  height = window.innerHeight;
+  canvas.width = Math.floor(width * dpr);
+  canvas.height = Math.floor(height * dpr);
+  canvas.style.width = `${width}px`;
+  canvas.style.height = `${height}px`;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  rebuildColumns();
+}
+
+function rebuildColumns() {
+  fontSize = Number(densityInput.value);
+  const total = Math.ceil(width / fontSize);
+  columns = Array.from({ length: total }, (_, index) => createColumn(index));
+  columnsLabel.textContent = String(total);
+  glyphLabel.textContent = String(columns.reduce((sum, column) => sum + column.length, 0));
+  densityValue.textContent = densityInput.value;
+  speedValue.textContent = speedInput.value;
+  modeValue.textContent = colorInput.value;
+}
+
+function addRipple(x, y) {
+  ripples.push({ x, y, radius: 0, life: 1 });
+  rippleLabel.textContent = String(ripples.length);
+}
+
+function rippleForce(x, y) {
+  let offset = 0;
+  for (const ripple of ripples) {
+    const dx = x - ripple.x;
+    const dy = y - ripple.y;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    const band = Math.abs(dist - ripple.radius);
+    if (band < 90) offset += (1 - band / 90) * 16 * ripple.life;
+  }
+  return offset;
+}
+
+function drawColumn(column, palette, speedMul) {
+  const trail = column.length;
+  for (let i = 0; i < trail; i++) {
+    const y = column.y - i * fontSize;
+    if (y < -fontSize || y > height + fontSize) continue;
+    if (Math.random() < 0.08) column.chars[i] = randomGlyph();
+    const head = i === 0;
+    const alpha = head ? 1 : Math.max(0, 1 - i / trail) * 0.85;
+    ctx.fillStyle = head ? palette.head : `rgba(${hexToRgb(palette.main)}, ${alpha})`;
+    ctx.shadowColor = head ? palette.main : 'transparent';
+    ctx.shadowBlur = head ? 18 : 0;
+    ctx.fillText(column.chars[i], column.x, y);
+  }
+  ctx.shadowBlur = 0;
+  column.y += fontSize * column.speed * speedMul + rippleForce(column.x, column.y) * 0.03;
+  if (column.y - trail * fontSize > height + 40) {
+    const index = Math.round(column.x / fontSize);
+    Object.assign(column, createColumn(index));
+  }
+}
+
+function hexToRgb(hex) {
+  const value = hex.replace('#', '');
+  const numeric = parseInt(value, 16);
+  return `${(numeric >> 16) & 255}, ${(numeric >> 8) & 255}, ${numeric & 255}`;
+}
+
+function render() {
+  const now = performance.now();
+  const dt = Math.min(0.05, (now - lastTime) / 1000);
+  lastTime = now;
+
+  ctx.fillStyle = 'rgba(10, 10, 10, 0.18)';
+  ctx.fillRect(0, 0, width, height);
+
+  const palette = palettes[colorInput.value];
+  const speedMul = Number(speedInput.value) * dt * 2.8;
+  ctx.font = `${fontSize}px monospace`;
+  ctx.textBaseline = 'top';
+
+  for (const column of columns) drawColumn(column, palette, speedMul);
+
+  ctx.strokeStyle = palette.glow;
+  ctx.lineWidth = 2;
+  ripples = ripples.filter(ripple => ripple.life > 0.03);
+  for (const ripple of ripples) {
+    ripple.radius += 280 * dt;
+    ripple.life *= 0.985;
+    ctx.beginPath();
+    ctx.arc(ripple.x, ripple.y, ripple.radius, 0, Math.PI * 2);
+    ctx.stroke();
+  }
+  rippleLabel.textContent = String(ripples.length);
+
+  requestAnimationFrame(render);
+}
+
+window.addEventListener('resize', resize);
+densityInput.addEventListener('input', rebuildColumns);
+speedInput.addEventListener('input', rebuildColumns);
+colorInput.addEventListener('input', rebuildColumns);
+canvas.addEventListener('click', event => addRipple(event.clientX, event.clientY));
+window.addEventListener('keydown', event => {
+  if (event.key.toLowerCase() === 'd') rebuildColumns();
+  if (event.key.toLowerCase() === ' ') addRipple(width * 0.5, height * 0.5);
+});
+
+resize();
+addRipple(width * 0.5, height * 0.5);
+render();
+</script>
+</body>
+</html>

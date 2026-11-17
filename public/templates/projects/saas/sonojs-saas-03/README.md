@@ -5,7 +5,7 @@ Category: `saas`
 Slug / folder: `sonojs-saas-03`  
 Path: `public/templates/projects/saas/sonojs-saas-03/`  
 
-Crypto liquidity / trading-firm marketing site. Demo brand: **Auros** — Making Digital Markets Liquid.
+Crypto liquidity / trading-firm marketing site. Demo brand: **Auros**. Making Digital Markets Liquid.
 
 ## Images / video
 

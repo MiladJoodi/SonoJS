@@ -81,7 +81,7 @@ export default function LicensePage() {
           original or lightly modified Pro source.
         </li>
         <li>
-          Redistribute the original Pro source—or a thin wrapper around it—as a
+          Redistribute the original Pro source, or a thin wrapper around it, as a
           competing component library, template collection, starter kit, or UI
           kit.
         </li>

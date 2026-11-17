@@ -94,7 +94,7 @@ export default async function PasswordInputDocsPage() {
           <p className="leading-relaxed text-muted-foreground">
             Password field for login, sign-up, and reset flows. Show / hide,
             optional strength meter, requirements checklist, copy, and Caps Lock
-            warning — built on{" "}
+            warning, built on{" "}
             <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
               InputGroup
             </code>
@@ -127,7 +127,7 @@ export default async function PasswordInputDocsPage() {
               type: "string / ChangeEvent",
               defaultValue: "-",
               description:
-                "Native input value API — works with React Hook Form.",
+                "Native input value API, works with React Hook Form.",
             },
             {
               name: "showStrength",

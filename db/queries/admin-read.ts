@@ -106,7 +106,7 @@ export type AdminOverviewPayload = {
     usersLast30Days: number
     canceling: number
     expiringIn7Days: number
-    /** Active Pro via Plan Grant (`sub_manual_*`) — not an anomaly. */
+    /** Active Pro via Plan Grant (`sub_manual_*`), not an anomaly. */
     manualPro: number
   }
   alerts: AdminOverviewAlert[]
@@ -332,7 +332,7 @@ function asNumber(v: unknown): number {
 }
 
 /**
- * Compact dashboard payload for `/admin` — aggregates + small recent lists.
+ * Compact dashboard payload for `/admin`, aggregates + small recent lists.
  */
 export async function getAdminOverview(): Promise<AdminOverviewPayload> {
   try {

@@ -5,7 +5,7 @@ Category: `saas`
 Slug / folder: `sonojs-saas-09`  
 Path: `public/templates/projects/saas/sonojs-saas-09/`  
 
-Cinematic mountain retreat. Demo brand: **Yunjian Retreat** / 云间 — Stay above the clouds.
+Cinematic mountain retreat. Demo brand: **Yunjian Retreat** / 云间. Stay above the clouds.
 
 ## Images / video
 

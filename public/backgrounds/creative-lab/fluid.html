@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>002 — Fluid Particles · creative-lab</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #000; overflow: hidden; }
+    canvas { display: block; }
+  
+    html.embed #ui,
+    html.embed #info,
+    html.embed #controls,
+    html.embed #stats,
+    html.embed #hint,
+    html.embed .panel,
+    html.embed header,
+    html.embed footer { display: none !important; }
+  </style>
+  <script>if(/\bembed=1\b/.test(location.search))document.documentElement.classList.add("embed")</script>
+</head>
+<body>
+<canvas id="c"></canvas>
+
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+
+let W, H;
+
+// Flow field constants — declared before resize() call to avoid TDZ
+const CELL = 24;
+let cols, rows, flowField;
+
+// SPH density grid
+const DENSITY_CELL = 40;
+let dcols, drows, densityGrid;
+
+// Mouse interaction
+const mouse = { x: -9999, y: -9999, vx: 0, vy: 0, px: 0, py: 0 };
+window.addEventListener('mousemove', e => {
+  mouse.vx = e.clientX - mouse.px;
+  mouse.vy = e.clientY - mouse.py;
+  mouse.px = mouse.x;
+  mouse.py = mouse.y;
+  mouse.x = e.clientX;
+  mouse.y = e.clientY;
+});
+
+function resize() {
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+  initFlowField();
+}
+resize();
+window.addEventListener('resize', resize);
+
+function hash(x, y) {
+  // Simple deterministic noise angle
+  const n = Math.sin(x * 127.1 + y * 311.7) * 43758.5453;
+  return (n - Math.floor(n)) * Math.PI * 2;
+}
+
+function initFlowField() {
+  cols = Math.ceil(W / CELL) + 1;
+  rows = Math.ceil(H / CELL) + 1;
+  flowField = new Float32Array(cols * rows * 2);
+  const time = performance.now() * 0.0001;
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      const angle = hash(c + time, r + time) + Math.sin(r * 0.3) * 0.5;
+      const i = (r * cols + c) * 2;
+      flowField[i] = Math.cos(angle);
+      flowField[i + 1] = Math.sin(angle);
+    }
+  }
+}
+
+function getFlow(x, y) {
+  const c = (x / CELL) | 0;
+  const r = (y / CELL) | 0;
+  if (c < 0 || r < 0 || c >= cols || r >= rows) return [0, 0];
+  const i = (r * cols + c) * 2;
+  return [flowField[i], flowField[i + 1]];
+}
+
+// SPH-lite: density grid for coloring
+
+function updateDensity(particles) {
+  dcols = Math.ceil(W / DENSITY_CELL) + 1;
+  drows = Math.ceil(H / DENSITY_CELL) + 1;
+  densityGrid = new Uint16Array(dcols * drows);
+  for (const p of particles) {
+    const c = (p.x / DENSITY_CELL) | 0;
+    const r = (p.y / DENSITY_CELL) | 0;
+    if (c >= 0 && r >= 0 && c < dcols && r < drows) {
+      densityGrid[r * dcols + c]++;
+    }
+  }
+}
+
+function getDensity(x, y) {
+  const c = (x / DENSITY_CELL) | 0;
+  const r = (y / DENSITY_CELL) | 0;
+  if (c < 0 || r < 0 || c >= dcols || r >= drows) return 0;
+  return densityGrid[r * dcols + c];
+}
+
+// Particles
+class Particle {
+  constructor() { this.reset(); }
+  reset() {
+    this.x = Math.random() * W;
+    this.y = Math.random() * H;
+    this.vx = (Math.random() - 0.5) * 0.5;
+    this.vy = (Math.random() - 0.5) * 0.5;
+    this.life = 0.6 + Math.random() * 0.4;
+    this.age = 0;
+    this.maxAge = 400 + Math.random() * 600;
+  }
+  update() {
+    const [fx, fy] = getFlow(this.x, this.y);
+    // Flow field influence
+    this.vx += fx * 0.08;
+    this.vy += fy * 0.08;
+
+    // Mouse repulsion/disturbance
+    const mdx = this.x - mouse.x;
+    const mdy = this.y - mouse.y;
+    const mdist2 = mdx * mdx + mdy * mdy;
+    if (mdist2 < 8000) {
+      const mdist = Math.sqrt(mdist2) + 0.1;
+      const strength = (8000 - mdist2) / 8000;
+      this.vx += (mdx / mdist) * strength * 1.8 + mouse.vx * 0.04;
+      this.vy += (mdy / mdist) * strength * 1.8 + mouse.vy * 0.04;
+    }
+
+    // Damping
+    this.vx *= 0.97;
+    this.vy *= 0.97;
+
+    this.x += this.vx;
+    this.y += this.vy;
+    this.age++;
+
+    // Respawn
+    if (this.age > this.maxAge || this.x < 0 || this.x > W || this.y < 0 || this.y > H) {
+      this.reset();
+    }
+  }
+  get speed() {
+    return Math.sqrt(this.vx * this.vx + this.vy * this.vy);
+  }
+  getColor(density) {
+    const s = Math.min(this.speed / 3, 1);
+    const d = Math.min(density / 8, 1);
+    // Deep blue → cyan → white
+    // base: (10, 20, 80), mid: (0, 200, 220), high: (255, 255, 255)
+    let r, g, b;
+    if (s < 0.5) {
+      const t = s * 2;
+      r = Math.round(10 + t * (-10));
+      g = Math.round(20 + t * 180);
+      b = Math.round(80 + t * 140);
+    } else {
+      const t = (s - 0.5) * 2;
+      r = Math.round(0 + t * 255);
+      g = Math.round(200 + t * 55);
+      b = Math.round(220 + t * 35);
+    }
+    const alpha = 0.5 + s * 0.4 + d * 0.1;
+    return `rgba(${r},${g},${b},${alpha})`;
+  }
+}
+
+const NUM = 500;
+const particles = Array.from({ length: NUM }, () => new Particle());
+
+// Periodically refresh flow field for animation
+let flowTimer = 0;
+
+function draw() {
+  flowTimer++;
+  if (flowTimer % 180 === 0) initFlowField();
+
+  ctx.fillStyle = 'rgba(0, 2, 10, 0.15)';
+  ctx.fillRect(0, 0, W, H);
+
+  updateDensity(particles);
+
+  for (const p of particles) {
+    p.update();
+    const density = getDensity(p.x, p.y);
+    const s = Math.min(p.speed / 3, 1);
+    const radius = 0.8 + s * 1.8;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, radius, 0, Math.PI * 2);
+    ctx.fillStyle = p.getColor(density);
+    ctx.fill();
+  }
+
+  requestAnimationFrame(draw);
+}
+
+draw();
+</script>
+</body>
+</html>

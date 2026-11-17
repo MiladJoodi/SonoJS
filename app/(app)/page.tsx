@@ -14,7 +14,7 @@ import {
   websiteJsonLd,
 } from "@/lib/seo-jsonld"
 
-// Sync on `/` — deferred BTF CSS painted unstyled section shells (huge orbit CLS).
+// Sync on `/`, deferred BTF CSS painted unstyled section shells (huge orbit CLS).
 import "@/components/home/home-below-fold-style"
 
 export const metadata = pageMetadata({

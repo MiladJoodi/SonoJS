@@ -7,7 +7,7 @@ function loadHomeOrbitStage() {
 }
 
 /**
- * Lock size with inline styles — BTF CSS arrives after paint, so Tailwind
+ * Lock size with inline styles. BTF CSS arrives after paint, so Tailwind
  * max-w / aspect-square alone briefly leave a full-column circle (CLS).
  */
 const ORBIT_BOX_STYLE = {

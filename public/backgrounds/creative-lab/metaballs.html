@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>029 — Metaballs</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #0a0a0f;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      overflow: hidden;
+    }
+    canvas {
+      display: block;
+      flex: 1;
+      width: 100%;
+      cursor: crosshair;
+    }
+    .controls {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: rgba(10, 10, 15, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 16px 20px;
+      color: #e6edf3;
+      font-size: 0.82rem;
+      z-index: 100;
+      min-width: 200px;
+    }
+    .controls h3 {
+      font-size: 0.9rem;
+      margin-bottom: 12px;
+      color: #58a6ff;
+      font-weight: 600;
+    }
+    .control-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .control-row label {
+      color: #8b949e;
+    }
+    .control-row input[type="range"] {
+      width: 90px;
+      accent-color: #58a6ff;
+    }
+    .control-row span {
+      min-width: 32px;
+      text-align: right;
+      font-family: 'SF Mono', monospace;
+      color: #58a6ff;
+    }
+    .btn {
+      width: 100%;
+      padding: 8px;
+      margin-top: 8px;
+      background: rgba(88, 166, 255, 0.15);
+      border: 1px solid rgba(88, 166, 255, 0.3);
+      border-radius: 6px;
+      color: #58a6ff;
+      cursor: pointer;
+      font-size: 0.8rem;
+      transition: all 0.2s;
+    }
+    .btn:hover {
+      background: rgba(88, 166, 255, 0.25);
+      border-color: #58a6ff;
+    }
+    .color-row {
+      display: flex;
+      gap: 6px;
+      margin-top: 10px;
+    }
+    .color-btn {
+      flex: 1;
+      height: 28px;
+      border: 2px solid transparent;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .color-btn.active {
+      border-color: #fff;
+      transform: scale(1.05);
+    }
+    .color-btn:hover {
+      transform: scale(1.1);
+    }
+    .hint {
+      position: fixed;
+      bottom: 50px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 0.75rem;
+      pointer-events: none;
+      transition: opacity 0.5s;
+    }
+  
+    html.embed #ui,
+    html.embed #info,
+    html.embed #controls,
+    html.embed #stats,
+    html.embed #hint,
+    html.embed .panel,
+    html.embed header,
+    html.embed footer { display: none !important; }
+  </style>
+  <script>if(/\bembed=1\b/.test(location.search))document.documentElement.classList.add("embed")</script>
+</head>
+<body>
+
+<canvas id="canvas"></canvas>
+
+<div class="controls">
+  <h3>⚪ Metaballs</h3>
+  <div class="control-row">
+    <label>Balls</label>
+    <input type="range" id="ballCount" min="3" max="20" value="8">
+    <span id="ballCountVal">8</span>
+  </div>
+  <div class="control-row">
+    <label>Threshold</label>
+    <input type="range" id="threshold" min="50" max="200" value="100">
+    <span id="thresholdVal">1.0</span>
+  </div>
+  <div class="control-row">
+    <label>Speed</label>
+    <input type="range" id="speed" min="10" max="100" value="50">
+    <span id="speedVal">1.0</span>
+  </div>
+  <div class="control-row">
+    <label>Glow</label>
+    <input type="range" id="glow" min="0" max="100" value="60">
+    <span id="glowVal">60</span>
+  </div>
+  <div class="color-row">
+    <div class="color-btn active" data-palette="cyber" style="background: linear-gradient(135deg, #00ffff, #ff00ff)"></div>
+    <div class="color-btn" data-palette="fire" style="background: linear-gradient(135deg, #ff4500, #ffd700)"></div>
+    <div class="color-btn" data-palette="ocean" style="background: linear-gradient(135deg, #0077be, #00ff88)"></div>
+    <div class="color-btn" data-palette="plasma" style="background: linear-gradient(135deg, #8b00ff, #ff1493)"></div>
+  </div>
+  <button class="btn" id="resetBtn">Reset Balls</button>
+</div>
+
+<div class="hint">Click to attract • Move mouse to interact</div>
+
+
+
+<script>
+const canvas = document.getElementById('canvas');
+const gl = canvas.getContext('webgl2') || canvas.getContext('webgl');
+
+// Controls
+const ballCountSlider = document.getElementById('ballCount');
+const thresholdSlider = document.getElementById('threshold');
+const speedSlider = document.getElementById('speed');
+const glowSlider = document.getElementById('glow');
+const ballCountVal = document.getElementById('ballCountVal');
+const thresholdVal = document.getElementById('thresholdVal');
+const speedVal = document.getElementById('speedVal');
+const glowVal = document.getElementById('glowVal');
+const resetBtn = document.getElementById('resetBtn');
+const colorBtns = document.querySelectorAll('.color-btn');
+
+let ballCount = 8;
+let threshold = 1.0;
+let speedMult = 1.0;
+let glowIntensity = 0.6;
+let currentPalette = 'cyber';
+
+const palettes = {
+  cyber: [[0.0, 1.0, 1.0], [1.0, 0.0, 1.0], [0.5, 0.0, 1.0]],
+  fire: [[1.0, 0.27, 0.0], [1.0, 0.84, 0.0], [1.0, 0.5, 0.0]],
+  ocean: [[0.0, 0.47, 0.75], [0.0, 1.0, 0.53], [0.0, 0.8, 0.8]],
+  plasma: [[0.55, 0.0, 1.0], [1.0, 0.08, 0.58], [0.8, 0.0, 0.8]]
+};
+
+// Vertex shader
+const vsSource = `
+  attribute vec2 aPosition;
+  void main() {
+    gl_Position = vec4(aPosition, 0.0, 1.0);
+  }
+`;
+
+// Fragment shader - metaballs with marching squares implicit
+const fsSource = `
+  precision highp float;
+  uniform vec2 uResolution;
+  uniform float uTime;
+  uniform vec2 uMouse;
+  uniform float uMouseDown;
+  uniform vec4 uBalls[20];
+  uniform int uBallCount;
+  uniform float uThreshold;
+  uniform float uGlow;
+  uniform vec3 uColor1;
+  uniform vec3 uColor2;
+  uniform vec3 uColor3;
+
+  float metaball(vec2 p, vec2 center, float radius) {
+    float d = length(p - center);
+    return (radius * radius) / (d * d + 0.0001);
+  }
+
+  void main() {
+    vec2 uv = gl_FragCoord.xy / uResolution;
+    vec2 p = gl_FragCoord.xy;
+    
+    float sum = 0.0;
+    vec3 colorSum = vec3(0.0);
+    float weightSum = 0.0;
+    
+    for (int i = 0; i < 20; i++) {
+      if (i >= uBallCount) break;
+      vec2 center = uBalls[i].xy;
+      float radius = uBalls[i].z;
+      float colorIdx = uBalls[i].w;
+      
+      float contrib = metaball(p, center, radius);
+      sum += contrib;
+      
+      vec3 ballColor = mix(mix(uColor1, uColor2, colorIdx), uColor3, colorIdx * colorIdx);
+      colorSum += ballColor * contrib;
+      weightSum += contrib;
+    }
+    
+    // Mouse attraction effect
+    if (uMouseDown > 0.5) {
+      float mouseDist = length(p - uMouse);
+      float mouseEffect = 800.0 / (mouseDist * mouseDist + 1000.0);
+      sum += mouseEffect * 0.3;
+    }
+    
+    vec3 avgColor = weightSum > 0.0 ? colorSum / weightSum : uColor1;
+    
+    // Smooth threshold with glow
+    float edge = smoothstep(uThreshold - 0.3, uThreshold + 0.1, sum);
+    float glow = pow(sum / uThreshold, 2.0) * uGlow;
+    
+    // Background gradient
+    vec3 bg = mix(vec3(0.02, 0.02, 0.05), vec3(0.05, 0.02, 0.08), uv.y);
+    
+    // Inner color with gradient
+    float innerGrad = smoothstep(uThreshold, uThreshold + 1.5, sum);
+    vec3 innerColor = mix(avgColor, avgColor * 1.5, innerGrad);
+    
+    // Edge highlight
+    float edgeHighlight = smoothstep(uThreshold - 0.2, uThreshold, sum) - smoothstep(uThreshold, uThreshold + 0.3, sum);
+    innerColor += vec3(1.0) * edgeHighlight * 0.5;
+    
+    // Final composition
+    vec3 color = mix(bg, innerColor, edge);
+    color += avgColor * glow * 0.15;
+    
+    // Subtle vignette
+    float vignette = 1.0 - length(uv - 0.5) * 0.5;
+    color *= vignette;
+    
+    gl_FragColor = vec4(color, 1.0);
+  }
+`;
+
+function createShader(gl, type, source) {
+  const shader = gl.createShader(type);
+  gl.shaderSource(shader, source);
+  gl.compileShader(shader);
+  if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+
+    gl.deleteShader(shader);
+    return null;
+  }
+  return shader;
+}
+
+function createProgram(gl, vs, fs) {
+  const program = gl.createProgram();
+  gl.attachShader(program, vs);
+  gl.attachShader(program, fs);
+  gl.linkProgram(program);
+  if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+
+    return null;
+  }
+  return program;
+}
+
+const vs = createShader(gl, gl.VERTEX_SHADER, vsSource);
+const fs = createShader(gl, gl.FRAGMENT_SHADER, fsSource);
+const program = createProgram(gl, vs, fs);
+
+const positionBuffer = gl.createBuffer();
+gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
+  -1, -1, 1, -1, -1, 1,
+  -1, 1, 1, -1, 1, 1
+]), gl.STATIC_DRAW);
+
+const aPosition = gl.getAttribLocation(program, 'aPosition');
+const uResolution = gl.getUniformLocation(program, 'uResolution');
+const uTime = gl.getUniformLocation(program, 'uTime');
+const uMouse = gl.getUniformLocation(program, 'uMouse');
+const uMouseDown = gl.getUniformLocation(program, 'uMouseDown');
+const uBalls = gl.getUniformLocation(program, 'uBalls');
+const uBallCount = gl.getUniformLocation(program, 'uBallCount');
+const uThreshold = gl.getUniformLocation(program, 'uThreshold');
+const uGlow = gl.getUniformLocation(program, 'uGlow');
+const uColor1 = gl.getUniformLocation(program, 'uColor1');
+const uColor2 = gl.getUniformLocation(program, 'uColor2');
+const uColor3 = gl.getUniformLocation(program, 'uColor3');
+
+// Ball class
+class Ball {
+  constructor(x, y, radius) {
+    this.x = x;
+    this.y = y;
+    this.radius = radius;
+    this.vx = (Math.random() - 0.5) * 3;
+    this.vy = (Math.random() - 0.5) * 3;
+    this.baseVx = this.vx;
+    this.baseVy = this.vy;
+    this.colorIndex = Math.random();
+    this.phaseX = Math.random() * Math.PI * 2;
+    this.phaseY = Math.random() * Math.PI * 2;
+    this.freqX = 0.3 + Math.random() * 0.5;
+    this.freqY = 0.3 + Math.random() * 0.5;
+  }
+  
+  update(time, width, height, mouseX, mouseY, mouseDown) {
+    // Organic movement with sine waves
+    const wobbleX = Math.sin(time * this.freqX + this.phaseX) * 0.5;
+    const wobbleY = Math.cos(time * this.freqY + this.phaseY) * 0.5;
+    
+    this.vx = (this.baseVx + wobbleX) * speedMult;
+    this.vy = (this.baseVy + wobbleY) * speedMult;
+    
+    // Mouse interaction
+    if (mouseX >= 0 && mouseY >= 0) {
+      const dx = mouseX - this.x;
+      const dy = mouseY - this.y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      
+      if (mouseDown && dist > 0) {
+        // Attract to mouse
+        const force = Math.min(500 / (dist + 1), 5);
+        this.vx += (dx / dist) * force * 0.1;
+        this.vy += (dy / dist) * force * 0.1;
+      } else if (dist < 200 && dist > 0) {
+        // Gentle repulsion when hovering
+        const force = (200 - dist) / 200 * 0.3;
+        this.vx -= (dx / dist) * force;
+        this.vy -= (dy / dist) * force;
+      }
+    }
+    
+    // Damping
+    this.vx *= 0.99;
+    this.vy *= 0.99;
+    
+    this.x += this.vx;
+    this.y += this.vy;
+    
+    // Bounce off walls with padding
+    const padding = this.radius * 0.5;
+    if (this.x < padding) { this.x = padding; this.vx *= -0.8; this.baseVx *= -1; }
+    if (this.x > width - padding) { this.x = width - padding; this.vx *= -0.8; this.baseVx *= -1; }
+    if (this.y < padding) { this.y = padding; this.vy *= -0.8; this.baseVy *= -1; }
+    if (this.y > height - padding) { this.y = height - padding; this.vy *= -0.8; this.baseVy *= -1; }
+  }
+}
+
+let balls = [];
+let mouseX = -1000, mouseY = -1000;
+let mouseDown = false;
+
+function initBalls() {
+  balls = [];
+  const w = canvas.width;
+  const h = canvas.height;
+  for (let i = 0; i < ballCount; i++) {
+    const radius = 40 + Math.random() * 60;
+    const x = radius + Math.random() * (w - radius * 2);
+    const y = radius + Math.random() * (h - radius * 2);
+    balls.push(new Ball(x, y, radius));
+  }
+}
+
+function resize() {
+  const dpr = Math.min(window.devicePixelRatio, 2);
+  canvas.width = window.innerWidth * dpr;
+  canvas.height = window.innerHeight * dpr;
+  canvas.style.width = window.innerWidth + 'px';
+  canvas.style.height = window.innerHeight + 'px';
+  gl.viewport(0, 0, canvas.width, canvas.height);
+}
+
+window.addEventListener('resize', () => {
+  resize();
+  initBalls();
+});
+
+canvas.addEventListener('mousemove', e => {
+  const dpr = Math.min(window.devicePixelRatio, 2);
+  mouseX = e.clientX * dpr;
+  mouseY = (canvas.height / dpr - e.clientY) * dpr;
+});
+
+canvas.addEventListener('mousedown', () => mouseDown = true);
+canvas.addEventListener('mouseup', () => mouseDown = false);
+canvas.addEventListener('mouseleave', () => {
+  mouseX = -1000;
+  mouseY = -1000;
+  mouseDown = false;
+});
+
+canvas.addEventListener('touchmove', e => {
+  e.preventDefault();
+  const dpr = Math.min(window.devicePixelRatio, 2);
+  const touch = e.touches[0];
+  mouseX = touch.clientX * dpr;
+  mouseY = (canvas.height / dpr - touch.clientY) * dpr;
+}, { passive: false });
+
+canvas.addEventListener('touchstart', e => {
+  mouseDown = true;
+  const dpr = Math.min(window.devicePixelRatio, 2);
+  const touch = e.touches[0];
+  mouseX = touch.clientX * dpr;
+  mouseY = (canvas.height / dpr - touch.clientY) * dpr;
+});
+
+canvas.addEventListener('touchend', () => {
+  mouseDown = false;
+  mouseX = -1000;
+  mouseY = -1000;
+});
+
+// Control handlers
+ballCountSlider.oninput = () => {
+  ballCount = parseInt(ballCountSlider.value);
+  ballCountVal.textContent = ballCount;
+  initBalls();
+};
+
+thresholdSlider.oninput = () => {
+  threshold = parseInt(thresholdSlider.value) / 100;
+  thresholdVal.textContent = threshold.toFixed(1);
+};
+
+speedSlider.oninput = () => {
+  speedMult = parseInt(speedSlider.value) / 50;
+  speedVal.textContent = speedMult.toFixed(1);
+};
+
+glowSlider.oninput = () => {
+  glowIntensity = parseInt(glowSlider.value) / 100;
+  glowVal.textContent = Math.round(glowIntensity * 100);
+};
+
+resetBtn.onclick = initBalls;
+
+colorBtns.forEach(btn => {
+  btn.onclick = () => {
+    colorBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentPalette = btn.dataset.palette;
+  };
+});
+
+// Hide hint after first interaction
+let hintVisible = true;
+canvas.addEventListener('mousemove', () => {
+  if (hintVisible) {
+    document.querySelector('.hint').style.opacity = '0';
+    hintVisible = false;
+  }
+}, { once: true });
+
+resize();
+initBalls();
+
+let startTime = performance.now();
+
+function render() {
+  const time = (performance.now() - startTime) / 1000;
+  
+  // Update balls
+  for (const ball of balls) {
+    ball.update(time, canvas.width, canvas.height, mouseX, mouseY, mouseDown);
+  }
+  
+  gl.useProgram(program);
+  
+  gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+  gl.enableVertexAttribArray(aPosition);
+  gl.vertexAttribPointer(aPosition, 2, gl.FLOAT, false, 0, 0);
+  
+  gl.uniform2f(uResolution, canvas.width, canvas.height);
+  gl.uniform1f(uTime, time);
+  gl.uniform2f(uMouse, mouseX, mouseY);
+  gl.uniform1f(uMouseDown, mouseDown ? 1.0 : 0.0);
+  gl.uniform1i(uBallCount, balls.length);
+  gl.uniform1f(uThreshold, threshold);
+  gl.uniform1f(uGlow, glowIntensity);
+  
+  const palette = palettes[currentPalette];
+  gl.uniform3fv(uColor1, palette[0]);
+  gl.uniform3fv(uColor2, palette[1]);
+  gl.uniform3fv(uColor3, palette[2]);
+  
+  // Pack ball data into uniform array
+  const ballData = new Float32Array(80); // 20 balls * 4 components
+  for (let i = 0; i < balls.length && i < 20; i++) {
+    ballData[i * 4] = balls[i].x;
+    ballData[i * 4 + 1] = balls[i].y;
+    ballData[i * 4 + 2] = balls[i].radius;
+    ballData[i * 4 + 3] = balls[i].colorIndex;
+  }
+  gl.uniform4fv(uBalls, ballData);
+  
+  gl.drawArrays(gl.TRIANGLES, 0, 6);
+  
+  requestAnimationFrame(render);
+}
+
+render();
+</script>
+</body>
+</html>

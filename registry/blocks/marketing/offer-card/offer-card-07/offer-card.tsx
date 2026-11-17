@@ -128,7 +128,7 @@ export default function OfferCard({
   }
 
   const handleCtaClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
-    // Preview-safe default (`href="#"`) — no navigation / hash jump.
+    // Preview-safe default (`href="#"`). No navigation / hash jump.
     if (!href || href === "#") event.preventDefault()
   }
 

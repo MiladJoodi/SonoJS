@@ -47,7 +47,7 @@ export function DottedMapDefault() {
       <div className="relative z-0 size-full">
         <DottedMap<MyMarker>
           markers={markers}
-          // Hide the default fill — overlay draws a centered flag + orange ring
+          // Hide the default fill, overlay draws a centered flag + orange ring
           markerColor="transparent"
           renderMarkerOverlay={({ marker, x, y, r, index }) => {
             const { countryCode, label } = marker.overlay

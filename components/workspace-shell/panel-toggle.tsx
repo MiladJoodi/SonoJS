@@ -11,7 +11,7 @@ import {
   TooltipTrigger,
 } from "@sonojs/ui/components/tooltip"
 
-/** Desktop-only right panel chrome — never shown on small screens. */
+/** Desktop-only right panel chrome. Never shown on small screens. */
 export const WORKSPACE_RIGHT_TOGGLE_VISIBILITY = "hidden xl:inline-flex"
 
 /** Match DocsAdjacentPager prev/next chrome. */

@@ -23,7 +23,7 @@ Revenue command-center SaaS landing with WebGL planet. Demo brand: **Ascend**.
 
 ## Run locally
 
-Do not open `index.html` via `file://` — ES modules and GLBs need a static server.
+Do not open `index.html` via `file://`. ES modules and GLBs need a static server.
 
 ```bash
 npx --yes serve .

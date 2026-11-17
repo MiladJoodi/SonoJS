@@ -1,4 +1,4 @@
-/* Docs-site chrome utilities — preview letterbox, scroll masks, hide bars */
+/* Docs-site chrome utilities, preview letterbox, scroll masks, hide bars */
 
 @utility no-scrollbar {
   -ms-overflow-style: none;
@@ -42,7 +42,7 @@
     calc(var(--transparency-cell) / -2) 0;
 }
 
-/* Edge fade on scroll containers — mask softens top/bottom while content remains. */
+/* Edge fade on scroll containers, mask softens top/bottom while content remains. */
 @property --scroll-fade-t {
   syntax: "<length-percentage>";
   inherits: false;

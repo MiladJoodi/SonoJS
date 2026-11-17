@@ -5,7 +5,7 @@ Category: `ecommerce`
 Slug / folder: `sonojs-ecommerce-06`  
 Path: `public/templates/projects/ecommerce/sonojs-ecommerce-06/`  
 
-Foldable product launch landing. Demo product: **iPhone Duo** — Hello, hello.
+Foldable product launch landing. Demo product: **iPhone Duo**. Hello, hello.
 
 ## Images / video
 

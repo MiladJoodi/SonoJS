@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crystal Lattice</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; overflow: hidden; background: #0a0a0a; }
+  canvas { display: block; width: 100vw; height: 100vh; }
+  .label {
+    position: fixed; top: 20px; left: 24px;
+    font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+    font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+    color: rgba(200, 149, 108, 0.5); z-index: 10; pointer-events: none; user-select: none;
+  }
+  html.embed .label { display: none; }
+</style>
+<script>if(/\bembed=1\b/.test(location.search))document.documentElement.classList.add("embed")</script>
+</head>
+<body>
+<div class="label">Crystal Lattice</div>
+<canvas id="canvas"></canvas>
+<script>
+// ─────────────────────────────────────────────
+// 34 · Crystal Lattice — Faceted crystalline structures with prismatic refraction
+// ─────────────────────────────────────────────
+(function() {
+  var canvas = document.getElementById('canvas');
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var urlParams = new URLSearchParams(window.location.search);
+  var pixelScale = parseFloat(urlParams.get('p')) || 1;
+
+  var gl = canvas.getContext('webgl', { alpha: true, antialias: false, preserveDrawingBuffer: false });
+  if (!gl) return;
+
+  // ── Mouse-drag rotation state ──
+  var mouseX = 0, mouseY = 0;
+  var isDragging = false;
+  var dragStartX = 0, dragStartY = 0;
+  var rotX = 0, rotY = 0;
+
+  canvas.addEventListener('mousedown', function(e) {
+    isDragging = true;
+    dragStartX = e.clientX;
+    dragStartY = e.clientY;
+  });
+  canvas.addEventListener('mousemove', function(e) {
+    if (!isDragging) return;
+    var dx = e.clientX - dragStartX;
+    var dy = e.clientY - dragStartY;
+    rotX += dx * 0.005;
+    rotY += dy * 0.005;
+    dragStartX = e.clientX;
+    dragStartY = e.clientY;
+  });
+  canvas.addEventListener('mouseup', function() { isDragging = false; });
+  canvas.addEventListener('mouseleave', function() { isDragging = false; });
+
+  // ── Touch support ──
+  canvas.addEventListener('touchstart', function(e) {
+    if (e.touches.length === 1) {
+      isDragging = true;
+      dragStartX = e.touches[0].clientX;
+      dragStartY = e.touches[0].clientY;
+    }
+  });
+  canvas.addEventListener('touchmove', function(e) {
+    if (!isDragging || e.touches.length !== 1) return;
+    e.preventDefault();
+    var dx = e.touches[0].clientX - dragStartX;
+    var dy = e.touches[0].clientY - dragStartY;
+    rotX += dx * 0.005;
+    rotY += dy * 0.005;
+    dragStartX = e.touches[0].clientX;
+    dragStartY = e.touches[0].clientY;
+  }, { passive: false });
+  canvas.addEventListener('touchend', function() { isDragging = false; });
+
+  var vertSrc = [
+    'attribute vec2 a_pos;',
+    'void main() { gl_Position = vec4(a_pos, 0.0, 1.0); }'
+  ].join('\n');
+
+  var fragSrc = [
+    'precision highp float;',
+    'uniform float u_time;',
+    'uniform vec2 u_res;',
+    'uniform float u_growthSpeed;',
+    'uniform float u_refraction;',
+    'uniform float u_rotX;',
+    'uniform float u_rotY;',
+    'uniform vec2 u_center;',
+    'uniform float u_scale;',
+    '',
+    '#define PI 3.14159265359',
+    '#define TAU 6.28318530718',
+    '#define MAX_STEPS 48',
+    '#define MAX_DIST 25.0',
+    '#define SURF_DIST 0.004',
+    '',
+    '// ── Rotation matrices ──',
+    'mat2 rot2(float a) {',
+    '  float c = cos(a), s = sin(a);',
+    '  return mat2(c, -s, s, c);',
+    '}',
+    '',
+    '// ── Hash / noise ──',
+    'float hash(float n) { return fract(sin(n) * 43758.5453123); }',
+    'float hash2(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }',
+    '',
+    'float noise(vec3 p) {',
+    '  vec3 i = floor(p);',
+    '  vec3 f = fract(p);',
+    '  f = f * f * (3.0 - 2.0 * f);',
+    '  float n = i.x + i.y * 157.0 + i.z * 113.0;',
+    '  return mix(',
+    '    mix(mix(hash(n), hash(n + 1.0), f.x),',
+    '        mix(hash(n + 157.0), hash(n + 158.0), f.x), f.y),',
+    '    mix(mix(hash(n + 113.0), hash(n + 114.0), f.x),',
+    '        mix(hash(n + 270.0), hash(n + 271.0), f.x), f.y),',
+    '    f.z);',
+    '}',
+    '',
+    '// ── SDF primitives ──',
+    '',
+    '// Hexagonal prism: p is position, h.x = radius, h.y = half-height',
+    'float sdHexPrism(vec3 p, vec2 h) {',
+    '  vec3 q = abs(p);',
+    '  float d1 = q.z - h.y;',
+    '  float d2 = max(q.x * 0.866025 + q.y * 0.5, q.y) - h.x;',
+    '  return min(max(d1, d2), 0.0) + length(max(vec2(d1, d2), 0.0));',
+    '}',
+    '',
+    '// Octahedron SDF',
+    'float sdOctahedron(vec3 p, float s) {',
+    '  p = abs(p);',
+    '  float m = p.x + p.y + p.z - s;',
+    '  vec3 q;',
+    '  if (3.0 * p.x < m) q = p.xyz;',
+    '  else if (3.0 * p.y < m) q = p.yzx;',
+    '  else if (3.0 * p.z < m) q = p.zxy;',
+    '  else return m * 0.57735027;',
+    '  float k = clamp(0.5 * (q.z - q.y + s), 0.0, s);',
+    '  return length(vec3(q.x, q.y - s + k, q.z - k));',
+    '}',
+    '',
+    '// Box SDF',
+    'float sdBox(vec3 p, vec3 b) {',
+    '  vec3 q = abs(p) - b;',
+    '  return length(max(q, 0.0)) + min(max(q.x, max(q.y, q.z)), 0.0);',
+    '}',
+    '',
+    '// Smooth minimum for crystal cluster blending',
+    'float smin(float a, float b, float k) {',
+    '  float h = clamp(0.5 + 0.5 * (b - a) / k, 0.0, 1.0);',
+    '  return mix(b, a, h) - k * h * (1.0 - h);',
+    '}',
+    '',
+    '// Sharp minimum — preserves facets',
+    'float sharpMin(float a, float b, float k) {',
+    '  return min(a, b) - max(k - abs(a - b), 0.0) * 0.25 / k;',
+    '}',
+    '',
+    '// ── Crystal visibility: u_growthSpeed controls count, quick fade-in on load ──',
+    '',
+    '// ── Single crystal shaft: hex prism with hex pyramid termination ──',
+    'float crystalShaft(vec3 p, float radius, float height, float pointiness) {',
+    '  // height = total crystal height from base to tip',
+    '  float taperLen = min(radius * pointiness, height * 0.4);',
+    '  ',
+    '  // Shift so base is at y=0, crystal grows upward',
+    '  p.y -= height * 0.5;',
+    '  ',
+    '  // Hex prism along Y covering full crystal height',
+    '  float body = sdHexPrism(p.xzy, vec2(radius, height * 0.5));',
+    '  ',
+    '  // Hex pyramid termination: 6 flat faces converging to a point',
+    '  float tipLocal = height * 0.5;',
+    '  float slope = radius / taperLen;',
+    '  vec3 q = abs(p);',
+    '  float hexDist = max(q.x * 0.866025 + q.z * 0.5, q.z);',
+    '  float pyramid = hexDist - max(0.0, tipLocal - p.y) * slope;',
+    '  ',
+    '  return max(body, pyramid);',
+    '}',
+    '',
+    '// ── Scene: cluster of crystal formations ──',
+    'float sceneSDF(vec3 p, float t) {',
+    '  float d = MAX_DIST;',
+    '  float density = u_growthSpeed;',
+    '  float ga = smoothstep(0.0, 2.5, t);  // quick 2.5s fade-in on load',
+    '  ',
+    '  // --- Main crystals (always visible, threshold < 0.5) ---',
+    '  ',
+    '  // Central crystal — tallest',
+    '  {',
+    '    vec3 cp = p - vec3(0.0, -1.0, 0.0);',
+    '    cp.xz = rot2(0.05) * cp.xz;',
+    '    d = min(d, crystalShaft(cp, 0.5 * ga, 2.8 * ga, 2.2));',
+    '  }',
+    '  // Right crystal',
+    '  if (density > 0.3) {',
+    '    vec3 cp = p - vec3(0.4, -1.0, 0.1);',
+    '    cp.xy = rot2(-0.3) * cp.xy;',
+    '    cp.xz = rot2(0.2) * cp.xz;',
+    '    d = min(d, crystalShaft(cp, 0.4 * ga, 2.2 * ga, 2.0));',
+    '  }',
+    '  // Left crystal',
+    '  if (density > 0.3) {',
+    '    vec3 cp = p - vec3(-0.45, -1.0, -0.1);',
+    '    cp.xy = rot2(0.35) * cp.xy;',
+    '    cp.xz = rot2(-0.3) * cp.xz;',
+    '    d = min(d, crystalShaft(cp, 0.38 * ga, 2.0 * ga, 1.9));',
+    '  }',
+    '  // Back crystal',
+    '  if (density > 0.5) {',
+    '    vec3 cp = p - vec3(0.1, -1.0, -0.5);',
+    '    cp.yz = rot2(-0.3) * cp.yz;',
+    '    cp.xz = rot2(0.5) * cp.xz;',
+    '    d = min(d, crystalShaft(cp, 0.32 * ga, 1.8 * ga, 2.3));',
+    '  }',
+    '  // Back-left',
+    '  if (density > 0.5) {',
+    '    vec3 cp = p - vec3(-0.5, -1.0, -0.4);',
+    '    cp.xy = rot2(0.35) * cp.xy;',
+    '    cp.yz = rot2(-0.25) * cp.yz;',
+    '    d = min(d, crystalShaft(cp, 0.3 * ga, 1.5 * ga, 2.0));',
+    '  }',
+    '  // Front-left — small',
+    '  if (density > 0.8) {',
+    '    vec3 cp = p - vec3(-0.35, -1.0, 0.45);',
+    '    cp.xy = rot2(0.4) * cp.xy;',
+    '    cp.yz = rot2(0.3) * cp.yz;',
+    '    d = min(d, crystalShaft(cp, 0.26 * ga, 1.3 * ga, 2.1));',
+    '  }',
+    '  // Front-right — small',
+    '  if (density > 0.8) {',
+    '    vec3 cp = p - vec3(0.5, -1.0, 0.35);',
+    '    cp.xy = rot2(-0.5) * cp.xy;',
+    '    cp.xz = rot2(-0.2) * cp.xz;',
+    '    d = min(d, crystalShaft(cp, 0.22 * ga, 1.0 * ga, 2.4));',
+    '  }',
+    '  ',
+    '  // --- Accent crystals (density > 1.0) ---',
+    '  if (density > 1.0) {',
+    '    { vec3 cp = p - vec3(0.65, -1.0, 0.3); cp.xy = rot2(-0.6) * cp.xy; cp.xz = rot2(0.8) * cp.xz;',
+    '      d = min(d, crystalShaft(cp, 0.12 * ga, 0.5 * ga, 2.0)); }',
+    '    { vec3 cp = p - vec3(-0.6, -1.0, 0.5); cp.xy = rot2(0.55) * cp.xy; cp.xz = rot2(-0.6) * cp.xz;',
+    '      d = min(d, crystalShaft(cp, 0.1 * ga, 0.4 * ga, 2.2)); }',
+    '    { vec3 cp = p - vec3(0.3, -1.0, -0.6); cp.xy = rot2(-0.4) * cp.xy; cp.yz = rot2(-0.5) * cp.yz;',
+    '      d = min(d, crystalShaft(cp, 0.14 * ga, 0.55 * ga, 1.8)); }',
+    '    { vec3 cp = p - vec3(-0.25, -1.0, -0.55); cp.xy = rot2(0.5) * cp.xy; cp.yz = rot2(-0.35) * cp.yz;',
+    '      d = min(d, crystalShaft(cp, 0.11 * ga, 0.45 * ga, 2.1)); }',
+    '  }',
+    '  ',
+    '  // --- Outer ring of medium crystals (density > 1.4) ---',
+    '  if (density > 1.4) {',
+    '    { vec3 cp = p - vec3(0.8, -1.0, 0.0); cp.xy = rot2(-0.55) * cp.xy; cp.xz = rot2(0.1) * cp.xz;',
+    '      d = min(d, crystalShaft(cp, 0.28 * ga, 1.6 * ga, 2.0)); }',
+    '    { vec3 cp = p - vec3(-0.7, -1.0, 0.4); cp.xy = rot2(0.5) * cp.xy; cp.xz = rot2(-0.4) * cp.xz;',
+    '      d = min(d, crystalShaft(cp, 0.25 * ga, 1.4 * ga, 2.1)); }',
+    '    { vec3 cp = p - vec3(0.2, -1.0, 0.75); cp.xy = rot2(-0.2) * cp.xy; cp.yz = rot2(0.5) * cp.yz;',
+    '      d = min(d, crystalShaft(cp, 0.22 * ga, 1.2 * ga, 2.3)); }',
+    '    { vec3 cp = p - vec3(-0.3, -1.0, -0.7); cp.xy = rot2(0.45) * cp.xy; cp.yz = rot2(-0.4) * cp.yz;',
+    '      d = min(d, crystalShaft(cp, 0.24 * ga, 1.3 * ga, 1.9)); }',
+    '  }',
+    '  ',
+    '  // --- Dense procedural crystal bed (density > 1.7) ---',
+    '  if (density > 1.7) {',
+    '    for (int i = 0; i < 8; i++) {',
+    '      float fi = float(i);',
+    '      float angle = fi * 0.785 + 0.15;',
+    '      float dist = 0.65 + sin(fi * 2.7) * 0.2;',
+    '      vec3 cp = p - vec3(cos(angle) * dist, -1.0, sin(angle) * dist);',
+    '      float tiltAngle = 0.6 + sin(fi * 3.1) * 0.25;',
+    '      cp.xy = rot2(cos(angle) * tiltAngle) * cp.xy;',
+    '      cp.yz = rot2(sin(angle) * tiltAngle * 0.5) * cp.yz;',
+    '      float r = (0.08 + sin(fi * 4.3) * 0.04) * ga;',
+    '      float h = (0.4 + sin(fi * 2.1) * 0.15) * ga;',
+    '      d = min(d, crystalShaft(cp, r, h, 2.0));',
+    '    }',
+    '  }',
+    '  ',
+    '  return d;',
+    '}',
+    '',
+    '// ── Raymarching ──',
+    'float march(vec3 ro, vec3 rd, float t) {',
+    '  float d = 0.0;',
+    '  for (int i = 0; i < MAX_STEPS; i++) {',
+    '    vec3 p = ro + rd * d;',
+    '    float ds = sceneSDF(p, t);',
+    '    d += ds;',
+    '    if (ds < SURF_DIST || d > MAX_DIST) break;',
+    '  }',
+    '  return d;',
+    '}',
+    '',
+    '// ── Normal via tetrahedron technique (4 samples instead of 6) ──',
+    'vec3 getNormal(vec3 p, float t) {',
+    '  const vec2 e = vec2(0.008, -0.008);',
+    '  return normalize(',
+    '    e.xyy * sceneSDF(p + e.xyy, t) +',
+    '    e.yyx * sceneSDF(p + e.yyx, t) +',
+    '    e.yxy * sceneSDF(p + e.yxy, t) +',
+    '    e.xxx * sceneSDF(p + e.xxx, t)',
+    '  );',
+    '}',
+    '',
+    '// ── Spectral color for prismatic dispersion ──',
+    'vec3 spectral(float t) {',
+    '  t = fract(t);',
+    '  vec3 c;',
+    '  if (t < 0.17) c = mix(vec3(0.4, 0.0, 0.6), vec3(0.15, 0.15, 1.0), t / 0.17);',
+    '  else if (t < 0.33) c = mix(vec3(0.15, 0.15, 1.0), vec3(0.0, 0.85, 0.7), (t - 0.17) / 0.16);',
+    '  else if (t < 0.5) c = mix(vec3(0.0, 0.85, 0.7), vec3(0.0, 1.0, 0.15), (t - 0.33) / 0.17);',
+    '  else if (t < 0.67) c = mix(vec3(0.0, 1.0, 0.15), vec3(1.0, 0.95, 0.0), (t - 0.5) / 0.17);',
+    '  else if (t < 0.83) c = mix(vec3(1.0, 0.95, 0.0), vec3(1.0, 0.35, 0.0), (t - 0.67) / 0.16);',
+    '  else c = mix(vec3(1.0, 0.35, 0.0), vec3(0.55, 0.0, 0.35), (t - 0.83) / 0.17);',
+    '  return c;',
+    '}',
+    '',
+    '// ── Fresnel approximation ──',
+    'float fresnel(vec3 rd, vec3 n, float ior) {',
+    '  float cosI = abs(dot(rd, n));',
+    '  float r0 = (1.0 - ior) / (1.0 + ior);',
+    '  r0 = r0 * r0;',
+    '  return r0 + (1.0 - r0) * pow(1.0 - cosI, 5.0);',
+    '}',
+    '',
+    '// ── Interior refraction march for internal color ──',
+    'vec3 internalColor(vec3 p, vec3 rd, vec3 n, float t) {',
+    '  float ior = 1.55;  // quartz IOR',
+    '  vec3 refractDir = refract(rd, n, 1.0 / ior);',
+    '  if (length(refractDir) < 0.01) refractDir = reflect(rd, n);',
+    '  ',
+    '  // Estimate internal path length from single interior sample (smooth, no streaks)',
+    '  float sd = sceneSDF(p - n * 0.3, t);',
+    '  float pathLen = clamp(-sd * 3.0 + 0.3, 0.1, 1.0);',
+    '  ',
+    '  // Prismatic color based on refracted path length + direction',
+    '  float specPhase = pathLen * 2.0 + dot(refractDir, vec3(1.0, 0.5, 0.3)) * 0.25;',
+    '  specPhase += t * 0.15;',
+    '  ',
+    '  // Chromatic dispersion: separate R/G/B slightly',
+    '  float cr = pathLen * 1.95 + dot(refractDir, vec3(1.0, 0.3, 0.2)) * 0.55;',
+    '  float cg = pathLen * 2.0 + dot(refractDir, vec3(0.3, 1.0, 0.2)) * 0.55;',
+    '  float cb = pathLen * 2.05 + dot(refractDir, vec3(0.2, 0.3, 1.0)) * 0.55;',
+    '  ',
+    '  vec3 prism = vec3(',
+    '    spectral(cr * 0.3 + t * 0.05).r,',
+    '    spectral(cg * 0.3 + t * 0.05).g,',
+    '    spectral(cb * 0.3 + t * 0.05).b',
+    '  );',
+    '  ',
+    '  // Absorption — deeper = warmer amber',
+    '  vec3 absorption = exp(-pathLen * vec3(0.15, 0.7, 1.8));',
+    '  ',
+    '  return prism * 0.3 + absorption * 0.7;',
+    '}',
+    '',
+    '// ── Soft shadow for depth ──',
+    'float softShadow(vec3 ro, vec3 rd, float tmin, float tmax, float k, float t) {',
+    '  float res = 1.0;',
+    '  float d = tmin;',
+    '  for (int i = 0; i < 20; i++) {',
+    '    float h = sceneSDF(ro + rd * d, t);',
+    '    res = min(res, k * h / d);',
+    '    d += clamp(h, 0.01, 0.2);',
+    '    if (h < 0.001 || d > tmax) break;',
+    '  }',
+    '  return clamp(res, 0.0, 1.0);',
+    '}',
+    '',
+    '// ── Ambient occlusion ──',
+    'float ao(vec3 p, vec3 n, float t) {',
+    '  float h1 = 0.05, h2 = 0.2;',
+    '  float d1 = sceneSDF(p + n * h1, t);',
+    '  float d2 = sceneSDF(p + n * h2, t);',
+    '  return clamp(1.0 - 1.5 * ((h1 - d1) + (h2 - d2) * 0.5), 0.0, 1.0);',
+    '}',
+    '',
+    '// ── Facet sparkle — highlights at sharp edges ──',
+    'float facetSparkle(vec3 p, vec3 n, vec3 rd, vec3 lightDir, float t) {',
+    '  // Detect edges via SDF gradient discontinuity (3 SDF calls instead of 18)',
+    '  float e = 0.005;',
+    '  float d0 = sceneSDF(p, t);',
+    '  float dx = sceneSDF(p + vec3(e, 0, 0), t);',
+    '  float dy = sceneSDF(p + vec3(0, e, 0), t);',
+    '  float edginess = abs(dx - d0) + abs(dy - d0);',
+    '  edginess = smoothstep(0.001, 0.008, edginess);',
+    '  ',
+    '  // Specular highlight at edges',
+    '  vec3 h = normalize(lightDir - rd);',
+    '  float spec = pow(max(dot(n, h), 0.0), 200.0);',
+    '  ',
+    '  // Animated sparkle',
+    '  float flicker = sin(dot(p, vec3(13.7, 7.3, 11.1)) * 50.0 + t * 3.0) * 0.5 + 0.5;',
+    '  flicker *= sin(dot(p, vec3(5.3, 17.1, 3.7)) * 30.0 + t * 5.0) * 0.5 + 0.5;',
+    '  ',
+    '  return (spec * 3.0 + edginess * flicker * 0.8) * smoothstep(0.1, 0.3, edginess);',
+    '}',
+    '',
+    'void main() {',
+    '  vec2 origin = u_scale > 0.0 ? u_center : vec2(0.5);',
+    '  float sc = u_scale > 0.0 ? u_scale : 1.0;',
+    '  vec2 uv = (gl_FragCoord.xy - u_res * origin) / (min(u_res.x, u_res.y) * sc);',
+    '  float t = u_time;',
+    '  float slowT = t * 0.2;',
+    '  ',
+    '  // ── Camera: slowly orbiting the crystal cluster ──',
+    '  float camAngle = slowT * 0.3 + u_rotX;',
+    '  float camRadius = 5.5;',
+    '  float camHeight = clamp(1.0 + sin(slowT * 0.4) * 0.4 + u_rotY, -1.5, 4.0);',
+    '  vec3 ro = vec3(',
+    '    sin(camAngle) * camRadius,',
+    '    camHeight,',
+    '    cos(camAngle) * camRadius',
+    '  );',
+    '  vec3 target = vec3(0.0, -0.3, 0.0);',
+    '  ',
+    '  // Look-at camera matrix',
+    '  vec3 fwd = normalize(target - ro);',
+    '  vec3 right = normalize(cross(fwd, vec3(0, 1, 0)));',
+    '  vec3 up = cross(right, fwd);',
+    '  vec3 rd = normalize(fwd * 1.1 + right * uv.x + up * uv.y);',
+    '  ',
+    '  // ── Lights ──',
+    '  vec3 light1Dir = normalize(vec3(0.8, 1.2, 0.6));',
+    '  vec3 light1Col = vec3(1.0, 0.92, 0.8) * 1.5;',
+    '  vec3 light2Dir = normalize(vec3(-0.5, 0.3, -0.8));',
+    '  vec3 light2Col = vec3(0.6, 0.7, 1.0) * 0.6;',
+    '  vec3 light3Dir = normalize(vec3(0.0, -0.5, 1.0));',
+    '  vec3 light3Col = vec3(0.9, 0.75, 0.5) * 0.4;',
+    '  ',
+    '  // ── March ──',
+    '  float d = march(ro, rd, t);',
+    '  ',
+    '  // ── Background ──',
+    '  // Dramatic background with crystal glow',
+    '  vec3 col = vec3(0.025, 0.02, 0.028);',
+    '  // Warm radial glow centered on crystal cluster',
+    '  vec2 center = (vec2(0.5, 0.45) - 0.5) * 2.0;  // slightly above center',
+    '  float glowDist = length(uv - center * 0.1);',
+    '  col += vec3(0.12, 0.07, 0.04) * exp(-glowDist * 1.5);',
+    '  // Subtle color gradient top to bottom',
+    '  col += vec3(0.02, 0.015, 0.03) * (1.0 - uv.y);',
+    '  // Strong vignette',
+    '  float vig = 1.0 - dot(uv, uv) * 0.6;',
+    '  col *= vig;',
+    '  ',
+    '  if (d < MAX_DIST) {',
+    '    vec3 p = ro + rd * d;',
+    '    vec3 n = getNormal(p, t);',
+    '    ',
+    '    // ── Lighting ──',
+    '    float diff1 = max(dot(n, light1Dir), 0.0);',
+    '    float diff2 = max(dot(n, light2Dir), 0.0);',
+    '    float diff3 = max(dot(n, light3Dir), 0.0);',
+    '    ',
+    '    // Specular (high power for glassy facets)',
+    '    vec3 h1 = normalize(light1Dir - rd);',
+    '    vec3 h2 = normalize(light2Dir - rd);',
+    '    float spec1 = pow(max(dot(n, h1), 0.0), 90.0);',
+    '    float spec2 = pow(max(dot(n, h2), 0.0), 60.0);',
+    '    ',
+    '    // Fresnel for crystal transparency/reflection balance',
+    '    float fres = fresnel(rd, n, 1.55);',
+    '    ',
+    '    // Ambient occlusion',
+    '    float occ = ao(p, n, t);',
+    '    ',
+    '    // Quick shadow estimate',
+    '    float sha = smoothstep(0.0, 0.5, sceneSDF(p + light1Dir * 0.3, t));',
+    '    ',
+    '    {',
+    '      // ── Crystal material ──',
+    '      ',
+    '      // Base crystal color: warm amber with depth gradient',
+    '      float heightFade = smoothstep(-1.2, 1.5, p.y);',
+    '      vec3 crystalBase = mix(vec3(0.8, 0.35, 0.12), vec3(1.0, 0.55, 0.22), heightFade);',
+    '      crystalBase += noise(p * 6.0 + t * 0.1) * vec3(0.1, 0.05, -0.05);',
+    '      ',
+    '      // Internal refraction colors',
+    '      vec3 interior = internalColor(p, rd, n, t);',
+    '      interior *= u_refraction;',
+    '      ',
+    '      // Reflected environment (fake — sample noise as environment)',
+    '      vec3 refl = reflect(rd, n);',
+    '      float envNoise = noise(refl * 3.0 + t * 0.1);',
+    '      vec3 envColor = mix(',
+    '        vec3(0.2, 0.12, 0.06),',
+    '        vec3(0.5, 0.35, 0.18),',
+    '        envNoise',
+    '      );',
+    '      // Prismatic sheen on reflections (controlled by Prismatic slider)',
+    '      envColor += spectral(dot(refl, vec3(0.5, 1.0, 0.3)) * 0.5 + t * 0.05) * 0.3 * u_refraction;',
+    '      ',
+    '      // Combine: fresnel blend between refraction and reflection (clamped)',
+    '      vec3 crystalCol = mix(interior, envColor, fres * 0.5);',
+    '      ',
+    '      // Diffuse contribution (subsurface-like for translucent crystal)',
+    '      vec3 diffuse = crystalBase * (diff1 * light1Col * sha + diff2 * light2Col + diff3 * light3Col);',
+    '      ',
+    '      // Specular highlights — bright white-amber on facets',
+    '      vec3 specular = light1Col * spec1 * sha + light2Col * spec2;',
+    '      ',
+    '      // Facet sparkles — position-based flicker on specular highlights',
+    '      float sFlicker = sin(dot(p, vec3(13.7, 7.3, 11.1)) * 50.0 + t * 3.0) * 0.5 + 0.5;',
+    '      float sparkle = spec1 * sFlicker;',
+    '      vec3 sparkleCol = mix(vec3(1.0, 0.95, 0.85), spectral(dot(p, vec3(3.1, 7.3, 5.7)) + t * 0.3), 0.4);',
+    '      ',
+    '      // ── Growth striations — subtle lines along crystal faces ──',
+    '      float striation = sin(dot(p, n) * 80.0 + noise(p * 12.0) * 6.0) * 0.5 + 0.5;',
+    '      striation = smoothstep(0.3, 0.7, striation) * 0.15;',
+    '      crystalCol *= 1.0 + striation;',
+    '      ',
+    '      // ── Compose crystal appearance ──',
+    '      col = diffuse * 0.15 + crystalCol * 0.75 + specular * 0.7 + sparkleCol * sparkle * 0.5;',
+    '      col *= occ;',
+    '      ',
+    '      // ── Rim light — warm crystal edge glow ──',
+    '      float rim = pow(1.0 - max(dot(-rd, n), 0.0), 3.0);',
+    '      col += crystalBase * rim * 0.35;',
+    '      ',
+    '      // ── Prismatic edge shimmer — rainbow at facet boundaries ──',
+    '      float edgeShimmer = fres * pow(max(dot(n, light1Dir), 0.0), 0.5);',
+    '      vec3 prismEdge = spectral(dot(p, vec3(3.0, 5.0, 7.0)) * 0.4 + dot(n, rd) * 2.0 + t * 0.08);',
+    '      col += prismEdge * edgeShimmer * 0.35 * u_refraction;',
+    '      ',
+    '      // ── Prismatic caustics ──',
+    '      float caustic = pow(max(sin(dot(p, vec3(5.0, 3.0, 7.0)) * 4.0 + t * 1.5), 0.0), 8.0);',
+    '      col += spectral(dot(p, vec3(2.1, 5.3, 3.7)) * 0.5 + t * 0.1) * caustic * 0.12 * u_refraction;',
+    '      ',
+    '      // ── Translucency: backlight glow through crystal ──',
+    '      float backLight = pow(clamp(dot(rd, light1Dir), 0.0, 1.0), 2.0);',
+    '      col += crystalBase * backLight * 0.6;',
+    '      ',
+    '      // ── Subsurface scattering: wrap lighting for depth ──',
+    '      float wrap = max(dot(n, light1Dir) * 0.5 + 0.5, 0.0);',
+    '      col += crystalBase * wrap * 0.1 * (1.0 - heightFade);',
+    '    }',
+    '  }',
+    '  ',
+    '  // ── Floating dust / sparkle particles ──',
+    '  {',
+    '    for (int i = 0; i < 8; i++) {',
+    '      float fi = float(i);',
+    '      vec3 sparkPos = vec3(',
+    '        sin(fi * 2.37 + t * 0.15) * 2.0,',
+    '        sin(fi * 1.73 + t * 0.1) * 1.5 + 0.5,',
+    '        cos(fi * 3.11 + t * 0.12) * 2.0',
+    '      );',
+    '      float distToRay = length(cross(sparkPos - ro, rd));',
+    '      float depthAlongRay = dot(sparkPos - ro, rd);',
+    '      if (depthAlongRay > 0.0 && depthAlongRay < d) {',
+    '        float brightness = exp(-distToRay * 80.0) * 0.6;',
+    '        float flicker = sin(t * 3.0 + fi * 5.0) * 0.5 + 0.5;',
+    '        col += vec3(1.0, 0.9, 0.7) * brightness * flicker;',
+    '      }',
+    '    }',
+    '  }',
+    '  ',
+    '  // ── Tone mapping (ACES-ish) ──',
+    '  col = col * (2.51 * col + 0.03) / (col * (2.43 * col + 0.59) + 0.14);',
+    '  ',
+    '  // ── Slight warmth bias ──',
+    '  col = pow(col, vec3(0.94, 0.97, 1.04));',
+    '  ',
+    '  // ── Final gamma ──',
+    '  col = pow(col, vec3(1.0 / 2.2));',
+    '  ',
+    '  gl_FragColor = vec4(col, 1.0);',
+    '}'
+  ].join('\n');
+
+  function compile(type, src) {
+    var s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
+
+    }
+    return s;
+  }
+
+  var prog = gl.createProgram();
+  gl.attachShader(prog, compile(gl.VERTEX_SHADER, vertSrc));
+  gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, fragSrc));
+  gl.linkProgram(prog);
+  if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) {
+
+  }
+  gl.useProgram(prog);
+
+  var buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+  var aPos = gl.getAttribLocation(prog, 'a_pos');
+  gl.enableVertexAttribArray(aPos);
+  gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+
+  var uTime = gl.getUniformLocation(prog, 'u_time');
+  var uRes = gl.getUniformLocation(prog, 'u_res');
+  var uGrowthSpeed = gl.getUniformLocation(prog, 'u_growthSpeed');
+  var uRefraction = gl.getUniformLocation(prog, 'u_refraction');
+  var uRotX = gl.getUniformLocation(prog, 'u_rotX');
+  var uRotY = gl.getUniformLocation(prog, 'u_rotY');
+  var uCenter = gl.getUniformLocation(prog, 'u_center');
+  var uScale = gl.getUniformLocation(prog, 'u_scale');
+  var centerX = 0.0;
+  var centerY = 0.0;
+  var scaleVal = 0.0;
+
+  var growthSpeedVal = 1.0;
+  var refractionVal = 1.0;
+  var tiltXVal = 0.0;
+  var tiltYVal = 0.0;
+
+  var dpr = Math.min(window.devicePixelRatio || 1, 2) * pixelScale;
+  var needsResize = true;
+
+  function resize() {
+    needsResize = false;
+    var w = Math.round(canvas.clientWidth * dpr);
+    var h = Math.round(canvas.clientHeight * dpr);
+    if (canvas.width !== w || canvas.height !== h) {
+      canvas.width = w;
+      canvas.height = h;
+      gl.viewport(0, 0, w, h);
+      gl.uniform2f(uRes, canvas.width, canvas.height);
+    }
+  }
+
+  function render(now) {
+    if (needsResize) resize();
+    gl.uniform1f(uTime, prefersReduced ? 0.0 : now * 0.001);
+    gl.uniform1f(uGrowthSpeed, growthSpeedVal);
+    gl.uniform1f(uRefraction, refractionVal);
+    gl.uniform1f(uRotX, rotX + tiltXVal);
+    gl.uniform1f(uRotY, rotY + tiltYVal);
+    gl.uniform2f(uCenter, centerX, centerY);
+    gl.uniform1f(uScale, scaleVal);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+    requestAnimationFrame(render);
+  }
+
+  window.addEventListener('resize', function () {
+    needsResize = true;
+  });
+
+  resize();
+
+  requestAnimationFrame(render);
+
+  // ── Visibility pause ──
+  document.addEventListener('visibilitychange', function() {
+    if (!document.hidden) {
+      // handled by requestAnimationFrame naturally
+    }
+  });
+
+  // ── PostMessage listener for parameter updates ──
+  window.addEventListener('message', function(e) {
+    if (e.data && e.data.type === 'param') {
+      switch (e.data.name) {
+        case 'GROWTH_SPEED': growthSpeedVal = e.data.value; break;
+        case 'REFRACTION': refractionVal = e.data.value; break;
+        case 'TILT_X': tiltXVal = e.data.value; break;
+        case 'TILT_Y': tiltYVal = e.data.value; break;
+        case 'CENTER_X': centerX = e.data.value; break;
+        case 'CENTER_Y': centerY = e.data.value; break;
+        case 'SCALE': scaleVal = e.data.value; break;
+      }
+    }
+  });
+})();
+</script>
+</body>
+</html>

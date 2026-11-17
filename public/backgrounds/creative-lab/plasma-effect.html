@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>#036 Plasma Effect — creative-lab</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #000;
+      color: #e6edf3;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    canvas {
+      display: block;
+      width: 100vw;
+      height: 100vh;
+      position: fixed;
+      top: 0; left: 0;
+      cursor: crosshair;
+    }
+
+    #ui {
+      position: fixed;
+      top: 16px;
+      left: 16px;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 14px 16px;
+      min-width: 210px;
+    }
+
+    #ui h1 {
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #8b949e;
+      margin-bottom: 2px;
+    }
+
+    .row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+    }
+
+    .row label {
+      width: 80px;
+      color: #c9d1d9;
+      flex-shrink: 0;
+    }
+
+    .row input[type=range] {
+      flex: 1;
+      accent-color: #58a6ff;
+      cursor: pointer;
+    }
+
+    .row .val {
+      width: 30px;
+      text-align: right;
+      color: #8b949e;
+      font-size: 0.75rem;
+    }
+
+    .palette-row {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .palette-btn {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: border-color 0.15s, transform 0.15s;
+    }
+    .palette-btn:hover { transform: scale(1.18); }
+    .palette-btn.active { border-color: #fff; }
+
+    #fps {
+      font-size: 0.7rem;
+      color: #444;
+      text-align: right;
+    }
+
+  
+    html.embed #ui,
+    html.embed #info,
+    html.embed #controls,
+    html.embed #stats,
+    html.embed #hint,
+    html.embed .panel,
+    html.embed header,
+    html.embed footer { display: none !important; }
+  </style>
+  <script>if(/\bembed=1\b/.test(location.search))document.documentElement.classList.add("embed")</script>
+</head>
+<body>
+
+<canvas id="c"></canvas>
+
+<div id="ui">
+  <h1>036 · Plasma Effect</h1>
+
+  <div class="row">
+    <label>Speed</label>
+    <input type="range" id="speed" min="0.1" max="5" step="0.1" value="1.0">
+    <span class="val" id="speed-val">1.0</span>
+  </div>
+
+  <div class="row">
+    <label>Complexity</label>
+    <input type="range" id="complexity" min="1" max="8" step="0.5" value="3">
+    <span class="val" id="complexity-val">3.0</span>
+  </div>
+
+  <div class="row">
+    <label>Zoom</label>
+    <input type="range" id="zoom" min="0.5" max="6" step="0.1" value="2">
+    <span class="val" id="zoom-val">2.0</span>
+  </div>
+
+  <div class="row">
+    <label>Hue Shift</label>
+    <input type="range" id="hue" min="0" max="10" step="0.1" value="1">
+    <span class="val" id="hue-val">1.0</span>
+  </div>
+
+  <div class="row">
+    <label>Palette</label>
+    <div class="palette-row" id="palettes"></div>
+  </div>
+
+  <div id="fps">-- fps</div>
+</div>
+
+
+
+<script>
+// ─── WebGL setup ───────────────────────────────────────────────────────────────
+const canvas = document.getElementById('c');
+const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+
+if (!gl) {
+  document.body.innerHTML = '<p style="color:#fff;padding:40px">WebGL not supported.</p>';
+  throw new Error('no webgl');
+}
+
+// ─── Shaders ───────────────────────────────────────────────────────────────────
+const VS = `
+  attribute vec2 a_pos;
+  void main() {
+    gl_Position = vec4(a_pos, 0.0, 1.0);
+  }
+`;
+
+// Classic demoscene plasma with 6 sinusoidal layers, cycling color palette
+const FS = `
+  precision highp float;
+
+  uniform vec2  u_res;
+  uniform float u_time;
+  uniform float u_complexity;
+  uniform float u_zoom;
+  uniform float u_hue_speed;
+  uniform vec2  u_mouse;        // 0..1
+  uniform int   u_palette;
+
+  // ── utility ─────────────────────────────────────────────────────────────────
+  #define PI 3.141592653589793
+
+  vec3 hsv2rgb(vec3 c) {
+    vec4 K = vec4(1.0, 2.0/3.0, 1.0/3.0, 3.0);
+    vec3 p = abs(fract(c.xxx + K.xyz) * 6.0 - K.www);
+    return c.z * mix(K.xxx, clamp(p - K.xxx, 0.0, 1.0), c.y);
+  }
+
+  // ── colour palettes ─────────────────────────────────────────────────────────
+  // 0: rainbow classic
+  vec3 pal0(float t) {
+    return hsv2rgb(vec3(t, 0.9, 1.0));
+  }
+  // 1: fire
+  vec3 pal1(float t) {
+    t = fract(t);
+    vec3 a = vec3(0.5, 0.1, 0.0);
+    vec3 b = vec3(0.5, 0.3, 0.1);
+    vec3 c2 = vec3(1.0, 0.8, 0.4);
+    vec3 d = vec3(0.0, 0.25, 0.65);
+    return a + b * cos(2.0 * PI * (c2 * t + d));
+  }
+  // 2: acid/neon
+  vec3 pal2(float t) {
+    t = fract(t);
+    vec3 a = vec3(0.5);
+    vec3 b = vec3(0.5);
+    vec3 c2 = vec3(1.0, 0.7, 0.4);
+    vec3 d = vec3(0.0, 0.15, 0.20);
+    return a + b * cos(2.0 * PI * (c2 * t + d));
+  }
+  // 3: ocean
+  vec3 pal3(float t) {
+    t = fract(t);
+    vec3 a = vec3(0.1, 0.4, 0.6);
+    vec3 b = vec3(0.3, 0.3, 0.3);
+    vec3 c2 = vec3(0.6, 0.5, 0.4);
+    vec3 d = vec3(0.0, 0.2, 0.5);
+    return a + b * cos(2.0 * PI * (c2 * t + d));
+  }
+  // 4: lava lamp (purple/orange)
+  vec3 pal4(float t) {
+    t = fract(t);
+    vec3 a = vec3(0.5, 0.2, 0.5);
+    vec3 b = vec3(0.5, 0.3, 0.5);
+    vec3 c2 = vec3(0.8, 0.7, 1.0);
+    vec3 d = vec3(0.0, 0.3, 0.6);
+    return a + b * cos(2.0 * PI * (c2 * t + d));
+  }
+  // 5: matrix green
+  vec3 pal5(float t) {
+    t = fract(t);
+    float g = 0.5 + 0.5 * cos(2.0 * PI * t);
+    return vec3(0.0, g, g * 0.3);
+  }
+
+  vec3 applyPalette(int id, float t) {
+    if (id == 1) return pal1(t);
+    if (id == 2) return pal2(t);
+    if (id == 3) return pal3(t);
+    if (id == 4) return pal4(t);
+    if (id == 5) return pal5(t);
+    return pal0(t);
+  }
+
+  // ── main plasma ─────────────────────────────────────────────────────────────
+  void main() {
+    vec2 uv = (gl_FragCoord.xy / u_res) * 2.0 - 1.0;
+    uv.x *= u_res.x / u_res.y;          // aspect correct
+    uv *= u_zoom;
+
+    float t = u_time;
+    float cx = u_complexity;
+
+    // Mouse-driven distortion centre
+    vec2 mc = (u_mouse * 2.0 - 1.0);
+    mc.x *= u_res.x / u_res.y;
+    mc *= u_zoom;
+
+    float dist_m = length(uv - mc);
+
+    // Six overlapping sine waves — classic plasma recipe
+    float v = 0.0;
+    v += sin(uv.x * cx               + t);
+    v += sin(uv.y * cx * 0.7         + t * 1.3);
+    v += sin((uv.x + uv.y) * cx * 0.5 + t * 0.8);
+    v += sin(length(uv) * cx         - t * 1.1);
+    v += sin(length(uv - mc) * cx * 1.2 - t * 0.9);
+    v += sin((uv.x * uv.y) * cx * 0.3 + t * 0.6);
+    v /= 6.0;
+
+    // Normalise -1..1 → 0..1 and add hue cycling
+    float hue = v * 0.5 + 0.5 + t * u_hue_speed * 0.05;
+
+    vec3 col = applyPalette(u_palette, hue);
+
+    // Slight edge vignette
+    float vig = 1.0 - smoothstep(0.5, 1.4, length(uv / u_zoom));
+    col *= 0.6 + 0.4 * vig;
+
+    gl_FragColor = vec4(col, 1.0);
+  }
+`;
+
+function compile(type, src) {
+  const s = gl.createShader(type);
+  gl.shaderSource(s, src);
+  gl.compileShader(s);
+  if (!gl.getShaderParameter(s, gl.COMPILE_STATUS))
+    throw new Error(gl.getShaderInfoLog(s));
+  return s;
+}
+
+const prog = gl.createProgram();
+gl.attachShader(prog, compile(gl.VERTEX_SHADER, VS));
+gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, FS));
+gl.linkProgram(prog);
+if (!gl.getProgramParameter(prog, gl.LINK_STATUS))
+  throw new Error(gl.getProgramInfoLog(prog));
+gl.useProgram(prog);
+
+// Full-screen quad
+const buf = gl.createBuffer();
+gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+const aPos = gl.getAttribLocation(prog, 'a_pos');
+gl.enableVertexAttribArray(aPos);
+gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+
+// Uniform locations
+const uRes        = gl.getUniformLocation(prog, 'u_res');
+const uTime       = gl.getUniformLocation(prog, 'u_time');
+const uComplexity = gl.getUniformLocation(prog, 'u_complexity');
+const uZoom       = gl.getUniformLocation(prog, 'u_zoom');
+const uHueSpeed   = gl.getUniformLocation(prog, 'u_hue_speed');
+const uMouse      = gl.getUniformLocation(prog, 'u_mouse');
+const uPalette    = gl.getUniformLocation(prog, 'u_palette');
+
+// ─── State ─────────────────────────────────────────────────────────────────────
+const state = {
+  speed:      1.0,
+  complexity: 3.0,
+  zoom:       2.0,
+  hue:        1.0,
+  palette:    0,
+  mouse:      [0.5, 0.5],
+};
+
+let simTime = 0;
+let lastRaf = performance.now();
+let frameCount = 0, fpsTimer = 0;
+
+// ─── Resize ────────────────────────────────────────────────────────────────────
+function resize() {
+  canvas.width  = window.innerWidth  * window.devicePixelRatio | 0;
+  canvas.height = window.innerHeight * window.devicePixelRatio | 0;
+  gl.viewport(0, 0, canvas.width, canvas.height);
+}
+resize();
+window.addEventListener('resize', resize);
+
+// ─── Mouse ─────────────────────────────────────────────────────────────────────
+canvas.addEventListener('mousemove', e => {
+  state.mouse = [e.clientX / window.innerWidth, 1 - e.clientY / window.innerHeight];
+});
+canvas.addEventListener('touchmove', e => {
+  e.preventDefault();
+  const t = e.touches[0];
+  state.mouse = [t.clientX / window.innerWidth, 1 - t.clientY / window.innerHeight];
+}, { passive: false });
+
+// ─── Controls ──────────────────────────────────────────────────────────────────
+function bindSlider(id, key, fmt = v => v.toFixed(1)) {
+  const el  = document.getElementById(id);
+  const val = document.getElementById(id + '-val');
+  el.addEventListener('input', () => {
+    state[key] = parseFloat(el.value);
+    val.textContent = fmt(state[key]);
+  });
+}
+bindSlider('speed',      'speed');
+bindSlider('complexity', 'complexity');
+bindSlider('zoom',       'zoom');
+bindSlider('hue',        'hue');
+
+// ─── Palette buttons ───────────────────────────────────────────────────────────
+const PALETTES = [
+  { label: '🌈', bg: 'conic-gradient(red,yellow,lime,cyan,blue,magenta,red)' },
+  { label: '🔥', bg: 'linear-gradient(135deg,#ff6a00,#ee0979)' },
+  { label: '💚', bg: 'linear-gradient(135deg,#00ff88,#005500)' },  // acid
+  { label: '🌊', bg: 'linear-gradient(135deg,#0077b6,#00b4d8)' },
+  { label: '🪄', bg: 'linear-gradient(135deg,#c770cf,#ff8c00)' },
+  { label: '💻', bg: 'linear-gradient(135deg,#00ff41,#003b00)' },
+];
+
+const pRow = document.getElementById('palettes');
+PALETTES.forEach((p, i) => {
+  const btn = document.createElement('button');
+  btn.className = 'palette-btn' + (i === 0 ? ' active' : '');
+  btn.title = p.label;
+  btn.style.background = p.bg;
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.palette-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    state.palette = i;
+  });
+  pRow.appendChild(btn);
+});
+
+// ─── Render loop ───────────────────────────────────────────────────────────────
+function frame(now) {
+  requestAnimationFrame(frame);
+
+  const dt = (now - lastRaf) / 1000;
+  lastRaf = now;
+
+  // FPS counter
+  frameCount++;
+  fpsTimer += dt;
+  if (fpsTimer >= 0.5) {
+    document.getElementById('fps').textContent = Math.round(frameCount / fpsTimer) + ' fps';
+    frameCount = 0; fpsTimer = 0;
+  }
+
+  simTime += dt * state.speed;
+
+  gl.uniform2f(uRes, canvas.width, canvas.height);
+  gl.uniform1f(uTime, simTime);
+  gl.uniform1f(uComplexity, state.complexity);
+  gl.uniform1f(uZoom, state.zoom);
+  gl.uniform1f(uHueSpeed, state.hue);
+  gl.uniform2f(uMouse, state.mouse[0], state.mouse[1]);
+  gl.uniform1i(uPalette, state.palette);
+
+  gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+}
+
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>

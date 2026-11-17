@@ -212,7 +212,7 @@ export interface GlassCoinCarouselProps {
   speed?: number
   /** First glass tint (hex). Default aqua. */
   color1?: string
-  /** Second glass tint (hex). Default soft violet — pairs with `color1` for iridescence. */
+  /** Second glass tint (hex). Default soft violet, pairs with `color1` for iridescence. */
   color2?: string
   /** Maximum glass opacity. Default 0.88. */
   maxOpacity?: number

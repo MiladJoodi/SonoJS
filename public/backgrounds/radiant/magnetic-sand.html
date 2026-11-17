@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Magnetic Sand</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; overflow: hidden; background: #0a0a0a; }
+  canvas { display: block; width: 100vw; height: 100vh; }
+  .label {
+    position: fixed;
+    top: 20px;
+    left: 24px;
+    font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(200, 149, 108, 0.5);
+    z-index: 10;
+    pointer-events: none;
+    user-select: none;
+  }
+  html.embed .label { display: none; }
+</style>
+<script>if(/\bembed=1\b/.test(location.search))document.documentElement.classList.add("embed")</script>
+</head>
+<body>
+<div class="label">Magnetic Sand</div>
+<canvas id="canvas"></canvas>
+<script>
+(function() {
+  'use strict';
+
+  var canvas = document.getElementById('canvas');
+  var ctx = canvas.getContext('2d');
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ── Tunable params ──
+  var FIELD_STRENGTH = 1.0;
+  var PARTICLE_COUNT = 5000;
+
+  // ── postMessage param support ──
+  window.addEventListener('message', function(e) {
+    if (!e.data) return;
+    if (e.data.FIELD_STRENGTH !== undefined) FIELD_STRENGTH = Math.max(0.3, Math.min(2.0, +e.data.FIELD_STRENGTH));
+    if (e.data.PARTICLE_COUNT !== undefined) {
+      PARTICLE_COUNT = Math.floor(Math.max(1000, Math.min(5000, +e.data.PARTICLE_COUNT)));
+      initParticles();
+    }
+  });
+
+  // ── Mouse state ──
+  var mouseX = 0, mouseY = 0;
+  var mouseActive = false;
+  var mouseDown = false;
+  var mouseDipole = {
+    x: 0, y: 0, angle: 0, strength: 1.2,
+    rx: 0, ry: 0, freqX: 0, freqY: 0, phaseX: 0, phaseY: 0,
+    angleFreq: 0.4, anglePhase: 0
+  };
+
+  // ── Runtime state ──
+  var W = 0, H = 0, dpr = 1;
+  var particles = [];
+  var dipoles = [];
+  var paused = false;
+  var lastTime = 0;
+  var vignetteGrad = null;
+  var refR = 400; // reference radius (CSS px) for field normalization
+
+  // ── Resize ──
+  function resize() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = Math.round(window.innerWidth * dpr);
+    H = Math.round(window.innerHeight * dpr);
+    canvas.width = W;
+    canvas.height = H;
+    refR = Math.min(W, H) * 0.3; // reference radius scales with screen
+    vignetteGrad = null;
+    initDipoles();
+    for (var i = 0; i < particles.length; i++) {
+      if (particles[i].x < 0 || particles[i].x > W || particles[i].y < 0 || particles[i].y > H) {
+        particles[i].x = Math.random() * W;
+        particles[i].y = Math.random() * H;
+      }
+    }
+  }
+
+  // ── Dipole sources ──
+  function initDipoles() {
+    if (dipoles.length === 3) return;
+    dipoles = [];
+    for (var i = 0; i < 3; i++) {
+      dipoles.push({
+        x: W * 0.5,
+        y: H * 0.5,
+        angle: Math.random() * Math.PI * 2,
+        // Lissajous drift params (as fractions, multiplied by W/H in update)
+        rx: 0.15 + 0.12 * Math.random(),
+        ry: 0.15 + 0.12 * Math.random(),
+        freqX: 0.06 + 0.05 * Math.random(),
+        freqY: 0.04 + 0.05 * Math.random(),
+        phaseX: Math.random() * Math.PI * 2,
+        phaseY: Math.random() * Math.PI * 2,
+        angleFreq: 0.015 + 0.02 * Math.random(),
+        anglePhase: Math.random() * Math.PI * 2,
+        strength: 0.85 + 0.3 * Math.random()
+      });
+    }
+  }
+
+  function updateDipoles(t) {
+    var speedMul = prefersReduced ? 0.2 : 1.0;
+    var st = t * speedMul;
+    for (var i = 0; i < dipoles.length; i++) {
+      var d = dipoles[i];
+      var rxW = W * (d.rx + 0.04 * Math.sin(st * 0.013 + i * 2.1));
+      var ryH = H * (d.ry + 0.04 * Math.cos(st * 0.011 + i * 1.7));
+      d.x = W * 0.5 + rxW * Math.sin(st * d.freqX + d.phaseX);
+      d.y = H * 0.5 + ryH * Math.cos(st * d.freqY + d.phaseY);
+      d.angle = st * d.angleFreq + d.anglePhase;
+    }
+  }
+
+  // ── Particles ──
+  function mkParticle() {
+    return {
+      x: Math.random() * W,
+      y: Math.random() * H,
+      rotation: Math.random() * Math.PI * 2,
+      length: 5 + Math.random() * 5,
+      wobblePhase: Math.random() * Math.PI * 2,
+      wobbleSpeed: 0.5 + Math.random() * 1.5,
+      wobbleAmp: 0.03 + Math.random() * 0.05,
+      vx: 0,
+      vy: 0,
+      fieldStr: 0
+    };
+  }
+
+  function initParticles() {
+    particles = [];
+    for (var i = 0; i < PARTICLE_COUNT; i++) {
+      particles.push(mkParticle());
+    }
+  }
+
+  // ── Magnetic field calculation ──
+  // Aesthetic dipole field using softer 1/r falloff instead of physical 1/r^2
+  // This ensures particles far from dipoles still show field alignment
+  // The field direction uses proper dipole angular dependence for realistic lines
+  function getFieldAt(px, py, outField) {
+    var bx = 0, by = 0;
+    var closestR = 1e9;
+
+    // Include mouse dipole when active
+    var fieldDipoles = dipoles;
+    if (mouseActive) {
+      mouseDipole.x = mouseX * dpr;
+      mouseDipole.y = mouseY * dpr;
+      mouseDipole.strength = mouseDown ? 2.0 : 1.2;
+      fieldDipoles = dipoles.concat([mouseDipole]);
+    }
+
+    for (var i = 0; i < fieldDipoles.length; i++) {
+      var d = fieldDipoles[i];
+      var dx = px - d.x;
+      var dy = py - d.y;
+      var r2 = dx * dx + dy * dy;
+      var minDist = refR * 0.12;
+      var minR2 = minDist * minDist;
+      if (r2 < minR2) r2 = minR2;
+      var r = Math.sqrt(r2);
+
+      if (r < closestR) closestR = r;
+
+      // Unit vector from dipole to particle
+      var rx = dx / r;
+      var ry = dy / r;
+
+      // Dipole moment direction
+      var mx = Math.cos(d.angle);
+      var my = Math.sin(d.angle);
+
+      // Dipole angular factor: 2*(m.r_hat)*r_hat - m
+      var mdotr = mx * rx + my * ry;
+      var dirX = 2.0 * mdotr * rx - mx;
+      var dirY = 2.0 * mdotr * ry - my;
+
+      // Aesthetic falloff: blend 1/r and 1/r^2 for nice look at all distances
+      // Close: 1/r^2 dominates (strong alignment). Far: 1/r dominates (subtle alignment)
+      var invR = refR / r;            // 1 at refR distance
+      var falloff = 0.35 * invR * invR + 0.65 * invR;  // blended falloff
+
+      var s = d.strength * FIELD_STRENGTH * falloff;
+      bx += s * dirX;
+      by += s * dirY;
+    }
+
+    outField.x = bx;
+    outField.y = by;
+    outField.closestR = closestR;
+  }
+
+  // Reusable field object to avoid allocations
+  var _field = { x: 0, y: 0, closestR: 0 };
+
+  // ── Physics update ──
+  // Iron filings approach: particles mostly STAY in place and ROTATE to align.
+  // Very gentle drift along field lines + random Brownian diffusion keeps things organic.
+  function updateParticles(dt) {
+    var driftSpeed = (prefersReduced ? 0.04 : 0.15) * dpr;  // very gentle drift
+    var alignSpeed = prefersReduced ? 3.0 : 8.0;            // rotation is fast
+    var diffusion = (prefersReduced ? 0.10 : 0.30) * dpr;   // random jitter keeps distribution even
+
+    for (var i = 0; i < particles.length; i++) {
+      var p = particles[i];
+
+      getFieldAt(p.x, p.y, _field);
+      var bx = _field.x;
+      var by = _field.y;
+      var fmag = Math.sqrt(bx * bx + by * by);
+
+      // Normalized field strength for rendering (0 to 1)
+      p.fieldStr = Math.min(fmag * 1.2, 1.0);
+
+      if (fmag > 0.001) {
+        // Target rotation: align with field direction
+        var targetAngle = Math.atan2(by, bx);
+        var angleDiff = targetAngle - p.rotation;
+
+        // Normalize to [-PI, PI]
+        while (angleDiff > Math.PI) angleDiff -= Math.PI * 2;
+        while (angleDiff < -Math.PI) angleDiff += Math.PI * 2;
+
+        // Head/tail symmetry for line segments
+        if (angleDiff > Math.PI * 0.5) angleDiff -= Math.PI;
+        if (angleDiff < -Math.PI * 0.5) angleDiff += Math.PI;
+
+        p.rotation += angleDiff * alignSpeed * dt;
+
+        // Very gentle drift along field line direction
+        var normFx = bx / fmag;
+        var normFy = by / fmag;
+
+        // Slow organic wobble
+        p.wobblePhase += p.wobbleSpeed * dt;
+        var wobble = Math.sin(p.wobblePhase) * p.wobbleAmp;
+        var perpX = -normFy;
+        var perpY = normFx;
+
+        // Drift scales with field strength but stays very subtle
+        var speedFactor = Math.min(p.fieldStr * 1.2, 0.8);
+        var moveSpeed = driftSpeed * speedFactor;
+        p.vx = p.vx * 0.85 + (normFx * moveSpeed + perpX * wobble * moveSpeed * 0.5) * 0.15;
+        p.vy = p.vy * 0.85 + (normFy * moveSpeed + perpY * wobble * moveSpeed * 0.5) * 0.15;
+      } else {
+        p.vx *= 0.92;
+        p.vy *= 0.92;
+        p.wobblePhase += p.wobbleSpeed * dt;
+      }
+
+      // Brownian diffusion: keeps particles spread across the canvas
+      p.vx += (Math.random() - 0.5) * diffusion * dt * 60;
+      p.vy += (Math.random() - 0.5) * diffusion * dt * 60;
+
+      // Damping
+      p.vx *= 0.96;
+      p.vy *= 0.96;
+
+      p.x += p.vx * dt * 60;
+      p.y += p.vy * dt * 60;
+
+      // Wrap edges
+      var margin = 30 * dpr;
+      if (p.x < -margin) p.x += W + margin * 2;
+      if (p.x > W + margin) p.x -= W + margin * 2;
+      if (p.y < -margin) p.y += H + margin * 2;
+      if (p.y > H + margin) p.y -= H + margin * 2;
+    }
+  }
+
+  // ── Rendering ──
+  function drawGlow() {
+    ctx.save();
+    ctx.globalCompositeOperation = 'lighter';
+    var glowDipoles = mouseActive ? dipoles.concat([mouseDipole]) : dipoles;
+    for (var i = 0; i < glowDipoles.length; i++) {
+      var d = glowDipoles[i];
+      var radius = refR * 2.5 * d.strength * FIELD_STRENGTH;
+      var grad = ctx.createRadialGradient(d.x, d.y, 0, d.x, d.y, radius);
+      grad.addColorStop(0,    'rgba(220, 170, 90, 0.28)');
+      grad.addColorStop(0.10, 'rgba(200, 150, 70, 0.18)');
+      grad.addColorStop(0.30, 'rgba(170, 120, 60, 0.09)');
+      grad.addColorStop(0.55, 'rgba(130, 90, 45, 0.04)');
+      grad.addColorStop(0.80, 'rgba(90, 60, 30, 0.015)');
+      grad.addColorStop(1,    'rgba(60, 35, 15, 0)');
+      ctx.fillStyle = grad;
+      ctx.fillRect(d.x - radius, d.y - radius, radius * 2, radius * 2);
+    }
+    ctx.restore();
+  }
+
+  function drawParticles() {
+    // Bucket particles by field strength for batched rendering
+    var b0 = [], b1 = [], b2 = [], b3 = [], b4 = [];
+    for (var i = 0; i < particles.length; i++) {
+      var p = particles[i];
+      var s = p.fieldStr;
+      if (s > 0.50) b4.push(p);
+      else if (s > 0.30) b3.push(p);
+      else if (s > 0.15) b2.push(p);
+      else if (s > 0.05) b1.push(p);
+      else b0.push(p);
+    }
+
+    var buckets = [b0, b1, b2, b3, b4];
+
+    // Colors per bucket — warm amber/gold palette
+    var colors = [
+      'rgba(120, 85, 50, 0.50)',       // dim base — clearly visible
+      'rgba(160, 115, 68, 0.65)',      // warm brown
+      'rgba(200, 150, 90, 0.80)',      // medium amber
+      'rgba(235, 185, 115, 0.92)',     // bright gold
+      'rgba(255, 215, 140, 1.0)'       // hot gold — full opacity
+    ];
+    var widths = [1.5, 1.8, 2.1, 2.5, 3.0];
+
+    for (var b = 0; b < 5; b++) {
+      var list = buckets[b];
+      if (list.length === 0) continue;
+
+      ctx.strokeStyle = colors[b];
+      ctx.lineWidth = widths[b] * dpr * 0.5;
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+
+      for (var j = 0; j < list.length; j++) {
+        var p = list[j];
+        var halfLen = p.length * dpr * 0.5;
+        var cos = Math.cos(p.rotation);
+        var sin = Math.sin(p.rotation);
+        ctx.moveTo(p.x - cos * halfLen, p.y - sin * halfLen);
+        ctx.lineTo(p.x + cos * halfLen, p.y + sin * halfLen);
+      }
+      ctx.stroke();
+    }
+
+    // Additive glow for the two brightest buckets
+    ctx.save();
+    ctx.globalCompositeOperation = 'lighter';
+    for (var g = 3; g <= 4; g++) {
+      var gList = buckets[g];
+      if (gList.length === 0) continue;
+      ctx.strokeStyle = g === 4
+        ? 'rgba(255, 225, 170, 0.35)'
+        : 'rgba(230, 185, 125, 0.18)';
+      ctx.lineWidth = (g === 4 ? 7 : 5) * dpr * 0.5;
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+      for (var k = 0; k < gList.length; k++) {
+        var gp = gList[k];
+        var gLen = gp.length * dpr * 0.5;
+        var gc = Math.cos(gp.rotation);
+        var gs = Math.sin(gp.rotation);
+        ctx.moveTo(gp.x - gc * gLen, gp.y - gs * gLen);
+        ctx.lineTo(gp.x + gc * gLen, gp.y + gs * gLen);
+      }
+      ctx.stroke();
+    }
+    ctx.restore();
+  }
+
+  function drawVignette() {
+    if (!vignetteGrad) {
+      var cx = W * 0.5;
+      var cy = H * 0.5;
+      var r = Math.sqrt(cx * cx + cy * cy);
+      vignetteGrad = ctx.createRadialGradient(cx, cy, r * 0.35, cx, cy, r);
+      vignetteGrad.addColorStop(0, 'rgba(0, 0, 0, 0)');
+      vignetteGrad.addColorStop(0.6, 'rgba(0, 0, 0, 0.08)');
+      vignetteGrad.addColorStop(1, 'rgba(0, 0, 0, 0.40)');
+    }
+    ctx.fillStyle = vignetteGrad;
+    ctx.fillRect(0, 0, W, H);
+  }
+
+  // ── Main loop ──
+  function frame(now) {
+    if (paused) {
+      lastTime = 0;
+      requestAnimationFrame(frame);
+      return;
+    }
+
+    if (!lastTime) lastTime = now;
+    var dt = Math.min((now - lastTime) / 1000, 0.05);
+    lastTime = now;
+
+    updateDipoles(now / 1000);
+    mouseDipole.angle = now * 0.001 * mouseDipole.angleFreq;
+    updateParticles(dt);
+
+    // ── Draw ──
+    ctx.fillStyle = '#0a0a0a';
+    ctx.fillRect(0, 0, W, H);
+
+    drawGlow();
+    drawParticles();
+    drawVignette();
+
+    requestAnimationFrame(frame);
+  }
+
+  // ── Visibility handling ──
+  document.addEventListener('visibilitychange', function() {
+    paused = document.hidden;
+    if (!paused) lastTime = 0;
+  });
+
+  // ── Mouse events ──
+  canvas.addEventListener('mousemove', function(e) { mouseX = e.clientX; mouseY = e.clientY; mouseActive = true; });
+  canvas.addEventListener('mouseleave', function() { mouseActive = false; });
+  canvas.addEventListener('mousedown', function(e) { mouseDown = true; mouseX = e.clientX; mouseY = e.clientY; mouseActive = true; });
+  canvas.addEventListener('mouseup', function() { mouseDown = false; });
+  canvas.addEventListener('touchstart', function(e) { e.preventDefault(); mouseDown = true; mouseActive = true; mouseX = e.touches[0].clientX; mouseY = e.touches[0].clientY; }, { passive: false });
+  canvas.addEventListener('touchmove', function(e) { e.preventDefault(); mouseX = e.touches[0].clientX; mouseY = e.touches[0].clientY; }, { passive: false });
+  canvas.addEventListener('touchend', function() { mouseDown = false; mouseActive = false; });
+
+  // ── Init ──
+  window.addEventListener('resize', resize);
+  resize();
+  initParticles();
+  requestAnimationFrame(frame);
+
+})();
+</script>
+</body>
+</html>

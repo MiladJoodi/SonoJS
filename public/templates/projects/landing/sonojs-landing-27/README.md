@@ -23,7 +23,7 @@ Deep-field planetary survey marketing landing. Demo brand: **AETHER**.
 
 ## Run locally
 
-Do not open `index.html` via `file://` — scripts and assets need a static server.
+Do not open `index.html` via `file://`, scripts and assets need a static server.
 
 ```bash
 npx --yes serve .

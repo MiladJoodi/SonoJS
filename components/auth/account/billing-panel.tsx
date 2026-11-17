@@ -190,7 +190,7 @@ export function BillingPanel({
         <CardHeader className="border-b border-border/50 py-6">
           <CardTitle>Subscription</CardTitle>
           <CardDescription>
-            Pro is sold as a fixed period. It does not auto-renew—buy again from
+            Pro is sold as a fixed period. It does not auto-renew, buy again from
             Pricing when access ends.
           </CardDescription>
         </CardHeader>
@@ -223,7 +223,7 @@ export function BillingPanel({
             </div>
           ) : (
             <p className="text-sm text-muted-foreground">
-              You are on Free. Upgrade anytime for a fixed Pro period—no
+              You are on Free. Upgrade anytime for a fixed Pro period, no
               automatic renewal charges.
             </p>
           )}
