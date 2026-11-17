@@ -12580,6 +12580,69 @@ export const templateProjects: TemplateProject[] = [
       "Static file host (not file://)",
     ],
   },
+  {
+    slug: "sonojs-website-50",
+    title: "CRAV",
+    tagline:
+      "Artisan smashed burgers — menu, cart, checkout, and locations demo.",
+    description:
+      "CRAV is a multi-page premium smashed-burger restaurant website template by SonoJS (demo brand: CRAV). Zero-build static HTML/CSS/vanilla JS with a cinematic home hero, local Tailwind + Iconify + GSAP/Swiper, and English UI. Full menu with search, category and dietary filters, and sort; product detail with prefs/qty; cart (localStorage) and checkout (pickup/delivery + slots) into order-success; locations with Order here; about, ingredients, careers, FAQ, contact, privacy/terms, 404. Demo only — no real payments. Host statically (e.g. Cloudflare Workers); run with npx serve . from project root (not file://).",
+    category: "website",
+    websiteVertical: "restaurant",
+    stack: ["html", "css", "javascript", "tailwind"],
+    priceLabel: "$29",
+    priceCents: 2900,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 18,
+    accent: "18",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "landing",
+    coverImage: "/templates/projects/website/sonojs-website-50/main.webp",
+    coverImageDark: null,
+    coverVideo: "/templates/projects/website/sonojs-website-50/cover.mp4",
+    detailCoverImage:
+      "/templates/projects/website/sonojs-website-50/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-website-50.sonojs2.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-17",
+    firstReleasedAt: "2026-11-17",
+    screens: 17,
+    runCommand: "npx serve .",
+    highlights: [
+      {
+        title: "Order flow demo",
+        body: "Menu Add → item prefs → cart qty → pickup/delivery checkout → success.",
+      },
+      {
+        title: "Restaurant site map",
+        body: "Locations, about, ingredients, careers, FAQ, contact, and legal pages.",
+      },
+      {
+        title: "Cinematic home",
+        body: "Hero, featured smashs, gallery, and GSAP motion with local vendors.",
+      },
+      {
+        title: "Zero-build static",
+        body: "17 HTML pages — local Tailwind/fonts/GSAP/Swiper; npx serve .",
+      },
+    ],
+    includes: [
+      "17 HTML pages (home, menu, item, cart, checkout, locations…)",
+      "css theme/base/components/pages + self-hosted fonts",
+      "JS cart/core/data/pages + local GSAP, Swiper, Tailwind, Iconify",
+      "img food/interior pack + README + serve.json",
+    ],
+    requirements: [
+      "Modern browser",
+      "Static file host (`npx serve .` — not file://)",
+    ],
+  },
 ]
 
 export function getTemplateProject(
