@@ -12331,6 +12331,68 @@ export const templateProjects: TemplateProject[] = [
       "Static file host (not file://)",
     ],
   },
+  {
+    slug: "sonojs-website-46",
+    title: "Aurum Orbit",
+    tagline:
+      "Prop funded challenges — cinematic WebGL home plus trader portal demo.",
+    description:
+      "Aurum Orbit is a multi-page premium prop / funded-trading website template by SonoJS (demo brand: Aurum Orbit). Zero-build static HTML/CSS/vanilla JS with a cinematic WebGL home hero, gold/ink visual system, and local fonts. Marketing for challenge, pricing calculator, rules, payouts, scaling, reviews, FAQ, about, affiliates, careers, contact, and blog; auth + checkout demo; trader portal (dashboard, challenge status, Chart.js stats, positions, payouts, certificates, settings, help); legal and utility pages. Demo only — localStorage entitlements, no live brokerage. Host statically (e.g. Cloudflare Workers); serve from project root (WebGL required for home).",
+    category: "website",
+    websiteVertical: "fintech",
+    stack: ["html", "css", "javascript"],
+    priceLabel: "$39",
+    priceCents: 3900,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 42,
+    accent: "42",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "landing",
+    coverImage: "/templates/projects/website/sonojs-website-46/main.webp",
+    coverImageDark: null,
+    coverVideo: "/templates/projects/website/sonojs-website-46/cover.mp4",
+    detailCoverImage:
+      "/templates/projects/website/sonojs-website-46/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-website-46.sonojs2.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-17",
+    firstReleasedAt: "2026-11-17",
+    screens: 45,
+    highlights: [
+      {
+        title: "Cinematic WebGL home",
+        body: "Gold/ink funded-desk hero with challenge story sections.",
+      },
+      {
+        title: "Challenge commerce demo",
+        body: "Pricing calculator, checkout, and entitlement unlock into the portal.",
+      },
+      {
+        title: "Trader portal",
+        body: "Dashboard rings, stats charts, positions, payouts, and certificates.",
+      },
+      {
+        title: "Zero-build static",
+        body: "45 HTML pages — local GSAP/Chart.js/Three experience, fonts, images.",
+      },
+    ],
+    includes: [
+      "45 HTML pages (home, marketing, auth, checkout, app, legal…)",
+      "CSS tokens · chrome · kit · portal · cinematic home",
+      "JS — mock data, auth/commerce, page modules, local vendors",
+      "Local fonts and imagery",
+    ],
+    requirements: [
+      "Modern browser (WebGL for home hero)",
+      "Static file host (not file://)",
+    ],
+  },
 ]
 
 export function getTemplateProject(
