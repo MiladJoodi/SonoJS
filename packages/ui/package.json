@@ -1,6 +1,6 @@
 {
   "name": "@sonojs/ui",
-  "version": "1.0.9",
+  "version": "1.0.11",
   "description": "SonoJS - design system + CLI (copy-source add)",
   "license": "MIT",
   "type": "module",
@@ -133,6 +133,10 @@
     "./components/wheel-picker/*": "./src/components/wheel-picker/*",
     "./components/rich-text-editor": "./src/components/rich-text-editor/index.ts",
     "./components/rich-text-editor/*": "./src/components/rich-text-editor/*",
+    "./components/tags-input": "./src/components/tags-input/index.ts",
+    "./components/tags-input/*": "./src/components/tags-input/*",
+    "./components/currency-input": "./src/components/currency-input/index.ts",
+    "./components/currency-input/*": "./src/components/currency-input/*",
     "./components/*": "./src/components/*.tsx",
     "./hooks/*": "./src/hooks/*",
     "./hooks/use-direction": "./src/hooks/use-direction.tsx",

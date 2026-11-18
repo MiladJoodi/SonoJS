@@ -193,9 +193,9 @@ export function ComponentVariantPreview({
             : "overflow-hidden rounded-[12px]"
         )}
       >
-        {/* Same toolbar chrome as BlockExample (no CLI / no viewport). */}
-        <div className="flex flex-col gap-2 rounded-t-[12px] border-b border-border/80 bg-card px-3 py-2 sm:flex-row sm:items-center sm:justify-between sm:gap-3">
-          <div className="flex min-w-0 flex-wrap items-center gap-1">
+        {/* Tabs first (wrap); controls row below — same on mobile + desktop. */}
+        <div className="flex flex-col gap-2 rounded-t-[12px] border-b border-border/80 bg-card px-3 py-2">
+          <div className="flex flex-wrap items-center gap-1">
             {examples.map((item) => (
               <button
                 key={item.name}
@@ -214,7 +214,7 @@ export function ComponentVariantPreview({
             ))}
           </div>
 
-          <div className="flex shrink-0 flex-wrap items-center gap-1.5">
+          <div className="flex shrink-0 flex-nowrap items-center justify-end gap-1.5">
             {process.env.NODE_ENV === "development" &&
             effectiveView === "preview" ? (
               <DevPreviewCaptureButton

@@ -43,6 +43,16 @@ export const componentsNav: {
       title: COMPONENTS_FEATURED_GROUP,
       pages: [
         {
+          title: "Currency Input",
+          href: "/docs/components/currency-input",
+          badge: "new",
+        },
+        {
+          title: "Tags Input",
+          href: "/docs/components/tags-input",
+          badge: "new",
+        },
+        {
           title: "Rich Text Editor",
           href: "/docs/components/rich-text-editor",
           badge: "new",
@@ -120,6 +130,12 @@ export const componentsNav: {
           featured: true,
         },
         {
+          title: "Currency Input",
+          href: "/docs/components/currency-input",
+          featured: true,
+          badge: "new",
+        },
+        {
           title: "Date Picker",
           href: "/docs/components/date-picker",
           featured: true,
@@ -155,6 +171,12 @@ export const componentsNav: {
         { title: "Select", href: "/docs/components/select", featured: true },
         { title: "Slider", href: "/docs/components/slider" },
         { title: "Switch", href: "/docs/components/switch", featured: true },
+        {
+          title: "Tags Input",
+          href: "/docs/components/tags-input",
+          featured: true,
+          badge: "new",
+        },
         { title: "Textarea", href: "/docs/components/textarea" },
         {
           title: "Rich Text Editor",

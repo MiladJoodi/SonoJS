@@ -38,6 +38,8 @@ export const COMPONENT_META_DESCRIPTIONS: Record<string, string> = {
     "Show or hide secondary content without leaving the page, progressive disclosure for dense layouts.",
   combobox:
     "Searchable select for long option lists, typeahead, keyboard navigation, and clear empty states.",
+  "currency-input":
+    "Money field with Intl formatting, currency addon, locale separators, min/max, and mobile decimal input.",
   command:
     "Command palette patterns for quick actions and navigation, fuzzy find across your app.",
   "context-menu":
@@ -140,6 +142,8 @@ export const COMPONENT_META_DESCRIPTIONS: Record<string, string> = {
     "Semantic HTML tables with header, body, and caption styles for dense data.",
   tabs:
     "Tabbed panels to switch views without routing, underline and boxed variants.",
+  "tags-input":
+    "Inline chip input for tags and @mentions — creatable, searchable suggestions, avatars, and LTR/RTL.",
   textarea:
     "Multi-line text input for comments and prompts, resize behavior that fits forms.",
   timeline:

@@ -13838,6 +13838,130 @@ export const templateProjects: TemplateProject[] = [
       "Static file host (`npx serve .`)",
     ],
   },
+  {
+    slug: "sonojs-website-69",
+    title: "CULTURA Education",
+    tagline:
+      "Cultural exchange institute with programs, admissions theater, and student dashboard.",
+    description:
+      "CULTURA Education is a multi-page premium cultural education website template by SonoJS (demo brand: CULTURA Education). Zero-build static HTML/CSS/vanilla JS with deep green and gold campus craft, self-hosted Fraunces + Manrope, and local assets. Marketing for programs, curriculum topics, faculty, gallery, events, tuition, blog, FAQ, contact, careers, privacy/terms, 404. Interactive demos: admissions application theater (CULTURA10), sign-in (student / cultura2026), and student dashboard (courses, schedule, assignments, grades, messages, resources, profile). Demo only. Fiction institute. No live payments. localStorage theater. Host statically (e.g. Cloudflare Workers); run with npx serve . from the project root.",
+    category: "website",
+    websiteVertical: "education",
+    stack: ["html", "css", "javascript"],
+    priceLabel: "$39",
+    priceCents: 3900,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 150,
+    accent: "150",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "landing",
+    coverImage: "/websites/projects/sonojs-website-69/main.webp",
+    coverImageDark: null,
+    coverVideo: "/websites/projects/sonojs-website-69/cover.mp4",
+    detailCoverImage:
+      "/websites/projects/sonojs-website-69/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-website-69.winbeta-info.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-19",
+    firstReleasedAt: "2026-11-19",
+    screens: 36,
+    runCommand: "npx serve .",
+    highlights: [
+      {
+        title: "Admissions theater",
+        body: "Application form saves CULTURA10 confirmation codes in localStorage.",
+      },
+      {
+        title: "Student dashboard",
+        body: "Sign in demo unlocks courses, schedule, grades, messages, and profile.",
+      },
+      {
+        title: "Institute marketing",
+        body: "Programs, curriculum topics, faculty, gallery, tuition, and journal.",
+      },
+      {
+        title: "Zero-build static",
+        body: "36 HTML pages, local Fraunces + Manrope; run with npx serve .",
+      },
+    ],
+    includes: [
+      "36 HTML pages (home, programs, admissions, dashboard, blog, legal…)",
+      "css fonts - main; js main - dashboard",
+      "assets/images JPG pack + fonts + flags + favicon + README",
+    ],
+    requirements: [
+      "Modern browser",
+      "Static file host (`npx serve .`)",
+    ],
+  },
+  {
+    slug: "sonojs-website-70",
+    title: "ZeroToProd",
+    tagline:
+      "AI builder academy with roadmaps, prompt library, workflows, and checkout theater.",
+    description:
+      "ZeroToProd is a multi-page premium AI builder learning website template by SonoJS (demo brand: ZeroToProd). Zero-build static HTML/CSS/vanilla JS with neo-brutalist lime and ink craft, self-hosted Bricolage Grotesque + JetBrains Mono, and local assets. Marketing for roadmaps, lessons, prompts, workflows, templates, tools, stories, blog, pricing, FAQ, contact, privacy/terms, 404. Interactive demos: prompt library favorites, roadmap/lesson progress, pricing toggle, checkout promo SHIPFAST10, and auth portal (demo@zerotoprod.dev / shipfast). Demo only. Fiction learning platform. No live payments. No live AI API. localStorage theater. Host statically (e.g. Cloudflare Workers); run with npx serve . from the project root.",
+    category: "website",
+    websiteVertical: "education",
+    stack: ["html", "css", "javascript"],
+    priceLabel: "$29",
+    priceCents: 2900,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 72,
+    accent: "72",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "landing",
+    coverImage: "/websites/projects/sonojs-website-70/main.webp",
+    coverImageDark: null,
+    coverVideo: "/websites/projects/sonojs-website-70/cover.mp4",
+    detailCoverImage:
+      "/websites/projects/sonojs-website-70/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-website-70.winbeta-info.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-19",
+    firstReleasedAt: "2026-11-19",
+    screens: 30,
+    runCommand: "npx serve .",
+    highlights: [
+      {
+        title: "Prompt library",
+        body: "Search, tag filters, copy, and favorites stored in localStorage.",
+      },
+      {
+        title: "Roadmaps + lessons",
+        body: "Guided paths with checklist progress theater in the browser.",
+      },
+      {
+        title: "Checkout + portal",
+        body: "SHIPFAST10 pricing theater plus login, dashboard, and account demos.",
+      },
+      {
+        title: "Zero-build static",
+        body: "30 HTML pages, local Bricolage + JetBrains Mono; run with npx serve .",
+      },
+    ],
+    includes: [
+      "30 HTML pages (home, roadmaps, prompts, workflows, checkout, dashboard, legal…)",
+      "assets/css tokens - chrome - pages; assets/js chrome - prompts - progress - auth",
+      "assets/img pack + fonts + icons + serve.json + README",
+    ],
+    requirements: [
+      "Modern browser",
+      "Static file host (`npx serve .`)",
+    ],
+  },
 ]
 
 export function getTemplateProject(

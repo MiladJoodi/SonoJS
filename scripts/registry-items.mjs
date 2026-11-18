@@ -3419,6 +3419,32 @@ const registryItemsRaw = [
     ],
   },
   {
+    name: "currency-input",
+    type: "registry:ui",
+    title: "Currency Input",
+    description:
+      "Money field with Intl formatting, currency addon, locale separators, min/max, and LTR amount typing.",
+    dependencies: ["clsx", "tailwind-merge"],
+    registryDependencies: ["input-group"],
+    files: [
+      {
+        path: "packages/ui/src/components/currency-input/index.ts",
+        type: "registry:ui",
+        target: "components/currency-input/index.ts",
+      },
+      {
+        path: "packages/ui/src/components/currency-input/currency-input.tsx",
+        type: "registry:ui",
+        target: "components/currency-input/currency-input.tsx",
+      },
+      {
+        path: "packages/ui/src/components/currency-input/lib.ts",
+        type: "registry:ui",
+        target: "components/currency-input/lib.ts",
+      },
+    ],
+  },
+  {
     name: "phone-input",
     type: "registry:ui",
     title: "Phone Input",
@@ -3690,6 +3716,32 @@ const registryItemsRaw = [
         path: "packages/ui/src/components/multi-select/multi-select.tsx",
         type: "registry:ui",
         target: "components/multi-select/multi-select.tsx",
+      },
+    ],
+  },
+  {
+    name: "tags-input",
+    type: "registry:ui",
+    title: "Tags Input",
+    description:
+      "Inline chip input for tags and @mentions — creatable, searchable suggestions, avatars, LTR/RTL.",
+    dependencies: ["lucide-react", "clsx", "tailwind-merge"],
+    registryDependencies: [
+      "avatar",
+      "badge",
+      "command",
+      "popover",
+    ],
+    files: [
+      {
+        path: "packages/ui/src/components/tags-input/index.ts",
+        type: "registry:ui",
+        target: "components/tags-input/index.ts",
+      },
+      {
+        path: "packages/ui/src/components/tags-input/tags-input.tsx",
+        type: "registry:ui",
+        target: "components/tags-input/tags-input.tsx",
       },
     ],
   },

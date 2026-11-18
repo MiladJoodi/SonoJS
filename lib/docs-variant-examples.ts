@@ -109,6 +109,8 @@ const EXAMPLE_FOLDERS = [
   "todo-list",
   "textarea",
   "rich-text-editor",
+  "tags-input",
+  "currency-input",
   "toggle-group",
   "toggle",
   "tooltip",
