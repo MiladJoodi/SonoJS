@@ -24,7 +24,7 @@ export default function ComponentsIndexPage() {
         <h1 className="text-h1">Components</h1>
         <p className="leading-relaxed text-muted-foreground">
           Copy-source UI primitives and AI building blocks. Browse by category;
-          open a card for docs, install, and examples.
+          open a name for docs, install, and examples.
         </p>
       </header>
       <ComponentsDirectory groups={groups} />

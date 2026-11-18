@@ -13,6 +13,41 @@ export type SiteNavItem = {
   href: string
   label: string
   external?: boolean
+  /** Short line for rich header dropdowns. */
+  description?: string
+}
+
+/** Optional labeled cluster inside a header dropdown. */
+export type SiteNavSection = {
+  title?: string
+  items: SiteNavItem[]
+}
+
+/** Top-level link or a dropdown (Products / More). */
+export type SiteNavEntry =
+  | SiteNavItem
+  | {
+      label: string
+      sections: SiteNavSection[]
+    }
+
+export function isSiteNavDropdown(
+  entry: SiteNavEntry
+): entry is Extract<SiteNavEntry, { sections: SiteNavSection[] }> {
+  return "sections" in entry
+}
+
+/** Flat links for mobile More sheet / active-path helpers. */
+export function flattenSiteNavEntries(entries: SiteNavEntry[]): SiteNavItem[] {
+  const out: SiteNavItem[] = []
+  for (const entry of entries) {
+    if (isSiteNavDropdown(entry)) {
+      for (const section of entry.sections) out.push(...section.items)
+    } else {
+      out.push(entry)
+    }
+  }
+  return out
 }
 
 export const siteConfig = {
@@ -69,19 +104,75 @@ Ask before changing MCP config outside this project.`,
   githubRepo: "MiladJoodi/SonoJS",
   navItems: [
     { href: "/docs", label: "Docs" },
-    { href: "/docs/mcp", label: "MCP" },
     { href: "/docs/components", label: "Components" },
     { href: "/blocks", label: "Blocks" },
     { href: "/charts", label: "Charts" },
-    { href: "/cursors", label: "Cursors" },
-    { href: "/backgrounds", label: "Backgrounds" },
-    { href: "/3d", label: "3D" },
-    { href: "/ai", label: "AI" },
-    { href: "/carousels", label: "Carousels" },
-    { href: "/templates", label: "Templates" },
-    { href: "/websites", label: "Websites" },
+    {
+      label: "Products",
+      sections: [
+        {
+          items: [
+            {
+              href: "/templates",
+              label: "Templates",
+              description: "Product UI kits ready to ship.",
+            },
+            {
+              href: "/websites",
+              label: "Websites",
+              description: "Full marketing sites, ready to launch.",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      label: "More",
+      sections: [
+        {
+          title: "Library",
+          items: [
+            {
+              href: "/ai",
+              label: "AI",
+              description: "Chat and agent UI blocks.",
+            },
+            {
+              href: "/cursors",
+              label: "Cursors",
+              description: "Pointer effects and trails.",
+            },
+            {
+              href: "/backgrounds",
+              label: "Backgrounds",
+              description: "Animated HTML scenes.",
+            },
+            {
+              href: "/3d",
+              label: "3D",
+              description: "Installable WebGL scenes.",
+            },
+            {
+              href: "/carousels",
+              label: "Carousels",
+              description: "Motion image galleries.",
+            },
+          ],
+        },
+        {
+          title: "Build",
+          items: [
+            {
+              href: "/docs/mcp",
+              label: "MCP",
+              description: "Use SonoJS in Cursor agents.",
+            },
+          ],
+        },
+      ],
+    },
     { href: "/pricing", label: "Pricing" },
-  ] satisfies SiteNavItem[],
+  ] satisfies SiteNavEntry[],
   /** Secondary explore links shown in the site footer. */
   footerNavItems: [
     { href: "/tools", label: "Tools" },

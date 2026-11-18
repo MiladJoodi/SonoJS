@@ -12,7 +12,7 @@ const FEATURES = [
 ] as const
 
 const ICONS_HREF =
-  siteConfig.navItems.find((item) => item.label === "Icons")?.href ??
+  siteConfig.footerNavItems.find((item) => item.label === "Icons")?.href ??
   "https://icons.sonojs.com"
 
 export function HomeIconsSection() {
