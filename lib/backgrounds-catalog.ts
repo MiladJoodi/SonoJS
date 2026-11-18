@@ -94,6 +94,7 @@ export const BACKGROUND_FEATURED_IDS = new Set([
   "liquid-gold",
   "aurora-veil",
   "bioluminescence",
+  "halcyon",
   "magnetic-sand",
   "velvet-spotlight",
   "murmuration",
@@ -891,6 +892,16 @@ export const backgroundsCatalog: BackgroundsCatalogEntry[] = [
     description: "Deep sea jellyfish pulsing with bioluminescent glow and drifting plankton.",
     htmlPath: "/backgrounds/radiant/bioluminescence.html",
     previewPath: "/backgrounds/radiant/previews/bioluminescence.webp",
+    technique: "webgl",
+  },
+  {
+    id: "halcyon",
+    collection: "radiant",
+    title: "Halcyon",
+    description:
+      "Cinematic Gerstner ocean with Fresnel sky reflections, foam, and a sunset-to-bioluminescence day cycle.",
+    htmlPath: "/backgrounds/radiant/halcyon.html",
+    previewPath: "/backgrounds/radiant/previews/halcyon.webp",
     technique: "webgl",
   },
   {
