@@ -210,9 +210,20 @@
   #toast.show{ opacity:1; transform:translate(-50%,0); }
 
   @media (max-width:560px){
-    #hud{ gap:12px; padding:12px 14px; }
-    .slider{ width:70px; }
-    #placard{ top:20px; }
+    #hud{
+      left:10px; right:10px; bottom:max(10px, env(safe-area-inset-bottom, 0px));
+      transform:none; width:auto; max-width:none;
+      gap:10px 12px; padding:12px 14px;
+      justify-content:stretch; align-items:center;
+      max-height:min(36vh, 220px); overflow-y:auto;
+      -webkit-overflow-scrolling:touch;
+    }
+    #hud.idle{ transform:translateY(4px); }
+    #hud:hover{ transform:none !important; }
+    .group{ flex:1 1 auto; min-width:0; justify-content:center; }
+    .divider{ display:none; }
+    .slider{ width:100%; min-width:72px; flex:1; height:28px; }
+    #placard{ top:16px; }
     body{ cursor:auto; }
     #aura{ display:none; }
   }

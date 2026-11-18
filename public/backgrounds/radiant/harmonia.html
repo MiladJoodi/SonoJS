@@ -309,6 +309,19 @@ footer{padding:8px 22px 16px;display:flex;align-items:center;gap:16px;min-width:
   footer{flex-wrap:wrap}
   #ribbonWrap{flex-basis:100%;order:5}
 }
+@media (max-width:640px){
+  header{padding:10px 14px 4px;gap:10px}
+  h1.title{font-size:22px;letter-spacing:.22em}
+  .tagline{display:none}
+  :root{--wheel-size:min(92vw,48vh)}
+  #panel{
+    width:min(94vw,540px);
+    max-height:min(40vh,280px);
+    overflow-y:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+  footer{padding:8px 12px 12px}
+}
 </style>
 <script>if(/\bembed=1\b/.test(location.search))document.documentElement.classList.add("embed")</script>
 </head>

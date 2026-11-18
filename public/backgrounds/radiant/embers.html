@@ -151,8 +151,16 @@
   }
   #hint.gone{ opacity:0; }
   @media (max-width:560px){
-    #panel{ right:12px; bottom:12px; left:12px; width:auto; padding:14px 16px 12px; }
+    #panel{
+      right:10px; left:10px; width:auto;
+      bottom:max(10px, env(safe-area-inset-bottom, 0px));
+      padding:12px 14px 10px;
+      max-height:min(40vh, 260px);
+      overflow-y:auto;
+      -webkit-overflow-scrolling:touch;
+    }
     .row{ margin-bottom:9px; }
+    #hint{ bottom:auto; top:18px; transform:translateX(-50%); }
   }
 </style>
 <script>if(/\bembed=1\b/.test(location.search))document.documentElement.classList.add("embed")</script>

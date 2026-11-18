@@ -110,8 +110,18 @@
     background:rgba(10,13,26,.85);padding:6px 14px;border:1px solid rgba(201,138,138,.3);
   }
   @media (max-width:640px){
-    #rail button{letter-spacing:.18em;padding:8px 7px 8px 9px}
-    #about{right:8px;left:8px;width:auto}
+    #rail{
+      left:10px;right:10px;bottom:max(8px,env(safe-area-inset-bottom,0px));
+      transform:none;width:auto;max-width:none;
+      flex-wrap:wrap;justify-content:center;gap:4px 2px;
+      padding:6px 8px;border-radius:12px;
+      background:rgba(8,10,20,.55);border:1px solid rgba(255,255,255,.06);
+      -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+    }
+    #rail.hidden{transform:translateY(10px)}
+    #rail button{letter-spacing:.14em;padding:10px 8px;font-size:10px}
+    #hint{bottom:64px;font-size:10px;padding:0 16px}
+    #about{right:8px;left:8px;width:auto;bottom:72px}
   }
 </style>
 <script>if(/\bembed=1\b/.test(location.search))document.documentElement.classList.add("embed")</script>

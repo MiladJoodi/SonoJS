@@ -158,9 +158,17 @@
   }
 
   @media (max-width:600px){
-    #ui{ width:196px; padding:10px 12px 9px; }
+    #ui{
+      left:10px; right:10px; width:auto;
+      bottom:max(10px, env(safe-area-inset-bottom, 0px));
+      padding:10px 12px 9px;
+      max-height:min(42vh, 280px);
+      overflow-y:auto;
+      -webkit-overflow-scrolling:touch;
+    }
     #speciesList{ display:none; }
     #splash h1{ font-size:22px; }
+    #showBtn{ left:10px; bottom:max(10px, env(safe-area-inset-bottom, 0px)); }
   }
 </style>
 <script>if(/\bembed=1\b/.test(location.search))document.documentElement.classList.add("embed")</script>

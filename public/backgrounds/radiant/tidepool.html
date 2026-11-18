@@ -101,9 +101,17 @@
   }
 
   @media (max-width:640px){
-    #panel{width:calc(100% - 24px);left:12px;top:12px;padding:12px 13px 10px}
-    h1{font-size:21px}
-    #chart{height:64px}
+    #panel{
+      width:auto; left:10px; right:10px; top:auto;
+      bottom:max(10px, env(safe-area-inset-bottom, 0px));
+      padding:12px 14px 10px;
+      max-height:min(42vh, 280px);
+      overflow-y:auto;
+      -webkit-overflow-scrolling:touch;
+    }
+    h1{font-size:18px}
+    #chart{height:48px}
+    #flash{bottom:auto;top:18px}
   }
 </style>
 <script>if(/\bembed=1\b/.test(location.search))document.documentElement.classList.add("embed")</script>
