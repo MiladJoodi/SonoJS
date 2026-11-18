@@ -16,10 +16,10 @@ export type BackgroundsNavGroup = {
   pages: BackgroundsNavPage[]
 }
 
-/** Spotlight group — first in the sidebar; excluded from prev/next order. */
+/** Spotlight group — first in the sidebar (New badges, no heading); excluded from prev/next. */
 export const BACKGROUNDS_FEATURED_GROUP = "Featured"
 
-/** Featured 🔥 sidebar + gallery first. */
+/** Spotlight set — sidebar first with New badges + gallery pin. */
 export function isBackgroundSpotlight(id: string) {
   return (
     id === "embers" ||
@@ -55,7 +55,7 @@ const featuredBackgroundPages: BackgroundsNavPage[] = [...backgroundsCatalog]
     badge: "new" as const,
   }))
 
-/** Sidebar + index for `/backgrounds` — Featured, then flat A→Z list. */
+/** Sidebar + index for `/backgrounds` — New spotlight first, then flat A→Z list. */
 export const backgroundsNav: {
   top: BackgroundsNavPage[]
   groups: BackgroundsNavGroup[]

@@ -117,11 +117,10 @@ function BackgroundsSidebarBody({ className }: { className?: string }) {
                 key={group.title || `group-${groupIndex}`}
                 className="p-0"
               >
-                {group.title ? (
+                {group.title &&
+                group.title !== BACKGROUNDS_FEATURED_GROUP ? (
                   <SidebarGroupLabel className="px-2 text-xs font-medium text-muted-foreground">
-                    {group.title === BACKGROUNDS_FEATURED_GROUP
-                      ? "Featured 🔥"
-                      : group.title}
+                    {group.title}
                   </SidebarGroupLabel>
                 ) : null}
                 <SidebarGroupContent>
