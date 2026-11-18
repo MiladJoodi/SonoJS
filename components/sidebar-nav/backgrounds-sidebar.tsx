@@ -25,6 +25,7 @@ import {
   sidebarItemStateClass,
 } from "@/components/sidebar-nav/ui"
 import {
+  BACKGROUNDS_FEATURED_GROUP,
   backgroundsNav,
   getBackgroundsAdjacent,
   getBackgroundsCurrentLabel,
@@ -44,6 +45,13 @@ function BackgroundsSidebarBody({ className }: { className?: string }) {
   const pathname = usePathname()
   const [query, setQuery] = React.useState("")
   const normalized = normalizeNavSearch(query)
+
+  const featuredHrefs = React.useMemo(() => {
+    const featured = backgroundsNav.groups.find(
+      (group) => group.title === BACKGROUNDS_FEATURED_GROUP
+    )
+    return new Set(featured?.pages.map((page) => page.href) ?? [])
+  }, [])
 
   const filteredGroups = React.useMemo(() => {
     if (!normalized) return backgroundsNav.groups
@@ -105,16 +113,25 @@ function BackgroundsSidebarBody({ className }: { className?: string }) {
               : null}
 
             {filteredGroups.map((group, groupIndex) => (
-              <SidebarGroup key={group.title || `group-${groupIndex}`} className="p-0">
+              <SidebarGroup
+                key={group.title || `group-${groupIndex}`}
+                className="p-0"
+              >
                 {group.title ? (
                   <SidebarGroupLabel className="px-2 text-xs font-medium text-muted-foreground">
-                    {group.title}
+                    {group.title === BACKGROUNDS_FEATURED_GROUP
+                      ? "Featured 🔥"
+                      : group.title}
                   </SidebarGroupLabel>
                 ) : null}
                 <SidebarGroupContent>
                   <SidebarMenu className="gap-0.5">
                     {group.pages.map((page) => {
-                      const active = pathname === page.href
+                      const pathActive = pathname === page.href
+                      const active =
+                        pathActive &&
+                        (group.title === BACKGROUNDS_FEATURED_GROUP ||
+                          !featuredHrefs.has(page.href))
                       return (
                         <SidebarMenuItem key={page.href}>
                           <Link

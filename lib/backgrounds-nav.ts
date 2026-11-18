@@ -16,6 +16,27 @@ export type BackgroundsNavGroup = {
   pages: BackgroundsNavPage[]
 }
 
+/** Spotlight group — first in the sidebar; excluded from prev/next order. */
+export const BACKGROUNDS_FEATURED_GROUP = "Featured"
+
+/** Featured 🔥 sidebar + gallery first. */
+export function isBackgroundSpotlight(id: string) {
+  return (
+    id === "embers" ||
+    id === "event-horizon-study" ||
+    id === "galaxy-forge" ||
+    id === "halcyon" ||
+    id === "harmonia" ||
+    id === "ink-flow" ||
+    id === "moth-lamp" ||
+    id === "neon-circuit" ||
+    id === "koi-pond" ||
+    id === "noir-terminal" ||
+    id === "reef" ||
+    id === "tidepool"
+  )
+}
+
 const allBackgroundPages: BackgroundsNavPage[] = [...backgroundsCatalog]
   .sort((a, b) => a.title.localeCompare(b.title))
   .map((e) => ({
@@ -24,13 +45,27 @@ const allBackgroundPages: BackgroundsNavPage[] = [...backgroundsCatalog]
     featured: isBackgroundFeatured(e.id),
   }))
 
-/** Sidebar + index for `/backgrounds` — one flat list (no collection split). */
+const featuredBackgroundPages: BackgroundsNavPage[] = [...backgroundsCatalog]
+  .filter((e) => isBackgroundSpotlight(e.id))
+  .sort((a, b) => a.title.localeCompare(b.title))
+  .map((e) => ({
+    title: e.title,
+    href: backgroundViewHref(e.id),
+    featured: isBackgroundFeatured(e.id),
+    badge: "new" as const,
+  }))
+
+/** Sidebar + index for `/backgrounds` — Featured, then flat A→Z list. */
 export const backgroundsNav: {
   top: BackgroundsNavPage[]
   groups: BackgroundsNavGroup[]
 } = {
   top: [{ title: "All Backgrounds", href: "/backgrounds" }],
   groups: [
+    {
+      title: BACKGROUNDS_FEATURED_GROUP,
+      pages: featuredBackgroundPages,
+    },
     {
       title: "",
       pages: allBackgroundPages,
@@ -39,7 +74,9 @@ export const backgroundsNav: {
 }
 
 export function getBackgroundsPages(): BackgroundsNavPage[] {
-  return backgroundsNav.groups.flatMap((group) => group.pages)
+  return backgroundsNav.groups
+    .filter((group) => group.title !== BACKGROUNDS_FEATURED_GROUP)
+    .flatMap((group) => group.pages)
 }
 
 export function getBackgroundsCurrentLabel(pathname: string): string | null {

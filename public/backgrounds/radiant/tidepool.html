@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tidepool</title>
+<style>
+  html.embed .about { display: none !important; }
+  :root{
+    --ink:#eaf6f4;
+    --ink-dim:rgba(234,246,244,.62);
+    --panel:rgba(6,26,38,.58);
+    --line:rgba(255,255,255,.13);
+    --plank:#8ef0b4;
+    --graze:#ffcf8a;
+    --pred:#c9a2f5;
+    --accent:#ffd9a0;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%;overflow:hidden;background:#0a2a3d}
+  body{font-family:"Avenir Next","Segoe UI",system-ui,sans-serif;color:var(--ink)}
+  #sea{position:fixed;inset:0;display:block;cursor:crosshair}
+
+  #panel{
+    position:fixed;top:18px;left:18px;width:288px;z-index:5;
+    background:var(--panel);
+    backdrop-filter:blur(14px) saturate(1.3);
+    -webkit-backdrop-filter:blur(14px) saturate(1.3);
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:16px 16px 13px;
+    box-shadow:0 18px 50px rgba(0,10,20,.45), inset 0 1px 0 rgba(255,255,255,.08);
+    user-select:none;
+  }
+  h1{
+    font-family:Georgia,"Times New Roman",serif;font-weight:400;
+    font-size:26px;letter-spacing:.04em;line-height:1;
+  }
+  h1 em{font-style:italic;color:var(--accent)}
+  .sub{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-dim);margin-top:5px}
+
+  .stats{display:flex;gap:8px;margin-top:13px}
+  .stat{
+    flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);
+    border-radius:10px;padding:7px 4px 6px;text-align:center;
+  }
+  .stat b{font-size:17px;font-weight:600;display:block;font-variant-numeric:tabular-nums}
+  .stat span{font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-dim)}
+  .stat i{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:4px;vertical-align:1px}
+  .stat.p b{color:var(--plank)} .stat.p i{background:var(--plank)}
+  .stat.g b{color:var(--graze)} .stat.g i{background:var(--graze)}
+  .stat.d b{color:var(--pred)}  .stat.d i{background:var(--pred)}
+
+  #chart{width:100%;height:86px;margin-top:11px;border-radius:10px;
+    background:rgba(0,10,18,.35);border:1px solid rgba(255,255,255,.07);display:block}
+  .chartlabel{font-size:9.5px;color:var(--ink-dim);letter-spacing:.1em;text-transform:uppercase;margin-top:5px;text-align:center}
+
+  .tools{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:13px}
+  .tool{
+    appearance:none;border:1px solid rgba(255,255,255,.12);border-radius:11px;
+    background:rgba(255,255,255,.05);color:var(--ink);cursor:pointer;
+    padding:8px 2px 6px;font-family:inherit;transition:all .18s ease;text-align:center;
+  }
+  .tool svg{display:block;margin:0 auto 3px;width:20px;height:20px;opacity:.9}
+  .tool span{font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-dim)}
+  .tool:hover{background:rgba(255,255,255,.11);transform:translateY(-1px)}
+  .tool.active{background:rgba(255,217,160,.16);border-color:rgba(255,217,160,.55);box-shadow:0 0 14px rgba(255,217,160,.18)}
+  .tool.active span{color:var(--accent)}
+  .tool kbd{display:none}
+
+  .row{display:flex;gap:7px;margin-top:11px;align-items:center}
+  .btn{
+    appearance:none;border:1px solid rgba(255,255,255,.12);border-radius:9px;
+    background:rgba(255,255,255,.05);color:var(--ink);cursor:pointer;
+    font-family:inherit;font-size:11px;padding:6px 10px;letter-spacing:.05em;transition:background .15s;
+    white-space:nowrap;
+  }
+  .btn:hover{background:rgba(255,255,255,.12)}
+  .sun{flex:1;display:flex;align-items:center;gap:7px;font-size:10px;color:var(--ink-dim)}
+  input[type=range]{flex:1;accent-color:var(--accent);height:3px;cursor:pointer}
+
+  .hint{font-size:10.5px;color:var(--ink-dim);margin-top:11px;line-height:1.5}
+  .about{
+    font-size:10px;color:rgba(234,246,244,.45);margin-top:10px;padding-top:9px;
+    border-top:1px solid rgba(255,255,255,.08);line-height:1.55;
+  }
+  .about b{color:rgba(234,246,244,.7);font-weight:600}
+
+  #flash{
+    position:fixed;left:50%;bottom:38px;transform:translateX(-50%);z-index:6;
+    font-family:Georgia,serif;font-style:italic;font-size:17px;color:rgba(255,244,222,.95);
+    text-shadow:0 2px 14px rgba(0,0,0,.55);pointer-events:none;opacity:0;
+    letter-spacing:.03em;white-space:nowrap;
+  }
+  #flash.show{animation:flashIn 3.4s ease forwards}
+  @keyframes flashIn{
+    0%{opacity:0;transform:translateX(-50%) translateY(10px)}
+    12%{opacity:1;transform:translateX(-50%) translateY(0)}
+    78%{opacity:1}
+    100%{opacity:0;transform:translateX(-50%) translateY(-8px)}
+  }
+
+  @media (max-width:640px){
+    #panel{width:calc(100% - 24px);left:12px;top:12px;padding:12px 13px 10px}
+    h1{font-size:21px}
+    #chart{height:64px}
+  }
+</style>
+<script>if(/\bembed=1\b/.test(location.search))document.documentElement.classList.add("embed")</script>
+</head>
+<body>
+<canvas id="sea"></canvas>
+
+<div id="panel">
+  <h1>Tide<em>pool</em></h1>
+  <div class="sub">a living ecosystem</div>
+
+  <div class="stats">
+    <div class="stat p"><b id="cP">0</b><span><i></i>plankton</span></div>
+    <div class="stat g"><b id="cG">0</b><span><i></i>grazers</span></div>
+    <div class="stat d"><b id="cD">0</b><span><i></i>predators</span></div>
+  </div>
+
+  <canvas id="chart"></canvas>
+  <div class="chartlabel">population &middot; relative boom &amp; bust</div>
+
+  <div class="tools">
+    <button class="tool active" data-tool="feed" title="Feed (1) — sprinkle nutrients; hold &amp; drag to sow a bloom">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="8" cy="9" r="1.6"/><circle cx="14" cy="6" r="1.3"/><circle cx="17" cy="12" r="1.6"/><circle cx="11" cy="14" r="1.2"/><circle cx="7" cy="17" r="1.4"/><circle cx="15" cy="18" r="1.1"/></svg>
+      <span>feed</span>
+    </button>
+    <button class="tool" data-tool="grazer" title="Spawn grazers (2)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><path d="M4 12c3-4 8-5 12-3l4-3v12l-4-3c-4 2-9 1-12-3z"/><circle cx="7.5" cy="11.2" r="0.4" fill="currentColor"/></svg>
+      <span>grazer</span>
+    </button>
+    <button class="tool" data-tool="pred" title="Spawn a predator (3)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><path d="M3 13c4-6 10-7 14-4l4-4-1 6 1 6-4-4c-4 3-10 2-14-2z"/><path d="M10 7l2 3"/><circle cx="6.5" cy="11.5" r="0.4" fill="currentColor"/></svg>
+      <span>hunter</span>
+    </button>
+    <button class="tool" data-tool="meteor" title="Meteor strike (4)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="9" cy="15" r="4"/><path d="M14 10L21 3M17 3h4v4M12 5l1.5 2M19 12l-2 1.5"/></svg>
+      <span>meteor</span>
+    </button>
+  </div>
+
+  <div class="row">
+    <button class="btn" id="pauseBtn">Pause</button>
+    <button class="btn" id="speedBtn">1&times;</button>
+    <div class="sun"><span>sun</span><input type="range" id="sunSlider" min="0" max="200" value="100"></div>
+  </div>
+
+  <div class="hint">Click the water to use a tool. Plankton drink sunlight, grazers graze, hunters hunt — watch the cycles turn.</div>
+
+  <div class="about">
+    An ecosystem in a bowl of painted water: energy flows from sun to plankton
+    to grazer to hunter, and the graph remembers every boom and collapse.
+    <b>Built by Claude Fable 5.</b>
+  </div>
+</div>
+
+<div id="flash"></div>
+
+<script>
+'use strict';
+/* ============================================================
+   TIDEPOOL — a living ecosystem in watercolor
+   plankton -> grazers -> predators, with god-tools
+   ============================================================ */
+
+const canvas = document.getElementById('sea');
+const ctx = canvas.getContext('2d');
+const chartCv = document.getElementById('chart');
+const chartCtx = chartCv.getContext('2d');
+
+let W = 0, H = 0, DPR = 1;
+
+/* ---------- utils ---------- */
+const rand  = (a, b) => a + Math.random() * (b - a);
+const TAU = Math.PI * 2;
+const clamp = (v, a, b) => v < a ? a : (v > b ? b : v);
+
+/* ---------- watercolor backdrop (offscreen, rebuilt on resize) ---------- */
+let paper = null;
+function makePaper() {
+  paper = document.createElement('canvas');
+  paper.width = W; paper.height = H;
+  const p = paper.getContext('2d');
+
+  // deep ocean vertical wash
+  const g = p.createLinearGradient(0, 0, 0, H);
+  g.addColorStop(0.00, '#1c6d84');
+  g.addColorStop(0.35, '#155a76');
+  g.addColorStop(0.72, '#0e4360');
+  g.addColorStop(1.00, '#082a44');
+  p.fillStyle = g;
+  p.fillRect(0, 0, W, H);
+
+  // watercolor blooms — big soft pigment blotches
+  const tints = [
+    'rgba(64,170,160,', 'rgba(40,120,150,', 'rgba(90,190,170,',
+    'rgba(30,90,130,',  'rgba(120,200,190,', 'rgba(50,140,120,'
+  ];
+  for (let i = 0; i < 26; i++) {
+    const x = rand(0, W), y = rand(0, H);
+    const r = rand(Math.min(W, H) * 0.12, Math.min(W, H) * 0.42);
+    const a = rand(0.03, 0.10);
+    const t = tints[(Math.random() * tints.length) | 0];
+    const rg = p.createRadialGradient(x, y, r * 0.1, x, y, r);
+    rg.addColorStop(0, t + a + ')');
+    rg.addColorStop(0.75, t + (a * 0.55) + ')');
+    rg.addColorStop(1, t + '0)');
+    p.fillStyle = rg;
+    p.beginPath();
+    // irregular blob edge — watercolor bleed
+    const lobes = 7 + ((Math.random() * 5) | 0);
+    for (let k = 0; k <= lobes; k++) {
+      const ang = k / lobes * TAU;
+      const rr = r * rand(0.75, 1.12);
+      const px = x + Math.cos(ang) * rr, py = y + Math.sin(ang) * rr;
+      if (k === 0) p.moveTo(px, py); else p.quadraticCurveTo(
+        x + Math.cos(ang - TAU / lobes / 2) * rr * 1.15,
+        y + Math.sin(ang - TAU / lobes / 2) * rr * 1.15, px, py);
+    }
+    p.closePath(); p.fill();
+  }
+
+  // darker pooling at bottom corners
+  const vg = p.createRadialGradient(W / 2, H * 0.35, Math.min(W, H) * 0.3, W / 2, H * 0.6, Math.max(W, H) * 0.85);
+  vg.addColorStop(0, 'rgba(0,0,0,0)');
+  vg.addColorStop(1, 'rgba(3,14,28,0.55)');
+  p.fillStyle = vg;
+  p.fillRect(0, 0, W, H);
+
+  // paper grain
+  const gr = p.createImageData(128, 128);
+  for (let i = 0; i < gr.data.length; i += 4) {
+    const v = 235 + Math.random() * 20;
+    gr.data[i] = gr.data[i + 1] = gr.data[i + 2] = v;
+    gr.data[i + 3] = Math.random() * 14;
+  }
+  const gcv = document.createElement('canvas');
+  gcv.width = 128; gcv.height = 128;
+  gcv.getContext('2d').putImageData(gr, 0, 0);
+  p.globalCompositeOperation = 'overlay';
+  p.fillStyle = p.createPattern(gcv, 'repeat');
+  p.fillRect(0, 0, W, H);
+  p.globalCompositeOperation = 'source-over';
+}
+
+/* ---------- glow sprites ---------- */
+function makeGlow(color, r) {
+  const c = document.createElement('canvas');
+  c.width = c.height = r * 2;
+  const g = c.getContext('2d');
+  const rg = g.createRadialGradient(r, r, 0, r, r, r);
+  rg.addColorStop(0, color);
+  rg.addColorStop(1, 'rgba(0,0,0,0)');
+  g.fillStyle = rg;
+  g.fillRect(0, 0, r * 2, r * 2);
+  return c;
+}
+let spritePlank, spriteGraze, spritePred, spriteFood;
+function makeSprites() {
+  spritePlank = makeGlow('rgba(142,240,180,0.85)', 10);
+  spriteGraze = makeGlow('rgba(255,207,138,0.34)', 26);
+  spritePred  = makeGlow('rgba(201,162,245,0.30)', 40);
+  spriteFood  = makeGlow('rgba(190,255,210,0.9)', 7);
+}
+makeSprites();
+
+/* ---------- state ---------- */
+const plankton = [];
+const grazers  = [];
+const preds    = [];
+const ripples  = [];  // {x,y,r,max,a,color,lw}
+const motes    = [];  // particles {x,y,vx,vy,life,max,color,r}
+const bubbles  = [];
+const blooms   = [];  // scheduled nutrient blooms {x,y,t,delay,left}
+let meteor = null;
+let shake = 0;
+let simTime = 0;
+let paused = false;
+let speed = 1;
+let sun = 1;         // plankton growth multiplier
+let lastGrazerSeen = 0, lastPredSeen = 0;
+
+/* tuning */
+const PLANK_FOOD = 16;
+const GR = { maxSpeed: 62, drain: 5.4, sense: 105, fleeR: 125, eatR: 8,  repro: 125, start: 70,  maxAge: 78 };
+const PR = { maxSpeed: 76, drain: 6.6, sense: 165, eatR: 12, repro: 210, start: 105, maxAge: 115, eatGain: 62 };
+const plankCap  = () => Math.max(500, (W * H) / 1300);
+const grazerCap = () => Math.max(60, (W * H) / 11000);
+const predCap   = () => Math.max(10, (W * H) / 55000);
+
+/* ---------- spawners ---------- */
+function spawnPlankton(x, y) {
+  plankton.push({
+    x, y,
+    vx: rand(-6, 6), vy: rand(-6, 6),
+    r: rand(1.4, 2.8),
+    phase: rand(0, TAU),
+    dead: false
+  });
+}
+function spawnGrazer(x, y, energy, spd) {
+  grazers.push({
+    x, y,
+    vx: rand(-20, 20), vy: rand(-20, 20),
+    energy: energy != null ? energy : GR.start,
+    speed: spd != null ? spd : GR.maxSpeed * rand(0.9, 1.1),
+    age: 0, maxAge: GR.maxAge * rand(0.8, 1.2),
+    size: rand(5.2, 6.6), phase: rand(0, TAU),
+    wanderA: rand(0, TAU), dead: false
+  });
+}
+function spawnPred(x, y, energy, spd) {
+  preds.push({
+    x, y,
+    vx: rand(-20, 20), vy: rand(-20, 20),
+    energy: energy != null ? energy : PR.start,
+    speed: spd != null ? spd : PR.maxSpeed * rand(0.92, 1.08),
+    age: 0, maxAge: PR.maxAge * rand(0.8, 1.2),
+    size: rand(9.5, 12), phase: rand(0, TAU),
+    wanderA: rand(0, TAU), dead: false
+  });
+}
+function burst(x, y, color, n, spd, r) {
+  for (let i = 0; i < n; i++) {
+    const a = rand(0, TAU), s = rand(spd * 0.3, spd);
+    motes.push({
+      x, y, vx: Math.cos(a) * s, vy: Math.sin(a) * s,
+      life: 0, max: rand(0.5, 1.3), color, r: rand(r * 0.5, r)
+    });
+  }
+}
+function ripple(x, y, max, color, lw) {
+  ripples.push({ x, y, r: 6, max, a: 0.65, color: color || '255,255,255', lw: lw || 2 });
+}
+
+function seedWorld() {
+  plankton.length = 0; grazers.length = 0; preds.length = 0;
+  const nP = Math.floor(plankCap() * 0.45);
+  for (let i = 0; i < nP; i++) spawnPlankton(rand(0, W), rand(0, H));
+  const nG = Math.floor(grazerCap() * 0.3);
+  for (let i = 0; i < nG; i++) spawnGrazer(rand(W * 0.1, W * 0.9), rand(H * 0.1, H * 0.9));
+  const nD = Math.max(3, Math.floor(predCap() * 0.3));
+  for (let i = 0; i < nD; i++) spawnPred(rand(W * 0.2, W * 0.8), rand(H * 0.2, H * 0.8));
+  bubbles.length = 0;
+  for (let i = 0; i < 26; i++) bubbles.push({
+    x: rand(0, W), y: rand(0, H), r: rand(1, 3.4),
+    s: rand(8, 26), ph: rand(0, TAU)
+  });
+}
+
+/* ---------- spatial hash ---------- */
+const CELL = 70;
+function buildGrid(list) {
+  const m = new Map();
+  for (let i = 0; i < list.length; i++) {
+    const e = list[i];
+    if (e.dead) continue;
+    const k = ((e.x / CELL) | 0) + '_' + ((e.y / CELL) | 0);
+    let arr = m.get(k);
+    if (!arr) { arr = []; m.set(k, arr); }
+    arr.push(e);
+  }
+  return m;
+}
+function nearest(grid, x, y, radius) {
+  const cr = Math.ceil(radius / CELL);
+  const cx = (x / CELL) | 0, cy = (y / CELL) | 0;
+  let best = null, bd = radius * radius;
+  for (let ix = cx - cr; ix <= cx + cr; ix++) {
+    for (let iy = cy - cr; iy <= cy + cr; iy++) {
+      const arr = grid.get(ix + '_' + iy);
+      if (!arr) continue;
+      for (let i = 0; i < arr.length; i++) {
+        const e = arr[i];
+        if (e.dead) continue;
+        const dx = e.x - x, dy = e.y - y, d = dx * dx + dy * dy;
+        if (d < bd) { bd = d; best = e; }
+      }
+    }
+  }
+  return best;
+}
+
+/* ---------- flow field ---------- */
+function flowAngle(x, y, t) {
+  const s = 0.0016;
+  return Math.sin(x * s + t * 0.22) +
+         Math.cos(y * s * 1.35 - t * 0.16) +
+         Math.sin((x + y) * s * 0.55 + t * 0.09) * 1.4;
+}
+
+/* ---------- creature steering ---------- */
+function steerTo(e, tx, ty, force) {
+  const dx = tx - e.x, dy = ty - e.y;
+  const d = Math.hypot(dx, dy) || 1;
+  e.vx += dx / d * force;
+  e.vy += dy / d * force;
+}
+function limitSpeed(e, max) {
+  const s = Math.hypot(e.vx, e.vy);
+  if (s > max) { e.vx = e.vx / s * max; e.vy = e.vy / s * max; }
+}
+function walls(e, dt) {
+  const m = 46, f = 220 * dt;
+  if (e.x < m) e.vx += f;
+  if (e.x > W - m) e.vx -= f;
+  if (e.y < m) e.vy += f;
+  if (e.y > H - m) e.vy -= f;
+  e.x = clamp(e.x, 2, W - 2);
+  e.y = clamp(e.y, 2, H - 2);
+}
+function wander(e, dt, force) {
+  e.wanderA += rand(-2.4, 2.4) * dt;
+  e.vx += Math.cos(e.wanderA) * force * dt;
+  e.vy += Math.sin(e.wanderA) * force * dt;
+}
+
+/* ---------- simulation step ---------- */
+function step(dt) {
+  simTime += dt;
+  const t = simTime;
+
+  /* plankton: drift with current, breathe, reproduce toward cap */
+  const cap = plankCap();
+  const growth = 0.22 * sun * (1 - plankton.length / cap);
+  for (let i = 0; i < plankton.length; i++) {
+    const p = plankton[i];
+    if (p.dead) continue;
+    const a = flowAngle(p.x, p.y, t);
+    p.vx += Math.cos(a) * 14 * dt;
+    p.vy += Math.sin(a) * 14 * dt;
+    p.vx *= 0.96; p.vy *= 0.96;
+    p.x += p.vx * dt; p.y += p.vy * dt;
+    if (p.x < 0) p.x += W; if (p.x > W) p.x -= W;
+    if (p.y < 0) p.y += H; if (p.y > H) p.y -= H;
+    if (growth > 0 && Math.random() < growth * dt) {
+      spawnPlankton(p.x + rand(-14, 14), p.y + rand(-14, 14));
+    }
+  }
+  // faint ambient seeding so a wiped pool can recover
+  if (plankton.length < cap * 0.04 && Math.random() < dt * 2.2 * sun) {
+    spawnPlankton(rand(0, W), rand(0, H));
+  }
+
+  const gridP = buildGrid(plankton);
+  const gridG = buildGrid(grazers);
+  const gridD = buildGrid(preds);
+
+  /* grazers */
+  for (let i = 0; i < grazers.length; i++) {
+    const g = grazers[i];
+    if (g.dead) continue;
+    g.age += dt;
+    g.energy -= (GR.drain + Math.hypot(g.vx, g.vy) * 0.012) * dt;
+
+    const threat = nearest(gridD, g.x, g.y, GR.fleeR);
+    if (threat) {
+      steerTo(g, threat.x, threat.y, -420 * dt); // flee hard
+    } else {
+      const food = nearest(gridP, g.x, g.y, GR.sense);
+      if (food) {
+        steerTo(g, food.x, food.y, 190 * dt);
+        const dx = food.x - g.x, dy = food.y - g.y;
+        if (dx * dx + dy * dy < GR.eatR * GR.eatR) {
+          food.dead = true;
+          g.energy = Math.min(g.energy + PLANK_FOOD, 170);
+          motes.push({
+            x: food.x, y: food.y, vx: rand(-8, 8), vy: rand(-14, -4),
+            life: 0, max: 0.5, color: '190,255,210', r: 1.8
+          });
+        }
+      } else {
+        wander(g, dt, 130);
+      }
+      // gentle schooling separation
+      const buddy = nearest(gridG, g.x, g.y, 18);
+      if (buddy && buddy !== g) steerTo(g, buddy.x, buddy.y, -70 * dt);
+    }
+    walls(g, dt);
+    limitSpeed(g, threat ? g.speed * 1.45 : g.speed);
+    g.x += g.vx * dt; g.y += g.vy * dt;
+
+    if (g.energy > GR.repro && grazers.length < grazerCap() && Math.random() < 0.9 * dt) {
+      g.energy *= 0.5;
+      spawnGrazer(g.x + rand(-8, 8), g.y + rand(-8, 8), g.energy,
+        clamp(g.speed * rand(0.94, 1.06), GR.maxSpeed * 0.7, GR.maxSpeed * 1.35));
+      ripple(g.x, g.y, 26, '255,207,138', 1.2);
+    }
+    if (g.energy <= 0 || g.age > g.maxAge) {
+      g.dead = true;
+      burst(g.x, g.y, '255,207,138', 7, 26, 2.2);
+      // a body returns to the water: a few nutrients
+      for (let k = 0; k < 3; k++) spawnPlankton(g.x + rand(-12, 12), g.y + rand(-12, 12));
+    }
+  }
+
+  /* predators */
+  for (let i = 0; i < preds.length; i++) {
+    const d = preds[i];
+    if (d.dead) continue;
+    d.age += dt;
+    d.energy -= (PR.drain + Math.hypot(d.vx, d.vy) * 0.010) * dt;
+
+    const prey = nearest(gridG, d.x, d.y, PR.sense);
+    if (prey) {
+      steerTo(d, prey.x + prey.vx * 0.25, prey.y + prey.vy * 0.25, 210 * dt);
+      const dx = prey.x - d.x, dy = prey.y - d.y;
+      if (dx * dx + dy * dy < PR.eatR * PR.eatR) {
+        prey.dead = true;
+        d.energy = Math.min(d.energy + PR.eatGain, 280);
+        burst(prey.x, prey.y, '255,180,150', 10, 42, 2.4);
+        ripple(prey.x, prey.y, 34, '255,170,140', 1.4);
+      }
+    } else {
+      wander(d, dt, 110);
+    }
+    const rival = nearest(gridD, d.x, d.y, 40);
+    if (rival && rival !== d) steerTo(d, rival.x, rival.y, -60 * dt);
+
+    walls(d, dt);
+    limitSpeed(d, prey ? d.speed * 1.2 : d.speed * 0.7);
+    d.x += d.vx * dt; d.y += d.vy * dt;
+
+    if (d.energy > PR.repro && preds.length < predCap() && Math.random() < 0.55 * dt) {
+      d.energy *= 0.5;
+      spawnPred(d.x + rand(-10, 10), d.y + rand(-10, 10), d.energy,
+        clamp(d.speed * rand(0.94, 1.06), PR.maxSpeed * 0.7, PR.maxSpeed * 1.3));
+      ripple(d.x, d.y, 40, '201,162,245', 1.4);
+    }
+    if (d.energy <= 0 || d.age > d.maxAge) {
+      d.dead = true;
+      burst(d.x, d.y, '201,162,245', 12, 30, 2.6);
+      for (let k = 0; k < 6; k++) spawnPlankton(d.x + rand(-16, 16), d.y + rand(-16, 16));
+    }
+  }
+
+  /* sweep the dead */
+  compact(plankton); compact(grazers); compact(preds);
+
+  /* the tide brings newcomers when a species vanishes */
+  if (grazers.length > 0) lastGrazerSeen = t;
+  if (preds.length > 0) lastPredSeen = t;
+  if (grazers.length === 0 && t - lastGrazerSeen > 10) {
+    driftIn('grazer'); lastGrazerSeen = t;
+  }
+  if (preds.length === 0 && t - lastPredSeen > 16) {
+    driftIn('pred'); lastPredSeen = t;
+  }
+
+  /* scheduled meteor nutrient blooms */
+  for (let i = blooms.length - 1; i >= 0; i--) {
+    const b = blooms[i];
+    b.t += dt;
+    if (b.t > b.delay && b.left > 0) {
+      const n = Math.min(b.left, 3);
+      for (let k = 0; k < n; k++) {
+        const a = rand(0, TAU), r = rand(6, 90);
+        spawnPlankton(b.x + Math.cos(a) * r, b.y + Math.sin(a) * r);
+      }
+      b.left -= n;
+    }
+    if (b.left <= 0) blooms.splice(i, 1);
+  }
+
+  /* meteor physics */
+  if (meteor) {
+    meteor.y += meteor.vy * dt;
+    meteor.vy += 900 * dt;
+    motes.push({
+      x: meteor.x + rand(-4, 4), y: meteor.y - rand(4, 18),
+      vx: rand(-10, 10), vy: rand(-30, -10),
+      life: 0, max: 0.45, color: '255,190,120', r: rand(2, 4.5)
+    });
+    if (meteor.y >= meteor.ty) impact(meteor.x, meteor.ty);
+  }
+
+  /* effects */
+  for (let i = ripples.length - 1; i >= 0; i--) {
+    const r = ripples[i];
+    r.r += (r.max - r.r) * 3.2 * dt + 26 * dt;
+    r.a -= 0.9 * dt;
+    if (r.a <= 0 || r.r >= r.max) ripples.splice(i, 1);
+  }
+  for (let i = motes.length - 1; i >= 0; i--) {
+    const m = motes[i];
+    m.life += dt;
+    m.x += m.vx * dt; m.y += m.vy * dt;
+    m.vx *= 0.97; m.vy = m.vy * 0.97 - 8 * dt;
+    if (m.life >= m.max) motes.splice(i, 1);
+  }
+  for (let i = 0; i < bubbles.length; i++) {
+    const b = bubbles[i];
+    b.y -= b.s * dt;
+    b.x += Math.sin(t * 1.6 + b.ph) * 8 * dt;
+    if (b.y < -6) { b.y = H + 6; b.x = rand(0, W); }
+  }
+  shake *= Math.pow(0.02, dt);
+}
+
+function compact(list) {
+  let w = 0;
+  for (let i = 0; i < list.length; i++) {
+    if (!list[i].dead) list[w++] = list[i];
+  }
+  list.length = w;
+}
+
+function driftIn(kind) {
+  const edge = Math.random() < 0.5;
+  const x = edge ? (Math.random() < 0.5 ? 10 : W - 10) : rand(0, W);
+  const y = edge ? rand(0, H) : (Math.random() < 0.5 ? 10 : H - 10);
+  if (kind === 'grazer') {
+    for (let i = 0; i < 4; i++) spawnGrazer(x + rand(-14, 14), y + rand(-14, 14));
+    flash('the tide carries in a shoal of wanderers');
+  } else {
+    spawnPred(x, y, PR.start * 1.3);
+    flash('something older slips in with the tide');
+  }
+  ripple(x, y, 60, '210,240,255', 1.6);
+}
+
+/* ---------- meteor impact ---------- */
+function impact(x, y) {
+  meteor = null;
+  shake = 13;
+  ripple(x, y, 170, '255,220,180', 3.2);
+  ripple(x, y, 260, '255,200,150', 1.6);
+  burst(x, y, '255,205,140', 42, 190, 3.4);
+  burst(x, y, '255,240,220', 20, 120, 2.2);
+  const R2 = 150 * 150;
+  let toll = 0;
+  const cull = (list, big) => {
+    for (let i = 0; i < list.length; i++) {
+      const e = list[i];
+      const dx = e.x - x, dy = e.y - y;
+      if (dx * dx + dy * dy < R2) {
+        e.dead = true;
+        if (big) { toll++; burst(e.x, e.y, '255,200,160', 5, 60, 2); }
+      }
+    }
+  };
+  cull(plankton, false); cull(grazers, true); cull(preds, true);
+  compact(plankton); compact(grazers); compact(preds);
+  blooms.push({ x, y, t: 0, delay: 3.5, left: 90 });
+  flash(toll > 0
+    ? 'the sky falls — ' + toll + ' souls returned to the water'
+    : 'the sky falls on empty water');
+}
+
+/* ---------- render ---------- */
+function render(t) {
+  ctx.save();
+  ctx.clearRect(0, 0, W, H);
+  if (shake > 0.3) ctx.translate(rand(-shake, shake), rand(-shake, shake));
+  ctx.drawImage(paper, 0, 0);
+
+  /* god rays */
+  ctx.save();
+  ctx.globalCompositeOperation = 'lighter';
+  for (let i = 0; i < 4; i++) {
+    const rx = W * (0.15 + i * 0.24) + Math.sin(t * 0.07 + i * 2.1) * W * 0.06;
+    const wdt = W * 0.10 * (1 + Math.sin(t * 0.05 + i) * 0.3);
+    const grd = ctx.createLinearGradient(rx, 0, rx + wdt * 0.7, H);
+    grd.addColorStop(0, 'rgba(200,240,230,0.075)');
+    grd.addColorStop(0.7, 'rgba(180,230,220,0.02)');
+    grd.addColorStop(1, 'rgba(180,230,220,0)');
+    ctx.fillStyle = grd;
+    ctx.beginPath();
+    ctx.moveTo(rx, -10);
+    ctx.lineTo(rx + wdt, -10);
+    ctx.lineTo(rx + wdt * 2.4, H + 10);
+    ctx.lineTo(rx + wdt * 1.1, H + 10);
+    ctx.closePath();
+    ctx.fill();
+  }
+  ctx.restore();
+
+  /* caustic shimmer */
+  ctx.save();
+  ctx.globalCompositeOperation = 'lighter';
+  ctx.strokeStyle = 'rgba(190,235,225,0.05)';
+  ctx.lineWidth = 1.4;
+  for (let i = 0; i < 7; i++) {
+    const yy = (i / 7) * H + Math.sin(t * 0.4 + i * 3) * 22;
+    ctx.beginPath();
+    for (let x = -10; x <= W + 10; x += 26) {
+      const y = yy + Math.sin(x * 0.014 + t * 0.9 + i * 1.7) * 13
+                   + Math.sin(x * 0.031 - t * 0.6 + i) * 7;
+      if (x === -10) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+  }
+  ctx.restore();
+
+  /* bubbles */
+  ctx.strokeStyle = 'rgba(220,245,240,0.16)';
+  ctx.lineWidth = 1;
+  for (let i = 0; i < bubbles.length; i++) {
+    const b = bubbles[i];
+    ctx.beginPath();
+    ctx.arc(b.x, b.y, b.r, 0, TAU);
+    ctx.stroke();
+  }
+
+  /* plankton */
+  ctx.save();
+  ctx.globalCompositeOperation = 'lighter';
+  for (let i = 0; i < plankton.length; i++) {
+    const p = plankton[i];
+    const pulse = 0.7 + 0.3 * Math.sin(t * 2.2 + p.phase);
+    const s = p.r * 3.6 * pulse;
+    ctx.globalAlpha = 0.55 + 0.35 * pulse;
+    ctx.drawImage(spritePlank, p.x - s, p.y - s, s * 2, s * 2);
+  }
+  ctx.globalAlpha = 1;
+  ctx.restore();
+
+  /* grazers */
+  for (let i = 0; i < grazers.length; i++) {
+    const g = grazers[i];
+    drawFish(g, t, {
+      glow: spriteGraze, glowR: 3.4,
+      body: '#ffcf8a', belly: '#fff0d6', fin: '#f0a45c',
+      slim: 0.62
+    });
+  }
+
+  /* predators */
+  for (let i = 0; i < preds.length; i++) {
+    const d = preds[i];
+    drawFish(d, t, {
+      glow: spritePred, glowR: 3.0,
+      body: '#b088e0', belly: '#e2d0f7', fin: '#7d5bb5',
+      slim: 0.44, dorsal: true
+    });
+  }
+
+  /* motes */
+  ctx.save();
+  ctx.globalCompositeOperation = 'lighter';
+  for (let i = 0; i < motes.length; i++) {
+    const m = motes[i];
+    const k = 1 - m.life / m.max;
+    ctx.fillStyle = 'rgba(' + m.color + ',' + (0.7 * k) + ')';
+    ctx.beginPath();
+    ctx.arc(m.x, m.y, m.r * (0.4 + 0.6 * k), 0, TAU);
+    ctx.fill();
+  }
+  ctx.restore();
+
+  /* ripples */
+  for (let i = 0; i < ripples.length; i++) {
+    const r = ripples[i];
+    ctx.strokeStyle = 'rgba(' + r.color + ',' + Math.max(0, r.a) + ')';
+    ctx.lineWidth = r.lw;
+    ctx.beginPath();
+    ctx.arc(r.x, r.y, r.r, 0, TAU);
+    ctx.stroke();
+  }
+
+  /* meteor */
+  if (meteor) {
+    ctx.save();
+    ctx.globalCompositeOperation = 'lighter';
+    const mg = ctx.createRadialGradient(meteor.x, meteor.y, 0, meteor.x, meteor.y, 26);
+    mg.addColorStop(0, 'rgba(255,250,235,0.95)');
+    mg.addColorStop(0.4, 'rgba(255,190,110,0.7)');
+    mg.addColorStop(1, 'rgba(255,140,70,0)');
+    ctx.fillStyle = mg;
+    ctx.beginPath();
+    ctx.arc(meteor.x, meteor.y, 26, 0, TAU);
+    ctx.fill();
+    ctx.restore();
+  }
+
+  ctx.restore();
+}
+
+function drawFish(f, t, style) {
+  const ang = Math.atan2(f.vy, f.vx);
+  const sp = Math.hypot(f.vx, f.vy);
+  const wig = Math.sin(t * (6 + sp * 0.06) + f.phase);
+  const s = f.size;
+  const gs = s * style.glowR;
+  ctx.drawImage(style.glow, f.x - gs, f.y - gs, gs * 2, gs * 2);
+
+  ctx.save();
+  ctx.translate(f.x, f.y);
+  ctx.rotate(ang);
+
+  // tail
+  ctx.fillStyle = style.fin;
+  ctx.beginPath();
+  ctx.moveTo(-s * 0.75, 0);
+  ctx.quadraticCurveTo(-s * 1.5, wig * s * 0.55 - s * 0.5, -s * 1.85, wig * s * 0.85 - s * 0.35);
+  ctx.quadraticCurveTo(-s * 1.45, wig * s * 0.6, -s * 1.85, wig * s * 0.85 + s * 0.35);
+  ctx.quadraticCurveTo(-s * 1.5, wig * s * 0.55 + s * 0.5, -s * 0.75, 0);
+  ctx.closePath();
+  ctx.fill();
+
+  // body
+  ctx.fillStyle = style.body;
+  ctx.beginPath();
+  ctx.ellipse(0, 0, s, s * style.slim, 0, 0, TAU);
+  ctx.fill();
+
+  // belly highlight
+  ctx.fillStyle = style.belly;
+  ctx.globalAlpha = 0.55;
+  ctx.beginPath();
+  ctx.ellipse(s * 0.18, s * style.slim * 0.22, s * 0.6, s * style.slim * 0.5, 0, 0, TAU);
+  ctx.fill();
+  ctx.globalAlpha = 1;
+
+  // dorsal fin for predators
+  if (style.dorsal) {
+    ctx.fillStyle = style.fin;
+    ctx.beginPath();
+    ctx.moveTo(-s * 0.1, -s * style.slim * 0.7);
+    ctx.quadraticCurveTo(s * 0.05, -s * 1.15, s * 0.42, -s * style.slim * 0.6);
+    ctx.closePath();
+    ctx.fill();
+  }
+
+  // eye
+  ctx.fillStyle = 'rgba(20,30,45,0.85)';
+  ctx.beginPath();
+  ctx.arc(s * 0.55, -s * style.slim * 0.18, Math.max(1, s * 0.11), 0, TAU);
+  ctx.fill();
+
+  ctx.restore();
+}
+
+/* ---------- population chart ---------- */
+const histP = [], histG = [], histD = [];
+const HIST_MAX = 260;
+let sampleTimer = 0;
+
+function sample(dt) {
+  sampleTimer += dt;
+  if (sampleTimer < 0.3) return;
+  sampleTimer = 0;
+  histP.push(plankton.length);
+  histG.push(grazers.length);
+  histD.push(preds.length);
+  if (histP.length > HIST_MAX) { histP.shift(); histG.shift(); histD.shift(); }
+  document.getElementById('cP').textContent = plankton.length;
+  document.getElementById('cG').textContent = grazers.length;
+  document.getElementById('cD').textContent = preds.length;
+  drawChart();
+}
+
+function drawChart() {
+  const w = chartCv.width, h = chartCv.height;
+  const c = chartCtx;
+  c.clearRect(0, 0, w, h);
+  c.strokeStyle = 'rgba(255,255,255,0.06)';
+  c.lineWidth = 1;
+  for (let i = 1; i < 4; i++) {
+    c.beginPath();
+    c.moveTo(0, h * i / 4);
+    c.lineTo(w, h * i / 4);
+    c.stroke();
+  }
+  const series = [
+    [histP, '142,240,180'],
+    [histG, '255,207,138'],
+    [histD, '201,162,245']
+  ];
+  for (let si = 0; si < series.length; si++) {
+    const data = series[si][0], col = series[si][1];
+    if (data.length < 2) continue;
+    let max = 4;
+    for (let i = 0; i < data.length; i++) if (data[i] > max) max = data[i];
+    max *= 1.08;
+    const pad = 3;
+    c.beginPath();
+    for (let i = 0; i < data.length; i++) {
+      const x = i / (HIST_MAX - 1) * w;
+      const y = h - pad - (data[i] / max) * (h - pad * 2);
+      if (i === 0) c.moveTo(x, y); else c.lineTo(x, y);
+    }
+    c.strokeStyle = 'rgba(' + col + ',0.95)';
+    c.lineWidth = 1.6;
+    c.stroke();
+    // soft fill
+    const lastX = (data.length - 1) / (HIST_MAX - 1) * w;
+    c.lineTo(lastX, h);
+    c.lineTo(0, h);
+    c.closePath();
+    c.fillStyle = 'rgba(' + col + ',0.07)';
+    c.fill();
+  }
+}
+
+/* ---------- flash messages ---------- */
+const flashEl = document.getElementById('flash');
+let flashTimer = null;
+function flash(msg) {
+  flashEl.textContent = msg;
+  flashEl.classList.remove('show');
+  void flashEl.offsetWidth;
+  flashEl.classList.add('show');
+  clearTimeout(flashTimer);
+  flashTimer = setTimeout(() => flashEl.classList.remove('show'), 3500);
+}
+
+/* ---------- god tools ---------- */
+let tool = 'feed';
+let pointerDown = false;
+let feedAccum = 0;
+let meteorCooldown = 0;
+
+function useTool(x, y, isDrag) {
+  if (tool === 'feed') {
+    const n = isDrag ? 4 : 26;
+    for (let i = 0; i < n; i++) {
+      const a = rand(0, TAU), r = rand(0, isDrag ? 22 : 46);
+      spawnPlankton(x + Math.cos(a) * r, y + Math.sin(a) * r);
+    }
+    if (!isDrag) {
+      ripple(x, y, 52, '160,255,200', 1.6);
+      flash('nutrients scatter across the water');
+    }
+  } else if (tool === 'grazer' && !isDrag) {
+    for (let i = 0; i < 3; i++) spawnGrazer(x + rand(-12, 12), y + rand(-12, 12));
+    ripple(x, y, 44, '255,207,138', 1.6);
+    flash('grazers slip into the pool');
+  } else if (tool === 'pred' && !isDrag) {
+    spawnPred(x, y);
+    ripple(x, y, 52, '201,162,245', 1.8);
+    flash('a hunter descends');
+  } else if (tool === 'meteor' && !isDrag) {
+    if (meteor || meteorCooldown > 0) return;
+    meteor = { x: x + rand(-30, 30), y: -60, ty: y, vy: 420 };
+    meteorCooldown = 1.4;
+  }
+}
+
+canvas.addEventListener('pointerdown', e => {
+  pointerDown = true;
+  useTool(e.clientX, e.clientY, false);
+});
+canvas.addEventListener('pointermove', e => {
+  if (pointerDown && tool === 'feed') {
+    feedAccum += 1;
+    if (feedAccum % 3 === 0) useTool(e.clientX, e.clientY, true);
+  }
+});
+window.addEventListener('pointerup', () => { pointerDown = false; });
+
+const toolBtns = document.querySelectorAll('.tool');
+function setTool(name) {
+  tool = name;
+  toolBtns.forEach(b => b.classList.toggle('active', b.dataset.tool === name));
+}
+toolBtns.forEach(b => b.addEventListener('click', () => setTool(b.dataset.tool)));
+
+window.addEventListener('keydown', e => {
+  if (e.key === '1') setTool('feed');
+  else if (e.key === '2') setTool('grazer');
+  else if (e.key === '3') setTool('pred');
+  else if (e.key === '4') setTool('meteor');
+  else if (e.key === ' ') { e.preventDefault(); togglePause(); }
+});
+
+/* ---------- controls ---------- */
+const pauseBtn = document.getElementById('pauseBtn');
+const speedBtn = document.getElementById('speedBtn');
+function togglePause() {
+  paused = !paused;
+  pauseBtn.textContent = paused ? 'Resume' : 'Pause';
+}
+pauseBtn.addEventListener('click', togglePause);
+speedBtn.addEventListener('click', () => {
+  speed = speed === 1 ? 2 : (speed === 2 ? 0.5 : 1);
+  speedBtn.innerHTML = (speed === 0.5 ? '&frac12;' : speed) + '&times;';
+});
+document.getElementById('sunSlider').addEventListener('input', e => {
+  sun = e.target.value / 100;
+});
+
+/* ---------- resize ---------- */
+function resize() {
+  DPR = Math.min(window.devicePixelRatio || 1, 2);
+  W = window.innerWidth;
+  H = window.innerHeight;
+  canvas.width = W * DPR;
+  canvas.height = H * DPR;
+  canvas.style.width = W + 'px';
+  canvas.style.height = H + 'px';
+  ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  makePaper();
+  const cw = chartCv.clientWidth || 250;
+  chartCv.width = cw * DPR;
+  chartCv.height = (chartCv.clientHeight || 86) * DPR;
+  chartCtx.setTransform(1, 0, 0, 1, 0, 0);
+  chartCtx.scale(1, 1);
+  drawChart();
+}
+let resizeTimer = null;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(resize, 120);
+});
+
+/* ---------- main loop ---------- */
+let lastT = performance.now();
+function frame(now) {
+  requestAnimationFrame(frame);
+  let dt = Math.min((now - lastT) / 1000, 0.05);
+  lastT = now;
+  if (!paused) {
+    dt *= speed;
+    if (meteorCooldown > 0) meteorCooldown -= dt;
+    // sub-step at high speed for stability
+    const steps = speed > 1 ? 2 : 1;
+    for (let i = 0; i < steps; i++) step(dt / steps);
+    sample(dt);
+  }
+  render(simTime);
+}
+
+resize();
+seedWorld();
+sample(1); // populate counters immediately
+flash('the pool wakes');
+requestAnimationFrame(frame);
+</script>
+<style id="sonojs-credit-style">
+#sonojs-credit{position:fixed;bottom:10px;inset-inline-end:12px;z-index:9999;margin:0;padding:0;font:12px/1.2 system-ui,-apple-system,sans-serif;pointer-events:auto}
+#sonojs-credit a{color:rgba(234,246,244,.7);text-decoration:none;text-shadow:0 1px 2px rgba(0,0,0,.75)}
+#sonojs-credit a:hover{color:#eaf6f4;text-decoration:underline}
+html.embed #sonojs-credit,html.embed #sonojs-credit-style{display:none!important}
+</style>
+<footer id="sonojs-credit"><a href="https://sonojs.com" target="_blank" rel="noopener noreferrer">sonojs.com</a></footer>
+</body>
+</html>

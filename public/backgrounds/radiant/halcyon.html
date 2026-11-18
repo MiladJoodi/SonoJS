@@ -169,13 +169,56 @@
   }
 
   @media (max-width:760px){
-    #rail{ gap:20px; row-gap:14px; bottom:26px; }
-    .ctl{ width:150px !important; }
-    .ctl .lab{ font-size:8.5px; letter-spacing:0.2em; white-space:nowrap; }
-    .ctl .lab output{ font-size:8.5px; }
     #slate{ display:none; }
-    #brand{ top:20px; left:22px; }
-    #aboutBtn{ top:18px; right:22px; }
+    #brand{ top:14px; left:14px; font-size:11px; }
+    #aboutBtn{ top:12px; right:14px; }
+    #ui::before{ height:220px; }
+    #rail{
+      left:10px; right:10px;
+      bottom:max(10px, env(safe-area-inset-bottom, 0px));
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px 14px;
+      align-items:end;
+      justify-content:stretch;
+      padding:12px 14px 10px;
+      border-radius:14px;
+      background:rgba(2,4,10,.58);
+      border:1px solid rgba(255,246,230,.12);
+      -webkit-backdrop-filter:blur(14px);
+      backdrop-filter:blur(14px);
+      max-height:min(42vh, 280px);
+      overflow-y:auto;
+      -webkit-overflow-scrolling:touch;
+    }
+    .ctl,
+    .ctl[style]{
+      width:auto !important;
+      min-width:0;
+    }
+    .ctl .lab{
+      font-size:8px;
+      letter-spacing:0.12em;
+      white-space:nowrap;
+      gap:6px;
+    }
+    .ctl .lab output{
+      font-size:8px;
+      max-width:58%;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    input[type=range]{ height:28px; }
+    input[type=range]::-webkit-slider-thumb{
+      width:16px; height:16px; margin-top:-7.5px;
+    }
+    input[type=range]::-moz-range-thumb{ width:16px; height:16px; }
+    #play, #scope{
+      justify-self:center;
+      min-height:40px;
+      padding:10px 6px;
+      font-size:11px;
+    }
   }
   @media (prefers-reduced-motion:reduce){
     #slate b.flip{ animation:none; }

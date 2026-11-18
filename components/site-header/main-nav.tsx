@@ -7,6 +7,7 @@ import {
   BoxIcon,
   ChevronDownIcon,
   GalleryHorizontalEndIcon,
+  LayoutGridIcon,
   LayoutTemplateIcon,
   MousePointer2Icon,
   PlugIcon,
@@ -31,6 +32,7 @@ const activeClass =
   "text-primary underline decoration-primary decoration-2 underline-offset-8"
 
 const NAV_ICONS: Record<string, LucideIcon> = {
+  "/docs/components": LayoutGridIcon,
   "/templates": StoreIcon,
   "/websites": LayoutTemplateIcon,
   "/ai": SparklesIcon,

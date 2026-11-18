@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Ink Flow</title>
+<style>
+  html.embed #placard,
+  html.embed #hint,
+  html.embed #about { display: none !important; }
+  :root{
+    --glass: rgba(255,255,255,0.055);
+    --glass-hi: rgba(255,255,255,0.09);
+    --hair: rgba(255,255,255,0.09);
+    --ink: rgba(255,255,255,0.74);
+    --ink-dim: rgba(255,255,255,0.44);
+    --ink-faint: rgba(255,255,255,0.22);
+    --ease: cubic-bezier(.22,.61,.36,1);
+    --ease-out: cubic-bezier(.16,1,.3,1);
+  }
+  *{ margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  html,body{ width:100%; height:100%; overflow:hidden; background:#08090D; }
+  body{
+    font-family: ui-sans-serif, 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: var(--ink);
+    user-select:none; -webkit-user-select:none;
+    touch-action:none;
+    cursor: crosshair;
+  }
+  canvas{ position:fixed; inset:0; display:block; width:100%; height:100%; }
+  #stage{ z-index:1; }
+
+  /* radial vignette / stage light */
+  #vignette{
+    position:fixed; inset:0; z-index:2; pointer-events:none;
+    background:
+      radial-gradient(120% 90% at 50% 42%, rgba(18,19,26,0.0) 0%, rgba(10,11,15,0.0) 45%, rgba(5,5,8,0.6) 100%);
+  }
+  /* film grain */
+  #grain{
+    position:fixed; inset:0; z-index:3; pointer-events:none; opacity:.045;
+    background-image:var(--grain); background-size:180px 180px;
+    mix-blend-mode:overlay;
+  }
+
+  /* glowing pointer aura */
+  #aura{
+    position:fixed; z-index:4; left:0; top:0; width:120px; height:120px;
+    margin:-60px 0 0 -60px; pointer-events:none; opacity:0;
+    border-radius:50%;
+    background:radial-gradient(circle, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.04) 38%, rgba(255,255,255,0) 70%);
+    transition:opacity .5s ease;
+    will-change:transform;
+    mix-blend-mode:screen;
+  }
+  #aura::after{
+    content:''; position:absolute; inset:44px; border-radius:50%;
+    border:1px solid rgba(255,255,255,0.16);
+  }
+
+  /* Wordmark placard */
+  #placard{
+    position:fixed; z-index:5; top:30px; left:0; right:0; text-align:center;
+    pointer-events:none; transition:opacity 1.2s ease;
+  }
+  #placard .mark{
+    font-family: Georgia, 'Times New Roman', serif;
+    font-weight:400; font-size:15px; letter-spacing:.62em;
+    text-transform:lowercase; color:var(--ink-dim); text-indent:.62em;
+  }
+  #placard .sub{
+    margin-top:10px; font-size:10px; letter-spacing:.34em; color:var(--ink-faint);
+    text-transform:lowercase; font-weight:400;
+  }
+  /* cinematic reveal on load */
+  #placard .mark, #placard .sub{
+    opacity:0; filter:blur(6px); transform:translateY(6px);
+    animation:reveal 1.8s var(--ease-out) forwards;
+  }
+  #placard .sub{ animation-delay:.35s; }
+  @keyframes reveal{ to{ opacity:1; filter:blur(0); transform:none; } }
+
+  /* HUD */
+  #hud{
+    position:fixed; z-index:6; left:50%; bottom:28px; transform:translateX(-50%);
+    display:flex; align-items:center; gap:20px;
+    padding:14px 20px;
+    background:var(--glass);
+    border:1px solid var(--hair);
+    border-radius:20px;
+    backdrop-filter: blur(24px) saturate(1.25);
+    -webkit-backdrop-filter: blur(24px) saturate(1.25);
+    box-shadow: 0 14px 54px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.06);
+    transition: opacity .8s var(--ease), transform .8s var(--ease);
+    max-width: calc(100vw - 32px);
+    flex-wrap:wrap; justify-content:center;
+    animation:hudIn 1.1s var(--ease-out) .6s backwards;
+  }
+  /* `backwards` (not `forwards`) so the fill releases after the intro and the
+     .idle fade / hover states can take over the opacity + transform again. */
+  @keyframes hudIn{ from{ opacity:0; transform:translateX(-50%) translateY(14px); } to{ opacity:1; transform:translateX(-50%); } }
+  #hud.idle{ opacity:.14; transform:translateX(-50%) translateY(4px); }
+  #hud:hover{ opacity:1 !important; transform:translateX(-50%) !important; }
+
+  .group{ display:flex; align-items:center; gap:11px; }
+  .divider{ width:1px; height:30px; background:var(--hair); }
+
+  .label{ font-size:10px; letter-spacing:.16em; color:var(--ink-dim); text-transform:lowercase; white-space:nowrap; }
+
+  /* palette swatches */
+  .swatches{ display:flex; gap:8px; }
+  .sw{
+    width:26px; height:26px; border-radius:8px; cursor:pointer; position:relative;
+    border:1px solid rgba(255,255,255,0.10);
+    transition: transform .3s var(--ease-out), box-shadow .3s ease, border-color .3s ease;
+    overflow:visible;
+  }
+  .sw .swin{ position:absolute; inset:0; border-radius:7px; overflow:hidden; }
+  .sw:hover{ transform:translateY(-3px) scale(1.07); }
+  .sw.active{ border-color:rgba(255,255,255,0.6); box-shadow:0 0 0 1px rgba(255,255,255,0.28), 0 5px 16px rgba(0,0,0,0.45); }
+  .sw .ttl{
+    position:absolute; bottom:-22px; left:50%; transform:translateX(-50%);
+    font-size:9px; letter-spacing:.12em; color:var(--ink-dim); white-space:nowrap; opacity:0;
+    transition:opacity .22s ease, bottom .22s var(--ease-out); pointer-events:none;
+  }
+  .sw:hover .ttl{ opacity:1; bottom:-19px; }
+
+  /* sliders */
+  .slider{ position:relative; width:96px; height:26px; display:flex; align-items:center; cursor:ew-resize; touch-action:none; }
+  .slider .track{
+    position:absolute; left:0; right:0; height:3px; border-radius:3px;
+    background:rgba(255,255,255,0.13); top:50%; transform:translateY(-50%);
+  }
+  .slider .fill{
+    position:absolute; left:0; height:3px; border-radius:3px;
+    background:linear-gradient(90deg, rgba(255,255,255,0.35), rgba(255,255,255,0.7));
+    top:50%; transform:translateY(-50%);
+  }
+  .slider .knob{
+    position:absolute; width:12px; height:12px; border-radius:50%;
+    background:#EDEDF2; top:50%; transform:translate(-50%,-50%);
+    box-shadow:0 2px 6px rgba(0,0,0,0.5); transition:box-shadow .2s ease, transform .12s var(--ease-out);
+  }
+  .slider:hover .knob, .slider.drag .knob{ box-shadow:0 0 0 5px rgba(255,255,255,0.09), 0 2px 6px rgba(0,0,0,0.5); }
+  .slider.drag .knob{ transform:translate(-50%,-50%) scale(1.15); }
+
+  /* buttons */
+  .btn{
+    font-family:inherit; font-size:10px; letter-spacing:.16em; text-transform:lowercase;
+    color:var(--ink-dim); background:transparent; border:1px solid var(--hair);
+    border-radius:11px; padding:8px 13px; cursor:pointer; white-space:nowrap;
+    transition: color .25s ease, border-color .25s ease, background .25s ease, transform .12s var(--ease-out);
+  }
+  .btn:hover{ color:var(--ink); border-color:rgba(255,255,255,0.24); background:rgba(255,255,255,0.045); }
+  .btn:active{ transform:scale(.95); }
+  .iconbtn{ display:flex; align-items:center; justify-content:center; padding:8px; width:34px; height:34px; }
+  .iconbtn svg{ width:16px; height:16px; stroke:var(--ink-dim); fill:none; stroke-width:1.4; transition:stroke .25s ease; }
+  .iconbtn:hover svg{ stroke:var(--ink); }
+
+  /* about overlay */
+  #about{
+    position:fixed; z-index:20; inset:0; display:flex; align-items:center; justify-content:center;
+    background:rgba(5,5,8,0.74); backdrop-filter:blur(9px); -webkit-backdrop-filter:blur(9px);
+    opacity:0; pointer-events:none; transition:opacity .5s ease;
+  }
+  #about.open{ opacity:1; pointer-events:auto; }
+  #about .card{
+    max-width:440px; margin:24px; padding:36px 38px;
+    background:rgba(15,16,22,0.92); border:1px solid var(--hair); border-radius:22px;
+    box-shadow:0 26px 90px rgba(0,0,0,0.65), inset 0 1px 0 rgba(255,255,255,0.05);
+    transform:translateY(14px) scale(.97); transition:transform .55s var(--ease-out);
+  }
+  #about.open .card{ transform:none; }
+  #about .card h1{
+    font-family:Georgia, serif; font-weight:400; font-size:19px; letter-spacing:.4em;
+    text-transform:lowercase; text-indent:.4em; color:var(--ink); margin-bottom:16px;
+  }
+  #about .card p{ font-size:13px; line-height:1.75; color:var(--ink-dim); margin-bottom:14px; }
+  #about .card .keys{ font-size:11px; line-height:2.1; color:var(--ink-faint); letter-spacing:.03em; }
+  #about .card .keys b{ color:var(--ink-dim); font-weight:600; }
+  #about .credit{ margin-top:22px; font-size:10.5px; letter-spacing:.14em; color:var(--ink-faint); text-transform:lowercase; }
+  #about .close{ margin-top:22px; }
+
+  #info{
+    position:fixed; z-index:6; right:22px; top:24px; cursor:pointer;
+    width:30px; height:30px; border-radius:50%; border:1px solid var(--hair);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--ink-faint); font-size:13px; font-family:Georgia,serif; font-style:italic;
+    transition:color .25s, border-color .25s, transform .2s var(--ease-out); background:var(--glass);
+    backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+    animation:infoIn 1.1s var(--ease-out) .8s backwards;
+  }
+  @keyframes infoIn{ from{ opacity:0; transform:translateY(-8px); } to{ opacity:1; transform:none; } }
+  #info:hover{ color:var(--ink); border-color:rgba(255,255,255,0.24); transform:rotate(8deg) scale(1.08); }
+
+  #hint{
+    position:fixed; z-index:5; left:50%; top:50%; transform:translate(-50%,-50%);
+    font-size:12px; letter-spacing:.28em; color:var(--ink-faint); text-transform:lowercase;
+    pointer-events:none; transition:opacity 1.4s ease; text-align:center;
+  }
+  #flash{ position:fixed; inset:0; z-index:30; background:#fff; opacity:0; pointer-events:none; }
+
+  /* toast */
+  #toast{
+    position:fixed; z-index:25; left:50%; top:74px; transform:translate(-50%,-8px);
+    padding:9px 16px; border-radius:12px; background:var(--glass); border:1px solid var(--hair);
+    backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+    font-size:10px; letter-spacing:.18em; text-transform:lowercase; color:var(--ink-dim);
+    opacity:0; pointer-events:none; transition:opacity .4s ease, transform .5s var(--ease-out);
+    white-space:nowrap;
+  }
+  #toast.show{ opacity:1; transform:translate(-50%,0); }
+
+  @media (max-width:560px){
+    #hud{ gap:12px; padding:12px 14px; }
+    .slider{ width:70px; }
+    #placard{ top:20px; }
+    body{ cursor:auto; }
+    #aura{ display:none; }
+  }
+  @media (hover:none){ body{ cursor:auto; } #aura{ display:none; } }
+</style>
+<script>if(/\bembed=1\b/.test(location.search))document.documentElement.classList.add("embed")</script>
+
+<canvas id="stage"></canvas>
+<div id="vignette"></div>
+<div id="grain"></div>
+<div id="aura"></div>
+
+<div id="placard">
+  <div class="mark">ink flow</div>
+  <div class="sub">a darkroom aquarium</div>
+</div>
+
+<div id="hint">drag to release ink</div>
+
+<div id="info">i</div>
+
+<div id="toast"></div>
+<div id="flash"></div>
+
+<div id="hud">
+  <div class="group">
+    <span class="label">palette</span>
+    <div class="swatches" id="swatches"></div>
+  </div>
+  <div class="divider"></div>
+  <div class="group">
+    <span class="label">viscosity</span>
+    <div class="slider" id="visc"><div class="track"></div><div class="fill"></div><div class="knob"></div></div>
+  </div>
+  <div class="group">
+    <span class="label">emission</span>
+    <div class="slider" id="emis"><div class="track"></div><div class="fill"></div><div class="knob"></div></div>
+  </div>
+  <div class="divider"></div>
+  <div class="group">
+    <button class="btn" id="clear">clear</button>
+    <button class="btn iconbtn" id="shot" title="save png (s)">
+      <svg viewBox="0 0 24 24"><path d="M4 8h3l1.5-2h7L17 8h3v11H4z"/><circle cx="12" cy="13" r="3.4"/></svg>
+    </button>
+  </div>
+</div>
+
+<div id="about">
+  <div class="card">
+    <h1>ink flow</h1>
+    <p>Drag your finger through still water and watch color bloom, braid, and dissolve. An invisible curl-noise current grabs every stroke and unspools it into slow, glowing filaments — alive before you lift your finger, and never the same twice.</p>
+    <p style="color:var(--ink-faint)">Light refracts through the drifting dye, casting shimmering caustics across the darkroom floor. Leave it be and faint emitters wake at the edges, keeping the water in quiet motion. Double-tap the water for a supernova.</p>
+    <div class="keys">
+      <b>drag</b> &nbsp;release ink &nbsp;·&nbsp; <b>flick</b> &nbsp;jets &nbsp;·&nbsp; <b>double-tap</b> &nbsp;burst<br>
+      <b>s</b> &nbsp;save a png &nbsp;·&nbsp; <b>c</b> &nbsp;clear &nbsp;·&nbsp; <b>space</b> &nbsp;bloom &nbsp;·&nbsp; <b>1–5</b> &nbsp;palettes
+    </div>
+    <div class="credit">built by Claude Fable 5</div>
+    <button class="btn close" id="aboutClose">close</button>
+  </div>
+</div>
+
+<script>
+"use strict";
+(function(){
+
+/* ============================================================
+   PALETTES — each: array of {t, rgb} stops sampled by (speed,age)
+   Ordered bright core -> cool translucent tail.
+   ============================================================ */
+const PALETTES = [
+  { name:"sumi", stops:[ [0xF4,0xF2,0xEC],[0x9A,0xA0,0xAE],[0x30,0x34,0x40],[0x0C,0x0D,0x12] ] },
+  { name:"kintsugi", stops:[ [0xFF,0xE7,0x9A],[0xF5,0xC4,0x51],[0xE5,0x48,0x4D],[0x2A,0x10,0x14] ] },
+  { name:"abyssal", stops:[ [0xBE,0xFF,0xF4],[0x2D,0xD4,0xBF],[0x63,0x66,0xF1],[0x18,0x0B,0x2E] ] },
+  { name:"peony", stops:[ [0xFF,0xE1,0xF0],[0xF9,0xA8,0xD4],[0xD6,0x3A,0xA6],[0x35,0x0F,0x2C] ] },
+  { name:"chlorophyll", stops:[ [0xE6,0xFF,0x9E],[0xA3,0xE6,0x35],[0x1E,0x8A,0x5A],[0x06,0x1B,0x18] ] }
+];
+
+// Build a 256-entry RGB LUT (Float 0..1) from stops.
+function buildLUT(stops){
+  const N=256, lut=new Float32Array(N*3);
+  const seg=stops.length-1;
+  for(let i=0;i<N;i++){
+    const f=i/(N-1)*seg;
+    const a=Math.min(seg-1|0, Math.floor(f));
+    const t=f-a;
+    const s0=stops[a], s1=stops[a+1];
+    lut[i*3  ]=(s0[0]+(s1[0]-s0[0])*t)/255;
+    lut[i*3+1]=(s0[1]+(s1[1]-s0[1])*t)/255;
+    lut[i*3+2]=(s0[2]+(s1[2]-s0[2])*t)/255;
+  }
+  return lut;
+}
+const LUTS = PALETTES.map(p=>buildLUT(p.stops));
+
+/* ============================================================
+   WEBGL SETUP  (canvas/gl are `let` so the 2D fallback can rebind)
+   ============================================================ */
+let canvas = document.getElementById('stage');
+const GL_OPTS = {alpha:false, antialias:false, depth:false, stencil:false, preserveDrawingBuffer:false, premultipliedAlpha:false};
+let gl = canvas.getContext('webgl', GL_OPTS) || canvas.getContext('experimental-webgl', GL_OPTS);
+
+let useGL = !!gl;
+let use2D = !useGL;
+
+// ---- helpers ----
+function compile(type, src){
+  const s=gl.createShader(type); gl.shaderSource(s,src); gl.compileShader(s);
+  if(!gl.getShaderParameter(s,gl.COMPILE_STATUS)){ console.warn(gl.getShaderInfoLog(s)); throw new Error('shader'); }
+  return s;
+}
+function program(vs, fs){
+  const p=gl.createProgram();
+  gl.attachShader(p,compile(gl.VERTEX_SHADER,vs));
+  gl.attachShader(p,compile(gl.FRAGMENT_SHADER,fs));
+  gl.bindAttribLocation(p,0,'a_pos');
+  gl.linkProgram(p);
+  if(!gl.getProgramParameter(p,gl.LINK_STATUS)){ console.warn(gl.getProgramInfoLog(p)); throw new Error('link'); }
+  const u={}; const n=gl.getProgramParameter(p,gl.ACTIVE_UNIFORMS);
+  for(let i=0;i<n;i++){ const info=gl.getActiveUniform(p,i); u[info.name]=gl.getUniformLocation(p,info.name); }
+  return {p,u};
+}
+
+// A ping-pong float/half-float framebuffer target
+let texType, extLinear=false;
+function makeFBO(w,h,filter){
+  const tex=gl.createTexture();
+  gl.bindTexture(gl.TEXTURE_2D,tex);
+  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,filter);
+  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,filter);
+  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
+  gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,w,h,0,gl.RGBA,texType,null);
+  const fbo=gl.createFramebuffer();
+  gl.bindFramebuffer(gl.FRAMEBUFFER,fbo);
+  gl.framebufferTexture2D(gl.FRAMEBUFFER,gl.COLOR_ATTACHMENT0,gl.TEXTURE_2D,tex,0);
+  gl.viewport(0,0,w,h);
+  // alpha MUST clear to 0: dye alpha is density, and a=1 clear reads as
+  // full ink coverage — the whole stage boots to a white-out.
+  gl.clearColor(0,0,0,0); gl.clear(gl.COLOR_BUFFER_BIT);
+  return {tex,fbo,w,h};
+}
+function destroyFBO(o){ if(!o) return; if(o.tex) gl.deleteTexture(o.tex); if(o.fbo) gl.deleteFramebuffer(o.fbo); }
+function makeDouble(w,h,filter){
+  let a=makeFBO(w,h,filter), b=makeFBO(w,h,filter);
+  return { get read(){return a;}, get write(){return b;}, swap(){const t=a;a=b;b=t;},
+           destroy(){ destroyFBO(a); destroyFBO(b); }, w,h };
+}
+
+/* ---------- Shaders ---------- */
+const VERT = `
+attribute vec2 a_pos;
+varying vec2 v_uv;
+void main(){ v_uv = a_pos*0.5+0.5; gl_Position = vec4(a_pos,0.0,1.0); }
+`;
+
+// Advect the dye through the curl-noise flow field + optional pointer velocity.
+// Dye is stored RGB=color, A=density. We advect the whole RGBA.
+const FRAG_ADVECT = `
+precision highp float;
+varying vec2 v_uv;
+uniform sampler2D u_dye;
+uniform vec2  u_texel;     // 1/size
+uniform float u_time;      // z / evolving
+uniform float u_dt;
+uniform float u_dissip;    // <1 fade
+uniform float u_flowScale; // spatial frequency of curl
+uniform float u_flowStr;   // flow strength
+uniform float u_aspect;
+
+// -- value noise 3D (hash based) --
+float hash(vec3 p){
+  p = fract(p*0.3183099 + vec3(0.1,0.2,0.3));
+  p *= 17.0;
+  return fract(p.x*p.y*p.z*(p.x+p.y+p.z));
+}
+float vnoise(vec3 x){
+  vec3 i=floor(x), f=fract(x);
+  f=f*f*(3.0-2.0*f);
+  float n000=hash(i+vec3(0,0,0)), n100=hash(i+vec3(1,0,0));
+  float n010=hash(i+vec3(0,1,0)), n110=hash(i+vec3(1,1,0));
+  float n001=hash(i+vec3(0,0,1)), n101=hash(i+vec3(1,0,1));
+  float n011=hash(i+vec3(0,1,1)), n111=hash(i+vec3(1,1,1));
+  float nx00=mix(n000,n100,f.x), nx10=mix(n010,n110,f.x);
+  float nx01=mix(n001,n101,f.x), nx11=mix(n011,n111,f.x);
+  float nxy0=mix(nx00,nx10,f.y), nxy1=mix(nx01,nx11,f.y);
+  return mix(nxy0,nxy1,f.z);
+}
+float fbm(vec3 p){
+  float a=0.5, s=0.0;
+  for(int i=0;i<3;i++){ s+=a*vnoise(p); p*=2.02; a*=0.5; }
+  return s;
+}
+// scalar potential -> curl (2D) = perpendicular gradient
+vec2 curl(vec2 p, float z){
+  float e=0.6;
+  vec3 P=vec3(p,z);
+  float n1=fbm(P+vec3(0.0,e,0.0));
+  float n2=fbm(P-vec3(0.0,e,0.0));
+  float n3=fbm(P+vec3(e,0.0,0.0));
+  float n4=fbm(P-vec3(e,0.0,0.0));
+  float dx=(n1-n2)/(2.0*e);
+  float dy=(n3-n4)/(2.0*e);
+  return vec2(dx,-dy);
+}
+
+void main(){
+  vec2 uv=v_uv;
+  // sample point in noise space, keep aspect square-ish so swirl isn't stretched
+  vec2 p=vec2(uv.x*u_aspect, uv.y)*u_flowScale;
+  vec2 vel=curl(p, u_time)*u_flowStr;
+  // trace back
+  vec2 back = uv - vel*u_dt*u_texel*vec2(1.0/u_aspect,1.0)*300.0;
+  vec4 dye = texture2D(u_dye, back);
+  dye *= u_dissip;
+  gl_FragColor = dye;
+}
+`;
+
+// Splat brush: additive dye injection with radial falloff.
+const FRAG_SPLAT = `
+precision highp float;
+varying vec2 v_uv;
+uniform sampler2D u_dye;
+uniform vec2  u_point;   // uv
+uniform vec2  u_aspectv; // aspect correction for radius
+uniform float u_radius;
+uniform vec3  u_color;
+uniform float u_amount;
+void main(){
+  vec4 base=texture2D(u_dye, v_uv);
+  vec2 d=(v_uv-u_point)*u_aspectv;
+  float r=dot(d,d)/(u_radius*u_radius);
+  float f=exp(-r);              // gaussian brush
+  base.rgb += u_color*f*u_amount;
+  base.a   += f*u_amount;
+  gl_FragColor = base;
+}
+`;
+
+// Display: map density+color-accumulation to palette LUT by (speed proxy, age),
+// apply screen/additive glow + bloom + refraction caustics + vignette + grain.
+const FRAG_DISPLAY = `
+precision highp float;
+varying vec2 v_uv;
+uniform sampler2D u_dye;
+uniform sampler2D u_bloom;
+uniform sampler2D u_lutA;
+uniform sampler2D u_lutB;
+uniform float u_lutMix;
+uniform vec2  u_texel;
+uniform vec2  u_dtexel;   // dye texel (sim res) for gradient sampling
+uniform float u_time;
+uniform float u_grain;
+
+vec3 sampleLUT(sampler2D lut, float x){
+  return texture2D(lut, vec2(clamp(x,0.001,0.999),0.5)).rgb;
+}
+float rnd(vec2 p){ return fract(sin(dot(p,vec2(41.3,289.1)))*43758.5453); }
+
+void main(){
+  vec4 dye=texture2D(u_dye, v_uv);
+  float dens=dye.a;
+
+  // --- refraction caustics: the dye acts as a lens; its density gradient bends
+  //     the "floor light", concentrating bright veins along the ridges. ---
+  float dL = texture2D(u_dye, v_uv - vec2(u_dtexel.x,0.0)).a;
+  float dR = texture2D(u_dye, v_uv + vec2(u_dtexel.x,0.0)).a;
+  float dD = texture2D(u_dye, v_uv - vec2(0.0,u_dtexel.y)).a;
+  float dU = texture2D(u_dye, v_uv + vec2(0.0,u_dtexel.y)).a;
+  vec2 grad = vec2(dR-dL, dU-dD);
+  float caustic = pow(clamp(1.0 - length(grad)*7.0, 0.0, 1.0), 3.0);
+  caustic *= clamp(dens*2.2, 0.0, 1.0);
+
+  // "age/thinness": accumulated color relative to density gives a hue coord.
+  // brighter, denser core -> low LUT index (bright); thin edge -> high (cool tail)
+  float lum=dot(dye.rgb, vec3(0.333));
+  float core = clamp(lum/(dens+0.0004), 0.0, 1.0);
+  float coord = clamp(1.0 - core*1.4, 0.0, 1.0);
+  // fold in density: very faint dye pushes toward the cold tail
+  coord = clamp(coord*0.55 + (1.0 - clamp(dens*3.5,0.0,1.0))*0.45, 0.0, 1.0);
+
+  vec3 cA=sampleLUT(u_lutA, coord);
+  vec3 cB=sampleLUT(u_lutB, coord);
+  vec3 col=mix(cA,cB,u_lutMix);
+
+  float density=clamp(dens*1.6,0.0,1.0);
+  // intensity curve: soft shoulder so the core glows white-hot
+  float I = pow(density,0.72);
+  vec3 ink = col*I;
+  // bright core lift
+  ink += vec3(pow(density,3.5))*0.6;
+  // caustic shimmer rides on the ink color, brightening the veins
+  ink += col*caustic*0.9 + vec3(caustic)*0.25;
+
+  // bloom (additive)
+  vec3 bloom=texture2D(u_bloom, v_uv).rgb;
+  vec3 c = ink + bloom*1.2;
+
+  // near-black stage with faint radial glow baseline
+  vec2 q=v_uv-0.5; q.x*=1.0;
+  float vg = 1.0 - dot(q,q)*1.15;
+  vec3 stage = mix(vec3(0.032,0.036,0.05), vec3(0.066,0.071,0.098), clamp(vg,0.0,1.0));
+  c = stage + c;
+
+  // vignette darkening at edges
+  c *= clamp(vg*1.25+0.15, 0.0, 1.0);
+
+  // subtle filmic tonemap
+  c = c/(c+vec3(0.85))*1.85;
+
+  // grain
+  float g=(rnd(v_uv*u_texel*820.0 + u_time)-0.5)*u_grain;
+  c += g;
+
+  gl_FragColor=vec4(c,1.0);
+}
+`;
+
+// Bloom: bright-pass + separable blur (we run a couple of passes)
+const FRAG_PREFILTER = `
+precision highp float; varying vec2 v_uv;
+uniform sampler2D u_dye; uniform float u_thresh;
+void main(){
+  vec4 d=texture2D(u_dye,v_uv);
+  float dens=clamp(d.a*1.6,0.0,1.0);
+  float b=max(0.0, pow(dens,1.6)-u_thresh);
+  vec3 col=d.rgb/(d.a+0.0004);
+  gl_FragColor=vec4(col*b, 1.0);
+}
+`;
+const FRAG_BLUR = `
+precision highp float; varying vec2 v_uv;
+uniform sampler2D u_tex; uniform vec2 u_dir; uniform vec2 u_texel;
+void main(){
+  vec2 o=u_dir*u_texel;
+  vec3 s=texture2D(u_tex,v_uv).rgb*0.2270;
+  s+=texture2D(u_tex,v_uv+o*1.3846).rgb*0.3162;
+  s+=texture2D(u_tex,v_uv-o*1.3846).rgb*0.3162;
+  s+=texture2D(u_tex,v_uv+o*3.2307).rgb*0.0702;
+  s+=texture2D(u_tex,v_uv-o*3.2307).rgb*0.0702;
+  gl_FragColor=vec4(s,1.0);
+}
+`;
+
+/* ============================================================
+   STATE
+   ============================================================ */
+const state = {
+  paletteIndex: 0,
+  viscosity: 0.5,   // 0..1 (higher = thicker, slower fade, slower advect)
+  emission: 0.5,    // 0..1 (brush size & density)
+  dpr: Math.min(window.devicePixelRatio||1, 2),
+  simScale: 0.5,    // fraction of display res for sim
+  running: true
+};
+
+let SIM_W=0, SIM_H=0, DISP_W=0, DISP_H=0;
+let dye, bloomA, bloomB, prefilterFBO;
+let progAdvect, progSplat, progDisplay, progPre, progBlur;
+let quadBuf;
+let lutTexA, lutTexB;
+
+/* ---------- init GL ---------- */
+// Probe: can we actually RENDER into a texture of this type? Having the
+// texture extension alone doesn't guarantee color-renderability (e.g. some
+// drivers / SwiftShader). Sampling an incomplete FBO texture yields
+// (0,0,0,1) — alpha 1 everywhere — which washes the whole screen white.
+function fboRenderable(type){
+  const tex=gl.createTexture();
+  gl.bindTexture(gl.TEXTURE_2D,tex);
+  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.NEAREST);
+  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.NEAREST);
+  gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,4,4,0,gl.RGBA,type,null);
+  const fbo=gl.createFramebuffer();
+  gl.bindFramebuffer(gl.FRAMEBUFFER,fbo);
+  gl.framebufferTexture2D(gl.FRAMEBUFFER,gl.COLOR_ATTACHMENT0,gl.TEXTURE_2D,tex,0);
+  const ok=gl.checkFramebufferStatus(gl.FRAMEBUFFER)===gl.FRAMEBUFFER_COMPLETE;
+  gl.bindFramebuffer(gl.FRAMEBUFFER,null);
+  gl.deleteFramebuffer(fbo); gl.deleteTexture(tex);
+  return ok;
+}
+function initGL(){
+  // float support? try half-float -> float -> byte, verifying renderability
+  const hf=gl.getExtension('OES_texture_half_float');
+  const f=gl.getExtension('OES_texture_float');
+  const candidates=[];
+  if(hf) candidates.push({type:hf.HALF_FLOAT_OES, lin:!!gl.getExtension('OES_texture_half_float_linear')});
+  if(f)  candidates.push({type:gl.FLOAT,          lin:!!gl.getExtension('OES_texture_float_linear')});
+  candidates.push({type:gl.UNSIGNED_BYTE, lin:true});
+  for(const c of candidates){
+    if(fboRenderable(c.type)){ texType=c.type; extLinear=c.lin; break; }
+  }
+
+  progAdvect  = program(VERT, FRAG_ADVECT);
+  progSplat   = program(VERT, FRAG_SPLAT);
+  progDisplay = program(VERT, FRAG_DISPLAY);
+  progPre     = program(VERT, FRAG_PREFILTER);
+  progBlur    = program(VERT, FRAG_BLUR);
+
+  quadBuf=gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER,quadBuf);
+  gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1, 3,-1, -1,3]),gl.STATIC_DRAW);
+  gl.enableVertexAttribArray(0);
+  gl.vertexAttribPointer(0,2,gl.FLOAT,false,0,0);
+
+  // LUT textures (256x1)
+  lutTexA=makeLUTTexture(LUTS[state.paletteIndex]);
+  lutTexB=makeLUTTexture(LUTS[state.paletteIndex]);
+}
+
+function makeLUTTexture(lut){
+  const tex=gl.createTexture();
+  gl.bindTexture(gl.TEXTURE_2D,tex);
+  const data=new Uint8Array(256*4);
+  for(let i=0;i<256;i++){ data[i*4]=lut[i*3]*255; data[i*4+1]=lut[i*3+1]*255; data[i*4+2]=lut[i*3+2]*255; data[i*4+3]=255; }
+  gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,256,1,0,gl.RGBA,gl.UNSIGNED_BYTE,data);
+  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
+  return tex;
+}
+function updateLUTTexture(tex,lut){
+  gl.bindTexture(gl.TEXTURE_2D,tex);
+  const data=new Uint8Array(256*4);
+  for(let i=0;i<256;i++){ data[i*4]=lut[i*3]*255; data[i*4+1]=lut[i*3+1]*255; data[i*4+2]=lut[i*3+2]*255; data[i*4+3]=255; }
+  gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,256,1,0,gl.RGBA,gl.UNSIGNED_BYTE,data);
+}
+
+function resizeGL(){
+  const w=Math.max(2,Math.floor(window.innerWidth*state.dpr));
+  const h=Math.max(2,Math.floor(window.innerHeight*state.dpr));
+  canvas.width=w; canvas.height=h;
+  DISP_W=w; DISP_H=h;
+  const filt = extLinear ? gl.LINEAR : gl.NEAREST;
+
+  // free any prior allocations to avoid GPU memory leaks on resize / adapt
+  if(dye) dye.destroy();
+  destroyFBO(prefilterFBO); destroyFBO(bloomA); destroyFBO(bloomB);
+
+  SIM_W=Math.max(160, Math.floor(w*state.simScale));
+  SIM_H=Math.max(120, Math.floor(h*state.simScale));
+  dye=makeDouble(SIM_W,SIM_H,filt);
+
+  const bw=Math.max(80,Math.floor(SIM_W/2)), bh=Math.max(60,Math.floor(SIM_H/2));
+  // bloom targets share texType, so they must honor the same filterability limit
+  prefilterFBO=makeFBO(bw,bh,filt);
+  bloomA=makeFBO(bw,bh,filt);
+  bloomB=makeFBO(bw,bh,filt);
+}
+
+function drawQuad(){ gl.drawArrays(gl.TRIANGLES,0,3); }
+
+/* ============================================================
+   SIMULATION FRAME (GL)
+   ============================================================ */
+let simTime=0;
+
+function stepGL(dt){
+  gl.disable(gl.BLEND);
+  gl.bindBuffer(gl.ARRAY_BUFFER,quadBuf);
+  gl.enableVertexAttribArray(0);
+  gl.vertexAttribPointer(0,2,gl.FLOAT,false,0,0);
+
+  const aspect = SIM_W/SIM_H;
+
+  // viscosity mapping: thicker = slower advect, slower fade.
+  const visc = state.viscosity;
+  const dissip = 0.982 + visc*0.016;        // 0.982..0.998
+  const flowStr = 0.9 + (1.0-visc)*1.3;      // thinner water flows faster
+  const flowScale = 2.4;
+
+  // ADVECT
+  gl.useProgram(progAdvect.p);
+  gl.bindFramebuffer(gl.FRAMEBUFFER, dye.write.fbo);
+  gl.viewport(0,0,SIM_W,SIM_H);
+  gl.activeTexture(gl.TEXTURE0);
+  gl.bindTexture(gl.TEXTURE_2D, dye.read.tex);
+  gl.uniform1i(progAdvect.u.u_dye,0);
+  gl.uniform2f(progAdvect.u.u_texel,1/SIM_W,1/SIM_H);
+  gl.uniform1f(progAdvect.u.u_time, simTime);
+  gl.uniform1f(progAdvect.u.u_dt, dt);
+  gl.uniform1f(progAdvect.u.u_dissip, dissip);
+  gl.uniform1f(progAdvect.u.u_flowScale, flowScale);
+  gl.uniform1f(progAdvect.u.u_flowStr, flowStr);
+  gl.uniform1f(progAdvect.u.u_aspect, aspect);
+  drawQuad();
+  dye.swap();
+}
+
+// Splat one brush stamp into the dye field (ping-pong)
+function splatGL(u,v,color,radius,amount){
+  gl.useProgram(progSplat.p);
+  gl.bindFramebuffer(gl.FRAMEBUFFER, dye.write.fbo);
+  gl.viewport(0,0,SIM_W,SIM_H);
+  gl.disable(gl.BLEND);
+  gl.activeTexture(gl.TEXTURE0);
+  gl.bindTexture(gl.TEXTURE_2D, dye.read.tex);
+  gl.uniform1i(progSplat.u.u_dye,0);
+  gl.uniform2f(progSplat.u.u_point,u,v);
+  const aspect=SIM_W/SIM_H;
+  gl.uniform2f(progSplat.u.u_aspectv, aspect, 1.0);
+  gl.uniform1f(progSplat.u.u_radius, radius);
+  gl.uniform3f(progSplat.u.u_color, color[0],color[1],color[2]);
+  gl.uniform1f(progSplat.u.u_amount, amount);
+  drawQuad();
+  dye.swap();
+}
+
+function renderGL(){
+  // bloom prefilter
+  gl.useProgram(progPre.p);
+  gl.bindFramebuffer(gl.FRAMEBUFFER, prefilterFBO.fbo);
+  gl.viewport(0,0,prefilterFBO.w,prefilterFBO.h);
+  gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D,dye.read.tex);
+  gl.uniform1i(progPre.u.u_dye,0);
+  gl.uniform1f(progPre.u.u_thresh,0.18);
+  drawQuad();
+
+  // blur H -> bloomA
+  gl.useProgram(progBlur.p);
+  gl.bindFramebuffer(gl.FRAMEBUFFER, bloomA.fbo);
+  gl.viewport(0,0,bloomA.w,bloomA.h);
+  gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D,prefilterFBO.tex);
+  gl.uniform1i(progBlur.u.u_tex,0);
+  gl.uniform2f(progBlur.u.u_texel,1/bloomA.w,1/bloomA.h);
+  gl.uniform2f(progBlur.u.u_dir,1,0);
+  drawQuad();
+  // blur V -> bloomB
+  gl.bindFramebuffer(gl.FRAMEBUFFER, bloomB.fbo);
+  gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D,bloomA.tex);
+  gl.uniform2f(progBlur.u.u_dir,0,1);
+  drawQuad();
+  // second pass for a wider, softer glow
+  gl.bindFramebuffer(gl.FRAMEBUFFER, bloomA.fbo);
+  gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D,bloomB.tex);
+  gl.uniform2f(progBlur.u.u_dir,2,0); drawQuad();
+  gl.bindFramebuffer(gl.FRAMEBUFFER, bloomB.fbo);
+  gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D,bloomA.tex);
+  gl.uniform2f(progBlur.u.u_dir,0,2); drawQuad();
+
+  // display to screen
+  gl.useProgram(progDisplay.p);
+  gl.bindFramebuffer(gl.FRAMEBUFFER,null);
+  gl.viewport(0,0,DISP_W,DISP_H);
+  gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D,dye.read.tex);
+  gl.uniform1i(progDisplay.u.u_dye,0);
+  gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D,bloomB.tex);
+  gl.uniform1i(progDisplay.u.u_bloom,1);
+  gl.activeTexture(gl.TEXTURE2); gl.bindTexture(gl.TEXTURE_2D,lutTexA);
+  gl.uniform1i(progDisplay.u.u_lutA,2);
+  gl.activeTexture(gl.TEXTURE3); gl.bindTexture(gl.TEXTURE_2D,lutTexB);
+  gl.uniform1i(progDisplay.u.u_lutB,3);
+  gl.uniform1f(progDisplay.u.u_lutMix, lutMix);
+  gl.uniform2f(progDisplay.u.u_texel,1/DISP_W,1/DISP_H);
+  gl.uniform2f(progDisplay.u.u_dtexel,1/SIM_W,1/SIM_H);
+  gl.uniform1f(progDisplay.u.u_time, simTime*0.5);
+  gl.uniform1f(progDisplay.u.u_grain, 0.05);
+  drawQuad();
+}
+
+/* ============================================================
+   POINTER + INJECTION
+   ============================================================ */
+const pointers=new Map();
+let lastInteract=performance.now();
+
+function sampleLUTjs(idx, coord){
+  const lut=LUTS[idx]; const i=Math.max(0,Math.min(255,Math.round(coord*255)));
+  return [lut[i*3],lut[i*3+1],lut[i*3+2]];
+}
+
+function injectAt(px,py, dx,dy){
+  // px,py in CSS px. convert to sim uv.
+  const u = px/window.innerWidth;
+  const v = 1.0 - py/window.innerHeight;
+  const speed=Math.min(1, Math.hypot(dx,dy)/28);
+  // color coord: fast = bright core (low idx), slow=softer
+  const coord = 0.02 + (1.0-speed)*0.22;   // stay in the bright/mid region for injection
+  const color = sampleLUTjs(state.paletteIndex, coord);
+
+  // emission -> brush radius & amount
+  const em=state.emission;
+  const radius = 0.018 + em*0.05;
+  const amount = (0.12 + em*0.22) * (0.5 + speed*0.9);
+
+  // interpolate along drag so fast strokes are continuous jets
+  const dist=Math.hypot(dx,dy);
+  const steps=Math.max(1, Math.min(24, Math.floor(dist/6)));
+  for(let s=0;s<steps;s++){
+    const t=s/steps;
+    const uu=u - (dx/window.innerWidth)*t;
+    const vv=v + (dy/window.innerHeight)*t;
+    const jx=(Math.random()-0.5)*0.004*em;
+    const jy=(Math.random()-0.5)*0.004*em;
+    if(useGL) splatGL(uu+jx, vv+jy, [color[0]*amount*3.2, color[1]*amount*3.2, color[2]*amount*3.2], radius, amount);
+    else splat2D(uu+jx, vv+jy, color, radius, amount);
+  }
+  lastInteract=performance.now();
+}
+
+// Supernova burst on double-tap: a radial ring of bright splats.
+function burstAt(px,py){
+  const W=window.innerWidth,H=window.innerHeight;
+  const u=px/W, v=1-py/H;
+  const em=state.emission;
+  const rings=3;
+  for(let ring=0; ring<rings; ring++){
+    const rr=(0.02+ring*0.03);
+    const n=10+ring*6;
+    const coord=0.02+ring*0.06;
+    const color=sampleLUTjs(state.paletteIndex,coord);
+    const amount=(0.24 - ring*0.05);
+    for(let i=0;i<n;i++){
+      const a=(i/n)*Math.PI*2 + ring*0.4;
+      const uu=u+Math.cos(a)*rr;
+      const vv=v+Math.sin(a)*rr*(W/H);
+      const radius=0.02+em*0.03;
+      if(useGL) splatGL(uu, vv, [color[0]*amount*3.6, color[1]*amount*3.6, color[2]*amount*3.6], radius, amount);
+      else splat2D(uu, vv, color, radius, amount);
+    }
+  }
+  // bright core
+  const cc=sampleLUTjs(state.paletteIndex,0.01);
+  if(useGL) splatGL(u,v,[cc[0]*1.6,cc[1]*1.6,cc[2]*1.6],0.03+em*0.03,0.45);
+  else splat2D(u,v,cc,0.04,0.45);
+  pulseAura();
+  lastInteract=performance.now();
+}
+
+function pointerDown(e){
+  const id=e.pointerId!==undefined?e.pointerId:'m';
+  const r=canvas.getBoundingClientRect();
+  const x=e.clientX-r.left, y=e.clientY-r.top;
+  pointers.set(id,{x,y,down:true});
+  // double-tap / double-click detection -> supernova
+  const nowT=performance.now();
+  if(nowT-lastTapTime<300 && Math.hypot(x-lastTapX,y-lastTapY)<40){
+    burstAt(x,y); lastTapTime=0;
+  } else { lastTapTime=nowT; lastTapX=x; lastTapY=y; }
+  hideHint();
+  lastInteract=nowT;
+}
+let lastTapTime=0,lastTapX=0,lastTapY=0;
+function pointerMove(e){
+  // aura follows every move (target); actual position eased in RAF
+  auraTX=e.clientX; auraTY=e.clientY; auraActive=true;
+  const id=e.pointerId!==undefined?e.pointerId:'m';
+  const p=pointers.get(id); if(!p||!p.down) return;
+  const r=canvas.getBoundingClientRect();
+  const nx=e.clientX-r.left, ny=e.clientY-r.top;
+  const dx=nx-p.x, dy=ny-p.y;
+  injectAt(nx,ny,dx,dy);
+  p.x=nx; p.y=ny;
+}
+function pointerUp(e){
+  const id=e.pointerId!==undefined?e.pointerId:'m';
+  const p=pointers.get(id); if(p) p.down=false;
+  pointers.delete(id);
+}
+
+canvas.addEventListener('pointerdown',pointerDown);
+window.addEventListener('pointermove',pointerMove);
+window.addEventListener('pointerup',pointerUp);
+window.addEventListener('pointercancel',pointerUp);
+
+/* ---- pointer aura (eased) ---- */
+const auraEl=document.getElementById('aura');
+let auraX=innerWidth/2, auraY=innerHeight/2, auraTX=auraX, auraTY=auraY;
+let auraActive=false, auraPulse=0;
+function pulseAura(){ auraPulse=1; }
+window.addEventListener('pointerout',e=>{ if(!e.relatedTarget){ auraActive=false; auraEl.style.opacity='0'; } });
+function tickAura(){
+  auraX += (auraTX-auraX)*0.18;
+  auraY += (auraTY-auraY)*0.18;
+  const s = 1 + auraPulse*1.4;
+  auraPulse *= 0.86;
+  auraEl.style.transform=`translate(${auraX}px,${auraY}px) scale(${s.toFixed(3)})`;
+  if(auraActive) auraEl.style.opacity = (0.55 + auraPulse*0.45).toFixed(3);
+}
+
+/* ============================================================
+   IDLE AMBIENT EMITTERS  (rate-based, framerate independent)
+   ============================================================ */
+let ambientAcc=0;
+function ambient(dt){
+  const idle = performance.now()-lastInteract;
+  if(idle < 6000){ ambientAcc=0; return; }
+  // ~2 wisps per second regardless of framerate
+  ambientAcc += dt;
+  const interval=0.5;
+  while(ambientAcc>=interval){
+    ambientAcc-=interval;
+    const edge=Math.floor(Math.random()*4);
+    let px,py,dx,dy;
+    const W=window.innerWidth, H=window.innerHeight;
+    const m=40;
+    if(edge===0){ px=Math.random()*W; py=m; dx=(Math.random()-0.5)*6; dy=8; }
+    else if(edge===1){ px=W-m; py=Math.random()*H; dx=-8; dy=(Math.random()-0.5)*6; }
+    else if(edge===2){ px=Math.random()*W; py=H-m; dx=(Math.random()-0.5)*6; dy=-8; }
+    else { px=m; py=Math.random()*H; dx=8; dy=(Math.random()-0.5)*6; }
+    const coord=0.1+Math.random()*0.3;
+    const color=sampleLUTjs(state.paletteIndex,coord);
+    const amount=0.06;
+    const radius=0.03;
+    if(useGL) splatGL(px/W, 1-py/H, [color[0]*amount*3, color[1]*amount*3, color[2]*amount*3], radius, amount);
+    else splat2D(px/W,1-py/H,color,radius,amount);
+  }
+}
+
+/* ============================================================
+   CLEAR (gentle drain via boosted dissipation)
+   ============================================================ */
+let draining=0;
+function triggerClear(){
+  draining=1.0;
+  lastInteract=performance.now()-7000; // let ambient resume after
+}
+
+/* ============================================================
+   PALETTE CROSSFADE
+   ============================================================ */
+let lutMix=0, lutCrossfading=false, lutTarget=0;
+function setPalette(i){
+  if(i===state.paletteIndex && !lutCrossfading) { markPaletteUI(i); return; }
+  markPaletteUI(i);
+  toast(PALETTES[i].name);
+  if(!useGL){ state.paletteIndex=i; return; }
+  // A holds current, B holds target; crossfade mix 0->1 then commit to A
+  updateLUTTexture(lutTexA, LUTS[state.paletteIndex]);
+  updateLUTTexture(lutTexB, LUTS[i]);
+  lutTarget=i; lutMix=0; lutCrossfading=true;
+  state.paletteIndex=i;
+}
+function tickCrossfade(dt){
+  if(!lutCrossfading) return;
+  lutMix+=dt/0.5;
+  if(lutMix>=1){ lutMix=1; lutCrossfading=false; updateLUTTexture(lutTexA,LUTS[lutTarget]); lutMix=0; }
+}
+
+/* ============================================================
+   MAIN LOOP  (fixed-timestep accumulator + adaptive quality)
+   ============================================================ */
+let last=performance.now(), acc=0;
+const FIXED=1/60;
+let slowFrames=0, adaptCooldown=0;
+
+function frame(now){
+  requestAnimationFrame(frame);
+  // when tab is hidden, keep aura alive but skip heavy sim & reset clock
+  if(document.hidden){ last=now; return; }
+  let dt=(now-last)/1000; last=now;
+  if(dt>0.1) dt=0.1;
+  const frameStart=performance.now();
+
+  acc+=dt;
+  let steps=0;
+  while(acc>=FIXED && steps<3){
+    simTime += FIXED*0.9;   // evolve curl field on z (breathing current)
+    if(useGL) stepGL(FIXED);
+    acc-=FIXED; steps++;
+  }
+  ambient(dt);
+  tickCrossfade(dt);
+  tickAura();
+
+  if(useGL){
+    if(draining>0){
+      drainGL();
+      draining-=dt*0.7;
+      if(draining<0) draining=0;
+    }
+    renderGL();
+  } else {
+    step2D(dt);
+    render2D();
+  }
+
+  // adaptive quality
+  adaptCooldown-=dt;
+  const ft=performance.now()-frameStart;
+  if(ft>15) slowFrames++; else slowFrames=Math.max(0,slowFrames-1);
+  if(slowFrames>40 && adaptCooldown<=0 && state.simScale>0.34){
+    state.simScale=Math.max(0.34,state.simScale-0.1);
+    if(useGL){ resizeGL(); } else { resize2D(); }
+    slowFrames=0; adaptCooldown=3;
+  }
+
+  updateIdleHUD();
+}
+
+// extra dissipation pass for drain
+function drainGL(){
+  gl.useProgram(progAdvect.p);
+  gl.bindFramebuffer(gl.FRAMEBUFFER, dye.write.fbo);
+  gl.viewport(0,0,SIM_W,SIM_H);
+  gl.disable(gl.BLEND);
+  gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D,dye.read.tex);
+  gl.uniform1i(progAdvect.u.u_dye,0);
+  gl.uniform2f(progAdvect.u.u_texel,1/SIM_W,1/SIM_H);
+  gl.uniform1f(progAdvect.u.u_time, simTime);
+  gl.uniform1f(progAdvect.u.u_dt, FIXED);
+  gl.uniform1f(progAdvect.u.u_dissip, 0.92);   // aggressive fade
+  gl.uniform1f(progAdvect.u.u_flowScale, 2.4);
+  gl.uniform1f(progAdvect.u.u_flowStr, 1.4);
+  gl.uniform1f(progAdvect.u.u_aspect, SIM_W/SIM_H);
+  drawQuad();
+  dye.swap();
+}
+
+/* ============================================================
+   CANVAS-2D FALLBACK
+   ============================================================ */
+let ctx2d, dyeA, dyeB, gw, gh, img2d, off2d, offctx;
+function init2D(){
+  ctx2d=canvas.getContext('2d');
+  resize2D();
+}
+function resize2D(){
+  const w=Math.max(2,Math.floor(window.innerWidth*state.dpr));
+  const h=Math.max(2,Math.floor(window.innerHeight*state.dpr));
+  canvas.width=w; canvas.height=h; DISP_W=w; DISP_H=h;
+  const sc = 0.28 * (state.simScale/0.5); // honor adaptive quality
+  gw=Math.max(120,Math.floor(w*sc)); gh=Math.max(90,Math.floor(h*sc));
+  const na=new Float32Array(gw*gh*3), nb=new Float32Array(gw*gh*3);
+  dyeA=na; dyeB=nb;
+  off2d=document.createElement('canvas'); off2d.width=gw; off2d.height=gh;
+  offctx=off2d.getContext('2d'); img2d=offctx.createImageData(gw,gh);
+}
+// cheap value noise for 2D curl
+function h2(x,y,z){ let n=Math.sin(x*127.1+y*311.7+z*74.7)*43758.5453; return n-Math.floor(n); }
+function vn2(x,y,z){
+  const xi=Math.floor(x),yi=Math.floor(y),zi=Math.floor(z);
+  const xf=x-xi,yf=y-yi,zf=z-zi;
+  const u=xf*xf*(3-2*xf),v=yf*yf*(3-2*yf),w=zf*zf*(3-2*zf);
+  function L(a,b,t){return a+(b-a)*t;}
+  const c000=h2(xi,yi,zi),c100=h2(xi+1,yi,zi),c010=h2(xi,yi+1,zi),c110=h2(xi+1,yi+1,zi);
+  const c001=h2(xi,yi,zi+1),c101=h2(xi+1,yi,zi+1),c011=h2(xi,yi+1,zi+1),c111=h2(xi+1,yi+1,zi+1);
+  return L(L(L(c000,c100,u),L(c010,c110,u),v),L(L(c001,c101,u),L(c011,c111,u),v),w);
+}
+function curl2(x,y,z){
+  const e=0.4;
+  const n1=vn2(x,y+e,z),n2=vn2(x,y-e,z),n3=vn2(x+e,y,z),n4=vn2(x-e,y,z);
+  return [(n1-n2)/(2*e), -(n3-n4)/(2*e)];
+}
+function splat2D(u,v,color,radius,amount){
+  const cx=u*gw, cy=(1-v)*gh; const rad=radius*gw*1.6;
+  const r2=rad*rad;
+  const x0=Math.max(0,Math.floor(cx-rad)),x1=Math.min(gw-1,Math.ceil(cx+rad));
+  const y0=Math.max(0,Math.floor(cy-rad)),y1=Math.min(gh-1,Math.ceil(cy+rad));
+  for(let y=y0;y<=y1;y++)for(let x=x0;x<=x1;x++){
+    const dx=x-cx,dy=y-cy; const d=(dx*dx+dy*dy)/r2;
+    if(d>3)continue; const f=Math.exp(-d)*amount*2.4;
+    const i=(y*gw+x)*3;
+    dyeA[i]+=color[0]*f; dyeA[i+1]+=color[1]*f; dyeA[i+2]+=color[2]*f;
+  }
+}
+function step2D(dt){
+  const visc=state.viscosity;
+  const dissip=0.975+visc*0.02;
+  const flowStr=(0.9+(1-visc)*1.2)*0.9;
+  const z=simTime;
+  const fs=2.4/gw;
+  const drainMul = draining>0 ? 0.9 : dissip;
+  for(let y=0;y<gh;y++)for(let x=0;x<gw;x++){
+    const c=curl2(x*fs*(gw/gh),y*fs,z);
+    let bx=x-c[0]*flowStr*3.2, by=y-c[1]*flowStr*3.2;
+    if(bx<0)bx=0; else if(bx>gw-1)bx=gw-1;
+    if(by<0)by=0; else if(by>gh-1)by=gh-1;
+    const x0=bx|0,y0=by|0; const fx=bx-x0,fy=by-y0;
+    const x1=Math.min(gw-1,x0+1),y1=Math.min(gh-1,y0+1);
+    const i00=(y0*gw+x0)*3,i10=(y0*gw+x1)*3,i01=(y1*gw+x0)*3,i11=(y1*gw+x1)*3;
+    const o=(y*gw+x)*3;
+    for(let k=0;k<3;k++){
+      const top=dyeA[i00+k]+(dyeA[i10+k]-dyeA[i00+k])*fx;
+      const bot=dyeA[i01+k]+(dyeA[i11+k]-dyeA[i01+k])*fx;
+      dyeB[o+k]=(top+(bot-top)*fy)*drainMul;
+    }
+  }
+  const t=dyeA; dyeA=dyeB; dyeB=t;
+  if(draining>0){ draining-=dt*0.7; if(draining<0) draining=0; }
+}
+function render2D(){
+  const d=img2d.data;
+  for(let p=0,i=0;p<gw*gh;p++,i+=3){
+    let r=dyeA[i],g=dyeA[i+1],b=dyeA[i+2];
+    const dens=(r+g+b)/3;
+    const I=Math.pow(Math.min(1,dens*1.6),0.72);
+    let R=0.05+r*I*1.4, G=0.055+g*I*1.4, B=0.075+b*I*1.4;
+    R=R/(R+0.85)*1.85; G=G/(G+0.85)*1.85; B=B/(B+0.85)*1.85;
+    const j=p*4;
+    d[j]=Math.min(255,R*255); d[j+1]=Math.min(255,G*255); d[j+2]=Math.min(255,B*255); d[j+3]=255;
+  }
+  offctx.putImageData(img2d,0,0);
+  ctx2d.imageSmoothingEnabled=true;
+  ctx2d.globalCompositeOperation='source-over';
+  ctx2d.drawImage(off2d,0,0,DISP_W,DISP_H);
+}
+
+/* ============================================================
+   UI WIRING
+   ============================================================ */
+const swWrap=document.getElementById('swatches');
+PALETTES.forEach((p,i)=>{
+  const el=document.createElement('div'); el.className='sw'+(i===0?' active':'');
+  const s=p.stops;
+  el.innerHTML=`<div class="swin" style="background:linear-gradient(135deg, rgb(${s[0]}) 0%, rgb(${s[1]}) 45%, rgb(${s[2]}) 100%)"></div><span class="ttl">${p.name}</span>`;
+  el.addEventListener('click',()=>setPalette(i));
+  swWrap.appendChild(el);
+});
+function markPaletteUI(i){
+  [...swWrap.children].forEach((c,k)=>c.classList.toggle('active',k===i));
+}
+
+// sliders
+function makeSlider(id, get, set){
+  const el=document.getElementById(id);
+  const fill=el.querySelector('.fill'), knob=el.querySelector('.knob');
+  function paint(){ const v=get(); fill.style.width=(v*100)+'%'; knob.style.left=(v*100)+'%'; }
+  let dragging=false;
+  function upd(clientX){
+    const r=el.getBoundingClientRect();
+    let v=(clientX-r.left)/r.width; v=Math.max(0,Math.min(1,v));
+    set(v); paint(); lastInteract=performance.now();
+  }
+  el.addEventListener('pointerdown',e=>{ dragging=true; el.classList.add('drag'); upd(e.clientX); try{ el.setPointerCapture(e.pointerId); }catch(_){/* stale pointer id */} });
+  el.addEventListener('pointermove',e=>{ if(dragging) upd(e.clientX); });
+  const end=e=>{ dragging=false; el.classList.remove('drag'); };
+  el.addEventListener('pointerup',end);
+  el.addEventListener('pointercancel',end);
+  paint();
+  return paint;
+}
+makeSlider('visc',()=>state.viscosity,v=>state.viscosity=v);
+makeSlider('emis',()=>state.emission,v=>state.emission=v);
+
+document.getElementById('clear').addEventListener('click',triggerClear);
+document.getElementById('shot').addEventListener('click',screenshot);
+
+// about
+const about=document.getElementById('about');
+document.getElementById('info').addEventListener('click',()=>about.classList.add('open'));
+document.getElementById('aboutClose').addEventListener('click',()=>about.classList.remove('open'));
+about.addEventListener('click',e=>{ if(e.target===about) about.classList.remove('open'); });
+
+// keyboard
+window.addEventListener('keydown',e=>{
+  if(e.key==='s'||e.key==='S') screenshot();
+  else if(e.key==='c'||e.key==='C') triggerClear();
+  else if(e.key===' '){ e.preventDefault(); burstAt(auraX||innerWidth/2, auraY||innerHeight/2); }
+  else if(e.key>='1'&&e.key<='5'){ const i=+e.key-1; if(i<PALETTES.length) setPalette(i); }
+  else if(e.key==='Escape') about.classList.remove('open');
+  lastInteract=performance.now();
+});
+
+// toast
+const toastEl=document.getElementById('toast');
+let toastT;
+function toast(msg){
+  toastEl.textContent=msg; toastEl.classList.add('show');
+  clearTimeout(toastT); toastT=setTimeout(()=>toastEl.classList.remove('show'),1100);
+}
+
+// screenshot — read pixels so it works without preserveDrawingBuffer
+const flash=document.getElementById('flash');
+function screenshot(){
+  try{
+    let url;
+    if(useGL){
+      renderGL(); // fresh frame in the back buffer this same tick
+      const w=DISP_W,h=DISP_H;
+      const pixels=new Uint8Array(w*h*4);
+      gl.readPixels(0,0,w,h,gl.RGBA,gl.UNSIGNED_BYTE,pixels);
+      const out=document.createElement('canvas'); out.width=w; out.height=h;
+      const octx=out.getContext('2d');
+      const id=octx.createImageData(w,h);
+      // WebGL origin is bottom-left; flip vertically into the 2D image
+      for(let y=0;y<h;y++){
+        const src=(h-1-y)*w*4, dst=y*w*4;
+        id.data.set(pixels.subarray(src,src+w*4), dst);
+      }
+      octx.putImageData(id,0,0);
+      url=out.toDataURL('image/png');
+    } else {
+      url=canvas.toDataURL('image/png');
+    }
+    const a=document.createElement('a');
+    a.href=url; a.download='ink-flow-'+Date.now()+'.png'; a.click();
+    flash.style.transition='none'; flash.style.opacity='0.5';
+    requestAnimationFrame(()=>{ flash.style.transition='opacity .5s ease'; flash.style.opacity='0'; });
+    toast('saved');
+  }catch(err){ console.warn('screenshot failed',err); toast('save failed'); }
+}
+
+// idle HUD fade
+const hud=document.getElementById('hud');
+const placard=document.getElementById('placard');
+function updateIdleHUD(){
+  const idle=performance.now()-lastInteract;
+  if(idle>3000) hud.classList.add('idle'); else hud.classList.remove('idle');
+  placard.style.opacity = idle>6000 ? '0.35' : '1';
+}
+['pointermove','pointerdown','keydown'].forEach(ev=>window.addEventListener(ev,()=>lastInteract=performance.now()));
+
+// hint
+const hint=document.getElementById('hint');
+let hintHidden=false;
+function hideHint(){ if(!hintHidden){ hintHidden=true; hint.style.opacity='0'; } }
+setTimeout(()=>{ if(!hintHidden) hint.style.opacity='0.5'; },600);
+setTimeout(hideHint,7000);
+
+/* ============================================================
+   GRAIN TEXTURE (data URI, generated once)
+   ============================================================ */
+(function grain(){
+  const c=document.createElement('canvas'); c.width=c.height=180;
+  const x=c.getContext('2d'); const im=x.createImageData(180,180); const d=im.data;
+  for(let i=0;i<d.length;i+=4){ const v=Math.random()*255; d[i]=d[i+1]=d[i+2]=v; d[i+3]=255; }
+  x.putImageData(im,0,0);
+  document.documentElement.style.setProperty('--grain',`url(${c.toDataURL('image/png')})`);
+})();
+
+/* ============================================================
+   BOOT
+   ============================================================ */
+function boot(){
+  let ok=false;
+  if(useGL){
+    try{ initGL(); resizeGL(); ok=true; }
+    catch(err){ console.warn('WebGL init failed, falling back to 2D',err); ok=false; }
+  }
+  if(!ok && useGL){
+    // GL bound but failed: swap in a fresh canvas we can get a 2D context from.
+    useGL=false; use2D=true; gl=null;
+    fallbackTo2D();
+  }
+  if(!useGL){ init2D(); }
+
+  // opening flourish: a few gentle seed wisps so first load isn't empty
+  setTimeout(()=>{
+    const W=window.innerWidth,H=window.innerHeight;
+    for(let k=0;k<5;k++){
+      setTimeout(()=>{
+        const cx=W*(0.3+Math.random()*0.4), cy=H*(0.3+Math.random()*0.4);
+        for(let s=0;s<6;s++){
+          const a=Math.random()*Math.PI*2, r=Math.random()*40;
+          injectAt(cx+Math.cos(a)*r, cy+Math.sin(a)*r, Math.cos(a)*4, Math.sin(a)*4);
+        }
+      }, k*120);
+    }
+  }, 400);
+
+  requestAnimationFrame(frame);
+}
+
+// Replace the GL-bound canvas with a clean clone and rebind pointer events + refs.
+function fallbackTo2D(){
+  const parent=canvas.parentNode;
+  const nc=canvas.cloneNode(false);
+  parent.replaceChild(nc,canvas);
+  canvas=nc;                              // rebind module reference (canvas is `let`)
+  canvas.addEventListener('pointerdown',pointerDown);
+}
+
+// resize
+let resizeT;
+window.addEventListener('resize',()=>{
+  clearTimeout(resizeT);
+  resizeT=setTimeout(()=>{
+    state.dpr=Math.min(window.devicePixelRatio||1,2);
+    if(useGL) resizeGL(); else resize2D();
+  },120);
+});
+
+// handle GPU context loss gracefully (mobile / tab restore)
+canvas.addEventListener('webglcontextlost',e=>{ e.preventDefault(); }, false);
+canvas.addEventListener('webglcontextrestored',()=>{
+  if(!useGL) return;
+  try{ initGL(); resizeGL(); toast('restored'); }
+  catch(err){ console.warn('context restore failed',err); }
+}, false);
+
+boot();
+
+})();
+</script>
+<style id="sonojs-credit-style">
+#sonojs-credit{position:fixed;bottom:10px;inset-inline-end:12px;z-index:9999;margin:0;padding:0;font:12px/1.2 system-ui,-apple-system,sans-serif;pointer-events:auto}
+#sonojs-credit a{color:rgba(255,255,255,.7);text-decoration:none;text-shadow:0 1px 2px rgba(0,0,0,.75)}
+#sonojs-credit a:hover{color:#fff;text-decoration:underline}
+html.embed #sonojs-credit,html.embed #sonojs-credit-style{display:none!important}
+</style>
+<footer id="sonojs-credit"><a href="https://sonojs.com" target="_blank" rel="noopener noreferrer">sonojs.com</a></footer>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connect Network</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #0b1220;
+    }
+    #large-header {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 35%, #1a3358 0%, transparent 55%),
+        radial-gradient(ellipse 70% 50% at 70% 80%, #132038 0%, transparent 50%),
+        linear-gradient(160deg, #0a101c 0%, #121c2e 45%, #0b1220 100%);
+      background-size: cover;
+      background-position: center;
+    }
+    #demo-canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      touch-action: none;
+    }
+    .main-title {
+      position: absolute;
+      margin: 0;
+      padding: 0;
+      color: #f9f1e9;
+      text-align: center;
+      top: 50%;
+      left: 50%;
+      transform: translate3d(-50%, -50%, 0);
+      text-transform: uppercase;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-size: clamp(2rem, 6vw, 4.2em);
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      pointer-events: none;
+      user-select: none;
+      text-shadow: 0 2px 24px rgba(0, 0, 0, 0.45);
+    }
+    .main-title .thin { font-weight: 200; }
+    html.embed .main-title { display: none !important; }
+  </style>
+  <script>if (/\bembed=1\b/.test(location.search)) document.documentElement.classList.add("embed")</script>
+</head>
+<body>
+  <div id="large-header" class="large-header">
+    <canvas id="demo-canvas"></canvas>
+    <h1 class="main-title">Connect <span class="thin">Network</span></h1>
+  </div>
+
+  <script>
+  (function () {
+    var width, height, largeHeader, canvas, ctx, points, target;
+    var animateHeader = true;
+    var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    initHeader();
+    initAnimation();
+    addListeners();
+
+    function initHeader() {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      target = { x: width / 2, y: height / 2 };
+
+      largeHeader = document.getElementById("large-header");
+      largeHeader.style.height = height + "px";
+
+      canvas = document.getElementById("demo-canvas");
+      canvas.width = width;
+      canvas.height = height;
+      ctx = canvas.getContext("2d");
+
+      points = [];
+      var stepX = width / 20;
+      var stepY = height / 20;
+      for (var x = 0; x < width; x += stepX) {
+        for (var y = 0; y < height; y += stepY) {
+          var px = x + Math.random() * stepX;
+          var py = y + Math.random() * stepY;
+          var p = {
+            x: px,
+            originX: px,
+            y: py,
+            originY: py,
+            sx: px,
+            sy: py,
+            tx: px,
+            ty: py,
+            t0: 0,
+            dur: 1000,
+            closest: null,
+            circle: null,
+            active: 0,
+          };
+          points.push(p);
+        }
+      }
+
+      for (var i = 0; i < points.length; i++) {
+        var closest = [];
+        var p1 = points[i];
+        for (var j = 0; j < points.length; j++) {
+          var p2 = points[j];
+          if (p1 === p2) continue;
+          var placed = false;
+          for (var k = 0; k < 5; k++) {
+            if (!placed && closest[k] === undefined) {
+              closest[k] = p2;
+              placed = true;
+            }
+          }
+          for (k = 0; k < 5; k++) {
+            if (!placed && getDistance(p1, p2) < getDistance(p1, closest[k])) {
+              closest[k] = p2;
+              placed = true;
+            }
+          }
+        }
+        p1.closest = closest;
+      }
+
+      for (i = 0; i < points.length; i++) {
+        points[i].circle = new Circle(
+          points[i],
+          2 + Math.random() * 2,
+          "rgba(255,255,255,0.3)"
+        );
+        if (!reduceMotion) shiftPoint(points[i]);
+      }
+    }
+
+    function addListeners() {
+      if (!("ontouchstart" in window)) {
+        window.addEventListener("mousemove", mouseMove, { passive: true });
+      } else {
+        window.addEventListener(
+          "touchmove",
+          function (e) {
+            if (!e.touches || !e.touches[0]) return;
+            target.x = e.touches[0].clientX;
+            target.y = e.touches[0].clientY;
+          },
+          { passive: true }
+        );
+      }
+      window.addEventListener("resize", resize);
+    }
+
+    function mouseMove(e) {
+      target.x = e.clientX;
+      target.y = e.clientY;
+    }
+
+    function resize() {
+      initHeader();
+    }
+
+    function easeInOutCirc(t) {
+      return t < 0.5
+        ? (1 - Math.sqrt(1 - Math.pow(2 * t, 2))) / 2
+        : (Math.sqrt(1 - Math.pow(-2 * t + 2, 2)) + 1) / 2;
+    }
+
+    function shiftPoint(p) {
+      p.sx = p.x;
+      p.sy = p.y;
+      p.tx = p.originX - 50 + Math.random() * 100;
+      p.ty = p.originY - 50 + Math.random() * 100;
+      p.t0 = performance.now();
+      p.dur = (1 + Math.random()) * 1000;
+    }
+
+    function tickPoints(now) {
+      for (var i = 0; i < points.length; i++) {
+        var p = points[i];
+        if (reduceMotion) continue;
+        var u = Math.min(1, (now - p.t0) / p.dur);
+        var e = easeInOutCirc(u);
+        p.x = p.sx + (p.tx - p.sx) * e;
+        p.y = p.sy + (p.ty - p.sy) * e;
+        if (u >= 1) shiftPoint(p);
+      }
+    }
+
+    function initAnimation() {
+      requestAnimationFrame(animate);
+    }
+
+    function animate(now) {
+      if (animateHeader) {
+        tickPoints(now || performance.now());
+        ctx.clearRect(0, 0, width, height);
+        for (var i = 0; i < points.length; i++) {
+          var dist = Math.abs(getDistance(target, points[i]));
+          if (dist < 4000) {
+            points[i].active = 0.3;
+            points[i].circle.active = 0.6;
+          } else if (dist < 20000) {
+            points[i].active = 0.1;
+            points[i].circle.active = 0.3;
+          } else if (dist < 40000) {
+            points[i].active = 0.02;
+            points[i].circle.active = 0.1;
+          } else {
+            points[i].active = 0;
+            points[i].circle.active = 0;
+          }
+          drawLines(points[i]);
+          points[i].circle.draw();
+        }
+      }
+      requestAnimationFrame(animate);
+    }
+
+    function drawLines(p) {
+      if (!p.active) return;
+      for (var i = 0; i < p.closest.length; i++) {
+        ctx.beginPath();
+        ctx.moveTo(p.x, p.y);
+        ctx.lineTo(p.closest[i].x, p.closest[i].y);
+        ctx.strokeStyle = "rgba(156,217,249," + p.active + ")";
+        ctx.stroke();
+      }
+    }
+
+    function Circle(pos, rad, color) {
+      this.pos = pos;
+      this.radius = rad;
+      this.color = color;
+      this.active = 0;
+      this.draw = function () {
+        if (!this.active) return;
+        ctx.beginPath();
+        ctx.arc(this.pos.x, this.pos.y, this.radius, 0, 2 * Math.PI, false);
+        ctx.fillStyle = "rgba(156,217,249," + this.active + ")";
+        ctx.fill();
+      };
+    }
+
+    function getDistance(p1, p2) {
+      return Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2);
+    }
+  })();
+  </script>
+  <style id="sonojs-credit-style">
+  #sonojs-credit{position:fixed;bottom:10px;inset-inline-end:12px;z-index:9999;margin:0;padding:0;font:12px/1.2 system-ui,-apple-system,sans-serif;pointer-events:auto}
+  #sonojs-credit a{color:rgba(255,255,255,.7);text-decoration:none;text-shadow:0 1px 2px rgba(0,0,0,.75)}
+  #sonojs-credit a:hover{color:#fff;text-decoration:underline}
+  html.embed #sonojs-credit,html.embed #sonojs-credit-style{display:none!important}
+  </style>
+  <footer id="sonojs-credit"><a href="https://sonojs.com" target="_blank" rel="noopener noreferrer">sonojs.com</a></footer>
+</body>
+</html>

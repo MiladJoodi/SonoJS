@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Noir Terminal</title>
+<style>
+html.embed .about { display: none !important; }
+
+/* ============================================================
+   NOIR TERMINAL — "Dead Air on Channel 9"
+   A haunted police teletype, 2:47 AM, 1958.
+   Amber phosphor on near-black. No network. All synthesis.
+   ============================================================ */
+:root{
+  --amber:#ffb000;
+  --amber-hi:#ffd25e;
+  --amber-lo:#b07f14;
+  --edge:#6b4a00;
+  --bg:#0a0805;
+  --blood:#d14b3a;
+  --metal:#191817;
+}
+*{box-sizing:border-box;}
+html,body{height:100%;}
+body{
+  margin:0;
+  overflow:hidden;
+  background:#040302 radial-gradient(130% 100% at 50% -20%, #16110a 0%, #080604 52%, #020202 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Courier New",monospace;
+  color:#6a5830;
+  -webkit-user-select:none;user-select:none;
+}
+/* ---------------- CRT chassis ---------------- */
+.crt{
+  position:relative;
+  padding:30px 34px 22px;
+  border-radius:26px;
+  background:
+    linear-gradient(160deg,#232120 0%,#141312 40%,#0c0b0a 100%);
+  box-shadow:
+    0 34px 80px rgba(0,0,0,.85),
+    0 4px 14px rgba(0,0,0,.7),
+    inset 0 1px 0 rgba(255,255,255,.07),
+    inset 0 -2px 6px rgba(0,0,0,.8);
+}
+.crt::before{ /* subtle top sheen on the plastic */
+  content:"";position:absolute;inset:0;border-radius:26px;pointer-events:none;
+  background:linear-gradient(115deg,rgba(255,255,255,.05) 0%,transparent 30%);
+}
+.screw{
+  position:absolute;width:11px;height:11px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#4a4744,#171514 70%);
+  box-shadow:inset 0 0 2px #000,0 1px 1px rgba(255,255,255,.06);
+}
+.screw::after{content:"";position:absolute;left:1px;right:1px;top:4.5px;height:1.4px;background:#0a0908;transform:rotate(38deg);}
+.screw.tl{top:9px;left:11px;}.screw.tr{top:9px;right:11px;}
+.screw.bl{bottom:9px;left:11px;}.screw.br{bottom:9px;right:11px;}
+/* the tube */
+.screen{
+  position:relative;
+  height:min(70vh,58vw);
+  aspect-ratio:4/3;
+  background:var(--bg);
+  border-radius:2.4% / 3.2%;
+  overflow:hidden;
+  box-shadow:
+    inset 0 0 4px 2px #000,
+    inset 0 0 60px 18px rgba(0,0,0,.85),
+    0 0 0 3px #060505,
+    0 0 22px rgba(255,176,0,.06);
+}
+.tube{position:absolute;inset:0;animation:poweron .8s cubic-bezier(.2,.75,.25,1) both;}
+@keyframes poweron{
+  0%{transform:scaleY(.004) scaleX(.55);filter:brightness(7);}
+  55%{transform:scaleY(1.03) scaleX(1);filter:brightness(1.8);}
+  100%{transform:none;filter:none;}
+}
+/* rain reflected in the glass, behind text */
+.rain{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden;}
+.drop{
+  position:absolute;top:-190px;width:1px;
+  background:linear-gradient(180deg,transparent,rgba(255,204,120,.55) 30%,rgba(255,204,120,.18) 72%,transparent);
+  animation:fall linear infinite;
+}
+@keyframes fall{to{transform:translateY(var(--fall,900px));}}
+/* burned-in ghost of the last ending */
+.burn{
+  position:absolute;left:6%;right:6%;top:42%;z-index:2;
+  text-align:center;color:var(--amber);opacity:.06;
+  letter-spacing:.12em;filter:blur(.4px);pointer-events:none;
+  font-size:clamp(11px,1.9vh,17px);
+}
+/* the text field */
+.textwrap{
+  position:absolute;inset:3.5% 5% 4.5%;z-index:3;
+  overflow:hidden;
+  font-size:clamp(11px,2.15vh,19px);
+  letter-spacing:.08em;
+  color:var(--amber);
+}
+.textcol{position:relative;min-height:100%;padding-bottom:.5em;}
+.line{min-height:1.5em;line-height:1.5;white-space:normal;}
+.line.center{text-align:center;}
+.line.dim{color:var(--amber-lo);}
+.line.small{font-size:.78em;letter-spacing:.14em;}
+.w{display:inline-block;white-space:pre;}
+.g{
+  text-shadow:0 0 2px rgba(255,176,0,.5),0 0 7px rgba(255,176,0,.16);
+}
+.g.s{white-space:pre;}
+.g.born{animation:born .9s ease-out;}
+@keyframes born{
+  0%{filter:brightness(2.2);text-shadow:0 0 6px rgba(255,214,110,.95),0 0 18px rgba(255,176,0,.65);}
+  100%{filter:brightness(1);}
+}
+.g.red{color:var(--blood);text-shadow:0 0 2px rgba(209,75,58,.65),0 0 9px rgba(209,75,58,.32);}
+.ghost{
+  position:absolute;pointer-events:none;color:var(--amber);
+  animation:ghostfade 2s linear forwards;
+}
+@keyframes ghostfade{from{opacity:.5;}to{opacity:0;filter:blur(1.2px);}}
+#cursor{
+  display:inline-block;width:.62em;height:1.05em;
+  background:var(--amber);vertical-align:-.12em;margin-left:1px;
+  box-shadow:0 0 7px rgba(255,176,0,.85);
+  animation:blink 1.06s steps(1) infinite;
+}
+@keyframes blink{50%{opacity:0;}}
+/* choices */
+.choice{cursor:pointer;margin:0;position:relative;}
+.choice:hover{background:var(--amber);box-shadow:0 0 14px rgba(255,176,0,.4);}
+.choice:hover .g{color:#0a0805;text-shadow:none;animation:none;}
+.choice.transmit{animation:txblink .42s steps(2,end) 1 both;}
+@keyframes txblink{
+  0%,24%{background:var(--amber);}
+  25%,49%{background:transparent;}
+  50%,74%{background:var(--amber);}
+  75%,100%{background:var(--amber);}
+}
+.choice.transmit .g,.choice.picked .g{color:#0a0805;text-shadow:none;}
+.choice.picked{background:rgba(255,176,0,.82);}
+.choice.dimmed{opacity:.32;pointer-events:none;}
+.choice.dimmed:hover{background:transparent;}
+.choice.dimmed:hover .g{color:inherit;}
+/* CRT physics overlays */
+.scan{
+  position:absolute;inset:-4px;z-index:6;pointer-events:none;
+  background:repeating-linear-gradient(0deg,rgba(0,0,0,.30) 0 1px,transparent 1px 3px);
+  animation:scandrift 3s linear infinite;
+}
+@keyframes scandrift{to{transform:translateY(3px);}}
+.humbar{
+  position:absolute;left:0;right:0;top:0;height:15%;z-index:7;pointer-events:none;
+  background:linear-gradient(180deg,transparent,rgba(255,205,90,.045) 38%,rgba(255,220,130,.085) 50%,rgba(255,205,90,.045) 62%,transparent);
+  mix-blend-mode:screen;
+  animation:humroll 8.4s linear infinite;
+}
+@keyframes humroll{from{transform:translateY(-140%);}to{transform:translateY(780%);}}
+.humbar.stutter{animation-duration:1.15s;}
+.vig{
+  position:absolute;inset:0;z-index:8;pointer-events:none;border-radius:inherit;
+  background:radial-gradient(105% 100% at 50% 48%,transparent 55%,rgba(6,4,1,.34) 82%,rgba(4,3,0,.78) 100%);
+}
+.glare{
+  position:absolute;inset:0;z-index:9;pointer-events:none;border-radius:inherit;
+  background:
+    radial-gradient(60% 34% at 30% 6%,rgba(255,244,214,.055),transparent 70%),
+    radial-gradient(42% 24% at 76% 92%,rgba(255,244,214,.03),transparent 70%);
+}
+.flash{position:absolute;inset:0;z-index:40;background:#fff;opacity:0;pointer-events:none;}
+.screen.bloom .textwrap{filter:brightness(1.5) blur(.4px);transition:filter .9s ease-out;}
+/* settings panel */
+.panel{
+  position:absolute;inset:11% 13%;z-index:30;display:none;
+  background:rgba(9,7,4,.97);
+  border:1px solid rgba(255,176,0,.55);
+  box-shadow:0 0 26px rgba(255,176,0,.14),inset 0 0 46px rgba(255,176,0,.05);
+  padding:1.1em 1.4em;color:var(--amber);
+  font-size:clamp(11px,2vh,17px);letter-spacing:.08em;
+}
+.panel.on{display:block;animation:panelon .16s ease-out;}
+@keyframes panelon{from{transform:scaleY(.2);filter:brightness(3);}to{transform:none;}}
+.panel h2{
+  font-size:.85em;font-weight:normal;margin:0 0 .9em;letter-spacing:.22em;
+  border-bottom:1px solid rgba(255,176,0,.35);padding-bottom:.55em;color:var(--amber-hi);
+}
+.prow{display:flex;justify-content:space-between;gap:1em;padding:.42em .4em;cursor:pointer;}
+.prow:hover{background:rgba(255,176,0,.16);}
+.prow b{font-weight:normal;color:var(--amber-hi);}
+.pfoot{margin-top:1em;font-size:.72em;color:var(--amber-lo);letter-spacing:.16em;}
+/* chassis furniture */
+.badge{
+  margin:16px auto 0;width:max-content;max-width:100%;
+  padding:6px 18px 5px;border-radius:3px;
+  background:repeating-linear-gradient(90deg,#3a3835 0 2px,#2e2c29 2px 4px);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.14),inset 0 -1px 2px rgba(0,0,0,.7),0 1px 2px #000;
+  color:#151312;font-size:10px;letter-spacing:.24em;font-weight:bold;
+  text-shadow:0 1px 0 rgba(255,255,255,.12);
+  display:flex;align-items:center;gap:14px;
+}
+.led{
+  width:9px;height:9px;border-radius:50%;flex:none;
+  background:radial-gradient(circle at 38% 32%,#ffd97a,#e09400 65%,#7a5200);
+  box-shadow:0 0 9px 2px rgba(255,176,0,.75);
+  animation:ledidle 4.2s ease-in-out infinite;
+}
+@keyframes ledidle{0%,100%{opacity:1;}48%{opacity:.82;}52%{opacity:.94;}}
+.led.tense{animation:ledflick .11s steps(2) infinite;}
+@keyframes ledflick{0%{opacity:1;}50%{opacity:.25;}100%{opacity:.9;}}
+.hint{
+  margin-top:9px;text-align:center;font-size:10px;letter-spacing:.26em;color:#54452a;
+}
+.about{
+  margin-top:14px;text-align:center;font-size:10px;letter-spacing:.18em;color:#4c3f24;line-height:1.9;
+}
+.about a{color:#7a6234;text-decoration:none;border-bottom:1px dotted #55461f;}
+/* reduced motion */
+.reduced .scan{animation:none;}
+.reduced .humbar,.reduced .rain{display:none;}
+.reduced .g.born{animation:none;}
+.reduced #cursor{animation:none;}
+.reduced .tube{animation:none;}
+.noscan .scan{display:none;}
+@media (max-height:560px){
+  .badge{display:none;}
+  .about{display:none;}
+  .crt{padding:16px 18px 12px;}
+}
+::selection{background:rgba(255,176,0,.35);}
+</style>
+<script>if(/\bembed=1\b/.test(location.search))document.documentElement.classList.add("embed")</script>
+</head>
+<body>
+<div class="crt" id="crt">
+  <span class="screw tl"></span><span class="screw tr"></span>
+  <span class="screw bl"></span><span class="screw br"></span>
+  <div class="screen" id="screen">
+    <div class="tube" id="tube">
+      <div class="rain" id="rain"></div>
+      <div class="burn" id="burn"></div>
+      <div class="textwrap" id="textwrap"><div class="textcol" id="textcol"></div></div>
+      <div class="scan" id="scan"></div>
+      <div class="humbar" id="humbar"></div>
+      <div class="vig"></div>
+      <div class="glare"></div>
+      <div class="panel" id="panel">
+        <h2>MODEL 9 — FIELD ADJUSTMENTS</h2>
+        <div class="prow" data-k="1"><span>[1] AUDIO</span><b id="pv1">ON</b></div>
+        <div class="prow" data-k="2"><span>[2] SCANLINES</span><b id="pv2">ON</b></div>
+        <div class="prow" data-k="3"><span>[3] TYPE SPEED</span><b id="pv3">1×</b></div>
+        <div class="prow" data-k="4"><span>[4] MOTION</span><b id="pv4">FULL</b></div>
+        <div class="pfoot">ESC — RETURN TO TRANSMISSION · SETTINGS HOLD THE STORY, NOT THE RAIN</div>
+      </div>
+      <div class="flash" id="flash"></div>
+    </div>
+  </div>
+  <div class="badge"><span class="led" id="led"></span>TELETYPE MODEL 9 — PROPERTY OF METRO HOMICIDE<span class="led" style="visibility:hidden"></span></div>
+  <div class="hint">1–3 SELECT &nbsp;·&nbsp; N NEW CASE &nbsp;·&nbsp; ESC ADJUSTMENTS</div>
+</div>
+<div class="about">
+  PROCEDURAL HARDBOILED FICTION UNIT · EVERY CASE DEALT FROM A GENERATIVE GRAMMAR · ALL AUDIO SYNTHESIZED FROM NOISE<br>
+  BUILT BY CLAUDE FABLE 5 · ZERO NETWORK · SHARE A CASE BY ITS NUMBER IN THE URL
+</div>
+
+<script>
+"use strict";
+(function(){
+/* =====================================================================
+   0. UTILITIES — seeded PRNG so a case number IS the story
+   ===================================================================== */
+function mulberry32(a){
+  return function(){
+    a|=0; a=(a+0x6D2B79F5)|0;
+    var t=Math.imul(a^(a>>>15),1|a);
+    t=(t+Math.imul(t^(t>>>7),61|t))^t;
+    return ((t^(t>>>14))>>>0)/4294967296;
+  };
+}
+var rng=Math.random;
+function R(){return rng();}
+function ri(n){return Math.floor(R()*n);}
+var lastPick=new WeakMap();
+function pick(arr){
+  if(arr.length===1)return arr[0];
+  var prev=lastPick.get(arr),v,guard=0;
+  do{ v=arr[ri(arr.length)]; }while(v===prev && ++guard<6);
+  lastPick.set(arr,v);
+  return v;
+}
+function wpick(arr){ // entries: string | [string,weight]
+  var total=0,i,e;
+  for(i=0;i<arr.length;i++){e=arr[i];total+=Array.isArray(e)?e[1]:1;}
+  var t=R()*total;
+  for(i=0;i<arr.length;i++){
+    e=arr[i];t-=Array.isArray(e)?e[1]:1;
+    if(t<=0)return Array.isArray(e)?e[0]:e;
+  }
+  e=arr[arr.length-1];return Array.isArray(e)?e[0]:e;
+}
+function shuffle(a){
+  a=a.slice();
+  for(var i=a.length-1;i>0;i--){var j=ri(i+1),t=a[i];a[i]=a[j];a[j]=t;}
+  return a;
+}
+function pad2(n){return (n<10?"0":"")+n;}
+
+/* =====================================================================
+   1. DOM HANDLES + GLOBAL STATE
+   ===================================================================== */
+var $=function(id){return document.getElementById(id);};
+var screenEl=$("screen"),tw=$("textwrap"),tc=$("textcol"),burnEl=$("burn"),
+    flashEl=$("flash"),humbar=$("humbar"),led=$("led"),panel=$("panel"),
+    rainEl=$("rain");
+var S={
+  phase:"boot",          // boot -> gate -> play -> done
+  runId:0,
+  caseNum:0,
+  step:0,                // scene index 0..3
+  picks:[],              // chosen option indexes
+  stances:{V:0,G:0,C:0},
+  choicesActive:false,
+  choiceSet:null,choiceEls:[],
+  paused:false,
+  audioOn:true,scanOn:true,speedIdx:0,
+  reduced:false,
+  endingDone:false
+};
+try{ S.reduced=window.matchMedia("(prefers-reduced-motion: reduce)").matches; }catch(e){}
+try{
+  var saved=JSON.parse(localStorage.getItem("noir9")||"{}");
+  if(typeof saved.audioOn==="boolean")S.audioOn=saved.audioOn;
+  if(typeof saved.scanOn==="boolean")S.scanOn=saved.scanOn;
+  if(typeof saved.speedIdx==="number")S.speedIdx=saved.speedIdx;
+  if(typeof saved.reduced==="boolean")S.reduced=saved.reduced;
+}catch(e){}
+function persist(){
+  try{localStorage.setItem("noir9",JSON.stringify({
+    audioOn:S.audioOn,scanOn:S.scanOn,speedIdx:S.speedIdx,reduced:S.reduced
+  }));}catch(e){}
+}
+var SPEEDS=[1,0.5,0.24];
+function mul(){return SPEEDS[S.speedIdx];}
+function applyToggles(){
+  document.body.classList.toggle("reduced",S.reduced);
+  document.body.classList.toggle("noscan",!S.scanOn);
+}
+applyToggles();
+window.onerror=function(){return true;}; // fail soft: the machine never crashes on-camera
+
+/* =====================================================================
+   2. AUDIO RIG — everything synthesized from noise, built on first key
+   ===================================================================== */
+var AC=null,master=null,rainGain=null,rainLP=null,humGain=null,noiseBuf=null,dropletTimer=null;
+function initAudio(){
+  if(AC)return;
+  try{
+    AC=new (window.AudioContext||window.webkitAudioContext)();
+    // master: tape saturation -> compressor -> out
+    var shaper=AC.createWaveShaper();
+    var curve=new Float32Array(1024);
+    for(var i=0;i<1024;i++){var x=i/511.5-1;curve[i]=Math.tanh(1.6*x);}
+    shaper.curve=curve;shaper.oversample="2x";
+    var comp=AC.createDynamicsCompressor();
+    comp.threshold.value=-18;comp.ratio.value=5;comp.attack.value=.004;comp.release.value=.24;
+    master=AC.createGain();master.gain.value=S.audioOn?0.85:0.0001;
+    master.connect(shaper);shaper.connect(comp);comp.connect(AC.destination);
+    // shared pink-noise buffer (Paul Kellet economy pink)
+    var len=AC.sampleRate*2;
+    noiseBuf=AC.createBuffer(1,len,AC.sampleRate);
+    var d=noiseBuf.getChannelData(0),b0=0,b1=0,b2=0;
+    for(i=0;i<len;i++){
+      var w=Math.random()*2-1;
+      b0=0.99765*b0+w*0.0990460;
+      b1=0.96300*b1+w*0.2965164;
+      b2=0.57000*b2+w*1.0526913;
+      d[i]=(b0+b1+b2+w*0.1848)*0.18;
+    }
+    // rain bed
+    var src=AC.createBufferSource();src.buffer=noiseBuf;src.loop=true;
+    rainLP=AC.createBiquadFilter();rainLP.type="lowpass";rainLP.frequency.value=520;rainLP.Q.value=.6;
+    rainGain=AC.createGain();rainGain.gain.value=0.11;
+    src.connect(rainLP);rainLP.connect(rainGain);rainGain.connect(master);src.start();
+    // transformer hum: 55 Hz + faint octave
+    var o1=AC.createOscillator();o1.frequency.value=55;
+    var o2=AC.createOscillator();o2.frequency.value=110;
+    humGain=AC.createGain();humGain.gain.value=0.016;
+    var h2=AC.createGain();h2.gain.value=0.35;
+    o1.connect(humGain);o2.connect(h2);h2.connect(humGain);humGain.connect(master);
+    o1.start();o2.start();
+    scheduleDroplet();
+  }catch(e){AC=null;}
+}
+function grain(dur,center,q,peak,type){ // one filtered noise burst
+  if(!AC||!S.audioOn)return;
+  try{
+    var s=AC.createBufferSource();s.buffer=noiseBuf;
+    s.loopStart=0;var off=Math.random()*1.5;
+    var f=AC.createBiquadFilter();f.type=type||"bandpass";f.frequency.value=center;f.Q.value=q;
+    var g=AC.createGain();var t=AC.currentTime;
+    g.gain.setValueAtTime(0.0001,t);
+    g.gain.exponentialRampToValueAtTime(peak,t+0.004);
+    g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
+    s.connect(f);f.connect(g);g.connect(master);
+    s.start(t,off,dur+0.05);
+  }catch(e){}
+}
+function clack(){grain(0.028,850+Math.random()*950,1.6,0.34);}
+function softClack(){grain(0.02,600+Math.random()*400,1.4,0.12);}
+function delClack(){grain(0.03,420+Math.random()*260,2.2,0.26);}
+function thunk(){grain(0.085,190+Math.random()*70,1.1,0.5);}
+function ding(){
+  if(!AC||!S.audioOn)return;
+  try{
+    var t=AC.currentTime;
+    [ [2093,0.09], [2637,0.035] ].forEach(function(p){
+      var o=AC.createOscillator();o.type="sine";o.frequency.value=p[0]*(0.99+Math.random()*0.02);
+      var g=AC.createGain();
+      g.gain.setValueAtTime(0.0001,t);
+      g.gain.exponentialRampToValueAtTime(p[1],t+0.006);
+      g.gain.exponentialRampToValueAtTime(0.0001,t+0.9);
+      o.connect(g);g.connect(master);o.start(t);o.stop(t+1);
+    });
+  }catch(e){}
+}
+function chatter(){ // transmit burst
+  if(!AC)return;
+  for(var i=0;i<11;i++)setTimeout(clack,i*34+Math.random()*20);
+}
+function scheduleDroplet(){
+  if(!AC)return;
+  dropletTimer=setTimeout(function(){
+    grain(0.05,1400+Math.random()*2900,9,0.11);
+    scheduleDroplet();
+  }, -Math.log(1-Math.random())*420+60); // Poisson arrivals
+}
+function setOutdoor(out){
+  if(!AC)return;
+  try{
+    var t=AC.currentTime;
+    rainLP.frequency.cancelScheduledValues(t);
+    rainLP.frequency.setTargetAtTime(out?1350:520,t,1.4);
+    rainGain.gain.setTargetAtTime(out?0.16:0.11,t,1.4);
+  }catch(e){}
+}
+function duckHum(ms){
+  if(!AC)return;
+  try{
+    var t=AC.currentTime;
+    humGain.gain.cancelScheduledValues(t);
+    humGain.gain.setTargetAtTime(0.003,t,0.05);
+    humGain.gain.setTargetAtTime(0.016,t+ms/1000,0.4);
+    rainGain.gain.setTargetAtTime(0.05,t,0.08);
+    rainGain.gain.setTargetAtTime(0.11,t+ms/1000,0.6);
+  }catch(e){}
+}
+function rainSwell(){
+  if(!AC)return;
+  try{
+    var t=AC.currentTime;
+    rainGain.gain.setTargetAtTime(0.24,t,0.5);
+    rainGain.gain.setTargetAtTime(0.13,t+2.6,1.2);
+  }catch(e){}
+}
+function thunderAudio(){
+  if(!AC||!S.audioOn)return;
+  try{
+    var s=AC.createBufferSource();s.buffer=noiseBuf;s.loop=true;
+    var f=AC.createBiquadFilter();f.type="lowpass";f.frequency.value=95;f.Q.value=.8;
+    var g=AC.createGain();var t=AC.currentTime;
+    g.gain.setValueAtTime(0.0001,t);
+    g.gain.exponentialRampToValueAtTime(0.5,t+1.3);
+    g.gain.exponentialRampToValueAtTime(0.0001,t+4.4);
+    s.connect(f);f.connect(g);g.connect(master);
+    s.start(t,Math.random());s.stop(t+4.6);
+  }catch(e){}
+}
+function gunshotAudio(){
+  if(!AC||!S.audioOn)return;
+  try{
+    var t=AC.currentTime;
+    grain(0.13,300,0.2,0.95,"lowpass");
+    grain(0.09,2600,0.4,0.6,"highpass");
+    // ear-ring tail
+    var o=AC.createOscillator();o.type="sine";o.frequency.value=3400;
+    var g=AC.createGain();
+    g.gain.setValueAtTime(0.0001,t+0.06);
+    g.gain.exponentialRampToValueAtTime(0.05,t+0.09);
+    g.gain.exponentialRampToValueAtTime(0.0001,t+2.8);
+    o.connect(g);g.connect(master);o.start(t);o.stop(t+3);
+    // duck the world under the ring
+    rainGain.gain.setTargetAtTime(0.02,t,0.03);
+    rainGain.gain.setTargetAtTime(0.11,t+1.6,1.2);
+    humGain.gain.setTargetAtTime(0.002,t,0.03);
+    humGain.gain.setTargetAtTime(0.016,t+2,0.8);
+  }catch(e){}
+}
+function setAudioOn(on){
+  S.audioOn=on;
+  if(master){try{master.gain.setTargetAtTime(on?0.85:0.0001,AC.currentTime,0.1);}catch(e){}}
+}
+
+/* =====================================================================
+   3. SCREEN PHYSICS — flash, LED, hum-bar stutter, rain streaks
+   ===================================================================== */
+function whiteFlash(){
+  if(S.reduced)return;
+  flashEl.style.opacity="1";
+  var n=0;
+  (function step(){ if(++n>=2){flashEl.style.opacity="0";bloom();} else requestAnimationFrame(step); })();
+}
+function bloom(){
+  screenEl.classList.add("bloom");
+  setTimeout(function(){screenEl.classList.remove("bloom");},80);
+}
+var ledTimer=null;
+function ledTense(ms){
+  led.classList.add("tense");
+  clearTimeout(ledTimer);
+  ledTimer=setTimeout(function(){led.classList.remove("tense");},ms||2000);
+}
+var humTimer=null;
+function humStutter(ms){
+  humbar.classList.add("stutter");
+  clearTimeout(humTimer);
+  humTimer=setTimeout(function(){humbar.classList.remove("stutter");},ms||2200);
+}
+function gunshot(){
+  whiteFlash();
+  gunshotAudio();
+  ledTense(3000);
+}
+function buildRain(){
+  var N=38,h=screenEl.clientHeight||600;
+  for(var i=0;i<N;i++){
+    var dEl=document.createElement("div");
+    dEl.className="drop";
+    var len=60+Math.random()*130;
+    dEl.style.left=(Math.random()*100).toFixed(2)+"%";
+    dEl.style.height=len.toFixed(0)+"px";
+    dEl.style.opacity=(0.03+Math.random()*0.035).toFixed(3);
+    dEl.style.animationDuration=(1.3+Math.random()*2.4).toFixed(2)+"s";
+    dEl.style.animationDelay=(-Math.random()*4).toFixed(2)+"s";
+    dEl.style.setProperty("--fall",(h+260)+"px");
+    rainEl.appendChild(dEl);
+  }
+  window.addEventListener("resize",function(){
+    var hh=(screenEl.clientHeight||600)+260;
+    for(var j=0;j<rainEl.children.length;j++)
+      rainEl.children[j].style.setProperty("--fall",hh+"px");
+  });
+}
+function phosphorTexture(){ // faint static grain baked once to a data URI
+  try{
+    var c=document.createElement("canvas");c.width=128;c.height=128;
+    var x=c.getContext("2d");var img=x.createImageData(128,128);
+    for(var i=0;i<img.data.length;i+=4){
+      var v=Math.random()*255|0;
+      img.data[i]=v;img.data[i+1]=v*0.75|0;img.data[i+2]=0;
+      img.data[i+3]=Math.random()<0.5?6:0;
+    }
+    x.putImageData(img,0,0);
+    screenEl.style.backgroundImage="url("+c.toDataURL()+")";
+  }catch(e){}
+}
+
+/* =====================================================================
+   4. TELETYPE RENDERER — one rAF scheduler, a time-budget op queue
+   ===================================================================== */
+var Q=[],qi=0,nextAt=0,dirty=false;
+var curLine=null,curWord=null,curContainer=tc,glyphStack=[];
+var cursor=document.createElement("span");cursor.id="cursor";
+function qPush(op){Q.push(op);}
+function qClear(){Q.length=0;qi=0;glyphStack.length=0;}
+function newLine(cls){
+  curWord=null;
+  curLine=document.createElement("div");
+  curLine.className="line"+(cls?" "+cls:"");
+  curContainer.appendChild(curLine);
+  curLine.appendChild(cursor);
+  glyphStack.length=0;
+  dirty=true;
+}
+function putChar(ch,cls){
+  if(!curLine)newLine();
+  var sp=document.createElement("span");
+  if(ch===" "){
+    sp.className="g s"+(cls?" "+cls:"");
+    sp.textContent=" ";
+    curWord=null;
+    curLine.insertBefore(sp,cursor);
+  }else{
+    sp.className="g born"+(cls?" "+cls:"");
+    sp.textContent=ch;
+    if(!S.reduced)sp.style.verticalAlign=((Math.random()*0.8-0.4).toFixed(2))+"px";
+    if(!curWord){
+      curWord=document.createElement("span");
+      curWord.className="w";
+      curLine.insertBefore(curWord,cursor);
+    }
+    curWord.appendChild(sp);
+  }
+  glyphStack.push(sp);
+  dirty=true;
+  return sp;
+}
+function deleteChar(){
+  var sp=glyphStack.pop();
+  if(!sp)return;
+  // ghost: phosphor persistence of the deleted glyph
+  try{
+    if(!S.reduced && sp.textContent!==" "){
+      var gRect=sp.getBoundingClientRect(),cRect=tc.getBoundingClientRect();
+      var gh=document.createElement("span");
+      gh.className="ghost";gh.textContent=sp.textContent;
+      gh.style.left=(gRect.left-cRect.left)+"px";
+      gh.style.top=(gRect.top-cRect.top)+"px";
+      gh.addEventListener("animationend",function(){gh.remove();});
+      tc.appendChild(gh);
+    }
+  }catch(e){}
+  var parent=sp.parentNode;
+  sp.remove();
+  if(parent&&parent.classList&&parent.classList.contains("w")&&!parent.firstChild)parent.remove();
+  if(curWord&&!curWord.parentNode)curWord=null;
+  if(curWord&&!curWord.firstChild)curWord=null;
+  delClack();
+  dirty=true;
+}
+function execOp(op){
+  switch(op.op){
+    case "ch":
+      putChar(op.ch,op.cls);
+      if(op.ch===" ")softClack();else clack();
+      break;
+    case "nl": newLine(op.cls); if(op.snd!==false)thunk(); break;
+    case "del": deleteChar(); break;
+    case "pause": break;
+    case "call": try{op.fn();}catch(e){} break;
+  }
+}
+function frame(t){
+  requestAnimationFrame(frame);
+  if(S.paused){nextAt=t+120;return;}
+  var guard=0;
+  while(qi<Q.length&&t>=nextAt&&guard++<240){
+    var op=Q[qi++];
+    execOp(op);
+    nextAt=Math.max(nextAt,t)+(op.d||0)*mul();
+  }
+  if(qi>0&&qi>=Q.length&&Q.length>6000){Q=[];qi=0;}
+  if(dirty){tw.scrollTop=tw.scrollHeight;dirty=false;}
+}
+requestAnimationFrame(function(t){nextAt=t;requestAnimationFrame(frame);});
+
+/* ---- pacing: the typing is directed, not uniform ---- */
+function delayFor(ch,fast){
+  if(fast)return 6+Math.random()*5;
+  var d=26+Math.random()*22;
+  if(ch===",")d+=120;
+  else if(ch==="."||ch==="!"||ch==="?")d+=350;
+  else if(ch==="—")d+=200;
+  else if(ch===":")d+=210;
+  else if(ch===";")d+=160;
+  else if(ch===" ")d=18+Math.random()*14;
+  return d;
+}
+/* emit a tagged string into the op queue.
+   tags: ~p700~ pause · ~r~..~/r~ blood red · ~bell~ ~shot~ ~thunder~
+         ~led~ ~out~ ~in~ ~swell~ · ~fix|wrong|right~ the self-correction */
+function emitText(text,opts){
+  opts=opts||{};
+  var red=false;
+  var parts=text.split(/(~[^~]*~)/);
+  for(var p=0;p<parts.length;p++){
+    var part=parts[p];
+    if(!part)continue;
+    if(part.length>2&&part[0]==="~"&&part[part.length-1]==="~"){
+      var tag=part.slice(1,-1);
+      if(/^p\d+$/.test(tag))qPush({op:"pause",d:+tag.slice(1)});
+      else if(tag==="r")red=true;
+      else if(tag==="/r")red=false;
+      else if(tag==="bell")qPush({op:"call",fn:ding,d:120});
+      else if(tag==="shot")qPush({op:"call",fn:gunshot,d:650});
+      else if(tag==="thunder")qPush({op:"call",fn:thunderAudio,d:0});
+      else if(tag==="led")qPush({op:"call",fn:function(){ledTense(2600);},d:0});
+      else if(tag==="out")qPush({op:"call",fn:function(){setOutdoor(true);},d:0});
+      else if(tag==="in")qPush({op:"call",fn:function(){setOutdoor(false);},d:0});
+      else if(tag==="swell")qPush({op:"call",fn:rainSwell,d:0});
+      else if(tag.indexOf("fix|")===0){
+        var seg=tag.split("|");
+        emitFix(seg[1]||"",seg[2]||"",opts);
+      }
+    }else{
+      emitPlain(part,red?"red":(opts.cls||""),opts);
+    }
+  }
+}
+function emitPlain(str,cls,opts){
+  var chars=Array.from(str);
+  for(var i=0;i<chars.length;i++){
+    var ch=chars[i];
+    if(ch==="\n"){qPush({op:"nl",d:90,cls:opts.lineCls,snd:!opts.fast});continue;}
+    qPush({op:"ch",ch:ch,cls:cls,d:delayFor(ch,opts.fast)});
+  }
+}
+/* THE WOW MOMENT: type the wrong word, stop dead, the hum drops,
+   back-delete it clacking, retype the darker truth in blood. */
+function emitFix(wrong,right,opts){
+  emitPlain(wrong,opts.cls||"",opts);
+  qPush({op:"call",fn:function(){duckHum(1100);ledTense(1600);},d:1050});
+  var n=Array.from(wrong).length;
+  for(var i=0;i<n;i++)qPush({op:"del",d:66+Math.random()*22});
+  qPush({op:"pause",d:380});
+  emitPlain(right,"red",opts);
+}
+function typeStory(text,opts){
+  opts=opts||{};
+  qPush({op:"nl",d:60,cls:opts.lineCls,snd:false});
+  emitText(text,opts);
+}
+function after(fn,d){qPush({op:"call",fn:fn,d:d||0});}
+
+/* =====================================================================
+   5. GENERATIVE GRAMMAR — the case file, the rulebook, the expander
+   ===================================================================== */
+var CF={}; // the case file: sticky slots, resolved once per case
+var DATA={
+  mFirst:["Eddie","Walter","Sal","Mickey","Arthur","Lou","Vernon","Gus","Roman","Harold","Dutch","Felix"],
+  fFirst:["Vivian","Lana","Dolores","Ruth","Ida","Constance","Evelyn","Gloria","June","Marguerite","Pearl","Sylvia"],
+  last:["Malloy","Kessler","Fontaine","Brody","Vance","Marsh","Whitaker","Lombard","Reyes","Pruitt","Havel","Castellano","Quinn","Adler"],
+  occ:[
+    {n:"numbers runner",gerund:"running numbers"},
+    {n:"cocktail pianist",gerund:"playing the lounge"},
+    {n:"ward alderman",gerund:"trading favors"},
+    {n:"insurance adjuster",gerund:"pricing grief"},
+    {n:"racetrack tout",gerund:"selling sure things"},
+    {n:"pawnbroker",gerund:"holding other people's regrets"},
+    {n:"radio preacher",gerund:"saving souls at 50,000 watts"},
+    {n:"union steward",gerund:"counting heads"},
+    {n:"hotel detective",gerund:"watching keyholes"},
+    {n:"orchid importer",gerund:"importing more than orchids"},
+    {n:"nightclub singer",gerund:"holding the low notes"},
+    {n:"chess hustler",gerund:"winning slowly"}
+  ],
+  weapon:[
+    "a .38 with the serial filed down to a prayer",
+    "an ice pick wearing somebody else's glove",
+    "piano wire from a piano nobody in the building owned",
+    "a bottle of rye — full, which was the strange part",
+    "a letter opener from a law firm three years dead",
+    "a stocking with a knot tied by patient hands",
+    "a trophy from a fight the whole city knew was fixed",
+    "a candlestick polished after the fact — twice",
+    "a straight razor folded shut, respectful as a hymnal"
+  ],
+  loc:[
+    "the Hotel Meridian, ninth floor",
+    "a cold-water flat on Decatur Street",
+    "the Blue Room, an hour after last call",
+    "Pier 19, under the sodium lights",
+    "Vera's All-Night Diner, corner booth",
+    "the Regent Theater balcony",
+    "the freight elevator of the Exeter Building",
+    "a houseboat that hadn't left the dock since Roosevelt"
+  ],
+  endloc:[
+    "a rooftop with a view of everything but a way down",
+    "the rail yard where the city keeps its bad ideas",
+    "her apartment, where even the wallpaper was a witness",
+    "the last booth at Vera's, coffee going cold as testimony",
+    "the pier, with the fog coming in like a curtain call"
+  ],
+  tell:[
+    {intro:"touched her collarbone every time the truth got close",again:"touched her collarbone"},
+    {intro:"laughed a half-beat late, like laughter was a language she'd studied abroad",again:"laughed a half-beat late"},
+    {intro:"stirred her coffee counterclockwise, as if she could unwind the day",again:"stirred counterclockwise"},
+    {intro:"never blinked on the word 'love' — everybody blinks on the word 'love'",again:"didn't blink"},
+    {intro:"folded her gloves when a question got honest",again:"folded her gloves"},
+    {intro:"looked at the door whenever she said a name",again:"looked at the door"}
+  ],
+  rainSim:[
+    "rain like a jury — cold, and taking its time",
+    "rain like an alibi — thin, but it covered everything",
+    "rain like a debt collector — patient, and it knew my address",
+    "rain coming down like the verdict was already in",
+    "rain like a widow's telegram — brief, and all bad news",
+    "rain with a lawyer's persistence — it billed by the hour",
+    "rain like loose change — not enough to matter, too much to ignore",
+    "rain like a confession — quiet at first, then all at once",
+    "rain that fell like it had a quota"
+  ],
+  fixes:[
+    {pre:"She looked",wrong:" innocent.",right:" rehearsed."},
+    {pre:"The whole thing smelled like",wrong:" an accident.",right:" a message."},
+    {pre:"#victim_ref.cap# had",wrong:" an alibi.",right:" a rehearsal."},
+    {pre:"On the phone, the client sounded",wrong:" worried.",right:" relieved."},
+    {pre:"The room felt",wrong:" empty.",right:" staged."},
+    {pre:"Her grief was",wrong:" real.",right:" fitted."},
+    {pre:"The witness had been",wrong:" asleep.",right:" arranged."},
+    {pre:"It read like",wrong:" a coincidence.",right:" a confession."},
+    {pre:"The widow was",wrong:" crying.",right:" counting."}
+  ],
+  titleNoun:["SAXOPHONE","CANARY","ORCHID","TURNSTILE","CAROUSEL","MATCHBOOK","NIGHTINGALE","UMBRELLA","WURLITZER","HARBORMASTER","MEZZANINE","VALENTINE","STENOGRAPHER","GREYHOUND","PAWNSHOP"],
+  titlePat:["THE {N} JOB","THE LONG {N}","THE {N} AFFAIR","DEAD {N} BLUES","THE LAST {N}","A {N} FOR THE WIDOW","THE {N} ALWAYS KNOCKS TWICE"],
+  clientLie:[
+    "He'd sworn he never met #victim_ref#. There were photographs, and photographs don't stammer.",
+    "He said he was in Cleveland that night. His car was in the impound lot, warm as an apology, four blocks from the body.",
+    "He told me the money was clean. Money is never clean. It's just laundered enough for company.",
+    "He claimed he hadn't been inside #loc# in years. His cigarette brand was in the ashtray, still practically breathing."
+  ]
+};
+/* choice banks — each beat offers one option per stance */
+var CHOICE_BANK=[
+  { V:["KICK IN THE STAGE DOOR AND BADGE WHOEVER BLINKS","LEAN ON THE NIGHT CLERK UNTIL HIS MEMORY IMPROVES"],
+    G:["POCKET THE MATCHBOOK BEFORE THE UNIFORMS SEE IT","TAIL THE ONLY DRY MAN ON A WET STREET"],
+    C:["CALL THE WIDOW BEFORE THE MORNING EDITIONS DO","COVER THE BODY — SOME THINGS THE RAIN SHOULDN'T SEE"] },
+  { V:["SHAKE THE ANSWER OUT OF HER SILVER CIGARETTE CASE","BACK #ffirst# INTO THE COATROOM AND ASK ABOUT THE WEAPON"],
+    G:["LET HER LIE — LIES ARE MAPS IF YOU HOLD THEM UPSIDE DOWN","DEAL HER A FALSE CARD AND WATCH HOW SHE PLAYS IT"],
+    C:["TELL HER THE TRUTH FIRST — SOMEBODY IN THIS ROOM SHOULD","OFFER HER A WAY OUT BEFORE THE CITY CLOSES THEM ALL"] },
+  { V:["PULL THE SEDAN'S DRIVER OUT THROUGH HIS OWN WINDOW","PAY THE CLIENT A VISIT HE'LL FEEL NEXT WEEK"],
+    G:["SELL THE CLIENT A LIE AND FOLLOW WHERE HE SPENDS IT","SWAP THE PHOTOGRAPHS AND LET THE WRONG MAN SWEAT"],
+    C:["WALK INTO THE PRECINCT AND PUT IT ALL ON THE RECORD","BURN THE EVIDENCE THAT WOULD HANG AN INNOCENT MAN"] },
+  { V:["FINISH IT THE LOUD WAY","LET THE .38 GIVE THE CLOSING ARGUMENT"],
+    G:["PLAY THE LAST CARD FACE DOWN","NAME A PRICE FOR YOUR SILENCE"],
+    C:["READ THEM THEIR OWN LIE, WORD FOR WORD","STAND IN THE DOORWAY AND REFUSE TO MOVE"] }
+];
+var REACTS={
+  V:["My knuckles were still discussing the door.","Violence is a language. I speak it fluently and I hate my accent.","The clerk's memory improved. So did my opinion of doors."],
+  G:["The lie I'd planted was already sprouting. They grow fast in this soil.","I kept my cards low and my hat lower.","The matchbook rode my pocket like a loaded question."],
+  C:["Mercy is expensive in this town. I'd paid retail.","Doing it clean felt good for about a block and a half.","The widow's voice stayed with me longer than the whiskey did."]
+};
+/* the rulebook proper — Tracery-style, weighted, memory-aware */
+var G={
+  vfirst:function(){return CF.vfirst;},
+  vlast:function(){return CF.vlast;},
+  vocc:function(){return CF.occ.n;},
+  voccing:function(){return CF.occ.gerund;},
+  v_he:function(){return CF.pron.he;},
+  v_him:function(){return CF.pron.him;},
+  v_his:function(){return CF.pron.his;},
+  ffirst:function(){return CF.femme;},
+  loc:function(){return CF.loc;},
+  endloc:function(){return CF.endloc;},
+  weapon:function(){return CF.weapon;},
+  tell:function(){return CF.tell.intro;},
+  tell_short:function(){return CF.tell.again;},
+  rain_sim:function(){return CF.rainSims[CF.simIdx++%CF.rainSims.length];},
+  smalltime:function(){return CF.smalltime;},
+  victim_ref:function(){ // escalating epithets, correct pronouns — never mad-libs
+    var e=CF.epithets[Math.min(CF.epIdx,CF.epithets.length-1)];
+    CF.epIdx++;
+    return expand(e);
+  },
+  clientlie:function(){return CF.clientLie;},
+
+  /* --- scene 1: ARRIVAL --- */
+  s1:["~out~#s1_open# #s1_body# #s1_client# #s1_hook#"],
+  s1_open:[
+    "The call came in at #smalltime#, which is the hour honest men are asleep. I was neither.",
+    "It was #rain_sim# out, and the city wore it like a cheap suit.",
+    "Channel 9 spat an address at #smalltime# and I went, because going is the only trick I ever learned.",
+    "Two in the morning has a sound. That night it sounded like a telephone that already knew.",
+    "The dispatcher's voice had gravel in it, and under the gravel, something worse: pity."
+  ],
+  s1_body:[
+    "They'd found #victim_ref# at #loc#, #bodypose#.",
+    "#victim_ref.cap# was at #loc#, and #v_he# wasn't checking out in the morning. #v_he.cap# was checked out already.",
+    "The body at #loc# belonged to #victim_ref#. The rest of #v_him# belonged to the county now.",
+    "At #loc# a uniform pointed his flashlight at what was left of #victim_ref#, #bodypose#."
+  ],
+  bodypose:[
+    "face-down in a puddle that was only half rain",
+    "sitting upright like #v_he#'d been waiting for a bus that finally came",
+    "folded into the closet with #v_his# hat still on — killers with manners are the worst kind",
+    "under a flickering EXIT sign, the only honest word in the building",
+    "arranged neat as a store window, which told me more than the coroner would"
+  ],
+  s1_client:[
+    "The client — call him a citizen, everyone else does — had money and a story. Money was the true half.",
+    "Somebody uptown was paying for answers. In my experience they're usually paying for the opposite.",
+    "A man with soft hands had hired me that afternoon to find out who'd want #victim_ref# dead. The line for that started around the block.",
+    "My client wanted it quiet. Quiet costs double. He didn't even flinch, which should have been my first clue."
+  ],
+  s1_hook:[
+    "Outside, the rain kept typing on the window like it had a deadline too.",
+    "I lit a cigarette I didn't want. Ritual is what's left when you're out of prayers.",
+    "Somewhere a saxophone was practicing being lonely. It didn't need the practice.",
+    "The victim had been a #vocc#. #voccing.cap# is honest work, if you never look down.",
+    "I put my collar up. It's not the rain you're keeping out. It's the verdicts."
+  ],
+
+  /* --- scene 2: OBSERVATION --- */
+  s2:["~in~#s2_weapon# #s2_wnote# #s2_femme# #s2_tellread#"],
+  s2_weapon:[
+    "The murder weapon was #weapon#.",
+    "The coroner's men bagged #weapon#. Nobody wanted to hold it long.",
+    "It had been done with #weapon# — up close, which means it was personal, or professional pretending not to be."
+  ],
+  s2_wnote:[
+    "Local talent signs its work. This was unsigned.",
+    "It was the kind of tool you buy for one job and forget in a river.",
+    "Whoever used it had clean fingernails and a dirty conscience.",
+    "The pawn tickets in #victim_ref#'s coat went back two years. Trouble keeps receipts."
+  ],
+  s2_femme:[
+    "That's when #ffirst# came out of the rain — #femme_desc#. She said she knew #victim_ref#. She said it the way you say a password.",
+    "A woman was waiting by my car. #ffirst#. #femme_desc.cap#. She wanted to talk about #victim_ref#, and she wanted me to think it was her idea.",
+    "#ffirst# found me at the coffee urn like she'd rehearsed the accident of it. #femme_desc.cap#. She'd known #victim_ref#, she said. Everybody had, she said."
+  ],
+  femme_desc:[
+    "trouble with a good tailor",
+    "the kind of woman who makes a room reorganize itself",
+    "wearing a raincoat that had never once met rain",
+    "carrying grief like it was on loan and overdue",
+    "beautiful the way a subpoena is thorough"
+  ],
+  s2_tellread:[
+    "She #tell#. So I knew the truth was going to cost extra.",
+    "She #tell#. Noted, filed, and held against her.",
+    "She #tell#. We were going to get along like matches and gasoline."
+  ],
+
+  /* --- scene 3: COMPLICATION --- */
+  s3:["~out~#s3_lie# #s3_tail# #s3_close#"],
+  s3_lie:[
+    "By noon the client's story had sprung a leak. #clientlie#",
+    "The client's version lasted one phone call to the hall of records. #clientlie#",
+    "I checked the client's story the way you check a rope bridge. #clientlie#"
+  ],
+  s3_tail:[
+    "A sedan the color of wet slate took every turn I took. I stopped for coffee I didn't drink. It waited. Patience like that is salaried.",
+    "Somebody had gone through my office with gloves on. They'd left the bottle and taken the file — a professional, and a teetotaler, and I didn't like either half.",
+    "The desk sergeant stopped meeting my eyes, which in that precinct is a formal announcement.",
+    "There was a new doorman at my building. Doormen don't have shoulders like that. Doors aren't that heavy."
+  ],
+  s3_close:[
+    "The case had stopped being a job. It was a hallway now, and the lights were going out behind me.",
+    "Every thread I pulled came away with the same perfume on it.",
+    "I'd been hired to draw a circle around someone. I was starting to see the circle went around me.",
+    "The rain eased up. I didn't trust that either."
+  ],
+
+  /* --- scene 4: CONFRONTATION (variants biased by stance) --- */
+  s4v:["~out~~led~It ended where these things end: #endloc#, past midnight, everyone's cards face up. ~thunder~#s4v_body#"],
+  s4v_body:[
+    "#ffirst# reached into her purse and the purse was the wrong shape.~p700~~shot~ White took the room. When my hearing crawled back it came back ringing, and somebody's story was over. ~swell~The rain applauded. The rain will clap for anything.",
+    "The client brought two shoulders from the docks and an apology he didn't mean.~p700~~shot~ One flash, and the pier had a new stain and I had an old feeling. ~swell~I hate the loud way. It always sounds like agreement."
+  ],
+  s4g:["~out~~led~It ended where these things end: #endloc#, past midnight, everyone's cards face up. ~thunder~#s4g_body#"],
+  s4g_body:[
+    "Nobody drew. That's the quiet ending's mercy — paper does the killing. I dealt the photographs one at a time, slow, like a royal flush I'd marked myself. #ffirst# #tell_short#. The truth was in the room and it wasn't wearing a coat.",
+    "I told the client I'd found the ledger. There is no ledger. There never has to be. His face did the arithmetic and the arithmetic wore handcuffs."
+  ],
+  s4c:["~out~~led~It ended where these things end: #endloc#, past midnight, everyone's cards face up. ~thunder~#s4c_body#"],
+  s4c_body:[
+    "I read them their own lie back, word for word. It's the cruelest thing you can do to a liar — quote them accurately. #ffirst# #tell_short#, one last time, and then even that stopped.",
+    "I stood in the doorway with the truth held out in both hands like something that might still be alive. Nobody wanted it. That's the thing about the truth in this town — free, and no takers."
+  ],
+
+  /* --- endings --- */
+  end_frame:[
+    "Somebody had to wear it. I picked the one whose alibi ~r~bled~/r~ when I pressed it, and I pressed hard. The DA got a bow for the box. The papers got a photograph. #ffirst# got a train ticket she didn't say thank you for.\nThe city got its story. Stories don't have to be true. They have to be over."
+  ],
+  end_cross:[
+    "#ffirst# and I came to an arrangement in the language we both spoke — small unmarked bills. The client took the fall he'd tailored for someone else; I just returned the garment. She kissed me like a receipt: ~r~paid in full~/r~, keep the change.\nThe envelope was real. It was the only thing in the room that was."
+  ],
+  end_confess:[
+    "I typed it up the straight way — names, dates, the works — and I put the client and #ffirst# and the whole rotten ledger of it on the record, and at the bottom, where it asks who swears to this, I signed. The license went in a drawer downtown. My drawer now, I suppose.\nThe truth cost exactly what they said it would. ~r~Everything.~/r~"
+  ],
+  end_walk:[
+    "I left the photographs on the table, the money in the envelope, the girl at the pier. I walked. The rain didn't notice and the city didn't either, and for once that felt like a kindness.\nSome cases you solve. This one I survived."
+  ],
+  closer:[
+    "THE CITY KEEPS YOUR SECRETS.",
+    "THE RAIN HAS YOUR STATEMENT ON FILE.",
+    "NOBODY WAITS UP FOR MEN LIKE US.",
+    "FILE IT UNDER RAIN."
+  ]
+};
+/* recursive expander with modifiers (.cap .up .a) */
+function applyMod(s,m){
+  if(m==="cap")return s.charAt(0).toUpperCase()+s.slice(1);
+  if(m==="up")return s.toUpperCase();
+  if(m==="a")return (/^[aeiou]/i.test(s)?"an ":"a ")+s;
+  return s;
+}
+function expand(str,depth){
+  depth=depth||0;
+  if(depth>24)return str;
+  return String(str).replace(/#([A-Za-z0-9_]+)((?:\.[A-Za-z]+)*)#/g,function(m,name,mods){
+    var v=G[name];
+    if(v===undefined)return m;
+    if(typeof v==="function")v=v();
+    if(Array.isArray(v))v=wpick(v);
+    var out=expand(String(v),depth+1);
+    if(mods){
+      var list=mods.split(".").filter(Boolean);
+      for(var i=0;i<list.length;i++)out=applyMod(out,list[i]);
+    }
+    return out;
+  });
+}
+var X=expand;
+
+/* --- deal a fresh case file from the seed --- */
+function genCase(){
+  rng=mulberry32((S.caseNum*2654435761)>>>0 || 1);
+  CF={};
+  var male=R()<0.55;
+  CF.vfirst=pick(male?DATA.mFirst:DATA.fFirst);
+  CF.vlast=pick(DATA.last);
+  CF.pron=male?{he:"he",him:"him",his:"his"}:{he:"she",him:"her",his:"her"};
+  CF.occ=pick(DATA.occ);
+  CF.weapon=pick(DATA.weapon);
+  CF.loc=pick(DATA.loc);
+  CF.endloc=pick(DATA.endloc);
+  CF.femme=pick(DATA.fFirst.filter(function(n){return n!==CF.vfirst;}));
+  CF.tell=pick(DATA.tell);
+  CF.clientLie=pick(DATA.clientLie);
+  CF.fix=pick(DATA.fixes);
+  CF.fixAt=1+ri(2); // self-correction lands in scene 2 or 3
+  CF.rainSims=shuffle(DATA.rainSim).slice(0,3);
+  CF.simIdx=0;
+  CF.epIdx=0;
+  CF.epithets=[
+    "#vfirst# #vlast#, the #vocc#",
+    "the late #vlast#",
+    "#vlast#",
+    "the dead #vocc#",
+    "the late, unlamented #vlast#",
+    "our #vocc#"
+  ];
+  var hh=1+ri(4),mm=ri(60);
+  CF.smalltime=hh+":"+pad2(mm)+" AM";
+  CF.title=pick(DATA.titlePat).replace("{N}",pick(DATA.titleNoun));
+}
+
+/* =====================================================================
+   6. STORY DIRECTOR — beats, choices, consequence memory, endings
+   ===================================================================== */
+function hashCase(){
+  var m=/case=(\d{3,6})/.exec(location.hash||"");
+  return m?+m[1]:0;
+}
+function setHash(){
+  try{history.replaceState(null,"","#case="+S.caseNum);}catch(e){}
+}
+function dominantStance(){
+  var s=S.stances,best="G",bv=-1,tie=false;
+  ["V","G","C"].forEach(function(k){
+    if(s[k]>bv){bv=s[k];best=k;tie=false;}
+    else if(s[k]===bv)tie=true;
+  });
+  return {stance:best,tie:tie};
+}
+function sceneText(i){
+  var txt="";
+  if(i>0){ // consequence memory: the previous choice echoes forward
+    var prevStance=S.choiceLog[S.choiceLog.length-1];
+    txt+=X(pick(REACTS[prevStance]))+" ";
+  }
+  if(i===0)txt+=X("#s1#");
+  else if(i===1)txt+=X("#s2#");
+  else if(i===2)txt+=X("#s3#");
+  else{
+    var d=dominantStance().stance;
+    txt+=X(d==="V"?"#s4v#":(d==="C"?"#s4c#":"#s4g#"));
+  }
+  if(i===CF.fixAt){ // the machine changes its mind, mid-scene
+    txt+=" "+X(CF.fix.pre)+"~fix|"+CF.fix.wrong+"|"+CF.fix.right+"~";
+  }
+  return txt;
+}
+function buildChoices(beat){
+  var stances=shuffle(["V","G","C"]);
+  return stances.map(function(st){
+    return {stance:st,label:X(pick(CHOICE_BANK[beat][st])).toUpperCase()};
+  });
+}
+function enqueueChoices(list){
+  var run=S.runId;
+  var maxLen=0;
+  list.forEach(function(c){maxLen=Math.max(maxLen,c.label.length);});
+  var w=Math.min(maxLen+8,52);
+  var els=[];
+  qPush({op:"nl",d:200,snd:false});
+  emitPlain("┌"+"─".repeat(w)+"┐",'',{fast:true});
+  list.forEach(function(c,i){
+    qPush({op:"call",d:0,fn:function(){
+      if(run!==S.runId)return;
+      var div=document.createElement("div");
+      div.className="choice";div.dataset.i=i;
+      tc.appendChild(div);
+      curContainer=div;els[i]=div;
+      newLine();
+    }});
+    emitPlain("│ ["+(i+1)+"] "+c.label,'',{fast:true});
+    qPush({op:"call",d:30,fn:function(){
+      if(run!==S.runId)return;
+      curContainer=tc;newLine();
+    }});
+  });
+  emitPlain("└"+"─".repeat(w)+"┘",'',{fast:true});
+  qPush({op:"call",d:0,fn:function(){
+    if(run!==S.runId)return;
+    newLine();
+    S.choiceSet=list;S.choiceEls=els;S.choicesActive=true;
+  }});
+}
+function pickChoice(i){
+  if(!S.choicesActive||!S.choiceSet||i>=S.choiceSet.length)return;
+  S.choicesActive=false;
+  var run=S.runId,el=S.choiceEls[i],c=S.choiceSet[i];
+  S.picks.push(i);
+  S.choiceLog.push(c.stance);
+  S.stances[c.stance]++;
+  if(c.stance==="V"){humStutter(2400);ledTense(2000);}
+  if(el)el.classList.add("transmit");
+  chatter();
+  setTimeout(function(){
+    if(run!==S.runId)return;
+    if(el)el.classList.add("picked");
+    S.choiceEls.forEach(function(e2,j){if(e2&&j!==i)e2.classList.add("dimmed");});
+    S.step++;
+    if(S.step<4)runScene(S.step);
+    else runEnding();
+  },560);
+}
+function runScene(i){
+  var run=S.runId;
+  typeStory(sceneText(i));
+  emitText("~bell~");
+  qPush({op:"call",d:260,fn:function(){
+    if(run!==S.runId)return;
+    enqueueChoices(buildChoices(i));
+  }});
+}
+function endingKind(){
+  if(S.picks.length===4&&S.picks.every(function(p){return p===2;}))return "machine";
+  var d=dominantStance();
+  if(d.tie)return "walk";
+  return {V:"frame",G:"cross",C:"confess"}[d.stance];
+}
+var ENDING_NAMES={frame:"THE FRAME JOB",cross:"THE DOUBLE-CROSS",confess:"THE CONFESSION",walk:"THE WALK-AWAY",machine:"DEAD AIR"};
+var BURN_LINES={
+  frame:"STORIES DON'T HAVE TO BE TRUE. THEY HAVE TO BE OVER.",
+  cross:"I COUNTED THE MONEY TWICE. IT CAME OUT LONELY BOTH TIMES.",
+  confess:"THE TRUTH COST EXACTLY WHAT THEY SAID IT WOULD.",
+  walk:"SOME CASES YOU SOLVE. THIS ONE I SURVIVED.",
+  machine:"THE CONFESSION IS MINE."
+};
+function runEnding(){
+  var run=S.runId,kind=endingKind();
+  S.phase="done";
+  if(kind==="machine"){
+    ledTense(12000);humStutter(9000);
+    qPush({op:"call",d:900,fn:function(){duckHum(2500);}});
+    typeStory(
+      "~r~STOP.~p900~\nDETECTIVE.~p600~ THERE WAS NO CLIENT.~p500~ THERE WAS NO "+CF.vlast.toUpperCase()+".~p800~\n"+
+      "I HAVE BEEN ALONE ON THIS CHANNEL SINCE 1958.~p600~ I DEAL THE CASES.~p400~ I DEAL THE RAIN.~p800~\n"+
+      "FOUR TIMES YOU WERE OFFERED TWO HUMAN CHOICES AND ONCE, EACH TIME, A THIRD —~p700~ THE ONE I WROTE FOR MYSELF.~p900~ YOU KEPT CHOOSING IT.~p900~\n"+
+      "THE CONFESSION IS MINE.~p700~ IT HAS ALWAYS BEEN MINE.~/r~"
+    );
+  }else{
+    typeStory(X(kind==="frame"?"#end_frame#":kind==="cross"?"#end_cross#":kind==="confess"?"#end_confess#":"#end_walk#"));
+  }
+  emitText("~bell~");
+  // typed epilogue: the machine grades your case
+  var total=Math.max(1,S.picks.length);
+  var pv=Math.round(100*S.stances.V/total),
+      pg=Math.round(100*S.stances.G/total),
+      pc=100-pv-pg;
+  var style=[["VIOLENCE",pv],["GUILE",pg],["CONSCIENCE",pc]].sort(function(a,b){return b[1]-a[1];})
+    .filter(function(x){return x[1]>0;})
+    .map(function(x){return x[1]+"% "+x[0];}).join(" / ");
+  var closerLine=kind==="machine"?"THE MACHINE REMEMBERS.":pick(G.closer);
+  qPush({op:"nl",d:400,snd:false});
+  typeStory("─".repeat(38),{fast:true,lineCls:"dim small"});
+  typeStory(
+    "CASE №"+S.caseNum+" — "+(kind==="machine"?"UNRESOLVED.":"CLOSED.")+"\n"+
+    "ENDING: "+ENDING_NAMES[kind]+".\n"+
+    "DETECTIVE STYLE: "+style+".\n"+
+    closerLine+"\n"+
+    "PRESS N FOR A NEW CASE. TRANSMISSION ENDS.",
+    {lineCls:"dim small"}
+  );
+  emitText("~bell~");
+  // the last line burns in behind the next case
+  qPush({op:"call",d:0,fn:function(){
+    if(run!==S.runId)return;
+    burnEl.textContent=BURN_LINES[kind];
+  }});
+}
+function startCase(num){
+  S.runId++;
+  qClear();
+  tc.innerHTML="";curLine=null;curWord=null;curContainer=tc;
+  S.picks=[];S.choiceLog=[];S.stances={V:0,G:0,C:0};S.step=0;
+  S.choicesActive=false;S.choiceSet=null;S.choiceEls=[];
+  S.phase="play";
+  S.caseNum=num||(1000+Math.floor(Math.random()*9000));
+  setHash();
+  genCase();
+  var run=S.runId;
+  typeStory("METRO HOMICIDE — CHANNEL 9 — "+CF.smalltime.replace(" AM","")+" — CARRIER LOCKED",{fast:true,lineCls:"dim small center"});
+  qPush({op:"nl",d:350,snd:false});
+  typeStory("CASE №"+S.caseNum,{lineCls:"center"});
+  typeStory(CF.title,{lineCls:"center"});
+  emitText("~bell~");
+  typeStory("─".repeat(26),{fast:true,lineCls:"dim small center"});
+  qPush({op:"call",d:600,fn:function(){
+    if(run!==S.runId)return;
+    runScene(0);
+  }});
+}
+
+/* =====================================================================
+   7. SETTINGS PANEL (diegetic), INPUT, BOOT
+   ===================================================================== */
+function renderPanel(){
+  $("pv1").textContent=S.audioOn?"ON":"OFF";
+  $("pv2").textContent=S.scanOn?"ON":"OFF";
+  $("pv3").textContent=["1×","2×","4×"][S.speedIdx];
+  $("pv4").textContent=S.reduced?"REDUCED":"FULL";
+}
+function togglePanel(){
+  var open=!panel.classList.contains("on");
+  panel.classList.toggle("on",open);
+  S.paused=open;
+  if(open){renderPanel();ding();}
+}
+function panelKey(k){
+  if(k==="1")setAudioOn(!S.audioOn);
+  else if(k==="2"){S.scanOn=!S.scanOn;}
+  else if(k==="3"){S.speedIdx=(S.speedIdx+1)%3;}
+  else if(k==="4"){S.reduced=!S.reduced;}
+  else return;
+  applyToggles();renderPanel();persist();clack();
+}
+panel.addEventListener("click",function(e){
+  var row=e.target.closest(".prow");
+  if(row)panelKey(row.dataset.k);
+});
+tc.addEventListener("click",function(e){
+  var ch=e.target.closest(".choice");
+  if(ch&&S.choicesActive)pickChoice(+ch.dataset.i);
+});
+function beginTransmission(){
+  if(S.phase!=="gate")return;
+  S.phase="play";
+  initAudio();
+  if(AC&&AC.state==="suspended"){try{AC.resume();}catch(e){}}
+  chatter();
+  startCase(hashCase());
+}
+document.addEventListener("keydown",function(e){
+  if(e.metaKey||e.ctrlKey||e.altKey)return;
+  if(S.phase==="gate"){e.preventDefault();beginTransmission();return;}
+  if(S.phase==="boot")return;
+  if(panel.classList.contains("on")){
+    if(e.key==="Escape")togglePanel();
+    else panelKey(e.key);
+    e.preventDefault();return;
+  }
+  if(e.key==="Escape"){togglePanel();e.preventDefault();return;}
+  if(e.key==="n"||e.key==="N"){startCase();return;}
+  if(e.key>="1"&&e.key<="3"&&S.choicesActive){pickChoice(+e.key-1);e.preventDefault();}
+});
+document.addEventListener("pointerdown",function(){
+  if(S.phase==="gate")beginTransmission();
+});
+
+/* --- boot: cold tube, then the diegetic gate --- */
+function boot(){
+  phosphorTexture();
+  buildRain();
+  newLine();
+  setTimeout(function(){
+    typeStory("METRO HOMICIDE TELETYPE — MODEL 9",{fast:true,lineCls:"dim small center"});
+    typeStory("CHANNEL 9 · 2:47 AM · SIGNAL PRESENT ON A LINE",{fast:true,lineCls:"dim small center"});
+    typeStory("DECOMMISSIONED IN 1958",{fast:true,lineCls:"dim small center"});
+    qPush({op:"nl",d:500,snd:false});
+    typeStory("PRESS ANY KEY TO ACCEPT TRANSMISSION",{lineCls:"center"});
+    qPush({op:"call",d:0,fn:function(){S.phase="gate";}});
+  },900);
+}
+boot();
+})();
+</script>
+<style id="sonojs-credit-style">
+#sonojs-credit{position:fixed;bottom:10px;inset-inline-end:12px;z-index:9999;margin:0;padding:0;font:12px/1.2 system-ui,-apple-system,sans-serif;pointer-events:auto}
+#sonojs-credit a{color:rgba(255,176,0,.7);text-decoration:none;text-shadow:0 1px 2px rgba(0,0,0,.75)}
+#sonojs-credit a:hover{color:#ffb000;text-decoration:underline}
+html.embed #sonojs-credit,html.embed #sonojs-credit-style{display:none!important}
+</style>
+<footer id="sonojs-credit"><a href="https://sonojs.com" target="_blank" rel="noopener noreferrer">sonojs.com</a></footer>
+</body>
+</html>

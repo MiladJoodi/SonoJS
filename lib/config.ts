@@ -104,34 +104,17 @@ Ask before changing MCP config outside this project.`,
   githubRepo: "MiladJoodi/SonoJS",
   navItems: [
     { href: "/docs", label: "Docs" },
-    { href: "/docs/components", label: "Components" },
-    { href: "/blocks", label: "Blocks" },
-    { href: "/charts", label: "Charts" },
     {
-      label: "Products",
-      sections: [
-        {
-          items: [
-            {
-              href: "/templates",
-              label: "Templates",
-              description: "Product UI kits ready to ship.",
-            },
-            {
-              href: "/websites",
-              label: "Websites",
-              description: "Full marketing sites, ready to launch.",
-            },
-          ],
-        },
-      ],
-    },
-    {
-      label: "More",
+      label: "Components",
       sections: [
         {
           title: "Library",
           items: [
+            {
+              href: "/docs/components",
+              label: "All Components",
+              description: "Browse primitives, forms, and building blocks.",
+            },
             {
               href: "/ai",
               label: "AI",
@@ -159,18 +142,30 @@ Ask before changing MCP config outside this project.`,
             },
           ],
         },
+      ],
+    },
+    { href: "/blocks", label: "Blocks" },
+    { href: "/charts", label: "Charts" },
+    {
+      label: "Products",
+      sections: [
         {
-          title: "Build",
           items: [
             {
-              href: "/docs/mcp",
-              label: "MCP",
-              description: "Use SonoJS in Cursor agents.",
+              href: "/templates",
+              label: "Templates",
+              description: "Product UI kits ready to ship.",
+            },
+            {
+              href: "/websites",
+              label: "Websites",
+              description: "Full marketing sites, ready to launch.",
             },
           ],
         },
       ],
     },
+    { href: "/docs/mcp", label: "MCP" },
     { href: "/pricing", label: "Pricing" },
   ] satisfies SiteNavEntry[],
   /** Secondary explore links shown in the site footer. */
