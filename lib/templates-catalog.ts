@@ -13712,6 +13712,132 @@ export const templateProjects: TemplateProject[] = [
       "Static file host (`npx serve .`)",
     ],
   },
+  {
+    slug: "sonojs-website-67",
+    title: "Northpaw Vet",
+    tagline:
+      "Calm clinical vet care with booking wizard, triage, pet chart, and portal.",
+    description:
+      "Northpaw Vet is a multi-page premium veterinary clinic website template by SonoJS (demo brand: Northpaw Vet - Harborline fiction practice). Zero-build static HTML/CSS/vanilla JS with a slate canvas, emerald accent, self-hosted Inter, and local SVG icons. Marketing for services, team, gallery, pricing, emergency, prep, journal, FAQ, contact, privacy/terms, 404. Clinical demos: book wizard (PAW10), triage (Green/Amber/Red), multi-pet chart, vaccine planner, and guardian portal. Demo only. Fiction clinic. Not veterinary advice. No live payments. localStorage theater. Host statically (e.g. Cloudflare Workers); run with npx serve . from the project root.",
+    category: "website",
+    websiteVertical: "pets",
+    stack: ["html", "css", "javascript"],
+    priceLabel: "$39",
+    priceCents: 3900,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 160,
+    accent: "160",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "landing",
+    coverImage: "/websites/projects/sonojs-website-67/main.webp",
+    coverImageDark: null,
+    coverVideo: "/websites/projects/sonojs-website-67/cover.mp4",
+    detailCoverImage:
+      "/websites/projects/sonojs-website-67/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-website-67.winbeta-info.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-18",
+    firstReleasedAt: "2026-11-18",
+    screens: 25,
+    runCommand: "npx serve .",
+    highlights: [
+      {
+        title: "Book wizard",
+        body: "Species, concern, clinician, slot, and PAW10 confirmation codes in localStorage.",
+      },
+      {
+        title: "Triage + chart",
+        body: "Green/Amber/Red urgency demo, multi-pet profiles, and vaccine planner.",
+      },
+      {
+        title: "Clinical marketing",
+        body: "Services, team, emergency prep, gallery, and soft slate/emerald craft.",
+      },
+      {
+        title: "Zero-build static",
+        body: "25 HTML pages, local Inter; run with npx serve .",
+      },
+    ],
+    includes: [
+      "25 HTML pages (home, services, book, triage, pet-chart, vaccines, portal, legal…)",
+      "assets/css tokens - base - components - pages - site",
+      "assets/js chrome - book - triage - pets - auth - content - motion",
+      "assets/images JPG pack + fonts + favicon + serve.json + README",
+    ],
+    requirements: [
+      "Modern browser",
+      "Static file host (`npx serve .`)",
+    ],
+  },
+  {
+    slug: "sonojs-website-68",
+    title: "Linea Sketch",
+    tagline:
+      "Pet pencil portraits with create flow, gallery compare, frames, and order theater.",
+    description:
+      "Linea Sketch is a multi-page premium pet portrait studio website template by SonoJS (demo brand: Linea Sketch - Aria Lin - Harborline). Zero-build static HTML/CSS/vanilla JS with a paper canvas (#FAFAF8), ink typography, self-hosted Playfair Display + Inter, and local icons. Marketing for gallery, styles, frames, pricing, journal, FAQ, contact, privacy/terms, 404. Interactive demos: photo-to-sketch create wizard, before/after compare slider, style chips, frame shop, order theater (LINEA10), gift certificate, and account portal. Demo only. Fiction studio. No live payments. No live AI backend. Uploads stay in the browser. localStorage theater. Host statically (e.g. Cloudflare Workers); run with npx serve . from the project root.",
+    category: "website",
+    websiteVertical: "pets",
+    stack: ["html", "css", "javascript"],
+    priceLabel: "$29",
+    priceCents: 2900,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 40,
+    accent: "40",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "landing",
+    coverImage: "/websites/projects/sonojs-website-68/main.webp",
+    coverImageDark: null,
+    coverVideo: "/websites/projects/sonojs-website-68/cover.mp4",
+    detailCoverImage:
+      "/websites/projects/sonojs-website-68/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-website-68.winbeta-info.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-18",
+    firstReleasedAt: "2026-11-18",
+    screens: 23,
+    runCommand: "npx serve .",
+    highlights: [
+      {
+        title: "Create + compare",
+        body: "Upload theater with canvas sketch preview and drag photo-versus-pencil slider.",
+      },
+      {
+        title: "Styles + frames",
+        body: "Graphite, soft, sepia, accent styles plus digital / matte / oak finish shop.",
+      },
+      {
+        title: "Order + gift portal",
+        body: "LINEA10 order theater, gift certificate, and account portal in localStorage.",
+      },
+      {
+        title: "Zero-build static",
+        body: "23 HTML pages, local Playfair + Inter; run with npx serve .",
+      },
+    ],
+    includes: [
+      "23 HTML pages (home, create, preview, gallery, styles, frames, order, portal, legal…)",
+      "assets/css tokens - base - components - pages - site",
+      "assets/js chrome - create - preview - order - gallery - gift - auth - content - slider",
+      "assets/img WebP pack + fonts + serve.json + README",
+    ],
+    requirements: [
+      "Modern browser",
+      "Static file host (`npx serve .`)",
+    ],
+  },
 ]
 
 export function getTemplateProject(
