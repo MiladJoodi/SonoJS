@@ -63,6 +63,7 @@ export const TOP_LEVEL_COMPONENT_ROOTS = new Set([
   "border-beam",
   "confetti",
   "shine-border",
+  "wheel-picker",
   "3d",
   "carousels",
 ])

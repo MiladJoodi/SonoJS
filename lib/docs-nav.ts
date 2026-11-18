@@ -43,6 +43,11 @@ export const componentsNav: {
       title: COMPONENTS_FEATURED_GROUP,
       pages: [
         {
+          title: "Wheel Picker",
+          href: "/docs/components/wheel-picker",
+          badge: "new",
+        },
+        {
           title: "Color Picker",
           href: "/docs/components/color-picker",
           badge: "new",
@@ -148,6 +153,12 @@ export const componentsNav: {
         { title: "Textarea", href: "/docs/components/textarea" },
         { title: "Toggle", href: "/docs/components/toggle" },
         { title: "Toggle Group", href: "/docs/components/toggle-group" },
+        {
+          title: "Wheel Picker",
+          href: "/docs/components/wheel-picker",
+          featured: true,
+          badge: "new",
+        },
       ],
     },
     {

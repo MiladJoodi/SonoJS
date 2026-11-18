@@ -135,6 +135,7 @@ const FOLDER_ORDER = [
   "verified-badge",
   "voice-ai-orb",
   "voice-selector",
+  "wheel-picker",
 ]
 
 function stripNoise(source) {

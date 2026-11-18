@@ -4391,6 +4391,30 @@ const registryItemsRaw = [
     ],
   },
   {
+    name: "wheel-picker",
+    type: "registry:ui",
+    title: "Wheel Picker",
+    description:
+      "iOS-style wheel picker for scrolling through options, time, and dates.",
+    dependencies: [
+      "@ncdai/react-wheel-picker@^1.2.3",
+      "clsx",
+      "tailwind-merge",
+    ],
+    files: [
+      {
+        path: "packages/ui/src/components/wheel-picker/index.ts",
+        type: "registry:ui",
+        target: "components/wheel-picker/index.ts",
+      },
+      {
+        path: "packages/ui/src/components/wheel-picker/wheel-picker.tsx",
+        type: "registry:ui",
+        target: "components/wheel-picker/wheel-picker.tsx",
+      },
+    ],
+  },
+  {
     name: "tabs",
     type: "registry:ui",
     title: "Tabs",

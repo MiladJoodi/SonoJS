@@ -134,6 +134,8 @@ export const COMPONENT_META_DESCRIPTIONS: Record<string, string> = {
     "Loading indicators for buttons and panels when an action is in flight.",
   switch:
     "On/off toggles for settings, compact thumb and clear pressed state.",
+  "wheel-picker":
+    "iOS-style wheel picker for options, time, date, and duration columns with inertia scrolling.",
   table:
     "Semantic HTML tables with header, body, and caption styles for dense data.",
   tabs:

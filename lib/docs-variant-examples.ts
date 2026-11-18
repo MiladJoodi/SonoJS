@@ -145,6 +145,7 @@ const EXAMPLE_FOLDERS = [
   "verified-badge",
   "voice-ai-orb",
   "voice-selector",
+  "wheel-picker",
 ] as const
 
 function exampleSlug(folder: string): string {

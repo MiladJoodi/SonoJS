@@ -1,0 +1,29 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "wheel-picker",
+  "type": "registry:ui",
+  "title": "Wheel Picker",
+  "description": "iOS-style wheel picker for scrolling through options, time, and dates.",
+  "access": "public",
+  "dependencies": [
+    "@ncdai/react-wheel-picker@^1.2.3",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "files": [
+    {
+      "path": "components/wheel-picker/index.ts",
+      "type": "registry:ui",
+      "content": "export {\n  WheelPicker,\n  WheelPickerWrapper,\n  type WheelPickerClassNames,\n  type WheelPickerOption,\n  type WheelPickerValue,\n} from \"./wheel-picker\"\n",
+      "target": "components/wheel-picker/index.ts"
+    },
+    {
+      "path": "components/wheel-picker/wheel-picker.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\"\n\nimport \"@ncdai/react-wheel-picker/style.css\"\n\nimport type { ComponentProps } from \"react\"\nimport * as WheelPickerPrimitive from \"@ncdai/react-wheel-picker\"\n\nimport { cn } from \"@/lib/utils\"\n\ntype WheelPickerValue = WheelPickerPrimitive.WheelPickerValue\n\ntype WheelPickerOption<T extends WheelPickerValue = string> =\n  WheelPickerPrimitive.WheelPickerOption<T>\n\ntype WheelPickerClassNames = WheelPickerPrimitive.WheelPickerClassNames\n\nfunction WheelPickerWrapper({\n  className,\n  ...props\n}: ComponentProps<typeof WheelPickerPrimitive.WheelPickerWrapper>) {\n  return (\n    <WheelPickerPrimitive.WheelPickerWrapper\n      className={cn(\n        // Library CSS sets [data-rwp-wrapper]{width:100%} — force a compact card.\n        \"!w-44 max-w-full justify-center cursor-pointer rounded-md border border-border/70 bg-card px-1 shadow-soft\",\n        \"*:data-rwp:!flex-none *:data-rwp:w-full\",\n        \"*:data-rwp:first:*:data-rwp-highlight-wrapper:rounded-s-md\",\n        \"*:data-rwp:last:*:data-rwp-highlight-wrapper:rounded-e-md\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\nfunction WheelPicker<T extends WheelPickerValue = string>({\n  classNames,\n  ...props\n}: WheelPickerPrimitive.WheelPickerProps<T>) {\n  return (\n    <WheelPickerPrimitive.WheelPicker\n      classNames={{\n        optionItem: cn(\n          \"cursor-pointer text-muted-foreground data-disabled:cursor-not-allowed data-disabled:opacity-40\",\n          classNames?.optionItem\n        ),\n        highlightWrapper: cn(\n          \"bg-muted text-foreground\",\n          \"data-rwp-focused:inset-ring-2 data-rwp-focused:inset-ring-ring/50\",\n          classNames?.highlightWrapper\n        ),\n        highlightItem: cn(\n          \"data-disabled:opacity-40\",\n          classNames?.highlightItem\n        ),\n      }}\n      {...props}\n    />\n  )\n}\n\nexport { WheelPicker, WheelPickerWrapper }\nexport type { WheelPickerClassNames, WheelPickerOption, WheelPickerValue }\n",
+      "target": "components/wheel-picker/wheel-picker.tsx"
+    }
+  ],
+  "version": "0.1.0+89dfc31bfb16",
+  "generatedAt": "2026-11-18T13:25:39.548Z"
+}
