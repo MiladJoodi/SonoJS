@@ -108,6 +108,7 @@ const EXAMPLE_FOLDERS = [
   "timeline",
   "todo-list",
   "textarea",
+  "rich-text-editor",
   "toggle-group",
   "toggle",
   "tooltip",

@@ -64,6 +64,7 @@ export const TOP_LEVEL_COMPONENT_ROOTS = new Set([
   "confetti",
   "shine-border",
   "wheel-picker",
+  "rich-text-editor",
   "3d",
   "carousels",
 ])

@@ -125,6 +125,7 @@ const FOLDER_ORDER = [
   "timeline",
   "todo-list",
   "textarea",
+  "rich-text-editor",
   "toggle-group",
   "toggle",
   "tooltip",

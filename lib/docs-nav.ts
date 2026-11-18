@@ -43,6 +43,11 @@ export const componentsNav: {
       title: COMPONENTS_FEATURED_GROUP,
       pages: [
         {
+          title: "Rich Text Editor",
+          href: "/docs/components/rich-text-editor",
+          badge: "new",
+        },
+        {
           title: "Wheel Picker",
           href: "/docs/components/wheel-picker",
           badge: "new",
@@ -151,6 +156,12 @@ export const componentsNav: {
         { title: "Slider", href: "/docs/components/slider" },
         { title: "Switch", href: "/docs/components/switch", featured: true },
         { title: "Textarea", href: "/docs/components/textarea" },
+        {
+          title: "Rich Text Editor",
+          href: "/docs/components/rich-text-editor",
+          featured: true,
+          badge: "new",
+        },
         { title: "Toggle", href: "/docs/components/toggle" },
         { title: "Toggle Group", href: "/docs/components/toggle-group" },
         {
