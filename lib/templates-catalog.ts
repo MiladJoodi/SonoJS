@@ -14458,6 +14458,130 @@ export const templateProjects: TemplateProject[] = [
       "Static file host (`npx serve .`)",
     ],
   },
+  {
+    slug: "sonojs-website-79",
+    title: "Lumen Body Lab",
+    tagline:
+      "Venice unisex beauty salon with living cinematic hero, six service lanes, and booking theater.",
+    description:
+      "Lumen Body Lab is a multi-page premium unisex beauty salon website template by SonoJS (demo brand: Lumen Body Lab - Venice, Los Angeles fiction). Zero-build static HTML/CSS/vanilla JS with zinc-stone and rose-gold craft, self-hosted Cormorant Garamond + Manrope, local icons, and a living cinematic hero (parallax glow + soft canvas dust; Three.js vendored locally). Marketing for hair, nails, skin, wax, massage, lashes, pricing, gallery, about, FAQ, contact, privacy/terms, 404. Interactive demos: multi-step Book wizard (BODY10), gallery lightbox, and guest account with prefilled login (demo@lumenbody.demo / glow1234). Demo only. Fiction salon at 318 Soft Tide Court. No live payments. localStorage theater. Host statically (e.g. Cloudflare Workers); run with npx serve . from the project root.",
+    category: "website",
+    websiteVertical: "beauty",
+    stack: ["html", "css", "javascript"],
+    priceLabel: "$39",
+    priceCents: 3900,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 30,
+    accent: "30",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "landing",
+    coverImage: "/websites/projects/sonojs-website-79/main.webp",
+    coverImageDark: null,
+    coverVideo: "/websites/projects/sonojs-website-79/cover.mp4",
+    detailCoverImage:
+      "/websites/projects/sonojs-website-79/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-website-79.winbeta-info.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-20",
+    firstReleasedAt: "2026-11-20",
+    screens: 20,
+    runCommand: "npx serve .",
+    highlights: [
+      {
+        title: "Living cinematic hero",
+        body: "Full-bleed Venice studio hero with glow, canvas dust, and reduced-motion fallback.",
+      },
+      {
+        title: "Six service lanes",
+        body: "Hair, nails, skin, wax, massage, and lashes with dedicated detail pages.",
+      },
+      {
+        title: "Book + guest login",
+        body: "BODY10 booking wizard and demo@lumenbody.demo / glow1234 account theater.",
+      },
+      {
+        title: "Zero-build static",
+        body: "20 HTML pages, local Cormorant + Manrope + Three.js; run with npx serve .",
+      },
+    ],
+    includes: [
+      "20 HTML pages (home, services x6, pricing, gallery, about, book, auth, contact, legal…)",
+      "css tokens - base - layout - components - pages",
+      "js data - main - booking - auth - hero; assets/img + fonts + icons + vendor/three.min.js + README",
+    ],
+    requirements: [
+      "Modern browser",
+      "Static file host (`npx serve .`)",
+    ],
+  },
+  {
+    slug: "sonojs-website-80",
+    title: "ROSE & RIDGE Nail Atelier",
+    tagline:
+      "Austin boutique nail atelier with BIAB, art, booking wizard, and two fictional suites.",
+    description:
+      "ROSE & RIDGE Nail Atelier is a multi-page premium nail salon website template by SonoJS (demo brand: ROSE & RIDGE - Austin, Texas fiction). Zero-build static HTML/CSS/vanilla JS with soft nude and dusty-rose craft, self-hosted Cormorant Garamond + Source Sans 3, and local nail photography. Marketing for BIAB, custom nail art, extensions, pedicures, pricing, gallery, locations, FAQ, contact, privacy, 404. Interactive demos: multi-step Book wizard, gallery, contact theater, and guest login saved under rose_ridge_* localStorage keys. Demo only. Fiction boutiques at Cedar Hollow Lane and Willow Bend Avenue. No live payments. Host statically (e.g. Cloudflare Workers); run with npx serve . from the project root.",
+    category: "website",
+    websiteVertical: "beauty",
+    stack: ["html", "css", "javascript"],
+    priceLabel: "$29",
+    priceCents: 2900,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 350,
+    accent: "350",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "landing",
+    coverImage: "/websites/projects/sonojs-website-80/main.webp",
+    coverImageDark: null,
+    coverVideo: "/websites/projects/sonojs-website-80/cover.mp4",
+    detailCoverImage:
+      "/websites/projects/sonojs-website-80/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-website-80.winbeta-info.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-20",
+    firstReleasedAt: "2026-11-20",
+    screens: 16,
+    runCommand: "npx serve .",
+    highlights: [
+      {
+        title: "Arch hero + stories",
+        body: "Soft Austin hero with rotating nail story slides and specialty cards.",
+      },
+      {
+        title: "Service detail pages",
+        body: "BIAB, nail art, extensions, and pedicure pages with USD ranges.",
+      },
+      {
+        title: "Book + login theater",
+        body: "Multi-step booking and guest login under rose_ridge_* localStorage keys.",
+      },
+      {
+        title: "Zero-build static",
+        body: "16 HTML pages, local Cormorant + Source Sans 3; run with npx serve .",
+      },
+    ],
+    includes: [
+      "16 HTML pages (home, services x4, pricing, gallery, locations, book, auth, legal…)",
+      "css styles + pages; js data - main - booking",
+      "assets/images + fonts + icons; README with demo contacts",
+    ],
+    requirements: [
+      "Modern browser",
+      "Static file host (`npx serve .`)",
+    ],
+  },
 ]
 
 export function getTemplateProject(
