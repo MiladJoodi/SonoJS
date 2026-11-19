@@ -43,6 +43,16 @@ export const componentsNav: {
       title: COMPONENTS_FEATURED_GROUP,
       pages: [
         {
+          title: "Tree Checkbox",
+          href: "/docs/components/tree-checkbox",
+          badge: "new",
+        },
+        {
+          title: "Address Autocomplete",
+          href: "/docs/components/address-autocomplete",
+          badge: "new",
+        },
+        {
           title: "Signature Pad",
           href: "/docs/components/signature-pad",
           badge: "new",
@@ -117,6 +127,12 @@ export const componentsNav: {
     {
       title: "Forms",
       pages: [
+        {
+          title: "Address Autocomplete",
+          href: "/docs/components/address-autocomplete",
+          featured: true,
+          badge: "new",
+        },
         {
           title: "Button",
           href: "/docs/components/button",
@@ -219,6 +235,12 @@ export const componentsNav: {
         },
         { title: "Toggle", href: "/docs/components/toggle" },
         { title: "Toggle Group", href: "/docs/components/toggle-group" },
+        {
+          title: "Tree Checkbox",
+          href: "/docs/components/tree-checkbox",
+          featured: true,
+          badge: "new",
+        },
         {
           title: "Wheel Picker",
           href: "/docs/components/wheel-picker",

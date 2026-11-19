@@ -70,6 +70,8 @@ export const TOP_LEVEL_COMPONENT_ROOTS = new Set([
   "payment-input",
   "image-cropper",
   "signature-pad",
+  "address-autocomplete",
+  "tree-checkbox",
   "3d",
   "carousels",
 ])

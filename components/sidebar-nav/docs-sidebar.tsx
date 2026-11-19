@@ -221,9 +221,11 @@ function DocsSidebarBody({ className }: { className?: string }) {
                               ? "Featured 🔥"
                               : group.title}
                           </span>
-                          <span className={SIDEBAR_GROUP_COUNT_CLASS}>
-                            {group.pages.length}
-                          </span>
+                          {group.title !== COMPONENTS_FEATURED_GROUP ? (
+                            <span className={SIDEBAR_GROUP_COUNT_CLASS}>
+                              {group.pages.length}
+                            </span>
+                          ) : null}
                           <SidebarNavChevron group="docs-folder" />
                         </CollapsibleTrigger>
                         <CollapsibleContent

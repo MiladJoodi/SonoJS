@@ -4291,6 +4291,58 @@ const registryItemsRaw = [
     ],
   },
   {
+    name: "address-autocomplete",
+    type: "registry:ui",
+    title: "Address Autocomplete",
+    description:
+      "Async address search field with debounced suggestions, structured value, and clear — wire any geocoder via onSearch.",
+    dependencies: ["lucide-react", "clsx", "tailwind-merge"],
+    registryDependencies: ["command", "input-group"],
+    files: [
+      {
+        path: "packages/ui/src/components/address-autocomplete/index.ts",
+        type: "registry:ui",
+        target: "components/address-autocomplete/index.ts",
+      },
+      {
+        path: "packages/ui/src/components/address-autocomplete/address-autocomplete.tsx",
+        type: "registry:ui",
+        target: "components/address-autocomplete/address-autocomplete.tsx",
+      },
+      {
+        path: "packages/ui/src/components/address-autocomplete/mock.ts",
+        type: "registry:ui",
+        target: "components/address-autocomplete/mock.ts",
+      },
+    ],
+  },
+  {
+    name: "tree-checkbox",
+    type: "registry:ui",
+    title: "Tree Checkbox",
+    description:
+      "Nested checkbox tree with cascade select, parent indeterminate state, and collapsible branches.",
+    dependencies: ["lucide-react", "clsx", "tailwind-merge"],
+    registryDependencies: ["checkbox", "collapsible"],
+    files: [
+      {
+        path: "packages/ui/src/components/tree-checkbox/index.ts",
+        type: "registry:ui",
+        target: "components/tree-checkbox/index.ts",
+      },
+      {
+        path: "packages/ui/src/components/tree-checkbox/tree-checkbox.tsx",
+        type: "registry:ui",
+        target: "components/tree-checkbox/tree-checkbox.tsx",
+      },
+      {
+        path: "packages/ui/src/components/tree-checkbox/lib.ts",
+        type: "registry:ui",
+        target: "components/tree-checkbox/lib.ts",
+      },
+    ],
+  },
+  {
     name: "separator",
     type: "registry:ui",
     title: "Separator",

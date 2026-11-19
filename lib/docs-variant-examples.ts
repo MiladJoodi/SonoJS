@@ -114,6 +114,8 @@ const EXAMPLE_FOLDERS = [
   "payment-input",
   "image-cropper",
   "signature-pad",
+  "address-autocomplete",
+  "tree-checkbox",
   "toggle-group",
   "toggle",
   "tooltip",

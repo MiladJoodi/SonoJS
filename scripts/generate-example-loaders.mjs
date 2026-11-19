@@ -131,6 +131,8 @@ const FOLDER_ORDER = [
   "payment-input",
   "image-cropper",
   "signature-pad",
+  "address-autocomplete",
+  "tree-checkbox",
   "toggle-group",
   "toggle",
   "tooltip",
