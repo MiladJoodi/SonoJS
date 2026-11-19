@@ -14148,6 +14148,68 @@ export const templateProjects: TemplateProject[] = [
       "Static file host (`npx serve .`)",
     ],
   },
+  {
+    slug: "sonojs-website-74",
+    title: "Palace on Seine",
+    tagline:
+      "Paris Ile Saint-Louis heritage hotel with rooms, dining, booking wizard, and guest portal.",
+    description:
+      "Palace on Seine is a multi-page premium heritage boutique hotel website template by SonoJS (demo brand: Palace on Seine - Ile Saint-Louis Paris fiction). Zero-build static HTML/CSS/vanilla JS with royal off-white, brown, and gold craft, self-hosted Cormorant Garamond + Inter, and local assets. Marketing for rooms, dining, experiences, gallery, journal, offers, heritage, FAQ, contact, privacy/terms, 404. Interactive demos: Book wizard (SEINE10), rooms filter, dining table reserve, and guest portal with prefilled login (demo@palace-on-seine.demo / seine1234). Demo only. Fiction hotel. No live payments. localStorage theater. Host statically (e.g. Cloudflare Workers); run with npx serve . from the project root.",
+    category: "website",
+    websiteVertical: "hotel",
+    stack: ["html", "css", "javascript"],
+    priceLabel: "$39",
+    priceCents: 3900,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 40,
+    accent: "40",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "landing",
+    coverImage: "/websites/projects/sonojs-website-74/main.webp",
+    coverImageDark: null,
+    coverVideo: "/websites/projects/sonojs-website-74/cover.mp4",
+    detailCoverImage:
+      "/websites/projects/sonojs-website-74/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-website-74.winbeta-info.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-19",
+    firstReleasedAt: "2026-11-19",
+    screens: 29,
+    runCommand: "npx serve .",
+    highlights: [
+      {
+        title: "Book wizard",
+        body: "Dates, room type, guests, optional breakfast, and SEINE10 promo in localStorage.",
+      },
+      {
+        title: "Rooms + dining",
+        body: "View filters plus a separate rooftop table-reserve theater.",
+      },
+      {
+        title: "Guest portal",
+        body: "Prefilled login demo@palace-on-seine.demo / seine1234 unlocks stay stubs.",
+      },
+      {
+        title: "Zero-build static",
+        body: "29 HTML pages, local Cormorant + Inter; run with npx serve .",
+      },
+    ],
+    includes: [
+      "29 HTML pages (home, rooms, dining, experiences, book, portal, journal, legal…)",
+      "css tokens - base - components - pages",
+      "js hero - booking - auth - portal - chrome; assets/img + fonts + maps + README",
+    ],
+    requirements: [
+      "Modern browser",
+      "Static file host (`npx serve .`)",
+    ],
+  },
 ]
 
 export function getTemplateProject(

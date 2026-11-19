@@ -2,7 +2,6 @@
 
 import * as React from "react"
 
-import { ScrollArea } from "@sonojs/ui/components/scroll-area"
 import { useDirection } from "@sonojs/ui/hooks/use-direction"
 import { cn } from "@sonojs/ui/lib/utils"
 
@@ -20,7 +19,8 @@ import {
 
 export type { AvailabilitySlot }
 
-const ROW_PX = 28
+const ROW_PX = 24
+const VIEWPORT_MAX_PX = 280
 
 export type AvailabilityProps = Omit<
   React.ComponentProps<"div">,
@@ -66,8 +66,14 @@ function Availability({
 
   const isControlled = valueProp !== undefined
   const slots = isControlled ? valueProp : uncontrolled
-  slotsRef.current = slots
-  dragRef.current = drag
+
+  React.useEffect(() => {
+    slotsRef.current = slots
+  }, [slots])
+
+  React.useEffect(() => {
+    dragRef.current = drag
+  }, [drag])
 
   const interactive = !disabled && !readOnly
   const totalMinutes = Math.max(0, dayEndMinutes - dayStartMinutes)
@@ -87,13 +93,24 @@ function Availability({
     return marks
   }, [dayEndMinutes, dayStartMinutes])
 
-  const setSlots = React.useCallback(
-    (next: AvailabilitySlot[]) => {
-      const merged = mergeAllSlots(next)
-      if (!isControlled) setUncontrolled(merged)
-      onValueChange?.(merged)
+  const publishSlots = React.useCallback(
+    (next: AvailabilitySlot[], merge: boolean) => {
+      const normalized = next
+        .map((slot) =>
+          normalizeSlot(slot, { dayStartMinutes, dayEndMinutes, slotMinutes })
+        )
+        .filter((slot): slot is AvailabilitySlot => slot != null)
+      const finalSlots = merge ? mergeAllSlots(normalized) : normalized
+      if (!isControlled) setUncontrolled(finalSlots)
+      onValueChange?.(finalSlots)
     },
-    [isControlled, onValueChange]
+    [
+      dayEndMinutes,
+      dayStartMinutes,
+      isControlled,
+      onValueChange,
+      slotMinutes,
+    ]
   )
 
   const minutesFromClientY = React.useCallback(
@@ -109,18 +126,6 @@ function Availability({
     [dayStartMinutes, slotMinutes, totalMinutes]
   )
 
-  const commitSlots = React.useCallback(
-    (next: AvailabilitySlot[]) => {
-      const normalized = next
-        .map((slot) =>
-          normalizeSlot(slot, { dayStartMinutes, dayEndMinutes, slotMinutes })
-        )
-        .filter((slot): slot is AvailabilitySlot => slot != null)
-      setSlots(normalized)
-    },
-    [dayEndMinutes, dayStartMinutes, setSlots, slotMinutes]
-  )
-
   React.useEffect(() => {
     if (!drag || !interactive) return
 
@@ -131,20 +136,21 @@ function Availability({
 
       if (current.type === "paint") {
         const start = Math.min(current.anchor, minutes)
-        const end = Math.max(current.anchor, minutes) + slotMinutes
+        const end = Math.max(
+          start + slotMinutes,
+          Math.max(current.anchor, minutes) + slotMinutes
+        )
         const draft: AvailabilitySlot = {
           id: current.draftId,
           day: current.day,
           startMinutes: start,
-          endMinutes: end,
+          endMinutes: Math.min(dayEndMinutes, end),
         }
         const without = slotsRef.current.filter((s) => s.id !== current.draftId)
-        commitSlots([...without, draft])
+        publishSlots([...without, draft], false)
         return
       }
 
-      const target = slotsRef.current.find((s) => s.id === current.id)
-      if (!target) return
       const next = slotsRef.current.map((slot) => {
         if (slot.id !== current.id) return slot
         if (current.edge === "start") {
@@ -158,10 +164,11 @@ function Availability({
           endMinutes: Math.max(minutes, slot.startMinutes + slotMinutes),
         }
       })
-      commitSlots(next)
+      publishSlots(next, false)
     }
 
     const onUp = () => {
+      publishSlots(slotsRef.current, true)
       setDrag(null)
     }
 
@@ -173,7 +180,14 @@ function Availability({
       window.removeEventListener("pointerup", onUp)
       window.removeEventListener("pointercancel", onUp)
     }
-  }, [commitSlots, drag, interactive, minutesFromClientY, slotMinutes])
+  }, [
+    dayEndMinutes,
+    drag,
+    interactive,
+    minutesFromClientY,
+    publishSlots,
+    slotMinutes,
+  ])
 
   React.useEffect(() => {
     if (!selectedId || !interactive) return
@@ -182,12 +196,15 @@ function Availability({
       const tag = (event.target as HTMLElement | null)?.tagName
       if (tag === "INPUT" || tag === "TEXTAREA") return
       event.preventDefault()
-      commitSlots(slotsRef.current.filter((s) => s.id !== selectedId))
+      publishSlots(
+        slotsRef.current.filter((s) => s.id !== selectedId),
+        true
+      )
       setSelectedId(null)
     }
     window.addEventListener("keydown", onKeyDown)
     return () => window.removeEventListener("keydown", onKeyDown)
-  }, [commitSlots, interactive, selectedId])
+  }, [interactive, publishSlots, selectedId])
 
   const startPaint = (day: number, clientY: number) => {
     if (!interactive) return
@@ -201,7 +218,7 @@ function Availability({
     }
     setSelectedId(draftId)
     setDrag({ type: "paint", day, anchor, draftId })
-    commitSlots([...slotsRef.current, draft])
+    publishSlots([...slotsRef.current, draft], false)
   }
 
   const slotTop = (startMinutes: number) =>
@@ -215,28 +232,31 @@ function Availability({
       data-disabled={disabled ? "" : undefined}
       data-readonly={readOnly ? "" : undefined}
       className={cn(
-        "w-full overflow-hidden rounded-[12px] border border-border/70 bg-card shadow-xs",
-        disabled && "opacity-50",
+        "flex w-full flex-col overflow-hidden rounded-[12px] border border-border/70 bg-card shadow-xs",
+        disabled && "pointer-events-none opacity-50",
         className
       )}
       {...props}
     >
-      <div className="grid grid-cols-[56px_1fr] border-b border-border/70">
-        <div className="border-e border-border/70" aria-hidden />
-        <div className="grid grid-cols-7">
-          {displayDays.map((day) => (
-            <div
-              key={day}
-              className="border-e border-border/70 px-1 py-2 text-center text-xs font-medium text-muted-foreground last:border-e-0"
-            >
-              {DAY_LABELS[day]}
-            </div>
-          ))}
+      <div
+        className="overflow-auto overscroll-contain"
+        style={{ maxHeight: VIEWPORT_MAX_PX }}
+      >
+        <div className="sticky top-0 z-20 grid grid-cols-[52px_1fr] border-b border-border/70 bg-card">
+          <div className="border-e border-border/70 bg-card" aria-hidden />
+          <div className="grid grid-cols-7 bg-card">
+            {displayDays.map((day) => (
+              <div
+                key={day}
+                className="border-e border-border/70 px-1 py-2 text-center text-xs font-medium text-muted-foreground last:border-e-0"
+              >
+                {DAY_LABELS[day]}
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
 
-      <ScrollArea className="h-[min(28rem,70vh)]">
-        <div className="grid grid-cols-[56px_1fr]">
+        <div className="grid grid-cols-[52px_1fr]">
           <div
             className="relative border-e border-border/70"
             style={{ height: gridHeight }}
@@ -245,9 +265,13 @@ function Availability({
             {hourMarks.map((mark) => (
               <div
                 key={mark}
-                className="absolute inset-x-0 -translate-y-1/2 pe-2 text-end text-[10px] text-muted-foreground"
+                className="absolute inset-x-0 pe-2 text-end text-[10px] leading-none text-muted-foreground"
                 style={{
                   top: `${((mark - dayStartMinutes) / totalMinutes) * 100}%`,
+                  transform:
+                    mark === dayStartMinutes
+                      ? "translateY(2px)"
+                      : "translateY(-50%)",
                 }}
               >
                 {formatTimeLabel(mark)}
@@ -273,13 +297,21 @@ function Availability({
               <div
                 key={day}
                 className={cn(
-                  "relative border-e border-border/70 last:border-e-0",
-                  interactive && "cursor-crosshair"
+                  "relative h-full min-h-0 border-e border-border/70 last:border-e-0",
+                  interactive
+                    ? "cursor-crosshair"
+                    : disabled
+                      ? "cursor-not-allowed"
+                      : undefined
                 )}
                 style={{ gridColumn: colIndex + 1 }}
                 onPointerDown={(event) => {
                   if (!interactive) return
-                  if ((event.target as HTMLElement).closest("[data-slot=availability-slot]")) {
+                  if (
+                    (event.target as HTMLElement).closest(
+                      "[data-slot=availability-slot]"
+                    )
+                  ) {
                     return
                   }
                   event.preventDefault()
@@ -299,7 +331,7 @@ function Availability({
                         tabIndex={interactive ? 0 : -1}
                         aria-label={`${DAY_LABELS[slot.day]} ${formatSlotRange(slot.startMinutes, slot.endMinutes)}`}
                         className={cn(
-                          "absolute inset-x-1 z-10 overflow-hidden rounded-md border border-primary/40 bg-primary/15 px-1.5 py-1 text-start text-[10px] leading-tight text-foreground shadow-xs outline-none",
+                          "absolute inset-x-1 z-10 overflow-hidden rounded-md border border-primary/40 bg-primary/15 px-1.5 py-0.5 text-start text-[10px] leading-tight text-foreground shadow-xs outline-none",
                           interactive && "cursor-pointer",
                           selected && "ring-2 ring-ring"
                         )}
@@ -314,15 +346,24 @@ function Availability({
                         }}
                         onKeyDown={(event) => {
                           if (!interactive) return
-                          if (event.key === "Delete" || event.key === "Backspace") {
+                          if (
+                            event.key === "Delete" ||
+                            event.key === "Backspace"
+                          ) {
                             event.preventDefault()
-                            commitSlots(slots.filter((s) => s.id !== slot.id))
+                            publishSlots(
+                              slots.filter((s) => s.id !== slot.id),
+                              true
+                            )
                             setSelectedId(null)
                           }
                         }}
                       >
                         <span className="block truncate font-medium">
-                          {formatSlotRange(slot.startMinutes, slot.endMinutes)}
+                          {formatSlotRange(
+                            slot.startMinutes,
+                            slot.endMinutes
+                          )}
                         </span>
                         {interactive ? (
                           <>
@@ -363,7 +404,7 @@ function Availability({
             ))}
           </div>
         </div>
-      </ScrollArea>
+      </div>
     </div>
   )
 }

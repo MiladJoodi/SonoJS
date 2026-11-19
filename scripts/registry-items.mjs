@@ -4343,6 +4343,98 @@ const registryItemsRaw = [
     ],
   },
   {
+    name: "availability",
+    type: "registry:ui",
+    title: "Availability",
+    description:
+      "Weekly free-time grid — drag to paint slots, resize edges, snap and merge overlapping ranges.",
+    dependencies: ["clsx", "tailwind-merge"],
+    files: [
+      {
+        path: "packages/ui/src/components/availability/index.ts",
+        type: "registry:ui",
+        target: "components/availability/index.ts",
+      },
+      {
+        path: "packages/ui/src/components/availability/availability.tsx",
+        type: "registry:ui",
+        target: "components/availability/availability.tsx",
+      },
+      {
+        path: "packages/ui/src/components/availability/lib.ts",
+        type: "registry:ui",
+        target: "components/availability/lib.ts",
+      },
+    ],
+  },
+  {
+    name: "data-table-grid",
+    type: "registry:ui",
+    title: "Data Table Grid",
+    description:
+      "Advanced data grid chrome — sticky pin columns, resize handles, sort headers — compose with TanStack Table v9.",
+    dependencies: [
+      "@tanstack/react-table@^9.3.1",
+      "lucide-react",
+      "clsx",
+      "tailwind-merge",
+    ],
+    registryDependencies: ["table", "button", "dropdown-menu"],
+    files: [
+      {
+        path: "packages/ui/src/components/data-table-grid/index.ts",
+        type: "registry:ui",
+        target: "components/data-table-grid/index.ts",
+      },
+      {
+        path: "packages/ui/src/components/data-table-grid/data-table-grid.tsx",
+        type: "registry:ui",
+        target: "components/data-table-grid/data-table-grid.tsx",
+      },
+      {
+        path: "packages/ui/src/components/data-table-grid/column-header.tsx",
+        type: "registry:ui",
+        target: "components/data-table-grid/column-header.tsx",
+      },
+      {
+        path: "packages/ui/src/components/data-table-grid/resize-handle.tsx",
+        type: "registry:ui",
+        target: "components/data-table-grid/resize-handle.tsx",
+      },
+      {
+        path: "packages/ui/src/components/data-table-grid/lib.ts",
+        type: "registry:ui",
+        target: "components/data-table-grid/lib.ts",
+      },
+    ],
+  },
+  {
+    name: "availability-slots",
+    type: "registry:ui",
+    title: "Availability Slots",
+    description:
+      "Bookable time buttons for a day — Cal.com-style picker with optional multi-column layout.",
+    dependencies: ["clsx", "tailwind-merge"],
+    registryDependencies: ["button"],
+    files: [
+      {
+        path: "packages/ui/src/components/availability-slots/index.ts",
+        type: "registry:ui",
+        target: "components/availability-slots/index.ts",
+      },
+      {
+        path: "packages/ui/src/components/availability-slots/availability-slots.tsx",
+        type: "registry:ui",
+        target: "components/availability-slots/availability-slots.tsx",
+      },
+      {
+        path: "packages/ui/src/components/availability-slots/lib.ts",
+        type: "registry:ui",
+        target: "components/availability-slots/lib.ts",
+      },
+    ],
+  },
+  {
     name: "separator",
     type: "registry:ui",
     title: "Separator",

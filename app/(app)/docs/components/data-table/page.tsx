@@ -5,6 +5,7 @@ import {
   ComponentVariantPreview,
   DocsInstallation,
   DocsPageHeader,
+  DocsRelated,
 } from "@/components/docs"
 import { withVariantCode } from "@/lib/docs-variant-examples"
 
@@ -234,6 +235,21 @@ export default async function DataTableDocsPage() {
           code={usageSource}
         />
       </section>
+
+      <DocsRelated
+        links={[
+          {
+            href: "/docs/components/data-table-grid",
+            title: "Data Table Grid",
+            description: "pin, resize, and sticky advanced chrome",
+          },
+          {
+            href: "/docs/components/table",
+            title: "Table",
+            description: "table chrome primitives",
+          },
+        ]}
+      />
     </article>
   )
 }

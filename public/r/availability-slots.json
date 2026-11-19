@@ -1,0 +1,37 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "availability-slots",
+  "type": "registry:ui",
+  "title": "Availability Slots",
+  "description": "Bookable time buttons for a day — Cal.com-style picker with optional multi-column layout.",
+  "access": "public",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "button"
+  ],
+  "files": [
+    {
+      "path": "components/availability-slots/index.ts",
+      "type": "registry:ui",
+      "content": "export {\n  AvailabilitySlots,\n  type AvailabilitySlotsProps,\n  type AvailabilityTimeSlot,\n} from \"./availability-slots\"\nexport {\n  expandRangesToTimeSlots,\n  formatTimeLabel,\n  formatTimeSlotLabel,\n} from \"./lib\"\n",
+      "target": "components/availability-slots/index.ts"
+    },
+    {
+      "path": "components/availability-slots/availability-slots.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\n\nimport { Button } from \"@/components/ui/button\"\nimport { cn } from \"@/lib/utils\"\n\nimport {\n  formatTimeSlotLabel,\n  type AvailabilityTimeSlot,\n} from \"./lib\"\n\nexport type { AvailabilityTimeSlot }\n\nexport type AvailabilitySlotsProps = Omit<\n  React.ComponentProps<\"div\">,\n  \"defaultValue\" | \"onChange\" | \"children\"\n> & {\n  slots: AvailabilityTimeSlot[]\n  value?: string | null\n  defaultValue?: string | null\n  onValueChange?: (value: string | null) => void\n  /** Grid columns for the time buttons. Default `1` (Cal.com list). */\n  columns?: 1 | 2 | 3\n  /** Shown when `slots` is empty. */\n  emptyText?: string\n  disabled?: boolean\n}\n\nfunction AvailabilitySlots({\n  slots,\n  value: valueProp,\n  defaultValue = null,\n  onValueChange,\n  columns = 1,\n  emptyText = \"No times available\",\n  disabled = false,\n  className,\n  ...props\n}: AvailabilitySlotsProps) {\n  const [uncontrolled, setUncontrolled] = React.useState<string | null>(\n    defaultValue\n  )\n  const isControlled = valueProp !== undefined\n  const value = isControlled ? valueProp : uncontrolled\n\n  const setValue = React.useCallback(\n    (next: string | null) => {\n      if (!isControlled) setUncontrolled(next)\n      onValueChange?.(next)\n    },\n    [isControlled, onValueChange]\n  )\n\n  return (\n    <div\n      data-slot=\"availability-slots\"\n      data-disabled={disabled ? \"\" : undefined}\n      role=\"listbox\"\n      aria-label=\"Available times\"\n      aria-disabled={disabled || undefined}\n      className={cn(\n        \"w-full min-w-0\",\n        disabled && \"pointer-events-none opacity-50\",\n        className\n      )}\n      {...props}\n    >\n      {slots.length === 0 ? (\n        <p className=\"rounded-[12px] border border-dashed border-border/70 bg-muted/30 px-4 py-8 text-center text-sm text-muted-foreground\">\n          {emptyText}\n        </p>\n      ) : (\n        <div\n          className={cn(\n            \"grid gap-2\",\n            columns === 1 && \"grid-cols-1\",\n            columns === 2 && \"grid-cols-2\",\n            columns === 3 && \"grid-cols-3\"\n          )}\n        >\n          {slots.map((slot) => {\n            const selected = value === slot.id\n            const label =\n              slot.label ??\n              formatTimeSlotLabel(slot.startMinutes, slot.endMinutes)\n            const slotDisabled = disabled || Boolean(slot.disabled)\n\n            return (\n              <Button\n                key={slot.id}\n                type=\"button\"\n                role=\"option\"\n                aria-selected={selected}\n                variant={selected ? \"default\" : \"outline\"}\n                size=\"default\"\n                disabled={slotDisabled}\n                className={cn(\n                  \"h-[46px] w-full font-medium tabular-nums\",\n                  !selected && \"bg-card\"\n                )}\n                onClick={() => {\n                  if (slotDisabled) return\n                  setValue(selected ? null : slot.id)\n                }}\n              >\n                {label}\n              </Button>\n            )\n          })}\n        </div>\n      )}\n    </div>\n  )\n}\n\nexport { AvailabilitySlots }\n",
+      "target": "components/availability-slots/availability-slots.tsx"
+    },
+    {
+      "path": "components/availability-slots/lib.ts",
+      "type": "registry:ui",
+      "content": "export type AvailabilityTimeSlot = {\n  id: string\n  /** Minutes from midnight. */\n  startMinutes: number\n  /** Optional end; defaults to start + duration when building labels. */\n  endMinutes?: number\n  label?: string\n  disabled?: boolean\n}\n\nexport function formatTimeLabel(totalMinutes: number) {\n  const hours = Math.floor(totalMinutes / 60)\n  const minutes = totalMinutes % 60\n  const h12 = ((hours + 11) % 12) + 1\n  const suffix = hours >= 12 ? \"PM\" : \"AM\"\n  if (minutes === 0) return `${h12}:00 ${suffix}`\n  return `${h12}:${String(minutes).padStart(2, \"0\")} ${suffix}`\n}\n\nexport function formatTimeSlotLabel(\n  startMinutes: number,\n  endMinutes?: number\n) {\n  if (endMinutes == null || endMinutes <= startMinutes) {\n    return formatTimeLabel(startMinutes)\n  }\n  return `${formatTimeLabel(startMinutes)} – ${formatTimeLabel(endMinutes)}`\n}\n\n/**\n * Expand free ranges into bookable starts (Cal.com-style).\n * `durationMinutes` is the meeting length; `stepMinutes` is the grid step.\n */\nexport function expandRangesToTimeSlots(\n  ranges: { startMinutes: number; endMinutes: number }[],\n  durationMinutes: number,\n  stepMinutes = durationMinutes\n): AvailabilityTimeSlot[] {\n  const duration = Math.max(1, durationMinutes)\n  const step = Math.max(1, stepMinutes)\n  const out: AvailabilityTimeSlot[] = []\n\n  for (const range of ranges) {\n    for (\n      let start = range.startMinutes;\n      start + duration <= range.endMinutes;\n      start += step\n    ) {\n      const end = start + duration\n      out.push({\n        id: `${start}-${end}`,\n        startMinutes: start,\n        endMinutes: end,\n        label: formatTimeLabel(start),\n      })\n    }\n  }\n\n  return out\n}\n",
+      "target": "components/availability-slots/lib.ts"
+    }
+  ],
+  "version": "0.1.0+25096d7f61dc",
+  "generatedAt": "2026-11-19T10:42:40.678Z"
+}

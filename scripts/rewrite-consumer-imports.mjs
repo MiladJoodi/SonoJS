@@ -72,6 +72,9 @@ export const TOP_LEVEL_COMPONENT_ROOTS = new Set([
   "signature-pad",
   "address-autocomplete",
   "tree-checkbox",
+  "availability",
+  "availability-slots",
+  "data-table-grid",
   "3d",
   "carousels",
 ])

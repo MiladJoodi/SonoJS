@@ -43,6 +43,21 @@ export const componentsNav: {
       title: COMPONENTS_FEATURED_GROUP,
       pages: [
         {
+          title: "Availability",
+          href: "/docs/components/availability",
+          badge: "new",
+        },
+        {
+          title: "Availability Slots",
+          href: "/docs/components/availability-slots",
+          badge: "new",
+        },
+        {
+          title: "Data Table Grid",
+          href: "/docs/components/data-table-grid",
+          badge: "new",
+        },
+        {
           title: "Tree Checkbox",
           href: "/docs/components/tree-checkbox",
           badge: "new",
@@ -130,6 +145,18 @@ export const componentsNav: {
         {
           title: "Address Autocomplete",
           href: "/docs/components/address-autocomplete",
+          featured: true,
+          badge: "new",
+        },
+        {
+          title: "Availability",
+          href: "/docs/components/availability",
+          featured: true,
+          badge: "new",
+        },
+        {
+          title: "Availability Slots",
+          href: "/docs/components/availability-slots",
           featured: true,
           badge: "new",
         },
@@ -335,6 +362,12 @@ export const componentsNav: {
         { title: "Carousel", href: "/docs/components/carousel" },
         { title: "Code Panel", href: "/docs/components/code-panel" },
         { title: "Data Table", href: "/docs/components/data-table" },
+        {
+          title: "Data Table Grid",
+          href: "/docs/components/data-table-grid",
+          featured: true,
+          badge: "new",
+        },
         { title: "Message", href: "/docs/components/message" },
         {
           title: "Message Scroller",
