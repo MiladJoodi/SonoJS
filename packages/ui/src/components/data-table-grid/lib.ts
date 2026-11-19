@@ -10,7 +10,14 @@ export type PinableColumn = {
   getSize: () => number
 }
 
-export type PinTable = {
+/**
+ * Any TanStack `useTable()` instance.
+ * Typed as `object` so tables without `columnPinningFeature` still type-check
+ * (a type with only optional fields is a TS “weak type”).
+ */
+export type PinTable = object
+
+type PinTableHelpers = {
   getStartVisibleLeafColumns?: () => Array<{ id: string }>
   getEndVisibleLeafColumns?: () => Array<{ id: string }>
 }
@@ -46,10 +53,11 @@ export function isPinEdgeColumn(
 ): boolean {
   const pinned = column.getIsPinned?.() ?? false
   if (!pinned) return false
+  const helpers = table as PinTableHelpers
   const leaves =
     pinned === "start"
-      ? (table.getStartVisibleLeafColumns?.() ?? [])
-      : (table.getEndVisibleLeafColumns?.() ?? [])
+      ? (helpers.getStartVisibleLeafColumns?.() ?? [])
+      : (helpers.getEndVisibleLeafColumns?.() ?? [])
   if (leaves.length === 0) return false
   if (pinned === "start") {
     return leaves[leaves.length - 1]?.id === column.id
