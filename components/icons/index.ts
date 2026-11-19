@@ -2,6 +2,7 @@ export * from "./plan"
 export * from "./brand"
 export * from "./tools"
 export {
+  AmexIcon,
   AuthjsIcon,
   AxiosIcon,
   BunIcon,

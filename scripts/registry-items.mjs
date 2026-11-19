@@ -3156,6 +3156,37 @@ const registryItemsRaw = [
     ],
   },
   {
+    name: "image-cropper",
+    type: "registry:ui",
+    title: "Image Cropper",
+    description:
+      "Pan, zoom, and crop images with react-easy-crop, zoom slider, and canvas Blob helpers.",
+    dependencies: ["react-easy-crop", "clsx", "tailwind-merge"],
+    registryDependencies: ["slider"],
+    files: [
+      {
+        path: "packages/ui/src/components/image-cropper/index.ts",
+        type: "registry:ui",
+        target: "components/image-cropper/index.ts",
+      },
+      {
+        path: "packages/ui/src/components/image-cropper/image-cropper.tsx",
+        type: "registry:ui",
+        target: "components/image-cropper/image-cropper.tsx",
+      },
+      {
+        path: "packages/ui/src/components/image-cropper/lib.ts",
+        type: "registry:ui",
+        target: "components/image-cropper/lib.ts",
+      },
+      {
+        path: "packages/ui/src/components/image-cropper/demo.jpg",
+        type: "registry:file",
+        target: "components/image-cropper/demo.jpg",
+      },
+    ],
+  },
+  {
     name: "image-generation",
     type: "registry:ui",
     title: "Image Generation",
@@ -3441,6 +3472,47 @@ const registryItemsRaw = [
         path: "packages/ui/src/components/currency-input/lib.ts",
         type: "registry:ui",
         target: "components/currency-input/lib.ts",
+      },
+    ],
+  },
+  {
+    name: "payment-input",
+    type: "registry:ui",
+    title: "Payment Input",
+    description:
+      "Card number, expiry, CVC, and IBAN fields with masking, Luhn, brand detection, and mod-97 validation.",
+    dependencies: ["clsx", "tailwind-merge"],
+    registryDependencies: ["input-group"],
+    files: [
+      {
+        path: "packages/ui/src/components/payment-input/index.ts",
+        type: "registry:ui",
+        target: "components/payment-input/index.ts",
+      },
+      {
+        path: "packages/ui/src/components/payment-input/card-number-input.tsx",
+        type: "registry:ui",
+        target: "components/payment-input/card-number-input.tsx",
+      },
+      {
+        path: "packages/ui/src/components/payment-input/card-expiry-input.tsx",
+        type: "registry:ui",
+        target: "components/payment-input/card-expiry-input.tsx",
+      },
+      {
+        path: "packages/ui/src/components/payment-input/card-cvc-input.tsx",
+        type: "registry:ui",
+        target: "components/payment-input/card-cvc-input.tsx",
+      },
+      {
+        path: "packages/ui/src/components/payment-input/iban-input.tsx",
+        type: "registry:ui",
+        target: "components/payment-input/iban-input.tsx",
+      },
+      {
+        path: "packages/ui/src/components/payment-input/lib.ts",
+        type: "registry:ui",
+        target: "components/payment-input/lib.ts",
       },
     ],
   },
@@ -4195,6 +4267,26 @@ const registryItemsRaw = [
         path: "packages/ui/src/lib/ease.ts",
         type: "registry:lib",
         target: "lib/ease.ts",
+      },
+    ],
+  },
+  {
+    name: "signature-pad",
+    type: "registry:ui",
+    title: "Signature Pad",
+    description:
+      "Handwritten signature capture with mouse and touch, undo/clear, and PNG export.",
+    dependencies: ["signature_pad", "clsx", "tailwind-merge"],
+    files: [
+      {
+        path: "packages/ui/src/components/signature-pad/index.ts",
+        type: "registry:ui",
+        target: "components/signature-pad/index.ts",
+      },
+      {
+        path: "packages/ui/src/components/signature-pad/signature-pad.tsx",
+        type: "registry:ui",
+        target: "components/signature-pad/signature-pad.tsx",
       },
     ],
   },

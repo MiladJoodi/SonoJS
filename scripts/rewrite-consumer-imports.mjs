@@ -67,6 +67,9 @@ export const TOP_LEVEL_COMPONENT_ROOTS = new Set([
   "rich-text-editor",
   "tags-input",
   "currency-input",
+  "payment-input",
+  "image-cropper",
+  "signature-pad",
   "3d",
   "carousels",
 ])

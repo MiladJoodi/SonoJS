@@ -1,3 +1,4 @@
+export { AmexIcon } from "./amex"
 export { AuthjsIcon } from "./authjs"
 export { AxiosIcon } from "./axios"
 export { BunIcon } from "./bun"

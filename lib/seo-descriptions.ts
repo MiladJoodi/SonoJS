@@ -40,6 +40,12 @@ export const COMPONENT_META_DESCRIPTIONS: Record<string, string> = {
     "Searchable select for long option lists, typeahead, keyboard navigation, and clear empty states.",
   "currency-input":
     "Money field with Intl formatting, currency addon, locale separators, min/max, and mobile decimal input.",
+  "payment-input":
+    "Card number, expiry, CVC, and IBAN fields with masking, Luhn, brand detection, and mod-97 validation.",
+  "image-cropper":
+    "Pan, zoom, and crop images with react-easy-crop, zoom slider, and canvas Blob helpers.",
+  "signature-pad":
+    "Handwritten signature capture with mouse and touch, undo/clear, and PNG export.",
   command:
     "Command palette patterns for quick actions and navigation, fuzzy find across your app.",
   "context-menu":

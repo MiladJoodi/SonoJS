@@ -43,6 +43,21 @@ export const componentsNav: {
       title: COMPONENTS_FEATURED_GROUP,
       pages: [
         {
+          title: "Signature Pad",
+          href: "/docs/components/signature-pad",
+          badge: "new",
+        },
+        {
+          title: "Image Cropper",
+          href: "/docs/components/image-cropper",
+          badge: "new",
+        },
+        {
+          title: "Payment Input",
+          href: "/docs/components/payment-input",
+          badge: "new",
+        },
+        {
           title: "Currency Input",
           href: "/docs/components/currency-input",
           badge: "new",
@@ -146,6 +161,12 @@ export const componentsNav: {
           featured: true,
         },
         { title: "Field", href: "/docs/components/field", featured: true },
+        {
+          title: "Image Cropper",
+          href: "/docs/components/image-cropper",
+          featured: true,
+          badge: "new",
+        },
         { title: "Input", href: "/docs/components/input", featured: true },
         { title: "Input Group", href: "/docs/components/input-group" },
         { title: "Input OTP", href: "/docs/components/input-otp" },
@@ -161,6 +182,12 @@ export const componentsNav: {
           href: "/docs/components/password-input",
           featured: true,
         },
+        {
+          title: "Payment Input",
+          href: "/docs/components/payment-input",
+          featured: true,
+          badge: "new",
+        },
         { title: "Phone Input", href: "/docs/components/phone-input" },
         {
           title: "Radio Group",
@@ -169,6 +196,12 @@ export const componentsNav: {
         },
         { title: "Rainbow Button", href: "/docs/components/rainbow-button" },
         { title: "Select", href: "/docs/components/select", featured: true },
+        {
+          title: "Signature Pad",
+          href: "/docs/components/signature-pad",
+          featured: true,
+          badge: "new",
+        },
         { title: "Slider", href: "/docs/components/slider" },
         { title: "Switch", href: "/docs/components/switch", featured: true },
         {
