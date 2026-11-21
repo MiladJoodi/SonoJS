@@ -136,6 +136,11 @@ Ask before changing MCP config outside this project.`,
               description: "Installable WebGL scenes.",
             },
             {
+              href: "/promo",
+              label: "Promo",
+              description: "Sale tags, signup modals, and overlays.",
+            },
+            {
               href: "/carousels",
               label: "Carousels",
               description: "Motion image galleries.",

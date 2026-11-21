@@ -35,6 +35,11 @@ registry/
     area/
       chart-area.tsx
       index.ts
+  promo/                  # /promo catalog (not under blocks)
+    sale-tag/
+      hanging-tag.tsx
+      sale-tag-01/
+        sale-tag.tsx
 ```
 
 UI components: author in `packages/ui/src/components/` only (`registry:build` → `public/r/`).
@@ -46,8 +51,9 @@ Rules:
 3. **One folder per UI item name** (`button`, `login-01`). Folder name matches the registry / docs slug.
 4. **Examples** live under `registry/examples/<component>/` (or `registry/examples/<category>/<component>/` for categories like `3d`), not `registry/examples/<component>-<variant>.tsx` at the root of `examples/`.
 5. **Blocks** live under `registry/blocks/<category>/<name>/`. Category matches the docs catalog (`ai-agents`, `authentication`, …). Keep every file for that block inside its folder.
-6. Prefer a small `index.ts` barrel when the folder has multiple entry files consumers import together.
-7. Shared utilities stay in `lib/`, `hooks/`, or `packages/ui/src/lib` - not inside a random component folder unless they are private to that item.
+6. **Promo** (sale overlays, ribbons, holiday popups): author under `registry/promo/<name>/`. Docs under `app/(app)/promo/<slug>/`. Media under `public/media/promo/<slug>/` / thumbs `public/images/promo/`. Consumer install: `components/<slug>/…` (flat under `components/`, no `promo/` nest) — not under `components/blocks/`.
+7. Prefer a small `index.ts` barrel when the folder has multiple entry files consumers import together.
+8. Shared utilities stay in `lib/`, `hooks/`, or `packages/ui/src/lib` - not inside a random component folder unless they are private to that item.
 
 ## `@sonojs/ui` package
 

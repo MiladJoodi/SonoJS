@@ -8928,6 +8928,114 @@ const registryItemsRaw = [
         : []),
     ],
   })),
+  ...[
+    [
+      "sale-tag-01",
+      "Black Friday hanging price tag — drops on a string, swings, copies BF20.",
+    ],
+    [
+      "sale-tag-02",
+      "Cyber Monday hanging price tag — navy + cyan, copies CYBER20.",
+    ],
+    [
+      "sale-tag-03",
+      "Kraft paper hanging price tag — warm paper look, copies KRAFT20.",
+    ],
+  ].map(([slug, description]) => ({
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    dependencies: ["motion", "lucide-react"],
+    files: [
+      {
+        path: `registry/promo/sale-tag/${slug}/sale-tag.tsx`,
+        type: "registry:component",
+        target: `components/${slug}/sale-tag.tsx`,
+      },
+      {
+        path: "registry/promo/sale-tag/hanging-tag.tsx",
+        type: "registry:component",
+        target: `components/${slug}/hanging-tag.tsx`,
+      },
+    ],
+  })),
+  {
+    name: "sale-signup-01",
+    type: "registry:block",
+    title: "sale-signup-01",
+    description:
+      "Early Black Friday signup modal — cream email panel, burgundy house-shaped tier offers, free-gift arch card.",
+    dependencies: ["motion", "lucide-react"],
+    files: [
+      {
+        path: "registry/promo/sale-signup/sale-signup-01/sale-signup.tsx",
+        type: "registry:component",
+        target: "components/sale-signup-01/sale-signup.tsx",
+      },
+      {
+        path: "registry/promo/sale-signup/sale-modal.tsx",
+        type: "registry:component",
+        target: "components/sale-signup-01/sale-modal.tsx",
+      },
+      {
+        path: "registry/promo/sale-signup/images/dutch-oven.jpg",
+        type: "registry:file",
+        target: "components/sale-signup-01/images/dutch-oven.jpg",
+      },
+    ],
+  },
+  {
+    name: "fork-ribbon-01",
+    type: "registry:block",
+    title: "fork-ribbon-01",
+    description:
+      "Fork me on GitHub corner ribbon — tones and corners via props.",
+    files: [
+      {
+        path: "registry/promo/fork-ribbon/fork-ribbon-01/fork-ribbon.tsx",
+        type: "registry:component",
+        target: "components/fork-ribbon-01/fork-ribbon.tsx",
+      },
+      {
+        path: "registry/promo/fork-ribbon/corner-ribbon.tsx",
+        type: "registry:component",
+        target: "components/fork-ribbon-01/corner-ribbon.tsx",
+      },
+    ],
+  },
+  ...[
+    [
+      "holiday-popup-01",
+      "Winter Night holiday popup — navy card, gold CTA, falling snow.",
+    ],
+    [
+      "holiday-popup-02",
+      "Candy Cane holiday popup — crimson card, white CTA, falling snow.",
+    ],
+    [
+      "holiday-popup-03",
+      "Evergreen holiday popup — cream card, deep green CTA, falling snow.",
+    ],
+  ].map(([slug, description]) => ({
+    name: slug,
+    type: "registry:block",
+    title: slug,
+    description,
+    dependencies: ["motion", "lucide-react"],
+    files: [
+      {
+        path: `registry/promo/holiday-popup/${slug}/holiday-popup.tsx`,
+        type: "registry:component",
+        target: `components/${slug}/holiday-popup.tsx`,
+      },
+      {
+        path: "registry/promo/holiday-popup/holiday-card.tsx",
+        type: "registry:component",
+        target: `components/${slug}/holiday-card.tsx`,
+      },
+    ],
+  })),
   {
     name: "cta-01",
     type: "registry:block",

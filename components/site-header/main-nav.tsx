@@ -10,6 +10,7 @@ import {
   LayoutGridIcon,
   LayoutTemplateIcon,
   MousePointer2Icon,
+  PercentIcon,
   PlugIcon,
   SparklesIcon,
   StoreIcon,
@@ -39,6 +40,7 @@ const NAV_ICONS: Record<string, LucideIcon> = {
   "/cursors": MousePointer2Icon,
   "/backgrounds": WallpaperIcon,
   "/3d": BoxIcon,
+  "/promo": PercentIcon,
   "/carousels": GalleryHorizontalEndIcon,
   "/docs/mcp": PlugIcon,
 }

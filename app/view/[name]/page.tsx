@@ -176,6 +176,14 @@ import OfferCard04 from "@/registry/blocks/marketing/offer-card/offer-card-04/of
 import OfferCard05 from "@/registry/blocks/marketing/offer-card/offer-card-05/offer-card"
 import OfferCard06 from "@/registry/blocks/marketing/offer-card/offer-card-06/offer-card"
 import OfferCard07 from "@/registry/blocks/marketing/offer-card/offer-card-07/offer-card"
+import SaleTag01 from "@/registry/promo/sale-tag/sale-tag-01/sale-tag"
+import SaleTag02 from "@/registry/promo/sale-tag/sale-tag-02/sale-tag"
+import SaleTag03 from "@/registry/promo/sale-tag/sale-tag-03/sale-tag"
+import SaleSignup01 from "@/registry/promo/sale-signup/sale-signup-01/sale-signup"
+import { CornerRibbon } from "@/registry/promo/fork-ribbon/corner-ribbon"
+import HolidayPopup01 from "@/registry/promo/holiday-popup/holiday-popup-01/holiday-popup"
+import HolidayPopup02 from "@/registry/promo/holiday-popup/holiday-popup-02/holiday-popup"
+import HolidayPopup03 from "@/registry/promo/holiday-popup/holiday-popup-03/holiday-popup"
 import Stats01 from "@/registry/blocks/marketing/stats/stats-01/stats"
 import Stats02 from "@/registry/blocks/marketing/stats/stats-02/stats"
 import Stats03 from "@/registry/blocks/marketing/stats/stats-03/stats"
@@ -1682,6 +1690,85 @@ const views: Record<string, ComponentType> = {
         <div className="flex w-full max-w-[292px] justify-center">
           <OfferCard07 open />
         </div>
+      </div>
+    )
+  },
+  "sale-tag-01": function SaleTag01View() {
+    return (
+      <div className="relative min-h-svh w-full bg-canvas">
+        <SaleTag01 />
+      </div>
+    )
+  },
+  "sale-tag-02": function SaleTag02View() {
+    return (
+      <div className="relative min-h-svh w-full bg-canvas">
+        <SaleTag02 />
+      </div>
+    )
+  },
+  "sale-tag-03": function SaleTag03View() {
+    return (
+      <div className="relative min-h-svh w-full bg-canvas">
+        <SaleTag03 />
+      </div>
+    )
+  },
+  "sale-signup-01": function SaleSignup01View() {
+    return (
+      <div className="relative min-h-svh w-full bg-canvas">
+        <SaleSignup01 position="absolute" />
+      </div>
+    )
+  },
+  "fork-ribbon-01": function ForkRibbon01View() {
+    return (
+      <div className="relative min-h-svh w-full overflow-hidden bg-canvas">
+        <CornerRibbon
+          label="Fork me on GitHub"
+          tone="red"
+          corner="top-start"
+          href="#"
+        />
+        <CornerRibbon
+          label="Fork me on GitHub"
+          tone="orange"
+          corner="top-end"
+          href="#"
+        />
+        <CornerRibbon
+          label="Fork me on GitHub"
+          tone="green"
+          corner="bottom-end"
+          href="#"
+        />
+        <CornerRibbon
+          label="Fork me on GitHub"
+          tone="black"
+          corner="bottom-start"
+          href="#"
+        />
+      </div>
+    )
+  },
+  "holiday-popup-01": function HolidayPopup01View() {
+    return (
+      <div className="relative min-h-svh w-full overflow-hidden">
+        <HolidayPopup01 />
+      </div>
+    )
+  },
+  "holiday-popup-02": function HolidayPopup02View() {
+    return (
+      <div className="relative min-h-svh w-full overflow-hidden">
+        <HolidayPopup02 />
+      </div>
+    )
+  },
+  "holiday-popup-03": function HolidayPopup03View() {
+    return (
+      <div className="relative min-h-svh w-full overflow-hidden">
+        <HolidayPopup03 />
       </div>
     )
   },

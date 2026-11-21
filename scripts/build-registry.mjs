@@ -135,6 +135,7 @@ function buildItemPayload(item, version, generatedAt) {
       isSourceText &&
       (file.path.startsWith("packages/ui/") ||
         file.path.startsWith("registry/blocks/") ||
+        file.path.startsWith("registry/promo/") ||
         file.path.startsWith("registry/cursors/") ||
         file.path.startsWith("registry/examples/") ||
         file.path.startsWith("registry/hooks/"))

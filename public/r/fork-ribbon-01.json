@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "fork-ribbon-01",
+  "type": "registry:block",
+  "title": "fork-ribbon-01",
+  "description": "Fork me on GitHub corner ribbon — tones and corners via props.",
+  "access": "public",
+  "files": [
+    {
+      "path": "components/fork-ribbon-01/fork-ribbon.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport type { ComponentProps } from \"react\"\n\nimport { CornerRibbon } from \"@/components/fork-ribbon-01/corner-ribbon\"\n\n/**\n * Classic red corner ribbon — “Fork me on GitHub”.\n * Live apps: pass `position=\"fixed\"`. Change `corner` / `tone` for other looks.\n */\nexport default function ForkRibbon01(\n  props: ComponentProps<typeof CornerRibbon>\n) {\n  return (\n    <CornerRibbon\n      label=\"Fork me on GitHub\"\n      tone=\"red\"\n      corner=\"top-start\"\n      position=\"absolute\"\n      {...props}\n    />\n  )\n}\n",
+      "target": "components/fork-ribbon-01/fork-ribbon.tsx"
+    },
+    {
+      "path": "components/fork-ribbon-01/corner-ribbon.tsx",
+      "type": "registry:component",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\nexport type CornerRibbonTone =\n  | \"red\"\n  | \"orange\"\n  | \"green\"\n  | \"black\"\n  | \"navy\"\n  | \"rose\"\n\nexport type CornerRibbonCorner =\n  | \"top-end\"\n  | \"top-start\"\n  | \"bottom-end\"\n  | \"bottom-start\"\n\nexport type CornerRibbonProps = {\n  className?: string\n  /** Visible ribbon copy. Default keeps the classic fork line. */\n  label?: string\n  href?: string\n  tone?: CornerRibbonTone\n  corner?: CornerRibbonCorner\n  /** `absolute` for framed demos; `fixed` for live sites. */\n  position?: \"fixed\" | \"absolute\"\n  title?: string\n}\n\nconst TONE: Record<CornerRibbonTone, string> = {\n  red: \"bg-[#a00]\",\n  orange: \"bg-[#f80]\",\n  green: \"bg-[#090]\",\n  black: \"bg-[#333]\",\n  navy: \"bg-[#0b1b33]\",\n  rose: \"bg-[#be123c]\",\n}\n\n/**\n * Classic corner ribbon (fork-ribbon geometry), rebuilt for React + logical corners.\n * Default label stays “Fork me on GitHub”.\n *\n * Stitch lines are absolute `top`/`bottom` children at 0.22em — identical on every corner.\n */\nfunction CornerRibbon({\n  className,\n  label = \"Fork me on GitHub\",\n  href = \"#\",\n  tone = \"red\",\n  corner = \"top-end\",\n  position = \"absolute\",\n  title,\n}: CornerRibbonProps) {\n  const isStart = corner === \"top-start\" || corner === \"bottom-start\"\n  const isBottom = corner === \"bottom-start\" || corner === \"bottom-end\"\n  // Mirror the classic CSS: top-end & bottom-start → +45°; top-start & bottom-end → -45°.\n  const rotate =\n    corner === \"top-end\" || corner === \"bottom-start\" ? \"rotate-45\" : \"-rotate-45\"\n\n  return (\n    <a\n      href={href}\n      title={title ?? label}\n      data-slot=\"corner-ribbon\"\n      data-tone={tone}\n      data-corner={corner}\n      className={cn(\n        \"pointer-events-none z-[90] overflow-hidden text-[13px]\",\n        position === \"fixed\" ? \"fixed\" : \"absolute\",\n        \"size-[12.1em]\",\n        isBottom ? \"bottom-0 top-auto\" : \"top-0 bottom-auto\",\n        isStart ? \"start-0 end-auto\" : \"end-0 start-auto\",\n        className\n      )}\n    >\n      <span\n        className={cn(\n          \"pointer-events-auto absolute flex h-[2.15em] w-[15.38em] cursor-pointer items-center justify-center\",\n          \"text-center text-[1em] font-bold leading-none text-white no-underline\",\n          \"shadow-[0_0.15em_0.23em_0_rgba(0,0,0,0.45)]\",\n          \"[text-shadow:0_-0.08em_rgba(0,0,0,0.5)]\",\n          TONE[tone],\n          rotate,\n          isBottom ? \"bottom-[3.23em] top-auto\" : \"top-[3.23em] bottom-auto\",\n          isStart ? \"start-[-3.23em] end-auto\" : \"end-[-3.23em] start-auto\"\n        )}\n      >\n        <span\n          aria-hidden\n          className=\"pointer-events-none absolute inset-x-0 top-[0.22em] border-t-[0.08em] border-dotted border-white/75\"\n        />\n        <span\n          aria-hidden\n          className=\"pointer-events-none absolute inset-x-0 bottom-[0.22em] border-t-[0.08em] border-dotted border-white/75\"\n        />\n        {label}\n      </span>\n    </a>\n  )\n}\n\nexport { CornerRibbon, TONE }\n",
+      "target": "components/fork-ribbon-01/corner-ribbon.tsx"
+    }
+  ],
+  "version": "0.1.0+11aa17dcdfe3",
+  "generatedAt": "2026-11-21T12:51:19.316Z"
+}

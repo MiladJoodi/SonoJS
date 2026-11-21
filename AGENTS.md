@@ -23,7 +23,7 @@ Direction is a **core architecture** requirement for every new registry componen
 Group files **per component / block / chart / example set**. No flat dumps of related siblings.
 
 - Examples: `registry/examples/button/default.tsx` (not `examples/button-default.tsx`)
-- Blocks: `registry/blocks/<category>/<name>/…` · charts/ui: `registry/<kind>/<name>/…`
+- Blocks: `registry/blocks/<category>/<name>/…` · Promo: `registry/promo/<name>/…` → install `components/<slug>/` · charts/ui: `registry/<kind>/<name>/…`
 - Package UI: `packages/ui/src/components/…` (folder when multi-file)
 - 3D: `packages/ui/src/components/3d/<slug>/` · `registry/examples/3d/<slug>/` · `app/(app)/3d/<slug>/` · install `components/3d/<slug>/` (exceptions: `clothes-rack` stays flat + dual docs; CSS `marquee` stays flat under docs only; tilted photo columns are `image-marquee`)
 - Site chrome: `components/<feature>/…` when 2+ related files (`docs/`, `direction/`, `site-header/`, `sidebar-nav/`, `tools/`)
