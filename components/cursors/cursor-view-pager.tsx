@@ -3,7 +3,7 @@ import {
   type DocsAdjacentLink,
 } from "@/components/docs/docs-adjacent-pager"
 import {
-  cursorViewHref,
+  cursorHref,
   type CursorsCatalogEntry,
 } from "@/lib/cursors-catalog"
 import { cn } from "@/lib/utils"
@@ -12,7 +12,7 @@ function toLink(
   entry: CursorsCatalogEntry | null | undefined
 ): DocsAdjacentLink | undefined {
   if (!entry) return undefined
-  return { href: cursorViewHref(entry.id), title: entry.title }
+  return { href: cursorHref(entry.id), title: entry.title }
 }
 
 export function CursorViewPager({

@@ -1,7 +1,7 @@
 import Link from "next/link"
 
 import {
-  backgroundViewHref,
+  backgroundHref,
   type BackgroundsCatalogEntry,
 } from "@/lib/backgrounds-catalog"
 import { cn } from "@/lib/utils"
@@ -11,7 +11,7 @@ export function BackgroundExampleCard({
 }: {
   entry: BackgroundsCatalogEntry
 }) {
-  const href = backgroundViewHref(entry.id)
+  const href = backgroundHref(entry.id)
 
   return (
     <Link

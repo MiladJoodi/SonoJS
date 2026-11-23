@@ -1,5 +1,5 @@
 import {
-  cursorViewHref,
+  cursorHref,
   cursorsCatalog,
   getCursorAdjacent,
   isCursorFeatured,
@@ -24,7 +24,7 @@ export const cursorsNav: CursorsNavItem[] = [...cursorsCatalog]
   .map((entry) => ({
     id: entry.id,
     title: entry.title,
-    href: cursorViewHref(entry.id),
+    href: cursorHref(entry.id),
     featured: isCursorFeatured(entry.id),
     status: entry.status,
   }))
@@ -32,8 +32,10 @@ export const cursorsNav: CursorsNavItem[] = [...cursorsCatalog]
 export function getCursorsCurrentLabel(pathname: string): string | null {
   if (pathname === "/cursors") return "Cursors"
 
-  if (pathname.startsWith("/cursors/view/")) {
-    const id = pathname.slice("/cursors/view/".length)
+  if (pathname.startsWith("/cursors/")) {
+    const id = pathname.startsWith("/cursors/view/")
+      ? pathname.slice("/cursors/view/".length)
+      : pathname.slice("/cursors/".length)
     return cursorsCatalog.find((e) => e.id === id)?.title ?? "Cursor"
   }
 
@@ -44,16 +46,18 @@ export function getCursorsAdjacent(pathname: string): {
   previous: { href: string; title: string } | null
   next: { href: string; title: string } | null
 } {
-  if (!pathname.startsWith("/cursors/view/")) {
+  if (!pathname.startsWith("/cursors/")) {
     return { previous: null, next: null }
   }
-  const id = pathname.slice("/cursors/view/".length)
+  const id = pathname.startsWith("/cursors/view/")
+    ? pathname.slice("/cursors/view/".length)
+    : pathname.slice("/cursors/".length)
   const { previous, next } = getCursorAdjacent(id)
   return {
     previous: previous
-      ? { href: cursorViewHref(previous.id), title: previous.title }
+      ? { href: cursorHref(previous.id), title: previous.title }
       : null,
-    next: next ? { href: cursorViewHref(next.id), title: next.title } : null,
+    next: next ? { href: cursorHref(next.id), title: next.title } : null,
   }
 }
 

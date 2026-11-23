@@ -24,6 +24,7 @@ export function CursorGallery() {
           title={entry.title}
           status={entry.status}
           imageSrc={cursorThumbSrc(entry.id)}
+          disableLivePreview={entry.id === "splash-cursor"}
         />
       ))}
     </CatalogSection>

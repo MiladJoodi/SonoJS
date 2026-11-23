@@ -12,7 +12,8 @@ import { getAiPages } from "@/lib/ai-nav"
 import { get3dPages } from "@/lib/3d-nav"
 import { getPopupsPages } from "@/lib/popups-nav"
 import { getCarouselsPages } from "@/lib/carousels-nav"
-import { cursorsCatalog, cursorViewHref } from "@/lib/cursors-catalog"
+import { backgroundsCatalog, backgroundHref } from "@/lib/backgrounds-catalog"
+import { cursorsCatalog, cursorHref } from "@/lib/cursors-catalog"
 import { getDocsComponentPages, getDocsGuidePages } from "@/lib/docs-nav"
 import { templateProjects } from "@/lib/templates-catalog"
 import {
@@ -60,6 +61,7 @@ function appPageFileCandidates(href: string): string[] {
 /** True when a path has a concrete App Router page (not catch-all placeholders). */
 export function sitemapPathExists(href: string): boolean {
   const normalized = normalizePath(href)
+  if (normalized.startsWith("/cursors/view/")) return false
   if (normalized.startsWith("/charts/view/")) {
     const id = normalized.slice("/charts/view/".length)
     if (!id || id.includes("/")) return false
@@ -69,10 +71,16 @@ export function sitemapPathExists(href: string): boolean {
     const category = normalized.slice("/charts/".length)
     return (CHART_CATEGORIES as readonly string[]).includes(category)
   }
-  if (normalized.startsWith("/cursors/view/")) {
-    const id = normalized.slice("/cursors/view/".length)
+  if (normalized.startsWith("/cursors/")) {
+    const id = normalized.slice("/cursors/".length)
     if (!id || id.includes("/")) return false
     return cursorsCatalog.some((e) => e.id === id && e.status === "ported")
+  }
+  if (normalized.startsWith("/backgrounds/view/")) return false
+  if (normalized.startsWith("/backgrounds/")) {
+    const id = normalized.slice("/backgrounds/".length)
+    if (!id || id.includes("/")) return false
+    return backgroundsCatalog.some((entry) => entry.id === id)
   }
   if (normalized.startsWith("/templates/")) {
     const slug = normalized.slice("/templates/".length)
@@ -169,7 +177,10 @@ export function buildSitemapPaths(): string[] {
   }
   for (const entry of cursorsCatalog) {
     if (entry.status !== "ported") continue
-    pushUnique(paths, cursorViewHref(entry.id))
+    pushUnique(paths, cursorHref(entry.id))
+  }
+  for (const entry of backgroundsCatalog) {
+    pushUnique(paths, backgroundHref(entry.id))
   }
 
   return [...paths].sort((a, b) => a.localeCompare(b))

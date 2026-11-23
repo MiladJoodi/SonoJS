@@ -12,9 +12,6 @@ export default function NeonCursorDemo() {
     <div ref={stageRef} className={`${CURSOR_STAGE_DARK} cursor-none`}>
       <NeonCursor containerRef={stageRef} />
       <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
-        <p className="pointer-events-none text-sm text-zinc-300">
-          Spring neon - click to pulse
-        </p>
         <button
           type="button"
           data-cursor-hover

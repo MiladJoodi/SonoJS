@@ -1299,8 +1299,8 @@ export function getBackgroundEntry(
   return backgroundsCatalog.find((e) => e.id === id)
 }
 
-export function backgroundViewHref(id: string) {
-  return `/backgrounds/view/${id}`
+export function backgroundHref(id: string) {
+  return `/backgrounds/${id}`
 }
 
 export function getBackgroundAdjacent(id: string): {

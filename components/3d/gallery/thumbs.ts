@@ -31,15 +31,22 @@ const THEMED_THUMB_SLUGS = new Set([
   "orbiting-circles",
 ])
 
+const PNG_THUMB_SLUGS = new Set(["crystalized-ball"])
+
 export function threeDThumbSrc(slug: string, theme: "light" | "dark") {
   if (THEMED_THUMB_SLUGS.has(slug)) {
     return `/images/3d/${slug}-${theme}.webp`
   }
-  return `/images/3d/${slug}-default.webp`
+  const extension = PNG_THUMB_SLUGS.has(slug) ? "png" : "webp"
+  return `/images/3d/${slug}-default.${extension}`
 }
 
 export function hasThreeDThumb(slug: string) {
-  return DEFAULT_THUMB_SLUGS.has(slug) || THEMED_THUMB_SLUGS.has(slug)
+  return (
+    DEFAULT_THUMB_SLUGS.has(slug) ||
+    THEMED_THUMB_SLUGS.has(slug) ||
+    PNG_THUMB_SLUGS.has(slug)
+  )
 }
 
 export function threeDSlugFromHref(href: string) {

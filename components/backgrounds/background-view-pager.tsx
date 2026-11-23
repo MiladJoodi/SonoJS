@@ -3,7 +3,7 @@ import {
   type DocsAdjacentLink,
 } from "@/components/docs/docs-adjacent-pager"
 import {
-  backgroundViewHref,
+  backgroundHref,
   type BackgroundsCatalogEntry,
 } from "@/lib/backgrounds-catalog"
 import { cn } from "@/lib/utils"
@@ -12,7 +12,7 @@ function toLink(
   entry: BackgroundsCatalogEntry | null | undefined
 ): DocsAdjacentLink | undefined {
   if (!entry) return undefined
-  return { href: backgroundViewHref(entry.id), title: entry.title }
+  return { href: backgroundHref(entry.id), title: entry.title }
 }
 
 export function BackgroundViewPager({

@@ -4,7 +4,7 @@ import * as React from "react"
 import Link from "next/link"
 import { MousePointerClickIcon } from "lucide-react"
 
-import { cursorViewHref } from "@/lib/cursors-catalog"
+import { cursorHref } from "@/lib/cursors-catalog"
 import { cn } from "@/lib/utils"
 import { prefetchCursorDemo } from "@/registry/cursors/demo-loaders"
 
@@ -15,16 +15,18 @@ export function CursorExampleCard({
   title,
   status,
   imageSrc,
+  disableLivePreview = false,
 }: {
   id: string
   title: string
   status?: "pending" | "ported"
   imageSrc?: string
+  disableLivePreview?: boolean
 }) {
   const pending = status === "pending"
   const [hovered, setHovered] = React.useState(false)
   const [previewReady, setPreviewReady] = React.useState(false)
-  const href = cursorViewHref(id)
+  const href = cursorHref(id)
   const label = pending ? `${title} (pending)` : title
 
   return (
@@ -33,7 +35,7 @@ export function CursorExampleCard({
       prefetch={false}
       aria-label={label}
       onMouseEnter={() => {
-        if (pending || imageSrc) return
+        if (pending || imageSrc || disableLivePreview) return
         prefetchCursorDemo(id)
         setHovered(true)
       }}
@@ -69,7 +71,7 @@ export function CursorExampleCard({
                 previewReady ? "scale-110 opacity-0" : "group-hover:scale-110"
               )}
             />
-            {hovered && !pending ? (
+            {hovered && !pending && !disableLivePreview ? (
               <CardLivePreview
                 id={id}
                 onReady={() => setPreviewReady(true)}

@@ -27,9 +27,6 @@ export default function SpotlightCursorDemo() {
         </div>
       </div>
       <SpotlightCursor containerRef={stageRef} />
-      <p className="pointer-events-none absolute inset-x-0 bottom-4 text-center text-sm font-medium text-white/75">
-        Move your mouse
-      </p>
     </div>
   )
 }

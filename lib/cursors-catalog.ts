@@ -98,6 +98,20 @@ export const cursorsCatalog: CursorsCatalogEntry[] = [
     status: "ported",
   },
   {
+    id: "splash-cursor",
+    category: "trail",
+    title: "Splash Cursor",
+    description: "Fluid ink trail that swirls behind the pointer and splashes on click.",
+    status: "ported",
+  },
+  {
+    id: "glow-cursor",
+    category: "trail",
+    title: "Glow Cursor",
+    description: "A glowing fluid trail follows the pointer and bursts on click.",
+    status: "ported",
+  },
+  {
     id: "bubble-cursor",
     category: "trail",
     title: "Bubble Cursor",
@@ -287,8 +301,8 @@ export function getCursorsByCategory(
   return cursorsCatalog.filter((e) => e.category === category)
 }
 
-export function cursorViewHref(id: string): string {
-  return `/cursors/view/${id}`
+export function cursorHref(id: string): string {
+  return `/cursors/${id}`
 }
 
 export function cursorCategoryHref(category: CursorCategory): string {

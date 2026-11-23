@@ -35,6 +35,7 @@ const CURSOR_THUMB_SLUGS = new Set([
   "smooth-cursor",
   "smooth-cursor-follower",
   "snowflake-cursor",
+  "splash-cursor",
   "spotlight-cursor",
   "springy-cursor",
   "textflag-cursor",

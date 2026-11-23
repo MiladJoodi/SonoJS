@@ -5473,6 +5473,26 @@ const registryItemsRaw = [
     ],
   },
   {
+    name: "crystalized-ball",
+    type: "registry:ui",
+    title: "Crystalized Ball",
+    description:
+      "Interactive crystal sphere with a crackling rim, glowing particles, and configurable plasma presets.",
+    dependencies: ["ogl"],
+    files: [
+      {
+        path: "packages/ui/src/components/3d/crystalized-ball/index.tsx",
+        type: "registry:ui",
+        target: "components/3d/crystalized-ball/index.tsx",
+      },
+      {
+        path: "packages/ui/src/components/3d/crystalized-ball/crystalized-ball.css",
+        type: "registry:file",
+        target: "components/3d/crystalized-ball/crystalized-ball.css",
+      },
+    ],
+  },
+  {
     name: "3d-image-carousel",
     type: "registry:ui",
     title: "3D Image Carousel",

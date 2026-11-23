@@ -288,7 +288,7 @@ export function cursorCategoryMetadata(
   })
 }
 
-export function cursorViewMetadata(
+export function cursorMetadata(
   id: string,
   title: string,
   index: boolean
@@ -297,7 +297,7 @@ export function cursorViewMetadata(
   return pageMetadata({
     title: displayTitle,
     description: `Interactive ${title} demo for SonoJS - preview, install command, and source.`,
-    path: `/cursors/view/${id}`,
+    path: `/cursors/${id}`,
     index,
   })
 }

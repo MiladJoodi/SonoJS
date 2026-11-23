@@ -103,6 +103,8 @@
     "./components/3d/orbiting-circles/*": "./src/components/3d/orbiting-circles/*",
     "./components/3d/plasma-globe": "./src/components/3d/plasma-globe/index.tsx",
     "./components/3d/plasma-globe/*": "./src/components/3d/plasma-globe/*",
+    "./components/3d/crystalized-ball": "./src/components/3d/crystalized-ball/index.tsx",
+    "./components/3d/crystalized-ball/*": "./src/components/3d/crystalized-ball/*",
     "./components/carousels/3d-image-carousel": "./src/components/carousels/3d-image-carousel/index.tsx",
     "./components/carousels/3d-image-carousel/*": "./src/components/carousels/3d-image-carousel/*",
     "./components/carousels/3d-carousel": "./src/components/carousels/3d-carousel/index.tsx",

@@ -38,6 +38,12 @@ export const threeDNav: {
           featured: true,
         },
         {
+          title: "Crystalized Ball",
+          href: "/3d/crystalized-ball",
+          badge: "new",
+          featured: true,
+        },
+        {
           title: "Glass Coin Carousel",
           href: "/3d/glass-coin-carousel",
           badge: "new",

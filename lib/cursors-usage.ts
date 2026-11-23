@@ -1,5 +1,11 @@
 /** Install path after `sonojs add <id>`. */
 export function cursorImportPath(id: string): string {
+  if (id === "splash-cursor") {
+    return "@/components/cursors/splash-cursor/splash-cursor"
+  }
+  if (id === "glow-cursor") {
+    return "@/components/cursors/glow-cursor/glow-cursor"
+  }
   return `@/components/cursors/${id}`
 }
 
@@ -225,6 +231,70 @@ export default function Page() {
     <${name} className="min-h-svh">
       {/* Put buttons / links inside - hover shows the chip */}
     </${name}>
+  )
+}
+`,
+    }
+  }
+
+  if (id === "splash-cursor") {
+    return {
+      blurb:
+        "Install with the Command tab, then mount SplashCursor inside a positioned wrapper. The fluid effect stays within that wrapper.",
+      code: `"use client"
+
+import SplashCursor from "${path}"
+
+export default function Page() {
+  return (
+    <div className="relative min-h-svh cursor-none bg-black">
+      <SplashCursor
+        rainbow={false}
+        size={1}
+        force={1}
+        swirl={3}
+        trail={1}
+        clickSplash
+        colorSpeed={1}
+        intensity={1}
+        momentum={1}
+        shading={1}
+        glow={0}
+        quality="high"
+        intro
+        contained
+      />
+      {/* Your page content */}
+    </div>
+  )
+}
+`,
+    }
+  }
+
+  if (id === "glow-cursor") {
+    return {
+      blurb:
+        "Install with the Command tab, then use GlowCursor as the content wrapper. The effect is clipped to its bounds.",
+      code: `"use client"
+
+import GlowCursor from "${path}"
+
+export default function Page() {
+  return (
+    <div className="h-[500px] w-full bg-black">
+      <GlowCursor
+        color="#5f8bff"
+        intensity={1.3}
+        trailWidth={3}
+        linger={1.4}
+        glow={1.2}
+        clickBurst
+        theme="dark"
+      >
+        {/* Your content here */}
+      </GlowCursor>
+    </div>
   )
 }
 `,

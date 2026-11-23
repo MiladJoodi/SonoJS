@@ -11,9 +11,6 @@ export default function ClickEffectCursorDemo() {
   return (
     <div ref={stageRef} className={`${CURSOR_STAGE_DARK} cursor-none`}>
       <ClickEffectCursor containerRef={stageRef} className="absolute inset-0" />
-      <p className="pointer-events-none absolute inset-0 flex items-center justify-center text-sm text-zinc-400">
-        Click anywhere
-      </p>
     </div>
   )
 }

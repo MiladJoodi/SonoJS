@@ -73,7 +73,7 @@ function hrefForRegistry(item, surface) {
   if (!name) return null
   switch (surface) {
     case "cursors":
-      return `/cursors/view/${name}`
+      return `/cursors/${name}`
     case "charts":
       return `/charts/view/${name}`
     case "ai":

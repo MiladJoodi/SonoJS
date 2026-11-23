@@ -1,5 +1,5 @@
 import {
-  backgroundViewHref,
+  backgroundHref,
   backgroundsCatalog,
   isBackgroundFeatured,
 } from "@/lib/backgrounds-catalog"
@@ -41,7 +41,7 @@ const allBackgroundPages: BackgroundsNavPage[] = [...backgroundsCatalog]
   .sort((a, b) => a.title.localeCompare(b.title))
   .map((e) => ({
     title: e.title,
-    href: backgroundViewHref(e.id),
+    href: backgroundHref(e.id),
     featured: isBackgroundFeatured(e.id),
   }))
 
@@ -50,7 +50,7 @@ const featuredBackgroundPages: BackgroundsNavPage[] = [...backgroundsCatalog]
   .sort((a, b) => a.title.localeCompare(b.title))
   .map((e) => ({
     title: e.title,
-    href: backgroundViewHref(e.id),
+    href: backgroundHref(e.id),
     featured: isBackgroundFeatured(e.id),
     badge: "new" as const,
   }))
@@ -81,8 +81,10 @@ export function getBackgroundsPages(): BackgroundsNavPage[] {
 
 export function getBackgroundsCurrentLabel(pathname: string): string | null {
   if (pathname === "/backgrounds") return "Backgrounds"
-  if (pathname.startsWith("/backgrounds/view/")) {
-    const id = pathname.slice("/backgrounds/view/".length)
+  if (pathname.startsWith("/backgrounds/")) {
+    const id = pathname.startsWith("/backgrounds/view/")
+      ? pathname.slice("/backgrounds/view/".length)
+      : pathname.slice("/backgrounds/".length)
     return backgroundsCatalog.find((e) => e.id === id)?.title ?? "Background"
   }
   const page = getBackgroundsPages().find((p) => p.href === pathname)
@@ -99,7 +101,10 @@ export function getBackgroundsAdjacent(pathname: string): {
   }
 
   const pages = getBackgroundsPages()
-  const index = pages.findIndex((p) => p.href === pathname)
+  const route = pathname.startsWith("/backgrounds/view/")
+    ? `/backgrounds/${pathname.slice("/backgrounds/view/".length)}`
+    : pathname
+  const index = pages.findIndex((p) => p.href === route)
   if (index < 0) return { previous: null, next: null }
   return {
     previous:

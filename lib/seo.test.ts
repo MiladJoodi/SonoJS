@@ -5,7 +5,7 @@ import {
   aiDocsMetadata,
   chartViewMetadata,
   componentDocsMetadata,
-  cursorViewMetadata,
+  cursorMetadata,
   isNoindexPath,
   isProductionIndexingEnabled,
   normalizePath,
@@ -117,7 +117,7 @@ describe("seo helpers", () => {
     expect(chartMeta.title).toBe("Simple Bar Chart")
     expect(chartMeta.description).not.toMatch(/Chart chart/i)
 
-    const cursorMeta = cursorViewMetadata("ripple-cursor", "Ripple Cursor", true)
+    const cursorMeta = cursorMetadata("ripple-cursor", "Ripple Cursor", true)
     expect(cursorMeta.title).toBe("Ripple Cursor")
   })
 
@@ -255,7 +255,10 @@ describe("sitemap builder", () => {
     expect(paths.has("/blocks")).toBe(true)
     expect(paths.has("/charts")).toBe(true)
     expect(paths.has("/cursors")).toBe(true)
-    expect(paths.has("/cursors/view/smooth-cursor-follower")).toBe(true)
+    expect(paths.has("/cursors/smooth-cursor-follower")).toBe(true)
+    expect(paths.has("/cursors/view/smooth-cursor-follower")).toBe(false)
+    expect(paths.has("/backgrounds/embers")).toBe(true)
+    expect(paths.has("/backgrounds/view/embers")).toBe(false)
     expect(paths.has("/ai")).toBe(true)
     expect(paths.has("/ai/prompt-input")).toBe(true)
     expect(paths.has("/popups")).toBe(true)

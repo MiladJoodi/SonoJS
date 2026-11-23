@@ -434,6 +434,42 @@ export const cursorRegistryItems = [
       },
     ],
   },
+  {
+    name: "splash-cursor",
+    type: "registry:cursor",
+    title: "Splash Cursor",
+    description: "Fluid WebGL cursor trail with swirling ink and click splashes.",
+    files: [
+      {
+        path: "registry/cursors/splash-cursor/splash-cursor.tsx",
+        type: "registry:component",
+        target: "components/cursors/splash-cursor/splash-cursor.tsx",
+      },
+      {
+        path: "registry/cursors/splash-cursor/splash-cursor.css",
+        type: "registry:file",
+        target: "components/cursors/splash-cursor/splash-cursor.css",
+      },
+    ],
+  },
+  {
+    name: "glow-cursor",
+    type: "registry:cursor",
+    title: "Glow Cursor",
+    description: "Glowing fluid cursor trail with a burst on click.",
+    files: [
+      {
+        path: "registry/cursors/glow-cursor/glow-cursor.tsx",
+        type: "registry:component",
+        target: "components/cursors/glow-cursor/glow-cursor.tsx",
+      },
+      {
+        path: "registry/cursors/glow-cursor/glow-cursor.css",
+        type: "registry:file",
+        target: "components/cursors/glow-cursor/glow-cursor.css",
+      },
+    ],
+  },
 ]
 
 for (const item of cursorRegistryItems) {
