@@ -655,10 +655,7 @@ export function AdminAccessPanel() {
           totalCount={table.totalCount}
           rowOffset={table.rowOffset}
           pageSize={table.pageSize}
-          onPrev={() => table.setPage(Math.max(1, table.page - 1))}
-          onNext={() =>
-            table.setPage(Math.min(table.pageCount, table.page + 1))
-          }
+          onPageChange={table.setPage}
         />
       </section>
     </div>
