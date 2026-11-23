@@ -30,7 +30,7 @@
 <canvas id="canvas"></canvas>
 <script>
 // ─────────────────────────────────────────────
-// Magnetic Field — Dipole field lines with silk glow
+// Magnetic Field - Dipole field lines with silk glow
 // ─────────────────────────────────────────────
 (function () {
   var canvas = document.getElementById('canvas');
@@ -124,7 +124,7 @@
     '  vec2 uv = (gl_FragCoord.xy - 0.5 * u_res.xy) / u_res.y;',
     '  float t = u_time * u_waveSpeed;',
     '',
-    '  // Poles — mouse rotates the dipole axis',
+    '  // Poles - mouse rotates the dipole axis',
     '  float poleAngle = 0.0;',
     '  if (u_mouse.x > 0.0) {',
     '    vec2 mUV = (u_mouse - 0.5 * u_res.xy) / u_res.y;',

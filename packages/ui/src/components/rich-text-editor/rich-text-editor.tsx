@@ -18,7 +18,7 @@ import { useRichTextEditor } from "./use-rich-text-editor"
 const editorSurfaceClassName = cn(
   "rounded-b-md border border-border/70 bg-card shadow-xs",
   "aria-invalid:border-destructive",
-  // Only the real editor root — never [contenteditable] alone (matches
+  // Only the real editor root - never [contenteditable] alone (matches
   // task-item labels with contenteditable="false" and blows min-height up).
   "[&_.ProseMirror]:min-h-[var(--rte-min-height,16rem)]",
   "[&_.ProseMirror]:px-3 [&_.ProseMirror]:py-2",
@@ -32,7 +32,7 @@ const editorSurfaceClassName = cn(
   "[&_.ProseMirror_ul]:my-1.5 [&_.ProseMirror_ul]:list-disc [&_.ProseMirror_ul]:ps-6",
   "[&_.ProseMirror_ol]:my-1.5 [&_.ProseMirror_ol]:list-decimal [&_.ProseMirror_ol]:ps-6",
   "[&_.ProseMirror_li]:my-0 [&_.ProseMirror_li_p]:my-0",
-  // Task list — compact checkbox + text on one line rhythm
+  // Task list - compact checkbox + text on one line rhythm
   "[&_.ProseMirror_ul[data-type=taskList]]:my-1.5 [&_.ProseMirror_ul[data-type=taskList]]:list-none [&_.ProseMirror_ul[data-type=taskList]]:ps-0",
   "[&_.ProseMirror_ul[data-type=taskList]_li]:m-0 [&_.ProseMirror_ul[data-type=taskList]_li]:flex [&_.ProseMirror_ul[data-type=taskList]_li]:items-start [&_.ProseMirror_ul[data-type=taskList]_li]:gap-2 [&_.ProseMirror_ul[data-type=taskList]_li]:py-0.5",
   "[&_.ProseMirror_ul[data-type=taskList]_li_label]:m-0 [&_.ProseMirror_ul[data-type=taskList]_li_label]:flex [&_.ProseMirror_ul[data-type=taskList]_li_label]:h-[1.375rem] [&_.ProseMirror_ul[data-type=taskList]_li_label]:shrink-0 [&_.ProseMirror_ul[data-type=taskList]_li_label]:items-center [&_.ProseMirror_ul[data-type=taskList]_li_label]:p-0",
@@ -71,7 +71,7 @@ export type RichTextEditorProps = {
   variant?: RichTextEditorVariant
   /**
    * When true on `advanced`, the second toolbar row toggles behind Expand.
-   * Default false — advanced always shows both rows.
+   * Default false - advanced always shows both rows.
    */
   toolbarCollapsible?: boolean
   id?: string
@@ -96,7 +96,7 @@ function RichTextEditor({
   toolbarCollapsible = false,
   id,
 }: RichTextEditorProps) {
-  // TipTap's useEditor calls Math.random() — only mount it after hydration.
+  // TipTap's useEditor calls Math.random() - only mount it after hydration.
   const ready = React.useSyncExternalStore(
     () => () => {},
     () => true,
@@ -269,7 +269,7 @@ function RichTextEditorShell({
         "relative flex w-full flex-col rounded-md",
         // Extra bottom padding when the toolbar docks over the keyboard.
         mobileDock && "pb-[calc(5.5rem+env(safe-area-inset-bottom,0px))]",
-        // Invalid state only — no focus ring/border on the editor chrome.
+        // Invalid state only - no focus ring/border on the editor chrome.
         "has-[[aria-invalid=true]]:[&_[data-slot=rich-text-editor-toolbar]]:border-destructive",
         "has-[[aria-invalid=true]]:[&_[data-slot=rich-text-editor-surface]]:border-destructive",
         className

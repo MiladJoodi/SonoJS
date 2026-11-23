@@ -30,7 +30,7 @@
 <canvas id="canvas"></canvas>
 <script>
 // ─────────────────────────────────────────────
-// 46 · Gothic Filigree — Symmetrical ornamental scrollwork shader
+// 46 · Gothic Filigree - Symmetrical ornamental scrollwork shader
 // ─────────────────────────────────────────────
 (function () {
   var canvas = document.getElementById('canvas');
@@ -61,7 +61,7 @@
     '  return mat2(c, -s, s, c);',
     '}',
     '',
-    '// Gothic pointed arch SDF — two overlapping circles',
+    '// Gothic pointed arch SDF - two overlapping circles',
     'float archSDF(vec2 p, float w, float h) {',
     '  float sep = w * 0.38;',
     '  float rad = sqrt(sep * sep + h * h);',
@@ -76,7 +76,7 @@
     '// ── Main filigree composition ──',
     'float filigree(vec2 uv, float t) {',
     '  float d = 1e5;',
-    '  float lw = 0.002;  // base line width — very thin',
+    '  float lw = 0.002;  // base line width - very thin',
     '',
     '  float angle = atan(uv.y, uv.x);',
     '  float r = length(uv);',
@@ -104,7 +104,7 @@
     '  d = min(d, abs(petalD) - lw * 0.6);',
     '',
     '  // ════════════════════════════════════════════',
-    '  // ZONE 2: Inner tracery ring (0.12 — 0.28)',
+    '  // ZONE 2: Inner tracery ring (0.12 - 0.28)',
     '  // ════════════════════════════════════════════',
     '  // Bounding rings',
     '  float r1 = 0.13 + 0.003 * sin(t * 0.5);',
@@ -141,7 +141,7 @@
     '  d = min(d, spokeD);',
     '',
     '  // ════════════════════════════════════════════',
-    '  // ZONE 3: Scrollwork belt (0.28 — 0.46)',
+    '  // ZONE 3: Scrollwork belt (0.28 - 0.46)',
     '  // ════════════════════════════════════════════',
     '  float r3 = 0.46 + 0.005 * sin(t * 0.35 + 2.0);',
     '  d = min(d, abs(r - r3) - lw);',
@@ -157,12 +157,12 @@
     '    // Paired arcs forming a heart/fleur shape (mirror on y)',
     '    vec2 opM = vec2(op.x, abs(op.y));',
     '',
-    '    // Main lobe — arc curving outward',
+    '    // Main lobe - arc curving outward',
     '    float lobe1 = abs(length(opM - vec2(0.015, 0.012)) - 0.022) - lw * 0.6;',
     '    lobe1 = max(lobe1, -opM.x + 0.002);  // clip inner edge',
     '    d = min(d, lobe1);',
     '',
-    '    // Inner counter-lobe — smaller arc curving inward',
+    '    // Inner counter-lobe - smaller arc curving inward',
     '    float lobe2 = abs(length(opM - vec2(-0.008, 0.008)) - 0.015) - lw * 0.5;',
     '    lobe2 = max(lobe2, opM.x + 0.005);',
     '    d = min(d, lobe2);',
@@ -173,7 +173,7 @@
     '    stem = max(stem, -op.x - 0.025);',
     '    d = min(d, stem);',
     '',
-    '    // Tip finial — small circle at outer end',
+    '    // Tip finial - small circle at outer end',
     '    d = min(d, length(op - vec2(0.035, 0.0)) - 0.005);',
     '',
     '    // Base connecting to inner ring',
@@ -191,12 +191,12 @@
     '  d = min(d, abs(cusp) - lw * 0.5);',
     '',
     '  // ════════════════════════════════════════════',
-    '  // ZONE 4: Outer tracery (0.46 — 0.68)',
+    '  // ZONE 4: Outer tracery (0.46 - 0.68)',
     '  // ════════════════════════════════════════════',
     '  float r4 = 0.68;',
     '  d = min(d, abs(r - r4) - lw * 1.2);',
     '',
-    '  // Large gothic arches — 4-fold with half-arch subdivisions',
+    '  // Large gothic arches - 4-fold with half-arch subdivisions',
     '  float seg4 = TAU / 4.0;',
     '  float ra4 = mod(angle + seg4 * 0.5, seg4) - seg4 * 0.5;',
     '  vec2 rp4 = vec2(cos(ra4), sin(ra4)) * r;',

@@ -31,7 +31,7 @@
 <canvas id="canvas"></canvas>
 <script>
 // ─────────────────────────────────────────────
-// Analog Drift — Lissajous figures with phosphor
+// Analog Drift - Lissajous figures with phosphor
 // persistence, drifting through parameter space
 // ─────────────────────────────────────────────
 (function() {
@@ -60,7 +60,7 @@
   // ── Tunable parameters ──
   var DRIFT_SPEED = 0.5;
   var TRAIL_LENGTH = 1.0;
-  // Normalized figure center + scale — exposed so the article hero can
+  // Normalized figure center + scale - exposed so the article hero can
   // push the scope off-center without affecting the standalone shader.
   var CENTER_X = 0.5;
   var CENTER_Y = 0.5;
@@ -71,7 +71,7 @@
   var mouseTarget = { a: 1, delta: 0 };
   var mouseCurrent = { a: 1, delta: 0 };
 
-  // Mouse nudge range — gentle influence, not full override
+  // Mouse nudge range - gentle influence, not full override
   var MOUSE_A_RANGE = 0.8;       // ±0.8 nudge on frequency ratio
   var MOUSE_DELTA_RANGE = 0.6;   // ±0.6 radians nudge on phase
 

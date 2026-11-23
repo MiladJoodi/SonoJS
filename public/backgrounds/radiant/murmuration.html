@@ -113,7 +113,7 @@
     mtCanvas.width = W; mtCanvas.height = H;
     mtCtx.clearRect(0, 0, W, H);
 
-    // 3 layers: far (most faded), mid, near (most visible) — well separated
+    // 3 layers: far (most faded), mid, near (most visible) - well separated
     var layers = [
       { baseY: 0.46, amp: 0.09, freq: 0.0025, octaves: 3, phase: 42.5, color: [192, 162, 132] },
       { baseY: 0.62, amp: 0.08, freq: 0.003, octaves: 3, phase: 197.3, color: [168, 135, 105] },
@@ -455,7 +455,7 @@
 
   // ── Render ──
   function render() {
-    // Trail fade — color depends on palette
+    // Trail fade - color depends on palette
     if (PALETTE > 0.5) {
       // Twilight: warm amber sky with vertical gradient for depth
       var skyGrd = ctx.createLinearGradient(0, 0, 0, H);
@@ -470,7 +470,7 @@
     }
     ctx.fillRect(-1, -1, W + 2, H + 2);
 
-    // Mountain silhouettes — repaint at low alpha each frame to persist through trail fade
+    // Mountain silhouettes - repaint at low alpha each frame to persist through trail fade
     if (PALETTE > 0.5) {
       ctx.save();
       ctx.globalAlpha = 0.15;
@@ -478,7 +478,7 @@
       ctx.restore();
     }
 
-    // Grain texture — adds life to the twilight background
+    // Grain texture - adds life to the twilight background
     if (PALETTE > 0.5 && frameCount % 3 === 0) {
       ctx.save();
       ctx.globalAlpha = 0.03;
@@ -507,7 +507,7 @@
       ctx.fillRect(0, 0, W, H * 0.4);
     }
 
-    // Density glow pass (every 3rd frame using pre-rendered sprite) — dark mode only
+    // Density glow pass (every 3rd frame using pre-rendered sprite) - dark mode only
     if (frameCount % 3 === 0 && PALETTE < 0.5) {
       ctx.globalAlpha = 0.025;
       for (var cell = 0; cell < gridTotal; cell++) {

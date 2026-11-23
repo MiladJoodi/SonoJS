@@ -1,6 +1,6 @@
 import type { AddressSuggestion } from "./address-autocomplete"
 
-/** Demo dataset — replace `onSearch` with your geocoder in production. */
+/** Demo dataset - replace `onSearch` with your geocoder in production. */
 export const MOCK_ADDRESSES: AddressSuggestion[] = [
   {
     id: "us-1",

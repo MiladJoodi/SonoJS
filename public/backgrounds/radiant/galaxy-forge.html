@@ -158,9 +158,9 @@ input[type=range]:hover::-moz-range-thumb{filter:drop-shadow(0 0 9px rgba(200,22
 <div id="about" hidden>
   <div class="panel">
     <h2>GALAXY FORGE</h2>
-    <p>A living spiral galaxy computed entirely on your GPU. Up to four hundred thousand stars each ride their own tilted elliptical orbit; the arms are density waves — standing patterns the stars drift through as the disk turns, just as in real galaxies.</p>
+    <p>A living spiral galaxy computed entirely on your GPU. Up to four hundred thousand stars each ride their own tilted elliptical orbit; the arms are density waves - standing patterns the stars drift through as the disk turns, just as in real galaxies.</p>
     <p class="keys">drag&nbsp;·&nbsp;orbit&ensp;&ensp;scroll&nbsp;·&nbsp;dolly&ensp;&ensp;F&nbsp;·&nbsp;hud&ensp;&ensp;G&nbsp;·&nbsp;forge&ensp;&ensp;C&nbsp;·&nbsp;capture&ensp;&ensp;D&nbsp;·&nbsp;cinema</p>
-    <p class="credit">Built by Claude Fable 5 — one self-contained file. No libraries, no network, only light.</p>
+    <p class="credit">Built by Claude Fable 5 - one self-contained file. No libraries, no network, only light.</p>
     <button class="act" id="bClose">Close</button>
   </div>
 </div>
@@ -174,7 +174,7 @@ input[type=range]:hover::-moz-range-thumb{filter:drop-shadow(0 0 9px rgba(200,22
 'use strict';
 var $=function(s){return document.querySelector(s)};
 function fail(msg){var e=$('#err');e.hidden=false;e.textContent=msg;}
-try{ boot(); }catch(ex){ fail('GALAXY FORGE could not ignite — '+(ex&&ex.message?ex.message:ex)); if(window.console)console.error(ex); }
+try{ boot(); }catch(ex){ fail('GALAXY FORGE could not ignite - '+(ex&&ex.message?ex.message:ex)); if(window.console)console.error(ex); }
 
 function boot(){
 /* ---------- utils ---------- */
@@ -199,7 +199,7 @@ var canvas=$('#gl');
 var gl=canvas.getContext('webgl2',{alpha:false,antialias:false,depth:false,stencil:false,powerPreference:'high-performance'})
       ||canvas.getContext('webgl',{alpha:false,antialias:false,depth:false,stencil:false,powerPreference:'high-performance'});
 if(!gl)throw new Error('WebGL is not available on this device');
-canvas.addEventListener('webglcontextlost',function(e){e.preventDefault();fail('GPU CONTEXT LOST — RELOAD TO REFORGE');},false);
+canvas.addEventListener('webglcontextlost',function(e){e.preventDefault();fail('GPU CONTEXT LOST - RELOAD TO REFORGE');},false);
 
 function makeProg(vs,fs){
   function compile(type,src){
@@ -261,7 +261,7 @@ function resizeRT(rt,w,h){
 }
 function freeRT(rt){gl.deleteFramebuffer(rt.fb);gl.deleteTexture(rt.tex);}
 
-/* ---------- shaders (GLSL 100 — runs on WebGL1 and WebGL2) ---------- */
+/* ---------- shaders (GLSL 100 - runs on WebGL1 and WebGL2) ---------- */
 var VS_STAR=[
 'precision highp float;',
 'attribute vec4 d0;','attribute vec4 d1;','attribute float pp;',
@@ -675,7 +675,7 @@ function renderPipeline(rts,outFB,w,h,count,gn){
   gl.clearColor(0,0,0,1);gl.clear(gl.COLOR_BUFFER_BIT);
   gl.enable(gl.BLEND);gl.blendFunc(gl.ONE,gl.ONE);
 
-  /* 1 — background starfield + field galaxies */
+  /* 1 - background starfield + field galaxies */
   gl.useProgram(pBg.p);
   uM4(pBg,'uVP',vp);u2f(pBg,'uOff',OFFX,OFFY);
   u1f(pBg,'uPt',pt);u1f(pBg,'uTime',simT);u1f(pBg,'uFade',bgFade);
@@ -684,7 +684,7 @@ function renderPipeline(rts,outFB,w,h,count,gn){
   setAttribs([[pBg.a.p0,bB0,4],[pBg.a.p1,bB1,4]]);
   gl.drawArrays(gl.POINTS,0,B.n);
 
-  /* 2 — core glow: in-plane sheen then camera-facing halo */
+  /* 2 - core glow: in-plane sheen then camera-facing halo */
   gl.useProgram(pGlow.p);
   uM4(pGlow,'uVP',vp);u2f(pGlow,'uOff',OFFX,OFFY);
   setAttribs([[pGlow.a.q,bGlow,2]]);
@@ -699,25 +699,25 @@ function renderPipeline(rts,outFB,w,h,count,gn){
   u1f(pGlow,'uSize',cur.core*10*2.4);u1f(pGlow,'uInt',0.85*coreOn);
   gl.drawArrays(gl.TRIANGLE_STRIP,0,4);
 
-  /* 3 — main star pass: one draw call, position computed in-shader */
+  /* 3 - main star pass: one draw call, position computed in-shader */
   gl.useProgram(pStar.p);
   uM4(pStar,'uVP',vp);u2f(pStar,'uOff',OFFX,OFFY);
   starUniforms(pStar,simT,pt*0.6,gn*1.5,0,0);
   setAttribs([[pStar.a.d0,bS0,4],[pStar.a.d1,bS1,4],[pStar.a.pp,bSP,1]]);
   gl.drawArrays(gl.POINTS,0,count);
 
-  /* 4 — dust lanes: dark occluders along inner arm edges */
+  /* 4 - dust lanes: dark occluders along inner arm edges */
   starUniforms(pStar,simT,pt,gn,1,0.55);
   gl.blendFunc(gl.ZERO,gl.ONE_MINUS_SRC_ALPHA);
   setAttribs([[pStar.a.d0,bD0,4],[pStar.a.d1,bD1,4],[pStar.a.pp,bDP,1]]);
   gl.drawArrays(gl.POINTS,0,DUST_N);
 
-  /* 5 — faint warm dust emission */
+  /* 5 - faint warm dust emission */
   gl.blendFunc(gl.ONE,gl.ONE);
   starUniforms(pStar,simT,pt,gn,2,0.55);
   gl.drawArrays(gl.POINTS,0,DUST_N);
 
-  /* 6 — bloom: bright pass at quarter res, separable gaussian x2 */
+  /* 6 - bloom: bright pass at quarter res, separable gaussian x2 */
   gl.disable(gl.BLEND);
   var bw=Math.max(1,w>>2),bh=Math.max(1,h>>2);
   gl.bindFramebuffer(gl.FRAMEBUFFER,rts.a.fb);gl.viewport(0,0,bw,bh);
@@ -734,7 +734,7 @@ function renderPipeline(rts,outFB,w,h,count,gn){
   gl.bindTexture(gl.TEXTURE_2D,rts.b.tex);u2f(pBlur,'uDir',0,1/bh);
   gl.drawArrays(gl.TRIANGLES,0,3);
 
-  /* 7 — composite: tonemap + vignette + void lift + dither */
+  /* 7 - composite: tonemap + vignette + void lift + dither */
   gl.bindFramebuffer(gl.FRAMEBUFFER,outFB);
   gl.viewport(0,0,w,h);
   gl.useProgram(pFinal.p);

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="description" content="Moth &amp; Lamp — a living nocturne. Place a lamp in the dark and watch a hundred small devotions spiral toward it. Real transverse-orientation phototaxis, no scripted circles.">
+<meta name="description" content="Moth &amp; Lamp - a living nocturne. Place a lamp in the dark and watch a hundred small devotions spiral toward it. Real transverse-orientation phototaxis, no scripted circles.">
 <title>Moth &amp; Lamp</title>
 <style>
   html.embed #title,
@@ -131,7 +131,7 @@
 
 <div id="title" aria-hidden="true">
   <h1>Moth &amp; Lamp</h1>
-  <p>a living nocturne — place a lamp in the dark,<br>and watch a hundred small devotions spiral toward it</p>
+  <p>a living nocturne - place a lamp in the dark,<br>and watch a hundred small devotions spiral toward it</p>
 </div>
 
 <div id="caption" aria-live="polite"></div>
@@ -171,7 +171,7 @@
 'use strict';
 
 /* =========================================================================
-   MOTH & LAMP — a living nocturne
+   MOTH & LAMP - a living nocturne
    Real transverse-orientation phototaxis. Single file, zero dependencies.
    ========================================================================= */
 
@@ -525,7 +525,7 @@ function capOrbit(){ /* hook kept for clarity */ }
 function sensedLit(x,y){ senseAt(x,y,-1); return clamp(SENSE.total*2.2,0,1); }
 
 /* =========================================================================
-   RENDERING — layered passes, heavy caching
+   RENDERING - layered passes, heavy caching
    ========================================================================= */
 var bgCv=null, treeCv=null, midCv=null, foreCv=null, vigCv=null, glowCv=null;
 var grainCvs=[];
@@ -747,7 +747,7 @@ function drawLight(t){
       ctx.beginPath(); ctx.arc(0,0,cw*1.5,0,TAU); ctx.fill();
       ctx.restore();
 
-      /* dust motes — stateless curl-drift from time */
+      /* dust motes - stateless curl-drift from time */
       var nm=Math.round(120+90*I);
       ctx.fillStyle='rgba('+rgb+',1)';
       for(var m=0;m<nm;m++){
@@ -1042,7 +1042,7 @@ function render(al,t){
 }
 
 /* =========================================================================
-   AUDIO — generative nocturne, no samples
+   AUDIO - generative nocturne, no samples
    ========================================================================= */
 var AU={ctx:null, on:true, started:false, master:null, drones:[], noiseBuf:null,
         flG:null, flPan:null, nextChirp:0};
@@ -1062,7 +1062,7 @@ function initAudio(){
     AU.master.connect(comp);
     AU.master.gain.linearRampToValueAtTime(AU.on?0.75:0, a.currentTime+3);
 
-    /* breathing drone pad — D minor */
+    /* breathing drone pad - D minor */
     var freqs=[73.42,110,146.83,174.61];
     for(var i=0;i<freqs.length;i++){
       var g=a.createGain(); g.gain.value=0.0001; g.connect(AU.master);
@@ -1198,7 +1198,7 @@ function updateAudio(dt){
 }
 
 /* =========================================================================
-   CAPTIONS — one-line whispers, never repeated
+   CAPTIONS - one-line whispers, never repeated
    ========================================================================= */
 var capEl=document.getElementById('caption');
 var capUsed={}, capBusy=false, capQueue=[];

@@ -30,7 +30,7 @@
 <canvas id="canvas"></canvas>
 <script>
 // ─────────────────────────────────────────────
-// Strobe Geometry — Sharp geometric shapes flash into existence,
+// Strobe Geometry - Sharp geometric shapes flash into existence,
 // leaving glowing afterimage silhouettes that fade cyan → magenta → dark
 // ─────────────────────────────────────────────
 (function () {
@@ -223,7 +223,7 @@
     '  // Musical timing: strong beat (even idx), weak beat (odd idx)',
     '  bool isStrong = (mod(fi, 2.0) < 0.5);',
     '',
-    '  // Hash-based position, rotation, type — changes each cycle',
+    '  // Hash-based position, rotation, type - changes each cycle',
     '  float cycleLen = float(MAX_SHAPES) * flashInterval;',
     '  float cycle = floor(u_time / cycleLen);',
     '  float seed = fi * 13.37 + cycle * 97.31;',
@@ -236,7 +236,7 @@
     '  vec2 basePos = hash2(seed + 1.0) * 2.0 - 1.0;',
     '  s.center = basePos * vec2(0.65, 0.50);',
     '',
-    '  // Rotation: dramatic angles — quantized to bold increments + randomness',
+    '  // Rotation: dramatic angles - quantized to bold increments + randomness',
     '  float baseAngle = floor(hash(seed + 2.0) * 8.0) * (PI / 4.0);',
     '  float angleJitter = (hash(seed + 5.0) - 0.5) * (PI / 6.0);',
     '  s.rotation = baseAngle + angleJitter;',
@@ -302,7 +302,7 @@
     '      float fi = float(i);',
     '      bool isStrong = (mod(fi, 2.0) < 0.5);',
     '      if (ci == 1) {',
-    '        // Previous cycle shapes — recalculate with previous cycle hash',
+    '        // Previous cycle shapes - recalculate with previous cycle hash',
     '        float prevCycle = floor(t / cycleLen) - 1.0;',
     '        float seed = fi * 13.37 + prevCycle * 97.31;',
     '        shape.center = (hash2(seed + 1.0) * 2.0 - 1.0) * vec2(0.65, 0.50);',
@@ -373,7 +373,7 @@
     '      vec3 warmBloom = mix(bloomColor, bloomColor + vec3(0.15, 0.1, 0.05), bloom * isFlashing);',
     '      col += warmBloom * bloom * bloomIntensity * u_glowIntensity * 0.4;',
     '',
-    '      // Extra hot bloom during flash — warm-tinted white core',
+    '      // Extra hot bloom during flash - warm-tinted white core',
     '      if (age < 0.25) {',
     '        float hotBloomWidth = isStrong ? 0.10 : 0.06;',
     '        float hotBloom = exp(-abs(d) / hotBloomWidth) * isFlashing;',

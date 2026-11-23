@@ -7,6 +7,8 @@ import { cn } from "@/lib/utils"
 
 const CYCLE_MS = 48 * 60 * 60 * 1000
 const STORAGE_KEY = "sonojs-pro-promo-cycle-start"
+/** Stable SSR + first client paint - real remaining time is applied after mount. */
+const SSR_LABEL = "48:00:00"
 
 function pad2(n: number) {
   return String(n).padStart(2, "0")
@@ -20,8 +22,8 @@ function formatRemaining(ms: number) {
   return `${pad2(h)}:${pad2(m)}:${pad2(s)}`
 }
 
+/** Client-only: reads/writes localStorage. Never call during render/SSR. */
 function readRemainingMs(now = Date.now()) {
-  if (typeof window === "undefined") return CYCLE_MS
   let start = Number(window.localStorage.getItem(STORAGE_KEY))
   if (!Number.isFinite(start) || start <= 0 || now - start >= CYCLE_MS) {
     start = now
@@ -32,7 +34,7 @@ function readRemainingMs(now = Date.now()) {
 
 /** Thin site-wide Pro promo strip with a rolling 48h countdown. */
 export function ProPromoBanner({ className }: { className?: string }) {
-  const [label, setLabel] = React.useState("48:00:00")
+  const [label, setLabel] = React.useState(SSR_LABEL)
 
   React.useEffect(() => {
     const tick = () => setLabel(formatRemaining(readRemainingMs()))
@@ -69,6 +71,7 @@ export function ProPromoBanner({ className }: { className?: string }) {
           className="shrink-0 font-mono text-[13px] font-semibold tabular-nums tracking-tight sm:text-sm"
           aria-live="polite"
           aria-atomic="true"
+          suppressHydrationWarning
         >
           {label}
         </span>

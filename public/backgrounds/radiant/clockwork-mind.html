@@ -30,7 +30,7 @@
 <canvas id="canvas"></canvas>
 <script>
 // ─────────────────────────────────────────────
-// 32 · Clockwork Mind — Interlocking precision gears
+// 32 · Clockwork Mind - Interlocking precision gears
 // ─────────────────────────────────────────────
 (function() {
   var canvas = document.getElementById('canvas');
@@ -84,7 +84,7 @@
   var gearDefs = [];
   var scale;
 
-  // Tooth profile constants — consistent across all gears for proper meshing
+  // Tooth profile constants - consistent across all gears for proper meshing
   // Each tooth occupies one toothAngle = 2*PI/teeth
   // Tooth land (raised part) is 40% of the pitch, gap is 60%
   // This gives clearance for meshing teeth to fit into gaps
@@ -209,7 +209,7 @@
       //   nearestToothWorld = parent.phase + nearestK * parentPitch
       //
       // But actually, for the meshing to work continuously, we don't need the
-      // nearest tooth — we need the phase relationship. The fundamental constraint is:
+      // nearest tooth - we need the phase relationship. The fundamental constraint is:
       //
       //   parent.direction * parent.speed * t + parent.phase   (parent rotation)
       //   child.direction  * child.speed  * t + child.phase    (child rotation)
@@ -245,7 +245,7 @@
       // For meshing, child's tooth phase at contact must be offset by half a pitch (valley):
       //   childToothPhaseAtContact = parentToothPhaseAtContact * (childTeeth / parent.teeth) + childPitch / 2
       //
-      // Wait — simpler approach. The fundamental gear meshing constraint:
+      // Wait - simpler approach. The fundamental gear meshing constraint:
       //   parent_rotation * parent.teeth + child_rotation * childTeeth = constant
       //
       // This is because for every tooth that passes the contact point on the parent,

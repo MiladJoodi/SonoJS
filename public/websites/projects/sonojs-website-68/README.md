@@ -17,7 +17,7 @@ Premium pet pencil-portrait studio with create flow, gallery compare, frames, an
 
 ## Live / package
 
-- Demo: https://sonojs-website-68.winbeta-info.workers.dev/
+- Demo: https://sonojs-website-68.sonojs3.workers.dev/
 - Zip: `products/webiste/sonojs-website-68/sonojs-website-68.zip`
 
 ## Access

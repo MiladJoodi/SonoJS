@@ -11,7 +11,8 @@ alwaysApply: true
 | Surface | Path | Role |
 |---|---|---|
 | Edit here | `packages/ui/src/components/…` | Docs preview + install payload |
-| Blocks / charts / promo | `registry/blocks/`, `registry/charts/`, `registry/promo/` | Still authored under `registry/` |
+| Blocks / charts | `registry/blocks/`, `registry/charts/` | Still authored under `registry/` |
+| Popups | SonoJS-pro zip + CF gallery | Not in public `public/r` / CLI; no `registry/popups` here |
 | Built output | `public/r/<item>.json` | What `add` installs - never hand-edit |
 
 Do **not** keep a second hand-edited copy under `registry/ui/`.

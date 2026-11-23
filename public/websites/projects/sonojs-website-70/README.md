@@ -17,7 +17,7 @@ Neo-brutalist AI builder learning platform with roadmaps, prompts, workflows, an
 
 ## Live / package
 
-- Demo: https://sonojs-website-70.winbeta-info.workers.dev/
+- Demo: https://sonojs-website-70.sonojs3.workers.dev/
 - Zip: `products/webiste/sonojs-website-70/sonojs-website-70.zip`
 
 ## Access

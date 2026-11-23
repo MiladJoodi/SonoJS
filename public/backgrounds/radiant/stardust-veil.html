@@ -30,7 +30,7 @@
 <canvas id="canvas"></canvas>
 <script>
 // ─────────────────────────────────────────────
-// Stardust Veil — Dense shimmering cosmic stardust curtain
+// Stardust Veil - Dense shimmering cosmic stardust curtain
 // Multi-layer parallax particles, aurora ribbons, celestial wind
 // ─────────────────────────────────────────────
 (function () {
@@ -87,7 +87,7 @@
     '  return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);',
     '}',
     '',
-    '// FBM — configurable octaves (up to 7)',
+    '// FBM - configurable octaves (up to 7)',
     'float fbm(vec2 p, int octaves) {',
     '  float val = 0.0;',
     '  float amp = 0.5;',
@@ -375,7 +375,7 @@
     'void main() {',
     '  vec2 uv = (gl_FragCoord.xy - u_res * 0.5) / min(u_res.x, u_res.y);',
     '',
-    '  // ── Mouse: gravitational lensing — warp UV near cursor ──',
+    '  // ── Mouse: gravitational lensing - warp UV near cursor ──',
     '  if (u_mouse.x > 0.0) {',
     '    vec2 mUV = (u_mouse - u_res * 0.5) / min(u_res.x, u_res.y);',
     '    vec2 delta = uv - mUV;',
@@ -439,7 +439,7 @@
     '  float shimmer = noise(uv * 12.0 + t * 0.5) * noise(uv * 8.0 - t * 0.3);',
     '  col += vec3(0.75, 0.65, 0.85) * shimmer * 0.015;',
     '',
-    '  // ── Vignette — subtle darkening at edges ──',
+    '  // ── Vignette - subtle darkening at edges ──',
     '  float dist = length(uv);',
     '  float vignette = 1.0 - smoothstep(0.5, 1.4, dist);',
     '  col *= 0.7 + vignette * 0.3;',
@@ -494,7 +494,7 @@
   var driftSpeedVal = 0.4;
   var starDensityVal = 1.0;
 
-  // Render at 1x — soft cosmic dust doesn't need retina resolution
+  // Render at 1x - soft cosmic dust doesn't need retina resolution
   var dpr = 1.0;
   var mouseX = -1.0, mouseY = -1.0;
   canvas.addEventListener('mousemove', function (e) {

@@ -17,7 +17,7 @@ Fiction content systems studio for experience brands in San Diego - shoot, edit,
 
 ## Live / package
 
-- Demo: https://sonojs-website-83.winbeta-info.workers.dev/
+- Demo: https://sonojs-website-83.sonojs3.workers.dev/
 - Zip: `products/webiste/sonojs-website-83/sonojs-website-83.zip`
 
 ## Access

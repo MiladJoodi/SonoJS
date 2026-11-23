@@ -93,7 +93,7 @@ export function maskCardNumber(digits: string, brand?: CardBrand): string {
   if (d.length <= 4) return formatCardNumber(d, brand)
   const maskedDigits = `${"*".repeat(Math.max(0, d.length - 4))}${d.slice(-4)}`
   const b = brand ?? detectCardBrand(d)
-  // formatCardNumber strips non-digits — group the masked string manually.
+  // formatCardNumber strips non-digits - group the masked string manually.
   if (b === "amex") {
     return [maskedDigits.slice(0, 4), maskedDigits.slice(4, 10), maskedDigits.slice(10, 15)]
       .filter(Boolean)

@@ -17,7 +17,7 @@ Fiction manga and manhwa reading hub - catalog, genres, chapter reader, bookmark
 
 ## Live / package
 
-- Demo: https://sonojs-website-78.winbeta-info.workers.dev/
+- Demo: https://sonojs-website-78.sonojs3.workers.dev/
 - Zip: `products/webiste/sonojs-website-78/sonojs-website-78.zip`
 
 ## Access

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>#063 Fireflies — creative-lab</title>
+<title>#063 Fireflies - creative-lab</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{background:#000;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#d6eaaa}
@@ -43,7 +43,7 @@ button.active{background:rgba(110,190,55,0.28);border-color:rgba(110,190,55,0.55
   <h1>063 · Fireflies</h1>
   <div class="info">Kuramoto phase-coupled oscillators</div>
   <div class="statrow">Count     <span id="v-n">200</span></div>
-  <div class="statrow">FPS       <span id="v-fps">—</span></div>
+  <div class="statrow">FPS       <span id="v-fps">-</span></div>
   <div class="statrow">Sync R    <span id="v-r">0.000</span></div>
   <div id="sync-wrap"><div id="sync-bar"></div></div>
   <div class="sep"></div>
@@ -275,7 +275,7 @@ function step(dt) {
     } else if (thetas[i] < 0) {
       thetas[i] += TWO_PI;
     }
-    // Unused reference to prev — only to signal intent
+    // Unused reference to prev - only to signal intent
     void prev;
 
     // Decay flash: ~0.3 s half-life
@@ -293,7 +293,7 @@ function draw() {
   if (bgCanvas) ctx.drawImage(bgCanvas, 0, 0);
   else { ctx.fillStyle = '#000a01'; ctx.fillRect(0, 0, W, H); }
 
-  // Fireflies — additive blending creates natural glow overlap
+  // Fireflies - additive blending creates natural glow overlap
   ctx.globalCompositeOperation = 'lighter';
 
   for (let i = 0; i < N; i++) {

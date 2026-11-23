@@ -17,7 +17,7 @@ Fiction esports hub - live streams, tournaments, team, blog, and merch shop with
 
 ## Live / package
 
-- Demo: https://sonojs-website-77.winbeta-info.workers.dev/
+- Demo: https://sonojs-website-77.sonojs3.workers.dev/
 - Zip: `products/webiste/sonojs-website-77/sonojs-website-77.zip`
 
 ## Access

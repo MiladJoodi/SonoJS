@@ -305,10 +305,10 @@
     NETWORK GRAPH, AND THE BOARD PERPETUALLY RE-ETCHES ITSELF.</div>
     <div class="rows">
       <span class="k">CLICK</span><span class="v">power surge from the nearest node</span>
-      <span class="k">HOLD + RELEASE</span><span class="v">charge a mega-surge — floods the whole network</span>
+      <span class="k">HOLD + RELEASE</span><span class="v">charge a mega-surge - floods the whole network</span>
       <span class="k">HOVER</span><span class="v">rest on a trace to light up its whole net, EDA-style</span>
       <span class="k">MOVE</span><span class="v">parallax through three depth layers</span>
-      <span class="k">1 / 2 / 3</span><span class="v">palette — Tokyo · Vapor · Reactor</span>
+      <span class="k">1 / 2 / 3</span><span class="v">palette - Tokyo · Vapor · Reactor</span>
       <span class="k">A</span><span class="v">auto-drift installation mode</span>
       <span class="k">S</span><span class="v">save a PNG of the canvas</span>
     </div>
@@ -321,7 +321,7 @@
 (function(){
 
 /* ============================================================
-   NEON CIRCUIT — generative PCB dreamscape
+   NEON CIRCUIT - generative PCB dreamscape
    graph-routed light pulses · time-sliced growth · 3 parallax layers
    ============================================================ */
 
@@ -422,7 +422,7 @@ function rebuildSprites(){
 }
 
 /* ============================================================
-   BOARD — grid-routed graph of traces (per layer)
+   BOARD - grid-routed graph of traces (per layer)
    ============================================================ */
 var DIRS = [[1,0],[1,1],[0,1],[-1,1],[-1,0],[-1,-1],[0,-1],[1,-1]];
 
@@ -1431,13 +1431,13 @@ function setSpeed(v, fromAuto){
   if (fromAuto) rSpeed.value = speedMul;
 }
 function setPalette(i){
-  if (i !== palIdx) toast('PALETTE — ' + PALETTES[i].name);
+  if (i !== palIdx) toast('PALETTE - ' + PALETTES[i].name);
   palIdx = i; palTarget = PALETTES[i]; palMoving = 0;
   var sws = swWrap.children;
   for (var s=0; s<sws.length; s++) sws[s].classList.toggle('on', s===i);
 }
 function setAuto(v){
-  if (v !== autoMode) toast(v ? 'AUTO DRIFT — ON' : 'AUTO DRIFT — OFF');
+  if (v !== autoMode) toast(v ? 'AUTO DRIFT - ON' : 'AUTO DRIFT - OFF');
   autoMode = v;
   autoBtn.classList.toggle('on', v);
   if (v){ nextPalShift = now + 26000; nextAutoSurge = now + 6000; }
@@ -1477,7 +1477,7 @@ window.addEventListener('keydown', function(ev){
       a.download = 'neon-circuit.png';
       a.href = main.toDataURL('image/png');
       a.click();
-      toast('FRAME SAVED — NEON-CIRCUIT.PNG');
+      toast('FRAME SAVED - NEON-CIRCUIT.PNG');
     } catch(e){}
   }
   else if (k === 'a') setAuto(!autoMode);

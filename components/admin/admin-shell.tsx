@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils"
 
 const NAV = [
   { href: "/admin", label: "Overview", exact: true },
+  { href: "/admin/access", label: "Access" },
   { href: "/admin/users", label: "Users" },
   { href: "/admin/downloads", label: "Downloads" },
   { href: "/admin/subscriptions", label: "Subscriptions" },

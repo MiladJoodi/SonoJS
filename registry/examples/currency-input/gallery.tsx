@@ -20,11 +20,11 @@ export function CurrencyInputGallery() {
             List price
           </h3>
           <p className="text-xs text-muted-foreground">
-            Stored as a number — shown with locale formatting.
+            Stored as a number - shown with locale formatting.
           </p>
         </div>
         <Badge variant="secondary" className="ms-auto shrink-0 font-normal">
-          {value == null ? "—" : `$${value.toFixed(2)}`}
+          {value == null ? "-" : `$${value.toFixed(2)}`}
         </Badge>
       </div>
       <CurrencyInput

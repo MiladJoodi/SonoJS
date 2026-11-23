@@ -141,7 +141,7 @@
     '  vec2 origin = u_scale > 0.0 ? u_center : vec2(0.5);',
     '  float sc = u_scale > 0.0 ? u_scale : 1.0;',
     '  vec2 p = (uv - origin) * vec2(aspect, 1.0) / sc;',
-    '  // Mouse tilts viewing angle — shifts interference colors',
+    '  // Mouse tilts viewing angle - shifts interference colors',
     '  if (u_mouse.x >= 0.0) {',
     '    vec2 tilt = (u_mouse - 0.5) * 0.4;',
     '    p += tilt;',
@@ -369,7 +369,7 @@
     gl.uniform1f(uTime, prefersReduced ? 0.0 : now * 0.001);
     gl.uniform1f(uFilmThickness, filmThicknessVal);
     gl.uniform1f(uFlowSpeed, flowSpeedVal);
-    // Mouse tilts the view angle (changes iridescence colors) — don't shift center
+    // Mouse tilts the view angle (changes iridescence colors) - don't shift center
     gl.uniform2f(uCenter, centerX, centerY);
     gl.uniform1f(uScale, scaleVal);
     gl.uniform2f(uMouse, mouseXVal, mouseYVal);

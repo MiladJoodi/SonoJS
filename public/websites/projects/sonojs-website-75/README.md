@@ -17,7 +17,7 @@ Premium DTC beauty ecommerce - makeup, skincare, tools, cart, checkout, and gues
 
 ## Live / package
 
-- Demo: https://sonojs-website-75.winbeta-info.workers.dev/
+- Demo: https://sonojs-website-75.sonojs3.workers.dev/
 - Zip: `products/webiste/sonojs-website-75/sonojs-website-75.zip`
 
 ## Access

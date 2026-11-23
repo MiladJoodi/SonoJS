@@ -17,7 +17,7 @@ Calm Portland neighborhood dental clinic with warm canvas and teal accent. Brand
 
 ## Live / package
 
-- Demo: https://sonojs-website-88.winbeta-info.workers.dev/
+- Demo: https://sonojs-website-88.sonojs3.workers.dev/
 - Zip: `products/webiste/sonojs-website-88/sonojs-website-88.zip`
 
 ## Access

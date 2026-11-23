@@ -376,7 +376,7 @@
 
     // For ghost trails, progressively shorten from the tail
     if (ghostFade !== undefined && ghostFade < 1.0) {
-      var visibleFraction = ghostFade; // linear shortening — no sudden snap
+      var visibleFraction = ghostFade; // linear shortening - no sudden snap
       startIdx = Math.floor(len * (1 - visibleFraction));
       if (startIdx >= len - 1) return;
     }
@@ -390,7 +390,7 @@
 
       // Position fade: quadratic curve, older points toward the tail are dimmer
       var normalizedPos = (i - startIdx) / visibleLen;
-      positionFade = Math.sqrt(normalizedPos); // square root — keeps tail visible longer
+      positionFade = Math.sqrt(normalizedPos); // square root - keeps tail visible longer
 
       e = pt.energy;
       alpha = (0.35 + e * 0.65) * positionFade * globalAlpha;

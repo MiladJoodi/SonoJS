@@ -30,7 +30,7 @@
 <canvas id="canvas"></canvas>
 <script>
 // ─────────────────────────────────────────────
-// Event Horizon — Original Schwarzschild black hole
+// Event Horizon - Original Schwarzschild black hole
 // Verlet geodesic integration, Novikov-Thorne disk, Doppler beaming
 // ─────────────────────────────────────────────
 (function () {
@@ -67,7 +67,7 @@ const float DISK_IN = 2.2;   // Inner glow edge (infalling material)
 const float DISK_OUT = 14.0;  // Outer disk edge
 
 // ──────────────────────────────────────────
-// Hash — PCG-inspired, no sin()
+// Hash - PCG-inspired, no sin()
 // ──────────────────────────────────────────
 float hash(vec2 p) {
     vec3 p3 = fract(vec3(p.xyx) * 0.1031);
@@ -110,7 +110,7 @@ float fbmLite(vec2 p) {
 }
 
 // ──────────────────────────────────────────
-// Star field — cell-based with spherical UV
+// Star field - cell-based with spherical UV
 // ──────────────────────────────────────────
 vec3 starField(vec3 rd) {
     float u = atan(rd.z, rd.x) / TAU + 0.5;
@@ -135,7 +135,7 @@ vec3 starField(vec3 rd) {
         float b = pow(r.x, 18.0) * exp(-d * d * 1000.0);
         col += vec3(0.85, 0.88, 1.0) * b * 2.0;
     }
-    // Subtle nebula (lite noise — pow(3) crushes detail anyway)
+    // Subtle nebula (lite noise - pow(3) crushes detail anyway)
     float n = fbmLite(vec2(u, v) * 3.0) * fbmLite(vec2(u, v) * 5.5 + 10.0);
     col += vec3(0.10, 0.04, 0.14) * pow(n, 3.0);
 
@@ -186,17 +186,17 @@ vec4 shadeDisk(vec3 hit, vec3 vel, float time) {
     float ca = cos(rotAngle), sa = sin(rotAngle);
     vec2 rotXZ = vec2(hit.x * ca - hit.z * sa, hit.x * sa + hit.z * ca);
 
-    // FBM turbulence — the primary texture, gives cloudy organic feel
+    // FBM turbulence - the primary texture, gives cloudy organic feel
     // Sampled at Keplerian-rotated coords for orbital flow
     float turb = fbm(rotXZ * 1.2 + vec2(lr * 3.0));
     turb = 0.25 + 0.75 * turb;
 
-    // Time-evolving detail layer — single noise call (subtle contribution)
+    // Time-evolving detail layer - single noise call (subtle contribution)
     float timeShift = time * 0.15;
     float detail = gNoise(rotXZ * 3.5 + vec2(100.0 + timeShift, timeShift * 0.7));
     turb *= 0.7 + 0.3 * detail;
 
-    // Concentric ring modulation — visible structure within the clouds
+    // Concentric ring modulation - visible structure within the clouds
     float ringPhase1 = sin(r * 10.0 + rotAngle * r * 0.3) * 0.5 + 0.5;
     float ringPhase2 = sin(r * 20.0 - rotAngle * r * 0.15) * 0.5 + 0.5;
     float rings = ringPhase1 * 0.55 + ringPhase2 * 0.45;
@@ -216,7 +216,7 @@ vec4 shadeDisk(vec3 hit, vec3 vel, float time) {
 
     // Edge fades
     float innerFade = smoothstep(DISK_IN * 0.7, DISK_IN * 1.2, r);
-    // ISCO fade — emission ramps up beyond ISCO
+    // ISCO fade - emission ramps up beyond ISCO
     float iscoFade = 0.35 + 0.65 * smoothstep(ISCO * 0.85, ISCO * 1.2, r);
     float outerFade = 1.0 - smoothstep(DISK_OUT * 0.55, DISK_OUT, r);
     I *= innerFade * iscoFade * outerFade;
@@ -262,7 +262,7 @@ vec4 shadeDisk(vec3 hit, vec3 vel, float time) {
 }
 
 // ──────────────────────────────────────────
-// Main — Schwarzschild geodesic ray tracer
+// Main - Schwarzschild geodesic ray tracer
 // Uses velocity-Verlet integration of:
 //   d²x/dλ² = -1.5 · RS · L² / r⁵ · x
 // where L² = |x × v|² is the conserved angular momentum
@@ -399,7 +399,7 @@ void main() {
     float chromo = u_chromatic;
 
     // Soft wide chromatic bands: red/orange outside, blue inside
-    // No center "white ring" — purely spectral separation
+    // No center "white ring" - purely spectral separation
     float baseChroma = 0.1 + 0.5 * chromo;
     float spread = 0.08 + 0.18 * chromo;
     float falloff = 20.0 + 15.0 * (1.0 - chromo); // wider/softer bands

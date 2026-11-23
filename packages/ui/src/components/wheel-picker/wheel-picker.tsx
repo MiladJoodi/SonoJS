@@ -21,7 +21,7 @@ function WheelPickerWrapper({
   return (
     <WheelPickerPrimitive.WheelPickerWrapper
       className={cn(
-        // Library CSS sets [data-rwp-wrapper]{width:100%} — force a compact card.
+        // Library CSS sets [data-rwp-wrapper]{width:100%} - force a compact card.
         "!w-44 max-w-full justify-center cursor-pointer rounded-md border border-border/70 bg-card px-1 shadow-soft",
         "*:data-rwp:!flex-none *:data-rwp:w-full",
         "*:data-rwp:first:*:data-rwp-highlight-wrapper:rounded-s-md",

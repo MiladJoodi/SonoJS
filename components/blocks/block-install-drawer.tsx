@@ -266,19 +266,6 @@ export function BlockInstallBody({
 
   return (
     <div className="w-full min-w-0 max-w-full space-y-6 p-4">
-      <div className="min-w-0 max-w-full">
-        <DocsInstallationTabs
-          cliCode={cli}
-          cliHtml={highlighted.cliHtml}
-          alsoNeedsRegistry={registry}
-          alsoNeedsNpm={npm}
-          manualNpmCommand={manualNpm}
-          files={highlighted.files}
-          showAliasNote={showAliasNote}
-          copyTooltip={false}
-        />
-      </div>
-
       {highlighted.usage.length > 0 ? (
         <section className="min-w-0 space-y-3">
           <h3 className="text-sm font-medium text-foreground">Usage</h3>
@@ -294,6 +281,19 @@ export function BlockInstallBody({
           ))}
         </section>
       ) : null}
+
+      <div className="min-w-0 max-w-full">
+        <DocsInstallationTabs
+          cliCode={cli}
+          cliHtml={highlighted.cliHtml}
+          alsoNeedsRegistry={registry}
+          alsoNeedsNpm={npm}
+          manualNpmCommand={manualNpm}
+          files={highlighted.files}
+          showAliasNote={showAliasNote}
+          copyTooltip={false}
+        />
+      </div>
     </div>
   )
 }

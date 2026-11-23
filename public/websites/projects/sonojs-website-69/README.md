@@ -17,7 +17,7 @@ Cultural exchange institute with programs, admissions theater, and student dashb
 
 ## Live / package
 
-- Demo: https://sonojs-website-69.winbeta-info.workers.dev/
+- Demo: https://sonojs-website-69.sonojs3.workers.dev/
 - Zip: `products/webiste/sonojs-website-69/sonojs-website-69.zip`
 
 ## Access

@@ -9,8 +9,8 @@ import { breadcrumbListJsonLd } from "@/lib/seo-jsonld"
 import { cn } from "@/lib/utils"
 
 /**
- * Block docs title row: truncate title, prev/next ready blocks.
- * Matches the charts view header chrome.
+ * Block docs title row: truncate title, prev/next neighbors.
+ * Matches the charts view header chrome. `/popups` uses `PopupsPageHeader`.
  */
 export function BlocksPageHeader({
   title,

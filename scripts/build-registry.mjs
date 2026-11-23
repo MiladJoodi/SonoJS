@@ -135,7 +135,7 @@ function buildItemPayload(item, version, generatedAt) {
       isSourceText &&
       (file.path.startsWith("packages/ui/") ||
         file.path.startsWith("registry/blocks/") ||
-        file.path.startsWith("registry/promo/") ||
+        file.path.startsWith("registry/popups/") ||
         file.path.startsWith("registry/cursors/") ||
         file.path.startsWith("registry/examples/") ||
         file.path.startsWith("registry/hooks/"))
@@ -160,8 +160,7 @@ function buildItemPayload(item, version, generatedAt) {
     return payload
   })
 
-  const access =
-    item.access === "member" || item.access === "pro" ? item.access : "public"
+  const access = resolveItemAccess(item)
 
   return {
     $schema: "https://ui.shadcn.com/schema/registry-item.json",
@@ -180,9 +179,13 @@ function buildItemPayload(item, version, generatedAt) {
   }
 }
 
+function resolveItemAccess(item) {
+  if (item.access === "member" || item.access === "pro") return item.access
+  return "public"
+}
+
 function toIndexEntry(item) {
-  const access =
-    item.access === "member" || item.access === "pro" ? item.access : "public"
+  const access = resolveItemAccess(item)
 
   return {
     name: item.name,

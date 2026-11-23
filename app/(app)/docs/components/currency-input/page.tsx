@@ -32,14 +32,14 @@ const exampleDefs = [
     name: "currency-input-popular",
     title: "Popular currencies",
     description:
-      "Switch `currency` + `locale` — USD, EUR, GBP, IRR, SAR, AED, TRY, JPY, INR, CNY.",
+      "Switch `currency` + `locale` - USD, EUR, GBP, IRR, SAR, AED, TRY, JPY, INR, CNY.",
     requires: ["input-group", "select"],
   },
   {
     name: "currency-input-eur",
     title: "Euro",
     description:
-      '`currency="EUR"` and `locale="de-DE"` — comma decimals from Intl.',
+      '`currency="EUR"` and `locale="de-DE"` - comma decimals from Intl.',
     requires: ["input-group"],
   },
   {
@@ -106,7 +106,7 @@ export default async function CurrencyInputDocsPage() {
             <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
               locale
             </code>{" "}
-            — Intl supplies the symbol and separators. The amount stays LTR for
+            - Intl supplies the symbol and separators. The amount stays LTR for
             caret stability; the addon follows start/end.
           </p>
         }

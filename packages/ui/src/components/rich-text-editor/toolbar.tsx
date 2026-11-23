@@ -98,7 +98,7 @@ const toolbarRowClassName = cn(
 )
 
 const toolbarRadiusClassName = "rounded-md!"
-/** 44px mobile / 32px desktop — WCAG touch + dense desktop. */
+/** 44px mobile / 32px desktop - WCAG touch + dense desktop. */
 const toolbarIconButtonClassName = cn(
   "size-11! shrink-0 p-0! md:size-8!",
   toolbarRadiusClassName,
@@ -110,7 +110,7 @@ const toolbarDropdownTriggerClassName = cn(
   toolbarControlClassName
 )
 const toolbarToggleItemClassName = cn(
-  // Separate chips (not a glued segmented control) — gap comes from ToggleGroup spacing.
+  // Separate chips (not a glued segmented control) - gap comes from ToggleGroup spacing.
   "size-11! min-w-11! shrink-0 rounded-md! border border-border/70 px-0! py-0! shadow-none",
   "md:size-8! md:min-w-8!",
   "data-[spacing=1]:rounded-md! data-[spacing=1]:border-s! data-[spacing=1]:border-border/70!"
@@ -566,7 +566,7 @@ export function RichTextEditorToolbar({
             : undefined
         }
       >
-        {/* Row 1 — History | Heading | Marks | Align | Lists | Insert */}
+        {/* Row 1 - History | Heading | Marks | Align | Lists | Insert */}
         <div className={toolbarRowClassName}>
           <ToolbarGroup label="History">
             <ToolbarIconButton
@@ -825,7 +825,7 @@ export function RichTextEditorToolbar({
           ) : null}
         </div>
 
-        {/* Row 2 — advanced: Font | Color/marks | Indent | Table/blocks */}
+        {/* Row 2 - advanced: Font | Color/marks | Indent | Table/blocks */}
         {showRow2 ? (
           <div
             id="rich-text-editor-toolbar-row-2"

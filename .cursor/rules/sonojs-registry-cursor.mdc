@@ -6,7 +6,7 @@ alwaysApply: true
 
 # SonoJS registry - cursor pointer on clickables
 
-Applies to **installable** sources: `packages/ui` (UI) and `registry/blocks|charts|promo|examples` (what `sonojs add` ships).
+Applies to **installable** sources: `packages/ui` (UI) and `registry/blocks|charts|popups|examples` (what `sonojs add` ships).
 
 ## Rule
 

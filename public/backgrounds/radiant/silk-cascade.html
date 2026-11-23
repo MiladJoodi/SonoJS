@@ -23,7 +23,7 @@
 <canvas id="canvas"></canvas>
 <script>
 // ─────────────────────────────────────────────
-// Silk Cascade — Multi-layered translucent silk
+// Silk Cascade - Multi-layered translucent silk
 // fabric with anisotropic specular highlights,
 // domain-warped folds, and parallax depth.
 // ─────────────────────────────────────────────
@@ -170,7 +170,7 @@
     '  vec2 grad=fold.yz;',
     '  vec3 N=normalize(vec3(-grad*1.8, 1.0));',
     '',
-    '  // Lighting — strong directional contrast',
+    '  // Lighting - strong directional contrast',
     '  float NdL1=max(dot(N, L1), 0.0);',
     '  float NdL2=max(dot(N, L2), 0.0);',
     '  float lit=NdL1*0.75+NdL2*0.12;',
@@ -185,7 +185,7 @@
     '  vec3 fabric=mix(darkCol, midCol, midBlend);',
     '  fabric=mix(fabric, brightCol, brightBlend*0.5);',
     '',
-    '  // Anisotropic specular streaks — sharp silk sheen',
+    '  // Anisotropic specular streaks - sharp silk sheen',
     '  float sp=kajiyaSpec(grad, L1, V, shine)*0.9;',
     '  sp+=kajiyaSpec(grad, L2, V, shine*0.6)*0.15;',
     '  sp*=sheenMul;',
@@ -196,7 +196,7 @@
     '  float trans=smoothstep(0.3, 0.9, depth)*lit*0.08;',
     '  fabric+=vec3(0.45, 0.28, 0.15)*trans;',
     '',
-    '  // Sparkle — extremely rare, only where specular is strong',
+    '  // Sparkle - extremely rare, only where specular is strong',
     '  float sparkle=hash12(floor(p*500.0+t*0.7));',
     '  sparkle=step(0.9992, sparkle)*specPow*20.0*sheenMul;',
     '  fabric+=specCol*min(sparkle, 2.0);',
@@ -214,7 +214,7 @@
     '',
     '  float t=u_time*u_flowSpeed;',
     '',
-    '  // Primary light — follows cursor for shimmering highlights',
+    '  // Primary light - follows cursor for shimmering highlights',
     '  vec3 L1=normalize(vec3(',
     '    0.4+sin(t*0.07)*0.3,',
     '    0.9+cos(t*0.09)*0.15,',
@@ -231,7 +231,7 @@
     '  ));',
     '  vec3 V=vec3(0.0, 0.0, 1.0);',
     '',
-    '  // Background — deep dark with purple tint',
+    '  // Background - deep dark with purple tint',
     '  float bgD=length(p);',
     '  vec3 bg=mix(',
     '    vec3(0.055, 0.03, 0.075),',
@@ -240,7 +240,7 @@
     '  );',
     '  bg+=vec3(0.025, 0.012, 0.035)*exp(-bgD*bgD*2.0);',
     '',
-    '  // Layer 1: Deep — warm gold/champagne (slowest, most transparent)',
+    '  // Layer 1: Deep - warm gold/champagne (slowest, most transparent)',
     '  vec4 ly1=shadeLayer(',
     '    p*0.8+vec2(0.15, t*0.015), t,',
     '    0.0, 2.0, 0.5,',
@@ -253,7 +253,7 @@
     '    u_sheenIntensity*0.7',
     '  );',
     '',
-    '  // Layer 2: Middle — rose pink',
+    '  // Layer 2: Middle - rose pink',
     '  vec4 ly2=shadeLayer(',
     '    p*1.0+vec2(t*0.012, -0.1), t,',
     '    1.0, 3.2, 0.75,',
@@ -266,7 +266,7 @@
     '    u_sheenIntensity*0.9',
     '  );',
     '',
-    '  // Layer 3: Front — soft lavender (fastest, most opaque)',
+    '  // Layer 3: Front - soft lavender (fastest, most opaque)',
     '  vec4 ly3=shadeLayer(',
     '    p*1.2+vec2(-t*0.008, t*0.02), t,',
     '    2.0, 4.5, 1.0,',
@@ -348,7 +348,7 @@
   var flowSpeedVal = 0.4;
   var sheenIntensityVal = 1.0;
 
-  // Render at 1x CSS pixels — soft folds look identical upscaled
+  // Render at 1x CSS pixels - soft folds look identical upscaled
   var dpr = 1.0;
   var mouseX = -1.0, mouseY = -1.0;
   canvas.addEventListener('mousemove', function (e) {

@@ -133,7 +133,7 @@
   <div class="chartlabel">population &middot; relative boom &amp; bust</div>
 
   <div class="tools">
-    <button class="tool active" data-tool="feed" title="Feed (1) — sprinkle nutrients; hold &amp; drag to sow a bloom">
+    <button class="tool active" data-tool="feed" title="Feed (1) - sprinkle nutrients; hold &amp; drag to sow a bloom">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="8" cy="9" r="1.6"/><circle cx="14" cy="6" r="1.3"/><circle cx="17" cy="12" r="1.6"/><circle cx="11" cy="14" r="1.2"/><circle cx="7" cy="17" r="1.4"/><circle cx="15" cy="18" r="1.1"/></svg>
       <span>feed</span>
     </button>
@@ -157,7 +157,7 @@
     <div class="sun"><span>sun</span><input type="range" id="sunSlider" min="0" max="200" value="100"></div>
   </div>
 
-  <div class="hint">Click the water to use a tool. Plankton drink sunlight, grazers graze, hunters hunt — watch the cycles turn.</div>
+  <div class="hint">Click the water to use a tool. Plankton drink sunlight, grazers graze, hunters hunt - watch the cycles turn.</div>
 
   <div class="about">
     An ecosystem in a bowl of painted water: energy flows from sun to plankton
@@ -171,7 +171,7 @@
 <script>
 'use strict';
 /* ============================================================
-   TIDEPOOL — a living ecosystem in watercolor
+   TIDEPOOL - a living ecosystem in watercolor
    plankton -> grazers -> predators, with god-tools
    ============================================================ */
 
@@ -203,7 +203,7 @@ function makePaper() {
   p.fillStyle = g;
   p.fillRect(0, 0, W, H);
 
-  // watercolor blooms — big soft pigment blotches
+  // watercolor blooms - big soft pigment blotches
   const tints = [
     'rgba(64,170,160,', 'rgba(40,120,150,', 'rgba(90,190,170,',
     'rgba(30,90,130,',  'rgba(120,200,190,', 'rgba(50,140,120,'
@@ -219,7 +219,7 @@ function makePaper() {
     rg.addColorStop(1, t + '0)');
     p.fillStyle = rg;
     p.beginPath();
-    // irregular blob edge — watercolor bleed
+    // irregular blob edge - watercolor bleed
     const lobes = 7 + ((Math.random() * 5) | 0);
     for (let k = 0; k <= lobes; k++) {
       const ang = k / lobes * TAU;
@@ -655,7 +655,7 @@ function impact(x, y) {
   compact(plankton); compact(grazers); compact(preds);
   blooms.push({ x, y, t: 0, delay: 3.5, left: 90 });
   flash(toll > 0
-    ? 'the sky falls — ' + toll + ' souls returned to the water'
+    ? 'the sky falls - ' + toll + ' souls returned to the water'
     : 'the sky falls on empty water');
 }
 

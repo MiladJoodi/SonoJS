@@ -43,7 +43,7 @@
   var time = 0;
   var running = true;
 
-  // Mouse state for plucking — drag across strings to strum them
+  // Mouse state for plucking - drag across strings to strum them
   var mouseX = 0, mouseY = 0;
   var mouseDown = false;
   var lastPluckedString = -1;
@@ -129,7 +129,7 @@
     return W * (0.12 + s * 0.76 / (NUM_STRINGS - 1));
   }
 
-  // Harmonic envelope — modes fade in and out
+  // Harmonic envelope - modes fade in and out
   function harmonicAmp(mode, t) {
     var period = 8.0 + mode * 2.5;
     var phase = mode * 1.3;
@@ -264,7 +264,7 @@
       ctx.lineWidth = s.thickness;
       ctx.stroke();
 
-      // Antinode highlights — bright spots at maximum amplitude
+      // Antinode highlights - bright spots at maximum amplitude
       for (var j = 0; j <= SEGMENTS; j += 4) {
         var yNorm = j / SEGMENTS;
         var y = margin + yNorm * stringLen;

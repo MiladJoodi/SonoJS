@@ -14,7 +14,7 @@ export default function BackgroundsIndexPage() {
       <header className="space-y-2">
         <h1 className="text-h1">Backgrounds</h1>
         <p className="text-muted-foreground">
-          Single-file animated backgrounds — open a card for the live preview
+          Single-file animated backgrounds - open a card for the live preview
           and HTML download.
         </p>
       </header>

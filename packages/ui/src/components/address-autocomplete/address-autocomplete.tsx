@@ -44,7 +44,7 @@ export type AddressAutocompleteProps = Omit<
 > & {
   /**
    * Async address lookup. Defaults to the bundled offline mock so the
-   * installed component works immediately — swap for Mapbox Search (etc.) in production.
+   * installed component works immediately - swap for Mapbox Search (etc.) in production.
    */
   onSearch?: (query: string) => Promise<AddressSuggestion[]>
   value?: AddressValue | null

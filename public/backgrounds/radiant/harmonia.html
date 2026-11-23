@@ -415,7 +415,7 @@ footer{padding:8px 22px 16px;display:flex;align-items:center;gap:16px;min-width:
   <div class="introCard">
     <h1>HARMONIA</h1>
     <p>A brass-and-ink orrery of Western harmony.<br>
-    Hover the wheel and it sounds. Circle it slowly and you will <em>feel</em> why the circle of fifths is a circle — before reading a single word.</p>
+    Hover the wheel and it sounds. Circle it slowly and you will <em>feel</em> why the circle of fifths is a circle - before reading a single word.</p>
     <div id="beginSeal" role="button" tabindex="0"><span>BEGIN</span></div>
     <div class="introHintSub">press the seal · sound on</div>
   </div>
@@ -425,8 +425,8 @@ footer{padding:8px 22px 16px;display:flex;align-items:center;gap:16px;min-width:
   <div class="aboutCard">
     <span class="closeX" id="aboutClose">✕</span>
     <h2>HARMONIA</h2>
-    <p><b style="color:#d8c48c">Hover</b> any wedge to hear its chord and see its key signature drawn in; neighbours glow because they share six of seven notes. <b style="color:#d8c48c">Click</b> a key to hear a cadence with four-part voice leading — watch the four luminous voices glide. <b style="color:#d8c48c">Hold</b> a wedge (or press the centre hub) to seal the chord onto the parchment ribbon, then play your progression back with the brass stylus. The inner enamel disc re-lenses the whole instrument through any of the seven modes.</p>
-    <p>Everything here is procedural — the star chart, the felt-piano voice, the reverb — generated at load in a single file, no samples, no network.</p>
+    <p><b style="color:#d8c48c">Hover</b> any wedge to hear its chord and see its key signature drawn in; neighbours glow because they share six of seven notes. <b style="color:#d8c48c">Click</b> a key to hear a cadence with four-part voice leading - watch the four luminous voices glide. <b style="color:#d8c48c">Hold</b> a wedge (or press the centre hub) to seal the chord onto the parchment ribbon, then play your progression back with the brass stylus. The inner enamel disc re-lenses the whole instrument through any of the seven modes.</p>
+    <p>Everything here is procedural - the star chart, the felt-piano voice, the reverb - generated at load in a single file, no samples, no network.</p>
     <p class="credit">Built by Claude Fable 5 · an interactive music-theory instrument</p>
   </div>
 </div>
@@ -449,13 +449,13 @@ const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 /* ═══════════════ music theory core ═══════════════ */
 const MAJOR=[0,2,4,5,7,9,11];
 const MODES=[
- {name:'Ionian',   color:'#d69a2d',note:'<b>Ionian</b> — the bright default. Hymns, pop choruses, plain sunlight.',charDeg:-1},
- {name:'Dorian',   color:'#3f9e7c',note:'<b>Dorian</b> — minor with a hopeful lift: the raised 6th of jazz, folk lament, So What.',charDeg:5},
- {name:'Phrygian', color:'#a33045',note:'<b>Phrygian</b> — the flattened 2nd smolders. Flamenco, metal, ancient shadow.',charDeg:1},
- {name:'Lydian',   color:'#3760b8',note:'<b>Lydian</b> — one raised 4th and the floor floats away. Film scores, wonder.',charDeg:3},
- {name:'Mixolydian',color:'#c9822e',note:'<b>Mixolydian</b> — the dominant that never resolves. Folk, rock, bagpipes.',charDeg:6},
- {name:'Aeolian',  color:'#7e4fae',note:'<b>Aeolian</b> — natural minor: rain on glass, the relative dark inside every major.',charDeg:5},
- {name:'Locrian',  color:'#5a5f6a',note:'<b>Locrian</b> — built on a diminished heart. Unstable, rare, a held breath.',charDeg:4},
+ {name:'Ionian',   color:'#d69a2d',note:'<b>Ionian</b> - the bright default. Hymns, pop choruses, plain sunlight.',charDeg:-1},
+ {name:'Dorian',   color:'#3f9e7c',note:'<b>Dorian</b> - minor with a hopeful lift: the raised 6th of jazz, folk lament, So What.',charDeg:5},
+ {name:'Phrygian', color:'#a33045',note:'<b>Phrygian</b> - the flattened 2nd smolders. Flamenco, metal, ancient shadow.',charDeg:1},
+ {name:'Lydian',   color:'#3760b8',note:'<b>Lydian</b> - one raised 4th and the floor floats away. Film scores, wonder.',charDeg:3},
+ {name:'Mixolydian',color:'#c9822e',note:'<b>Mixolydian</b> - the dominant that never resolves. Folk, rock, bagpipes.',charDeg:6},
+ {name:'Aeolian',  color:'#7e4fae',note:'<b>Aeolian</b> - natural minor: rain on glass, the relative dark inside every major.',charDeg:5},
+ {name:'Locrian',  color:'#5a5f6a',note:'<b>Locrian</b> - built on a diminished heart. Unstable, rare, a held breath.',charDeg:4},
 ];
 const MODE_OFF=[0,-2,-4,1,-1,-3,-5]; // fifths offset to relative major
 const MAJ_NAMES=['C','G','D','A','E','B','F♯','D♭','A♭','E♭','B♭','F'];

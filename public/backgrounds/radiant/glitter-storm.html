@@ -123,7 +123,7 @@
     particles.sort(function(a, b) { return a.z - b.z; });
   }
 
-  // ── Lights — three rotating spots, orbit as 3D direction vectors ──
+  // ── Lights - three rotating spots, orbit as 3D direction vectors ──
   //   Each light is described purely as a unit direction in 3D space
   //   that sweeps around. We only need the direction, not a position.
   function initLights() {
@@ -178,7 +178,7 @@
       var ny = st * sp;
       var nz = ct;
 
-      // Mouse: gentle wind nudge — temporary, particles recover naturally
+      // Mouse: gentle wind nudge - temporary, particles recover naturally
       if (mouseActive) {
         var mdx = mouseX * dpr - p.x;
         var mdy = mouseY * dpr - p.y;
@@ -196,7 +196,7 @@
       p.vx += (p.baseVx - p.vx) * 0.03;
       p.vy += (p.baseVy - p.vy) * 0.03;
 
-      // Specular: |dot(N, L)|  — mirrors on both sides of disc
+      // Specular: |dot(N, L)|  - mirrors on both sides of disc
       var smax = 0;
       var sr2 = p.r, sg2 = p.g, sb2 = p.b;
       for (var li = 0; li < dirs.length; li++) {
@@ -238,7 +238,7 @@
   function draw() {
     var t = simTime;
 
-    // Persistence fade — keep a trail but not too opaque
+    // Persistence fade - keep a trail but not too opaque
     ctx.globalAlpha = 1;
     ctx.globalCompositeOperation = 'source-over';
     ctx.fillStyle = 'rgba(10,10,10,0.18)';
@@ -302,7 +302,7 @@
           }
         }
 
-        // Disc body — use setTransform for scale+rotate (faster than save/restore)
+        // Disc body - use setTransform for scale+rotate (faster than save/restore)
         var sx = Math.max(0.12, Math.abs(Math.cos(p.phi)));
         var sy = Math.max(0.12, Math.abs(Math.cos(p.theta)));
         var cosPhi = Math.cos(p.phi), sinPhi = Math.sin(p.phi);
@@ -314,7 +314,7 @@
         ctx.setTransform(1, 0, 0, 1, 0, 0);
 
       } else {
-        // Dim ambient flake — small, transparent, no glow
+        // Dim ambient flake - small, transparent, no glow
         var da = (0.55 + p.z * 0.4) * 0.55;
         if (da < 0.05) continue;
         var sx = Math.max(0.12, Math.abs(Math.cos(p.phi)));

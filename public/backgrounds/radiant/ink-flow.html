@@ -274,7 +274,7 @@
 <div id="about">
   <div class="card">
     <h1>ink flow</h1>
-    <p>Drag your finger through still water and watch color bloom, braid, and dissolve. An invisible curl-noise current grabs every stroke and unspools it into slow, glowing filaments — alive before you lift your finger, and never the same twice.</p>
+    <p>Drag your finger through still water and watch color bloom, braid, and dissolve. An invisible curl-noise current grabs every stroke and unspools it into slow, glowing filaments - alive before you lift your finger, and never the same twice.</p>
     <p style="color:var(--ink-faint)">Light refracts through the drifting dye, casting shimmering caustics across the darkroom floor. Leave it be and faint emitters wake at the edges, keeping the water in quiet motion. Double-tap the water for a supernova.</p>
     <div class="keys">
       <b>drag</b> &nbsp;release ink &nbsp;·&nbsp; <b>flick</b> &nbsp;jets &nbsp;·&nbsp; <b>double-tap</b> &nbsp;burst<br>
@@ -290,7 +290,7 @@
 (function(){
 
 /* ============================================================
-   PALETTES — each: array of {t, rgb} stops sampled by (speed,age)
+   PALETTES - each: array of {t, rgb} stops sampled by (speed,age)
    Ordered bright core -> cool translucent tail.
    ============================================================ */
 const PALETTES = [
@@ -361,7 +361,7 @@ function makeFBO(w,h,filter){
   gl.framebufferTexture2D(gl.FRAMEBUFFER,gl.COLOR_ATTACHMENT0,gl.TEXTURE_2D,tex,0);
   gl.viewport(0,0,w,h);
   // alpha MUST clear to 0: dye alpha is density, and a=1 clear reads as
-  // full ink coverage — the whole stage boots to a white-out.
+  // full ink coverage - the whole stage boots to a white-out.
   gl.clearColor(0,0,0,0); gl.clear(gl.COLOR_BUFFER_BIT);
   return {tex,fbo,w,h};
 }
@@ -590,7 +590,7 @@ let lutTexA, lutTexB;
 // Probe: can we actually RENDER into a texture of this type? Having the
 // texture extension alone doesn't guarantee color-renderability (e.g. some
 // drivers / SwiftShader). Sampling an incomplete FBO texture yields
-// (0,0,0,1) — alpha 1 everywhere — which washes the whole screen white.
+// (0,0,0,1) - alpha 1 everywhere - which washes the whole screen white.
 function fboRenderable(type){
   const tex=gl.createTexture();
   gl.bindTexture(gl.TEXTURE_2D,tex);
@@ -1187,7 +1187,7 @@ function toast(msg){
   clearTimeout(toastT); toastT=setTimeout(()=>toastEl.classList.remove('show'),1100);
 }
 
-// screenshot — read pixels so it works without preserveDrawingBuffer
+// screenshot - read pixels so it works without preserveDrawingBuffer
 const flash=document.getElementById('flash');
 function screenshot(){
   try{

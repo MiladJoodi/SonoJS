@@ -20,7 +20,7 @@ const exampleDefs = [
     name: "address-autocomplete-gallery",
     title: "Gallery",
     description:
-      "Search, select, and clear. Pass any async `onSearch` — demos use the bundled mock.",
+      "Search, select, and clear. Pass any async `onSearch` - demos use the bundled mock.",
     requires: ["command", "input-group", "badge"],
     npmRequires: ["lucide-react"],
   },
@@ -107,7 +107,7 @@ export default async function AddressAutocompleteDocsPage() {
         description={
           <p className="leading-relaxed text-muted-foreground">
             Type to search addresses. Works out of the box with a bundled offline
-            mock — override{" "}
+            mock - override{" "}
             <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
               onSearch
             </code>{" "}

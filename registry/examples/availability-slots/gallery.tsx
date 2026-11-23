@@ -42,7 +42,7 @@ export function AvailabilitySlotsGallery() {
             Book a time
           </h3>
           <p className="text-xs text-muted-foreground">
-            Pick a day, then choose a free slot — same flow as a booking page.
+            Pick a day, then choose a free slot - same flow as a booking page.
           </p>
         </div>
         <Badge variant="secondary" className="ms-auto shrink-0 font-normal">

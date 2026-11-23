@@ -66,7 +66,7 @@ export function TreeCheckboxGallery() {
           </h3>
           <p className="text-xs text-muted-foreground">
             Toggle <span className="font-medium text-foreground">Documents</span>{" "}
-            to cascade children — parents show indeterminate when partial.
+            to cascade children - parents show indeterminate when partial.
           </p>
         </div>
         <Badge variant="secondary" className="ms-auto shrink-0 font-normal">

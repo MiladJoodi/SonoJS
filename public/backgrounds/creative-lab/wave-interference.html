@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>#035 — Wave Interference · creative-lab</title>
+  <title>#035 - Wave Interference · creative-lab</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -375,11 +375,11 @@ function render() {
     document.getElementById('infoLabel').textContent =
       sources.length === 0
         ? 'Click to add sources'
-        : `${sources.length} source${sources.length > 1 ? 's' : ''} — click to add`;
+        : `${sources.length} source${sources.length > 1 ? 's' : ''} - click to add`;
   } else if (mode === 'doubleSlit') {
-    document.getElementById('infoLabel').textContent = `Double Slit — λ=${wavelength}px`;
+    document.getElementById('infoLabel').textContent = `Double Slit - λ=${wavelength}px`;
   } else {
-    document.getElementById('infoLabel').textContent = 'Standing Wave — opposing sources';
+    document.getElementById('infoLabel').textContent = 'Standing Wave - opposing sources';
   }
 }
 

@@ -30,7 +30,7 @@
 <canvas id="canvas"></canvas>
 <script>
 // ─────────────────────────────────────────────
-// Gilt Thread — Golden threads weave intricate Lissajous patterns
+// Gilt Thread - Golden threads weave intricate Lissajous patterns
 // Trail-buffer approach: no fade rectangles, no residue
 // ─────────────────────────────────────────────
 (function () {
@@ -105,13 +105,13 @@
 
     var w = smoothWarp;
     if (shape === 2) {
-      // Rose / rhodonea curves — warp changes petal count ratio
+      // Rose / rhodonea curves - warp changes petal count ratio
       var k = th.fx / th.fy + w * 0.3;
       var r = ax * Math.cos(k * s + th.px);
       return { x: r * Math.cos(s), y: r * Math.sin(s) };
     }
     if (shape === 3) {
-      // Spirograph / epitrochoid — warp changes inner radius
+      // Spirograph / epitrochoid - warp changes inner radius
       var R = ax * 0.6, rr = ax * (0.23 + w * 0.04), d = ax * 0.45;
       var idx = (th.fx + th.fy) * 0.5;
       rr *= (0.7 + (idx % 3) * 0.15);
@@ -122,7 +122,7 @@
       };
     }
     if (shape === 4) {
-      // Butterfly curve — warp stretches the wings
+      // Butterfly curve - warp stretches the wings
       var bt = s * (0.4 + w * 0.05) + th.px;
       var expTerm = Math.exp(Math.cos(bt)) - 2 * Math.cos(4 * bt) - Math.pow(Math.sin(bt / 12), 5);
       return {
@@ -130,7 +130,7 @@
         y: Math.cos(bt) * expTerm * ay * 0.28
       };
     }
-    // Default: shape 1 — Lissajous (mouse warps frequency ratio)
+    // Default: shape 1 - Lissajous (mouse warps frequency ratio)
     return {
       x: Math.sin(s * (th.fx + smoothWarp * 0.5) + th.px) * ax,
       y: Math.sin(s * (th.fy - smoothWarp * 0.3) + th.py) * ay
@@ -421,7 +421,7 @@
       updateTrail(threads[i], threadTime);
     }
 
-    // Clear completely — no residue possible
+    // Clear completely - no residue possible
     ctx.fillStyle = '#0a0a0a';
     ctx.fillRect(0, 0, W, H);
 

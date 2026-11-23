@@ -193,7 +193,7 @@ export function ComponentVariantPreview({
             : "overflow-hidden rounded-[12px]"
         )}
       >
-        {/* Tabs first (wrap); controls row below — same on mobile + desktop. */}
+        {/* Tabs first (wrap); controls row below - same on mobile + desktop. */}
         <div className="flex flex-col gap-2 rounded-t-[12px] border-b border-border/80 bg-card px-3 py-2">
           <div className="flex flex-wrap items-center gap-1">
             {examples.map((item) => (

@@ -10,7 +10,7 @@ import {
 } from "@/lib/charts-catalog"
 import { getAiPages } from "@/lib/ai-nav"
 import { get3dPages } from "@/lib/3d-nav"
-import { getPromoPages } from "@/lib/promo-nav"
+import { getPopupsPages } from "@/lib/popups-nav"
 import { getCarouselsPages } from "@/lib/carousels-nav"
 import { cursorsCatalog, cursorViewHref } from "@/lib/cursors-catalog"
 import { getDocsComponentPages, getDocsGuidePages } from "@/lib/docs-nav"
@@ -122,7 +122,7 @@ export function buildSitemapPaths(): string[] {
   pushUnique(paths, "/cursors")
   pushUnique(paths, "/3d")
   pushUnique(paths, "/ai")
-  pushUnique(paths, "/promo")
+  pushUnique(paths, "/popups")
   pushUnique(paths, "/carousels")
   pushUnique(paths, "/tools")
   pushUnique(paths, "/docs/components")
@@ -143,7 +143,7 @@ export function buildSitemapPaths(): string[] {
   for (const page of getAiPages()) {
     pushUnique(paths, page.href)
   }
-  for (const page of getPromoPages()) {
+  for (const page of getPopupsPages()) {
     pushUnique(paths, page.href)
   }
   for (const page of getCarouselsPages()) {

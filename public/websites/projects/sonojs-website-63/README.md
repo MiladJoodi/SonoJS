@@ -17,7 +17,7 @@ Family primary-care clinic with local Vanta fog atmosphere, booking wizard, and 
 
 ## Live / package
 
-- Demo: https://sonojs-website-63.winbeta-info.workers.dev/
+- Demo: https://sonojs-website-63.sonojs3.workers.dev/
 - Zip: `products/webiste/sonojs-website-63/sonojs-website-63.zip`
 
 ## Access

@@ -12,7 +12,7 @@ export type ComponentsDirectoryItem = {
   featured?: boolean
 }
 
-/** Name-only catalog — sectioned links, no wireframe thumbs. */
+/** Name-only catalog - sectioned links, no wireframe thumbs. */
 export function ComponentsDirectory({
   groups,
 }: {

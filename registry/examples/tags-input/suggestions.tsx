@@ -24,7 +24,7 @@ export function TagsInputSuggestions() {
       creatable
       defaultValue={["react", "typescript"]}
       placeholder="Add skills…"
-      emptyText="No skill match — create a new one."
+      emptyText="No skill match - create a new one."
     />
   )
 }

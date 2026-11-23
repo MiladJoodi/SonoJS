@@ -30,7 +30,7 @@
 <canvas id="canvas"></canvas>
 <script>
 // ─────────────────────────────────────────────
-// 20 · Metamorphosis — Raymarched metaballs with liquid-metal surface
+// 20 · Metamorphosis - Raymarched metaballs with liquid-metal surface
 // ─────────────────────────────────────────────
 (function () {
   var canvas = document.getElementById('canvas');
@@ -63,7 +63,7 @@
     '#define SURF_DIST 0.002',
     '#define BLOB_MAX 6',
     '',
-    '// Precomputed blob data — set once per pixel in main(),',
+    '// Precomputed blob data - set once per pixel in main(),',
     '// read many times in scene(). Avoids redundant trig across',
     '// ~120 scene() calls per hit pixel (march + normal + shadow + AO).',
     'vec3 g_pos[BLOB_MAX];',
@@ -95,7 +95,7 @@
     '  return d;',
     '}',
     '',
-    '// Tetrahedron normal — 4 scene evals instead of 6',
+    '// Tetrahedron normal - 4 scene evals instead of 6',
     'vec3 calcNormal(vec3 p) {',
     '  vec2 e = vec2(0.002, -0.002);',
     '  return normalize(',
@@ -205,7 +205,7 @@
     '  vec3 up = cross(right, fwd);',
     '  vec3 rd = normalize(fwd * 1.5 + right * uv.x + up * uv.y);',
     '',
-    '  // Bounding sphere early-out — skip raymarch for rays that miss entirely',
+    '  // Bounding sphere early-out - skip raymarch for rays that miss entirely',
     '  float bsB = dot(ro, rd);',
     '  float bsC = dot(ro, ro) - 6.25;', // radius 2.5 squared
     '  float bsDisc = bsB * bsB - bsC;',

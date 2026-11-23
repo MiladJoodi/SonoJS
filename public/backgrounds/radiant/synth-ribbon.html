@@ -30,7 +30,7 @@
 <canvas id="canvas"></canvas>
 <script>
 // ─────────────────────────────────────────────
-// Synth Ribbon — Flowing metallic ribbons twisting
+// Synth Ribbon - Flowing metallic ribbons twisting
 // in 3D space with chrome reflections, 80s aesthetic
 // ─────────────────────────────────────────────
 (function() {
@@ -147,7 +147,7 @@
     g += rim * 0.8;
     b += rim * 1.0;
 
-    // Depth fog — further = darker, bluer
+    // Depth fog - further = darker, bluer
     var fogAmount = Math.max(0, Math.min(1, (depth - 200) / 800));
     r = r * (1 - fogAmount * 0.7) + 0.02 * fogAmount;
     g = g * (1 - fogAmount * 0.6) + 0.03 * fogAmount;
@@ -303,7 +303,7 @@
         var py = Math.sin(param * 2.5 * rb.freqY + rb.phaseY + tSpeed * 0.5) * rb.ampY;
         var pz = param * 500 + rb.zOffset + Math.sin(param * 2.0 * rb.freqZ + rb.phaseZ + tSpeed * 0.3) * rb.ampZ + 500;
 
-        // Mouse attraction — gently pull ribbons toward mouse position in 3D
+        // Mouse attraction - gently pull ribbons toward mouse position in 3D
         if (mouse.active) {
           var mouseDistFactor = 1.0 / (1.0 + Math.abs(pz - 300) * 0.003);
           px += attractX * mouseDistFactor * 0.3;
@@ -421,7 +421,7 @@
 
     ctx.globalAlpha = 1;
 
-    // Lens flare removed — was jumping erratically between brightest segments
+    // Lens flare removed - was jumping erratically between brightest segments
 
     requestAnimationFrame(draw);
   }

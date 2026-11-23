@@ -20,7 +20,7 @@ const exampleDefs = [
     name: "data-table-grid-gallery",
     title: "Gallery",
     description:
-      "Filter, sort, pin, resize, and paginate in one grid — pin menus on headers, drag edges to resize.",
+      "Filter, sort, pin, resize, and paginate in one grid - pin menus on headers, drag edges to resize.",
     requires: ["table", "button", "dropdown-menu", "badge", "input"],
     npmRequires: ["@tanstack/react-table@^9.3.1", "lucide-react"],
   },
@@ -167,7 +167,7 @@ export default async function DataTableGridDocsPage() {
         pathname="/docs/components/data-table-grid"
         description={
           <p className="leading-relaxed text-muted-foreground">
-            Advanced grid chrome for TanStack Table v9 — sticky pinned columns,
+            Advanced grid chrome for TanStack Table v9 - sticky pinned columns,
             resize handles, and sort/pin headers. Pair with the basic{" "}
             <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
               Data Table

@@ -17,7 +17,7 @@ Fiction intimate Reformer Pilates studio with attached Nourish cafe in Boulder, 
 
 ## Live / package
 
-- Demo: https://sonojs-website-82.winbeta-info.workers.dev/
+- Demo: https://sonojs-website-82.sonojs3.workers.dev/
 - Zip: `products/webiste/sonojs-website-82/sonojs-website-82.zip`
 
 ## Access

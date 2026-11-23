@@ -17,7 +17,7 @@ Healthcare decisions podcast with sketch-paper craft, episode player, framework 
 
 ## Live / package
 
-- Demo: https://sonojs-website-62.winbeta-info.workers.dev/
+- Demo: https://sonojs-website-62.sonojs3.workers.dev/
 - Zip: `products/webiste/sonojs-website-62/sonojs-website-62.zip`
 
 ## Access

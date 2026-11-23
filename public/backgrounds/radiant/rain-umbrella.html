@@ -24,7 +24,7 @@
 <canvas id="canvas"></canvas>
 <script>
 // ─────────────────────────────────────────────
-// 61 · Rain on Umbrella — Canvas-stamp refraction
+// 61 · Rain on Umbrella - Canvas-stamp refraction
 // Procedurally generated drop bitmaps + WebGL refraction shader
 // ─────────────────────────────────────────────
 (function () {
@@ -92,12 +92,12 @@
   //     R = vertical refraction offset (128 = neutral)
   //     G = horizontal refraction offset (128 = neutral)
   //     B = depth/distance (higher = deeper into drop)
-  //     A = 255 (always fully opaque — critical for screen-blend)
+  //     A = 255 (always fully opaque - critical for screen-blend)
   // ═══════════════════════════════════════════════
 
   var dropSize = 64;
 
-  // Drop shape mask — defines where the drop is visible
+  // Drop shape mask - defines where the drop is visible
   function generateDropAlpha(size) {
     var c = document.createElement('canvas');
     c.width = c.height = size;
@@ -128,7 +128,7 @@
     return c;
   }
 
-  // Refraction normal map — encodes lens-like light bending
+  // Refraction normal map - encodes lens-like light bending
   function generateDropColor(size) {
     var c = document.createElement('canvas');
     c.width = c.height = size;
@@ -149,7 +149,7 @@
         var ny = dist > 0.001 ? dy / dist : 0;
 
         // Refraction strength: increases toward edges (lens effect)
-        // Capped at 60 for subtle, soft distortion — micro-droplets
+        // Capped at 60 for subtle, soft distortion - micro-droplets
         // barely refract while larger drops still show clear lensing
         var strength = dist;
 
@@ -161,7 +161,7 @@
         d[idx] = Math.max(0, Math.min(255, r));
         d[idx + 1] = Math.max(0, Math.min(255, g));
         d[idx + 2] = Math.round(depth);
-        d[idx + 3] = 255; // Fully opaque — prevents premultiply corruption
+        d[idx + 3] = 255; // Fully opaque - prevents premultiply corruption
       }
     }
     ctx.putImageData(imgData, 0, 0);
@@ -191,11 +191,11 @@
     // Helper: draw element at x and also at x±w so it tiles seamlessly
     function tileX(x, fn) { fn(x - w); fn(x); fn(x + w); }
 
-    // Warm dark base — not pure black, slightly warm
+    // Warm dark base - not pure black, slightly warm
     ctx.fillStyle = '#0a0812';
     ctx.fillRect(0, 0, ww, h);
 
-    // Warm ambient washes — the overall glow of a lit city seen through fabric
+    // Warm ambient washes - the overall glow of a lit city seen through fabric
     // Biased upward (lights are above us) but spread everywhere
     for (var i = 0; i < 10; i++) {
       var awx = srand() * w + w;
@@ -216,7 +216,7 @@
       });
     }
 
-    // Large vibrant bokeh — the main visual feature
+    // Large vibrant bokeh - the main visual feature
     // Big soft glows representing out-of-focus city lights through umbrella
     for (var i = 0; i < 30; i++) {
       var bkx = srand() * w + w;
@@ -240,7 +240,7 @@
 
       tileX(bkx, function(xx) {
         var g = ctx.createRadialGradient(xx, bky, 0, xx, bky, bkr);
-        // Solid bright center fading out — NOT ring-shaped
+        // Solid bright center fading out - NOT ring-shaped
         g.addColorStop(0, 'hsla(' + hue + ',' + sat + '%,' + lit + '%,' + alpha + ')');
         g.addColorStop(0.3, 'hsla(' + hue + ',' + sat + '%,' + lit + '%,' + (alpha * 0.6) + ')');
         g.addColorStop(0.6, 'hsla(' + hue + ',' + sat + '%,' + (lit * 0.75) + '%,' + (alpha * 0.2) + ')');
@@ -252,7 +252,7 @@
       });
     }
 
-    // Streetlight cores — bright hot points with large halos
+    // Streetlight cores - bright hot points with large halos
     for (var i = 0; i < 8; i++) {
       var lx = srand() * w + w;
       var ly = h * 0.05 + srand() * h * 0.5;
@@ -282,7 +282,7 @@
       });
     }
 
-    // Neon accents — splashes of pink/teal/red
+    // Neon accents - splashes of pink/teal/red
     for (var i = 0; i < 6; i++) {
       var nx = srand() * w + w;
       var ny = h * 0.2 + srand() * h * 0.55;
@@ -302,7 +302,7 @@
       });
     }
 
-    // Warm ambient lift — overall scene shouldn't be too dark
+    // Warm ambient lift - overall scene shouldn't be too dark
     ctx.fillStyle = 'rgba(30, 18, 10, 0.06)';
     ctx.fillRect(0, 0, ww, h);
 
@@ -317,7 +317,7 @@
       ctx.filter = 'none';
     }
 
-    // Crop center third — seamless tile
+    // Crop center third - seamless tile
     var out = createCanvas(w, h);
     var octx = out.getContext('2d');
     octx.drawImage(c, w, 0, w, h, 0, 0, w, h);
@@ -334,7 +334,7 @@
   var textureBgCanvas = generateSkyBg(1024, 512, 4);
 
   // ═══════════════════════════════════════════════
-  // DROP GRAPHICS — Canvas-stamp approach
+  // DROP GRAPHICS - Canvas-stamp approach
   // Pre-render 255 depth-variant drop bitmaps
   // ═══════════════════════════════════════════════
 
@@ -380,7 +380,7 @@
   }
 
   // ═══════════════════════════════════════════════
-  // RAINDROPS — Physics model
+  // RAINDROPS - Physics model
   // ═══════════════════════════════════════════════
 
   var Drop = {
@@ -518,7 +518,7 @@
         // Dome curvature drives initial momentum
         var curvature = Math.min(1, dist / maxDist);
         var startMomentum = 0.2 + curvature * curvature * 2.0 + ((r - options.minR) * 0.08) + random(0.5);
-        // Per-drop shape variation — each drop is slightly different
+        // Per-drop shape variation - each drop is slightly different
         var wx = 0.8 + Math.random() * 0.4;  // 0.8 – 1.2
         var wy = 0.85 + Math.random() * 0.35; // 0.85 – 1.2
         var rd = rdCreateDrop({
@@ -647,7 +647,7 @@
       var curvature = Math.min(1, distFromCenter / maxDist);
       drop.momentum += curvature * curvature * 0.2 * timeScale;
 
-      // Movement — radial outward from center
+      // Movement - radial outward from center
       var moved = drop.momentum > 0;
       if (moved && !drop.killed) {
         drop.x += Math.cos(drop.angle) * drop.momentum * options.globalTimeScale;
@@ -728,7 +728,7 @@
   }
 
   // ═══════════════════════════════════════════════
-  // WEBGL RENDERER — Refraction shader
+  // WEBGL RENDERER - Refraction shader
   // ═══════════════════════════════════════════════
 
   var gl = canvas.getContext('webgl', { alpha: false, antialias: false });
@@ -743,7 +743,7 @@
     '}'
   ].join('\n');
 
-  // Fragment shader — water refraction
+  // Fragment shader - water refraction
   var fragSrc = [
     'precision mediump float;',
     '',
@@ -839,7 +839,7 @@
     '  // Angular distance to nearest rib',
     '  float secAng = mod(ang + SECTOR * 0.5, SECTOR) - SECTOR * 0.5;',
     '',
-    '  // Organic wobble — ribs flex under fabric tension + per-rib variation',
+    '  // Organic wobble - ribs flex under fabric tension + per-rib variation',
     '  float ribIdx = floor((ang + PI) / SECTOR);',
     '  float wobble = sin(dist * 16.0 + ribIdx * 4.7) * 0.018 * dist;',
     '  wobble += sin(dist * 37.0 - ribIdx * 2.3) * 0.008 * dist;',

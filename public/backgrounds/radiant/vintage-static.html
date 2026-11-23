@@ -30,7 +30,7 @@
 <canvas id="canvas"></canvas>
 <script>
 // ─────────────────────────────────────────────
-// 59 · Vintage Static — Retro TV color bars melting into warm interference
+// 59 · Vintage Static - Retro TV color bars melting into warm interference
 // ─────────────────────────────────────────────
 (function() {
   var canvas = document.getElementById('canvas');
@@ -184,7 +184,7 @@
         ctx.globalAlpha = 1 - barMelt * 0.3;
         ctx.fillRect(sx, yOffset, sliceWidth, sliceHeight);
 
-        // Drip tip — paint-like blob at the bottom
+        // Drip tip - paint-like blob at the bottom
         if (barMelt > 0.1) {
           var tipY = yOffset + sliceHeight;
           var tipSize = barMelt * 8 * (0.5 + smoothNoise(sliceSeed * 3.1 + time) * 0.5);
@@ -293,7 +293,7 @@
       seed = (seed * 1103515245 + 12345) & 0x7fffffff;
       var idx = ((seed % totalPixels) | 0) * 4;
 
-      // Random static brightness — warm-tinted
+      // Random static brightness - warm-tinted
       seed = (seed * 1103515245 + 12345) & 0x7fffffff;
       var brightness = (seed & 0xff);
 
@@ -361,7 +361,7 @@
     ctx.fillStyle = vigGrad;
     ctx.fillRect(0, 0, width, height);
 
-    // Edge curvature — darken edges more strongly (top/bottom/left/right)
+    // Edge curvature - darken edges more strongly (top/bottom/left/right)
     // Top edge curve
     var edgeGrad = ctx.createLinearGradient(0, 0, 0, height * 0.04);
     edgeGrad.addColorStop(0, 'rgba(0, 0, 0, 0.7)');
@@ -390,7 +390,7 @@
     ctx.fillStyle = edgeGrad;
     ctx.fillRect(width * 0.97, 0, width * 0.03, height);
 
-    // Subtle screen glow — warm phosphor tint
+    // Subtle screen glow - warm phosphor tint
     ctx.globalCompositeOperation = 'lighter';
     ctx.globalAlpha = 0.02;
     ctx.fillStyle = 'rgba(200, 160, 100, 1)';

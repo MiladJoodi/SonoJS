@@ -17,7 +17,7 @@ Cinematic 1:1 strength and boxing-informed coaching brand in Miami. Brand: **VOR
 
 ## Live / package
 
-- Demo: https://sonojs-website-85.winbeta-info.workers.dev/
+- Demo: https://sonojs-website-85.sonojs3.workers.dev/
 - Zip: `products/webiste/sonojs-website-85/sonojs-website-85.zip`
 
 ## Access

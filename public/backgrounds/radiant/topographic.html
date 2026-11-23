@@ -182,7 +182,7 @@ const SimplexNoise = (function() {
     return (threshold - v1) / (v2 - v1);
   }
 
-  // Marching squares lookup — maps 4-bit case index to list of edge pairs
+  // Marching squares lookup - maps 4-bit case index to list of edge pairs
   // Edges: 0=top, 1=right, 2=bottom, 3=left
   const EDGE_TABLE = [
     [],            // 0000
@@ -316,7 +316,7 @@ const SimplexNoise = (function() {
       const distFromCenter = Math.abs(threshold - 0.5) * 2; // 0 at center, 1 at edges
       const baseAlpha = 0.25 + (1 - distFromCenter) * 0.45;
 
-      // Every 5th contour is a "major" contour — thicker and brighter
+      // Every 5th contour is a "major" contour - thicker and brighter
       const isMajor = (c % 5 === 0);
       const glowWidth = isMajor ? 4.5 : 2.5;
       const sharpWidth = isMajor ? 1.2 : 0.6;
@@ -431,7 +431,7 @@ const SimplexNoise = (function() {
       if (angle < -Math.PI / 2) angle += Math.PI;
       ctx.rotate(angle);
 
-      // Background knockout — small dark rectangle behind text
+      // Background knockout - small dark rectangle behind text
       ctx.fillStyle = 'rgba(10, 10, 10, 0.85)';
       ctx.fillRect(-tw / 2, -6, tw, 12);
 

@@ -5,7 +5,7 @@ import { createProductCheckout } from "@/lib/stripe/product-checkout"
 
 /**
  * Authenticated one-time product Checkout.
- * Body: `{ slug }` only — price is read from the catalog on the server.
+ * Body: `{ slug }` only - price is read from the catalog on the server.
  * Entitlement is granted only after the Stripe webhook (never on success_url).
  */
 export async function POST(req: Request) {

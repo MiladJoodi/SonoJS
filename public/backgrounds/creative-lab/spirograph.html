@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>#053 Spirograph — creative-lab</title>
+<title>#053 Spirograph - creative-lab</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{background:#07070f;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#d4dce8}
@@ -113,9 +113,9 @@ input[type=checkbox]{accent-color:#40b4ff;cursor:pointer;width:13px;height:13px}
 </div>
 
 <div id="info">
-  Loops: <span id="stLoops">—</span><br>
-  Angle: <span id="stAngle">—</span>°<br>
-  Points: <span id="stPts">—</span>
+  Loops: <span id="stLoops">-</span><br>
+  Angle: <span id="stAngle">-</span>°<br>
+  Points: <span id="stPts">-</span>
 </div>
 
 <div id="hint">Drag to rotate · Scroll to zoom</div>
@@ -170,7 +170,7 @@ function gcd(a, b) { a = Math.abs(a); b = Math.abs(b); while(b){ let t=b; b=a%b;
 function lcm(a, b) { return a / gcd(a,b) * b; }
 
 function computePeriod(R, r) {
-  // period = 2π * r / gcd(R,r) — t goes from 0 to period for one full loop
+  // period = 2π * r / gcd(R,r) - t goes from 0 to period for one full loop
   const g = gcd(Math.round(R), Math.round(r));
   const periods = Math.round(R) / g;
   return 2 * Math.PI * periods;
@@ -459,7 +459,7 @@ function frame(ts) {
 
     if (drawnUpTo < curvePoints.length - 1) {
       if (fade > 0) {
-        // fade mode — draw to offscreen with fade
+        // fade mode - draw to offscreen with fade
         offCtx.fillStyle = `rgba(7,7,15,${fade / 100})`;
         offCtx.fillRect(0, 0, W, H);
       }

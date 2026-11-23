@@ -17,7 +17,7 @@ Fiction luxury nail salon in Austin, Texas - BIAB, nail art, extensions, pedicur
 
 ## Live / package
 
-- Demo: https://sonojs-website-80.winbeta-info.workers.dev/
+- Demo: https://sonojs-website-80.sonojs3.workers.dev/
 - Zip: `products/webiste/sonojs-website-80/sonojs-website-80.zip`
 
 ## Access

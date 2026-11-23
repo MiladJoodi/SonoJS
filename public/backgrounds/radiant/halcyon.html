@@ -255,8 +255,8 @@
   <div class="card">
     <h1>H A L C Y O N</h1>
     <div class="rule"></div>
-    <p>An ocean in one file. Eight Gerstner waves displace a screen-projected grid; foam is grown from the Jacobian of the surface where crests self-compress; an analytic sky feeds Fresnel reflections and a wind-stretched sun path. Press play and the sun swells, reddens and drowns — the breaking crests come back to life as bioluminescence under a rising moon, and meteors score the dark, doubled in the water below.</p>
-    <p class="keys">DRAG — LOOK&nbsp;&nbsp;&nbsp;SCROLL — LENS&nbsp;&nbsp;&nbsp;SPACE — PLAY&nbsp;&nbsp;&nbsp;L — 2.39:1&nbsp;&nbsp;&nbsp;ESC — CLOSE</p>
+    <p>An ocean in one file. Eight Gerstner waves displace a screen-projected grid; foam is grown from the Jacobian of the surface where crests self-compress; an analytic sky feeds Fresnel reflections and a wind-stretched sun path. Press play and the sun swells, reddens and drowns - the breaking crests come back to life as bioluminescence under a rising moon, and meteors score the dark, doubled in the water below.</p>
+    <p class="keys">DRAG - LOOK&nbsp;&nbsp;&nbsp;SCROLL - LENS&nbsp;&nbsp;&nbsp;SPACE - PLAY&nbsp;&nbsp;&nbsp;L - 2.39:1&nbsp;&nbsp;&nbsp;ESC - CLOSE</p>
     <p class="credit">A SINGLE SELF-CONTAINED HTML FILE · NO LIBRARIES<br>BUILT BY <b>CLAUDE FABLE 5</b></p>
   </div>
 </div>
@@ -267,7 +267,7 @@
 'use strict';
 (function(){
 /* ============================================================
-   HALCYON — a cinematic ocean in one file
+   HALCYON - a cinematic ocean in one file
    Built by Claude Fable 5
    ============================================================ */
 
@@ -395,7 +395,7 @@ function makeTarget(w, h, depth){
     gl.framebufferRenderbuffer(gl.FRAMEBUFFER, gl.DEPTH_ATTACHMENT, gl.RENDERBUFFER, t.depth);
   }
   if (gl.checkFramebufferStatus(gl.FRAMEBUFFER) !== gl.FRAMEBUFFER_COMPLETE && floatOK){
-    /* half float not renderable after all — rebuild everything as RGBA8 */
+    /* half float not renderable after all - rebuild everything as RGBA8 */
     floatOK = false; halfType = gl.UNSIGNED_BYTE; halfInternal = gl.RGBA;
     gl.bindFramebuffer(gl.FRAMEBUFFER, null);
     return makeTarget(w, h, depth);
@@ -414,7 +414,7 @@ function resizeTarget(t, w, h){
 }
 
 /* ============================================================
-   SHADERS (GLSL 1.00 — runs on both WebGL1 and WebGL2)
+   SHADERS (GLSL 1.00 - runs on both WebGL1 and WebGL2)
    ============================================================ */
 
 var NOISE = [
@@ -459,7 +459,7 @@ var SKY = [
 '      col += vec3(0.75,0.86,1.0) * exp(-d2*340.0) * tw * uStarA * (0.35 + fract(hs*7.77)*1.7) * smoothstep(0.0, 0.18, rd.y);',
 '    }',
 '  }',
-   /* meteors — hashed once per 6s window; the ocean reflection sees them too */
+   /* meteors - hashed once per 6s window; the ocean reflection sees them too */
 '  if (uStarA > 0.25 && withStars > 0.5 && rd.y > -0.02){',
 '    float mep = floor(uTime/6.0);',
 '    float mft = fract(uTime/6.0);',
@@ -615,7 +615,7 @@ WAVES,
 '  vec3 foamLit = vec3(0.93, 0.96, 0.97) * (uAmb*1.4 + uKeyCol*(0.35 + 0.65*max(dot(n, uKeyDir), 0.0)));',
 '  col = mix(col, foamLit, foam * uFoamW);',
 
-   /* bioluminescence — foam mask reborn as emissive cyan */
+   /* bioluminescence - foam mask reborn as emissive cyan */
 '  if (uBioGain > 0.002){',
 '    float trail = fbm(vParam*0.17 - uWindDir*uTime*0.22);',
 '    float mask2 = smoothstep(uFoamLo*0.55, uFoamHi*0.95, comp + (trail-0.44)*0.42);',
@@ -781,7 +781,7 @@ var rtBloomA = makeTarget(4, 4, false);
 var rtBloomB = makeTarget(4, 4, false);
 
 /* ============================================================
-   THE SEA — wave synthesis
+   THE SEA - wave synthesis
    ============================================================ */
 var WIND_HEADING = 2.55;               /* radians; roughly toward camera-left */
 var SWELL_HEADING = WIND_HEADING - 0.62;
@@ -803,7 +803,7 @@ function buildWaves(bf, swellPct){
   var sE = swellPct/100;
   var i, L, k, slope, a, dir, idx = 0;
   var sumAmp = 0;
-  /* swell band — long, glassy energy */
+  /* swell band - long, glassy energy */
   var baseL = 68 + 130*sE;
   var swellMul = [1.0, 0.55, 1.72];
   var swellSl  = [1.0, 0.72, 0.82];
@@ -817,7 +817,7 @@ function buildWaves(bf, swellPct){
     waveTgt[idx].k = k; waveTgt[idx].a = a; waveTgt[idx].q = 1;
     sumAmp += a; idx++;
   }
-  /* wind band — short, choppy, foamy */
+  /* wind band - short, choppy, foamy */
   var Lw = 3.5 + 55*Math.pow(w, 1.5);
   var windMul = [0.32, 0.55, 1.0, 1.75, 2.9];
   var windSl  = [1.15, 1.0, 0.9, 0.75, 0.6];
@@ -832,7 +832,7 @@ function buildWaves(bf, swellPct){
     waveTgt[idx].k = k; waveTgt[idx].a = a; waveTgt[idx].q = 1;
     sumAmp += a; idx++;
   }
-  /* steepness budget: sum(q*k*a) = qShare — crests sharpen, never loop */
+  /* steepness budget: sum(q*k*a) = qShare - crests sharpen, never loop */
   var qShare = 0.55 + 0.42*w;
   for (i=0;i<8;i++){
     var ka = waveTgt[i].k * waveTgt[i].a;
@@ -865,7 +865,7 @@ function tickWaves(dt){
 }
 
 /* ============================================================
-   THE LIGHT — color script across four reels
+   THE LIGHT - color script across four reels
    ============================================================ */
 /* h: 0 → 1 over the sunset. Keys: [h, sunElDeg, zen, hor, haze, sunC, sunI,
    halo, diskDeg, starA, deep, shal, sss, foamW, bio, sat, gain, lift, expo, bloom] */
@@ -1034,7 +1034,7 @@ elAbout.addEventListener('click', function(){ elAbout.classList.remove('show'); 
 /* clicking the text itself shouldn't dismiss the dialog */
 elAbout.firstElementChild.addEventListener('click', function(e){ e.stopPropagation(); });
 
-/* idle fade — the ocean is always the star */
+/* idle fade - the ocean is always the star */
 var idleTimer = 0;
 function wake(){
   document.body.classList.remove('idle');

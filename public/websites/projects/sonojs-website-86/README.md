@@ -17,7 +17,7 @@ Neighborhood performance gym in Austin with acid-lime on black/white bands. Bran
 
 ## Live / package
 
-- Demo: https://sonojs-website-86.winbeta-info.workers.dev/
+- Demo: https://sonojs-website-86.sonojs3.workers.dev/
 - Zip: `products/webiste/sonojs-website-86/sonojs-website-86.zip`
 
 ## Access

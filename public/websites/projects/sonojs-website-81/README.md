@@ -17,7 +17,7 @@ Fiction boutique physio + Pilates + wellbeing studio in Portland, Oregon - class
 
 ## Live / package
 
-- Demo: https://sonojs-website-81.winbeta-info.workers.dev/
+- Demo: https://sonojs-website-81.sonojs3.workers.dev/
 - Zip: `products/webiste/sonojs-website-81/sonojs-website-81.zip`
 
 ## Access

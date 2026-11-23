@@ -109,7 +109,7 @@
 <div id="hint">hold to feed &nbsp;·&nbsp; tap to stir the water</div>
 <div id="foot">
   <button id="sound" class="off" title="sound on/off" aria-label="toggle sound">音</button>
-  <span>静 stillwater — a koi pond in one file · built by Claude Fable 5</span>
+  <span>静 stillwater - a koi pond in one file · built by Claude Fable 5</span>
 </div>
 <div id="plate"></div>
 <div id="debug"></div>
@@ -120,7 +120,7 @@
 (function(){
 
 /* ============================================================
-   静 STILLWATER — an interactive koi pond in one file
+   静 STILLWATER - an interactive koi pond in one file
    Built by Claude Fable 5.
    floor canvas : depth gradient + sand + scrolling caustic webs
    main canvas  : koi (12-joint spines, unique sprite genomes),
@@ -189,7 +189,7 @@ function resize(){
 }
 
 /* ============================================================
-   WATER — heightfield (two-buffer wave equation) on a coarse grid
+   WATER - heightfield (two-buffer wave equation) on a coarse grid
    ============================================================ */
 var GW=160, GH=90;
 var u0 = new Float32Array(GW*GH), u1 = new Float32Array(GW*GH);
@@ -251,7 +251,7 @@ function renderWater(){
 }
 
 /* ============================================================
-   FLOOR — depth gradient, sand mottle, precomputed caustic webs
+   FLOOR - depth gradient, sand mottle, precomputed caustic webs
    ============================================================ */
 function makeCausticTile(seed, size){
   var rng = mulberry32(seed);
@@ -366,7 +366,7 @@ function drawFloor(t){
   fx.fillRect(-256,-256,W+512,H+512);
   fx.restore();
 
-  /* caustic webs — two tiles scrolled against each other, 8s pulse */
+  /* caustic webs - two tiles scrolled against each other, 8s pulse */
   var pulse = 0.55 + 0.35*Math.sin(t*TAU/8);
   fx.save();
   fx.globalCompositeOperation="lighter";
@@ -385,7 +385,7 @@ function drawFloor(t){
 }
 
 /* ============================================================
-   KOI — genome, sprite painting, spine physics, behaviors
+   KOI - genome, sprite painting, spine physics, behaviors
    ============================================================ */
 var SPR_L=256, SPR_W=84, N=12, SLICES=N-1;
 var VARIETIES=["Kohaku","Sanke","Showa","Tancho","Ogon","Karasu"];
@@ -500,7 +500,7 @@ function makeKoiSprite(gen){
     paintPatch(g,rng,"#0e0d0c", 80+rng()*(SPR_L*0.5), mid+(rng()-0.5)*22, 40, 3);
   }
 
-  /* scale hatching — crescents (still source-atop so they stay on the body) */
+  /* scale hatching - crescents (still source-atop so they stay on the body) */
   g.strokeStyle = "rgba(20,20,25,0.10)";
   if(gen.variety===5) g.strokeStyle="rgba(160,190,200,0.10)";
   g.lineWidth=1;
@@ -856,7 +856,7 @@ Koi.prototype.draw = function(ctx){
 };
 
 /* ============================================================
-   POND ENTITIES — pellets, rings, pads, lotus, petals, dragonfly
+   POND ENTITIES - pellets, rings, pads, lotus, petals, dragonfly
    ============================================================ */
 var koi=[];
 var pellets=[];
@@ -1024,7 +1024,7 @@ function updateDragonfly(dt){
 }
 
 /* ============================================================
-   SOUND — lazy AudioContext, pentatonic pluck + bloop
+   SOUND - lazy AudioContext, pentatonic pluck + bloop
    ============================================================ */
 var Snd={
   ctx:null, master:null, on:false,
@@ -1090,7 +1090,7 @@ soundBtn.addEventListener("click", function(ev){
 soundBtn.addEventListener("pointerdown", function(ev){ ev.stopPropagation(); });
 
 /* ============================================================
-   INPUT — unified pointer: trail, tap-startle, hold-feed, dbl-tap
+   INPUT - unified pointer: trail, tap-startle, hold-feed, dbl-tap
    ============================================================ */
 var ptr={ x:-999,y:-999, lastX:0,lastY:0, speed:0, active:false,
           down:false, downT:0, downX:0, downY:0, moved:0,
@@ -1208,7 +1208,7 @@ function updateCounter(){
 }
 
 /* ============================================================
-   MAIN LOOP — fixed 60 Hz sim, render each rAF
+   MAIN LOOP - fixed 60 Hz sim, render each rAF
    ============================================================ */
 var STEP=1/60, acc=0, lastT=0, startT=0;
 var medBase=0, medW=0, quietT=0;

@@ -31,7 +31,7 @@
 <canvas id="canvas"></canvas>
 <script>
 // ─────────────────────────────────────────────
-// Erosion Channels — Dendritic channel networks
+// Erosion Channels - Dendritic channel networks
 // carving through warm terrain
 // ─────────────────────────────────────────────
 (function () {
@@ -91,7 +91,7 @@
     '             mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), f.x), f.y);',
     '}',
     '',
-    '// ── Terrain FBM (3 octaves — was 5) ──',
+    '// ── Terrain FBM (3 octaves - was 5) ──',
     'float terrainFBM(vec2 p) {',
     '  float v = 0.0, amp = 0.5;',
     '  mat2 rot = mat2(0.8, 0.6, -0.6, 0.8);',
@@ -166,7 +166,7 @@
     '  vec3 normal = vec3(0.0, 0.0, 1.0);',
     ].join('\n'),
     '',
-    '  // ── Light direction — cursor overrides sun when active ──',
+    '  // ── Light direction - cursor overrides sun when active ──',
     '  float sunAng = t * 0.12 + PI * 0.25;',
     '  float sunElev = 0.4 + 0.2 * sin(t * 0.07);',
     '  vec3 autoLight = normalize(vec3(cos(sunAng), sin(sunAng), sin(sunElev) + 0.3));',
@@ -180,7 +180,7 @@
     '  float lighting = ambient + diff * 0.78;',
     '  lighting *= mix(0.55, 1.0, smoothstep(0.0, 0.2, diff));',
     '',
-    '  // Specular — reduced shininess',
+    '  // Specular - reduced shininess',
     '  vec3 halfV = normalize(lightDir + vec3(0.0, 0.0, 1.0));',
     '  float spec = pow(max(dot(normal, halfV), 0.0), 20.0);',
     '',
@@ -223,19 +223,19 @@
     '  vec3 col = mix(terrainCol, chanCol, smoothstep(0.0, 0.08, dn));',
     '  col *= lighting;',
     '',
-    '  // ── Highlights — reduced intensity ──',
+    '  // ── Highlights - reduced intensity ──',
     '  float edgeLight = smoothstep(0.55, 0.95, diff) * max(0.0, 1.0 - dn * 1.5);',
     '  col += hotHighlight * spec * 0.15 * max(0.0, 1.0 - dn * 1.2);',
     '  col += hotHighlight * edgeLight * 0.04;',
     '',
     '  // ── Grain / sandstone texture (configurable) ──',
     '  float grainAmt = u_grain;',
-    '  // Fine sand grain — pixel-scale hash for crisp individual grains',
+    '  // Fine sand grain - pixel-scale hash for crisp individual grains',
     '  float g1 = hash(gl_FragCoord.xy * 1.0 + fract(u_time * 0.7) * 100.0);',
     '  float g2 = hash(gl_FragCoord.xy * 0.5 + 73.1);',
     '  col += (g1 - 0.5) * 0.03 * grainAmt;',
     '  col += (g2 - 0.5) * 0.02 * grainAmt;',
-    '  // Medium sand texture — high-freq noise at pixel scale',
+    '  // Medium sand texture - high-freq noise at pixel scale',
     '  float sandTex = vnoise(gl_FragCoord.xy * 0.4);',
     '  col += (sandTex - 0.5) * 0.04 * grainAmt * max(0.0, 1.0 - dn * 1.5);',
     '  // Subtle directional streaks in channel walls',

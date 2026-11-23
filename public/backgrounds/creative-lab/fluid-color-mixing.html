@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>#068 Fluid Color Mixing — creative-lab</title>
+<title>#068 Fluid Color Mixing - creative-lab</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{background:#000;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#e0e8ff}
@@ -405,7 +405,7 @@ function step(dt) {
   bindTex(vel.read.tex, 0); gl.uniform1i(ul(prg.div,'uVel'), 0);
   renderTo(divBuf.write.fbo, SIM, SIM); divBuf.swap();
 
-  // 5. Pressure solve — Jacobi iteration
+  // 5. Pressure solve - Jacobi iteration
   clearFBO(prs.read.fbo,  SIM, SIM);
   clearFBO(prs.write.fbo, SIM, SIM);
   gl.useProgram(prg.pressure);

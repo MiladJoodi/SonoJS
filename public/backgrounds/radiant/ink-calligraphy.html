@@ -150,19 +150,19 @@
     var strokeType = Math.random();
     var maxW, lifespan, targetDist, curveAmt;
     if (strokeType < 0.4) {
-      // Hairline — thin, fast, long
+      // Hairline - thin, fast, long
       maxW = 3 + Math.random() * 8;
       lifespan = 2.5 + Math.random() * 3.0;
       targetDist = PW * (0.4 + Math.random() * 0.3);
       curveAmt = (Math.random() - 0.5) * 0.005;
     } else if (strokeType < 0.8) {
-      // Medium — balanced
+      // Medium - balanced
       maxW = 10 + Math.random() * 20;
       lifespan = 3.0 + Math.random() * 3.5;
       targetDist = PW * (0.3 + Math.random() * 0.25);
       curveAmt = (Math.random() - 0.5) * 0.008;
     } else {
-      // Bold — wider, slower, dramatic sweep
+      // Bold - wider, slower, dramatic sweep
       maxW = 30 + Math.random() * 35;
       lifespan = 2.5 + Math.random() * 2.0;
       targetDist = PW * (0.2 + Math.random() * 0.2);
@@ -201,7 +201,7 @@
 
       var t = age / b.life; // 0..1 normalized life
 
-      // Steering — gentler, with curve that fades at exit to prevent tight hooks
+      // Steering - gentler, with curve that fades at exit to prevent tight hooks
       var n1 = noise.noise2D(b.x * 0.0003 + b.noff, b.y * 0.0003 + time * 0.06);
       var n2 = noise2.noise2D(b.x * 0.0007 + b.noff + 50, b.y * 0.0007 + time * 0.04);
       var curveFade = t > 0.7 ? (1 - t) / 0.3 : 1.0; // curve decays at exit
@@ -261,7 +261,7 @@
       inkCtx.quadraticCurveTo(b.px, b.py, b.x, b.y);
       inkCtx.stroke();
 
-      // Bleed halo — subtle, only on thicker strokes
+      // Bleed halo - subtle, only on thicker strokes
       if (b.w > 8) {
         inkCtx.lineWidth = b.w * 1.5;
         inkCtx.strokeStyle = 'rgba(' + rI + ',' + gI + ',' + bI + ',' + (alpha * 0.04) + ')';
@@ -473,7 +473,7 @@
     inkCtx.restore();
   }
 
-  // ── Fade — continuous per-frame fade so old strokes dissolve ──
+  // ── Fade - continuous per-frame fade so old strokes dissolve ──
   var fadeA = 0;
   function fade(dt) {
     fadeA += dt;

@@ -92,7 +92,7 @@ export function DataTableGridResizing() {
   return (
     <div className="w-full max-w-2xl space-y-2">
       <p className="text-xs text-muted-foreground">
-        Drag the column edge handles — sizing uses{" "}
+        Drag the column edge handles - sizing uses{" "}
         <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
           {"columnResizeMode=\"onChange\""}
         </code>

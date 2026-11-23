@@ -220,7 +220,7 @@
   }
 
   function injectImpulse() {
-    // Single clean impulse from one edge — let it propagate fully
+    // Single clean impulse from one edge - let it propagate fully
     var baseStrength = (22 + Math.random() * 14) * IMPULSE_STRENGTH;
     var edge = Math.floor(Math.random() * 4);
     injectSingleImpulse(edge, baseStrength);
@@ -288,35 +288,35 @@
     var r, g, b, a;
 
     if (t < 0.1) {
-      // Resting — dark reddish-brown (hue ~10°)
+      // Resting - dark reddish-brown (hue ~10°)
       var f = t / 0.1;
       r = 40 + f * 20;
       g = 14 + f * 8;
       b = 5 + f * 3;
       a = 0.25 + f * 0.1;
     } else if (t < 0.3) {
-      // Low tension — warm orange (hue ~12°)
+      // Low tension - warm orange (hue ~12°)
       var f = (t - 0.1) / 0.2;
       r = 60 + f * 120;
       g = 22 + f * 38;
       b = 8 + f * 8;
       a = 0.35 + f * 0.2;
     } else if (t < 0.55) {
-      // Medium — bright orange (hue ~15°)
+      // Medium - bright orange (hue ~15°)
       var f = (t - 0.3) / 0.25;
       r = 180 + f * 50;
       g = 60 + f * 60;
       b = 16 + f * 14;
       a = 0.55 + f * 0.2;
     } else if (t < 0.8) {
-      // High — hot orange-white (hue ~12°)
+      // High - hot orange-white (hue ~12°)
       var f = (t - 0.55) / 0.25;
       r = 230 + f * 25;
       g = 120 + f * 100;
       b = 30 + f * 90;
       a = 0.75 + f * 0.15;
     } else {
-      // Extreme — white-hot with orange tint
+      // Extreme - white-hot with orange tint
       var f = (t - 0.8) / 0.2;
       r = 255;
       g = 220 + f * 35;
@@ -380,7 +380,7 @@
     var springCount = springs.length / 3;
 
     // ── Layer 1: Soft wide glow pass (neon tube bloom) ──
-    // ALL connections get this — creates the always-visible neon mesh
+    // ALL connections get this - creates the always-visible neon mesh
     for (var s = 0; s < springCount; s++) {
       var s3 = s * 3;
       var a = springs[s3];
@@ -478,7 +478,7 @@
         var bloomIntensity = (speed - velocityThreshold) / 15.0;
         if (bloomIntensity > 1) bloomIntensity = 1;
 
-        // Outer halo — warm orange
+        // Outer halo - warm orange
         var haloRadius = 4 + bloomIntensity * 12;
         var haloAlpha = bloomIntensity * 0.35;
         var haloR = Math.round(220 + bloomIntensity * 35);
@@ -518,7 +518,7 @@
 
       var fl = flash.life;
 
-      // Core radial glow — bigger and brighter
+      // Core radial glow - bigger and brighter
       var flashRadius = (1 - fl) * 100 + 20;
       var flashAlpha = fl * fl * 0.8;
 

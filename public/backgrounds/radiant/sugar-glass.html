@@ -30,7 +30,7 @@
 <canvas id="canvas"></canvas>
 <script>
 // ─────────────────────────────────────────────
-// Sugar Glass — Caramelized sugar glass with Voronoi fracture patterns
+// Sugar Glass - Caramelized sugar glass with Voronoi fracture patterns
 // ─────────────────────────────────────────────
 (function() {
   var canvas = document.getElementById('canvas');
@@ -78,7 +78,7 @@
     '  vec2 nearestCell = vec2(0.0);',
     '  vec2 nearestPoint = vec2(0.0);',
     '',
-    '  // 3x3 neighbor search — unrolled to avoid non-constant indexing',
+    '  // 3x3 neighbor search - unrolled to avoid non-constant indexing',
     '  vec2 g;',
     '  vec2 o;',
     '  vec2 diff;',
@@ -201,14 +201,14 @@
     '  );',
     '  p += shimmer;',
     '',
-    '  // Macro Voronoi fractures — foreground layer, stronger parallax',
+    '  // Macro Voronoi fractures - foreground layer, stronger parallax',
     '  vec2 macroUV = (p + mouseOffset * 1.0) * 3.5 + 0.5;',
     '  vec3 macro = voronoi(macroUV, t);',
     '  float macroCenterDist = macro.x;',
     '  float macroEdge = macro.y;',
     '  float cellId = macro.z;',
     '',
-    '  // Micro fractures — background layer, subtler parallax (inverted for depth)',
+    '  // Micro fractures - background layer, subtler parallax (inverted for depth)',
     '  float microEdge = voronoiEdge((p + mouseOffset * 2.5) * 9.0 + vec2(3.7, 1.2), t * 0.7);',
     '',
     '  // Time-varying crack widths',
@@ -220,7 +220,7 @@
     '  float macroCrack = 1.0 - smoothstep(0.0, macroCrackWidth, macroEdge);',
     '  float microCrack = 1.0 - smoothstep(0.0, microCrackWidth, microEdge);',
     '',
-    '  // Combined crack pattern — macro dominates, micro adds detail',
+    '  // Combined crack pattern - macro dominates, micro adds detail',
     '  float crack = macroCrack + microCrack * 0.4;',
     '  crack = clamp(crack, 0.0, 1.0);',
     '',
@@ -238,7 +238,7 @@
     '  vec3 caramel = vec3(0.831, 0.647, 0.455);    // #d4a574',
     '  vec3 deepAmber = vec3(0.29, 0.125, 0.0);     // #4a2000',
     '',
-    '  // Glass surface — varies per cell',
+    '  // Glass surface - varies per cell',
     '  vec3 glassColor = mix(amber, caramel, cellHueShift);',
     '  glassColor = mix(deepAmber, glassColor, cellThickness);',
     '',
@@ -278,7 +278,7 @@
     '  vig = smoothstep(0.0, 1.0, vig);',
     '  col *= 0.6 + 0.4 * vig;',
     '',
-    '  // Tone mapping — keep it warm',
+    '  // Tone mapping - keep it warm',
     '  col = pow(col, vec3(0.95));',
     '',
     '  gl_FragColor = vec4(col, 1.0);',

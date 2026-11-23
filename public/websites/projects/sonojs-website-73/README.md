@@ -17,7 +17,7 @@ Mediterranean cliff wellness retreat with suites, spa rituals, booking, and gues
 
 ## Live / package
 
-- Demo: https://sonojs-website-73.winbeta-info.workers.dev/
+- Demo: https://sonojs-website-73.sonojs3.workers.dev/
 - Zip: `products/webiste/sonojs-website-73/sonojs-website-73.zip`
 
 ## Access

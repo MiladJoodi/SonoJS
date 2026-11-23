@@ -17,7 +17,7 @@ Intimate Charleston solo advocate - Criminal Defense, Family Law, Business Couns
 
 ## Live / package
 
-- Demo: https://sonojs-website-95.winbeta-info.workers.dev/
+- Demo: https://sonojs-website-95.sonojs3.workers.dev/
 - Zip: `products/webiste/sonojs-website-95/sonojs-website-95.zip`
 
 ## Access

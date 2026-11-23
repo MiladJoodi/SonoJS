@@ -30,7 +30,7 @@
 <canvas id="canvas"></canvas>
 <script>
 // ─────────────────────────────────────────────
-// Feedback Loop — Recursive video feedback creating infinite
+// Feedback Loop - Recursive video feedback creating infinite
 // fractal tunnel depth. Reads its own previous frame, applies
 // zoom + rotation + color shift, composites new geometric seeds.
 // Inspired by Daft Punk's Alive 2007 pyramid projections.
@@ -327,7 +327,7 @@
     '  // ── Scanlines: horizontal lines scrolling at different rate ──',
     '  float scanY = gl_FragCoord.y;',
     '',
-    '  // Fine scanlines — subtle CRT effect',
+    '  // Fine scanlines - subtle CRT effect',
     '  float fineScan = sin(scanY * PI * 0.5) * 0.5 + 0.5;',
     '  fineScan = pow(fineScan, 2.0);',
     '  float scanDarken = mix(0.75, 1.0, fineScan);',
@@ -557,7 +557,7 @@
       smoothMouseY += (0.5 - smoothMouseY) * 0.02;
     }
 
-    // ── Pass 1: Feedback — read from previous, write to current ──
+    // ── Pass 1: Feedback - read from previous, write to current ──
     var readFBO = currentFBO === 0 ? fboA : fboB;
     var writeFBO = currentFBO === 0 ? fboB : fboA;
 
@@ -582,7 +582,7 @@
     // Swap: next frame reads from what we just wrote
     currentFBO = 1 - currentFBO;
 
-    // ── Pass 2: Display — render feedback result to screen with post-processing ──
+    // ── Pass 2: Display - render feedback result to screen with post-processing ──
     gl.bindFramebuffer(gl.FRAMEBUFFER, null);
     gl.viewport(0, 0, displayW, displayH);
 

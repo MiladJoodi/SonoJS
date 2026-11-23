@@ -19,7 +19,7 @@ const exampleDefs = [
     name: "rich-text-editor-default",
     title: "Simple",
     description:
-      "Default `variant=\"simple\"` — one toolbar row with history, heading, marks, lists, and insert.",
+      "Default `variant=\"simple\"` - one toolbar row with history, heading, marks, lists, and insert.",
   },
   {
     name: "rich-text-editor-advanced",
@@ -37,7 +37,7 @@ const exampleDefs = [
     name: "rich-text-editor-rtl",
     title: "RTL",
     description:
-      "Same editor with `dir=\"rtl\"` and `lang=\"fa\"` — toolbar, menus, and text follow the writing direction.",
+      "Same editor with `dir=\"rtl\"` and `lang=\"fa\"` - toolbar, menus, and text follow the writing direction.",
   },
   {
     name: "rich-text-editor-rtl-advanced",
@@ -49,7 +49,7 @@ const exampleDefs = [
     name: "rich-text-editor-controlled",
     title: "Controlled",
     description:
-      "`value` + `onChange` — `onChange` returns both HTML and TipTap JSON.",
+      "`value` + `onChange` - `onChange` returns both HTML and TipTap JSON.",
   },
   {
     name: "rich-text-editor-disabled",

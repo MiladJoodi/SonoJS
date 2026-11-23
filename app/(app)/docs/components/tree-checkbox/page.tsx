@@ -17,7 +17,7 @@ const exampleDefs = [
     name: "tree-checkbox-gallery",
     title: "Gallery",
     description:
-      "Permissions tree with cascade select. Toggle `Documents` — parents show indeterminate when partial.",
+      "Permissions tree with cascade select. Toggle `Documents` - parents show indeterminate when partial.",
     requires: ["checkbox", "collapsible", "badge"],
     npmRequires: ["lucide-react"],
   },

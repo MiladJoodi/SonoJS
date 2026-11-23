@@ -30,7 +30,7 @@
 <canvas id="canvas"></canvas>
 <script>
 // ─────────────────────────────────────────────
-// Chromatic Bloom — Luminous color orbs on black
+// Chromatic Bloom - Luminous color orbs on black
 // ─────────────────────────────────────────────
 (function () {
   var canvas = document.getElementById('canvas');
@@ -105,7 +105,7 @@
     '',
     '  // ── Layer 2: Primary color orbs (5 large, soft) ──',
     '',
-    '  // Orb colors — VIVID, near-max saturation',
+    '  // Orb colors - VIVID, near-max saturation',
     '  vec3 cobalt    = vec3(0.03, 0.10, 1.00);',
     '  vec3 orange    = vec3(1.00, 0.42, 0.03);',
     '  vec3 whiteBlue = vec3(0.85, 0.93, 1.00);',
@@ -237,7 +237,7 @@
     '  // Clamp to avoid artifacts',
     '  col = max(col, vec3(0.0));',
     '',
-    '  // Minimal tone mapping — just a soft knee to avoid hard clipping',
+    '  // Minimal tone mapping - just a soft knee to avoid hard clipping',
     '  // where overlap creates values > 1, gently compress; otherwise pass through',
     '  col = mix(col, sqrt(col), smoothstep(0.6, 1.5, col));',
     '',

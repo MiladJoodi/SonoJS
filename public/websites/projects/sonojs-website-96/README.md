@@ -17,7 +17,7 @@ Soft luxury residential design-build (Santa Barbara fiction) with soft gold acce
 
 ## Live / package
 
-- Demo: https://sonojs-website-96.winbeta-info.workers.dev/
+- Demo: https://sonojs-website-96.sonojs3.workers.dev/
 - Zip: `products/webiste/sonojs-website-96/sonojs-website-96.zip`
 
 ## Access

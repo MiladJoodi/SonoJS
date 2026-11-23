@@ -17,7 +17,7 @@ Soft-pink beauty clinic and salon across US boutiques - services, gallery, booki
 
 ## Live / package
 
-- Demo: https://sonojs-website-76.winbeta-info.workers.dev/
+- Demo: https://sonojs-website-76.sonojs3.workers.dev/
 - Zip: `products/webiste/sonojs-website-76/sonojs-website-76.zip`
 
 ## Access

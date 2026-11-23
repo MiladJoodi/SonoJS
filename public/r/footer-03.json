@@ -34,13 +34,13 @@
     {
       "path": "components/blocks/marketing/footer-03/icons/facebook.tsx",
       "type": "registry:component",
-      "content": "import { cn } from \"@/lib/utils\"\n\nconst facebookPath =\n  \"M12 22.5C17.799 22.5 22.5 17.799 22.5 12C22.5 6.20101 17.799 1.5 12 1.5C6.20101 1.5 1.5 6.20101 1.5 12C1.5 17.1752 5.24405 21.4759 10.1712 22.3413V15.2112H7.5V12.2476H10.1712V9.98883C10.1712 7.4197 11.7411 6 14.1452 6C15.2959 6 16.5 6.20024 16.5 6.20024V8.7233H15.1726C13.8657 8.7233 13.4589 9.51428 13.4589 10.3252V12.2476H16.3767L15.9103 15.2112H13.4589V22.3759C12.9525 22.4534 12.4351 22.4952 11.9084 22.4996C11.9389 22.4999 11.9694 22.5 12 22.5Z\"\n\nexport function FacebookIcon({\n  className,\n  ...props\n}: React.ComponentProps<\"svg\">) {\n  return (\n    <svg\n      viewBox=\"0 0 24 24\"\n      aria-hidden=\"true\"\n      className={cn(\"size-5\", className)}\n      {...props}\n    >\n      <g transform=\"translate(12 12) scale(1.12) translate(-12 -12)\">\n        <path\n          fillRule=\"evenodd\"\n          clipRule=\"evenodd\"\n          d={facebookPath}\n          fill=\"#0866FF\"\n        />\n      </g>\n    </svg>\n  )\n}\n",
+      "content": "import { cn } from \"@/lib/utils\"\n\nexport function FacebookIcon({\n  className,\n  ...props\n}: React.ComponentProps<\"svg\">) {\n  return (\n    <svg\n      viewBox=\"0 0 24 24\"\n      aria-hidden=\"true\"\n      className={cn(\"size-5\", className)}\n      fill=\"none\"\n      {...props}\n    >\n      <circle cx=\"12\" cy=\"12\" r=\"10.5\" fill=\"#0866FF\" />\n      <path\n        fill=\"#fff\"\n        d=\"M13.36 19.5v-6.54h2.2l.33-2.55h-2.53V8.78c0-.74.2-1.24 1.27-1.24h1.35V5.26A18.1 18.1 0 0 0 13.7 5.1c-2.24 0-3.78 1.37-3.78 3.88v2.17H7.5v2.55h2.42V19.5h3.44Z\"\n      />\n    </svg>\n  )\n}\n",
       "target": "components/blocks/marketing/footer-03/icons/facebook.tsx"
     },
     {
       "path": "components/blocks/marketing/footer-03/icons/facebook.svg",
       "type": "registry:file",
-      "content": "PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIj48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTEyIDIyLjVDMTcuNzk5IDIyLjUgMjIuNSAxNy43OTkgMjIuNSAxMkMyMi41IDYuMjAxMDEgMTcuNzk5IDEuNSAxMiAxLjVDNi4yMDEwMSAxLjUgMS41IDYuMjAxMDEgMS41IDEyQzEuNSAxNy4xNzUyIDUuMjQ0MDUgMjEuNDc1OSAxMC4xNzEyIDIyLjM0MTNWMTUuMjExMkg3LjVWMTIuMjQ3NkgxMC4xNzEyVjkuOTg4ODNDMTAuMTcxMiA3LjQxOTcgMTEuNzQxMSA2IDE0LjE0NTIgNkMxNS4yOTU5IDYgMTYuNSA2LjIwMDI0IDE2LjUgNi4yMDAyNFY4LjcyMzNIMTUuMTcyNkMxMy44NjU3IDguNzIzMyAxMy40NTg5IDkuNTE0MjggMTMuNDU4OSAxMC4zMjUyVjEyLjI0NzZIMTYuMzc2N0wxNS45MTAzIDE1LjIxMTJIMTMuNDU4OVYyMi4zNzU5QzEyLjk1MjUgMjIuNDUzNCAxMi40MzUxIDIyLjQ5NTIgMTEuOTA4NCAyMi40OTk2QzExLjkzODkgMjIuNDk5OSAxMS45Njk0IDIyLjUgMTIgMjIuNVoiIGZpbGw9IiMwODY2RkYiPjwvcGF0aD48L3N2Zz4=",
+      "content": "PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSI+CiAgPGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTAuNSIgZmlsbD0iIzA4NjZGRiIvPgogIDxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0xMy4zNiAxOS41di02LjU0aDIuMmwuMzMtMi41NWgtMi41M1Y4Ljc4YzAtLjc0LjItMS4yNCAxLjI3LTEuMjRoMS4zNVY1LjI2QTE4LjEgMTguMSAwIDAgMCAxMy43IDUuMWMtMi4yNCAwLTMuNzggMS4zNy0zLjc4IDMuODh2Mi4xN0g3LjV2Mi41NWgyLjQyVjE5LjVoMy40NFoiLz4KPC9zdmc+Cg==",
       "encoding": "base64",
       "target": "components/blocks/marketing/footer-03/icons/facebook.svg"
     },
@@ -71,6 +71,6 @@
       "target": "components/blocks/marketing/footer-03/icons/x.svg"
     }
   ],
-  "version": "0.1.0+11aa17dcdfe3",
-  "generatedAt": "2026-11-21T12:51:19.316Z"
+  "version": "0.1.0+5e8ff4b783c4",
+  "generatedAt": "2026-11-23T01:47:20.470Z"
 }

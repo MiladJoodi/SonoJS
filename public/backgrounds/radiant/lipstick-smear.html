@@ -229,7 +229,7 @@
     '  rim = pow(rim, 5.0);',
     '  col += vec3(1.0, 0.72, 0.78) * rim * pg * 0.7;',
     '',
-    '  // Bloom: two-pass cross — tight inner + wide outer for soft diffuse glow',
+    '  // Bloom: two-pass cross - tight inner + wide outer for soft diffuse glow',
     '  vec2 bx1 = 3.0 / u_res;',
     '  vec3 b1 = (',
     '    texture2D(u_dye, v_uv + vec2(bx1.x,0.0)).rgb +',
@@ -526,7 +526,7 @@
       var cg = ca[1]*(1-cf)+cb[1]*cf;
       var cbv = ca[2]*(1-cf)+cb[2]*cf;
 
-      // Scale dye injection by dt — keep values modest so colors stay saturated, not white
+      // Scale dye injection by dt - keep values modest so colors stay saturated, not white
       var dyeStr = Math.min(dt * 12.0, 0.16);
       splat(velBuf, nx, ny, vx,           vy,           0,                e.velRad);
       splat(dyeBuf, nx, ny, cr * dyeStr,  cg * dyeStr,  cbv * dyeStr,     e.dyeRad);
@@ -547,9 +547,9 @@
     for (var s = 0; s < pts.length; s++) {
       var sx = pts[s][0], sy = pts[s][1], ci = pts[s][2];
       var c = PAL[ci % PAL.length];
-      // Inject velocity in random directions for initial turbulence — strong enough to advect
+      // Inject velocity in random directions for initial turbulence - strong enough to advect
       splat(velBuf, sx, sy, (Math.random()-0.5)*8.0, (Math.random()-0.5)*8.0, 0, 0.10);
-      // Dye at moderate strength — not so strong it washes to white
+      // Dye at moderate strength - not so strong it washes to white
       splat(dyeBuf, sx, sy, c[0]*0.70, c[1]*0.70, c[2]*0.70, 0.10);
     }
   }
@@ -559,7 +559,7 @@
 
   function step(dt) {
     // Higher viscosity = more dissipation = slower fluid
-    // Viscosity 0.8 → velDiss≈0.988, dyeDiss≈0.996 — thick fluid, slow decay
+    // Viscosity 0.8 → velDiss≈0.988, dyeDiss≈0.996 - thick fluid, slow decay
     var velDiss = Math.max(0.994 - VISCOSITY*0.006, 0.96);
     var dyeDiss = Math.max(0.998 - VISCOSITY*0.003, 0.98);
     var curl    = Math.max(5.0, 18.0 - VISCOSITY*8.0);

@@ -31,7 +31,7 @@
 <canvas id="canvas"></canvas>
 <script>
 // ─────────────────────────────────────────────
-// Golden Sediment — Layered sedimentary strata with tectonic deformation
+// Golden Sediment - Layered sedimentary strata with tectonic deformation
 // ─────────────────────────────────────────────
 (function () {
   var canvas = document.getElementById('canvas');
@@ -163,7 +163,7 @@
     '  return base;',
     '}',
     '',
-    '// ── Grain texture per layer — washi paper fibers ──',
+    '// ── Grain texture per layer - washi paper fibers ──',
     'float grainTexture(vec2 uv, float layerIdx) {',
     '  float h = hash11(layerIdx * 41.93);',
     '  float h2 = hash11(layerIdx * 67.19);',
@@ -309,7 +309,7 @@
     '  float edgeShade = smoothstep(0.0, 0.15, layerPos) * smoothstep(1.0, 0.85, layerPos);',
     '  col *= 0.85 + 0.15 * edgeShade;',
     '',
-    '  // Paper edge shadow — soft shadow at bottom of each layer',
+    '  // Paper edge shadow - soft shadow at bottom of each layer',
     '  float edgeShadow = smoothstep(0.0, 0.08, layerPos);',
     '  col *= 0.82 + 0.18 * edgeShadow;',
     '  // Slight highlight at top edge (paper catching light)',

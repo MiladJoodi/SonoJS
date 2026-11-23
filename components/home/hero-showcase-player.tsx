@@ -14,6 +14,8 @@ import {
 } from "@/components/home/hero-showcase-chrome"
 import { cn } from "@/lib/utils"
 
+import homeDemoWav from "./home-demo.wav"
+
 const EQ_BARS = Array.from({ length: 13 }, (_, b) => ({
   h: 18 + Math.round(Math.abs(Math.sin(b * 0.95 + 0.4)) * 64),
   d: -(b * 0.08),
@@ -165,7 +167,7 @@ export function ShowcasePlayerPreview({
     >
       <audio
         ref={audioRef}
-        src="/media/home-demo.wav"
+        src={homeDemoWav}
         preload="metadata"
         playsInline
       />

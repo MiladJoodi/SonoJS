@@ -17,7 +17,7 @@ Boutique luxury pet boarding with suites, booking wizard, suite builder, and pet
 
 ## Live / package
 
-- Demo: https://sonojs-website-64.winbeta-info.workers.dev/
+- Demo: https://sonojs-website-64.sonojs3.workers.dev/
 - Zip: `products/webiste/sonojs-website-64/sonojs-website-64.zip`
 
 ## Access

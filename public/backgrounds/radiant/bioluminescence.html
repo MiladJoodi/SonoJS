@@ -30,7 +30,7 @@
 <canvas id="canvas"></canvas>
 <script>
 // ─────────────────────────────────────────────
-// 45 · Bioluminescence — Glowing plankton in ocean waves at night
+// 45 · Bioluminescence - Glowing plankton in ocean waves at night
 // ─────────────────────────────────────────────
 (function () {
   var canvas = document.getElementById('canvas');
@@ -142,7 +142,7 @@
     '    float undulation = sin(wave_x) * 0.03 + sin(wave_x * 2.3 + fi) * 0.015;',
     '    float dist_to_wave = abs(uv.y - y_center - undulation);',
     '    float breakLine = smoothstep(0.03, 0.0, dist_to_wave);',
-    '    // Modulate along the wave — some sections break, others don\'t',
+    '    // Modulate along the wave - some sections break, others don\'t',
     '    float modulation = noise(vec2(uv.x * 3.0 + fi * 10.0, t * 0.2 + fi));',
     '    modulation = smoothstep(0.35, 0.7, modulation);',
     '    breaks += breakLine * modulation * (1.0 - fi * 0.2);',
@@ -167,7 +167,7 @@
     '  glow += organic1 * disturbance * 0.8;',
     '  glow += organic2 * pow(disturbance, 2.0) * 0.5;',
     '',
-    '  // Swirling tendrils of light — eddies and currents',
+    '  // Swirling tendrils of light - eddies and currents',
     '  vec2 eddy_uv = uv * 5.0 + vec2(t * 0.08, t * 0.05);',
     '  float eddy = fbm(eddy_uv, 6);',
     '  float eddy_curl = abs(eddy - fbm(eddy_uv + vec2(0.01, 0.0), 6)) * 80.0;',
@@ -230,7 +230,7 @@
     '  float t = u_time * u_waveSpeed;',
     '',
     '  // ── Deep ocean base color ──',
-    '  // Dark navy-black gradient — darker at top (deep water), slightly lighter near surface',
+    '  // Dark navy-black gradient - darker at top (deep water), slightly lighter near surface',
     '  vec3 deepColor = vec3(0.017, 0.011, 0.0);',
     '  vec3 midColor = vec3(0.028, 0.018, 0.001);',
     '  vec3 surfaceColor = vec3(0.034, 0.024, 0.0);',
@@ -250,7 +250,7 @@
     '  float waveHeight = waves.x;',
     '  float waveDisturbance = waves.y;',
     '',
-    '  // Subtle wave shading — dark troughs, slightly lit crests',
+    '  // Subtle wave shading - dark troughs, slightly lit crests',
     '  col += vec3(0.02, 0.012, 0.005) * waveHeight * 0.3;',
     '',
     '  // ── BIOLUMINESCENCE ──',
@@ -265,11 +265,11 @@
     '    bio += attract * u_glowIntensity;',
     '  }',
     '',
-    '  // Wave-break bioluminescence — brightest at breaking wave lines',
+    '  // Wave-break bioluminescence - brightest at breaking wave lines',
     '  float breaks = waveBreak(uvAspect, t);',
     '  bio += breaks * 1.2 * u_glowIntensity;',
     '',
-    '  // Shape the glow — more concentrated, less uniform',
+    '  // Shape the glow - more concentrated, less uniform',
     '  bio = pow(max(bio, 0.0), 1.3);',
     '',
     '  // Bioluminescent color: electric blue-cyan with green tints',
@@ -282,7 +282,7 @@
     '  vec3 bioCol = mix(bioColor1, bioColor2, colorVar);',
     '  bioCol = mix(bioCol, bioColor3, smoothstep(0.5, 1.0, bio));',
     '',
-    '  // Add the glow — additive blending',
+    '  // Add the glow - additive blending',
     '  col += bioCol * bio * 0.7;',
     '',
     '  // ── Bright plankton sparks ──',
@@ -310,7 +310,7 @@
     '  float surfaceWave = noise(vec2(uvAspect.x * 4.0 + t * 0.1, t * 0.2));',
     '  col += vec3(0.028, 0.018, 0.001) * surfaceGlow * surfaceWave;',
     '',
-    '  // ── Depth fog — darker in the deep ──',
+    '  // ── Depth fog - darker in the deep ──',
     '  float depthFog = smoothstep(0.6, 0.0, uv.y);',
     '  col = mix(col, deepColor * 0.5, depthFog * 0.4);',
     '',

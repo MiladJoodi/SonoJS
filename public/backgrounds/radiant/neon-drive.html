@@ -30,7 +30,7 @@
 <canvas id="canvas"></canvas>
 <script>
 // ─────────────────────────────────────────────
-// 40 · Neon Drive — Synthwave outrun horizon shader
+// 40 · Neon Drive - Synthwave outrun horizon shader
 // ─────────────────────────────────────────────
 (function () {
   var canvas = document.getElementById('canvas');
@@ -124,7 +124,7 @@
     '  vec3 col = mix(colBot, colMid, smoothstep(0.0, 0.35, skyY));',
     '  col = mix(col, colTop, smoothstep(0.25, 0.85, skyY));',
     '',
-    '  // Horizon haze — warm orange glow right at the horizon',
+    '  // Horizon haze - warm orange glow right at the horizon',
     '  float hazeStrength = exp(-skyY * 8.0) * 0.7;',
     '  col += vec3(1.0, 0.4, 0.1) * hazeStrength;',
     '',
@@ -171,7 +171,7 @@
     '',
     '  float gridVal = max(zGrid, xGrid);',
     '',
-    '  // Distance fade — fade in from horizon, stay visible to camera',
+    '  // Distance fade - fade in from horizon, stay visible to camera',
     '  float fadeIn = smoothstep(0.0, 0.05, roadY);',
     '',
     '  // Brightness increases slightly near camera for depth cue',
@@ -190,7 +190,7 @@
     '  vec3 accentColor = vec3(0.1, 0.6, 1.0);',
     '  gridColor = mix(gridColor, accentColor, majorGrid * 0.4);',
     '',
-    '  // Grid glow — soft bloom around grid lines',
+    '  // Grid glow - soft bloom around grid lines',
     '  float zGlow = exp(-zLine * 20.0) * 0.25;',
     '  float xGlow = exp(-xLine * 20.0) * 0.2;',
     '  float gridGlow = max(zGlow, xGlow);',
@@ -198,11 +198,11 @@
     '  vec3 col = gridColor * gridVal * proxBright * fadeIn;',
     '  col += gridColor * gridGlow * fadeIn * 0.7;',
     '',
-    '  // Ground base color — very dark with slight purple tint',
+    '  // Ground base color - very dark with slight purple tint',
     '  vec3 groundColor = vec3(0.02, 0.01, 0.04);',
     '  col += groundColor;',
     '',
-    '  // Horizon fog glow — warm/pink mist at the horizon',
+    '  // Horizon fog glow - warm/pink mist at the horizon',
     '  float fogBand = exp(-roadY * 10.0);',
     '  col += vec3(0.5, 0.1, 0.35) * fogBand * 0.5;',
     '',
@@ -262,7 +262,7 @@
     '',
     '  float fadeIn = smoothstep(0.0, 0.05, roadY);',
     '',
-    '  // Slightly different color for side terrain grid — purple',
+    '  // Slightly different color for side terrain grid - purple',
     '  vec3 sideColor = vec3(0.4, 0.05, 0.6);',
     '  return sideColor * gridVal * fadeIn * 0.35;',
     '}',
@@ -410,7 +410,7 @@
     '  // Subtle scanlines for CRT feel',
     '  col *= scanlines(gl_FragCoord.xy);',
     '',
-    '  // Tone mapping — slight S-curve for richer darks',
+    '  // Tone mapping - slight S-curve for richer darks',
     '  col = col / (col + vec3(0.8));',
     '  col = pow(col, vec3(0.95));',
     '',

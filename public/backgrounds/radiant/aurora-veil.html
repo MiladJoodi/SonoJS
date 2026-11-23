@@ -30,7 +30,7 @@
 <canvas id="canvas"></canvas>
 <script>
 // ─────────────────────────────────────────────
-// 43 · Aurora Veil — Dramatic northern lights display
+// 43 · Aurora Veil - Dramatic northern lights display
 // ─────────────────────────────────────────────
 (function () {
   var canvas = document.getElementById('canvas');
@@ -109,10 +109,10 @@
     '  // Distance from ribbon center',
     '  float dx = uv.x - (centerX + waveOffset);',
     '',
-    '  // Ribbon profile — wide gaussian falloff',
+    '  // Ribbon profile - wide gaussian falloff',
     '  float ribbon = exp(-dx * dx / (ribbonWidth * ribbonWidth));',
     '',
-    '  // Brightness varies along the ribbon vertically — shimmer and pulse',
+    '  // Brightness varies along the ribbon vertically - shimmer and pulse',
     '  float brightBand = 0.5 + 0.5 * sin(uv.y * 2.5 + t * 0.7 + phase * 2.0);',
     '  brightBand *= 0.5 + 0.5 * sin(uv.y * 5.0 - t * 0.9 + phase);',
     '',
@@ -198,7 +198,7 @@
     '',
     '  // ── Dark sky background ──',
     '  vec3 col = vec3(0.012, 0.010, 0.022);',
-    '  // Slight gradient — lighter near horizon',
+    '  // Slight gradient - lighter near horizon',
     '  col += vec3(0.012, 0.010, 0.018) * smoothstep(0.5, -0.3, uv.y);',
     '',
     '  // ── Background stars ──',
@@ -206,7 +206,7 @@
     '  vec3 starColor = vec3(0.9, 0.88, 0.8);',
     '  col += starColor * starField;',
     '',
-    '  // ── Aurora ribbons — 7 layers for visual richness ──',
+    '  // ── Aurora ribbons - 7 layers for visual richness ──',
     '',
     '  // Ribbon 1: dominant green curtain, wide and bright',
     '  float r1 = auroraRibbon(uv, t, 0.0, 0.22, 2.5, 0.28, 0.0);',
@@ -281,7 +281,7 @@
     '  vec3 auroraLight = r1color * i1 + r2color * i2 + r3color * i3',
     '                   + r4color * i4 + r5color * i5 + r6color * i6 + r7color * i7;',
     '',
-    '  // Global pulsing intensity — aurora shimmers and breathes',
+    '  // Global pulsing intensity - aurora shimmers and breathes',
     '  float pulse = 0.85 + 0.15 * sin(t * 0.8) * sin(t * 0.53 + 1.0);',
     '  auroraLight *= pulse;',
     '',
@@ -344,7 +344,7 @@
     '  // ── Ensure no negatives ──',
     '  col = max(col, vec3(0.0));',
     '',
-    '  // ── Subtle tone curve — boost saturation slightly ──',
+    '  // ── Subtle tone curve - boost saturation slightly ──',
     '  col = pow(col, vec3(0.92, 0.95, 0.98));',
     '',
     '  gl_FragColor = vec4(col, 1.0);',

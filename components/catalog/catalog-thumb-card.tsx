@@ -7,8 +7,12 @@ import Link from "next/link"
 import { DevPreviewCaptureButton } from "@/components/docs/dev-preview-capture-button"
 import { cn } from "@/lib/utils"
 
-const imgClass =
+const imgContainClass =
   "size-full object-contain object-center p-2.5 md:p-3 group-hover:scale-110 transition-transform duration-500"
+
+/** Full-bleed thumbs (e.g. `/popups`) - no letterbox padding. */
+const imgCoverClass =
+  "size-full object-cover object-center group-hover:scale-110 transition-transform duration-500"
 
 /** Shrink-wrap the bitmap so border-radius clips the image, not letterbox space. */
 const roundedImgClass =
@@ -27,6 +31,11 @@ export function CatalogThumbCard({
   className,
   /** Round the thumb image itself (used on `/ai`). */
   roundedThumb = false,
+  /**
+   * `contain` (default) letterboxes with padding.
+   * `cover` fills the thumb plane edge-to-edge (`/popups`).
+   */
+  thumbFit = "contain",
   /** File base for dev capture (defaults to last path segment of `href`). */
   captureName,
   /** Above-the-fold thumbs use `eager`; default keeps below-fold lazy. */
@@ -39,6 +48,7 @@ export function CatalogThumbCard({
   preview?: ReactNode
   className?: string
   roundedThumb?: boolean
+  thumbFit?: "contain" | "cover"
   captureName?: string
   loading?: "eager" | "lazy"
 }) {
@@ -102,7 +112,10 @@ export function CatalogThumbCard({
               alt=""
               loading={loading}
               decoding="async"
-              className={cn(imgClass, "dark:hidden")}
+              className={cn(
+                thumbFit === "cover" ? imgCoverClass : imgContainClass,
+                "dark:hidden"
+              )}
             />
             {/* eslint-disable-next-line @next/next/no-img-element -- static public webps */}
             <img
@@ -110,7 +123,10 @@ export function CatalogThumbCard({
               alt=""
               loading={loading}
               decoding="async"
-              className={cn(imgClass, "hidden dark:block")}
+              className={cn(
+                thumbFit === "cover" ? imgCoverClass : imgContainClass,
+                "hidden dark:block"
+              )}
             />
           </>
         ) : null}

@@ -59,8 +59,8 @@ export function SiteFooter() {
             )
           )}
         </nav>
-        <p>
-          © {new Date().getFullYear()} {siteConfig.name}
+        <p suppressHydrationWarning>
+          {`© ${new Date().getFullYear()} ${siteConfig.name}`}
         </p>
       </div>
     </footer>

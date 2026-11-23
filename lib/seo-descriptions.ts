@@ -149,7 +149,7 @@ export const COMPONENT_META_DESCRIPTIONS: Record<string, string> = {
   tabs:
     "Tabbed panels to switch views without routing, underline and boxed variants.",
   "tags-input":
-    "Inline chip input for tags and @mentions — creatable, searchable suggestions, avatars, and LTR/RTL.",
+    "Inline chip input for tags and @mentions - creatable, searchable suggestions, avatars, and LTR/RTL.",
   textarea:
     "Multi-line text input for comments and prompts, resize behavior that fits forms.",
   timeline:

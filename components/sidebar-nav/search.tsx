@@ -39,6 +39,9 @@ export function SidebarNavSearch({
         ref={inputRef}
         data-sidebar-nav-search=""
         data-slot="input-group-control"
+        type="text"
+        inputMode="search"
+        autoComplete="off"
         value={value}
         onChange={(event) => onValueChange(event.target.value)}
         onKeyDown={(event) => {

@@ -119,6 +119,30 @@ function authSocialIconFiles(slug, icons) {
   ])
 }
 
+/** Social brand icons for popup installs (`@/registry/icons/*` → popup-local `icons/`). */
+function popupIconFiles(slug, icons) {
+  return icons.flatMap((name) => [
+    {
+      path: `registry/icons/${name}.tsx`,
+      type: "registry:component",
+      target: `components/${slug}/icons/${name}.tsx`,
+    },
+    {
+      path: `registry/icons/${name}.svg`,
+      type: "registry:file",
+      target: `components/${slug}/icons/${name}.svg`,
+    },
+  ])
+}
+
+const FOLLOW_US_ICONS = [
+  "facebook",
+  "instagram",
+  "linkedin",
+  "tiktok",
+  "youtube",
+]
+
 /** Brand / tool icons for navigation blocks (`@/registry/icons/*` → block-local `icons/`). */
 function navBlockIconFiles(slug, icons) {
   return icons.flatMap((name) => [
@@ -3796,7 +3820,7 @@ const registryItemsRaw = [
     type: "registry:ui",
     title: "Tags Input",
     description:
-      "Inline chip input for tags and @mentions — creatable, searchable suggestions, avatars, LTR/RTL.",
+      "Inline chip input for tags and @mentions - creatable, searchable suggestions, avatars, LTR/RTL.",
     dependencies: ["lucide-react", "clsx", "tailwind-merge"],
     registryDependencies: [
       "avatar",
@@ -4295,7 +4319,7 @@ const registryItemsRaw = [
     type: "registry:ui",
     title: "Address Autocomplete",
     description:
-      "Async address search field with debounced suggestions, structured value, and clear — wire any geocoder via onSearch.",
+      "Async address search field with debounced suggestions, structured value, and clear - wire any geocoder via onSearch.",
     dependencies: ["lucide-react", "clsx", "tailwind-merge"],
     registryDependencies: ["command", "input-group"],
     files: [
@@ -4347,7 +4371,7 @@ const registryItemsRaw = [
     type: "registry:ui",
     title: "Availability",
     description:
-      "Weekly free-time grid — drag to paint slots, resize edges, snap and merge overlapping ranges.",
+      "Weekly free-time grid - drag to paint slots, resize edges, snap and merge overlapping ranges.",
     dependencies: ["clsx", "tailwind-merge"],
     files: [
       {
@@ -4372,7 +4396,7 @@ const registryItemsRaw = [
     type: "registry:ui",
     title: "Data Table Grid",
     description:
-      "Advanced data grid chrome — sticky pin columns, resize handles, sort headers — compose with TanStack Table v9.",
+      "Advanced data grid chrome - sticky pin columns, resize handles, sort headers - compose with TanStack Table v9.",
     dependencies: [
       "@tanstack/react-table@^9.3.1",
       "lucide-react",
@@ -4413,7 +4437,7 @@ const registryItemsRaw = [
     type: "registry:ui",
     title: "Availability Slots",
     description:
-      "Bookable time buttons for a day — Cal.com-style picker with optional multi-column layout.",
+      "Bookable time buttons for a day - Cal.com-style picker with optional multi-column layout.",
     dependencies: ["clsx", "tailwind-merge"],
     registryDependencies: ["button"],
     files: [
@@ -8926,114 +8950,6 @@ const registryItemsRaw = [
             target: `components/blocks/marketing/offer-card-01/images/avatar-${n}.webp`,
           }))
         : []),
-    ],
-  })),
-  ...[
-    [
-      "sale-tag-01",
-      "Black Friday hanging price tag — drops on a string, swings, copies BF20.",
-    ],
-    [
-      "sale-tag-02",
-      "Cyber Monday hanging price tag — navy + cyan, copies CYBER20.",
-    ],
-    [
-      "sale-tag-03",
-      "Kraft paper hanging price tag — warm paper look, copies KRAFT20.",
-    ],
-  ].map(([slug, description]) => ({
-    name: slug,
-    type: "registry:block",
-    title: slug,
-    description,
-    dependencies: ["motion", "lucide-react"],
-    files: [
-      {
-        path: `registry/promo/sale-tag/${slug}/sale-tag.tsx`,
-        type: "registry:component",
-        target: `components/${slug}/sale-tag.tsx`,
-      },
-      {
-        path: "registry/promo/sale-tag/hanging-tag.tsx",
-        type: "registry:component",
-        target: `components/${slug}/hanging-tag.tsx`,
-      },
-    ],
-  })),
-  {
-    name: "sale-signup-01",
-    type: "registry:block",
-    title: "sale-signup-01",
-    description:
-      "Early Black Friday signup modal — cream email panel, burgundy house-shaped tier offers, free-gift arch card.",
-    dependencies: ["motion", "lucide-react"],
-    files: [
-      {
-        path: "registry/promo/sale-signup/sale-signup-01/sale-signup.tsx",
-        type: "registry:component",
-        target: "components/sale-signup-01/sale-signup.tsx",
-      },
-      {
-        path: "registry/promo/sale-signup/sale-modal.tsx",
-        type: "registry:component",
-        target: "components/sale-signup-01/sale-modal.tsx",
-      },
-      {
-        path: "registry/promo/sale-signup/images/dutch-oven.jpg",
-        type: "registry:file",
-        target: "components/sale-signup-01/images/dutch-oven.jpg",
-      },
-    ],
-  },
-  {
-    name: "fork-ribbon-01",
-    type: "registry:block",
-    title: "fork-ribbon-01",
-    description:
-      "Fork me on GitHub corner ribbon — tones and corners via props.",
-    files: [
-      {
-        path: "registry/promo/fork-ribbon/fork-ribbon-01/fork-ribbon.tsx",
-        type: "registry:component",
-        target: "components/fork-ribbon-01/fork-ribbon.tsx",
-      },
-      {
-        path: "registry/promo/fork-ribbon/corner-ribbon.tsx",
-        type: "registry:component",
-        target: "components/fork-ribbon-01/corner-ribbon.tsx",
-      },
-    ],
-  },
-  ...[
-    [
-      "holiday-popup-01",
-      "Winter Night holiday popup — navy card, gold CTA, falling snow.",
-    ],
-    [
-      "holiday-popup-02",
-      "Candy Cane holiday popup — crimson card, white CTA, falling snow.",
-    ],
-    [
-      "holiday-popup-03",
-      "Evergreen holiday popup — cream card, deep green CTA, falling snow.",
-    ],
-  ].map(([slug, description]) => ({
-    name: slug,
-    type: "registry:block",
-    title: slug,
-    description,
-    dependencies: ["motion", "lucide-react"],
-    files: [
-      {
-        path: `registry/promo/holiday-popup/${slug}/holiday-popup.tsx`,
-        type: "registry:component",
-        target: `components/${slug}/holiday-popup.tsx`,
-      },
-      {
-        path: "registry/promo/holiday-popup/holiday-card.tsx",
-        type: "registry:component",
-        target: `components/${slug}/holiday-card.tsx`,
-      },
     ],
   })),
   {
@@ -23128,4 +23044,5 @@ function withSoftSurfaceCssVars(item) {
 export const registryItems = [
   ...registryItemsRaw,
   ...cursorRegistryItems,
-].map(withSoftSurfaceCssVars)
+]
+  .map(withSoftSurfaceCssVars)

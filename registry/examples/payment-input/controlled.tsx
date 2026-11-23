@@ -22,13 +22,13 @@ export function PaymentInputControlled() {
           aria-label="Card number"
         />
         <p className="text-xs text-muted-foreground">
-          Raw: {card || "—"}
+          Raw: {card || "-"}
         </p>
       </div>
       <div className="space-y-2">
         <IbanInput value={iban} onValueChange={setIban} aria-label="IBAN" />
         <p className="text-xs text-muted-foreground">
-          {iban || "—"} · {isValidIban(iban) ? "valid" : "invalid"}
+          {iban || "-"} · {isValidIban(iban) ? "valid" : "invalid"}
         </p>
       </div>
       <Button

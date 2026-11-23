@@ -26,8 +26,8 @@ export function DocsApiProps({
         className
       )}
     >
-      <table className="w-full text-start text-secondary">
-        <thead className="border-b border-border/70 bg-muted/50 text-caption text-muted-foreground">
+      <table className="w-full text-start text-sm">
+        <thead className="border-b border-border/70 bg-muted/50 text-sm text-muted-foreground">
           <tr>
             <th className="px-4 py-2.5 font-medium">Prop</th>
             <th className="px-4 py-2.5 font-medium">Type</th>
@@ -38,16 +38,16 @@ export function DocsApiProps({
         <tbody>
           {rows.map((row) => (
             <tr key={row.name} className="border-t border-border/70">
-              <td className="px-4 py-3 font-mono text-[length:var(--text-code)] text-primary">
+              <td className="px-4 py-3 font-mono text-sm text-primary">
                 {row.name}
               </td>
-              <td className="px-4 py-3 font-mono text-[length:var(--text-code)] text-muted-foreground">
+              <td className="px-4 py-3 font-mono text-sm text-muted-foreground">
                 {formatPropType(row.type)}
               </td>
-              <td className="px-4 py-3 font-mono text-[length:var(--text-code)] text-muted-foreground">
+              <td className="px-4 py-3 font-mono text-sm text-muted-foreground">
                 {row.defaultValue ?? "-"}
               </td>
-              <td className="px-4 py-3 text-muted-foreground">
+              <td className="px-4 py-3 text-sm text-muted-foreground">
                 {row.description}
               </td>
             </tr>

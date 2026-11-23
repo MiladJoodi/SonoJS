@@ -32,7 +32,7 @@ const exampleDefs = [
     name: "payment-input-brands",
     title: "Brand detection",
     description:
-      "Visa, Mastercard, Amex and more from the leading digits — shown in the end addon.",
+      "Visa, Mastercard, Amex and more from the leading digits - shown in the end addon.",
     requires: ["input-group"],
   },
   {
@@ -110,7 +110,7 @@ export default async function PaymentInputDocsPage() {
             <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
               InputGroup
             </code>
-            . Formatting is display-only —{" "}
+            . Formatting is display-only -{" "}
             <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
               onValueChange
             </code>{" "}
@@ -205,7 +205,7 @@ export default async function PaymentInputDocsPage() {
               name: "brand",
               type: "CardBrand",
               defaultValue: '"unknown"',
-              description: "CVC only — Amex uses 4 digits.",
+              description: "CVC only - Amex uses 4 digits.",
             },
           ]}
         />

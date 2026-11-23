@@ -115,7 +115,7 @@ export default async function TagsInputDocsPage() {
             <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
               multiple
             </code>{" "}
-            is fixed items — Tags Input is for create-as-you-type.
+            is fixed items - Tags Input is for create-as-you-type.
           </p>
         }
       />

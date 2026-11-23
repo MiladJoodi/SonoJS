@@ -10,6 +10,7 @@ export {
   fetchProductRegistry,
   getProductRegistryEntry,
   PRO_REGISTRY_PATH,
+  PRO_REGISTRY_PATHS,
   type ProRegistry,
   type ProRegistryEntry,
   type ProRegistryProductType,

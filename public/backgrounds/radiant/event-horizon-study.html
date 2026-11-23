@@ -8,7 +8,7 @@
   html.embed #titlecard,
   html.embed #about { display: none !important; }
   /* ============================================================
-     EVENT HORIZON — the page is 98% void. The black hole is the
+     EVENT HORIZON - the page is 98% void. The black hole is the
      only light source in the room; the UI reads by disk-light.
      ============================================================ */
   :root{
@@ -86,7 +86,7 @@
     color: rgba(232,201,125,0.9);
     white-space:nowrap;
   }
-  /* hairline sliders — a 1px rule with a small circular thumb */
+  /* hairline sliders - a 1px rule with a small circular thumb */
   input[type=range]{
     -webkit-appearance:none; appearance:none;
     width:100%; height:18px; background:transparent; cursor:pointer; display:block;
@@ -262,18 +262,18 @@
     <h2>Event Horizon</h2>
     <div class="hr"></div>
     <p>A Schwarzschild black hole rendered live in a single fragment shader.
-       Every ray is marched through curved spacetime — bent step by step toward
-       the singularity — so the photon ring, the Einstein halo of the accretion
+       Every ray is marched through curved spacetime - bent step by step toward
+       the singularity - so the photon ring, the Einstein halo of the accretion
        disk lensed over the top of the hole, and the doubling of background
        stars all emerge from the same equation, not from artwork.</p>
     <p>The disk is shaded by physics: blackbody temperature falling with radius,
        relativistic Doppler beaming brightening the approaching side into
        blue-white, gravitational redshift dimming the inner edge, and
        differentially rotating turbulence shearing into spiral streaks.
-       Set LENSING to zero and gravity switches off — flat space, a plain dark
-       circle — then bend reality back on.</p>
+       Set LENSING to zero and gravity switches off - flat space, a plain dark
+       circle - then bend reality back on.</p>
     <p>Click the void to feed it: a stray star is torn into a hot spot that
-       spirals through the disk — its light bent into both lensed images —
+       spirals through the disk - its light bent into both lensed images -
        then plunges past the horizon in a flare and a brief ringdown
        shiver of the lens itself.</p>
     <p class="fine">Raw WebGL &middot; zero dependencies &middot; one file<br>Built by Claude Fable 5</p>
@@ -420,7 +420,7 @@ vec3 diskShade(vec3 hit, vec3 rd, out float alpha){
   float n2 = fbm2(duv * 3.30 + 5.0);
   float turb = 0.45 + 0.85 * n + 0.40 * n2;
 
-  /* infalling hot spot — a shredded star riding the disk; because it is
+  /* infalling hot spot - a shredded star riding the disk; because it is
      shaded here, gravity lenses it into every image of the disk at once */
   vec2  sv   = hit.xz - uSpot.xy;
   float spot = uSpot.z * exp(-dot(sv, sv) * 4.0);
@@ -606,7 +606,7 @@ if(!gl){ fail('WebGL context unavailable'); return; }
 
 canvas.addEventListener('webglcontextlost', function(ev){
   ev.preventDefault();
-  fail('GPU context lost — reload the page');
+  fail('GPU context lost - reload the page');
 }, false);
 
 /* ---------------- shader plumbing ---------------- */
@@ -700,7 +700,7 @@ function onResize(){
 window.addEventListener('resize', onResize);
 onResize();
 
-/* staged reveal — transition-driven, so idle dimming can never replay it */
+/* staged reveal - transition-driven, so idle dimming can never replay it */
 requestAnimationFrame(function(){ document.body.classList.add('booted'); });
 setTimeout(function(){ document.body.classList.add('settled'); }, 5400);
 
@@ -826,7 +826,7 @@ canvas.addEventListener('wheel', function(ev){
    A tap drops a shredded star onto the outer disk. It rides a Keplerian
    inspiral for ~12 s (the shader lenses it into every disk image), then
    plunges: the disk flares and the lens itself rings down like a struck
-   bell — a damped oscillation in the lensing strength.                  */
+   bell - a damped oscillation in the lensing strength.                  */
 var spot  = { on:false, r:8.0, ang:0, u:0, i:0 };
 var flare = 0;
 function sstep(a, b, x){
@@ -932,7 +932,7 @@ function frame(now){
   spotTick(dt);
   govern();
 
-  /* chase targets — no parameter ever snaps */
+  /* chase targets - no parameter ever snaps */
   var k = 1 - Math.exp(-dt * 3.2);
   P.lum.cur  += (P.lum.tgt  - P.lum.cur)  * k;
   P.lens.cur += (P.lens.tgt - P.lens.cur) * k;
@@ -941,12 +941,12 @@ function frame(now){
 
   var cam = camera(dt);
 
-  /* 1 — hero scene into offscreen (scaled) buffer */
+  /* 1 - hero scene into offscreen (scaled) buffer */
   gl.useProgram(pScene.prog);
   gl.uniform2f(pScene.u.uRes, sceneFBO.w, sceneFBO.h);
   gl.uniform1f(pScene.u.uTime, simT);
   gl.uniform3f(pScene.u.uCamPos, cam[0], cam[1], cam[2]);
-  /* ringdown: after a plunge the lens oscillates, damped — multiplicative,
+  /* ringdown: after a plunge the lens oscillates, damped - multiplicative,
      so flat space (lensing 0) stays perfectly flat */
   var ring = 1 + flare * flare * 0.05 * Math.sin(simT * 16.0);
   gl.uniform1f(pScene.u.uLensing, Math.max(0, P.lens.cur * ring));
@@ -957,14 +957,14 @@ function frame(now){
     spot.i);
   draw(sceneFBO.fb, sceneFBO.w, sceneFBO.h);
 
-  /* 2 — bright pass, quarter res */
+  /* 2 - bright pass, quarter res */
   gl.useProgram(pBright.prog);
   gl.activeTexture(gl.TEXTURE0);
   gl.bindTexture(gl.TEXTURE_2D, sceneFBO.tex);
   gl.uniform1i(pBright.u.uTex, 0);
   draw(bloomA.fb, bloomA.w, bloomA.h);
 
-  /* 3 — separable gaussian blur H then V */
+  /* 3 - separable gaussian blur H then V */
   gl.useProgram(pBlur.prog);
   gl.uniform1i(pBlur.u.uTex, 0);
   gl.bindTexture(gl.TEXTURE_2D, bloomA.tex);
@@ -974,7 +974,7 @@ function frame(now){
   gl.uniform2f(pBlur.u.uDir, 0.0, 1.0 / bloomB.h);
   draw(bloomA.fb, bloomA.w, bloomA.h);
 
-  /* 4 — composite to screen: bloom + vignette + grain + ACES */
+  /* 4 - composite to screen: bloom + vignette + grain + ACES */
   gl.useProgram(pComp.prog);
   gl.activeTexture(gl.TEXTURE0);
   gl.bindTexture(gl.TEXTURE_2D, sceneFBO.tex);

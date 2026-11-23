@@ -168,7 +168,7 @@
 
     const col = particle.color;
 
-    // Glow pass — thicker, lower alpha
+    // Glow pass - thicker, lower alpha
     ctx.lineCap = 'round';
     ctx.lineJoin = 'round';
     for (let i = 1; i < len; i++) {
@@ -187,7 +187,7 @@
       ctx.stroke();
     }
 
-    // Crisp pass — thin, higher alpha
+    // Crisp pass - thin, higher alpha
     for (let i = 1; i < len; i++) {
       const t = i / len;
       const alpha = t * t * 0.7;
@@ -231,7 +231,7 @@
     const w = window.innerWidth;
     const h = window.innerHeight;
 
-    // Full clear each frame — trails come from stored trail data
+    // Full clear each frame - trails come from stored trail data
     ctx.fillStyle = '#0a0a0a';
     ctx.fillRect(0, 0, w, h);
 

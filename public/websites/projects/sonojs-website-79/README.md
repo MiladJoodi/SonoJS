@@ -17,7 +17,7 @@ Fiction unisex beauty salon in Venice, Los Angeles - hair, nails, skin, wax, mas
 
 ## Live / package
 
-- Demo: https://sonojs-website-79.winbeta-info.workers.dev/
+- Demo: https://sonojs-website-79.sonojs3.workers.dev/
 - Zip: `products/webiste/sonojs-website-79/sonojs-website-79.zip`
 
 ## Access

@@ -30,7 +30,7 @@
 <canvas id="canvas"></canvas>
 <script>
 // ─────────────────────────────────────────────
-// 15 · Golden Throne — Sacred geometry mandala
+// 15 · Golden Throne - Sacred geometry mandala
 // ─────────────────────────────────────────────
 (function () {
   var canvas = document.getElementById('canvas');
@@ -131,7 +131,7 @@
     '  float t = layer / totalLayers;',
     '  float radius = 0.08 + t * 0.38;',
     '  ',
-    '  // Differential rotation — inner faster, outer slower, some counter-rotating',
+    '  // Differential rotation - inner faster, outer slower, some counter-rotating',
     '  float speed = u_rotationSpeed * (1.5 - t * 1.2);',
     '  float direction = mod(layer, 2.0) < 1.0 ? 1.0 : -1.0;',
     '  float rot_angle = time * speed * direction + layer * PHI;',
@@ -200,7 +200,7 @@
     '  return spiralD * fade + (1.0 - fade);',
     '}',
     '',
-    '// ── Fractal detail — repeating at smaller scales ──',
+    '// ── Fractal detail - repeating at smaller scales ──',
     'float fractalDetail(vec2 uv, float time) {',
     '  float d = 1e9;',
     '  float scale = 1.0;',
@@ -233,7 +233,7 @@
     '  vec3 col = vec3(0.0);',
     '  float r = length(uv);',
     '  ',
-    '  // ── Object mask — keep mandala centered with dark surround ──',
+    '  // ── Object mask - keep mandala centered with dark surround ──',
     '  float objectRadius = 0.48;',
     '  float objectFade = smoothstep(objectRadius, objectRadius * 0.7, r);',
     '',
@@ -245,12 +245,12 @@
     '    float fi = float(i);',
     '    float layerD = mandalaLayer(uv, t, fi, complexity);',
     '    ',
-    '    // Convert SDF to glow — sharp lines with soft bloom',
+    '    // Convert SDF to glow - sharp lines with soft bloom',
     '    float lineGlow = 0.0025 / (abs(layerD) + 0.0025);',
     '    float bloom = 0.008 / (abs(layerD) + 0.008) * 0.3;',
     '    float layerIntensity = (lineGlow + bloom);',
     '    ',
-    '    // Color varies per layer — golden gradient from warm amber to bright gold',
+    '    // Color varies per layer - golden gradient from warm amber to bright gold',
     '    float colorT = fi / complexity + t * 0.02;',
     '    vec3 layerColor = gold(colorT);',
     '    ',
@@ -270,7 +270,7 @@
     '  float fractal = fractalDetail(uv, t);',
     '  col += gold(0.3 + t * 0.03) * fractal * 0.4;',
     '',
-    '  // ── Central glowing point — pulses subtly ──',
+    '  // ── Central glowing point - pulses subtly ──',
     '  float centerPulse = 0.8 + 0.2 * sin(t * 1.5);',
     '  float centerGlow = 0.01 / (r * r + 0.01) * centerPulse;',
     '  vec3 centerColor = vec3(1.0, 0.92, 0.7); // bright white-gold',
@@ -282,12 +282,12 @@
     '  float innerRingGlow = 0.003 / (abs(innerRing) + 0.003);',
     '  col += vec3(1.0, 0.88, 0.6) * innerRingGlow * 0.3;',
     '',
-    '  // ── Outer boundary ring — ornate edge ──',
+    '  // ── Outer boundary ring - ornate edge ──',
     '  float outerRing = abs(r - objectRadius + 0.01) - 0.003;',
     '  float outerGlow = 0.004 / (abs(outerRing) + 0.004);',
     '  col += gold(0.5 + t * 0.015) * outerGlow * 0.35;',
     '',
-    '  // ── Second outer ring — slightly inside ──',
+    '  // ── Second outer ring - slightly inside ──',
     '  float outerRing2 = abs(r - objectRadius + 0.035) - 0.002;',
     '  float outerGlow2 = 0.003 / (abs(outerRing2) + 0.003);',
     '  col += gold(0.6) * outerGlow2 * 0.2;',

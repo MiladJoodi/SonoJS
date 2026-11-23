@@ -31,7 +31,7 @@ const exampleDefs = [
     name: "signature-pad-contract",
     title: "Contract",
     description:
-      "Agree checkbox + required signature before submit — classic delivery / waiver flow.",
+      "Agree checkbox + required signature before submit - classic delivery / waiver flow.",
     requires: ["button", "checkbox", "field"],
     npmRequires: ["signature_pad"],
   },

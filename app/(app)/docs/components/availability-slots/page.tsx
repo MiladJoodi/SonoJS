@@ -20,7 +20,7 @@ const exampleDefs = [
     name: "availability-slots-gallery",
     title: "Gallery",
     description:
-      "Calendar + time list — pick a day, then choose a free opening.",
+      "Calendar + time list - pick a day, then choose a free opening.",
     requires: ["button", "calendar", "badge"],
     npmRequires: ["lucide-react"],
   },
@@ -85,7 +85,7 @@ export default async function AvailabilitySlotsDocsPage() {
         pathname="/docs/components/availability-slots"
         description={
           <p className="leading-relaxed text-muted-foreground">
-            Bookable time buttons for a single day — the Cal.com-style picker.
+            Bookable time buttons for a single day - the Cal.com-style picker.
             Pair with{" "}
             <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
               Calendar

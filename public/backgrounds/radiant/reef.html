@@ -182,7 +182,7 @@
 </div>
 
 <div id="ui">
-  <div class="hdr"><b>Reef</b><span>dive console</span><button id="hideBtn" title="hide console (H)">—</button></div>
+  <div class="hdr"><b>Reef</b><span>dive console</span><button id="hideBtn" title="hide console (H)">-</button></div>
   <div class="ctl"><label>Schoolers <em id="vSchool">140</em></label><input type="range" id="rSchool" min="0" max="220" value="140"></div>
   <div class="ctl"><label>Grazers <em id="vGraze">16</em></label><input type="range" id="rGraze" min="0" max="40" value="16"></div>
   <div class="ctl"><label>Drifters <em id="vDrift">14</em></label><input type="range" id="rDrift" min="0" max="40" value="14"></div>
@@ -194,7 +194,7 @@
     <button id="aboutBtn">About</button>
   </div>
   <div id="speciesList"></div>
-  <div class="meta"><span id="seedLbl">seed —</span><span id="fpsLbl">— fps</span></div>
+  <div class="meta"><span id="seedLbl">seed -</span><span id="fpsLbl">- fps</span></div>
 </div>
 <button id="showBtn" title="show console">◈</button>
 
@@ -202,14 +202,14 @@
   <div class="card">
     <h2>Reef</h2>
     <h3>a living procedural aquarium</h3>
-    <p>Every fish on screen was grown from a species genome — a body spline, parametric fin fans, a pigment
-       program — and moves on its own boid mind. Nothing is a sprite, nothing is a loop. Corals bud while you
+    <p>Every fish on screen was grown from a species genome - a body spline, parametric fin fans, a pigment
+       program - and moves on its own boid mind. Nothing is a sprite, nothing is a loop. Corals bud while you
        watch; kelp answers a shared current field; and every 45–120 seconds a shark drifts through and the
        whole reef decides, all at once, to panic.</p>
     <div class="tips">
-      <b>Click water</b> — scatter food flakes &nbsp;·&nbsp; <b>F</b> — feed<br>
-      <b>N</b> — grow a brand-new reef from a fresh seed<br>
-      <b>H</b> — hide the console for screensaver mode
+      <b>Click water</b> - scatter food flakes &nbsp;·&nbsp; <b>F</b> - feed<br>
+      <b>N</b> - grow a brand-new reef from a fresh seed<br>
+      <b>H</b> - hide the console for screensaver mode
     </div>
     <div class="credit">Built by Claude Fable 5 · one file · zero dependencies</div>
     <button id="aboutClose">Return to the water</button>
@@ -222,7 +222,7 @@
 "use strict";
 (function(){
 /* ============================================================
-   REEF — a living procedural aquarium
+   REEF - a living procedural aquarium
    single-file, canvas 2d, seeded, zero dependencies
    ============================================================ */
 var TAU = Math.PI*2, PI = Math.PI;
@@ -269,7 +269,7 @@ var canvas = document.getElementById("sea");
 var ctx = canvas.getContext("2d", { alpha:false });
 var toast = document.getElementById("toast");
 function fail(msg){ toast.textContent = msg; toast.style.display = "block"; }
-if(!ctx){ fail("Canvas 2D unavailable — REEF cannot dive here."); return; }
+if(!ctx){ fail("Canvas 2D unavailable - REEF cannot dive here."); return; }
 window.addEventListener("error", function(e){ fail("REEF error: " + (e.message||"unknown")); });
 
 var W=0, H=0, dpr=1, rs=1;              /* css size, pixel ratio, resolution governor scale */
@@ -670,7 +670,7 @@ function sharkStep(dt){
 }
 
 /* ============================================================
-   FLORA — kelp, anemones, coral growth
+   FLORA - kelp, anemones, coral growth
    ============================================================ */
 function buildFlora(){
   kelps.length=0; anems.length=0; corals.length=0; rocks.length=0; vents.length=0;
@@ -883,7 +883,7 @@ function drawAnem(an){
 }
 
 /* ============================================================
-   PARTICLES — flakes, bubbles, marine snow
+   PARTICLES - flakes, bubbles, marine snow
    ============================================================ */
 function feedAt(x,y){
   var n = 26;
@@ -948,7 +948,7 @@ function snowStep(dt){
 }
 
 /* ============================================================
-   FISH RENDER — ribboned spine + parametric fins
+   FISH RENDER - ribboned spine + parametric fins
    ============================================================ */
 function drawCaudal(c, type, l, h, pw){
   c.beginPath();
@@ -1148,7 +1148,7 @@ function drawFish(f){
 }
 
 /* ============================================================
-   ATMOSPHERE — water, god rays, caustics, vignette
+   ATMOSPHERE - water, god rays, caustics, vignette
    ============================================================ */
 function rebuildGradients(){
   var deg = Math.abs(sunA)/(PI/4);
@@ -1344,7 +1344,7 @@ function render(){
 }
 
 /* ============================================================
-   MAIN LOOP — fixed timestep + resolution governor
+   MAIN LOOP - fixed timestep + resolution governor
    ============================================================ */
 var last = 0, acc = 0, STEPT = 1/60;
 var frameEMA = 16, fpsShow = 0, perfN = 0;

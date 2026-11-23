@@ -1,8 +1,5 @@
 import { cn } from "@/lib/utils"
 
-const facebookPath =
-  "M12 22.5C17.799 22.5 22.5 17.799 22.5 12C22.5 6.20101 17.799 1.5 12 1.5C6.20101 1.5 1.5 6.20101 1.5 12C1.5 17.1752 5.24405 21.4759 10.1712 22.3413V15.2112H7.5V12.2476H10.1712V9.98883C10.1712 7.4197 11.7411 6 14.1452 6C15.2959 6 16.5 6.20024 16.5 6.20024V8.7233H15.1726C13.8657 8.7233 13.4589 9.51428 13.4589 10.3252V12.2476H16.3767L15.9103 15.2112H13.4589V22.3759C12.9525 22.4534 12.4351 22.4952 11.9084 22.4996C11.9389 22.4999 11.9694 22.5 12 22.5Z"
-
 export function FacebookIcon({
   className,
   ...props
@@ -12,16 +9,14 @@ export function FacebookIcon({
       viewBox="0 0 24 24"
       aria-hidden="true"
       className={cn("size-5", className)}
+      fill="none"
       {...props}
     >
-      <g transform="translate(12 12) scale(1.12) translate(-12 -12)">
-        <path
-          fillRule="evenodd"
-          clipRule="evenodd"
-          d={facebookPath}
-          fill="#0866FF"
-        />
-      </g>
+      <circle cx="12" cy="12" r="10.5" fill="#0866FF" />
+      <path
+        fill="#fff"
+        d="M13.36 19.5v-6.54h2.2l.33-2.55h-2.53V8.78c0-.74.2-1.24 1.27-1.24h1.35V5.26A18.1 18.1 0 0 0 13.7 5.1c-2.24 0-3.78 1.37-3.78 3.88v2.17H7.5v2.55h2.42V19.5h3.44Z"
+      />
     </svg>
   )
 }

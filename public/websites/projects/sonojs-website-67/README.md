@@ -17,7 +17,7 @@ Calm clinical vet care for dogs and cats with booking, triage, chart, and portal
 
 ## Live / package
 
-- Demo: https://sonojs-website-67.winbeta-info.workers.dev/
+- Demo: https://sonojs-website-67.sonojs3.workers.dev/
 - Zip: `products/webiste/sonojs-website-67/sonojs-website-67.zip`
 
 ## Access

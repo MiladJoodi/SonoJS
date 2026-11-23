@@ -17,7 +17,7 @@ Soft blue Denver family dental clinic with floating service cards and mission ba
 
 ## Live / package
 
-- Demo: https://sonojs-website-89.winbeta-info.workers.dev/
+- Demo: https://sonojs-website-89.sonojs3.workers.dev/
 - Zip: `products/webiste/sonojs-website-89/sonojs-website-89.zip`
 
 ## Access

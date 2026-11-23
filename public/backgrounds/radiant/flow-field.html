@@ -228,7 +228,7 @@ const SimplexNoise = (function() {
   let time = 0;
 
   function draw() {
-    // Fade previous frame with dark overlay — creates trailing effect
+    // Fade previous frame with dark overlay - creates trailing effect
     ctx.fillStyle = 'rgba(10, 10, 10, 0.03)';
     ctx.fillRect(0, 0, W, H);
 
@@ -249,7 +249,7 @@ const SimplexNoise = (function() {
       let vx = Math.cos(angle) * p.speed * SPEED;
       let vy = Math.sin(angle) * p.speed * SPEED;
 
-      // Mouse interaction — gentle push away
+      // Mouse interaction - gentle push away
       if (mouse.active) {
         const dx = p.x - mouse.x;
         const dy = p.y - mouse.y;

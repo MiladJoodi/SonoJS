@@ -27,9 +27,9 @@ export type TagsInputOption = {
   value: string
   label: string
   disabled?: boolean
-  /** Mention rows — image URL. */
+  /** Mention rows - image URL. */
   avatar?: string
-  /** Mention rows — e.g. `@handle` or email. */
+  /** Mention rows - e.g. `@handle` or email. */
   description?: string
 }
 

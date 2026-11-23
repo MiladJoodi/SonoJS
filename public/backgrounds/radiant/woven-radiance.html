@@ -30,8 +30,8 @@
 <canvas id="canvas"></canvas>
 <script>
 // ─────────────────────────────────────────────
-// 50 · Woven Radiance — African textile-inspired geometric weave
-// Smooth, continuous animation — fabric flowing like being woven
+// 50 · Woven Radiance - African textile-inspired geometric weave
+// Smooth, continuous animation - fabric flowing like being woven
 // ─────────────────────────────────────────────
 (function() {
   var canvas = document.getElementById('canvas');
@@ -106,7 +106,7 @@
     return 0.5 - 0.5 * Math.cos(t * Math.PI * 2);
   }
 
-  // ── Color palette — vibrant African textile-inspired ──
+  // ── Color palette - vibrant African textile-inspired ──
   var basePalette = [
     { r: 218, g: 165, b: 32  }, // deep gold
     { r: 205, g: 133, b: 63  }, // amber/peru
@@ -141,7 +141,7 @@
     var baseIdx = (Math.floor(seededRandom(seed) * basePalette.length) + clickShift) % basePalette.length;
     var nextIdx = (baseIdx + 1 + Math.floor(seededRandom(seed + 100) * 3)) % basePalette.length;
 
-    // Very slow, smooth sinusoidal blend between two colors — no sudden shifts
+    // Very slow, smooth sinusoidal blend between two colors - no sudden shifts
     // Use a slow sine wave for continuous back-and-forth blending
     // mouseClickOffset shifts the phase to cycle the color scheme on click
     var phase = time * 0.06 * WEAVE_SPEED + threadIndex * 0.3 + (isVertical ? 5.0 : 0.0) + mouseClickOffset;
@@ -204,7 +204,7 @@
     var basePattern = Math.floor(seededRandom(patternSeed) * patternFuncs.length);
     var nextPattern = (basePattern + 1) % patternFuncs.length;
 
-    // Very slow evolution phase — smoothly cycles between patterns
+    // Very slow evolution phase - smoothly cycles between patterns
     // Using smootherstep on a sine wave for extra-smooth transitions
     var evolveSpeed = 0.025 * WEAVE_SPEED; // very slow
     var evolvePhase = time * evolveSpeed + blockH * 2.3 + blockV * 3.7;
@@ -224,7 +224,7 @@
   // ── Draw a single thread segment with 3D-ish shading ──
   // Now accepts a continuous "onTopAmount" (0..1) instead of boolean
   function drawThreadSegment(x, y, w, h, color, onTopAmount, isVertical, time, threadIdx) {
-    // Gentle breathing effect on thread width — very slow and smooth
+    // Gentle breathing effect on thread width - very slow and smooth
     var breatheSpeed = 0.4 * WEAVE_SPEED; // slower breathing
     var breathePhase = time * breatheSpeed + threadIdx * 0.5 + (isVertical ? 3.0 : 0.0);
     var breathe = Math.sin(breathePhase) * 0.03; // reduced amplitude for subtlety
@@ -236,7 +236,7 @@
     var drawW = isVertical ? pulseW : w;
     var drawH = isVertical ? h : pulseH;
 
-    // Thread body color — smoothly interpolate brightness based on onTopAmount
+    // Thread body color - smoothly interpolate brightness based on onTopAmount
     var r = Math.min(255, color.r * COLOR_RICHNESS + (1 - COLOR_RICHNESS) * 140);
     var g = Math.min(255, color.g * COLOR_RICHNESS + (1 - COLOR_RICHNESS) * 120);
     var b = Math.min(255, color.b * COLOR_RICHNESS + (1 - COLOR_RICHNESS) * 100);
@@ -251,7 +251,7 @@
     ctx.fillStyle = 'rgb(' + r + ',' + g + ',' + b + ')';
     ctx.fillRect(drawX, drawY, drawW, drawH);
 
-    // Thread texture — subtle grain lines within the thread
+    // Thread texture - subtle grain lines within the thread
     var lineAlpha = 0.08 * COLOR_RICHNESS;
     ctx.strokeStyle = 'rgba(255, 255, 240, ' + lineAlpha + ')';
     ctx.lineWidth = 0.5;
@@ -273,7 +273,7 @@
       }
     }
 
-    // Highlight along leading edge — intensity scales with onTopAmount
+    // Highlight along leading edge - intensity scales with onTopAmount
     if (onTopAmount > 0.1) {
       var hlAlpha = 0.15 * COLOR_RICHNESS * onTopAmount;
       if (isVertical) {
@@ -292,7 +292,7 @@
     }
   }
 
-  // ── Shadow drawing — now with smooth alpha based on onTopAmount ──
+  // ── Shadow drawing - now with smooth alpha based on onTopAmount ──
   function drawShadow(x, y, w, h, isVertical, onTopAmount) {
     var shadowOffset = 2 * _pad;
     // Shadow fades smoothly with onTopAmount
@@ -317,7 +317,7 @@
     var cols = Math.ceil(width / cellSize) + 2;
     var rows = Math.ceil(height / cellSize) + 2;
 
-    // Slow, smooth pan offset — continuous drift
+    // Slow, smooth pan offset - continuous drift
     var panX = Math.sin(time * 0.02 * WEAVE_SPEED) * cellSize * 0.5;
     var panY = Math.cos(time * 0.015 * WEAVE_SPEED) * cellSize * 0.3;
     var startX = -cellSize + panX;
@@ -393,7 +393,7 @@
     ctx.fillRect(0, 0, width, height);
   }
 
-  // ── Warm glow overlay — smoother movement ──
+  // ── Warm glow overlay - smoother movement ──
   function drawWarmGlow(time) {
     // Very gentle, slow-moving warm radiance
     var cx = width / 2 + Math.sin(time * 0.08 * WEAVE_SPEED) * width * 0.08;
@@ -410,7 +410,7 @@
     ctx.fillRect(0, 0, width, height);
   }
 
-  // ── Animation loop — frame-rate independent via elapsed time ──
+  // ── Animation loop - frame-rate independent via elapsed time ──
   var animTime = 0;
   var lastTimestamp = 0;
   var isVisible = true;
@@ -423,7 +423,7 @@
 
     if (prefersReduced) dt = 0;
 
-    // Accumulate smooth time — frame-rate independent
+    // Accumulate smooth time - frame-rate independent
     animTime += dt;
 
     // Clear

@@ -17,7 +17,7 @@ Dark cinematic multi-office dental group across Bergen County, NJ (Ridgewood / E
 
 ## Live / package
 
-- Demo: https://sonojs-website-91.winbeta-info.workers.dev/
+- Demo: https://sonojs-website-91.sonojs3.workers.dev/
 - Zip: `products/webiste/sonojs-website-91/sonojs-website-91.zip`
 
 ## Access

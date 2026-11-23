@@ -28,7 +28,7 @@ export const BACKGROUND_COLLECTION_META: Record<
   },
 }
 
-/** Featured set for green sidebar bullets — strong / showcase demos. */
+/** Featured set for green sidebar bullets - strong / showcase demos. */
 export const BACKGROUND_FEATURED_IDS = new Set([
   // Creative Lab
   "fluid",
@@ -971,7 +971,7 @@ export const backgroundsCatalog: BackgroundsCatalogEntry[] = [
     collection: "radiant",
     title: "Ink Flow",
     description:
-      "Darkroom ink aquarium — drag to release glowing fluid with viscosity and emission controls.",
+      "Darkroom ink aquarium - drag to release glowing fluid with viscosity and emission controls.",
     htmlPath: "/backgrounds/radiant/ink-flow.html",
     previewPath: "/backgrounds/radiant/previews/ink-flow.webp",
     technique: "webgl",
@@ -981,7 +981,7 @@ export const backgroundsCatalog: BackgroundsCatalogEntry[] = [
     collection: "radiant",
     title: "Moth & Lamp",
     description:
-      "Night meadow — plant lamps, moths spiral toward the light, moon and sound toggles.",
+      "Night meadow - plant lamps, moths spiral toward the light, moon and sound toggles.",
     htmlPath: "/backgrounds/radiant/moth-lamp.html",
     previewPath: "/backgrounds/radiant/previews/moth-lamp.webp",
     technique: "canvas-2d",
@@ -1001,7 +1001,7 @@ export const backgroundsCatalog: BackgroundsCatalogEntry[] = [
     collection: "radiant",
     title: "Noir Terminal",
     description:
-      "Procedural hardboiled teletype — amber CRT cases you can play and share by number.",
+      "Procedural hardboiled teletype - amber CRT cases you can play and share by number.",
     htmlPath: "/backgrounds/radiant/noir-terminal.html",
     previewPath: "/backgrounds/radiant/previews/noir-terminal.webp",
     technique: "canvas-2d",
@@ -1011,7 +1011,7 @@ export const backgroundsCatalog: BackgroundsCatalogEntry[] = [
     collection: "radiant",
     title: "Reef",
     description:
-      "Living procedural aquarium — schools, grazers, current, and sun-angle dive controls.",
+      "Living procedural aquarium - schools, grazers, current, and sun-angle dive controls.",
     htmlPath: "/backgrounds/radiant/reef.html",
     previewPath: "/backgrounds/radiant/previews/reef.webp",
     technique: "canvas-2d",
@@ -1021,7 +1021,7 @@ export const backgroundsCatalog: BackgroundsCatalogEntry[] = [
     collection: "radiant",
     title: "Koi Pond",
     description:
-      "Stillwater koi pond — feed on hold, stir on tap, with lily pads and soft caustics.",
+      "Stillwater koi pond - feed on hold, stir on tap, with lily pads and soft caustics.",
     htmlPath: "/backgrounds/radiant/koi-pond.html",
     previewPath: "/backgrounds/radiant/previews/koi-pond.webp",
     technique: "canvas-2d",
@@ -1031,7 +1031,7 @@ export const backgroundsCatalog: BackgroundsCatalogEntry[] = [
     collection: "radiant",
     title: "Tidepool",
     description:
-      "Living ecosystem — plankton, grazers, predators, sun, and tools to feed or strike.",
+      "Living ecosystem - plankton, grazers, predators, sun, and tools to feed or strike.",
     htmlPath: "/backgrounds/radiant/tidepool.html",
     previewPath: "/backgrounds/radiant/previews/tidepool.webp",
     technique: "canvas-2d",

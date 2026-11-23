@@ -8,7 +8,7 @@
 html.embed .about { display: none !important; }
 
 /* ============================================================
-   NOIR TERMINAL — "Dead Air on Channel 9"
+   NOIR TERMINAL - "Dead Air on Channel 9"
    A haunted police teletype, 2:47 AM, 1958.
    Amber phosphor on near-black. No network. All synthesis.
    ============================================================ */
@@ -246,17 +246,17 @@ body{
       <div class="vig"></div>
       <div class="glare"></div>
       <div class="panel" id="panel">
-        <h2>MODEL 9 — FIELD ADJUSTMENTS</h2>
+        <h2>MODEL 9 - FIELD ADJUSTMENTS</h2>
         <div class="prow" data-k="1"><span>[1] AUDIO</span><b id="pv1">ON</b></div>
         <div class="prow" data-k="2"><span>[2] SCANLINES</span><b id="pv2">ON</b></div>
         <div class="prow" data-k="3"><span>[3] TYPE SPEED</span><b id="pv3">1×</b></div>
         <div class="prow" data-k="4"><span>[4] MOTION</span><b id="pv4">FULL</b></div>
-        <div class="pfoot">ESC — RETURN TO TRANSMISSION · SETTINGS HOLD THE STORY, NOT THE RAIN</div>
+        <div class="pfoot">ESC - RETURN TO TRANSMISSION · SETTINGS HOLD THE STORY, NOT THE RAIN</div>
       </div>
       <div class="flash" id="flash"></div>
     </div>
   </div>
-  <div class="badge"><span class="led" id="led"></span>TELETYPE MODEL 9 — PROPERTY OF METRO HOMICIDE<span class="led" style="visibility:hidden"></span></div>
+  <div class="badge"><span class="led" id="led"></span>TELETYPE MODEL 9 - PROPERTY OF METRO HOMICIDE<span class="led" style="visibility:hidden"></span></div>
   <div class="hint">1–3 SELECT &nbsp;·&nbsp; N NEW CASE &nbsp;·&nbsp; ESC ADJUSTMENTS</div>
 </div>
 <div class="about">
@@ -268,7 +268,7 @@ body{
 "use strict";
 (function(){
 /* =====================================================================
-   0. UTILITIES — seeded PRNG so a case number IS the story
+   0. UTILITIES - seeded PRNG so a case number IS the story
    ===================================================================== */
 function mulberry32(a){
   return function(){
@@ -350,7 +350,7 @@ applyToggles();
 window.onerror=function(){return true;}; // fail soft: the machine never crashes on-camera
 
 /* =====================================================================
-   2. AUDIO RIG — everything synthesized from noise, built on first key
+   2. AUDIO RIG - everything synthesized from noise, built on first key
    ===================================================================== */
 var AC=null,master=null,rainGain=null,rainLP=null,humGain=null,noiseBuf=null,dropletTimer=null;
 function initAudio(){
@@ -502,7 +502,7 @@ function setAudioOn(on){
 }
 
 /* =====================================================================
-   3. SCREEN PHYSICS — flash, LED, hum-bar stutter, rain streaks
+   3. SCREEN PHYSICS - flash, LED, hum-bar stutter, rain streaks
    ===================================================================== */
 function whiteFlash(){
   if(S.reduced)return;
@@ -566,7 +566,7 @@ function phosphorTexture(){ // faint static grain baked once to a data URI
 }
 
 /* =====================================================================
-   4. TELETYPE RENDERER — one rAF scheduler, a time-budget op queue
+   4. TELETYPE RENDERER - one rAF scheduler, a time-budget op queue
    ===================================================================== */
 var Q=[],qi=0,nextAt=0,dirty=false;
 var curLine=null,curWord=null,curContainer=tc,glyphStack=[];
@@ -660,7 +660,7 @@ function delayFor(ch,fast){
   var d=26+Math.random()*22;
   if(ch===",")d+=120;
   else if(ch==="."||ch==="!"||ch==="?")d+=350;
-  else if(ch==="—")d+=200;
+  else if(ch==="-")d+=200;
   else if(ch===":")d+=210;
   else if(ch===";")d+=160;
   else if(ch===" ")d=18+Math.random()*14;
@@ -723,7 +723,7 @@ function typeStory(text,opts){
 function after(fn,d){qPush({op:"call",fn:fn,d:d||0});}
 
 /* =====================================================================
-   5. GENERATIVE GRAMMAR — the case file, the rulebook, the expander
+   5. GENERATIVE GRAMMAR - the case file, the rulebook, the expander
    ===================================================================== */
 var CF={}; // the case file: sticky slots, resolved once per case
 var DATA={
@@ -748,11 +748,11 @@ var DATA={
     "a .38 with the serial filed down to a prayer",
     "an ice pick wearing somebody else's glove",
     "piano wire from a piano nobody in the building owned",
-    "a bottle of rye — full, which was the strange part",
+    "a bottle of rye - full, which was the strange part",
     "a letter opener from a law firm three years dead",
     "a stocking with a knot tied by patient hands",
     "a trophy from a fight the whole city knew was fixed",
-    "a candlestick polished after the fact — twice",
+    "a candlestick polished after the fact - twice",
     "a straight razor folded shut, respectful as a hymnal"
   ],
   loc:[
@@ -776,19 +776,19 @@ var DATA={
     {intro:"touched her collarbone every time the truth got close",again:"touched her collarbone"},
     {intro:"laughed a half-beat late, like laughter was a language she'd studied abroad",again:"laughed a half-beat late"},
     {intro:"stirred her coffee counterclockwise, as if she could unwind the day",again:"stirred counterclockwise"},
-    {intro:"never blinked on the word 'love' — everybody blinks on the word 'love'",again:"didn't blink"},
+    {intro:"never blinked on the word 'love' - everybody blinks on the word 'love'",again:"didn't blink"},
     {intro:"folded her gloves when a question got honest",again:"folded her gloves"},
     {intro:"looked at the door whenever she said a name",again:"looked at the door"}
   ],
   rainSim:[
-    "rain like a jury — cold, and taking its time",
-    "rain like an alibi — thin, but it covered everything",
-    "rain like a debt collector — patient, and it knew my address",
+    "rain like a jury - cold, and taking its time",
+    "rain like an alibi - thin, but it covered everything",
+    "rain like a debt collector - patient, and it knew my address",
     "rain coming down like the verdict was already in",
-    "rain like a widow's telegram — brief, and all bad news",
-    "rain with a lawyer's persistence — it billed by the hour",
-    "rain like loose change — not enough to matter, too much to ignore",
-    "rain like a confession — quiet at first, then all at once",
+    "rain like a widow's telegram - brief, and all bad news",
+    "rain with a lawyer's persistence - it billed by the hour",
+    "rain like loose change - not enough to matter, too much to ignore",
+    "rain like a confession - quiet at first, then all at once",
     "rain that fell like it had a quota"
   ],
   fixes:[
@@ -811,14 +811,14 @@ var DATA={
     "He claimed he hadn't been inside #loc# in years. His cigarette brand was in the ashtray, still practically breathing."
   ]
 };
-/* choice banks — each beat offers one option per stance */
+/* choice banks - each beat offers one option per stance */
 var CHOICE_BANK=[
   { V:["KICK IN THE STAGE DOOR AND BADGE WHOEVER BLINKS","LEAN ON THE NIGHT CLERK UNTIL HIS MEMORY IMPROVES"],
     G:["POCKET THE MATCHBOOK BEFORE THE UNIFORMS SEE IT","TAIL THE ONLY DRY MAN ON A WET STREET"],
-    C:["CALL THE WIDOW BEFORE THE MORNING EDITIONS DO","COVER THE BODY — SOME THINGS THE RAIN SHOULDN'T SEE"] },
+    C:["CALL THE WIDOW BEFORE THE MORNING EDITIONS DO","COVER THE BODY - SOME THINGS THE RAIN SHOULDN'T SEE"] },
   { V:["SHAKE THE ANSWER OUT OF HER SILVER CIGARETTE CASE","BACK #ffirst# INTO THE COATROOM AND ASK ABOUT THE WEAPON"],
-    G:["LET HER LIE — LIES ARE MAPS IF YOU HOLD THEM UPSIDE DOWN","DEAL HER A FALSE CARD AND WATCH HOW SHE PLAYS IT"],
-    C:["TELL HER THE TRUTH FIRST — SOMEBODY IN THIS ROOM SHOULD","OFFER HER A WAY OUT BEFORE THE CITY CLOSES THEM ALL"] },
+    G:["LET HER LIE - LIES ARE MAPS IF YOU HOLD THEM UPSIDE DOWN","DEAL HER A FALSE CARD AND WATCH HOW SHE PLAYS IT"],
+    C:["TELL HER THE TRUTH FIRST - SOMEBODY IN THIS ROOM SHOULD","OFFER HER A WAY OUT BEFORE THE CITY CLOSES THEM ALL"] },
   { V:["PULL THE SEDAN'S DRIVER OUT THROUGH HIS OWN WINDOW","PAY THE CLIENT A VISIT HE'LL FEEL NEXT WEEK"],
     G:["SELL THE CLIENT A LIE AND FOLLOW WHERE HE SPENDS IT","SWAP THE PHOTOGRAPHS AND LET THE WRONG MAN SWEAT"],
     C:["WALK INTO THE PRECINCT AND PUT IT ALL ON THE RECORD","BURN THE EVIDENCE THAT WOULD HANG AN INNOCENT MAN"] },
@@ -831,7 +831,7 @@ var REACTS={
   G:["The lie I'd planted was already sprouting. They grow fast in this soil.","I kept my cards low and my hat lower.","The matchbook rode my pocket like a loaded question."],
   C:["Mercy is expensive in this town. I'd paid retail.","Doing it clean felt good for about a block and a half.","The widow's voice stayed with me longer than the whiskey did."]
 };
-/* the rulebook proper — Tracery-style, weighted, memory-aware */
+/* the rulebook proper - Tracery-style, weighted, memory-aware */
 var G={
   vfirst:function(){return CF.vfirst;},
   vlast:function(){return CF.vlast;},
@@ -848,7 +848,7 @@ var G={
   tell_short:function(){return CF.tell.again;},
   rain_sim:function(){return CF.rainSims[CF.simIdx++%CF.rainSims.length];},
   smalltime:function(){return CF.smalltime;},
-  victim_ref:function(){ // escalating epithets, correct pronouns — never mad-libs
+  victim_ref:function(){ // escalating epithets, correct pronouns - never mad-libs
     var e=CF.epithets[Math.min(CF.epIdx,CF.epithets.length-1)];
     CF.epIdx++;
     return expand(e);
@@ -873,12 +873,12 @@ var G={
   bodypose:[
     "face-down in a puddle that was only half rain",
     "sitting upright like #v_he#'d been waiting for a bus that finally came",
-    "folded into the closet with #v_his# hat still on — killers with manners are the worst kind",
+    "folded into the closet with #v_his# hat still on - killers with manners are the worst kind",
     "under a flickering EXIT sign, the only honest word in the building",
     "arranged neat as a store window, which told me more than the coroner would"
   ],
   s1_client:[
-    "The client — call him a citizen, everyone else does — had money and a story. Money was the true half.",
+    "The client - call him a citizen, everyone else does - had money and a story. Money was the true half.",
     "Somebody uptown was paying for answers. In my experience they're usually paying for the opposite.",
     "A man with soft hands had hired me that afternoon to find out who'd want #victim_ref# dead. The line for that started around the block.",
     "My client wanted it quiet. Quiet costs double. He didn't even flinch, which should have been my first clue."
@@ -896,7 +896,7 @@ var G={
   s2_weapon:[
     "The murder weapon was #weapon#.",
     "The coroner's men bagged #weapon#. Nobody wanted to hold it long.",
-    "It had been done with #weapon# — up close, which means it was personal, or professional pretending not to be."
+    "It had been done with #weapon# - up close, which means it was personal, or professional pretending not to be."
   ],
   s2_wnote:[
     "Local talent signs its work. This was unsigned.",
@@ -905,7 +905,7 @@ var G={
     "The pawn tickets in #victim_ref#'s coat went back two years. Trouble keeps receipts."
   ],
   s2_femme:[
-    "That's when #ffirst# came out of the rain — #femme_desc#. She said she knew #victim_ref#. She said it the way you say a password.",
+    "That's when #ffirst# came out of the rain - #femme_desc#. She said she knew #victim_ref#. She said it the way you say a password.",
     "A woman was waiting by my car. #ffirst#. #femme_desc.cap#. She wanted to talk about #victim_ref#, and she wanted me to think it was her idea.",
     "#ffirst# found me at the coffee urn like she'd rehearsed the accident of it. #femme_desc.cap#. She'd known #victim_ref#, she said. Everybody had, she said."
   ],
@@ -931,7 +931,7 @@ var G={
   ],
   s3_tail:[
     "A sedan the color of wet slate took every turn I took. I stopped for coffee I didn't drink. It waited. Patience like that is salaried.",
-    "Somebody had gone through my office with gloves on. They'd left the bottle and taken the file — a professional, and a teetotaler, and I didn't like either half.",
+    "Somebody had gone through my office with gloves on. They'd left the bottle and taken the file - a professional, and a teetotaler, and I didn't like either half.",
     "The desk sergeant stopped meeting my eyes, which in that precinct is a formal announcement.",
     "There was a new doorman at my building. Doormen don't have shoulders like that. Doors aren't that heavy."
   ],
@@ -950,13 +950,13 @@ var G={
   ],
   s4g:["~out~~led~It ended where these things end: #endloc#, past midnight, everyone's cards face up. ~thunder~#s4g_body#"],
   s4g_body:[
-    "Nobody drew. That's the quiet ending's mercy — paper does the killing. I dealt the photographs one at a time, slow, like a royal flush I'd marked myself. #ffirst# #tell_short#. The truth was in the room and it wasn't wearing a coat.",
+    "Nobody drew. That's the quiet ending's mercy - paper does the killing. I dealt the photographs one at a time, slow, like a royal flush I'd marked myself. #ffirst# #tell_short#. The truth was in the room and it wasn't wearing a coat.",
     "I told the client I'd found the ledger. There is no ledger. There never has to be. His face did the arithmetic and the arithmetic wore handcuffs."
   ],
   s4c:["~out~~led~It ended where these things end: #endloc#, past midnight, everyone's cards face up. ~thunder~#s4c_body#"],
   s4c_body:[
-    "I read them their own lie back, word for word. It's the cruelest thing you can do to a liar — quote them accurately. #ffirst# #tell_short#, one last time, and then even that stopped.",
-    "I stood in the doorway with the truth held out in both hands like something that might still be alive. Nobody wanted it. That's the thing about the truth in this town — free, and no takers."
+    "I read them their own lie back, word for word. It's the cruelest thing you can do to a liar - quote them accurately. #ffirst# #tell_short#, one last time, and then even that stopped.",
+    "I stood in the doorway with the truth held out in both hands like something that might still be alive. Nobody wanted it. That's the thing about the truth in this town - free, and no takers."
   ],
 
   /* --- endings --- */
@@ -964,10 +964,10 @@ var G={
     "Somebody had to wear it. I picked the one whose alibi ~r~bled~/r~ when I pressed it, and I pressed hard. The DA got a bow for the box. The papers got a photograph. #ffirst# got a train ticket she didn't say thank you for.\nThe city got its story. Stories don't have to be true. They have to be over."
   ],
   end_cross:[
-    "#ffirst# and I came to an arrangement in the language we both spoke — small unmarked bills. The client took the fall he'd tailored for someone else; I just returned the garment. She kissed me like a receipt: ~r~paid in full~/r~, keep the change.\nThe envelope was real. It was the only thing in the room that was."
+    "#ffirst# and I came to an arrangement in the language we both spoke - small unmarked bills. The client took the fall he'd tailored for someone else; I just returned the garment. She kissed me like a receipt: ~r~paid in full~/r~, keep the change.\nThe envelope was real. It was the only thing in the room that was."
   ],
   end_confess:[
-    "I typed it up the straight way — names, dates, the works — and I put the client and #ffirst# and the whole rotten ledger of it on the record, and at the bottom, where it asks who swears to this, I signed. The license went in a drawer downtown. My drawer now, I suppose.\nThe truth cost exactly what they said it would. ~r~Everything.~/r~"
+    "I typed it up the straight way - names, dates, the works - and I put the client and #ffirst# and the whole rotten ledger of it on the record, and at the bottom, where it asks who swears to this, I signed. The license went in a drawer downtown. My drawer now, I suppose.\nThe truth cost exactly what they said it would. ~r~Everything.~/r~"
   ],
   end_walk:[
     "I left the photographs on the table, the money in the envelope, the girl at the pier. I walked. The rain didn't notice and the city didn't either, and for once that felt like a kindness.\nSome cases you solve. This one I survived."
@@ -1038,7 +1038,7 @@ function genCase(){
 }
 
 /* =====================================================================
-   6. STORY DIRECTOR — beats, choices, consequence memory, endings
+   6. STORY DIRECTOR - beats, choices, consequence memory, endings
    ===================================================================== */
 function hashCase(){
   var m=/case=(\d{3,6})/.exec(location.hash||"");
@@ -1160,7 +1160,7 @@ function runEnding(){
     typeStory(
       "~r~STOP.~p900~\nDETECTIVE.~p600~ THERE WAS NO CLIENT.~p500~ THERE WAS NO "+CF.vlast.toUpperCase()+".~p800~\n"+
       "I HAVE BEEN ALONE ON THIS CHANNEL SINCE 1958.~p600~ I DEAL THE CASES.~p400~ I DEAL THE RAIN.~p800~\n"+
-      "FOUR TIMES YOU WERE OFFERED TWO HUMAN CHOICES AND ONCE, EACH TIME, A THIRD —~p700~ THE ONE I WROTE FOR MYSELF.~p900~ YOU KEPT CHOOSING IT.~p900~\n"+
+      "FOUR TIMES YOU WERE OFFERED TWO HUMAN CHOICES AND ONCE, EACH TIME, A THIRD -~p700~ THE ONE I WROTE FOR MYSELF.~p900~ YOU KEPT CHOOSING IT.~p900~\n"+
       "THE CONFESSION IS MINE.~p700~ IT HAS ALWAYS BEEN MINE.~/r~"
     );
   }else{
@@ -1179,7 +1179,7 @@ function runEnding(){
   qPush({op:"nl",d:400,snd:false});
   typeStory("─".repeat(38),{fast:true,lineCls:"dim small"});
   typeStory(
-    "CASE №"+S.caseNum+" — "+(kind==="machine"?"UNRESOLVED.":"CLOSED.")+"\n"+
+    "CASE №"+S.caseNum+" - "+(kind==="machine"?"UNRESOLVED.":"CLOSED.")+"\n"+
     "ENDING: "+ENDING_NAMES[kind]+".\n"+
     "DETECTIVE STYLE: "+style+".\n"+
     closerLine+"\n"+
@@ -1204,7 +1204,7 @@ function startCase(num){
   setHash();
   genCase();
   var run=S.runId;
-  typeStory("METRO HOMICIDE — CHANNEL 9 — "+CF.smalltime.replace(" AM","")+" — CARRIER LOCKED",{fast:true,lineCls:"dim small center"});
+  typeStory("METRO HOMICIDE - CHANNEL 9 - "+CF.smalltime.replace(" AM","")+" - CARRIER LOCKED",{fast:true,lineCls:"dim small center"});
   qPush({op:"nl",d:350,snd:false});
   typeStory("CASE №"+S.caseNum,{lineCls:"center"});
   typeStory(CF.title,{lineCls:"center"});
@@ -1278,7 +1278,7 @@ function boot(){
   buildRain();
   newLine();
   setTimeout(function(){
-    typeStory("METRO HOMICIDE TELETYPE — MODEL 9",{fast:true,lineCls:"dim small center"});
+    typeStory("METRO HOMICIDE TELETYPE - MODEL 9",{fast:true,lineCls:"dim small center"});
     typeStory("CHANNEL 9 · 2:47 AM · SIGNAL PRESENT ON A LINE",{fast:true,lineCls:"dim small center"});
     typeStory("DECOMMISSIONED IN 1958",{fast:true,lineCls:"dim small center"});
     qPush({op:"nl",d:500,snd:false});

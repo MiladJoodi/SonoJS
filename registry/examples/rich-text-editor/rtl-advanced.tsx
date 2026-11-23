@@ -10,7 +10,7 @@ export function RichTextEditorRtlAdvanced() {
         lang="fa"
         variant="advanced"
         placeholder="متن خود را بنویسید…"
-        defaultValue="<p>حالت <strong>پیشرفته</strong> با تراز، رنگ، جدول و فهرست کارها — کامل راست‌چین.</p>"
+        defaultValue="<p>حالت <strong>پیشرفته</strong> با تراز، رنگ، جدول و فهرست کارها - کامل راست‌چین.</p>"
       />
     </div>
   )

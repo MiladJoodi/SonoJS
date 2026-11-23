@@ -30,7 +30,7 @@
 <canvas id="canvas"></canvas>
 <script>
 // ─────────────────────────────────────────────
-// 36 · Kaleidoscope Runway — Fashion-inspired kaleidoscopic tessellations
+// 36 · Kaleidoscope Runway - Fashion-inspired kaleidoscopic tessellations
 // ─────────────────────────────────────────────
 (function () {
   var canvas = document.getElementById('canvas');
@@ -254,7 +254,7 @@
     '  );',
     '  col += centerColor * centerGlow * 0.7;',
     '  ',
-    '  // ── Secondary center detail — mandala star ──',
+    '  // ── Secondary center detail - mandala star ──',
     '  float starAngle = atan(uv.y, uv.x);',
     '  float star = abs(sin(starAngle * segments * 0.5 + t * 0.4));',
     '  star = pow(star, 8.0) * exp(-r * 3.0);',
@@ -266,7 +266,7 @@
     '  pinkFlash = pow(max(pinkFlash, 0.0), 6.0) * 0.8;',
     '  col += vec3(0.95, 0.2, 0.5) * pinkFlash * (1.0 - r * 0.5);',
     '  ',
-    '  // ── Outer fade — mandala dissolves at edges ──',
+    '  // ── Outer fade - mandala dissolves at edges ──',
     '  float edgeFade = smoothstep(0.9, 0.5, r);',
     '  col *= edgeFade;',
     '  ',

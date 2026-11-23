@@ -190,7 +190,7 @@
     <input type="range" id="rSpark" min="0" max="100" value="65" step="1">
   </div>
   <button id="soundBtn" type="button">Sound&ensp;·&ensp;off</button>
-  <p class="about">Everything here is synthesized live — flames, sparks, smoke and crackle.<br>Built by <b>Claude&nbsp;Fable&nbsp;5</b>. Drag Fuel to zero and wait.</p>
+  <p class="about">Everything here is synthesized live - flames, sparks, smoke and crackle.<br>Built by <b>Claude&nbsp;Fable&nbsp;5</b>. Drag Fuel to zero and wait.</p>
 </div>
 
 <script>
@@ -198,7 +198,7 @@
 'use strict';
 
 /* ============================================================
-   EMBERS — a night by the fire
+   EMBERS - a night by the fire
    Single-file procedural campfire simulation.
    Built by Claude Fable 5.
    ============================================================ */
@@ -248,7 +248,7 @@ function fbm(x, y){
        + vnoise(x * 2.03, y * 2.03) * 0.25
        + vnoise(x * 4.07, y * 4.07) * 0.125;
 }
-/* curl of the fbm field — divergence-free-ish swirl for sparks & smoke */
+/* curl of the fbm field - divergence-free-ish swirl for sparks & smoke */
 const CURL_E = 0.35;
 function curl(x, y, out){
   const dy = fbm(x, y + CURL_E) - fbm(x, y - CURL_E);
@@ -302,7 +302,7 @@ const params = {
   sparks: 0.65,    /*  0 .. 1 density */
   sound: false
 };
-let fuelLive = 0.15;   /* eases toward params.fuel — the fire's actual life */
+let fuelLive = 0.15;   /* eases toward params.fuel - the fire's actual life */
 let surge = 0;         /* poke surge, decays */
 let simT = 0;          /* simulation clock (s) */
 let quality = 0;       /* 0 full, 1 fewer particles, 2 no smoke/bloom */
@@ -359,7 +359,7 @@ function makeSmokeSprite(moon){
 makeSmokeSprite(params.sky);
 
 /* ============================================================
-   PARTICLE POOLS — Float32 SoA, zero per-frame allocation
+   PARTICLE POOLS - Float32 SoA, zero per-frame allocation
    ============================================================ */
 const MAXP = 700;                      /* sparks + ash */
 const P = {
@@ -765,7 +765,7 @@ function renderLogs(){
 }
 
 /* ============================================================
-   SIMULATION — fixed 120 Hz steps
+   SIMULATION - fixed 120 Hz steps
    ============================================================ */
 const STEP = 1 / 120;
 let sparkAcc = 0, smokeAcc = 0;
@@ -792,7 +792,7 @@ const _vf = { x: 0, y: 0 };
 function simStep(dt){
   simT += dt;
 
-  /* the fire's actual life follows the slider — slow starve, quicker feed */
+  /* the fire's actual life follows the slider - slow starve, quicker feed */
   const tau = params.fuel > fuelLive ? 2.6 : 7.2;
   fuelLive += (params.fuel - fuelLive) * (1 - Math.exp(-dt / tau));
   fuelLive = clamp(fuelLive, 0, 1);
@@ -1007,7 +1007,7 @@ function renderFire(){
       const halfW = (17 + 26 * life) * S * PC.wMul * (0.8 + 0.4 * fbm(seed * 2.3, simT * 1.2 * timeK));
       const disp = hh * 0.20;
 
-      /* pinch factor — tongues neck and detach near the top */
+      /* pinch factor - tongues neck and detach near the top */
       const pinchN = fbm(seed * 3.1, simT * 1.4 * timeK);
       for (let k = 0; k <= K_SEG; k++){
         const u = k / K_SEG;
@@ -1062,7 +1062,7 @@ function renderFire(){
 function render(){
   ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
 
-  /* static backdrop (device pixels — draw 1:1) */
+  /* static backdrop (device pixels - draw 1:1) */
   ctx.setTransform(1, 0, 0, 1, 0, 0);
   ctx.drawImage(backCv, 0, 0);
   ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
@@ -1092,7 +1092,7 @@ function render(){
   }
   ctx.globalAlpha = 1;
 
-  /* warm light pool — the fire claims the ground, stones and tree trunks */
+  /* warm light pool - the fire claims the ground, stones and tree trunks */
   const flick = 0.86 + 0.14 * fbm(simT * 3.1, 7.7) + surge * 0.25;
   const glowLife = 0.12 + 0.88 * fuelLive;
   const R1 = (150 + 300 * fuelLive) * S * flick;
@@ -1109,7 +1109,7 @@ function render(){
   ctx.fillStyle = lg;
   ctx.fillRect(fireX - R2, fireY - 20 * S - R2, R2 * 2, R2 * 2);
 
-  /* living coal bed — behind the logs */
+  /* living coal bed - behind the logs */
   const coalGlow = 0.32 + 0.68 * fuelLive;
   const coalSpd = 0.35 + 0.65 * fuelLive;
   for (const c of coals){
@@ -1179,7 +1179,7 @@ function render(){
     }
   }
 
-  /* smoke — screen blend, moon-tinted sprite */
+  /* smoke - screen blend, moon-tinted sprite */
   if (quality < 2 && spSmoke){
     ctx.globalCompositeOperation = 'screen';
     for (let i = 0; i < MAXSM; i++){
@@ -1209,7 +1209,7 @@ function drawCoal(c, coalGlow, coalSpd){
 }
 
 /* ============================================================
-   WEB AUDIO — brown-noise roar, Poisson crackle, wind swell
+   WEB AUDIO - brown-noise roar, Poisson crackle, wind swell
    ============================================================ */
 const audio = {
   ctx: null, master: null, roarGain: null, windGain: null,
@@ -1407,7 +1407,7 @@ window.addEventListener('resize', function(){
 });
 
 /* ============================================================
-   MAIN LOOP — fixed-timestep sim, rAF render, degradation ladder
+   MAIN LOOP - fixed-timestep sim, rAF render, degradation ladder
    ============================================================ */
 let lastT = 0, acc = 0;
 let slowFrames = 0;

@@ -1,15 +1,31 @@
 import "server-only"
 
-import { fetchRepoFileText } from "@/lib/github-pro/client"
+import {
+  fetchRepoFileText,
+  GitHubProApiError,
+} from "@/lib/github-pro/client"
 
 /** Central product registry in the private Pro repo (under `products/`). */
 export const PRO_REGISTRY_PATH = "registry/registry.json"
+
+/**
+ * Ordered registry shards. `registry.json` is required; the rest soft-404 to `{}`.
+ * Later files win on slug clash.
+ */
+export const PRO_REGISTRY_PATHS = [
+  "registry/registry.json",
+  "registry/websites.json",
+  "registry/templates.json",
+  "registry/components.json",
+  "registry/popups.json",
+] as const
 
 export type ProRegistryProductType =
   | "component"
   | "block"
   | "template"
   | "hero"
+  | "popup"
 
 export type ProRegistryEntry = {
   name: string
@@ -34,7 +50,8 @@ function parseType(value: unknown): ProRegistryProductType | undefined {
     value === "component" ||
     value === "block" ||
     value === "template" ||
-    value === "hero"
+    value === "hero" ||
+    value === "popup"
   ) {
     return value
   }
@@ -64,16 +81,9 @@ function parseEntry(_slug: string, raw: unknown): ProRegistryEntry | null {
   }
 }
 
-export async function fetchProRegistry(): Promise<ProRegistry> {
-  const text = await fetchRepoFileText(PRO_REGISTRY_PATH)
-  let json: unknown
-  try {
-    json = JSON.parse(text)
-  } catch {
-    throw new Error("Pro registry JSON is invalid")
-  }
+function parseRegistryObject(json: unknown, label: string): ProRegistry {
   if (!json || typeof json !== "object" || Array.isArray(json)) {
-    throw new Error("Pro registry must be a JSON object")
+    throw new Error(`Pro registry must be a JSON object (${label})`)
   }
 
   const out: ProRegistry = {}
@@ -81,6 +91,46 @@ export async function fetchProRegistry(): Promise<ProRegistry> {
     const entry = parseEntry(slug, value)
     if (entry) out[slug] = entry
   }
+  return out
+}
+
+async function loadRegistryShard(
+  path: string,
+  required: boolean
+): Promise<ProRegistry> {
+  let text: string
+  try {
+    text = await fetchRepoFileText(path)
+  } catch (err) {
+    if (
+      !required &&
+      err instanceof GitHubProApiError &&
+      err.status === 404
+    ) {
+      return {}
+    }
+    throw err
+  }
+
+  let json: unknown
+  try {
+    json = JSON.parse(text)
+  } catch {
+    throw new Error(`Pro registry JSON is invalid (${path})`)
+  }
+
+  return parseRegistryObject(json, path)
+}
+
+export async function fetchProRegistry(): Promise<ProRegistry> {
+  const out: ProRegistry = {}
+
+  for (const path of PRO_REGISTRY_PATHS) {
+    const required = path === PRO_REGISTRY_PATH
+    const shard = await loadRegistryShard(path, required)
+    Object.assign(out, shard)
+  }
+
   return out
 }
 

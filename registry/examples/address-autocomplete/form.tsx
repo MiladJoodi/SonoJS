@@ -27,7 +27,7 @@ export function AddressAutocompleteForm() {
         <FieldDescription>
           Try <span className="font-medium text-foreground">new</span>,{" "}
           <span className="font-medium text-foreground">london</span>, or{" "}
-          <span className="font-medium text-foreground">paris</span> — pick a
+          <span className="font-medium text-foreground">paris</span> - pick a
           suggestion to fill the fields below.
         </FieldDescription>
         <FieldGroup>

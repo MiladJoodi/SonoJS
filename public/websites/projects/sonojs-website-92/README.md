@@ -17,7 +17,7 @@ Boston Soft Lift veneers boutique - airy white/blue specialist look with before/
 
 ## Live / package
 
-- Demo: https://sonojs-website-92.winbeta-info.workers.dev/
+- Demo: https://sonojs-website-92.sonojs3.workers.dev/
 - Zip: `products/webiste/sonojs-website-92/sonojs-website-92.zip`
 
 ## Access

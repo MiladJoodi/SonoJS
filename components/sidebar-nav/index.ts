@@ -11,7 +11,7 @@ export {
   CarouselsSidebar,
 } from "./carousels-sidebar"
 export { AiListIndex, AiSidebar } from "./ai-sidebar"
-export { PromoListIndex, PromoSidebar } from "./promo-sidebar"
+export { PopupsListIndex, PopupsSidebar } from "./popups-sidebar"
 export { BlocksListIndex, BlocksSidebar } from "./blocks-sidebar"
 export { ToolsListIndex, ToolsSidebar, ToolsSidebarToggle } from "./tools-sidebar"
 export { LegalListIndex, LegalSidebar } from "./legal-sidebar"

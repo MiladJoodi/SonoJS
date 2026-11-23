@@ -30,7 +30,7 @@
 <canvas id="canvas"></canvas>
 <script>
 // ─────────────────────────────────────────────
-// Dither Gradient — Smooth gradients decomposed into ordered dithering
+// Dither Gradient - Smooth gradients decomposed into ordered dithering
 // patterns. Analog warmth quantized into digital precision.
 // ─────────────────────────────────────────────
 (function () {
@@ -172,7 +172,7 @@
     '}',
     '',
     '// ══════════════════════════════════════════',
-    '// Base gradient field — slowly morphing multi-center gradients',
+    '// Base gradient field - slowly morphing multi-center gradients',
     '// ══════════════════════════════════════════',
     'vec3 baseGradient(vec2 uv, float t) {',
     '  // Slowly rotating coordinate system',
@@ -235,7 +235,7 @@
     '  float bitD = u_bitDepth;',
     '',
     '  // ── Mouse interaction ──',
-    '  // Mouse reveals "analog truth" — smooth gradients in a radius',
+    '  // Mouse reveals "analog truth" - smooth gradients in a radius',
     '  float mouseReveal = 0.0;',
     '  vec2 mouseUV = vec2(-10.0);',
     '  if (u_mouse.x >= 0.0) {',
@@ -249,7 +249,7 @@
     '  vec3 smoothColor = baseGradient(uv, t);',
     '',
     '  // ── Pixel coordinates for dither patterns ──',
-    '  // Scale by ditherScale — larger = bigger dither cells',
+    '  // Scale by ditherScale - larger = bigger dither cells',
     '  vec2 ditherCoord = fragCoord / ditherSc;',
     '',
     '  // ── Layer 2 & 3: Pattern transition regions ──',
@@ -350,7 +350,7 @@
     '  vig = pow(vig, 0.4);',
     '  finalColor *= vig;',
     '',
-    '  // ── Film grain — very subtle ──',
+    '  // ── Film grain - very subtle ──',
     '  float grain = (hash(fragCoord + fract(t * 41.0) * 1000.0) - 0.5) * 0.02;',
     '  finalColor += grain;',
     '',

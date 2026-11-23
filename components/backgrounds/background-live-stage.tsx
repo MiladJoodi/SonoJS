@@ -9,7 +9,7 @@ import type { BackgroundsCatalogEntry } from "@/lib/backgrounds-catalog"
 import { SITE_TOOLTIP_DELAY_MS } from "@/lib/site-tooltip"
 import { cn } from "@/lib/utils"
 
-/** Preview stage — same chrome bar + fullscreen control as BlockExample. */
+/** Preview stage - same chrome bar + fullscreen control as BlockExample. */
 export function BackgroundLiveStage({
   entry,
   title = "Preview",

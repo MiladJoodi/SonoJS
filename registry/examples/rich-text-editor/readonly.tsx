@@ -7,7 +7,7 @@ export function RichTextEditorReadonly() {
     <div className="w-full">
       <RichTextEditor
         readOnly
-        defaultValue="<p>Read-only — content cannot be edited.</p>"
+        defaultValue="<p>Read-only - content cannot be edited.</p>"
       />
     </div>
   )

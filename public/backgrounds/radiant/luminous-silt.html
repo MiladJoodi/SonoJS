@@ -30,7 +30,7 @@
 <canvas id="canvas"></canvas>
 <script>
 // ─────────────────────────────────────────────
-// Luminous Silt — Dense particle color clouds
+// Luminous Silt - Dense particle color clouds
 // ─────────────────────────────────────────────
 (function () {
   var canvas = document.getElementById('canvas');
@@ -203,7 +203,7 @@
       posY[i] = Math.random() * H;
       velScale[i] = 0.3 + Math.random() * 0.7;
       brightnessIdx[i] = (Math.random() * NUM_NORMAL_ALPHAS) | 0;
-      // ~5% of particles are sparkles — always use highest alpha bucket
+      // ~5% of particles are sparkles - always use highest alpha bucket
       isSparkle[i] = Math.random() < 0.05 ? 1 : 0;
     }
     allocBuckets();

@@ -30,7 +30,7 @@
 <canvas id="canvas"></canvas>
 <script>
 // ─────────────────────────────────────────────
-// Moiré Interference — Overlapping concentric ring interference patterns
+// Moiré Interference - Overlapping concentric ring interference patterns
 // ─────────────────────────────────────────────
 (function () {
   var canvas = document.getElementById('canvas');
@@ -82,14 +82,14 @@
     '  float drift = u_driftSpeed;',
     '  float density = u_ringDensity;',
     '',
-    '  // ── Ring frequency — controls how tight the concentric circles are ──',
+    '  // ── Ring frequency - controls how tight the concentric circles are ──',
     '  float baseFreq = 60.0 * density;',
     '',
-    '  // ── Subtle breathing — ring spacing pulses slowly ──',
+    '  // ── Subtle breathing - ring spacing pulses slowly ──',
     '  float breathe = 1.0 + 0.04 * sin(t * 0.3) + 0.02 * sin(t * 0.17 + 1.0);',
     '  float freq = baseFreq * breathe;',
     '',
-    '  // ── Center points — 4 sources orbiting at different speeds and radii ──',
+    '  // ── Center points - 4 sources orbiting at different speeds and radii ──',
     '  // Each center drifts in a unique elliptical/Lissajous path',
     '  float d = drift;',
     '',
@@ -113,7 +113,7 @@
     '    0.17 * sin(t * d * 0.47 + 0.8)',
     '  );',
     '',
-    '  // ── Mouse-driven 5th center — shifts one pattern layer ──',
+    '  // ── Mouse-driven 5th center - shifts one pattern layer ──',
     '  if (u_mouse.x > 0.0) {',
     '    vec2 mUV = (u_mouse - u_res * 0.5) / min(u_res.x, u_res.y);',
     '    c3 = mUV;',
@@ -184,17 +184,17 @@
     '  shimmer = smoothstep(0.4, 0.8, shimmer);',
     '  col += vec3(0.12, 0.08, 0.04) * shimmer * 0.2;',
     '',
-    '  // ── Vignette — darken edges to focus attention on center ──',
+    '  // ── Vignette - darken edges to focus attention on center ──',
     '  float vig = 1.0 - dot(uv * 0.9, uv * 0.9);',
     '  vig = clamp(vig, 0.0, 1.0);',
     '  vig = pow(vig, 0.5);',
     '  col *= vig;',
     '',
-    '  // ── Fine grain — subtle noise overlay for tactile quality ──',
+    '  // ── Fine grain - subtle noise overlay for tactile quality ──',
     '  float grain = (hash(gl_FragCoord.xy + fract(t * 37.0) * 1000.0) - 0.5) * 0.03;',
     '  col += grain;',
     '',
-    '  // ── Tone mapping — keep blacks deep ──',
+    '  // ── Tone mapping - keep blacks deep ──',
     '  col = max(col, vec3(0.0));',
     '  col = col / (1.0 + col * 0.2);',
     '',
