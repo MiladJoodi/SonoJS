@@ -4,6 +4,7 @@ import { CatalogSection } from "@/components/catalog/catalog-section"
 import { cursorsCatalog } from "@/lib/cursors-catalog"
 
 import { CursorExampleCard } from "./example-card"
+import { cursorThumbSrc } from "./thumbs"
 
 /** Flat card grid, shared catalog columns (same as 3D / AI / carousels). */
 export function CursorGallery() {
@@ -22,6 +23,7 @@ export function CursorGallery() {
           id={entry.id}
           title={entry.title}
           status={entry.status}
+          imageSrc={cursorThumbSrc(entry.id)}
         />
       ))}
     </CatalogSection>
