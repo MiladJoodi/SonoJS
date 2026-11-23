@@ -39,6 +39,7 @@ const CURSOR_THUMB_SLUGS = new Set([
   "springy-cursor",
   "textflag-cursor",
   "texticon-cursor",
+  "trail-cursor",
 ])
 
 export function cursorThumbSrc(id: string) {
