@@ -1,6 +1,7 @@
 /**
  * Builds a lean access inventory for /admin/access.
- * Reads public/r/*.json + lib/templates-catalog.ts after registry:build.
+ * Reads public/r/*.json + lib/templates-catalog.ts + lib/popups-nav.ts
+ * after registry:build. Also lists known Pro demos (pro-button).
  *
  * Usage: node scripts/build-access-index.mjs
  */
@@ -19,9 +20,12 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const root = path.resolve(__dirname, "..")
 const registryDir = path.join(root, "public", "r")
 const catalogPath = path.join(root, "lib", "templates-catalog.ts")
+const popupsNavPath = path.join(root, "lib", "popups-nav.ts")
 const outPath = path.join(root, "public", "admin", "access-index.json")
 
 const SKIP_REGISTRY = new Set(["registry.json", "index.json", "access-index.json"])
+/** Install helpers — not access-gated product surfaces for this inventory. */
+const SKIP_REGISTRY_TYPES = new Set(["registry:hook"])
 
 function normalizeAccess(value) {
   if (value === "member" || value === "pro") return value
@@ -107,13 +111,15 @@ function readRegistryItems() {
         readFileSync(path.join(registryDir, file), "utf8")
       )
       if (!raw?.name) continue
+      const type = raw.type || "registry:ui"
+      if (SKIP_REGISTRY_TYPES.has(type)) continue
       const access = normalizeAccess(raw.access)
       const surface = surfaceFromItem(raw)
       items.push({
         kind: "registry",
         name: raw.name,
         title: raw.title || raw.name,
-        type: raw.type || "registry:ui",
+        type,
         surface,
         access,
         accessLabel: accessLabel(access),
@@ -126,6 +132,58 @@ function readRegistryItems() {
   }
   items.sort((a, b) => a.name.localeCompare(b.name))
   return items
+}
+
+/**
+ * Pro popups are not in public/r — parse the docs nav catalog.
+ * Shape matches registry rows so summary.byAccess / bySurface stay correct.
+ */
+function parsePopupItems() {
+  if (!existsSync(popupsNavPath)) return []
+  const src = readFileSync(popupsNavPath, "utf8")
+  const items = []
+  const seen = new Set()
+  const re =
+    /\{\s*title:\s*"([^"]+)"\s*,\s*href:\s*"(\/popups\/[^"]+)"/g
+  let match
+  while ((match = re.exec(src)) !== null) {
+    const title = match[1]
+    const href = match[2]
+    if (!href || href === "/popups") continue
+    const name = href.slice("/popups/".length)
+    if (!name || seen.has(name)) continue
+    seen.add(name)
+    items.push({
+      kind: "registry",
+      name,
+      title,
+      type: "pro:popup",
+      surface: "popups",
+      access: "pro",
+      accessLabel: accessLabel("pro"),
+      href,
+      registryUrl: null,
+    })
+  }
+  items.sort((a, b) => a.name.localeCompare(b.name))
+  return items
+}
+
+/** Known Pro demos that live outside public/r (Pro API / site chrome). */
+function proDemoItems() {
+  return [
+    {
+      kind: "registry",
+      name: "pro-button",
+      title: "Pro Button",
+      type: "pro:component",
+      surface: "components",
+      access: "pro",
+      accessLabel: accessLabel("pro"),
+      href: "/docs/components/pro-button",
+      registryUrl: null,
+    },
+  ]
 }
 
 function parseCatalogProjects() {
@@ -183,7 +241,11 @@ function countBy(list, keyFn) {
 
 function main() {
   const generatedAt = new Date().toISOString()
-  const registry = readRegistryItems()
+  const registry = [
+    ...readRegistryItems(),
+    ...parsePopupItems(),
+    ...proDemoItems(),
+  ].sort((a, b) => a.name.localeCompare(b.name))
   const catalog = parseCatalogProjects()
   const templates = catalog.filter((r) => r.kind === "template")
   const websites = catalog.filter((r) => r.kind === "website")
@@ -283,8 +345,8 @@ function main() {
       },
       {
         id: "pro-api",
-        title: "Pro component API",
-        body: "Extra Pro-only packages live behind /api/pro/components (GitHub Pro registry), not in these public/r counts.",
+        title: "Pro packages + popups",
+        body: "Pro-only items (popups from lib/popups-nav.ts, Pro Button demo) are listed here with access:\"pro\". Install/source still comes from /api/pro/components (private GitHub Pro registry) — this index does not fetch that repo at build time.",
         href: "/docs/components/pro-button",
       },
       {
@@ -296,7 +358,7 @@ function main() {
       {
         id: "rebuild",
         title: "Keep this page fresh",
-        body: "After changing registry access or templates-catalog prices, run npm run registry:build (or npm run access:index).",
+        body: "After changing registry access, popups-nav, or templates-catalog prices, run npm run registry:build (or npm run access:index).",
       },
     ],
     registry,

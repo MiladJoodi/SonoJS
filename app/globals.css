@@ -108,14 +108,14 @@
   }
 
   ::selection {
-    /* Light: soft primary wash. Dark: stronger mix, 22% vanishes on #09090b. */
-    background: color-mix(in oklab, var(--primary) 22%, transparent);
-    color: var(--foreground);
+    /* Solid primary so light mode never reads as white-on-white. */
+    background: var(--primary);
+    color: var(--primary-foreground);
   }
 
   .dark ::selection {
-    background: color-mix(in oklab, var(--primary) 48%, transparent);
-    color: var(--foreground);
+    background: var(--primary);
+    color: var(--primary-foreground);
   }
 }
 

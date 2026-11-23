@@ -30,7 +30,7 @@ type RegistryRow = {
   access: AccessTier
   accessLabel: string
   href: string | null
-  registryUrl: string
+  registryUrl: string | null
 }
 
 type CatalogRow = {
@@ -587,10 +587,9 @@ export function AdminAccessPanel() {
                           row.href
                             ? { href: row.href, label: "Page" }
                             : null,
-                          {
-                            href: row.registryUrl,
-                            label: "JSON",
-                          },
+                          row.registryUrl
+                            ? { href: row.registryUrl, label: "JSON" }
+                            : null,
                         ]}
                       />
                     </td>
@@ -678,7 +677,7 @@ function FilterPill({
       className={cn(
         "cursor-pointer rounded-md px-2.5 py-1 text-xs font-medium transition-colors",
         active
-          ? "bg-foreground text-background"
+          ? "bg-primary text-primary-foreground"
           : "bg-muted/50 text-muted-foreground hover:bg-muted hover:text-foreground"
       )}
     >
