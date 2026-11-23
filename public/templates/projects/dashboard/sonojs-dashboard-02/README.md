@@ -17,11 +17,9 @@ Product analytics admin (demo: Acme Inc / Vantage). Overview, Analytics, Custome
 ## Live / package
 
 - Demo: https://sonojs-dashboard-02.sonojs.workers.dev/
-- Zip: `products/dashboards/sonojs-dashboard-02/sonojs-dashboard-02.zip`
 - Local: `npm install` then `npm run dev`
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-dashboard-02`

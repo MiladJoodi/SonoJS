@@ -17,10 +17,8 @@ Interactive electric-vehicle design study. Demo brand: **VEYRA**.
 ## Live / package
 
 - Demo: https://sonojs-landing-05.sonojs.workers.dev/
-- Zip: `products/landing/sonojs-landing-05/sonojs-landing-05.zip`
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-landing-05`

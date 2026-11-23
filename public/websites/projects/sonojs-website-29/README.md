@@ -18,7 +18,6 @@ Crypto exchange & trading UI kit. Demo brand: **Crypo**.
 ## Live / package
 
 - Demo: https://sonojs-website-29.sonojs2.workers.dev/pages/home/
-- Zip: `products/webiste/sonojs-website-29/sonojs-website-29.zip`
 - Local: `npx serve .` then open `/pages/home/`
 
 ## Run locally
@@ -33,4 +32,3 @@ Open `http://localhost:3000/pages/home/` (or the port `serve` prints).
 
 - Live preview: public
 - Download: paid one-time (`$49`) via product entitlement
-- Zip via Pro registry slug `sonojs-website-29`

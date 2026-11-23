@@ -17,11 +17,9 @@ AI plant-design marketing hero. Demo brand: **bloom**.
 ## Live / package
 
 - Demo: https://sonojs-hero-51.sonojs.workers.dev/
-- Zip: `products/heroes/sonojs-hero-51/sonojs-hero-51.zip`
 - Local: `npm install` then `npm run dev`
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-hero-51`

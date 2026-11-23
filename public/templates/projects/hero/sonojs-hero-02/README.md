@@ -23,4 +23,3 @@ Interactive 3D juice product showcase. Demo brand: **Juicy**.
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-hero-02` → `products/heroes/sonojs-hero-02/sonojs-hero-02.zip`

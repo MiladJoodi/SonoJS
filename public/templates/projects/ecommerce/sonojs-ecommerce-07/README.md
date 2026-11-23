@@ -17,11 +17,9 @@ Editorial photographer & filmmaker commission site. Demo brand: **Marcus Thorne*
 ## Live / package
 
 - Demo: https://sonojs-ecommerce-07.sonojs2.workers.dev/
-- Zip: `products/ecommerce/sonojs-ecommerce-07/sonojs-ecommerce-07.zip`
 - Local: `npm install` then `npm run dev`
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-ecommerce-07`

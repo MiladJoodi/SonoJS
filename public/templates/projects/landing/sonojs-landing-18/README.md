@@ -17,11 +17,9 @@ AI workplace-search marketing landing. Demo brand: **Dala**. Unlock collective w
 ## Live / package
 
 - Demo: https://sonojs-landing-18.sonojs.workers.dev/
-- Zip: `products/landing/sonojs-landing-18/sonojs-landing-18.zip`
 - Local: `npm install` then `npm run dev`
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-landing-18`

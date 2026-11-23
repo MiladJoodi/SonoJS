@@ -19,7 +19,6 @@ Tesla Hover Game night-chase hero with HUD gauges. Demo brand: **Roadster / Hove
 ## Live / package
 
 - Demo: https://sonojs-hero-75.sonojs2.workers.dev/
-- Zip: `products/heroes/sonojs-hero-75/sonojs-hero-75.zip`
 - Local: `npm install` then `npm run dev`
 
 ## Run locally
@@ -37,7 +36,6 @@ Production preview: `npm run build` then `npm run preview`.
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-hero-75`
 
 ## Note
 

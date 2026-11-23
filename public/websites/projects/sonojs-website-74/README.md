@@ -18,10 +18,8 @@ Heritage boutique hotel on Ile Saint-Louis, Paris - rooms, dining, booking wizar
 ## Live / package
 
 - Demo: https://sonojs-website-74.sonojs3.workers.dev/
-- Zip: `products/webiste/sonojs-website-74/sonojs-website-74.zip`
 
 ## Access
 
 - Live preview: public
 - Download: paid entitlement (`$39`)
-- Zip via Pro registry slug `sonojs-website-74`

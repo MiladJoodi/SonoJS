@@ -17,11 +17,9 @@ Applied AI lab marketing site. Demo brand: **The Meridian Company** / Helm.
 ## Live / package
 
 - Demo: https://sonojs-saas-06.sonojs.workers.dev/
-- Zip: `products/saas/sonojs-saas-06/sonojs-saas-06.zip`
 - Local: `npm install` then `npm run dev`
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-saas-06`

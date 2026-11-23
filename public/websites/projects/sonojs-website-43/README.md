@@ -18,10 +18,8 @@ Perpetual futures exchange kit (marketing + trade/markets/portfolio). Brand: **A
 ## Live / package
 
 - Demo: https://sonojs-website-43.sonojs2.workers.dev/
-- Zip: `products/webiste/sonojs-website-43/sonojs-website-43.zip`
 
 ## Access
 
 - Live preview: public
 - Download: paid entitlement (`$39`)
-- Zip via Pro registry slug `sonojs-website-43`

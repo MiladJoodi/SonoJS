@@ -17,11 +17,9 @@ Developer email platform landing. Demo brand: **Resend**. Email for developers.
 ## Live / package
 
 - Demo: https://sonojs-saas-05.sonojs.workers.dev/
-- Zip: `products/saas/sonojs-saas-05/sonojs-saas-05.zip`
 - Local: `npm install` then `npm run dev`
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-saas-05`

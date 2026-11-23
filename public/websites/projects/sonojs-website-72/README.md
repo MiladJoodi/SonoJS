@@ -18,10 +18,8 @@ Coastal boutique hotel with rooms, dining, spa, booking wizard, and guest portal
 ## Live / package
 
 - Demo: https://sonojs-website-72.sonojs3.workers.dev/
-- Zip: `products/webiste/sonojs-website-72/sonojs-website-72.zip`
 
 ## Access
 
 - Live preview: public
 - Download: paid entitlement (`$29`)
-- Zip via Pro registry slug `sonojs-website-72`

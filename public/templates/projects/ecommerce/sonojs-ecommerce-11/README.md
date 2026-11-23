@@ -18,10 +18,8 @@ Interactive evening & tailoring fashion rail / lookbook. Brand: **Maison Verrel 
 ## Live / package
 
 - Demo: https://sonojs-ecommerce-11.sonojs2.workers.dev/
-- Zip: `products/ecommerce/sonojs-ecommerce-11/sonojs-ecommerce-11.zip`
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-ecommerce-11`

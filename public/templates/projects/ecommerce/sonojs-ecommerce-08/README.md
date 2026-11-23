@@ -18,7 +18,6 @@ Full-viewport zero-sugar soda product hero. Demo brand: **Soda / Diet Soda**.
 ## Live / package
 
 - Demo: https://sonojs-ecommerce-08.sonojs2.workers.dev/
-- Zip: `products/ecommerce/sonojs-ecommerce-08/sonojs-ecommerce-08.zip`
 - Local: `npx --yes serve .`
 
 ## Run locally
@@ -35,4 +34,3 @@ Then open the URL printed in the terminal (usually `http://localhost:3000`).
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-ecommerce-08`

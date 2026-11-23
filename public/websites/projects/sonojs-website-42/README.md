@@ -18,10 +18,8 @@ On-chain signals crypto terminal (markets, trade, bots, watchlist). Brand: **Vyr
 ## Live / package
 
 - Demo: https://sonojs-website-42.sonojs2.workers.dev/
-- Zip: `products/webiste/sonojs-website-42/sonojs-website-42.zip`
 
 ## Access
 
 - Live preview: public
 - Download: paid entitlement (`$39`)
-- Zip via Pro registry slug `sonojs-website-42`

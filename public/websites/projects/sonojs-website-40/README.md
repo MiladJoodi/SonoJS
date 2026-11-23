@@ -18,7 +18,6 @@ Global project-operations SaaS site (marketing + auth + app shell). Brand: **Orb
 ## Live / package
 
 - Demo: https://sonojs-website-40.sonojs2.workers.dev/
-- Zip: `products/webiste/sonojs-website-40/sonojs-website-40.zip`
 - Local: `npx serve .`
 
 ## Run locally
@@ -35,4 +34,3 @@ Then open the URL printed in the terminal (usually `http://localhost:3000`).
 
 - Live preview: public
 - Download: paid entitlement (`$39`)
-- Zip via Pro registry slug `sonojs-website-40`

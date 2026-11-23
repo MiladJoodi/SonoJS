@@ -17,10 +17,8 @@ Interactive mesh hero. Demo brand: **Membrane**.
 ## Live / package
 
 - Demo: https://sonojs-hero-13.sonojs.workers.dev/
-- Zip: `products/heroes/sonojs-hero-13/sonojs-hero-13.zip`
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-hero-13`

@@ -18,10 +18,8 @@ Healthcare decisions podcast with sketch-paper craft, episode player, framework 
 ## Live / package
 
 - Demo: https://sonojs-website-62.sonojs3.workers.dev/
-- Zip: `products/webiste/sonojs-website-62/sonojs-website-62.zip`
 
 ## Access
 
 - Live preview: public
 - Download: paid entitlement (`$29`)
-- Zip via Pro registry slug `sonojs-website-62`

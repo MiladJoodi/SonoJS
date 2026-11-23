@@ -17,11 +17,9 @@ Online business banking landing. Demo brand: **Mercury**. Radically different ba
 ## Live / package
 
 - Demo: https://sonojs-landing-17.sonojs.workers.dev/
-- Zip: `products/landing/sonojs-landing-17/sonojs-landing-17.zip`
 - Local: `npm install` then `npm run dev`
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-landing-17`

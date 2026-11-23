@@ -19,11 +19,9 @@ Interactive 3D Earth explorer. Demo brand: **Atlas**.
 - Demo: https://sonojs-hero-11.sonojs.workers.dev/
 - Download: Google Drive  
   https://drive.google.com/file/d/1SkqOMkM8hlCQQFIBfKcHbLvelcHkN6yg/view?usp=drive_link
-- Zip (Pro registry fallback): `products/heroes/sonojs-hero-11/sonojs-hero-11.zip`
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
 - Primary download: Google Drive (`downloadUrl` in catalog)
-- Zip via Pro registry slug `sonojs-hero-11`

@@ -18,10 +18,8 @@ Single-page interactive real-fruit smoothie flavour stage with sprite sheets, pa
 ## Live / package
 
 - Demo: https://sonojs-ecommerce-12.sonojs2.workers.dev/
-- Zip: `products/ecommerce/sonojs-ecommerce-12/sonojs-ecommerce-12.zip`
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-ecommerce-12`

@@ -17,11 +17,9 @@ Crypto liquidity / trading-firm marketing site. Demo brand: **Auros**. Making Di
 ## Live / package
 
 - Demo: https://sonojs-saas-03.sonojs.workers.dev/
-- Zip: `products/saas/sonojs-saas-03/sonojs-saas-03.zip`
 - Local: `npm install` then `npm run dev`
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-saas-03`

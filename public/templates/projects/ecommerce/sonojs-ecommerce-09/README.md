@@ -18,7 +18,6 @@ Interactive character / fashion look creator with cart demo. Brand: **VELL**.
 ## Live / package
 
 - Demo: https://sonojs-ecommerce-09.sonojs2.workers.dev/
-- Zip: `products/ecommerce/sonojs-ecommerce-09/sonojs-ecommerce-09.zip`
 - Local: `npx --yes serve .`
 
 ## Run locally
@@ -35,4 +34,3 @@ Open `/` (Create a Character stage).
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-ecommerce-09`

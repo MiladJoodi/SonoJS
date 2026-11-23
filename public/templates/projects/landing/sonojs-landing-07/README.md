@@ -17,7 +17,6 @@ Path: `public/templates/projects/landing/sonojs-landing-07/`
 ## Live / package
 
 - Demo: https://sonojs-landing-07.sonojs.workers.dev/
-- Zip: `products/landing/sonojs-landing-07/sonojs-landing-07.zip`
 
 ## Run locally
 
@@ -31,4 +30,3 @@ ES modules / Three.js need a static server (`file://` will not work).
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-landing-07`

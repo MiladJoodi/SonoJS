@@ -18,10 +18,8 @@ Sit-down café & restaurant site with multi-step reservation demo (no online car
 ## Live / package
 
 - Demo: https://sonojs-website-51.sonojs2.workers.dev/
-- Zip: `products/webiste/sonojs-website-51/sonojs-website-51.zip`
 
 ## Access
 
 - Live preview: public
 - Download: paid entitlement (`$29`)
-- Zip via Pro registry slug `sonojs-website-51`

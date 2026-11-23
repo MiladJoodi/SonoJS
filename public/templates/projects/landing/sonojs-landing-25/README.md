@@ -18,7 +18,6 @@ Breathing-app marketing landing. Demo brand: **STILLWATER**.
 ## Live / package
 
 - Demo: https://sonojs-landing-25.sonojs2.workers.dev/
-- Zip: `products/landing/sonojs-landing-25/sonojs-landing-25.zip`
 - Local: `npx --yes serve .`
 
 ## Run locally
@@ -35,4 +34,3 @@ Then open the URL printed in the terminal (usually `http://localhost:3000`).
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-landing-25`

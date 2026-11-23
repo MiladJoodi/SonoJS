@@ -19,7 +19,6 @@ Ops console marketing site for agent pipelines. Demo brand: **Velora**.
 ## Live / package
 
 - Demo: https://sonojs-website-07.sonojs2.workers.dev/
-- Zip: `products/webiste/sonojs-website-07/sonojs-website-07.zip`
 - Local: `npx serve .`
 
 ## Run locally
@@ -32,4 +31,3 @@ npx serve .
 
 - Live preview: public
 - Download: paid one-time (`$29`) via product entitlement
-- Zip via Pro registry slug `sonojs-website-07`

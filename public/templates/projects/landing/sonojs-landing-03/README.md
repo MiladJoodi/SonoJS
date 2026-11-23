@@ -23,4 +23,3 @@ Premium AI / SaaS landing with an interactive WebGL hero. Demo brand: **Aether**
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-landing-03` → `products/landing/sonojs-landing-03/sonojs-landing-03.zip`

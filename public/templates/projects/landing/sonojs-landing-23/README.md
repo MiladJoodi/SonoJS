@@ -17,11 +17,9 @@ Film archive landing. Demo brand: **Leon Vasari / Archive Edition**.
 ## Live / package
 
 - Demo: https://sonojs-landing-23.sonojs2.workers.dev/
-- Zip: `products/landing/sonojs-landing-23/sonojs-landing-23.zip`
 - Local: `npx --yes serve .`
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-landing-23`

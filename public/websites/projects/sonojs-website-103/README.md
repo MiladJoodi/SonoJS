@@ -18,10 +18,8 @@ Live concert / touring AV brand (Brooklyn fiction) with near-black cyan × magen
 ## Live / package
 
 - Demo: https://sonojs-website-103.sonojs3.workers.dev/
-- Zip: `products/webiste/sonojs-website-103/sonojs-website-103.zip`
 
 ## Access
 
 - Live preview: public
 - Download: paid entitlement (`$39`)
-- Zip via Pro registry slug `sonojs-website-103`

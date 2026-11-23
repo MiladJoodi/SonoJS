@@ -17,11 +17,9 @@ AI text-to-video marketing hero. Demo brand: **Oryon**.
 ## Live / package
 
 - Demo: https://sonojs-hero-72.sonojs2.workers.dev/
-- Zip: `products/heroes/sonojs-hero-72/sonojs-hero-72.zip`
 - Local: `npx --yes serve .`
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-hero-72`

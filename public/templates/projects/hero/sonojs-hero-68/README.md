@@ -17,11 +17,9 @@ Dark website-builder hero. Demo brand: **Weblex**.
 ## Live / package
 
 - Demo: https://sonojs-hero-68.sonojs2.workers.dev/ (may still show Hello world until redeploy)
-- Zip: `products/heroes/sonojs-hero-68/sonojs-hero-68.zip`
 - Local: `npm run dev` / `npm run build`
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-hero-68`

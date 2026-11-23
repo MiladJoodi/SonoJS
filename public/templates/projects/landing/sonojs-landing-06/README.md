@@ -17,10 +17,8 @@ Vertical film-festival slider. Demo brand: **Cinema Reel**.
 ## Live / package
 
 - Demo: https://sonojs-landing-06.sonojs.workers.dev/
-- Zip: `products/landing/sonojs-landing-06/sonojs-landing-06.zip`
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-landing-06`

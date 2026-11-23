@@ -17,10 +17,8 @@ Wheel-jacked infinite portfolio reel. Demo brand: **Folio**.
 ## Live / package
 
 - Demo: https://sonojs-portfolio-02.sonojs.workers.dev/
-- Zip: `products/portfolio/sonojs-portfolio-02/sonojs-portfolio-02.zip`
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-portfolio-02`

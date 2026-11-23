@@ -18,10 +18,8 @@ Neo-brutalist AI builder learning platform with roadmaps, prompts, workflows, an
 ## Live / package
 
 - Demo: https://sonojs-website-70.sonojs3.workers.dev/
-- Zip: `products/webiste/sonojs-website-70/sonojs-website-70.zip`
 
 ## Access
 
 - Live preview: public
 - Download: paid entitlement (`$29`)
-- Zip via Pro registry slug `sonojs-website-70`

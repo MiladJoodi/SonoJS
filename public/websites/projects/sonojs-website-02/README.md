@@ -18,7 +18,6 @@ Listener-supported cyberpunk net-radio multi-page site. Demo brand: **NULLWAVE**
 ## Live / package
 
 - Demo: https://sonojs-website-02.sonojs2.workers.dev/
-- Zip: `products/webiste/sonojs-website-02/sonojs-website-02.zip`
 - Local: `npx serve .`
 
 ## Run locally
@@ -33,4 +32,3 @@ Then open the URL printed in the terminal (usually `http://localhost:3000`).
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-website-02`

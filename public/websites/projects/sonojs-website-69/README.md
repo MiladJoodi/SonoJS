@@ -18,10 +18,8 @@ Cultural exchange institute with programs, admissions theater, and student dashb
 ## Live / package
 
 - Demo: https://sonojs-website-69.sonojs3.workers.dev/
-- Zip: `products/webiste/sonojs-website-69/sonojs-website-69.zip`
 
 ## Access
 
 - Live preview: public
 - Download: paid entitlement (`$39`)
-- Zip via Pro registry slug `sonojs-website-69`

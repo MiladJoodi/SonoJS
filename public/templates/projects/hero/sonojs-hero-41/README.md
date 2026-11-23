@@ -17,11 +17,9 @@ Studio hero with soft video stage. Demo brand: **Aethera®**.
 ## Live / package
 
 - Demo: https://sonojs-hero-41.sonojs.workers.dev/
-- Zip: `products/heroes/sonojs-hero-41/sonojs-hero-41.zip`
 - Local: `npm install` then `npm run dev`
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-hero-41`

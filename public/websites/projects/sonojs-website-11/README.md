@@ -18,10 +18,8 @@ Luxury / exotic car rental site. Demo brand: **United Motors Group** (Beverly Hi
 ## Live / package
 
 - Demo: https://sonojs-website-11.sonojs2.workers.dev/
-- Zip: `products/webiste/sonojs-website-11/sonojs-website-11.zip`
 
 ## Access
 
 - Live preview: public
 - Download: paid one-time (`$29`) via product entitlement
-- Zip via Pro registry slug `sonojs-website-11`

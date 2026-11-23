@@ -18,10 +18,8 @@ Premium real-estate media agency site. Demo brand: **Lumina**.
 ## Live / package
 
 - Demo: https://sonojs-website-14.sonojs2.workers.dev/
-- Zip: `products/webiste/sonojs-website-14/sonojs-website-14.zip`
 
 ## Access
 
 - Live preview: public
 - Download: paid one-time (`$29`) via product entitlement
-- Zip via Pro registry slug `sonojs-website-14`

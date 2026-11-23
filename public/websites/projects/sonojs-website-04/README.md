@@ -20,7 +20,6 @@ Add these two files into this folder before shipping the catalog card.
 ## Live / package
 
 - Demo: https://sonojs-website-04.sonojs2.workers.dev/
-- Zip: `products/webiste/sonojs-website-04/sonojs-website-04.zip`
 - Local: `npx serve .`
 
 ## Run locally
@@ -40,4 +39,3 @@ npm run build:css
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-website-04`

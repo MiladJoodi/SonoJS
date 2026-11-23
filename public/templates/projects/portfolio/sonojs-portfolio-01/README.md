@@ -17,10 +17,8 @@ Dark personal portfolio for a 3D creator. Demo brand: **Jack**.
 ## Live / package
 
 - Demo: https://sonojs-portfolio-01.sonojs.workers.dev/
-- Zip: `products/portfolio/sonojs-portfolio-01/sonojs-portfolio-01.zip`
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-portfolio-01`

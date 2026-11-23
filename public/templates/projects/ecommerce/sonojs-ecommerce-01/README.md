@@ -23,4 +23,3 @@ Spatial try-on storefront. Demo brand: **VirtualFit**.
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-ecommerce-01` → `products/ecommerce/sonojs-ecommerce-01/sonojs-ecommerce-01.zip`

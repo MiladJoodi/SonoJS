@@ -18,10 +18,8 @@ Specialty aquatic / gunite pool builder (Scottsdale fiction) with sky-slate cine
 ## Live / package
 
 - Demo: https://sonojs-website-97.sonojs3.workers.dev/
-- Zip: `products/webiste/sonojs-website-97/sonojs-website-97.zip`
 
 ## Access
 
 - Live preview: public
 - Download: paid entitlement (`$39`)
-- Zip via Pro registry slug `sonojs-website-97`

@@ -17,11 +17,9 @@ Cinematic mountain retreat. Demo brand: **Yunjian Retreat** / 云间. Stay above
 ## Live / package
 
 - Demo: https://sonojs-saas-09.sonojs.workers.dev/
-- Zip: `products/saas/sonojs-saas-09/sonojs-saas-09.zip`
 - Local: `npx --yes serve .` (needed for ES modules / Three.js; do not open `file://`)
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-saas-09`

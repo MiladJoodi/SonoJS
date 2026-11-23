@@ -17,11 +17,9 @@ Tropical macaw product hero (The Tropical Talker). Demo brand: **Parrot**.
 ## Live / package
 
 - Demo: https://sonojs-hero-36.sonojs.workers.dev/
-- Zip: `products/heroes/sonojs-hero-36/sonojs-hero-36.zip`
 - Local: `npm run dev` (serve on `:3000`) or `START.cmd`
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-hero-36`

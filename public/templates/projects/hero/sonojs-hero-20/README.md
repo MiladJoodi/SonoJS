@@ -17,10 +17,8 @@ Auto-automation video hero. Demo brand: **Lumina Vision** / **auto-automation**.
 ## Live / package
 
 - Demo: https://sonojs-hero-20.sonojs.workers.dev/
-- Zip: `products/heroes/sonojs-hero-20/sonojs-hero-20.zip`
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-hero-20`

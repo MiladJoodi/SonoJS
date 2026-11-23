@@ -18,7 +18,6 @@ Interactive cuboid studio hero with slide chapters. Demo brand: **Design World S
 ## Live / package
 
 - Demo: https://sonojs-hero-76.sonojs2.workers.dev/
-- Zip: `products/heroes/sonojs-hero-76/sonojs-hero-76.zip`
 - Local: `npm install` then `npm run dev`
 
 ## Run locally
@@ -36,4 +35,3 @@ Production preview: `npm run build` then `npm run preview`.
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-hero-76`

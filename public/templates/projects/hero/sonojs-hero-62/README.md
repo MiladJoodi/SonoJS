@@ -17,11 +17,9 @@ Full-viewport AI-product marketing hero. Demo brand: **Power AI**.
 ## Live / package
 
 - Demo: https://sonojs-hero-62.sonojs.workers.dev/
-- Zip: `products/heroes/sonojs-hero-62/sonojs-hero-62.zip`
 - Local: `npm install` then `npm run dev`
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-hero-62`

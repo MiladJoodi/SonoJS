@@ -18,7 +18,6 @@ Bilingual luxury jewelry boutique. Demo brand: **Vidalli Andrea** (Krottendorf, 
 ## Live / package
 
 - Demo: https://sonojs-website-03.sonojs2.workers.dev/
-- Zip: `products/webiste/sonojs-website-03/sonojs-website-03.zip`
 - Local: `npx serve .`
 
 ## Run locally
@@ -33,4 +32,3 @@ Then open the URL printed in the terminal (usually `http://localhost:3000`). Swi
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-website-03`

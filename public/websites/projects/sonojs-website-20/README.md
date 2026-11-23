@@ -18,10 +18,8 @@ Specialty coffee storefront. Demo brand: **Island Roaster** (Portland, ME).
 ## Live / package
 
 - Demo: https://sonojs-website-20.sonojs2.workers.dev/
-- Zip: `products/webiste/sonojs-website-20/sonojs-website-20.zip`
 
 ## Access
 
 - Live preview: public
 - Download: paid one-time (`$29`) via product entitlement
-- Zip via Pro registry slug `sonojs-website-20`

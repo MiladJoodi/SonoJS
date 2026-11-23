@@ -17,11 +17,9 @@ Studio hero with scrub video and A.R.I.A. typewriter. Demo brand: **Mainframe®*
 ## Live / package
 
 - Demo: https://sonojs-hero-39.sonojs.workers.dev/
-- Zip: `products/heroes/sonojs-hero-39/sonojs-hero-39.zip`
 - Local: `npm install` then `npm run dev`
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-hero-39`

@@ -18,7 +18,6 @@ Consumer crypto wallet kit. Demo brand: **Rivi** (Clarity Onchain).
 ## Live / package
 
 - Demo: https://sonojs-website-36.sonojs2.workers.dev/
-- Zip: `products/webiste/sonojs-website-36/sonojs-website-36.zip`
 - Local: `npx serve .` then `/` or `/html/index.html`
 
 ## Run locally
@@ -33,4 +32,3 @@ Open `/`. Demo: `jordan@rivi.app` / `demo1234` · or **Continue as demo**.
 
 - Live preview: public
 - Download: paid one-time (`$39`) via product entitlement
-- Zip via Pro registry slug `sonojs-website-36`

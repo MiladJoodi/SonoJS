@@ -17,11 +17,9 @@ Open-world runner hero with frame cinema. Demo brand: **Earshot**.
 ## Live / package
 
 - Demo: https://sonojs-hero-38.sonojs.workers.dev/
-- Zip: `products/heroes/sonojs-hero-38/sonojs-hero-38.zip`
 - Local: `.\serve.ps1` → http://localhost:8080
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-hero-38`

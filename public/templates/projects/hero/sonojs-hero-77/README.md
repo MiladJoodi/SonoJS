@@ -18,7 +18,6 @@ Cinematic dual-stage video hero (Attention → Action). Demo brand: **Noir**.
 ## Live / package
 
 - Demo: https://sonojs-hero-77.sonojs3.workers.dev/
-- Zip: `products/heroes/sonojs-hero-77/sonojs-hero-77.zip`
 
 ## Run locally
 
@@ -30,4 +29,3 @@ npx serve .
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-hero-77`

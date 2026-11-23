@@ -18,10 +18,8 @@ Fire-led fine dining with GSAP tasting journey, reserve wizard, seating map, and
 ## Live / package
 
 - Demo: https://sonojs-website-65.sonojs3.workers.dev/
-- Zip: `products/webiste/sonojs-website-65/sonojs-website-65.zip`
 
 ## Access
 
 - Live preview: public
 - Download: paid entitlement (`$49`)
-- Zip via Pro registry slug `sonojs-website-65`

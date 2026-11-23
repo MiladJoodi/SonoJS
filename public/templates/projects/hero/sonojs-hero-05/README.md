@@ -17,10 +17,8 @@ Interactive planet-hopper hero. Demo brand: **Ubernatural** / **Planet Jumping**
 ## Live / package
 
 - Demo: https://sonojs-hero-05.sonojs.workers.dev/
-- Zip: `products/heroes/sonojs-hero-05/sonojs-hero-05.zip`
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-hero-05`

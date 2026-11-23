@@ -17,11 +17,9 @@ Auth product marketing landing. Demo brand: **AuthKit**. The world's best login 
 ## Live / package
 
 - Demo: https://sonojs-saas-04.sonojs.workers.dev/
-- Zip: `products/saas/sonojs-saas-04/sonojs-saas-04.zip`
 - Local: `npm install` then `npm run dev`
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-saas-04`

@@ -17,11 +17,9 @@ Global payments marketing page. Demo brand: **Velara**.
 ## Live / package
 
 - Demo: https://sonojs-hero-69.sonojs2.workers.dev/
-- Zip: `products/heroes/sonojs-hero-69/sonojs-hero-69.zip`
 - Local: `npx --yes serve .`
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-hero-69`

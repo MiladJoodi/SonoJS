@@ -18,10 +18,8 @@ Interactive kaiten lunch belt with hover-pause, flick spin, plate dialogs, and a
 ## Live / package
 
 - Demo: https://sonojs-ecommerce-14.sonojs3.workers.dev/
-- Zip: `products/ecommerce/sonojs-ecommerce-14/sonojs-ecommerce-14.zip`
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-ecommerce-14`

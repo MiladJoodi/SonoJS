@@ -18,10 +18,8 @@ No `cover.mp4` for this item.
 ## Live / package
 
 - Demo: https://sonojs-hero-26.sonojs.workers.dev/
-- Zip: `products/heroes/sonojs-hero-26/sonojs-hero-26.zip`
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-hero-26`

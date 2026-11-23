@@ -17,11 +17,9 @@ AI apps & websites creation studio. Demo brand: **Luma**.
 ## Live / package
 
 - Demo: https://sonojs-saas-14.sonojs2.workers.dev/
-- Zip: `products/saas/sonojs-saas-14/sonojs-saas-14.zip`
 - Local: `npx --yes serve .`
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-saas-14`

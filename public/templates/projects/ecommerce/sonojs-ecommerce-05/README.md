@@ -17,11 +17,9 @@ Vision virtual-shop marketing page. Demo brand: **VERTEX**.
 ## Live / package
 
 - Demo: https://sonojs-ecommerce-05.sonojs.workers.dev/
-- Zip: `products/ecommerce/sonojs-ecommerce-05/sonojs-ecommerce-05.zip`
 - Local: open `index.html` or serve the folder statically
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-ecommerce-05`

@@ -18,10 +18,8 @@ Prop / funded trading kit (cinematic WebGL home + trader portal). Brand: **Aurum
 ## Live / package
 
 - Demo: https://sonojs-website-46.sonojs2.workers.dev/
-- Zip: `products/webiste/sonojs-website-46/sonojs-website-46.zip`
 
 ## Access
 
 - Live preview: public
 - Download: paid entitlement (`$39`)
-- Zip via Pro registry slug `sonojs-website-46`

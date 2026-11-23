@@ -22,4 +22,3 @@ Path: `public/templates/projects/crypto/sonojs-crypto-01/`
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug (`registry/registry.json` in SonoJS-pro)

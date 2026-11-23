@@ -18,10 +18,8 @@ Revenue-cycle and underpayment recovery studio for specialty practices, with Lea
 ## Live / package
 
 - Demo: https://sonojs-website-58.sonojs2.workers.dev/
-- Zip: `products/webiste/sonojs-website-58/sonojs-website-58.zip`
 
 ## Access
 
 - Live preview: public
 - Download: paid entitlement (`$39`)
-- Zip via Pro registry slug `sonojs-website-58`

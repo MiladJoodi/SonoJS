@@ -18,10 +18,8 @@ Cinematic wedding films + stills (Napa fiction) with dark cinema luxury, F/2.8 p
 ## Live / package
 
 - Demo: https://sonojs-website-99.sonojs3.workers.dev/
-- Zip: `products/webiste/sonojs-website-99/sonojs-website-99.zip`
 
 ## Access
 
 - Live preview: public
 - Download: paid entitlement (`$39`)
-- Zip via Pro registry slug `sonojs-website-99`

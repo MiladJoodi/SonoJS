@@ -18,10 +18,8 @@ Calm SaaS marketing + workspace demo (Lisbon fiction) with cool paper/ink craft,
 ## Live / package
 
 - Demo: https://sonojs-website-104.sonojs3.workers.dev/
-- Zip: `products/webiste/sonojs-website-104/sonojs-website-104.zip`
 
 ## Access
 
 - Live preview: public
 - Download: paid entitlement (`$39`)
-- Zip via Pro registry slug `sonojs-website-104`

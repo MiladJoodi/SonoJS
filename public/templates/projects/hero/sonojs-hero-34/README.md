@@ -17,10 +17,8 @@ Ceramic dog-bowl product hero with video stage and six glaze gallery. Demo brand
 ## Live / package
 
 - Demo: https://sonojs-hero-34.sonojs.workers.dev/
-- Zip: `products/heroes/sonojs-hero-34/sonojs-hero-34.zip`
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-hero-34`

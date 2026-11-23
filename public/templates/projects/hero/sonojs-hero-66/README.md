@@ -17,11 +17,9 @@ Full-bleed video marketing hero. Demo brand: **Aurora**. Design That Lights the 
 ## Live / package
 
 - Demo: https://sonojs-hero-66.sonojs.workers.dev/
-- Zip: `products/heroes/sonojs-hero-66/sonojs-hero-66.zip`
 - Local: `npm install` then `npm run dev`
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-hero-66`

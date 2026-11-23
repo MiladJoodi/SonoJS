@@ -18,7 +18,6 @@ Durable AI jobs / sync-rails SaaS marketing kit. Demo brand: **Synqor**.
 ## Live / package
 
 - Demo: https://sonojs-website-08.sonojs2.workers.dev/
-- Zip: `products/webiste/sonojs-website-08/sonojs-website-08.zip`
 - Local: `npx serve .`
 
 ## Run locally
@@ -31,4 +30,3 @@ npx serve .
 
 - Live preview: public
 - Download: paid one-time (`$29`) via product entitlement
-- Zip via Pro registry slug `sonojs-website-08`

@@ -17,11 +17,9 @@ Interactive sci-fi scroll universe. Demo brand: **ECLIPSE. The Last Frontier**.
 ## Live / package
 
 - Demo: https://sonojs-saas-07.sonojs.workers.dev/
-- Zip: `products/saas/sonojs-saas-07/sonojs-saas-07.zip`
 - Local: `npx --yes serve .` (needed so assets load; do not open `index.html` as file://)
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-saas-07`

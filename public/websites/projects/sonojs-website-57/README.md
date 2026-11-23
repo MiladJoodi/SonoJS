@@ -18,10 +18,8 @@ AI automation for healthcare software teams with WebGL fluid stage, voice/automa
 ## Live / package
 
 - Demo: https://sonojs-website-57.sonojs2.workers.dev/
-- Zip: `products/webiste/sonojs-website-57/sonojs-website-57.zip`
 
 ## Access
 
 - Live preview: public
 - Download: paid entitlement (`$39`)
-- Zip via Pro registry slug `sonojs-website-57`

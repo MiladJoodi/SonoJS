@@ -18,7 +18,6 @@ Premium online casino frontend. Demo brand: **Nexa Casino**.
 ## Live / package
 
 - Demo: https://sonojs-website-25.sonojs2.workers.dev/
-- Zip: `products/webiste/sonojs-website-25/sonojs-website-25.zip`
 - Local: `npx serve .`
 
 ## Run locally
@@ -31,4 +30,3 @@ npx serve .
 
 - Live preview: public
 - Download: paid one-time (`$49`) via product entitlement
-- Zip via Pro registry slug `sonojs-website-25`

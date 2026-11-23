@@ -17,11 +17,9 @@ Full-bleed exhibition hero. Demo brand: **Glacier**. Frozen In Time.
 ## Live / package
 
 - Demo: https://sonojs-hero-67.sonojs.workers.dev/
-- Zip: `products/heroes/sonojs-hero-67/sonojs-hero-67.zip`
 - Local: `npm install` then `npm run dev`
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-hero-67`

@@ -18,11 +18,9 @@ Dense crypto-sportsbook demo (slip, SGM, casino game chrome, wallet). Brand: **B
 ## Live / package
 
 - Demo: https://sonojs-website-47.sonojs2.workers.dev/
-- Zip: `products/webiste/sonojs-website-47/sonojs-website-47.zip`
 - Run: `npx serve .`
 
 ## Access
 
 - Live preview: public
 - Download: paid entitlement (`$49`)
-- Zip via Pro registry slug `sonojs-website-47`

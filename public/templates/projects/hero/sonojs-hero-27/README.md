@@ -17,10 +17,8 @@ Private-aviation hero with nested video stage. Demo brand: **Jetfly** / **JetCre
 ## Live / package
 
 - Demo: https://sonojs-hero-27.sonojs.workers.dev/
-- Zip: `products/heroes/sonojs-hero-27/sonojs-hero-27.zip`
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-hero-27`

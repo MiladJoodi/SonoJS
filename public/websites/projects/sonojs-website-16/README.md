@@ -18,10 +18,8 @@ Ultra-luxury Dubai real-estate site. Demo brand: **AURUM** (AED).
 ## Live / package
 
 - Demo: https://sonojs-website-16.sonojs2.workers.dev/
-- Zip: `products/webiste/sonojs-website-16/sonojs-website-16.zip`
 
 ## Access
 
 - Live preview: public
 - Download: paid one-time (`$29`) via product entitlement
-- Zip via Pro registry slug `sonojs-website-16`

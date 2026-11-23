@@ -18,7 +18,6 @@ Hybrid wealth OS kit. Demo brand: **Aura Financial**.
 ## Live / package
 
 - Demo: https://sonojs-website-35.sonojs2.workers.dev/
-- Zip: `products/webiste/sonojs-website-35/sonojs-website-35.zip`
 - Local: `npx serve .`
 
 ## Run locally
@@ -33,4 +32,3 @@ Open `/`. Demo: `alex@fund.com` / `demo1234`.
 
 - Live preview: public
 - Download: paid one-time (`$49`) via product entitlement
-- Zip via Pro registry slug `sonojs-website-35`

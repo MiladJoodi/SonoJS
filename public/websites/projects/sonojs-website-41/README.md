@@ -18,10 +18,8 @@ Sportsbook kit (odds, live, event, casino, wallet). Brand: **SportOdds**.
 ## Live / package
 
 - Demo: https://sonojs-website-41.sonojs2.workers.dev/
-- Zip: `products/webiste/sonojs-website-41/sonojs-website-41.zip`
 
 ## Access
 
 - Live preview: public
 - Download: paid entitlement (`$49`)
-- Zip via Pro registry slug `sonojs-website-41`

@@ -17,10 +17,8 @@ Real-estate marketing landing. Demo brand: **Sabrina Residences**.
 ## Live / package
 
 - Demo: https://sonojs-landing-08.sonojs.workers.dev/
-- Zip: `products/landing/sonojs-landing-08/sonojs-landing-08.zip`
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-landing-08`

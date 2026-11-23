@@ -18,7 +18,6 @@ Scroll-driven WebGL sculpture hero. Demo brand: **Laocoön**.
 ## Live / package
 
 - Demo: https://sonojs-hero-73.sonojs2.workers.dev/
-- Zip: `products/heroes/sonojs-hero-73/sonojs-hero-73.zip`
 - Local: `npx serve .`
 
 ## Run locally
@@ -35,4 +34,3 @@ Then open the URL printed in the terminal (usually `http://localhost:3000`).
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-hero-73`

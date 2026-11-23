@@ -18,10 +18,8 @@ Prop / funded trading marketing kit (challenges, payouts, pricing). Brand: **Tre
 ## Live / package
 
 - Demo: https://sonojs-website-44.sonojs2.workers.dev/
-- Zip: `products/webiste/sonojs-website-44/sonojs-website-44.zip`
 
 ## Access
 
 - Live preview: public
 - Download: paid entitlement (`$39`)
-- Zip via Pro registry slug `sonojs-website-44`

@@ -22,4 +22,3 @@ Full-bleed private-jet video hero. Demo brand: **SkyElite**.
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-hero-03` → `products/heroes/sonojs-hero-03/sonojs-hero-03.zip`

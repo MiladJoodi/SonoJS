@@ -17,11 +17,9 @@ Full-viewport film / streaming marketing hero. Demo brand: **CINEMATIC**.
 ## Live / package
 
 - Demo: https://sonojs-hero-55.sonojs.workers.dev/
-- Zip: `products/heroes/sonojs-hero-55/sonojs-hero-55.zip`
 - Local: `npm install` then `npm run dev`
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-hero-55`

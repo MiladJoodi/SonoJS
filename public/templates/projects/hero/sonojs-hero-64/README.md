@@ -17,11 +17,9 @@ Cinematic VR product hero. Demo brand: **Visor** / Visor Vision X1.
 ## Live / package
 
 - Demo: https://sonojs-hero-64.sonojs.workers.dev/
-- Zip: `products/heroes/sonojs-hero-64/sonojs-hero-64.zip`
 - Local: `npm install` then `npm run dev`
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-hero-64`

@@ -18,7 +18,6 @@ Luxury handwoven rug atelier storefront. Demo brand: **ORNA**.
 ## Live / package
 
 - Demo: https://sonojs-website-05.sonojs2.workers.dev/
-- Zip: `products/webiste/sonojs-website-05/sonojs-website-05.zip`
 - Local: `npx serve .`
 
 ## Run locally
@@ -31,4 +30,3 @@ npx serve .
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-website-05`

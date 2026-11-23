@@ -18,10 +18,8 @@ Soft-pink beauty clinic and salon across US boutiques - services, gallery, booki
 ## Live / package
 
 - Demo: https://sonojs-website-76.sonojs3.workers.dev/
-- Zip: `products/webiste/sonojs-website-76/sonojs-website-76.zip`
 
 ## Access
 
 - Live preview: public
 - Download: paid entitlement (`$39`)
-- Zip via Pro registry slug `sonojs-website-76`

@@ -18,7 +18,6 @@ Cinematic scroll-driven 3D pet boutique. Demo brand: **GOODKIND**.
 ## Live / package
 
 - Demo: https://sonojs-landing-26.sonojs2.workers.dev/
-- Zip: `products/landing/sonojs-landing-26/sonojs-landing-26.zip`
 - Local: `npm install` then `npm run dev`
 
 ## Run locally
@@ -43,4 +42,3 @@ npm run preview
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-landing-26`

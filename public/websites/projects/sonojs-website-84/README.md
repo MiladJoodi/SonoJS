@@ -18,10 +18,8 @@ Luxury dog spa, styling, and boutique enrichment daycare in Austin. Brand: **Sof
 ## Live / package
 
 - Demo: https://sonojs-website-84.sonojs3.workers.dev/
-- Zip: `products/webiste/sonojs-website-84/sonojs-website-84.zip`
 
 ## Access
 
 - Live preview: public
 - Download: paid entitlement (`$29`)
-- Zip via Pro registry slug `sonojs-website-84`

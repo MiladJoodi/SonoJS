@@ -18,10 +18,8 @@ Capital-markets deploy-controls B2B marketing site (WebGL hero + docs). Brand: *
 ## Live / package
 
 - Demo: https://sonojs-website-45.sonojs2.workers.dev/
-- Zip: `products/webiste/sonojs-website-45/sonojs-website-45.zip`
 
 ## Access
 
 - Live preview: public
 - Download: paid entitlement (`$39`)
-- Zip via Pro registry slug `sonojs-website-45`

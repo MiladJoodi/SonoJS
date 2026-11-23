@@ -18,7 +18,6 @@ Deep-work waitlist hero with interactive fluid canvas. Demo brand: **Flowstate**
 ## Live / package
 
 - Demo: https://sonojs-saas-15.sonojs2.workers.dev/
-- Zip: `products/saas/sonojs-saas-15/sonojs-saas-15.zip`
 - Local: `npx --yes serve .`
 
 ## Run locally
@@ -35,4 +34,3 @@ Then open the URL printed in the terminal (usually `http://localhost:3000`).
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-saas-15`

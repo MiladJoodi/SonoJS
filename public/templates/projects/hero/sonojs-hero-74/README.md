@@ -18,7 +18,6 @@ Cinematic interactive valley hero with tilt feature cards. Demo brand: **Moss Va
 ## Live / package
 
 - Demo: https://sonojs-hero-74.sonojs2.workers.dev/
-- Zip: `products/heroes/sonojs-hero-74/sonojs-hero-74.zip`
 - Local: `npm install` then `npm run dev`
 
 ## Run locally
@@ -36,7 +35,6 @@ Production preview: `npm run build` then `npm run preview`.
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-hero-74`
 
 ## Note
 

@@ -18,10 +18,8 @@ Luxury real-estate agency site. Demo brand: **Northline Residences** (Miami).
 ## Live / package
 
 - Demo: https://sonojs-website-12.sonojs2.workers.dev/
-- Zip: `products/webiste/sonojs-website-12/sonojs-website-12.zip`
 
 ## Access
 
 - Live preview: public
 - Download: paid one-time (`$29`) via product entitlement
-- Zip via Pro registry slug `sonojs-website-12`

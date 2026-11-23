@@ -18,10 +18,8 @@ Family primary-care clinic with local Vanta fog atmosphere, booking wizard, and 
 ## Live / package
 
 - Demo: https://sonojs-website-63.sonojs3.workers.dev/
-- Zip: `products/webiste/sonojs-website-63/sonojs-website-63.zip`
 
 ## Access
 
 - Live preview: public
 - Download: paid entitlement (`$29`)
-- Zip via Pro registry slug `sonojs-website-63`

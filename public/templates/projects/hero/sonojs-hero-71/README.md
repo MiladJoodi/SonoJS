@@ -17,11 +17,9 @@ Next-gen AI chatbot marketing hero. Demo brand: **Kelo**.
 ## Live / package
 
 - Demo: https://sonojs-hero-71.sonojs2.workers.dev/ (may still show Hello world until redeploy)
-- Zip: `products/heroes/sonojs-hero-71/sonojs-hero-71.zip`
 - Local: `npx --yes serve .`
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-hero-71`

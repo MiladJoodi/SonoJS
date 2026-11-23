@@ -18,10 +18,8 @@ Multi-page design-studio marketing site. Brand: **Visionary**.
 ## Live / package
 
 - Demo: https://sonojs-saas-17.sonojs2.workers.dev/
-- Zip: `products/saas/sonojs-saas-17/sonojs-saas-17.zip`
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-saas-17`

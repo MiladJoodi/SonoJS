@@ -18,10 +18,8 @@ Aggressive Pittsburgh PI + criminal defense firm with navy/orange trial energy. 
 ## Live / package
 
 - Demo: https://sonojs-website-93.sonojs3.workers.dev/
-- Zip: `products/webiste/sonojs-website-93/sonojs-website-93.zip`
 
 ## Access
 
 - Live preview: public
 - Download: paid entitlement (`$39`)
-- Zip via Pro registry slug `sonojs-website-93`

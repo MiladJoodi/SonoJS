@@ -18,10 +18,8 @@ Wedding and private-event DJ + sound + lighting (Austin fiction) with dark slate
 ## Live / package
 
 - Demo: https://sonojs-website-100.sonojs3.workers.dev/
-- Zip: `products/webiste/sonojs-website-100/sonojs-website-100.zip`
 
 ## Access
 
 - Live preview: public
 - Download: paid entitlement (`$39`)
-- Zip via Pro registry slug `sonojs-website-100`

@@ -18,7 +18,6 @@ Prop-firm evaluation kit. Demo brand: **FundedDesk** (fictional, simulated only)
 ## Live / package
 
 - Demo: https://sonojs-website-38.sonojs2.workers.dev/
-- Zip: `products/webiste/sonojs-website-38/sonojs-website-38.zip`
 - Local: `npx serve .`
 
 ## Run locally
@@ -33,4 +32,3 @@ Open `/`. Demo: `alex@fundeddesk.com` / `demo1234` · coupon `HELLO`.
 
 - Live preview: public
 - Download: paid one-time (`$39`) via product entitlement
-- Zip via Pro registry slug `sonojs-website-38`

@@ -25,4 +25,3 @@ A minimal changelog template built using Next.js. Used to showcase product relea
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-landing-02` → `products/landing/sonojs-landing-02/sonojs-landing-02.zip`

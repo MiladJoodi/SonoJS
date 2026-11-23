@@ -18,10 +18,8 @@ Botanical family dental studio with whitening shade theater, booking, and patien
 ## Live / package
 
 - Demo: https://sonojs-website-61.sonojs2.workers.dev/
-- Zip: `products/webiste/sonojs-website-61/sonojs-website-61.zip`
 
 ## Access
 
 - Live preview: public
 - Download: paid entitlement (`$29`)
-- Zip via Pro registry slug `sonojs-website-61`

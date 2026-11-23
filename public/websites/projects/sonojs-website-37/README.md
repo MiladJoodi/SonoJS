@@ -18,7 +18,6 @@ FX education + indicator commerce + member portal. Demo brand: **Auden FX** (ACR
 ## Live / package
 
 - Demo: https://sonojs-website-37.sonojs2.workers.dev/
-- Zip: `products/webiste/sonojs-website-37/sonojs-website-37.zip`
 - Local: `npx serve .` then `/` or `/html/index.html`
 
 ## Run locally
@@ -33,4 +32,3 @@ Open `/`. Demo: `alex@audenfx.com` / `demo1234` · or **Continue as demo**.
 
 - Live preview: public
 - Download: paid one-time (`$49`) via product entitlement
-- Zip via Pro registry slug `sonojs-website-37`

@@ -18,7 +18,6 @@ Mobile-first casino, sports, and shop frontend. Demo brand: **Betora**.
 ## Live / package
 
 - Demo: https://sonojs-website-23.sonojs2.workers.dev/
-- Zip: `products/webiste/sonojs-website-23/sonojs-website-23.zip`
 - Local: `npx serve .`
 
 ## Run locally
@@ -33,4 +32,3 @@ JSON data needs a local server (not `file://`). Open the URL printed by `serve` 
 
 - Live preview: public
 - Download: paid one-time (`$49`) via product entitlement
-- Zip via Pro registry slug `sonojs-website-23`

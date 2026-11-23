@@ -18,10 +18,8 @@ Lakeside highland luxury resort with booking wizard, rooms, spa, dining, offers,
 ## Live / package
 
 - Demo: https://sonojs-website-71.sonojs3.workers.dev/
-- Zip: `products/webiste/sonojs-website-71/sonojs-website-71.zip`
 
 ## Access
 
 - Live preview: public
 - Download: paid entitlement (`$39`)
-- Zip via Pro registry slug `sonojs-website-71`

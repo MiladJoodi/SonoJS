@@ -18,10 +18,8 @@ Boutique Westside Los Angeles dental studio with indigo/cyan premium DNA. Brand:
 ## Live / package
 
 - Demo: https://sonojs-website-87.sonojs3.workers.dev/
-- Zip: `products/webiste/sonojs-website-87/sonojs-website-87.zip`
 
 ## Access
 
 - Live preview: public
 - Download: paid entitlement (`$29`)
-- Zip via Pro registry slug `sonojs-website-87`

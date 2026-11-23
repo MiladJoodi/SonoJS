@@ -18,10 +18,8 @@ Luxury watch store. Demo brand: **Aureum** (New York HQ).
 ## Live / package
 
 - Demo: https://sonojs-website-19.sonojs2.workers.dev/
-- Zip: `products/webiste/sonojs-website-19/sonojs-website-19.zip`
 
 ## Access
 
 - Live preview: public
 - Download: paid one-time (`$29`) via product entitlement
-- Zip via Pro registry slug `sonojs-website-19`

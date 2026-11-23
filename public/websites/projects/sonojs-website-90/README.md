@@ -18,10 +18,8 @@ Queens serif teal sanctuary dental clinic with Ken Burns hero and before/after s
 ## Live / package
 
 - Demo: https://sonojs-website-90.sonojs3.workers.dev/
-- Zip: `products/webiste/sonojs-website-90/sonojs-website-90.zip`
 
 ## Access
 
 - Live preview: public
 - Download: paid entitlement (`$29`)
-- Zip via Pro registry slug `sonojs-website-90`

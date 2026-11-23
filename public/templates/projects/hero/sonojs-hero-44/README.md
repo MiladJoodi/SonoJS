@@ -17,11 +17,9 @@ Cinematic 404 error-page hero. Demo brand: **LGPSM**.
 ## Live / package
 
 - Demo: https://sonojs-hero-44.sonojs.workers.dev/
-- Zip: `products/heroes/sonojs-hero-44/sonojs-hero-44.zip`
 - Local: `npm install` then `npm run dev`
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-hero-44`

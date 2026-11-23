@@ -17,11 +17,9 @@ Foldable product launch landing. Demo product: **iPhone Duo**. Hello, hello.
 ## Live / package
 
 - Demo: https://sonojs-ecommerce-06.sonojs.workers.dev/
-- Zip: `products/ecommerce/sonojs-ecommerce-06/sonojs-ecommerce-06.zip`
 - Local: `npm install` then `npm run dev`
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-ecommerce-06`

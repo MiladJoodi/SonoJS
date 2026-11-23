@@ -18,10 +18,8 @@ Match-Trader prop funding desk with violet ledger and orange punch. Brand: **Fun
 ## Live / package
 
 - Demo: https://sonojs-website-52.sonojs2.workers.dev/
-- Zip: `products/webiste/sonojs-website-52/sonojs-website-52.zip`
 
 ## Access
 
 - Live preview: public
 - Download: paid entitlement (`$39`)
-- Zip via Pro registry slug `sonojs-website-52`

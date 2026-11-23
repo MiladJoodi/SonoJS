@@ -17,11 +17,9 @@ Full-viewport product / agency marketing hero. Demo brand: **Fluxora**.
 ## Live / package
 
 - Demo: https://sonojs-hero-59.sonojs.workers.dev/
-- Zip: `products/heroes/sonojs-hero-59/sonojs-hero-59.zip`
 - Local: `npm install` then `npm run dev`
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-hero-59`

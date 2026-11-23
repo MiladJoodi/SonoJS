@@ -17,11 +17,9 @@ Winter mountain photography portfolio. Demo brand: **Alpenglow Photo Co.**
 ## Live / package
 
 - Demo: https://sonojs-portfolio-05.sonojs.workers.dev/
-- Zip: `products/portfolio/sonojs-portfolio-05/sonojs-portfolio-05.zip`
 - Local: `npm install` then `npm run dev`
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-portfolio-05`

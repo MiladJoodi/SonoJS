@@ -18,10 +18,8 @@ Futures prop evaluations (consistency NONE) + trader portal demo. Brand: **RedFu
 ## Live / package
 
 - Demo: https://sonojs-website-48.sonojs2.workers.dev/
-- Zip: `products/webiste/sonojs-website-48/sonojs-website-48.zip`
 
 ## Access
 
 - Live preview: public
 - Download: paid entitlement (`$39`)
-- Zip via Pro registry slug `sonojs-website-48`

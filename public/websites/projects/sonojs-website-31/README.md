@@ -5,7 +5,6 @@ Category: `website` · Vertical: `fintech`
 Slug / folder: `sonojs-website-31`  
 Path: `public/websites/projects/sonojs-website-31/`  
 Source: `E:\New folder\10`  
-Zip: `products/webiste/sonojs-website-31/sonojs-website-31.zip`
 
 Digital banking dashboard + marketing site. Demo brand: **Banking ProX**.
 
@@ -19,7 +18,6 @@ Digital banking dashboard + marketing site. Demo brand: **Banking ProX**.
 ## Live / package
 
 - Demo: https://sonojs-website-31.sonojs2.workers.dev/
-- Zip: `products/webiste/sonojs-website-31/sonojs-website-31.zip`
 - Local: `npx serve .`
 
 ## Run locally
@@ -34,4 +32,3 @@ Open `/` for the marketing landing or `/pages/index.html` for the app dashboard.
 
 - Live preview: public
 - Download: paid one-time (`$49`) via product entitlement
-- Zip via Pro registry slug `sonojs-website-31`

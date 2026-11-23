@@ -17,11 +17,9 @@ Interactive film contact-sheet portfolio. Demo brand: **Noor Halberg** / Collage
 ## Live / package
 
 - Demo: https://sonojs-portfolio-04.sonojs.workers.dev/
-- Zip: `products/portfolio/sonojs-portfolio-04/sonojs-portfolio-04.zip`
 - Local: `npm install` then `npm run dev`
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-portfolio-04`

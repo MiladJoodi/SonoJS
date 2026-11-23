@@ -17,10 +17,8 @@ Digital-infrastructure marketing hero with full-bleed video. Demo brand: **Qumic
 ## Live / package
 
 - Demo: https://sonojs-hero-28.sonojs.workers.dev/
-- Zip: `products/heroes/sonojs-hero-28/sonojs-hero-28.zip`
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-hero-28`

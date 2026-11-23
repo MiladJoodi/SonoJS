@@ -17,10 +17,8 @@ Hover-to-reveal fashion hero. Demo brand: **Mina Hwang-Seo** / **Pink Rider**.
 ## Live / package
 
 - Demo: https://sonojs-hero-14.sonojs.workers.dev/
-- Zip: `products/heroes/sonojs-hero-14/sonojs-hero-14.zip`
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-hero-14`

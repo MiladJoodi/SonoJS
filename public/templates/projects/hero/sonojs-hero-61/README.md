@@ -17,11 +17,9 @@ Full-viewport editorial / media marketing hero. Demo brand: **Lumina**.
 ## Live / package
 
 - Demo: https://sonojs-hero-61.sonojs.workers.dev/
-- Zip: `products/heroes/sonojs-hero-61/sonojs-hero-61.zip`
 - Local: `npm install` then `npm run dev`
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-hero-61`

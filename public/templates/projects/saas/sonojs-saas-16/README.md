@@ -18,7 +18,6 @@ Revenue command-center SaaS landing with WebGL planet. Demo brand: **Ascend**.
 ## Live / package
 
 - Demo: https://sonojs-saas-16.sonojs2.workers.dev/
-- Zip: `products/saas/sonojs-saas-16/sonojs-saas-16.zip`
 - Local: `npx --yes serve .`
 
 ## Run locally
@@ -35,4 +34,3 @@ Then open the URL printed in the terminal (usually `http://localhost:3000`).
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-saas-16`

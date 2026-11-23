@@ -17,11 +17,9 @@ Specialty coffee bar & roastery landing. Demo brand: **CØFF**.
 ## Live / package
 
 - Demo: https://sonojs-landing-19.sonojs2.workers.dev/
-- Zip: `products/landing/sonojs-landing-19/sonojs-landing-19.zip`
 - Local: `npx --yes serve .`
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-landing-19`

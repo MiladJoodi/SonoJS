@@ -18,10 +18,8 @@ Fiction manga and manhwa reading hub - catalog, genres, chapter reader, bookmark
 ## Live / package
 
 - Demo: https://sonojs-website-78.sonojs3.workers.dev/
-- Zip: `products/webiste/sonojs-website-78/sonojs-website-78.zip`
 
 ## Access
 
 - Live preview: public
 - Download: paid entitlement (`$39`)
-- Zip via Pro registry slug `sonojs-website-78`

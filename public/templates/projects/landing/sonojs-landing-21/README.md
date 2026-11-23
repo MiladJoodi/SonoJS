@@ -17,11 +17,9 @@ Design-build architecture & construction landing. Demo brand: **Brixzon**.
 ## Live / package
 
 - Demo: https://sonojs-landing-21.sonojs2.workers.dev/
-- Zip: `products/landing/sonojs-landing-21/sonojs-landing-21.zip`
 - Local: `npx --yes serve .`
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-landing-21`

@@ -18,7 +18,6 @@ Premium fitness OS for coaches (programs, merch, bookings). Demo brand: **FORGE*
 ## Live / package
 
 - Demo: https://sonojs-website-28.sonojs2.workers.dev/pages/
-- Zip: `products/webiste/sonojs-website-28/sonojs-website-28.zip`
 - Local: `npx serve .` then open `/pages/`
 
 ## Run locally
@@ -33,4 +32,3 @@ Open `http://localhost:3000/pages/` (or the port `serve` prints).
 
 - Live preview: public
 - Download: paid one-time (`$39`) via product entitlement
-- Zip via Pro registry slug `sonojs-website-28`

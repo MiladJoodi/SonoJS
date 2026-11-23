@@ -18,7 +18,6 @@ Five-pie stone-oven pizza slider hero. Demo brand: **Ember Slice**.
 ## Live / package
 
 - Demo: https://sonojs-hero-78.sonojs3.workers.dev/
-- Zip: `products/heroes/sonojs-hero-78/sonojs-hero-78.zip`
 
 ## Run locally
 
@@ -30,4 +29,3 @@ npx serve .
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-hero-78`

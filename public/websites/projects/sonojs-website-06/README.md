@@ -18,7 +18,6 @@ Premium multi-page café site. Demo brand: **KÁVA & Co. Coffee** (Mill Bay Cent
 ## Live / package
 
 - Demo: https://sonojs-website-06.sonojs2.workers.dev/
-- Zip: `products/webiste/sonojs-website-06/sonojs-website-06.zip`
 - Local: `npm install && npm run dev`
 
 ## Run locally
@@ -32,4 +31,3 @@ npm run dev
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-website-06`

@@ -18,7 +18,6 @@ Map-first real-estate workspace. Demo brand: **Nestora**.
 ## Live / package
 
 - Demo: https://sonojs-website-15.sonojs2.workers.dev/
-- Zip: `products/webiste/sonojs-website-15/sonojs-website-15.zip`
 - Local: `npx serve .`
 
 ## Run locally
@@ -31,4 +30,3 @@ npx serve .
 
 - Live preview: public
 - Download: paid one-time (`$29`) via product entitlement
-- Zip via Pro registry slug `sonojs-website-15`

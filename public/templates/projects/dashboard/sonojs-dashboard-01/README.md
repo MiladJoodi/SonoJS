@@ -21,4 +21,3 @@ Path: `public/templates/projects/dashboard/sonojs-dashboard-01/`
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug (see `registry/registry.json` in SonoJS-pro)

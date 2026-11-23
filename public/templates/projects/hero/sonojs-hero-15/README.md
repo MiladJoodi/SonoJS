@@ -17,10 +17,8 @@ Full-bleed luxury car rental hero. Demo brand: **VELORA** / **Regal Drive**.
 ## Live / package
 
 - Demo: https://sonojs-hero-15.sonojs.workers.dev/
-- Zip: `products/heroes/sonojs-hero-15/sonojs-hero-15.zip`
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-hero-15`

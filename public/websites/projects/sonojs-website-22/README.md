@@ -18,10 +18,8 @@ Premium casino frontend for EU / US demo markets. Demo brand: **NovaSpin Casino*
 ## Live / package
 
 - Demo: https://sonojs-website-22.sonojs2.workers.dev/
-- Zip: `products/webiste/sonojs-website-22/sonojs-website-22.zip`
 
 ## Access
 
 - Live preview: public
 - Download: paid one-time (`$49`) via product entitlement
-- Zip via Pro registry slug `sonojs-website-22`

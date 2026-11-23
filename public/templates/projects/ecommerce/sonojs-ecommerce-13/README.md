@@ -18,10 +18,8 @@ Full-viewport sneaker product hero with colourway swap, size pricing, gallery lo
 ## Live / package
 
 - Demo: https://sonojs-ecommerce-13.sonojs3.workers.dev/
-- Zip: `products/ecommerce/sonojs-ecommerce-13/sonojs-ecommerce-13.zip`
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-ecommerce-13`

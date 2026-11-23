@@ -18,7 +18,6 @@ Seasonal Canadian fine-dining restaurant site. Demo brand: **Maison Vale** (Mont
 ## Live / package
 
 - Demo: https://sonojs-website-09.sonojs2.workers.dev/
-- Zip: `products/webiste/sonojs-website-09/sonojs-website-09.zip`
 - Local: `npx serve .`
 
 ## Run locally
@@ -31,4 +30,3 @@ npx serve .
 
 - Live preview: public
 - Download: paid one-time (`$29`) via product entitlement
-- Zip via Pro registry slug `sonojs-website-09`

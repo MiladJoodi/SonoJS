@@ -18,10 +18,8 @@ Multi-page minimal design-studio site. Brand: **Minimal Design Studio**.
 ## Live / package
 
 - Demo: https://sonojs-saas-18.sonojs2.workers.dev/
-- Zip: `products/saas/sonojs-saas-18/sonojs-saas-18.zip`
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-saas-18`

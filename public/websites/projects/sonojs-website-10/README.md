@@ -18,10 +18,8 @@ Street-style pizzeria site. Demo brand: **Shimago Pizzeria** (Ludhiana).
 ## Live / package
 
 - Demo: https://sonojs-website-10.sonojs2.workers.dev/
-- Zip: `products/webiste/sonojs-website-10/sonojs-website-10.zip`
 
 ## Access
 
 - Live preview: public
 - Download: paid one-time (`$29`) via product entitlement
-- Zip via Pro registry slug `sonojs-website-10`

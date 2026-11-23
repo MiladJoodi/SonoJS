@@ -18,10 +18,8 @@ Unhurried primary-care clinic with services, booking, reviews, and patient porta
 ## Live / package
 
 - Demo: https://sonojs-website-60.sonojs2.workers.dev/
-- Zip: `products/webiste/sonojs-website-60/sonojs-website-60.zip`
 
 ## Access
 
 - Live preview: public
 - Download: paid entitlement (`$29`)
-- Zip via Pro registry slug `sonojs-website-60`

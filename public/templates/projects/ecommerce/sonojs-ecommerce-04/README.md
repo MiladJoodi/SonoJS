@@ -17,11 +17,9 @@ Multi-category shopping homepage. Demo brand: **Shop**.
 ## Live / package
 
 - Demo: https://sonojs-ecommerce-04.sonojs.workers.dev/
-- Zip: `products/ecommerce/sonojs-ecommerce-04/sonojs-ecommerce-04.zip`
 - Local: open `index.html` or serve the folder statically
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-ecommerce-04`

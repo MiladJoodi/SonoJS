@@ -1943,6 +1943,67 @@ export const templateProjects: TemplateProject[] = [
     ],
   },
   {
+    slug: "sonojs-ecommerce-16",
+    title: "LEON Lucky Wheel",
+    tagline:
+      "Spin for a second chance - Zeus-themed casino bonus wheel.",
+    description:
+      "LEON Lucky Wheel is a single-page casino promotion demo by SonoJS (demo brand: LEON). Zero-build static HTML/CSS/vanilla JavaScript with a full-screen Zeus scene, animated gold prize wheel, responsive spin buttons, a first-spin try-again modal, and a bonus claim modal reached from the Try again action. The claim CTA links to the supplied LEON tracking destination. Demo interaction only; no real prize logic, account system, or payment backend. Run with npx serve . from the project root or host statically on Cloudflare Workers.",
+    category: "ecommerce",
+    stack: ["html", "css", "javascript"],
+    priceLabel: "Free",
+    priceCents: 0,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 225,
+    accent: "225",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "shop",
+    coverImage: "/templates/projects/ecommerce/sonojs-ecommerce-16/main.webp",
+    coverImageDark: null,
+    coverVideo: "/templates/projects/ecommerce/sonojs-ecommerce-16/cover.mp4",
+    detailCoverImage:
+      "/templates/projects/ecommerce/sonojs-ecommerce-16/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-ecommerce-16.sonojs3.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-23",
+    firstReleasedAt: "2026-11-23",
+    screens: 1,
+    runCommand: "npx serve .",
+    highlights: [
+      {
+        title: "Zeus prize wheel",
+        body: "Full-screen LEON scene with an animated gold bonus wheel.",
+      },
+      {
+        title: "Two-step spin flow",
+        body: "First spin shows Try again; selecting it advances to the bonus dialog.",
+      },
+      {
+        title: "Responsive controls",
+        body: "Desktop and mobile spin buttons with dedicated modal states.",
+      },
+      {
+        title: "Zero-build static",
+        body: "HTML + CSS + vanilla JS with local artwork; serve with npx serve .",
+      },
+    ],
+    includes: [
+      "index.html + assets/css/site.css + assets/js/site.js",
+      "Local Zeus, wheel, background, and bonus modal artwork",
+      "Two-step spin / bonus modal demo (no real prize backend)",
+    ],
+    requirements: [
+      "Modern browser",
+      "Static file host (`npx serve .`)",
+    ],
+  },
+  {
     slug: "sonojs-portfolio-01",
     title: "Jack",
     tagline:

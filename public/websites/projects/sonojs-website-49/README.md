@@ -18,10 +18,8 @@ Forex & crypto prop firm (MT5/cTrader) + trader portal demo. Brand: **Aether Fun
 ## Live / package
 
 - Demo: https://sonojs-website-49.sonojs2.workers.dev/
-- Zip: `products/webiste/sonojs-website-49/sonojs-website-49.zip`
 
 ## Access
 
 - Live preview: public
 - Download: paid entitlement (`$39`)
-- Zip via Pro registry slug `sonojs-website-49`

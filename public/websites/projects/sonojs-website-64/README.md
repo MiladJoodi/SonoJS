@@ -18,10 +18,8 @@ Boutique luxury pet boarding with suites, booking wizard, suite builder, and pet
 ## Live / package
 
 - Demo: https://sonojs-website-64.sonojs3.workers.dev/
-- Zip: `products/webiste/sonojs-website-64/sonojs-website-64.zip`
 
 ## Access
 
 - Live preview: public
 - Download: paid entitlement (`$39`)
-- Zip via Pro registry slug `sonojs-website-64`

@@ -18,10 +18,8 @@ Wedding invitation / guest microsite (Charleston fiction) with ivory · espresso
 ## Live / package
 
 - Demo: https://sonojs-website-101.sonojs3.workers.dev/
-- Zip: `products/webiste/sonojs-website-101/sonojs-website-101.zip`
 
 ## Access
 
 - Live preview: public
 - Download: paid entitlement (`$39`)
-- Zip via Pro registry slug `sonojs-website-101`

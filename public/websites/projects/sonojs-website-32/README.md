@@ -18,7 +18,6 @@ Investor relations suite (stock, financials, reports, portal). Demo brand: **Mer
 ## Live / package
 
 - Demo: https://sonojs-website-32.sonojs2.workers.dev/
-- Zip: `products/webiste/sonojs-website-32/sonojs-website-32.zip`
 - Local: `npx serve .`
 
 ## Run locally
@@ -33,4 +32,3 @@ Open `/` or `/index.html`. Demo portal: `investor@sonojs.com` / `demo1234`.
 
 - Live preview: public
 - Download: paid one-time (`$39`) via product entitlement
-- Zip via Pro registry slug `sonojs-website-32`

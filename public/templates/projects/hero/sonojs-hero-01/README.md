@@ -23,4 +23,3 @@ Path: `public/templates/projects/hero/sonojs-hero-01/`
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug → `products/heroes/sonojs-hero-01/sonojs-hero-01.zip`

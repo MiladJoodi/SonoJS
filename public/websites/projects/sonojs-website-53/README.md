@@ -18,10 +18,8 @@ Live casino marketing lobby with demo wallet, auth portal, and promo theater (LI
 ## Live / package
 
 - Demo: https://sonojs-website-53.sonojs2.workers.dev/
-- Zip: `products/webiste/sonojs-website-53/sonojs-website-53.zip`
 
 ## Access
 
 - Live preview: public
 - Download: paid entitlement (`$29`)
-- Zip via Pro registry slug `sonojs-website-53`

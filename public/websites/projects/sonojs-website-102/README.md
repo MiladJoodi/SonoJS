@@ -18,10 +18,8 @@ Wedding photography studio (Miami Beach fiction) with true-black editorial chrom
 ## Live / package
 
 - Demo: https://sonojs-website-102.sonojs3.workers.dev/
-- Zip: `products/webiste/sonojs-website-102/sonojs-website-102.zip`
 
 ## Access
 
 - Live preview: public
 - Download: paid entitlement (`$39`)
-- Zip via Pro registry slug `sonojs-website-102`

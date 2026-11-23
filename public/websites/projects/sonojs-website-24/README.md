@@ -18,7 +18,6 @@ Casino affiliate hub with shop and blog. Demo brand: **Nuts**.
 ## Live / package
 
 - Demo: https://sonojs-website-24.sonojs2.workers.dev/
-- Zip: `products/webiste/sonojs-website-24/sonojs-website-24.zip`
 - Local: `npx serve .`
 
 ## Run locally
@@ -31,4 +30,3 @@ npx serve .
 
 - Live preview: public
 - Download: paid one-time (`$39`) via product entitlement
-- Zip via Pro registry slug `sonojs-website-24`

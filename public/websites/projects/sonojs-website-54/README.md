@@ -18,10 +18,8 @@ Premium dark healthcare AI advisory site with booking demo and client portal. Br
 ## Live / package
 
 - Demo: https://sonojs-website-54.sonojs2.workers.dev/
-- Zip: `products/webiste/sonojs-website-54/sonojs-website-54.zip`
 
 ## Access
 
 - Live preview: public
 - Download: paid entitlement (`$29`)
-- Zip via Pro registry slug `sonojs-website-54`

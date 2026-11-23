@@ -18,10 +18,8 @@ Digital pathology lab transformation studio with slide theater, readiness scorin
 ## Live / package
 
 - Demo: https://sonojs-website-56.sonojs2.workers.dev/
-- Zip: `products/webiste/sonojs-website-56/sonojs-website-56.zip`
 
 ## Access
 
 - Live preview: public
 - Download: paid entitlement (`$39`)
-- Zip via Pro registry slug `sonojs-website-56`

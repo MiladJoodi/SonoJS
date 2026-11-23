@@ -18,7 +18,6 @@ Online casino & gambling hub with merch shop. Demo brand: **Nuts**.
 ## Live / package
 
 - Demo: https://sonojs-website-26.sonojs2.workers.dev/
-- Zip: `products/webiste/sonojs-website-26/sonojs-website-26.zip`
 - Local: `npx serve .`
 
 ## Run locally
@@ -31,4 +30,3 @@ npx serve .
 
 - Live preview: public
 - Download: paid one-time (`$49`) via product entitlement
-- Zip via Pro registry slug `sonojs-website-26`

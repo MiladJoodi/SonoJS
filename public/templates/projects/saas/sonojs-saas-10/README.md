@@ -17,11 +17,9 @@ Independent creative studio site. Demo brand: **NORTH/FORM**.
 ## Live / package
 
 - Demo: https://sonojs-saas-10.sonojs2.workers.dev/
-- Zip: `products/saas/sonojs-saas-10/sonojs-saas-10.zip`
 - Local: `npx --yes serve .`
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-saas-10`

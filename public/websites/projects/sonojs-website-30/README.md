@@ -18,7 +18,6 @@ Stock trading dashboard + marketing site. Demo brand: **TradeX**.
 ## Live / package
 
 - Demo: https://sonojs-website-30.sonojs2.workers.dev/
-- Zip: `products/webiste/sonojs-website-30/sonojs-website-30.zip`
 - Local: `npx serve .`
 
 ## Run locally
@@ -33,4 +32,3 @@ Open `/` for the marketing landing or `/pages/index.html` for the app dashboard.
 
 - Live preview: public
 - Download: paid one-time (`$49`) via product entitlement
-- Zip via Pro registry slug `sonojs-website-30`

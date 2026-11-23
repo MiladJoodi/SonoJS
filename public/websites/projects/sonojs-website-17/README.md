@@ -18,10 +18,8 @@ Late-night grill restaurant site. Demo brand: **Empire**.
 ## Live / package
 
 - Demo: https://sonojs-website-17.sonojs2.workers.dev/
-- Zip: `products/webiste/sonojs-website-17/sonojs-website-17.zip`
 
 ## Access
 
 - Live preview: public
 - Download: paid one-time (`$29`) via product entitlement
-- Zip via Pro registry slug `sonojs-website-17`

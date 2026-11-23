@@ -18,10 +18,8 @@ Commercial + light industrial GC (Denver fiction) with light concrete / charcoal
 ## Live / package
 
 - Demo: https://sonojs-website-98.sonojs3.workers.dev/
-- Zip: `products/webiste/sonojs-website-98/sonojs-website-98.zip`
 
 ## Access
 
 - Live preview: public
 - Download: paid entitlement (`$39`)
-- Zip via Pro registry slug `sonojs-website-98`

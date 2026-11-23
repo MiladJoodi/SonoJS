@@ -18,10 +18,8 @@ Spatial SaaS marketing site with Spline hero. Brand: **Clarity Stream**.
 ## Live / package
 
 - Demo: https://sonojs-saas-19.sonojs2.workers.dev/
-- Zip: `products/saas/sonojs-saas-19/sonojs-saas-19.zip`
 
 ## Access
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-saas-19`

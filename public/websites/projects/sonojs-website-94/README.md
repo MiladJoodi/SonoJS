@@ -18,10 +18,8 @@ Dark editorial San Francisco boutique - Litigation, Corporate, Immigration with 
 ## Live / package
 
 - Demo: https://sonojs-website-94.sonojs3.workers.dev/
-- Zip: `products/webiste/sonojs-website-94/sonojs-website-94.zip`
 
 ## Access
 
 - Live preview: public
 - Download: paid entitlement (`$39`)
-- Zip via Pro registry slug `sonojs-website-94`

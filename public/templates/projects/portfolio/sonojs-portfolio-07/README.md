@@ -18,7 +18,6 @@ F1 driver portfolio with 3D helmet hero. Demo brand: **GRIDO1 Racing Systems / K
 ## Live / package
 
 - Demo: https://sonojs-portfolio-07.sonojs2.workers.dev/
-- Zip: `products/portfolio/sonojs-portfolio-07/sonojs-portfolio-07.zip`
 - Local: `npx serve .`
 
 ## Run locally
@@ -35,4 +34,3 @@ Then open the URL printed in the terminal (usually `http://localhost:3000`).
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-portfolio-07`

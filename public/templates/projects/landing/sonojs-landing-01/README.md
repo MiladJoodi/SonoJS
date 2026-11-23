@@ -26,4 +26,3 @@ Drop these next to this README:
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug (`registry/registry.json` in SonoJS-pro)

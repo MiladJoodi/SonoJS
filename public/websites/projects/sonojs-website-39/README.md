@@ -18,7 +18,6 @@ Cybersecurity advisory marketing kit. Demo brand: **Nullline** (fictional).
 ## Live / package
 
 - Demo: https://sonojs-website-39.sonojs2.workers.dev/
-- Zip: `products/webiste/sonojs-website-39/sonojs-website-39.zip`
 - Local: `npx serve .`
 
 ## Run locally
@@ -33,4 +32,3 @@ Open `/`. Contact → thanks stores a demo lead in `localStorage`.
 
 - Live preview: public
 - Download: paid one-time (`$29`) via product entitlement
-- Zip via Pro registry slug `sonojs-website-39`

@@ -18,10 +18,8 @@ Fiction content systems studio for experience brands in San Diego - shoot, edit,
 ## Live / package
 
 - Demo: https://sonojs-website-83.sonojs3.workers.dev/
-- Zip: `products/webiste/sonojs-website-83/sonojs-website-83.zip`
 
 ## Access
 
 - Live preview: public
 - Download: paid entitlement (`$29`)
-- Zip via Pro registry slug `sonojs-website-83`

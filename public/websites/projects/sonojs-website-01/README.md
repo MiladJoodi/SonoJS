@@ -17,7 +17,6 @@ Full multi-page independent salon site. Demo brand: **Empire Owl Salon** (Langfo
 ## Live / package
 
 - Demo: https://sonojs-website-01.sonojs2.workers.dev/
-- Zip: `products/webiste/sonojs-website-01/sonojs-website-01.zip` (folder name as shipped)
 - Local: `npx serve .`
 
 ## Run locally
@@ -32,4 +31,3 @@ Then open the URL printed in the terminal (usually `http://localhost:3000`).
 
 - Live preview: public
 - Download: `member` (signed-in free)
-- Zip via Pro registry slug `sonojs-website-01`
