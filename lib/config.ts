@@ -1,6 +1,7 @@
 import { PRODUCTION_ORIGIN } from "@/lib/site-origin"
 
 const LOCAL_APP_URL = "http://localhost:3000"
+const MOCK_API_URL = "https://api.sonojs.com"
 
 function resolveAppUrl() {
   const fromEnv = process.env.NEXT_PUBLIC_APP_URL?.trim()
@@ -91,6 +92,8 @@ Ask before changing MCP config outside this project.`,
         : ""),
     contact: "/contact",
     buyMeACoffee: "https://buymeacoffee.com/sonojs",
+    /** Public mock HTTP API for demos and tooling. */
+    mockApi: MOCK_API_URL,
   },
 
   legal: {
@@ -172,6 +175,11 @@ Ask before changing MCP config outside this project.`,
     },
     { href: "/docs/mcp", label: "MCP" },
     { href: "/pricing", label: "Pricing" },
+    {
+      href: MOCK_API_URL,
+      label: "Mock API",
+      external: true,
+    },
   ] satisfies SiteNavEntry[],
   /** Secondary explore links shown in the site footer. */
   footerNavItems: [
@@ -180,6 +188,11 @@ Ask before changing MCP config outside this project.`,
     {
       href: "https://icons.sonojs.com",
       label: "Icons",
+      external: true,
+    },
+    {
+      href: MOCK_API_URL,
+      label: "Mock API",
       external: true,
     },
   ] satisfies SiteNavItem[],

@@ -131,21 +131,34 @@ function ToolsSidebarBody({
                   </SidebarMenuItem>
                 ) : null}
                 {filtered.map((item) => {
-                  const active = pathname === item.href
+                  const active = !item.external && pathname === item.href
+                  const className = cn(
+                    SIDEBAR_TOP_LINK_CLASS,
+                    sidebarItemStateClass(active)
+                  )
                   return (
                     <SidebarMenuItem key={item.href}>
-                      <Link
-                        href={item.href}
-                        prefetch={false}
-                        data-active={active || undefined}
-                        className={cn(
-                          SIDEBAR_TOP_LINK_CLASS,
-                          sidebarItemStateClass(active)
-                        )}
-                      >
-                        <SidebarNavBullet featured={item.featured} />
-                        <SidebarNavLabel label={item.title} />
-                      </Link>
+                      {item.external ? (
+                        <a
+                          href={item.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={className}
+                        >
+                          <SidebarNavBullet featured={item.featured} />
+                          <SidebarNavLabel label={item.title} />
+                        </a>
+                      ) : (
+                        <Link
+                          href={item.href}
+                          prefetch={false}
+                          data-active={active || undefined}
+                          className={className}
+                        >
+                          <SidebarNavBullet featured={item.featured} />
+                          <SidebarNavLabel label={item.title} />
+                        </Link>
+                      )}
                     </SidebarMenuItem>
                   )
                 })}

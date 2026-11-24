@@ -21,6 +21,7 @@ import {
   StoreIcon,
   TagIcon,
   WallpaperIcon,
+  ServerIcon,
   WrenchIcon,
   type LucideIcon,
 } from "lucide-react"
@@ -64,6 +65,7 @@ const MORE_ICONS: Record<string, LucideIcon> = {
   "/pricing": TagIcon,
   "/tools": WrenchIcon,
   "https://icons.sonojs.com": ShapesIcon,
+  "https://api.sonojs.com": ServerIcon,
 }
 
 /**
