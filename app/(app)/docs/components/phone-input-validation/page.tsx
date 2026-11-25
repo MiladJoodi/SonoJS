@@ -21,7 +21,7 @@ const exampleDefs = [
     title: "Live status",
     description:
       "`onValidationChange` drives the hint below — try an invalid US number and blur to see the error border.",
-    requires: ["input-group", "popover", "phone-input"],
+    requires: ["input-group", "popover"],
     npmRequires: ["lucide-react", "libphonenumber-js"],
   },
   {
@@ -29,7 +29,7 @@ const exampleDefs = [
     title: "Block submit",
     description:
       "Gate submit on `state === \"valid\"` and pair `Field` + `FieldError` when the user tries anyway.",
-    requires: ["button", "field", "input-group", "popover", "phone-input"],
+    requires: ["button", "field", "input-group", "popover"],
     npmRequires: ["lucide-react", "libphonenumber-js"],
   },
   {
@@ -37,7 +37,7 @@ const exampleDefs = [
     title: "Controlled",
     description:
       "Control `value`, `country`, and read `onValidationChange` for empty, incomplete, valid, or invalid.",
-    requires: ["button", "input-group", "popover", "phone-input"],
+    requires: ["button", "input-group", "popover"],
     npmRequires: ["lucide-react", "libphonenumber-js"],
   },
   {
@@ -45,14 +45,14 @@ const exampleDefs = [
     title: "With Label",
     description:
       "Pair with `Label`; switching country keeps the digits and re-formats for the new region.",
-    requires: ["input-group", "label", "popover", "phone-input"],
+    requires: ["input-group", "label", "popover"],
     npmRequires: ["lucide-react", "libphonenumber-js"],
   },
   {
     name: "phone-input-validation-disabled",
     title: "Disabled",
     description: "Pass `disabled` to lock the country trigger and national field.",
-    requires: ["input-group", "popover", "phone-input"],
+    requires: ["input-group", "popover"],
     npmRequires: ["lucide-react", "libphonenumber-js"],
   },
 ]

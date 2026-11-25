@@ -3578,15 +3578,18 @@ const registryItemsRaw = [
       "clsx",
       "tailwind-merge",
     ],
-    registryDependencies: [
-      "dialog",
-      "input",
-      "input-group",
-      "popover",
-      "phone-input",
-      "table",
-    ],
+    registryDependencies: ["dialog", "input", "input-group", "popover", "table"],
     files: [
+      {
+        path: "packages/ui/src/components/phone-input-validation/countries.json",
+        type: "registry:ui",
+        target: "components/phone-input-validation/countries.json",
+      },
+      {
+        path: "packages/ui/src/components/phone-input-validation/phone-countries.ts",
+        type: "registry:ui",
+        target: "components/phone-input-validation/phone-countries.ts",
+      },
       {
         path: "packages/ui/src/components/phone-input-validation/index.ts",
         type: "registry:ui",

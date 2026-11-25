@@ -19,7 +19,7 @@ import {
   TableHeader,
   TableRow,
 } from "@sonojs/ui/components/table"
-import { flagSrc, DEFAULT_FLAG_CDN_BASE } from "@sonojs/ui/components/phone-input"
+import { flagSrc, DEFAULT_FLAG_CDN_BASE } from "./phone-countries"
 import { cn } from "@sonojs/ui/lib/utils"
 
 import { countryValidationRows } from "./validation-reference"

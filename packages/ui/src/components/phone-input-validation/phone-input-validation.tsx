@@ -11,7 +11,7 @@ import {
   isoToFlag,
   phoneCountries,
   type PhoneCountry,
-} from "@sonojs/ui/components/phone-input"
+} from "./phone-countries"
 import {
   InputGroup,
   InputGroupAddon,

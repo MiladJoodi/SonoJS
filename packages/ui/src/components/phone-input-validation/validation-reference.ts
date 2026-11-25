@@ -7,7 +7,7 @@ import {
 import type { CountryCode } from "libphonenumber-js/max"
 import examples from "libphonenumber-js/mobile/examples"
 
-import { phoneCountries } from "@sonojs/ui/components/phone-input"
+import { phoneCountries } from "./phone-countries"
 
 export type CountryValidationRow = {
   code: string
