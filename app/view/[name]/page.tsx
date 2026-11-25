@@ -256,6 +256,7 @@ import AccountSettings02 from "@/registry/blocks/user-account/account-settings/a
 import AccountSettings03 from "@/registry/blocks/user-account/account-settings/account-settings-03/account-settings"
 import AccountSettings04 from "@/registry/blocks/user-account/account-settings/account-settings-04/account-settings"
 import AccountSettings05 from "@/registry/blocks/user-account/account-settings/account-settings-05/account-settings"
+import AccountSettings06 from "@/registry/blocks/user-account/account-settings/account-settings-06/account-settings"
 import UserProfile01 from "@/registry/blocks/user-account/user-profile/user-profile-01/user-profile"
 import UserProfile02 from "@/registry/blocks/user-account/user-profile/user-profile-02/user-profile"
 import UserProfile03 from "@/registry/blocks/user-account/user-profile/user-profile-03/user-profile"
@@ -645,6 +646,12 @@ import ProductsMegaMenu from "@/registry/blocks/navigation/mega-menu/mega-menu-0
 import FeaturesMegaMenu from "@/registry/blocks/navigation/mega-menu/mega-menu-04/mega-menu"
 import ToolsMegaMenu from "@/registry/blocks/navigation/mega-menu/mega-menu-05/mega-menu"
 import CompanyIconsMegaMenu from "@/registry/blocks/navigation/mega-menu/mega-menu-06/mega-menu"
+import InlineCreateCommandMenu from "@/registry/blocks/navigation/command-menu/command-menu-01/command-menu"
+import GlobalLauncherCommandMenu from "@/registry/blocks/navigation/command-menu/command-menu-02/command-menu"
+import PeopleScoutCommandMenu from "@/registry/blocks/navigation/command-menu/command-menu-03/command-menu"
+import CodeJumpCommandMenu from "@/registry/blocks/navigation/command-menu/command-menu-04/command-menu"
+import IntegrationSplitCommandMenu from "@/registry/blocks/navigation/command-menu/command-menu-05/command-menu"
+import SlashStudioCommandMenu from "@/registry/blocks/navigation/command-menu/command-menu-06/command-menu"
 import SimpleSidebar from "@/registry/blocks/navigation/sidebar/sidebar-01/sidebar"
 import IconSidebar from "@/registry/blocks/navigation/sidebar/sidebar-02/sidebar"
 import UserSidebar from "@/registry/blocks/navigation/sidebar/sidebar-03/sidebar"
@@ -2466,6 +2473,15 @@ const views: Record<string, ComponentType> = {
       <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
         <div className="w-full">
           <AccountSettings05 />
+        </div>
+      </div>
+    )
+  },
+  "account-settings-06": function AccountSettings06View() {
+    return (
+      <div className="flex min-h-svh w-full items-start justify-center bg-canvas px-0 py-0">
+        <div className="w-full">
+          <AccountSettings06 />
         </div>
       </div>
     )
@@ -6045,6 +6061,12 @@ const views: Record<string, ComponentType> = {
   "mega-menu-04": FeaturesMegaMenu,
   "mega-menu-05": ToolsMegaMenu,
   "mega-menu-06": CompanyIconsMegaMenu,
+  "command-menu-01": InlineCreateCommandMenu,
+  "command-menu-02": GlobalLauncherCommandMenu,
+  "command-menu-03": PeopleScoutCommandMenu,
+  "command-menu-04": CodeJumpCommandMenu,
+  "command-menu-05": IntegrationSplitCommandMenu,
+  "command-menu-06": SlashStudioCommandMenu,
   "sidebar-01": SimpleSidebar,
   "sidebar-02": IconSidebar,
   "sidebar-03": UserSidebar,

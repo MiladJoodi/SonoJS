@@ -126,7 +126,15 @@ function PickerPopoverList<T>({
         align="start"
         className="w-auto p-0"
         style={menuWidth ? { width: menuWidth } : undefined}
-        onOpenAutoFocus={(event) => event.preventDefault()}
+        onOpenAutoFocus={(event) => {
+          event.preventDefault()
+          const panel = event.currentTarget
+          requestAnimationFrame(() => {
+            panel
+              .querySelector<HTMLInputElement>('input[type="search"]')
+              ?.focus()
+          })
+        }}
         onCloseAutoFocus={(event) => event.preventDefault()}
       >
         <div className="border-b border-border/50 p-2">

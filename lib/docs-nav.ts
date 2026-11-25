@@ -61,6 +61,12 @@ export const componentsNav: {
           badge: "new",
         },
         {
+          title: "Country & City Selector",
+          href: "/docs/components/country-city-selector",
+          featured: true,
+          badge: "new",
+        },
+        {
           title: "Multi Select",
           href: "/docs/components/multi-select",
           featured: true,

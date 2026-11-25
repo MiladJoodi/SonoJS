@@ -87,6 +87,7 @@ export const NOINDEX_EXACT_PATHS = [
   "/tools/endpoints",
   "/tools/markdown-editor",
   "/tools/flags",
+  "/tools/geo",
 ] as const
 
 export function isProductionIndexingEnabled(): boolean {

@@ -131,6 +131,11 @@ const countryCityProps = [
     description: "Country flags in the country popover.",
   },
   {
+    name: "countryLabel / stateLabel / cityLabel",
+    type: "string",
+    description: "Optional field labels above each control.",
+  },
+  {
     name: "geoDataBaseUrl",
     type: "string",
     description: "Shard base for all fields.",

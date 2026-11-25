@@ -3,6 +3,7 @@
 import * as React from "react"
 import type { City, Country, State } from "@sonojs/geo"
 
+import { Label } from "@sonojs/ui/components/label"
 import { cn } from "@sonojs/ui/lib/utils"
 
 import { CitySearchSelect } from "./city-search-select"
@@ -28,12 +29,33 @@ export type CountryCitySelectProps = Omit<
   onCityChange?: (cityId: number | null, city?: City | null) => void
   disabled?: boolean
   showFlags?: boolean
+  countryLabel?: string
+  stateLabel?: string
+  cityLabel?: string
   countryPlaceholder?: string
   statePlaceholder?: string
   cityPlaceholder?: string
   geoDataBaseUrl?: string
   flagCdnBase?: string
   className?: string
+}
+
+function FieldBlock({
+  label,
+  htmlFor,
+  children,
+}: {
+  label?: string
+  htmlFor?: string
+  children: React.ReactNode
+}) {
+  if (!label) return children
+  return (
+    <div className="grid w-full gap-2">
+      <Label htmlFor={htmlFor}>{label}</Label>
+      {children}
+    </div>
+  )
 }
 
 function CountryCitySelect({
@@ -50,6 +72,9 @@ function CountryCitySelect({
   onCityChange,
   disabled = false,
   showFlags = true,
+  countryLabel,
+  stateLabel,
+  cityLabel,
   countryPlaceholder = "Choose country",
   statePlaceholder = "Choose state / province",
   cityPlaceholder = "Choose city",
@@ -58,6 +83,11 @@ function CountryCitySelect({
   className,
   ...props
 }: CountryCitySelectProps) {
+  const reactId = React.useId()
+  const countryFieldId = `${reactId}-country`
+  const stateFieldId = `${reactId}-state`
+  const cityFieldId = `${reactId}-city`
+
   const countryControlled = countryProp !== undefined
   const stateControlled = stateIdProp !== undefined
   const cityControlled = cityIdProp !== undefined
@@ -126,36 +156,45 @@ function CountryCitySelect({
       className={cn("flex w-full flex-col gap-4", className)}
       {...props}
     >
-      <CountrySearchSelect
-        disabled={disabled}
-        value={countryIso}
-        placeholder={countryPlaceholder}
-        geoDataBaseUrl={geoDataBaseUrl}
-        flagCdnBase={flagCdnBase}
-        showFlags={showFlags}
-        onValueChange={handleCountryChange}
-      />
-      {includeState ? (
-        <StateSearchSelect
+      <FieldBlock label={countryLabel} htmlFor={countryFieldId}>
+        <CountrySearchSelect
+          id={countryFieldId}
           disabled={disabled}
-          countryIso={countryIso}
-          stateId={stateId}
-          placeholder={statePlaceholder}
+          value={countryIso}
+          placeholder={countryPlaceholder}
           geoDataBaseUrl={geoDataBaseUrl}
-          onStateChange={handleStateChange}
+          flagCdnBase={flagCdnBase}
+          showFlags={showFlags}
+          onValueChange={handleCountryChange}
         />
+      </FieldBlock>
+      {includeState ? (
+        <FieldBlock label={stateLabel} htmlFor={stateFieldId}>
+          <StateSearchSelect
+            id={stateFieldId}
+            disabled={disabled}
+            countryIso={countryIso}
+            stateId={stateId}
+            placeholder={statePlaceholder}
+            geoDataBaseUrl={geoDataBaseUrl}
+            onStateChange={handleStateChange}
+          />
+        </FieldBlock>
       ) : null}
       {includeCity ? (
-        <CitySearchSelect
-          disabled={disabled}
-          countryIso={countryIso}
-          stateId={includeState ? stateId : null}
-          requireState={includeState}
-          cityId={cityId}
-          placeholder={cityPlaceholder}
-          geoDataBaseUrl={geoDataBaseUrl}
-          onCityChange={handleCityChange}
-        />
+        <FieldBlock label={cityLabel} htmlFor={cityFieldId}>
+          <CitySearchSelect
+            id={cityFieldId}
+            disabled={disabled}
+            countryIso={countryIso}
+            stateId={includeState ? stateId : null}
+            requireState={includeState}
+            cityId={cityId}
+            placeholder={cityPlaceholder}
+            geoDataBaseUrl={geoDataBaseUrl}
+            onCityChange={handleCityChange}
+          />
+        </FieldBlock>
       ) : null}
     </div>
   )

@@ -35,6 +35,7 @@ export const toolsNav: ToolsNavItem[] = [
     href: siteConfig.links.mockApi,
     description: "Ready-to-use fake HTTP endpoints for demos and prototyping.",
     external: true,
+    featured: true,
   },
   {
     title: "Markdown Editor",
@@ -46,6 +47,13 @@ export const toolsNav: ToolsNavItem[] = [
     title: "Flags",
     href: toolHref("flags"),
     description: "Browse flags and copy CDN URLs.",
+    featured: true,
+  },
+  {
+    title: "Geo",
+    href: toolHref("geo"),
+    description: "Try country, state, and city selection with @sonojs/geo.",
+    featured: true,
   },
 ]
 

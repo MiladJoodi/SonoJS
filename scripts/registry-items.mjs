@@ -3624,7 +3624,7 @@ const registryItemsRaw = [
     description:
       "Country, optional state/province, and city pickers in popovers with in-panel search; lazy @sonojs/geo shards and flag CDN.",
     dependencies: ["@sonojs/geo", "lucide-react", "clsx", "tailwind-merge"],
-    registryDependencies: ["input-group", "popover"],
+    registryDependencies: ["input-group", "label", "popover"],
     files: [
       {
         path: "packages/ui/src/components/country-city-selector/index.ts",
