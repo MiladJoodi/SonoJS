@@ -129,6 +129,7 @@ function PickerPopoverList<T>({
         onOpenAutoFocus={(event) => {
           event.preventDefault()
           const panel = event.currentTarget
+          if (!(panel instanceof HTMLElement)) return
           requestAnimationFrame(() => {
             panel
               .querySelector<HTMLInputElement>('input[type="search"]')
