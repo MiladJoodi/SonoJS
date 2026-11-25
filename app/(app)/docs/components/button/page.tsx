@@ -126,11 +126,6 @@ export default async function ButtonDocsPage() {
             description: "related actions that share one border",
           },
           {
-            href: "/docs/components/pro-button",
-            title: "Pro Button",
-            description: "upgrade and Pro CTAs",
-          },
-          {
             href: "/docs/components/field",
             title: "Field",
             description: "label and validate form controls around buttons",

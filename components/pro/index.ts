@@ -1,4 +1,3 @@
-export { ProButton, type ProButtonProps } from "./pro-button"
 export {
   ProArchiveDownload,
   type ProArchiveDownloadProps,

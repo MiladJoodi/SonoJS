@@ -3567,6 +3567,54 @@ const registryItemsRaw = [
     ],
   },
   {
+    name: "phone-input-validation",
+    type: "registry:ui",
+    title: "Phone Input with Validation",
+    description:
+      "Phone field with validation, as-you-type national formatting, and digits preserved on country change.",
+    dependencies: [
+      "libphonenumber-js",
+      "lucide-react",
+      "clsx",
+      "tailwind-merge",
+    ],
+    registryDependencies: [
+      "dialog",
+      "input",
+      "input-group",
+      "popover",
+      "phone-input",
+      "table",
+    ],
+    files: [
+      {
+        path: "packages/ui/src/components/phone-input-validation/index.ts",
+        type: "registry:ui",
+        target: "components/phone-input-validation/index.ts",
+      },
+      {
+        path: "packages/ui/src/components/phone-input-validation/phone-input-validation.tsx",
+        type: "registry:ui",
+        target: "components/phone-input-validation/phone-input-validation.tsx",
+      },
+      {
+        path: "packages/ui/src/components/phone-input-validation/lib.ts",
+        type: "registry:ui",
+        target: "components/phone-input-validation/lib.ts",
+      },
+      {
+        path: "packages/ui/src/components/phone-input-validation/validation-reference.ts",
+        type: "registry:ui",
+        target: "components/phone-input-validation/validation-reference.ts",
+      },
+      {
+        path: "packages/ui/src/components/phone-input-validation/validation-country-guide.tsx",
+        type: "registry:ui",
+        target: "components/phone-input-validation/validation-country-guide.tsx",
+      },
+    ],
+  },
+  {
     name: "item",
     type: "registry:ui",
     title: "Item",

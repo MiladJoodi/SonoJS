@@ -59,6 +59,7 @@ export const TOP_LEVEL_COMPONENT_ROOTS = new Set([
   "multi-select",
   "password-input",
   "phone-input",
+  "phone-input-validation",
   "progressive-blur",
   "border-beam",
   "confetti",

@@ -42,6 +42,8 @@ export const COMPONENT_META_DESCRIPTIONS: Record<string, string> = {
     "Money field with Intl formatting, currency addon, locale separators, min/max, and mobile decimal input.",
   "payment-input":
     "Card number, expiry, CVC, and IBAN fields with masking, Luhn, brand detection, and mod-97 validation.",
+  "phone-input-validation":
+    "Phone field with country dial picker, live national formatting, per-country validation, and digits preserved on country change.",
   "image-cropper":
     "Pan, zoom, and crop images with react-easy-crop, zoom slider, and canvas Blob helpers.",
   "signature-pad":
@@ -108,8 +110,6 @@ export const COMPONENT_META_DESCRIPTIONS: Record<string, string> = {
     "Page controls for tables and search results, previous, next, and numbered jumps.",
   popover:
     "Non-modal floating panels for filters and lightweight forms anchored to a trigger.",
-  "pro-button":
-    "Highlighted CTA button for Pro and upgrade moments, stands out from default primary.",
   progress:
     "Linear progress for uploads and multi-step flows, determinate and indeterminate modes.",
   "progressive-blur":

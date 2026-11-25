@@ -1,7 +1,7 @@
 /**
  * Builds a lean access inventory for /admin/access.
  * Reads public/r/*.json + lib/templates-catalog.ts + lib/popups-nav.ts
- * after registry:build. Also lists known Pro demos (pro-button).
+ * after registry:build.
  *
  * Usage: node scripts/build-access-index.mjs
  */
@@ -169,21 +169,9 @@ function parsePopupItems() {
   return items
 }
 
-/** Known Pro demos that live outside public/r (Pro API / site chrome). */
+/** Pro demos that live outside public/r (Pro API / site chrome). */
 function proDemoItems() {
-  return [
-    {
-      kind: "registry",
-      name: "pro-button",
-      title: "Pro Button",
-      type: "pro:component",
-      surface: "components",
-      access: "pro",
-      accessLabel: accessLabel("pro"),
-      href: "/docs/components/pro-button",
-      registryUrl: null,
-    },
-  ]
+  return []
 }
 
 function parseCatalogProjects() {
@@ -346,8 +334,7 @@ function main() {
       {
         id: "pro-api",
         title: "Pro packages + popups",
-        body: "Pro-only items (popups from lib/popups-nav.ts, Pro Button demo) are listed here with access:\"pro\". Install/source still comes from /api/pro/components (private GitHub Pro registry) — this index does not fetch that repo at build time.",
-        href: "/docs/components/pro-button",
+        body: "Pro-only items (e.g. popups from lib/popups-nav.ts) are listed here with access:\"pro\". Install/source still comes from /api/pro/components (private GitHub Pro registry) — this index does not fetch that repo at build time.",
       },
       {
         id: "backgrounds-cursors",

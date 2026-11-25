@@ -96,7 +96,6 @@ const FOLDER_ORDER = [
   "popover",
   "progress",
   "progressive-blur",
-  "pro-button",
   "prompt-input-2",
   "prompt-input",
   "queue",

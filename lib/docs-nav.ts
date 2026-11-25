@@ -1,7 +1,7 @@
 export type DocsNavPage = {
   title: string
   href: string
-  /** Green sidebar bullet - core / high-traffic items. */
+  /** Green sidebar bullet — standout / high-value items (not every primitive). */
   featured?: boolean
   /** Small “New” chip next to the title (manual spotlight). */
   badge?: "new"
@@ -43,100 +43,52 @@ export const componentsNav: {
       title: COMPONENTS_FEATURED_GROUP,
       pages: [
         {
-          title: "Availability",
-          href: "/docs/components/availability",
-          badge: "new",
-        },
-        {
-          title: "Availability Slots",
-          href: "/docs/components/availability-slots",
-          badge: "new",
-        },
-        {
-          title: "Data Table Grid",
-          href: "/docs/components/data-table-grid",
-          badge: "new",
-        },
-        {
-          title: "Tree Checkbox",
-          href: "/docs/components/tree-checkbox",
-          badge: "new",
-        },
-        {
-          title: "Address Autocomplete",
-          href: "/docs/components/address-autocomplete",
-          badge: "new",
-        },
-        {
-          title: "Signature Pad",
-          href: "/docs/components/signature-pad",
-          badge: "new",
-        },
-        {
-          title: "Image Cropper",
-          href: "/docs/components/image-cropper",
+          title: "Phone Input with Validation",
+          href: "/docs/components/phone-input-validation",
+          featured: true,
           badge: "new",
         },
         {
           title: "Payment Input",
           href: "/docs/components/payment-input",
+          featured: true,
           badge: "new",
         },
         {
-          title: "Currency Input",
-          href: "/docs/components/currency-input",
-          badge: "new",
-        },
-        {
-          title: "Tags Input",
-          href: "/docs/components/tags-input",
-          badge: "new",
-        },
-        {
-          title: "Rich Text Editor",
-          href: "/docs/components/rich-text-editor",
-          badge: "new",
-        },
-        {
-          title: "Wheel Picker",
-          href: "/docs/components/wheel-picker",
-          badge: "new",
-        },
-        {
-          title: "Color Picker",
-          href: "/docs/components/color-picker",
-          badge: "new",
-        },
-        {
-          title: "Password Input",
-          href: "/docs/components/password-input",
+          title: "Address Autocomplete",
+          href: "/docs/components/address-autocomplete",
+          featured: true,
           badge: "new",
         },
         {
           title: "Multi Select",
           href: "/docs/components/multi-select",
+          featured: true,
+        },
+        {
+          title: "Password Input",
+          href: "/docs/components/password-input",
+          featured: true,
+          badge: "new",
+        },
+        {
+          title: "Data Table Grid",
+          href: "/docs/components/data-table-grid",
+          featured: true,
           badge: "new",
         },
         {
           title: "Dropzone",
           href: "/docs/components/dropzone",
+          featured: true,
           badge: "new",
         },
         {
-          title: "Clothes Rack",
-          href: "/docs/components/clothes-rack",
+          title: "Rich Text Editor",
+          href: "/docs/components/rich-text-editor",
+          featured: true,
           badge: "new",
         },
-        {
-          title: "Tweet Card",
-          href: "/docs/components/tweet-card",
-          badge: "new",
-        },
-        {
-          title: "Verified Badge",
-          href: "/docs/components/verified-badge",
-        },
-        { title: "Marquee", href: "/docs/components/marquee" },
       ],
     },
     {
@@ -160,27 +112,15 @@ export const componentsNav: {
           featured: true,
           badge: "new",
         },
-        {
-          title: "Button",
-          href: "/docs/components/button",
-          featured: true,
-        },
+        { title: "Button", href: "/docs/components/button" },
         { title: "Button Group", href: "/docs/components/button-group" },
-        { title: "Pro Button", href: "/docs/components/pro-button" },
-        {
-          title: "Calendar",
-          href: "/docs/components/calendar",
-          featured: true,
-        },
-        {
-          title: "Checkbox",
-          href: "/docs/components/checkbox",
-          featured: true,
-        },
+        { title: "Calendar", href: "/docs/components/calendar" },
+        { title: "Checkbox", href: "/docs/components/checkbox" },
         {
           title: "Color Picker",
           href: "/docs/components/color-picker",
           featured: true,
+          badge: "new",
         },
         {
           title: "Combobox",
@@ -193,27 +133,28 @@ export const componentsNav: {
           featured: true,
           badge: "new",
         },
-        {
-          title: "Date Picker",
-          href: "/docs/components/date-picker",
-          featured: true,
-        },
+        { title: "Date Picker", href: "/docs/components/date-picker" },
         {
           title: "Dropzone",
           href: "/docs/components/dropzone",
           featured: true,
+          badge: "new",
         },
-        { title: "Field", href: "/docs/components/field", featured: true },
+        { title: "Field", href: "/docs/components/field" },
         {
           title: "Image Cropper",
           href: "/docs/components/image-cropper",
           featured: true,
           badge: "new",
         },
-        { title: "Input", href: "/docs/components/input", featured: true },
+        { title: "Input", href: "/docs/components/input" },
         { title: "Input Group", href: "/docs/components/input-group" },
-        { title: "Input OTP", href: "/docs/components/input-otp" },
-        { title: "Label", href: "/docs/components/label", featured: true },
+        {
+          title: "Input OTP",
+          href: "/docs/components/input-otp",
+          featured: true,
+        },
+        { title: "Label", href: "/docs/components/label" },
         {
           title: "Multi Select",
           href: "/docs/components/multi-select",
@@ -224,6 +165,7 @@ export const componentsNav: {
           title: "Password Input",
           href: "/docs/components/password-input",
           featured: true,
+          badge: "new",
         },
         {
           title: "Payment Input",
@@ -231,14 +173,20 @@ export const componentsNav: {
           featured: true,
           badge: "new",
         },
-        { title: "Phone Input", href: "/docs/components/phone-input" },
         {
-          title: "Radio Group",
-          href: "/docs/components/radio-group",
+          title: "Phone Input",
+          href: "/docs/components/phone-input",
           featured: true,
         },
+        {
+          title: "Phone Input with Validation",
+          href: "/docs/components/phone-input-validation",
+          featured: true,
+          badge: "new",
+        },
+        { title: "Radio Group", href: "/docs/components/radio-group" },
         { title: "Rainbow Button", href: "/docs/components/rainbow-button" },
-        { title: "Select", href: "/docs/components/select", featured: true },
+        { title: "Select", href: "/docs/components/select" },
         {
           title: "Signature Pad",
           href: "/docs/components/signature-pad",
@@ -246,7 +194,7 @@ export const componentsNav: {
           badge: "new",
         },
         { title: "Slider", href: "/docs/components/slider" },
-        { title: "Switch", href: "/docs/components/switch", featured: true },
+        { title: "Switch", href: "/docs/components/switch" },
         {
           title: "Tags Input",
           href: "/docs/components/tags-input",
@@ -279,13 +227,9 @@ export const componentsNav: {
     {
       title: "Layout",
       pages: [
-        {
-          title: "Accordion",
-          href: "/docs/components/accordion",
-          featured: true,
-        },
+        { title: "Accordion", href: "/docs/components/accordion" },
         { title: "Border Beam", href: "/docs/components/border-beam" },
-        { title: "Card", href: "/docs/components/card", featured: true },
+        { title: "Card", href: "/docs/components/card" },
         { title: "Collapsible", href: "/docs/components/collapsible" },
         { title: "Confetti", href: "/docs/components/confetti" },
         { title: "Dotted Map", href: "/docs/components/dotted-map" },
@@ -303,18 +247,14 @@ export const componentsNav: {
         { title: "Separator", href: "/docs/components/separator" },
         { title: "Shine Border", href: "/docs/components/shine-border" },
         { title: "Sortable", href: "/docs/components/sortable" },
-        { title: "Tabs", href: "/docs/components/tabs", featured: true },
+        { title: "Tabs", href: "/docs/components/tabs" },
         { title: "Timeline", href: "/docs/components/timeline" },
       ],
     },
     {
       title: "Overlays",
       pages: [
-        {
-          title: "Alert Dialog",
-          href: "/docs/components/alert-dialog",
-          featured: true,
-        },
+        { title: "Alert Dialog", href: "/docs/components/alert-dialog" },
         { title: "Command", href: "/docs/components/command" },
         { title: "Context Menu", href: "/docs/components/context-menu" },
         { title: "Dialog", href: "/docs/components/dialog" },
@@ -322,12 +262,8 @@ export const componentsNav: {
         { title: "Dropdown Menu", href: "/docs/components/dropdown-menu" },
         { title: "Hover Card", href: "/docs/components/hover-card" },
         { title: "Menubar", href: "/docs/components/menubar" },
-        {
-          title: "Popover",
-          href: "/docs/components/popover",
-          featured: true,
-        },
-        { title: "Sheet", href: "/docs/components/sheet", featured: true },
+        { title: "Popover", href: "/docs/components/popover" },
+        { title: "Sheet", href: "/docs/components/sheet" },
         { title: "Tooltip", href: "/docs/components/tooltip" },
       ],
     },
@@ -346,22 +282,21 @@ export const componentsNav: {
         {
           title: "Verified Badge",
           href: "/docs/components/verified-badge",
-          featured: true,
         },
       ],
     },
     {
       title: "Data display",
       pages: [
-        {
-          title: "Avatar",
-          href: "/docs/components/avatar",
-          featured: true,
-        },
-        { title: "Bubble", href: "/docs/components/bubble", featured: true },
+        { title: "Avatar", href: "/docs/components/avatar" },
+        { title: "Bubble", href: "/docs/components/bubble" },
         { title: "Carousel", href: "/docs/components/carousel" },
         { title: "Code Panel", href: "/docs/components/code-panel" },
-        { title: "Data Table", href: "/docs/components/data-table" },
+        {
+          title: "Data Table",
+          href: "/docs/components/data-table",
+          featured: true,
+        },
         {
           title: "Data Table Grid",
           href: "/docs/components/data-table-grid",
@@ -374,7 +309,7 @@ export const componentsNav: {
           href: "/docs/components/message-scroller",
         },
         { title: "Pagination", href: "/docs/components/pagination" },
-        { title: "Table", href: "/docs/components/table", featured: true },
+        { title: "Table", href: "/docs/components/table" },
       ],
     },
     {
@@ -396,10 +331,7 @@ export const componentsNav: {
       title: "Navigation",
       pages: [
         { title: "Breadcrumb", href: "/docs/components/breadcrumb" },
-        {
-          title: "Navigation Menu",
-          href: "/docs/components/navigation-menu",
-        },
+        { title: "Navigation Menu", href: "/docs/components/navigation-menu" },
       ],
     },
   ],
