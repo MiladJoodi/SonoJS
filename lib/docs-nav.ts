@@ -133,6 +133,12 @@ export const componentsNav: {
           featured: true,
           badge: "new",
         },
+        {
+          title: "Country & City Selector",
+          href: "/docs/components/country-city-selector",
+          featured: true,
+          badge: "new",
+        },
         { title: "Date Picker", href: "/docs/components/date-picker" },
         {
           title: "Dropzone",

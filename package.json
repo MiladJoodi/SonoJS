@@ -45,6 +45,7 @@
     "@react-three/fiber": "^9.8.2",
     "@react-three/postprocessing": "^3.2.2",
     "@rive-app/react-webgl2": "^4.38.0",
+    "@sonojs/geo": "^0.1.0",
     "@sonojs/ui": "*",
     "@vercel/analytics": "^2.0.1",
     "ai": "^5.0.285",

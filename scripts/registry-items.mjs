@@ -3618,6 +3618,67 @@ const registryItemsRaw = [
     ],
   },
   {
+    name: "country-city-selector",
+    type: "registry:ui",
+    title: "Country & City Selector",
+    description:
+      "Country, optional state/province, and city pickers in popovers with in-panel search; lazy @sonojs/geo shards and flag CDN.",
+    dependencies: ["@sonojs/geo", "lucide-react", "clsx", "tailwind-merge"],
+    registryDependencies: ["input-group", "popover"],
+    files: [
+      {
+        path: "packages/ui/src/components/country-city-selector/index.ts",
+        type: "registry:ui",
+        target: "components/country-city-selector/index.ts",
+      },
+      {
+        path: "packages/ui/src/components/country-city-selector/country-flag.tsx",
+        type: "registry:ui",
+        target: "components/country-city-selector/country-flag.tsx",
+      },
+      {
+        path: "packages/ui/src/components/country-city-selector/geo-config.ts",
+        type: "registry:ui",
+        target: "components/country-city-selector/geo-config.ts",
+      },
+      {
+        path: "packages/ui/src/components/country-city-selector/geo-data.ts",
+        type: "registry:ui",
+        target: "components/country-city-selector/geo-data.ts",
+      },
+      {
+        path: "packages/ui/src/components/country-city-selector/geo-search.ts",
+        type: "registry:ui",
+        target: "components/country-city-selector/geo-search.ts",
+      },
+      {
+        path: "packages/ui/src/components/country-city-selector/country-search-select.tsx",
+        type: "registry:ui",
+        target: "components/country-city-selector/country-search-select.tsx",
+      },
+      {
+        path: "packages/ui/src/components/country-city-selector/state-search-select.tsx",
+        type: "registry:ui",
+        target: "components/country-city-selector/state-search-select.tsx",
+      },
+      {
+        path: "packages/ui/src/components/country-city-selector/city-search-select.tsx",
+        type: "registry:ui",
+        target: "components/country-city-selector/city-search-select.tsx",
+      },
+      {
+        path: "packages/ui/src/components/country-city-selector/picker-popover-list.tsx",
+        type: "registry:ui",
+        target: "components/country-city-selector/picker-popover-list.tsx",
+      },
+      {
+        path: "packages/ui/src/components/country-city-selector/country-city-select.tsx",
+        type: "registry:ui",
+        target: "components/country-city-selector/country-city-select.tsx",
+      },
+    ],
+  },
+  {
     name: "item",
     type: "registry:ui",
     title: "Item",

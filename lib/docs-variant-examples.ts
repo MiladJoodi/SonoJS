@@ -111,6 +111,7 @@ const EXAMPLE_FOLDERS = [
   "textarea",
   "rich-text-editor",
   "tags-input",
+  "country-city-selector",
   "currency-input",
   "payment-input",
   "image-cropper",

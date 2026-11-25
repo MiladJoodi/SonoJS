@@ -38,6 +38,8 @@ export const COMPONENT_META_DESCRIPTIONS: Record<string, string> = {
     "Show or hide secondary content without leaving the page, progressive disclosure for dense layouts.",
   combobox:
     "Searchable select for long option lists, typeahead, keyboard navigation, and clear empty states.",
+  "country-city-selector":
+    "Country search and country-to-city selects with @sonojs/geo lazy shards, jsDelivr flags, debounced search, and ISO2 plus city id values.",
   "currency-input":
     "Money field with Intl formatting, currency addon, locale separators, min/max, and mobile decimal input.",
   "payment-input":
