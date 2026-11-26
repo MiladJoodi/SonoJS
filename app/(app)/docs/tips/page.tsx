@@ -1,10 +1,14 @@
 import { ComponentSource } from "@/components/docs"
+import {
+  DOCS_GUIDE_PAGE_DESCRIPTIONS,
+  DOCS_GUIDE_PAGE_TITLES,
+} from "@/lib/docs-guide-titles"
 import { docsGuideMetadata } from "@/lib/seo"
 
 export const metadata = docsGuideMetadata(
   "/docs/tips",
-  "Tips",
-  "Practical notes and common gotchas when installing and using SonoJS components."
+  DOCS_GUIDE_PAGE_TITLES["/docs/tips"],
+  DOCS_GUIDE_PAGE_DESCRIPTIONS["/docs/tips"],
 )
 
 export default function TipsDocsPage() {

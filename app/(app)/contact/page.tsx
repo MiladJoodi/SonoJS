@@ -1,13 +1,12 @@
-import type { Metadata } from "next"
-
 import { ContactForm } from "@/components/contact"
 import { siteConfig } from "@/lib/config"
+import { pageMetadata } from "@/lib/seo"
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Contact",
   description: `Get in touch with ${siteConfig.name}.`,
-  alternates: { canonical: "/contact" },
-}
+  path: "/contact",
+})
 
 export default function ContactPage() {
   return (

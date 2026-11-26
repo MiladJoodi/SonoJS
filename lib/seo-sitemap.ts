@@ -15,6 +15,7 @@ import { getCarouselsPages } from "@/lib/carousels-nav"
 import { backgroundsCatalog, backgroundHref } from "@/lib/backgrounds-catalog"
 import { cursorsCatalog, cursorHref } from "@/lib/cursors-catalog"
 import { getDocsComponentPages, getDocsGuidePages } from "@/lib/docs-nav"
+import { legalNav } from "@/lib/legal-nav"
 import { templateProjects } from "@/lib/templates-catalog"
 import {
   absoluteUrl,
@@ -125,6 +126,13 @@ export function buildSitemapPaths(): string[] {
   const paths = new Set<string>()
 
   pushUnique(paths, "/")
+  pushUnique(paths, "/about")
+  pushUnique(paths, "/contact")
+  pushUnique(paths, "/backgrounds")
+  pushUnique(paths, "/legal")
+  for (const page of legalNav) {
+    pushUnique(paths, page.href)
+  }
   pushUnique(paths, "/blocks")
   pushUnique(paths, "/charts")
   pushUnique(paths, "/cursors")

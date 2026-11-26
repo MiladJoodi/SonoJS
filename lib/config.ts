@@ -76,6 +76,7 @@ Ask before changing MCP config outside this project.`,
     x: "https://x.com/_sonojs",
     linkedin: "https://www.linkedin.com/company/sonojs",
     youtube: "https://www.youtube.com/@SonoJSDev",
+    npm: "https://www.npmjs.com/package/@sonojs/ui",
     /** Support inbox, override with SUPPORT_EMAIL / NEXT_PUBLIC_SUPPORT_EMAIL. */
     supportEmail:
       process.env.NEXT_PUBLIC_SUPPORT_EMAIL?.trim() ||
@@ -177,6 +178,7 @@ Ask before changing MCP config outside this project.`,
   ] satisfies SiteNavEntry[],
   /** Secondary explore links shown in the site footer. */
   footerNavItems: [
+    { href: "/about", label: "About" },
     { href: "/tools", label: "Tools" },
     { href: "/pricing", label: "Pricing" },
     {

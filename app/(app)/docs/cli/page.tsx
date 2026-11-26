@@ -1,11 +1,15 @@
 import { ComponentSource } from "@/components/docs"
 import { siteConfig } from "@/lib/config"
+import {
+  DOCS_GUIDE_PAGE_DESCRIPTIONS,
+  DOCS_GUIDE_PAGE_TITLES,
+} from "@/lib/docs-guide-titles"
 import { docsGuideMetadata } from "@/lib/seo"
 
 export const metadata = docsGuideMetadata(
   "/docs/cli",
-  "CLI",
-  "SonoJS copy-source CLI - init the design system and add components with npx @sonojs/ui."
+  DOCS_GUIDE_PAGE_TITLES["/docs/cli"],
+  DOCS_GUIDE_PAGE_DESCRIPTIONS["/docs/cli"],
 )
 
 export default function CliDocsPage() {

@@ -1,0 +1,42 @@
+# SonoJS
+
+> React components, blocks, charts, and cursors for Tailwind apps. Add with the SonoJS CLI or generate UI via MCP.
+
+SonoJS (https://sonojs.com) is the public docs and catalog for a copy-source React UI library. Browse primitives and blocks on the site, install files with `npx @sonojs/ui@latest add <name>`, or connect an MCP client for agent-driven installs.
+
+## Catalog
+
+- Components and guides: https://sonojs.com/docs
+- UI blocks: https://sonojs.com/blocks
+- Charts: https://sonojs.com/charts
+- Cursors: https://sonojs.com/cursors
+- Backgrounds: https://sonojs.com/backgrounds
+- AI components: https://sonojs.com/ai
+- 3D scenes: https://sonojs.com/3d
+- Templates: https://sonojs.com/templates
+- Website packs: https://sonojs.com/websites
+- Tools: https://sonojs.com/tools
+
+## Setup
+
+- About: https://sonojs.com/about
+- Installation: https://sonojs.com/docs/installation
+- CLI: https://sonojs.com/docs/cli
+- MCP server: https://sonojs.com/docs/mcp
+- Direction (RTL / LTR): https://sonojs.com/docs/direction
+
+## Registry (machine-readable)
+
+- Registry index: https://sonojs.com/r/registry.json
+- Per-item JSON: https://sonojs.com/r/<item-name>.json
+
+## Contact
+
+- Contact page: https://sonojs.com/contact
+- Email: info@sonojs.com
+- Legal: https://sonojs.com/legal
+
+## Official profiles
+
+- GitHub: https://github.com/MiladJoodi/SonoJS
+- npm: https://www.npmjs.com/package/@sonojs/ui

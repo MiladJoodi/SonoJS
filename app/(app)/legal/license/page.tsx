@@ -1,13 +1,12 @@
-import type { Metadata } from "next"
-
 import { LegalPage, SupportEmail } from "@/components/legal"
+import { pageMetadata } from "@/lib/seo"
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Pro License Agreement",
   description:
     "How you may use SonoJS Pro components, blocks, and source code under an active subscription.",
-  alternates: { canonical: "/legal/license" },
-}
+  path: "/legal/license",
+})
 
 export default function LicensePage() {
   return (

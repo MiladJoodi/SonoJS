@@ -23,6 +23,7 @@ const requiredFiles = [
   "public/favicon.svg",
   "public/favicon.png",
   "public/apple-touch-icon.png",
+  "public/llms.txt",
 ]
 
 let failed = false
@@ -93,10 +94,45 @@ if (fs.existsSync(path.join(root, "app/opengraph-image.tsx"))) {
   failed = true
 }
 
+const proxySrc = fs.readFileSync(path.join(root, "proxy.ts"), "utf8")
+if (
+  !proxySrc.includes("BREADCRUMB_PATH_HEADER") ||
+  !proxySrc.includes("set(BREADCRUMB_PATH_HEADER")
+) {
+  console.error("proxy.ts must inject BREADCRUMB_PATH_HEADER on each request")
+  failed = true
+}
+const breadcrumbHeaderSrc = fs.readFileSync(
+  path.join(root, "lib/seo-breadcrumb-labels.ts"),
+  "utf8"
+)
+if (
+  !breadcrumbHeaderSrc.includes('BREADCRUMB_PATH_HEADER = "x-pathname"')
+) {
+  console.error('lib/seo-breadcrumb-labels.ts must define x-pathname header')
+  failed = true
+}
+
 if (failed) {
   console.error("verify:seo failed")
   process.exit(1)
 }
 
 console.log("verify:seo ok - run `npx vitest run lib/seo.test.ts` for sitemap integrity")
+
+const buildId = path.join(root, ".next", "BUILD_ID")
+if (fs.existsSync(buildId)) {
+  const { spawnSync } = require("node:child_process")
+  const r = spawnSync(
+    process.execPath,
+    ["scripts/verify-breadcrumb-html.mjs"],
+    { cwd: root, stdio: "inherit" }
+  )
+  if (r.status !== 0) process.exit(r.status ?? 1)
+} else {
+  console.log(
+    "verify:seo: skip breadcrumb HTML probe (no .next/BUILD_ID — run build, then verify:seo again)"
+  )
+}
+
 void pathToFileURL

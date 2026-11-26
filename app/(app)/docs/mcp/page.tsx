@@ -1,11 +1,15 @@
 import { AgentPromptCard, ComponentSource } from "@/components/docs"
 import { siteConfig } from "@/lib/config"
+import {
+  DOCS_GUIDE_PAGE_DESCRIPTIONS,
+  DOCS_GUIDE_PAGE_TITLES,
+} from "@/lib/docs-guide-titles"
 import { docsGuideMetadata } from "@/lib/seo"
 
 export const metadata = docsGuideMetadata(
   "/docs/mcp",
-  "MCP Server",
-  "Connect Cursor, Claude, Codex, and other MCP clients so agents can discover SonoJS registry items the same way the CLI does."
+  DOCS_GUIDE_PAGE_TITLES["/docs/mcp"],
+  DOCS_GUIDE_PAGE_DESCRIPTIONS["/docs/mcp"],
 )
 
 export default function McpDocsPage() {

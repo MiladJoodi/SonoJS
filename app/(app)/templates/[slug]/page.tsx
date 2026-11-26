@@ -1,11 +1,13 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 
+import { JsonLd } from "@/components/seo/json-ld"
 import { TemplateDetailPage } from "@/components/templates/detail-page"
 import { templateProjects } from "@/lib/templates-catalog"
 import { getTemplatePreviewDetail } from "@/lib/templates-preview-data"
 import { resolveProductOwnership } from "@/lib/resolve-product-ownership"
-import { pageMetadata } from "@/lib/seo"
+import { pageMetadata, productDetailPageMetadata } from "@/lib/seo"
+import { productCoverImagePath, productJsonLd } from "@/lib/seo-jsonld"
 
 type PageProps = {
   params: Promise<{ slug: string }>
@@ -32,10 +34,11 @@ export async function generateMetadata({
       path: `/templates/${slug}`,
     })
   }
-  return pageMetadata({
+  return productDetailPageMetadata({
     title: detail.title,
     description: detail.tagline,
     path: `/templates/${detail.slug}`,
+    coverImagePath: productCoverImagePath(detail),
   })
 }
 
@@ -49,5 +52,20 @@ export default async function TemplateProjectPage({ params }: PageProps) {
     detail.priceCents
   )
 
-  return <TemplateDetailPage detail={detail} ownsProduct={ownsProduct} />
+  const path = `/templates/${detail.slug}`
+
+  return (
+    <>
+      <JsonLd
+        data={productJsonLd({
+          name: detail.title,
+          description: detail.tagline,
+          path,
+          priceCents: detail.priceCents,
+          imagePath: productCoverImagePath(detail),
+        })}
+      />
+      <TemplateDetailPage detail={detail} ownsProduct={ownsProduct} />
+    </>
+  )
 }
