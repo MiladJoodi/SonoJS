@@ -1,6 +1,8 @@
 import { Suspense } from "react"
 
 import { SignedInHintProvider } from "@/components/auth/signed-in-hint"
+import { SitewideBreadcrumbJsonLd } from "@/components/seo/sitewide-breadcrumb-json-ld"
+import { SitewideContentJsonLd } from "@/components/seo/sitewide-content-json-ld"
 import { MobileHeaderScroll } from "@/components/mobile-header-scroll"
 import { NavigationProgress } from "@/components/navigation-progress"
 import { ScrollToTop } from "@/components/scroll-to-top"
@@ -28,6 +30,8 @@ export default async function AppLayout({
         <ScrollToTop />
         <MobileHeaderScroll />
         <SiteHeader initialSignedIn={signedIn} />
+        <SitewideBreadcrumbJsonLd />
+        <SitewideContentJsonLd />
         <main className="flex min-h-0 flex-1 flex-col">{children}</main>
         <SiteFooter />
         <MobileBottomNav />

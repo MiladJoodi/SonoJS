@@ -1,6 +1,15 @@
 import { clerkMiddleware } from "@clerk/nextjs/server"
+import { NextResponse } from "next/server"
 
-export default clerkMiddleware()
+import { BREADCRUMB_PATH_HEADER } from "@/lib/seo-breadcrumb-labels"
+
+export default clerkMiddleware((_auth, req) => {
+  const requestHeaders = new Headers(req.headers)
+  requestHeaders.set(BREADCRUMB_PATH_HEADER, req.nextUrl.pathname)
+  return NextResponse.next({
+    request: { headers: requestHeaders },
+  })
+})
 
 export const config = {
   matcher: [

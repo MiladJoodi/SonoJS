@@ -1,16 +1,16 @@
-import type { Metadata } from "next"
 import Link from "next/link"
 import { ArrowRightIcon } from "lucide-react"
 
 import { DocsPageHeader } from "@/components/docs"
 import { legalNav } from "@/lib/legal-nav"
 import { siteConfig } from "@/lib/config"
+import { pageMetadata } from "@/lib/seo"
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Legal",
   description: "Terms, privacy, Pro license, and refund policy for SonoJS.",
-  alternates: { canonical: "/legal" },
-}
+  path: "/legal",
+})
 
 export default function LegalIndexPage() {
   return (

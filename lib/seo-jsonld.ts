@@ -1,9 +1,37 @@
+import type { TemplatePreviewDetail } from "@/lib/templates-preview-data"
+
 import { siteConfig } from "@/lib/config"
-import { absoluteUrl, normalizePath } from "@/lib/seo"
+import type { ResolvedContentPage } from "@/lib/seo-content-page"
+import { absoluteUrl, normalizePath, OG_IMAGE } from "@/lib/seo"
+
+/**
+ * Matches Stripe catalog checkout default (`create-product-checkout-session.ts`
+ * uses `currency ?? "usd"`).
+ */
+export const PRODUCT_OFFER_CURRENCY = "USD" as const
 
 export const ORGANIZATION_ID = absoluteUrl("/#organization")
 export const WEBSITE_ID = absoluteUrl("/#website")
 export const SOFTWARE_ID = absoluteUrl("/#software")
+
+export function organizationSameAsUrls(): string[] {
+  const candidates = [
+    siteConfig.links.github,
+    siteConfig.links.x,
+    siteConfig.links.linkedin,
+    siteConfig.links.youtube,
+    siteConfig.links.npm,
+  ]
+  const seen = new Set<string>()
+  const out: string[] = []
+  for (const url of candidates) {
+    const trimmed = url?.trim()
+    if (!trimmed || seen.has(trimmed)) continue
+    seen.add(trimmed)
+    out.push(trimmed)
+  }
+  return out
+}
 
 export function organizationJsonLd(): Record<string, unknown> {
   return {
@@ -12,11 +40,11 @@ export function organizationJsonLd(): Record<string, unknown> {
     "@id": ORGANIZATION_ID,
     name: siteConfig.name,
     url: absoluteUrl("/"),
-    sameAs: [
-      siteConfig.links.github,
-      siteConfig.links.x,
-      siteConfig.links.linkedin,
-    ],
+    logo: {
+      "@type": "ImageObject",
+      url: absoluteUrl(OG_IMAGE.url),
+    },
+    sameAs: organizationSameAsUrls(),
   }
 }
 
@@ -32,6 +60,8 @@ export function softwareApplicationJsonLd(): Record<string, unknown> {
     offers: {
       "@type": "Offer",
       url: absoluteUrl("/pricing"),
+      price: 0,
+      priceCurrency: PRODUCT_OFFER_CURRENCY,
     },
     publisher: { "@id": ORGANIZATION_ID },
   }
@@ -73,7 +103,13 @@ const SECTION_LABELS: Record<string, string> = {
   cursors: "Cursors",
   tools: "Tools",
   templates: "Templates",
+  websites: "Websites",
+  backgrounds: "Backgrounds",
+  popups: "Popups",
   pricing: "Pricing",
+  about: "About",
+  contact: "Contact",
+  legal: "Legal",
 }
 
 /**
@@ -125,7 +161,15 @@ export function isBreadcrumbLinkedPath(
  * Example: /docs/components/button → Home › Docs › Components › Button
  * Example: /blocks/authentication/login → Home › Blocks › Login
  */
-export function breadcrumbItemsFromPath(pathname: string): BreadcrumbItem[] {
+export type BreadcrumbBuildOptions = {
+  /** Override the visible name on the leaf crumb (canonical path unchanged). */
+  leafLabel?: string
+}
+
+export function breadcrumbItemsFromPath(
+  pathname: string,
+  options: BreadcrumbBuildOptions = {}
+): BreadcrumbItem[] {
   const normalized = normalizePath(pathname)
   const items: BreadcrumbItem[] = [{ name: "Home", path: "/" }]
   if (normalized === "/") return items
@@ -140,13 +184,162 @@ export function breadcrumbItemsFromPath(pathname: string): BreadcrumbItem[] {
     const name = SECTION_LABELS[segment] ?? titleCaseSegment(segment)
     items.push({ name, path: acc })
   }
+
+  const leafLabel = options.leafLabel?.trim()
+  if (leafLabel && items.length > 1) {
+    const last = items[items.length - 1]!
+    items[items.length - 1] = { ...last, name: leafLabel }
+  }
+
   return items
 }
 
-export function breadcrumbListJsonLd(
-  pathname: string
+export function productCoverImagePath(
+  detail: Pick<TemplatePreviewDetail, "coverSrc" | "project">
+): string | null {
+  const fromProject =
+    detail.project.detailCoverImage?.trim() ||
+    detail.project.coverImage?.trim() ||
+    null
+  const fromCard = detail.coverSrc?.trim() || null
+  return fromProject || fromCard
+}
+
+export type ProductJsonLdInput = {
+  name: string
+  description: string
+  path: string
+  priceCents: number
+  imagePath?: string | null
+}
+
+/** Product snippet for a single catalog item. Never emits ratings or reviews. */
+export function productJsonLd(input: ProductJsonLdInput): Record<string, unknown> {
+  const path = normalizePath(input.path)
+  const cents = Number.isFinite(input.priceCents)
+    ? Math.max(0, Math.floor(input.priceCents))
+    : 0
+  const price = (cents / 100).toFixed(2)
+  const imagePath = input.imagePath?.trim()
+
+  const json: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "@id": `${absoluteUrl(path)}#product`,
+    name: input.name,
+    description: input.description,
+    url: absoluteUrl(path),
+    brand: { "@id": ORGANIZATION_ID },
+    offers: {
+      "@type": "Offer",
+      price,
+      priceCurrency: PRODUCT_OFFER_CURRENCY,
+      url: absoluteUrl(path),
+    },
+  }
+
+  if (imagePath) {
+    json.image = absoluteUrl(imagePath)
+  }
+
+  return json
+}
+
+export type ContentPageJsonLdInput = Pick<
+  ResolvedContentPage,
+  "pathname" | "title" | "description" | "schemaType"
+>
+
+const TYPESCRIPT = "TypeScript"
+
+function contentPageBase(input: ContentPageJsonLdInput): Record<string, unknown> {
+  const path = normalizePath(input.pathname)
+  return {
+    "@context": "https://schema.org",
+    name: input.title,
+    headline: input.title,
+    description: input.description,
+    url: absoluteUrl(path),
+    publisher: { "@id": ORGANIZATION_ID },
+    isPartOf: { "@id": WEBSITE_ID },
+  }
+}
+
+/** Article-style technical docs (`/docs` guides). No fabricated author or date fields. */
+export function techArticleJsonLd(
+  input: ContentPageJsonLdInput
+): Record<string, unknown> {
+  const path = normalizePath(input.pathname)
+  return {
+    ...contentPageBase(input),
+    "@type": "TechArticle",
+    "@id": `${absoluteUrl(path)}#article`,
+    mainEntityOfPage: absoluteUrl(path),
+  }
+}
+
+/** Section hubs and chart category indexes. */
+export function webPageJsonLd(
+  input: ContentPageJsonLdInput
+): Record<string, unknown> {
+  const path = normalizePath(input.pathname)
+  return {
+    ...contentPageBase(input),
+    "@type": "WebPage",
+    "@id": `${absoluteUrl(path)}#webpage`,
+  }
+}
+
+/** Installable React source (component docs, AI, chart demos). */
+export function softwareSourceCodeJsonLd(
+  input: ContentPageJsonLdInput
+): Record<string, unknown> {
+  const path = normalizePath(input.pathname)
+  return {
+    ...contentPageBase(input),
+    "@type": "SoftwareSourceCode",
+    "@id": `${absoluteUrl(path)}#sourcecode`,
+    programmingLanguage: TYPESCRIPT,
+    runtimePlatform: "React",
+    codeRepository: siteConfig.links.github,
+  }
+}
+
+/** Copy-ready UI sections and cursor effects. */
+export function creativeWorkJsonLd(
+  input: ContentPageJsonLdInput
+): Record<string, unknown> {
+  const path = normalizePath(input.pathname)
+  return {
+    ...contentPageBase(input),
+    "@type": "CreativeWork",
+    "@id": `${absoluteUrl(path)}#creativework`,
+    creator: { "@id": ORGANIZATION_ID },
+  }
+}
+
+export function contentPageJsonLd(
+  input: ContentPageJsonLdInput
 ): Record<string, unknown> | null {
-  const items = breadcrumbItemsFromPath(pathname)
+  switch (input.schemaType) {
+    case "TechArticle":
+      return techArticleJsonLd(input)
+    case "WebPage":
+      return webPageJsonLd(input)
+    case "SoftwareSourceCode":
+      return softwareSourceCodeJsonLd(input)
+    case "CreativeWork":
+      return creativeWorkJsonLd(input)
+    default:
+      return null
+  }
+}
+
+export function breadcrumbListJsonLd(
+  pathname: string,
+  options: BreadcrumbBuildOptions = {}
+): Record<string, unknown> | null {
+  const items = breadcrumbItemsFromPath(pathname, options)
   if (items.length < 2) return null
 
   return {

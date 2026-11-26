@@ -14,6 +14,7 @@ import {
   OG_IMAGE,
   ogImageAltForPath,
   pageMetadata,
+  productDetailPageMetadata,
   twitterHandleFromConfig,
   withKindSuffix,
 } from "@/lib/seo"
@@ -24,11 +25,32 @@ import {
 import {
   breadcrumbItemsFromPath,
   breadcrumbListJsonLd,
+  contentPageJsonLd,
+  creativeWorkJsonLd,
   isBreadcrumbLinkedPath,
   organizationJsonLd,
+  softwareSourceCodeJsonLd,
+  techArticleJsonLd,
+  webPageJsonLd,
+  organizationSameAsUrls,
+  PRODUCT_OFFER_CURRENCY,
+  productJsonLd,
   softwareApplicationJsonLd,
   websiteJsonLd,
 } from "@/lib/seo-jsonld"
+import { templateProjects } from "@/lib/templates-catalog"
+import { siteConfig } from "@/lib/config"
+import {
+  isBreadcrumbEligiblePath,
+  resolveBreadcrumbLeafLabel,
+} from "@/lib/seo-breadcrumb-labels"
+import { DOCS_GUIDE_PAGE_TITLES } from "@/lib/docs-guide-titles"
+import { docsNav } from "@/lib/docs-nav"
+import { chartsCatalog } from "@/lib/charts-catalog"
+import {
+  isContentJsonLdEligiblePath,
+  resolveContentPage,
+} from "@/lib/seo-content-page"
 import {
   assertSitemapIntegrity,
   buildSitemapEntries,
@@ -131,6 +153,24 @@ describe("seo helpers", () => {
 
   it("builds Organization, SoftwareApplication, WebSite, and breadcrumbs", () => {
     expect(organizationJsonLd()["@type"]).toBe("Organization")
+    const logo = organizationJsonLd().logo as { url?: string }
+    expect(logo?.url).toBe(absoluteUrl(OG_IMAGE.url))
+    const sameAs = organizationJsonLd().sameAs as string[]
+    expect(sameAs).toEqual(organizationSameAsUrls())
+    expect(sameAs).toContain(siteConfig.links.github)
+    expect(sameAs).toContain(siteConfig.links.x)
+    expect(sameAs).toContain(siteConfig.links.linkedin)
+    expect(sameAs).toContain(siteConfig.links.youtube)
+    expect(sameAs).toContain(siteConfig.links.npm)
+    for (const url of sameAs) {
+      expect(url.startsWith("https://")).toBe(true)
+    }
+    const appOffers = softwareApplicationJsonLd().offers as {
+      price: number
+      priceCurrency: string
+    }
+    expect(appOffers.price).toBe(0)
+    expect(appOffers.priceCurrency).toBe(PRODUCT_OFFER_CURRENCY)
     expect(softwareApplicationJsonLd()["@type"]).toBe("SoftwareApplication")
     expect(websiteJsonLd()["@type"]).toBe("WebSite")
     expect(websiteJsonLd().publisher).toEqual({
@@ -302,7 +342,227 @@ describe("sitemap builder", () => {
     expect(paths.has("/templates/sonojs-dashboard-01")).toBe(true)
     expect(paths.has("/templates/sonojs-website-01")).toBe(false)
     expect(paths.has("/websites/sonojs-website-01")).toBe(true)
+    expect(paths.has("/about")).toBe(true)
+    expect(paths.has("/contact")).toBe(true)
+    expect(paths.has("/backgrounds")).toBe(true)
+    expect(paths.has("/legal")).toBe(true)
+    expect(paths.has("/legal/terms")).toBe(true)
     expect(paths.has("/docs/components/toast")).toBe(false)
     expect(paths.has("/docs/components/agent-code-block")).toBe(false)
+  })
+})
+
+describe("product JSON-LD", () => {
+  it("emits Product with USD offers and no ratings", () => {
+    const json = productJsonLd({
+      name: "Commerce Admin",
+      description: "Admin panel template",
+      path: "/templates/sonojs-dashboard-01",
+      priceCents: 0,
+    })
+    expect(json["@type"]).toBe("Product")
+    expect(json["@id"]).toBe(
+      `${PRODUCTION_ORIGIN}/templates/sonojs-dashboard-01#product`
+    )
+    expect(json.aggregateRating).toBeUndefined()
+    expect(json.review).toBeUndefined()
+    const offers = json.offers as { price: string; priceCurrency: string; url: string }
+    expect(offers.price).toBe("0.00")
+    expect(offers.priceCurrency).toBe(PRODUCT_OFFER_CURRENCY)
+    expect(offers.url).toBe(
+      `${PRODUCTION_ORIGIN}/templates/sonojs-dashboard-01`
+    )
+  })
+
+  it("formats paid prices from cents", () => {
+    const json = productJsonLd({
+      name: "Pro pack",
+      description: "Paid template",
+      path: "/templates/pro-example",
+      priceCents: 1999,
+    })
+    expect((json.offers as { price: string }).price).toBe("19.99")
+  })
+
+  it("includes absolute image when provided", () => {
+    const json = productJsonLd({
+      name: "T",
+      description: "D",
+      path: "/websites/site-01",
+      priceCents: 0,
+      imagePath: "/templates/projects/x/cover-light.webp",
+    })
+    expect(json.image).toBe(
+      absoluteUrl("/templates/projects/x/cover-light.webp")
+    )
+  })
+})
+
+describe("product detail metadata", () => {
+  it("uses catalog cover for Open Graph when provided", () => {
+    const cover =
+      "/templates/projects/dashboard/sonojs-dashboard-01/cover-light.webp"
+    const meta = productDetailPageMetadata({
+      title: "Commerce Admin Dashboard",
+      description: "Admin template",
+      path: "/templates/sonojs-dashboard-01",
+      coverImagePath: cover,
+    })
+    expect(meta.alternates?.canonical).toBe("/templates/sonojs-dashboard-01")
+    expect(meta.openGraph?.url).toBe(
+      `${PRODUCTION_ORIGIN}/templates/sonojs-dashboard-01`
+    )
+    expect(meta.openGraph?.images).toEqual([
+      expect.objectContaining({
+        url: cover,
+        type: "image/webp",
+      }),
+    ])
+    expect(meta.twitter?.images).toEqual([cover])
+  })
+})
+
+describe("content page JSON-LD", () => {
+  it("emits TechArticle for docs guides with canonical URLs", () => {
+    const page = resolveContentPage("/docs/installation")
+    expect(page?.schemaType).toBe("TechArticle")
+    expect(page?.title).toBe("Installation")
+    const json = techArticleJsonLd(page!)
+    expect(json["@type"]).toBe("TechArticle")
+    expect(json.url).toBe(`${PRODUCTION_ORIGIN}/docs/installation`)
+    expect(json).not.toHaveProperty("author")
+    expect(json).not.toHaveProperty("datePublished")
+    expect(json).not.toHaveProperty("aggregateRating")
+  })
+
+  it("emits SoftwareSourceCode for component docs", () => {
+    const page = resolveContentPage("/docs/components/button")
+    expect(page?.schemaType).toBe("SoftwareSourceCode")
+    const json = softwareSourceCodeJsonLd(page!)
+    expect(json["@type"]).toBe("SoftwareSourceCode")
+    expect(json.programmingLanguage).toBe("TypeScript")
+    expect(json.url).toBe(`${PRODUCTION_ORIGIN}/docs/components/button`)
+    expect(contentPageJsonLd(page!)?.["@type"]).toBe("SoftwareSourceCode")
+  })
+
+  it("emits CreativeWork for blocks and WebPage for hubs", () => {
+    const block = resolveContentPage("/blocks/authentication/login")
+    expect(block?.schemaType).toBe("CreativeWork")
+    expect(creativeWorkJsonLd(block!)["@type"]).toBe("CreativeWork")
+
+    const hub = resolveContentPage("/charts")
+    expect(hub?.schemaType).toBe("WebPage")
+    expect(webPageJsonLd(hub!)["@type"]).toBe("WebPage")
+  })
+
+  it("skips product routes, noindex chart views, and cursor embeds", () => {
+    expect(isContentJsonLdEligiblePath("/templates/sonojs-dashboard-01")).toBe(
+      false
+    )
+    const pendingChart = chartsCatalog.find((c) => c.status === "pending")
+    if (pendingChart) {
+      expect(
+        isContentJsonLdEligiblePath(`/charts/view/${pendingChart.id}`)
+      ).toBe(false)
+    }
+    expect(
+      isContentJsonLdEligiblePath("/cursors/view/smooth-cursor-follower")
+    ).toBe(false)
+  })
+})
+
+describe("breadcrumb coverage", () => {
+  it("skips ineligible routes", () => {
+    expect(isBreadcrumbEligiblePath("/")).toBe(false)
+    expect(isBreadcrumbEligiblePath("/view/login-01")).toBe(false)
+    expect(isBreadcrumbEligiblePath("/admin")).toBe(false)
+    expect(isBreadcrumbEligiblePath("/account")).toBe(false)
+    expect(isBreadcrumbEligiblePath("/sign-in")).toBe(false)
+    expect(
+      isBreadcrumbEligiblePath("/cursors/view/smooth-cursor-follower")
+    ).toBe(false)
+    expect(isBreadcrumbEligiblePath("/docs")).toBe(true)
+    expect(isBreadcrumbEligiblePath("/templates")).toBe(true)
+  })
+
+  it("uses each guide page title as the breadcrumb leaf", () => {
+    expect(resolveBreadcrumbLeafLabel("/docs")).toBe("Introduction")
+    expect(resolveBreadcrumbLeafLabel("/docs/installation")).toBe("Installation")
+    expect(resolveBreadcrumbLeafLabel("/docs/mcp")).toBe("MCP Server")
+    expect(resolveBreadcrumbLeafLabel("/docs/direction")).toBe(
+      "Direction (RTL / LTR)"
+    )
+  })
+
+  it("keeps DOCS_GUIDE_PAGE_TITLES aligned with docsNav.top", () => {
+    for (const page of docsNav.top) {
+      expect(
+        DOCS_GUIDE_PAGE_TITLES[
+          page.href as keyof typeof DOCS_GUIDE_PAGE_TITLES
+        ]
+      ).toBe(page.title)
+    }
+  })
+
+  it("resolves catalog leaf labels", () => {
+    expect(resolveBreadcrumbLeafLabel("/docs/components/button")).toBe("Button")
+    expect(resolveBreadcrumbLeafLabel("/legal/privacy")).toBe("Privacy Policy")
+    expect(resolveBreadcrumbLeafLabel("/templates/sonojs-dashboard-01")).toBe(
+      "Commerce Admin Dashboard"
+    )
+  })
+
+  it("builds template detail trails with canonical URLs", () => {
+    const path = "/templates/sonojs-dashboard-01"
+    const crumbs = breadcrumbItemsFromPath(path, {
+      leafLabel: resolveBreadcrumbLeafLabel(path) ?? undefined,
+    })
+    expect(crumbs.map((c) => c.path)).toEqual(["/", "/templates", path])
+    expect(crumbs.map((c) => c.name)).toEqual([
+      "Home",
+      "Templates",
+      "Commerce Admin Dashboard",
+    ])
+    const jsonLd = breadcrumbListJsonLd(path, {
+      leafLabel: resolveBreadcrumbLeafLabel(path) ?? undefined,
+    })
+    const items = jsonLd?.itemListElement as { item: string }[]
+    expect(items.map((i) => i.item)).toEqual([
+      absoluteUrl("/"),
+      absoluteUrl("/templates"),
+      absoluteUrl(path),
+    ])
+  })
+
+  it("builds chart view trails without linking /charts/view", () => {
+    const path = "/charts/view/simple-bar-chart"
+    const crumbs = breadcrumbItemsFromPath(path, {
+      leafLabel: resolveBreadcrumbLeafLabel(path) ?? undefined,
+    })
+    expect(crumbs.map((c) => c.path)).toEqual(["/", "/charts", path])
+    expect(crumbs.some((c) => c.path === "/charts/view")).toBe(false)
+  })
+
+  it("builds website hub and detail trails", () => {
+    const hub = breadcrumbItemsFromPath("/websites")
+    expect(hub.map((c) => c.name)).toEqual(["Home", "Websites"])
+    const slug = templateProjects.find((p) => p.category === "website")?.slug
+    expect(slug).toBeTruthy()
+    if (!slug) return
+    const path = `/websites/${slug}`
+    const crumbs = breadcrumbItemsFromPath(path, {
+      leafLabel: resolveBreadcrumbLeafLabel(path) ?? undefined,
+    })
+    expect(crumbs[1]?.path).toBe("/websites")
+  })
+})
+
+describe("legacy marketplace slug mapping", () => {
+  const slugs = new Set(templateProjects.map((p) => p.slug))
+
+  it("keeps indexed marketplace examples on real template slugs", () => {
+    expect(slugs.has("sonojs-landing-02")).toBe(true)
+    expect(slugs.has("sonojs-landing-03")).toBe(true)
+    expect(slugs.has("sonojs-hero-05")).toBe(true)
   })
 })

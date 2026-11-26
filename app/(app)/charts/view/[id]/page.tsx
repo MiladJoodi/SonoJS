@@ -15,7 +15,7 @@ import { chartUsageSnippets } from "@/lib/chart-demo-export-name"
 import { getChartAdjacent, getChartEntry } from "@/lib/charts-catalog"
 import { highlightCode } from "@/lib/highlight-code"
 import { readChartDemoSource } from "@/lib/read-chart-demo-source"
-import { chartViewMetadata } from "@/lib/seo"
+import { chartViewMetadata, pageMetadata } from "@/lib/seo"
 
 export async function generateMetadata({
   params,
@@ -25,7 +25,12 @@ export async function generateMetadata({
   const { id } = await params
   const entry = getChartEntry(id)
   if (!entry) {
-    return { title: "Chart" }
+    return pageMetadata({
+      title: "Chart",
+      description: "Chart not found on SonoJS.",
+      path: `/charts/view/${id}`,
+      index: false,
+    })
   }
   return chartViewMetadata(id, entry.title, entry.status === "ported")
 }

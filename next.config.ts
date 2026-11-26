@@ -18,10 +18,9 @@ const revalidateImmediately = [
  * Temporary SEO bridge. Delete this block after ~2026-08 once
  * Search Console shows near-zero hits on /marketplace.
  */
+/** Flat slug routes only exist at `/templates/[slug]` (not nested folder paths). */
 const marketplaceToTemplatesRedirects = [
   ["/marketplace", "/templates"],
-  ["/marketplace/projects/:path*", "/templates/projects/:path*"],
-  ["/marketplace/hero/:path*", "/templates/hero/:path*"],
   ["/marketplace/:slug", "/templates/:slug"],
   ["/api/marketplace/:slug/download", "/api/templates/:slug/download"],
 ] as const;
@@ -86,6 +85,16 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      {
+        source: "/marketplace/projects/:category/:slug",
+        destination: "/templates/:slug",
+        permanent: true,
+      },
+      {
+        source: "/marketplace/hero/:slug",
+        destination: "/templates/:slug",
+        permanent: true,
+      },
       ...marketplaceToTemplatesRedirects.map(([source, destination]) => ({
         source,
         destination,

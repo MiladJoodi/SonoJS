@@ -1,15 +1,15 @@
-import type { Metadata } from "next"
 import Link from "next/link"
 
 import { LegalPage, SupportEmail } from "@/components/legal"
 import { siteConfig } from "@/lib/config"
+import { pageMetadata } from "@/lib/seo"
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Privacy Policy",
   description:
     "How SonoJS collects, uses, and protects personal information for accounts, billing, and downloads.",
-  alternates: { canonical: "/legal/privacy" },
-}
+  path: "/legal/privacy",
+})
 
 export default function PrivacyPage() {
   return (

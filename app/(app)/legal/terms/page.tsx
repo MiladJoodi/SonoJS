@@ -1,15 +1,15 @@
-import type { Metadata } from "next"
 import Link from "next/link"
 
 import { LegalPage, SupportEmail } from "@/components/legal"
 import { siteConfig } from "@/lib/config"
+import { pageMetadata } from "@/lib/seo"
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Terms of Service",
   description:
     "Rules for using SonoJS, including accounts, Pro purchases, and product access.",
-  alternates: { canonical: "/legal/terms" },
-}
+  path: "/legal/terms",
+})
 
 export default function TermsPage() {
   return (

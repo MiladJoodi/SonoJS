@@ -1,12 +1,16 @@
 import { ComponentSource } from "@/components/docs"
+import {
+  DOCS_GUIDE_PAGE_DESCRIPTIONS,
+  DOCS_GUIDE_PAGE_TITLES,
+} from "@/lib/docs-guide-titles"
 import { docsGuideMetadata } from "@/lib/seo"
 
 import { DirectionTryIt } from "./direction-try-it"
 
 export const metadata = docsGuideMetadata(
   "/docs/direction",
-  "Direction (RTL / LTR)",
-  "Use SonoJS in right-to-left or left-to-right layouts. Set dir on the HTML element; components inherit direction automatically."
+  DOCS_GUIDE_PAGE_TITLES["/docs/direction"],
+  DOCS_GUIDE_PAGE_DESCRIPTIONS["/docs/direction"],
 )
 
 export default function DirectionDocsPage() {

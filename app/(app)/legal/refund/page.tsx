@@ -1,13 +1,12 @@
-import type { Metadata } from "next"
-
 import { LegalPage, SupportEmail } from "@/components/legal"
+import { pageMetadata } from "@/lib/seo"
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Refund Policy",
   description:
     "How SonoJS handles refund requests for Pro digital subscriptions.",
-  alternates: { canonical: "/legal/refund" },
-}
+  path: "/legal/refund",
+})
 
 export default function RefundPage() {
   return (

@@ -2,13 +2,17 @@ import Link from "next/link"
 
 import { ComponentSource } from "@/components/docs"
 import { buttonVariants } from "@sonojs/ui/components/button"
+import {
+  DOCS_GUIDE_PAGE_DESCRIPTIONS,
+  DOCS_GUIDE_PAGE_TITLES,
+} from "@/lib/docs-guide-titles"
 import { docsGuideMetadata } from "@/lib/seo"
 import { cn } from "@/lib/utils"
 
 export const metadata = docsGuideMetadata(
   "/docs/guide",
-  "Guide",
-  "A short path from an empty project to your first SonoJS React component."
+  DOCS_GUIDE_PAGE_TITLES["/docs/guide"],
+  DOCS_GUIDE_PAGE_DESCRIPTIONS["/docs/guide"],
 )
 
 export default function GuideDocsPage() {

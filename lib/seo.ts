@@ -55,10 +55,41 @@ export function ogImageAltForPath(path: string, titleFallback?: string): string 
   return titleFallback ? `${titleFallback}, ${siteConfig.name}` : OG_SECTION_ALT.default
 }
 
+export type PageMetadataShareImage = {
+  /** Public path (e.g. `/templates/.../cover-light.webp`) or absolute URL. */
+  path: string
+  width?: number
+  height?: number
+  type?: string
+  alt?: string
+}
+
+function mimeFromSharePath(imagePath: string): string | undefined {
+  const lower = imagePath.toLowerCase()
+  if (lower.endsWith(".webp")) return "image/webp"
+  if (lower.endsWith(".png")) return "image/png"
+  if (lower.endsWith(".jpg") || lower.endsWith(".jpeg")) return "image/jpeg"
+  return undefined
+}
+
 function shareImages(
   path: string,
-  title?: string
+  title?: string,
+  override?: PageMetadataShareImage
 ): NonNullable<Metadata["openGraph"]>["images"] {
+  if (override?.path?.trim()) {
+    const url = override.path.trim()
+    const alt = override.alt ?? ogImageAltForPath(path, title)
+    return [
+      {
+        url,
+        width: override.width,
+        height: override.height,
+        type: override.type ?? mimeFromSharePath(url),
+        alt,
+      },
+    ]
+  }
   return [
     {
       url: OG_IMAGE.url,
@@ -68,6 +99,15 @@ function shareImages(
       alt: ogImageAltForPath(path, title),
     },
   ]
+}
+
+function twitterImages(
+  path: string,
+  title?: string,
+  override?: PageMetadataShareImage
+): string[] {
+  if (override?.path?.trim()) return [override.path.trim()]
+  return [OG_IMAGE.url]
 }
 
 /** Append kind only when the title does not already end with that word. */
@@ -131,6 +171,8 @@ type PageMetadataInput = {
   index?: boolean
   /** Use absolute title (skip `%s · SonoJS` template). */
   absoluteTitle?: boolean
+  /** When set, overrides the default `/og.png` share image. */
+  image?: PageMetadataShareImage
 }
 
 function robotsFor(index: boolean): Metadata["robots"] {
@@ -150,13 +192,14 @@ export function pageMetadata({
   path,
   index = true,
   absoluteTitle = false,
+  image,
 }: PageMetadataInput): Metadata {
   const normalized = normalizePath(path)
   const url = absoluteUrl(normalized)
   const shouldIndex = index && !isNoindexPath(normalized)
   const twitterHandle = twitterHandleFromConfig()
 
-  const images = shareImages(normalized, title)
+  const images = shareImages(normalized, title, image)
 
   return {
     title: absoluteTitle ? { absolute: title } : title,
@@ -177,12 +220,34 @@ export function pageMetadata({
       card: "summary_large_image",
       title,
       description,
-      images: [OG_IMAGE.url],
+      images: twitterImages(normalized, title, image),
       site: twitterHandle,
       creator: twitterHandle,
     },
     robots: robotsFor(shouldIndex),
   }
+}
+
+export function productDetailPageMetadata({
+  title,
+  description,
+  path,
+  coverImagePath,
+}: {
+  title: string
+  description: string
+  path: string
+  coverImagePath?: string | null
+}): Metadata {
+  const imagePath = coverImagePath?.trim()
+  return pageMetadata({
+    title,
+    description,
+    path,
+    image: imagePath
+      ? { path: imagePath, alt: `${title}, ${siteConfig.name}` }
+      : undefined,
+  })
 }
 
 export function noindexMetadata({
