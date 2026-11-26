@@ -193,8 +193,13 @@ export function EyeTracker({
   }, [follow, bounce, eyeScale])
 
   useEffect(() => {
-    eyeGeom.current = eye
-  }, [eye.w, eye.h, eye.r])
+    const base = STYLES[look] ?? STYLES.Slant
+    eyeGeom.current = {
+      w: base.w * eyeScale * eyeWidth,
+      h: base.h * eyeScale * eyeHeight,
+      r: base.r * eyeScale * eyeWidth * eyeRound,
+    }
+  }, [look, eyeScale, eyeWidth, eyeHeight, eyeRound])
 
   useEffect(() => {
     const el = box.current
@@ -358,11 +363,17 @@ export function EyeTracker({
   const s = clamp(size, 16, 180)
   const bodyPath = SHAPES[shape] ?? SHAPES.Ball
   const clip = `eye-tracker-clip-${useId().replace(/:/g, "")}`
-  const [pathD, setPathD] = useState(bodyPath)
 
   const bodyEl = useRef<SVGPathElement>(null)
   const clipEl = useRef<SVGPathElement>(null)
   const shapeFrom = useRef(shape)
+  const [morphedPath, setMorphedPath] = useState(bodyPath)
+
+  const pathD = still
+    ? typeof document === "undefined"
+      ? bodyPath
+      : outline(measure(shape))
+    : morphedPath
 
   useLayoutEffect(() => {
     if (shapeFrom.current === shape) return
@@ -371,7 +382,6 @@ export function EyeTracker({
     shapeFrom.current = shape
     if (still) {
       const d = outline(end)
-      setPathD(d)
       bodyEl.current?.setAttribute("d", d)
       clipEl.current?.setAttribute("d", d)
       return
@@ -379,7 +389,7 @@ export function EyeTracker({
     const t0 = performance.now()
     const ms = 520
     let raf = 0
-  const step = (now: number) => {
+    const step = (now: number) => {
       const u = Math.min(1, (now - t0) / ms)
       const c = 1.3
       const e = 1 + (c + 1) * Math.pow(u - 1, 3) + c * Math.pow(u - 1, 2)
@@ -388,7 +398,7 @@ export function EyeTracker({
       bodyEl.current?.setAttribute("d", d)
       clipEl.current?.setAttribute("d", d)
       if (u < 1) raf = requestAnimationFrame(step)
-      else setPathD(d)
+      else setMorphedPath(d)
     }
     raf = requestAnimationFrame(step)
     return () => cancelAnimationFrame(raf)
@@ -410,17 +420,10 @@ export function EyeTracker({
       >
         <defs>
           <clipPath id={clip}>
-            <path
-              ref={clipEl}
-              d={shown.current ? outline(shown.current) : body}
-            />
+            <path ref={clipEl} d={pathD} />
           </clipPath>
         </defs>
-        <path
-          ref={bodyEl}
-          className="eye-tracker__body"
-          d={shown.current ? outline(shown.current) : body}
-        />
+        <path ref={bodyEl} className="eye-tracker__body" d={pathD} />
         <g clipPath={`url(#${clip})`}>
           {[0, 1].map((i) => (
             <g key={i} ref={(n) => {
