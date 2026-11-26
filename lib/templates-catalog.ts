@@ -9955,6 +9955,67 @@ export const templateProjects: TemplateProject[] = [
     ],
   },
   {
+    slug: "sonojs-landing-31",
+    title: "Hollowmere",
+    tagline:
+      "A night of lanterns, scroll-painted canyon festival landing.",
+    description:
+      "Hollowmere is a scroll-cinema Halloween festival landing by SonoJS (demo brand: Hollowmere · A Night of Lanterns). Zero-build static HTML with inline CSS and vanilla JS, Oswald + Inter from Google Fonts, and layered WebP art plates under assets/img/. Fixed nav with mobile sheet, five painted scenes (hero, Our Story, The Rites, Plan Your Night, finale) joined by seam bands, smooth-scroll parallax with a eased scroller, canvas ghost falls / dust / lava particles, flickering ember and cold glows, ghost sprites from a sprite sheet, cursor-following lantern light on fine pointers, intro title reveals, and scroll-triggered copy panels. Demo event chrome only. No ticketing backend. Run with npx serve . or host statically on Cloudflare Workers.",
+    category: "landing",
+    stack: ["html", "css", "javascript"],
+    priceLabel: "Free",
+    priceCents: 0,
+    rating: 0,
+    reviewCount: 0,
+    salesLabel: "",
+    coverHue: 268,
+    accent: "268",
+    enabled: true,
+    access: "member",
+    badge: "new",
+    coverVariant: "landing",
+    coverImage: "/templates/projects/landing/sonojs-landing-31/main.webp",
+    coverImageDark: null,
+    coverVideo: "/templates/projects/landing/sonojs-landing-31/cover.mp4",
+    detailCoverImage:
+      "/templates/projects/landing/sonojs-landing-31/main.webp",
+    detailCoverImageDark: null,
+    liveUrl: "https://sonojs-landing-31.sonojs3.workers.dev/",
+    downloadUrl: "",
+    version: "1.0.0",
+    updatedAt: "2026-11-26",
+    firstReleasedAt: "2026-11-26",
+    screens: 5,
+    runCommand: "npx serve .",
+    highlights: [
+      {
+        title: "Scroll-painted scenes",
+        body: "Five art plates with seam bands, parallax drift, and eased fixed scroller.",
+      },
+      {
+        title: "Lantern atmosphere",
+        body: "Canvas falls, mist, ember glows, ghost sprites, and a cursor lantern on desktop.",
+      },
+      {
+        title: "Festival story",
+        body: "Our Story, The Rites, visitor hours, and midnight ticket CTAs.",
+      },
+      {
+        title: "Zero-build static",
+        body: "Single index.html plus assets/img WebP plates and sprite-sheet, npx serve .",
+      },
+    ],
+    includes: [
+      "index.html (inline CSS + scroll/canvas JS)",
+      "assets/img/ scene WebPs · seam bands · sprite-sheet.webp",
+      "Google Fonts Oswald + Inter (CDN)",
+    ],
+    requirements: [
+      "Modern browser",
+      "Static file host (npx serve .)",
+    ],
+  },
+  {
     slug: "sonojs-website-01",
     title: "Empire Owl Salon",
     tagline:

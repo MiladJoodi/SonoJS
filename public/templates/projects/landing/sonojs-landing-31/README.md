@@ -1,0 +1,35 @@
+# Hollowmere
+
+Package: Hollowmere (`1.0.0`) — HTML · CSS · JavaScript  
+Category: `landing`  
+Slug / folder: `sonojs-landing-31`  
+Path: `public/templates/projects/landing/sonojs-landing-31/`
+
+Scroll-driven festival landing for a one-night lantern walk. Demo brand: **Hollowmere · A Night of Lanterns**.
+
+## Images / video
+
+| File | Purpose |
+|---|---|
+| `main.webp` | Catalog card still + detail page hero |
+| `cover.mp4` | Catalog card hover / autoplay cover |
+
+## Live / package
+
+- Demo: https://sonojs-landing-31.sonojs3.workers.dev/
+- Local: `npx serve .`
+
+## Run locally
+
+Do not open via `file://` (canvas layers and WebP art need a static host).
+
+```bash
+npx serve .
+```
+
+Then open the URL printed in the terminal (usually `http://localhost:3000`).
+
+## Access
+
+- Live preview: public
+- Download: `member` (signed-in free)
