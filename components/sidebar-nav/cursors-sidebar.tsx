@@ -19,11 +19,13 @@ import {
   SIDEBAR_SHELL_CLASS,
   SIDEBAR_TOP_LINK_CLASS,
   SIDEBAR_ITEM_ACTIVE,
+  SidebarNavBadge,
   SidebarNavBullet,
   SidebarNavLabel,
   sidebarItemStateClass,
 } from "@/components/sidebar-nav/ui"
 import {
+  CURSORS_FEATURED_GROUP,
   cursorsNav,
   getCursorsAdjacent,
   getCursorsCurrentLabel,
@@ -34,6 +36,7 @@ import {
   SidebarContent,
   SidebarGroup,
   SidebarGroupContent,
+  SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuItem,
 } from "@sonojs/ui/components/sidebar"
@@ -43,14 +46,28 @@ function CursorsSidebarBody({ className }: { className?: string }) {
   const [query, setQuery] = React.useState("")
   const normalized = normalizeNavSearch(query)
 
-  const filtered = React.useMemo(() => {
-    if (!normalized) return cursorsNav
-    return cursorsNav.filter(
-      (item) =>
-        matchesNavQuery(item.title, normalized) ||
-        matchesNavQuery(item.id, normalized)
+  const featuredHrefs = React.useMemo(() => {
+    const featured = cursorsNav.groups.find(
+      (group) => group.title === CURSORS_FEATURED_GROUP
     )
+    return new Set(featured?.pages.map((page) => page.href) ?? [])
+  }, [])
+
+  const filteredGroups = React.useMemo(() => {
+    if (!normalized) return cursorsNav.groups
+    return cursorsNav.groups
+      .map((group) => ({
+        ...group,
+        pages: group.pages.filter(
+          (page) =>
+            matchesNavQuery(page.title, normalized) ||
+            matchesNavQuery(page.id, normalized)
+        ),
+      }))
+      .filter((group) => group.pages.length > 0)
   }, [normalized])
+
+  const showTop = !normalized
 
   return (
     <div className={cn("flex h-full min-h-0 flex-col", className)}>
@@ -64,57 +81,87 @@ function CursorsSidebarBody({ className }: { className?: string }) {
         />
       </div>
       <SidebarContent className={SIDEBAR_CONTENT_CLASS}>
-        {filtered.length === 0 ? (
+        {filteredGroups.length === 0 && !showTop ? (
           <p className={SIDEBAR_EMPTY_CLASS}>No matches.</p>
         ) : (
-          <SidebarGroup className="p-0">
-            <SidebarGroupContent>
-              <SidebarMenu className="gap-0.5">
-                {!normalized ? (
-                  <SidebarMenuItem>
-                    <Link
-                      href="/cursors"
-                      prefetch={false}
-                      data-active={pathname === "/cursors" || undefined}
-                      className={cn(
-                        SIDEBAR_TOP_LINK_CLASS,
-                        pathname === "/cursors" && SIDEBAR_ITEM_ACTIVE
-                      )}
-                    >
-                      All cursors
-                    </Link>
-                  </SidebarMenuItem>
-                ) : null}
-
-                {filtered.map((item) => {
+          <>
+            {showTop
+              ? cursorsNav.top.map((item) => {
                   const active = pathname === item.href
                   return (
-                    <SidebarMenuItem key={item.id}>
-                      <Link
-                        href={item.href}
-                        prefetch={false}
-                        data-active={active || undefined}
-                        title={
-                          item.status === "pending" ? "Pending" : undefined
-                        }
-                        className={cn(
-                          SIDEBAR_NESTED_ITEM_CLASS,
-                          "ms-0",
-                          sidebarItemStateClass(active),
-                          item.status === "pending" &&
-                            !active &&
-                            "opacity-70"
-                        )}
-                      >
-                        <SidebarNavBullet featured={item.featured} />
-                        <SidebarNavLabel label={item.title} />
-                      </Link>
-                    </SidebarMenuItem>
+                    <SidebarGroup key={item.href} className="p-0">
+                      <SidebarGroupContent>
+                        <SidebarMenu className="gap-0.5">
+                          <SidebarMenuItem>
+                            <Link
+                              href={item.href}
+                              prefetch={false}
+                              data-active={active || undefined}
+                              className={cn(
+                                SIDEBAR_TOP_LINK_CLASS,
+                                active && SIDEBAR_ITEM_ACTIVE
+                              )}
+                            >
+                              {item.title}
+                            </Link>
+                          </SidebarMenuItem>
+                        </SidebarMenu>
+                      </SidebarGroupContent>
+                    </SidebarGroup>
                   )
-                })}
-              </SidebarMenu>
-            </SidebarGroupContent>
-          </SidebarGroup>
+                })
+              : null}
+
+            {filteredGroups.map((group, groupIndex) => (
+              <SidebarGroup
+                key={group.title || `group-${groupIndex}`}
+                className="p-0"
+              >
+                {group.title && group.title !== CURSORS_FEATURED_GROUP ? (
+                  <SidebarGroupLabel className="px-2 text-xs font-medium text-muted-foreground">
+                    {group.title}
+                  </SidebarGroupLabel>
+                ) : null}
+                <SidebarGroupContent>
+                  <SidebarMenu className="gap-0.5">
+                    {group.pages.map((page) => {
+                      const pathActive = pathname === page.href
+                      const active =
+                        pathActive &&
+                        (group.title === CURSORS_FEATURED_GROUP ||
+                          !featuredHrefs.has(page.href))
+                      return (
+                        <SidebarMenuItem key={`${group.title}-${page.href}`}>
+                          <Link
+                            href={page.href}
+                            prefetch={false}
+                            data-active={active || undefined}
+                            title={
+                              page.status === "pending" ? "Pending" : undefined
+                            }
+                            className={cn(
+                              SIDEBAR_NESTED_ITEM_CLASS,
+                              "ms-0",
+                              sidebarItemStateClass(active),
+                              page.status === "pending" &&
+                                !active &&
+                                "opacity-70"
+                            )}
+                          >
+                            <SidebarNavBullet featured={page.featured} />
+                            <SidebarNavLabel label={page.title} />
+                            {page.badge === "new" ? (
+                              <SidebarNavBadge>New</SidebarNavBadge>
+                            ) : null}
+                          </Link>
+                        </SidebarMenuItem>
+                      )
+                    })}
+                  </SidebarMenu>
+                </SidebarGroupContent>
+              </SidebarGroup>
+            ))}
+          </>
         )}
       </SidebarContent>
     </div>

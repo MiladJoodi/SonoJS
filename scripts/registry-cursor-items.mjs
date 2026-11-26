@@ -453,6 +453,25 @@ export const cursorRegistryItems = [
     ],
   },
   {
+    name: "eye-tracker",
+    type: "registry:cursor",
+    title: "Eye Tracker",
+    description:
+      "Mascot face with sphere-projected eyes that follow the pointer.",
+    files: [
+      {
+        path: "registry/cursors/eye-tracker/eye-tracker.tsx",
+        type: "registry:component",
+        target: "components/cursors/eye-tracker/eye-tracker.tsx",
+      },
+      {
+        path: "registry/cursors/eye-tracker/eye-tracker.css",
+        type: "registry:file",
+        target: "components/cursors/eye-tracker/eye-tracker.css",
+      },
+    ],
+  },
+  {
     name: "glow-cursor",
     type: "registry:cursor",
     title: "Glow Cursor",

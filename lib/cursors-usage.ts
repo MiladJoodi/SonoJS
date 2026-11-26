@@ -6,6 +6,9 @@ export function cursorImportPath(id: string): string {
   if (id === "glow-cursor") {
     return "@/components/cursors/glow-cursor/glow-cursor"
   }
+  if (id === "eye-tracker") {
+    return "@/components/cursors/eye-tracker/eye-tracker"
+  }
   return `@/components/cursors/${id}`
 }
 
@@ -41,6 +44,7 @@ export function cursorExportName(id: string): string {
     "morph-cursor": "MorphCursor",
     "ink-cursor": "InkCursor",
     "glass-cursor": "GlassCursor",
+    "eye-tracker": "EyeTracker",
   }
   return map[id] ?? "Cursor"
 }
@@ -265,6 +269,28 @@ export default function Page() {
         contained
       />
       {/* Your page content */}
+    </div>
+  )
+}
+`,
+    }
+  }
+
+  if (id === "eye-tracker") {
+    return {
+      blurb:
+        "Mark a stage with data-cursor-stage (or pass within), then drop EyeTracker inside. Eyes track the pointer only while it is over that stage.",
+      code: `"use client"
+
+import { EyeTracker } from "${path}"
+
+export default function Page() {
+  return (
+    <div
+      data-cursor-stage
+      className="relative flex min-h-[28rem] items-center justify-center rounded-[12px] border border-border/70 bg-card"
+    >
+      <EyeTracker follow={60} bounce={30} size={100} shape="Cube" eyes="Slant" />
     </div>
   )
 }

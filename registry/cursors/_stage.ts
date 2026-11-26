@@ -7,3 +7,7 @@ export const CURSOR_STAGE_LIGHT = `${CURSOR_STAGE_BASE} bg-white dark:bg-zinc-95
 
 /** Effects that need a black stage (neon / spotlight / click). */
 export const CURSOR_STAGE_DARK = `${CURSOR_STAGE_BASE} bg-black`
+
+/** Short mascot / chip demos — same idea as `BlockExample` `previewSize="compact"`. */
+export const CURSOR_STAGE_COMPACT =
+  "relative h-[min(40vh,20rem)] min-h-[14rem] w-full overflow-hidden bg-canvas"

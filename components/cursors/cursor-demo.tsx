@@ -4,10 +4,12 @@ import * as React from "react"
 
 import { LoadingRing } from "@/components/sono-loader"
 import { cn } from "@/lib/utils"
+import { getCursorEntry } from "@/lib/cursors-catalog"
 import { getCursorDemoLoader } from "@/registry/cursors/demo-loaders"
 
 const STAGE_CLASS = "relative w-full min-w-0"
-const STAGE_LOADING_MIN = "min-h-[28rem] sm:min-h-[32rem]"
+const STAGE_LOADING_MIN_DEFAULT = "min-h-[28rem] sm:min-h-[32rem]"
+const STAGE_LOADING_MIN_COMPACT = "min-h-[14rem]"
 
 type CursorModule = Record<string, unknown>
 
@@ -28,7 +30,9 @@ export function CursorDemo({ id }: { id: string }) {
     )
   }
 
-  return <CursorDemoLoader key={id} load={load} />
+  const compact = getCursorEntry(id)?.previewSize === "compact"
+
+  return <CursorDemoLoader key={id} load={load} compact={compact} />
 }
 
 function CursorDemoSplash({ active }: { active: boolean }) {
@@ -60,7 +64,13 @@ function CursorDemoSplash({ active }: { active: boolean }) {
   )
 }
 
-function CursorDemoLoader({ load }: { load: () => Promise<CursorModule> }) {
+function CursorDemoLoader({
+  load,
+  compact = false,
+}: {
+  load: () => Promise<CursorModule>
+  compact?: boolean
+}) {
   const [Demo, setDemo] = React.useState<React.ComponentType | null>(null)
   const [error, setError] = React.useState<string | null>(null)
   const [revealed, setRevealed] = React.useState(false)
@@ -94,10 +104,10 @@ function CursorDemoLoader({ load }: { load: () => Promise<CursorModule> }) {
     }
   }, [load])
 
+  const loadingMin = compact ? STAGE_LOADING_MIN_COMPACT : STAGE_LOADING_MIN_DEFAULT
+
   return (
-    <div
-      className={cn(STAGE_CLASS, !Demo && !error && STAGE_LOADING_MIN)}
-    >
+    <div className={cn(STAGE_CLASS, !Demo && !error && loadingMin)}>
       <CursorDemoSplash active={!revealed && !error} />
       {error ? (
         <p className="p-6 text-sm text-destructive">{error}</p>

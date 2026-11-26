@@ -1,33 +1,85 @@
 import {
+  compareCursorsCatalogOrder,
   cursorHref,
+  CURSORS_SPOTLIGHT_IDS,
   cursorsCatalog,
-  getCursorAdjacent,
   isCursorFeatured,
 } from "@/lib/cursors-catalog"
 
-export type CursorsNavItem = {
+export type CursorsNavPage = {
   id: string
   title: string
   href: string
   featured?: boolean
   status: "pending" | "ported"
+  badge?: "new"
 }
 
-/** Flat sidebar list - ported first, then pending. */
-export const cursorsNav: CursorsNavItem[] = [...cursorsCatalog]
-  .sort((a, b) => {
-    if (a.status !== b.status) {
-      return a.status === "ported" ? -1 : 1
-    }
-    return a.title.localeCompare(b.title)
-  })
-  .map((entry) => ({
+export type CursorsNavGroup = {
+  title: string
+  pages: CursorsNavPage[]
+}
+
+/** Spotlight group — first in the sidebar (no heading). */
+export const CURSORS_FEATURED_GROUP = "Featured"
+
+function mapNavPage(
+  entry: (typeof cursorsCatalog)[number]
+): CursorsNavPage {
+  return {
     id: entry.id,
     title: entry.title,
     href: cursorHref(entry.id),
     featured: isCursorFeatured(entry.id),
     status: entry.status,
-  }))
+  }
+}
+
+const allCursorPages: CursorsNavPage[] = [...cursorsCatalog]
+  .sort(compareCursorsCatalogOrder)
+  .map(mapNavPage)
+
+const pageById = new Map(allCursorPages.map((page) => [page.id, page]))
+
+const featuredCursorPages: CursorsNavPage[] = CURSORS_SPOTLIGHT_IDS.map(
+  (id) => {
+    const page = pageById.get(id)
+    if (!page) {
+      throw new Error(`Missing cursor spotlight page: ${id}`)
+    }
+    return { ...page, badge: "new" as const }
+  }
+)
+
+const spotlightIdSet = new Set<string>(CURSORS_SPOTLIGHT_IDS)
+
+/** Gallery / prev-next: spotlight pin first, then remaining catalog order. */
+function getCursorsPagesOrdered(): CursorsNavPage[] {
+  const rest = allCursorPages.filter((page) => !spotlightIdSet.has(page.id))
+  return [...featuredCursorPages, ...rest]
+}
+
+/** Sidebar + index for `/cursors` — Featured spotlight first, then flat list. */
+export const cursorsNav: {
+  top: { title: string; href: string }[]
+  groups: CursorsNavGroup[]
+} = {
+  top: [{ title: "All cursors", href: "/cursors" }],
+  groups: [
+    {
+      title: CURSORS_FEATURED_GROUP,
+      pages: featuredCursorPages,
+    },
+    {
+      title: "",
+      pages: allCursorPages,
+    },
+  ],
+}
+
+export function getCursorsPages(): CursorsNavPage[] {
+  return getCursorsPagesOrdered()
+}
 
 export function getCursorsCurrentLabel(pathname: string): string | null {
   if (pathname === "/cursors") return "Cursors"
@@ -52,12 +104,19 @@ export function getCursorsAdjacent(pathname: string): {
   const id = pathname.startsWith("/cursors/view/")
     ? pathname.slice("/cursors/view/".length)
     : pathname.slice("/cursors/".length)
-  const { previous, next } = getCursorAdjacent(id)
+
+  const pages = getCursorsPages().filter((p) => p.status === "ported")
+  const index = pages.findIndex((p) => p.id === id)
+  if (index < 0) return { previous: null, next: null }
+
+  const previous = index > 0 ? pages[index - 1]! : null
+  const next = index < pages.length - 1 ? pages[index + 1]! : null
+
   return {
     previous: previous
-      ? { href: cursorHref(previous.id), title: previous.title }
+      ? { href: previous.href, title: previous.title }
       : null,
-    next: next ? { href: cursorHref(next.id), title: next.title } : null,
+    next: next ? { href: next.href, title: next.title } : null,
   }
 }
 

@@ -34,6 +34,7 @@ const LOADERS: Record<string, DemoLoader> = {
   "morph-cursor": () => import("./morph-cursor/demo"),
   "ink-cursor": () => import("./ink-cursor/demo"),
   "glass-cursor": () => import("./glass-cursor/demo"),
+  "eye-tracker": () => import("./eye-tracker/demo"),
 }
 
 /** In-flight / resolved dynamic imports, revisiting a card is instant. */

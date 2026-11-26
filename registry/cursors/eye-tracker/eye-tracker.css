@@ -1,0 +1,99 @@
+.eye-tracker {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  display: grid;
+  place-items: center;
+}
+
+.eye-tracker__ball {
+  width: var(--eye-tracker-size, 100px);
+  height: var(--eye-tracker-size, 100px);
+  overflow: visible;
+}
+
+/* Light: lifted white slab + dark eyes (readable on white stages). */
+.eye-tracker__body {
+  fill: #ffffff;
+  stroke: #d4d4d8;
+  stroke-width: 0.85;
+}
+
+.eye-tracker__eye {
+  fill: #0b0b0d;
+}
+
+.dark .eye-tracker__body {
+  fill: #2b2c30;
+  stroke: #3f3f46;
+  stroke-width: 0.75;
+}
+
+.dark .eye-tracker__eye {
+  fill: #fbfbfa;
+}
+
+.eye-tracker__ball[data-poke] {
+  cursor: pointer;
+  transform-origin: center;
+  transition: scale 420ms cubic-bezier(0.24, 1.34, 0.38, 1);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.eye-tracker__ball[data-poke]:active {
+  scale: 0.96;
+  transition-duration: 160ms;
+  transition-timing-function: ease;
+}
+
+.eye-tracker__say {
+  position: absolute;
+  inset-inline-start: calc(50% + var(--eye-tracker-size, 100px) * 0.36);
+  top: calc(50% + var(--eye-tracker-size, 100px) * 0.3);
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  min-height: 34px;
+  padding: 0 16px;
+  border-radius: 6px 14px 14px 14px;
+  background: var(--say-tint, var(--primary));
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.06),
+    inset 0 -1.5px 0 rgba(0, 0, 0, 0.1);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 400;
+  white-space: nowrap;
+  transform-origin: top left;
+  opacity: 0;
+  scale: 0.85;
+  pointer-events: none;
+  transition:
+    opacity 160ms ease,
+    scale 220ms cubic-bezier(0.24, 1.34, 0.38, 1),
+    background-color 220ms ease;
+}
+
+[dir="rtl"] .eye-tracker__say {
+  transform-origin: top right;
+  border-radius: 14px 6px 14px 14px;
+}
+
+.eye-tracker__say[data-on] {
+  opacity: 1;
+  scale: 1;
+}
+
+.eye-tracker__caret {
+  width: 1.5px;
+  height: 13px;
+  border-radius: 1px;
+  background: rgba(255, 255, 255, 0.92);
+  animation: eye-tracker-caret 1s steps(1) infinite;
+}
+
+@keyframes eye-tracker-caret {
+  50% {
+    opacity: 0;
+  }
+}

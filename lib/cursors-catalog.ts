@@ -15,6 +15,8 @@ export type CursorsCatalogEntry = {
   description: string
   status: CursorPortStatus
   featured?: boolean
+  /** Docs preview frame height (`CursorDemo`). */
+  previewSize?: "default" | "compact"
 }
 
 export const CURSOR_CATEGORIES = [
@@ -44,13 +46,54 @@ export const CURSOR_CATEGORY_META: Record<
   },
 }
 
-/** Sparse featured set for green sidebar bullets. */
+/** Green sidebar bullets — showcase cursors (keep reasonably sparse). */
 export const CURSOR_FEATURED_IDS = new Set([
+  "glow-cursor",
+  "splash-cursor",
+  "spotlight-cursor",
+  "gradient-cursor",
+  "eye-tracker",
   "smooth-cursor-follower",
   "magnetic-cursor",
   "neon-cursor",
-  "spotlight-cursor",
+  "glass-cursor",
+  "ink-cursor",
+  "agent-cursor",
 ])
+
+/**
+ * Spotlight pin — sidebar Featured block + gallery order (then A→Z).
+ * Keep each id in the flat catalog list too.
+ */
+export const CURSORS_SPOTLIGHT_IDS = [
+  "glow-cursor",
+  "splash-cursor",
+  "spotlight-cursor",
+  "gradient-cursor",
+  "eye-tracker",
+] as const
+
+export function isCursorSpotlight(id: string) {
+  return (CURSORS_SPOTLIGHT_IDS as readonly string[]).includes(id)
+}
+
+function cursorSpotlightRank(id: string): number {
+  const index = (CURSORS_SPOTLIGHT_IDS as readonly string[]).indexOf(id)
+  return index === -1 ? Number.MAX_SAFE_INTEGER : index
+}
+
+export function compareCursorsCatalogOrder(
+  a: CursorsCatalogEntry,
+  b: CursorsCatalogEntry
+): number {
+  if (a.status !== b.status) {
+    return a.status === "ported" ? -1 : 1
+  }
+  const ar = cursorSpotlightRank(a.id)
+  const br = cursorSpotlightRank(b.id)
+  if (ar !== br) return ar - br
+  return a.title.localeCompare(b.title)
+}
 
 export const cursorsCatalog: CursorsCatalogEntry[] = [
   // Ported - pointer
@@ -243,6 +286,15 @@ export const cursorsCatalog: CursorsCatalogEntry[] = [
   },
   // Ported - 2026 trends
   {
+    id: "eye-tracker",
+    category: "interaction",
+    title: "Eye Tracker",
+    description:
+      "Rounded mascot whose eyes follow the pointer inside the stage.",
+    status: "ported",
+    previewSize: "compact",
+  },
+  {
     id: "agent-cursor",
     category: "interaction",
     title: "Agent Cursor",
@@ -313,7 +365,9 @@ export function getCursorAdjacent(id: string): {
   previous: CursorsCatalogEntry | null
   next: CursorsCatalogEntry | null
 } {
-  const ported = cursorsCatalog.filter((e) => e.status === "ported")
+  const ported = [...cursorsCatalog]
+    .filter((e) => e.status === "ported")
+    .sort(compareCursorsCatalogOrder)
   const index = ported.findIndex((e) => e.id === id)
   if (index < 0) return { previous: null, next: null }
   return {
