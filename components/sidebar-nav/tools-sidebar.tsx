@@ -3,8 +3,6 @@
 import * as React from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { PanelLeftCloseIcon, PanelLeftOpenIcon } from "lucide-react"
-
 import { ListIndexNav } from "@/components/sidebar-nav/list-index-nav"
 import {
   matchesNavQuery,
@@ -18,6 +16,7 @@ import {
   SIDEBAR_SEARCH_WRAP_CLASS,
   SIDEBAR_SHELL_CLASS,
   SIDEBAR_TOP_LINK_CLASS,
+  SidebarNavBadge,
   SidebarNavBullet,
   SidebarNavLabel,
   sidebarItemStateClass,
@@ -28,7 +27,6 @@ import {
   toolsNav,
 } from "@/lib/tools-nav"
 import { cn } from "@/lib/utils"
-import { Button } from "@sonojs/ui/components/button"
 import {
   Sidebar,
   SidebarContent,
@@ -38,45 +36,7 @@ import {
   SidebarMenuItem,
 } from "@sonojs/ui/components/sidebar"
 
-export function ToolsSidebarToggle({
-  open,
-  onToggle,
-  className,
-}: {
-  open: boolean
-  onToggle: () => void
-  className?: string
-}) {
-  return (
-    <Button
-      type="button"
-      variant="ghost"
-      size="icon"
-      className={cn(
-        "size-8 shrink-0 text-muted-foreground hover:text-foreground",
-        className
-      )}
-      aria-expanded={open}
-      aria-controls="tools-sidebar"
-      aria-label={open ? "Hide tools sidebar" : "Show tools sidebar"}
-      onClick={onToggle}
-    >
-      {open ? (
-        <PanelLeftCloseIcon className="size-4 icon-dir" />
-      ) : (
-        <PanelLeftOpenIcon className="size-4 icon-dir" />
-      )}
-    </Button>
-  )
-}
-
-function ToolsSidebarBody({
-  className,
-  trailing,
-}: {
-  className?: string
-  trailing?: React.ReactNode
-}) {
+function ToolsSidebarBody({ className }: { className?: string }) {
   const pathname = usePathname()
   const [query, setQuery] = React.useState("")
   const normalized = normalizeNavSearch(query)
@@ -91,21 +51,13 @@ function ToolsSidebarBody({
 
   return (
     <div className={cn("flex h-full w-full flex-col", className)}>
-      <div
-        className={cn(
-          SIDEBAR_SEARCH_WRAP_CLASS,
-          trailing && "flex items-center gap-1"
-        )}
-      >
-        <div className="min-w-0 flex-1">
-          <SidebarNavSearch
-            value={query}
-            onValueChange={setQuery}
-            onClear={() => setQuery("")}
-            inputClassName={SIDEBAR_SEARCH_INPUT_CLASS}
-          />
-        </div>
-        {trailing}
+      <div className={SIDEBAR_SEARCH_WRAP_CLASS}>
+        <SidebarNavSearch
+          value={query}
+          onValueChange={setQuery}
+          onClear={() => setQuery("")}
+          inputClassName={SIDEBAR_SEARCH_INPUT_CLASS}
+        />
       </div>
       <SidebarContent className={SIDEBAR_CONTENT_CLASS}>
         {filtered.length === 0 && !showIndex ? (
@@ -146,7 +98,12 @@ function ToolsSidebarBody({
                           className={className}
                         >
                           <SidebarNavBullet featured={item.featured} />
-                          <SidebarNavLabel label={item.title} />
+                          <span className="flex min-w-0 flex-1 items-center gap-2">
+                            <SidebarNavLabel label={item.title} />
+                            {item.badge === "new" ? (
+                              <SidebarNavBadge>New</SidebarNavBadge>
+                            ) : null}
+                          </span>
                         </a>
                       ) : (
                         <Link
@@ -156,7 +113,12 @@ function ToolsSidebarBody({
                           className={className}
                         >
                           <SidebarNavBullet featured={item.featured} />
-                          <SidebarNavLabel label={item.title} />
+                          <span className="flex min-w-0 flex-1 items-center gap-2">
+                            <SidebarNavLabel label={item.title} />
+                            {item.badge === "new" ? (
+                              <SidebarNavBadge>New</SidebarNavBadge>
+                            ) : null}
+                          </span>
                         </Link>
                       )}
                     </SidebarMenuItem>
@@ -171,22 +133,14 @@ function ToolsSidebarBody({
   )
 }
 
-export function ToolsSidebar({
-  onToggle,
-  className,
-}: {
-  onToggle: () => void
-  className?: string
-}) {
+export function ToolsSidebar({ className }: { className?: string }) {
   return (
     <Sidebar
       id="tools-sidebar"
       collapsible="none"
-      className={cn(className ?? SIDEBAR_SHELL_CLASS)}
+      className={cn(SIDEBAR_SHELL_CLASS, className)}
     >
-      <ToolsSidebarBody
-        trailing={<ToolsSidebarToggle open onToggle={onToggle} />}
-      />
+      <ToolsSidebarBody />
     </Sidebar>
   )
 }

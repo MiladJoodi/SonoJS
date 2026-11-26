@@ -13,7 +13,7 @@ export {
 export { AiListIndex, AiSidebar } from "./ai-sidebar"
 export { PopupsListIndex, PopupsSidebar } from "./popups-sidebar"
 export { BlocksListIndex, BlocksSidebar } from "./blocks-sidebar"
-export { ToolsListIndex, ToolsSidebar, ToolsSidebarToggle } from "./tools-sidebar"
+export { ToolsListIndex, ToolsSidebar } from "./tools-sidebar"
 export { LegalListIndex, LegalSidebar } from "./legal-sidebar"
 export { ListIndexNav } from "./list-index-nav"
 export {

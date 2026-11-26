@@ -1,0 +1,103 @@
+/* Guide code blocks — capped height like docs ComponentSource */
+.captcha-tool-guide .sono-code-shiki {
+  max-height: 9rem;
+  overflow-y: auto;
+  overflow-x: auto;
+}
+
+/* CaptchaKit scoped to SonoJS /tools — tokens from app/globals.css */
+.captcha-tool-widget .captchakit,
+.captcha-tool-widget .captchakit[data-theme="dark"],
+.captcha-tool-widget .captchakit[data-theme="light"] {
+  --captchakit-primary: var(--primary);
+  --captchakit-background: var(--card);
+  --captchakit-text: var(--foreground);
+  --captchakit-muted: var(--muted-foreground);
+  --captchakit-border: color-mix(in oklab, var(--border) 70%, transparent);
+  --captchakit-error: var(--destructive);
+  --captchakit-radius: var(--radius-control);
+  --captchakit-focus: var(--ring);
+
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: var(--foreground);
+  background: transparent;
+  border: none;
+  border-radius: 0;
+}
+
+.captcha-tool-widget .captchakit-challenge {
+  min-height: 3rem;
+  padding: 0.5rem 2.25rem 0.5rem 0.75rem;
+  background: color-mix(in oklab, var(--muted) 45%, var(--card));
+  border: 1px solid color-mix(in oklab, var(--border) 70%, transparent);
+  border-radius: var(--radius-control);
+}
+
+.captcha-tool-widget .captchakit-display {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.captcha-tool-widget .captchakit-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--muted-foreground);
+}
+
+.captcha-tool-widget .captchakit-input {
+  height: 2.875rem;
+  padding-inline: 0.75rem;
+  font-size: 0.875rem;
+  background: var(--card);
+  border: 1px solid color-mix(in oklab, var(--border) 70%, transparent);
+  border-radius: var(--radius-control);
+  box-shadow: var(--shadow-xs, 0 1px 2px rgb(0 0 0 / 0.05));
+}
+
+.captcha-tool-widget .captchakit-input:focus {
+  outline: none;
+  border-color: var(--ring);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 30%, transparent);
+}
+
+.captcha-tool-widget .captchakit-button {
+  height: 2.875rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--primary-foreground);
+  background: var(--primary);
+  border: none;
+  border-radius: var(--radius-control);
+  cursor: pointer;
+}
+
+.captcha-tool-widget .captchakit-button:hover:not(:disabled) {
+  background: color-mix(in oklab, var(--primary) 90%, transparent);
+}
+
+.captcha-tool-widget .captchakit-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.captcha-tool-widget .captchakit-refresh {
+  cursor: pointer;
+  color: var(--muted-foreground);
+}
+
+.captcha-tool-widget .captchakit-refresh:hover:not(:disabled) {
+  color: var(--foreground);
+}
+
+.captcha-tool-widget .captchakit-error {
+  font-size: 0.875rem;
+  color: var(--destructive);
+}

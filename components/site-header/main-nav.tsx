@@ -6,24 +6,33 @@ import { usePathname } from "next/navigation"
 import {
   BoxIcon,
   ChevronDownIcon,
+  FlagIcon,
   GalleryHorizontalEndIcon,
+  GlobeIcon,
   LayoutGridIcon,
   LayoutTemplateIcon,
   MousePointer2Icon,
+  PenLineIcon,
   PictureInPicture2Icon,
   PlugIcon,
+  SendIcon,
+  ServerIcon,
+  ShieldCheckIcon,
   SparklesIcon,
   StoreIcon,
   WallpaperIcon,
+  WrenchIcon,
   type LucideIcon,
 } from "lucide-react"
 
 import {
   flattenSiteNavEntries,
   isSiteNavDropdown,
+  siteConfig,
   type SiteNavEntry,
   type SiteNavItem,
 } from "@/lib/config"
+import { withToolsHeaderNav } from "@/lib/tools-nav"
 import { cn } from "@/lib/utils"
 
 const linkClass =
@@ -43,6 +52,13 @@ const NAV_ICONS: Record<string, LucideIcon> = {
   "/popups": PictureInPicture2Icon,
   "/carousels": GalleryHorizontalEndIcon,
   "/docs/mcp": PlugIcon,
+  "/tools": WrenchIcon,
+  "/tools/endpoints": SendIcon,
+  "/tools/markdown-editor": PenLineIcon,
+  "/tools/flags": FlagIcon,
+  "/tools/geo": GlobeIcon,
+  "/tools/captcha": ShieldCheckIcon,
+  [siteConfig.links.mockApi]: ServerIcon,
 }
 
 function pathIsActive(pathname: string, href: string) {
@@ -156,8 +172,12 @@ function NavDropdown({
   pathname: string
 }) {
   const childHrefs = entry.sections.flatMap((s) => s.items.map((i) => i.href))
-  const active = childHrefs.some((href) => pathIsActive(pathname, href))
   const isProducts = entry.label === "Products"
+  const isTools = entry.label === "Tools"
+  const active =
+    isTools
+      ? pathname === "/tools" || pathname.startsWith("/tools/")
+      : childHrefs.some((href) => pathIsActive(pathname, href))
   const itemCount = childHrefs.length
   const panelId = React.useId()
   const rootRef = React.useRef<HTMLDivElement>(null)
@@ -237,7 +257,7 @@ function NavDropdown({
                 <div
                   className={cn(
                     "grid gap-1",
-                    !isProducts && itemCount > 2
+                    !isProducts && (isTools || itemCount > 2)
                       ? "sm:grid-cols-2"
                       : "grid-cols-1"
                   )}
@@ -269,14 +289,15 @@ export function MainNav({
   items: SiteNavEntry[]
 }) {
   const pathname = usePathname()
-  const flat = flattenSiteNavEntries(items)
+  const navItems = React.useMemo(() => withToolsHeaderNav(items), [items])
+  const flat = flattenSiteNavEntries(navItems)
   const activeHref = flat
     .filter((item) => !item.external && pathIsActive(pathname, item.href))
     .sort((a, b) => b.href.length - a.href.length)[0]?.href
 
   return (
     <nav className={cn("items-center gap-0", className)} {...props}>
-      {items.map((entry) => {
+      {navItems.map((entry) => {
         if (isSiteNavDropdown(entry)) {
           return (
             <NavDropdown

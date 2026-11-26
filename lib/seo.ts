@@ -88,6 +88,7 @@ export const NOINDEX_EXACT_PATHS = [
   "/tools/markdown-editor",
   "/tools/flags",
   "/tools/geo",
+  "/tools/captcha",
 ] as const
 
 export function isProductionIndexingEnabled(): boolean {

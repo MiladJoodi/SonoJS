@@ -111,7 +111,6 @@ Ask before changing MCP config outside this project.`,
       label: "Components",
       sections: [
         {
-          title: "Library",
           items: [
             {
               href: "/docs/components",
@@ -175,11 +174,6 @@ Ask before changing MCP config outside this project.`,
     },
     { href: "/docs/mcp", label: "MCP" },
     { href: "/pricing", label: "Pricing" },
-    {
-      href: MOCK_API_URL,
-      label: "Mock API",
-      external: true,
-    },
   ] satisfies SiteNavEntry[],
   /** Secondary explore links shown in the site footer. */
   footerNavItems: [

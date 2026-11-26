@@ -1,10 +1,15 @@
-import { siteConfig } from "@/lib/config"
+import {
+  siteConfig,
+  type SiteNavEntry,
+  type SiteNavSection,
+} from "@/lib/config"
 
 export type ToolsNavItem = {
   title: string
   href: string
   description: string
   featured?: boolean
+  badge?: "new"
   /** Opens outside the docs app (new tab). */
   external?: boolean
 }
@@ -54,11 +59,66 @@ export const toolsNav: ToolsNavItem[] = [
     href: toolHref("geo"),
     description: "Try country, state, and city selection with @sonojs/geo.",
     featured: true,
+    badge: "new",
+  },
+  {
+    title: "Captcha",
+    href: toolHref("captcha"),
+    description:
+      "Live CaptchaKit playground — self-hosted CAPTCHA for React and Next.js.",
+    featured: true,
+    badge: "new",
   },
 ]
 
 export function getAllToolItems(): ToolsNavItem[] {
   return toolsNav
+}
+
+export function toolsDisplayDescription(item: ToolsNavItem): string {
+  return TOOLS_SHORT_BLURB[item.href] ?? item.description
+}
+
+/** Short lines for the header dropdown (sidebar/catalog keep full `description`). */
+/** Short catalog + header lines (full `description` stays for docs/search if needed). */
+export const TOOLS_SHORT_BLURB: Record<string, string> = {
+  [toolHref("endpoints")]: "Send requests and inspect responses.",
+  [siteConfig.links.mockApi]: "Fake HTTP endpoints for prototyping.",
+  [toolHref("markdown-editor")]: "Write, preview, and export Markdown.",
+  [toolHref("flags")]: "Browse flags and copy CDN URLs.",
+  [toolHref("geo")]: "Country / state / city picker demo.",
+  [toolHref("captcha")]: "Live self-hosted CAPTCHA demo.",
+}
+
+/** Header mega-menu entry (merged into `siteConfig.navItems` in MainNav). */
+export function buildToolsHeaderNavEntry(): Extract<
+  SiteNavEntry,
+  { sections: SiteNavSection[] }
+> {
+  return {
+    label: "Tools",
+    sections: [
+      {
+        items: toolsNav.map((item) => ({
+          href: item.href,
+          label: item.title,
+          description: TOOLS_SHORT_BLURB[item.href] ?? item.description,
+          ...(item.external ? { external: true as const } : {}),
+        })),
+      },
+    ],
+  }
+}
+
+/** Insert Tools dropdown immediately before MCP. */
+export function withToolsHeaderNav(entries: SiteNavEntry[]): SiteNavEntry[] {
+  const mcpIndex = entries.findIndex(
+    (entry) => !("sections" in entry) && entry.href === "/docs/mcp"
+  )
+  const insertAt = mcpIndex >= 0 ? mcpIndex : entries.length
+  const next = [...entries]
+  next.splice(insertAt, 0, buildToolsHeaderNavEntry())
+  return next
 }
 
 /** In-app tools only (for prev/next and route matching). */
