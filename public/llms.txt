@@ -19,7 +19,6 @@ SonoJS (https://sonojs.com) is the public docs and catalog for a copy-source Rea
 
 ## Setup
 
-- About: https://sonojs.com/about
 - Installation: https://sonojs.com/docs/installation
 - CLI: https://sonojs.com/docs/cli
 - MCP server: https://sonojs.com/docs/mcp

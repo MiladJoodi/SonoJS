@@ -98,7 +98,6 @@ export function resolveBreadcrumbLeafLabel(pathname: string): string | undefined
     if (project?.title) return project.title
   }
 
-  if (normalized === "/about") return "About"
   if (normalized === "/contact") return "Contact"
   if (normalized === "/pricing") return "Pricing"
 

@@ -126,7 +126,6 @@ export function buildSitemapPaths(): string[] {
   const paths = new Set<string>()
 
   pushUnique(paths, "/")
-  pushUnique(paths, "/about")
   pushUnique(paths, "/contact")
   pushUnique(paths, "/backgrounds")
   pushUnique(paths, "/legal")

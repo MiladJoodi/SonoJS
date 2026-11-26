@@ -342,7 +342,7 @@ describe("sitemap builder", () => {
     expect(paths.has("/templates/sonojs-dashboard-01")).toBe(true)
     expect(paths.has("/templates/sonojs-website-01")).toBe(false)
     expect(paths.has("/websites/sonojs-website-01")).toBe(true)
-    expect(paths.has("/about")).toBe(true)
+    expect(paths.has("/about")).toBe(false)
     expect(paths.has("/contact")).toBe(true)
     expect(paths.has("/backgrounds")).toBe(true)
     expect(paths.has("/legal")).toBe(true)

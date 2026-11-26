@@ -178,7 +178,6 @@ Ask before changing MCP config outside this project.`,
   ] satisfies SiteNavEntry[],
   /** Secondary explore links shown in the site footer. */
   footerNavItems: [
-    { href: "/about", label: "About" },
     { href: "/tools", label: "Tools" },
     { href: "/pricing", label: "Pricing" },
     {

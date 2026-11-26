@@ -32,3 +32,10 @@
   max-width: none;
   margin-inline: 0;
 }
+
+/* Legal prose — stable reading column on first paint (globals, not route-extended). */
+.reading-column {
+  width: 100%;
+  max-width: 42rem;
+  margin-inline: auto;
+}
