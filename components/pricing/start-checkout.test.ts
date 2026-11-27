@@ -71,7 +71,7 @@ describe("startCheckout", () => {
     const result = await startCheckout("pro-yearly", fetchImpl)
     expect(result).toEqual({
       ok: false,
-      error: expect.stringMatching(/already have an active/i),
+      error: "You already have active Pro access.",
     })
   })
 })

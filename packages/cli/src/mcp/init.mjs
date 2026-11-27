@@ -73,6 +73,139 @@ export function upsertJsonMcpConfig(raw, entry, opts = {}) {
   }
 }
 
+const CODEX_SONOJS_SECTION_RE =
+  /^\[(?:mcp_servers|mcp\.servers)\.sonojs(?:\.env)?\][^\n]*(?:\n(?!\[)[^\n]*)*/gm
+
+const CODEX_SONOJS_MAIN_HEADER_RE = /^\[(?:mcp_servers|mcp\.servers)\.sonojs\]/m
+
+/**
+ * @param {{ command: string, args: string[], env?: Record<string, string> }} entry
+ */
+function buildCodexSonojsBlock(entry) {
+  const lines = [
+    "[mcp_servers.sonojs]",
+    `command = ${JSON.stringify(entry.command)}`,
+    `args = [${entry.args.map((a) => JSON.stringify(a)).join(", ")}]`,
+  ]
+  if (entry.env && Object.keys(entry.env).length) {
+    lines.push("[mcp_servers.sonojs.env]")
+    for (const [k, v] of Object.entries(entry.env)) {
+      lines.push(`${k} = ${JSON.stringify(v)}`)
+    }
+  }
+  return `${lines.join("\n")}\n`
+}
+
+/**
+ * @param {Record<string, string> | undefined} env
+ */
+function normalizedCodexEnv(env) {
+  if (!env || !Object.keys(env).length) return undefined
+  return env
+}
+
+/**
+ * @param {{ command: string, args: string[], env?: Record<string, string> }} a
+ * @param {{ command: string, args: string[], env?: Record<string, string> }} b
+ */
+function codexSonojsEntryEqual(a, b) {
+  if (a.command !== b.command) return false
+  if (JSON.stringify(a.args) !== JSON.stringify(b.args)) return false
+  const aEnv = a.env ?? {}
+  const bEnv = b.env ?? {}
+  const keys = new Set([...Object.keys(aEnv), ...Object.keys(bEnv)])
+  for (const k of keys) {
+    if (aEnv[k] !== bEnv[k]) return false
+  }
+  return true
+}
+
+/**
+ * Read the canonical `sonojs` Codex MCP block (supports `mcp_servers` / `mcp.servers` aliases).
+ *
+ * @param {string} text
+ * @returns {{ command: string, args: string[], env?: Record<string, string> } | null}
+ */
+export function parseCodexSonojsConfig(text) {
+  const lines = text.split("\n")
+  for (let i = 0; i < lines.length; i++) {
+    const header = lines[i].match(/^\[(mcp_servers|mcp\.servers)\.sonojs\]$/)
+    if (!header) continue
+
+    /** @type {string | undefined} */
+    let command
+    /** @type {string[] | undefined} */
+    let args
+    i++
+    while (i < lines.length && lines[i].trim() !== "" && !lines[i].startsWith("[")) {
+      const kv = lines[i].match(/^(command|args)\s*=\s*(.+)$/)
+      if (kv) {
+        try {
+          const val = JSON.parse(kv[2].trim())
+          if (kv[1] === "command") command = val
+          else args = val
+        } catch {
+          return null
+        }
+      }
+      i++
+    }
+
+    /** @type {Record<string, string>} */
+    const env = {}
+    if (i < lines.length) {
+      const envHeader = lines[i].match(
+        /^\[(mcp_servers|mcp\.servers)\.sonojs\.env\]$/
+      )
+      if (envHeader) {
+        i++
+        while (i < lines.length && lines[i].trim() !== "" && !lines[i].startsWith("[")) {
+          const kv = lines[i].match(/^(\w+)\s*=\s*(.+)$/)
+          if (kv) {
+            try {
+              env[kv[1]] = JSON.parse(kv[2].trim())
+            } catch {
+              env[kv[1]] = kv[2].trim()
+            }
+          }
+          i++
+        }
+      }
+    }
+
+    if (typeof command !== "string" || !Array.isArray(args)) return null
+    return {
+      command,
+      args,
+      env: Object.keys(env).length ? env : undefined,
+    }
+  }
+  return null
+}
+
+/**
+ * @param {string} text
+ */
+function stripCodexSonojsSections(text) {
+  return text.replace(CODEX_SONOJS_SECTION_RE, "")
+}
+
+/**
+ * @param {string} text
+ */
+function hasCodexSonojsEnvSection(text) {
+  return /^\[(?:mcp_servers|mcp\.servers)\.sonojs\.env\]/m.test(text)
+}
+
+/**
+ * @param {string} text
+ */
+function hasOrphanCodexSonojsEnv(text) {
+  return (
+    hasCodexSonojsEnvSection(text) && !CODEX_SONOJS_MAIN_HEADER_RE.test(text)
+  )
+}
+
 /**
  * Upsert `[mcp_servers.sonojs]` (or `[mcp.servers.sonojs]`) in Codex TOML.
  *
@@ -80,46 +213,59 @@ export function upsertJsonMcpConfig(raw, entry, opts = {}) {
  * @param {{ command: string, args: string[], env?: Record<string, string> }} entry
  */
 export function upsertCodexToml(raw, entry) {
-  const sectionHeader = "[mcp_servers.sonojs]"
-  const altHeader = "[mcp.servers.sonojs]"
-  const lines = [
-    sectionHeader,
-    `command = ${JSON.stringify(entry.command)}`,
-    `args = [${entry.args.map((a) => JSON.stringify(a)).join(", ")}]`,
-  ]
-  if (entry.env && Object.keys(entry.env).length) {
-    lines.push(`[mcp_servers.sonojs.env]`)
-    for (const [k, v] of Object.entries(entry.env)) {
-      lines.push(`${k} = ${JSON.stringify(v)}`)
-    }
-  }
-  const block = `${lines.join("\n")}\n`
-
   const text = raw ?? ""
-  const headerRe =
-    /^\[(?:mcp_servers|mcp\.servers)\.sonojs\][^\n]*(?:\n(?!\[)[^\n]*)*/gm
-  if (headerRe.test(text)) {
-    const next = text.replace(headerRe, block.trimEnd())
-    const already = next === text || next.trim() === text.trim()
-    // Normalize: if content equivalent after rewrite
-    if (already) {
-      return { changed: false, text }
-    }
-    // Check if args/command already match by simple includes
-    const hasCommand = text.includes(
-      `command = ${JSON.stringify(entry.command)}`
-    )
-    const hasArgs = text.includes(
-      `args = [${entry.args.map((a) => JSON.stringify(a)).join(", ")}]`
-    )
-    if (hasCommand && hasArgs) {
-      return { changed: false, text }
-    }
-    return { changed: true, text: next.endsWith("\n") ? next : `${next}\n` }
+  const desired = {
+    command: entry.command,
+    args: entry.args,
+    env: normalizedCodexEnv(entry.env),
+  }
+  const existing = parseCodexSonojsConfig(text)
+  const block = buildCodexSonojsBlock(entry)
+
+  if (
+    existing &&
+    codexSonojsEntryEqual(existing, desired) &&
+    !hasOrphanCodexSonojsEnv(text) &&
+    Boolean(desired.env) === hasCodexSonojsEnvSection(text)
+  ) {
+    return { changed: false, text }
   }
 
-  const sep = text.trim().length ? (text.endsWith("\n") ? "\n" : "\n\n") : ""
-  return { changed: true, text: `${text}${sep}${block}` }
+  const mainIdx = text.search(CODEX_SONOJS_MAIN_HEADER_RE)
+  let next
+  if (mainIdx >= 0) {
+    const before = text.slice(0, mainIdx).replace(/\s+$/, "")
+    const after = stripCodexSonojsSections(text.slice(mainIdx)).replace(
+      /^\s+/,
+      ""
+    )
+    next = ""
+    if (before.length) {
+      next += before.endsWith("\n") ? before : `${before}\n`
+      next += "\n"
+    }
+    next += block
+    if (after.length) {
+      if (!next.endsWith("\n")) next += "\n"
+      next += after.endsWith("\n") ? after : `${after}\n`
+    } else if (!next.endsWith("\n")) {
+      next += "\n"
+    }
+  } else if (hasOrphanCodexSonojsEnv(text)) {
+    const stripped = stripCodexSonojsSections(text).replace(/\n{3,}/g, "\n\n")
+    const sep = stripped.trim().length
+      ? stripped.endsWith("\n")
+        ? ""
+        : "\n\n"
+      : ""
+    next = `${stripped.replace(/\s+$/, "")}${sep}${block}`
+    if (!next.endsWith("\n")) next += "\n"
+  } else {
+    const sep = text.trim().length ? (text.endsWith("\n") ? "\n" : "\n\n") : ""
+    next = `${text.replace(/\s+$/, "")}${text.trim().length ? sep : ""}${block}`
+  }
+
+  return { changed: true, text: next }
 }
 
 /**
