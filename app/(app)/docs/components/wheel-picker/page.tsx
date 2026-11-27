@@ -81,15 +81,6 @@ export default async function WheelPickerDocsPage() {
         description={
           <p className="leading-relaxed text-muted-foreground">
             An iOS-style scroll wheel for choosing options, times, and dates.
-            Installs under{" "}
-            <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
-              components/wheel-picker
-            </code>
-            , not under{" "}
-            <code className="rounded-md border border-border/70 bg-muted/50 px-1 py-0.5 font-mono text-[0.9em]">
-              ui/
-            </code>
-            .
           </p>
         }
       />
