@@ -3,7 +3,6 @@ import {
   siteConfig,
   type SiteNavItem,
 } from "@/lib/config"
-import { withToolsHeaderNav } from "@/lib/tools-nav"
 
 export type MobileBottomNavMatch = "exact" | "prefix"
 
@@ -59,7 +58,8 @@ const HOME_NAV_ITEM: SiteNavItem = { href: "/", label: "Home" }
 
 /** Remaining site nav links for the More drawer - Home first. Deduped by href. */
 export function getMobileMoreNavItems(): SiteNavItem[] {
-  const rest = flattenSiteNavEntries(withToolsHeaderNav(siteConfig.navItems)).filter(
+  // Mobile More uses one `/tools` link (from footerNavItems), not the desktop Tools dropdown.
+  const rest = flattenSiteNavEntries(siteConfig.navItems).filter(
     (item) => !PRIMARY_HREFS.has(item.href)
   )
   const seen = new Set<string>(["/"])
